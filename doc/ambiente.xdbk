@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<chapter id="ambiente">
+	<title>Ambiente de operación</title>
+
+	<para>SIVeL puede emplearse en un banco de documentación
+		de violaciones a DDHH, DIH y VPS, por esto además de personas
+		capacitadas, requiere una infraestructura tecnológica en la 
+		organización donde se utilice.  
+	</para>
+
+	<sect1 id="recurso-humano">
+		<title>Recurso Humano</title>
+		<para>
+Documentar casos de violencia política y sostener la infraestructura 
+requiere personas capacitadas o con ánimo de capacitarse.  
+Dependiendo del volumen de información, la infraestructura y necesidades 
+pueden identificarse los roles:
+	<itemizedlist>
+		<listitem>
+			<para>Archivista(s): que mantiene archivo de prensa
+				bien en medio físico o bien en medio digital 
+				(rol <literal>consulta</literal> en SIVeL).</para>
+		</listitem>
+		<listitem>
+			<para>Analista(s) de información:  Que recolecta,
+				analiza, clasifica e ingresa información
+				periódicamente.  
+				Es deseable que se entreviste directamente 
+				con las víctimas.  Aprovecha el sistema
+				para hacer consultas y conteos (rol 
+				<literal>analista</literal>).
+			</para>
+		</listitem>
+		<listitem>
+			<para>Administrador(a) de Tecnología: Que instala, mantiene y mejora 
+				la infraestructura buscando garantizar
+				servicio continuo. Saca copias de respaldo
+				periódicamente, administra usuarios de SIVeL,
+				realiza personalizaciones básicas (e.g
+				información geográfica, profesiones,
+				sectores, presuntos responsables, marco 
+				conceptual). Actualiza
+				sistema operativo y SIVeL por lo menos
+				cada 6 meses. (rol 
+				<literal>administrador</literal>).</para>
+		</listitem>
+		<listitem>
+		<para>Desarrollador(es) de SIVeL: Realiza 
+			personalizaciones más avanzadas y las aporta
+			liberándolas al dominio público.  
+			</para>
+		</listitem>
+	</itemizedlist>
+</para>
+
+	</sect1>
+
+	<sect1 id="infraestructura-tecnologica">
+		<title>Infraestructura Tecnológica</title>
+		<para>
+		Hemos considerado y clasificado posibles infraestructuras 
+		en 7 niveles según su complejidad y costo de operación (note 
+		que los 2 primeros no requieren acceso a Internet):
+	<itemizedlist>
+		<listitem>
+			<para>[Nivel 1] Un computador aislado donde se documentan
+				casos.  Cada usuario de SIVeL debe pasar
+			        2 autenticaciones, la información
+				se mantiene cifrada, pueden
+				sacarse copias de respaldo no 
+				cifradas en USB o disquete o del
+				contenedor cifrado en CD. 
+				Además de OpenBSD 
+				puede tener Linux o Windows --aunque
+				no se recomienda por seguridad.
+			</para>
+			<informalfigure>
+				<screenshot><mediaobject><imageobject><imagedata
+								fileref="nivel1.eps" format="EPS" scale="40"
+								align="center"></imagedata>
+						</imageobject>
+						<imageobject><imagedata fileref="nivel1.png"
+								format="PNG" align="center"></imagedata></imageobject>
+				</mediaobject></screenshot>
+			</informalfigure>
+		</listitem>
+		<listitem>
+			<para>[Nivel 2] Un computador conectado a una red local. 
+		Podrían usarse todos los 
+	      computadores de la red local (intranet) para ingresar/consultar 
+	      información previa autenticación.  Las copias de respaldo
+	      pueden enviarse manualmente a otro computador de la red.
+	      Además de OpenBSD puede tener Linux o Windows (aunque
+	      no se recomienda por seguridad), pero
+	      sólo funciona la consulta cuando esté en OpenBSD.
+      </para>
+			<informalfigure>
+				<screenshot><mediaobject><imageobject><imagedata
+								fileref="nivel2.eps" format="EPS" scale="40"
+								align="center"></imagedata>
+						</imageobject>
+						<imageobject><imagedata fileref="nivel2.png"
+								format="PNG" align="center"></imagedata></imageobject>
+				</mediaobject></screenshot>
+			</informalfigure>
+
+
+		</listitem>
+		<listitem>
+			<para>[Nivel 3] Un cortafuegos/servidor con OpenBSD 
+				(y eventualmente Linux o Windows con
+				la consecuente disminución de seguridad) que 
+				brinde operación 
+				mientras haya conexión a Internet (por
+				ejemplo vía módem) y mientras 
+				esté encendido.  Como cortafuegos evitaría 
+				posibles ataques a puertos TCP y UDP.
+				Posible conexión segura (e.g ssh) y momentánea
+				a otros bancos de datos.
+				Podría usarse desde la red
+				interna como en [Nivel 2].
+			</para>
+			<informalfigure>
+				<screenshot><mediaobject><imageobject><imagedata
+								fileref="nivel3.eps" format="EPS" scale="40"
+								align="center"></imagedata>
+						</imageobject>
+						<imageobject><imagedata fileref="nivel3.png"
+								format="PNG" align="center"></imagedata></imageobject>
+				</mediaobject></screenshot>
+			</informalfigure>
+
+
+		</listitem>
+
+		<listitem>
+			<para>[Nivel 4]  Un cortafuegos/servidor solo con OpenBSD 
+				operando de manera continua (24 horas al día, 
+				365 días al año) conectado a Internet 
+				permanentemente.
+				 Este computador actuaría
+				como enrutador de la red interna (servicio
+				NAT).  Además de usuarios en la 
+				intranet, podría haber usuarios externos 
+				(internet) que ingresen/consulten de forma
+				segura con previa autorización.
+				Permitiría mantener publicada parte de la 
+				información (sin fuentes) en Internet.
+				Copias de respaldo en el mismo computador
+				automáticas, posibilidad de enviar 
+				automáticamente copia a otro computador 
+				fuera de organización.
+			</para>
+			<para>Para no perder esfuerzos de seguridad de
+				SIVeL es importante utilizarlo desde 
+				estaciones de trabajo seguras, se recomienda
+				utilizarla desde OpenBSD bien configurado
+				o en su defecto Linux.   No se recomienda
+				Windows porque es altamente vulnerable a 
+				virus y otras fallas de seguridad.</para>
+			<informalfigure>
+				<screenshot><mediaobject><imageobject><imagedata
+								fileref="nivel4.eps" format="EPS" scale="40"
+								align="center"></imagedata>
+						</imageobject>
+						<imageobject><imagedata fileref="nivel4.png"
+								format="PNG" align="center"></imagedata></imageobject>
+				</mediaobject></screenshot>
+			</informalfigure>
+
+
+		</listitem>
+		<listitem>
+			<para>[Nivel 5] Un cortafuegos y un servidor, ambos con 
+				OpenBSD operando de forma continua. 
+				El servidor estaría conectado junto con 
+				el resto de la red por ejemplo a un
+				concentrador o switch.  Este esquema brinda
+				operación más robusta que [Nivel 4] y facilita
+				respaldo automático de los datos cifrados
+				del servidor en el cortafuegos.
+			</para>
+			<informalfigure>
+				<screenshot><mediaobject><imageobject><imagedata
+								fileref="nivel5.eps" format="EPS" scale="40"
+								align="center"></imagedata>
+						</imageobject>
+						<imageobject><imagedata fileref="nivel5.png"
+								format="PNG" align="center"></imagedata></imageobject>
+				</mediaobject></screenshot>
+			</informalfigure>
+
+		</listitem>
+		<listitem>
+			<para>[Nivel 6] Una zona desmilitarizada (DMZ), con un 
+				cortafuegos en OpenBSD, una zona para el
+				servidor con SIVeL y otra zona para la red 
+				local. Soporta usuarios en la intranet y 
+				en internet.  Brinda más seguridad que
+				[Nivel 5] porque aisla más la red local del 
+				servidor.
+			</para>
+			<informalfigure>
+				<screenshot><mediaobject><imageobject><imagedata
+								fileref="nivel6.eps" format="EPS" scale="40"
+								align="center"></imagedata>
+						</imageobject>
+						<imageobject><imagedata fileref="nivel6.png"
+								format="PNG" align="center"></imagedata></imageobject>
+				</mediaobject></screenshot>
+			</informalfigure>
+		</listitem>
+		<listitem>
+			<para>[Nivel 7] Sub-bancos regionales.  En cada 
+				organización sub-banco puede contarse con
+				infraestructura [Nivel 1], [Nivel 2] ... o [Nivel 6].  Se 
+				intercambia información periódicamente
+				y puede automatizarse intercambio con 
+				sub-bancos con infraestructuras [Nivel 4], [Nivel 5] o [Nivel 6]
+			</para>
+		</listitem>
+	</itemizedlist>
+</para>
+	</sect1>
+
+	<sect1 id="requerimientos">
+		<title>Requerimientos</title>
+		<para>En cuanto a recurso humano se requiere al menos una 
+persona que desempeñe todos los roles. O tantas como el volumen
+de información, necesidades y posibilidades de la organización lo permitan.
+Cada rol requiere personas comprometidas en aprender y en enseñar.
+</para>
+<para>Los recursos de hardware requeridos dependen de la infraestructura
+	que desee implementar:
+
+			<itemizedlist>
+				<listitem>
+					<para>[Nivel 1]  Para el servidor SIVeL no hay exigencias altas en cuanto al procesador 
+(funciona en Pentium III), su velocidad (funciona con 500Mhz),
+la cantidad de memoria RAM (funciona con 128MB) o
+el espacio requerido en disco (funciona en 2GB y una partición de
+intercambio --swap-- por 
+ejemplo de 64MB).    Es deseable un disco duro independiente donde no
+se instalen otros sistemas operativos o en su 
+defecto una partición primaria (ver <xref linkend="instalacion"></xref>).
+					</para>
+				</listitem>
+				<listitem>
+					<para>[Nivel 2] Lo de [Nivel 1] y además red local 
+						o RAL o LAN (puede ser Ethernet 
+velocidades 100MB o 1GB con cableado estructurado y concentrador o 
+bien inalámbrica 2MB).
+					</para>
+				</listitem>
+				<listitem>
+					<para>[Nivel 3] Lo de [Nivel 2] y además la(s) 
+persona(s) a cargo se capacitan para resolver dificultades
+que puedan presentarse con el cortafuegos, examinar bitácoras periódicamente 
+para prevenir ingresos no autorizados o para actuar en caso de detectar 
+alguno.  Conexión a Internet que puede ser esporádica, por ejemplo módem.
+					</para>
+				</listitem>
+				<listitem>
+					<para>[Nivel 4] Lo de [Nivel 3] y además:
+La(s) persona(s) a cargo pueden administrar cuentas en el 
+cortafuegos y capacitar a eventuales usuarios externos para
+ingresar de forma segura. Para tener conexión a Internet continua y
+hacer NAT a red interna este computador debe tener 2 tarjetas de red. 
+El servicio de conexión a Internet puede ser satelital a nivel nacional,
+puede prestarlo Telecom en la mayoría de ciudades y en cada ciudad hay 
+proveedores bien por fibra
+óptica (e.g Supercable y Telmex en Bogotá), banda ancha sobre líneas 
+telefónicas existentes (e.g ETB, Telecom, Telebucaramanga) o WiMax (por 
+ejemplo Une en Barranquilla).
+El cortafuegos/servidor debe estar encendido 24 horas al día los
+365 días del año.  Altisimamente recomendada una UPS para mantener
+operación unos minutos cuando se va la luz.
+					</para>
+				</listitem>
+				<listitem>
+					<para>[Nivel 5] Lo de [Nivel 4] y además:
+Otro computador con OpenBSD que opere continuamente como cortafuegos 
+independiente del servidor.  Las características mínimas de un cortafuegos 
+--que no se dedique a nada más-- procesador de más de 512MHz, más de 
+64MB en RAM, disco de más de 1GB, 2 tarjetas de red. El cortafuegos debe 
+estar encendido continuamente y sólo tendrá OpenBSD.  </para>
+				</listitem>
+				<listitem>
+					<para>[Nivel 6] Lo de [Nivel 5] y además:
+Una tarjeta de red Ethernet adicional para  el cortafuegos (tendrá 3) y 
+un cable UTP5e cruzado para conectar cortafuegos y servidor.  Tanto 
+cortafuegos como servidor deben estar encendidos 24 horas al día, 
+365 días del año.  UPS.
+					</para>
+				</listitem>
+				<listitem>
+					<para>[Nivel 7] Persona(s) que puedan 
+y deseen montar infraestructura (e.g sistema operativo, SIVeL, 
+cortafuegos, servidor) en sub-bancos y capacitar allí.
+				       	</para>
+				</listitem>
+			</itemizedlist>
+					</para>
+
+				</sect1>
+
+				<sect1 id="otros-servicios">
+					<title>Otros servicios que pueden ser fuente de recursos</title>
+					<para>El esfuerzo por capacitarse
+y mantener la mencionada infraestructura se convierte en fuente de recursos:
+<itemizedlist>
+	<listitem>
+		<para>[Nivel 1] Las herramientas instalables en adJ, en
+particular OpenOffice, bastan
+para producir e imprimir informes de DDHH, DIH, VPS con diseños 
+sencillos, casos, fotos, conteos y gráficas estadísticas. 
+También  pueden hacerse borradores que sean insumo para
+diseñadores e impresores.   Estos informes pueden ser financiados
+por agencias de cooperación, o pueden ofrecerse para la venta
+cubriendo costos de producción sin olvidar que la información es
+de las víctimas.
+	</para>
+	<para>Además con suficiente capacitación pueden realizarse tareas
+		típicas de un computador de escritorio (navegador, cliente
+		de correo, hoja de cálculo, procesador de texto), aprovechar 
+		el servidor web para practicar diseño de páginas web 
+		(con HTML y CSS) o para aprender programación (por ejemplo 
+		PHP y Javascript) y sobre documentación técnica (DocBook,
+		LaTeX).</para>
+</listitem>
+<listitem>
+	<para>[Nivel 2] Pueden configurarse servicios para la red interna
+		para convertirla en una Intranet, son particularmente
+		faciles web, correo interno, mensajería instantanea
+		con SILC.  Dependiendo del objetivo de la red interna
+		pueden encontrarse otros programas que operarán en 
+		OpenBSD por ejemplo para educación.  Un aula con
+		computadores y RAL, aún sin Internet, será un buen espacio 
+		para realizar capacitaciones y podrá alquilarse con este
+		fin.
+	</para>
+</listitem>
+<listitem>
+	<para>[Nivel 3] El cortafuegos puede configurarse para filtrar
+		contenidos indeseados del web cuando se navega o bien servicios
+		de la red interna hacía Internet como Messenger.</para>
+</listitem>
+<listitem>
+	<para>[Nivel 4], [Nivel 5] y [Nivel 6] El servidor continuamente conectado a Internet 
+		puede ser fundamental en la estrategía de comunicaciones de la 
+		organización (apreciada por agencias de cooperación) por 
+		cuanto puede configurarse para:
+		alojar página web de la organización con limitaciones
+		de espacio dadas por capacidad de disco y con posibilidad
+		de configurar más servicios (e.g manejador de contenidos, 
+		blogs, educación virtual), ser servidor de
+		correo y alojar correo (puede ser de forma extrasegura)
+		con IMAP y/o webmail, mantener listas de correo para
+		distribución masiva de correo, 
+		operar como servidor DNS para manejar el dominio de la
+		organización, sincronización de reloj automática, 
+		directorio de contactos LDAP, servicios web seguro (por
+		ejemplo para comercio electrónico), emisora o estación
+		de TV por Internet (requieren bastante ancho de banda).
+	</para>
+	<para>La conexión a Internet permanente permite ofrecer más servicios
+		fuera de la organización:
+		café internet (mejor con infraestructura [Nivel 6]), brindar 
+		conexión a Internet 
+		a oficinas cercanas ---puede ser con cables ethernet o 
+		inalámbrica aprovechando posibilidad de regular ancho de 
+		banda---, ofrecer 
+		alojamiento de páginas web a otras organizaciones (dominios 
+		virtuales), servidor de correo a otras organizaciones, servidor 
+		DNS para otras organizaciones.
+	</para>
+</listitem>
+<listitem>
+	<para>[Nivel 7] La información de los sub-bancos puede replicarse
+		y respaldarse mejor. Pueden configurarse servicios como
+		los de [Nivel 6] pero redundantes y distribuidos tanto para 
+		mejorar tiempos de respuesta como
+		para aumentar robustez, garantizando visibilidad en Internet 
+		aún cuando uno o más nodos estén fuera de servicio. 
+		Para garantizar más la operación de un nodo pueden llegar
+		al mismo cortafuegos 2 proveedores de Internet diferentes
+		y configurarse balanceo, contar con una UPS potente o
+		con un generador.  OpenBSD también facilita operación
+		de cortafuegos redundantes y otros servicios típicos
+		tanto de un DataCenter como de grandes enrutadores
+		de Internet. </para>
+</listitem>
+</itemizedlist>
+					</para>
+				</sect1>
+</chapter>

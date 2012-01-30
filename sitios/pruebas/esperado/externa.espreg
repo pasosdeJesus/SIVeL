@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8559-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html> <head>  <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
+<!--Fuentes de dominio publico. Sin garantías. 2004-->
+<!-- http://sivel.sf.net -->
+<script language = "JavaScript">
+<!--
+function envia(que){
+    document.forms[0]._qf_default.value = que;
+    document.forms[0].submit();
+}
+// -->
+<!-- Contador por: Nannette Thacker -->
+<!-- http://www.shiningstar.net -->
+<!-- Original by :  Ronnie T. Moore -->
+<!-- Web Site:  The JavaScript Source -->
+<!-- Use one function for multiple text areas on a page -->
+<!-- Limit the number of characters per textarea -->
+<!-- Begin
+function textCounter(field, cntfield, maxlimit)
+{
+    if (field.value.length > maxlimit) // if too long...trim it!
+        field.value = field.value.substring(0, maxlimit);
+    // otherwise, update 'characters left' counter
+    else
+        cntfield.value = maxlimit - field.value.length;
+}
+//  End -->
+</script></head><body background = "sitios/pruebas/fondo.jpg"><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th></tr>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>nombres apellidos (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td>
+</table><a href = "captura_caso.php">Consulta Detallada</a>, <div align = "right"><a href = "index.php"><b>Menú principal</b></a></div></body></html>

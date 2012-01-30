@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8559-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html> <head><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
+<!--Fuentes de dominio publico. Sin garantías. 2004-->
+<!-- http://sivel.sf.net -->
+<script language = "JavaScript">
+<!--
+function envia(que){
+    document.forms[0]._qf_default.value = que;
+    document.forms[0].submit();
+}
+// -->
+<!-- Contador por: Nannette Thacker -->
+<!-- http://www.shiningstar.net -->
+<!-- Original by :  Ronnie T. Moore -->
+<!-- Web Site:  The JavaScript Source -->
+<!-- Use one function for multiple text areas on a page -->
+<!-- Limit the number of characters per textarea -->
+<!-- Begin
+function textCounter(field, cntfield, maxlimit)
+{
+    if (field.value.length > maxlimit) // if too long...trim it!
+        field.value = field.value.substring(0, maxlimit);
+    // otherwise, update 'characters left' counter
+    else
+        cntfield.value = maxlimit - field.value.length;
+}
+//  End -->
+</script></head><body background = "sitios/pruebas/fondo.jpg"><table border="1"><tr><th>C. Dep.</th><th>Departamento</th><th>C. Mun.</th><th>Municipio</th><th>Tipo de Violencia</th><th>Supracategoria</th><th>Categoria</th><th>N. V&iacute;ctimizaciones</th></tr>
+<tr><td>1</td><td>y</td><td>1</td><td>municipio1</td><td>tipo1</td><td>supra1</td><td>cat1</td><td>1</td></tr>
+</table></body></html>

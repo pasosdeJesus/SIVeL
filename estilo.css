@@ -1,0 +1,210 @@
+/* Hoja de estilo cedida al dominio público. 2004. Sin garantias.
+   vtamra@users.sourceforge.net
+   Referencia: http://www.w3.org/TR/REC-CSS2/box.html
+  
+  Con base en diseño 
+  http://www.oswd.org/design/preview/id/2702
+
+  */
+
+
+td[class=blanco] {
+	background: white;
+}
+
+td[class=borde] {
+	background:#3C3A68; 
+	color:white;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	}
+
+
+
+input[class=botonsel] {
+	background:#3C3A68; 
+	color:white;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+a[class=menu] {
+	background: #AEAEC1;
+	color: black;
+	margin: 0px 0px 0px 0px;
+	padding: 2px 2px 2px 2px;
+}
+
+a[class=menusel] {
+	background: #A7A5FF;
+	color: black;
+	margin: 0px 0px 0px 0px;
+	padding: 2px 2px 2px 2px;
+}
+
+div[class=menusel] {
+	background: #A7A5FF;
+	color: black;
+	margin: 0px 8px 8px 8px;
+	padding: 8px 2px 2px 2px;
+}
+
+div[class=logo] {
+	margin: 4px 4px 4px 4px;
+	padding: 4px 4px 4px 4px;
+}
+ul[class=menu] {
+	margin: 12px 12px 12px 12px;
+	padding: 3px 3px 3px 3px
+}
+
+li[class=menu] {
+	background: #A7A5FF;
+	color: black;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+/*	list-style: none */
+}
+
+
+/*li[class=submenu] a:link {
+	color: white;
+	text-decoration: none;
+} */
+
+li[class=menu] a[href] {
+	color: black;
+	text-decoration: underline;
+}
+
+
+body {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.8em;
+	margin: 0;
+	padding: 0;
+}
+.menu {
+	margin: 0px;
+	padding:0px;
+	margin-left:0px;
+	margin-top:0px;
+	border-left:1px solid #180001;
+}
+
+* html .menu {
+	margin-left: -3px;
+}
+.menu-list {
+	list-style-type: none;
+	margin:0px 0px 0px 0px;
+	padding:0px;
+}
+
+* html .menu li{
+	margin-bottom:-3px;
+}
+
+.menu li {
+	margin:0px;
+	border-bottom:1px solid #182801;
+	color: #D9CEB8;
+	font-size: 1.2em;
+	text-decoration: none;
+	background-color:#646464;
+	padding:0px;
+	width:150px;
+}
+
+.menu li a {
+	margin:0px;
+	display: block;
+	color: #F5F8EF;
+	font-size: 1.0em;
+	text-decoration: none;
+	border-left:5px solid #F5F8EF;
+	padding:5px;
+}
+
+.menu li a:hover {
+	text-decoration: none;
+	background-color:#A0A0A0;
+}
+
+
+/*Nav bar styles*/
+/* http://www.phoenity.com/newtedge/horizontal_nav/ */
+ul.nav,
+.nav ul{
+margin: 0;
+padding: 0;
+cursor: default;
+list-style-type: none;
+display: inline;
+}
+
+ul.nav{
+display: table;
+}
+
+ul.block{
+width: 100%;
+table-layout: fixed;
+}
+
+ul.nav>li{
+display: table-cell;
+position: relative;
+padding: 2px 6px;
+}
+/*
+ul.nav>li:hover{
+padding-right: 1px;
+}*/
+
+ul.nav li>ul{
+display: none;
+position: absolute;
+max-width: 40ex;
+margin-left: -6px;
+margin-top: 2px;
+}
+
+ul.nav li:hover>ul{
+display : block;
+}
+
+.nav ul li a{
+display: block;
+padding: 2px 10px;
+}
+
+/*Menu styles*/
+
+ul.nav,
+.nav ul,
+.nav ul li a{
+background-color: #fff;
+color: #006903;
+}
+
+ul.nav li:hover,
+.nav ul li a:hover{
+background-color: #369;
+color: #fff;
+}
+
+ul.nav li:active,
+.nav ul li a:active{
+background-color: #036;
+color: #fff;
+}
+
+ul.nav,
+.nav ul{
+border: 1px solid #369;
+}
+
+.nav a{
+text-decoration: none;
+}

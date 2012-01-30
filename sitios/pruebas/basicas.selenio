@@ -1,0 +1,2096 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="https://127.0.0.1/" />
+<title>basicas</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">basicas</td></tr>
+</thead><tbody>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Departamento</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=AMAZONAS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2002</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=AMAZONAS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Municipio</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ABEJORRAL (ANTIOQUIA)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ABEJORRAL (ANTIOQUIA)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_departamento</td>
+	<td>label=x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tipo Clase</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=CABECERA MUNICIPAL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=CABECERA MUNICIPAL</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Municipio</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x (x)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tipo Clase</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Departamento</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Frontera</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Brasil</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Brasil</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Filiación</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ALIANZAS IZQUIERDA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ALIANZAS IZQUIERDA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Organización social</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=AMBIENTALISTA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2006</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=AMBIENTALISTA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Profesión</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ABOGADO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=02</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ABOGADO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Rango edad</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=De 0 a 15 Años</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Jun</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=De 0 a 15 Años</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>r</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rango</td>
+	<td>r</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>limiteinferior</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>limitesuperior</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=r</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Resultado agresión</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=HERIDO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2007</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=HERIDO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Sector Social</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=CAMPESINO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=CAMPESINO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Vínculo con el estado</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ALCALDIA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ALCALDIA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tipo de Relación</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Abuela</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2008</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Abuela</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>xpath=//input[@type='checkbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>observaciones</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tipo de Violencia</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ACCIONES BÉLICAS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=1990</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ACCIONES BÉLICAS</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nomcorto</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Supracategoria</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ABUSO DE AUTORIDAD (DH)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ABUSO DE AUTORIDAD (DH)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id</td>
+	<td>100000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x (BELICAS)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Categoria</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ABORTO FORZADO, B (PERSECUCIÓN POLÍTICA)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=19</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Dic</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ABORTO FORZADO, B (PERSECUCIÓN POLÍTICA)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id</td>
+	<td>100000</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>c</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=c, B (PERSECUCIÓN POLÍTICA)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Contexto</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=FALSO POSITIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=19</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Dic</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2011</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=FALSO POSITIVO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>c</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=c</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Presuntos responsables</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=AGENTE EXTRANJERO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=AGENTE EXTRANJERO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_papa</td>
+	<td>label=AGENTE EXTRANJERO</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Antecedentes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ALLANAMIENTO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=ALLANAMIENTO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Intervalo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=MADRUGADA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=31</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Dic</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2025</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=MADRUGADA</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=12</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rango</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Etiquetas para un caso</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=AMARILLO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>observaciones</td>
+	<td>Color #FFFF000</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=AMARILLO</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>observaciones</td>
+	<td>Color #FFFF00</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>d</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>observaciones</td>
+	<td>d</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=d</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Fuentes frecuentes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Columnas de Reporte Consolidado</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=1, MUERTOS, 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=1, MUERTOS, 0</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[d]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[M]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fechadeshabilitacion[Y]</td>
+	<td>label=</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>actualizar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>rotulo</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>tipo_violencia</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>clasificacion</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>peso</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=//a[contains(text(),'x, 1')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

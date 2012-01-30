@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<appendix id="call">
+  <title>Public invitation to audit SIVeL 1.1</title> 
+
+  <para>Thanks to God  we
+	  are able to offer $300.000 colombian pesos (aprox. EU$100) for each
+	  vulnerability found and fixed in SIVeL &PRY-VERSION; (we thank
+  EU$50 offere by wiroal@riseup.net since 6.May.2010).</para>
+  <para>If you belong to an organization that documents infractions
+	  to Humanitarian international Law or Human Rights Violations
+	  with SIVeL, we invite you to donate
+	  for this public invitation, in order to increase the
+	  reward offered.  </para>
+  <para>If you are developer or interested in information security 
+	  we invite you to look for bugs in the security of SIVeL,
+	  by experimenting on the test installation; by doing your 
+	  own installation, following the recommendations for the operation 
+	  environment
+	  (see <xref linkend="instalacion"/>),
+	  or by auditing the PHP sources in the public domain.
+  </para>
+  <para>
+	  To report a vulnerability please have in mind:
+	  <itemizedlist>
+		  <listitem>
+			  <para>You found the bug. </para>
+		  </listitem>
+		  <listitem>
+			  <para>Each bug must be replicable in the
+				  test installation.
+				  You can check the form that doesn't
+				  require authentication:
+				  <ulink url="https://sivel11.pasosdeJesus.org/consulta_web.php"></ulink> ;
+				  as well as other components that shouldn't allow
+				  modification of information as
+				  user <literal>sivel11</literal> with
+				  password <literal>sivel11</literal>:
+				  <ulink url="https://sivel11.pasosdeJesus.org/index.php"></ulink> ; 
+				  or as administrator 
+				  <literal>adminsivel11</literal> also with
+				  password <literal>sivel11</literal>.
+				  This installation operates on the 
+				  recommended execution platform
+				  (OpenBSD distribution
+				  <ulink url="https://aprendiendo.pasosdeJesus.org">adJ</ulink> &VER-OPENBSD;, 
+				  web server with SSL in chroot,
+				  PostgreSQL and hardened PHP) and 
+				  uses data from
+				  <ulink url="http://www.nocheyniebla.org">Banco De Datos de Violencia Política, DH y DIH del CINEP</ulink>.
+			  </para>
+		  </listitem>
+		  <listitem>
+			  <para>Your report should explain the methodology
+				  that you used to find the bug and propose 
+				  a solution in the source code of the
+				  branch SIVEL1_1 of the CVS repository
+				  <ulink url="https://sourceforge.net/scm/?type=cvs&amp;group_id=104373"></ulink> 
+				  (in the directory
+				  <filename>doc</filename>
+				  of the sources there are examples of past 
+				  auditories).
+			  </para>
+		  </listitem>
+		  <listitem>
+			  <para>To report a vulnerability subscribe your
+				 email address to the non moderated list
+				  <ulink url="https://lists.sourceforge.net/lists/listinfo/sivel-desarrollo">sivel-desarrollo</ulink> and
+				  send there your public domain report
+				  (by reporting a vulnerability in that list
+				  you confirm that your contribution is in
+				  the public domain). </para>
+		  </listitem>
+		  <listitem>
+			  <para>Your report will be evaluated and 
+				  answered in the same list, and if
+				  we are able to reproduce it, we will
+				  give you the monetary compensation personally,
+				  or via PayPal or a bank transfer.
+			  </para>
+		  </listitem>
+		  <listitem>
+			  <para>The data about yourself that you don't want to 
+				  publish in the list (for example your
+				  name), can be sent to Vladimir Támara Patiño
+				  vtamara@pasosdeJesus.org or by
+				  writing to Cr 5 #33B-02, Bogotá, Colombia 
+				  (if you need to send encrypted information 
+				  you can use the PGP public key available
+				  at <ulink url="http://vtamara.pasosdeJesus.org/vtamara-pgp.txt"></ulink>).
+			  </para>
+		  </listitem>
+	  </itemizedlist>
+  </para>
+  <para>
+	  We thank your interest in this public call, its most recent
+	  version is available at:
+	  <ulink url="http://sivel.sf.net/1.1/call.html"></ulink>. We invite
+	  you to distribute it without changes.
+  </para>
+
+</appendix>

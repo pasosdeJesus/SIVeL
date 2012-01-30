@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<chapter id="personalizacion" role="periodo" userlevel="p2">
+	<title>Personalización</title>
+  <highlights role="logros">
+  <itemizedlist>
+	  <listitem role="logro" id="logro4"><para>Identifica posibilidades de personalización de SIVeL
+	  </para></listitem>
+	  <listitem role="logro" id="logro5"><para>Dependiendo de su interés y experiencia personaliza SIVeL.
+	  </para></listitem>
+  </itemizedlist>
+  </highlights>
+
+  <para>SIVeL puede personalizarse para adaptarse mejor a su proyecto,
+	  al menos de 5 formas: 
+	  <itemizedlist>
+		  <listitem>
+			  <para>Configurando detalles de la interfaz (i.e
+				  la presentación que ven los usuarios finales 
+				  cuando abren SIVeL en un navegador).</para>
+		  </listitem>
+		  <listitem>
+			  <para>Modificando tablas básicas para que 
+				  reflejen mejor los datos de su proyecto (por 
+				  ejemplo las posibles profesiones de las 
+				  víctimas, los posibles sectores sociales 
+				  e incluso la tipificación de violencia).</para>
+			  <para>Aunque para mantener posibilidad de 
+intercambiar datos entre diversas instalaciones o personalizaciones de SIVeL, 
+para modificarlas tener en cuenta:
+<itemizedlist>
+				  <listitem>
+					  <para>Los valores que no desean usarse, no eliminarlos sino deshabilitarlos, poniendoles una fecha de deshabilitación.
+					  </para>
+				  </listitem>
+				  <listitem>
+					  <para>Si se desean nuevos valores, añadirlos sin modificar los existentes.
+					  </para>
+				  </listitem>
+				  <listitem>
+					  <para>Procurar no cambiar los 
+valores existentes y estándar de SIVeL, en caso de cambiarlos los nuevos 
+valores que usen los códigos anteriores deben homologar los anteriores.
+					  </para>
+				  </listitem>
+		  </itemizedlist>
+	  </para>
+		  </listitem>
+		  <listitem>
+			  <para>Empleando campos existentes que su proyecto 
+				  no requiere para representar otros que si 
+				  requiere.  Por ejemplo si su proyecto 
+				  requiere especificar etnia 
+				  de una víctima, más que el sector social
+				  al que pertenece, puede emplear el campo
+				  sector social y adaptar la tabla para
+				  que tenga justamente las etnias posibles.
+			  </para>
+		  </listitem>
+		  <listitem>
+			  <para>Extendiendo las fuentes o modificandolas.  Lo cual es plenamente
+				  legal --aunque nos alegraría mucho que
+				  compartiera sus cambios en la lista
+				  <email>sivel-desarrollo@lists.sourceforge.net</email>.
+			  </para>
+		  </listitem>
+	  </itemizedlist>
+
+  </para>
+
+  <sect1 id="tablas-basicas">
+	  <title>Tablas básicas</title>
+      <highlights role="logros">
+        <itemizedlist>
+		<listitem role="indicador" id="logro4.ind1"><para>Puede ver y editar información disponible en tablas básicas</para></listitem>
+		<listitem role="indicador" id="logro4.ind2"><para>Puede añadir o eliminar registros a tablas básicas</para></listitem>
+        </itemizedlist>
+       </highlights>
+
+       <para>Es la forma más directa de personalización como se explica
+	       en la sección correspondiente 
+	       (ver <xref linkend="tablasbasicas"></xref>).
+ </para>
+    </sect1>
+
+    <sect1 id="detalles-interfaz">
+	    <title>Detalles de la interfaz de usuario</title>
+	    <para>
+		    El logo que se presenta en el fondo, el texto central
+		    y otros elementos del menú principal pueden cambiarse
+		    creando páginas HTML y referenciandolas en algunas
+		    variables del archivo <filename>conf.php</filename> de
+		    su sitio como <literal>cabezote_principal</literal>,
+		    <literal>pie_principal</literal> y <literal>fondo</literal>.
+		    Los estilos empleados pueden
+		    configurarse en la hoja <literal>estilo.css</literal>.
+	    </para>
+	    <para> La única página que no requiere autenticación es
+		    <filename>consulta_web.php</filename><footnote><para>Aunque
+				    si ingresa un usuario autenticado del rol apropiado
+				    puede mostrar más opciones</para></footnote> que puede habilitar
+		    para que los casos de su organización sean consultados
+		    desde el web.   Por seguridad, se recomienda que la base 
+		    pública sea una segunda base, copia de la información 
+		    pública de la base real.
+	    </para>
+	    <para>Algunos detalles de la interfaz también pueden
+		    configurarse en variables del archivo
+		    <filename>conf.php</filename> de su sitio.  A continuación
+		    se listan las variables de configuración, algunas
+		    se tratan en detalle en las siguientes secciones:
+		    <variablelist>
+			    &varconfphp;
+		    </variablelist> 
+	    </para>
+    </sect1>
+
+
+    <sect1 id="casos-personalizacion">
+	    <title>Casos de personalización reinterpretando</title>
+	    <para>
+		    Algunos  nombres en la interfaz de usuario pueden
+		    cambiarse desde un sólo sitio para que una organización
+		    pueda reinterpretar uno o más campos típicos de SIVeL
+		    (aunque no es lo más recomendable si se piensa en
+		    compartir información con otras organizaciones que empleen
+		    SIVeL).
+		</para> 
+		<para>Lo que queremos decir con reinterpretar posiblemente
+			se entienda con un ejemplo: En una organización 
+			donde se registran casos relacionados con 
+			iglesias, se prefirió emplear la tabla filiación 
+			política para registrar la iglesia de la víctima.
+		</para>
+		<para>En tal caso basta editar valores de la variable
+			<literal>etiqueta</literal> del archivo
+			<filename>conf.php</filename> que está en
+			el directorio de su sitio (e.g <filename>sitios/sivel</filename>).  Este archivo
+			está organizado en el mismo orden de las pestañas
+			de la ficha de captura. Para el ejemplo
+			mencionado bastaría añadir datos con iglesias
+			a la tabla básica Filiación, deshabilitar los
+			originales y cambiar la línea:
+			<screen>
+'filiacion'=> 'Filiación política',
+			</screen>
+			por
+			<screen>
+'filiacion'=> 'Iglesia',
+			</screen>
+		</para>
+    </sect1>
+
+    <sect1 id="activando-modulos">
+	    <title>Activar módulos</title>
+	    <para>
+		    SIVeL &PRY-VERSION; es modular e incluye diversos módulos 
+		    que puede activar típicamente editando el archivo
+		    <filename>conf.php</filename> del sitio al que agregará
+		    el módulo y ejecutando el script <literal>actualiza.php</literal> 
+		    como cuando hace actualizaciones (ver <xref linkend="actualizacion-sivel"></xref>).
+	    </para>
+	    <para>
+		    Los módulos disponibles son:
+		    <orderedlist>
+			    <listitem>
+				    <para><emphasis>anexos</emphasis> Para anexar archivos a casos. Directorio <filename>modulos/anexos</filename></para>
+			    </listitem>
+			    <listitem>
+				    <para><emphasis>belicas</emphasis> Para registrar acciones bélicas y generar reportes de estas. Directorio <filename>modulos/anexos</filename></para>
+			    </listitem>
+			    <listitem>
+				    <para><emphasis>estrotulos</emphasis> Estadísticas por rótulos del reporte consolidado. Directorio <filename>modulos/anexos</filename></para>
+			    </listitem>
+			    <listitem>
+				    <para><emphasis>etiquetas</emphasis> Poner etiquetas y observaciones a casos. Directorio <filename>modulos/etiquetas</filename></para>
+			    </listitem>
+			    <listitem>
+				    <para><emphasis>segjudicial</emphasis> Para hacer seguimiento judicial a casos. Directorio <filename>modulos/segjudicial</filename></para>
+			    </listitem>
+
+		    </orderedlist>
+	    </para>
+	    <para>
+		    Vea instrucciones más detallas para cada módulo 
+		    en el archivo <filename>Instala.txt</filename> ubicado 
+		    en el directorio del módulo.
+	    </para>
+
+    </sect1>
+
+    <sect1 id="crear-sitio">
+	    <title>Crear sitio</title>
+	    <para>
+		    SIVeL &PRY-VERSION; permite manejar varios sitios con una 
+		    sola instancia (código fuente en una ubicación), cada
+		    sitio puede tener un URL y una base de datos independiente.
+	    </para>
+	     Yo configure clave de base de datos en su
+	     cuenta en ~/.pgpass (vealo por favor para que sepa la clave del
+	     usuario sivel en PostgreSQL pues la requerirá bastante).
+	     Despues pase al directorio de fuentes de SIVeL
+	             /var/www/htdocs/sivel
+		     y saque respaldo de todas las bases:
+		             sudo bin/resptodositio.sh
+
+			     De ahi pase
+			             cd sitios
+				     Cree directorio y base de nombre ofb con
+				             sudo ./nuevo.sh ofb
+					     Después agregue en el archivo de configuración de Apache
+					     /var/www/conf/httpd.conf en un VirtualHost para esas
+					     bases en puerto 12443 (busque por ejemplo concejotumaco) agregue un
+					     Alias para redirigir /ofb/ a /var/www/htdocs/sivel
+					     Después reinicie Apache.
+					     sudo apachectl stop
+					     sudo sh /etc/rc.local
+
+					     Con un navegador abra:
+					     https://www.nocheyniebla.org:12443/ofb/
+					     Que da el mensaje:
+					     No existe configuración 'sitios/WWW.NOCHEYNIEBLA.ORG_OFB'
+					     el cual me ayuda a crear el enlace que se necesita:
+
+					     cd /var/www/htdocs/sivel/sitios
+					     sudo ln -s ofb WWW.NOCHEYNIEBLA.ORG_OFB
+
+					     Tras esto al volver intentar con la URL de la nueva base:
+					     https://www.nocheyniebla.org:12443/ofb/
+					     Ya deja autenticar.
+
+	    <para>Para iniciar un sitio (digamos sivelper) pase al directorio 
+		    <filename>sitios</filename> de las fuentes y emplee el
+		    archivo de comandos <filename>nuevo.sh</filename>:
+		    <screen>
+cd /var/www/htdocs/sivel/sitios
+./nuevo.sh sivelper
+		    </screen>
+		    Asi creara un nuevo directorio sivelper en sitios y
+		    una nueva base de datos sivelper con el mismo usuario
+		    de su instalación principal.  Poblará la base de datos
+		    con las tablas básicas y le permitirá crear un primer
+		    usuario.
+	    </para>
+
+    </sect1>
+	
+    <sect1 id="modificaciones-fuentes">
+	    <title>Modificaciones a las fuentes</title>
+	    
+	    <para>Aunque modificar las fuentes de SIVeL, como con cualquier otro
+	proyecto requiere previo estudio de estas, algunos detalles facilitarán
+	la labor: se emplean estándares de programación;
+	se cuenta
+	con pruebas de regresión (ver <xref linkend="pruebas-regresion"></xref>)
+       	que facilitan la detección de errores que 
+	podrían introducirse al modificar las fuentes; se emplean librerías
+	estándares de Pear (resaltamos 
+	<filename>DB_DataObject_FormBuilder</filename>).
+	</para>
+
+	<sect2 id="estandares">
+		<title>Estándares de programación</title>
+        <para>En cuanto a base de datos se emplea SQL estándar con
+            nomenclatura de tablas en síngular y campo llave único de nombre
+            <literal>id</literal>.
+			Para las partes en PHP se emplean estándares de PEAR 
+			(ver <xref linkend="pearcs"></xref>) ampliados
+			con reglas de nomenclatura de silverorange 
+            (ver <xref linkend="nomenclaturaphp"></xref> y personalización
+            de estándar en <filename>herram/estandares.xml</filename>).
+			Los estándares de PEAR se verifican 
+			con la herramienta <literal>phpcs</literal>
+			del paquete PHP_CodeSniffer (ver
+            <xref linkend="phpcs"></xref>), el cual puede instalarse con:
+            <screen>
+sudo pear install PHP_CodeSniffer
+            </screen>
+            y una vez instalado puede verificarse con:
+			<screen>
+herram/estandares.sh
+			</screen>
+			Los errores quedarán en el archivo <filename>/tmp/e</filename>
+	</para>
+</sect2>
+
+	
+	<sect2 id="documentacion-tecnica">
+	    <title>Documentación técnica</title>
+	    <para>Siguiendo el estándar adoptado para PHP, las fuentes 
+		    incluyen comentarios que permiten 
+		    generar documentación técnica con la herramienta 
+		    <literal>phpdoc</literal> (ver <xref linkend="phpdoc"></xref>), la cual típicamente se instala desde la línea de comandos con:
+		    <screen>
+sudo pear install PHPDocumentor
+            </screen>
+            Esta herramienta requiere bastante memoria por lo que se sugiere
+            verificar en <filename>/var/www/conf/php.inf</filename> que
+            <literal>memory_limit</literal> sea por lo 
+            menos <literal>256M</literal>.
+
+		    La documentación de SIVeL se genera con:
+		    <screen>
+make tecdoc
+		    </screen>
+		    El resultado queda en el directorio <filename>pdoc</filename> o puede consultarse en
+		    <ulink url="&URLSITE;/tec/"/>.
+	    </para>
+    </sect2>
+
+    <sect2 id="documentacion-usuario">
+	    <title>Documentación de usuario</title>
+	    <para>Se emplea DocBook con las facilidades de repasa<footnote><para>Puede sincronizar con las facilidades más recientes ejecutando <literal>DREPASA=/hoome/miusuario/structio/repasa herram/fixldevdbrep.sh</literal> cambiando la ubicación de las fuentes de repasa en la variable <literal>DREPASA</literal>.</para></footnote>.  
+		    Está disponible en formato HTML en <ulink url="http://sivel.sf.net"></ulink>.</para>
+        <para>
+            Para generarla a partir de fuentes primero configure con:
+            <screen>
+cd doc
+./conf.sh
+            </screen>
+            y si cuenta con todas las herramientas necesarias generela con
+            <screen>
+make
+            </screen>
+            Puede consultar más documentación sobre las fuentes y 
+            el desarrollo de esta documentación en <filename>doc/Leame.txt</filename> 
+            y <filename>doc/Desarrollo.txt</filename>
+        </para>
+    </sect2>
+	
+    <sect2 id="arquitectura">
+        <title>Arquitectura de la Aplicación</title>
+	<para>Se trata de una aplicación web modular y orientada a objetos
+		cuyos roles se identifican en 
+		la sección <xref linkend="recurso-humano"></xref>. Un esobozo
+	       de arquitectura se presenta en la siguiente figura 
+            (completamos los diagramas de <xref linkend="infraestructura-tecnologica"></xref>).
+        </para>
+        <informalfigure>
+            <screenshot><mediaobject><imageobject>
+                        <imagedata fileref="arqseg.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+                    <imageobject><imagedata fileref="arqseg.png" format="PNG" align="center"></imagedata></imageobject>
+                    <textobject><phrase>Esbozo de Arquitectura</phrase></textobject></mediaobject>
+            </screenshot>
+    </informalfigure>
+    </sect2>
+
+		    <sect2 id="controlversiones">
+                <title>Control de versiones</title>
+                <para>Las fuentes de la aplicación se mantienen en un
+                    repositorio CVS amablemente mantenido por SourceForge y
+                    utilizable públicamente en modo de sólo lectura.
+                </para>
+                <para>
+                    Los usuarios anonimos puede extraer fuentes de sólo 
+                    lectura con:
+                    <screen>
+cvs -z3 -danonymous@sivel.cvs.sourceforge.net:/cvsroot/sivel co -rSIVEL1_1 sivel
+                    </screen>
+                    Los desarrolladores pueden extraer las fuentes de
+                    lectura/escritura como se presenta a continuación
+                    (remplace <literal>miusuario</literal> por su 
+                    identificación en SourceForge):
+                    <screen>
+cvs -z3 -dmiusuario@sivel.cvs.sourceforge.net:/cvsroot/sivel co -rSIVEL1_1 sivel
+                    </screen>
+                    o una vez con las fuentes pueden establecerse las 
+                    variables CVSROOT y CVS_RSH con la utilidad 
+                    <filename>pcvs.sh</filename>:
+                    <screen>
+./pcvs.sh
+cvs -z3 co sivel
+                    </screen>
+                </para>
+                <para>La rama de las versión 1.1 es: <literal>SIVEL1_1</literal>h
+                    La versión en desarrollo está en la rama <literal>HEAD</literal>.
+                </para>
+            </sect2>
+		    <sect2 id="fuentes">
+                <title>Organización de fuentes</title>
+                <para>Las extensiones empleadas a lo largo de las fuentes son:
+                    <itemizedlist>
+                        <listitem>
+                            <para>.htaccess: Para controlar opciones de Apache ytípicamente evitar listar directorios desde el web.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.awk: programa para awk usado desde línea de comandos.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.bitacora: Bitacora de pruebas de regresión.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.css: Hoja de estilos en cascada CSS usado
+                                desde interfaz HTML.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.copia: Copia de respaldo. </para>
+                        </listitem>
+                        <listitem>
+                            <para>.dsl: Hoja de estilos DSSL usado para generar documentación a partir de fuentes en DocBook.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.empty: Archivo de configuración de fuentes con valores por defecto</para>
+                        </listitem>
+                        <listitem>
+                            <para>.ent: Entidades para parametrizar fuentes de documentación en Docbook</para>
+                        </listitem>
+                        <listitem>
+                            <para>.espreg: Resultado esperado en prueba de regresión</para>
+                        </listitem>
+                        <listitem>
+                            <para>.grep: Patrones por buscar con grep</para>
+                        </listitem>
+                        <listitem>
+                            <para>.html: Documento HTML, partes de la interfaz web</para>
+                        </listitem>
+                        <listitem>
+                            <para>.ico: Icono para presentar en sitio web</para>
+                        </listitem>
+                        <listitem>
+                            <para>.ini: Configuración de base de datos</para>
+                        </listitem>
+                        <listitem>
+                            <para>.ispell: Diccionario para ispell</para>
+                        </listitem>
+                        <listitem>
+                            <para>.jpg: Formato gráfico con pérdidas y alta compresión</para>
+                        </listitem>
+                        <listitem>
+                            <para>.js: Fuente en Javascript</para>
+                        </listitem>
+                        <listitem>
+                            <para>.mak y Makefile: Archivos para construir aplicaciones o distribuciones o documentación</para>
+                        </listitem>
+                        <listitem>
+                            <para>.odt: Documentación en Open Document Format</para>
+                        </listitem>
+                        <listitem>
+                            <para>.php: Fuente en PHP, la mayoría para ser empleadas desde la aplicación web, aunque por ejemplo las pruebas de regresión se ejecutan desde la línea de comandos.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.plantilla: Fuente en PHP con variables de configuración por defecto.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.png: Formato gráfico sin perdidas.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.sed: Instrucciones para el Stream Editor sed.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.selenio: Pruebas de regresión para Selenium.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.sh: Archivos de comandos para ser ejecutados por el interprete de comandos.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.sql: Instrucciones SQL para un motor de bases de datos que soporte ese estándar.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.svg: Gráficas en formato vectorial.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.txt: Documentación como texto plano.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.xdbk: Fuentes de documentación en DocBook XML.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.xml: Archivo de configuración en XML.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.xrlt: Relato en XML en formato del SINCODH.</para>
+                        </listitem>
+                        <listitem>
+                            <para>.xsl: Hoja de estilo XSL.</para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+                <sect3 id="fuentes-herramientas">
+                    <title>Fuentes de herramientas administrativas y de desarrollo</title>
+                <para>
+Para configurar fuentes se emplea <filename>conf.sh</filename> que proviene
+del módulo <literal>devel/confsh</literal> del repositorio CVS de structio
+(ver <ulink url="http://structio.sf.net"></ulink>).  
+Los archivos
+relacionados con esta herramienta se instalan/verifican con el archivo de 
+comandos 
+<filename>enlaces.sh</filename> de esa herramienta y en el momento de
+este escrito son:  
+<filename>herram/comdist.mak</filename>,  
+<filename>herram/confaux.sh</filename>, 
+<filename>herram/misc.sh</filename>, 
+<filename>herram/rtest.sh</filename>
+<filename>conf.sh</filename> y
+<filename>confv.empty</filename>.
+</para>
+<para>En el directorio <filename>bin</filename> hay algunas herramientas
+	para realizar operaciones administrativas desde el interprete de 
+	comandos.  
+	Puede 
+	ver la descripción de cada una en <xref linkend="admin2"></xref>.</para>
+
+<para>
+	El archivo de comandos
+	<literal>herram/buscafallas.sh</literal> verifica que se sigan
+	algunas prácticas seguras en las fuentes.
+</para>
+                </sect3>
+
+                <sect3 id="fuentes-pruebas">
+                    <title>Fuentes de pruebas de regresión</title>
+                    <para>
+Ubicados en directorio sitios/pruebas.  Unas se ejecutan desde la línea
+de comandos, las otras --con extensión .selenio--
+se ejecutan con Selenium IDE. Vea detalles en <xref linkend="pruebas-regresion"></xref>.
+                    </para>
+                </sect3>
+                
+                <sect3 id="fuentes-basico">
+                    <title>Fuentes de SIVeL Básico</title>
+                    <para>
+    Ubicadas en directorio principal y en DataObjects.  Los grupos 
+    principales de las fuentes PHP son: 
+    (1) DB_DataObject_SIVeL.php y DataObjects/*php  
+    una clase por cada tabla para modelar un registro; 
+    (2) captura_caso.php,  buscarGrupo.php, buscarPersona.php, 
+    eliminar_caso.php y Pag*php que corresponden a pestañas de la ficha de 
+    captura; 
+    (3) consulta_web.php, consulta_web_cat.php, consulta_web_correo.php y
+    ResConsulta.php para realizar consultas
+    detallada y web;
+    (4) consolidado.php y ResConsulta.php para generar reportes;
+    (5) tablas_basicas.php, tabla.php, detalle.php para administrar 
+    tablas básicas;
+    (6) usyroles.php, detus.php para administrar usuarios;
+    (7) misc.php, misc_caso.php, misc_actualiza.php y opcion.php con funciones
+    auxiliares empleadas a lo largo de las fuentes;
+    (8) importaRelato.php, actualiza.php, completaActos.php, verifica.php que
+    realizan las operaciones del menú Otros;
+    (9) index.php, PresentaMenuPrincipal.php con el menú principal.
+        </para> 
+                </sect3>
+                <sect3 id="fuentes-sitios">
+                    <title>Fuentes de Sitios</title>
+	    <para>La posiblidad de hacer instalación multisitio y de crear
+		    nuevos módulos (inspirado en Drupal) facilita la 
+		    separación de las fuentes
+		    genéricas de las fuentes personalizadas.  
+		    De esta forma incluso en algunas personalizaciones 
+		    profundas podrá actualizar sólo SIVeL genérico.</para>
+	    <para>Cada sitio debe ser un directorio dentro del 
+		    directorio <filename>sitios</filename> y debe
+		    contar con enlaces por cada forma en la que puede ingresarse
+		    al sitio.  Por ejemplo si ha configurado Apache para
+		    ingresar como http://127.0.0.1/misivel debe tener
+		    un enlace al directorio del sitio de nombre
+		    <filename>127.0.0.1_MISIVEL</filename>.
+	    	    </para>
+                </sect3>
+
+
+                <sect3 id="fuentes-modulos">
+                    <title>Fuentes de Módulos</title>
+		    <para>Cada módulo se ubica en un directorio al interior
+			    del directorio <filename>modulo</filename>.  
+		    Vea más adelante los archivos que componen un módulo.</para>
+                </sect3>
+
+            </sect2>
+
+		    <sect2 id="interfaz">
+			    <title>Interfaz</title>
+<para>
+	La interfaz se desarrolló en PHP (ver <xref linkend="php"></xref>) 
+	empleando diversas librerías de Pear (ver <xref linkend="pear"></xref>),
+       	entre las que destacamos:
+	<variablelist>
+		<varlistentry><term><literal>DB_DataObject_FormBuilder</literal></term>
+			<listitem>
+				<para>Que permite generar formularios 
+					semiautomáticamente a partir de 
+					objetos 
+					<literal>DB_DataObject</literal> 
+					empleando algún 
+					sistema de presentación como
+					<literal>HTML_QuickForm</literal>
+				 (ver
+				 <xref linkend="dbdataobjectformbuilder"></xref>).
+			 </para>
+			</listitem>
+		</varlistentry>
+		<varlistentry><term><literal>DB_DataObject</literal></term>
+			<listitem>
+				<para>Que abstrae una base de datos SQL,
+					identificando tablas con clases y
+					registros con objetos
+				 (ver
+				 <xref linkend="dbdataobject"></xref>).
+			      	</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</para>
+<para>Se empleo programación orientada a objetos, las clases y su jerarquía
+	pueden verse en la documentación técnica (ver
+	<xref linkend="documentacion-tecnica"></xref>) 
+</para>
+    </sect2>
+
+	<sect2 id="base-de-datos">
+	    <title>Base de Datos</title>
+	    <para>En cuanto a base de datos la estructura en SQL (ver <xref linkend="sqlpost"></xref>) de SIVeL genérico está en el archivo 
+		    <filename>estructura.sql</filename>
+		    y los datos iniciales en archivos con nombres de la forma 
+		    <filename>datos-*.sql</filename>.   A continuación se incluye un grafo extaido de
+		    <filename>estructura.sql</filename> y generado
+		    con GraphViz (ver <xref linkend="graphviz"></xref>).
+	    </para>
+<informalfigure>
+	<screenshot><mediaobject><imageobject>
+	<imagedata fileref="estructura.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+	<imageobject><imagedata fileref="estructura.png" format="PNG" align="center"></imagedata></imageobject>
+	<textobject><phrase>Estructura de la Base de Datos</phrase></textobject></mediaobject>
+	</screenshot>
+</informalfigure>
+
+    </sect2>
+    <sect2 id="separacion-de-fuentes-genericas-de-personalizadas">
+	    <title>Separación de fuentes genéricas de las personalizadas</title>
+	    <para>
+		    Para hacer una personalización se sugiere iniciar
+		    un nuevo sitio,  digamos
+		    <literal>sitios/sivelper</literal>, que puede crear
+		    con 
+		    <screen>
+cd sitios
+./nuevo.sh sivelper
+		    </screen> 
+		    Este archivo de comandos creará el directorio con los 
+		    archivos
+		    que requiere para comenzar y generará una nueva base de
+		    datos <literal>sivelper</literal>.
+	    </para>
+
+
+		<para>
+		    Por su parte
+		    un nuevo módulo se puede iniciar por ejemplo en 
+		    <literal>modulos/nuevomod</literal>
+		   	    </para>
+			    <para>La estructura de un sitio y de un módulo es 
+la misma, ambos tienen algunos archivos que son
+puntos de unión con el SIVeL genérico:
+		    <variablelist>
+			    <varlistentry><term><filename>sitios/sivelper/estructura.sql</filename></term>
+				    <listitem><para>Donde declara en SQL las 
+nuevas tablas, secuencias y elementos estructurales de la base de datos.  
+Este archivo será ejecutado en nuevas instalaciones de su personalización 
+cuando se cree la base de datos.</para></listitem>
+			    </varlistentry>
+                <varlistentry><term><filename>sitios/sivelper/datos.sql</filename></term>
+				    <listitem><para>Donde inserta en SQL datos 
+iniciales para las tablas de SIVeL y su personalización. 
+Se ejecuta durante la creación de la base de datos, después de que se ha
+ejecutado <filename>sitios/sivelper/estructura.sql</filename>.  En este archivo
+también debe incluir las actualizaciones de
+<filename>sitios/sivelper/actualiza.php</filename>. 
+				    </para></listitem>
+                </varlistentry>
+                <varlistentry><term><filename>sitios/sivelper/prepara-indices.sql</filename></term>
+                    <listitem><para>Que actualiza índices definidos en 
+				    <filename>estructura.sql</filename> a los máximos valores usados
+                            en las tablas o al mínimo de datos personalizados
+                            en casos de tablas básicas.  
+				    </para></listitem>
+			    </varlistentry>
+
+			    <varlistentry><term><filename>sitios/sivelper/actualiza.php</filename></term>
+				    <listitem><para>
+Este se ejecutará cuando desde la interfaz web 
+el usuario solicite actualizar, por lo que recomendamos que cree
+las mismas bases de datos de <filename>sitios/estructura.sql</filename> e
+incluya los mismos datos de <filename>sitios/datos.sql</filename>.  
+A medida que desarrolle su personalización/módulo podrá realizar
+cambios a la base de datos añadiendolos como actualizaciones a este archivo.
+Por esto, en este archivo queda una historia de la personalización/módulo.
+Incluso desde este puede modificar tablas o datos que no son de
+su personalización, aunque no es recomendable y de requerirlo 
+se sugiere seguir las indicaciones antes dadas para personalizaciones
+de las fuentes genéricas (por ejemplo deshabilitar registros de tablas
+básicas en lugar de borrarlos).
+				    </para></listitem>
+			    </varlistentry>
+		    </variablelist> 
+Como el propósito de los archivos <filename>sitios/sivelper/estructura.sql</filename> y <filename>sitios/sivelper/datos.sql</filename> es inicializar
+nuevas bases de datos, estos deben reflejar el estado
+final de las tablas que maneja la personalización después de ejecutar 
+<filename>sitios/sivelper/actualiza.php</filename>, pero estos
+archivos no incluyen la historia de cambios que si debe estar presente en 
+<filename>sitios/sivelper/actualiza.php</filename> para poder actualizar
+instalaciones con versiones previas.   El archivo 
+<filename>sitios/sivelper/prepara-indices.sql</filename> será ejecutado 
+tanto al inicializar una base como al actualizar.
+</para>
+
+	    <para>Si su personalización consiste en nuevos reportes
+		    que no modifican ni requieren nueva información en bases
+		    de datos, basta que cree nuevas fuentes en PHP y las referencie
+		    desde nuevas opciones del menú (incluyendolas desde
+		    <filename>sitios/sivelper/datos.sql</filename> y 
+		    también desde
+		    <filename>sitios/sivelper/actualiza.php</filename>), tal como hace el 
+		    módulo <filename>modulos/estrotulos</filename>.
+	    </para>
+    <para>
+	    	Si su personalización maneja nuevos datos, se sugiere que
+		lo haga en tablas nuevas (de requerirlo piense en extender
+		tablas existentes usando la misma llave primaria en la
+		nueva tabla), las nuevas clases descendientes de
+		<literal>DB_DataObject</literal> 
+		ubiquelas en el directorio <literal>DataObjects</literal> 
+		de su personalización (e.g 
+		<filename>sitios/sivelper/DataObjects</filename>).
+	Para agregar una nueva tabla  tenga en cuenta:
+	<itemizedlist>
+		<listitem>
+			<para>Agregue la definición en
+				<filename>sitios/sivelper/estructura.sql</filename>.   Si agrega una tabla básica hagála descendiente de 
+				<filename>DataObjects/Basica.php</filename> 
+				que incluira los campos id, nombre, fechacreacion y fechadeshabilitacion.
+			</para>
+		</listitem>
+		<listitem>
+			<para>Agregue código que cree las nuevas
+tablas y los nuevos datos en
+<filename>sitios/sivelper/actualiza.php</filename> como un bloque digamos 
+con identificación <literal>mip-1</literal>.
+En instalaciones que ya operan de SIVeL este es el código que efectivamente 
+será utilizado para activar su personalización.
+</para></listitem>
+<listitem>
+	<para>Agregue datos en <filename>sitios/sivelper/datos.sql</filename>
+		así como registros en la tabla ActualizacionBase con
+		la(s) identificación(es) que haya agregado
+		en <filename>sitios/sivelper/actualiza.php</filename> (en
+		este ejemplo <literal>mip-1</literal>).  Si añadió índices
+		(por ejemplo para tablas básicas) añada actualización
+		para este en
+		<filename>prepara_indice.sql</filename>, eventualmente
+		con un índice máximo para datos reservados (las
+		personalizaciones emplearan índices superiores).
+	</para>
+</listitem>
+<listitem>
+	<para>Agregue llaves de las nuevas tablas en 
+<filename>sitios/sivelpear/DataObjects/estructura-dataobject.ini</filename> e 
+integridad referencial 
+en <filename>sitios/sivelpear/DataObjects/estructura-dataobject.links.ini</filename> --en 
+				el primero los códigos resultan de la
+				suma de:
+				<screen>
+128 NOT NULL
+1 INTEGER
+2 VARCHAR o TEXT
+4 DATE
+8 TIME
+16 BOOLEAN
+32 LOG TEXT
+64 BLOB
+				</screen>
+		
+			</para>
+		</listitem>
+		<listitem>
+			<para>En el directorio <filename>sitios/sivelper/DataObjects</filename> cree un archivo con datos de tabla como 
+				descendiente bien
+				de de <filename>DataObjects/Basica.php</filename> (si es
+				tabla básica, ver por ejemplo <filename>Etnia.php</filename>) o de 
+				<filename>DB_DataObject_SIVeL.php</filename>
+				(ver por ejemplo <filename>Profesion_comunidad.php</filename>).
+				El nombre 
+				debe ser el mismo de la tabla primera letra 
+				mayúscula y demás minúsculas.   Se recomienda
+				consultar documentación de clases base
+				mencionadas.
+			</para>
+		</listitem>			
+		<listitem>
+			<para> Las tablas básicas se declaran en el arreglo
+				<literal>menu_tablas_basicas</literal> que 
+				se define en  el archivo de
+				configuración de cada sitio
+				<literal>conf.php</literal>, este arreglo
+				puede ser completado durante la ejecución.
+				Entonces si tiene información parametrizable 
+				como para una tabla básica, debe tener una 
+		    nueva pestaña o una
+		    extensión de una pestaña existente en la que declare
+		    la función actGlobales() que añada la tabla a las
+		    básicas.  Vea un ejemplo en el módulo
+		    <filename>modulos/etiquetas/PagEtiqueta.php</filename>
+		    que añade la tabla básica Etiqueta cuando se activa
+		    el módulo.   Una vez agregue la agregue puede probar
+		    inserción, eliminación de registros desde el menú
+		    Administración->Tablas Básicas.
+			</para>
+		</listitem>
+	</itemizedlist>
+
+	</para>
+	    <para>
+		    La nueva información la puede solicitar en una nueva
+		    pestaña del formulario de captura como puede ver
+		    en el módulo etiquetas y en particular en
+		    <filename>modulos/etiquetas/PagEtiquetas.php</filename>
+	    </para>
+	    <para>
+		    Es posible extender pestañas de la ficha de captura o
+		    refinar la forma como se generar para incluir nuevos
+		    campos.  Un ejemplo lo puede ver en el módulo anexos
+		    en <filename>modulos/anexos/PagFrecuenteAnexo.php</filename>
+		    que extiende la pestaña Fuentes Frecuentes, así como
+		    la tabla suyacente (<literal>Escrito_caso</literal>).
+	    </para>
+	    <para>
+		    Algunas recomendaciones para crear o extender pestañas son:
+				<itemizedlist>
+					<listitem>
+						<para>
+Cada pestaña corresponde 
+a un archivo con una clase que extiende <literal>PagBaseSimple</literal> o 
+<literal>PagBaseMultiple</literal> o una pestaña existente.  El nombre 
+comienza con <literal>Pag</literal> (<filename>PagMemo.php</filename> 
+es uno simple para comenzar). También puede ver la 
+descripción de las funciones por definir en <literal>PagBaseSimple</literal> 
+(ver <ulink url="&URLSITE;/tec/">documentación técnica</ulink>)
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+Algunos detalles de la presentación de la información de una pestaña se 
+determinan en las clases que corresponden a tablas, 
+y que son descendientes de <filename>DB_DataObject</filename>.  Los detalles 
+por cuadrar los específica la librería 
+<filename>DB_DataObject_FormBuilder</filename>.  En estas mismas clases puede 
+cuadrar otros detalles con las funciones <literal>preGenerateForm</literal>
+y <literal>postGenerateForm</literal> que se llaman antes y después
+de generar el formulario.
+						</para>
+					</listitem>
+					<listitem>
+						<para>Si necesita agregar
+o eliminar pestañas asegure que se referencian las pestañas
+en el orden que se desean en la variable <literal>ficha_tabuladores</literal> 
+de <filename>sitios/sivelper/conf.php</filename>.</para></listitem>
+</itemizedlist>
+</para>
+<para>
+Como orden posible para realizar pruebas después de hacer cambios se sugiere:
+<orderedlist>
+	<listitem>
+		<para>Vea que la interfaz sea como la espera modificando
+			la constructora de la clase y
+			las funciones <literal>iniVar</literal>,
+			<literal>nullVar</literal>,
+			<literal>formularioAgrega</literal> y
+			<literal>formularioValores</literal>.</para>
+	</listitem>
+	<listitem>
+		<para>Verifique que se procesen los datos examinando la 
+			base de datos después de cambiarse de pestaña
+			en la función <literal>procesa</literal>.  
+			Note que tras procesar cada
+			pestaña debe llamarse la función 
+			<literal>funcionario_caso</literal>
+		 </para>
+	</listitem>
+	<listitem>
+		<para>Agregue instrucciones para eliminar en las funciones
+			<literal>eliminaDep</literal> y
+			<literal>elimina</literal>.
+		</para>
+	</listitem>
+	<listitem>
+		<para>Agregue información para búsquedas desde Consulta
+			Web en la función <literal>datosBusqueda</literal>.
+		</para>
+	</listitem>
+</orderedlist>
+</para>
+<para>
+	Puede resultar convenientes activar mensajes de depuración
+	de DataObject poniendo en 5 la opción 'debug' en el 
+	archivo <filename>sitios/sivelper/conf.php</filename>
+</para>
+
+	</sect2>
+	
+	    </sect1>
+
+    <sect1 id="seguridad">
+	    <title>Algunos lineamientos de seguridad informática</title>
+	    <para>En aplicaciones web es común encontrar fallas de
+		    seguridad.   Entre las causas están: debilidades
+		    en las fuentes o en los programas de las que 
+		    dependen, labores o procedimientos administrativos
+		    insuficientes, exceso de confianza de desarrolladores,
+		    administradores y usuarios.  Algunos lineamientos son:
+
+		    <itemizedlist>
+			    <listitem>
+				    <para>Confiar 100% en Dios y sólo en Dios.</para>
+			    </listitem>
+			    <listitem>
+				    <para>Emplear aplicaciones de fuentes 
+					    abiertas pues resultan
+		    auditables y sus desarrolladores no se confian en 
+		    la 'seguridad por inobservabilidad.'
+				    </para>
+			    </listitem>
+			    <listitem>
+				    <para>Preferir aplicaciones cuyos
+					    desarrolladores acudan a políticas
+					    de apertura total 
+					    en cuanto a fallas
+					    de seguridad (ver 
+					    <xref linkend="aperturatotal"></xref>).
+				    </para>
+			    </listitem>
+			    <listitem>
+				    <para>Preferir aplicaciones y protocolos
+					    que empleen cifrado 
+					    fuerte. Cifrar datos sensibles.</para>
+			    </listitem>
+			    <listitem>
+				    <para>
+		    Emplear aplicaciones que tengan bajo registro
+		    de vulnerabilidades y cuyas fallan sean cerradas
+		    tan pronto como son encontradas (ver <xref linkend="secunia"></xref>).
+				    </para>
+			    </listitem>
+			    <listitem>
+				    <para>
+		    Mantener actualizadas fuentes, librerías, lenguajes,
+		    ambientes de desarrollo y sistema operativo.  Es
+		    buen hábito actualizar todo esto cada 6 meses.
+				    </para>
+			    </listitem>
+			    <listitem>
+				    <para>
+					    No emplear claves fáciles. Mejor 
+					    que sean palabras de más de 8
+					    caracteres que no aparezcan en 
+					    diccionario alguno, con 
+					    mayúsculas, minúsculas,
+					    números y símbolos.  Procurar cambiarlas al menos cada 6 meses.
+				    </para>
+			    </listitem>
+			    <listitem>
+				    <para>Documentarse sobre posibles fallas
+					    de seguridad en el lenguaje
+					    de programación empleado y
+					    como cerrarlas.
+					    Para el caso de PHP
+					    puede consultarse
+		    	<xref linkend="crashcourse"></xref>.  
+				    </para>
+			    </listitem>
+			    <listitem>
+				    <para>Hacer auditorias o verificaciones
+de seguridad o de vulnerabilidades de la aplicación.  En el caso de
+SIVeL además de solicitar auditorias externas públicas que dieron 
+resultados en el 2008, hemos realizado una verificación interna
+con el estándar OWASP ASVS de 2009
+(ver en fuentes en <filename>doc/owasp-asvs-SIVeL.odt</filename>).
+				    </para>
+			    </listitem>
+
+			</itemizedlist>
+		   
+	    </para>
+    </sect1>
+	
+</chapter>

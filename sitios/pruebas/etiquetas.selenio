@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="https://127.0.0.1/" />
+<title>etiquetas</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">etiquetas</td></tr>
+</thead><tbody>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Etiquetas para un caso</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a &gt; b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Ficha</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=titulo</td>
+	<td>CASOSELENIUMPORBORRAR</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=fecha[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=fecha[M]</td>
+	<td>label=Feb</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=fecha[Y]</td>
+	<td>label=2002</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_basicos_ubicacion</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>name=id_departamento</td>
+	<td>label=AMAZONAS</td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>name=id_municipio</td>
+	<td>label=LA CHORRERA</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_ubicacion_pResponsables</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=id_p_responsable</td>
+	<td>label=ACCU</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_pResponsables_victimaIndividual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=nombres-persona</td>
+	<td>X</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=apellidos-persona</td>
+	<td>X</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_victimaIndividual_acto</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>name=presponsables[]</td>
+	<td>label=ACCU</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>name=categorias[]</td>
+	<td>label=A11 DESAPARICIÓN</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>name=victimas[]</td>
+	<td>label=X X</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_acto_agregarActo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_acto_etiquetas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=fetiqueta</td>
+	<td>label=x</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=fobservaciones</td>
+	<td>X</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_etiquetas_agregarEtiqueta</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_etiquetas_menu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Consulta Web</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=poretiqueta</td>
+	<td>label=x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_consultaWeb_consulta</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, 'captura_caso.php?modo=edita')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_basicos_victimaColectiva</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=nombre</td>
+	<td>X</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_victimaColectiva_acto</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>name=presponsablescol[]</td>
+	<td>label=ACCU</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>name=categoriascol[]</td>
+	<td>label=A28 COLECTIVO AMENAZADO</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>name=victimascol[]</td>
+	<td>label=X</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_acto_agregarActocolectivo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_acto_reporte</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Menu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=V. Individuales</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=poretiqueta</td>
+	<td>label=x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_estadisticas_consulta</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Consulta Web</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=titulo</td>
+	<td>CASOSELENIUMPORBORRAR</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=poretiqueta</td>
+	<td>label=x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_consultaWeb_consulta</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a[contains(@href, 'captura_caso.php?modo=edita')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_basicos_elimina_caso</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Consulta Web</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=poretiqueta</td>
+	<td>label=x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_consultaWeb_consulta</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Etiquetas para un caso</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=eliminar</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

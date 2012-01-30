@@ -1,0 +1,31 @@
+Seguimiento Judicial
+
+1. En el archivo de configuración de SIVeL
+	1.1 Agregue modulos/etiquetas entre los módulos, por ejemplo
+	    con anexos y etiquetas sería:
+		$modulos="modulos/segjudicial";
+
+	1.2 Agregue la pestaña de Observaciones en
+		$GLOBALS['ficha_tabuladores']
+	    por ejemplo con los módulos anexos y observaciones sería:
+$GLOBALS['ficha_tabuladores']=array(
+    0 => array('basicos', 'PagBasicos', 12),
+    1 => array('ubicacion', 'PagUbicacion', 4),
+    2 => array('frecuentes', 'PagFuentesFrecuentes', 7),
+    3 => array('otras', 'PagOtrasFuentes', 9),
+    4 => array('tipoViolencia', 'PagTipoViolencia', 5),
+    5 => array('pResponsables', 'PagPResponsables', 6), 
+    6 => array('victimaIndividual', 'PagVictimaIndividual', 2),
+    7 => array('victimaColectiva', 'PagVictimaColectiva',3),
+    8 => array('acto', 'PagActo', 1),
+    9 => array('segjudicial', 'modulos/segjudicial/PagSegJudicial', 11),
+    10 => array('memo', 'PagMemo', 8),
+    11 => array('evaluacion', 'PagEvaluacion', 10)
+); 
+ 
+2. Desde un navegador abra la página de actualización de la base, por
+   ejemplo desde el mismo servidor con:
+	https://127.0.0.1/actualiza.php  
+   y siga las instrucciones que allí vea (en particular darle permiso
+   de escritura a los archivos .ini y .links.ini).
+

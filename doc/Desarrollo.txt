@@ -1,0 +1,77 @@
+
+RECOMENDACIONES PARA CONTINUAR DESARROLLO DE ESTAS FUENTES
+---------------------------------------------------------- 
+
+Antes de consultar este documento se sugiere consultar Leame.txt
+
+La información de este archivo es apropiada para quien desea continuar
+el desarrollo de estas fuentes DocBook (http://www.docbook.org) que emplean 
+las ayudas de repasa (http://structio.sourceforge.net/repasa).
+
+
+EDICIÓN DE FUENTES XML
+
+Después de hacer cambios a las fuentes XML es mejor verificar la validez con:
+	make valida
+
+Después de compilar, crear distribuciones o publicar, puede eliminar algunos
+archivos con:
+	make  limpia
+
+y todos los generables excepto los de configuración con:
+	make limpiamas
+
+Tenga en cuenta las siguientes recomendaciones al hacer modificaciones:
+
+* Emplee preferencialmente DocBook XML 4.1.2.  Puede consultar ayuda
+  en español sobre este formato en:
+	 http://lucas.hispalinux.es/Tutoriales/DOCBOOK/doctut/
+	
+* Emplee las convenciones de repasa para documentos DocBook en cuanto
+  a estructura, indicadores, logros, ejercicios y definiciones.  Consulte
+  estas convenciones en http://structio.sourceforge.net/repasa/doc
+  o si instaló repasa puede 
+	1. ejecutar 'man db2rep'
+        2. consultar la documentación HTML que puede estar en 
+	   /usr/local/share/doc/repasa (o un directorio análogo de
+	   acuerdo al prefijo de instalación usado al configurar las fuentes
+	   de repasa).
+
+* Si requiere agregar un nuevo archivo xml (incluyendolo en el xml principal), 
+  añada también el nombre en la variables SOURCES del Makefile, de forma 
+  análoga si elimina un archivo xml también retirelo de esta variable.  
+
+* Si requiere añadir una gráfica, sugerimos que la agregue al directorio
+  img y a la variable IMAGES del Makefile (las reglas por defecto del 
+  Makefile se encargarán de hacer las conversiones necesarios y de copiarlas 
+  en el directorio apropiado antes de generar PDF, HTML o PostScript).
+  De forma análoga cuando elimine una gráfica del directorio img, también
+  retirela de la variable IMAGES.  Emplee de ser posible el formato PNG.
+
+* Modifique el Makefile si requiere procesamiento adiciónal
+
+Por defecto las variables del archivo confv.sh (que resultán tras la
+configuración con conf.sh a partir del módelo confv.empty)  están disponibles 
+en:
+	* conf.sh para usarlas durante la configuración
+	* en el Makefile (que incluye el archivo generado Make.inc)
+	* y en las fuentes XML (que deberían incluir el archivo generado 
+	  confv.ent).  
+Así por ejemplo en sus fuentes XML puede referirse al nombre del proyecto 
+con &PROYECTO; o a la versión con &PRY_VERSION; 
+En el Makefile puede referirse a estos datos con $(PROYECTO) y
+$(PRY_VERSION).  
+
+
+GENERACIÓN DE OTROS ARCHIVOS
+
+Es posible generar un comprimido con las páginas HTML con nombre
+docsivel-1.1_html.tar.gz usando:
+
+	make docsivel-1.1_html.tar.gz
+
+O un comprimido del PostScript  con nombre mi_proyecto-1.0.ps.gz usando:
+	make imp/docsivel-1.1.ps.gz
+
+
+

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" [ 
+<!ENTITY % confv SYSTEM "confv.ent">
+<!ENTITY % personaliza SYSTEM "personaliza.ent">
+<!ENTITY % infoversion SYSTEM "infoversion.ent">
+%confv;
+%personaliza;
+%infoversion;
+<!ENTITY principios SYSTEM "principios.xdbk">
+<!ENTITY ambiente SYSTEM "ambiente.xdbk">
+<!ENTITY uso SYSTEM "uso.xdbk">
+<!ENTITY administracion SYSTEM "administracion.xdbk">
+<!ENTITY instala SYSTEM "instala.xdbk">
+<!ENTITY pautas SYSTEM "para-recoger-datos.xdbk">
+<!ENTITY personalizacion SYSTEM "personalizacion.xdbk">
+<!ENTITY varconfphp SYSTEM "varconfphp.xdbk">
+
+<!ENTITY novedades SYSTEM "novedades.xdbk">
+<!ENTITY creditos SYSTEM "creditos.xdbk">
+<!ENTITY llamado SYSTEM "llamado.xdbk">
+<!ENTITY call SYSTEM "call.xdbk">
+<!ENTITY biblio SYSTEM "biblio.xdbk">
+<!ENTITY indice SYSTEM "indice.xdbk">
+]>
+
+<book lang="es">
+	<title>Documentación de SIVeL &PRY-VERSION;</title>
+  <bookinfo>
+	  <title>Documentación de SIVeL &PRY-VERSION;</title>
+	<!--	<author><firstname>Vladimir</firstname>
+		<surname>Támara Patiño</surname>
+	</author> -->
+	<legalnotice><para>SIVeL se dedica a Dios y a las víctimas. 
+			Su código fuente se libera al Dominio Público, sin 
+			garantías. Oramos para que no sea utilizado por 
+			estructuras armadas.  Esta documentación fue
+			actualizada por última vez en &FECHA-ACT;</para>
+		<para>En Internet puede consultar la versión más
+			reciente de esta documentación en 
+			<ulink url="&URLSITE;"/>, así como la
+			<ulink url="&URLSITE;/tec/">documentación técnica</ulink> 	
+			o bien descargar
+			<ulink url="http://sourceforge.net/projects/sivel/files/">el
+				código fuente de SIVeL</ulink> o esta
+			documentación en formato
+			<ulink url="&URLSITE;/&PROYECTO;-&PRY-VERSION;_html.tar.gz">HTML comprimido</ulink>.
+			<!--			<ulink url="&URLSITE;/&PROYECTO;-&PRY-VERSION;.ps.gz">
+				PostScript comprimido</ulink> y
+			<ulink url="&URLSITE;/&PROYECTO;-&PRY-VERSION;.pdf">PDF</ulink>. -->
+		</para>
+		<para>Lo invitamos a consultar versiones más recientes
+			y noticias relacionadas con SIVeL en 
+			<ulink url="http://sivel.sf.net"/>
+		</para>
+	</legalnotice>
+  </bookinfo>
+
+  <!-- Introducción -->
+  &principios; 
+  &ambiente; 
+
+  <!-- Tema -->
+  &uso;
+  &administracion;
+  &instala; 
+  &personalizacion;
+  
+
+  <!-- Apendeices -->
+  <appendix id="novedades">
+	   <title>Novedades</title>
+	   <para>
+             &novedades;
+           </para>
+   </appendix>
+
+  &llamado;
+  &call;
+  &creditos;
+  &biblio;
+  <!--  &indice; -->
+</book>

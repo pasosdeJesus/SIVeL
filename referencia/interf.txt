@@ -1,0 +1,70 @@
+
+Menus de la interfaz empleada por el Banco de Datos de Derechos Humanos
+y Violencia Política de 2000 a 2004.
+No se han revisado las fuentes, sólo la funcionalidad del ejecutable.
+
+----
+
+Administracion
+	Tablas basicas
+		Informacion geografica
+			Departamento
+			Municipio
+			Tipo clase
+			Clase
+			Region
+			Frontera
+
+			
+		Informacion implicado
+			Filiación
+			Organización social
+			Profesion
+			Rango edad
+			Resultado agresion
+			Sector social
+			Vinculo con el estado
+
+		Caso 
+			Tipo de violencia
+			Categoria
+			Supracategoria
+			Contexto
+			Presuntos responsables
+			Antecedente
+			Intervalo
+
+			
+		Fuente 
+			Fuentes frecuentes
+		BANCODAT 
+			Funcionario
+
+	Usuarios y roles:
+		Agregar, eliminar, actualizar rol
+		Por cada Rol permite escoger menus a los que puede
+		  entrar.
+
+
+Caso
+	Ficha
+
+Consulta externa
+	Consulta externa
+
+Reportes
+	Reporte Revista
+	Reporte General
+	Reporte Consolidado
+	Reporte general por localización (bug en menu de roles/usuarios
+		de la interfaz para windows estos están en estadísiticas)
+	Reporte general con código
+	Reporte Revista Belicas
+	Reporte Revista NO Belicas
+	Reporte Revista Memo Belicas
+	Reporte Revista Memo NO Belicas
+
+
+Estadisticas
+	Estadisticas
+

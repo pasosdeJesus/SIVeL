@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<appendix id="creditos">
+  <title>Créditos</title> 
+
+  <para>Damos gracias primero a Dios y a Él encomendamos y dedicamos
+	  este proyecto. </para>
+  <para>Se han empleado como referencia interfaces de usuario y datos
+	  (sin consultar fuentes ni estructuras de las bases) las 
+	  siguientes bases de datos del 
+	  <ulink url="http://www.nocheyniebla.org">Banco de Datos de DDHH, DIH y VPS</ulink> 
+	  del <ulink url="http://www.cinep.org.co">CINEP</ulink>:
+	  <itemizedlist>
+		  <listitem>
+			  <para> Base empleada de 1998 a 2000.</para>
+		  </listitem>
+		  <listitem>
+			  <para> Base empleada de 2000 a 2004. </para>
+		  </listitem>
+	  </itemizedlist>
+  </para>
+  <para>
+	  Ha ayudado con su autorización
+ <itemizedlist>
+	 <listitem>
+		 <para>
+	S. Javier Giraldo, coordinador del Banco de Datos de Derechos
+	Humanos, Derecho Internacional Humanitario y Violencia Política
+	del CINEP.
+		 </para>
+	 </listitem>
+	 </itemizedlist>
+  </para>
+  <para>
+	  Han aportado datos para las tablas básicas:
+	  <itemizedlist>
+		  <listitem>
+			  <para>
+	 Categorías de "Marco Conceptual", revista Noche y Niebla.
+	  http://www.nocheyniebla.org
+			  </para>
+		  </listitem>
+		  <listitem>
+			  <para>
+	 Información geográfica tomada del Departamento Nacional
+	  de Planeación, DANE y Banco de Datos de Derechos Humanos y
+	  Violencia Política.
+			  </para>
+		  </listitem>
+		  <listitem>
+			  <para>
+	Otros datos empleados en el Banco de Datos de Derechos Humanos y
+	  Violencia Política del CINEP.
+			  </para>
+		  </listitem>
+	  </itemizedlist>
+	</para>
+	<para>
+	Han ayudado con sugerencias y requerimientos:
+	<itemizedlist>
+		<listitem>
+			<para>William Rozo Alvarez (wiroal@nocheyniebla.org), 
+				juana, M, Juliana Villabono, Bernardo.
+			</para>
+		</listitem>
+	</itemizedlist>
+</para>	
+<para>
+	A las fuentes de la versión 1.0, le hicieron auditorías de 
+	seguridad (ver sus reportes en las fuentes de la versión 1.0):
+	<itemizedlist>
+		<listitem>
+			<para>Julio César Garcés Rios. (garcez@linuxmail.org)</para>
+		</listitem>
+		<listitem>
+			<para>Fernando Muñoz. (munozferna@gmail.com)</para>
+		</listitem>
+	</itemizedlist>
+</para>	
+<para>
+	El módulo de seguimiento judicial y los datos relacionados han
+	sido aportados por Humanidad Vigente.
+</para>	
+<para>
+	Han ayudado a documentar:
+	<itemizedlist>
+		<listitem>
+			<para> Diana Garzón (artemisa1786@hotmail.com), quien 
+				preparó un manual para Humanidad
+				Vigente algunas de cuyas partes se incorporaron
+				a este manual con al autorización de 
+				Humanidad Vigente.
+			</para>
+		</listitem>
+		<listitem>
+			<para>Shalom Wiebe (shalomwiebe@gmail.com), quien 
+				corrigió llamado en inglés.</para>
+		</listitem>
+		<listitem>
+			<para>Vladimir Támara Patiño 
+				(vtamara@pasosdeJesus.org).  
+			</para>
+		</listitem>
+		<listitem>
+			<para>Eduard Hoyos escribió documentación
+				inicial para restaurar un volcado SQL.  
+			</para>
+		</listitem>
+	</itemizedlist>
+</para>
+
+<para>
+	El módulo de Etiquetas se desarrolló inicialmente para el OPI.
+</para>
+
+
+<para>
+	El módulo de Estadísticas por Rótulos se desarrolló inicialmente para Justapaz.
+</para>
+
+<para>
+	El módulo de Acciones Judiciales se desarrolló inicialmente para Humanidad Vigente, quienes han aportado también los datos que requiere este módulo.
+</para>
+
+<para>
+	El módulo de Anexos se desarrolló inicialmente para Reiniciar.
+</para>
+
+<para>
+	Han ayudado a programar:
+	<itemizedlist>
+		<listitem>
+			<para>
+	Mauricio Rivera (mauricio.rivera.p@gmail.com) desarrolló una 
+    versión previa de la Consulta Web y quien además ideó el nombre
+    SIVeL.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+	Vladimir Támara Patiño (vtamara@pasosdeJesus.org).
+			</para>
+		</listitem>
+	</itemizedlist>
+</para>
+	<para>
+		En sus albores, parte del código fue generado automáticamente con:
+		<itemizedlist>
+			<listitem>
+				<para>
+	DB_DataObject y DB_DataObject_FormBuilder de Pear	
+				</para>
+			</listitem>
+		</itemizedlist>
+	</para>
+	<para>
+		El cabezote del menú principal y el fondo son aportes
+		de William Rozo (wiroal@nocheyniebla.org).
+	</para>
+	<para>Han ayudado a probar y reportar problemas: William Rozo (wiroal@nocheyniebla.org), Marcela Medina, Rosa Liliana Ortiz, Diana Garzón y Fabian Wilches</para>
+
+<para>
+	Los colores y organización de la Ficha Caso son tomados de un generador 
+	de barras de progreso del paquete HTML_Progress de Pear.   
+</para>
+<para>La idea de ofrecer retribución pública a quienes encuentren
+	fallas de seguridad fue tomada de <literal>djbdns</literal> 
+	escrito por Daniel Bernstein.</para>
+<para>La nomenclatura de versiones se base en la de Mozilla Firefox.
+	</para>
+
+<para>
+	Entre otras empleamos las siguientes herramientas (ver un listado más
+	detallado en archivo Instala.txt de la distribución de fuentes):
+	OpenBSD, PostgreSQL, Apache con mod_ssl, PHP, Pear.
+</para>
+
+</appendix>

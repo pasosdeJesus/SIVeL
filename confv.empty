@@ -1,0 +1,182 @@
+#!/bin/sh
+# Variables de configuración
+
+# Las siguientes líneas definen variables de configuración que,
+# eventualmente, usted puede quedar cambiar para adaptar mejor este programa a
+# sus necesidades --después de modificar este archivo ejecute conf.sh.   
+
+# Note que la sintaxis de este archivo es apropiada para
+# ser usada por conf.sh, a continuación de cada variable debe haber
+# dos líneas con comentarios.  La primera describe la variable y la segunda
+# da una indicación de que hacer si ocurre algún problema.
+
+# Identificación
+
+PROYECTO="sivel"
+# Nombre del proyecto
+#
+
+PRY_VERSION="1.2"
+# Version
+#
+
+PRY_DESC="Sistema de información para sistematizar casos de violencia político social"
+# Descripcion corta
+#
+
+
+RAMA="SIVEL1_2"
+# Rama en repositorio CVS
+#
+
+
+URLSITE="http://www.sourceforge.net/projects/sivel"
+# Sitio de desarrollo de este proyecto
+#
+
+FECHA_PROX="20/07/2012"
+# Fecha en la que esperamos liberar próxima versión
+#
+
+# 25 de Julio, 25 de Octubre, 25 de Enero y 25 de Abril
+
+
+ACT_PROC="act-scp"
+# Regla para actualizar sitio de publicación
+# Las que hay por defecto son act-scp y act-ncftpput
+
+CVSPROYECTO="sivel.cvs.sourceforge.net:/cvsroot/sivel"
+# CVSROOT del proyecto
+#
+
+MES_ACT="octubre de 2002"
+# Mes de actualización
+#
+
+FECHA_ACT=""
+# Fecha de la actualización más reciente
+#
+
+# Particulares de la aplicación
+
+CHROOTDIR="/var/www"
+# Directorio en el que Apache hace chroot
+# 
+
+SOCKPSQL="";
+# Socket de PostgreSQL
+#
+
+
+# Programas típicos
+
+AWK=""
+# Interprete POSIX Awk.  Empleado para transformar textos.
+# Hace parte del paquete awk.
+
+CP=""
+# Para copiar archivos
+# Herramienta típica en sistemas Unix.
+
+CVS=""
+# Para control de versiones
+# Sugerido http://www.opencvs.org
+
+ECHO="/bin/echo"
+# Ejecutable echo
+#
+
+ED=""
+# Editor orientado a linea.
+# Herramienta estándar en sistemas Unix
+
+FIND=""
+# Para ubicar archivos
+# Herramienta típica en sistemas Unix.
+
+GZIP=""
+# Compresor gzip.
+# Herramienta típica en sistemas Unix.
+
+MAKE=""
+# Ejecuta comandos requeridos
+# Herramienta estándar en sistemas Unix
+
+MKDIR=""
+# Crea directorios
+# Herramienta estándar en sistemas Unix
+
+MV=""
+# Mueve/renombra archivos
+# Herramienta estándar en sistemas Unix
+
+NCFTPPUT=""
+# Programa para transferir archivos desde línea de comandos usando el protocolo FTP
+# Es una herramienta del paquete ncftp cliente http://www.ncftpd.com/
+
+PERL=""
+# Interprete del lenguaje Perl.
+# Herramienta típica en sistemas Unix.  http://www.perl.org
+
+RM=""
+# Para eliminar archivos
+# Herramienta típica en sistemas Unix.
+
+SCP=""
+# Programa para transferir archivos desde la línea de comandos usando SSH
+# Es una herramienta del paquete ssh  http://www.openssh.org
+
+SED=""
+# Stream Editor.  Empleado para transformar textos.
+# Hace parte del paquete sed.
+
+TAR=""
+# Empaquetador de archivos tar.
+# Herramienta típica en sistemas Unix.
+
+TOUCH=""
+# touch
+# Herramienta típica en sistemas Unix. 
+
+W3M=""
+# Navegador de web en texto.
+# http://www.w3m.org
+
+W3M_OPT=""
+# Opciones para visualizador HTML como texto
+#
+
+ZIP=""
+# Compresor zip.
+# Herramienta típica en sistemas Unix.
+
+
+# Programas particulares de la aplicación
+
+PHP=""
+# Interprete de PHP
+# http://www.php.net
+
+PHPDOC=""
+# Sistema de documentación
+# http://www.phpdoc.org
+
+PEAR=""
+# Librerías para PHP
+# http://pear.php.net
+
+
+ISPELL="/usr/local/bin/ispell"
+# Corrector ortográfico (instalar en chroot de Apache con bin/prep-chroot.sh)
+# http://fmg-www.cs.ucla.edu/fmg-members/geoff/ispell.html
+
+DICCIONARIO="dic.ispell";
+# Diccionario para ISPELL
+#
+
+OPENSSL="/usr/sbin/openssl"
+# Ejecutable OpenSSL
+#
+
+
+

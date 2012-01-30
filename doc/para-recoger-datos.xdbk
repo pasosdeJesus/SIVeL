@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+
+
+<sect2 id="metodologia-recoleccion">
+	<title>Pautas para recolección de información</title>
+
+  <!--  <para>Una posible pregunta por responder (sugerida en la CCJ) es
+	  <emphasis>`¿Quién le hizo que a quien, cuando y por qué?</emphasis>.
+  </para> -->
+  <para>La siguiente lista es empleada en talleres del Banco de Datos de 
+	  Violencia Política, Derechos Humanos y Derecho Internacional 
+	  Humanitario del CINEP:
+	  <orderedlist>
+		  <listitem>
+			  <para>QUÉ: El hecho ocurrido (¿qué pasó?)</para>
+		  </listitem>
+		  <listitem>
+			  <para>QUIÉN: El responsable del hecho</para>
+		  </listitem>
+		  <listitem>
+			  <para>CONTRA QUIÉN: La víctima del hecho (quién era, sector social, antecedentes)</para>
+		  </listitem>
+		  <listitem>
+			  <para>CÓMO: La forma como ocurrió el hecho (métodos 
+				  y vehículos utilizados, tipo de armas, hora 
+				  de ocurrencia del hecho, etc.)
+			  </para>
+		  </listitem>
+		  <listitem>
+			  <para>¿POR QUÉ?  Móviles que causaron el hecho.</para>
+		  </listitem>
+		  <listitem>
+			  <para>CUANDO: La fecha en que ocurrió el hecho (día, mes año, hora)</para>
+		  </listitem>
+		  <listitem>
+			  <para>EN DÓNDE: El lugar en que ocurrió el hecho (departamento,municipio, barrio, vereda)</para>
+		  </listitem>
+		  <listitem>
+			  <para>COYUNTURA: Lo que ha pasado o está pasando en 
+				  la región, barrio o vereda; presencia de 
+				  actores políticos y actores armados; 
+				  presencia de organizaciones sociales.
+			  </para>
+		  </listitem>
+		  <listitem>
+			  <para>LA OTRA VERSIÓN: Rescatar las diferentes 
+				  versiones que han circulado: versión 
+				  oficial versus la otra versión.
+			  </para>
+		  </listitem>
+	  </orderedlist>
+  </para>
+  </sect2>

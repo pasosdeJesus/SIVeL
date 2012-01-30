@@ -1,0 +1,8 @@
+# Asegurar AllowOverride Options en httpd.conf para este dir.
+
+php_flag display_errors on
+Options -Indexes
+<Files ~ "Entries|Entries.Log|Repository|Root">
+    Order allow,deny
+    Deny from all
+</Files>

@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="https://127.0.0.1/" />
+<title>segjudicial</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">segjudicial</td></tr>
+</thead><tbody>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_basicos_segjudicial</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_segjudicial_nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tipoetapa[1]</td>
+	<td>label=NO HAY</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=demandante</td>
+	<td>Pedro Gomez</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=demandado</td>
+	<td>Antonio Perez</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=poderdante</td>
+	<td>Ramon López</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=telefono</td>
+	<td>23322311</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_segjudicial_siguienteMultiple</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_segjudicial_siguienteMultiple</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tipoetapa[0]</td>
+	<td>label=ADMINISTRATIVO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tipoetapa[1]</td>
+	<td>label=PENDIENTE PRESENTACION DEMANDA</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=demandante</td>
+	<td>Pedro Gomez</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=demandado</td>
+	<td>Estado</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=poderdante</td>
+	<td>Julian Ramirez</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=telefono</td>
+	<td>09809772</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_segjudicial_anteriorMultiple</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=id_tipo_accion</td>
+	<td>label=ACLARACION DE LA DEMANDA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=id_despacho</td>
+	<td>label=JUZGADO PENAL 1, 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=numero_radicado</td>
+	<td>23231241</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=observaciones_accion</td>
+	<td>observación</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=respondido</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_segjudicial_agregaraccionj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=id_tipo_accion</td>
+	<td>label=RECURSO DE REPOSICIÓN</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=id_despacho</td>
+	<td>label=JUZGADO PROMISCUO MUNICIPAL DE ARAUQUITA, 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=numero_radicado</td>
+	<td>897</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=observaciones_accion</td>
+	<td>observa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_segjudicial_agregaraccionj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_segjudicial_siguienteMultiple</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=id_tipo_accion</td>
+	<td>label=RECEPCIÓN DE TESTIMONIOS</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=id_despacho</td>
+	<td>label=PERSONERIA, 2</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=numero_radicado</td>
+	<td>323411</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>name=observaciones_accion</td>
+	<td>personeria</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>name=respondido</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_segjudicial_agregaraccionj</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_segjudicial_anteriorMultiple</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_segjudicial_siguienteMultiple</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_segjudicial_anteriorMultiple</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=tipoetapa[1]</td>
+	<td>label=PRUEBAS</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_segjudicial_siguienteMultiple</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_segjudicial_anteriorMultiple</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_segjudicial_menu</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tipos de acciones judiciales</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a &gt; b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tipos de proceso</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a &gt; b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Despacho</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_tipo</td>
+	<td>DISCIPLINARIO</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a &gt; b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Tablas Básicas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Etapa</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Nuevo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_tipo</td>
+	<td>DISCIPLINARIO</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=añadir</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a &gt; b</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

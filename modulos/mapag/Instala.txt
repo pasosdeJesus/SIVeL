@@ -1,0 +1,20 @@
+Módulo Mapa con GoogleMaps por Luca Urech <lucaurech@yahoo.de>
+
+1. Active en PHP posibilidad de abrir URLs en php.ini:
+
+	allow_url_fopen = On
+
+2. En el archivo de configuración de SIVeL (conf.php)
+	1.1 agregue modulos/mapag entre los módulos
+		$modulos="modulos/mapag";
+
+	1.2 complete opciones del menú agregando:
+		$GLOBALS['modulo'][300]='modulos/mapag/index.php';
+
+3. Desde un navegador abra la página de actualización de la base, por
+   ejemplo desde el mismo servidor con:
+	https://127.0.0.1/actualiza.php  
+
+4. Puede ver el mapa desde el menú Reportes o con un URL de la forma
+	https://127.0.0.1/opcion.php?num=200
+

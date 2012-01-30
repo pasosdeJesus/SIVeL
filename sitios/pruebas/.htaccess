@@ -1,0 +1,7 @@
+# Asegurar AllowOverride Options en httpd.conf para este dir.
+
+php_flag display_errors on
+
+Order deny,allow
+Deny from all
+

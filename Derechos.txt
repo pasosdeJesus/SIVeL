@@ -1,0 +1,13 @@
+
+   SIVeL se dedica a Dios y a las víctimas. Su código fuente se libera al
+   Dominio Público, sin garantías. Oramos para que no sea utilizado por
+   estructuras armadas. Esta documentación fue actualizada por última vez
+   en 22/10/2011
+
+   En Internet puede consultar la versión más reciente de esta
+   documentación en http://sivel.sf.net/1.1/, así como la documentación
+   técnica o bien descargar el código fuente de SIVeL o esta documentación
+   en formato HTML comprimido.
+
+   Lo invitamos a consultar versiones más recientes y noticias
+   relacionadas con SIVeL en http://sivel.sf.net

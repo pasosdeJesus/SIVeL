@@ -1,0 +1,15 @@
+Si te vuelve a ocurrir algo así puedes hacer solo una de las dos
+siguientes:
+
+1. Reiniciar el computador (apgar y encender) y asegurarse de dar la
+   clave correcta cuando pida Encription Key (si es correcta debe decir
+   algo como "filesystem is clean", si queda mal dice algo como
+   "BAD MAGIC.."
+
+2. Sin reiniciar el computador entrar a la cuenta sivel (voy a crear
+   una cuenta janna), abrir una terminal y teclear:
+sudo su -
+. /etc/rc.local
+  Si las particiones no están montadas preguntara la clave de
+  cifrado y las montará.
+

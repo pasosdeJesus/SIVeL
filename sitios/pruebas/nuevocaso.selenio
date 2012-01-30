@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="https://127.0.0.1/" />
+<title>nuevocaso</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">nuevocaso</td></tr>
+</thead><tbody>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Ficha</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>titulo</td>
+	<td>titulo</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fecha[d]</td>
+	<td>label=01</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fecha[M]</td>
+	<td>label=Ene</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fecha[Y]</td>
+	<td>label=2009</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>hora</td>
+	<td>1:00PM</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>duracion</td>
+	<td>1h</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_intervalo</td>
+	<td>label=TARDE</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id_region[]</td>
+	<td>label=ANTIOQUIA CHOCO SANT</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id_frontera[]</td>
+	<td>label=Brasil</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_basicos_ubicacion</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>id_departamento</td>
+	<td>label=ANTIOQUIA</td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>id_municipio</td>
+	<td>label=ABEJORRAL</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_clase</td>
+	<td>label=ABEJORRAL (CM)</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>lugar</td>
+	<td>lugar</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>sitio</td>
+	<td>sitio</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>latitud</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>longitud</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_tipo_sitio</td>
+	<td>label=URBANO</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_ubicacion_frecuentes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=id_prensa</td>
+	<td>label=B7 - BOYACA 7 DIAS</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fecha[d]</td>
+	<td>label=13</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>fecha[Y]</td>
+	<td>label=2010</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ubicacion</td>
+	<td>ubi</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>clasificacion</td>
+	<td>cla</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ubicacion_fisica</td>
+	<td>ubig</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_frecuentes_otras</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>otr</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>anotacion</td>
+	<td>anota</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>ubicacion_fisica</td>
+	<td>ubi</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tipo_fuente</td>
+	<td>label=Directa</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_otras_tipoViolencia</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id_contexto[]</td>
+	<td>label=FALSO POSITIVO</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id_antecedente[]</td>
+	<td>label=ALLANAMIENTO</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_tipoViolencia_pResponsables</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_p_responsable</td>
+	<td>label=ACCU</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>bloque</td>
+	<td>blo</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>frente</td>
+	<td>fre</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>brigada</td>
+	<td>bri</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>division</td>
+	<td>div</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>batallon</td>
+	<td>bat</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>otro</td>
+	<td>otr</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>clasificacion[]</td>
+	<td>label=C62:BELICAS:BÉLICAS:COMBATE</td>
+</tr>
+<tr>
+	<td>removeSelection</td>
+	<td>clasificacion[]</td>
+	<td>label=C62:BELICAS:BÉLICAS:COMBATE</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>clasificacion[]</td>
+	<td>label=C63:BELICAS:BÉLICAS:EMBOSCADA</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>clasificacion[]</td>
+	<td>label=C62:BELICAS:BÉLICAS:COMBATE</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_pResponsables_victimaIndividual</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>id_departamento</td>
+	<td>label=ARAUCA</td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>id_municipio</td>
+	<td>label=ARAUCA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>tipodocumento</td>
+	<td>label=Cédula de Extranjería</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>numerodocumento</td>
+	<td>333</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombres</td>
+	<td>nombre</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>apellidos</td>
+	<td>apellido</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>anionac</td>
+	<td>label=1913</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>hijos</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_profesion</td>
+	<td>label=PERIODISTA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_rango_edad</td>
+	<td>label=SIN INFORMACIÓN</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_filiacion</td>
+	<td>label=OTRO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_sector_social</td>
+	<td>label=EMPRESARIO</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_organizacion</td>
+	<td>label=FEMENINA</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_vinculo_estado</td>
+	<td>label=JUNTAS ADMINIST. LOCALES</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>anotaciones</td>
+	<td>anotaciones</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id_antecedente[]</td>
+	<td>label=AMNISTIA - INDULTO</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_victimaIndividual_victimaColectiva</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>nombre</td>
+	<td>colectiva1</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>anotaciones</td>
+	<td>anota</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>personas_aprox</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id_organizacion_armada</td>
+	<td>label=SIJIN</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id_antecedente[]</td>
+	<td>label=DESAPARICION</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id_rango[]</td>
+	<td>label=De 0 a 15 Años</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id_sector[]</td>
+	<td>label=EMPRESARIO</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id_vinculo_estado[]</td>
+	<td>label=ASAMBLEA DEPARTAMENTAL</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id_filiacion[]</td>
+	<td>label=ALIANZAS IZQUIERDA</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id_profesion[]</td>
+	<td>label=ARTISTA</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>id_organizacion[]</td>
+	<td>label=CIVICA</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_victimaColectiva_acto</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>presponsables[]</td>
+	<td>label=ACCU</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>categorias[]</td>
+	<td>label=A11 DESAPARICIÓN</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>victimas[]</td>
+	<td>label=nombre apellido</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>categorias[]</td>
+	<td>label=A10 EJECUCIÓN EXTRAJUDICIAL</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_acto_agregarActo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>presponsablescol[]</td>
+	<td>label=ACCU</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>categoriascol[]</td>
+	<td>label=A38 COLECTIVO AMENAZADO</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>categoriascol[]</td>
+	<td>label=A102 COLECTIVO DESPLAZADO</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>victimascol[]</td>
+	<td>label=colectiva1</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_acto_agregarActocolectivo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_acto_memo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//textarea[@name='memo']</td>
+	<td>memo</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_memo_anexos</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_anexos_etiquetas</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>fobservaciones</td>
+	<td>color por borrar</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_etiquetas_agregarEtiqueta</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_etiquetas_evaluacion</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gr_confiabilidad</td>
+	<td>label=Media</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gr_esclarecimiento</td>
+	<td>label=Alto</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gr_impunidad</td>
+	<td>label=Nula</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>gr_informacion</td>
+	<td>label=Total</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_evaluacion_reporte</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Volver al Caso</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>_qf_basicos_elimina_caso</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//b</td>
+	<td></td>
+</tr>
+</tbody></table>
+</body>
+</html>

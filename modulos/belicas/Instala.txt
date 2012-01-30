@@ -1,0 +1,37 @@
+Módulo Bélicas
+
+1. En el archivo de configuración de SIVeL
+	1.1 agregue modulos/belicas entre los módulos
+		$modulos="modulos/belicas";
+
+	1.2 complete opciones del menú agregando:
+		$GLOBALS['modulo'][200]='modulos/belicas/estadisticas_comb.php';
+
+	1.3 agregue la pestaña de Víctima combatiente en
+		$GLOBALS['ficha_tabuladores']
+	    por ejemplo con los módulo bélicas, anexos y etiquetas quedaría:
+
+$GLOBALS['ficha_tabuladores']=array(
+    0 => array('basicos', 'PagBasicos', 14),
+    1 => array('ubicacion', 'PagUbicacion', 5),
+    2 => array('frecuentes', 'modulos/anexos/PagFrecuenteAnexo', 8),
+    3 => array('otras', 'modulos/anexos/PagOtraAnexo', 10),
+    4 => array('tipoViolencia', 'PagTipoViolencia', 6),
+    5 => array('pResponsables', 'PagPResponsables', 7),
+    6 => array('victimaIndividual', 'PagVictimaIndividual', 2),
+    7 => array('victimaColectiva', 'PagVictimaColectiva',3),
+    8 => array('victimaCombatiente', 'modulos/belicas/PagVictimaCombatiente', 4),
+    9 => array('acto', 'PagActo', 1),
+    10 => array('memo', 'PagMemo', 9),
+    11 => array('anexos', 'modulos/anexos/PagAnexo', 11),
+    12 => array('etiquetas', 'modulos/etiquetas/PagEtiquetas', 12),
+    13 => array('evaluacion', 'PagEvaluacion', 13)
+);
+
+ 
+2. Desde un navegador abra la página de actualización de la base, por
+   ejemplo desde el mismo servidor con:
+	https://127.0.0.1/actualiza.php  
+   y siga las instrucciones que allí vea (en particular darle permiso
+   de escritura a los archivos .ini y .links.ini).
+

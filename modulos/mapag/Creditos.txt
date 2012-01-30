@@ -1,0 +1,12 @@
+
+Desarrollo de Luca Urech <lucaurech@yahoo.de> cedido al dominio público.
+Agradecimientos a la Corporación Compromiso donde comenzó a funcionar:
+http://corporacioncompromiso.org/index.shtml?s=i 
+
+Emplea librerías con doble licencia MIT y GPL: 
+	* jquery de John Resig http://jquery.com/
+	* datepicker, eye y utils de Stefan Petre www.eyecon.ro 
+		http://www.eyecon.ro/datepicker/datepicker.zip
+
+Los iconos de carga de Ajax seguramente fueron generados con:
+	http://www.ajaxload.info/

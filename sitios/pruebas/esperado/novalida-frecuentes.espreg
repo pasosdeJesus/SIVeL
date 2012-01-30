@@ -1,0 +1,220 @@
+<div class='regla'>Fecha de fuente no puede ser anterior a la del caso</div>
+<script type="text/javascript">
+//<![CDATA[
+function validate_frecuentes(frm) {
+  var value = '';
+  var errFlag = new Array();
+  var _qfGroups = {};
+  _qfMsg = '';
+
+  _qfGroups['fecha'] = {'fecha[d]': true, 'fecha[m]': true, 'fecha[Y]': true};
+  value = new Array();
+  var valueIdx = 0;
+  for (var i = 0; i < frm.elements.length; i++) {
+    var _element = frm.elements[i];
+    if (_element.name in _qfGroups['fecha']) {
+      switch (_element.type) {
+        case 'checkbox':
+        case 'radio':
+          if (_element.checked) {
+            value[valueIdx++] = _element.value;
+          }
+          break;
+        case 'select-one':
+          if (-1 != _element.selectedIndex) {
+            value[valueIdx++] = _element.options[_element.selectedIndex].value;
+          }
+          break;
+        case 'select-multiple':
+          var tmpVal = new Array();
+          var tmpIdx = 0;
+          for (var j = 0; j < _element.options.length; j++) {
+            if (_element.options[j].selected) {
+              tmpVal[tmpIdx++] = _element.options[j].value;
+            }
+          }
+          if (tmpIdx > 0) {
+            value[valueIdx++] = tmpVal;
+          }
+          break;
+        default:
+          value[valueIdx++] = _element.value;
+      }
+    }
+  }
+
+  if (value != '' && !frecposterior('', value) && !errFlag['fecha']) {
+    errFlag['fecha'] = true;
+    _qfMsg = _qfMsg + '\n - La fecha de la fuente debe ser posterior a la del caso';
+  }
+
+  if (_qfMsg != '') {
+    _qfMsg = 'Invalid information entered.' + _qfMsg;
+    _qfMsg = _qfMsg + '\nPlease correct these fields.';
+    alert(_qfMsg);
+    return false;
+  }
+  return true;
+}
+//]]>
+</script>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang = "es">
+<head>
+<meta http-equiv = "Content-Type" content = "text/html; charset=ISO-8859-1">
+<title>Ficha caso</title>
+<style type = "text/css">
+
+body {
+  background-color: #FFFFFF;
+  font-family: Arial;
+  font-size: 10pt;
+}
+
+h1 {
+  color: #000FFC;
+  text-align: center;
+}
+
+.maintable {
+  width: 100%;
+  border-width: 0;
+  border-color: #D0D0D0;
+  background-color: #EEE;
+}
+
+th {
+  text-align: center;
+  color: #FFC;
+  background-color: #AAA;
+  white-space: nowrap;
+}
+
+input {
+  font-family: Arial;
+}
+
+input.flat {
+  font-size: 10pt;
+  border-width: 2px 2px 0px 2px;
+  border-color: #996;
+}
+
+</style>
+<script type = "text/javascript" src="sivel.js" type="text/javascript"></script>
+<script type = "text/javascript">
+<!--
+function envia(que) {  document.forms[0]._qf_default.value = que; document.forms[0].submit(); }
+-->
+</script>
+<body><table class="maintable" align = "left"><colgroup><col width = "150" style = "colprin1"/><col/></colgroup><form action="sitios/pruebas/novalida-frecuentes.php" method="post" name="frecuentes" id="frecuentes" target="_self" onsubmit="try { var myValidator = validate_frecuentes; } catch(e) { return true; } return myValidator(this);">
+<tr>
+<td valign="top" align="left" colspan="2"><input class="flat" name="_qf_frecuentes_basicos" value="Datos básicos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_ubicacion" value="Ubicación" type="submit" />&nbsp;<input class="flat" disabled="disabled" name="_qf_frecuentes_frecuentes" value="Fuentes Frecuentes" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_otras" value="Otras Frecuentes" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_tipoViolencia" value="Contexto" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_pResponsables" value="Presuntos Responsables" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_victimaIndividual" value="Víctimas Individuales" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_victimaColectiva" value="Víctima Colectiva" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_acto" value="Actos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_memo" value="Memo" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_anexos" value="Anexos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_etiquetas" value="Etiquetas" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_evaluacion" value="Evaluación" type="submit" /></td>
+</tr><tr><th colspan = "2"><table width = "100%"><th align = "left">Fuentes Frecuentes (1/1)</th><th algin = "right">Caso 1</th></table></th></tr>
+<tr>
+<td align="right" valign="top"><b></b></td>
+<td valign="top" align="left"><input name="_qf_frecuentes_eliminar" value="Eliminar" type="submit" />&nbsp;<input name="_qf_frecuentes_nuevo" value="Nueva" type="submit" />&nbsp;<input name="_qf_frecuentes_nuevoCopia" value="Nueva Copia" type="submit" />&nbsp;<input name="_qf_frecuentes_anteriorMultiple" value="Fuente anterior" type="submit" />&nbsp;<input name="_qf_frecuentes_siguienteMultiple" value="Fuente siguiente" type="submit" /></td>
+</tr>
+<tr>
+<td align="right" valign="top"><b>Fuente</b></td>
+<td valign="top" align="left"><select name="id_prensa">
+<option value=""></option>
+<option value="1" selected="selected">prensa1</option>
+</select></td>
+</tr>
+<tr>
+<td align="right" valign="top"><b>Fecha</b></td>
+<td valign="top" align="left"><select name="fecha[d]">
+<option value="1">01</option>
+<option value="2">02</option>
+<option value="3">03</option>
+<option value="4">04</option>
+<option value="5">05</option>
+<option value="6">06</option>
+<option value="7">07</option>
+<option value="8">08</option>
+<option value="9">09</option>
+<option value="10" selected="selected">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+</select>-<select name="fecha[m]">
+<option value="1">01</option>
+<option value="2">02</option>
+<option value="3">03</option>
+<option value="4">04</option>
+<option value="5">05</option>
+<option value="6">06</option>
+<option value="7">07</option>
+<option value="8">08</option>
+<option value="9">09</option>
+<option value="10" selected="selected">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+</select>-<select name="fecha[Y]">
+<option value="1990">1990</option>
+<option value="1991">1991</option>
+<option value="1992">1992</option>
+<option value="1993">1993</option>
+<option value="1994">1994</option>
+<option value="1995">1995</option>
+<option value="1996">1996</option>
+<option value="1997">1997</option>
+<option value="1998">1998</option>
+<option value="1999">1999</option>
+<option value="2000">2000</option>
+<option value="2001">2001</option>
+<option value="2002">2002</option>
+<option value="2003">2003</option>
+<option value="2004">2004</option>
+<option value="2005">2005</option>
+<option value="2006">2006</option>
+<option value="2007">2007</option>
+<option value="2008">2008</option>
+<option value="2009">2009</option>
+<option value="2010">2010</option>
+<option value="2011">2011</option>
+</select></td>
+</tr>
+<tr>
+<td align="right" valign="top"><b>Ubicación</b></td>
+<td valign="top" align="left"><input name="ubicacion" type="text" value="ubicación" size="70" maxlength="100" /></td>
+</tr>
+<tr>
+<td align="right" valign="top"><b>Clasificación</b></td>
+<td valign="top" align="left"><input name="clasificacion" type="text" value="clasificacion" size="70" maxlength="100" /></td>
+</tr>
+<tr>
+<td align="right" valign="top"><b>Ubicación Física</b></td>
+<td valign="top" align="left"><input name="ubicacion_fisica" type="text" value="ubicacion" size="70" maxlength="100" /></td>
+</tr>
+<tr>
+<td align="right" valign="top"><b>Anexo</b></td>
+<td valign="top" align="left"><select name="id_anexo">
+<option value="" selected="selected"></option>
+<option value="1"></option>
+</select></td>
+</tr><tr><th colspan = "2">&nbsp; </th></tr>
+<tr>
+<td valign="top" align="center" colspan="2"><input style="width:85px; padding:0; " name="_qf_frecuentes_anterior" value="&lt;&lt; Anterior" type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_reporte" value="Val. y Rep. Gen." type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_busqueda" value="Buscar" type="submit" disabled="true" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_menu" value="Menú" type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_elimina_caso" value="Elimina caso" type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_casonuevo" value="Caso nuevo" type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_siguiente" value="Siguiente &gt;&gt;" type="submit" /></td>
+</tr><input name="id_caso" type="hidden" value="1" />
+<input name="_qf_default" type="hidden" value="frecuentes:siguiente" />
+</form></table></body></html>No insertaron datos de pestaña en tabla escrito_caso. Antes: 1, después: 1
