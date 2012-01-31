@@ -7,12 +7,12 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2009 Dominio público. Sin garantías.
- * @license   Dominio público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2009 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   Dominio pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: DB_DataObject_SIVeL.php,v 1.27.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: Sï¿½LO DEFINICIONES
  */
 
 require_once "DB/DataObject.php";
@@ -25,15 +25,15 @@ require_once $_SESSION['dirsitio'] . "/conf.php";
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  */
 abstract class DB_DataObject_SIVeL extends DB_DataObject
 {
 
     /**
-     * Nombre de la tabla en SQL y minúsculas
+     * Nombre de la tabla en SQL y minï¿½sculas
      */
     var $__table = 'nom_tabla';
 
@@ -53,7 +53,7 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
     }
 
     /**
-     * Retorna un valor. Estático.
+     * Retorna un valor. Estï¿½tico.
      *
      * @param mixed $k Llave
      * @param mixed $v Valor
@@ -71,13 +71,13 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
 
     /**
      * Funciona legada
-     * Como ocurria en FormBuilder 0.10, hasta versión 1.121 en el
+     * Como ocurria en FormBuilder 0.10, hasta versiï¿½n 1.121 en el
      * CVS de FormBuilder.php. Cambio sucitado por bug #3469
      *
      * @param string $table Tabla
      * @param string $key   Llave
      *
-     * @return string opción enumerada asociada a la llave.
+     * @return string opciï¿½n enumerada asociada a la llave.
      */
     function enumCallback($table, $key)
     {
@@ -103,9 +103,9 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
 
 
     /**
-     * Identificacion de registro 'SIN INFORMACIÓN'
+     * Identificacion de registro 'SIN INFORMACIï¿½N'
      *
-     * @return integer Código del registro SIN INFORMACIÓN
+     * @return integer Cï¿½digo del registro SIN INFORMACIï¿½N
      **/
     static function idSinInfo()
     {
@@ -114,9 +114,9 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
 
 
     /**
-     * Campos que pueden ser SIN INFORMACION y el código correspondiente
+     * Campos que pueden ser SIN INFORMACION y el cï¿½digo correspondiente
      *
-     * @return array Arreglo de campos que pueden ser sin información
+     * @return array Arreglo de campos que pueden ser sin informaciï¿½n
      */
     static function camposSinInfo()
     {
@@ -158,7 +158,7 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
         /*var_dump($form);
         debug_print_backtrace();*/
         if (!is_array($this->fb_fieldLabels)) {
-            echo "Definir etiquetas en fb_fieldLabels<br>";
+            echo _("Definir etiquetas en fb_fieldLabels<br>");
             print_r($this);
         } else {
             foreach ($this->fb_fieldLabels as $c => $et) {
@@ -211,7 +211,7 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
      *
      * @param array &$ar Arreglo con datos que se completan para convertir
      * posteriormente a XML
-     * @param array $dad Datos adicionales par la conversión.
+     * @param array $dad Datos adicionales par la conversiï¿½n.
      *
      * @return void  No retorna un dato pero modifica $ar
      */
