@@ -7,12 +7,12 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2005 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2005 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: consulta_web_correo.php,v 1.45.2.3 2011/10/18 16:05:02 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: CONSULTA PÚBLICA
+ * Acceso: CONSULTA Pï¿½BLICA
  */
 
 /**
@@ -38,22 +38,22 @@ require_once 'Mail/mime.php';
 require_once 'confv.php';
 
 /**
- * Responde a botón enviar
+ * Responde a botï¿½n enviar
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  */
 class AccionEnviaCorreo extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciï¿½n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      Pï¿½gina
+     * @param string $actionName Acciï¿½n
      *
      * @return void
      */
@@ -67,7 +67,7 @@ class AccionEnviaCorreo extends HTML_QuickForm_Action
          (pueden ser distribuidos)
          pero tambien impide que dos personas envien informacion dentro de un
          lapso de cierto tiempo (3 s?).  Si no se espera mucho publico para el
-         servicio puede resultar aceptable la limitación.
+         servicio puede resultar aceptable la limitaciï¿½n.
          */
         $ultimo= $_SESSION['dirsitio'] . '/ultimoenvio.txt';
         /* Manejo de archivos basado en ejemplo de
@@ -108,7 +108,7 @@ class AccionEnviaCorreo extends HTML_QuickForm_Action
         }
 
         $cuerposinenc = escapeshellarg(var_post_escapa("correo", null, 5000));
-        //Evitamos inyección de encabezados
+        //Evitamos inyecciï¿½n de encabezados
         $cuerposinenc = str_replace("\r", "", $cuerposinenc);
         $cuerposinenc = str_replace("\n", "", $cuerposinenc);
 
@@ -179,8 +179,8 @@ class AccionEnviaCorreo extends HTML_QuickForm_Action
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  */
 class ConsultaWebCorreo extends HTML_QuickForm_Page
@@ -233,7 +233,7 @@ class ConsultaWebCorreo extends HTML_QuickForm_Page
         $sel->setCols(50);
         $sel->setValue(
             'Indice: ' . $indice .
-            'Ubicación: ' . $ubicacion .
+            'Ubicaciï¿½n: ' . $ubicacion .
             'Descripcion: ' . $descripcion .
             'Responsables: ' . $presponsables .
             'Victimas: ' . $victimas .
