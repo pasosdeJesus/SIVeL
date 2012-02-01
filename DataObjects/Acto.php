@@ -8,12 +8,12 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: Acto.php,v 1.10.2.3 2012/01/17 04:05:47 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: Sï¿½LO DEFINICIONES
  */
 
 /**
@@ -23,12 +23,12 @@ require_once 'DB_DataObject_SIVeL.php';
 
 /**
  * Definicion para la tabla acto
- * Ver documentación de DataObjects_Caso.
+ * Ver documentaciï¿½n de DataObjects_Caso.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
@@ -71,7 +71,7 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
 
         $t = '<table id="tablaActos" width="100%"><thead><tr>' .
             '<th>P. Responsable</th><th>Categoria</th>' .
-            '<th>Víctima</th><th></th></thead><tbody>';
+            '<th>Vï¿½ctima</th><th></th></thead><tbody>';
         $p = clone $formbuilder->_do;
         $db = $p->getDatabaseConnection();
         $p->id_p_responsable = null;
