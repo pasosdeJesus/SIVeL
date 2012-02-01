@@ -2,19 +2,19 @@
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
 /**
  * Consulta de categoria para consulta web
- * Una versión inicial fue desarrollada en 2004 por Mauricio Rivera
+ * Una versiï¿½n inicial fue desarrollada en 2004 por Mauricio Rivera
  * (mauricio.rivera.p@gmail.com).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2005 Dominio público.  Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2005 Dominio pï¿½blico.  Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: consulta_web_cat.php,v 1.25.2.1 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: CONSULTA PÚBLICA
+ * Acceso: CONSULTA Pï¿½BLICA
  */
 
 require_once "aut.php";
@@ -58,7 +58,7 @@ if ($dc->find() == 0) {
 $dc->fetch();
 
 echo "<table border='1'>";
-echo "<tr><th>Código</th><th>Descripción</th></tr>";
+echo "<tr><th>Cï¿½digo</th><th>Descripciï¿½n</th></tr>";
 echo "<tr><td>" . htmlentities($t) . htmlentities($c) . "</td>";
 echo "<td>" . htmlentities($dt->nombre) . " / " . htmlentities($ds->nombre) 
     . " / " . htmlentities($dc->nombre) . "</td></tr>";
