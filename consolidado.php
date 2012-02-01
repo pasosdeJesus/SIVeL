@@ -1,21 +1,21 @@
 <?php
 //  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
 /**
-* Consolidado de víctimas.
+* Consolidado de vï¿½ctimas.
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: consolidado.php,v 1.57.2.6 2011/12/12 10:43:57 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Consolidado de víctimas.
+ * Consolidado de vï¿½ctimas.
  */
 
 require_once "aut.php";
@@ -35,12 +35,12 @@ require_once 'misc.php';
 
 
 /**
- * Responde a botón Consulta
+ * Responde a botï¿½n Consulta
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  */
 class AccionConsolidado extends HTML_QuickForm_Action
@@ -52,12 +52,12 @@ class AccionConsolidado extends HTML_QuickForm_Action
 
     /**
      * Presenta categorias que conformaran cada columna de la tabla.
-     * Depuración
+     * Depuraciï¿½n
      *
-     * @param handle  &$db    Conexión a BD
+     * @param handle  &$db    Conexiï¿½n a BD
      * @param array   $cataux Cat
      * @param unknown $pResto pResto
-     * @param unknown $ncol   Número de columnas
+     * @param unknown $ncol   Nï¿½mero de columnas
      *
      * @return void
      */
@@ -95,7 +95,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
      * Llena arreglo de presuntos responsables que conformaran cada columna de
      *  la tabla.  Muestra en pantalla si muestra es true
      *
-     * @param object  &$db     Conexión a BD
+     * @param object  &$db     Conexiï¿½n a BD
      * @param array   &$tpresp Tabla de presuntos responsables
      * @param unknown $muestra Muestra
      *
@@ -131,8 +131,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
     /**
      * Realiza consulta
      *
-     * @param unknown &$page      Página
-     * @param unknown $actionName nombre de la acción
+     * @param unknown &$page      Pï¿½gina
+     * @param unknown $actionName nombre de la acciï¿½n
      *
      * @return void
      * @access public
@@ -160,7 +160,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         $pIdMunicipio = (int)var_post_escapa('id_municipio', $db);
         $pIdDepartamento = (int)var_post_escapa('id_departamento', $db);
 
-        $campos = array('caso_id' => 'Cód.');
+        $campos = array('caso_id' => 'Cï¿½d.');
         $tablas = "victima, caso, acto, municipio, departamento";
         $where = "";
 
@@ -206,7 +206,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             die($ncol->getMessage());
         }
         if ($ncol <= 0) {
-            die('Falta información para reporte consolidado en tabla categoria');
+            die('Falta informaciï¿½n para reporte consolidado en tabla categoria');
         }
         $d->orderBy('id');
         $d->find();
@@ -272,7 +272,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             $fdesdellena = $pFincdesde['Y'] != '' && $pFincdesde['M'] != ''
                 && $pFincdesde['d'] != '';
             if ($fhastallena || $fdesdellena) {
-                /* Se hace así porque puede haber casos que no
+                /* Se hace asï¿½ porque puede haber casos que no
                     tengan asociado funcionario --cuando vienen de otro
                     banco (?), antiguos*/
                 $q = "SELECT MIN(fecha_inicio) FROM funcionario_caso " .
@@ -324,14 +324,14 @@ class AccionConsolidado extends HTML_QuickForm_Action
             if ($depuraConsolidado) {
                 echo "<td>IdCaso</td><td>IdVic</td>";
             }
-            echo "<th>Fecha</th><th>Ubicación</th><th>Víctimas</th>";
+            echo "<th>Fecha</th><th>Ubicaciï¿½n</th><th>Vï¿½ctimas</th>";
         } elseif ($pMuestra == "csv") {
             header("Content-type: text/csv");
-            echo '"Fecha", "Ubicación", "Víctimas", ""';
+            echo '"Fecha", "Ubicaciï¿½n", "Vï¿½ctimas", ""';
         } elseif ($pMuestra == 'latex') {
             //header("Content-type: application/x-latex");
             echo "<pre>";
-            echo '\\textbf{Fecha} & \\textbf{Ubicacion} & \\textbf{Víctimas} ';
+            echo '\\textbf{Fecha} & \\textbf{Ubicacion} & \\textbf{Vï¿½ctimas} ';
         }
         foreach ($cat as $idcat => $cp) {
             if ($pResto || $idcat != chr($ncol+65)) {
@@ -363,7 +363,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             $u->id_caso = $idcaso;
             if ($u->find() == 0) {
                 die("<br/><font color='red'>Caso sin ubicacion: " .
-                    "$idcaso -- estadística incompleta!!!</font>"
+                    "$idcaso -- estadï¿½stica incompleta!!!</font>"
                 );
             }
             $u->fetch();
@@ -415,7 +415,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                         $suma[$idcat]++;
                     } else {
                         die("Sobreconteo por caso " . $idcaso .
-                            " que saldría más de una vez en la columna " .
+                            " que saldrï¿½a mï¿½s de una vez en la columna " .
                             $idcat
                         );
                     }
@@ -438,8 +438,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
             if ($acto->find()==0) {
                 $acto = null;
                 echo_esc(
-                    "Víctima sin presunto responsable '$idvic', " 
-                    . "'$nom' en caso '$idcaso' -- estadística incompleta!!!"
+                    "Vï¿½ctima sin presunto responsable '$idvic', " 
+                    . "'$nom' en caso '$idcaso' -- estadï¿½stica incompleta!!!"
                 );
             } else {
                 $apr = array();
@@ -501,8 +501,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  */
 class PagConsolidado extends HTML_QuickForm_Page
@@ -600,13 +600,13 @@ class PagConsolidado extends HTML_QuickForm_Page
         $ae[] =& $t;
         $ae[] =&  $this->createElement(
             'radio', 'muestra', 'csv',
-            'Formato CSV (hoja de cálculo)', 'csv'
+            'Formato CSV (hoja de cï¿½lculo)', 'csv'
         );
         $ae[] =&  $this->createElement(
             'radio', 'muestra', 'latex',
             'LaTeX', 'latex'
         );
-        $this->addGroup($ae, null, 'Forma de presentación', '&nbsp;', false);
+        $this->addGroup($ae, null, 'Forma de presentaciï¿½n', '&nbsp;', false);
         $t->setChecked(true);
 
         $prevnext = array();
@@ -619,7 +619,7 @@ class PagConsolidado extends HTML_QuickForm_Page
         $this->addGroup($prevnext, null, '', '&nbsp;', false);
 
         $tpie = "<div align=right><a href=\"index.php\">" .
-            "Menú Principal</a></div>";
+            "Menï¿½ Principal</a></div>";
         $e =& $this->addElement('header', null, $tpie);
 
         if (!isset($_POST['evita_csrf'])) {
