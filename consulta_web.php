@@ -1,17 +1,17 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
 /**
- * Consulta para la página web.
- * Una versión inicial que sirvió de referencia fue desarrollada por
+ * Consulta para la pï¿½gina web.
+ * Una versiï¿½n inicial que sirviï¿½ de referencia fue desarrollada por
  * Mauricio Rivera (mauricio.rivera.p@gmail.com) en 2004.
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2005 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2005 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: consulta_web.php,v 1.119.2.6 2011/12/31 19:28:47 vtamara Exp $
  * @link      http://sivel.sf.net
  */
@@ -46,12 +46,12 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
 
 
 /**
- * Responde a botón para hacer consulta.
+ * Responde a botï¿½n para hacer consulta.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscaId
  */
@@ -59,10 +59,10 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciï¿½n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      Pï¿½gina
+     * @param string $actionName Acciï¿½n
      *
      * @return void
      */
@@ -96,7 +96,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         $pTeX       = (int)var_req_escapa('m_tex', $db);
         $pTitulo    = substr(var_req_escapa('titulo', $db), 0, 32);
 
-        $campos = array(); //'caso_id' => 'Cód.');
+        $campos = array(); //'caso_id' => 'Cï¿½d.');
         $tablas = "caso";
         $where = "";
         $ordCasos = array();
@@ -318,7 +318,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 "trim(persona.apellidos)) ILIKE '%" . trim($pNomvic) . "%'";
         }
 
-        // Búsqueda por víctima no incluye combatientes para evitar sobreconteos
+        // Bï¿½squeda por vï¿½ctima no incluye combatientes para evitar sobreconteos
         // Emplear consulta_externa
         $conv = array('caso_id' => 0, 'caso_fecha' => 1, 'caso_memo' =>2);
         $q = "SELECT DISTINCT ";
@@ -385,12 +385,12 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
 
 
 /**
- * Fórmulario para consulta web.
+ * Fï¿½rmulario para consulta web.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  */
 class ConsultaWeb extends HTML_QuickForm_Page
@@ -449,7 +449,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         );
 
         if ($this->opciones != array()) {
-            $cod =& $this->addElement('text', 'id_casos', 'Código(s): ');
+            $cod =& $this->addElement('text', 'id_casos', 'Cï¿½digo(s): ');
             $cod->setSize(80);
         }
 
@@ -515,7 +515,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $sel =& $this->addElement(
             'text', 'nomvic',
-            'Nombre o apellido de la víctima'
+            'Nombre o apellido de la vï¿½ctima'
         );
         $sel->setSize(80);
 
@@ -558,7 +558,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $sel =& $this->addElement(
             'select', 'clasificacion',
-            'Clasificación de Violencia'
+            'Clasificaciï¿½n de Violencia'
         );
         $sel->setMultiple(true);
         $sel->setSize(5);
@@ -602,7 +602,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $sel =& $this->addElement(
             'select',
-            'ssocial', 'Sector Social Víctima'
+            'ssocial', 'Sector Social Vï¿½ctima'
         );
         $options = array('' => '') + htmlentities_array(
             $db->getAssoc("SELECT id, nombre FROM sector_social")
@@ -670,7 +670,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         }
         $x =& $this->createElement(
             'radio', 'ordenar', 'ubicacion',
-            'Ubicación', 'ubicacion'
+            'Ubicaciï¿½n', 'ubicacion'
         );
         $ae[] =& $x;
         if ($pOrden == 'ubicacion') {
@@ -680,7 +680,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         if ($this->opciones != array()) {
             $x =& $this->createElement(
                 'radio', 'ordenar', 'codigo',
-                'Código', 'codigo'
+                'Cï¿½digo', 'codigo'
             );
             $ae[] =& $x;
             if ($pOrden == 'codigo') {
@@ -775,7 +775,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
             $t =& $x;
         }
 
-        $this->addGroup($ae, null, 'Forma de presentación', '&nbsp;', false);
+        $this->addGroup($ae, null, 'Forma de presentaciï¿½n', '&nbsp;', false);
         $t->setChecked(true);
 
         $asinc = array();
@@ -796,7 +796,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
             }
         };
 
-        if (in_array(42, $this->opciones)) { // Podría ver rep. gen?
+        if (in_array(42, $this->opciones)) { // Podrï¿½a ver rep. gen?
             $sel =& $this->createElement(
                 'checkbox',
                 'm_fuentes', 'Fuentes', 'Fuentes'
@@ -808,7 +808,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         }
         $sel =& $this->createElement(
             'checkbox',
-            'retroalimentacion', 'Retroalimentación', 'Retroalimentación'
+            'retroalimentacion', 'Retroalimentaciï¿½n', 'Retroalimentaciï¿½n'
         );
         $sel->setValue(false);
         $opch[] =& $sel;
@@ -826,7 +826,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $opch[] =& $sel;
         $sel =& $this->createElement(
             'checkbox',
-            'm_tex', 'Conversión a TeX', 'Conversión a TeX'
+            'm_tex', 'Conversiï¿½n a TeX', 'Conversiï¿½n a TeX'
         );
         if (!in_array('m_tex', $asinc)) {
             $sel->setValue(false);
@@ -849,7 +849,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         }
 
         $this->addGroup(
-            $opch, null, 'Detalles de la presentación',
+            $opch, null, 'Detalles de la presentaciï¿½n',
             '&nbsp;', false
         );
 
@@ -864,7 +864,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         if (isset($this->opciones) && in_array(42, $this->opciones)) {
             $tpie = "<div align=right><a href=\"index.php\">" .
-                "Menú Principal</a></div>";
+                "Menï¿½ Principal</a></div>";
         } else if (isset($GLOBALS['pie_consulta_web_publica'])) {
             $tpie = $GLOBALS['pie_consulta_web_publica'];
         } else {
