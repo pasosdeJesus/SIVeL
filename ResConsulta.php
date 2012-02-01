@@ -7,9 +7,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: ResConsulta.php,v 1.167.2.4 2011/10/13 13:41:06 vtamara Exp $
  * @link      http://sivel.sf.net
  */
@@ -63,8 +63,8 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
 */
 class ResConsulta
@@ -74,11 +74,11 @@ class ResConsulta
      * Campos
      * @var    array
      */
-    var $campos; // Ver parámetros de constructora
+    var $campos; // Ver parï¿½metros de constructora
 
 
     /**
-     * Conexión a base de datos
+     * Conexiï¿½n a base de datos
      * @var    object
      */
     var $db;
@@ -102,7 +102,7 @@ class ResConsulta
     var $mostrar;
 
     /**
-     * Memo en varias líneas
+     * Memo en varias lï¿½neas
      * @var    bool
      */
     var $varlin;
@@ -114,7 +114,7 @@ class ResConsulta
     var $ordenar;
 
     /**
-     * Traducción TeX
+     * Traducciï¿½n TeX
      * @var    bool
      */
     var $tex;
@@ -135,7 +135,7 @@ class ResConsulta
      * Constructora
      *
      * @param array  &$campos      Campos por mostrar id => nombre
-     * @param handle &$db          Conexión a base de datos
+     * @param handle &$db          Conexiï¿½n a base de datos
      * @param string &$resultado   Resultado de consulta tiene caso.id
      * @param array  &$conv        Convertir id de campos a base de datos
      * @param string $mostrar      Forma de presentacion (rev., gen., tabla)
@@ -172,8 +172,8 @@ class ResConsulta
     /**
      * Extrae ubicaciones asociadas a un caso.
      *
-     * @param integer $idcaso Código del caso
-     * @param handle  &$db    Conexión a base de datos
+     * @param integer $idcaso Cï¿½digo del caso
+     * @param handle  &$db    Conexiï¿½n a base de datos
      * @param array   &$idd   Ids. de departamentos  retornados
      * @param array   &$ndd   Nombres de departamentos  retornados
      * @param array   &$idm   Ids. de municipios  retornados
@@ -263,7 +263,7 @@ class ResConsulta
     /**
      * Retorna cadena con ubicaciones
      *
-     * @param handel  &$db    Conexión a BD
+     * @param handel  &$db    Conexiï¿½n a BD
      * @param integer $idcaso Id. del caso
      *
      * @return string ubicaciones
@@ -298,18 +298,18 @@ class ResConsulta
 
 
     /**
-     * Extrae víctimas de un caso y retorna su información en varios
+     * Extrae vï¿½ctimas de un caso y retorna su informaciï¿½n en varios
      *   vectores
      *
      * @param integer $idcaso     Id. del caso
-     * @param handle  &$db        Conexión
+     * @param handle  &$db        Conexiï¿½n
      * @param array   &$idp       Vector de identificaciones
      * @param array   &$ndp       Vector de nombres
      * @param integer $id_persona Id.
      * @param integer &$indid     Indid
      * @param object  &$edp       edp
      *
-     * @return Total de víctimas
+     * @return Total de vï¿½ctimas
      */
     function extraeVictimas($idcaso, &$db, &$idp, &$ndp,
         $id_persona, &$indid, &$edp
@@ -336,17 +336,17 @@ class ResConsulta
 
 
     /**
-     * Extrae víctimas de un caso y retorna su información en varios
+     * Extrae vï¿½ctimas de un caso y retorna su informaciï¿½n en varios
      * vectores
      *
      * @param integer $idcaso         Id. del caso
-     * @param handle  &$db            Conexión
+     * @param handle  &$db            Conexiï¿½n
      * @param array   &$idp           Vector de identificaciones
      * @param array   &$ndp           Vector de nombres
      * @param integer $id_combatiente Id.
      * @param integer &$indid         Indid
      *
-     * @return Total de víctimas
+     * @return Total de vï¿½ctimas
 
      */
     function extraeCombatientes($idcaso, &$db, &$idp, &$ndp,
@@ -375,7 +375,7 @@ class ResConsulta
      * Extrae presuntos responsables
      *
      * @param int    $idcaso Id. del caso
-     * @param object &$db    Conexión a BD
+     * @param object &$db    Conexiï¿½n a BD
      * @param array  &$idp   Vector de identificaciones
      * @param array  &$idp2  Vector de identificaciones 2
      * @param array  &$ndp   Vector de nombres
@@ -409,7 +409,7 @@ class ResConsulta
      *        $idp (identificacion), $ndp (nombre) y $cpd (cantidad de personas)
      *
      * @param int    $idcaso      Id. del caso
-     * @param object &$db         Conexión a BD
+     * @param object &$db         Conexiï¿½n a BD
      * @param array  &$idp        Vector de identificaciones
      * @param array  &$ndp        Vector de nombres
      * @param array  &$cdp        Vector
@@ -449,10 +449,10 @@ class ResConsulta
     /**
      * Reporte de Actos
      *
-     * @param object &$db        Conexión a BD
+     * @param object &$db        Conexiï¿½n a BD
      * @param array  $tablas     Tablas
      * @param string $donde      Donde
-     * @param string $pFinchasta Caja de selección
+     * @param string $pFinchasta Caja de selecciï¿½n
      * @param string $pMuestra   Muestra
      *
      * @return void
@@ -493,18 +493,18 @@ class ResConsulta
         $suma = array();
         if ($pMuestra == "csv") {
             header("Content-type: text/csv");
-            echo '"Fecha", "Caso", "Víctima", "Categoria", "P. Responsable", ""\n';
+            echo '"Fecha", "Caso", "Vï¿½ctima", "Categoria", "P. Responsable", ""\n';
         } elseif ($pMuestra == 'latex') {
             //header("Content-type: application/x-latex");
             echo "<pre>";
-            echo '\\textbf{Fecha} & \\textbf{Caso} & \\textbf{Víctima} & '
+            echo '\\textbf{Fecha} & \\textbf{Caso} & \\textbf{Vï¿½ctima} & '
                 . ' \\textbf{Categoria} & \\textbf{P. Responsable} \\\\ \n '
                 . '\hline\n';
         } else { // tabla o consolidado
 
             echo "<table border='1'>\n";
-            echo "<tr><th>Fecha</th><th>Caso</th><th>Víctima</th>" .
-                "<th>Sector Social</th><th>Organización Social</th>" .
+            echo "<tr><th>Fecha</th><th>Caso</th><th>Vï¿½ctima</th>" .
+                "<th>Sector Social</th><th>Organizaciï¿½n Social</th>" .
                 "<th>Categoria</th><th>P. Responsable</th></tr>";
         }
 
@@ -563,9 +563,9 @@ class ResConsulta
      * violencia  extraidos de la tabla con una consulta que recibe
      *  (retorna primero tipo_violencia, id_supracategoria e id_categoria)
      *
-     * @param object &$db   Conexión a BD
+     * @param object &$db   Conexiï¿½n a BD
      * @param string $q     Q
-     * @param string &$sel  Caja de selección
+     * @param string &$sel  Caja de selecciï¿½n
      * @param string $orden Orden
      *
      * @return void
@@ -633,7 +633,7 @@ class ResConsulta
     /**
      * Convierte reporte a HTML
      *
-     * @param boolean $retroalim    Retroalimentación
+     * @param boolean $retroalim    Retroalimentaciï¿½n
      * @param string  $html_enlace1 Enlace por agregar al final
      *
      * @return void
@@ -886,7 +886,7 @@ class ResConsulta
                         );
                         $r .= "</relatos>\n";
                         if (!file_put_contents($nar, $r)) {
-                            echo " ... Falló<br>";
+                            echo " ... Fallï¿½<br>";
                         } else {
                             echo "<br>\n";
                         }
@@ -1016,7 +1016,7 @@ class ResConsulta
         if (!in_array($this->mostrar, $sinpie)) {
             echo $html_enlace1;
             echo '<div align = "right"><a href = "index.php">' .
-                '<b>Menú principal</b></a></div>';
+                '<b>Menï¿½ principal</b></a></div>';
             pie_envia($GLOBALS['pie_consulta_web']);
         }
     }
@@ -1025,12 +1025,12 @@ class ResConsulta
     /**
      * Retorna una fila de la tabla
      *
-     * @param object  $db        Conexión a B.D
-     * @param int     $idcaso    Código de caso
+     * @param object  $db        Conexiï¿½n a B.D
+     * @param int     $idcaso    Cï¿½digo de caso
      * @param array   $campos    Campos por mostrar
      * @param array   $conv      Conversiones
      * @param array   $sal       Para conversiones con $conv
-     * @param boolean $retroalim Con boton de retroalimentación
+     * @param boolean $retroalim Con boton de retroalimentaciï¿½n
      *
      * @return string Fila en HTML
      */
@@ -1058,9 +1058,9 @@ class ResConsulta
             $html_renglon .= "<td valign='top'>";
             $sep = "";
             $vr = $vrescon = $vrpre = $vrpost = "";
-            // No se sacaron responsables y demás directamente en
-            // la consulta por dificultad en el caso de ubicación
-            // pues la información puede provenir de diversas tablas
+            // No se sacaron responsables y demï¿½s directamente en
+            // la consulta por dificultad en el caso de ubicaciï¿½n
+            // pues la informaciï¿½n puede provenir de diversas tablas
             if ($cc == 'm_ubicacion') {
                 $vr .= ResConsulta::ubicacion($db, $idcaso);
             } else if ($cc == 'm_presponsables') {
@@ -1165,7 +1165,7 @@ class ResConsulta
                     $seploc = ", ";
                 }
 
-                $vrpost = " | Víctimas:".$totv;
+                $vrpost = " | Vï¿½ctimas:".$totv;
 
             } else if ($cc == 'm_tipificacion') {
                 $idp = array(); // Identificaciones
@@ -1240,16 +1240,16 @@ class ResConsulta
      * elemento => valor donde
      * elemento puede ser un elemento solo o un elemento con atributo
      * de la forma elemento{atributo->valor}.
-     * La representación en XML de estos relatos es la definida en el
-     * documento de diseño del SINCODH.
+     * La representaciï¿½n en XML de estos relatos es la definida en el
+     * documento de diseï¿½o del SINCODH.
      *
      * Ideas:
-     * - autocontenido, poner códigos previamente introducidos.
+     * - autocontenido, poner cï¿½digos previamente introducidos.
      *
-     * @param integer $idcaso Identificación del caso
-     * @param object  $db     conexión a base de datos
+     * @param integer $idcaso Identificaciï¿½n del caso
+     * @param object  $db     conexiï¿½n a base de datos
      * @param array   $campos Campos por mostrar
-     * @param boolean $varlin Varías lineas?
+     * @param boolean $varlin Varï¿½as lineas?
      *
      * @return string Reporte
      */
@@ -1276,7 +1276,7 @@ class ResConsulta
         if (!PEAR::isError($nom) && $nom == 'SINCODH:PUBLICO') {
                $formacomp = 'publico';
         } else if (!isset($campos['m_fuentes'])  ) {
-            // Si no van fuentes se considera público
+            // Si no van fuentes se considera pï¿½blico
             $formacomp = 'publico';
         } else {
             $formacomp = 'privado';
@@ -1327,7 +1327,7 @@ class ResConsulta
 
         $afecha = explode("-", $dcaso->fecha);
 
-        $max_id_grupo = 0; // Máxima identificación de grupos en víctimas
+        $max_id_grupo = 0; // Mï¿½xima identificaciï¿½n de grupos en vï¿½ctimas
         //colectivas para sumarlo a id. de presuntos responsables
         if (isset($campos['m_victimas'])) {
             $r .= "  <!-- Victimas personas individuales -->\n";
@@ -1557,7 +1557,7 @@ class ResConsulta
         $ubitipositio = "";
         if (isset($campos['m_ubicacion'])) {
             $r .= "  <!-- Ubicacion -->\n";
-            // Tomamos ubicación (una sola)
+            // Tomamos ubicaciï¿½n (una sola)
             $dubicacion= objeto_tabla('ubicacion');
             $dubicacion->id_caso = $idcaso;
             $dubicacion->find();
@@ -1574,7 +1574,7 @@ class ResConsulta
             }
             if ($nubi > 1) {
                 $arotros['observaciones{tipo->etiqueta:IMPORTA_RELATO}']
-                    = date('Y-m-d') . " Tiene más de una ubicacion: $uobs";
+                    = date('Y-m-d') . " Tiene mï¿½s de una ubicacion: $uobs";
             }
             $arubicacion = array();
             $dubicacion->aRelato(
@@ -1725,9 +1725,9 @@ class ResConsulta
             }
 
             //Quien opera debe ser bien conciente, encomendamos a Dios
-            //a las personas que dan información para que el proteja su
+            //a las personas que dan informaciï¿½n para que el proteja su
             //identidad en el caso de quienes no quieren que sea revelada
-            //y para que proteja la vida de quienes optan por visibilización,
+            //y para que proteja la vida de quienes optan por visibilizaciï¿½n,
             //en particular moviendo corazones en nuestra sociedad.
             $r .= "  <!-- Fuente frecuente -->\n";
             $descritocaso = objeto_tabla('escrito_caso');
@@ -1871,9 +1871,9 @@ class ResConsulta
      * Retorna un registro del reporte general.
      *
      * @param integer $idcaso id. del caso
-     * @param handle  $db     Conexión a BD
+     * @param handle  $db     Conexiï¿½n a BD
      * @param array   $campos Campos por mostrar
-     * @param boolean $varlin Varias líneas
+     * @param boolean $varlin Varias lï¿½neas
      *
      * @return string  Registro como texto
      */
@@ -2148,11 +2148,11 @@ class ResConsulta
     }
 
     /**
-     * Nombre de una tipificación
+     * Nombre de una tipificaciï¿½n
      *
-     * @param string $c Tipificación
+     * @param string $c Tipificaciï¿½n
      *
-     * @return string Hace pequeños cambios a tipificación que recibe
+     * @return string Hace pequeï¿½os cambios a tipificaciï¿½n que recibe
      */
     static function nomTipificacion($c)
     {
@@ -2170,10 +2170,10 @@ class ResConsulta
     }
 
     /**
-     * Presenta listado de presuntos responsables, categorias y víctimas
+     * Presenta listado de presuntos responsables, categorias y vï¿½ctimas
      *
      * Hay varias formas de agrupar, por ejemplo el siguiente arreglo
-     * indexado por presunto responsable y categoria con códigos de víctimas
+     * indexado por presunto responsable y categoria con cï¿½digos de vï¿½ctimas
      * como valor:
      *
      *    Array
@@ -2195,23 +2195,23 @@ class ResConsulta
 
         )
 
-    * Agrupando más por categorias:
+    * Agrupando mï¿½s por categorias:
     * 15 => 10 => i6
     *       14,19 => i6,i9
     *       12 => i9
     * 16 => 10,16 => i6
     *       12 => i6,i9
 
-    * Agrupando más por presuntos responsables:
+    * Agrupando mï¿½s por presuntos responsables:
     * 15,16 => 10 => i6
     *          12 => i9
     * 15 => 14,19 => i6,i9
     * 16 => 12 => i9
     *       16 => i6
     * Depende del orden de agrupamiento de cada indice.  Esta
-    * función emplea el siguiente orden:
+    * funciï¿½n emplea el siguiente orden:
     * 1. Agrupar presuntos responsables
-    * 2. Agrupar víctimas
+    * 2. Agrupar vï¿½ctimas
     * 3. Agrupar categorias
     *
     * @param integer $idcaso Id. del caso
@@ -2380,7 +2380,7 @@ class ResConsulta
             }
         }
 
-        /* Agrupamos víctimas */
+        /* Agrupamos vï¿½ctimas */
         $agV = array();
         foreach ($agPr as $idc => $lvp) {
             foreach ($lvp as $idv => $lp) {
@@ -2409,7 +2409,7 @@ class ResConsulta
             }
         }
 
-        /* Categorias que no tiene víctimas */
+        /* Categorias que no tiene vï¿½ctimas */
         $dcat = objeto_tabla('categoria_p_responsable_caso');
         if (PEAR::isError($dcat)) {
             die($dcat->getMessage());
@@ -2453,7 +2453,7 @@ class ResConsulta
         }
 
         foreach ($aspr as $ipr => $imcs) {
-            $agC[$ipr][$imcs] = -1; // Convención para Categorias sin víctima
+            $agC[$ipr][$imcs] = -1; // Convenciï¿½n para Categorias sin vï¿½ctima
         }
 
         foreach ($agC as $pr => $r1) {
@@ -2611,11 +2611,11 @@ class ResConsulta
      * Retorna un registro del reporte revista
      *
      * @param integer $idcaso  Id. del caso
-     * @param handle  $db      Conexión a BD
+     * @param handle  $db      Conexiï¿½n a BD
      * @param array   $campos  Campos por mostrar
-     * @param boolean $varlin  Varias líneas
+     * @param boolean $varlin  Varias lï¿½neas
      * @param boolean $tex     Generar TeX ?
-     * @param boolean $numcaso Número de caso para orden por rótulo
+     * @param boolean $numcaso Nï¿½mero de caso para orden por rï¿½tulo
      *
      * @return string  Registro
      */
@@ -2655,7 +2655,7 @@ class ResConsulta
             $a = explode("-", $dcaso->fecha);
             /*$ts=mktime(0, 0, 0, $a[1], $a[2], $a[0]);
             setlocale(LC_TIME, "es");
-            strftime ... Se intentó pero no soportó locale es */
+            strftime ... Se intentï¿½ pero no soportï¿½ locale es */
             if ($tex) {
                 $fecha = $a[2] . "/" . $GLOBALS['mes_corto'][(int)$a[1]] .
                     "/" . substr($a[0], 2);
@@ -2773,10 +2773,10 @@ class ResConsulta
     /**
      * Renglon de reporte CSV
      *
-     * @param object  $db     Conexión
+     * @param object  $db     Conexiï¿½n
      * @param unknown $idcaso Id. caso
      * @param array   $campos Campos por mostrar
-     * @param array   $conv   Para conversión de ids.
+     * @param array   $conv   Para conversiï¿½n de ids.
      * @param array   $sal    registro por generar
      *
      * @return void
@@ -2790,9 +2790,9 @@ class ResConsulta
             $sep = "";
             $vr = $vrescon = "";
             $vrpost = '"';
-            // No se sacaron responsables y demás directamente en
-            // la consulta por dificultad en el caso de ubicación
-            // pues la información puede provenir de diversas tablas
+            // No se sacaron responsables y demï¿½s directamente en
+            // la consulta por dificultad en el caso de ubicaciï¿½n
+            // pues la informaciï¿½n puede provenir de diversas tablas
             if ($cc == 'm_ubicacion') {
                 $vr .= ResConsulta::ubicacion($db, $idcaso);
             } else if ($cc == 'm_presponsables') {
