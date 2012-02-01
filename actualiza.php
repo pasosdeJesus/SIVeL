@@ -1,20 +1,20 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
 /**
-* Actualiza base de datos después de actualizar fuentes
+* Actualiza base de datos despuï¿½s de actualizar fuentes
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2006 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2006 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: actualiza.php,v 1.122.2.3 2011/10/22 12:59:54 vtamara Exp $
  * @link      http://sivel.sf.net
  */
 
-/** Actualiza base de datos después de actualizar fuentes */
+/** Actualiza base de datos despuï¿½s de actualizar fuentes */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once "confv.php";
@@ -44,7 +44,7 @@ echo '<table width="100%"><td style="white-space: nowrap; '
 echo "Preactualizando sitio<br>";
 $ap = $_SESSION['dirsitio'] . '/preactualiza.php';
 if (file_exists($ap)) {
-    echo "Preactualizando personalización<br>";
+    echo "Preactualizando personalizaciï¿½n<br>";
     include_once "$ap";
 }
 
@@ -60,7 +60,7 @@ if (!aplicado($idact)) {
         " REFERENCES categoria"
     );
     $cat = objeto_tabla('categoria');
-    // EJECUCIÓN EXTRAJUDICIAL
+    // EJECUCIï¿½N EXTRAJUDICIAL
     $cat = DataObjects_Categoria::staticGet('10'); $cat->contada_en='701';
     $cat->update();
     // AMENAZA
@@ -99,7 +99,7 @@ if (!aplicado($idact)) {
     );
     hace_consulta(
         $db, "UPDATE opcion " .
-        " SET descripcion='Menú Conteos' " .
+        " SET descripcion='Menï¿½ Conteos' " .
         " WHERE id_opcion='50';"
     );
     aplicaact($act, $idac, 'Conteos');
@@ -111,7 +111,7 @@ if (!aplicado($idact)) {
         $db, "ALTER TABLE victima " .
         " ADD COLUMN anotaciones VARCHAR(1000)"
     );
-    aplicaact($act, $idac, 'Anotaciones en víctima');
+    aplicaact($act, $idac, 'Anotaciones en vï¿½ctima');
 }
 
 $idact = '1.0';
@@ -127,9 +127,9 @@ if (!aplicado($idact)) {
         die($nr->getMessage() . " - " . $nr->getUserInfo());
     }
     if ($nr > 0) {
-        echo "<font color='red'>Antes de aplicar la actualización " .
+        echo "<font color='red'>Antes de aplicar la actualizaciï¿½n " .
         "debe definir 'Resultados " .
-        "de Agresión' no especificados contra " . (int)$nr .
+        "de Agresiï¿½n' no especificados contra " . (int)$nr .
         "combatientes de los siguientes casos: <br>";
         $r = hace_consulta(
             $db, "SELECT DISTINCT id_caso " .
@@ -150,7 +150,7 @@ if (!aplicado($idact)) {
         "COLUMN id_resultado_agresion SET NOT NULL"
     );
 
-    // Consistencia en demográficas, no sabe y otros = SIN INFORMACION
+    // Consistencia en demogrï¿½ficas, no sabe y otros = SIN INFORMACION
     hace_consulta(
         $db, "UPDATE victima SET id_rango_edad='6' " .
         "WHERE id_rango_edad IS NULL"
@@ -217,7 +217,7 @@ if (!aplicado($idact)) {
     );
     hace_consulta(
         $db, $preins .
-        "(291, '2008-10-20', NULL, 2, 'A', 8, 'V.S. - VIOLACIÓN')",
+        "(291, '2008-10-20', NULL, 2, 'A', 8, 'V.S. - VIOLACIï¿½N')",
         false
     );
     hace_consulta(
@@ -227,12 +227,12 @@ if (!aplicado($idact)) {
     );
     hace_consulta(
         $db, $preins .
-        "(293, '2008-10-20', NULL, 2, 'A', 8, 'V.S. - PROSTITUCIÓN FORZADA')",
+        "(293, '2008-10-20', NULL, 2, 'A', 8, 'V.S. - PROSTITUCIï¿½N FORZADA')",
         false
     );
     hace_consulta(
         $db, $preins .  "(294, '2008-10-20', NULL, 2, " .
-        "'A', 8, 'V.S. - ESTERILIZACIÓN FORZADA')", false
+        "'A', 8, 'V.S. - ESTERILIZACIï¿½N FORZADA')", false
     );
     hace_consulta(
         $db, $preins .  "(295, '2008-10-20', NULL, 2, " .
@@ -244,7 +244,7 @@ if (!aplicado($idact)) {
     );
     hace_consulta(
         $db, $preins .
-        "(391, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - VIOLACIÓN')", false
+        "(391, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - VIOLACIï¿½N')", false
     );
     hace_consulta(
         $db, $preins .
@@ -252,12 +252,12 @@ if (!aplicado($idact)) {
     );
     hace_consulta(
         $db, $preins .
-        "(393, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - PROSTITUCIÓN FORZADA')",
+        "(393, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - PROSTITUCIï¿½N FORZADA')",
         false
     );
     hace_consulta(
         $db, $preins .
-        "(394, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - ESTERILIZACIÓN FORZADA')",
+        "(394, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - ESTERILIZACIï¿½N FORZADA')",
         false
     );
     hace_consulta(
@@ -267,7 +267,7 @@ if (!aplicado($idact)) {
     );
     hace_consulta(
         $db, $preins .
-        "(771, '2008-10-20', NULL, 1, 'D', 12, 'VIOLACIÓN')", false
+        "(771, '2008-10-20', NULL, 1, 'D', 12, 'VIOLACIï¿½N')", false
     );
     hace_consulta(
         $db, $preins .
@@ -275,11 +275,11 @@ if (!aplicado($idact)) {
     );
     hace_consulta(
         $db, $preins .
-        "(773, '2008-10-20', NULL, 1, 'D', 12, 'PROSTITUCIÓN FORZADA')", false
+        "(773, '2008-10-20', NULL, 1, 'D', 12, 'PROSTITUCIï¿½N FORZADA')", false
     );
     hace_consulta(
         $db, $preins .
-        "(774, '2008-10-20', NULL, 1, 'D', 12, 'ESTERILIZACIÓN FORZADA')", false
+        "(774, '2008-10-20', NULL, 1, 'D', 12, 'ESTERILIZACIï¿½N FORZADA')", false
     );
     hace_consulta(
         $db, $preins .
@@ -291,7 +291,7 @@ if (!aplicado($idact)) {
     );
     hace_consulta(
         $db, $preins .
-        "(191, '2008-10-20', NULL, 1, 'A', 8, 'V.S. - VIOLACIÓN')", false
+        "(191, '2008-10-20', NULL, 1, 'A', 8, 'V.S. - VIOLACIï¿½N')", false
     );
     hace_consulta(
         $db, $preins .
@@ -300,12 +300,12 @@ if (!aplicado($idact)) {
     );
     hace_consulta(
         $db, $preins .
-        "(193, '2008-10-20', NULL, 1, 'A', 8, 'V.S. - PROSTITUCIÓN FORZADA')",
+        "(193, '2008-10-20', NULL, 1, 'A', 8, 'V.S. - PROSTITUCIï¿½N FORZADA')",
         false
     );
     hace_consulta(
         $db, $preins .
-        "(194, '2008-10-20', NULL, 1, 'A', 8, 'V.S. - ESTERILIZACIÓN FORZADA')",
+        "(194, '2008-10-20', NULL, 1, 'A', 8, 'V.S. - ESTERILIZACIï¿½N FORZADA')",
         false
     );
     hace_consulta(
@@ -325,7 +325,7 @@ if (!aplicado($idact)) {
     );
 
 
-    aplicaact($act, $idac, 'Consistencia demográficos, nuevas categorías');
+    aplicaact($act, $idac, 'Consistencia demogrï¿½ficos, nuevas categorï¿½as');
 }
 
 
@@ -334,11 +334,11 @@ if (!aplicado($idact)) {
 
     hace_consulta(
         $db, "INSERT INTO prensa " .
-        " VALUES (0,'SIN INFORMACIÓN','Indirecta');", false
+        " VALUES (0,'SIN INFORMACIï¿½N','Indirecta');", false
     );
 
     aplicaact(
-        $act, $idac, 'SIN INFORMACIÓN en Fuente Frecuente ' 
+        $act, $idac, 'SIN INFORMACIï¿½N en Fuente Frecuente ' 
         . 'para permitir consulta externa'
     );
 }
@@ -540,7 +540,7 @@ if (!aplicado($idac)) {
         $db, "ALTER TABLE caso DROP " .
         "COLUMN tipo_ubicacion", false
     );
-    aplicaact($act, $idac, 'Tipo de ubicación en ubicación');
+    aplicaact($act, $idac, 'Tipo de ubicaciï¿½n en ubicaciï¿½n');
 }
 
 
@@ -725,7 +725,7 @@ if (!aplicado($idac)) {
     }
     if ((int)$np > 0) {
         echo_esc(
-            "Hay $np registros en victima_colectiva que no están en "
+            "Hay $np registros en victima_colectiva que no estï¿½n en "
             . " victima_colectiva_caso. Resolver primero"
         );
         $grave = true;
@@ -743,7 +743,7 @@ if (!aplicado($idac)) {
         }
         if ((int)$np > 0) {
             echo_esc(
-                "Hay $np registros en $tabla que no están en "
+                "Hay $np registros en $tabla que no estï¿½n en "
                 . " victima_colectiva_caso"
             );
             $grave = true;
@@ -878,7 +878,7 @@ if (!aplicado($idac)) {
             " REFERENCES victima_colectiva(id_grupoper, id_caso)";
         $r = hace_consulta($db, $q);
     }
-    aplicaact($act, $idac, 'Víctimas colectivas');
+    aplicaact($act, $idac, 'Vï¿½ctimas colectivas');
 }
 
 $idac = '1.1a1-act';
@@ -948,7 +948,7 @@ if (!aplicado($idac)) {
         $db, "DELETE FROM opcion " .
         " WHERE descripcion = 'Conteos V. Combatientes'"
     );
-    aplicaact($act, $idac, 'Bélicas es módulo');
+    aplicaact($act, $idac, 'Bï¿½licas es mï¿½dulo');
 }
 
 $idac = '1.1a1-jp';
@@ -993,7 +993,7 @@ if (!aplicado($idac)) {
         " SET id_papa='38' WHERE id in ('13')"
     );
 
-    aplicaact($act, $idac, 'Jerarquía presuntos responsables');
+    aplicaact($act, $idac, 'Jerarquï¿½a presuntos responsables');
 }
 
 $idac = '1.1a1-tc';
@@ -1056,7 +1056,7 @@ if (!aplicado($idac)) {
         );
     }
 
-    aplicaact($act, $idac, 'Personalizabilidad de más básicas');
+    aplicaact($act, $idac, 'Personalizabilidad de mï¿½s bï¿½sicas');
 }
 
 
@@ -1167,7 +1167,7 @@ if (!aplicado($idac)) {
     );
 
 
-    aplicaact($act, $idac, 'Jerarquía refinada');
+    aplicaact($act, $idac, 'Jerarquï¿½a refinada');
 }
 
 $idac = '1.1a2-imp';
@@ -1243,7 +1243,7 @@ if (!aplicado($idac)) {
 
     hace_consulta(
         $db, "UPDATE categoria SET nombre='RAPTO' " .
-        " WHERE id='48' AND nombre='DESAPARCIÓN';", false
+        " WHERE id='48' AND nombre='DESAPARCIï¿½N';", false
     );
     hace_consulta(
         $db, "UPDATE categoria SET nombre='ATENTADO' " .
@@ -1276,7 +1276,7 @@ if (!aplicado($idac)) {
         "ADD COLUMN peso INTEGER DEFAULT '0'", false
     );
 
-    aplicaact($act, $idac, 'Pesos en rótulos de reporte consolidado');
+    aplicaact($act, $idac, 'Pesos en rï¿½tulos de reporte consolidado');
 }
 
 $idac = '1.1b1-ctx';
@@ -1331,7 +1331,7 @@ if (!aplicado($idac)) {
         " VALUES ('63', 'Actualizar', '60', 'actualiza')", false
     );
 
-    aplicaact($act, $idac, 'Contexto y detalles pequeños requeridos por RB');
+    aplicaact($act, $idac, 'Contexto y detalles pequeï¿½os requeridos por RB');
 }
 
 $idac = '1.1b1-tr';
@@ -1411,7 +1411,7 @@ if (!aplicado($idac)) {
 $idac = '1.1b1-esp';
 if (!aplicado($idac)) {
     $r = hace_consulta(
-        $db, "UPDATE  tipo_violencia SET nombre='VIOLENCIA POLÍTICO SOCIAL'
+        $db, "UPDATE  tipo_violencia SET nombre='VIOLENCIA POLï¿½TICO SOCIAL'
         WHERE id = 'B'", false
     );
     $r = hace_consulta(
@@ -1439,7 +1439,7 @@ if (!aplicado($idac)) {
     $r = hace_consulta(
         $db, "INSERT INTO categoria (id, fecha_creacion, fecha_deshabilitacion,
         id_supracategoria, id_tipo_violencia, col_rep_consolidado, nombre,
-        tipocat) VALUES (421, '2010-04-17', NULL, 1, 'B', NULL, 'VIOLACIÓN',
+        tipocat) VALUES (421, '2010-04-17', NULL, 1, 'B', NULL, 'VIOLACIï¿½N',
         'I')", false
     );
     $r = hace_consulta(
@@ -1452,13 +1452,13 @@ if (!aplicado($idac)) {
         $db, "INSERT INTO categoria (id, fecha_creacion, fecha_deshabilitacion,
         id_supracategoria, id_tipo_violencia, col_rep_consolidado, nombre,
         tipocat) VALUES (423, '2010-04-17', NULL, 1, 'B', NULL,
-        'PROSTITUCIÓN FORZADA', 'I')", false
+        'PROSTITUCIï¿½N FORZADA', 'I')", false
     );
     $r = hace_consulta(
         $db, "INSERT INTO categoria (id, fecha_creacion, fecha_deshabilitacion,
         id_supracategoria, id_tipo_violencia, col_rep_consolidado, nombre,
         tipocat) VALUES (424, '2010-04-17', NULL, 1, 'B', NULL,
-        'ESTERILIZACIÓN FORZADA', 'I')", false
+        'ESTERILIZACIï¿½N FORZADA', 'I')", false
     );
     $r = hace_consulta(
         $db, "INSERT INTO categoria (id, fecha_creacion, fecha_deshabilitacion,
@@ -1563,7 +1563,7 @@ if (!aplicado($idac)) {
     cambia_tipocol($db, 'ubicacion', 'sitio', 'VARCHAR(260)');
     cambia_tipocol($db, 'ubicacion', 'lugar', 'VARCHAR(260)');
 
-    aplicaact($act, $idac, 'Tamaño de ubicación');
+    aplicaact($act, $idac, 'Tamaï¿½o de ubicaciï¿½n');
 }
 
 $idac = '1.1b2-vc';
@@ -1623,7 +1623,7 @@ if (!aplicado($idac)) {
         $db, "UPDATE categoria SET tipocat='O' WHERE id='902'",
         false
     );
-    aplicaact($act, $idac, 'Reversa categoria colectiva. Es por métodos');
+    aplicaact($act, $idac, 'Reversa categoria colectiva. Es por mï¿½todos');
 }
 
 $idac = '1.1b3-is';
@@ -1641,7 +1641,7 @@ if (!aplicado($idac)) {
         $db, "INSERT INTO categoria (id, fecha_creacion,
         fecha_deshabilitacion, id_supracategoria, id_tipo_violencia,
         col_rep_consolidado, nombre, tipocat)
-        VALUES (291, '2008-10-20', NULL, 2, 'A', 8, 'V.S. - VIOLACIÓN', 'I');",
+        VALUES (291, '2008-10-20', NULL, 2, 'A', 8, 'V.S. - VIOLACIï¿½N', 'I');",
         false
     );
     $r = hace_consulta(
@@ -1751,8 +1751,8 @@ if (!aplicado($idac)) {
         );
     }
     aplicaact(
-        $act, $idac, 'Añade fechacreacion y fechadeshabilitacion '
-        . ' a otras tablas básicas'
+        $act, $idac, 'Aï¿½ade fechacreacion y fechadeshabilitacion '
+        . ' a otras tablas bï¿½sicas'
     );
 }
 
@@ -1779,7 +1779,7 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db, "INSERT INTO etnia (id, nombre, descripcion, "
         . " fechacreacion, fechadeshabilitacion) "
-        . " VALUES (1, 'SIN INFORMACIÓN', '', '2011-04-26', NULL)", false
+        . " VALUES (1, 'SIN INFORMACIï¿½N', '', '2011-04-26', NULL)", false
     );
     hace_consulta(
         $db, "ALTER TABLE victima " .
@@ -1791,7 +1791,7 @@ if (!aplicado($idac)) {
     if ($r) {
         aplicaact(
             $act, $idac,
-            'Añade etnia y contexto intolerancia social'
+            'Aï¿½ade etnia y contexto intolerancia social'
         );
     } else {
         echo_esc("No pudo abrir $na");
@@ -1804,7 +1804,7 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db, "INSERT INTO contexto " .
         " (id, nombre, fechacreacion, fechadeshabilitacion) " .
-        " VALUES ('31', 'SEGURIDAD INFORMÁTICA', '2011-04-28', NULL)", false
+        " VALUES ('31', 'SEGURIDAD INFORMï¿½TICA', '2011-04-28', NULL)", false
     );
 
     hace_consulta($db, "CREATE SEQUENCE iglesia_seq;", false);
@@ -1821,7 +1821,7 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db, "INSERT INTO iglesia (id, nombre, descripcion, "
         . " fechacreacion, fechadeshabilitacion) "
-        . " VALUES (1, 'SIN INFORMACIÓN', '', '2011-04-28', NULL)", false
+        . " VALUES (1, 'SIN INFORMACIï¿½N', '', '2011-04-28', NULL)", false
     );
     hace_consulta(
         $db, "ALTER TABLE victima " .
@@ -1833,7 +1833,7 @@ if (!aplicado($idac)) {
     if ($r) {
         aplicaact(
             $act, $idac,
-            'Añade iglesia y contexto Seguridad Informática'
+            'Aï¿½ade iglesia y contexto Seguridad Informï¿½tica'
         );
     } else {
         echo_esc("No pudo abrir $na");
@@ -1865,7 +1865,7 @@ if (!aplicado($idac)) {
         "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, 
         id_supracategoria, id_tipo_violencia, col_rep_consolidado, 
         nombre, tipocat) 
-        VALUES (521, '2011-07-07', NULL, 2, 'B', 12, 'VIOLACIÓN', 'I'); ",
+        VALUES (521, '2011-07-07', NULL, 2, 'B', 12, 'VIOLACIï¿½N', 'I'); ",
         false
     );
     $r = hace_consulta(
@@ -1882,7 +1882,7 @@ if (!aplicado($idac)) {
         id_supracategoria, id_tipo_violencia, col_rep_consolidado, 
         nombre, tipocat) 
         VALUES (523, '2011-07-07', NULL, 2, 'B', 12, 
-        'PROSTITUCIÓN FORZADA', 'I'); ",
+        'PROSTITUCIï¿½N FORZADA', 'I'); ",
         false
     );
     $r = hace_consulta(
@@ -1891,7 +1891,7 @@ if (!aplicado($idac)) {
         id_supracategoria, id_tipo_violencia, col_rep_consolidado, 
         nombre, tipocat) 
         VALUES (524, '2011-07-07', NULL, 2, 'B', 12, 
-        'ESTERILIZACIÓN FORZADA', 'I'); ",
+        'ESTERILIZACIï¿½N FORZADA', 'I'); ",
         false
     );
     $r = hace_consulta(
@@ -1956,14 +1956,14 @@ if (!aplicado($idac)) {
         "COLUMN orientacionsexual SET NOT NULL"
     );
     aplicaact(
-        $act, $idac, 'Orientación sexual'
+        $act, $idac, 'Orientaciï¿½n sexual'
     );
 }
 
 
 
 
-echo "Revisando variables de configuración PHP...<br>";
+echo "Revisando variables de configuraciï¿½n PHP...<br>";
 $vplant = extraeVarPHP('sitios/pordefecto/conf.php.plantilla');
 $vconf = extraeVarPHP($_SESSION['dirsitio'] . '/conf.php');
 $vc ="";
@@ -1983,8 +1983,8 @@ if ($vc != "") {
     );
     echo "Por favor editelo (desde adJ intente click derecho en el escritorio "
         . "y eligiendo 'SIVeL-&gt;Editar conf.php'), "
-        . "añada al final las siguientes líneas y vuelva a cargar esta "
-        . " página:<br><hr/>";
+        . "aï¿½ada al final las siguientes lï¿½neas y vuelva a cargar esta "
+        . " pï¿½gina:<br><hr/>";
     echo "<pre>";
     echo htmlentities($vc);
     echo "</pre><hr/></font></blockquote>";
@@ -2011,7 +2011,7 @@ if (isset($GLOBALS['menu_tablas_basicas'])) {
 </pre></font>";
     }
 } else {
-    echo "<font color='red'>No se encontró variable global " .
+    echo "<font color='red'>No se encontrï¿½ variable global " .
         "<tt>menu_tablas_basicas</tt></font>";
 }
 
@@ -2098,19 +2098,19 @@ if (is_writable($nini) && is_writable($nlinksini)) {
     );
     echo "<br><font color='#FF9999'>Se sugiere quitar "
     . "permiso de escritura desde el servidor web a estos archivos.</font> "
-    . "Desde la línea de comandos intente el siguiente comando y vuelva "
-    . " a cargar esta página: <br><tt>";
+    . "Desde la lï¿½nea de comandos intente el siguiente comando y vuelva "
+    . " a cargar esta pï¿½gina: <br><tt>";
     echo_esc(
         "  sudo chmod a-w $dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.*"
     );
     echo "</tt>";
 } else {
     echo_esc(
-        "No se regenerará esquema, rengerelo manualmente o de permiso "
+        "No se regenerarï¿½ esquema, rengerelo manualmente o de permiso "
         . " de escritura a "
         . "$dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.ini y "
         . "$dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.links.ini "
-        . "Puede ser desde una línea de comandos con:"
+        . "Puede ser desde una lï¿½nea de comandos con:"
     );
     echo "<tt>";
     echo_esc(
@@ -2130,7 +2130,7 @@ if (!isset($_SESSION['SIN_INDICES']) || !$_SESSION['SIN_INDICES']) {
     $r = consulta_archivo($db, $na, false, false, false);
 }
 
-echo "Actualizando módulos<br>";
+echo "Actualizando mï¿½dulos<br>";
 $lm = explode(" ", $modulos);
 foreach ($lm as $m) {
     if ($m != '') {
@@ -2145,7 +2145,7 @@ foreach ($lm as $m) {
 
 $ap = $_SESSION['dirsitio'] . '/actualiza.php';
 if (file_exists($ap)) {
-    echo_esc("Actualizando personalización ($ap)");
+    echo_esc("Actualizando personalizaciï¿½n ($ap)");
     include_once $ap;
     if (!isset($_SESSION['SIN_INDICES']) || !$_SESSION['SIN_INDICES']) {
         $na = "$m/prepara_indices.sql";
@@ -2155,6 +2155,6 @@ if (file_exists($ap)) {
 
 echo '<table width="100%"><td style="white-space: nowrap; '
     . 'background-color: #CCCCCC;" align="left" valign="top" colspan="2">'
-    . '<b><div align=right><a href="index.php">Menú Principal</a></div></b>'
+    . '<b><div align=right><a href="index.php">Menï¿½ Principal</a></div></b>'
     . '</td></table>';
 ?>
