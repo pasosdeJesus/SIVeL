@@ -1,6 +1,17 @@
 
 1.2 o posteriores
 
+Paso a UTF-8
+http://www.phpwact.org/php/i18n/charsets
+Internacionalización
+Iñtërnâtiônàlizætiøn
+
+Con vim http://www.maruko.ca/i18n/
+
+
+Semantic Versioning
+http://semver.org/
+
 Consulta detallada buscar por procedencia de víctima
 
 Falta consulta detallada al especificar 
