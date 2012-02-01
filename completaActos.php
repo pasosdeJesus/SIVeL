@@ -7,9 +7,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2010 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2010 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: completaActos.php,v 1.15 2011/05/19 04:18:44 vtamara Exp $
  * @link      http://sivel.sf.net
  */
@@ -41,7 +41,7 @@ $s = "SELECT * FROM replicadas WHERE (id_p_responsable, contada_en, " .
     " id_categoria, id_persona, id_caso from acto);";
 $ni = $db->getOne($s);
 sin_error_pear($ni);
-echo " Se insertarán " . (int)$ni . " actos<br>";
+echo " Se insertarï¿½n " . (int)$ni . " actos<br>";
 hace_consulta(
     $db, "INSERT INTO acto (id_p_responsable, id_categoria, " .
     " id_persona, id_caso) SELECT * FROM replicadas " .
@@ -67,7 +67,7 @@ $s = "SELECT * FROM replicadasc " .
     " FROM actocolectivo)";
 $ni = $db->getOne($s);
 sin_error_pear($ni);
-echo " Se insertarán " . (int)$ni . " actos colectivos<br>";
+echo " Se insertarï¿½n " . (int)$ni . " actos colectivos<br>";
 hace_consulta(
     $db, "INSERT INTO actocolectivo " .
     " (id_p_responsable, id_categoria, id_grupoper, id_caso) $s"
@@ -77,7 +77,7 @@ hace_consulta($db, "DROP VIEW replicadasc");
 echo '<table width="100%">' .
     '<td style="white-space: nowrap; background-color: #CCCCCC;" ' .
     'align="left" valign="top" colspan="2"><b>' .
-    '<div align=right><a href="index.php">Menú Principal</a>' .
+    '<div align=right><a href="index.php">Menï¿½ Principal</a>' .
     '</div></b></td></table>';
 /* Completa casos de paramilitares en DIH en DH
 
