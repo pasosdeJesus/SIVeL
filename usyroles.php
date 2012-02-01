@@ -8,9 +8,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: usyroles.php,v 1.28.2.1 2011/09/07 02:52:24 vtamara Exp $
  * @link      http://sivel.sf.net
 */
@@ -71,7 +71,7 @@ echo '<pr>&nbsp;</pr><table border="0" width="100%"
     '<td align = "left">' .
     '<a href = "detusyrol.php">Nuevo</a>' .
     '</td><td align = "right">' .
-    '<a href = "index.php"><b>Menú Principal</b></a>' .
+    '<a href = "index.php"><b>Menï¿½ Principal</b></a>' .
     '</td></tr></table>';
 
 pie_envia()
