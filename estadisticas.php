@@ -1,21 +1,21 @@
 <?php
 //  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
 /**
- * Estadísticas victimas individuales/casos
+ * Estadï¿½sticas victimas individuales/casos
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: estadisticas.php,v 1.74.2.10 2011/10/26 21:25:31 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Estadísticas victimas individuales/casos
+ * Estadï¿½sticas victimas individuales/casos
  */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
@@ -34,22 +34,22 @@ require_once 'ResConsulta.php';
 require_once 'misc.php';
 
 /**
- * Responde a botón consulta
+ * Responde a botï¿½n consulta
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  */
 class AccionEstadisticasInd extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciï¿½n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      Pï¿½gina
+     * @param string $actionName Acciï¿½n
      *
      * @return void
      */
@@ -197,15 +197,15 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         if ($pSegun == 'id_p_responsable') {
             $cab[] = 'N. Actos';  
             // Un acto es un hecho de violencia cometido por un actor 
-            // contra una víctima
+            // contra una vï¿½ctima
         } else {
-            $cab[] = 'N. Víctimizaciones';  
-            // Una victimización o violación es un tipo de violencia 
-            // sufrido por una víctima (sin examinar el o los responsables)
-            // Para casos con un sólo presunto responsable actos y 
+            $cab[] = 'N. Vï¿½ctimizaciones';  
+            // Una victimizaciï¿½n o violaciï¿½n es un tipo de violencia 
+            // sufrido por una vï¿½ctima (sin examinar el o los responsables)
+            // Para casos con un sï¿½lo presunto responsable actos y 
             // violaciones/victimizaciones coincide.
             // Un hecho contra una victima con N presuntos responsables, 
-            // cuenta como una victimización pero como N actos
+            // cuenta como una victimizaciï¿½n pero como N actos
         }
         $tCat .= 'acto';
         $tQue .= "victima, persona, $tCat, ";
@@ -219,7 +219,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $pQ1sel = 'victima.id_persona, ';
 
         $tablas = $tablaSegun . "$tQue caso, categoria";
-        $campos = array('caso_id' => 'Cód.');
+        $campos = array('caso_id' => 'Cï¿½d.');
 
 
         if ($pTipo != '') {
@@ -345,7 +345,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             echo "</table>";
             if ($nf > 0) {
                 echo '<div align = "right"><a href = "index.php">' .
-                    '<b>Menú principal</b></a></div>';
+                    '<b>Menï¿½ principal</b></a></div>';
             }
             pie_envia();
         } else { // CSV
@@ -374,12 +374,12 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
 
 
 /**
- * Formulario de Estadísticas Individuales
+ * Formulario de Estadï¿½sticas Individuales
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  */
 class PagEstadisticasInd extends HTML_QuickForm_Page
@@ -508,7 +508,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
         $nsupra = $this->idSupracategoria();
 
         $sel =& $this->addElement(
-            'select', 'segun', 'Según'
+            'select', 'segun', 'Segï¿½n'
         );
         $sel->loadArray(
             array(
@@ -570,7 +570,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
         );
         $sel->setValue(true);
         $ae[] =& $sel;
-        $this->addGroup($ae, null, 'Ubicación', '&nbsp;', false);
+        $this->addGroup($ae, null, 'Ubicaciï¿½n', '&nbsp;', false);
 
         $sel =& $this->addElement(
             'checkbox',
@@ -587,9 +587,9 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
 
         $ae[] =&  $this->createElement(
             'radio', 'muestra', 'csv',
-            'Formato CSV (hoja de cálculo)', 'csv'
+            'Formato CSV (hoja de cï¿½lculo)', 'csv'
         );
-        $this->addGroup($ae, null, 'Forma de presentación', '&nbsp;', false);
+        $this->addGroup($ae, null, 'Forma de presentaciï¿½n', '&nbsp;', false);
         $t->setChecked(true);
 
 
@@ -603,7 +603,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
         $this->addGroup($prevnext, null, '', '&nbsp;', false);
 
         $tpie = "<div align=right><a href=\"index.php\">" .
-            "Menú Principal</a></div>";
+            "Menï¿½ Principal</a></div>";
         $e =& $this->addElement('header', null, $tpie);
 
 
