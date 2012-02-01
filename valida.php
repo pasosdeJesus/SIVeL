@@ -1,5 +1,6 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+# coding: iso-8859-1
 /**
  * Realiza validaciones a datos de base
  *
@@ -7,9 +8,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
- * @copyright 2010 Dominio pï¿½blico. Sin garantï¿½as.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½ass
+ * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
+ * @copyright 2010 Dominio público. Sin garantías.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías
  * @version   CVS: $Id: valida.php,v 1.15.2.2 2011/10/18 16:17:58 vtamara Exp $
  * @link      http://sivel.sf.net
  */
@@ -25,15 +26,15 @@ $db = autenticaUsuario($dsn, $accno, $aut_usuario, 64);
 echo '<table width="100%"><td style="white-space: ' .
     ' nowrap; background-color: #CCCCCC;" align="left" ' .
     ' valign="top" colspan="2"><b><div align=center>' ;
-echo "Reporte de consistencia del " . date("Y-m-d H:m");
+echo _("Reporte de consistencia del ") . date("Y-m-d H:m");
 echo '</div></b></td></table>';
 resValida(
-    $db, "Casos con memo vacio",
+    $db, _("Casos con memo vacio"),
     "SELECT id, fecha FROM caso WHERE memo='' ORDER BY fecha;"
 );
 
 resValida(
-    $db, "Casos con fecha de otras fuentes anterior a la del caso",
+    $db, _("Casos con fecha de otras fuentes anterior a la del caso"),
     "SELECT caso.id, caso.fecha, fuente_directa.nombre
     FROM fuente_directa_caso, caso, fuente_directa
     WHERE fuente_directa_caso.id_caso = caso.id
@@ -42,7 +43,7 @@ resValida(
 );
 
 resValida(
-    $db, "Casos con fecha de fuente frecuente anterior a la del caso",
+    $db, _("Casos con fecha de fuente frecuente anterior a la del caso"),
     "SELECT caso.id, caso.fecha, prensa.nombre
     FROM escrito_caso, prensa, caso
     WHERE escrito_caso.id_caso = caso.id AND escrito_caso.id_prensa = prensa.id
@@ -59,7 +60,7 @@ hace_consulta(
     " GROUP BY caso.id order by caso.id"
 );
 resValida(
-    $db, "Casos con fecha inicial de funcionario anterior o igual a la del caso",
+    $db, _("Casos con fecha inicial de funcionario anterior o igual a la del caso"),
     "SELECT y.id, caso.fecha, y.min as fecha_funcionario, funcionario.nombre
     FROM y, caso, funcionario_caso, funcionario
     WHERE y.id = caso.id AND y.min <= caso.fecha
@@ -69,13 +70,13 @@ resValida(
 );
 
 resValida(
-    $db, "Casos sin funcionario",
+    $db, _("Casos sin funcionario"),
     "SELECT caso.id FROM caso
     WHERE caso.id NOT IN (SELECT id_caso FROM funcionario_caso);"
 );
 
 resValida(
-    $db, "Casos con mï¿½s de una ubicaciï¿½n (salen duplicados en conteos)",
+    $db, _("Casos con más de una ubicación (salen duplicados en conteos)"),
     "SELECT id, c from (SELECT caso.id, count(ubicacion.id) AS c
     FROM caso, ubicacion WHERE caso.id = ubicacion.id_caso
     GROUP BY caso.id order by 2) AS f WHERE c >= 2"
@@ -83,7 +84,7 @@ resValida(
 
 
 resValida(
-    $db, "Vï¿½ctimas con categorias que no son para vï¿½ctimas individuales",
+    $db, _("Víctimas con categorias que no son para víctimas individuales"),
     "SELECT acto.id_caso, acto.id_categoria, acto.id_persona,
     persona.nombres || ' ' || persona.apellidos
     FROM acto, persona
@@ -93,7 +94,8 @@ resValida(
 
 
 resValida(
-    $db, "Vï¿½ctimas colectivas con categorias que no son para vï¿½ctimas colectivas",
+    $db, 
+    _("Víctimas colectivas con categorias que no son para víctimas colectivas"),
     "SELECT actocolectivo.id_caso, actocolectivo.id_categoria, grupoper.nombre
     FROM actocolectivo, grupoper
     WHERE grupoper.id = actocolectivo.id_grupoper
@@ -102,7 +104,7 @@ resValida(
 
 
 resValida(
-    $db, _("Registros en victima_colectiva que no estï¿½n en actocolectivo"),
+    $db, _("Registros en victima_colectiva que no están en actocolectivo"),
     "SELECT id_caso, id_grupoper, grupoper.nombre
     FROM victima_colectiva, grupoper
     WHERE grupoper.id = victima_colectiva.id_grupoper
@@ -114,5 +116,6 @@ resValida(
 echo '<table width="100%">
     <td style = "white-space: nowrap; background-color: #CCCCCC;"
     align = "left" valign="top" colspan="2"><b><div align=right>
-    <a href = "index.php">Menï¿½ Principal</a></div></b></td></table>';
+    <a href = "index.php">' . _('Menú Principal') . 
+    '</a></div></b></td></table>';
 ?>
