@@ -8,12 +8,12 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: Antecedente.php,v 1.12.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: Sï¿½LO DEFINICIONES
  */
 
 /**
@@ -23,12 +23,12 @@ require_once 'DataObjects/Basica.php';
 
 /**
  * Definicion para la tabla antecedente.
- * Ver documentación de DataObjects_Basica.
+ * Ver documentaciï¿½n de DataObjects_Basica.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Basica
  */

@@ -1,22 +1,22 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
 /**
- *Página del multi-formulario para capturar caso (captura_caso.php).
+ *Pï¿½gina del multi-formulario para capturar caso (captura_caso.php).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: PagActo.php,v 1.23.2.4 2011/10/11 16:33:37 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: Sï¿½LO DEFINICIONES
  */
 
 /**
- * Pestaña Actos de la ficha de captura de caso
+ * Pestaï¿½a Actos de la ficha de captura de caso
  */
 
 require_once 'PagBaseSimple.php';
@@ -24,21 +24,21 @@ require_once 'ResConsulta.php';
 
 
 /**
- * Acción que responde al boton Agregar agresión individual
+ * Acciï¿½n que responde al boton Agregar agresiï¿½n individual
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  */
 class AgregarActo extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acción
+     * Ejecuta acciï¿½n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      Pï¿½gina
+     * @param string $actionName Acciï¿½n
      *
      * @return void
      */
@@ -54,21 +54,21 @@ class AgregarActo extends HTML_QuickForm_Action
 }
 
 /**
- * Acción que responde al boton Agregar Agresion colectiva
+ * Acciï¿½n que responde al boton Agregar Agresion colectiva
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  */
 class AgregarActocolectivo extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acción
+     * Ejecuta acciï¿½n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      Pï¿½gina
+     * @param string $actionName Acciï¿½n
      *
      * @return void
      */
@@ -84,22 +84,22 @@ class AgregarActocolectivo extends HTML_QuickForm_Action
 }
 
 /**
- * Acción que responde al enlace Eliminar acto individual
+ * Acciï¿½n que responde al enlace Eliminar acto individual
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  */
 class EliminaActo extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciï¿½n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      Pï¿½gina
+     * @param string $actionName Acciï¿½n
      *
      * @return void
      */
@@ -121,22 +121,22 @@ class EliminaActo extends HTML_QuickForm_Action
 }
 
 /**
- * Acción que responde al enlace Eliminar acto colectivo
+ * Acciï¿½n que responde al enlace Eliminar acto colectivo
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  */
 class EliminaActocolectivo extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciï¿½n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      Pï¿½gina
+     * @param string $actionName Acciï¿½n
      *
      * @return void
      */
@@ -160,12 +160,12 @@ class EliminaActocolectivo extends HTML_QuickForm_Action
 
 /**
  * Actos
- * Ver documentación de funciones en clase base.
+ * Ver documentaciï¿½n de funciones en clase base.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  * @see      PagBaseSimple
  */
@@ -185,7 +185,7 @@ class PagActo extends PagBaseSimple
     /*var $bt;  Benchmark_Timer */
 
     /**
-     * Pone en null variables asociadas a tablas de la pestaña.
+     * Pone en null variables asociadas a tablas de la pestaï¿½a.
      *
      * @return null
      */
@@ -199,7 +199,7 @@ class PagActo extends PagBaseSimple
     /**
      * Inicializa variables.
      *
-     * @return handle Conexión a base de datos
+     * @return handle Conexiï¿½n a base de datos
      */
     function iniVar()
     {
@@ -217,7 +217,7 @@ class PagActo extends PagBaseSimple
 
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no debería ser null");
+            die("Bug: idcaso no deberï¿½a ser null");
         }
 
         $dacto->id_caso = $idcaso;
@@ -245,7 +245,7 @@ class PagActo extends PagBaseSimple
 
     /**
      * Constructora.
-     * Ver documentación completa en clase base.
+     * Ver documentaciï¿½n completa en clase base.
      *
      * @param string $nomForma Nombre
      *
@@ -273,9 +273,9 @@ class PagActo extends PagBaseSimple
 
     /**
      * Agrega elementos al formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciï¿½n completa en clase base.
      *
-     * @param handle &$db    Conexión a base de datos
+     * @param handle &$db    Conexiï¿½n a base de datos
      * @param string $idcaso Id del caso
      *
      * @return void
@@ -339,7 +339,7 @@ class PagActo extends PagBaseSimple
         $gacto[] =& $sel;
 
         $bn = $this->getButtonName('agregarActo');
-        $sel =& $this->createElement('submit', $bn, 'Añadir');
+        $sel =& $this->createElement('submit', $bn, 'Aï¿½adir');
         $gacto[] =& $sel;
 
         $this->addGroup($gacto, 'nuevoacto', 'Individuales', '&nbsp;', false);
@@ -403,7 +403,7 @@ class PagActo extends PagBaseSimple
 
             $sel =& $this->createElement(
                 'submit', $this->getButtonName('agregarActocolectivo'),
-                'Añadir'
+                'Aï¿½adir'
             );
             $gactocol[] =& $sel;
 
@@ -421,9 +421,9 @@ class PagActo extends PagBaseSimple
 
     /**
      * Llena valores del formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciï¿½n completa en clase base.
      *
-     * @param handle  &$db    Conexión a base de datos
+     * @param handle  &$db    Conexiï¿½n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -449,9 +449,9 @@ class PagActo extends PagBaseSimple
 
     /**
      * Elimina registros de tablas relacionadas con caso de este formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciï¿½n completa en clase base.
      *
-     * @param handle  &$db    Conexión a base de datos
+     * @param handle  &$db    Conexiï¿½n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -472,13 +472,13 @@ class PagActo extends PagBaseSimple
 
     /**
      * Procesa valores del formulario enviados por el usuario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciï¿½n completa en clase base.
      *
      * @param handle &$valores    Valores ingresados por usuario
-     * @param bool   $procActo    True si y solo si debe añadirse acto
-     * @param bool   $procActocol True si y solo si debe añadirse acto colec.
+     * @param bool   $procActo    True si y solo si debe aï¿½adirse acto
+     * @param bool   $procActocol True si y solo si debe aï¿½adirse acto colec.
      *
-     * @return bool Verdadero si y solo si puede completarlo con éxito
+     * @return bool Verdadero si y solo si puede completarlo con ï¿½xito
      * @see PagBaseSimple
      */
     function procesa(&$valores, $procActo = false, $procActocol = false)
@@ -536,12 +536,12 @@ class PagActo extends PagBaseSimple
 
     /**
      * Prepara consulta SQL para buscar datos de este formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciï¿½n completa en clase base.
      *
      * @param string &$w       Consulta que se construye
      * @param string &$t       Tablas
-     * @param string &$db      Conexión a base de datos
-     * @param object $idcaso   Identificación de caso
+     * @param string &$db      Conexiï¿½n a base de datos
+     * @param object $idcaso   Identificaciï¿½n de caso
      * @param string &$subcons Subconsulta
      *
      * @return void
@@ -556,7 +556,7 @@ class PagActo extends PagBaseSimple
     }
 
     /**
-     * Ver documentación en clase base.
+     * Ver documentaciï¿½n en clase base.
      *
      * @see PagBaseSimple
      *

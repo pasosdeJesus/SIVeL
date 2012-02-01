@@ -1,22 +1,22 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
 /**
- * Página del multi-formulario para capturar caso (captura_caso.php).
+ * Pï¿½gina del multi-formulario para capturar caso (captura_caso.php).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: PagVictimaCombatiente.php,v 1.12.2.4 2011/10/13 13:41:08 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: Sï¿½LO DEFINICIONES
  */
 
 /**
- * Pestaña Víctima Combatiente de la ficha de captura de caso
+ * Pestaï¿½a Vï¿½ctima Combatiente de la ficha de captura de caso
  */
 require_once 'PagBaseMultiple.php';
 require_once 'ResConsulta.php';
@@ -31,13 +31,13 @@ require_once 'DataObjects/Presuntos_responsables.php';
 require_once 'DataObjects/Resultado_agresion.php';
 
 /**
- * Víctima Combatiente.
- * Ver documentación de funciones en clase base.
+ * Vï¿½ctima Combatiente.
+ * Ver documentaciï¿½n de funciones en clase base.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
  * @see PagBaseMultiple
  */
@@ -49,7 +49,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
     /** Antecedentes */
     var $bantecedente_combatiente;
 
-    var $titulo = 'Víctima Combatiente';
+    var $titulo = 'Vï¿½ctima Combatiente';
 
     var $tcorto = 'Comb.';
 
@@ -60,7 +60,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
     var $clase_modelo = 'combatiente';
 
     /**
-     * Pone en null variables asociadas a tablas de la pestaña.
+     * Pone en null variables asociadas a tablas de la pestaï¿½a.
      *
      * @return null
      */
@@ -72,9 +72,9 @@ class PagVictimaCombatiente extends PagBaseMultiple
 
 
     /**
-     * Retorna una identificación del registro actual.
+     * Retorna una identificaciï¿½n del registro actual.
      *
-     * @return string Identifación
+     * @return string Identifaciï¿½n
      */
     function copiaId()
     {
@@ -101,9 +101,9 @@ class PagVictimaCombatiente extends PagBaseMultiple
      /**
      * Inicializa variables.
      *
-     * @param integer $id_combatiente Id  de víctima combatiente
+     * @param integer $id_combatiente Id  de vï¿½ctima combatiente
      *
-     * @return handle Conexión a base de datos
+     * @return handle Conexiï¿½n a base de datos
      */
     function iniVar($id_combatiente = null)
     {
@@ -114,7 +114,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
 
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no debería ser null");
+            die("Bug: idcaso no deberï¿½a ser null");
         }
 
         $idp = array();
@@ -159,7 +159,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
 
     /**
      * Constructora.
-     * Ver documentación completa en clase base.
+     * Ver documentaciï¿½n completa en clase base.
      *
      * @param string $nomForma Nombre
      * @param string $mreq     Mensaje de dato requerido
@@ -176,9 +176,9 @@ class PagVictimaCombatiente extends PagBaseMultiple
 
     /**
      * Agrega elementos al formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciï¿½n completa en clase base.
      *
-     * @param handle &$db    Conexión a base de datos
+     * @param handle &$db    Conexiï¿½n a base de datos
      * @param string $idcaso Id del caso
      *
      * @return void
@@ -206,9 +206,9 @@ class PagVictimaCombatiente extends PagBaseMultiple
 
     /**
      * Llena valores del formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciï¿½n completa en clase base.
      *
-     * @param handle  &$db    Conexión a base de datos
+     * @param handle  &$db    Conexiï¿½n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -276,11 +276,11 @@ class PagVictimaCombatiente extends PagBaseMultiple
 
     /**
      * Elimina de la base antecedentes de un combatiente y opcionalmente
-     * datos del combatiente también.
+     * datos del combatiente tambiï¿½n.
      *
      * @param object $dcombatiente    objeto con campos ya llenos identifican
      * datos de combatiente por eliminar
-     * @param bool   $elimcombatiente elimina también el combatiente.
+     * @param bool   $elimcombatiente elimina tambiï¿½n el combatiente.
      *
      * @return void
      */
@@ -305,9 +305,9 @@ class PagVictimaCombatiente extends PagBaseMultiple
 
     /**
      * Elimina registros de tablas relacionadas con caso de este formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciï¿½n completa en clase base.
      *
-     * @param handle  &$db    Conexión a base de datos
+     * @param handle  &$db    Conexiï¿½n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -335,11 +335,11 @@ class PagVictimaCombatiente extends PagBaseMultiple
 
     /**
      * Procesa valores del formulario enviados por el usuario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciï¿½n completa en clase base.
      *
      * @param handle &$valores Valores ingresados por usuario
      *
-     * @return bool Verdadero si y solo si puede completarlo con éxito
+     * @return bool Verdadero si y solo si puede completarlo con ï¿½xito
      * @see PagBaseSimple
      */
     function procesa(&$valores)
@@ -412,13 +412,13 @@ class PagVictimaCombatiente extends PagBaseMultiple
             if (!isset($valores['nombre'])
                 || trim($valores['nombre']) == ''
             ) {
-                error_valida('Falta nombre de víctima', $valores);
+                error_valida('Falta nombre de vï¿½ctima', $valores);
                 return false;
             }
             if (!isset($valores['id_resultado_agresion'])
                     || $valores['id_resultado_agresion'] == ''
             ) {
-                error_valida('Falta resultado de agresión', $valores);
+                error_valida('Falta resultado de agresiï¿½n', $valores);
                 return false;
             }
         }
@@ -467,7 +467,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
 
     /**
      * Prepara consulta SQL para buscar datos de este formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciï¿½n completa en clase base.
      *
      * @param string &$w       Consulta que se construye
      * @param string &$t       Tablas
