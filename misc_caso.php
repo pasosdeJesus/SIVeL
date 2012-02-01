@@ -3,23 +3,23 @@
 /* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: */
 
 /**
-* Funciones diversas útiles en fuentes que requieren interfaz de captura
+* Funciones diversas ï¿½tiles en fuentes que requieren interfaz de captura
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2006 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2006 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: misc_caso.php,v 1.35.2.2 2011/10/18 16:05:03 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: Sï¿½LO DEFINICIONES
  */
 
 
 /**
- * Funciones diversas útiles en fuentes que requieren interfaz de captura
+ * Funciones diversas ï¿½tiles en fuentes que requieren interfaz de captura
  */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
@@ -32,10 +32,10 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
 }
 
 /**
- * eliminaCaso(db, idcaso) elimina el caso número idcaso usando la conexión
+ * eliminaCaso(db, idcaso) elimina el caso nï¿½mero idcaso usando la conexiï¿½n
  * a la base db.
  *
- * @param handle  &$db    Conexión a base de datos
+ * @param handle  &$db    Conexiï¿½n a base de datos
  * @param integer $idcaso Id. del caso
  *
  * @return void
@@ -43,7 +43,7 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
 function eliminaCaso(&$db, $idcaso)
 {
     if (!isset($idcaso) || $idcaso == "") {
-        die("Sólo se eliminan casos ya ingresados");
+        die("Sï¿½lo se eliminan casos ya ingresados");
     }
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
         list($n, $c, $o) = $tab;
@@ -72,7 +72,7 @@ function eliminaCaso(&$db, $idcaso)
 
 
 /**
- * Llama función actGlobales de cada una de los tabuladores de la
+ * Llama funciï¿½n actGlobales de cada una de los tabuladores de la
  * ficha de captura.
  *
  * @return void
