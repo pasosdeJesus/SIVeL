@@ -3,15 +3,15 @@
 /**
  * Consulta Detallada.
  * Aprovecha el formulario de captura (captura_caso), se diferencia
- * con una variable de sesión (forma_modo).
+ * con una variable de sesiï¿½n (forma_modo).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: consulta.php,v 1.25 2011/05/19 04:18:44 vtamara Exp $
  * @link      http://sivel.sf.net
  */
