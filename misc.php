@@ -532,14 +532,14 @@ function error_valida($msg, $valores, $iderr = '')
  * 68-More-Aggregate-Fun-Whos-on-First-and-Whos-on-Last.html
  *
  * @param object &$db     Conexión a base de datos
- * @param string $mens    Mensaje por mostrar
+ * @param string $hmens   Mensaje por mostrar, ya está en HTML sin XSS
  * @param string $cons    Consulta pr realizar
  * @param bool   $confunc Incluir primer funcionario que trabajo caso, en este
  *                        caso columna con id del caso se llama id_caso
  *
  * @return void
  */
-function resValida(&$db, $mens, $cons, $confunc = false)
+function res_valida(&$db, $hmens, $cons, $confunc = false)
 {
     if ($confunc) {
         hace_consulta(
@@ -582,7 +582,7 @@ function resValida(&$db, $mens, $cons, $confunc = false)
         );
 
     }
-    echo "<p>" . htmlentities($mens) . ": ";
+    echo "<p>" . $hmens . ": ";
 
     if ($confunc) {
         $r = hace_consulta(
