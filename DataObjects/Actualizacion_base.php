@@ -40,14 +40,14 @@ class DataObjects_Actualizacion_base extends DB_DataObject_SIVeL
     // START_AUTOCODE
     /* the code below is auto generated do not remove the above tag */
 
-    var $__table = 'actualizacion_base';                     // table name
+    var $__table = _('actualizacion_base');                     // table name
     var $id;                              // varcha(10)  not_null primary_key
     var $fecha;                           // date(4)  not_null
     var $descripcion;                          // varchar(-1)  not_null
 
     /* the code above is auto generated do not remove the tag below */
     // END_AUTOCODE
-    var $nom_tabla = 'Actualizacion Base';
+    var $nom_tabla = _('Actualizacion Base');
 }
 
 ?>
