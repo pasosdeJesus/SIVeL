@@ -7,9 +7,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2010 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantíass
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2010 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½ass
  * @version   CVS: $Id: valida.php,v 1.15.2.2 2011/10/18 16:17:58 vtamara Exp $
  * @link      http://sivel.sf.net
  */
@@ -75,7 +75,7 @@ resValida(
 );
 
 resValida(
-    $db, "Casos con más de una ubicación (salen duplicados en conteos)",
+    $db, "Casos con mï¿½s de una ubicaciï¿½n (salen duplicados en conteos)",
     "SELECT id, c from (SELECT caso.id, count(ubicacion.id) AS c
     FROM caso, ubicacion WHERE caso.id = ubicacion.id_caso
     GROUP BY caso.id order by 2) AS f WHERE c >= 2"
@@ -83,7 +83,7 @@ resValida(
 
 
 resValida(
-    $db, "Víctimas con categorias que no son para víctimas individuales",
+    $db, "Vï¿½ctimas con categorias que no son para vï¿½ctimas individuales",
     "SELECT acto.id_caso, acto.id_categoria, acto.id_persona,
     persona.nombres || ' ' || persona.apellidos
     FROM acto, persona
@@ -93,7 +93,7 @@ resValida(
 
 
 resValida(
-    $db, "Víctimas colectivas con categorias que no son para víctimas colectivas",
+    $db, "Vï¿½ctimas colectivas con categorias que no son para vï¿½ctimas colectivas",
     "SELECT actocolectivo.id_caso, actocolectivo.id_categoria, grupoper.nombre
     FROM actocolectivo, grupoper
     WHERE grupoper.id = actocolectivo.id_grupoper
@@ -102,7 +102,7 @@ resValida(
 
 
 resValida(
-    $db, "Registros en victima_colectiva que no están en actocolectivo",
+    $db, _("Registros en victima_colectiva que no estï¿½n en actocolectivo"),
     "SELECT id_caso, id_grupoper, grupoper.nombre
     FROM victima_colectiva, grupoper
     WHERE grupoper.id = victima_colectiva.id_grupoper
@@ -114,5 +114,5 @@ resValida(
 echo '<table width="100%">
     <td style = "white-space: nowrap; background-color: #CCCCCC;"
     align = "left" valign="top" colspan="2"><b><div align=right>
-    <a href = "index.php">Menú Principal</a></div></b></td></table>';
+    <a href = "index.php">Menï¿½ Principal</a></div></b></td></table>';
 ?>
