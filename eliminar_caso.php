@@ -2,21 +2,21 @@
 //  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
 
 /**
-* Elimina caso en el que está (se supone que la eliminación ya fue confirmada)
+* Elimina caso en el que estï¿½ (se supone que la eliminaciï¿½n ya fue confirmada)
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2005 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2005 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: eliminar_caso.php,v 1.19 2011/05/19 04:18:44 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Elimina caso en el que está (se supone que la eliminación ya fue confirmada)
+ * Elimina caso en el que estï¿½ (se supone que la eliminaciï¿½n ya fue confirmada)
  */
 require_once 'misc.php';
 require_once 'aut.php';
@@ -34,7 +34,7 @@ eliminaCaso($db, $idcaso);
 echo "Caso " . $idcaso . " eliminado<br/>";
 echo '<table border="0" width="100%" ' .
     'style="white-space: nowrap; background-color:#CCCCCC;"><tr>' .
-    '<td align = "right"><a href = "index.php"><b>Menú Principal</b></a></td>' .
+    '<td align = "right"><a href = "index.php"><b>Menï¿½ Principal</b></a></td>' .
     '</tr></table>';
 
 pie_envia();
