@@ -1,15 +1,15 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
 /**
- * Ficha para capturar casos (también utilizable para buscar).
+ * Ficha para capturar casos (tambiï¿½n utilizable para buscar).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2005 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2005 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: captura_caso.php,v 1.89.2.4 2011/10/18 16:05:02 vtamara Exp $
  * @link      http://sivel.sf.net
  * @link      http://www.21st.de/downloads/rapidprototyping.pdf
@@ -50,8 +50,8 @@ if (isset($GLOBALS['PagPresentaRes'])) {
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
 */
 class PresentaFormulario extends HTML_QuickForm_Action_Display
@@ -60,7 +60,7 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
     /**
      * Presenta formulario
      *
-     * @param object &$pag Página
+     * @param object &$pag Pï¿½gina
      *
      * @return void
      */
@@ -161,8 +161,8 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico.
  * @link     http://sivel.sf.net/tec
 */
 class CapturaCaso extends HTML_QuickForm_Controller
@@ -172,7 +172,7 @@ class CapturaCaso extends HTML_QuickForm_Controller
     var $_botonSiguiente= 'Siguiente >>';
     var $_botonElimina  = 'Elimina caso';
     var $_botonReporte  = 'Val. y Rep. Gen.';
-    var $_botonMenu     = 'Menú';
+    var $_botonMenu     = 'Menï¿½';
     var $_botonCasoNuevo = 'Caso nuevo';
     var $_botonBusqueda = 'Buscar';
     var $_attrBoton     = array('style'=>'width:85px; padding:0; ');
@@ -282,7 +282,7 @@ class CapturaCaso extends HTML_QuickForm_Controller
      * Crea Tabuladores en Ficha.
      * Adaptada de Progress/generator.php
      *
-     * @param object &$page      Página
+     * @param object &$page      Pï¿½gina
      * @param array  $attributes Atributos
      *
      * @return void
@@ -314,10 +314,10 @@ class CapturaCaso extends HTML_QuickForm_Controller
 
 
     /**
-     * Agrega botones a una página.
+     * Agrega botones a una pï¿½gina.
      * Adaptada de Progress/generator.php
      *
-     * @param object &$page      HTML_QuicForm_Page página por cambiar
+     * @param object &$page      HTML_QuicForm_Page pï¿½gina por cambiar
      * @param array  $buttons    Botones por agregar
      * @param array  $attributes Atributos
      *
@@ -354,7 +354,7 @@ class CapturaCaso extends HTML_QuickForm_Controller
     /**
      * Crea botones de la parte inferior de la ficha.
      *
-     * @param object &$page HTML_QuickForm_Page Página con ficha.
+     * @param object &$page HTML_QuickForm_Page Pï¿½gina con ficha.
      *
      * @return void
      */
@@ -387,10 +387,10 @@ class CapturaCaso extends HTML_QuickForm_Controller
 
 
     /**
-     * Habilita botones estándar de la página.
+     * Habilita botones estï¿½ndar de la pï¿½gina.
      * Adaptada de Progress/generator.php
      *
-     * @param object &$page  HTML_QuickForm_Page Página con ficha.
+     * @param object &$page  HTML_QuickForm_Page Pï¿½gina con ficha.
      * @param array  $events Eventos
      *
      * @return void
@@ -421,10 +421,10 @@ class CapturaCaso extends HTML_QuickForm_Controller
 
 
     /**
-     * Deshabilita los botones estándar de una página.
+     * Deshabilita los botones estï¿½ndar de una pï¿½gina.
      * Adaptada de Progress/generator.php
      *
-     * @param object &$page  HTML_QuickForm_Page Página con ficha.
+     * @param object &$page  HTML_QuickForm_Page Pï¿½gina con ficha.
      * @param array  $events Eventos
      *
      * @return void
