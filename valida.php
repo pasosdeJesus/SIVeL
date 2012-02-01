@@ -112,7 +112,6 @@ resValida(
 );
 
 
-
 echo '<table width="100%">
     <td style = "white-space: nowrap; background-color: #CCCCCC;"
     align = "left" valign="top" colspan="2"><b><div align=right>
