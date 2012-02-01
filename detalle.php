@@ -9,9 +9,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: detalle.php,v 1.60.2.5 2011/10/22 14:57:56 vtamara Exp $
  * @link      http://sivel.sf.net
 */
@@ -36,7 +36,7 @@ $tabla = var_req_escapa('tabla');
 actGlobales();
 $u = html_menu_toma_url($GLOBALS['menu_tablas_basicas']);
 if (!in_array($tabla, $u)) {
-    die("La tabla '$tabla' no es básica");
+    die("La tabla '$tabla' no es bï¿½sica");
 }
 $d = objeto_tabla($tabla);
 $db = $d->getDatabaseConnection();
@@ -49,7 +49,7 @@ if (isset($_GET['id'])) {
         $d->$n = $r[1];
     }
     if ($d->find()!=1) {
-        die("Se esperaba un sólo registro");
+        die("Se esperaba un sï¿½lo registro");
     }
     $d->fetch();
 }
@@ -66,7 +66,7 @@ $f->setRequiredNote($mreq);
 
 $ed = array();
 if (!isset($_GET['id'])) {
-    $e =& $f->createElement('submit', 'añadir', 'Añadir');
+    $e =& $f->createElement('submit', 'aï¿½adir', 'Aï¿½adir');
     $ed[] =& $e;
 } else {
     $e =& $f->createElement('submit', 'actualizar', 'Actualizar');
@@ -78,7 +78,7 @@ if (!isset($_GET['id'])) {
 $f->addGroup($ed, null, '', '&nbsp;', false);
 $f->addElement(
     'header', null,
-    '<div align = "right"><a href = "index.php">Menú Principal</a></div>'
+    '<div align = "right"><a href = "index.php">Menï¿½ Principal</a></div>'
 );
 
 
@@ -86,11 +86,11 @@ if ($f->validate()) {
     if (!$d->masValidaciones($f->_submitValues)) {
         echo "No pasaron validaciones adicionales";
     } else if (!verifica_sin_CSRF($f->_submitValues)) {
-        die("Datos enviados no pasaron verificación CSRF");
+        die("Datos enviados no pasaron verificaciï¿½n CSRF");
     } else {
         $res = null;
         if (isset($f->_submitValues['actualizar'])
-            || isset($f->_submitValues['añadir'])
+            || isset($f->_submitValues['aï¿½adir'])
         ) {
             if (isset($f->_submitValues['actualizar'])) {
                 $b->forceQueryType(
