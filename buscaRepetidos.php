@@ -7,9 +7,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2010 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2010 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: buscaRepetidos.php,v 1.13.2.2 2011/10/13 13:41:06 vtamara Exp $
  * @link      http://sivel.sf.net
  */
@@ -56,6 +56,6 @@ echo "<p/>";
 echo '<table width="100%">'
     . '<td style="white-space: nowrap; background-color: #CCCCCC;" '
     . 'align="left" valign="top" colspan="2"><b><div align=right>'
-    . '<a href="index.php">Menú Principal</a></div></b></td></table>';
+    . '<a href="index.php">Menï¿½ Principal</a></div></b></td></table>';
 
 ?>
