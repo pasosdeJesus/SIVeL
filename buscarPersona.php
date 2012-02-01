@@ -7,9 +7,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2007 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2007 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: buscarPersona.php,v 1.12.2.3 2011/10/22 12:51:52 vtamara Exp $
  * @link      http://sivel.sf.net
  */
@@ -71,7 +71,7 @@ function muestra()
     //echo "rol=$rol";
     echo "<table>";
     echo "<tr>" .
-        "<th>Nombres y apellidos</th><th>Víctima en</th><th>Familiar en</th>".
+        "<th>Nombres y apellidos</th><th>Vï¿½ctima en</th><th>Familiar en</th>".
         "</tr>";
 
     while ($result->fetchInto($row)) {
