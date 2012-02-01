@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
-* Verifica inserción de memo de un caso
+* Verifica inserciÃ³n de memo de un caso
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2007 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2007 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: inscaso-memo-valida.php,v 1.5.2.1 2011/09/14 14:56:19 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Verifica inserción de memo de un caso
+ * Verifica inserciÃ³n de memo de un caso
  */
 if (PHP_SAPI !== 'cli') {
     die("Acceso: INTERPRETE DE COMANDOS");
@@ -32,7 +32,7 @@ if (PEAR::isError($dcaso)) {
 $dcaso->get(1);
 
 if ($dcaso->memo != 'memo') {
-    echo "***No modificó memo";
+    echo "***No modificÃ³ memo";
     exit(1);
 }
 

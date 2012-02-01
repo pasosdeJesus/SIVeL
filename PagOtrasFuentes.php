@@ -1,34 +1,34 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
- * Página del multi-formulario para capturar caso (captura_caso.php).
+ * PÃ¡gina del multi-formulario para capturar caso (captura_caso.php).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: PagOtrasFuentes.php,v 1.64.2.2 2011/10/11 16:33:37 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 /**
- * Pestaña Otras Fuentes de la ficha de captura de caso
+ * PestaÃ±a Otras Fuentes de la ficha de captura de caso
  */
 require_once 'PagBaseMultiple.php';
 
 /**
- * Página otras fuentes.
- * Ver documentación de funciones en clase base.
+ * PÃ¡gina otras fuentes.
+ * Ver documentaciÃ³n de funciones en clase base.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      PagBaseMultiple
 */
@@ -38,7 +38,7 @@ class PagOtrasFuentes extends PagBaseMultiple
     /* Objetos DB_DataObject_FormBuilder */
     /** Fuente directa independiente de caso */
     var $bfuente_directa;
-    /** Relación entre fuente directa y caso */
+    /** RelaciÃ³n entre fuente directa y caso */
     var $bfuente_directa_caso;
 
     var $titulo = 'Otras Fuentes';
@@ -54,7 +54,7 @@ class PagOtrasFuentes extends PagBaseMultiple
 
 
     /**
-     * Pone en null variables asociadas a tablas de la pestaña.
+     * Pone en null variables asociadas a tablas de la pestaÃ±a.
      *
      * @return null
      */
@@ -66,9 +66,9 @@ class PagOtrasFuentes extends PagBaseMultiple
 
 
     /**
-     * Retorna una identificación del registro actual.
+     * Retorna una identificaciÃ³n del registro actual.
      *
-     * @return string Identifación
+     * @return string IdentifaciÃ³n
      */
     function copiaId()
     {
@@ -96,10 +96,10 @@ class PagOtrasFuentes extends PagBaseMultiple
 
 
     /**
-     * Inicializa variables y datos de la pestaña.
-     * Ver documentación completa en clase base.
+     * Inicializa variables y datos de la pestaÃ±a.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @return handle Conexión a base de datos
+     * @return handle ConexiÃ³n a base de datos
      */
     function iniVar()
     {
@@ -108,7 +108,7 @@ class PagOtrasFuentes extends PagBaseMultiple
         $db =& $do->getDatabaseConnection();
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no debería ser null");
+            die("Bug: idcaso no deberÃ­a ser null");
         }
         $do->id_caso = $idcaso;
 
@@ -166,7 +166,7 @@ class PagOtrasFuentes extends PagBaseMultiple
 
     /**
      * Constructora.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param string $nomForma Nombre
      *
@@ -183,9 +183,9 @@ class PagOtrasFuentes extends PagBaseMultiple
 
     /**
      * Agrega elementos al formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle &$db    Conexión a base de datos
+     * @param handle &$db    ConexiÃ³n a base de datos
      * @param string $idcaso Id del caso
      *
      * @return void
@@ -211,9 +211,9 @@ class PagOtrasFuentes extends PagBaseMultiple
 
     /**
      * Llena valores del formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle  &$db    Conexión a base de datos
+     * @param handle  &$db    ConexiÃ³n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -290,9 +290,9 @@ class PagOtrasFuentes extends PagBaseMultiple
 
     /**
      * Elimina registros de tablas relacionadas con caso de este formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle  &$db    Conexión a base de datos
+     * @param handle  &$db    ConexiÃ³n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -311,11 +311,11 @@ class PagOtrasFuentes extends PagBaseMultiple
 
     /**
      * Procesa valores del formulario enviados por el usuario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param handle &$valores Valores ingresados por usuario
      *
-     * @return bool Verdadero si y solo si puede completarlo con éxito
+     * @return bool Verdadero si y solo si puede completarlo con Ã©xito
      * @see PagBaseSimple
      */
     function procesa(&$valores)
@@ -417,12 +417,12 @@ class PagOtrasFuentes extends PagBaseMultiple
 
     /**
      * Prepara consulta SQL para buscar datos de este formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param string &$w       Consulta que se construye
      * @param string &$t       Tablas
-     * @param string &$db      Conexión a base de datos
-     * @param object $idcaso   Identificación de caso
+     * @param string &$db      ConexiÃ³n a base de datos
+     * @param object $idcaso   IdentificaciÃ³n de caso
      * @param string &$subcons Subconsulta
      *
      * @return void
@@ -438,20 +438,20 @@ class PagOtrasFuentes extends PagBaseMultiple
 
     /**
      * Busca una fuente no frecuente por nombre y la inserta en un caso
-     * con los datos que esta función recibe.
+     * con los datos que esta funciÃ³n recibe.
      *
-     * @param object &$db    Conexión a base de datos
-     * @param intger $idcaso Número de caso al que se añade fuente
+     * @param object &$db    ConexiÃ³n a base de datos
+     * @param intger $idcaso NÃºmero de caso al que se aÃ±ade fuente
      * @param string $nomf   Nombre de la fuente
      * @param string $fecha  Fecha de fuente
-     * @param string $ubif   Ubicación física
-     * @param string $anota  Anotación
-     * @param string $tipof  Tipo de fuente 
+     * @param string $ubif   UbicaciÃ³n fÃ­sica
+     * @param string $anota  AnotaciÃ³n
+     * @param string $tipof  Tipo de fuente
      * @param string &$obs   Colchon para agregar notas de conversion
      *
      * @return boolean true sii puede insertar
      */
-    static function busca_inserta(&$db, $idcaso, $nomf, $fecha, 
+    static function busca_inserta(&$db, $idcaso, $nomf, $fecha,
         $ubif, $anota, $tipof, &$obs
     ) {
         assert($idcaso != null);
@@ -500,12 +500,12 @@ class PagOtrasFuentes extends PagBaseMultiple
     }
 
     /**
-     * Importa de un relato SINCODH lo relacionado con esta pestaña,
+     * Importa de un relato SINCODH lo relacionado con esta pestaÃ±a,
      * creando registros en la base de datos para el caso $idcaso
      *
-     * @param object &$db    Conexión a base de datos
+     * @param object &$db    ConexiÃ³n a base de datos
      * @param object $r      Relato en XML
-     * @param int    $idcaso Número de caso que se inserta
+     * @param int    $idcaso NÃºmero de caso que se inserta
      * @param string &$obs   Colchon para agregar notas de conversion
      *
      * @return void
@@ -518,18 +518,18 @@ class PagOtrasFuentes extends PagBaseMultiple
             $nomf = $fuente->nombre_fuente;
             if (empty($fuente->fecha_fuente)) {
                 repObs(
-                    "No se incluyó fuente sin fecha: " .
+                    "No se incluyÃ³ fuente sin fecha: " .
                     $fuente->asXML()
                 );
             } else if (empty($fuente->nombre_fuente)) {
                 repObs(
-                    "No se incluyó fuente sin nombre: " .
+                    "No se incluyÃ³ fuente sin nombre: " .
                     $fuente->asXML()
                 );
             } else {
                 $fecha = conv_fecha($fuente->fecha_fuente, $obs);
                 PagOtrasFuentes::busca_inserta(
-                    $db, $idcaso, utf8_decode($nomf), $fecha, 
+                    $db, $idcaso, utf8_decode($nomf), $fecha,
                     utf8_decode((string)$fuente->ubicacion_fuente),
                     dato_en_obs($fuente, 'anotacion'),
                     dato_en_obs($fuente, 'tipo_fuente'),

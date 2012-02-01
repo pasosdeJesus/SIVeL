@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
  * Consulta externa
@@ -8,9 +8,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir T·mara <vtamara@pasosdeJesus.org>
- * @copyright 2007 Dominio p˙blico. Sin garantÌas.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P˙blico. Sin garantÌas.
+ * @author    Vladimir T√°mara <vtamara@pasosdeJesus.org>
+ * @copyright 2007 Dominio p√∫blico. Sin garant√≠as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P√∫blico. Sin garant√≠as.
  * @version   CVS: $Id: externa.php,v 1.10.2.1 2011/09/14 14:56:19 vtamara Exp $
  * @link      http://sivel.sf.net
 */
@@ -26,7 +26,7 @@ $post = array();
 require_once "ambiente.php";
 require_once "misc.php";
 
-/*** B¡SICOS ***/
+/*** B√ÅSICOS ***/
 
 $post['evita_csrf'] = '1234';
 $post['_qf_default'] = 'basicos:siguiente';
@@ -69,12 +69,12 @@ hace_consulta($db, "DELETE FROM caso where id='-1';");
 hace_consulta($db, "DELETE FROM intervalo where id='5';");
 hace_consulta(
     $db, "INSERT INTO intervalo (id, nombre, rango, fechacreacion) " .
-    " VALUES ('5', 'SIN INFORMACI”N', 'SIN INFORMACI”N', '2001-01-01');"
+    " VALUES ('5', 'SIN INFORMACI√ìN', 'SIN INFORMACI√ìN', '2001-01-01');"
 );
 hace_consulta(
     $db, "INSERT INTO rango_edad (id, nombre, rango, limiteinferior,
     limitesuperior, fechacreacion)
-    VALUES ('6', 'SN', 'SIN INFORMACI”N', '-1', '-1', '2001-01-01');"
+    VALUES ('6', 'SN', 'SIN INFORMACI√ìN', '-1', '-1', '2001-01-01');"
 );
 
 //hace_consulta($db, "INSERT INTO caso (id, fecha, memo, id_intervalo) " .

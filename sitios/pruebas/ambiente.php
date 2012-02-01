@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
-* Ambiente para pruebas de regresión.
+* Ambiente para pruebas de regresiÃ³n.
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2006 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2006 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: ambiente.php,v 1.12.2.3 2011/10/18 16:05:05 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Ambiente para pruebas de regresión.
+ * Ambiente para pruebas de regresiÃ³n.
  */
 
 if (PHP_SAPI !== 'cli') {
@@ -59,7 +59,7 @@ $_SESSION['opciones'][15] = 60;
 
 
 $_SERVER['SERVER_NAME'] = '127.0.0.1';
-$_SERVER['REQUEST_URI'] = 'pruebas';  // así lo pone insdep.php
+$_SERVER['REQUEST_URI'] = 'pruebas';  // asÃ­ lo pone insdep.php
 $_SERVER['HTTP_X_FORWARDED_SERVER'] = '';
 
 
@@ -69,19 +69,19 @@ require_once "conf.php";
 
 
 /**
- * Verifica inserción en una o más tablas
- * @param object &$db Conexión a base
+ * Verifica inserciÃ³n en una o mÃ¡s tablas
+ * @param object &$db ConexiÃ³n a base
  * @param array  $tabla_prueba Tablas por revisar
- * @param array  $na  Número de registros antes de inserción
+ * @param array  $na  NÃºmero de registros antes de inserciÃ³n
  * @param bool   $terminaError Salir ante el primer error con exit(1)
  *
- * @return Retorna cantidad de errores de validación.  Hay error en una
- * de las tablas si la cuenta de registros es una más que la de $na
+ * @return Retorna cantidad de errores de validaciÃ³n.  Hay error en una
+ * de las tablas si la cuenta de registros es una mÃ¡s que la de $na
  */
 function verificaInsercion(&$db, $tabla_prueba, $na)
 {
     if (!isset($db) || PEAR::isError($db)) {
-        echo "Error en conexión " . $db->getMesssage();
+        echo "Error en conexiÃ³n " . $db->getMesssage();
         exit(1);
     }
 //    echo "OJO verificaInsercion(db, " . count($tabla_prueba) . ", " .  count($na) . "\n";
@@ -94,8 +94,8 @@ function verificaInsercion(&$db, $tabla_prueba, $na)
         $nd[$nt] = (int)($db->getOne($q));
         //echo " nd[nt] = $nd[$nt] ";
         if (($nd[$nt]-$na[$nt])!= 1) {
-            echo "No insertaron datos de pestaña en tabla $nt. Antes: " .
-                $na[$nt] . ", después: " . $nd[$nt] . "\n";
+            echo "No insertaron datos de pestaÃ±a en tabla $nt. Antes: " .
+                $na[$nt] . ", despuÃ©s: " . $nd[$nt] . "\n";
             $nume++;
         }
         return $nume;
@@ -103,14 +103,14 @@ function verificaInsercion(&$db, $tabla_prueba, $na)
 }
 
 /**
- * Agrega datos a una pestaña del formulario Ficha.
- * Sólo puede llamarse una vez por cada ejecución de php (pues el
+ * Agrega datos a una pestaÃ±a del formulario Ficha.
+ * SÃ³lo puede llamarse una vez por cada ejecuciÃ³n de php (pues el
  * require se ejecuta una vez)
  *
- * @param handle  &$db          Conexión a BD
- * @param string  $tabla_prueba Tabla que debe incrementarse tras pasar pestaña
+ * @param handle  &$db          ConexiÃ³n a BD
+ * @param string  $tabla_prueba Tabla que debe incrementarse tras pasar pestaÃ±a
  * @param array   $post         Valor que debe tomar la variable POST
- * @param integer $basicos_id   Cód. caso si falta $_SESSION['basicos_id']
+ * @param integer $basicos_id   CÃ³d. caso si falta $_SESSION['basicos_id']
  * @param boolean $terminaError Si hay error terminar
  * @param array   $files        Valor que debe tomar la variable $_FILES
  *
@@ -121,7 +121,7 @@ function pasaPestanaFicha(&$db, $tabla_prueba, $post, $basicos_id = null,
 {
 
     if (!isset($db) || PEAR::isError($db)) {
-        echo "Error en conexión " . $db->getMesssage();
+        echo "Error en conexiÃ³n " . $db->getMesssage();
         exit(1);
     }
     $_SESSION['fvloc_pag'] = '0';
@@ -213,10 +213,10 @@ function pasaPestanaFicha(&$db, $tabla_prueba, $post, $basicos_id = null,
 
 
 /**
- * Retorna nombre de la sesión basado en URL.
+ * Retorna nombre de la sesiÃ³n basado en URL.
  * Como la de aut.php
  *
- * @return string Nombre de la sesión
+ * @return string Nombre de la sesiÃ³n
  */
 function nomSesion2()
 {
@@ -228,10 +228,10 @@ function nomSesion2()
     }
     $_SERVER['HTTP_HOST'] = 'localhost';
     // La idea de usar HTTP_HOST es de fuentes de Drupal pero no basta porque
-    // al menos en php 5.2.5 de OpenBSD 4.2 el nombre de la sesión debe
-    // ser alfanumérico (documentado) y comenzar con letra (no documentado).
-    // Así mismo varias instalaciones en el mismo HOST corriendo simultaneamente
-    // confundirían el nombre de sesión.
+    // al menos en php 5.2.5 de OpenBSD 4.2 el nombre de la sesiÃ³n debe
+    // ser alfanumÃ©rico (documentado) y comenzar con letra (no documentado).
+    // AsÃ­ mismo varias instalaciones en el mismo HOST corriendo simultaneamente
+    // confundirÃ­an el nombre de sesiÃ³n.
     $snru = preg_replace(
         '/[^a-z0-9]/i', '',
         "s" . $_SERVER['HTTP_HOST'] . $dsru

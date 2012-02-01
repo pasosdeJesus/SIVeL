@@ -1,5 +1,5 @@
 <?php
-//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Importa relato
  *
@@ -7,9 +7,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: importaRelato.php,v 1.36.2.4 2011/10/21 03:58:22 vtamara Exp $
  * @link      http://sivel.sf.net
  */
@@ -52,24 +52,24 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
 
 
 /**
- * Responde a botón importar
+ * Responde a botÃ³n importar
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  */
 class AccionImportaRelato extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
      * Basado en caso_detalles_sivel_remoto.php de Luca
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -90,10 +90,10 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         }
         $iderrorimportacion = (int)$db->getOne(
             "SELECT id FROM etiqueta "
-            . " WHERE nombre = 'ERROR_IMPORTACIÓN'"
+            . " WHERE nombre = 'ERROR_IMPORTACIÃ“N'"
         );
         if ($iderrorimportacion == 0) {
-            die("Debe haber una etiqueta ERROR_IMPORTACIÓN. "
+            die("Debe haber una etiqueta ERROR_IMPORTACIÃ“N. "
                 . " Favor <a href='actualiza.php'>actualizar</a>."
             );
         }
@@ -107,7 +107,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         $pArchivo = $e['name'];
 
         if ($e['size'] <= 0) {
-            die("Tamaño de archivo debe ser mayor que 0");
+            die("TamaÃ±o de archivo debe ser mayor que 0");
         }
         move_uploaded_file(
             $e['tmp_name'], $GLOBALS['dir_anexos'] . "/" .
@@ -121,7 +121,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         $cont = "";
         if (substr($pArchivo, strlen($pArchivo) - 3, 3) == '.gz') {
             if (!function_exists('readgzfile')) {
-                die("Falta soporte para Zlib en su instalación de PHP. "
+                die("Falta soporte para Zlib en su instalaciÃ³n de PHP. "
                     . " Descomprima manualmente e importe el descomprimido"
                 );
             }
@@ -139,7 +139,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             die("No pudo cargarse '" . $pArchivo . "'");
         }
 
-        $yaesta = array(); // Indica cuales pestañas ya importaron
+        $yaesta = array(); // Indica cuales pestaÃ±as ya importaron
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
             list($n, $c, $o) = $tab;
             $yaesta[$c] = false;
@@ -219,9 +219,9 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $nomf = utf8_decode($r->organizacion_responsable);
             $fecha = date('Y-m-d');
             $orgfuente = PagFuentesFrecuentes::busca_inserta(
-                $db, $idcaso, $nomf, $fecha, 
+                $db, $idcaso, $nomf, $fecha,
                 utf8_decode($r->id_relato),
-                'Organización responsable incluida automáticamente',
+                'OrganizaciÃ³n responsable incluida automÃ¡ticamente',
                 '', $obs
             );
             $yaesta['PagFuentesFrecuentes'] = true;
@@ -231,9 +231,9 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             PagOtrasFuentes::importaRelato($db, $r, $idcaso, $obs);
             if (!$orgfuente) {
                 $orgfuente = PagOtrasFuentes::busca_inserta(
-                    $db, $idcaso, $nomf, $fecha, 
+                    $db, $idcaso, $nomf, $fecha,
                     utf8_decode($r->id_relato),
-                    'Organización responsable incluida automáticamente',
+                    'OrganizaciÃ³n responsable incluida automÃ¡ticamente',
                     'Indirecta', $obs
                 );
             }
@@ -401,7 +401,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     if (!$dvictima->insert()) {
                         var_dump($dvictima);
                         repObs(
-                            "No pudo insertar víctima '"
+                            "No pudo insertar vÃ­ctima '"
                             . $dvictima->id_persona . " "
                             . $dvictima->getMessage() . " "
                             .  $dvictima->getUserInfo()
@@ -441,7 +441,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         }
                         $ids = DataObjects_Presuntos_responsables::idSinInfo();
                         if ($pr == $ids
-                            && $nomg != 'SIN INFORMACIÓN'
+                            && $nomg != 'SIN INFORMACIÃ“N'
                             && $nomg != 'SIN INFORMACION'
                         ) {
                             $dpresp->otro = $nomg;
@@ -469,7 +469,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                                 $ocat->find(1); $ocat->fetch();
                                 if (PEAR::isError($ocat)) {
                                     repObs(
-                                        "No se reconoció categoria $ag",
+                                        "No se reconociÃ³ categoria $ag",
                                         $obs
                                     );
                                 } else {
@@ -541,14 +541,14 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         print_r($acto);
                     }
                 } else {
-                    repObs("Agresión particular vacía", $obs);
+                    repObs("AgresiÃ³n particular vacÃ­a", $obs);
                 }
             }
             $yaesta['PagActo'] = true;
 
-            // Completamos victimas colectivas suponiendo que también son
+            // Completamos victimas colectivas suponiendo que tambiÃ©n son
             // los grupos que no son presuntos responsables y que no fueron
-            // nombrados como víctimas en actos
+            // nombrados como vÃ­ctimas en actos
             foreach ($datgrupo as $idg => $g) {
                 //echo "OJO revisando idg=$idg\n";
                 if (!isset($id_presp[$idg]) && !isset($id_vcol[$idg])) {
@@ -619,8 +619,8 @@ class AccionImportaRelato extends HTML_QuickForm_Action
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  */
 class PagImportaRelato extends HTML_QuickForm_Page
@@ -634,17 +634,17 @@ class PagImportaRelato extends HTML_QuickForm_Page
     function PagImportaRelato()
     {
         if (!isset($GLOBALS['dir_anexos'])) {
-            die("Se requiere módulo anexos con variable dir_anexos");
+            die("Se requiere mÃ³dulo anexos con variable dir_anexos");
         }
         if (!is_writable($GLOBALS['dir_anexos'])) {
             die("El directorio '" . $GLOBALS['dir_anexos'] .
-                " debería permitir escritura"
+                " deberÃ­a permitir escritura"
             );
         }
 
         $ec =& objeto_tabla('etiquetacaso');
         if (PEAR::isError($ec)) {
-            echo "Se requiere módulo etiquetas";
+            echo "Se requiere mÃ³dulo etiquetas";
         }
 
         $this->HTML_QuickForm_Page('importaRelato', 'post', '_self', null);
@@ -690,7 +690,7 @@ class PagImportaRelato extends HTML_QuickForm_Page
         $this->setDefaultAction('importa');
 
         $tpie = "<div align=right><a href=\"index.php\">" .
-            "Menú Principal</a></div>";
+            "MenÃº Principal</a></div>";
         $e =& $this->addElement('header', null, $tpie);
 
     }

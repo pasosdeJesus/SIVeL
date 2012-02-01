@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * P醙ina del multi-formulario para capturar caso (captura_caso.php).
+ * P谩gina del multi-formulario para capturar caso (captura_caso.php).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio p鷅lico. Sin garant韆s.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico. Sin garant韆s.
+ * @author    Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio p煤blico. Sin garant铆as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico. Sin garant铆as.
  * @version   CVS: $Id: PagPResponsables.php,v 1.82.2.7 2011/10/22 14:58:19 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: S覮O DEFINICIONES
+ * Acceso: S脫LO DEFINICIONES
  */
 
 /**
- * Pesta馻 Presuntos Responsables de la ficha de captura de caso
+ * Pesta帽a Presuntos Responsables de la ficha de captura de caso
  */
 require_once 'PagBaseMultiple.php';
 require_once 'ResConsulta.php';
@@ -24,13 +24,13 @@ require_once 'DataObjects/Presuntos_responsables.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
 
 /**
- * P醙ina presuntos responsables.
- * Ver documentaci髇 de funciones en clase base.
+ * P谩gina presuntos responsables.
+ * Ver documentaci贸n de funciones en clase base.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
  * @see      PagBaseMultiple
 */
@@ -52,7 +52,7 @@ class PagPResponsables extends PagBaseMultiple
     var $clase_modelo = 'presuntos_responsables_caso';
 
     /**
-     * Pone en null variables asociadas a tablas de la pesta馻.
+     * Pone en null variables asociadas a tablas de la pesta帽a.
      *
      * @return null
      */
@@ -63,9 +63,9 @@ class PagPResponsables extends PagBaseMultiple
     }
 
     /**
-     * Retorna una identificaci髇 del registro actual.
+     * Retorna una identificaci贸n del registro actual.
      *
-     * @return string Identifaci髇
+     * @return string Identifaci贸n
      */
     function copiaId()
     {
@@ -111,10 +111,10 @@ class PagPResponsables extends PagBaseMultiple
 
 
     /**
-     * Inicializa variables y datos de la pesta馻.
-     * Ver documentaci髇 completa en clase base.
+     * Inicializa variables y datos de la pesta帽a.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @return handle Conexi髇 a base de datos
+     * @return handle Conexi贸n a base de datos
      */
     function iniVar()
     {
@@ -124,7 +124,7 @@ class PagPResponsables extends PagBaseMultiple
         $db =& $drespCaso->getDatabaseConnection();
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no deber韆 ser null");
+            die("Bug: idcaso no deber铆a ser null");
         }
 
         $idp = array();
@@ -178,7 +178,7 @@ class PagPResponsables extends PagBaseMultiple
 
     /**
      * Constructora.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
      * @param string $nomForma Nombre
      *
@@ -195,9 +195,9 @@ class PagPResponsables extends PagBaseMultiple
 
     /**
      * Agrega elementos al formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle &$db    Conexi髇 a base de datos
+     * @param handle &$db    Conexi贸n a base de datos
      * @param string $idcaso Id del caso
      *
      * @return void
@@ -271,9 +271,9 @@ class PagPResponsables extends PagBaseMultiple
 
     /**
      * Llena valores del formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle  &$db    Conexi髇 a base de datos
+     * @param handle  &$db    Conexi贸n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -347,9 +347,9 @@ class PagPResponsables extends PagBaseMultiple
 
     /**
      * Elimina registros de tablas relacionadas con caso de este formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle  &$db    Conexi髇 a base de datos
+     * @param handle  &$db    Conexi贸n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -373,7 +373,7 @@ class PagPResponsables extends PagBaseMultiple
      * @param handle  &$db     Base de datos
      * @param integer $idcaso  Id. del caso
      * @param integer $idpres  Id del presunto responsable
-     * @param integer $accion  Acci髇
+     * @param integer $accion  Acci贸n
      * @param integer $valores Valores enviados por formulario
      *
      * @return bool Verdaderdo si y solo si hay integridad referencial
@@ -401,11 +401,11 @@ class PagPResponsables extends PagBaseMultiple
 
     /**
      * Procesa valores del formulario enviados por el usuario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
      * @param handle &$valores Valores ingresados por usuario
      *
-     * @return bool Verdadero si y solo si puede completarlo con 閤ito
+     * @return bool Verdadero si y solo si puede completarlo con 茅xito
      * @see PagBaseSimple
      */
     function procesa(&$valores)
@@ -482,12 +482,12 @@ class PagPResponsables extends PagBaseMultiple
 
     /**
      * Prepara consulta SQL para buscar datos de este formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
      * @param string &$w       Consulta que se construye
      * @param string &$t       Tablas
-     * @param string &$db      Conexi髇 a base de datos
-     * @param object $idcaso   Identificaci髇 de caso
+     * @param string &$db      Conexi贸n a base de datos
+     * @param object $idcaso   Identificaci贸n de caso
      * @param string &$subcons Subconsulta
      *
      * @return void

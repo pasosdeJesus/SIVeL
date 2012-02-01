@@ -1,29 +1,29 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * P醙ina del multi-formulario para capturar caso (captura_caso.php).
+ * P谩gina del multi-formulario para capturar caso (captura_caso.php).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @copyright 2006 Dominio p鷅lico. Sin garant韆s.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico. Sin garant韆s.
+ * @author    Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @copyright 2006 Dominio p煤blico. Sin garant铆as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico. Sin garant铆as.
  * @version   CVS: $Id: PagAnexo.php,v 1.15.2.5 2011/10/18 16:05:04 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: S覮O DEFINICIONES
+ * Acceso: S脫LO DEFINICIONES
  */
 
 /**
- * Pesta馻 Anexo de la ficha de captura de caso
+ * Pesta帽a Anexo de la ficha de captura de caso
  */
 require_once 'PagBaseMultiple.php';
 require_once 'HTML/QuickForm/Action.php';
 
 
 /**
- * Acci髇 que responde al bot髇 ver anexo
+ * Acci贸n que responde al bot贸n ver anexo
  *
  * @category SIVeL
  *
@@ -31,17 +31,17 @@ require_once 'HTML/QuickForm/Action.php';
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  Dominio p鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  Dominio p煤blico.
  * @link     http://sivel.sf.net/tec
  */
 class VerAnexo extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acci髇
+     * Ejecuta acci贸n
      *
-     * @param object &$page      P醙ina
-     * @param string $actionName Acci髇
+     * @param object &$page      P谩gina
+     * @param string $actionName Acci贸n
      *
      * @return void
      */
@@ -64,10 +64,10 @@ class VerAnexo extends HTML_QuickForm_Action
                 if (!file_exists($arch)) {
                     die("No existe el archivo especificado");
                 }
-                $nombre = substr($nombre, strlen($inin));  // Eliminado n鷐ero de caso
+                $nombre = substr($nombre, strlen($inin));  // Eliminado n煤mero de caso
                 $ps = (int)strpos($nombre, "_");
                 if ($ps < 1) {
-                    die("El nombre del archivo no es est醤dar");
+                    die("El nombre del archivo no es est谩ndar");
                 }
                 $nombre = substr($nombre, $ps+1);
                 header('HTTP/1.1 200 OK');
@@ -103,7 +103,7 @@ class PagAnexo extends PagBaseMultiple
     var $clase_modelo = 'anexo';
 
     /**
-     * Pone en null variables asociadas a tablas de la pesta馻.
+     * Pone en null variables asociadas a tablas de la pesta帽a.
      *
      * @return null
      */
@@ -113,9 +113,9 @@ class PagAnexo extends PagBaseMultiple
     }
 
     /**
-     * Retorna una identificaci髇 del registro actual.
+     * Retorna una identificaci贸n del registro actual.
      *
-     * @return string Identifaci髇
+     * @return string Identifaci贸n
      */
     function copiaId()
     {
@@ -133,10 +133,10 @@ class PagAnexo extends PagBaseMultiple
 
 
     /**
-     * Inicializa variables y datos de la pesta馻.
-     * Ver documentaci髇 completa en clase base.
+     * Inicializa variables y datos de la pesta帽a.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @return handle Conexi髇 a base de datos
+     * @return handle Conexi贸n a base de datos
      */
      function iniVar()
     {
@@ -177,7 +177,7 @@ class PagAnexo extends PagBaseMultiple
 
     /**
      * Constructora.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
      * @param string $nomForma Nombre
      * @param string $mreq     Mensaje de dato requerido
@@ -196,9 +196,9 @@ class PagAnexo extends PagBaseMultiple
 
     /**
      * Agrega elementos al formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle &$db    Conexi髇 a base de datos
+     * @param handle &$db    Conexi贸n a base de datos
      * @param string $idcaso Id del caso
      *
      * @return void
@@ -222,9 +222,9 @@ class PagAnexo extends PagBaseMultiple
 
     /**
      * Llena valores del formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle  &$db    Conexi髇 a base de datos
+     * @param handle  &$db    Conexi贸n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -236,9 +236,9 @@ class PagAnexo extends PagBaseMultiple
 
     /**
      * Elimina registros de tablas relacionadas con caso de este formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle  &$db    Conexi髇 a base de datos
+     * @param handle  &$db    Conexi贸n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -259,11 +259,11 @@ class PagAnexo extends PagBaseMultiple
 
     /**
      * Procesa valores del formulario enviados por el usuario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
      * @param handle &$valores Valores ingresados por usuario
      *
-     * @return bool Verdadero si y solo si puede completarlo con 閤ito
+     * @return bool Verdadero si y solo si puede completarlo con 茅xito
      * @see PagBaseSimple
      */
     function procesa(&$valores)
@@ -284,7 +284,7 @@ class PagAnexo extends PagBaseMultiple
             $this->banexo->dateToDatabaseCallback,
             var_escapa($valores['fecha'], $db)
         );
-        $this->banexo->_do->descripcion = 
+        $this->banexo->_do->descripcion =
             var_escapa($valores['descripcion'], $db);
 
         if (!isset($this->banexo->_do->id) || $this->banexo->_do->id <= 0) {

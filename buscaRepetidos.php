@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Busca datos repetidos
  *
@@ -7,9 +7,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2010 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2010 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: buscaRepetidos.php,v 1.13.2.2 2011/10/13 13:41:06 vtamara Exp $
  * @link      http://sivel.sf.net
  */
@@ -45,7 +45,7 @@ while ($res->fetchInto($reg)) {
         "'>" . htmlentities($reg[0]) . "</a> ";
     for ($i = 1; $i < $reg[2]; $i++) {
         $reg2 =& $res->fetchRow();
-        echo "<a href='captura_caso.php?id=" . urlencode($reg2[0]) . 
+        echo "<a href='captura_caso.php?id=" . urlencode($reg2[0]) .
             "'>" . htmlentities($reg2[0]) . "</a> ";
     }
     echo "</td></tr>\n";
@@ -56,6 +56,6 @@ echo "<p/>";
 echo '<table width="100%">'
     . '<td style="white-space: nowrap; background-color: #CCCCCC;" '
     . 'align="left" valign="top" colspan="2"><b><div align=right>'
-    . '<a href="index.php">Menú Principal</a></div></b></td></table>';
+    . '<a href="index.php">MenÃº Principal</a></div></b></td></table>';
 
 ?>

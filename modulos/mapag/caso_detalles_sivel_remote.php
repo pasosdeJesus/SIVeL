@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Detalls de un caso
  *
@@ -57,49 +57,49 @@ $dom = new DOMDocument("1.0");
 
 if (!empty($id_caso) && $id_caso != 0) {
 
-	// carga datos del archivo XML de Sivel
-	$xmlSivel = simplexml_load_string(file_get_contents($requestUrl)) or die("url '" . $requestUrl . "' not loading");
-	
-	// todo bien, crear documento xml
-	$node = $dom->createElement("casos");
-	$parnode = $dom->appendChild($node);
-	$node2 = $dom->createElement("caso");
-	$node2->setAttribute("id", $id_caso);
-	$subnode = $parnode->appendChild($node2);
-	
-	$output['titulo'] = $dom->createElement('titulo', $xmlSivel->relato->titulo);
-	$output['hechos'] = $dom->createElement('hechos', $xmlSivel->relato->hechos);
-	$output['fecha'] = $dom->createElement('fecha', $xmlSivel->relato->fecha);
-	$output['hora'] = $dom->createElement('hora', $xmlSivel->relato->hora);
-	$output['departamento'] = $dom->createElement('departamento', $xmlSivel->relato->departamento);
-	$output['municipio'] = $dom->createElement('municipio', $xmlSivel->relato->municipio);
-	$output['centro_poblado'] = $dom->createElement('centro_poblado', $xmlSivel->relato->centro_poblado);
-	
-	foreach ($output as $value) {
-		$subnode->appendChild($value);
-	}
-	
-	$prresp = $dom->createElement("presuntos_responsables");
-	$prrespnode = $subnode->appendChild($prresp);
-	foreach ($xmlSivel->relato->grupo as $grupo) {
-		if (!empty($grupo->nombre_grupo)) {
-		$outputGrupo = $dom->createElement('presunto_responsable', $grupo->nombre_grupo);
-		$outputGrupo->setAttribute("id", utf8_encode($grupo->id_grupo));
-		$prrespnode->appendChild($outputGrupo);
-		}
-	}
-	
-	$victimas = $dom->createElement("victimas");
-	$victimasnode = $subnode->appendChild($victimas);
-	foreach ($xmlSivel->relato->persona as $persona) {
-		$id_persona = (int) $persona->id_persona;
-		$outputVictima = $dom->createElement('persona', $persona->nombre);
-		
-		$outputVictima->setAttribute("id", utf8_encode($persona->id_persona));
-		$outputVictima->setAttribute("sexo", utf8_encode($persona->sexo));
-		$victimasnode->appendChild($outputVictima);
-	}
-			
+    // carga datos del archivo XML de Sivel
+    $xmlSivel = simplexml_load_string(file_get_contents($requestUrl)) or die("url '" . $requestUrl . "' not loading");
+    
+    // todo bien, crear documento xml
+    $node = $dom->createElement("casos");
+    $parnode = $dom->appendChild($node);
+    $node2 = $dom->createElement("caso");
+    $node2->setAttribute("id", $id_caso);
+    $subnode = $parnode->appendChild($node2);
+    
+    $output['titulo'] = $dom->createElement('titulo', $xmlSivel->relato->titulo);
+    $output['hechos'] = $dom->createElement('hechos', $xmlSivel->relato->hechos);
+    $output['fecha'] = $dom->createElement('fecha', $xmlSivel->relato->fecha);
+    $output['hora'] = $dom->createElement('hora', $xmlSivel->relato->hora);
+    $output['departamento'] = $dom->createElement('departamento', $xmlSivel->relato->departamento);
+    $output['municipio'] = $dom->createElement('municipio', $xmlSivel->relato->municipio);
+    $output['centro_poblado'] = $dom->createElement('centro_poblado', $xmlSivel->relato->centro_poblado);
+    
+    foreach ($output as $value) {
+        $subnode->appendChild($value);
+    }
+    
+    $prresp = $dom->createElement("presuntos_responsables");
+    $prrespnode = $subnode->appendChild($prresp);
+    foreach ($xmlSivel->relato->grupo as $grupo) {
+        if (!empty($grupo->nombre_grupo)) {
+        $outputGrupo = $dom->createElement('presunto_responsable', $grupo->nombre_grupo);
+        $outputGrupo->setAttribute("id", utf8_encode($grupo->id_grupo));
+        $prrespnode->appendChild($outputGrupo);
+        }
+    }
+    
+    $victimas = $dom->createElement("victimas");
+    $victimasnode = $subnode->appendChild($victimas);
+    foreach ($xmlSivel->relato->persona as $persona) {
+        $id_persona = (int) $persona->id_persona;
+        $outputVictima = $dom->createElement('persona', $persona->nombre);
+        
+        $outputVictima->setAttribute("id", utf8_encode($persona->id_persona));
+        $outputVictima->setAttribute("sexo", utf8_encode($persona->sexo));
+        $victimasnode->appendChild($outputVictima);
+    }
+            
 }
 
 echo $dom->saveXML();

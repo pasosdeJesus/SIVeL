@@ -1,5 +1,5 @@
 <?php
-//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Funciones para importar relatos
  *
@@ -7,21 +7,21 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T·mara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio p˙blico. Sin garantÌas.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P˙blico. Sin garantÌas.
+ * @author    Vladimir T√°mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio p√∫blico. Sin garant√≠as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P√∫blico. Sin garant√≠as.
  * @version   CVS: $Id: misc_importa.php,v 1.32.2.4 2011/10/22 14:57:56 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: S”LO DEFINICIONES
+ * Acceso: S√ìLO DEFINICIONES
  */
 
 
 /**
- * Reporta observaciÛn
+ * Reporta observaci√≥n
  *
- * @param string  $nobs   Nueva observaciÛn
+ * @param string  $nobs   Nueva observaci√≥n
  * @param string  &$obs   Colchon de observaciones
- * @param boolean $coneco Reportar tambiÈn en pantalla?
+ * @param boolean $coneco Reportar tambi√©n en pantalla?
  *
  * @return void
  **/
@@ -35,14 +35,14 @@ function repObs($nobs, &$obs, $coneco = false)
 
 
 /**
- * Busca dato en una tabla b·sica
+ * Busca dato en una tabla b√°sica
  *
- * @param object &$db    ConexiÛn a base de datos
+ * @param object &$db    Conexi√≥n a base de datos
  * @param string $tabla  Tabla en la cual buscar
  * @param string $nombre Nombre por buscar
  * @param string &$obs   Colchon para agregar observaciones
  *
- * @return integer CÛdigo en tabla o 0 si no lo encuentra
+ * @return integer C√≥digo en tabla o 0 si no lo encuentra
  */
 function convBasica(&$db, $tabla, $nombre, &$obs)
 {
@@ -110,14 +110,14 @@ function convBasica(&$db, $tabla, $nombre, &$obs)
 
 
 /**
- * Convierte violaciÛn
+ * Convierte violaci√≥n
  *
- * @param object &$db      ConexiÛn a base de datos
- * @param string $tipoi    Nombre de violaciÛn
+ * @param object &$db      Conexi√≥n a base de datos
+ * @param string $tipoi    Nombre de violaci√≥n
  * @param string $id_presp Id. del presunto responsable
  * @param string &$obs     Colchon para agregar observaciones
  *
- * @return integer CÛdigo del tipo de violencia o 0 si no encontrÛ
+ * @return integer C√≥digo del tipo de violencia o 0 si no encontr√≥
  */
 function conv_violacion(&$db, $tipoi, $id_presp, &$obs)
 {
@@ -154,8 +154,8 @@ function conv_violacion(&$db, $tipoi, $id_presp, &$obs)
 function sinTildes($s)
 {
     $r = str_replace(
-        array('·', 'È', 'Ì', 'Û', '˙', '¸', '¡', '…', 'Õ',
-        '”', '⁄', '‹'
+        array('√°', '√©', '√≠', '√≥', '√∫', '√º', '√Å', '√â', '√ç',
+        '√ì', '√ö', '√ú'
         ),
         array('a', 'e', 'i', 'o', 'u', 'u', 'A', 'E', 'I', 'O', 'U', 'U'),
         $s
@@ -166,7 +166,7 @@ function sinTildes($s)
 
 
 /**
- * Convierte localizaciÛn
+ * Convierte localizaci√≥n
  *
  * @param object &$db          Conexion a base de datos
  * @param string $departamento Departamento
@@ -179,7 +179,7 @@ function sinTildes($s)
  */
 function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
 {
-    if ($departamento == 'BOGOT¡ DC') {
+    if ($departamento == 'BOGOT√Å DC') {
         $departamento = 'DISTRITO CAPITAL';
     }
     if ($departamento == 'GUAJIRA') {
@@ -189,7 +189,7 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
         $municipio = 'TIERRALTA';
     }
 
-    //echo "OJO conv_localizaciÛn comienzo: departamento=$departamento, "
+    //echo "OJO conv_localizaci√≥n comienzo: departamento=$departamento, "
     //    . "municipio=$municipio, observaciones=$obs\n";
 
     $lugar = '';
@@ -204,10 +204,10 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
         if (!isset($d->id)) {
             $d->nombre = a_mayusculas($d->nombre);
             $d->find(1);
-            $pr = preg_match('/[¡…Õ”⁄‹]/', $d->nombre);
+            $pr = preg_match('/[√Å√â√ç√ì√ö√ú]/', $d->nombre);
             if (!isset($d->id) && $pr > 0) {
                 $d->nombre = str_replace(
-                    array('¡', '…', 'Õ', '”', '⁄', '‹'),
+                    array('√Å', '√â', '√ç', '√ì', '√ö', '√ú'),
                     array('A', 'E', 'I', 'O', 'U', 'U'),
                     $d->nombre
                 );
@@ -219,7 +219,7 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
         }
         if (!isset($d->id)) {
             repObs(
-                "LocalizaciÛn: Departamento desconocido '$departamento'",
+                "Localizaci√≥n: Departamento desconocido '$departamento'",
                 $obs
             );
             $idd = 1000;
@@ -234,7 +234,7 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
     }
     if ($municipio != '') {
         $municipiost = str_replace(
-            array('¡', '…', 'Õ', '”', '⁄', '‹'),
+            array('√Å', '√â', '√ç', '√ì', '√ö', '√ú'),
             array('A', 'E', 'I', 'O', 'U', 'U'),
             a_mayusculas($municipio)
         );
@@ -283,7 +283,7 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
             }
         } else {
             repObs(
-                "LocalizaciÛn: Municipio desconocido '$municipio'",
+                "Localizaci√≥n: Municipio desconocido '$municipio'",
                 $obs
             );
             $idm = 1000;
@@ -291,7 +291,7 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
     }
     if ($cenp != '') {
         $cenpst = str_replace(
-            array('¡', '…', 'Õ', '”', '⁄', '‹'),
+            array('√Å', '√â', '√ç', '√ì', '√ö', '√ú'),
             array('A', 'E', 'I', 'O', 'U', 'U'),
             a_mayusculas($cenp)
         );
@@ -345,7 +345,7 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
             }
         } else {
             repObs(
-                "LocalizaciÛn: Clase desconocida '$cenp' en municipio " .
+                "Localizaci√≥n: Clase desconocida '$cenp' en municipio " .
                 "'$idm' y departamento '$idd'",
                 $obs
             );
@@ -353,22 +353,22 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
         }
     }
 
-    //echo "OJO conv_localizaciÛn final: idd=$idd, idm=$idm, "
+    //echo "OJO conv_localizaci√≥n final: idd=$idd, idm=$idm, "
     //    . "idc=$idc, observaciones=$obs\n";
     return array($idd, $idm, $idc);
 }
 
 
 /**
- * Indica en observaciones como es conversiÛn de fecha
+ * Indica en observaciones como es conversi√≥n de fecha
  *
  * @param string $d       Dia
  * @param string $m       Mes
- * @param string $a       AÒo
+ * @param string $a       A√±o
  * @param string $orig    Orig
- * @param string &$dia_s  Para retornar dÌa
+ * @param string &$dia_s  Para retornar d√≠a
  * @param string &$mes_s  Retorna mes
- * @param string &$anio_s Retorna aÒo
+ * @param string &$anio_s Retorna a√±o
  * @param string &$obs    Colchon para agregar observaciones
  *
  * @return array (idd, idm, idc)  Identificaciones de departamento, municipio
@@ -390,7 +390,7 @@ function conv_dia_mes_anio($d, $m, $a, $orig, &$dia_s, &$mes_s, &$anio_s, &$obs)
     }
     if ($anio_s == 0) {
         $anio_s = 1970;
-        $o .= " Falta aÒo.";
+        $o .= " Falta a√±o.";
     }
 
     $m = 'especial';
@@ -406,7 +406,7 @@ function conv_dia_mes_anio($d, $m, $a, $orig, &$dia_s, &$mes_s, &$anio_s, &$obs)
  *
  * @param string  $fecha  Fecha
  * @param string  &$obs   Colchon para agregar observaciones
- * @param boolean $depura Mensajes de depuraciÛn?
+ * @param boolean $depura Mensajes de depuraci√≥n?
  *
  * @return array (d, m, c) Identificaciones de departamento, municipio y clase
  */
@@ -794,10 +794,10 @@ function conv_fecha($fecha, &$obs, $depura = false)
         $t = $mes_s;
         $mes_s = $dia_s;
         $dia_s = $t;
-        repObs("Fecha intercambiando mes y dÌa $fecha", $obs);
+        repObs("Fecha intercambiando mes y d√≠a $fecha", $obs);
     }
     if ($anio_s < 1900 || $anio_s>(int)date('Y')) {
-        repObs("Fecha: aÒo errado ($fecha), dejando 1970.", $obs);
+        repObs("Fecha: a√±o errado ($fecha), dejando 1970.", $obs);
         $anio_s = 1970;
     }
     if ($mes_s < 1 || $mes_s > 12) {
@@ -821,13 +821,13 @@ function conv_fecha($fecha, &$obs, $depura = false)
  * @param string &$obs            Colchon para agregar observaciones
  * @param string $nom             Nombre buscado
  * @param string $ap              Apellido buscado
- * @param string $anionac         AÒo de nacimiento
+ * @param string $anionac         A√±o de nacimiento
  * @param string $sexo            Sexo
- * @param string $id_departamento CÛdigo del dep. de procedencia
- * @param string $id_municipio    CÛdigo del mun. de procedencia
- * @param string $id_clase        CÛdigo de la clase de procedencia
+ * @param string $id_departamento C√≥digo del dep. de procedencia
+ * @param string $id_municipio    C√≥digo del mun. de procedencia
+ * @param string $id_clase        C√≥digo de la clase de procedencia
  * @param string $tipodocumento   Tipo de documento de identidad
- * @param string $numerodocumento N˙mero de documento de identidad
+ * @param string $numerodocumento N√∫mero de documento de identidad
  *
  * @return array (d, m, c) Identificaciones de departamento, municipio y clase
  */
@@ -846,7 +846,7 @@ function conv_persona(&$db, &$aper, &$obs, $nom, $ap, $anionac, $sexo = 'S',
             $anombres = $na[0];
             $aapellidos = $na[1];
             $cper = '';
-            $sep = ', como vÌctima en casos ';
+            $sep = ', como v√≠ctima en casos ';
             foreach ($na[2] as $nc) {
                 $cper .= $sep . $nc;
                 $sep = ", ";
@@ -905,18 +905,18 @@ function conv_persona(&$db, &$aper, &$obs, $nom, $ap, $anionac, $sexo = 'S',
  * @param object &$db Conexion a base de datos
  *
  * @return array($aper, $maxidper, $fechacaso, $ubicaso, $cat, $obs) arreglo
- * de persona, maxima identificaciÛ, arreglo de fechas de los casos, arreglo
+ * de persona, maxima identificaci√≥, arreglo de fechas de los casos, arreglo
  * de ubicaciones de los casos, arreglo de categorias, arreglo de observaciones.
- * Indexados por la identificaciÛn en base.
+ * Indexados por la identificaci√≥n en base.
  */
 function extrae_per(&$db)
 {
     $aper = array(); // aper[idper] es arreglo con nombre, apellidos,
     // arreglo de casos en los que aparece
-    $fechacaso = array(); // fechacaso[idcaso] es fecha en la que ocurriÛ caso
+    $fechacaso = array(); // fechacaso[idcaso] es fecha en la que ocurri√≥ caso
     $ubicaso = array(); // ubicaso[idcaso] es arreglo con id_dep, id_mun
     $cat = array(); // cat[idcaso] es arreglo de categorias del caso
-    $obs = array(); // obs[idcaso] es cadena con observaciones de la conversiÛn
+    $obs = array(); // obs[idcaso] es cadena con observaciones de la conversi√≥n
 
     $options =& PEAR::getStaticProperty('DB_DataObject', 'options');
     $options['dont_die'] = true;
@@ -935,7 +935,7 @@ function extrae_per(&$db)
         while ($cvi->fetch()) {
             $vcasos[$cvi->id_caso] = $cvi->id_caso;
         }
-        $aper[$pe->id][2] = $vcasos; // Casos en los que es vÌctima
+        $aper[$pe->id][2] = $vcasos; // Casos en los que es v√≠ctima
         $fcasos = array(); // Casos en los que es familiar
         $cr = objeto_tabla('Relacion_personas');
         $cr->orderBy('id_persona1');
@@ -963,15 +963,15 @@ function extrae_per(&$db)
 
 
 /**
- * Convierte vÌctimas colectivas insertando los datos de requerirse
+ * Convierte v√≠ctimas colectivas insertando los datos de requerirse
  *
  * @param object &$db    Conexion a base de datos
  * @param array  $agr    Listado de grupos de la base
- * @param string $idcaso IdentificaciÛn del caso que se edita
+ * @param string $idcaso Identificaci√≥n del caso que se edita
  * @param string $grupo  Grupo buscado
  * @param string &$obs   Colchon para agregar observaciones
  *
- * @return integer identificaciÛn el grupo en base
+ * @return integer identificaci√≥n el grupo en base
  */
 function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
 {
@@ -985,7 +985,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
     foreach ($agr as $k => $na) {
         $anombre = $na[0];
         $cper = '';
-        $sep = ', como vÌctima en casos ';
+        $sep = ', como v√≠ctima en casos ';
         foreach ($na[2] as $nc) {
             $cper .= $sep . $nc;
             $sep = ", ";
@@ -1015,7 +1015,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
         $agr[$idgr] = array($nombre, array());
     }
 
-    // Inserta VÌctima Colectiva
+    // Inserta V√≠ctima Colectiva
     $dvictimacol= objeto_tabla('victima_colectiva');
     $dvictimacol->id_caso = $idcaso;
     $dvictimacol->id_grupoper = $idgr;
@@ -1030,7 +1030,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
     }
     if (!$dvictimacol->insert()) {
         repObs(
-            "Acto: No pudo insertar vÌctima col. '$idgr', '",
+            "Acto: No pudo insertar v√≠ctima col. '$idgr', '",
             $obs
         );
     }
@@ -1064,15 +1064,15 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
 
 
 /**
- * Retorna informaciÛn de todos grupos en la base
+ * Retorna informaci√≥n de todos grupos en la base
  *
  * @param object &$db        Conexion a base de datos
  * @param array  &$fechacaso Fecha del caso
- * @param string &$ubicaso   UbicaciÛn
- * @param string &$cat       CategorÌa de violencia
+ * @param string &$ubicaso   Ubicaci√≥n
+ * @param string &$cat       Categor√≠a de violencia
  * @param string &$obs       Colchon para agregar observaciones
  *
- * @return array $agr[$idgr] = array($nom, $lc) indexado por identificaciÛn
+ * @return array $agr[$idgr] = array($nom, $lc) indexado por identificaci√≥n
  * de grupos, cada uno tiene nombre y arreglo de casos en los que aparece
  */
 function extrae_grupos(&$db, &$fechacaso, &$ubicaso, &$cat, &$obs)
@@ -1097,7 +1097,7 @@ function extrae_grupos(&$db, &$fechacaso, &$ubicaso, &$cat, &$obs)
         while ($cvi->fetch()) {
             $vcasos[$cvi->id_caso] = $cvi->id_caso;
         }
-        $agr[$pe->id][2] = $vcasos; // Casos en los que son vÌctima
+        $agr[$pe->id][2] = $vcasos; // Casos en los que son v√≠ctima
     }
 
     return $agr;
@@ -1105,7 +1105,7 @@ function extrae_grupos(&$db, &$fechacaso, &$ubicaso, &$cat, &$obs)
 
 
 /**
- * Retorna informaciÛn de todos los casos en la base
+ * Retorna informaci√≥n de todos los casos en la base
  *
  * @return array ($fechacaso, $cat, $ubicacion) arreglos de fechas, categorias
  * y ubicaciones indexados por id. de caso
@@ -1122,7 +1122,7 @@ function extrae_casos()
     $dcaso->orderBy('id');
     $dcaso->find();
     while ($dcaso->fetch()) {
-        $obs[$dcaso->id]=""; // No hay observaciones para esta conversiÛn en BD
+        $obs[$dcaso->id]=""; // No hay observaciones para esta conversi√≥n en BD
         $fechacaso[$dcaso->id] = $dcaso->fecha;
         $cat[$dcaso->id] = array();
         $dcat = objeto_tabla('acto');
@@ -1146,11 +1146,11 @@ function extrae_casos()
 
 
 /**
- * Busca convertir un n˙mero de lenguaje natural a entero
+ * Busca convertir un n√∫mero de lenguaje natural a entero
  *
- * @param string $n N˙mero en lenguaje natural
+ * @param string $n N√∫mero en lenguaje natural
  *
- * @return integer Con n˙mero o 0 si no lo logra
+ * @return integer Con n√∫mero o 0 si no lo logra
  */
 function lnat_a_numero($n)
 {
@@ -1224,9 +1224,9 @@ function sxml_valor_atributo($oxml, $nomat)
  * y de haberlo lo retorna
  *
  * @param object $oxml Objeto XML
- * @param string $id   IdentificaciÛn por buscar en observaciones
+ * @param string $id   Identificaci√≥n por buscar en observaciones
  *
- * @return null si no hay observacion con el tipo dado o la observaciÛn
+ * @return null si no hay observacion con el tipo dado o la observaci√≥n
  */
 function dato_en_obs($oxml, $id)
 {
@@ -1240,9 +1240,9 @@ function dato_en_obs($oxml, $id)
         return null;
     }
     if (count($po) > 1) {
-        echo "Problema en funciÛn <tt>datoenObservaciones(oxml, id="
+        echo "Problema en funci√≥n <tt>datoenObservaciones(oxml, id="
             . htmlentities($id)
-            . ")</tt>." 
+            . ")</tt>."
             . "  Hay varias observaciones con tipo buscado<br>";
     }
     $r = utf8_decode((string)$po[0]);
@@ -1251,21 +1251,21 @@ function dato_en_obs($oxml, $id)
 
 
 /**
- * De ser posible inserta un dato en una tabla b·sica sancandolo
+ * De ser posible inserta un dato en una tabla b√°sica sancandolo
  * de las observaciones de un objeto
  *
  * @param object  &$db        Conexion a base de datos
  * @param string  &$obs       Para quejarse
  * @param object  $oxml       Objeto XML
  * @param string  $ntipoobs   Nombre del campo en observaciones
- * @param string  $ntablabas  Nombre de la tabla b·sica
- * @param string  $ntablacaso Nombre de la tabla que relaciona la b·sica
+ * @param string  $ntablabas  Nombre de la tabla b√°sica
+ * @param string  $ntablacaso Nombre de la tabla que relaciona la b√°sica
  *   con caso, si se deja en blanco no intenta agregar registro
- * @param integer $idcaso     IdentificaciÛn del caso
+ * @param integer $idcaso     Identificaci√≥n del caso
  * @param string  $sepv       Separador si vienen varios datos
- * @param string  $ncampo     Nombre de campo en tabla b·sica, '' es ntipoobs
+ * @param string  $ncampo     Nombre de campo en tabla b√°sica, '' es ntipoobs
  *
- * @return integer Id. del dato en la tabla b·sica o 0 si no se encuentra
+ * @return integer Id. del dato en la tabla b√°sica o 0 si no se encuentra
  */
 function dato_basico_en_obs(&$db, &$obs, $oxml,
     $ntipoobs, $ntablabas, $ntablacaso, $idcaso, $sepv = null, $ncampo = ''
@@ -1301,15 +1301,15 @@ function dato_basico_en_obs(&$db, &$obs, $oxml,
 
 
 /**
- * Convierte categoria de cadena a n˙mero (especialmente si tiene el cÛdigo
- * al final entre parÈntesis).
+ * Convierte categoria de cadena a n√∫mero (especialmente si tiene el c√≥digo
+ * al final entre par√©ntesis).
  *
  * @param object &$db  Conexion a base de datos
- * @param string &$obs Colchon para reportar notas de conversiÛn
- * @param string $agr  Cadena con agresiÛn
+ * @param string &$obs Colchon para reportar notas de conversi√≥n
+ * @param string $agr  Cadena con agresi√≥n
  * @param string $pr   Presunto responsable
  *
- * @return IdentificaciÛn de categoria
+ * @return Identificaci√≥n de categoria
  * @see conv_violacion
  */
 function conv_categoria(&$db, &$obs, $agr, $pr)

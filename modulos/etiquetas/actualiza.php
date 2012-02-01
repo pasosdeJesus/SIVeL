@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
 * Actualiza modulo etiquetas
  *
@@ -7,14 +7,14 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2009 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2009 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   $$
  * @link      http://sivel.sf.net
  */
 
-/** Actualiza base de datos después de actualizar fuentes */
+/** Actualiza base de datos despuÃ©s de actualizar fuentes */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once "confv.php";
@@ -75,7 +75,7 @@ $idac = 'eti-d1';
 if (!aplicado($idac)) {
     $r = hace_consulta(
         $db, "INSERT INTO etiqueta (nombre, observaciones) " .
-        " VALUES ('SINCODH:PUBLICO', 'El documento es público')", false
+        " VALUES ('SINCODH:PUBLICO', 'El documento es pÃºblico')", false
     );
     $r = hace_consulta(
         $db, "INSERT INTO etiqueta (nombre, observaciones) " .
@@ -88,9 +88,9 @@ if (!aplicado($idac)) {
 /**
  * Inserta una etiqueta si no esta
  *
- * @param objetc &$db         Conexión a base de datos
+ * @param objetc &$db         ConexiÃ³n a base de datos
  * @param string $etiqueta    Etiqueta por insertar
- * @param string $descripcion Descripción de etiqueta
+ * @param string $descripcion DescripciÃ³n de etiqueta
  *
  * @return void
  */
@@ -137,9 +137,9 @@ if (!aplicado($idac)) {
 $idac = 'eti-er';
 if (!aplicado($idac)) {
     inserta_etiqueta_si_falta(
-        $db, 'ERROR_IMPORTACIÓN', 'Error en importación'
+        $db, 'ERROR_IMPORTACIÃ“N', 'Error en importaciÃ³n'
     );
-    aplicaact($act, $idac, 'Etiqueta para errores de importación');
+    aplicaact($act, $idac, 'Etiqueta para errores de importaciÃ³n');
 }
 
 $idac = 'eti-fi';
@@ -157,7 +157,7 @@ $idac = 'eti-fe';
 if (!aplicado($idac)) {
     agrega_fechas($db, 'etiqueta');
 
-    aplicaact($act, $idac, 'Fecha en tablas básicas');
+    aplicaact($act, $idac, 'Fecha en tablas bÃ¡sicas');
 }
 
 echo "Actualizando indices<br>";

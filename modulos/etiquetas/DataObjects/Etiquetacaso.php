@@ -1,18 +1,18 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Definición de objeto tabla etiquetacaso
+ * DefiniciÃ³n de objeto tabla etiquetacaso
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2007 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2007 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: Etiquetacaso.php,v 1.14.2.2 2011/09/14 14:56:19 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 require_once 'DB/DataObject.php';
@@ -20,20 +20,20 @@ require_once 'HTML/QuickForm/Action.php';
 
 
 /**
- * Acción que responde al boton Agregar Etiqueta
+ * AcciÃ³n que responde al boton Agregar Etiqueta
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  */
 class AgregarEtiqueta extends HTML_QuickForm_Action
 {
     /**
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -49,22 +49,22 @@ class AgregarEtiqueta extends HTML_QuickForm_Action
 }
 
 /**
- * Acción que responde al boton Eliminar
+ * AcciÃ³n que responde al boton Eliminar
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  */
 class EliminaEst extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -76,12 +76,12 @@ class EliminaEst extends HTML_QuickForm_Action
 
 /**
  * Definicion para la tabla etiquetacaso
- * Ver documentación de DataObjects_Caso.
+ * Ver documentaciÃ³n de DataObjects_Caso.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
@@ -130,17 +130,17 @@ class DataObjects_Etiquetacaso extends DB_DataObject_SIVeL
         while ($p->fetch() && $p->id_caso == $_SESSION['basicos_id'] ) {
             $dp = $p->getLink('id_etiqueta');
             $fn = $p->getLink('id_funcionario');
-            $n = 'fobs_' . (int)$p->id_caso . "_" 
-                . (int)$p->id_etiqueta . "_" 
+            $n = 'fobs_' . (int)$p->id_caso . "_"
+                . (int)$p->id_etiqueta . "_"
                 . (int)$p->id_funcionario . "_" . $p->fecha;
             $t .= '<tr><td>' . $p->fecha . '</td><td>'
                 . htmlentities($dp->nombre) . '</td>'
                 . '<td><textarea name="' . $n . '" cols="20" rows="3">'
-                . htmlentities($p->observaciones) . '</textarea></td><td>' 
-                . $fn->nombre . '</td><td><a href="' 
+                . htmlentities($p->observaciones) . '</textarea></td><td>'
+                . $fn->nombre . '</td><td><a href="'
                 . htmlspecialchars($_SERVER['PHP_SELF']) . '?eliminaest='
                 . (int)$p->id_caso . ":" . (int)$p->id_etiqueta . ":"
-                . (int)$p->id_funcionario. ":" . $p->fecha 
+                . (int)$p->id_funcionario. ":" . $p->fecha
                 . '">Eliminar</a></td>';
         }
         $t .= '</table>';
@@ -174,7 +174,7 @@ class DataObjects_Etiquetacaso extends DB_DataObject_SIVeL
         );
         $sel =& $form->createElement(
             'submit',
-            $form->getButtonName('agregarEtiqueta'),'Añadir'
+            $form->getButtonName('agregarEtiqueta'),'AÃ±adir'
         );
         $fm[] =& $sel;
 

@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
-* Inserci髇 de evaluaci髇 y paso a reporte general en un caso
+* Inserci贸n de evaluaci贸n y paso a reporte general en un caso
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @copyright 2007 Dominio p鷅lico. Sin garant韆s.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico. Sin garant韆s.
+ * @author    Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @copyright 2007 Dominio p煤blico. Sin garant铆as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico. Sin garant铆as.
  * @version   CVS: $Id: inscaso-valrepgen.php,v 1.4.2.2 2011/10/18 16:05:05 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Inserci髇 de evaluaci髇 y paso a reporte general en un caso
+ * Inserci贸n de evaluaci贸n y paso a reporte general en un caso
  */
 if (PHP_SAPI !== 'cli') {
     die("Acceso: INTERPRETE DE COMANDOS");
@@ -24,7 +24,7 @@ if (PHP_SAPI !== 'cli') {
 require_once "ambiente.php";
 require_once "PagBasicos.php";
 
-/*** Validaci髇 y Reporte General ***/
+/*** Validaci贸n y Reporte General ***/
 
 ReporteGeneral::reporte(1);
 

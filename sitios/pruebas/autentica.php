@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
- * Prueba Autenticación
+ * Prueba AutenticaciÃ³n
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2010 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2010 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: autentica.php,v 1.6.2.2 2011/10/11 16:33:37 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Prueba autenticación
+ * Prueba autenticaciÃ³n
  */
 
 if (PHP_SAPI !== 'cli') {

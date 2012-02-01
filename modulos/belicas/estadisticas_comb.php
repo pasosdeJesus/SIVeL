@@ -1,21 +1,21 @@
 <?php
-//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
-* Estadísticas victimas combatientes
+* EstadÃ­sticas victimas combatientes
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: estadisticas_comb.php,v 1.13.2.4 2011/10/18 16:05:05 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Estadísticas victimas combatientes
+ * EstadÃ­sticas victimas combatientes
  */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
@@ -33,12 +33,12 @@ require_once 'PagTipoViolencia.php';
 require_once 'ResConsulta.php';
 
 /**
- * Responde a botón Consulta
+ * Responde a botÃ³n Consulta
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  */
 class AccionEstadisticasComb extends HTML_QuickForm_Action
@@ -48,7 +48,7 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
      * Muestra un dato
      *
      * @param string  $t    Selector
-     * @param unknown $np   Nombre de organización
+     * @param unknown $np   Nombre de organizaciÃ³n
      * @param unknown $ndep Departamento
      * @param unknown $nmun Municipio
      * @param array   $res  Vector con otros
@@ -58,13 +58,13 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
      */
     function muestraUno($t, $np, $cdep, $html_nomdep, $cmun, $nommun, $res)
     {
-        if ($t == 'Organización') {
+        if ($t == 'OrganizaciÃ³n') {
             echo "<td>" . htmlentities($np) . "</td>";
         } elseif ($t == 'C. Dep.') {
            echo "<td>" . htmlentities($cdep) . "</td>";
         } elseif ($t == 'Dep.') {
             // Escapado tras consulta
-           echo "<td>" . $html_nomdep . "</td>";  
+           echo "<td>" . $html_nomdep . "</td>";
         } elseif ($t == 'C. Mun.') {
            echo "<td>" . htmlentities($cmun) . "</td>";
         } elseif ($t == 'Mun.') {
@@ -76,10 +76,10 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
     }
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -130,7 +130,7 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
         $tgeo = '';
         $ggeo = '';
         $ogeo = '';
-        $cab = array('Organización');
+        $cab = array('OrganizaciÃ³n');
         if ($pDepartamento != '') {
             $cab[] = 'C. Dep.';
             $cab[] = 'Dep.';
@@ -269,12 +269,12 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
 
 
 /**
- * Formulario de Estadísticas por Combatiente
+ * Formulario de EstadÃ­sticas por Combatiente
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  */
 class PagEstadisticasComb extends HTML_QuickForm_Page
@@ -380,7 +380,7 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
         );
         $sel->setValue(true);
         $ae[] =& $sel;
-        $this->addGroup($ae, null, 'Ubicación', '&nbsp;', false);
+        $this->addGroup($ae, null, 'UbicaciÃ³n', '&nbsp;', false);
 
         $prevnext = array();
         $sel =& $this->createElement(
@@ -392,7 +392,7 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
         $this->addGroup($prevnext, null, '', '&nbsp;', false);
 
         $tpie = "<div align=right><a href=\"index.php\">" .
-            "Menú Principal</a></div>";
+            "MenÃº Principal</a></div>";
         $e =& $this->addElement('header', null, $tpie);
 
 

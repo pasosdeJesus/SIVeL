@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
  * Importa relato
@@ -8,9 +8,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2011 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2011 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: imprelato.php,v 1.2.2.2 2011/10/17 15:01:20 vtamara Exp $
  * @link      http://sivel.sf.net
 */
@@ -23,7 +23,7 @@ if (PHP_SAPI !== 'cli') {
 }
 require_once "ambiente.php";
 
-/*** Validación y Reporte General ***/
+/*** ValidaciÃ³n y Reporte General ***/
 
 $post = array();
 
@@ -50,7 +50,7 @@ $dcaso = objeto_tabla('caso');
 $dcaso->id = 2;
 $dcaso->find(1);
 if ($dcaso->memo == null || $dcaso->memo == '') {
-    die("No logró importar relato como caso 2");
+    die("No logrÃ³ importar relato como caso 2");
 }
 
 $post = array();

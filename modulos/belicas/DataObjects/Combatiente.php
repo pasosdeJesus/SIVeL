@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Objeto asociado a una tabla combatiente
  * Parcialmente generado por DB_DataObject.
@@ -8,12 +8,12 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio p鷅lico. Sin garant韆s.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico. Sin garant韆s.
+ * @author    Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio p煤blico. Sin garant铆as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico. Sin garant铆as.
  * @version   CVS: $Id: Combatiente.php,v 1.12.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: S覮O DEFINICIONES
+ * Acceso: S脫LO DEFINICIONES
  */
 
 require_once 'DB_DataObject_SIVeL.php';
@@ -28,12 +28,12 @@ require_once 'DataObjects/Vinculo_estado.php';
 
 /**
  * Definicion para la tabla combatiente.
- * Ver documentaci髇 de DataObjects_Caso.
+ * Ver documentaci贸n de DataObjects_Caso.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
@@ -69,7 +69,7 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
     );
     var $fb_enumFields = array('sexo');
     var $es_enumOptions = array('sexo' => array('F' => 'Femenino',
-        'M' => 'Masculino', 'S'=> 'SIN INFORMACI覰'
+        'M' => 'Masculino', 'S'=> 'SIN INFORMACI脫N'
     )
     );
     var $fb_addFormHeader = false;
@@ -81,12 +81,12 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
         'sexo'=>'Sexo',
         'id_rango_edad' => 'Rango de Edad',
         'id_sector_social'=> 'Sector Social',
-        'id_vinculo_estado'=> 'V韓culo Estado',
-        'id_filiacion'=> 'Filiaci髇 Pol韙ica',
+        'id_vinculo_estado'=> 'V铆nculo Estado',
+        'id_filiacion'=> 'Filiaci贸n Pol铆tica',
         'id_profesion'=> 'Profesion',
-        'id_organizacion'=> 'Organizaci髇 Social',
-        'id_organizacion_armada'=> 'Organizaci髇 Armada',
-        'id_resultado_agresion'=> 'Resultado Agresi髇'
+        'id_organizacion'=> 'Organizaci贸n Social',
+        'id_organizacion_armada'=> 'Organizaci贸n Armada',
+        'id_resultado_agresion'=> 'Resultado Agresi贸n'
         );
 
     /**
@@ -95,7 +95,7 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
      * @param string $table Tabla
      * @param string $key   Llave
      *
-     * @return opci髇 enumeada asociada a la llave.
+     * @return opci贸n enumeada asociada a la llave.
      */
     function enumCallback($table, $key)
     {
@@ -115,9 +115,9 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
     }
 
     /**
-     * Campos que pueden ser SIN INFORMACION y el c骴igo corresp
+     * Campos que pueden ser SIN INFORMACION y el c贸digo corresp
      *
-     * @return array Arreglo de campos que pueden ser sin informaci髇
+     * @return array Arreglo de campos que pueden ser sin informaci贸n
      */
     static function camposSinInfo()
     {
@@ -240,7 +240,7 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
 
     /**
      * Convierte registro a relato (arreglo de elementos) que agrega a $ar
-     * dad son datos adicionales que pueden requerirse para la conversi髇.
+     * dad son datos adicionales que pueden requerirse para la conversi贸n.
      *
      * @param array &$ar Arreglo
      * @param array $dad Arreglo

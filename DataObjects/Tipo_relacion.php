@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Objeto asociado a una tabla de la base de datos.
  * Parcialmente generado por DB_DataObject.
@@ -8,12 +8,12 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2009 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2009 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: Tipo_relacion.php,v 1.12.2.1 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 /**
@@ -28,7 +28,7 @@ class DataObjects_Tipo_relacion extends DataObjects_Basica
     var $dirigido;                        // boolean
     var $observaciones;                   // varchar(-1)  not_null
 
-    var $nom_tabla = 'Tipo de Relación';
+    var $nom_tabla = 'Tipo de RelaciÃ³n';
 
     var $fb_preDefOrder = array(
         'id',
@@ -53,9 +53,9 @@ class DataObjects_Tipo_relacion extends DataObjects_Basica
 
 
     /**
-     * Identificacion de registro 'SIN INFORMACIÓN'
+     * Identificacion de registro 'SIN INFORMACIÃ“N'
      *
-     * @return integer Id del registro SIN INFORMACIÓN
+     * @return integer Id del registro SIN INFORMACIÃ“N
      */
     static function idSinInfo()
     {

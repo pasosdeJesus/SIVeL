@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Objeto asociado a una tabla de la base de datos.
  * Parcialmente generado por DB_DataObject.
@@ -8,12 +8,12 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2009 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2009 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: Relacion_personas.php,v 1.14.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 /**
@@ -24,21 +24,21 @@ require_once 'HTML/QuickForm/Action.php';
 
 
 /**
- * Acción que responde al botor Agregar Familiar
+ * AcciÃ³n que responde al botor Agregar Familiar
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  */
 class AgregarFamiliar extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -57,12 +57,12 @@ class AgregarFamiliar extends HTML_QuickForm_Action
 
 /**
  * Definicion para la tabla relacion_personas
- * Ver documentación de DataObjects_Caso.
+ * Ver documentaciÃ³n de DataObjects_Caso.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
@@ -91,9 +91,9 @@ class DataObjects_Relacion_personas extends DB_DataObject_SIVeL
     var $fb_fieldLabels = array();
 
     /**
-     * Campos que pueden ser SIN INFORMACION y el código correspondiente
+     * Campos que pueden ser SIN INFORMACION y el cÃ³digo correspondiente
      *
-     * @return array Arreglo de campos que pueden ser sin información
+     * @return array Arreglo de campos que pueden ser sin informaciÃ³n
      */
     static function camposSinInfo()
     {
@@ -155,7 +155,7 @@ class DataObjects_Relacion_personas extends DB_DataObject_SIVeL
             $comovic = "";
             $comofam = "";
             enlaces_casos_persona(
-                $db, $_SESSION['basicos_id'], 
+                $db, $_SESSION['basicos_id'],
                 $dp->id, $comovic, $comofam
             );
             if ($comovic != '' && $comofam != '') {
@@ -176,11 +176,11 @@ class DataObjects_Relacion_personas extends DB_DataObject_SIVeL
 
         $fm = array();
         $sel =& $form->createElement('text', 'fnombres', 'fnombres');
-        $sel->updateAttributes( array('id' => "nombres-relacionado"));
+        $sel->updateAttributes(array('id' => "nombres-relacionado"));
         $sel->setSize(10);
         $fm[] =& $sel;
         $sel =& $form->createElement('text', 'fapellidos', 'fapellidos');
-        $sel->updateAttributes( array('id' => "apellidos-relacionado"));
+        $sel->updateAttributes(array('id' => "apellidos-relacionado"));
         $sel->setSize(10);
         $fm[] =& $sel;
         $sel =& $form->createElement('select', 'ftipo', 'ftipo', array());
@@ -209,7 +209,7 @@ class DataObjects_Relacion_personas extends DB_DataObject_SIVeL
 
         $sel =& $form->createElement(
             'submit',
-            $form->getButtonName('agregarFamiliar'),'Añadir'
+            $form->getButtonName('agregarFamiliar'),'AÃ±adir'
         );
         $fm[] =& $sel;
 

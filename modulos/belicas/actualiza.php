@@ -1,20 +1,20 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
-* Actualiza modulo bélicas
+* Actualiza modulo bÃ©licas
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2009 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2009 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   $$
  * @link      http://sivel.sf.net
  */
 
-/** Actualiza base de datos después de actualizar fuentes */
+/** Actualiza base de datos despuÃ©s de actualizar fuentes */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once "confv.php";
@@ -60,20 +60,20 @@ if (!aplicado($idac)) {
     )", false
 );
 
-    aplicaact($act, $idac, 'Tablas bélicas');
+    aplicaact($act, $idac, 'Tablas bÃ©licas');
 }
 
 $idac = 'sbel-2';
 if (!aplicado($idac)) {
 
     hace_consulta($db, "INSERT INTO opcion (id_opcion, descripcion, id_mama, nomid) VALUES ('52', 'V. Combatientes', '50', 'opcion?num=200')", false);
-    hace_consulta($db, "INSERT INTO opcion VALUES ('46', 'Revista Bélicas', 40, 'consulta_web?mostrar=revista&categoria=belicas&sincampos=caso_id')", false);
-    hace_consulta($db, "INSERT INTO opcion VALUES ('47', 'Revista Memo Bélicas', 40, 'consulta_web?mostrar=revista&categoria=belicas&sincampos=caso_id,m_victimas,m_presponsables,m_tipificacion,m_fuentes')", false);
-    hace_consulta($db, "INSERT INTO opcion VALUES ('48', 'Revista NO Bélicas', 40, 'consulta_web?mostrar=revista&categoria=nobelicas&sincampos=caso_id')", false);
-    hace_consulta($db, "INSERT INTO opcion VALUES ('49', 'Revista Memo NO Bélicas', 40, 'consulta_web?mostrar=revista&categoria=nobelicas&sincampos=caso_id,m_victimas, m_presponsables, m_tipificacion, m_fuentes')", false);
+    hace_consulta($db, "INSERT INTO opcion VALUES ('46', 'Revista BÃ©licas', 40, 'consulta_web?mostrar=revista&categoria=belicas&sincampos=caso_id')", false);
+    hace_consulta($db, "INSERT INTO opcion VALUES ('47', 'Revista Memo BÃ©licas', 40, 'consulta_web?mostrar=revista&categoria=belicas&sincampos=caso_id,m_victimas,m_presponsables,m_tipificacion,m_fuentes')", false);
+    hace_consulta($db, "INSERT INTO opcion VALUES ('48', 'Revista NO BÃ©licas', 40, 'consulta_web?mostrar=revista&categoria=nobelicas&sincampos=caso_id')", false);
+    hace_consulta($db, "INSERT INTO opcion VALUES ('49', 'Revista Memo NO BÃ©licas', 40, 'consulta_web?mostrar=revista&categoria=nobelicas&sincampos=caso_id,m_victimas, m_presponsables, m_tipificacion, m_fuentes')", false);
     hace_consulta($db, "INSERT INTO opcion (id_opcion, descripcion, id_mama, nomid) VALUES ('54', 'Colectivas con Rotulos de Rep. Cons.', '50', 'opcion?num=101')", false);
 
-    aplicaact($act, $idac, 'Opciones de bélicas en menu');
+    aplicaact($act, $idac, 'Opciones de bÃ©licas en menu');
 }
 
 $idac = 'sbel-3';

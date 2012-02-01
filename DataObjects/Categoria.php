@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Objeto asociado a una tabla de la base de datos.
  * Parcialmente generado por DB_DataObject.
@@ -8,12 +8,12 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio p鷅lico. Sin garant韆s.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico. Sin garant韆s.
+ * @author    Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio p煤blico. Sin garant铆as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico. Sin garant铆as.
  * @version   CVS: $Id: Categoria.php,v 1.18.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: S覮O DEFINICIONES
+ * Acceso: S脫LO DEFINICIONES
  */
 
 /**
@@ -23,12 +23,12 @@ require_once 'DataObjects/Basica.php';
 
 /**
  * Definicion para la tabla categoria.
- * Ver documentaci髇 de DataObjects_Basica.
+ * Ver documentaci贸n de DataObjects_Basica.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Basica
  */
@@ -60,14 +60,14 @@ class DataObjects_Categoria extends DataObjects_Basica
         'fechadeshabilitacion', 'id_supracategoria', 'col_rep_consolidado',
         'contada_en', 'tipocat'
     );
-    var $fb_fieldLabels = array('id' => 'C骴igo de Categor韆',
+    var $fb_fieldLabels = array('id' => 'C贸digo de Categor铆a',
                 'id_supracategoria' => 'Supracategoria',
                 'id_tipo_violencia' => 'Tipo de Violencia',
                 'nombre' => 'Nombre',
-                'fechacreacion' => 'Fecha de Creaci髇',
-                'fechadeshabilitacion' => 'Fecha de Deshabilitaci髇',
+                'fechacreacion' => 'Fecha de Creaci贸n',
+                'fechadeshabilitacion' => 'Fecha de Deshabilitaci贸n',
                 'col_rep_consolidado' => 'Columna en Rep. Consolidado',
-                'contada_en' => 'Contada tambi閚 como Categoria',
+                'contada_en' => 'Contada tambi茅n como Categoria',
                 'tipocat' => 'Tipo de Categoria'
             );
     var $fb_selectAddEmpty = array('fechadeshabilitacion');
@@ -134,14 +134,14 @@ class DataObjects_Categoria extends DataObjects_Basica
     }
 
      /**
-     * Requerido por versiones de FormBuilder de 0.10, hasta versi髇 1.121 en
+     * Requerido por versiones de FormBuilder de 0.10, hasta versi贸n 1.121 en
      * el CVS de FormBuilder.php.
      * Cambio sucitado por bug #3469.
      *
      * @param string $table Tabla
      * @param string $key   Llave
      *
-     * @return opci髇 enumeada asociada a la llave.
+     * @return opci贸n enumeada asociada a la llave.
      */
     function enumCallback($table, $key)
     {
@@ -187,8 +187,8 @@ class DataObjects_Categoria extends DataObjects_Basica
         $s->_options = array();
         $q = "SELECT tipo_violencia.id || ':' || supracategoria.id,
             supracategoria.nombre || ' (' || tipo_violencia.nombre || ')'
-            FROM supracategoria, tipo_violencia 
-            WHERE tipo_violencia.id=supracategoria.id_tipo_violencia";
+            FROM supracategoria, tipo_violencia
+            WHERE tipo_violencia.id = supracategoria.id_tipo_violencia";
         $op = $db->getAssoc($q);
         sin_error_pear($op);
         $r = $s->loadArray(htmlentities_array($op));
@@ -207,10 +207,10 @@ class DataObjects_Categoria extends DataObjects_Basica
     }
 
     /**
-     * Para evitar que intente numeraci髇 autom醫ica cuando se
+     * Para evitar que intente numeraci贸n autom谩tica cuando se
      * agregan categorias
      *
-     * @return array Indica no numerar autom醫icamente
+     * @return array Indica no numerar autom谩ticamente
      */
     function sequenceKey()
     {

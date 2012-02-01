@@ -1,8 +1,8 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
- * Presenta registros de una tabla básica
+ * Presenta registros de una tabla bÃ¡sica
  * Referencias:
  * - http://www.21st.de/downloads/rapidprototyping.pdf
  * - http://pear.php.net/manual/en/package.database.db-dataobject.intro-purpose.php
@@ -11,15 +11,15 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: tabla.php,v 1.48.2.2 2011/10/18 16:05:03 vtamara Exp $
  * @link      http://sivel.sf.net
  */
 
 /**
- * Presenta registros de una tabla básica
+ * Presenta registros de una tabla bÃ¡sica
  */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
@@ -34,7 +34,7 @@ $db = autenticaUsuario($dsn, $accno, $aut_usuario, 11);
  * Muestra un registro
  *
  * @param object &$d     DataObject con registro por mostrar
- * @param string $titulo Título
+ * @param string $titulo TÃ­tulo
  * @param string $k      Llave del elemento d
  *
  * @return array ($pk, $t) donde $pk es llave primaria y $t es texto por mostrar
@@ -49,7 +49,7 @@ function registro(&$d, $titulo, $k)
         $psep = "";
         $p = " (";
         foreach ($titulo as $c) {
-            // getLink no soporta llaves foraneas múltiples
+            // getLink no soporta llaves foraneas mÃºltiples
             // Debemos hacerlo a mano en caso de clase y categoria
             $ds = null;
             if ($c == 'id_municipio') {
@@ -96,14 +96,14 @@ function registro(&$d, $titulo, $k)
 
 
 /**
- * Presenta rama de árbol.
+ * Presenta rama de Ã¡rbol.
  * En la tabla se requiere que sea una llave simple con nombre id
  * y que el elemento papa se llame id_papa
  *
  * @param string  $tabla   Nombre de tabla
  * @param string  $titulo  Titulo por mostrar
- * @param string  $idpapa  Id. de papá
- * @param boolean $arbol   Es árbol?
+ * @param string  $idpapa  Id. de papÃ¡
+ * @param boolean $arbol   Es Ã¡rbol?
  * @param boolean $indenta Cadena con espacios para indentar
  *
  * @return void
@@ -162,7 +162,7 @@ $tabla = var_escapa($_GET['tabla'], $db);
 actGlobales();
 $u = html_menu_toma_url($GLOBALS['menu_tablas_basicas']);
 if (!in_array($tabla, $u)) {
-    die("La tabla '$tabla' no es básica");
+    die("La tabla '$tabla' no es bÃ¡sica");
 }
 
 
@@ -197,7 +197,7 @@ if (isset($d->fb_linkDisplayFields)) {
 }
 
 $vd = get_object_vars($d);
-if (in_array('id_papa', array_keys($vd))) { /** jerarquía */
+if (in_array('id_papa', array_keys($vd))) { /** jerarquÃ­a */
     rama($tabla, $titulo, null, true, "");
 } else { /** Lineal */
     if (is_array($titulo)) {
@@ -225,7 +225,7 @@ echo '<pr>&nbsp;</pr><table border="0" width="100%" ' .
     '<td align = "left">' .
     '<a href="detalle.php?tabla=' . htmlentities($tabla) . '">Nuevo</a>' .
     '</td><td align="right">' .
-    '<a href="index.php"><b>Menú Principal</b></a>' .
+    '<a href="index.php"><b>MenÃº Principal</b></a>' .
     '</td></tr></table>';
 pie_envia();
 

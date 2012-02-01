@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
  * Reporte relato
@@ -8,9 +8,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2011 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2011 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: relato.php,v 1.5.2.1 2011/09/14 14:56:19 vtamara Exp $
  * @link      http://sivel.sf.net
 */
@@ -25,7 +25,7 @@ require_once "ambiente.php";
 require_once "misc.php";
 
 
-/*** Validación y Relato ***/
+/*** ValidaciÃ³n y Relato ***/
 
 hace_consulta($db, "INSERT INTO rango_edad_comunidad (id_caso, id_grupoper, id_rango) VALUES ('1', '1', '6');", false, false);
 

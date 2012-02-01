@@ -1,34 +1,34 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Objeto asociado a una tabla básica típica de la base de datos.
+ * Objeto asociado a una tabla bÃ¡sica tÃ­pica de la base de datos.
  * Parcialmente generado por DB_DataObject.
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2009 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2009 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: Basica.php,v 1.12.2.2 2011/10/22 12:55:07 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 /**
- * Definicion para una tabla básica.
+ * Definicion para una tabla bÃ¡sica.
  */
 require_once 'DB_DataObject_SIVeL.php';
 
 /**
- * Definicion para una tabla básica.
- * Ver documentación de DataObjects_Caso.
+ * Definicion para una tabla bÃ¡sica.
+ * Ver documentaciÃ³n de DataObjects_Caso.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
@@ -43,17 +43,17 @@ class DataObjects_Basica extends DB_DataObject_SIVeL
     var $fechacreacion;                 // date(4)
     var $fechadeshabilitacion;          // date(4)
 
-    var $nom_tabla = 'Básica';
+    var $nom_tabla = 'BÃ¡sica';
 
     var $fb_linkDisplayFields = array('nombre');
     var $fb_select_display_field = 'nombre';
     var $fb_selectAddEmpty = array('fechadeshabilitacion');
     var $fb_hidePrimaryKey = true;
     var $fb_fieldLabels = array(
-        'id' => 'Identificación',
+        'id' => 'IdentificaciÃ³n',
         'nombre' => 'Nombre',
-        'fechacreacion' => 'Fecha de creación',
-        'fechadeshabilitacion' => 'Fecha de deshabilitación',
+        'fechacreacion' => 'Fecha de creaciÃ³n',
+        'fechadeshabilitacion' => 'Fecha de deshabilitaciÃ³n',
     );
     var $fb_preDefOrder = array(
         'id',
@@ -125,9 +125,9 @@ class DataObjects_Basica extends DB_DataObject_SIVeL
     }
 
     /**
-     * Identificacion de registro 'SIN INFORMACIÓN'
+     * Identificacion de registro 'SIN INFORMACIÃ“N'
      *
-     * @return integer Id del registro SIN INFORMACIÓN
+     * @return integer Id del registro SIN INFORMACIÃ“N
      */
     static function idSinInfo()
     {
@@ -138,10 +138,10 @@ class DataObjects_Basica extends DB_DataObject_SIVeL
      * Validaciones adicionales a valores pasados por el formulario y que
      * se pretenden agregar a la base
      *
-     * @param array $values  Valores pasados por formulario de la tabla básica
+     * @param array $values  Valores pasados por formulario de la tabla bÃ¡sica
      *
      * @return bool da verdadero si y solo si pasa validaciones adicionales, si
-     * no pasa validaciones debe presentar razón con echo
+     * no pasa validaciones debe presentar razÃ³n con echo
      */
     static function masValidaciones($values)
     {

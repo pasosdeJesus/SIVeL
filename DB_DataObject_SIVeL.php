@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Clase base para objetos que representan registros/tablas
  *
@@ -7,12 +7,12 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @copyright 2009 Dominio p鷅lico. Sin garant韆s.
- * @license   Dominio p鷅lico. Sin garant韆s.
+ * @author    Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @copyright 2009 Dominio p煤blico. Sin garant铆as.
+ * @license   Dominio p煤blico. Sin garant铆as.
  * @version   CVS: $Id: DB_DataObject_SIVeL.php,v 1.27.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: S覮O DEFINICIONES
+ * Acceso: S脫LO DEFINICIONES
  */
 
 require_once "DB/DataObject.php";
@@ -25,15 +25,15 @@ require_once $_SESSION['dirsitio'] . "/conf.php";
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
  */
 abstract class DB_DataObject_SIVeL extends DB_DataObject
 {
 
     /**
-     * Nombre de la tabla en SQL y min鷖culas
+     * Nombre de la tabla en SQL y min煤sculas
      */
     var $__table = 'nom_tabla';
 
@@ -53,7 +53,7 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
     }
 
     /**
-     * Retorna un valor. Est醫ico.
+     * Retorna un valor. Est谩tico.
      *
      * @param mixed $k Llave
      * @param mixed $v Valor
@@ -71,13 +71,13 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
 
     /**
      * Funciona legada
-     * Como ocurria en FormBuilder 0.10, hasta versi髇 1.121 en el
+     * Como ocurria en FormBuilder 0.10, hasta versi贸n 1.121 en el
      * CVS de FormBuilder.php. Cambio sucitado por bug #3469
      *
      * @param string $table Tabla
      * @param string $key   Llave
      *
-     * @return string opci髇 enumerada asociada a la llave.
+     * @return string opci贸n enumerada asociada a la llave.
      */
     function enumCallback($table, $key)
     {
@@ -103,9 +103,9 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
 
 
     /**
-     * Identificacion de registro 'SIN INFORMACI覰'
+     * Identificacion de registro 'SIN INFORMACI脫N'
      *
-     * @return integer C骴igo del registro SIN INFORMACI覰
+     * @return integer C贸digo del registro SIN INFORMACI脫N
      **/
     static function idSinInfo()
     {
@@ -114,9 +114,9 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
 
 
     /**
-     * Campos que pueden ser SIN INFORMACION y el c骴igo correspondiente
+     * Campos que pueden ser SIN INFORMACION y el c贸digo correspondiente
      *
-     * @return array Arreglo de campos que pueden ser sin informaci髇
+     * @return array Arreglo de campos que pueden ser sin informaci贸n
      */
     static function camposSinInfo()
     {
@@ -211,7 +211,7 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
      *
      * @param array &$ar Arreglo con datos que se completan para convertir
      * posteriormente a XML
-     * @param array $dad Datos adicionales par la conversi髇.
+     * @param array $dad Datos adicionales par la conversi贸n.
      *
      * @return void  No retorna un dato pero modifica $ar
      */

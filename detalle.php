@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
  * Permite editar o agregar registros a una tabla
@@ -9,9 +9,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: detalle.php,v 1.60.2.5 2011/10/22 14:57:56 vtamara Exp $
  * @link      http://sivel.sf.net
 */
@@ -36,7 +36,7 @@ $tabla = var_req_escapa('tabla');
 actGlobales();
 $u = html_menu_toma_url($GLOBALS['menu_tablas_basicas']);
 if (!in_array($tabla, $u)) {
-    die("La tabla '$tabla' no es básica");
+    die("La tabla '$tabla' no es bÃ¡sica");
 }
 $d = objeto_tabla($tabla);
 $db = $d->getDatabaseConnection();
@@ -49,7 +49,7 @@ if (isset($_GET['id'])) {
         $d->$n = $r[1];
     }
     if ($d->find()!=1) {
-        die("Se esperaba un sólo registro");
+        die("Se esperaba un sÃ³lo registro");
     }
     $d->fetch();
 }
@@ -66,7 +66,7 @@ $f->setRequiredNote($mreq);
 
 $ed = array();
 if (!isset($_GET['id'])) {
-    $e =& $f->createElement('submit', 'añadir', 'Añadir');
+    $e =& $f->createElement('submit', 'aÃ±adir', 'AÃ±adir');
     $ed[] =& $e;
 } else {
     $e =& $f->createElement('submit', 'actualizar', 'Actualizar');
@@ -78,7 +78,7 @@ if (!isset($_GET['id'])) {
 $f->addGroup($ed, null, '', '&nbsp;', false);
 $f->addElement(
     'header', null,
-    '<div align = "right"><a href = "index.php">Menú Principal</a></div>'
+    '<div align = "right"><a href = "index.php">MenÃº Principal</a></div>'
 );
 
 
@@ -86,11 +86,11 @@ if ($f->validate()) {
     if (!$d->masValidaciones($f->_submitValues)) {
         echo "No pasaron validaciones adicionales";
     } else if (!verifica_sin_CSRF($f->_submitValues)) {
-        die("Datos enviados no pasaron verificación CSRF");
+        die("Datos enviados no pasaron verificaciÃ³n CSRF");
     } else {
         $res = null;
         if (isset($f->_submitValues['actualizar'])
-            || isset($f->_submitValues['añadir'])
+            || isset($f->_submitValues['aÃ±adir'])
         ) {
             if (isset($f->_submitValues['actualizar'])) {
                 $b->forceQueryType(
@@ -111,11 +111,11 @@ if ($f->validate()) {
         if (PEAR::isError($res)) {
             echo_esc($res->getMessage());
         } else {
-            // prevenimos HRHS 
+            // prevenimos HRHS
             // http://www.securiteam.com/securityreviews/5WP0E2KFGK.html
             $ntabla = str_replace(array("\n", "\r"), array("", ""), $tabla);
 
-            header('Location: tabla.php?tabla=' . $ntabla); 
+            header('Location: tabla.php?tabla=' . $ntabla);
         }
     }
 }

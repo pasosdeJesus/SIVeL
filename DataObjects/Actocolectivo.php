@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Objeto asociado a una tabla de la base de datos.
  * Parcialmente generado por DB_DataObject.
@@ -8,12 +8,12 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: Actocolectivo.php,v 1.11.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 /**
@@ -23,12 +23,12 @@ require_once 'DB_DataObject_SIVeL.php';
 
 /**
  * Definicion para la tabla actocolectivo
- * Ver documentación de DataObjects_Caso.
+ * Ver documentaciÃ³n de DataObjects_Caso.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
@@ -72,7 +72,7 @@ class DataObjects_Actocolectivo extends DB_DataObject_SIVeL
 
         $t = '<table id="tablaActos" width="100%"><thead><tr>' .
             '<th>P. Responsable</th><th>Categoria</th>' .
-            '<th>Víctima Colectiva</th><th></th></thead><tbody>';
+            '<th>VÃ­ctima Colectiva</th><th></th></thead><tbody>';
         $p = clone $formbuilder->_do;
         $db = $p->getDatabaseConnection();
         $p->id_p_responsable = null;
@@ -83,14 +83,14 @@ class DataObjects_Actocolectivo extends DB_DataObject_SIVeL
             $pp =& $p->getLink('id_p_responsable');
             $ca =& $p->getLink('id_categoria');
             $vc =& $p->getLink('id_grupoper');
-            $t .= "<tr><td>" 
+            $t .= "<tr><td>"
                 . htmlentities($pp->nombre)
                 . "</td><td>" . htmlentities($ca->id_tipo_violencia)
                 . (int)$ca->id . " "
-                . htmlentities($ca->nombre) . "</td><td>" 
+                . htmlentities($ca->nombre) . "</td><td>"
                 . htmlentities($vc->nombre) . "</td>" .
-                "<td><a href='{$_SERVER['PHP_SELF']}?eliminaactocolectivo=" 
-                . (int)$p->id_p_responsable . ":" 
+                "<td><a href='{$_SERVER['PHP_SELF']}?eliminaactocolectivo="
+                . (int)$p->id_p_responsable . ":"
                 . (int)$p->id_categoria . ":"
                 . (int)$p->id_grupoper
                 . "'>Eliminar</a></td>";

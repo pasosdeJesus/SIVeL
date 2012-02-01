@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Página del multi-formulario para consulta externa
+ * PÃ¡gina del multi-formulario para consulta externa
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2005 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2005 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: PagPresentaRes.php,v 1.46.2.3 2011/10/11 16:33:37 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 /**
- * Pestaña Presentación de Resultados de la consulta externa
+ * PestaÃ±a PresentaciÃ³n de Resultados de la consulta externa
  */
 require_once $_SESSION['dirsitio'] . "/conf.php";
 require_once 'PagBaseSimple.php';
@@ -27,8 +27,8 @@ require_once 'HTML/QuickForm/Renderer/Default.php';
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
 */
 class Doble_Renderer extends HTML_QuickForm_Renderer_Default
@@ -37,16 +37,16 @@ class Doble_Renderer extends HTML_QuickForm_Renderer_Default
 }
 
 /**
- * Presentación de resultados.
- * Ver documentación de funciones en clase base.
- * A diferencia de las demás páginas del formulario de captura, esta sólo
- * se presenta para búsquedas y no mantiene la información en la base de
- * datos sino en variables de sesión.
+ * PresentaciÃ³n de resultados.
+ * Ver documentaciÃ³n de funciones en clase base.
+ * A diferencia de las demÃ¡s pÃ¡ginas del formulario de captura, esta sÃ³lo
+ * se presenta para bÃºsquedas y no mantiene la informaciÃ³n en la base de
+ * datos sino en variables de sesiÃ³n.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      PagBaseSimple
  */
@@ -59,13 +59,13 @@ class PagPresentaRes extends PagBaseSimple
 
     /* Objetos DB_DataObject_FormBuilder */
 
-    /** Opciones de presentación */
+    /** Opciones de presentaciÃ³n */
     var $opciones;
 
 
     /**
      * Constructora.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param string $nomForma Nombre
      * @param string $opciones Opciones
@@ -90,9 +90,9 @@ class PagPresentaRes extends PagBaseSimple
 
     /**
      * Agrega elementos al formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle &$db    Conexión a base de datos
+     * @param handle &$db    ConexiÃ³n a base de datos
      * @param string $idcaso Id del caso
      *
      * @return void
@@ -111,7 +111,7 @@ class PagPresentaRes extends PagBaseSimple
         }
         $x =& $this->createElement(
             'radio', 'ordenar', 'ubicacion',
-            'Ubicación', 'ubicacion'
+            'UbicaciÃ³n', 'ubicacion'
         );
         $ae[] =& $x;
         if ($ult['ordenar'] == 'ubicacion') {
@@ -119,7 +119,7 @@ class PagPresentaRes extends PagBaseSimple
         }
         $x =& $this->createElement(
             'radio', 'ordenar', 'codigo',
-            'Código', 'codigo'
+            'CÃ³digo', 'codigo'
         );
         $ae[] =& $x;
         if ($ult['ordenar'] == 'codigo') {
@@ -216,7 +216,7 @@ class PagPresentaRes extends PagBaseSimple
             $prevnext[] =& $sel;
         };
 
-        if (in_array(42, $this->opciones)) { // Podría ver rep. gen?
+        if (in_array(42, $this->opciones)) { // PodrÃ­a ver rep. gen?
             $sel =& $this->createElement(
                 'checkbox',
                 'm_fuentes', 'Fuentes', 'Fuentes'
@@ -278,9 +278,9 @@ class PagPresentaRes extends PagBaseSimple
 
     /**
      * Llena valores del formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle  &$db    Conexión a base de datos
+     * @param handle  &$db    ConexiÃ³n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -292,9 +292,9 @@ class PagPresentaRes extends PagBaseSimple
 
     /**
      * Elimina registros de tablas relacionadas con caso de este formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle  &$db    Conexión a base de datos
+     * @param handle  &$db    ConexiÃ³n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -305,7 +305,7 @@ class PagPresentaRes extends PagBaseSimple
     }
 
     /**
-    * Suponemos que un formulario vació es válido pero no agrega
+    * Suponemos que un formulario vaciÃ³ es vÃ¡lido pero no agrega
     * ni actualiza info en b.d
     *
     * @param array &$valores Valores enviados por usuario
@@ -322,12 +322,12 @@ class PagPresentaRes extends PagBaseSimple
 
     /**
      * Prepara consulta SQL para buscar datos de este formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param string &$w       Consulta que se construye
      * @param string &$t       Tablas
-     * @param string &$db      Conexión a base de datos
-     * @param object $idcaso   Identificación de caso
+     * @param string &$db      ConexiÃ³n a base de datos
+     * @param object $idcaso   IdentificaciÃ³n de caso
      * @param string &$subcons Subconsulta
      *
      * @return void

@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Página del multi-formulario para capturar caso (captura_caso.php).
+ * PÃ¡gina del multi-formulario para capturar caso (captura_caso.php).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: PagBasicos.php,v 1.110.2.3 2011/10/13 13:41:06 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
 */
 
 /**
- * Datos básicos del multi-formulario capturar caso
+ * Datos bÃ¡sicos del multi-formulario capturar caso
  */
 require_once 'HTML/QuickForm/Action.php';
 require_once 'PagBaseSimple.php';
@@ -37,12 +37,12 @@ require_once 'HTML/Javascript.php';
 
 
 /**
- * Acción para avanzar a siguienete.
+ * AcciÃ³n para avanzar a siguienete.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscarId
  */
@@ -50,10 +50,10 @@ class Siguiente extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -76,22 +76,22 @@ class Siguiente extends HTML_QuickForm_Action
 
 
 /**
- * Acción para retroceder.
+ * AcciÃ³n para retroceder.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscarId
  */
 class Anterior extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -117,12 +117,12 @@ class Anterior extends HTML_QuickForm_Action
 
 
 /**
- * Acción para iniciar caso nuevo.
+ * AcciÃ³n para iniciar caso nuevo.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscarId
  */
@@ -130,10 +130,10 @@ class CasoNuevo extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -150,12 +150,12 @@ class CasoNuevo extends HTML_QuickForm_Action
 
 
 /**
- * Acción para terminar salvando (Menú)
+ * AcciÃ³n para terminar salvando (MenÃº)
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscarId
  */
@@ -163,10 +163,10 @@ class Terminar extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -195,12 +195,12 @@ class Terminar extends HTML_QuickForm_Action
 
 
 /**
- * Acción para terminar sin salvar.
+ * AcciÃ³n para terminar sin salvar.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscarId
  */
@@ -208,10 +208,10 @@ class TerminarSinSalvar extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -223,12 +223,12 @@ class TerminarSinSalvar extends HTML_QuickForm_Action
 }
 
 /**
- * Acción para eliminar caso.
+ * AcciÃ³n para eliminar caso.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscarId
  */
@@ -236,10 +236,10 @@ class EliminaCaso extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -248,7 +248,7 @@ class EliminaCaso extends HTML_QuickForm_Action
         $htmljs = new HTML_Javascript();
         echo $htmljs->startScript();
         echo $htmljs->confirm(
-            'Confirma eliminación del caso ' .
+            'Confirma eliminaciÃ³n del caso ' .
             (int)$_SESSION['basicos_id'] . '?', 'eliminar'
         );
         echo $htmljs->write('eliminar', true);
@@ -263,12 +263,12 @@ class EliminaCaso extends HTML_QuickForm_Action
 
 
 /**
- * Acción para hacer una busqueda.
+ * AcciÃ³n para hacer una busqueda.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscarId
  */
@@ -277,10 +277,10 @@ class Busqueda extends HTML_QuickForm_Action
     /**
      * Prepara consulta
      *
-     * @param object &$page  Página
+     * @param object &$page  PÃ¡gina
      * @param object &$dCaso Registro caso DataObject
      *
-     * @return array consulta, conexión a base de datos, partes de consulta
+     * @return array consulta, conexiÃ³n a base de datos, partes de consulta
      */
     static function prepConsulta(&$page, &$dCaso)
     {
@@ -296,7 +296,7 @@ class Busqueda extends HTML_QuickForm_Action
 
         $dCaso->id = $GLOBALS['idbus'];
         if ($dCaso->find() == 0) {
-            die("Problema debería haber un registro en caso con id = " .
+            die("Problema deberÃ­a haber un registro en caso con id = " .
                 $GLOBALS['idbus']
             );
         }
@@ -349,10 +349,10 @@ class Busqueda extends HTML_QuickForm_Action
 
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -413,12 +413,12 @@ class Busqueda extends HTML_QuickForm_Action
 }
 
 /**
- * Acción para presentar reporte general.
+ * AcciÃ³n para presentar reporte general.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscarId
  */
@@ -428,14 +428,14 @@ class ReporteGeneral extends HTML_QuickForm_Action
     /**
      * Presenta reporte general de un caso
      *
-     * @param integer $idcaso Número de caso
+     * @param integer $idcaso NÃºmero de caso
      *
      * @return void
      */
     static function reporte($idcaso)
     {
         echo "<html><head>";
-        echo "<title>Reporte General del caso " . (int)$idcaso 
+        echo "<title>Reporte General del caso " . (int)$idcaso
             . "</title></head>";
         echo "<body>";
         $r = valida_caso($idcaso);
@@ -454,17 +454,17 @@ class ReporteGeneral extends HTML_QuickForm_Action
     }
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
     function perform(&$page, $actionName)
     {
         if (($pdest = $page->controller->getPage($actionName)) == null) {
-            die("No existe en el controlador la página $actionName");
+            die("No existe en el controlador la pÃ¡gina $actionName");
         }
         if ($page->procesa($page->_submitValues)) {
             $this->reporte($_SESSION['basicos_id']);
@@ -476,29 +476,29 @@ class ReporteGeneral extends HTML_QuickForm_Action
 
 
 /**
- * Acción para saltar.
+ * AcciÃ³n para saltar.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscarId
  */
 class Salta extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
     function perform(&$page, $actionName)
     {
         if (($pdest = $page->controller->getPage($actionName)) == null) {
-            die("No existe en el controlador la página $actionName");
+            die("No existe en el controlador la pÃ¡gina $actionName");
         }
         if ($page->procesa($page->_submitValues)) {
             $pdest->handle('jump');
@@ -510,21 +510,21 @@ class Salta extends HTML_QuickForm_Action
 
 
 /**
- * Responde al boton buscar caso en tabulador Básicos de la ficha de ingreso.
+ * Responde al boton buscar caso en tabulador BÃ¡sicos de la ficha de ingreso.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
 */
 class BuscarId extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acción.
+     * Ejecuta acciÃ³n.
      *
-     * @param object &$page      HTML_QuickForm página que produjo la acción
-     * @param string $actionName Nombre de la acción
+     * @param object &$page      HTML_QuickForm pÃ¡gina que produjo la acciÃ³n
+     * @param string $actionName Nombre de la acciÃ³n
      *
      * @return void
      */
@@ -538,13 +538,13 @@ class BuscarId extends HTML_QuickForm_Action
 
 
 /**
- * Página de datos básicos.
- * Ver documentación de funciones en clase base.
+ * PÃ¡gina de datos bÃ¡sicos.
+ * Ver documentaciÃ³n de funciones en clase base.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      PagBaseSimple
  */
@@ -554,15 +554,15 @@ class PagBasicos extends PagBaseSimple
     var $bfrontera_caso;
     var $bregion_caso;
 
-    var $titulo = 'Datos básicos';
+    var $titulo = 'Datos bÃ¡sicos';
 
     var $clase_modelo = 'caso';
 
     /**
-     * Inicializa variables y datos de la pestaña.
-     * Ver documentación completa en clase base.
+     * Inicializa variables y datos de la pestaÃ±a.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @return handle Conexión a base de datos
+     * @return handle ConexiÃ³n a base de datos
      */
     function iniVar()
     {
@@ -570,7 +570,7 @@ class PagBasicos extends PagBaseSimple
         $dfrontera_caso =& objeto_tabla('frontera_caso');
         $dregion_caso =& objeto_tabla('region_caso');
 
-        // Modo insercion: id en null indica que se está insertado
+        // Modo insercion: id en null indica que se estÃ¡ insertado
         // uno nuevo.
         if (isset($_REQUEST['id'])) {
             $dcaso->id = (int)var_escapa($_REQUEST['id'], $db);
@@ -583,10 +583,10 @@ class PagBasicos extends PagBaseSimple
         $dfrontera_caso->id_caso = $dcaso->id;
         $dregion_caso->id_caso = $dcaso->id;
 
-        // Si ya existía lo carga
+        // Si ya existÃ­a lo carga
         if (isset($dcaso->id)) {
             if (($e = $dcaso->find()) != 1 && $dcaso->id != $GLOBALS['idbus']) {
-                die("Se esperaba un sólo registro, pero se encontraron $e (" .
+                die("Se esperaba un sÃ³lo registro, pero se encontraron $e (" .
                     $dcaso->id.")"
                 );
             } else if ($e != 0 || $dcaso->id != $GLOBALS['idbus']) {
@@ -632,9 +632,9 @@ class PagBasicos extends PagBaseSimple
 
     /**
      * Agrega elementos al formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle &$db    Conexión a base de datos
+     * @param handle &$db    ConexiÃ³n a base de datos
      * @param string $idcaso Id del caso
      *
      * @return void
@@ -679,7 +679,7 @@ class PagBasicos extends PagBaseSimple
             $this->bcaso->_do->id_intervalo
                 = DataObjects_Intervalo::idSinInfo();
             $this->bcaso->_do->defSinInf = false;
-        } else { // Nuevo o actualización
+        } else { // Nuevo o actualizaciÃ³n
             $ed = array();
             $tid =& $this->createElement('static', 'id', 'No. Caso: ');
             $ed[] =& $tid;
@@ -714,7 +714,7 @@ class PagBasicos extends PagBaseSimple
 
         }
 
-        $e =& $this->addElement('header', 'ubicacion', 'Ubicación');
+        $e =& $this->addElement('header', 'ubicacion', 'UbicaciÃ³n');
 
         $this->bregion_caso->createSubmit = 0;
         $this->bregion_caso->useForm($this);
@@ -733,9 +733,9 @@ class PagBasicos extends PagBaseSimple
 
     /**
      * Llena valores del formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle  &$db    Conexión a base de datos
+     * @param handle  &$db    ConexiÃ³n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -793,9 +793,9 @@ class PagBasicos extends PagBaseSimple
 
     /**
      * Elimina registros de tablas relacionadas con caso de este formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle  &$db    Conexión a base de datos
+     * @param handle  &$db    ConexiÃ³n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -817,11 +817,11 @@ class PagBasicos extends PagBaseSimple
 
     /**
      * Procesa valores del formulario enviados por el usuario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param handle &$valores Valores ingresados por usuario
      *
-     * @return bool Verdadero si y solo si puede completarlo con éxito
+     * @return bool Verdadero si y solo si puede completarlo con Ã©xito
      * @see PagBaseSimple
      */
     function procesa(&$valores)
@@ -900,7 +900,7 @@ class PagBasicos extends PagBaseSimple
         }
 
         // No llamar con $this->eliminaDep porque al extender llama
-        // al eliminaDep de la clase extendida que borrará más de lo que
+        // al eliminaDep de la clase extendida que borrarÃ¡ mÃ¡s de lo que
         // espera esta funcion.
         PagBasicos::eliminaDep($db, $idcaso);
         if (isset($valores['id_frontera'])) {
@@ -925,12 +925,12 @@ class PagBasicos extends PagBaseSimple
 
     /**
      * Prepara consulta SQL para buscar datos de este formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param string &$w       Consulta que se construye
      * @param string &$t       Tablas
-     * @param object &$db      Conexión a base de datos
-     * @param int    $idcaso   Identificación del caso
+     * @param object &$db      ConexiÃ³n a base de datos
+     * @param int    $idcaso   IdentificaciÃ³n del caso
      * @param string &$subcons Subconsulta
      *
      * @return void

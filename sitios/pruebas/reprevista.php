@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
 * Reporte revista.
@@ -8,9 +8,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2007 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2007 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: reprevista.php,v 1.5.2.1 2011/09/14 14:56:19 vtamara Exp $
  * @link      http://sivel.sf.net
 */
@@ -23,7 +23,7 @@ if (PHP_SAPI !== 'cli') {
 }
 require_once "ambiente.php";
 
-/*** Validación y Reporte General ***/
+/*** ValidaciÃ³n y Reporte General ***/
 
 $post = array();
 

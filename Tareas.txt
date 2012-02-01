@@ -1,67 +1,86 @@
 
 1.2 o posteriores
 
-Paso a UTF-8
-http://www.phpwact.org/php/i18n/charsets
-InternacionalizaciÛn
-IÒtÎrn‚tiÙn‡lizÊti¯n
 
+1. Dejamos las fuentes en UTF-8 pero la salida HTML por defecto ISO-8859-1
+2. Se evaluar√° pasar salida HTML a UTF-8 asi como otras salidas (CSV, XML)
+   respecto a concentrar esfuerzos de interfaz en SIVeL 2.0
+3. Se evaluar√° pasar datos de la base de datos a UTF-8 
+
+Documentar ayudas para el paso a paso a UTF-8
+
+http://www.phpwact.org/php/i18n/charsets
 Con vim http://www.maruko.ca/i18n/
+ 
+En OpenBSD adJ 5.0 hay xterm con buen soporte para UTF-8 (el de tmux est√°
+mejorando en enero 2012).
+para iniciar xterm que soporta UTF-8:
+	xterm -en utf8
+En estas t√©rminales puede usar vim con:
+	set filencoding=utf-8
+	set encoding=utf-8
+	set tenc=utf-8
+
+Si usa un xterm y/o tmux que no soporten UTF-8, en ~/.vimrc como vim
+si los soporta bien puede emplear:
+	set tenc=latin-1
+	set enc=utf-8
+
 
 
 Semantic Versioning
 http://semver.org/
 
-Consulta detallada buscar por procedencia de vÌctima
+Consulta detallada buscar por procedencia de v√≠ctima
 
 Falta consulta detallada al especificar 
-	ubicaciÛn (dep, mun y centro, tipo de ubicaciÛn), 
-	presuntos responsables (por categoria y SIN INFORMACI”N),
-	vÌctimas colectivas (sin org. arm), individuales (info. persona), 
-	actos, mÛdulos seguimiento, anexos (sÛlo descripciÛn),
+	ubicaci√≥n (dep, mun y centro, tipo de ubicaci√≥n), 
+	presuntos responsables (por categoria y SIN INFORMACI√ìN),
+	v√≠ctimas colectivas (sin org. arm), individuales (info. persona), 
+	actos, m√≥dulos seguimiento, anexos (s√≥lo descripci√≥n),
 
 
 Actualizar Etnia  y DIVIPOLA
 Seguir completando herram/buscafallas.sh
 Sal en hashes, cambiar a SHA256, modelamiento de amenazas, evitar 
-autocompletaciÛn de claves, reautenticar para cambiar clave, rol y 
+autocompletaci√≥n de claves, reautenticar para cambiar clave, rol y 
 crear usuarios.
-Bitacoras para decisiones de autenticaciÛn y fallidas.
-Deshabilitar por un tiempo cuando se exceda m·ximo de intentos de autenticar.
-Documentar componentes externos en tÈrminos de funciones de la aplicaciÛn.
+Bitacoras para decisiones de autenticaci√≥n y fallidas.
+Deshabilitar por un tiempo cuando se exceda m√°ximo de intentos de autenticar.
+Documentar componentes externos en t√©rminos de funciones de la aplicaci√≥n.
 Verificar galletas dominio y restricciones, 
 Deshabilitar listado de directorios.
 Verificar escape XML de relatos generados.
-Centralizar m·s control de emisiÛn en cada lenguaje HTML (echo_esc), 
+Centralizar m√°s control de emisi√≥n en cada lenguaje HTML (echo_esc), 
 SQL, XML, CSV, LaTeX e interprete de comandos.
-Verificar generaciÛn aleatoria, mejorar la de CSRF.
-PolÌtica de manejo de llaves.
+Verificar generaci√≥n aleatoria, mejorar la de CSRF.
+Pol√≠tica de manejo de llaves.
 Verificar manejo de errores de servidor al lado del servidor.
-Verificar eliminaciÛn de informaciÛn sensible en cliente y servidor.
+Verificar eliminaci√≥n de informaci√≥n sensible en cliente y servidor.
 Ceritificados firmados por CA y posibilidad real de verificar y revocar.
-Considerar codificaciÛn UTF-8.
+Considerar codificaci√≥n UTF-8.
 Banderas en galletas.
 Juego de caracteres en todo encabezado respuesta.
-Cifrado deberÌa ser funciÛn de API.
+Cifrado deber√≠a ser funci√≥n de API.
 
 
-DuplicaciÛn entre Fuentes Frecuentes con FD-Fuente Directa y Otras Fuentes.
-Ser· mejor quitar Otras Fuentes y pasarlas a Fuentes Frecuentes como FD o OTRAS
+Duplicaci√≥n entre Fuentes Frecuentes con FD-Fuente Directa y Otras Fuentes.
+Ser√° mejor quitar Otras Fuentes y pasarlas a Fuentes Frecuentes como FD o OTRAS
 y renombrar a Fuentes ?
 
-Buscar forma de actualizar DIVIPOLA y tablas b·sicas, posiblemente
+Buscar forma de actualizar DIVIPOLA y tablas b√°sicas, posiblemente
 leyendos datos-*.sql, reconociendo y comparando con lo que hay en la
 base.  Ver funcion lee_sql de actualiza.php
 
-Revisar y aplicar est·ndares de nomenclatura SQL (_ solo para relaciones).
+Revisar y aplicar est√°ndares de nomenclatura SQL (_ solo para relaciones).
 
-Bit·cora de actualizaciones realizadas.
+Bit√°cora de actualizaciones realizadas.
 
 Agregar etiqueta NO PUBLICABLE, que no salgan casos con esa etiqueta
-en estadÌsticas ni en consulta web no autenticada
+en estad√≠sticas ni en consulta web no autenticada
 
-OrtografÌa en tablas basicas como presunto responsable 
-(INFORMACION->INFORMACI”N)
+Ortograf√≠a en tablas basicas como presunto responsable 
+(INFORMACION->INFORMACI√ìN)
 
 Quita tipo_violencia y supracategoria de categoria_p_responsable_caso
 
@@ -71,11 +90,11 @@ Fabian: movil con iniciales.
 Perfeccionar exportar/importar a Relato, para que sirva
 para iniciar un caso como copia de otro.  
 
-Falta Consulta web por m·s de un tipo de categoria
+Falta Consulta web por m√°s de un tipo de categoria
 
-Falta que algunas variables de configuraciÛn pasen a la base de datos.
+Falta que algunas variables de configuraci√≥n pasen a la base de datos.
 
-Que Ver Mapa sea botÛn controlado por Javascript (activado cuando haya 
+Que Ver Mapa sea bot√≥n controlado por Javascript (activado cuando haya 
 	datos en Latitud y Longitud).
 
 Nomenclatura SQL: tablas y campos sin _  (comenzado con fecha_deshabilitar
@@ -84,7 +103,7 @@ Nomenclatura SQL: tablas y campos sin _  (comenzado con fecha_deshabilitar
 Usar prepare para consultas.
 
 Req. R. B. D.
-	VÌctima. ProfesiÛn/OcupaciÛn que deje elegir varias para una persona.
+	V√≠ctima. Profesi√≥n/Ocupaci√≥n que deje elegir varias para una persona.
 	Sector Social, que deje elegir varios.
 
 
@@ -98,31 +117,31 @@ OTROS
 	fuente_directa a otrasfuentes.
 - En fuentes posibilidad de poner tipo de fuente indirecta (revista,
 	periodico, etc). 
-- Fuentes frecuentes. ClasificaciÛn dejar escoger categorias.
+- Fuentes frecuentes. Clasificaci√≥n dejar escoger categorias.
   Cambiar prensa por fuente (dejar escoger revista).
-- Fuente directa encriptada.  CÛdigo o pseudonimo. 
-  Se est· remplazando con particiÛn encriptada, si no se hace tendrÌa que
-  usarse una clave com˙n para todos los usuarios de la base.
-- EstandarizaciÛn del formato de hora. 2009-09-14 e.g. en Caso:
-	DuraciÛn: Crear cuadro seleccion con dia, hora, semanas, otros 
+- Fuente directa encriptada.  C√≥digo o pseudonimo. 
+  Se est√° remplazando con partici√≥n encriptada, si no se hace tendr√≠a que
+  usarse una clave com√∫n para todos los usuarios de la base.
+- Estandarizaci√≥n del formato de hora. 2009-09-14 e.g. en Caso:
+	Duraci√≥n: Crear cuadro seleccion con dia, hora, semanas, otros 
 	y tiempo.
 - Presunto responsable agregar un campo (responsable demostrado).
-- Indicar usuario que est· haciendo modificaciones y rol.
-- Bitacora de modificaciones y eliminaciones (que autom·tico y porque
-	explicado por funcionario tras completar cambios con opciÛn
+- Indicar usuario que est√° haciendo modificaciones y rol.
+- Bitacora de modificaciones y eliminaciones (que autom√°tico y porque
+	explicado por funcionario tras completar cambios con opci√≥n
 	para cancelar --deshacer cambios). Juliana Villabono.  
 	juliana_lapata@yahoo.com
 - Informe de novedades para un caso que puede abrirse desde botones.
 
-- EVALUACI”N:  
-	- Adoptar la de Colombia Nunca M·s
-	- Agregar la posibilidad de digitar la razÛn al frente de cada grado
-	- EvaluacÛn.  Escala para los grados seleccionables.
+- EVALUACI√ìN:  
+	- Adoptar la de Colombia Nunca M√°s
+	- Agregar la posibilidad de digitar la raz√≥n al frente de cada grado
+	- Evaluac√≥n.  Escala para los grados seleccionables.
 	  Bernardo Moreno bernardmore@hotmail.com
 	  more1@starmedia.com, bernardmore@hotmail.com, sistemas@fpuis.edu.co
 
 
-2. AUTENTICACI”N
+2. AUTENTICACI√ìN
 
 * No permitir crear usuarios con id de funcionarios existentes
 
@@ -133,9 +152,9 @@ OTROS
 
 * Usar sistema de plantillas y widgets
 
-3.2 TABLAS B¡SICAS
+3.2 TABLAS B√ÅSICAS
 
-* Interfaz m·s activa, aprovechar que llave primaria es un campo
+* Interfaz m√°s activa, aprovechar que llave primaria es un campo
   (por ejemplo de a 20)
 
 3.3 USUARIOS Y ROLES
@@ -144,23 +163,23 @@ OTROS
 
 3.4 FICHA CASO
 
-Reglas de validaciÛn: 
+Reglas de validaci√≥n: 
 	- sitio y lugar, nombre de fuentes directas (y otros de car. no num) 
-	  no deberÌa permitir n˙meros.  Juliana.
+	  no deber√≠a permitir n√∫meros.  Juliana.
 
 Velocidad:
 	- Selects dependientes eventualmente pueden hacerse mejor con
-	la Ìdea de:
+	la √≠dea de:
   http://simplythebest.net/scripts/DHTML_scripts/javascripts/javascript_63.html
 	scando info e la base con JavaScript
 
 Usabilidad:
-	- Que de tipificaciÛn a victimas sÛlo lleve tipos que corresponden
+	- Que de tipificaci√≥n a victimas s√≥lo lleve tipos que corresponden
 	  a personas.
-	- Boton para agregar datos a tablas b·sicas faciles desde Ficha.
-	- SerÌa bueno dejar en Javascript algo para hacer la siguiente equivalencia
-(tomada de Pag 6. Marco TeÛrico):
-Homicidio Intencional de PP (D701) <-> EjecuciÛn extrajudicial (A10)
+	- Boton para agregar datos a tablas b√°sicas faciles desde Ficha.
+	- Ser√≠a bueno dejar en Javascript algo para hacer la siguiente equivalencia
+(tomada de Pag 6. Marco Te√≥rico):
+Homicidio Intencional de PP (D701) <-> Ejecuci√≥n extrajudicial (A10)
 Amenaza Individual (D73) <-> Amenaza Individual (A15)
 Amenaza Colectiva (D706) <-> Amenaza Colectiva (A18)
 Tortura (D702) <-> Tortura (A12)
@@ -171,27 +190,27 @@ Desplazamiento Colectivo (D903) <-> Desplazamiento Colectivo (A102)
 Otras:
 	- Que se reusen efectivamente fuentes directas en la interfaz, 
 
-	- Facilitra ubicaciÛn de vÌctimas anteriores m·s
+	- Facilitra ubicaci√≥n de v√≠ctimas anteriores m√°s
 	- Facilitar mezclas al importar
 
 - Que avise con un mensaje cuando la fecha del caso del periodo anterior
 
 Validaciones.
-	* Cuando se eliga pr. respon sin informaciÛn que sÛlo puedan elegirse categorias de VPS (no de DH ni DIH).
+	* Cuando se eliga pr. respon sin informaci√≥n que s√≥lo puedan elegirse categorias de VPS (no de DH ni DIH).
 
 
 3.5 CONSULTA EXTERNA
 
-* Fechas en fuentes frecuentes/directas deberÌa poder tener '' o mejor rango
-* Agregar vacÌo a campos NOT NULL que por defecto en el
-  formulario de captura dicen SIN INFORMACI”N (e.g id_intervalo,
+* Fechas en fuentes frecuentes/directas deber√≠a poder tener '' o mejor rango
+* Agregar vac√≠o a campos NOT NULL que por defecto en el
+  formulario de captura dicen SIN INFORMACI√ìN (e.g id_intervalo,
   tipo_ubicacion).
 * Agregar vacio a fechas en fuentes
-* En el momento todo lo que es SIN INFORMACI”N no se tiene en cuenta
-  en la busqueda, deberÌa poderse hacer una b˙squeda de registros que tenga
-  SIN INFORMACI”N en campos.
+* En el momento todo lo que es SIN INFORMACI√ìN no se tiene en cuenta
+  en la busqueda, deber√≠a poderse hacer una b√∫squeda de registros que tenga
+  SIN INFORMACI√ìN en campos.
 * victima, fuentes directas, victima colectiva y combatiente crean nuevo id.  
-  SerÌa mejor recorrer esos y buscar de acuerdo a los campos llenos.  
+  Ser√≠a mejor recorrer esos y buscar de acuerdo a los campos llenos.  
 * Permitir elegir al usuario los campos texto que desea con LIKE o ~*
 
 
@@ -208,26 +227,26 @@ Validaciones.
 
 * Validar fechas antes de enviar consulta (si la fecha es errada
 por ejem 31.Feb saca error).
-* En estadÌsticas si se escoge victimas ind habilitar seg˙n. Para
+* En estad√≠sticas si se escoge victimas ind habilitar seg√∫n. Para
   casos no.
-* Al devolverse en una estadÌstica que presente datos anteriormente 
+* Al devolverse en una estad√≠stica que presente datos anteriormente 
   escogidos.
 
-4. DOCUMENTACI”N
+4. DOCUMENTACI√ìN
 
-Completarla, dejar Wiki p˙blico (?) -- convertible a DocBook y viceversa?
+Completarla, dejar Wiki p√∫blico (?) -- convertible a DocBook y viceversa?
 
-5. M”DULOS
+5. M√ìDULOS
 
-M”DULO B…LICAS 
+M√ìDULO B√âLICAS 
 - Organizar
-- En tabla a cada vÌctima combatiente agregar resultado de agresiÛn
-	  y cÛdigo de grupo armado al que pertenecia.
+- En tabla a cada v√≠ctima combatiente agregar resultado de agresi√≥n
+	  y c√≥digo de grupo armado al que pertenecia.
  
 
 6. FUENTES
 
 7. SERVICIOS WEB
-	Consultar sistemas de informaciÛn p˙blicos como:
+	Consultar sistemas de informaci√≥n p√∫blicos como:
 http://sirdec.medicinalegal.gov.co:38080/consultasPublicas/faces/paginas/desaparecidos.jsp
 

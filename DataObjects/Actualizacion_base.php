@@ -1,5 +1,5 @@
 <?php
-/* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: */
+/* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8: */
 
 /**
  * Objeto asociado a una tabla de la base de datos.
@@ -9,12 +9,12 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio publico. Sin garantias.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantias.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantias.
  * @version   CVS: $Id: Actualizacion_base.php,v 1.8.2.1 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 
@@ -26,12 +26,12 @@ require_once 'DB_DataObject_SIVeL.php';
 
 /**
  * Definicion para la tabla actualizacion_base.
- * Ver documentación de DataObjects_Caso.
+ * Ver documentaciÃ³n de DataObjects_Caso.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */

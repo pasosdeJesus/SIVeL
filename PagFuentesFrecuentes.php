@@ -1,42 +1,42 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Página del multi-formulario para capturar caso (captura_caso.php).
+ * PÃ¡gina del multi-formulario para capturar caso (captura_caso.php).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: PagFuentesFrecuentes.php,v 1.71.2.3 2011/10/13 09:57:49 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 /**
- * Pestaña Fuentes Frecuentes del multi-formulario capturar caso
+ * PestaÃ±a Fuentes Frecuentes del multi-formulario capturar caso
  */
 
 require_once 'PagBaseMultiple.php';
 require_once 'DataObjects/Prensa.php';
 
 /**
- * Página fuentes frecuentes.
- * Ver documentación de funciones en clase base.
+ * PÃ¡gina fuentes frecuentes.
+ * Ver documentaciÃ³n de funciones en clase base.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      PagBaseMultiple
  */
 class PagFuentesFrecuentes extends PagBaseMultiple
 {
 
-    /** Fuente frecuente asociada al caso, que se está consultando */
+    /** Fuente frecuente asociada al caso, que se estÃ¡ consultando */
     var $bescrito_caso;
 
     var $titulo = 'Fuentes Frecuentes';
@@ -50,7 +50,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     var $clase_modelo = 'escrito_caso';
 
     /**
-     * Pone en null variables asociadas a tablas de la pestaña.
+     * Pone en null variables asociadas a tablas de la pestaÃ±a.
      *
      * @return null
      */
@@ -60,9 +60,9 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     }
 
     /**
-     * Retorna una identificación del registro actual.
+     * Retorna una identificaciÃ³n del registro actual.
      *
-     * @return string Identifación
+     * @return string IdentifaciÃ³n
      */
     function copiaId()
     {
@@ -90,10 +90,10 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     }
 
     /**
-     * Inicializa variables y datos de la pestaña.
-     * Ver documentación completa en clase base.
+     * Inicializa variables y datos de la pestaÃ±a.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @return handle Conexión a base de datos
+     * @return handle ConexiÃ³n a base de datos
      */
     function iniVar()
     {
@@ -101,7 +101,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
         $db =& $do->getDatabaseConnection();
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no debería ser null");
+            die("Bug: idcaso no deberÃ­a ser null");
         }
         $do->id_caso = $idcaso;
         $result = hace_consulta(
@@ -138,7 +138,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
 
     /**
      * Constructora.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param string $nomForma Nombre
      *
@@ -155,9 +155,9 @@ class PagFuentesFrecuentes extends PagBaseMultiple
 
     /**
      * Agrega elementos al formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle &$db    Conexión a base de datos
+     * @param handle &$db    ConexiÃ³n a base de datos
      * @param string $idcaso Id del caso
      *
      * @return void
@@ -189,9 +189,9 @@ class PagFuentesFrecuentes extends PagBaseMultiple
 
     /**
      * Llena valores del formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle  &$db    Conexión a base de datos
+     * @param handle  &$db    ConexiÃ³n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -258,9 +258,9 @@ class PagFuentesFrecuentes extends PagBaseMultiple
 
     /**
      * Elimina registros de tablas relacionadas con caso de este formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle  &$db    Conexión a base de datos
+     * @param handle  &$db    ConexiÃ³n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -275,11 +275,11 @@ class PagFuentesFrecuentes extends PagBaseMultiple
 
     /**
      * Procesa valores del formulario enviados por el usuario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param handle &$valores Valores ingresados por usuario
      *
-     * @return bool Verdadero si y solo si puede completarlo con éxito
+     * @return bool Verdadero si y solo si puede completarlo con Ã©xito
      * @see PagBaseSimple
      */
     function procesa(&$valores)
@@ -315,9 +315,9 @@ class PagFuentesFrecuentes extends PagBaseMultiple
         );
         $nobusca = !isset($_SESSION['forma_modo'])
             || $_SESSION['forma_modo'] != 'busqueda';
-        /* No funcionan reglas de validación de QuickForm
-           porque no está construido el formulario cuando pasa
-           por esta función.  $this->validate encuentra que
+        /* No funcionan reglas de validaciÃ³n de QuickForm
+           porque no estÃ¡ construido el formulario cuando pasa
+           por esta funciÃ³n.  $this->validate encuentra que
            $this->_rules es vacio */
         if ($nobusca && strtotime($df) < strtotime($do->fecha)) {
             error_valida(
@@ -364,12 +364,12 @@ class PagFuentesFrecuentes extends PagBaseMultiple
 
     /**
      * Prepara consulta SQL para buscar datos de este formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param string &$w       Consulta que se construye
      * @param string &$t       Tablas
-     * @param string &$db      Conexión a base de datos
-     * @param object $idcaso   Identificación de caso
+     * @param string &$db      ConexiÃ³n a base de datos
+     * @param object $idcaso   IdentificaciÃ³n de caso
      * @param string &$subcons Subconsulta
      *
      * @return void
@@ -386,20 +386,20 @@ class PagFuentesFrecuentes extends PagBaseMultiple
 
     /**
      * Busca una fuente frecuente por nombre y la inserta en un caso
-     * con los datos que esta función recibe.
+     * con los datos que esta funciÃ³n recibe.
      *
-     * @param object &$db    Conexión a base de datos
-     * @param intger $idcaso Número de caso al que se añade fuente
+     * @param object &$db    ConexiÃ³n a base de datos
+     * @param intger $idcaso NÃºmero de caso al que se aÃ±ade fuente
      * @param string $nomf   Nombre de la fuente
      * @param string $fecha  Fecha de fuente
-     * @param string $ubif   Ubicación física
-     * @param string $ubi    Ubicación
-     * @param string $cla    Clasificación
+     * @param string $ubif   UbicaciÃ³n fÃ­sica
+     * @param string $ubi    UbicaciÃ³n
+     * @param string $cla    ClasificaciÃ³n
      * @param string &$obs   Colchon para agregar notas de conversion
      *
      * @return boolean true sii encuentra y puede insertar
      */
-    static function busca_inserta(&$db, $idcaso, $nomf, $fecha, 
+    static function busca_inserta(&$db, $idcaso, $nomf, $fecha,
         $ubif, $ubi, $cla, &$obs
     ) {
         $rp = hace_consulta(
@@ -436,12 +436,12 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     }
 
     /**
-     * Importa de un relato SINCODH lo relacionado con esta pestaña,
+     * Importa de un relato SINCODH lo relacionado con esta pestaÃ±a,
      * creando registros en la base de datos para el caso $idcaso
      *
-     * @param object &$db    Conexión a base de datos
+     * @param object &$db    ConexiÃ³n a base de datos
      * @param object $r      Relato en XML
-     * @param int    $idcaso Número de caso que se inserta
+     * @param int    $idcaso NÃºmero de caso que se inserta
      * @param string &$obs   Colchon para agregar notas de conversion
      *
      * @return void
@@ -454,18 +454,18 @@ class PagFuentesFrecuentes extends PagBaseMultiple
             $nomf = utf8_decode($fuente->nombre_fuente);
             if (empty($fuente->fecha_fuente)) {
                 repObs(
-                    "No se incluyó fuente sin fecha: " .
+                    "No se incluyÃ³ fuente sin fecha: " .
                     $fuente->asXML(), $obs
                 );
             } else if (empty($fuente->nombre_fuente)) {
                 repObs(
-                    "No se incluyó fuente sin nombre: " .
+                    "No se incluyÃ³ fuente sin nombre: " .
                     $fuente->asXML(), $obs
                 );
             } else {
                 $fecha = conv_fecha($fuente->fecha_fuente, $obs);
                 busca_inserta(
-                    $db, $idcaso, $nomf, $fecha, 
+                    $db, $idcaso, $nomf, $fecha,
                     utf8_decode((string)$fuente->ubicacion_fuente),
                     dato_en_obs($fuente, 'ubicacion'),
                     dato_en_obs($fuente, 'clasificacion'),

@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Objeto asociado a una tabla de la base de datos.
  * Parcialmente generado por DB_DataObject.
@@ -8,12 +8,12 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio p鷅lico. Sin garant韆s.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico. Sin garant韆s.
+ * @author    Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio p煤blico. Sin garant铆as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico. Sin garant铆as.
  * @version   CVS: $Id: Victima.php,v 1.22.2.2 2011/10/22 12:59:54 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: S覮O DEFINICIONES
+ * Acceso: S脫LO DEFINICIONES
  */
 
 /**
@@ -32,12 +32,12 @@ require_once "Presuntos_responsables.php";
 
 /**
  * Definicion para la tabla victima.
- * Ver documentaci髇 de DataObjects_Caso.
+ * Ver documentaci贸n de DataObjects_Caso.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
@@ -58,25 +58,25 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
     var $id_etnia;
     var $id_iglesia;
     var $anotaciones;                       // varchar(-1)
-    var $orientacionsexual;                 
+    var $orientacionsexual;
 
-    var $fb_preDefOrder = array('hijos', 
+    var $fb_preDefOrder = array('hijos',
         'id_profesion', 'id_rango_edad', 'id_filiacion',
         'id_sector_social', 'id_organizacion', 'id_vinculo_estado',
-        'id_organizacion_armada', 'id_etnia', 'id_iglesia', 
+        'id_organizacion_armada', 'id_etnia', 'id_iglesia',
         'orientacionsexual','anotaciones'
     );
-    var $fb_fieldsToRender = array('hijos', 
+    var $fb_fieldsToRender = array('hijos',
         'id_profesion', 'id_rango_edad', 'id_filiacion',
         'id_sector_social', 'id_organizacion', 'id_vinculo_estado',
-        'id_organizacion_armada', 'id_etnia', 
+        'id_organizacion_armada', 'id_etnia',
         'orientacionsexual', 'anotaciones'
     );
-    var $fb_enumFields = array( 'orientacionsexual');
+    var $fb_enumFields = array('orientacionsexual');
     var $es_enumOptions = array(
         'orientacionsexual' => array(
             'L' => 'Lesbiana',
-            'G' => 'Gay', 
+            'G' => 'Gay',
             'B'=> 'Bisexual',
             'T'=> 'Transexual',
             'I'=> 'Intersexual',
@@ -97,17 +97,17 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
     );
     var $fb_fieldLabels = array(
         'hijos'=> 'Hijos',
-        'id_profesion'=> 'Profesi髇',
+        'id_profesion'=> 'Profesi贸n',
         'id_rango_edad'=> 'Rango de Edad',
-        'id_filiacion'=> 'Filiaci髇 Pol韙ica',
+        'id_filiacion'=> 'Filiaci贸n Pol铆tica',
         'id_sector_social'=> 'Sector Social',
-        'id_organizacion'=> 'Organizaci髇',
-        'id_vinculo_estado'=> 'V韓culo con el Estado',
-        'id_organizacion_armada'=> 'Organizaci髇 Armada V韈tima',
+        'id_organizacion'=> 'Organizaci贸n',
+        'id_vinculo_estado'=> 'V铆nculo con el Estado',
+        'id_organizacion_armada'=> 'Organizaci贸n Armada V铆ctima',
         'id_etnia' => 'Etnia',
         'id_iglesia' => 'Iglesia',
-        'anotaciones'=> 'Anotaciones', 
-        'orientacionsexual' => 'Orientaci髇 Sexual',
+        'anotaciones'=> 'Anotaciones',
+        'orientacionsexual' => 'Orientaci贸n Sexual',
     );
     var $fb_hidePrimaryKey = true;
     var $fb_linkDisplayFields = array('id_persona');
@@ -126,9 +126,9 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
 
 
     /**
-     * Campos que pueden ser SIN INFORMACION y el c骴igo correspondiente
+     * Campos que pueden ser SIN INFORMACION y el c贸digo correspondiente
      *
-     * @return array Arreglo de campos que pueden ser sin informaci髇
+     * @return array Arreglo de campos que pueden ser sin informaci贸n
      */
     static function camposSinInfo()
     {
@@ -221,10 +221,10 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
 
     /**
      * Convierte registro a relato (arreglo de elementos) que agrega a $ar
-     * dad son datos adicionales que pueden requerirse para la conversi髇.
+     * dad son datos adicionales que pueden requerirse para la conversi贸n.
      *
      * @param array $ar  Arreglo con elementos
-     * @param array $dad Datos adicionales para conversi髇
+     * @param array $dad Datos adicionales para conversi贸n
      *
      * @return $ar modificado
      */

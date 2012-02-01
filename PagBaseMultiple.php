@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Base para página con multiples subpáginas al capturar caso
+ * Base para pÃ¡gina con multiples subpÃ¡ginas al capturar caso
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2005 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2005 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: PagBaseMultiple.php,v 1.34.2.1 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 /**
- * Base para página con multiples subpáginas al capturar caso
+ * Base para pÃ¡gina con multiples subpÃ¡ginas al capturar caso
  */
 require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . "/conf.php";
@@ -24,22 +24,22 @@ require_once 'PagBaseSimple.php';
 require_once 'HTML/QuickForm/Action.php';
 
 /**
- * Acción que responde al botón eliminar.
+ * AcciÃ³n que responde al botÃ³n eliminar.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscarId
  */
 class EliminarMultiple extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -58,22 +58,22 @@ class EliminarMultiple extends HTML_QuickForm_Action
 }
 
 /**
- * Acción que responde al botón nuevo
+ * AcciÃ³n que responde al botÃ³n nuevo
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscarId
  */
 class NuevoMultiple extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -90,22 +90,22 @@ class NuevoMultiple extends HTML_QuickForm_Action
 }
 
 /**
- * Acción que responde al botón nuevo como copia
+ * AcciÃ³n que responde al botÃ³n nuevo como copia
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscarId
  */
 class NuevoCopiaMultiple extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -125,22 +125,22 @@ class NuevoCopiaMultiple extends HTML_QuickForm_Action
 
 
 /**
- * Acción que responde al botón anterior
+ * AcciÃ³n que responde al botÃ³n anterior
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscarId
  */
 class AnteriorMultiple extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -159,12 +159,12 @@ class AnteriorMultiple extends HTML_QuickForm_Action
 }
 
 /**
- * Acción que responde al botón siguiente
+ * AcciÃ³n que responde al botÃ³n siguiente
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      BuscarId
  */
@@ -172,10 +172,10 @@ class SiguienteMultiple extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -196,19 +196,19 @@ class SiguienteMultiple extends HTML_QuickForm_Action
 
 
 /**
- * Clase base para página con multiples subpáginas al capturar caso.
+ * Clase base para pÃ¡gina con multiples subpÃ¡ginas al capturar caso.
  *
- * La ídea es identificar con un número las posibles subpáginas, para
+ * La Ã­dea es identificar con un nÃºmero las posibles subpÃ¡ginas, para
  * poder avanzar, retroceder, eliminar y agregar nuevos.
- * La información de la subpágina en la que está se mantiene en variables
- * de sesión que tienen un prefijo común.
+ * La informaciÃ³n de la subpÃ¡gina en la que estÃ¡ se mantiene en variables
+ * de sesiÃ³n que tienen un prefijo comÃºn.
  *
- * Ver también documentación de clase base.
+ * Ver tambiÃ©n documentaciÃ³n de clase base.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      PagBaseSimple
  */
@@ -218,14 +218,14 @@ abstract class PagBaseMultiple extends PagBaseSimple
     /** Titulo corto que aparece en botones */
     var $tcorto = '';
 
-    /** Prefijo común para variables de sesión de la clase */
+    /** Prefijo comÃºn para variables de sesiÃ³n de la clase */
     var $pref = '';
 
     /** Habilitar boton Nueva Copia */
     var $nuevoCopia = true;
 
     /**
-     * Pone en null variables asociadas a tablas de la pestaña.
+     * Pone en null variables asociadas a tablas de la pestaÃ±a.
      *
      * @return null
      */
@@ -241,9 +241,9 @@ abstract class PagBaseMultiple extends PagBaseSimple
     abstract function elimina(&$valores) ;
 
     /**
-     * Retorna una identificación del registro actual.
+     * Retorna una identificaciÃ³n del registro actual.
      *
-     * @return string Identifación
+     * @return string IdentifaciÃ³n
      */
     abstract function copiaId();
 
@@ -293,7 +293,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
         $this->controller->creaTabuladores($this, array('class' => 'flat'));
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no debería ser null");
+            die("Bug: idcaso no deberÃ­a ser null");
         }
 
         $comp = $idcaso == $GLOBALS['idbus'] ? 'Consulta' : 'Caso ' . $idcaso;

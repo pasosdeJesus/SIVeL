@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Objeto asociado a una tabla de la base de datos.
  * Parcialmente generado por DB_DataObject.
@@ -8,24 +8,24 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: Prensa.php,v 1.12.2.2 2011/10/22 14:58:19 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 require_once 'DataObjects/Basica.php';
 
 /**
  * Definicion para la tabla prensa.
- * Ver documentación de DataObjects_Basica.
+ * Ver documentaciÃ³n de DataObjects_Basica.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Basica
  */
@@ -38,8 +38,8 @@ class DataObjects_Prensa extends DataObjects_Basica
 
     var $fb_fieldLabels= array(
         'tipo_fuente'=>'Tipo de Fuente',
-        'fechacreacion' => 'Fecha de Creación',
-        'fechadeshabilitacion' => 'Fecha de Deshabilitación',
+        'fechacreacion' => 'Fecha de CreaciÃ³n',
+        'fechadeshabilitacion' => 'Fecha de DeshabilitaciÃ³n',
     );
     var $fb_enumFields = array('tipo_fuente');
     var $es_enumOptions = array(
@@ -70,7 +70,7 @@ class DataObjects_Prensa extends DataObjects_Basica
 
 
     /**
-     * Identificacion de registro 'SIN INFORMACIÓN'
+     * Identificacion de registro 'SIN INFORMACIÃ“N'
      *
      * @return integer Id
      */

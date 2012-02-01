@@ -1,15 +1,15 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Carga una opción no estándar del menú
+ * Carga una opciÃ³n no estÃ¡ndar del menÃº
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2010 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2010 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: opcion.php,v 1.9.2.3 2011/12/31 19:28:47 vtamara Exp $
  * @link      http://sivel.sf.net
  */
@@ -19,15 +19,15 @@ require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
 
 /*$aut_usuario = "";
-$db = autenticaUsuario($dsn, $accno, $aut_usuario, 0); 
-Debe autenticarse en la función muestra del modulo */
+$db = autenticaUsuario($dsn, $accno, $aut_usuario, 0);
+Debe autenticarse en la funciÃ³n muestra del modulo */
 
 if (!isset($_REQUEST['num'])) {
-    die("Falta parámetro num");
+    die("Falta parÃ¡metro num");
 }
 
 if (!isset($GLOBALS['modulo'][(int)$_REQUEST['num']])) {
-    die("No se ha definido \$GLOBALS['modulo'][" 
+    die("No se ha definido \$GLOBALS['modulo']["
         . (int)$_REQUEST['num'] . "] en conf.php");
 }
 

@@ -1,18 +1,18 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Funciones para hacer reporte revista por rótulos
+ * Funciones para hacer reporte revista por rÃ³tulos
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2006 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2006 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: reporteRotulos.php,v 1.14.2.3 2011/10/18 16:05:05 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 
@@ -23,12 +23,12 @@
  * @param array  opciones Opciones del usuario autenticado
  * @param object obj      Objeto HTML_QuickForm con formulario
  * @param array  ae       Arreglo de opciones de ordenamiento
- * @param object t        Opción por defecto
+ * @param object t        OpciÃ³n por defecto
  */
 function rotulos_cwebordenar($pOrden, $opciones, $obj, &$ae, &$t)
 {
     $x =& $obj->createElement(
-        'radio', 'ordenar', 'rotulo', 'Rótulo',
+        'radio', 'ordenar', 'rotulo', 'RÃ³tulo',
         'rotulo'
     );
     $ae[] =& $x;
@@ -51,8 +51,8 @@ function rotulos_orden_cons(&$q, $pOrdenar)
     $nq = "";
     if ($pOrdenar == 'rotulo') {
         $excvi = $excvc = '';
-        if (isset($GLOBALS['estrotulos_excluirsinfiliacion']) &&
-            $GLOBALS['estrotulos_excluirsinfiliacion']) {
+        if (isset($GLOBALS['estrotulos_excluirsinfiliacion'])
+            && $GLOBALS['estrotulos_excluirsinfiliacion']) {
             $excvi = ' AND acto.id_persona IN ' .
             '(SELECT id_persona FROM victima WHERE id_filiacion<>\'' .
             DataObjects_Filiacion::idSinInfo() . '\') ';
@@ -99,9 +99,9 @@ function rotulos_orden_cons(&$q, $pOrdenar)
  *
  * @param object db Base de datos
  * @param array  campos por mostrar
- * @param string idcaso Código de caso
- * @param string numcaso Número de caso
- * @return string Cadena por añadir al comienzo
+ * @param string idcaso CÃ³digo de caso
+ * @param string numcaso NÃºmero de caso
+ * @return string Cadena por aÃ±adir al comienzo
  */
 function rotulos_inicial(&$db, $campos, $idcaso, $numcaso)
 {
@@ -191,9 +191,9 @@ function rotulos_inicial(&$db, $campos, $idcaso, $numcaso)
  *
  * @param object db Base de datos
  * @param array  campos por mostrar
- * @param string idcaso Código de caso
- * @param string numcaso Número de caso
- * @return string Cadena por añadir al final
+ * @param string idcaso CÃ³digo de caso
+ * @param string numcaso NÃºmero de caso
+ * @return string Cadena por aÃ±adir al final
  */
 
 function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)

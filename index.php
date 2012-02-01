@@ -1,23 +1,23 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
- * Menú de SIVeL.
+ * MenÃº de SIVeL.
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: index.php,v 1.60.2.3 2012/01/24 01:34:04 vtamara Exp $
  * @link      http://sivel.sf.net
  * @link      http://pear.php.net/manual/en/package.html.html-menu.intro.php
  */
 
 /**
- * Menú de SIVeL.
+ * MenÃº de SIVeL.
  */
 require_once 'aut.php';
 require_once 'HTML/Menu.php';
@@ -28,11 +28,11 @@ require_once 'misc_caso.php';
 require_once 'PresentaMenuPrincipal.php';
 
 /**
- * Lee menú de base de datos y construye una estructura apropiada para
+ * Lee menÃº de base de datos y construye una estructura apropiada para
  * HTML/Menu.
  *
- * @param handle  &$db Conexión a base de datos
- * @param integer $id  Identificación de menú por revisar
+ * @param handle  &$db ConexiÃ³n a base de datos
+ * @param integer $id  IdentificaciÃ³n de menÃº por revisar
  *
  * @return array apropiado para HTML_Menu
  */
@@ -64,9 +64,9 @@ function bd_a_menu(&$db, $id)
 
 
 /**
- * Presenta menú principal.
+ * Presenta menÃº principal.
  *
- * @param handle &$db Conexión a base de datos
+ * @param handle &$db ConexiÃ³n a base de datos
  *
  * @return void
  */
@@ -78,7 +78,7 @@ function menu_principal(&$db)
 
     encabezado_envia(
         'SIVeL ' . $GLOBALS['PRY_VERSION'].
-        ': ' . 'Sistema de Información de Violencia Política'
+        ': ' . 'Sistema de InformaciÃ³n de Violencia PolÃ­tica'
     );
     if ($GLOBALS['cabezote_principal'] != ''
         && file_exists($GLOBALS['cabezote_principal'])
@@ -116,10 +116,10 @@ function menu_principal(&$db)
 }
 
 /**
- * Inicializa variables cada vez que llega al índice (en particular para
- * búsquedas).
+ * Inicializa variables cada vez que llega al Ã­ndice (en particular para
+ * bÃºsquedas).
  *
- * @param handle &$db Conexión a base de datos
+ * @param handle &$db ConexiÃ³n a base de datos
  *
  * @return void
  */
@@ -131,7 +131,7 @@ function inicializa(&$db)
         eliminaCaso($db, $idbus);
     } else {
         die(
-            "Variable Global idbus con id. de caso para búsquedas debería " .
+            "Variable Global idbus con id. de caso para bÃºsquedas deberÃ­a " .
             "ser no positiva"
         );
     }

@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
 * Actualiza departamento.
@@ -8,9 +8,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2006 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2006 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: actdep.php,v 1.9.2.2 2011/10/22 14:58:19 vtamara Exp $
  * @link      http://sivel.sf.net
 */
@@ -54,7 +54,7 @@ $nd = $db->getOne("SELECT nombre FROM departamento WHERE id = '$iddep';");
 echo "nd = $nd\n";
 
 if ($nd!= 'y') {
-    echo "No actualizó";
+    echo "No actualizÃ³";
     exit(1);
 }
 exit(0);

@@ -1,18 +1,18 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- *P醙ina del multi-formulario para capturar caso (captura_caso.php).
+ *P谩gina del multi-formulario para capturar caso (captura_caso.php).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @copyright 2007 Dominio p鷅lico. Sin garant韆s.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico. Sin garant韆s.
+ * @author    Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @copyright 2007 Dominio p煤blico. Sin garant铆as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico. Sin garant铆as.
  * @version   CVS: $Id: PagSegJudicial.php,v 1.22.2.7 2011/10/22 13:01:23 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: S覮O DEFINICIONES
+ * Acceso: S脫LO DEFINICIONES
  */
 
 require_once 'PagBaseMultiple.php';
@@ -34,21 +34,21 @@ require_once 'DataObjects/Tipo_proceso.php';
 
 
 /**
- * Acci髇 que responde al botor Agregar Acci髇
+ * Acci贸n que responde al botor Agregar Acci贸n
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
  */
 class AgregarAccionJ extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acci髇
+     * Ejecuta acci贸n
      *
-     * @param object &$page      P醙ina
-     * @param string $actionName Acci髇
+     * @param object &$page      P谩gina
+     * @param string $actionName Acci贸n
      *
      * @return void
      */
@@ -65,22 +65,22 @@ class AgregarAccionJ extends HTML_QuickForm_Action
 
 
 /**
-* Responde a eliminaci髇 de una acci髇
+* Responde a eliminaci贸n de una acci贸n
  * @package SIVeL
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  Dominio p鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  Dominio p煤blico.
  * @link     http://sivel.sf.net/tec
 */
 class EliminaAccionJ extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acci髇
+     * Ejecuta acci贸n
      *
-     * @param object &$page      P醙ina
-     * @param string $actionName Acci髇
+     * @param object &$page      P谩gina
+     * @param string $actionName Acci贸n
      *
      * @return void
      */
@@ -99,13 +99,13 @@ class EliminaAccionJ extends HTML_QuickForm_Action
 
 
 /**
-* P醙ina Proceso Judicial
-* Ver documentaci髇 de funciones en clase base.
+* P谩gina Proceso Judicial
+* Ver documentaci贸n de funciones en clase base.
  * @package SIVeL
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  Dominio p鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  Dominio p煤blico.
  * @link     http://sivel.sf.net/tec
 */
 class PagSegJudicial extends PagBaseMultiple
@@ -125,7 +125,7 @@ class PagSegJudicial extends PagBaseMultiple
     var $clase_modelo = 'proceso';
 
     /**
-     * Pone en null variables asociadas a tablas de la pesta馻.
+     * Pone en null variables asociadas a tablas de la pesta帽a.
      *
      * @return null
      */
@@ -136,9 +136,9 @@ class PagSegJudicial extends PagBaseMultiple
     }
 
     /**
-     * Retorna una identificaci髇 del registro actual.
+     * Retorna una identificaci贸n del registro actual.
      *
-     * @return string Identifaci髇
+     * @return string Identifaci贸n
      */
     function copiaId()
     {
@@ -163,7 +163,7 @@ class PagSegJudicial extends PagBaseMultiple
 
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no deber韆 ser null");
+            die("Bug: idcaso no deber铆a ser null");
         }
 
         $idp = array();
@@ -210,7 +210,7 @@ class PagSegJudicial extends PagBaseMultiple
 
     /**
      * Constructora.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
      * @param string $nomForma Nombre
      * @param string $mreq     Mensaje de dato requerido
@@ -230,9 +230,9 @@ class PagSegJudicial extends PagBaseMultiple
 
     /**
      * Agrega elementos al formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle &$db    Conexi髇 a base de datos
+     * @param handle &$db    Conexi贸n a base de datos
      * @param string $idcaso Id del caso
      *
      * @return void
@@ -261,9 +261,9 @@ class PagSegJudicial extends PagBaseMultiple
 
     /**
      * Llena valores del formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle  &$db    Conexi髇 a base de datos
+     * @param handle  &$db    Conexi贸n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -323,7 +323,7 @@ class PagSegJudicial extends PagBaseMultiple
     }
 
     /**
-    * @param procAc es true si y solo si debe a馻dirse Acci髇
+    * @param procAc es true si y solo si debe a帽adirse Acci贸n
     */
     function procesa(&$valores, $procAc = false)
     {
@@ -370,9 +370,9 @@ class PagSegJudicial extends PagBaseMultiple
             $nacc->id_tipo_accion = (int)$valores['id_tipo_accion'];
             $nacc->id_despacho = (int)$valores['id_despacho'];
             $nacc->fecha = arr_a_fecha(var_escapa($valores['fecha'], $db, 20));
-            $nacc->numero_radicado = 
+            $nacc->numero_radicado =
                 var_escapa($valores['numero_radicado'], $db);
-            $nacc->observaciones_accion = 
+            $nacc->observaciones_accion =
                 var_escapa($valores['observaciones_accion'], $db);
             $nacc->insert();
             $nacc->respondido= isset($valores['respondido'])
@@ -400,12 +400,12 @@ class PagSegJudicial extends PagBaseMultiple
         parent::handle($action);
     }
 
-    /** Extrae procesos de un caso y retorna su informaci髇 en varios
+    /** Extrae procesos de un caso y retorna su informaci贸n en varios
      *  vectores
-     *  
+     *
      *  @param integer $idcaso  Id. del Caso
-     *  @param object  &$db     Conexi髇 a BD
-     *  @param array   &$idp    Para retornar identificaci髇 de procesos
+     *  @param object  &$db     Conexi贸n a BD
+     *  @param array   &$idp    Para retornar identificaci贸n de procesos
      *
      *  @return integer Cantidad de procesos retornados
      **/
@@ -468,7 +468,7 @@ class PagSegJudicial extends PagBaseMultiple
             $tablas .= ", proceso";
             $oconv = array('proceso_id', 'proceso_proximafecha');
             $pOrdenar = "fechajudicial";
-            $campos['proceso_proximafecha'] = 'Pr髕ima fecha';
+            $campos['proceso_proximafecha'] = 'Pr贸xima fecha';
         }
     }
 
@@ -501,27 +501,27 @@ class PagSegJudicial extends PagBaseMultiple
     {
         html_menu_agrega_submenu(
             $GLOBALS['menu_tablas_basicas'],
-            null, 'Informaci髇 Judicial',
+            null, 'Informaci贸n Judicial',
             '', null
         );
         html_menu_agrega_submenu(
             $GLOBALS['menu_tablas_basicas'],
-            'Informaci髇 Judicial', 'Tipos de acciones judiciales',
+            'Informaci贸n Judicial', 'Tipos de acciones judiciales',
             'tipo_accion', null
         );
         html_menu_agrega_submenu(
             $GLOBALS['menu_tablas_basicas'],
-            'Informaci髇 Judicial', 'Tipos de proceso',
+            'Informaci贸n Judicial', 'Tipos de proceso',
             'tipo_proceso', null
         );
         html_menu_agrega_submenu(
             $GLOBALS['menu_tablas_basicas'],
-            'Informaci髇 Judicial', 'Despacho',
+            'Informaci贸n Judicial', 'Despacho',
             'despacho', null
         );
         html_menu_agrega_submenu(
             $GLOBALS['menu_tablas_basicas'],
-            'Informaci髇 Judicial', 'Etapa',
+            'Informaci贸n Judicial', 'Etapa',
             'etapa', null
         );
     }

@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- *Página del multi-formulario para capturar caso (captura_caso.php).
+ *PÃ¡gina del multi-formulario para capturar caso (captura_caso.php).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: PagVictimaIndividual.php,v 1.123.2.5 2011/10/13 09:57:49 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 /**
- * Pestaña Víctima Individual de la ficha de captura de caso
+ * PestaÃ±a VÃ­ctima Individual de la ficha de captura de caso
  */
 
 require_once 'PagBaseMultiple.php';
@@ -36,22 +36,22 @@ require_once 'DataObjects/Relacion_personas.php';
 
 
 /**
- * Responde a eliminación de una relación
+ * Responde a eliminaciÃ³n de una relaciÃ³n
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  */
 class EliminaRel extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -73,12 +73,12 @@ class EliminaRel extends HTML_QuickForm_Action
 
 /**
  * Victima Individual.
- * Ver documentación de funciones en clase base.
+ * Ver documentaciÃ³n de funciones en clase base.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      PagBaseMultiple
  */
@@ -89,7 +89,7 @@ class PagVictimaIndividual extends PagBaseMultiple
 
     var $brelacion_personas;
 
-    /** Víctima */
+    /** VÃ­ctima */
     var $bvictima;
 
     /** Antecedentes */
@@ -106,7 +106,7 @@ class PagVictimaIndividual extends PagBaseMultiple
     /*var $bt;  Benchmark_Timer */
 
     /**
-     * Pone en null variables asociadas a tablas de la pestaña.
+     * Pone en null variables asociadas a tablas de la pestaÃ±a.
      *
      * @return null
      */
@@ -122,7 +122,7 @@ class PagVictimaIndividual extends PagBaseMultiple
     /**
      * Responde a eventos
      *
-     * @param string $accion Acción solicitada
+     * @param string $accion AcciÃ³n solicitada
      *
      * @return void
      */
@@ -132,9 +132,9 @@ class PagVictimaIndividual extends PagBaseMultiple
     }
 
     /**
-     * Retorna una identificación del registro actual.
+     * Retorna una identificaciÃ³n del registro actual.
      *
-     * @return string Identifación
+     * @return string IdentifaciÃ³n
      */
     function copiaId()
     {
@@ -163,9 +163,9 @@ class PagVictimaIndividual extends PagBaseMultiple
     /**
      * Inicializa variables.
      *
-     * @param integer $id_persona Id  de víctima
+     * @param integer $id_persona Id  de vÃ­ctima
      *
-     * @return handle Conexión a base de datos
+     * @return handle ConexiÃ³n a base de datos
      */
     function iniVar($id_persona = null)
     {
@@ -178,19 +178,19 @@ class PagVictimaIndividual extends PagBaseMultiple
 
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no debería ser null");
+            die("Bug: idcaso no deberÃ­a ser null");
         }
 
         $idp = array();
         $ndp = array();
         $edp = array();
         $indid = -1;
-        //$bt->setMarker("iniVar: antes de extrae víctimas");
+        //$bt->setMarker("iniVar: antes de extrae vÃ­ctimas");
         $tot = ResConsulta::extraeVictimas(
             $idcaso, $db, $idp, $ndp,
             $id_persona, $indid, $edp
         );
-        //$bt->setMarker("iniVar: después de extrae víctimas");
+        //$bt->setMarker("iniVar: despuÃ©s de extrae vÃ­ctimas");
         $_SESSION['fvi_total'] = $tot;
         if ($indid >= 0) {
             $_SESSION['fvi_pag'] = $indid;
@@ -252,7 +252,7 @@ class PagVictimaIndividual extends PagBaseMultiple
 
     /**
      * Constructora.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param string $nomForma Nombre
      *
@@ -276,9 +276,9 @@ class PagVictimaIndividual extends PagBaseMultiple
 
     /**
      * Agrega elementos al formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle &$db    Conexión a base de datos
+     * @param handle &$db    ConexiÃ³n a base de datos
      * @param string $idcaso Id del caso
      *
      * @return void
@@ -294,7 +294,7 @@ class PagVictimaIndividual extends PagBaseMultiple
         $_SESSION['pagVictimaIndividual_id_persona'] = $vv;
 
         list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
-            $db, $this, 'victimaIndividual', 
+            $db, $this, 'victimaIndividual',
             $this->bpersona->_do->id_departamento,
             $this->bpersona->_do->id_municipio
         );
@@ -318,12 +318,12 @@ class PagVictimaIndividual extends PagBaseMultiple
             );
             if ($comovic != '') {
                 $this->addElement(
-                    'static', 'tambien', 'Cómo víctima en casos', $comovic
+                    'static', 'tambien', 'CÃ³mo vÃ­ctima en casos', $comovic
                 );
             }
             if ($comofam != '') {
                 $this->addElement(
-                    'static', 'tambien', 'Cómo familiar en casos', $comofam
+                    'static', 'tambien', 'CÃ³mo familiar en casos', $comofam
                 );
             }
         }
@@ -351,9 +351,9 @@ class PagVictimaIndividual extends PagBaseMultiple
 
     /**
      * Llena valores del formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle  &$db    Conexión a base de datos
+     * @param handle  &$db    ConexiÃ³n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -502,12 +502,12 @@ class PagVictimaIndividual extends PagBaseMultiple
     }
 
     /**
-    * Elimina datos relacionados con la víctima que se ven en esta
-    * pestaña y opcionalmente datos de la víctima y de otras pestañas
-    * relacionados con víctima.
+    * Elimina datos relacionados con la vÃ­ctima que se ven en esta
+    * pestaÃ±a y opcionalmente datos de la vÃ­ctima y de otras pestaÃ±as
+    * relacionados con vÃ­ctima.
     *
-    * @param object $dvictima DB_DataObject con datos de víctima
-    * @param bool   $elimVic  Si es <b>true</b> elimina datos de víctima también
+    * @param object $dvictima DB_DataObject con datos de vÃ­ctima
+    * @param bool   $elimVic  Si es <b>true</b> elimina datos de vÃ­ctima tambiÃ©n
     *
     * @return void
     */
@@ -540,9 +540,9 @@ class PagVictimaIndividual extends PagBaseMultiple
 
     /**
      * Elimina registros de tablas relacionadas con caso de este formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
-     * @param handle  &$db    Conexión a base de datos
+     * @param handle  &$db    ConexiÃ³n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -571,12 +571,12 @@ class PagVictimaIndividual extends PagBaseMultiple
 
     /**
      * Procesa valores del formulario enviados por el usuario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param handle &$valores Valores ingresados por usuario
-     * @param bool   $procFam  True si y solo si debe añadirse familiar
+     * @param bool   $procFam  True si y solo si debe aÃ±adirse familiar
      *
-     * @return bool Verdadero si y solo si puede completarlo con éxito
+     * @return bool Verdadero si y solo si puede completarlo con Ã©xito
      * @see PagBaseSimple
      */
     function procesa(&$valores, $procFam = false)
@@ -628,7 +628,7 @@ class PagVictimaIndividual extends PagBaseMultiple
         if ($nobus
             && (!isset($valores['nombres']) || trim($valores['nombres'])=='')
         ) {
-            error_valida('Falta nombre de víctima', $valores);
+            error_valida('Falta nombre de vÃ­ctima', $valores);
             return false;
         }
 
@@ -660,7 +660,7 @@ class PagVictimaIndividual extends PagBaseMultiple
             && (!isset($valores['fnombres']) || $valores['fnombres'] == '')
             && (!isset($valores['fapellidos']) || $valores['fapellidos'] == '')
         ) {
-                error_valida('Faltó nombre y/o apellido de familiar', $valores);
+                error_valida('FaltÃ³ nombre y/o apellido de familiar', $valores);
                 return false;
         }
 
@@ -681,7 +681,7 @@ class PagVictimaIndividual extends PagBaseMultiple
         }
         if ($procFam) {
             $nper =& objeto_tabla('persona');
-            if (isset($valores['id_persona2']) 
+            if (isset($valores['id_persona2'])
                 && (int)$valores['id_persona2'] > 0
             ) {
                 $nper->get((int)$valores['id_persona2']);
@@ -691,7 +691,7 @@ class PagVictimaIndividual extends PagBaseMultiple
             } else {
                 $nper->nombres = var_escapa($valores['fnombres'], $db);
                 $nper->apellidos = var_escapa($valores['fapellidos'], $db);
-                $nper->sexo = 'S'; 
+                $nper->sexo = 'S';
                 $nper->insert();
             }
             $this->brelacion_personas->_do->id_persona1
@@ -732,12 +732,12 @@ class PagVictimaIndividual extends PagBaseMultiple
 
     /**
      * Prepara consulta SQL para buscar datos de este formulario.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param string &$w       Consulta que se construye
      * @param string &$t       Tablas
-     * @param object &$db      Conexión a base de datos
-     * @param object $idcaso   Identificación del caso
+     * @param object &$db      ConexiÃ³n a base de datos
+     * @param object $idcaso   IdentificaciÃ³n del caso
      * @param string &$subcons Subconsulta
      *
      * @return void

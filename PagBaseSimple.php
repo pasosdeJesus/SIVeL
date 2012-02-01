@@ -1,23 +1,23 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Base para página simple del multi-formulario para capturar caso
+ * Base para pÃ¡gina simple del multi-formulario para capturar caso
  * (captura_caso.php).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2005 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2005 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: PagBaseSimple.php,v 1.50.2.6 2011/10/13 13:41:06 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 /**
- * Base para página simple del multi-formulario para capturar caso
+ * Base para pÃ¡gina simple del multi-formulario para capturar caso
  */
 
 require_once 'HTML/QuickForm/Page.php';
@@ -26,27 +26,27 @@ require_once 'misc.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
 
 /**
- * Clase base para subformularios de una sóla página
+ * Clase base para subformularios de una sÃ³la pÃ¡gina
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  */
 abstract class PagBaseSimple extends HTML_QuickForm_Page
 {
 
-    /** Titulo que aparecerá en formulario */
+    /** Titulo que aparecerÃ¡ en formulario */
     var $titulo = '';
 
-    /** Nombre de una clase DataObject característica de este formulario */
+    /** Nombre de una clase DataObject caracterÃ­stica de este formulario */
     var $clase_modelo = 'caso';
 
     /**
      * Definimos variables para subformularios (a su vez descendientes de
      * DB_DataObject_FormBuilder).
-     * Convención sugerida: que comienzan con la letra b
+     * ConvenciÃ³n sugerida: que comienzan con la letra b
      */
     var $bcaso = null;
 
@@ -58,18 +58,18 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
 
 
     /** Inicializa variables de la clase extrayendo datos de la base.
-     * Puede mejorarse manteniendo información en var. de sesión
+     * Puede mejorarse manteniendo informaciÃ³n en var. de sesiÃ³n
      * (actualizada con operaciones)
      * para que no tener que consultar la base de datos siempre.
      *
      * @param bool $cargaCaso  decide si se carga o no el caso de la B.D
      * @param bool $retArreglo indica si debe retornar un arreglo con
-     * base de datos, objeto dcaso e identificación o sólo
+     * base de datos, objeto dcaso e identificaciÃ³n o sÃ³lo
      * base de datos.
      *
-     * @return mixed Puede ser bien conexión a base de daotos o bien
-     * un arreglo con base, objeto dcaso e identificación de caso (depende
-     * del parámetro $retArreglo
+     * @return mixed Puede ser bien conexiÃ³n a base de daotos o bien
+     * un arreglo con base, objeto dcaso e identificaciÃ³n de caso (depende
+     * del parÃ¡metro $retArreglo
      */
     function iniVar($cargaCaso = true, $retArreglo = false)
     {
@@ -83,13 +83,13 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
         if ($cargaCaso) {
             $idcaso =& $_SESSION['basicos_id'];
             if (!isset($idcaso) || $idcaso == null) {
-                die("Bug: idcaso no debería ser null");
+                die("Bug: idcaso no deberÃ­a ser null");
             }
             $dcaso->id = $idcaso;
             if (($e = $dcaso->find()) != 1
                 && $idcaso != $GLOBALS['idbus']
             ) {
-                die("Se esperaba un sólo registro, pero se encontraron $e.");
+                die("Se esperaba un sÃ³lo registro, pero se encontraron $e.");
             }
             $dcaso->fetch();
         }
@@ -132,8 +132,8 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
     /**
      * Agrega elementos particulares del formulario
      *
-     * @param handle  &$db    Conexión a base de datos
-     * @param integer $idcaso Identificación del caso
+     * @param handle  &$db    ConexiÃ³n a base de datos
+     * @param integer $idcaso IdentificaciÃ³n del caso
      *
      * @return void
      */
@@ -144,8 +144,8 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
     * Establece valores por defecto cuando se requiere para presentar
     * en el formulario.
     *
-    * @param handle  &$db    Conexión a base de datos
-    * @param integer $idcaso Identificación del caso
+    * @param handle  &$db    ConexiÃ³n a base de datos
+    * @param integer $idcaso IdentificaciÃ³n del caso
     *
     * @return void
     */
@@ -196,7 +196,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
 
         $this->setDefaultAction('siguiente');
 
-        // OJO Mejor cambiar valores después de crear formulario, si
+        // OJO Mejor cambiar valores despuÃ©s de crear formulario, si
         // se hace antes molesta.
         $this->formularioValores($db, $idcaso);
     }
@@ -206,8 +206,8 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      * Elimina de la base, datos asociados a un caso y presentados por este
      * formulario.
      *
-     * @param handle  &$db    conexión a base de datos
-     * @param integer $idcaso Número de caso
+     * @param handle  &$db    conexiÃ³n a base de datos
+     * @param integer $idcaso NÃºmero de caso
      *
      * @return void
      */
@@ -216,8 +216,8 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
 
     /**
      * Verifica y salva datos.
-     * Típicamente debe validar datos, preprocesar de requerirse,
-     * procesar con función process y finalmente registrar evento con función
+     * TÃ­picamente debe validar datos, preprocesar de requerirse,
+     * procesar con funciÃ³n process y finalmente registrar evento con funciÃ³n
      * funcionario_caso
      *
      * @param array &$valores Valores enviados por el formulario.
@@ -254,14 +254,14 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
 
     /**
      * Llena una consulta de acuerdo a datos del formulario cuando
-     * está en modo busqueda.
+     * estÃ¡ en modo busqueda.
      * <b>SELECT caso.id FROM $t WHERE $w</b>
      *
      * @param string &$w       Condiciones de consulta exterior
      * @param string &$t       Tablas de consulta exterior
-     * @param object &$db      Conexión a base de datos
-     * @param object $idcaso   Identificación de caso
-     * @param string &$subcons Consulta interior (si no es vacía hacer UNION)
+     * @param object &$db      ConexiÃ³n a base de datos
+     * @param object $idcaso   IdentificaciÃ³n de caso
+     * @param string &$subcons Consulta interior (si no es vacÃ­a hacer UNION)
      *
      * @return void
      */
@@ -298,13 +298,13 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      * Llamada para mostrar un registro en ResConsulta.
      * Hace posible nuevos tipos de consulta.
      *
-     * @param object  &$db       Conexión a B.D
+     * @param object  &$db       ConexiÃ³n a B.D
      * @param string  $mostrar   Forma de mostrar consulta
-     * @param int     $idcaso    Código de caso
+     * @param int     $idcaso    CÃ³digo de caso
      * @param array   $campos    Campos por mostrar
      * @param array   $conv      Conversiones
      * @param array   $sal       Para conversiones con $conv
-     * @param boolean $retroalim Con boton de retroalimentación
+     * @param boolean $retroalim Con boton de retroalimentaciÃ³n
      *
      * @return string Fila en HTML
      */
@@ -327,7 +327,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
 
 
     /**
-     * Llamada cuando se inicia presentación en formato de tabla.
+     * Llamada cuando se inicia presentaciÃ³n en formato de tabla.
      * Da oportunidad por ejemplo de inicializar variables.
      *
      * @param string $cc Campo que se muestra
@@ -339,13 +339,13 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
     }
 
     /**
-     * Llamada desde la función que muestra cada fila de la tabla en
+     * Llamada desde la funciÃ³n que muestra cada fila de la tabla en
      * ResConsulta.
      * Hace posible modificar la tabla.
      *
      * @param object &$db    Base de datos
      * @param string $cc     Campo que se procesa
-     * @param int    $idcaso Número de caso
+     * @param int    $idcaso NÃºmero de caso
      *
      * @return Cadena por presentar
      */
@@ -365,10 +365,10 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
     }
 
     /**
-     * Llamada desde consulta web durante construcción de formulario para
-     * dar la posibilidad de añadir elementos.
+     * Llamada desde consulta web durante construcciÃ³n de formulario para
+     * dar la posibilidad de aÃ±adir elementos.
      *
-     * @param object &$db   Conexión a B.D
+     * @param object &$db   ConexiÃ³n a B.D
      * @param object &$form Formulario
      *
      * @return Cadena por presentar
@@ -382,7 +382,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
     /**
      * Llamada desde consulta_web para completar consulta SQL en caso
      *
-     * @param object &$db       Conexión a B.D
+     * @param object &$db       ConexiÃ³n a B.D
      * @param string $mostrar   Forma de mostrar consulta
      * @param string &$where    Consulta SQL por completar
      * @param string &$tablas   Tablas incluidas en consulta
@@ -398,14 +398,14 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
 
 
     /**
-     * Llamada desde consulta_web al generar formulario en porción
-     * `Forma de presentación'
+     * Llamada desde consulta_web al generar formulario en porciÃ³n
+     * `Forma de presentaciÃ³n'
      *
      * @param string $mostrar  Forma de mostrar consulta
      * @param array  $opciones Opciones de menu del usuario
      * @param object &$forma   Formulario
      * @param array  &$ae      Grupo de elementos que conforman Forma de pres.
-     * @param array  &$t       Si está marcado lo pone en el elemento creado
+     * @param array  &$t       Si estÃ¡ marcado lo pone en el elemento creado
      *
      * @return void
      */
@@ -416,8 +416,8 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
 
 
     /**
-     * Llamada desde consulta_web para generar formulario en porción
-     * 'Detalles de la presentación'
+     * Llamada desde consulta_web para generar formulario en porciÃ³n
+     * 'Detalles de la presentaciÃ³n'
      *
      * @param string $mostrar  Forma de mostrar consulta
      * @param array  $opciones Opciones de menu del usuario
@@ -434,7 +434,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
 
     /**
      * Llamada desde consulta_web para completar consulta poniendo una
-     * política de ordenamiento
+     * polÃ­tica de ordenamiento
      *
      * @param object &$q       Consulta por modificar
      * @param string $pOrdenar Criterio de ordenamiento
@@ -449,9 +449,9 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
     /**
      * Llamada para completar registro por mostrar en Reporte General.
      *
-     * @param object &$db    Conexión a B.D
+     * @param object &$db    ConexiÃ³n a B.D
      * @param array  $campos Campos por mostrar
-     * @param int    $idcaso Código de caso
+     * @param int    $idcaso CÃ³digo de caso
      *
      * @return void
      */
@@ -463,9 +463,9 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
     /**
      * Llamada para completar registro por mostrar en Reporte Revista.
      *
-     * @param object &$db    Conexión a B.D
+     * @param object &$db    ConexiÃ³n a B.D
      * @param array  $campos Campos por mostrar
-     * @param int    $idcaso Código de caso
+     * @param int    $idcaso CÃ³digo de caso
      *
      * @return void
      */
@@ -475,10 +475,10 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
 
 
     /**
-     * Llamada desde formulario de estadísticas individuales para
-     * dar la posibilidad de añadir elementos.
+     * Llamada desde formulario de estadÃ­sticas individuales para
+     * dar la posibilidad de aÃ±adir elementos.
      *
-     * @param object &$db   Conexión a B.D
+     * @param object &$db   ConexiÃ³n a B.D
      * @param object &$form Formulario
      *
      * @return Cadena por presentar
@@ -489,15 +489,15 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
 
     /**
      * Llamada desde estadisticas.php para completar primera consulta SQL
-     * que genera estadísticas
+     * que genera estadÃ­sticas
      *
-     * @param object &$db     Conexión a B.D
+     * @param object &$db     ConexiÃ³n a B.D
      * @param string &$where  Consulta SQL que se completa
      * @param string &$tablas Tablas incluidas en consulta
      *
      * @return void Modifica $tablas y $where
      */
-    static function estadisticasIndCreaConsulta(&$db, &$where, &$tablas) 
+    static function estadisticasIndCreaConsulta(&$db, &$where, &$tablas)
     {
     }
 
@@ -513,7 +513,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
     /**
      * Llamada para crear encabezado en Javascript
      *
-     * @param string &$js colchon de funciones en javascript 
+     * @param string &$js colchon de funciones en javascript
      *
      * @return void
      */
@@ -522,12 +522,12 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
     }
 
     /**
-     * Importa de un relato SINCODH lo relacionado con esta pestaña,
+     * Importa de un relato SINCODH lo relacionado con esta pestaÃ±a,
      * creando registros en la base de datos para el caso $idcaso
      *
-     * @param object &$db    Conexión a base de datos
+     * @param object &$db    ConexiÃ³n a base de datos
      * @param object $r      Relato en XML
-     * @param int    $idcaso Número de caso que se inserta
+     * @param int    $idcaso NÃºmero de caso que se inserta
      * @param string &$obs   Colchon para agregar notas de conversion
      *
      * @return void

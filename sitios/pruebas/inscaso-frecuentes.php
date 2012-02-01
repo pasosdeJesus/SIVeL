@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
-* Inserción de fuentes frecuentes de un caso
+* InserciÃ³n de fuentes frecuentes de un caso
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2007 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2007 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: inscaso-frecuentes.php,v 1.4.2.1 2011/09/14 14:56:19 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Inserción de fuentes frecuentes de un caso
+ * InserciÃ³n de fuentes frecuentes de un caso
  */
 if (PHP_SAPI !== 'cli') {
     die("Acceso: INTERPRETE DE COMANDOS");
@@ -30,7 +30,7 @@ $post['id_prensa'] = '1';
 $post['fecha']['d'] = '10';
 $post['fecha']['M'] = '10';
 $post['fecha']['Y'] = '2007';
-$post['ubicacion'] = 'ubicación';
+$post['ubicacion'] = 'ubicaciÃ³n';
 $post['clasificacion'] = 'clasificacion';
 $post['ubicacion_fisica'] = 'ubicacion';
 $post['_qf_frecuentes_siguienteMultiple'] = 'Fuente siguiente';

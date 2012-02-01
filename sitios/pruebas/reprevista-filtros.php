@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
  * Reporte revista con filtros.
@@ -8,9 +8,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2007 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2007 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: reprevista-filtros.php,v 1.6.2.1 2011/09/14 14:56:19 vtamara Exp $
  * @link      http://sivel.sf.net
 */
@@ -69,12 +69,12 @@ $post['retroalimentacion'] = '1';
 $post['ssocial'] = '';
 $post['titulo'] = '';
 $post['usuario'] = '';
-echo "** Por Código\n";
+echo "** Por CÃ³digo\n";
 consultaweb($post);
 
 $post['id_casos'] = '';
-$post['titulo'] = 'Título';
-echo "** Por Título\n";
+$post['titulo'] = 'TÃ­tulo';
+echo "** Por TÃ­tulo\n";
 consultaweb($post);
 
 $post['titulo'] = '';
@@ -96,7 +96,7 @@ consultaweb($post);
 
 $post['nomvic'] = '';
 $post['fini']['Y'] = '2007';
-echo "** Por Año inicial\n";
+echo "** Por AÃ±o inicial\n";
 consultaweb($post);
 
 $post['fini']['M'] = '08';
@@ -104,14 +104,14 @@ echo "** Por Mes inicial\n";
 consultaweb($post);
 
 $post['fini']['d'] = '07';
-echo "** Por día inicial\n";
+echo "** Por dÃ­a inicial\n";
 consultaweb($post);
 
 $post['fini']['Y'] = '';
 $post['fini']['M'] = '';
 $post['fini']['d'] = '';
 $post['ffin']['Y'] = '2007';
-echo "** Por año final\n";
+echo "** Por aÃ±o final\n";
 consultaweb($post);
 
 $post['ffin']['M'] = '08';
@@ -131,7 +131,7 @@ consultaweb($post);
 
 $post['presponsable'] = '';
 $post['clasificacion']['0'] = 'T:1000:1000';
-echo "** Por clasificación\n";
+echo "** Por clasificaciÃ³n\n";
 consultaweb($post);
 
 unset($post['clasificacion']);
@@ -146,7 +146,7 @@ consultaweb($post);
 
 
 $post['id_casos'] = '1';
-$post['titulo'] = 'Título';
+$post['titulo'] = 'TÃ­tulo';
 $post['id_departamento'] = '1';
 $post['id_municipio'] = '1';
 $post['id_clase'] = '1';
@@ -165,15 +165,15 @@ echo "** Todas las restricciones";
 consultaweb($post);
 
 $post['id_casos'] = '11';
-echo "** Código errado";
+echo "** CÃ³digo errado";
 consultaweb($post);
 
 $post['id_casos'] = '1';
 $post['titulo'] = 'Tot';
-echo "** Título errado";
+echo "** TÃ­tulo errado";
 consultaweb($post);
 
-$post['titulo'] = 'Título';
+$post['titulo'] = 'TÃ­tulo';
 $post['id_departamento'] = '2';
 echo "** Departamento errado";
 consultaweb($post);
@@ -205,12 +205,12 @@ consultaweb($post);
 
 $post['ffin']['M'] = '08';
 $post['ffin']['Y'] = '2006';
-echo "** Año final errado";
+echo "** AÃ±o final errado";
 consultaweb($post);
 
 $post['ffin']['Y'] = '2007';
 $post['fini']['d'] = '08';
-echo "** Día inicial errado";
+echo "** DÃ­a inicial errado";
 consultaweb($post);
 
 $post['fini']['d'] = '07';
@@ -220,7 +220,7 @@ consultaweb($post);
 
 $post['fini']['M'] = '08';
 $post['fini']['Y'] = '2008';
-echo "** Año inicial errado";
+echo "** AÃ±o inicial errado";
 consultaweb($post);
 
 $post['fini']['Y'] = '2007';
@@ -230,7 +230,7 @@ consultaweb($post);
 
 /*$post['presponsable'] = '1';
 $post['clasificacion']['0'] = 'T:1:0';
-echo "** Clasificación errada";
+echo "** ClasificaciÃ³n errada";
 consultaweb($post);
 **/
 $post['clasificacion']['0'] = 'T:1000:1000';
@@ -245,15 +245,15 @@ consultaweb($post);
 
 $post['usuario'] = '';
 $post['ordenar'] = 'localizacion';
-echo "** Ordenado por localización\n";
+echo "** Ordenado por localizaciÃ³n\n";
 consultaweb($post);
 
 $post['ordenar'] = 'codigo';
-echo "** Ordenado por código\n";
+echo "** Ordenado por cÃ³digo\n";
 consultaweb($post);
 
 unset($post['retroalimentacion']);
-echo "** Sin retroalimentación\n";
+echo "** Sin retroalimentaciÃ³n\n";
 consultaweb($post);
 
 unset($post['m_fuentes']);
@@ -269,11 +269,11 @@ echo "** Sin P. Responsables\n";
 consultaweb($post);
 
 unset($post['m_victimas']);
-echo "** Sin Víctimas\n";
+echo "** Sin VÃ­ctimas\n";
 consultaweb($post);
 
 unset($post['m_localizacion']);
-echo "** Sin Localización\n";
+echo "** Sin LocalizaciÃ³n\n";
 consultaweb($post);
 
 unset($post['caso_fecha']);
@@ -285,7 +285,7 @@ echo "** Sin Memo\n";
 consultaweb($post);
 
 unset($post['caso_id']);
-echo "** Sin Código\n";
+echo "** Sin CÃ³digo\n";
 consultaweb($post);
 
 

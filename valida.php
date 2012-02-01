@@ -1,6 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fenc=utf-8 :
-# coding: utf-8
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8 :
 /**
  * Realiza validaciones a datos de base
  *
@@ -94,7 +93,7 @@ res_valida(
 
 
 res_valida(
-    $db, 
+    $db,
     _("V&iacute;ctimas colectivas con categorias que no son para v&iacute;ctimas colectivas"),
     "SELECT actocolectivo.id_caso, actocolectivo.id_categoria, grupoper.nombre
     FROM actocolectivo, grupoper
@@ -115,6 +114,6 @@ res_valida(
 echo '<table width="100%">
     <td style = "white-space: nowrap; background-color: #CCCCCC;"
     align = "left" valign="top" colspan="2"><b><div align=right>
-    <a href = "index.php">' . _('Men&uacute; Principal') . 
+    <a href = "index.php">' . _('Men&uacute; Principal') .
     '</a></div></b></td></table>';
 ?>

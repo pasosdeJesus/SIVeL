@@ -1,21 +1,21 @@
 <?php
-//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Estadísticas victimas colectivas por rótulos
+ * EstadÃ­sticas victimas colectivas por rÃ³tulos
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2009 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2009 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: estcolectivas.php,v 1.16.2.6 2011/11/15 12:03:19 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Estadísticas de victimas individuales/casos por rótulos
+ * EstadÃ­sticas de victimas individuales/casos por rÃ³tulos
  */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
@@ -37,22 +37,22 @@ require_once "ResConsulta.php";
 
 
 /**
- * Responde a botón consulta
+ * Responde a botÃ³n consulta
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  */
 class AccionEstadisticasCol extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -71,7 +71,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         $pSupra = var_post_escapa('id_supracategoria');
         $pSegun = var_post_escapa('segun');
         $pMuestra = var_post_escapa('muestra');
-        
+
         $pMunicipio = var_post_escapa('municipio');
         $pDepartamento = var_post_escapa('departamento');
         $pSinFiliacion = var_post_escapa('sinfiliacion');
@@ -163,7 +163,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             $cfSegun = "filiacion.nombre";
             $tablaSegun = "filiacion, ";
             $condSegun = "AND filiacion.id=$cons2.id_filiacion";
-            $titSegun = 'Filiación';
+            $titSegun = 'FiliaciÃ³n';
         } else if ($pSegun == 'id_sector_social') {
             $campoSegun = "id_sector_social";
             $cfSegun = "sector_social.nombre";
@@ -202,7 +202,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         if ($pSegun == 'id_p_responsable') {
             $cab[] = 'N. Actos';
         } else {
-            $cab[] = 'N. Víctimizaciones';
+            $cab[] = 'N. VÃ­ctimizaciones';
         }
         $tCat .= '';
         $tQue .= "victima_colectiva, grupoper $tCat, ";
@@ -227,7 +227,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         $pQ1='id_grupoper, ';
         $pQ1sel = 'victima_colectiva.id_grupoper, ';
         $tablas = $tablaFil . $tablaSegun . "$tQue actocolectivo, caso, categoria ";
-        $campos = array('caso_id' => 'Cód.');
+        $campos = array('caso_id' => 'CÃ³d.');
 
 
         if ($pTipo != '') {
@@ -286,13 +286,13 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             $result->getMessage()."'"
             );
         }
-// El método para departamento y municipio es machete porque cuando
-// no hay asigna santa-marta y así saldría e.g PUTUMAYO    SANTA MARTA
-        $q3 = "SELECT $cfSegun3 $tDep $tMun 
-            TRIM(parametros_reporte_consolidado.rotulo), 
-            SUM($cons2.personas_aprox) 
-            FROM $tablaSegun departamento, municipio, 
-            parametros_reporte_consolidado, $cons2 
+// El mÃ©todo para departamento y municipio es machete porque cuando
+// no hay asigna santa-marta y asÃ­ saldrÃ­a e.g PUTUMAYO    SANTA MARTA
+        $q3 = "SELECT $cfSegun3 $tDep $tMun
+            TRIM(parametros_reporte_consolidado.rotulo),
+            SUM($cons2.personas_aprox)
+            FROM $tablaSegun departamento, municipio,
+            parametros_reporte_consolidado, $cons2
             WHERE (($cons2.id_departamento IS NULL AND departamento.id = 47) OR
             departamento.id = $cons2.id_departamento)
             AND (($cons2.id_municipio IS NULL AND municipio.id = 1
@@ -361,7 +361,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             }
             echo "<th>Total</th>";
             echo "</tr>\n";
-            
+
             $row = array();
             foreach ($tfil as $f => $t1) {
                 echo "<tr>";
@@ -371,7 +371,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
                     echo "<td>";
                     if (isset($celda[$f][$c])) {
                         echo htmlentities($celda[$f][$c]); # . " " . $sfil;
-                        if ($ncol >= $colenc) { 
+                        if ($ncol >= $colenc) {
                             $scol[$c] += (int)$celda[$f][$c];
                             $sfil += (int)$celda[$f][$c];
                         }
@@ -436,12 +436,12 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
 
 
 /**
- * Formulario de Estadísticas Individuales por rótulos
+ * Formulario de EstadÃ­sticas Individuales por rÃ³tulos
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  */
 class PagEstadisticasCol extends HTML_QuickForm_Page
@@ -449,7 +449,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
 
     /**
      * Constructora.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param string $nomForma Nombre
      * @param string $mreq     Mensaje de dato requerido
@@ -497,7 +497,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
 
         $e =& $this->addElement(
             'header', null,
-            'Estadísticas Victimas Colectivas'
+            'EstadÃ­sticas Victimas Colectivas'
         );
 
         $e =& $this->addElement('hidden', 'num', (int)$_REQUEST['num']);
@@ -559,11 +559,11 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
 
         $sel =& $this->addElement(
             'select',
-            'segun', 'Según'
+            'segun', 'SegÃºn'
         );
         $sel->loadArray(
             array('' => '',
-            'id_p_responsable' => 'ACTOS ' 
+            'id_p_responsable' => 'ACTOS '
                 . strtoupper($GLOBALS['etiqueta']['p_responsable']),
             'meses' => 'MESES',
         )
@@ -583,7 +583,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
         );
         //       $sel->setValue(true);
         $ae[] =& $sel;
-        $this->addGroup($ae, null, 'Localización', '&nbsp;', false);
+        $this->addGroup($ae, null, 'LocalizaciÃ³n', '&nbsp;', false);
 
         $ae = array();
         $sel =& $this->createElement(
@@ -593,7 +593,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
         //        $sel->setValue(true);
         $ae[] =& $sel;
         $this->addGroup(
-            $ae, null, "Víctimas colectivas sin " .
+            $ae, null, "VÃ­ctimas colectivas sin " .
             $GLOBALS['etiqueta']['filiacion'],
             '&nbsp;', false
         );
@@ -607,9 +607,9 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
 
         $ae[] =&  $this->createElement(
             'radio', 'muestra', 'csv',
-            'Formato CSV (hoja de cálculo)', 'csv'
+            'Formato CSV (hoja de cÃ¡lculo)', 'csv'
         );
-        $this->addGroup($ae, null, 'Forma de presentación', '&nbsp;', false);
+        $this->addGroup($ae, null, 'Forma de presentaciÃ³n', '&nbsp;', false);
         $t->setChecked(true);
 
 
@@ -630,7 +630,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
 
 
 /**
- * Presenta formulario filtro o estadística
+ * Presenta formulario filtro o estadÃ­stica
  */
 function muestra($dsn, $accno)
 {

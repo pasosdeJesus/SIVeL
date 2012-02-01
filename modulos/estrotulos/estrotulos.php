@@ -1,21 +1,21 @@
 <?php
-//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Estadísticas victimas individuales por rótulos
+ * EstadÃ­sticas victimas individuales por rÃ³tulos
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2009 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2009 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: estrotulos.php,v 1.16.2.6 2011/11/15 12:03:19 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Estadísticas de victimas individuales por rótulos
+ * EstadÃ­sticas de victimas individuales por rÃ³tulos
  */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
@@ -36,22 +36,22 @@ require_once "PagTipoViolencia.php";
 require_once "ResConsulta.php";
 
 /**
- * Responde a botón consulta
+ * Responde a botÃ³n consulta
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  */
 class AccionEstadisticasIndRot extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acción
+     * Ejecuta acciÃ³n
      *
-     * @param object &$page      Página
-     * @param string $actionName Acción
+     * @param object &$page      PÃ¡gina
+     * @param string $actionName AcciÃ³n
      *
      * @return void
      */
@@ -152,9 +152,9 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
             $cfSegun = "meses";
             $tablaSegun= "";
             $titSegun = 'Mes';
-        } elseif ($pSegun == 'id_filiacion' ||
-            $pSegun == 'id_organizacion' ||
-            $pSegun == 'id_sector_social' 
+        } elseif ($pSegun == 'id_filiacion'
+            || $pSegun == 'id_organizacion'
+            || $pSegun == 'id_sector_social'
         ) { # or $pSegun = '!= '') {
             $campoSegun = $pSegun;
             $ant = explode("_", $pSegun);
@@ -174,7 +174,7 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
             $tablaSegun .= ",";
         }
 
-        $colenc = 0; // Número de columnas con etiquetas en lugar de datos
+        $colenc = 0; // NÃºmero de columnas con etiquetas en lugar de datos
         $cab = array();
         if ($titSegun != "") {
             $cab[] = $titSegun;
@@ -195,7 +195,7 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
             $colenc++;
         }
         $cab[] = 'Rotulo';
-        $cab[] = 'N. Víctimizaciones';
+        $cab[] = 'N. VÃ­ctimizaciones';
         $tCat .= 'acto';
         $tQue .= "victima, persona, $tCat, ";
         consulta_and_sinap($where, "victima.id_caso","caso.id");
@@ -206,7 +206,7 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
         $pQ1='id_persona, ';
         $pQ1sel = 'persona.id, ';
         $tablas = $tablaSegun . "$tQue caso, categoria";
-        $campos = array('caso_id' => 'Cód.');
+        $campos = array('caso_id' => 'CÃ³d.');
 
 
         if ($pTipo != '') {
@@ -262,11 +262,11 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
             );
         }
 
-        // El método para departamento y municipio es machete porque cuando
-        // no hay asigna santa-marta y así saldría e.g PUTUMAYO    SANTA MARTA
-        $q3 = "SELECT $cfSegun3 $tDep $tMun 
-            TRIM(parametros_reporte_consolidado.rotulo), 
-            COUNT(cast($cons2.id_persona as text) || ' ' || cast($cons2.id_caso as text)) 
+        // El mÃ©todo para departamento y municipio es machete porque cuando
+        // no hay asigna santa-marta y asÃ­ saldrÃ­a e.g PUTUMAYO    SANTA MARTA
+        $q3 = "SELECT $cfSegun3 $tDep $tMun
+            TRIM(parametros_reporte_consolidado.rotulo),
+            COUNT(cast($cons2.id_persona as text) || ' ' || cast($cons2.id_caso as text))
             FROM $tablaSegun departamento, municipio,
             parametros_reporte_consolidado,
             $cons2
@@ -299,8 +299,8 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
         for ($i = 0; $i < count($cab)-2; $i++) {
             $tcol[$cab[$i]]=1;
         }
-        $q4='SELECT no_columna, rotulo 
-            FROM parametros_reporte_consolidado 
+        $q4='SELECT no_columna, rotulo
+            FROM parametros_reporte_consolidado
             ORDER BY 1';
         $rcon = hace_consulta($db, $q4);
         if (PEAR::isError($rcon)) {
@@ -365,7 +365,7 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
                 echo "</tr>\n";
             }
 
-            if (count($tfil) > 1) { 
+            if (count($tfil) > 1) {
                 echo "<tr>";
                 $sfil = 0;
                 $ncol = 0;
@@ -416,12 +416,12 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
 
 
 /**
- * Formulario de Estadísticas Individuales por rótulos
+ * Formulario de EstadÃ­sticas Individuales por rÃ³tulos
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  */
 class PagEstadisticasIndRot extends HTML_QuickForm_Page
@@ -429,7 +429,7 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
 
     /**
      * Constructora.
-     * Ver documentación completa en clase base.
+     * Ver documentaciÃ³n completa en clase base.
      *
      * @param string $nomForma Nombre
      * @param string $mreq     Mensaje de dato requerido
@@ -478,7 +478,7 @@ function buildForm()
     $x =&  objeto_tabla('departamento');
     $db = $x->getDatabaseConnection();
 
-    $e =& $this->addElement('header', null, 'Estadísticas Victimas Individuales');
+    $e =& $this->addElement('header', null, 'EstadÃ­sticas Victimas Individuales');
     $e =& $this->addElement('hidden', 'num', (int)$_REQUEST['num']);
 
 //    $e =& $this->addElement('static', 'fini', 'Victimas ');
@@ -540,11 +540,11 @@ function buildForm()
 
     $sel =& $this->addElement(
         'select',
-        'segun', 'Según'
+        'segun', 'SegÃºn'
     );
     $sel->loadArray(
         array('' => '',
-        'id_p_responsable' => 'ACTOS ' 
+        'id_p_responsable' => 'ACTOS '
             . strtoupper($GLOBALS['etiqueta']['p_responsable']),
         'id_rango_edad' => strtoupper($GLOBALS['etiqueta']['rango_edad']),
         'sexo' => strtoupper($GLOBALS['etiqueta']['sexo']),
@@ -572,7 +572,7 @@ function buildForm()
     );
     //$sel->setValue(true);
     $ae[] =& $sel;
-    $this->addGroup($ae, null, 'Localización', '&nbsp;', false);
+    $this->addGroup($ae, null, 'LocalizaciÃ³n', '&nbsp;', false);
 
     $ae = array();
     $sel =& $this->createElement(
@@ -582,7 +582,7 @@ function buildForm()
     //$sel->setValue(true);
     $ae[] =& $sel;
     $this->addGroup(
-        $ae, null, "Víctimas sin " .
+        $ae, null, "VÃ­ctimas sin " .
         $GLOBALS['etiqueta']['filiacion'],
         '&nbsp;', false
     );
@@ -596,9 +596,9 @@ function buildForm()
 
     $ae[] =&  $this->createElement(
         'radio', 'muestra', 'csv',
-        'Formato CSV (hoja de cálculo)', 'csv'
+        'Formato CSV (hoja de cÃ¡lculo)', 'csv'
     );
-    $this->addGroup($ae, null, 'Forma de presentación', '&nbsp;', false);
+    $this->addGroup($ae, null, 'Forma de presentaciÃ³n', '&nbsp;', false);
     $t->setChecked(true);
 
 
@@ -619,7 +619,7 @@ function buildForm()
 
 
 /**
- * Presenta formulario filtro o estadística
+ * Presenta formulario filtro o estadÃ­stica
  */
 function muestra($dsn, $accno)
 {

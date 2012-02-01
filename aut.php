@@ -1,25 +1,25 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Funciones para autenticación de usuarios con Auth de Pear.
+ * Funciones para autenticaciÃ³n de usuarios con Auth de Pear.
  * Con base en {@link http://structio.sourceforge.net/seguidor}
  * que a su vez se basa en
  * {@link http://pear.php.net/manual/en/package.authentication.auth.intro.php}
- * Debe incluirse después de incluir misc.php.
+ * Debe incluirse despuÃ©s de incluir misc.php.
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: aut.php,v 1.20.2.4 2011/12/31 19:28:47 vtamara Exp $
  * @link      http://sivel.sf.net
  */
 
 /**
- * Funciones para autenticación de usuarios con Auth de Pear.
+ * Funciones para autenticaciÃ³n de usuarios con Auth de Pear.
  */
 require_once "Auth.php";
 require_once "DB.php";
@@ -61,7 +61,7 @@ function noLoginFunction()
  * Extrae opciones para un usuario.
  *
  * @param string  $usuario Login del usuario
- * @param handle  &$db     Conexión a BD
+ * @param handle  &$db     ConexiÃ³n a BD
  * @param array   &$op     Se llena con opciones del usuario.
  * @param integer &$rol    Rol del usuario
  *
@@ -80,7 +80,7 @@ function sacaOpciones($usuario, &$db, &$op, &$rol)
         "WHERE id_rol='" . $rol . "';";
     $result = hace_consulta($db, $q, false);
     if (PEAR::isError($result)) {
-        die("No se encontró el rol del usuario");
+        die("No se encontrÃ³ el rol del usuario");
     }
     $row = array();
     while ($result->fetchInto($row)) {
@@ -90,11 +90,11 @@ function sacaOpciones($usuario, &$db, &$op, &$rol)
 
 
 /**
- * Retorna nombre de la sesión basado en URL.
- * Podría considerarse una forma de almacenar sesiones diferente --drupal
+ * Retorna nombre de la sesiÃ³n basado en URL.
+ * PodrÃ­a considerarse una forma de almacenar sesiones diferente --drupal
  * usa base de datos.
  *
- * @return string Nombre de la sesión
+ * @return string Nombre de la sesiÃ³n
  */
 function nomSesion()
 {
@@ -105,10 +105,10 @@ function nomSesion()
         $dsru = substr($sru, 0, $l);
     }
     // La idea de usar HTTP_HOST es de fuentes de Drupal pero no basta porque
-    // al menos en php 5.2.5 de OpenBSD 4.2 el nombre de la sesión debe
-    // ser alfanumérico (documentado) y comenzar con letra (no documentado).
-    // Así mismo varias instalaciones en el mismo HOST corriendo simultaneamente
-    // confundirían el nombre de sesión.
+    // al menos en php 5.2.5 de OpenBSD 4.2 el nombre de la sesiÃ³n debe
+    // ser alfanumÃ©rico (documentado) y comenzar con letra (no documentado).
+    // AsÃ­ mismo varias instalaciones en el mismo HOST corriendo simultaneamente
+    // confundirÃ­an el nombre de sesiÃ³n.
     $snru = preg_replace(
         '/[^a-z0-9]/i', '',
         "s" . $_SERVER['HTTP_HOST'] . $dsru
@@ -118,7 +118,7 @@ function nomSesion()
 
 
 /**
- * De requerirlo inicia sesión y autentica un usuario listado como usuario
+ * De requerirlo inicia sesiÃ³n y autentica un usuario listado como usuario
  * en la base de datos y consulta opciones a las que puede acceder.
  * Si el usuario tiene permiso para la opcion $opcion retorna true.
  * En otro caso falla.
@@ -126,7 +126,7 @@ function nomSesion()
  * @param string  $dsn      URL de base de datos
  * @param string  $accno    Mensaje de error por mostrar si no autentica
  * @param string  &$usuario Retorna en esta variable el login del usuario
- * @param integer $opcion   Código de la opción del menu que el usuario desea
+ * @param integer $opcion   CÃ³digo de la opciÃ³n del menu que el usuario desea
  *
  * @return mixed Conectar base de datos
  */
@@ -159,8 +159,8 @@ function autenticaUsuario($dsn,  $accno, &$usuario, $opcion)
     if ($a->checkAuth()) {
         ini_set('session.cookie_httponly', true);
         ini_set('session.cookie_secure', true);
-        $texp = 60*60*4; // 4 horas de sesión
-        ini_set('session.gc_maxlifetime', $texp); 
+        $texp = 60*60*4; // 4 horas de sesiÃ³n
+        ini_set('session.gc_maxlifetime', $texp);
         $a->setExpire($texp);
         $a->setIdle($texp / 2);
 
@@ -180,7 +180,7 @@ function autenticaUsuario($dsn,  $accno, &$usuario, $opcion)
             sacaOpciones($usuario, $db, $op, $rol);
             if (count($op) == 0) {
                 echo "No tiene opciones este usuario, " .
-                    "¿seguro la base está bien inicializada?";
+                    "Â¿seguro la base estÃ¡ bien inicializada?";
             }
             $_SESSION['opciones'] = $op;
             $q = "SELECT id FROM funcionario " .
@@ -248,7 +248,7 @@ function autenticaUsuario($dsn,  $accno, &$usuario, $opcion)
 
 
 /**
- * Cierra sesión iniciada con autenticaUsuario.
+ * Cierra sesiÃ³n iniciada con autenticaUsuario.
  *
  * @param string $dsn URL de base de datos
  *
@@ -281,7 +281,7 @@ function cierraSesion($dsn)
 
 
 /**
- * Localiza directorio del archivo de configuración según URL
+ * Localiza directorio del archivo de configuraciÃ³n segÃºn URL
  *
  * @return nada
  */
@@ -332,7 +332,7 @@ function localizaConf()
         }
     }
     if (!$existe) {
-        die("No existe configuración '$dirsitio'");
+        die("No existe configuraciÃ³n '$dirsitio'");
     }
     //trigger_error("OJO quedo dirsitio='$dirsitio'");
     return $dirsitio;

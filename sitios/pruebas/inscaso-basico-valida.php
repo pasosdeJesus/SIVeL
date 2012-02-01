@@ -1,21 +1,21 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
- * Verifica inserción en pestaña básicos
+ * Verifica inserciÃ³n en pestaÃ±a bÃ¡sicos
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2011 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2011 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: inscaso-basico-valida.php,v 1.6.2.1 2011/09/14 14:56:19 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
-// Necesario porque la pestaña termina pasando por
+// Necesario porque la pestaÃ±a termina pasando por
 // QuickForm/Actions/Jump.php que intenta enviar encabezado Location
 // para cargar otra pagina y eso no es soportado en modo CLI.
 

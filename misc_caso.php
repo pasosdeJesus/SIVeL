@@ -1,25 +1,25 @@
 <?php
 
-/* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker: */
+/* vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8: */
 
 /**
-* Funciones diversas útiles en fuentes que requieren interfaz de captura
+* Funciones diversas Ãºtiles en fuentes que requieren interfaz de captura
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2006 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2006 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: misc_caso.php,v 1.35.2.2 2011/10/18 16:05:03 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 
 /**
- * Funciones diversas útiles en fuentes que requieren interfaz de captura
+ * Funciones diversas Ãºtiles en fuentes que requieren interfaz de captura
  */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
@@ -32,10 +32,10 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
 }
 
 /**
- * eliminaCaso(db, idcaso) elimina el caso número idcaso usando la conexión
+ * eliminaCaso(db, idcaso) elimina el caso nÃºmero idcaso usando la conexiÃ³n
  * a la base db.
  *
- * @param handle  &$db    Conexión a base de datos
+ * @param handle  &$db    ConexiÃ³n a base de datos
  * @param integer $idcaso Id. del caso
  *
  * @return void
@@ -43,7 +43,7 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
 function eliminaCaso(&$db, $idcaso)
 {
     if (!isset($idcaso) || $idcaso == "") {
-        die("Sólo se eliminan casos ya ingresados");
+        die("SÃ³lo se eliminan casos ya ingresados");
     }
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
         list($n, $c, $o) = $tab;
@@ -72,7 +72,7 @@ function eliminaCaso(&$db, $idcaso)
 
 
 /**
- * Llama función actGlobales de cada una de los tabuladores de la
+ * Llama funciÃ³n actGlobales de cada una de los tabuladores de la
  * ficha de captura.
  *
  * @return void

@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
-* Inserción de un usuario
+* InserciÃ³n de un usuario
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2007 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2007 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: insusu.php,v 1.5.2.2 2011/10/11 16:33:37 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Inserción de un usuario
+ * InserciÃ³n de un usuario
  */
 if (PHP_SAPI !== 'cli') {
     die("Acceso: INTERPRETE DE COMANDOS");
@@ -33,7 +33,7 @@ $_REQUEST['password'] = $_POST['password'] = 'b';
 $_REQUEST['nombre'] = $_POST['nombre'] = 'c';
 $_REQUEST['descripcion'] = $_POST['descripcion'] = 'd';
 $_REQUEST['id_rol'] = $_POST['id_rol'] = '1';
-$_REQUEST['añadir'] = $_POST['añadir'] = 'Añadir';
+$_REQUEST['aÃ±adir'] = $_POST['aÃ±adir'] = 'AÃ±adir';
 $_REQUEST['evita_csrf'] = $_SESSION['sin_csrf'] = $_POST['evita_csrf'] = 1234;
 
 $_SERVER['REQUEST_URI'] = 'pruebas';
@@ -47,7 +47,7 @@ $nd = (int)$db->getOne("SELECT COUNT(id_usuario) FROM usuario;");
 echo "insusu nd=$nd\n";
 
 if (($nd-$na)!= 1) {
-    echo "No insertó";
+    echo "No insertÃ³";
     exit(1);
 }
 exit(0);

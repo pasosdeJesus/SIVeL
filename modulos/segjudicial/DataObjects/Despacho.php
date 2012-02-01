@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Objeto tabla despacho
  *
@@ -7,12 +7,12 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio p鷅lico. Sin garant韆s.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico. Sin garant韆s.
+ * @author    Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio p煤blico. Sin garant铆as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico. Sin garant铆as.
  * @version   CVS: $Id: Despacho.php,v 1.12.2.3 2011/10/22 12:55:08 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: S覮O DEFINICIONES
+ * Acceso: S脫LO DEFINICIONES
  */
 
 
@@ -20,12 +20,12 @@ require_once 'DataObjects/Basica.php';
 
 /**
  * Definicion para la tabla despacho
- * Ver documentaci髇 de DataObjects_Caso.
+ * Ver documentaci贸n de DataObjects_Caso.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
@@ -37,7 +37,7 @@ class DataObjects_Despacho extends DataObjects_Basica
     var $id_tipo;                              // int4(4)  not_null
     var $observaciones;                        // varchar(-1)  not_null
 
-    var $nom_tabla = 'Despacho de una actuaci髇 judicial';
+    var $nom_tabla = 'Despacho de una actuaci贸n judicial';
 
     var $fb_preDefOrder = array(
         'id',
@@ -55,29 +55,29 @@ class DataObjects_Despacho extends DataObjects_Basica
         'fechacreacion',
         'fechadeshabilitacion',
     );
- 
+
     var $fb_addFormHeader = false;
     var $fb_fieldsRequired = array(
-        'id_tipo', 
+        'id_tipo',
         'nombre',
         'fechacreacion'
     );
     var $fb_linkDisplayFields = array(
-        'nombre', 
+        'nombre',
         'id_tipo',
     );
     var $fb_fieldLabels = array(
         'id_tipo' => 'Tipo de proceso',
         'nombre' => 'Nombre',
         'observaciones' => 'Observaciones',
-        'fechacreacion' => 'Fecha de creaci髇',
-        'fechadeshabilitacion' => 'Fecha de deshabilitaci髇',
+        'fechacreacion' => 'Fecha de creaci贸n',
+        'fechadeshabilitacion' => 'Fecha de deshabilitaci贸n',
     );
 
     /**
-     * Identificacion de registro 'SIN INFORMACI覰'
+     * Identificacion de registro 'SIN INFORMACI脫N'
      *
-     * @return string Identificaci髇
+     * @return string Identificaci贸n
      */
     static function idSinInfo()
     {

@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
 * Editar usuarios y roles de usuario
@@ -8,9 +8,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: detusyrol.php,v 1.48.2.5 2011/10/26 03:42:55 vtamara Exp $
  * @link      http://sivel.sf.net
 */
@@ -40,7 +40,7 @@ if (isset($_GET['id'])) {
         $d->$n = $r[1];
     }
     if ($d->find()!=1) {
-        die("Se esperaba un sólo registro");
+        die("Se esperaba un sÃ³lo registro");
     }
     $d->fetch();
 }
@@ -53,7 +53,7 @@ $f->setRequiredNote($mreq);
 
 $ed = array();
 if (!isset($_GET['id'])) {
-    $e =& $f->createElement('submit', 'añadir', 'Añadir');
+    $e =& $f->createElement('submit', 'aÃ±adir', 'AÃ±adir');
     $ed[] =& $e;
 } else {
     $s=& $f->getElement('id_usuario');
@@ -66,14 +66,14 @@ if (!isset($_GET['id'])) {
 $f->addGroup($ed, null, '', '&nbsp;', false);
 $f->addElement(
     'header', null, '<div align=right>' .
-    '<a href = "index.php">Menú Principal</a></div>'
+    '<a href = "index.php">MenÃº Principal</a></div>'
 );
 
 $actsincambiarclave = isset($f->_submitValues['actualizar'])
     && $f->_submitValues['password'] == '';
 if ($actsincambiarclave || $f->validate()) {
     if (!verifica_sin_CSRF($f->_submitValues)) {
-        die("Datos enviados no pasaron verificación CSRF");
+        die("Datos enviados no pasaron verificaciÃ³n CSRF");
     }
     if (isset($GLOBALS['deshabilita_manejo_usuarios'])
         && $GLOBALS['deshabilita_manejo_usuarios'] === true
@@ -87,17 +87,17 @@ if ($actsincambiarclave || $f->validate()) {
         $b->forceQueryType(DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT);
     }
     if (isset($f->_submitValues['actualizar'])
-        || isset($f->_submitValues['añadir'])
+        || isset($f->_submitValues['aÃ±adir'])
     ) {
         $res = $f->process(array($b, 'processForm'), false);
-        if (isset($f->_submitValues['añadir']) ) {
+        if (isset($f->_submitValues['aÃ±adir']) ) {
             $db = $d->getDatabaseConnection();
             if (PEAR::isError($db)) {
                 die($db->getMessage());
             }
             $q = "INSERT INTO funcionario (anotacion, nombre) " .
-                " VALUES ('" 
-                . var_escapa($f->_submitValues['descripcion'], $db) . "', '" 
+                " VALUES ('"
+                . var_escapa($f->_submitValues['descripcion'], $db) . "', '"
                 . var_escapa($f->_submitValues['id_usuario'], $db) . "')";
             //echo $q;
             hace_consulta($db, $q);

@@ -1,36 +1,36 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
-* Cierra sesi髇 de Sivel
+* Cierra sesi贸n de Sivel
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio p鷅lico. Sin garant韆s.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico. Sin garant韆s.
+ * @author    Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio p煤blico. Sin garant铆as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico. Sin garant铆as.
  * @version   CVS: $Id: terminar.php,v 1.24.2.1 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: CONSULTA P贐LICA
+ * Acceso: CONSULTA P脷BLICA
 */
 
 
 /**
- * Cierra sesi髇 de Sivel
+ * Cierra sesi贸n de Sivel
  */
 require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once 'misc.php';
 
 cierraSesion($dsn);
-echo "<html><head><title>SIVeL: Sistema de Informaci髇 de Violencia " .
-    "Pol韙ica en L韓ea</title></head>";
+echo "<html><head><title>SIVeL: Sistema de Informaci贸n de Violencia " .
+    "Pol铆tica en L铆nea</title></head>";
 echo "<body>";
-echo "<h1>SIVeL: Sistema de Informaci髇 de Violencia Pol韙ica en L韓ea</h1>";
-echo "Fin de sesi髇<br>";
-echo '<a href = "index.php">Iniciar nueva sesi髇</a>';
+echo "<h1>SIVeL: Sistema de Informaci贸n de Violencia Pol铆tica en L铆nea</h1>";
+echo "Fin de sesi贸n<br>";
+echo '<a href = "index.php">Iniciar nueva sesi贸n</a>';
 echo "</body>";
 echo "</html>";
 ?>

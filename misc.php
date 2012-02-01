@@ -1,24 +1,24 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Funciones diversas ˙tiles en varias fuentes PHP.
- * CrÈditos: Se ha empleado porciones cortas de cÛdigo y documentaciÛn
+ * Funciones diversas √∫tiles en varias fuentes PHP.
+ * Cr√©ditos: Se ha empleado porciones cortas de c√≥digo y documentaci√≥n
  * disponible en: http://structio.sourceforge.net/seguidor
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T·mara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio p˙blico. Sin garantÌas.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P˙blico. Sin garantÌas.
+ * @author    Vladimir T√°mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio p√∫blico. Sin garant√≠as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P√∫blico. Sin garant√≠as.
  * @version   CVS: $Id: misc.php,v 1.147.2.11 2011/12/31 19:28:47 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: S”LO DEFINICIONES
+ * Acceso: S√ìLO DEFINICIONES
  */
 
 /**
- * Funciones diversas ˙tiles en varias fuentes PHP.
+ * Funciones diversas √∫tiles en varias fuentes PHP.
  */
 
 require_once "Auth.php";
@@ -61,11 +61,11 @@ $GLOBALS['mes_corto'] = array(1=>'Ene', 2=>'Feb', 3=>'Mar',
 $GLOBALS['mreglareq'] = 'El campo %s es indispensable.';
 
 /**
- * Mensaje de valores no v·lidos
+ * Mensaje de valores no v√°lidos
  * @global string $GLOBALS['mreglavio']
  * @name   $mreglavio
  */
-$GLOBALS['mreglavio'] = '%s: El valor que ha ingresado no es v·lido.';
+$GLOBALS['mreglavio'] = '%s: El valor que ha ingresado no es v√°lido.';
 
 /**
  * Campos por mostrar por defecto en reportes
@@ -73,20 +73,20 @@ $GLOBALS['mreglavio'] = '%s: El valor que ha ingresado no es v·lido.';
  * @name   $cw_ncampos
  */
 if (!isset($GLOBALS['cw_ncampos'])) {
-    $GLOBALS['cw_ncampos'] = array('caso_id' => 'CÛdigo',
-        'caso_memo' => 'DescripciÛn',
+    $GLOBALS['cw_ncampos'] = array('caso_id' => 'C√≥digo',
+        'caso_memo' => 'Descripci√≥n',
         'caso_fecha' => 'Fecha',
-        'm_ubicacion' => 'UbicaciÛn',
-        'm_victimas' => 'VÌctimas',
+        'm_ubicacion' => 'Ubicaci√≥n',
+        'm_victimas' => 'V√≠ctimas',
         'm_presponsables' => 'Pr. Resp.',
-        'm_tipificacion' => 'TipificaciÛn'
+        'm_tipificacion' => 'Tipificaci√≥n'
     );
 }
 
     /*
 
     /**
-     * N˙mero de caso usado en b˙squedas --no puede usarse en casos.
+     * N√∫mero de caso usado en b√∫squedas --no puede usarse en casos.
      * @global unknown $GLOBALS['idbus']
      * @name   $idbus
      */
@@ -96,36 +96,36 @@ $GLOBALS['idbus']=-1;
 /* -------- OPERACIONES CON CADENAS */
 
 /**
- * Convierte a min˙sculas textos en espaÒol
+ * Convierte a min√∫sculas textos en espa√±ol
  *
  * @param string $s Cadena
  *
- * @return string Convertida a min˙sculas
+ * @return string Convertida a min√∫sculas
      */
 function a_minusculas($s)
 {
     $r = strtolower($s);
     $r = str_replace(
-        array('¡', '…', 'Õ', '”', '⁄'),
-        array('·', 'È', 'Ì', 'Û', '˙'), $r
+        array('√Å', '√â', '√ç', '√ì', '√ö'),
+        array('√°', '√©', '√≠', '√≥', '√∫'), $r
     );
     return $r;
 }
 
 
 /**
- * Convierta may˙sculas textos en espaÒol
+ * Convierta may√∫sculas textos en espa√±ol
  *
  * @param string $s Cadena
  *
- * @return string Convertida a may˙scula
+ * @return string Convertida a may√∫scula
      */
 function a_mayusculas($s)
 {
     $r = strtoupper($s);
     $r = str_replace(
-        array('·', 'È', 'Ì', 'Û', '˙', 'Ò', '¸'),
-        array('¡', '…', 'Õ', '”', '⁄', '—', '‹'),
+        array('√°', '√©', '√≠', '√≥', '√∫', '√±', '√º'),
+        array('√Å', '√â', '√ç', '√ì', '√ö', '√ë', '√ú'),
         $r
     );
     return $r;
@@ -133,18 +133,18 @@ function a_mayusculas($s)
 
 
 /**
- * Convierte a may˙scula la primera letra de cada palabra de $s y el resto a
- * min˙sculas.
+ * Convierte a may√∫scula la primera letra de cada palabra de $s y el resto a
+ * min√∫sculas.
  *
  * @param string $s Cadena
  *
- * @return string Convertida primera letra de cada palabra a may˙scula
- *         y resto a min˙sculas
+ * @return string Convertida primera letra de cada palabra a may√∫scula
+ *         y resto a min√∫sculas
      */
 function prim_may($s)
 {
     $rs = a_minusculas($s);
-    $ant = 1; // PrÛximo debe ser may˙scula
+    $ant = 1; // Pr√≥ximo debe ser may√∫scula
     for ($i = 0; $i < strlen($rs); $i++) {
         if ($ant == 1) {
             $rs[$i] = a_mayusculas($rs[$i]);
@@ -166,7 +166,7 @@ function prim_may($s)
  *
  * @param char $c caracter
  *
- * @return string  RepresentaciÛn laTeX
+ * @return string  Representaci√≥n laTeX
      */
 function car2latex($c)
 {
@@ -201,10 +201,10 @@ function car2latex($c)
     case '~':
         $r = '\\~{}';
         break;
-    case 'ø':
+    case '¬ø':
         $r = '?`';
         break;
-    case '°':
+    case '¬°':
         $r = '!`';
         break;
     case '|':
@@ -228,11 +228,11 @@ function car2latex($c)
 function txt2latex($s)
 {
     $r = "";
-    $nc = 0; // N˙mero de comillas encontradas
-    $nc = 0; // N˙mero de apostrofes encontradas
+    $nc = 0; // N√∫mero de comillas encontradas
+    $nc = 0; // N√∫mero de apostrofes encontradas
     for ($i = 0; $i < strlen($s); $i++) {
         switch ($s{$i}) {
-        case '"': 
+        case '"':
             $nc++;
             if (($nc % 2)==1) {
                 $r .= "``";
@@ -240,7 +240,7 @@ function txt2latex($s)
                 $r .= "''";
             }
             break;
-        case '\'': 
+        case '\'':
             $na++;
             if (($na % 2)==1) {
                 $r .= "`";
@@ -265,8 +265,8 @@ function txt2latex($s)
      */
 function formato_texto_tex($t)
 {
-    $num_com = 0;  // N˙mero de comillas
-    $num_apo = 0;  // N˙mero de apostrofes
+    $num_com = 0;  // N√∫mero de comillas
+    $num_apo = 0;  // N√∫mero de apostrofes
     $r = "";
     for ($i = 0; $i < strlen($t); $i++) {
         $c = substr($t, $i, 1);
@@ -308,7 +308,7 @@ function formato_texto_tex($t)
  * @param array $ar  Arreglo
  * @param array $ind Arreglo de llaves
  *
- * @return array Subarreglo de $arr cuyas llaves est·n en $ind
+ * @return array Subarreglo de $arr cuyas llaves est√°n en $ind
  **/
 function subarreglo($ar, $ind)
 {
@@ -325,7 +325,7 @@ function subarreglo($ar, $ind)
 /* -------- OPERACIONES SOBRE estructuras para HTML_Menu */
 
 /**
- * Agrega un submen˙ a un menu como los requeridos por
+ * Agrega un submen√∫ a un menu como los requeridos por
  * HTML_Menu
  *
  * @param object &$menu      Menu por modificar
@@ -334,7 +334,7 @@ function subarreglo($ar, $ind)
  * @param string $nurl       Url por asociar al subtitulo agregado
  * @param array  $nsub       Subarbol por asociar al subtitulo agregado
  *
- * @return true si y solo si encuentra el titulo y puede aÒadir subtitulo nuevo
+ * @return true si y solo si encuentra el titulo y puede a√±adir subtitulo nuevo
      */
 function html_menu_agrega_submenu(&$menu, $titulo, $nsubtitulo, $nurl,
     $nsub = null
@@ -413,7 +413,7 @@ function html_menu_toma_url($m)
 /* -------- ARCHIVOS */
 
 /**
- * EnvÌa a salida est·ndar contenido del archivo noma
+ * Env√≠a a salida est√°ndar contenido del archivo noma
  *
  * @param string $noma Nombre del archivo
  * @param string $esc  Escapar contenido antes de presentarlo
@@ -435,7 +435,7 @@ function muestra_archivo($noma, $esc = false)
 }
 
 
-/* -------- FORMULARIOS  Y SESI”N */
+/* -------- FORMULARIOS  Y SESI√ìN */
 
 /**
  * Agregar tabla a formulario
@@ -464,8 +464,8 @@ function agregar_tabla($nom, &$f, $idcaso, $nuevo, &$da)
         $da,
         array(
             'requiredRuleMessage' => 'El campo %s es indispensable.',
-            'ruleViolationMessage' => 
-            '%s: El valor que ha ingresado no es v·lido.'
+            'ruleViolationMessage' =>
+            '%s: El valor que ha ingresado no es v√°lido.'
         )
     );
 
@@ -478,10 +478,10 @@ function agregar_tabla($nom, &$f, $idcaso, $nuevo, &$da)
 
 
 /**
- * PreparaciÛn de informaciÛn en acciones que responden a
+ * Preparaci√≥n de informaci√≥n en acciones que responden a
  *    eventos de HTML_QuickForm_Controller
  *
- * @param mixed &$page P·gina
+ * @param mixed &$page P√°gina
  *
  * @return boolean Validado
      */
@@ -502,11 +502,11 @@ function valida(&$page)
 
 
 /**
- * Presenta un error de validaciÛn no fatal.
+ * Presenta un error de validaci√≥n no fatal.
  *
  * @param string $msg     Mensaje de error
  * @param array  $valores Valores del formulario por recuperar
- * @param string $iderr   Si es no nulo variable de sesiÛn donde ponerlo
+ * @param string $iderr   Si es no nulo variable de sesi√≥n donde ponerlo
  *
  * @return void
      */
@@ -515,7 +515,7 @@ function error_valida($msg, $valores, $iderr = '')
     if (isset($valores) && is_array($valores) && count($valores) > 0) {
         $_SESSION['recuperaErrorValida'] = $valores;
     }
-    echo "<div class='regla'>" 
+    echo "<div class='regla'>"
         .  htmlentities($msg)
         . "</div>";
     if ($iderr != '') {
@@ -524,15 +524,15 @@ function error_valida($msg, $valores, $iderr = '')
 }
 
 /**
- * Presenta resultado de una validaciÛn.
- * La primera columna de la consulta $cons debe ser una identificaciÛn
+ * Presenta resultado de una validaci√≥n.
+ * La primera columna de la consulta $cons debe ser una identificaci√≥n
  * de caso
- * Las funciones SQL son tomadas de: 
+ * Las funciones SQL son tomadas de:
  * http://www.postgresonline.com/journal/archives/
  * 68-More-Aggregate-Fun-Whos-on-First-and-Whos-on-Last.html
  *
- * @param object &$db     ConexiÛn a base de datos
- * @param string $hmens   Mensaje por mostrar, ya est· en HTML sin XSS
+ * @param object &$db     Conexi√≥n a base de datos
+ * @param string $hmens   Mensaje por mostrar, ya est√° en HTML sin XSS
  * @param string $cons    Consulta pr realizar
  * @param bool   $confunc Incluir primer funcionario que trabajo caso, en este
  *                        caso columna con id del caso se llama id_caso
@@ -543,19 +543,19 @@ function res_valida(&$db, $hmens, $cons, $confunc = false)
 {
     if ($confunc) {
         hace_consulta(
-            $db, 
-            "CREATE OR REPLACE FUNCTION 
+            $db,
+            "CREATE OR REPLACE FUNCTION
             first_element_state(anyarray, anyelement) RETURNS anyarray AS
             $$
-            SELECT CASE WHEN array_upper($1,1) IS NULL 
-                THEN array_append($1,$2) 
-                ELSE $1 
+            SELECT CASE WHEN array_upper($1,1) IS NULL
+                THEN array_append($1,$2)
+                ELSE $1
             END;
             $$
             LANGUAGE 'sql' IMMUTABLE;", false, false
         );
         hace_consulta(
-            $db, 
+            $db,
             "CREATE OR REPLACE FUNCTION first_element(anyarray)
             RETURNS anyelement AS
             $$
@@ -565,19 +565,19 @@ function res_valida(&$db, $hmens, $cons, $confunc = false)
             false, false
         );
         hace_consulta(
-            $db, 
-            "CREATE AGGREGATE first(anyelement) (             
-                SFUNC=first_element_state,
-                STYPE=anyarray,    
-                FINALFUNC=first_element
+            $db,
+            "CREATE AGGREGATE first(anyelement) (
+                SFUNC = first_element_state,
+                STYPE = anyarray,
+                FINALFUNC = first_element
             );", false, false
-        ); 
+        );
         hace_consulta(
             $db,
-            "CREATE VIEW primerfuncionario AS 
-            SELECT id_caso, MIN(fecha_inicio) AS fecha_inicio, 
-            FIRST(id_funcionario) AS id_funcionario 
-            FROM funcionario_caso 
+            "CREATE VIEW primerfuncionario AS
+            SELECT id_caso, MIN(fecha_inicio) AS fecha_inicio,
+            FIRST(id_funcionario) AS id_funcionario
+            FROM funcionario_caso
             GROUP BY id_caso ORDER BY id_caso;", false, false
         );
 
@@ -586,12 +586,12 @@ function res_valida(&$db, $hmens, $cons, $confunc = false)
 
     if ($confunc) {
         $r = hace_consulta(
-            $db, 
-            "SELECT primerfuncionario.id_caso, 
-            funcionario.nombre, sub.* 
-            FROM primerfuncionario, funcionario, ($cons) AS sub 
-            WHERE primerfuncionario.id_funcionario=funcionario.id
-            AND primerfuncionario.id_caso=sub.id_caso" 
+            $db,
+            "SELECT primerfuncionario.id_caso,
+            funcionario.nombre, sub.*
+            FROM primerfuncionario, funcionario, ($cons) AS sub
+            WHERE primerfuncionario.id_funcionario = funcionario.id
+            AND primerfuncionario.id_caso = sub.id_caso"
         );
     } else {
         $r = hace_consulta($db, $cons);
@@ -624,7 +624,7 @@ function res_valida(&$db, $hmens, $cons, $confunc = false)
 
 
 /**
- * Retira variables de sesiÛn
+ * Retira variables de sesi√≥n
  *
  * @return void
      */
@@ -720,7 +720,7 @@ function toma_elemento_recc($form, $nom, $yaanalizados = array())
 
 
 /**
- * Pone valores por defecto en una pestaÒa, para ser llamado desde
+ * Pone valores por defecto en una pesta√±a, para ser llamado desde
  * formularioValores
  *
  * PORHACER: Que no use el booleanFields sino que examine tipos de
@@ -737,7 +737,7 @@ function valores_pordefecto_form($d, $form)
         $cq = toma_elemento_recc($form, $c);
         if ($cq == null || PEAR::isError($cq)) {
             echo_esc(
-                "Error: No se encontrÛ elemento $c en el formulario<br>"
+                "Error: No se encontr√≥ elemento $c en el formulario<br>"
             );
         }
         if (isset($d->fb_booleanFields)
@@ -756,7 +756,7 @@ function valores_pordefecto_form($d, $form)
 
 
 /**
- * IdentificaciÛn de departamento elegido por usuario.
+ * Identificaci√≥n de departamento elegido por usuario.
  *
  * @param object $form Formulario
  *
@@ -775,7 +775,7 @@ function ret_id_departamento($form)
 
 
 /**
- * IdentificaciÛn del municpio elegido por usuario.
+ * Identificaci√≥n del municpio elegido por usuario.
  *
  * @param object $form Formulario
  *
@@ -795,7 +795,7 @@ function ret_id_municipio($form)
 
 
 /**
- * IdentificaciÛn de la clase geogr·fica elegida por usuario
+ * Identificaci√≥n de la clase geogr√°fica elegida por usuario
  *
  * @param object $form Formulario
  *
@@ -816,7 +816,7 @@ function ret_id_clase($form)
 /**
  * Presenta encabezado
  *
- * @param string $titulo   TÌtulo
+ * @param string $titulo   T√≠tulo
  * @param string $cabezote Imagen de Cabezote
  *
  * @return void
@@ -832,7 +832,7 @@ function encabezado_envia($titulo = null, $cabezote = '')
         echo '  <title>' . htmlentities($titulo) . '</title>';
     }
     echo '<link rel = "stylesheet" type = "text/css" href = "estilo.css" />
-<!--Fuentes de dominio publico. Sin garantÌas. 2004-->
+<!--Fuentes de dominio publico. Sin garant√≠as. 2004-->
 <!-- http://sivel.sf.net -->
 <script language = "JavaScript">
 <!--
@@ -874,9 +874,9 @@ function textCounter(field, cntfield, maxlimit)
 
 
 /**
- * Presenta pie de p·gina general en captura
+ * Presenta pie de p√°gina general en captura
  *
- * @param string $pie Archivo con pie de p·gina por mostrar
+ * @param string $pie Archivo con pie de p√°gina por mostrar
  *
  * @return void
      */
@@ -899,11 +899,11 @@ function pie_envia($pie = '')
 /**
  * Genera enlace a un caso (reporte general por abrir en otra ventana)
  *
- * @param integer $id IdentificaciÛn del caso
+ * @param integer $id Identificaci√≥n del caso
  *
  * @return string Cadena HTML con enlace a caso
      */
-function enlace_caso($id) 
+function enlace_caso($id)
 {
     return "<a target='_otro' href='consulta_web.php?" .
         "_qf_consultaWeb_consulta=Consulta" .
@@ -916,14 +916,14 @@ function enlace_caso($id)
 /**
  * Retorna enlaces a casos donde se referencie a una persona
  *
- * @param object  &$db      ConexiÛn a base de datos
- * @param integer $idcaso   IdentificaciÛn del caso (por excluir)
- * @param integer $idp      IdentificaciÛn de la persona
- * @param string  &$comovic Colchon para retornar URLs como vÌctima
+ * @param object  &$db      Conexi√≥n a base de datos
+ * @param integer $idcaso   Identificaci√≥n del caso (por excluir)
+ * @param integer $idp      Identificaci√≥n de la persona
+ * @param string  &$comovic Colchon para retornar URLs como v√≠ctima
  * @param string  &$comofam Colchon para retornar URLs como familiar
  *
  * @return void Llena $comovic y $comofan con enlaces a casos donde
- * se referencia idp como vÌctima y familiar respectivamente 
+ * se referencia idp como v√≠ctima y familiar respectivamente
  * (excepto idcaso)
      */
 function enlaces_casos_persona(
@@ -941,7 +941,7 @@ function enlaces_casos_persona(
         }
     }
 
-    $q = "SELECT id_caso FROM relacion_personas, victima 
+    $q = "SELECT id_caso FROM relacion_personas, victima
         WHERE id_persona1 = id_persona AND id_persona2 = '$idp'";
     $r = hace_consulta($db, $q);
     $campos = array();
@@ -957,17 +957,17 @@ function enlaces_casos_persona(
 
 
 /**
- * Retorna enlaces a casos donde se referencie a una vÌctima colectiva
+ * Retorna enlaces a casos donde se referencie a una v√≠ctima colectiva
  *
- * @param object  &$db      ConexiÛn a base de datos
- * @param integer $idcaso   IdentificaciÛn del caso (por excluir)
- * @param integer $idc      IdentificaciÛn del grupo de personas
- * @param string  &$comovic Colchon para retornar URLs como vÌctima
+ * @param object  &$db      Conexi√≥n a base de datos
+ * @param integer $idcaso   Identificaci√≥n del caso (por excluir)
+ * @param integer $idc      Identificaci√≥n del grupo de personas
+ * @param string  &$comovic Colchon para retornar URLs como v√≠ctima
  *
- * @return void Llena $comovic con enlaces a casos donde se referencia 
- *   idc como vÌctima y familiar respectivamente (excepto idcaso)
+ * @return void Llena $comovic con enlaces a casos donde se referencia
+ *   idc como v√≠ctima y familiar respectivamente (excepto idcaso)
      */
-function enlaces_casos_grupoper(&$db, $idcaso, $idc, &$comovic) 
+function enlaces_casos_grupoper(&$db, $idcaso, $idc, &$comovic)
 {
     $q = "SELECT id_caso FROM victima_colectiva WHERE id_grupoper = '$idc'";
     $r = hace_consulta($db, $q);
@@ -990,7 +990,7 @@ function enlaces_casos_grupoper(&$db, $idcaso, $idc, &$comovic)
  *
  * @return array Arreglo convertido
      */
-function htmlentities_array($ar) 
+function htmlentities_array($ar)
 {
     $ars = array();
     foreach ($ar as $l => $v) {
@@ -1008,7 +1008,7 @@ function htmlentities_array($ar)
 
 /**
  * Muestra mensaje escapandolo antes para presentar en navegador y termina
- * 
+ *
  * @param string $mens Mensaje por mostrar
  *
  * @return void
@@ -1021,7 +1021,7 @@ function die_esc($mens)
 
 /**
  * Muestra mensaje escapandolo antes para presentar en navegador
- * 
+ *
  * @param string $mens Mensaje por mostrar
  * @param bool   $nl   Nueva linea tras mensaje
  *
@@ -1054,7 +1054,7 @@ function sin_error_pear($do, $msg = "")
 /**
  * Ejecuta consulta $q
  *
- * @param handle &$db          ConexiÛna BD
+ * @param handle &$db          Conexi√≥na BD
  * @param string $q            Consulta
  * @param bool   $finenerror   Indica si termina en caso de error o no
  * @param bool   $muestraerror Indica si debe mostrar mensaje de error
@@ -1081,7 +1081,7 @@ function hace_consulta(&$db, $q, $finenerror = true, $muestraerror = true)
 /**
  * Ejecuta consulta $q que debe retornar exactamente un resultado
  *
- * @param handle &$db ConexiÛna BD
+ * @param handle &$db Conexi√≥na BD
  * @param string $q   Consulta
  *
  * @return resultado de la consulta. si no hay 1 resultado o errores termina.
@@ -1100,13 +1100,13 @@ function retorna_uno_o_termina(&$db, $q)
 
 
 /**
- * Agrega condiciÛn a WHERE en un SELECT de SQL
+ * Agrega condici√≥n a WHERE en un SELECT de SQL
  *
- * @param unknown &$db   ConexiÛn a base de datos
+ * @param unknown &$db   Conexi√≥n a base de datos
  * @param string  &$w    cadena con WHERE que se completa
  * @param string  $n     nombre de campo
  * @param string  $v     valor esperado
- * @param string  $opcmp operador de comparaciÛn por usar.
+ * @param string  $opcmp operador de comparaci√≥n por usar.
  * @param string  $con   con
  *
  * @return void
@@ -1124,13 +1124,13 @@ function consulta_and(&$db, &$w, $n, $v, $opcmp = '=', $con='AND')
 
 
 /**
- * Como la funciÛn anterior sÛlo que el valor no lo pone entre apostrofes
+ * Como la funci√≥n anterior s√≥lo que el valor no lo pone entre apostrofes
  * y supone que ya viene escapado el valor $v
  *
  * @param string &$w    cadena con WHERE que se completa
  * @param string $n     nombre de campo
  * @param string $v     valor esperado
- * @param string $opcmp operador de comparaciÛn por usar.
+ * @param string $opcmp operador de comparaci√≥n por usar.
  * @param string $con   con
  *
  * @return void
@@ -1146,9 +1146,9 @@ function consulta_and_sinap(&$w, $n, $v, $opcmp = '=', $con = "AND")
 /* */
 
 /**
- * Agrega a expresiÛn WHERE los que corresponden a una tabla
+ * Agrega a expresi√≥n WHERE los que corresponden a una tabla
  * uno a muchos (uno con tabla de llave $llave_prin con el registro
- * $id_prin). DisyunciÛn de los registros elegidos --de la tabla
+ * $id_prin). Disyunci√≥n de los registros elegidos --de la tabla
  * $ntabla con llave $llave_ntabla y valor $id_prin).
  *
  * @param string  &$w           cadena con WHERE que se completa
@@ -1189,7 +1189,7 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
             foreach ($llave_ntabla as $il => $vl) {
                 consulta_and_sinap(
                     $w, var_escapa($ntabla, $db). "." .
-                    var_escapa($vl), 
+                    var_escapa($vl),
                     var_escapa($llave_prin[$il]),
                     "=", $gcon
                 );
@@ -1346,13 +1346,13 @@ function lista_relacionados($tabla, $llave,
 
 /**
  * Recibe un DB_DataObject y retorna la sentencia SQL INSERT que
- insertarÌa los datosShort description for function
+ insertar√≠a los datosShort description for function
  *
- * @param handle &$db   ConexiÛn a BD
+ * @param handle &$db   Conexi√≥n a BD
  * @param object $d     DataObject
- * @param array  $delta Cambio en numeraciÛn
+ * @param array  $delta Cambio en numeraci√≥n
  *
- * @return string  instrucciÛn SQL
+ * @return string  instrucci√≥n SQL
      */
 function inserta_sql(&$db, $d, $delta = null)
 {
@@ -1383,7 +1383,7 @@ function inserta_sql(&$db, $d, $delta = null)
 /**
  * Retorna arreglo de tablas que referencian a $tabla
  *
- * @param handle $base  ConexiÛn
+ * @param handle $base  Conexi√≥n
  * @param string $tabla Tabla
  *
  * @return array Tablas que referencian a $tabla
@@ -1442,8 +1442,8 @@ function funcionario_caso($idcaso)
  * Agradecimientos por correciones a garcez@linuxmail.org
  *
  * @param string  $v       Nombre de variable POST
- * @param handle  &$db     ConexiÛn a BD.
- * @param integer $maxlong Longitud m·xima
+ * @param handle  &$db     Conexi√≥n a BD.
+ * @param integer $maxlong Longitud m√°xima
  *
  * @return string Cadena escapada
      */
@@ -1466,11 +1466,11 @@ function var_escapa($v, &$db = null, $maxlong = 1024)
             /** Evita XSS */
             $p2=htmlspecialchars($p1);
 
-            /** Evita inyecciÛn de cÛdigo SQL */
+            /** Evita inyecci√≥n de c√≥digo SQL */
             if (isset($db) && $db != null && !PEAR::isError($db)) {
                 $p3 = $db->escapeSimple($p2);
             } else {
-                // Tomado de librerÌa de Pear DB/pgsql.php
+                // Tomado de librer√≠a de Pear DB/pgsql.php
                 $p3 = (!get_magic_quotes_gpc())?str_replace(
                     "'", "''",
                     str_replace('\\', '\\\\', $p2)
@@ -1486,12 +1486,12 @@ function var_escapa($v, &$db = null, $maxlong = 1024)
 }
 
 /**
- * Retorna una variable enviada por mÈtodo POST tras escaparla
+ * Retorna una variable enviada por m√©todo POST tras escaparla
  *  para hacer consultas con DB
  *
  * @param string  $nv      Nombre de variable POST
- * @param handle  $db      ConexiÛn a BD.
- * @param integer $maxlong Longitud m·xima
+ * @param handle  $db      Conexi√≥n a BD.
+ * @param integer $maxlong Longitud m√°xima
  *
  * @return mixed Cadena escapada
      */
@@ -1506,12 +1506,12 @@ function var_post_escapa($nv, $db = null, $maxlong = 1024)
 
 
 /**
- * Retorna una variable enviada por mÈtodo POST o por GET tras escaparla
+ * Retorna una variable enviada por m√©todo POST o por GET tras escaparla
  * para hacer consultas con DB
  *
  * @param string  $nv      Nombre de variable
- * @param handle  $db      ConexiÛn a BD.
- * @param integer $maxlong Longitud m·xima
+ * @param handle  $db      Conexi√≥n a BD.
+ * @param integer $maxlong Longitud m√°xima
  *
  * @return mixed Cadena escapada
      */
@@ -1527,7 +1527,7 @@ function var_req_escapa($nv, $db = null, $maxlong = 1024)
 
 /**
  * Convierte un arreglo para fechas a una fecha.
- * Mes y dÌa pueden ser '' y supone valores por defecto (1).
+ * Mes y d√≠a pueden ser '' y supone valores por defecto (1).
  *
  * @param array $f     Arreglo con indices Y, M, d, el valor $f['Y'] no puede ser ''
  * @param bool  $desde Si es cierto completa suponiendo que es una fecha Desde,
@@ -1575,11 +1575,11 @@ function arr_a_fecha($f, $desde = true)
 
 
 /**
- * Convierte fecha en arreglo aÒo, mes, dia
+ * Convierte fecha en arreglo a√±o, mes, dia
  *
  * @param array $f Fecha por convertir en formato AAAA-MM-DD
  *
- * @return array 'Y' => aÒo, 'M' => mes, 'd' => dÌa
+ * @return array 'Y' => a√±o, 'M' => mes, 'd' => d√≠a
      */
 function fecha_a_arr($f)
 {
@@ -1593,7 +1593,7 @@ function fecha_a_arr($f)
 }
 
 /**
- * Retorna identificaciÛn del rango de edad al que pertenece la edad $er
+ * Retorna identificaci√≥n del rango de edad al que pertenece la edad $er
  *  o 0 si a ninguno.
  *
  * @param integer $er edad
@@ -1619,12 +1619,12 @@ function rango_de_edad($er)
 
 
 /**
- * Verifica si una edad est· en un rango
+ * Verifica si una edad est√° en un rango
  *
  * @param int $e Edad
- * @param int $r IdentificaciÛn del rango en BD.
+ * @param int $r Identificaci√≥n del rango en BD.
  *
- * @return boolean true si la edad est· en el rango.
+ * @return boolean true si la edad est√° en el rango.
      */
 function verifica_edad_y_rango($e, $r)
 {
@@ -1632,7 +1632,7 @@ function verifica_edad_y_rango($e, $r)
     $do->get((int)$r);
     if (PEAR::isError($do)) {
         die_esc(
-            "IdentificaciÛn de rango desconocida (" .
+            "Identificaci√≥n de rango desconocida (" .
             $do->getMessage() . " - " . $do->getUserInfo() . ")"
         );
     }
@@ -1660,7 +1660,7 @@ function agrega_control_CSRF(&$form)
 
 
 /**
- * Verifica control CSRF aÒadido por agrega_control_CSRF al formulario
+ * Verifica control CSRF a√±adido por agrega_control_CSRF al formulario
  *
  * @param array $valores Valores recibidos de formulario
  *
@@ -1669,13 +1669,13 @@ function agrega_control_CSRF(&$form)
 function verifica_sin_CSRF($valores)
 {
     if (!isset($_SESSION['sin_csrf'])) {
-        die_esc("DeberÌa existir variable para evitar CSRF en sesiÛn.");
+        die_esc("Deber√≠a existir variable para evitar CSRF en sesi√≥n.");
     }
     if (!isset($valores['evita_csrf'])
         || $valores['evita_csrf'] != $_SESSION['sin_csrf']
     ) {
         die_esc(
-            "Datos enviados no pasaron verificaciÛn CSRF (" .
+            "Datos enviados no pasaron verificaci√≥n CSRF (" .
             $_SESSION['sin_csrf'] . ", " . (int)$valores['evita_csrf'] . ")"
         );
     }
@@ -1684,15 +1684,15 @@ function verifica_sin_CSRF($valores)
 
 
 /**
- * Retorna cantidad de aÒos entre la fecha de nacimiento y
+ * Retorna cantidad de a√±os entre la fecha de nacimiento y
  * la fecha del hecho.
  *
- * @param integer $anionac   AÒo nacimiento
- * @param integer $aniohecho AÒo del hecho
+ * @param integer $anionac   A√±o nacimiento
+ * @param integer $aniohecho A√±o del hecho
  * @param integer $mesnac    Mes de nacimiento
  * @param integer $meshecho  Mes del hecho
- * @param integer $dianac    DÌa de nacimiento
- * @param integer $diahecho  DÌa del hecho
+ * @param integer $dianac    D√≠a de nacimiento
+ * @param integer $diahecho  D√≠a del hecho
  *
  * @return integer Edad de persona en fecha del hecho
  **/
@@ -1739,8 +1739,8 @@ function agrega_tabla(&$t, $nt)
  * Convierte el valor del campo de un DataObject al tipo especificado.
  *
  * @param object  &$do   DataObject
- * @param string  $campo Campo cuyo valor se extraer·
- * @param integer $tipo  Valores numÈrico como el empleado por DB_DataObject
+ * @param string  $campo Campo cuyo valor se extraer√°
+ * @param integer $tipo  Valores num√©rico como el empleado por DB_DataObject
  *
  * @return integer Valor del campo del objeto recibido convertido al tipo
      */
@@ -1759,15 +1759,15 @@ function convierte_valor(&$do, $campo, $tipo)
 /**
  * Prepara una consulta que coincida con los datos de una tabla.
  *
- * @param object  &$duc    Objeto DataObject del cual se formar· consulta
- * @param string  $rel     RelaciÛn
- * @param string  $bas     Tabla b·sica
- * @param string  $crelbas RelaciÛn con tabla b·sica
- * @param boolean $enbas   En tablas b·sicas
+ * @param object  &$duc    Objeto DataObject del cual se formar√° consulta
+ * @param string  $rel     Relaci√≥n
+ * @param string  $bas     Tabla b√°sica
+ * @param string  $crelbas Relaci√≥n con tabla b√°sica
+ * @param boolean $enbas   En tablas b√°sicas
  * @param array   $otrast  Otras tablas que se relacionan con $duc
  * @param string  $iotrast Campo por el cual se relacionan las de $otrast
  * @param array   $nonulos Campos que no pueden ser nulos
- * @param string  $irelot  Campo con identificaciÛn en otras
+ * @param string  $irelot  Campo con identificaci√≥n en otras
  * @param array   $masenl  Tablas de algunos campos que pueden ser sin info.
  * @param array   $tab     Estructura de base sacada de .ini
  *
@@ -1807,7 +1807,7 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
         $ignora |= $vdc === '';
         $ignora |= $vdc == null;
 
-        /// ConvenciÛn interna para fechas si es anio_min - 1 ignorar
+        /// Convenci√≥n interna para fechas si es anio_min - 1 ignorar
         $ignora |= $tipo == 134
             && substr($vdc, 0, 4) == ($GLOBALS['anio_min'] - 1);
         $valor = $ignora ? '' : convierte_valor($duc, $campo, $tipo);
@@ -1893,7 +1893,7 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
 
 
 /**
- * Prepara consulta de forma genÈrica
+ * Prepara consulta de forma gen√©rica
  *
  * @param string &$w      Consulta por retornar
  * @param string &$t      Lista de tablas
@@ -1986,7 +1986,7 @@ function es_objeto_nulo($do)
 /**
  * Validaciones globales de un caso
  *
- * @param integer $idcaso IdentificaciÛn de caso por validar.
+ * @param integer $idcaso Identificaci√≥n de caso por validar.
  *
  * @return bool Validado
      */
@@ -1998,8 +1998,8 @@ function valida_caso($idcaso)
         die_esc($dcaso->getMessage());
     }
     $db =& $dcaso->getDatabaseConnection();
-    // Completo: ubicaciÛn, fuentes, clasif., pr. resp,
-    // victima excepto en ciertas bÈlicas, memo.
+    // Completo: ubicaci√≥n, fuentes, clasif., pr. resp,
+    // victima excepto en ciertas b√©licas, memo.
     $q = "SELECT COUNT(*) FROM escrito_caso WHERE id_caso='"
         .$idcaso . "';";
     $nfue = (int)$db->getOne($q);
@@ -2059,7 +2059,7 @@ function valida_caso($idcaso)
         $r=`$cmd`;
         if ($r != "") {
             error_valida(
-                "Errores ortogr·ficos en memo: $r<br>" .
+                "Errores ortogr√°ficos en memo: $r<br>" .
                 str_replace(
                     '%l', $GLOBALS['CHROOTDIR'] . getcwd() . "/" .
                     $GLOBALS['DICCIONARIO'], $GLOBALS['MENS_ORTOGRAFIA']
@@ -2076,21 +2076,21 @@ function valida_caso($idcaso)
 
 
 /**
- * Crear un patrÛn de b˙squeda a partir de un arreglo de palabras por buscar
+ * Crear un patr√≥n de b√∫squeda a partir de un arreglo de palabras por buscar
  * en ese orden
  *
  * @param array $ar Arreglo de palabras por buscar en ese orden
  *
- * @return string PatrÛn de b˙squeda para usar con ~ en PostgreSQL
+ * @return string Patr√≥n de b√∫squeda para usar con ~ en PostgreSQL
      */
-function crea_patron($ar) 
+function crea_patron($ar)
 {
     assert(is_array($ar));
 
     $patron = "";
     $inipat = "";
     // Grupos de caracteres equivalentes
-    $c = array ('a·A¡', 'eÈE…', 'iÌIÕ', 'oÛO”', 'u˙U˙‹¸', 'zZsS', 'nNÒ—');
+    $c = array ('a√°A√Å', 'e√©E√â', 'i√≠I√ç', 'o√≥O√ì', 'u√∫U√∫√ú√º', 'zZsS', 'nN√±√ë');
     $u = "";
     foreach ($ar as $ni) {
         $patron .= $inipat . ".*";
@@ -2169,10 +2169,10 @@ function a_elementos_xml(&$r, $ind, $ad, $ren = null)
  * dato_relacionado(&$ad, $tabla, $campoid, $id, $camporel, $camponombre)
  * Abre tabla $tabla, ubica los que tengan $campoid en $id y por
  * cada uno agrega el nombre $camponombre de la tabla relacionada
- * por el campo $camporel.  La informaciÛn la agrega al arreglo
+ * por el campo $camporel.  La informaci√≥n la agrega al arreglo
  * por convertir a XML ad como observacion cuyo tipo es $camporel.
  *
- * @param array  &$ad         Arreglo al cual agrega informaciÛn convertida
+ * @param array  &$ad         Arreglo al cual agrega informaci√≥n convertida
  * @param string $tabla       nombre de tabla (e.g sector_social_comunidad)
  * @param string $id          Arreglo con llaves y valores
  * @param string $camporel    Campo de $tabla
@@ -2207,7 +2207,7 @@ function dato_relacionado(&$ad, $tabla,
  * @param object &$do      DB_DataObject
  * @param string $campo    nombre de campo en $do
  * @param string $elemento Elemento
- * @param array  &$ad      Arreglo al cual agrega informaciÛn convertida
+ * @param array  &$ad      Arreglo al cual agrega informaci√≥n convertida
  * @param string $valor    Valor por incluir en $ad
  *
  * @return void
@@ -2259,7 +2259,7 @@ function enlaza_relato(&$do, $campo, $elemento, &$ad, $valor = null)
 
 
 
-/* -------------- DEPURACI”N */
+/* -------------- DEPURACI√ìN */
 
 /**
  * Muestra variables
@@ -2282,7 +2282,7 @@ function impvar($nom, $a)
 
 
 /**
- * Presenta ambiente de ejcuciÛn
+ * Presenta ambiente de ejcuci√≥n
  *
  * @return void
      */
@@ -2302,7 +2302,7 @@ function ambiente()
  *
  * @param array $arr Arreglo
  *
- * @return integer AproximaciÛn a cantidad de memoria usada.
+ * @return integer Aproximaci√≥n a cantidad de memoria usada.
  **/
 function tam_arreglo($arr)
 {

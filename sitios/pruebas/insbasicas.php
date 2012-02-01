@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
-* Inserción de datos en tablas básicas
+* InserciÃ³n de datos en tablas bÃ¡sicas
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2006 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2006 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: insbasicas.php,v 1.10.2.2 2011/10/11 16:33:37 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Inserción de datos en tablas básicas
+ * InserciÃ³n de datos en tablas bÃ¡sicas
  */
 if (PHP_SAPI !== 'cli') {
     die("Acceso: INTERPRETE DE COMANDOS");
@@ -24,7 +24,7 @@ if (PHP_SAPI !== 'cli') {
 require_once "ambiente.php";
 
 /**
- * Inserta data en tabla básica
+ * Inserta data en tabla bÃ¡sica
  *
  * @param string $tabla     Nombre de la tabla
  * @param string $llave_sec Llave secundaria
@@ -37,7 +37,7 @@ function instablabasica($tabla, $llave_sec, $valor, $campos = array())
 {
     global $db, $dsn, $mreq, $accno;
 
-    echo "++ Inserción en tabla $tabla\n";
+    echo "++ InserciÃ³n en tabla $tabla\n";
     echo "db = $db, dsn = $dsn, mreq = $mreq, accno = $accno\n";
 
     $na = (int)$db->getOne("SELECT COUNT($llave_sec) FROM $tabla;");
@@ -57,7 +57,7 @@ function instablabasica($tabla, $llave_sec, $valor, $campos = array())
         $_REQUEST[$c] = $_POST[$c] = $v;
     }
 
-    $_REQUEST['añadir'] = $_POST['añadir'] = 'Añadir';
+    $_REQUEST['aÃ±adir'] = $_POST['aÃ±adir'] = 'AÃ±adir';
 
     $_REQUEST['evita_csrf'] = $_SESSION['sin_csrf'] =
         $_POST['evita_csrf'] = 1234;
@@ -70,7 +70,7 @@ function instablabasica($tabla, $llave_sec, $valor, $campos = array())
     $nd = (int)$db->getOne("SELECT COUNT($llave_sec) FROM $tabla;");
     echo "nd = $nd\n";
     if (($nd-$na) != 1) {
-        echo "** No insertó en $tabla\n";
+        echo "** No insertÃ³ en $tabla\n";
         return 1;
     }
     return 0;
@@ -86,7 +86,7 @@ $_POST['_qf__dataobjects_departamento'] = '';
 $_REQUEST['id'] = $_POST['id'] = '';
 $_REQUEST['nombre'] = $_POST['nombre'] = 'x';
 $_REQUEST['fechacreacion'] = $_POST['fechacreacion'] = $fc;
-$_REQUEST['añadir'] = $_POST['añadir'] = 'Añadir';
+$_REQUEST['aÃ±adir'] = $_POST['aÃ±adir'] = 'AÃ±adir';
 
 $_REQUEST['evita_csrf'] = $_SESSION['sin_csrf'] = $_POST['evita_csrf'] = 1234;
 
@@ -97,7 +97,7 @@ hace_consulta($db, "SELECT COUNT(nombre) FROM departamento;");
 $nd = (int)$db->getOne("SELECT COUNT(nombre) FROM departamento;");
 
 if (($nd-$na) != 1) {
-    echo "No insertó";
+    echo "No insertÃ³";
     exit(1);
 }
 
@@ -117,8 +117,8 @@ $c += instablabasica(
 );
 
 $c += instablabasica(
-    'intervalo', 'nombre', 'SIN INFORMACIÓN',
-    array('rango' => 'SIN INFORMACIÓN')
+    'intervalo', 'nombre', 'SIN INFORMACIÃ“N',
+    array('rango' => 'SIN INFORMACIÃ“N')
 );
 
 $c += instablabasica(

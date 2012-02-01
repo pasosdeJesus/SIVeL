@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Objeto tabla etapa
  *
@@ -7,24 +7,24 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2007 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2007 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: Etapa.php,v 1.11.2.3 2011/10/22 12:55:08 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 require_once 'DataObjects/Basica.php';
 
 /**
  * Definicion para la tabla etapa
- * Ver documentación de DataObjects_Caso.
+ * Ver documentaciÃ³n de DataObjects_Caso.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
@@ -65,14 +65,14 @@ class DataObjects_Etapa extends DataObjects_Basica
         'id_tipo' => 'Tipo de proceso',
         'nombre' => 'Nombre',
         'observaciones' => 'Observaciones',
-        'fechacreacion' => 'Fecha de creación',
-        'fechadeshabilitacion' => 'Fecha de deshabilitación',
+        'fechacreacion' => 'Fecha de creaciÃ³n',
+        'fechadeshabilitacion' => 'Fecha de deshabilitaciÃ³n',
     );
 
      /**
-     * Identificacion de registro 'SIN INFORMACIÓN'
+     * Identificacion de registro 'SIN INFORMACIÃ“N'
      *
-     * @return string Identificación
+     * @return string IdentificaciÃ³n
      */
     static function idSinInfo()
     {

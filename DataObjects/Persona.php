@@ -1,5 +1,5 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Objeto asociado a una tabla de la base de datos.
  * Parcialmente generado por DB_DataObject.
@@ -8,12 +8,12 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: Persona.php,v 1.25.2.5 2011/10/22 12:51:52 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 /**
@@ -24,12 +24,12 @@ require_once 'misc.php';
 
 /**
  * Definicion para la tabla persona.
- * Ver documentación de DataObjects_Caso.
+ * Ver documentaciÃ³n de DataObjects_Caso.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
@@ -69,12 +69,12 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
     var $fb_fieldLabels = array(
         'nombres' => 'Nombres',
         'apellidos' => 'Apellidos',
-        'anionac' => 'Año Nacimiento',
+        'anionac' => 'AÃ±o Nacimiento',
         'mesnac' => 'Mes Nacimiento',
-        'dianac' => 'Día Nacimiento',
+        'dianac' => 'DÃ­a Nacimiento',
         'sexo' => 'Sexo',
         'tipodocumento' => 'Tipo de Docuento',
-        'numerodocumento' => 'Número de Documento',
+        'numerodocumento' => 'NÃºmero de Documento',
         'id_departamento' => 'Departamento',
         'id_municipio' => 'Municipio',
         'id_clase'  => 'Clase'
@@ -85,10 +85,10 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         'tipodocumento'
     );
     var $es_enumOptions = array('sexo' => array('F' => 'Femenino',
-        'M' => 'Masculino', 'S'=> 'SIN INFORMACIÓN'
+        'M' => 'Masculino', 'S'=> 'SIN INFORMACIÃ“N'
     ),
-        'tipodocumento' => array ('CC' => 'Cédula de Ciudadania',
-            'CE' => 'Cédula de Extranjería',
+        'tipodocumento' => array ('CC' => 'CÃ©dula de Ciudadania',
+            'CE' => 'CÃ©dula de ExtranjerÃ­a',
             'RC' => 'Registro Civil',
             'TI' => 'Tarjeta de Identidad',
             'OT' => 'Otro',
@@ -111,13 +111,13 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
     /**
      * Funciona legada
-     * Como ocurria en FormBuilder 0.10, hasta versión 1.121 en el
+     * Como ocurria en FormBuilder 0.10, hasta versiÃ³n 1.121 en el
      * CVS de FormBuilder.php. Cambio sucitado por bug #3469
      *
      * @param string $table Tabla
      * @param string $key   Llave
      *
-     * @return opción enumeada asociada a la llave.
+     * @return opciÃ³n enumeada asociada a la llave.
      */
     function enumCallback($table, $key)
     {
@@ -125,7 +125,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
     }
 
     /**
-    * Modifica el año de nacimiento antes de incluirlo en base de datos.
+    * Modifica el aÃ±o de nacimiento antes de incluirlo en base de datos.
     * Para funcionar con versiones nuevas de DB_DataObject requiere
     * <b>useMutator</b> en <b>true</b>
     *
@@ -167,9 +167,9 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
     }
 
     /**
-     * Campos que pueden ser SIN INFORMACION y el código correspondiente
+     * Campos que pueden ser SIN INFORMACION y el cÃ³digo correspondiente
      *
-     * @return array Arreglo de campos que pueden ser sin información
+     * @return array Arreglo de campos que pueden ser sin informaciÃ³n
      */
     static function camposSinInfo()
     {
@@ -271,7 +271,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         $gr[] =& $sel;
         $form->removeElement('apellidos');
 
-        if ($this->id == null) { 
+        if ($this->id == null) {
             $sel =& $form->createElement(
                 'static','','',
                 "<a href=\"javascript:abrirBusquedaPersona('persona')\">" .
@@ -344,7 +344,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
 
     /** Convierte registro a relato (arreglo de elementos) que agrega a $ar
-     * dad son datos adicionales que pueden requerirse para la conversión.
+     * dad son datos adicionales que pueden requerirse para la conversiÃ³n.
      */
     function aRelato(&$ar, $dad = array())
     {
@@ -371,20 +371,20 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
     /**
      * Valida datos de persona recibidos por formulario
-     * @param string $fecharef Fecha de referencia para calcular año nac.
+     * @param string $fecharef Fecha de referencia para calcular aÃ±o nac.
      * @param bool   $valrango Decide si se valida/autocompleta rango de edad
      * @param array  &$valores Valores recibidos en formulario
      * @param string &$merr    Colchon para mensajes de error
      *
      * @return bool Verdadero sii valida bien y autocompleta valores
-     *    (edad, anionac, mesnac, dianac, id_rango_edad), 
-     *    si hay error de validación queda en merr
+     *    (edad, anionac, mesnac, dianac, id_rango_edad),
+     *    si hay error de validaciÃ³n queda en merr
      */
-    function valida($fecharef, $valrango, &$valores, &$merr) 
+    function valida($fecharef, $valrango, &$valores, &$merr)
     {
         if (!is_array($fecharef)) {
             $fecharef = fecha_a_arr($fecharef);
-        } 
+        }
         $fhanio = $fecharef['Y'];
         $fhmes = $fecharef['M'];
         $fhdia = $fecharef['d'];
@@ -394,8 +394,8 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         ) {
                 $valores['anionac'] = $fhanio - (int)$valores['edad'];
         }
-        if ($valrango &&
-            $valores['id_rango_edad'] != DataObjects_Rango_edad::idSinInfo()
+        if ($valrango
+            && $valores['id_rango_edad'] != DataObjects_Rango_edad::idSinInfo()
             && $valores['anionac'] != ''
         ) {
             $r = (int)$valores['id_rango_edad'];

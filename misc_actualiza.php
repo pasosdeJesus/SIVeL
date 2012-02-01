@@ -1,21 +1,21 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
-* Actualiza base de datos después de actualizar fuentes
+* Actualiza base de datos despuÃ©s de actualizar fuentes
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2006 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2006 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: misc_actualiza.php,v 1.23.2.4 2011/10/22 14:57:56 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
-/** Actualiza base de datos después de actualizar fuentes */
+/** Actualiza base de datos despuÃ©s de actualizar fuentes */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once "confv.php";
@@ -25,10 +25,10 @@ require_once "DataObjects/Categoria.php";
 
 
 /**
- * Retorna valor de una variable de un archivo de configuración SH (ultima)
+ * Retorna valor de una variable de un archivo de configuraciÃ³n SH (ultima)
  *
- * @param string $a Archivo de configuración
- * @param string $v Archivo de configuración
+ * @param string $a Archivo de configuraciÃ³n
+ * @param string $v Archivo de configuraciÃ³n
  *
  * @return null si no encuentra variable
  */
@@ -36,7 +36,7 @@ function valVarConf($a, $v)
 {
     assert($v != "");
     if (!($f = fopen($a, "r"))) {
-        die("Falta archivo de configuración '$a'");
+        die("Falta archivo de configuraciÃ³n '$a'");
     }
 
     $r = null;
@@ -67,7 +67,7 @@ function extraeVarPHP($f)
     $ttokens = count($tokens);
     $estado = 0;
     $avar = array(); // Arreglo con variables encontradas
-    $nomvar = ""; //Nombre de última variable encontrada
+    $nomvar = ""; //Nombre de Ãºltima variable encontrada
     $ultcom = ""; //Ultimo comentario encontrado
     for ($i = 0; $i < count($tokens); $i++) {
         $token = $tokens[$i];
@@ -167,9 +167,9 @@ function muestraVarPhpEnHTML($avar)
 }
 
 /**
- * Retorna líneas que definen una variable  en archivo de conf. PHP
+ * Retorna lÃ­neas que definen una variable  en archivo de conf. PHP
  *
- * @param string $a Archivo de configuración
+ * @param string $a Archivo de configuraciÃ³n
  * @param string $v v
  *
  * @return string null si no encuentra variable
@@ -178,7 +178,7 @@ function valVarConfPHP($a, $v)
 {
     assert($v != "");
     if (!($f = fopen($a, "r"))) {
-        die("Falta archivo de configuración '$a'");
+        die("Falta archivo de configuraciÃ³n '$a'");
     }
 
     $r = null;
@@ -227,15 +227,15 @@ function valVarConfPHP($a, $v)
 
 
 /**
- * Revisa si una versión de actualización ya se aplicó
+ * Revisa si una versiÃ³n de actualizaciÃ³n ya se aplicÃ³
  *
- * @param string $ver Versión
+ * @param string $ver VersiÃ³n
  *
- * @return bool si se aplicó o no
+ * @return bool si se aplicÃ³ o no
  */
 function aplicado($ver)
 {
-    echo_esc("Revisando aplicación de actualización $ver: ", false);
+    echo_esc("Revisando aplicaciÃ³n de actualizaciÃ³n $ver: ", false);
     $ds = objeto_tabla('Actualizacion_base');
     $ds->fecha = null;
     $ds->get($ver);
@@ -248,11 +248,11 @@ function aplicado($ver)
 }
 
 /**
- * Aplica una actualización con la fecha de hoy
+ * Aplica una actualizaciÃ³n con la fecha de hoy
  *
  * @param object  &$act DataObject a tabla actualizacion_base
- * @param integer $idac Identificación de la actualización
- * @param string  $desc Descripción
+ * @param integer $idac IdentificaciÃ³n de la actualizaciÃ³n
+ * @param string  $desc DescripciÃ³n
  *
  * @return void
  */
@@ -264,19 +264,19 @@ function aplicaact(&$act, $idac, $desc)
     $act->insert();
 
     echo_esc($act->getMessage());
-    echo_esc("  Aplicada actualización $idac ($desc)");
+    echo_esc("  Aplicada actualizaciÃ³n $idac ($desc)");
 }
 
 
 
 /**
- * Actualiza el índice de la tabla dada cuya llave es id
+ * Actualiza el Ã­ndice de la tabla dada cuya llave es id
  *
- * @param object  &$db       Conexión a base de datos
- * @param string  $tabla     Tabla cuyo índice se actualizará
+ * @param object  &$db       ConexiÃ³n a base de datos
+ * @param string  $tabla     Tabla cuyo Ã­ndice se actualizarÃ¡
  * @param string  $nid       Nombre del campo con llave de $tabla
- * @param integer $maxreserv Máximo código reservado para datos de SIVeL
- * nuclear (los datos personalizados tendrán codigos superiores o
+ * @param integer $maxreserv MÃ¡ximo cÃ³digo reservado para datos de SIVeL
+ * nuclear (los datos personalizados tendrÃ¡n codigos superiores o
  * iguales a este).
  *
  * @return void
@@ -304,7 +304,7 @@ function actualiza_indice(&$db, $tabla, $nid = 'id', $maxreserv = 0)
 /**
  * Cambia el tipo de una columna de una tabla en una base de datos
  *
- * @param object &$db       Conexión a base de datos
+ * @param object &$db       ConexiÃ³n a base de datos
  * @param string $tabla     Nombre de la tabla
  * @param string $columna   Nombre de la columna
  * @param string $nuevotipo Nuevo tipo de la columna
@@ -329,14 +329,14 @@ function cambia_tipocol(&$db, $tabla, $columna, $nuevotipo)
 /**
  * Cambia datos de una tabla
  *
- * @param object &$db          Conexión a base de datos
+ * @param object &$db          ConexiÃ³n a base de datos
  * @param string $tabla        Nombre de tabla por cambiar
  * @param array  $deshabilitar valores por deshabilitar
- * @param array  $agregar      ids y valores por añadir
+ * @param array  $agregar      ids y valores por aÃ±adir
  * @param array  $homologar    valores antiguos por cambiar a nuevos
  *                              homologables
- * @param string $cfechades    nombre del campo con fecha de deshabilitación
- * @param string $cfechacre    nombre del campo con fecha de creación
+ * @param string $cfechades    nombre del campo con fecha de deshabilitaciÃ³n
+ * @param string $cfechacre    nombre del campo con fecha de creaciÃ³n
  *
  * @return void
  */
@@ -369,9 +369,9 @@ function cambia_datos(&$db, $tabla, $deshabilitar, $agregar, $homologar,
 
 /**
  * Ejecuta consultas SQL del archivo $na.  Se espera que cada
- * consulta este en una línea del archivo (de máximo 4096 catacteres).
+ * consulta este en una lÃ­nea del archivo (de mÃ¡ximo 4096 catacteres).
  *
- * @param object &$db   Conexión a base de datos
+ * @param object &$db   ConexiÃ³n a base de datos
  * @param string $na    Nombre del archivo
  * @param bool   $derr  Detener en caso de error
  * @param bool   $merr  Mostrar mensajes de error
@@ -390,12 +390,12 @@ function consulta_archivo(&$db, $na, $derr = false, $merr = false,
             $buffer = fgets($h, 4096);
             if (strlen($buffer) > 4094) {
                 echo_esc(
-                    "$na:$nl: Línea de más de 4096 caracteres cortada"
+                    "$na:$nl: LÃ­nea de mÃ¡s de 4096 caracteres cortada"
                 );
             }
             if (substr(trim($buffer), 0, 2) != '--' && trim($buffer) != '') {
                 if ($mcons) {
-                    echo (int)$nl . "<tt>" 
+                    echo (int)$nl . "<tt>"
                         . htmlentities($buffer)
                         . "</tt><br>";
                 }
@@ -410,10 +410,10 @@ function consulta_archivo(&$db, $na, $derr = false, $merr = false,
 
 
 /**
- * Agrega fechacreacion y fechadeshabilitacion a una tabla básica
+ * Agrega fechacreacion y fechadeshabilitacion a una tabla bÃ¡sica
  *
- * @param object &$db          Conexión a base de datos
- * @param string $nt           Nombre de la tabla básica
+ * @param object &$db          ConexiÃ³n a base de datos
+ * @param string $nt           Nombre de la tabla bÃ¡sica
  * @param bool   $finerror     Indica si termina en caso de error o no
  * @param bool   $muestraerror Indica si debe mostrar mensaje de error
  *
@@ -430,7 +430,7 @@ function agrega_fechas(&$db, $nt, $finerror = false, $muestraerror = true)
         $db, "ALTER TABLE $nt " .
         "ADD COLUMN fechadeshabilitacion DATE " .
         "CHECK (fechadeshabilitacion IS NULL OR " .
-        "fechadeshabilitacion >= fechacreacion)", 
+        "fechadeshabilitacion >= fechacreacion)",
         $finerror, $muestraerror
     );
 }

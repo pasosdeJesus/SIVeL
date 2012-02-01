@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * P醙ina del multi-formulario para capturar caso (captura_caso.php).
+ * P谩gina del multi-formulario para capturar caso (captura_caso.php).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio p鷅lico. Sin garant韆s.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico. Sin garant韆s.
+ * @author    Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio p煤blico. Sin garant铆as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico. Sin garant铆as.
  * @version   CVS: $Id: PagFrecuenteAnexo.php,v 1.13.2.3 2011/10/13 09:57:50 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: S覮O DEFINICIONES
+ * Acceso: S脫LO DEFINICIONES
  */
 
 /**
- * Pesta馻 Fuentes Frecuentes con Anexo del multi-formulario capturar caso
+ * Pesta帽a Fuentes Frecuentes con Anexo del multi-formulario capturar caso
  */
 
 require_once 'PagFuentesFrecuentes.php';
@@ -24,13 +24,13 @@ require_once 'ResConsulta.php';
 
 
 /**
- * P醙ina fuentes frecuentes con anexo.
- * Ver documentaci髇 de funciones en clase base.
+ * P谩gina fuentes frecuentes con anexo.
+ * Ver documentaci贸n de funciones en clase base.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
  * @see PagFuentesFrecuentes
  */
@@ -69,7 +69,7 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
 
     /**
      * Constructora.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
      * @param string $nomForma Nombre
      *
@@ -83,9 +83,9 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
 
     /**
      * Agrega elementos al formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle &$db    Conexi髇 a base de datos
+     * @param handle &$db    Conexi贸n a base de datos
      * @param string $idcaso Id del caso
      *
      * @return void
@@ -128,9 +128,9 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
 
     /**
      * Llena valores del formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle  &$db    Conexi髇 a base de datos
+     * @param handle  &$db    Conexi贸n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -165,11 +165,11 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
 
     /**
      * Procesa valores del formulario enviados por el usuario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
      * @param handle &$valores Valores ingresados por usuario
      *
-     * @return bool Verdadero si y solo si puede completarlo con 閤ito
+     * @return bool Verdadero si y solo si puede completarlo con 茅xito
      * @see PagBaseSimple
      */
     function procesa(&$valores)

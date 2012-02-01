@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * P醙ina del multi-formulario para capturar caso (captura_caso.php).
+ * P谩gina del multi-formulario para capturar caso (captura_caso.php).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio p鷅lico. Sin garant韆s.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico. Sin garant韆s.
+ * @author    Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio p煤blico. Sin garant铆as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico. Sin garant铆as.
  * @version   CVS: $Id: PagTipoViolencia.php,v 1.83.2.3 2011/10/13 09:57:49 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: S覮O DEFINICIONES
+ * Acceso: S脫LO DEFINICIONES
  */
 
 /**
- * Pesta馻 Tipo de Violencia de la ficha de captura de un caso
+ * Pesta帽a Tipo de Violencia de la ficha de captura de un caso
  */
 require_once 'PagBaseSimple.php';
 require_once 'ResConsulta.php';
@@ -27,17 +27,17 @@ require_once 'ResConsulta.php';
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
 */
 class CamTipoViolencia extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acci髇
+     * Ejecuta acci贸n
      *
-     * @param object &$page      P醙ina
-     * @param string $actionName Acci髇
+     * @param object &$page      P谩gina
+     * @param string $actionName Acci贸n
      *
      * @return void
      */
@@ -58,12 +58,12 @@ class CamTipoViolencia extends HTML_QuickForm_Action
 
 /**
  * Tipo de Violencia.
- * Ver documentaci髇 de funciones en clase base.
+ * Ver documentaci贸n de funciones en clase base.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
  * @see      PagBaseSimple
 */
@@ -85,10 +85,10 @@ class PagTipoViolencia extends PagBaseSimple
     var $clase_modelo = 'caso_contexto';
 
     /**
-     * Inicializa variables y datos de la pesta馻.
-     * Ver documentaci髇 completa en clase base.
+     * Inicializa variables y datos de la pesta帽a.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @return handle Conexi髇 a base de datos
+     * @return handle Conexi贸n a base de datos
      */
     function iniVar()
     {
@@ -127,7 +127,7 @@ class PagTipoViolencia extends PagBaseSimple
 
     /**
      * Constructora.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
      * @param string $nomForma Nombre
      *
@@ -149,9 +149,9 @@ class PagTipoViolencia extends PagBaseSimple
 
     /**
      * Agrega elementos al formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle &$db    Conexi髇 a base de datos
+     * @param handle &$db    Conexi贸n a base de datos
      * @param string $idcaso Id del caso
      *
      * @return void
@@ -182,9 +182,9 @@ class PagTipoViolencia extends PagBaseSimple
 
     /**
      * Llena valores del formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle  &$db    Conexi髇 a base de datos
+     * @param handle  &$db    Conexi贸n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -236,9 +236,9 @@ class PagTipoViolencia extends PagBaseSimple
 
     /**
      * Elimina registros de tablas relacionadas con caso de este formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle  &$db    Conexi髇 a base de datos
+     * @param handle  &$db    Conexi贸n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -258,11 +258,11 @@ class PagTipoViolencia extends PagBaseSimple
         );
     }
 
-    /** Verifica si se violar韆 integridad referencial al cambiar
+    /** Verifica si se violar铆a integridad referencial al cambiar
     * una categoria
     *
     * @param handle  &$db     Base de datos
-    * @param integer $idcaso  N鷐ero de caso
+    * @param integer $idcaso  N煤mero de caso
     * @param string  $tv      Tipo de Violencia
     * @param integer $s       Supracategoria
     * @param integer $c       Categoria
@@ -278,11 +278,11 @@ class PagTipoViolencia extends PagBaseSimple
 
     /**
      * Procesa valores del formulario enviados por el usuario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
      * @param handle &$valores Valores ingresados por usuario
      *
-     * @return bool Verdadero si y solo si puede completarlo con 閤ito
+     * @return bool Verdadero si y solo si puede completarlo con 茅xito
      * @see PagBaseSimple
      */
     function procesa(&$valores)
@@ -298,7 +298,7 @@ class PagTipoViolencia extends PagBaseSimple
         $idcaso = $this->bcaso->_do->id;
 
         // Verificamos no ir a violar integridad referencial
-        // en caso de modificaci髇
+        // en caso de modificaci贸n
 
         $result = hace_consulta(
             $db, "DELETE FROM caso_contexto " .
@@ -341,7 +341,7 @@ class PagTipoViolencia extends PagBaseSimple
     * @param integer $s  Supracategoria
     * @param integer $c  Categoria
     *
-    * @return string Identificaci髇
+    * @return string Identificaci贸n
     */
     function cadenaDeCodcat($tv, $s, $c)
     {
@@ -350,9 +350,9 @@ class PagTipoViolencia extends PagBaseSimple
 
     /**
     * Dada una cadena creada con cadenaDeCodcat retorna el
-    * c骴igo de la categoria llenando las referencias.
+    * c贸digo de la categoria llenando las referencias.
     *
-    * @param string  $cadena identificaci髇 retornada por cadenaDeCodcat
+    * @param string  $cadena identificaci贸n retornada por cadenaDeCodcat
     * @param string  &$tv    Referencia donde llena tipo de violencia
     * @param integer &$s     Referencia para poner supracategoria
     * @param integer &$c     Referencia para poner categoria
@@ -369,12 +369,12 @@ class PagTipoViolencia extends PagBaseSimple
 
     /**
      * Prepara consulta SQL para buscar datos de este formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
      * @param string &$w       Consulta que se construye
      * @param string &$t       Tablas
-     * @param object &$db      Conexi髇 a base de datos
-     * @param object $idcaso   Identificaci髇 del caso
+     * @param object &$db      Conexi贸n a base de datos
+     * @param object $idcaso   Identificaci贸n del caso
      * @param string &$subcons Subconsulta
      *
      * @return void
@@ -399,12 +399,12 @@ class PagTipoViolencia extends PagBaseSimple
 
 
     /**
-     * Importa de un relato SINCODH lo relacionado con esta pesta馻,
+     * Importa de un relato SINCODH lo relacionado con esta pesta帽a,
      * creando registros en la base de datos para el caso $idcaso
      *
-     * @param object &$db    Conexi髇 a base de datos
+     * @param object &$db    Conexi贸n a base de datos
      * @param object $r      Relato en XML
-     * @param int    $idcaso N鷐ero de caso que se inserta
+     * @param int    $idcaso N煤mero de caso que se inserta
      * @param string &$obs   Para agregar notas de conversion
      *
      * @return void

@@ -1,20 +1,20 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Presenta menu principal
  *
- * Basado en fuentes y documentación del paquete de Pear HTML_Menu_Renderer
+ * Basado en fuentes y documentaciÃ³n del paquete de Pear HTML_Menu_Renderer
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: PresentaMenuPrincipal.php,v 1.17.2.1 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: SÓLO DEFINICIONES
+ * Acceso: SÃ“LO DEFINICIONES
  */
 
 /**
@@ -28,8 +28,8 @@ require_once 'HTML/Menu/Renderer.php';
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
  * @link     http://sivel.sf.net/tec
  */
 class PresentaMenuPrincipal extends HTML_Menu_Renderer
@@ -42,9 +42,9 @@ class PresentaMenuPrincipal extends HTML_Menu_Renderer
     var $_html = '';
 
     /**
-     * Termina el menú
+     * Termina el menÃº
      *
-     * @param int $level profundidad actual en la estructura de árbol
+     * @param int $level profundidad actual en la estructura de Ã¡rbol
      *
      * @return void
      */
@@ -55,9 +55,9 @@ class PresentaMenuPrincipal extends HTML_Menu_Renderer
 
 
     /**
-     * Completa el nivel del árbol (para los tipos 'tree' y 'sitemap')
+     * Completa el nivel del Ã¡rbol (para los tipos 'tree' y 'sitemap')
      *
-     * @param int $level profundidad actual en la estructura de árbol
+     * @param int $level profundidad actual en la estructura de Ã¡rbol
      *
      * @return void
      */
@@ -67,9 +67,9 @@ class PresentaMenuPrincipal extends HTML_Menu_Renderer
 
 
     /**
-     * Completa fila en el menú
+     * Completa fila en el menÃº
      *
-     * @param int $level profundidad actual en la estructura de árbol
+     * @param int $level profundidad actual en la estructura de Ã¡rbol
      *
      * @return void
      */
@@ -79,10 +79,10 @@ class PresentaMenuPrincipal extends HTML_Menu_Renderer
 
 
     /**
-     * Genera el elmento del menú
+     * Genera el elmento del menÃº
      *
      * @param array $node  Elmento que se genera
-     * @param int   $level profundidad actual en la estructura de árbol
+     * @param int   $level profundidad actual en la estructura de Ã¡rbol
      * @param int   $type  Tipo de elmento (una constante HTML_MENU_ENTRY_* )
      *
      * @return void

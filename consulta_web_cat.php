@@ -1,20 +1,20 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Consulta de categoria para consulta web
- * Una versión inicial fue desarrollada en 2004 por Mauricio Rivera
+ * Una versiÃ³n inicial fue desarrollada en 2004 por Mauricio Rivera
  * (mauricio.rivera.p@gmail.com).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2005 Dominio público.  Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2005 Dominio pÃºblico.  Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: consulta_web_cat.php,v 1.25.2.1 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: CONSULTA PÚBLICA
+ * Acceso: CONSULTA PÃšBLICA
  */
 
 require_once "aut.php";
@@ -23,7 +23,7 @@ require_once "misc.php";
 require_once 'DataObjects/Categoria.php';
 
 encabezado_envia('Categoria');
-if (!isset($_REQUEST['t']) || !isset($_REQUEST['s']) 
+if (!isset($_REQUEST['t']) || !isset($_REQUEST['s'])
     || !isset($_REQUEST['c'])
 ) {
         die("Faltan datos para efectuar consulta");
@@ -58,9 +58,9 @@ if ($dc->find() == 0) {
 $dc->fetch();
 
 echo "<table border='1'>";
-echo "<tr><th>Código</th><th>Descripción</th></tr>";
+echo "<tr><th>CÃ³digo</th><th>DescripciÃ³n</th></tr>";
 echo "<tr><td>" . htmlentities($t) . htmlentities($c) . "</td>";
-echo "<td>" . htmlentities($dt->nombre) . " / " . htmlentities($ds->nombre) 
+echo "<td>" . htmlentities($dt->nombre) . " / " . htmlentities($ds->nombre)
     . " / " . htmlentities($dc->nombre) . "</td></tr>";
 echo "</table>";
 

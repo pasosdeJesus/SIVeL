@@ -1,33 +1,33 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
-* InserciÛn de un caso
+* Inserci√≥n de un caso
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir T·mara <vtamara@pasosdeJesus.org>
- * @copyright 2007 Dominio p˙blico. Sin garantÌas.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P˙blico. Sin garantÌas.
+ * @author    Vladimir T√°mara <vtamara@pasosdeJesus.org>
+ * @copyright 2007 Dominio p√∫blico. Sin garant√≠as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P√∫blico. Sin garant√≠as.
  * @version   CVS: $Id: inscaso-basico.php,v 1.6.2.1 2011/09/14 14:56:19 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * InserciÛn de un caso
+ * Inserci√≥n de un caso
  */
 if (PHP_SAPI !== 'cli') {
     die("Acceso: INTERPRETE DE COMANDOS");
 }
 require_once "ambiente.php";
 
-/*** B¡SICOS ***/
+/*** B√ÅSICOS ***/
 $post = array();
-$post['_qf_basicos_ubicacion'] = 'UbicaciÛn';
+$post['_qf_basicos_ubicacion'] = 'Ubicaci√≥n';
 $post['busid'] = '';
-$post['titulo'] = 'TÌtulo';
+$post['titulo'] = 'T√≠tulo';
 $post['fecha']['d'] = '7';
 $post['fecha']['M'] = '8';
 $post['fecha']['Y'] = '2007';

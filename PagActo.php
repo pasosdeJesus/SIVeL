@@ -1,22 +1,22 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- *P醙ina del multi-formulario para capturar caso (captura_caso.php).
+ *P谩gina del multi-formulario para capturar caso (captura_caso.php).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio p鷅lico. Sin garant韆s.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico. Sin garant韆s.
+ * @author    Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio p煤blico. Sin garant铆as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico. Sin garant铆as.
  * @version   CVS: $Id: PagActo.php,v 1.23.2.4 2011/10/11 16:33:37 vtamara Exp $
  * @link      http://sivel.sf.net
- * Acceso: S覮O DEFINICIONES
+ * Acceso: S脫LO DEFINICIONES
  */
 
 /**
- * Pesta馻 Actos de la ficha de captura de caso
+ * Pesta帽a Actos de la ficha de captura de caso
  */
 
 require_once 'PagBaseSimple.php';
@@ -24,21 +24,21 @@ require_once 'ResConsulta.php';
 
 
 /**
- * Acci髇 que responde al boton Agregar agresi髇 individual
+ * Acci贸n que responde al boton Agregar agresi贸n individual
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
  */
 class AgregarActo extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acci髇
+     * Ejecuta acci贸n
      *
-     * @param object &$page      P醙ina
-     * @param string $actionName Acci髇
+     * @param object &$page      P谩gina
+     * @param string $actionName Acci贸n
      *
      * @return void
      */
@@ -54,21 +54,21 @@ class AgregarActo extends HTML_QuickForm_Action
 }
 
 /**
- * Acci髇 que responde al boton Agregar Agresion colectiva
+ * Acci贸n que responde al boton Agregar Agresion colectiva
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
  */
 class AgregarActocolectivo extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acci髇
+     * Ejecuta acci贸n
      *
-     * @param object &$page      P醙ina
-     * @param string $actionName Acci髇
+     * @param object &$page      P谩gina
+     * @param string $actionName Acci贸n
      *
      * @return void
      */
@@ -84,22 +84,22 @@ class AgregarActocolectivo extends HTML_QuickForm_Action
 }
 
 /**
- * Acci髇 que responde al enlace Eliminar acto individual
+ * Acci贸n que responde al enlace Eliminar acto individual
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
  */
 class EliminaActo extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acci髇
+     * Ejecuta acci贸n
      *
-     * @param object &$page      P醙ina
-     * @param string $actionName Acci髇
+     * @param object &$page      P谩gina
+     * @param string $actionName Acci贸n
      *
      * @return void
      */
@@ -121,22 +121,22 @@ class EliminaActo extends HTML_QuickForm_Action
 }
 
 /**
- * Acci髇 que responde al enlace Eliminar acto colectivo
+ * Acci贸n que responde al enlace Eliminar acto colectivo
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
  */
 class EliminaActocolectivo extends HTML_QuickForm_Action
 {
 
     /**
-     * Ejecuta acci髇
+     * Ejecuta acci贸n
      *
-     * @param object &$page      P醙ina
-     * @param string $actionName Acci髇
+     * @param object &$page      P谩gina
+     * @param string $actionName Acci贸n
      *
      * @return void
      */
@@ -160,12 +160,12 @@ class EliminaActocolectivo extends HTML_QuickForm_Action
 
 /**
  * Actos
- * Ver documentaci髇 de funciones en clase base.
+ * Ver documentaci贸n de funciones en clase base.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico.
+ * @author   Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico.
  * @link     http://sivel.sf.net/tec
  * @see      PagBaseSimple
  */
@@ -185,7 +185,7 @@ class PagActo extends PagBaseSimple
     /*var $bt;  Benchmark_Timer */
 
     /**
-     * Pone en null variables asociadas a tablas de la pesta馻.
+     * Pone en null variables asociadas a tablas de la pesta帽a.
      *
      * @return null
      */
@@ -199,7 +199,7 @@ class PagActo extends PagBaseSimple
     /**
      * Inicializa variables.
      *
-     * @return handle Conexi髇 a base de datos
+     * @return handle Conexi贸n a base de datos
      */
     function iniVar()
     {
@@ -217,7 +217,7 @@ class PagActo extends PagBaseSimple
 
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no deber韆 ser null");
+            die("Bug: idcaso no deber铆a ser null");
         }
 
         $dacto->id_caso = $idcaso;
@@ -245,7 +245,7 @@ class PagActo extends PagBaseSimple
 
     /**
      * Constructora.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
      * @param string $nomForma Nombre
      *
@@ -273,9 +273,9 @@ class PagActo extends PagBaseSimple
 
     /**
      * Agrega elementos al formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle &$db    Conexi髇 a base de datos
+     * @param handle &$db    Conexi贸n a base de datos
      * @param string $idcaso Id del caso
      *
      * @return void
@@ -300,9 +300,9 @@ class PagActo extends PagBaseSimple
         $op = htmlentities_array(
             $db->getAssoc(
                 "SELECT id_p_responsable, nombre
-                FROM presuntos_responsables_caso, presuntos_responsables 
-                WHERE id_caso=$idcaso AND 
-                presuntos_responsables.id=id_p_responsable 
+                FROM presuntos_responsables_caso, presuntos_responsables
+                WHERE id_caso = $idcaso AND
+                presuntos_responsables.id = id_p_responsable
                 ORDER BY nombre"
             )
         );
@@ -316,7 +316,7 @@ class PagActo extends PagBaseSimple
             $db->getAssoc(
                 "SELECT id, id_tipo_violencia || id || ' ' || nombre
                 FROM categoria
-                WHERE tipocat='I'  AND fechadeshabilitacion IS NULL
+                WHERE tipocat = 'I'  AND fechadeshabilitacion IS NULL
                 ORDER BY id_tipo_violencia, id"
             )
         );
@@ -329,9 +329,9 @@ class PagActo extends PagBaseSimple
         $op = htmlentities_array(
             $db->getAssoc(
                 "SELECT id_persona, nombres || ' ' || apellidos
-                FROM victima, persona 
-                WHERE id_caso=$idcaso AND 
-                victima.id_persona=persona.id 
+                FROM victima, persona
+                WHERE id_caso = $idcaso AND
+                victima.id_persona = persona.id
                 ORDER BY nombres, apellidos "
             )
         );
@@ -339,7 +339,7 @@ class PagActo extends PagBaseSimple
         $gacto[] =& $sel;
 
         $bn = $this->getButtonName('agregarActo');
-        $sel =& $this->createElement('submit', $bn, 'A馻dir');
+        $sel =& $this->createElement('submit', $bn, 'A帽adir');
         $gacto[] =& $sel;
 
         $this->addGroup($gacto, 'nuevoacto', 'Individuales', '&nbsp;', false);
@@ -393,8 +393,8 @@ class PagActo extends PagBaseSimple
                 $db->getAssoc(
                     "SELECT id_grupoper, nombre
                     FROM victima_colectiva, grupoper
-                    WHERE id_caso=$idcaso AND 
-                    victima_colectiva.id_grupoper=grupoper.id 
+                    WHERE id_caso = $idcaso AND
+                    victima_colectiva.id_grupoper = grupoper.id
                     ORDER BY nombre"
                 )
             );
@@ -403,7 +403,7 @@ class PagActo extends PagBaseSimple
 
             $sel =& $this->createElement(
                 'submit', $this->getButtonName('agregarActocolectivo'),
-                'A馻dir'
+                'A帽adir'
             );
             $gactocol[] =& $sel;
 
@@ -421,9 +421,9 @@ class PagActo extends PagBaseSimple
 
     /**
      * Llena valores del formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle  &$db    Conexi髇 a base de datos
+     * @param handle  &$db    Conexi贸n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -449,9 +449,9 @@ class PagActo extends PagBaseSimple
 
     /**
      * Elimina registros de tablas relacionadas con caso de este formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
-     * @param handle  &$db    Conexi髇 a base de datos
+     * @param handle  &$db    Conexi贸n a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -472,13 +472,13 @@ class PagActo extends PagBaseSimple
 
     /**
      * Procesa valores del formulario enviados por el usuario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
      * @param handle &$valores    Valores ingresados por usuario
-     * @param bool   $procActo    True si y solo si debe a馻dirse acto
-     * @param bool   $procActocol True si y solo si debe a馻dirse acto colec.
+     * @param bool   $procActo    True si y solo si debe a帽adirse acto
+     * @param bool   $procActocol True si y solo si debe a帽adirse acto colec.
      *
-     * @return bool Verdadero si y solo si puede completarlo con 閤ito
+     * @return bool Verdadero si y solo si puede completarlo con 茅xito
      * @see PagBaseSimple
      */
     function procesa(&$valores, $procActo = false, $procActocol = false)
@@ -536,12 +536,12 @@ class PagActo extends PagBaseSimple
 
     /**
      * Prepara consulta SQL para buscar datos de este formulario.
-     * Ver documentaci髇 completa en clase base.
+     * Ver documentaci贸n completa en clase base.
      *
      * @param string &$w       Consulta que se construye
      * @param string &$t       Tablas
-     * @param string &$db      Conexi髇 a base de datos
-     * @param object $idcaso   Identificaci髇 de caso
+     * @param string &$db      Conexi贸n a base de datos
+     * @param object $idcaso   Identificaci贸n de caso
      * @param string &$subcons Subconsulta
      *
      * @return void
@@ -556,7 +556,7 @@ class PagActo extends PagBaseSimple
     }
 
     /**
-     * Ver documentaci髇 en clase base.
+     * Ver documentaci贸n en clase base.
      *
      * @see PagBaseSimple
      *

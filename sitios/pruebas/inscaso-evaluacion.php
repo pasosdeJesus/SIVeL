@@ -1,36 +1,36 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 
 /**
-* Inserci髇 de evaluaci髇 un caso
+* Inserci贸n de evaluaci贸n un caso
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL-pruebas
- * @author    Vladimir T醡ara <vtamara@pasosdeJesus.org>
- * @copyright 2007 Dominio p鷅lico. Sin garant韆s.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P鷅lico. Sin garant韆s.
+ * @author    Vladimir T谩mara <vtamara@pasosdeJesus.org>
+ * @copyright 2007 Dominio p煤blico. Sin garant铆as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P煤blico. Sin garant铆as.
  * @version   CVS: $Id: inscaso-evaluacion.php,v 1.4.2.1 2011/09/14 14:56:19 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Inserci髇 de evaluaci髇 un caso
+ * Inserci贸n de evaluaci贸n un caso
  */
 if (PHP_SAPI !== 'cli') {
     die("Acceso: INTERPRETE DE COMANDOS");
 }
 require_once "ambiente.php";
 
-/*** EVALUACI覰 ***/
+/*** EVALUACI脫N ***/
 
 $post = array();
 $post['gr_confiabilidad'] = 'Alta';
 $post['gr_esclarecimiento'] = 'Alto';
 $post['gr_impunidad'] = 'Nula';
 $post['gr_informacion'] = 'Parc';
-$post['_qf_evaluacion_basicos'] = 'Datos b醩icos';
+$post['_qf_evaluacion_basicos'] = 'Datos b谩sicos';
 $post['_qf_default'] = 'evaluacion:siguiente';
 pasaPestanaFicha($db, array(), $post, 1);
 assert(false); // No llega
