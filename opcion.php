@@ -1,15 +1,15 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
 /**
- * Carga una opción no estándar del menú
+ * Carga una opciï¿½n no estï¿½ndar del menï¿½
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2010 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir Tï¿½mara <vtamara@pasosdeJesus.org>
+ * @copyright 2010 Dominio pï¿½blico. Sin garantï¿½as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Pï¿½blico. Sin garantï¿½as.
  * @version   CVS: $Id: opcion.php,v 1.9.2.3 2011/12/31 19:28:47 vtamara Exp $
  * @link      http://sivel.sf.net
  */
@@ -20,10 +20,10 @@ require_once $_SESSION['dirsitio'] . '/conf.php';
 
 /*$aut_usuario = "";
 $db = autenticaUsuario($dsn, $accno, $aut_usuario, 0); 
-Debe autenticarse en la función muestra del modulo */
+Debe autenticarse en la funciï¿½n muestra del modulo */
 
 if (!isset($_REQUEST['num'])) {
-    die("Falta parámetro num");
+    die("Falta parï¿½metro num");
 }
 
 if (!isset($GLOBALS['modulo'][(int)$_REQUEST['num']])) {
