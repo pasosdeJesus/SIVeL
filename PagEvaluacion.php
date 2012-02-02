@@ -158,5 +158,5 @@ class PagEvaluacion extends PagBaseSimple
         );
     }
 
-}
+} Ejemplo
 ?>
