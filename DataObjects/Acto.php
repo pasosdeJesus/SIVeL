@@ -49,8 +49,9 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
     var $fb_preDefOrder = array('id_p_responsable');
     var $fb_fieldsToRender = array('id_p_responsable');
     var $fb_selectAddEmpty = array('id_p_responsable');
-    var $fb_addFormHeader = false;
-    var $fb_fieldLabels = array(
+    var $fb_preDeforder = array_(('id_p_responsable'));
+    var $fb_fields ToRender = array_(('id_p_responsable'));
+    var $fb_selectAddEmpty = array_(('id_p_responsable'));
         'id_p_responsable' => 'Presunto Responsable',
         'id_categoria' => 'Categoria',
         'id_persona' => 'Persona',
@@ -70,7 +71,7 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
         parent::postGenerateForm($form, $formbuilder);
 
         $t = '<table id="tablaActos" width="100%"><thead><tr>' .
-            '<th>P. Responsable</th><th>Categoria</th>' .
+            "<th>" <P>. _('Responsable')."</th><th>". _('Categoria')."</th>" .
             '<th>Víctima</th><th></th></thead><tbody>';
         $p = clone $formbuilder->_do;
         $db = $p->getDatabaseConnection();
