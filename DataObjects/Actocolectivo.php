@@ -50,8 +50,8 @@ class DataObjects_Actocolectivo extends DB_DataObject_SIVeL
     var $fb_preDefOrder = array('id_p_responsable');
     var $fb_fieldsToRender = array('id_p_responsable');
     var $fb_selectAddEmpty = array('id_p_responsable');
-    var $fb_addFormHeader = false;
-    var $fb_fieldLabels = array(
+    var $fb_preDeforder = array('id_p_responsable');
+    var $fb_fieldsToRender = array('id_p_responsable');
         'id_p_responsable' => 'Presunto Responsable',
         'id_categoria' => 'Categoria',
         'id_grupoper' => 'Grupo de Personas',
@@ -71,8 +71,8 @@ class DataObjects_Actocolectivo extends DB_DataObject_SIVeL
         parent::postGenerateForm($form, $formbuilder);
 
         $t = '<table id="tablaActos" width="100%"><thead><tr>' .
-            '<th>P. Responsable</th><th>Categoria</th>' .
-            '<th>Víctima Colectiva</th><th></th></thead><tbody>';
+            '<th>'._('P. Responsable') . '</th><th>' . _('Categoria') . '</th>' .
+            '<th>' . _('Víctima Colectiva') . '</th><th></th></thead><tbody>';
         $p = clone $formbuilder->_do;
         $db = $p->getDatabaseConnection();
         $p->id_p_responsable = null;
