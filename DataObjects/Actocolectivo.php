@@ -50,12 +50,12 @@ class DataObjects_Actocolectivo extends DB_DataObject_SIVeL
     var $fb_preDefOrder = array('id_p_responsable');
     var $fb_fieldsToRender = array('id_p_responsable');
     var $fb_selectAddEmpty = array('id_p_responsable');
-    var $fb_preDeforder = array('id_p_responsable');
+    var $fb_preDefOrder = array('id_p_responsable');
     var $fb_fieldsToRender = array('id_p_responsable');
-        'id_p_responsable' => 'Presunto Responsable',
-        'id_categoria' => 'Categoria',
-        'id_grupoper' => 'Grupo de Personas',
-        'id_caso' => 'Caso'
+        'id_p_responsable' => _('Presunto Responsable'),
+        'id_categoria' => _('Categoria'),
+        'id_grupoper' => _('Grupo de Personas'),
+        'id_caso' => _('Caso')
     );
 
     /**
@@ -93,7 +93,7 @@ class DataObjects_Actocolectivo extends DB_DataObject_SIVeL
                 . (int)$p->id_p_responsable . ":"
                 . (int)$p->id_categoria . ":"
                 . (int)$p->id_grupoper
-                . "'>Eliminar</a></td>";
+                . "'>" . _("Eliminar") . "</a></td>";
         }
         $t .= '</tbody></table>';
         $sel =& $form->addElement('static', 'colectivas', '', $t);
