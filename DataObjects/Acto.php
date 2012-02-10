@@ -49,8 +49,8 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
     var $fb_preDefOrder = array('id_p_responsable');
     var $fb_fieldsToRender = array('id_p_responsable');
     var $fb_selectAddEmpty = array('id_p_responsable');
-    var $fb_preDeforder = array_(('id_p_responsable'));
-    var $fb_fieldsToRender = array_(('id_p_responsable'));
+    var $fb_preDeforder = array('id_p_responsable');
+    var $fb_fieldsToRender = array('id_p_responsable');
         'id_p_responsable' => 'Presunto Responsable',
         'id_categoria' => 'Categoria',
         'id_persona' => 'Persona',
