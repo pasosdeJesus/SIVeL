@@ -51,11 +51,11 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
     var $fb_selectAddEmpty = array('id_p_responsable');
     var $fb_addFormHeader = false;
     var $fb_fieldLabels = array(
-    
-        'id_p_responsable' => _('Presunto Responsable'),
-        'id_categoria' => _('Categoria'),
-        'id_persona' => _('Persona'),
-        'id_caso' => _('Caso');
+        'id_p_responsable' => 'Presunto Responsable',
+        'id_categoria' => 'Categoria',
+        'id_persona' => 'Persona',
+        'id_caso' => 'Caso',
+    );
 
     /**
      * Ajusta formulario generado.
@@ -70,8 +70,8 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
         parent::postGenerateForm($form, $formbuilder);
 
         $t = '<table id="tablaActos" width="100%"><thead><tr>' .
-            '<th>' . _('P. Responsable') . '</th><th>' . _('Categoria') . '</th>' .
-            '<th>' . _('Víctima') . '</th><th></th></thead><tbody>';
+            '<th>' . _('P. Responsable') . '</th><th>' . _('Categoria') . 
+            '</th>' . '<th>' . _('Víctima') . '</th><th></th></thead><tbody>';
         $p = clone $formbuilder->_do;
         $db = $p->getDatabaseConnection();
         $p->id_p_responsable = null;
