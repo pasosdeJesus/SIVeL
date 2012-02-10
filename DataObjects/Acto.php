@@ -49,13 +49,12 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
     var $fb_preDefOrder = array('id_p_responsable');
     var $fb_fieldsToRender = array('id_p_responsable');
     var $fb_selectAddEmpty = array('id_p_responsable');
-    var $fb_preDeforder = array('id_p_responsable');
+    var $fb_preDefOrder = array('id_p_responsable');
     var $fb_fieldsToRender = array('id_p_responsable');
-        'id_p_responsable' => 'Presunto Responsable',
-        'id_categoria' => 'Categoria',
-        'id_persona' => 'Persona',
-        'id_caso' => 'Caso'
-    );
+        'id_p_responsable' => _('Presunto Responsable'),
+        'id_categoria' => _('Categoria'),
+        'id_persona' => _('Persona'),
+        'id_caso' => _('Caso');
 
     /**
      * Ajusta formulario generado.
@@ -91,7 +90,7 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
                 . "<td><a href='{$_SERVER['PHP_SELF']}?eliminaacto="
                 . (int)$p->id_p_responsable . ":"
                 . (int)$p->id_categoria . ':'
-                . (int)$p->id_persona . "'>Eliminar</a></td>";
+                . (int)$p->id_persona . "'>" . _('Eliminar') . "</a></td>";
         }
         $t .= '</tbody></table>';
         $sel =& $form->addElement('static', 'individuales', '', $t);
