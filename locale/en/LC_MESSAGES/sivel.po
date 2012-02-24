@@ -1,0 +1,94 @@
+# English translations for sivel package.
+# Copyright (C) 2012 Public Domain according to Colombian legislation
+# This file is distributed under the same license as the sivel package.
+# Vladimir Tamara Patino <>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sivel 1.1cp1\n"
+"Report-Msgid-Bugs-To: vtamara@pasosdeJesus.org\n"
+"POT-Creation-Date: 2012-02-24 08:36-0500\n"
+"PO-Revision-Date: 2012-02-24 08:16-0500\n"
+"Last-Translator: Vladimir Tamara Patino <>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: tablas_basicas.php:29 tablas_basicas.php:47
+msgid "Tablas B&aacute;sicas"
+msgstr "Basic Tables"
+
+#: tablas_basicas.php:55 valida.php:117
+msgid "Men&uacute; Principal"
+msgstr "Main Menu"
+
+#: valida.php:28
+msgid "Reporte de consistencia del "
+msgstr "Consistency report of "
+
+#: valida.php:31
+msgid "Casos con memo vacio"
+msgstr "Cases with empty description"
+
+#: valida.php:36
+msgid "Casos con fecha de otras fuentes anterior a la del caso"
+msgstr "Cases with date of other sources before case's date"
+
+#: valida.php:45
+msgid "Casos con fecha de fuente frecuente anterior a la del caso"
+msgstr "Cases with date of frequent source before case's date"
+
+#: valida.php:62
+msgid "Casos con fecha inicial de funcionario anterior o igual a la del caso"
+msgstr "Cases with initial date of staff member before or equal to case's date"
+
+#: valida.php:72
+msgid "Casos sin funcionario"
+msgstr "Cases without staff member"
+
+#: valida.php:78
+msgid ""
+"Casos con m&aacute;s de una ubicaci&oacute;n (salen duplicados en conteos)"
+msgstr ""
+"Cases with more than one ubication (they are duplicated in counting)"
+
+#: valida.php:86
+msgid ""
+"V&iacute;ctimas con categorias que no son para v&iacute;ctimas individuales"
+msgstr ""
+"Victims with categories that are not for individual victims"
+
+#: valida.php:97
+msgid ""
+"V&iacute;ctimas colectivas con categorias que no son para v&iacute;ctimas "
+"colectivas"
+msgstr ""
+"Colective victims with categories that are not for colective victims"
+
+#: valida.php:106
+msgid "Registros en victima_colectiva que no est&aacute;n en actocolectivo"
+msgstr "Registers in victima_colectiva that are not in actocolectivo"
+
+#: DataObjects/Acto.php:73 DataObjects/Actocolectivo.php:74
+msgid "P. Responsable"
+msgstr "Alleged Perpetrator"
+
+#: DataObjects/Acto.php:73 DataObjects/Actocolectivo.php:74
+msgid "Categoria"
+msgstr "Category"
+
+#: DataObjects/Acto.php:74
+msgid "Víctima"
+msgstr "Victim"
+
+#: DataObjects/Acto.php:94 DataObjects/Actocolectivo.php:97
+msgid "Eliminar"
+msgstr "Delete"
+
+#: DataObjects/Actocolectivo.php:75
+msgid "Víctima Colectiva"
+msgstr "Colective Victim"
+
