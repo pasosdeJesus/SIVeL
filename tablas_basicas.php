@@ -26,7 +26,7 @@ require_once 'misc_caso.php';
 $aut_usuario = "";
 autenticaUsuario($dsn, $accno, $aut_usuario, 11);
 
-encabezado_envia("Tablas básicas");
+encabezado_envia(_("Tablas B&aacute;sicas"));
 
 require_once 'HTML/Menu.php';
 require_once 'HTML/Menu/DirectTreeRenderer.php';
@@ -43,14 +43,16 @@ $rend->setEntryTemplate(
 $menu->render($rend);
 echo '<table border = "0" width = "100%"><tr>' .
     '<td style = "white-space: nowrap;background-color:#CCCCCC;" ' .
-    'align="center" valign="top" colspan="2"><b>Tablas Básicas</b>' .
+    'align="center" valign="top" colspan="2"><b>' 
+    . _('Tablas B&aacute;sicas') . '</b>' .
     '</td></tr></table>';
 print $rend->toHtml();
 
 echo '<pr>&nbsp;</pr><table border="0" width="100%" ' .
     'style="white-space: nowrap; background-color:#CCCCCC;"><tr>' .
     '<td align="right">' .
-    '<a href="index.php"><b>Menú Principal</b></a>' .
+    '<a href="index.php"><b>' .
+    _('Men&uacute; Principal') . '</b></a>' .
     '</td></tr></table>';
     pie_envia();
 ?>

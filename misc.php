@@ -2320,5 +2320,12 @@ function tam_arreglo($arr)
     return $tmem;
 }
 
+function idioma($l = "es") {
+    putenv("LC_ALL=$l");
+    setlocale(LC_ALL, $l);
+    bindtextdomain("sivel", "./locale");
+    textdomain("sivel");
+}
+
 
 ?>

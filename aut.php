@@ -132,6 +132,7 @@ function nomSesion()
  */
 function autenticaUsuario($dsn,  $accno, &$usuario, $opcion)
 {
+    idioma("en");
     $snru = nomSesion();
     if (!isset($_SESSION) || session_name() != $snru) {
         session_name($snru);
