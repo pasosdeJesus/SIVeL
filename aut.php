@@ -14,7 +14,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: aut.php,v 1.20.2.4 2011/12/31 19:28:47 vtamara Exp $
  * @link      http://sivel.sf.net
  */
 
@@ -24,6 +23,7 @@
 require_once "Auth.php";
 require_once "DB.php";
 require_once "HTML/Javascript.php";
+require_once "confv.php";
 
 /**
  * Formulario de ingreso.
@@ -160,7 +160,7 @@ function autenticaUsuario($dsn,  $accno, &$usuario, $opcion)
         ini_set('session.cookie_httponly', true);
         ini_set('session.cookie_secure', true);
         $texp = 60*60*4; // 4 horas de sesión
-        ini_set('session.gc_maxlifetime', $texp);
+        ini_set('session.gc_maxlifetime', $texp); 
         $a->setExpire($texp);
         $a->setIdle($texp / 2);
 
@@ -307,6 +307,8 @@ function localizaConf()
     while (substr($n, strlen($n)-1, 1)=='_') {
         $n = substr($n, 0, strlen($n)-1);
     }
+    $nn = substr($n, strpos($n, "_") + 1);
+
     $pref = "";
     if (isset($_SESSION['localizaConf_pref'])) {
         $pref = $_SESSION['localizaConf_pref'];
@@ -332,7 +334,23 @@ function localizaConf()
         }
     }
     if (!$existe) {
-        die("No existe configuración '$dirsitio'");
+        global $CHROOTDIR;
+        echo "No existe configuración '" . htmlentities($dirsitio) . "'<br>";
+        $r = dirname($_SERVER['PATH_TRANSLATED']) . "/sitios";
+        $rs = $CHROOTDIR . $r;
+        $cmd ="cd $rs; sudo ./nuevo.sh $pn; sudo ln -s $pn " . strtoupper($n);
+        foreach (array($nn, 'sivel') as $pn) {
+            $rp = $r . "/" . $pn;
+            if (file_exists($rp)) {
+                $fn = $pn;
+                echo "Existe ruta " . htmlentities("$CHROOTDIR$rp") . "<br>";
+                $cmd ="cd $rs; sudo ln -s $pn " . strtoupper($n);
+            }
+        }
+        echo "Posiblemente basta que ejecute desde una terminal: <br>";
+        echo "<font size='-1' color='#db9090'>" 
+            . htmlentities($cmd) . "</font>";
+        exit(1);
     }
     //trigger_error("OJO quedo dirsitio='$dirsitio'");
     return $dirsitio;

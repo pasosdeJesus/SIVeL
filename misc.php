@@ -12,7 +12,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: misc.php,v 1.147.2.11 2011/12/31 19:28:47 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -92,6 +91,17 @@ if (!isset($GLOBALS['cw_ncampos'])) {
      */
 $GLOBALS['idbus']=-1;
 
+/** 
+ * Encabezado de un relato
+ * @global string $GLOBALS['enc_relato']
+ * @name enc_relato
+ */
+$GLOBALS['enc_relato'] 
+    = "<" ."?xml version=\"1.0\" encoding=\"ISO-8859-1\"?".">\n"
+    . "<!DOCTYPE relatos PUBLIC \"-//SINCODH/DTD relatos 0.96\" "
+    . "\"relatos.dtd\">\n"
+    . '<'.'?xml-stylesheet type="text/xsl" href="xrlat-a-html.xsl"?'
+    . ">\n";
 
 /* -------- OPERACIONES CON CADENAS */
 
@@ -101,10 +111,10 @@ $GLOBALS['idbus']=-1;
  * @param string $s Cadena
  *
  * @return string Convertida a minúsculas
-     */
+ */
 function a_minusculas($s)
 {
-    $r = strtolower($s);
+    $r = mb_strtolower($s);
     $r = str_replace(
         array('Á', 'É', 'Í', 'Ó', 'Ú'),
         array('á', 'é', 'í', 'ó', 'ú'), $r
@@ -122,12 +132,12 @@ function a_minusculas($s)
      */
 function a_mayusculas($s)
 {
-    $r = strtoupper($s);
     $r = str_replace(
         array('á', 'é', 'í', 'ó', 'ú', 'ñ', 'ü'),
         array('Á', 'É', 'Í', 'Ó', 'Ú', 'Ñ', 'Ü'),
-        $r
+        $s
     );
+    $r = mb_strtoupper($r, "iso-8859-1");
     return $r;
 }
 
@@ -232,7 +242,7 @@ function txt2latex($s)
     $nc = 0; // Número de apostrofes encontradas
     for ($i = 0; $i < strlen($s); $i++) {
         switch ($s{$i}) {
-        case '"':
+        case '"': 
             $nc++;
             if (($nc % 2)==1) {
                 $r .= "``";
@@ -240,7 +250,7 @@ function txt2latex($s)
                 $r .= "''";
             }
             break;
-        case '\'':
+        case '\'': 
             $na++;
             if (($na % 2)==1) {
                 $r .= "`";
@@ -428,7 +438,8 @@ function muestra_archivo($noma, $esc = false)
         if ($esc) {
             echo_esc(fread($rh, 1024));
         } else {
-            echo fread($rh, 1024);
+            $html_l = fread($rh, 1024);
+            echo $html_l;
         }
     }
     fclose($rh);
@@ -464,7 +475,7 @@ function agregar_tabla($nom, &$f, $idcaso, $nuevo, &$da)
         $da,
         array(
             'requiredRuleMessage' => 'El campo %s es indispensable.',
-            'ruleViolationMessage' =>
+            'ruleViolationMessage' => 
             '%s: El valor que ha ingresado no es válido.'
         )
     );
@@ -515,7 +526,7 @@ function error_valida($msg, $valores, $iderr = '')
     if (isset($valores) && is_array($valores) && count($valores) > 0) {
         $_SESSION['recuperaErrorValida'] = $valores;
     }
-    echo "<div class='regla'>"
+    echo "<div class='regla'>" 
         .  htmlentities($msg)
         . "</div>";
     if ($iderr != '') {
@@ -527,35 +538,35 @@ function error_valida($msg, $valores, $iderr = '')
  * Presenta resultado de una validación.
  * La primera columna de la consulta $cons debe ser una identificación
  * de caso
- * Las funciones SQL son tomadas de:
+ * Las funciones SQL son tomadas de: 
  * http://www.postgresonline.com/journal/archives/
  * 68-More-Aggregate-Fun-Whos-on-First-and-Whos-on-Last.html
  *
  * @param object &$db     Conexión a base de datos
- * @param string $hmens   Mensaje por mostrar, ya está en HTML sin XSS
+ * @param string $mens    Mensaje por mostrar
  * @param string $cons    Consulta pr realizar
  * @param bool   $confunc Incluir primer funcionario que trabajo caso, en este
  *                        caso columna con id del caso se llama id_caso
  *
  * @return void
  */
-function res_valida(&$db, $hmens, $cons, $confunc = false)
+function resValida(&$db, $mens, $cons, $confunc = false)
 {
     if ($confunc) {
         hace_consulta(
-            $db,
-            "CREATE OR REPLACE FUNCTION
+            $db, 
+            "CREATE OR REPLACE FUNCTION 
             first_element_state(anyarray, anyelement) RETURNS anyarray AS
             $$
-            SELECT CASE WHEN array_upper($1,1) IS NULL
-                THEN array_append($1,$2)
-                ELSE $1
+            SELECT CASE WHEN array_upper($1,1) IS NULL 
+                THEN array_append($1,$2) 
+                ELSE $1 
             END;
             $$
             LANGUAGE 'sql' IMMUTABLE;", false, false
         );
         hace_consulta(
-            $db,
+            $db, 
             "CREATE OR REPLACE FUNCTION first_element(anyarray)
             RETURNS anyelement AS
             $$
@@ -565,33 +576,33 @@ function res_valida(&$db, $hmens, $cons, $confunc = false)
             false, false
         );
         hace_consulta(
-            $db,
-            "CREATE AGGREGATE first(anyelement) (
-                SFUNC = first_element_state,
-                STYPE = anyarray,
-                FINALFUNC = first_element
+            $db, 
+            "CREATE AGGREGATE first(anyelement) (             
+                SFUNC=first_element_state,
+                STYPE=anyarray,    
+                FINALFUNC=first_element
             );", false, false
-        );
+        ); 
         hace_consulta(
             $db,
-            "CREATE VIEW primerfuncionario AS
-            SELECT id_caso, MIN(fecha_inicio) AS fecha_inicio,
-            FIRST(id_funcionario) AS id_funcionario
-            FROM funcionario_caso
+            "CREATE VIEW primerfuncionario AS 
+            SELECT id_caso, MIN(fecha_inicio) AS fecha_inicio, 
+            FIRST(id_funcionario) AS id_funcionario 
+            FROM funcionario_caso 
             GROUP BY id_caso ORDER BY id_caso;", false, false
         );
 
     }
-    echo "<p>" . $hmens . ": ";
+    echo "<p>" . htmlentities($mens) . ": ";
 
     if ($confunc) {
         $r = hace_consulta(
-            $db,
-            "SELECT primerfuncionario.id_caso,
-            funcionario.nombre, sub.*
-            FROM primerfuncionario, funcionario, ($cons) AS sub
-            WHERE primerfuncionario.id_funcionario = funcionario.id
-            AND primerfuncionario.id_caso = sub.id_caso"
+            $db, 
+            "SELECT primerfuncionario.id_caso, 
+            funcionario.nombre, sub.* 
+            FROM primerfuncionario, funcionario, ($cons) AS sub 
+            WHERE primerfuncionario.id_funcionario=funcionario.id
+            AND primerfuncionario.id_caso=sub.id_caso" 
         );
     } else {
         $r = hace_consulta($db, $cons);
@@ -823,7 +834,7 @@ function ret_id_clase($form)
      */
 function encabezado_envia($titulo = null, $cabezote = '')
 {
-    echo '<' .'?xml version="1.0" encoding="ISO-8559-1"?' .'>
+    echo '<' .'?xml version="1.0" encoding="UTF8"?' .'>
 <' . '!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
     echo '<' . 'html>'; // xmlns = "http://www.w3.org/1999/xhtml" lang = "es">
@@ -903,7 +914,7 @@ function pie_envia($pie = '')
  *
  * @return string Cadena HTML con enlace a caso
      */
-function enlace_caso($id)
+function enlace_caso_html($id) 
 {
     return "<a target='_otro' href='consulta_web.php?" .
         "_qf_consultaWeb_consulta=Consulta" .
@@ -923,10 +934,10 @@ function enlace_caso($id)
  * @param string  &$comofam Colchon para retornar URLs como familiar
  *
  * @return void Llena $comovic y $comofan con enlaces a casos donde
- * se referencia idp como víctima y familiar respectivamente
+ * se referencia idp como víctima y familiar respectivamente 
  * (excepto idcaso)
      */
-function enlaces_casos_persona(
+function enlaces_casos_persona_html(
     &$db, $idcaso, $idp, &$comovic, &$comofam
 ) {
     $q = "SELECT id_caso FROM victima WHERE id_persona = '$idp'";
@@ -936,12 +947,12 @@ function enlaces_casos_persona(
     while ($r->fetchInto($campos)) {
         $idv = $campos[0];
         if ($idv != $idcaso) {
-            $comovic .= $sep . enlace_caso($idv);
+            $comovic .= $sep . enlace_caso_html($idv);
             $sep = ", ";
         }
     }
 
-    $q = "SELECT id_caso FROM relacion_personas, victima
+    $q = "SELECT id_caso FROM relacion_personas, victima 
         WHERE id_persona1 = id_persona AND id_persona2 = '$idp'";
     $r = hace_consulta($db, $q);
     $campos = array();
@@ -949,7 +960,7 @@ function enlaces_casos_persona(
     while ($r->fetchInto($campos)) {
         $idv = $campos[0];
         if ($idv != $idcaso) {
-            $comofam .= $sep . enlace_caso($idv);
+            $comofam .= $sep . enlace_caso_html($idv);
             $sep = ", ";
         }
     }
@@ -964,10 +975,10 @@ function enlaces_casos_persona(
  * @param integer $idc      Identificación del grupo de personas
  * @param string  &$comovic Colchon para retornar URLs como víctima
  *
- * @return void Llena $comovic con enlaces a casos donde se referencia
+ * @return void Llena $comovic con enlaces a casos donde se referencia 
  *   idc como víctima y familiar respectivamente (excepto idcaso)
      */
-function enlaces_casos_grupoper(&$db, $idcaso, $idc, &$comovic)
+function enlaces_casos_grupoper_html(&$db, $idcaso, $idc, &$comovic) 
 {
     $q = "SELECT id_caso FROM victima_colectiva WHERE id_grupoper = '$idc'";
     $r = hace_consulta($db, $q);
@@ -976,7 +987,7 @@ function enlaces_casos_grupoper(&$db, $idcaso, $idc, &$comovic)
     while ($r->fetchInto($campos)) {
         $idv = $campos[0];
         if ($idv != $idcaso) {
-            $comovic .= $sep . enlace_caso($idv);
+            $comovic .= $sep . enlace_caso_html($idv);
             $sep = ", ";
         }
     }
@@ -990,7 +1001,7 @@ function enlaces_casos_grupoper(&$db, $idcaso, $idc, &$comovic)
  *
  * @return array Arreglo convertido
      */
-function htmlentities_array($ar)
+function htmlentities_array($ar) 
 {
     $ars = array();
     foreach ($ar as $l => $v) {
@@ -1008,7 +1019,7 @@ function htmlentities_array($ar)
 
 /**
  * Muestra mensaje escapandolo antes para presentar en navegador y termina
- *
+ * 
  * @param string $mens Mensaje por mostrar
  *
  * @return void
@@ -1021,7 +1032,7 @@ function die_esc($mens)
 
 /**
  * Muestra mensaje escapandolo antes para presentar en navegador
- *
+ * 
  * @param string $mens Mensaje por mostrar
  * @param bool   $nl   Nueva linea tras mensaje
  *
@@ -1189,7 +1200,7 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
             foreach ($llave_ntabla as $il => $vl) {
                 consulta_and_sinap(
                     $w, var_escapa($ntabla, $db). "." .
-                    var_escapa($vl),
+                    var_escapa($vl), 
                     var_escapa($llave_prin[$il]),
                     "=", $gcon
                 );
@@ -1770,12 +1781,13 @@ function convierte_valor(&$do, $campo, $tipo)
  * @param string  $irelot  Campo con identificación en otras
  * @param array   $masenl  Tablas de algunos campos que pueden ser sin info.
  * @param array   $tab     Estructura de base sacada de .ini
+ * @param array   $fignora Si un campo de tipo bool es false ignora
  *
  * @return string Consulta SQL
      */
 function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
     $otrast = array(), $iotrast = '', $nonulos = array(), $irelot = "id",
-    $masenl = array(), $tab = null
+    $masenl = array(), $tab = null, $fignora = true
 ) {
     //echo "OJO prepara_consulta_con_tabla(duc, $rel, $bas, $crelbas, "
     // . "$enbas, $otrast,  $iotrast,  $nonulos,  $irelot, $masenl,  "
@@ -1807,6 +1819,7 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
         $ignora |= $vdc === '';
         $ignora |= $vdc == null;
 
+        $ignora |= $tipo == 18 && $duc->$campo == 'f' && $fignora;
         /// Convención interna para fechas si es anio_min - 1 ignorar
         $ignora |= $tipo == 134
             && substr($vdc, 0, 4) == ($GLOBALS['anio_min'] - 1);
@@ -1829,7 +1842,7 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
         $ignora |= ($valor == 0 && is_array($nonulos)
             && in_array($campo, $nonulos));
         if (!$ignora) {
-            if (($tipo & 2) && ($tipo != 134)) {
+            if (($tipo & 2) && $tipo != 134 && $tipo !=18) {
                 // Cadena que no es fecha
                 consulta_and(
                     $db, $w2, "$rel.$campo", "%" .trim($valor) . "%",
@@ -1838,7 +1851,7 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
             } else {
                 consulta_and($db, $w2, "$rel.$campo", $valor, '=', 'AND');
             }
-            //echo "w2=$w2,<br>";
+            //echo "OJO w2=$w2,<br>";
         }
     }
     if (isset($otrast) && is_array($otrast) && $iotrast != '') {
@@ -1948,7 +1961,7 @@ function prepara_consulta_gen(&$w, &$t, $idcaso, $rel, $bas, $crelbas, $enbas,
         consulta_and_sinap($w, "$rel.$crelbas", "$bas.id", "=", "AND");
     }
 
-    if ($w3!="") {
+    if ($w3 != "") {
         $w = $w == "" ? "($w3)" : "$w AND ($w3)";
     }
 }
@@ -2007,7 +2020,7 @@ function valida_caso($idcaso)
         "WHERE id_caso='" . $idcaso . "';";
     $nfue+=(int)$db->getOne($q);
     if ($nfue <= 0) {
-        error_valida('Falta fuente.<br>', array());
+        error_valida('Falta fuente.', array());
         $valr = false;
     }
     $q = "SELECT COUNT(*) FROM acto " .
@@ -2020,14 +2033,14 @@ function valida_caso($idcaso)
         "WHERE id_caso='" . $idcaso . "';";
     $ncat += (int)$db->getOne($q);
     if ($ncat <= 0) {
-        error_valida('Falta tipo de violencia.<br>', array());
+        error_valida('Falta tipo de violencia.', array());
         $valr = false;
     }
     $q = "SELECT COUNT(*) FROM presuntos_responsables_caso " .
         "WHERE id_caso='" . $idcaso . "';";
     $npresp = (int)$db->getOne($q);
     if ($npresp <= 0) {
-        error_valida('Falta presunto responsable.<br>', array());
+        error_valida('Falta presunto responsable.', array());
         $valr = false;
     }
     $q = "SELECT COUNT(*) FROM victima " .
@@ -2040,12 +2053,12 @@ function valida_caso($idcaso)
         "WHERE id_caso='" . $idcaso . "';";
     @$nvic+=(int)$db->getOne($q);
     if ($nvic <= 0) {
-        error_valida('Falta victima.<br>', array());
+        error_valida('Falta victima.', array());
         $valr = false;
     }
     $dcaso->get($idcaso);
     if (trim($dcaso->memo)=='') {
-        error_valida('Falta memo.<br>', array());
+        error_valida('Falta memo.', array());
         $valr = false;
     }
     if (isset($GLOBALS['ISPELL']) && $GLOBALS['ISPELL'] != '') {
@@ -2083,7 +2096,7 @@ function valida_caso($idcaso)
  *
  * @return string Patrón de búsqueda para usar con ~ en PostgreSQL
      */
-function crea_patron($ar)
+function crea_patron($ar) 
 {
     assert(is_array($ar));
 
@@ -2258,7 +2271,6 @@ function enlaza_relato(&$do, $campo, $elemento, &$ad, $valor = null)
 }
 
 
-
 /* -------------- DEPURACIÓN */
 
 /**
@@ -2320,5 +2332,24 @@ function tam_arreglo($arr)
     return $tmem;
 }
 
+
+if (!function_exists('get_called_class')) {
+    /**
+     * Retorna nombre de clase llamadora
+     * 
+     * @return void
+     */
+    function get_called_class()
+    {
+        $bt = debug_backtrace();
+        $lines = file($bt[1]['file']);
+        preg_match(
+            '/([a-zA-Z0-9\_]+)::'.$bt[1]['function'].'/',
+            $lines[$bt[1]['line']-1],
+            $matches
+        );
+        return $matches[1];
+    }
+}
 
 ?>

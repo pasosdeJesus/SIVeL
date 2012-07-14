@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: tablas_basicas.php,v 1.26 2011/05/19 04:18:44 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
@@ -26,7 +25,8 @@ require_once 'misc_caso.php';
 $aut_usuario = "";
 autenticaUsuario($dsn, $accno, $aut_usuario, 11);
 
-encabezado_envia("Tablas básicas");
+$nomp = _("Tablas b&aacute;sicas");
+encabezado_envia($nomp);
 
 require_once 'HTML/Menu.php';
 require_once 'HTML/Menu/DirectTreeRenderer.php';
@@ -43,14 +43,14 @@ $rend->setEntryTemplate(
 $menu->render($rend);
 echo '<table border = "0" width = "100%"><tr>' .
     '<td style = "white-space: nowrap;background-color:#CCCCCC;" ' .
-    'align="center" valign="top" colspan="2"><b>Tablas Básicas</b>' .
+    'align="center" valign="top" colspan="2"><b>' . $nomp . '</b>' .
     '</td></tr></table>';
 print $rend->toHtml();
 
 echo '<pr>&nbsp;</pr><table border="0" width="100%" ' .
     'style="white-space: nowrap; background-color:#CCCCCC;"><tr>' .
     '<td align="right">' .
-    '<a href="index.php"><b>Menú Principal</b></a>' .
+    '<a href="index.php"><b>Men&uacute; Principal</b></a>' .
     '</td></tr></table>';
     pie_envia();
 ?>

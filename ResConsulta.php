@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: ResConsulta.php,v 1.167.2.4 2011/10/13 13:41:06 vtamara Exp $
  * @link      http://sivel.sf.net
  */
 
@@ -641,11 +640,8 @@ class ResConsulta
     function aHtml($retroalim = true,
         $html_enlace1='<a href = "consulta_web.php">Consulta Web</a>, '
     ) {
-        $html_erelato =  "<" ."?xml version=\"1.0\" encoding=\"ISO-8859-1\"?".">\n"
-            . "<!DOCTYPE relatos PUBLIC \"-//SINCODH/DTD relatos 0.96\" "
-            . "\"relatos.dtd\">\n"
-            . '<'.'?xml-stylesheet type="text/xsl" href="xrlat-a-html.xsl"?'
-            . ">\n<relatos>";
+        $html_erelato =  $GLOBALS['enc_relato']
+            . "<relatos>";
 
         $j = 0;
         $tot = 0;
@@ -845,8 +841,8 @@ class ResConsulta
                         if ($peso >= $ultpeso) {
                             $ultpeso = $peso;
                         } else {
-                            echo "<br/><font color='red'>Peso " . (int)$peso
-                               . " de caso " . (int)$idcaso
+                            echo "<br/><font color='red'>Peso " . (int)$peso 
+                               . " de caso " . (int)$idcaso 
                                ." fuera de secuencia</font><br/>";
                         }
                     } else {
@@ -854,10 +850,11 @@ class ResConsulta
                     }
                     break;
                 case 'relato':
-                    echo $this->reporteRelato(
+                    $html_relato = $this->reporteRelato(
                         $idcaso, null,
                         $this->campos, $this->varlin
                     );
+                    echo $html_relato;
                     break;
                 case 'csv':
                     echo $this->reporteCsvAdjunto(
@@ -949,7 +946,9 @@ class ResConsulta
             echo "</relatos>\n";
             break;
         case 'tabla':
-            if (array_key_exists('m_desembolsos', $this->campos)) {
+            if (isset($GLOBALS['reporte_tabla_fila_totales']) 
+                && $GLOBALS['reporte_tabla_fila_totales'] == true
+            ) {
                 echo "<tr>";
                 $html_renglon = "";
                 foreach ($this->campos as $cc => $nc) {
@@ -959,7 +958,7 @@ class ResConsulta
                         if (($d = strrpos($c, "/"))>0) {
                             $c = substr($c, $d+1);
                         }
-                        if (is_callable(array($c, 'resConsultaFinaltabla'))) {
+                        if (is_callable(array($c, 'resConsultaFinaltablaHtml'))) {
                             $html_renglon .= call_user_func_array(
                                 array($c, 'resConsultaFinaltablaHtml'),
                                 array($cc)
@@ -1052,7 +1051,7 @@ class ResConsulta
                 }
             }
         }
-        $html_renglon = "<tr style='background-color: " . htmlentities($col)
+        $html_renglon = "<tr style='background-color: " . htmlentities($col) 
             . "'>";
         foreach ($campos as $cc => $nc) {
             $html_renglon .= "<td valign='top'>";
@@ -1224,7 +1223,7 @@ class ResConsulta
             echo "<td valign=top><form method=\"POST\" " .
                 "action=\"consulta_web_correo.php\">\n";
             foreach ($escon as $l => $v) {
-                echo "<input type=\"hidden\" name=\""
+                echo "<input type=\"hidden\" name=\"" 
                     . htmlentities($l) . "\" value=\""
                     . htmlentities($v) . "\">\n";
             }
@@ -1264,7 +1263,7 @@ class ResConsulta
         $formacomp = 'privado';
         $locdb = false;
         if ($db == null) {
-            $locdb = true;
+            $locdb = true; 
             $db = $dcaso->getDatabaseConnection();
         }
         $nom = $db->getOne(
@@ -1409,7 +1408,7 @@ class ResConsulta
                 $atradrel = DataObjects_Victima_colectiva::tradRelato();
                 foreach ($atradrel as $t => $vt) {
                     $cx = $vt[0];
-                    $idt = $vt[1];
+                    $idt = $vt[1]; 
                     $lr = lista_relacionados(
                         $t,
                         array('id_grupoper' => $dvictimacol->id_grupoper,
@@ -1847,7 +1846,7 @@ class ResConsulta
                 'observaciones{tipo->contexto}' => $tcont,
                 'observaciones{tipo->antecedente}' => $tan,)
             );
-            unset($tan);
+            unset($tan); 
             unset($tcon);
             unset($ubitipositipo);
             unset($ubilugar);
@@ -1890,8 +1889,8 @@ class ResConsulta
         $dcaso->get('id', $idcaso);
         $r = ""; $rcaso = "";
         if (array_key_exists('caso_id', $campos)) {
-            $rcaso .= "CASO NO. "
-                . "<a href='captura_caso.php?modo=edita&id={$dcaso->id}'>"
+            $rcaso .= "CASO NO. " 
+                . "<a href='captura_caso.php?modo=edita&id={$dcaso->id}'>" 
                 . "{$dcaso->id}</a>\n";
         }
         if (array_key_exists('caso_fecha', $campos)) {
@@ -2044,6 +2043,18 @@ class ResConsulta
         $r = "";
         if (array_key_exists('m_tipificacion', $campos)) {
             $lcat = array();
+            $dcontexto = objeto_tabla('caso_contexto');
+            $dcontexto->id_caso = $idcaso;
+            $dcontexto->find();
+            $pref = "Contexto: ";
+            $post = "";
+            while ($dcontexto->fetch()) {
+                $dc = $dcontexto->getLink('id_contexto');
+                $r .= $pref . $dc->nombre;
+                $pref = ", ";
+                $post = "\n";
+            }
+            $r .= $post;
 
             $dacto = objeto_tabla('acto');
             $dacto->id_caso = $idcaso;
@@ -2168,6 +2179,54 @@ class ResConsulta
 
         return $r;
     }
+   
+    /**
+     * Representacion de un grupo de victimas
+     *
+     * @param string &$r      Cadena resultante
+     * @param string $lvc     Arreglo con códigos de personas por presentar
+     * @param string $lvic    Arreglo de datos de victimas indexado por código
+     * @param bool   $indenta Identacion?
+     * @param bool   $corto   Formato corto?
+     *
+     * @return void
+     */
+    static function representa_victimas(&$r, $lvc, $lvic, 
+        $indenta, $corto = false
+    ) {
+        $nns = 0;
+        $sep = $corto ? "Víctimas: " : "";
+        $fin = "";
+        foreach ($lvc as $idv) {
+            if ($idv == -1) {
+                return ;
+            }
+            $nv = $lvic[$idv];
+            if (trim($nv)=="NN") {
+                $nns++;
+            } else {
+                if ($indenta) {
+                    $r .= "&nbsp;&nbsp;&nbsp;&nbsp;";
+                }
+                $r .= $sep . trim(strip_tags($nv));
+                if (!$corto) {
+                    $r .= "\n";
+                } else {
+                    $sep = ", ";
+                    $fin = "\n";
+                }
+            }
+        }
+        $r .= $fin;
+        if ($nns >= 1 && $indenta) {
+            $r .= "&nbsp;&nbsp;&nbsp;&nbsp;";
+        }
+        if ($nns == 1) {
+            $r .= "PERSONA SIN IDENTIFICAR\n";
+        } else if ($nns > 1) {
+            $r .= $nns . " PERSONAS SIN IDENTIFICAR\n";
+        }
+    }
 
     /**
      * Presenta listado de presuntos responsables, categorias y víctimas
@@ -2224,6 +2283,10 @@ class ResConsulta
     static function listaPrCatVictima($idcaso,  $campos, &$r,
         $repgen= false
     ) {
+        $corto = !array_key_exists('m_presponsables', $campos)
+            && !array_key_exists('m_tipificacion', $campos)
+                && array_key_exists('m_victimas', $campos);
+
         $indenta = false;
         if (isset($GLOBALS['reporte_indenta_victimas'])
             && $GLOBALS['reporte_indenta_victimas'] === true
@@ -2258,37 +2321,38 @@ class ResConsulta
                 strip_tags($dpersona->apellidos);
             $idp = DataObjects_Sector_social::id_profesional();
             if ($dvictima->id_profesion != DataObjects_Profesion::idSinInfo()
-                && $dvictima->id_sector_social == $idp
+                && $dvictima->id_sector_social == $idp 
+                && !$corto
             ) {
-                    $dprofesion = $dvictima->getLink('id_profesion');
-                    $nvc .= " - " . strip_tags($dprofesion->nombre);
+                $dprofesion = $dvictima->getLink('id_profesion');
+                $nvc .= " - " . strip_tags($dprofesion->nombre);
             } else {
                 $ids = DataObjects_Sector_social::idSinInfo();
-                if ($dvictima->id_sector_social != $ids) {
-                        $dsector = $dvictima->
-                            getLink('id_sector_social');
-                        $nvc .= " - " . strip_tags($dsector->nombre);
+                if ($dvictima->id_sector_social != $ids && !$corto) {
+                    $dsector = $dvictima->
+                        getLink('id_sector_social');
+                    $nvc .= " - " . strip_tags($dsector->nombre);
                 }
                 $ids = DataObjects_Profesion::idSinInfo();
-                if ($dvictima->id_profesion != $ids) {
-                        $dprofesion = $dvictima->
-                            getLink('id_profesion');
-                        $nvc .= " - " . strip_tags($dprofesion->nombre);
+                if ($dvictima->id_profesion != $ids && !$corto) {
+                    $dprofesion = $dvictima->
+                        getLink('id_profesion');
+                    $nvc .= " - " . strip_tags($dprofesion->nombre);
                 }
             }
             $dper = $dvictima->getLink('id_persona');
             if ($repgen && $dvictima->hijos != null
-                && $dvictima->hijos != null
+                && $dvictima->hijos != null && !$corto
             ) {
                 $nvc .= " " . $dvictima->hijos. " hijos.";
             }
             $ids = DataObjects_Filiacion::idSinInfo();
-            if ($repgen && $dvictima->id_filiacion != $ids) {
-                    $nvc .= " " . $GLOBALS['etiqueta']['filiacion'] . ": ";
-                    $dfiliacion = $dvictima->getLink('id_filiacion');
-                    $nvc .= $dfiliacion->nombre . ". ";
+            if ($repgen && $dvictima->id_filiacion != $id && !$cortos) {
+                $nvc .= " " . $GLOBALS['etiqueta']['filiacion'] . ": ";
+                $dfiliacion = $dvictima->getLink('id_filiacion');
+                $nvc .= $dfiliacion->nombre . ". ";
             }
-            if (isset($campos['m_fuentes'])
+            if (isset($campos['m_fuentes']) && !$corto
                 && $repgen && trim($dvictima->anotaciones) != ''
             ) {
                 $nvc .= " " . $GLOBALS['etiqueta']['anotaciones_victima']
@@ -2296,7 +2360,7 @@ class ResConsulta
             }
             $ids = DataObjects_Organizacion::idSinInfo();
             if ($repgen &&  isset($dvictima->id_organizacion)
-                && $dvictima->id_organizacion != $ids
+                && $dvictima->id_organizacion != $ids && !$corto
             ) {
                 $nvc .= "  ".$GLOBALS['etiqueta']['organizacion'] .
                     ": ";
@@ -2364,6 +2428,16 @@ class ResConsulta
             unset($dgrupoper);
             $dactoc->free();
             unset($dactoc);
+        }
+        if (!array_key_exists('m_presponsables', $campos)
+            && !array_key_exists('m_tipificacion', $campos)
+            && array_key_exists('m_victimas', $campos)
+        ) {
+            $lvc = array_keys($lvic);
+            ResConsulta::representa_victimas(
+                $r, $lvc, $lvic, $indenta, true
+            );
+            return;
         }
 
         /** Agrupamos presuntos responsables */
@@ -2462,8 +2536,6 @@ class ResConsulta
                 $ra = "";  $rant = ""; $sep2="";
                 //                $plistos = array();
                 foreach ($pids as $idp) {
-                    //                    if (!in_array($idp, $plistos)) {
-                    //                        $plistos[] = $idp;
                     $dpr = objeto_tabla('presuntos_responsables');
                     $dpr->get('id', $idp);
                     if ($ra != "") {
@@ -2525,6 +2597,7 @@ class ResConsulta
                     $sepc = "&nbsp;&nbsp;";
                 } else {
                     $r .= "\n";
+                    $sepc = "";
                 }
                 foreach ($arids as $idc) {
                     $dpr = objeto_tabla('categoria');
@@ -2570,35 +2643,14 @@ class ResConsulta
                 if ($repgen) {
                     $r .= "\n";
                 }
-                $nns = 0;
                 if (array_key_exists('m_victimas', $campos)) {
                     if (!$indenta) {
                         $r .= "\n";
                     }
                     $lvc = explode(',', $vc);
-                    foreach ($lvc as $idv) {
-                        if ($idv == -1) {
-                            continue;
-                        }
-                        $nv = $lvic[$idv];
-                        if (trim($nv)=="NN") {
-                            $nns++;
-                        } else {
-                            if ($indenta) {
-                                $r .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-                            }
-                            $r .= trim(strip_tags($nv));
-                            $r .= "\n";
-                        }
-                    }
-                    if ($nns >= 1 && $indenta) {
-                        $r .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-                    }
-                    if ($nns == 1) {
-                        $r .= "PERSONA SIN IDENTIFICAR\n";
-                    } else if ($nns > 1) {
-                        $r .= $nns . " PERSONAS SIN IDENTIFICAR\n";
-                    }
+                    ResConsulta::representa_victimas(
+                        $r, $lvc, $lvic, $indenta
+                    );
                 }
             }
         }
@@ -2919,7 +2971,6 @@ class ResConsulta
         }
         echo $adjunto_renglon;
     }
-
 
 }
 

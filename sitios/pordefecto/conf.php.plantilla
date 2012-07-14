@@ -1,19 +1,18 @@
 <?php
-// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Variables de configuraciÛn.
- * Basado en script de configuraciÛn http://structio.sourceforge.net/seguidor
+ * Variables de configuraci√≥n.
+ * Basado en script de configuraci√≥n http://structio.sourceforge.net/seguidor
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir T·mara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio p˙blico. Sin garantÌas.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P˙blico. Sin garantÌas.
- * @version   $Id: conf.php.plantilla,v 1.40.2.2 2011/09/14 14:56:19 vtamara Exp $
+ * @author    Vladimir T√°mara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio p√∫blico. Sin garant√≠as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P√∫blico. Sin garant√≠as.
  * @link      http://sivel.sf.net
- * Acceso: S”LO DEFINICIONES
+ * Acceso: S√ìLO DEFINICIONES
  */
 
 /** Servidor/socket del Motor de bases de datos */
@@ -42,15 +41,15 @@ $dirsitio = "sitios/sivel";
 
 // RELATOS
 
-/** OrganizaciÛn responsable, aparecer· al exportar relatos
+/** Organizaci√≥n responsable, aparecer√° al exportar relatos
  * @global string $GLOBALS['organizacion_responsable']
  */
 $GLOBALS['organizacion_responsable'] = 'D';
 
-/** Derechos de reproducciÛn por defecto, aparecer·n al exportar relatos
+/** Derechos de reproducci√≥n por defecto, aparecer√°n al exportar relatos
  * @global string $GLOBALS['derechos']
  */
-$GLOBALS['derechos'] = 'Dominio P˙blico';
+$GLOBALS['derechos'] = 'Dominio P√∫blico';
 
 /**
  * Directorio con relatos
@@ -64,13 +63,22 @@ $GLOBALS['DIR_RELATOS'] = '/sincodh-publico/relatos/';
  */
 $GLOBALS['PREF_RELATOS'] = 'org';
 
+/**
+ * Estilo: nombres y apellidos de victimas.
+ * MAYUSCULAS seria JOSE PEREZ
+ * minusculas seria Jose Perez
+ *
+ * @global string $GLOBALS['estilo_nombres']
+ */
+$GLOBALS['estilo_nombres'] = 'MAYUSCULAS';
+
 
 // VOLCADOS  - COPIAS DE RESPALDO LOCALES
 
 /** Contenedor cifrado de volcados */
 $imagenrlocal = "/var/resbase.img";
 
-/** Directorio local donde quedara volcado diarÌo del ˙ltimo mes
+/** Directorio local donde quedara volcado diar√≠o del √∫ltimo mes
  * Se espera que se almacene en el contenedor cifrado.
  */
 $rlocal = "/var/www/resbase";
@@ -82,11 +90,11 @@ $copiaphp = false;
 
 // COPIAS DE RESPALDO REMOTAS
 
-/** Destinos a los cuales copiar volcado diario de la ˙ltima semana.
+/** Destinos a los cuales copiar volcado diario de la √∫ltima semana.
  * e.g "usuario1@maquina1: usuario2@maquina2:" */
 $rremotos = "";
 
-/** Llave ssh. Generela con ssh-keygen sin clave, el dueÒo debe ser quien
+/** Llave ssh. Generela con ssh-keygen sin clave, el due√±o debe ser quien
  * ejecuta el script respaldo.sh */
 $llave = $dirchroot . $dirserv . $dirsitio . "/id_rsa";
 
@@ -97,8 +105,13 @@ $llave = $dirchroot . $dirserv . $dirsitio . "/id_rsa";
  */
 $GLOBALS['iglesias_cristianas'] = true;
 
+/**
+ * Color del fondo de la ficha de captura en notacion HTML
+ * @global string $GLOBALS['ficha_color_fondo']
+ */
+$GLOBALS['ficha_color_fondo'] = '#EEE';
 
-// PUBLICACI”N EN P¡GINA WEB
+// PUBLICACI√ìN EN P√ÅGINA WEB
 
 /**  Usuario */
 $usuarioact = "sivel";
@@ -150,19 +163,23 @@ $_DB_DATAOBJECT_FORMBUILDER['CONFIG'] = array (
 
 // MODULOS
 
-/** MÛdulos empleados (relativos a directorio con fuentes) */
-$modulos = "modulos/anexos modulos/etiquetas";
+/** M√≥dulos empleados (relativos a directorio con fuentes) */
+$modulos = "modulos/anexos modulos/etiquetas modulos/mapag";
 
 /** Directorio donde se almacenan anexos */
 $GLOBALS['dir_anexos'] = '/resbase/anexos';
 
-// Opciones del men˙
+// Opciones de Reporte Tabla
+$GLOBALS['reporte_tabla_fila_totales'] = false;
+
+// Opciones del men√∫
 		
 // $GLOBALS['modulo'][100] = 'modulos/estrotulos/estrotulos.php';
 // $GLOBALS['modulo'][101] = 'modulos/estrotulos/estcolectivas.php';
 // $GLOBALS['modulo'][200] = 'modulos/belicas/estadisticas_comb.php';
+$GLOBALS['modulo'][300] = 'modulos/mapag/index.php';
 
-// Posibilidades de mÛdulos
+// Posibilidades de m√≥dulos
 // $GLOBALS['consultaweb_ordenarpor'][0] = "rotulos_cwebordenar";
 // $GLOBALS['gancho_rc_reginicial'][0] = "rotulos_inicial";
 // $GLOBALS['gancho_rc_regfinal'][0] = "rotulos_final";
@@ -177,7 +194,7 @@ foreach ($lm as $m) {
     $rutas_include .= "$m:$m/DataObjects/:";
 }
 
-/* La siguiente requiere AllowOverride All en configuraciÛn de Apache */
+/* La siguiente requiere AllowOverride All en configuraci√≥n de Apache */
 ini_set('include_path', $rutas_include);
 
 /** Cadena en caso de no existir usuario o clave */
@@ -186,22 +203,22 @@ $accno = "Acceso no autorizado\n";
 /** Palabra clave para algunos cifrados.
  * @global string $GLOBALS['PALABRA_SITIO']
  */
-$GLOBALS['PALABRA_SITIO'] = 'sigamos el ejemplo de Jes˙s';
+$GLOBALS['PALABRA_SITIO'] = 'sigamos el ejemplo de Jes√∫s';
 
 /** Deshabilita operaciones con usuarios
  * @global string $GLOBALS['deshabilita_manejo_usuarios']
  */
 $GLOBALS['deshabilita_manejo_usuarios'] = false;
 
-/** Mensaje por presentar si se encuentran fallas ortogr·ficas al validar
+/** Mensaje por presentar si se encuentran fallas ortogr√°ficas al validar
  * @global string $GLOBALS['MENS_ORTOGRAFIA']
  */
-$GLOBALS['MENS_ORTOGRAFIA'] = 'Las palabras que estÈn bien por favor agreguelas al diccionario (%l).';
+$GLOBALS['MENS_ORTOGRAFIA'] = 'Las palabras que est√©n bien por favor agreguelas al diccionario (%l).';
 
-/** Mensaje por presentar en la p·gina principal para indicar donde reportar fallas.
+/** Mensaje por presentar en la p√°gina principal para indicar donde reportar fallas.
  * @global string $GLOBALS['REPORTA_FALLAS']
  */
-$GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">DocumentaciÛn</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>Por favor reporte fallas o requerimientos en el sistema de seguimiento disponible <a href='http://sourceforge.net/tracker/?group_id=104373&atid=637817'>en lÌnea</a>";
+$GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">Documentaci√≥n</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>Por favor reporte fallas o requerimientos en el sistema de seguimiento disponible <a href='http://sourceforge.net/tracker/?group_id=104373&atid=637817'>en l√≠nea</a>";
 
 /** Ancho en porcentaje de tablas en reporte general.
  * Puede cambiarse en caso de que tenga problemas al imprimir (por ejemplo
@@ -210,38 +227,38 @@ $GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">DocumentaciÛn</a>
  */
 $GLOBALS['ancho-tabla'] = "78%";
 
-/** Determina si se indentan o no vÌctimas en reporte general y revista
+/** Determina si se indentan o no v√≠ctimas en reporte general y revista
  * @global string $GLOBALS['reporte_indenta_victimas']
  */
 $GLOBALS['reporte_indenta_victimas'] = true;
 
-/** Fecha m·xima de caso por usar en consulta web.
- * aÒo-mes-aÒo
+/** Fecha m√°xima de caso por usar en consulta web.
+ * a√±o-mes-a√±o
  * @global string $GLOBALS['consulta_web_fecha_max']
  */
 $GLOBALS['consulta_web_fecha_max'] = '2024-11-30';
 
-/** Fecha mÌnima de caso por consultar en web
+/** Fecha m√≠nima de caso por consultar en web
  * @global string $GLOBALS['consulta_web_fecha_min']
  */
 $GLOBALS['consulta_web_fecha_min'] = '2001-1-1';
 
-/** M·ximo de registros por retornar en una consulta web (0 es ilimitado)
+/** M√°ximo de registros por retornar en una consulta web (0 es ilimitado)
  * @global string $GLOBALS['consulta_web_max']
  */
-$GLOBALS['consulta_web_max']=400;
+$GLOBALS['consulta_web_max']=4000;
 
-/** AÒo mÌnimo que puede elegirse en fechas de la Ficha
+/** A√±o m√≠nimo que puede elegirse en fechas de la Ficha
  * @global string $GLOBALS['anio_min']
  */
 $GLOBALS['anio_min']=1990;
 
-/** DirecciÛn de correo a la cual enviar mensajes cifrados.
+/** Direcci√≥n de correo a la cual enviar mensajes cifrados.
  * @global string $GLOBALS['receptor_correo']
  */
 $GLOBALS['receptor_correo'] = 'sivel@localhost';
 
-/** DirecciÛn de la cual provendr·n mensajes cifrados.
+/** Direcci√≥n de la cual provendr√°n mensajes cifrados.
  * @global string $GLOBALS['emisor_correo']
  */
 $GLOBALS['emisor_correo'] = 'bancodat@nocheyniebla.org';
@@ -262,7 +279,7 @@ $GLOBALS['pie_consulta_web'] = '';
  * Dejar '&nbsp;' si no hay
  * @global string $GLOBALS['pie_consulta_web_publica']
  */
-$GLOBALS['pie_consulta_web_publica']='<div align="right"><a href="http://sivel.sourceforge.net/1.1/consultaweb.html">DocumentaciÛn</a></div>';
+$GLOBALS['pie_consulta_web_publica']='<div align="right"><a href="http://sivel.sourceforge.net/1.1/consultaweb.html">Documentaci√≥n</a></div>';
 
 /** Cabezote para enviar correos desde consulta_web.
  * Dejar '' si no hay
@@ -276,13 +293,13 @@ $GLOBALS['cabezote_consulta_web_correo'] = '';
  */
 $GLOBALS['pie_consulta_web_correo'] = '<hr/><a href="consulta_web.php">Consulta web</a>';
 
-/** Archivo HTML que se pone como cabezote (antes del men˙) del men˙ principal
+/** Archivo HTML que se pone como cabezote (antes del men√∫) del men√∫ principal
  * Dejar '' si no hay
  * @global string $GLOBALS['cabezote_principal']
  */
 $GLOBALS['cabezote_principal'] = '';
 
-/** Archivo HTML que se pone en el centro del men˙ principal
+/** Archivo HTML que se pone en el centro del men√∫ principal
  * Dejar '' si no hay
  * @global string $GLOBALS['centro_principal']
  */
@@ -294,14 +311,14 @@ $GLOBALS['centro_principal'] = 'centro_principal.html';
 $GLOBALS['fondo']= $dirsitio . '/fondo.jpg';
 
 
-/** Indica si en la pestaÒa Actos deben presentarse actos colectivos
+/** Indica si en la pesta√±a Actos deben presentarse actos colectivos
  * @global bool $GLOBALS['actoscolectivos']
 */
 $GLOBALS['actoscolectivos'] = true;
 
 
-/** PestaÒas de la Ficha  de captura
-    'id', 'Clase', 'orden en eliminaciÛn (no rep)' */
+/** Pesta√±as de la Ficha  de captura
+    'id', 'Clase', 'orden en eliminaci√≥n (no rep)' */
 $GLOBALS['ficha_tabuladores'] = array(
     0 => array('basicos', 'PagBasicos', 13),
     1 => array('ubicacion', 'PagUbicacion', 4),
@@ -318,33 +335,33 @@ $GLOBALS['ficha_tabuladores'] = array(
     12 => array('evaluacion', 'PagEvaluacion', 12)
 );
 
-/** Tablas b·sicas */
+/** Tablas b√°sicas */
 $GLOBALS['menu_tablas_basicas'] = array(
-    array('title' => 'InformaciÛn geogr·fica', 'url'=> null, 'sub' => array(
+    array('title' => 'Informaci√≥n geogr√°fica', 'url'=> null, 'sub' => array(
         array('title'=>'Departamento', 'url'=>'departamento','sub'=>null),
         array('title'=>'Municipio', 'url'=>'municipio', 'sub'=>null),
         array('title'=>'Tipo Clase', 'url'=>'tipo_clase', 'sub'=>null),
 
         array('title'=>'Clase', 'url'=>'clase', 'sub'=>null),
-        array('title'=>'RegiÛn', 'url'=>'region', 'sub'=>null),
+        array('title'=>'Regi√≥n', 'url'=>'region', 'sub'=>null),
         array('title'=>'Frontera', 'url'=>'frontera', 'sub'=>null),
         array('title'=>'Tipo de Sitio', 'url'=>'tipo_sitio', 'sub'=>null),
         ),
     ),
-    array('title' => 'InformaciÛn implicado', 'url'=> null, 'sub' => array(
+    array('title' => 'Informaci√≥n implicado', 'url'=> null, 'sub' => array(
         array('title'=>'Etnia', 'url'=>'etnia', 'sub'=>null),
-        array('title'=>'FiliaciÛn', 'url'=>'filiacion', 'sub'=>null),
+        array('title'=>'Filiaci√≥n', 'url'=>'filiacion', 'sub'=>null),
         array('title'=>'Iglesia', 'url'=>'iglesia', 'sub'=>null),
-        array('title'=>'OrganizaciÛn social', 'url'=>'organizacion', 'sub'=>null),
-        array('title'=>'ProfesiÛn', 'url'=>'profesion', 'sub'=>null),
+        array('title'=>'Organizaci√≥n social', 'url'=>'organizacion', 'sub'=>null),
+        array('title'=>'Profesi√≥n', 'url'=>'profesion', 'sub'=>null),
         array('title'=>'Rango edad', 'url'=>'rango_edad', 'sub'=>null),
-        array('title'=>'Resultado agresiÛn', 'url'=>'resultado_agresion', 'sub'=>null),
+        array('title'=>'Resultado agresi√≥n', 'url'=>'resultado_agresion', 'sub'=>null),
         array('title'=>'Sector Social', 'url'=>'sector_social', 'sub'=>null),
-        array('title'=>'Tipo de RelaciÛn', 'url'=>'tipo_relacion', 'sub'=>null),
-        array('title'=>'VÌnculo con el estado', 'url'=>'vinculo_estado', 'sub'=>null),
+        array('title'=>'Tipo de Relaci√≥n', 'url'=>'tipo_relacion', 'sub'=>null),
+        array('title'=>'V√≠nculo con el estado', 'url'=>'vinculo_estado', 'sub'=>null),
         ),
     ),
-    array('title' => 'InformaciÛn caso', 'url'=> null, 'sub' => array(
+    array('title' => 'Informaci√≥n caso', 'url'=> null, 'sub' => array(
         array('title'=>'Tipo de Violencia', 'url'=>'tipo_violencia', 'sub'=>null),
         array('title'=>'Supracategoria', 'url'=>'supracategoria', 'sub'=>null),
         array('title'=>'Categoria', 'url'=>'categoria', 'sub'=>null),
@@ -354,7 +371,7 @@ $GLOBALS['menu_tablas_basicas'] = array(
         array('title'=>'Intervalo', 'url'=>'intervalo', 'sub'=>null),
         ),
     ),
-    array('title' => 'InformaciÛn fuentes', 'url'=> null, 'sub' => array(
+    array('title' => 'Informaci√≥n fuentes', 'url'=> null, 'sub' => array(
         array('title'=>'Fuentes frecuentes', 'url'=>'prensa', 'sub'=>null),
         ),
     ),
@@ -372,32 +389,32 @@ $GLOBALS['etiqueta'] = array(
     'titulo' => 'Titulo',
     'fecha' => 'Fecha',
     'hora' => 'Hora',
-    'duracion' => 'DuraciÛn',
-    'tipo_ubicacion' => 'Tipo de ubicaciÛn',
+    'duracion' => 'Duraci√≥n',
+    'tipo_ubicacion' => 'Tipo de ubicaci√≥n',
     'id_intervalo' => 'Intervalo',
 
-// UbicaciÛn
-    'region' => 'RegiÛn',
+// Ubicaci√≥n
+    'region' => 'Regi√≥n',
     'frontera' => 'Frontera',
 
     'departamento' => 'Departamento',
     'municipio' => 'Municipio',
     'clase' => 'Clase',
 
-    'ubicacion' => 'UbicaciÛn',
+    'ubicacion' => 'Ubicaci√≥n',
     'lugar' => 'Lugar',
     'sitio' => 'Sitio',
 
 // Fuente frecuente
     'id_prensa' => 'Fuente',
     'fecha_fuente' => 'Fecha',
-    'ubicacion_fuente' => 'UbicaciÛn',
-    'clasificacion_fuente' => 'ClasificaciÛn',
-    'ubicacion_fisica' => 'UbicaciÛn FÌsica',
+    'ubicacion_fuente' => 'Ubicaci√≥n',
+    'clasificacion_fuente' => 'Clasificaci√≥n',
+    'ubicacion_fisica' => 'Ubicaci√≥n F√≠sica',
 
 // Otras fuentes
     'nombre' => 'Nombre',
-    'ubicacion_fisica' => 'UbicaciÛn FÌsica',
+    'ubicacion_fisica' => 'Ubicaci√≥n F√≠sica',
     'tipo_fuente' => 'Tipo de Fuente',
     'anotacion' => 'Anotacion',
 
@@ -414,33 +431,33 @@ $GLOBALS['etiqueta'] = array(
     'bloque' => 'Bloque',
     'frente' => 'Frente',
     'brigada' => 'Brigada',
-    'batallon' => 'BatallÛn',
-    'division' => 'DivisiÛn',
+    'batallon' => 'Batall√≥n',
+    'division' => 'Divisi√≥n',
     'otro' => 'Otro',
 
-// VÌctima Individual
-    'victimas_individuales'=> 'VÌctimas Individuales',
+// V√≠ctima Individual
+    'victimas_individuales'=> 'V√≠ctimas Individuales',
 //    'nombre'=> 'Nombre',
     'edad'=> 'Edad',
     'hijos'=> 'Hijos',
     'sexo'=> 'Sexo',
-    'profesion'=> 'ProfesiÛn',
+    'profesion'=> 'Profesi√≥n',
     'rango_edad'=> 'Rango de Edad',
-    'filiacion'=> 'FiliaciÛn polÌtica',
+    'filiacion'=> 'Filiaci√≥n pol√≠tica',
     'sector_social'=> 'Sector Social',
-    'organizacion'=> 'OrganizaciÛn Social',
-    'vinculo_estado'=> 'VÌnculo con el Estado',
-    'organizacion_armada'=> 'OrganizaciÛn Armada VÌctima',
+    'organizacion'=> 'Organizaci√≥n Social',
+    'vinculo_estado'=> 'V√≠nculo con el Estado',
+    'organizacion_armada'=> 'Organizaci√≥n Armada V√≠ctima',
     'anotaciones_victima' => 'Anotaciones',
 
     'p_responsable'=> 'Presunto Responsable',
     'antecedentes'=> 'Antecedentes',
     'tipo_violencia'=> 'Tipo Violencia',
 
-// VÌctima Colectiva
-    'victimas_colectivas'=> 'VÌctimas Colectivas',
+// V√≠ctima Colectiva
+    'victimas_colectivas'=> 'V√≠ctimas Colectivas',
 //   'nombre' => 'Nombre',
-//   'organizacion_armada'=> 'OrganizaciÛn Armada VÌctima',
+//   'organizacion_armada'=> 'Organizaci√≥n Armada V√≠ctima',
     'personas_aprox' => 'Num. Aprox. Personas',
     'anotacion' => 'Anotaciones',
 
@@ -449,33 +466,33 @@ $GLOBALS['etiqueta'] = array(
 //    'p_responsable'=> 'Presunto Responsable',
 //    'rango_edad'=> 'Rango de Edad',
 //    'sector_social'=> 'Sector Social',
-//    'vinculo_estado'=> 'VÌnculo con el Estado',
-//    'filiacion'=> 'FiliaciÛn polÌtica',
-//    'profesion'=> 'ProfesiÛn',
-//    'organizacion'=> 'OrganizaciÛn Social',
+//    'vinculo_estado'=> 'V√≠nculo con el Estado',
+//    'filiacion'=> 'Filiaci√≥n pol√≠tica',
+//    'profesion'=> 'Profesi√≥n',
+//    'organizacion'=> 'Organizaci√≥n Social',
 
 
-// VÌctima Combatiente
-    'victimas_combatientes'=> 'VÌctimas Combatientes',
+// V√≠ctima Combatiente
+    'victimas_combatientes'=> 'V√≠ctimas Combatientes',
 //       'nombre'=>'Nombre',
     'alias'=>'Alias',
 //       'edad'=>'Edad',
 //       'sexo'=>'Sexo',
 //       'rango_edad' => 'Rango de Edad',
 //       'sector_social'=> 'Sector Social',
-//       'vinculo_estado'=> 'VÌnculo Estado',
-//       'filiacion'=> 'FiliaciÛn PolÌtica',
+//       'vinculo_estado'=> 'V√≠nculo Estado',
+//       'filiacion'=> 'Filiaci√≥n Pol√≠tica',
 //       'profesion'=> 'Profesion',
-//       'organizacion'=> 'OrganizaciÛn Social',
-//       'organizacion_armada'=> 'OrganizaciÛn Armada',
-    'resultado_agresion'=> 'Resultado AgresiÛn',
+//       'organizacion'=> 'Organizaci√≥n Social',
+//       'organizacion_armada'=> 'Organizaci√≥n Armada',
+    'resultado_agresion'=> 'Resultado Agresi√≥n',
 
 //Actos
     'Actos' => 'Actos',
 //Memo
     'memo' => 'Memo',
 
-//EvaluaciÛn
+//Evaluaci√≥n
     'gr_confiabilidad' => 'Gr. Confiabilidad Fuente',
     'gr_esclarecimiento' => 'Gr.Esclarecimiento',
     'gr_impunidad' => 'Gr. Impunidad',
@@ -484,36 +501,36 @@ $GLOBALS['etiqueta'] = array(
 // Otros
     'analista' => 'Analista',
     'meses' => 'Meses',
-    'victimas' => 'VÌctimas',
+    'victimas' => 'V√≠ctimas',
 
-// PestaÒas
+// Pesta√±as
 
-    'PagBasicos' => 'Datos b·sicos',
-    'PagUbicacion' => 'UbicaciÛn',
+    'PagBasicos' => 'Datos b√°sicos',
+    'PagUbicacion' => 'Ubicaci√≥n',
     'PagFuentesFrecuentes' => 'Fuentes Frecuentes',
     'PagOtrasFuentes' => 'Otras Fuentes',
     'PagTipoViolencia' => 'Contexto',
     'PagPResponsables' => 'Presuntos Responsables',
-    'PagVictimaColectiva' => 'VÌctima Colectiva',
-    'PagVictimaIndividual' => 'VÌctimas Individuales',
-    'PagVictimaCombatiente' => 'VÌctima Combatiente',
-    'PagMemoPagEvaluacion' => 'EvaluaciÛn',
+    'PagVictimaColectiva' => 'V√≠ctima Colectiva',
+    'PagVictimaIndividual' => 'V√≠ctimas Individuales',
+    'PagVictimaCombatiente' => 'V√≠ctima Combatiente',
+    'PagMemoPagEvaluacion' => 'Evaluaci√≥n',
 
 );
 
-// Opciones del men˙
+// Opciones del men√∫
 //
 
 // $GLOBALS['modulo'][1] = 'sitios/misitio/miopcion.php';
 
 /** Campos que pueden elegirse en consultas */
-$GLOBALS['cw_ncampos'] = array('caso_id' => 'CÛdigo',
-    'caso_memo' => 'DescripciÛn',
+$GLOBALS['cw_ncampos'] = array('caso_id' => 'C√≥digo',
+    'caso_memo' => 'Descripci√≥n',
     'caso_fecha' => 'Fecha',
-    'm_ubicacion' => 'UbicaciÛn',
-    'm_victimas' => 'VÌctimas',
+    'm_ubicacion' => 'Ubicaci√≥n',
+    'm_victimas' => 'V√≠ctimas',
     'm_presponsables' => 'Pr. Resp.',
-    'm_tipificacion' => 'TipificaciÛn',
+    'm_tipificacion' => 'Tipificaci√≥n',
     #'m_observaciones' => 'Observaciones',
     #'m_anexos' => 'Anexos',
 );
