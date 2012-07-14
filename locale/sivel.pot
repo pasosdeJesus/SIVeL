@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: sivel 1.1cp1\n"
+"Project-Id-Version: sivel 1.2\n"
 "Report-Msgid-Bugs-To: vtamara@pasosdeJesus.org\n"
-"POT-Creation-Date: 2012-02-24 08:36-0500\n"
+"POT-Creation-Date: 2012-07-13 22:14-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,70 +17,107 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: tablas_basicas.php:29 tablas_basicas.php:47
+#: tablas_basicas.php:28 tablas_basicas.php:46
 msgid "Tablas B&aacute;sicas"
 msgstr ""
 
-#: tablas_basicas.php:55 valida.php:117
+#: tablas_basicas.php:54 valida.php:116
 msgid "Men&uacute; Principal"
 msgstr ""
 
-#: valida.php:28
+#: valida.php:27
 msgid "Reporte de consistencia del "
 msgstr ""
 
-#: valida.php:31
+#: valida.php:30
 msgid "Casos con memo vacio"
 msgstr ""
 
-#: valida.php:36
+#: valida.php:35
 msgid "Casos con fecha de otras fuentes anterior a la del caso"
 msgstr ""
 
-#: valida.php:45
+#: valida.php:44
 msgid "Casos con fecha de fuente frecuente anterior a la del caso"
 msgstr ""
 
-#: valida.php:62
+#: valida.php:61
 msgid "Casos con fecha inicial de funcionario anterior o igual a la del caso"
 msgstr ""
 
-#: valida.php:72
+#: valida.php:71
 msgid "Casos sin funcionario"
 msgstr ""
 
-#: valida.php:78
+#: valida.php:77
 msgid "Casos con m&aacute;s de una ubicaci&oacute;n (salen duplicados en conteos)"
 msgstr ""
 
-#: valida.php:86
+#: valida.php:85
 msgid "V&iacute;ctimas con categorias que no son para v&iacute;ctimas individuales"
 msgstr ""
 
-#: valida.php:97
+#: valida.php:96
 msgid "V&iacute;ctimas colectivas con categorias que no son para v&iacute;ctimas colectivas"
 msgstr ""
 
-#: valida.php:106
+#: valida.php:105
 msgid "Registros en victima_colectiva que no est&aacute;n en actocolectivo"
 msgstr ""
 
-#: DataObjects/Acto.php:73 DataObjects/Actocolectivo.php:74
+#: DataObjects/Acto.php:68 DataObjects/Actocolectivo.php:69
 msgid "P. Responsable"
 msgstr ""
 
-#: DataObjects/Acto.php:73 DataObjects/Actocolectivo.php:74
+#: DataObjects/Acto.php:68 DataObjects/Actocolectivo.php:69
 msgid "Categoria"
 msgstr ""
 
-#: DataObjects/Acto.php:74
+#: DataObjects/Acto.php:69
 msgid "Víctima"
 msgstr ""
 
-#: DataObjects/Acto.php:94 DataObjects/Actocolectivo.php:97
+#: DataObjects/Acto.php:89 DataObjects/Actocolectivo.php:92
+#: DataObjects/Relacion_personas.php:160
 msgid "Eliminar"
 msgstr ""
 
-#: DataObjects/Actocolectivo.php:75
+#: DataObjects/Actocolectivo.php:70
 msgid "Víctima Colectiva"
+msgstr ""
+
+#: DataObjects/Parametros_reporte_consolidado.php:105
+msgid "Empleada en categorias"
+msgstr ""
+
+#: DataObjects/Persona.php:243
+msgid "Documento de Identidad"
+msgstr ""
+
+#: DataObjects/Persona.php:277
+msgid "Nombres y Apellidos"
+msgstr ""
+
+#: DataObjects/Persona.php:316
+msgid "Fecha Nac. y Sexo"
+msgstr ""
+
+#: DataObjects/Persona.php:402
+msgid "La edad "
+msgstr ""
+
+#: DataObjects/Persona.php:403
+msgid " (fecha del hecho menos fecha de nacimiento) "
+msgstr ""
+
+#: DataObjects/Persona.php:404
+msgid " debe corresponder al rango de edad"
+msgstr ""
+
+#: DataObjects/Persona.php:416
+msgid "La fecha de nacimiento no corresponde a un rango"
+msgstr ""
+
+#: DataObjects/Relacion_personas.php:164
+msgid "Familiares"
 msgstr ""
