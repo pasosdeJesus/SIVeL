@@ -23,7 +23,7 @@ require_once "misc_actualiza.php";
 
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $accno, $aut_usuario, 21);
+$db = autenticaUsuario($dsn, $aut_usuario, 21);
 
 
 /* ==========================  OJO ==================================

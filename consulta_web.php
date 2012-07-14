@@ -95,7 +95,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         $pConcoordenadas = (int)var_req_escapa('concoordenadas', $db);
         $pTeX       = (int)var_req_escapa('m_tex', $db);
         $pTitulo    = substr(var_req_escapa('titulo', $db), 0, 32);
-        $pTvio	= substr(var_req_escapa('tipo_violencia', $db), 0, 1);
+        $pTvio    = substr(var_req_escapa('tipo_violencia', $db), 0, 1);
 
         $campos = array(); //'caso_id' => 'Cód.');
         $tablas = "caso";
@@ -139,26 +139,26 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             $GLOBALS['consulta_web_fecha_max'], "<="
         );
 
-	if ($pTvio!= '') {
-	    $where .= ' AND caso.id IN '
-		. "(SELECT id_caso FROM acto, categoria WHERE 
-		   acto.id_categoria=categoria.id
-		   AND categoria.id_tipo_violencia='$pTvio'
-		   UNION
-		   SELECT id_caso FROM actocolectivo, categoria WHERE
-		   actocolectivo.id_categoria=categoria.id
-		   AND categoria.id_tipo_violencia='$pTvio'
-		   UNION
-		   SELECT id_caso FROM categoria_p_responsable_caso WHERE
-		   id_tipo_violencia='$pTvio')";
-	} 
-	if ($pClasificacion != '') { 
-	    $ini = '('; 
-	    $so = ''; 
-	    $tind = false; 
-	    $tcol = false; 
-	    $totr = false;
-	    foreach ($pClasificacion as $cla) {
+    if ($pTvio!= '') {
+        $where .= ' AND caso.id IN '
+        . "(SELECT id_caso FROM acto, categoria WHERE
+           acto.id_categoria = categoria.id
+           AND categoria.id_tipo_violencia = '$pTvio'
+           UNION
+           SELECT id_caso FROM actocolectivo, categoria WHERE
+           actocolectivo.id_categoria = categoria.id
+           AND categoria.id_tipo_violencia = '$pTvio'
+           UNION
+           SELECT id_caso FROM categoria_p_responsable_caso WHERE
+           id_tipo_violencia = '$pTvio')";
+    }
+    if ($pClasificacion != '') {
+        $ini = '(';
+        $so = '';
+        $tind = false;
+        $tcol = false;
+        $totr = false;
+        foreach ($pClasificacion as $cla) {
                 $r = explode(":", $cla);
                 $so2='';
                 $dcatc = objeto_tabla('categoria');
@@ -633,7 +633,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $aut_usuario = "";
         if (isset($_SESSION['id_funcionario'])) {
             include $_SESSION['dirsitio'] . "/conf.php";
-            autenticaUsuario($dsn, $accno, $aut_usuario, 0);
+            autenticaUsuario($dsn, $aut_usuario, 0);
         }
 
 
@@ -828,7 +828,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
                     } else {
                         $sel->setValue(true);
                     }
-                } 
+                }
                 $opch[] =& $sel;
             }
         };

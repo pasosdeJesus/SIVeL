@@ -124,15 +124,14 @@ function nomSesion()
  * En otro caso falla.
  *
  * @param string  $dsn      URL de base de datos
- * @param string  $accno    Mensaje de error por mostrar si no autentica
  * @param string  &$usuario Retorna en esta variable el login del usuario
  * @param integer $opcion   Código de la opción del menu que el usuario desea
  *
  * @return mixed Conectar base de datos
  */
-function autenticaUsuario($dsn,  $accno, &$usuario, $opcion)
+function autenticaUsuario($dsn,  &$usuario, $opcion)
 {
-    idioma("en");
+    $accno = "Acceso no autorizado";
     $snru = nomSesion();
     if (!isset($_SESSION) || session_name() != $snru) {
         session_name($snru);
@@ -161,7 +160,7 @@ function autenticaUsuario($dsn,  $accno, &$usuario, $opcion)
         ini_set('session.cookie_httponly', true);
         ini_set('session.cookie_secure', true);
         $texp = 60*60*4; // 4 horas de sesión
-        ini_set('session.gc_maxlifetime', $texp); 
+        ini_set('session.gc_maxlifetime', $texp);
         $a->setExpire($texp);
         $a->setIdle($texp / 2);
 
@@ -192,6 +191,7 @@ function autenticaUsuario($dsn,  $accno, &$usuario, $opcion)
                 $idf = $row[0];
             }
             $_SESSION['id_funcionario'] = $idf;
+            idioma("en");
         }
         if (in_array($opcion, $_SESSION['opciones'])) {
             return $db;
@@ -349,7 +349,7 @@ function localizaConf()
             }
         }
         echo "Posiblemente basta que ejecute desde una terminal: <br>";
-        echo "<font size='-1' color='#db9090'>" 
+        echo "<font size='-1' color='#db9090'>"
             . htmlentities($cmd) . "</font>";
         exit(1);
     }

@@ -299,9 +299,9 @@ class PagActo extends PagBaseSimple
         $op = htmlentities_array(
             $db->getAssoc(
                 "SELECT id_p_responsable, nombre
-                FROM presuntos_responsables_caso, presuntos_responsables 
-                WHERE id_caso=$idcaso AND 
-                presuntos_responsables.id=id_p_responsable 
+                FROM presuntos_responsables_caso, presuntos_responsables
+                WHERE id_caso = $idcaso AND
+                presuntos_responsables.id = id_p_responsable
                 ORDER BY nombre"
             )
         );
@@ -315,7 +315,7 @@ class PagActo extends PagBaseSimple
             $db->getAssoc(
                 "SELECT id, id_tipo_violencia || id || ' ' || nombre
                 FROM categoria
-                WHERE tipocat='I'  AND fechadeshabilitacion IS NULL
+                WHERE tipocat = 'I'  AND fechadeshabilitacion IS NULL
                 ORDER BY id_tipo_violencia, id"
             )
         );
@@ -328,9 +328,9 @@ class PagActo extends PagBaseSimple
         $op = htmlentities_array(
             $db->getAssoc(
                 "SELECT id_persona, nombres || ' ' || apellidos
-                FROM victima, persona 
-                WHERE id_caso=$idcaso AND 
-                victima.id_persona=persona.id 
+                FROM victima, persona
+                WHERE id_caso = $idcaso AND
+                victima.id_persona = persona.id
                 ORDER BY nombres, apellidos "
             )
         );
@@ -392,8 +392,8 @@ class PagActo extends PagBaseSimple
                 $db->getAssoc(
                     "SELECT id_grupoper, nombre
                     FROM victima_colectiva, grupoper
-                    WHERE id_caso=$idcaso AND 
-                    victima_colectiva.id_grupoper=grupoper.id 
+                    WHERE id_caso = $idcaso AND
+                    victima_colectiva.id_grupoper = grupoper.id
                     ORDER BY nombre"
                 )
             );
@@ -573,12 +573,12 @@ class PagActo extends PagBaseSimple
 
 
     /**
-     * Compara datos relacionados con esta pestaña de los casos 
+     * Compara datos relacionados con esta pestaña de los casos
      * con identificación id1 e id2.
      *
      * @param object  &$db Conexión a base de datos
-     * @param array   &$r  Para llenar resultados de comparación, cada 
-     *   entrada es de la forma 
+     * @param array   &$r  Para llenar resultados de comparación, cada
+     *   entrada es de la forma
      *      id_unica => ('etiqueta', 'valor1', 'valor2', pref)
      *   donde valor1 es valor en primer caso, valor2 es valor en segundo
      *   caso y pref es 1 o 2 para indicar cual de los valores será por defecto
@@ -589,10 +589,10 @@ class PagActo extends PagBaseSimple
      * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls) 
+    static function compara(&$db, &$r, $id1, $id2, $cls)
     {
         PagBaseMultiple::compara(
-            $db, $r, $id1, $id2, 
+            $db, $r, $id1, $id2,
             array('Actos' => array('acto', 'id_categoria'))
         );
     }
@@ -606,7 +606,7 @@ class PagActo extends PagBaseSimple
      * @param array   $sol Arreglo con solicitudes de cambios de la forma
      *   id_unica => (pref)
      *   donde pref es 1 si el valor relacionado con id_unica debe
-     *   tomarse del caso $id1 o 2 si debe tomarse de $id2.  Las 
+     *   tomarse del caso $id1 o 2 si debe tomarse de $id2.  Las
      *   identificaciones id_unica son las empleadas por la función
      *   compara.
      * @param integer $id1 Código de primer caso
@@ -618,7 +618,7 @@ class PagActo extends PagBaseSimple
      * acuerdo a las preferencias especificadas en $sol.
      * @see PagBaseSimple
      */
-    static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls) 
+    static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls)
     {
         //echo "PagActo::mezcla(db, sol, $id1, $id2, $idn)";
         PagBaseMultiple::mezcla(
@@ -626,7 +626,7 @@ class PagActo extends PagBaseSimple
             array('Actos' => array('acto', 'id_categoria'))
         );
         PagBaseMultiple::mezcla(
-            $db, $sol, $id1, $id2, $idn, 
+            $db, $sol, $id1, $id2, $idn,
             array('Actos' => array('acto', 'id_categoria'))
         );
     }

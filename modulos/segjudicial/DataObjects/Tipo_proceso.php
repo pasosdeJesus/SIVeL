@@ -48,7 +48,7 @@ class DataObjects_Tipo_proceso extends DataObjects_Basica
         'fechacreacion',
         'fechadeshabilitacion',
     );
- 
+
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'
      *

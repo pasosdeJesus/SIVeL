@@ -23,7 +23,7 @@ require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once 'misc_caso.php';
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $accno, $aut_usuario, 21);
+$db = autenticaUsuario($dsn, $aut_usuario, 21);
 
 encabezado_envia();
 $idcaso = $_SESSION['basicos_id'];

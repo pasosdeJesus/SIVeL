@@ -19,7 +19,7 @@ require_once "confv.php";
 require_once "misc.php";
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $accno, $aut_usuario, 64);
+$db = autenticaUsuario($dsn, $aut_usuario, 64);
 
 echo '<table width="100%"><td style="white-space: ' .
     ' nowrap; background-color: #CCCCCC;" align="left" ' .

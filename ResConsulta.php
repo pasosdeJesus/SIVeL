@@ -656,7 +656,7 @@ class ResConsulta
             include $_SESSION['dirsitio'] . "/conf.php";
 
             $aut_usuario = "";
-            autenticaUsuario($dsn, $accno, $aut_usuario, 0);
+            autenticaUsuario($dsn, $aut_usuario, 0);
             if (in_array(42, $_SESSION['opciones'])) {
                 $esadmin = true;
             }
@@ -841,8 +841,8 @@ class ResConsulta
                         if ($peso >= $ultpeso) {
                             $ultpeso = $peso;
                         } else {
-                            echo "<br/><font color='red'>Peso " . (int)$peso 
-                               . " de caso " . (int)$idcaso 
+                            echo "<br/><font color='red'>Peso " . (int)$peso
+                               . " de caso " . (int)$idcaso
                                ." fuera de secuencia</font><br/>";
                         }
                     } else {
@@ -946,7 +946,7 @@ class ResConsulta
             echo "</relatos>\n";
             break;
         case 'tabla':
-            if (isset($GLOBALS['reporte_tabla_fila_totales']) 
+            if (isset($GLOBALS['reporte_tabla_fila_totales'])
                 && $GLOBALS['reporte_tabla_fila_totales'] == true
             ) {
                 echo "<tr>";
@@ -1051,7 +1051,7 @@ class ResConsulta
                 }
             }
         }
-        $html_renglon = "<tr style='background-color: " . htmlentities($col) 
+        $html_renglon = "<tr style='background-color: " . htmlentities($col)
             . "'>";
         foreach ($campos as $cc => $nc) {
             $html_renglon .= "<td valign='top'>";
@@ -1223,7 +1223,7 @@ class ResConsulta
             echo "<td valign=top><form method=\"POST\" " .
                 "action=\"consulta_web_correo.php\">\n";
             foreach ($escon as $l => $v) {
-                echo "<input type=\"hidden\" name=\"" 
+                echo "<input type=\"hidden\" name=\""
                     . htmlentities($l) . "\" value=\""
                     . htmlentities($v) . "\">\n";
             }
@@ -1263,7 +1263,7 @@ class ResConsulta
         $formacomp = 'privado';
         $locdb = false;
         if ($db == null) {
-            $locdb = true; 
+            $locdb = true;
             $db = $dcaso->getDatabaseConnection();
         }
         $nom = $db->getOne(
@@ -1408,7 +1408,7 @@ class ResConsulta
                 $atradrel = DataObjects_Victima_colectiva::tradRelato();
                 foreach ($atradrel as $t => $vt) {
                     $cx = $vt[0];
-                    $idt = $vt[1]; 
+                    $idt = $vt[1];
                     $lr = lista_relacionados(
                         $t,
                         array('id_grupoper' => $dvictimacol->id_grupoper,
@@ -1718,7 +1718,7 @@ class ResConsulta
         ) {
             include $_SESSION['dirsitio'] . "/conf.php";
             $aut_usuario = "";
-            autenticaUsuario($dsn, $accno, $aut_usuario, 0);
+            autenticaUsuario($dsn, $aut_usuario, 0);
             if (!in_array(42, $_SESSION['opciones'])) {
                 die('No autorizado');
             }
@@ -1846,7 +1846,7 @@ class ResConsulta
                 'observaciones{tipo->contexto}' => $tcont,
                 'observaciones{tipo->antecedente}' => $tan,)
             );
-            unset($tan); 
+            unset($tan);
             unset($tcon);
             unset($ubitipositipo);
             unset($ubilugar);
@@ -1889,8 +1889,8 @@ class ResConsulta
         $dcaso->get('id', $idcaso);
         $r = ""; $rcaso = "";
         if (array_key_exists('caso_id', $campos)) {
-            $rcaso .= "CASO NO. " 
-                . "<a href='captura_caso.php?modo=edita&id={$dcaso->id}'>" 
+            $rcaso .= "CASO NO. "
+                . "<a href='captura_caso.php?modo=edita&id={$dcaso->id}'>"
                 . "{$dcaso->id}</a>\n";
         }
         if (array_key_exists('caso_fecha', $campos)) {
@@ -2179,7 +2179,7 @@ class ResConsulta
 
         return $r;
     }
-   
+
     /**
      * Representacion de un grupo de victimas
      *
@@ -2191,7 +2191,7 @@ class ResConsulta
      *
      * @return void
      */
-    static function representa_victimas(&$r, $lvc, $lvic, 
+    static function representa_victimas(&$r, $lvc, $lvic,
         $indenta, $corto = false
     ) {
         $nns = 0;
@@ -2321,7 +2321,7 @@ class ResConsulta
                 strip_tags($dpersona->apellidos);
             $idp = DataObjects_Sector_social::id_profesional();
             if ($dvictima->id_profesion != DataObjects_Profesion::idSinInfo()
-                && $dvictima->id_sector_social == $idp 
+                && $dvictima->id_sector_social == $idp
                 && !$corto
             ) {
                 $dprofesion = $dvictima->getLink('id_profesion');

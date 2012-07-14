@@ -45,7 +45,7 @@ function repObs($nobs, &$obs, $coneco = false)
  *
  * @return integer Código en tabla o -1 si no lo encuentra
  */
-function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true, 
+function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
     $ncamp = "nombre")
 {
     //echo "OJO conv_basica(db, $tabla, $nombre, $obs)<br>";
@@ -83,7 +83,7 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
 
         if (PEAR::isError($r) || $r == null) {
             repObs("-- $tabla: desconocido '$nombre'", $obs);
-            if ($sininf 
+            if ($sininf
                 && is_callable(array("DataObjects_$tabla", 'idSinInfo'))
             ) {
                 $r = call_user_func(
@@ -840,19 +840,19 @@ function conv_fecha($fecha, &$obs, $depura = false)
  * deja en idsiguales, los ids de similares en idssimilares
  */
 
-function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper, 
-    $nom, $ap, $mdlev = 3, $anionac = null, $mesnac = null, $dianac = null, 
-    $sexo = 'S', $id_departamento = null, $id_municipio = null, 
+function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper,
+    $nom, $ap, $mdlev = 3, $anionac = null, $mesnac = null, $dianac = null,
+    $sexo = 'S', $id_departamento = null, $id_municipio = null,
     $id_clase = null, $tipodocumento = null, $numerodocumento = null
 ) {
     $idper = -1;
-    if (isset($GLOBALS['estilo_nombres']) 
+    if (isset($GLOBALS['estilo_nombres'])
         && $GLOBALS['estilo_nombres'] == 'MAYUSCULAS'
     ) {
         $nombres = a_mayusculas($nom);
         $apellidos = a_mayusculas($ap);
-    } else if (isset($GLOBALS['estilo_nombres']) 
-        && $GLOBALS['estilo_nombres'] == 'minusculas'
+    } else if (isset($GLOBALS['estilo_nombres'])
+        && $GLOBALS['estilo_nombres'] == 'a_minusculas'
     ) {
         $nombres = prim_may($nom);
         $apellidos = prim_may($ap);
@@ -867,15 +867,15 @@ function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper,
         && substr($nomap, 0, 4) != 'N.N '
     ) {
         foreach ($aper as $k=>$na) {
-            if (isset($GLOBALS['estilo_nombres']) 
+            if (isset($GLOBALS['estilo_nombres'])
                 && $GLOBALS['estilo_nombres'] == 'MAYUSCULAS'
             ) {
                 $anombres = a_mayusculas($na[0]);
                 $aapellidos = a_mayusculas($na[1]);
                 /*$nombres = a_mayusculas($nom);
                 $apellidos = a_mayusculas($ap); */
-            } else if (isset($GLOBALS['estilo_nombres']) 
-                && $GLOBALS['estilo_nombres'] == 'minusculas'
+            } else if (isset($GLOBALS['estilo_nombres'])
+                && $GLOBALS['estilo_nombres'] == 'a_minusculas'
             ) {
                 $anombres = prim_may($na[0]);
                 $aapellidos = prim_may($na[1]);
@@ -887,7 +887,7 @@ function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper,
             $anomap = trim(trim($anombres) . " " . trim($aapellidos));
             //echo "OJO comp $anombres, $nombres y $aapellidos, $apellidos<br>";
             if ((strcasecmp($anombres, $nombres) == 0
-                && strcasecmp($aapellidos, $apellidos) == 0) 
+                && strcasecmp($aapellidos, $apellidos) == 0)
                 || (strcasecmp($anomap, $nomap) == 0)
             ) {
                 $idsiguales[] = $k;
@@ -897,7 +897,7 @@ function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper,
                 $dna = levenshtein($anomap, $nomap);
                 if (($dn <= $mdlev && $da <= $mdlev) || $dna < $mdlev) {
                     $idssimilares[] = $k;
-                } 
+                }
             }
         }
     }
@@ -923,19 +923,19 @@ function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper,
  *
  * @return integer  Identificación de registro persona insertado/actualizado
  */
-function conv_persona(&$db, &$aper, &$obs, $nom, $ap, $anionac, 
+function conv_persona(&$db, &$aper, &$obs, $nom, $ap, $anionac,
     $mesnac = null, $dianac = null, $sexo = 'S',
     $id_departamento = null, $id_municipio = null, $id_clase = null,
     $tipodocumento = null, $numerodocumento = null
 ) {
     //echo "OJO conv_persona(db, aper, obs, $nom, $ap, $anionac,...)<br>\n";
-    if (isset($GLOBALS['estilo_nombres']) 
+    if (isset($GLOBALS['estilo_nombres'])
         && $GLOBALS['estilo_nombres'] == 'MAYUSCULAS'
     ) {
         $nombres = a_mayusculas($nom);
         $apellidos = a_mayusculas($ap);
-    } else if (isset($GLOBALS['estilo_nombres']) 
-        && $GLOBALS['estilo_nombres'] == 'minusculas'
+    } else if (isset($GLOBALS['estilo_nombres'])
+        && $GLOBALS['estilo_nombres'] == 'a_minusculas'
     ) {
         $nombres = prim_may($nom);
         $apellidos = prim_may($ap);
@@ -1087,12 +1087,12 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
     );
     $nombre = str_replace("*", "", $nombre);
 
-    if (isset($GLOBALS['estilo_nombres']) 
+    if (isset($GLOBALS['estilo_nombres'])
         && $GLOBALS['estilo_nombres'] == 'MAYUSCULAS'
     ) {
         $nombre = a_mayusculas($nombre);
-    } else if (isset($GLOBALS['estilo_nombres']) 
-        && $GLOBALS['estilo_nombres'] == 'minusculas'
+    } else if (isset($GLOBALS['estilo_nombres'])
+        && $GLOBALS['estilo_nombres'] == 'a_minusculas'
     ) {
         $nombre = prim_may($nombre);
     }
@@ -1354,7 +1354,7 @@ function dato_en_obs(&$oxml, $id)
     if (count($po) > 1) {
         echo "Problema en función <tt>datoenObservaciones(oxml, id="
             . htmlentities($id)
-            . ")</tt>." 
+            . ")</tt>."
             . "  Hay varias observaciones con tipo buscado<br>";
     }
     $r = utf8_decode((string)$po[0]);
@@ -1461,7 +1461,7 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
         return -1;
     }
     $id_presp[$idp] = $pr;
-    //echo "OJO asignando id_presp[$idp]=$pr<br>";
+    //echo "OJO asignando id_presp[$idp] = $pr<br>";
     $dpresp = objeto_tabla('presuntos_responsables_caso');
     $dpresp->id_caso = $idcaso;
     $dpresp->id_p_responsable = $pr;

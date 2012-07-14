@@ -424,14 +424,14 @@ class PagTipoViolencia extends PagBaseSimple
         // bienes fue ingresado con caso
     }
 
-   
+
     /**
-     * Compara datos relacionados con esta pestaña de los casos 
+     * Compara datos relacionados con esta pestaña de los casos
      * con identificación id1 e id2.
      *
      * @param object  &$db Conexión a base de datos
-     * @param array   &$r  Para llenar resultados de comparación, cada 
-     *   entrada es de la forma 
+     * @param array   &$r  Para llenar resultados de comparación, cada
+     *   entrada es de la forma
      *      id_unica => ('etiqueta', 'valor1', 'valor2', pref)
      *   donde valor1 es valor en primer caso, valor2 es valor en segundo
      *   caso y pref es 1 o 2 para indicar cual de los valores será por defecto
@@ -442,12 +442,12 @@ class PagTipoViolencia extends PagBaseSimple
      * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls) 
+    static function compara(&$db, &$r, $id1, $id2, $cls)
     {
-        //echo "PagTipoViolencia::compara(db, r, $id1, $id2, a)"; 
+        //echo "PagTipoViolencia::compara(db, r, $id1, $id2, a)";
         //print_r($cls); echo "<br>";
         if ($cls == null || (count($cls) == 1 && $cls[0] == 'caso_contexto')) {
-            $cls = array('Contextos' => array('caso_contexto', 'id_contexto'), 
+            $cls = array('Contextos' => array('caso_contexto', 'id_contexto'),
                 'Antecedentes' => array('antecedente_caso', 'id_antecedente'));
         }
         //print_r($cls);
@@ -498,7 +498,7 @@ class PagTipoViolencia extends PagBaseSimple
      * @param array   $sol Arreglo con solicitudes de cambios de la forma
      *   id_unica => (pref)
      *   donde pref es 1 si el valor relacionado con id_unica debe
-     *   tomarse del caso $id1 o 2 si debe tomarse de $id2.  Las 
+     *   tomarse del caso $id1 o 2 si debe tomarse de $id2.  Las
      *   identificaciones id_unica son las empleadas por la función
      *   compara.
      * @param integer $id1 Código de primer caso
@@ -510,13 +510,13 @@ class PagTipoViolencia extends PagBaseSimple
      * acuerdo a las preferencias especificadas en $sol.
      * @see PagBaseSimple
      */
-    static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls) 
+    static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls)
     {
-        //echo "PagTipoViolencia::mezcla(db, ["; print_r($sol); 
+        //echo "PagTipoViolencia::mezcla(db, ["; print_r($sol);
         //echo "], $id1, $id2, $idn, [" ; print_r($a) ; echo "])<br>";
-        
+
         if ($cls == 'caso_contexto') {
-            $cls = array('Contextos' => array('caso_contexto', 'id_contexto'), 
+            $cls = array('Contextos' => array('caso_contexto', 'id_contexto'),
                 'Antecedentes' => array('antecedente_caso', 'id_antecedente'));
         }
         foreach ($cls as $eti => $cls) {

@@ -28,7 +28,7 @@ function muestra()
     global $dsn, $accno;
 
     $aut_usuario = "";
-    $db = autenticaUsuario($dsn, $accno, $aut_usuario, 0);
+    $db = autenticaUsuario($dsn, $aut_usuario, 0);
 
     $nombre = trim(utf8_decode(var_req_escapa('nombre', $db, 100)));
     $pn = explode(' ', $nombre);
@@ -37,7 +37,7 @@ function muestra()
         if ($p != '') {
             $cn[] = $p;
         }
-    } 
+    }
     $patron = crea_patron($cn);
 
     //echo "OJO nombre=$nombre, patron='$patron'";
@@ -61,7 +61,7 @@ function muestra()
         . '</script>';
     echo "<table>";
     echo "<tr>" .
-        "<th>Nombre</th><th>Víctima en</th>".
+        "<th>Nombre</th><th>Víctima en</th>" .
         "</tr>";
     while ($result->fetchInto($row)) {
         echo "<tr>";

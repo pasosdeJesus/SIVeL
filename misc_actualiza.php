@@ -396,7 +396,7 @@ function consulta_archivo(&$db, $na, $derr = false, $merr = false,
             }
             if (substr(trim($buffer), 0, 2) != '--' && trim($buffer) != '') {
                 if ($mcons) {
-                    echo (int)$nl . "<tt>" 
+                    echo (int)$nl . "<tt>"
                         . htmlentities($buffer)
                         . "</tt><br>";
                 }
@@ -431,7 +431,7 @@ function agrega_fechas(&$db, $nt, $finerror = false, $muestraerror = true)
         $db, "ALTER TABLE $nt " .
         "ADD COLUMN fechadeshabilitacion DATE " .
         "CHECK (fechadeshabilitacion IS NULL OR " .
-        "fechadeshabilitacion >= fechacreacion)", 
+        "fechadeshabilitacion >= fechacreacion)",
         $finerror, $muestraerror
     );
 }

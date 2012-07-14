@@ -63,7 +63,7 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
            echo "<td>" . htmlentities($cdep) . "</td>";
         } elseif ($t == 'Dep.') {
             // Escapado tras consulta
-           echo "<td>" . $html_nomdep . "</td>";  
+           echo "<td>" . $html_nomdep . "</td>";
         } elseif ($t == 'C. Mun.') {
            echo "<td>" . htmlentities($cmun) . "</td>";
         } elseif ($t == 'Mun.') {
@@ -394,8 +394,8 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
             "Menú Principal</a></div>";
         $e =& $this->addElement('header', null, $tpie);
 
-	$num = (int)$_REQUEST['num'];
-	$this->addElement('hidden', 'num', $num);	
+    $num = (int)$_REQUEST['num'];
+    $this->addElement('hidden', 'num', $num);
 
 
         if (!isset($_POST['evita_csrf'])) {
@@ -411,7 +411,7 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
 function muestra($dsn, $accno)
 {
     $aut_usuario = "";
-    autenticaUsuario($dsn, $accno, $aut_usuario, 21);
+    autenticaUsuario($dsn, $aut_usuario, 21);
 
     $wizard =& new HTML_QuickForm_Controller('EstadisticasComb', false);
     $consweb = new PagEstadisticasComb($mreq);

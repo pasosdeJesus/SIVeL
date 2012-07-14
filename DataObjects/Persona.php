@@ -399,7 +399,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
                     (int)$valores['dianac'], $fhdia
                 );
                 if (!verifica_edad_y_rango($e, $r)) {
-                    $merr = _("La edad ") . (int)$e . 
+                    $merr = _("La edad ") . (int)$e .
                         _(" (fecha del hecho menos fecha de nacimiento) ") .
                         _(" debe corresponder al rango de edad");
                     return false;

@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <variablelist>
+	<varlistentry><term>Versión 1.2 (Oct.2012)</term>
+		<listitem>
+            <para><itemizedlist>
+                    <listitem>
+                        <para>Codificación de caracteres: Base de datos debe estar en UTF-8.  Salida enviada al navegador en UTF-8. Fuentes en UTF-8. </para>
+                    </listitem>
+					<listitem>
+						<para>
+Georeferenciación permite filtrar por tipo de violencia.
+						</para>
+					</listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
 	<varlistentry><term>Versión 1.1.2 (Jul.2012)</term>
 		<listitem>
             <para><itemizedlist>

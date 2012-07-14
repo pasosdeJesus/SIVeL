@@ -22,7 +22,7 @@ require_once "misc.php";
 require_once 'DataObjects/Categoria.php';
 
 encabezado_envia('Categoria');
-if (!isset($_REQUEST['t']) || !isset($_REQUEST['s']) 
+if (!isset($_REQUEST['t']) || !isset($_REQUEST['s'])
     || !isset($_REQUEST['c'])
 ) {
         die("Faltan datos para efectuar consulta");
@@ -59,7 +59,7 @@ $dc->fetch();
 echo "<table border='1'>";
 echo "<tr><th>Código</th><th>Descripción</th></tr>";
 echo "<tr><td>" . htmlentities($t) . htmlentities($c) . "</td>";
-echo "<td>" . htmlentities($dt->nombre) . " / " . htmlentities($ds->nombre) 
+echo "<td>" . htmlentities($dt->nombre) . " / " . htmlentities($ds->nombre)
     . " / " . htmlentities($dc->nombre) . "</td></tr>";
 echo "</table>";
 

@@ -522,7 +522,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      *
      * @return void Modifica $tablas y $where
      */
-    static function estadisticasIndCreaConsulta(&$db, &$where, &$tablas) 
+    static function estadisticasIndCreaConsulta(&$db, &$where, &$tablas)
     {
     }
 
@@ -538,7 +538,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
     /**
      * Llamada para crear encabezado en Javascript
      *
-     * @param string &$js colchon de funciones en javascript 
+     * @param string &$js colchon de funciones en javascript
      *
      * @return void
      */
@@ -564,22 +564,22 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
 
     /**
      * Campos de la ficha que se comparan en función compara
-     * 
+     *
      * @return array con nombres de campos
      */
-    static function campos_compara() 
+    static function campos_compara()
     {
         return array('titulo', 'hora', 'duracion');
     }
 
 
     /**
-     * Compara datos relacionados con esta pestaña de los casos 
+     * Compara datos relacionados con esta pestaña de los casos
      * con identificación id1 e id2.
      *
      * @param object  &$db Conexión a base de datos
-     * @param array   &$r  Para llenar resultados de comparación, cada 
-     *   entrada es de la forma 
+     * @param array   &$r  Para llenar resultados de comparación, cada
+     *   entrada es de la forma
      *      id_unica => ('etiqueta', 'valor1', 'valor2', pref)
      *   donde valor1 es valor en primer caso, valor2 es valor en segundo
      *   caso y pref es 1 o 2 para indicar cual de los valores será por defecto
@@ -589,9 +589,9 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      *
      * @return void Añade a $r datos de comparación
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls = array('caso')) 
+    static function compara(&$db, &$r, $id1, $id2, $cls = array('caso'))
     {
-        //echo "<br>OJO PagBaseSimple::compara(db, r, $id1, $id2, "; print_r($cls); 
+        //echo "<br>OJO PagBaseSimple::compara(db, r, $id1, $id2, "; print_r($cls);
         $enl = parse_ini_file(
             $_SESSION['dirsitio'] . "/DataObjects/" .
             $GLOBALS['dbnombre'] . ".links.ini",
@@ -660,7 +660,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
                         ) {
                             $vp = 2;
                         } else if ((method_exists($de2, 'idSinInfo')
-                            && $v2 == $de2->idSinInfo()) 
+                            && $v2 == $de2->idSinInfo())
                             || $de2->nombre == 'POR DETERMINAR'
                         ) {
                             $vp = 1;
@@ -698,7 +698,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      * @param array   $sol Arreglo con solicitudes de cambios de la forma
      *   id_unica => (pref)
      *   donde pref es 1 si el valor relacionado con id_unica debe
-     *   tomarse del caso $id1 o 2 si debe tomarse de $id2.  Las 
+     *   tomarse del caso $id1 o 2 si debe tomarse de $id2.  Las
      *   identificaciones id_unica son las empleadas por la función
      *   compara.
      * @param integer $id1 Código de primer caso
@@ -709,11 +709,11 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      * @return Mezcla valores de los casos $id1 e $id2 en el caso $idn de
      * acuerdo a las preferencias especificadas en $sol.
      */
-    static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls) 
+    static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls)
     {
-        //echo "OJO PagBaseSimple::mezcla(db, "; 
-        //print_r($sol); echo ", $id1, $id2, $idn, "; 
-        //print_r($cls); echo ")<br> "; 
+        //echo "OJO PagBaseSimple::mezcla(db, ";
+        //print_r($sol); echo ", $id1, $id2, $idn, ";
+        //print_r($cls); echo ")<br> ";
         if (!is_array($cls)) {
             $cls = array($cls);
         }
@@ -763,9 +763,9 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
                 //echo $t;
                 $dd->id_caso = $idn;
             }
-            if ($t != 'caso'  && ($dd->id_caso == null 
+            if ($t != 'caso'  && ($dd->id_caso == null
                 || ($t == 'ubicacion' && $dd->id == null)
-                || $nuevodd )
+                || $nuevodd)
             ) {
                     //echo "OJO insertando";
                 $dd->id_caso = $idn;

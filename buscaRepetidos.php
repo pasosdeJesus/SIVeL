@@ -20,7 +20,7 @@ require_once "misc.php";
 
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $accno, $aut_usuario, 65);
+$db = autenticaUsuario($dsn, $aut_usuario, 65);
 
 echo '<table width="100%">'
     . '<td style="white-space: nowrap; background-color: #CCCCCC;" '

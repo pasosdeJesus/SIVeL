@@ -39,7 +39,7 @@ class DataObjects_Basica extends DB_DataObject_SIVeL
     var $nombre;                        // varchar(-1)  not_null
     var $fechacreacion;                 // date(4)
     var $fechadeshabilitacion;          // date(4)
-    
+
     var $nom_tabla = 'Básica';
 
     var $fb_linkDisplayFields = array('nombre');

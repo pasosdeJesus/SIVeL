@@ -21,11 +21,13 @@
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once "misc.php";
-require_once "misc_caso.php";
-require_once "DB/DataObject/FormBuilder.php";
 
 $aut_usuario = "";
-autenticaUsuario($dsn, $accno, $aut_usuario, 11);
+autenticaUsuario($dsn, $aut_usuario, 11);
+
+require_once $_SESSION['dirsitio'] . '/conf_int.php';
+require_once "misc_caso.php";
+require_once "DB/DataObject/FormBuilder.php";
 
 if (!isset($_REQUEST['tabla'])) {
     die('Por favor especificar parametro "tabla"');
@@ -110,11 +112,11 @@ if ($f->validate()) {
         if (PEAR::isError($res)) {
             echo_esc($res->getMessage());
         } else {
-            // prevenimos HRHS 
+            // prevenimos HRHS
             // http://www.securiteam.com/securityreviews/5WP0E2KFGK.html
             $ntabla = str_replace(array("\n", "\r"), array("", ""), $tabla);
 
-            header('Location: tabla.php?tabla=' . $ntabla); 
+            header('Location: tabla.php?tabla=' . $ntabla);
         }
     }
 }

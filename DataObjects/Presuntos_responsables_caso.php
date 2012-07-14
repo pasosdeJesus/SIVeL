@@ -161,7 +161,7 @@ class DataObjects_Presuntos_responsables_caso extends DB_DataObject_SIVeL
         $form->removeElement('id_caso');
     }
 
-    /** 
+    /**
      * Convierte registro a relato (arreglo de elementos) que agrega a $ar
      *
      * @param array &$ar Arreglo

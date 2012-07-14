@@ -50,7 +50,7 @@ class DataObjects_Etiqueta extends DataObjects_Basica
         'fechacreacion',
         'fechadeshabilitacion',
     );
- 
+
     /**
      * Ajusta formulario generado.
      *

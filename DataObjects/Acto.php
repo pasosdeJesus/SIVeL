@@ -65,7 +65,7 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
         parent::postGenerateForm($form, $formbuilder);
 
         $t = '<table id="tablaActos" width="100%"><thead><tr>' .
-            '<th>' . _('P. Responsable') . '</th><th>' . _('Categoria') . 
+            '<th>' . _('P. Responsable') . '</th><th>' . _('Categoria') .
             '</th>' . '<th>' . _('Víctima') . '</th><th></th></thead><tbody>';
         $p = clone $formbuilder->_do;
         $db = $p->getDatabaseConnection();

@@ -1,5 +1,5 @@
 . ./confv.sh
-xgettext --package-name=$PROYECTO --package-version=$PRY_VERSION --foreign-user --copyright-holder="Public Domain according to Colombian legislation" --msgid-bugs-address=vtamara@pasosdeJesus.org -kT_gettext -kT_ --from-code utf-8 -d $PROYECTO -o locale/$PROYECTO.pot -L PHP --no-wrap *php DataObjects/*php
+xgettext --package-name=$PROYECTO --package-version=$PRY_VERSION --foreign-user --copyright-holder="Public Domain according to Colombian legislation" --msgid-bugs-address=vtamara@pasosdeJesus.org -kT_gettext -kT_ --from-code utf-8 -d $PROYECTO -o locale/$PROYECTO.pot -L PHP --no-wrap *php DataObjects/*php sitios/pordefecto/*php
 if (test ! -f locale/en/LC_MESSAGES/$PROYECTO.po) then {
 	msginit -l en -o locale/en/LC_MESSAGES/$PROYECTO.po -i locale/$PROYECTO.pot
 } else {

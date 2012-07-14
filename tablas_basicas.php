@@ -20,10 +20,12 @@
 require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once 'misc.php';
-require_once 'misc_caso.php';
 
 $aut_usuario = "";
-autenticaUsuario($dsn, $accno, $aut_usuario, 11);
+autenticaUsuario($dsn, $aut_usuario, 11);
+
+require_once $_SESSION['dirsitio'] . '/conf_int.php';
+require_once 'misc_caso.php';
 
 encabezado_envia(_("Tablas B&aacute;sicas"));
 
@@ -42,7 +44,7 @@ $rend->setEntryTemplate(
 $menu->render($rend);
 echo '<table border = "0" width = "100%"><tr>' .
     '<td style = "white-space: nowrap;background-color:#CCCCCC;" ' .
-    'align="center" valign="top" colspan="2"><b>' 
+    'align="center" valign="top" colspan="2"><b>'
     . _('Tablas B&aacute;sicas') . '</b>' .
     '</td></tr></table>';
 print $rend->toHtml();

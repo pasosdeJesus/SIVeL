@@ -242,7 +242,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $nomf = utf8_decode($r->organizacion_responsable);
             $fecha = date('Y-m-d');
             $orgfuente = PagFuentesFrecuentes::busca_inserta(
-                $db, $idcaso, $nomf, $fecha, 
+                $db, $idcaso, $nomf, $fecha,
                 utf8_decode($r->id_relato),
                 'Organización responsable incluida automáticamente',
                 '', $obs
@@ -260,7 +260,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             PagOtrasFuentes::importaRelato($db, $r, $idcaso, $obs);
             if ($orgfuente <= 0) {
                 $orgfuente = PagOtrasFuentes::busca_inserta(
-                    $db, $idcaso, $nomf, $fecha, 
+                    $db, $idcaso, $nomf, $fecha,
                     utf8_decode($r->id_relato),
                     'Organización responsable incluida automáticamente',
                     'Indirecta', $obs
@@ -356,7 +356,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         $db, $aper, $obs,
                         utf8_decode($persona->nombre),
                         utf8_decode($persona->apellido), $anionac,
-                        $mesnac, $dianac, $sexo, 
+                        $mesnac, $dianac, $sexo,
                         $idd, $idm, $idc, $tipo_documento,
                         $numero_documento
                     );
@@ -464,7 +464,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             . "'", $obs
                         );
                     }
-                    foreach (array('antecedentes' => 'antecedente',  ) 
+                    foreach (array('antecedentes' => 'antecedente',  )
                         as $cs => $cs2
                     ) {
                         //echo "OJO cs=$cs, cs2=$cs2<br>";
@@ -498,7 +498,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
 
             // Actos
             foreach ($r->acto as $acto) {
-                //echo "OJO acto->agresion_particular=" 
+                //echo "OJO acto->agresion_particular="
                 //    . $acto->agresion_particular . "<br>";
                 if (!empty($acto->agresion_particular)) {
                     $idp = (int)$acto->id_presunto_grupo_responsable;
@@ -643,7 +643,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 $ec->insert();
             }
 
-            
+
         }
 
     }
@@ -735,7 +735,7 @@ class PagImportaRelato extends HTML_QuickForm_Page
 }
 
 $aut_usuario = "";
-autenticaUsuario($dsn, $accno, $aut_usuario, 61);
+autenticaUsuario($dsn, $aut_usuario, 61);
 
 $wizard =& new HTML_QuickForm_Controller('Importa', false);
 $consweb = new PagImportaRelato($mreq);

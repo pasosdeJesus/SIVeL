@@ -22,7 +22,7 @@ require_once 'misc.php';
 $id_departamento = (int)$_GET['id_departamento'];
 
 if ($id_departamento != 0) {
-	
+
     trigger_error("dep=" . $id_departamento);
     $municipios = array();
     $d = objeto_tabla('municipio');
@@ -35,18 +35,19 @@ if ($id_departamento != 0) {
             'id_municipio' => $d->id,
             'name' => $d->nombre
         );
-        trigger_error("dep=" . $d->id_departamento . ", mun=" 
-            . $d->id . ", nombre=" . $d->nombre);
+        trigger_error("dep=" . $d->id_departamento . ", mun="
+            . $d->id . ", nombre=" . $d->nombre
+        );
     }
     trigger_error(print_r($d, true));
-	foreach ($municipios[$id_departamento] as $municipio) {
-		$municipiosContainer[] = array(
-				'id' => (int)$municipio['id_municipio'],
-				'name' => utf8_encode($municipio['name'])
-			);
-	}
-	
-	echo json_encode($municipiosContainer);
+    foreach ($municipios[$id_departamento] as $municipio) {
+        $municipiosContainer[] = array(
+                'id' => (int)$municipio['id_municipio'],
+                'name' => utf8_encode($municipio['name'])
+            );
+    }
+
+    echo json_encode($municipiosContainer);
 }
 
 ?>

@@ -369,9 +369,9 @@ class PagSegJudicial extends PagBaseMultiple
             $nacc->id_tipo_accion = (int)$valores['id_tipo_accion'];
             $nacc->id_despacho = (int)$valores['id_despacho'];
             $nacc->fecha = arr_a_fecha(var_escapa($valores['fecha'], $db, 20));
-            $nacc->numero_radicado = 
+            $nacc->numero_radicado =
                 var_escapa($valores['numero_radicado'], $db);
-            $nacc->observaciones_accion = 
+            $nacc->observaciones_accion =
                 var_escapa($valores['observaciones_accion'], $db);
             $nacc->insert();
             $nacc->respondido= isset($valores['respondido'])
@@ -401,7 +401,7 @@ class PagSegJudicial extends PagBaseMultiple
 
     /** Extrae procesos de un caso y retorna su información en varios
      *  vectores
-     *  
+     *
      *  @param integer $idcaso  Id. del Caso
      *  @param object  &$db     Conexión a BD
      *  @param array   &$idp    Para retornar identificación de procesos
@@ -527,12 +527,12 @@ class PagSegJudicial extends PagBaseMultiple
 
 
     /**
-     * Compara datos relacionados con esta pestaña de los casos 
+     * Compara datos relacionados con esta pestaña de los casos
      * con identificación id1 e id2.
      *
      * @param object  &$db Conexión a base de datos
-     * @param array   &$r  Para llenar resultados de comparación, cada 
-     *   entrada es de la forma 
+     * @param array   &$r  Para llenar resultados de comparación, cada
+     *   entrada es de la forma
      *      id_unica => ('etiqueta', 'valor1', 'valor2', pref)
      *   donde valor1 es valor en primer caso, valor2 es valor en segundo
      *   caso y pref es 1 o 2 para indicar cual de los valores será por defecto
@@ -543,10 +543,10 @@ class PagSegJudicial extends PagBaseMultiple
      * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls) 
+    static function compara(&$db, &$r, $id1, $id2, $cls)
     {
         PagBaseMultiple::compara(
-            $db, $r, $id1, $id2, 
+            $db, $r, $id1, $id2,
             array('Seguimiento Judicial' => array('proceso', 'id_tipo'))
         );
     }
@@ -560,7 +560,7 @@ class PagSegJudicial extends PagBaseMultiple
      * @param array   $sol Arreglo con solicitudes de cambios de la forma
      *   id_unica => (pref)
      *   donde pref es 1 si el valor relacionado con id_unica debe
-     *   tomarse del caso $id1 o 2 si debe tomarse de $id2.  Las 
+     *   tomarse del caso $id1 o 2 si debe tomarse de $id2.  Las
      *   identificaciones id_unica son las empleadas por la función
      *   compara.
      * @param integer $id1 Código de primer caso
@@ -572,20 +572,20 @@ class PagSegJudicial extends PagBaseMultiple
      * acuerdo a las preferencias especificadas en $sol.
      * @see PagBaseSimple
      */
-    static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls) 
+    static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls)
     {
         //echo "OJO PagSegJudicial::mezcla(db, sol, $id1, $id2, $idn, $cls)";
-        $e1 = isset($sol['proceso']['id_tipo']) && 
-            $sol['proceso']['id_tipo'] == 1;
+        $e1 = isset($sol['proceso']['id_tipo'])
+            && $sol['proceso']['id_tipo'] == 1;
         if (($e1 && $idn != $id1) || (!$e1 && $idn != $id2)) {
             PagSegJudicial::eliminaDep($db, $idn);
             PagBaseMultiple::mezcla(
-                $db, $sol, $id1, $id2, $idn, 
+                $db, $sol, $id1, $id2, $idn,
                 array('Seguimiento Judicial' => array('proceso', 'id_tipo'))
             );
             PagBaseMultiple::mezcla(
-                $db, $sol, $id1, $id2, $idn, 
-                array('Seguimiento Judicial' 
+                $db, $sol, $id1, $id2, $idn,
+                array('Seguimiento Judicial'
                 => array('accion', 'id_tipo', 'proceso'))
             );
             echo "Falta completar copia de Acciones en Seguimiento Judicial<br>";

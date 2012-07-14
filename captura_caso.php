@@ -75,7 +75,7 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
         $css->setStyle('.maintable', 'width', '100%');
         $css->setStyle('.maintable', 'border-width', '0');
         $css->setStyle('.maintable', 'border-color', '#D0D0D0');
-        $colfon = isset($GLOBALS['ficha_color_fondo']) ? 
+        $colfon = isset($GLOBALS['ficha_color_fondo']) ?
             $GLOBALS['ficha_color_fondo'] : '#EEE';
         $css->setStyle('.maintable', 'background-color', $colfon);
         $css->setStyle('th', 'text-align', 'center');
@@ -115,7 +115,8 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
                 echo_enc("Falta encJavascript en $n, $c");
             }
         }
-        $js .= 'function envia(que) { ' .
+        $js .= 'function envia(que)
+        {
             ' document.forms[0]._qf_default.value = que;' .
             ' document.forms[0].submit(); }';
         $enc = str_replace('{%javascript%}', $js, $enc);
@@ -465,7 +466,7 @@ if (!isset($dsn)) {
 }
 $aut_usuario = "";
 $accno = "";
-autenticaUsuario($dsn, $accno, $aut_usuario, 31);
+autenticaUsuario($dsn, $aut_usuario, 31);
 
 if (isset($_GET['limpia']) && $_GET['limpia'] == 1) {
     unset_var_session();

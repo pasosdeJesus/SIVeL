@@ -28,7 +28,7 @@ function muestra()
     global $dsn, $accno;
 
     $aut_usuario = "";
-    $db = autenticaUsuario($dsn, $accno, $aut_usuario, 0);
+    $db = autenticaUsuario($dsn, $aut_usuario, 0);
     $nombres = trim(utf8_decode(var_req_escapa('nombres', $db, 100)));
     $apellidos  = trim(utf8_decode(var_req_escapa('apellidos', $db, 100)));
     $rol = var_req_escapa('rol', $db, 32);
@@ -39,12 +39,12 @@ function muestra()
         if ($p != '') {
             $cn[] = $p;
         }
-    } 
+    }
     foreach ($pa as $p) {
         if ($p != '') {
             $cn[] = $p;
         }
-    } 
+    }
 
     $patron = crea_patron($cn);
 
@@ -70,12 +70,12 @@ function muestra()
     //echo "rol=$rol";
     echo "<table>";
     echo "<tr>" .
-        "<th>Nombres y apellidos</th><th>Víctima en</th><th>Familiar en</th>".
+        "<th>Nombres y apellidos</th><th>Víctima en</th><th>Familiar en</th>" .
         "</tr>";
 
     while ($result->fetchInto($row)) {
         echo "<tr>";
-        echo '<td><a href="#" onClick="enviar_persona(\'' 
+        echo '<td><a href="#" onClick="enviar_persona(\''
             . htmlentities($rol) . '\'';
         $html_sep = ", ";
         foreach ($row as $v) {

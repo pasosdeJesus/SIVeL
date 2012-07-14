@@ -22,7 +22,7 @@ require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once 'misc.php';
 
 $aut_usuario = "";
-autenticaUsuario($dsn, $accno, $aut_usuario, 12);
+autenticaUsuario($dsn, $aut_usuario, 12);
 
 $tabla = 'usuario';
 

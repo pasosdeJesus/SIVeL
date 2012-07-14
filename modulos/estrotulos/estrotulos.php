@@ -151,9 +151,9 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
             $cfSegun = "meses";
             $tablaSegun= "";
             $titSegun = 'Mes';
-        } elseif ($pSegun == 'id_filiacion' ||
-            $pSegun == 'id_organizacion' ||
-            $pSegun == 'id_sector_social' 
+        } elseif ($pSegun == 'id_filiacion'
+            || $pSegun == 'id_organizacion'
+            || $pSegun == 'id_sector_social'
         ) { # or $pSegun = '!= '') {
             $campoSegun = $pSegun;
             $ant = explode("_", $pSegun);
@@ -263,9 +263,9 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
 
         // El método para departamento y municipio es machete porque cuando
         // no hay asigna santa-marta y así saldría e.g PUTUMAYO    SANTA MARTA
-        $q3 = "SELECT $cfSegun3 $tDep $tMun 
-            TRIM(parametros_reporte_consolidado.rotulo), 
-            COUNT(cast($cons2.id_persona as text) || ' ' || cast($cons2.id_caso as text)) 
+        $q3 = "SELECT $cfSegun3 $tDep $tMun
+            TRIM(parametros_reporte_consolidado.rotulo),
+            COUNT(cast($cons2.id_persona as text) || ' ' || cast($cons2.id_caso as text))
             FROM $tablaSegun departamento, municipio,
             parametros_reporte_consolidado,
             $cons2
@@ -298,8 +298,8 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
         for ($i = 0; $i < count($cab)-2; $i++) {
             $tcol[$cab[$i]]=1;
         }
-        $q4='SELECT no_columna, rotulo 
-            FROM parametros_reporte_consolidado 
+        $q4='SELECT no_columna, rotulo
+            FROM parametros_reporte_consolidado
             ORDER BY 1';
         $rcon = hace_consulta($db, $q4);
         if (PEAR::isError($rcon)) {
@@ -364,7 +364,7 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
                 echo "</tr>\n";
             }
 
-            if (count($tfil) > 1) { 
+            if (count($tfil) > 1) {
                 echo "<tr>";
                 $sfil = 0;
                 $ncol = 0;
@@ -543,7 +543,7 @@ function buildForm()
     );
     $sel->loadArray(
         array('' => '',
-        'id_p_responsable' => 'ACTOS ' 
+        'id_p_responsable' => 'ACTOS '
             . strtoupper($GLOBALS['etiqueta']['p_responsable']),
         'id_rango_edad' => strtoupper($GLOBALS['etiqueta']['rango_edad']),
         'sexo' => strtoupper($GLOBALS['etiqueta']['sexo']),
@@ -623,7 +623,7 @@ function buildForm()
 function muestra($dsn, $accno)
 {
     $aut_usuario = "";
-    autenticaUsuario($dsn, $accno, $aut_usuario, 21);
+    autenticaUsuario($dsn, $aut_usuario, 21);
 
     $wizard =& new HTML_QuickForm_Controller('EstadisticasInd', false);
     $consweb = new PagEstadisticasIndRot();

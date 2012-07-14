@@ -194,16 +194,16 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $cab[] = 'Supracategoria';
         $cab[] = 'Categoria';
         if ($pSegun == 'id_p_responsable') {
-            $cab[] = 'N. Actos';  
-            // Un acto es un hecho de violencia cometido por un actor 
+            $cab[] = 'N. Actos';
+            // Un acto es un hecho de violencia cometido por un actor
             // contra una víctima
         } else {
-            $cab[] = 'N. Víctimizaciones';  
-            // Una victimización o violación es un tipo de violencia 
+            $cab[] = 'N. Víctimizaciones';
+            // Una victimización o violación es un tipo de violencia
             // sufrido por una víctima (sin examinar el o los responsables)
-            // Para casos con un sólo presunto responsable actos y 
+            // Para casos con un sólo presunto responsable actos y
             // violaciones/victimizaciones coincide.
-            // Un hecho contra una victima con N presuntos responsables, 
+            // Un hecho contra una victima con N presuntos responsables,
             // cuenta como una victimización pero como N actos
         }
         $tCat .= 'acto';
@@ -237,7 +237,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             if (is_callable(array($c, 'estadisticasIndCreaConsulta'))) {
                 call_user_func_array(
                     array($c, 'estadisticasIndCreaConsulta'),
-                    array( &$db, &$where, &$tablas)
+                    array(&$db, &$where, &$tablas)
                 );
             } else {
                 echo_esc("Falta estadisticasIndCreaConsulta en $n, $c");
@@ -536,7 +536,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
             if (is_callable(array($c, 'estadisticasIndFiltro'))) {
                 call_user_func_array(
                     array($c, 'estadisticasIndFiltro'),
-                    array( $db, $this)
+                    array($db, $this)
                 );
             } else {
                 echo_esc("Falta estadisticasIndFiltro en $n, $c");
@@ -615,7 +615,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
 }
 
 $aut_usuario = "";
-autenticaUsuario($dsn, $accno, $aut_usuario, 21);
+autenticaUsuario($dsn, $aut_usuario, 21);
 
 $wizard =& new HTML_QuickForm_Controller('EstadisticasInd', false);
 $consweb = new PagEstadisticasInd($mreq);

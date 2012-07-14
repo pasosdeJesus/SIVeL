@@ -49,7 +49,7 @@ class DataObjects_Tipo_accion extends DataObjects_Basica
         'fechacreacion',
         'fechadeshabilitacion',
     );
- 
+
     static function idSinInfo()
     {
         return 1;

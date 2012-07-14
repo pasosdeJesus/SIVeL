@@ -445,12 +445,12 @@ class PagOtrasFuentes extends PagBaseMultiple
      * @param string $fecha  Fecha de fuente
      * @param string $ubif   Ubicación física
      * @param string $anota  Anotación
-     * @param string $tipof  Tipo de fuente 
+     * @param string $tipof  Tipo de fuente
      * @param string &$obs   Colchon para agregar notas de conversion
      *
      * @return integer Id de la fuente insertad o -1 si no puede
      */
-    static function busca_inserta(&$db, $idcaso, $nomf, $fecha, 
+    static function busca_inserta(&$db, $idcaso, $nomf, $fecha,
         $ubif, $anota, $tipof, &$obs
     ) {
         assert($idcaso != null);
@@ -528,7 +528,7 @@ class PagOtrasFuentes extends PagBaseMultiple
             } else {
                 $fecha = conv_fecha($fuente->fecha_fuente, $obs);
                 PagOtrasFuentes::busca_inserta(
-                    $db, $idcaso, utf8_decode($nomf), $fecha, 
+                    $db, $idcaso, utf8_decode($nomf), $fecha,
                     utf8_decode((string)$fuente->ubicacion_fuente),
                     dato_en_obs($fuente, 'anotacion'),
                     dato_en_obs($fuente, 'tipo_fuente'),
@@ -540,12 +540,12 @@ class PagOtrasFuentes extends PagBaseMultiple
 
 
     /**
-     * Compara datos relacionados con esta pestaña de los casos 
+     * Compara datos relacionados con esta pestaña de los casos
      * con identificación id1 e id2.
      *
      * @param object  &$db Conexión a base de datos
-     * @param array   &$r  Para llenar resultados de comparación, cada 
-     *   entrada es de la forma 
+     * @param array   &$r  Para llenar resultados de comparación, cada
+     *   entrada es de la forma
      *      id_unica => ('etiqueta', 'valor1', 'valor2', pref)
      *   donde valor1 es valor en primer caso, valor2 es valor en segundo
      *   caso y pref es 1 o 2 para indicar cual de los valores será por defecto
@@ -556,7 +556,7 @@ class PagOtrasFuentes extends PagBaseMultiple
      * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls) 
+    static function compara(&$db, &$r, $id1, $id2, $cls)
     {
     }
 
@@ -569,7 +569,7 @@ class PagOtrasFuentes extends PagBaseMultiple
      * @param array   $sol Arreglo con solicitudes de cambios de la forma
      *   id_unica => (pref)
      *   donde pref es 1 si el valor relacionado con id_unica debe
-     *   tomarse del caso $id1 o 2 si debe tomarse de $id2.  Las 
+     *   tomarse del caso $id1 o 2 si debe tomarse de $id2.  Las
      *   identificaciones id_unica son las empleadas por la función
      *   compara.
      * @param integer $id1 Código de primer caso
@@ -581,10 +581,10 @@ class PagOtrasFuentes extends PagBaseMultiple
      * acuerdo a las preferencias especificadas en $sol.
      * @see PagBaseSimple
      */
-    static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls) 
+    static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls)
     {
-        //echo "OJO PagOtrasFuentes::mezcla(db, "; 
-        //print_r($sol); echo ", $id1, $id2, $idn, $t)<br> "; 
+        //echo "OJO PagOtrasFuentes::mezcla(db, ";
+        //print_r($sol); echo ", $id1, $id2, $idn, $t)<br> ";
         foreach ($cls as $t) {
             if ($t == 'anexo') {
                 $pl = 'id';
@@ -606,14 +606,14 @@ class PagOtrasFuentes extends PagBaseMultiple
                     $dd->$c = $d1->$c;
                 }
                 $dd->insert();
-                //echo "OJO 1 insertado dd"; print_r($dd); 
+                //echo "OJO 1 insertado dd"; print_r($dd);
             }
             $d2->find();
             while ($d2->fetch()) {
                 //echo "copiando de nuevo d1<br>";
                 $dd = objeto_tabla($t);
                 $dd->id_caso = $idn;
-                foreach (array_merge(array($pl), $dd->fb_fieldLabels) 
+                foreach (array_merge(array($pl), $dd->fb_fieldLabels)
                     as $c => $cf
                 ) {
                     //echo "OJO 2 c=$c, d2->c=" . $d2->$c . "<br>";
@@ -623,7 +623,7 @@ class PagOtrasFuentes extends PagBaseMultiple
                 //echo "OJO 2 insertado dd"; print_r($dd); //$dd->insert();
             }
             //print_r($dd);
-        } 
+        }
     }
 
 }

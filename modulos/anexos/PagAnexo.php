@@ -284,7 +284,7 @@ class PagAnexo extends PagBaseMultiple
             $this->banexo->dateToDatabaseCallback,
             var_escapa($valores['fecha'], $db)
         );
-        $this->banexo->_do->descripcion = 
+        $this->banexo->_do->descripcion =
             var_escapa($valores['descripcion'], $db);
 
         if (!isset($this->banexo->_do->id) || $this->banexo->_do->id <= 0) {
@@ -333,7 +333,7 @@ class PagAnexo extends PagBaseMultiple
     }
 
     /**
-     * Compara datos relacionados con esta pestaña de los casos 
+     * Compara datos relacionados con esta pestaña de los casos
      * con identificación id1 e id2.
      *
      * @param object  $db  Conexión a base de datos
@@ -344,7 +344,7 @@ class PagAnexo extends PagBaseMultiple
      * @return Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $a) 
+    static function compara(&$db, &$r, $id1, $id2, $a)
     {
     }
 
@@ -362,7 +362,7 @@ class PagAnexo extends PagBaseMultiple
      * acuerdo a las preferencias especificadas en $sol.
      * @see PagBaseSimple
      */
-    static function mezcla(&$db, $sol, $id1, $id2, $idn, $t = 'anexo') 
+    static function mezcla(&$db, $sol, $id1, $id2, $idn, $t = 'anexo')
     {
         //echo "OJO PagAnexo::mezcla<br>";
         PagOtrasFuentes::mezcla($db, $sol, $id1, $id2, $idn, 'anexo');

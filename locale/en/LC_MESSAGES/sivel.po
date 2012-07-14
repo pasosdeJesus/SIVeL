@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sivel 1.1cp1\n"
 "Report-Msgid-Bugs-To: vtamara@pasosdeJesus.org\n"
-"POT-Creation-Date: 2012-07-13 22:07-0500\n"
+"POT-Creation-Date: 2012-07-14 07:35-0500\n"
 "PO-Revision-Date: 2012-02-24 08:16-0500\n"
 "Last-Translator: Vladimir Tamara Patino <>\n"
 "Language-Team: English\n"
@@ -74,6 +74,7 @@ msgid "P. Responsable"
 msgstr "Alleged Perpetrator"
 
 #: DataObjects/Acto.php:68 DataObjects/Actocolectivo.php:69
+#: sitios/pordefecto/conf.php:367
 msgid "Categoria"
 msgstr "Category"
 
@@ -116,12 +117,132 @@ msgstr " (date of case minus born date)"
 
 #: DataObjects/Persona.php:404
 msgid " debe corresponder al rango de edad"
-msgstr " it must match an age range"
+msgstr " it must match an age group "
 
 #: DataObjects/Persona.php:416
 msgid "La fecha de nacimiento no corresponde a un rango"
-msgstr "Born date doesn't correspon to any range"
+msgstr "Born date doesn't correspon to any group"
 
 #: DataObjects/Relacion_personas.php:164
 msgid "Familiares"
 msgstr "Relatives"
+
+#: sitios/pordefecto/conf.php:340
+msgid "Información geográfica"
+msgstr "Geographical Information"
+
+#: sitios/pordefecto/conf.php:341
+msgid "Departamento"
+msgstr "Department"
+
+#: sitios/pordefecto/conf.php:342
+msgid "Municipio"
+msgstr "Municipality"
+
+#: sitios/pordefecto/conf.php:343
+msgid "Tipo Clase"
+msgstr "Class Type"
+
+#: sitios/pordefecto/conf.php:345
+msgid "Clase"
+msgstr "Class"
+
+#: sitios/pordefecto/conf.php:346
+msgid "Región"
+msgstr "Region"
+
+#: sitios/pordefecto/conf.php:347
+msgid "Frontera"
+msgstr "Boundary"
+
+#: sitios/pordefecto/conf.php:348
+msgid "Tipo de Sitio"
+msgstr "Kind of Site"
+
+#: sitios/pordefecto/conf.php:351
+msgid "Información implicado"
+msgstr "Information of people involved"
+
+#: sitios/pordefecto/conf.php:352
+msgid "Etnia"
+msgstr "Ethnic Group"
+
+#: sitios/pordefecto/conf.php:353
+msgid "Filiación"
+msgstr "Affiliation"
+
+#: sitios/pordefecto/conf.php:354
+msgid "Iglesia"
+msgstr "Church"
+
+#: sitios/pordefecto/conf.php:355
+msgid "Organización social"
+msgstr "Social Organization"
+
+#: sitios/pordefecto/conf.php:356
+msgid "Profesión"
+msgstr "Profession"
+
+#: sitios/pordefecto/conf.php:357
+msgid "Rango edad"
+msgstr "Age Group"
+
+#: sitios/pordefecto/conf.php:358
+msgid "Resultado agresión"
+msgstr "Result of agression"
+
+#: sitios/pordefecto/conf.php:359
+msgid "Sector Social"
+msgstr "Social Sector"
+
+#: sitios/pordefecto/conf.php:360
+msgid "Tipo de Relación"
+msgstr "Kind of Relationship"
+
+#: sitios/pordefecto/conf.php:361
+msgid "Vínculo con el estado"
+msgstr "Link with state"
+
+#: sitios/pordefecto/conf.php:364
+msgid "Información caso"
+msgstr "Information of Case"
+
+#: sitios/pordefecto/conf.php:365
+msgid "Tipo de Violencia"
+msgstr "Kind of Violence"
+
+#: sitios/pordefecto/conf.php:366
+msgid "Supracategoria"
+msgstr "Supercategory"
+
+#: sitios/pordefecto/conf.php:368
+msgid "Contexto"
+msgstr "Context"
+
+#: sitios/pordefecto/conf.php:369
+msgid "Presuntos responsables"
+msgstr "Alleged Perpetrators"
+
+#: sitios/pordefecto/conf.php:370
+msgid "Antecedentes"
+msgstr "Antecedents"
+
+#: sitios/pordefecto/conf.php:371
+msgid "Intervalo"
+msgstr "Interval"
+
+#: sitios/pordefecto/conf.php:374
+msgid "Información fuentes"
+msgstr "Information of Sources"
+
+#: sitios/pordefecto/conf.php:375
+msgid "Fuentes frecuentes"
+msgstr "Frequent Source"
+
+#: sitios/pordefecto/conf.php:378
+msgid "Reportes"
+msgstr "Reports"
+
+#: sitios/pordefecto/conf.php:379
+msgid "Columnas de Reporte Consolidado"
+msgstr "Columns of Consolidated Report"

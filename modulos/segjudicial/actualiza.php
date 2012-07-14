@@ -23,7 +23,7 @@ require_once "misc_actualiza.php";
 
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $accno, $aut_usuario, 21);
+$db = autenticaUsuario($dsn, $aut_usuario, 21);
 
 
 $act = objeto_tabla('Actualizacion_base');
@@ -119,7 +119,7 @@ if (!aplicado($idac)) {
 
 $idac = 'sj-fe';
 if (!aplicado($idac)) {
-    foreach(array('tipo_accion', 'etapa', 'despacho', 'tipo_proceso') as $nt) {
+    foreach (array('tipo_accion', 'etapa', 'despacho', 'tipo_proceso') as $nt) {
         agrega_fechas($db, $nt);
     }
 

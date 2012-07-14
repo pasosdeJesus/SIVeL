@@ -1,7 +1,7 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Variables de configuración.
+ * Variables de configuración de la interfaz de usuario.
  * Basado en script de configuración http://structio.sourceforge.net/seguidor
  *
  * PHP version 5
@@ -15,30 +15,6 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
-/** Servidor/socket del Motor de bases de datos */
-$dbservidor = "unix(/tmp)"; # Si prefiere TCP/IP (no recomendado) use tcp(localhost)
-
-/** Nombre de base de datos */
-$dbnombre = "sivel";
-
-/** Usuario del MBD */
-$dbusuario = "sivel";
-
-/** Clave del usuario ante el MBD */
-$dbclave = "xyz";
-
-/** Opciones especiales para acceder base de datos desde consola */
-$socketopt = "-h /var/www/tmp";
-
-/** Directorio en el que correo servidor web */
-$dirchroot = "/var/www";
-
-/** Directorio de fuentes en servidor web */
-$dirserv = "/htdocs/sivel";
-
-/** Directorio del sitio relativo a $dirserv */
-$dirsitio = "sitios/sivel";
-
 // RELATOS
 
 /** Organización responsable, aparecerá al exportar relatos
@@ -50,53 +26,6 @@ $GLOBALS['organizacion_responsable'] = 'D';
  * @global string $GLOBALS['derechos']
  */
 $GLOBALS['derechos'] = 'Dominio Público';
-
-/**
- * Directorio con relatos
- * @global string $GLOBALS['DIR_RELATOS']
- */
-$GLOBALS['DIR_RELATOS'] = '/sincodh-publico/relatos/';
-
-/**
- * Prefijo para nombres de archivo de relatos
- * @global string $GLOBALS['PREF_RELATOS']
- */
-$GLOBALS['PREF_RELATOS'] = 'org';
-
-/**
- * Estilo: nombres y apellidos de victimas.
- * MAYUSCULAS seria JOSE PEREZ
- * minusculas seria Jose Perez
- *
- * @global string $GLOBALS['estilo_nombres']
- */
-$GLOBALS['estilo_nombres'] = 'MAYUSCULAS';
-
-
-// VOLCADOS  - COPIAS DE RESPALDO LOCALES
-
-/** Contenedor cifrado de volcados */
-$imagenrlocal = "/var/resbase.img";
-
-/** Directorio local donde quedara volcado diarío del último mes
- * Se espera que se almacene en el contenedor cifrado.
- */
-$rlocal = "/var/www/resbase";
-
-/**
- * Se copian fuentes de PHP en directorio de respaldos?
- */
-$copiaphp = false;
-
-// COPIAS DE RESPALDO REMOTAS
-
-/** Destinos a los cuales copiar volcado diario de la última semana.
- * e.g "usuario1@maquina1: usuario2@maquina2:" */
-$rremotos = "";
-
-/** Llave ssh. Generela con ssh-keygen sin clave, el dueño debe ser quien
- * ejecuta el script respaldo.sh */
-$llave = $dirchroot . $dirserv . $dirsitio . "/id_rsa";
 
 // PARTICULARIDADES
 
@@ -111,104 +40,9 @@ $GLOBALS['iglesias_cristianas'] = true;
  */
 $GLOBALS['ficha_color_fondo'] = '#EEE';
 
-// PUBLICACIÓN EN PÁGINA WEB
-
-/**  Usuario */
-$usuarioact = "sivel";
-
-/** Comptuador al cual copiar */
-$maquinaweb = "otramaquina";
-
-/** Directorio */
-$dirweb = "/tmp";
-
-/** Opciones para scp de actweb, e.g -i ... */
-$opscpweb = "";
-
-
-// Mejor no empleamos sobrecarga porque no funciona en
-// diversas versiones de PHP
-if (!defined('DB_DATAOBJECT_NO_OVERLOAD')) {
-    define('DB_DATAOBJECT_NO_OVERLOAD',1);
-}
-
-/** DSN de la base de datos.  */
-$dsn = "pgsql://$dbusuario:$dbclave@$dbservidor/$dbnombre";
-
-require_once "PEAR.php";
-
-require_once 'DB/DataObject.php';
-require_once 'DB/DataObject/FormBuilder.php';
-
-$options = &PEAR::getStaticProperty('DB_DataObject', 'options');
-$options = array(
-    'database' => $dsn,
-    'schema_location' => $dirsitio . '/DataObjects',
-    'class_location' => 'DataObjects/',
-    'require_prefix' => 'DataObjects/',
-    'class_prefix' => 'DataObjects_',
-    'extends_location' => 'DataObjects_',
-    'debug' => '0',
-);
-
-$_DB_DATAOBJECT_FORMBUILDER['CONFIG'] = array (
-    'select_display_field' => 'nombre',
-    'hidePrimaryKey' => false,
-    'submitText' => 'Enviar',
-    'linkDisplayLevel' => 2,
-    'dbDateFormat' => 1,
-    'dateElementFormat' => "d-m-Y",
-    'useCallTimePassByReference' => 0
-);
-
-// MODULOS
-
-/** Módulos empleados (relativos a directorio con fuentes) */
-$modulos = "modulos/anexos modulos/etiquetas modulos/mapag";
-
-/** Directorio donde se almacenan anexos */
-$GLOBALS['dir_anexos'] = '/resbase/anexos';
-
-// Opciones de Reporte Tabla
-$GLOBALS['reporte_tabla_fila_totales'] = false;
-
-// Opciones del menú
-		
-// $GLOBALS['modulo'][100] = 'modulos/estrotulos/estrotulos.php';
-// $GLOBALS['modulo'][101] = 'modulos/estrotulos/estcolectivas.php';
-// $GLOBALS['modulo'][200] = 'modulos/belicas/estadisticas_comb.php';
-$GLOBALS['modulo'][300] = 'modulos/mapag/index.php';
-
-// Posibilidades de módulos
-// $GLOBALS['consultaweb_ordenarpor'][0] = "rotulos_cwebordenar";
-// $GLOBALS['gancho_rc_reginicial'][0] = "rotulos_inicial";
-// $GLOBALS['gancho_rc_regfinal'][0] = "rotulos_final";
-// $GLOBALS['misc_ordencons'][0] = "rotulos_orden_cons";
-
-
-/* Rutas en particular donde haya subdirectorios DataObjects */
-$rutas_include = ini_get('include_path').
-    ":.:$dirserv:$dirserv/$dirsitio:$dirsitio:";
-$lm = explode(" ", $modulos);
-foreach ($lm as $m) {
-    $rutas_include .= "$m:$m/DataObjects/:";
-}
-
-/* La siguiente requiere AllowOverride All en configuración de Apache */
-ini_set('include_path', $rutas_include);
 
 /** Cadena en caso de no existir usuario o clave */
 $accno = "Acceso no autorizado\n";
-
-/** Palabra clave para algunos cifrados.
- * @global string $GLOBALS['PALABRA_SITIO']
- */
-$GLOBALS['PALABRA_SITIO'] = 'sigamos el ejemplo de Jesús';
-
-/** Deshabilita operaciones con usuarios
- * @global string $GLOBALS['deshabilita_manejo_usuarios']
- */
-$GLOBALS['deshabilita_manejo_usuarios'] = false;
 
 /** Mensaje por presentar si se encuentran fallas ortográficas al validar
  * @global string $GLOBALS['MENS_ORTOGRAFIA']
@@ -218,11 +52,7 @@ $GLOBALS['MENS_ORTOGRAFIA'] = 'Las palabras que estén bien por favor agreguelas
 /** Mensaje por presentar en la página principal para indicar donde reportar fallas.
  * @global string $GLOBALS['REPORTA_FALLAS']
  */
-<<<<<<< HEAD
-$GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">Documentación</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>Por favor reporte fallas o requerimientos en el sistema de seguimiento disponible <a href='http://sourceforge.net/tracker/?group_id=104373&atid=637817'>en línea</a>";
-=======
-$GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">Documentaci&oacute;n</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>Por favor reporte fallas o requerimientos en el sistema de seguimiento disponible <a href='http://sourceforge.net/tracker/?group_id=104373&atid=637817'>en l�nea</a>";
->>>>>>> 9c56936babd0f5dcf7824669c3748eff15477872
+$GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">Documentaci&oacute;n</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>Por favor reporte fallas o requerimientos en el sistema de seguimiento disponible <a href='http://sourceforge.net/tracker/?group_id=104373&atid=637817'>en l&iacute;nea</a>";
 
 /** Ancho en porcentaje de tablas en reporte general.
  * Puede cambiarse en caso de que tenga problemas al imprimir (por ejemplo
@@ -283,7 +113,7 @@ $GLOBALS['pie_consulta_web'] = '';
  * Dejar '&nbsp;' si no hay
  * @global string $GLOBALS['pie_consulta_web_publica']
  */
-$GLOBALS['pie_consulta_web_publica']='<div align="right"><a href="http://sivel.sourceforge.net/1.1/consultaweb.html">Documentación</a></div>';
+$GLOBALS['pie_consulta_web_publica'] = '<div align="right"><a href="http://sivel.sourceforge.net/1.1/consultaweb.html">Documentación</a></div>';
 
 /** Cabezote para enviar correos desde consulta_web.
  * Dejar '' si no hay
@@ -341,52 +171,50 @@ $GLOBALS['ficha_tabuladores'] = array(
 
 /** Tablas básicas */
 $GLOBALS['menu_tablas_basicas'] = array(
-    array('title' => 'Información geográfica', 'url'=> null, 'sub' => array(
-        array('title'=>'Departamento', 'url'=>'departamento','sub'=>null),
-        array('title'=>'Municipio', 'url'=>'municipio', 'sub'=>null),
-        array('title'=>'Tipo Clase', 'url'=>'tipo_clase', 'sub'=>null),
+    array('title' => _('Información geográfica'), 'url'=> null, 'sub' => array(
+        array('title'=>_('Departamento'), 'url'=>'departamento','sub'=>null),
+        array('title'=>_('Municipio'), 'url'=>'municipio', 'sub'=>null),
+        array('title'=>_('Tipo Clase'), 'url'=>'tipo_clase', 'sub'=>null),
 
-        array('title'=>'Clase', 'url'=>'clase', 'sub'=>null),
-        array('title'=>'Región', 'url'=>'region', 'sub'=>null),
-        array('title'=>'Frontera', 'url'=>'frontera', 'sub'=>null),
-        array('title'=>'Tipo de Sitio', 'url'=>'tipo_sitio', 'sub'=>null),
+        array('title'=>_('Clase'), 'url'=>'clase', 'sub'=>null),
+        array('title'=>_('Región'), 'url'=>'region', 'sub'=>null),
+        array('title'=>_('Frontera'), 'url'=>'frontera', 'sub'=>null),
+        array('title'=>_('Tipo de Sitio'), 'url'=>'tipo_sitio', 'sub'=>null),
         ),
     ),
-    array('title' => 'Información implicado', 'url'=> null, 'sub' => array(
-        array('title'=>'Etnia', 'url'=>'etnia', 'sub'=>null),
-        array('title'=>'Filiación', 'url'=>'filiacion', 'sub'=>null),
-        array('title'=>'Iglesia', 'url'=>'iglesia', 'sub'=>null),
-        array('title'=>'Organización social', 'url'=>'organizacion', 'sub'=>null),
-        array('title'=>'Profesión', 'url'=>'profesion', 'sub'=>null),
-        array('title'=>'Rango edad', 'url'=>'rango_edad', 'sub'=>null),
-        array('title'=>'Resultado agresión', 'url'=>'resultado_agresion', 'sub'=>null),
-        array('title'=>'Sector Social', 'url'=>'sector_social', 'sub'=>null),
-        array('title'=>'Tipo de Relación', 'url'=>'tipo_relacion', 'sub'=>null),
-        array('title'=>'Vínculo con el estado', 'url'=>'vinculo_estado', 'sub'=>null),
+    array('title'=>_('Información implicado'), 'url'=> null, 'sub' => array(
+        array('title'=>_('Etnia'), 'url'=>'etnia', 'sub'=>null),
+        array('title'=>_('Filiación'), 'url'=>'filiacion', 'sub'=>null),
+        array('title'=>_('Iglesia'), 'url'=>'iglesia', 'sub'=>null),
+        array('title'=>_('Organización social'), 'url'=>'organizacion', 'sub'=>null),
+        array('title'=>_('Profesión'), 'url'=>'profesion', 'sub'=>null),
+        array('title'=>_('Rango edad'), 'url'=>'rango_edad', 'sub'=>null),
+        array('title'=>_('Resultado agresión'), 'url'=>'resultado_agresion', 'sub'=>null),
+        array('title'=>_('Sector Social'), 'url'=>'sector_social', 'sub'=>null),
+        array('title'=>_('Tipo de Relación'), 'url'=>'tipo_relacion', 'sub'=>null),
+        array('title'=>_('Vínculo con el estado'), 'url'=>'vinculo_estado', 'sub'=>null),
         ),
     ),
-    array('title' => 'Información caso', 'url'=> null, 'sub' => array(
-        array('title'=>'Tipo de Violencia', 'url'=>'tipo_violencia', 'sub'=>null),
-        array('title'=>'Supracategoria', 'url'=>'supracategoria', 'sub'=>null),
-        array('title'=>'Categoria', 'url'=>'categoria', 'sub'=>null),
-        array('title'=>'Contexto', 'url'=>'contexto', 'sub'=>null),
-        array('title'=>'Presuntos responsables', 'url'=>'presuntos_responsables', 'sub'=>null),
-        array('title'=>'Antecedentes', 'url'=>'antecedente', 'sub'=>null),
-        array('title'=>'Intervalo', 'url'=>'intervalo', 'sub'=>null),
+    array('title'=>_('Información caso'), 'url'=> null, 'sub' => array(
+        array('title'=>_('Tipo de Violencia'), 'url'=>'tipo_violencia', 'sub'=>null),
+        array('title'=>_('Supracategoria'), 'url'=>'supracategoria', 'sub'=>null),
+        array('title'=>_('Categoria'), 'url'=>'categoria', 'sub'=>null),
+        array('title'=>_('Contexto'), 'url'=>'contexto', 'sub'=>null),
+        array('title'=>_('Presuntos responsables'), 'url'=>'presuntos_responsables', 'sub'=>null),
+        array('title'=>_('Antecedentes'), 'url'=>'antecedente', 'sub'=>null),
+        array('title'=>_('Intervalo'), 'url'=>'intervalo', 'sub'=>null),
         ),
     ),
-    array('title' => 'Información fuentes', 'url'=> null, 'sub' => array(
-        array('title'=>'Fuentes frecuentes', 'url'=>'prensa', 'sub'=>null),
+    array('title'=>_('Información fuentes'), 'url'=> null, 'sub' => array(
+        array('title'=>_('Fuentes frecuentes'), 'url'=>'prensa', 'sub'=>null),
         ),
     ),
-    array('title' => 'Reportes', 'url'=> null, 'sub' => array(
-        array('title'=>'Columnas de Reporte Consolidado',
+    array('title'=>_('Reportes'), 'url'=> null, 'sub' => array(
+        array('title'=>_('Columnas de Reporte Consolidado'),
             'url'=>'parametros_reporte_consolidado', 'sub'=>null),
         ),
     ),
 );
-
-
 /** Etiquetas que aparecen en la interfaz */
 $GLOBALS['etiqueta'] = array(
 // Caso

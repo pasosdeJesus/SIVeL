@@ -54,15 +54,15 @@ class DataObjects_Despacho extends DataObjects_Basica
         'fechacreacion',
         'fechadeshabilitacion',
     );
- 
+
     var $fb_addFormHeader = false;
     var $fb_fieldsRequired = array(
-        'id_tipo', 
+        'id_tipo',
         'nombre',
         'fechacreacion'
     );
     var $fb_linkDisplayFields = array(
-        'nombre', 
+        'nombre',
         'id_tipo',
     );
     var $fb_fieldLabels = array(

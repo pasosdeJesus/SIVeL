@@ -22,7 +22,7 @@ require_once "DataObjects/Categoria.php";
 require_once "misc_actualiza.php";
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $accno, $aut_usuario, 21);
+$db = autenticaUsuario($dsn, $aut_usuario, 21);
 if (!in_array(63, $_SESSION['opciones'])) {
     hace_consulta(
         $db, "INSERT INTO opcion VALUES ('63', 'Actualizar', '60', " .
@@ -35,7 +35,7 @@ if (!in_array(63, $_SESSION['opciones'])) {
     include "terminar.php";
     die("");
 }
-$db = autenticaUsuario($dsn, $accno, $aut_usuario, 63);
+$db = autenticaUsuario($dsn, $aut_usuario, 63);
 
 echo '<table width="100%"><td style="white-space: nowrap; '
     . 'background-color: #CCCCCC;" align="left" valign="top" colspan="2">'
@@ -337,7 +337,7 @@ if (!aplicado($idact)) {
     );
 
     aplicaact(
-        $act, $idac, 'SIN INFORMACIÓN en Fuente Frecuente ' 
+        $act, $idac, 'SIN INFORMACIÓN en Fuente Frecuente '
         . 'para permitir consulta externa'
     );
 }
@@ -1851,69 +1851,69 @@ if (!aplicado($idac)) {
         $db, "UPDATE categoria SET contada_en='777' WHERE id='197'", false
     );
     $r = hace_consulta(
-        $db, 
-        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, 
-        id_supracategoria, id_tipo_violencia, col_rep_consolidado, 
-        nombre, tipocat) 
+        $db,
+        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion,
+        id_supracategoria, id_tipo_violencia, col_rep_consolidado,
+        nombre, tipocat)
         VALUES (520, '2011-07-07', NULL, 2, 'B', 12, 'VIOLENCIA SEXUAL', 'I');",
         false
     );
 
     $r = hace_consulta(
-        $db, 
-        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, 
-        id_supracategoria, id_tipo_violencia, col_rep_consolidado, 
-        nombre, tipocat) 
+        $db,
+        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion,
+        id_supracategoria, id_tipo_violencia, col_rep_consolidado,
+        nombre, tipocat)
         VALUES (521, '2011-07-07', NULL, 2, 'B', 12, 'VIOLACIÓN', 'I'); ",
         false
     );
     $r = hace_consulta(
-        $db, 
-        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, 
-        id_supracategoria, id_tipo_violencia, col_rep_consolidado, 
-        nombre, tipocat) 
+        $db,
+        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion,
+        id_supracategoria, id_tipo_violencia, col_rep_consolidado,
+        nombre, tipocat)
         VALUES (522, '2011-07-07', NULL, 2, 'B', 12, 'EMBARAZO FORZADO', 'I');",
         false
     );
     $r = hace_consulta(
-        $db, 
-        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, 
-        id_supracategoria, id_tipo_violencia, col_rep_consolidado, 
-        nombre, tipocat) 
-        VALUES (523, '2011-07-07', NULL, 2, 'B', 12, 
+        $db,
+        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion,
+        id_supracategoria, id_tipo_violencia, col_rep_consolidado,
+        nombre, tipocat)
+        VALUES (523, '2011-07-07', NULL, 2, 'B', 12,
         'PROSTITUCIÓN FORZADA', 'I'); ",
         false
     );
     $r = hace_consulta(
-        $db, 
-        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, 
-        id_supracategoria, id_tipo_violencia, col_rep_consolidado, 
-        nombre, tipocat) 
-        VALUES (524, '2011-07-07', NULL, 2, 'B', 12, 
+        $db,
+        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion,
+        id_supracategoria, id_tipo_violencia, col_rep_consolidado,
+        nombre, tipocat)
+        VALUES (524, '2011-07-07', NULL, 2, 'B', 12,
         'ESTERILIZACIÓN FORZADA', 'I'); ",
         false
     );
     $r = hace_consulta(
-        $db, 
-        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, 
-        id_supracategoria, id_tipo_violencia, col_rep_consolidado, 
-        nombre, tipocat) 
+        $db,
+        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion,
+        id_supracategoria, id_tipo_violencia, col_rep_consolidado,
+        nombre, tipocat)
         VALUES (525, '2011-07-07', NULL, 2, 'B', 12, 'ESCLAVITUD SEXUAL', 'I');",
         false
     );
     $r = hace_consulta(
-        $db, 
-        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, 
-        id_supracategoria, id_tipo_violencia, col_rep_consolidado, 
-        nombre, tipocat) 
+        $db,
+        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion,
+        id_supracategoria, id_tipo_violencia, col_rep_consolidado,
+        nombre, tipocat)
         VALUES (526, '2011-07-07', NULL, 2, 'B', 12, 'ABUSO SEXUAL', 'I'); ",
         false
     );
     $r = hace_consulta(
-        $db, 
-        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, 
-        id_supracategoria, id_tipo_violencia, col_rep_consolidado, 
-        nombre, tipocat) 
+        $db,
+        "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion,
+        id_supracategoria, id_tipo_violencia, col_rep_consolidado,
+        nombre, tipocat)
         VALUES (527, '2011-07-07', NULL, 2, 'B', 12, 'ABORTO FORZADO', 'I'); ",
         false
     );
@@ -1945,7 +1945,7 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db, "ALTER TABLE victima" .
         " ADD COLUMN orientacionsexual CHAR(1) DEFAULT 'H' " .
-        " CHECK (orientacionsexual='L' OR orientacionsexual='G' OR " . 
+        " CHECK (orientacionsexual='L' OR orientacionsexual='G' OR " .
         " orientacionsexual='B' OR orientacionsexual='T' OR " .
         " orientacionsexual='I' OR orientacionsexual='H' " .
         " )", false
@@ -1999,8 +1999,8 @@ if (isset($GLOBALS['menu_tablas_basicas'])) {
     }
     if (!$hayrep) {
         echo "<font color='red'>En el arreglo <tt>menu_tablas_basicas</tt> " .
-            "del archivo <tt>" . htmlentities($_SESSION['dirsitio']) 
-            . "</tt> falta: 
+            "del archivo <tt>" . htmlentities($_SESSION['dirsitio'])
+            . "</tt> falta:
 <pre>
     array('title' => 'Reportes', 'url'=> null, 'sub' => array(
         array('title'=>'Columnas de Reporte Consolidado',
@@ -2060,8 +2060,8 @@ function agregaArchivo($fuente, $destino, $modo = "w")
 function leeEstructura($nd, $dbnombre, $dirap, $modo)
 {
     if (!file_exists("$nd/DataObjects/estructura-dataobject.ini")) {
-        echo "No puede leerse " 
-            . htmlentities("$nd/DataObjects/estructura-dataobject.ini") 
+        echo "No puede leerse "
+            . htmlentities("$nd/DataObjects/estructura-dataobject.ini")
             . "<br>";
         return;
     }

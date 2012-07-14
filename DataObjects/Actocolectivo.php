@@ -66,8 +66,8 @@ class DataObjects_Actocolectivo extends DB_DataObject_SIVeL
         parent::postGenerateForm($form, $formbuilder);
 
         $t = '<table id="tablaActos" width="100%"><thead><tr>' .
-            '<th>'. _('P. Responsable') . '</th><th>' . _('Categoria') . 
-            '</th><th>' . _('Víctima Colectiva') . 
+            '<th>'. _('P. Responsable') . '</th><th>' . _('Categoria') .
+            '</th><th>' . _('Víctima Colectiva') .
             '</th><th></th></thead><tbody>';
         $p = clone $formbuilder->_do;
         $db = $p->getDatabaseConnection();

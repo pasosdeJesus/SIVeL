@@ -137,7 +137,7 @@ function inicializa(&$db)
 }
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $accno, $aut_usuario, 0);
+$db = autenticaUsuario($dsn, $aut_usuario, 0);
 
 $res = hace_consulta($db, 'SELECT count(*) FROM acto', false);
 if (PEAR::isError($res)) {

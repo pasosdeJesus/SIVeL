@@ -50,8 +50,8 @@ function rotulos_orden_cons(&$q, $pOrdenar)
     $nq = "";
     if ($pOrdenar == 'rotulo') {
         $excvi = $excvc = '';
-        if (isset($GLOBALS['estrotulos_excluirsinfiliacion']) &&
-            $GLOBALS['estrotulos_excluirsinfiliacion']) {
+        if (isset($GLOBALS['estrotulos_excluirsinfiliacion'])
+            && $GLOBALS['estrotulos_excluirsinfiliacion']) {
             $excvi = ' AND acto.id_persona IN ' .
             '(SELECT id_persona FROM victima WHERE id_filiacion<>\'' .
             DataObjects_Filiacion::idSinInfo() . '\') ';

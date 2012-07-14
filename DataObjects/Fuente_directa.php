@@ -92,8 +92,8 @@ class DataObjects_Fuente_directa extends DB_DataObject_SIVeL
      */
     function preProcessForm(&$valores, &$formbuilder)
     {
-        if ($this->id != null 
-            && (!isset($valores['id']) || $valores['id'] == '')) 
+        if ($this->id != null
+            && (!isset($valores['id']) || $valores['id'] == ''))
         {
             $valores['id'] = $this->id;
         }

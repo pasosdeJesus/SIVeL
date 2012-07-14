@@ -70,7 +70,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         $pSupra = var_post_escapa('id_supracategoria');
         $pSegun = var_post_escapa('segun');
         $pMuestra = var_post_escapa('muestra');
-        
+
         $pMunicipio = var_post_escapa('municipio');
         $pDepartamento = var_post_escapa('departamento');
         $pSinFiliacion = var_post_escapa('sinfiliacion');
@@ -287,11 +287,11 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         }
 // El método para departamento y municipio es machete porque cuando
 // no hay asigna santa-marta y así saldría e.g PUTUMAYO    SANTA MARTA
-        $q3 = "SELECT $cfSegun3 $tDep $tMun 
-            TRIM(parametros_reporte_consolidado.rotulo), 
-            SUM($cons2.personas_aprox) 
-            FROM $tablaSegun departamento, municipio, 
-            parametros_reporte_consolidado, $cons2 
+        $q3 = "SELECT $cfSegun3 $tDep $tMun
+            TRIM(parametros_reporte_consolidado.rotulo),
+            SUM($cons2.personas_aprox)
+            FROM $tablaSegun departamento, municipio,
+            parametros_reporte_consolidado, $cons2
             WHERE (($cons2.id_departamento IS NULL AND departamento.id = 47) OR
             departamento.id = $cons2.id_departamento)
             AND (($cons2.id_municipio IS NULL AND municipio.id = 1
@@ -360,7 +360,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             }
             echo "<th>Total</th>";
             echo "</tr>\n";
-            
+
             $row = array();
             foreach ($tfil as $f => $t1) {
                 echo "<tr>";
@@ -370,7 +370,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
                     echo "<td>";
                     if (isset($celda[$f][$c])) {
                         echo htmlentities($celda[$f][$c]); # . " " . $sfil;
-                        if ($ncol >= $colenc) { 
+                        if ($ncol >= $colenc) {
                             $scol[$c] += (int)$celda[$f][$c];
                             $sfil += (int)$celda[$f][$c];
                         }
@@ -562,7 +562,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
         );
         $sel->loadArray(
             array('' => '',
-            'id_p_responsable' => 'ACTOS ' 
+            'id_p_responsable' => 'ACTOS '
                 . strtoupper($GLOBALS['etiqueta']['p_responsable']),
             'meses' => 'MESES',
         )
@@ -634,7 +634,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
 function muestra($dsn, $accno)
 {
     $aut_usuario = "";
-    autenticaUsuario($dsn, $accno, $aut_usuario, 21);
+    autenticaUsuario($dsn, $aut_usuario, 21);
 
     $wizard =& new HTML_QuickForm_Controller('EstadisticasCol', false);
     $consweb = new PagEstadisticasCol();

@@ -18,7 +18,7 @@ require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
 
 /*$aut_usuario = "";
-$db = autenticaUsuario($dsn, $accno, $aut_usuario, 0); 
+$db = autenticaUsuario($dsn, $aut_usuario, 0);
 Debe autenticarse en la función muestra del modulo */
 
 if (!isset($_REQUEST['num'])) {
@@ -26,7 +26,7 @@ if (!isset($_REQUEST['num'])) {
 }
 
 if (!isset($GLOBALS['modulo'][(int)$_REQUEST['num']])) {
-    die("No se ha definido \$GLOBALS['modulo'][" 
+    die("No se ha definido \$GLOBALS['modulo']["
         . (int)$_REQUEST['num'] . "] en conf.php");
 }
 

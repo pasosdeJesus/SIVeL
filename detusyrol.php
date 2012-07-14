@@ -23,7 +23,7 @@ require_once "misc.php";
 require_once "DB/DataObject/FormBuilder.php";
 
 $aut_usuario = "";
-autenticaUsuario($dsn, $accno, $aut_usuario, 12);
+autenticaUsuario($dsn, $aut_usuario, 12);
 $tabla = 'usuario';
 
 $d = objeto_tabla($tabla);
@@ -95,8 +95,8 @@ if ($actsincambiarclave || $f->validate()) {
                 die($db->getMessage());
             }
             $q = "INSERT INTO funcionario (anotacion, nombre) " .
-                " VALUES ('" 
-                . var_escapa($f->_submitValues['descripcion'], $db) . "', '" 
+                " VALUES ('"
+                . var_escapa($f->_submitValues['descripcion'], $db) . "', '"
                 . var_escapa($f->_submitValues['id_usuario'], $db) . "')";
             //echo $q;
             hace_consulta($db, $q);

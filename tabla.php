@@ -23,11 +23,12 @@
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once "misc.php";
-require_once "misc_caso.php";
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $accno, $aut_usuario, 11);
+$db = autenticaUsuario($dsn, $aut_usuario, 11);
 
+require_once $_SESSION['dirsitio'] . '/conf_int.php';
+require_once "misc_caso.php";
 
 /**
  * Muestra un registro
@@ -224,7 +225,7 @@ echo '<pr>&nbsp;</pr><table border="0" width="100%" ' .
     '<td align = "left">' .
     '<a href="detalle.php?tabla=' . htmlentities($tabla) . '">Nuevo</a>' .
     '</td><td align="right">' .
-    '<a href="index.php"><b>Menú Principal</b></a>' .
+    '<a href="index.php"><b>' . _('Men&uacute; Principal') . '</b></a>' .
     '</td></tr></table>';
 pie_envia();
 
