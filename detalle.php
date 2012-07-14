@@ -30,14 +30,14 @@ require_once "misc_caso.php";
 require_once "DB/DataObject/FormBuilder.php";
 
 if (!isset($_REQUEST['tabla'])) {
-    die('Por favor especificar parametro "tabla"');
+    die(_('Por favor especificar parametro "tabla"'));
 }
 $tabla = var_req_escapa('tabla');
 
 actGlobales();
 $u = html_menu_toma_url($GLOBALS['menu_tablas_basicas']);
 if (!in_array($tabla, $u)) {
-    die("La tabla '$tabla' no es básica");
+    die(_("La tabla '") . $tabla . _("' no es básica"));
 }
 $d = objeto_tabla($tabla);
 $db = $d->getDatabaseConnection();
@@ -50,7 +50,7 @@ if (isset($_GET['id'])) {
         $d->$n = $r[1];
     }
     if ($d->find()!=1) {
-        die("Se esperaba un sólo registro");
+        die(_("Se esperaba un sólo registro"));
     }
     $d->fetch();
 }
@@ -67,27 +67,28 @@ $f->setRequiredNote($mreq);
 
 $ed = array();
 if (!isset($_GET['id'])) {
-    $e =& $f->createElement('submit', 'añadir', 'Añadir');
+    $e =& $f->createElement('submit', 'añadir', _('Añadir'));
     $ed[] =& $e;
 } else {
-    $e =& $f->createElement('submit', 'actualizar', 'Actualizar');
+    $e =& $f->createElement('submit', 'actualizar', _('Actualizar'));
     $ed[] =& $e;
-    $e =& $f->createElement('submit', 'eliminar', 'Eliminar');
+    $e =& $f->createElement('submit', 'eliminar', _('Eliminar'));
     $ed[] =& $e;
     $f->addElement('hidden', 'tabla', $tabla);
 }
 $f->addGroup($ed, null, '', '&nbsp;', false);
 $f->addElement(
     'header', null,
-    '<div align = "right"><a href = "index.php">Menú Principal</a></div>'
+    '<div align = "right"><a href = "index.php">' .
+    _('Men&uacute; Principal') . '</a></div>'
 );
 
 
 if ($f->validate()) {
     if (!$d->masValidaciones($f->_submitValues)) {
-        echo "No pasaron validaciones adicionales";
+        echo _("No pasaron validaciones adicionales");
     } else if (!verifica_sin_CSRF($f->_submitValues)) {
-        die("Datos enviados no pasaron verificación CSRF");
+        die(_("Datos enviados no pasaron verificación CSRF"));
     } else {
         $res = null;
         if (isset($f->_submitValues['actualizar'])
