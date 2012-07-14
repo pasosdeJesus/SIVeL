@@ -1000,15 +1000,15 @@ function enlaces_casos_grupoper_html(&$db, $idcaso, $idc, &$comovic)
  * @param array $ar Arreglo por convertir
  *
  * @return array Arreglo convertido
-     */
-function htmlentities_array($ar) 
+ */
+function htmlentities_array($ar, $enc = 'UTF-8') 
 {
     $ars = array();
     foreach ($ar as $l => $v) {
         if (is_array($v)) {
-            $ars[$l] = htmlentities_array($v);
+            $ars[$l] = htmlentities_array($v, $enc);
         } else {
-            $ars[$l] = htmlentities($v);
+            $ars[$l] = htmlentities($v, ENT_COMPAT, $enc);
         }
     }
     return $ars;
