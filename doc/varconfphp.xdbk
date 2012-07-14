@@ -7,9 +7,17 @@
 <listitem><para> Derechos de reproducción por defecto, aparecerán al exportar relatos</para></listitem></varlistentry>
 <varlistentry><term><literal>PREF_RELATOS</literal></term>
 <listitem><para> Derechos de reproducción por defecto, aparecerán al exportar relatos</para></listitem></varlistentry>
+<varlistentry><term><literal>estilo_nombres</literal></term>
+<listitem><para> Derechos de reproducción por defecto, aparecerán al exportar relatos</para></listitem></varlistentry>
 <varlistentry><term><literal>iglesias_cristianas</literal></term>
 <listitem><para> Incluir iglesias cristianas en ficha</para></listitem></varlistentry>
+<varlistentry><term><literal>ficha_color_fondo</literal></term>
+<listitem><para> Incluir iglesias cristianas en ficha</para></listitem></varlistentry>
 <varlistentry><term><literal>dir_anexos</literal></term>
+<listitem><para> Directorio donde se almacenan anexos</para></listitem></varlistentry>
+<varlistentry><term><literal>reporte_tabla_fila_totales</literal></term>
+<listitem><para> Directorio donde se almacenan anexos</para></listitem></varlistentry>
+<varlistentry><term><literal>modulo</literal></term>
 <listitem><para> Directorio donde se almacenan anexos</para></listitem></varlistentry>
 <varlistentry><term><literal>PALABRA_SITIO</literal></term>
 <listitem><para> Palabra clave para algunos cifrados.</para></listitem></varlistentry>

@@ -1,17 +1,490 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <variablelist>
-	<varlistentry><term>Versión 1.1a1 (Feb.2012)</term>
-		<listitem><para><itemizedlist>
+	<varlistentry><term>Versión 1.1.2 (Jul.2012)</term>
+		<listitem>
+            <para><itemizedlist>
+                    <listitem>
+                        <para>Mejorada importación de relatos: rangos de edad y conversión a mayúsculas.</para>
+                    </listitem>
+					<listitem>
+						<para>
+Georeferenciación permite filtrar por tipo de violencia.
+						</para>
+					</listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
+
+	<varlistentry><term>Versión 1.1.1 (Abr.2012)</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem>
+						<para>
+Nuevo módulo para georeferenciación con Googlemaps cedido al dominio
+público por Luca Urech &lt;lucaurech@yahoo.de&gt; y la Corporación Compromiso.
+El mapa se ve desde el menú
+<menuchoice><guimenu>Reportes</guimenu><guimenuitem>Mapa en Googlemap</guimenuitem></menuchoice>.  
+En instalaciones nuevas activelo eligiendo desde el 
+menú principal <menuchoice><guimenu>Otros</guimenu><guimenuitem>Actualizar</guimenuitem></menuchoice>.  
+Nueva opción en consulta web para filtrar casos con coordenadas.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+Pequeñas mejoras: Al importar un relato, este se añade como anexo y 
+fuente al caso.  
+En reporte general presenta contexto(s).  Reporte consolidado permite
+filtrar por etiquetas. En reportes revista presenta
+listado corto de victimas si no se requiere presunto responsable ni
+tipificacion.    Nueva variable de configuración 
+<literal>$GLOBALS['estilo_nombres']</literal> para definir 
+estilo en capitalizacion de nombres (<literal>MAYUSCULAS</literal> o 
+<literal>minusculas</literal>) que se usa al
+importar relatos. Nueva variable de configuración 
+<literal>$GLOBALS['ficha_color_fondo']</literal>
+para definir color del fondo de la ficha de captura.
+						</para>
+					</listitem>
+
+					<listitem>
+						<para>
+Fallas corregidas: estadísticas al elegir tipo de violencia no presenta 
+error CSRF.  Encabezado en reporte consolidado, gracias por reportar a 
+wiroal@www.nocheyniebla.org.  Importación de relatos ahora importa
+correctamente presuntos responsables sin actos relacionados, gracias
+por reportar a wiroal@www.nocheyniebla.org.  
+Enlaces en ventanas para buscar personas o
+grupos. En Ubicación puede elegirse Exterior, gracias por reportar a 
+chaplin@www.nocheyniebla.org. Mejor 
+mensaje de error  en caso de no poder importar archivos con 
+tama&ntilde;o superior al m&aacute;ximo (en tal caso revisar variables
+de configuraci&oacute;n de Apache <literal>upload_max_filesize</literal>
+y <literal>post_max_size</literal>).
+						</para>
+					</listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
+
+	<varlistentry><term>Versión 1.1 (Oct.2011)</term>
+		<listitem>
+            <para><itemizedlist>
+					<listitem>
+						<para>Verificación de seguridad con base en OWASP ASVS 2009 (ver doc/owasp-asvs-SIVeL.odt). 
+Más saneamiento de datos de entrada y salida --incluso proveniente de 
+base de datos.
+Previene más HRHS. Centraliza control y verificación de CSRF.  
+Políticas para datos de entrada y salida.
+Herramienta <literal>herram/buscafallas.sh</literal> para ayudar a 
+verificar.
+                        </para>
+					</listitem>
+
+					<listitem>
+                        <para>Para aumentar consistencia con SIVeL 1.0 sólo
+                            los conteos por presunto responsables son 
+                            por actos, mientras que los demás son por 
+                            victimización.  
+                            Ver <xref linkend="cconteos"></xref>. </para>
+					</listitem>
+
+                    <listitem>
+                        <para>En la pestaña Víctima Individual se presentan
+                            enlaces a otros casos donde la víctima y sus
+                            familiares aparezcan. Con los botónes Buscar
+                            se pueden elegir mejor víctimas y familiares
+                            que aparecen en otros casos, ver 
+                            <xref linkend="victimaindividual"></xref>. </para>
+					</listitem>
+					<listitem>
+						<para>Nuevo criterio para sacar conteos de víctimas individuales: por etiqueta.</para>
+					</listitem>
+					<listitem>
+						<para>
+Pequeñas mejoras: Actualizada herramienta de configuración, configure con <literal>./conf.sh -i</literal>.
+Reporte general tiene enlace al número de caso. 
+En módulo de seguimiento judicial campos con jerarquía Tipo->Etapa. 
+Al importar relatos pone como fuente del caso la organización responsable del caso --intenta primero ubicarla entre fuentes frecuentes. 
+Eliminado reporte SQL --que se remplaza con volcados desde línea de comandos y Relatos--. 
+Módulo  estrotulos permite excluir de los conteos víctimas sin filiación cuando se define <literal>$GLOBALS['estrotulos_excluirsinfiliacion'] = true;</literal> 
+en archivo de configuración.</para>
+					</listitem>
+				<listitem>
+                    <para>Fallas corregidas: 
+                        Al actualizar, ahora si actualiza 
+                        datos del índice de grupo de personas (gracias a 
+                        territoriosporvidadigna@hotmail.com) por reportar.   
+                        No permite ver etiquetas en Consulta Web pública, 
+                        sólo a usuarios autenticados (gracias por reportar a 
+                        wiroal@nocheyniebla.org). Orden en presuntos 
+                        responsables de división y bridaga (gracias a 
+                        Freddy Caicedo). Categorias de violencia sexual 
+                        completadas A197, B520-B527 (gracias a Yebrail 
+                        Alvares).</para>
+                		</listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
+	<varlistentry><term>Versión 1.1cp2 (Abr.2011)</term>
+		<listitem>
+			<para><itemizedlist>
+				<listitem>
+					<para>Otros->Validar reporta casos con más de una ubicación.</para>
+                </listitem>
+
+				<listitem>
+                    <para>Nuevos contextos 'INTOLERANCIA SOCIAL' y 'SEGURIDAD INFORMÁTICA.'  Nuevas categorias Etnia e Iglesia.  Puede activarse/desactivarse captura de información de iglesias en la ficha con la variable <literal>$GLOBALS['iglesias_cristianas']</literal> configurable en <literal>conf.php</literal>.  Al editar una columnas de reporte consolidado presenta categorias de esta.</para>
+	    </listitem>
+
+                <listitem>
+                    <para>Renovados y aplicados estándares de programación (ver <xref linkend="estandares"></xref>).  <ulink url="http://sivel.sf.net/1.1/tec/">Documentación técnica</ulink> actualizada. </para>
+                </listitem>
+				<listitem>
+					<para>Fallas corregidas: En la ficha de captura, en las pestañas víctima y víctima colectiva funciona, "Nueva copia", especialmente útil para casos con varias víctimas con datos similares. Archivo de comandos para eliminar bélicas funciona.  Pruebas de regresión a exportación e importación de relatos.  Mejorad importación de víctimas colectivas.   Conteos de víctimas colectivas en módulo estrotulos.
+					</para>
+				</listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+	<varlistentry><term>Versión 1.1cp1 (Mar.2011)</term>
+		<listitem>
+			<para><itemizedlist>
+				<listitem>
+					<para>La consulta en forma de tabla 
+ahora puede tener colores cuando se emplea el módulo de etiquetas y cuando
+se marcan casos con colores (idea aportada por Diana Garzón
+&lt;artemisa1786@hotmail.com&gt;).  
+El color de un caso se establece con una etiqueta que corresponda al color. 
+Por defecto ahora hay etiquetas ROJO, AMARILLO, AZUL y VERDE. 
+Puede definirse un nuevo color, creando una nueva etiqueta con el nombre del 
+color (digamos CIAN cuyos componentes RGB en hexadecimal son 00FFFF) 
+y poniendo una observación de la forma 'Color #00FFFF'
+					</para>
+				</listitem>
+				<listitem>
+					<para>Nuevo logo por William Rozo &lt;wiroal@riseup.net&gt;, empleando foto cedida por Oriol Segon, tomada durante audiencia pública en La Macarena el 22 de Julio de 2010 por parte del sacerdote Javier Giraldo ante 61 víctimas.  La luz simboliza el Espiritu, la esperanza. Es luz en las tienieblas de la impunidad.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Nuevo script 
+<filename>bin/resptodositio.sh</filename> que realiza respaldo 
+de todos los sitios disponibles en el directirio
+<filename>sitios</filename>.  Se recomienda programar su ejecución diaría,
+ver <xref linkend="respaldo-diario"></xref>
+</para>
+				</listitem>
+				<listitem>
+					<para>Posible personalizar si los reportes general y revista indentan víctimas con variable <literal>$GLOBALS['reporte_indenta_victima']</literal> en archivo de sitio <filename>conf.php</filename></para>
+				</listitem>
+				<listitem>
+					<para>Fallas corregidas: En consulta detallada la forma de presentación. Actos ahora si tiene en cuenta filtro especificado. Agradecimientos a William Rozo &lt;wiroal@riseup.net&gt;. Algunas fechas pueden ser posteriores a 2010, aunque se requiere corregir la librería HTML_QuickForm (ver <ulink url="http://pear.php.net/bugs/bug.php?id=18171"></ulink>). No falla al elegir Víctima anterior estando en la primera. El tipo de ubicación comienza 'SIN INFORMACIÓN'.</para>
+				</listitem>
+				<listitem>
+					<para>Estándares de programación en nomenclatura mejor especificados e implementados.  Pruebas de regresión. Tanto emulando navegador y servidor, como gráficas empleando Selenium. Recibimos más casos de prueba. Ver <xref linkend="pruebas-selenium"></xref></para>
+				</listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
+
+	<varlistentry><term>Versión 1.1b3 (Oct.2010)</term>
+		<listitem>
+			<para><itemizedlist>
+				<listitem>
+					<para>Documentación actualizada.
+					</para>
+				</listitem>
+
+
+				<listitem>
+					<para>Agregado límite inferior y límite
+						superior a rangos de edad. Más validaciones a tablas básicas.
+					</para>
+				</listitem>
+
+				<listitem>
+					<para>Desde consulta detallada, 
+permite generar relatos en archivos (el directorio de generación se 
+configura en la variable <literal>$GLOBALS['DIR_RELATO']</literal> del archivo
+<filename>conf.php</filename>).
+</para>
+				</listitem>
+
+
+				<listitem>
+					<para>Fecha de ingreso en reporte consolidado.  Listado de casos en los que esta la misma víctima en pestaña Víctima Individual. Agradecimientos a Cristina Cano &lt;bdmeta@nocheyniebla.org&gt;.
+</para>
+				</listitem>
+
+				<listitem>
+					<para>Archivo de comandos <filename>bin/elim-rango.sh</filename> que elimina un rango de casos.
+</para>
+				</listitem>
+				<listitem>
+					<para>En pestaña de Víctima Individual 
+puede especificarse Edad para autocompletar el año de nacimiento (agradecimientos a Fabian Wilches &lt;fabianwilches@justapaz.org&gt;).
+</para>
+				</listitem>
+
+
+				<listitem>
+					<para>Fallas corregidas:
+Mejorada importación de relatos.  Reporte consolidado no repite presuntos 
+responsables. 
+Reporte revista y reporte general organizan mejor presuntos responsables, 
+categorías de violencia y víctimas. Ahora permite borrar todos los contextos 
+de un caso (gracias Carlos Garavis &lt;emirgaz@yahoo.com&gt;).  </para>
+				</listitem>
+
+				<listitem>
+					<para>Presunto responsable inicialmente en blanco, para posibilitar elegir uno SIN INFORMACIÓN con facilidad.</para>
+				</listitem>
 				<listitem><para>
-Codificación de fuentes en PHP pasada de ISO-8859-1 a UTF-8.
+En consulta web y consulta detallada las búsquedas en campos que son 
+textos (por ejemplo nombre de la persona, memo, anotaciones, etc) ignoran 
+diferencia entre mayúscula y minúscula y el texto búscado puede ser
+subcadena del texto del campo.
 				</para></listitem>
 
-		</itemizedlist></para></listitem>
-	</varlistentry>
-</variablelist>
+				<listitem><para>
+					Búsqueda de repetidos rápida
+			</para></listitem>
+				<listitem><para>
+						Ajustes a tablas básicas: Categoría D902 es de tipo Otros (gracias Carlos Garavis &lt;emirgaz@yahoo.com&gt;). Categoría 221 renumerada a 291 (gracias a Alejandro Burgos &lt;alejobuco82@hotmail.com>&gt;).
+				</para></listitem>
+				<listitem><para>
+						Puede personalizarse inclusión de actos colectivos en pestaña Actos.
+				</para></listitem>
 
-El historial de la versión 1.1 puede verse en el 
-<ulink url="http://sivel.sf.net/1.1/">manual de esa versión</ulink>. 
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
+	<varlistentry><term>Versión 1.1b2 (Jul.2010)</term>
+		<listitem>
+			<para><itemizedlist>
+
+						<listitem><para>
+Cambios a categorías por defecto: violencia sexual en VPS, aborto forzado en DH, DIH y VPS.
+					</para></listitem>
+
+						<listitem><para>
+Los nuevos sitios por defecto tiene activados los módulos de Anexos y 
+Etiquetas, con pestañas Fuentes Frecuentes y Otras Fuentes que permiten 
+referenciar anexos.
+					</para></listitem>
+						<listitem><para>
+								Menú Otros->Buscar Repetidos busca casos con memo repetido.
+					</para></listitem>
+
+						<listitem><para>
+Menu Otros->Valida que realiza diversas validaciones. Más espacio en sitio y lugar de ubicación. Por defecto las fuentes se esperan e instalan en <filename>/var/www/htdocs/sivel</filename>.
+					</para></listitem>
+						<listitem><para>
+Corrección de fallas: Presentacion de presuntos responsables y categorías de 
+violencia en reporte revista. Reporte general mas completo. Consulta web con
+ubicación. Al actualizar de 1.0 a 1.1 tambien convierte ubicaciones 
+reusadas en diversos casos. El módulos bélicas soporta conteos. Mejora
+velocidad al presentar Víctimas Individuales y Colectivas. Tipo de sitio como
+nueva tabla bpasica.  Mejorada exportación/importación a relato.
+					</para></listitem>
+					<listitem><para>
+Experimental: Consulta web cuando se solicita consultar por
+categorías individuales mezcladas con colectivas y/o otras.
+					</para></listitem>
+					<listitem>
+						<para>
+Procedimiento de actualización de 1.0 a 1.1 simplificado 
+(ver <xref linkend="actualizacion-sivel"></xref>).
+						</para>
+					</listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+	<varlistentry><term>Versión 1.1b1 (Mar.2010)</term>
+		<listitem>
+			<para><itemizedlist>
+						<listitem><para>
+Primera versión beta, funcionalidad esperada para la versión 1.1 completa. 
+Se corregiran fallas en versiones beta hasta publicar la 1.1.
+					</para></listitem>
+										<listitem><para>
+Corrección de fallas: al actualizar elimina registros relacionados con 
+víctimas colectivas 
+que no están referenciadas en caso alguno.  Mejor eliminación de víctimas 
+tanto en instalación genérica como en personalizaciones 
+(gracias a Fabian Wilches y 
+Diana Garzón). Categorías recientes de DH replicadas en DIH.  
+Al actualizar de 1.0 a 1.1 se eliminan registros relacionados con víctimas 
+colectivas que no están referenciadas en caso alguno.  Tabla
+incluye victimizaciones de víctimas colectivas.  Sexo en víctima individual
+comienza en SIN INFORMACIÓN y puede actualizarse.  Fecha de deshabilitación
+en blanco por defecto.  Conteos por víctima individual funcionan.  Conteos
+en módulo rótulos funciona.  Intercambiados División ocn Batallón en 
+pestaña Presuntos Responsables.
+					</para></listitem>
+
+					<listitem><para>
+Actualizado contexto para incluir FALSO POSITIVO.   
+Protocolo: en algunas tablas básicas se reservan códigos menores a 100,
+las personalizaciones deben tener código mayor que 100.
+					</para></listitem>
+
+
+					<listitem><para>
+El módulo Estadísticas por Rótulos (modulos/estrotulos) incluye un 
+nuevo reporte revista ordenado por rótulos (para activarlo ver 
+modulos/estrotulos/Instala.txt).  Este módulo aprovehca nuevas
+posibilidades de personalización de Consulta Web y Reporte Revista 
+(funciones gancho consultaweb_ordenapor y consultaweb_formapresentacion, 
+misc_ordencons, reporterevista_reginicial y reporterevista_regfinal).
+					</para></listitem>
+
+					<listitem><para>
+Nueva opción del menú Otros->Completar actos  que completa actos
+individuales y colectivas de categorías replicadas.
+					</para></listitem>
+
+					<listitem><para>
+Informe de actos en HTML desde Consulta Externa.  
+Cada victimización individual la presenta con código de caso,
+presunto responsable, fecha, víctima, tipo de victimización y detalles
+de la víctima (sector social y organización social).
+					</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
+
+	<varlistentry><term>Versión 1.1a2 (Ene.2010)</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem><para>
+							Documentación parcialmente actualizada en <xref linkend="ficha"></xref> y <xref linkend="personalizacion"></xref>.
+					</para></listitem>
+
+
+					<listitem><para>
+							Módulo <emphasis>estrotulos</emphasis> para generar estadísticas por rótulos de reporte consolidado (basado en desarrollo inicial para Justapaz).
+					</para></listitem>
+
+
+					<listitem><para>
+							Módulo <emphasis>etiquetas</emphasis> para poner etiquetas con observaciones a casos (basado en desarrollo para el OPI).
+					</para></listitem>
+
+			<listitem><para>
+					Permite añadir familiares a una víctima.
+			</para></listitem>
+
+			<listitem><para>
+					Posibilidad de importar relatos.
+			</para></listitem>
+			<listitem><para>
+					Datos ordenados en cajas de selección de pestaña Acto,  mejor clasificación de categorías, corrección de fallas (agradecemos los reportes a Marcela Medina, Rosa Ortiz, Diana Garzón y Fabian Wilches).
+			</para></listitem>
+			<listitem><para>
+			Renumera Presuntos Responsables con códigos entre 39 y 100, reservando números de 1 a 100 para SIVeL básico y códigos mayores de 100 para personalizaciones.	
+	</para></listitem>
+	<listitem>
+		<para>Módulo <emphasis>belicas</emphasis></para>
+	</listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
+	<varlistentry><term>Versión 1.1a1 (Sep.2009)</term>
+		<listitem>
+				<para><itemizedlist>
+				<listitem><para>
+Pestaña localización eliminada, su funcionalidad ha sido integrada en
+la pestaña ubicación.  			
+				</para></listitem>
+				<listitem><para>
+Reportes organizados por ubicación ahora incluyen casos que no tienen 
+ubicación o que no tiene departamento.
+				</para></listitem>
+				<listitem><para>
+Ubicación permite incluir latitud y longitud, así como ubicar estas 
+coordenadas en <ulink url="http://www.openstreetmap.org"/>
+				</para></listitem>
+				<listitem><para>
+Genera reportes en XML (DTD relato 0.95 del SINCODH) desde Consulta 
+Externa y Consulta Web.
+				</para></listitem>
+				<listitem><para>
+Posibilidad de buscar víctimas individuales y víctimas colectivas
+de casos existentes e identificarlos
+como víctimas en nuevos casos.
+				</para></listitem>
+				<listitem><para>
+Fondo, cabezote y centro de interfaz principal personalizables.
+				</para></listitem>
+				<listitem><para>
+Para especificar mejor `quien hizo que a quien' permite 
+registrar actos.  Inspirada
+en metodología de eventos de HURIDOCS.
+				</para></listitem>
+				<listitem><para>
+Presuntos responsables organizados en jerarquía.
+				</para></listitem>
+				<listitem><para>
+Para aumentar posibilidad de personalizar tablas básicas (escondiendo valores no usado y agregando nuevos), se agregó fecha de creación y deshabilitación en varias y se aumentó espacio para nombre.
+				</para></listitem>
+
+				<listitem><para>
+Las categorías pueden ser de uno de 3 tipos: Individual, Colectiva y Otros.   Esto permite simplificar la interacción porque las categorías de tipo `Otros' se especifican junto con el presunto responsable, las de tipo `Individual' se especifican sólo en Actos Individuales y las de tipo `Colectiva' sólo en Actos Colectivos.
+				</para></listitem>
+				<listitem><para>
+Fuentes reorganizadas para permitir módulos y operación multisitio. Esto facilita personalizaciones y sus actualizaciones<footnote><para>.  Para eliminar fuentes reubicadas (no es indispensable) ejecute desde el directorio con fuentes de SIVeL:
+<screen>
+rm -f A* C*php Departamento* Des* E* F*php \
+  I*php M*php O* P_* Par* Presuntos_* Pro* Ran* \
+  Region* Resul* Ro* S* Ti* U* V* aut/aut.php
+</screen>
+			</para></footnote></para>
+			<para>
+						Si al intentar ingresar recibe un error como <literal>No existe configuración 'sitios/127.0.0.1_SIVEL'</literal>, desde las fuentes de SIVeL  cree un enlace así:
+						<screen>
+ln -s sitios/sivel sitios/127.0.0.1_SIVEL
+						</screen>
+						cambiando <literal>127.0.0.1_SIVEL</literal> por el que haya aparecido en el mensaje de error.
+				</para></listitem>
+				<listitem><para>
+Lo relacionado con acciones bélicas se dejó en el módulo <emphasis>belicas</emphasis>.
+				</para></listitem>
+
+				<listitem><para>
+Incluye módulo <emphasis>anexos</emphasis> para anexar documentos a un caso 
+y de requerirse relacionarlos con fuentes
+(basado en desarrollo inicial para Reiniciar).
+				</para></listitem>
+				<listitem><para>
+Incluye el módulo <emphasis>segjudicial</emphasis> para hacer seguimiento 
+judicial a un caso (inicialmente desarrollado para
+Humanidad Vigente).
+				</para></listitem>
+
+
+		</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+	</variablelist>
+
+		El historial de la versión 1.0 puede verse en el <ulink url="http://sivel.sf.net/1.0/">manual de esa versión</ulink>. 
 
 

@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Tipo_proceso.php,v 1.13.2.2 2011/10/22 12:55:08 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -49,7 +48,7 @@ class DataObjects_Tipo_proceso extends DataObjects_Basica
         'fechacreacion',
         'fechadeshabilitacion',
     );
-
+ 
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'
      *

@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2009 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: estcolectivas.php,v 1.16.2.6 2011/11/15 12:03:19 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
@@ -71,7 +70,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         $pSupra = var_post_escapa('id_supracategoria');
         $pSegun = var_post_escapa('segun');
         $pMuestra = var_post_escapa('muestra');
-
+        
         $pMunicipio = var_post_escapa('municipio');
         $pDepartamento = var_post_escapa('departamento');
         $pSinFiliacion = var_post_escapa('sinfiliacion');
@@ -288,11 +287,11 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         }
 // El método para departamento y municipio es machete porque cuando
 // no hay asigna santa-marta y así saldría e.g PUTUMAYO    SANTA MARTA
-        $q3 = "SELECT $cfSegun3 $tDep $tMun
-            TRIM(parametros_reporte_consolidado.rotulo),
-            SUM($cons2.personas_aprox)
-            FROM $tablaSegun departamento, municipio,
-            parametros_reporte_consolidado, $cons2
+        $q3 = "SELECT $cfSegun3 $tDep $tMun 
+            TRIM(parametros_reporte_consolidado.rotulo), 
+            SUM($cons2.personas_aprox) 
+            FROM $tablaSegun departamento, municipio, 
+            parametros_reporte_consolidado, $cons2 
             WHERE (($cons2.id_departamento IS NULL AND departamento.id = 47) OR
             departamento.id = $cons2.id_departamento)
             AND (($cons2.id_municipio IS NULL AND municipio.id = 1
@@ -361,7 +360,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             }
             echo "<th>Total</th>";
             echo "</tr>\n";
-
+            
             $row = array();
             foreach ($tfil as $f => $t1) {
                 echo "<tr>";
@@ -371,7 +370,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
                     echo "<td>";
                     if (isset($celda[$f][$c])) {
                         echo htmlentities($celda[$f][$c]); # . " " . $sfil;
-                        if ($ncol >= $colenc) {
+                        if ($ncol >= $colenc) { 
                             $scol[$c] += (int)$celda[$f][$c];
                             $sfil += (int)$celda[$f][$c];
                         }
@@ -381,7 +380,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
                     echo "</td>";
                     $ncol++;
                 }
-                echo "<td><b>$sfil</b></td>";
+                echo "<td><b>" . (int)$sfil . "</b></td>";
                 echo "</tr>\n";
             }
 
@@ -396,13 +395,13 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
                             echo "<b>Total</b>";
                         }
                     } else {
-                        echo "<b>" . $scol[$k] . "</b>";
+                        echo "<b>" . (int)$scol[$k] . "</b>";
                         $sfil += $scol[$k];
                     }
                     echo "</td>";
                     $ncol++;
                 }
-                echo "<td><b>" . $sfil . "</b></td>";
+                echo "<td><b>" . (int)$sfil . "</b></td>";
                 echo "</tr>";
             }
             echo "</table>";
@@ -563,7 +562,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
         );
         $sel->loadArray(
             array('' => '',
-            'id_p_responsable' => 'ACTOS '
+            'id_p_responsable' => 'ACTOS ' 
                 . strtoupper($GLOBALS['etiqueta']['p_responsable']),
             'meses' => 'MESES',
         )

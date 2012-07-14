@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2005 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: captura_caso.php,v 1.89.2.4 2011/10/18 16:05:02 vtamara Exp $
  * @link      http://sivel.sf.net
  * @link      http://www.21st.de/downloads/rapidprototyping.pdf
  */
@@ -76,7 +75,9 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
         $css->setStyle('.maintable', 'width', '100%');
         $css->setStyle('.maintable', 'border-width', '0');
         $css->setStyle('.maintable', 'border-color', '#D0D0D0');
-        $css->setStyle('.maintable', 'background-color', '#EEE');
+        $colfon = isset($GLOBALS['ficha_color_fondo']) ? 
+            $GLOBALS['ficha_color_fondo'] : '#EEE';
+        $css->setStyle('.maintable', 'background-color', $colfon);
         $css->setStyle('th', 'text-align', 'center');
         $css->setStyle('th', 'color', '#FFC');
         $css->setStyle('th', 'background-color', '#AAA');
@@ -88,7 +89,7 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
         $enc = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang = "es">
 <head>
-<meta http-equiv = "Content-Type" content = "text/html; charset=ISO-8859-1">
+<meta http-equiv = "Content-Type" content = "text/html; charset=UTF8">
 <title>Ficha caso</title>
 <style type = "text/css">
 {%style%}
@@ -114,12 +115,9 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
                 echo_enc("Falta encJavascript en $n, $c");
             }
         }
-        $js .= '
-            function envia(que)
-            {
-                document.forms[0]._qf_default.value = que;
-                document.forms[0].submit();
-            }';
+        $js .= 'function envia(que) { ' .
+            ' document.forms[0]._qf_default.value = que;' .
+            ' document.forms[0].submit(); }';
         $enc = str_replace('{%javascript%}', $js, $enc);
 
         $renderer =& $pag->defaultRenderer();

@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2010 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: autentica.php,v 1.6.2.2 2011/10/11 16:33:37 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
@@ -30,7 +29,7 @@ require_once "misc.php";
 require_once "misc_caso.php";
 require_once "DB/DataObject/FormBuilder.php";
 
-die("x");
+//die("x");
 $aut_usuario = "";
 autenticaUsuario($dsn, $accno, $aut_usuario, 11);
 

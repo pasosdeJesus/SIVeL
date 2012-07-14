@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Caso_contexto.php,v 1.13.2.1 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -34,8 +33,6 @@ require_once 'DB_DataObject_SIVeL.php';
  */
 class DataObjects_Caso_contexto extends DB_DataObject_SIVeL
 {
-    // START_AUTOCODE
-    /* the code below is auto generated do not remove the above tag */
 
     var $__table = 'caso_contexto';                   // table name
     var $id_caso;                         // int4(4)  multiple_key
@@ -43,8 +40,6 @@ class DataObjects_Caso_contexto extends DB_DataObject_SIVeL
 
     var $nom_tabla = 'Contexto';
 
-    /* the code above is auto generated do not remove the tag below */
-    // END_AUTOCODE
 
     var $fb_preDefOrder = array('id_contexto');
     var $fb_fieldsToRender = array('id_contexto');

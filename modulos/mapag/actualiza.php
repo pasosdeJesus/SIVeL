@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2011 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   $$
  * @link      http://sivel.sf.net
  */
 
@@ -31,7 +30,7 @@ $act = objeto_tabla('Actualizacion_base');
 $idac = 'mg-1';
 if (!aplicado($idac)) {
 
-    hace_consulta($db, "INSERT INTO opcion (id_opcion, descripcion, id_mama, nomid) VALUES ('491', 'Mapa en Googlemap', '40', 'opcion?num=200')", false);
+    hace_consulta($db, "INSERT INTO opcion (id_opcion, descripcion, id_mama, nomid) VALUES ('491', 'Mapa en Googlemap', '40', 'opcion?num=300')", false);
 
     aplicaact(
         $act, $idac, 'Opción del menú para ingresar al mapa'

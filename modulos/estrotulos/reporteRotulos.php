@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2006 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: reporteRotulos.php,v 1.14.2.3 2011/10/18 16:05:05 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -51,8 +50,8 @@ function rotulos_orden_cons(&$q, $pOrdenar)
     $nq = "";
     if ($pOrdenar == 'rotulo') {
         $excvi = $excvc = '';
-        if (isset($GLOBALS['estrotulos_excluirsinfiliacion'])
-            && $GLOBALS['estrotulos_excluirsinfiliacion']) {
+        if (isset($GLOBALS['estrotulos_excluirsinfiliacion']) &&
+            $GLOBALS['estrotulos_excluirsinfiliacion']) {
             $excvi = ' AND acto.id_persona IN ' .
             '(SELECT id_persona FROM victima WHERE id_filiacion<>\'' .
             DataObjects_Filiacion::idSinInfo() . '\') ';

@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Victima.php,v 1.22.2.2 2011/10/22 12:59:54 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -249,7 +248,6 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
             $ar['fecha_nacimiento'] = $dpersona->anionac . "-" .
                 $m . "-" . $d ;
         }
-/*        $ar['sexo'] = $dpersona->sexo; */
 
         return $ar;
     }

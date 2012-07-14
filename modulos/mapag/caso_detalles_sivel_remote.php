@@ -8,12 +8,13 @@
  * @category  SIVeL
  * @package   SIVeL
  * @author    Luca Urech <lucaurech@yahoo.de>
- * @copyright 2011 Dominio p�blico. Sin garant�as.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio P�blico. Sin garant�as.
- * @version   $$
+ * @copyright 2011 Dominio público. Sin garantías.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * Acceso: CONSULTA PÚBLICA
  * @link      http://sivel.sf.net
  */
 
+require_once "../../misc.php";
 
 // $host = "https://172.16.0.91"; 
 $pu = parse_url($_SERVER['HTTP_REFERER']);
@@ -40,9 +41,9 @@ $classificacion[13] = array('rotulo' => 'TORTURA', 'tipo_violencia' => 'VP', 'cl
 $classificacion[14] = array('rotulo' => 'HERIDOS', 'tipo_violencia' => 'VP', 'clasificacion' => 'INTEGRIDAD');
 $classificacion[15] = array('rotulo' => 'ATENTADOS', 'tipo_violencia' => 'VP', 'clasificacion' => 'INTEGRIDAD');
 $classificacion[16] = array('rotulo' => 'AMENAZAS', 'tipo_violencia' => 'VP', 'clasificacion' => 'INTEGRIDAD');
-$classificacion[17] = array('rotulo' => 'DESAPARICIÓN', 'tipo_violencia' => 'DH', 'clasificacion' => 'LIBERTAD');
+$classificacion[17] = array('rotulo' => 'DESAPARICIÃN', 'tipo_violencia' => 'DH', 'clasificacion' => 'LIBERTAD');
 $classificacion[18] = array('rotulo' => 'DETENCION ARBITRARIA', 'tipo_violencia' => 'DH', 'clasificacion' => 'LIBERTAD');
-$classificacion[19] = array('rotulo' => 'DEPORTACIÓN', 'tipo_violencia' => 'DH', 'clasificacion' => 'LIBERTAD');
+$classificacion[19] = array('rotulo' => 'DEPORTACIÃN', 'tipo_violencia' => 'DH', 'clasificacion' => 'LIBERTAD');
 $classificacion[20] = array('rotulo' => 'RECLUTAMIENTO DE MENORES', 'tipo_violencia' => 'DIH', 'clasificacion' => 'LIBERTAD');
 $classificacion[21] = array('rotulo' => 'TOMA DE REHENES', 'tipo_violencia' => 'DIH', 'clasificacion' => 'LIBERTAD');
 $classificacion[22] = array('rotulo' => 'ESCUDO', 'tipo_violencia' => 'DIH', 'clasificacion' => 'LIBERTAD');
@@ -57,49 +58,49 @@ $dom = new DOMDocument("1.0");
 
 if (!empty($id_caso) && $id_caso != 0) {
 
-    // carga datos del archivo XML de Sivel
-    $xmlSivel = simplexml_load_string(file_get_contents($requestUrl)) or die("url '" . $requestUrl . "' not loading");
-    
-    // todo bien, crear documento xml
-    $node = $dom->createElement("casos");
-    $parnode = $dom->appendChild($node);
-    $node2 = $dom->createElement("caso");
-    $node2->setAttribute("id", $id_caso);
-    $subnode = $parnode->appendChild($node2);
-    
-    $output['titulo'] = $dom->createElement('titulo', $xmlSivel->relato->titulo);
-    $output['hechos'] = $dom->createElement('hechos', $xmlSivel->relato->hechos);
-    $output['fecha'] = $dom->createElement('fecha', $xmlSivel->relato->fecha);
-    $output['hora'] = $dom->createElement('hora', $xmlSivel->relato->hora);
-    $output['departamento'] = $dom->createElement('departamento', $xmlSivel->relato->departamento);
-    $output['municipio'] = $dom->createElement('municipio', $xmlSivel->relato->municipio);
-    $output['centro_poblado'] = $dom->createElement('centro_poblado', $xmlSivel->relato->centro_poblado);
-    
-    foreach ($output as $value) {
-        $subnode->appendChild($value);
-    }
-    
-    $prresp = $dom->createElement("presuntos_responsables");
-    $prrespnode = $subnode->appendChild($prresp);
-    foreach ($xmlSivel->relato->grupo as $grupo) {
-        if (!empty($grupo->nombre_grupo)) {
-        $outputGrupo = $dom->createElement('presunto_responsable', $grupo->nombre_grupo);
-        $outputGrupo->setAttribute("id", utf8_encode($grupo->id_grupo));
-        $prrespnode->appendChild($outputGrupo);
-        }
-    }
-    
-    $victimas = $dom->createElement("victimas");
-    $victimasnode = $subnode->appendChild($victimas);
-    foreach ($xmlSivel->relato->persona as $persona) {
-        $id_persona = (int) $persona->id_persona;
-        $outputVictima = $dom->createElement('persona', $persona->nombre);
-        
-        $outputVictima->setAttribute("id", utf8_encode($persona->id_persona));
-        $outputVictima->setAttribute("sexo", utf8_encode($persona->sexo));
-        $victimasnode->appendChild($outputVictima);
-    }
-            
+	// carga datos del archivo XML de Sivel
+	$xmlSivel = simplexml_load_string(file_get_contents($requestUrl)) or die("url '" . $requestUrl . "' not loading");
+	
+	// todo bien, crear documento xml
+	$node = $dom->createElement("casos");
+	$parnode = $dom->appendChild($node);
+	$node2 = $dom->createElement("caso");
+	$node2->setAttribute("id", $id_caso);
+	$subnode = $parnode->appendChild($node2);
+	
+	$output['titulo'] = $dom->createElement('titulo', $xmlSivel->relato->titulo);
+	$output['hechos'] = $dom->createElement('hechos', $xmlSivel->relato->hechos);
+	$output['fecha'] = $dom->createElement('fecha', $xmlSivel->relato->fecha);
+	$output['hora'] = $dom->createElement('hora', $xmlSivel->relato->hora);
+	$output['departamento'] = $dom->createElement('departamento', $xmlSivel->relato->departamento);
+	$output['municipio'] = $dom->createElement('municipio', $xmlSivel->relato->municipio);
+	$output['centro_poblado'] = $dom->createElement('centro_poblado', $xmlSivel->relato->centro_poblado);
+	
+	foreach ($output as $value) {
+		$subnode->appendChild($value);
+	}
+	
+	$prresp = $dom->createElement("presuntos_responsables");
+	$prrespnode = $subnode->appendChild($prresp);
+	foreach ($xmlSivel->relato->grupo as $grupo) {
+		if (!empty($grupo->nombre_grupo)) {
+		$outputGrupo = $dom->createElement('presunto_responsable', $grupo->nombre_grupo);
+		$outputGrupo->setAttribute("id", utf8_encode($grupo->id_grupo));
+		$prrespnode->appendChild($outputGrupo);
+		}
+	}
+	
+	$victimas = $dom->createElement("victimas");
+	$victimasnode = $subnode->appendChild($victimas);
+	foreach ($xmlSivel->relato->persona as $persona) {
+		$id_persona = (int) $persona->id_persona;
+		$outputVictima = $dom->createElement('persona', $persona->nombre);
+		
+		$outputVictima->setAttribute("id", utf8_encode($persona->id_persona));
+		$outputVictima->setAttribute("sexo", utf8_encode($persona->sexo));
+		$victimasnode->appendChild($outputVictima);
+	}
+			
 }
 
 echo $dom->saveXML();

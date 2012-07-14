@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2007 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Etiquetacaso.php,v 1.14.2.2 2011/09/14 14:56:19 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -42,7 +41,7 @@ class AgregarEtiqueta extends HTML_QuickForm_Action
         if ($page->procesa($page->_submitValues, true)) {
             $page->_submitValues = array();
             $page->_defaultValues = array();
-            $page->nullVar();
+     //       $page->nullVar();
         }
         $page->handle('display');
     }
@@ -102,7 +101,8 @@ class DataObjects_Etiquetacaso extends DB_DataObject_SIVeL
 
     var $fb_fieldLabels = array(
         'fecha' => 'Fecha',
-        'observaciones' => 'Observaciones'
+        'observaciones' => 'Observaciones',
+        'id_funcionario' => 'Funcionario',
     );
 
     /**
@@ -130,17 +130,17 @@ class DataObjects_Etiquetacaso extends DB_DataObject_SIVeL
         while ($p->fetch() && $p->id_caso == $_SESSION['basicos_id'] ) {
             $dp = $p->getLink('id_etiqueta');
             $fn = $p->getLink('id_funcionario');
-            $n = 'fobs_' . (int)$p->id_caso . "_"
-                . (int)$p->id_etiqueta . "_"
+            $n = 'fobs_' . (int)$p->id_caso . "_" 
+                . (int)$p->id_etiqueta . "_" 
                 . (int)$p->id_funcionario . "_" . $p->fecha;
             $t .= '<tr><td>' . $p->fecha . '</td><td>'
                 . htmlentities($dp->nombre) . '</td>'
                 . '<td><textarea name="' . $n . '" cols="20" rows="3">'
-                . htmlentities($p->observaciones) . '</textarea></td><td>'
-                . $fn->nombre . '</td><td><a href="'
+                . htmlentities($p->observaciones) . '</textarea></td><td>' 
+                . $fn->nombre . '</td><td><a href="' 
                 . htmlspecialchars($_SERVER['PHP_SELF']) . '?eliminaest='
                 . (int)$p->id_caso . ":" . (int)$p->id_etiqueta . ":"
-                . (int)$p->id_funcionario. ":" . $p->fecha
+                . (int)$p->id_funcionario. ":" . $p->fecha 
                 . '">Eliminar</a></td>';
         }
         $t .= '</table>';

@@ -1,5 +1,5 @@
 <?php
-//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Importa relato
  *
@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: importaRelato.php,v 1.36.2.4 2011/10/21 03:58:22 vtamara Exp $
  * @link      http://sivel.sf.net
  */
 
@@ -107,16 +106,20 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         $pArchivo = $e['name'];
 
         if ($e['size'] <= 0) {
-            die("Tamaño de archivo debe ser mayor que 0");
+            $u = ini_get('upload_max_filesize');
+            $p = ini_get('post_max_size');
+            die(
+                "No pudo subirse archivo, revisar que el tamaño sea "
+                . "mayor que cero y menor que $u y que $p"
+            );
         }
         move_uploaded_file(
             $e['tmp_name'], $GLOBALS['dir_anexos'] . "/" .
             $pArchivo
         );
 
-        list($aper, $maxidper, $fechacaso, $ubicaso, $catcaso, $obscaso)
-            = extrae_per($db);
-        $agr = extrae_grupos($db, $fechacaso, $ubicaso, $catcaso, $obscaso);
+        list($aper, $maxidper) = extrae_per($db);
+        $agr = extrae_grupos($db);
 
         $cont = "";
         if (substr($pArchivo, strlen($pArchivo) - 3, 3) == '.gz') {
@@ -135,7 +138,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         $relatos = simplexml_load_string($cont);
         if (!$relatos) {
             $e = libxml_get_errors();
-            var_dump($e);
+            //var_dump($e);
             die("No pudo cargarse '" . $pArchivo . "'");
         }
 
@@ -147,7 +150,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
 
         foreach ($relatos->relato as $r) {
             $obs = "";
-            $id_presp = array();
+            $id_presp = array();  // Presuntos responsables identificados
             $id_pers = array();
             $id_vcol = array();
             $datgrupo = array();
@@ -161,10 +164,10 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             );
             $dcaso->fecha = conv_fecha($r->fecha, $obs);
             if (isset($r->duracion) && $r->duracion != "") {
-                $dcaso->duracion = $r->duracion;
+                $dcaso->duracion = utf8_decode(trim($r->duracion));
             }
             if (isset($r->hora) && $r->hora!= "") {
-                $dcaso->hora = $r->hora;
+                $dcaso->hora = utf8_decode(trim($r->hora));
             }
             $pf = explode('-', $dcaso->fecha);
             $aniocaso = (int)$pf[0];
@@ -211,6 +214,26 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             PagUbicacion::importaRelato($db, $r, $idcaso, $obs);
             $yaesta['PagUbicacion'] = true;
 
+            $anexof = objeto_tabla('anexo');
+            $anexof->id_caso = $idcaso;
+            $anexof->fecha = date('Y-m-d');
+            $anexof->archivo = '';
+            $anexof->descripcion = "Fuente extraida automaticamente de $narc";
+            $anexof->insert();
+            //var_dump($anexof); die("x");
+
+            $rx = $GLOBALS['enc_relato']
+                . "<relatos>\n"
+                . utf8_decode($r->asXml())
+                . "\n</relatos>\n" ;
+            $nf = 0;
+            $ax = $idcaso . "_" . $anexof->id . "_relatoimportado.xrlt";
+            $cax = $GLOBALS['dir_anexos'] . "/" . $ax;
+            file_put_contents($cax, $rx);
+
+            $anexof->archivo = $ax;
+            $anexof->update();
+
             PagFuentesFrecuentes::importaRelato(
                 $db, $r, $idcaso,
                 $obs
@@ -219,23 +242,31 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $nomf = utf8_decode($r->organizacion_responsable);
             $fecha = date('Y-m-d');
             $orgfuente = PagFuentesFrecuentes::busca_inserta(
-                $db, $idcaso, $nomf, $fecha,
+                $db, $idcaso, $nomf, $fecha, 
                 utf8_decode($r->id_relato),
                 'Organización responsable incluida automáticamente',
                 '', $obs
             );
+            if ($orgfuente > 0) {
+                $anexof->id_prensa = $orgfuente;
+                $anexof->fecha_prensa = $fecha;
+                $anexof->update();
+            }
+
             $yaesta['PagFuentesFrecuentes'] = true;
             $yaesta['modulos/anexos/PagFrecuenteAnexo'] = true;
 
 
             PagOtrasFuentes::importaRelato($db, $r, $idcaso, $obs);
-            if (!$orgfuente) {
+            if ($orgfuente <= 0) {
                 $orgfuente = PagOtrasFuentes::busca_inserta(
-                    $db, $idcaso, $nomf, $fecha,
+                    $db, $idcaso, $nomf, $fecha, 
                     utf8_decode($r->id_relato),
                     'Organización responsable incluida automáticamente',
                     'Indirecta', $obs
                 );
+                $anexof->id_fuente_directa = $orgfuente;
+                $anexof->update();
             }
             $yaesta['PagOtrasFuentes'] = true;
             $yaesta['modulos/anexos/PagOtraAnexo'] = true;
@@ -260,9 +291,13 @@ class AccionImportaRelato extends HTML_QuickForm_Action
 
             // Victimas
             $id_pers = array();
+            $aedad = array();
             foreach ($r->persona as $persona) {
+                //echo "OJO Persona <br>";
                 if (!empty($persona->nombre)) {
                     $anionac = null;
+                    $mesnac = null;
+                    $dianac = null;
                     $edad = null;
                     if (isset($persona->fecha_nacimiento)) {
                         $fn = conv_fecha(
@@ -283,15 +318,16 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             $anionac = $aniocaso - lnat_a_numero($edad);
                         }
                     }
-                    $sexonac = 'S';
+                    $sexo = 'S';
                     if (isset($persona->sexo)
                         && ($persona->sexo == 'M' || $persona->sexo == 'F')
                     ) {
-                        $sexonac = $persona->sexo;
+                        $sexo = $persona->sexo;
                     }
-                    $ndep = dato_en_obs($persona, 'id_departamento');
-                    $nmun = dato_en_obs($persona, 'id_municipio');
-                    $ncla = dato_en_obs($persona, 'id_clase');
+                    $ndep = dato_en_obs($persona, 'departamento');
+                    $nmun = dato_en_obs($persona, 'municipio');
+                    $ncla = dato_en_obs($persona, 'clase');
+                    //echo "OJO ndep=$ndep, nmun=$nmun, ncla=$ncla<br>";
                     $idd = $idm = $idc = null;
                     if ($ndep != null || $nmun != null
                         || $ncla != null
@@ -300,6 +336,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             $db,
                             $ndep, $nmun, $ncla, $obs
                         );
+                        //echo "OJO idd=$idd, idm=$idm, idc=$idc<br>";
                         if ($idd == 1000) {
                             $idd = null;
                         }
@@ -319,10 +356,14 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         $db, $aper, $obs,
                         utf8_decode($persona->nombre),
                         utf8_decode($persona->apellido), $anionac,
-                        $sexonac, $idd, $idm, $idc, $tipo_documento,
+                        $mesnac, $dianac, $sexo, 
+                        $idd, $idm, $idc, $tipo_documento,
                         $numero_documento
                     );
                     $id_pers[(string)$persona->id_persona] = $cper;
+                    if ($edad != null) {
+                        $aedad[$cper] = $edad;
+                    }
                 }
             }
             foreach ($r->victima as $victima) {
@@ -343,12 +384,28 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         }
                         $dvictima->id_persona
                             = $id_pers[(string)$victima->id_persona];
+                        $idredad = -1;
+                        $edad = isset($aedad[$dvictima->id_persona]) ?
+                            $aedad[$dvictima->id_persona] : null;
                         if ($edad != null) {
-                            $dvictima->id_rango_edad = rango_de_edad($edad);
+                            //echo "OJO id_persona=" . $dvictima->id_persona
+                            //    . " edad=$edad<br>\n";
+                            $idredad = rango_de_edad($edad);
                         } else {
-                            $dvictima->id_rango_edad
-                                = DataObjects_Rango_edad::idSinInfo();
+                            $redad = dato_en_obs($victima, 'rango_edad');
+                            //echo "OJO redad=$redad<br>\n";
+                            if ($redad != null) {
+                                $idredad = (int)conv_basica(
+                                    $db, 'rango_edad',
+                                    $redad, $obs, false, 'rango'
+                                );
+                            }
                         }
+                        //echo "OJO 2 idredad=$idredad<br>\n";
+                        if ($idredad == -1) {
+                            $idredad = DataObjects_Rango_edad::idSinInfo();
+                        }
+                        $dvictima->id_rango_edad = $idredad;
                         foreach (array('ocupacion' => 'profesion',
                             'iglesia' => 'filiacion',
                             'sector_condicion' => 'sector_social',
@@ -359,7 +416,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             $ncs = "id_" . $cs;
                             //echo "OJO ncs=$ncs<br>";
                             if (isset($victima->$cr)) {
-                                $dvictima->$ncs = (int)convBasica(
+                                $dvictima->$ncs = (int)conv_basica(
                                     $db,
                                     "$cs",
                                     utf8_decode($victima->$cr),
@@ -385,21 +442,20 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         'organizacion_armada' => 'presuntos_responsables')
                         as $cs => $cs2
                     ) {
-                            $ncs = "id_" . $cs;
-                            //echo "OJO cs=$cs, ncs=$ncs<br>";
+                        $ncs = "id_" . $cs;
+                        //echo "OJO cs=$cs, ncs=$ncs<br>";
                         $v = dato_en_obs($victima, $cs); // ya hace utf8_decode
                         if ($v != null) {
-                            $dvictima->$ncs = (int)convBasica(
+                            $dvictima->$ncs = (int)conv_basica(
                                 $db, $cs2,
                                 $v, $obs
                             );
                         }
-
                         //echo "OJO dvictima->ncs=" .  $dvictima->$ncs . "<br>";
                     }
 
                     if (!$dvictima->insert()) {
-                        var_dump($dvictima);
+                        //var_dump($dvictima);
                         repObs(
                             "No pudo insertar víctima '"
                             . $dvictima->id_persona . " "
@@ -408,79 +464,54 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             . "'", $obs
                         );
                     }
+                    foreach (array('antecedentes' => 'antecedente',  ) 
+                        as $cs => $cs2
+                    ) {
+                        //echo "OJO cs=$cs, cs2=$cs2<br>";
+                        $v = dato_en_obs($victima, $cs); // ya hace utf8_decode
+                        //echo "OJO v=$v<br>";
+                        if ($v != null) {
+                            $la = explode(';', $v);
+                            foreach ($la as $ant) {
+                                //echo "OJO ant=$ant<br>";
+                                $idant = (int)conv_basica(
+                                    $db, $cs2,
+                                    $ant, $obs
+                                );
+                                //echo "OJO idant=$idant<br>";
+                                if ($idant > 0) {
+                                    $dantv= objeto_tabla('antecedente_victima');
+                                    $dantv->id_caso = (int)$idcaso;
+                                    $dantv->id_persona = (int)$dvictima->id_persona;
+                                    $dantv->id_antecedente = $idant;
+                                    $dantv->insert();
+                                    //var_dump($dantv);
+                                }
+                            }
+                        }
+                    }
+
+
                 }
             }
             $yaesta['PagVictimaIndividual'] = true;
 
             // Actos
             foreach ($r->acto as $acto) {
+                //echo "OJO acto->agresion_particular=" 
+                //    . $acto->agresion_particular . "<br>";
                 if (!empty($acto->agresion_particular)) {
                     $idp = (int)$acto->id_presunto_grupo_responsable;
                     $pr = null;
+                    // echo "OJO idp=$idp<br>";
                     if (isset($id_presp[$idp])) {
                         // Ya registrado presunto responsable
                         $pr = $id_presp[$idp];
                     } else if (isset($datgrupo[$idp])) {
                         $g = $datgrupo[$idp];
-                        $nomg = utf8_decode($g->nombre_grupo);
-                        $pr = convBasica(
-                            $db, 'presuntos_responsables',
-                            $nomg, $obs
+                        $pr = conv_presp(
+                            $db, $idcaso, $idp, $g, $id_presp, $obs
                         );
-                        $id_presp[$idp] = $pr;
-                        $dpresp = objeto_tabla('presuntos_responsables_caso');
-                        $dpresp->id_caso = $idcaso;
-                        $dpresp->id_p_responsable = $pr;
-                        $dpresp->tipo = 0;
-                        $dpresp->id = 1;
-                        foreach (array('bloque', 'frente', 'brigada',
-                            'batallon', 'division', 'otro'
-                        ) as $c
-                        ) {
-                            $dpresp->$c = dato_en_obs($g, $c);
-                        }
-                        $ids = DataObjects_Presuntos_responsables::idSinInfo();
-                        if ($pr == $ids
-                            && $nomg != 'SIN INFORMACIÓN'
-                            && $nomg != 'SIN INFORMACION'
-                        ) {
-                            $dpresp->otro = $nomg;
-                        }
-                        if (!$dpresp->insert()) {
-                            repObs(
-                                "No pudo insertar p. resp '" .
-                                $dpresp->id_p_responsable . "'",
-                                $obs
-                            );
-                        }
-                        foreach ($g->agresion_sin_vicd as $ag) {
-                            if (!empty($ag)) {
-                                $idc = conv_categoria(
-                                    $db, $obs,
-                                    utf8_decode((string)$ag), $pr
-                                );
-                                $ocp = objeto_tabla('categoria_p_responsable_caso');
-                                $ocp->id_caso = $idcaso;
-                                $ocp->id_p_responsable = $pr;
-                                $ocp->id = $dpresp->id;
-                                $ocp->id_categoria = $idc;
-                                $ocat = objeto_tabla('Categoria');
-                                $ocat->id = (int)$idc;
-                                $ocat->find(1); $ocat->fetch();
-                                if (PEAR::isError($ocat)) {
-                                    repObs(
-                                        "No se reconoció categoria $ag",
-                                        $obs
-                                    );
-                                } else {
-                                    $ocp->id_tipo_violencia
-                                        = $ocat->id_tipo_violencia;
-                                    $ocp->id_supracategoria
-                                        = $ocat->id_supracategoria;
-                                    $ocp->insert();
-                                }
-                            }
-                        }
                     } else {
                         repObs(
                             "No hay datos de p. resp. '" .
@@ -495,7 +526,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     if ($id_categoria == 0) {
                         break;
                     }
-                    //echo "OJO "; print_r($acto);
+                    // echo "OJO "; print_r($acto);
                     if (!empty($acto->id_victima_individual)) {
                         $dacto= objeto_tabla('acto');
                         $dacto->id_caso = $idcaso;
@@ -511,6 +542,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             $idvi = (string)$acto->id_victima_individual;
                             $dacto->id_persona = $id_pers[$idvi];
                             $dacto->insert();
+                            //print_r($dacto);
                         }
                     } else if (!empty($acto->id_grupo_victima)) {
                         $ia = (string)$acto->id_grupo_victima;
@@ -553,11 +585,14 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 //echo "OJO revisando idg=$idg\n";
                 if (!isset($id_presp[$idg]) && !isset($id_vcol[$idg])) {
                     //echo "OJO convirtiendo a victima colectiva idg=$idg\n";
-                    $cg = conv_victima_col(
-                        $db, $agr, $idcaso, $g,
-                        $obs
-                    );
-                    $id_vcol[$idg] = $cg;
+                    $idp = conv_presp($db, $idcaso, $idg, $g, $id_presp, $obs);
+                    if ($idp == -1) { // Asumimos que es víctima colectiva
+                        $cg = conv_victima_col(
+                            $db, $agr, $idcaso, $g,
+                            $obs
+                        );
+                        $id_vcol[$idg] = $cg;
+                    }
                 }
             }
 
@@ -587,11 +622,11 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             echo_esc("Observaciones: $obs");
 
             $ec = objeto_tabla('etiquetacaso');
-            $ec->fecha = date('Y-M-d');
+            $ec->fecha = date('Y-m-d');
             $ec->id_caso = $idcaso;
             $ec->id_etiqueta = $idetiqueta;
             $ec->id_funcionario = $_SESSION['id_funcionario'];
-            $ec->fecha = date('Y-M-d');
+            $ec->fecha = date('Y-m-d');
             $ec->observaciones = "";
             if (isset($r->id_relato)) {
                 $ec->observaciones = utf8_decode(trim($r->id_relato));
@@ -600,13 +635,15 @@ class AccionImportaRelato extends HTML_QuickForm_Action
 
             if (trim($obs) != '') {
                 $ec = objeto_tabla('etiquetacaso');
-                $ec->fecha = date('Y-M-d');
+                $ec->fecha = date('Y-m-d');
                 $ec->id_caso = $idcaso;
                 $ec->id_etiqueta = $iderrorimportacion;
                 $ec->id_funcionario = $_SESSION['id_funcionario'];
                 $ec->observaciones = $obs;
                 $ec->insert();
             }
+
+            
         }
 
     }

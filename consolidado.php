@@ -1,5 +1,5 @@
 <?php
-//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
+// vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
 * Consolidado de víctimas.
  *
@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: consolidado.php,v 1.57.2.6 2011/12/12 10:43:57 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
@@ -32,6 +31,16 @@ require_once 'PagTipoViolencia.php';
 require_once 'PagUbicacion.php';
 require_once 'ResConsulta.php';
 require_once 'misc.php';
+
+foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
+    list($n, $c, $o) = $tab;
+    if (($d = strrpos($c, "/"))>0) {
+        $c = substr($c, $d+1);
+    }
+    // @codingStandardsIgnoreStart
+    require_once "$c.php";
+    // @codingStandardsIgnoreEnd
+}
 
 
 /**
@@ -78,7 +87,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 $rot = '';
             }
             if ($n<($ncol+1) || ($pResto && $n==($ncol+1))) {
-                $html_l = $sep . "<b>" . htmlentities($l)
+                $html_l = $sep . "<b>" . htmlentities($l) 
                     . " " . htmlentities($rot) . ":</b>";
                 echo $html_l;
                 foreach ($lc as $cc) {
@@ -119,7 +128,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             $d->get($row[0]);
             $tpresp[$row[0]] = $l;
             if ($muestra) {
-                echo "<b>" . (int)$l . "</b>: "
+                echo "<b>" . (int)$l . "</b>: " 
                     . htmlentities($d->nombre) . ";";
             }
             $l++;
@@ -161,7 +170,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         $pIdDepartamento = (int)var_post_escapa('id_departamento', $db);
 
         $campos = array('caso_id' => 'Cód.');
-        $tablas = "victima, caso, acto, municipio, departamento";
+        $tablas = "persona, victima, caso, acto ";
         $where = "";
 
         consulta_and_sinap($where, "victima.id_caso", "caso.id");
@@ -175,6 +184,33 @@ class AccionConsolidado extends HTML_QuickForm_Action
             $db, $where, "caso.fecha",
             $GLOBALS['consulta_web_fecha_max'], "<="
         );
+
+        foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
+            list($ntab, $ctab, $otab) = $tab;
+            if (($possl = strrpos($ctab, "/"))>0) {
+                $ctab = substr($ctab, $possl+1);
+            }
+            if (is_callable(array($ctab, 'consolidadoCreaConsulta'))) {
+                call_user_func_array(
+                    array($ctab, 'consolidadoCreaConsulta'),
+                    array($db, &$where, &$tablas)
+                );
+            } else {
+                echo_esc("Falta consolidadoCreaConsulta en $ntab, $ctab");
+            }
+        }
+        if (isset($GLOBALS['gancho_co_creaconsulta'])) {
+            foreach ($GLOBALS['gancho_co_creaconsulta'] as $k => $f) {
+                if (is_callable($f)) {
+                    call_user_func_array(
+                        $f,
+                        array($db, &$where, &$tablas)
+                    );
+                } else {
+                    echo_esc("Falta $f de gancho_co_creaconsulta[$k]");
+                }
+            }
+        }
 
         $tgeo = "";
         if ($pIdClase != '') {
@@ -199,6 +235,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 $where, "ubicacion.id_departamento", $pIdDepartamento
             );
         }
+        $tablas = $tgeo . $tablas;
+        
         $q = "SELECT MAX(col_rep_consolidado) FROM categoria;";
         $ncol = $db->getOne($q);
 
@@ -255,7 +293,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         $q = " SELECT caso.id, persona.id, " .
             " persona.nombres || ' ' || persona.apellidos, caso.fecha, " .
             "acto.id_categoria " .
-            " FROM $tgeo persona, victima, caso, acto " .
+            " FROM $tablas " .
             " WHERE persona.id=victima.id_persona " .
             " AND $where " ;
         $q = "(" . $q . ") ORDER BY 3";
@@ -333,14 +371,14 @@ class AccionConsolidado extends HTML_QuickForm_Action
             echo "<pre>";
             echo '\\textbf{Fecha} & \\textbf{Ubicacion} & \\textbf{Víctimas} ';
         }
-        foreach ($cat as $idcat => $cp) {
-            if ($pResto || $idcat != chr($ncol+65)) {
+        foreach ($cat as $html_idcat => $cp) {
+            if ($pResto || $html_idcat != chr($ncol+65)) {
                 if ($pMuestra == "tabla") {
-                    echo "<th>". $idcat . "</th>";
+                    echo "<th>". $html_idcat . "</th>";
                 } elseif ($pMuestra == 'csv') {
-                    echo ", \"" . $idcat . "\"";
+                    echo ", \"" . $html_idcat . "\"";
                 } elseif ($pMuestra == 'latex') {
-                    echo "& \\textbf{" . $idcat . "} ";
+                    echo "& \\textbf{" . $html_idcat . "} ";
                 }
             }
             $suma[$idcat]=0;
@@ -386,10 +424,10 @@ class AccionConsolidado extends HTML_QuickForm_Action
             if ($pMuestra == "tabla") {
                 echo "<tr>";
                 if ($depuraConsolidado) {
-                    echo "<td>". (int)$idcaso . "</td><td>"
+                    echo "<td>". (int)$idcaso . "</td><td>" 
                         . (int)$idvic . "</td>";
                 }
-                echo "<td>" . htmlentities($fecha) . "</td><td>" .
+                echo "<td>" . htmlentities($fecha) . "</td><td>" . 
                     htmlentities($ubi) . "</td><td>" .
                     trim(htmlentities($nom)) . "</td>";
             } elseif ($pMuestra == 'csv') {
@@ -438,7 +476,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             if ($acto->find()==0) {
                 $acto = null;
                 echo_esc(
-                    "Víctima sin presunto responsable '$idvic', "
+                    "Víctima sin presunto responsable '$idvic', " 
                     . "'$nom' en caso '$idcaso' -- estadística incompleta!!!"
                 );
             } else {
@@ -541,7 +579,7 @@ class PagConsolidado extends HTML_QuickForm_Page
         $e =& $this->addElement('header', null, 'Reporte consolidado');
 
         list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
-            $db, $this, 'victimaIndividual',
+            $db, $this, 'victimaIndividual', 
             $this->bpersona->_do->id_departamento,
             $this->bpersona->_do->id_municipio
         );
@@ -566,6 +604,21 @@ class PagConsolidado extends HTML_QuickForm_Page
             'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
             )
         );
+
+
+        foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
+            list($n, $c, $o) = $tab;
+            if (($d = strrpos($c, "/"))>0) {
+                $c = substr($c, $d+1);
+            }
+            if (is_callable(array($c, 'consolidadoFiltro'))) {
+                call_user_func_array(
+                    array($c, 'consolidadoFiltro'),
+                    array(&$db, &$this)
+                );
+            }
+        }
+
         if (isset($_SESSION['id_funcionario'])) {
             $aut_usuario = "";
             include $_SESSION['dirsitio'] . "/conf.php";

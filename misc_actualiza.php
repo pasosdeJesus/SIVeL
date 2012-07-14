@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2006 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: misc_actualiza.php,v 1.23.2.4 2011/10/22 14:57:56 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -263,7 +262,9 @@ function aplicaact(&$act, $idac, $desc)
     $act->descripcion = $desc;
     $act->insert();
 
-    echo_esc($act->getMessage());
+    if (is_callable(array($act, 'getMessage'))) {
+        echo_esc($act->getMessage());
+    }
     echo_esc("  Aplicada actualización $idac ($desc)");
 }
 
@@ -395,7 +396,7 @@ function consulta_archivo(&$db, $na, $derr = false, $merr = false,
             }
             if (substr(trim($buffer), 0, 2) != '--' && trim($buffer) != '') {
                 if ($mcons) {
-                    echo (int)$nl . "<tt>"
+                    echo (int)$nl . "<tt>" 
                         . htmlentities($buffer)
                         . "</tt><br>";
                 }
@@ -430,7 +431,7 @@ function agrega_fechas(&$db, $nt, $finerror = false, $muestraerror = true)
         $db, "ALTER TABLE $nt " .
         "ADD COLUMN fechadeshabilitacion DATE " .
         "CHECK (fechadeshabilitacion IS NULL OR " .
-        "fechadeshabilitacion >= fechacreacion)",
+        "fechadeshabilitacion >= fechacreacion)", 
         $finerror, $muestraerror
     );
 }

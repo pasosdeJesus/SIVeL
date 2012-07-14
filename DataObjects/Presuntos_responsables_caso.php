@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Presuntos_responsables_caso.php,v 1.19.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -35,8 +34,6 @@ require_once "Presuntos_responsables.php";
  */
 class DataObjects_Presuntos_responsables_caso extends DB_DataObject_SIVeL
 {
-    // START_AUTOCODE
-    /* the code below is auto generated do not remove the above tag */
 
     var $__table = 'presuntos_responsables_caso';     // table name
     var $id_caso;                         // int4(4)  multiple_key
@@ -50,8 +47,6 @@ class DataObjects_Presuntos_responsables_caso extends DB_DataObject_SIVeL
     var $otro;                            // varchar(-1)
     var $id;                              // int4(4)  multiple_key
 
-    /* the code above is auto generated do not remove the tag below */
-    // END_AUTOCODE
 
     var $fb_preDefOrder = array('id_p_responsable',
         'tipo', 'bloque', 'frente', 'division', 'brigada', 'batallon',
@@ -104,16 +99,15 @@ class DataObjects_Presuntos_responsables_caso extends DB_DataObject_SIVeL
     function preGenerateForm(&$formbuilder)
     {
         $this->fb_preDefElements = array('id_caso' =>
-                    HTML_QuickForm::createElement('hidden', 'id_caso')
+            HTML_QuickForm::createElement('hidden', 'id_caso')
         );
 
         if (!isset($this->id_p_responsable)) {
             $this->id_p_responsable= '';
-//                DataObjects_Presuntos_responsables::idSinInfo();
         }
         $formbuilder->enumOptionsCallback = array($this,
-                    "enumCallback"
-                );
+            "enumCallback"
+        );
     }
 
     /**
@@ -130,70 +124,50 @@ class DataObjects_Presuntos_responsables_caso extends DB_DataObject_SIVeL
         $e =& $form->getElement('id_p_responsable');
         $e->addOption('', '');
 
-/*        $e =& $form->getElement('tipo');
-        if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['tipo'])
-        ) {
-            $e->setLabel($GLOBALS['etiqueta']['tipo']);
-        } */
-
         $sel =& $form->getElement('bloque');
         if (isset($sel) && !PEAR::isError($sel)) {
             $sel->setSize(50);
             $sel->setMaxlength(50);
-/*            if (isset($GLOBALS['etiqueta']['bloque'])) {
-                $sel->setLabel($GLOBALS['etiqueta']['bloque']);
-} */
         }
 
         $e =& $form->getElement('frente');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(50);
             $e->setMaxlength(50);
-/*            if (isset($GLOBALS['etiqueta']['frente'])) {
-                $e->setLabel($GLOBALS['etiqueta']['frente']);
-} */
         }
 
         $e =& $form->getElement('brigada');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(50);
             $e->setMaxlength(50);
-/*            if (isset($GLOBALS['etiqueta']['brigada'])) {
-                $e->setLabel($GLOBALS['etiqueta']['brigada']);
-} */
         }
 
         $e =& $form->getElement('batallon');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(50);
             $e->setMaxlength(50);
-/*            if (isset($GLOBALS['etiqueta']['batallon'])) {
-                $e->setLabel($GLOBALS['etiqueta']['batallon']);
-} */
         }
         $e =& $form->getElement('division');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(50);
             $e->setMaxlength(50);
-/*            if (isset($GLOBALS['etiqueta']['division'])) {
-                $e->setLabel($GLOBALS['etiqueta']['division']);
-} */
         }
 
         $sel =& $form->getElement('otro');
         if (isset($sel) && !PEAR::isError($sel)) {
             $sel->setSize(50);
             $sel->setMaxlength(50);
-/*            if (isset($GLOBALS['etiqueta']['otro'])) {
-                $sel->setLabel($GLOBALS['etiqueta']['otro']);
-} */
         }
         $form->removeElement('id_caso');
     }
 
-    /** Convierte registro a relato (arreglo de elementos) que agrega a $ar
-     * dad son datos adicionales que pueden requerirse para la conversión.
+    /** 
+     * Convierte registro a relato (arreglo de elementos) que agrega a $ar
+     *
+     * @param array &$ar Arreglo
+     * @param array $dad Datos adicionales que pueden requerirse en conv.
+     *
+     * @return array Arreglo de elementos. El mismo $ar.
      */
     function aRelato(&$ar, $dad = array())
     {

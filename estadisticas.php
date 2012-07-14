@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: estadisticas.php,v 1.74.2.10 2011/10/26 21:25:31 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
@@ -74,7 +73,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $pDepartamento = (int)var_post_escapa('departamento');
         $pSinCatRepetidas = var_post_escapa('sin_cat_repetidas');
 
-        #verifica_sin_CSRF($page->_submitValues);
+        //verifica_sin_CSRF($page->_submitValues);
 
         $tGeo = '';
         if ($pMunicipio != '') {
@@ -195,16 +194,16 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $cab[] = 'Supracategoria';
         $cab[] = 'Categoria';
         if ($pSegun == 'id_p_responsable') {
-            $cab[] = 'N. Actos';
-            // Un acto es un hecho de violencia cometido por un actor
+            $cab[] = 'N. Actos';  
+            // Un acto es un hecho de violencia cometido por un actor 
             // contra una víctima
         } else {
-            $cab[] = 'N. Víctimizaciones';
-            // Una victimización o violación es un tipo de violencia
+            $cab[] = 'N. Víctimizaciones';  
+            // Una victimización o violación es un tipo de violencia 
             // sufrido por una víctima (sin examinar el o los responsables)
-            // Para casos con un sólo presunto responsable actos y
+            // Para casos con un sólo presunto responsable actos y 
             // violaciones/victimizaciones coincide.
-            // Un hecho contra una victima con N presuntos responsables,
+            // Un hecho contra una victima con N presuntos responsables, 
             // cuenta como una victimización pero como N actos
         }
         $tCat .= 'acto';
@@ -238,7 +237,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             if (is_callable(array($c, 'estadisticasIndCreaConsulta'))) {
                 call_user_func_array(
                     array($c, 'estadisticasIndCreaConsulta'),
-                    array(&$db, &$where, &$tablas)
+                    array( &$db, &$where, &$tablas)
                 );
             } else {
                 echo_esc("Falta estadisticasIndCreaConsulta en $n, $c");
@@ -537,7 +536,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
             if (is_callable(array($c, 'estadisticasIndFiltro'))) {
                 call_user_func_array(
                     array($c, 'estadisticasIndFiltro'),
-                    array($db, $this)
+                    array( $db, $this)
                 );
             } else {
                 echo_esc("Falta estadisticasIndFiltro en $n, $c");

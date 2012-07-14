@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2007 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: buscarPersona.php,v 1.12.2.3 2011/10/22 12:51:52 vtamara Exp $
  * @link      http://sivel.sf.net
  */
 
@@ -40,12 +39,12 @@ function muestra()
         if ($p != '') {
             $cn[] = $p;
         }
-    }
+    } 
     foreach ($pa as $p) {
         if ($p != '') {
             $cn[] = $p;
         }
-    }
+    } 
 
     $patron = crea_patron($cn);
 
@@ -71,12 +70,12 @@ function muestra()
     //echo "rol=$rol";
     echo "<table>";
     echo "<tr>" .
-        "<th>Nombres y apellidos</th><th>Víctima en</th><th>Familiar en</th>" .
+        "<th>Nombres y apellidos</th><th>Víctima en</th><th>Familiar en</th>".
         "</tr>";
 
     while ($result->fetchInto($row)) {
         echo "<tr>";
-        echo '<td><a href="#" onClick="enviar_persona(\''
+        echo '<td><a href="#" onClick="enviar_persona(\'' 
             . htmlentities($rol) . '\'';
         $html_sep = ", ";
         foreach ($row as $v) {
@@ -85,13 +84,13 @@ function muestra()
         }
         echo ')">';
         echo htmlentities($row[1] . " ".$row[2]) . "</a></td>";
-        $comovic = "";
-        $comofam = "";
-        enlaces_casos_persona(
-            &$db, 0, $row[0], &$comovic, &$comofam
+        $html_comovic = "";
+        $html_comofam = "";
+        enlaces_casos_persona_html(
+            &$db, 0, $row[0], &$html_comovic, &$html_comofam
         );
-        echo "<td align='center'>" . htmlentities($comovic) . "</td>";
-        echo "<td align='center'>" . htmlentities($comofam) . "</td>";
+        echo "<td align='center'>" . $html_comovic . "</td>";
+        echo "<td align='center'>" . $html_comofam . "</td>";
 
         echo "</tr>\n";
     }

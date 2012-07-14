@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Municipio.php,v 1.12.2.1 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -35,8 +34,6 @@ require_once 'DataObjects/Basica.php';
  */
 class DataObjects_Municipio extends DataObjects_Basica
 {
-    // START_AUTOCODE
-    /* the code below is auto generated do not remove the above tag */
 
     var $__table = 'municipio';                       // table name
     var $id_departamento;                 // int4(4)  multiple_key

@@ -154,7 +154,7 @@ valores que usen los códigos anteriores deben homologar los anteriores.
     <sect1 id="activando-modulos">
 	    <title>Activar módulos</title>
 	    <para>
-		    SIVeL &PRY-VERSION; es modular e incluye diversos módulos 
+		    SIVeL &PRY-VERSION; incluye diversos módulos 
 		    que puede activar típicamente editando el archivo
 		    <filename>conf.php</filename> del sitio al que agregará
 		    el módulo y ejecutando el script <literal>actualiza.php</literal> 
@@ -174,6 +174,9 @@ valores que usen los códigos anteriores deben homologar los anteriores.
 			    </listitem>
 			    <listitem>
 				    <para><emphasis>etiquetas</emphasis> Poner etiquetas y observaciones a casos. Directorio <filename>modulos/etiquetas</filename></para>
+			    </listitem>
+			    <listitem>
+				    <para><emphasis>mapag</emphasis> Georeferenciación sobre mapas de Googlemaps.</para>
 			    </listitem>
 			    <listitem>
 				    <para><emphasis>segjudicial</emphasis> Para hacer seguimiento judicial a casos. Directorio <filename>modulos/segjudicial</filename></para>
@@ -372,8 +375,8 @@ cvs -z3 -dmiusuario@sivel.cvs.sourceforge.net:/cvsroot/sivel co -rSIVEL1_1 sivel
 cvs -z3 co sivel
                     </screen>
                 </para>
-                <para>La rama de las versión 1.1 es: <literal>SIVEL1_1</literal>h
-                    La versión en desarrollo está en la rama <literal>HEAD</literal>.
+                <para>La rama de las versión 1.1 es: "<literal>SIVEL1_1</literal>".
+                    La versión en desarrollo está en la rama "<literal>HEAD</literal>".
                 </para>
             </sect2>
 		    <sect2 id="fuentes">
@@ -381,7 +384,7 @@ cvs -z3 co sivel
                 <para>Las extensiones empleadas a lo largo de las fuentes son:
                     <itemizedlist>
                         <listitem>
-                            <para>.htaccess: Para controlar opciones de Apache ytípicamente evitar listar directorios desde el web.</para>
+                            <para>.htaccess: Para controlar opciones de Apache y típicamente evitar listar directorios desde el web.</para>
                         </listitem>
                         <listitem>
                             <para>.awk: programa para awk usado desde línea de comandos.</para>
@@ -407,6 +410,9 @@ cvs -z3 co sivel
                         </listitem>
                         <listitem>
                             <para>.espreg: Resultado esperado en prueba de regresión</para>
+                        </listitem>
+                        <listitem>
+                            <para>.gif: Formato para animaciones mientras apng o mpg son mejor soportados.</para>
                         </listitem>
                         <listitem>
                             <para>.grep: Patrones por buscar con grep</para>
@@ -727,7 +733,11 @@ tanto al inicializar una base como al actualizar.
 			<para>Agregue la definición en
 				<filename>sitios/sivelper/estructura.sql</filename>.   Si agrega una tabla básica hagála descendiente de 
 				<filename>DataObjects/Basica.php</filename> 
-				que incluira los campos id, nombre, fechacreacion y fechadeshabilitacion.
+                que incluirá los campos 
+                <literal>id</literal>, 
+                <literal>nombre</literal>, 
+                <literal>fechacreacion</literal> y 
+                <literal>fechadeshabilitacion</literal>.
 			</para>
 		</listitem>
 		<listitem>
@@ -740,10 +750,12 @@ será utilizado para activar su personalización.
 </para></listitem>
 <listitem>
 	<para>Agregue datos en <filename>sitios/sivelper/datos.sql</filename>
-		así como registros en la tabla ActualizacionBase con
+        así como registros en la tabla <literal>ActualizacionBase</literal> con
 		la(s) identificación(es) que haya agregado
 		en <filename>sitios/sivelper/actualiza.php</filename> (en
-		este ejemplo <literal>mip-1</literal>).  Si añadió índices
+        este ejemplo <literal>mip-1</literal>); esto lo puede hacer
+        brevement con la función <literal>aplicaact</literal>.
+        Si añadió índices
 		(por ejemplo para tablas básicas) añada actualización
 		para este en
 		<filename>prepara_indice.sql</filename>, eventualmente
@@ -759,7 +771,6 @@ en <filename>sitios/sivelpear/DataObjects/estructura-dataobject.links.ini</filen
 				el primero los códigos resultan de la
 				suma de:
 				<screen>
-128 NOT NULL
 1 INTEGER
 2 VARCHAR o TEXT
 4 DATE
@@ -767,20 +778,28 @@ en <filename>sitios/sivelpear/DataObjects/estructura-dataobject.links.ini</filen
 16 BOOLEAN
 32 LOG TEXT
 64 BLOB
+128 NOT NULL
 				</screen>
-		
-			</para>
+            </para>
+            <para>A partir de estos archivos junto con los
+                de SIVeL básico y los de otros módulos se crean
+                los archivos  de un sitio tanto
+                al actualizar con actualiza.php como desde la
+                línea de comandos con el script 
+                <filename>bin/creaesquema.sh</filename> que
+                debe ejecutarse desde el directorio del sitio.
+            </para>
 		</listitem>
 		<listitem>
 			<para>En el directorio <filename>sitios/sivelper/DataObjects</filename> cree un archivo con datos de tabla como 
 				descendiente bien
-				de de <filename>DataObjects/Basica.php</filename> (si es
+				de <filename>DataObjects/Basica.php</filename> (si es
 				tabla básica, ver por ejemplo <filename>Etnia.php</filename>) o de 
 				<filename>DB_DataObject_SIVeL.php</filename>
 				(ver por ejemplo <filename>Profesion_comunidad.php</filename>).
 				El nombre 
-				debe ser el mismo de la tabla primera letra 
-				mayúscula y demás minúsculas.   Se recomienda
+				debe ser el mismo de la tabla pero con la primera letra 
+				mayúscula y las demás minúsculas.   Se recomienda
 				consultar documentación de clases base
 				mencionadas.
 			</para>
@@ -796,13 +815,13 @@ en <filename>sitios/sivelpear/DataObjects/estructura-dataobject.links.ini</filen
 				como para una tabla básica, debe tener una 
 		    nueva pestaña o una
 		    extensión de una pestaña existente en la que declare
-		    la función actGlobales() que añada la tabla a las
+            la función <literal>actGlobales()</literal> que añada la tabla a las
 		    básicas.  Vea un ejemplo en el módulo
 		    <filename>modulos/etiquetas/PagEtiqueta.php</filename>
-		    que añade la tabla básica Etiqueta cuando se activa
-		    el módulo.   Una vez agregue la agregue puede probar
-		    inserción, eliminación de registros desde el menú
-		    Administración->Tablas Básicas.
+            que añade la tabla básica <literal>Etiqueta</literal> cuando 
+            se activa el módulo.   Una vez agregue la agregue puede probar
+            inserción, eliminación de registros desde el menú
+            <menuchoice><guimenu>Administración</guimenu><guimenuitem>Tablas Básicas</guimenuitem></menuchoice>.
 			</para>
 		</listitem>
 	</itemizedlist>
@@ -811,7 +830,7 @@ en <filename>sitios/sivelpear/DataObjects/estructura-dataobject.links.ini</filen
 	    <para>
 		    La nueva información la puede solicitar en una nueva
 		    pestaña del formulario de captura como puede ver
-		    en el módulo etiquetas y en particular en
+		    a manera de ejemplo en el módulo etiquetas y en particular en
 		    <filename>modulos/etiquetas/PagEtiquetas.php</filename>
 	    </para>
 	    <para>
@@ -820,7 +839,7 @@ en <filename>sitios/sivelpear/DataObjects/estructura-dataobject.links.ini</filen
 		    campos.  Un ejemplo lo puede ver en el módulo anexos
 		    en <filename>modulos/anexos/PagFrecuenteAnexo.php</filename>
 		    que extiende la pestaña Fuentes Frecuentes, así como
-		    la tabla suyacente (<literal>Escrito_caso</literal>).
+		    la tabla subyacente (<literal>Escrito_caso</literal>).
 	    </para>
 	    <para>
 		    Algunas recomendaciones para crear o extender pestañas son:
@@ -885,12 +904,20 @@ Como orden posible para realizar pruebas después de hacer cambios se sugiere:
 		<para>Agregue información para búsquedas desde Consulta
 			Web en la función <literal>datosBusqueda</literal>.
 		</para>
+    </listitem>
+	<listitem>
+        <para>Agregue método para exportar a relato (seguramente
+            en observaciones) en la función
+            <literal>aRelato</literal>, así como para importar
+            en la función <literal>importa</literal>.
+		</para>
 	</listitem>
+
 </orderedlist>
 </para>
 <para>
 	Puede resultar convenientes activar mensajes de depuración
-	de DataObject poniendo en 5 la opción 'debug' en el 
+    de DataObject poniendo en 5 la opción '<literal>debug</literal>' en el 
 	archivo <filename>sitios/sivelper/conf.php</filename>
 </para>
 

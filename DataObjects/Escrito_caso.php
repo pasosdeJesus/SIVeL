@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Escrito_caso.php,v 1.14.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -36,8 +35,6 @@ require_once $_SESSION['dirsitio'] . '/conf.php';
  */
 class DataObjects_Escrito_caso extends DB_DataObject_SIVeL
 {
-    // START_AUTOCODE
-    /* the code below is auto generated do not remove the above tag */
 
     var $__table = 'escrito_caso';                    // table name
     var $fecha;                           // date(4)  multiple_key
@@ -47,15 +44,15 @@ class DataObjects_Escrito_caso extends DB_DataObject_SIVeL
     var $id_prensa;                       // int4(4)  multiple_key
     var $id_caso;                         // int4(4)  multiple_key
 
-    /* the code above is auto generated do not remove the tag below */
-    // END_AUTOCODE
 
     var $fb_selectAddEmpty = array('id_prensa');
     var $fb_hidePrimaryKey = false;
-    var $fb_preDefOrder = array('id_prensa', 'fecha', 'ubicacion',
+    var $fb_preDefOrder = array(
+        'id_prensa', 'fecha', 'ubicacion',
         'clasificacion', 'ubicacion_fisica'
     );
-    var $fb_fieldsToRender = array('id_prensa', 'fecha', 'ubicacion',
+    var $fb_fieldsToRender = array(
+        'id_prensa', 'fecha', 'ubicacion',
         'clasificacion', 'ubicacion_fisica'
     );
     var $fb_addFormHeader = false;
@@ -80,7 +77,8 @@ class DataObjects_Escrito_caso extends DB_DataObject_SIVeL
     {
         $fv = isset($GLOBALS['fechaPuedeSerVacia'])
             && $GLOBALS['fechaPuedeSerVacia'];
-        return array('minYear' => $GLOBALS['anio_min'],
+        return array(
+            'minYear' => $GLOBALS['anio_min'],
             'addEmptyOption' => $fv
         );
     }
@@ -95,7 +93,7 @@ class DataObjects_Escrito_caso extends DB_DataObject_SIVeL
     function preGenerateForm(&$formbuilder)
     {
         $this->fb_preDefElements = array('id_caso' =>
-                    HTML_QuickForm::createElement('hidden', 'id_caso')
+            HTML_QuickForm::createElement('hidden', 'id_caso')
         );
     }
 
@@ -111,16 +109,6 @@ class DataObjects_Escrito_caso extends DB_DataObject_SIVeL
     {
         parent::postGenerateForm($form, $formbuilder);
 
-/*        $sel =& $form->getElement('id_prensa');
-        if (isset($sel) && !PEAR::isError($sel)
-            && $sel->getType() == 'select'
-        ) {
-            if (isset($GLOBALS['etiqueta']['id_prensa'])) {
-                $sel->setLabel($GLOBALS['etiqueta']['id_prensa']);
-            }
-            $sel->_options = htmlentities_array($sel->_options);
-        }
- */
         $e =& $form->getElement('ubicacion');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(70);

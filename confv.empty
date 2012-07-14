@@ -34,7 +34,7 @@ URLSITE="http://www.sourceforge.net/projects/sivel"
 # Sitio de desarrollo de este proyecto
 #
 
-FECHA_PROX="20/07/2012"
+FECHA_PROX="20/03/2013"
 # Fecha en la que esperamos liberar próxima versión
 #
 
@@ -178,5 +178,8 @@ OPENSSL="/usr/sbin/openssl"
 # Ejecutable OpenSSL
 #
 
+IMAGENRLOCAL="/var/resbase.img"
+# Ubicacion de contenedor cifrado 
+#
 
 

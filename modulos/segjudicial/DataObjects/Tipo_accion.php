@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2006 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Tipo_accion.php,v 1.11.2.2 2011/10/22 12:55:08 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -50,7 +49,7 @@ class DataObjects_Tipo_accion extends DataObjects_Basica
         'fechacreacion',
         'fechadeshabilitacion',
     );
-
+ 
     static function idSinInfo()
     {
         return 1;

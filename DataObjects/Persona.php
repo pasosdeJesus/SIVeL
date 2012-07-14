@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Persona.php,v 1.25.2.5 2011/10/22 12:51:52 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -35,8 +34,6 @@ require_once 'misc.php';
  */
 class DataObjects_Persona extends DB_DataObject_SIVeL
 {
-    // START_AUTOCODE
-    /* the code below is auto generated do not remove the above tag */
 
     var $__table = 'persona';                         // table name
     var $id;                              // int4(4)  not_null primary_key
@@ -52,8 +49,6 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
     var $tipodocumento;                  // varchar(-1)
     var $numerodocumento;                // varchar(-1)
 
-    /* the code above is auto generated do not remove the tag below */
-    // END_AUTOCODE
 
 
     var $fb_preDefOrder = array('nombres', 'apellidos', 'anionac',
@@ -84,30 +79,36 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
     var $fb_enumFields = array('anionac', 'mesnac', 'dianac', 'sexo',
         'tipodocumento'
     );
-    var $es_enumOptions = array('sexo' => array('F' => 'Femenino',
-        'M' => 'Masculino', 'S'=> 'SIN INFORMACIÓN'
-    ),
-        'tipodocumento' => array ('CC' => 'Cédula de Ciudadania',
+    var $es_enumOptions = array(
+        'sexo' => array(
+            'F' => 'Femenino',
+            'M' => 'Masculino', 'S'=> 'SIN INFORMACIÓN'
+        ),
+        'tipodocumento' => array (
+            'CC' => 'Cédula de Ciudadania',
             'CE' => 'Cédula de Extranjería',
             'RC' => 'Registro Civil',
             'TI' => 'Tarjeta de Identidad',
             'OT' => 'Otro',
         ),
-       'mesnac' => array(1=>'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul',
+        'mesnac' => array(
+            1=>'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul',
             'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
-       ),
-       'dianac' => array('1' => '1', '2', '3', '4', '5', '6', '7',
+        ),
+        'dianac' => array(
+            '1' => '1', '2', '3', '4', '5', '6', '7',
             '8', '9', '10', '11', '12', '13', '14', '15', '16',
             '17', '18', '19', '20', '21', '22', '23', '24', '25',
             '26', '27', '28', '29', '30', '31'
-       ),
-       'anionac' => array(),
+        ),
+        'anionac' => array(),
     );
     var $fb_addFormHeader = false;
     var $fb_selectAddEmpty = array();
     var $fb_fieldsRequired = array('nombres');
     var $fb_useMutators = true;
     var $fb_hidePrimaryKey = true;
+    var $fb_linkDisplayFields = array('nombres', 'apellidos');
 
     /**
      * Funciona legada
@@ -125,42 +126,42 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
     }
 
     /**
-    * Modifica el año de nacimiento antes de incluirlo en base de datos.
-    * Para funcionar con versiones nuevas de DB_DataObject requiere
-    * <b>useMutator</b> en <b>true</b>
-    *
-    * @param string $value Valor recibido de formulario
-    *
-    * @return Valor para base de datos
-    */
+     * Modifica el año de nacimiento antes de incluirlo en base de datos.
+     * Para funcionar con versiones nuevas de DB_DataObject requiere
+     * <b>useMutator</b> en <b>true</b>
+     *
+     * @param string $value Valor recibido de formulario
+     *
+     * @return Valor para base de datos
+     */
     function setanionac($value)
     {
         $this->anionac= ($value == 0) ? null : $value;
     }
 
     /**
-    * Modifica el mes de nacimiento antes de incluirlo en base de datos.
-    * Para funcionar con versiones nuevas de DB_DataObject requiere
-    * <b>useMutator</b> en <b>true</b>
-    *
-    * @param string $value Valor recibido de formulario
-    *
-    * @return Valor para base de datos
-    */
+     * Modifica el mes de nacimiento antes de incluirlo en base de datos.
+     * Para funcionar con versiones nuevas de DB_DataObject requiere
+     * <b>useMutator</b> en <b>true</b>
+     *
+     * @param string $value Valor recibido de formulario
+     *
+     * @return Valor para base de datos
+     */
     function setmesnac($value)
     {
         $this->mesnac= ($value == 0) ? null : $value;
     }
 
     /**
-    * Modifica el dia de nacimiento antes de incluirlo en base de datos.
-    * Para funcionar con versiones nuevas de DB_DataObject requiere
-    * <b>useMutator</b> en <b>true</b>
-    *
-    * @param string $value Valor recibido de formulario
-    *
-    * @return Valor para base de datos
-    */
+     * Modifica el dia de nacimiento antes de incluirlo en base de datos.
+     * Para funcionar con versiones nuevas de DB_DataObject requiere
+     * <b>useMutator</b> en <b>true</b>
+     *
+     * @param string $value Valor recibido de formulario
+     *
+     * @return Valor para base de datos
+     */
     function setdianac($value)
     {
         $this->dianac= ($value == 0) ? null : $value;
@@ -219,16 +220,8 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         parent::postGenerateForm($form, $formbuilder);
         $gr = array();
 
-/*        foreach ($this->fb_fieldLabels as $c => $et) {
-            $e =& $form->getElement($c);
-            if (isset($e) && !PEAR::isError($e)
-                && isset($GLOBALS['etiqueta'][$c])) {
-                $e->setLabel($GLOBALS['etiqueta'][$c]);
-            }
-} */
-
         $sel =& $form->getElement('id');
-//        $sel->freeze();
+        //        $sel->freeze();
         $gr[] =& $sel;
         $form->removeElement('id');
 
@@ -247,7 +240,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             $gr[] =& $numdoc;
 
             $form->addGroup(
-                $gr, 'numerodocumento', 'Documento de Identidad',
+                $gr, 'numerodocumento', _('Documento de Identidad'),
                 '&nbsp;', false
             );
         }
@@ -257,7 +250,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         $sel->setSize(30);
         $sel->setMaxlength(100);
         $sel->updateAttributes(
-                 array('id' => "nombres-persona")
+            array('id' => "nombres-persona")
         );
         $gr[] =& $sel;
         $form->removeElement('nombres');
@@ -266,7 +259,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         $sel->setSize(30);
         $sel->setMaxlength(100);
         $sel->updateAttributes(
-                 array('id' => "apellidos-persona")
+            array('id' => "apellidos-persona")
         );
         $gr[] =& $sel;
         $form->removeElement('apellidos');
@@ -281,7 +274,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         }
 
         $form->addGroup(
-            $gr, 'nom', 'Nombres y Apellidos',
+            $gr, 'nom', _('Nombres y Apellidos'),
             '&nbsp;', false
         );
 
@@ -312,7 +305,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         $gr[] =& $seln;
         if ($this->anionac != null && $this->anionac > 0) {
             $na ='19';  // el valor lo pone formularioValores de PagVictimaIndividual
-//            $na = edad_de_fechanac($this->anionac, $aniohecho, $this->mesnac, $meshecho, $this->dianac, $diahecho)
+            //            $na = edad_de_fechanac($this->anionac, $aniohecho, $this->mesnac, $meshecho, $this->dianac, $diahecho)
             $seln->setValue($na);
             $seln->freeze();
         }
@@ -320,7 +313,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         $gr[] =& $seln;
 
         $form->addGroup(
-            $gr, 'nacimiento', 'Fecha Nac. y Sexo',
+            $gr, 'nacimiento', _('Fecha Nac. y Sexo'),
             '&nbsp;', false
         );
 
@@ -331,12 +324,12 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
 
     /**
-    * Modifica cantidad de hijos antes de incluirlo en base de datos.
-    *
-    * @param string $value Valor recibido de formulario
-    *
-    * @return Valor para base de datos
-    */
+     * Modifica cantidad de hijos antes de incluirlo en base de datos.
+     *
+     * @param string $value Valor recibido de formulario
+     *
+     * @return Valor para base de datos
+     */
     function sethijos($value)
     {
         $this->hijos= ($value == '') ? 'null' : $value;
@@ -391,39 +384,41 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
         if ((int)$valores['edad'] > 0
             && (!isset($valores['anionac']) || $valores['anionac'] == '')
-        ) {
-                $valores['anionac'] = $fhanio - (int)$valores['edad'];
-        }
+                ) {
+                    $valores['anionac'] = $fhanio - (int)$valores['edad'];
+                }
         if ($valrango
             && $valores['id_rango_edad'] != DataObjects_Rango_edad::idSinInfo()
-            && $valores['anionac'] != ''
-        ) {
-            $r = (int)$valores['id_rango_edad'];
-            //print_r($valores);
-            $e = edad_de_fechanac(
-                (int)$valores['anionac'], $fhanio,
-                (int)$valores['mesnac'], $fhmes,
-                (int)$valores['dianac'], $fhdia
-            );
-            if (!verifica_edad_y_rango($e, $r)) {
-                $merr = "La edad " . (int)$e . " (fecha del hecho menos " .
-                    "fecha de nacimiento) debe corresponder al rango de edad";
-                return false;
+                && $valores['anionac'] != ''
+            ) {
+                $r = (int)$valores['id_rango_edad'];
+                //print_r($valores);
+                $e = edad_de_fechanac(
+                    (int)$valores['anionac'], $fhanio,
+                    (int)$valores['mesnac'], $fhmes,
+                    (int)$valores['dianac'], $fhdia
+                );
+                if (!verifica_edad_y_rango($e, $r)) {
+                    $merr = _("La edad ") . (int)$e . 
+                        _(" (fecha del hecho menos fecha de nacimiento) ") .
+                        _(" debe corresponder al rango de edad");
+                    return false;
+                }
+            } else if ($valrango && $valores['anionac'] != '') { //Autocompleta
+                $e = edad_de_fechanac(
+                    (int)$valores['anionac'], $fhanio,
+                    (int)$valores['anionac'], $fhmes,
+                    (int)$valores['dianac'], $fhdia
+                );
+                $re = rango_de_edad($e);
+                if ($re == 0) {
+                    $merr = _(
+                        'La fecha de nacimiento no corresponde a un rango'
+                    );
+                    return false;
+                }
+                $valores['id_rango_edad'] = $re;
             }
-        } else if ($valrango && $valores['anionac'] != '') { //Autocompleta
-            $e = edad_de_fechanac(
-                (int)$valores['anionac'], $fhanio,
-                (int)$valores['anionac'], $fhmes,
-                (int)$valores['dianac'], $fhdia
-            );
-            $re = rango_de_edad($e);
-            if ($re == 0) {
-                $merr ='La fecha de nacimiento no corresponde a ' .
-                    'rango alguno';
-                return false;
-            }
-            $valores['id_rango_edad'] = $re;
-        }
         return true;
     }
 

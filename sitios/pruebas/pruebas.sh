@@ -2,6 +2,8 @@
 # Pruebas de regresión.
 # Dominio público. 2007. vtamara@pasosdeJesus.org
 
+. ./confv.sh
+
 function die {
 	echo $1;
 	exit 1;
@@ -30,7 +32,7 @@ function prueba {
 	if (test "$sal" != "") then {
 		genDataObject 0;
 		mkdir -p sitios/pruebas/salida
-		php -n $a | grep -v evita_csrf > sitios/pruebas/salida/$sal.tmp 2>&1
+		$PHP -n $a | grep -v evita_csrf > sitios/pruebas/salida/$sal.tmp 2>&1
 		if (test "$saca" != "") then {
 			grep -v "$saca" sitios/pruebas/salida/$sal.tmp > sitios/pruebas/salida/$sal.espreg
 			if (test "$saca4" != "") then {
@@ -47,7 +49,7 @@ function prueba {
 		diff -b sitios/pruebas/salida/$sal.espreg sitios/pruebas/esperado/$sal.espreg > /dev/null
 	} else {
 		genDataObject 5;
-		php -n $a >> sitios/pruebas/pruebas.bitacora 2>&1
+		$PHP -n $a >> sitios/pruebas/pruebas.bitacora 2>&1
 	} fi;
 	if (test "$?" != "0") then {
 		echo " Falló";
@@ -167,7 +169,7 @@ if (test "$SALTAINI" != "1") then {
 } fi;
 
 
-php -n -r 'phpinfo();' | grep -v "^[^ a-z]* =>" >> sitios/pruebas/pruebas.bitacora 2>&1
+$PHP -n -r 'phpinfo();' | grep -v "^[^ a-z]* =>" >> sitios/pruebas/pruebas.bitacora 2>&1
 
 #function x {
 prueba sitios/pruebas/autentica.php "Autenticación"
@@ -193,7 +195,6 @@ prueba sitios/pruebas/inscaso-anexos.php " - Anexo"
 prueba sitios/pruebas/inscaso-etiqueta.php " - Etiqueta"
 prueba sitios/pruebas/inscaso-evaluacion.php " - Evaluacion"
 prueba sitios/pruebas/inscaso-evaluacion-valida.php " - Valida Evaluacion"
-	#}
 prueba sitios/pruebas/inscaso-valrepgen.php " - Validar y Reporte General" valrepgen "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*"
 prueba sitios/pruebas/reprevista.php " - Reporte Revista" reprevista
 prueba sitios/pruebas/reprevista-filtros.php " - Filtros en Reporte Revista" reprevista-filtros
@@ -204,3 +205,5 @@ prueba sitios/pruebas/novalida-frecuentes.php " - Validación frecuentes" novalid
 prueba sitios/pruebas/externa.php " - Consulta externa" externa
 prueba sitios/pruebas/relato.php " - Exporta Relato " relato
 prueba sitios/pruebas/imprelato.php " - Importa Relato " imprelato "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*" "" "resimp.xrlt.espreg" "Warning" "fecha_fuente" "D -"
+#}
+#prueba sitios/pruebas/mezcla.php " - Mezcla 2 Casos" mezcla

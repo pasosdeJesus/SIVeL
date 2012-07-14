@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2007 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: buscarGrupo.php,v 1.11.2.2 2011/10/13 13:41:06 vtamara Exp $
  * @link      http://sivel.sf.net
  */
 
@@ -38,7 +37,7 @@ function muestra()
         if ($p != '') {
             $cn[] = $p;
         }
-    }
+    } 
     $patron = crea_patron($cn);
 
     //echo "OJO nombre=$nombre, patron='$patron'";
@@ -62,7 +61,7 @@ function muestra()
         . '</script>';
     echo "<table>";
     echo "<tr>" .
-        "<th>Nombre</th><th>Víctima en</th>" .
+        "<th>Nombre</th><th>Víctima en</th>".
         "</tr>";
     while ($result->fetchInto($row)) {
         echo "<tr>";
@@ -74,9 +73,9 @@ function muestra()
         }
         echo ')">';
         echo htmlentities($row[1] . " ".$row[2]) . "</td>";
-        $comovic = "";
-        enlaces_casos_grupoper(&$db, 0, $row[0], &$comovic);
-        echo "<td align='center'>" . htmlentities($comovic) . "</td>";
+        $html_comovic = "";
+        enlaces_casos_grupoper_html(&$db, 0, $row[0], &$html_comovic);
+        echo "<td align='center'>" . $html_comovic . "</td>";
         echo "</tr>\n";
     }
     echo "</table>";

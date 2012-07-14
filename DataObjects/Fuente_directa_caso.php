@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Fuente_directa_caso.php,v 1.14.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -36,8 +35,6 @@ require_once $_SESSION['dirsitio'] . '/conf.php';
  */
 class DataObjects_Fuente_directa_caso extends DB_DataObject_SIVeL
 {
-    // START_AUTOCODE
-    /* the code below is auto generated do not remove the above tag */
 
     var $__table = 'fuente_directa_caso';             // table name
     var $id_caso;                         // int4(4)  multiple_key
@@ -47,8 +44,6 @@ class DataObjects_Fuente_directa_caso extends DB_DataObject_SIVeL
     var $ubicacion_fisica;                // varchar(-1)
     var $tipo_fuente;                     // varchar(-1)
 
-    /* the code above is auto generated do not remove the tag below */
-    // END_AUTOCODE
 
     var $fb_addFormHeader = false;
     //var $fb_selectAddEmpty = array('id_fuente_directa');

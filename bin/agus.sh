@@ -14,7 +14,12 @@ if (test ! -f "$DIRSEG/vardb.sh" ) then {
 
 
 . $DIRSEG/vardb.sh
+. $DIRSEG/../../confv.sh
 
+if (test $PHP = "") then {
+	echo "Falta configurar fuentes";
+	exit 1;
+} fi;
 echo -n "usuario (sin espacios): ";
 read id;
 echo -n "nombre: ";
@@ -30,7 +35,7 @@ read anotacion;
 echo -n "clave: ";
 stty -echo; read clave; stty echo
 
-clavesha1=`php -n -r "echo sha1(\"$clave\");"`;
+clavesha1=$($PHP -n -r "echo sha1('$clave');")
 q="SET client_encoding to 'LATIN1'; INSERT INTO usuario(id_usuario, password, nombre, descripcion, id_rol)  VALUES ('$id', '$clavesha1', '$nombre', '$descripcion', '$idrol'); INSERT INTO funcionario(anotacion, nombre) VALUES ('$anotacion', '$id');" 
 echo $q;
 ../../bin/psql.sh -c "$q"

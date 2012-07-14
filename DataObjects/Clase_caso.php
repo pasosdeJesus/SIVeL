@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Clase_caso.php,v 1.6.2.1 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -34,8 +33,6 @@ require_once 'DB_DataObject_SIVeL.php';
  */
 class DataObjects_Clase_caso extends DB_DataObject_SIVeL
 {
-    // START_AUTOCODE
-    /* the code below is auto generated do not remove the above tag */
 
     var $__table = 'clase_caso';                      // table name
     var $id_clase;                        // int4(4)  multiple_key
@@ -43,8 +40,6 @@ class DataObjects_Clase_caso extends DB_DataObject_SIVeL
     var $id_departamento;                 // int4(4)  multiple_key
     var $id_caso;                         // int4(4)  multiple_key
 
-    /* the code above is auto generated do not remove the tag below */
-    // END_AUTOCODE
     var $fb_preDefOrder = array('id_clase');
     var $fb_fieldsToRender = array('id_clase');
     var $fb_selectAddEmpty = array('id_clase');

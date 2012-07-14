@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2006 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: PagAnexo.php,v 1.15.2.5 2011/10/18 16:05:04 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -18,6 +17,7 @@
 /**
  * Pestaña Anexo de la ficha de captura de caso
  */
+require_once 'PagBaseSimple.php';
 require_once 'PagBaseMultiple.php';
 require_once 'HTML/QuickForm/Action.php';
 
@@ -55,9 +55,9 @@ class VerAnexo extends HTML_QuickForm_Action
                 if (strpos($nombre, '/')  != false) {
                     die("No puede tener el caracter/");
                 }
-                if ((substr($nombre, 0, strlen($inin)) . "_") != ($inin . "_")) {
-                    die("El nombre del archivo es incorrecto '" . $inin . "' =/= '" .
-                        substr($nombre, 0, strlen($inin)) . "'"
+                if ((substr($nombre, 0, strlen($inin))) != $inin) {
+                    die("El nombre del archivo es incorrecto, " .
+                        "porque no comienza con '$inin'"
                     );
                 }
                 $arch = $GLOBALS['dir_anexos'] . "/" . $nombre;
@@ -284,7 +284,7 @@ class PagAnexo extends PagBaseMultiple
             $this->banexo->dateToDatabaseCallback,
             var_escapa($valores['fecha'], $db)
         );
-        $this->banexo->_do->descripcion =
+        $this->banexo->_do->descripcion = 
             var_escapa($valores['descripcion'], $db);
 
         if (!isset($this->banexo->_do->id) || $this->banexo->_do->id <= 0) {
@@ -332,5 +332,40 @@ class PagAnexo extends PagBaseMultiple
         consulta_or_muchos($w, $t, 'anexo');
     }
 
+    /**
+     * Compara datos relacionados con esta pestaña de los casos 
+     * con identificación id1 e id2.
+     *
+     * @param object  $db  Conexión a base de datos
+     * @param array   $r   Resultados de comparación
+     * @param integer $id1 Código de primer caso
+     * @param integer $id2 Código de segundo caso
+     *
+     * @return Añade a $r datos de comparación
+     * @see PagBaseSimple
+     */
+    static function compara(&$db, &$r, $id1, $id2, $a) 
+    {
+    }
+
+    /**
+     * Mezcla valores de los casos $id1 e $id2 en el caso $idn de
+     * acuerdo a las preferencias especificadas en $sol.
+     *
+     * @param object  &$db Conexión a base de datos
+     * @param array   $sol Arreglo con solicitudes de cambios
+     * @param integer $id1 Código de primer caso
+     * @param integer $id2 Código de segundo caso
+     * @param integer $idn Código del caso en el que aplicará los cambios
+     *
+     * @return Mezcla valores de los casos $id1 e $id2 en el caso $idn de
+     * acuerdo a las preferencias especificadas en $sol.
+     * @see PagBaseSimple
+     */
+    static function mezcla(&$db, $sol, $id1, $id2, $idn, $t = 'anexo') 
+    {
+        //echo "OJO PagAnexo::mezcla<br>";
+        PagOtrasFuentes::mezcla($db, $sol, $id1, $id2, $idn, 'anexo');
+    }
 }
 ?>

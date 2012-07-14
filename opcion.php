@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2010 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: opcion.php,v 1.9.2.3 2011/12/31 19:28:47 vtamara Exp $
  * @link      http://sivel.sf.net
  */
 
@@ -19,7 +18,7 @@ require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
 
 /*$aut_usuario = "";
-$db = autenticaUsuario($dsn, $accno, $aut_usuario, 0);
+$db = autenticaUsuario($dsn, $accno, $aut_usuario, 0); 
 Debe autenticarse en la función muestra del modulo */
 
 if (!isset($_REQUEST['num'])) {
@@ -27,7 +26,7 @@ if (!isset($_REQUEST['num'])) {
 }
 
 if (!isset($GLOBALS['modulo'][(int)$_REQUEST['num']])) {
-    die("No se ha definido \$GLOBALS['modulo']["
+    die("No se ha definido \$GLOBALS['modulo'][" 
         . (int)$_REQUEST['num'] . "] en conf.php");
 }
 

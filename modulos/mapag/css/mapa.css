@@ -18,7 +18,7 @@ form { display: inline; }
 .infowindowcont { font-family: Arial; font-size: 13px; line-height: 15px; }
 
 h3 { margin: 0 0 7px 0; font-size: 12px; }
-.settings_box { float: left; margin-right: 30px; }
+.settings_box { float: left; margin-right: 20px; }
 * html .settings_box { margin-right: 20px; }
 
 #settings_canvas { position: relative; width: 570px; padding: 8px 15px; }

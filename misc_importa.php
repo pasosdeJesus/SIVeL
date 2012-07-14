@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: misc_importa.php,v 1.32.2.4 2011/10/22 14:57:56 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -41,14 +40,17 @@ function repObs($nobs, &$obs, $coneco = false)
  * @param string $tabla  Tabla en la cual buscar
  * @param string $nombre Nombre por buscar
  * @param string &$obs   Colchon para agregar observaciones
+ * @param bool   $sininf Si no esta retornar código del dato SIN INFORMACIÓN?
+ * @param string &$ncamp Nombre del campo con el cual comparar
  *
- * @return integer Código en tabla o 0 si no lo encuentra
+ * @return integer Código en tabla o -1 si no lo encuentra
  */
-function convBasica(&$db, $tabla, $nombre, &$obs)
+function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true, 
+    $ncamp = "nombre")
 {
-    //echo "OJO convBasica(db, $tabla, $nombre, $obs)<br>";
+    //echo "OJO conv_basica(db, $tabla, $nombre, $obs)<br>";
     $d = objeto_tabla($tabla);
-    $nom0 = $d->nombre = ereg_replace(
+    $nom0 = $d->$ncamp = ereg_replace(
         "  *", " ",
         trim(var_escapa($nombre, $db))
     );
@@ -58,46 +60,48 @@ function convBasica(&$db, $tabla, $nombre, &$obs)
     }
     $nom1 = a_mayusculas($nom0);
     if (!isset($d->id)) {
-        $d->nombre = $nom1;
+        $d->$ncamp= $nom1;
         $d->find(1);
     }
     if (!isset($d->id)) {
-        $nom2 = $d->nombre
+        $nom2 = $d->$ncamp
             = a_mayusculas(sinTildes(var_escapa($nom0, $db)));
         $d->find(1);
     }
     if (!isset($d->id)) {
-        $q = "SELECT id FROM $tabla WHERE nombre ILIKE '%${nom0}%'";
+        $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom0}%'";
         $r = $db->getOne($q);
         if (PEAR::isError($r) || $r == null) {
-            $q = "SELECT id FROM $tabla WHERE nombre ILIKE '%${nom1}%'";
+            $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom1}%'";
             $r = $db->getOne($q);
         }
         if (PEAR::isError($r) || $r == null) {
-            $q = "SELECT id FROM $tabla WHERE nombre ILIKE '%${nom2}%'";
+            $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom2}%'";
             //echo " q=$q";
             $r = $db->getOne($q);
         }
 
         if (PEAR::isError($r) || $r == null) {
             repObs("-- $tabla: desconocido '$nombre'", $obs);
-            if (is_callable(array("DataObjects_$tabla", 'idSinInfo'))) {
+            if ($sininf 
+                && is_callable(array("DataObjects_$tabla", 'idSinInfo'))
+            ) {
                 $r = call_user_func(
                     array("DataObjects_$tabla",
                     "idSinInfo"
                     )
                 );
             } else {
-                $r = 0;
+                $r = -1;
             }
         } else {
             $d = objeto_tabla($tabla);
             $d->id = $r;
             $d->find(1);
-            if (trim($d->nombre) != trim($nom0)) {
+            if (trim($d->$ncamp) != trim($nom0)) {
                 repObs(
                     "$tabla: elegido registro '$r' con nombre '" .
-                    $d->nombre . "' que es similar a '$nom0'", $obs
+                    $d->$ncamp . "' que es similar a '$nom0'", $obs
                 );
             }
         }
@@ -812,6 +816,92 @@ function conv_fecha($fecha, &$obs, $depura = false)
     return $anio_s . "-" . $mes_s . "-".$dia_s;
 }
 
+/**
+ * Convierte datos de persona y los inserta/actualiza en la base
+ *
+ * @param object &$db             Conexion a base de datos
+ * @param object &$idsiguales     Arreglo para completar con iguales
+ * @param object &$idssimilares   Arreglo para completar con similares
+ * @param array  $aper            Listado de personas de la base
+ * @param string $nom             Nombre buscado
+ * @param string $ap              Apellido buscado
+ * @param string $mdlev           Distancia Levenshtein maxima para similares
+ * @param string $anionac         Año de nacimiento
+ * @param string $mesnac          Mes de nacimiento
+ * @param string $dianac          Dia de nacimiento
+ * @param string $sexo            Sexo
+ * @param string $id_departamento Código del dep. de procedencia
+ * @param string $id_municipio    Código del mun. de procedencia
+ * @param string $id_clase        Código de la clase de procedencia
+ * @param string $tipodocumento   Tipo de documento de identidad
+ * @param string $numerodocumento Número de documento de identidad
+ *
+ * @return integer  Iguales mas similares.  Las ids de los iguales loas
+ * deja en idsiguales, los ids de similares en idssimilares
+ */
+
+function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper, 
+    $nom, $ap, $mdlev = 3, $anionac = null, $mesnac = null, $dianac = null, 
+    $sexo = 'S', $id_departamento = null, $id_municipio = null, 
+    $id_clase = null, $tipodocumento = null, $numerodocumento = null
+) {
+    $idper = -1;
+    if (isset($GLOBALS['estilo_nombres']) 
+        && $GLOBALS['estilo_nombres'] == 'MAYUSCULAS'
+    ) {
+        $nombres = a_mayusculas($nom);
+        $apellidos = a_mayusculas($ap);
+    } else if (isset($GLOBALS['estilo_nombres']) 
+        && $GLOBALS['estilo_nombres'] == 'minusculas'
+    ) {
+        $nombres = prim_may($nom);
+        $apellidos = prim_may($ap);
+    } else {
+        $nombres = $nom;
+        $apellidos = $ap;
+    }
+
+    $nomap = trim(trim($nombres) . " " . trim($apellidos));
+    if ($nomap != 'NN' && $nomap != 'N N' && $nomap != 'N.N'
+        && $nomap != 'N.N.' && $nomap != 'N N.'
+        && substr($nomap, 0, 4) != 'N.N '
+    ) {
+        foreach ($aper as $k=>$na) {
+            if (isset($GLOBALS['estilo_nombres']) 
+                && $GLOBALS['estilo_nombres'] == 'MAYUSCULAS'
+            ) {
+                $anombres = a_mayusculas($na[0]);
+                $aapellidos = a_mayusculas($na[1]);
+                /*$nombres = a_mayusculas($nom);
+                $apellidos = a_mayusculas($ap); */
+            } else if (isset($GLOBALS['estilo_nombres']) 
+                && $GLOBALS['estilo_nombres'] == 'minusculas'
+            ) {
+                $anombres = prim_may($na[0]);
+                $aapellidos = prim_may($na[1]);
+            } else {
+                $anombres = $na[0];
+                $aapellidos = $na[1];
+            }
+
+            $anomap = trim(trim($anombres) . " " . trim($aapellidos));
+            //echo "OJO comp $anombres, $nombres y $aapellidos, $apellidos<br>";
+            if ((strcasecmp($anombres, $nombres) == 0
+                && strcasecmp($aapellidos, $apellidos) == 0) 
+                || (strcasecmp($anomap, $nomap) == 0)
+            ) {
+                $idsiguales[] = $k;
+            } else {
+                $dn = levenshtein($anombres, $nombres);
+                $da = levenshtein($aapellidos, $apellidos);
+                $dna = levenshtein($anomap, $nomap);
+                if (($dn <= $mdlev && $da <= $mdlev) || $dna < $mdlev) {
+                    $idssimilares[] = $k;
+                } 
+            }
+        }
+    }
+}
 
 /**
  * Convierte datos de persona y los inserta/actualiza en la base
@@ -822,6 +912,8 @@ function conv_fecha($fecha, &$obs, $depura = false)
  * @param string $nom             Nombre buscado
  * @param string $ap              Apellido buscado
  * @param string $anionac         Año de nacimiento
+ * @param string $mesnac          Mes de nacimiento
+ * @param string $dianac          Dia de nacimiento
  * @param string $sexo            Sexo
  * @param string $id_departamento Código del dep. de procedencia
  * @param string $id_municipio    Código del mun. de procedencia
@@ -829,18 +921,35 @@ function conv_fecha($fecha, &$obs, $depura = false)
  * @param string $tipodocumento   Tipo de documento de identidad
  * @param string $numerodocumento Número de documento de identidad
  *
- * @return array (d, m, c) Identificaciones de departamento, municipio y clase
+ * @return integer  Identificación de registro persona insertado/actualizado
  */
-function conv_persona(&$db, &$aper, &$obs, $nom, $ap, $anionac, $sexo = 'S',
+function conv_persona(&$db, &$aper, &$obs, $nom, $ap, $anionac, 
+    $mesnac = null, $dianac = null, $sexo = 'S',
     $id_departamento = null, $id_municipio = null, $id_clase = null,
     $tipodocumento = null, $numerodocumento = null
 ) {
-    $nombres = $nom;
-    $apellidos = $ap;
+    //echo "OJO conv_persona(db, aper, obs, $nom, $ap, $anionac,...)<br>\n";
+    if (isset($GLOBALS['estilo_nombres']) 
+        && $GLOBALS['estilo_nombres'] == 'MAYUSCULAS'
+    ) {
+        $nombres = a_mayusculas($nom);
+        $apellidos = a_mayusculas($ap);
+    } else if (isset($GLOBALS['estilo_nombres']) 
+        && $GLOBALS['estilo_nombres'] == 'minusculas'
+    ) {
+        $nombres = prim_may($nom);
+        $apellidos = prim_may($ap);
+    } else {
+        $nombres = $nom;
+        $apellidos = $ap;
+    }
+
+    //echo "OJO conv_persona. nombres=$nombres, apellidos=$apellidos<br>\n";
     $idper = -1;
     $nomap = trim(trim($nombres) . " " . trim($apellidos));
     if ($nomap != 'NN' && $nomap != 'N N' && $nomap != 'N.N'
         && $nomap != 'N.N.' && $nomap != 'N N.'
+        && substr($nomap, 0, 4) != 'N.N '
     ) {
         foreach ($aper as $k=>$na) {
             $anombres = $na[0];
@@ -851,6 +960,7 @@ function conv_persona(&$db, &$aper, &$obs, $nom, $ap, $anionac, $sexo = 'S',
                 $cper .= $sep . $nc;
                 $sep = ", ";
             }
+            //echo "OJO comp $anombres, $nombres y $aapellidos, $apellidos<br>";
             if (strcasecmp($anombres, $nombres) == 0
                 && strcasecmp($aapellidos, $apellidos) == 0
             ) {
@@ -872,22 +982,24 @@ function conv_persona(&$db, &$aper, &$obs, $nom, $ap, $anionac, $sexo = 'S',
         }
     }
     if ($idper==-1) {
-            $dpersona = objeto_tabla('persona');
-            $dpersona->nombres = $nombres;
-            $dpersona->apellidos = $apellidos;
-            $dpersona->sexo = $sexo;
-            $dpersona->insert();
-            $idper = $dpersona->id;
-            $aper[$idper] = array($nombres, $apellidos, array());
+        $dpersona = objeto_tabla('persona');
+        $dpersona->nombres = $nombres;
+        $dpersona->apellidos = $apellidos;
+        $dpersona->sexo = $sexo;
+        $dpersona->insert();
+        //print_r($dpersona);
+        $idper = $dpersona->id;
+        $aper[$idper] = array($nombres, $apellidos, array());
     }
     $dpersona = objeto_tabla('persona');
     $dpersona->id = $idper;
     $dpersona->find(1);
     foreach (array(
-        'anionac', 'id_departamento', 'id_municipio',
+        'anionac', 'mesnac', 'dianac', 'id_departamento', 'id_municipio',
         'id_clase', 'tipodocumento', 'numerodocumento'
     ) as $c
     ) {
+        //echo "OJO c=$c, \$c=" . $$c ."<br>";
         if ($$c != null && $dpersona->$c == null) {
             $dpersona->$c = $$c;
         }
@@ -904,19 +1016,13 @@ function conv_persona(&$db, &$aper, &$obs, $nom, $ap, $anionac, $sexo = 'S',
  *
  * @param object &$db Conexion a base de datos
  *
- * @return array($aper, $maxidper, $fechacaso, $ubicaso, $cat, $obs) arreglo
- * de persona, maxima identificació, arreglo de fechas de los casos, arreglo
- * de ubicaciones de los casos, arreglo de categorias, arreglo de observaciones.
- * Indexados por la identificación en base.
+ * @return array($aper, $maxidper) arreglo
+ * de personas indexado por identificación en base, maxima identificación
  */
 function extrae_per(&$db)
 {
     $aper = array(); // aper[idper] es arreglo con nombre, apellidos,
     // arreglo de casos en los que aparece
-    $fechacaso = array(); // fechacaso[idcaso] es fecha en la que ocurrió caso
-    $ubicaso = array(); // ubicaso[idcaso] es arreglo con id_dep, id_mun
-    $cat = array(); // cat[idcaso] es arreglo de categorias del caso
-    $obs = array(); // obs[idcaso] es cadena con observaciones de la conversión
 
     $options =& PEAR::getStaticProperty('DB_DataObject', 'options');
     $options['dont_die'] = true;
@@ -958,7 +1064,7 @@ function extrae_per(&$db)
         }
     }
 
-    return array($aper, $maxidper, $fechacaso, $ubicaso, $cat, $obs);
+    return array($aper, $maxidper);
 }
 
 
@@ -980,6 +1086,16 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
         trim(utf8_decode($grupo->nombre_grupo))
     );
     $nombre = str_replace("*", "", $nombre);
+
+    if (isset($GLOBALS['estilo_nombres']) 
+        && $GLOBALS['estilo_nombres'] == 'MAYUSCULAS'
+    ) {
+        $nombre = a_mayusculas($nombre);
+    } else if (isset($GLOBALS['estilo_nombres']) 
+        && $GLOBALS['estilo_nombres'] == 'minusculas'
+    ) {
+        $nombre = prim_may($nombre);
+    }
 
     $idgr = -1;
     foreach ($agr as $k => $na) {
@@ -1024,7 +1140,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
     $oa = dato_en_obs($grupo, 'organizacion_armada');
     if ($oa != '') {
         $dvictimacol->id_organizacion_armada
-            = (int)convBasica(
+            = (int)conv_basica(
                 $db, 'presuntos_responsables', $oa, $obs
             );
     }
@@ -1048,7 +1164,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
                 $drviccol->id_caso = $idcaso;
                 $drviccol->id_grupoper = $idgr;
                 $pl = explode(':', $l[$idt]); //vinculo_estado:id
-                $drviccol->$idt = (int)convBasica($db, $pl[0], $v, $obs);
+                $drviccol->$idt = (int)conv_basica($db, $pl[0], $v, $obs);
                 if (!$drviccol->insert()) {
                     repObs(
                         "Colectiva: No pudo insertar '$v' en "
@@ -1066,16 +1182,12 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
 /**
  * Retorna información de todos grupos en la base
  *
- * @param object &$db        Conexion a base de datos
- * @param array  &$fechacaso Fecha del caso
- * @param string &$ubicaso   Ubicación
- * @param string &$cat       Categoría de violencia
- * @param string &$obs       Colchon para agregar observaciones
+ * @param object &$db Conexion a base de datos
  *
  * @return array $agr[$idgr] = array($nom, $lc) indexado por identificación
  * de grupos, cada uno tiene nombre y arreglo de casos en los que aparece
  */
-function extrae_grupos(&$db, &$fechacaso, &$ubicaso, &$cat, &$obs)
+function extrae_grupos(&$db)
 {
     $agr = array();
     // agr[idper] es arreglo con nombre arreglo de casos en los que aparece
@@ -1223,12 +1335,12 @@ function sxml_valor_atributo($oxml, $nomat)
  * Determina si en las observaciones de un objeto hay un dato buscado
  * y de haberlo lo retorna
  *
- * @param object $oxml Objeto XML
- * @param string $id   Identificación por buscar en observaciones
+ * @param object &$oxml Objeto XML
+ * @param string $id    Identificación por buscar en observaciones
  *
  * @return null si no hay observacion con el tipo dado o la observación
  */
-function dato_en_obs($oxml, $id)
+function dato_en_obs(&$oxml, $id)
 {
     assert(isset($oxml) && get_class($oxml) == 'SimpleXMLElement');
     assert(isset($id) && $id != '');
@@ -1242,7 +1354,7 @@ function dato_en_obs($oxml, $id)
     if (count($po) > 1) {
         echo "Problema en función <tt>datoenObservaciones(oxml, id="
             . htmlentities($id)
-            . ")</tt>."
+            . ")</tt>." 
             . "  Hay varias observaciones con tipo buscado<br>";
     }
     $r = utf8_decode((string)$po[0]);
@@ -1285,7 +1397,7 @@ function dato_basico_en_obs(&$db, &$obs, $oxml,
             $adat = array(0 => $noms);
         }
         foreach ($adat as $nom) {
-            $idb = convBasica($db, $ntablabas, $nom, $obs);
+            $idb = conv_basica($db, $ntablabas, $nom, $obs);
             //echo "OJO itera nom=$nom, idb=$idb<br>";
             if ($idb != 0 && $ntablacaso != '') {
                 $dt = objeto_tabla($ntablacaso);
@@ -1322,6 +1434,87 @@ function conv_categoria(&$db, &$obs, $agr, $pr)
         $id_categoria = conv_violacion($db, $agr, $pr, $obs);
     }
     return $id_categoria;
+}
+
+
+/**
+ * Convierte presunto responsable si hay uno en tabla básica
+ *
+ * @param object &$db       Conexion a base de datos
+ * @param int    $idcaso    Id. Caso
+ * @param int    $idp       Id. presunto responsable leido en relato
+ * @param object $g         Datos del presunto responsable como grupo
+ * @param array  &$id_presp Arreglo de pr. resp ya identificados
+ * @param string &$obs      Colchon para reportar notas de conversión
+ *
+ * @return integer Identificación de presunto responsable en base o -1 si no hay
+ */
+
+function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
+{
+    $nomg = utf8_decode($g->nombre_grupo);
+    $pr = conv_basica(
+        $db, 'presuntos_responsables',
+        $nomg, $obs, false
+    );
+    if ($pr == -1) {
+        return -1;
+    }
+    $id_presp[$idp] = $pr;
+    //echo "OJO asignando id_presp[$idp]=$pr<br>";
+    $dpresp = objeto_tabla('presuntos_responsables_caso');
+    $dpresp->id_caso = $idcaso;
+    $dpresp->id_p_responsable = $pr;
+    $dpresp->tipo = 0;
+    $dpresp->id = 1;
+    foreach (array('bloque', 'frente', 'brigada',
+        'batallon', 'division', 'otro') as $c
+    ) {
+        $dpresp->$c = dato_en_obs($g, $c);
+    }
+    $ids = DataObjects_Presuntos_responsables::idSinInfo();
+    if ($pr == $ids
+        && $nomg != 'SIN INFORMACIÓN'
+        && $nomg != 'SIN INFORMACION'
+    ) {
+        $dpresp->otro = $nomg;
+    }
+    if (!$dpresp->insert()) {
+        repObs(
+            "No pudo insertar p. resp '" .
+            $dpresp->id_p_responsable . "'",
+            $obs
+        );
+    }
+    foreach ($g->agresion_sin_vicd as $ag) {
+        if (!empty($ag)) {
+            $idc = conv_categoria(
+                $db, $obs,
+                utf8_decode((string)$ag), $pr
+            );
+            $ocp = objeto_tabla('categoria_p_responsable_caso');
+            $ocp->id_caso = $idcaso;
+            $ocp->id_p_responsable = $pr;
+            $ocp->id = $dpresp->id;
+            $ocp->id_categoria = $idc;
+            $ocat = objeto_tabla('Categoria');
+            $ocat->id = (int)$idc;
+            $ocat->find(1); $ocat->fetch();
+            if (PEAR::isError($ocat)) {
+                repObs(
+                    "No se reconoció categoria $ag",
+                    $obs
+                );
+            } else {
+                $ocp->id_tipo_violencia
+                    = $ocat->id_tipo_violencia;
+                $ocp->id_supracategoria
+                    = $ocat->id_supracategoria;
+                $ocp->insert();
+            }
+        }
+    }
+    return $pr;
 }
 
 ?>

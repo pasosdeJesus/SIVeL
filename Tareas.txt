@@ -1,36 +1,6 @@
 
 1.2 o posteriores
 
-
-1. Dejamos las fuentes en UTF-8 pero la salida HTML por defecto ISO-8859-1
-2. Se evaluará pasar salida HTML a UTF-8 asi como otras salidas (CSV, XML)
-   respecto a concentrar esfuerzos de interfaz en SIVeL 2.0
-3. Se evaluará pasar datos de la base de datos a UTF-8 
-
-Documentar ayudas para el paso a paso a UTF-8
-
-http://www.phpwact.org/php/i18n/charsets
-Con vim http://www.maruko.ca/i18n/
- 
-En OpenBSD adJ 5.0 hay xterm con buen soporte para UTF-8 (el de tmux está
-mejorando en enero 2012).
-para iniciar xterm que soporta UTF-8:
-	xterm -en utf8
-En estas términales puede usar vim con:
-	set filencoding=utf-8
-	set encoding=utf-8
-	set tenc=utf-8
-
-Si usa un xterm y/o tmux que no soporten UTF-8, en ~/.vimrc como vim
-si los soporta bien puede emplear:
-	set tenc=latin-1
-	set enc=utf-8
-
-
-
-Semantic Versioning
-http://semver.org/
-
 Consulta detallada buscar por procedencia de víctima
 
 Falta consulta detallada al especificar 

@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2005 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: consulta_web_correo.php,v 1.45.2.3 2011/10/18 16:05:02 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: CONSULTA PÚBLICA
  */

@@ -12,7 +12,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2005 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: consulta_web.php,v 1.119.2.6 2011/12/31 19:28:47 vtamara Exp $
  * @link      http://sivel.sf.net
  */
 
@@ -93,8 +92,10 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         $pMFuentes  = (int)var_req_escapa('m_fuentes', $db);
         $pRetroalimentacion = (int)var_req_escapa('retroalimentacion', $db);
         $pVarLineas = (int)var_req_escapa('m_varlineas', $db);
+        $pConcoordenadas = (int)var_req_escapa('concoordenadas', $db);
         $pTeX       = (int)var_req_escapa('m_tex', $db);
         $pTitulo    = substr(var_req_escapa('titulo', $db), 0, 32);
+        $pTvio	= substr(var_req_escapa('tipo_violencia', $db), 0, 1);
 
         $campos = array(); //'caso_id' => 'Cód.');
         $tablas = "caso";
@@ -138,13 +139,26 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             $GLOBALS['consulta_web_fecha_max'], "<="
         );
 
-        if ($pClasificacion != '') {
-            $ini = '(';
-            $so = '';
-            $tind = false;
-            $tcol = false;
-            $totr = false;
-            foreach ($pClasificacion as $cla) {
+	if ($pTvio!= '') {
+	    $where .= ' AND caso.id IN '
+		. "(SELECT id_caso FROM acto, categoria WHERE 
+		   acto.id_categoria=categoria.id
+		   AND categoria.id_tipo_violencia='$pTvio'
+		   UNION
+		   SELECT id_caso FROM actocolectivo, categoria WHERE
+		   actocolectivo.id_categoria=categoria.id
+		   AND categoria.id_tipo_violencia='$pTvio'
+		   UNION
+		   SELECT id_caso FROM categoria_p_responsable_caso WHERE
+		   id_tipo_violencia='$pTvio')";
+	} 
+	if ($pClasificacion != '') { 
+	    $ini = '('; 
+	    $so = ''; 
+	    $tind = false; 
+	    $tcol = false; 
+	    $totr = false;
+	    foreach ($pClasificacion as $cla) {
                 $r = explode(":", $cla);
                 $so2='';
                 $dcatc = objeto_tabla('categoria');
@@ -251,6 +265,13 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
             consulta_and(
                 $db, $where, "ubicacion.id_departamento", $pIdDepartamento
+            );
+            $tablas .= ", ubicacion";
+        }
+        if ($pConcoordenadas) {
+            consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
+            consulta_and_sinap(
+                $where, "ubicacion.latitud", "NULL", " IS NOT "
             );
             $tablas .= ", ubicacion";
         }
@@ -659,6 +680,18 @@ class ConsultaWeb extends HTML_QuickForm_Page
             }
         }
 
+        $opch = array();
+        $sel =& $this->createElement(
+            'checkbox',
+            'concoordenadas', 'Con Coordenadas', 'Con Coordenadas'
+        );
+        $opch[] =& $sel;
+
+        $this->addGroup(
+            $opch, null, 'Coordenadas', '&nbsp;', false
+        );
+
+
         $ae = array();
         $x =& $this->createElement(
             'radio', 'ordenar', 'fecha',
@@ -790,8 +823,12 @@ class ConsultaWeb extends HTML_QuickForm_Page
                     $idc, $dc, $dc
                 );
                 if (!in_array($idc, $asinc)) {
-                    $sel->setValue(true);
-                }
+                    if (isset($GLOBALS['cw_ncampos_valor_inicial'][$idc])) {
+                        $sel->setValue($GLOBALS['cw_ncampos_valor_inicial'][$idc]);
+                    } else {
+                        $sel->setValue(true);
+                    }
+                } 
                 $opch[] =& $sel;
             }
         };

@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2009 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   $$
  * @link      http://sivel.sf.net
  */
 
@@ -120,7 +119,7 @@ if (!aplicado($idac)) {
 
 $idac = 'sj-fe';
 if (!aplicado($idac)) {
-    foreach (array('tipo_accion', 'etapa', 'despacho', 'tipo_proceso') as $nt) {
+    foreach(array('tipo_accion', 'etapa', 'despacho', 'tipo_proceso') as $nt) {
         agrega_fechas($db, $nt);
     }
 

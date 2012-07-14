@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2005 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: PagBaseSimple.php,v 1.50.2.6 2011/10/13 13:41:06 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -163,7 +162,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
         $this->_submitValues = array();
         $this->_defaultValues = array();
 
-        $cm = "b".$this->clase_modelo;
+        $cm = "b" . $this->clase_modelo;
         if (!isset($cm) || $cm == null || !isset($this->$cm)
             || $this->$cm == null
         ) {
@@ -445,6 +444,32 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
     {
     }
 
+    /**
+     * Llamada desde consolidado durante construcción de formulario para
+     * dar la posibilidad de añadir elementos.
+     *
+     * @param object &$db   Conexión a B.D
+     * @param object &$form Formulario
+     *
+     * @return Cadena por presentar
+     */
+    static function consolidadoFiltro(&$db, &$form)
+    {
+    }
+
+    /**
+     * Llamada desde consolidado para completar consulta SQL en caso
+     *
+     * @param object &$db     Conexión a B.D
+     * @param string &$where  Consulta SQL por completar
+     * @param string &$tablas Tablas incluidas en consulta
+     *
+     * @return void
+     */
+    static function consolidadoCreaConsulta(&$db, &$where, &$tablas)
+    {
+    }
+
 
     /**
      * Llamada para completar registro por mostrar en Reporte General.
@@ -497,7 +522,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      *
      * @return void Modifica $tablas y $where
      */
-    static function estadisticasIndCreaConsulta(&$db, &$where, &$tablas)
+    static function estadisticasIndCreaConsulta(&$db, &$where, &$tablas) 
     {
     }
 
@@ -513,7 +538,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
     /**
      * Llamada para crear encabezado en Javascript
      *
-     * @param string &$js colchon de funciones en javascript
+     * @param string &$js colchon de funciones en javascript 
      *
      * @return void
      */
@@ -536,6 +561,224 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
     static function importaRelato(&$db, $r, $idcaso, &$obs)
     {
     }
+
+    /**
+     * Campos de la ficha que se comparan en función compara
+     * 
+     * @return array con nombres de campos
+     */
+    static function campos_compara() 
+    {
+        return array('titulo', 'hora', 'duracion');
+    }
+
+
+    /**
+     * Compara datos relacionados con esta pestaña de los casos 
+     * con identificación id1 e id2.
+     *
+     * @param object  &$db Conexión a base de datos
+     * @param array   &$r  Para llenar resultados de comparación, cada 
+     *   entrada es de la forma 
+     *      id_unica => ('etiqueta', 'valor1', 'valor2', pref)
+     *   donde valor1 es valor en primer caso, valor2 es valor en segundo
+     *   caso y pref es 1 o 2 para indicar cual de los valores será por defecto
+     * @param integer $id1 Código de primer caso
+     * @param integer $id2 Código de segundo caso
+     * @param array   $cls Especificación de las tablas por revisar.
+     *
+     * @return void Añade a $r datos de comparación
+     */
+    static function compara(&$db, &$r, $id1, $id2, $cls = array('caso')) 
+    {
+        //echo "<br>OJO PagBaseSimple::compara(db, r, $id1, $id2, "; print_r($cls); 
+        $enl = parse_ini_file(
+            $_SESSION['dirsitio'] . "/DataObjects/" .
+            $GLOBALS['dbnombre'] . ".links.ini",
+            true
+        );
+        //print_r($enl); die("x");
+        foreach ($cls as $cl) {
+            //echo "cl=$cl ";
+            $d1 = objeto_tabla($cl);
+            if ($cl == 'caso') {
+                $d1->id = $id1;
+            } else {
+                $d1->id_caso = $id1;
+            }
+            $d1->find(1);
+            $d2 = objeto_tabla($cl);
+            if ($cl == 'caso') {
+                $d2->id = $id2;
+            } else {
+                $d2->id_caso = $id2;
+            }
+            $d2->find(1);
+            foreach ($d1->fb_fieldLabels as $c => $et) {
+                //echo "<br>c=$c ";
+                $v1 = $v2 = "";
+                $vp = 1;
+                if (trim($d2->$c) != trim($d1->$c)) {
+                    if (strlen(trim($d2->$c)) > strlen(trim($d1->$c))) {
+                        $vp = 2;
+                    }
+                    $eti = $et;
+                    if (isset($GLOBALS['etiqueta'][$c])) {
+                        $eti = $GLOBALS['etiqueta'][$c];
+                    }
+                    $v1 = $d1->$c;
+                    $v2 = $d2->$c;
+                    //echo ", v1=$v1, v2=$v2";
+                    if (isset($enl[$cl][$c])) {
+                        if ($c == 'id_municipio') {
+                            $de1 = objeto_tabla('municipio');
+                            $de1->id_departamento = $d1->id_departamento;
+                            $de1->id = $d1->id_municipio;
+                            $de1->find(1);
+                            $de2 = objeto_tabla('municipio');
+                            $de2->id_departamento = $d2->id_departamento;
+                            $de2->id = $d2->id_municipio;
+                            $de2->find(1);
+                        } else if ($c == 'id_clase') {
+                            $de1 = objeto_tabla('clase');
+                            $de1->id_departamento = $d1->id_departamento;
+                            $de1->id_municipio= $d1->id_municipio;
+                            $de1->id = $d1->id_clase;
+                            $de1->find(1);
+                            $de2 = objeto_tabla('clase');
+                            $de2->id_departamento = $d2->id_departamento;
+                            $de2->id_municipio= $d2->id_municipio;
+                            $de2->id = $d2->id_clase;
+                            $de2->find(1);
+                        } else {
+                            $de1 = $d1->getLink($c);
+                            $de2 = $d2->getLink($c);
+                        }
+                        if ((method_exists($de1, 'idSinInfo')
+                            && $v1 == $de1->idSinInfo())
+                            || $de1->nombre == 'POR DETERMINAR'
+                        ) {
+                            $vp = 2;
+                        } else if ((method_exists($de2, 'idSinInfo')
+                            && $v2 == $de2->idSinInfo()) 
+                            || $de2->nombre == 'POR DETERMINAR'
+                        ) {
+                            $vp = 1;
+                        }
+                        if ($v1 != null) {
+                            if ($c == 'id_rango_edad') {
+                                $v1 = $de1->rango;
+                            } else {
+                                $v1 = $de1->nombre;
+                            }
+                        }
+                        if ($v2 != null) {
+                            if ($c == 'id_rango_edad') {
+                                $v2 = $de2->rango;
+                            } else {
+                                $v2 = $de2->nombre;
+                            }
+                        }
+                        //echo "OJO , v1=$v1, v2=$v2";
+                    }
+                    $r[$cl . '-' . $c] = array(
+                        $eti, $v1, $v2, $vp
+                    );
+                }
+            }
+        }
+        //print_r($r);
+    }
+
+    /**
+     * Mezcla valores de los casos $id1 e $id2 en el caso $idn de
+     * acuerdo a las preferencias especificadas en $sol.
+     *
+     * @param object  &$db Conexión a base de datos
+     * @param array   $sol Arreglo con solicitudes de cambios de la forma
+     *   id_unica => (pref)
+     *   donde pref es 1 si el valor relacionado con id_unica debe
+     *   tomarse del caso $id1 o 2 si debe tomarse de $id2.  Las 
+     *   identificaciones id_unica son las empleadas por la función
+     *   compara.
+     * @param integer $id1 Código de primer caso
+     * @param integer $id2 Código de segundo caso
+     * @param integer $idn Código del caso en el que aplicará los cambios
+     * @param arrayer $cls Especificación de tablas por mezclar
+     *
+     * @return Mezcla valores de los casos $id1 e $id2 en el caso $idn de
+     * acuerdo a las preferencias especificadas en $sol.
+     */
+    static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls) 
+    {
+        //echo "OJO PagBaseSimple::mezcla(db, "; 
+        //print_r($sol); echo ", $id1, $id2, $idn, "; 
+        //print_r($cls); echo ")<br> "; 
+        if (!is_array($cls)) {
+            $cls = array($cls);
+        }
+        foreach ($cls as $t) {
+            $d1 = objeto_tabla($t);
+            $d2 = objeto_tabla($t);
+            $dd = objeto_tabla($t);
+            if ($t == 'caso') {
+                $d1->id = $id1;
+                $d2->id = $id2;
+                $dd->id = $idn;
+            } else {
+                $d1->id_caso = $id1;
+                $d2->id_caso = $id2;
+                $dd->id_caso = $idn;
+            }
+            $d1->find(1);
+            $d2->find(1);
+            if ($t == 'casoreiniciar' || $t == 'carpeta') {
+                hace_consulta(
+                    $db, "INSERT INTO $t (id_caso) VALUES ('$idn');"
+                );
+            }
+            $dd->find();
+            $nuevodd = !$dd->fetch();
+
+            foreach ($d1->fb_fieldLabels as $c => $et) {
+                //echo "<br>OJO c=$c ";
+                $v1 = $v2 = "";
+                $vp = 1;
+                if ($t == 'caso' && $c == 'id') {
+                    continue;
+                }
+                if (isset($sol[$t][$c])) {
+                    $vp = $sol[$t][$c];
+                }
+                if ($vp == 1) {
+                    //echo "  Elegido 1<br>";
+                    $dd->$c = $d1->$c;
+                } else {
+                    //echo "  Elegido 2<br>";
+                    $dd->$c = $d2->$c;
+                }
+            }
+            if ($nuevodd) {
+                //echo "nuevodd=$nuevodd";
+                //echo $t;
+                $dd->id_caso = $idn;
+            }
+            if ($t != 'caso'  && ($dd->id_caso == null 
+                || ($t == 'ubicacion' && $dd->id == null)
+                || $nuevodd )
+            ) {
+                    //echo "OJO insertando";
+                $dd->id_caso = $idn;
+                //echo "Antes: "; print_r($dd);
+                $dd->insert();
+            } else if ($t == 'caso' || $dd->id_caso == $idn) {
+                //echo "OJO actualizando";
+                $dd->update();
+            }
+            //echo "Después: "; print_r($dd);
+        }
+    }
+
 
 }
 

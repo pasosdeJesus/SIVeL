@@ -254,7 +254,7 @@ echo " PostgreSQL corriendo";
 proceso post Postgresql 
 check "SOCKPSQL" "" "test -S \$SOCKPSQL/.s.PGSQL.5432" '/var/www/tmp/' '/tmp/' '/var/run/postgresql/'
 
-check "PHP" "" "test -x \$PHP" `which php 2> /dev/null`
+check "PHP" "" "test -x \$PHP" `which php-5.2 2> /dev/null` `which php 2> /dev/null` 
 verphp=`$PHP -v | grep "PHP " | sed -e "s|.*PHP \([0-9.]*\).*|\1|g"`;
 if (test "$?" != 0 -o "x$verphp" = "x") then {
 	echo "  $PROYECTO funciona con versiones de PHP posteriores a la 5.0";
@@ -295,7 +295,7 @@ echo \"HTML/QuickForm/date si soporta años superiores a 2010\n\";
 exit(0);
 ?>" > /tmp/rfecha.php
 
-php /tmp/rfecha.php
+$PHP /tmp/rfecha.php
 if (test "$?" != "0") then {
 	echo "Aplique solución descrita en http://pear.php.net/bugs/bug.php?id=18171&edit=12&patch=date&revision=1295481833";
 	exit 1;

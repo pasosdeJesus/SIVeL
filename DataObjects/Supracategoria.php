@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Supracategoria.php,v 1.14.2.3 2011/10/22 14:58:19 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -106,19 +105,6 @@ class DataObjects_Supracategoria extends DataObjects_Basica
     function postGenerateForm(&$form, &$formbuilder)
     {
         parent::postGenerateForm($form, $formbuilder);
-/*        $h =& $form->getElement('__header__');
-        if (PEAR::isError($h)) {
-            $h =& $form->getElement(null);
-        }
-        $h->setValue($this->nom_tabla);
-        $f =& $form->getElement('fechadeshabilitacion');
-        if (!isset($this->fechadeshabilitacion)
-            || $this->fechadeshabilitacion == ''
-        ) {
-            $f->_elements[0]->setValue('');
-            $f->_elements[1]->setValue('');
-            $f->_elements[2]->setValue('');
-       }*/
     }
 
 }

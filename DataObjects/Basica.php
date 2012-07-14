@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2009 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Basica.php,v 1.12.2.2 2011/10/22 12:55:07 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -34,15 +33,13 @@ require_once 'DB_DataObject_SIVeL.php';
  */
 class DataObjects_Basica extends DB_DataObject_SIVeL
 {
-    // START_AUTOCODE
-    /* the code below is auto generated do not remove the above tag */
 
     var $__table = 'basica';                       // table name
     var $id;                            // int4(4)  not_null primary_key
     var $nombre;                        // varchar(-1)  not_null
     var $fechacreacion;                 // date(4)
     var $fechadeshabilitacion;          // date(4)
-
+    
     var $nom_tabla = 'Básica';
 
     var $fb_linkDisplayFields = array('nombre');

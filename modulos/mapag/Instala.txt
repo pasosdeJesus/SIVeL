@@ -11,6 +11,9 @@ Módulo Mapa con GoogleMaps por Luca Urech <lucaurech@yahoo.de>
 	1.2 complete opciones del menú agregando:
 		$GLOBALS['modulo'][300]='modulos/mapag/index.php';
 
+        1.3 Aumente el limite de casos por mostrar en consulta web para
+            que puedan presentarse todos los de la base.
+
 3. Desde un navegador abra la página de actualización de la base, por
    ejemplo desde el mismo servidor con:
 	https://127.0.0.1/actualiza.php  

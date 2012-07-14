@@ -1,13 +1,13 @@
 Seguimiento Judicial
 
 1. En el archivo de configuración de SIVeL
-	1.1 Agregue modulos/etiquetas entre los módulos, por ejemplo
+	1.1 Agregue modulos/segjudicial entre los módulos, por ejemplo
 	    con anexos y etiquetas sería:
-		$modulos="modulos/segjudicial";
+		$modulos="modulos/anexos modulos/etiquetas modulos/segjudicial";
 
 	1.2 Agregue la pestaña de Observaciones en
 		$GLOBALS['ficha_tabuladores']
-	    por ejemplo con los módulos anexos y observaciones sería:
+	    por ejemplo con los módulos anexos y etiquetas sería:
 $GLOBALS['ficha_tabuladores']=array(
     0 => array('basicos', 'PagBasicos', 12),
     1 => array('ubicacion', 'PagUbicacion', 4),

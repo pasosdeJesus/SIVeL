@@ -64,8 +64,9 @@ function addCases(refresh) {
 	var desde = $('#inputDesde').val();
 	var hasta = $('#inputHasta').val();
 	var departamento = $('#departamento').val();
-	var municipio = $('#municipio').val();
+	//var municipio = $('#municipio').val();
 	var prresp = $('#prresp').val();
+	var tvio = $('#tvio').val();
 
 		
 	var requestUrl = "modulos/mapag/casos_sivel_remote.php?desde=" + desde;
@@ -73,8 +74,8 @@ function addCases(refresh) {
 	if (departamento != 0) {
 		requestUrl += "&departamento=" + departamento;
 	}
-	if (municipio != 0) {
-		requestUrl += "&municipio=" + municipio;
+	if (tvio != 0) {
+		requestUrl += "&tvio=" + tvio;
 	}
 	if (prresp != 0) {
 		requestUrl += "&prresp=" + prresp;
@@ -191,8 +192,8 @@ function createMarker(point, codigo, title) {
 			
 			infoTabs = [
 					new GInfoWindowTab("Descripción", descripcionCont),
-					new GInfoWindowTab("Hechos", hechosCont),
-					new GInfoWindowTab("Victimas", victimasCont)
+					new GInfoWindowTab("Datos", hechosCont),
+					new GInfoWindowTab("Víctimas", victimasCont)
 			]
 								
 			var options= { maxWidth: 400 }; 

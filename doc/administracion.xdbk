@@ -606,9 +606,9 @@ php herram/hex2bin.php &lt; /tmp/hex &gt; /tmp/cifrado
         instalación de fuentes, configurar diversos sitios cada uno con su
         URL, autenticación y base de datos únicos.</para>
     <para>Para agregar un nuevo sitio (digamos <literal>sivelmb</literal>) 
-        en una términal ubiquese en las fuentes de SIVeL y ejecute:
+        en una términal ubiquese en las fuentes de SIVeL ejecutando:
         <screen>
-cd sitios
+cd /var/www/htdocs/sivel/sitios
 ./nuevo.sh sivelmb
         </screen>
         a continuación agregue un punto de entrada en el servidor web,
@@ -616,49 +616,33 @@ cd sitios
         <literal>https://127.0.0.1/sivelmb/</literal>, si las
         fuentes de SIVeL están en <filename>/var/www/htdocs/sivel</filename>
         agregué a la sección de Alias de 
-        <filename>/var/www/conf/httpd.conf</filename>:
+        <filename>/var/www/conf/httpd.conf</filename>.  Puede editar
+el archivo de configuracion con:
+
+        <screen>
+sudo xfw /var/www/conf/httpd.conf
+        </screen> 
+Busque la palabra "Alias" y agregue:
         <screen>
 Alias /sivelmb/ "/var/www/htdocs/sivel"
         </screen> 
-        y reinicie el servidor web.</para>
+        y reinicie el servidor web desde una terminal con:
+        <screen>
+sudo apachectl stop
+sudo sh /etc/rc.local
+        </screen> 
+</para>
     <para>
         Después cree un enlace que permita redireccionar a su nuevo
         sitio, para determinar el nombre del enlace convierta los símbolos
         '/' del URL a '_' y páselo a mayúsculas o aún más sencillo intente
-        ingresar al URL donde debe ver un mensaje que incluirá el nombre
-        del enlace que debe crear, para este caso desde el directorio 
+        ingresar al URL donde debe ver un mensaje que incluirá instrucciones
+	para crear el enlace.
+        Para este ejemplo desde el directorio 
         <filename>sitios</filename> ejecute:
         <screen>
 ln -s sivelmb 127.0.0.1_SIVELMB        
         </screen>
-        Verifique los datos del archivo <filename>sivelmb/conf.php</filename>
-        para asegurar que referencia un usuario de PostgreSQL, una clave
-        y una base de datos correcta:
-        <screen>
-$dbnombre = "sivelmb";
-...
-$dbusuario = "sivel";
-...
-$dbclave = "miclave";
-        </screen>
-        Cree la base de datos ejecutando desde una terminal:
-        <screen>
-cd sivelmb
-../../bin/creapg.sh
-        </screen>
-        Desde ese directorio puede asegurar o repetir la creación de la 
-        configuración de los esquemas con:
-        <screen>
-../../bin/creaesquema.sh
-        </screen>
-
-        Agregue un primer usuario desde el mismo directorio
-        <filename>sitios/sivelmb</filename> con:
-        <screen>
-../../bin/agus.sh
-        </screen>
-        y finalmente ingrese a probar el nuevo sitio con un navegador
-        en el URL <literal>https://127.0.0.1/sivelmb</literal>.
     </para>
 	</sect2>
 </sect1>

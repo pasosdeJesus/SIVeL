@@ -60,7 +60,8 @@
 	<itemizedlist>
 		<listitem>
 			<para>William Rozo Alvarez (wiroal@nocheyniebla.org), 
-				juana, M, Juliana Villabono, Bernardo.
+                Juana, M, Juliana Villabono, Bernardo, Jerry Garavito,
+                Freddy.
 			</para>
 		</listitem>
 	</itemizedlist>
@@ -78,9 +79,40 @@
 	</itemizedlist>
 </para>	
 <para>
+    Con respecto a módulos:
+	<itemizedlist>
+		<listitem>
+<para>
 	El módulo de seguimiento judicial y los datos relacionados han
 	sido aportados por Humanidad Vigente.
 </para>	
+		</listitem>
+		<listitem>
+<para>
+	El módulo de Etiquetas se desarrolló inicialmente para el OPI.
+</para>
+		</listitem>
+		<listitem>
+
+<para>
+	El módulo de Estadísticas por Rótulos se desarrolló inicialmente para Justapaz.
+</para>
+		</listitem>
+		<listitem>
+<para>
+	El módulo de Anexos se desarrolló inicialmente para Reiniciar.
+</para>
+		</listitem>
+		<listitem>
+<para>
+    El módulo de Georeferenciación sobre Googlemaps lo desarrollo 
+    Luca Urech &lt;lucaurech@yahoo.de&gt; para la Corporación Compromiso.
+</para>
+		</listitem>
+	</itemizedlist>
+</para>	
+
+
 <para>
 	Han ayudado a documentar:
 	<itemizedlist>
@@ -109,22 +141,6 @@
 	</itemizedlist>
 </para>
 
-<para>
-	El módulo de Etiquetas se desarrolló inicialmente para el OPI.
-</para>
-
-
-<para>
-	El módulo de Estadísticas por Rótulos se desarrolló inicialmente para Justapaz.
-</para>
-
-<para>
-	El módulo de Acciones Judiciales se desarrolló inicialmente para Humanidad Vigente, quienes han aportado también los datos que requiere este módulo.
-</para>
-
-<para>
-	El módulo de Anexos se desarrolló inicialmente para Reiniciar.
-</para>
 
 <para>
 	Han ayudado a programar:
@@ -157,7 +173,7 @@
 		El cabezote del menú principal y el fondo son aportes
 		de William Rozo (wiroal@nocheyniebla.org).
 	</para>
-	<para>Han ayudado a probar y reportar problemas: William Rozo (wiroal@nocheyniebla.org), Marcela Medina, Rosa Liliana Ortiz, Diana Garzón y Fabian Wilches</para>
+	<para>Han ayudado a probar y reportar problemas: William Rozo (wiroal@nocheyniebla.org), Carlos Garaviz, Marcela Medina, Rosa Liliana Ortiz, Diana Garzón y Fabian Wilches</para>
 
 <para>
 	Los colores y organización de la Ficha Caso son tomados de un generador 

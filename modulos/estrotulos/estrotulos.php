@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2009 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: estrotulos.php,v 1.16.2.6 2011/11/15 12:03:19 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
@@ -152,9 +151,9 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
             $cfSegun = "meses";
             $tablaSegun= "";
             $titSegun = 'Mes';
-        } elseif ($pSegun == 'id_filiacion'
-            || $pSegun == 'id_organizacion'
-            || $pSegun == 'id_sector_social'
+        } elseif ($pSegun == 'id_filiacion' ||
+            $pSegun == 'id_organizacion' ||
+            $pSegun == 'id_sector_social' 
         ) { # or $pSegun = '!= '') {
             $campoSegun = $pSegun;
             $ant = explode("_", $pSegun);
@@ -264,9 +263,9 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
 
         // El método para departamento y municipio es machete porque cuando
         // no hay asigna santa-marta y así saldría e.g PUTUMAYO    SANTA MARTA
-        $q3 = "SELECT $cfSegun3 $tDep $tMun
-            TRIM(parametros_reporte_consolidado.rotulo),
-            COUNT(cast($cons2.id_persona as text) || ' ' || cast($cons2.id_caso as text))
+        $q3 = "SELECT $cfSegun3 $tDep $tMun 
+            TRIM(parametros_reporte_consolidado.rotulo), 
+            COUNT(cast($cons2.id_persona as text) || ' ' || cast($cons2.id_caso as text)) 
             FROM $tablaSegun departamento, municipio,
             parametros_reporte_consolidado,
             $cons2
@@ -299,8 +298,8 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
         for ($i = 0; $i < count($cab)-2; $i++) {
             $tcol[$cab[$i]]=1;
         }
-        $q4='SELECT no_columna, rotulo
-            FROM parametros_reporte_consolidado
+        $q4='SELECT no_columna, rotulo 
+            FROM parametros_reporte_consolidado 
             ORDER BY 1';
         $rcon = hace_consulta($db, $q4);
         if (PEAR::isError($rcon)) {
@@ -361,11 +360,11 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
                     echo "</td>";
                     $ncol++;
                 }
-                echo "<td><b>$sfil</b></td>";
+                echo "<td><b>" . (int)$sfil . "</b></td>";
                 echo "</tr>\n";
             }
 
-            if (count($tfil) > 1) {
+            if (count($tfil) > 1) { 
                 echo "<tr>";
                 $sfil = 0;
                 $ncol = 0;
@@ -376,13 +375,13 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
                             echo "<b>Total</b>";
                         }
                     } else {
-                        echo "<b>" . $scol[$k] . "</b>";
+                        echo "<b>" . (int)$scol[$k] . "</b>";
                         $sfil += (int)$scol[$k];
                     }
                     echo "</td>";
                     $ncol++;
                 }
-                echo "<td><b>$sfil</b></td>";
+                echo "<td><b>" . (int)$sfil "</b></td>";
                 echo "</tr>\n";
             }
             echo "</table>";
@@ -544,7 +543,7 @@ function buildForm()
     );
     $sel->loadArray(
         array('' => '',
-        'id_p_responsable' => 'ACTOS '
+        'id_p_responsable' => 'ACTOS ' 
             . strtoupper($GLOBALS['etiqueta']['p_responsable']),
         'id_rango_edad' => strtoupper($GLOBALS['etiqueta']['rango_edad']),
         'sexo' => strtoupper($GLOBALS['etiqueta']['sexo']),

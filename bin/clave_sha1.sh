@@ -13,6 +13,7 @@ if (test ! -f "$DIRSEG/vardb.sh" ) then {
 
 
 . $DIRSEG/vardb.sh
+. $DIRSEG/confv.sh
 
 usuario="$1"
 if (test "$usuario" = "") then {
@@ -39,13 +40,13 @@ echo -n "clave? ";
 stty -echo; read clave; stty echo
 echo
 
-clavemd5=`php -n -r "echo md5(\"$clave\");"`;
+clavemd5=`$PHP -n -r "echo md5(\"$clave\");"`;
 if (test "$c" != "$clavemd5") then {
 	echo "Clave incorrecta, ingresada '$clavemd5', esperada '$c'";
 	exit 1;
 } fi;
 
-clavesha1=`php -n -r "echo sha1(\"$clave\");"`;
+clavesha1=`$PHP -n -r "echo sha1(\"$clave\");"`;
 q="SET client_encoding to 'LATIN1'; UPDATE usuario SET password='$clavesha1' WHERE id_usuario='$usuario';"
 $DIRSEG/../../bin/psql.sh -c "$q" 
 echo "Condensado de la clave cambiado de md5 a sha1";

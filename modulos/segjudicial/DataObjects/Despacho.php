@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Despacho.php,v 1.12.2.3 2011/10/22 12:55:08 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -55,15 +54,15 @@ class DataObjects_Despacho extends DataObjects_Basica
         'fechacreacion',
         'fechadeshabilitacion',
     );
-
+ 
     var $fb_addFormHeader = false;
     var $fb_fieldsRequired = array(
-        'id_tipo',
+        'id_tipo', 
         'nombre',
         'fechacreacion'
     );
     var $fb_linkDisplayFields = array(
-        'nombre',
+        'nombre', 
         'id_tipo',
     );
     var $fb_fieldLabels = array(

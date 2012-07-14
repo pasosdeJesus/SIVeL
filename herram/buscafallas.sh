@@ -57,7 +57,7 @@ diff /tmp/todos /tmp/conAutentica
 echo "* V5.1, V5.2 Funcion procesa llama valores a su primer argumento"
 p=`find . -name "*php" -exec grep -l -e "function *procesa *(" {} ';'`
 grep -A 1 "function *procesa" $p | grep "^[^ ]*:" | grep -v -e "procesa *( *\&\$valores"
-echo "V5.1, V5.2 Variables de entrada sin asignacion, comparación, isset o valor_escapa:"
+echo "V5.1, V5.2 Variables de entrada sin asignacion, comparación, isset o var_escapa:"
 for b in _REQUEST _POST _GET valores ; do
 	p=`find . -name "*php" -exec grep -l -e "$b *\[" {} ';'`
 	grep -A 1 "$b *\[" $p | grep "^[^ ]*:" | grep -v -e "isset *( *\$$b" -e "unset *( *\$$b" -e "\$$b[^ ]* *=" -e "\$$b[^ ]* *!=" -e "(int) *\$$b" -e "var_escapa( *\$$b" 

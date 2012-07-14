@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Acto.php,v 1.10.2.3 2012/01/17 04:05:47 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -34,8 +33,6 @@ require_once 'DB_DataObject_SIVeL.php';
  */
 class DataObjects_Acto extends DB_DataObject_SIVeL
 {
-    // START_AUTOCODE
-    /* the code below is auto generated do not remove the above tag */
 
     var $__table = 'acto';                      // table name
     var $id_p_responsable;                        // int4(4)  multiple_key
@@ -44,8 +41,6 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
     var $id_caso;                         // int4(4)  multiple_key
 
 
-    /* the code above is auto generated do not remove the tag below */
-    // END_AUTOCODE
     var $fb_preDefOrder = array('id_p_responsable');
     var $fb_fieldsToRender = array('id_p_responsable');
     var $fb_selectAddEmpty = array('id_p_responsable');
@@ -54,7 +49,7 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
         'id_p_responsable' => 'Presunto Responsable',
         'id_categoria' => 'Categoria',
         'id_persona' => 'Persona',
-        'id_caso' => 'Caso',
+        'id_caso' => 'Caso'
     );
 
     /**

@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: PagActo.php,v 1.23.2.4 2011/10/11 16:33:37 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -300,9 +299,9 @@ class PagActo extends PagBaseSimple
         $op = htmlentities_array(
             $db->getAssoc(
                 "SELECT id_p_responsable, nombre
-                FROM presuntos_responsables_caso, presuntos_responsables
-                WHERE id_caso = $idcaso AND
-                presuntos_responsables.id = id_p_responsable
+                FROM presuntos_responsables_caso, presuntos_responsables 
+                WHERE id_caso=$idcaso AND 
+                presuntos_responsables.id=id_p_responsable 
                 ORDER BY nombre"
             )
         );
@@ -316,7 +315,7 @@ class PagActo extends PagBaseSimple
             $db->getAssoc(
                 "SELECT id, id_tipo_violencia || id || ' ' || nombre
                 FROM categoria
-                WHERE tipocat = 'I'  AND fechadeshabilitacion IS NULL
+                WHERE tipocat='I'  AND fechadeshabilitacion IS NULL
                 ORDER BY id_tipo_violencia, id"
             )
         );
@@ -329,9 +328,9 @@ class PagActo extends PagBaseSimple
         $op = htmlentities_array(
             $db->getAssoc(
                 "SELECT id_persona, nombres || ' ' || apellidos
-                FROM victima, persona
-                WHERE id_caso = $idcaso AND
-                victima.id_persona = persona.id
+                FROM victima, persona 
+                WHERE id_caso=$idcaso AND 
+                victima.id_persona=persona.id 
                 ORDER BY nombres, apellidos "
             )
         );
@@ -393,8 +392,8 @@ class PagActo extends PagBaseSimple
                 $db->getAssoc(
                     "SELECT id_grupoper, nombre
                     FROM victima_colectiva, grupoper
-                    WHERE id_caso = $idcaso AND
-                    victima_colectiva.id_grupoper = grupoper.id
+                    WHERE id_caso=$idcaso AND 
+                    victima_colectiva.id_grupoper=grupoper.id 
                     ORDER BY nombre"
                 )
             );
@@ -570,6 +569,66 @@ class PagActo extends PagBaseSimple
         if (isset($_REQUEST['eliminaactocolectivo'])) {
             $_REQUEST['_qf_acto_eliminaactocolectivo'] = true;
         }
+    }
+
+
+    /**
+     * Compara datos relacionados con esta pestaña de los casos 
+     * con identificación id1 e id2.
+     *
+     * @param object  &$db Conexión a base de datos
+     * @param array   &$r  Para llenar resultados de comparación, cada 
+     *   entrada es de la forma 
+     *      id_unica => ('etiqueta', 'valor1', 'valor2', pref)
+     *   donde valor1 es valor en primer caso, valor2 es valor en segundo
+     *   caso y pref es 1 o 2 para indicar cual de los valores será por defecto
+     * @param integer $id1 Código de primer caso
+     * @param integer $id2 Código de segundo caso
+     * @param array   $cls Especificación de las tablas por revisar.
+     *
+     * @return void Añade a $r datos de comparación
+     * @see PagBaseSimple
+     */
+    static function compara(&$db, &$r, $id1, $id2, $cls) 
+    {
+        PagBaseMultiple::compara(
+            $db, $r, $id1, $id2, 
+            array('Actos' => array('acto', 'id_categoria'))
+        );
+    }
+
+
+    /**
+     * Mezcla valores de los casos $id1 e $id2 en el caso $idn de
+     * acuerdo a las preferencias especificadas en $sol.
+     *
+     * @param object  &$db Conexión a base de datos
+     * @param array   $sol Arreglo con solicitudes de cambios de la forma
+     *   id_unica => (pref)
+     *   donde pref es 1 si el valor relacionado con id_unica debe
+     *   tomarse del caso $id1 o 2 si debe tomarse de $id2.  Las 
+     *   identificaciones id_unica son las empleadas por la función
+     *   compara.
+     * @param integer $id1 Código de primer caso
+     * @param integer $id2 Código de segundo caso
+     * @param integer $idn Código del caso en el que aplicará los cambios
+     * @param arrayer $cls Especificación de tablas por mezclar
+     *
+     * @return Mezcla valores de los casos $id1 e $id2 en el caso $idn de
+     * acuerdo a las preferencias especificadas en $sol.
+     * @see PagBaseSimple
+     */
+    static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls) 
+    {
+        //echo "PagActo::mezcla(db, sol, $id1, $id2, $idn)";
+        PagBaseMultiple::mezcla(
+            $db, $sol, $id1, $id2, $idn,
+            array('Actos' => array('acto', 'id_categoria'))
+        );
+        PagBaseMultiple::mezcla(
+            $db, $sol, $id1, $id2, $idn, 
+            array('Actos' => array('acto', 'id_categoria'))
+        );
     }
 
 

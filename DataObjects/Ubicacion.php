@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Ubicacion.php,v 1.21.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -35,8 +34,6 @@ require_once 'Tipo_sitio.php';
  */
 class DataObjects_Ubicacion extends DB_DataObject_SIVeL
 {
-    // START_AUTOCODE
-    /* the code below is auto generated do not remove the above tag */
 
     var $__table = 'ubicacion';                       // table name
     var $id;                              // int4(4)  not_null primary_key
@@ -51,14 +48,13 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     var $longitud;
 
 
-    /* the code above is auto generated do not remove the tag below */
-    // END_AUTOCODE
 
-    var $fb_preDefOrder = array('id_departamento', 'id_municipio',
+    var $fb_preDefOrder = array(
+        'id_departamento', 'id_municipio',
         'id_clase', 'lugar', 'sitio', 'latitud', 'longitud', 'id_tipo_sitio'
     );
-    var $fb_fieldsToRender = array('lugar', 'sitio', 'latitud', 'longitud',
-        'id_tipo_sitio'
+    var $fb_fieldsToRender = array(
+        'lugar', 'sitio', 'latitud', 'longitud', 'id_tipo_sitio'
     );
     var $fb_addFormHeader = false;
     var $fb_hidePrimaryKey = true;
@@ -120,13 +116,6 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     function preGenerateForm(&$formbuilder)
     {
         parent::preGenerateForm($formbuilder);
-
-/*        $csin = $this->camposSinInfo();
-        foreach ($csin as $c => $v) {
-            if (!isset($this->$c)) {
-                $this->$c = $csin[$c];
-            }
-        } */
     }
 
     /**

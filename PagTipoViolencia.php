@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: PagTipoViolencia.php,v 1.83.2.3 2011/10/13 09:57:49 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -423,6 +422,129 @@ class PagTipoViolencia extends PagBaseSimple
             'id_antecedente'
         );
         // bienes fue ingresado con caso
+    }
+
+   
+    /**
+     * Compara datos relacionados con esta pestaña de los casos 
+     * con identificación id1 e id2.
+     *
+     * @param object  &$db Conexión a base de datos
+     * @param array   &$r  Para llenar resultados de comparación, cada 
+     *   entrada es de la forma 
+     *      id_unica => ('etiqueta', 'valor1', 'valor2', pref)
+     *   donde valor1 es valor en primer caso, valor2 es valor en segundo
+     *   caso y pref es 1 o 2 para indicar cual de los valores será por defecto
+     * @param integer $id1 Código de primer caso
+     * @param integer $id2 Código de segundo caso
+     * @param array   $cls Especificación de las tablas por revisar.
+     *
+     * @return void Añade a $r datos de comparación
+     * @see PagBaseSimple
+     */
+    static function compara(&$db, &$r, $id1, $id2, $cls) 
+    {
+        //echo "PagTipoViolencia::compara(db, r, $id1, $id2, a)"; 
+        //print_r($cls); echo "<br>";
+        if ($cls == null || (count($cls) == 1 && $cls[0] == 'caso_contexto')) {
+            $cls = array('Contextos' => array('caso_contexto', 'id_contexto'), 
+                'Antecedentes' => array('antecedente_caso', 'id_antecedente'));
+        }
+        //print_r($cls);
+        //PagBaseSimple::compara($db, $r, $id1, $id2, array('caso'));
+        foreach ($cls as $eti => $cls) {
+            list($cl, $c) = $cls;
+            //echo "OJO cl=$cl, c=$c<br> ";
+            $v1 = $v2 = "";
+            $d1 = objeto_tabla($cl);
+            $d1->id_caso = $id1;
+            $d1->find();
+            $sep = "";
+            while ($d1->fetch()) {
+                //echo "d1 fetched " . $d1->$c . "<br>";
+                $d = $d1->getLink($c);
+                $v1 .= $sep . $d->nombre;
+                $sep = ", ";
+            }
+            //echo "v1=$v1<br>";
+            $d2 = objeto_tabla($cl);
+            $d2->id_caso = $id2;
+            $d2->find();
+            $sep = "";
+            while ($d2->fetch()) {
+                $d = $d2->getLink($c);
+                $v2 .= $sep . $d->nombre;
+                $sep = ", ";
+            }
+            $vp = 1;
+            if (strlen($v2) > strlen($v1)) {
+                $vp =2;
+            }
+            if ($v1 != $v2) {
+                $r[$cl . '-' . $c] = array(
+                    $eti, $v1, $v2, $vp
+                );
+            }
+        }
+
+    }
+
+
+    /**
+     * Mezcla valores de los casos $id1 e $id2 en el caso $idn de
+     * acuerdo a las preferencias especificadas en $sol.
+     *
+     * @param object  &$db Conexión a base de datos
+     * @param array   $sol Arreglo con solicitudes de cambios de la forma
+     *   id_unica => (pref)
+     *   donde pref es 1 si el valor relacionado con id_unica debe
+     *   tomarse del caso $id1 o 2 si debe tomarse de $id2.  Las 
+     *   identificaciones id_unica son las empleadas por la función
+     *   compara.
+     * @param integer $id1 Código de primer caso
+     * @param integer $id2 Código de segundo caso
+     * @param integer $idn Código del caso en el que aplicará los cambios
+     * @param array   $cls Especificación de tablas por mezclar
+     *
+     * @return Mezcla valores de los casos $id1 e $id2 en el caso $idn de
+     * acuerdo a las preferencias especificadas en $sol.
+     * @see PagBaseSimple
+     */
+    static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls) 
+    {
+        //echo "PagTipoViolencia::mezcla(db, ["; print_r($sol); 
+        //echo "], $id1, $id2, $idn, [" ; print_r($a) ; echo "])<br>";
+        
+        if ($cls == 'caso_contexto') {
+            $cls = array('Contextos' => array('caso_contexto', 'id_contexto'), 
+                'Antecedentes' => array('antecedente_caso', 'id_antecedente'));
+        }
+        foreach ($cls as $eti => $cls) {
+            list($cl, $c) = $cls;
+            //echo "OJO cl=$cl, c=$c<br> ";
+            $de = objeto_tabla($cl);
+            //$eti = $de->nom_tabla
+            if (isset($sol[$cl][$c]) && $sol[$cl][$c] == 1) {
+                //echo "OJO caso 1";
+                $de->id_caso = $id1;
+            } else {
+                //echo "OJO caso 2";
+                $de->id_caso = $id2;
+            }
+            $de->find();
+            $lc = array();
+            while ($de->fetch()) {
+                //echo "OJO de->$c=" . $de->$c . "<br>";
+                $lc[] = $de->$c;
+            }
+            foreach ($lc as $v) {
+                $d = objeto_tabla($cl);
+                $d->id_caso = $idn;
+                $d->$c = $v;
+                //echo "por insertar"; print_r($d); die("x");
+                $d->insert();
+            }
+        }
     }
 
 }

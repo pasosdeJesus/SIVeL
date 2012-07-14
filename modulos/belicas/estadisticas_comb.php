@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: estadisticas_comb.php,v 1.13.2.4 2011/10/18 16:05:05 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
@@ -64,7 +63,7 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
            echo "<td>" . htmlentities($cdep) . "</td>";
         } elseif ($t == 'Dep.') {
             // Escapado tras consulta
-           echo "<td>" . $html_nomdep . "</td>";
+           echo "<td>" . $html_nomdep . "</td>";  
         } elseif ($t == 'C. Mun.') {
            echo "<td>" . htmlentities($cmun) . "</td>";
         } elseif ($t == 'Mun.') {
@@ -394,6 +393,9 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
         $tpie = "<div align=right><a href=\"index.php\">" .
             "Menú Principal</a></div>";
         $e =& $this->addElement('header', null, $tpie);
+
+	$num = (int)$_REQUEST['num'];
+	$this->addElement('hidden', 'num', $num);	
 
 
         if (!isset($_POST['evita_csrf'])) {

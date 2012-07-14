@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Vinculo_estado_comunidad.php,v 1.16.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -35,16 +34,12 @@ require_once 'DB_DataObject_SIVeL.php';
  */
 class DataObjects_Vinculo_estado_comunidad extends DB_DataObject_SIVeL
 {
-    // START_AUTOCODE
-    /* the code below is auto generated do not remove the above tag */
 
     var $__table = 'vinculo_estado_comunidad';                // table name
     var $id_vinculo_estado;                  // int4(4)  multiple_key
     var $id_grupoper;                  // int4(4)  multiple_key
     var $id_caso;                  // int4(4)  multiple_key
 
-    /* the code above is auto generated do not remove the tag below */
-    // END_AUTOCODE
 
     var $fb_preDefOrder = array('id_vinculo_estado');
     var $fb_fieldsToRender = array('id_vinculo_estado');
@@ -89,22 +84,6 @@ class DataObjects_Vinculo_estado_comunidad extends DB_DataObject_SIVeL
             'id_caso' =>
             HTML_QuickForm::createElement('hidden', 'id_caso')
         );
-
-    /*    $d = objeto_tabla('caso');
-        $db =& $d->getDatabaseConnection();
-        sin_error_pear($db);
-        $p =  htmlentities_array(
-            $db->getAssoc("SELECT  id, nombre FROM vinculo_estado " .
-                "ORDER BY id"
-            )
-        );
-        sin_error_pear($p);
-        print_r($p);
-        $v =& HTML_QuickForm::createElement('select', 'id_vinculo_estado',
-            'Vinculo Estado: ', array());
-        $options= array('' => '') + $p;
-        $v->loadArray($options);
-        $this->fb_preDefElements = array('id_vinculo_estado' => $v); */
     }
 
     /**
@@ -122,9 +101,6 @@ class DataObjects_Vinculo_estado_comunidad extends DB_DataObject_SIVeL
         if (isset($sel) && !PEAR::isError($sel)) {
             $sel->setMultiple(true);
             $sel->setSize(5);
-/*            if (isset($GLOBALS['etiqueta']['vinculo_estado'])) {
-                $sel->setLabel($GLOBALS['etiqueta']['vinculo_estado']);
-} */
         }
         $form->removeElement('id_caso');
 

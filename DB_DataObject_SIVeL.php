@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2009 Dominio público. Sin garantías.
  * @license   Dominio público. Sin garantías.
- * @version   CVS: $Id: DB_DataObject_SIVeL.php,v 1.27.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */

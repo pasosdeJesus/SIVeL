@@ -12,7 +12,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2005 Dominio público.  Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: consulta_web_cat.php,v 1.25.2.1 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: CONSULTA PÚBLICA
  */
@@ -23,7 +22,7 @@ require_once "misc.php";
 require_once 'DataObjects/Categoria.php';
 
 encabezado_envia('Categoria');
-if (!isset($_REQUEST['t']) || !isset($_REQUEST['s'])
+if (!isset($_REQUEST['t']) || !isset($_REQUEST['s']) 
     || !isset($_REQUEST['c'])
 ) {
         die("Faltan datos para efectuar consulta");
@@ -60,7 +59,7 @@ $dc->fetch();
 echo "<table border='1'>";
 echo "<tr><th>Código</th><th>Descripción</th></tr>";
 echo "<tr><td>" . htmlentities($t) . htmlentities($c) . "</td>";
-echo "<td>" . htmlentities($dt->nombre) . " / " . htmlentities($ds->nombre)
+echo "<td>" . htmlentities($dt->nombre) . " / " . htmlentities($ds->nombre) 
     . " / " . htmlentities($dc->nombre) . "</td></tr>";
 echo "</table>";
 

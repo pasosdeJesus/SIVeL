@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Usuario.php,v 1.13.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -34,8 +33,6 @@ require_once 'DB_DataObject_SIVeL.php';
  */
 class DataObjects_Usuario extends DB_DataObject_SIVeL
 {
-    // START_AUTOCODE
-    /* the code below is auto generated do not remove the above tag */
 
     var $__table = 'usuario';                         // table name
     var $id_usuario;                      // varchar(-1)  not_null primary_key
@@ -45,8 +42,6 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
     var $id_rol;                          // int4(4)
     var $dias_edicion_caso;               // int4(4)
 
-    /* the code above is auto generated do not remove the tag below */
-    // END_AUTOCODE
 
     var $fb_fieldLabels = array(
         'id_usuario' => 'Identificación',
@@ -55,11 +50,11 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
         'descripcion' => 'Descripcion',
         'id_rol' => 'Rol'
     );
-    var $fb_preDefOrder = array('id_usuario', 'password', 'nombre',
-        'descripcion', 'id_rol'
+    var $fb_preDefOrder = array(
+        'id_usuario', 'password', 'nombre', 'descripcion', 'id_rol'
     );
-    var $fb_fieldsToRender = array('id_usuario', 'password', 'nombre',
-        'descripcion', 'id_rol'
+    var $fb_fieldsToRender = array(
+        'id_usuario', 'password', 'nombre', 'descripcion', 'id_rol'
     );
     var $fb_linkDisplayFields = array('id_usuario');
     var $fb_select_display_field= 'id_usuario';
@@ -90,8 +85,7 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
     function preGenerateForm(&$formbuilder)
     {
         $e = HTML_QuickForm::createElement(
-            'password',
-            'password', 'Clave'
+            'password', 'password', 'Clave'
         );
         $this->fb_preDefElements = array('password' => $e);
     }

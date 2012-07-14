@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Anexo.php,v 1.8.2.1 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -48,7 +47,10 @@ class DataObjects_Anexo extends DB_DataObject_SIVeL
     var $fb_addFormHeader = false;
     var $fb_fieldLabels = array(
         'fecha' => 'Fecha',
-        'descripcion' => 'Descripción'
+        'descripcion' => 'Descripción',
+        'archivo' => 'Archivo',
+        'id_prensa' => 'Id. Prensa',
+        'id_fuente_directa' => 'Id. Fuente Directa',
     );
 
     /**

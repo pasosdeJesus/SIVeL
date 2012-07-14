@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2005 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: eliminar_caso.php,v 1.19 2011/05/19 04:18:44 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 

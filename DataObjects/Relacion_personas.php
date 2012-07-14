@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2009 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Relacion_personas.php,v 1.14.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -68,8 +67,6 @@ class AgregarFamiliar extends HTML_QuickForm_Action
  */
 class DataObjects_Relacion_personas extends DB_DataObject_SIVeL
 {
-    // START_AUTOCODE
-    /* the code below is auto generated do not remove the above tag */
 
     var $__table = 'relacion_personas';         // table name
     var $id_persona1;                           // int4(4)  not_null primary_key
@@ -79,8 +76,6 @@ class DataObjects_Relacion_personas extends DB_DataObject_SIVeL
 
 
 
-    /* the code above is auto generated do not remove the tag below */
-    // END_AUTOCODE
 
     var $fb_preDefOrder = array('id_tipo', 'observaciones');
     var $fb_fieldsToRender = array('id_tipo', 'observaciones');
@@ -131,18 +126,12 @@ class DataObjects_Relacion_personas extends DB_DataObject_SIVeL
     function postGenerateForm(&$form, &$formbuilder)
     {
         parent::postGenerateForm($form, $formbuilder);
-/*        foreach ($this->fb_fieldLabels as $c => $et) {
-            $e =& $form->getElement($c);
-            if (isset($e) && !PEAR::isError($e)
-                && isset($GLOBALS['etiqueta'][$c])
-            ) {
-                    $e->setLabel($GLOBALS['etiqueta'][$c]);
-                }
-} */
 
         $form->removeElement('observaciones');
-        $t = '<table id="tablaRelaciones" width="100%"><thead><tr><th>Nombres</th><th>Apellidos</th>' .
-            '<Th>Tipo</th><th>Observaciones</th><th>Casos</th></tr></thead><tbody>';
+        $t = '<table id="tablaRelaciones" width="100%">' .
+            '<thead><tr><th>Nombres</th><th>Apellidos</th>' .
+            '<th>Tipo</th><th>Observaciones</th><th>Casos</th>' .
+            '</tr></thead><tbody>';
         $p = clone $formbuilder->_do;
         $db = $p->getDatabaseConnection();
         $p->id_persona2=null;
@@ -154,7 +143,7 @@ class DataObjects_Relacion_personas extends DB_DataObject_SIVeL
             $dt = $p->getLink('id_tipo');
             $comovic = "";
             $comofam = "";
-            enlaces_casos_persona(
+            enlaces_casos_persona_html(
                 $db, $_SESSION['basicos_id'],
                 $dp->id, $comovic, $comofam
             );
@@ -168,10 +157,12 @@ class DataObjects_Relacion_personas extends DB_DataObject_SIVeL
                 '<td>' . $comovic . $comofam . '</td>' .
                 '<td><a href="'.$_SERVER['PHP_SELF'] . '?eliminarel=' .
                 $p->id_persona1.":".$p->id_persona2.":".$p->id_tipo.
-                '">Eliminar</a></td>';
+                '">'. _('Eliminar') . '</a></td>';
         }
         $t .= '</tbody></table>';
-        $sel =& $form->addElement('static', 'familiares', 'Familiares', $t);
+        $sel =& $form->addElement(
+            'static', 'familiares', _('Familiares'), $t
+        );
         $form->removeElement('id_persona1');
 
         $fm = array();

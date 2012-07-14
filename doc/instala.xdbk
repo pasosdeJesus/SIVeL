@@ -49,7 +49,12 @@ su -
 		cifrado, a continuación ejecute:
 		<screen>
 /inst-sivel.sh
-		</screen>
+        </screen>
+        Este último script formulará otras preguntas breves incluyendo
+        primer usuario y clave para SIVeL y creará un primer sitio para usted.
+        Visitelo desde el servidor con un navegador en la dirección 
+        https://127.0.0.1/ y una vez ingrese actualice desde el
+        menú <menuchoice><guimenu>Otros</guimenu><guimenuitem>Actualizar</guimenuitem></menuchoice>.  
 	</para>
 
 	<para>El resto de instrucciones de este capítulo, le servirán si 
@@ -458,11 +463,21 @@ cd ~
 mkdir tmp2
 cd tmp2
 cvs -d:pserver:anonymous@sivel.cvs.sourceforge.net:/cvsroot/sivel login
-cvs -z3 -d:pserver:anonymous@sivel.cvs.sourceforge.net:/cvsroot/sivel co -P sivel
+cvs -z3 -d:pserver:anonymous@sivel.cvs.sourceforge.net:/cvsroot/sivel co -rSIVEL1_1 -P sivel
 sudo chown $USER:$USER /var/www/htdocs/sivel
 cp -rf sivel/* /var/www/htdocs/sivel
 </screen>
 Cuando le solicite clave presione ENTER.
+					</para>
+				</listitem>
+			<listitem>
+				<para>Si ya tiene unas fuentes que tengan control de versiones (con el directorio CVS), actualicelas asi:
+<screen>
+cd /var/www/htdocs/sivel
+cvs -d:pserver:anonymous@sivel.cvs.sourceforge.net:/cvsroot/sivel login
+cvs -z3 -d:pserver:anonymous@sivel.cvs.sourceforge.net:/cvsroot/sivel update -rSIVEL1_1 -Pd
+</screen>
+
 					</para>
 				</listitem>
 			</orderedlist>

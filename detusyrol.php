@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: detusyrol.php,v 1.48.2.5 2011/10/26 03:42:55 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
@@ -96,8 +95,8 @@ if ($actsincambiarclave || $f->validate()) {
                 die($db->getMessage());
             }
             $q = "INSERT INTO funcionario (anotacion, nombre) " .
-                " VALUES ('"
-                . var_escapa($f->_submitValues['descripcion'], $db) . "', '"
+                " VALUES ('" 
+                . var_escapa($f->_submitValues['descripcion'], $db) . "', '" 
                 . var_escapa($f->_submitValues['id_usuario'], $db) . "')";
             //echo $q;
             hace_consulta($db, $q);

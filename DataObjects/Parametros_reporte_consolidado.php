@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Parametros_reporte_consolidado.php,v 1.14.2.2 2011/10/22 14:58:19 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -103,7 +102,7 @@ class DataObjects_Parametros_reporte_consolidado extends DataObjects_Basica
             }
             if ($lv != '') {
                 $form->addElement(
-                    'static', 'empleada', 'Empleada en categorias', $lv
+                    'static', 'empleada', _('Empleada en categorias'), $lv
                 );
             }
         }

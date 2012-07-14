@@ -12,7 +12,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: detalle.php,v 1.60.2.5 2011/10/22 14:57:56 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
@@ -111,11 +110,11 @@ if ($f->validate()) {
         if (PEAR::isError($res)) {
             echo_esc($res->getMessage());
         } else {
-            // prevenimos HRHS
+            // prevenimos HRHS 
             // http://www.securiteam.com/securityreviews/5WP0E2KFGK.html
             $ntabla = str_replace(array("\n", "\r"), array("", ""), $tabla);
 
-            header('Location: tabla.php?tabla=' . $ntabla);
+            header('Location: tabla.php?tabla=' . $ntabla); 
         }
     }
 }

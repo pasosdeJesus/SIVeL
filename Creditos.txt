@@ -1,6 +1,6 @@
-ApÈndice D. CrÈditos
+Ap√©ndice D. Cr√©ditos
 
-   Damos gracias primero a Dios y a …l encomendamos y dedicamos este
+   Damos gracias primero a Dios y a √âl encomendamos y dedicamos este
    proyecto.
 
    Se han empleado como referencia interfaces de usuario y datos (sin
@@ -9,77 +9,73 @@ ApÈndice D. CrÈditos
      * Base empleada de 1998 a 2000.
      * Base empleada de 2000 a 2004.
 
-   Ha ayudado con su autorizaciÛn
+   Ha ayudado con su autorizaci√≥n
      * S. Javier Giraldo, coordinador del Banco de Datos de Derechos
-       Humanos, Derecho Internacional Humanitario y Violencia PolÌtica del
+       Humanos, Derecho Internacional Humanitario y Violencia Pol√≠tica del
        CINEP.
 
-   Han aportado datos para las tablas b·sicas:
-     * CategorÌas de "Marco Conceptual", revista Noche y Niebla.
+   Han aportado datos para las tablas b√°sicas:
+     * Categor√≠as de "Marco Conceptual", revista Noche y Niebla.
        http://www.nocheyniebla.org
-     * InformaciÛn geogr·fica tomada del Departamento Nacional de
-       PlaneaciÛn, DANE y Banco de Datos de Derechos Humanos y Violencia
-       PolÌtica.
+     * Informaci√≥n geogr√°fica tomada del Departamento Nacional de
+       Planeaci√≥n, DANE y Banco de Datos de Derechos Humanos y Violencia
+       Pol√≠tica.
      * Otros datos empleados en el Banco de Datos de Derechos Humanos y
-       Violencia PolÌtica del CINEP.
+       Violencia Pol√≠tica del CINEP.
 
    Han ayudado con sugerencias y requerimientos:
-     * William Rozo Alvarez (wiroal@nocheyniebla.org), juana, M, Juliana
-       Villabono, Bernardo.
+     * William Rozo Alvarez (wiroal@nocheyniebla.org), Juana, M, Juliana
+       Villabono, Bernardo, Jerry Garavito, Freddy.
 
-   A las fuentes de la versiÛn 1.0, le hicieron auditorÌas de seguridad
-   (ver sus reportes en las fuentes de la versiÛn 1.0):
-     * Julio CÈsar GarcÈs Rios. (garcez@linuxmail.org)
-     * Fernando MuÒoz. (munozferna@gmail.com)
+   A las fuentes de la versi√≥n 1.0, le hicieron auditor√≠as de seguridad
+   (ver sus reportes en las fuentes de la versi√≥n 1.0):
+     * Julio C√©sar Garc√©s Rios. (garcez@linuxmail.org)
+     * Fernando Mu√±oz. (munozferna@gmail.com)
 
-   El mÛdulo de seguimiento judicial y los datos relacionados han sido
-   aportados por Humanidad Vigente.
+   Con respecto a m√≥dulos:
+     * El m√≥dulo de seguimiento judicial y los datos relacionados han sido
+       aportados por Humanidad Vigente.
+     * El m√≥dulo de Etiquetas se desarroll√≥ inicialmente para el OPI.
+     * El m√≥dulo de Estad√≠sticas por R√≥tulos se desarroll√≥ inicialmente
+       para Justapaz.
+     * El m√≥dulo de Anexos se desarroll√≥ inicialmente para Reiniciar.
+     * El m√≥dulo de Georeferenciaci√≥n sobre Googlemaps lo desarrollo Luca
+       Urech <lucaurech@yahoo.de> para la Corporaci√≥n Compromiso.
 
    Han ayudado a documentar:
-     * Diana GarzÛn (artemisa1786@hotmail.com), quien preparÛ un manual
+     * Diana Garz√≥n (artemisa1786@hotmail.com), quien prepar√≥ un manual
        para Humanidad Vigente algunas de cuyas partes se incorporaron a
-       este manual con al autorizaciÛn de Humanidad Vigente.
-     * Shalom Wiebe (shalomwiebe@gmail.com), quien corrigiÛ llamado en
-       inglÈs.
-     * Vladimir T·mara PatiÒo (vtamara@pasosdeJesus.org).
-     * Eduard Hoyos escribiÛ documentaciÛn inicial para restaurar un
+       este manual con al autorizaci√≥n de Humanidad Vigente.
+     * Shalom Wiebe (shalomwiebe@gmail.com), quien corrigi√≥ llamado en
+       ingl√©s.
+     * Vladimir T√°mara Pati√±o (vtamara@pasosdeJesus.org).
+     * Eduard Hoyos escribi√≥ documentaci√≥n inicial para restaurar un
        volcado SQL.
 
-   El mÛdulo de Etiquetas se desarrollÛ inicialmente para el OPI.
-
-   El mÛdulo de EstadÌsticas por RÛtulos se desarrollÛ inicialmente para
-   Justapaz.
-
-   El mÛdulo de Acciones Judiciales se desarrollÛ inicialmente para
-   Humanidad Vigente, quienes han aportado tambiÈn los datos que requiere
-   este mÛdulo.
-
-   El mÛdulo de Anexos se desarrollÛ inicialmente para Reiniciar.
-
    Han ayudado a programar:
-     * Mauricio Rivera (mauricio.rivera.p@gmail.com) desarrollÛ una
-       versiÛn previa de la Consulta Web y quien adem·s ideÛ el nombre
+     * Mauricio Rivera (mauricio.rivera.p@gmail.com) desarroll√≥ una
+       versi√≥n previa de la Consulta Web y quien adem√°s ide√≥ el nombre
        SIVeL.
-     * Vladimir T·mara PatiÒo (vtamara@pasosdeJesus.org).
+     * Vladimir T√°mara Pati√±o (vtamara@pasosdeJesus.org).
 
-   En sus albores, parte del cÛdigo fue generado autom·ticamente con:
+   En sus albores, parte del c√≥digo fue generado autom√°ticamente con:
      * DB_DataObject y DB_DataObject_FormBuilder de Pear
 
-   El cabezote del men˙ principal y el fondo son aportes de William Rozo
+   El cabezote del men√∫ principal y el fondo son aportes de William Rozo
    (wiroal@nocheyniebla.org).
 
    Han ayudado a probar y reportar problemas: William Rozo
-   (wiroal@nocheyniebla.org), Marcela Medina, Rosa Liliana Ortiz, Diana
-   GarzÛn y Fabian Wilches
+   (wiroal@nocheyniebla.org), Carlos Garaviz, Marcela Medina, Rosa Liliana
+   Ortiz, Diana Garz√≥n y Fabian Wilches
 
-   Los colores y organizaciÛn de la Ficha Caso son tomados de un generador
+   Los colores y organizaci√≥n de la Ficha Caso son tomados de un generador
    de barras de progreso del paquete HTML_Progress de Pear.
 
-   La idea de ofrecer retribuciÛn p˙blica a quienes encuentren fallas de
+   La idea de ofrecer retribuci√≥n p√∫blica a quienes encuentren fallas de
    seguridad fue tomada de djbdns escrito por Daniel Bernstein.
 
    La nomenclatura de versiones se base en la de Mozilla Firefox.
 
-   Entre otras empleamos las siguientes herramientas (ver un listado m·s
-   detallado en archivo Instala.txt de la distribuciÛn de fuentes):
+   Entre otras empleamos las siguientes herramientas (ver un listado m√°s
+   detallado en archivo Instala.txt de la distribuci√≥n de fuentes):
    OpenBSD, PostgreSQL, Apache con mod_ssl, PHP, Pear.

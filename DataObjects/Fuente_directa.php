@@ -11,7 +11,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: Fuente_directa.php,v 1.11.2.2 2011/09/14 14:56:18 vtamara Exp $
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -34,15 +33,11 @@ require_once 'DB_DataObject_SIVeL.php';
  */
 class DataObjects_Fuente_directa extends DB_DataObject_SIVeL
 {
-    // START_AUTOCODE
-    /* the code below is auto generated do not remove the above tag */
 
     var $__table = 'fuente_directa';                  // table name
     var $id;                              // int4(4)  not_null primary_key
     var $nombre;                          // varchar(-1)  not_null
 
-    /* the code above is auto generated do not remove the tag below */
-    // END_AUTOCODE
     var $fb_linkDisplayFields = array('nombre');
     var $fb_addFormHeader = false;
     var $fb_preDefOrder = array('nombre');
@@ -84,9 +79,6 @@ class DataObjects_Fuente_directa extends DB_DataObject_SIVeL
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(70);
             $e->setMaxlength(200);
-/*            if (isset($GLOBALS['etiqueta']['nombre'])) {
-                $e->setLabel($GLOBALS['etiqueta']['nombre']);
-} */
         }
     }
 
@@ -100,7 +92,9 @@ class DataObjects_Fuente_directa extends DB_DataObject_SIVeL
      */
     function preProcessForm(&$valores, &$formbuilder)
     {
-        if ($this->id != null && (!isset($valores['id']) || $valores['id'] == '')) {
+        if ($this->id != null 
+            && (!isset($valores['id']) || $valores['id'] == '')) 
+        {
             $valores['id'] = $this->id;
         }
     }

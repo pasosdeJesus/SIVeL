@@ -2707,7 +2707,7 @@ class ResConsulta
             $a = explode("-", $dcaso->fecha);
             /*$ts=mktime(0, 0, 0, $a[1], $a[2], $a[0]);
             setlocale(LC_TIME, "es");
-            strftime ... Se intentó pero no soportó locale es */
+            strftime ... Se intentó pero OpenBSD 5.0 no soportó locale es */
             if ($tex) {
                 $fecha = $a[2] . "/" . $GLOBALS['mes_corto'][(int)$a[1]] .
                     "/" . substr($a[0], 2);
