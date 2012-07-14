@@ -38,7 +38,15 @@ class DataObjects_Clase extends DataObjects_Basica
     var $id_tipo_clase;                   // varchar(-1)
     var $id_departamento;                 // int4(4)  multiple_key
 
-    var $nom_tabla = 'Clase';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Clase');
+    }
+
 
     var $fb_select_display_field = 'nombre';
     var $fb_linkDisplayFields = array('nombre', 'id_departamento',

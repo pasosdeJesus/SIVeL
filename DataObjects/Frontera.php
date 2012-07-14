@@ -35,7 +35,15 @@ class DataObjects_Frontera extends DataObjects_Basica
 {
     var $__table = 'frontera';                        // table name
 
-    var $nom_tabla = 'Frontera';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Frontera');
+    }
+
 }
 
 ?>

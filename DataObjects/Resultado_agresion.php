@@ -36,7 +36,15 @@ class DataObjects_Resultado_agresion extends DataObjects_Basica
 
     var $__table = 'resultado_agresion';              // table name
 
-    var $nom_tabla = 'Resultado agresión';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Resultado agresión');
+    }
+
 
 }
 

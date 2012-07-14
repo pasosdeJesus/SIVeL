@@ -27,7 +27,15 @@ class DataObjects_Tipo_relacion extends DataObjects_Basica
     var $dirigido;                        // boolean
     var $observaciones;                   // varchar(-1)  not_null
 
-    var $nom_tabla = 'Tipo de Relación';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Tipo de Relación');
+    }
+
 
     var $fb_preDefOrder = array(
         'id',

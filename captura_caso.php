@@ -115,8 +115,7 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
                 echo_enc("Falta encJavascript en $n, $c");
             }
         }
-        $js .= 'function envia(que)
-        {
+        $js .= 'function envia(que) ' . '{ ' .
             ' document.forms[0]._qf_default.value = que;' .
             ' document.forms[0].submit(); }';
         $enc = str_replace('{%javascript%}', $js, $enc);

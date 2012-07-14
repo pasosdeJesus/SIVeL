@@ -38,7 +38,15 @@ class DataObjects_Actualizacion_base extends DB_DataObject_SIVeL
 {
 
     var $__table = 'actualizacion_base';                     // table name
-    var $nom_tabla = 'Actualizacion Base';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Actualizacion Base');
+    }
+
     var $id;                              // varcha(10)  not_null primary_key
     var $fecha;                           // date(4)  not_null
     var $descripcion;                          // varchar(-1)  not_null

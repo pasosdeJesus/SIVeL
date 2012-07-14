@@ -68,11 +68,11 @@ function muestra()
         echo '<td><a href="#" onClick="enviar_grupoper(';
         $html_sep = "";
         foreach ($row as $v) {
-            echo $html_sep . "'" . htmlentities($v) . "'";
+            echo $html_sep . "'" . htmlentities($v, ENT_COMPAT, 'UTF-8') . "'";
             $html_sep = ", ";
         }
         echo ')">';
-        echo htmlentities($row[1] . " ".$row[2]) . "</td>";
+        echo htmlentities($row[1] . " ".$row[2], ENT_COMPAT, 'UTF-8') . "</td>";
         $html_comovic = "";
         enlaces_casos_grupoper_html(&$db, 0, $row[0], &$html_comovic);
         echo "<td align='center'>" . $html_comovic . "</td>";

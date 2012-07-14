@@ -41,7 +41,15 @@ class DataObjects_Parametros_reporte_consolidado extends DataObjects_Basica
     var $clasificacion;                   // varchar(-1)  not_null
     var $peso;                            // int
 
-    var $nom_tabla = 'Columnas Reporte Consolidado';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Columnas Reporte Consolidado');
+    }
+
 
     var $fb_linkDisplayFields = array('no_columna', 'rotulo', 'peso');
     var $fb_hidePrimaryKey = true;

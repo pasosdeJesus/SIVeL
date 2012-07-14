@@ -37,7 +37,15 @@ class DataObjects_Contexto extends DataObjects_Basica
 
     var $__table = 'contexto';                        // table name
 
-    var $nom_tabla = 'Contexto';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Contexto');
+    }
+
 
 }
 

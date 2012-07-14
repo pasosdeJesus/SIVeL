@@ -39,7 +39,7 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
     /**
      * Nombre de la tabla para presentar en formularios (puede incluir espacios)
      */
-    var $nom_tabla = 'nombre de la tabla';
+    var  $nom_tabla = 'nombre de la tabla';
 
     /**
      * Truco de compatibilidad con ZE2

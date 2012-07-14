@@ -35,7 +35,15 @@ class DataObjects_Etnia extends DataObjects_Basica
 {
     var $__table = 'etnia';                       // table name
 
-    var $nom_tabla = 'Etnia';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Etnia');
+    }
+
 
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'

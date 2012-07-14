@@ -39,7 +39,15 @@ class DataObjects_Intervalo extends DataObjects_Basica
     var $fb_linkDisplayFields = array('nombre');
     var $fb_hidePrimaryKey = true;
 
-    var $nom_tabla = 'Intervalo';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Intervalo');
+    }
+
     var $fb_preDefOrder = array(
         'nombre',
         'rango',

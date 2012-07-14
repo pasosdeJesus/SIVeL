@@ -159,8 +159,8 @@ function muestraVarPhpEnHTML($avar)
     echo "<pre>";
     foreach ($avar as $nv => $ld) {
         list($vv, $cv) = $ld;
-        echo htmlentities($cv)."<br/>";
-        echo htmlentities($nv)." = ".htmlentities($vv).";<br/><br/>";
+        echo htmlentities($cv, ENT_COMPAT, 'UTF-8')."<br/>";
+        echo htmlentities($nv, ENT_COMPAT, 'UTF-8')." = ".htmlentities($vv, ENT_COMPAT, 'UTF-8').";<br/><br/>";
     }
     echo "</pre>";
 }
@@ -397,7 +397,7 @@ function consulta_archivo(&$db, $na, $derr = false, $merr = false,
             if (substr(trim($buffer), 0, 2) != '--' && trim($buffer) != '') {
                 if ($mcons) {
                     echo (int)$nl . "<tt>"
-                        . htmlentities($buffer)
+                        . htmlentities($buffer, ENT_COMPAT, 'UTF-8')
                         . "</tt><br>";
                 }
                 hace_consulta($db, $buffer, $derr, $merr);

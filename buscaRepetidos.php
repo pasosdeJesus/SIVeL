@@ -39,13 +39,13 @@ echo "<table width='100%' border='1'><tr>" .
     "<th width='50%'>Memo</th><th>Casos</th></tr>";
 $reg = array();
 while ($res->fetchInto($reg)) {
-    echo "<tr><td>" . htmlentities($reg[1]) . "</td><td>" .
+    echo "<tr><td>" . htmlentities($reg[1], ENT_COMPAT, 'UTF-8') . "</td><td>" .
         "<a href='captura_caso.php?id=" . urlencode($reg[0]) .
-        "'>" . htmlentities($reg[0]) . "</a> ";
+        "'>" . htmlentities($reg[0], ENT_COMPAT, 'UTF-8') . "</a> ";
     for ($i = 1; $i < $reg[2]; $i++) {
         $reg2 =& $res->fetchRow();
         echo "<a href='captura_caso.php?id=" . urlencode($reg2[0]) .
-            "'>" . htmlentities($reg2[0]) . "</a> ";
+            "'>" . htmlentities($reg2[0], ENT_COMPAT, 'UTF-8') . "</a> ";
     }
     echo "</td></tr>\n";
 }

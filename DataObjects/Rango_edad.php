@@ -38,7 +38,15 @@ class DataObjects_Rango_edad extends DataObjects_Basica
     var $limiteinferior;
     var $limitesuperior;
 
-    var $nom_tabla = 'Rango de edad';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Rango de edad');
+    }
+
 
     var $fb_linkDisplayFields = array('rango');
     var $fb_select_display_field = 'rango';

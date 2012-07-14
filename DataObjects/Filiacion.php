@@ -35,7 +35,15 @@ class DataObjects_Filiacion extends DataObjects_Basica
 {
     var $__table = 'filiacion';                       // table name
 
-    var $nom_tabla = 'Filiación';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Filiación');
+    }
+
 
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'

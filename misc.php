@@ -527,7 +527,7 @@ function error_valida($msg, $valores, $iderr = '')
         $_SESSION['recuperaErrorValida'] = $valores;
     }
     echo "<div class='regla'>"
-        .  htmlentities($msg)
+        .  htmlentities($msg, ENT_COMPAT, 'UTF-8')
         . "</div>";
     if ($iderr != '') {
         $_SESSION[$iderr] = $msg;
@@ -593,7 +593,7 @@ function resValida(&$db, $mens, $cons, $confunc = false)
         );
 
     }
-    echo "<p>" . htmlentities($mens) . ": ";
+    echo "<p>" . htmlentities($mens, ENT_COMPAT, 'UTF-8') . ": ";
 
     if ($confunc) {
         $r = hace_consulta(
@@ -840,7 +840,7 @@ function encabezado_envia($titulo = null, $cabezote = '')
     echo '<' . 'html>'; // xmlns = "http://www.w3.org/1999/xhtml" lang = "es">
     echo ' <' . 'head>';
     if (isset($titulo)) {
-        echo '  <title>' . htmlentities($titulo) . '</title>';
+        echo '  <title>' . htmlentities($titulo, ENT_COMPAT, 'UTF-8') . '</title>';
     }
     echo '<link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantías. 2004-->
@@ -1026,7 +1026,7 @@ function htmlentities_array($ar, $enc = 'UTF-8')
      */
 function die_esc($mens)
 {
-    die(htmlentities($mens));
+    die(htmlentities($mens, ENT_COMPAT, 'UTF-8'));
 }
 
 
@@ -1040,7 +1040,7 @@ function die_esc($mens)
      */
 function echo_esc($mens, $nl = true)
 {
-    echo htmlentities($mens);
+    echo htmlentities($mens, ENT_COMPAT, 'UTF-8');
     if ($nl) {
         echo "<br>\n";
     }
@@ -2331,7 +2331,6 @@ function tam_arreglo($arr)
     }
     return $tmem;
 }
-
 /**
  * Establece locale
  *
@@ -2342,6 +2341,7 @@ function tam_arreglo($arr)
 function idioma($l = "es")
 {
     putenv("LC_ALL=$l");
+    $GLOBALS['LC_ALL'] = $l;
     setlocale(LC_ALL, $l);
     bindtextdomain("sivel", "./locale");
     textdomain("sivel");

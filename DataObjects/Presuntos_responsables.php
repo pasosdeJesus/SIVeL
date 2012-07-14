@@ -41,7 +41,15 @@ class DataObjects_Presuntos_responsables extends DataObjects_Basica
     var $fechacreacion;                  // date(4)  not_null
     var $fechadeshabilitacion;           // date(4)
 
-    var $nom_tabla = 'Presuntos Responsables';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Presuntos Responsables');
+    }
+
 
     var $fb_linkDisplayFields = array('nombre');
     var $fb_addFormHeader = false;

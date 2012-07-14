@@ -14,7 +14,6 @@ function aplica {
 		echo "Falta nombre de archivo por verificar";
 		exit 1;
 	} fi;
-echo "noverifica=$NOVERIFICA";
     if (test "${NOVERIFICA}" != "1") then {
 	    echo "Verificando $i";
         $PHP -l $i

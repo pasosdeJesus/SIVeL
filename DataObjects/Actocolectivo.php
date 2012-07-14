@@ -80,11 +80,11 @@ class DataObjects_Actocolectivo extends DB_DataObject_SIVeL
             $ca =& $p->getLink('id_categoria');
             $vc =& $p->getLink('id_grupoper');
             $t .= "<tr><td>"
-                . htmlentities($pp->nombre)
-                . "</td><td>" . htmlentities($ca->id_tipo_violencia)
+                . htmlentities($pp->nombre, ENT_COMPAT, 'UTF-8')
+                . "</td><td>" . htmlentities($ca->id_tipo_violencia, ENT_COMPAT, 'UTF-8')
                 . (int)$ca->id . " "
-                . htmlentities($ca->nombre) . "</td><td>"
-                . htmlentities($vc->nombre) . "</td>" .
+                . htmlentities($ca->nombre, ENT_COMPAT, 'UTF-8') . "</td><td>"
+                . htmlentities($vc->nombre, ENT_COMPAT, 'UTF-8') . "</td>" .
                 "<td><a href='{$_SERVER['PHP_SELF']}?eliminaactocolectivo="
                 . (int)$p->id_p_responsable . ":"
                 . (int)$p->id_categoria . ":"

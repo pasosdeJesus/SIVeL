@@ -35,7 +35,15 @@ class DataObjects_Profesion extends DataObjects_Basica
 {
     var $__table = 'profesion';                       // table name
 
-    var $nom_tabla = 'Profesión';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Profesión');
+    }
+
 
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'

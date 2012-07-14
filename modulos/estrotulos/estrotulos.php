@@ -335,7 +335,7 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
             echo "<tr>";
             $scol = array();
             foreach ($tcol as $k => $t) {
-                echo "<th>" . htmlentities($k) . "</th>";
+                echo "<th>" . htmlentities($k, ENT_COMPAT, 'UTF-8') . "</th>";
                 $scol[$k] = 0;
             }
             echo "<th>Total</th>";
@@ -349,7 +349,7 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
                 foreach ($tcol as $c => $t2) {
                     echo "<td>";
                     if (isset($celda[$f][$c])) {
-                        echo htmlentities($celda[$f][$c]);
+                        echo htmlentities($celda[$f][$c], ENT_COMPAT, 'UTF-8');
                         if ($ncol >= $colenc) {
                             $scol[$c] += (int)$celda[$f][$c];
                             $sfil += (int)$celda[$f][$c];
@@ -381,7 +381,7 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
                     echo "</td>";
                     $ncol++;
                 }
-                echo "<td><b>" . (int)$sfil "</b></td>";
+                echo "<td><b>" . (int)$sfil . "</b></td>";
                 echo "</tr>\n";
             }
             echo "</table>";

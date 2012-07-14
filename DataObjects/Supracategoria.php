@@ -36,7 +36,15 @@ class DataObjects_Supracategoria extends DataObjects_Basica
     var $__table = 'supracategoria';                  // table name
     var $id_tipo_violencia;               // varchar(-1)  multiple_key
 
-    var $nom_tabla = 'Supracategoria';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Supracategoria');
+    }
+
 
     var $fb_linkDisplayFields = array('nombre','id_tipo_violencia');
     var $fb_fieldLabels = array('id_tipo_violencia'=>'Tipo de Violencia');

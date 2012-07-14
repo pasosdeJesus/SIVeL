@@ -34,7 +34,15 @@ class DataObjects_Etiqueta extends DataObjects_Basica
 
     var $observaciones;                        // varchar(-1)  not_null
 
-    var $nom_tabla = 'Etiqueta de un caso';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Etiqueta de un caso');
+    }
+
 
     var $fb_preDefOrder = array(
         'id',

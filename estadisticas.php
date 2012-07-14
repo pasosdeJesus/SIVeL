@@ -326,7 +326,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             encabezado_envia();
             echo "<table border=\"1\"><tr>";
             foreach ($cab as $k => $t) {
-                echo "<th>" . htmlentities($t) . "</th>";
+                echo "<th>" . htmlentities($t, ENT_COMPAT, 'UTF-8') . "</th>";
             }
             echo "</tr>\n";
             $row = array();
@@ -335,7 +335,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
                 echo "<tr>";
                 foreach ($cab as $k => $t) {
                     echo "<td>";
-                    echo htmlentities($row[$k]);
+                    echo htmlentities($row[$k], ENT_COMPAT, 'UTF-8');
                     echo "</td>";
                 }
                 echo "</tr>\n";

@@ -35,7 +35,7 @@ $c = (int)var_escapa($_REQUEST['c']);
 $dt =& objeto_tabla('tipo_violencia');
 $dt->id = $t;
 if ($dt->find() == 0) {
-    die("No existe tipo de violencia " . htmlentities($t));
+    die("No existe tipo de violencia " . htmlentities($t, ENT_COMPAT, 'UTF-8'));
 }
 $dt->fetch();
 
@@ -43,7 +43,7 @@ $ds =& objeto_tabla('supracategoria');
 $ds->id_tipo_violencia = $t;
 $ds->id = $s;
 if ($ds->find() == 0) {
-    die("No existe supracategoria " . htmlentities($s));
+    die("No existe supracategoria " . htmlentities($s, ENT_COMPAT, 'UTF-8'));
 }
 $ds->fetch();
 
@@ -52,15 +52,15 @@ $dc->id_tipo_violencia = $t;
 $dc->id_supracategoria = $s;
 $dc->id = $c;
 if ($dc->find() == 0) {
-    die("No existe categoria " . htmlentities($c));
+    die("No existe categoria " . htmlentities($c, ENT_COMPAT, 'UTF-8'));
 }
 $dc->fetch();
 
 echo "<table border='1'>";
 echo "<tr><th>Código</th><th>Descripción</th></tr>";
-echo "<tr><td>" . htmlentities($t) . htmlentities($c) . "</td>";
-echo "<td>" . htmlentities($dt->nombre) . " / " . htmlentities($ds->nombre)
-    . " / " . htmlentities($dc->nombre) . "</td></tr>";
+echo "<tr><td>" . htmlentities($t, ENT_COMPAT, 'UTF-8') . htmlentities($c, ENT_COMPAT, 'UTF-8') . "</td>";
+echo "<td>" . htmlentities($dt->nombre, ENT_COMPAT, 'UTF-8') . " / " . htmlentities($ds->nombre, ENT_COMPAT, 'UTF-8')
+    . " / " . htmlentities($dc->nombre, ENT_COMPAT, 'UTF-8') . "</td></tr>";
 echo "</table>";
 
 pie_envia();

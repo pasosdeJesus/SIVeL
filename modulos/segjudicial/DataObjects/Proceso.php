@@ -47,7 +47,15 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
     var $telefono;
     var $observaciones;
 
-    var $nom_tabla = 'Proceso';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Proceso');
+    }
+
 
     var $fb_preDefOrder = array(
         'id_tipo', 'proximafecha',

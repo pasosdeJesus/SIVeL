@@ -35,7 +35,15 @@ class DataObjects_Iglesia extends DataObjects_Basica
 {
     var $__table = 'iglesia';                       // table name
 
-    var $nom_tabla = 'Iglesia';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Iglesia');
+    }
+
 
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'

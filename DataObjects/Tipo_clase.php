@@ -36,7 +36,15 @@ class DataObjects_Tipo_clase extends DataObjects_Basica
 
     var $__table = 'tipo_clase';                      // table name
 
-    var $nom_tabla = 'Tipo Clase';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Tipo Clase');
+    }
+
 
     var $fb_hidePrimaryKey = false;
     var $fb_fieldsToRender = array(

@@ -61,7 +61,7 @@ while ($d->fetch()) {
         '<a href = "detusyrol.php?id=%s">
             %s</a><br>',
         urlencode($pk),
-        htmlentities($t)
+        htmlentities($t, ENT_COMPAT, 'UTF-8')
     );
 }
 

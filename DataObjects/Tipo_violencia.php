@@ -36,7 +36,15 @@ class DataObjects_Tipo_violencia extends DataObjects_Basica
     var $__table = 'tipo_violencia';                  // table name
     var $nomcorto;                          // varchar(-1)  not_null
 
-    var $nom_tabla = 'Tipo de violencia';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Tipo de violencia');
+    }
+
 
     var $fb_dateFields = array('fechacreacion', 'fechadeshabilitacion');
     var $fb_linkDisplayFields = array('nombre');

@@ -34,7 +34,15 @@ class DataObjects_P_responsable_agrede_combatiente extends DB_DataObject_SIVeL
     var $id_p_responsable;                // int4(4)  multiple_key
     var $id_combatiente;                  // int4(4)  multiple_key
 
-    var $nom_tabla = 'Presuntso Responsable Agrede Combatiente';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Presuntso Responsable Agrede Combatiente');
+    }
+
 
     var $fb_hidePrimaryKey = true;
 }

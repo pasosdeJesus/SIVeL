@@ -35,7 +35,15 @@ class DataObjects_Sector_social extends DataObjects_Basica
 {
     var $__table = 'sector_social';                       // table name
 
-    var $nom_tabla = 'Sector Social';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Sector Social');
+    }
+
 
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'

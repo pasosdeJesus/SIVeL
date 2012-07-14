@@ -214,6 +214,19 @@
 
 }
 
+/var \$nom_tabla/ {
+    if (match($0, /'.*'/)) {
+        nt = substr($0, RSTART, RLENGTH);
+        if (nt != "'nombre de la tabla'") {
+            print "    /**\n     * Constructora\n     * return @void\n     */";
+            print "    public function __construct()";
+            print "    {";
+            $0 =  "        $this->nom_tabla = _(";
+            $0 = $0 nt ");\n    }\n";
+        }
+    }
+}
+
 /function .* {/ {
 	match($0, /^ */);
 	i = substr($0, 1, RLENGTH);

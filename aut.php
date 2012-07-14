@@ -191,8 +191,8 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
                 $idf = $row[0];
             }
             $_SESSION['id_funcionario'] = $idf;
-            idioma("en");
         }
+        idioma("en");
         if (in_array($opcion, $_SESSION['opciones'])) {
             return $db;
         }
@@ -336,7 +336,7 @@ function localizaConf()
     }
     if (!$existe) {
         global $CHROOTDIR;
-        echo "No existe configuración '" . htmlentities($dirsitio) . "'<br>";
+        echo "No existe configuración '" . htmlentities($dirsitio, ENT_COMPAT, 'UTF-8') . "'<br>";
         $r = dirname($_SERVER['PATH_TRANSLATED']) . "/sitios";
         $rs = $CHROOTDIR . $r;
         $cmd ="cd $rs; sudo ./nuevo.sh $pn; sudo ln -s $pn " . strtoupper($n);
@@ -344,13 +344,13 @@ function localizaConf()
             $rp = $r . "/" . $pn;
             if (file_exists($rp)) {
                 $fn = $pn;
-                echo "Existe ruta " . htmlentities("$CHROOTDIR$rp") . "<br>";
+                echo "Existe ruta " . htmlentities("$CHROOTDIR$rp", ENT_COMPAT, 'UTF-8') . "<br>";
                 $cmd ="cd $rs; sudo ln -s $pn " . strtoupper($n);
             }
         }
         echo "Posiblemente basta que ejecute desde una terminal: <br>";
         echo "<font size='-1' color='#db9090'>"
-            . htmlentities($cmd) . "</font>";
+            . htmlentities($cmd, ENT_COMPAT, 'UTF-8') . "</font>";
         exit(1);
     }
     //trigger_error("OJO quedo dirsitio='$dirsitio'");

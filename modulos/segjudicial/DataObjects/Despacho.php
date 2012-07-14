@@ -36,7 +36,15 @@ class DataObjects_Despacho extends DataObjects_Basica
     var $id_tipo;                              // int4(4)  not_null
     var $observaciones;                        // varchar(-1)  not_null
 
-    var $nom_tabla = 'Despacho de una actuación judicial';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Despacho de una actuación judicial');
+    }
+
 
     var $fb_preDefOrder = array(
         'id',

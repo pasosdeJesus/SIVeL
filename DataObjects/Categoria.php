@@ -45,7 +45,15 @@ class DataObjects_Categoria extends DataObjects_Basica
     var $fechacreacion;                  // date(4)  not_null
     var $fechadeshabilitacion;           // date(4)
 
-    var $nom_tabla = 'Categoria';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Categoria');
+    }
+
 
     var $fb_linkDisplayFields = array('nombre',
         'id_tipo_violencia',

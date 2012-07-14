@@ -112,4 +112,4 @@ s/  *$//g
 s/http:\/\/creativecommons.org\/publicdomain\/zero\/1.0\//https:\/\/www.pasosdejesus.org\/dominio_publico_colombia.html/g
 s/vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:/vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:/g
 s/autenticaUsuario(\$dsn, \$accno/autenticaUsuario($dsn/g
-
+s/htmlentities(\([^,)]*\))/htmlentities(\1, ENT_COMPAT, 'UTF-8')/g

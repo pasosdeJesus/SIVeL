@@ -33,7 +33,15 @@ class DataObjects_Tipo_accion extends DataObjects_Basica
 
     var $observaciones;                   // varchar(-1)  not_null
 
-    var $nom_tabla = 'Tipo de Acción';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Tipo de Acción');
+    }
+
 
     var $fb_preDefOrder = array(
         'id',

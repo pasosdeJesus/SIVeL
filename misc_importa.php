@@ -1353,7 +1353,7 @@ function dato_en_obs(&$oxml, $id)
     }
     if (count($po) > 1) {
         echo "Problema en función <tt>datoenObservaciones(oxml, id="
-            . htmlentities($id)
+            . htmlentities($id, ENT_COMPAT, 'UTF-8')
             . ")</tt>."
             . "  Hay varias observaciones con tipo buscado<br>";
     }

@@ -87,11 +87,11 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 $rot = '';
             }
             if ($n<($ncol+1) || ($pResto && $n==($ncol+1))) {
-                $html_l = $sep . "<b>" . htmlentities($l) 
-                    . " " . htmlentities($rot) . ":</b>";
+                $html_l = $sep . "<b>" . htmlentities($l, ENT_COMPAT, 'UTF-8')
+                    . " " . htmlentities($rot, ENT_COMPAT, 'UTF-8') . ":</b>";
                 echo $html_l;
                 foreach ($lc as $cc) {
-                    echo htmlentities($cc) . " ";
+                    echo htmlentities($cc, ENT_COMPAT, 'UTF-8') . " ";
                 }
                 $sep = "; ";
             }
@@ -128,8 +128,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
             $d->get($row[0]);
             $tpresp[$row[0]] = $l;
             if ($muestra) {
-                echo "<b>" . (int)$l . "</b>: " 
-                    . htmlentities($d->nombre) . ";";
+                echo "<b>" . (int)$l . "</b>: "
+                    . htmlentities($d->nombre, ENT_COMPAT, 'UTF-8') . ";";
             }
             $l++;
         }
@@ -236,7 +236,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             );
         }
         $tablas = $tgeo . $tablas;
-        
+
         $q = "SELECT MAX(col_rep_consolidado) FROM categoria;";
         $ncol = $db->getOne($q);
 
@@ -424,19 +424,20 @@ class AccionConsolidado extends HTML_QuickForm_Action
             if ($pMuestra == "tabla") {
                 echo "<tr>";
                 if ($depuraConsolidado) {
-                    echo "<td>". (int)$idcaso . "</td><td>" 
+                    echo "<td>". (int)$idcaso . "</td><td>"
                         . (int)$idvic . "</td>";
                 }
-                echo "<td>" . htmlentities($fecha) . "</td><td>" . 
-                    htmlentities($ubi) . "</td><td>" .
-                    trim(htmlentities($nom)) . "</td>";
+                echo "<td>" . htmlentities($fecha, ENT_COMPAT, 'UTF-8') .
+                    "</td><td>" .  htmlentities($ubi, ENT_COMPAT, 'UTF-8') .
+                    "</td><td>" .
+                    trim(htmlentities($nom, ENT_COMPAT, 'UTF-8')) . "</td>";
             } elseif ($pMuestra == 'csv') {
                 $adjunto_l = $fecha . ", " . $ubi . ", ".trim($nom).", ";
                 echo $adjunto_l;
             } elseif ($pMuestra == 'latex') {
                 $lt = txt2latex($fecha) . " & " . txt2latex($ubi).
                     " & " . txt2latex(trim($nom)) . " ";
-                echo htmlentities($lt);
+                echo htmlentities($lt, ENT_COMPAT, 'UTF-8');
             }
             foreach ($cat as $idcat => $cp) {
                 if (isset($dv[$idcaso][$idvic][$idcat])) {
@@ -476,7 +477,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             if ($acto->find()==0) {
                 $acto = null;
                 echo_esc(
-                    "Víctima sin presunto responsable '$idvic', " 
+                    "Víctima sin presunto responsable '$idvic', "
                     . "'$nom' en caso '$idcaso' -- estadística incompleta!!!"
                 );
             } else {
@@ -494,12 +495,12 @@ class AccionConsolidado extends HTML_QuickForm_Action
             }
 
             if ($pMuestra == "tabla") {
-                echo "<td>" . htmlentities($presp) . "</td></tr>\n";
+                echo "<td>" . htmlentities($presp, ENT_COMPAT, 'UTF-8') . "</td></tr>\n";
             } elseif ($pMuestra == 'csv') {
                 $adjunto_l = ",$presp \n";
                 echo $adjunto_l;
             } elseif ($pMuestra == 'latex') {
-                echo htmlentities("& $presp \\\\\n \hline\n");
+                echo htmlentities("& $presp \\\\\n \hline\n", ENT_COMPAT, 'UTF-8');
             }
 
         }
@@ -579,7 +580,7 @@ class PagConsolidado extends HTML_QuickForm_Page
         $e =& $this->addElement('header', null, 'Reporte consolidado');
 
         list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
-            $db, $this, 'victimaIndividual', 
+            $db, $this, 'victimaIndividual',
             $this->bpersona->_do->id_departamento,
             $this->bpersona->_do->id_municipio
         );
@@ -622,7 +623,7 @@ class PagConsolidado extends HTML_QuickForm_Page
         if (isset($_SESSION['id_funcionario'])) {
             $aut_usuario = "";
             include $_SESSION['dirsitio'] . "/conf.php";
-            autenticaUsuario($dsn, $accno, $aut_usuario, 0);
+            autenticaUsuario($dsn, $aut_usuario, 0);
             if (in_array(42, $_SESSION['opciones'])) {
                 $e =& $this->addElement(
                     'date', 'fincdesde',
@@ -687,7 +688,7 @@ class PagConsolidado extends HTML_QuickForm_Page
 }
 
 $aut_usuario = "";
-autenticaUsuario($dsn, $accno, $aut_usuario, 43);
+autenticaUsuario($dsn, $aut_usuario, 43);
 
 $wizard =& new HTML_QuickForm_Controller('Consolidado', false);
 $consweb = new PagConsolidado();

@@ -37,7 +37,15 @@ class DataObjects_Tipo_sitio extends DataObjects_Basica
 {
     var $__table = 'tipo_sitio';         // table name
 
-    var $nom_tabla = 'Tipo de Sitio';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Tipo de Sitio');
+    }
+
 
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'

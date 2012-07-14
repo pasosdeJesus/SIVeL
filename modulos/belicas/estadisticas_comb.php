@@ -58,16 +58,16 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
     function muestraUno($t, $np, $cdep, $html_nomdep, $cmun, $nommun, $res)
     {
         if ($t == 'Organización') {
-            echo "<td>" . htmlentities($np) . "</td>";
+            echo "<td>" . htmlentities($np, ENT_COMPAT, 'UTF-8') . "</td>";
         } elseif ($t == 'C. Dep.') {
-           echo "<td>" . htmlentities($cdep) . "</td>";
+           echo "<td>" . htmlentities($cdep, ENT_COMPAT, 'UTF-8') . "</td>";
         } elseif ($t == 'Dep.') {
             // Escapado tras consulta
            echo "<td>" . $html_nomdep . "</td>";
         } elseif ($t == 'C. Mun.') {
-           echo "<td>" . htmlentities($cmun) . "</td>";
+           echo "<td>" . htmlentities($cmun, ENT_COMPAT, 'UTF-8') . "</td>";
         } elseif ($t == 'Mun.') {
-           echo "<td>" . htmlentities($nommun) . "</td>";
+           echo "<td>" . htmlentities($nommun, ENT_COMPAT, 'UTF-8') . "</td>";
         } else {
             echo "<td>" .
                 (isset($res[$t]) ? (int)$res[$t] : 0) ."</td>";
@@ -223,7 +223,7 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
         encabezado_envia();
         echo "<table border=\"1\"><tr>";
         foreach ($cab as $k => $t) {
-            echo "<th>" . htmlentities($t) . "</th>";
+            echo "<th>" . htmlentities($t, ENT_COMPAT, 'UTF-8') . "</th>";
         }
         echo "</tr>\n";
         foreach ($n as $np => $dep) {

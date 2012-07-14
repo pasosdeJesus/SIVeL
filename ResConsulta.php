@@ -521,13 +521,15 @@ class ResConsulta
             $presp = $row[5];
 
             if ($pMuestra == "tabla" || $pMuestra == 'actos') {
-                $html_il = "<tr><td>" . htmlentities($fecha) . "</td>" .
-                    "<td>" . trim(htmlentities($idcaso)) . "</td>" .
-                    "<td>" . trim(htmlentities($nom)) . "</td>" .
-                    "<td>" . trim(htmlentities($ss)) . "</td>" .
-                    "<td>" . trim(htmlentities($os)) . "</td>" .
-                    "<td>" . htmlentities($cat) . "</td>" .
-                    "<td>" . htmlentities($presp) . "</td>";
+                $html_il = "<tr><td>" .
+                    htmlentities($fecha, ENT_COMPAT, 'UTF-8') . "</td>" .
+                    "<td>" . trim(htmlentities($idcaso, ENT_COMPAT, 'UTF-8')) .
+                    "</td><td>" . trim(htmlentities($nom, ENT_COMPAT, 'UTF-8')).
+                    "</td><td>" . trim(htmlentities($ss, ENT_COMPAT, 'UTF-8')) .
+                    "</td><td>" . trim(htmlentities($os, ENT_COMPAT, 'UTF-8')) .
+                    "</td><td>" . htmlentities($cat, ENT_COMPAT, 'UTF-8') .
+                    "</td><td>" . htmlentities($presp, ENT_COMPAT, 'UTF-8') .
+                    "</td>";
             } elseif ($pMuestra == 'csv') {
                 $html_il = $fecha . ", ".trim($nom).
                     ", " . $cat . ", " . $presp . ", ";
@@ -739,7 +741,9 @@ class ResConsulta
             ) {
                 echo "Falta definir directorio destino en variable " .
                     "\$GLOBALS['DIR_RELATOS'] del archivo " .
-                    htmlentities("$dirserv/$dirsitio/conf.php") . "<br>";
+                    htmlentities(
+                        "$dirserv/$dirsitio/conf.php", ENT_COMPAT, 'UTF-8'
+                    ) . "<br>";
                 die("");
             } else if (!is_writable($GLOBALS['DIR_RELATOS'])) {
                 echo "No puede escribirse en directorio " .
@@ -834,7 +838,8 @@ class ResConsulta
                         && array_key_exists('m_tipificacion', $this->campos)
                     ) {
                         if ($peso > $ultpeso) {
-                            echo "<font size=+2>" . htmlentities($rotulo) .
+                            echo "<font size=+2>" .
+                                htmlentities($rotulo, ENT_COMPAT, 'UTF-8') .
                                 "</font>\n";
                         }
                         echo $html_r . "\n";
@@ -874,7 +879,8 @@ class ResConsulta
                     echo "<br>";
                     $nar = $GLOBALS['DIR_RELATOS'] .
                         $GLOBALS['PREF_RELATOS'] . $idcaso . '.xrlat';
-                    echo "&nbsp;&nbsp;" . htmlentities($nar);
+                    echo "&nbsp;&nbsp;" .
+                        htmlentities($nar, ENT_COMPAT, 'UTF-8');
                     if (!file_exists($nar)) {
                         $r = $html_erelato;
                         $r .= ResConsulta::reporteRelato(
@@ -1051,8 +1057,9 @@ class ResConsulta
                 }
             }
         }
-        $html_renglon = "<tr style='background-color: " . htmlentities($col)
-            . "'>";
+        $html_renglon = "<tr style='background-color: " .
+            htmlentities($col, ENT_COMPAT, 'UTF-8') .
+            "'>";
         foreach ($campos as $cc => $nc) {
             $html_renglon .= "<td valign='top'>";
             $sep = "";
@@ -1224,8 +1231,8 @@ class ResConsulta
                 "action=\"consulta_web_correo.php\">\n";
             foreach ($escon as $l => $v) {
                 echo "<input type=\"hidden\" name=\""
-                    . htmlentities($l) . "\" value=\""
-                    . htmlentities($v) . "\">\n";
+                    . htmlentities($l, ENT_COMPAT, 'UTF-8') . "\" value=\""
+                    . htmlentities($v, ENT_COMPAT, 'UTF-8') . "\">\n";
             }
             echo "<p>\n<input TYPE=\"submit\" NAME=\"Request\" " .
                 "VALUE=\"Comente caso\">\n";

@@ -134,9 +134,9 @@ class DataObjects_Etiquetacaso extends DB_DataObject_SIVeL
                 . (int)$p->id_etiqueta . "_"
                 . (int)$p->id_funcionario . "_" . $p->fecha;
             $t .= '<tr><td>' . $p->fecha . '</td><td>'
-                . htmlentities($dp->nombre) . '</td>'
+                . htmlentities($dp->nombre, ENT_COMPAT, 'UTF-8') . '</td>'
                 . '<td><textarea name="' . $n . '" cols="20" rows="3">'
-                . htmlentities($p->observaciones) . '</textarea></td><td>'
+                . htmlentities($p->observaciones, ENT_COMPAT, 'UTF-8') . '</textarea></td><td>'
                 . $fn->nombre . '</td><td><a href="'
                 . htmlspecialchars($_SERVER['PHP_SELF']) . '?eliminaest='
                 . (int)$p->id_caso . ":" . (int)$p->id_etiqueta . ":"

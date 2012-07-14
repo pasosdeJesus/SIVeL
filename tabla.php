@@ -144,7 +144,7 @@ function rama($tabla, $titulo, $idpapa, $arbol, $indenta)
                 $indenta,
                 urlencode($pk),
                 urlencode($tabla),
-                htmlentities($t)
+                htmlentities($t, ENT_COMPAT, 'UTF-8')
             );
             echo $html_l;
         }
@@ -165,12 +165,7 @@ if (!in_array($tabla, $u)) {
     die("La tabla '$tabla' no es básica");
 }
 
-
-
 $d = objeto_tabla($tabla);
-if (PEAR::isError($d)) {
-    die($d->getMessage());
-}
 if (isset($d->nom_tabla)) {
     $nom_tabla=  $d->nom_tabla;
 } else if (isset($GLOBALS['etiqueta'][$d->__table])) {
@@ -185,7 +180,7 @@ echo '<table border = "0" width = "100%"><tr>'
     . ' <td style = "white-space: nowrap;'
     . 'background-color:#CCCCCC;" align = "center" '
     . 'valign = "top" colspan = "2"><b>'
-    . htmlentities($nom_tabla) . '</b></td></tr></table>';
+    . htmlentities($nom_tabla, ENT_COMPAT, 'UTF-8') . '</b></td></tr></table>';
 
 $k = $d->keys();
 $titulo = $_DB_DATAOBJECT_FORMBUILDER['CONFIG']['select_display_field'];
@@ -213,7 +208,7 @@ if (in_array('id_papa', array_keys($vd))) { /** jerarquía */
                 %s</a><br>',
                 urlencode($pk),
                 urlencode($tabla),
-                htmlentities($t)
+                htmlentities($t, ENT_COMPAT, 'UTF-8')
             );
     }
 }
@@ -223,7 +218,8 @@ if (in_array('id_papa', array_keys($vd))) { /** jerarquía */
 echo '<pr>&nbsp;</pr><table border="0" width="100%" ' .
     'style="white-space: nowrap; background-color:#CCCCCC;"><tr>' .
     '<td align = "left">' .
-    '<a href="detalle.php?tabla=' . htmlentities($tabla) . '">Nuevo</a>' .
+    '<a href="detalle.php?tabla=' . htmlentities($tabla, ENC_COMPAT, 'UTF-8') . '">' .
+    _('Nuevo') . '</a>' .
     '</td><td align="right">' .
     '<a href="index.php"><b>' . _('Men&uacute; Principal') . '</b></a>' .
     '</td></tr></table>';

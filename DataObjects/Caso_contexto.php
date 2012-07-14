@@ -38,7 +38,15 @@ class DataObjects_Caso_contexto extends DB_DataObject_SIVeL
     var $id_caso;                         // int4(4)  multiple_key
     var $id_contexto;                     // int4(4)  multiple_key
 
-    var $nom_tabla = 'Contexto';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Contexto');
+    }
+
 
 
     var $fb_preDefOrder = array('id_contexto');

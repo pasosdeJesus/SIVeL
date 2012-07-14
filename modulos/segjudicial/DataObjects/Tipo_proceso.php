@@ -32,7 +32,15 @@ class DataObjects_Tipo_proceso extends DataObjects_Basica
     var $__table = 'tipo_proceso';                         // table name
     var $observaciones;                        // varchar(-1)  not_null
 
-    var $nom_tabla = 'Tipo de proceso';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Tipo de proceso');
+    }
+
 
     var $fb_preDefOrder = array(
         'id',

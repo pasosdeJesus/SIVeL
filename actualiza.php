@@ -137,7 +137,7 @@ if (!aplicado($idact)) {
         $row = array();
         $sep = "";
         while ($r->fetchInto($row)) {
-            echo htmlentities($sep . $row[0]);
+            echo htmlentities($sep . $row[0], ENT_COMPAT, 'UTF-8');
             $sep = ", ";
         }
         echo "</font>";
@@ -1985,7 +1985,7 @@ if ($vc != "") {
         . "añada al final las siguientes líneas y vuelva a cargar esta "
         . " página:<br><hr/>";
     echo "<pre>";
-    echo htmlentities($vc);
+    echo htmlentities($vc, ENT_COMPAT, 'UTF-8');
     echo "</pre><hr/></font></blockquote>";
     die("");
 }
@@ -1999,7 +1999,7 @@ if (isset($GLOBALS['menu_tablas_basicas'])) {
     }
     if (!$hayrep) {
         echo "<font color='red'>En el arreglo <tt>menu_tablas_basicas</tt> " .
-            "del archivo <tt>" . htmlentities($_SESSION['dirsitio'])
+            "del archivo <tt>" . htmlentities($_SESSION['dirsitio'], ENT_COMPAT, 'UTF-8')
             . "</tt> falta:
 <pre>
     array('title' => 'Reportes', 'url'=> null, 'sub' => array(
@@ -2061,7 +2061,7 @@ function leeEstructura($nd, $dbnombre, $dirap, $modo)
 {
     if (!file_exists("$nd/DataObjects/estructura-dataobject.ini")) {
         echo "No puede leerse "
-            . htmlentities("$nd/DataObjects/estructura-dataobject.ini")
+            . htmlentities("$nd/DataObjects/estructura-dataobject.ini", ENT_COMPAT, 'UTF-8')
             . "<br>";
         return;
     }

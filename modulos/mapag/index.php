@@ -76,7 +76,7 @@ $d = objeto_tabla('departamento');
 $d->find();
 while ($d->fetch()) {
     echo "<option value=\"" . (int)$d->id . "\">";
-    echo htmlentities($d->nombre) . "</option>\n";
+    echo htmlentities($d->nombre, ENT_COMPAT, 'UTF-8') . "</option>\n";
 }
 ?>
                     </select>
@@ -97,7 +97,7 @@ while ($d->fetch()) {
     $d->find();
     while ($d->fetch()) {
         echo "<option value=\"" . (int)$d->id . "\">";
-        echo htmlentities($d->nombre) . "</option>\n";
+        echo htmlentities($d->nombre, ENT_COMPAT, 'UTF-8') . "</option>\n";
     }
 ?>
                     </select>
@@ -114,7 +114,7 @@ while ($d->fetch()) {
     $d->find();
     while ($d->fetch()) {
         echo "<option value=\"" . $d->id . "\">";
-        echo htmlentities($d->nombre) . "</option>\n";
+        echo htmlentities($d->nombre, ENT_COMPAT, 'UTF-8') . "</option>\n";
     }
 ?>
                     </select>

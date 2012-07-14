@@ -355,7 +355,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             echo "<tr>";
             $scol = array();
             foreach ($tcol as $k => $t) {
-                echo "<th>" . htmlentities($k) . "</th>";
+                echo "<th>" . htmlentities($k, ENT_COMPAT, 'UTF-8') . "</th>";
                 $scol[$k] = 0;
             }
             echo "<th>Total</th>";
@@ -369,7 +369,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
                 foreach ($tcol as $c => $t2) {
                     echo "<td>";
                     if (isset($celda[$f][$c])) {
-                        echo htmlentities($celda[$f][$c]); # . " " . $sfil;
+                        echo htmlentities($celda[$f][$c], ENT_COMPAT, 'UTF-8'); # . " " . $sfil;
                         if ($ncol >= $colenc) {
                             $scol[$c] += (int)$celda[$f][$c];
                             $sfil += (int)$celda[$f][$c];

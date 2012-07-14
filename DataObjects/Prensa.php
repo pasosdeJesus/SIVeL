@@ -33,7 +33,15 @@ class DataObjects_Prensa extends DataObjects_Basica
     var $__table = 'prensa';                          // table name
     var $tipo_fuente;                     // varchar(-1)  not_null
 
-    var $nom_tabla = 'Fuentes frecuentes';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Fuentes frecuentes');
+    }
+
 
     var $fb_fieldLabels= array(
         'tipo_fuente'=>'Tipo de Fuente',

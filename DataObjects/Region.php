@@ -36,7 +36,15 @@ class DataObjects_Region extends DataObjects_Basica
 
     var $__table = 'region';                          // table name
 
-    var $nom_tabla = 'Región';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Región');
+    }
+
 }
 
 ?>

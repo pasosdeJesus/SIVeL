@@ -38,7 +38,15 @@ class DataObjects_Municipio extends DataObjects_Basica
     var $__table = 'municipio';                       // table name
     var $id_departamento;                 // int4(4)  multiple_key
 
-    var $nom_tabla = 'Municipio';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Municipio');
+    }
+
 
     var $fb_linkDisplayFields = array('nombre', 'id_departamento');
     var $fb_preDefOrder = array(

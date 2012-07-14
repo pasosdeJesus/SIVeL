@@ -35,7 +35,14 @@ class DataObjects_Departamento extends DataObjects_Basica
 {
     var $__table = 'departamento';                    // table name
 
-    var $nom_tabla = 'Departamento';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Departamento');
+    }
 }
 
 ?>

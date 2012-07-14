@@ -54,7 +54,15 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
     var $id_caso;                         // int4(4)
     var $id_organizacion_armada;          // int4(4)
 
-    var $nom_tabla = 'Combatiente';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Combatiente');
+    }
+
 
     var $fb_preDefOrder = array('nombre', 'alias', 'edad', 'sexo',
         'id_rango_edad', 'id_sector_social', 'id_vinculo_estado',

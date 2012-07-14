@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sivel 1.1cp1\n"
 "Report-Msgid-Bugs-To: vtamara@pasosdeJesus.org\n"
-"POT-Creation-Date: 2012-07-14 07:35-0500\n"
+"POT-Creation-Date: 2012-07-14 09:47-0500\n"
 "PO-Revision-Date: 2012-02-24 08:16-0500\n"
 "Last-Translator: Vladimir Tamara Patino <>\n"
 "Language-Team: English\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: tablas_basicas.php:28 tablas_basicas.php:46
-msgid "Tablas B&aacute;sicas"
-msgstr "Basic Tables"
-
-#: tablas_basicas.php:54 valida.php:116
+#: tabla.php:228 tablas_basicas.php:56 valida.php:116
 msgid "Men&uacute; Principal"
 msgstr "Main Menu"
+
+#: tablas_basicas.php:30 tablas_basicas.php:48
+msgid "Tablas B&aacute;sicas"
+msgstr "Basic Tables"
 
 #: valida.php:27
 msgid "Reporte de consistencia del "
@@ -74,7 +74,7 @@ msgid "P. Responsable"
 msgstr "Alleged Perpetrator"
 
 #: DataObjects/Acto.php:68 DataObjects/Actocolectivo.php:69
-#: sitios/pordefecto/conf.php:367
+#: sitios/pordefecto/conf_int.php:201
 msgid "Categoria"
 msgstr "Category"
 
@@ -90,6 +90,10 @@ msgstr "Delete"
 #: DataObjects/Actocolectivo.php:70
 msgid "Víctima Colectiva"
 msgstr "Colective Victim"
+
+#: DataObjects/Departamento.php:39 sitios/pordefecto/conf_int.php:175
+msgid "Departamento"
+msgstr "Department"
 
 #: DataObjects/Parametros_reporte_consolidado.php:105
 msgid "Empleada en categorias"
@@ -127,122 +131,118 @@ msgstr "Born date doesn't correspon to any group"
 msgid "Familiares"
 msgstr "Relatives"
 
-#: sitios/pordefecto/conf.php:340
+#: sitios/pordefecto/conf_int.php:174
 msgid "Información geográfica"
 msgstr "Geographical Information"
 
-#: sitios/pordefecto/conf.php:341
-msgid "Departamento"
-msgstr "Department"
-
-#: sitios/pordefecto/conf.php:342
+#: sitios/pordefecto/conf_int.php:176
 msgid "Municipio"
 msgstr "Municipality"
 
-#: sitios/pordefecto/conf.php:343
+#: sitios/pordefecto/conf_int.php:177
 msgid "Tipo Clase"
 msgstr "Class Type"
 
-#: sitios/pordefecto/conf.php:345
+#: sitios/pordefecto/conf_int.php:179
 msgid "Clase"
 msgstr "Class"
 
-#: sitios/pordefecto/conf.php:346
+#: sitios/pordefecto/conf_int.php:180
 msgid "Región"
 msgstr "Region"
 
-#: sitios/pordefecto/conf.php:347
+#: sitios/pordefecto/conf_int.php:181
 msgid "Frontera"
 msgstr "Boundary"
 
-#: sitios/pordefecto/conf.php:348
+#: sitios/pordefecto/conf_int.php:182
 msgid "Tipo de Sitio"
 msgstr "Kind of Site"
 
-#: sitios/pordefecto/conf.php:351
+#: sitios/pordefecto/conf_int.php:185
 msgid "Información implicado"
 msgstr "Information of people involved"
 
-#: sitios/pordefecto/conf.php:352
+#: sitios/pordefecto/conf_int.php:186
 msgid "Etnia"
 msgstr "Ethnic Group"
 
-#: sitios/pordefecto/conf.php:353
+#: sitios/pordefecto/conf_int.php:187
 msgid "Filiación"
 msgstr "Affiliation"
 
-#: sitios/pordefecto/conf.php:354
+#: sitios/pordefecto/conf_int.php:188
 msgid "Iglesia"
 msgstr "Church"
 
-#: sitios/pordefecto/conf.php:355
+#: sitios/pordefecto/conf_int.php:189
 msgid "Organización social"
 msgstr "Social Organization"
 
-#: sitios/pordefecto/conf.php:356
+#: sitios/pordefecto/conf_int.php:190
 msgid "Profesión"
 msgstr "Profession"
 
-#: sitios/pordefecto/conf.php:357
+#: sitios/pordefecto/conf_int.php:191
 msgid "Rango edad"
 msgstr "Age Group"
 
-#: sitios/pordefecto/conf.php:358
+#: sitios/pordefecto/conf_int.php:192
 msgid "Resultado agresión"
 msgstr "Result of agression"
 
-#: sitios/pordefecto/conf.php:359
+#: sitios/pordefecto/conf_int.php:193
 msgid "Sector Social"
 msgstr "Social Sector"
 
-#: sitios/pordefecto/conf.php:360
+#: sitios/pordefecto/conf_int.php:194
 msgid "Tipo de Relación"
 msgstr "Kind of Relationship"
 
-#: sitios/pordefecto/conf.php:361
+#: sitios/pordefecto/conf_int.php:195
 msgid "Vínculo con el estado"
 msgstr "Link with state"
 
-#: sitios/pordefecto/conf.php:364
+#: sitios/pordefecto/conf_int.php:198
 msgid "Información caso"
 msgstr "Information of Case"
 
-#: sitios/pordefecto/conf.php:365
+#: sitios/pordefecto/conf_int.php:199
 msgid "Tipo de Violencia"
 msgstr "Kind of Violence"
 
-#: sitios/pordefecto/conf.php:366
+#: sitios/pordefecto/conf_int.php:200
 msgid "Supracategoria"
 msgstr "Supercategory"
 
-#: sitios/pordefecto/conf.php:368
+#: sitios/pordefecto/conf_int.php:202
 msgid "Contexto"
 msgstr "Context"
 
-#: sitios/pordefecto/conf.php:369
+#: sitios/pordefecto/conf_int.php:203
 msgid "Presuntos responsables"
 msgstr "Alleged Perpetrators"
 
-#: sitios/pordefecto/conf.php:370
+#: sitios/pordefecto/conf_int.php:204
 msgid "Antecedentes"
 msgstr "Antecedents"
 
-#: sitios/pordefecto/conf.php:371
+#: sitios/pordefecto/conf_int.php:205
 msgid "Intervalo"
 msgstr "Interval"
 
-#: sitios/pordefecto/conf.php:374
+#: sitios/pordefecto/conf_int.php:208
 msgid "Información fuentes"
 msgstr "Information of Sources"
 
-#: sitios/pordefecto/conf.php:375
+#: sitios/pordefecto/conf_int.php:209
 msgid "Fuentes frecuentes"
 msgstr "Frequent Source"
 
-#: sitios/pordefecto/conf.php:378
+#: sitios/pordefecto/conf_int.php:212
 msgid "Reportes"
 msgstr "Reports"
 
-#: sitios/pordefecto/conf.php:379
+#: sitios/pordefecto/conf_int.php:213
 msgid "Columnas de Reporte Consolidado"
 msgstr "Columns of Consolidated Report"

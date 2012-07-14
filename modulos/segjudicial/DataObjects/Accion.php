@@ -173,11 +173,11 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
             $ddespacho = $p->getLink('id_despacho');
             $n = "fobs_{$p->id_proceso}_{$p->id_tipo_accion}_" .
                 "{$p->id_despacho}_{$p->fecha}";
-            $t .= "<tr><td>" . htmlentities($dtipo->nombre) . "</td>" .
-                "<td>" . htmlentities($ddespacho->nombre) . "</td>" .
-                "<td>" . htmlentities($p->fecha) . "</td>" .
-                "<td>" . htmlentities($p->numero_radicado) . "</td>" .
-                "<td>" . htmlentities($p->observaciones_accion) . "</td>" .
+            $t .= "<tr><td>" . htmlentities($dtipo->nombre, ENT_COMPAT, 'UTF-8') . "</td>" .
+                "<td>" . htmlentities($ddespacho->nombre, ENT_COMPAT, 'UTF-8') . "</td>" .
+                "<td>" . htmlentities($p->fecha, ENT_COMPAT, 'UTF-8') . "</td>" .
+                "<td>" . htmlentities($p->numero_radicado, ENT_COMPAT, 'UTF-8') . "</td>" .
+                "<td>" . htmlentities($p->observaciones_accion, ENT_COMPAT, 'UTF-8') . "</td>" .
                 "<td>" . ($p->respondido == 't'?'Si':'No') . "</td>" .
                 "<td><a href=\"{$_SERVER['PHP_SELF']}?eliminaaccionj=" .
                 $p->id . "\">Eliminar</a></td>";

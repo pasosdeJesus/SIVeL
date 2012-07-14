@@ -76,14 +76,14 @@ function muestra()
     while ($result->fetchInto($row)) {
         echo "<tr>";
         echo '<td><a href="#" onClick="enviar_persona(\''
-            . htmlentities($rol) . '\'';
+            . htmlentities($rol, ENT_COMPAT, 'UTF-8') . '\'';
         $html_sep = ", ";
         foreach ($row as $v) {
-            echo $html_sep . "'" . htmlentities($v) . "'";
+            echo $html_sep . "'" . htmlentities($v, ENT_COMPAT, 'UTF-8') . "'";
             $html_sep = ", ";
         }
         echo ')">';
-        echo htmlentities($row[1] . " ".$row[2]) . "</a></td>";
+        echo htmlentities($row[1] . " ".$row[2], ENT_COMPAT, 'UTF-8') . "</a></td>";
         $html_comovic = "";
         $html_comofam = "";
         enlaces_casos_persona_html(

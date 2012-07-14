@@ -32,7 +32,15 @@ class DataObjects_Vinculo_estado extends DataObjects_Basica
 {
     var $__table = 'vinculo_estado';                       // table name
 
-    var $nom_tabla = 'Vinculo con el Estado';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Vinculo con el Estado');
+    }
+
 
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'

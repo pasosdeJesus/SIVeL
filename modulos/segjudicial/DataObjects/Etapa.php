@@ -33,7 +33,15 @@ class DataObjects_Etapa extends DataObjects_Basica
     var $id_tipo;                              // int4(4)  not_null
     var $observaciones;                        // varchar(-1)  not_null
 
-    var $nom_tabla = 'Etapa';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Etapa');
+    }
+
 
     var $fb_preDefOrder = array(
         'id',

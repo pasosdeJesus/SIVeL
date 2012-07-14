@@ -77,11 +77,11 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
             $pp =& $p->getLink('id_p_responsable');
             $ca =& $p->getLink('id_categoria');
             $vi =& $p->getLink('id_persona');
-            $t .= "<tr><td>" .  htmlentities($pp->nombre)
+            $t .= "<tr><td>" .  htmlentities($pp->nombre, ENT_COMPAT, 'UTF-8')
                 . "</td><td>" . $ca->id_tipo_violencia
                 . (int)$ca->id . " "
-                . htmlentities($ca->nombre) . "</td>"
-                . "<td>" . htmlentities("{$vi->nombres}  {$vi->apellidos}")
+                . htmlentities($ca->nombre, ENT_COMPAT, 'UTF-8') . "</td>"
+                . "<td>" . htmlentities("{$vi->nombres}  {$vi->apellidos}", ENT_COMPAT, 'UTF-8')
                 . "</td>"
                 . "<td><a href='{$_SERVER['PHP_SELF']}?eliminaacto="
                 . (int)$p->id_p_responsable . ":"

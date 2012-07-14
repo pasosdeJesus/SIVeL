@@ -35,7 +35,15 @@ class DataObjects_Organizacion extends DataObjects_Basica
 {
     var $__table = 'organizacion';                       // table name
 
-    var $nom_tabla = 'Organización';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Organización');
+    }
+
 
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'

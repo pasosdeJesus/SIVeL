@@ -44,7 +44,15 @@ class DataObjects_Antecedente extends DataObjects_Basica
     var $fb_hidePrimaryKey = true;
     var $fb_selectAddEmpty = array('fechadeshabilitacion');
 
-    var $nom_tabla = 'Antecedentes';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->nom_tabla = _('Antecedentes');
+    }
+
 
     /**
      * Pone valor nulo
