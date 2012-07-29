@@ -42,7 +42,7 @@ class DataObjects_Tipo_violencia extends DataObjects_Basica
      */
     public function __construct()
     {
-        $this->nom_tabla = _('Tipo de violencia');
+        $this->nom_tabla = _('Tipo de Violencia');
     }
 
 

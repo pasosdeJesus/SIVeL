@@ -44,7 +44,7 @@ class DataObjects_Rango_edad extends DataObjects_Basica
      */
     public function __construct()
     {
-        $this->nom_tabla = _('Rango de edad');
+        $this->nom_tabla = _('Rango de Edad');
     }
 
 

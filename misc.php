@@ -879,7 +879,8 @@ function textCounter(field, cntfield, maxlimit)
         }
         fclose($rh);
     } else {
-        echo '</' . 'head><' . 'body background = "' . $GLOBALS['fondo'] . '">';
+        $f = isset($GLOBALS['fondo']) ? $GLOBALS['fondo'] : '';
+        echo '</' . 'head><' . 'body background = "' . $f . '">';
     }
 }
 
@@ -2331,22 +2332,6 @@ function tam_arreglo($arr)
     }
     return $tmem;
 }
-/**
- * Establece locale
- *
- * @param string $l Nombre del locale
- *
- * @return void
- **/
-function idioma($l = "es")
-{
-    putenv("LC_ALL=$l");
-    $GLOBALS['LC_ALL'] = $l;
-    setlocale(LC_ALL, $l);
-    bindtextdomain("sivel", "./locale");
-    textdomain("sivel");
-}
-
 
 if (!function_exists('get_called_class')) {
     /**

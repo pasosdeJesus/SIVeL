@@ -18,45 +18,49 @@
 /**
  * Menú de SIVeL.
  */
+require_once 'misc.php';
 require_once 'aut.php';
+include_once $_SESSION['dirsitio'] . '/conf.php';
 require_once 'HTML/Menu.php';
 require_once 'confv.php';
-require_once $_SESSION['dirsitio'] . '/conf.php';
-require_once 'misc.php';
 require_once 'misc_caso.php';
 require_once 'PresentaMenuPrincipal.php';
+
+$aut_usuario = "";
+$db = autenticaUsuario($dsn, $aut_usuario, 0);
+
+include_once $_SESSION['dirsitio'] . '/conf_int.php';
+
 
 /**
  * Lee menú de base de datos y construye una estructura apropiada para
  * HTML/Menu.
  *
- * @param handle  &$db Conexión a base de datos
  * @param integer $id  Identificación de menú por revisar
  *
  * @return array apropiado para HTML_Menu
  */
-function bd_a_menu(&$db, $id)
+function bd_a_menu($id)
 {
-    $q = "SELECT id_opcion, descripcion, nomid FROM opcion  " .
-        " WHERE id_mama='$id' ORDER by id_opcion;";
-    $result = hace_consulta($db, $q);
-    $row = array();
+    //echo "OJO bd_a_menu($id)<br>";
     $r = array();
-    while ($result->fetchInto($row)) {
-        if ($row[2] != '') {
-            if (strchr($row[2], '?')) {
-                $url = str_replace('?', '.php?', $row[2]);
+    foreach($GLOBALS['m_opcion'] as $idop => $dop) {
+        if ($dop['idpapa'] == $id) {
+            if ($dop['url'] != '') {
+                if (strchr($dop['url'], '?')) {
+                    $url = str_replace('?', '.php?', $dop['url']);
+                } else {
+                    $url = $dop['url'] . '.php';
+                }
             } else {
-                $url = $row[2] . '.php';
+                $url = '';
             }
-        } else {
-            $url = '';
+            $r[] = array(
+                'title' => $dop['nombre'],
+                'url' => $url,
+                'sub' => bd_a_menu($idop)
+            );
         }
-        $r[] = array(
-            'title' => $row[1],
-            'url' => $url,
-            'sub' => bd_a_menu($db, $row[0])
-        );
     }
     return $r;
 }
@@ -72,7 +76,7 @@ function bd_a_menu(&$db, $id)
 function menu_principal(&$db)
 {
 
-    $datMenu = bd_a_menu($db, 0);
+    $datMenu = bd_a_menu(0);
     $menu =& new HTML_Menu($datMenu, 'sitemap');
 
     encabezado_envia(
@@ -135,9 +139,6 @@ function inicializa(&$db)
         );
     }
 }
-
-$aut_usuario = "";
-$db = autenticaUsuario($dsn, $aut_usuario, 0);
 
 $res = hace_consulta($db, 'SELECT count(*) FROM acto', false);
 if (PEAR::isError($res)) {

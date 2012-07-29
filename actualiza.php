@@ -16,6 +16,7 @@
 /** Actualiza base de datos después de actualizar fuentes */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
+require_once 'sitios/pordefecto/conf_int.php';
 require_once "confv.php";
 require_once "misc.php";
 require_once "DataObjects/Categoria.php";
@@ -1958,7 +1959,30 @@ if (!aplicado($idac)) {
         $act, $idac, 'Orientación sexual'
     );
 }
+$idac = '1.2-sm';
+if (!aplicado($idac)) {
+    hace_consulta($db, 'DROP TABLE opcion_rol', false);
+    hace_consulta($db, 'DROP TABLE opcion', false);
+    hace_consulta(
+        $db, "ALTER TABLE usuario DROP CONSTRAINT usuario_id_rol_fkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario CONSTRAINT usuario_id_rol_fkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario CONSTRAINT usuario_id_rol_fkey", false
+    );
+    hace_consulta(
+        $db, 
+        "ALTER TABLE usuario ADD CONSTRAINT usuario_id_rol_check "
+        . " CHECK (id_rol>='1' AND id_rol<='4')", false);
+    hace_consulta($db, 'DROP TABLE rol', false);
+    hace_consulta($db, 'DROP SEQUENCE rol_seq', false);
 
+    aplicaact(
+        $act, $idac, 'Menú pasa de base de datos a interfaz'
+    );
+}
 
 
 

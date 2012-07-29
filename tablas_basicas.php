@@ -18,6 +18,10 @@
  * Presenta tablas básicas
  */
 require_once 'aut.php';
+if (!isset($_SESSION['dirsitio'])) {
+    print_r($_SESSION);
+    die("NO está dirsitio");
+}
 require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once 'misc.php';
 
@@ -27,7 +31,7 @@ autenticaUsuario($dsn, $aut_usuario, 11);
 require_once $_SESSION['dirsitio'] . '/conf_int.php';
 require_once 'misc_caso.php';
 
-encabezado_envia(_("Tablas B&aacute;sicas"));
+encabezado_envia(_("Tablas Básicas"));
 
 require_once 'HTML/Menu.php';
 require_once 'HTML/Menu/DirectTreeRenderer.php';
@@ -45,7 +49,7 @@ $menu->render($rend);
 echo '<table border = "0" width = "100%"><tr>' .
     '<td style = "white-space: nowrap;background-color:#CCCCCC;" ' .
     'align="center" valign="top" colspan="2"><b>'
-    . _('Tablas B&aacute;sicas') . '</b>' .
+    . _('Tablas Básicas') . '</b>' .
     '</td></tr></table>';
 print $rend->toHtml();
 

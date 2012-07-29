@@ -213,15 +213,6 @@ CREATE TABLE funcionario (
 	nombre 	VARCHAR(15) NOT NULL UNIQUE
 );
 
--- Por consistencia con demas deberia ser id no id_opcion
--- id_mama es id de opcion mama (menús son árbol)
-CREATE TABLE opcion (
-	id_opcion INTEGER PRIMARY KEY,
-	descripcion VARCHAR(50) NOT NULL,
-	id_mama	INTEGER,
-	nomid VARCHAR(150)
-);
-
 CREATE SEQUENCE organizacion_seq;
 
 CREATE TABLE organizacion (
@@ -284,14 +275,6 @@ CREATE TABLE resultado_agresion (
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 ); 
 
-CREATE SEQUENCE rol_seq;
-
--- Por consistencia con otras tablas debería ser id en lugar de id_rol
-CREATE TABLE rol (
-	id_rol INTEGER PRIMARY KEY DEFAULT(nextval('rol_seq')),
-	nombre VARCHAR(20) NOT NULL
-); 
-
 CREATE SEQUENCE sector_social_seq;
 
 CREATE TABLE sector_social (
@@ -335,7 +318,7 @@ CREATE TABLE usuario (
 	password VARCHAR(64) NOT NULL,
 	nombre VARCHAR(50),
 	descripcion VARCHAR(50),
-	id_rol INTEGER REFERENCES rol,
+	id_rol INTEGER CHECK (id_rol>='1' AND id_rol<='4'),
 	dias_edicion_caso INTEGER 
 );
 
@@ -567,12 +550,6 @@ CREATE TABLE funcionario_caso (
 	id_caso INTEGER REFERENCES caso,
 	fecha_inicio DATE,
 	PRIMARY KEY(id_funcionario, id_caso)
-);
-
-CREATE TABLE opcion_rol (
-	id_opcion INTEGER REFERENCES opcion,
-	id_rol INTEGER REFERENCES rol,
-	PRIMARY KEY(id_opcion, id_rol)
 );
 
 CREATE TABLE organizacion_comunidad (

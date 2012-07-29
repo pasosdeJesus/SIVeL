@@ -27,10 +27,10 @@ edtchroot=`echo $dtchroot | sed -e "s/\//\\\\\\\\\//g"`
 #echo "edts=$edts";
 #echo "edtchroot=$edtchroot";
 
-nomplant="conf.php.plantilla"
+nomplant="conf.php"
 
 if (test "$CON_TODO" = "1") then {
-	nomplant="conf-todomodulo.php.plantilla"
+	nomplant="conf-todomodulo.php"
 } fi;
 
 if (test "$usivel" = "") then {
@@ -43,7 +43,8 @@ if (test -f /home/$usivel/.pgpass) then {
 
 mkdir -p $ns/DataObjects
 sed -e "s/dbnombre *= *\".*\"/dbnombre = \"$ns\"/g;s/dbclave *= *\".*\"/dbclave = \"$CLSIVELPG\"/g;s/dirsitio *= *\".*\"/dirsitio = \"sitios\/$ns\"/g;s/dirserv *= *\".*\"/dirserv = \"$edtchroot\"/g" pordefecto/$nomplant > $ns/conf.php
-sed -e "s/dirap *= *.*/dirap=$edts\/sitios\/$ns/g" pordefecto/vardb.sh.plantilla > $ns/vardb.sh
+sed -e "s/dirap *= *.*/dirap=$edts\/sitios\/$ns/g" pordefecto/vardb.sh > $ns/vardb.sh
+cp pordefecto/conf_int.php $ns/conf_int.php
 touch $ns/ultimoenvio.txt
 sudo chown -f www:www $ns/ultimoenvio.txt
 sudo chgrp www $ns/conf*.php

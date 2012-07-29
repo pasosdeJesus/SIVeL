@@ -47,7 +47,7 @@ class DataObjects_Parametros_reporte_consolidado extends DataObjects_Basica
      */
     public function __construct()
     {
-        $this->nom_tabla = _('Columnas Reporte Consolidado');
+        $this->nom_tabla = _('Columnas de Reporte Consolidado');
     }
 
 

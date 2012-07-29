@@ -42,7 +42,7 @@ class DataObjects_Resultado_agresion extends DataObjects_Basica
      */
     public function __construct()
     {
-        $this->nom_tabla = _('Resultado agresión');
+        $this->nom_tabla = _('Resultado Agresión');
     }
 
 

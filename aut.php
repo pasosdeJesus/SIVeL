@@ -25,6 +25,24 @@ require_once "DB.php";
 require_once "HTML/Javascript.php";
 require_once "confv.php";
 
+
+/**
+ * Establece locale
+ *
+ * @param string $l Nombre del locale
+ *
+ * @return void
+ **/
+function idioma($l = "es")
+{
+    putenv("LC_ALL=$l");
+    $GLOBALS['LC_ALL'] = $l;
+    setlocale(LC_ALL, $l);
+    bindtextdomain("sivel", "./locale");
+    textdomain("sivel");
+}
+
+
 /**
  * Formulario de ingreso.
  *
@@ -198,6 +216,7 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
         }
         die($accno . " (1)");
     } else {
+        idioma("en");
         if (isset($_POST['username']) && isset($_POST['password'])) {
             $params = array(
                 "dsn" => $dsn,
@@ -289,6 +308,7 @@ function cierraSesion($dsn)
 function localizaConf()
 {
     global $dirsitio;
+    $pbase = 'sivel';
     if (isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
         $n = $_SERVER['HTTP_X_FORWARDED_SERVER'];
     } else {
@@ -309,6 +329,7 @@ function localizaConf()
         $n = substr($n, 0, strlen($n)-1);
     }
     $nn = substr($n, strpos($n, "_") + 1);
+    $pbase = $nn;
 
     $pref = "";
     if (isset($_SESSION['localizaConf_pref'])) {
@@ -336,10 +357,13 @@ function localizaConf()
     }
     if (!$existe) {
         global $CHROOTDIR;
-        echo "No existe configuración '" . htmlentities($dirsitio, ENT_COMPAT, 'UTF-8') . "'<br>";
+        encabezado_envia('Error');
+        echo "No existe configuración '" 
+            . htmlentities($dirsitio, ENT_COMPAT, 'UTF-8') . "'<br>";
         $r = dirname($_SERVER['PATH_TRANSLATED']) . "/sitios";
         $rs = $CHROOTDIR . $r;
-        $cmd ="cd $rs; sudo ./nuevo.sh $pn; sudo ln -s $pn " . strtoupper($n);
+        $cmd ="cd $rs; sudo ./nuevo.sh $pbase; sudo ln -s $pbase " 
+            . strtoupper($n);
         foreach (array($nn, 'sivel') as $pn) {
             $rp = $r . "/" . $pn;
             if (file_exists($rp)) {
@@ -351,6 +375,7 @@ function localizaConf()
         echo "Posiblemente basta que ejecute desde una terminal: <br>";
         echo "<font size='-1' color='#db9090'>"
             . htmlentities($cmd, ENT_COMPAT, 'UTF-8') . "</font>";
+        pie_envia();
         exit(1);
     }
     //trigger_error("OJO quedo dirsitio='$dirsitio'");

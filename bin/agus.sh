@@ -26,9 +26,12 @@ echo -n "nombre: ";
 read nombre;
 echo -n "descripcion: ";
 read descripcion;
-
-../../bin/psql.sh -c "SELECT * from rol;" 
-echo -n "id_rol: ";
+echo "Roles:";
+echo "  1- Administrador"
+echo "  2- Analista"
+echo "  3- Consulta"
+echo "  4- Ayudante"
+echo -n "Rol (1-4): ";
 read idrol;
 echo -n "anotación: ";
 read anotacion;
