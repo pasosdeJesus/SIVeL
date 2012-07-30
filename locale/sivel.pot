@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sivel 1.2\n"
 "Report-Msgid-Bugs-To: vtamara@pasosdeJesus.org\n"
-"POT-Creation-Date: 2012-07-29 13:10-0500\n"
+"POT-Creation-Date: 2012-07-30 13:50-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr ""
 msgid "Eliminar"
 msgstr ""
 
-#: detalle.php:83 tabla.php:224 tablas_basicas.php:56 valida.php:116
+#: detalle.php:83 tabla.php:224 tablas_basicas.php:60 valida.php:116
 msgid "Men&uacute; Principal"
 msgstr ""
 
@@ -62,7 +62,7 @@ msgstr ""
 msgid "Nuevo"
 msgstr ""
 
-#: tablas_basicas.php:30 tablas_basicas.php:48
+#: tablas_basicas.php:34 tablas_basicas.php:52
 #: sitios/pordefecto/conf_int.php:364
 msgid "Tablas Básicas"
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sivel 1.1cp1\n"
 "Report-Msgid-Bugs-To: vtamara@pasosdeJesus.org\n"
-"POT-Creation-Date: 2012-07-29 13:10-0500\n"
+"POT-Creation-Date: 2012-07-30 13:50-0500\n"
 "PO-Revision-Date: 2012-02-24 08:16-0500\n"
 "Last-Translator: Vladimir Tamara Patino <>\n"
 "Language-Team: English\n"
@@ -46,7 +46,7 @@ msgstr "Update"
 msgid "Eliminar"
 msgstr "Delete"
 
-#: detalle.php:83 tabla.php:224 tablas_basicas.php:56 valida.php:116
+#: detalle.php:83 tabla.php:224 tablas_basicas.php:60 valida.php:116
 msgid "Men&uacute; Principal"
 msgstr "Main Menu"
 
@@ -62,7 +62,7 @@ msgstr "Sent data didn't pass CSRF validation"
 msgid "Nuevo"
 msgstr "New"
 
-#: tablas_basicas.php:30 tablas_basicas.php:48
+#: tablas_basicas.php:34 tablas_basicas.php:52
 #: sitios/pordefecto/conf_int.php:364
 msgid "Tablas Básicas"
 msgstr "Basic Tables"
@@ -569,7 +569,7 @@ msgstr "Detailed Query"
 
 #: sitios/pordefecto/conf_int.php:375
 msgid "Consulta Web"
-msgstr "Query fo Web"
+msgstr "Query for Web"
 
 #: sitios/pordefecto/conf_int.php:379
 msgid "Revista"
@@ -622,4 +622,3 @@ msgstr "Look for repeated"
 #: sitios/pordefecto/conf_int.php:420
 msgid "Salir"
 msgstr "Exit"
-

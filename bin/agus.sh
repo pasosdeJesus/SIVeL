@@ -1,6 +1,6 @@
 #!/bin/sh
 # Permite agregar un usuario con un rol
-# Dominio público. vtamara@pasosdeJesus.org
+# Dominio pÃºblico. vtamara@pasosdeJesus.org
 
 DIRSEG=$1
 if (test "$DIRSEG" = "") then {
@@ -8,7 +8,7 @@ if (test "$DIRSEG" = "") then {
 } fi;
 
 if (test ! -f "$DIRSEG/vardb.sh" ) then {
-	echo "Ejecute desde directorio de un sitio o especifique este como primer parámetro";
+	echo "Ejecute desde directorio de un sitio o especifique este como primer parÃ¡metro";
 	exit 1;
 } fi;
 
@@ -33,13 +33,13 @@ echo "  3- Consulta"
 echo "  4- Ayudante"
 echo -n "Rol (1-4): ";
 read idrol;
-echo -n "anotación: ";
+echo -n "anotaciÃ³n: ";
 read anotacion;
 echo -n "clave: ";
 stty -echo; read clave; stty echo
 
 clavesha1=$($PHP -n -r "echo sha1('$clave');")
-q="SET client_encoding to 'LATIN1'; INSERT INTO usuario(id_usuario, password, nombre, descripcion, id_rol)  VALUES ('$id', '$clavesha1', '$nombre', '$descripcion', '$idrol'); INSERT INTO funcionario(anotacion, nombre) VALUES ('$anotacion', '$id');" 
+q="SET client_encoding to 'UTF8'; INSERT INTO usuario(id_usuario, password, nombre, descripcion, id_rol)  VALUES ('$id', '$clavesha1', '$nombre', '$descripcion', '$idrol'); INSERT INTO funcionario(anotacion, nombre) VALUES ('$anotacion', '$id');" 
 echo $q;
 ../../bin/psql.sh -c "$q"
 

@@ -76,6 +76,32 @@ function noLoginFunction()
 
 
 /**
+ * Roles para los que está disponible cada opción del menú, ver opciones
+ * y roles en sitios/pordefecto/conf_int.php
+ */
+$GLOBALS['m_opcion_rol'] = array (
+    0 => array(1, 2, 3, 4),
+    11 => array(1),
+    12 => array(1),
+    21 => array(1, 2),
+    31 => array(1, 2, 3),
+    41 => array(1, 2),
+    42 => array(1, 2, 4),
+    43 => array(1),
+    51 => array(1),
+    44 => array(1, 2),
+    45 => array(1, 2),
+    60 => array(1, 2, 3, 4),
+    61 => array(1, 2, 3),
+    62 => array(1),
+    63 => array(1),
+    64 => array(1, 2, 3),
+    65 => array(1, 2, 3),
+);
+
+
+
+/**
  * Extrae opciones para un usuario.
  *
  * @param string  $usuario Login del usuario
@@ -94,15 +120,10 @@ function sacaOpciones($usuario, &$db, &$op, &$rol)
     if ($result->fetchInto($row)) {
         $rol = $row[0];
     }
-    $q = "SELECT id_opcion FROM opcion_rol " .
-        "WHERE id_rol='" . $rol . "';";
-    $result = hace_consulta($db, $q, false);
-    if (PEAR::isError($result)) {
-        die("No se encontró el rol del usuario");
-    }
-    $row = array();
-    while ($result->fetchInto($row)) {
-        $op[] = $row[0];
+    foreach($GLOBALS['m_opcion_rol'] as $idop => $aroles) {
+        if (in_array($rol, $aroles)) {
+            $op[] = $idop;
+        }
     }
 }
 

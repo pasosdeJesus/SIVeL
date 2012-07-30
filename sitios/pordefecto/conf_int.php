@@ -421,25 +421,5 @@ $GLOBALS['m_opcion'] = array (
 );
 
 
-$GLOBALS['m_opcion_rol'] = array (
-    0 => array(1, 2, 3, 4),
-    11 => array(1),
-    12 => array(1),
-    21 => array(1, 2),
-    31 => array(1, 2, 3),
-    41 => array(1, 2),
-    42 => array(1, 2, 4),
-    43 => array(1),
-    51 => array(1),
-    44 => array(1, 2),
-    45 => array(1, 2),
-    60 => array(1, 2, 3, 4),
-    61 => array(1, 2, 3),
-    62 => array(1),
-    63 => array(1),
-    64 => array(1, 2, 3),
-    65 => array(1, 2, 3),
-);
-
 
 include_once $_SESSION['dirsitio'] . '/conf_int.php';

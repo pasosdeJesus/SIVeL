@@ -95,7 +95,7 @@ if (test "$SIN_DROP" != "1") then {
 	dropdb $socketopt -U $dbusuario $dbnombre; 
 } fi;
 	
-cmd="createdb $socketopt -E UTF8 -U $dbusuario $dbnombre"
+cmd="createdb $socketopt -E UTF8 -U $dbusuario $dbnombre -T template0"
 echo $cmd
 eval $cmd
 
