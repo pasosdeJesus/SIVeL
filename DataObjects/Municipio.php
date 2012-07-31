@@ -45,6 +45,13 @@ class DataObjects_Municipio extends DataObjects_Basica
     public function __construct()
     {
         $this->nom_tabla = _('Municipio');
+        $this->fb_fieldLabels = array(
+            'id_departamento' => _('Departamento'),
+            'nombre' => _('Nombre'),
+            'fechacreacion' => _('Fecha de Creación'),
+            'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
+        );
+
     }
 
 
@@ -60,12 +67,6 @@ class DataObjects_Municipio extends DataObjects_Basica
         'nombre',
         'fechacreacion',
         'fechadeshabilitacion',
-    );
-    var $fb_fieldLabels = array(
-        'id_departamento' => 'Departamento',
-        'nombre' => 'Nombre',
-        'fechacreacion' => 'Fecha de Creación',
-        'fechadeshabilitacion' => 'Fecha de Deshabilitación',
     );
 
     var $fb_hidePrimaryKey = false;

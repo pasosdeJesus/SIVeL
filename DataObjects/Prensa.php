@@ -40,14 +40,15 @@ class DataObjects_Prensa extends DataObjects_Basica
     public function __construct()
     {
         $this->nom_tabla = _('Fuentes frecuentes');
+        $this->fb_fieldLabels= array(
+            'tipo_fuente'=> _('Tipo de Fuente'),
+            'fechacreacion' => _('Fecha de Creación'),
+            'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
+        );
+
     }
 
 
-    var $fb_fieldLabels= array(
-        'tipo_fuente'=>'Tipo de Fuente',
-        'fechacreacion' => 'Fecha de Creación',
-        'fechadeshabilitacion' => 'Fecha de Deshabilitación',
-    );
     var $fb_enumFields = array('tipo_fuente');
     var $es_enumOptions = array(
         'tipo_fuente' => array(

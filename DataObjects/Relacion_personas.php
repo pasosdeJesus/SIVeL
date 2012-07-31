@@ -83,7 +83,16 @@ class DataObjects_Relacion_personas extends DB_DataObject_SIVeL
     var $fb_selectAddEmpty = array();
     var $fb_fieldsRequired = array('id_tipo');
     var $fb_hidePrimaryKey = array('id_tipo');
-    var $fb_fieldLabels = array();
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+        );
+    }
+
 
     /**
      * Campos que pueden ser SIN INFORMACION y el código correspondiente

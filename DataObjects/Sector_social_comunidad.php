@@ -44,9 +44,17 @@ class DataObjects_Sector_social_comunidad extends DB_DataObject_SIVeL
     var $fb_fieldsToRender = array('id_sector');
     var $fb_addFormHeader = false;
     var $fb_excludeFromAutoRules = array('id_sector');
-    var $fb_fieldLabels = array(
-        'id_sector' => 'Sector Social'
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'id_sector' => _('Sector Social'),
+        );
+    }
+
     var $fb_hidePrimaryKey = false;
 
 

@@ -99,11 +99,19 @@ class DataObjects_Etiquetacaso extends DB_DataObject_SIVeL
     var $fb_selectAddEmpty = array();
     var $fb_hidePrimaryKey = true;
 
-    var $fb_fieldLabels = array(
-        'fecha' => 'Fecha',
-        'observaciones' => 'Observaciones',
-        'id_funcionario' => 'Funcionario',
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'fecha' => _('Fecha'),
+           'observaciones' => _('Observaciones'),
+           'id_funcionario' => _('Funcionario'),
+        );
+    }
+
 
     /**
      * Ajusta formulario generado.

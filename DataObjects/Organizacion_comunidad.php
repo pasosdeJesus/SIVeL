@@ -45,9 +45,17 @@ class DataObjects_Organizacion_comunidad extends DB_DataObject_SIVeL
     var $fb_fieldsToRender = array('id_organizacion');
     var $fb_addFormHeader = false;
     var $fb_excludeFromAutoRules = array('id_organizacion');
-    var $fb_fieldLabels = array(
-        'id_organizacion' => 'Organización Social'
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'id_organizacion' => _('Organización Social'),
+        );
+    }
+
     var $fb_hidePrimaryKey = false;
 
 

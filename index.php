@@ -44,7 +44,7 @@ function bd_a_menu($id)
 {
     //echo "OJO bd_a_menu($id)<br>";
     $r = array();
-    foreach($GLOBALS['m_opcion'] as $idop => $dop) {
+    foreach ($GLOBALS['m_opcion'] as $idop => $dop) {
         if ($dop['idpapa'] == $id) {
             if ($dop['url'] != '') {
                 if (strchr($dop['url'], '?')) {

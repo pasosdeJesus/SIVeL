@@ -44,9 +44,17 @@ class DataObjects_Fuente_directa extends DB_DataObject_SIVeL
     var $fb_fieldsToRender = array('nombre');
     var $fb_hidePrimaryKey = false;
     var $fb_excludeFromAutoRules = array('nombre');
-    var $fb_fieldLabels = array(
-        'nombre' => 'Nombre'
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'nombre' => _('Nombre'),
+        );
+    }
+
 
 
     /**

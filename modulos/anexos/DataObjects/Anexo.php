@@ -45,13 +45,21 @@ class DataObjects_Anexo extends DB_DataObject_SIVeL
     var $fb_hidePrimaryKey = true;
     var $fb_fieldsToRender = array('fecha', 'descripcion');
     var $fb_addFormHeader = false;
-    var $fb_fieldLabels = array(
-        'fecha' => 'Fecha',
-        'descripcion' => 'Descripción',
-        'archivo' => 'Archivo',
-        'id_prensa' => 'Id. Prensa',
-        'id_fuente_directa' => 'Id. Fuente Directa',
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'fecha' => _('Fecha'),
+           'descripcion' => _('Descripción'),
+           'archivo' => _('Archivo'),
+           'id_prensa' => _('Id. Prensa'),
+           'id_fuente_directa' => _('Id. Fuente Directa'),
+        );
+    }
+
 
     /**
      * Ajusta formulario generado.

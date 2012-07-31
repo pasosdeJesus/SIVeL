@@ -45,9 +45,17 @@ class DataObjects_Rango_edad_comunidad extends DB_DataObject_SIVeL
     var $fb_fieldsToRender = array('id_rango');
     var $fb_addFormHeader = false;
     var $fb_excludeFromAutoRules = array('id_rango');
-    var $fb_fieldLabels = array(
-        'id_rango' => 'Rango de edades'
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'id_rango' => _('Rangos de Edades'),
+        );
+    }
+
     var $fb_hidePrimaryKey = false;
 
     /**

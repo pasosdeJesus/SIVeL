@@ -155,14 +155,14 @@ function rama($tabla, $titulo, $idpapa, $arbol, $indenta)
 }
 
 if (!isset($_GET['tabla'])) {
-    die('Por favor especificar parametro "tabla"');
+    die(_('Por favor especificar parametro "tabla"'));
 }
 $tabla = var_escapa($_GET['tabla'], $db);
 
 actGlobales();
 $u = html_menu_toma_url($GLOBALS['menu_tablas_basicas']);
 if (!in_array($tabla, $u)) {
-    die("La tabla '$tabla' no es básica");
+    die(_("La tabla '") . $tabla . _("' no es básica"));
 }
 
 $d = objeto_tabla($tabla);
@@ -174,7 +174,7 @@ if (isset($d->nom_tabla)) {
     $nom_tabla = $tabla;
 }
 
-//encabezado_envia("Tabla " . $nom_tabla);
+encabezado_envia(_("Tabla ") . $nom_tabla);
 
 echo '<table border = "0" width = "100%"><tr>'
     . ' <td style = "white-space: nowrap;'
@@ -218,7 +218,7 @@ if (in_array('id_papa', array_keys($vd))) { /** jerarquía */
 echo '<pr>&nbsp;</pr><table border="0" width="100%" ' .
     'style="white-space: nowrap; background-color:#CCCCCC;"><tr>' .
     '<td align = "left">' .
-    '<a href="detalle.php?tabla=' . htmlentities($tabla, ENC_COMPAT, 'UTF-8') . '">' .
+    '<a href="detalle.php?tabla=' . urlencode($tabla) . '">' .
     _('Nuevo') . '</a>' .
     '</td><td align="right">' .
     '<a href="index.php"><b>' . _('Men&uacute; Principal') . '</b></a>' .

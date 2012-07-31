@@ -2,6 +2,30 @@
 # Pequeño cambio a fuentes PHP.
 # Agrega package a class que no tengan
 
+
+# Removes spaces at left and right
+function trim(str) {
+	gsub(/^  */, "", str);
+	gsub(/  *$/, "", str);
+	return str;
+}
+
+# [transear(sa)] recieves id => val and returns id => _(val)
+function transear(sa)
+{
+	r = sa;
+	sa = trim(sa);
+	if (match(sa, /=> .*,/)) {
+		r = substr(sa, 1, RSTART - 1) "=> _(";
+	        r = r substr(sa, RSTART + 3, RLENGTH - 4) "),";
+	} else if (match(sa, /=> .*/)) {
+		r = substr(sa, 1, RSTART - 1) "=> _(";
+	        r = r substr(sa, RSTART + 3, RLENGTH - 3) "),";
+	}
+
+	return r;
+}
+
 /^#/ {
 	$0 = "//" substr($0, 2, length($0) - 1);
 }
@@ -227,6 +251,36 @@
     }
 }
 
+/var \$fb_fieldLabels/ {
+	if (match($0, /array\(/)) {
+		s = trim(substr($0, RSTART + 6));
+		print "    /**\n     * Constructora\n     * return @void\n     */";
+		print "    public function __construct()";
+		print "    {";
+		i = "$this->fb_fieldLabels= array(";
+		if (s != "") {
+			print "        " i;
+			$0 = s;
+		} else {
+			$0 = i;
+		}
+		rfb = 1;
+	}
+}
+
+/\);/ {
+	if (rfb == 1) {
+		if (match($0, /\);/)) {
+			a = trim(substr($0, 1, RSTART - 1));
+			if (a != "") {
+				print "           " transear(a);
+			}
+		}
+		$0 = "        );\n    }\n";
+		rfb = 0;
+	}
+}
+
 /function .* {/ {
 	match($0, /^ */);
 	i = substr($0, 1, RLENGTH);
@@ -355,6 +409,16 @@
 
 # Otro
 /.*/ {
+	if (rfb == 1) {
+		c = transear($0);
+		if (match($0, /fb_fieldLabels/)) {
+			$0 = "        ";
+		} else {
+			$0 = "           " ;
+		}
+		$0 = $0 c; 
+	}
+
 	if (cierracor != "\n" && $0 != cierracor) {
 	        if (inidb == 0) {
 			$0 = cierracor "\n" $0;
@@ -417,4 +481,5 @@ BEGIN {
 	haysee = 0;
 	cierracor = "\n";
 	fnlinea = "";
+	rfb = 0;
 }

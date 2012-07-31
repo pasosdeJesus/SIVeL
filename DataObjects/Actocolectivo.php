@@ -46,12 +46,20 @@ class DataObjects_Actocolectivo extends DB_DataObject_SIVeL
     var $fb_fieldsToRender = array('id_p_responsable');
     var $fb_selectAddEmpty = array('id_p_responsable');
     var $fb_addFormHeader = false;
-    var $fb_fieldLabels = array(
-        'id_p_responsable' => 'Presunto Responsable',
-        'id_categoria' => 'Categoria',
-        'id_grupoper' => 'Grupo de Personas',
-        'id_caso' => 'Caso'
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'id_p_responsable' => _('Presunto Responsable'),
+           'id_categoria' => _('Categoria'),
+           'id_grupoper' => _('Grupo de Personas'),
+           'id_caso' => _('Caso'),
+       );
+    }
+
 
     /**
      * Ajusta formulario generado.

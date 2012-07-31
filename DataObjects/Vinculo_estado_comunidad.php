@@ -45,9 +45,17 @@ class DataObjects_Vinculo_estado_comunidad extends DB_DataObject_SIVeL
     var $fb_fieldsToRender = array('id_vinculo_estado');
     var $fb_addFormHeader = false;
     var $fb_excludeFromAutoRules = array('id_vinculo_estado');
-    var $fb_fieldLabels = array(
-        'id_vinculo_estado' => 'Vinculo Estado'
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'id_vinculo_estado' => _('Vínculo con el Estado'),
+        );
+    }
+
     var $fb_hidePrimaryKey = false;
 
 

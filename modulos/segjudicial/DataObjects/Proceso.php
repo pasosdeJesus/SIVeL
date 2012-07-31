@@ -54,6 +54,17 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
     public function __construct()
     {
         $this->nom_tabla = _('Proceso');
+        $this->fb_fieldLabels = array(
+            'id_tipo' => _('Tipo'),
+            'id_etapa' => _('Etapa'),
+            'proximafecha' => _('Próxima fecha'),
+            'demandante' => _('Demandante'),
+            'demandado' => _('Demandado'),
+            'poderdante' => _('Apoderado'),
+            'telefono' => _('Teléfono'),
+            'observaciones' => _('Observaciones'),
+        );
+
     }
 
 
@@ -68,16 +79,6 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
         'observaciones',
     );
     var $fb_addFormHeader = false;
-    var $fb_fieldLabels = array(
-        'id_tipo' => 'Tipo',
-        'id_etapa' => 'Etapa',
-        'proximafecha' => 'Próxima fecha',
-        'demandante' => 'Demandante',
-        'demandado' => 'Demandado',
-        'poderdante' => 'Apoderado',
-        'telefono' => 'Teléfono',
-        'observaciones' => 'Observaciones',
-    );
     var $fb_textFields = array(
         'observaciones',
     );

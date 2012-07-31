@@ -39,7 +39,7 @@ if (isset($_GET['id'])) {
         $d->$n = $r[1];
     }
     if ($d->find()!=1) {
-        die("Se esperaba un sólo registro");
+        die(_("Se esperaba un sólo registro"));
     }
     $d->fetch();
 }
@@ -52,32 +52,32 @@ $f->setRequiredNote($mreq);
 
 $ed = array();
 if (!isset($_GET['id'])) {
-    $e =& $f->createElement('submit', 'añadir', 'Añadir');
+    $e =& $f->createElement('submit', 'añadir', _('Añadir'));
     $ed[] =& $e;
 } else {
     $s=& $f->getElement('id_usuario');
     $s->freeze();
-    $e =& $f->createElement('submit', 'actualizar', 'Actualizar');
+    $e =& $f->createElement('submit', 'actualizar', _('Actualizar'));
     $ed[] =& $e;
-    $e =& $f->createElement('submit', 'eliminar', 'Eliminar');
+    $e =& $f->createElement('submit', 'eliminar', _('Eliminar'));
     $ed[] =& $e;
 }
 $f->addGroup($ed, null, '', '&nbsp;', false);
 $f->addElement(
     'header', null, '<div align=right>' .
-    '<a href = "index.php">Menú Principal</a></div>'
+    '<a href = "index.php">' . _('Men&uacute; Principal') . '</a></div>'
 );
 
 $actsincambiarclave = isset($f->_submitValues['actualizar'])
     && $f->_submitValues['password'] == '';
 if ($actsincambiarclave || $f->validate()) {
     if (!verifica_sin_CSRF($f->_submitValues)) {
-        die("Datos enviados no pasaron verificación CSRF");
+        die(_("Datos enviados no pasaron verificación CSRF"));
     }
     if (isset($GLOBALS['deshabilita_manejo_usuarios'])
         && $GLOBALS['deshabilita_manejo_usuarios'] === true
     ) {
-            die("Funcionalidad deshabilitada");
+            die(_("Funcionalidad deshabilitada"));
     }
 
     if (isset($f->_submitValues['actualizar'])) {
@@ -118,8 +118,11 @@ if ($actsincambiarclave || $f->validate()) {
     }
 }
 
+
 agrega_control_CSRF($f);
 
+encabezado_envia(_("Detalle de usuario"));
 echo $f->toHtml();
+pie_envia();
 
 ?>

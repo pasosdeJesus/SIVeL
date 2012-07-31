@@ -45,6 +45,16 @@ class DataObjects_Rango_edad extends DataObjects_Basica
     public function __construct()
     {
         $this->nom_tabla = _('Rango de Edad');
+        $this->fb_fieldLabels = array(
+            'nombre' => _('Nombre'),
+            'Rango' => _('Rango'),
+            'limiteinferior' => _('Límite Inferior'),
+            'limitesuperior' => _('Límite Superior'),
+            'fechacreacion' => _('Fecha de Creación'),
+            'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
+        );
+
+
     }
 
 
@@ -76,18 +86,6 @@ class DataObjects_Rango_edad extends DataObjects_Basica
     );
 
 
-
-    /**
-     * Nombres por presentar para cada campo.
-     */
-    var $fb_fieldLabels = array(
-        'nombre' => 'Nombre',
-        'Rango' => 'Rango',
-        'limiteinferior' => 'Límite Inferior',
-        'limitesuperior' => 'Límite Superior',
-        'fechacreacion' => 'Fecha de Creación',
-        'fechadeshabilitacion' => 'Fecha de Deshabilitación',
-    );
 
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'

@@ -205,7 +205,7 @@ $GLOBALS['etiqueta'] = array(
     'fecha' => _('Fecha'),
     'hora' => _('Hora'),
     'duracion' => _('Duración'),
-    'tipo_ubicacion' => _('Tipo de ubicación'),
+    'tipo_ubicacion' => _('Tipo de Ubicación'),
     'id_intervalo' => _('Intervalo'),
 
 // Ubicación
@@ -361,7 +361,7 @@ $GLOBALS['m_rol'] = array (
 $GLOBALS['m_opcion'] = array (
     10 => array('nombre' => _('Administración'), 'idpapa' => 0, 'url' => NULL),
     11 => array(
-        'nombre' => _('Tablas Básicas'), 'idpapa' => 10, 
+        'nombre' => _('Tablas Básicas'), 'idpapa' => 10,
         'url' => 'tablas_basicas'
     ),
     12 => array('nombre' => _('Usuarios'), 'idpapa' => 10, 'url' => 'usyroles'),
@@ -376,45 +376,45 @@ $GLOBALS['m_opcion'] = array (
     ),
     40 => array('nombre' => _('Reportes'), 'idpapa' => 0, 'url' => NULL),
     41 => array(
-        'nombre' => _('Revista'), 'idpapa' => 40, 
+        'nombre' => _('Revista'), 'idpapa' => 40,
         'url' => 'consulta_web?mostrar=revista&sincampos=caso_id'
     ),
     42 => array(
-        'nombre' => _('General'), 'idpapa' => 40, 
+        'nombre' => _('General'), 'idpapa' => 40,
         'url' => 'consulta_web?mostrar=general'
     ),
     43 => array(
         'nombre' => _('Consolidado'), 'idpapa' => 40, 'url' => 'consolidado'
     ),
     44 => array(
-        'nombre' => _('General por Localizacion'), 'idpapa' => 40, 
+        'nombre' => _('General por Localizacion'), 'idpapa' => 40,
         'url' => 'consulta_web?mostrar=general&orden=localizacion'
     ),
     45 => array(
-        'nombre' => _('Revista con código'), 'idpapa' => 40, 
+        'nombre' => _('Revista con código'), 'idpapa' => 40,
         'url' => 'consulta_web?mostrar=revista'
     ),
     50 => array('nombre' => _('Conteos'), 'idpapa' => 0, 'url' => NULL),
     51 => array(
-        'nombre' => _('V. Individuales'), 'idpapa' => 50, 
+        'nombre' => _('V. Individuales'), 'idpapa' => 50,
         'url' => 'estadisticas'
     ),
     60 => array('nombre' => _('Otros'), 'idpapa' => 0, 'url' => NULL),
     61 => array(
-        'nombre' => _('Importar Relatos'), 'idpapa' => 60, 
+        'nombre' => _('Importar Relatos'), 'idpapa' => 60,
         'url' => 'importaRelato'
     ),
     62 => array(
-        'nombre' => _('Completar Actos'), 'idpapa' => 60, 
+        'nombre' => _('Completar Actos'), 'idpapa' => 60,
         'url' => 'completaActos'
     ),
     63 => array(
-        'nombre' => _('Actualizar'), 'idpapa' => 60, 
+        'nombre' => _('Actualizar'), 'idpapa' => 60,
         'url' => 'actualiza'
     ),
     64 => array('nombre' => _('Validar'), 'idpapa' => 60, 'url' => 'valida'),
     65 => array(
-        'nombre' => _('Buscar repetidos'), 'idpapa' => 60, 
+        'nombre' => _('Buscar repetidos'), 'idpapa' => 60,
         'url' => 'buscaRepetidos'
     ),
     69 => array('nombre' => _('Salir'), 'idpapa' => 60, 'url' => 'terminar'),

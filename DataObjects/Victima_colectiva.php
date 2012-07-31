@@ -45,10 +45,18 @@ class DataObjects_Victima_colectiva extends DB_DataObject_SIVeL
         'id_organizacion_armada'
     );
     var $fb_addFormHeader = false;
-    var $fb_fieldLabels = array(
-        'id_organizacion_armada'=> 'Organización Armada Víctima',
-        'personas_aprox' => 'Num. Aprox. Personas',
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'id_organizacion_armada'=> _('Organización Armada Víctima'),
+           'personas_aprox' => _('Num. Aprox. Personas'),
+        );
+    }
+
     var $fb_hidePrimaryKey = true;
 
     /**

@@ -72,16 +72,6 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
         'orientacionsexual', 'anotaciones'
     );
     var $fb_enumFields = array('orientacionsexual');
-    var $es_enumOptions = array(
-        'orientacionsexual' => array(
-            'L' => 'Lesbiana',
-            'G' => 'Gay',
-            'B'=> 'Bisexual',
-            'T'=> 'Transexual',
-            'I'=> 'Intersexual',
-            'H'=> 'Heterosexual',
-        )
-    );
     var $fb_addFormHeader = false;
     var $fb_selectAddEmpty = array();
     var $fb_fieldsRequired = array('id_profesion', 'id_rango_edad',
@@ -94,20 +84,38 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
         'id_organizacion', 'id_vinculo_estado', 'id_organizacion_armada',
         'id_etnia', 'id_iglesia', 'orientacionsexual'
     );
-    var $fb_fieldLabels = array(
-        'hijos'=> 'Hijos',
-        'id_profesion'=> 'Profesión',
-        'id_rango_edad'=> 'Rango de Edad',
-        'id_filiacion'=> 'Filiación Política',
-        'id_sector_social'=> 'Sector Social',
-        'id_organizacion'=> 'Organización',
-        'id_vinculo_estado'=> 'Vínculo con el Estado',
-        'id_organizacion_armada'=> 'Organización Armada Víctima',
-        'id_etnia' => 'Etnia',
-        'id_iglesia' => 'Iglesia',
-        'anotaciones'=> 'Anotaciones',
-        'orientacionsexual' => 'Orientación Sexual',
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+            'hijos'=> _('Hijos'),
+            'id_profesion'=> _('Profesión'),
+            'id_rango_edad'=> _('Rango de Edad'),
+            'id_filiacion'=> _('Filiación Política'),
+            'id_sector_social'=> _('Sector Social'),
+            'id_organizacion'=> _('Organización'),
+            'id_vinculo_estado'=> _('Vínculo con el Estado'),
+            'id_organizacion_armada'=> _('Organización Armada Víctima'),
+            'id_etnia' => _('Etnia'),
+            'id_iglesia' => _('Iglesia'),
+            'anotaciones'=> _('Anotaciones'),
+            'orientacionsexual' => _('Orientación Sexual'),
+        );
+        $this->es_enumOptions = array(
+            'orientacionsexual' => array(
+                'L' => _('Lesbiana'),
+                'G' => _('Gay'),
+                'B'=> _('Bisexual'),
+                'T'=> _('Transexual'),
+                'I'=> _('Intersexual'),
+                'H'=> _('Heterosexual'),
+            )
+        );
+    }
+
     var $fb_hidePrimaryKey = true;
     var $fb_linkDisplayFields = array('id_persona');
 

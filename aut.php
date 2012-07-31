@@ -120,7 +120,7 @@ function sacaOpciones($usuario, &$db, &$op, &$rol)
     if ($result->fetchInto($row)) {
         $rol = $row[0];
     }
-    foreach($GLOBALS['m_opcion_rol'] as $idop => $aroles) {
+    foreach ($GLOBALS['m_opcion_rol'] as $idop => $aroles) {
         if (in_array($rol, $aroles)) {
             $op[] = $idop;
         }
@@ -379,11 +379,11 @@ function localizaConf()
     if (!$existe) {
         global $CHROOTDIR;
         encabezado_envia('Error');
-        echo "No existe configuración '" 
+        echo "No existe configuración '"
             . htmlentities($dirsitio, ENT_COMPAT, 'UTF-8') . "'<br>";
         $r = dirname($_SERVER['PATH_TRANSLATED']) . "/sitios";
         $rs = $CHROOTDIR . $r;
-        $cmd ="cd $rs; sudo ./nuevo.sh $pbase; sudo ln -s $pbase " 
+        $cmd ="cd $rs; sudo ./nuevo.sh $pbase; sudo ln -s $pbase "
             . strtoupper($n);
         foreach (array($nn, 'sivel') as $pn) {
             $rp = $r . "/" . $pn;

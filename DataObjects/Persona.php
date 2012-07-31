@@ -61,23 +61,31 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         'numerodocumento'
     );
 
-    var $fb_fieldLabels = array(
-        'nombres' => 'Nombres',
-        'apellidos' => 'Apellidos',
-        'anionac' => 'Año Nacimiento',
-        'mesnac' => 'Mes Nacimiento',
-        'dianac' => 'Día Nacimiento',
-        'sexo' => 'Sexo',
-        'tipodocumento' => 'Tipo de Docuento',
-        'numerodocumento' => 'Número de Documento',
-        'id_departamento' => 'Departamento',
-        'id_municipio' => 'Municipio',
-        'id_clase'  => 'Clase'
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'nombres' => _('Nombres'),
+           'apellidos' => _('Apellidos'),
+           'anionac' => _('Año Nacimiento'),
+           'mesnac' => _('Mes Nacimiento'),
+           'dianac' => _('Día Nacimiento'),
+           'sexo' => _('Sexo'),
+           'tipodocumento' => _('Tipo de Docuento'),
+           'numerodocumento' => _('Número de Documento'),
+           'id_departamento' => _('Departamento'),
+           'id_municipio' => _('Municipio'),
+           'id_clase'  => _('Clase'),
+        );
+    }
 
 
-    var $fb_enumFields = array('anionac', 'mesnac', 'dianac', 'sexo',
-        'tipodocumento'
+
+    var $fb_enumFields = array(
+        'anionac', 'mesnac', 'dianac', 'sexo', 'tipodocumento'
     );
     var $es_enumOptions = array(
         'sexo' => array(

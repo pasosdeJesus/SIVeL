@@ -48,6 +48,13 @@ class DataObjects_Presuntos_responsables extends DataObjects_Basica
     public function __construct()
     {
         $this->nom_tabla = _('Presuntos Responsables');
+        $this->fb_fieldLabels = array(
+            'nombre' => _('Nombre'),
+            'id_papa' => _('Subestructura de'),
+            'fechacreacion' => _('Fecha de Creación'),
+            'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
+        );
+
     }
 
 
@@ -55,12 +62,6 @@ class DataObjects_Presuntos_responsables extends DataObjects_Basica
     var $fb_addFormHeader = false;
     var $fb_hidePrimaryKey = true;
     var $fb_selectAddEmpty = array('fechadeshabilitacion', 'id_papa');
-    var $fb_fieldLabels = array(
-        'nombre' => 'Nombre',
-        'id_papa' => 'Subestructura de',
-        'fechacreacion' => 'Fecha de Creación',
-        'fechadeshabilitacion' => 'Fecha de Deshabilitación',
-    );
     var $fb_preDefOrder = array(
         'nombre',
         'id_papa',

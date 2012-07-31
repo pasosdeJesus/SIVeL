@@ -58,16 +58,24 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     );
     var $fb_addFormHeader = false;
     var $fb_hidePrimaryKey = true;
-    var $fb_fieldLabels = array(
-        'id_departamento' => 'Departamento',
-        'id_municipio' => 'Municipio',
-        'id_clase' => 'Centro Poblado',
-        'lugar' => 'Lugar',
-        'sitio' => 'Sitio',
-        'id_tipo_sitio' => 'Tipo de Ubicación',
-        'latitud' => 'Latitud',
-        'longitud' => 'Longitud',
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'id_departamento' => _('Departamento'),
+           'id_municipio' => _('Municipio'),
+           'id_clase' => _('Centro Poblado'),
+           'lugar' => _('Lugar'),
+           'sitio' => _('Sitio'),
+           'id_tipo_sitio' => _('Tipo de Ubicación'),
+           'latitud' => _('Latitud'),
+           'longitud' => _('Longitud'),
+        );
+    }
+
     var $fb_excludeFromAutoRules = array('id_tipo_sitio');
 
     static function camposSinInfo()

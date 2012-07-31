@@ -68,9 +68,9 @@ while ($d->fetch()) {
 echo '<pr>&nbsp;</pr><table border="0" width="100%"
     style = "white-space: nowrap; background-color:#CCCCCC;"><tr>' .
     '<td align = "left">' .
-    '<a href = "detusyrol.php">Nuevo</a>' .
+    '<a href = "detusyrol.php">' . _('Nuevo') . '</a>' .
     '</td><td align = "right">' .
-    '<a href = "index.php"><b>Menú Principal</b></a>' .
+    '<a href = "index.php"><b>' . _('Men&uacute; Principal') . '</b></a>' .
     '</td></tr></table>';
 
 pie_envia()

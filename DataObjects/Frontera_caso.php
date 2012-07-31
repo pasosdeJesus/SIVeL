@@ -45,9 +45,17 @@ class DataObjects_Frontera_caso extends DB_DataObject_SIVeL
     var $fb_addFormHeader = false;
     var $fb_excludeFromAutoRules = array('id_frontera');
     var $fb_hidePrimaryKey = false;
-    var $fb_fieldLabels = array(
-        'id_frontera' => 'Frontera'
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'id_frontera' => _('Frontera'),
+        );
+    }
+
 
 
     /**

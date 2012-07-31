@@ -55,14 +55,22 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
          'numero_radicado', 'observaciones_accion', 'respondido'
      );
     var $fb_addFormHeader = true;
-    var $fb_fieldLabels = array(
-        'id_tipo_accion'        => 'Tipo de Acción',
-        'id_despacho'           => 'Despacho',
-        'fecha'                 => 'Fecha de la Acción',
-        'numero_radicado'       => 'No. Radicado',
-        'observaciones_accion'  => 'Observaciones',
-        'respondido'            => 'Respondido'
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'id_tipo_accion'        => _('Tipo de Acción'),
+           'id_despacho'           => _('Despacho'),
+           'fecha'                 => _('Fecha de la Acción'),
+           'numero_radicado'       => _('No. Radicado'),
+           'observaciones_accion'  => _('Observaciones'),
+           'respondido'            => _('Respondido'),
+        );
+    }
+
     var $fb_textFields = array ('observaciones_accion');
     var $fb_booleanFields = array ('respondido');
 

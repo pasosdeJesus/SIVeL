@@ -97,21 +97,29 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
     );
 
     /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+    /**
      * Nombres por presentar para cada campo.
      */
-    var $fb_fieldLabels = array(
-        'titulo' => 'Nombre',
-        'fecha' => 'Fecha',
-        'hora' => 'Hora',
-        'duracion' => 'Duracion',
-        'memo' => 'Memo',
-        'gr_confiabilidad' => 'Gr. Confiabilidad Fuente',
-        'gr_esclarecimiento' => 'Gr.Esclarecimiento',
-        'gr_impunidad' => 'Gr. Impunidad',
-        'gr_informacion' => 'Gr. Informacion',
-        'bienes' => 'Bienes Afectados',
-        'id_intervalo' => 'Intervalo'
-    );
+        $this->fb_fieldLabels= array(
+           'titulo' => _('Nombre'),
+           'fecha' => _('Fecha'),
+           'hora' => _('Hora'),
+           'duracion' => _('Duracion'),
+           'memo' => _('Memo'),
+           'gr_confiabilidad' => _('Gr. Confiabilidad Fuente'),
+           'gr_esclarecimiento' => _('Gr.Esclarecimiento'),
+           'gr_impunidad' => _('Gr. Impunidad'),
+           'gr_informacion' => _('Gr. Informacion'),
+           'bienes' => _('Bienes Afectados'),
+           'id_intervalo' => _('Intervalo'),
+        );
+    }
+
 
     /**
     * Campos que deben presentarse como SELECTs con opciones

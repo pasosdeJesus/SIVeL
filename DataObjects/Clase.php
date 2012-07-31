@@ -45,6 +45,15 @@ class DataObjects_Clase extends DataObjects_Basica
     public function __construct()
     {
         $this->nom_tabla = _('Clase');
+        $this->fb_fieldLabels = array(
+            'nombre' => _('Nombre'),
+            'id_departamento' => _('Departamento'),
+            'id_municipio'=> _('Municipio'),
+            'id_tipo_clase'=> _('Tipo Clase'),
+            'fechacreacion' => _('Fecha de Creación'),
+            'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
+        );
+
     }
 
 
@@ -63,14 +72,6 @@ class DataObjects_Clase extends DataObjects_Basica
         'id_tipo_clase',
         'fechacreacion',
         'fechadeshabilitacion',
-    );
-    var $fb_fieldLabels = array(
-        'nombre' => 'Nombre',
-        'id_departamento' => 'Departamento',
-        'id_municipio'=>'Municipio',
-        'id_tipo_clase'=>'Tipo Clase',
-        'fechacreacion' => 'Fecha de Creación',
-        'fechadeshabilitacion' => 'Fecha de Deshabilitación',
     );
     var $fb_hidePrimaryKey = false;
 

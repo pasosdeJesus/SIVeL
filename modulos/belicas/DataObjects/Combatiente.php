@@ -61,6 +61,22 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
     public function __construct()
     {
         $this->nom_tabla = _('Combatiente');
+        $this->fb_fieldLabels = array(
+            'nombre'=> _('Nombre'),
+            'alias'=> _('Alias'),
+            'edad'=> _('Edad'),
+            'sexo'=> _('Sexo'),
+            'id_rango_edad' => _('Rango de Edad'),
+            'id_sector_social'=> _('Sector Social'),
+            'id_vinculo_estado'=> _('Vínculo Estado'),
+            'id_filiacion'=> _('Filiación Política'),
+            'id_profesion'=> _('Profesion'),
+            'id_organizacion'=> _('Organización Social'),
+            'id_organizacion_armada'=> _('Organización Armada'),
+            'id_resultado_agresion'=> _('Resultado Agresión')
+        );
+
+
     }
 
 
@@ -81,21 +97,6 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
     );
     var $fb_addFormHeader = false;
     var $fb_excludeFromAutoRules = array('nombre', 'sexo');
-    var $fb_fieldLabels = array(
-        'nombre'=>'Nombre',
-        'alias'=>'Alias',
-        'edad'=>'Edad',
-        'sexo'=>'Sexo',
-        'id_rango_edad' => 'Rango de Edad',
-        'id_sector_social'=> 'Sector Social',
-        'id_vinculo_estado'=> 'Vínculo Estado',
-        'id_filiacion'=> 'Filiación Política',
-        'id_profesion'=> 'Profesion',
-        'id_organizacion'=> 'Organización Social',
-        'id_organizacion_armada'=> 'Organización Armada',
-        'id_resultado_agresion'=> 'Resultado Agresión'
-        );
-
     /**
      * Funciona legada
      *

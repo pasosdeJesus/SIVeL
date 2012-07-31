@@ -43,11 +43,13 @@ class DataObjects_Supracategoria extends DataObjects_Basica
     public function __construct()
     {
         $this->nom_tabla = _('Supracategoria');
+        $this->fb_fieldLabels = array(
+            'id_tipo_violencia' => _('Tipo de Violencia')
+        );
     }
 
 
     var $fb_linkDisplayFields = array('nombre','id_tipo_violencia');
-    var $fb_fieldLabels = array('id_tipo_violencia'=>'Tipo de Violencia');
     var $fb_selectAddEmpty = array('fechadeshabilitacion');
     var $fb_select_display_field = 'nombre';
     var $fb_hidePrimaryKey = false;

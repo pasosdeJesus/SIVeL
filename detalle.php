@@ -124,7 +124,9 @@ if ($f->validate()) {
 
 agrega_control_CSRF($f);
 
+encabezado_envia(_('Editando registro de la tabla ') . $tabla);
 echo $f->toHtml();
+pie_envia();
 
 ?>
 

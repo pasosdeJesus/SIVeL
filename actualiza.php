@@ -1973,7 +1973,7 @@ if (!aplicado($idac)) {
         $db, "ALTER TABLE usuario CONSTRAINT usuario_id_rol_fkey", false
     );
     hace_consulta(
-        $db, 
+        $db,
         "ALTER TABLE usuario ADD CONSTRAINT usuario_id_rol_check "
         . " CHECK (id_rol>='1' AND id_rol<='4')", false);
     hace_consulta($db, 'DROP TABLE rol', false);

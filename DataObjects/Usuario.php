@@ -43,13 +43,30 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
     var $dias_edicion_caso;               // int4(4)
 
 
-    var $fb_fieldLabels = array(
-        'id_usuario' => 'Identificación',
-        'password' => 'Clave',
-        'nombre' => 'Nombre',
-        'descripcion' => 'Descripcion',
-        'id_rol' => 'Rol'
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'id_usuario' => _('Identificación'),
+           'password' => _('Clave'),
+           'nombre' => _('Nombre'),
+           'descripcion' => _('Descripcion'),
+           'id_rol' => _('Rol'),
+       );
+        $this->es_enumOptions = array(
+            'id_rol' => array(
+                '1' => _('Administrador'),
+                '2' => _('Analista'), 
+                '3' => _('Consulta'),
+                '4' => _('Ayudante'),
+            ),
+        );
+
+    }
+
     var $fb_preDefOrder = array(
         'id_usuario', 'password', 'nombre', 'descripcion', 'id_rol'
     );
@@ -59,6 +76,24 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
     var $fb_linkDisplayFields = array('id_usuario');
     var $fb_select_display_field= 'id_usuario';
     var $fb_hidePrimaryKey = false;
+
+    var $fb_enumFields = array('id_rol');
+
+
+    /**
+     * Funciona legada
+     * Como ocurria en FormBuilder 0.10, hasta versión 1.121 en el
+     * CVS de FormBuilder.php. Cambio sucitado por bug #3469
+     *
+     * @param string $table Tabla
+     * @param string $key   Llave
+     *
+     * @return opción enumeada asociada a la llave.
+     */
+    function enumCallback($table, $key)
+    {
+        return $this->es_enumOptions[$key];
+    }
 
     /**
      * Pone un valor en la base diferente al recibido del formulario.
@@ -84,6 +119,10 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
      */
     function preGenerateForm(&$formbuilder)
     {
+
+        $formbuilder->enumOptionsCallback = array($this,
+            "enumCallback"
+        );
         $e = HTML_QuickForm::createElement(
             'password', 'password', 'Clave'
         );

@@ -43,10 +43,18 @@ class DataObjects_Region_caso extends DB_DataObject_SIVeL
     var $fb_addFormHeader = false;
     var $fb_excludeFromAutoRules = array('id_region');
     var $fb_hidePrimaryKey = false;
-    var $fb_fieldLabels= array(
-        'id_region' => 'Region',
-        'id_frontera' => 'Frontera'
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'id_region' => _('Region'),
+           'id_frontera' => _('Frontera'),
+        );
+    }
+
 
     /**
      * Prepara antes de generar formulario.

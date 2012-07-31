@@ -58,12 +58,20 @@ class DataObjects_Fuente_directa_caso extends DB_DataObject_SIVeL
         array('Directa', 'Indirecta')
     );
     var $fb_excludeFromAutoRules = array('fecha');
-    var $fb_fieldLabels = array(
-        'anotacion' => 'Anotación',
-        'fecha' => 'Fecha',
-        'ubicacion_fisica' => 'Ubicación Física',
-        'tipo_fuente' => 'Tipo de Fuente'
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'anotacion' => _('Anotación'),
+           'fecha' => _('Fecha'),
+           'ubicacion_fisica' => _('Ubicación Física'),
+           'tipo_fuente' => _('Tipo de Fuente'),
+        );
+    }
+
     var $fb_hidePrimaryKey = false;
 
 

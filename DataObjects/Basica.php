@@ -47,6 +47,12 @@ class DataObjects_Basica extends DB_DataObject_SIVeL
     public function __construct()
     {
         $this->nom_tabla = _('Básica');
+        $this->fb_fieldLabels = array(
+            'id' => _('Identificación'),
+            'nombre' => _('Nombre'),
+            'fechacreacion' => _('Fecha de Creación'),
+            'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
+        );
     }
 
 
@@ -54,12 +60,6 @@ class DataObjects_Basica extends DB_DataObject_SIVeL
     var $fb_select_display_field = 'nombre';
     var $fb_selectAddEmpty = array('fechadeshabilitacion');
     var $fb_hidePrimaryKey = true;
-    var $fb_fieldLabels = array(
-        'id' => 'Identificación',
-        'nombre' => 'Nombre',
-        'fechacreacion' => 'Fecha de creación',
-        'fechadeshabilitacion' => 'Fecha de deshabilitación',
-    );
     var $fb_preDefOrder = array(
         'id',
         'nombre',

@@ -43,7 +43,17 @@ class DataObjects_Antecedente_caso extends DB_DataObject_SIVeL
     var $fb_fieldsToRender = array('id_antecedente');
     var $fb_addFormHeader = false;
     var $fb_excludeFromAutoRules = array('id_antecedente');
-    var $fb_fieldLabels = array('id_antecedente' => 'Antecedente');
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'id_antecedente' => _('Antecedente'),
+        );
+    }
+
     var $fb_hidePrimaryKey = false;
 
     /**

@@ -45,10 +45,18 @@ class DataObjects_Grupoper extends DB_DataObject_SIVeL
 
     var $fb_fieldsToRender = array('nombre', 'anotaciones');
 
-    var $fb_fieldLabels = array(
-        'nombre' => 'Nombre',
-        'anotaciones' => 'Anotaciones',
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'nombre' => _('Nombre'),
+           'anotaciones' => _('Anotaciones'),
+        );
+    }
+
     var $fb_linkDisplayFields = array('nombre');
     var $fb_addFormHeader = false;
     var $fb_selectAddEmpty = array();

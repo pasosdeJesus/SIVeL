@@ -45,6 +45,7 @@ class DataObjects_Caso_contexto extends DB_DataObject_SIVeL
     public function __construct()
     {
         $this->nom_tabla = _('Contexto');
+        $this->fb_fieldLabels = array('id_contexto' => _('Contexto'));
     }
 
 
@@ -53,7 +54,6 @@ class DataObjects_Caso_contexto extends DB_DataObject_SIVeL
     var $fb_fieldsToRender = array('id_contexto');
     var $fb_addFormHeader = false;
     var $fb_excludeFromAutoRules = array('id_contexto');
-    var $fb_fieldLabels = array('id_contexto' => 'Contexto');
     var $fb_hidePrimaryKey = false;
 
     /**

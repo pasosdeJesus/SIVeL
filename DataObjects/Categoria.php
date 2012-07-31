@@ -52,6 +52,16 @@ class DataObjects_Categoria extends DataObjects_Basica
     public function __construct()
     {
         $this->nom_tabla = _('Categoria');
+        $this->fb_fieldLabels = array('id' => _('Código de Categoría'),
+            'id_supracategoria' => _('Supracategoria'),
+            'id_tipo_violencia' => _('Tipo de Violencia'),
+            'nombre' => _('Nombre'),
+            'fechacreacion' => _('Fecha de Creación'),
+            'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
+            'col_rep_consolidado' => _('Columna en Rep. Consolidado'),
+            'contada_en' => _('Contada también como Categoria'),
+            'tipocat' => _('Tipo de Categoria')
+        );
     }
 
 
@@ -67,17 +77,7 @@ class DataObjects_Categoria extends DataObjects_Basica
         'fechadeshabilitacion', 'id_supracategoria', 'col_rep_consolidado',
         'contada_en', 'tipocat'
     );
-    var $fb_fieldLabels = array('id' => 'Código de Categoría',
-                'id_supracategoria' => 'Supracategoria',
-                'id_tipo_violencia' => 'Tipo de Violencia',
-                'nombre' => 'Nombre',
-                'fechacreacion' => 'Fecha de Creación',
-                'fechadeshabilitacion' => 'Fecha de Deshabilitación',
-                'col_rep_consolidado' => 'Columna en Rep. Consolidado',
-                'contada_en' => 'Contada también como Categoria',
-                'tipocat' => 'Tipo de Categoria'
-            );
-    var $fb_selectAddEmpty = array('fechadeshabilitacion');
+   var $fb_selectAddEmpty = array('fechadeshabilitacion');
     var $fb_hidePrimaryKey = false;
     var $fb_enumFields = array('tipocat');
     var $es_enumOptions = array('tipocat' => array('I' => 'Individual',

@@ -45,9 +45,17 @@ class DataObjects_Filiacion_comunidad extends DB_DataObject_SIVeL
     var $fb_fieldsToRender = array('id_filiacion');
     var $fb_addFormHeader = false;
     var $fb_excludeFromAutoRules = array('id_filiacion');
-    var $fb_fieldLabels = array(
-        'id_filiacion' => 'Filiacion Politica'
-    );
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        $this->fb_fieldLabels= array(
+           'id_filiacion' => _('Filiacion Politica'),
+        );
+    }
+
     var $fb_hidePrimaryKey = false;
 
     /**

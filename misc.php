@@ -843,7 +843,7 @@ function encabezado_envia($titulo = null, $cabezote = '')
         echo '  <title>' . htmlentities($titulo, ENT_COMPAT, 'UTF-8') . '</title>';
     }
     echo '<link rel = "stylesheet" type = "text/css" href = "estilo.css" />
-<!--Fuentes de dominio publico. Sin garantías. 2004-->
+<!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
 <script language = "JavaScript">
 <!--
