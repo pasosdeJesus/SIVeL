@@ -33,6 +33,8 @@ class DataObjects_Tipo_relacion extends DataObjects_Basica
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Tipo de Relación');
     }
 

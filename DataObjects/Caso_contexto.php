@@ -44,6 +44,8 @@ class DataObjects_Caso_contexto extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Contexto');
         $this->fb_fieldLabels = array('id_contexto' => _('Contexto'));
     }

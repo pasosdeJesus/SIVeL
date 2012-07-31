@@ -39,6 +39,8 @@ class DataObjects_Etapa extends DataObjects_Basica
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Etapa');
         $this->fb_fieldLabels = array(
             'id_tipo' => _('Tipo de proceso'),

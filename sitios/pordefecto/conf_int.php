@@ -52,7 +52,9 @@ $GLOBALS['MENS_ORTOGRAFIA'] = 'Las palabras que estén bien por favor agreguelas
 /** Mensaje por presentar en la página principal para indicar donde reportar fallas.
  * @global string $GLOBALS['REPORTA_FALLAS']
  */
-$GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">Documentaci&oacute;n</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>Por favor reporte fallas o requerimientos en el sistema de seguimiento disponible <a href='http://sourceforge.net/tracker/?group_id=104373&atid=637817'>en l&iacute;nea</a>";
+$GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">Documentaci&oacute;n</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>" . _("Por favor reporte fallas o requerimientos en el sistema de seguimiento disponible")
+    . "<a href='http://sourceforge.net/tracker/?group_id=104373&atid=637817'>"
+    . _("en l&iacute;nea") . "</a>";
 
 /** Ancho en porcentaje de tablas en reporte general.
  * Puede cambiarse en caso de que tenga problemas al imprimir (por ejemplo
@@ -113,7 +115,7 @@ $GLOBALS['pie_consulta_web'] = '';
  * Dejar '&nbsp;' si no hay
  * @global string $GLOBALS['pie_consulta_web_publica']
  */
-$GLOBALS['pie_consulta_web_publica'] = '<div align="right"><a href="http://sivel.sourceforge.net/1.1/consultaweb.html">Documentación</a></div>';
+$GLOBALS['pie_consulta_web_publica'] = '<div align="right"><a href="http://sivel.sourceforge.net/1.1/consultaweb.html">' . _('Documentación') .'</a></div>';
 
 /** Cabezote para enviar correos desde consulta_web.
  * Dejar '' si no hay
@@ -422,4 +424,67 @@ $GLOBALS['m_opcion'] = array (
 
 
 
-include_once $_SESSION['dirsitio'] . '/conf_int.php';
+/* Mensajes para formularios */
+
+$mreq = '<span style = "font-size:80%; color:#ff0000;">*</span>
+    <span style = "font-size:80%;"> '
+    . _('marca un campo requerido') . '</span>';
+
+/**
+ * Meses
+ * @global array $GLOBALS['mes']
+ * @name   $mes
+ */
+$GLOBALS['mes'] = array(
+    1=> _('Enero'), 2=> _('Febrero'), 3=> _('Marzo'),
+    4=> _('Abril'), 5=> _('Mayo'), 6=> _('Junio'),
+    7=> _('Julio'), 8=> _('Agosto'), 9=> _('Septiembre'),
+    10=> _('Octubre'), 11=> _('Noviembre'), 12=> _('Diciembre')
+);
+
+/**
+ * Nombres cortos de meses
+ * @global array $GLOBALS['mes_corto']
+ * @name   $mes_corto
+ */
+$GLOBALS['mes_corto'] = array(
+    1=> _('Ene'), 2=> _('Feb'), 3=> _('Mar'),
+    4=> _('Abr'), 5=> _('May'), 6=> _('Jun'),
+    7=> _('Jul'), 8=> _('Ago'), 9=> _('Sep'),
+    10=> _('Oct'), 11=> _('Nov'), 12=> _('Dic')
+);
+
+
+/**
+ * mensaje de campos indispensables
+ * @global string $GLOBALS['mreglareq']
+ * @name   $mreglareq
+ */
+$GLOBALS['mreglareq'] = _('El campo %s es indispensable.');
+
+/**
+ * Mensaje de valores no válidos
+ * @global string $GLOBALS['mreglavio']
+ * @name   $mreglavio
+ */
+$GLOBALS['mreglavio'] = '%s: El valor que ha ingresado no es válido.';
+
+/**
+ * Campos por mostrar por defecto en reportes
+ * @global array $GLOBALS['cw_ncampos']
+ * @name   $cw_ncampos
+ */
+if (!isset($GLOBALS['cw_ncampos'])) {
+    $GLOBALS['cw_ncampos'] = array(
+        'caso_id' => _('Código'),
+        'caso_memo' => _('Descripción'),
+        'caso_fecha' => _('Fecha'),
+        'm_ubicacion' => _('Ubicación'),
+        'm_victimas' => _('Víctimas'),
+        'm_presponsables' => _('Pr. Resp.'),
+        'm_tipificacion' => _('Tipificación')
+    );
+}
+
+
+

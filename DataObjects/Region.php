@@ -42,6 +42,8 @@ class DataObjects_Region extends DataObjects_Basica
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Región');
     }
 

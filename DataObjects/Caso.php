@@ -102,6 +102,8 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
     /**
      * Nombres por presentar para cada campo.
      */

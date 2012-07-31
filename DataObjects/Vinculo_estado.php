@@ -38,6 +38,8 @@ class DataObjects_Vinculo_estado extends DataObjects_Basica
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Vínculo con el Estado');
     }
 

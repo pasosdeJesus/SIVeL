@@ -45,7 +45,10 @@ class DataObjects_Intervalo extends DataObjects_Basica
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Intervalo');
+        $this->fb_fieldLabels['rango'] = _('Rango');
     }
 
     var $fb_preDefOrder = array(

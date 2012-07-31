@@ -89,6 +89,8 @@ class DataObjects_Relacion_personas extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->fb_fieldLabels= array(
         );
     }

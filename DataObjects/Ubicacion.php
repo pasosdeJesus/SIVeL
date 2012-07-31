@@ -64,6 +64,8 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->fb_fieldLabels= array(
            'id_departamento' => _('Departamento'),
            'id_municipio' => _('Municipio'),

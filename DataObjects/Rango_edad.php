@@ -44,6 +44,8 @@ class DataObjects_Rango_edad extends DataObjects_Basica
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Rango de Edad');
         $this->fb_fieldLabels = array(
             'nombre' => _('Nombre'),

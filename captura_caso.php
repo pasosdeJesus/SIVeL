@@ -209,7 +209,8 @@ class CapturaCaso extends HTML_QuickForm_Controller
             die($GLOBALS['accno'] . " (3)");
         }
         $mreq = '<span style = "font-size:80%; color:#ff0000;">*</span>' .
-            '<span style = "font-size:80%;"> marca un campo requerido</span>';
+            '<span style = "font-size:80%;"> '
+            . _('marca un campo requerido') . '</span>';
         foreach ($this->_tabs as $tab) {
             list($pag, $cl) = $tab;
             if (($d = strrpos($cl, "/"))>0) {

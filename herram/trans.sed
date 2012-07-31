@@ -113,3 +113,5 @@ s/http:\/\/creativecommons.org\/publicdomain\/zero\/1.0\//https:\/\/www.pasosdej
 s/vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:/vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:/g
 s/autenticaUsuario(\$dsn, \$accno/autenticaUsuario($dsn/g
 s/htmlentities(\([^,)]*\))/htmlentities(\1, ENT_COMPAT, 'UTF-8')/g
+s/parent::construct/parent::__construct/g
+

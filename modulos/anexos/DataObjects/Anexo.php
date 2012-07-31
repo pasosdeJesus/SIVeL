@@ -51,6 +51,8 @@ class DataObjects_Anexo extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->fb_fieldLabels= array(
            'fecha' => _('Fecha'),
            'descripcion' => _('Descripción'),

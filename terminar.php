@@ -25,16 +25,16 @@ require_once 'misc.php';
 
 cierraSesion($dsn);
 encabezado_envia(_('Cerrando sesión'));
-#echo "<html><head><title>" 
-#    . _('SIVeL: Sistema de Información de Violencia Política en Línea')
-#    . "</title></head>";
-#echo "<body>"; #
+//echo "<html><head><title>"
+//    . _('SIVeL: Sistema de Información de Violencia Política en Línea')
+//    . "</title></head>";
+//echo "<body>"; #
 echo "<h1>" .
-    _('SIVeL: Sistema de Información de Violencia Política en Línea') 
+    _('SIVeL: Sistema de Información de Violencia Política en Línea')
     . "</h1>";
 echo _("Fin de sesión") . "<br>";
 echo '<a href = "index.php">' . _('Iniciar nueva sesión') . '</a>';
-#echo "</body>";
-#echo "</html>";
+//echo "</body>";
+//echo "</html>";
 pie_envia();
 ?>

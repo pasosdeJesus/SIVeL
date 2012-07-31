@@ -47,6 +47,8 @@ class DataObjects_Presuntos_responsables extends DataObjects_Basica
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Presuntos Responsables');
         $this->fb_fieldLabels = array(
             'nombre' => _('Nombre'),

@@ -49,6 +49,8 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->fb_fieldLabels= array(
            'id_usuario' => _('Identificación'),
            'password' => _('Clave'),
@@ -59,7 +61,7 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
         $this->es_enumOptions = array(
             'id_rol' => array(
                 '1' => _('Administrador'),
-                '2' => _('Analista'), 
+                '2' => _('Analista'),
                 '3' => _('Consulta'),
                 '4' => _('Ayudante'),
             ),

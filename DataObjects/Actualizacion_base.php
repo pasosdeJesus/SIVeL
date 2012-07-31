@@ -44,6 +44,8 @@ class DataObjects_Actualizacion_base extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Actualizacion Base');
     }
 

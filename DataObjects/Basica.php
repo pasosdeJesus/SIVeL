@@ -46,6 +46,8 @@ class DataObjects_Basica extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Básica');
         $this->fb_fieldLabels = array(
             'id' => _('Identificación'),

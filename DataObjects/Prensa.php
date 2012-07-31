@@ -39,6 +39,8 @@ class DataObjects_Prensa extends DataObjects_Basica
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Fuentes frecuentes');
         $this->fb_fieldLabels= array(
             'tipo_fuente'=> _('Tipo de Fuente'),

@@ -40,6 +40,8 @@ class DataObjects_P_responsable_agrede_combatiente extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Presuntso Responsable Agrede Combatiente');
     }
 

@@ -49,6 +49,8 @@ class DataObjects_Region_caso extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->fb_fieldLabels= array(
            'id_region' => _('Region'),
            'id_frontera' => _('Frontera'),

@@ -105,6 +105,8 @@ class DataObjects_Etiquetacaso extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->fb_fieldLabels= array(
            'fecha' => _('Fecha'),
            'observaciones' => _('Observaciones'),

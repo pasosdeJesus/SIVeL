@@ -42,6 +42,8 @@ class DataObjects_Despacho extends DataObjects_Basica
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Despacho de una actuación judicial');
         $this->fb_fieldLabels = array(
             'id_tipo' => _('Tipo de proceso'),

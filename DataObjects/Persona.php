@@ -67,6 +67,8 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->fb_fieldLabels= array(
            'nombres' => _('Nombres'),
            'apellidos' => _('Apellidos'),

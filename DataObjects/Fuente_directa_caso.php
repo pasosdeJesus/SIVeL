@@ -64,6 +64,8 @@ class DataObjects_Fuente_directa_caso extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->fb_fieldLabels= array(
            'anotacion' => _('Anotación'),
            'fecha' => _('Fecha'),

@@ -42,6 +42,14 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
     var  $nom_tabla = 'nombre de la tabla';
 
     /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    { // __construct()
+    }
+
+    /**
      * Truco de compatibilidad con ZE2
      *
      * @return object copia del objeto

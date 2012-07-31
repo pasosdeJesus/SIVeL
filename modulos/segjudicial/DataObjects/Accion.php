@@ -61,6 +61,8 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->fb_fieldLabels= array(
            'id_tipo_accion'        => _('Tipo de Acción'),
            'id_despacho'           => _('Despacho'),

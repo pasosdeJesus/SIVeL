@@ -51,6 +51,8 @@ class DataObjects_Victima_colectiva extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->fb_fieldLabels= array(
            'id_organizacion_armada'=> _('Organización Armada Víctima'),
            'personas_aprox' => _('Num. Aprox. Personas'),

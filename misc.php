@@ -25,72 +25,6 @@ require_once "HTML/QuickForm.php";
 require_once "HTML/Common.php";
 require_once "DB_DataObject_SIVeL.php";
 
-/* Mensajes para formularios */
-
-$mreq = '<span style = "font-size:80%; color:#ff0000;">*</span>
-    <span style = "font-size:80%;"> marca un campo requerido</span>';
-
-/**
- * Meses
- * @global array $GLOBALS['mes']
- * @name   $mes
- */
-$GLOBALS['mes'] = array(1=>'Enero', 2=>'Febrero', 3=>'Marzo',
-    4=>'Abril', 5=>'Mayo', 6=>'Junio', 7=>'Julio',
-    8=>'Agosto', 9=>'Septiembre', 10=>'Octubre', 11=>'Noviembre',
-    12=>'Diciembre'
-);
-
-/**
- * Nombres cortos de meses
- * @global array $GLOBALS['mes_corto']
- * @name   $mes_corto
- */
-$GLOBALS['mes_corto'] = array(1=>'Ene', 2=>'Feb', 3=>'Mar',
-    4=>'Abr', 5=>'May', 6=>'Jun', 7=>'Jul',
-    8=>'Ago', 9=>'Sep', 10=>'Oct', 11=>'Nov', 12=>'Dic'
-);
-
-
-/**
- * mensaje de campos indispensables
- * @global string $GLOBALS['mreglareq']
- * @name   $mreglareq
- */
-$GLOBALS['mreglareq'] = 'El campo %s es indispensable.';
-
-/**
- * Mensaje de valores no válidos
- * @global string $GLOBALS['mreglavio']
- * @name   $mreglavio
- */
-$GLOBALS['mreglavio'] = '%s: El valor que ha ingresado no es válido.';
-
-/**
- * Campos por mostrar por defecto en reportes
- * @global array $GLOBALS['cw_ncampos']
- * @name   $cw_ncampos
- */
-if (!isset($GLOBALS['cw_ncampos'])) {
-    $GLOBALS['cw_ncampos'] = array('caso_id' => 'Código',
-        'caso_memo' => 'Descripción',
-        'caso_fecha' => 'Fecha',
-        'm_ubicacion' => 'Ubicación',
-        'm_victimas' => 'Víctimas',
-        'm_presponsables' => 'Pr. Resp.',
-        'm_tipificacion' => 'Tipificación'
-    );
-}
-
-    /*
-
-    /**
-     * Número de caso usado en búsquedas --no puede usarse en casos.
-     * @global unknown $GLOBALS['idbus']
-     * @name   $idbus
-     */
-$GLOBALS['idbus']=-1;
-
 /**
  * Encabezado de un relato
  * @global string $GLOBALS['enc_relato']
@@ -102,6 +36,13 @@ $GLOBALS['enc_relato']
     . "\"relatos.dtd\">\n"
     . '<'.'?xml-stylesheet type="text/xsl" href="xrlat-a-html.xsl"?'
     . ">\n";
+
+/**
+ * Número de caso usado en búsquedas --no puede usarse en casos.
+ * @global unknown $GLOBALS['idbus']
+ * @name   $idbus
+ */
+$GLOBALS['idbus']=-1;
 
 /* -------- OPERACIONES CON CADENAS */
 

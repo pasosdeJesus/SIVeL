@@ -366,6 +366,20 @@ function transear(sa)
 	$0 = substr($0, 1, RSTART-1) "\n" substr($0, RSTART, length($0) - RSTART +1);
 }
 
+/__construct()/ {
+	if (abrcons>0) {
+		abrcons = 0;
+	} else {
+		abrcons = 1;
+	}
+}
+
+/^ *{/ {
+	if (abrcons == 1) {
+		abrcons = 2;
+	}	
+}
+
 /^ *}/ {
 	if (cierracor != "\n") {
 		print cierracor;
@@ -418,6 +432,12 @@ function transear(sa)
 		}
 		$0 = $0 c; 
 	}
+	if (abrcons == 2) {
+		abrcons =3;
+	} else if (abrcons == 3) {
+		print "        parent::__construct();\n"; 
+		abrcons = 0;
+	} 
 
 	if (cierracor != "\n" && $0 != cierracor) {
 	        if (inidb == 0) {
@@ -482,4 +502,5 @@ BEGIN {
 	cierracor = "\n";
 	fnlinea = "";
 	rfb = 0;
+	abrcons = 0;
 }

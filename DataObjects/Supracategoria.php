@@ -42,10 +42,10 @@ class DataObjects_Supracategoria extends DataObjects_Basica
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Supracategoria');
-        $this->fb_fieldLabels = array(
-            'id_tipo_violencia' => _('Tipo de Violencia')
-        );
+        $this->fb_fieldLabels['id_tipo_violencia'] = _('Tipo de Violencia');
     }
 
 

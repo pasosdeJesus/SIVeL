@@ -26,10 +26,11 @@ autenticaUsuario($dsn, $aut_usuario, 12);
 
 $tabla = 'usuario';
 
-encabezado_envia("Usuarios");
+encabezado_envia(_("Usuarios"));
 echo '<table border="0" width="100%"><tr>
     <td style = "white-space: nowrap;background-color:#CCCCCC;" align="center"
-    valign = "top" colspan="2"><b>Usuarios</b></td></tr></table>';
+    valign = "top" colspan="2"><b>' . _('Usuarios') 
+    . '</b></td></tr></table>';
 
 $d = objeto_tabla($tabla);
 if (PEAR::isError($d)) {

@@ -40,6 +40,8 @@ class DataObjects_Etiqueta extends DataObjects_Basica
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Etiqueta de un caso');
     }
 

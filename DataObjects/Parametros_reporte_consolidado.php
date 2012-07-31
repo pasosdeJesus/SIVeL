@@ -47,7 +47,13 @@ class DataObjects_Parametros_reporte_consolidado extends DataObjects_Basica
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Columnas de Reporte Consolidado');
+        $this->fb_fieldLabels['rotulo'] = _('Rotulo');
+        $this->fb_fieldLabels['tipo_violencia'] = _('Tipo de Violencia');
+        $this->fb_fieldLabels['clasifcacion'] = _('Clasificación');
+        $this->fb_fieldLabels['peso'] = _('Peso');
     }
 
 

@@ -90,6 +90,8 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->fb_fieldLabels= array(
             'hijos'=> _('Hijos'),
             'id_profesion'=> _('Profesión'),

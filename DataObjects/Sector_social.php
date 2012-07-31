@@ -41,6 +41,8 @@ class DataObjects_Sector_social extends DataObjects_Basica
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->nom_tabla = _('Sector Social');
     }
 
