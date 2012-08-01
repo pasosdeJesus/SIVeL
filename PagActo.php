@@ -173,6 +173,8 @@ class PagActo extends PagBaseSimple
 
     var $bacto;
 
+    var $titulo = 'Actos';
+
     var $bactocolectivo;
 
     var $clase_modelo = 'acto';
@@ -212,7 +214,7 @@ class PagActo extends PagBaseSimple
 
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no debería ser null");
+            die(_("Bug: idcaso no debería ser null"));
         }
 
         $dacto->id_caso = $idcaso;
@@ -336,10 +338,12 @@ class PagActo extends PagBaseSimple
         $gacto[] =& $sel;
 
         $bn = $this->getButtonName('agregarActo');
-        $sel =& $this->createElement('submit', $bn, 'Añadir');
+        $sel =& $this->createElement('submit', $bn, _('Añadir'));
         $gacto[] =& $sel;
 
-        $this->addGroup($gacto, 'nuevoacto', 'Individuales', '&nbsp;', false);
+        $this->addGroup(
+            $gacto, 'nuevoacto', _('Individuales'), '&nbsp;', false
+        );
 
         $this->bacto->createSubmit = 0;
         $this->bacto->useForm($this);
@@ -400,12 +404,12 @@ class PagActo extends PagBaseSimple
 
             $sel =& $this->createElement(
                 'submit', $this->getButtonName('agregarActocolectivo'),
-                'Añadir'
+                _('Añadir')
             );
             $gactocol[] =& $sel;
 
             $this->addGroup(
-                $gactocol, 'nuevoactocol', 'Colectivos', '&nbsp;', false
+                $gactocol, 'nuevoactocol', _('Colectivos'), '&nbsp;', false
             );
 
             $this->bactocolectivo->createSubmit = 0;

@@ -36,6 +36,8 @@ class PagEvaluacion extends PagBaseSimple
 
     var $clase_modelo = 'caso';
 
+    var $titulo = 'Evaluación';
+
     /**
      * Constructora.
      * Ver documentación completa en clase base.

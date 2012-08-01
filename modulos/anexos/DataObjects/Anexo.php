@@ -89,7 +89,7 @@ class DataObjects_Anexo extends DB_DataObject_SIVeL
         }
 
         if (!isset($this->id)) {
-            $form->addElement('file', 'archivo_sel', 'Archivo');
+            $form->addElement('file', 'archivo_sel', _('Archivo'));
         }
     }
 

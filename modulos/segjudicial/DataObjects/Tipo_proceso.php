@@ -40,7 +40,7 @@ class DataObjects_Tipo_proceso extends DataObjects_Basica
     {
         parent::__construct();
 
-        $this->nom_tabla = _('Tipo de proceso');
+        $this->nom_tabla = _('Tipo de Proceso');
     }
 
 

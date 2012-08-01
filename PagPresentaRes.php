@@ -59,6 +59,7 @@ class PagPresentaRes extends PagBaseSimple
     /** Opciones de presentación */
     var $opciones;
 
+    var $titulo = 'Forma de Presentar Resultados';
 
     /**
      * Constructora.

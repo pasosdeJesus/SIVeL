@@ -62,6 +62,50 @@ $GLOBALS['PREF_RELATOS'] = 'org';
  */
 $GLOBALS['estilo_nombres'] = 'MAYUSCULAS';
 
+/** Organización responsable, aparecerá al exportar relatos
+ * @global string $GLOBALS['organizacion_responsable']
+ */
+$GLOBALS['organizacion_responsable'] = 'D';
+
+/** Derechos de reproducción por defecto, aparecerán al exportar relatos
+ * @global string $GLOBALS['derechos']
+ */
+$GLOBALS['derechos'] = 'Dominio Público';
+
+/** Incluir iglesias cristianas en ficha
+ * @global string $GLOBALS['iglesias_cristianas']
+ */
+$GLOBALS['iglesias_cristianas'] = true;
+
+
+/** Fecha máxima de caso por usar en consulta web.
+ * año-mes-año
+ * @global string $GLOBALS['consulta_web_fecha_max']
+ */
+$GLOBALS['consulta_web_fecha_max'] = '2024-11-30';
+
+/** Fecha mínima de caso por consultar en web
+ * @global string $GLOBALS['consulta_web_fecha_min']
+ */
+$GLOBALS['consulta_web_fecha_min'] = '2001-1-1';
+
+/** Máximo de registros por retornar en una consulta web (0 es ilimitado)
+ * @global string $GLOBALS['consulta_web_max']
+ */
+$GLOBALS['consulta_web_max']=4000;
+
+/** Año mínimo que puede elegirse en fechas de la Ficha
+ * @global string $GLOBALS['anio_min']
+ */
+$GLOBALS['anio_min']=1990;
+
+/** Indica si en la pestaña Actos deben presentarse actos colectivos
+ * @global bool $GLOBALS['actoscolectivos']
+*/
+$GLOBALS['actoscolectivos'] = true;
+
+
+
 
 // VOLCADOS  - COPIAS DE RESPALDO LOCALES
 
@@ -109,6 +153,7 @@ $dirweb = "/tmp";
 
 /** Opciones para scp de actweb, e.g -i ... */
 $opscpweb = "";
+
 
 
 // Mejor no empleamos sobrecarga porque no funciona en

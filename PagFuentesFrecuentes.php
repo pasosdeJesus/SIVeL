@@ -38,6 +38,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     /** Fuente frecuente asociada al caso, que se está consultando */
     var $bescrito_caso;
 
+    var $titulo = 'Fuentes Frecuentes';
 
     var $pref = "ff";
 

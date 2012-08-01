@@ -298,7 +298,8 @@ abstract class PagBaseMultiple extends PagBaseSimple
             die("Bug: idcaso no debería ser null");
         }
 
-        $comp = $idcaso == $GLOBALS['idbus'] ? 'Consulta' : 'Caso ' . $idcaso;
+        $comp = $idcaso == $GLOBALS['idbus'] ? 
+            _('Consulta') : _('Caso') . ' ' . $idcaso;
         $nf = $_SESSION[$this->pref.'_pag'] >= $_SESSION[$this->pref.'_total'] ?
             '-' : $_SESSION[$this->pref . '_pag'] + 1;
         $e =& $this->addElement(
@@ -312,17 +313,17 @@ abstract class PagBaseMultiple extends PagBaseSimple
 
         $nac = 'eliminar';
         $n = $this->getButtonName($nac);
-        $e =& $this->createElement('submit', $n, 'Eliminar');
+        $e =& $this->createElement('submit', $n, _('Eliminar'));
         $ed[] =& $e;
 
         $nac = 'nuevo';
         $n = $this->getButtonName($nac);
-        $e =& $this->createElement('submit', $n, 'Nueva');
+        $e =& $this->createElement('submit', $n, _('Nueva'));
         $ed[] =& $e;
 
         $nac = 'nuevoCopia';
         $n = $this->getButtonName($nac);
-        $e =& $this->createElement('submit', $n, 'Nueva Copia');
+        $e =& $this->createElement('submit', $n, _('Nueva Copia'));
         if (!$this->nuevoCopia) {
             $e->updateAttributes(array('disabled' => 'true'));
         }
@@ -330,12 +331,14 @@ abstract class PagBaseMultiple extends PagBaseSimple
 
         $nac = 'anteriorMultiple';
         $n = $this->getButtonName($nac);
-        $e =& $this->createElement('submit', $n, $this->tcorto.' anterior');
+        $nb = sprintf(_("%s anterior"), $this->tcorto);
+        $e =& $this->createElement('submit', $n, $nb);
         $ed[] =& $e;
 
         $nac = 'siguienteMultiple';
         $n = $this->getButtonName($nac);
-        $e =& $this->createElement('submit', $n, $this->tcorto.' siguiente');
+        $nb = sprintf(_("%s siguiente"), $this->tcorto);
+        $e =& $this->createElement('submit', $n, $nb);
         $ed[] =& $e;
 
         $this->addGroup($ed, null, '', '&nbsp;', false);

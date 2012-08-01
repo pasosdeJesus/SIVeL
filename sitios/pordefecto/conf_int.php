@@ -15,24 +15,8 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
-// RELATOS
 
-/** Organización responsable, aparecerá al exportar relatos
- * @global string $GLOBALS['organizacion_responsable']
- */
-$GLOBALS['organizacion_responsable'] = 'D';
-
-/** Derechos de reproducción por defecto, aparecerán al exportar relatos
- * @global string $GLOBALS['derechos']
- */
-$GLOBALS['derechos'] = 'Dominio Público';
-
-// PARTICULARIDADES
-
-/** Incluir iglesias cristianas en ficha
- * @global string $GLOBALS['iglesias_cristianas']
- */
-$GLOBALS['iglesias_cristianas'] = true;
+// INTERFAZ DE USUARIO
 
 /**
  * Color del fondo de la ficha de captura en notacion HTML
@@ -70,26 +54,7 @@ $GLOBALS['ancho-tabla'] = "78%";
  */
 $GLOBALS['reporte_indenta_victimas'] = true;
 
-/** Fecha máxima de caso por usar en consulta web.
- * año-mes-año
- * @global string $GLOBALS['consulta_web_fecha_max']
- */
-$GLOBALS['consulta_web_fecha_max'] = '2024-11-30';
 
-/** Fecha mínima de caso por consultar en web
- * @global string $GLOBALS['consulta_web_fecha_min']
- */
-$GLOBALS['consulta_web_fecha_min'] = '2001-1-1';
-
-/** Máximo de registros por retornar en una consulta web (0 es ilimitado)
- * @global string $GLOBALS['consulta_web_max']
- */
-$GLOBALS['consulta_web_max']=4000;
-
-/** Año mínimo que puede elegirse en fechas de la Ficha
- * @global string $GLOBALS['anio_min']
- */
-$GLOBALS['anio_min']=1990;
 
 /** Dirección de correo a la cual enviar mensajes cifrados.
  * @global string $GLOBALS['receptor_correo']
@@ -148,11 +113,6 @@ $GLOBALS['centro_principal'] = 'centro_principal.html';
  */
 $GLOBALS['fondo']= $dirsitio . '/fondo.jpg';
 
-
-/** Indica si en la pestaña Actos deben presentarse actos colectivos
- * @global bool $GLOBALS['actoscolectivos']
-*/
-$GLOBALS['actoscolectivos'] = true;
 
 
 

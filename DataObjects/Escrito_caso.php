@@ -57,13 +57,22 @@ class DataObjects_Escrito_caso extends DB_DataObject_SIVeL
     );
     var $fb_addFormHeader = false;
     var $fb_excludeFromAutoRules = array('fecha', 'id_prensa');
-    var  $fb_fieldLabels = array(
-        'fecha' => 'Fecha',
-        'ubicacion' => 'Ubicación',
-        'clasificacion' => 'Clasificación',
-        'ubicacion_fisica' => 'Ubicación Física',
-        'id_prensa' => 'Fuente'
-    );
+
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->fb_fieldLabels = array(
+            'fecha' => _('Fecha'),
+            'ubicacion' => _('Ubicación'),
+            'clasificacion' => _('Clasificación'),
+            'ubicacion_fisica' => _('Ubicación Física'),
+            'id_prensa' => _('Fuente')
+        );
+    }
 
 
     /**

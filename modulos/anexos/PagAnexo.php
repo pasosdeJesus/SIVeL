@@ -98,6 +98,8 @@ class PagAnexo extends PagBaseMultiple
 
     var $clase_modelo = 'anexo';
 
+    var $titulo  = 'Anexos';
+
     /**
      * Pone en null variables asociadas a tablas de la pestaña.
      *
@@ -185,7 +187,7 @@ class PagAnexo extends PagBaseMultiple
         parent::PagBaseMultiple($nomForma);
 
         $this->titulo  = _('Anexos');
-        $this->tcorto = _('Anexos');
+        $this->tcorto = _('Anexo');
 
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());

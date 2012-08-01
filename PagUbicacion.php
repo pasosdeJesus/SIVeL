@@ -112,6 +112,8 @@ class PagUbicacion extends PagBaseMultiple
 
     var $clase_modelo = 'ubicacion';
 
+    var $titulo = 'Ubicación';
+
     /**
      * Deja en blanco variables de este formulario
      *
@@ -433,11 +435,12 @@ class PagUbicacion extends PagBaseMultiple
             && isset($this->bubicacion->_do->longitud)
         ) {
             $this->addElement(
-                'static', 'Ver mapa', 'Ver',
+                'static', _('Ver mapa'), _('Ver'),
                 '<a href="http://www.openstreetmap.org/?lat=' .
                 $this->bubicacion->_do->latitud .  '&lon=' .
                 $this->bubicacion->_do->longitud .
-                '&zoom=14&layers=B000FTFT" target="_mapa">Mapa</a>'
+                '&zoom=14&layers=B000FTFT" target="_mapa">' 
+                . _('Mapa') . '</a>'
             );
         }
 

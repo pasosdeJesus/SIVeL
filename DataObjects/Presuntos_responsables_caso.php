@@ -63,16 +63,22 @@ class DataObjects_Presuntos_responsables_caso extends DB_DataObject_SIVeL
     );
     var $fb_addFormHeader = false;
     var $fb_excludeFromAutoRules = array('id_p_responsable', 'tipo');
-    var $fb_fieldLabels = array (
-        'id_p_responsable' => 'Presunto responsable',
-        'tipo' => 'Bando',
-        'bloque' => 'Bloque',
-        'frente' => 'Frente',
-        'division' => 'División',
-        'brigada' => 'Brigada',
-        'batallon' => 'Batallón',
-        'otro' => 'Otro'
-    );
+
+    function __construct() 
+    {
+        parent::__construct();
+
+        $this->fb_fieldLabels = array (
+            'id_p_responsable' => _('Presunto Responsable'),
+            'tipo' => _('Bando'),
+            'bloque' => _('Bloque'),
+            'frente' => _('Frente'),
+            'division' => _('División'),
+            'brigada' => _('Brigada'),
+            'batallon' => _('Batallón'),
+            'otro' => _('Otro')
+        );
+    }
     var $fb_hidePrimaryKey = false;
 
     /**

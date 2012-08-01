@@ -158,11 +158,12 @@ class DataObjects_Grupoper extends DB_DataObject_SIVeL
 
         $sel =& $form->createElement(
             'static','','',
-            "<a href=\"javascript:abrirBusquedaGrupoper()\">Buscar Grupo</a>"
+            "<a href=\"javascript:abrirBusquedaGrupoper()\">"
+            . _("Buscar Grupo") . "</a>"
         );
         $gr[] =& $sel;
 
-        $form->addGroup($gr, 'gid', 'Nombre', '&nbsp;', false);
+        $form->addGroup($gr, 'gid', _('Nombre'), '&nbsp;', false);
 
         $form->addElement($anota);
     }

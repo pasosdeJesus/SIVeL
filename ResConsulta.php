@@ -752,14 +752,14 @@ class ResConsulta
                             array($cc)
                         );
                     } else {
-                        echo_esc(_("Falta resConsultaInicioTabla en") 
-                            . " $n, $c");
+                        echo_esc(_("Falta") ." resConsultaInicioTabla " 
+                            . _("en") . " $n, $c");
                     }
                 }
             }
             echo "$html_renglon";
             if ($retroalim) {
-                echo "<th valign=top>" . _("Retroalimentacion") . "</th>";
+                echo "<th valign=top>" . _("Retroalimentación") . "</th>";
             }
             echo "</tr>\n";
             break;
@@ -802,7 +802,8 @@ class ResConsulta
                         array($this->mostrar, &$renglon, &$rtexto, $tot)
                     );
                 } else {
-                    echo_esc(_("Falta resConsultaInicio en") . " $n, $c");
+                    echo_esc(_("Falta") ." resConsultaInicio " 
+                        . _("en") . " $n, $c");
                 }
             }
             if (isset($GLOBALS['gancho_rc_inicio'])) {
@@ -1054,7 +1055,7 @@ class ResConsulta
         if (!in_array($this->mostrar, $sinpie)) {
             echo $html_enlace1;
             echo '<div align = "right"><a href = "index.php">' .
-                '<b>' . _('Men&uacute; principal') . '</b></a></div>';
+                '<b>' . _('Men&uacute; Principal') . '</b></a></div>';
             pie_envia($GLOBALS['pie_consulta_web']);
         }
     }

@@ -37,6 +37,8 @@ class PagEtiquetas extends PagBaseSimple
 
     var $clase_modelo = 'etiquetacaso';
 
+    var $titulo = 'Etiquetas';
+
     /**
      * Pone en null variables asociadas a tablas de la pestaña.
      *
@@ -319,14 +321,14 @@ class PagEtiquetas extends PagBaseSimple
 
          $sel =& $form->createElement(
              'select',
-             'critetiqueta', 'Criterio Etiqueta'
+             'critetiqueta', _('Criterio Etiqueta')
          );
          $sel->loadArray(array('0' => 'tiene', '1' => 'no tiene'));
          $gr[] = $sel;
 
          $sel =& $form->createElement(
              'select',
-             'poretiqueta', 'Etiqueta'
+             'poretiqueta', _('Etiqueta')
          );
          if (!PEAR::isError($sel)) {
              $options = array('' => '') +
@@ -339,7 +341,7 @@ class PagEtiquetas extends PagBaseSimple
              $sel->loadArray($options);
          }
          $gr[] = $sel;
-         $form->addGroup($gr, null, 'Etiqueta', '&nbsp;', false);
+         $form->addGroup($gr, null, _('Etiqueta'), '&nbsp;', false);
      }
 
 
@@ -460,7 +462,7 @@ class PagEtiquetas extends PagBaseSimple
                  AND etiquetacaso.id_caso = '$idcaso'"
              );
              $reg = array();
-             $sep = "Etiquetas: \n   ";
+             $sep = _("Etiquetas") . ": \n   ";
              while ($c->fetchInto($reg)) {
                  $r .= $sep . trim($reg[0]);
                  if (trim($reg[1]) != "") {

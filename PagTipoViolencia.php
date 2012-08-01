@@ -77,6 +77,8 @@ class PagTipoViolencia extends PagBaseSimple
     /** Antecedentes del caso */
     var $bantecedente_caso;
 
+    var $titulo = 'Contexto';
+
     var $clase_modelo = 'caso_contexto';
 
     /**

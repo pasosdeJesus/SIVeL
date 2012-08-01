@@ -110,7 +110,7 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
                 $c = substr($c, $d+1);
             }
             if (is_callable(array($c, 'encJavascript'))) {
-                call_user_func(array($c, 'encJavascript'), $js);
+                call_user_func(array($c, 'encJavascript'), &$js);
             } else {
                 echo_enc("Falta encJavascript en $n, $c");
             }
@@ -311,7 +311,9 @@ class CapturaCaso extends HTML_QuickForm_Controller
             }
             $varc = get_class_vars($cls);
             $titulo = isset($GLOBALS['etiqueta'][$cls]) ?
-                $GLOBALS['etiqueta'][$cls] : $varc['titulo'];
+                $GLOBALS['etiqueta'][$cls] : _($varc['titulo']);
+            //echo "OJO cls=$cls, titulo=$titulo, varc=$varc<br>";
+            //var_dump($varc);
             $attrs = ($pageName == $event) ? $here : $attributes;
             $jump[] =& $page->createElement(
                 'submit',

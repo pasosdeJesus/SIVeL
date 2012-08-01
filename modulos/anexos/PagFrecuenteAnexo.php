@@ -37,6 +37,7 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
 {
 
 
+    var $titulo = 'Fuentes Frecuentes';
 
     /**
      * Elimina de base de datos el registro actual.

@@ -36,6 +36,8 @@ require_once 'ResConsulta.php';
 class PagOtraAnexo extends PagOtrasFuentes
 {
 
+    var $titulo = 'Otras Fuentes';
+
     /**
      * Elimina de base de datos el registro actual.
      *
@@ -103,7 +105,7 @@ class PagOtraAnexo extends PagOtrasFuentes
                 "AND (id_prensa IS NULL) " .
                 "AND (id_fuente_directa IS NULL $cor)  " ;
             $an = $this->addElement(
-                'select', 'id_anexo', 'Anexo',
+                'select', 'id_anexo', _('Anexo'),
                 array()
             );
             $q = "SELECT  id, archivo FROM anexo " .

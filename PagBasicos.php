@@ -553,6 +553,8 @@ class PagBasicos extends PagBaseSimple
     var $bfrontera_caso;
     var $bregion_caso;
 
+    var $titulo = 'Datos Básicos';
+
     var $clase_modelo = 'caso';
 
     /**

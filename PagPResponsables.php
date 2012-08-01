@@ -40,6 +40,7 @@ class PagPResponsables extends PagBaseMultiple
     /** Categorias de cada presunto responsable */
     var $bcategoria;
 
+    var $titulo = 'Presuntos Responsables';
 
     var $pref = "fpr";
 

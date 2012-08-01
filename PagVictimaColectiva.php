@@ -71,6 +71,10 @@ class PagVictimaColectiva extends PagBaseMultiple
     /** Clase modelo para pestaña */
     var $clase_modelo = 'victima_colectiva';
 
+    var $titulo = 'Víctimas Colectivas';
+
+    var $tcorto = 'Víc. Colectivas';
+
     /**
      * Pone en null variables asociadas a tablas de la pestaña.
      *

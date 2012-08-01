@@ -126,8 +126,10 @@ class DataObjects_Etiquetacaso extends DB_DataObject_SIVeL
     function postGenerateForm(&$form, &$formbuilder)
     {
         parent::postGenerateForm($form, $formbuilder);
-        $t = '<table width="100%"><tr><th>Fecha</th><th>Etiqueta</th>' .
-            '<th>Observaciones</th><th>Funcionario</th></tr>';
+        $t = '<table width="100%"><tr><th>' . _('Fecha') 
+            . '</th><th>' . _('Etiqueta') 
+            . '</th><th>' . _('Observaciones') 
+            . '</th><th>' . _('Funcionario') . '</th></tr>';
         $p = clone $formbuilder->_do;
         $db = $p->getDatabaseConnection();
         $p->id_caso = $_SESSION['basicos_id'];
@@ -151,10 +153,10 @@ class DataObjects_Etiquetacaso extends DB_DataObject_SIVeL
                 . htmlspecialchars($_SERVER['PHP_SELF']) . '?eliminaest='
                 . (int)$p->id_caso . ":" . (int)$p->id_etiqueta . ":"
                 . (int)$p->id_funcionario. ":" . $p->fecha
-                . '">Eliminar</a></td>';
+                . '">' . _('Eliminar') . '</a></td>';
         }
         $t .= '</table>';
-        $sel =& $form->addElement('static', null, 'Etiquetas', $t);
+        $sel =& $form->addElement('static', null, _('Etiquetas'), $t);
         $form->removeElement('id_caso');
         $form->removeElement('observaciones');
         $form->removeElement('fecha');
@@ -184,12 +186,12 @@ class DataObjects_Etiquetacaso extends DB_DataObject_SIVeL
         );
         $sel =& $form->createElement(
             'submit',
-            $form->getButtonName('agregarEtiqueta'),'Añadir'
+            $form->getButtonName('agregarEtiqueta'),_('Añadir')
         );
         $fm[] =& $sel;
 
         $form->addGroup(
-            $fm, 'etiqueta', 'Nueva',
+            $fm, 'etiqueta', _('Nueva'),
             '&nbsp;', false
         );
     }

@@ -41,6 +41,8 @@ class PagOtrasFuentes extends PagBaseMultiple
     var $bfuente_directa_caso;
 
 
+    var $titulo = 'Otras Fuentes';
+
     var $pref = "fd";
 
     var $nuevaCopia = false;

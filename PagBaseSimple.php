@@ -180,7 +180,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
         $comp = isset($_SESSION['forma_modo'])
             && $_SESSION['forma_modo'] == 'busqueda'
             && $idcaso == $GLOBALS['idbus'] ?
-            'Consulta' : 'Caso ' . $idcaso;
+            _('Consulta') : _('Caso') . ' ' . $idcaso;
 
         $e =& $this->addElement(
             'header', null, '<table width = "100%">' .

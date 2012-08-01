@@ -91,6 +91,8 @@ class PagVictimaIndividual extends PagBaseMultiple
     /** Víctima */
     var $bvictima;
 
+    var $titulo = 'Víctimas Individuales';
+
     /** Antecedentes */
     var $bantecedente_victima;
 
@@ -302,7 +304,7 @@ class PagVictimaIndividual extends PagBaseMultiple
         $gr[] =& $mun;
         $gr[] =& $cla;
 
-        $this->addGroup($gr, 'procedencia', 'Procedencia', '&nbsp;', false);
+        $this->addGroup($gr, 'procedencia', _('Procedencia'), '&nbsp;', false);
 
         $this->bpersona->createSubmit = 0;
         $this->bpersona->useForm($this);

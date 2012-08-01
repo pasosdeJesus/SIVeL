@@ -54,6 +54,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
 
     var $clase_modelo = 'combatiente';
 
+    var $titulo = 'Víctima Combatiente';
+
     /**
      * Pone en null variables asociadas a tablas de la pestaña.
      *

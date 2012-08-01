@@ -35,6 +35,8 @@ class PagMemo extends PagBaseSimple
 
     var $clase_modelo = 'caso';
 
+    var $titulo = 'Memo';
+
     /**
      * Constructora.
      * Ver documentación completa en clase base.

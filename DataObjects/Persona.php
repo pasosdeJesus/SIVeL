@@ -278,7 +278,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             $sel =& $form->createElement(
                 'static','','',
                 "<a href=\"javascript:abrirBusquedaPersona('persona')\">" .
-                "Buscar persona</a>"
+                _("Buscar persona") . "</a>"
             );
             $gr[] =& $sel;
         }
@@ -309,7 +309,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         $seln =& $form->createElement('static', 'pi', '', '(Edad:');
         $gr[] =& $seln;
 
-        $seln =& $form->createElement('text', 'edad', 'Edad');
+        $seln =& $form->createElement('text', 'edad', _('Edad'));
         $seln->setSize(3);
         $seln->setMaxlength(3);
         $gr[] =& $seln;

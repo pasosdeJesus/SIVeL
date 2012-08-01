@@ -119,6 +119,8 @@ class PagSegJudicial extends PagBaseMultiple
 
     var $clase_modelo = 'proceso';
 
+    var $titulo = 'Seguimiento Judicial';
+
     /**
      * Pone en null variables asociadas a tablas de la pestaña.
      *
