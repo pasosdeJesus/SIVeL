@@ -483,7 +483,7 @@ if (!isset($GLOBALS['cw_ncampos'])) {
         'caso_fecha' => _('Fecha'),
         'm_ubicacion' => _('Ubicación'),
         'm_victimas' => _('Víctimas'),
-        'm_presponsables' => _('Pr. Resp.'),
+        'm_presponsables' => _('P. Resp.'),
         'm_tipificacion' => _('Tipificación')
     );
 }

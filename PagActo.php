@@ -175,10 +175,6 @@ class PagActo extends PagBaseSimple
 
     var $bactocolectivo;
 
-    var $titulo = 'Actos';
-
-    var $tcorto = 'Actos';
-
     var $clase_modelo = 'acto';
 
     /*var $bt;  Benchmark_Timer */
@@ -253,6 +249,8 @@ class PagActo extends PagBaseSimple
     function PagActo($nomForma)
     {
         parent::PagBaseSimple($nomForma);
+        $this->titulo = _('Actos');
+        $this->tcorto = _('Actos');
 
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());

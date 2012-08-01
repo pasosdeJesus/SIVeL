@@ -33,8 +33,6 @@ require_once 'PagBaseSimple.php';
 class PagMemo extends PagBaseSimple
 {
 
-    var $titulo = 'Memo';
-
     var $clase_modelo = 'caso';
 
     /**
@@ -48,6 +46,8 @@ class PagMemo extends PagBaseSimple
     function PagMemo($nomForma)
     {
         parent::PagBaseSimple($nomForma);
+        $this->titulo = _('Memo');
+
         $this->titulo = $GLOBALS['etiqueta']['memo'];
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());

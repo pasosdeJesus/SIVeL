@@ -214,6 +214,9 @@ class SiguienteMultiple extends HTML_QuickForm_Action
 abstract class PagBaseMultiple extends PagBaseSimple
 {
 
+    /** Titulo de la pestaña cuando se le de foco*/
+    var $titulo= '';
+
     /** Titulo corto que aparece en botones */
     var $tcorto = '';
 

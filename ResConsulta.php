@@ -490,23 +490,39 @@ class ResConsulta
         $result = hace_consulta($db, $q);
 
         $suma = array();
+        $ac = array(
+            _("Fecha"), _("Caso"), _("Víctima"), 
+            _("Sector Social"), _("Organización Social"),
+            _("Categoria"), _("P. Responsable") 
+        );
+
         if ($pMuestra == "csv") {
             header("Content-type: text/csv");
-            echo '"Fecha", "Caso", "Víctima", "Categoria", "P. Responsable", ""\n';
+            $st = ""; $cpm = "";
+            foreach($ac as $c) {
+                $cpm .= $st . "\"$c\"";
+                $st = ", ";
+            }
+            echo $cpm . ', ""\n';
         } elseif ($pMuestra == 'latex') {
             //header("Content-type: application/x-latex");
             echo "<pre>";
-            echo '\\textbf{Fecha} & \\textbf{Caso} & \\textbf{Víctima} & '
-                . ' \\textbf{Categoria} & \\textbf{P. Responsable} \\\\ \n '
+            $st = ""; $cpm = "";
+            foreach($ac as $c) {
+                $cpm .= $st . "\\textbf{$c}";
+                $st = " & ";
+            }
+            echo $cpm . ' \\\\ \n'
                 . '\hline\n';
         } else { // tabla o consolidado
 
             echo "<table border='1'>\n";
-            echo "<tr><th>Fecha</th><th>Caso</th><th>Víctima</th>" .
-                "<th>Sector Social</th><th>Organización Social</th>" .
-                "<th>Categoria</th><th>P. Responsable</th></tr>";
+            $st = ""; $cpm = "<tr>";
+            foreach($ac as $c) {
+                $cpm .= $st . "<th>$c</th>";
+            }
+            echo $cpm . '</tr>';
         }
-
 
         $tv = 0;
         while ($result->fetchInto($row)) {
@@ -640,8 +656,12 @@ class ResConsulta
      * @return void
      */
     function aHtml($retroalim = true,
-        $html_enlace1='<a href = "consulta_web.php">Consulta Web</a>, '
+        $html_enlace1=null
     ) {
+        if ($html_enlace1 == null) {
+            $html_enlace1 = '<a href = "consulta_web.php">' 
+                . _('Consulta Web') . '</a>, ';
+        }
         $html_erelato =  $GLOBALS['enc_relato']
             . "<relatos>";
 
@@ -668,16 +688,20 @@ class ResConsulta
             && $GLOBALS['consulta_web_max'] > 0
             && $tot > $GLOBALS['consulta_web_max']
         ) {
-            echo "Consulta de " . (int)$tot . " casos. <br>";
-            die("Por favor refine su consulta para que sean menos de " .
-            $GLOBALS['consulta_web_max']
+            echo _("Consulta de ") . (int)$tot . _(" casos") .".<br>";
+            die(
+                _("Por favor refine su consulta para que sean menos de") 
+                . " " .  $GLOBALS['consulta_web_max']
             );
         }
         switch ($this->mostrar) {
         case 'general':
         case 'revista':
-            encabezado_envia('Consulta Web', $GLOBALS['cabezote_consulta_web']);
-            echo "<html><head><title>Reporte Revista</title></head>";
+            encabezado_envia(
+                _('Consulta Web'), $GLOBALS['cabezote_consulta_web']
+            );
+            echo "<html><head><title>" . _("Reporte Revista") 
+                . "</title></head>";
             echo "<body>";
             echo "<pre>";
             break;
@@ -704,7 +728,10 @@ class ResConsulta
             echo "$adjunto_renglon\n";
             break;
         case 'tabla':
-            encabezado_envia('Consulta Web', $GLOBALS['cabezote_consulta_web']);
+            encabezado_envia(
+                _('Consulta Web'), 
+                $GLOBALS['cabezote_consulta_web']
+            );
             echo "<html><head><title>Tabla</title></head>";
             echo "<body>";
             echo "Consulta de " . (int)$tot . " casos. ";
@@ -725,13 +752,14 @@ class ResConsulta
                             array($cc)
                         );
                     } else {
-                        echo_esc("Falta resConsultaInicioTabla en $n, $c");
+                        echo_esc(_("Falta resConsultaInicioTabla en") 
+                            . " $n, $c");
                     }
                 }
             }
             echo "$html_renglon";
             if ($retroalim) {
-                echo "<th valign=top>Retroalimentacion</th>";
+                echo "<th valign=top>" . _("Retroalimentacion") . "</th>";
             }
             echo "</tr>\n";
             break;
@@ -739,27 +767,28 @@ class ResConsulta
             if (!isset($GLOBALS['DIR_RELATOS'])
                 || $GLOBALS['DIR_RELATOS'] == ''
             ) {
-                echo "Falta definir directorio destino en variable " .
-                    "\$GLOBALS['DIR_RELATOS'] del archivo " .
+                echo _("Falta definir directorio destino en variable") ." " .
+                    "\$GLOBALS['DIR_RELATOS'] " . _("del archivo") ." " .
                     htmlentities(
                         "$dirserv/$dirsitio/conf.php", ENT_COMPAT, 'UTF-8'
                     ) . "<br>";
                 die("");
             } else if (!is_writable($GLOBALS['DIR_RELATOS'])) {
-                echo "No puede escribirse en directorio " .
+                echo _("No puede escribirse en directorio") . " " .
                     $GLOBALS['DIR_RELATOS'] .
-                    "<br>Ajuste o cambie permisos temporalmente con:<br>" .
-                    "<tt>sudo chmod a+w ${GLOBALS['dirchroot']}" .
+                    "<br>" . _("Ajuste o cambie permisos temporalmente con")
+                    . ":<br><tt>sudo chmod a+w ${GLOBALS['dirchroot']}" .
                     "${GLOBALS['DIR_RELATOS']}</tt><br>";
             } else {
-                echo "<font color='red'>El directorio  " .
-                    $GLOBALS['DIR_RELATOS'] .
-                    " puede ser escrito</font><br>" .
-                    "Tras generar, retire permiso de escritura con :<br>" .
+                echo "<font color='red'>" . _("El directorio") . "  " 
+                    .  $GLOBALS['DIR_RELATOS'] 
+                    .  " " . _("puede ser escrito") . "</font><br>" 
+                    .  _("Tras generar, retire permiso de escritura con")
+                    . " :<br>" .
                     "<tt>sudo chmod a-w ${GLOBALS['dirchroot']}" .
                     "${GLOBALS['DIR_RELATOS']}</tt><br>";
             }
-            echo "Generando relatos:<br>";
+            echo _("Generando relatos") . ":<br>";
             break;
         default:
             foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
@@ -773,7 +802,7 @@ class ResConsulta
                         array($this->mostrar, &$renglon, &$rtexto, $tot)
                     );
                 } else {
-                    echo_esc("Falta resConsultaInicio en $n, $c");
+                    echo_esc(_("Falta resConsultaInicio en") . " $n, $c");
                 }
             }
             if (isset($GLOBALS['gancho_rc_inicio'])) {
@@ -785,7 +814,8 @@ class ResConsulta
                                 array($this->mostrar, &$renglon, &$rtexto, $tot)
                             );
                         } else {
-                            echo_esc("Falta $f de gancho_rc_inicio[$k]");
+                            echo_esc(_("Falta") . " $f "
+                                . _("de") . " gancho_rc_inicio[$k]");
                         }
                     }
                 }
@@ -847,8 +877,8 @@ class ResConsulta
                             $ultpeso = $peso;
                         } else {
                             echo "<br/><font color='red'>Peso " . (int)$peso
-                               . " de caso " . (int)$idcaso
-                               ." fuera de secuencia</font><br/>";
+                               . " " . _("de caso") ." " . (int)$idcaso
+                               ." " . _("fuera de secuencia") . "</font><br/>";
                         }
                     } else {
                         echo $html_r . "\n";
@@ -970,7 +1000,8 @@ class ResConsulta
                                 array($cc)
                             );
                         } else {
-                            echo_esc("Falta resConsultaFinaltablaHtml en $n, $c");
+                            echo_esc(_("Falta") . " resConsultaFinaltablaHtml "
+                                . _("en") . " $n, $c");
                         }
                     }
                     $html_renglon .= "</td>";
@@ -995,7 +1026,8 @@ class ResConsulta
                         array($this->mostrar)
                     );
                 } else {
-                    echo_esc("Falta resConsultaFinal en $n, $c");
+                    echo_esc(_("Falta") . " resConsultaFinal "
+                        . _("en") . " $n, $c");
                 }
             }
             if (isset($GLOBALS['gancho_rc_final'])) {
@@ -1007,7 +1039,8 @@ class ResConsulta
                                 array($this->mostrar)
                             );
                         } else {
-                            echo_esc("Falta $f de resConsultaFinal[$k]");
+                            echo_esc(_("Falta") .  " $f " 
+                                . _("de") . " resConsultaFinal[$k]");
                         }
                     }
                 }
@@ -1021,7 +1054,7 @@ class ResConsulta
         if (!in_array($this->mostrar, $sinpie)) {
             echo $html_enlace1;
             echo '<div align = "right"><a href = "index.php">' .
-                '<b>Menú principal</b></a></div>';
+                '<b>' . _('Men&uacute; principal') . '</b></a></div>';
             pie_envia($GLOBALS['pie_consulta_web']);
         }
     }

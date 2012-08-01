@@ -36,7 +36,6 @@ require_once 'ResConsulta.php';
 class PagFrecuenteAnexo extends PagFuentesFrecuentes
 {
 
-    var $titulo = 'Fuentes Frecuentes';
 
 
     /**
@@ -77,6 +76,7 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
     function PagFrecuenteAnexo($nomForma)
     {
         parent::PagFuentesFrecuentes($nomForma);
+        $this->titulo  = _('Fuentes Frecuentes');
     }
 
 

@@ -33,7 +33,6 @@ require_once 'PagBaseSimple.php';
 class PagEvaluacion extends PagBaseSimple
 {
 
-    var $titulo = 'Evaluación';
 
     var $clase_modelo = 'caso';
 
@@ -48,6 +47,7 @@ class PagEvaluacion extends PagBaseSimple
     function PagEvaluacion($nomForma)
     {
         parent::PagBaseSimple($nomForma);
+        $this->titulo = _('Evaluación');
 
         $this->addAction('process', new Terminar());
         if (isset($_SESSION['forma_modo'])

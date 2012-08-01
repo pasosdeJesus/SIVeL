@@ -553,8 +553,6 @@ class PagBasicos extends PagBaseSimple
     var $bfrontera_caso;
     var $bregion_caso;
 
-    var $titulo = 'Datos básicos';
-
     var $clase_modelo = 'caso';
 
     /**
@@ -623,6 +621,9 @@ class PagBasicos extends PagBaseSimple
     function PagBasicos($nomForma)
     {
         parent::PagBaseSimple($nomForma);
+        $this->titulo = _('Datos Básicos');
+        $this->tcorto = _('Básicos');
+
 
         $this->addAction('buscar', new BuscarId());
         $this->addAction('siguiente', new Siguiente());
@@ -684,21 +685,21 @@ class PagBasicos extends PagBaseSimple
             $ed[] =& $tid;
             $tid =& $this->createElement(
                 'text', 'busid',
-                'No. Caso por buscar: ', array("align"=>"right")
+                _('No. Caso por buscar: '), array("align"=>"right")
             );
             $tid->setSize(7);
             $ed[] =& $tid;
             $botBuscar =& $this->createElement(
                 'submit',
-                $this->getButtonName('buscar'), 'Buscar',
+                $this->getButtonName('buscar'), _('Buscar'),
                 array("align" => "right")
             );
             $ed[] =& $botBuscar;
             $ed[] =& $this->createElement(
                 'static', null,
-                'Deje en blanco si es nuevo'
+                _('Deje en blanco si es nuevo')
             );
-            $this->addGroup($ed, null, 'No. Caso', '&nbsp;', false);
+            $this->addGroup($ed, null, _('No. Caso'), '&nbsp;', false);
         }
 
 
@@ -713,7 +714,7 @@ class PagBasicos extends PagBaseSimple
 
         }
 
-        $e =& $this->addElement('header', 'ubicacion', 'Ubicación');
+        $e =& $this->addElement('header', 'ubicacion', _('Ubicación'));
 
         $this->bregion_caso->createSubmit = 0;
         $this->bregion_caso->useForm($this);
@@ -866,7 +867,7 @@ class PagBasicos extends PagBaseSimple
                 || $valores['fecha']['M'] == ''
                 || $valores['fecha']['Y'] == ''
             ) {
-                error_valida('Falta fecha del caso', $valores);
+                error_valida(_('Falta fecha del caso'), $valores);
                 return false;
             }
         }

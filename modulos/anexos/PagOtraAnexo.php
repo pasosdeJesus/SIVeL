@@ -36,8 +36,6 @@ require_once 'ResConsulta.php';
 class PagOtraAnexo extends PagOtrasFuentes
 {
 
-    var $titulo = 'Otras Fuentes';
-
     /**
      * Elimina de base de datos el registro actual.
      *
@@ -72,6 +70,7 @@ class PagOtraAnexo extends PagOtrasFuentes
     function PagOtraAnexo($nomForma)
     {
         parent::PagOtrasFuentes($nomForma);
+        $this->titulo  = _('Otras Fuentes');
     }
 
 

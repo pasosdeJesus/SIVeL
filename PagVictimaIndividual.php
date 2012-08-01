@@ -94,10 +94,6 @@ class PagVictimaIndividual extends PagBaseMultiple
     /** Antecedentes */
     var $bantecedente_victima;
 
-    var $titulo = 'Victimas Individuales';
-
-    var $tcorto = 'Victima';
-
     var $pref = "fvi";
 
     var $clase_modelo = 'victima';
@@ -260,6 +256,9 @@ class PagVictimaIndividual extends PagBaseMultiple
     function PagVictimaIndividual($nomForma)
     {
         parent::PagBaseMultiple($nomForma);
+        $this->titulo = _('Víctimas Individuales');
+        $this->tcorto = _('Víctima');
+
 
         PagUbicacion::nullVarUbicacion();
         $this->addAction('id_departamento', new CamDepartamento());
@@ -317,12 +316,12 @@ class PagVictimaIndividual extends PagBaseMultiple
             );
             if ($comovic != '') {
                 $this->addElement(
-                    'static', 'tambien', 'Cómo víctima en casos', $comovic
+                    'static', 'tambien', _('Cómo víctima en casos'), $comovic
                 );
             }
             if ($comofam != '') {
                 $this->addElement(
-                    'static', 'tambien', 'Cómo familiar en casos', $comofam
+                    'static', 'tambien', _('Cómo familiar en casos'), $comofam
                 );
             }
         }
@@ -627,14 +626,14 @@ class PagVictimaIndividual extends PagBaseMultiple
         if ($nobus
             && (!isset($valores['nombres']) || trim($valores['nombres'])=='')
         ) {
-            error_valida('Falta nombre de víctima', $valores);
+            error_valida(_('Falta nombre de víctima'), $valores);
             return false;
         }
 
         if (isset($valores['hijos'])
             && ((int)$valores['hijos'] < 0 || (int)$valores['hijos'] > 100)
         ) {
-            error_valida('Cantidad de hijos fuera de rango', $valores);
+            error_valida(_('Cantidad de hijos fuera de rango'), $valores);
             return false;
         }
 
@@ -659,7 +658,7 @@ class PagVictimaIndividual extends PagBaseMultiple
             && (!isset($valores['fnombres']) || $valores['fnombres'] == '')
             && (!isset($valores['fapellidos']) || $valores['fapellidos'] == '')
         ) {
-                error_valida('Faltó nombre y/o apellido de familiar', $valores);
+                error_valida(_('Faltó nombre y/o apellido de familiar'), $valores);
                 return false;
         }
 

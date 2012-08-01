@@ -184,8 +184,8 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                     $totr = true;
                 } else {
                     die(
-                        "Falta especificar tipo de categoria {$dcatc->id}" .
-                        " ({$dcatc->tipocat})"
+                        _("Falta especificar tipo de categoria") 
+                        . " {$dcatc->id}" . " ({$dcatc->tipocat})"
                     );
                 }
                 $so .= $ini . $so2 . ')';
@@ -226,7 +226,8 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                     )
                 );
             } else {
-                echo_esc("Falta consultaWebCreaConsulta en $n, $c");
+                echo_esc(_("Falta") . " consultaWebCreaConsulta " 
+                    . _("en") . " $n, $c");
             }
         }
         if (isset($GLOBALS['gancho_cw_creaconsulta'])) {
@@ -240,7 +241,8 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                         )
                     );
                 } else {
-                    echo_esc("Falta $f de gancho_cw_creaconsulta[$k]");
+                    echo_esc(_("Falta") ." $f "
+                       . _("de") . " gancho_cw_creaconsulta[$k]");
                 }
             }
         }
@@ -365,10 +367,13 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             if (is_callable(array($c, 'consultaWebOrden'))) {
                 call_user_func_array(
                     array($c, 'consultaWebOrden'),
-                    array($q, &$pOrdenar)
+                    array(&$q, &$pOrdenar)
                 );
             } else {
-                echo_esc("Falta consultaWebOrden en $n, $c");
+                echo_esc(
+                    _("Falta") . " consultaWebOrden "
+                    . _("en") . " $n, $c"
+                );
             }
         }
 
@@ -455,7 +460,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $pOrden     =var_req_escapa('orden');
 
 
-        encabezado_envia('Consulta Web', $GLOBALS['cabezote_consulta_web']);
+        encabezado_envia(_('Consulta Web'), $GLOBALS['cabezote_consulta_web']);
         $x =&  objeto_tabla('departamento');
         $db = $x->getDatabaseConnection();
         if (PEAR::isError($db)) {
@@ -463,23 +468,27 @@ class ConsultaWeb extends HTML_QuickForm_Page
         }
 
         $e =& $this->addElement(
-            'header', null, 'Periodo de Consulta ' .
+            'header', null, _('Periodo de Consulta') . ' ' .
             $GLOBALS['consulta_web_fecha_min'].
-            ' hasta ' .
+            ' ' . _('hasta') . ' ' .
             $GLOBALS['consulta_web_fecha_max']
         );
 
         if ($this->opciones != array()) {
-            $cod =& $this->addElement('text', 'id_casos', 'Código(s): ');
+            $cod =& $this->addElement(
+                'text', 'id_casos', _('Código(s)') . ': '
+            );
             $cod->setSize(80);
         }
 
-        $sel =& $this->addElement('text', 'titulo', 'Titulo del caso:');
+        $sel =& $this->addElement(
+            'text', 'titulo', _('Título del caso') . ':'
+        );
         $sel->setSize(80);
 
         $dep =& $this->addElement(
             'select', 'id_departamento',
-            'Departamento: ', array()
+            _('Departamento') . ': ', array()
         );
         $options= array('' => '') + htmlentities_array(
             $db->getAssoc(
@@ -496,7 +505,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $mun =& $this->addElement(
             'select', 'id_municipio',
-            'Municipio: ', array()
+            _('Municipio') .': ', array()
         );
         $mun->updateAttributes(
             array('onchange' =>
@@ -506,7 +515,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $cla =& $this->addElement(
             'select', 'id_clase',
-            'Centro Poblado: ', array()
+            _('Centro Poblado') . ': ', array()
         );
 
         $ndepartamento = ret_id_departamento($this);
@@ -536,7 +545,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $sel =& $this->addElement(
             'text', 'nomvic',
-            'Nombre o apellido de la víctima'
+           _('Nombre o apellido de la víctima') 
         );
         $sel->setSize(80);
 
@@ -546,14 +555,14 @@ class ConsultaWeb extends HTML_QuickForm_Page
         }
         $ay = explode('-', $GLOBALS['consulta_web_fecha_min']);
         $e =& $this->addElement(
-            'date', 'fini', 'Desde: ',
+            'date', 'fini', _('Desde: '),
             array(
                 'language' => 'es', 'addEmptyOption' => true,
             'minYear' => $ay[0], 'maxYear' => $cy
             )
         );
         $e =& $this->addElement(
-            'date', 'ffin', 'Hasta:',
+            'date', 'ffin', _('Hasta:'),
             array(
                 'language' => 'es', 'addEmptyOption' => true,
             'minYear' => $ay[0], 'maxYear' => $cy
@@ -563,7 +572,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $sel =& $this->addElement(
             'select',
-            'presponsable', 'Presunto Responsable'
+            'presponsable',_('Presunto Responsable') 
         );
         $lpr = htmlentities_array(
             $db->getAssoc(
@@ -579,7 +588,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $sel =& $this->addElement(
             'select', 'clasificacion',
-            'Clasificación de Violencia'
+           _('Clasificación de Violencia') 
         );
         $sel->setMultiple(true);
         $sel->setSize(5);
@@ -622,8 +631,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         }
 
         $sel =& $this->addElement(
-            'select',
-            'ssocial', 'Sector Social Víctima'
+            'select', 'ssocial', _('Sector Social Víctima') 
         );
         $options = array('' => '') + htmlentities_array(
             $db->getAssoc("SELECT id, nombre FROM sector_social")
@@ -654,7 +662,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
             if (in_array(42, $_SESSION['opciones'])) {
                 $sel =& $this->addElement(
                     'select',
-                    'usuario', 'Usuario'
+                    'usuario', _('Usuario')
                 );
                 $options= array(''=>' ') + htmlentities_array(
                     $db->getAssoc(
@@ -663,14 +671,14 @@ class ConsultaWeb extends HTML_QuickForm_Page
                 );
                 $sel->loadArray($options);
                 $e =& $this->addElement(
-                    'date', 'fiini', 'Ingreso Desde: ',
+                    'date', 'fiini', _('Ingreso Desde') . ': ',
                     array(
                         'language' => 'es', 'addEmptyOption' => true,
                     'minYear' => $ay[0], 'maxYear' => $cy
                     )
                 );
                 $e =& $this->addElement(
-                    'date', 'fifin', 'Ingreso Hasta:',
+                    'date', 'fifin', _('Ingreso Hasta') . ':',
                     array(
                         'language' => 'es', 'addEmptyOption' => true,
                     'minYear' => $ay[0], 'maxYear' => $cy
@@ -683,19 +691,19 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $opch = array();
         $sel =& $this->createElement(
             'checkbox',
-            'concoordenadas', 'Con Coordenadas', 'Con Coordenadas'
+            'concoordenadas', _('Con Coordenadas'),_('Con Coordenadas') 
         );
         $opch[] =& $sel;
 
         $this->addGroup(
-            $opch, null, 'Coordenadas', '&nbsp;', false
+            $opch, null, _('Coordenadas'), '&nbsp;', false
         );
 
 
         $ae = array();
         $x =& $this->createElement(
             'radio', 'ordenar', 'fecha',
-            'Fecha', 'fecha'
+            _('Fecha'), 'fecha'
         );
         $ae[] =&  $x;
         if ($pOrden == '' || $pOrden == 'fecha') {
@@ -703,7 +711,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         }
         $x =& $this->createElement(
             'radio', 'ordenar', 'ubicacion',
-            'Ubicación', 'ubicacion'
+            _('Ubicación'), 'ubicacion'
         );
         $ae[] =& $x;
         if ($pOrden == 'ubicacion') {
@@ -713,7 +721,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         if ($this->opciones != array()) {
             $x =& $this->createElement(
                 'radio', 'ordenar', 'codigo',
-                'Código', 'codigo'
+                _('Código'), 'codigo'
             );
             $ae[] =& $x;
             if ($pOrden == 'codigo') {
@@ -728,25 +736,27 @@ class ConsultaWeb extends HTML_QuickForm_Page
                         array($pOrden, $this->opciones, $this, &$ae, &$t)
                     );
                 } else {
-                    echo_esc("Falta $f de consultaweb_ordenarpor[$k]");
+                    echo_esc(_("Falta ") 
+                        . $f 
+                        . _("de") . " consultaweb_ordenarpor[$k]");
                 }
             }
         }
 
 
-        $this->addGroup($ae, null, 'Ordenar por', '&nbsp;', false);
+        $this->addGroup($ae, null, _('Ordenar por'), '&nbsp;', false);
         $t->setChecked(true);
 
         $ae = array();
         $t =& $this->createElement(
             'radio', 'mostrar', 'tabla',
-            'Tabla', 'tabla'
+            _('Tabla'), 'tabla'
         );
         $ae[] =&  $t;
 
         $x =&  $this->createElement(
             'radio', 'mostrar', 'revista',
-            'Reporte Revista', 'revista'
+            _('Reporte Revista'), 'revista'
         );
         $ae[] =& $x;
         if ($pMostrar == 'revista') {
@@ -756,7 +766,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         if (isset($this->opciones) && in_array(42, $this->opciones)) {
             $x =&  $this->createElement(
                 'radio', 'mostrar',
-                'general', 'Reporte General', 'general'
+                'general', _('Reporte General'), 'general'
             );
             $ae[] =& $x;
             if ($pMostrar == 'general') {
@@ -765,7 +775,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         }
         $x =&  $this->createElement(
             'radio', 'mostrar',
-            'relato', 'Relato XML', 'relato'
+            'relato', _('Relato XML'), 'relato'
         );
         $ae[] =& $x;
         if ($pMostrar == 'relato') {
@@ -786,7 +796,11 @@ class ConsultaWeb extends HTML_QuickForm_Page
                     )
                 );
             } else {
-                echo_esc("Falta consultaWebFormaPresentacion en $n, $c");
+                echo_esc(
+                    _("Falta") . " consultaWebFormaPresentacion "
+                   . _("en") 
+                    . "$n, $c"
+                );
             }
         }
         if (isset($GLOBALS['gancho_cw_formapresentacion'])) {
@@ -797,18 +811,19 @@ class ConsultaWeb extends HTML_QuickForm_Page
                         array($pMostrar, $this->opciones, $this, &$ae, &$t)
                     );
                 } else {
-                    echo_esc("Falta $f de consultaWebFormaPresentacion[$k]");
+                    echo_esc(_("Falta") . " " . $f . 
+                        _("de") . "consultaWebFormaPresentacion[$k]");
                 }
             }
         }
 
-        $x =& $this->createElement('radio', 'mostrar', 'csv', 'CSV', 'csv');
+        $x =& $this->createElement('radio', 'mostrar', 'csv', _('CSV'), 'csv');
         $ae[] =&  $x;
         if ($pMostrar == 'csv') {
             $t =& $x;
         }
 
-        $this->addGroup($ae, null, 'Forma de presentación', '&nbsp;', false);
+        $this->addGroup($ae, null, _('Forma de presentación'), '&nbsp;', false);
         $t->setChecked(true);
 
         $asinc = array();
@@ -836,7 +851,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         if (in_array(42, $this->opciones)) { // Podría ver rep. gen?
             $sel =& $this->createElement(
                 'checkbox',
-                'm_fuentes', 'Fuentes', 'Fuentes'
+                'm_fuentes', _('Fuentes'), _('Fuentes')
             );
             if (!in_array('m_fuentes', $asinc)) {
                 $sel->setValue(false);
@@ -845,17 +860,19 @@ class ConsultaWeb extends HTML_QuickForm_Page
         }
         $sel =& $this->createElement(
             'checkbox',
-            'retroalimentacion', 'Retroalimentación', 'Retroalimentación'
+            'retroalimentacion', _('Retroalimentación'), 
+            _('Retroalimentación')
         );
         $sel->setValue(false);
         $opch[] =& $sel;
 
-        $this->addGroup($opch, null, 'Campos por mostrar', '&nbsp;', false);
+        $this->addGroup($opch, null, _('Campos por mostrar'), '&nbsp;', false);
 
         $opch = array();
         $sel =& $this->createElement(
             'checkbox',
-            'm_varlineas', 'Memo en varias lineas', 'Memo en varias lineas'
+            'm_varlineas', _('Memo en varias líneas'), 
+            _('Memo en varias líneas')
         );
         if (!in_array('m_varlineas', $asinc)) {
             $sel->setValue(false);
@@ -863,7 +880,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $opch[] =& $sel;
         $sel =& $this->createElement(
             'checkbox',
-            'm_tex', 'Conversión a TeX', 'Conversión a TeX'
+            'm_tex', _('Conversión a TeX'), _('Conversión a TeX')
         );
         if (!in_array('m_tex', $asinc)) {
             $sel->setValue(false);
@@ -878,22 +895,25 @@ class ConsultaWeb extends HTML_QuickForm_Page
             if (is_callable(array($c, 'consultaWebDetalle'))) {
                 call_user_func_array(
                     array($c, 'consultaWebDetalle'),
-                    array($pMostrar, $this->opciones, $this, $opch)
+                    array($pMostrar, $this->opciones, &$this, &$opch)
                 );
             } else {
-                echo_esc("Falta consultaWebDetalle en $n, $c");
+                echo_esc(
+                    _("Falta") . " consultaWebDetalle " 
+                    . _("en") ." $n, $c"
+                );
             }
         }
 
         $this->addGroup(
-            $opch, null, 'Detalles de la presentación',
+            $opch, null, _('Detalles de la presentación'),
             '&nbsp;', false
         );
 
         $opch = array();
         $sel =& $this->createElement(
             'submit',
-            $this->getButtonName('consulta'), 'Consulta'
+            $this->getButtonName('consulta'), _('Consulta')
         );
         $opch[] =& $sel;
 
@@ -901,7 +921,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         if (isset($this->opciones) && in_array(42, $this->opciones)) {
             $tpie = "<div align=right><a href=\"index.php\">" .
-                "Menú Principal</a></div>";
+                _("Men&uacute; Principal") .  "</a></div>";
         } else if (isset($GLOBALS['pie_consulta_web_publica'])) {
             $tpie = $GLOBALS['pie_consulta_web_publica'];
         } else {
@@ -939,6 +959,8 @@ function runController()
         $db =& $d->getDatabaseConnection();
         $rol = "";
         sacaOpciones($_SESSION[$nv]['username'], $db, $opciones, $rol);
+        idioma('en');
+        require_once $_SESSION['dirsitio'] . "/conf_int.php";
     }
 
     $wizard =& new HTML_QuickForm_Controller('Consulta', false);

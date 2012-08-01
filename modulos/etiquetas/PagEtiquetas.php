@@ -35,10 +35,6 @@ class PagEtiquetas extends PagBaseSimple
 
     var $betiquetacaso;
 
-    var $titulo = 'Etiquetas';
-
-    var $tcorto = 'Etiquetas';
-
     var $clase_modelo = 'etiquetacaso';
 
     /**
@@ -86,6 +82,8 @@ class PagEtiquetas extends PagBaseSimple
     function PagEtiquetas($nomForma)
     {
         parent::PagBaseSimple($nomForma, $this->titulo);
+        $this->titulo  = _('Etiquetas');
+        $this->tcorto  = _('Etiquetas');
 
         $this->addAction('process', new Terminar());
 /*        if (isset($_SESSION['forma_modo'])

@@ -38,9 +38,6 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     /** Fuente frecuente asociada al caso, que se está consultando */
     var $bescrito_caso;
 
-    var $titulo = 'Fuentes Frecuentes';
-
-    var $tcorto = 'Fuente';
 
     var $pref = "ff";
 
@@ -147,6 +144,9 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     {
         parent::PagBaseMultiple($nomForma);
 
+        $this->titulo = _('Fuentes Frecuentes');
+        $this->tcorto = _('Fuente');
+
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
     }
@@ -178,7 +178,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
         );
         $this->addRule(
             'fecha',
-            'La fecha de la fuente debe ser posterior a la del caso',
+            _('La fecha de la fuente debe ser posterior a la del caso'),
             'frecuenteposterior', null, 'client'
         );
 
@@ -320,7 +320,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
            $this->_rules es vacio */
         if ($nobusca && strtotime($df) < strtotime($do->fecha)) {
             error_valida(
-                'Fecha de fuente no puede ser anterior a la del caso',
+                _('Fecha de fuente no puede ser anterior a la del caso'),
                 $valores
             );
             return false;
@@ -378,7 +378,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     {
         prepara_consulta_gen(
             $w, $t, $idcaso,
-            'escrito_caso', 'Prensa', 'id_prensa', false
+            'escrito_caso', _('Prensa'), 'id_prensa', false
         );
         // echo "OJO w=$w";
     }
@@ -453,12 +453,12 @@ class PagFuentesFrecuentes extends PagBaseMultiple
             $nomf = utf8_decode($fuente->nombre_fuente);
             if (empty($fuente->fecha_fuente)) {
                 repObs(
-                    "No se incluyó fuente sin fecha: " .
+                    _("No se incluyó fuente sin fecha: ") .
                     $fuente->asXML(), $obs
                 );
             } else if (empty($fuente->nombre_fuente)) {
                 repObs(
-                    "No se incluyó fuente sin nombre: " .
+                    _("No se incluyó fuente sin nombre: ") .
                     $fuente->asXML(), $obs
                 );
             } else {

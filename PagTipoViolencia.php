@@ -71,15 +71,11 @@ class PagTipoViolencia extends PagBaseSimple
 
     /* Variables DB_DataObject_FormBuilder */
 
-    /** Categorias del caso */
-
     /** Contextos del caso */
     var $bcaso_contexto;
 
     /** Antecedentes del caso */
     var $bantecedente_caso;
-
-    var $titulo = 'Contexto';
 
     var $clase_modelo = 'caso_contexto';
 
@@ -135,6 +131,8 @@ class PagTipoViolencia extends PagBaseSimple
     function PagTipoViolencia($nomForma)
     {
         parent::PagBaseSimple($nomForma);
+
+        $this->titulo = _('Contexto');
 
         $this->addAction('siguiente', new Siguiente('salvaTipoViolencia'));
         $this->addAction('anterior', new Anterior('salvaTipoViolencia'));

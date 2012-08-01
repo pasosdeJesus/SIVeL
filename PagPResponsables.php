@@ -40,9 +40,6 @@ class PagPResponsables extends PagBaseMultiple
     /** Categorias de cada presunto responsable */
     var $bcategoria;
 
-    var $titulo = 'Presuntos Responsables';
-
-    var $tcorto = 'P. Resp.';
 
     var $pref = "fpr";
 
@@ -186,6 +183,8 @@ class PagPResponsables extends PagBaseMultiple
     function PagPResponsables($nomForma)
     {
         parent::PagBaseMultiple($nomForma);
+        $this->titulo = _('Presuntos Responsables');
+        $this->tcorto = _('P. Resp.');
 
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
@@ -246,11 +245,11 @@ class PagPResponsables extends PagBaseMultiple
 
         $sel =& $this->addElement(
             'select', 'clasificacion',
-            'Otras Agresiones'
+            _('Otras Agresiones')
         );
         $this->addRule(
             'clasificacion', 'requerido',
-            'Otras Agresiones', 'required', '', 'client'
+            _('Otras Agresiones'), 'required', '', 'client'
         );
         $sel->setMultiple(true);
         ResConsulta::llenaSelCategoria(
@@ -389,7 +388,8 @@ class PagPResponsables extends PagBaseMultiple
         $nr = $db->getOne($q);
         if ($nr > 0) {
             error_valida(
-                'Hay ' . $nr . ' categorias que no son de tipo Otras',
+                _('Hay ') . $nr . 
+                (' categorias que no son de tipo Otras'),
                 $valores
             );
             return false;

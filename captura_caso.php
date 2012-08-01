@@ -190,6 +190,14 @@ class CapturaCaso extends HTML_QuickForm_Controller
      */
     function CapturaCaso($opciones)
     {
+        $this->_botonAnterior   = _('<< Anterior');
+        $this->_botonSiguiente = _('Siguiente >>');
+        $this->_botonElimina   = _('Elimina caso');
+        $this->_botonReporte   = _('Val. y Rep. Gen.');
+        $this->_botonMenu      = _('Menú');
+        $this->_botonCasoNuevo  = _('Caso nuevo');
+        $this->_botonBusqueda  = _('Buscar');
+
         $this->opciones = $opciones;
         $this->_modal = false;
         $this->_tabs = $GLOBALS['ficha_tabuladores'];

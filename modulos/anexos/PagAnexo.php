@@ -92,10 +92,6 @@ class PagAnexo extends PagBaseMultiple
 {
     var $banexo;
 
-    var $titulo = 'Anexos';
-
-    var $tcorto = "Anexo";
-
     var $pref = "a";
 
     var $nuevaCopia = false;
@@ -187,6 +183,9 @@ class PagAnexo extends PagBaseMultiple
     function PagAnexo($nomForma)
     {
         parent::PagBaseMultiple($nomForma);
+
+        $this->titulo  = _('Anexos');
+        $this->tcorto = _('Anexos');
 
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());

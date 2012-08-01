@@ -48,10 +48,6 @@ class PagVictimaCombatiente extends PagBaseMultiple
     /** Antecedentes */
     var $bantecedente_combatiente;
 
-    var $titulo = 'Víctima Combatiente';
-
-    var $tcorto = 'Comb.';
-
     var $pref = "fvm";
 
     var $nuevaCopia = false;
@@ -168,6 +164,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
     function PagVictimaCombatiente($nomForma)
     {
         parent::PagBaseMultiple($nomForma);
+        $this->titulo  = _('Víctima Combatiente');
+        $this->tcorto  = _('Comb.');
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
     }

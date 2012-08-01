@@ -62,12 +62,6 @@ class PagVictimaColectiva extends PagBaseMultiple
     /** Organizaciones */
     var $borganizacion_comunidad;
 
-    /** Titulo completo  */
-    var $titulo = 'Víctimas Colectivas';
-
-    /** Titulo corto */
-    var $tcorto = 'Vic. colectiva';
-
     /** Prefijo para variables de sesión */
     var $pref = "fvc";
 
@@ -275,6 +269,9 @@ class PagVictimaColectiva extends PagBaseMultiple
     function PagVictimaColectiva($nomForma)
     {
         parent::PagBaseMultiple($nomForma);
+        $this->titulo = _('Víctimas Colectivas');
+        $this->tcorto = _('Vic. colectiva');
+
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
 

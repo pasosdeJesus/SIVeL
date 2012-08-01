@@ -106,10 +106,6 @@ class PagUbicacion extends PagBaseMultiple
     /** Ubicación independiente del caso */
     var $bubicacion;
 
-    var $titulo = 'Ubicación';
-
-    var $tcorto = 'Ubicación';
-
     var $pref = "fub";
 
     var $nuevaCopia = false;
@@ -242,6 +238,8 @@ class PagUbicacion extends PagBaseMultiple
     function PagUbicacion($nomForma)
     {
         parent::PagBaseMultiple($nomForma);
+        $this->titulo = _('Ubicación');
+        $this->tcorto = _('Ubicación');
 
         PagUbicacion::nullVarUbicacion();
         $this->addAction('id_departamento', new CamDepartamento());

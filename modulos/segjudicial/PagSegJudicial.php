@@ -113,10 +113,6 @@ class PagSegJudicial extends PagBaseMultiple
     var $bproceso;
     var $baccion;
 
-    var $titulo = 'Seguimiento Judicial';
-
-    var $tcorto = 'Seg. Jud.';
-
     var $pref = "fju";
 
     var $nuevaCopia = false;
@@ -219,6 +215,8 @@ class PagSegJudicial extends PagBaseMultiple
     function PagSegJudicial($nomForma)
     {
         parent::PagBaseMultiple($nomForma);
+        $this->titulo  = _('Seguimiento Judicial');
+        $this->tcorto  = _('Seg. Jud.');
 
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());

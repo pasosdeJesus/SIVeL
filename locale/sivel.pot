@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sivel 1.2\n"
 "Report-Msgid-Bugs-To: vtamara@pasosdeJesus.org\n"
-"POT-Creation-Date: 2012-08-01 05:27-0500\n"
+"POT-Creation-Date: 2012-08-01 07:12-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,389 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: captura_caso.php:213 sitios/pordefecto/conf_int.php:433
+#: PagActo.php:252 PagActo.php:253 PagPresentaRes.php:169
+#: sitios/pordefecto/conf_int.php:310
+msgid "Actos"
+msgstr ""
+
+#: PagBasicos.php:624
+msgid "Datos Básicos"
+msgstr ""
+
+#: PagBasicos.php:625
+msgid "Básicos"
+msgstr ""
+
+#: PagBasicos.php:688
+msgid "No. Caso por buscar: "
+msgstr ""
+
+#: PagBasicos.php:694 captura_caso.php:199
+msgid "Buscar"
+msgstr ""
+
+#: PagBasicos.php:700
+msgid "Deje en blanco si es nuevo"
+msgstr ""
+
+#: PagBasicos.php:702
+msgid "No. Caso"
+msgstr ""
+
+#: PagBasicos.php:717 PagPresentaRes.php:113 PagUbicacion.php:241
+#: PagUbicacion.php:242 consulta_web.php:714
+#: sitios/pordefecto/conf_int.php:223 sitios/pordefecto/conf_int.php:230
+#: sitios/pordefecto/conf_int.php:328 sitios/pordefecto/conf_int.php:349
+#: sitios/pordefecto/conf_int.php:484
+msgid "Ubicación"
+msgstr ""
+
+#: PagBasicos.php:870
+msgid "Falta fecha del caso"
+msgstr ""
+
+#: PagEvaluacion.php:50 sitios/pordefecto/conf_int.php:336
+msgid "Evaluación"
+msgstr ""
+
+#: PagFuentesFrecuentes.php:147 sitios/pordefecto/conf_int.php:196
+#: sitios/pordefecto/conf_int.php:329
+msgid "Fuentes Frecuentes"
+msgstr ""
+
+#: PagFuentesFrecuentes.php:148 PagOtrasFuentes.php:175
+#: sitios/pordefecto/conf_int.php:228
+msgid "Fuente"
+msgstr ""
+
+#: PagFuentesFrecuentes.php:181
+msgid "La fecha de la fuente debe ser posterior a la del caso"
+msgstr ""
+
+#: PagFuentesFrecuentes.php:323 PagOtrasFuentes.php:357
+msgid "Fecha de fuente no puede ser anterior a la del caso"
+msgstr ""
+
+#: PagFuentesFrecuentes.php:381
+msgid "Prensa"
+msgstr ""
+
+#: PagFuentesFrecuentes.php:456 PagOtrasFuentes.php:520
+msgid "No se incluyó fuente sin fecha: "
+msgstr ""
+
+#: PagFuentesFrecuentes.php:461 PagOtrasFuentes.php:525
+msgid "No se incluyó fuente sin nombre: "
+msgstr ""
+
+#: PagMemo.php:49 DataObjects/Caso.php:115 sitios/pordefecto/conf_int.php:312
+msgid "Memo"
+msgstr ""
+
+#: PagOtrasFuentes.php:174 sitios/pordefecto/conf_int.php:330
+msgid "Otras Fuentes"
+msgstr ""
+
+#: PagOtrasFuentes.php:489 PagPResponsables.php:391
+msgid "Hay "
+msgstr ""
+
+#: PagOtrasFuentes.php:490
+msgid "fuentes no frecuentes con nombre como "
+msgstr ""
+
+#: PagOtrasFuentes.php:492
+msgid ", escogida la primera"
+msgstr ""
+
+#: PagPResponsables.php:186 DataObjects/Presuntos_responsables.php:52
+#: sitios/pordefecto/conf_int.php:190 sitios/pordefecto/conf_int.php:248
+#: sitios/pordefecto/conf_int.php:332
+msgid "Presuntos Responsables"
+msgstr ""
+
+#: PagPResponsables.php:187 sitios/pordefecto/conf_int.php:486
+msgid "P. Resp."
+msgstr ""
+
+#: PagPResponsables.php:248 PagPResponsables.php:252
+msgid "Otras Agresiones"
+msgstr ""
+
+#: PagPresentaRes.php:75
+msgid "Forma de Presentar Resultados"
+msgstr ""
+
+#: PagPresentaRes.php:121 consulta_web.php:724
+#: sitios/pordefecto/conf_int.php:346 sitios/pordefecto/conf_int.php:481
+msgid "Código"
+msgstr ""
+
+#: PagPresentaRes.php:128 consulta_web.php:747
+msgid "Ordenar por"
+msgstr ""
+
+#: PagPresentaRes.php:133 consulta_web.php:753
+msgid "Tabla"
+msgstr ""
+
+#: PagPresentaRes.php:138 consulta_web.php:820
+msgid "CSV"
+msgstr ""
+
+#: PagPresentaRes.php:159 consulta_web.php:769
+msgid "Reporte General"
+msgstr ""
+
+#: PagPresentaRes.php:180 consulta_web.php:778
+msgid "Relato XML"
+msgstr ""
+
+#: PagPresentaRes.php:191
+msgid "Relatos XML en disco local"
+msgstr ""
+
+#: PagPresentaRes.php:203
+msgid "Forma"
+msgstr ""
+
+#: PagPresentaRes.php:225 consulta_web.php:854
+msgid "Fuentes"
+msgstr ""
+
+#: PagPresentaRes.php:236
+msgid "Mostrar"
+msgstr ""
+
+#: PagPresentaRes.php:241 PagPresentaRes.php:242 consulta_web.php:874
+#: consulta_web.php:875
+msgid "Memo en varias líneas"
+msgstr ""
+
+#: PagPresentaRes.php:250
+msgid "Detalles"
+msgstr ""
+
+#: PagPresentaRes.php:258
+msgid "Ingreso Desde: "
+msgstr ""
+
+#: PagPresentaRes.php:268
+msgid "Ingreso Hasta:"
+msgstr ""
+
+#: PagTipoViolencia.php:135 DataObjects/Caso_contexto.php:49
+#: DataObjects/Caso_contexto.php:50 DataObjects/Contexto.php:48
+#: sitios/pordefecto/conf_int.php:189 sitios/pordefecto/conf_int.php:241
+#: sitios/pordefecto/conf_int.php:242 sitios/pordefecto/conf_int.php:331
+msgid "Contexto"
+msgstr ""
+
+#: PagVictimaColectiva.php:272 sitios/pordefecto/conf_int.php:277
+msgid "Víctimas Colectivas"
+msgstr ""
+
+#: PagVictimaColectiva.php:273
+msgid "Vic. colectiva"
+msgstr ""
+
+#: PagVictimaIndividual.php:259 sitios/pordefecto/conf_int.php:258
+#: sitios/pordefecto/conf_int.php:334
+msgid "Víctimas Individuales"
+msgstr ""
+
+#: PagVictimaIndividual.php:260 DataObjects/Acto.php:79
+msgid "Víctima"
+msgstr ""
+
+#: PagVictimaIndividual.php:319
+msgid "Cómo víctima en casos"
+msgstr ""
+
+#: PagVictimaIndividual.php:324
+msgid "Cómo familiar en casos"
+msgstr ""
+
+#: PagVictimaIndividual.php:629
+msgid "Falta nombre de víctima"
+msgstr ""
+
+#: PagVictimaIndividual.php:636
+msgid "Cantidad de hijos fuera de rango"
+msgstr ""
+
+#: PagVictimaIndividual.php:661
+msgid "Faltó nombre y/o apellido de familiar"
+msgstr ""
+
+#: captura_caso.php:193
+msgid "<< Anterior"
+msgstr ""
+
+#: captura_caso.php:194
+msgid "Siguiente >>"
+msgstr ""
+
+#: captura_caso.php:195
+msgid "Elimina caso"
+msgstr ""
+
+#: captura_caso.php:196
+msgid "Val. y Rep. Gen."
+msgstr ""
+
+#: captura_caso.php:197
+msgid "Menú"
+msgstr ""
+
+#: captura_caso.php:198
+msgid "Caso nuevo"
+msgstr ""
+
+#: captura_caso.php:221 sitios/pordefecto/conf_int.php:433
 msgid "marca un campo requerido"
+msgstr ""
+
+#: consulta_web.php:187
+msgid "Falta especificar tipo de categoria"
+msgstr ""
+
+#: consulta_web.php:229 consulta_web.php:244 consulta_web.php:374
+#: consulta_web.php:800 consulta_web.php:814 consulta_web.php:902
+msgid "Falta"
+msgstr ""
+
+#: consulta_web.php:230 consulta_web.php:375 consulta_web.php:801
+#: consulta_web.php:903
+msgid "en"
+msgstr ""
+
+#: consulta_web.php:245 consulta_web.php:741 consulta_web.php:815
+msgid "de"
+msgstr ""
+
+#: consulta_web.php:471
+msgid "Periodo de Consulta"
+msgstr ""
+
+#: consulta_web.php:473
+msgid "hasta"
+msgstr ""
+
+#: consulta_web.php:479
+msgid "Código(s)"
+msgstr ""
+
+#: consulta_web.php:485
+msgid "Título del caso"
+msgstr ""
+
+#: consulta_web.php:491 DataObjects/Clase.php:52
+#: DataObjects/Departamento.php:45 DataObjects/Municipio.php:51
+#: DataObjects/Persona.php:81 DataObjects/Ubicacion.php:70
+#: sitios/pordefecto/conf_int.php:162 sitios/pordefecto/conf_int.php:219
+msgid "Departamento"
+msgstr ""
+
+#: consulta_web.php:508 DataObjects/Clase.php:53 DataObjects/Municipio.php:49
+#: DataObjects/Persona.php:82 DataObjects/Ubicacion.php:71
+#: sitios/pordefecto/conf_int.php:163 sitios/pordefecto/conf_int.php:220
+msgid "Municipio"
+msgstr ""
+
+#: consulta_web.php:518 DataObjects/Ubicacion.php:72
+msgid "Centro Poblado"
+msgstr ""
+
+#: consulta_web.php:548
+msgid "Nombre o apellido de la víctima"
+msgstr ""
+
+#: consulta_web.php:558
+msgid "Desde: "
+msgstr ""
+
+#: consulta_web.php:565
+msgid "Hasta:"
+msgstr ""
+
+#: consulta_web.php:575 DataObjects/Acto.php:57
+#: DataObjects/Actocolectivo.php:58 sitios/pordefecto/conf_int.php:247
+#: sitios/pordefecto/conf_int.php:272
+msgid "Presunto Responsable"
+msgstr ""
+
+#: consulta_web.php:591
+msgid "Clasificación de Violencia"
+msgstr ""
+
+#: consulta_web.php:634
+msgid "Sector Social Víctima"
+msgstr ""
+
+#: consulta_web.php:665
+msgid "Usuario"
+msgstr ""
+
+#: consulta_web.php:674
+msgid "Ingreso Desde"
+msgstr ""
+
+#: consulta_web.php:681
+msgid "Ingreso Hasta"
+msgstr ""
+
+#: consulta_web.php:694
+msgid "Con Coordenadas"
+msgstr ""
+
+#: consulta_web.php:699
+msgid "Coordenadas"
+msgstr ""
+
+#: consulta_web.php:706 DataObjects/Caso.php:112
+#: DataObjects/Fuente_directa_caso.php:71 sitios/pordefecto/conf_int.php:209
+#: sitios/pordefecto/conf_int.php:229 sitios/pordefecto/conf_int.php:348
+#: sitios/pordefecto/conf_int.php:483
+msgid "Fecha"
+msgstr ""
+
+#: consulta_web.php:739
+msgid "Falta "
+msgstr ""
+
+#: consulta_web.php:759
+msgid "Reporte Revista"
+msgstr ""
+
+#: consulta_web.php:826
+msgid "Forma de presentación"
+msgstr ""
+
+#: consulta_web.php:863 consulta_web.php:864
+msgid "Retroalimentación"
+msgstr ""
+
+#: consulta_web.php:869
+msgid "Campos por mostrar"
+msgstr ""
+
+#: consulta_web.php:883
+msgid "Conversión a TeX"
+msgstr ""
+
+#: consulta_web.php:909
+msgid "Detalles de la presentación"
+msgstr ""
+
+#: consulta_web.php:916 DataObjects/Usuario.php:65
+#: sitios/pordefecto/conf_int.php:361
+msgid "Consulta"
+msgstr ""
+
+#: consulta_web.php:924 detalle.php:83 detusyrol.php:68 tabla.php:224
+#: tablas_basicas.php:60 usyroles.php:74 valida.php:116
+msgid "Men&uacute; Principal"
 msgstr ""
 
 #: detalle.php:33 tabla.php:158
@@ -48,11 +429,6 @@ msgstr ""
 #: detalle.php:75 detusyrol.php:62 DataObjects/Acto.php:99
 #: DataObjects/Actocolectivo.php:102 DataObjects/Relacion_personas.php:171
 msgid "Eliminar"
-msgstr ""
-
-#: detalle.php:83 detusyrol.php:68 tabla.php:224 tablas_basicas.php:60
-#: usyroles.php:74 valida.php:116
-msgid "Men&uacute; Principal"
 msgstr ""
 
 #: detalle.php:89
@@ -148,11 +524,6 @@ msgstr ""
 msgid "Registros en victima_colectiva que no est&aacute;n en actocolectivo"
 msgstr ""
 
-#: DataObjects/Acto.php:57 DataObjects/Actocolectivo.php:58
-#: sitios/pordefecto/conf_int.php:247 sitios/pordefecto/conf_int.php:272
-msgid "Presunto Responsable"
-msgstr ""
-
 #: DataObjects/Acto.php:58 DataObjects/Acto.php:78
 #: DataObjects/Actocolectivo.php:59 DataObjects/Actocolectivo.php:79
 #: DataObjects/Categoria.php:56 sitios/pordefecto/conf_int.php:188
@@ -170,10 +541,6 @@ msgstr ""
 
 #: DataObjects/Acto.php:78 DataObjects/Actocolectivo.php:79
 msgid "P. Responsable"
-msgstr ""
-
-#: DataObjects/Acto.php:79
-msgid "Víctima"
 msgstr ""
 
 #: DataObjects/Actocolectivo.php:60
@@ -229,22 +596,12 @@ msgstr ""
 msgid "Fecha de Deshabilitación"
 msgstr ""
 
-#: DataObjects/Caso.php:112 DataObjects/Fuente_directa_caso.php:71
-#: sitios/pordefecto/conf_int.php:209 sitios/pordefecto/conf_int.php:229
-#: sitios/pordefecto/conf_int.php:348 sitios/pordefecto/conf_int.php:483
-msgid "Fecha"
-msgstr ""
-
 #: DataObjects/Caso.php:113 sitios/pordefecto/conf_int.php:210
 msgid "Hora"
 msgstr ""
 
 #: DataObjects/Caso.php:114
 msgid "Duracion"
-msgstr ""
-
-#: DataObjects/Caso.php:115 sitios/pordefecto/conf_int.php:312
-msgid "Memo"
 msgstr ""
 
 #: DataObjects/Caso.php:116 sitios/pordefecto/conf_int.php:315
@@ -270,13 +627,6 @@ msgstr ""
 #: DataObjects/Caso.php:121 DataObjects/Intervalo.php:50
 #: sitios/pordefecto/conf_int.php:192 sitios/pordefecto/conf_int.php:213
 msgid "Intervalo"
-msgstr ""
-
-#: DataObjects/Caso_contexto.php:49 DataObjects/Caso_contexto.php:50
-#: DataObjects/Contexto.php:48 sitios/pordefecto/conf_int.php:189
-#: sitios/pordefecto/conf_int.php:241 sitios/pordefecto/conf_int.php:242
-#: sitios/pordefecto/conf_int.php:331
-msgid "Contexto"
 msgstr ""
 
 #: DataObjects/Categoria.php:57
@@ -310,19 +660,6 @@ msgstr ""
 #: DataObjects/Clase.php:49 DataObjects/Persona.php:83
 #: sitios/pordefecto/conf_int.php:166 sitios/pordefecto/conf_int.php:221
 msgid "Clase"
-msgstr ""
-
-#: DataObjects/Clase.php:52 DataObjects/Departamento.php:45
-#: DataObjects/Municipio.php:51 DataObjects/Persona.php:81
-#: DataObjects/Ubicacion.php:70 sitios/pordefecto/conf_int.php:162
-#: sitios/pordefecto/conf_int.php:219
-msgid "Departamento"
-msgstr ""
-
-#: DataObjects/Clase.php:53 DataObjects/Municipio.php:49
-#: DataObjects/Persona.php:82 DataObjects/Ubicacion.php:71
-#: sitios/pordefecto/conf_int.php:163 sitios/pordefecto/conf_int.php:220
-msgid "Municipio"
 msgstr ""
 
 #: DataObjects/Clase.php:54 DataObjects/Tipo_clase.php:47
@@ -472,12 +809,6 @@ msgstr ""
 msgid "Fuentes frecuentes"
 msgstr ""
 
-#: DataObjects/Presuntos_responsables.php:52
-#: sitios/pordefecto/conf_int.php:190 sitios/pordefecto/conf_int.php:248
-#: sitios/pordefecto/conf_int.php:332
-msgid "Presuntos Responsables"
-msgstr ""
-
 #: DataObjects/Presuntos_responsables.php:55
 msgid "Subestructura de"
 msgstr ""
@@ -537,10 +868,6 @@ msgstr ""
 msgid "Tipo de Sitio"
 msgstr ""
 
-#: DataObjects/Ubicacion.php:72
-msgid "Centro Poblado"
-msgstr ""
-
 #: DataObjects/Ubicacion.php:73 sitios/pordefecto/conf_int.php:224
 msgid "Lugar"
 msgstr ""
@@ -580,10 +907,6 @@ msgstr ""
 #: DataObjects/Usuario.php:64 sitios/pordefecto/conf_int.php:321
 #: sitios/pordefecto/conf_int.php:360
 msgid "Analista"
-msgstr ""
-
-#: DataObjects/Usuario.php:65 sitios/pordefecto/conf_int.php:361
-msgid "Consulta"
 msgstr ""
 
 #: DataObjects/Usuario.php:66 sitios/pordefecto/conf_int.php:362
@@ -673,10 +996,6 @@ msgstr ""
 msgid "Información Fuentes"
 msgstr ""
 
-#: sitios/pordefecto/conf_int.php:196 sitios/pordefecto/conf_int.php:329
-msgid "Fuentes Frecuentes"
-msgstr ""
-
 #: sitios/pordefecto/conf_int.php:199 sitios/pordefecto/conf_int.php:381
 msgid "Reportes"
 msgstr ""
@@ -687,16 +1006,6 @@ msgstr ""
 
 #: sitios/pordefecto/conf_int.php:211
 msgid "Duración"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:223 sitios/pordefecto/conf_int.php:230
-#: sitios/pordefecto/conf_int.php:328 sitios/pordefecto/conf_int.php:349
-#: sitios/pordefecto/conf_int.php:484
-msgid "Ubicación"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:228
-msgid "Fuente"
 msgstr ""
 
 #: sitios/pordefecto/conf_int.php:238
@@ -731,10 +1040,6 @@ msgstr ""
 msgid "Otro"
 msgstr ""
 
-#: sitios/pordefecto/conf_int.php:258 sitios/pordefecto/conf_int.php:334
-msgid "Víctimas Individuales"
-msgstr ""
-
 #: sitios/pordefecto/conf_int.php:260
 msgid "Edad"
 msgstr ""
@@ -743,20 +1048,12 @@ msgstr ""
 msgid "Tipo Violencia"
 msgstr ""
 
-#: sitios/pordefecto/conf_int.php:277
-msgid "Víctimas Colectivas"
-msgstr ""
-
 #: sitios/pordefecto/conf_int.php:295
 msgid "Víctimas Combatientes"
 msgstr ""
 
 #: sitios/pordefecto/conf_int.php:297
 msgid "Alias"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:310
-msgid "Actos"
 msgstr ""
 
 #: sitios/pordefecto/conf_int.php:322
@@ -772,27 +1069,15 @@ msgstr ""
 msgid "Datos básicos"
 msgstr ""
 
-#: sitios/pordefecto/conf_int.php:330
-msgid "Otras Fuentes"
-msgstr ""
-
 #: sitios/pordefecto/conf_int.php:335
 msgid "Víctima Combatiente"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:336
-msgid "Evaluación"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:346 sitios/pordefecto/conf_int.php:481
-msgid "Código"
 msgstr ""
 
 #: sitios/pordefecto/conf_int.php:347 sitios/pordefecto/conf_int.php:482
 msgid "Descripción"
 msgstr ""
 
-#: sitios/pordefecto/conf_int.php:351 sitios/pordefecto/conf_int.php:486
+#: sitios/pordefecto/conf_int.php:351
 msgid "Pr. Resp."
 msgstr ""
 

@@ -52,8 +52,6 @@ class Doble_Renderer extends HTML_QuickForm_Renderer_Default
 class PagPresentaRes extends PagBaseSimple
 {
 
-    var $titulo = 'Forma de Presentar Resultados';
-
     var $clase_modelo = '';
 
     /* Objetos DB_DataObject_FormBuilder */
@@ -74,6 +72,8 @@ class PagPresentaRes extends PagBaseSimple
     function PagPresentaRes($nomForma, $opciones)
     {
         parent::PagBaseSimple($nomForma);
+        $this->titulo = _('Forma de Presentar Resultados');
+
         $this->opciones = $opciones;
         if (!isset($_SESSION['busca_presenta'])) {
             $_SESSION['busca_presenta']['ordenar'] = 'fecha';
@@ -110,7 +110,7 @@ class PagPresentaRes extends PagBaseSimple
         }
         $x =& $this->createElement(
             'radio', 'ordenar', 'ubicacion',
-            'Ubicación', 'ubicacion'
+            _('Ubicación'), 'ubicacion'
         );
         $ae[] =& $x;
         if ($ult['ordenar'] == 'ubicacion') {
@@ -118,21 +118,25 @@ class PagPresentaRes extends PagBaseSimple
         }
         $x =& $this->createElement(
             'radio', 'ordenar', 'codigo',
-            'Código', 'codigo'
+            _('Código'), 'codigo'
         );
         $ae[] =& $x;
         if ($ult['ordenar'] == 'codigo') {
             $t =& $x;
         }
 
-        $this->addGroup($ae, null, 'Ordenar por', '&nbsp;', false);
+        $this->addGroup($ae, null, _('Ordenar por'), '&nbsp;', false);
         $t->setChecked(true);
 
         $ae = array();
-        $t =& $this->createElement('radio', 'mostrar', 'tabla', 'Tabla', 'tabla');
+        $t =& $this->createElement(
+            'radio', 'mostrar', 'tabla', _('Tabla'), 'tabla'
+        );
         $ae[] =&  $t;
 
-        $x =& $this->createElement('radio', 'mostrar', 'csv', 'CSV', 'csv');
+        $x =& $this->createElement(
+            'radio', 'mostrar', 'csv', _('CSV'), 'csv'
+        );
         $ae[] =&  $x;
         if (isset($ult['mostrar']) && $ult['mostrar'] == 'revista') {
             $t =& $x;
@@ -152,7 +156,7 @@ class PagPresentaRes extends PagBaseSimple
             if (in_array(42, $this->opciones)) {
                 $x =&  $this->createElement(
                     'radio', 'mostrar',
-                    'general', 'Reporte General', 'general'
+                    'general', _('Reporte General'), 'general'
                 );
                 $ae[] =& $x;
                 if (isset($ult['mostrar'])
@@ -162,7 +166,7 @@ class PagPresentaRes extends PagBaseSimple
                 }
                 $x =&  $this->createElement(
                     'radio', 'mostrar',
-                    'actos', 'Actos', 'actos'
+                    'actos', _('Actos'), 'actos'
                 );
                 $ae[] =& $x;
                 if (isset($ult['mostrar'])
@@ -173,7 +177,7 @@ class PagPresentaRes extends PagBaseSimple
 
                 $x =&  $this->createElement(
                     'radio', 'mostrar',
-                    'relato', 'Relato XML', 'relato'
+                    'relato', _('Relato XML'), 'relato'
                 );
                 $ae[] =& $x;
                 if (isset($ult['mostrar'])
@@ -184,7 +188,7 @@ class PagPresentaRes extends PagBaseSimple
 
                 $x =&  $this->createElement(
                     'radio', 'mostrar',
-                    'relatoslocal', 'Relatos XML en disco local',
+                    'relatoslocal', _('Relatos XML en disco local'),
                     'relatoslocal'
                 );
                 $ae[] =& $x;
@@ -196,7 +200,7 @@ class PagPresentaRes extends PagBaseSimple
 
             }
         }
-        $this->addGroup($ae, null, 'Forma', '&nbsp;', false);
+        $this->addGroup($ae, null, _('Forma'), '&nbsp;', false);
         $t->setChecked(true);
 
         $asinc = array();
@@ -218,7 +222,7 @@ class PagPresentaRes extends PagBaseSimple
         if (in_array(42, $this->opciones)) { // Podría ver rep. gen?
             $sel =& $this->createElement(
                 'checkbox',
-                'm_fuentes', 'Fuentes', 'Fuentes'
+                'm_fuentes', _('Fuentes'), _('Fuentes')
             );
             if (!in_array('m_fuentes', $ult) && isset($ult['m_fuentes'])
                 && $ult['m_fuentes'] == 1
@@ -229,12 +233,13 @@ class PagPresentaRes extends PagBaseSimple
 
         }
 
-        $this->addGroup($prevnext, null, 'Mostrar', '&nbsp;', false);
+        $this->addGroup($prevnext, null, _('Mostrar'), '&nbsp;', false);
 
         $prevnext = array();
         $sel =& $this->createElement(
             'checkbox',
-            'm_varlineas', 'Memo en varias lineas', 'Memo en varias lineas'
+            'm_varlineas', _('Memo en varias líneas'), 
+            _('Memo en varias líneas')
         );
         if (!in_array('m_varlineas', $ult) && isset($ult['m_varlineas'])
             && $ult['m_varlineas'] == 1
@@ -242,7 +247,7 @@ class PagPresentaRes extends PagBaseSimple
             $sel->setValue(true);
         }
         $prevnext[] =& $sel;
-        $this->addGroup($prevnext, null, 'Detalles', '&nbsp;', false);
+        $this->addGroup($prevnext, null, _('Detalles'), '&nbsp;', false);
 
         $cy = date('Y');
         if ($cy < 2005) {
@@ -250,7 +255,7 @@ class PagPresentaRes extends PagBaseSimple
         }
         $ay = explode('-', $GLOBALS['consulta_web_fecha_min']);
         $e =& $this->addElement(
-            'date', 'fiini', 'Ingreso Desde: ',
+            'date', 'fiini', _('Ingreso Desde: '),
             array(
                 'language' => 'es',
                 'addEmptyOption' => true,
@@ -260,7 +265,7 @@ class PagPresentaRes extends PagBaseSimple
         );
 
         $e =& $this->addElement(
-            'date', 'fifin', 'Ingreso Hasta:',
+            'date', 'fifin', _('Ingreso Hasta:'),
             array(
                 'language' => 'es', 'addEmptyOption' => true,
                 'minYear' => $ay[0], 'maxYear' => $cy

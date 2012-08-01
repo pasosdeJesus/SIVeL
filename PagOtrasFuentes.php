@@ -40,9 +40,6 @@ class PagOtrasFuentes extends PagBaseMultiple
     /** Relación entre fuente directa y caso */
     var $bfuente_directa_caso;
 
-    var $titulo = 'Otras Fuentes';
-
-    var $tcorto = 'Fuente';
 
     var $pref = "fd";
 
@@ -174,6 +171,8 @@ class PagOtrasFuentes extends PagBaseMultiple
     function PagOtrasFuentes($nomForma)
     {
         parent::PagBaseMultiple($nomForma);
+        $this->titulo = _('Otras Fuentes');
+        $this->tcorto = _('Fuente');
 
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
@@ -355,7 +354,7 @@ class PagOtrasFuentes extends PagBaseMultiple
         ) {
             if (strtotime($df)<strtotime($do->fecha)) {
                 error_valida(
-                    'Fecha de fuente no puede ser anterior a la del caso',
+                    _('Fecha de fuente no puede ser anterior a la del caso'),
                     $valores
                 );
                 return false;
@@ -487,9 +486,10 @@ class PagOtrasFuentes extends PagBaseMultiple
             $dfdc->id_fuente_directa = $row[0];
             if ($rp->fetchInto($row)) {
                 repObs(
-                    "Hay $nr fuente no frecuentes con nombre como " .
-                    $fuente->nombre_fuente .
-                    ", escogida la primera\n", $obs
+                    _("Hay ") . $nr . 
+                    _("fuentes no frecuentes con nombre como ") 
+                    .  $fuente->nombre_fuente 
+                    .  _(", escogida la primera") . "\n", $obs
                 );
             }
         }
@@ -517,12 +517,12 @@ class PagOtrasFuentes extends PagBaseMultiple
             $nomf = $fuente->nombre_fuente;
             if (empty($fuente->fecha_fuente)) {
                 repObs(
-                    "No se incluyó fuente sin fecha: " .
+                    _("No se incluyó fuente sin fecha: ") .
                     $fuente->asXML()
                 );
             } else if (empty($fuente->nombre_fuente)) {
                 repObs(
-                    "No se incluyó fuente sin nombre: " .
+                    _("No se incluyó fuente sin nombre: ") .
                     $fuente->asXML()
                 );
             } else {
