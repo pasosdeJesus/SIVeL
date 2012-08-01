@@ -126,7 +126,7 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
             "enumCallback"
         );
         $e = HTML_QuickForm::createElement(
-            'password', 'password', 'Clave'
+            'password', 'password', _('Clave')
         );
         $this->fb_preDefElements = array('password' => $e);
     }

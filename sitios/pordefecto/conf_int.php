@@ -52,8 +52,10 @@ $GLOBALS['MENS_ORTOGRAFIA'] = 'Las palabras que estén bien por favor agreguelas
 /** Mensaje por presentar en la página principal para indicar donde reportar fallas.
  * @global string $GLOBALS['REPORTA_FALLAS']
  */
-$GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">Documentaci&oacute;n</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>" . _("Por favor reporte fallas o requerimientos en el sistema de seguimiento disponible")
-    . "<a href='http://sourceforge.net/tracker/?group_id=104373&atid=637817'>"
+$GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">" 
+    .  _('Documentaci&oacute;n') 
+    . "</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>" . _("Por favor reporte fallas o requerimientos en el sistema de seguimiento disponible")
+    . " <a href='http://sourceforge.net/tracker/?group_id=104373&atid=637817'>"
     . _("en l&iacute;nea") . "</a>";
 
 /** Ancho en porcentaje de tablas en reporte general.
