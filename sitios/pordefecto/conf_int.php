@@ -106,7 +106,8 @@ $GLOBALS['cabezote_principal'] = '';
  * Dejar '' si no hay
  * @global string $GLOBALS['centro_principal']
  */
-$GLOBALS['centro_principal'] = 'centro_principal.html';
+$GLOBALS['centro_principal'] = 'centro_principal-' . $GLOBALS['LC_ALL'] 
+    . '.html';
 
 /** Imagen de fondo
  * @global string $GLOBALS['fondo']
