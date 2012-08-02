@@ -48,12 +48,6 @@ $dirsitio = "sitios/sivel";
 $GLOBALS['DIR_RELATOS'] = '/sincodh-publico/relatos/';
 
 /**
- * Prefijo para nombres de archivo de relatos
- * @global string $GLOBALS['PREF_RELATOS']
- */
-$GLOBALS['PREF_RELATOS'] = 'org';
-
-/**
  * Estilo: nombres y apellidos de victimas.
  * MAYUSCULAS seria JOSE PEREZ
  * a_minusculas seria Jose Perez
@@ -66,6 +60,13 @@ $GLOBALS['estilo_nombres'] = 'MAYUSCULAS';
  * @global string $GLOBALS['organizacion_responsable']
  */
 $GLOBALS['organizacion_responsable'] = 'D';
+
+/**
+ * Prefijo para nombres de archivo de relatos
+ * @global string $GLOBALS['PREF_RELATOS']
+ */
+$GLOBALS['PREF_RELATOS'] = 'org';
+
 
 /** Derechos de reproducción por defecto, aparecerán al exportar relatos
  * @global string $GLOBALS['derechos']
@@ -104,7 +105,8 @@ $GLOBALS['anio_min']=1990;
 */
 $GLOBALS['actoscolectivos'] = true;
 
-
+// Opciones de Reporte Tabla
+$GLOBALS['reporte_tabla_fila_totales'] = false;
 
 
 // VOLCADOS  - COPIAS DE RESPALDO LOCALES
@@ -132,13 +134,6 @@ $rremotos = "";
  * ejecuta el script respaldo.sh */
 $llave = $dirchroot . $dirserv . $dirsitio . "/id_rsa";
 
-// PARTICULARIDADES
-
-/** Incluir iglesias cristianas en ficha
- * @global string $GLOBALS['iglesias_cristianas']
- */
-$GLOBALS['iglesias_cristianas'] = true;
-
 
 // PUBLICACIÓN EN PÁGINA WEB
 
@@ -153,79 +148,6 @@ $dirweb = "/tmp";
 
 /** Opciones para scp de actweb, e.g -i ... */
 $opscpweb = "";
-
-
-
-// Mejor no empleamos sobrecarga porque no funciona en
-// diversas versiones de PHP
-if (!defined('DB_DATAOBJECT_NO_OVERLOAD')) {
-    define('DB_DATAOBJECT_NO_OVERLOAD',1);
-}
-
-/** DSN de la base de datos.  */
-$dsn = "pgsql://$dbusuario:$dbclave@$dbservidor/$dbnombre";
-
-require_once "PEAR.php";
-
-require_once 'DB/DataObject.php';
-require_once 'DB/DataObject/FormBuilder.php';
-
-$options = &PEAR::getStaticProperty('DB_DataObject', 'options');
-$options = array(
-    'database' => $dsn,
-    'schema_location' => $dirsitio . '/DataObjects',
-    'class_location' => 'DataObjects/',
-    'require_prefix' => 'DataObjects/',
-    'class_prefix' => 'DataObjects_',
-    'extends_location' => 'DataObjects_',
-    'debug' => '0',
-);
-
-$_DB_DATAOBJECT_FORMBUILDER['CONFIG'] = array (
-    'select_display_field' => 'nombre',
-    'hidePrimaryKey' => false,
-    'submitText' => 'Enviar',
-    'linkDisplayLevel' => 2,
-    'dbDateFormat' => 1,
-    'dateElementFormat' => "d-m-Y",
-    'useCallTimePassByReference' => 0
-);
-
-// MODULOS
-
-/** Módulos empleados (relativos a directorio con fuentes) */
-$modulos = "modulos/anexos modulos/etiquetas modulos/mapag";
-
-/** Directorio donde se almacenan anexos */
-$GLOBALS['dir_anexos'] = '/resbase/anexos';
-
-// Opciones de Reporte Tabla
-$GLOBALS['reporte_tabla_fila_totales'] = false;
-
-// Opciones del menú
-
-// $GLOBALS['modulo'][100] = 'modulos/estrotulos/estrotulos.php';
-// $GLOBALS['modulo'][101] = 'modulos/estrotulos/estcolectivas.php';
-// $GLOBALS['modulo'][200] = 'modulos/belicas/estadisticas_comb.php';
-$GLOBALS['modulo'][300] = 'modulos/mapag/index.php';
-
-// Posibilidades de módulos
-// $GLOBALS['consultaweb_ordenarpor'][0] = "rotulos_cwebordenar";
-// $GLOBALS['gancho_rc_reginicial'][0] = "rotulos_inicial";
-// $GLOBALS['gancho_rc_regfinal'][0] = "rotulos_final";
-// $GLOBALS['misc_ordencons'][0] = "rotulos_orden_cons";
-
-
-/* Rutas en particular donde haya subdirectorios DataObjects */
-$rutas_include = ini_get('include_path').
-    ":.:$dirserv:$dirserv/$dirsitio:$dirsitio:";
-$lm = explode(" ", $modulos);
-foreach ($lm as $m) {
-    $rutas_include .= "$m:$m/DataObjects/:";
-}
-
-/* La siguiente requiere AllowOverride All en configuración de Apache */
-ini_set('include_path', $rutas_include);
 
 /** Palabra clave para algunos cifrados.
  * @global string $GLOBALS['PALABRA_SITIO']
@@ -255,5 +177,10 @@ $GLOBALS['ficha_tabuladores'] = array(
     12 => array('evaluacion', 'PagEvaluacion', 12)
 );
 
+
+// MODULOS
+
+/** Módulos empleados (relativos a directorio con fuentes) */
+$modulos = "modulos/anexos modulos/etiquetas modulos/mapag";
 
 
