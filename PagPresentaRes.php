@@ -104,7 +104,8 @@ class PagPresentaRes extends PagBaseSimple
         $ult = $_SESSION['busca_presenta'];
 
         $ae = array();
-        $x =& $this->createElement('radio', 'ordenar', 'fecha', 'Fecha', 'fecha');
+        $x =& $this->createElement('radio', 'ordenar', 'fecha', 
+            _('Fecha'), 'fecha');
         $ae[] =&  $x;
         if ($ult['ordenar'] == '' || $ult['ordenar'] == 'fecha') {
             $t =& $x;
@@ -147,7 +148,7 @@ class PagPresentaRes extends PagBaseSimple
             if (in_array(41, $this->opciones)) {
                 $x =&  $this->createElement(
                     'radio', 'mostrar', 'revista',
-                    'Reporte Revista', 'revista'
+                    _('Reporte Revista'), 'revista'
                 );
                 $ae[] =& $x;
                 if (isset($ult['mostrar']) && $ult['mostrar'] == 'revista') {

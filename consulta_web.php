@@ -959,7 +959,7 @@ function runController()
         $db =& $d->getDatabaseConnection();
         $rol = "";
         sacaOpciones($_SESSION[$nv]['username'], $db, $opciones, $rol);
-        idioma('en');
+        idioma('en_US');
         require_once $_SESSION['dirsitio'] . "/conf_int.php";
     }
 

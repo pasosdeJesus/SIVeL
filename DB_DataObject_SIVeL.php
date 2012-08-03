@@ -165,7 +165,7 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
         /*var_dump($form);
         debug_print_backtrace();*/
         if (!is_array($this->fb_fieldLabels)) {
-            echo "Definir etiquetas en fb_fieldLabels<br>";
+            echo _("Definir etiquetas en fb_fieldLabels") . "<br>";
             print_r($this);
         } else {
             foreach ($this->fb_fieldLabels as $c => $et) {
@@ -187,8 +187,7 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
         }
         if (PEAR::isError($h)) {
             $h =& $form->addElement('header', '__header__', $this->nom_tabla);
-        }
-        $f =& $form->getElement('fechadeshabilitacion');
+        }        $f =& $form->getElement('fechadeshabilitacion');
         if (!PEAR::isError($f) && !isset($this->fechadeshabilitacion)) {
             $f->_elements[0]->setValue('');
             $f->_elements[1]->setValue('');

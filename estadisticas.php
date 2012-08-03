@@ -445,34 +445,32 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
 
         $e =& $this->addElement(
             'header', null,
-            'Conteos Victimizacione Individuales'
+            _('Conteos Victimizacione Individuales')
         );
-
-        //    $e =& $this->addElement('static', 'fini', 'Victimas ');
 
         $cy = date('Y');
         if ($cy < 2005) {
             $cy = 2005;
         }
         $e =& $this->addElement(
-            'date', 'fini', 'Desde: ',
+            'date', 'fini', _('Desde') .': ',
             array(
                 'language' => 'es', 'addEmptyOption' => true,
             'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
             )
         );
         $e =& $this->addElement(
-            'date', 'ffin', 'Hasta',
+            'date', 'ffin', _('Hasta'),
             array(
                 'language' => 'es', 'addEmptyOption' => true,
-            'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
+                'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
             )
         );
 
 
         $tipo =& $this->addElement(
             'select', 'id_tipo_violencia',
-            'Tipo de violencia: ', array()
+            _('Tipo de violencia') . ': ', array()
         );
         $options= array('' => '') + htmlentities_array(
             $db->getAssoc(
@@ -490,7 +488,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
 
         $supra =& $this->addElement(
             'select', 'id_supracategoria',
-            'Supracategoria: ', array()
+            _('Supracategoria') . ': ', array()
         );
 
         $ntipoviolencia = $this->idTipoViolencia();
@@ -507,7 +505,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
         $nsupra = $this->idSupracategoria();
 
         $sel =& $this->addElement(
-            'select', 'segun', 'Según'
+            'select', 'segun', _('Según')
         );
         $sel->loadArray(
             array(
@@ -550,59 +548,58 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
                         array($pMostrar, $this->opciones, $this, &$ae, &$t)
                     );
                 } else {
-                    echo_esc("Falta $f de estadisticasIndFiltro[$k]");
+                    echo_esc(_("Falta") . " $f " 
+                        .  _("de") . " estadisticasIndFiltro[$k]");
                 }
             }
         }
 
         $ae = array();
         $sel =& $this->createElement(
-            'checkbox',
-            'departamento', 'Departamento', 'Departamento'
+            'checkbox', 'departamento', 'Departamento', _('Departamento')
         );
         $sel->setValue(true);
         $ae[] =& $sel;
 
         $sel =& $this->createElement(
-            'checkbox',
-            'municipio', 'Municipio', 'Municipio'
+            'checkbox', 'municipio', 'Municipio', _('Municipio')
         );
         $sel->setValue(true);
         $ae[] =& $sel;
-        $this->addGroup($ae, null, 'Ubicación', '&nbsp;', false);
+        $this->addGroup($ae, null, _('Ubicación'), '&nbsp;', false);
 
         $sel =& $this->addElement(
             'checkbox',
             'sin_cat_repetidas', 'Excluir  Categorias Repetidas',
-            'Excluir Categorias Repetidas'
+            _('Excluir Categorias Repetidas')
         );
 
         $ae = array();
         $t =& $this->createElement(
             'radio', 'muestra', 'tabla',
-            'Tabla HTML', 'tabla'
+            _('Tabla HTML'), 'tabla'
         );
         $ae[] =&  $t;
 
         $ae[] =&  $this->createElement(
             'radio', 'muestra', 'csv',
-            'Formato CSV (hoja de cálculo)', 'csv'
+            _('Formato CSV (hoja de cálculo)'), 'csv'
         );
-        $this->addGroup($ae, null, 'Forma de presentación', '&nbsp;', false);
+        $this->addGroup($ae, null, _('Forma de presentación'), '&nbsp;', false);
         $t->setChecked(true);
 
 
         $prevnext = array();
         $sel =& $this->createElement(
             'submit',
-            $this->getButtonName('consulta'), 'Consulta'
+            $this->getButtonName('consulta'), _('Consulta')
         );
         $prevnext[] =& $sel;
 
         $this->addGroup($prevnext, null, '', '&nbsp;', false);
 
         $tpie = "<div align=right><a href=\"index.php\">" .
-            "Menú Principal</a></div>";
+            _("Men&uacute; Principal") . "</a></div>";
         $e =& $this->addElement('header', null, $tpie);
 
 

@@ -17,8 +17,8 @@
 /**
  * Base para página con multiples subpáginas al capturar caso
  */
-require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . "/conf.php";
+require_once 'aut.php';
 require_once 'PagBaseSimple.php';
 require_once 'HTML/QuickForm/Action.php';
 
@@ -295,7 +295,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
         $this->controller->creaTabuladores($this, array('class' => 'flat'));
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no debería ser null");
+            die(_("Bug: idcaso no debería ser null"));
         }
 
         $comp = $idcaso == $GLOBALS['idbus'] ? 

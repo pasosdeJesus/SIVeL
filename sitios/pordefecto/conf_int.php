@@ -37,8 +37,9 @@ $GLOBALS['MENS_ORTOGRAFIA'] = 'Las palabras que estén bien por favor agreguelas
  * @global string $GLOBALS['REPORTA_FALLAS']
  */
 $GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">" 
-    .  _('Documentaci&oacute;n') 
-    . "</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>" . _("Por favor reporte fallas o requerimientos en el sistema de seguimiento disponible")
+    . _('Documentaci&oacute;n') 
+    . "</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>" 
+    . _("Por favor reporte fallas o requerimientos en el sistema de seguimiento disponible")
     . " <a href='http://sourceforge.net/tracker/?group_id=104373&atid=637817'>"
     . _("en l&iacute;nea") . "</a>";
 
@@ -102,17 +103,31 @@ $GLOBALS['pie_consulta_web_correo'] = '<hr/><a href="consulta_web.php">Consulta 
  */
 $GLOBALS['cabezote_principal'] = '';
 
+if (isset($_SESSION['LANG'])) {
+    //echo "OJO en pordefecto/conf_int.php SESSION[LANG]=" . $_SESSION[LANG] . "<br>";
+    $lang = $_SESSION['LANG'];
+    if (($pu = strpos($_SESSION['LANG'], '_')) > 0) {
+        $lang = substr($_SESSION['LANG'], 0, $pu);
+    }
+} else {
+    echo "<font color='red'>No hay idioma definido en sitios/pordefecto/conf_int.php<br>";
+    debug_print_backtrace();
+}
+
+if ($lang == "") {
+    $lang = "es";
+}
+
 /** Archivo HTML que se pone en el centro del menú principal
  * Dejar '' si no hay
  * @global string $GLOBALS['centro_principal']
  */
-$GLOBALS['centro_principal'] = 'centro_principal-' . $GLOBALS['LC_ALL'] 
-    . '.html';
+$GLOBALS['centro_principal'] = 'centro_principal-' . $lang . '.html';
 
 /** Imagen de fondo
  * @global string $GLOBALS['fondo']
  */
-$GLOBALS['fondo']= $dirsitio . '/fondo.jpg';
+$GLOBALS['fondo']= ''; #$dirsitio . '/fondo.jpg';
 
 
 

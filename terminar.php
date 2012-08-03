@@ -19,8 +19,14 @@
 /**
  * Cierra sesión de Sivel
  */
+
+require_once 'misc.php';
 require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
+$aut_usuario = "";
+$db = autenticaUsuario($dsn, $aut_usuario, 0);
+include_once $_SESSION['dirsitio'] . '/conf_int.php';
+
 require_once 'misc.php';
 
 cierraSesion($dsn);

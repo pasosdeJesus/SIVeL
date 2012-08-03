@@ -25,8 +25,8 @@ $db = autenticaUsuario($dsn, $aut_usuario, 65);
 echo '<table width="100%">'
     . '<td style="white-space: nowrap; background-color: #CCCCCC;" '
     . 'align="left" valign="top" colspan="2"><b>'
-    . '<div align=center>Reporte de casos repetidos ' . date('Y-m-d H:m') .
-    '</div></b></td></table><p/>';
+    . '<div align=center>' . _('Reporte de casos repetidos') . ' '
+    . date('Y-m-d H:m') . '</div></b></td></table><p/>';
 
 $res =& hace_consulta(
     $db, "SELECT c1.id, trim(c1.memo), count(c1.id) as num " .
@@ -36,7 +36,7 @@ $res =& hace_consulta(
 );
 
 echo "<table width='100%' border='1'><tr>" .
-    "<th width='50%'>Memo</th><th>Casos</th></tr>";
+    "<th width='50%'>" . _("Memo") . "</th><th>" . _("Casos") . "</th></tr>";
 $reg = array();
 while ($res->fetchInto($reg)) {
     echo "<tr><td>" . htmlentities($reg[1], ENT_COMPAT, 'UTF-8') . "</td><td>" .
@@ -55,6 +55,7 @@ echo "<p/>";
 echo '<table width="100%">'
     . '<td style="white-space: nowrap; background-color: #CCCCCC;" '
     . 'align="left" valign="top" colspan="2"><b><div align=right>'
-    . '<a href="index.php">Menú Principal</a></div></b></td></table>';
+    . '<a href="index.php">' ._('Men&uacute; Principal') 
+    . '</a></div></b></td></table>';
 
 ?>

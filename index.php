@@ -21,15 +21,15 @@
 require_once 'misc.php';
 require_once 'aut.php';
 include_once $_SESSION['dirsitio'] . '/conf.php';
+$aut_usuario = "";
+$db = autenticaUsuario($dsn, $aut_usuario, 0);
+include_once $_SESSION['dirsitio'] . '/conf_int.php';
+
+
 require_once 'HTML/Menu.php';
 require_once 'confv.php';
 require_once 'misc_caso.php';
 require_once 'PresentaMenuPrincipal.php';
-
-$aut_usuario = "";
-$db = autenticaUsuario($dsn, $aut_usuario, 0);
-
-include_once $_SESSION['dirsitio'] . '/conf_int.php';
 
 
 /**

@@ -688,7 +688,7 @@ class ResConsulta
             && $GLOBALS['consulta_web_max'] > 0
             && $tot > $GLOBALS['consulta_web_max']
         ) {
-            echo _("Consulta de ") . (int)$tot . _(" casos") .".<br>";
+            echo _("Consulta de") . " " . (int)$tot . " " . _("casos") .".<br>";
             die(
                 _("Por favor refine su consulta para que sean menos de") 
                 . " " .  $GLOBALS['consulta_web_max']
@@ -734,7 +734,7 @@ class ResConsulta
             );
             echo "<html><head><title>Tabla</title></head>";
             echo "<body>";
-            echo "Consulta de " . (int)$tot . " casos. ";
+            echo _("Consulta de") . " " . (int)$tot . " casos. ";
             echo "<p><table border=1 cellspacing=0 cellpadding=5>";
             $html_renglon = "<tr>";
             $rtexto = "";

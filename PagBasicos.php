@@ -246,9 +246,9 @@ class EliminaCaso extends HTML_QuickForm_Action
     {
         $htmljs = new HTML_Javascript();
         echo $htmljs->startScript();
-        echo $htmljs->confirm(
-            'Confirma eliminación del caso ' .
-            (int)$_SESSION['basicos_id'] . '?', 'eliminar'
+        echo $htmljs->confirm(sprintf(
+            _('¿Confirma eliminación del caso %s?'), 
+            (int)$_SESSION['basicos_id']), 'eliminar'
         );
         echo $htmljs->write('eliminar', true);
         echo $htmljs->_out(
@@ -295,9 +295,10 @@ class Busqueda extends HTML_QuickForm_Action
 
         $dCaso->id = $GLOBALS['idbus'];
         if ($dCaso->find() == 0) {
-            die("Problema debería haber un registro en caso con id = " .
+            die(sprintf(
+                "Problema debería haber un registro en caso con id = %s",
                 $GLOBALS['idbus']
-            );
+            ));
         }
         $dCaso->fetch();
         $w = "";
@@ -434,7 +435,7 @@ class ReporteGeneral extends HTML_QuickForm_Action
     static function reporte($idcaso)
     {
         echo "<html><head>";
-        echo "<title>Reporte General del caso " . (int)$idcaso
+        echo "<title>" . sprintf(_("Reporte General del caso %s"), (int)$idcaso)
             . "</title></head>";
         echo "<body>";
         $r = valida_caso($idcaso);
@@ -446,9 +447,10 @@ class ReporteGeneral extends HTML_QuickForm_Action
         echo $html_rep;
         echo "</pre>";
         echo "<hr>";
-        echo '<a href = "captura_caso.php">Volver al Caso</a> | ';
-        echo '<a href = "captura_caso.php?limpia=1">Caso Nuevo</a> | ';
-        echo '<a href = "index.php">Menu</a>';
+        echo '<a href = "captura_caso.php">' . _('Volver al Caso') . '</a> | ';
+        echo '<a href = "captura_caso.php?limpia=1">' . _('Caso Nuevo') 
+            . '</a> | ';
+        echo '<a href = "index.php">' . _('Menú') . '</a>';
         echo "</body></html>";
     }
 
@@ -463,7 +465,7 @@ class ReporteGeneral extends HTML_QuickForm_Action
     function perform(&$page, $actionName)
     {
         if (($pdest = $page->controller->getPage($actionName)) == null) {
-            die("No existe en el controlador la página $actionName");
+            die(_("No existe en el controlador la página") . $actionName);
         }
         if ($page->procesa($page->_submitValues)) {
             $this->reporte($_SESSION['basicos_id']);
@@ -585,8 +587,9 @@ class PagBasicos extends PagBaseSimple
         // Si ya existía lo carga
         if (isset($dcaso->id)) {
             if (($e = $dcaso->find()) != 1 && $dcaso->id != $GLOBALS['idbus']) {
-                die("Se esperaba un sólo registro, pero se encontraron $e (" .
-                    $dcaso->id.")"
+                die(
+                    _("Se esperaba un sólo registro, pero se encontraron")
+                   . " $e (" .  $dcaso->id . ")"
                 );
             } else if ($e != 0 || $dcaso->id != $GLOBALS['idbus']) {
                 $dcaso->fetch();
@@ -651,7 +654,7 @@ class PagBasicos extends PagBaseSimple
             $this->addElement('hidden', 'id', $GLOBALS['idbus']);
 
             $e =& $this->addElement(
-                'date', 'fini', 'Fecha inicial',
+                'date', 'fini', _('Fecha inicial'),
                 array('language' => 'es', 'addEmptyOption' => true,
                 'minYear' => $GLOBALS['anio_min']
                 )
@@ -665,7 +668,7 @@ class PagBasicos extends PagBaseSimple
             }
             $this->_defaultValues['fini'] = $v;
             $e =& $this->addElement(
-                'date', 'ffin', 'Fecha final',
+                'date', 'ffin', _('Fecha final'),
                 array('language' => 'es', 'addEmptyOption' => true,
                 'minYear' => $GLOBALS['anio_min']
                 )
@@ -683,7 +686,7 @@ class PagBasicos extends PagBaseSimple
             $this->bcaso->_do->defSinInf = false;
         } else { // Nuevo o actualización
             $ed = array();
-            $tid =& $this->createElement('static', 'id', 'No. Caso: ');
+            $tid =& $this->createElement('static', 'id', _('No. Caso') . ': ');
             $ed[] =& $tid;
             $tid =& $this->createElement(
                 'text', 'busid',

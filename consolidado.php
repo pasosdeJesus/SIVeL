@@ -19,6 +19,11 @@
 
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
+$aut_usuario = "";
+autenticaUsuario($dsn, $aut_usuario, 43);
+
+require_once $_SESSION['dirsitio'] . "/conf_int.php";
+
 require_once 'HTML/QuickForm/Controller.php';
 require_once 'HTML/QuickForm/Action/Display.php';
 require_once 'HTML/QuickForm/Action/Next.php';
@@ -196,7 +201,10 @@ class AccionConsolidado extends HTML_QuickForm_Action
                     array($db, &$where, &$tablas)
                 );
             } else {
-                echo_esc("Falta consolidadoCreaConsulta en $ntab, $ctab");
+                echo_esc(
+                    _("Falta") . " consolidadoCreaConsulta "
+                    . _("en") . " $ntab, $ctab"
+                );
             }
         }
         if (isset($GLOBALS['gancho_co_creaconsulta'])) {
@@ -207,7 +215,10 @@ class AccionConsolidado extends HTML_QuickForm_Action
                         array($db, &$where, &$tablas)
                     );
                 } else {
-                    echo_esc("Falta $f de gancho_co_creaconsulta[$k]");
+                    echo_esc(
+                        _("Falta") ." $f " . _("de") 
+                        . " gancho_co_creaconsulta[$k]"
+                    );
                 }
             }
         }
@@ -244,7 +255,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             die($ncol->getMessage());
         }
         if ($ncol <= 0) {
-            die('Falta información para reporte consolidado en tabla categoria');
+            die(_('Falta información para reporte consolidado en tabla categoria'));
         }
         $d->orderBy('id');
         $d->find();
@@ -261,7 +272,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         ksort($cataux);
         if ($pMuestra == "tabla") {
             $this->depTabla($db, $cataux, $pResto, $ncol);
-            echo "<p>Presuntos Responsables<br>";
+            echo "<p>" . _("Presuntos Responsables") . "<br>";
         }
         $this->muestraPresp($db, $r_presp, $pMuestra == "tabla");
         $cat = $cataux;
@@ -362,14 +373,17 @@ class AccionConsolidado extends HTML_QuickForm_Action
             if ($depuraConsolidado) {
                 echo "<td>IdCaso</td><td>IdVic</td>";
             }
-            echo "<th>Fecha</th><th>Ubicación</th><th>Víctimas</th>";
+            echo "<th>" . _("Fecha") . "</th><th>" . _("Ubicación")
+                . "</th><th>" . _("Víctimas") . "</th>";
         } elseif ($pMuestra == "csv") {
             header("Content-type: text/csv");
-            echo '"Fecha", "Ubicación", "Víctimas", ""';
+            echo '"' . _('Fecha') . '", "' . _('Ubicación') . '", "'
+                . _('Víctimas') . '", ""';
         } elseif ($pMuestra == 'latex') {
             //header("Content-type: application/x-latex");
             echo "<pre>";
-            echo '\\textbf{Fecha} & \\textbf{Ubicacion} & \\textbf{Víctimas} ';
+            echo '\\textbf{' . _('Fecha') . '} & \\textbf{' . _('Ubicacion')
+                . '} & \\textbf{' . _('Víctimas') . '} ';
         }
         foreach ($cat as $html_idcat => $cp) {
             if ($pResto || $html_idcat != chr($ncol+65)) {
@@ -381,7 +395,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                     echo "& \\textbf{" . $html_idcat . "} ";
                 }
             }
-            $suma[$idcat]=0;
+            $suma[$html_idcat]=0;
         }
         if ($pMuestra == "tabla") {
             echo "<td>PR</td></tr>";
@@ -400,8 +414,12 @@ class AccionConsolidado extends HTML_QuickForm_Action
             $u =&  objeto_tabla('ubicacion');
             $u->id_caso = $idcaso;
             if ($u->find() == 0) {
-                die("<br/><font color='red'>Caso sin ubicacion: " .
-                    "$idcaso -- estadística incompleta!!!</font>"
+                die("<br/><font color='red'>" . 
+                    sprintf(
+                        _("Caso sin ubicacion: %s --estadística incompleta"),
+                        $idcaso
+                    )
+                    .  "</font>"
                 );
             }
             $u->fetch();
@@ -412,10 +430,10 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 $m->id = $u->id_municipio;
                 $m->id_departamento = $u->id_departamento;
                 if ($m->find()==0) {
-                    die("Caso " . $idcaso .
-                        " referencia municipio inexistente " .
-                        $m->id.", " . $m->id_departamento
-                    );
+                    die(sprintf(
+                        "El caso %s referencia municipio inexistente %s",
+                        $idcaso, $m->id . ", " . $m->id_departamento
+                    ));
                 }
                 $m->fetch();
                 $ubi .= " - ".trim($m->nombre);
@@ -453,10 +471,11 @@ class AccionConsolidado extends HTML_QuickForm_Action
                     if ($dv[$idcaso][$idvic][$idcat] == 1) {
                         $suma[$idcat]++;
                     } else {
-                        die("Sobreconteo por caso " . $idcaso .
-                            " que saldría más de una vez en la columna " .
-                            $idcat
-                        );
+                        die(sprintf(
+                            "Sobreconteo por caso %s "
+                            . " que saldría más de una vez en la columna %s",
+                            $idcaso, $idcat
+                        ));
                     }
                     $dv[$idcaso][$idvic][$idcat]++;
                 } else {
@@ -476,10 +495,11 @@ class AccionConsolidado extends HTML_QuickForm_Action
             $acto->id_caso = $idcaso;
             if ($acto->find()==0) {
                 $acto = null;
-                echo_esc(
-                    "Víctima sin presunto responsable '$idvic', "
-                    . "'$nom' en caso '$idcaso' -- estadística incompleta!!!"
-                );
+                echo_esc(sprintf(
+                    "Víctima sin presunto responsable '%s', "
+                    . "'%s' en caso '%s' -- estadística incompleta!!!", 
+                    $idvic, $nom, $idcaso
+                ));
             } else {
                 $apr = array();
                 $pr_sep = $presp = "";
@@ -577,7 +597,7 @@ class PagConsolidado extends HTML_QuickForm_Page
         $x =&  objeto_tabla('departamento');
         $db = $x->getDatabaseConnection();
 
-        $e =& $this->addElement('header', null, 'Reporte consolidado');
+        $e =& $this->addElement('header', null, _('Reporte consolidado'));
 
         list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
             $db, $this, 'victimaIndividual',
@@ -594,13 +614,13 @@ class PagConsolidado extends HTML_QuickForm_Page
             $cy = 2005;
         }
         $e =& $this->addElement(
-            'date', 'fini', 'Desde: ',
+            'date', 'fini', _('Desde'),
             array('language' => 'es', 'addEmptyOption' => true,
             'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
             )
         );
         $e =& $this->addElement(
-            'date', 'ffin', 'Hasta',
+            'date', 'ffin', _('Hasta'),
             array('language' => 'es', 'addEmptyOption' => true,
             'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
             )
@@ -627,21 +647,23 @@ class PagConsolidado extends HTML_QuickForm_Page
             if (in_array(42, $_SESSION['opciones'])) {
                 $e =& $this->addElement(
                     'date', 'fincdesde',
-                    'Ingresado en base desde', array('language' => 'es',
+                    _('Ingresado en base desde'), 
+                    array('language' => 'es',
                     'addEmptyOption' => true,
                     'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
                     )
                 );
                 $e =& $this->addElement(
                     'date', 'finchasta',
-                    'Ingresado en base hasta', array('language' => 'es',
+                    _('Ingresado en base hasta'), 
+                    array('language' => 'es',
                     'addEmptyOption' => true,
                     'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
                     )
                 );
                 $e =& $this->addElement(
                     'checkbox', 'resto',
-                    'Agregar columna con resto', ''
+                    _('Agregar columna con resto'), ''
                 );
             }
         }
@@ -649,31 +671,31 @@ class PagConsolidado extends HTML_QuickForm_Page
         $ae = array();
         $t =&  $this->createElement(
             'radio', 'muestra', 'tabla',
-            'Tabla HTML', 'tabla'
+            _('Tabla HTML'), 'tabla'
         );
         $ae[] =& $t;
         $ae[] =&  $this->createElement(
             'radio', 'muestra', 'csv',
-            'Formato CSV (hoja de cálculo)', 'csv'
+            _('Formato CSV (hoja de cálculo)'), 'csv'
         );
         $ae[] =&  $this->createElement(
             'radio', 'muestra', 'latex',
-            'LaTeX', 'latex'
+            _L('LaTeX'), 'latex'
         );
-        $this->addGroup($ae, null, 'Forma de presentación', '&nbsp;', false);
+        $this->addGroup($ae, null, _('Forma de presentación'), '&nbsp;', false);
         $t->setChecked(true);
 
         $prevnext = array();
         $sel =& $this->createElement(
             'submit',
-            $this->getButtonName('consulta'), 'Consulta'
+            $this->getButtonName('consulta'), _('Consulta')
         );
         $prevnext[] =& $sel;
 
         $this->addGroup($prevnext, null, '', '&nbsp;', false);
 
         $tpie = "<div align=right><a href=\"index.php\">" .
-            "Menú Principal</a></div>";
+            _("Men&uacute; Principal") . "</a></div>";
         $e =& $this->addElement('header', null, $tpie);
 
         if (!isset($_POST['evita_csrf'])) {
@@ -686,9 +708,6 @@ class PagConsolidado extends HTML_QuickForm_Page
     }
 
 }
-
-$aut_usuario = "";
-autenticaUsuario($dsn, $aut_usuario, 43);
 
 $wizard =& new HTML_QuickForm_Controller('Consolidado', false);
 $consweb = new PagConsolidado();

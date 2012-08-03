@@ -82,13 +82,16 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
         if ($cargaCaso) {
             $idcaso =& $_SESSION['basicos_id'];
             if (!isset($idcaso) || $idcaso == null) {
-                die("Bug: idcaso no debería ser null");
+                die(_("Bug: idcaso no debería ser null"));
             }
             $dcaso->id = $idcaso;
             if (($e = $dcaso->find()) != 1
                 && $idcaso != $GLOBALS['idbus']
             ) {
-                die("Se esperaba un sólo registro, pero se encontraron $e.");
+                die(sprintf(
+                    _("Se esperaba un sólo registro, pero se encontraron %s."),
+                    $e
+                ));
             }
             $dcaso->fetch();
         }

@@ -16,14 +16,16 @@
 /** Actualiza base de datos después de actualizar fuentes */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
-require_once 'sitios/pordefecto/conf_int.php';
+
+$aut_usuario = "";
+$db = autenticaUsuario($dsn, $aut_usuario, 21);
+
+require_once $_SESSION['dirsitio'] . '/conf_int.php';
 require_once "confv.php";
 require_once "misc.php";
 require_once "DataObjects/Categoria.php";
 require_once "misc_actualiza.php";
 
-$aut_usuario = "";
-$db = autenticaUsuario($dsn, $aut_usuario, 21);
 if (!in_array(63, $_SESSION['opciones'])) {
     hace_consulta(
         $db, "INSERT INTO opcion VALUES ('63', 'Actualizar', '60', " .
@@ -2023,8 +2025,10 @@ if (isset($GLOBALS['menu_tablas_basicas'])) {
     }
     if (!$hayrep) {
         echo "<font color='red'>En el arreglo <tt>menu_tablas_basicas</tt> " .
-            "del archivo <tt>" . htmlentities($_SESSION['dirsitio'], ENT_COMPAT, 'UTF-8')
-            . "</tt> falta:
+            "del archivo <tt>" . 
+            htmlentities(
+                $_SESSION['dirsitio'] . "/conf.php", ENT_COMPAT, 'UTF-8'
+            ) . "</tt> falta:
 <pre>
     array('title' => 'Reportes', 'url'=> null, 'sub' => array(
         array('title'=>'Columnas de Reporte Consolidado',

@@ -491,7 +491,7 @@ function error_valida($msg, $valores, $iderr = '')
  *
  * @return void
  */
-function resValida(&$db, $mens, $cons, $confunc = false)
+function res_valida(&$db, $mens, $cons, $confunc = false)
 {
     if ($confunc) {
         hace_consulta(

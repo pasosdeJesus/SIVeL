@@ -15,8 +15,17 @@
  */
 
 require_once "aut.php";
-require_once $_SESSION['dirsitio'] . "/conf.php";
 require_once "confv.php";
+require_once $_SESSION['dirsitio'] . "/conf.php";
+
+global $dsn;
+if (!isset($dsn)) {
+    die("Se esperaba que dsn estuviera definido");
+}
+$aut_usuario = "";
+$accno = "";
+autenticaUsuario($dsn, $aut_usuario, 31);
+
 
 require_once 'HTML/QuickForm/Controller.php';
 require_once 'HTML/QuickForm/Action/Direct.php';
@@ -195,7 +204,7 @@ class CapturaCaso extends HTML_QuickForm_Controller
         $this->_botonElimina   = _('Elimina caso');
         $this->_botonReporte   = _('Val. y Rep. Gen.');
         $this->_botonMenu      = _('Menú');
-        $this->_botonCasoNuevo  = _('Caso nuevo');
+        $this->_botonCasoNuevo  = _('Caso Nuevo');
         $this->_botonBusqueda  = _('Buscar');
 
         $this->opciones = $opciones;
@@ -469,14 +478,6 @@ class CapturaCaso extends HTML_QuickForm_Controller
 
 
 }
-
-global $dsn;
-if (!isset($dsn)) {
-    include_once $_SESSION['dirsitio'] . "/conf.php";
-}
-$aut_usuario = "";
-$accno = "";
-autenticaUsuario($dsn, $aut_usuario, 31);
 
 if (isset($_GET['limpia']) && $_GET['limpia'] == 1) {
     unset_var_session();

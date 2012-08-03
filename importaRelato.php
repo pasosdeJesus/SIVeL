@@ -83,8 +83,9 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             .  " WHERE nombre = 'IMPORTA_RELATO'"
         );
         if ($idetiqueta == 0) {
-            die("Debe haber una etiqueta IMPORTA_RELATO. "
-                . " Favor <a href='actualiza.php'>actualizar</a>."
+            die(_("Debe haber una etiqueta IMPORTA_RELATO.") . " "
+                . _("Favor") . " <a href='actualiza.php'>" 
+                . _("actualizar") . "</a>."
             );
         }
         $iderrorimportacion = (int)$db->getOne(
@@ -92,8 +93,9 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             . " WHERE nombre = 'ERROR_IMPORTACIÓN'"
         );
         if ($iderrorimportacion == 0) {
-            die("Debe haber una etiqueta ERROR_IMPORTACIÓN. "
-                . " Favor <a href='actualiza.php'>actualizar</a>."
+            die(_("Debe haber una etiqueta ERROR_IMPORTACIÓN.") . " "
+                . _("Favor") . " <a href='actualiza.php'>"
+                . _("actualizar") . "</a>."
             );
         }
 
@@ -108,10 +110,10 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         if ($e['size'] <= 0) {
             $u = ini_get('upload_max_filesize');
             $p = ini_get('post_max_size');
-            die(
+            die(sprintf(
                 "No pudo subirse archivo, revisar que el tamaño sea "
-                . "mayor que cero y menor que $u y que $p"
-            );
+                . "mayor que cero y menor que %s y que %s", $u, $p
+            ));
         }
         move_uploaded_file(
             $e['tmp_name'], $GLOBALS['dir_anexos'] . "/" .
@@ -124,8 +126,8 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         $cont = "";
         if (substr($pArchivo, strlen($pArchivo) - 3, 3) == '.gz') {
             if (!function_exists('readgzfile')) {
-                die("Falta soporte para Zlib en su instalación de PHP. "
-                    . " Descomprima manualmente e importe el descomprimido"
+                die(_("Falta soporte para Zlib en su instalación de PHP.") . " "
+                    . _("Descomprima manualmente e importe el descomprimido")
                 );
             }
             $narc = $GLOBALS['dir_anexos'] . "/$pArchivo";
@@ -244,7 +246,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $orgfuente = PagFuentesFrecuentes::busca_inserta(
                 $db, $idcaso, $nomf, $fecha,
                 utf8_decode($r->id_relato),
-                'Organización responsable incluida automáticamente',
+                _('Organización responsable incluida automáticamente'),
                 '', $obs
             );
             if ($orgfuente > 0) {
@@ -262,7 +264,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 $orgfuente = PagOtrasFuentes::busca_inserta(
                     $db, $idcaso, $nomf, $fecha,
                     utf8_decode($r->id_relato),
-                    'Organización responsable incluida automáticamente',
+                    _('Organización responsable incluida automáticamente'),
                     'Indirecta', $obs
                 );
                 $anexof->id_fuente_directa = $orgfuente;
@@ -369,9 +371,9 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             foreach ($r->victima as $victima) {
                 if (!empty($victima->id_persona)) {
                     if (!isset($id_pers[(string)$victima->id_persona])) {
-                        repObs(
-                            "Acto: No hay definida persona con id '" .
-                            (string)$acto->id_victima_individual .  "'",
+                        repObs(sprintf(
+                            _("Acto: No hay definida persona con id '%s'",
+                            (string)$acto->id_victima_individual)),
                             $obs
                         );
                     } else {
@@ -457,7 +459,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     if (!$dvictima->insert()) {
                         //var_dump($dvictima);
                         repObs(
-                            "No pudo insertar víctima '"
+                            _("No pudo insertar víctima") ." '"
                             . $dvictima->id_persona . " "
                             . $dvictima->getMessage() . " "
                             .  $dvictima->getUserInfo()
@@ -514,7 +516,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         );
                     } else {
                         repObs(
-                            "No hay datos de p. resp. '" .
+                            _("No hay datos de p. resp.") . " '" .
                             $idp . "'", $obs
                         );
                         break;
@@ -534,7 +536,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         $dacto->id_categoria = $id_categoria;
                         if (!isset($id_pers[(string)$acto->id_victima_individual])) {
                             repObs(
-                                "No hay definida persona con id. '" .
+                                _("No hay definida persona con id.") ." '" .
                                 ((string)$acto->id_victima_individual) . "'",
                                 $obs
                             );
@@ -563,17 +565,18 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         $dactocolectivo->id_grupoper = $cg;
                         if (!$dactocolectivo->insert()) {
                             repObs(
-                                "Acto: No pudo insertar acto col. '$cg', '"
+                                _("Acto: No pudo insertar acto col.") 
+                                . " '$cg', '"
                                 . ((string)$acto->id_grupo_victima) . "'",
                                 $obs
                             );
                         }
                     } else {
-                        repObs("No es individual ni colectiva", $obs);
+                        repObs(_("No es individual ni colectiva"), $obs);
                         print_r($acto);
                     }
                 } else {
-                    repObs("Agresión particular vacía", $obs);
+                    repObs(_("Agresión particular vacía"), $obs);
                 }
             }
             $yaesta['PagActo'] = true;
@@ -608,7 +611,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             array($db, $r, $idcaso, $obs)
                         );
                     } else {
-                        echo_esc("Falta importaRelato en $n, $c");
+                        echo_esc(_("Falta importaRelato en") . " $n, $c");
                     }
                 }
             }
@@ -619,7 +622,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 $GLOBALS['cw_ncampos'] + array('m_fuentes' => 'Fuentes')
             );
             echo "<hr><pre>$html_rep</pre>";
-            echo_esc("Observaciones: $obs");
+            echo_esc(_("Observaciones"). ": $obs");
 
             $ec = objeto_tabla('etiquetacaso');
             $ec->fecha = date('Y-m-d');
@@ -671,17 +674,18 @@ class PagImportaRelato extends HTML_QuickForm_Page
     function PagImportaRelato()
     {
         if (!isset($GLOBALS['dir_anexos'])) {
-            die("Se requiere módulo anexos con variable dir_anexos");
+            die(_("Se requiere módulo anexos con variable dir_anexos"));
         }
         if (!is_writable($GLOBALS['dir_anexos'])) {
-            die("El directorio '" . $GLOBALS['dir_anexos'] .
-                " debería permitir escritura"
-            );
+            die(sprintf(
+                _("El directorio '%s' debería permitir escritura"), 
+                $GLOBALS['dir_anexos'] 
+            ));
         }
 
         $ec =& objeto_tabla('etiquetacaso');
         if (PEAR::isError($ec)) {
-            echo "Se requiere módulo etiquetas";
+            echo _("Se requiere módulo etiquetas");
         }
 
         $this->HTML_QuickForm_Page('importaRelato', 'post', '_self', null);
@@ -702,14 +706,14 @@ class PagImportaRelato extends HTML_QuickForm_Page
 
         $e =& $this->addElement(
             'header', null,
-            'Importa Relatos'
+            _('Importa Relatos')
         );
 
         //    $e =& $this->addElement('static', 'fini', 'Victimas ');
 
         $archivo_sel =& $this->addElement(
             'file', 'archivo_sel',
-            'Archivo con relatos'
+            _('Archivo con relatos')
         );
 
         agrega_control_CSRF($this);
@@ -717,7 +721,7 @@ class PagImportaRelato extends HTML_QuickForm_Page
         $prevnext = array();
         $sel =& $this->createElement(
             'submit',
-            $this->getButtonName('importa'), 'Importar'
+            $this->getButtonName('importa'), _('Importar')
         );
         $prevnext[] =& $sel;
 
@@ -727,7 +731,7 @@ class PagImportaRelato extends HTML_QuickForm_Page
         $this->setDefaultAction('importa');
 
         $tpie = "<div align=right><a href=\"index.php\">" .
-            "Menú Principal</a></div>";
+            _("Men&uacute; Principal") . "</a></div>";
         $e =& $this->addElement('header', null, $tpie);
 
     }

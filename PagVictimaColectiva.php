@@ -20,6 +20,8 @@
 
 require_once 'PagBaseMultiple.php';
 require_once 'ResConsulta.php';
+require_once 'aut.php';
+require_once $_SESSION['dirsitio'] . "/conf.php";
 
 /**
  * Víctima Colectiva.
@@ -278,8 +280,9 @@ class PagVictimaColectiva extends PagBaseMultiple
 
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
-
-        $this->titulo = $GLOBALS['etiqueta']['victimas_colectivas'];
+        if (isset($GLOBALS['etiqueta']['victimas_colectivas'])) {
+            $this->titulo = $GLOBALS['etiqueta']['victimas_colectivas'];
+        }
     }
 
 

@@ -33,13 +33,28 @@ require_once "confv.php";
  *
  * @return void
  **/
-function idioma($l = "es")
+function idioma($l = "es_CO")
 {
-    putenv("LC_ALL=$l");
+    //echo "OJO idioma($l)<br>";
+    $td = 'sivel';
     $GLOBALS['LC_ALL'] = $l;
+    $_SESSION['LANG'] = $l;
+    putenv("LANGUAGE=$l");
+    putenv("LANG=$l");
+    putenv("LC_ALL=$l");
+    putenv("LC_MESSAGESL=$l");
     setlocale(LC_ALL, $l);
-    bindtextdomain("sivel", "./locale");
-    textdomain("sivel");
+    setlocale(LC_CTYPE, $l);
+    $locales_dir = dirname(__FILE__).'/locale';
+    $locales_dir = './locale';
+    bindtextdomain($td,$locales_dir);
+    bind_textdomain_codeset($td, 'UTF-8'); 
+    textdomain($td);
+    if ($l == "en_US" && "Fuente" == _("Fuente")) {
+        echo"Error al inicializar idioma"; 
+        debug_print_backtrace();
+        die();
+    }
 }
 
 
@@ -54,9 +69,10 @@ function loginFunction()
         htmlspecialchars($_SERVER['PHP_SELF']) . "\">";
     echo "<table border='0'>";
     echo "<tr><td bgcolor='#c0c0c0' colspan='2'>Autenticaci&oacute;n</td></tr>";
-    echo "<tr><td>Usuario:</td><td><input type=\"text\" name=\"username\">" .
-        "</td></tr>";
-    echo "<tr><td>Clave:</td><td><input type=\"password\" name=\"password\">" .
+    echo "<tr><td>" .  _("Usuario") 
+        . ":</td><td><input type=\"text\" name=\"username\"></td></tr>";
+    echo "<tr><td>" . _("Clave")
+        . ":</td><td><input type=\"password\" name=\"password\">" .
         "<br></td></tr>";
     echo "<tr><td colspan='2' align='center'><input type=\"submit\" " .
         "value=\"Enviar\"></tr></td>";
@@ -170,7 +186,7 @@ function nomSesion()
  */
 function autenticaUsuario($dsn,  &$usuario, $opcion)
 {
-    $accno = "Acceso no autorizado";
+    $accno = _("Acceso no autorizado");
     $snru = nomSesion();
     if (!isset($_SESSION) || session_name() != $snru) {
         session_name($snru);
@@ -231,13 +247,13 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
             }
             $_SESSION['id_funcionario'] = $idf;
         }
-        idioma("en");
+        idioma("en_US");
         if (in_array($opcion, $_SESSION['opciones'])) {
             return $db;
         }
         die($accno . " (1)");
     } else {
-        idioma("en");
+        idioma("en_US");
         if (isset($_POST['username']) && isset($_POST['password'])) {
             $params = array(
                 "dsn" => $dsn,

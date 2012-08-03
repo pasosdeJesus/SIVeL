@@ -49,6 +49,8 @@ $b->createSubmit = 0;
 $b->useMutators = true;
 $f = $b->getForm(htmlspecialchars($_SERVER['REQUEST_URI']));
 $f->setRequiredNote($mreq);
+$h =& $f->getElement('__header__');
+$h->setText(_($d->nom_tabla));
 
 $ed = array();
 if (!isset($_GET['id'])) {

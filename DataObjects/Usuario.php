@@ -51,6 +51,7 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
     {
         parent::__construct();
 
+        $this->nom_tabla = _("Usuario");
         $this->fb_fieldLabels= array(
            'id_usuario' => _('Identificación'),
            'password' => _('Clave'),
@@ -121,7 +122,6 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
      */
     function preGenerateForm(&$formbuilder)
     {
-
         $formbuilder->enumOptionsCallback = array($this,
             "enumCallback"
         );
