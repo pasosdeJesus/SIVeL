@@ -108,7 +108,7 @@ class PagOtrasFuentes extends PagBaseMultiple
         $db =& $do->getDatabaseConnection();
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no debería ser null");
+            die(_("Bug: idcaso no debería ser null"));
         }
         $do->id_caso = $idcaso;
 
@@ -154,10 +154,10 @@ class PagOtrasFuentes extends PagBaseMultiple
         );
 
         if ($this->bfuente_directa_caso == null) {
-            die("bfuente_directa_caso es null");
+            die("bfuente_directa_caso " . _("es null"));
         }
         if ($this->bfuente_directa == null) {
-            die("bfuente_directa es null");
+            die("bfuente_directa " . _("es null"));
         }
 
         return $db;

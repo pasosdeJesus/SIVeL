@@ -963,7 +963,7 @@ function runController()
         require_once $_SESSION['dirsitio'] . "/conf_int.php";
     }
 
-    $wizard =& new HTML_QuickForm_Controller('Consulta', false);
+    $wizard = new HTML_QuickForm_Controller('Consulta', false);
     $consweb = new ConsultaWeb($opciones);
 
     $wizard->addPage($consweb);

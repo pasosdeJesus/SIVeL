@@ -169,7 +169,7 @@ class PagVictimaIndividual extends PagBaseMultiple
     {
         $id_persona = null;
         if (isset($aper) && count($aper) == 1) {
-            list($id_persona) = each($aper);
+            $id_persona = $aper[0];
         }
         $dvictima=& objeto_tabla('victima');
         $dpersona=& objeto_tabla('persona');
@@ -180,7 +180,7 @@ class PagVictimaIndividual extends PagBaseMultiple
 
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no debería ser null");
+            die(_("Bug: idcaso no debería ser null"));
         }
 
         $idp = array();

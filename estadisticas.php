@@ -344,7 +344,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             echo "</table>";
             if ($nf > 0) {
                 echo '<div align = "right"><a href = "index.php">' .
-                    '<b>Menú principal</b></a></div>';
+                    '<b>' . _('Men&uacute; Principal') . '</b></a></div>';
             }
             pie_envia();
         } else { // CSV
@@ -534,7 +534,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
             if (is_callable(array($c, 'estadisticasIndFiltro'))) {
                 call_user_func_array(
                     array($c, 'estadisticasIndFiltro'),
-                    array($db, $this)
+                    array(&$db, &$this)
                 );
             } else {
                 echo_esc("Falta estadisticasIndFiltro en $n, $c");
@@ -570,8 +570,8 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
 
         $sel =& $this->addElement(
             'checkbox',
-            'sin_cat_repetidas', 'Excluir  Categorias Repetidas',
-            _('Excluir Categorias Repetidas')
+            'sin_cat_repetidas', _('Categorias Repetidas'),
+            _('Excluir')
         );
 
         $ae = array();
@@ -614,7 +614,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
 $aut_usuario = "";
 autenticaUsuario($dsn, $aut_usuario, 21);
 
-$wizard =& new HTML_QuickForm_Controller('EstadisticasInd', false);
+$wizard = new HTML_QuickForm_Controller('EstadisticasInd', false);
 $consweb = new PagEstadisticasInd($mreq);
 
 $wizard->addPage($consweb);

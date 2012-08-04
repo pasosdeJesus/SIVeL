@@ -123,7 +123,7 @@ class PagPResponsables extends PagBaseMultiple
         $db =& $drespCaso->getDatabaseConnection();
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no debería ser null");
+            die(_("Bug: idcaso no debería ser null"));
         }
 
         $idp = array();

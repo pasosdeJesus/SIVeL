@@ -42,7 +42,7 @@ $db = autenticaUsuario($dsn, $aut_usuario, 63);
 
 echo '<table width="100%"><td style="white-space: nowrap; '
     . 'background-color: #CCCCCC;" align="left" valign="top" colspan="2">'
-    . '<b><div align=center>Actualizando</div></b></td></table>';
+    . '<b><div align=center>' . _('Actualizando') . '</div></b></td></table>';
 echo "Preactualizando sitio<br>";
 $ap = $_SESSION['dirsitio'] . '/preactualiza.php';
 if (file_exists($ap)) {
@@ -1993,15 +1993,12 @@ if (!aplicado($idac)) {
         . " VARCHAR(6) NOT NULL DEFAULT 'es_CO'", false
     );
 
-    die("x");
-    aplicaact(
-        $act, $idac, 'Idioma preferido por usuario'
-    );
+//    aplicaact( $act, $idac, 'Idioma preferido por usuario');
 }
 
 
 
-echo "Revisando variables de configuración PHP...<br>";
+/*echo "Revisando variables de configuración PHP...<br>";
 $vplant = extraeVarPHP('sitios/pordefecto/conf.php.plantilla');
 $vconf = extraeVarPHP($_SESSION['dirsitio'] . '/conf.php');
 $vc ="";
@@ -2028,7 +2025,7 @@ if ($vc != "") {
     echo "</pre><hr/></font></blockquote>";
     die("");
 }
-
+ */
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {
@@ -2198,6 +2195,7 @@ if (file_exists($ap)) {
 
 echo '<table width="100%"><td style="white-space: nowrap; '
     . 'background-color: #CCCCCC;" align="left" valign="top" colspan="2">'
-    . '<b><div align=right><a href="index.php">Menú Principal</a></div></b>'
+    . '<b><div align=right><a href="index.php">' 
+    . _('Men&uacute; Principal') . '</a></div></b>'
     . '</td></table>';
 ?>

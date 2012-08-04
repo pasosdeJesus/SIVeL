@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sivel 1.2\n"
 "Report-Msgid-Bugs-To: vtamara@pasosdeJesus.org\n"
-"POT-Creation-Date: 2012-08-03 05:29-0500\n"
+"POT-Creation-Date: 2012-08-04 12:29-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,35 +21,37 @@ msgstr ""
 msgid "Definir etiquetas en fb_fieldLabels"
 msgstr ""
 
-#: PagActo.php:217 PagBaseMultiple.php:298 PagBaseSimple.php:85
+#: PagActo.php:219 PagBaseMultiple.php:298 PagBaseSimple.php:94
+#: PagOtrasFuentes.php:111 PagPResponsables.php:126 PagUbicacion.php:189
+#: PagVictimaColectiva.php:171 PagVictimaIndividual.php:183
 msgid "Bug: idcaso no debería ser null"
 msgstr ""
 
-#: PagActo.php:254 PagActo.php:255 PagPresentaRes.php:171
+#: PagActo.php:256 PagActo.php:257 PagPresentaRes.php:172
 #: sitios/pordefecto/conf_int.php:286
 msgid "Actos"
 msgstr ""
 
-#: PagActo.php:341 PagActo.php:407 detalle.php:70 detusyrol.php:57
+#: PagActo.php:343 PagActo.php:409 detalle.php:70 detusyrol.php:57
 #: modulos/etiquetas/DataObjects/Etiquetacaso.php:189
 msgid "Añadir"
 msgstr ""
 
-#: PagActo.php:345
+#: PagActo.php:347
 msgid "Individuales"
 msgstr ""
 
-#: PagActo.php:412
+#: PagActo.php:414
 msgid "Colectivos"
 msgstr ""
 
-#: PagBaseMultiple.php:302 PagBaseSimple.php:186 consolidado.php:691
+#: PagBaseMultiple.php:302 PagBaseSimple.php:195 consolidado.php:691
 #: consulta_web.php:916 estadisticas.php:595 DataObjects/Usuario.php:66
 #: sitios/pordefecto/conf_int.php:337
 msgid "Consulta"
 msgstr ""
 
-#: PagBaseMultiple.php:302 PagBaseSimple.php:186 ResConsulta.php:494
+#: PagBaseMultiple.php:302 PagBaseSimple.php:195 ResConsulta.php:494
 #: DataObjects/Acto.php:60 DataObjects/Actocolectivo.php:61
 #: sitios/pordefecto/conf_int.php:348
 msgid "Caso"
@@ -80,7 +82,7 @@ msgstr ""
 msgid "%s siguiente"
 msgstr ""
 
-#: PagBaseSimple.php:92
+#: PagBaseSimple.php:101
 #, php-format
 msgid "Se esperaba un sólo registro, pero se encontraron %s."
 msgstr ""
@@ -111,44 +113,44 @@ msgstr ""
 msgid "No existe en el controlador la página"
 msgstr ""
 
-#: PagBasicos.php:591
+#: PagBasicos.php:593
 msgid "Se esperaba un sólo registro, pero se encontraron"
 msgstr ""
 
-#: PagBasicos.php:629
+#: PagBasicos.php:631
 msgid "Datos Básicos"
 msgstr ""
 
-#: PagBasicos.php:630
+#: PagBasicos.php:632
 msgid "Básicos"
 msgstr ""
 
-#: PagBasicos.php:657
+#: PagBasicos.php:659
 msgid "Fecha inicial"
 msgstr ""
 
-#: PagBasicos.php:671
+#: PagBasicos.php:673
 msgid "Fecha final"
 msgstr ""
 
-#: PagBasicos.php:689 PagBasicos.php:707
+#: PagBasicos.php:691 PagBasicos.php:709
 msgid "No. Caso"
 msgstr ""
 
-#: PagBasicos.php:693
+#: PagBasicos.php:695
 msgid "No. Caso por buscar: "
 msgstr ""
 
-#: PagBasicos.php:699 captura_caso.php:208
+#: PagBasicos.php:701 captura_caso.php:208
 msgid "Buscar"
 msgstr ""
 
-#: PagBasicos.php:705
+#: PagBasicos.php:707
 msgid "Deje en blanco si es nuevo"
 msgstr ""
 
-#: PagBasicos.php:722 PagPresentaRes.php:115 PagUbicacion.php:243
-#: PagUbicacion.php:244 consolidado.php:376 consolidado.php:380
+#: PagBasicos.php:724 PagPresentaRes.php:116 PagUbicacion.php:245
+#: PagUbicacion.php:246 consolidado.php:376 consolidado.php:380
 #: consulta_web.php:714 estadisticas.php:569 DataObjects/Escrito_caso.php:70
 #: sitios/pordefecto/conf_int.php:199 sitios/pordefecto/conf_int.php:206
 #: sitios/pordefecto/conf_int.php:304 sitios/pordefecto/conf_int.php:325
@@ -156,7 +158,7 @@ msgstr ""
 msgid "Ubicación"
 msgstr ""
 
-#: PagBasicos.php:875
+#: PagBasicos.php:877
 msgid "Falta fecha del caso"
 msgstr ""
 
@@ -164,77 +166,82 @@ msgstr ""
 msgid "Evaluación"
 msgstr ""
 
-#: PagFuentesFrecuentes.php:148 sitios/pordefecto/conf_int.php:172
+#: PagFuentesFrecuentes.php:150 sitios/pordefecto/conf_int.php:172
 #: sitios/pordefecto/conf_int.php:305 modulos/anexos/PagFrecuenteAnexo.php:80
 msgid "Fuentes Frecuentes"
 msgstr ""
 
-#: PagFuentesFrecuentes.php:149 PagOtrasFuentes.php:177 aut.php:53 pint.php:22
+#: PagFuentesFrecuentes.php:151 PagOtrasFuentes.php:179 aut.php:85 pint.php:22
 #: DataObjects/Escrito_caso.php:73 sitios/pordefecto/conf_int.php:204
 msgid "Fuente"
 msgstr ""
 
-#: PagFuentesFrecuentes.php:182
+#: PagFuentesFrecuentes.php:184
 msgid "La fecha de la fuente debe ser posterior a la del caso"
 msgstr ""
 
-#: PagFuentesFrecuentes.php:324 PagOtrasFuentes.php:359
+#: PagFuentesFrecuentes.php:326 PagOtrasFuentes.php:361
 msgid "Fecha de fuente no puede ser anterior a la del caso"
 msgstr ""
 
-#: PagFuentesFrecuentes.php:382
+#: PagFuentesFrecuentes.php:384
 msgid "Prensa"
 msgstr ""
 
-#: PagFuentesFrecuentes.php:457 PagOtrasFuentes.php:522
+#: PagFuentesFrecuentes.php:459 PagOtrasFuentes.php:524
 msgid "No se incluyó fuente sin fecha: "
 msgstr ""
 
-#: PagFuentesFrecuentes.php:462 PagOtrasFuentes.php:527
+#: PagFuentesFrecuentes.php:464 PagOtrasFuentes.php:529
 msgid "No se incluyó fuente sin nombre: "
 msgstr ""
 
-#: PagMemo.php:51 DataObjects/Caso.php:115 sitios/pordefecto/conf_int.php:288
+#: PagMemo.php:51 buscaRepetidos.php:39 DataObjects/Caso.php:115
+#: sitios/pordefecto/conf_int.php:288
 msgid "Memo"
 msgstr ""
 
-#: PagOtrasFuentes.php:176 sitios/pordefecto/conf_int.php:306
+#: PagOtrasFuentes.php:157 PagOtrasFuentes.php:160
+msgid "es null"
+msgstr ""
+
+#: PagOtrasFuentes.php:178 sitios/pordefecto/conf_int.php:306
 #: modulos/anexos/PagOtraAnexo.php:75
 msgid "Otras Fuentes"
 msgstr ""
 
-#: PagOtrasFuentes.php:491 PagPResponsables.php:392
+#: PagOtrasFuentes.php:493 PagPResponsables.php:394
 msgid "Hay "
 msgstr ""
 
-#: PagOtrasFuentes.php:492
+#: PagOtrasFuentes.php:494
 msgid "fuentes no frecuentes con nombre como "
 msgstr ""
 
-#: PagOtrasFuentes.php:494
+#: PagOtrasFuentes.php:496
 msgid ", escogida la primera"
 msgstr ""
 
-#: PagPResponsables.php:187 consolidado.php:275
+#: PagPResponsables.php:189 consolidado.php:275
 #: DataObjects/Presuntos_responsables.php:52
 #: sitios/pordefecto/conf_int.php:166 sitios/pordefecto/conf_int.php:224
 #: sitios/pordefecto/conf_int.php:308
 msgid "Presuntos Responsables"
 msgstr ""
 
-#: PagPResponsables.php:188 sitios/pordefecto/conf_int.php:462
+#: PagPResponsables.php:190 sitios/pordefecto/conf_int.php:462
 msgid "P. Resp."
 msgstr ""
 
-#: PagPResponsables.php:249 PagPResponsables.php:253
+#: PagPResponsables.php:251 PagPResponsables.php:255
 msgid "Otras Agresiones"
 msgstr ""
 
-#: PagPresentaRes.php:76
+#: PagPresentaRes.php:77
 msgid "Forma de Presentar Resultados"
 msgstr ""
 
-#: PagPresentaRes.php:108 ResConsulta.php:494 consolidado.php:376
+#: PagPresentaRes.php:109 ResConsulta.php:494 consolidado.php:376
 #: consolidado.php:380 consolidado.php:385 consulta_web.php:706
 #: DataObjects/Caso.php:112 DataObjects/Escrito_caso.php:69
 #: DataObjects/Fuente_directa_caso.php:71 sitios/pordefecto/conf_int.php:185
@@ -245,125 +252,133 @@ msgstr ""
 msgid "Fecha"
 msgstr ""
 
-#: PagPresentaRes.php:123 consulta_web.php:724
+#: PagPresentaRes.php:124 consulta_web.php:724
 #: sitios/pordefecto/conf_int.php:322 sitios/pordefecto/conf_int.php:457
 msgid "Código"
 msgstr ""
 
-#: PagPresentaRes.php:130 consulta_web.php:747
+#: PagPresentaRes.php:131 consulta_web.php:747
 msgid "Ordenar por"
 msgstr ""
 
-#: PagPresentaRes.php:135 consulta_web.php:753
+#: PagPresentaRes.php:136 consulta_web.php:753
 msgid "Tabla"
 msgstr ""
 
-#: PagPresentaRes.php:140 consulta_web.php:820
+#: PagPresentaRes.php:141 consulta_web.php:820
 msgid "CSV"
 msgstr ""
 
-#: PagPresentaRes.php:151 ResConsulta.php:703 consulta_web.php:759
+#: PagPresentaRes.php:152 ResConsulta.php:703 consulta_web.php:759
 msgid "Reporte Revista"
 msgstr ""
 
-#: PagPresentaRes.php:161 consulta_web.php:769
+#: PagPresentaRes.php:162 consulta_web.php:769
 msgid "Reporte General"
 msgstr ""
 
-#: PagPresentaRes.php:182 consulta_web.php:778
+#: PagPresentaRes.php:183 consulta_web.php:778
 msgid "Relato XML"
 msgstr ""
 
-#: PagPresentaRes.php:193
+#: PagPresentaRes.php:194
 msgid "Relatos XML en disco local"
 msgstr ""
 
-#: PagPresentaRes.php:205
+#: PagPresentaRes.php:206
 msgid "Forma"
 msgstr ""
 
-#: PagPresentaRes.php:227 consulta_web.php:854
+#: PagPresentaRes.php:228 consulta_web.php:854
 msgid "Fuentes"
 msgstr ""
 
-#: PagPresentaRes.php:238
+#: PagPresentaRes.php:239
 msgid "Mostrar"
 msgstr ""
 
-#: PagPresentaRes.php:243 PagPresentaRes.php:244 consulta_web.php:874
+#: PagPresentaRes.php:244 PagPresentaRes.php:245 consulta_web.php:874
 #: consulta_web.php:875
 msgid "Memo en varias líneas"
 msgstr ""
 
-#: PagPresentaRes.php:252
+#: PagPresentaRes.php:253
 msgid "Detalles"
 msgstr ""
 
-#: PagPresentaRes.php:260
+#: PagPresentaRes.php:261
 msgid "Ingreso Desde: "
 msgstr ""
 
-#: PagPresentaRes.php:270
+#: PagPresentaRes.php:271
 msgid "Ingreso Hasta:"
 msgstr ""
 
-#: PagTipoViolencia.php:137 DataObjects/Caso_contexto.php:49
+#: PagTipoViolencia.php:139 DataObjects/Caso_contexto.php:49
 #: DataObjects/Caso_contexto.php:50 DataObjects/Contexto.php:48
 #: sitios/pordefecto/conf_int.php:165 sitios/pordefecto/conf_int.php:217
 #: sitios/pordefecto/conf_int.php:218 sitios/pordefecto/conf_int.php:307
 msgid "Contexto"
 msgstr ""
 
-#: PagUbicacion.php:438
+#: PagUbicacion.php:196
+msgid "No pudo consultarse caso"
+msgstr ""
+
+#: PagUbicacion.php:440
 msgid "Ver mapa"
 msgstr ""
 
-#: PagUbicacion.php:438
+#: PagUbicacion.php:440
 msgid "Ver"
 msgstr ""
 
-#: PagUbicacion.php:443
+#: PagUbicacion.php:445
 msgid "Mapa"
 msgstr ""
 
-#: PagVictimaColectiva.php:278 sitios/pordefecto/conf_int.php:253
+#: PagUbicacion.php:783
+msgid "idubicacion es 0"
+msgstr ""
+
+#: PagVictimaColectiva.php:283 sitios/pordefecto/conf_int.php:253
 msgid "Víctimas Colectivas"
 msgstr ""
 
-#: PagVictimaColectiva.php:279
+#: PagVictimaColectiva.php:284
 msgid "Vic. colectiva"
 msgstr ""
 
-#: PagVictimaIndividual.php:261 sitios/pordefecto/conf_int.php:234
+#: PagVictimaIndividual.php:266 sitios/pordefecto/conf_int.php:234
 #: sitios/pordefecto/conf_int.php:310
 msgid "Víctimas Individuales"
 msgstr ""
 
-#: PagVictimaIndividual.php:262 ResConsulta.php:494 DataObjects/Acto.php:79
+#: PagVictimaIndividual.php:267 ResConsulta.php:494 DataObjects/Acto.php:79
 msgid "Víctima"
 msgstr ""
 
-#: PagVictimaIndividual.php:307
+#: PagVictimaIndividual.php:312
 msgid "Procedencia"
 msgstr ""
 
-#: PagVictimaIndividual.php:321
+#: PagVictimaIndividual.php:326
 msgid "Cómo víctima en casos"
 msgstr ""
 
-#: PagVictimaIndividual.php:326
+#: PagVictimaIndividual.php:331
 msgid "Cómo familiar en casos"
 msgstr ""
 
-#: PagVictimaIndividual.php:631
+#: PagVictimaIndividual.php:636
 msgid "Falta nombre de víctima"
 msgstr ""
 
-#: PagVictimaIndividual.php:638
+#: PagVictimaIndividual.php:643
 msgid "Cantidad de hijos fuera de rango"
 msgstr ""
 
-#: PagVictimaIndividual.php:663
+#: PagVictimaIndividual.php:668
 msgid "Faltó nombre y/o apellido de familiar"
 msgstr ""
 
@@ -472,10 +487,35 @@ msgstr ""
 msgid "fuera de secuencia"
 msgstr ""
 
-#: ResConsulta.php:1058 consolidado.php:698 consulta_web.php:924
-#: detalle.php:83 detusyrol.php:70 estadisticas.php:602 importaRelato.php:734
-#: tabla.php:224 tablas_basicas.php:60 usyroles.php:74 valida.php:116
+#: ResConsulta.php:1058 actualiza.php:2199 buscaRepetidos.php:58
+#: consolidado.php:698 consulta_web.php:924 detalle.php:83 detusyrol.php:70
+#: estadisticas.php:347 estadisticas.php:602 importaRelato.php:734
+#: tabla.php:224 tablas_basicas.php:60 usyroles.php:72 valida.php:116
 msgid "Men&uacute; Principal"
+msgstr ""
+
+#: actualiza.php:45
+msgid "Actualizando"
+msgstr ""
+
+#: aut.php:104 consulta_web.php:665 DataObjects/Usuario.php:54
+msgid "Usuario"
+msgstr ""
+
+#: aut.php:106 DataObjects/Usuario.php:57 DataObjects/Usuario.php:129
+msgid "Clave"
+msgstr ""
+
+#: aut.php:221
+msgid "Acceso no autorizado"
+msgstr ""
+
+#: buscaRepetidos.php:28
+msgid "Reporte de casos repetidos"
+msgstr ""
+
+#: buscaRepetidos.php:39
+msgid "Casos"
 msgstr ""
 
 #: captura_caso.php:202
@@ -525,7 +565,7 @@ msgstr ""
 msgid "Desde"
 msgstr ""
 
-#: consolidado.php:623
+#: consolidado.php:623 estadisticas.php:463
 msgid "Hasta"
 msgstr ""
 
@@ -537,8 +577,20 @@ msgstr ""
 msgid "Ingresado en base hasta"
 msgstr ""
 
+#: consolidado.php:666
+msgid "Agregar columna con resto"
+msgstr ""
+
+#: consolidado.php:674 estadisticas.php:580
+msgid "Tabla HTML"
+msgstr ""
+
 #: consolidado.php:679 estadisticas.php:586
 msgid "Formato CSV (hoja de cálculo)"
+msgstr ""
+
+#: consolidado.php:683
+msgid "LaTeX"
 msgstr ""
 
 #: consolidado.php:685 consulta_web.php:826 estadisticas.php:588
@@ -608,10 +660,6 @@ msgstr ""
 
 #: consulta_web.php:634
 msgid "Sector Social Víctima"
-msgstr ""
-
-#: consulta_web.php:665 DataObjects/Usuario.php:54
-msgid "Usuario"
 msgstr ""
 
 #: consulta_web.php:674
@@ -703,8 +751,12 @@ msgstr ""
 msgid "Según"
 msgstr ""
 
+#: estadisticas.php:573
+msgid "Categorias Repetidas"
+msgstr ""
+
 #: estadisticas.php:574
-msgid "Excluir Categorias Repetidas"
+msgid "Excluir"
 msgstr ""
 
 #: importaRelato.php:86
@@ -788,6 +840,14 @@ msgstr ""
 msgid "Se requiere módulo etiquetas"
 msgstr ""
 
+#: importaRelato.php:709
+msgid "Importa Relatos"
+msgstr ""
+
+#: importaRelato.php:716
+msgid "Archivo con relatos"
+msgstr ""
+
 #: importaRelato.php:724
 msgid "Importar"
 msgstr ""
@@ -796,7 +856,7 @@ msgstr ""
 msgid "Tabla "
 msgstr ""
 
-#: tabla.php:222 usyroles.php:72
+#: tabla.php:222 usyroles.php:70
 msgid "Nuevo"
 msgstr ""
 
@@ -805,19 +865,19 @@ msgstr ""
 msgid "Tablas Básicas"
 msgstr ""
 
-#: terminar.php:27
+#: terminar.php:33
 msgid "Cerrando sesión"
 msgstr ""
 
-#: terminar.php:33
+#: terminar.php:39
 msgid "SIVeL: Sistema de Información de Violencia Política en Línea"
 msgstr ""
 
-#: terminar.php:35
+#: terminar.php:41
 msgid "Fin de sesión"
 msgstr ""
 
-#: terminar.php:36
+#: terminar.php:42
 msgid "Iniciar nueva sesión"
 msgstr ""
 
@@ -1252,10 +1312,6 @@ msgstr ""
 msgid "Longitud"
 msgstr ""
 
-#: DataObjects/Usuario.php:57 DataObjects/Usuario.php:129
-msgid "Clave"
-msgstr ""
-
 #: DataObjects/Usuario.php:59
 msgid "Descripcion"
 msgstr ""
@@ -1399,7 +1455,7 @@ msgid "Datos básicos"
 msgstr ""
 
 #: sitios/pordefecto/conf_int.php:311
-#: modulos/belicas/PagVictimaCombatiente.php:169
+#: modulos/belicas/PagVictimaCombatiente.php:174
 msgid "Víctima Combatiente"
 msgstr ""
 
@@ -1585,11 +1641,11 @@ msgstr ""
 msgid "El campo %s es indispensable."
 msgstr ""
 
-#: modulos/anexos/PagAnexo.php:189
+#: modulos/anexos/PagAnexo.php:191
 msgid "Anexos"
 msgstr ""
 
-#: modulos/anexos/PagAnexo.php:190 modulos/anexos/PagOtraAnexo.php:108
+#: modulos/anexos/PagAnexo.php:192 modulos/anexos/PagOtraAnexo.php:108
 msgid "Anexo"
 msgstr ""
 
@@ -1606,7 +1662,7 @@ msgstr ""
 msgid "Id. Fuente Directa"
 msgstr ""
 
-#: modulos/belicas/PagVictimaCombatiente.php:170
+#: modulos/belicas/PagVictimaCombatiente.php:175
 msgid "Comb."
 msgstr ""
 
@@ -1631,18 +1687,18 @@ msgstr ""
 msgid "Presuntso Responsable Agrede Combatiente"
 msgstr ""
 
-#: modulos/etiquetas/PagEtiquetas.php:87 modulos/etiquetas/PagEtiquetas.php:88
-#: modulos/etiquetas/PagEtiquetas.php:465
+#: modulos/etiquetas/PagEtiquetas.php:89 modulos/etiquetas/PagEtiquetas.php:90
+#: modulos/etiquetas/PagEtiquetas.php:467
 #: modulos/etiquetas/DataObjects/Etiquetacaso.php:159
 msgid "Etiquetas"
 msgstr ""
 
-#: modulos/etiquetas/PagEtiquetas.php:324
+#: modulos/etiquetas/PagEtiquetas.php:326
 msgid "Criterio Etiqueta"
 msgstr ""
 
-#: modulos/etiquetas/PagEtiquetas.php:331
-#: modulos/etiquetas/PagEtiquetas.php:344
+#: modulos/etiquetas/PagEtiquetas.php:333
+#: modulos/etiquetas/PagEtiquetas.php:346
 #: modulos/etiquetas/DataObjects/Etiquetacaso.php:130
 msgid "Etiqueta"
 msgstr ""
@@ -1656,11 +1712,11 @@ msgstr ""
 msgid "Funcionario"
 msgstr ""
 
-#: modulos/segjudicial/PagSegJudicial.php:220
+#: modulos/segjudicial/PagSegJudicial.php:233
 msgid "Seguimiento Judicial"
 msgstr ""
 
-#: modulos/segjudicial/PagSegJudicial.php:221
+#: modulos/segjudicial/PagSegJudicial.php:234
 msgid "Seg. Jud."
 msgstr ""
 

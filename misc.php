@@ -1018,8 +1018,7 @@ function sin_error_pear($do, $msg = "")
 function hace_consulta(&$db, $q, $finenerror = true, $muestraerror = true)
 {
     $res = $db->query($q);
-    global $pear;
-    if ($pear->isError($res)) {
+    if (PEAR::isError($res)) {
         if ($muestraerror) {
             echo_esc(
                 "Error: " . $res->getMessage() . " - " .  $res->getUserInfo()

@@ -234,9 +234,9 @@ class CapturaCaso extends HTML_QuickForm_Controller
                 $cl = substr($cl, $d+1);
             }
             if ($pag == "presentacion") {
-                $clpag =& new $cl($pag, $opciones);
+                $clpag = new $cl($pag, $opciones);
             } else {
-                $clpag =& new $cl($pag);
+                $clpag = new $cl($pag);
             }
             $this->addPage($clpag);
             $this->addAction($pag, new Salta());
@@ -499,7 +499,7 @@ if (isset($_SESSION[$nv]['username']) || $opciones == array()) {
     sacaOpciones($_SESSION[$nv]['username'], $db, $opciones, $rol);
 }
 
-$captura=& new CapturaCaso($opciones);
+$captura = new CapturaCaso($opciones);
 
 if (isset($_REQUEST['modo'])) {
     $_SESSION['forma_modo'] = 'consulta';

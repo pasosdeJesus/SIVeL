@@ -164,7 +164,7 @@ class PagSegJudicial extends PagBaseMultiple
     {
         $id_persona = null;
         if (isset($aper) && count($aper) == 1) {
-            list($id_persona) = each($aper);
+            $id_persona = $aper[0];
         }
         $dproceso=& objeto_tabla('proceso');
         $daccion=& objeto_tabla('accion');

@@ -680,7 +680,7 @@ class PagConsolidado extends HTML_QuickForm_Page
         );
         $ae[] =&  $this->createElement(
             'radio', 'muestra', 'latex',
-            _L('LaTeX'), 'latex'
+            _('LaTeX'), 'latex'
         );
         $this->addGroup($ae, null, _('Forma de presentación'), '&nbsp;', false);
         $t->setChecked(true);
@@ -709,7 +709,7 @@ class PagConsolidado extends HTML_QuickForm_Page
 
 }
 
-$wizard =& new HTML_QuickForm_Controller('Consolidado', false);
+$wizard = new HTML_QuickForm_Controller('Consolidado', false);
 $consweb = new PagConsolidado();
 
 $wizard->addPage($consweb);

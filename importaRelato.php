@@ -741,7 +741,7 @@ class PagImportaRelato extends HTML_QuickForm_Page
 $aut_usuario = "";
 autenticaUsuario($dsn, $aut_usuario, 61);
 
-$wizard =& new HTML_QuickForm_Controller('Importa', false);
+$wizard = new HTML_QuickForm_Controller('Importa', false);
 $consweb = new PagImportaRelato($mreq);
 
 $wizard->addPage($consweb);

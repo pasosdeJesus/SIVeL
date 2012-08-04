@@ -148,7 +148,7 @@ class PagVictimaColectiva extends PagBaseMultiple
     {
         $id_grupoper = null;
         if (isset($aper) && count($aper) == 1) {
-            list($id_grupoper) = each($aper);
+            $id_grupoper = $aper[0];
         }
         $dgrupoper =& objeto_tabla('grupoper');
         $dvictima_colectiva =& objeto_tabla('victima_colectiva');
@@ -168,7 +168,7 @@ class PagVictimaColectiva extends PagBaseMultiple
 
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no debería ser null");
+            die(_("Bug: idcaso no debería ser null"));
         }
 
         $idp = $ndp = $cdp = array();

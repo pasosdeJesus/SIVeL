@@ -186,14 +186,14 @@ class PagUbicacion extends PagBaseMultiple
         $db =& $dubicacion->getDatabaseConnection();
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die("Bug: idcaso no debería ser null");
+            die(_("Bug: idcaso no debería ser null"));
         }
         $result = hace_consulta($db, "SELECT  id FROM caso WHERE id='$idcaso'");
         $row = array();
         if (!isset($result) || PEAR::isError($result)
             || (!$result->fetchInto($row) && $idcaso != $GLOBALS['idbus'])
         ) {
-            die("No pudo consultarse caso " . $idcaso);
+            die(_("No pudo consultarse caso") . " " . $idcaso);
         }
 
         $idu = array();
@@ -780,7 +780,7 @@ class PagUbicacion extends PagBaseMultiple
         }
         $idubicacion = $dubicacion->id;
         if ($idubicacion == 0) {
-            die("idubicacion es 0");
+            die(_("idubicacion es 0"));
         }
     }
 

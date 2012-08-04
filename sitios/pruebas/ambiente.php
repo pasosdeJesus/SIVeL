@@ -245,6 +245,7 @@ if (PEAR::isError($db)) {
     echo $db->getMessage() . " - " . $db->getUserInfo();
     exit(1);
 }
+$db->query('SET client_encoding TO UTF8');
 $_REQUEST['username'] = $_POST['username'] = 'sivelpruebas';
 $_REQUEST['password'] = $_POST['password'] = 'sivelpruebas';
 

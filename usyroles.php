@@ -33,9 +33,7 @@ echo '<table border="0" width="100%"><tr>
     . '</b></td></tr></table>';
 
 $d = objeto_tabla($tabla);
-if (PEAR::isError($d)) {
-    die($d->getMessage());
-}
+sin_error_pear($d);
 
 $k = $d->keys();
 

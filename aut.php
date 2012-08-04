@@ -27,6 +27,26 @@ require_once "confv.php";
 
 
 /**
+ * Realiza una consulta SQL y retorna resultado
+ *
+ * @param object &$db Base de datos
+ * @param string $q   Consulta
+ *
+ * @return object Resultado
+ */
+
+function hace_consulta_aut(&$db, $q) 
+{
+    $result = $db->query($q);
+    if (PEAR::isError($result)) {
+        die(htmlentities(
+            $result->getMessage() . " - " . $result->getUserInfo()
+        ));
+    }
+    return $result;
+}
+
+/**
  * Establece locale
  *
  * @param string $l Nombre del locale
@@ -143,7 +163,7 @@ function sacaOpciones($usuario, &$db, &$op, &$rol)
 {
     $q = "SELECT id_rol FROM usuario " .
         "WHERE id_usuario='" .  $usuario . "';";
-    $result = hace_consulta($db, $q);
+    $result = hace_consulta_aut($db, $q);
     $row = array();
     if ($result->fetchInto($row)) {
         $rol = $row[0];
@@ -205,13 +225,14 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
         session_start();
     }
     $options = array('debug'       => 5);
-    $db1 = new DB();
-    $db =& $db1->connect($dsn, $options);
+    $db = DB::connect($dsn, $options);
     if (PEAR::isError($db)) {
         $m = $db->getMessage()."<br>\n" . $db->getUserInfo();
         $m = str_replace($dsn, '', $m);
         die($m);
     }
+    $db1 = new DB();
+    $db->query('SET client_encoding TO UTF8');
     $params = array(
         "dsn" => $dsn,
         "table" => "usuario",
@@ -253,7 +274,7 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
             $_SESSION['opciones'] = $op;
             $q = "SELECT id FROM funcionario " .
                 "WHERE nombre='" . $usuario . "';";
-            $result = hace_consulta($db, $q);
+            $result = hace_consulta_aut($db, $q);
             $row = array();
             if ($result->fetchInto($row)) {
                 $idf = $row[0];
@@ -261,13 +282,12 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
             $_SESSION['id_funcionario'] = $idf;
             $q = "SELECT idioma FROM usuario " .
                 "WHERE id_usuario='" . $usuario . "';";
-            $result = hace_consulta($db, $q);
+            $result = hace_consulta_aut($db, $q);
             $row = array();
             if ($result->fetchInto($row)) {
                 $lang = $row[0];
             }
             $_SESSION['idioma_usuario'] = $lang;
-
         }
         idioma($_SESSION['idioma_usuario']);
         if (in_array($opcion, $_SESSION['opciones'])) {
@@ -292,25 +312,25 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
             if ($b->checkAuth()) {
                 $clavesha1 = sha1(var_post_escapa('password', $db, 32));
                 $un = var_post_escapa('username', $db, 15);
-                hace_consulta(
+                hace_consulta_aut(
                     $db,
                     "ALTER TABLE usuario ADD COLUMN npass VARCHAR(64);"
                 );
-                hace_consulta(
+                hace_consulta_aut(
                     $db,
                     "UPDATE usuario SET npass=password;"
                 );
-                hace_consulta(
+                hace_consulta_aut(
                     $db,
                     "ALTER TABLE usuario DROP COLUMN password;"
                 );
-                hace_consulta(
+                hace_consulta_aut(
                     $db,
                     "ALTER TABLE usuario RENAME COLUMN npass TO password;"
                 );
                 $q = "UPDATE usuario SET password='$clavesha1' WHERE " .
                     "id_usuario='$un';";
-                hace_consulta($db, $q);
+                hace_consulta_aut($db, $q);
                 $htmljs = new HTML_Javascript();
                 echo $htmljs->startScript();
                 echo $htmljs->alert(

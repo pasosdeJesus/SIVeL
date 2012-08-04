@@ -20,6 +20,7 @@
 require_once $_SESSION['dirsitio'] . "/conf.php";
 require_once 'PagBaseSimple.php';
 require_once 'HTML/QuickForm/Renderer/Default.php';
+require_once $_SESSION['dirsitio'] . "/conf_int.php";
 
 /**
  * Renderer para este formulario

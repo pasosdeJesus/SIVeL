@@ -76,19 +76,17 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
         $cargaCaso = true;
         $retArreglo = true;
         if (isset($apar) && count($apar) == 2) {
-            list($cargaCaso, $retArreglo) = each($apar);
+            $cargaCaso = $apar[0];
+            $retArreglo = $apar[1];
         } else if (isset($apar) && count($apar) == 1) {
-            list($cargaCaso) = ecah($apar);
+            list($cargaCaso) = each($apar);
         }
-
         $dcaso = objeto_tabla('caso');
-        if (PEAR::isError($dcaso)) {
-            die($dcaso->getMessage());
-        }
+        sin_error_pear($dcaso);
         $db =& $dcaso->getDatabaseConnection();
 
         $idcaso = null;
-        if ($cargaCaso) {
+        if ($cargaCaso && isset($_SESSION['basicos_id'])) {
             $idcaso =& $_SESSION['basicos_id'];
             if (!isset($idcaso) || $idcaso == null) {
                 die(_("Bug: idcaso no debería ser null"));

@@ -569,7 +569,7 @@ class PagBasicos extends PagBaseSimple
      */
     function iniVar($apar = null)
     {
-        list($db, $dcaso, $idcaso) = parent::iniVar(array(false, true));
+        list($db, $dcaso, $idcaso) = each(parent::iniVar(array(false, true)));
         $dfrontera_caso =& objeto_tabla('frontera_caso');
         $dregion_caso =& objeto_tabla('region_caso');
 

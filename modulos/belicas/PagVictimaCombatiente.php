@@ -107,7 +107,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
     {
         $id_combatiente = null;
         if (count($aper) == 1) {
-            list($id_combatiente) = each($aper);
+            $id_combatiente = $aper[0];
         }
         $dcombatiente =& objeto_tabla('combatiente');
         $dantecedente_combatiente =&

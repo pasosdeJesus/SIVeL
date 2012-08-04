@@ -95,6 +95,7 @@ if (!aplicado($idac)) {
  */
 function inserta_etiqueta_si_falta(&$db, $etiqueta, $descripcion)
 {
+    $db->query('SET client_encoding TO UTF8');
     $idetiqueta = (int)$db->getOne(
         "SELECT id FROM etiqueta " .
         "WHERE nombre = '$etiqueta'"
