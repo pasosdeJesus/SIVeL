@@ -77,7 +77,7 @@ function menu_principal(&$db)
 {
 
     $datMenu = bd_a_menu(0);
-    $menu =& new HTML_Menu($datMenu, 'sitemap');
+    $menu = new HTML_Menu($datMenu, 'sitemap');
 
     encabezado_envia(
         'SIVeL ' . $GLOBALS['PRY_VERSION'].
@@ -95,7 +95,7 @@ function menu_principal(&$db)
         echo '</table>';
     }
 
-    $renderer =& new PresentaMenuPrincipal();
+    $renderer = new PresentaMenuPrincipal();
     $menu->render($renderer, '');
     $html_r = $renderer->toHtml();
     echo $html_r;
@@ -141,10 +141,10 @@ function inicializa(&$db)
 }
 
 $res = hace_consulta($db, 'SELECT count(*) FROM acto', false);
-if (PEAR::isError($res)) {
-    echo '<p>Se recomienda que ejecute ' .
-        '<a href="actualiza.php">actualiza.php</a></p><hr/>';
-}
+sin_error_pear(
+    $res, 'Se recomienda que ejecute <a href="actualiza.php">actualiza.php</a>'
+);
+
 inicializa($db);
 
 menu_principal($db);

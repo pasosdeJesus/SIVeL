@@ -56,22 +56,31 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
         <span style = "font-size:80%;"> marca un campo requerido</span>';
 
 
-    /** Inicializa variables de la clase extrayendo datos de la base.
+    /** 
+     * Inicializa variables de la clase extrayendo datos de la base.
      * Puede mejorarse manteniendo información en var. de sesión
-     * (actualizada con operaciones)
-     * para que no tener que consultar la base de datos siempre.
+     * (actualizada con operaciones) para que no tener que consultar 
+     * la base de datos siempre.
      *
-     * @param bool $cargaCaso  decide si se carga o no el caso de la B.D
-     * @param bool $retArreglo indica si debe retornar un arreglo con
-     * base de datos, objeto dcaso e identificación o sólo
-     * base de datos.
+     * @param array $apar Arreglo de parametros. Consta de 
+     *   0->bool $cargaCaso  decide si se carga o no el caso de la B.D
+     *   1->bool $retArreglo indica si debe retornar un arreglo con
+     *      base de datos, objeto dcaso e identificación o sólo B.D
      *
      * @return mixed Puede ser bien conexión a base de daotos o bien
      * un arreglo con base, objeto dcaso e identificación de caso (depende
      * del parámetro $retArreglo
      */
-    function iniVar($cargaCaso = true, $retArreglo = false)
+    function iniVar($apar = null)
     {
+        $cargaCaso = true;
+        $retArreglo = true;
+        if (isset($apar) && count($apar) == 2) {
+            list($cargaCaso, $retArreglo) = each($apar);
+        } else if (isset($apar) && count($apar) == 1) {
+            list($cargaCaso) = ecah($apar);
+        }
+
         $dcaso = objeto_tabla('caso');
         if (PEAR::isError($dcaso)) {
             die($dcaso->getMessage());
@@ -213,7 +222,10 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      *
      * @return void
      */
-    abstract static function eliminaDep(&$db, $idcaso);
+    static function eliminaDep(&$db, $idcaso) 
+    {
+    }
+
 
 
     /**

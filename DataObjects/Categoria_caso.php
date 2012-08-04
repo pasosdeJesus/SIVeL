@@ -62,7 +62,7 @@ class DataObjects_Categoria_caso extends DB_DataObject_SIVeL
             $action = htmlspecialchars($_SERVER['REQUEST_URI']);
         }
         if ($f == null) {
-            $f =& new HTML_QuickForm($formName, $method, $action,
+            $f = new HTML_QuickForm($formName, $method, $action,
             $target, null
         );
         }

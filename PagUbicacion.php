@@ -175,9 +175,11 @@ class PagUbicacion extends PagBaseMultiple
      * Inicializa variables y datos de la pestaña.
      * Ver documentación completa en clase base.
      *
+     * @param array $apar Arreglo de parametros. Vacio aqui.
+     *
      * @return handle Conexión a base de datos
      */
-    function iniVar()
+    function iniVar($apar = null)
     {
         $dubicacion =& objeto_tabla('ubicacion');
 
@@ -800,7 +802,7 @@ class PagUbicacion extends PagBaseMultiple
      * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls)
+    static function compara(&$db, &$r, $id1, $id2, $cls = array('caso'))
     {
         PagBaseSimple::compara($db, $r, $id1, $id2, array('ubicacion'));
     }

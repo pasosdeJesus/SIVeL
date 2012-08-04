@@ -138,13 +138,18 @@ class PagVictimaColectiva extends PagBaseMultiple
     /**
      * Inicializa variables.
      *
-     * @param integer $id_grupoper Id  de grupo de personas
+     * 
+     * @param array $apar Arreglo de parametros. Consta de
+     *   0=>$id_grupoper Id  de grupo de personas
      *
      * @return handle  Conexión a base de datos
      */
-    function iniVar($id_grupoper = null)
+    function iniVar($aper = null)
     {
-
+        $id_grupoper = null;
+        if (isset($aper) && count($aper) == 1) {
+            list($id_grupoper) = each($aper);
+        }
         $dgrupoper =& objeto_tabla('grupoper');
         $dvictima_colectiva =& objeto_tabla('victima_colectiva');
         $dantecedente_comunidad =&
@@ -632,7 +637,7 @@ class PagVictimaColectiva extends PagBaseMultiple
             $valores['id_grupoper'] = null;
             $db = $this->iniVar();
         } else {
-            $db = $this->iniVar((int)$valores['id_grupoper']);
+            $db = $this->iniVar(array((int)$valores['id_grupoper']));
         }
 
 
@@ -792,7 +797,7 @@ class PagVictimaColectiva extends PagBaseMultiple
      * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls)
+    static function compara(&$db, &$r, $id1, $id2, $cls = array('caso'))
     {
         parent::compara(
             $db, $r, $id1, $id2,

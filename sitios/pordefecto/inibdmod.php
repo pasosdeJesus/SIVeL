@@ -33,7 +33,9 @@ require_once "PEAR.php";
 require_once 'DB/DataObject.php';
 require_once 'DB/DataObject/FormBuilder.php';
 
-$options = &PEAR::getStaticProperty('DB_DataObject', 'options');
+global $pear;
+$pear = new PEAR();
+$options =& $pear->getStaticProperty('DB_DataObject', 'options');
 $options = array(
     'database' => $dsn,
     'schema_location' => $dirsitio . '/DataObjects',

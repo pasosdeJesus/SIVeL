@@ -98,12 +98,17 @@ class PagVictimaCombatiente extends PagBaseMultiple
      /**
      * Inicializa variables.
      *
-     * @param integer $id_combatiente Id  de víctima combatiente
+     * @param array $apar Arreglo de parametros. Consta de 
+     *  0=>id_combatiente Id  de víctima combatiente
      *
      * @return handle Conexión a base de datos
      */
-    function iniVar($id_combatiente = null)
+    function iniVar($aper = null)
     {
+        $id_combatiente = null;
+        if (count($aper) == 1) {
+            list($id_combatiente) = each($aper);
+        }
         $dcombatiente =& objeto_tabla('combatiente');
         $dantecedente_combatiente =&
             objeto_tabla('antecedente_combatiente');
@@ -426,7 +431,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             $valores['id'] = null;
             $db = $this->iniVar();
         } else {
-            $db = $this->iniVar((int)$valores['id']);
+            $db = $this->iniVar(array((int)$valores['id']));
         }
 
         $idcaso = $this->bcombatiente->_do->id_caso;

@@ -998,7 +998,8 @@ function echo_esc($mens, $nl = true)
  */
 function sin_error_pear($do, $msg = "")
 {
-    if (PEAR::isError($do)) {
+    global $pear;
+    if ($pear->isError($do)) {
         //debug_print_backtrace();
         die_esc(trim($msg . " ") . $do->getMessage() . " - " . $do->getUserInfo());
     }
@@ -1017,7 +1018,8 @@ function sin_error_pear($do, $msg = "")
 function hace_consulta(&$db, $q, $finenerror = true, $muestraerror = true)
 {
     $res = $db->query($q);
-    if (PEAR::isError($res)) {
+    global $pear;
+    if ($pear->isError($res)) {
         if ($muestraerror) {
             echo_esc(
                 "Error: " . $res->getMessage() . " - " .  $res->getUserInfo()
@@ -1419,8 +1421,9 @@ function var_escapa($v, &$db = null, $maxlong = 1024)
             /** Evita XSS */
             $p2=htmlspecialchars($p1);
 
+            global $pear;
             /** Evita inyección de código SQL */
-            if (isset($db) && $db != null && !PEAR::isError($db)) {
+            if (isset($db) && $db != null && !$pear->isError($db)) {
                 $p3 = $db->escapeSimple($p2);
             } else {
                 // Tomado de librería de Pear DB/pgsql.php
@@ -1919,7 +1922,8 @@ function prepara_consulta_gen(&$w, &$t, $idcaso, $rel, $bas, $crelbas, $enbas,
 function objeto_tabla($nom)
 {
     assert($nom != '');
-    $do =& DB_DataObject::factory($nom);
+    $db = new DB_DataObject();
+    $do = $db->factory($nom);
     sin_error_pear($do);
 
     return $do;

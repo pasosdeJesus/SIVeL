@@ -371,7 +371,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
      * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls)
+    static function compara(&$db, &$r, $id1, $id2, $cls = array('caso'))
     {
         //echo "OJO PagBaseMultiple::compara(db, r, $id1, $id2, {";
         //print_r($a); echo "})<br>";

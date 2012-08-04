@@ -40,6 +40,9 @@ FECHA_PROX="20/03/2013"
 
 # 25 de Julio, 25 de Octubre, 25 de Enero y 25 de Abril
 
+LENGDISP="es_CO en_US"
+# Idiomas en los que está disponible la interfaz de usuario
+#
 
 ACT_PROC="act-scp"
 # Regla para actualizar sitio de publicación

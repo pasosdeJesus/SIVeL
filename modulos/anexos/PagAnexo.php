@@ -134,11 +134,13 @@ class PagAnexo extends PagBaseMultiple
      * Inicializa variables y datos de la pestaña.
      * Ver documentación completa en clase base.
      *
+     * @param array $apar Arreglo de parametros. Vacio aqui.
+     *
      * @return handle Conexión a base de datos
      */
-     function iniVar()
+    function iniVar($aper = null)
     {
-        list($db, $dcaso, $idcaso) = parent::iniVar(true, true);
+        list($db, $dcaso, $idcaso) = parent::iniVar(array(true, true));
 
         $row = array();
         $ida = array();
@@ -345,7 +347,7 @@ class PagAnexo extends PagBaseMultiple
      * @return Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $a)
+    static function compara(&$db, &$r, $id1, $id2, $a = array('caso'))
     {
     }
 

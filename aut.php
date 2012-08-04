@@ -35,7 +35,19 @@ require_once "confv.php";
  **/
 function idioma($l = "es_CO")
 {
+    global $LENGDISP;
     //echo "OJO idioma($l)<br>";
+    $ld = explode(" ", $LENGDISP);
+    if (!in_array($l, $ld)) {
+        echo "El idioma '$l', se solicitó pero no está disponible.<br>";
+        echo "Los idiomas disponibles son: ";
+        $sep ="";
+        foreach($ld as $nl) {
+            echo $sep . $nl;
+            $sep =", ";
+        }
+        exit(1);
+    }
     $td = 'sivel';
     $GLOBALS['LC_ALL'] = $l;
     $_SESSION['LANG'] = $l;
@@ -193,7 +205,8 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
         session_start();
     }
     $options = array('debug'       => 5);
-    $db =& DB::connect($dsn, $options);
+    $db1 = new DB();
+    $db =& $db1->connect($dsn, $options);
     if (PEAR::isError($db)) {
         $m = $db->getMessage()."<br>\n" . $db->getUserInfo();
         $m = str_replace($dsn, '', $m);
@@ -246,14 +259,25 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
                 $idf = $row[0];
             }
             $_SESSION['id_funcionario'] = $idf;
+            $q = "SELECT idioma FROM usuario " .
+                "WHERE id_usuario='" . $usuario . "';";
+            $result = hace_consulta($db, $q);
+            $row = array();
+            if ($result->fetchInto($row)) {
+                $lang = $row[0];
+            }
+            $_SESSION['idioma_usuario'] = $lang;
+
         }
-        idioma("en_US");
+        idioma($_SESSION['idioma_usuario']);
         if (in_array($opcion, $_SESSION['opciones'])) {
             return $db;
         }
         die($accno . " (1)");
     } else {
-        idioma("en_US");
+        if (isset($_SESSION['idioma_usuario'])) {
+            idioma($_SESSION['idioma_usuario']);
+        }
         if (isset($_POST['username']) && isset($_POST['password'])) {
             $params = array(
                 "dsn" => $dsn,

@@ -38,8 +38,8 @@ require_once 'HTML/Menu/DirectTreeRenderer.php';
 
 actGlobales();
 
-$menu =& new HTML_Menu($GLOBALS['menu_tablas_basicas'], 'sitemap');
-$rend =& new HTML_Menu_DirectTreeRenderer();
+$menu = new HTML_Menu($GLOBALS['menu_tablas_basicas'], 'sitemap');
+$rend = new HTML_Menu_DirectTreeRenderer();
 
 $rend->setEntryTemplate(
     HTML_MENU_ENTRY_INACTIVE,

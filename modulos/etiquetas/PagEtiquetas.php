@@ -53,11 +53,13 @@ class PagEtiquetas extends PagBaseSimple
      * Inicializa variables y datos de la pestaña.
      * Ver documentación completa en clase base.
      *
+     * @param array $apar Arreglo de parametros. Vacio aqui.
+     * 
      * @return handle Conexión a base de datos
      */
-     function iniVar()
+    function iniVar($aper = null)
     {
-        list($db, $dcaso, $idcaso) = parent::iniVar(true, true);
+        list($db, $dcaso, $idcaso) = parent::iniVar(array(true, true));
 
         $detiquetacaso =& objeto_tabla('etiquetacaso');
         $detiquetacaso->id_caso = $idcaso;
@@ -493,7 +495,7 @@ class PagEtiquetas extends PagBaseSimple
      * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls)
+    static function compara(&$db, &$r, $id1, $id2, $cls = array('caso'))
     {
         PagBaseMultiple::compara(
             $db, $r, $id1, $id2,

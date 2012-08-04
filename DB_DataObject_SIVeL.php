@@ -67,7 +67,7 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
      *
      * @return object Registro cuya llave sea el valor.
      */
-    function staticGet($k, $v = null)
+    function &doStaticGet($k, $v = null)
     {
         return DB_DataObject::staticGet(
             'DataObjects_' .
@@ -95,11 +95,11 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
     /**
      * Opciones de fecha para un campo
      *
-     * @param string &$field campo
+     * @param string $field campo
      *
      * @return array arreglo de opciones
      */
-    function dateOptions(&$field)
+    function dateOptions($field)
     {
         return array('language' => 'es',
         'format' => 'dMY',

@@ -111,9 +111,11 @@ class PagPResponsables extends PagBaseMultiple
      * Inicializa variables y datos de la pestaña.
      * Ver documentación completa en clase base.
      *
+     * @param array $apar Arreglo de parametros. Vacio aqui.
+     *
      * @return handle Conexión a base de datos
      */
-    function iniVar()
+    function iniVar($apar = null)
     {
         $drespCaso =& objeto_tabla('presuntos_responsables_caso');
         $dcategoria =& objeto_tabla('categoria_p_responsable_caso');
@@ -592,7 +594,7 @@ class PagPResponsables extends PagBaseMultiple
      * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls)
+    static function compara(&$db, &$r, $id1, $id2, $cls = array('caso'))
     {
         parent::compara(
             $db, $r, $id1, $id2,

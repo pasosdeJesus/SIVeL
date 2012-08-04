@@ -196,9 +196,11 @@ class PagActo extends PagBaseSimple
     /**
      * Inicializa variables.
      *
+     * @param array $apar Arreglo de parametro. Vacío en esta función.
+     *
      * @return handle Conexión a base de datos
      */
-    function iniVar()
+    function iniVar($apar = null)
     {
         /*if (!isset($bt)) {
             $bt = new Benchmark_Timer(true);
@@ -591,7 +593,7 @@ class PagActo extends PagBaseSimple
      * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls)
+    static function compara(&$db, &$r, $id1, $id2, $cls = array('caso'))
     {
         PagBaseMultiple::compara(
             $db, $r, $id1, $id2,

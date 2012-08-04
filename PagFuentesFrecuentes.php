@@ -90,9 +90,11 @@ class PagFuentesFrecuentes extends PagBaseMultiple
      * Inicializa variables y datos de la pestaña.
      * Ver documentación completa en clase base.
      *
+     * @param array $apar Arreglo de parametros. Vacio aqui.
+     *
      * @return handle Conexión a base de datos
      */
-    function iniVar()
+    function iniVar($apar = null)
     {
         $do =& objeto_tabla('escrito_caso');
         $db =& $do->getDatabaseConnection();
@@ -493,7 +495,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
      * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls)
+    static function compara(&$db, &$r, $id1, $id2, $cls = array('caso'))
     {
     }
 

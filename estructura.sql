@@ -319,7 +319,8 @@ CREATE TABLE usuario (
 	nombre VARCHAR(50),
 	descripcion VARCHAR(50),
 	id_rol INTEGER CHECK (id_rol>='1' AND id_rol<='4'),
-	dias_edicion_caso INTEGER 
+	dias_edicion_caso INTEGER,
+	idioma VARCHAR(6) NOT NULL DEFAULT 'es_CO'
 );
 
 CREATE SEQUENCE vinculo_estado_seq;

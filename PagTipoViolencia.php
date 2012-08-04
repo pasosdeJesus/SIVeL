@@ -85,11 +85,13 @@ class PagTipoViolencia extends PagBaseSimple
      * Inicializa variables y datos de la pestaña.
      * Ver documentación completa en clase base.
      *
+     * @param array $apar Arreglo de parametros. Vacio aqui.
+     *
      * @return handle Conexión a base de datos
      */
-    function iniVar()
+    function iniVar($apar = null)
     {
-        list($db, $dcaso, $idcaso) = parent::iniVar(true, true);
+        list($db, $dcaso, $idcaso) = parent::iniVar(array(true, true));
 
         $dcaso_contexto =& objeto_tabla('caso_contexto');
         $dantecedente_caso =& objeto_tabla('antecedente_caso');
@@ -442,7 +444,7 @@ class PagTipoViolencia extends PagBaseSimple
      * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls)
+    static function compara(&$db, &$r, $id1, $id2, $cls = array('caso'))
     {
         //echo "PagTipoViolencia::compara(db, r, $id1, $id2, a)";
         //print_r($cls); echo "<br>";

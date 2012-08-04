@@ -1986,6 +1986,19 @@ if (!aplicado($idac)) {
     );
 }
 
+$idac = '1.2-lu';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "ALTER TABLE usuario ADD COLUMN idioma "
+        . " VARCHAR(6) NOT NULL DEFAULT 'es_CO'", false
+    );
+
+    die("x");
+    aplicaact(
+        $act, $idac, 'Idioma preferido por usuario'
+    );
+}
+
 
 
 echo "Revisando variables de configuración PHP...<br>";

@@ -160,12 +160,17 @@ class PagVictimaIndividual extends PagBaseMultiple
     /**
      * Inicializa variables.
      *
-     * @param integer $id_persona Id  de víctima
+     * @param array $apar Arreglo de parametros. Consta de
+     *  0=>$id_persona Id  de víctima
      *
      * @return handle Conexión a base de datos
      */
-    function iniVar($id_persona = null)
+    function iniVar($aper = null)
     {
+        $id_persona = null;
+        if (isset($aper) && count($aper) == 1) {
+            list($id_persona) = each($aper);
+        }
         $dvictima=& objeto_tabla('victima');
         $dpersona=& objeto_tabla('persona');
         $drelacion=& objeto_tabla('relacion_personas');
@@ -643,7 +648,7 @@ class PagVictimaIndividual extends PagBaseMultiple
             $valores['id_persona'] = null;
             $db = $this->iniVar(null);
         } else {
-            $db = $this->iniVar((int)$valores['id_persona']);
+            $db = $this->iniVar(array((int)$valores['id_persona']));
         }
 
         $idcaso =& $_SESSION['basicos_id'];
@@ -829,7 +834,7 @@ class PagVictimaIndividual extends PagBaseMultiple
      * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls)
+    static function compara(&$db, &$r, $id1, $id2, $cls = array('caso'))
     {
         parent::compara(
             $db, $r, $id1, $id2,

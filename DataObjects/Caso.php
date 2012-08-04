@@ -169,7 +169,7 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
     /**
      * Opciones para un campo fecha.
      *
-     * @param string $nomCampo Nombre del campo fecha
+     * @param string &$nomCampo Nombre del campo fecha
      *
      * @return Opciones fecha
      */

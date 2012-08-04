@@ -151,8 +151,21 @@ class PagSegJudicial extends PagBaseMultiple
         }
     }
 
-    function iniVar($id_persona = null)
+
+     /**
+     * Inicializa variables y datos de la pestaña.
+     * Ver documentación completa en clase base.
+     *
+     * @param array $apar Arreglo de parametros. Vacio aqui.
+     *
+     * @return handle Conexión a base de datos
+     */
+    function iniVar($aper = null)
     {
+        $id_persona = null;
+        if (isset($aper) && count($aper) == 1) {
+            list($id_persona) = each($aper);
+        }
         $dproceso=& objeto_tabla('proceso');
         $daccion=& objeto_tabla('accion');
 
@@ -351,7 +364,7 @@ class PagSegJudicial extends PagBaseMultiple
             $valores['id'] = null;
             $db = $this->iniVar();
         } else {
-            $db = $this->iniVar((int)$valores['id']);
+            $db = $this->iniVar(array((int)$valores['id']));
         }
         $dcaso = objeto_tabla('caso');
         if (PEAR::isError($dcaso)) {

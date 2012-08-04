@@ -563,11 +563,13 @@ class PagBasicos extends PagBaseSimple
      * Inicializa variables y datos de la pestaña.
      * Ver documentación completa en clase base.
      *
+     * @param array $apar Arreglo de parametros. Vacio aqui.
+     *
      * @return handle Conexión a base de datos
      */
-    function iniVar()
+    function iniVar($apar = null)
     {
-        list($db, $dcaso, $idcaso) = parent::iniVar(false, true);
+        list($db, $dcaso, $idcaso) = parent::iniVar(array(false, true));
         $dfrontera_caso =& objeto_tabla('frontera_caso');
         $dregion_caso =& objeto_tabla('region_caso');
 
@@ -1035,7 +1037,7 @@ class PagBasicos extends PagBaseSimple
      * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
-    static function compara(&$db, &$r, $id1, $id2, $cls)
+    static function compara(&$db, &$r, $id1, $id2, $cls = array('caso'))
     {
         parent::compara($db, $r, $id1, $id2, array('caso'));
     }
