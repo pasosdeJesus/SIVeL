@@ -945,6 +945,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
  */
 function runController()
 {
+    encabezado_envia(_('Consulta Web'));
     $snru = nomSesion();
     if (!isset($_SESSION) || session_name()!=$snru) {
         session_name($snru);
@@ -973,6 +974,7 @@ function runController()
     $wizard->addAction('process', new AccionConsultaWeb());
 
     $wizard->run();
+    pie_envia();
 }
 
 runController();

@@ -434,10 +434,9 @@ class ReporteGeneral extends HTML_QuickForm_Action
      */
     static function reporte($idcaso)
     {
-        echo "<html><head>";
-        echo "<title>" . sprintf(_("Reporte General del caso %s"), (int)$idcaso)
-            . "</title></head>";
-        echo "<body>";
+        encabezado_envia(sprintf(
+            _("Reporte General del caso %s"), (int)$idcaso
+        ));
         $r = valida_caso($idcaso);
         $html_rep = ResConsulta::reporteGeneralHtml(
             $idcaso, null,
@@ -451,7 +450,7 @@ class ReporteGeneral extends HTML_QuickForm_Action
         echo '<a href = "captura_caso.php?limpia=1">' . _('Caso Nuevo') 
             . '</a> | ';
         echo '<a href = "index.php">' . _('Menú') . '</a>';
-        echo "</body></html>";
+        pie_envia();
     }
 
     /**
@@ -569,7 +568,14 @@ class PagBasicos extends PagBaseSimple
      */
     function iniVar($apar = null)
     {
-        list($db, $dcaso, $idcaso) = each(parent::iniVar(array(false, true)));
+        $r = parent::iniVar(array(false, true));
+        if (count($r) != 3) {
+            die_esc(_('Se esperaban 3 parametros en iniVar'));
+        }
+        $db = $r[0];
+        $dcaso = $r[1];
+        $idcaso = $r[2];
+//            list($db, $dcaso, $idcaso) = each(parent::
         $dfrontera_caso =& objeto_tabla('frontera_caso');
         $dregion_caso =& objeto_tabla('region_caso');
 
@@ -1069,5 +1075,10 @@ class PagBasicos extends PagBaseSimple
     }
 
 
+    function handle($action)
+    {
+        parent::handle($action);
+    //    echo "PagBasicos::handle($action)";
+    }
 }
 ?>

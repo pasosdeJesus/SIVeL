@@ -48,6 +48,7 @@ $b =& DB_DataObject_FormBuilder::create($d);
 $b->createSubmit = 0;
 $b->useMutators = true;
 $f = $b->getForm(htmlspecialchars($_SERVER['REQUEST_URI']));
+global $mreq;
 $f->setRequiredNote($mreq);
 $h =& $f->getElement('__header__');
 $h->setText(_($d->nom_tabla));

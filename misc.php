@@ -55,7 +55,7 @@ $GLOBALS['idbus']=-1;
  */
 function a_minusculas($s)
 {
-    $r = mb_strtolower($s);
+    $r = mb_strtolower($s, 'UTF8');
     $r = str_replace(
         array('Á', 'É', 'Í', 'Ó', 'Ú'),
         array('á', 'é', 'í', 'ó', 'ú'), $r
@@ -415,9 +415,9 @@ function agregar_tabla($nom, &$f, $idcaso, $nuevo, &$da)
     $ba =& DB_DataObject_FormBuilder::create(
         $da,
         array(
-            'requiredRuleMessage' => 'El campo %s es indispensable.',
+            'requiredRuleMessage' => _('El campo %s es indispensable.'),
             'ruleViolationMessage' =>
-            '%s: El valor que ha ingresado no es válido.'
+            _('%s: El valor que ha ingresado no es válido.')
         )
     );
 
@@ -688,9 +688,10 @@ function valores_pordefecto_form($d, $form)
     foreach ($d->fb_fieldsToRender as $c) {
         $cq = toma_elemento_recc($form, $c);
         if ($cq == null || PEAR::isError($cq)) {
-            echo_esc(
-                "Error: No se encontró elemento $c en el formulario<br>"
-            );
+            echo_esc(sprintf( 
+                _("Error: No se encontró elemento %s en el formulario") ."<br>",
+                $c
+            ));
         }
         if (isset($d->fb_booleanFields)
             && in_array($c, $d->fb_booleanFields)
@@ -784,6 +785,7 @@ function encabezado_envia($titulo = null, $cabezote = '')
         echo '  <title>' . htmlentities($titulo, ENT_COMPAT, 'UTF-8') . '</title>';
     }
     echo '<link rel = "stylesheet" type = "text/css" href = "estilo.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
 <script language = "JavaScript">
@@ -1020,7 +1022,8 @@ function hace_consulta(&$db, $q, $finenerror = true, $muestraerror = true)
     if (PEAR::isError($res)) {
         if ($muestraerror) {
             echo_esc(
-                "Error: " . $res->getMessage() . " - " .  $res->getUserInfo()
+                _("Error") . ": " . 
+                $res->getMessage() . " - " .  $res->getUserInfo()
             );
             echo_esc($q);
         }
@@ -1043,7 +1046,10 @@ function retorna_uno_o_termina(&$db, $q)
 {
     $res = hace_consulta($db, $q);
     if (($nr = $res->numRows()) != 1) {
-        die("Se esperaba un resultado y no $nr de consulta \"$q\".<br>");
+        die_esc(sprintf(
+            _("Se esperaba un resultado y no %s de consulta \"%s\""),
+            $nr, $q
+        ));
     }
     $reg = array();
     $res->fetchInto($reg);
@@ -1234,7 +1240,8 @@ function consulta_orden(&$q, $pOrdenar)
                     array(&$q, $pOrdenar)
                 );
             } else {
-                echo_esc("Falta $f de misc_ordencons[$k]");
+                echo_esc(sprintf(
+                    _("Falta %s de misc_ordencons[%s]"), $f, $k));
             }
         }
     }
@@ -1274,7 +1281,9 @@ function lista_relacionados($tabla, $llave,
     while ($do->fetch()) {
         $dr= $do->getLink($enlace);
         if (PEAR::isError($dr) || $dr == null) {
-            echo_esc("No hay campo $enlace en tabla " . $do->__table);
+            echo_esc(sprintf(
+                _("No hay campo %s en tabla %s"), $enlace, $do->__table 
+            ));
             break;
         }
         //echo "getlink";
@@ -1377,7 +1386,7 @@ function funcionario_caso($idcaso)
     if (!isset($_SESSION['id_funcionario'])
         || $_SESSION['id_funcionario'] == ''
     ) {
-        die_esc("No es funcionario");
+        die_esc(_("No es funcionario"));
     }
     $dfc = objeto_tabla('funcionario_caso');
     $dfc->id_caso = $idcaso;
@@ -1585,7 +1594,7 @@ function verifica_edad_y_rango($e, $r)
     $do->get((int)$r);
     if (PEAR::isError($do)) {
         die_esc(
-            "Identificación de rango desconocida (" .
+            _("Identificación de rango desconocida") . " (" .
             $do->getMessage() . " - " . $do->getUserInfo() . ")"
         );
     }
@@ -1622,13 +1631,13 @@ function agrega_control_CSRF(&$form)
 function verifica_sin_CSRF($valores)
 {
     if (!isset($_SESSION['sin_csrf'])) {
-        die_esc("Debería existir variable para evitar CSRF en sesión.");
+        die_esc(_("Debería existir variable para evitar CSRF en sesión."));
     }
     if (!isset($valores['evita_csrf'])
         || $valores['evita_csrf'] != $_SESSION['sin_csrf']
     ) {
         die_esc(
-            "Datos enviados no pasaron verificación CSRF (" .
+            _("Datos enviados no pasaron verificación CSRF") . " (" .
             $_SESSION['sin_csrf'] . ", " . (int)$valores['evita_csrf'] . ")"
         );
     }
@@ -2015,7 +2024,7 @@ function valida_caso($idcaso)
         $r=`$cmd`;
         if ($r != "") {
             error_valida(
-                "Errores ortográficos en memo: $r<br>" .
+                _("Errores ortográficos en memo") . ": $r<br>" .
                 str_replace(
                     '%l', $GLOBALS['CHROOTDIR'] . getcwd() . "/" .
                     $GLOBALS['DICCIONARIO'], $GLOBALS['MENS_ORTOGRAFIA']

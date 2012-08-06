@@ -234,9 +234,9 @@ class CapturaCaso extends HTML_QuickForm_Controller
                 $cl = substr($cl, $d+1);
             }
             if ($pag == "presentacion") {
-                $clpag = new $cl($pag, $opciones);
+                $clpag =& new $cl($pag, $opciones);
             } else {
-                $clpag = new $cl($pag);
+                $clpag =& new $cl($pag);
             }
             $this->addPage($clpag);
             $this->addAction($pag, new Salta());
@@ -487,7 +487,7 @@ if (isset($_GET['limpia']) && $_GET['limpia'] == 1) {
 //die("abc");
 
 $opciones = array();
-
+encabezado_envia('');
 $nv = "_auth_".nomSesion();
 if (isset($_SESSION[$nv]['username']) || $opciones == array()) {
     $d = objeto_tabla('caso');
@@ -521,4 +521,5 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
 }
 
 $captura->run();
+pie_envia();
 ?>

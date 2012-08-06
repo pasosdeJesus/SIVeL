@@ -2208,6 +2208,7 @@ class ResConsulta
      */
     static function nomTipificacion($c)
     {
+        //echo "OJO nomTipificacion($c)<br>";
         $r = ucwords(a_minusculas($c));
         $r = str_replace(" De ", " de ", $r);
         $r = str_replace(" Y ", " y ", $r);
@@ -2388,7 +2389,7 @@ class ResConsulta
                 $nvc .= " " . $dvictima->hijos. " hijos.";
             }
             $ids = DataObjects_Filiacion::idSinInfo();
-            if ($repgen && $dvictima->id_filiacion != $id && !$cortos) {
+            if ($repgen && $dvictima->id_filiacion != $ids && !$corto) {
                 $nvc .= " " . $GLOBALS['etiqueta']['filiacion'] . ": ";
                 $dfiliacion = $dvictima->getLink('id_filiacion');
                 $nvc .= $dfiliacion->nombre . ". ";

@@ -18,6 +18,11 @@
  */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
+
+$aut_usuario = "";
+autenticaUsuario($dsn, $aut_usuario, 21);
+
+require_once $_SESSION['dirsitio'] . "/conf_int.php";
 require_once 'HTML/QuickForm/Controller.php';
 
 require_once 'HTML/QuickForm/Action/Display.php';
@@ -611,9 +616,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
 
 }
 
-$aut_usuario = "";
-autenticaUsuario($dsn, $aut_usuario, 21);
-
+encabezado_envia(_('Conteos Victimizacione Individuales'));
 $wizard = new HTML_QuickForm_Controller('EstadisticasInd', false);
 $consweb = new PagEstadisticasInd($mreq);
 
@@ -626,4 +629,5 @@ $wizard->addAction('jump', new HTML_QuickForm_Action_Jump());
 $wizard->addAction('process', new AccionEstadisticasInd());
 
 $wizard->run();
+pie_envia();
 ?>

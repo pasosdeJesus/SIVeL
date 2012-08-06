@@ -166,7 +166,7 @@ class PagEtiquetas extends PagBaseSimple
          if ($agregaEtiqueta
          && (!isset($valores['fetiqueta']) || $valores['fetiqueta'] == '')
          ) {
-             error_valida('Faltó fecha y/o etiqueta', $valores);
+             error_valida(_('Faltó fecha y/o etiqueta'), $valores);
              return false;
          }
 
@@ -185,7 +185,7 @@ class PagEtiquetas extends PagBaseSimple
                  var_escapa($valores['fobservaciones'], $db);
              //print_r($this->betiquetacaso->_do);
              $r = $this->betiquetacaso->_do->insert();
-             sin_error_pear($r, 'No pudo insertar en base.');
+             sin_error_pear($r, _('No pudo insertar en base.'));
              $agregaEtiqueta = false;
          }
 
@@ -227,7 +227,9 @@ class PagEtiquetas extends PagBaseSimple
          $duc->id_caso = $idcaso;
          if ($duc->find()>0) {
              $t .= ", etiquetacaso, etiqueta";
-             consulta_and_sinap($w, "etiquetacaso.id_caso", "caso.id", "=", "AND");
+             consulta_and_sinap(
+                 $w, "etiquetacaso.id_caso", "caso.id", "=", "AND"
+             );
              consulta_and_sinap(
                  $w, "etiquetacaso.id_etiqueta",
                  "etiqueta.id", "=", "AND"
@@ -301,7 +303,7 @@ class PagEtiquetas extends PagBaseSimple
      {
          html_menu_agrega_submenu(
              $GLOBALS['menu_tablas_basicas'],
-             'Información caso', 'Etiquetas para un caso',
+             _('Información caso'), _('Etiquetas para un caso'),
              'etiqueta', null
          );
      }
@@ -325,7 +327,7 @@ class PagEtiquetas extends PagBaseSimple
              'select',
              'critetiqueta', _('Criterio Etiqueta')
          );
-         $sel->loadArray(array('0' => 'tiene', '1' => 'no tiene'));
+         $sel->loadArray(array('0' => _('tiene'), '1' => _('no tiene')));
          $gr[] = $sel;
 
          $sel =& $form->createElement(

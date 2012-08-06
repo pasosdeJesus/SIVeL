@@ -21,10 +21,11 @@ require_once "misc.php";
 $aut_usuario = "";
 $db = autenticaUsuario($dsn, $aut_usuario, 64);
 
+$t = _("Reporte de consistencia del") ." " . date("Y-m-d H:m");
+encabezado_envia($t);
 echo '<table width="100%"><td style="white-space: ' .
     ' nowrap; background-color: #CCCCCC;" align="left" ' .
-    ' valign="top" colspan="2"><b><div align=center>' ;
-echo _("Reporte de consistencia del ") . date("Y-m-d H:m");
+    ' valign="top" colspan="2"><b><div align=center>' . $t;
 echo '</div></b></td></table>';
 res_valida(
     $db, _("Casos con memo vacio"),
@@ -115,4 +116,5 @@ echo '<table width="100%">
     align = "left" valign="top" colspan="2"><b><div align=right>
     <a href = "index.php">' . _('Men&uacute; Principal') .
     '</a></div></b></td></table>';
+pie_envia();
 ?>

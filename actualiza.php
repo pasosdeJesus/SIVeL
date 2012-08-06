@@ -40,6 +40,7 @@ if (!in_array(63, $_SESSION['opciones'])) {
 }
 $db = autenticaUsuario($dsn, $aut_usuario, 63);
 
+encabezado_envia(_('Actualizando'));
 echo '<table width="100%"><td style="white-space: nowrap; '
     . 'background-color: #CCCCCC;" align="left" valign="top" colspan="2">'
     . '<b><div align=center>' . _('Actualizando') . '</div></b></td></table>';
@@ -1562,8 +1563,8 @@ if (!aplicado($idac)) {
 
 $idac = '1.1b2-lu';
 if (!aplicado($idac)) {
-    cambia_tipocol($db, 'ubicacion', 'sitio', 'VARCHAR(260)');
-    cambia_tipocol($db, 'ubicacion', 'lugar', 'VARCHAR(260)');
+    cambia_tipocol($db, 'ubicacion', 'sitio', 'VARCHAR(260)', false);
+    cambia_tipocol($db, 'ubicacion', 'lugar', 'VARCHAR(260)', false);
 
     aplicaact($act, $idac, 'Tamaño de ubicación');
 }
@@ -2029,7 +2030,9 @@ if ($vc != "") {
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {
-        if ($a['title'] == 'Reportes') {
+        if ($a['title'] == 'Reportes' 
+            || $a['sub'][0]['url'] == 'parametros_reporte_consolidado'
+        ) {
             $hayrep = true;
         }
     }
@@ -2198,4 +2201,6 @@ echo '<table width="100%"><td style="white-space: nowrap; '
     . '<b><div align=right><a href="index.php">' 
     . _('Men&uacute; Principal') . '</a></div></b>'
     . '</td></table>';
+
+pie_envia();
 ?>

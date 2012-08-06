@@ -85,7 +85,7 @@ function idioma($l = "es_CO")
     bind_textdomain_codeset($td, 'UTF-8'); 
     textdomain($td);
     if ($l == "en_US" && "Fuente" == _("Fuente")) {
-        echo"Error al inicializar idioma"; 
+        echo htmlentities("Error al inicializar idioma $l") . "<br>"; 
         debug_print_backtrace();
         die();
     }

@@ -22,10 +22,12 @@ require_once "misc.php";
 $aut_usuario = "";
 $db = autenticaUsuario($dsn, $aut_usuario, 65);
 
+$t = _('Reporte de casos repetidos');
+encabezado_envia($t);
 echo '<table width="100%">'
     . '<td style="white-space: nowrap; background-color: #CCCCCC;" '
     . 'align="left" valign="top" colspan="2"><b>'
-    . '<div align=center>' . _('Reporte de casos repetidos') . ' '
+    . '<div align=center>' . $t . ' '
     . date('Y-m-d H:m') . '</div></b></td></table><p/>';
 
 $res =& hace_consulta(
@@ -57,5 +59,5 @@ echo '<table width="100%">'
     . 'align="left" valign="top" colspan="2"><b><div align=right>'
     . '<a href="index.php">' ._('Men&uacute; Principal') 
     . '</a></div></b></td></table>';
-
+pie_envia();
 ?>

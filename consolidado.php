@@ -600,9 +600,7 @@ class PagConsolidado extends HTML_QuickForm_Page
         $e =& $this->addElement('header', null, _('Reporte consolidado'));
 
         list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
-            $db, $this, 'victimaIndividual',
-            $this->bpersona->_do->id_departamento,
-            $this->bpersona->_do->id_municipio
+            $db, $this, 'victimaIndividual', null, null
         );
 
         $this->addElement($dep);

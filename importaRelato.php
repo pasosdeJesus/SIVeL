@@ -15,6 +15,11 @@
 
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
+$aut_usuario = "";
+autenticaUsuario($dsn, $aut_usuario, 61);
+
+require_once $_SESSION['dirsitio'] . "/conf_int.php";
+require_once "misc.php";
 require_once "misc_importa.php";
 require_once 'HTML/QuickForm/Controller.php';
 
@@ -140,7 +145,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         $relatos = simplexml_load_string($cont);
         if (!$relatos) {
             $e = libxml_get_errors();
-            //var_dump($e);
             die("No pudo cargarse '" . $pArchivo . "'");
         }
 
@@ -158,18 +162,19 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $datgrupo = array();
             $dcaso = objeto_tabla('caso');
             if (isset($r->titulo)) {
-                $dcaso->titulo = utf8_decode($r->titulo);
+                $dcaso->titulo = $r->titulo;
             }
             $dcaso->memo = ereg_replace(
                 "\n", " ",
-                utf8_decode(trim($r->hechos))
+                trim($r->hechos)
+//                trim($r->hechos)
             );
             $dcaso->fecha = conv_fecha($r->fecha, $obs);
             if (isset($r->duracion) && $r->duracion != "") {
-                $dcaso->duracion = utf8_decode(trim($r->duracion));
+                $dcaso->duracion = trim($r->duracion);
             }
             if (isset($r->hora) && $r->hora!= "") {
-                $dcaso->hora = utf8_decode(trim($r->hora));
+                $dcaso->hora = trim($r->hora);
             }
             $pf = explode('-', $dcaso->fecha);
             $aniocaso = (int)$pf[0];
@@ -204,7 +209,10 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 ), 5
             );
             $dcaso->bienes = dato_en_obs($r, 'bienes');
-            $dcaso->insert();
+            if (!$dcaso->insert()) {
+                var_dump($dcaso);
+                die(_("No pudo insertar caso ") . $dcaso->id);
+            }
             $idcaso = $dcaso->id;
             if ($idcaso == 0) {
                 die("idcaso es 0");
@@ -222,11 +230,10 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $anexof->archivo = '';
             $anexof->descripcion = "Fuente extraida automaticamente de $narc";
             $anexof->insert();
-            //var_dump($anexof); die("x");
 
             $rx = $GLOBALS['enc_relato']
                 . "<relatos>\n"
-                . utf8_decode($r->asXml())
+                . $r->asXml()
                 . "\n</relatos>\n" ;
             $nf = 0;
             $ax = $idcaso . "_" . $anexof->id . "_relatoimportado.xrlt";
@@ -241,11 +248,11 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 $obs
             );
             $idprensa = null;
-            $nomf = utf8_decode($r->organizacion_responsable);
+            $nomf = $r->organizacion_responsable;
             $fecha = date('Y-m-d');
             $orgfuente = PagFuentesFrecuentes::busca_inserta(
                 $db, $idcaso, $nomf, $fecha,
-                utf8_decode($r->id_relato),
+                $r->id_relato,
                 _('Organización responsable incluida automáticamente'),
                 '', $obs
             );
@@ -263,7 +270,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             if ($orgfuente <= 0) {
                 $orgfuente = PagOtrasFuentes::busca_inserta(
                     $db, $idcaso, $nomf, $fecha,
-                    utf8_decode($r->id_relato),
+                    $r->id_relato,
                     _('Organización responsable incluida automáticamente'),
                     'Indirecta', $obs
                 );
@@ -356,8 +363,8 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     }
                     $cper = conv_persona(
                         $db, $aper, $obs,
-                        utf8_decode($persona->nombre),
-                        utf8_decode($persona->apellido), $anionac,
+                        $persona->nombre,
+                        $persona->apellido, $anionac,
                         $mesnac, $dianac, $sexo,
                         $idd, $idm, $idc, $tipo_documento,
                         $numero_documento
@@ -421,7 +428,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                                 $dvictima->$ncs = (int)conv_basica(
                                     $db,
                                     "$cs",
-                                    utf8_decode($victima->$cr),
+                                    $victima->$cr,
                                     $obs
                                 );
                             } else if (is_callable(
@@ -457,14 +464,13 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     }
 
                     if (!$dvictima->insert()) {
-                        //var_dump($dvictima);
-                        repObs(
-                            _("No pudo insertar víctima") ." '"
-                            . $dvictima->id_persona . " "
-                            . $dvictima->getMessage() . " "
-                            .  $dvictima->getUserInfo()
-                            . "'", $obs
-                        );
+                        $m = _("No pudo insertar víctima") ." '"
+                            . $dvictima->id_persona . "' ";
+                        if (PEAR::isError($dvictima)) {
+                            $m .= $dvictima->getMessage() . " " 
+                                . $dvictima->getUserInfo();
+                        }
+                        repObs($m, $obs);
                     }
                     foreach (array('antecedentes' => 'antecedente',  )
                         as $cs => $cs2
@@ -487,7 +493,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                                     $dantv->id_persona = (int)$dvictima->id_persona;
                                     $dantv->id_antecedente = $idant;
                                     $dantv->insert();
-                                    //var_dump($dantv);
                                 }
                             }
                         }
@@ -523,7 +528,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     }
                     $id_categoria = conv_categoria(
                         $db, $obs,
-                        utf8_decode($acto->agresion_particular), $pr
+                        $acto->agresion_particular, $pr
                     );
                     if ($id_categoria == 0) {
                         break;
@@ -608,7 +613,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     if (is_callable(array($c, 'importaRelato'))) {
                         call_user_func_array(
                             array($c, 'importaRelato'),
-                            array($db, $r, $idcaso, $obs)
+                            array($db, $r, $idcaso, &$obs)
                         );
                     } else {
                         echo_esc(_("Falta importaRelato en") . " $n, $c");
@@ -632,7 +637,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $ec->fecha = date('Y-m-d');
             $ec->observaciones = "";
             if (isset($r->id_relato)) {
-                $ec->observaciones = utf8_decode(trim($r->id_relato));
+                $ec->observaciones = trim($r->id_relato);
             }
             $ec->insert();
 
@@ -738,9 +743,7 @@ class PagImportaRelato extends HTML_QuickForm_Page
 
 }
 
-$aut_usuario = "";
-autenticaUsuario($dsn, $aut_usuario, 61);
-
+global $mreq;
 $wizard = new HTML_QuickForm_Controller('Importa', false);
 $consweb = new PagImportaRelato($mreq);
 

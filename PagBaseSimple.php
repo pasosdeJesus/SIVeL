@@ -186,7 +186,6 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
         $idcaso = $_SESSION['basicos_id'];
         $this->controller->creaTabuladores($this, array('class' => 'flat'));
 
-
         $comp = isset($_SESSION['forma_modo'])
             && $_SESSION['forma_modo'] == 'busqueda'
             && $idcaso == $GLOBALS['idbus'] ?

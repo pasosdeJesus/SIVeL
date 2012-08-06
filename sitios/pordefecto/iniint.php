@@ -14,7 +14,7 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
-
+global $modulos;
 $lm = explode(" ", $modulos);
 foreach ($lm as $m) {
     if (file_exists("$m/conf_int.php")) {

@@ -22,11 +22,13 @@ require_once "DataObjects/Categoria.php";
 $aut_usuario = "";
 $db = autenticaUsuario($dsn, $aut_usuario, 62);
 
+$t = 'Completa actos ' . date('Y-m-d H:m');
+encabezado_envia($t);
 echo '<table width="100%">'
     . '<td style="white-space: nowrap; background-color: #CCCCCC;" '
     . 'align="left" valign="top" colspan="2"><b>'
-    . '<div align=center>Completa actos ' . date('Y-m-d H:m') .
-    '</div></b></td></table><p/>';
+    . '<div align=center>' . $t
+    . '</div></b></td></table><p/>';
 echo "Individuales<br>";
 hace_consulta($db, "DROP VIEW replicadas", false, false);
 hace_consulta(
@@ -76,7 +78,8 @@ hace_consulta($db, "DROP VIEW replicadasc");
 echo '<table width="100%">' .
     '<td style="white-space: nowrap; background-color: #CCCCCC;" ' .
     'align="left" valign="top" colspan="2"><b>' .
-    '<div align=right><a href="index.php">Menú Principal</a>' .
+    '<div align=right><a href="index.php">' .
+    _('Men&uacute; Principal') . '</a>' .
     '</div></b></td></table>';
 /* Completa casos de paramilitares en DIH en DH
 
@@ -107,4 +110,5 @@ echo '<table width="100%">' .
 
  */
 
+    pie_envia();
 ?>

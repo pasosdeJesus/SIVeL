@@ -1083,7 +1083,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
 {
     $nombre = ereg_replace(
         "  *", " ",
-        trim(utf8_decode($grupo->nombre_grupo))
+        trim($grupo->nombre_grupo)
     );
     $nombre = str_replace("*", "", $nombre);
 
@@ -1156,7 +1156,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
         $cx = $vt[0];
         $idt = $vt[1];
         //echo "OJO t=$t, cx=$cx, idt=$idt<br>\n";
-        $partes = explode(";", dato_en_obs($grupo, $cx)); // ya hace utf8_decode
+        $partes = explode(";", dato_en_obs($grupo, $cx)); 
         foreach ($partes as $v) {
             if ($v != null && $v != '') {
                 $drviccol = objeto_tabla($t);
@@ -1357,7 +1357,7 @@ function dato_en_obs(&$oxml, $id)
             . ")</tt>."
             . "  Hay varias observaciones con tipo buscado<br>";
     }
-    $r = utf8_decode((string)$po[0]);
+    $r = (string)$po[0];
     return $r;
 }
 
@@ -1452,7 +1452,7 @@ function conv_categoria(&$db, &$obs, $agr, $pr)
 
 function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
 {
-    $nomg = utf8_decode($g->nombre_grupo);
+    $nomg = $g->nombre_grupo;
     $pr = conv_basica(
         $db, 'presuntos_responsables',
         $nomg, $obs, false
@@ -1489,8 +1489,7 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
     foreach ($g->agresion_sin_vicd as $ag) {
         if (!empty($ag)) {
             $idc = conv_categoria(
-                $db, $obs,
-                utf8_decode((string)$ag), $pr
+                $db, $obs, (string)$ag, $pr
             );
             $ocp = objeto_tabla('categoria_p_responsable_caso');
             $ocp->id_caso = $idcaso;
