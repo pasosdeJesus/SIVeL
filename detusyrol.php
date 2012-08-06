@@ -91,6 +91,9 @@ if ($actsincambiarclave || $f->validate()) {
         || isset($f->_submitValues['añadir'])
     ) {
         $res = $f->process(array($b, 'processForm'), false);
+        if ($_SESSION['id_usuario'] == $f->_submitValues['id_usuario']) {
+            idioma($f->_submitValues['idioma']);
+        }
         if (isset($f->_submitValues['añadir']) ) {
             $db = $d->getDatabaseConnection();
             if (PEAR::isError($db)) {

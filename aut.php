@@ -66,10 +66,12 @@ function idioma($l = "es_CO")
             echo $sep . $nl;
             $sep =", ";
         }
-        exit(1);
+        echo "<br>Estableciendo es_CO<br>";
+        $l = 'es_CO';
     }
     $td = 'sivel';
     $GLOBALS['LC_ALL'] = $l;
+    $_SESSION['idioma_usuario'] = $l;
     $_SESSION['LANG'] = $l;
     putenv("LANGUAGE=$l");
     putenv("LANG=$l");
@@ -279,6 +281,7 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
             if ($result->fetchInto($row)) {
                 $idf = $row[0];
             }
+            $_SESSION['id_usuario'] = $usuario;
             $_SESSION['id_funcionario'] = $idf;
             $q = "SELECT idioma FROM usuario " .
                 "WHERE id_usuario='" . $usuario . "';";
@@ -289,7 +292,11 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
             }
             $_SESSION['idioma_usuario'] = $lang;
         }
-        idioma($_SESSION['idioma_usuario']);
+        if (isset($_SESSION['idioma_usuario'])) {
+            idioma($_SESSION['idioma_usuario']);
+        } else {
+            idioma($_SESSION['es_CO']);
+        }
         if (in_array($opcion, $_SESSION['opciones'])) {
             return $db;
         }
@@ -374,6 +381,7 @@ function cierraSesion($dsn)
     unset($_SESSION[$nv]);
     unset($_SESSION['_authession']);
     unset($_SESSION['id_funcionario']);
+    unset($_SESSION['id_usuario']);
     unset($_SESSION['opciones']);
     $a->logout();
     session_write_close();

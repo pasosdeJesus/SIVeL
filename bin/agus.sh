@@ -27,15 +27,32 @@ read nombre;
 echo -n "Descripcion: ";
 read descripcion;
 echo "Roles:";
-echo "  1- Administrador"
-echo "  2- Analista"
-echo "  3- Consulta"
-echo "  4- Ayudante"
-echo -n "Rol (1-4): ";
+minr=0;
+maxr=0;
+for i in ${ROLESDISP}; do
+	n=`echo $i | sed -e "s/[^0-9]*\([0-9]*\),.*/\1/g"`
+	l=`echo $i | sed -e "s/[^0-9]*[0-9]*,\(.*\)/\1/g"`
+	echo "  " $n "- " $l;
+	if (test "$n" -lt "$minr" -o "$minr" = "0") then {
+		minr=$n;
+	} fi;
+	if (test "$n" -gt "$maxr" -o "$maxr" = "0") then {
+		maxr=$n;
+	} fi;
+done;
+echo -n "Rol ($minr-$maxr): ";
 read idrol;
-if (test "$idrol" != "1" -a "$idrol" != "2" -a "$idrol" != "3" -a "$idrol" != "4") then {
-	echo "NO se eligió rol disponible, eligiendo Analista";
-	$idrol = "2";
+sidrol=""
+for i in ${ROLESDISP}; do
+	n=`echo $i | sed -e "s/[^0-9]*\([0-9]*\),.*/\1/g"`
+	l=`echo $i | sed -e "s/[^0-9]*[0-9]*,\(.*\)/\1/g"`
+	if (test "$idrol" = "$n") then {
+		sidrol="$n";
+	} fi;
+done;
+if (test "$sidrol" = "") then {
+	echo "No se eligió uno de los roles disponibles, eligiendo 2";
+	sidrol="2";
 } fi;
 echo -n "Anotación: ";
 read anotacion;
@@ -59,7 +76,7 @@ echo -n "Clave: ";
 stty -echo; read clave; stty echo
 
 clavesha1=$($PHP -n -r "echo sha1('$clave');")
-q="SET client_encoding to 'UTF8'; INSERT INTO usuario(id_usuario, password, nombre, descripcion, id_rol, idioma)  VALUES ('$id', '$clavesha1', '$nombre', '$descripcion', '$idrol', '$idsel'); INSERT INTO funcionario(anotacion, nombre) VALUES ('$anotacion', '$id');" 
+q="SET client_encoding to 'UTF8'; INSERT INTO usuario(id_usuario, password, nombre, descripcion, id_rol, idioma)  VALUES ('$id', '$clavesha1', '$nombre', '$descripcion', '$sidrol', '$idsel'); INSERT INTO funcionario(anotacion, nombre) VALUES ('$anotacion', '$id');" 
 echo $q;
 ../../bin/psql.sh -c "$q"
 

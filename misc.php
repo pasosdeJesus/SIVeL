@@ -998,8 +998,7 @@ function echo_esc($mens, $nl = true)
  */
 function sin_error_pear($do, $msg = "")
 {
-    global $pear;
-    if ($pear->isError($do)) {
+    if (PEAR::isError($do)) {
         //debug_print_backtrace();
         die_esc(trim($msg . " ") . $do->getMessage() . " - " . $do->getUserInfo());
     }
@@ -1420,9 +1419,8 @@ function var_escapa($v, &$db = null, $maxlong = 1024)
             /** Evita XSS */
             $p2=htmlspecialchars($p1);
 
-            global $pear;
             /** Evita inyección de código SQL */
-            if (isset($db) && $db != null && !$pear->isError($db)) {
+            if (isset($db) && $db != null && !PEAR::isError($db)) {
                 $p3 = $db->escapeSimple($p2);
             } else {
                 // Tomado de librería de Pear DB/pgsql.php

@@ -19,6 +19,7 @@
  * Definicion para la tabla usuario.
  */
 require_once 'DB_DataObject_SIVeL.php';
+require_once 'confv.php';
 
 /**
  * Definicion para la tabla usuario.
@@ -41,6 +42,7 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
     var $descripcion;                     // varchar(-1)
     var $id_rol;                          // int4(4)
     var $dias_edicion_caso;               // int4(4)
+    var $idioma;               
 
 
     /**
@@ -53,34 +55,41 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
 
         $this->nom_tabla = _("Usuario");
         $this->fb_fieldLabels= array(
-           'id_usuario' => _('Identificación'),
-           'password' => _('Clave'),
-           'nombre' => _('Nombre'),
-           'descripcion' => _('Descripcion'),
-           'id_rol' => _('Rol'),
-       );
-        $this->es_enumOptions = array(
-            'id_rol' => array(
-                '1' => _('Administrador'),
-                '2' => _('Analista'),
-                '3' => _('Consulta'),
-                '4' => _('Ayudante'),
-            ),
+            'id_usuario' => _('Identificación'),
+            'password' => _('Clave'),
+            'nombre' => _('Nombre'),
+            'descripcion' => _('Descripcion'),
+            'id_rol' => _('Rol'),
+            'idioma' => _('Idioma'),
         );
-
+        global $LENGDISP, $ROLESDISP;
+        $ld = explode(" ", $LENGDISP);
+        foreach($ld as $l) {
+            $this->es_enumOptions['idioma'][$l] = $l;
+        }
+        $rd = explode(" ", $ROLESDISP);
+        foreach($rd as $er) {
+            $pr = explode(",", $er);
+            if ((int)$pr[0] <= 0) {
+                die_esc("Identficacion de rol errada $er en \$ROLESDISP");
+            }
+            $this->es_enumOptions['id_rol'][$pr[0]] = $pr[1];
+        }
     }
 
     var $fb_preDefOrder = array(
-        'id_usuario', 'password', 'nombre', 'descripcion', 'id_rol'
+        'id_usuario', 'password', 'nombre', 'descripcion', 'id_rol',
+        'idioma'
     );
     var $fb_fieldsToRender = array(
-        'id_usuario', 'password', 'nombre', 'descripcion', 'id_rol'
+        'id_usuario', 'password', 'nombre', 'descripcion', 'id_rol',
+        'idioma'
     );
     var $fb_linkDisplayFields = array('id_usuario');
     var $fb_select_display_field= 'id_usuario';
     var $fb_hidePrimaryKey = false;
 
-    var $fb_enumFields = array('id_rol');
+    var $fb_enumFields = array('id_rol', 'idioma');
 
 
     /**

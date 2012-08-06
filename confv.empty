@@ -44,6 +44,10 @@ LENGDISP="es_CO en_US"
 # Idiomas en los que está disponible la interfaz de usuario
 #
 
+ROLESDISP="1,Administrador 2,Analista 3,Consulta 4,Ayudante"
+# Roles que están disponibles desde la interfaz de usuario
+#
+
 ACT_PROC="act-scp"
 # Regla para actualizar sitio de publicación
 # Las que hay por defecto son act-scp y act-ncftpput
