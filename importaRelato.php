@@ -116,8 +116,8 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $u = ini_get('upload_max_filesize');
             $p = ini_get('post_max_size');
             die(sprintf(
-                "No pudo subirse archivo, revisar que el tamaño sea "
-                . "mayor que cero y menor que %s y que %s", $u, $p
+                _("No pudo subirse archivo, revisar que el tamaño sea "
+                . "mayor que cero y menor que %s y que %s"), $u, $p
             ));
         }
         move_uploaded_file(
@@ -140,12 +140,16 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         } else {
             $narc = $GLOBALS['dir_anexos'] . "/$pArchivo";
             $cont = file_get_contents($narc);
+            if ($cont == '') {
+                die_esc('No puede importar archivo vacío ' . $pArchivo);
+            }
         }
 
         $relatos = simplexml_load_string($cont);
         if (!$relatos) {
             $e = libxml_get_errors();
-            die("No pudo cargarse '" . $pArchivo . "'");
+            var_dump($e);
+            die(_("No pudo cargarse") . " '" . $pArchivo . "'");
         }
 
         $yaesta = array(); // Indica cuales pestañas ya importaron
@@ -215,7 +219,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             }
             $idcaso = $dcaso->id;
             if ($idcaso == 0) {
-                die("idcaso es 0");
+                die(_("idcaso es 0"));
             }
             $yaesta['PagBasicos'] = true;
             $yaesta['PagMemo'] = true;
@@ -228,7 +232,9 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $anexof->id_caso = $idcaso;
             $anexof->fecha = date('Y-m-d');
             $anexof->archivo = '';
-            $anexof->descripcion = "Fuente extraida automaticamente de $narc";
+            $anexof->descripcion = sprintf(
+                _("Fuente extraida automaticamente de %s"), $narc
+            );
             $anexof->insert();
 
             $rx = $GLOBALS['enc_relato']

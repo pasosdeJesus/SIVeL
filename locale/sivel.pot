@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sivel 1.2\n"
 "Report-Msgid-Bugs-To: vtamara@pasosdeJesus.org\n"
-"POT-Creation-Date: 2012-08-06 08:39-0500\n"
+"POT-Creation-Date: 2012-08-07 13:49-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgid "Colectivos"
 msgstr ""
 
 #: PagBaseMultiple.php:302 PagBaseSimple.php:192 consolidado.php:689
-#: consulta_web.php:916 estadisticas.php:600
+#: consulta_web.php:916 estadisticas.php:607
 #: sitios/pordefecto/conf_int.php:337
 msgid "Consulta"
 msgstr ""
@@ -155,7 +155,7 @@ msgstr ""
 
 #: PagBasicos.php:730 PagPresentaRes.php:116 PagUbicacion.php:245
 #: PagUbicacion.php:246 consolidado.php:376 consolidado.php:380
-#: consulta_web.php:714 estadisticas.php:574 DataObjects/Escrito_caso.php:70
+#: consulta_web.php:714 estadisticas.php:581 DataObjects/Escrito_caso.php:70
 #: sitios/pordefecto/conf_int.php:199 sitios/pordefecto/conf_int.php:206
 #: sitios/pordefecto/conf_int.php:304 sitios/pordefecto/conf_int.php:325
 #: sitios/pordefecto/conf_int.php:460
@@ -175,7 +175,7 @@ msgstr ""
 msgid "Fuentes Frecuentes"
 msgstr ""
 
-#: PagFuentesFrecuentes.php:151 PagOtrasFuentes.php:179 aut.php:87 pint.php:22
+#: PagFuentesFrecuentes.php:151 PagOtrasFuentes.php:179 aut.php:87
 #: DataObjects/Escrito_caso.php:73 sitios/pordefecto/conf_int.php:204
 msgid "Fuente"
 msgstr ""
@@ -318,10 +318,11 @@ msgstr ""
 msgid "Ingreso Hasta:"
 msgstr ""
 
-#: PagTipoViolencia.php:139 DataObjects/Caso_contexto.php:49
-#: DataObjects/Caso_contexto.php:50 DataObjects/Contexto.php:48
-#: sitios/pordefecto/conf_int.php:165 sitios/pordefecto/conf_int.php:217
-#: sitios/pordefecto/conf_int.php:218 sitios/pordefecto/conf_int.php:307
+#: PagTipoViolencia.php:139 ResConsulta.php:2095
+#: DataObjects/Caso_contexto.php:49 DataObjects/Caso_contexto.php:50
+#: DataObjects/Contexto.php:48 sitios/pordefecto/conf_int.php:165
+#: sitios/pordefecto/conf_int.php:217 sitios/pordefecto/conf_int.php:218
+#: sitios/pordefecto/conf_int.php:307
 msgid "Contexto"
 msgstr ""
 
@@ -399,9 +400,10 @@ msgstr ""
 msgid "Organización Social"
 msgstr ""
 
-#: ResConsulta.php:496 DataObjects/Acto.php:58 DataObjects/Acto.php:78
-#: DataObjects/Actocolectivo.php:59 DataObjects/Actocolectivo.php:79
-#: DataObjects/Categoria.php:56 sitios/pordefecto/conf_int.php:164
+#: ResConsulta.php:496 estadisticas.php:200 DataObjects/Acto.php:58
+#: DataObjects/Acto.php:78 DataObjects/Actocolectivo.php:59
+#: DataObjects/Actocolectivo.php:79 DataObjects/Categoria.php:56
+#: sitios/pordefecto/conf_int.php:164
 msgid "Categoria"
 msgstr ""
 
@@ -420,7 +422,7 @@ msgstr ""
 msgid "Consulta de"
 msgstr ""
 
-#: ResConsulta.php:691
+#: ResConsulta.php:691 ResConsulta.php:737
 msgid "casos"
 msgstr ""
 
@@ -429,16 +431,21 @@ msgid "Por favor refine su consulta para que sean menos de"
 msgstr ""
 
 #: ResConsulta.php:755 ResConsulta.php:805 ResConsulta.php:818
-#: ResConsulta.php:1004 ResConsulta.php:1030 ResConsulta.php:1043
-#: consolidado.php:205 consolidado.php:219 consulta_web.php:229
-#: consulta_web.php:244 consulta_web.php:374 consulta_web.php:800
-#: consulta_web.php:814 consulta_web.php:902 estadisticas.php:556
+#: ResConsulta.php:947 ResConsulta.php:966 ResConsulta.php:1007
+#: ResConsulta.php:1033 ResConsulta.php:1046 ResConsulta.php:1258
+#: ResConsulta.php:2164 ResConsulta.php:2752 ResConsulta.php:2851
+#: ResConsulta.php:2868 consolidado.php:205 consolidado.php:219
+#: consulta_web.php:229 consulta_web.php:244 consulta_web.php:374
+#: consulta_web.php:800 consulta_web.php:814 consulta_web.php:902
+#: estadisticas.php:260 estadisticas.php:563
 msgid "Falta"
 msgstr ""
 
-#: ResConsulta.php:756 ResConsulta.php:806 ResConsulta.php:1005
-#: ResConsulta.php:1031 consolidado.php:206 consulta_web.php:230
-#: consulta_web.php:375 consulta_web.php:801 consulta_web.php:903
+#: ResConsulta.php:756 ResConsulta.php:806 ResConsulta.php:948
+#: ResConsulta.php:1008 ResConsulta.php:1034 ResConsulta.php:1259
+#: ResConsulta.php:2165 ResConsulta.php:2852 consolidado.php:206
+#: consulta_web.php:230 consulta_web.php:375 consulta_web.php:801
+#: consulta_web.php:903
 msgid "en"
 msgstr ""
 
@@ -478,9 +485,9 @@ msgstr ""
 msgid "Generando relatos"
 msgstr ""
 
-#: ResConsulta.php:819 ResConsulta.php:1044 consolidado.php:219
-#: consulta_web.php:245 consulta_web.php:741 consulta_web.php:815
-#: estadisticas.php:557
+#: ResConsulta.php:819 ResConsulta.php:967 ResConsulta.php:1047
+#: consolidado.php:219 consulta_web.php:245 consulta_web.php:741
+#: consulta_web.php:815 estadisticas.php:260 estadisticas.php:564
 msgid "de"
 msgstr ""
 
@@ -492,12 +499,46 @@ msgstr ""
 msgid "fuera de secuencia"
 msgstr ""
 
-#: ResConsulta.php:1058 actualiza.php:2202 buscaRepetidos.php:60
+#: ResConsulta.php:923
+msgid "Falló"
+msgstr ""
+
+#: ResConsulta.php:1061 actualiza.php:2202 buscaRepetidos.php:60
 #: completaActos.php:82 consolidado.php:696 consulta_web.php:924
-#: detalle.php:83 detusyrol.php:71 estadisticas.php:352 estadisticas.php:607
-#: importaRelato.php:739 tabla.php:224 tablas_basicas.php:60 usyroles.php:72
+#: detalle.php:83 detusyrol.php:71 estadisticas.php:355 estadisticas.php:614
+#: importaRelato.php:745 tabla.php:224 tablas_basicas.php:60 usyroles.php:72
 #: valida.php:117
 msgid "Men&uacute; Principal"
+msgstr ""
+
+#: ResConsulta.php:1211 ResConsulta.php:2248 consolidado.php:377
+#: consolidado.php:381 consolidado.php:386 sitios/pordefecto/conf_int.php:299
+#: sitios/pordefecto/conf_int.php:326 sitios/pordefecto/conf_int.php:461
+msgid "Víctimas"
+msgstr ""
+
+#: ResConsulta.php:1622
+msgid "Tiene más de una ubicación"
+msgstr ""
+
+#: ResConsulta.php:1938
+msgid "CASO No."
+msgstr ""
+
+#: ResConsulta.php:2004
+msgid "Tip. Ub"
+msgstr ""
+
+#: ResConsulta.php:2275
+msgid "PERSONA SIN IDENTIFICAR"
+msgstr ""
+
+#: ResConsulta.php:2277
+msgid "PERSONAS SIN IDENTIFICAR"
+msgstr ""
+
+#: ResConsulta.php:2752 ResConsulta.php:2868
+msgid "indicada en"
 msgstr ""
 
 #: actualiza.php:43 actualiza.php:46
@@ -548,12 +589,6 @@ msgstr ""
 msgid "Falta información para reporte consolidado en tabla categoria"
 msgstr ""
 
-#: consolidado.php:377 consolidado.php:381 consolidado.php:386
-#: sitios/pordefecto/conf_int.php:299 sitios/pordefecto/conf_int.php:326
-#: sitios/pordefecto/conf_int.php:461
-msgid "Víctimas"
-msgstr ""
-
 #: consolidado.php:385
 msgid "Ubicacion"
 msgstr ""
@@ -567,11 +602,11 @@ msgstr ""
 msgid "Reporte consolidado"
 msgstr ""
 
-#: consolidado.php:615 estadisticas.php:461
+#: consolidado.php:615 estadisticas.php:468
 msgid "Desde"
 msgstr ""
 
-#: consolidado.php:621 estadisticas.php:468
+#: consolidado.php:621 estadisticas.php:475
 msgid "Hasta"
 msgstr ""
 
@@ -587,11 +622,11 @@ msgstr ""
 msgid "Agregar columna con resto"
 msgstr ""
 
-#: consolidado.php:672 estadisticas.php:585
+#: consolidado.php:672 estadisticas.php:592
 msgid "Tabla HTML"
 msgstr ""
 
-#: consolidado.php:677 estadisticas.php:591
+#: consolidado.php:677 estadisticas.php:598
 msgid "Formato CSV (hoja de cálculo)"
 msgstr ""
 
@@ -599,7 +634,7 @@ msgstr ""
 msgid "LaTeX"
 msgstr ""
 
-#: consolidado.php:683 consulta_web.php:826 estadisticas.php:593
+#: consolidado.php:683 consulta_web.php:826 estadisticas.php:600
 msgid "Forma de presentación"
 msgstr ""
 
@@ -623,17 +658,18 @@ msgstr ""
 msgid "Título del caso"
 msgstr ""
 
-#: consulta_web.php:491 estadisticas.php:564 DataObjects/Clase.php:52
-#: DataObjects/Departamento.php:45 DataObjects/Municipio.php:51
-#: DataObjects/Persona.php:81 DataObjects/Ubicacion.php:70
-#: sitios/pordefecto/conf_int.php:138 sitios/pordefecto/conf_int.php:195
+#: consulta_web.php:491 estadisticas.php:189 estadisticas.php:571
+#: DataObjects/Clase.php:52 DataObjects/Departamento.php:45
+#: DataObjects/Municipio.php:51 DataObjects/Persona.php:81
+#: DataObjects/Ubicacion.php:70 sitios/pordefecto/conf_int.php:138
+#: sitios/pordefecto/conf_int.php:195
 msgid "Departamento"
 msgstr ""
 
-#: consulta_web.php:508 estadisticas.php:570 DataObjects/Clase.php:53
-#: DataObjects/Municipio.php:49 DataObjects/Persona.php:82
-#: DataObjects/Ubicacion.php:71 sitios/pordefecto/conf_int.php:139
-#: sitios/pordefecto/conf_int.php:196
+#: consulta_web.php:508 estadisticas.php:196 estadisticas.php:577
+#: DataObjects/Clase.php:53 DataObjects/Municipio.php:49
+#: DataObjects/Persona.php:82 DataObjects/Ubicacion.php:71
+#: sitios/pordefecto/conf_int.php:139 sitios/pordefecto/conf_int.php:196
 msgid "Municipio"
 msgstr ""
 
@@ -740,28 +776,63 @@ msgstr ""
 msgid "Detalle de usuario"
 msgstr ""
 
-#: estadisticas.php:453 estadisticas.php:619
-msgid "Conteos Victimizacione Individuales"
+#: estadisticas.php:188
+msgid "C. Dep."
 msgstr ""
 
-#: estadisticas.php:478
-msgid "Tipo de violencia"
+#: estadisticas.php:195
+msgid "C. Mun."
 msgstr ""
 
-#: estadisticas.php:496 DataObjects/Categoria.php:58
+#: estadisticas.php:198 DataObjects/Categoria.php:59
+#: DataObjects/Parametros_reporte_consolidado.php:54
+#: DataObjects/Supracategoria.php:48 DataObjects/Tipo_violencia.php:47
+#: sitios/pordefecto/conf_int.php:162
+msgid "Tipo de Violencia"
+msgstr ""
+
+#: estadisticas.php:199 estadisticas.php:503 DataObjects/Categoria.php:58
 #: DataObjects/Supracategoria.php:47 sitios/pordefecto/conf_int.php:163
 msgid "Supracategoria"
 msgstr ""
 
-#: estadisticas.php:513
+#: estadisticas.php:202
+msgid "N. Actos"
+msgstr ""
+
+#: estadisticas.php:206
+msgid "N. Víctimizaciones"
+msgstr ""
+
+#: estadisticas.php:226
+msgid "Cód."
+msgstr ""
+
+#: estadisticas.php:456 estadisticas.php:626
+msgid "Conteos Victimizacione Individuales"
+msgstr ""
+
+#: estadisticas.php:485
+msgid "Tipo de violencia"
+msgstr ""
+
+#: estadisticas.php:520
 msgid "Según"
 msgstr ""
 
-#: estadisticas.php:578
+#: estadisticas.php:536
+msgid "MESES"
+msgstr ""
+
+#: estadisticas.php:537
+msgid "PROFESION"
+msgstr ""
+
+#: estadisticas.php:585
 msgid "Categorias Repetidas"
 msgstr ""
 
-#: estadisticas.php:579
+#: estadisticas.php:586
 msgid "Excluir"
 msgstr ""
 
@@ -781,6 +852,11 @@ msgstr ""
 msgid "Debe haber una etiqueta ERROR_IMPORTACIÓN."
 msgstr ""
 
+#: importaRelato.php:119
+#, php-format
+msgid "No pudo subirse archivo, revisar que el tamaño sea mayor que cero y menor que %s y que %s"
+msgstr ""
+
 #: importaRelato.php:134
 msgid "Falta soporte para Zlib en su instalación de PHP."
 msgstr ""
@@ -789,76 +865,89 @@ msgstr ""
 msgid "Descomprima manualmente e importe el descomprimido"
 msgstr ""
 
-#: importaRelato.php:214
+#: importaRelato.php:152
+msgid "No pudo cargarse"
+msgstr ""
+
+#: importaRelato.php:218
 msgid "No pudo insertar caso "
 msgstr ""
 
-#: importaRelato.php:256 importaRelato.php:274
+#: importaRelato.php:222
+msgid "idcaso es 0"
+msgstr ""
+
+#: importaRelato.php:236
+#, php-format
+msgid "Fuente extraida automaticamente de %s"
+msgstr ""
+
+#: importaRelato.php:262 importaRelato.php:280
 msgid "Organización responsable incluida automáticamente"
 msgstr ""
 
-#: importaRelato.php:382
+#: importaRelato.php:388
 #, php-format
 msgid "Acto: No hay definida persona con id '%s'"
 msgstr ""
 
-#: importaRelato.php:467
+#: importaRelato.php:473
 msgid "No pudo insertar víctima"
 msgstr ""
 
-#: importaRelato.php:524
+#: importaRelato.php:530
 msgid "No hay datos de p. resp."
 msgstr ""
 
-#: importaRelato.php:544
+#: importaRelato.php:550
 msgid "No hay definida persona con id."
 msgstr ""
 
-#: importaRelato.php:573
+#: importaRelato.php:579
 msgid "Acto: No pudo insertar acto col."
 msgstr ""
 
-#: importaRelato.php:580
+#: importaRelato.php:586
 msgid "No es individual ni colectiva"
 msgstr ""
 
-#: importaRelato.php:584
+#: importaRelato.php:590
 msgid "Agresión particular vacía"
 msgstr ""
 
-#: importaRelato.php:619
+#: importaRelato.php:625
 msgid "Falta importaRelato en"
 msgstr ""
 
-#: importaRelato.php:630 modulos/etiquetas/DataObjects/Etiquetacaso.php:112
+#: importaRelato.php:636 modulos/etiquetas/DataObjects/Etiquetacaso.php:112
 #: modulos/etiquetas/DataObjects/Etiquetacaso.php:131
 #: modulos/segjudicial/DataObjects/Accion.php:71
 #: modulos/segjudicial/DataObjects/Proceso.php:67
 msgid "Observaciones"
 msgstr ""
 
-#: importaRelato.php:682
+#: importaRelato.php:688
 msgid "Se requiere módulo anexos con variable dir_anexos"
 msgstr ""
 
-#: importaRelato.php:686
+#: importaRelato.php:692
 #, php-format
 msgid "El directorio '%s' debería permitir escritura"
 msgstr ""
 
-#: importaRelato.php:693
+#: importaRelato.php:699
 msgid "Se requiere módulo etiquetas"
 msgstr ""
 
-#: importaRelato.php:714
+#: importaRelato.php:720
 msgid "Importa Relatos"
 msgstr ""
 
-#: importaRelato.php:721
+#: importaRelato.php:727
 msgid "Archivo con relatos"
 msgstr ""
 
-#: importaRelato.php:729
+#: importaRelato.php:735
 msgid "Importar"
 msgstr ""
 
@@ -1079,13 +1168,6 @@ msgstr ""
 
 #: DataObjects/Categoria.php:57
 msgid "Código de Categoría"
-msgstr ""
-
-#: DataObjects/Categoria.php:59
-#: DataObjects/Parametros_reporte_consolidado.php:54
-#: DataObjects/Supracategoria.php:48 DataObjects/Tipo_violencia.php:47
-#: sitios/pordefecto/conf_int.php:162
-msgid "Tipo de Violencia"
 msgstr ""
 
 #: DataObjects/Categoria.php:63

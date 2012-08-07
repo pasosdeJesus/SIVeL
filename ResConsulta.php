@@ -734,7 +734,7 @@ class ResConsulta
             );
             echo "<html><head><title>Tabla</title></head>";
             echo "<body>";
-            echo _("Consulta de") . " " . (int)$tot . " casos. ";
+            echo _("Consulta de") . " " . (int)$tot . " " . _("casos") . ". ";
             echo "<p><table border=1 cellspacing=0 cellpadding=5>";
             $html_renglon = "<tr>";
             $rtexto = "";
@@ -920,7 +920,7 @@ class ResConsulta
                         );
                         $r .= "</relatos>\n";
                         if (!file_put_contents($nar, $r)) {
-                            echo " ... Falló<br>";
+                            echo " ... " . _("Falló") . "<br>";
                         } else {
                             echo "<br>\n";
                         }
@@ -943,7 +943,10 @@ class ResConsulta
                                 $this->conv, $sal, $retroalim)
                             );
                         } else {
-                            echo_esc("Falta resConsultaRegistro en $n, $c");
+                            echo_esc(
+                                _("Falta") . " resConsultaRegistro " 
+                                . _("en") . " $n, $c"
+                            );
                         }
                     }
 
@@ -960,8 +963,8 @@ class ResConsulta
                                         $this->conv, $sal, $retroalim)
                                     );
                                 } else {
-                                    muestra_escapado(
-                                        "Falta $f de resConsultaRegistro[$k]"
+                                    muestra_escapado( _("Falta") . " $f " 
+                                       . _("de") . " resConsultaRegistro[$k]"
                                     );
                                 }
                             }
@@ -1205,7 +1208,7 @@ class ResConsulta
                     $seploc = ", ";
                 }
 
-                $vrpost = " | Víctimas:".$totv;
+                $vrpost = " | " . _("Víctimas") . ":".$totv;
 
             } else if ($cc == 'm_tipificacion') {
                 $idp = array(); // Identificaciones
@@ -1252,7 +1255,8 @@ class ResConsulta
                             array(&$db, $cc, $idcaso)
                         );
                     } else {
-                        echo_esc("Falta resConsultaFilaTabla en $n, $c");
+                        echo_esc(_("Falta") . " resConsultaFilaTabla "
+                            . _("en") . " $n, $c");
                     }
                 }
             }
@@ -1614,7 +1618,8 @@ class ResConsulta
             }
             if ($nubi > 1) {
                 $arotros['observaciones{tipo->etiqueta:IMPORTA_RELATO}']
-                    = date('Y-m-d') . " Tiene más de una ubicacion: $uobs";
+                    = date('Y-m-d') . " " .
+                    _("Tiene más de una ubicación") . ": $uobs";
             }
             $arubicacion = array();
             $dubicacion->aRelato(
@@ -1930,7 +1935,7 @@ class ResConsulta
         $dcaso->get('id', $idcaso);
         $r = ""; $rcaso = "";
         if (array_key_exists('caso_id', $campos)) {
-            $rcaso .= "CASO NO. "
+            $rcaso .= _("CASO No.") . " "
                 . "<a href='captura_caso.php?modo=edita&id={$dcaso->id}'>"
                 . "{$dcaso->id}</a>\n";
         }
@@ -1996,7 +2001,7 @@ class ResConsulta
                 }
             }
 
-            $r .= "  Tip. Ub: ";
+            $r .= "  " . _("Tip. Ub") . ": ";
             $r .= trim($cadub);
             $r .= "\n\n";
 
@@ -2087,7 +2092,7 @@ class ResConsulta
             $dcontexto = objeto_tabla('caso_contexto');
             $dcontexto->id_caso = $idcaso;
             $dcontexto->find();
-            $pref = "Contexto: ";
+            $pref = _("Contexto") . ": ";
             $post = "";
             while ($dcontexto->fetch()) {
                 $dc = $dcontexto->getLink('id_contexto');
@@ -2155,7 +2160,10 @@ class ResConsulta
                     array(&$db, $campos, $idcaso)
                 );
             } else {
-                echo_esc("Falta reporteGeneralRegistroHtml en $n, $c");
+                echo_esc(
+                    _("Falta") . " reporteGeneralRegistroHtml "
+                    . _("en") . " $n, $c"
+                );
             }
         }
 
@@ -2237,7 +2245,7 @@ class ResConsulta
         $indenta, $corto = false
     ) {
         $nns = 0;
-        $sep = $corto ? "Víctimas: " : "";
+        $sep = $corto ? _("Víctimas") . ": " : "";
         $fin = "";
         foreach ($lvc as $idv) {
             if ($idv == -1) {
@@ -2264,9 +2272,9 @@ class ResConsulta
             $r .= "&nbsp;&nbsp;&nbsp;&nbsp;";
         }
         if ($nns == 1) {
-            $r .= "PERSONA SIN IDENTIFICAR\n";
+            $r .= _("PERSONA SIN IDENTIFICAR") . "\n";
         } else if ($nns > 1) {
-            $r .= $nns . " PERSONAS SIN IDENTIFICAR\n";
+            $r .= $nns . " " . _("PERSONAS SIN IDENTIFICAR") . "\n";
         }
     }
 
@@ -2740,7 +2748,10 @@ class ResConsulta
                         array(&$db, $campos, $idcaso, $numcaso)
                     );
                 } else {
-                    echo_esc("Falta $f indicada en gancho_rc_reginicial[$k]");
+                    echo_esc(
+                        _("Falta") ." $f " . _("indicada en")
+                        . " gancho_rc_reginicial[$k]"
+                    ); 
                 }
             }
         }
@@ -2837,7 +2848,8 @@ class ResConsulta
                     array(&$db, $campos, $idcaso)
                 );
             } else {
-                echo_esc("Falta reporteRevistaRegistroHtml en $n, $c");
+                echo_esc(_("Falta") . " reporteRevistaRegistroHtml " 
+                    . _("en") . " $n, $c");
             }
         }
 
@@ -2852,7 +2864,10 @@ class ResConsulta
                     );
                     $r .= $rr;
                 } else {
-                    echo_esc("Falta $f indicada en gancho_rc_regfinal[$k]");
+                    echo_esc(
+                        _("Falta") . " $f ". _("indicada en")
+                        . "gancho_rc_regfinal[$k]"
+                    );
                 }
             }
         }

@@ -63,18 +63,9 @@ $GLOBALS['derechos'] = 'Dominio Público';
 /** Módulos empleados (relativos a directorio con fuentes) */
 $modulos = "modulos/anexos modulos/etiquetas modulos/mapag";
 
-// Opciones del menú
-
-// $GLOBALS['modulo'][100] = 'modulos/estrotulos/estrotulos.php';
-// $GLOBALS['modulo'][101] = 'modulos/estrotulos/estcolectivas.php';
-// $GLOBALS['modulo'][200] = 'modulos/belicas/estadisticas_comb.php';
-$GLOBALS['modulo'][300] = 'modulos/mapag/index.php';
-
-// Posibilidades de módulos
-// $GLOBALS['consultaweb_ordenarpor'][0] = "rotulos_cwebordenar";
-// $GLOBALS['gancho_rc_reginicial'][0] = "rotulos_inicial";
-// $GLOBALS['gancho_rc_regfinal'][0] = "rotulos_final";
-// $GLOBALS['misc_ordencons'][0] = "rotulos_orden_cons";
-
-
 require 'sitios/pordefecto/inibdmod.php';
+
+// Sobrecarga a configuración de módulos
+
+
+

@@ -185,25 +185,25 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         if ($pDepartamento == "1") {
             $tDep = "departamento.id, trim(departamento.nombre), ";
             $gDep = "departamento.id, departamento.nombre, ";
-            $cab[] = 'C. Dep.';
-            $cab[] = 'Departamento';
+            $cab[] = _('C. Dep.');
+            $cab[] = _('Departamento');
         }
         $tMun = $gMun = "";
         if ($pMunicipio == "1") {
             $tMun = "municipio.id, trim(municipio.nombre), ";
             $gMun = "municipio.id, municipio.nombre, ";
-            $cab[] = 'C. Mun.';
-            $cab[] = 'Municipio';
+            $cab[] = _('C. Mun.');
+            $cab[] = _('Municipio');
         }
-        $cab[] = 'Tipo de Violencia';
-        $cab[] = 'Supracategoria';
-        $cab[] = 'Categoria';
+        $cab[] = _('Tipo de Violencia');
+        $cab[] = _('Supracategoria');
+        $cab[] = _('Categoria');
         if ($pSegun == 'id_p_responsable') {
-            $cab[] = 'N. Actos';
+            $cab[] = _('N. Actos');
             // Un acto es un hecho de violencia cometido por un actor
             // contra una víctima
         } else {
-            $cab[] = 'N. Víctimizaciones';
+            $cab[] = _('N. Víctimizaciones');
             // Una victimización o violación es un tipo de violencia
             // sufrido por una víctima (sin examinar el o los responsables)
             // Para casos con un sólo presunto responsable actos y
@@ -223,7 +223,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $pQ1sel = 'victima.id_persona, ';
 
         $tablas = $tablaSegun . "$tQue caso, categoria";
-        $campos = array('caso_id' => 'Cód.');
+        $campos = array('caso_id' => _('Cód.'));
 
 
         if ($pTipo != '') {
@@ -256,7 +256,10 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
                         array($pMostrar, $this->opciones, $this, &$ae, &$t)
                     );
                 } else {
-                    echo_esc("Falta $f de gancho_ei_creaconsulta[$k]");
+                    echo_esc(
+                        _("Falta") . " $f " . _("de") 
+                        . " gancho_ei_creaconsulta[$k]"
+                    );
                 }
             }
         }
@@ -452,6 +455,10 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
             'header', null,
             _('Conteos Victimizacione Individuales')
         );
+        $lang = 'es';
+        if (isset($_SESSION['LANG'])) {
+            $lang = substr($_SESSION['LANG'], 0, 2);
+        }
 
         $cy = date('Y');
         if ($cy < 2005) {
@@ -460,14 +467,14 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
         $e =& $this->addElement(
             'date', 'fini', _('Desde') .': ',
             array(
-                'language' => 'es', 'addEmptyOption' => true,
+                'language' => $lang, 'addEmptyOption' => true,
             'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
             )
         );
         $e =& $this->addElement(
             'date', 'ffin', _('Hasta'),
             array(
-                'language' => 'es', 'addEmptyOption' => true,
+                'language' => $lang, 'addEmptyOption' => true,
                 'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
             )
         );
@@ -526,8 +533,8 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
                 strtoupper($GLOBALS['etiqueta']['sector_social']),
             'id_organizacion' =>
                 strtoupper($GLOBALS['etiqueta']['organizacion']),
-            'meses' => 'MESES',
-            'id_profesion' => 'PROFESION',
+            'meses' => _('MESES'),
+            'id_profesion' => _('PROFESION'),
         )
         );
 

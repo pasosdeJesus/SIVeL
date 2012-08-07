@@ -16,7 +16,7 @@
 
 // Opciones del menú
 
-$GLOBALS['modulo'][200] = 'modulos/belicas/estadisticas_comb.php';
+$GLOBALS['modulo'][300] = 'modulos/mapag/index.php';
 
 
 
