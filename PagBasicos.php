@@ -664,9 +664,10 @@ class PagBasicos extends PagBaseSimple
         ) {  //Busqueda
             $this->addElement('hidden', 'id', $GLOBALS['idbus']);
 
+	    $slan = isset($_SESSION['LANG']) ?  $_SESSION['LANG'] : 'es';
             $e =& $this->addElement(
                 'date', 'fini', _('Fecha inicial'),
-                array('language' => 'es', 'addEmptyOption' => true,
+                array('language' => $slan, 'addEmptyOption' => true,
                 'minYear' => $GLOBALS['anio_min']
                 )
             );
@@ -680,7 +681,7 @@ class PagBasicos extends PagBaseSimple
             $this->_defaultValues['fini'] = $v;
             $e =& $this->addElement(
                 'date', 'ffin', _('Fecha final'),
-                array('language' => 'es', 'addEmptyOption' => true,
+                array('language' => $slan, 'addEmptyOption' => true,
                 'minYear' => $GLOBALS['anio_min']
                 )
             );

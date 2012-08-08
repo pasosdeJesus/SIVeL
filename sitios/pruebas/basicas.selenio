@@ -13,12 +13,12 @@
 </thead><tbody>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Departamento</td>
+	<td>css=a[href*='tabla=departamento']</td>
 	<td></td>
 </tr>
 <tr>
@@ -34,7 +34,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -73,7 +73,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href='detalle.php?tabla=departamento']</td>
 	<td></td>
 </tr>
 <tr>
@@ -93,12 +93,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Municipio</td>
+	<td>css=a[href='tabla.php?tabla=municipio']</td>
 	<td></td>
 </tr>
 <tr>
@@ -114,7 +114,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -153,7 +153,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href='detalle.php?tabla=municipio']</td>
 	<td></td>
 </tr>
 <tr>
@@ -178,12 +178,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tipo Clase</td>
+	<td>css=a[href='tabla.php?tabla=tipo_clase']</td>
 	<td></td>
 </tr>
 <tr>
@@ -199,7 +199,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -238,7 +238,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -263,12 +263,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Municipio</td>
+	<td>css=a[href='tabla.php?tabla=municipio']</td>
 	<td></td>
 </tr>
 <tr>
@@ -288,37 +288,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tipo Clase</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=x</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>eliminar</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>//a/b</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Departamento</td>
+	<td>css=a[href='tabla.php?tabla=tipo_clase']</td>
 	<td></td>
 </tr>
 <tr>
@@ -338,12 +313,37 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Frontera</td>
+	<td>css=a[href='tabla.php?tabla=departamento']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=x</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//a/b</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a[href='tablas_basicas.php']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a[href='tabla.php?tabla=frontera']</td>
 	<td></td>
 </tr>
 <tr>
@@ -359,7 +359,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -398,7 +398,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -428,12 +428,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Filiación</td>
+	<td>css=a[href='tabla.php?tabla=filiacion']</td>
 	<td></td>
 </tr>
 <tr>
@@ -449,7 +449,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -488,7 +488,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -518,17 +518,17 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Organización social</td>
+	<td>css=a[href$='tabla=organizacion']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -564,7 +564,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -608,12 +608,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Profesión</td>
+	<td>css=a[href$='tabla=profesion']</td>
 	<td></td>
 </tr>
 <tr>
@@ -629,7 +629,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -673,12 +673,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Rango edad</td>
+	<td>css=a[href$='tabla=rango_edad']</td>
 	<td></td>
 </tr>
 <tr>
@@ -733,7 +733,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -778,12 +778,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Resultado agresión</td>
+	<td>css=a[href$='tabla=resultado_agresion']</td>
 	<td></td>
 </tr>
 <tr>
@@ -799,7 +799,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -838,7 +838,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -868,12 +868,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Sector Social</td>
+	<td>css=a[href$='tabla=sector_social']</td>
 	<td></td>
 </tr>
 <tr>
@@ -889,7 +889,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -928,7 +928,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -958,12 +958,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Vínculo con el estado</td>
+	<td>css=a[href$='tabla=vinculo_estado']</td>
 	<td></td>
 </tr>
 <tr>
@@ -979,7 +979,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1018,7 +1018,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1048,12 +1048,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tipo de Relación</td>
+	<td>css=a[href$='tabla=tipo_relacion']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1069,7 +1069,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1108,7 +1108,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1153,12 +1153,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tipo de Violencia</td>
+	<td>css=a[href$='tabla=tipo_violencia']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1174,12 +1174,12 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[Y]</td>
-	<td>label=1990</td>
+	<td>label=2001</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1218,7 +1218,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1258,12 +1258,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Supracategoria</td>
+	<td>css=a[href$='tabla=supracategoria']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1279,7 +1279,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1318,7 +1318,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1353,12 +1353,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Categoria</td>
+	<td>css=a[href$='tabla=categoria']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1413,7 +1413,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1448,12 +1448,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Contexto</td>
+	<td>css=a[href$='tabla=contexto']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1508,7 +1508,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1538,12 +1538,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Presuntos responsables</td>
+	<td>css=a[href$='tabla=presuntos_responsables']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1559,7 +1559,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1598,7 +1598,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1633,12 +1633,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Antecedentes</td>
+	<td>css=a[href$='tabla=antecedente']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1654,7 +1654,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1693,7 +1693,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1723,12 +1723,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Intervalo</td>
+	<td>css=a[href$='tabla=intervalo']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1788,7 +1788,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1823,12 +1823,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Etiquetas para un caso</td>
+	<td>css=a[href$='tabla=etiqueta']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1863,7 +1863,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1898,12 +1898,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Fuentes frecuentes</td>
+	<td>css=a[href$='tabla=prensa']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1919,7 +1919,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1958,7 +1958,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1988,12 +1988,12 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Tablas Básicas</td>
+	<td>css=a[href='tablas_basicas.php']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Columnas de Reporte Consolidado</td>
+	<td>css=a[href$='tabla=parametros_reporte_consolidado']</td>
 	<td></td>
 </tr>
 <tr>
@@ -2009,7 +2009,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Ene</td>
+	<td>label=Feb</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -2048,7 +2048,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Nuevo</td>
+	<td>css=a[href^='detalle.php?tabla=']</td>
 	<td></td>
 </tr>
 <tr>

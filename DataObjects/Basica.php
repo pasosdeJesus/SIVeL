@@ -111,11 +111,7 @@ class DataObjects_Basica extends DB_DataObject_SIVeL
      */
     function dateOptions($field)
     {
-        return array('language' => 'es',
-        'format' => 'dMY',
-        'minYear' => $GLOBALS['anio_min'],
-        'maxYear' => 2025
-        );
+	parent::dateOptions($field);
     }
 
     /**

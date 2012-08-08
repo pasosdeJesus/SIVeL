@@ -614,15 +614,16 @@ class PagConsolidado extends HTML_QuickForm_Page
         if ($cy < 2005) {
             $cy = 2005;
         }
+	$slan = isset($_SESSION['LANG']) ?  $_SESSION['LANG'] : 'es';
         $e =& $this->addElement(
             'date', 'fini', _('Desde'),
-            array('language' => 'es', 'addEmptyOption' => true,
+            array('language' => $slan, 'addEmptyOption' => true,
             'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
             )
         );
         $e =& $this->addElement(
             'date', 'ffin', _('Hasta'),
-            array('language' => 'es', 'addEmptyOption' => true,
+            array('language' => $slan, 'addEmptyOption' => true,
             'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
             )
         );
@@ -649,7 +650,7 @@ class PagConsolidado extends HTML_QuickForm_Page
                 $e =& $this->addElement(
                     'date', 'fincdesde',
                     _('Ingresado en base desde'), 
-                    array('language' => 'es',
+                    array('language' => $slan,
                     'addEmptyOption' => true,
                     'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
                     )

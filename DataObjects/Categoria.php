@@ -126,22 +126,6 @@ class DataObjects_Categoria extends DataObjects_Basica
         $this->id_supracategoria = $a[1];
     }
 
-    /**
-     * Opciones de fecha para un campo
-     *
-     * @param string $field campo
-     *
-     * @return arreglo de opciones
-     */
-    function dateOptions($field)
-    {
-        return array('language' => 'es',
-        'format' => 'dMY',
-        'minYear' => $GLOBALS['anio_min'],
-        'maxYear' => 2025
-        );
-    }
-
      /**
      * Requerido por versiones de FormBuilder de 0.10, hasta versión 1.121 en
      * el CVS de FormBuilder.php.

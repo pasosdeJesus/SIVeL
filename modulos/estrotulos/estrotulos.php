@@ -486,9 +486,11 @@ function buildForm()
     if ($cy < 2005) {
         $cy = 2005;
     }
+    $slan = isset($_SESSION['LANG']) ? $_SESSION['LANG'] : 'es';
+             
     $e =& $this->addElement(
         'date', 'fini', 'Desde: ',
-        array('language' => 'es', 'addEmptyOption' => true,
+        array('language' => $slan, 'addEmptyOption' => true,
         'minYear' => '1990', 'maxYear' => $cy
         )
     );
@@ -496,7 +498,7 @@ function buildForm()
 
     $e =& $this->addElement(
         'date', 'ffin', 'Hasta',
-        array('language' => 'es', 'addEmptyOption' => true,
+        array('language' => $slan, 'addEmptyOption' => true,
         'minYear' => '1990', 'maxYear' => $cy
         )
     );

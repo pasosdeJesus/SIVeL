@@ -110,11 +110,7 @@ class DataObjects_Tipo_violencia extends DataObjects_Basica
      */
     function dateOptions(&$field)
     {
-    return array('language' => 'es',
-        'format' => 'dMY',
-        'minYear' => $GLOBALS['anio_min'],
-        'maxYear' => 2025
-    );
+	return parent::dateOptions($field);
     }
 
 

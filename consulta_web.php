@@ -464,8 +464,8 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $pOrden     =var_req_escapa('orden');
 
         $slan = "es";
-        if (isset($_SESSION['lang'])) {
-            $slan = substr($_SESSION['lang'], 0, 2);
+        if (isset($_SESSION['LANG'])) {
+            $slan = substr($_SESSION['LANG'], 0, 2);
         }
 
         encabezado_envia(_('Consulta Web'), $GLOBALS['cabezote_consulta_web']);

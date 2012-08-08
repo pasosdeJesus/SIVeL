@@ -258,10 +258,11 @@ class PagPresentaRes extends PagBaseSimple
             $cy = 2005;
         }
         $ay = explode('-', $GLOBALS['consulta_web_fecha_min']);
+	$slan = isset($_SESSION['LANG']) ?  $_SESSION['LANG'] : 'es';
         $e =& $this->addElement(
             'date', 'fiini', _('Ingreso Desde: '),
             array(
-                'language' => 'es',
+                'language' => $slan, 
                 'addEmptyOption' => true,
                 'minYear' => $ay[0],
                 'maxYear' => $cy
@@ -271,7 +272,7 @@ class PagPresentaRes extends PagBaseSimple
         $e =& $this->addElement(
             'date', 'fifin', _('Ingreso Hasta:'),
             array(
-                'language' => 'es', 'addEmptyOption' => true,
+                'language' => $slan, 'addEmptyOption' => true,
                 'minYear' => $ay[0], 'maxYear' => $cy
             )
         );

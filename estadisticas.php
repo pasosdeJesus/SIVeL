@@ -455,9 +455,9 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
             'header', null,
             _('Conteos Victimizacione Individuales')
         );
-        $lang = 'es';
+        $slang = 'es';
         if (isset($_SESSION['LANG'])) {
-            $lang = substr($_SESSION['LANG'], 0, 2);
+            $slang = substr($_SESSION['LANG'], 0, 2);
         }
 
         $cy = date('Y');
@@ -467,14 +467,14 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
         $e =& $this->addElement(
             'date', 'fini', _('Desde') .': ',
             array(
-                'language' => $lang, 'addEmptyOption' => true,
+                'language' => $slang, 'addEmptyOption' => true,
             'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
             )
         );
         $e =& $this->addElement(
             'date', 'ffin', _('Hasta'),
             array(
-                'language' => $lang, 'addEmptyOption' => true,
+                'language' => $slang, 'addEmptyOption' => true,
                 'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
             )
         );

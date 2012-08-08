@@ -101,10 +101,15 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
      */
     function dateOptions($field)
     {
-        return array('language' => 'es',
+        $slan = "es";
+        if (isset($_SESSION['LANG'])) {
+            $slan = substr($_SESSION['LANG'], 0, 2);
+        }
+
+        return array('language' => $slan,
         'format' => 'dMY',
         'minYear' => $GLOBALS['anio_min'],
-        'maxYear' => 2025
+        'maxYear' => date('Y')+10;
         );
     }
 

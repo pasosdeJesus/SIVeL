@@ -175,12 +175,7 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
      */
     function dateOptions($nomCampo)
     {
-        return array('format' => 'd-M-Y',
-            'language' => 'es',
-            'minYear' => $GLOBALS['anio_min'],
-            'maxYear' => date('Y'),
-            'addEmptyOption' => true
-            );
+	return parent::dateOptions($nomCampo);
     }
 
 
