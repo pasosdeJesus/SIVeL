@@ -137,18 +137,17 @@ class PagVictimaColectiva extends PagBaseMultiple
 
     /**
      * Inicializa variables.
-     *
      * 
      * @param array $apar Arreglo de parametros. Consta de
      *   0=>$id_grupoper Id  de grupo de personas
      *
      * @return handle  Conexión a base de datos
      */
-    function iniVar($aper = null)
+    function iniVar($apar = null)
     {
         $id_grupoper = null;
-        if (isset($aper) && count($aper) == 1) {
-            $id_grupoper = $aper[0];
+        if (isset($apar) && count($apar) == 1) {
+            $id_grupoper = $apar[0];
         }
         $dgrupoper =& objeto_tabla('grupoper');
         $dvictima_colectiva =& objeto_tabla('victima_colectiva');

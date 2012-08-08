@@ -560,8 +560,10 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
                         array($pMostrar, $this->opciones, $this, &$ae, &$t)
                     );
                 } else {
-                    echo_esc(_("Falta") . " $f " 
-                        .  _("de") . " estadisticasIndFiltro[$k]");
+                    echo_esc(
+                        _("Falta") . " $f " .  _("de") 
+                        . " estadisticasIndFiltro[$k]"
+                    );
                 }
             }
         }

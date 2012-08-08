@@ -75,7 +75,8 @@ res_valida(
 );
 
 res_valida(
-    $db, _("Casos con m&aacute;s de una ubicaci&oacute;n (salen duplicados en conteos)"),
+    $db, 
+    _("Casos con más de una ubicaci&oacute;n (salen duplicados en conteos)"),
     "SELECT id, c from (SELECT caso.id, count(ubicacion.id) AS c
     FROM caso, ubicacion WHERE caso.id = ubicacion.id_caso
     GROUP BY caso.id order by 2) AS f WHERE c >= 2"
@@ -83,7 +84,7 @@ res_valida(
 
 
 res_valida(
-    $db, _("V&iacute;ctimas con categorias que no son para v&iacute;ctimas individuales"),
+    $db, _("Víctimas con categorias que no son para víctimas individuales"),
     "SELECT acto.id_caso, acto.id_categoria, acto.id_persona,
     persona.nombres || ' ' || persona.apellidos
     FROM acto, persona
@@ -94,7 +95,7 @@ res_valida(
 
 res_valida(
     $db,
-    _("V&iacute;ctimas colectivas con categorias que no son para v&iacute;ctimas colectivas"),
+    _("Víctimas colectivas con categorias que no son para víctimas colectivas"),
     "SELECT actocolectivo.id_caso, actocolectivo.id_categoria, grupoper.nombre
     FROM actocolectivo, grupoper
     WHERE grupoper.id = actocolectivo.id_grupoper

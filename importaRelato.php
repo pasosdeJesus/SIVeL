@@ -115,10 +115,14 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         if ($e['size'] <= 0) {
             $u = ini_get('upload_max_filesize');
             $p = ini_get('post_max_size');
-            die(sprintf(
-                _("No pudo subirse archivo, revisar que el tamaño sea "
-                . "mayor que cero y menor que %s y que %s"), $u, $p
-            ));
+            die(
+                sprintf(
+                    _(
+                        "No pudo subirse archivo, revisar que el tamaño sea "
+                        . "mayor que cero y menor que %s y que %s"
+                    ), $u, $p
+                )
+            );
         }
         move_uploaded_file(
             $e['tmp_name'], $GLOBALS['dir_anexos'] . "/" .
@@ -171,7 +175,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $dcaso->memo = ereg_replace(
                 "\n", " ",
                 trim($r->hechos)
-//                trim($r->hechos)
             );
             $dcaso->fecha = conv_fecha($r->fecha, $obs);
             if (isset($r->duracion) && $r->duracion != "") {
@@ -384,9 +387,11 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             foreach ($r->victima as $victima) {
                 if (!empty($victima->id_persona)) {
                     if (!isset($id_pers[(string)$victima->id_persona])) {
-                        repObs(sprintf(
-                            _("Acto: No hay definida persona con id '%s'",
-                            (string)$acto->id_victima_individual)),
+                        repObs(
+                            sprintf(
+                                _("Acto: No hay definida persona con id '%s'"),
+                                (string)$acto->id_victima_individual
+                            ),
                             $obs
                         );
                     } else {

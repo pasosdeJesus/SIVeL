@@ -165,11 +165,11 @@ class PagVictimaIndividual extends PagBaseMultiple
      *
      * @return handle Conexión a base de datos
      */
-    function iniVar($aper = null)
+    function iniVar($apar = null)
     {
         $id_persona = null;
-        if (isset($aper) && count($aper) == 1) {
-            $id_persona = $aper[0];
+        if (isset($apar) && count($apar) == 1) {
+            $id_persoea = $apar[0];
         }
         $dvictima=& objeto_tabla('victima');
         $dpersona=& objeto_tabla('persona');

@@ -62,7 +62,7 @@ function idioma($l = "es_CO")
         echo "El idioma '$l', se solicitó pero no está disponible.<br>";
         echo "Los idiomas disponibles son: ";
         $sep ="";
-        foreach($ld as $nl) {
+        foreach ($ld as $nl) {
             echo $sep . $nl;
             $sep =", ";
         }
@@ -81,7 +81,7 @@ function idioma($l = "es_CO")
     setlocale(LC_CTYPE, $l);
     $locales_dir = dirname(__FILE__).'/locale';
     $locales_dir = './locale';
-    bindtextdomain($td,$locales_dir);
+    bindtextdomain($td, $locales_dir);
     bind_textdomain_codeset($td, 'UTF-8'); 
     textdomain($td);
     if ($l == "en_US" && "Fuente" == _("Fuente")) {
@@ -457,7 +457,9 @@ function localizaConf()
             $rp = $r . "/" . $pn;
             if (file_exists($rp)) {
                 $fn = $pn;
-                echo "Existe ruta " . htmlentities("$CHROOTDIR$rp", ENT_COMPAT, 'UTF-8') . "<br>";
+                echo "Existe ruta " 
+                    . htmlentities("$CHROOTDIR$rp", ENT_COMPAT, 'UTF-8') 
+                    . "<br>";
                 $cmd ="cd $rs; sudo ln -s $pn " . strtoupper($n);
             }
         }

@@ -105,8 +105,9 @@ class PagPresentaRes extends PagBaseSimple
         $ult = $_SESSION['busca_presenta'];
 
         $ae = array();
-        $x =& $this->createElement('radio', 'ordenar', 'fecha', 
-            _('Fecha'), 'fecha');
+        $x =& $this->createElement(
+            'radio', 'ordenar', 'fecha', _('Fecha'), 'fecha'
+        );
         $ae[] =&  $x;
         if ($ult['ordenar'] == '' || $ult['ordenar'] == 'fecha') {
             $t =& $x;

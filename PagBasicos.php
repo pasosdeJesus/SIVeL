@@ -246,9 +246,11 @@ class EliminaCaso extends HTML_QuickForm_Action
     {
         $htmljs = new HTML_Javascript();
         echo $htmljs->startScript();
-        echo $htmljs->confirm(sprintf(
-            _('¿Confirma eliminación del caso %s?'), 
-            (int)$_SESSION['basicos_id']), 'eliminar'
+        echo $htmljs->confirm(
+            sprintf(
+                _('¿Confirma eliminación del caso %s?'), 
+                (int)$_SESSION['basicos_id']
+            ), 'eliminar'
         );
         echo $htmljs->write('eliminar', true);
         echo $htmljs->_out(
@@ -434,9 +436,11 @@ class ReporteGeneral extends HTML_QuickForm_Action
      */
     static function reporte($idcaso)
     {
-        encabezado_envia(sprintf(
-            _("Reporte General del caso %s"), (int)$idcaso
-        ));
+        encabezado_envia(
+            sprintf(
+                _("Reporte General del caso %s"), (int)$idcaso
+            )
+        );
         $r = valida_caso($idcaso);
         $html_rep = ResConsulta::reporteGeneralHtml(
             $idcaso, null,
@@ -575,7 +579,6 @@ class PagBasicos extends PagBaseSimple
         $db = $r[0];
         $dcaso = $r[1];
         $idcaso = $r[2];
-//            list($db, $dcaso, $idcaso) = each(parent::
         $dfrontera_caso =& objeto_tabla('frontera_caso');
         $dregion_caso =& objeto_tabla('region_caso');
 
@@ -1075,10 +1078,10 @@ class PagBasicos extends PagBaseSimple
     }
 
 
-    function handle($action)
-    {
-        parent::handle($action);
+    //function handle($action)
+    //{
+    //    parent::handle($action);
     //    echo "PagBasicos::handle($action)";
-    }
+    //}
 }
 ?>

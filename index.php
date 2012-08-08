@@ -20,10 +20,10 @@
  */
 require_once 'misc.php';
 require_once 'aut.php';
-include_once $_SESSION['dirsitio'] . '/conf.php';
+require_once $_SESSION['dirsitio'] . '/conf.php';
 $aut_usuario = "";
 $db = autenticaUsuario($dsn, $aut_usuario, 0);
-include_once $_SESSION['dirsitio'] . '/conf_int.php';
+require_once $_SESSION['dirsitio'] . '/conf_int.php';
 
 
 require_once 'HTML/Menu.php';
@@ -36,7 +36,7 @@ require_once 'PresentaMenuPrincipal.php';
  * Lee menú de base de datos y construye una estructura apropiada para
  * HTML/Menu.
  *
- * @param integer $id  Identificación de menú por revisar
+ * @param integer $id Identificación de menú por revisar
  *
  * @return array apropiado para HTML_Menu
  */

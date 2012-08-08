@@ -1,5 +1,5 @@
 <?php
-//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8: -->
+//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Consulta Detallada.
  * Aprovecha el formulario de captura (captura_caso), se diferencia

@@ -139,26 +139,26 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             $GLOBALS['consulta_web_fecha_max'], "<="
         );
 
-    if ($pTvio!= '') {
-        $where .= ' AND caso.id IN '
-        . "(SELECT id_caso FROM acto, categoria WHERE
-           acto.id_categoria = categoria.id
-           AND categoria.id_tipo_violencia = '$pTvio'
-           UNION
-           SELECT id_caso FROM actocolectivo, categoria WHERE
-           actocolectivo.id_categoria = categoria.id
-           AND categoria.id_tipo_violencia = '$pTvio'
-           UNION
-           SELECT id_caso FROM categoria_p_responsable_caso WHERE
-           id_tipo_violencia = '$pTvio')";
-    }
-    if ($pClasificacion != '') {
-        $ini = '(';
-        $so = '';
-        $tind = false;
-        $tcol = false;
-        $totr = false;
-        foreach ($pClasificacion as $cla) {
+        if ($pTvio != '') {
+            $where .= ' AND caso.id IN '
+                . "(SELECT id_caso FROM acto, categoria WHERE
+                acto.id_categoria = categoria.id
+                AND categoria.id_tipo_violencia = '$pTvio'
+                UNION
+                SELECT id_caso FROM actocolectivo, categoria WHERE
+                actocolectivo.id_categoria = categoria.id
+                AND categoria.id_tipo_violencia = '$pTvio'
+                UNION
+                SELECT id_caso FROM categoria_p_responsable_caso WHERE
+                id_tipo_violencia = '$pTvio')";
+        }
+        if ($pClasificacion != '') {
+            $ini = '(';
+            $so = '';
+            $tind = false;
+            $tcol = false;
+            $totr = false;
+            foreach ($pClasificacion as $cla) {
                 $r = explode(":", $cla);
                 $so2='';
                 $dcatc = objeto_tabla('categoria');
@@ -226,8 +226,10 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                     )
                 );
             } else {
-                echo_esc(_("Falta") . " consultaWebCreaConsulta " 
-                    . _("en") . " $n, $c");
+                echo_esc(
+                    _("Falta") . " consultaWebCreaConsulta " 
+                    . _("en") . " $n, $c"
+                );
             }
         }
         if (isset($GLOBALS['gancho_cw_creaconsulta'])) {
@@ -237,12 +239,14 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                         $f,
                         array(
                             $db, $pMostrar, &$where, &$tablas,
-                        &$pOrdenar, &$campos, $page
+                            &$pOrdenar, &$campos, $page
                         )
                     );
                 } else {
-                    echo_esc(_("Falta") ." $f "
-                       . _("de") . " gancho_cw_creaconsulta[$k]");
+                    echo_esc(
+                        _("Falta") ." $f " . _("de") 
+                        . " gancho_cw_creaconsulta[$k]"
+                    );
                 }
             }
         }
@@ -459,6 +463,10 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $pSinCampos =var_req_escapa('sincampos');
         $pOrden     =var_req_escapa('orden');
 
+        $slan = "es";
+        if (isset($_SESSION['lang'])) {
+            $slan = substr($_SESSION['lang'], 0, 2);
+        }
 
         encabezado_envia(_('Consulta Web'), $GLOBALS['cabezote_consulta_web']);
         $x =&  objeto_tabla('departamento');
@@ -545,7 +553,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $sel =& $this->addElement(
             'text', 'nomvic',
-           _('Nombre o apellido de la víctima') 
+            _('Nombre o apellido de la víctima') 
         );
         $sel->setSize(80);
 
@@ -557,14 +565,14 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $e =& $this->addElement(
             'date', 'fini', _('Desde: '),
             array(
-                'language' => 'es', 'addEmptyOption' => true,
-            'minYear' => $ay[0], 'maxYear' => $cy
+                'language' => $slan, 'addEmptyOption' => true,
+                'minYear' => $ay[0], 'maxYear' => $cy
             )
         );
         $e =& $this->addElement(
             'date', 'ffin', _('Hasta:'),
             array(
-                'language' => 'es', 'addEmptyOption' => true,
+                'language' => $slan, 'addEmptyOption' => true,
             'minYear' => $ay[0], 'maxYear' => $cy
             )
         );
@@ -572,7 +580,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $sel =& $this->addElement(
             'select',
-            'presponsable',_('Presunto Responsable') 
+            'presponsable', _('Presunto Responsable') 
         );
         $lpr = htmlentities_array(
             $db->getAssoc(
@@ -588,7 +596,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $sel =& $this->addElement(
             'select', 'clasificacion',
-           _('Clasificación de Violencia') 
+            _('Clasificación de Violencia') 
         );
         $sel->setMultiple(true);
         $sel->setSize(5);
@@ -673,14 +681,14 @@ class ConsultaWeb extends HTML_QuickForm_Page
                 $e =& $this->addElement(
                     'date', 'fiini', _('Ingreso Desde') . ': ',
                     array(
-                        'language' => 'es', 'addEmptyOption' => true,
+                        'language' => $slan, 'addEmptyOption' => true,
                     'minYear' => $ay[0], 'maxYear' => $cy
                     )
                 );
                 $e =& $this->addElement(
                     'date', 'fifin', _('Ingreso Hasta') . ':',
                     array(
-                        'language' => 'es', 'addEmptyOption' => true,
+                        'language' => $slan, 'addEmptyOption' => true,
                     'minYear' => $ay[0], 'maxYear' => $cy
                     )
                 );
@@ -691,7 +699,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $opch = array();
         $sel =& $this->createElement(
             'checkbox',
-            'concoordenadas', _('Con Coordenadas'),_('Con Coordenadas') 
+            'concoordenadas', _('Con Coordenadas'), _('Con Coordenadas') 
         );
         $opch[] =& $sel;
 
@@ -736,9 +744,10 @@ class ConsultaWeb extends HTML_QuickForm_Page
                         array($pOrden, $this->opciones, $this, &$ae, &$t)
                     );
                 } else {
-                    echo_esc(_("Falta ") 
-                        . $f 
-                        . _("de") . " consultaweb_ordenarpor[$k]");
+                    echo_esc(
+                        _("Falta ") . $f . _("de") 
+                        . " consultaweb_ordenarpor[$k]"
+                    );
                 }
             }
         }
@@ -798,7 +807,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
             } else {
                 echo_esc(
                     _("Falta") . " consultaWebFormaPresentacion "
-                   . _("en") 
+                    . _("en") 
                     . "$n, $c"
                 );
             }
@@ -811,8 +820,10 @@ class ConsultaWeb extends HTML_QuickForm_Page
                         array($pMostrar, $this->opciones, $this, &$ae, &$t)
                     );
                 } else {
-                    echo_esc(_("Falta") . " " . $f . 
-                        _("de") . "consultaWebFormaPresentacion[$k]");
+                    echo_esc(
+                        _("Falta") . " " . $f . 
+                        _("de") . "consultaWebFormaPresentacion[$k]"
+                    );
                 }
             }
         }
@@ -960,7 +971,7 @@ function runController()
         $rol = "";
         sacaOpciones($_SESSION[$nv]['username'], $db, $opciones, $rol);
         idioma('en_US');
-        require_once $_SESSION['dirsitio'] . "/conf_int.php";
+        include_once $_SESSION['dirsitio'] . "/conf_int.php";
     }
 
     $wizard = new HTML_QuickForm_Controller('Consulta', false);

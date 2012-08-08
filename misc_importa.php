@@ -41,13 +41,13 @@ function repObs($nobs, &$obs, $coneco = false)
  * @param string $nombre Nombre por buscar
  * @param string &$obs   Colchon para agregar observaciones
  * @param bool   $sininf Si no esta retornar código del dato SIN INFORMACIÓN?
- * @param string &$ncamp Nombre del campo con el cual comparar
+ * @param string $ncamp  Nombre del campo con el cual comparar
  *
  * @return integer Código en tabla o -1 si no lo encuentra
  */
 function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
-    $ncamp = "nombre")
-{
+    $ncamp = "nombre"
+) {
     //echo "OJO conv_basica(db, $tabla, $nombre, $obs)<br>";
     $d = objeto_tabla($tabla);
     $nom0 = $d->$ncamp = ereg_replace(
@@ -1275,16 +1275,26 @@ function lnat_a_numero($n)
     switch (a_mayusculas(trim($n))) {
     case "UNO" :
     case "UN" :
-    case "UNA" : return 1;
-    case "DOS" : return 2;
-    case "TRES" : return 3;
-    case "CUATRO" : return 4;
-    case "CINCO" : return 5;
-    case "SEIS" : return 6;
-    case "SIETE" : return 7;
-    case "OCHO" : return 8;
-    case "NUEVE" : return 9;
-    case "DIEZ" : return 10;
+    case "UNA" : 
+        return 1;
+    case "DOS" : 
+        return 2;
+    case "TRES" : 
+        return 3;
+    case "CUATRO" : 
+        return 4;
+    case "CINCO" : 
+        return 5;
+    case "SEIS" : 
+        return 6;
+    case "SIETE" : 
+        return 7;
+    case "OCHO" : 
+        return 8;
+    case "NUEVE" : 
+        return 9;
+    case "DIEZ" : 
+        return 10;
     }
 
     return 0;

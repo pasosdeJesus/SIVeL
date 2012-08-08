@@ -159,8 +159,9 @@ function muestraVarPhpEnHTML($avar)
     echo "<pre>";
     foreach ($avar as $nv => $ld) {
         list($vv, $cv) = $ld;
-        echo htmlentities($cv, ENT_COMPAT, 'UTF-8')."<br/>";
-        echo htmlentities($nv, ENT_COMPAT, 'UTF-8')." = ".htmlentities($vv, ENT_COMPAT, 'UTF-8').";<br/><br/>";
+        echo htmlentities($cv, ENT_COMPAT, 'UTF-8') . "<br/>";
+        echo htmlentities($nv, ENT_COMPAT, 'UTF-8') . " = "
+            . htmlentities($vv, ENT_COMPAT, 'UTF-8') . ";<br/><br/>";
     }
     echo "</pre>";
 }

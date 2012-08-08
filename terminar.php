@@ -1,8 +1,7 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
-
 /**
-* Cierra sesión de Sivel
+ * Cierra sesión de Sivel
  *
  * PHP version 5
  *
@@ -25,8 +24,7 @@ require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
 $aut_usuario = "";
 $db = autenticaUsuario($dsn, $aut_usuario, 0);
-include_once $_SESSION['dirsitio'] . '/conf_int.php';
-
+require_once $_SESSION['dirsitio'] . '/conf_int.php';
 require_once 'misc.php';
 
 cierraSesion($dsn);

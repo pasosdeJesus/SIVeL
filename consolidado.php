@@ -495,11 +495,13 @@ class AccionConsolidado extends HTML_QuickForm_Action
             $acto->id_caso = $idcaso;
             if ($acto->find()==0) {
                 $acto = null;
-                echo_esc(sprintf(
-                    "Víctima sin presunto responsable '%s', "
-                    . "'%s' en caso '%s' -- estadística incompleta!!!", 
-                    $idvic, $nom, $idcaso
-                ));
+                echo_esc(
+                    sprintf(
+                        "Víctima sin presunto responsable '%s', "
+                        . "'%s' en caso '%s' -- estadística incompleta!!!", 
+                        $idvic, $nom, $idcaso
+                    )
+                );
             } else {
                 $apr = array();
                 $pr_sep = $presp = "";
@@ -515,7 +517,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
             }
 
             if ($pMuestra == "tabla") {
-                echo "<td>" . htmlentities($presp, ENT_COMPAT, 'UTF-8') . "</td></tr>\n";
+                echo "<td>" . htmlentities($presp, ENT_COMPAT, 'UTF-8') 
+                    . "</td></tr>\n";
             } elseif ($pMuestra == 'csv') {
                 $adjunto_l = ",$presp \n";
                 echo $adjunto_l;

@@ -58,8 +58,10 @@ $dc->fetch();
 
 echo "<table border='1'>";
 echo "<tr><th>Código</th><th>Descripción</th></tr>";
-echo "<tr><td>" . htmlentities($t, ENT_COMPAT, 'UTF-8') . htmlentities($c, ENT_COMPAT, 'UTF-8') . "</td>";
-echo "<td>" . htmlentities($dt->nombre, ENT_COMPAT, 'UTF-8') . " / " . htmlentities($ds->nombre, ENT_COMPAT, 'UTF-8')
+echo "<tr><td>" . htmlentities($t, ENT_COMPAT, 'UTF-8') 
+    . htmlentities($c, ENT_COMPAT, 'UTF-8') . "</td>";
+echo "<td>" . htmlentities($dt->nombre, ENT_COMPAT, 'UTF-8') . " / " 
+    . htmlentities($ds->nombre, ENT_COMPAT, 'UTF-8')
     . " / " . htmlentities($dc->nombre, ENT_COMPAT, 'UTF-8') . "</td></tr>";
 echo "</table>";
 

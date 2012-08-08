@@ -688,10 +688,12 @@ function valores_pordefecto_form($d, $form)
     foreach ($d->fb_fieldsToRender as $c) {
         $cq = toma_elemento_recc($form, $c);
         if ($cq == null || PEAR::isError($cq)) {
-            echo_esc(sprintf( 
-                _("Error: No se encontró elemento %s en el formulario") ."<br>",
-                $c
-            ));
+            echo_esc(
+                sprintf(
+                    _("Error: No se encontró elemento %s en el formulario") 
+                    . "<br>", $c
+                )
+            );
         }
         if (isset($d->fb_booleanFields)
             && in_array($c, $d->fb_booleanFields)
@@ -776,7 +778,7 @@ function ret_id_clase($form)
      */
 function encabezado_envia($titulo = null, $cabezote = '')
 {
-    # http://www.w3.org/TR/html5-diff/
+    // http://www.w3.org/TR/html5-diff/
     echo '<' . '!doctype html>
 <html>
 <head>
@@ -941,7 +943,8 @@ function enlaces_casos_grupoper_html(&$db, $idcaso, $idc, &$comovic)
  * Convierte valores de un arreglo a entidades HTML aptas para mostrar en
  * web
  *
- * @param array $ar Arreglo por convertir
+ * @param array $ar  Arreglo por convertir
+ * @param array $enc Codificación
  *
  * @return array Arreglo convertido
  */
@@ -1046,10 +1049,12 @@ function retorna_uno_o_termina(&$db, $q)
 {
     $res = hace_consulta($db, $q);
     if (($nr = $res->numRows()) != 1) {
-        die_esc(sprintf(
-            _("Se esperaba un resultado y no %s de consulta \"%s\""),
-            $nr, $q
-        ));
+        die_esc(
+            sprintf(
+                _("Se esperaba un resultado y no %s de consulta \"%s\""),
+                $nr, $q
+            )
+        );
     }
     $reg = array();
     $res->fetchInto($reg);
@@ -1240,8 +1245,11 @@ function consulta_orden(&$q, $pOrdenar)
                     array(&$q, $pOrdenar)
                 );
             } else {
-                echo_esc(sprintf(
-                    _("Falta %s de misc_ordencons[%s]"), $f, $k));
+                echo_esc(
+                    sprintf(
+                        _("Falta %s de misc_ordencons[%s]"), $f, $k
+                    )
+                );
             }
         }
     }
@@ -1281,9 +1289,11 @@ function lista_relacionados($tabla, $llave,
     while ($do->fetch()) {
         $dr= $do->getLink($enlace);
         if (PEAR::isError($dr) || $dr == null) {
-            echo_esc(sprintf(
-                _("No hay campo %s en tabla %s"), $enlace, $do->__table 
-            ));
+            echo_esc(
+                sprintf(
+                    _("No hay campo %s en tabla %s"), $enlace, $do->__table 
+                )
+            );
             break;
         }
         //echo "getlink";
@@ -2047,7 +2057,7 @@ function valida_caso($idcaso)
  * @param array $ar Arreglo de palabras por buscar en ese orden
  *
  * @return string Patrón de búsqueda para usar con ~ en PostgreSQL
-     */
+ */
 function crea_patron($ar)
 {
     assert(is_array($ar));
@@ -2055,7 +2065,9 @@ function crea_patron($ar)
     $patron = "";
     $inipat = "";
     // Grupos de caracteres equivalentes
-    $c = array ('aáAÁ', 'eéEÉ', 'iíIÍ', 'oóOÓ', 'uúUúÜü', 'zZsS', 'nNñÑ');
+    $c = array (
+        'aáAÁ', 'eéEÉ', 'iíIÍ', 'oóOÓ', 'uúUúÜü', 'zZsS', 'nNñÑ'
+    );
     $u = "";
     foreach ($ar as $ni) {
         $patron .= $inipat . ".*";

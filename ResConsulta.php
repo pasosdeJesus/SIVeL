@@ -499,7 +499,7 @@ class ResConsulta
         if ($pMuestra == "csv") {
             header("Content-type: text/csv");
             $st = ""; $cpm = "";
-            foreach($ac as $c) {
+            foreach ($ac as $c) {
                 $cpm .= $st . "\"$c\"";
                 $st = ", ";
             }
@@ -508,7 +508,7 @@ class ResConsulta
             //header("Content-type: application/x-latex");
             echo "<pre>";
             $st = ""; $cpm = "";
-            foreach($ac as $c) {
+            foreach ($ac as $c) {
                 $cpm .= $st . "\\textbf{$c}";
                 $st = " & ";
             }
@@ -518,7 +518,7 @@ class ResConsulta
 
             echo "<table border='1'>\n";
             $st = ""; $cpm = "<tr>";
-            foreach($ac as $c) {
+            foreach ($ac as $c) {
                 $cpm .= $st . "<th>$c</th>";
             }
             echo $cpm . '</tr>';
@@ -752,8 +752,10 @@ class ResConsulta
                             array($cc)
                         );
                     } else {
-                        echo_esc(_("Falta") ." resConsultaInicioTabla " 
-                            . _("en") . " $n, $c");
+                        echo_esc(
+                            _("Falta") ." resConsultaInicioTabla " 
+                            . _("en") . " $n, $c"
+                        );
                     }
                 }
             }
@@ -802,8 +804,9 @@ class ResConsulta
                         array($this->mostrar, &$renglon, &$rtexto, $tot)
                     );
                 } else {
-                    echo_esc(_("Falta") ." resConsultaInicio " 
-                        . _("en") . " $n, $c");
+                    echo_esc(
+                        _("Falta") ." resConsultaInicio " . _("en") . " $n, $c"
+                    );
                 }
             }
             if (isset($GLOBALS['gancho_rc_inicio'])) {
@@ -815,8 +818,10 @@ class ResConsulta
                                 array($this->mostrar, &$renglon, &$rtexto, $tot)
                             );
                         } else {
-                            echo_esc(_("Falta") . " $f "
-                                . _("de") . " gancho_rc_inicio[$k]");
+                            echo_esc(
+                                _("Falta") . " $f " . _("de") 
+                                . " gancho_rc_inicio[$k]"
+                            );
                         }
                     }
                 }
@@ -963,8 +968,9 @@ class ResConsulta
                                         $this->conv, $sal, $retroalim)
                                     );
                                 } else {
-                                    muestra_escapado( _("Falta") . " $f " 
-                                       . _("de") . " resConsultaRegistro[$k]"
+                                    muestra_escapado(
+                                        _("Falta") . " $f " . _("de") 
+                                        . " resConsultaRegistro[$k]"
                                     );
                                 }
                             }
@@ -1004,8 +1010,10 @@ class ResConsulta
                                 array($cc)
                             );
                         } else {
-                            echo_esc(_("Falta") . " resConsultaFinaltablaHtml "
-                                . _("en") . " $n, $c");
+                            echo_esc(
+                                _("Falta") . " resConsultaFinaltablaHtml "
+                                . _("en") . " $n, $c"
+                            );
                         }
                     }
                     $html_renglon .= "</td>";
@@ -1030,8 +1038,9 @@ class ResConsulta
                         array($this->mostrar)
                     );
                 } else {
-                    echo_esc(_("Falta") . " resConsultaFinal "
-                        . _("en") . " $n, $c");
+                    echo_esc(
+                        _("Falta") . " resConsultaFinal " . _("en") . " $n, $c"
+                    );
                 }
             }
             if (isset($GLOBALS['gancho_rc_final'])) {
@@ -1043,8 +1052,10 @@ class ResConsulta
                                 array($this->mostrar)
                             );
                         } else {
-                            echo_esc(_("Falta") .  " $f " 
-                                . _("de") . " resConsultaFinal[$k]");
+                            echo_esc(
+                                _("Falta") .  " $f " . _("de") 
+                                . " resConsultaFinal[$k]"
+                            );
                         }
                     }
                 }
@@ -1255,8 +1266,10 @@ class ResConsulta
                             array(&$db, $cc, $idcaso)
                         );
                     } else {
-                        echo_esc(_("Falta") . " resConsultaFilaTabla "
-                            . _("en") . " $n, $c");
+                        echo_esc(
+                            _("Falta") . " resConsultaFilaTabla " . _("en") 
+                            . " $n, $c"
+                        );
                     }
                 }
             }
@@ -2848,8 +2861,10 @@ class ResConsulta
                     array(&$db, $campos, $idcaso)
                 );
             } else {
-                echo_esc(_("Falta") . " reporteRevistaRegistroHtml " 
-                    . _("en") . " $n, $c");
+                echo_esc(
+                    _("Falta") . " reporteRevistaRegistroHtml " 
+                    . _("en") . " $n, $c"
+                );
             }
         }
 

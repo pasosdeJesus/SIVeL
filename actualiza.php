@@ -1978,7 +1978,8 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db,
         "ALTER TABLE usuario ADD CONSTRAINT usuario_id_rol_check "
-        . " CHECK (id_rol>='1' AND id_rol<='4')", false);
+        . " CHECK (id_rol>='1' AND id_rol<='4')", false
+    );
     hace_consulta($db, 'DROP TABLE rol', false);
     hace_consulta($db, 'DROP SEQUENCE rol_seq', false);
 
@@ -1994,39 +1995,10 @@ if (!aplicado($idac)) {
         . " VARCHAR(6) NOT NULL DEFAULT 'es_CO'", false
     );
 
-//    aplicaact( $act, $idac, 'Idioma preferido por usuario');
+    aplicaact($act, $idac, 'Idioma preferido por usuario');
 }
 
 
-
-/*echo "Revisando variables de configuración PHP...<br>";
-$vplant = extraeVarPHP('sitios/pordefecto/conf.php.plantilla');
-$vconf = extraeVarPHP($_SESSION['dirsitio'] . '/conf.php');
-$vc ="";
-foreach ($vplant as $nv => $ld) {
-    list($vv, $cv) = $ld;
-    if (!isset($vconf[$nv])) {
-        $vc .= "$cv\n$nv = $vv ;\n\n";
-    }
-}
-
-if ($vc != "") {
-    echo "<blockquote><font color='red'>";
-    echo_esc(
-        "Faltan variables en el archivo "
-        . $GLOBALS['dirchroot'] . $GLOBALS['dirserv']
-        . $_SESSION['dirsitio'] . "/conf.php"
-    );
-    echo "Por favor editelo (desde adJ intente click derecho en el escritorio "
-        . "y eligiendo 'SIVeL-&gt;Editar conf.php'), "
-        . "añada al final las siguientes líneas y vuelva a cargar esta "
-        . " página:<br><hr/>";
-    echo "<pre>";
-    echo htmlentities($vc, ENT_COMPAT, 'UTF-8');
-    echo "</pre><hr/></font></blockquote>";
-    die("");
-}
- */
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {
@@ -2102,7 +2074,10 @@ function leeEstructura($nd, $dbnombre, $dirap, $modo)
 {
     if (!file_exists("$nd/DataObjects/estructura-dataobject.ini")) {
         echo "No puede leerse "
-            . htmlentities("$nd/DataObjects/estructura-dataobject.ini", ENT_COMPAT, 'UTF-8')
+            . htmlentities(
+                "$nd/DataObjects/estructura-dataobject.ini", 
+                ENT_COMPAT, 'UTF-8'
+            )
             . "<br>";
         return;
     }
