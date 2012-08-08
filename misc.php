@@ -31,8 +31,8 @@ require_once "DB_DataObject_SIVeL.php";
  * @name enc_relato
  */
 $GLOBALS['enc_relato']
-    = "<" ."?xml version=\"1.0\" encoding=\"ISO-8859-1\"?".">\n"
-    . "<!DOCTYPE relatos PUBLIC \"-//SINCODH/DTD relatos 0.96\" "
+    = "<" ."?xml version=\"1.0\" encoding=\"UTF8\"?".">\n"
+    . "<!DOCTYPE relatos PUBLIC \"-//SINCODH/DTD relatos 0.97\" "
     . "\"relatos.dtd\">\n"
     . '<'.'?xml-stylesheet type="text/xsl" href="xrlat-a-html.xsl"?'
     . ">\n";
