@@ -95,10 +95,11 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
         $css->setStyle('input.flat', 'font-size', '10pt');
         $css->setStyle('input.flat', 'border-width', '2px 2px 0px 2px');
         $css->setStyle('input.flat', 'border-color', '#996');
-        $enc = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html lang = "es">
+        // http://www.w3.org/TR/html5-diff/
+        $enc = '<!doctype html>
+<html>
 <head>
-<meta http-equiv = "Content-Type" content = "text/html; charset=UTF8">
+<meta charset="UTF-8">
 <title>Ficha caso</title>
 <style type = "text/css">
 {%style%}
@@ -487,7 +488,6 @@ if (isset($_GET['limpia']) && $_GET['limpia'] == 1) {
 //die("abc");
 
 $opciones = array();
-encabezado_envia('');
 $nv = "_auth_".nomSesion();
 if (isset($_SESSION[$nv]['username']) || $opciones == array()) {
     $d = objeto_tabla('caso');
@@ -521,5 +521,4 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
 }
 
 $captura->run();
-pie_envia();
 ?>

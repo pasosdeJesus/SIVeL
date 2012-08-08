@@ -776,16 +776,16 @@ function ret_id_clase($form)
      */
 function encabezado_envia($titulo = null, $cabezote = '')
 {
-    echo '<' .'?xml version="1.0" encoding="UTF8"?' .'>
-<' . '!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-    echo '<' . 'html>'; // xmlns = "http://www.w3.org/1999/xhtml" lang = "es">
-    echo ' <' . 'head>';
+    # http://www.w3.org/TR/html5-diff/
+    echo '<' . '!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+';
     if (isset($titulo)) {
         echo '  <title>' . htmlentities($titulo, ENT_COMPAT, 'UTF-8') . '</title>';
     }
     echo '<link rel = "stylesheet" type = "text/css" href = "estilo.css" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
 <script language = "JavaScript">
