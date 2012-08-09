@@ -106,10 +106,11 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
             $slan = substr($_SESSION['LANG'], 0, 2);
         }
 
-        return array('language' => $slan,
-        'format' => 'dMY',
-        'minYear' => $GLOBALS['anio_min'],
-        'maxYear' => date('Y')+10;
+        return array(
+            'language' => $slan,
+            'format' => 'd-M-Y',
+            'minYear' => $GLOBALS['anio_min'],
+            'maxYear' => date('Y')+10
         );
     }
 

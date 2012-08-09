@@ -86,10 +86,10 @@ class DataObjects_Escrito_caso extends DB_DataObject_SIVeL
     {
         $fv = isset($GLOBALS['fechaPuedeSerVacia'])
             && $GLOBALS['fechaPuedeSerVacia'];
-        return array(
-            'minYear' => $GLOBALS['anio_min'],
-            'addEmptyOption' => $fv
-        );
+        $a = parent::dateOptions($fieldName);
+        $a['addEmptyOption'] = $fv;
+
+        return $a;
     }
 
     /**

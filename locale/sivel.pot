@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sivel 1.2\n"
 "Report-Msgid-Bugs-To: vtamara@pasosdeJesus.org\n"
-"POT-Creation-Date: 2012-08-08 11:57-0500\n"
+"POT-Creation-Date: 2012-08-08 19:33-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: DB_DataObject_SIVeL.php:168
+#: DB_DataObject_SIVeL.php:174
 msgid "Definir etiquetas en fb_fieldLabels"
 msgstr ""
 
@@ -45,7 +45,7 @@ msgstr ""
 msgid "Colectivos"
 msgstr ""
 
-#: PagBaseMultiple.php:302 PagBaseSimple.php:192 consolidado.php:692
+#: PagBaseMultiple.php:302 PagBaseSimple.php:192 consolidado.php:693
 #: consulta_web.php:927 estadisticas.php:609
 #: sitios/pordefecto/conf_int.php:337
 msgid "Consulta"
@@ -129,31 +129,31 @@ msgstr ""
 msgid "Básicos"
 msgstr ""
 
-#: PagBasicos.php:668
+#: PagBasicos.php:669
 msgid "Fecha inicial"
 msgstr ""
 
-#: PagBasicos.php:682
+#: PagBasicos.php:683
 msgid "Fecha final"
 msgstr ""
 
-#: PagBasicos.php:700 PagBasicos.php:718
+#: PagBasicos.php:701 PagBasicos.php:719
 msgid "No. Caso"
 msgstr ""
 
-#: PagBasicos.php:704
+#: PagBasicos.php:705
 msgid "No. Caso por buscar: "
 msgstr ""
 
-#: PagBasicos.php:710 captura_caso.php:209
+#: PagBasicos.php:711 captura_caso.php:209
 msgid "Buscar"
 msgstr ""
 
-#: PagBasicos.php:716
+#: PagBasicos.php:717
 msgid "Deje en blanco si es nuevo"
 msgstr ""
 
-#: PagBasicos.php:733 PagPresentaRes.php:117 PagUbicacion.php:245
+#: PagBasicos.php:734 PagPresentaRes.php:117 PagUbicacion.php:245
 #: PagUbicacion.php:246 consolidado.php:376 consolidado.php:380
 #: consulta_web.php:722 estadisticas.php:583 DataObjects/Escrito_caso.php:70
 #: sitios/pordefecto/conf_int.php:199 sitios/pordefecto/conf_int.php:206
@@ -162,7 +162,7 @@ msgstr ""
 msgid "Ubicación"
 msgstr ""
 
-#: PagBasicos.php:886
+#: PagBasicos.php:887
 msgid "Falta fecha del caso"
 msgstr ""
 
@@ -310,11 +310,11 @@ msgstr ""
 msgid "Detalles"
 msgstr ""
 
-#: PagPresentaRes.php:262
+#: PagPresentaRes.php:263
 msgid "Ingreso Desde: "
 msgstr ""
 
-#: PagPresentaRes.php:272
+#: PagPresentaRes.php:273
 msgid "Ingreso Hasta:"
 msgstr ""
 
@@ -503,7 +503,7 @@ msgid "Falló"
 msgstr ""
 
 #: ResConsulta.php:1072 actualiza.php:2177 buscaRepetidos.php:60
-#: completaActos.php:82 consolidado.php:699 consulta_web.php:935
+#: completaActos.php:82 consolidado.php:700 consulta_web.php:935
 #: detalle.php:83 detusyrol.php:71 estadisticas.php:355 estadisticas.php:616
 #: importaRelato.php:750 tabla.php:224 tablas_basicas.php:60 usyroles.php:72
 #: valida.php:118
@@ -601,39 +601,39 @@ msgstr ""
 msgid "Reporte consolidado"
 msgstr ""
 
-#: consolidado.php:618 estadisticas.php:468
+#: consolidado.php:619 estadisticas.php:468
 msgid "Desde"
 msgstr ""
 
-#: consolidado.php:624 estadisticas.php:475
+#: consolidado.php:625 estadisticas.php:475
 msgid "Hasta"
 msgstr ""
 
-#: consolidado.php:651
+#: consolidado.php:652
 msgid "Ingresado en base desde"
 msgstr ""
 
-#: consolidado.php:659
+#: consolidado.php:660
 msgid "Ingresado en base hasta"
 msgstr ""
 
-#: consolidado.php:667
+#: consolidado.php:668
 msgid "Agregar columna con resto"
 msgstr ""
 
-#: consolidado.php:675 estadisticas.php:594
+#: consolidado.php:676 estadisticas.php:594
 msgid "Tabla HTML"
 msgstr ""
 
-#: consolidado.php:680 estadisticas.php:600
+#: consolidado.php:681 estadisticas.php:600
 msgid "Formato CSV (hoja de cálculo)"
 msgstr ""
 
-#: consolidado.php:684
+#: consolidado.php:685
 msgid "LaTeX"
 msgstr ""
 
-#: consolidado.php:686 consulta_web.php:837 estadisticas.php:602
+#: consolidado.php:687 consulta_web.php:837 estadisticas.php:602
 msgid "Forma de presentación"
 msgstr ""
 
@@ -918,7 +918,8 @@ msgstr ""
 msgid "Falta importaRelato en"
 msgstr ""
 
-#: importaRelato.php:641 modulos/etiquetas/DataObjects/Etiquetacaso.php:112
+#: importaRelato.php:641 DataObjects/Tipo_relacion.php:45
+#: modulos/etiquetas/DataObjects/Etiquetacaso.php:112
 #: modulos/etiquetas/DataObjects/Etiquetacaso.php:131
 #: modulos/segjudicial/DataObjects/Accion.php:71
 #: modulos/segjudicial/DataObjects/Proceso.php:67
@@ -1104,7 +1105,8 @@ msgstr ""
 msgid "Básica"
 msgstr ""
 
-#: DataObjects/Basica.php:53 DataObjects/Usuario.php:58
+#: DataObjects/Basica.php:53 DataObjects/Tipo_relacion.php:40
+#: DataObjects/Usuario.php:58
 msgid "Identificación"
 msgstr ""
 
@@ -1113,7 +1115,8 @@ msgstr ""
 #: DataObjects/Fuente_directa.php:56 DataObjects/Grupoper.php:57
 #: DataObjects/Grupoper.php:166 DataObjects/Municipio.php:52
 #: DataObjects/Presuntos_responsables.php:54 DataObjects/Rango_edad.php:51
-#: DataObjects/Usuario.php:60 sitios/pordefecto/conf_int.php:211
+#: DataObjects/Tipo_relacion.php:41 DataObjects/Usuario.php:60
+#: sitios/pordefecto/conf_int.php:211
 #: modulos/belicas/DataObjects/Combatiente.php:67
 msgid "Nombre"
 msgstr ""
@@ -1121,14 +1124,14 @@ msgstr ""
 #: DataObjects/Basica.php:55 DataObjects/Categoria.php:61
 #: DataObjects/Clase.php:55 DataObjects/Municipio.php:53
 #: DataObjects/Prensa.php:47 DataObjects/Presuntos_responsables.php:56
-#: DataObjects/Rango_edad.php:55
+#: DataObjects/Rango_edad.php:55 DataObjects/Tipo_relacion.php:42
 msgid "Fecha de Creación"
 msgstr ""
 
 #: DataObjects/Basica.php:56 DataObjects/Categoria.php:62
 #: DataObjects/Clase.php:56 DataObjects/Municipio.php:54
 #: DataObjects/Prensa.php:48 DataObjects/Presuntos_responsables.php:57
-#: DataObjects/Rango_edad.php:56
+#: DataObjects/Rango_edad.php:56 DataObjects/Tipo_relacion.php:43
 msgid "Fecha de Deshabilitación"
 msgstr ""
 
@@ -1302,40 +1305,88 @@ msgstr ""
 msgid "Número de Documento"
 msgstr ""
 
-#: DataObjects/Persona.php:253
+#: DataObjects/Persona.php:86 sitios/pordefecto/conf_int.php:429
+msgid "Ene"
+msgstr ""
+
+#: DataObjects/Persona.php:86 sitios/pordefecto/conf_int.php:429
+msgid "Feb"
+msgstr ""
+
+#: DataObjects/Persona.php:86 sitios/pordefecto/conf_int.php:429
+msgid "Mar"
+msgstr ""
+
+#: DataObjects/Persona.php:86 sitios/pordefecto/conf_int.php:430
+msgid "Abr"
+msgstr ""
+
+#: DataObjects/Persona.php:87 sitios/pordefecto/conf_int.php:430
+msgid "May"
+msgstr ""
+
+#: DataObjects/Persona.php:87 sitios/pordefecto/conf_int.php:430
+msgid "Jun"
+msgstr ""
+
+#: DataObjects/Persona.php:87 sitios/pordefecto/conf_int.php:431
+msgid "Jul"
+msgstr ""
+
+#: DataObjects/Persona.php:87 sitios/pordefecto/conf_int.php:431
+msgid "Ago"
+msgstr ""
+
+#: DataObjects/Persona.php:88 sitios/pordefecto/conf_int.php:431
+msgid "Sep"
+msgstr ""
+
+#: DataObjects/Persona.php:88 sitios/pordefecto/conf_int.php:432
+msgid "Oct"
+msgstr ""
+
+#: DataObjects/Persona.php:88 sitios/pordefecto/conf_int.php:432
+msgid "Nov"
+msgstr ""
+
+#: DataObjects/Persona.php:88 sitios/pordefecto/conf_int.php:432
+msgid "Dic"
+msgstr ""
+
+#: DataObjects/Persona.php:259
 msgid "Documento de Identidad"
 msgstr ""
 
-#: DataObjects/Persona.php:281
+#: DataObjects/Persona.php:287
 msgid "Buscar persona"
 msgstr ""
 
-#: DataObjects/Persona.php:287
+#: DataObjects/Persona.php:293
 msgid "Nombres y Apellidos"
 msgstr ""
 
-#: DataObjects/Persona.php:312 sitios/pordefecto/conf_int.php:236
+#: DataObjects/Persona.php:318 sitios/pordefecto/conf_int.php:236
 #: modulos/belicas/DataObjects/Combatiente.php:69
 msgid "Edad"
 msgstr ""
 
-#: DataObjects/Persona.php:326
+#: DataObjects/Persona.php:332
 msgid "Fecha Nac. y Sexo"
 msgstr ""
 
-#: DataObjects/Persona.php:412
+#: DataObjects/Persona.php:418
 msgid "La edad "
 msgstr ""
 
-#: DataObjects/Persona.php:413
+#: DataObjects/Persona.php:419
 msgid " (fecha del hecho menos fecha de nacimiento) "
 msgstr ""
 
-#: DataObjects/Persona.php:414
+#: DataObjects/Persona.php:420
 msgid " debe corresponder al rango de edad"
 msgstr ""
 
-#: DataObjects/Persona.php:426
+#: DataObjects/Persona.php:432
 msgid "La fecha de nacimiento no corresponde a un rango"
 msgstr ""
 
@@ -1427,6 +1478,10 @@ msgstr ""
 
 #: DataObjects/Tipo_relacion.php:38 sitios/pordefecto/conf_int.php:157
 msgid "Tipo de Relación"
+msgstr ""
+
+#: DataObjects/Tipo_relacion.php:44
+msgid "Dirigido"
 msgstr ""
 
 #: DataObjects/Tipo_sitio.php:48 sitios/pordefecto/conf_int.php:145
@@ -1732,54 +1787,6 @@ msgstr ""
 msgid "Diciembre"
 msgstr ""
 
-#: sitios/pordefecto/conf_int.php:429
-msgid "Ene"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:429
-msgid "Feb"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:429
-msgid "Mar"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:430
-msgid "Abr"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:430
-msgid "May"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:430
-msgid "Jun"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:431
-msgid "Jul"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:431
-msgid "Ago"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:431
-msgid "Sep"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:432
-msgid "Oct"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:432
-msgid "Nov"
-msgstr ""
-
-#: sitios/pordefecto/conf_int.php:432
-msgid "Dic"
-msgstr ""
-
 #: modulos/anexos/PagAnexo.php:191
 msgid "Anexos"
 msgstr ""
@@ -1789,7 +1796,7 @@ msgid "Anexo"
 msgstr ""
 
 #: modulos/anexos/DataObjects/Anexo.php:59
-#: modulos/anexos/DataObjects/Anexo.php:92
+#: modulos/anexos/DataObjects/Anexo.php:93
 msgid "Archivo"
 msgstr ""
 

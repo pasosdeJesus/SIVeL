@@ -70,18 +70,24 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         parent::__construct();
 
         $this->fb_fieldLabels= array(
-           'nombres' => _('Nombres'),
-           'apellidos' => _('Apellidos'),
-           'anionac' => _('Año Nacimiento'),
-           'mesnac' => _('Mes Nacimiento'),
-           'dianac' => _('Día Nacimiento'),
-           'sexo' => _('Sexo'),
-           'tipodocumento' => _('Tipo de Docuento'),
-           'numerodocumento' => _('Número de Documento'),
-           'id_departamento' => _('Departamento'),
-           'id_municipio' => _('Municipio'),
-           'id_clase'  => _('Clase'),
+            'nombres' => _('Nombres'),
+            'apellidos' => _('Apellidos'),
+            'anionac' => _('Año Nacimiento'),
+            'mesnac' => _('Mes Nacimiento'),
+            'dianac' => _('Día Nacimiento'),
+            'sexo' => _('Sexo'),
+            'tipodocumento' => _('Tipo de Docuento'),
+            'numerodocumento' => _('Número de Documento'),
+            'id_departamento' => _('Departamento'),
+            'id_municipio' => _('Municipio'),
+            'id_clase'  => _('Clase'),
         );
+        $this->fb_enumOptions['mesnac'] = array(
+            1=>_('Ene'), _('Feb'), _('Mar'), _('Abr'), 
+            _('May'), _('Jun'), _('Jul'), _('Ago'), 
+            _('Sep'), _('Oct'), _('Nov'), _('Dic')
+        );
+
     }
 
 

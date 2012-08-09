@@ -88,17 +88,6 @@ class DataObjects_Supracategoria extends DataObjects_Basica
         $this->fechadeshabilitacion = ($valor == '0000-00-00') ? 'null' : $valor;
     }
 
-    /**
-     * Opciones de fecha para un campo
-     *
-     * @param string $field campo
-     *
-     * @return arreglo de opciones
-     */
-    function dateOptions($field)
-    {
-	return parent::dateOptions($field);
-    }
 
     /**
      * Ajusta formulario generado.

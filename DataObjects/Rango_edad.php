@@ -49,7 +49,7 @@ class DataObjects_Rango_edad extends DataObjects_Basica
         $this->nom_tabla = _('Rango de Edad');
         $this->fb_fieldLabels = array(
             'nombre' => _('Nombre'),
-            'Rango' => _('Rango'),
+            'rango' => _('Rango'),
             'limiteinferior' => _('Límite Inferior'),
             'limitesuperior' => _('Límite Superior'),
             'fechacreacion' => _('Fecha de Creación'),

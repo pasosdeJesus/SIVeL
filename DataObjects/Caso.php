@@ -167,19 +167,6 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
 
 
     /**
-     * Opciones para un campo fecha.
-     *
-     * @param string &$nomCampo Nombre del campo fecha
-     *
-     * @return Opciones fecha
-     */
-    function dateOptions($nomCampo)
-    {
-	return parent::dateOptions($nomCampo);
-    }
-
-
-    /**
      * Requerido por versiones de FormBuilder de 0.10, hasta versión 1.121 en
      * el CVS de FormBuilder.php.
      * Cambio sucitado por bug #3469.

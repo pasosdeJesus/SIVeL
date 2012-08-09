@@ -101,18 +101,6 @@ class DataObjects_Tipo_violencia extends DataObjects_Basica
     }
 
 
-    /**
-     * Opciones de fecha para un campo
-     *
-     * @param string &$field campo
-     *
-     * @return arreglo de opciones
-     */
-    function dateOptions(&$field)
-    {
-	return parent::dateOptions($field);
-    }
-
 
     /**
      * Ajusta formulario generado.

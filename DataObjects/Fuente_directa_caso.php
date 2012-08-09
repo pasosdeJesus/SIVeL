@@ -76,7 +76,6 @@ class DataObjects_Fuente_directa_caso extends DB_DataObject_SIVeL
 
     var $fb_hidePrimaryKey = false;
 
-
     /**
      * Opciones de fecha para un campo
      *
@@ -88,11 +87,12 @@ class DataObjects_Fuente_directa_caso extends DB_DataObject_SIVeL
     {
         $fv = isset($GLOBALS['fechaPuedeSerVacia'])
             && $GLOBALS['fechaPuedeSerVacia'];
-        return array('minYear' => $GLOBALS['anio_min'],
-            'maxYear' => date('Y'),
-            'addEmptyOption' => $fv
-        );
+        $a = parent::dateOptions($fieldName);
+        $a['addEmptyOption'] = $fv;
+
+        return $a;
     }
+
 
     /**
      * Prepara antes de generar formulario.

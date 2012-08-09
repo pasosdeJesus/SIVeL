@@ -99,18 +99,6 @@ class DataObjects_Presuntos_responsables extends DataObjects_Basica
 
 
     /**
-     * Opciones de fecha para un campo
-     *
-     * @param string $field campo
-     *
-     * @return arreglo de opciones
-     */
-    function dateOptions($field)
-    {
-	parent::dateOptions($field);
-    }
-
-    /**
      * Ajusta formulario generado.
      *
      * @param object &$form      Formulario HTML_QuickForm

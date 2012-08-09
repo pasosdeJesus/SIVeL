@@ -36,6 +36,15 @@ class DataObjects_Tipo_relacion extends DataObjects_Basica
         parent::__construct();
 
         $this->nom_tabla = _('Tipo de Relación');
+        $this->fb_fieldLabels = array(
+            'id' => _('Identificación'),
+            'nombre' => _('Nombre'),
+            'fechacreacion' => _('Fecha de Creación'),
+            'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
+            'dirigido' => _('Dirigido'),
+            'observaciones' => _('Observaciones'),
+        );
+
     }
 
 

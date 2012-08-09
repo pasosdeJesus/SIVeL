@@ -103,18 +103,6 @@ class DataObjects_Basica extends DB_DataObject_SIVeL
     }
 
     /**
-     * Opciones de fecha para un campo
-     *
-     * @param string $field campo
-     *
-     * @return arreglo de opciones
-     */
-    function dateOptions($field)
-    {
-	parent::dateOptions($field);
-    }
-
-    /**
      * Ajusta formulario generado.
      *
      * @param object &$form        Formulario HTML_QuickForm
