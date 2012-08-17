@@ -5,6 +5,11 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem>
+						<para>Activa PostGIS al crear base de datos
+						</para>
+					</listitem>
+
+					<listitem>
 						<para>Activado Soporte de Idiomas Nativos. Permite especificar al usuario el idioma que prefiere para la interfaz y la traduce a ese idioma.  En el momento hay traducciones a español e inglés.
 						</para>
 					</listitem>

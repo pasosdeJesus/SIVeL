@@ -1,7 +1,7 @@
 #!/bin/sh
 # Crea base de datos, tablas, datos iniciales y archivos para DataObject
-# Dominio público. Sin garantías. 2004.  vtamara@users.sourceforge.net
-# Basado en script de dominio público de 
+# Dominio pÃºblico. Sin garantÃ­as. 2004.  vtamara@users.sourceforge.net
+# Basado en script de dominio pÃºblico de 
 # 	http://structio.sourceforge.net/seguidor
 
 if (test ! -f vardb.sh -o ! -f conf.php) then {
@@ -43,11 +43,11 @@ function verificaDataobject {
 	nd=$1;
 	if (test -f $nd/estructura.sql) then {
 		if (test ! -f $nd/DataObjects/estructura-dataobject.ini) then {
-			echo "Debería existir $nd/DataObjects/estructura-dataobject.ini";
+			echo "DeberÃ­a existir $nd/DataObjects/estructura-dataobject.ini";
 			exit 1;
 		} fi;
 		if (test ! -f $nd/DataObjects/estructura-dataobject.links.ini) then {
-			echo "Debería existir $nd/DataObjects/estructura-dataobject.links.ini";
+			echo "DeberÃ­a existir $nd/DataObjects/estructura-dataobject.links.ini";
 			exit 1;
 		} fi;
 
@@ -66,7 +66,7 @@ else {
 
 for i in $modulos; do 
 	if (test ! -d $dirfuentes/$i) then {
-		echo "Falta directorio de módulo $dirfuentes/$i";
+		echo "Falta directorio de mÃ³dulo $dirfuentes/$i";
 		exit 1;
 	} fi;
 	verificaDataobject $dirfuentes/$i
@@ -77,15 +77,15 @@ verificaDataobject ${dirap}
 psql $socketopt -U $dbusuario postgres -c ""
 if (test "$?" != "0") then {
 	echo "Verifique: ";
-	echo "  a) Que esté funcionando el servidor PostgreSQL";
-	echo "  b) Que esté definido el usuario $dbusuario de PostgreSQL";
+	echo "  a) Que estÃ© funcionando el servidor PostgreSQL";
+	echo "  b) Que estÃ© definido el usuario $dbusuario de PostgreSQL";
 	exit 1;
 } fi;
 
-echo "Advertencia: este script borrara la información existente en "
-echo "la base '$dbnombre' del usuario '$dbusuario' y sobreescribirá "
+echo "Advertencia: este script borrara la informaciÃ³n existente en "
+echo "la base '$dbnombre' del usuario '$dbusuario' y sobreescribirÃ¡ "
 echo "$dirap/DataObjects/$dbnombre.ini y $dirap/DataObjects/$dbnombre.links.ini"
-echo "con información base y de módulos: $modulos"
+echo "con informaciÃ³n base y de mÃ³dulos: $modulos"
 echo "Presione [Enter] para continuar o detenga con [Ctrl]+[C]";
 if (test "${PREGUNTA}" != "no") then {
 	read;
@@ -98,12 +98,24 @@ if (test "$SIN_DROP" != "1") then {
 cmd="createdb $socketopt -E UTF8 -U $dbusuario $dbnombre -T template0"
 echo $cmd
 eval $cmd
-
+cmd="createlang $socketopt plpgsql -U $dbusuario $dbnombre"
+echo $cmd
+eval $cmd
+if (test -f /usr/local/share/postgresql/contrib/postgis-1.5/postgis.sql) then {
+	cmd="psql $socketopt -U $dbusuario -d $dbnombre -f /usr/local/share/postgresql/contrib/postgis-1.5/postgis.sql"
+	echo $cmd
+	eval $cmd
+} fi;
+if (test -f /usr/local/share/postgresql/contrib/postgis-1.5/spatial_ref_sys.sql) then {
+	cmd="psql $socketopt -U $dbusuario -d $dbnombre -f /usr/local/share/postgresql/contrib/postgis-1.5/spatial_ref_sys.sql"
+	echo $cmd
+	eval $cmd
+} fi;
 if (test "$SIN_ESQUEMA" = "1") then {
 	exit 0;
 } fi;
 
-# Iniciar archivo vacío por construir con leeEstructura:
+# Iniciar archivo vacÃ­o por construir con leeEstructura:
 echo "" > $dirap/DataObjects/$dbnombre.ini
 echo "" > $dirap/DataObjects/$dbnombre.links.ini
 
