@@ -73,3 +73,33 @@ foreach($lm as $m) {
         require_once "$m/conf.php";
     }
 }
+
+foreach($GLOBALS['nueva_ficha_tabuladores'] as $a) {
+    $puesto = $a[0];
+    $nom = $a[1];
+    $arc = $a[2];
+    $puestoelim = $a[3];
+    $nft = array();
+    for($nf = 0; 
+        $nf < count($GLOBALS['ficha_tabuladores']);
+        $nf++
+    ) {
+        $f = $GLOBALS['ficha_tabuladores'][$nf];
+        $fpe = $f[2];
+        if ($fpe >= $puestoelim) {
+            $f[2] = $fpe + 1;
+        }
+        if ($nf < $puesto) {
+            $nft[$nf] = $f;
+        } else if ($nf == $puesto) {
+            $nft[$nf] = array($nom, $arc, $puestoelim);
+            $nft[$nf + 1] = $f;
+        } else  {
+            $nft[$nf + 1] = $f;
+        }
+    }
+    $GLOBALS['ficha_tabuladores'] = $nft;
+}
+
+//var_dump($GLOBALS['ficha_tabuladores']);
+//die("x");

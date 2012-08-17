@@ -71,6 +71,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
            'observaciones_accion'  => _('Observaciones'),
            'respondido'            => _('Respondido'),
         );
+        $this->nom_tabla = _('Acción');
     }
 
     var $fb_textFields = array ('observaciones_accion');
@@ -166,13 +167,18 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
         $fa[] =& $form->removeElement('id_tipo_accion');
         $fa[] =& $form->removeElement('id_despacho');
         $sf = $fa[] =& $form->removeElement('fecha');
-        $sf->setLabel('Fecha de la Acción');
+        $sf->setLabel(_('Fecha de la Acción'));
         $fa[] =& $form->removeElement('numero_radicado');
         $fa[] =& $obs;
         $fa[] = $res;
 
-        $t = '<table width="100%"><tr><th>Tipo</th><th>Despacho</th>' .
-            '<th>Fecha</th><th>N. Rad.</th><th>Observaciones</th><th>Resp</th></tr>';
+        $t = '<table width="100%"><tr><th>' . _('Tipo') 
+            . '</th><th>' . _('Despacho') 
+            . '</th><th>' . _('Fecha') 
+            . '</th><th>' . _('N. Rad.')
+            . '</th><th>' . _('Observaciones')
+            . '</th><th>' . _('Resp') 
+            . '</th></tr>';
         $p = objeto_tabla('accion');
         $db = $p->getDatabaseConnection();
         $p->id_proceso = $formbuilder->_do->id_proceso;
@@ -183,14 +189,19 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
             $ddespacho = $p->getLink('id_despacho');
             $n = "fobs_{$p->id_proceso}_{$p->id_tipo_accion}_" .
                 "{$p->id_despacho}_{$p->fecha}";
-            $t .= "<tr><td>" . htmlentities($dtipo->nombre, ENT_COMPAT, 'UTF-8') . "</td>" .
-                "<td>" . htmlentities($ddespacho->nombre, ENT_COMPAT, 'UTF-8') . "</td>" .
-                "<td>" . htmlentities($p->fecha, ENT_COMPAT, 'UTF-8') . "</td>" .
-                "<td>" . htmlentities($p->numero_radicado, ENT_COMPAT, 'UTF-8') . "</td>" .
-                "<td>" . htmlentities($p->observaciones_accion, ENT_COMPAT, 'UTF-8') . "</td>" .
-                "<td>" . ($p->respondido == 't'?'Si':'No') . "</td>" .
-                "<td><a href=\"{$_SERVER['PHP_SELF']}?eliminaaccionj=" .
-                $p->id . "\">Eliminar</a></td>";
+            $t .= "<tr><td>"
+                . htmlentities($dtipo->nombre, ENT_COMPAT, 'UTF-8')
+                . "</td><td>"
+                . htmlentities($ddespacho->nombre, ENT_COMPAT, 'UTF-8')
+                . "</td><td>"
+                . htmlentities($p->fecha, ENT_COMPAT, 'UTF-8')
+                . "</td><td>"
+                . htmlentities($p->numero_radicado, ENT_COMPAT, 'UTF-8')
+                . "</td><td>"
+                . htmlentities($p->observaciones_accion, ENT_COMPAT, 'UTF-8')
+                . "</td><td>" . ($p->respondido == 't' ? _('Si') : _('No'))
+                . "</td><td><a href=\"{$_SERVER['PHP_SELF']}?eliminaaccionj="
+                . $p->id . "\">" . _('Eliminar') . "</a></td>";
         }
         $t .= '</table>';
         $sel =& $form->addElement('static', null, '', $t);
@@ -204,7 +215,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
         );
         $sel =& $form->createElement(
             'submit',
-            $form->getButtonName('agregaraccionj'),'Añadir Acción'
+            $form->getButtonName('agregaraccionj'), _('Añadir Acción')
         );
         $form->addElement($sel);
 

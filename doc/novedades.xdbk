@@ -5,6 +5,13 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem>
+						<para>Configuración más sencilla de módulos.  Basta agregar el módulo en la variable <literal>modulos</literal> del archivo de configuración del sitio y desde el menú principal elegir 
+<menuchoice><guimenu>Otros</guimenu><guimenuitem>Actualizar</guimenuitem></menuchoice>.  
+						</para>
+					</listitem>
+
+
+					<listitem>
 						<para>Activa PostGIS al crear base de datos
 						</para>
 					</listitem>

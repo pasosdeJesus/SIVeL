@@ -159,6 +159,7 @@ $GLOBALS['PALABRA_SITIO'] = 'sigamos el ejemplo de Jesús';
  */
 $GLOBALS['deshabilita_manejo_usuarios'] = false;
 
+
 /** Pestañas de la Ficha  de captura
     'id', 'Clase', 'orden en eliminación (no rep)' */
 $GLOBALS['ficha_tabuladores'] = array(
@@ -177,6 +178,8 @@ $GLOBALS['ficha_tabuladores'] = array(
     12 => array('evaluacion', 'PagEvaluacion', 12)
 );
 
+/** Solicitudes de nuevas pestañas en ficha de captura */
+$GLOBALS['nueva_ficha_tabuladores'] = array();
 
 // MODULOS
 

@@ -130,7 +130,9 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
         $db = $p->getDatabaseConnection();
 
         //$form->setDefaults(array('test' => array('4','15')));
-        $sel = $form->createElement('hierselect', 'tipoetapa', 'Tipo/Etapa', null, '/');
+        $sel = $form->createElement(
+            'hierselect', 'tipoetapa', _('Tipo/Etapa'), null, '/'
+        );
         $mainOptions = htmlentities_array(
             $db->getAssoc('SELECT id, nombre FROM tipo_proceso')
         );

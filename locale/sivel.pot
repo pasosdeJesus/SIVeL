@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sivel 1.2\n"
 "Report-Msgid-Bugs-To: vtamara@pasosdeJesus.org\n"
-"POT-Creation-Date: 2012-08-08 19:33-0500\n"
+"POT-Creation-Date: 2012-08-17 18:12-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,12 +46,12 @@ msgid "Colectivos"
 msgstr ""
 
 #: PagBaseMultiple.php:302 PagBaseSimple.php:192 consolidado.php:693
-#: consulta_web.php:927 estadisticas.php:609
+#: consulta_web.php:928 estadisticas.php:609
 #: sitios/pordefecto/conf_int.php:337
 msgid "Consulta"
 msgstr ""
 
-#: PagBaseMultiple.php:302 PagBaseSimple.php:192 ResConsulta.php:494
+#: PagBaseMultiple.php:302 PagBaseSimple.php:192 ResConsulta.php:509
 #: DataObjects/Acto.php:60 DataObjects/Actocolectivo.php:61
 #: sitios/pordefecto/conf_int.php:348
 msgid "Caso"
@@ -61,6 +61,7 @@ msgstr ""
 #: DataObjects/Acto.php:99 DataObjects/Actocolectivo.php:102
 #: DataObjects/Relacion_personas.php:171
 #: modulos/etiquetas/DataObjects/Etiquetacaso.php:156
+#: modulos/segjudicial/DataObjects/Accion.php:204
 msgid "Eliminar"
 msgstr ""
 
@@ -155,7 +156,7 @@ msgstr ""
 
 #: PagBasicos.php:734 PagPresentaRes.php:117 PagUbicacion.php:245
 #: PagUbicacion.php:246 consolidado.php:376 consolidado.php:380
-#: consulta_web.php:722 estadisticas.php:583 DataObjects/Escrito_caso.php:70
+#: consulta_web.php:723 estadisticas.php:583 DataObjects/Escrito_caso.php:70
 #: sitios/pordefecto/conf_int.php:199 sitios/pordefecto/conf_int.php:206
 #: sitios/pordefecto/conf_int.php:304 sitios/pordefecto/conf_int.php:325
 #: sitios/pordefecto/conf_int.php:460
@@ -245,43 +246,44 @@ msgstr ""
 msgid "Forma de Presentar Resultados"
 msgstr ""
 
-#: PagPresentaRes.php:109 ResConsulta.php:494 consolidado.php:376
-#: consolidado.php:380 consolidado.php:385 consulta_web.php:714
+#: PagPresentaRes.php:109 ResConsulta.php:509 consolidado.php:376
+#: consolidado.php:380 consolidado.php:385 consulta_web.php:715
 #: DataObjects/Caso.php:112 DataObjects/Escrito_caso.php:69
 #: DataObjects/Fuente_directa_caso.php:71 sitios/pordefecto/conf_int.php:185
 #: sitios/pordefecto/conf_int.php:205 sitios/pordefecto/conf_int.php:324
 #: sitios/pordefecto/conf_int.php:459 modulos/anexos/DataObjects/Anexo.php:57
 #: modulos/etiquetas/DataObjects/Etiquetacaso.php:111
 #: modulos/etiquetas/DataObjects/Etiquetacaso.php:129
+#: modulos/segjudicial/DataObjects/Accion.php:177
 msgid "Fecha"
 msgstr ""
 
-#: PagPresentaRes.php:125 consulta_web.php:732
+#: PagPresentaRes.php:125 consulta_web.php:733
 #: sitios/pordefecto/conf_int.php:322 sitios/pordefecto/conf_int.php:457
 msgid "Código"
 msgstr ""
 
-#: PagPresentaRes.php:132 consulta_web.php:756
+#: PagPresentaRes.php:132 consulta_web.php:757
 msgid "Ordenar por"
 msgstr ""
 
-#: PagPresentaRes.php:137 consulta_web.php:762
+#: PagPresentaRes.php:137 consulta_web.php:763
 msgid "Tabla"
 msgstr ""
 
-#: PagPresentaRes.php:142 consulta_web.php:831
+#: PagPresentaRes.php:142 consulta_web.php:832
 msgid "CSV"
 msgstr ""
 
-#: PagPresentaRes.php:153 ResConsulta.php:703 consulta_web.php:768
+#: PagPresentaRes.php:153 ResConsulta.php:718 consulta_web.php:769
 msgid "Reporte Revista"
 msgstr ""
 
-#: PagPresentaRes.php:163 consulta_web.php:778
+#: PagPresentaRes.php:163 consulta_web.php:779
 msgid "Reporte General"
 msgstr ""
 
-#: PagPresentaRes.php:184 consulta_web.php:787
+#: PagPresentaRes.php:184 consulta_web.php:788
 msgid "Relato XML"
 msgstr ""
 
@@ -293,7 +295,7 @@ msgstr ""
 msgid "Forma"
 msgstr ""
 
-#: PagPresentaRes.php:229 consulta_web.php:865
+#: PagPresentaRes.php:229 consulta_web.php:866
 msgid "Fuentes"
 msgstr ""
 
@@ -301,8 +303,8 @@ msgstr ""
 msgid "Mostrar"
 msgstr ""
 
-#: PagPresentaRes.php:245 PagPresentaRes.php:246 consulta_web.php:885
-#: consulta_web.php:886
+#: PagPresentaRes.php:245 PagPresentaRes.php:246 consulta_web.php:886
+#: consulta_web.php:887
 msgid "Memo en varias líneas"
 msgstr ""
 
@@ -318,7 +320,7 @@ msgstr ""
 msgid "Ingreso Hasta:"
 msgstr ""
 
-#: PagTipoViolencia.php:139 ResConsulta.php:2108
+#: PagTipoViolencia.php:139 ResConsulta.php:2123
 #: DataObjects/Caso_contexto.php:49 DataObjects/Caso_contexto.php:50
 #: DataObjects/Contexto.php:48 sitios/pordefecto/conf_int.php:165
 #: sitios/pordefecto/conf_int.php:217 sitios/pordefecto/conf_int.php:218
@@ -359,7 +361,7 @@ msgstr ""
 msgid "Víctimas Individuales"
 msgstr ""
 
-#: PagVictimaIndividual.php:267 ResConsulta.php:494 DataObjects/Acto.php:79
+#: PagVictimaIndividual.php:267 ResConsulta.php:509 DataObjects/Acto.php:79
 msgid "Víctima"
 msgstr ""
 
@@ -387,156 +389,156 @@ msgstr ""
 msgid "Faltó nombre y/o apellido de familiar"
 msgstr ""
 
-#: ResConsulta.php:495 DataObjects/Sector_social.php:46
+#: ResConsulta.php:510 DataObjects/Sector_social.php:46
 #: DataObjects/Sector_social_comunidad.php:56 DataObjects/Victima.php:100
 #: sitios/pordefecto/conf_int.php:156 sitios/pordefecto/conf_int.php:242
 #: modulos/belicas/DataObjects/Combatiente.php:72
 msgid "Sector Social"
 msgstr ""
 
-#: ResConsulta.php:495 DataObjects/Organizacion_comunidad.php:57
+#: ResConsulta.php:510 DataObjects/Organizacion_comunidad.php:57
 #: sitios/pordefecto/conf_int.php:152 sitios/pordefecto/conf_int.php:243
 #: modulos/belicas/DataObjects/Combatiente.php:76
 msgid "Organización Social"
 msgstr ""
 
-#: ResConsulta.php:496 estadisticas.php:200 DataObjects/Acto.php:58
+#: ResConsulta.php:511 estadisticas.php:200 DataObjects/Acto.php:58
 #: DataObjects/Acto.php:78 DataObjects/Actocolectivo.php:59
 #: DataObjects/Actocolectivo.php:79 DataObjects/Categoria.php:56
 #: sitios/pordefecto/conf_int.php:164
 msgid "Categoria"
 msgstr ""
 
-#: ResConsulta.php:496 DataObjects/Acto.php:78
+#: ResConsulta.php:511 DataObjects/Acto.php:78
 #: DataObjects/Actocolectivo.php:79
 msgid "P. Responsable"
 msgstr ""
 
-#: ResConsulta.php:663 ResConsulta.php:701 ResConsulta.php:732
-#: consulta_web.php:471 sitios/pordefecto/conf_int.php:355
+#: ResConsulta.php:678 ResConsulta.php:716 ResConsulta.php:747
+#: consulta_web.php:472 sitios/pordefecto/conf_int.php:355
 msgid "Consulta Web"
 msgstr ""
 
-#: ResConsulta.php:691 ResConsulta.php:737
+#: ResConsulta.php:706 ResConsulta.php:752
 msgid "Consulta de"
 msgstr ""
 
-#: ResConsulta.php:691 ResConsulta.php:737
+#: ResConsulta.php:706 ResConsulta.php:752
 msgid "casos"
 msgstr ""
 
-#: ResConsulta.php:693
+#: ResConsulta.php:708
 msgid "Por favor refine su consulta para que sean menos de"
 msgstr ""
 
-#: ResConsulta.php:756 ResConsulta.php:808 ResConsulta.php:822
-#: ResConsulta.php:952 ResConsulta.php:972 ResConsulta.php:1014
-#: ResConsulta.php:1042 ResConsulta.php:1056 ResConsulta.php:1270
-#: ResConsulta.php:2177 ResConsulta.php:2765 ResConsulta.php:2865
-#: ResConsulta.php:2883 consolidado.php:205 consolidado.php:219
-#: consulta_web.php:230 consulta_web.php:247 consulta_web.php:378
-#: consulta_web.php:809 consulta_web.php:824 consulta_web.php:913
+#: ResConsulta.php:771 ResConsulta.php:823 ResConsulta.php:837
+#: ResConsulta.php:967 ResConsulta.php:987 ResConsulta.php:1029
+#: ResConsulta.php:1057 ResConsulta.php:1071 ResConsulta.php:1285
+#: ResConsulta.php:2192 ResConsulta.php:2780 ResConsulta.php:2880
+#: ResConsulta.php:2898 consolidado.php:205 consolidado.php:219
+#: consulta_web.php:231 consulta_web.php:248 consulta_web.php:379
+#: consulta_web.php:810 consulta_web.php:825 consulta_web.php:914
 #: estadisticas.php:260 estadisticas.php:564
 msgid "Falta"
 msgstr ""
 
-#: ResConsulta.php:757 ResConsulta.php:808 ResConsulta.php:953
-#: ResConsulta.php:1015 ResConsulta.php:1042 ResConsulta.php:1270
-#: ResConsulta.php:2178 ResConsulta.php:2866 consolidado.php:206
-#: consulta_web.php:231 consulta_web.php:379 consulta_web.php:810
-#: consulta_web.php:914
+#: ResConsulta.php:772 ResConsulta.php:823 ResConsulta.php:968
+#: ResConsulta.php:1030 ResConsulta.php:1057 ResConsulta.php:1285
+#: ResConsulta.php:2193 ResConsulta.php:2881 consolidado.php:206
+#: consulta_web.php:232 consulta_web.php:380 consulta_web.php:811
+#: consulta_web.php:915
 msgid "en"
 msgstr ""
 
-#: ResConsulta.php:764 consulta_web.php:874 consulta_web.php:875
+#: ResConsulta.php:779 consulta_web.php:875 consulta_web.php:876
 msgid "Retroalimentación"
 msgstr ""
 
-#: ResConsulta.php:772
+#: ResConsulta.php:787
 msgid "Falta definir directorio destino en variable"
 msgstr ""
 
-#: ResConsulta.php:773
+#: ResConsulta.php:788
 msgid "del archivo"
 msgstr ""
 
-#: ResConsulta.php:779
+#: ResConsulta.php:794
 msgid "No puede escribirse en directorio"
 msgstr ""
 
-#: ResConsulta.php:781
+#: ResConsulta.php:796
 msgid "Ajuste o cambie permisos temporalmente con"
 msgstr ""
 
-#: ResConsulta.php:785
+#: ResConsulta.php:800
 msgid "El directorio"
 msgstr ""
 
-#: ResConsulta.php:787
+#: ResConsulta.php:802
 msgid "puede ser escrito"
 msgstr ""
 
-#: ResConsulta.php:788
+#: ResConsulta.php:803
 msgid "Tras generar, retire permiso de escritura con"
 msgstr ""
 
-#: ResConsulta.php:793
+#: ResConsulta.php:808
 msgid "Generando relatos"
 msgstr ""
 
-#: ResConsulta.php:822 ResConsulta.php:972 ResConsulta.php:1056
-#: consolidado.php:219 consulta_web.php:247 consulta_web.php:748
-#: consulta_web.php:825 estadisticas.php:260 estadisticas.php:564
+#: ResConsulta.php:837 ResConsulta.php:987 ResConsulta.php:1071
+#: consolidado.php:219 consulta_web.php:248 consulta_web.php:749
+#: consulta_web.php:826 estadisticas.php:260 estadisticas.php:564
 msgid "de"
 msgstr ""
 
-#: ResConsulta.php:886
+#: ResConsulta.php:901
 msgid "de caso"
 msgstr ""
 
-#: ResConsulta.php:887
+#: ResConsulta.php:902
 msgid "fuera de secuencia"
 msgstr ""
 
-#: ResConsulta.php:928
+#: ResConsulta.php:943
 msgid "Falló"
 msgstr ""
 
-#: ResConsulta.php:1072 actualiza.php:2177 buscaRepetidos.php:60
-#: completaActos.php:82 consolidado.php:700 consulta_web.php:935
+#: ResConsulta.php:1087 actualiza.php:2177 buscaRepetidos.php:60
+#: completaActos.php:81 consolidado.php:700 consulta_web.php:936
 #: detalle.php:83 detusyrol.php:71 estadisticas.php:355 estadisticas.php:616
-#: importaRelato.php:750 tabla.php:224 tablas_basicas.php:60 usyroles.php:72
+#: importaRelato.php:764 tabla.php:224 tablas_basicas.php:60 usyroles.php:72
 #: valida.php:118
 msgid "Men&uacute; Principal"
 msgstr ""
 
-#: ResConsulta.php:1222 ResConsulta.php:2261 consolidado.php:377
+#: ResConsulta.php:1237 ResConsulta.php:2276 consolidado.php:377
 #: consolidado.php:381 consolidado.php:386 sitios/pordefecto/conf_int.php:299
 #: sitios/pordefecto/conf_int.php:326 sitios/pordefecto/conf_int.php:461
 msgid "Víctimas"
 msgstr ""
 
-#: ResConsulta.php:1635
+#: ResConsulta.php:1650
 msgid "Tiene más de una ubicación"
 msgstr ""
 
-#: ResConsulta.php:1951
+#: ResConsulta.php:1966
 msgid "CASO No."
 msgstr ""
 
-#: ResConsulta.php:2017
+#: ResConsulta.php:2032
 msgid "Tip. Ub"
 msgstr ""
 
-#: ResConsulta.php:2288
+#: ResConsulta.php:2303
 msgid "PERSONA SIN IDENTIFICAR"
 msgstr ""
 
-#: ResConsulta.php:2290
+#: ResConsulta.php:2305
 msgid "PERSONAS SIN IDENTIFICAR"
 msgstr ""
 
-#: ResConsulta.php:2765 ResConsulta.php:2883
+#: ResConsulta.php:2780 ResConsulta.php:2898
 msgid "indicada en"
 msgstr ""
 
@@ -544,7 +546,7 @@ msgstr ""
 msgid "Actualizando"
 msgstr ""
 
-#: aut.php:106 consulta_web.php:673 DataObjects/Usuario.php:56
+#: aut.php:106 consulta_web.php:674 DataObjects/Usuario.php:56
 msgid "Usuario"
 msgstr ""
 
@@ -633,31 +635,31 @@ msgstr ""
 msgid "LaTeX"
 msgstr ""
 
-#: consolidado.php:687 consulta_web.php:837 estadisticas.php:602
+#: consolidado.php:687 consulta_web.php:838 estadisticas.php:602
 msgid "Forma de presentación"
 msgstr ""
 
-#: consulta_web.php:187
+#: consulta_web.php:188
 msgid "Falta especificar tipo de categoria"
 msgstr ""
 
-#: consulta_web.php:479
+#: consulta_web.php:480
 msgid "Periodo de Consulta"
 msgstr ""
 
-#: consulta_web.php:481
+#: consulta_web.php:482
 msgid "hasta"
 msgstr ""
 
-#: consulta_web.php:487
+#: consulta_web.php:488
 msgid "Código(s)"
 msgstr ""
 
-#: consulta_web.php:493
+#: consulta_web.php:494
 msgid "Título del caso"
 msgstr ""
 
-#: consulta_web.php:499 estadisticas.php:189 estadisticas.php:573
+#: consulta_web.php:500 estadisticas.php:189 estadisticas.php:573
 #: DataObjects/Clase.php:52 DataObjects/Departamento.php:45
 #: DataObjects/Municipio.php:51 DataObjects/Persona.php:81
 #: DataObjects/Ubicacion.php:70 sitios/pordefecto/conf_int.php:138
@@ -665,73 +667,73 @@ msgstr ""
 msgid "Departamento"
 msgstr ""
 
-#: consulta_web.php:516 estadisticas.php:196 estadisticas.php:579
+#: consulta_web.php:517 estadisticas.php:196 estadisticas.php:579
 #: DataObjects/Clase.php:53 DataObjects/Municipio.php:49
 #: DataObjects/Persona.php:82 DataObjects/Ubicacion.php:71
 #: sitios/pordefecto/conf_int.php:139 sitios/pordefecto/conf_int.php:196
 msgid "Municipio"
 msgstr ""
 
-#: consulta_web.php:526 DataObjects/Ubicacion.php:72
+#: consulta_web.php:527 DataObjects/Ubicacion.php:72
 msgid "Centro Poblado"
 msgstr ""
 
-#: consulta_web.php:556
+#: consulta_web.php:557
 msgid "Nombre o apellido de la víctima"
 msgstr ""
 
-#: consulta_web.php:566
+#: consulta_web.php:567
 msgid "Desde: "
 msgstr ""
 
-#: consulta_web.php:573
+#: consulta_web.php:574
 msgid "Hasta:"
 msgstr ""
 
-#: consulta_web.php:583 DataObjects/Acto.php:57
+#: consulta_web.php:584 DataObjects/Acto.php:57
 #: DataObjects/Actocolectivo.php:58
 #: DataObjects/Presuntos_responsables_caso.php:72
 #: sitios/pordefecto/conf_int.php:223 sitios/pordefecto/conf_int.php:248
 msgid "Presunto Responsable"
 msgstr ""
 
-#: consulta_web.php:599
+#: consulta_web.php:600
 msgid "Clasificación de Violencia"
 msgstr ""
 
-#: consulta_web.php:642
+#: consulta_web.php:643
 msgid "Sector Social Víctima"
 msgstr ""
 
-#: consulta_web.php:682
+#: consulta_web.php:683
 msgid "Ingreso Desde"
 msgstr ""
 
-#: consulta_web.php:689
+#: consulta_web.php:690
 msgid "Ingreso Hasta"
 msgstr ""
 
-#: consulta_web.php:702
+#: consulta_web.php:703
 msgid "Con Coordenadas"
 msgstr ""
 
-#: consulta_web.php:707
+#: consulta_web.php:708
 msgid "Coordenadas"
 msgstr ""
 
-#: consulta_web.php:748
+#: consulta_web.php:749
 msgid "Falta "
 msgstr ""
 
-#: consulta_web.php:880
+#: consulta_web.php:881
 msgid "Campos por mostrar"
 msgstr ""
 
-#: consulta_web.php:894
+#: consulta_web.php:895
 msgid "Conversión a TeX"
 msgstr ""
 
-#: consulta_web.php:920
+#: consulta_web.php:921
 msgid "Detalles de la presentación"
 msgstr ""
 
@@ -856,98 +858,99 @@ msgstr ""
 msgid "No pudo subirse archivo, revisar que el tamaño sea mayor que cero y menor que %s y que %s"
 msgstr ""
 
-#: importaRelato.php:138
+#: importaRelato.php:143
 msgid "Falta soporte para Zlib en su instalación de PHP."
 msgstr ""
 
-#: importaRelato.php:139
+#: importaRelato.php:144
 msgid "Descomprima manualmente e importe el descomprimido"
 msgstr ""
 
-#: importaRelato.php:156
+#: importaRelato.php:161
 msgid "No pudo cargarse"
 msgstr ""
 
-#: importaRelato.php:221
+#: importaRelato.php:226
 msgid "No pudo insertar caso "
 msgstr ""
 
-#: importaRelato.php:225
+#: importaRelato.php:230
 msgid "idcaso es 0"
 msgstr ""
 
-#: importaRelato.php:239
+#: importaRelato.php:244
 #, php-format
 msgid "Fuente extraida automaticamente de %s"
 msgstr ""
 
-#: importaRelato.php:265 importaRelato.php:283
+#: importaRelato.php:270 importaRelato.php:288
 msgid "Organización responsable incluida automáticamente"
 msgstr ""
 
-#: importaRelato.php:392
+#: importaRelato.php:397
 #, php-format
 msgid "Acto: No hay definida persona con id '%s'"
 msgstr ""
 
-#: importaRelato.php:478
+#: importaRelato.php:483
 msgid "No pudo insertar víctima"
 msgstr ""
 
-#: importaRelato.php:535
+#: importaRelato.php:540
 msgid "No hay datos de p. resp."
 msgstr ""
 
-#: importaRelato.php:555
+#: importaRelato.php:560
 msgid "No hay definida persona con id."
 msgstr ""
 
-#: importaRelato.php:584
+#: importaRelato.php:589
 msgid "Acto: No pudo insertar acto col."
 msgstr ""
 
-#: importaRelato.php:591
+#: importaRelato.php:596
 msgid "No es individual ni colectiva"
 msgstr ""
 
-#: importaRelato.php:595
+#: importaRelato.php:600
 msgid "Agresión particular vacía"
 msgstr ""
 
-#: importaRelato.php:630
+#: importaRelato.php:635
 msgid "Falta importaRelato en"
 msgstr ""
 
-#: importaRelato.php:641 DataObjects/Tipo_relacion.php:45
+#: importaRelato.php:646 DataObjects/Tipo_relacion.php:45
 #: modulos/etiquetas/DataObjects/Etiquetacaso.php:112
 #: modulos/etiquetas/DataObjects/Etiquetacaso.php:131
 #: modulos/segjudicial/DataObjects/Accion.php:71
+#: modulos/segjudicial/DataObjects/Accion.php:179
 #: modulos/segjudicial/DataObjects/Proceso.php:67
 msgid "Observaciones"
 msgstr ""
 
-#: importaRelato.php:693
+#: importaRelato.php:698
 msgid "Se requiere módulo anexos con variable dir_anexos"
 msgstr ""
 
-#: importaRelato.php:697
+#: importaRelato.php:702
 #, php-format
 msgid "El directorio '%s' debería permitir escritura"
 msgstr ""
 
-#: importaRelato.php:704
+#: importaRelato.php:709
 msgid "Se requiere módulo etiquetas"
 msgstr ""
 
-#: importaRelato.php:725
+#: importaRelato.php:730
 msgid "Importa Relatos"
 msgstr ""
 
-#: importaRelato.php:732
+#: importaRelato.php:737
 msgid "Archivo con relatos"
 msgstr ""
 
-#: importaRelato.php:740
+#: importaRelato.php:754
 msgid "Importar"
 msgstr ""
 
@@ -1892,10 +1895,12 @@ msgid "Tipo de Acción"
 msgstr ""
 
 #: modulos/segjudicial/DataObjects/Accion.php:68
+#: modulos/segjudicial/DataObjects/Accion.php:176
 msgid "Despacho"
 msgstr ""
 
 #: modulos/segjudicial/DataObjects/Accion.php:69
+#: modulos/segjudicial/DataObjects/Accion.php:170
 msgid "Fecha de la Acción"
 msgstr ""
 
@@ -1905,6 +1910,35 @@ msgstr ""
 
 #: modulos/segjudicial/DataObjects/Accion.php:72
 msgid "Respondido"
+msgstr ""
+
+#: modulos/segjudicial/DataObjects/Accion.php:74
+msgid "Acción"
+msgstr ""
+
+#: modulos/segjudicial/DataObjects/Accion.php:175
+#: modulos/segjudicial/DataObjects/Proceso.php:60
+msgid "Tipo"
+msgstr ""
+
+#: modulos/segjudicial/DataObjects/Accion.php:178
+msgid "N. Rad."
+msgstr ""
+
+#: modulos/segjudicial/DataObjects/Accion.php:180
+msgid "Resp"
+msgstr ""
+
+#: modulos/segjudicial/DataObjects/Accion.php:202
+msgid "Si"
+msgstr ""
+
+#: modulos/segjudicial/DataObjects/Accion.php:202
+msgid "No"
+msgstr ""
+
+#: modulos/segjudicial/DataObjects/Accion.php:218
+msgid "Añadir Acción"
 msgstr ""
 
 #: modulos/segjudicial/DataObjects/Despacho.php:47
@@ -1926,10 +1960,6 @@ msgstr ""
 msgid "Proceso"
 msgstr ""
 
-#: modulos/segjudicial/DataObjects/Proceso.php:60
-msgid "Tipo"
-msgstr ""
-
 #: modulos/segjudicial/DataObjects/Proceso.php:62
 msgid "Próxima fecha"
 msgstr ""
@@ -1948,4 +1978,8 @@ msgstr ""
 
 #: modulos/segjudicial/DataObjects/Proceso.php:66
 msgid "Teléfono"
+msgstr ""
+
+#: modulos/segjudicial/DataObjects/Proceso.php:134
+msgid "Tipo/Etapa"
 msgstr ""
