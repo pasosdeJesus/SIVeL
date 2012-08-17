@@ -78,7 +78,7 @@ function a_mayusculas($s)
         array('Á', 'É', 'Í', 'Ó', 'Ú', 'Ñ', 'Ü'),
         $s
     );
-    $r = mb_strtoupper($r, "iso-8859-1");
+    $r = mb_strtoupper($r, "UTF8");
     return $r;
 }
 

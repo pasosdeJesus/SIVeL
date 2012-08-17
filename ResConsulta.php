@@ -95,6 +95,12 @@ class ResConsulta
     var $conv;
 
     /**
+     * Indica si primero se presenta el nombre, si es falso primero apellido
+     * @var     bool
+     */
+    var $primnom;
+
+    /**
      * Mostrar
      * @var    string
      */
@@ -142,12 +148,13 @@ class ResConsulta
      * @param array  $ordCasos     Orden de los casos por mostrar
      * @param array  $busca_pr     Opciones de mostrar info.
      * @param array  $ordenar      Ordenar
+     * @param object &$primnom     Nombre y apellido
      *
      * @return void
-    */
+     */
     function ResConsulta(&$campos, &$db, &$resultado, &$conv, $mostrar,
         $detallesform = array(), $ordCasos = array(), $busca_pr = null,
-        $ordenar = null
+        $ordenar = null, $primnom = true
     ) {
         $this->campos =& $campos;
         $this->db=& $db;
@@ -161,6 +168,7 @@ class ResConsulta
         $this->ordCasos = $ordCasos;
         $this->busca_pr = $busca_pr;
         $this->ordenar = $ordenar;
+        $this->primnom = $primnom;
         $this->varlin = isset($detallesform['varlineas']) ?
             $detallesform['varlineas'] : true;
         $this->tex = isset($detallesform['tex']) ?
@@ -307,11 +315,12 @@ class ResConsulta
      * @param integer $id_persona Id.
      * @param integer &$indid     Indid
      * @param object  &$edp       edp
+     * @param object  &$primnom   Nombre y apellido
      *
      * @return Total de víctimas
      */
     function extraeVictimas($idcaso, &$db, &$idp, &$ndp,
-        $id_persona, &$indid, &$edp
+        $id_persona, &$indid, &$edp, $primnom = true
     ) {
         $q = "SELECT  id_persona, nombres, apellidos, anionac " .
             " FROM victima, persona " .
@@ -322,6 +331,12 @@ class ResConsulta
         $tot = 0;
         while ($result->fetchInto($row)) {
             $idp[] = $row[0];
+            if ($primnom) {
+                 $ndp[] = $row[1] . " " . $row[2];
+             } else {
+                 $ndp[] = $row[2] . " " . $row[1];
+             }
+
             $ndp[] = $row[1] . " " . $row[2];
             $edp[] = $row[3];
             if (isset($id_persona) && $id_persona== $row[0]) {
@@ -907,7 +922,7 @@ class ResConsulta
                 case 'tabla':
                     $this->filaTabla(
                         $this->db, $idcaso, $this->campos,
-                        $this->conv, $sal, $retroalim
+                        $this->conv, $sal, $retroalim, $this->primnom
                     );
                     break;
                 case 'relatoslocal':
@@ -1087,9 +1102,9 @@ class ResConsulta
      *
      * @return string Fila en HTML
      */
-    static function
-    filaTabla($db, $idcaso, $campos, $conv, $sal, $retroalim = true)
-    {
+    static function filaTabla($db, $idcaso, $campos, $conv, $sal, 
+        $retroalim = true, $primnom = true
+    ) {
         //echo "OJO filaTabal(db, $idcaso, campos, conv, sal, retroalim);<br>";
         $col = "#FFFFFF";
         $dec = objeto_tabla('etiquetacaso');
@@ -1154,7 +1169,7 @@ class ResConsulta
                 $indid = -1;
                 $totv = ResConsulta::extraeVictimas(
                     $idcaso,
-                    $db, $idp, $ndp, null, $indid, $edp
+                    $db, $idp, $ndp, null, $indid, $edp, $primnom
                 );
                 $k = 0;
                 $seploc = "";

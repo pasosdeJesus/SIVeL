@@ -96,6 +96,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         $pTeX       = (int)var_req_escapa('m_tex', $db);
         $pTitulo    = substr(var_req_escapa('titulo', $db), 0, 32);
         $pTvio    = substr(var_req_escapa('tipo_violencia', $db), 0, 1);
+        $pPrimNom = var_req_escapa('primnom') == 'nombre';
 
         $campos = array(); //'caso_id' => 'Cód.');
         $tablas = "caso";
@@ -407,7 +408,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         $r = new ResConsulta(
             $campos, $db, $ar, $conv, $pMostrar,
             array('varlineas' => $pVarLineas, 'tex' => $pTeX),
-            $ordCasos, null, $pOrdenar
+            $ordCasos, null, $pOrdenar, $pPrimNom
         );
         $r->aHtml($pRetroalimentacion == 1);
     }

@@ -24,12 +24,6 @@ require 'sitios/pordefecto/conf_int.php';
 // ESTE ARCHIVO ES INCLUDO DESPUÉS DE QUE SE HA DEFINIDO EL IDIOMA DE LA 
 // INTERFAZ 
 
-/**
- * Imagen de fondo en pantalla principal
- * @global string $GLOBALS['fondo']
- */
-$GLOBALS['fondo']= $dirsitio . '/fondo-en.jpg';
-
 // PARTICULARIDADES
 
 /**

@@ -386,7 +386,7 @@ class PagUbicacion extends PagBaseMultiple
             $cla->loadArray(array());
         }
         $nmunicipio = PagUbicacion::retIdMunicipio($form, $mundef);
-        if ($nmunicipio !== null) {
+        if ((int)$nmunicipio != 0) {
             $mun->setValue($nmunicipio);
             $options = array('' => '') + htmlentities_array(
                 $db->getAssoc(

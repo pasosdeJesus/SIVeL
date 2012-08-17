@@ -37,18 +37,16 @@ hace_consulta(
     " FROM acto, categoria WHERE acto.id_categoria=categoria.id " .
     " AND categoria.contada_en IS NOT NULL ORDER BY id;"
 );
-$s = "SELECT * FROM replicadas WHERE (id_p_responsable, contada_en, " .
+$pres = " FROM replicadas WHERE (id_p_responsable, contada_en, " .
     " id_persona, id_caso) NOT IN (select id_p_responsable, " .
-    " id_categoria, id_persona, id_caso from acto);";
+    " id_categoria, id_persona, id_caso from acto)";
+$s = "SELECT COUNT(*) FROM $pres";
 $ni = $db->getOne($s);
 sin_error_pear($ni);
 echo " Se insertarán " . (int)$ni . " actos<br>";
 hace_consulta(
     $db, "INSERT INTO acto (id_p_responsable, id_categoria, " .
-    " id_persona, id_caso) SELECT * FROM replicadas " .
-    " WHERE (id_p_responsable, contada_en, id_persona, id_caso) " .
-    " NOT IN (SELECT id_p_responsable, id_categoria, id_persona, id_caso " .
-    " FROM acto);"
+    " id_persona, id_caso) SELECT * $pres"
 );
 hace_consulta($db, "DROP VIEW replicadas");
 
@@ -62,16 +60,17 @@ hace_consulta(
     " WHERE actocolectivo.id_categoria=categoria.id " .
     " AND categoria.contada_en IS NOT NULL ORDER BY id;"
 );
-$s = "SELECT * FROM replicadasc " .
+$pres = " FROM replicadasc " .
     " WHERE (id_p_responsable, contada_en, id_grupoper, id_caso) " .
     " NOT IN (SELECT id_p_responsable, id_categoria, id_grupoper, id_caso " .
     " FROM actocolectivo)";
+$s = "SELECT COUNT(*) FROM $pres ";
 $ni = $db->getOne($s);
 sin_error_pear($ni);
 echo " Se insertarán " . (int)$ni . " actos colectivos<br>";
 hace_consulta(
     $db, "INSERT INTO actocolectivo " .
-    " (id_p_responsable, id_categoria, id_grupoper, id_caso) $s"
+    " (id_p_responsable, id_categoria, id_grupoper, id_caso) SELECT * $pres"
 );
 hace_consulta($db, "DROP VIEW replicadasc");
 

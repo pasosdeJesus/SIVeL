@@ -128,9 +128,14 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $e['tmp_name'], $GLOBALS['dir_anexos'] . "/" .
             $pArchivo
         );
-
-        list($aper, $maxidper) = extrae_per($db);
-        $agr = extrae_grupos($db);
+        $intensivo = $_POST['intensivo'] == '1';
+        $aper = array();
+        $maxidper = 0;
+        $agr = array();
+        if ($intensivo) {
+            list($aper, $maxidper) = extrae_per($db);
+            $agr = extrae_grupos($db);
+        }
 
         $cont = "";
         if (substr($pArchivo, strlen($pArchivo) - 3, 3) == '.gz') {
@@ -731,7 +736,16 @@ class PagImportaRelato extends HTML_QuickForm_Page
             'file', 'archivo_sel',
             _('Archivo con relatos')
         );
+        $sel =& $this->addElement(
+            'checkbox',
+            'intensivo', 'Buscar victimas y grupos en otros casos', 
+            'Intensivo.  Requiere memoria y disco proporcional al '
+            . 'número de casos en la base.'
+        );
 
+        $this->addGroup(
+            $opch, null, 'Coordenadas', '&nbsp;', false
+        );
         agrega_control_CSRF($this);
 
         $prevnext = array();

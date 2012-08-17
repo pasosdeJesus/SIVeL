@@ -199,51 +199,68 @@ valores que usen los códigos anteriores deben homologar los anteriores.
 		    sola instancia (código fuente en una ubicación), cada
 		    sitio puede tener un URL y una base de datos independiente.
 	    </para>
-	     Yo configure clave de base de datos en su
-	     cuenta en ~/.pgpass (vealo por favor para que sepa la clave del
-	     usuario sivel en PostgreSQL pues la requerirá bastante).
-	     Despues pase al directorio de fuentes de SIVeL
-	             /var/www/htdocs/sivel
-		     y saque respaldo de todas las bases:
-		             sudo bin/resptodositio.sh
-
-			     De ahi pase
-			             cd sitios
-				     Cree directorio y base de nombre ofb con
-				             sudo ./nuevo.sh ofb
-					     Después agregue en el archivo de configuración de Apache
-					     /var/www/conf/httpd.conf en un VirtualHost para esas
-					     bases en puerto 12443 (busque por ejemplo concejotumaco) agregue un
-					     Alias para redirigir /ofb/ a /var/www/htdocs/sivel
-					     Después reinicie Apache.
-					     sudo apachectl stop
-					     sudo sh /etc/rc.local
-
-					     Con un navegador abra:
-					     https://www.nocheyniebla.org:12443/ofb/
-					     Que da el mensaje:
-					     No existe configuración 'sitios/WWW.NOCHEYNIEBLA.ORG_OFB'
-					     el cual me ayuda a crear el enlace que se necesita:
-
-					     cd /var/www/htdocs/sivel/sitios
-					     sudo ln -s ofb WWW.NOCHEYNIEBLA.ORG_OFB
-
-					     Tras esto al volver intentar con la URL de la nueva base:
-					     https://www.nocheyniebla.org:12443/ofb/
-					     Ya deja autenticar.
-
-	    <para>Para iniciar un sitio (digamos sivelper) pase al directorio 
-		    <filename>sitios</filename> de las fuentes y emplee el
+	    <para>
+		    La labor se facilita si tiene el usuario para PostgreSQL
+		    y su clave en el archivo ~/.pgpass 
+		    (verifiquelo por favor).
+	    </para>
+	    <para>
+		    Para crear un nuevo sitio pase al directorio de fuentes 
+		    de SIVeL <filename>/var/www/htdocs/sivel</filename>
+		    y saque respaldo de todas las bases:
+		    <screen>
+sudo bin/resptodositio.sh
+</screen>
+		    De ahí pase al directorio de sitios:
+		    <screen>
+cd sitios
+</screen>
+		    y emplee el
 		    archivo de comandos <filename>nuevo.sh</filename>:
 		    <screen>
-cd /var/www/htdocs/sivel/sitios
-./nuevo.sh sivelper
+sudo ./nuevo.sh sivelper
 		    </screen>
-		    Asi creara un nuevo directorio sivelper en sitios y
-		    una nueva base de datos sivelper con el mismo usuario
+		    Así creara un nuevo directorio <literal>sivelper</literal> 
+		    en sitios y
+		    una nueva base de datos <literal>sivelper</literal> 
+		    con el mismo usuario
 		    de su instalación principal.  Poblará la base de datos
 		    con las tablas básicas y le permitirá crear un primer
 		    usuario.
+	    </para>
+	    <para>Tras esto debe configurar el servidor web para
+		    reconocer la nueva instalación, bien con un 
+		    <literal>Alias</literal>
+		    o bien con un 
+		    <literal>VirtualHost</literal>.  Por ejemplo para
+		    agregar un <literal>Alias</literal>, edite el archivo 
+		    <filename>/var/www/conf/httpd.conf</filename> y
+		    puede buscar la sección de Alias y agregar:
+		    <screen>
+Alias	/sivelper/ "/var/www/htdocs/sivel"
+		    </screen>
+		    Reinicie Apache para que la configuración empiece a funcionar:
+		    <screen>
+sudo apachectl stop
+sudo sh /etc/rc.local
+		    </screen>
+		    Y después con un navegador desde el mismo servidor
+		    abra una dirección de la forma 
+		    <ulink url="https://127.0.0.1.org/sivelper/"></ulink>
+		    Que debe dar un mensaje como:
+		    <screen>
+No existe configuración 'sitios/WWW.NOCHEYNIEBLA.ORG_OFB'
+		    </screen>
+		    y una ayuda de como crear el enlace que requiere, que
+		    en este caso sería:
+		    <screen>
+cd /var/www/htdocs/sivel/sitios
+sudo ln -s ofb WWW.NOCHEYNIEBLA.ORG_OFB
+		    </screen>
+		    
+		    Tras esto al volver intentar con la URL de la nueva base:
+		    <ulink url="https://127.0.0.1/sivelper/"></ulink>
+		    ya debe deja autenticar.
 	    </para>
 
     </sect1>
