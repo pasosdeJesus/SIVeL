@@ -1374,7 +1374,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Dic</td>
+	<td>value=12</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1469,7 +1469,7 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Dic</td>
+	<td>value=12</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -1744,12 +1744,12 @@
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[M]</td>
-	<td>label=Dic</td>
+	<td>value=12</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>fechadeshabilitacion[Y]</td>
-	<td>label=2025</td>
+	<td>label=2012</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
