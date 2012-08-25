@@ -18,5 +18,4 @@
 
 $GLOBALS['modulo'][200] = 'modulos/belicas/estadisticas_comb.php';
 
-
-
+$GLOBALS['nueva_ficha_tabuladores'][] =  array(8,'belicas', 'modulos/belicas/PagVictimaCombatiente', 4);

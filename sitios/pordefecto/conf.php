@@ -163,19 +163,17 @@ $GLOBALS['deshabilita_manejo_usuarios'] = false;
 /** Pestañas de la Ficha  de captura
     'id', 'Clase', 'orden en eliminación (no rep)' */
 $GLOBALS['ficha_tabuladores'] = array(
-    0 => array('basicos', 'PagBasicos', 13),
+    0 => array('basicos', 'PagBasicos', 11),
     1 => array('ubicacion', 'PagUbicacion', 4),
-    2 => array('frecuentes', 'modulos/anexos/PagFrecuenteAnexo', 7),
-    3 => array('otras', 'modulos/anexos/PagOtraAnexo', 9),
+    2 => array('frecuentes', 'PagFuentesFrecuentes', 7),
+    3 => array('otras', 'PagOtrasFuentes', 9),
     4 => array('tipoViolencia', 'PagTipoViolencia', 5),
     5 => array('pResponsables', 'PagPResponsables', 6),
     6 => array('victimaIndividual', 'PagVictimaIndividual', 2),
     7 => array('victimaColectiva', 'PagVictimaColectiva',3),
     8 => array('acto', 'PagActo', 1),
     9 => array('memo', 'PagMemo', 8),
-    10 => array('anexos', 'modulos/anexos/PagAnexo', 10),
-    11 => array('etiquetas', 'modulos/etiquetas/PagEtiquetas', 11),
-    12 => array('evaluacion', 'PagEvaluacion', 12)
+    10 => array('evaluacion', 'PagEvaluacion', 10)
 );
 
 /** Solicitudes de nuevas pestañas en ficha de captura */

@@ -18,4 +18,14 @@
 $GLOBALS['dir_anexos'] = '/resbase/anexos';
 
 
+$GLOBALS['nueva_ficha_tabuladores'][] =  array(
+    10,'anexos', 'modulos/anexos/PagAnexo', 10
+);
+$GLOBALS['remplaza_ficha_tabuladores'][] =  array(
+    'frecuentes', 'modulos/anexos/PagFrecuenteAnexo'
+);
+$GLOBALS['remplaza_ficha_tabuladores'][] =  array(
+    'otras', 'modulos/anexos/PagOtraAnexo'
+);
+
 

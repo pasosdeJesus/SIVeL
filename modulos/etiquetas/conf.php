@@ -18,5 +18,4 @@
 
 $GLOBALS['modulo'][500] = '';
 
-
-
+$GLOBALS['nueva_ficha_tabuladores'][] =  array(11,'etiquetas', 'modulos/etiquetas/PagEtiquetas', 11);

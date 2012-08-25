@@ -1,25 +1,13 @@
 Módulo Estadísticas por Rótulos de Reporte Consolidado
 
-1. En el archivo de configuración de SIVeL (conf.php)
-	1.1 agregue modulos/estrotulos entre los módulos
+1. En el archivo de configuración del sitio (conf.php) agregue 
+   modulos/estrotulos entre los módulos
 		$modulos="modulos/estrotulos";
 
-	1.2 complete opciones del menú agregando:
-		$GLOBALS['modulo'][100]='modulos/estrotulos/estrotulos.php';
-		$GLOBALS['modulo'][101]='modulos/estrotulos/estcolectivas.php';
-
-	1.3 si desea activar un reporte revista ordenado por rótulos especial:
-		require_once "modulos/estrotulos/reporteRotulos.php";
-
-		$GLOBALS['consultaweb_ordenarpor'][0] = "rotulos_cwebordenar";
-		$GLOBALS['gancho_rc_reginicial'][0] = "rotulos_inicial";
-		$GLOBALS['gancho_rc_regfinal'][0] = "rotulos_final";
-		$GLOBALS['misc_ordencons'][0] = "rotulos_orden_cons";
-
-	1.4 Si en el reporte por rótulos desea excluir en el ordenamiento
-	    por categorias las víctimas cuya filiación es SIN INFORMACIÓN:
-
-		$GLOBALS['estrotulos_excluirsinfiliacion'] = true;
+   Si en el reporte por rótulos desea excluir en el ordenamiento
+   por categorias las víctimas cuya filiación es SIN INFORMACIÓN, agregue
+   a su archivo de configuración:
+       $GLOBALS['estrotulos_excluirsinfiliacion'] = true;
 
 2. Desde un navegador abra la página de actualización de la base, por
    ejemplo desde el mismo servidor con:
