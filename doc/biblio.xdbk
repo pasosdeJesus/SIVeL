@@ -105,6 +105,14 @@
 	    Consultado Mar 2011</bibliomisc>
   </biblioentry>
 
+  <biblioentry id="nomcakephp">
+	  <title>Cookbook 1.3: Model and Database Conventions</title>
+    <bibliomisc><ulink
+		    url="http://book.cakephp.org/1.3/en/view/903/Model-and-Database-Conventions"/>.  CakePHP
+	    Consultado Ago 2012</bibliomisc>
+  </biblioentry>
+
+
   <bibliomixed id="basico_OpenBSD">
 	  <title>Uso Básico de la distribución Aprendiendo de Jesús de OpenBSD</title>
 	<bibliomisc><ulink

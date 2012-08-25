@@ -378,7 +378,7 @@ $GLOBALS['menu_tablas_basicas'] = array(
         array('title'=>'Supracategoria', 'url'=>'supracategoria', 'sub'=>null),
         array('title'=>'Categoria', 'url'=>'categoria', 'sub'=>null),
         array('title'=>'Contexto', 'url'=>'contexto', 'sub'=>null),
-        array('title'=>'Presuntos responsables', 'url'=>'presuntos_responsables', 'sub'=>null),
+        array('title'=>'Presuntos responsables', 'url'=>'presponsable', 'sub'=>null),
         array('title'=>'Antecedentes', 'url'=>'antecedente', 'sub'=>null),
         array('title'=>'Intervalo', 'url'=>'intervalo', 'sub'=>null),
         ),

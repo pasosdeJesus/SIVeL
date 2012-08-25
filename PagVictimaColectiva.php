@@ -137,7 +137,7 @@ class PagVictimaColectiva extends PagBaseMultiple
 
     /**
      * Inicializa variables.
-     * 
+     *
      * @param array $apar Arreglo de parametros. Consta de
      *   0=>$id_grupoper Id  de grupo de personas
      *

@@ -80,7 +80,7 @@ if (!empty($id_caso) && $id_caso != 0) {
         $subnode->appendChild($value);
     }
 
-    $prresp = $dom->createElement("presuntos_responsables");
+    $prresp = $dom->createElement("presponsable");
     $prrespnode = $subnode->appendChild($prresp);
     foreach ($xmlSivel->relato->grupo as $grupo) {
         if (!empty($grupo->nombre_grupo)) {

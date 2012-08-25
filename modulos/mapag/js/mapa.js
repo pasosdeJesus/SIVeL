@@ -154,7 +154,7 @@ function createMarker(point, codigo, title) {
 			var municipio = GXml.value(casos[0].getElementsByTagName("municipio")[0]);
 			var centro_poblado = GXml.value(casos[0].getElementsByTagName("centro_poblado")[0]);
 			var victimas = casos[0].getElementsByTagName("victimas")[0].getElementsByTagName('persona');
-			var prresp = casos[0].getElementsByTagName("presuntos_responsables")[0].getElementsByTagName('presunto_responsable');
+			var prresp = casos[0].getElementsByTagName("presponsable")[0].getElementsByTagName('presponsable');
 			
 			// generar contenido
 			var descripcionCont = '<div class="infowindowcont"><h3>' + titulo + '</h3>' + hechos + '</div>';

@@ -24,7 +24,7 @@ function eliminafuera {
 	echo "Presione  [RETORNO] para continuar";
         read 
 
-	for nt in caso_contexto categoria_p_responsable_caso presuntos_responsables_caso antecedente_caso ubicacion funcionario_caso acto antecedente_victima victima region_caso frontera_caso antecedente_comunidad vinculo_estado_comunidad profesion_comunidad filiacion_comunidad organizacion_comunidad rango_edad_comunidad sector_social_comunidad actocolectivo victima_colectiva etiquetacaso escrito_caso fuente_directa_caso anexo; do
+	for nt in caso_contexto categoria_p_responsable_caso caso_presponsable antecedente_caso ubicacion funcionario_caso acto antecedente_victima victima region_caso frontera_caso antecedente_comunidad vinculo_estado_comunidad profesion_comunidad filiacion_comunidad organizacion_comunidad rango_edad_comunidad sector_social_comunidad actocolectivo victima_colectiva etiquetacaso escrito_caso fuente_directa_caso anexo; do
 		../../bin/psql.sh -c "delete from $nt where id_caso not in (select distinct id_caso from $nvista order by 1);"
 	done
 	../../bin/psql.sh -c "delete from caso where id not in (select distinct id_caso from $nvista order by 1);"

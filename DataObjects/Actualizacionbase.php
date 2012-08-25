@@ -18,13 +18,13 @@
 
 
 /**
- * Definicion para la tabla actualizacion_base.
+ * Definicion para la tabla actualizacionbase.
  */
 
 require_once 'DB_DataObject_SIVeL.php';
 
 /**
- * Definicion para la tabla actualizacion_base.
+ * Definicion para la tabla actualizacionbase.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -34,10 +34,10 @@ require_once 'DB_DataObject_SIVeL.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Actualizacion_base extends DB_DataObject_SIVeL
+class DataObjects_Actualizacionbase extends DB_DataObject_SIVeL
 {
 
-    var $__table = 'actualizacion_base';                     // table name
+    var $__table = 'actualizacionbase';                     // table name
     /**
      * Constructora
      * return @void

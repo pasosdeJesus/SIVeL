@@ -29,12 +29,12 @@ $db = autenticaUsuario($dsn, $aut_usuario, 21);
 /* ==========================  OJO ==================================
  * Al agregar cambios a la estructura o datos de la base de datos en archivos
  * sql usados en instalaciones frescas, también poner el INSERT respectivo
- * en actualizacion_base en datos.sql
+ * en actualizacionbase en datos.sql
  * ==================================================================
  */
 
 
-$act = objeto_tabla('Actualizacion_base');
+$act = objeto_tabla('Actualizacionbase');
 
 $idac = 'anexo-1';
 if (!aplicado($idac)) {

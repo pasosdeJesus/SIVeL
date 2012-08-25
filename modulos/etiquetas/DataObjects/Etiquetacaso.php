@@ -126,9 +126,9 @@ class DataObjects_Etiquetacaso extends DB_DataObject_SIVeL
     function postGenerateForm(&$form, &$formbuilder)
     {
         parent::postGenerateForm($form, $formbuilder);
-        $t = '<table width="100%"><tr><th>' . _('Fecha') 
-            . '</th><th>' . _('Etiqueta') 
-            . '</th><th>' . _('Observaciones') 
+        $t = '<table width="100%"><tr><th>' . _('Fecha')
+            . '</th><th>' . _('Etiqueta')
+            . '</th><th>' . _('Observaciones')
             . '</th><th>' . _('Funcionario') . '</th></tr>';
         $p = clone $formbuilder->_do;
         $db = $p->getDatabaseConnection();

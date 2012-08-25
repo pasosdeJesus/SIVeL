@@ -30,9 +30,9 @@ require_once 'DataObjects/Fuente_directa_caso.php';
 require_once 'DataObjects/Categoria_caso.php';
 require_once 'DataObjects/Supracategoria.php';
 require_once 'DataObjects/Categoria.php';
-require_once 'DataObjects/Presuntos_responsables.php';
-require_once 'DataObjects/Presuntos_responsables_caso.php';
-require_once 'DataObjects/Categoria_p_responsable_caso.php';
+require_once 'DataObjects/Presponsable.php';
+require_once 'DataObjects/Caso_presponsable.php';
+require_once 'DataObjects/Caso_categoria_presponsable.php';
 require_once 'DataObjects/Victima.php';
 require_once 'DataObjects/Victima_colectiva.php';
 require_once 'DataObjects/Sector_social.php';
@@ -43,7 +43,7 @@ require_once 'DataObjects/Resultado_agresion.php';
 require_once 'DataObjects/Filiacion.php';
 require_once 'DataObjects/Sector_social.php';
 require_once 'DataObjects/Profesion.php';
-require_once 'DataObjects/Presuntos_responsables.php';
+require_once 'DataObjects/Presponsable.php';
 require_once 'DataObjects/Etiquetacaso.php';
 
 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
@@ -336,8 +336,6 @@ class ResConsulta
              } else {
                  $ndp[] = $row[2] . " " . $row[1];
              }
-
-            $ndp[] = $row[1] . " " . $row[2];
             $edp[] = $row[3];
             if (isset($id_persona) && $id_persona== $row[0]) {
                 $indid = $tot;
@@ -398,11 +396,11 @@ class ResConsulta
      */
     function extraePResponsables($idcaso, &$db, &$idp, &$idp2, &$ndp)
     {
-        $q = "SELECT  id_p_responsable, presuntos_responsables_caso.id, " .
-            " presuntos_responsables.nombre " .
-            " FROM presuntos_responsables_caso, presuntos_responsables " .
+        $q = "SELECT  id_p_responsable, caso_presponsable.id, " .
+            " presponsable.nombre " .
+            " FROM caso_presponsable, presponsable " .
             " WHERE id_caso='$idcaso' " .
-            " AND id_p_responsable=presuntos_responsables.id " .
+            " AND id_p_responsable=presponsable.id " .
             " ORDER BY id;";
         $result = hace_consulta($db, $q);
         $row = array();
@@ -481,7 +479,7 @@ class ResConsulta
         }
         $etablas = array_merge(
             $etablas, array('caso',
-            'victima', 'persona', 'presuntos_responsables',
+            'victima', 'persona', 'presponsable',
             'acto',
             'sector_social', 'organizacion'
         )
@@ -489,10 +487,10 @@ class ResConsulta
         $etablas = implode(", ", array_unique($etablas));
         $q = " SELECT caso.id, persona.id, " .
             " persona.nombres || ' ' || persona.apellidos, caso.fecha, " .
-            " acto.id_categoria, presuntos_responsables.nombre, " .
+            " acto.id_categoria, presponsable.nombre, " .
             " sector_social.nombre, organizacion.nombre  " .
             " FROM  $etablas WHERE " .
-            " presuntos_responsables.id=acto.id_p_responsable " .
+            " presponsable.id=acto.id_p_responsable " .
             " AND acto.id_persona=persona.id " .
             " AND persona.id=victima.id_persona " .
             " AND caso.id=victima.id_caso " .
@@ -506,9 +504,9 @@ class ResConsulta
 
         $suma = array();
         $ac = array(
-            _("Fecha"), _("Caso"), _("Víctima"), 
+            _("Fecha"), _("Caso"), _("Víctima"),
             _("Sector Social"), _("Organización Social"),
-            _("Categoria"), _("P. Responsable") 
+            _("Categoria"), _("P. Responsable")
         );
 
         if ($pMuestra == "csv") {
@@ -674,7 +672,7 @@ class ResConsulta
         $html_enlace1=null
     ) {
         if ($html_enlace1 == null) {
-            $html_enlace1 = '<a href = "consulta_web.php">' 
+            $html_enlace1 = '<a href = "consulta_web.php">'
                 . _('Consulta Web') . '</a>, ';
         }
         $html_erelato =  $GLOBALS['enc_relato']
@@ -705,7 +703,7 @@ class ResConsulta
         ) {
             echo _("Consulta de") . " " . (int)$tot . " " . _("casos") .".<br>";
             die(
-                _("Por favor refine su consulta para que sean menos de") 
+                _("Por favor refine su consulta para que sean menos de")
                 . " " .  $GLOBALS['consulta_web_max']
             );
         }
@@ -715,7 +713,7 @@ class ResConsulta
             encabezado_envia(
                 _('Consulta Web'), $GLOBALS['cabezote_consulta_web']
             );
-            echo "<html><head><title>" . _("Reporte Revista") 
+            echo "<html><head><title>" . _("Reporte Revista")
                 . "</title></head>";
             echo "<body>";
             echo "<pre>";
@@ -744,7 +742,7 @@ class ResConsulta
             break;
         case 'tabla':
             encabezado_envia(
-                _('Consulta Web'), 
+                _('Consulta Web'),
                 $GLOBALS['cabezote_consulta_web']
             );
             echo "<html><head><title>Tabla</title></head>";
@@ -768,7 +766,7 @@ class ResConsulta
                         );
                     } else {
                         echo_esc(
-                            _("Falta") ." resConsultaInicioTabla " 
+                            _("Falta") ." resConsultaInicioTabla "
                             . _("en") . " $n, $c"
                         );
                     }
@@ -797,9 +795,9 @@ class ResConsulta
                     . ":<br><tt>sudo chmod a+w ${GLOBALS['dirchroot']}" .
                     "${GLOBALS['DIR_RELATOS']}</tt><br>";
             } else {
-                echo "<font color='red'>" . _("El directorio") . "  " 
-                    .  $GLOBALS['DIR_RELATOS'] 
-                    .  " " . _("puede ser escrito") . "</font><br>" 
+                echo "<font color='red'>" . _("El directorio") . "  "
+                    .  $GLOBALS['DIR_RELATOS']
+                    .  " " . _("puede ser escrito") . "</font><br>"
                     .  _("Tras generar, retire permiso de escritura con")
                     . " :<br>" .
                     "<tt>sudo chmod a-w ${GLOBALS['dirchroot']}" .
@@ -834,7 +832,7 @@ class ResConsulta
                             );
                         } else {
                             echo_esc(
-                                _("Falta") . " $f " . _("de") 
+                                _("Falta") . " $f " . _("de")
                                 . " gancho_rc_inicio[$k]"
                             );
                         }
@@ -964,7 +962,7 @@ class ResConsulta
                             );
                         } else {
                             echo_esc(
-                                _("Falta") . " resConsultaRegistro " 
+                                _("Falta") . " resConsultaRegistro "
                                 . _("en") . " $n, $c"
                             );
                         }
@@ -984,7 +982,7 @@ class ResConsulta
                                     );
                                 } else {
                                     muestra_escapado(
-                                        _("Falta") . " $f " . _("de") 
+                                        _("Falta") . " $f " . _("de")
                                         . " resConsultaRegistro[$k]"
                                     );
                                 }
@@ -1068,7 +1066,7 @@ class ResConsulta
                             );
                         } else {
                             echo_esc(
-                                _("Falta") .  " $f " . _("de") 
+                                _("Falta") .  " $f " . _("de")
                                 . " resConsultaFinal[$k]"
                             );
                         }
@@ -1102,7 +1100,7 @@ class ResConsulta
      *
      * @return string Fila en HTML
      */
-    static function filaTabla($db, $idcaso, $campos, $conv, $sal, 
+    static function filaTabla($db, $idcaso, $campos, $conv, $sal,
         $retroalim = true, $primnom = true
     ) {
         //echo "OJO filaTabal(db, $idcaso, campos, conv, sal, retroalim);<br>";
@@ -1243,7 +1241,7 @@ class ResConsulta
                 ResConsulta::llenaSelCategoria(
                     $db,
                     "(SELECT id_tipo_violencia, id_supracategoria, " .
-                    "id_categoria FROM categoria_p_responsable_caso " .
+                    "id_categoria FROM caso_categoria_presponsable " .
                     "WHERE id_caso='$idcaso') UNION " .
                     "(SELECT id_tipo_violencia, id_supracategoria, " .
                     "id_categoria FROM categoria, acto " .
@@ -1282,7 +1280,7 @@ class ResConsulta
                         );
                     } else {
                         echo_esc(
-                            _("Falta") . " resConsultaFilaTabla " . _("en") 
+                            _("Falta") . " resConsultaFilaTabla " . _("en")
                             . " $n, $c"
                         );
                     }
@@ -1503,7 +1501,7 @@ class ResConsulta
 
         if (isset($campos['m_presponsables'])) {
             $r .= "  <!-- Presuntos responsables -->\n";
-            $dprespcaso = objeto_tabla('presuntos_responsables_caso');
+            $dprespcaso = objeto_tabla('caso_presponsable');
             $dprespcaso->id_caso = $idcaso;
             $dprespcaso->orderBy('id_p_responsable');
             $dprespcaso->find();
@@ -1521,7 +1519,7 @@ class ResConsulta
                     array('id_p_responsable' => 'id_grupo',
                     'nombre' => 'nombre_grupo',)
                 );
-                $dcp = objeto_tabla('categoria_p_responsable_caso');
+                $dcp = objeto_tabla('caso_categoria_presponsable');
                 $dcp->id_caso = $dprespcaso->id_caso;
                 $dcp->id_p_responsable = $dprespcaso->id_p_responsable;
                 if ($dcp->find()>0) {
@@ -2143,7 +2141,7 @@ class ResConsulta
                 $lcat[$dactocolectivo->id_categoria]
                     = $dactocolectivo->id_categoria;
             }
-            $dcatpr= objeto_tabla('categoria_p_responsable_caso');
+            $dcatpr= objeto_tabla('caso_categoria_presponsable');
             $dcatpr->id_caso = $idcaso;
             $dcatpr->find();
             while ($dcatpr->fetch()) {
@@ -2562,7 +2560,7 @@ class ResConsulta
         }
 
         /* Categorias que no tiene víctimas */
-        $dcat = objeto_tabla('categoria_p_responsable_caso');
+        $dcat = objeto_tabla('caso_categoria_presponsable');
         if (PEAR::isError($dcat)) {
             die($dcat->getMessage());
         }
@@ -2614,14 +2612,14 @@ class ResConsulta
                 $ra = "";  $rant = ""; $sep2="";
                 //                $plistos = array();
                 foreach ($pids as $idp) {
-                    $dpr = objeto_tabla('presuntos_responsables');
+                    $dpr = objeto_tabla('presponsable');
                     $dpr->get('id', $idp);
                     if ($ra != "") {
                         $sep2=", ";
                     }
                     $ra .= $sep2 . $rant;
                     $rant = trim(strip_tags($dpr->nombre));
-                    $dprc = objeto_tabla('presuntos_responsables_caso');
+                    $dprc = objeto_tabla('caso_presponsable');
                     $dprc->id_caso = $idcaso;
                     $dprc->id_p_responsable = $idp;
                     $dprc->fetch(1);
@@ -2779,7 +2777,7 @@ class ResConsulta
                     echo_esc(
                         _("Falta") ." $f " . _("indicada en")
                         . " gancho_rc_reginicial[$k]"
-                    ); 
+                    );
                 }
             }
         }
@@ -2877,7 +2875,7 @@ class ResConsulta
                 );
             } else {
                 echo_esc(
-                    _("Falta") . " reporteRevistaRegistroHtml " 
+                    _("Falta") . " reporteRevistaRegistroHtml "
                     . _("en") . " $n, $c"
                 );
             }

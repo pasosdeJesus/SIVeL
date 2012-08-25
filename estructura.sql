@@ -10,7 +10,7 @@
 SET client_encoding = 'LATIN1';
 
 
-CREATE TABLE actualizacion_base (
+CREATE TABLE actualizacionbase (
 	id VARCHAR(10) PRIMARY KEY,
 	fecha DATE NOT NULL,
 	descripcion VARCHAR(500) NOT NULL
@@ -232,12 +232,12 @@ CREATE TABLE prensa (
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
 
-CREATE SEQUENCE presuntos_responsables_seq;
+CREATE SEQUENCE presponsable_seq;
 
-CREATE TABLE presuntos_responsables (
-	id INTEGER PRIMARY KEY DEFAULT(nextval('presuntos_responsables_seq')),
+CREATE TABLE presponsable (
+	id INTEGER PRIMARY KEY DEFAULT(nextval('presponsable_seq')),
 	nombre VARCHAR(500) NOT NULL,
-	id_papa INTEGER REFERENCES presuntos_responsables,
+	id_papa INTEGER REFERENCES presponsable,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
@@ -392,7 +392,7 @@ CREATE TABLE victima (
 	id_sector_social INTEGER REFERENCES sector_social NOT NULL,
 	id_organizacion	INTEGER REFERENCES organizacion NOT NULL,
 	id_vinculo_estado INTEGER REFERENCES vinculo_estado NOT NULL,
-	id_organizacion_armada INTEGER REFERENCES presuntos_responsables NOT NULL,
+	id_organizacion_armada INTEGER REFERENCES presponsable NOT NULL,
 	anotaciones	VARCHAR(1000),
 	id_etnia INTEGER REFERENCES etnia,
 	id_iglesia INTEGER REFERENCES iglesia,
@@ -419,7 +419,7 @@ CREATE TABLE victima_colectiva (
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	personas_aprox INTEGER,
-	id_organizacion_armada INTEGER REFERENCES presuntos_responsables,
+	id_organizacion_armada INTEGER REFERENCES presponsable,
 	PRIMARY KEY(id_grupoper, id_caso)
 );
 
@@ -475,9 +475,9 @@ CREATE TABLE caso_contexto (
 	PRIMARY KEY(id_caso, id_contexto)
 );
 
-CREATE TABLE presuntos_responsables_caso (
+CREATE TABLE presponsable_caso (
 	id_caso INTEGER REFERENCES caso,
-	id_p_responsable INTEGER REFERENCES presuntos_responsables,
+	id_p_responsable INTEGER REFERENCES presponsable,
 	tipo	INTEGER	NOT NULL,
 	bloque	VARCHAR(50),
 	frente	VARCHAR(50),
@@ -490,20 +490,20 @@ CREATE TABLE presuntos_responsables_caso (
 );
 
 
-CREATE TABLE categoria_p_responsable_caso (
+CREATE TABLE categoria_presponsable_caso (
 	id_tipo_violencia VARCHAR(1) REFERENCES tipo_violencia,
 	id_supracategoria INTEGER,
 	id_categoria INTEGER REFERENCES categoria, 
 	--En interfaz verificar que categoria es de tipocat Otra ('O')
 	id INTEGER NOT NULL,
 	id_caso INTEGER REFERENCES caso,
-	id_p_responsable INTEGER REFERENCES presuntos_responsables,
+	id_p_responsable INTEGER REFERENCES presponsable,
 	PRIMARY KEY(id_tipo_violencia, id_supracategoria, id_categoria,
 		id, id_caso, id_p_responsable),
 	FOREIGN KEY (id_supracategoria, id_tipo_violencia) 
 	REFERENCES supracategoria (id, id_tipo_violencia),
 	FOREIGN KEY (id, id_caso, id_p_responsable)
-	REFERENCES presuntos_responsables_caso (id, id_caso, 
+	REFERENCES presponsable_caso (id, id_caso, 
 		id_p_responsable)
 );
 
@@ -588,7 +588,7 @@ CREATE TABLE sector_social_comunidad (
 
 
 CREATE TABLE acto (
-	id_p_responsable INTEGER REFERENCES presuntos_responsables,
+	id_p_responsable INTEGER REFERENCES presponsable,
 	id_categoria INTEGER REFERENCES categoria,
 	id_persona INTEGER REFERENCES persona,
 	id_caso INTEGER REFERENCES caso,
@@ -598,7 +598,7 @@ CREATE TABLE acto (
 );
 
 CREATE TABLE actocolectivo (
-	id_p_responsable INTEGER REFERENCES presuntos_responsables,
+	id_p_responsable INTEGER REFERENCES presponsable,
 	id_categoria INTEGER REFERENCES categoria,
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,

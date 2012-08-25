@@ -490,9 +490,9 @@ class PagOtrasFuentes extends PagBaseMultiple
             $dfdc->id_fuente_directa = $row[0];
             if ($rp->fetchInto($row)) {
                 repObs(
-                    _("Hay ") . $nr . 
-                    _("fuentes no frecuentes con nombre como ") 
-                    .  $fuente->nombre_fuente 
+                    _("Hay ") . $nr .
+                    _("fuentes no frecuentes con nombre como ")
+                    .  $fuente->nombre_fuente
                     .  _(", escogida la primera") . "\n", $obs
                 );
             }

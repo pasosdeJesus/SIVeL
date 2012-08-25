@@ -42,7 +42,7 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
     var $descripcion;                     // varchar(-1)
     var $id_rol;                          // int4(4)
     var $dias_edicion_caso;               // int4(4)
-    var $idioma;               
+    var $idioma;
 
 
     /**
@@ -64,11 +64,11 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
         );
         global $LENGDISP, $ROLESDISP;
         $ld = explode(" ", $LENGDISP);
-        foreach($ld as $l) {
+        foreach ($ld as $l) {
             $this->es_enumOptions['idioma'][$l] = $l;
         }
         $rd = explode(" ", $ROLESDISP);
-        foreach($rd as $er) {
+        foreach ($rd as $er) {
             $pr = explode(",", $er);
             if ((int)$pr[0] <= 0) {
                 die_esc("Identficacion de rol errada $er en \$ROLESDISP");

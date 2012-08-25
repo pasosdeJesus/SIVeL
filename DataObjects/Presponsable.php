@@ -16,12 +16,12 @@
  */
 
 /**
- * Definicion para la tabla presuntos_responsables.
+ * Definicion para la tabla presponsable.
  */
 require_once 'DataObjects/Basica.php';
 
 /**
- * Definicion para la tabla presuntos_responsables.
+ * Definicion para la tabla presponsable.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -31,10 +31,10 @@ require_once 'DataObjects/Basica.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Presuntos_responsables extends DataObjects_Basica
+class DataObjects_Presponsable extends DataObjects_Basica
 {
 
-    var $__table = 'presuntos_responsables';          // table name
+    var $__table = 'presponsable';          // table name
     var $id;                              // int4(4)  not_null primary_key
     var $nombre;                          // varchar(-1)  not_null
     var $id_papa;                            // int4

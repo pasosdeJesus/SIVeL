@@ -123,13 +123,13 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
             $titSegun = 'Sexo';
         } elseif ($pSegun == 'id_p_responsable') {
             $distinct = ""; // Para contar actos
-            $cfSegun = 'presuntos_responsables.nombre';
-            $tablaSegun = "presuntos_responsables, ";
-            $condSegun = "AND presuntos_responsables.id=$cons2.id_p_responsable";
+            $cfSegun = 'presponsable.nombre';
+            $tablaSegun = "presponsable, ";
+            $condSegun = "AND presponsable.id=$cons2.id_p_responsable";
             $titSegun = 'P. Responsable';
             consulta_and_sinap(
                 $where, "acto.id_p_responsable",
-                "presuntos_responsables.id"
+                "presponsable.id"
             );
             consulta_and_sinap($where, "victima.id_persona","acto.id_persona");
             $tQue .= "";
@@ -487,7 +487,7 @@ function buildForm()
         $cy = 2005;
     }
     $slan = isset($_SESSION['LANG']) ? $_SESSION['LANG'] : 'es';
-             
+
     $e =& $this->addElement(
         'date', 'fini', 'Desde: ',
         array('language' => $slan, 'addEmptyOption' => true,

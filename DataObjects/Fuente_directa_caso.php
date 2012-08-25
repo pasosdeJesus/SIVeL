@@ -133,8 +133,8 @@ class DataObjects_Fuente_directa_caso extends DB_DataObject_SIVeL
 
         $e =& $form->getElement('fecha');
         if (isset($e) && !PEAR::isError($e)) {
-            $e->_options['language'] = isset($_SESSION['LANG']) 
-		? $_SESSION['LANG'] : 'es';
+            $e->_options['language'] = isset($_SESSION['LANG'])
+        ? $_SESSION['LANG'] : 'es';
             $e->_options['format'] = 'dMY';
             $e->_options['addEmptyOption'] = true;
             $e->_options['minYear'] = $GLOBALS['anio_min'];

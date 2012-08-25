@@ -172,12 +172,12 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
         $fa[] =& $obs;
         $fa[] = $res;
 
-        $t = '<table width="100%"><tr><th>' . _('Tipo') 
-            . '</th><th>' . _('Despacho') 
-            . '</th><th>' . _('Fecha') 
+        $t = '<table width="100%"><tr><th>' . _('Tipo')
+            . '</th><th>' . _('Despacho')
+            . '</th><th>' . _('Fecha')
             . '</th><th>' . _('N. Rad.')
             . '</th><th>' . _('Observaciones')
-            . '</th><th>' . _('Resp') 
+            . '</th><th>' . _('Resp')
             . '</th></tr>';
         $p = objeto_tabla('accion');
         $db = $p->getDatabaseConnection();

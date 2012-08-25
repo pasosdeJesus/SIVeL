@@ -29,7 +29,7 @@ $tabla = 'usuario';
 encabezado_envia(_("Usuarios"));
 echo '<table border="0" width="100%"><tr>
     <td style = "white-space: nowrap;background-color:#CCCCCC;" align="center"
-    valign = "top" colspan="2"><b>' . _('Usuarios') 
+    valign = "top" colspan="2"><b>' . _('Usuarios')
     . '</b></td></tr></table>';
 
 $d = objeto_tabla($tabla);

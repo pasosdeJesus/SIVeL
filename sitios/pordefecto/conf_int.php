@@ -36,9 +36,9 @@ $GLOBALS['MENS_ORTOGRAFIA'] = 'Las palabras que estén bien por favor agreguelas
 /** Mensaje por presentar en la página principal para indicar donde reportar fallas.
  * @global string $GLOBALS['REPORTA_FALLAS']
  */
-$GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">" 
-    . _('Documentaci&oacute;n') 
-    . "</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>" 
+$GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">"
+    . _('Documentaci&oacute;n')
+    . "</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>"
     . _("Por favor reporte fallas o requerimientos en el sistema de seguimiento disponible")
     . " <a href='https://github.com/pasosdeJesus/SIVeL/issues'>"
     . _("en l&iacute;nea") . "</a>";
@@ -163,7 +163,7 @@ $GLOBALS['menu_tablas_basicas'] = array(
         array('title'=>_('Supracategoria'), 'url'=>'supracategoria', 'sub'=>null),
         array('title'=>_('Categoria'), 'url'=>'categoria', 'sub'=>null),
         array('title'=>_('Contexto'), 'url'=>'contexto', 'sub'=>null),
-        array('title'=>_('Presuntos Responsables'), 'url'=>'presuntos_responsables', 'sub'=>null),
+        array('title'=>_('Presuntos Responsables'), 'url'=>'presponsable', 'sub'=>null),
         array('title'=>_('Antecedentes'), 'url'=>'antecedente', 'sub'=>null),
         array('title'=>_('Intervalo'), 'url'=>'intervalo', 'sub'=>null),
         ),

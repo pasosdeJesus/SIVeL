@@ -20,7 +20,7 @@ SELECT setval('organizacion_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT M
 SELECT setval('parametros_reporte_consolidado_seq', max(no_columna)) FROM parametros_reporte_consolidado;
 SELECT setval('persona_seq', max(id)) FROM persona;
 SELECT setval('prensa_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM prensa) AS s;
-SELECT setval('presuntos_responsables_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM presuntos_responsables) AS s;
+SELECT setval('presponsable_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM presponsable) AS s;
 SELECT setval('profesion_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM profesion) AS s;
 SELECT setval('rango_edad_seq', max(id)) FROM rango_edad;
 SELECT setval('region_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM region) AS s;

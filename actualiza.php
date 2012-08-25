@@ -40,10 +40,69 @@ if (!in_array(63, $_SESSION['opciones'])) {
 }
 $db = autenticaUsuario($dsn, $aut_usuario, 63);
 
+function regeneraEsquemas() {
+    global $dirserv, $dirsitio, $dbnombre, $dirchroot, $modulos;
+    $nini = "$dirserv/$dirsitio/DataObjects/$dbnombre.ini";
+    $nlinksini = "$dirserv/$dirsitio/DataObjects/$dbnombre.links.ini";
+    $nestini = "$dirserv/$dirsitio/DataObjects/estructura-dataobject.ini";
+    if (is_writable($nini) && is_writable($nlinksini)) {
+        leeEstructura($dirserv, $dbnombre, "$dirserv/$dirsitio", "w");
+        foreach (explode(" ", $modulos) as $i) {
+            leeEstructura("$dirserv/$i", $dbnombre, "$dirserv/$dirsitio", "a");
+        }
+        if (file_exists($nestini)) {
+            leeEstructura(
+                "$dirserv/$dirsitio", $dbnombre, "$dirserv/$dirsitio", "a"
+            );
+        }
+        echo_esc(
+            "Regenerados $dirserv/$dirsitio/DataObjects/$dbnombre.ini y "
+            . "$dirserv/$dirsitio/DataObjects/$dbnombre.ini "
+        );
+        echo "<br><font color='#FF9999'>Se sugiere quitar "
+            . "permiso de escritura desde el servidor web a estos archivos.</font> "
+            . "Desde la línea de comandos intente el siguiente comando y vuelva "
+            . " a cargar esta página: <br><tt>";
+        echo_esc(
+            "  sudo chmod a-w $dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.*"
+        );
+        echo "</tt>";
+    } else {
+        echo_esc(
+            "No se regenerará esquema, rengerelo manualmente o de permiso "
+            . " de escritura a "
+            . "$dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.ini y "
+            . "$dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.links.ini "
+            . "Puede ser desde una línea de comandos con:"
+        );
+        echo "<tt>";
+        echo_esc(
+            "  sudo chown www:www "
+            . "$dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.*"
+        );
+        echo_esc(
+            "  sudo chmod u+w "
+            . "$dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.*"
+        );
+        echo "</tt>";
+    }
+}
+
+
+
+$r = $db->getOne('SELECT COUNT(*) FROM actualizacionbase');
+if (PEAR::isError($r)) {
+    $r = $db->query(
+        'ALTER TABLE actualizacion_base RENAME TO actualizacionbase'
+    );
+    regeneraEsquemas();
+}
+
 encabezado_envia(_('Actualizando'));
 echo '<table width="100%"><td style="white-space: nowrap; '
     . 'background-color: #CCCCCC;" align="left" valign="top" colspan="2">'
     . '<b><div align=center>' . _('Actualizando') . '</div></b></td></table>';
+
 echo "Preactualizando sitio<br>";
 $ap = $_SESSION['dirsitio'] . '/preactualiza.php';
 if (file_exists($ap)) {
@@ -51,7 +110,7 @@ if (file_exists($ap)) {
     include_once "$ap";
 }
 
-$act = objeto_tabla('Actualizacion_base');
+$act = objeto_tabla('Actualizacionbase');
 if (PEAR::isError($act)) {
     die("No pudo act");
 }
@@ -1999,6 +2058,34 @@ if (!aplicado($idac)) {
 }
 
 
+$idac = '1.2-rt';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, 
+        "ALTER TABLE categoria_p_responsable_caso RENAME TO "
+        . "caso_categoria_presponsable", false
+    );
+    hace_consulta(
+        $db, 
+        "ALTER TABLE presuntos_responsables RENAME TO "
+        . "presponsable ", false
+    );
+    hace_consulta(
+        $db, 
+        "ALTER SEQUENCE presuntos_responsables_seq RENAME TO "
+        . "presponsable_seq ", false
+    );
+    hace_consulta(
+        $db, 
+        "ALTER TABLE presuntos_responsables_caso RENAME TO "
+        . "caso_presponsable", false
+    );
+
+    aplicaact($act, $idac, 'Renombrando tablas con presunto responsable');
+}
+
+
+
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {
@@ -2029,6 +2116,7 @@ if (isset($GLOBALS['menu_tablas_basicas'])) {
 
 
 // Creando esquema
+regeneraEsquemas();
 
 /**
  * Agrega el contendio del archivo $fuente al $destino
@@ -2097,50 +2185,7 @@ function leeEstructura($nd, $dbnombre, $dirap, $modo)
 
 
 
-$nini = "$dirserv/$dirsitio/DataObjects/$dbnombre.ini";
-$nlinksini = "$dirserv/$dirsitio/DataObjects/$dbnombre.links.ini";
-$nestini = "$dirserv/$dirsitio/DataObjects/estructura-dataobject.ini";
-if (is_writable($nini) && is_writable($nlinksini)) {
-    leeEstructura($dirserv, $dbnombre, "$dirserv/$dirsitio", "w");
-    foreach (explode(" ", $modulos) as $i) {
-        leeEstructura("$dirserv/$i", $dbnombre, "$dirserv/$dirsitio", "a");
-    }
-    if (file_exists($nestini)) {
-        leeEstructura(
-            "$dirserv/$dirsitio", $dbnombre, "$dirserv/$dirsitio", "a"
-        );
-    }
-    echo_esc(
-        "Regenerados $dirserv/$dirsitio/DataObjects/$dbnombre.ini y "
-        . "$dirserv/$dirsitio/DataObjects/$dbnombre.ini "
-    );
-    echo "<br><font color='#FF9999'>Se sugiere quitar "
-    . "permiso de escritura desde el servidor web a estos archivos.</font> "
-    . "Desde la línea de comandos intente el siguiente comando y vuelva "
-    . " a cargar esta página: <br><tt>";
-    echo_esc(
-        "  sudo chmod a-w $dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.*"
-    );
-    echo "</tt>";
-} else {
-    echo_esc(
-        "No se regenerará esquema, rengerelo manualmente o de permiso "
-        . " de escritura a "
-        . "$dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.ini y "
-        . "$dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.links.ini "
-        . "Puede ser desde una línea de comandos con:"
-    );
-    echo "<tt>";
-    echo_esc(
-        "  sudo chown www:www "
-        . "$dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.*"
-    );
-    echo_esc(
-        "  sudo chmod u+w "
-        . "$dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.*"
-    );
-    echo "</tt>";
-}
+
 
 if (!isset($_SESSION['SIN_INDICES']) || !$_SESSION['SIN_INDICES']) {
     echo "Actualizando indices<br>";

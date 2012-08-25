@@ -162,26 +162,26 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
         }
         hace_consulta($db, "DROP VIEW vestcomb", false, false);
         $q = "CREATE VIEW vestcomb (presp, iddep, idmun, nomres, cid) AS
-            (SELECT presuntos_responsables.nombre,
+            (SELECT presponsable.nombre,
             ubicacion.id_departamento, ubicacion.id_municipio,
             resultado_agresion.nombre,
             combatiente.id FROM resultado_agresion, caso, ubicacion,
-            combatiente, presuntos_responsables
+            combatiente, presponsable
             WHERE $where AND
             ubicacion.id_caso = caso.id AND
             resultado_agresion.id = id_resultado_agresion AND
             caso.id = combatiente.id_caso AND
-            presuntos_responsables.id = id_organizacion_armada";
+            presponsable.id = id_organizacion_armada";
 /*        foreach (array("municipio", "clase") as $t) {
-            $q .= " UNION SELECT presuntos_responsables.nombre,
+            $q .= " UNION SELECT presponsable.nombre,
                 {$t}_caso.id_departamento, {$t}_caso.id_municipio,
                 resultado_agresion.nombre, combatiente.id
                 FROM resultado_agresion, caso, {$t}_caso, combatiente,
-                presuntos_responsables
+                presponsable
                 WHERE $where AND {$t}_caso.id_caso = caso.id AND
                 resultado_agresion.id = id_resultado_agresion AND
                 caso.id = combatiente.id_caso AND
-                presuntos_responsables.id = id_organizacion_armada";
+                presponsable.id = id_organizacion_armada";
 } */
         $q .= " )";
         //echo "q= $q";
@@ -352,7 +352,7 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
         if ($cy < 2005) {
             $cy = 2005;
         }
-	$slan = isset($_SESSION['LANG']) ? $_SESSION['LANG'] : 'es';
+    $slan = isset($_SESSION['LANG']) ? $_SESSION['LANG'] : 'es';
 
         $e =& $this->addElement(
             'date', 'fini', 'Desde: ',

@@ -35,7 +35,7 @@ require_once "confv.php";
  * @return object Resultado
  */
 
-function hace_consulta_aut(&$db, $q) 
+function hace_consulta_aut(&$db, $q)
 {
     $result = $db->query($q);
     if (PEAR::isError($result)) {
@@ -82,10 +82,10 @@ function idioma($l = "es_CO")
     $locales_dir = dirname(__FILE__).'/locale';
     $locales_dir = './locale';
     bindtextdomain($td, $locales_dir);
-    bind_textdomain_codeset($td, 'UTF-8'); 
+    bind_textdomain_codeset($td, 'UTF-8');
     textdomain($td);
     if ($l == "en_US" && "Fuente" == _("Fuente")) {
-        echo htmlentities("Error al inicializar idioma $l") . "<br>"; 
+        echo htmlentities("Error al inicializar idioma $l", ENT_COMPAT, 'UTF-8') . "<br>";
         debug_print_backtrace();
         die();
     }
@@ -103,7 +103,7 @@ function loginFunction()
         htmlspecialchars($_SERVER['PHP_SELF']) . "\">";
     echo "<table border='0'>";
     echo "<tr><td bgcolor='#c0c0c0' colspan='2'>Autenticaci&oacute;n</td></tr>";
-    echo "<tr><td>" .  _("Usuario") 
+    echo "<tr><td>" .  _("Usuario")
         . ":</td><td><input type=\"text\" name=\"username\"></td></tr>";
     echo "<tr><td>" . _("Clave")
         . ":</td><td><input type=\"password\" name=\"password\">" .
@@ -457,8 +457,8 @@ function localizaConf()
             $rp = $r . "/" . $pn;
             if (file_exists($rp)) {
                 $fn = $pn;
-                echo "Existe ruta " 
-                    . htmlentities("$CHROOTDIR$rp", ENT_COMPAT, 'UTF-8') 
+                echo "Existe ruta "
+                    . htmlentities("$CHROOTDIR$rp", ENT_COMPAT, 'UTF-8')
                     . "<br>";
                 $cmd ="cd $rs; sudo ln -s $pn " . strtoupper($n);
             }

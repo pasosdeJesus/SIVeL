@@ -301,9 +301,9 @@ class PagActo extends PagBaseSimple
         $op = htmlentities_array(
             $db->getAssoc(
                 "SELECT id_p_responsable, nombre
-                FROM presuntos_responsables_caso, presuntos_responsables
+                FROM caso_presponsable, presponsable
                 WHERE id_caso = $idcaso AND
-                presuntos_responsables.id = id_p_responsable
+                presponsable.id = id_p_responsable
                 ORDER BY nombre"
             )
         );
@@ -363,9 +363,9 @@ class PagActo extends PagBaseSimple
             $op = htmlentities_array(
                 $db->getAssoc(
                     "SELECT id_p_responsable, nombre " .
-                    " FROM presuntos_responsables_caso, presuntos_responsables " .
+                    " FROM caso_presponsable, presponsable " .
                     " WHERE id_caso=$idcaso AND " .
-                    "presuntos_responsables.id=id_p_responsable " .
+                    "presponsable.id=id_p_responsable " .
                     "ORDER BY nombre "
                 )
             );

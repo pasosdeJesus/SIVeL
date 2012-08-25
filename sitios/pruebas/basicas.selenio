@@ -1543,7 +1543,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a[href$='tabla=presuntos_responsables']</td>
+	<td>css=a[href$='tabla=presponsable']</td>
 	<td></td>
 </tr>
 <tr>

@@ -150,7 +150,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 actocolectivo.id_categoria = categoria.id
                 AND categoria.id_tipo_violencia = '$pTvio'
                 UNION
-                SELECT id_caso FROM categoria_p_responsable_caso WHERE
+                SELECT id_caso FROM caso_categoria_presponsable WHERE
                 id_tipo_violencia = '$pTvio')";
         }
         if ($pClasificacion != '') {
@@ -179,13 +179,13 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 } else if ($dcatc->tipocat == 'O') {
                     consulta_and(
                         $db, $so2,
-                        "categoria_p_responsable_caso.id_categoria",
+                        "caso_categoria_presponsable.id_categoria",
                         (int)$r[2]
                     );
                     $totr = true;
                 } else {
                     die(
-                        _("Falta especificar tipo de categoria") 
+                        _("Falta especificar tipo de categoria")
                         . " {$dcatc->id}" . " ({$dcatc->tipocat})"
                     );
                 }
@@ -206,8 +206,8 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 $nt++;
             }
             if ($totr) {
-                $tablas .= " LEFT JOIN categoria_p_responsable_caso ON " .
-                    "caso.id=categoria_p_responsable_caso.id_caso";
+                $tablas .= " LEFT JOIN caso_categoria_presponsable ON " .
+                    "caso.id=caso_categoria_presponsable.id_caso";
                 $nt++;
             }
         }
@@ -228,7 +228,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 );
             } else {
                 echo_esc(
-                    _("Falta") . " consultaWebCreaConsulta " 
+                    _("Falta") . " consultaWebCreaConsulta "
                     . _("en") . " $n, $c"
                 );
             }
@@ -245,7 +245,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                     );
                 } else {
                     echo_esc(
-                        _("Falta") ." $f " . _("de") 
+                        _("Falta") ." $f " . _("de")
                         . " gancho_cw_creaconsulta[$k]"
                     );
                 }
@@ -285,14 +285,14 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
 
         if ($pPresponsable != '') {
             consulta_and_sinap(
-                $where, "presuntos_responsables_caso.id_caso",
+                $where, "caso_presponsable.id_caso",
                 "caso.id"
             );
             consulta_and(
-                $db, $where, "presuntos_responsables_caso.id_p_responsable",
+                $db, $where, "caso_presponsable.id_p_responsable",
                 $pPresponsable
             );
-            $tablas .= ', presuntos_responsables_caso';
+            $tablas .= ', caso_presponsable';
         }
 
 
@@ -554,7 +554,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $sel =& $this->addElement(
             'text', 'nomvic',
-            _('Nombre o apellido de la víctima') 
+            _('Nombre o apellido de la víctima')
         );
         $sel->setSize(80);
 
@@ -581,11 +581,11 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $sel =& $this->addElement(
             'select',
-            'presponsable', _('Presunto Responsable') 
+            'presponsable', _('Presunto Responsable')
         );
         $lpr = htmlentities_array(
             $db->getAssoc(
-                "SELECT id, nombre FROM presuntos_responsables " .
+                "SELECT id, nombre FROM presponsable " .
                 "WHERE fechadeshabilitacion is null"
             )
         );
@@ -597,7 +597,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $sel =& $this->addElement(
             'select', 'clasificacion',
-            _('Clasificación de Violencia') 
+            _('Clasificación de Violencia')
         );
         $sel->setMultiple(true);
         $sel->setSize(5);
@@ -640,7 +640,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         }
 
         $sel =& $this->addElement(
-            'select', 'ssocial', _('Sector Social Víctima') 
+            'select', 'ssocial', _('Sector Social Víctima')
         );
         $options = array('' => '') + htmlentities_array(
             $db->getAssoc("SELECT id, nombre FROM sector_social")
@@ -700,7 +700,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $opch = array();
         $sel =& $this->createElement(
             'checkbox',
-            'concoordenadas', _('Con Coordenadas'), _('Con Coordenadas') 
+            'concoordenadas', _('Con Coordenadas'), _('Con Coordenadas')
         );
         $opch[] =& $sel;
 
@@ -746,7 +746,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
                     );
                 } else {
                     echo_esc(
-                        _("Falta ") . $f . _("de") 
+                        _("Falta ") . $f . _("de")
                         . " consultaweb_ordenarpor[$k]"
                     );
                 }
@@ -808,7 +808,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
             } else {
                 echo_esc(
                     _("Falta") . " consultaWebFormaPresentacion "
-                    . _("en") 
+                    . _("en")
                     . "$n, $c"
                 );
             }
@@ -822,7 +822,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
                     );
                 } else {
                     echo_esc(
-                        _("Falta") . " " . $f . 
+                        _("Falta") . " " . $f .
                         _("de") . "consultaWebFormaPresentacion[$k]"
                     );
                 }
@@ -872,7 +872,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         }
         $sel =& $this->createElement(
             'checkbox',
-            'retroalimentacion', _('Retroalimentación'), 
+            'retroalimentacion', _('Retroalimentación'),
             _('Retroalimentación')
         );
         $sel->setValue(false);
@@ -883,7 +883,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $opch = array();
         $sel =& $this->createElement(
             'checkbox',
-            'm_varlineas', _('Memo en varias líneas'), 
+            'm_varlineas', _('Memo en varias líneas'),
             _('Memo en varias líneas')
         );
         if (!in_array('m_varlineas', $asinc)) {
@@ -911,7 +911,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
                 );
             } else {
                 echo_esc(
-                    _("Falta") . " consultaWebDetalle " 
+                    _("Falta") . " consultaWebDetalle "
                     . _("en") ." $n, $c"
                 );
             }

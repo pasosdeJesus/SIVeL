@@ -54,7 +54,7 @@ class PagEtiquetas extends PagBaseSimple
      * Ver documentación completa en clase base.
      *
      * @param array $apar Arreglo de parametros. Vacio aqui.
-     * 
+     *
      * @return handle Conexión a base de datos
      */
     function iniVar($aper = null)

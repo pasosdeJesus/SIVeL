@@ -298,7 +298,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
             die(_("Bug: idcaso no debería ser null"));
         }
 
-        $comp = $idcaso == $GLOBALS['idbus'] ? 
+        $comp = $idcaso == $GLOBALS['idbus'] ?
             _('Consulta') : _('Caso') . ' ' . $idcaso;
         $nf = $_SESSION[$this->pref.'_pag'] >= $_SESSION[$this->pref.'_total'] ?
             '-' : $_SESSION[$this->pref . '_pag'] + 1;
@@ -471,8 +471,8 @@ abstract class PagBaseMultiple extends PagBaseSimple
         if ($cls == 'caso_contexto') {
             $cls = array('Contextos' => array('caso_contexto', 'id_contexto'),
             'Antecedentes' => array('antecedente_caso', 'id_antecedente'));
-            // 'presuntos_responsables_caso' => array(
-            // 'presuntos_responsables_caso', 'id_caso,id_p_responsable,id'));
+            // 'caso_presponsable' => array(
+            // 'caso_presponsable', 'id_caso,id_p_responsable,id'));
         }
         foreach ($cls as $eti => $clm) {
             if (count($clm) == 2) {

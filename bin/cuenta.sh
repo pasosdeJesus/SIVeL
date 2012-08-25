@@ -25,7 +25,7 @@ ctabla caso
 ctabla caso_contexto                   
 ctabla categoria                       
 ctabla categoria_caso                  
-ctabla categoria_p_responsable_caso    
+ctabla caso_categoria_presponsable
 ctabla clase                           
 ctabla combatiente                     
 ctabla contexto                        
@@ -47,11 +47,11 @@ ctabla opcion
 ctabla opcion_rol                      
 ctabla organizacion                    
 ctabla organizacion_comunidad          
-ctabla p_responsable_agrede_combatiente
+ctabla cp_responsable_agrede_combatiente
 ctabla parametros_reporte_consolidado  
 ctabla prensa                          
-ctabla presuntos_responsables          
-ctabla presuntos_responsables_caso     
+ctabla presponsable
+ctabla caso_presponsable
 ctabla profesion                       
 ctabla profesion_comunidad             
 ctabla rango_edad                      

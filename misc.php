@@ -690,7 +690,7 @@ function valores_pordefecto_form($d, $form)
         if ($cq == null || PEAR::isError($cq)) {
             echo_esc(
                 sprintf(
-                    _("Error: No se encontró elemento %s en el formulario") 
+                    _("Error: No se encontró elemento %s en el formulario")
                     . "<br>", $c
                 )
             );
@@ -782,7 +782,7 @@ function encabezado_envia($titulo = null, $cabezote = '')
     echo '<' . '!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset = "UTF-8">
 ';
     if (isset($titulo)) {
         echo '  <title>' . htmlentities($titulo, ENT_COMPAT, 'UTF-8') . '</title>';
@@ -1025,7 +1025,7 @@ function hace_consulta(&$db, $q, $finenerror = true, $muestraerror = true)
     if (PEAR::isError($res)) {
         if ($muestraerror) {
             echo_esc(
-                _("Error") . ": " . 
+                _("Error") . ": " .
                 $res->getMessage() . " - " .  $res->getUserInfo()
             );
             echo_esc($q);
@@ -1291,7 +1291,7 @@ function lista_relacionados($tabla, $llave,
         if (PEAR::isError($dr) || $dr == null) {
             echo_esc(
                 sprintf(
-                    _("No hay campo %s en tabla %s"), $enlace, $do->__table 
+                    _("No hay campo %s en tabla %s"), $enlace, $do->__table
                 )
             );
             break;
@@ -1991,14 +1991,14 @@ function valida_caso($idcaso)
     $q = "SELECT COUNT(*) FROM actocolectivo " .
         "WHERE id_caso='" . $idcaso . "';";
     $ncat += (int)$db->getOne($q);
-    $q = "SELECT COUNT(*) FROM categoria_p_responsable_caso " .
+    $q = "SELECT COUNT(*) FROM caso_categoria_presponsable " .
         "WHERE id_caso='" . $idcaso . "';";
     $ncat += (int)$db->getOne($q);
     if ($ncat <= 0) {
         error_valida('Falta tipo de violencia.', array());
         $valr = false;
     }
-    $q = "SELECT COUNT(*) FROM presuntos_responsables_caso " .
+    $q = "SELECT COUNT(*) FROM caso_presponsable " .
         "WHERE id_caso='" . $idcaso . "';";
     $npresp = (int)$db->getOne($q);
     if ($npresp <= 0) {
