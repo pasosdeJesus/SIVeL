@@ -242,7 +242,7 @@ class PagPresentaRes extends PagBaseSimple
         $prevnext = array();
         $sel =& $this->createElement(
             'checkbox',
-            'm_varlineas', _('Memo en varias líneas'), 
+            'm_varlineas', _('Memo en varias líneas'),
             _('Memo en varias líneas')
         );
         if (!in_array('m_varlineas', $ult) && isset($ult['m_varlineas'])
@@ -258,11 +258,11 @@ class PagPresentaRes extends PagBaseSimple
             $cy = 2005;
         }
         $ay = explode('-', $GLOBALS['consulta_web_fecha_min']);
-	$slan = isset($_SESSION['LANG']) ?  $_SESSION['LANG'] : 'es';
+    $slan = isset($_SESSION['LANG']) ?  $_SESSION['LANG'] : 'es';
         $e =& $this->addElement(
             'date', 'fiini', _('Ingreso Desde: '),
             array(
-                'language' => $slan, 
+                'language' => $slan,
                 'addEmptyOption' => true,
                 'minYear' => $ay[0],
                 'maxYear' => $cy

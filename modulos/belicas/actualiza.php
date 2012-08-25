@@ -26,7 +26,7 @@ $aut_usuario = "";
 $db = autenticaUsuario($dsn, $aut_usuario, 21);
 
 
-$act = objeto_tabla('Actualizacion_base');
+$act = objeto_tabla('Actualizacionbase');
 
 $idac = 'sbel-1';
 if (!aplicado($idac)) {
@@ -47,7 +47,7 @@ if (!aplicado($idac)) {
         id_organizacion    INTEGER REFERENCES organizacion,
         id_vinculo_estado INTEGER REFERENCES vinculo_estado,
         id_caso    INTEGER REFERENCES caso,
-        id_organizacion_armada INTEGER REFERENCES presuntos_responsables
+        id_organizacion_armada INTEGER REFERENCES presponsable
         )", false
     );
 

@@ -38,8 +38,8 @@ $post['_qf_pResponsables_siguienteMultiple'] = 'Responsable siguiente';
 $post['_qf_default'] = 'pResponsables:siguiente';
 pasaPestanaFicha(
     $db,
-    array("presuntos_responsables_caso",
-    "categoria_p_responsable_caso"
+    array("caso_presponsable",
+    "caso_categoria_presponsable"
     ),
     $post, 1
 );

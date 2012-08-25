@@ -34,7 +34,7 @@ require_once 'HTML/QuickForm/text.php';
 require_once 'PagTipoViolencia.php';
 require_once 'PagFuentesFrecuentes.php';
 require_once 'ResConsulta.php';
-require_once 'DataObjects/Presuntos_responsables.php';
+require_once 'DataObjects/Presponsable.php';
 require_once 'DataObjects/Profesion.php';
 require_once 'DataObjects/Rango_edad.php';
 require_once 'DataObjects/Filiacion.php';
@@ -89,7 +89,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         );
         if ($idetiqueta == 0) {
             die(_("Debe haber una etiqueta IMPORTA_RELATO.") . " "
-                . _("Favor") . " <a href='actualiza.php'>" 
+                . _("Favor") . " <a href='actualiza.php'>"
                 . _("actualizar") . "</a>."
             );
         }
@@ -128,7 +128,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $e['tmp_name'], $GLOBALS['dir_anexos'] . "/" .
             $pArchivo
         );
-        $intensivo = $_POST['intensivo'] == '1';
+        $intensivo = isset($_POST['intensivo']) && $_POST['intensivo'] == '1';
         $aper = array();
         $maxidper = 0;
         $agr = array();
@@ -464,7 +464,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     }
                     foreach (array('filiacion' => 'filiacion',
                         'vinculo_estado' => 'vinculo_estado',
-                        'organizacion_armada' => 'presuntos_responsables')
+                        'organizacion_armada' => 'presponsable')
                         as $cs => $cs2
                     ) {
                         $ncs = "id_" . $cs;
@@ -483,7 +483,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         $m = _("No pudo insertar víctima") ." '"
                             . $dvictima->id_persona . "' ";
                         if (PEAR::isError($dvictima)) {
-                            $m .= $dvictima->getMessage() . " " 
+                            $m .= $dvictima->getMessage() . " "
                                 . $dvictima->getUserInfo();
                         }
                         repObs($m, $obs);
@@ -586,7 +586,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         $dactocolectivo->id_grupoper = $cg;
                         if (!$dactocolectivo->insert()) {
                             repObs(
-                                _("Acto: No pudo insertar acto col.") 
+                                _("Acto: No pudo insertar acto col.")
                                 . " '$cg', '"
                                 . ((string)$acto->id_grupo_victima) . "'",
                                 $obs
@@ -699,8 +699,8 @@ class PagImportaRelato extends HTML_QuickForm_Page
         }
         if (!is_writable($GLOBALS['dir_anexos'])) {
             die(sprintf(
-                _("El directorio '%s' debería permitir escritura"), 
-                $GLOBALS['dir_anexos'] 
+                _("El directorio '%s' debería permitir escritura"),
+                $GLOBALS['dir_anexos']
             ));
         }
 
@@ -738,7 +738,7 @@ class PagImportaRelato extends HTML_QuickForm_Page
         );
         $sel =& $this->addElement(
             'checkbox',
-            'intensivo', 'Buscar victimas y grupos en otros casos', 
+            'intensivo', 'Buscar victimas y grupos en otros casos',
             'Intensivo.  Requiere memoria y disco proporcional al '
             . 'número de casos en la base.'
         );

@@ -236,21 +236,21 @@ function valVarConfPHP($a, $v)
 function aplicado($ver)
 {
     echo_esc("Revisando aplicación de actualización $ver: ", false);
-    $ds = objeto_tabla('Actualizacion_base');
+    $ds = objeto_tabla('Actualizacionbase');
     $ds->fecha = null;
     $ds->get($ver);
     if (PEAR::isError($ds) || $ds->id != $ver || $ds->fecha == null) {
         echo_esc("No");
         return false;
     }
-        echo_esc("Si");
+    echo_esc("Si");
     return true;
 }
 
 /**
  * Aplica una actualización con la fecha de hoy
  *
- * @param object  &$act DataObject a tabla actualizacion_base
+ * @param object  &$act DataObject a tabla actualizacionbase
  * @param integer $idac Identificación de la actualización
  * @param string  $desc Descripción
  *

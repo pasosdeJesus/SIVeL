@@ -18,7 +18,7 @@
 require_once 'DB_DataObject_SIVeL.php';
 require_once 'DataObjects/Filiacion.php';
 require_once 'DataObjects/Organizacion.php';
-require_once 'DataObjects/Presuntos_responsables.php';
+require_once 'DataObjects/Presponsable.php';
 require_once 'DataObjects/Profesion.php';
 require_once 'DataObjects/Rango_edad.php';
 require_once 'DataObjects/Resultado_agresion.php';
@@ -140,7 +140,7 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
             'id_organizacion' => DataObjects_Organizacion::idSinInfo(),
             'id_vinculo_estado' => DataObjects_Vinculo_estado::idSinInfo(),
             'id_organizacion_armada' =>
-                DataObjects_Presuntos_responsables::idSinInfo(),
+                DataObjects_Presponsable::idSinInfo(),
         );
     }
 

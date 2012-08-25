@@ -126,7 +126,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         $tpresp = array();
         $l = 1;
         while ($result->fetchInto($row)) {
-            $d = objeto_tabla('presuntos_responsables');
+            $d = objeto_tabla('presponsable');
             if (PEAR::isError($d)) {
                 die($d->getMessage());
             }
@@ -216,7 +216,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                     );
                 } else {
                     echo_esc(
-                        _("Falta") ." $f " . _("de") 
+                        _("Falta") ." $f " . _("de")
                         . " gancho_co_creaconsulta[$k]"
                     );
                 }
@@ -414,7 +414,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             $u =&  objeto_tabla('ubicacion');
             $u->id_caso = $idcaso;
             if ($u->find() == 0) {
-                die("<br/><font color='red'>" . 
+                die("<br/><font color='red'>" .
                     sprintf(
                         _("Caso sin ubicacion: %s --estadística incompleta"),
                         $idcaso
@@ -498,7 +498,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 echo_esc(
                     sprintf(
                         "Víctima sin presunto responsable '%s', "
-                        . "'%s' en caso '%s' -- estadística incompleta!!!", 
+                        . "'%s' en caso '%s' -- estadística incompleta!!!",
                         $idvic, $nom, $idcaso
                     )
                 );
@@ -517,7 +517,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             }
 
             if ($pMuestra == "tabla") {
-                echo "<td>" . htmlentities($presp, ENT_COMPAT, 'UTF-8') 
+                echo "<td>" . htmlentities($presp, ENT_COMPAT, 'UTF-8')
                     . "</td></tr>\n";
             } elseif ($pMuestra == 'csv') {
                 $adjunto_l = ",$presp \n";
@@ -614,7 +614,7 @@ class PagConsolidado extends HTML_QuickForm_Page
         if ($cy < 2005) {
             $cy = 2005;
         }
-	$slan = isset($_SESSION['LANG']) ?  $_SESSION['LANG'] : 'es';
+    $slan = isset($_SESSION['LANG']) ?  $_SESSION['LANG'] : 'es';
         $e =& $this->addElement(
             'date', 'fini', _('Desde'),
             array('language' => $slan, 'addEmptyOption' => true,
@@ -649,7 +649,7 @@ class PagConsolidado extends HTML_QuickForm_Page
             if (in_array(42, $_SESSION['opciones'])) {
                 $e =& $this->addElement(
                     'date', 'fincdesde',
-                    _('Ingresado en base desde'), 
+                    _('Ingresado en base desde'),
                     array('language' => $slan,
                     'addEmptyOption' => true,
                     'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy
@@ -657,7 +657,7 @@ class PagConsolidado extends HTML_QuickForm_Page
                 );
                 $e =& $this->addElement(
                     'date', 'finchasta',
-                    _('Ingresado en base hasta'), 
+                    _('Ingresado en base hasta'),
                     array('language' => 'es',
                     'addEmptyOption' => true,
                     'minYear' => $GLOBALS['anio_min'], 'maxYear' => $cy

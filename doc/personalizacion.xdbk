@@ -283,7 +283,10 @@ sudo ln -s ofb WWW.NOCHEYNIEBLA.ORG_OFB
 		<title>Estándares de programación</title>
         <para>En cuanto a base de datos se emplea SQL estándar con
             nomenclatura de tablas en síngular y campo llave único de nombre
-            <literal>id</literal>.
+	    <literal>id</literal>; los nombres de tablas no llevan espacio ni 
+	    _, excepto tablas que relacionan otras 2 en cuyo caso se usa 
+	    orden alfabético como sugieren las convenciones de CakePHP 
+	    (ver <xref linkend="nomcakephp"></xref>.
 			Para las partes en PHP se emplean estándares de PEAR 
 			(ver <xref linkend="pearcs"></xref>) ampliados
 			con reglas de nomenclatura de silverorange 

@@ -248,7 +248,7 @@ class EliminaCaso extends HTML_QuickForm_Action
         echo $htmljs->startScript();
         echo $htmljs->confirm(
             sprintf(
-                _('¿Confirma eliminación del caso %s?'), 
+                _('¿Confirma eliminación del caso %s?'),
                 (int)$_SESSION['basicos_id']
             ), 'eliminar'
         );
@@ -451,7 +451,7 @@ class ReporteGeneral extends HTML_QuickForm_Action
         echo "</pre>";
         echo "<hr>";
         echo '<a href = "captura_caso.php">' . _('Volver al Caso') . '</a> | ';
-        echo '<a href = "captura_caso.php?limpia=1">' . _('Caso Nuevo') 
+        echo '<a href = "captura_caso.php?limpia=1">' . _('Caso Nuevo')
             . '</a> | ';
         echo '<a href = "index.php">' . _('Menú') . '</a>';
         pie_envia();
@@ -664,7 +664,7 @@ class PagBasicos extends PagBaseSimple
         ) {  //Busqueda
             $this->addElement('hidden', 'id', $GLOBALS['idbus']);
 
-	    $slan = isset($_SESSION['LANG']) ?  $_SESSION['LANG'] : 'es';
+        $slan = isset($_SESSION['LANG']) ?  $_SESSION['LANG'] : 'es';
             $e =& $this->addElement(
                 'date', 'fini', _('Fecha inicial'),
                 array('language' => $slan, 'addEmptyOption' => true,

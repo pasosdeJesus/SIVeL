@@ -83,8 +83,8 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             'id_clase'  => _('Clase'),
         );
         $this->fb_enumOptions['mesnac'] = array(
-            1=>_('Ene'), _('Feb'), _('Mar'), _('Abr'), 
-            _('May'), _('Jun'), _('Jul'), _('Ago'), 
+            1=>_('Ene'), _('Feb'), _('Mar'), _('Abr'),
+            _('May'), _('Jun'), _('Jul'), _('Ago'),
             _('Sep'), _('Oct'), _('Nov'), _('Dic')
         );
 

@@ -25,7 +25,7 @@ require_once 'DataObjects/Vinculo_estado.php';
 require_once 'DataObjects/Filiacion.php';
 require_once 'DataObjects/Organizacion.php';
 require_once 'DataObjects/Profesion.php';
-require_once 'DataObjects/Presuntos_responsables.php';
+require_once 'DataObjects/Presponsable.php';
 require_once 'DataObjects/Resultado_agresion.php';
 require_once 'DataObjects/Etapa.php';
 require_once 'DataObjects/Tipo_proceso.php';

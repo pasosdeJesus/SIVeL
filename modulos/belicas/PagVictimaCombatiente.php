@@ -26,7 +26,7 @@ require_once 'DataObjects/Vinculo_estado.php';
 require_once 'DataObjects/Filiacion.php';
 require_once 'DataObjects/Organizacion.php';
 require_once 'DataObjects/Profesion.php';
-require_once 'DataObjects/Presuntos_responsables.php';
+require_once 'DataObjects/Presponsable.php';
 require_once 'DataObjects/Resultado_agresion.php';
 
 /**
@@ -98,7 +98,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
      /**
      * Inicializa variables.
      *
-     * @param array $apar Arreglo de parametros. Consta de 
+     * @param array $apar Arreglo de parametros. Consta de
      *  0=>id_combatiente Id  de víctima combatiente
      *
      * @return handle Conexión a base de datos
@@ -375,7 +375,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             )
             && (!isset($valores['id_organizacion_armada'])
             || $valores['id_organizacion_armada']==
-                DataObjects_Presuntos_responsables::idSinInfo()
+                DataObjects_Presponsable::idSinInfo()
                 )
             ;
         if ($es_vacio) {
@@ -525,7 +525,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
                     $r .= $dprofesion->nombre;
                 }
             if ($dcombatiente->id_organizacion_armada!=
-                DataObjects_Presuntos_Responsables::idSinInfo()
+                DataObjects_Presponsable::idSinInfo()
             ) {
                     $r .= "\n    " .
                         $GLOBALS['etiqueta']['organizacion_armada'] . ": ";
@@ -552,7 +552,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
         while ($dcombatiente->fetch()) {
             $r .= trim($dcombatiente->nombre);
             if ($dcombatiente->id_organizacion_armada!=
-                DataObjects_Presuntos_responsables::idSinInfo()
+                DataObjects_Presponsable::idSinInfo()
             ) {
                     $dorg = $dcombatiente->
                         getLink('id_organizacion_armada');

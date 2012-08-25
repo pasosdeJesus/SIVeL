@@ -441,7 +441,7 @@ class PagUbicacion extends PagBaseMultiple
                 '<a href="http://www.openstreetmap.org/?lat=' .
                 $this->bubicacion->_do->latitud .  '&lon=' .
                 $this->bubicacion->_do->longitud .
-                '&zoom=14&layers=B000FTFT" target="_mapa">' 
+                '&zoom=14&layers=B000FTFT" target="_mapa">'
                 . _('Mapa') . '</a>'
             );
         }

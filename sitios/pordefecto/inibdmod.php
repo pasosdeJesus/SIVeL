@@ -68,7 +68,7 @@ foreach ($lm as $m) {
 /* La siguiente requiere AllowOverride All en configuración de Apache */
 ini_set('include_path', $rutas_include);
 
-foreach($lm as $m) {
+foreach ($lm as $m) {
     if (file_exists("$m/conf.php")) {
         require_once "$m/conf.php";
     }
@@ -98,7 +98,7 @@ foreach($GLOBALS['nueva_ficha_tabuladores'] as $a) {
     $arc = $a[2];
     $puestoelim = $a[3];
     $nft = array();
-    for($nf = 0; 
+    for ($nf = 0;
         $nf < count($GLOBALS['ficha_tabuladores']);
         $nf++
     ) {

@@ -134,13 +134,13 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             $titSegun = 'Sexo';
         } elseif ($pSegun == 'id_p_responsable') {
             $distinct = '';
-            $cfSegun = 'presuntos_responsables.nombre';
-            $tablaSegun = "presuntos_responsables, ";
-            $condSegun = "AND presuntos_responsables.id=$cons2.id_p_responsable";
+            $cfSegun = 'presponsable.nombre';
+            $tablaSegun = "presponsable, ";
+            $condSegun = "AND presponsable.id=$cons2.id_p_responsable";
             $titSegun = 'P. Responsable';
             consulta_and_sinap(
                 $where, "acto.id_p_responsable",
-                "presuntos_responsables.id"
+                "presponsable.id"
             );
             consulta_and_sinap(
                 $where, "victima.id_persona", "acto.id_persona"
@@ -257,7 +257,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
                     );
                 } else {
                     echo_esc(
-                        _("Falta") . " $f " . _("de") 
+                        _("Falta") . " $f " . _("de")
                         . " gancho_ei_creaconsulta[$k]"
                     );
                 }
@@ -561,7 +561,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
                     );
                 } else {
                     echo_esc(
-                        _("Falta") . " $f " .  _("de") 
+                        _("Falta") . " $f " .  _("de")
                         . " estadisticasIndFiltro[$k]"
                     );
                 }
@@ -625,7 +625,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
 
 }
 
-encabezado_envia(_('Conteos Victimizacione Individuales'));
+encabezado_envia(_('Conteos Victimizaciones Individuales'));
 $wizard = new HTML_QuickForm_Controller('EstadisticasInd', false);
 $consweb = new PagEstadisticasInd($mreq);
 

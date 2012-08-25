@@ -75,7 +75,7 @@ res_valida(
 );
 
 res_valida(
-    $db, 
+    $db,
     _("Casos con más de una ubicaci&oacute;n (salen duplicados en conteos)"),
     "SELECT id, c from (SELECT caso.id, count(ubicacion.id) AS c
     FROM caso, ubicacion WHERE caso.id = ubicacion.id_caso

@@ -173,7 +173,6 @@ if (isset($d->nom_tabla)) {
 } else {
     $nom_tabla = $tabla;
 }
-
 encabezado_envia(_("Tabla ") . $nom_tabla);
 
 echo '<table border = "0" width = "100%"><tr>'

@@ -19,7 +19,7 @@
  */
 require_once 'PagBaseMultiple.php';
 require_once 'ResConsulta.php';
-require_once 'DataObjects/Presuntos_responsables.php';
+require_once 'DataObjects/Presponsable.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
 
 /**
@@ -36,7 +36,7 @@ require_once $_SESSION['dirsitio'] . '/conf.php';
 class PagPResponsables extends PagBaseMultiple
 {
     /** Relaciona caso con presuntos responsables */
-    var $bpresuntos_responsables_caso;
+    var $bcaso_presponsable;
     /** Categorias de cada presunto responsable */
     var $bcategoria;
 
@@ -46,7 +46,7 @@ class PagPResponsables extends PagBaseMultiple
 
     var $nuevaCopia = false;
 
-    var $clase_modelo = 'presuntos_responsables_caso';
+    var $clase_modelo = 'caso_presponsable';
 
     /**
      * Pone en null variables asociadas a tablas de la pestaña.
@@ -55,7 +55,7 @@ class PagPResponsables extends PagBaseMultiple
      */
     function nullVar()
     {
-        $this->bpresuntos_responsables_caso = null;
+        $this->bcaso_presponsable = null;
         $this->bcategoria = null;
     }
 
@@ -66,8 +66,8 @@ class PagPResponsables extends PagBaseMultiple
      */
     function copiaId()
     {
-        return $this->bpresuntos_responsables_caso->_do->id_p_responsable .
-            ":" . $this->bpresuntos_responsables_caso->_do->id;
+        return $this->bcaso_presponsable->_do->id_p_responsable .
+            ":" . $this->bcaso_presponsable->_do->id;
     }
 
     /**
@@ -80,7 +80,7 @@ class PagPResponsables extends PagBaseMultiple
     function elimina(&$valores)
     {
         if ($valores['id'] != null) {
-            $do =& objeto_tabla('presuntos_responsables_caso');
+            $do =& objeto_tabla('caso_presponsables');
             $db =& $do->getDatabaseConnection();
             $do->id_caso = $_SESSION['basicos_id'];
             $do->id_p_responsable
@@ -91,7 +91,7 @@ class PagPResponsables extends PagBaseMultiple
                 $do->id_p_responsable, 'eliminar', $valores
             );
             if ($ir && $do->find()==1) {
-                $q = "DELETE FROM categoria_p_responsable_caso " .
+                $q = "DELETE FROM caso_categoria_presponsable " .
                     "WHERE id_caso='" . (int)$do->id_caso . "' " .
                     " AND id='" . (int)var_escapa($do->id, $db) . "' " .
                     " AND id_p_responsable='" .
@@ -117,8 +117,8 @@ class PagPResponsables extends PagBaseMultiple
      */
     function iniVar($apar = null)
     {
-        $drespCaso =& objeto_tabla('presuntos_responsables_caso');
-        $dcategoria =& objeto_tabla('categoria_p_responsable_caso');
+        $drespCaso =& objeto_tabla('caso_presponsable');
+        $dcategoria =& objeto_tabla('caso_categoria_presponsable');
 
         $db =& $drespCaso->getDatabaseConnection();
         $idcaso =& $_SESSION['basicos_id'];
@@ -140,7 +140,7 @@ class PagPResponsables extends PagBaseMultiple
         if ($_SESSION['fpr_pag'] < 0 || $_SESSION['fpr_pag'] >= $tot) {
             $drespCaso->id_p_responsable = null;
             $q = "SELECT (max(id)) FROM " .
-                    "presuntos_responsables_caso WHERE " .
+                    "caso_presponsable WHERE " .
                     "id_caso='" . $idcaso . "'";
             $id = (int)($db->getOne($q)) + 1;
             $drespCaso->id = $id;
@@ -158,7 +158,7 @@ class PagPResponsables extends PagBaseMultiple
             $dcategoria->id = $idp2[$_SESSION['fpr_pag']];
         }
 
-        $this->bpresuntos_responsables_caso =& DB_DataObject_FormBuilder::create(
+        $this->bcaso_presponsable =& DB_DataObject_FormBuilder::create(
             $drespCaso,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
                 'ruleViolationMessage' => $GLOBALS['mreglavio']
@@ -207,15 +207,15 @@ class PagPResponsables extends PagBaseMultiple
      */
     function formularioAgrega(&$db, $idcaso)
     {
-        if (isset($this->bpresuntos_responsables_caso->_do->id)) {
-            $vv = $this->bpresuntos_responsables_caso->_do->id;
+        if (isset($this->bcaso_presponsable->_do->id)) {
+            $vv = $this->bcaso_presponsable->_do->id;
         } else {
             $vv = '';
         }
         $this->addElement('hidden', 'id', $vv);
 
-        $this->bpresuntos_responsables_caso->createSubmit = 0;
-        $q = "SELECT DISTINCT tipo FROM presuntos_responsables_caso " .
+        $this->bcaso_presponsable->createSubmit = 0;
+        $q = "SELECT DISTINCT tipo FROM caso_presponsable " .
             " WHERE id_caso='" . (int)$_SESSION['basicos_id'] . "' " .
             " ORDER BY tipo;";
         $result = hace_consulta($db, $q);
@@ -232,16 +232,16 @@ class PagPResponsables extends PagBaseMultiple
         while (count($op)<3) {
             list($llave, $op[]) = each($l);
         }
-        $this->bpresuntos_responsables_caso->_do->es_enumOptions['tipo'] = $op;
+        $this->bcaso_presponsable->_do->es_enumOptions['tipo'] = $op;
         if (isset($_SESSION['forma_modo'])
             && $_SESSION['forma_modo'] == 'busqueda'
         ) {
-            $this->bpresuntos_responsables_caso->_do->es_enumOptions['tipo']
+            $this->bcaso_presponsable->_do->es_enumOptions['tipo']
                 = array('' => '') + $op;
         }
 
-        $this->bpresuntos_responsables_caso->useForm($this);
-        $this->bpresuntos_responsables_caso->getForm();
+        $this->bcaso_presponsable->useForm($this);
+        $this->bcaso_presponsable->getForm();
 
         $pr =& $this->getElement('id_p_responsable');
         sort($pr->_options);
@@ -282,7 +282,7 @@ class PagPResponsables extends PagBaseMultiple
      */
     function formularioValores(&$db, $idcaso)
     {
-        $d =& objeto_tabla('presuntos_responsables_caso');
+        $d =& objeto_tabla('caso_presponsable');
         $campos = array_merge(
             array('id_p_responsable', 'clasificacion'),
             $d->fb_fieldsToRender
@@ -291,7 +291,7 @@ class PagPResponsables extends PagBaseMultiple
         if (isset($_SESSION['recuperaErrorValida'])) {
             $v = $_SESSION['recuperaErrorValida'];
         } else {
-            $cpr = $this->bpresuntos_responsables_caso->_do->id_p_responsable;
+            $cpr = $this->bcaso_presponsable->_do->id_p_responsable;
             $v['id_p_responsable'] = $cpr;
             $pr=& $this->getElement('id_p_responsable');
             $pr->setValue($cpr);
@@ -311,7 +311,7 @@ class PagPResponsables extends PagBaseMultiple
                     $v[$c] = $d->$c;
                     //$cq->setValue($d->$c);
                 }
-                $dc =& objeto_tabla('categoria_p_responsable_caso');
+                $dc =& objeto_tabla('caso_categoria_presponsable');
                 $dc->id_caso = $idcaso;
                 $dc->id_p_responsable = $idpr;
                 $dc->id = $id;
@@ -360,11 +360,11 @@ class PagPResponsables extends PagBaseMultiple
     {
         assert($db != null);
         assert(isset($idcaso));
-        $q = "DELETE FROM categoria_p_responsable_caso WHERE id_caso='"
+        $q = "DELETE FROM caso_categoria_presponsable WHERE id_caso='"
             . (int)$idcaso . "'";
         hace_consulta($db, $q);
 
-        $q = "DELETE FROM presuntos_responsables_caso WHERE id_caso='"
+        $q = "DELETE FROM caso_presponsable WHERE id_caso='"
             . (int)$idcaso . "'";
         hace_consulta($db, $q);
     }
@@ -382,7 +382,7 @@ class PagPResponsables extends PagBaseMultiple
     static function integridadRef(&$db, $idcaso, $idpres, $accion, $valores)
     {
         $q = "SELECT COUNT(tipocat) FROM " .
-        "categoria_p_responsable_caso, categoria WHERE " .
+        "caso_categoria_presponsable, categoria WHERE " .
         "id_categoria=categoria.id AND " .
         "id_caso='" . $idcaso . "' AND " .
         "id_p_responsable='" . $idpres . "' AND "  .
@@ -391,7 +391,7 @@ class PagPResponsables extends PagBaseMultiple
         $nr = $db->getOne($q);
         if ($nr > 0) {
             error_valida(
-                _('Hay ') . $nr . 
+                _('Hay ') . $nr .
                 (' categorias que no son de tipo Otras'),
                 $valores
             );
@@ -423,15 +423,15 @@ class PagPResponsables extends PagBaseMultiple
         verifica_sin_CSRF($valores);
 
         $db = $this->iniVar();
-        $this->bpresuntos_responsables_caso->forceQueryType(
+        $this->bcaso_presponsable->forceQueryType(
             DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
         );
-        if (isset($this->bpresuntos_responsables_caso->_do->id)
-            && isset($this->bpresuntos_responsables_caso->_do->id_p_responsable)
+        if (isset($this->bcaso_presponsable->_do->id)
+            && isset($this->bcaso_presponsable->_do->id_p_responsable)
         ) {
             $id = (int)var_escapa($valores['id'], $db);
-            $idcaso = $this->bpresuntos_responsables_caso->_do->id_caso;
-            $idpres = $this->bpresuntos_responsables_caso->_do->id_p_responsable;
+            $idcaso = $this->bcaso_presponsable->_do->id_caso;
+            $idpres = $this->bcaso_presponsable->_do->id_p_responsable;
             if (isset($idpres) && $idpres != ''
                 && $valores['id_p_responsable'] != $idpres
             ) {
@@ -442,20 +442,20 @@ class PagPResponsables extends PagBaseMultiple
                     return false;
                 }
             }
-            $q = "DELETE FROM categoria_p_responsable_caso " .
+            $q = "DELETE FROM caso_categoria_presponsable " .
                 " WHERE id_caso='" . (int)$idcaso . "' " .
                 " AND id='" . (int)$id . "' " .
                 " AND id_p_responsable='" . (int)$idpres . "'";
             $result = hace_consulta($db, $q);
-            $this->bpresuntos_responsables_caso->_do->delete();
-            $this->bpresuntos_responsables_caso->_do->id = $id;
-            $this->bpresuntos_responsables_caso->_do->id_caso = $idcaso;
+            $this->bcaso_presponsable->_do->delete();
+            $this->bcaso_presponsable->_do->id = $id;
+            $this->bcaso_presponsable->_do->id_caso = $idcaso;
         } else {
             $_SESSION['fpr_total']++;
         }
 
         $ret = $this->process(
-            array(&$this->bpresuntos_responsables_caso,
+            array(&$this->bcaso_presponsable,
             'processForm'
             ), false
         );
@@ -466,11 +466,11 @@ class PagPResponsables extends PagBaseMultiple
             foreach (var_escapa($valores['clasificacion']) as $k => $v) {
                 $t = explode(":", var_escapa($v, $db));
                 $this->bcategoria->_do->id
-                    = $this->bpresuntos_responsables_caso->_do->id;
+                    = $this->bcaso_presponsable->_do->id;
                 $this->bcategoria->_do->id_caso
-                    = $this->bpresuntos_responsables_caso->_do->id_caso;
+                    = $this->bcaso_presponsable->_do->id_caso;
                 $this->bcategoria->_do->id_p_responsable
-                    = $this->bpresuntos_responsables_caso->_do->id_p_responsable;
+                    = $this->bcaso_presponsable->_do->id_p_responsable;
                 $this->bcategoria->_do->id_tipo_violencia = $t[0];
                 $this->bcategoria->_do->id_supracategoria = $t[1];
                 $this->bcategoria->_do->id_categoria = $t[2];
@@ -497,24 +497,24 @@ class PagPResponsables extends PagBaseMultiple
      */
     function datosBusqueda(&$w, &$t, &$db, $idcaso, &$subcons)
     {
-        $duc=& objeto_tabla('presuntos_responsables_caso');
+        $duc=& objeto_tabla('caso_presponsable');
         $duc->id_caso = (int)$idcaso;
         if ($duc->find()>0) {
-            $t .= ", presuntos_responsables_caso";
+            $t .= ", caso_presponsable";
             consulta_and_sinap(
-                $w, "presuntos_responsables_caso.id_caso",
+                $w, "caso_presponsable.id_caso",
                 "caso.id", "=", "AND"
             );
             $w3="";
             while ($duc->fetch()) {
                 $w2="";
                 consulta_and(
-                    $db, $w2, "presuntos_responsables_caso.id_p_responsable",
+                    $db, $w2, "caso_presponsable.id_p_responsable",
                     (int)($duc->id_p_responsable), "=", "AND"
                 );
                 if (isset($duc->tipo)) {
                     consulta_and(
-                        $db, $w2, "presuntos_responsables_caso.tipo",
+                        $db, $w2, "caso_presponsable.tipo",
                         $duc->tipo, "=", "AND"
                     );
                 }
@@ -527,41 +527,41 @@ class PagPResponsables extends PagBaseMultiple
                     if (isset($duc->$ncampo) && trim($duc->$ncampo) != '') {
                         consulta_and(
                             $db, $w2,
-                            "presuntos_responsables_caso.$ncampo",
+                            "caso_presponsable.$ncampo",
                             "%" . trim($duc->$ncampo) . "%",
                             " ILIKE ", "AND"
                         );
                     }
                 }
 
-                $du=& objeto_tabla('Categoria_p_responsable_caso');
+                $du=& objeto_tabla('Caso_categoria_presponsable');
                 $du->id_caso = (int)$idcaso;
                 if ($du->find()>0) {
-                    $t .= ", categoria_p_responsable_caso";
+                    $t .= ", caso_categoria_presponsable";
                     consulta_and_sinap(
-                        $w, "categoria_p_responsable_caso.id_caso",
+                        $w, "caso_categoria_presponsable.id_caso",
                         "caso.id", "=", "AND"
                     );
                     consulta_and_sinap(
                         $w,
-                        "categoria_p_responsable_caso.id_p_responsable",
-                        "presuntos_responsables_caso.id_p_responsable", "=",
+                        "caso_categoria_presponsable.id_p_responsable",
+                        "caso_presponsable.id_p_responsable", "=",
                         "AND"
                     );
                     while ($du->fetch()) {
                         consulta_and(
                             $db, $w2,
-                            "categoria_p_responsable_caso.id_tipo_violencia",
+                            "caso_categoria_presponsable.id_tipo_violencia",
                             $du->id_tipo_violencia, '=', 'AND'
                         );
                         consulta_and(
                             $db, $w2,
-                            "categoria_p_responsable_caso.id_supracategoria",
+                            "caso_categoria_presponsable.id_supracategoria",
                             $du->id_supracategoria, '=', 'AND'
                         );
                         consulta_and(
                             $db, $w2,
-                            "categoria_p_responsable_caso.id_categoria",
+                            "caso_categoria_presponsable.id_categoria",
                             $du->id_categoria, '=', 'AND'
                         );
                     }
@@ -599,7 +599,7 @@ class PagPResponsables extends PagBaseMultiple
         parent::compara(
             $db, $r, $id1, $id2,
             array('Presuntos Responsables'
-            => array('presuntos_responsables_caso', 'id_p_responsable,id'))
+            => array('caso_presponsable', 'id_p_responsable,id'))
         );
     }
 
@@ -629,7 +629,7 @@ class PagPResponsables extends PagBaseMultiple
         parent::mezcla(
             $db, $sol, $id1, $id2, $idn,
             array('Presuntos Responsables'
-            => array('presuntos_responsables_caso', 'id_p_responsable,id'))
+            => array('caso_presponsable', 'id_p_responsable,id'))
         );
     }
 

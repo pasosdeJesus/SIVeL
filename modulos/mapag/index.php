@@ -93,7 +93,7 @@ while ($d->fetch()) {
                         <option value = "0">Mostrar todos</option>
                                     <option value = "">-----------------------</option>
 <?php
-    $d = objeto_tabla('presuntos_responsables');
+    $d = objeto_tabla('presponsable');
     $d->find();
     while ($d->fetch()) {
         echo "<option value=\"" . (int)$d->id . "\">";

@@ -126,7 +126,7 @@ $c += instablabasica(
 );
 
 $c += instablabasica(
-    'presuntos_responsables', 'nombre', 'presuntos r1',
+    'presponsable', 'nombre', 'presuntos r1',
     array('polo' => 'OTROS', 'fechacreacion' => $fc)
 );
 

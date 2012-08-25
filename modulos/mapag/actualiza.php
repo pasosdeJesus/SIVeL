@@ -25,7 +25,7 @@ $aut_usuario = "";
 $db = autenticaUsuario($dsn, $aut_usuario, 21);
 
 
-$act = objeto_tabla('Actualizacion_base');
+$act = objeto_tabla('Actualizacionbase');
 
 $idac = 'mg-1';
 if (!aplicado($idac)) {

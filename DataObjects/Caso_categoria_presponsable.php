@@ -16,12 +16,12 @@
  */
 
 /**
- * Definicion para la tabla categoria_p_responsable_caso.
+ * Definicion para la tabla caso_categoria_presponsable.
  */
 require_once 'DB_DataObject_SIVeL.php';
 
 /**
- * Definicion para la tabla categoria_p_responsable_caso.
+ * Definicion para la tabla caso_categoria_presponsable.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -31,10 +31,10 @@ require_once 'DB_DataObject_SIVeL.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Categoria_p_responsable_caso extends DB_DataObject_SIVeL
+class DataObjects_Caso_categoria_presponsable extends DB_DataObject_SIVeL
 {
 
-    var $__table = 'categoria_p_responsable_caso';    // table name
+    var $__table = 'caso_categoria_presponsable';    // table name
     var $id_tipo_violencia;               // varchar(-1)  multiple_key
     var $id_supracategoria;               // int4(4)  multiple_key
     var $id_categoria;                    // int4(4)  multiple_key

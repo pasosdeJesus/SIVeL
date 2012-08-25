@@ -1141,7 +1141,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
     if ($oa != '') {
         $dvictimacol->id_organizacion_armada
             = (int)conv_basica(
-                $db, 'presuntos_responsables', $oa, $obs
+                $db, 'presponsable', $oa, $obs
             );
     }
     if (!$dvictimacol->insert()) {
@@ -1156,7 +1156,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
         $cx = $vt[0];
         $idt = $vt[1];
         //echo "OJO t=$t, cx=$cx, idt=$idt<br>\n";
-        $partes = explode(";", dato_en_obs($grupo, $cx)); 
+        $partes = explode(";", dato_en_obs($grupo, $cx));
         foreach ($partes as $v) {
             if ($v != null && $v != '') {
                 $drviccol = objeto_tabla($t);
@@ -1275,25 +1275,25 @@ function lnat_a_numero($n)
     switch (a_mayusculas(trim($n))) {
     case "UNO" :
     case "UN" :
-    case "UNA" : 
+    case "UNA" :
         return 1;
-    case "DOS" : 
+    case "DOS" :
         return 2;
-    case "TRES" : 
+    case "TRES" :
         return 3;
-    case "CUATRO" : 
+    case "CUATRO" :
         return 4;
-    case "CINCO" : 
+    case "CINCO" :
         return 5;
-    case "SEIS" : 
+    case "SEIS" :
         return 6;
-    case "SIETE" : 
+    case "SIETE" :
         return 7;
-    case "OCHO" : 
+    case "OCHO" :
         return 8;
-    case "NUEVE" : 
+    case "NUEVE" :
         return 9;
-    case "DIEZ" : 
+    case "DIEZ" :
         return 10;
     }
 
@@ -1464,7 +1464,7 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
 {
     $nomg = $g->nombre_grupo;
     $pr = conv_basica(
-        $db, 'presuntos_responsables',
+        $db, 'presponsable',
         $nomg, $obs, false
     );
     if ($pr == -1) {
@@ -1472,7 +1472,7 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
     }
     $id_presp[$idp] = $pr;
     //echo "OJO asignando id_presp[$idp] = $pr<br>";
-    $dpresp = objeto_tabla('presuntos_responsables_caso');
+    $dpresp = objeto_tabla('caso_presponsable');
     $dpresp->id_caso = $idcaso;
     $dpresp->id_p_responsable = $pr;
     $dpresp->tipo = 0;
@@ -1482,7 +1482,7 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
     ) {
         $dpresp->$c = dato_en_obs($g, $c);
     }
-    $ids = DataObjects_Presuntos_responsables::idSinInfo();
+    $ids = DataObjects_Presponsable::idSinInfo();
     if ($pr == $ids
         && $nomg != 'SIN INFORMACIÓN'
         && $nomg != 'SIN INFORMACION'
@@ -1501,7 +1501,7 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
             $idc = conv_categoria(
                 $db, $obs, (string)$ag, $pr
             );
-            $ocp = objeto_tabla('categoria_p_responsable_caso');
+            $ocp = objeto_tabla('caso_categoria_presponsable');
             $ocp->id_caso = $idcaso;
             $ocp->id_p_responsable = $pr;
             $ocp->id = $dpresp->id;

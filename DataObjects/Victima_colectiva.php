@@ -83,9 +83,9 @@ class DataObjects_Victima_colectiva extends DB_DataObject_SIVeL
     function preGenerateForm(&$formbuilder)
     {
         if (!isset($this->id_organizacion_armada)) {
-            include_once "Presuntos_responsables.php";
+            include_once "Presponsable.php";
             $this->id_organizacion_armada =
-                DataObjects_Presuntos_responsables::idSinInfo();
+                DataObjects_Presponsable::idSinInfo();
         }
     }
 

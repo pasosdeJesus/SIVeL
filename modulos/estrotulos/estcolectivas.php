@@ -135,9 +135,9 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             $titSegun = 'Sexo';
         } else if ($pSegun == 'id_p_responsable') {
             $distinct = "DISTINCT ";
-            $cfSegun = 'presuntos_responsables.nombre';
-            $tablaSegun = "presuntos_responsables, ";
-            $condSegun = "AND presuntos_responsables.id=$cons2.id_p_responsable";
+            $cfSegun = 'presponsable.nombre';
+            $tablaSegun = "presponsable, ";
+            $condSegun = "AND presponsable.id=$cons2.id_p_responsable";
             $titSegun = 'P. Responsable';
             consulta_and_sinap(
                 $where, "victima_colectiva.id_grupoper",
@@ -152,7 +152,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
                 "actocolectivo.id_grupoper"
             );
             consulta_and_sinap(
-                $where, "presuntos_responsables.id",
+                $where, "presponsable.id",
                 "actocolectivo.id_p_responsable"
             );
             $tQue .= "";
@@ -505,8 +505,8 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
         if ($cy < 2005) {
             $cy = 2005;
         }
-	$slan = isset($_SESSION['LANG']) ? $_SESSION['LANG']) : 'es';
-             
+        $slan = isset($_SESSION['LANG']) ? $_SESSION['LANG'] : 'es';
+
         $e =& $this->addElement(
             'date', 'fini', 'Desde: ',
             array('language' => $slan, 'addEmptyOption' => true,

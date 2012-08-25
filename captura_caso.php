@@ -99,7 +99,7 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
         $enc = '<!doctype html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset = "UTF-8">
 <title>Ficha caso</title>
 <style type = "text/css">
 {%style%}

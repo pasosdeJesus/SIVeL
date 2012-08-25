@@ -82,10 +82,10 @@ function rotulos_orden_cons(&$q, $pOrdenar)
             // otros
             ' UNION (SELECT subo.*, parametros_reporte_consolidado.peso ' .
             'FROM parametros_reporte_consolidado,' .
-            'categoria, categoria_p_responsable_caso, (' . $q . ') AS subo WHERE ' .
+            'categoria, caso_categoria_presponsable, (' . $q . ') AS subo WHERE ' .
             '(parametros_reporte_consolidado.no_columna=categoria.col_rep_consolidado ' .
-            'AND categoria.id = categoria_p_responsable_caso.id_categoria ' .
-            'AND categoria_p_responsable_caso.id_caso = subo.id) ' .
+            'AND categoria.id = caso_categoria_presponsable.id_categoria ' .
+            'AND caso_categoria_presponsable.id_caso = subo.id) ' .
             ')) AS subt ORDER BY subt.peso, subt.fecha ';
             //echo "OJO nq=$nq"; //die("x");
     }
@@ -203,7 +203,7 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
     $rotulo = "";
     if ($numcaso != null) {
         if (array_key_exists('m_presponsables', $campos)) {
-            $dprespcaso = objeto_tabla('presuntos_responsables_caso');
+            $dprespcaso = objeto_tabla('caso_presponsable');
             if (PEAR::isError($dprespcaso)) {
                 die($dprespcaso->getMessage());
             }
@@ -269,7 +269,7 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
                     $rotulo = $drot->rotulo;
                 }
             }
-            $catpresp = objeto_tabla('categoria_p_responsable_caso');
+            $catpresp = objeto_tabla('caso_categoria_presponsable');
             $catpresp->id_caso = $idcaso;
             $catpresp->orderBy('id_categoria');
             $catpresp->find();

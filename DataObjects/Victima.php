@@ -27,7 +27,7 @@ require_once "DataObjects/Filiacion.php";
 require_once "Sector_social.php";
 require_once "Organizacion.php";
 require_once "Vinculo_estado.php";
-require_once "Presuntos_responsables.php";
+require_once "Presponsable.php";
 
 /**
  * Definicion para la tabla victima.
@@ -149,7 +149,7 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
             'id_organizacion' => DataObjects_Organizacion::idSinInfo(),
             'id_vinculo_estado' => DataObjects_Vinculo_estado::idSinInfo(),
             'id_organizacion_armada' =>
-                DataObjects_Presuntos_responsables::idSinInfo(),
+                DataObjects_Presponsable::idSinInfo(),
             'id_etnia' =>
                 DataObjects_Etnia::idSinInfo(),
             'id_iglesia' =>
