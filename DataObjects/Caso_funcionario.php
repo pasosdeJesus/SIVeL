@@ -9,21 +9,19 @@
  * @category  SIVeL
  * @package   SIVeL
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2009 Dominio público. Sin garantías.
+ * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
 
 /**
- * Definicion  para la tabla tipo_sitio
+ * Definicion para la tabla caso_funcionario.
  */
 require_once 'DB_DataObject_SIVeL.php';
-require_once 'HTML/QuickForm/Action.php';
-
 
 /**
- * Definicion para la tabla tipo_sitio
+ * Definicion para la tabla caso_funcionario.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -33,32 +31,16 @@ require_once 'HTML/QuickForm/Action.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Tipo_sitio extends DataObjects_Basica
+class DataObjects_Caso_funcionario extends DB_DataObject_SIVeL
 {
-    var $__table = 'tipo_sitio';         // table name
 
-    /**
-     * Constructora
-     * return @void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->nom_tabla = _('Tipo de Sitio');
-    }
+    var $__table = 'caso_funcionario';                // table name
+    var $id_funcionario;                  // int4(4)  multiple_key
+    var $id_caso;                         // int4(4)  multiple_key
+    var $fecha_inicio;                    // date(4)
 
 
-    /**
-     * Identificacion de registro 'SIN INFORMACIÓN'
-     *
-     * @return integer Id del registro SIN INFORMACIÓN
-     */
-    static function idSinInfo()
-    {
-        return 1;
-    }
-
+    var $fb_hidePrimaryKey = true;
 }
 
 ?>

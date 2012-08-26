@@ -25,31 +25,31 @@ $requestUrl = $host . "/consulta_web.php?_qf_consultaWeb_consulta=Consulta&mostr
 
 // datos para clasificar los casos
 /* tal vez lo utilizamos mas tarde
-$classificacion[1] = array('rotulo' => 'MUERTOS', 'tipo_violencia' => 'DH', 'clasificacion' => 'VIDA');
-$classificacion[2] = array('rotulo' => 'MUERTOS', 'tipo_violencia' => 'DIH', 'clasificacion' => 'VIDA');
-$classificacion[3] = array('rotulo' => 'MUERTOS', 'tipo_violencia' => 'VP', 'clasificacion' => 'VIDA');
-$classificacion[4] = array('rotulo' => 'TORTURA', 'tipo_violencia' => 'DH', 'clasificacion' => 'INTEGRIDAD');
-$classificacion[5] = array('rotulo' => 'HERIDOS', 'tipo_violencia' => 'DH', 'clasificacion' => 'INTEGRIDAD');
-$classificacion[6] = array('rotulo' => 'ATENTADOS', 'tipo_violencia' => 'DH', 'clasificacion' => 'INTEGRIDAD');
-$classificacion[7] = array('rotulo' => 'AMENAZAS', 'tipo_violencia' => 'DH', 'clasificacion' => 'INTEGRIDAD');
-$classificacion[8] = array('rotulo' => 'VIOLENCIA SEXUAL', 'tipo_violencia' => 'DH', 'clasificacion' => 'INTEGRIDAD');
-$classificacion[9] = array('rotulo' => 'TORTURA', 'tipo_violencia' => 'DIH', 'clasificacion' => 'INTEGRIDAD');
-$classificacion[10] = array('rotulo' => 'HERIDOS', 'tipo_violencia' => 'DIH', 'clasificacion' => 'INTEGRIDAD');
-$classificacion[11] = array('rotulo' => 'AMENAZAS', 'tipo_violencia' => 'DIH', 'clasificacion' => 'INTEGRIDAD');
-$classificacion[12] = array('rotulo' => 'VIOLENCIA SEXUAL', 'tipo_violencia' => 'DIH', 'clasificacion' => 'INTEGRIDAD');
-$classificacion[13] = array('rotulo' => 'TORTURA', 'tipo_violencia' => 'VP', 'clasificacion' => 'INTEGRIDAD');
-$classificacion[14] = array('rotulo' => 'HERIDOS', 'tipo_violencia' => 'VP', 'clasificacion' => 'INTEGRIDAD');
-$classificacion[15] = array('rotulo' => 'ATENTADOS', 'tipo_violencia' => 'VP', 'clasificacion' => 'INTEGRIDAD');
-$classificacion[16] = array('rotulo' => 'AMENAZAS', 'tipo_violencia' => 'VP', 'clasificacion' => 'INTEGRIDAD');
-$classificacion[17] = array('rotulo' => 'DESAPARICIÃN', 'tipo_violencia' => 'DH', 'clasificacion' => 'LIBERTAD');
-$classificacion[18] = array('rotulo' => 'DETENCION ARBITRARIA', 'tipo_violencia' => 'DH', 'clasificacion' => 'LIBERTAD');
-$classificacion[19] = array('rotulo' => 'DEPORTACIÃN', 'tipo_violencia' => 'DH', 'clasificacion' => 'LIBERTAD');
-$classificacion[20] = array('rotulo' => 'RECLUTAMIENTO DE MENORES', 'tipo_violencia' => 'DIH', 'clasificacion' => 'LIBERTAD');
-$classificacion[21] = array('rotulo' => 'TOMA DE REHENES', 'tipo_violencia' => 'DIH', 'clasificacion' => 'LIBERTAD');
-$classificacion[22] = array('rotulo' => 'ESCUDO', 'tipo_violencia' => 'DIH', 'clasificacion' => 'LIBERTAD');
-$classificacion[23] = array('rotulo' => 'RAPTO', 'tipo_violencia' => 'VP', 'clasificacion' => 'LIBERTAD');
-$classificacion[24] = array('rotulo' => 'SECUESTRO', 'tipo_violencia' => 'VP', 'clasificacion' => 'LIBERTAD');
-$classificacion[25] = array('rotulo' => 'COLECTIVO CONFINADO', 'tipo_violencia' => 'DIH', 'clasificacion' => 'INTEGRIDAD');
+$classificacion[1] = array('rotulo' => 'MUERTOS', 'tviolencia' => 'DH', 'clasificacion' => 'VIDA');
+$classificacion[2] = array('rotulo' => 'MUERTOS', 'tviolencia' => 'DIH', 'clasificacion' => 'VIDA');
+$classificacion[3] = array('rotulo' => 'MUERTOS', 'tviolencia' => 'VP', 'clasificacion' => 'VIDA');
+$classificacion[4] = array('rotulo' => 'TORTURA', 'tviolencia' => 'DH', 'clasificacion' => 'INTEGRIDAD');
+$classificacion[5] = array('rotulo' => 'HERIDOS', 'tviolencia' => 'DH', 'clasificacion' => 'INTEGRIDAD');
+$classificacion[6] = array('rotulo' => 'ATENTADOS', 'tviolencia' => 'DH', 'clasificacion' => 'INTEGRIDAD');
+$classificacion[7] = array('rotulo' => 'AMENAZAS', 'tviolencia' => 'DH', 'clasificacion' => 'INTEGRIDAD');
+$classificacion[8] = array('rotulo' => 'VIOLENCIA SEXUAL', 'tviolencia' => 'DH', 'clasificacion' => 'INTEGRIDAD');
+$classificacion[9] = array('rotulo' => 'TORTURA', 'tviolencia' => 'DIH', 'clasificacion' => 'INTEGRIDAD');
+$classificacion[10] = array('rotulo' => 'HERIDOS', 'tviolencia' => 'DIH', 'clasificacion' => 'INTEGRIDAD');
+$classificacion[11] = array('rotulo' => 'AMENAZAS', 'tviolencia' => 'DIH', 'clasificacion' => 'INTEGRIDAD');
+$classificacion[12] = array('rotulo' => 'VIOLENCIA SEXUAL', 'tviolencia' => 'DIH', 'clasificacion' => 'INTEGRIDAD');
+$classificacion[13] = array('rotulo' => 'TORTURA', 'tviolencia' => 'VP', 'clasificacion' => 'INTEGRIDAD');
+$classificacion[14] = array('rotulo' => 'HERIDOS', 'tviolencia' => 'VP', 'clasificacion' => 'INTEGRIDAD');
+$classificacion[15] = array('rotulo' => 'ATENTADOS', 'tviolencia' => 'VP', 'clasificacion' => 'INTEGRIDAD');
+$classificacion[16] = array('rotulo' => 'AMENAZAS', 'tviolencia' => 'VP', 'clasificacion' => 'INTEGRIDAD');
+$classificacion[17] = array('rotulo' => 'DESAPARICIÃN', 'tviolencia' => 'DH', 'clasificacion' => 'LIBERTAD');
+$classificacion[18] = array('rotulo' => 'DETENCION ARBITRARIA', 'tviolencia' => 'DH', 'clasificacion' => 'LIBERTAD');
+$classificacion[19] = array('rotulo' => 'DEPORTACIÃN', 'tviolencia' => 'DH', 'clasificacion' => 'LIBERTAD');
+$classificacion[20] = array('rotulo' => 'RECLUTAMIENTO DE MENORES', 'tviolencia' => 'DIH', 'clasificacion' => 'LIBERTAD');
+$classificacion[21] = array('rotulo' => 'TOMA DE REHENES', 'tviolencia' => 'DIH', 'clasificacion' => 'LIBERTAD');
+$classificacion[22] = array('rotulo' => 'ESCUDO', 'tviolencia' => 'DIH', 'clasificacion' => 'LIBERTAD');
+$classificacion[23] = array('rotulo' => 'RAPTO', 'tviolencia' => 'VP', 'clasificacion' => 'LIBERTAD');
+$classificacion[24] = array('rotulo' => 'SECUESTRO', 'tviolencia' => 'VP', 'clasificacion' => 'LIBERTAD');
+$classificacion[25] = array('rotulo' => 'COLECTIVO CONFINADO', 'tviolencia' => 'DIH', 'clasificacion' => 'INTEGRIDAD');
 */
 
 // generar documento XML

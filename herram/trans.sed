@@ -114,5 +114,3 @@ s/vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:/vim: set expandta
 s/autenticaUsuario(\$dsn, \$accno/autenticaUsuario($dsn/g
 s/htmlentities(\([^,)]*\))/htmlentities(\1, ENT_COMPAT, 'UTF-8')/g
 s/parent::construct/parent::__construct/g
-s/\([^_]\)vinculo_estado/\1vinculoestado/g
-s/\([^_]\)Vinculo_estado/\1Vinculoestado/g

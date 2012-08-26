@@ -16,12 +16,12 @@
  */
 
 /**
- * Definicion para la tabla funcionario_caso.
+ * Definicion para la tabla tclase.
  */
-require_once 'DB_DataObject_SIVeL.php';
+require_once 'DataObjects/Basica.php';
 
 /**
- * Definicion para la tabla funcionario_caso.
+ * Definicion para la tabla tclase.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -29,18 +29,38 @@ require_once 'DB_DataObject_SIVeL.php';
  * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
  * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
  * @link     http://sivel.sf.net/tec
- * @see      DataObjects_Caso
+ * @see      DataObjects_Basica
  */
-class DataObjects_Funcionario_caso extends DB_DataObject_SIVeL
+class DataObjects_Tclase extends DataObjects_Basica
 {
 
-    var $__table = 'funcionario_caso';                // table name
-    var $id_funcionario;                  // int4(4)  multiple_key
-    var $id_caso;                         // int4(4)  multiple_key
-    var $fecha_inicio;                    // date(4)
+    var $__table = 'tclase';                      // table name
+
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->nom_tabla = _('Tipo Clase');
+    }
 
 
-    var $fb_hidePrimaryKey = true;
+    var $fb_hidePrimaryKey = false;
+    var $fb_fieldsToRender = array(
+        'id',
+        'nombre',
+        'fechacreacion',
+        'fechadeshabilitacion',
+    );
+    var $fb_fieldsRequired = array(
+        'id',
+        'nombre',
+        'fechacreacion',
+    );
+
 }
 
 ?>

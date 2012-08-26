@@ -56,34 +56,34 @@ function rotulos_orden_cons(&$q, $pOrdenar)
             '(SELECT id_persona FROM victima WHERE id_filiacion<>\'' .
             DataObjects_Filiacion::idSinInfo() . '\') ';
             $excvc = 'AND actocolectivo.id_grupoper IN ' .
-            '(SELECT id_grupoper FROM filiacion_comunidad ' .
+            '(SELECT id_grupoper FROM comunidad_filiacion ' .
             ' WHERE id_filiacion<>\'' .
             DataObjects_Filiacion::idSinInfo() . '\') ';
         }
 
         $nq = 'SELECT subt.* FROM ((SELECT sub.*, ' .
-            'parametros_reporte_consolidado.peso as peso ' .
-            ' FROM parametros_reporte_consolidado,' .
+            'pconsolidado.peso as peso ' .
+            ' FROM pconsolidado,' .
             'categoria, acto, (' . $q . ') AS sub WHERE ' .
-            '(parametros_reporte_consolidado.no_columna=categoria.col_rep_consolidado ' .
+            '(pconsolidado.no_columna=categoria.col_rep_consolidado ' .
             ' AND categoria.id=acto.id_categoria ' .
             ' AND acto.id_caso=sub.id ' .
             $excvi.
             ') )' .
             // colectivas
-            'UNION (SELECT subc.*, parametros_reporte_consolidado.peso ' .
-            'FROM parametros_reporte_consolidado,' .
+            'UNION (SELECT subc.*, pconsolidado.peso ' .
+            'FROM pconsolidado,' .
             'categoria, actocolectivo, (' . $q . ') AS subc WHERE ' .
-            '(parametros_reporte_consolidado.no_columna=categoria.col_rep_consolidado ' .
+            '(pconsolidado.no_columna=categoria.col_rep_consolidado ' .
             'AND categoria.id = actocolectivo.id_categoria ' .
             'AND actocolectivo.id_caso = subc.id ' .
             $excvc.
             ') ) ' .
             // otros
-            ' UNION (SELECT subo.*, parametros_reporte_consolidado.peso ' .
-            'FROM parametros_reporte_consolidado,' .
+            ' UNION (SELECT subo.*, pconsolidado.peso ' .
+            'FROM pconsolidado,' .
             'categoria, caso_categoria_presponsable, (' . $q . ') AS subo WHERE ' .
-            '(parametros_reporte_consolidado.no_columna=categoria.col_rep_consolidado ' .
+            '(pconsolidado.no_columna=categoria.col_rep_consolidado ' .
             'AND categoria.id = caso_categoria_presponsable.id_categoria ' .
             'AND caso_categoria_presponsable.id_caso = subo.id) ' .
             ')) AS subt ORDER BY subt.peso, subt.fecha ';
@@ -169,7 +169,7 @@ function rotulos_inicial(&$db, $campos, $idcaso, $numcaso)
                 $r .= trim($tnn) . "\n";
             }
         }
-        $dvictimac = objeto_tabla('victima_colectiva');
+        $dvictimac = objeto_tabla('victimacolectiva');
         if (PEAR::isError($dvictimac)) {
             die($dvictimac->getMessage());
         }

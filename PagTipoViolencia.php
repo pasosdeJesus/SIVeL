@@ -330,7 +330,7 @@ class PagTipoViolencia extends PagBaseSimple
             array(&$this->bcaso, 'processForm'),
             false
         );
-        funcionario_caso($_SESSION['basicos_id']);
+        caso_funcionario($_SESSION['basicos_id']);
         return  $ret;
     }
 

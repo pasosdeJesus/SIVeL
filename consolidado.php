@@ -80,7 +80,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         $n = 1;
         $sep = "";
         foreach ($cataux as $l => $lc) {
-            $p = objeto_tabla('parametros_reporte_consolidado');
+            $p = objeto_tabla('pconsolidado');
             if (PEAR::isError($p)) {
                 die($p->getMessage());
             }
@@ -324,7 +324,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 /* Se hace así porque puede haber casos que no
                     tengan asociado funcionario --cuando vienen de otro
                     banco (?), antiguos*/
-                $q = "SELECT MIN(fecha_inicio) FROM funcionario_caso " .
+                $q = "SELECT MIN(fecha_inicio) FROM caso_funcionario " .
                     " WHERE id_caso='" . $row[0] . "';";
                 $rfc = hace_consulta($db, $q);
                 if ($rfc->fetchInto($minf)) {

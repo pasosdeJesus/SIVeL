@@ -32,7 +32,7 @@ $t = var_escapa($_REQUEST['t']);
 $s = (int)var_escapa($_REQUEST['s']);
 $c = (int)var_escapa($_REQUEST['c']);
 
-$dt =& objeto_tabla('tipo_violencia');
+$dt =& objeto_tabla('tviolencia');
 $dt->id = $t;
 if ($dt->find() == 0) {
     die("No existe tipo de violencia " . htmlentities($t, ENT_COMPAT, 'UTF-8'));

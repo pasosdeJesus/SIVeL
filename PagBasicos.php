@@ -314,14 +314,14 @@ class Busqueda extends HTML_QuickForm_Action
         if ((isset($pFiini['Y']) && $pFiini['Y'] != '')
             || (isset($pFifin['Y']) && $pFifin['Y'] != '')
         ) {
-                $t .= ", funcionario_caso";
-                consulta_and_sinap($w, "funcionario_caso.id_caso", "caso.id");
+                $t .= ", caso_funcionario";
+                consulta_and_sinap($w, "caso_funcionario.id_caso", "caso.id");
         }
         if (isset($pFiini['Y'])
             && $pFiini['Y'] != ''
         ) {
                 consulta_and(
-                    $db, $w, "funcionario_caso.fecha_inicio",
+                    $db, $w, "caso_funcionario.fecha_inicio",
                     arr_a_fecha($pFiini, true), ">="
                 );
         }
@@ -329,7 +329,7 @@ class Busqueda extends HTML_QuickForm_Action
             && $pFifin['Y'] != ''
         ) {
                 consulta_and(
-                    $db, $w, "funcionario_caso.fecha_inicio",
+                    $db, $w, "caso_funcionario.fecha_inicio",
                     arr_a_fecha($pFifin, false), "<="
                 );
         }
@@ -555,8 +555,8 @@ class BuscarId extends HTML_QuickForm_Action
 class PagBasicos extends PagBaseSimple
 {
     /* Variables DB_DataObject_FormBuilder de caso */
-    var $bfrontera_caso;
-    var $bregion_caso;
+    var $bcaso_frontera;
+    var $bcaso_region;
 
     var $titulo = 'Datos Básicos';
 
@@ -579,8 +579,8 @@ class PagBasicos extends PagBaseSimple
         $db = $r[0];
         $dcaso = $r[1];
         $idcaso = $r[2];
-        $dfrontera_caso =& objeto_tabla('frontera_caso');
-        $dregion_caso =& objeto_tabla('region_caso');
+        $dcaso_frontera =& objeto_tabla('caso_frontera');
+        $dcaso_region =& objeto_tabla('caso_region');
 
         // Modo insercion: id en null indica que se está insertado
         // uno nuevo.
@@ -592,8 +592,8 @@ class PagBasicos extends PagBaseSimple
             $dcaso->id = null;
         }
         $_SESSION['basicos_id'] = $dcaso->id;
-        $dfrontera_caso->id_caso = $dcaso->id;
-        $dregion_caso->id_caso = $dcaso->id;
+        $dcaso_frontera->id_caso = $dcaso->id;
+        $dcaso_region->id_caso = $dcaso->id;
 
         // Si ya existía lo carga
         if (isset($dcaso->id)) {
@@ -605,19 +605,19 @@ class PagBasicos extends PagBaseSimple
             } else if ($e != 0 || $dcaso->id != $GLOBALS['idbus']) {
                 $dcaso->fetch();
             }
-            $dfrontera_caso->find();
-            $dregion_caso->find();
+            $dcaso_frontera->find();
+            $dcaso_region->find();
         }
 
-        $this->bfrontera_caso =& DB_DataObject_FormBuilder::create(
-            $dfrontera_caso,
+        $this->bcaso_frontera =& DB_DataObject_FormBuilder::create(
+            $dcaso_frontera,
             array('requiredRuleMessage' =>
             $GLOBALS['mreglareq'],
             'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
         );
-        $this->bregion_caso =& DB_DataObject_FormBuilder::create(
-            $dregion_caso,
+        $this->bcaso_region =& DB_DataObject_FormBuilder::create(
+            $dcaso_region,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
             'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
@@ -733,15 +733,15 @@ class PagBasicos extends PagBaseSimple
 
         $e =& $this->addElement('header', 'ubicacion', _('Ubicación'));
 
-        $this->bregion_caso->createSubmit = 0;
-        $this->bregion_caso->useForm($this);
-        $this->bregion_caso->getForm();
+        $this->bcaso_region->createSubmit = 0;
+        $this->bcaso_region->useForm($this);
+        $this->bcaso_region->getForm();
         unset($this->_rules['id_region[]']);
         unset($this->_rules['id_region']);
 
-        $this->bfrontera_caso->createSubmit = 0;
-        $this->bfrontera_caso->useForm($this);
-        $bff = $this->bfrontera_caso->getForm();
+        $this->bcaso_frontera->createSubmit = 0;
+        $this->bcaso_frontera->useForm($this);
+        $bff = $this->bcaso_frontera->getForm();
         unset($bff->_rules['id_frontera[]']);
         unset($this->_rules['id_frontera']);
 
@@ -778,18 +778,18 @@ class PagBasicos extends PagBaseSimple
             $scf =& $this->getElement('id_frontera');
             if (!PEAR::isError($scf)) {
                 $valscf = array();
-                $this->bfrontera_caso->_do->find();
-                while ($this->bfrontera_caso->_do->fetch()) {
-                    $valscf[] = $this->bfrontera_caso->_do->id_frontera;
+                $this->bcaso_frontera->_do->find();
+                while ($this->bcaso_frontera->_do->fetch()) {
+                    $valscf[] = $this->bcaso_frontera->_do->id_frontera;
                 }
                 $scf->setValue($valscf);
             }
             $scr =& $this->getElement('id_region');
             if (!PEAR::isError($scr)) {
                 $valscr = array();
-                $t = $this->bregion_caso->_do->find();
-                while ($this->bregion_caso->_do->fetch()) {
-                    $valscr[] = $this->bregion_caso->_do->id_region;
+                $t = $this->bcaso_region->_do->find();
+                while ($this->bcaso_region->_do->fetch()) {
+                    $valscr[] = $this->bcaso_region->_do->id_region;
                 }
                 $scr->setValue($valscr);
             }
@@ -823,11 +823,11 @@ class PagBasicos extends PagBaseSimple
         assert($db != null);
         assert(isset($idcaso));
         $result = hace_consulta(
-            $db, "DELETE FROM frontera_caso " .
+            $db, "DELETE FROM caso_frontera " .
             "WHERE id_caso='" . $idcaso . "'"
         );
         $result = hace_consulta(
-            $db, "DELETE FROM region_caso " .
+            $db, "DELETE FROM caso_region " .
             "WHERE id_caso='" . $idcaso . "'"
         );
     }
@@ -922,21 +922,21 @@ class PagBasicos extends PagBaseSimple
         PagBasicos::eliminaDep($db, $idcaso);
         if (isset($valores['id_frontera'])) {
             foreach (var_escapa($valores['id_frontera'], $db) as $k => $v) {
-                $this->bfrontera_caso->_do->id_caso = $idcaso;
-                $this->bfrontera_caso->_do->id_frontera = $v;
-                $this->bfrontera_caso->_do->insert();
+                $this->bcaso_frontera->_do->id_caso = $idcaso;
+                $this->bcaso_frontera->_do->id_frontera = $v;
+                $this->bcaso_frontera->_do->insert();
             }
         }
         if (isset($valores['id_region'])) {
             foreach (var_escapa($valores['id_region'], $db) as $k => $v) {
-                $this->bregion_caso->_do->id_caso = $idcaso;
-                $this->bregion_caso->_do->id_region = $v;
-                $this->bregion_caso->_do->insert();
+                $this->bcaso_region->_do->id_caso = $idcaso;
+                $this->bcaso_region->_do->id_region = $v;
+                $this->bcaso_region->_do->insert();
             }
         }
 
         $_SESSION['basicos_id'] = $idcaso;
-        funcionario_caso($idcaso);
+        caso_funcionario($idcaso);
         return  $ret;
     }
 
@@ -1014,9 +1014,9 @@ class PagBasicos extends PagBaseSimple
         }
 
         $t = "caso";
-        consulta_or_muchos($w, $t, 'frontera_caso');
+        consulta_or_muchos($w, $t, 'caso_frontera');
 
-        consulta_or_muchos($w, $t, 'region_caso');
+        consulta_or_muchos($w, $t, 'caso_region');
     }
 
     /**

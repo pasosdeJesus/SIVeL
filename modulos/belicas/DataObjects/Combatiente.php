@@ -20,9 +20,9 @@ require_once 'DataObjects/Filiacion.php';
 require_once 'DataObjects/Organizacion.php';
 require_once 'DataObjects/Presponsable.php';
 require_once 'DataObjects/Profesion.php';
-require_once 'DataObjects/Rango_edad.php';
-require_once 'DataObjects/Resultado_agresion.php';
-require_once 'DataObjects/Sector_social.php';
+require_once 'DataObjects/Rangoedad.php';
+require_once 'DataObjects/Resagresion.php';
+require_once 'DataObjects/Sectorsocial.php';
 require_once 'DataObjects/Vinculoestado.php';
 
 /**
@@ -44,7 +44,7 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
     var $alias;                           // varchar(-1)
     var $edad;                            // int4(4)
     var $sexo;                            // varchar(-1)  not null
-    var $id_resultado_agresion;           // int4(4)
+    var $id_resagresion;           // int4(4)
     var $id_profesion;                    // int4(4)
     var $id_rango_edad;                   // int4(4)
     var $id_filiacion;                    // int4(4)
@@ -75,7 +75,7 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
             'id_profesion'=> _('Profesion'),
             'id_organizacion'=> _('Organización Social'),
             'id_organizacion_armada'=> _('Organización Armada'),
-            'id_resultado_agresion'=> _('Resultado Agresión')
+            'id_resagresion'=> _('Resultado Agresión')
         );
 
 
@@ -85,12 +85,12 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
     var $fb_preDefOrder = array('nombre', 'alias', 'edad', 'sexo',
         'id_rango_edad', 'id_sector_social', 'id_vinculo_estado',
          'id_filiacion', 'id_profesion', 'id_organizacion',
-        'id_organizacion_armada', 'id_resultado_agresion'
+        'id_organizacion_armada', 'id_resagresion'
     );
     var $fb_fieldsToRender = array('nombre', 'alias', 'edad', 'sexo',
         'id_rango_edad', 'id_sector_social', 'id_vinculo_estado',
          'id_filiacion', 'id_profesion', 'id_organizacion',
-        'id_organizacion_armada', 'id_resultado_agresion'
+        'id_organizacion_armada', 'id_resagresion'
     );
     var $fb_enumFields = array('sexo');
     var $es_enumOptions = array('sexo' => array('F' => 'Femenino',
@@ -133,10 +133,10 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
     {
         return array(
             'sexo'=>'S',
-            'id_rango_edad'=> DataObjects_Rango_edad::idSinInfo(),
+            'id_rango_edad'=> DataObjects_Rangoedad::idSinInfo(),
             'id_profesion'=> DataObjects_Profesion::idSinInfo(),
             'id_filiacion' => DataObjects_Filiacion::idSinInfo(),
-            'id_sector_social' => DataObjects_Sector_social::idSinInfo(),
+            'id_sector_social' => DataObjects_Sectorsocial::idSinInfo(),
             'id_organizacion' => DataObjects_Organizacion::idSinInfo(),
             'id_vinculo_estado' => DataObjects_Vinculo_estado::idSinInfo(),
             'id_organizacion_armada' =>
@@ -192,16 +192,16 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
 
         $e =& $form->getElement('id_rango_edad');
         if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['rango_edad'])
+            && isset($GLOBALS['etiqueta']['rangoedad'])
         ) {
-            $e->setLabel($GLOBALS['etiqueta']['rango_edad']);
+            $e->setLabel($GLOBALS['etiqueta']['rangoedad']);
         }
 
         $e =& $form->getElement('id_sector_social');
         if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['sector_social'])
+            && isset($GLOBALS['etiqueta']['sectorsocial'])
         ) {
-            $e->setLabel($GLOBALS['etiqueta']['sector_social']);
+            $e->setLabel($GLOBALS['etiqueta']['sectorsocial']);
         }
 
         $e =& $form->getElement('id_vinculo_estado');
@@ -239,11 +239,11 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
             $e->setLabel($GLOBALS['etiqueta']['organizacion_armada']);
         }
 
-        $e =& $form->getElement('id_resultado_agresion');
+        $e =& $form->getElement('id_resagresion');
         if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['resultado_agresion'])
+            && isset($GLOBALS['etiqueta']['resagresion'])
         ) {
-            $e->setLabel($GLOBALS['etiqueta']['resultado_agresion']);
+            $e->setLabel($GLOBALS['etiqueta']['resagresion']);
         }
 
     }

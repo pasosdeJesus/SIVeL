@@ -19,7 +19,7 @@
  * Definicion para la tabla ubicacion.
  */
 require_once 'DB_DataObject_SIVeL.php';
-require_once 'Tipo_sitio.php';
+require_once 'Tsitio.php';
 
 /**
  * Definicion para la tabla ubicacion.
@@ -83,7 +83,7 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     static function camposSinInfo()
     {
         $a = array(
-            'id_tipo_sitio'=> DataObjects_Tipo_sitio::idSinInfo(),
+            'id_tipo_sitio'=> DataObjects_Tsitio::idSinInfo(),
         );
         return $a;
     }
@@ -143,7 +143,7 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
 
         $e =& $form->getElement('id_tipo_sitio');
         if (!isset($this->id_tipo_sitio)) {
-            $this->id_tipo_sitio = DataObjects_Tipo_sitio::idSinInfo();
+            $this->id_tipo_sitio = DataObjects_Tsitio::idSinInfo();
         }
         $e->setValue($this->id_tipo_sitio);
         $e->_options = htmlentities_array($e->_options);

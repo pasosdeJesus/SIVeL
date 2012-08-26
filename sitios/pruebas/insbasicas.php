@@ -102,8 +102,8 @@ if (($nd-$na) != 1) {
 
 $c = 0;
 
-foreach (array('tipo_sitio', 'frontera', 'region', 'filiacion', 'organizacion',
-    'profesion', 'sector_social', 'vinculoestado', 'antecedente',
+foreach (array('tsitio', 'frontera', 'region', 'filiacion', 'organizacion',
+    'profesion', 'sectorsocial', 'vinculoestado', 'antecedente',
     'contexto'
 ) as $t
 ) {
@@ -121,7 +121,7 @@ $c += instablabasica(
 );
 
 $c += instablabasica(
-    'prensa', 'nombre', 'prensa1',
+    'ffrecuente', 'nombre', 'ffrecuente1',
     array('tipo_fuente' => 'Indirecta')
 );
 
@@ -131,21 +131,21 @@ $c += instablabasica(
 );
 
 $c += instablabasica(
-    'rango_edad', 'nombre', 'rango_edad1',
+    'rangoedad', 'nombre', 'rangoedad1',
     array('rango' => 'desc1', 'limiteinferior' => '0',
     'limitesuperior' => '100'
     )
 );
 
 $c += instablabasica(
-    'parametros_reporte_consolidado', 'rotulo', 'rotulo1',
-    array('tipo_violencia' => 'UNA',
+    'pconsolidado', 'rotulo', 'rotulo1',
+    array('tviolencia' => 'UNA',
     'clasificacion' => 'OTRA'
     )
 );
 
 $c += instablabasica(
-    'tipo_violencia', 'nombre', 'tipo1',
+    'tviolencia', 'nombre', 'tipo1',
     array('id' => 'T', 'nomcorto' => 't1', 'fechacreacion' => $fc)
 );
 $c += instablabasica(

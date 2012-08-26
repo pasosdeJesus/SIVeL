@@ -16,12 +16,12 @@
  */
 
 /**
- * Definicion para la tabla resultado_agresion.
+ * Definicion para la tabla resagresion.
  */
 require_once 'DataObjects/Basica.php';
 
 /**
- * Definicion para la tabla resultado_agresion.
+ * Definicion para la tabla resagresion.
  * Ver documentación de DataObjects_Basica.
  *
  * @category SIVeL
@@ -31,10 +31,10 @@ require_once 'DataObjects/Basica.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Basica
  */
-class DataObjects_Resultado_agresion extends DataObjects_Basica
+class DataObjects_Resagresion extends DataObjects_Basica
 {
 
-    var $__table = 'resultado_agresion';              // table name
+    var $__table = 'resagresion';              // table name
 
     /**
      * Constructora

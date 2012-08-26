@@ -60,11 +60,11 @@ if (!aplicado($idac)) {
     );
     $r = hace_consulta(
         $db, "ALTER TABLE anexo ADD COLUMN id_prensa INTEGER " .
-        "REFERENCES prensa", false
+        "REFERENCES ffrecuente", false
     );
     $r = hace_consulta(
         $db, "ALTER TABLE anexo ADD COLUMN id_fuente_directa " .
-        "INTEGER REFERENCES fuente_directa", false
+        "INTEGER REFERENCES fotra", false
     );
 
     aplicaact($act, $idac, 'Anexos relacionados con fuentes');

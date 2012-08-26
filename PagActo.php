@@ -395,9 +395,9 @@ class PagActo extends PagBaseSimple
             $op = htmlentities_array(
                 $db->getAssoc(
                     "SELECT id_grupoper, nombre
-                    FROM victima_colectiva, grupoper
+                    FROM victimacolectiva, grupoper
                     WHERE id_caso = $idcaso AND
-                    victima_colectiva.id_grupoper = grupoper.id
+                    victimacolectiva.id_grupoper = grupoper.id
                     ORDER BY nombre"
                 )
             );
@@ -533,7 +533,7 @@ class PagActo extends PagBaseSimple
                 }
             }
         }
-        funcionario_caso($_SESSION['basicos_id']);
+        caso_funcionario($_SESSION['basicos_id']);
         return  $ret;
     }
 

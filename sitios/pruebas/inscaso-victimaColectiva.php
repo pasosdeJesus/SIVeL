@@ -40,13 +40,13 @@ $post['id_organizacion']['0'] = '1';
 $post['_qf_victimaColectiva_siguienteMultiple'] = 'Vic. colectiva siguiente';
 $post['_qf_default'] = 'victimaColectiva:siguiente';
 pasaPestanaFicha(
-    $db, array("victima_colectiva",
+    $db, array("victimacolectiva",
     "antecedente_comunidad",
-    "rango_edad_comunidad",
+    "comunidad_rangoedad",
     "vinculoestado_comunidad",
-    "filiacion_comunidad",
-    "profesion_comunidad",
-    "organizacion_comunidad",
+    "comunidad_filiacion",
+    "comunidad_profesion",
+    "comunidad_organizacion",
     "p_responsable_agrede_comunidad"
     ),
     $post, 1

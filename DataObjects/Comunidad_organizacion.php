@@ -16,12 +16,12 @@
  */
 
 /**
- * Definicion para la tabla region_caso.
+ * Definicion para la tabla comunidad_organizacion.
  */
 require_once 'DB_DataObject_SIVeL.php';
 
 /**
- * Definicion para la tabla region_caso.
+ * Definicion para la tabla comunidad_organizacion.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -31,18 +31,20 @@ require_once 'DB_DataObject_SIVeL.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Region_caso extends DB_DataObject_SIVeL
+class DataObjects_Comunidad_organizacion extends DB_DataObject_SIVeL
 {
 
-    var $__table = 'region_caso';                     // table name
-    var $id_region;                       // int4(4)  multiple_key
-    var $id_caso;                         // int4(4)  multiple_key
+    var $__table = 'comunidad_organizacion';          // table name
+    var $id_organizacion;                 // int4(4)  multiple_key
+    var $id_grupoper;                  // int4(4)  multiple_key
+    var $id_caso;                  // int4(4)  multiple_key
 
-    var $fb_preDefOrder = array('id_region');
-    var $fb_fieldsToRender = array('id_region');
+
+
+    var $fb_preDefOrder = array('id_organizacion');
+    var $fb_fieldsToRender = array('id_organizacion');
     var $fb_addFormHeader = false;
-    var $fb_excludeFromAutoRules = array('id_region');
-    var $fb_hidePrimaryKey = false;
+    var $fb_excludeFromAutoRules = array('id_organizacion');
     /**
      * Constructora
      * return @void
@@ -52,11 +54,31 @@ class DataObjects_Region_caso extends DB_DataObject_SIVeL
         parent::__construct();
 
         $this->fb_fieldLabels= array(
-           'id_region' => _('Region'),
-           'id_frontera' => _('Frontera'),
+           'id_organizacion' => _('Organización Social'),
         );
     }
 
+    var $fb_hidePrimaryKey = false;
+
+
+    /**
+     * Prepara consulta agregando objeto enlazado a este por
+     * campo field.
+     *
+     * @param object &$opts  objeto DB para completar consulta
+     * @param string &$field campo por el cual enlazar
+     *
+     * @return void
+     */
+    function prepareLinkedDataObject(&$opts, &$field)
+    {
+        switch ($field) {
+        case 'id_organizacion':
+            $opts->whereAdd('fechadeshabilitacion IS NULL');
+            break;
+
+        }
+    }
 
     /**
      * Prepara antes de generar formulario.
@@ -67,7 +89,9 @@ class DataObjects_Region_caso extends DB_DataObject_SIVeL
      */
     function preGenerateForm(&$formbuilder)
     {
-        $this->fb_preDefElements = array('id_caso' =>
+        $this->fb_preDefElements = array('id_grupoper' =>
+            HTML_QuickForm::createElement('hidden', 'id_grupoper'),
+            'id_caso' =>
             HTML_QuickForm::createElement('hidden', 'id_caso')
         );
     }
@@ -83,12 +107,19 @@ class DataObjects_Region_caso extends DB_DataObject_SIVeL
     function postGenerateForm(&$form, &$formbuilder)
     {
         parent::postGenerateForm($form, $formbuilder);
-        $sel =& $form->getElement('id_region');
+        $sel =& $form->getElement('id_organizacion');
         if (isset($sel) && !PEAR::isError($sel)) {
-            $sel->setSize('5');
             $sel->setMultiple(true);
+            $sel->setSize(5);
+            if (isset($GLOBALS['etiqueta']['organizacion'])) {
+                $sel->setLabel($GLOBALS['etiqueta']['organizacion']);
+            }
         }
+        $form->removeElement('id_grupoper');
+        $form->removeElement('id_caso');
+        $form->removeElement('id_caso');
     }
+
 }
 
 ?>

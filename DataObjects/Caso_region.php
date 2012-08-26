@@ -16,12 +16,12 @@
  */
 
 /**
- * Definicion para la tabla frontera_caso.
+ * Definicion para la tabla caso_region.
  */
 require_once 'DB_DataObject_SIVeL.php';
 
 /**
- * Definicion para la tabla frontera_caso.
+ * Definicion para la tabla caso_region.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -31,19 +31,17 @@ require_once 'DB_DataObject_SIVeL.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Frontera_caso extends DB_DataObject_SIVeL
+class DataObjects_Caso_region extends DB_DataObject_SIVeL
 {
 
-    var $__table = 'frontera_caso';                   // table name
-    var $id_frontera;                     // int4(4)  multiple_key
+    var $__table = 'caso_region';                     // table name
+    var $id_region;                       // int4(4)  multiple_key
     var $id_caso;                         // int4(4)  multiple_key
 
-
-
-    var $fb_preDefOrder = array('id_frontera');
-    var $fb_fieldsToRender = array('id_frontera');
+    var $fb_preDefOrder = array('id_region');
+    var $fb_fieldsToRender = array('id_region');
     var $fb_addFormHeader = false;
-    var $fb_excludeFromAutoRules = array('id_frontera');
+    var $fb_excludeFromAutoRules = array('id_region');
     var $fb_hidePrimaryKey = false;
     /**
      * Constructora
@@ -54,10 +52,10 @@ class DataObjects_Frontera_caso extends DB_DataObject_SIVeL
         parent::__construct();
 
         $this->fb_fieldLabels= array(
+           'id_region' => _('Region'),
            'id_frontera' => _('Frontera'),
         );
     }
-
 
 
     /**
@@ -85,19 +83,12 @@ class DataObjects_Frontera_caso extends DB_DataObject_SIVeL
     function postGenerateForm(&$form, &$formbuilder)
     {
         parent::postGenerateForm($form, $formbuilder);
-        $sel =& $form->getElement('id_frontera');
-        if (isset($sel) && !PEAR::isError($sel)
-            && $sel->getType() == 'select'
-        ) {
+        $sel =& $form->getElement('id_region');
+        if (isset($sel) && !PEAR::isError($sel)) {
             $sel->setSize('5');
             $sel->setMultiple(true);
-            if (isset($GLOBALS['etiqueta']['frontera'])) {
-                $sel->setLabel($GLOBALS['etiqueta']['frontera']);
-            }
         }
-        unset($form->_rules['id_frontera']);
     }
-
 }
 
 ?>

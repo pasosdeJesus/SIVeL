@@ -16,12 +16,12 @@
  */
 
 /**
- * Definicion para la tabla fuente_directa.
+ * Definicion para la tabla fotra.
  */
 require_once 'DB_DataObject_SIVeL.php';
 
 /**
- * Definicion para la tabla fuente_directa.
+ * Definicion para la tabla fotra.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -31,10 +31,10 @@ require_once 'DB_DataObject_SIVeL.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Fuente_directa extends DB_DataObject_SIVeL
+class DataObjects_Fotra extends DB_DataObject_SIVeL
 {
 
-    var $__table = 'fuente_directa';                  // table name
+    var $__table = 'fotra';                  // table name
     var $id;                              // int4(4)  not_null primary_key
     var $nombre;                          // varchar(-1)  not_null
 

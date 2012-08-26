@@ -19,14 +19,14 @@ require_once 'ResConsulta.php';
 require_once 'HTML/QuickForm/Action.php';
 
 require_once 'DataObjects/Accion.php';
-require_once 'DataObjects/Rango_edad.php';
-require_once 'DataObjects/Sector_social.php';
+require_once 'DataObjects/Rangoedad.php';
+require_once 'DataObjects/Sectorsocial.php';
 require_once 'DataObjects/Vinculoestado.php';
 require_once 'DataObjects/Filiacion.php';
 require_once 'DataObjects/Organizacion.php';
 require_once 'DataObjects/Profesion.php';
 require_once 'DataObjects/Presponsable.php';
-require_once 'DataObjects/Resultado_agresion.php';
+require_once 'DataObjects/Resagresion.php';
 require_once 'DataObjects/Etapa.php';
 require_once 'DataObjects/Tipo_proceso.php';
 
@@ -395,7 +395,7 @@ class PagSegJudicial extends PagBaseMultiple
             $procAc = false;
         }
 
-        funcionario_caso($_SESSION['basicos_id']);
+        caso_funcionario($_SESSION['basicos_id']);
         return  $ret;
     }
 

@@ -19,7 +19,7 @@
  */
 
 require_once 'PagBaseMultiple.php';
-require_once 'DataObjects/Prensa.php';
+require_once 'DataObjects/Ffrecuente.php';
 
 /**
  * Página fuentes frecuentes.
@@ -36,7 +36,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
 {
 
     /** Fuente frecuente asociada al caso, que se está consultando */
-    var $bescrito_caso;
+    var $bcaso_ffrecuente;
 
     var $titulo = 'Fuentes Frecuentes';
 
@@ -44,7 +44,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
 
     var $nuevaCopia = false;
 
-    var $clase_modelo = 'escrito_caso';
+    var $clase_modelo = 'caso_ffrecuente';
 
     /**
      * Pone en null variables asociadas a tablas de la pestaña.
@@ -53,7 +53,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
      */
     function nullVar()
     {
-        $this->bescrito_caso = null;
+        $this->bcaso_ffrecuente = null;
     }
 
     /**
@@ -63,9 +63,9 @@ class PagFuentesFrecuentes extends PagBaseMultiple
      */
     function copiaId()
     {
-        $r = $this->bescrito_caso->_do->id_caso.":" .
-            $this->bescrito_caso->_do->id_prensa.":" .
-            $this->bescrito_caso->_do->fecha;
+        $r = $this->bcaso_ffrecuente->_do->id_caso.":" .
+            $this->bcaso_ffrecuente->_do->id_prensa.":" .
+            $this->bcaso_ffrecuente->_do->fecha;
         return  $r;
     }
 
@@ -80,8 +80,8 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     function elimina(&$valores)
     {
         $this->iniVar();
-        if ($this->bescrito_caso->_do->id_prensa != null) {
-            $this->bescrito_caso->_do->delete();
+        if ($this->bcaso_ffrecuente->_do->id_prensa != null) {
+            $this->bcaso_ffrecuente->_do->delete();
             $_SESSION['ff_total']--;
         }
     }
@@ -96,7 +96,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
      */
     function iniVar($apar = null)
     {
-        $do =& objeto_tabla('escrito_caso');
+        $do =& objeto_tabla('caso_ffrecuente');
         $db =& $do->getDatabaseConnection();
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
@@ -105,7 +105,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
         $do->id_caso = $idcaso;
         $result = hace_consulta(
             $db, "SELECT id_prensa " .
-            " FROM escrito_caso, prensa " .
+            " FROM caso_ffrecuente, ffrecuente " .
             " WHERE id_caso='$idcaso' AND id_prensa=id " .
             " ORDER BY nombre;"
         );
@@ -125,7 +125,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
             $do->fetch();
         }
 
-        $this->bescrito_caso =& DB_DataObject_FormBuilder::create(
+        $this->bcaso_ffrecuente =& DB_DataObject_FormBuilder::create(
             $do,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
                   'ruleViolationMessage' => $GLOBALS['mreglavio']
@@ -171,9 +171,9 @@ class PagFuentesFrecuentes extends PagBaseMultiple
         $GLOBALS['fechaPuedeSerVacia'] = isset($_SESSION['forma_modo'])
             && $_SESSION['forma_modo'] == 'busqueda';
 
-        $this->bescrito_caso->createSubmit = 0;
-        $this->bescrito_caso->useForm($this);
-        $this->bescrito_caso->getForm();
+        $this->bcaso_ffrecuente->createSubmit = 0;
+        $this->bcaso_ffrecuente->useForm($this);
+        $this->bcaso_ffrecuente->getForm();
 
         $this->registerRule(
             'frecuenteposterior', 'function', 'frecposterior',
@@ -205,15 +205,15 @@ class PagFuentesFrecuentes extends PagBaseMultiple
         if (isset($_SESSION['recuperaErrorValida'])) {
             establece_valores_form(
                 $this,
-                $this->bescrito_caso->_do->fb_fieldsToRender,
+                $this->bcaso_ffrecuente->_do->fb_fieldsToRender,
                 $_SESSION['recuperaErrorValida']
             );
             unset($_SESSION['recuperaErrorValida']);
         } else {
-            foreach ($this->bescrito_caso->_do->fb_fieldsToRender as $c) {
+            foreach ($this->bcaso_ffrecuente->_do->fb_fieldsToRender as $c) {
                 $cq = $this->getElement($c);
-                if (isset($this->bescrito_caso->_do->$c)) {
-                    $cq->setValue($this->bescrito_caso->_do->$c);
+                if (isset($this->bcaso_ffrecuente->_do->$c)) {
+                    $cq->setValue($this->bcaso_ffrecuente->_do->$c);
                 }
             }
         }
@@ -244,7 +244,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
             list($idc, $idp, $fecha)
                 = explode(':', $_SESSION['nuevo_copia_id']);
             unset($_SESSION['nuevo_copia_id']);
-            $d =& objeto_tabla('escrito_caso');
+            $d =& objeto_tabla('caso_ffrecuente');
             $d->id_caso = $idc;
             $d->id_prensa = $idp;
             $d->fecha = $fecha;
@@ -272,7 +272,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     {
         assert($db != null);
         assert(isset($idcaso));
-        hace_consulta($db, "DELETE FROM escrito_caso WHERE id_caso='$idcaso'");
+        hace_consulta($db, "DELETE FROM caso_ffrecuente WHERE id_caso='$idcaso'");
     }
 
     /**
@@ -308,11 +308,11 @@ class PagFuentesFrecuentes extends PagBaseMultiple
 
         $db = $this->iniVar();
         $do =& objeto_tabla('caso');
-        $do->id = $this->bescrito_caso->_do->id_caso;
+        $do->id = $this->bcaso_ffrecuente->_do->id_caso;
         $do->find();
         $do->fetch();
         $df = call_user_func(
-            $this->bescrito_caso->dateToDatabaseCallback,
+            $this->bcaso_ffrecuente->dateToDatabaseCallback,
             var_escapa($valores['fecha'], $db, 20)
         );
         $nobusca = !isset($_SESSION['forma_modo'])
@@ -329,11 +329,11 @@ class PagFuentesFrecuentes extends PagBaseMultiple
             return false;
         }
 
-        if ($this->bescrito_caso->_do->id_prensa != null) {
-            $this->bescrito_caso->_do->delete();
+        if ($this->bcaso_ffrecuente->_do->id_prensa != null) {
+            $this->bcaso_ffrecuente->_do->delete();
             $_SESSION['ff_total']--;
         }
-        $this->bescrito_caso->forceQueryType(
+        $this->bcaso_ffrecuente->forceQueryType(
             DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
         );
 
@@ -348,17 +348,17 @@ class PagFuentesFrecuentes extends PagBaseMultiple
                 $valores['fecha']['Y'] = $GLOBALS['anio_min'] - 1;
             }
             if ($valores['id_prensa'] == '') {
-                $valores['id_prensa'] = DataObjects_Prensa::id_sinInfo();
+                $valores['id_prensa'] = DataObjects_Ffrecuente::id_sinInfo();
             }
         }
 
         $ret = $this->process(
-            array(&$this->bescrito_caso, 'processForm'),
+            array(&$this->bcaso_ffrecuente, 'processForm'),
             false
         );
         $_SESSION['ff_total']++;
 
-        funcionario_caso($_SESSION['basicos_id']);
+        caso_funcionario($_SESSION['basicos_id']);
         return  $ret;
     }
 
@@ -381,7 +381,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     {
         prepara_consulta_gen(
             $w, $t, $idcaso,
-            'escrito_caso', _('Prensa'), 'id_prensa', false
+            'caso_ffrecuente', _('Ffrecuente'), 'id_prensa', false
         );
         // echo "OJO w=$w";
     }
@@ -399,19 +399,19 @@ class PagFuentesFrecuentes extends PagBaseMultiple
      * @param string $cla    Clasificación
      * @param string &$obs   Colchon para agregar notas de conversion
      *
-     * @return integer Id de prensa insertada o -1 si no pudo
+     * @return integer Id de ffrecuente insertada o -1 si no pudo
      */
     static function busca_inserta(&$db, $idcaso, $nomf, $fecha,
         $ubif, $ubi, $cla, &$obs
     ) {
         $rp = hace_consulta(
-            $db, "SELECT id FROM prensa WHERE " .
+            $db, "SELECT id FROM ffrecuente WHERE " .
             "nombre ILIKE '$nomf'"
         );
         $rows = array();
         $nr = $rp->numRows();
         if ($rp->fetchInto($row)) {
-            $idprensa = $row[0];
+            $idffrecuente = $row[0];
             if ($rp->fetchInto($row)) {
                 repObs(
                     "Hay $nr fuentes frecuentes con nombre como " .
@@ -420,9 +420,9 @@ class PagFuentesFrecuentes extends PagBaseMultiple
                 );
             }
             if (!empty($fecha)) {
-                $escritocaso = objeto_tabla('escrito_caso');
+                $escritocaso = objeto_tabla('caso_ffrecuente');
                 $escritocaso->id_caso = $idcaso;
-                $escritocaso->id_prensa = $idprensa;
+                $escritocaso->id_prensa = $idffrecuente;
                 $escritocaso->fecha = $fecha;
                 if (!empty($ubif)) {
                     $escritocaso->ubicacion_fisica = $ubif;
@@ -452,7 +452,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     static function importaRelato(&$db, $r, $idcaso, &$obs)
     {
         foreach ($r->fuente as $fuente) {
-            $idprensa = null;
+            $idffrecuente = null;
             $nomf = utf8_decode($fuente->nombre_fuente);
             if (empty($fuente->fecha_fuente)) {
                 repObs(
@@ -523,7 +523,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls)
     {
         PagOtrasFuentes::mezcla(
-            $db, $sol, $id1, $id2, $idn, array('escrito_caso')
+            $db, $sol, $id1, $id2, $idn, array('caso_ffrecuente')
         );
     }
 

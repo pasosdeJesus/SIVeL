@@ -16,14 +16,14 @@
  */
 
 /**
- * Definicion  para la tabla tipo_relacion
+ * Definicion  para la tabla trelacion
  */
 require_once 'DB_DataObject_SIVeL.php';
 require_once 'HTML/QuickForm/Action.php';
 
-class DataObjects_Tipo_relacion extends DataObjects_Basica
+class DataObjects_Trelacion extends DataObjects_Basica
 {
-    var $__table = 'tipo_relacion';         // table name
+    var $__table = 'trelacion';         // table name
     var $dirigido;                        // boolean
     var $observaciones;                   // varchar(-1)  not_null
 

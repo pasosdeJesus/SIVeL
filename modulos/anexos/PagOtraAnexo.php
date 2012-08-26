@@ -48,12 +48,12 @@ class PagOtraAnexo extends PagOtrasFuentes
     function elimina(&$valores)
     {
         $this->iniVar();
-        if ($this->bfuente_directa_caso->_do->id_fuente_directa != null) {
-            $idcaso = $this->bfuente_directa_caso->_do->id_caso;
-            $vf = "'{$this->bfuente_directa_caso->_do->id_fuente_directa}'";
+        if ($this->bcaso_fotra->_do->id_fuente_directa != null) {
+            $idcaso = $this->bcaso_fotra->_do->id_caso;
+            $vf = "'{$this->bcaso_fotra->_do->id_fuente_directa}'";
             $q =  "UPDATE anexo SET id_fuente_directa=NULL " .
                 "WHERE id_caso='$idcaso' AND id_fuente_directa=$vf";
-            $db = $this->bfuente_directa_caso->_do->getDatabaseConnection();
+            $db = $this->bcaso_fotra->_do->getDatabaseConnection();
             hace_consulta($db, $q, false) ;
         }
 
@@ -95,9 +95,9 @@ class PagOtraAnexo extends PagOtrasFuentes
         if (!isset($_SESSION['forma_modo'])
             || $_SESSION['forma_modo'] != 'busqueda'
         ) {
-            if ($this->bfuente_directa_caso->_do->id_fuente_directa != null) {
+            if ($this->bcaso_fotra->_do->id_fuente_directa != null) {
                 $cor = "OR id_fuente_directa=" .
-                    "'{$this->bfuente_directa_caso->_do->id_fuente_directa}' ";
+                    "'{$this->bcaso_fotra->_do->id_fuente_directa}' ";
             } else {
                 $cor = "";
             }
@@ -135,11 +135,11 @@ class PagOtraAnexo extends PagOtrasFuentes
 
         $puesto = false;
         $sel = $this->getElement('id_anexo');
-        if ($this->bfuente_directa_caso->_do->id_fuente_directa != null) {
+        if ($this->bcaso_fotra->_do->id_fuente_directa != null) {
             $danexo = objeto_tabla('anexo');
             $danexo->id_caso = $_SESSION['basicos_id'];
             $danexo->id_fuente_directa =
-                $this->bfuente_directa_caso->_do->id_fuente_directa;
+                $this->bcaso_fotra->_do->id_fuente_directa;
             $danexo->find();
             if ($danexo->fetch()) {
                 $sel->setValue($danexo->id);
@@ -174,8 +174,8 @@ class PagOtraAnexo extends PagOtrasFuentes
         $db = $this->iniVar();
 
         $r = parent::procesa($valores);
-        if ($this->bfuente_directa_caso->_do->id_fuente_directa != null) {
-            $vf = "'{$this->bfuente_directa_caso->_do->id_fuente_directa}'";
+        if ($this->bcaso_fotra->_do->id_fuente_directa != null) {
+            $vf = "'{$this->bcaso_fotra->_do->id_fuente_directa}'";
             if (isset($valores['id_anexo']) && $valores['id_anexo'] != '') {
                 $ida = var_escapa($valores['id_anexo'], $db);
                 $q =  "UPDATE anexo SET id_fuente_directa=$vf " .
@@ -188,7 +188,7 @@ class PagOtraAnexo extends PagOtrasFuentes
             hace_consulta($db, $q, false) ;
         }
 
-        funcionario_caso($_SESSION['basicos_id']);
+        caso_funcionario($_SESSION['basicos_id']);
         return $r;
     }
 

@@ -75,8 +75,8 @@ foreach ($lm as $m) {
 }
 
 foreach ($GLOBALS['remplaza_ficha_tabuladores'] as $a) {
-    $nom = $a[1];
-    $arc = $a[2];
+    $nom = $a[0];
+    $arc = $a[1];
     $nft = array();
     for ($nf = 0;
         $nf < count($GLOBALS['ficha_tabuladores']);

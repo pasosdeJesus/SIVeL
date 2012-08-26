@@ -140,7 +140,7 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
             $cab[] = 'Mun.';
             $sgeo = 'iddep, idmun, ';
         }
-        $dr = objeto_tabla('resultado_agresion');
+        $dr = objeto_tabla('resagresion');
         $dr->find();
         $dr->orderBy('id');
         while ($dr->fetch()) {
@@ -164,22 +164,22 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
         $q = "CREATE VIEW vestcomb (presp, iddep, idmun, nomres, cid) AS
             (SELECT presponsable.nombre,
             ubicacion.id_departamento, ubicacion.id_municipio,
-            resultado_agresion.nombre,
-            combatiente.id FROM resultado_agresion, caso, ubicacion,
+            resagresion.nombre,
+            combatiente.id FROM resagresion, caso, ubicacion,
             combatiente, presponsable
             WHERE $where AND
             ubicacion.id_caso = caso.id AND
-            resultado_agresion.id = id_resultado_agresion AND
+            resagresion.id = id_resagresion AND
             caso.id = combatiente.id_caso AND
             presponsable.id = id_organizacion_armada";
 /*        foreach (array("municipio", "clase") as $t) {
             $q .= " UNION SELECT presponsable.nombre,
                 {$t}_caso.id_departamento, {$t}_caso.id_municipio,
-                resultado_agresion.nombre, combatiente.id
-                FROM resultado_agresion, caso, {$t}_caso, combatiente,
+                resagresion.nombre, combatiente.id
+                FROM resagresion, caso, {$t}_caso, combatiente,
                 presponsable
                 WHERE $where AND {$t}_caso.id_caso = caso.id AND
-                resultado_agresion.id = id_resultado_agresion AND
+                resagresion.id = id_resagresion AND
                 caso.id = combatiente.id_caso AND
                 presponsable.id = id_organizacion_armada";
 } */

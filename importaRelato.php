@@ -36,12 +36,12 @@ require_once 'PagFuentesFrecuentes.php';
 require_once 'ResConsulta.php';
 require_once 'DataObjects/Presponsable.php';
 require_once 'DataObjects/Profesion.php';
-require_once 'DataObjects/Rango_edad.php';
+require_once 'DataObjects/Rangoedad.php';
 require_once 'DataObjects/Filiacion.php';
-require_once 'DataObjects/Sector_social.php';
+require_once 'DataObjects/Sectorsocial.php';
 require_once 'DataObjects/Organizacion.php';
 require_once 'DataObjects/Vinculoestado.php';
-require_once 'DataObjects/Tipo_sitio.php';
+require_once 'DataObjects/Tsitio.php';
 require_once 'DataObjects/Categoria.php';
 
 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
@@ -261,7 +261,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 $db, $r, $idcaso,
                 $obs
             );
-            $idprensa = null;
+            $idffrecuente = null;
             $nomf = $r->organizacion_responsable;
             $fecha = date('Y-m-d');
             $orgfuente = PagFuentesFrecuentes::busca_inserta(
@@ -417,23 +417,23 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             //    . " edad=$edad<br>\n";
                             $idredad = rango_de_edad($edad);
                         } else {
-                            $redad = dato_en_obs($victima, 'rango_edad');
+                            $redad = dato_en_obs($victima, 'rangoedad');
                             //echo "OJO redad=$redad<br>\n";
                             if ($redad != null) {
                                 $idredad = (int)conv_basica(
-                                    $db, 'rango_edad',
+                                    $db, 'rangoedad',
                                     $redad, $obs, false, 'rango'
                                 );
                             }
                         }
                         //echo "OJO 2 idredad=$idredad<br>\n";
                         if ($idredad == -1) {
-                            $idredad = DataObjects_Rango_edad::idSinInfo();
+                            $idredad = DataObjects_Rangoedad::idSinInfo();
                         }
                         $dvictima->id_rango_edad = $idredad;
                         foreach (array('ocupacion' => 'profesion',
                             'iglesia' => 'filiacion',
-                            'sector_condicion' => 'sector_social',
+                            'sector_condicion' => 'sectorsocial',
                             'organizacion' =>  'organizacion'
                         ) as $cr => $cs
                         ) {
@@ -636,7 +636,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     }
                 }
             }
-            funcionario_caso($idcaso);
+            caso_funcionario($idcaso);
 
             $html_rep = ResConsulta::reporteGeneralHtml(
                 $idcaso, $db,

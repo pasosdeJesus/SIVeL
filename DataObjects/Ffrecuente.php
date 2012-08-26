@@ -15,13 +15,10 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
-/**
- * Definicion para la tabla rango_edad.
- */
 require_once 'DataObjects/Basica.php';
 
 /**
- * Definicion para la tabla rango_edad.
+ * Definicion para la tabla ffrecuente.
  * Ver documentación de DataObjects_Basica.
  *
  * @category SIVeL
@@ -31,12 +28,10 @@ require_once 'DataObjects/Basica.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Basica
  */
-class DataObjects_Rango_edad extends DataObjects_Basica
+class DataObjects_Ffrecuente extends DataObjects_Basica
 {
-    var $__table = 'rango_edad';                      // table name
-    var $rango;                           // varchar(-1)  not_null
-    var $limiteinferior;
-    var $limitesuperior;
+    var $__table = 'ffrecuente';                          // table name
+    var $tipo_fuente;                     // varchar(-1)  not_null
 
     /**
      * Constructora
@@ -46,57 +41,52 @@ class DataObjects_Rango_edad extends DataObjects_Basica
     {
         parent::__construct();
 
-        $this->nom_tabla = _('Rango de Edad');
-        $this->fb_fieldLabels = array(
-            'nombre' => _('Nombre'),
-            'rango' => _('Rango'),
-            'limiteinferior' => _('Límite Inferior'),
-            'limitesuperior' => _('Límite Superior'),
+        $this->nom_tabla = _('Fuentes frecuentes');
+        $this->fb_fieldLabels= array(
+            'tipo_fuente'=> _('Tipo de Fuente'),
             'fechacreacion' => _('Fecha de Creación'),
             'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
         );
 
-
     }
 
 
-    var $fb_linkDisplayFields = array('rango');
-    var $fb_select_display_field = 'rango';
-    var $fb_linkOrderFields = array('nombre');
+    var $fb_enumFields = array('tipo_fuente');
+    var $es_enumOptions = array(
+        'tipo_fuente' => array(
+            'Directa' => 'Directa',
+            'Indirecta' => 'Indirecta'
+        )
+    );
     var $fb_preDefOrder = array(
         'nombre',
-        'rango',
-        'limiteinferior',
-        'limitesuperior',
+        'tipo_fuente',
         'fechacreacion',
         'fechadeshabilitacion',
     );
     var $fb_fieldsToRender = array(
         'nombre',
-        'rango',
-        'limiteinferior',
-        'limitesuperior',
+        'tipo_fuente',
         'fechacreacion',
         'fechadeshabilitacion',
     );
     var $fb_fieldsRequired = array(
         'nombre',
-        'rango',
-        'limiteinferior',
-        'limitesuperior',
+        'tipo_fuente',
         'fechacreacion',
     );
+
 
 
 
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'
      *
-     * @return int Id.
+     * @return integer Id
      */
     static function idSinInfo()
     {
-        return 6;
+        return 0;
     }
 
 }

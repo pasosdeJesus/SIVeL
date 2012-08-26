@@ -75,7 +75,7 @@ class DataObjects_Categoria_caso extends DB_DataObject_SIVeL
             $e->setLabel($GLOBALS['etiqueta']['clasificacion']);
         }
         $tvio =  htmlentities_array(
-            $db->getAssoc("SELECT id, nombre FROM tipo_violencia;")
+            $db->getAssoc("SELECT id, nombre FROM tviolencia;")
         );
         //Aqui podria ser con WHERE fechadeshabilitacion<>null para
         //registros nuevos. Pero en registros antiguos no.

@@ -108,12 +108,12 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
 
 
         if ($pSegun == 'id_rango_edad') {
-            consulta_and_sinap($where, "victima.id_rango_edad","rango_edad.id");
-//$tablas .= ", rango_edad"; */
+            consulta_and_sinap($where, "victima.id_rango_edad","rangoedad.id");
+//$tablas .= ", rangoedad"; */
             $campoSegun = "id_rango_edad";
-            $cfSegun = "rango_edad.rango";
-            $tablaSegun = "rango_edad, ";
-            $condSegun = "AND rango_edad.id=$cons2.id_rango_edad";
+            $cfSegun = "rangoedad.rango";
+            $tablaSegun = "rangoedad, ";
+            $condSegun = "AND rangoedad.id=$cons2.id_rango_edad";
             $titSegun = 'Edad';
         }  elseif ($pSegun == 'sexo') {
             $campoSegun = "sexo";
@@ -136,13 +136,13 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
             $campoSegun = "acto.id_p_responsable";
         } elseif ($pSegun == 'id_sector_social') {
             $campoSegun = "id_sector_social";
-            $cfSegun = "sector_social.nombre";
-            $tablaSegun = "sector_social, ";
+            $cfSegun = "sectorsocial.nombre";
+            $tablaSegun = "sectorsocial, ";
             consulta_and_sinap(
                 $where, "victima.id_sector_social",
-                "sector_social.id"
+                "sectorsocial.id"
             );
-            $condSegun = "AND sector_social.id=$cons2.id_sector_social";
+            $condSegun = "AND sectorsocial.id=$cons2.id_sector_social";
             $titSegun = 'Sector Social';
         } elseif ($pSegun == 'meses') {
             $campoSegun = "extract(year from fecha) || '-' " .
@@ -264,10 +264,10 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
         // El método para departamento y municipio es machete porque cuando
         // no hay asigna santa-marta y así saldría e.g PUTUMAYO    SANTA MARTA
         $q3 = "SELECT $cfSegun3 $tDep $tMun
-            TRIM(parametros_reporte_consolidado.rotulo),
+            TRIM(pconsolidado.rotulo),
             COUNT(cast($cons2.id_persona as text) || ' ' || cast($cons2.id_caso as text))
             FROM $tablaSegun departamento, municipio,
-            parametros_reporte_consolidado,
+            pconsolidado,
             $cons2
             WHERE
             (($cons2.id_departamento IS NULL AND departamento.id = 47) OR
@@ -276,10 +276,10 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
             AND municipio.id_departamento = 47)  OR
             (municipio.id = $cons2.id_municipio
             AND municipio.id_departamento = $cons2.id_departamento))
-            AND col_rep_consolidado = parametros_reporte_consolidado.no_columna
+            AND col_rep_consolidado = pconsolidado.no_columna
             $condSegun
-            GROUP BY $cfSegun2 $gDep $gMun parametros_reporte_consolidado.rotulo
-            ORDER BY $cfSegun2 $gDep $gMun parametros_reporte_consolidado.rotulo
+            GROUP BY $cfSegun2 $gDep $gMun pconsolidado.rotulo
+            ORDER BY $cfSegun2 $gDep $gMun pconsolidado.rotulo
             ";
 
         //echo "q3 es $q3<hr>"; die("x");
@@ -299,7 +299,7 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
             $tcol[$cab[$i]]=1;
         }
         $q4='SELECT no_columna, rotulo
-            FROM parametros_reporte_consolidado
+            FROM pconsolidado
             ORDER BY 1';
         $rcon = hace_consulta($db, $q4);
         if (PEAR::isError($rcon)) {
@@ -510,7 +510,7 @@ function buildForm()
     );
     $options= array('' => '') + htmlentities_array(
         $db->getAssoc(
-            "SELECT  id, nombre FROM tipo_violencia " .
+            "SELECT  id, nombre FROM tviolencia " .
             "ORDER BY id"
         )
     );
@@ -547,11 +547,11 @@ function buildForm()
         array('' => '',
         'id_p_responsable' => 'ACTOS '
             . strtoupper($GLOBALS['etiqueta']['p_responsable']),
-        'id_rango_edad' => strtoupper($GLOBALS['etiqueta']['rango_edad']),
+        'id_rango_edad' => strtoupper($GLOBALS['etiqueta']['rangoedad']),
         'sexo' => strtoupper($GLOBALS['etiqueta']['sexo']),
         'id_filiacion' => strtoupper($GLOBALS['etiqueta']['filiacion']),
         'id_profesion' => strtoupper($GLOBALS['etiqueta']['profesion']),
-        'id_sector_social' => strtoupper($GLOBALS['etiqueta']['sector_social']),
+        'id_sector_social' => strtoupper($GLOBALS['etiqueta']['sectorsocial']),
         'id_organizacion' => strtoupper($GLOBALS['etiqueta']['organizacion']),
         'meses' => 'MESES',
         'id_profesion' => 'PROFESION',

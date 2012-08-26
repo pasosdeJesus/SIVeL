@@ -34,7 +34,7 @@ $post['clasificacion'] = 'clasificacion';
 $post['ubicacion_fisica'] = 'ubicacion';
 $post['_qf_frecuentes_siguienteMultiple'] = 'Fuente siguiente';
 $post['_qf_default'] = 'frecuentes:siguiente';
-pasaPestanaFicha($db, array("escrito_caso"), $post, 1);
+pasaPestanaFicha($db, array("caso_ffrecuente"), $post, 1);
 
 exit(0);
 ?>

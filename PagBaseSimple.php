@@ -229,7 +229,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      * Verifica y salva datos.
      * Típicamente debe validar datos, preprocesar de requerirse,
      * procesar con función process y finalmente registrar evento con función
-     * funcionario_caso
+     * caso_funcionario
      *
      * @param array &$valores Valores enviados por el formulario.
      *
@@ -258,7 +258,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
 
         // Otros
 
-        funcionario_caso($_SESSION['basicos_id']);
+        caso_funcionario($_SESSION['basicos_id']);
         return  $ret;
     }
 

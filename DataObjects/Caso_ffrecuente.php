@@ -16,14 +16,14 @@
  */
 
 /**
- * Definicion para la tabla escrito_caso.
+ * Definicion para la tabla caso_ffrecuente.
  */
 require_once 'DB_DataObject_SIVeL.php';
 require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
 
 /**
- * Definicion para la tabla escrito_caso.
+ * Definicion para la tabla caso_ffrecuente.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -33,10 +33,10 @@ require_once $_SESSION['dirsitio'] . '/conf.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Escrito_caso extends DB_DataObject_SIVeL
+class DataObjects_Caso_ffrecuente extends DB_DataObject_SIVeL
 {
 
-    var $__table = 'escrito_caso';                    // table name
+    var $__table = 'caso_ffrecuente';                    // table name
     var $fecha;                           // date(4)  multiple_key
     var $ubicacion;                       // varchar(-1)
     var $clasificacion;                   // varchar(-1)

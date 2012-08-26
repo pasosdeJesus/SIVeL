@@ -16,14 +16,14 @@
  */
 
 /**
- * Definicion para la tabla fuente_directa_caso.
+ * Definicion para la tabla caso_fotra.
  */
 require_once 'DB_DataObject_SIVeL.php';
 require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
 
 /**
- * Definicion para la tabla fuente_directa_caso.
+ * Definicion para la tabla caso_fotra.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -33,10 +33,10 @@ require_once $_SESSION['dirsitio'] . '/conf.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Fuente_directa_caso extends DB_DataObject_SIVeL
+class DataObjects_Caso_fotra extends DB_DataObject_SIVeL
 {
 
-    var $__table = 'fuente_directa_caso';             // table name
+    var $__table = 'caso_fotra';             // table name
     var $id_caso;                         // int4(4)  multiple_key
     var $id_fuente_directa;               // int4(4)  multiple_key
     var $anotacion;                       // varchar(-1)

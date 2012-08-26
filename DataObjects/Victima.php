@@ -22,9 +22,9 @@ require_once 'DB_DataObject_SIVeL.php';
 require_once "Profesion.php";
 require_once "Etnia.php";
 require_once "Iglesia.php";
-require_once "Rango_edad.php";
+require_once "Rangoedad.php";
 require_once "DataObjects/Filiacion.php";
-require_once "Sector_social.php";
+require_once "Sectorsocial.php";
 require_once "Organizacion.php";
 require_once "Vinculoestado.php";
 require_once "Presponsable.php";
@@ -142,10 +142,10 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
     static function camposSinInfo()
     {
         return array(
-            'id_rango_edad'=> DataObjects_Rango_edad::idSinInfo(),
+            'id_rango_edad'=> DataObjects_Rangoedad::idSinInfo(),
             'id_profesion'=> DataObjects_Profesion::idSinInfo(),
             'id_filiacion' => DataObjects_Filiacion::idSinInfo(),
-            'id_sector_social' => DataObjects_Sector_social::idSinInfo(),
+            'id_sector_social' => DataObjects_Sectorsocial::idSinInfo(),
             'id_organizacion' => DataObjects_Organizacion::idSinInfo(),
             'id_vinculo_estado' => DataObjects_Vinculoestado::idSinInfo(),
             'id_organizacion_armada' =>

@@ -104,28 +104,28 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         $condSegun = "";
         $distinct = "DISTINCT ";
         if ($pSinFiliacion != 1) {
-            $tablaFil = "filiacion_comunidad, ";
+            $tablaFil = "comunidad_filiacion, ";
             consulta_and(
-                $db, $where, "filiacion_comunidad.id_filiacion",
+                $db, $where, "comunidad_filiacion.id_filiacion",
                 DataObjects_Filiacion::idSinInfo(), "<>"
             );
             consulta_and_sinap(
-                $where, "filiacion_comunidad.id_caso",
+                $where, "comunidad_filiacion.id_caso",
                 "caso.id"
             );
             consulta_and_sinap(
-                $where, "filiacion_comunidad.id_grupoper",
+                $where, "comunidad_filiacion.id_grupoper",
                 "grupoper.id"
             );
         }
 
         if ($pSegun == 'id_rango_edad') {
-/*            consulta_and_sinap($where, "victima.id_rango_edad","rango_edad.id");
-            $tablas .= ", rango_edad"; */
+/*            consulta_and_sinap($where, "victima.id_rango_edad","rangoedad.id");
+            $tablas .= ", rangoedad"; */
             $campoSegun = "id_rango_edad";
-            $cfSegun = "rango_edad.rango";
-            $tablaSegun = "rango_edad, ";
-            $condSegun = "AND rango_edad.id=$cons2.id_rango_edad";
+            $cfSegun = "rangoedad.rango";
+            $tablaSegun = "rangoedad, ";
+            $condSegun = "AND rangoedad.id=$cons2.id_rango_edad";
             $titSegun = 'Edad';
         }  else if ($pSegun == 'sexo') {
             $campoSegun = "sexo";
@@ -140,11 +140,11 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             $condSegun = "AND presponsable.id=$cons2.id_p_responsable";
             $titSegun = 'P. Responsable';
             consulta_and_sinap(
-                $where, "victima_colectiva.id_grupoper",
+                $where, "victimacolectiva.id_grupoper",
                 "grupoper.id"
             );
             consulta_and_sinap(
-                $where, "victima_colectiva.id_grupoper",
+                $where, "victimacolectiva.id_grupoper",
                 "actocolectivo.id_grupoper"
             );
             consulta_and_sinap(
@@ -165,9 +165,9 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             $titSegun = 'Filiación';
         } else if ($pSegun == 'id_sector_social') {
             $campoSegun = "id_sector_social";
-            $cfSegun = "sector_social.nombre";
-            $tablaSegun = "sector_social, ";
-            $condSegun = "AND sector_social.id=$cons2.id_sector_social";
+            $cfSegun = "sectorsocial.nombre";
+            $tablaSegun = "sectorsocial, ";
+            $condSegun = "AND sectorsocial.id=$cons2.id_sector_social";
             $titSegun = 'Sector Social';
         } else if ($pSegun == 'meses') {
             $campoSegun = "extract(year from fecha) || '-' || lpad(cast(extract(month from fecha) as text), 2, cast('0' as text))";
@@ -204,18 +204,18 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             $cab[] = 'N. Víctimizaciones';
         }
         $tCat .= '';
-        $tQue .= "victima_colectiva, grupoper $tCat, ";
+        $tQue .= "victimacolectiva, grupoper $tCat, ";
         consulta_and_sinap($where, "actocolectivo.id_caso","caso.id");
         consulta_and_sinap(
             $where, "actocolectivo.id_grupoper",
             "grupoper.id"
         );
         consulta_and_sinap(
-            $where, "victima_colectiva.id_grupoper",
+            $where, "victimacolectiva.id_grupoper",
             "grupoper.id"
         );
         consulta_and_sinap(
-            $where, "victima_colectiva.id_caso",
+            $where, "victimacolectiva.id_caso",
             "caso.id"
         );
         consulta_and_sinap(
@@ -224,7 +224,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         );
         $cCons = 'id_grupoper';
         $pQ1='id_grupoper, ';
-        $pQ1sel = 'victima_colectiva.id_grupoper, ';
+        $pQ1sel = 'victimacolectiva.id_grupoper, ';
         $tablas = $tablaFil . $tablaSegun . "$tQue actocolectivo, caso, categoria ";
         $campos = array('caso_id' => 'Cód.');
 
@@ -246,7 +246,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         $q1 = "CREATE VIEW $cons ($pQ1 personas_aprox, id_caso, " .
         "id_tipo_violencia, " .
         "id_supracategoria, id_categoria, col_rep_consolidado" .
-        $pSegun2 .") AS SELECT $distinct $pQ1sel victima_colectiva.personas_aprox, " .
+        $pSegun2 .") AS SELECT $distinct $pQ1sel victimacolectiva.personas_aprox, " .
         "caso.id, " .
         "categoria.id_tipo_violencia, categoria.id_supracategoria, " .
         "actocolectivo.id_categoria, categoria.col_rep_consolidado " .
@@ -288,20 +288,20 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
 // El método para departamento y municipio es machete porque cuando
 // no hay asigna santa-marta y así saldría e.g PUTUMAYO    SANTA MARTA
         $q3 = "SELECT $cfSegun3 $tDep $tMun
-            TRIM(parametros_reporte_consolidado.rotulo),
+            TRIM(pconsolidado.rotulo),
             SUM($cons2.personas_aprox)
             FROM $tablaSegun departamento, municipio,
-            parametros_reporte_consolidado, $cons2
+            pconsolidado, $cons2
             WHERE (($cons2.id_departamento IS NULL AND departamento.id = 47) OR
             departamento.id = $cons2.id_departamento)
             AND (($cons2.id_municipio IS NULL AND municipio.id = 1
             AND municipio.id_departamento = 47)  OR
             (municipio.id = $cons2.id_municipio
             AND municipio.id_departamento = $cons2.id_departamento))
-            AND col_rep_consolidado = parametros_reporte_consolidado.no_columna
+            AND col_rep_consolidado = pconsolidado.no_columna
             $condSegun
-            GROUP BY $cfSegun2 $gDep $gMun parametros_reporte_consolidado.rotulo
-            ORDER BY $cfSegun2 $gDep $gMun parametros_reporte_consolidado.rotulo
+            GROUP BY $cfSegun2 $gDep $gMun pconsolidado.rotulo
+            ORDER BY $cfSegun2 $gDep $gMun pconsolidado.rotulo
         ";
         //echo "q3 es $q3<hr>";
         $result = hace_consulta($db, $q3);
@@ -319,7 +319,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         for ($i = 0; $i < count($cab)-2; $i++) {
             $tcol[$cab[$i]]=1;
         }
-        $q4='SELECT no_columna, rotulo FROM parametros_reporte_consolidado " .
+        $q4='SELECT no_columna, rotulo FROM pconsolidado " .
         "ORDER BY 1';
         $rcon = hace_consulta($db, $q4);
         if (PEAR::isError($rcon)) {
@@ -529,7 +529,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
         );
         $options= array('' => '') + htmlentities_array(
             $db->getAssoc(
-                "SELECT  id, nombre FROM tipo_violencia " .
+                "SELECT  id, nombre FROM tviolencia " .
                 "ORDER BY id"
             )
         );

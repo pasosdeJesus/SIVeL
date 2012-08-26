@@ -119,12 +119,12 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $distinct = 'DISTINCT';
         if ($pSegun == 'id_rango_edad') {
             consulta_and_sinap(
-                $where, "victima.id_rango_edad", "rango_edad.id"
+                $where, "victima.id_rango_edad", "rangoedad.id"
             );
             $campoSegun = "id_rango_edad";
-            $cfSegun = "rango_edad.rango";
-            $tablaSegun = "rango_edad, ";
-            $condSegun = "AND rango_edad.id=$cons2.id_rango_edad";
+            $cfSegun = "rangoedad.rango";
+            $tablaSegun = "rangoedad, ";
+            $condSegun = "AND rangoedad.id=$cons2.id_rango_edad";
             $titSegun = 'Rango de Edad';
         } elseif ($pSegun == 'sexo') {
             $campoSegun = "sexo";
@@ -302,12 +302,12 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             ;
         //echo "q2=$q2<br>";
         $result = hace_consulta($db, $q2);
-        $q3="SELECT $cfSegun3 $tDep $tMun trim(tipo_violencia.nombre), " .
+        $q3="SELECT $cfSegun3 $tDep $tMun trim(tviolencia.nombre), " .
             "trim(supracategoria.nombre), trim(categoria.nombre), " .
             "count($cons2.$cCons) FROM
-        $tGeo $tablaSegun tipo_violencia,
+        $tGeo $tablaSegun tviolencia,
         supracategoria, categoria , $cons2
-        WHERE $cons2 . id_tipo_violencia = tipo_violencia.id
+        WHERE $cons2 . id_tipo_violencia = tviolencia.id
         AND $cons2 . id_tipo_violencia = supracategoria.id_tipo_violencia
         AND $cons2 . id_supracategoria = supracategoria.id
         AND $cons2 . id_tipo_violencia = categoria.id_tipo_violencia
@@ -321,9 +321,9 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             $q3 .= " AND municipio.id_departamento=$cons2.id_departamento ";
         }
         $q3 .= " $condSegun
-            GROUP BY $cfSegun2 $gDep $gMun tipo_violencia.nombre,
+            GROUP BY $cfSegun2 $gDep $gMun tviolencia.nombre,
             supracategoria.nombre, categoria.nombre
-            ORDER BY $cfSegun2 $gDep $gMun tipo_violencia.nombre,
+            ORDER BY $cfSegun2 $gDep $gMun tviolencia.nombre,
             supracategoria.nombre, categoria.nombre
             ";
 
@@ -486,7 +486,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
         );
         $options= array('' => '') + htmlentities_array(
             $db->getAssoc(
-                "SELECT  id, nombre FROM tipo_violencia " .
+                "SELECT  id, nombre FROM tviolencia " .
                 "ORDER BY id"
             )
         );
@@ -525,12 +525,12 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
             'id_p_responsable' =>
                 'ACTOS ' .
                 strtoupper($GLOBALS['etiqueta']['p_responsable']),
-            'id_rango_edad' => strtoupper($GLOBALS['etiqueta']['rango_edad']),
+            'id_rango_edad' => strtoupper($GLOBALS['etiqueta']['rangoedad']),
             'sexo' => strtoupper($GLOBALS['etiqueta']['sexo']),
             'id_filiacion' => strtoupper($GLOBALS['etiqueta']['filiacion']),
             'id_profesion' => strtoupper($GLOBALS['etiqueta']['profesion']),
             'id_sector_social' =>
-                strtoupper($GLOBALS['etiqueta']['sector_social']),
+                strtoupper($GLOBALS['etiqueta']['sectorsocial']),
             'id_organizacion' =>
                 strtoupper($GLOBALS['etiqueta']['organizacion']),
             'meses' => _('MESES'),

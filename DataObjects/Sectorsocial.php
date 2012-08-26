@@ -16,12 +16,12 @@
  */
 
 /**
- * Definicion para la tabla sector_social
+ * Definicion para la tabla sectorsocial
  */
 require_once 'DataObjects/Basica.php';
 
 /**
- * Definicion para la tabla sector_social
+ * Definicion para la tabla sectorsocial
  * Ver documentación de DataObjects_Basica.
  *
  * @category SIVeL
@@ -31,9 +31,9 @@ require_once 'DataObjects/Basica.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Basica
  */
-class DataObjects_Sector_social extends DataObjects_Basica
+class DataObjects_Sectorsocial extends DataObjects_Basica
 {
-    var $__table = 'sector_social';                       // table name
+    var $__table = 'sectorsocial';                       // table name
 
     /**
      * Constructora

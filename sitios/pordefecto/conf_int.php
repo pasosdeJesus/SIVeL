@@ -137,12 +137,12 @@ $GLOBALS['menu_tablas_basicas'] = array(
     array('title' => _('Información geográfica'), 'url'=> null, 'sub' => array(
         array('title'=>_('Departamento'), 'url'=>'departamento','sub'=>null),
         array('title'=>_('Municipio'), 'url'=>'municipio', 'sub'=>null),
-        array('title'=>_('Tipo Clase'), 'url'=>'tipo_clase', 'sub'=>null),
+        array('title'=>_('Tipo Clase'), 'url'=>'tclase', 'sub'=>null),
 
         array('title'=>_('Clase'), 'url'=>'clase', 'sub'=>null),
         array('title'=>_('Región'), 'url'=>'region', 'sub'=>null),
         array('title'=>_('Frontera'), 'url'=>'frontera', 'sub'=>null),
-        array('title'=>_('Tipo de Sitio'), 'url'=>'tipo_sitio', 'sub'=>null),
+        array('title'=>_('Tipo de Sitio'), 'url'=>'tsitio', 'sub'=>null),
         ),
     ),
     array('title'=>_('Información implicado'), 'url'=> null, 'sub' => array(
@@ -151,15 +151,15 @@ $GLOBALS['menu_tablas_basicas'] = array(
         array('title'=>_('Iglesia'), 'url'=>'iglesia', 'sub'=>null),
         array('title'=>_('Organización Social'), 'url'=>'organizacion', 'sub'=>null),
         array('title'=>_('Profesión'), 'url'=>'profesion', 'sub'=>null),
-        array('title'=>_('Rango de Edad'), 'url'=>'rango_edad', 'sub'=>null),
-        array('title'=>_('Resultado Agresión'), 'url'=>'resultado_agresion', 'sub'=>null),
-        array('title'=>_('Sector Social'), 'url'=>'sector_social', 'sub'=>null),
-        array('title'=>_('Tipo de Relación'), 'url'=>'tipo_relacion', 'sub'=>null),
+        array('title'=>_('Rango de Edad'), 'url'=>'rangoedad', 'sub'=>null),
+        array('title'=>_('Resultado Agresión'), 'url'=>'resagresion', 'sub'=>null),
+        array('title'=>_('Sector Social'), 'url'=>'sectorsocial', 'sub'=>null),
+        array('title'=>_('Tipo de Relación'), 'url'=>'trelacion', 'sub'=>null),
         array('title'=>_('Vínculo con el Estado'), 'url'=>'vinculoestado', 'sub'=>null),
         ),
     ),
     array('title'=>_('Información caso'), 'url'=> null, 'sub' => array(
-        array('title'=>_('Tipo de Violencia'), 'url'=>'tipo_violencia', 'sub'=>null),
+        array('title'=>_('Tipo de Violencia'), 'url'=>'tviolencia', 'sub'=>null),
         array('title'=>_('Supracategoria'), 'url'=>'supracategoria', 'sub'=>null),
         array('title'=>_('Categoria'), 'url'=>'categoria', 'sub'=>null),
         array('title'=>_('Contexto'), 'url'=>'contexto', 'sub'=>null),
@@ -169,12 +169,12 @@ $GLOBALS['menu_tablas_basicas'] = array(
         ),
     ),
     array('title'=>_('Información Fuentes'), 'url'=> null, 'sub' => array(
-        array('title'=>_('Fuentes Frecuentes'), 'url'=>'prensa', 'sub'=>null),
+        array('title'=>_('Fuentes Frecuentes'), 'url'=>'ffrecuente', 'sub'=>null),
         ),
     ),
     array('title'=>_('Reportes'), 'url'=> null, 'sub' => array(
         array('title'=>_('Columnas de Reporte Consolidado'),
-            'url'=>'parametros_reporte_consolidado', 'sub'=>null),
+            'url'=>'pconsolidado', 'sub'=>null),
         ),
     ),
 );
@@ -237,9 +237,9 @@ $GLOBALS['etiqueta'] = array(
     'hijos'=> _('Hijos'),
     'sexo'=> _('Sexo'),
     'profesion'=> _('Profesión'),
-    'rango_edad'=> _('Rango de Edad'),
+    'rangoedad'=> _('Rango de Edad'),
     'filiacion'=> _('Filiación Política'),
-    'sector_social'=> _('Sector Social'),
+    'sectorsocial'=> _('Sector Social'),
     'organizacion'=> _('Organización Social'),
     'vinculoestado'=> _('Vínculo con el Estado'),
     'organizacion_armada'=> _('Organización Armada Víctima'),
@@ -247,7 +247,7 @@ $GLOBALS['etiqueta'] = array(
 
     'p_responsable'=> _('Presunto Responsable'),
     'antecedentes'=> _('Antecedentes'),
-    'tipo_violencia'=> _('Tipo Violencia'),
+    'tviolencia'=> _('Tipo Violencia'),
 
 // Víctima Colectiva
     'victimas_colectivas'=> _('Víctimas Colectivas'),
@@ -256,11 +256,11 @@ $GLOBALS['etiqueta'] = array(
     'personas_aprox' => _('Num. Aprox. Personas'),
     'anotacion' => _('Anotaciones'),
 
-//    'tipo_violencia' =>
+//    'tviolencia' =>
 //    'antecedentes' =>
 //    'p_responsable'=> _('Presunto Responsable'),
-//    'rango_edad'=> _('Rango de Edad'),
-//    'sector_social'=> _('Sector Social'),
+//    'rangoedad'=> _('Rango de Edad'),
+//    'sectorsocial'=> _('Sector Social'),
 //    'vinculoestado'=> _('Vínculo con el Estado'),
 //    'filiacion'=> _('Filiación Política'),
 //    'profesion'=> _('Profesión'),
@@ -273,14 +273,14 @@ $GLOBALS['etiqueta'] = array(
     'alias'=> _('Alias'),
 //       'edad'=> _('Edad'),
 //       'sexo'=> _('Sexo'),
-//       'rango_edad' => _('Rango de Edad'),
-//       'sector_social'=> _('Sector Social'),
+//       'rangoedad' => _('Rango de Edad'),
+//       'sectorsocial'=> _('Sector Social'),
 //       'vinculoestado'=> _('Vínculo Estado'),
 //       'filiacion'=> _('Filiación Política'),
 //       'profesion'=> _('Profesion'),
 //       'organizacion'=> _('Organización Social'),
 //       'organizacion_armada'=> _('Organización Armada'),
-    'resultado_agresion'=> _('Resultado Agresión'),
+    'resagresion'=> _('Resultado Agresión'),
 
 //Actos
     'Actos' => _('Actos'),

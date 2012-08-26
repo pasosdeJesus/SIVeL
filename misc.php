@@ -529,7 +529,7 @@ function res_valida(&$db, $mens, $cons, $confunc = false)
             "CREATE VIEW primerfuncionario AS
             SELECT id_caso, MIN(fecha_inicio) AS fecha_inicio,
             FIRST(id_funcionario) AS id_funcionario
-            FROM funcionario_caso
+            FROM caso_funcionario
             GROUP BY id_caso ORDER BY id_caso;", false, false
         );
 
@@ -898,7 +898,7 @@ function enlaces_casos_persona_html(
         }
     }
 
-    $q = "SELECT id_caso FROM relacion_personas, victima
+    $q = "SELECT id_caso FROM persona_trelacion, victima
         WHERE id_persona1 = id_persona AND id_persona2 = '$idp'";
     $r = hace_consulta($db, $q);
     $campos = array();
@@ -926,7 +926,7 @@ function enlaces_casos_persona_html(
      */
 function enlaces_casos_grupoper_html(&$db, $idcaso, $idc, &$comovic)
 {
-    $q = "SELECT id_caso FROM victima_colectiva WHERE id_grupoper = '$idc'";
+    $q = "SELECT id_caso FROM victimacolectiva WHERE id_grupoper = '$idc'";
     $r = hace_consulta($db, $q);
     $campos = array();
     $sep = "";
@@ -1391,7 +1391,7 @@ function ref_dataobject($base, $tabla)
  *
  * @return void
      */
-function funcionario_caso($idcaso)
+function caso_funcionario($idcaso)
 {
     if ($idcaso == $GLOBALS['idbus']) {
         return;
@@ -1401,7 +1401,7 @@ function funcionario_caso($idcaso)
     ) {
         die_esc(_("No es funcionario"));
     }
-    $dfc = objeto_tabla('funcionario_caso');
+    $dfc = objeto_tabla('caso_funcionario');
     $dfc->id_caso = $idcaso;
     $dfc->id_funcionario = $_SESSION['id_funcionario'];
     if ($dfc->find()<1) {
@@ -1580,9 +1580,9 @@ function rango_de_edad($er)
     //echo "OJO rango_de_edad($er)<br>";
     $e = (int)$er;
 
-    $do = objeto_tabla('rango_edad');
+    $do = objeto_tabla('rangoedad');
     $do->find();
-    $res = DataObjects_Rango_edad::idSinInfo();
+    $res = DataObjects_Rangoedad::idSinInfo();
     while ($do->fetch()) {
         if ($do->limiteinferior <= $er && $er <= $do->limitesuperior) {
             $res = $do->id;
@@ -1603,7 +1603,7 @@ function rango_de_edad($er)
      */
 function verifica_edad_y_rango($e, $r)
 {
-    $do = objeto_tabla('rango_edad');
+    $do = objeto_tabla('rangoedad');
     $do->get((int)$r);
     if (PEAR::isError($do)) {
         die_esc(
@@ -1767,7 +1767,7 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
     $w2 = "";
     $cpm = array();
     foreach ($duc->fb_fieldsToRender as $k => $campo) {
-        if ($rel != "fuente_directa_caso" || $campo != "fecha") {
+        if ($rel != "caso_fotra" || $campo != "fecha") {
             $cpm[$k] = $campo;
         }
     }
@@ -1978,10 +1978,10 @@ function valida_caso($idcaso)
     $db =& $dcaso->getDatabaseConnection();
     // Completo: ubicación, fuentes, clasif., pr. resp,
     // victima excepto en ciertas bélicas, memo.
-    $q = "SELECT COUNT(*) FROM escrito_caso WHERE id_caso='"
+    $q = "SELECT COUNT(*) FROM caso_ffrecuente WHERE id_caso='"
         .$idcaso . "';";
     $nfue = (int)$db->getOne($q);
-    $q = "SELECT COUNT(*) FROM fuente_directa_caso " .
+    $q = "SELECT COUNT(*) FROM caso_fotra " .
         "WHERE id_caso='" . $idcaso . "';";
     $nfue+=(int)$db->getOne($q);
     if ($nfue <= 0) {
@@ -2011,7 +2011,7 @@ function valida_caso($idcaso)
     $q = "SELECT COUNT(*) FROM victima " .
         "WHERE id_caso='" . $idcaso . "';";
     $nvic = (int)$db->getOne($q);
-    $q = "SELECT COUNT(*) FROM victima_colectiva " .
+    $q = "SELECT COUNT(*) FROM victimacolectiva " .
         "WHERE id_caso='" . $idcaso . "';";
     $nvic+=(int)$db->getOne($q);
     $q = "SELECT COUNT(*) FROM combatiente " .
@@ -2153,7 +2153,7 @@ function a_elementos_xml(&$r, $ind, $ad, $ren = null)
  * por convertir a XML ad como observacion cuyo tipo es $camporel.
  *
  * @param array  &$ad         Arreglo al cual agrega información convertida
- * @param string $tabla       nombre de tabla (e.g sector_social_comunidad)
+ * @param string $tabla       nombre de tabla (e.g comunidad_sectorsocial)
  * @param string $id          Arreglo con llaves y valores
  * @param string $camporel    Campo de $tabla
  * @param string $camponombre nombre de campo por agregar a $ad

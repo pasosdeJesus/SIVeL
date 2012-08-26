@@ -16,12 +16,12 @@
  */
 
 /**
- * Definicion para la tabla victima_colectiva.
+ * Definicion para la tabla victimacolectiva.
  */
 require_once 'DB_DataObject_SIVeL.php';
 
 /**
- * Definicion para la tabla victima_colectiva.
+ * Definicion para la tabla victimacolectiva.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -31,10 +31,10 @@ require_once 'DB_DataObject_SIVeL.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Victima_colectiva extends DB_DataObject_SIVeL
+class DataObjects_Victimacolectiva extends DB_DataObject_SIVeL
 {
 
-    var $__table = 'victima_colectiva';               // table name
+    var $__table = 'victimacolectiva';               // table name
     var $id_grupoper;                     // int4(4)  not_null primary_key
     var $id_caso;                     // int4(4)  not_null primary_key
     var $personas_aprox;                  // int4(4)
@@ -128,20 +128,20 @@ class DataObjects_Victima_colectiva extends DB_DataObject_SIVeL
         return array(
             'vinculoestado_comunidad' =>
             array('vinculoestado_comunidad', 'id_vinculo_estado'),
-            'profesion_comunidad' =>
+            'comunidad_profesion' =>
             array('profesion', 'id_profesion'),
             'antecedente_comunidad' =>
             array('antecedente', 'id_antecedente'),
-            'filiacion_comunidad' =>
+            'comunidad_filiacion' =>
             array('filiacion', 'id_filiacion'),
-            'organizacion_comunidad' =>
+            'comunidad_organizacion' =>
             array('organizacion', 'id_organizacion'),
-            'rango_edad_comunidad' =>
-            array('rango_edad', 'id_rango'),
-            'rango_edad_comunidad' =>
-            array('rango_edad', 'id_rango'),
-            'sector_social_comunidad' =>
-            array('sector_social', 'id_sector'),
+            'comunidad_rangoedad' =>
+            array('rangoedad', 'id_rango'),
+            'comunidad_rangoedad' =>
+            array('rangoedad', 'id_rango'),
+            'comunidad_sectorsocial' =>
+            array('sectorsocial', 'id_sector'),
         );
     }
 

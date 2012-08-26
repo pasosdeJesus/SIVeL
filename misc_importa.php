@@ -1043,7 +1043,7 @@ function extrae_per(&$db)
         }
         $aper[$pe->id][2] = $vcasos; // Casos en los que es víctima
         $fcasos = array(); // Casos en los que es familiar
-        $cr = objeto_tabla('Relacion_personas');
+        $cr = objeto_tabla('Persona_trelacion');
         $cr->orderBy('id_persona1');
         $cr->id_persona2=$pe->id;
         $cr->find();
@@ -1132,7 +1132,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
     }
 
     // Inserta Víctima Colectiva
-    $dvictimacol= objeto_tabla('victima_colectiva');
+    $dvictimacol= objeto_tabla('victimacolectiva');
     $dvictimacol->id_caso = $idcaso;
     $dvictimacol->id_grupoper = $idgr;
     $dvictimacol->personas_aprox = dato_en_obs($grupo, 'personas_aprox');
@@ -1151,7 +1151,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
         );
     }
 
-    $atradrel = DataObjects_Victima_colectiva::tradRelato();
+    $atradrel = DataObjects_Victimacolectiva::tradRelato();
     foreach ($atradrel as $t => $vt) {
         $cx = $vt[0];
         $idt = $vt[1];
@@ -1201,7 +1201,7 @@ function extrae_grupos(&$db)
     $pe->find();
     while ($pe->fetch()) {
         $agr[$pe->id] = array(0 => $pe->nombre);
-        $cvi = objeto_tabla('Victima_colectiva');
+        $cvi = objeto_tabla('Victimacolectiva');
         $cvi->orderBy('id_caso');
         $cvi->id_grupoper= $pe->id;
         $cvi->find();

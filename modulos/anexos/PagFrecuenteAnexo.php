@@ -49,16 +49,16 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
     function elimina(&$valores)
     {
         $this->iniVar();
-        if ($this->bescrito_caso->_do->id_prensa != null
-            && $this->bescrito_caso->_do->fecha != null
+        if ($this->bcaso_ffrecuente->_do->id_prensa != null
+            && $this->bcaso_ffrecuente->_do->fecha != null
         ) {
-            $idcaso = $this->bescrito_caso->_do->id_caso;
-            $vf = "'{$this->bescrito_caso->_do->fecha}'";
-            $vp = "'{$this->bescrito_caso->_do->id_prensa}'";
+            $idcaso = $this->bcaso_ffrecuente->_do->id_caso;
+            $vf = "'{$this->bcaso_ffrecuente->_do->fecha}'";
+            $vp = "'{$this->bcaso_ffrecuente->_do->id_prensa}'";
             $q =  "UPDATE anexo SET fecha_prensa=NULL, id_prensa=NULL" .
                 " WHERE id_caso='$idcaso' AND fecha_prensa=$vf " .
                 " AND id_prensa=$vp";
-            $db = $this->bescrito_caso->_do->getDatabaseConnection();
+            $db = $this->bcaso_ffrecuente->_do->getDatabaseConnection();
             hace_consulta($db, $q, false) ;
         }
 
@@ -100,10 +100,10 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
         if (!isset($_SESSION['forma_modo'])
             || $_SESSION['forma_modo'] != 'busqueda'
         ) {
-            if ($this->bescrito_caso->_do->id_prensa != null) {
+            if ($this->bcaso_ffrecuente->_do->id_prensa != null) {
                 $cor = "OR (id_prensa=" .
-                    "'{$this->bescrito_caso->_do->id_prensa}' " .
-                    "AND fecha_prensa='{$this->bescrito_caso->_do->fecha}')";
+                    "'{$this->bcaso_ffrecuente->_do->id_prensa}' " .
+                    "AND fecha_prensa='{$this->bcaso_ffrecuente->_do->fecha}')";
             } else {
                 $cor = "";
             }
@@ -142,11 +142,11 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
 
         $puesto = false;
         $sel = $this->getElement('id_anexo');
-        if ($this->bescrito_caso->_do->id_prensa != null) {
+        if ($this->bcaso_ffrecuente->_do->id_prensa != null) {
             $danexo = objeto_tabla('anexo');
             $danexo->id_caso = $_SESSION['basicos_id'];
-            $danexo->id_prensa = $this->bescrito_caso->_do->id_prensa;
-            $danexo->id_fecha_prensa = $this->bescrito_caso->_do->fecha;
+            $danexo->id_prensa = $this->bcaso_ffrecuente->_do->id_prensa;
+            $danexo->id_fecha_prensa = $this->bcaso_ffrecuente->_do->fecha;
             $danexo->find();
             if ($danexo->fetch()) {
                 $sel->setValue($danexo->id);
@@ -179,11 +179,11 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
         $db = $this->iniVar();
 
         $r = parent::procesa($valores);
-        if (!es_objeto_nulo($this->bescrito_caso->_do->id_prensa)
-            && !es_objeto_nulo($this->bescrito_caso->_do->fecha)
+        if (!es_objeto_nulo($this->bcaso_ffrecuente->_do->id_prensa)
+            && !es_objeto_nulo($this->bcaso_ffrecuente->_do->fecha)
         ) {
-            $vf = "'{$this->bescrito_caso->_do->fecha}'";
-            $vp = "'{$this->bescrito_caso->_do->id_prensa}'";
+            $vf = "'{$this->bcaso_ffrecuente->_do->fecha}'";
+            $vp = "'{$this->bcaso_ffrecuente->_do->id_prensa}'";
             if (isset($valores['id_anexo'])
                 && $valores['id_anexo'] != ''
             ) {
@@ -199,7 +199,7 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
             hace_consulta($db, $q, false) ;
         }
 
-        funcionario_caso($_SESSION['basicos_id']);
+        caso_funcionario($_SESSION['basicos_id']);
         return $r;
     }
 

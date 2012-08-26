@@ -21,12 +21,12 @@ require_once 'HTML/QuickForm/Action.php';
 require_once 'aut.php';
 require_once 'misc.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
-require_once 'DataObjects/Escrito_caso.php';
-require_once 'DataObjects/Prensa.php';
+require_once 'DataObjects/Caso_ffrecuente.php';
+require_once 'DataObjects/Ffrecuente.php';
 require_once 'DataObjects/Caso.php';
-require_once 'DataObjects/Region_caso.php';
-require_once 'DataObjects/Frontera_caso.php';
-require_once 'DataObjects/Fuente_directa_caso.php';
+require_once 'DataObjects/Caso_region.php';
+require_once 'DataObjects/Caso_frontera.php';
+require_once 'DataObjects/Caso_fotra.php';
 require_once 'DataObjects/Categoria_caso.php';
 require_once 'DataObjects/Supracategoria.php';
 require_once 'DataObjects/Categoria.php';
@@ -34,14 +34,14 @@ require_once 'DataObjects/Presponsable.php';
 require_once 'DataObjects/Caso_presponsable.php';
 require_once 'DataObjects/Caso_categoria_presponsable.php';
 require_once 'DataObjects/Victima.php';
-require_once 'DataObjects/Victima_colectiva.php';
-require_once 'DataObjects/Sector_social.php';
-require_once 'DataObjects/Sector_social_comunidad.php';
-require_once 'DataObjects/Profesion_comunidad.php';
-require_once 'DataObjects/Funcionario_caso.php';
-require_once 'DataObjects/Resultado_agresion.php';
+require_once 'DataObjects/Victimacolectiva.php';
+require_once 'DataObjects/Sectorsocial.php';
+require_once 'DataObjects/Comunidad_sectorsocial.php';
+require_once 'DataObjects/Comunidad_profesion.php';
+require_once 'DataObjects/Caso_funcionario.php';
+require_once 'DataObjects/Resagresion.php';
 require_once 'DataObjects/Filiacion.php';
-require_once 'DataObjects/Sector_social.php';
+require_once 'DataObjects/Sectorsocial.php';
 require_once 'DataObjects/Profesion.php';
 require_once 'DataObjects/Presponsable.php';
 require_once 'DataObjects/Etiquetacaso.php';
@@ -199,10 +199,10 @@ class ResConsulta
         $q = "SELECT ubicacion.id_departamento, ubicacion.id_municipio, " .
             " ubicacion.id_clase, " .
             " departamento.nombre, municipio.nombre, clase.nombre, " .
-            " tipo_sitio.nombre " .
-            " FROM ubicacion, tipo_sitio, departamento, municipio, clase " .
+            " tsitio.nombre " .
+            " FROM ubicacion, tsitio, departamento, municipio, clase " .
             " WHERE ubicacion.id_caso='$idcaso' " .
-            " AND ubicacion.id_tipo_sitio=tipo_sitio.id " .
+            " AND ubicacion.id_tipo_sitio=tsitio.id " .
             " AND ubicacion.id_departamento=departamento.id " .
             " AND ubicacion.id_municipio=municipio.id " .
             " AND ubicacion.id_clase=clase.id " .
@@ -223,10 +223,10 @@ class ResConsulta
         }
         $q = "SELECT ubicacion.id_departamento, ubicacion.id_municipio, " .
             " departamento.nombre, municipio.nombre, " .
-            " tipo_sitio.nombre " .
-            " FROM ubicacion, tipo_sitio, departamento, municipio " .
+            " tsitio.nombre " .
+            " FROM ubicacion, tsitio, departamento, municipio " .
             " WHERE ubicacion.id_caso='$idcaso' " .
-            " AND ubicacion.id_tipo_sitio=tipo_sitio.id " .
+            " AND ubicacion.id_tipo_sitio=tsitio.id " .
             " AND ubicacion.id_departamento=departamento.id " .
             " AND municipio.id_departamento=departamento.id " .
             " AND ubicacion.id_municipio=municipio.id " .
@@ -244,10 +244,10 @@ class ResConsulta
             $tot++;
         }
         $q = "SELECT ubicacion.id_departamento, departamento.nombre, " .
-            " tipo_sitio.nombre " .
-            " FROM ubicacion, tipo_sitio, departamento " .
+            " tsitio.nombre " .
+            " FROM ubicacion, tsitio, departamento " .
             " WHERE ubicacion.id_caso='$idcaso' " .
-            " AND ubicacion.id_tipo_sitio=tipo_sitio.id " .
+            " AND ubicacion.id_tipo_sitio=tsitio.id " .
             " AND ubicacion.id_departamento=departamento.id " .
             " AND ubicacion.id_municipio IS NULL " .
             " AND ubicacion.id_clase IS NULL " .
@@ -436,8 +436,8 @@ class ResConsulta
         $id_grupoper, &$indid, &$totelem
     ) {
         $q = "SELECT  id_grupoper, nombre, personas_aprox " .
-            " FROM victima_colectiva, grupoper " .
-            " WHERE victima_colectiva.id_grupoper=grupoper.id " .
+            " FROM victimacolectiva, grupoper " .
+            " WHERE victimacolectiva.id_grupoper=grupoper.id " .
             " AND id_caso='$idcaso' ORDER BY id_grupoper;";
         $result = hace_consulta($db, $q);
         $row = array();
@@ -481,21 +481,21 @@ class ResConsulta
             $etablas, array('caso',
             'victima', 'persona', 'presponsable',
             'acto',
-            'sector_social', 'organizacion'
+            'sectorsocial', 'organizacion'
         )
         );
         $etablas = implode(", ", array_unique($etablas));
         $q = " SELECT caso.id, persona.id, " .
             " persona.nombres || ' ' || persona.apellidos, caso.fecha, " .
             " acto.id_categoria, presponsable.nombre, " .
-            " sector_social.nombre, organizacion.nombre  " .
+            " sectorsocial.nombre, organizacion.nombre  " .
             " FROM  $etablas WHERE " .
             " presponsable.id=acto.id_p_responsable " .
             " AND acto.id_persona=persona.id " .
             " AND persona.id=victima.id_persona " .
             " AND caso.id=victima.id_caso " .
             " AND caso.id=acto.id_caso " .
-            " AND sector_social.id=victima.id_sector_social" .
+            " AND sectorsocial.id=victima.id_sector_social" .
             " AND organizacion.id=victima.id_organizacion" .
             " AND $donde ORDER BY caso.fecha" ;
         //echo "q es $q<br>";
@@ -591,7 +591,7 @@ class ResConsulta
 
     /** Llena un select o un arreglo con ids y nombres de categorias de
      * violencia  extraidos de la tabla con una consulta que recibe
-     *  (retorna primero tipo_violencia, id_supracategoria e id_categoria)
+     *  (retorna primero tviolencia, id_supracategoria e id_categoria)
      *
      * @param object &$db   Conexión a BD
      * @param string $q     Q
@@ -606,7 +606,7 @@ class ResConsulta
         $row = array();
         while ($result->fetchInto($row)) {
             $qtvio = "SELECT id, nomcorto "
-                .  " FROM tipo_violencia "
+                .  " FROM tviolencia "
                 .  " WHERE id='" . $row[0] . "';";
             $tvio = htmlentities_array($db->getAssoc($qtvio));
             $scat = htmlentities_array(
@@ -1147,7 +1147,7 @@ class ResConsulta
                 $idp = array(); // Identificaciones
                 $idp2=array();
                 $ndp = array();
-                $dff = objeto_tabla('escrito_caso');
+                $dff = objeto_tabla('caso_ffrecuente');
                 if (PEAR::isError($dff)) {
                     die($dff->getMessage());
                 }
@@ -1417,7 +1417,7 @@ class ResConsulta
                     'id_clase' => 'REL;observaciones{tipo->clase}',
                 )
                 );
-                $drelp = objeto_tabla('relacion_personas');
+                $drelp = objeto_tabla('persona_trelacion');
                 $drelp->id_persona1 = $dvictima->id_persona;
                 $drelp->orderBy('id_persona2');
                 $drelp->find();
@@ -1453,7 +1453,7 @@ class ResConsulta
             unset($dvictima);
 
             $r .= "  <!-- Grupos victimizados -->\n";
-            $dvictimacol = objeto_tabla('victima_colectiva');
+            $dvictimacol = objeto_tabla('victimacolectiva');
             $dvictimacol->id_caso = $idcaso;
             $dvictimacol->orderBy('id_grupoper');
             $dvictimacol->find();
@@ -1476,7 +1476,7 @@ class ResConsulta
 
                 $r .= "  <grupo>\n";
 
-                $atradrel = DataObjects_Victima_colectiva::tradRelato();
+                $atradrel = DataObjects_Victimacolectiva::tradRelato();
                 foreach ($atradrel as $t => $vt) {
                     $cx = $vt[0];
                     $idt = $vt[1];
@@ -1607,7 +1607,7 @@ class ResConsulta
                 $drango = $dvictima->getLink('id_rango_edad');
                 a_elementos_xml(
                     $r, 4, array(
-                        'observaciones{tipo->rango_edad}' => $drango->rango,
+                        'observaciones{tipo->rangoedad}' => $drango->rango,
                         'observaciones{tipo->antecedentes}' => $tan,
                     )
                 );
@@ -1696,9 +1696,9 @@ class ResConsulta
                 $dvictima->find();
                 $dvictima->fetch(1);
                 $q = "SELECT clasificacion " .
-                    " FROM parametros_reporte_consolidado, categoria " .
+                    " FROM pconsolidado, categoria " .
                     " WHERE col_rep_consolidado=" .
-                    " parametros_reporte_consolidado.no_columna " .
+                    " pconsolidado.no_columna " .
                     " AND categoria.id='" . $dacto->id_categoria . "'";
                 $result = hace_consulta($db, $q);
                 $row = array();
@@ -1735,15 +1735,15 @@ class ResConsulta
             while ($dactocol->fetch()) {
                 $dccom = $dactocol->getLink('id_categoria');
                 $dpper = $dactocol->getLink('id_p_responsable');
-                $dvictimacol = objeto_tabla('victima_colectiva');
+                $dvictimacol = objeto_tabla('victimacolectiva');
                 $dvictimacol->id_caso = $idcaso;
                 $dvictimacol->id_grupoper= $dactocol->id_grupoper;
                 $dvictimacol->find();
                 $dvictimacol->fetch(1);
                 $q = "SELECT clasificacion " .
-                    " FROM parametros_reporte_consolidado, categoria " .
+                    " FROM pconsolidado, categoria " .
                     " WHERE col_rep_consolidado =" .
-                    " parametros_reporte_consolidado.no_columna " .
+                    " pconsolidado.no_columna " .
                     " AND categoria.id='" . $dccom->id. "'";
                 $result = hace_consulta($db, $q);
                 unset($q);
@@ -1801,16 +1801,16 @@ class ResConsulta
             //y para que proteja la vida de quienes optan por visibilización,
             //en particular moviendo corazones en nuestra sociedad.
             $r .= "  <!-- Fuente frecuente -->\n";
-            $descritocaso = objeto_tabla('escrito_caso');
+            $descritocaso = objeto_tabla('caso_ffrecuente');
             $descritocaso->id_caso = $idcaso;
             $descritocaso->orderBy('fecha, id_prensa');
             $descritocaso->find();
             while ($descritocaso->fetch()) {
                 $arfuente = array();
-                $dprensa = $descritocaso->getLink('id_prensa');
-                $arfuente['nombre_fuente'] = $dprensa->nombre;
-                $dprensa->free();
-                unset($dprensa);
+                $dffrecuente = $descritocaso->getLink('id_prensa');
+                $arfuente['nombre_fuente'] = $dffrecuente->nombre;
+                $dffrecuente->free();
+                unset($dffrecuente);
                 $descritocaso->aRelato(
                     $arfuente,
                     array('fecha' => 'fecha_fuente',
@@ -1828,7 +1828,7 @@ class ResConsulta
             unset($descritocaso);
 
             $r .= "  <!-- Fuente no frecuente -->\n";
-            $dfuentedirectacaso = objeto_tabla('fuente_directa_caso');
+            $dfuentedirectacaso = objeto_tabla('caso_fotra');
             $dfuentedirectacaso->id_caso = $idcaso;
             $dfuentedirectacaso->orderBy('fecha, id_fuente_directa');
             $dfuentedirectacaso->find();
@@ -1871,12 +1871,12 @@ class ResConsulta
             unset($dinter);
 
             $fr = lista_relacionados(
-                'frontera_caso',
+                'caso_frontera',
                 array('id_caso' => $idcaso), 'id_frontera'
             );
             $arotros['observaciones{tipo->frontera}'] = $fr;
             $reg = lista_relacionados(
-                'region_caso',
+                'caso_region',
                 array('id_caso' => $idcaso), 'id_region'
             );
             $arotros['observaciones{tipo->region}'] = $reg;
@@ -1914,7 +1914,7 @@ class ResConsulta
                 $r, 2,
                 array('observaciones{tipo->sitio}' => $ubisitio,
                 'observaciones{tipo->lugar}' => $ubilugar,
-                'observaciones{tipo->tipo_sitio}' => $ubitipositio,
+                'observaciones{tipo->tsitio}' => $ubitipositio,
                 'observaciones{tipo->contexto}' => $tcont,
                 'observaciones{tipo->antecedente}' => $tan,)
             );
@@ -2031,7 +2031,7 @@ class ResConsulta
             $r .= trim($cadub);
             $r .= "\n\n";
 
-            $dregioncaso = objeto_tabla('region_caso');
+            $dregioncaso = objeto_tabla('caso_region');
             $dregioncaso->id_caso = $idcaso;
             $dregioncaso->orderBy('id_region');
             $dregioncaso->find();
@@ -2046,7 +2046,7 @@ class ResConsulta
             $r .= $fl;
 
             $fl = "";
-            $dfronteracaso = objeto_tabla('frontera_caso');
+            $dfronteracaso = objeto_tabla('caso_frontera');
             if (PEAR::isError($dfronteracaso)) {
                 die($dfronteracaso->getMessage());
             }
@@ -2067,7 +2067,7 @@ class ResConsulta
         if (array_key_exists('m_fuentes', $campos)) {
             $fl = "";
             $sep = $GLOBALS['etiqueta']['id_prensa'] . ": ";
-            $descritocaso = objeto_tabla('escrito_caso');
+            $descritocaso = objeto_tabla('caso_ffrecuente');
             if (PEAR::isError($descritocaso)) {
                 die($descritocaso->getMessage());
             }
@@ -2075,8 +2075,8 @@ class ResConsulta
             $descritocaso->orderBy('fecha, id_prensa');
             $descritocaso->find();
             while ($descritocaso->fetch()) {
-                $dprensa = $descritocaso->getLink('id_prensa');
-                $r .= $sep . trim($dprensa->nombre);
+                $dffrecuente = $descritocaso->getLink('id_prensa');
+                $r .= $sep . trim($dffrecuente->nombre);
                 $r .= " - ".trim($descritocaso->ubicacion);
                 $r .= " - ";
                 $m = explode("-", $descritocaso->fecha);
@@ -2088,7 +2088,7 @@ class ResConsulta
 
             $fl = "";
             $sep = "";
-            $dfuentedirectacaso = objeto_tabla('fuente_directa_caso');
+            $dfuentedirectacaso = objeto_tabla('caso_fotra');
             if (PEAR::isError($dfuentedirectacaso)) {
                 die($dfuentedirectacaso->getMessage());
             }
@@ -2196,7 +2196,7 @@ class ResConsulta
         if (array_key_exists('m_fuentes', $campos)) {
             $sep = "\n\n" . a_mayusculas($GLOBALS['etiqueta']['analista']) .
                 "(s):\n    ";
-            $dfuncaso = objeto_tabla('funcionario_caso');
+            $dfuncaso = objeto_tabla('caso_funcionario');
             if (PEAR::isError($dfuncaso)) {
                 die($dfuncaso->getMessage());
             }
@@ -2395,7 +2395,7 @@ class ResConsulta
             }
             $nvc = strip_tags($dpersona->nombres) . " " .
                 strip_tags($dpersona->apellidos);
-            $idp = DataObjects_Sector_social::id_profesional();
+            $idp = DataObjects_Sectorsocial::id_profesional();
             if ($dvictima->id_profesion != DataObjects_Profesion::idSinInfo()
                 && $dvictima->id_sector_social == $idp
                 && !$corto
@@ -2403,7 +2403,7 @@ class ResConsulta
                 $dprofesion = $dvictima->getLink('id_profesion');
                 $nvc .= " - " . strip_tags($dprofesion->nombre);
             } else {
-                $ids = DataObjects_Sector_social::idSinInfo();
+                $ids = DataObjects_Sectorsocial::idSinInfo();
                 if ($dvictima->id_sector_social != $ids && !$corto) {
                     $dsector = $dvictima->
                         getLink('id_sector_social');
@@ -2447,7 +2447,7 @@ class ResConsulta
             $lvic['i' . $dvictima->id_persona] = $nvc;
         }
 
-        $dvictimacol = objeto_tabla('victima_colectiva');
+        $dvictimacol = objeto_tabla('victimacolectiva');
         $dvictimacol->id_caso = $idcaso;
         $dvictimacol->orderBy('id_grupoper');
         $dvictimacol->find();
@@ -2477,21 +2477,21 @@ class ResConsulta
                     $nvc .= " (".trim($dvictimacol->personas_aprox).") ";
                 }
                 $nvc .= lista_relacionados(
-                    'sector_social_comunidad',
+                    'comunidad_sectorsocial',
                     array('id_caso' => $dvictimacol->id_caso,
                     'id_grupoper' => $dvictimacol->id_grupoper),
                     'id_sector', ', ',
-                    "   " . $GLOBALS['etiqueta']['sector_social'] . ": "
+                    "   " . $GLOBALS['etiqueta']['sectorsocial'] . ": "
                 );
                 $nvc .= lista_relacionados(
-                    'profesion_comunidad',
+                    'comunidad_profesion',
                     array('id_caso' => $dvictimacol->id_caso,
                     'id_grupoper' => $dvictimacol->id_grupoper),
                     'id_profesion', ', ',
                     "   ".$GLOBALS['etiqueta']['profesion'] . ": "
                 );
                 $nvc .= lista_relacionados(
-                    'filiacion_comunidad',
+                    'comunidad_filiacion',
                     array('id_caso' => $dvictimacol->id_caso,
                     'id_grupoper' => $dvictimacol->id_grupoper),
                     'id_filiacion', ', ',
@@ -2949,7 +2949,7 @@ class ResConsulta
                 $idp = array(); // Identificaciones
                 $idp2=array();
                 $ndp = array();
-                $dff = objeto_tabla('escrito_caso');
+                $dff = objeto_tabla('caso_ffrecuente');
                 if (PEAR::isError($dff)) {
                     die($dff->getMessage());
                 }

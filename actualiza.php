@@ -40,7 +40,8 @@ if (!in_array(63, $_SESSION['opciones'])) {
 }
 $db = autenticaUsuario($dsn, $aut_usuario, 63);
 
-function regeneraEsquemas() {
+function regeneraEsquemas()
+{
     global $dirserv, $dirsitio, $dbnombre, $dirchroot, $modulos;
     $nini = "$dirserv/$dirsitio/DataObjects/$dbnombre.ini";
     $nlinksini = "$dirserv/$dirsitio/DataObjects/$dbnombre.links.ini";
@@ -2059,22 +2060,22 @@ if (!aplicado($idac)) {
 $idac = '1.2-rt';
 if (!aplicado($idac)) {
     hace_consulta(
-        $db, 
+        $db,
         "ALTER TABLE categoria_p_responsable_caso RENAME TO "
         . "caso_categoria_presponsable", false
     );
     hace_consulta(
-        $db, 
+        $db,
         "ALTER TABLE presuntos_responsables RENAME TO "
         . "presponsable ", false
     );
     hace_consulta(
-        $db, 
+        $db,
         "ALTER SEQUENCE presuntos_responsables_seq RENAME TO "
         . "presponsable_seq ", false
     );
     hace_consulta(
-        $db, 
+        $db,
         "ALTER TABLE presuntos_responsables_caso RENAME TO "
         . "caso_presponsable", false
     );
@@ -2085,29 +2086,180 @@ if (!aplicado($idac)) {
 $idac = '1.2-rt2';
 if (!aplicado($idac)) {
     hace_consulta(
-        $db, 
+        $db,
         "ALTER TABLE vinculo_estado RENAME TO "
         . "vinculoestado ", false
     );
     hace_consulta(
-        $db, 
+        $db,
         "ALTER SEQUENCE vinculo_estado_seq RENAME TO "
         . "vinculoestado_seq ", false
     );
     hace_consulta(
-        $db, 
+        $db,
         "ALTER TABLE vinculo_estado_comunidad RENAME TO "
-        . "vinculoestadocomunidad ", false
+        . "vinculoestado_comunidad ", false
     );
 
     aplicaact($act, $idac, 'Renombrando tablas vinculoestado');
+}
+
+$idac = '1.2-rt3';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db,
+        "ALTER TABLE filiacion_comunidad RENAME TO "
+        . "comunidad_filiacion", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE frontera_caso RENAME TO "
+        . "caso_frontera", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE funcionario_caso RENAME TO "
+        . "caso_funcionario", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE organizacion_comunidad RENAME TO "
+        . "comunidad_organizacion", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE profesion_comunidad RENAME TO "
+        . "comunidad_profesion", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE region_caso RENAME TO "
+        . "caso_region", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE victima_colectiva RENAME TO "
+        . "victimacolectiva", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE tipo_violencia RENAME TO "
+        . "tviolencia", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE tipo_sitio RENAME TO "
+        . "tsitio", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER SEQUENCE tipo_sitio_seq RENAME TO "
+        . "tsitio_seq ", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE tipo_relacion RENAME TO "
+        . "trelacion", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE tipo_clase RENAME TO "
+        . "tclase", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE sector_social RENAME TO "
+        . "sectorsocial", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER SEQUENCE sector_social_seq RENAME TO "
+        . "sectorsocial_seq ", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE sector_social_comunidad RENAME TO "
+        . "comunidad_sectorsocial", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE resultado_agresion RENAME TO "
+        . "resagresion", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER SEQUENCE resultado_agresion_seq RENAME TO "
+        . "resagresion_seq ", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE relacion_personas RENAME TO "
+        . "persona_trelacion", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE rango_edad RENAME TO "
+        . "rangoedad", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER SEQUENCE rango_edad_seq RENAME TO "
+        . "rangoedad_seq ", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE rango_edad_comunidad RENAME TO "
+        . "comunidad_rangoedad", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE parametros_reporte_consolidado RENAME TO "
+        . "pconsolidado", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER SEQUENCE parametros_reporte_consolidado_seq RENAME TO "
+        . "pconsolidado_seq ", false
+    );
+    hace_consulta(#
+        $db,
+        "ALTER TABLE prensa RENAME TO "
+        . "ffrecuente", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER SEQUENCE prensa_seq RENAME TO "
+        . "ffrecuente_seq ", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE escrito_caso RENAME TO "
+        . "caso_ffrecuente", false
+    );
+    hace_consulta(#
+        $db,
+        "ALTER TABLE fuente_directa RENAME TO "
+        . "fotra", false
+    );
+    hace_consulta(#
+        $db,
+        "ALTER SEQUENCE fuente_directa_seq RENAME TO "
+        . "fotra_seq ", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE fuente_directa_caso RENAME TO "
+        . "caso_fotra", false
+    );
+
+    aplicaact($act, $idac, 'Renombrando tablas para seguir estándares SQL');
 }
 
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {
-        if ($a['title'] == 'Reportes' 
+        if ($a['title'] == 'Reportes'
             || $a['sub'][0]['url'] == 'parametros_reporte_consolidado'
         ) {
             $hayrep = true;
@@ -2115,7 +2267,7 @@ if (isset($GLOBALS['menu_tablas_basicas'])) {
     }
     if (!$hayrep) {
         echo "<font color='red'>En el arreglo <tt>menu_tablas_basicas</tt> " .
-            "del archivo <tt>" . 
+            "del archivo <tt>" .
             htmlentities(
                 $_SESSION['dirsitio'] . "/conf.php", ENT_COMPAT, 'UTF-8'
             ) . "</tt> falta:
@@ -2181,7 +2333,7 @@ function leeEstructura($nd, $dbnombre, $dirap, $modo)
     if (!file_exists("$nd/DataObjects/estructura-dataobject.ini")) {
         echo "No puede leerse "
             . htmlentities(
-                "$nd/DataObjects/estructura-dataobject.ini", 
+                "$nd/DataObjects/estructura-dataobject.ini",
                 ENT_COMPAT, 'UTF-8'
             )
             . "<br>";
@@ -2236,7 +2388,7 @@ if (file_exists($ap)) {
 
 echo '<table width="100%"><td style="white-space: nowrap; '
     . 'background-color: #CCCCCC;" align="left" valign="top" colspan="2">'
-    . '<b><div align=right><a href="index.php">' 
+    . '<b><div align=right><a href="index.php">'
     . _('Men&uacute; Principal') . '</a></div></b>'
     . '</td></table>';
 

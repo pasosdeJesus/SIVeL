@@ -16,12 +16,12 @@
  */
 
 /**
- * Definicion para la tabla profesion_comunidad.
+ * Definicion para la tabla comunidad_filiacion.
  */
 require_once 'DB_DataObject_SIVeL.php';
 
 /**
- * Definicion para la tabla profesion_comunidad.
+ * Definicion para la tabla comunidad_filiacion.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -31,19 +31,20 @@ require_once 'DB_DataObject_SIVeL.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Profesion_comunidad extends DB_DataObject_SIVeL
+class DataObjects_Comunidad_filiacion extends DB_DataObject_SIVeL
 {
 
-    var $__table = 'profesion_comunidad';                // table name
-    var $id_profesion;                  // int4(4)  multiple_key
+    var $__table = 'comunidad_filiacion';             // table name
+    var $id_filiacion;                    // int4(4)  multiple_key
     var $id_grupoper;                  // int4(4)  multiple_key
     var $id_caso;                  // int4(4)  multiple_key
 
 
-    var $fb_preDefOrder = array('id_profesion');
-    var $fb_fieldsToRender = array('id_profesion');
+
+    var $fb_preDefOrder = array('id_filiacion');
+    var $fb_fieldsToRender = array('id_filiacion');
     var $fb_addFormHeader = false;
-    var $fb_excludeFromAutoRules = array('id_profesion');
+    var $fb_excludeFromAutoRules = array('id_filiacion');
     /**
      * Constructora
      * return @void
@@ -53,33 +54,11 @@ class DataObjects_Profesion_comunidad extends DB_DataObject_SIVeL
         parent::__construct();
 
         $this->fb_fieldLabels= array(
-           'id_profesion' => _('Profesión'),
+           'id_filiacion' => _('Filiacion Politica'),
         );
     }
 
     var $fb_hidePrimaryKey = false;
-
-
-
-    /**
-     * Prepara consulta agregando objeto enlazado a este por
-     * campo field.
-     *
-     * @param object &$opts  objeto DB para completar consulta
-     * @param string &$field campo por el cual enlazar
-     *
-     * @return void
-     */
-    function prepareLinkedDataObject(&$opts, &$field)
-    {
-        switch ($field) {
-        case 'id_profesion':
-            $opts->whereAdd('fechadeshabilitacion IS NULL');
-            break;
-
-        }
-    }
-
 
     /**
      * Prepara antes de generar formulario.
@@ -98,9 +77,28 @@ class DataObjects_Profesion_comunidad extends DB_DataObject_SIVeL
     }
 
     /**
+     * Prepara consulta agregando objeto enlazado a este por
+     * campo field.
+     *
+     * @param object &$opts  objeto DB para completar consulta
+     * @param string &$field campo por el cual enlazar
+     *
+     * @return void
+     */
+    function prepareLinkedDataObject(&$opts, &$field)
+    {
+        if ($field == 'id_antecedente') {
+            $q = 'id IN (SELECT id_antecedente FROM ' .
+                'antecedente_caso WHERE id_caso=\'' .
+                $_SESSION['basicos_id'] . '\')';
+            $opts->whereAdd($q);
+        }
+    }
+
+    /**
      * Ajusta formulario generado.
      *
-     * @param object &$form      Formulario HTML_QuickForm
+     * @param object &$form        Formulario HTML_QuickForm
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
@@ -108,13 +106,13 @@ class DataObjects_Profesion_comunidad extends DB_DataObject_SIVeL
     function postGenerateForm(&$form, &$formbuilder)
     {
         parent::postGenerateForm($form, $formbuilder);
-        $sel =& $form->getElement('id_profesion');
+        $sel =& $form->getElement('id_filiacion');
         if (isset($sel) && !PEAR::isError($sel)) {
             $sel->setMultiple(true);
             $sel->setSize(5);
-            if (isset($GLOBALS['etiqueta']['profesion'])) {
-                $sel->setLabel($GLOBALS['etiqueta']['profesion']);
-            }
+/*            if (isset($GLOBALS['etiqueta']['filiacion'])) {
+                $sel->setLabel($GLOBALS['etiqueta']['filiacion']);
+} */
         }
 
         $form->removeElement('id_grupoper');

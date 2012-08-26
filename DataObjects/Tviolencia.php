@@ -16,12 +16,12 @@
  */
 
 /**
- * Definicion para la tabla tipo_violencia.
+ * Definicion para la tabla tviolencia.
  */
 require_once 'DataObjects/Basica.php';
 
 /**
- * Definicion para la tabla tipo_violencia.
+ * Definicion para la tabla tviolencia.
  * Ver documentación de DataObjects_Basica.
  *
  * @category SIVeL
@@ -31,9 +31,9 @@ require_once 'DataObjects/Basica.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Basica
  */
-class DataObjects_Tipo_violencia extends DataObjects_Basica
+class DataObjects_Tviolencia extends DataObjects_Basica
 {
-    var $__table = 'tipo_violencia';                  // table name
+    var $__table = 'tviolencia';                  // table name
     var $nomcorto;                          // varchar(-1)  not_null
 
     /**

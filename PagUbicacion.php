@@ -603,7 +603,7 @@ class PagUbicacion extends PagBaseMultiple
 
         unset($_SESSION['camDepartamento']);
         unset($_SESSION['camMunicipio']);
-        funcionario_caso($_SESSION['basicos_id']);
+        caso_funcionario($_SESSION['basicos_id']);
         return  true;
     }
 
@@ -712,11 +712,11 @@ class PagUbicacion extends PagBaseMultiple
         //echo "OJO importaRelato(db, r, idcaso=$idcaso, observaciones=$obs)<br>";
         $reg = dato_basico_en_obs(
             $db, $obs, $r,
-            'region', 'region', 'region_caso', $idcaso, '; ', 'id_region'
+            'region', 'region', 'caso_region', $idcaso, '; ', 'id_region'
         );
         $fro = dato_basico_en_obs(
             $db, $obs, $r,
-            'frontera', 'frontera', 'frontera_caso', $idcaso, '; ',
+            'frontera', 'frontera', 'caso_frontera', $idcaso, '; ',
             'id_frontera'
         );
         $dubicacion = objeto_tabla('ubicacion');
@@ -754,13 +754,13 @@ class PagUbicacion extends PagBaseMultiple
             $dubicacion->id_clase = $id_clase;
         }
         $idtipositio = dato_basico_en_obs(
-            $db, $obs, $r, 'tipo_sitio', 'tipo_sitio', '', ''
+            $db, $obs, $r, 'tsitio', 'tsitio', '', ''
         );
         if (isset($idtipositio) && $idtipositio != null) {
             $dubicacion->id_tipo_sitio = $idtipositio;
         } else {
             $dubicacion->id_tipo_sitio
-                = DataObjects_Tipo_sitio::idSinInfo();
+                = DataObjects_Tsitio::idSinInfo();
         }
         if (isset($r->latitud)) {
             $dubicacion->latitud = (string)$r->latitud;

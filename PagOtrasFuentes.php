@@ -36,9 +36,9 @@ class PagOtrasFuentes extends PagBaseMultiple
 
     /* Objetos DB_DataObject_FormBuilder */
     /** Fuente directa independiente de caso */
-    var $bfuente_directa;
+    var $bfotra;
     /** Relación entre fuente directa y caso */
-    var $bfuente_directa_caso;
+    var $bcaso_fotra;
 
 
     var $titulo = 'Otras Fuentes';
@@ -47,7 +47,7 @@ class PagOtrasFuentes extends PagBaseMultiple
 
     var $nuevaCopia = false;
 
-    var $clase_modelo = 'fuente_directa_caso';
+    var $clase_modelo = 'caso_fotra';
 
 
 
@@ -58,8 +58,8 @@ class PagOtrasFuentes extends PagBaseMultiple
      */
     function nullVar()
     {
-        $this->bfuente_directa = null;
-        $this->bfuente_directa_caso = null;
+        $this->bfotra = null;
+        $this->bcaso_fotra = null;
     }
 
 
@@ -70,7 +70,7 @@ class PagOtrasFuentes extends PagBaseMultiple
      */
     function copiaId()
     {
-        return $this->bfuente_directa->_do->id;
+        return $this->bfotra->_do->id;
     }
 
 
@@ -84,10 +84,10 @@ class PagOtrasFuentes extends PagBaseMultiple
     function elimina(&$valores)
     {
         $this->iniVar();
-        if ($this->bfuente_directa_caso->_do->id_fuente_directa != null
-            && $this->bfuente_directa_caso->_do->fecha != null
+        if ($this->bcaso_fotra->_do->id_fuente_directa != null
+            && $this->bcaso_fotra->_do->fecha != null
         ) {
-            $this->bfuente_directa_caso->_do->delete();
+            $this->bcaso_fotra->_do->delete();
             $_SESSION['fd_total']--;
         }
     }
@@ -103,8 +103,8 @@ class PagOtrasFuentes extends PagBaseMultiple
      */
     function iniVar($apar = null)
     {
-        $do =& objeto_tabla('fuente_directa_caso');
-        $do_fd =& objeto_tabla('fuente_directa');
+        $do =& objeto_tabla('caso_fotra');
+        $do_fd =& objeto_tabla('fotra');
         $db =& $do->getDatabaseConnection();
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
@@ -114,7 +114,7 @@ class PagOtrasFuentes extends PagBaseMultiple
 
         $result = hace_consulta(
             $db, "SELECT  id_fuente_directa, fecha " .
-            " FROM fuente_directa_caso, fuente_directa " .
+            " FROM caso_fotra, fotra " .
             " WHERE id_caso='$idcaso' AND id_fuente_directa=id " .
             " ORDER BY nombre, fecha;"
         );
@@ -140,24 +140,24 @@ class PagOtrasFuentes extends PagBaseMultiple
             $do_fd->fetch();
         }
 
-        $this->bfuente_directa_caso =& DB_DataObject_FormBuilder::create(
+        $this->bcaso_fotra =& DB_DataObject_FormBuilder::create(
             $do,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
                   'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
         );
-        $this->bfuente_directa =& DB_DataObject_FormBuilder::create(
+        $this->bfotra =& DB_DataObject_FormBuilder::create(
             $do_fd,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
                   'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
         );
 
-        if ($this->bfuente_directa_caso == null) {
-            die("bfuente_directa_caso " . _("es null"));
+        if ($this->bcaso_fotra == null) {
+            die("bcaso_fotra " . _("es null"));
         }
-        if ($this->bfuente_directa == null) {
-            die("bfuente_directa " . _("es null"));
+        if ($this->bfotra == null) {
+            die("bfotra " . _("es null"));
         }
 
         return $db;
@@ -199,13 +199,13 @@ class PagOtrasFuentes extends PagBaseMultiple
         $GLOBALS['fechaPuedeSerVacia'] = isset($_SESSION['forma_modo'])
             && $_SESSION['forma_modo'] == 'busqueda';
 
-        $this->bfuente_directa->createSubmit = 0;
-        $this->bfuente_directa->useForm($this);
-        $this->bfuente_directa->getForm();
+        $this->bfotra->createSubmit = 0;
+        $this->bfotra->useForm($this);
+        $this->bfotra->getForm();
 
-        $this->bfuente_directa_caso->createSubmit = 0;
-        $this->bfuente_directa_caso->useForm($this);
-        $this->bfuente_directa_caso->getForm();
+        $this->bcaso_fotra->createSubmit = 0;
+        $this->bcaso_fotra->useForm($this);
+        $this->bcaso_fotra->getForm();
 
         agrega_control_CSRF($this);
     }
@@ -228,24 +228,24 @@ class PagOtrasFuentes extends PagBaseMultiple
             $v = $_SESSION['recuperaErrorValida'];
         } else {
             $v = array();
-            foreach ($this->bfuente_directa->_do->fb_fieldsToRender as $c) {
+            foreach ($this->bfotra->_do->fb_fieldsToRender as $c) {
                 $cq = $this->getElement($c);
-                if (isset($this->bfuente_directa->_do->$c)) {
-                    $v[$c] = $this->bfuente_directa->_do->$c;
+                if (isset($this->bfotra->_do->$c)) {
+                    $v[$c] = $this->bfotra->_do->$c;
                 }
             }
-            foreach ($this->bfuente_directa_caso->_do->fb_fieldsToRender as $c) {
+            foreach ($this->bcaso_fotra->_do->fb_fieldsToRender as $c) {
                 $cq = $this->getElement($c);
-                if (isset($this->bfuente_directa_caso->_do->$c)) {
-                    $v[$c] =$this->bfuente_directa_caso->_do->$c;
+                if (isset($this->bcaso_fotra->_do->$c)) {
+                    $v[$c] =$this->bcaso_fotra->_do->$c;
                 }
             }
             if (isset($_SESSION['nuevo_copia_id'])) {
                 $id = $_SESSION['nuevo_copia_id'];
                 unset($_SESSION['nuevo_copia_id']);
 
-                foreach (array('fuente_directa' => 'id',
-                    'fuente_directa_caso' => 'id_fuente_directa'
+                foreach (array('fotra' => 'id',
+                    'caso_fotra' => 'id_fuente_directa'
                 ) as $n => $k
                 ) {
                     $d =& objeto_tabla($n);
@@ -259,8 +259,8 @@ class PagOtrasFuentes extends PagBaseMultiple
         }
 
         $campos = array_merge(
-            $this->bfuente_directa->_do->fb_fieldsToRender,
-            $this->bfuente_directa_caso->_do->fb_fieldsToRender
+            $this->bfotra->_do->fb_fieldsToRender,
+            $this->bcaso_fotra->_do->fb_fieldsToRender
         );
         establece_valores_form($this, $campos, $v);
 
@@ -305,7 +305,7 @@ class PagOtrasFuentes extends PagBaseMultiple
         assert($db != null);
         assert(isset($idcaso));
         hace_consulta(
-            $db, "DELETE FROM fuente_directa_caso " .
+            $db, "DELETE FROM caso_fotra " .
             " WHERE id_caso='$idcaso'"
         );
     }
@@ -345,11 +345,11 @@ class PagOtrasFuentes extends PagBaseMultiple
         $db = $this->iniVar();
 
         $do =& objeto_tabla('caso');
-        $do->id = $this->bfuente_directa_caso->_do->id_caso;
+        $do->id = $this->bcaso_fotra->_do->id_caso;
         $do->find();
         $do->fetch();
         $df= call_user_func(
-            $this->bfuente_directa_caso->dateToDatabaseCallback,
+            $this->bcaso_fotra->dateToDatabaseCallback,
             var_escapa($valores['fecha'], $db)
         );
 
@@ -365,13 +365,13 @@ class PagOtrasFuentes extends PagBaseMultiple
             }
         }
 
-        if ($this->bfuente_directa_caso->_do->id_fuente_directa != null
-            && $this->bfuente_directa_caso->_do->fecha != null
+        if ($this->bcaso_fotra->_do->id_fuente_directa != null
+            && $this->bcaso_fotra->_do->fecha != null
         ) {
-            $this->bfuente_directa_caso->_do->delete();
+            $this->bcaso_fotra->_do->delete();
             $_SESSION['fd_total']--;
         }
-        $this->bfuente_directa_caso->forceQueryType(
+        $this->bcaso_fotra->forceQueryType(
             DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
         );
 
@@ -388,31 +388,31 @@ class PagOtrasFuentes extends PagBaseMultiple
                 $valores['fecha']['Y'] = $GLOBALS['anio_min'] - 1;
             }
         }
-        $q = "SELECT id FROM fuente_directa WHERE " .
+        $q = "SELECT id FROM fotra WHERE " .
             "nombre='" . var_escapa($valores['nombre'], $db) . "';";
         $result = hace_consulta($db, $q);
         $row = array();
         if (isset($result) && !PEAR::isError($result)
             && $result->fetchInto($row)
         ) {
-            $this->bfuente_directa->_do->get('id', $row[0]);
+            $this->bfotra->_do->get('id', $row[0]);
         } else {
-            $this->bfuente_directa->_do->id = $nuevoidf;
-            $this->bfuente_directa->_do->nombre
+            $this->bfotra->_do->id = $nuevoidf;
+            $this->bfotra->_do->nombre
                 = var_escapa($valores['nombre'], $db);
-            $this->bfuente_directa->_do->insert();
+            $this->bfotra->_do->insert();
         }
 
-        $this->bfuente_directa_caso->_do->id_fuente_directa
-            = $this->bfuente_directa->_do->id;
+        $this->bcaso_fotra->_do->id_fuente_directa
+            = $this->bfotra->_do->id;
         $ret = @$this->process(
-            array(&$this->bfuente_directa_caso,
+            array(&$this->bcaso_fotra,
             'processForm'
             ), false
         );
         $_SESSION['fd_total']++;
 
-        funcionario_caso($_SESSION['basicos_id']);
+        caso_funcionario($_SESSION['basicos_id']);
         return  $ret;
     }
 
@@ -433,8 +433,8 @@ class PagOtrasFuentes extends PagBaseMultiple
     function datosBusqueda(&$w, &$t, &$db, $idcaso, &$subcons)
     {
         prepara_consulta_gen(
-            $w, $t, $idcaso, 'fuente_directa_caso',
-            'fuente_directa', 'id_fuente_directa', true
+            $w, $t, $idcaso, 'caso_fotra',
+            'fotra', 'id_fuente_directa', true
         );
     }
 
@@ -460,7 +460,7 @@ class PagOtrasFuentes extends PagBaseMultiple
         assert($nomf != null);
         assert($fecha != null);
 
-        $dfdc = objeto_tabla('fuente_directa_caso');
+        $dfdc = objeto_tabla('caso_fotra');
         $dfdc->id_caso = $idcaso;
         $dfdc->fecha = $fecha;
         if (!empty($ubif)) {
@@ -474,12 +474,12 @@ class PagOtrasFuentes extends PagBaseMultiple
             }
         }
         $rp = hace_consulta(
-            $db, "SELECT id FROM fuente_directa " .
+            $db, "SELECT id FROM fotra " .
             " WHERE nombre ILIKE '$nomf'"
         );
         $rows = array();
         $nr = $rp->numRows();
-        $dfd = objeto_tabla('fuente_directa');
+        $dfd = objeto_tabla('fotra');
         if ($nr == 0) {
             $dfd->nombre = $nomf;
             $dfd->insert();
@@ -517,7 +517,7 @@ class PagOtrasFuentes extends PagBaseMultiple
     static function importaRelato(&$db, $r, $idcaso, &$obs)
     {
         foreach ($r->fuente as $fuente) {
-            $idprensa = null;
+            $idffrecuente = null;
             $nomf = $fuente->nombre_fuente;
             if (empty($fuente->fecha_fuente)) {
                 repObs(

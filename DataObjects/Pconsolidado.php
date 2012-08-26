@@ -16,12 +16,12 @@
  */
 
 /**
- * Definicion para la tabla parametros_reporte_consolidado.
+ * Definicion para la tabla pconsolidado.
  */
 require_once 'DataObjects/Basica.php';
 
 /**
- * Definicion para la tabla parametros_reporte_consolidado.
+ * Definicion para la tabla pconsolidado.
  * Ver documentación de DataObjects_Basica.
  *
  * @category SIVeL
@@ -31,13 +31,13 @@ require_once 'DataObjects/Basica.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Basica
  */
-class DataObjects_Parametros_reporte_consolidado extends DataObjects_Basica
+class DataObjects_Pconsolidado extends DataObjects_Basica
 {
 
-    var $__table = 'parametros_reporte_consolidado';    // table name
+    var $__table = 'pconsolidado';    // table name
     var $no_columna;                     // int4(4)  not_null primary_key
     var $rotulo;                          // varchar(-1)  not_null
-    var $tipo_violencia;                  // varchar(-1)  not_null
+    var $tviolencia;                  // varchar(-1)  not_null
     var $clasificacion;                   // varchar(-1)  not_null
     var $peso;                            // int
 
@@ -51,7 +51,7 @@ class DataObjects_Parametros_reporte_consolidado extends DataObjects_Basica
 
         $this->nom_tabla = _('Columnas de Reporte Consolidado');
         $this->fb_fieldLabels['rotulo'] = _('Rotulo');
-        $this->fb_fieldLabels['tipo_violencia'] = _('Tipo de Violencia');
+        $this->fb_fieldLabels['tviolencia'] = _('Tipo de Violencia');
         $this->fb_fieldLabels['clasifcacion'] = _('Clasificación');
         $this->fb_fieldLabels['peso'] = _('Peso');
     }
@@ -63,7 +63,7 @@ class DataObjects_Parametros_reporte_consolidado extends DataObjects_Basica
     var $fb_preDefOrder = array(
         'no_columna',
         'rotulo',
-        'tipo_violencia',
+        'tviolencia',
         'clasificacion',
         'peso',
         'fechacreacion',
@@ -72,7 +72,7 @@ class DataObjects_Parametros_reporte_consolidado extends DataObjects_Basica
     var $fb_fieldsToRender = array(
         'no_columna',
         'rotulo',
-        'tipo_violencia',
+        'tviolencia',
         'clasificacion',
         'peso',
         'fechacreacion',
@@ -81,7 +81,7 @@ class DataObjects_Parametros_reporte_consolidado extends DataObjects_Basica
     var $fb_fieldsRequired = array(
         'no_columna',
         'rotulo',
-        'tipo_violencia',
+        'tviolencia',
         'clasificacion',
         'tipo_fuente',
         'fechacreacion',

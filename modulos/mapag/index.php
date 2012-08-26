@@ -110,7 +110,7 @@ while ($d->fetch()) {
                         <option value = "0">Mostrar todos</option>
                                     <option value = "">-----------------------</option>
 <?php
-    $d = objeto_tabla('tipo_violencia');
+    $d = objeto_tabla('tviolencia');
     $d->find();
     while ($d->fetch()) {
         echo "<option value=\"" . $d->id . "\">";

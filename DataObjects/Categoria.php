@@ -178,10 +178,10 @@ class DataObjects_Categoria extends DataObjects_Basica
         $s =& $form->getElement('id_supracategoria');
         $db = $formbuilder->_do->getDatabaseConnection();
         $s->_options = array();
-        $q = "SELECT tipo_violencia.id || ':' || supracategoria.id,
-            supracategoria.nombre || ' (' || tipo_violencia.nombre || ')'
-            FROM supracategoria, tipo_violencia
-            WHERE tipo_violencia.id = supracategoria.id_tipo_violencia";
+        $q = "SELECT tviolencia.id || ':' || supracategoria.id,
+            supracategoria.nombre || ' (' || tviolencia.nombre || ')'
+            FROM supracategoria, tviolencia
+            WHERE tviolencia.id = supracategoria.id_tipo_violencia";
         $op = $db->getAssoc($q);
         sin_error_pear($op);
         $r = $s->loadArray(htmlentities_array($op));

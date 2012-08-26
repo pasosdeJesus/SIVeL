@@ -16,7 +16,7 @@
  */
 
 /**
- * Definicion  para la tabla relacion_personas
+ * Definicion  para la tabla persona_trelacion
  */
 require_once 'DB_DataObject_SIVeL.php';
 require_once 'HTML/QuickForm/Action.php';
@@ -55,7 +55,7 @@ class AgregarFamiliar extends HTML_QuickForm_Action
 
 
 /**
- * Definicion para la tabla relacion_personas
+ * Definicion para la tabla persona_trelacion
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -65,10 +65,10 @@ class AgregarFamiliar extends HTML_QuickForm_Action
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Relacion_personas extends DB_DataObject_SIVeL
+class DataObjects_Persona_trelacion extends DB_DataObject_SIVeL
 {
 
-    var $__table = 'relacion_personas';         // table name
+    var $__table = 'persona_trelacion';         // table name
     var $id_persona1;                           // int4(4)  not_null primary_key
     var $id_persona2;                           // int4(4)  not_null primary_key
     var $id_tipo;                              // varchar(-1)  not_null
@@ -188,7 +188,7 @@ class DataObjects_Relacion_personas extends DB_DataObject_SIVeL
         $sel =& $form->createElement('select', 'ftipo', 'ftipo', array());
         $sel->loadArray(
             htmlentities_array(
-                $db->getAssoc("SELECT id, nombre FROM tipo_relacion")
+                $db->getAssoc("SELECT id, nombre FROM trelacion")
             )
         );
         $fm[] =& $sel;

@@ -20,14 +20,14 @@
 require_once 'PagBaseMultiple.php';
 require_once 'ResConsulta.php';
 
-require_once 'DataObjects/Rango_edad.php';
-require_once 'DataObjects/Sector_social.php';
+require_once 'DataObjects/Rangoedad.php';
+require_once 'DataObjects/Sectorsocial.php';
 require_once 'DataObjects/Vinculoestado.php';
 require_once 'DataObjects/Filiacion.php';
 require_once 'DataObjects/Organizacion.php';
 require_once 'DataObjects/Profesion.php';
 require_once 'DataObjects/Presponsable.php';
-require_once 'DataObjects/Resultado_agresion.php';
+require_once 'DataObjects/Resagresion.php';
 
 /**
  * Víctima Combatiente.
@@ -353,11 +353,11 @@ class PagVictimaCombatiente extends PagBaseMultiple
             && (!isset($valores['edad']) || $valores['edad'] == '')
             && (!isset($valores['sexo']) || $valores['sexo'] == 'S')
             && (!isset($valores['id_rango_edad'])
-            || $valores['id_rango_edad']==DataObjects_Rango_edad::idSinInfo()
+            || $valores['id_rango_edad']==DataObjects_Rangoedad::idSinInfo()
             )
             && (!isset($valores['id_sector_social'])
             || $valores['id_sector_social']==
-                DataObjects_Sector_social::idSinInfo()
+                DataObjects_Sectorsocial::idSinInfo()
             )
             && (!isset($valores['id_vinculo_estado'])
             || $valores['id_vinculo_estado']==
@@ -385,7 +385,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             return false;
         }
         verifica_sin_CSRF($valores);
-        if ($valores['id_rango_edad']!=DataObjects_Rango_edad::idSinInfo()
+        if ($valores['id_rango_edad']!=DataObjects_Rangoedad::idSinInfo()
             && $valores['edad'] != ''
         ) {
             $r = (int)var_escapa($valores['id_rango_edad'], $db);
@@ -419,8 +419,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
                 error_valida('Falta nombre de víctima', $valores);
                 return false;
             }
-            if (!isset($valores['id_resultado_agresion'])
-                    || $valores['id_resultado_agresion'] == ''
+            if (!isset($valores['id_resagresion'])
+                    || $valores['id_resagresion'] == ''
             ) {
                 error_valida('Falta resultado de agresión', $valores);
                 return false;
@@ -464,7 +464,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             }
 
         }
-        funcionario_caso($_SESSION['basicos_id']);
+        caso_funcionario($_SESSION['basicos_id']);
         return  $ret;
     }
 
@@ -487,7 +487,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             $w, $t, $idcaso, 'combatiente',
             '', '', false, array('antecedente_combatiente'),
             'id_combatiente',
-            array('edad', 'id_resultado_agresion')
+            array('edad', 'id_resagresion')
         );
 
     }
@@ -504,15 +504,15 @@ class PagVictimaCombatiente extends PagBaseMultiple
         $r = "";
         while ($dcombatiente->fetch()) {
             $r .= $sep . trim($dcombatiente->nombre);
-            $r .= "\n    ".$GLOBALS['etiqueta']['resultado_agresion'] . ": ";
-            $dresultado = $dcombatiente->getLink('id_resultado_agresion');
+            $r .= "\n    ".$GLOBALS['etiqueta']['resagresion'] . ": ";
+            $dresultado = $dcombatiente->getLink('id_resagresion');
             $r .= $dresultado->nombre;
-            $dresultado = $dcombatiente->getLink('id_resultado_agresion');
+            $dresultado = $dcombatiente->getLink('id_resagresion');
             $r .= " (".trim($dresultado->nombre).")";
             if ($dcombatiente->id_sector_social!=
-                DataObjects_Sector_social::idSinInfo()
+                DataObjects_Sectorsocial::idSinInfo()
             ) {
-                    $r .= "\n    ".$GLOBALS['etiqueta']['sector_social'] . ": ";
+                    $r .= "\n    ".$GLOBALS['etiqueta']['sectorsocial'] . ": ";
                     $dsectorsocial = $dcombatiente->
                         getLink('id_sector_social');
                     $r .= $dsectorsocial->nombre;
@@ -558,9 +558,9 @@ class PagVictimaCombatiente extends PagBaseMultiple
                         getLink('id_organizacion_armada');
                     $r .= " / ".trim($dorg->nombre);
                 }
-            if (isset($dcombatiente->id_resultado_agresion)) {
+            if (isset($dcombatiente->id_resagresion)) {
                 $dresultado = $dcombatiente->
-                    getLink('id_resultado_agresion');
+                    getLink('id_resagresion');
                 $r .= " ".trim($dresultado->nombre);
             }
             $r .= "\n";

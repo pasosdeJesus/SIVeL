@@ -41,28 +41,28 @@ class PagVictimaColectiva extends PagBaseMultiple
     var $bgrupoper;
 
     /** Víctima colectiva (independiente de caso) */
-    var $bvictima_colectiva ;
+    var $bvictimacolectiva ;
 
     /** Antecedentes */
     var $bantecedente_comunidad;
 
     /** Rangos de edad */
-    var $brango_edad_comunidad;
+    var $bcomunidad_rangoedad;
 
     /** Sectores sociales */
-    var $bsector_social_comunidad;
+    var $bcomunidad_sectorsocial;
 
     /** Vínculos con estado */
     var $bvinculoestado_comunidad;
 
     /** Filiaciones */
-    var $bfiliacion_comunidad;
+    var $bcomunidad_filiacion;
 
     /** Profesiones */
-    var $bprofesion_comunidad;
+    var $bcomunidad_profesion;
 
     /** Organizaciones */
-    var $borganizacion_comunidad;
+    var $bcomunidad_organizacion;
 
     /** Prefijo para variables de sesión */
     var $pref = "fvc";
@@ -71,7 +71,7 @@ class PagVictimaColectiva extends PagBaseMultiple
     var $nuevaCopia = false;
 
     /** Clase modelo para pestaña */
-    var $clase_modelo = 'victima_colectiva';
+    var $clase_modelo = 'victimacolectiva';
 
     var $titulo = 'Víctimas Colectivas';
 
@@ -85,14 +85,14 @@ class PagVictimaColectiva extends PagBaseMultiple
     function nullVar()
     {
         $this->bgrupoper= null;
-        $this->bvictima_colectiva = null;
+        $this->bvictimacolectiva = null;
         $this->bantecedente_comunidad = null;
-        $this->brango_edad_comunidad = null;
-        $this->bsector_social_comunidad = null;
+        $this->bcomunidad_rangoedad = null;
+        $this->bcomunidad_sectorsocial = null;
         $this->bvinculoestado_comunidad = null;
-        $this->bfiliacion_comunidad = null;
-        $this->bprofesion_comunidad = null;
-        $this->borganizacion_comunidad = null;
+        $this->bcomunidad_filiacion = null;
+        $this->bcomunidad_profesion = null;
+        $this->bcomunidad_organizacion = null;
     }
 
     /**
@@ -102,7 +102,7 @@ class PagVictimaColectiva extends PagBaseMultiple
      */
     function copiaId()
     {
-        return $this->bvictima_colectiva->_do->id_grupoper;
+        return $this->bvictimacolectiva->_do->id_grupoper;
     }
 
     /**
@@ -115,22 +115,22 @@ class PagVictimaColectiva extends PagBaseMultiple
     function elimina(&$valores)
     {
         $this->iniVar();
-        if (isset($this->bvictima_colectiva->_do->id_grupoper)) {
-            $this->eliminaVic($this->bvictima_colectiva->_do, true);
+        if (isset($this->bvictimacolectiva->_do->id_grupoper)) {
+            $this->eliminaVic($this->bvictimacolectiva->_do, true);
             $_SESSION['fvc_total']--;
         }
     }
 
     var $tablasrel = array(
         'grupoper',
-        'victima_colectiva',
+        'victimacolectiva',
         'antecedente_comunidad',
-        'rango_edad_comunidad',
-        'sector_social_comunidad',
+        'comunidad_rangoedad',
+        'comunidad_sectorsocial',
         'vinculoestado_comunidad',
-        'filiacion_comunidad',
-        'profesion_comunidad',
-        'organizacion_comunidad',
+        'comunidad_filiacion',
+        'comunidad_profesion',
+        'comunidad_organizacion',
     );
 
 
@@ -150,20 +150,20 @@ class PagVictimaColectiva extends PagBaseMultiple
             $id_grupoper = $apar[0];
         }
         $dgrupoper =& objeto_tabla('grupoper');
-        $dvictima_colectiva =& objeto_tabla('victima_colectiva');
+        $dvictimacolectiva =& objeto_tabla('victimacolectiva');
         $dantecedente_comunidad =&
             objeto_tabla('antecedente_comunidad', $this);
-        $drango_edad_comunidad =&
-            objeto_tabla('rango_edad_comunidad');
-        $dsector_social_comunidad =&
-            objeto_tabla('sector_social_comunidad');
+        $dcomunidad_rangoedad =&
+            objeto_tabla('comunidad_rangoedad');
+        $dcomunidad_sectorsocial =&
+            objeto_tabla('comunidad_sectorsocial');
         $dvinculoestado_comunidad =&
             objeto_tabla('vinculoestado_comunidad');
-        $dfiliacion_comunidad =& objeto_tabla('filiacion_comunidad');
-        $dprofesion_comunidad =& objeto_tabla('profesion_comunidad');
-        $dorganizacion_comunidad =&
-            objeto_tabla('organizacion_comunidad');
-        $db =& $dvictima_colectiva->getDatabaseConnection();
+        $dcomunidad_filiacion =& objeto_tabla('comunidad_filiacion');
+        $dcomunidad_profesion =& objeto_tabla('comunidad_profesion');
+        $dcomunidad_organizacion =&
+            objeto_tabla('comunidad_organizacion');
+        $db =& $dvictimacolectiva->getDatabaseConnection();
 
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
@@ -181,32 +181,32 @@ class PagVictimaColectiva extends PagBaseMultiple
         if ($indid >= 0) {
             $_SESSION['fvc_pag'] = $indid;
         }
-        $dvictima_colectiva->id_caso= $idcaso;
+        $dvictimacolectiva->id_caso= $idcaso;
         if ($_SESSION['fvc_pag'] < 0 || $_SESSION['fvc_pag'] >= $tot) {
-            $dvictima_colectiva->id_grupoper = null;
+            $dvictimacolectiva->id_grupoper = null;
         } else {
-            $dvictima_colectiva->id_grupoper = $idp[$_SESSION['fvc_pag']];
-            $dvictima_colectiva->find();
-            $dvictima_colectiva->fetch();
+            $dvictimacolectiva->id_grupoper = $idp[$_SESSION['fvc_pag']];
+            $dvictimacolectiva->find();
+            $dvictimacolectiva->fetch();
             $dgrupoper->id = $idp[$_SESSION['fvc_pag']];
             $dgrupoper->find();
             $dgrupoper->fetch();
         }
-        $idgrupoper = $dvictima_colectiva->id_grupoper;
+        $idgrupoper = $dvictimacolectiva->id_grupoper;
         $dantecedente_comunidad->id_grupoper = $idgrupoper;
         $dantecedente_comunidad->id_caso= $idcaso;
-        $drango_edad_comunidad->id_grupoper= $idgrupoper;
-        $drango_edad_comunidad->id_caso= $idcaso;
-        $dsector_social_comunidad->id_grupoper = $idgrupoper;
-        $dsector_social_comunidad->id_caso = $idcaso;
+        $dcomunidad_rangoedad->id_grupoper= $idgrupoper;
+        $dcomunidad_rangoedad->id_caso= $idcaso;
+        $dcomunidad_sectorsocial->id_grupoper = $idgrupoper;
+        $dcomunidad_sectorsocial->id_caso = $idcaso;
         $dvinculoestado_comunidad->id_grupoper = $idgrupoper;
         $dvinculoestado_comunidad->id_caso = $idcaso;
-        $dfiliacion_comunidad->id_grupoper = $idgrupoper;
-        $dfiliacion_comunidad->id_caso= $idcaso;
-        $dprofesion_comunidad->id_grupoper= $idgrupoper;
-        $dprofesion_comunidad->id_caso = $idcaso;
-        $dorganizacion_comunidad->id_grupoper = $idgrupoper;
-        $dorganizacion_comunidad->id_caso = $idcaso;
+        $dcomunidad_filiacion->id_grupoper = $idgrupoper;
+        $dcomunidad_filiacion->id_caso= $idcaso;
+        $dcomunidad_profesion->id_grupoper= $idgrupoper;
+        $dcomunidad_profesion->id_caso = $idcaso;
+        $dcomunidad_organizacion->id_grupoper = $idgrupoper;
+        $dcomunidad_organizacion->id_caso = $idcaso;
 
         $this->bgrupoper =& DB_DataObject_FormBuilder::create(
             $dgrupoper,
@@ -214,27 +214,27 @@ class PagVictimaColectiva extends PagBaseMultiple
             'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
         );
-        $this->bvictima_colectiva  =& DB_DataObject_FormBuilder::create(
-            $dvictima_colectiva,
+        $this->bvictimacolectiva  =& DB_DataObject_FormBuilder::create(
+            $dvictimacolectiva,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
             'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
         );
-        $this->bvictima_colectiva->useMutators = true;
+        $this->bvictimacolectiva->useMutators = true;
         $this->bantecedente_comunidad =& DB_DataObject_FormBuilder::create(
             $dantecedente_comunidad,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
             'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
         );
-        $this->brango_edad_comunidad =& DB_DataObject_FormBuilder::create(
-            $drango_edad_comunidad,
+        $this->bcomunidad_rangoedad =& DB_DataObject_FormBuilder::create(
+            $dcomunidad_rangoedad,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
             'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
         );
-        $this->bsector_social_comunidad =& DB_DataObject_FormBuilder::create(
-            $dsector_social_comunidad,
+        $this->bcomunidad_sectorsocial =& DB_DataObject_FormBuilder::create(
+            $dcomunidad_sectorsocial,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
             'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
@@ -245,20 +245,20 @@ class PagVictimaColectiva extends PagBaseMultiple
             'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
         );
-        $this->bfiliacion_comunidad =& DB_DataObject_FormBuilder::create(
-            $dfiliacion_comunidad,
+        $this->bcomunidad_filiacion =& DB_DataObject_FormBuilder::create(
+            $dcomunidad_filiacion,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
             'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
         );
-        $this->bprofesion_comunidad =& DB_DataObject_FormBuilder::create(
-            $dprofesion_comunidad,
+        $this->bcomunidad_profesion =& DB_DataObject_FormBuilder::create(
+            $dcomunidad_profesion,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
             'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
         );
-        $this->borganizacion_comunidad =& DB_DataObject_FormBuilder::create(
-            $dorganizacion_comunidad,
+        $this->bcomunidad_organizacion =& DB_DataObject_FormBuilder::create(
+            $dcomunidad_organizacion,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
             'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
@@ -303,46 +303,46 @@ class PagVictimaColectiva extends PagBaseMultiple
     function formularioAgrega(&$db, $idcaso)
     {
         $e = $this->getElement(null);
-        $vv= isset($this->bvictima_colectiva->_do->id_grupoper) ?
-            $this->bvictima_colectiva->_do->id_grupoper : '';
+        $vv= isset($this->bvictimacolectiva->_do->id_grupoper) ?
+            $this->bvictimacolectiva->_do->id_grupoper : '';
         //$this->addElement('hidden', 'id_grupoper', $vv);
 
         $this->bgrupoper->createSubmit = 0;
         $this->bgrupoper->useForm($this);
         $this->bgrupoper->getForm();
 
-        $this->bvictima_colectiva->createSubmit = 0;
-        $this->bvictima_colectiva->useForm($this);
-        $this->bvictima_colectiva->getForm();
+        $this->bvictimacolectiva->createSubmit = 0;
+        $this->bvictimacolectiva->useForm($this);
+        $this->bvictimacolectiva->getForm();
 
         $this->bantecedente_comunidad->createSubmit = 0;
         $this->bantecedente_comunidad->useForm($this);
         $this->bantecedente_comunidad->getForm();
 
-        $this->brango_edad_comunidad->createSubmit = 0;
-        $this->brango_edad_comunidad->useForm($this);
-        $this->brango_edad_comunidad->getForm();
+        $this->bcomunidad_rangoedad->createSubmit = 0;
+        $this->bcomunidad_rangoedad->useForm($this);
+        $this->bcomunidad_rangoedad->getForm();
 
-        $this->bsector_social_comunidad->createSubmit = 0;
-        $this->bsector_social_comunidad->useForm($this);
-        $this->bsector_social_comunidad->getForm();
+        $this->bcomunidad_sectorsocial->createSubmit = 0;
+        $this->bcomunidad_sectorsocial->useForm($this);
+        $this->bcomunidad_sectorsocial->getForm();
 
         $this->bvinculoestado_comunidad->createSubmit = 0;
         $this->bvinculoestado_comunidad->useForm($this);
         $this->bvinculoestado_comunidad->getForm();
 
-        $this->bfiliacion_comunidad->createSubmit = 0;
-        $this->bfiliacion_comunidad->useForm($this);
-        $this->bfiliacion_comunidad->getForm();
+        $this->bcomunidad_filiacion->createSubmit = 0;
+        $this->bcomunidad_filiacion->useForm($this);
+        $this->bcomunidad_filiacion->getForm();
 
         $e =& $this->getElement('id_filiacion');
-        $this->bprofesion_comunidad->createSubmit = 0;
-        $this->bprofesion_comunidad->useForm($this);
-        $this->bprofesion_comunidad->getForm();
+        $this->bcomunidad_profesion->createSubmit = 0;
+        $this->bcomunidad_profesion->useForm($this);
+        $this->bcomunidad_profesion->getForm();
 
-        $this->borganizacion_comunidad->createSubmit = 0;
-        $this->borganizacion_comunidad->useForm($this);
-        $this->borganizacion_comunidad->getForm();
+        $this->bcomunidad_organizacion->createSubmit = 0;
+        $this->bcomunidad_organizacion->useForm($this);
+        $this->bcomunidad_organizacion->getForm();
 
         agrega_control_CSRF($this);
 
@@ -362,7 +362,7 @@ class PagVictimaColectiva extends PagBaseMultiple
     {
         $campos = array_merge(
             array('anotaciones'),
-            $this->bvictima_colectiva->_do->fb_fieldsToRender,
+            $this->bvictimacolectiva->_do->fb_fieldsToRender,
             array(
             'id_antecedente', 'id_rango',
             'id_sector', 'id_vinculo_estado', 'id_filiacion',
@@ -370,8 +370,8 @@ class PagVictimaColectiva extends PagBaseMultiple
             )
         );
 
-        $vv= isset($this->bvictima_colectiva->_do->id_grupoper) ?
-            $this->bvictima_colectiva->_do->id_grupoper : '';
+        $vv= isset($this->bvictimacolectiva->_do->id_grupoper) ?
+            $this->bvictimacolectiva->_do->id_grupoper : '';
         $v = array();
         if (isset($_SESSION['recuperaErrorValida'])) {
             $v = $_SESSION['recuperaErrorValida'];
@@ -389,7 +389,7 @@ class PagVictimaColectiva extends PagBaseMultiple
             $p = $cq->_elements[1];
             $p->setValue($dg->nombre);
 
-            $d =& objeto_tabla('victima_colectiva');
+            $d =& objeto_tabla('victimacolectiva');
             $d->id_grupoper = $id;
             $d->id_caso = $_SESSION['basicos_id'];
             $d->find();
@@ -398,12 +398,12 @@ class PagVictimaColectiva extends PagBaseMultiple
                 $v[$c] = $d->$c;
             }
             $r = array('antecedente_comunidad' => 'id_antecedente',
-                'rango_edad_comunidad' =>  'id_rango',
-                'sector_social_comunidad' =>  'id_sector',
+                'comunidad_rangoedad' =>  'id_rango',
+                'comunidad_sectorsocial' =>  'id_sector',
                 'vinculoestado_comunidad' =>  'id_vinculo_estado',
-                'filiacion_comunidad' =>  'id_filiacion',
-                'profesion_comunidad' =>  'id_profesion',
-                'organizacion_comunidad' =>  'id_organizacion'
+                'comunidad_filiacion' =>  'id_filiacion',
+                'comunidad_profesion' =>  'id_profesion',
+                'comunidad_organizacion' =>  'id_organizacion'
             );
             foreach ($r as $nt => $ca) {
                 $valel = array();
@@ -432,14 +432,14 @@ class PagVictimaColectiva extends PagBaseMultiple
                 $valsca[] = $this->bantecedente_comunidad->_do->id_antecedente;
             }
 
-            $n = $this->brango_edad_comunidad->_do->find();
-            while ($this->brango_edad_comunidad->_do->fetch()) {
-                $valscre[] = $this->brango_edad_comunidad->_do->id_rango;
+            $n = $this->bcomunidad_rangoedad->_do->find();
+            while ($this->bcomunidad_rangoedad->_do->fetch()) {
+                $valscre[] = $this->bcomunidad_rangoedad->_do->id_rango;
             }
 
-            $this->bsector_social_comunidad->_do->find();
-            while ($this->bsector_social_comunidad->_do->fetch()) {
-                $valscss[] = $this->bsector_social_comunidad->_do->id_sector;
+            $this->bcomunidad_sectorsocial->_do->find();
+            while ($this->bcomunidad_sectorsocial->_do->fetch()) {
+                $valscss[] = $this->bcomunidad_sectorsocial->_do->id_sector;
             }
 
             $this->bvinculoestado_comunidad->_do->find();
@@ -448,19 +448,19 @@ class PagVictimaColectiva extends PagBaseMultiple
                     = $this->bvinculoestado_comunidad->_do->id_vinculo_estado;
             }
 
-            $this->bfiliacion_comunidad->_do->find();
-            while ($this->bfiliacion_comunidad->_do->fetch()) {
-                $valscfc[] = $this->bfiliacion_comunidad->_do->id_filiacion;
+            $this->bcomunidad_filiacion->_do->find();
+            while ($this->bcomunidad_filiacion->_do->fetch()) {
+                $valscfc[] = $this->bcomunidad_filiacion->_do->id_filiacion;
             }
 
-            $this->bprofesion_comunidad->_do->find();
-            while ($this->bprofesion_comunidad->_do->fetch()) {
-                $valscpro[] = $this->bprofesion_comunidad->_do->id_profesion;
+            $this->bcomunidad_profesion->_do->find();
+            while ($this->bcomunidad_profesion->_do->fetch()) {
+                $valscpro[] = $this->bcomunidad_profesion->_do->id_profesion;
             }
 
-            $this->borganizacion_comunidad->_do->find();
-            while ($this->borganizacion_comunidad->_do->fetch()) {
-                $valscoc[] = $this->borganizacion_comunidad->_do->id_organizacion;
+            $this->bcomunidad_organizacion->_do->find();
+            while ($this->bcomunidad_organizacion->_do->fetch()) {
+                $valscoc[] = $this->bcomunidad_organizacion->_do->id_organizacion;
             }
             $v['id_antecedente'] = $valsca;
             $v['id_rango'] = $valscre;
@@ -470,11 +470,11 @@ class PagVictimaColectiva extends PagBaseMultiple
             $v['id_profesion'] = $valscpro;
             $v['id_organizacion'] = $valscoc;
             $v['id_organizacion_armada']
-                = $this->bvictima_colectiva->_do->id_organizacion_armada;
+                = $this->bvictimacolectiva->_do->id_organizacion_armada;
             $v['personas_aprox']
-                = isset($this->bvictima_colectiva->_do->personas_aprox)
-                && $this->bvictima_colectiva->_do->personas_aprox != 'null' ?
-                $this->bvictima_colectiva->_do->personas_aprox :
+                = isset($this->bvictimacolectiva->_do->personas_aprox)
+                && $this->bvictimacolectiva->_do->personas_aprox != 'null' ?
+                $this->bvictimacolectiva->_do->personas_aprox :
                 '';
         }
         establece_valores_form($this, $campos, $v);
@@ -506,12 +506,12 @@ class PagVictimaColectiva extends PagBaseMultiple
                 " AND id_grupoper='$idgrupoper'"
             );
             hace_consulta(
-                $db, "DELETE FROM rango_edad_comunidad " .
+                $db, "DELETE FROM comunidad_rangoedad " .
                 " WHERE id_caso=$idcaso " .
                 " AND id_grupoper='$idgrupoper'"
             );
             hace_consulta(
-                $db, "DELETE FROM sector_social_comunidad " .
+                $db, "DELETE FROM comunidad_sectorsocial " .
                 " WHERE id_caso=$idcaso " .
                 " AND id_grupoper='$idgrupoper'"
             );
@@ -522,17 +522,17 @@ class PagVictimaColectiva extends PagBaseMultiple
                 " AND id_grupoper='$idgrupoper'"
             );
             hace_consulta(
-                $db, "DELETE FROM filiacion_comunidad " .
+                $db, "DELETE FROM comunidad_filiacion " .
                 " WHERE id_caso=$idcaso " .
                 " AND id_grupoper='$idgrupoper'"
             );
             hace_consulta(
-                $db, "DELETE FROM profesion_comunidad " .
+                $db, "DELETE FROM comunidad_profesion " .
                 " WHERE id_caso=$idcaso " .
                 " AND id_grupoper='$idgrupoper'"
             );
             hace_consulta(
-                $db, "DELETE FROM organizacion_comunidad " .
+                $db, "DELETE FROM comunidad_organizacion " .
                 " WHERE id_caso=$idcaso " .
                 " AND id_grupoper='$idgrupoper'"
             );
@@ -557,7 +557,7 @@ class PagVictimaColectiva extends PagBaseMultiple
     {
         assert($db != null);
         assert(isset($idcaso));
-        $dvcolectiva =& objeto_tabla('victima_colectiva');
+        $dvcolectiva =& objeto_tabla('victimacolectiva');
         $dvcolectiva->id_caso = $idcaso;
         $dvcolectiva->find();
         $cp = array();
@@ -565,7 +565,7 @@ class PagVictimaColectiva extends PagBaseMultiple
             $cp[] = $dvcolectiva->id_grupoper;
         }
         foreach ($cp as $idg) {
-            $dvcolectiva =& objeto_tabla('victima_colectiva');
+            $dvcolectiva =& objeto_tabla('victimacolectiva');
             $dvcolectiva->id_caso = $idcaso;
             $dvcolectiva->id_grupoper= $idg;
             $dvcolectiva->find();
@@ -649,18 +649,18 @@ class PagVictimaColectiva extends PagBaseMultiple
             die($ret->getMessage());
         }
         $idgrupoper = $this->bgrupoper->_do->id;
-        $nuevo = $this->bvictima_colectiva->_do->id_grupoper == null
-            || $this->bvictima_colectiva->_do->id_grupoper != $idgrupoper;
+        $nuevo = $this->bvictimacolectiva->_do->id_grupoper == null
+            || $this->bvictimacolectiva->_do->id_grupoper != $idgrupoper;
 
-        $this->bvictima_colectiva->_do->id_grupoper = $idgrupoper;
+        $this->bvictimacolectiva->_do->id_grupoper = $idgrupoper;
         $valores['id_grupoper'] = $idgrupoper;
         if ($nuevo) {
-            $this->bvictima_colectiva->forceQueryType(
+            $this->bvictimacolectiva->forceQueryType(
                 DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
             );
         }
         $ret = $this->process(
-            array(&$this->bvictima_colectiva,
+            array(&$this->bvictimacolectiva,
             'processForm'
             ), false
         );
@@ -671,7 +671,7 @@ class PagVictimaColectiva extends PagBaseMultiple
         if ($nuevo) {
             $_SESSION['fvc_total']++;
         } else {
-            $this->eliminaVic($this->bvictima_colectiva->_do, false);
+            $this->eliminaVic($this->bvictimacolectiva->_do, false);
         }
 
         if (isset($valores['id_antecedente'])) {
@@ -687,21 +687,21 @@ class PagVictimaColectiva extends PagBaseMultiple
 
         if (isset($valores['id_rango'])) {
             foreach (var_escapa($valores['id_rango']) as $k => $v) {
-                $this->brango_edad_comunidad->_do->id_grupoper = $idgrupoper;
-                $this->brango_edad_comunidad->_do->id_caso = $idcaso;
-                $this->brango_edad_comunidad->_do->id_rango
+                $this->bcomunidad_rangoedad->_do->id_grupoper = $idgrupoper;
+                $this->bcomunidad_rangoedad->_do->id_caso = $idcaso;
+                $this->bcomunidad_rangoedad->_do->id_rango
                     = (int)var_escapa($v, $db);
-                $this->brango_edad_comunidad->_do->insert();
+                $this->bcomunidad_rangoedad->_do->insert();
             }
         }
 
         if (isset($valores['id_sector'])) {
             foreach (var_escapa($valores['id_sector']) as $k => $v) {
-                $this->bsector_social_comunidad->_do->id_grupoper = $idgrupoper;
-                $this->bsector_social_comunidad->_do->id_caso = $idcaso;
-                $this->bsector_social_comunidad->_do->id_sector
+                $this->bcomunidad_sectorsocial->_do->id_grupoper = $idgrupoper;
+                $this->bcomunidad_sectorsocial->_do->id_caso = $idcaso;
+                $this->bcomunidad_sectorsocial->_do->id_sector
                     = (int)var_escapa($v, $db);
-                $this->bsector_social_comunidad->_do->insert();
+                $this->bcomunidad_sectorsocial->_do->insert();
             }
         }
 
@@ -718,35 +718,35 @@ class PagVictimaColectiva extends PagBaseMultiple
 
         if (isset($valores['id_filiacion'])) {
             foreach (var_escapa($valores['id_filiacion']) as $k => $v) {
-                $this->bfiliacion_comunidad->_do->id_grupoper = $idgrupoper;
-                $this->bfiliacion_comunidad->_do->id_caso = $idcaso;
-                $this->bfiliacion_comunidad->_do->id_filiacion
+                $this->bcomunidad_filiacion->_do->id_grupoper = $idgrupoper;
+                $this->bcomunidad_filiacion->_do->id_caso = $idcaso;
+                $this->bcomunidad_filiacion->_do->id_filiacion
                     = (int)var_escapa($v, $db);
-                $this->bfiliacion_comunidad->_do->insert();
+                $this->bcomunidad_filiacion->_do->insert();
             }
         }
 
         if (isset($valores['id_profesion'])) {
             foreach (var_escapa($valores['id_profesion']) as $k => $v) {
-                $this->bprofesion_comunidad->_do->id_grupoper = $idgrupoper;
-                $this->bprofesion_comunidad->_do->id_caso= $idcaso;
-                $this->bprofesion_comunidad->_do->id_profesion
+                $this->bcomunidad_profesion->_do->id_grupoper = $idgrupoper;
+                $this->bcomunidad_profesion->_do->id_caso= $idcaso;
+                $this->bcomunidad_profesion->_do->id_profesion
                     = (int)var_escapa($v, $db);
-                $this->bprofesion_comunidad->_do->insert();
+                $this->bcomunidad_profesion->_do->insert();
             }
         }
 
         if (isset($valores['id_organizacion'])) {
             foreach (var_escapa($valores['id_organizacion']) as $k => $v) {
-                $this->borganizacion_comunidad->_do->id_grupoper = $idgrupoper;
-                $this->borganizacion_comunidad->_do->id_caso = $idcaso;
-                $this->borganizacion_comunidad->_do->id_organizacion
+                $this->bcomunidad_organizacion->_do->id_grupoper = $idgrupoper;
+                $this->bcomunidad_organizacion->_do->id_caso = $idcaso;
+                $this->bcomunidad_organizacion->_do->id_organizacion
                     = (int)var_escapa($v, $db);
-                $this->borganizacion_comunidad->_do->insert();
+                $this->bcomunidad_organizacion->_do->insert();
             }
         }
 
-        funcionario_caso($_SESSION['basicos_id']);
+        caso_funcionario($_SESSION['basicos_id']);
         return  $ret;
     }
 
@@ -767,11 +767,11 @@ class PagVictimaColectiva extends PagBaseMultiple
     function datosBusqueda(&$w, &$t, &$db, $idcaso, &$subcons)
     {
         prepara_consulta_gen(
-            $w, $t, $idcaso, 'victima_colectiva',
+            $w, $t, $idcaso, 'victimacolectiva',
             '', '', false, array('antecedente_comunidad',
-                    'rango_edad_comunidad', 'sector_social_comunidad',
-                    'vinculoestado_comunidad', 'filiacion_comunidad',
-                    'profesion_comunidad', 'organizacion_comunidad'
+                    'comunidad_rangoedad', 'comunidad_sectorsocial',
+                    'vinculoestado_comunidad', 'comunidad_filiacion',
+                    'comunidad_profesion', 'comunidad_organizacion'
             ),
             'id_grupoper', array('personas_aprox'), 'id_grupoper'
         );
@@ -801,7 +801,7 @@ class PagVictimaColectiva extends PagBaseMultiple
         parent::compara(
             $db, $r, $id1, $id2,
             array('Victimas Colectivas' =>
-            array('victima_colectiva', 'id_grupoper'))
+            array('victimacolectiva', 'id_grupoper'))
         );
     }
 
@@ -832,7 +832,7 @@ class PagVictimaColectiva extends PagBaseMultiple
         parent::mezcla(
             $db, $sol, $id1, $id2, $idn,
             array('Victimas Colectivas'
-            => array('victima_colectiva', 'id_grupoper'))
+            => array('victimacolectiva', 'id_grupoper'))
         );
     }
 

@@ -59,7 +59,7 @@ function eliminaCaso(&$db, $idcaso)
             echo_esc("Falta eliminaDep en $k, $c");
         }
     }
-    $q = "DELETE FROM funcionario_caso WHERE id_caso='$idcaso'";
+    $q = "DELETE FROM caso_funcionario WHERE id_caso='$idcaso'";
     hace_consulta($db, $q);
     $q = "DELETE FROM caso WHERE id='$idcaso'";
     $res = hace_consulta($db, $q);

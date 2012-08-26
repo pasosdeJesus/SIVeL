@@ -71,7 +71,7 @@ hace_consulta(
     " VALUES ('5', 'SIN INFORMACIÓN', 'SIN INFORMACIÓN', '2001-01-01');"
 );
 hace_consulta(
-    $db, "INSERT INTO rango_edad (id, nombre, rango, limiteinferior,
+    $db, "INSERT INTO rangoedad (id, nombre, rango, limiteinferior,
     limitesuperior, fechacreacion)
     VALUES ('6', 'SN', 'SIN INFORMACIÓN', '-1', '-1', '2001-01-01');"
 );

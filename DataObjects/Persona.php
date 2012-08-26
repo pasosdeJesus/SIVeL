@@ -404,7 +404,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
                     $valores['anionac'] = $fhanio - (int)$valores['edad'];
                 }
         if ($valrango
-            && $valores['id_rango_edad'] != DataObjects_Rango_edad::idSinInfo()
+            && $valores['id_rango_edad'] != DataObjects_Rangoedad::idSinInfo()
                 && $valores['anionac'] != ''
             ) {
                 $r = (int)$valores['id_rango_edad'];

@@ -23,15 +23,15 @@ require_once 'ResConsulta.php';
 require_once 'PagUbicacion.php';
 
 require_once 'DataObjects/Persona.php';
-require_once 'DataObjects/Rango_edad.php';
-require_once 'DataObjects/Sector_social.php';
+require_once 'DataObjects/Rangoedad.php';
+require_once 'DataObjects/Sectorsocial.php';
 require_once 'DataObjects/Vinculoestado.php';
 require_once 'DataObjects/Filiacion.php';
 require_once 'DataObjects/Organizacion.php';
 require_once 'DataObjects/Profesion.php';
 require_once 'DataObjects/Presponsable.php';
-require_once 'DataObjects/Resultado_agresion.php';
-require_once 'DataObjects/Relacion_personas.php';
+require_once 'DataObjects/Resagresion.php';
+require_once 'DataObjects/Persona_trelacion.php';
 
 
 /**
@@ -58,7 +58,7 @@ class EliminaRel extends HTML_QuickForm_Action
     {
         assert($_REQUEST['eliminarel'] != null);
 
-        $dvictima=& objeto_tabla('relacion_personas');
+        $dvictima=& objeto_tabla('persona_trelacion');
         list($dvictima->id_persona1, $dvictima->id_persona2,
             $dvictima->id_tipo
         ) = explode(':', var_escapa($_REQUEST['eliminarel']));
@@ -86,7 +86,7 @@ class PagVictimaIndividual extends PagBaseMultiple
 
     var $bpersona;
 
-    var $brelacion_personas;
+    var $bpersona_trelacion;
 
     /** Víctima */
     var $bvictima;
@@ -111,7 +111,7 @@ class PagVictimaIndividual extends PagBaseMultiple
     {
         $this->bvictima = null;
         $this->bpersona = null;
-        $this->relacion_personas = null;
+        $this->persona_trelacion = null;
         $this->bantecedente_victima = null;
         PagUbicacion::nullVarUbicacion();
     }
@@ -173,7 +173,7 @@ class PagVictimaIndividual extends PagBaseMultiple
         }
         $dvictima=& objeto_tabla('victima');
         $dpersona=& objeto_tabla('persona');
-        $drelacion=& objeto_tabla('relacion_personas');
+        $drelacion=& objeto_tabla('persona_trelacion');
         $dantecedente_victima =& objeto_tabla('antecedente_victima');
 
         $db =& $dvictima->getDatabaseConnection();
@@ -234,7 +234,7 @@ class PagVictimaIndividual extends PagBaseMultiple
             )
         );
         $this->bpersona->useMutators = true;
-        $this->brelacion_personas=& DB_DataObject_FormBuilder::create(
+        $this->bpersona_trelacion=& DB_DataObject_FormBuilder::create(
             $drelacion,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
             'ruleViolationMessage' => $GLOBALS['mreglavio']
@@ -333,9 +333,9 @@ class PagVictimaIndividual extends PagBaseMultiple
             }
         }
 
-        $this->brelacion_personas->createSubmit = 0;
-        $this->brelacion_personas->useForm($this);
-        $f =& $this->brelacion_personas->getForm($this);
+        $this->bpersona_trelacion->createSubmit = 0;
+        $this->bpersona_trelacion->useForm($this);
+        $f =& $this->bpersona_trelacion->getForm($this);
 
         if (isset($GLOBALS['iglesias_cristianas'])
             && $GLOBALS['iglesias_cristianas']
@@ -595,12 +595,12 @@ class PagVictimaIndividual extends PagBaseMultiple
             || $valores['id_profesion'] == DataObjects_Profesion::idSinInfo()
         );
         $es_vacio = $es_vacio && (!isset($valores['id_rango_edad'])
-            || $valores['id_rango_edad'] == DataObjects_Rango_edad::idSinInfo()
+            || $valores['id_rango_edad'] == DataObjects_Rangoedad::idSinInfo()
         );
         $es_vacio = $es_vacio && (!isset($valores['id_filiacion'])
             || $valores['id_filiacion'] == DataObjects_Filiacion::idSinInfo()
         );
-        $sssin = DataObjects_Sector_social::idSinInfo();
+        $sssin = DataObjects_Sectorsocial::idSinInfo();
         $es_vacio = $es_vacio && (!isset($valores['id_sector_social'])
             || $valores['id_sector_social'] == $sssin
         );
@@ -699,15 +699,15 @@ class PagVictimaIndividual extends PagBaseMultiple
                 $nper->sexo = 'S';
                 $nper->insert();
             }
-            $this->brelacion_personas->_do->id_persona1
+            $this->bpersona_trelacion->_do->id_persona1
                 = $this->bpersona->_do->id;
-            $this->brelacion_personas->_do->id_persona2
+            $this->bpersona_trelacion->_do->id_persona2
                 = $nper->id;
-            $this->brelacion_personas->_do->id_tipo
+            $this->bpersona_trelacion->_do->id_tipo
                 = var_escapa($valores['ftipo'], $db, 5);
-            $this->brelacion_personas->_do->observaciones
+            $this->bpersona_trelacion->_do->observaciones
                 = var_escapa($valores['fobservaciones'], $db);
-            $this->brelacion_personas->_do->insert();
+            $this->bpersona_trelacion->_do->insert();
             $procFam = false;
         }
 
@@ -729,8 +729,8 @@ class PagVictimaIndividual extends PagBaseMultiple
                 }
             }
         }
-        //$bt->setMarker("procesa: antes de funcionario_caso");
-        funcionario_caso($_SESSION['basicos_id']);
+        //$bt->setMarker("procesa: antes de caso_funcionario");
+        caso_funcionario($_SESSION['basicos_id']);
         //$bt->_Benchmark_Timer();
         return  $ret;
     }

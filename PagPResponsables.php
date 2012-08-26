@@ -478,7 +478,7 @@ class PagPResponsables extends PagBaseMultiple
             }
         }
 
-        funcionario_caso($_SESSION['basicos_id']);
+        caso_funcionario($_SESSION['basicos_id']);
         return  $ret;
     }
 

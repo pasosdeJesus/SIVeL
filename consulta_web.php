@@ -95,7 +95,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         $pConcoordenadas = (int)var_req_escapa('concoordenadas', $db);
         $pTeX       = (int)var_req_escapa('m_tex', $db);
         $pTitulo    = substr(var_req_escapa('titulo', $db), 0, 32);
-        $pTvio    = substr(var_req_escapa('tipo_violencia', $db), 0, 1);
+        $pTvio    = substr(var_req_escapa('tviolencia', $db), 0, 1);
         $pPrimNom = var_req_escapa('primnom') == 'nombre';
 
         $campos = array(); //'caso_id' => 'Cód.');
@@ -300,14 +300,14 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             && ($pUsuario != '' || (isset($pFiini['Y']) && $pFiini['Y'] != '')
             || (isset($pFifin['Y']) && $pFifin['Y'] != ''))
         ) {
-            $tablas .= ", funcionario_caso";
-            consulta_and_sinap($where, "funcionario_caso.id_caso", "caso.id");
+            $tablas .= ", caso_funcionario";
+            consulta_and_sinap($where, "caso_funcionario.id_caso", "caso.id");
         }
         if (in_array(42, $page->opciones)
             && isset($pFiini['Y']) && $pFiini['Y'] != ''
         ) {
             consulta_and(
-                $db, $where, "funcionario_caso.fecha_inicio",
+                $db, $where, "caso_funcionario.fecha_inicio",
                 arr_a_fecha($pFiini, true), ">="
             );
         }
@@ -315,14 +315,14 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             && isset($pFifin['Y']) && $pFifin['Y'] != ''
         ) {
             consulta_and(
-                $db, $where, "funcionario_caso.fecha_inicio",
+                $db, $where, "caso_funcionario.fecha_inicio",
                 arr_a_fecha($pFifin, false), "<="
             );
         }
 
         if (in_array(42, $page->opciones) && $pUsuario != '') {
             consulta_and(
-                $db, $where, "funcionario_caso.id_funcionario", $pUsuario
+                $db, $where, "caso_funcionario.id_funcionario", $pUsuario
             );
         }
 
@@ -643,7 +643,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
             'select', 'ssocial', _('Sector Social Víctima')
         );
         $options = array('' => '') + htmlentities_array(
-            $db->getAssoc("SELECT id, nombre FROM sector_social")
+            $db->getAssoc("SELECT id, nombre FROM sectorsocial")
         );
         $sel->loadArray($options);
 

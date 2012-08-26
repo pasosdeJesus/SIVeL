@@ -35,7 +35,7 @@ $post['ubicacion_fisica'] = 'ubicación';
 $post['tipo_fuente'] = '0';
 $post['_qf_otras_siguienteMultiple'] = 'Fuente siguiente';
 $post['_qf_default'] = 'otras:siguiente';
-pasaPestanaFicha($db, array("fuente_directa"), $post, 1);
+pasaPestanaFicha($db, array("fotra"), $post, 1);
 
 exit(0);
 ?>

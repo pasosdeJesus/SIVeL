@@ -56,19 +56,19 @@ CREATE TABLE caso (
 	id_intervalo INTEGER REFERENCES intervalo
 ); 
 
-CREATE SEQUENCE parametros_reporte_consolidado_seq;
+CREATE SEQUENCE pconsolidado_seq;
 
-CREATE TABLE parametros_reporte_consolidado (
+CREATE TABLE pconsolidado (
 	no_columna INTEGER PRIMARY KEY DEFAULT (nextval('parametros_reporte_consolidado_seq')),
 	rotulo VARCHAR(25) NOT NULL,
-	tipo_violencia VARCHAR(25) NOT NULL,
+	 VARCHAR(25) NOT NULL,
 	clasificacion VARCHAR(25) NOT NULL,
 	peso	INTEGER DEFAULT '0',
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
 
-CREATE TABLE tipo_violencia (
+CREATE TABLE  (
 	id CHAR(1) PRIMARY KEY,
 	nombre VARCHAR(50) NOT NULL,
 	nomcorto VARCHAR(10) NOT NULL,
@@ -81,8 +81,8 @@ CREATE TABLE supracategoria (
 	nombre VARCHAR(50) NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion), 
-	id_tipo_violencia VARCHAR(1) REFERENCES tipo_violencia NOT NULL,
-	PRIMARY KEY (id, id_tipo_violencia)
+	id_ VARCHAR(1) REFERENCES tviolencia NOT NULL,
+	PRIMARY KEY (id, id_)
 );
 
 
@@ -92,16 +92,16 @@ CREATE TABLE categoria (
 	fechacreacion	DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion),
 	id_supracategoria INTEGER NOT NULL,
-	id_tipo_violencia VARCHAR(1) NOT NULL REFERENCES tipo_violencia,
+	id_ VARCHAR(1) NOT NULL REFERENCES tviolencia,
 	col_rep_consolidado INTEGER REFERENCES parametros_reporte_consolidado (no_columna),
 	contada_en INTEGER REFERENCES categoria,
 	tipocat	CHAR DEFAULT 'I' CHECK (tipocat='I' OR tipocat='C' OR tipocat='O') ,
-	FOREIGN KEY (id_supracategoria, id_tipo_violencia) 
-	REFERENCES supracategoria (id, id_tipo_violencia)
+	FOREIGN KEY (id_supracategoria, id_) 
+	REFERENCES supracategoria (id, id_)
 );
 
 
-CREATE TABLE tipo_clase (
+CREATE TABLE tclase (
 	id VARCHAR(3) PRIMARY KEY,
 	nombre VARCHAR(500) NOT NULL,
 	fechacreacion DATE NOT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE clase (
 	id INTEGER NOT NULL DEFAULT(nextval('clase_seq')),
 	nombre VARCHAR(500) NOT NULL,
 	id_municipio INTEGER,
-	id_tipo_clase VARCHAR(3) REFERENCES tipo_clase, 
+	id_tipo_clase VARCHAR(3) REFERENCES tipoclase, 
 	id_departamento INTEGER REFERENCES departamento ON DELETE CASCADE,
 	fechacreacion	DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion),
@@ -196,10 +196,10 @@ CREATE TABLE frontera (
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
 
-CREATE SEQUENCE fuente_directa_seq;
+CREATE SEQUENCE fotra_seq;
 
-CREATE TABLE fuente_directa (
-	id INTEGER PRIMARY KEY DEFAULT(nextval('fuente_directa_seq')),
+CREATE TABLE fotra (
+	id INTEGER PRIMARY KEY DEFAULT(nextval('fotra_seq')),
 	nombre VARCHAR(500) NOT NULL
 );
 
@@ -222,10 +222,10 @@ CREATE TABLE organizacion (
 	fechadeshabilitacion DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
 
-CREATE SEQUENCE prensa_seq;
+CREATE SEQUENCE ffrecuente_seq;
 
-CREATE TABLE prensa (
-	id INTEGER PRIMARY KEY DEFAULT(nextval('prensa_seq')),
+CREATE TABLE ffrecuente (
+	id INTEGER PRIMARY KEY DEFAULT(nextval('ffrecuente_seq')),
 	nombre VARCHAR(500) NOT NULL,
 	tipo_fuente VARCHAR(25) NOT NULL,
 	fechacreacion DATE NOT NULL,
@@ -242,12 +242,12 @@ CREATE TABLE presponsable (
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
 
-CREATE SEQUENCE rango_edad_seq;
+CREATE SEQUENCE rangoedad_seq;
 
 -- Debería tener edad inicia y edad final para poder chequear bien en
 -- interfaz (ver PagVictimaIndividual).  Sobre nombre.
-CREATE TABLE rango_edad ( 
-	id INTEGER PRIMARY KEY DEFAULT(nextval('rango_edad_seq')),
+CREATE TABLE rangoedad ( 
+	id INTEGER PRIMARY KEY DEFAULT(nextval('rangoedad_seq')),
 	nombre VARCHAR(20) NOT NULL,
 	rango VARCHAR(20) NOT NULL,
 	limiteinferior INTEGER NOT NULL DEFAULT '0',
@@ -266,28 +266,28 @@ CREATE TABLE region (
 
 ); 
 
-CREATE SEQUENCE resultado_agresion_seq;
+CREATE SEQUENCE resagresion_seq;
 
-CREATE TABLE resultado_agresion (
-	id INTEGER PRIMARY KEY DEFAULT(nextval('resultado_agresion_seq')),
+CREATE TABLE resagresion (
+	id INTEGER PRIMARY KEY DEFAULT(nextval('resagresion_seq')),
 	nombre VARCHAR(500) NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 ); 
 
-CREATE SEQUENCE sector_social_seq;
+CREATE SEQUENCE sectorsocial_seq;
 
-CREATE TABLE sector_social (
-	id INTEGER PRIMARY KEY DEFAULT(nextval('sector_social_seq')),
+CREATE TABLE sectorsocial (
+	id INTEGER PRIMARY KEY DEFAULT(nextval('sectorsocial_seq')),
 	nombre VARCHAR(500) NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 ); 
 
-CREATE SEQUENCE tipo_sitio_seq; 
+CREATE SEQUENCE tsitio_seq; 
 
-CREATE TABLE tipo_sitio (
-	id INTEGER PRIMARY KEY DEFAULT(nextval('tipo_sitio_seq')),
+CREATE TABLE tsitio (
+	id INTEGER PRIMARY KEY DEFAULT(nextval('tsitio_seq')),
 	nombre VARCHAR(500) NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
@@ -302,7 +302,7 @@ CREATE TABLE ubicacion (
 	id_clase INTEGER,
 	id_municipio INTEGER,
 	id_departamento INTEGER REFERENCES departamento,
-	id_tipo_sitio INTEGER REFERENCES tipo_sitio NOT NULL,
+	id_tipo_sitio INTEGER REFERENCES tsitio NOT NULL,
 	id_caso INTEGER NOT NULL REFERENCES caso,
 	latitud FLOAT,
 	longitud FLOAT,
@@ -361,7 +361,7 @@ CREATE TABLE persona (
 );
 
 
-CREATE TABLE tipo_relacion (
+CREATE TABLE trelacion (
 	id      CHAR(2) PRIMARY KEY,
 	nombre VARCHAR(50) NOT NULL,
 	dirigido BOOLEAN NOT NULL, ---false significa que persona2 también se re laciona con persona1 de la misma forma e.g papa serìa true mientras que hermanos serìa false.
@@ -371,10 +371,10 @@ CREATE TABLE tipo_relacion (
 );
 
 
-CREATE TABLE relacion_personas (
+CREATE TABLE persona_trelacion (
 	id_persona1 INTEGER NOT NULL REFERENCES persona,
 	id_persona2 INTEGER NOT NULL REFERENCES persona,
-	id_tipo CHAR(2) NOT NULL REFERENCES tipo_relacion,
+	id_tipo CHAR(2) NOT NULL REFERENCES trelacion,
 	observaciones VARCHAR(200),
 	PRIMARY KEY(id_persona1, id_persona2, id_tipo)
 );
@@ -387,9 +387,9 @@ CREATE TABLE victima (
 	id_caso	INTEGER REFERENCES caso NOT NULL,
 	hijos INTEGER CHECK (hijos IS NULL OR (hijos>='0' AND hijos<='100')),
 	id_profesion INTEGER REFERENCES profesion NOT NULL,
-	id_rango_edad INTEGER REFERENCES rango_edad NOT NULL,
+	id_rango_edad INTEGER REFERENCES rangoedad NOT NULL,
 	id_filiacion INTEGER REFERENCES filiacion NOT NULL,
-	id_sector_social INTEGER REFERENCES sector_social NOT NULL,
+	id_sector_social INTEGER REFERENCES sectorsocial NOT NULL,
 	id_organizacion	INTEGER REFERENCES organizacion NOT NULL,
 	id_vinculo_estado INTEGER REFERENCES vinculoestado NOT NULL,
 	id_organizacion_armada INTEGER REFERENCES presponsable NOT NULL,
@@ -415,7 +415,7 @@ CREATE TABLE grupoper (
 	anotaciones VARCHAR(1000)
 );
 
-CREATE TABLE victima_colectiva (
+CREATE TABLE victimacolectiva (
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	personas_aprox INTEGER,
@@ -427,15 +427,15 @@ CREATE TABLE vinculoestado_comunidad (
 	id_vinculo_estado INTEGER REFERENCES vinculoestado,
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
-	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victima_colectiva(id_grupoper, id_caso),
+	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso),
 	PRIMARY KEY(id_vinculo_estado, id_grupoper, id_caso)
 );
 
-CREATE TABLE profesion_comunidad (
+CREATE TABLE comunidad_profesion (
 	id_profesion INTEGER REFERENCES profesion,
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
-	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victima_colectiva(id_grupoper, id_caso),
+	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso),
 	PRIMARY KEY(id_profesion, id_grupoper, id_caso)
 );
 
@@ -463,7 +463,7 @@ CREATE TABLE antecedente_comunidad (
 	id_antecedente INTEGER REFERENCES antecedente,
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
-	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victima_colectiva(id_grupoper, id_caso),
+	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso),
 	PRIMARY KEY(id_antecedente, id_grupoper, id_caso)
 );
 
@@ -491,17 +491,17 @@ CREATE TABLE presponsable_caso (
 
 
 CREATE TABLE categoria_presponsable_caso (
-	id_tipo_violencia VARCHAR(1) REFERENCES tipo_violencia,
+	id_ VARCHAR(1) REFERENCES tviolencia,
 	id_supracategoria INTEGER,
 	id_categoria INTEGER REFERENCES categoria, 
 	--En interfaz verificar que categoria es de tipocat Otra ('O')
 	id INTEGER NOT NULL,
 	id_caso INTEGER REFERENCES caso,
 	id_p_responsable INTEGER REFERENCES presponsable,
-	PRIMARY KEY(id_tipo_violencia, id_supracategoria, id_categoria,
+	PRIMARY KEY(id_, id_supracategoria, id_categoria,
 		id, id_caso, id_p_responsable),
-	FOREIGN KEY (id_supracategoria, id_tipo_violencia) 
-	REFERENCES supracategoria (id, id_tipo_violencia),
+	FOREIGN KEY (id_supracategoria, id_) 
+	REFERENCES supracategoria (id, id_),
 	FOREIGN KEY (id, id_caso, id_p_responsable)
 	REFERENCES presponsable_caso (id, id_caso, 
 		id_p_responsable)
@@ -511,34 +511,34 @@ CREATE TABLE categoria_presponsable_caso (
 -- Algunos campos ubicación, clasificacion y ubicacion_fisica son NULL (no pueden ser llave).
 -- Puede mejorarse clasificacion, para que esté relacionada con clasificacion
 -- del caso
-CREATE TABLE escrito_caso (
+CREATE TABLE caso_ffrecuente (
 	fecha DATE,
 	ubicacion VARCHAR(100),  -- En interfaz descripción página
 	clasificacion VARCHAR(100), -- Categoria que esta fuente clasifica 
 	ubicacion_fisica VARCHAR(100),
-	id_prensa INTEGER REFERENCES prensa,
+	id_prensa INTEGER REFERENCES ffrecuente,
 	id_caso	INTEGER REFERENCES caso,
 	PRIMARY KEY(fecha, id_prensa,id_caso)
 );
 
-CREATE TABLE filiacion_comunidad (
+CREATE TABLE comunidad_filiacion (
 	id_filiacion INTEGER REFERENCES filiacion,
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
-	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victima_colectiva(id_grupoper, id_caso),
+	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso),
 	PRIMARY KEY(id_filiacion, id_grupoper, id_caso)
 );
 
-CREATE TABLE frontera_caso (
+CREATE TABLE caso_frontera (
 	id_frontera INTEGER REFERENCES frontera,
 	id_caso INTEGER REFERENCES caso,
 	PRIMARY KEY(id_frontera, id_caso)
 );
 
 -- Tambien hay fuentes indirectas (pero no frecuentes).
-CREATE TABLE fuente_directa_caso (
+CREATE TABLE caso_fotra (
 	id_caso INTEGER REFERENCES caso,
-	id_fuente_directa INTEGER REFERENCES fuente_directa,
+	id_fuente_directa INTEGER REFERENCES fotra,
 	anotacion VARCHAR(200),
 	fecha DATE,
 	ubicacion_fisica VARCHAR(100),
@@ -546,43 +546,43 @@ CREATE TABLE fuente_directa_caso (
 	PRIMARY KEY(id_caso, id_fuente_directa, fecha)
 );
 
-CREATE TABLE funcionario_caso (
+CREATE TABLE caso_funcionario (
 	id_funcionario INTEGER REFERENCES funcionario,
 	id_caso INTEGER REFERENCES caso,
 	fecha_inicio DATE,
 	PRIMARY KEY(id_funcionario, id_caso)
 );
 
-CREATE TABLE organizacion_comunidad (
+CREATE TABLE comunidad_organizacion (
 	id_organizacion INTEGER REFERENCES organizacion,
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
-	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victima_colectiva(id_grupoper, id_caso),
+	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso),
 	PRIMARY KEY(id_organizacion, id_grupoper, id_caso)
 );
 
 -- id_rango_edad en lugar de id_rango
-CREATE TABLE rango_edad_comunidad (
-	id_rango INTEGER REFERENCES rango_edad,
+CREATE TABLE comunidad_rangoedad (
+	id_rango INTEGER REFERENCES rangoedad,
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
-	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victima_colectiva(id_grupoper, id_caso),
+	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso),
 	PRIMARY KEY(id_rango, id_grupoper, id_caso)
 );
 
 
-CREATE TABLE region_caso (
+CREATE TABLE caso_region (
 	id_region INTEGER REFERENCES region,
 	id_caso INTEGER REFERENCES caso,
 	PRIMARY KEY(id_region, id_caso)
 );
 
 
-CREATE TABLE sector_social_comunidad (
-	id_sector INTEGER REFERENCES sector_social,
+CREATE TABLE comunidad_sectorsocial (
+	id_sector INTEGER REFERENCES sectorsocial,
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
-	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victima_colectiva(id_grupoper, id_caso),
+	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso),
 	PRIMARY KEY(id_sector, id_grupoper, id_caso)
 );
 
@@ -602,7 +602,7 @@ CREATE TABLE actocolectivo (
 	id_categoria INTEGER REFERENCES categoria,
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
-	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victima_colectiva(id_grupoper, id_caso),
+	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso),
 	PRIMARY KEY(id_p_responsable, id_categoria, id_grupoper, id_caso)
 );
 

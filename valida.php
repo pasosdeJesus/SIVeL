@@ -34,44 +34,44 @@ res_valida(
 
 res_valida(
     $db, _("Casos con fecha de otras fuentes anterior a la del caso"),
-    "SELECT caso.id, caso.fecha, fuente_directa.nombre
-    FROM fuente_directa_caso, caso, fuente_directa
-    WHERE fuente_directa_caso.id_caso = caso.id
-    AND fuente_directa_caso.id_fuente_directa = fuente_directa.id
-    AND fuente_directa_caso.fecha < caso.fecha order by fecha;"
+    "SELECT caso.id, caso.fecha, fotra.nombre
+    FROM caso_fotra, caso, fotra
+    WHERE caso_fotra.id_caso = caso.id
+    AND caso_fotra.id_fuente_directa = fotra.id
+    AND caso_fotra.fecha < caso.fecha order by fecha;"
 );
 
 res_valida(
     $db, _("Casos con fecha de fuente frecuente anterior a la del caso"),
-    "SELECT caso.id, caso.fecha, prensa.nombre
-    FROM escrito_caso, prensa, caso
-    WHERE escrito_caso.id_caso = caso.id AND escrito_caso.id_prensa = prensa.id
-    AND escrito_caso.fecha < caso.fecha
+    "SELECT caso.id, caso.fecha, ffrecuente.nombre
+    FROM caso_ffrecuente, ffrecuente, caso
+    WHERE caso_ffrecuente.id_caso = caso.id AND caso_ffrecuente.id_prensa = ffrecuente.id
+    AND caso_ffrecuente.fecha < caso.fecha
     ORDER BY fecha;"
 );
 
 hace_consulta($db, "DROP VIEW y", false, false);
 hace_consulta(
     $db, "CREATE VIEW y AS SELECT caso.id, " .
-    " min(funcionario_caso.fecha_inicio) " .
-    " FROM funcionario_caso, caso " .
-    " WHERE caso.id>'35000' AND caso.id=funcionario_caso.id_caso " .
+    " min(caso_funcionario.fecha_inicio) " .
+    " FROM caso_funcionario, caso " .
+    " WHERE caso.id>'35000' AND caso.id=caso_funcionario.id_caso " .
     " GROUP BY caso.id order by caso.id"
 );
 res_valida(
     $db, _("Casos con fecha inicial de funcionario anterior o igual a la del caso"),
     "SELECT y.id, caso.fecha, y.min as fecha_funcionario, funcionario.nombre
-    FROM y, caso, funcionario_caso, funcionario
+    FROM y, caso, caso_funcionario, funcionario
     WHERE y.id = caso.id AND y.min <= caso.fecha
-    AND funcionario_caso.id_caso = caso.id
-    AND funcionario_caso.fecha_inicio = y.min
-    AND funcionario_caso.id_funcionario = funcionario.id;"
+    AND caso_funcionario.id_caso = caso.id
+    AND caso_funcionario.fecha_inicio = y.min
+    AND caso_funcionario.id_funcionario = funcionario.id;"
 );
 
 res_valida(
     $db, _("Casos sin funcionario"),
     "SELECT caso.id FROM caso
-    WHERE caso.id NOT IN (SELECT id_caso FROM funcionario_caso);"
+    WHERE caso.id NOT IN (SELECT id_caso FROM caso_funcionario);"
 );
 
 res_valida(
@@ -104,10 +104,10 @@ res_valida(
 
 
 res_valida(
-    $db, _("Registros en victima_colectiva que no est&aacute;n en actocolectivo"),
+    $db, _("Registros en victimacolectiva que no est&aacute;n en actocolectivo"),
     "SELECT id_caso, id_grupoper, grupoper.nombre
-    FROM victima_colectiva, grupoper
-    WHERE grupoper.id = victima_colectiva.id_grupoper
+    FROM victimacolectiva, grupoper
+    WHERE grupoper.id = victimacolectiva.id_grupoper
     AND id NOT IN (SELECT id_grupoper FROM actocolectivo)"
 );
 

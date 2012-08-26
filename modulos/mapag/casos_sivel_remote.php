@@ -41,7 +41,7 @@ $filtro = array(
     $requestUrl .= (!empty($filtro['hasta'])) ? "&ffin[d]=" . substr($filtro['hasta'], -2) . "&ffin[M]=" . substr($filtro['hasta'], 5, 2) . "&ffin[Y]=" . substr($filtro['hasta'], 0, 4) : "";
     $requestUrl .= (!empty($filtro['departamento'])) ? "&id_departamento=" . $filtro['departamento'] : "";
     $requestUrl .= (!empty($filtro['prresp'])) ? "&presponsable=" . $filtro['prresp'] : "";
-    $requestUrl .= (!empty($filtro['tvio'])) ? "&tipo_violencia=" . $filtro['tvio'] : "";
+    $requestUrl .= (!empty($filtro['tvio'])) ? "&tviolencia=" . $filtro['tvio'] : "";
 
     trigger_error($requestUrl);
 
