@@ -183,7 +183,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a[href='tabla.php?tabla=tipo_clase']</td>
+	<td>css=a[href='tabla.php?tabla=tclase']</td>
 	<td></td>
 </tr>
 <tr>
@@ -293,7 +293,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a[href='tabla.php?tabla=tipo_clase']</td>
+	<td>css=a[href='tabla.php?tabla=tclase']</td>
 	<td></td>
 </tr>
 <tr>
@@ -678,7 +678,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a[href$='tabla=rango_edad']</td>
+	<td>css=a[href$='tabla=rangoedad']</td>
 	<td></td>
 </tr>
 <tr>
@@ -783,7 +783,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a[href$='tabla=resultado_agresion']</td>
+	<td>css=a[href$='tabla=resagresion']</td>
 	<td></td>
 </tr>
 <tr>
@@ -873,7 +873,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a[href$='tabla=sector_social']</td>
+	<td>css=a[href$='tabla=sectorsocial']</td>
 	<td></td>
 </tr>
 <tr>
@@ -963,7 +963,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a[href$='tabla=vinculo_estado']</td>
+	<td>css=a[href$='tabla=vinculoestado']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1053,7 +1053,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a[href$='tabla=tipo_relacion']</td>
+	<td>css=a[href$='tabla=trelacion']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1158,7 +1158,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a[href$='tabla=tipo_violencia']</td>
+	<td>css=a[href$='tabla=tviolencia']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1903,7 +1903,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a[href$='tabla=prensa']</td>
+	<td>css=a[href$='tabla=ffrecuente']</td>
 	<td></td>
 </tr>
 <tr>
@@ -1993,7 +1993,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>css=a[href$='tabla=parametros_reporte_consolidado']</td>
+	<td>css=a[href$='tabla=pconsolidado']</td>
 	<td></td>
 </tr>
 <tr>
