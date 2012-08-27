@@ -1,23 +1,24 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Objeto tabla tipo_accion
+ * Objeto asociado a una tabla combatiente_presponsable
+ * Parcialmente generado por DB_DataObject.
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2006 Dominio público. Sin garantías.
+ * @copyright 2004 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
 
-require_once 'DataObjects/Basica.php';
+require_once 'DB_DataObject_SIVeL.php';
 
 /**
- * Definicion para la tabla tipo_accion
+ * Definicion para la tabla combatiente_presponsable.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -27,11 +28,11 @@ require_once 'DataObjects/Basica.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Tipo_accion extends DataObjects_Basica
+class DataObjects_Combatiente_presponsable extends DB_DataObject_SIVeL
 {
-    var $__table = 'tipo_accion';                  // table name
-
-    var $observaciones;                   // varchar(-1)  not_null
+    var $__table = 'combatiente_presponsable';    // table name
+    var $id_p_responsable;                // int4(4)  multiple_key
+    var $id_combatiente;                  // int4(4)  multiple_key
 
     /**
      * Constructora
@@ -41,30 +42,11 @@ class DataObjects_Tipo_accion extends DataObjects_Basica
     {
         parent::__construct();
 
-        $this->nom_tabla = _('Tipo de Acción');
+        $this->nom_tabla = _('Presunto Responsable Agrede Combatiente');
     }
 
 
-    var $fb_preDefOrder = array(
-        'id',
-        'nombre',
-        'observaciones',
-        'fechacreacion',
-        'fechadeshabilitacion',
-    );
-
-    var $fb_fieldsToRender = array(
-        'nombre',
-        'observaciones',
-        'fechacreacion',
-        'fechadeshabilitacion',
-    );
-
-    static function idSinInfo()
-    {
-        return 1;
-    }
-
+    var $fb_hidePrimaryKey = true;
 }
 
 ?>

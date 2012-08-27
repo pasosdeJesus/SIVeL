@@ -361,7 +361,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             )
             && (!isset($valores['id_vinculo_estado'])
             || $valores['id_vinculo_estado']==
-                DataObjects_Vinculo_estado::idSinInfo()
+                DataObjects_Vinculoestado::idSinInfo()
                 )
             && (!isset($valores['id_filiacion'])
             || $valores['id_filiacion']==DataObjects_Filiacion::idSinInfo()
@@ -419,8 +419,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
                 error_valida('Falta nombre de víctima', $valores);
                 return false;
             }
-            if (!isset($valores['id_resagresion'])
-                    || $valores['id_resagresion'] == ''
+            if (!isset($valores['id_resultado_agresion'])
+                    || $valores['id_resultado_agresion'] == ''
             ) {
                 error_valida('Falta resultado de agresión', $valores);
                 return false;
@@ -487,7 +487,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             $w, $t, $idcaso, 'combatiente',
             '', '', false, array('antecedente_combatiente'),
             'id_combatiente',
-            array('edad', 'id_resagresion')
+            array('edad', 'id_resultado_agresion')
         );
 
     }
@@ -505,9 +505,9 @@ class PagVictimaCombatiente extends PagBaseMultiple
         while ($dcombatiente->fetch()) {
             $r .= $sep . trim($dcombatiente->nombre);
             $r .= "\n    ".$GLOBALS['etiqueta']['resagresion'] . ": ";
-            $dresultado = $dcombatiente->getLink('id_resagresion');
+            $dresultado = $dcombatiente->getLink('id_resultado_agresion');
             $r .= $dresultado->nombre;
-            $dresultado = $dcombatiente->getLink('id_resagresion');
+            $dresultado = $dcombatiente->getLink('id_resultado_agresion');
             $r .= " (".trim($dresultado->nombre).")";
             if ($dcombatiente->id_sector_social!=
                 DataObjects_Sectorsocial::idSinInfo()
@@ -558,9 +558,9 @@ class PagVictimaCombatiente extends PagBaseMultiple
                         getLink('id_organizacion_armada');
                     $r .= " / ".trim($dorg->nombre);
                 }
-            if (isset($dcombatiente->id_resagresion)) {
+            if (isset($dcombatiente->id_resultado_agresion)) {
                 $dresultado = $dcombatiente->
-                    getLink('id_resagresion');
+                    getLink('id_resultado_agresion');
                 $r .= " ".trim($dresultado->nombre);
             }
             $r .= "\n";
@@ -572,7 +572,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
     function integridad_ref_tipoviolencia()
     {
         $q = "SELECT COUNT(id_combatiente) FROM " .
-        "p_responsable_agrede_combatiente, combatiente WHERE " .
+        "combatiente_presponsable, combatiente WHERE " .
         "combatiente.id_caso='" . $idcaso . "' AND " .
         "id_p_responsable='" . $idpres . "' AND " .
         "combatiente.id=id_combatiente";

@@ -169,7 +169,7 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
             combatiente, presponsable
             WHERE $where AND
             ubicacion.id_caso = caso.id AND
-            resagresion.id = id_resagresion AND
+            resagresion.id = id_resultado_agresion AND
             caso.id = combatiente.id_caso AND
             presponsable.id = id_organizacion_armada";
 /*        foreach (array("municipio", "clase") as $t) {
@@ -179,7 +179,7 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
                 FROM resagresion, caso, {$t}_caso, combatiente,
                 presponsable
                 WHERE $where AND {$t}_caso.id_caso = caso.id AND
-                resagresion.id = id_resagresion AND
+                resagresion.id = id_resultado_agresion AND
                 caso.id = combatiente.id_caso AND
                 presponsable.id = id_organizacion_armada";
 } */

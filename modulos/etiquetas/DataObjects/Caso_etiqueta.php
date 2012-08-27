@@ -1,7 +1,7 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Definición de objeto tabla etiquetacaso
+ * Definición de objeto tabla caso_etiqueta
  *
  * PHP version 5
  *
@@ -74,7 +74,7 @@ class EliminaEst extends HTML_QuickForm_Action
 
 
 /**
- * Definicion para la tabla etiquetacaso
+ * Definicion para la tabla caso_etiqueta
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -84,9 +84,9 @@ class EliminaEst extends HTML_QuickForm_Action
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Etiquetacaso extends DB_DataObject_SIVeL
+class DataObjects_Caso_etiqueta extends DB_DataObject_SIVeL
 {
-    var $__table = 'etiquetacaso';                         // table name
+    var $__table = 'caso_etiqueta';                         // table name
     var $id_caso;                          // int4(4)  not_null primary_key
     var $id_etiqueta;                        // int4(4)  not_null primary_key
     var $id_funcionario;                   // varchar(-1)  not_null

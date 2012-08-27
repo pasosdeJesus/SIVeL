@@ -44,7 +44,7 @@ require_once 'DataObjects/Filiacion.php';
 require_once 'DataObjects/Sectorsocial.php';
 require_once 'DataObjects/Profesion.php';
 require_once 'DataObjects/Presponsable.php';
-require_once 'DataObjects/Etiquetacaso.php';
+require_once 'DataObjects/Caso_etiqueta.php';
 
 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
     list($n, $c, $o) = $tab;
@@ -1105,7 +1105,7 @@ class ResConsulta
     ) {
         //echo "OJO filaTabal(db, $idcaso, campos, conv, sal, retroalim);<br>";
         $col = "#FFFFFF";
-        $dec = objeto_tabla('etiquetacaso');
+        $dec = objeto_tabla('caso_etiqueta');
         if (!PEAR::isError($dec)) {
             $dec->id_caso = $idcaso;
             $dec->find();
@@ -1338,9 +1338,9 @@ class ResConsulta
             $db = $dcaso->getDatabaseConnection();
         }
         $nom = $db->getOne(
-            "SELECT nombre FROM etiqueta, etiquetacaso "
-            . " WHERE etiquetacaso.id_caso='$idcaso' " .
-            " AND etiquetacaso.id_etiqueta=etiqueta.id " .
+            "SELECT nombre FROM etiqueta, caso_etiqueta "
+            . " WHERE caso_etiqueta.id_caso='$idcaso' " .
+            " AND caso_etiqueta.id_etiqueta=etiqueta.id " .
             " AND nombre LIKE 'SINCODH%'"
         );
         if (!PEAR::isError($nom) && $nom == 'SINCODH:PUBLICO') {

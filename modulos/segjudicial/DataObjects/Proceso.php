@@ -17,7 +17,7 @@
 
 require_once 'DB_DataObject_SIVeL.php';
 require_once  $GLOBALS['dirsitio'] . "/conf.php";
-require_once "Tipo_proceso.php";
+require_once "Tproceso.php";
 require_once "Etapa.php";
 
 
@@ -88,7 +88,7 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
     static function camposSinInfo()
     {
         return array(
-            'id_tipo'=> DataObjects_Tipo_Proceso::idSinInfo(),
+            'id_tipo'=> DataObjects_Tproceso::idSinInfo(),
             'id_etapa'=> DataObjects_Etapa::idSinInfo(),
         );
     }
@@ -134,7 +134,7 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
             'hierselect', 'tipoetapa', _('Tipo/Etapa'), null, '/'
         );
         $mainOptions = htmlentities_array(
-            $db->getAssoc('SELECT id, nombre FROM tipo_proceso')
+            $db->getAssoc('SELECT id, nombre FROM tproceso')
         );
         $sel->setMainOptions($mainOptions);
 

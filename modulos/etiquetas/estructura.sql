@@ -10,7 +10,7 @@ CREATE TABLE etiqueta (
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
 
-CREATE TABLE etiquetacaso (
+CREATE TABLE caso_etiqueta (
 	id_caso INTEGER REFERENCES caso NOT NULL,
 	id_etiqueta       INTEGER REFERENCES etiqueta NOT NULL,
 	id_funcionario INTEGER REFERENCES funcionario NOT NULL,

@@ -39,7 +39,7 @@ if (!aplicado($idac)) {
     )", false
 );
     $r = hace_consulta(
-        $db, "CREATE TABLE etiquetacaso (
+        $db, "CREATE TABLE caso_etiqueta (
         id_caso      INTEGER REFERENCES caso NOT NULL,
         id_etiqueta       INTEGER REFERENCES etiqueta NOT NULL,
         id_funcionario INTEGER REFERENCES funcionario NOT NULL,
@@ -59,7 +59,7 @@ if (aplicado('obs-1') && !aplicado($idac)) {
         " SELECT id, nombre, observaciones FROM estado", false
     );
     $r = hace_consulta(
-        $db, "INSERT INTO etiquetacaso (id_caso, id_etiqueta, " .
+        $db, "INSERT INTO caso_etiqueta (id_caso, id_etiqueta, " .
         " id_funcionario, fecha, observaciones) SELECT id_caso, id_estado, " .
         " id_funcionario, fecha, observaciones FROM estadocaso", false
     );
@@ -158,6 +158,17 @@ if (!aplicado($idac)) {
     agrega_fechas($db, 'etiqueta');
 
     aplicaact($act, $idac, 'Fecha en tablas básicas');
+}
+
+$idac = '1.2-re';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db,
+        "ALTER TABLE etiquetacaso RENAME TO "
+        . "caso_etiqueta", false
+    );
+
+    aplicaact($act, $idac, 'Renombra tablas');
 }
 
 echo "Actualizando indices<br>";

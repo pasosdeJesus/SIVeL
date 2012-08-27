@@ -28,7 +28,7 @@ require_once 'DataObjects/Profesion.php';
 require_once 'DataObjects/Presponsable.php';
 require_once 'DataObjects/Resagresion.php';
 require_once 'DataObjects/Etapa.php';
-require_once 'DataObjects/Tipo_proceso.php';
+require_once 'DataObjects/Tproceso.php';
 
 
 
@@ -344,7 +344,7 @@ class PagSegJudicial extends PagBaseMultiple
         $es_vacio = (
             (!isset($valores['id_tipo'])
             || $valores['id_tipo'] === ''
-            || $valores['id_tipo'] == DataObjects_Tipo_proceso::idSinInfo()
+            || $valores['id_tipo'] == DataObjects_Tproceso::idSinInfo()
             )
             || (!isset($valores['id_etapa'])
                 || $valores['id_etapa']==
@@ -519,12 +519,12 @@ class PagSegJudicial extends PagBaseMultiple
         html_menu_agrega_submenu(
             $GLOBALS['menu_tablas_basicas'],
             'Información Judicial', 'Tipos de acciones judiciales',
-            'tipo_accion', null
+            'taccion', null
         );
         html_menu_agrega_submenu(
             $GLOBALS['menu_tablas_basicas'],
             'Información Judicial', 'Tipos de proceso',
-            'tipo_proceso', null
+            'tproceso', null
         );
         html_menu_agrega_submenu(
             $GLOBALS['menu_tablas_basicas'],

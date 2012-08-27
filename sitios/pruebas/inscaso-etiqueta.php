@@ -27,7 +27,7 @@ $post['fetiqueta'] = '7';
 $post['fobservaciones'] = 'con color';
 $post['_qf_etiquetas_agregarEtiqueta'] = 'Añadir';
 $post['_qf_default'] = 'etiquetas:siguiente';
-pasaPestanaFicha($db, array("etiquetacaso"), $post, 1);
+pasaPestanaFicha($db, array("caso_etiqueta"), $post, 1);
 
 exit(0);
 ?>

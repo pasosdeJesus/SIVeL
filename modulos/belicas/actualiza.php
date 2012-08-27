@@ -39,7 +39,7 @@ if (!aplicado($idac)) {
         alias VARCHAR(100),
         edad INTEGER CHECK (edad IS NULL OR edad >= 0),
         sexo    CHAR(1)  NOT NULL CHECK (sexo = 'S' OR sexo='M' OR sexo='F'),
-        id_resagresion INTEGER NOT NULL REFERENCES resagresion,
+        id_resultado_agresion INTEGER NOT NULL REFERENCES resagresion,
         id_profesion INTEGER REFERENCES profesion,
         id_rango_edad    INTEGER REFERENCES rangoedad,
         id_filiacion    INTEGER    REFERENCES filiacion,
@@ -90,6 +90,16 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Roles');
 }
 
+$idac = '1.2-ra';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db,
+        "ALTER TABLE p_responsable_agrede_combatiente RENAME TO "
+        . "combatiente_presponsable", false
+    );
+
+    aplicaact($act, $idac, 'Renombra tablas');
+}
 
 echo "Actualizando indices<br>";
 actualiza_indice($db, 'combatiente');

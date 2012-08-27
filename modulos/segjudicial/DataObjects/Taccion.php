@@ -1,14 +1,14 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Objeto tabla tipo_proceso
+ * Objeto tabla taccion
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio público. Sin garantías.
+ * @copyright 2006 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
@@ -17,7 +17,7 @@
 require_once 'DataObjects/Basica.php';
 
 /**
- * Definicion para la tabla tipo_proceso
+ * Definicion para la tabla taccion
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -27,10 +27,11 @@ require_once 'DataObjects/Basica.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Tipo_proceso extends DataObjects_Basica
+class DataObjects_Taccion extends DataObjects_Basica
 {
-    var $__table = 'tipo_proceso';                         // table name
-    var $observaciones;                        // varchar(-1)  not_null
+    var $__table = 'taccion';                  // table name
+
+    var $observaciones;                   // varchar(-1)  not_null
 
     /**
      * Constructora
@@ -40,7 +41,7 @@ class DataObjects_Tipo_proceso extends DataObjects_Basica
     {
         parent::__construct();
 
-        $this->nom_tabla = _('Tipo de Proceso');
+        $this->nom_tabla = _('Tipo de Acción');
     }
 
 
@@ -59,40 +60,11 @@ class DataObjects_Tipo_proceso extends DataObjects_Basica
         'fechadeshabilitacion',
     );
 
-    /**
-     * Identificacion de registro 'SIN INFORMACIÓN'
-     *
-     * @return integer Id del registro SIN INFORMACIÓN
-     */
     static function idSinInfo()
     {
         return 1;
     }
 
-
-    /**
-     * Ajusta formulario generado.
-     *
-     * @param object &$form        Formulario HTML_QuickForm
-     * @param object &$formbuilder Generador DataObject_FormBuilder
-     *
-     * @return void
-     */
-    function postGenerateForm(&$form, &$formbuilder)
-    {
-        parent::postGenerateForm($form, $formbuilder);
-
-        $gr = array();
-        $sel =& $form->getElement('nombre');
-        $sel->setSize(30);
-        $sel->setMaxlength(150);
-        $gr[] =& $sel;
-
-        $sel =& $form->getElement('observaciones');
-        $sel->setSize(30);
-        $sel->setMaxlength(500);
-        $gr[] =& $sel;
-    }
 }
 
 ?>

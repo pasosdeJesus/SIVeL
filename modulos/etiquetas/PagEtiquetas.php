@@ -15,7 +15,7 @@
  */
 
 require_once 'PagBaseSimple.php';
-require_once 'Etiquetacaso.php';
+require_once 'Caso_etiqueta.php';
 require_once 'misc.php';
 
 
@@ -33,9 +33,9 @@ require_once 'misc.php';
 class PagEtiquetas extends PagBaseSimple
 {
 
-    var $betiquetacaso;
+    var $bcaso_etiqueta;
 
-    var $clase_modelo = 'etiquetacaso';
+    var $clase_modelo = 'caso_etiqueta';
 
     var $titulo = 'Etiquetas';
 
@@ -46,7 +46,7 @@ class PagEtiquetas extends PagBaseSimple
      */
     function nullVar()
     {
-        $this->betiquetacaso = null;
+        $this->bcaso_etiqueta = null;
     }
 
     /**
@@ -61,11 +61,11 @@ class PagEtiquetas extends PagBaseSimple
     {
         list($db, $dcaso, $idcaso) = parent::iniVar(array(true, true));
 
-        $detiquetacaso =& objeto_tabla('etiquetacaso');
-        $detiquetacaso->id_caso = $idcaso;
-        $detiquetacaso->find();
-        $this->betiquetacaso=& DB_DataObject_FormBuilder::create(
-            $detiquetacaso,
+        $dcaso_etiqueta =& objeto_tabla('caso_etiqueta');
+        $dcaso_etiqueta->id_caso = $idcaso;
+        $dcaso_etiqueta->find();
+        $this->bcaso_etiqueta=& DB_DataObject_FormBuilder::create(
+            $dcaso_etiqueta,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
             'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
@@ -113,9 +113,9 @@ class PagEtiquetas extends PagBaseSimple
      */
     function formularioAgrega(&$db, $idcaso)
     {
-        $this->betiquetacaso->createSubmit = 0;
-        $this->betiquetacaso->useForm($this);
-        $f =& $this->betiquetacaso->getForm($this);
+        $this->bcaso_etiqueta->createSubmit = 0;
+        $this->bcaso_etiqueta->useForm($this);
+        $f =& $this->bcaso_etiqueta->getForm($this);
 
     }
 
@@ -152,7 +152,7 @@ class PagEtiquetas extends PagBaseSimple
          assert($db != null);
          assert(isset($idcaso));
          $result = hace_consulta(
-             $db, "DELETE FROM etiquetacaso WHERE " .
+             $db, "DELETE FROM caso_etiqueta WHERE " .
             "id_caso='$idcaso'"
         );
      }
@@ -175,16 +175,16 @@ class PagEtiquetas extends PagBaseSimple
          $idcaso = $_SESSION['basicos_id'];
          // Procesamiento
          if ($agregaEtiqueta) {
-             $this->betiquetacaso->_do->id_caso = (int)$idcaso;
-             $this->betiquetacaso->_do->id_etiqueta =
+             $this->bcaso_etiqueta->_do->id_caso = (int)$idcaso;
+             $this->bcaso_etiqueta->_do->id_etiqueta =
                  (int)$valores['fetiqueta'];
-             $this->betiquetacaso->_do->id_funcionario =
+             $this->bcaso_etiqueta->_do->id_funcionario =
                  (int)$_SESSION['id_funcionario'];
-             $this->betiquetacaso->_do->fecha = date('Y-m-d');
-             $this->betiquetacaso->_do->observaciones =
+             $this->bcaso_etiqueta->_do->fecha = date('Y-m-d');
+             $this->bcaso_etiqueta->_do->observaciones =
                  var_escapa($valores['fobservaciones'], $db);
-             //print_r($this->betiquetacaso->_do);
-             $r = $this->betiquetacaso->_do->insert();
+             //print_r($this->bcaso_etiqueta->_do);
+             $r = $this->bcaso_etiqueta->_do->insert();
              sin_error_pear($r, _('No pudo insertar en base.'));
              $agregaEtiqueta = false;
          }
@@ -193,7 +193,7 @@ class PagEtiquetas extends PagBaseSimple
          foreach ($valores as $i => $v) {
              if (substr($i, 0, 5)=='fobs_') {
                  $po = explode('_', $i);
-                 $dec =& objeto_tabla('etiquetacaso');
+                 $dec =& objeto_tabla('caso_etiqueta');
                  $dec->id_caso = $idcaso;
                  $dec->id_etiqueta = $po[2];
                  $dec->id_funcionario = $po[3];
@@ -223,15 +223,15 @@ class PagEtiquetas extends PagBaseSimple
       */
      function datosBusqueda(&$w, &$t, &$db, $idcaso, &$subcons)
      {
-         $duc=& objeto_tabla('etiquetacaso');
+         $duc=& objeto_tabla('caso_etiqueta');
          $duc->id_caso = $idcaso;
          if ($duc->find()>0) {
-             $t .= ", etiquetacaso, etiqueta";
+             $t .= ", caso_etiqueta, etiqueta";
              consulta_and_sinap(
-                 $w, "etiquetacaso.id_caso", "caso.id", "=", "AND"
+                 $w, "caso_etiqueta.id_caso", "caso.id", "=", "AND"
              );
              consulta_and_sinap(
-                 $w, "etiquetacaso.id_etiqueta",
+                 $w, "caso_etiqueta.id_etiqueta",
                  "etiqueta.id", "=", "AND"
              );
              $w3="";
@@ -239,7 +239,7 @@ class PagEtiquetas extends PagBaseSimple
                  $w2="";
                  if (isset($duc->anotacion) && $duc->anotacion != '') {
                      consulta_and(
-                         $db, $w2, "etiquetacaso.id_funcionario",
+                         $db, $w2, "caso_etiqueta.id_funcionario",
                          $duc->id_anotacion, "=", "AND"
                      );
                  }
@@ -248,13 +248,13 @@ class PagEtiquetas extends PagBaseSimple
                      )
                  {
                      consulta_and(
-                         $db, $w2, "etiquetacaso.fecha",
+                         $db, $w2, "caso_etiqueta.fecha",
                          $duc->fecha, "=", "AND"
                      );
                  }
                  if (isset($duc->observaciones) && $duc->observaciones != '') {
                      consulta_and(
-                         $db, $w2, "etiquetacaso.observaciones",
+                         $db, $w2, "caso_etiqueta.observaciones",
                          $duc->observaciones, "=", "AND"
                      );
                  }
@@ -285,7 +285,7 @@ class PagEtiquetas extends PagBaseSimple
      {
          if (isset($_REQUEST['eliminaest'])) {
              assert($_REQUEST['eliminaest'] != null);
-             $de=& objeto_tabla('etiquetacaso');
+             $de=& objeto_tabla('caso_etiqueta');
              list($de->id_caso, $de->id_etiqueta, $de->id_funcionario,
                  $de->fecha
              ) = explode(':', var_escapa($_REQUEST['eliminaest']));
@@ -379,16 +379,16 @@ class PagEtiquetas extends PagBaseSimple
          $pCon = (int)var_req_escapa('critetiqueta', $db, 32);
          if ($pEtiqueta != "") {
              if ($pCon === 0) {
-                 agrega_tabla($tablas, 'etiquetacaso');
-                 consulta_and_sinap($where, "etiquetacaso.id_caso", "caso.id");
+                 agrega_tabla($tablas, 'caso_etiqueta');
+                 consulta_and_sinap($where, "caso_etiqueta.id_caso", "caso.id");
                  consulta_and(
-                     $db, $where, "etiquetacaso.id_etiqueta", $pEtiqueta, '='
+                     $db, $where, "caso_etiqueta.id_etiqueta", $pEtiqueta, '='
                  );
              } else {
 
                  consulta_and_sinap(
                      $where, "caso.id",
-                     "(SELECT id_caso FROM etiquetacaso
+                     "(SELECT id_caso FROM caso_etiqueta
                      WHERE id_etiqueta = '$pEtiqueta')",
                      ' NOT IN '
                  );
@@ -460,10 +460,10 @@ class PagEtiquetas extends PagBaseSimple
          $idcaso = (int)$idcaso;
          $r = "";
          if (isset($campos['m_fuentes'])) {
-             $c = hace_consulta($db, "SELECT nombre, etiquetacaso.observaciones
-                 FROM etiqueta, etiquetacaso
-                 WHERE etiqueta.id = etiquetacaso.id_etiqueta
-                 AND etiquetacaso.id_caso = '$idcaso'"
+             $c = hace_consulta($db, "SELECT nombre, caso_etiqueta.observaciones
+                 FROM etiqueta, caso_etiqueta
+                 WHERE etiqueta.id = caso_etiqueta.id_etiqueta
+                 AND caso_etiqueta.id_caso = '$idcaso'"
              );
              $reg = array();
              $sep = _("Etiquetas") . ": \n   ";
@@ -501,7 +501,7 @@ class PagEtiquetas extends PagBaseSimple
     {
         PagBaseMultiple::compara(
             $db, $r, $id1, $id2,
-            array('Etiquetas' => array('etiquetacaso', 'id_etiqueta'))
+            array('Etiquetas' => array('caso_etiqueta', 'id_etiqueta'))
         );
     }
 
@@ -529,13 +529,13 @@ class PagEtiquetas extends PagBaseSimple
     static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls)
     {
         //echo "OJO PagEtiquetas::mezcla(db, sol, $id1, $id2, $idn, $t)";
-        $e1 = isset($sol['etiquetacaso']['id_etiqueta'])
-            && $sol['etiquetacaso']['id_etiqueta'] == 1;
+        $e1 = isset($sol['caso_etiqueta']['id_etiqueta'])
+            && $sol['caso_etiqueta']['id_etiqueta'] == 1;
         if (($e1 && $idn != $id1) || (!$e1 && $idn != $id2)) {
             PagEtiquetas::eliminaDep($db, $idn);
             PagBaseMultiple::mezcla(
                 $db, $sol, $id1, $id2, $idn,
-                array('Etiquetas' => array('etiquetacaso', 'id_etiqueta'))
+                array('Etiquetas' => array('caso_etiqueta', 'id_etiqueta'))
             );
         }
     }

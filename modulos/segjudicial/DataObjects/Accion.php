@@ -19,7 +19,7 @@
  * Definicion para la tabla accion
  */
 require_once 'DB_DataObject_SIVeL.php';
-require_once 'Tipo_accion.php';
+require_once 'Taccion.php';
 require_once 'Despacho.php';
 
 
@@ -86,7 +86,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
     static function camposSinInfo()
     {
         return array(
-            'id_tipo_accion'    => DataObjects_Tipo_accion::idSinInfo(),
+            'id_tipo_accion'    => DataObjects_Taccion::idSinInfo(),
             'id_despacho'       => DataObjects_Despacho::idSinInfo(),
         );
     }

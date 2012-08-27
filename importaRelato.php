@@ -645,7 +645,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             echo "<hr><pre>$html_rep</pre>";
             echo_esc(_("Observaciones"). ": $obs");
 
-            $ec = objeto_tabla('etiquetacaso');
+            $ec = objeto_tabla('caso_etiqueta');
             $ec->fecha = date('Y-m-d');
             $ec->id_caso = $idcaso;
             $ec->id_etiqueta = $idetiqueta;
@@ -658,7 +658,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $ec->insert();
 
             if (trim($obs) != '') {
-                $ec = objeto_tabla('etiquetacaso');
+                $ec = objeto_tabla('caso_etiqueta');
                 $ec->fecha = date('Y-m-d');
                 $ec->id_caso = $idcaso;
                 $ec->id_etiqueta = $iderrorimportacion;
@@ -704,7 +704,7 @@ class PagImportaRelato extends HTML_QuickForm_Page
             ));
         }
 
-        $ec =& objeto_tabla('etiquetacaso');
+        $ec =& objeto_tabla('caso_etiqueta');
         if (PEAR::isError($ec)) {
             echo _("Se requiere módulo etiquetas");
         }
