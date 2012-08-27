@@ -26,7 +26,7 @@ require_once "Rango_edad.php";
 require_once "DataObjects/Filiacion.php";
 require_once "Sector_social.php";
 require_once "Organizacion.php";
-require_once "Vinculo_estado.php";
+require_once "Vinculoestado.php";
 require_once "Presponsable.php";
 
 /**
@@ -147,7 +147,7 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
             'id_filiacion' => DataObjects_Filiacion::idSinInfo(),
             'id_sector_social' => DataObjects_Sector_social::idSinInfo(),
             'id_organizacion' => DataObjects_Organizacion::idSinInfo(),
-            'id_vinculo_estado' => DataObjects_Vinculo_estado::idSinInfo(),
+            'id_vinculo_estado' => DataObjects_Vinculoestado::idSinInfo(),
             'id_organizacion_armada' =>
                 DataObjects_Presponsable::idSinInfo(),
             'id_etnia' =>

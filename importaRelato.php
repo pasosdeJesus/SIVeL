@@ -40,7 +40,7 @@ require_once 'DataObjects/Rango_edad.php';
 require_once 'DataObjects/Filiacion.php';
 require_once 'DataObjects/Sector_social.php';
 require_once 'DataObjects/Organizacion.php';
-require_once 'DataObjects/Vinculo_estado.php';
+require_once 'DataObjects/Vinculoestado.php';
 require_once 'DataObjects/Tipo_sitio.php';
 require_once 'DataObjects/Categoria.php';
 
@@ -463,7 +463,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         }
                     }
                     foreach (array('filiacion' => 'filiacion',
-                        'vinculo_estado' => 'vinculo_estado',
+                        'vinculoestado' => 'vinculoestado',
                         'organizacion_armada' => 'presponsable')
                         as $cs => $cs2
                     ) {

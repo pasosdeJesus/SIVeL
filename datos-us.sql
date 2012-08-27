@@ -52,4 +52,6 @@ INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.1-nd', '2011-1
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.1-os', '2011-10-21', 'Orientación sexual');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-sm', '2012-07-29', 'Menú pasa de base de datos a interfaz');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-lu', '2012-07-29', 'Usuarios con idioma');
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-rt', '2012-08-25', 'Renombrando tablas');
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-rt2', '2012-08-25', 'Renombrando tablas II');
  

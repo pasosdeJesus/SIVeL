@@ -16,12 +16,12 @@
  */
 
 /**
- * Definicion para la tabla vinculo_estado_comunidad.
+ * Definicion para la tabla vinculoestado_comunidad.
  */
 require_once 'DB_DataObject_SIVeL.php';
 
 /**
- * Definicion para la tabla vinculo_estado_comunidad.
+ * Definicion para la tabla vinculoestado_comunidad.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -32,10 +32,10 @@ require_once 'DB_DataObject_SIVeL.php';
  * @see      DB_DataObject_SIVeL
  * Acceso: SÓLO DEFINICIONES
  */
-class DataObjects_Vinculo_estado_comunidad extends DB_DataObject_SIVeL
+class DataObjects_Vinculoestado_comunidad extends DB_DataObject_SIVeL
 {
 
-    var $__table = 'vinculo_estado_comunidad';                // table name
+    var $__table = 'vinculoestado_comunidad';                // table name
     var $id_vinculo_estado;                  // int4(4)  multiple_key
     var $id_grupoper;                  // int4(4)  multiple_key
     var $id_caso;                  // int4(4)  multiple_key

@@ -22,7 +22,7 @@ require_once 'ResConsulta.php';
 
 require_once 'DataObjects/Rango_edad.php';
 require_once 'DataObjects/Sector_social.php';
-require_once 'DataObjects/Vinculo_estado.php';
+require_once 'DataObjects/Vinculoestado.php';
 require_once 'DataObjects/Filiacion.php';
 require_once 'DataObjects/Organizacion.php';
 require_once 'DataObjects/Profesion.php';

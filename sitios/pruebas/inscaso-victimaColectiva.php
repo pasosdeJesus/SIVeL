@@ -43,7 +43,7 @@ pasaPestanaFicha(
     $db, array("victima_colectiva",
     "antecedente_comunidad",
     "rango_edad_comunidad",
-    "vinculo_estado_comunidad",
+    "vinculoestado_comunidad",
     "filiacion_comunidad",
     "profesion_comunidad",
     "organizacion_comunidad",

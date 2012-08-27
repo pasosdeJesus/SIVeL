@@ -1163,7 +1163,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
                 $l = $drviccol->links();
                 $drviccol->id_caso = $idcaso;
                 $drviccol->id_grupoper = $idgr;
-                $pl = explode(':', $l[$idt]); //vinculo_estado:id
+                $pl = explode(':', $l[$idt]); //vinculoestado:id
                 $drviccol->$idt = (int)conv_basica($db, $pl[0], $v, $obs);
                 if (!$drviccol->insert()) {
                     repObs(

@@ -1031,6 +1031,9 @@ function hace_consulta(&$db, $q, $finenerror = true, $muestraerror = true)
             echo_esc($q);
         }
         if ($finenerror) {
+            echo _("&iquest;Ya") . " <a href='actualiza.php'>"
+                . _("actualiz&oacute;") . "</a> "
+                . _("y regener&oacute; esquema?");
             exit(1);
         }
     }

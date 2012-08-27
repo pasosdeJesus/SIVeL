@@ -323,9 +323,9 @@ CREATE TABLE usuario (
 	idioma VARCHAR(6) NOT NULL DEFAULT 'es_CO'
 );
 
-CREATE SEQUENCE vinculo_estado_seq;
+CREATE SEQUENCE vinculoestado_seq;
 
-CREATE TABLE vinculo_estado (
+CREATE TABLE vinculoestado (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('vinculo_estado_seq')),
 	nombre VARCHAR(500) NOT NULL,
 	fechacreacion DATE NOT NULL,
@@ -391,7 +391,7 @@ CREATE TABLE victima (
 	id_filiacion INTEGER REFERENCES filiacion NOT NULL,
 	id_sector_social INTEGER REFERENCES sector_social NOT NULL,
 	id_organizacion	INTEGER REFERENCES organizacion NOT NULL,
-	id_vinculo_estado INTEGER REFERENCES vinculo_estado NOT NULL,
+	id_vinculo_estado INTEGER REFERENCES vinculoestado NOT NULL,
 	id_organizacion_armada INTEGER REFERENCES presponsable NOT NULL,
 	anotaciones	VARCHAR(1000),
 	id_etnia INTEGER REFERENCES etnia,
@@ -423,8 +423,8 @@ CREATE TABLE victima_colectiva (
 	PRIMARY KEY(id_grupoper, id_caso)
 );
 
-CREATE TABLE vinculo_estado_comunidad (
-	id_vinculo_estado INTEGER REFERENCES vinculo_estado,
+CREATE TABLE vinculoestado_comunidad (
+	id_vinculo_estado INTEGER REFERENCES vinculoestado,
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	FOREIGN KEY (id_grupoper, id_caso) REFERENCES victima_colectiva(id_grupoper, id_caso),

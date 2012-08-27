@@ -74,11 +74,11 @@ foreach ($lm as $m) {
     }
 }
 
-foreach($GLOBALS['remplaza_ficha_tabuladores'] as $a) {
+foreach ($GLOBALS['remplaza_ficha_tabuladores'] as $a) {
     $nom = $a[1];
     $arc = $a[2];
     $nft = array();
-    for($nf = 0; 
+    for ($nf = 0;
         $nf < count($GLOBALS['ficha_tabuladores']);
         $nf++
     ) {
@@ -92,7 +92,7 @@ foreach($GLOBALS['remplaza_ficha_tabuladores'] as $a) {
 }
 
 
-foreach($GLOBALS['nueva_ficha_tabuladores'] as $a) {
+foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
     $puesto = $a[0];
     $nom = $a[1];
     $arc = $a[2];

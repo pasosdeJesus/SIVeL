@@ -25,7 +25,7 @@ $GLOBALS['gancho_rc_reginicial'][0] = "rotulos_inicial";
 $GLOBALS['gancho_rc_regfinal'][0] = "rotulos_final";
 $GLOBALS['misc_ordencons'][0] = "rotulos_orden_cons";
 
-// Para excluir en el ordenamiento por categorias las víctimas 
+// Para excluir en el ordenamiento por categorias las víctimas
 // cuya filiación es SIN INFORMACIÓN
 $GLOBALS['estrotulos_excluirsinfiliacion'] = false;
 

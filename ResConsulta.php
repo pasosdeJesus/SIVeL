@@ -1575,7 +1575,7 @@ class ResConsulta
                     'id_filiacion' => 'REL;observaciones{tipo->filiacion}',
                     'hijos' => 'observaciones{tipo->hijos}',
                     'id_vinculo_estado' =>
-                    'REL;observaciones{tipo->vinculo_estado}',
+                    'REL;observaciones{tipo->vinculoestado}',
                     'id_organizacion_armada' =>
                     'REL;observaciones{tipo->organizacion_armada}',
                     'anotaciones' => 'observaciones{tipo->anotaciones}',)
@@ -1592,7 +1592,7 @@ class ResConsulta
                         'danio_indirecto', 'personas_dependientes',
                         'observaciones{tipo->hijos}',
                         'observaciones{tipo->filiacion}',
-                        'observaciones{tipo->vinculo_estado}',
+                        'observaciones{tipo->vinculoestado}',
                         'observaciones{tipo->organizacion_armada}',
                         'observaciones{tipo->anotaciones}',)
                     )

@@ -5,7 +5,7 @@
 
 
 # Directorio donde reside la aplicación
-dirap=/var/www/htdocs/sivel/sitios/sivel
+dirap=/var/www/htdocs/sivel
 
 if (test ! -f $dirap/conf.php) then {
 	echo "Modifique la variable dirap del script vardb.sh para que tenga directorio de      instalacion";
@@ -20,12 +20,17 @@ function valconf {
 	} fi;
 	grep "\$$nv *=" $dirap/conf.php 2> /dev/null > /dev/null
 	if (test "$?" != "0") then {
-		echo "No está la variable $nv en $dirap/conf.php. Asegurese de ejecutar actualiza.php";
-		cmd="grep \"\$$nv *=\" $dirap/conf.php";
-		eval "$cmd";
-		exit 1;
-	} fi;
+		grep "\$$nv *=" $dirap/../pordefecto/conf.php 2> /dev/null > /dev/null
+		if (test "$?" != "0") then {
+			echo "No está la variable $nv en $dirap/conf.php ni en $dirap/../pordefecto/conf.php. Asegurese de ejecutar actualiza.php";
+			cmd="grep \"\$$nv *=\" $dirap/conf.php";
+			eval "$cmd";
+			exit 1;
+		} fi;
+		res=`grep "\\\$$nv *=" $dirap/../pordefecto/conf.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g'`;
+	} else {
 	res=`grep "\\\$$nv *=" $dirap/conf.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g'`;
+	} fi;
 	cmd="$nv=\"$res\";";
 	eval "$cmd";
 }

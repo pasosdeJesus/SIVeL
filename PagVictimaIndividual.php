@@ -25,7 +25,7 @@ require_once 'PagUbicacion.php';
 require_once 'DataObjects/Persona.php';
 require_once 'DataObjects/Rango_edad.php';
 require_once 'DataObjects/Sector_social.php';
-require_once 'DataObjects/Vinculo_estado.php';
+require_once 'DataObjects/Vinculoestado.php';
 require_once 'DataObjects/Filiacion.php';
 require_once 'DataObjects/Organizacion.php';
 require_once 'DataObjects/Profesion.php';
@@ -610,7 +610,7 @@ class PagVictimaIndividual extends PagBaseMultiple
         );
         $es_vacio = $es_vacio && (!isset($valores['id_vinculo_estado'])
             || $valores['id_vinculo_estado']==
-            DataObjects_Vinculo_estado::idSinInfo()
+            DataObjects_Vinculoestado::idSinInfo()
         );
         $es_vacio = $es_vacio && (!isset($valores['id_organizacion_armada'])
             || $valores['id_organizacion_armada']==

@@ -88,8 +88,10 @@ function regeneraEsquemas() {
     }
 }
 
-
-
+encabezado_envia(_('Actualizando'));
+echo '<table width="100%"><td style="white-space: nowrap; '
+    . 'background-color: #CCCCCC;" align="left" valign="top" colspan="2">'
+    . '<b><div align=center>' . _('Actualizando') . '</div></b></td></table>';
 $r = $db->getOne('SELECT COUNT(*) FROM actualizacionbase');
 if (PEAR::isError($r)) {
     $r = $db->query(
@@ -98,10 +100,6 @@ if (PEAR::isError($r)) {
     regeneraEsquemas();
 }
 
-encabezado_envia(_('Actualizando'));
-echo '<table width="100%"><td style="white-space: nowrap; '
-    . 'background-color: #CCCCCC;" align="left" valign="top" colspan="2">'
-    . '<b><div align=center>' . _('Actualizando') . '</div></b></td></table>';
 
 echo "Preactualizando sitio<br>";
 $ap = $_SESSION['dirsitio'] . '/preactualiza.php';
@@ -2084,6 +2082,26 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Renombrando tablas con presunto responsable');
 }
 
+$idac = '1.2-rt2';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, 
+        "ALTER TABLE vinculo_estado RENAME TO "
+        . "vinculoestado ", false
+    );
+    hace_consulta(
+        $db, 
+        "ALTER SEQUENCE vinculo_estado_seq RENAME TO "
+        . "vinculoestado_seq ", false
+    );
+    hace_consulta(
+        $db, 
+        "ALTER TABLE vinculo_estado_comunidad RENAME TO "
+        . "vinculoestadocomunidad ", false
+    );
+
+    aplicaact($act, $idac, 'Renombrando tablas vinculoestado');
+}
 
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {

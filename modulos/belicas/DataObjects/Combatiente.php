@@ -23,7 +23,7 @@ require_once 'DataObjects/Profesion.php';
 require_once 'DataObjects/Rango_edad.php';
 require_once 'DataObjects/Resultado_agresion.php';
 require_once 'DataObjects/Sector_social.php';
-require_once 'DataObjects/Vinculo_estado.php';
+require_once 'DataObjects/Vinculoestado.php';
 
 /**
  * Definicion para la tabla combatiente.
@@ -206,9 +206,9 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
 
         $e =& $form->getElement('id_vinculo_estado');
         if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['vinculo_estado'])
+            && isset($GLOBALS['etiqueta']['vinculoestado'])
         ) {
-            $e->setLabel($GLOBALS['etiqueta']['vinculo_estado']);
+            $e->setLabel($GLOBALS['etiqueta']['vinculoestado']);
         }
 
         $e =& $form->getElement('id_filiacion');

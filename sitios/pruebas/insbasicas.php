@@ -103,7 +103,7 @@ if (($nd-$na) != 1) {
 $c = 0;
 
 foreach (array('tipo_sitio', 'frontera', 'region', 'filiacion', 'organizacion',
-    'profesion', 'sector_social', 'vinculo_estado', 'antecedente',
+    'profesion', 'sector_social', 'vinculoestado', 'antecedente',
     'contexto'
 ) as $t
 ) {

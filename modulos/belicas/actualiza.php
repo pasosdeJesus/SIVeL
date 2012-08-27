@@ -45,7 +45,7 @@ if (!aplicado($idac)) {
         id_filiacion    INTEGER    REFERENCES filiacion,
         id_sector_social    INTEGER    REFERENCES sector_social,
         id_organizacion    INTEGER REFERENCES organizacion,
-        id_vinculo_estado INTEGER REFERENCES vinculo_estado,
+        id_vinculo_estado INTEGER REFERENCES vinculoestado,
         id_caso    INTEGER REFERENCES caso,
         id_organizacion_armada INTEGER REFERENCES presponsable
         )", false

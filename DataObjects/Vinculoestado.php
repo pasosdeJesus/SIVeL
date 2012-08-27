@@ -18,7 +18,7 @@
 require_once 'DataObjects/Basica.php';
 
 /**
- * Definicion para la tabla vinculo_estado
+ * Definicion para la tabla vinculoestado
  * Ver documentación de DataObjects_Basica.
  *
  * @category SIVeL
@@ -28,9 +28,9 @@ require_once 'DataObjects/Basica.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Basica
  */
-class DataObjects_Vinculo_estado extends DataObjects_Basica
+class DataObjects_Vinculoestado extends DataObjects_Basica
 {
-    var $__table = 'vinculo_estado';                       // table name
+    var $__table = 'vinculoestado';                       // table name
 
     /**
      * Constructora
