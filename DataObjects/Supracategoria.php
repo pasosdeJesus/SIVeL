@@ -34,7 +34,7 @@ require_once 'DataObjects/Basica.php';
 class DataObjects_Supracategoria extends DataObjects_Basica
 {
     var $__table = 'supracategoria';                  // table name
-    var $id_tipo_violencia;               // varchar(-1)  multiple_key
+    var $id_tviolencia;               // varchar(-1)  multiple_key
 
     /**
      * Constructora
@@ -45,30 +45,30 @@ class DataObjects_Supracategoria extends DataObjects_Basica
         parent::__construct();
 
         $this->nom_tabla = _('Supracategoria');
-        $this->fb_fieldLabels['id_tipo_violencia'] = _('Tipo de Violencia');
+        $this->fb_fieldLabels['id_tviolencia'] = _('Tipo de Violencia');
     }
 
 
-    var $fb_linkDisplayFields = array('nombre','id_tipo_violencia');
+    var $fb_linkDisplayFields = array('nombre','id_tviolencia');
     var $fb_selectAddEmpty = array('fechadeshabilitacion');
     var $fb_select_display_field = 'nombre';
     var $fb_hidePrimaryKey = false;
     var $fb_preDefOrder = array(
-        'id_tipo_violencia',
+        'id_tviolencia',
         'id',
         'nombre',
         'fechacreacion',
         'fechadeshabilitacion',
     );
     var $fb_fieldsToRender = array(
-        'id_tipo_violencia',
+        'id_tviolencia',
         'id',
         'nombre',
         'fechacreacion',
         'fechadeshabilitacion',
     );
     var $fb_fieldsRequired = array(
-        'id_tipo_violencia',
+        'id_tviolencia',
         'id',
         'nombre',
         'fechacreacion',

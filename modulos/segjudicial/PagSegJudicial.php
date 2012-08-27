@@ -295,10 +295,10 @@ class PagSegJudicial extends PagBaseMultiple
                     $cq->setValue($d->$c);
                 }
             }
-            $cq = $this->getElement('id_tipo');
-            $id_tipo = $cq->_elements[0];
+            $cq = $this->getElement('id_trelacion');
+            $id_trelacion = $cq->_elements[0];
             $id_etapa = $cq->_elements[1];
-            $id_tipo->setValue($d->id_tipo);
+            $id_trelacion->setValue($d->id_trelacion);
             $id_etapa->setValue($d->id_etapa);
             //die("x");
         }
@@ -339,12 +339,12 @@ class PagSegJudicial extends PagBaseMultiple
     */
     function procesa(&$valores, $procAc = false)
     {
-        $valores['id_tipo'] = (int)$valores['tipoetapa'][0];
+        $valores['id_trelacion'] = (int)$valores['tipoetapa'][0];
         $valores['id_etapa'] = (int)$valores['tipoetapa'][1];
         $es_vacio = (
-            (!isset($valores['id_tipo'])
-            || $valores['id_tipo'] === ''
-            || $valores['id_tipo'] == DataObjects_Tproceso::idSinInfo()
+            (!isset($valores['id_trelacion'])
+            || $valores['id_trelacion'] === ''
+            || $valores['id_trelacion'] == DataObjects_Tproceso::idSinInfo()
             )
             || (!isset($valores['id_etapa'])
                 || $valores['id_etapa']==
@@ -379,7 +379,7 @@ class PagSegJudicial extends PagBaseMultiple
             $nacc =& objeto_tabla('accion');
             $nacc->fb_useMutators = true;
             $nacc->id_proceso = $this->bproceso->_do->id;
-            $nacc->id_tipo_accion = (int)$valores['id_tipo_accion'];
+            $nacc->id_trelacion_accion = (int)$valores['id_trelacion_accion'];
             $nacc->id_despacho = (int)$valores['id_despacho'];
             $nacc->fecha = arr_a_fecha(var_escapa($valores['fecha'], $db, 20));
             $nacc->numero_radicado =
@@ -560,7 +560,7 @@ class PagSegJudicial extends PagBaseMultiple
     {
         PagBaseMultiple::compara(
             $db, $r, $id1, $id2,
-            array('Seguimiento Judicial' => array('proceso', 'id_tipo'))
+            array('Seguimiento Judicial' => array('proceso', 'id_trelacion'))
         );
     }
 
@@ -588,18 +588,18 @@ class PagSegJudicial extends PagBaseMultiple
     static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls)
     {
         //echo "OJO PagSegJudicial::mezcla(db, sol, $id1, $id2, $idn, $cls)";
-        $e1 = isset($sol['proceso']['id_tipo'])
-            && $sol['proceso']['id_tipo'] == 1;
+        $e1 = isset($sol['proceso']['id_trelacion'])
+            && $sol['proceso']['id_trelacion'] == 1;
         if (($e1 && $idn != $id1) || (!$e1 && $idn != $id2)) {
             PagSegJudicial::eliminaDep($db, $idn);
             PagBaseMultiple::mezcla(
                 $db, $sol, $id1, $id2, $idn,
-                array('Seguimiento Judicial' => array('proceso', 'id_tipo'))
+                array('Seguimiento Judicial' => array('proceso', 'id_trelacion'))
             );
             PagBaseMultiple::mezcla(
                 $db, $sol, $id1, $id2, $idn,
                 array('Seguimiento Judicial'
-                => array('accion', 'id_tipo', 'proceso'))
+                => array('accion', 'id_trelacion', 'proceso'))
             );
             echo "Falta completar copia de Acciones en Seguimiento Judicial<br>";
         }

@@ -66,7 +66,7 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
 
         $pFini = var_post_escapa('fini');
         $pFfin = var_post_escapa('ffin');
-        $pTipo = var_post_escapa('id_tipo_violencia');
+        $pTipo = var_post_escapa('id_tviolencia');
         $pSupra = var_post_escapa('id_supracategoria');
         $pSegun = var_post_escapa('segun');
         $pMuestra = var_post_escapa('muestra');
@@ -107,13 +107,13 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
         }
 
 
-        if ($pSegun == 'id_rango_edad') {
-            consulta_and_sinap($where, "victima.id_rango_edad","rangoedad.id");
+        if ($pSegun == 'id_rangoedad') {
+            consulta_and_sinap($where, "victima.id_rangoedad","rangoedad.id");
 //$tablas .= ", rangoedad"; */
-            $campoSegun = "id_rango_edad";
+            $campoSegun = "id_rangoedad";
             $cfSegun = "rangoedad.rango";
             $tablaSegun = "rangoedad, ";
-            $condSegun = "AND rangoedad.id=$cons2.id_rango_edad";
+            $condSegun = "AND rangoedad.id=$cons2.id_rangoedad";
             $titSegun = 'Edad';
         }  elseif ($pSegun == 'sexo') {
             $campoSegun = "sexo";
@@ -121,28 +121,28 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
             $tablaSegun = "";
             $condSegun = "";
             $titSegun = 'Sexo';
-        } elseif ($pSegun == 'id_p_responsable') {
+        } elseif ($pSegun == 'id_presponsable') {
             $distinct = ""; // Para contar actos
             $cfSegun = 'presponsable.nombre';
             $tablaSegun = "presponsable, ";
-            $condSegun = "AND presponsable.id=$cons2.id_p_responsable";
+            $condSegun = "AND presponsable.id=$cons2.id_presponsable";
             $titSegun = 'P. Responsable';
             consulta_and_sinap(
-                $where, "acto.id_p_responsable",
+                $where, "acto.id_presponsable",
                 "presponsable.id"
             );
             consulta_and_sinap($where, "victima.id_persona","acto.id_persona");
             $tQue .= "";
-            $campoSegun = "acto.id_p_responsable";
-        } elseif ($pSegun == 'id_sector_social') {
-            $campoSegun = "id_sector_social";
+            $campoSegun = "acto.id_presponsable";
+        } elseif ($pSegun == 'id_sectorsocial') {
+            $campoSegun = "id_sectorsocial";
             $cfSegun = "sectorsocial.nombre";
             $tablaSegun = "sectorsocial, ";
             consulta_and_sinap(
-                $where, "victima.id_sector_social",
+                $where, "victima.id_sectorsocial",
                 "sectorsocial.id"
             );
-            $condSegun = "AND sectorsocial.id=$cons2.id_sector_social";
+            $condSegun = "AND sectorsocial.id=$cons2.id_sectorsocial";
             $titSegun = 'Sector Social';
         } elseif ($pSegun == 'meses') {
             $campoSegun = "extract(year from fecha) || '-' " .
@@ -153,7 +153,7 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
             $titSegun = 'Mes';
         } elseif ($pSegun == 'id_filiacion'
             || $pSegun == 'id_organizacion'
-            || $pSegun == 'id_sector_social'
+            || $pSegun == 'id_sectorsocial'
         ) { # or $pSegun = '!= '') {
             $campoSegun = $pSegun;
             $ant = explode("_", $pSegun);
@@ -209,7 +209,7 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
 
 
         if ($pTipo != '') {
-            consulta_and($db, $where, "categoria.id_tipo_violencia", $pTipo);
+            consulta_and($db, $where, "categoria.id_tviolencia", $pTipo);
         }
         if ($pSupra != '') {
             consulta_and($db, $where, "categoria.id_supracategoria", $pSupra);
@@ -222,11 +222,11 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
             $cfSegun3="trim(" . $cfSegun . "), ";
             $campoSegun2=", ".$campoSegun;
         }
-        $q1="CREATE VIEW $cons ($pQ1 id_caso, id_tipo_violencia, id_supracategoria, id_categoria, col_rep_consolidado".$pSegun2 .") AS SELECT $pQ1sel caso.id, categoria.id_tipo_violencia, categoria.id_supracategoria, $tCat.id_categoria, categoria.col_rep_consolidado $campoSegun2 FROM ".$tablas
+        $q1="CREATE VIEW $cons ($pQ1 id_caso, id_tviolencia, id_supracategoria, id_categoria, id_pconsolidado".$pSegun2 .") AS SELECT $pQ1sel caso.id, categoria.id_tviolencia, categoria.id_supracategoria, $tCat.id_categoria, categoria.id_pconsolidado $campoSegun2 FROM ".$tablas
             ."  WHERE caso.id<>'".$GLOBALS['idbus'] . "'"
             ;
         // Evitamos sobreconteos de duplicados en DIH y DH excluyendo los de DH
-        $q1 .=  " AND id_categoria NOT IN (select id from categoria where contada_en IS NOT NULL) ";
+        $q1 .=  " AND id_categoria NOT IN (select id from categoria where contadaen IS NOT NULL) ";
 /*        <>'10' AND id_categoria<>'15' AND " .
             "id_categoria<>'18' AND id_categoria<>'12' AND " .
             "id_categoria<>'13' AND " .
@@ -245,11 +245,11 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
             );
         }
 
-        $q2="CREATE VIEW $cons2 (id_persona, id_caso, id_tipo_violencia, id_supracategoria, id_categoria, col_rep_consolidado" . $pSegun2 . ", id_departamento, id_municipio) ";
-        $q2 .= "AS SELECT $distinct $cons.id_persona, $cons.id_caso, id_tipo_violencia, id_supracategoria, id_categoria, col_rep_consolidado" . $pSegun2 . ", ubicacion.id_departamento, ubicacion.id_municipio FROM ubicacion, $cons
+        $q2="CREATE VIEW $cons2 (id_persona, id_caso, id_tviolencia, id_supracategoria, id_categoria, id_pconsolidado" . $pSegun2 . ", id_departamento, id_municipio) ";
+        $q2 .= "AS SELECT $distinct $cons.id_persona, $cons.id_caso, id_tviolencia, id_supracategoria, id_categoria, id_pconsolidado" . $pSegun2 . ", ubicacion.id_departamento, ubicacion.id_municipio FROM ubicacion, $cons
             WHERE $cons.id_caso = ubicacion.id_caso";
 /*        foreach (array('municipio_caso', 'clase_caso') as $t) {
-            $q2 .= " UNION  SELECT $cons.$cCons, id_tipo_violencia, id_supracategoria, id_categoria, col_rep_consolidado" . $pSegun2 . ", $t.id_departamento, $t.id_municipio FROM
+            $q2 .= " UNION  SELECT $cons.$cCons, id_tviolencia, id_supracategoria, id_categoria, id_pconsolidado" . $pSegun2 . ", $t.id_departamento, $t.id_municipio FROM
 $t, $cons WHERE $cons.id_caso = $t.id_caso";
 }  */
 
@@ -276,7 +276,7 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
             AND municipio.id_departamento = 47)  OR
             (municipio.id = $cons2.id_municipio
             AND municipio.id_departamento = $cons2.id_departamento))
-            AND col_rep_consolidado = pconsolidado.no_columna
+            AND id_pconsolidado = pconsolidado.id
             $condSegun
             GROUP BY $cfSegun2 $gDep $gMun pconsolidado.rotulo
             ORDER BY $cfSegun2 $gDep $gMun pconsolidado.rotulo
@@ -298,7 +298,7 @@ $t, $cons WHERE $cons.id_caso = $t.id_caso";
         for ($i = 0; $i < count($cab)-2; $i++) {
             $tcol[$cab[$i]]=1;
         }
-        $q4='SELECT no_columna, rotulo
+        $q4='SELECT id, rotulo
             FROM pconsolidado
             ORDER BY 1';
         $rcon = hace_consulta($db, $q4);
@@ -442,7 +442,7 @@ function PagEstadisticasIndRot()
         null
     );
 
-    $this->addAction('id_tipo_violencia', new CamTipoViolencia());
+    $this->addAction('id_tviolencia', new CamTipoViolencia());
 
     $this->addAction('consulta', new AccionEstadisticasIndRot());
 }
@@ -451,10 +451,10 @@ function PagEstadisticasIndRot()
 function idTipoViolencia()
 {
     $ntipoviolencia= null;
-    if (isset($this->_submitValues['id_tipo_violencia'])) {
-        $ntipoviolencia = (int)$this->_submitValues['id_tipo_violencia'] ;
-    } else if (isset($_SESSION['id_tipo_violencia'])) {
-        $ntipoviolencia = $_SESSION['id_tipo_violencia'] ;
+    if (isset($this->_submitValues['id_tviolencia'])) {
+        $ntipoviolencia = (int)$this->_submitValues['id_tviolencia'] ;
+    } else if (isset($_SESSION['id_tviolencia'])) {
+        $ntipoviolencia = $_SESSION['id_tviolencia'] ;
     }
     return $ntipoviolencia;
 }
@@ -505,7 +505,7 @@ function buildForm()
     $e->setValue(($cy  - 1) . "-12-31");
 
     $tipo =& $this->addElement(
-        'select', 'id_tipo_violencia',
+        'select', 'id_tviolencia',
         'Tipo de violencia: ', array()
     );
     $options= array('' => '') + htmlentities_array(
@@ -517,7 +517,7 @@ function buildForm()
     $tipo->loadArray($options);
     $tipo->updateAttributes(
         array('onchange' =>
-        'envia(\'estadisticas:id_tipo_violencia\')'
+        'envia(\'estadisticas:id_tviolencia\')'
         )
     );
 
@@ -532,7 +532,7 @@ function buildForm()
         $options= array('' => '') + htmlentities_array(
             $db->getAssoc(
                 "SELECT  id, nombre FROM supracategoria " .
-                "WHERE id_tipo_violencia='$ntipoviolencia' ORDER BY id"
+                "WHERE id_tviolencia='$ntipoviolencia' ORDER BY id"
             )
         );
         $supra->loadArray($options);
@@ -545,13 +545,13 @@ function buildForm()
     );
     $sel->loadArray(
         array('' => '',
-        'id_p_responsable' => 'ACTOS '
+        'id_presponsable' => 'ACTOS '
             . strtoupper($GLOBALS['etiqueta']['p_responsable']),
-        'id_rango_edad' => strtoupper($GLOBALS['etiqueta']['rangoedad']),
+        'id_rangoedad' => strtoupper($GLOBALS['etiqueta']['rangoedad']),
         'sexo' => strtoupper($GLOBALS['etiqueta']['sexo']),
         'id_filiacion' => strtoupper($GLOBALS['etiqueta']['filiacion']),
         'id_profesion' => strtoupper($GLOBALS['etiqueta']['profesion']),
-        'id_sector_social' => strtoupper($GLOBALS['etiqueta']['sectorsocial']),
+        'id_sectorsocial' => strtoupper($GLOBALS['etiqueta']['sectorsocial']),
         'id_organizacion' => strtoupper($GLOBALS['etiqueta']['organizacion']),
         'meses' => 'MESES',
         'id_profesion' => 'PROFESION',

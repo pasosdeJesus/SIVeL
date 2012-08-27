@@ -64,7 +64,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     function copiaId()
     {
         $r = $this->bcaso_ffrecuente->_do->id_caso.":" .
-            $this->bcaso_ffrecuente->_do->id_prensa.":" .
+            $this->bcaso_ffrecuente->_do->id_ffrecuente.":" .
             $this->bcaso_ffrecuente->_do->fecha;
         return  $r;
     }
@@ -80,7 +80,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     function elimina(&$valores)
     {
         $this->iniVar();
-        if ($this->bcaso_ffrecuente->_do->id_prensa != null) {
+        if ($this->bcaso_ffrecuente->_do->id_ffrecuente != null) {
             $this->bcaso_ffrecuente->_do->delete();
             $_SESSION['ff_total']--;
         }
@@ -104,9 +104,9 @@ class PagFuentesFrecuentes extends PagBaseMultiple
         }
         $do->id_caso = $idcaso;
         $result = hace_consulta(
-            $db, "SELECT id_prensa " .
+            $db, "SELECT id_ffrecuente " .
             " FROM caso_ffrecuente, ffrecuente " .
-            " WHERE id_caso='$idcaso' AND id_prensa=id " .
+            " WHERE id_caso='$idcaso' AND id_ffrecuente=id " .
             " ORDER BY nombre;"
         );
         $row = array();
@@ -118,9 +118,9 @@ class PagFuentesFrecuentes extends PagBaseMultiple
         }
         $_SESSION['ff_total'] = $tot;
         if ($_SESSION['ff_pag'] < 0 || $_SESSION['ff_pag'] >= $tot) {
-            $do->id_prensa = null;
+            $do->id_ffrecuente = null;
         } else {
-            $do->id_prensa = $idp[$_SESSION['ff_pag']];
+            $do->id_ffrecuente = $idp[$_SESSION['ff_pag']];
             $do->find();
             $do->fetch();
         }
@@ -246,7 +246,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
             unset($_SESSION['nuevo_copia_id']);
             $d =& objeto_tabla('caso_ffrecuente');
             $d->id_caso = $idc;
-            $d->id_prensa = $idp;
+            $d->id_ffrecuente = $idp;
             $d->fecha = $fecha;
             $d->find();
             $d->fetch();
@@ -286,15 +286,15 @@ class PagFuentesFrecuentes extends PagBaseMultiple
      */
     function procesa(&$valores)
     {
-        $es_vacio = ($valores['id_prensa'] == null
-                || $valores['id_prensa'] == ''
+        $es_vacio = ($valores['id_ffrecuente'] == null
+                || $valores['id_ffrecuente'] == ''
         )
             && ($valores['ubicacion'] == null || $valores['ubicacion'] == '')
             && ($valores['clasificacion'] == null
                 || $valores['clasificacion'] == ''
             )
-            && ($valores['ubicacion_fisica'] == null
-                || $valores['ubicacion_fisica'] == ''
+            && ($valores['ubicacionfisica'] == null
+                || $valores['ubicacionfisica'] == ''
                 )
         ;
 
@@ -329,7 +329,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
             return false;
         }
 
-        if ($this->bcaso_ffrecuente->_do->id_prensa != null) {
+        if ($this->bcaso_ffrecuente->_do->id_ffrecuente != null) {
             $this->bcaso_ffrecuente->_do->delete();
             $_SESSION['ff_total']--;
         }
@@ -347,8 +347,8 @@ class PagFuentesFrecuentes extends PagBaseMultiple
                 $valores['fecha']['m'] = 1;
                 $valores['fecha']['Y'] = $GLOBALS['anio_min'] - 1;
             }
-            if ($valores['id_prensa'] == '') {
-                $valores['id_prensa'] = DataObjects_Ffrecuente::id_sinInfo();
+            if ($valores['id_ffrecuente'] == '') {
+                $valores['id_ffrecuente'] = DataObjects_Ffrecuente::id_sinInfo();
             }
         }
 
@@ -381,7 +381,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     {
         prepara_consulta_gen(
             $w, $t, $idcaso,
-            'caso_ffrecuente', _('Ffrecuente'), 'id_prensa', false
+            'caso_ffrecuente', _('Ffrecuente'), 'id_ffrecuente', false
         );
         // echo "OJO w=$w";
     }
@@ -422,15 +422,15 @@ class PagFuentesFrecuentes extends PagBaseMultiple
             if (!empty($fecha)) {
                 $escritocaso = objeto_tabla('caso_ffrecuente');
                 $escritocaso->id_caso = $idcaso;
-                $escritocaso->id_prensa = $idffrecuente;
+                $escritocaso->id_ffrecuente = $idffrecuente;
                 $escritocaso->fecha = $fecha;
                 if (!empty($ubif)) {
-                    $escritocaso->ubicacion_fisica = $ubif;
+                    $escritocaso->ubicacionfisica = $ubif;
                 }
                 $escritocaso->ubicacion = $ubi;
                 $escritocaso->clasificacion = $cla;
                 $escritocaso->insert();
-                return $escritocaso->id_prensa;
+                return $escritocaso->id_ffrecuente;
             }
         }
 

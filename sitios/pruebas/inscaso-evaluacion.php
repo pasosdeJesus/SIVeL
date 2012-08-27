@@ -25,10 +25,10 @@ require_once "ambiente.php";
 /*** EVALUACIÓN ***/
 
 $post = array();
-$post['gr_confiabilidad'] = 'Alta';
-$post['gr_esclarecimiento'] = 'Alto';
-$post['gr_impunidad'] = 'Nula';
-$post['gr_informacion'] = 'Parc';
+$post['grconfiabilidad'] = 'Alta';
+$post['gresclarecimiento'] = 'Alto';
+$post['grimpunidad'] = 'Nula';
+$post['grinformacion'] = 'Parc';
 $post['_qf_evaluacion_basicos'] = 'Datos básicos';
 $post['_qf_default'] = 'evaluacion:siguiente';
 pasaPestanaFicha($db, array(), $post, 1);

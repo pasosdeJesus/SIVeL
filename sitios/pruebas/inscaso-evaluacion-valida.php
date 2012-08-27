@@ -24,15 +24,15 @@ require_once "ambiente.php";
 require_once "misc.php";
 
 $post = array();
-$post['gr_confiabilidad'] = 'Alta';
-$post['gr_esclarecimiento'] = 'Alto';
-$post['gr_impunidad'] = 'Nula';
-$post['gr_informacion'] = 'Parc';
+$post['grconfiabilidad'] = 'Alta';
+$post['gresclarecimiento'] = 'Alto';
+$post['grimpunidad'] = 'Nula';
+$post['grinformacion'] = 'Parc';
 
 $dcaso = objeto_tabla('caso');
 $dcaso->get(1);
-foreach (array('gr_confiabilidad', 'gr_esclarecimiento',
-    'gr_impunidad', 'gr_informacion'
+foreach (array('grconfiabilidad', 'gresclarecimiento',
+    'grimpunidad', 'grinformacion'
 ) as $g
 ) {
     if ($dcaso->$g != $post[$g]) {

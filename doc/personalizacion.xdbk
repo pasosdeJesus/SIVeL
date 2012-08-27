@@ -284,9 +284,15 @@ sudo ln -s ofb WWW.NOCHEYNIEBLA.ORG_OFB
         <para>En cuanto a base de datos se emplea SQL estándar con
             nomenclatura de tablas en síngular y campo llave único de nombre
 	    <literal>id</literal>; los nombres de tablas no llevan espacio ni 
-	    _, excepto tablas que relacionan otras 2 en cuyo caso se usa 
-	    orden alfabético como sugieren las convenciones de CakePHP 
-	    (ver <xref linkend="nomcakephp"></xref>.
+	    _, excepto tablas que relacionan otras 2 en cuyo caso se 
+	    separan las tablas ordenadas alfabéticamente separadas
+	    con '_' como sugieren las convenciones de CakePHP 
+	    (ver <xref linkend="nomcakephp"></xref>.  Los nombres de
+	    campos no llevan espacios ni _, excepto que una
+	    llave foranea de la tabla <literal>t</literal>
+	    puede ser <literal>id_tabla</literal>
+	    --aunque un campo que referencie llave de otra tabla puede
+	    tener un nombre diferente cuando se requiera aclarar.
 			Para las partes en PHP se emplean estándares de PEAR 
 			(ver <xref linkend="pearcs"></xref>) ampliados
 			con reglas de nomenclatura de silverorange 

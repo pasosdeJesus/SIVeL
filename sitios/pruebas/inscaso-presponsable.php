@@ -25,7 +25,7 @@ require_once "ambiente.php";
 /*** PRESUNTO RESPONSABLE ***/
 
 $post = array();
-$post['id_p_responsable'] = '1';
+$post['id_presponsable'] = '1';
 $post['tipo'] = '0';
 $post['bloque'] = 'bloque';
 $post['frente'] = 'frente';

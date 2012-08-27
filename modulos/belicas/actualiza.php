@@ -41,13 +41,13 @@ if (!aplicado($idac)) {
         sexo    CHAR(1)  NOT NULL CHECK (sexo = 'S' OR sexo='M' OR sexo='F'),
         id_resultado_agresion INTEGER NOT NULL REFERENCES resagresion,
         id_profesion INTEGER REFERENCES profesion,
-        id_rango_edad    INTEGER REFERENCES rangoedad,
+        id_rangoedad    INTEGER REFERENCES rangoedad,
         id_filiacion    INTEGER    REFERENCES filiacion,
-        id_sector_social    INTEGER    REFERENCES sectorsocial,
+        id_sectorsocial    INTEGER    REFERENCES sectorsocial,
         id_organizacion    INTEGER REFERENCES organizacion,
-        id_vinculo_estado INTEGER REFERENCES vinculoestado,
+        id_vinculoestado INTEGER REFERENCES vinculoestado,
         id_caso    INTEGER REFERENCES caso,
-        id_organizacion_armada INTEGER REFERENCES presponsable
+        organizacionarmada INTEGER REFERENCES presponsable
         )", false
     );
 

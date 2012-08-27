@@ -60,7 +60,7 @@ function registro(&$d, $titulo, $k)
             } else if ($c == 'id_supracategoria') {
                 $ds = objeto_tabla('Supracategoria');
                 $ds->id = $d->id_supracategoria;
-                $ds->id_tipo_violencia = $d->id_tipo_violencia;
+                $ds->id_tviolencia = $d->id_tviolencia;
                 $ds->find(1);
             } else if (in_array($c, $k)) {
                 $ds = $d->getLink($c);
@@ -98,7 +98,7 @@ function registro(&$d, $titulo, $k)
 /**
  * Presenta rama de árbol.
  * En la tabla se requiere que sea una llave simple con nombre id
- * y que el elemento papa se llame id_papa
+ * y que el elemento papa se llame papa
  *
  * @param string  $tabla   Nombre de tabla
  * @param string  $titulo  Titulo por mostrar
@@ -115,7 +115,7 @@ function rama($tabla, $titulo, $idpapa, $arbol, $indenta)
         die($d->getMessage());
     }
     if ($arbol) {
-        $d->id_papa = $idpapa;
+        $d->papa = $idpapa;
     }
     if (is_array($titulo)) {
         $d->orderBy(implode(",", $titulo));
@@ -126,7 +126,7 @@ function rama($tabla, $titulo, $idpapa, $arbol, $indenta)
     $pm = array();
     $k = $d->keys();
     while ($d->fetch()) {
-        if (!$arbol || $d->id_papa == $idpapa) {
+        if (!$arbol || $d->papa == $idpapa) {
             $pm[] = $d->id;
         }
     }
@@ -136,7 +136,7 @@ function rama($tabla, $titulo, $idpapa, $arbol, $indenta)
             die($d2->getMessage());
         }
         $d2->get($tid);
-        if ($d2->id_papa == $idpapa) {
+        if ($d2->papa == $idpapa) {
             list($pk, $t) = registro($d2, $titulo, $k);
             $html_l = sprintf(
                 '%s<a href="detalle.php?id=%s&tabla=%s">
@@ -191,7 +191,7 @@ if (isset($d->fb_linkDisplayFields)) {
 }
 
 $vd = get_object_vars($d);
-if (in_array('id_papa', array_keys($vd))) { /** jerarquía */
+if (in_array('papa', array_keys($vd))) { /** jerarquía */
     rama($tabla, $titulo, null, true, "");
 } else { /** Lineal */
     if (is_array($titulo)) {

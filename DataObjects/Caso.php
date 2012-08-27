@@ -44,10 +44,10 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
     var $hora;                            // varchar(-1)
     var $duracion;                        // varchar(-1)
     var $memo;                            // text(-1)  not_null
-    var $gr_confiabilidad;                // varchar(-1)
-    var $gr_esclarecimiento;              // varchar(-1)
-    var $gr_impunidad;                    // varchar(-1)
-    var $gr_informacion;                  // varchar(-1)
+    var $grconfiabilidad;                // varchar(-1)
+    var $gresclarecimiento;              // varchar(-1)
+    var $grimpunidad;                    // varchar(-1)
+    var $grinformacion;                  // varchar(-1)
     var $bienes;                          // text(-1)
     var $id_intervalo;                    // int4(4)
 
@@ -113,10 +113,10 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
            'hora' => _('Hora'),
            'duracion' => _('Duracion'),
            'memo' => _('Memo'),
-           'gr_confiabilidad' => _('Gr. Confiabilidad Fuente'),
-           'gr_esclarecimiento' => _('Gr.Esclarecimiento'),
-           'gr_impunidad' => _('Gr. Impunidad'),
-           'gr_informacion' => _('Gr. Informacion'),
+           'grconfiabilidad' => _('Gr. Confiabilidad Fuente'),
+           'gresclarecimiento' => _('Gr.Esclarecimiento'),
+           'grimpunidad' => _('Gr. Impunidad'),
+           'grinformacion' => _('Gr. Informacion'),
            'bienes' => _('Bienes Afectados'),
            'id_intervalo' => _('Intervalo'),
         );
@@ -127,8 +127,8 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
     * Campos que deben presentarse como SELECTs con opciones
     * controladas desde esta clase.
     */
-    var $fb_enumFields = array('gr_confiabilidad',
-        'gr_esclarecimiento', 'gr_impunidad', 'gr_informacion'
+    var $fb_enumFields = array('grconfiabilidad',
+        'gresclarecimiento', 'grimpunidad', 'grinformacion'
     );
         /* Opción 'S' también usada en PagBasicos::datosBusqueda */
 
@@ -136,24 +136,24 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
     * Posibles opciones de los SELECTs de los campos indicados en
     * fb_enumFields.
     */
-    var $es_enumOptions = array('gr_confiabilidad' => array('' => '',
+    var $es_enumOptions = array('grconfiabilidad' => array('' => '',
         /* Cada llave debe ser de 5 caracteres o FormBuilder/QuickForm (?) no
            pueden */
             'Alta '=>'Alta',
             'Media'=>'Media',
             'Baja '=>'Baja'
     ),
-        'gr_esclarecimiento' => array('' => '',
+        'gresclarecimiento' => array('' => '',
             'Alto ' => 'Alto',
             'Medio' => 'Medio',
             'Bajo ' => 'Bajo'
         ),
-        'gr_impunidad' => array('' => '',
+        'grimpunidad' => array('' => '',
             'Nula ' => 'Nula',
             'Parc ' => 'Parcial',
             'Total' => 'Total'
         ),
-        'gr_informacion' => array('' => '',
+        'grinformacion' => array('' => '',
             'Parc ' => 'Parcial',
             'Total' => 'Total'
         )
@@ -261,32 +261,32 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
             } */
         }
 
-/*        $e =& $form->getElement('gr_confiabilidad');
+/*        $e =& $form->getElement('grconfiabilidad');
         if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['gr_confiabilidad'])
+            && isset($GLOBALS['etiqueta']['grconfiabilidad'])
         ) {
-                $e->setLabel($GLOBALS['etiqueta']['gr_confiabilidad']);
+                $e->setLabel($GLOBALS['etiqueta']['grconfiabilidad']);
         }
 
-        $e =& $form->getElement('gr_esclarecimiento');
+        $e =& $form->getElement('gresclarecimiento');
         if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['gr_esclarecimiento'])
+            && isset($GLOBALS['etiqueta']['gresclarecimiento'])
         ) {
-                $e->setLabel($GLOBALS['etiqueta']['gr_esclarecimiento']);
+                $e->setLabel($GLOBALS['etiqueta']['gresclarecimiento']);
         }
 
-        $e =& $form->getElement('gr_impunidad');
+        $e =& $form->getElement('grimpunidad');
         if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['gr_impunidad'])
+            && isset($GLOBALS['etiqueta']['grimpunidad'])
         ) {
-                $e->setLabel($GLOBALS['etiqueta']['gr_impunidad']);
+                $e->setLabel($GLOBALS['etiqueta']['grimpunidad']);
         }
 
-        $e =& $form->getElement('gr_informacion');
+        $e =& $form->getElement('grinformacion');
         if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['gr_informacion'])
+            && isset($GLOBALS['etiqueta']['grinformacion'])
         ) {
-            $e->setLabel($GLOBALS['etiqueta']['gr_informacion']);
+            $e->setLabel($GLOBALS['etiqueta']['grinformacion']);
         }
 
         $e =& $form->getElement('id_intervalo');

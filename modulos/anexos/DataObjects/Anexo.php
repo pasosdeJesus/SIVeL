@@ -35,9 +35,9 @@ class DataObjects_Anexo extends DB_DataObject_SIVeL
     var $fecha;                           // date(4)
     var $descripcion;                     // varchar(-1)
     var $archivo;                        // varchar(-1)
-    var $id_prensa;
+    var $id_ffrecuente;
     var $fecha_prensa;
-    var $id_fuente_directa;
+    var $id_fotra;
 
     var $nom_tabla = "Anexo";
 
@@ -57,8 +57,8 @@ class DataObjects_Anexo extends DB_DataObject_SIVeL
            'fecha' => _('Fecha'),
            'descripcion' => _('Descripción'),
            'archivo' => _('Archivo'),
-           'id_prensa' => _('Id. Prensa'),
-           'id_fuente_directa' => _('Id. Fuente Directa'),
+           'id_ffrecuente' => _('Id. Prensa'),
+           'id_fotra' => _('Id. Fuente Directa'),
         );
     }
 

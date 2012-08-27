@@ -35,9 +35,9 @@ class DataObjects_Pconsolidado extends DataObjects_Basica
 {
 
     var $__table = 'pconsolidado';    // table name
-    var $no_columna;                     // int4(4)  not_null primary_key
+    var $id;                     // int4(4)  not_null primary_key
     var $rotulo;                          // varchar(-1)  not_null
-    var $tipo_violencia;                  // varchar(-1)  not_null
+    var $tipoviolencia;                  // varchar(-1)  not_null
     var $clasificacion;                   // varchar(-1)  not_null
     var $peso;                            // int
 
@@ -51,39 +51,39 @@ class DataObjects_Pconsolidado extends DataObjects_Basica
 
         $this->nom_tabla = _('Columnas de Reporte Consolidado');
         $this->fb_fieldLabels['rotulo'] = _('Rotulo');
-        $this->fb_fieldLabels['tipo_violencia'] = _('Tipo de Violencia');
+        $this->fb_fieldLabels['tipoviolencia'] = _('Tipo de Violencia');
         $this->fb_fieldLabels['clasifcacion'] = _('Clasificación');
         $this->fb_fieldLabels['peso'] = _('Peso');
     }
 
 
-    var $fb_linkDisplayFields = array('no_columna', 'rotulo', 'peso');
+    var $fb_linkDisplayFields = array('id', 'rotulo', 'peso');
     var $fb_hidePrimaryKey = true;
 
     var $fb_preDefOrder = array(
-        'no_columna',
+        'id',
         'rotulo',
-        'tipo_violencia',
+        'tipoviolencia',
         'clasificacion',
         'peso',
         'fechacreacion',
         'fechadeshabilitacion',
     );
     var $fb_fieldsToRender = array(
-        'no_columna',
+        'id',
         'rotulo',
-        'tipo_violencia',
+        'tipoviolencia',
         'clasificacion',
         'peso',
         'fechacreacion',
         'fechadeshabilitacion',
     );
     var $fb_fieldsRequired = array(
-        'no_columna',
+        'id',
         'rotulo',
-        'tipo_violencia',
+        'tipoviolencia',
         'clasificacion',
-        'tipo_fuente',
+        'tfuente',
         'fechacreacion',
     );
 
@@ -100,9 +100,9 @@ class DataObjects_Pconsolidado extends DataObjects_Basica
     {
         parent::postGenerateForm($form, $formbuilder);
 
-        if (isset($this->no_columna)) {
+        if (isset($this->id)) {
             $dcategoria = objeto_tabla('categoria');
-            $dcategoria->col_rep_consolidado = $this->no_columna;
+            $dcategoria->id_pconsolidado = $this->id;
             $dcategoria->orderby('id');
             $sep = $lv = "";
             $dcategoria->find();
@@ -110,7 +110,7 @@ class DataObjects_Pconsolidado extends DataObjects_Basica
                 $idc = $dcategoria->id;
                 $lv .= $sep . "<a href='detalle.php?"
                     . "id=id=$idc&tabla=categoria'>"
-                    . $dcategoria->id_tipo_violencia . $idc
+                    . $dcategoria->id_tviolencia . $idc
                     . "</a>";
                 $sep = ", ";
             }

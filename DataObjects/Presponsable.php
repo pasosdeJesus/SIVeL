@@ -37,7 +37,7 @@ class DataObjects_Presponsable extends DataObjects_Basica
     var $__table = 'presponsable';          // table name
     var $id;                              // int4(4)  not_null primary_key
     var $nombre;                          // varchar(-1)  not_null
-    var $id_papa;                            // int4
+    var $papa;                            // int4
     var $fechacreacion;                  // date(4)  not_null
     var $fechadeshabilitacion;           // date(4)
 
@@ -52,7 +52,7 @@ class DataObjects_Presponsable extends DataObjects_Basica
         $this->nom_tabla = _('Presuntos Responsables');
         $this->fb_fieldLabels = array(
             'nombre' => _('Nombre'),
-            'id_papa' => _('Subestructura de'),
+            'papa' => _('Subestructura de'),
             'fechacreacion' => _('Fecha de Creación'),
             'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
         );
@@ -63,16 +63,16 @@ class DataObjects_Presponsable extends DataObjects_Basica
     var $fb_linkDisplayFields = array('nombre');
     var $fb_addFormHeader = false;
     var $fb_hidePrimaryKey = true;
-    var $fb_selectAddEmpty = array('fechadeshabilitacion', 'id_papa');
+    var $fb_selectAddEmpty = array('fechadeshabilitacion', 'papa');
     var $fb_preDefOrder = array(
         'nombre',
-        'id_papa',
+        'papa',
         'fechacreacion',
         'fechadeshabilitacion',
     );
     var $fb_fieldsToRender = array(
         'nombre',
-        'id_papa',
+        'papa',
         'fechacreacion',
         'fechadeshabilitacion',
     );

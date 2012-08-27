@@ -35,15 +35,15 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
 {
 
     var $__table = 'acto';                      // table name
-    var $id_p_responsable;                        // int4(4)  multiple_key
+    var $id_presponsable;                        // int4(4)  multiple_key
     var $id_categoria;                    // int4(4)  multiple_key
     var $id_persona;                 // int4(4)  multiple_key
     var $id_caso;                         // int4(4)  multiple_key
 
 
-    var $fb_preDefOrder = array('id_p_responsable');
-    var $fb_fieldsToRender = array('id_p_responsable');
-    var $fb_selectAddEmpty = array('id_p_responsable');
+    var $fb_preDefOrder = array('id_presponsable');
+    var $fb_fieldsToRender = array('id_presponsable');
+    var $fb_selectAddEmpty = array('id_presponsable');
     var $fb_addFormHeader = false;
     /**
      * Constructora
@@ -54,7 +54,7 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
         parent::__construct();
 
         $this->fb_fieldLabels= array(
-           'id_p_responsable' => _('Presunto Responsable'),
+           'id_presponsable' => _('Presunto Responsable'),
            'id_categoria' => _('Categoria'),
            'id_persona' => _('Persona'),
            'id_caso' => _('Caso'),
@@ -79,22 +79,22 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
             '</th>' . '<th>' . _('Víctima') . '</th><th></th></thead><tbody>';
         $p = clone $formbuilder->_do;
         $db = $p->getDatabaseConnection();
-        $p->id_p_responsable = null;
+        $p->id_presponsable = null;
         $p->id_categoria = null;
         $p->id_persona = null;
         $p->find();
         while ($p->id_caso != null && $p->fetch()) {
-            $pp =& $p->getLink('id_p_responsable');
+            $pp =& $p->getLink('id_presponsable');
             $ca =& $p->getLink('id_categoria');
             $vi =& $p->getLink('id_persona');
             $t .= "<tr><td>" .  htmlentities($pp->nombre, ENT_COMPAT, 'UTF-8')
-                . "</td><td>" . $ca->id_tipo_violencia
+                . "</td><td>" . $ca->id_tviolencia
                 . (int)$ca->id . " "
                 . htmlentities($ca->nombre, ENT_COMPAT, 'UTF-8') . "</td>"
                 . "<td>" . htmlentities("{$vi->nombres}  {$vi->apellidos}", ENT_COMPAT, 'UTF-8')
                 . "</td>"
                 . "<td><a href='{$_SERVER['PHP_SELF']}?eliminaacto="
-                . (int)$p->id_p_responsable . ":"
+                . (int)$p->id_presponsable . ":"
                 . (int)$p->id_categoria . ':'
                 . (int)$p->id_persona . "'>" . _('Eliminar') . "</a></td>";
         }

@@ -202,7 +202,7 @@ class ResConsulta
             " tsitio.nombre " .
             " FROM ubicacion, tsitio, departamento, municipio, clase " .
             " WHERE ubicacion.id_caso='$idcaso' " .
-            " AND ubicacion.id_tipo_sitio=tsitio.id " .
+            " AND ubicacion.id_trelacionsitio=tsitio.id " .
             " AND ubicacion.id_departamento=departamento.id " .
             " AND ubicacion.id_municipio=municipio.id " .
             " AND ubicacion.id_clase=clase.id " .
@@ -226,7 +226,7 @@ class ResConsulta
             " tsitio.nombre " .
             " FROM ubicacion, tsitio, departamento, municipio " .
             " WHERE ubicacion.id_caso='$idcaso' " .
-            " AND ubicacion.id_tipo_sitio=tsitio.id " .
+            " AND ubicacion.id_trelacionsitio=tsitio.id " .
             " AND ubicacion.id_departamento=departamento.id " .
             " AND municipio.id_departamento=departamento.id " .
             " AND ubicacion.id_municipio=municipio.id " .
@@ -247,7 +247,7 @@ class ResConsulta
             " tsitio.nombre " .
             " FROM ubicacion, tsitio, departamento " .
             " WHERE ubicacion.id_caso='$idcaso' " .
-            " AND ubicacion.id_tipo_sitio=tsitio.id " .
+            " AND ubicacion.id_trelacionsitio=tsitio.id " .
             " AND ubicacion.id_departamento=departamento.id " .
             " AND ubicacion.id_municipio IS NULL " .
             " AND ubicacion.id_clase IS NULL " .
@@ -396,11 +396,11 @@ class ResConsulta
      */
     function extraePResponsables($idcaso, &$db, &$idp, &$idp2, &$ndp)
     {
-        $q = "SELECT  id_p_responsable, caso_presponsable.id, " .
+        $q = "SELECT  id_presponsable, caso_presponsable.id, " .
             " presponsable.nombre " .
             " FROM caso_presponsable, presponsable " .
             " WHERE id_caso='$idcaso' " .
-            " AND id_p_responsable=presponsable.id " .
+            " AND id_presponsable=presponsable.id " .
             " ORDER BY id;";
         $result = hace_consulta($db, $q);
         $row = array();
@@ -435,7 +435,7 @@ class ResConsulta
     function extraeColectivas($idcaso, &$db, &$idp, &$ndp, &$cdp,
         $id_grupoper, &$indid, &$totelem
     ) {
-        $q = "SELECT  id_grupoper, nombre, personas_aprox " .
+        $q = "SELECT  id_grupoper, nombre, personasaprox " .
             " FROM victimacolectiva, grupoper " .
             " WHERE victimacolectiva.id_grupoper=grupoper.id " .
             " AND id_caso='$idcaso' ORDER BY id_grupoper;";
@@ -490,12 +490,12 @@ class ResConsulta
             " acto.id_categoria, presponsable.nombre, " .
             " sectorsocial.nombre, organizacion.nombre  " .
             " FROM  $etablas WHERE " .
-            " presponsable.id=acto.id_p_responsable " .
+            " presponsable.id=acto.id_presponsable " .
             " AND acto.id_persona=persona.id " .
             " AND persona.id=victima.id_persona " .
             " AND caso.id=victima.id_caso " .
             " AND caso.id=acto.id_caso " .
-            " AND sectorsocial.id=victima.id_sector_social" .
+            " AND sectorsocial.id=victima.id_sectorsocial" .
             " AND organizacion.id=victima.id_organizacion" .
             " AND $donde ORDER BY caso.fecha" ;
         //echo "q es $q<br>";
@@ -613,7 +613,7 @@ class ResConsulta
                 $db->getAssoc(
                     "SELECT id, nombre " .
                     " FROM supracategoria " .
-                    " WHERE id_tipo_violencia='" . $row[0] . "' " .
+                    " WHERE id_tviolencia='" . $row[0] . "' " .
                     " AND id='" . $row[1] . "';"
                 )
             );
@@ -621,7 +621,7 @@ class ResConsulta
                 $db->getAssoc(
                     "SELECT id, nombre " .
                     "FROM categoria WHERE " .
-                    "id_tipo_violencia='".$row[0] . "' AND " .
+                    "id_tviolencia='".$row[0] . "' AND " .
                     "id_supracategoria='".$row[1] . "' AND " .
                     "id='".$row[2] . "';"
                 )
@@ -1155,7 +1155,7 @@ class ResConsulta
                 $dff->find();
                 $seploc = "";
                 while ($dff->fetch()) {
-                    $des = $dff->getLink('id_prensa');
+                    $des = $dff->getLink('id_ffrecuente');
                     $vr .= $seploc . trim($des->nombre)." " .
                         $dff->fecha;
                     $seploc = ", ";
@@ -1172,7 +1172,7 @@ class ResConsulta
                 $k = 0;
                 $seploc = "";
                 for ($k = 0; $k < count($ndp); $k++) {
-                    $q = "SELECT id_tipo_violencia, id_supracategoria, " .
+                    $q = "SELECT id_tviolencia, id_supracategoria, " .
                     "id_categoria " .
                     " FROM acto, categoria " .
                     " WHERE id_persona='". (int)$idp[$k] . "' " .
@@ -1206,7 +1206,7 @@ class ResConsulta
                 );
                 $bk = $k;
                 for (; $k < count($ndp); $k++) {
-                    $q = "SELECT id_tipo_violencia, id_supracategoria, " .
+                    $q = "SELECT id_tviolencia, id_supracategoria, " .
                     " id_categoria " .
                     " FROM actocolectivo, categoria " .
                     " WHERE id_grupoper='". (int)$idp[$k] . "' " .
@@ -1240,18 +1240,18 @@ class ResConsulta
                 $ncat = array();
                 ResConsulta::llenaSelCategoria(
                     $db,
-                    "(SELECT id_tipo_violencia, id_supracategoria, " .
+                    "(SELECT id_tviolencia, id_supracategoria, " .
                     "id_categoria FROM caso_categoria_presponsable " .
                     "WHERE id_caso='$idcaso') UNION " .
-                    "(SELECT id_tipo_violencia, id_supracategoria, " .
+                    "(SELECT id_tviolencia, id_supracategoria, " .
                     "id_categoria FROM categoria, acto " .
                     "WHERE id_caso='$idcaso' AND " .
                     "categoria.id=acto.id_categoria) UNION " .
-                    "(SELECT id_tipo_violencia, id_supracategoria, " .
+                    "(SELECT id_tviolencia, id_supracategoria, " .
                     "id_categoria FROM categoria, actocolectivo " .
                     "WHERE id_caso='$idcaso' AND " .
                     "categoria.id=actocolectivo.id_categoria) " .
-                    "ORDER BY id_tipo_violencia," .
+                    "ORDER BY id_tviolencia," .
                     "id_supracategoria, id_categoria;", $ncat, array(1, 2)
                 );
                 $vr = $seploc = "";
@@ -1353,18 +1353,18 @@ class ResConsulta
         }
         unset($nom);
         $dcaso->fb_fieldsToRender = array('id', 'titulo', 'fecha',
-            'hora', 'duracion', 'memo', 'gr_confiabilidad',
-            'gr_esclarecimiento', 'gr_impunidad', 'gr_informacion',
+            'hora', 'duracion', 'memo', 'grconfiabilidad',
+            'gresclarecimiento', 'grimpunidad', 'grinformacion',
             'bienes', 'id_intervalo'
         );
         $dcaso->aRelato(
             $arcaso,
             array('forma_compartir' => $formacomp,
             'memo' => 'hechos',
-            'gr_confiabilidad' => 'observaciones{tipo->gr_confiabilidad}',
-            'gr_esclarecimiento' => 'observaciones{tipo->gr_esclarecimiento}',
-            'gr_impunidad' => 'observaciones{tipo->gr_impunidad}',
-            'gr_informacion' => 'observaciones{tipo->gr_informacion}',
+            'grconfiabilidad' => 'observaciones{tipo->grconfiabilidad}',
+            'gresclarecimiento' => 'observaciones{tipo->gresclarecimiento}',
+            'grimpunidad' => 'observaciones{tipo->grimpunidad}',
+            'grinformacion' => 'observaciones{tipo->grinformacion}',
             'id_intervalo' => 'observaciones{tipo->id_intervalo}',
             'bienes' => 'observaciones{tipo->bienes}'
             )
@@ -1418,13 +1418,13 @@ class ResConsulta
                 )
                 );
                 $drelp = objeto_tabla('persona_trelacion');
-                $drelp->id_persona1 = $dvictima->id_persona;
-                $drelp->orderBy('id_persona2');
+                $drelp->persona1 = $dvictima->id_persona;
+                $drelp->orderBy('persona2');
                 $drelp->find();
                 $sep = $relp = "";
                 while ($drelp->fetch()) {
-                    $op = $drelp->getLink('id_persona2');
-                    $tr = $drelp->getLink('id_tipo');
+                    $op = $drelp->getLink('persona2');
+                    $tr = $drelp->getLink('id_trelacion');
                     $relp .= $sep . $tr->nombre . " " . $op->nombres .
                         ", " .  $op->apellidos . ". " . $op->observaciones;
                     $sep = "; ";
@@ -1468,10 +1468,10 @@ class ResConsulta
                 );
                 $dvictimacol->aRelato(
                     $argrupo, array(
-                        'id_organizacion_armada' =>
+                        'organizacionarmada' =>
                         'REL;observaciones{tipo->organizacion_armada}',
-                        'personas_aprox'
-                        => 'observaciones{tipo->personas_aprox}')
+                        'personasaprox'
+                        => 'observaciones{tipo->personasaprox}')
                 );
 
                 $r .= "  <grupo>\n";
@@ -1503,25 +1503,25 @@ class ResConsulta
             $r .= "  <!-- Presuntos responsables -->\n";
             $dprespcaso = objeto_tabla('caso_presponsable');
             $dprespcaso->id_caso = $idcaso;
-            $dprespcaso->orderBy('id_p_responsable');
+            $dprespcaso->orderBy('id_presponsable');
             $dprespcaso->find();
             while ($dprespcaso->fetch()) {
                 $argrupo = array();
                 $dprespcaso->aRelato($argrupo);
                 $r .= "  <grupo>\n";
-                $argrupo['id_p_responsable'] += $max_id_grupo;
+                $argrupo['id_presponsable'] += $max_id_grupo;
                 a_elementos_xml(
                     $r, 4, subarreglo(
                         $argrupo,
-                        array('id_p_responsable', 'nombre',
+                        array('id_presponsable', 'nombre',
                         'sigla', 'subgrupo_de')
                     ),
-                    array('id_p_responsable' => 'id_grupo',
+                    array('id_presponsable' => 'id_grupo',
                     'nombre' => 'nombre_grupo',)
                 );
                 $dcp = objeto_tabla('caso_categoria_presponsable');
                 $dcp->id_caso = $dprespcaso->id_caso;
-                $dcp->id_p_responsable = $dprespcaso->id_p_responsable;
+                $dcp->id_presponsable = $dprespcaso->id_presponsable;
                 if ($dcp->find()>0) {
                     while ($dcp->fetch()) {
                         $dcat = $dcp->getLink('id_categoria');
@@ -1570,13 +1570,13 @@ class ResConsulta
                     $arvictima,
                     array('fecha_caso' => $afecha,
                     'id_profesion' => 'REL;ocupacion',
-                    'id_sector_social' => 'REL;sector_condicion',
+                    'id_sectorsocial' => 'REL;sector_condicion',
                     'id_organizacion' => 'REL;organizacion',
                     'id_filiacion' => 'REL;observaciones{tipo->filiacion}',
                     'hijos' => 'observaciones{tipo->hijos}',
-                    'id_vinculo_estado' =>
+                    'id_vinculoestado' =>
                     'REL;observaciones{tipo->vinculoestado}',
-                    'id_organizacion_armada' =>
+                    'organizacionarmada' =>
                     'REL;observaciones{tipo->organizacion_armada}',
                     'anotaciones' => 'observaciones{tipo->anotaciones}',)
                 );
@@ -1604,7 +1604,7 @@ class ResConsulta
                     array('id_persona' => $dvictima->id_persona),
                     'id_antecedente'
                 );
-                $drango = $dvictima->getLink('id_rango_edad');
+                $drango = $dvictima->getLink('id_rangoedad');
                 a_elementos_xml(
                     $r, 4, array(
                         'observaciones{tipo->rangoedad}' => $drango->rango,
@@ -1640,7 +1640,7 @@ class ResConsulta
                     " cla: " . $dubicacion->id_clase .
                     " longitud: " . $dubicacion->longitud .
                     " latitud: " . $dubicacion->latitud .
-                    " tipositio: " . $dubicacion->id_tipo_sitio;
+                    " tipositio: " . $dubicacion->id_trelacionsitio;
             }
             if ($nubi > 1) {
                 $arotros['observaciones{tipo->etiqueta:IMPORTA_RELATO}']
@@ -1668,7 +1668,7 @@ class ResConsulta
                     'centro_poblado', 'longitud', 'latitud')
                 )
             );
-            $ts = $dubicacion->getLink('id_tipo_sitio');
+            $ts = $dubicacion->getLink('id_trelacionsitio');
             $ubisitio = $dubicacion->sitio;
             $ubilugar = $dubicacion->lugar;
             $ubitipositio = isset($ts->nombre) ? $ts->nombre : '';
@@ -1689,7 +1689,7 @@ class ResConsulta
             while ($dacto->fetch()) {
                 $dcat = $dacto->getLink('id_categoria');
                 $dper = $dacto->getLink('id_persona');
-                $dpres = $dacto->getLink('id_p_responsable');
+                $dpres = $dacto->getLink('id_presponsable');
                 $dvictima = objeto_tabla('victima');
                 $dvictima->id_caso = $idcaso;
                 $dvictima->id_persona = $dacto->id_persona;
@@ -1697,8 +1697,8 @@ class ResConsulta
                 $dvictima->fetch(1);
                 $q = "SELECT clasificacion " .
                     " FROM pconsolidado, categoria " .
-                    " WHERE col_rep_consolidado=" .
-                    " pconsolidado.no_columna " .
+                    " WHERE id_pconsolidado=" .
+                    " pconsolidado.id " .
                     " AND categoria.id='" . $dacto->id_categoria . "'";
                 $result = hace_consulta($db, $q);
                 $row = array();
@@ -1734,7 +1734,7 @@ class ResConsulta
             $dactocol->find();
             while ($dactocol->fetch()) {
                 $dccom = $dactocol->getLink('id_categoria');
-                $dpper = $dactocol->getLink('id_p_responsable');
+                $dpper = $dactocol->getLink('id_presponsable');
                 $dvictimacol = objeto_tabla('victimacolectiva');
                 $dvictimacol->id_caso = $idcaso;
                 $dvictimacol->id_grupoper= $dactocol->id_grupoper;
@@ -1742,8 +1742,8 @@ class ResConsulta
                 $dvictimacol->fetch(1);
                 $q = "SELECT clasificacion " .
                     " FROM pconsolidado, categoria " .
-                    " WHERE col_rep_consolidado =" .
-                    " pconsolidado.no_columna " .
+                    " WHERE id_pconsolidado =" .
+                    " pconsolidado.id " .
                     " AND categoria.id='" . $dccom->id. "'";
                 $result = hace_consulta($db, $q);
                 unset($q);
@@ -1803,22 +1803,22 @@ class ResConsulta
             $r .= "  <!-- Fuente frecuente -->\n";
             $descritocaso = objeto_tabla('caso_ffrecuente');
             $descritocaso->id_caso = $idcaso;
-            $descritocaso->orderBy('fecha, id_prensa');
+            $descritocaso->orderBy('fecha, id_ffrecuente');
             $descritocaso->find();
             while ($descritocaso->fetch()) {
                 $arfuente = array();
-                $dffrecuente = $descritocaso->getLink('id_prensa');
+                $dffrecuente = $descritocaso->getLink('id_ffrecuente');
                 $arfuente['nombre_fuente'] = $dffrecuente->nombre;
                 $dffrecuente->free();
                 unset($dffrecuente);
                 $descritocaso->aRelato(
                     $arfuente,
                     array('fecha' => 'fecha_fuente',
-                    'ubicacion_fisica' => 'ubicacion_fuente',
+                    'ubicacionfisica' => 'ubicacion_fuente',
                     'ubicacion' => 'observaciones{tipo->ubicacion}',
                     'clasificacion' => 'observaciones{tipo->clasificacion}')
                 );
-                unset($arfuente['id_prensa']);
+                unset($arfuente['id_ffrecuente']);
                 $r .= "  <fuente>\n";
                 a_elementos_xml($r, 4, $arfuente);
                 $r .= "  </fuente>\n";
@@ -1830,22 +1830,22 @@ class ResConsulta
             $r .= "  <!-- Fuente no frecuente -->\n";
             $dfuentedirectacaso = objeto_tabla('caso_fotra');
             $dfuentedirectacaso->id_caso = $idcaso;
-            $dfuentedirectacaso->orderBy('fecha, id_fuente_directa');
+            $dfuentedirectacaso->orderBy('fecha, id_fotra');
             $dfuentedirectacaso->find();
             while ($dfuentedirectacaso->fetch()) {
-                $dfd = $dfuentedirectacaso->getLink('id_fuente_directa');
+                $dfd = $dfuentedirectacaso->getLink('id_fotra');
                 $arfuente = array();
                 $arfuente['nombre_fuente'] = $dfd->nombre;
                 $dfuentedirectacaso->aRelato(
                     $arfuente,
                     array('anotacion' => 'observaciones{tipo->anotacion}',
                     'fecha' => 'fecha_fuente',
-                    'ubicacion_fisica' => 'ubicacion_fuente',
-                    'tipo_fuente' => 'observaciones{tipo->tipofuente}')
+                    'ubicacionfisica' => 'ubicacion_fuente',
+                    'tfuente' => 'observaciones{tipo->tipofuente}')
                 );
-                $ia2 = $dfuentedirectacaso->tipo_fuente;
+                $ia2 = $dfuentedirectacaso->tfuente;
                 $arfuente['observaciones{tipo->tipofuente}']
-                    = $dfuentedirectacaso->fb_enumOptions['tipo_fuente'][$ia2];
+                    = $dfuentedirectacaso->fb_enumOptions['tfuente'][$ia2];
                 $r .= "  <fuente>\n";
                 a_elementos_xml($r, 4, $arfuente);
                 $r .= "  </fuente>\n";
@@ -1893,10 +1893,10 @@ class ResConsulta
                 $r, 2,
                 subarreglo(
                     $arcaso, array(
-                        'observaciones{tipo->gr_confiabilidad}',
-                        'observaciones{tipo->gr_esclarecimiento}',
-                        'observaciones{tipo->gr_impunidad}',
-                        'observaciones{tipo->gr_informacion}',
+                        'observaciones{tipo->grconfiabilidad}',
+                        'observaciones{tipo->gresclarecimiento}',
+                        'observaciones{tipo->grimpunidad}',
+                        'observaciones{tipo->grinformacion}',
                         'observaciones{tipo->bienes}',
                     )
                 )
@@ -2066,16 +2066,16 @@ class ResConsulta
         }
         if (array_key_exists('m_fuentes', $campos)) {
             $fl = "";
-            $sep = $GLOBALS['etiqueta']['id_prensa'] . ": ";
+            $sep = $GLOBALS['etiqueta']['id_ffrecuente'] . ": ";
             $descritocaso = objeto_tabla('caso_ffrecuente');
             if (PEAR::isError($descritocaso)) {
                 die($descritocaso->getMessage());
             }
             $descritocaso->id_caso = $idcaso;
-            $descritocaso->orderBy('fecha, id_prensa');
+            $descritocaso->orderBy('fecha, id_ffrecuente');
             $descritocaso->find();
             while ($descritocaso->fetch()) {
-                $dffrecuente = $descritocaso->getLink('id_prensa');
+                $dffrecuente = $descritocaso->getLink('id_ffrecuente');
                 $r .= $sep . trim($dffrecuente->nombre);
                 $r .= " - ".trim($descritocaso->ubicacion);
                 $r .= " - ";
@@ -2093,13 +2093,13 @@ class ResConsulta
                 die($dfuentedirectacaso->getMessage());
             }
             $dfuentedirectacaso->id_caso = $idcaso;
-            $dfuentedirectacaso->orderBy('fecha, id_fuente_directa');
+            $dfuentedirectacaso->orderBy('fecha, id_fotra');
             $dfuentedirectacaso->find();
             while ($dfuentedirectacaso->fetch()) {
                 $dfuentedirecta
-                    = $dfuentedirectacaso->getLink('id_fuente_directa');
+                    = $dfuentedirectacaso->getLink('id_fotra');
                 $r .= $sep . trim($dfuentedirecta->nombre);
-                $r .= " - ".trim($dfuentedirectacaso->ubicacion_fisica);
+                $r .= " - ".trim($dfuentedirectacaso->ubicacionfisica);
                 $r .= " - ";
                 $m = explode("-", $dfuentedirectacaso->fecha);
                 $r .= $m[2] . "-".$GLOBALS['mes'][(int)$m[1]] . "-".$m[0];
@@ -2153,14 +2153,14 @@ class ResConsulta
                 $dcategoria->id = $idcat;
                 $dcategoria->find(1);
 
-                $r .= $dcategoria->id_tipo_violencia .
+                $r .= $dcategoria->id_tviolencia .
                     $dcategoria->id. ". ";
-                $dtipoviolencia = $dcategoria->getLink('id_tipo_violencia');
+                $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $r .= trim($dtipoviolencia->nombre)." - ";
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
-                $dsupracategoria->id_tipo_violencia
-                    = $dcategoria->id_tipo_violencia;
+                $dsupracategoria->id_tviolencia
+                    = $dcategoria->id_tviolencia;
                 $dsupracategoria->find(1);
                 $r .= trim($dsupracategoria->nombre)." - ";
                 $r .= trim($dcategoria->nombre)."\n";
@@ -2206,7 +2206,7 @@ class ResConsulta
                 $dfuncionario = $dfuncaso->getLink('id_funcionario');
                 $r .= $sep . trim($dfuncionario->nombre);
                 $r .= "  ";
-                $m = explode("-", $dfuncaso->fecha_inicio);
+                $m = explode("-", $dfuncaso->fechainicio);
                 $r .= $m[2] . "-".$GLOBALS['mes'][(int)$m[1]] . "-".$m[0];
                 $sep = "\n    ";
             }
@@ -2381,14 +2381,14 @@ class ResConsulta
             $dacto = objeto_tabla('acto');
             $dacto->id_persona = $dvictima->id_persona;
             $dacto->id_caso = $dvictima->id_caso;
-            $dacto->orderBy('id_p_responsable, id_categoria');
+            $dacto->orderBy('id_presponsable, id_categoria');
             $dacto->find();
             $sep2="";
             $icat = "";
             $presp = "";
             while ($dacto->fetch()) {
                 $sep2 = ",";
-                $ia1 = $dacto->id_p_responsable;
+                $ia1 = $dacto->id_presponsable;
                 $ia2 = $dacto->id_categoria;
                 $ia3 = 'i' . $dacto->id_persona;
                 $porVic[$ia1][$ia2][$ia3] = 'i' . $dacto->id_persona;
@@ -2397,16 +2397,16 @@ class ResConsulta
                 strip_tags($dpersona->apellidos);
             $idp = DataObjects_Sectorsocial::id_profesional();
             if ($dvictima->id_profesion != DataObjects_Profesion::idSinInfo()
-                && $dvictima->id_sector_social == $idp
+                && $dvictima->id_sectorsocial == $idp
                 && !$corto
             ) {
                 $dprofesion = $dvictima->getLink('id_profesion');
                 $nvc .= " - " . strip_tags($dprofesion->nombre);
             } else {
                 $ids = DataObjects_Sectorsocial::idSinInfo();
-                if ($dvictima->id_sector_social != $ids && !$corto) {
+                if ($dvictima->id_sectorsocial != $ids && !$corto) {
                     $dsector = $dvictima->
-                        getLink('id_sector_social');
+                        getLink('id_sectorsocial');
                     $nvc .= " - " . strip_tags($dsector->nombre);
                 }
                 $ids = DataObjects_Profesion::idSinInfo();
@@ -2458,10 +2458,10 @@ class ResConsulta
             $sep2="";
             $dactoc->id_grupoper = $dvictimacol->id_grupoper;
             $dactoc->id_caso = $dvictimacol->id_caso;
-            $dactoc->orderBy('id_p_responsable, id_categoria');
+            $dactoc->orderBy('id_presponsable, id_categoria');
             $dactoc->find();
             while ($dactoc->fetch()) {
-                $ia1 = $dactoc->id_p_responsable;
+                $ia1 = $dactoc->id_presponsable;
                 $ia2 = $dactoc->id_categoria;
                 $ia3 = 'c' . $dactoc->id_grupoper;
                 $porVic[$ia1][$ia2][$ia3] = $ia3;
@@ -2471,10 +2471,10 @@ class ResConsulta
             }
             $nvc = strip_tags($dgrupoper->nombre);
             if ($repgen) {
-                if ($dvictimacol->personas_aprox != null
-                    && $dvictimacol->personas_aprox > 0
+                if ($dvictimacol->personasaprox != null
+                    && $dvictimacol->personasaprox > 0
                 ) {
-                    $nvc .= " (".trim($dvictimacol->personas_aprox).") ";
+                    $nvc .= " (".trim($dvictimacol->personasaprox).") ";
                 }
                 $nvc .= lista_relacionados(
                     'comunidad_sectorsocial',
@@ -2574,7 +2574,7 @@ class ResConsulta
                 $pids = explode(",", $pr);
                 foreach ($r1 as $ids => $vc) {
                     $arids = explode(",", $ids);
-                    if (in_array($dcat->id_p_responsable, $pids)
+                    if (in_array($dcat->id_presponsable, $pids)
                         && in_array($dcat->id_categoria, $arids)
                     ) {
                         $esta = 1;
@@ -2585,10 +2585,10 @@ class ResConsulta
             if ($esta == 0) {  // No tiene victimas
                 if (isset($asinv[$dcat->id_categoria])) {
                     $asinv[$dcat->id_categoria] .= ","
-                        . $dcat->id_p_responsable;
+                        . $dcat->id_presponsable;
                 } else {
                     $asinv[$dcat->id_categoria]
-                        = $dcat->id_p_responsable;
+                        = $dcat->id_presponsable;
                 }
             }
         }
@@ -2621,7 +2621,7 @@ class ResConsulta
                     $rant = trim(strip_tags($dpr->nombre));
                     $dprc = objeto_tabla('caso_presponsable');
                     $dprc->id_caso = $idcaso;
-                    $dprc->id_p_responsable = $idp;
+                    $dprc->id_presponsable = $idp;
                     $dprc->fetch(1);
                     if ($repgen && $dprc->bloque != null) {
                         $rant .= " ".$GLOBALS['etiqueta']['bloque'] . ": " .
@@ -2681,16 +2681,16 @@ class ResConsulta
                     $dpr->find();
                     $dpr->fetch();
                     if ($repgen) {
-                        $r .= $sepc . $dpr->id_tipo_violencia . $idc;
+                        $r .= $sepc . $dpr->id_tviolencia . $idc;
                         $sepc = " / ";
                         continue;
                     }
                     $ds = objeto_tabla('supracategoria');
-                    $ds->id_tipo_violencia
-                        = $dpr->id_tipo_violencia;
+                    $ds->id_tviolencia
+                        = $dpr->id_tviolencia;
                     $ds->id = $dpr->id_supracategoria;
                     $ds->find(1);
-                    $dt = $dpr->getLink('id_tipo_violencia');
+                    $dt = $dpr->getLink('id_tviolencia');
                     $cat[trim($dt->nombre)][trim($ds->nombre)]
                         [trim($dpr->nombre)] = trim($dpr->nombre);
                 }
@@ -2957,7 +2957,7 @@ class ResConsulta
                 $dff->find();
                 $seploc = "";
                 while ($dff->fetch()) {
-                    $des = $dff->getLink('id_prensa');
+                    $des = $dff->getLink('id_ffrecuente');
                     $vr .= $seploc . trim($des->nombre)." " .
                         $dff->fecha;
                     $seploc = "; ";
@@ -2974,7 +2974,7 @@ class ResConsulta
                 $k = 0;
                 $seploc = "";
                 for ($k = 0; $k < count($ndp); $k++) {
-                    $q = "SELECT id_tipo_violencia, id_categoria " .
+                    $q = "SELECT id_tviolencia, id_categoria " .
                         " FROM acto, categoria " .
                         " WHERE id_persona='". (int)$idp[$k] . "' " .
                         " AND id_caso='" . (int)$idcaso ."' " .
@@ -3027,10 +3027,10 @@ class ResConsulta
                 $ncat = array();
                 ResConsulta::llenaSelCategoria(
                     $db,
-                    "SELECT id_tipo_violencia, id_supracategoria, " .
+                    "SELECT id_tviolencia, id_supracategoria, " .
                     "id_categoria FROM categoria_caso " .
                     "WHERE id_caso='$idcaso' " .
-                    "ORDER BY id_tipo_violencia," .
+                    "ORDER BY id_tviolencia," .
                     "id_supracategoria, id_categoria;",
                     $ncat, array(1, 2)
                 );

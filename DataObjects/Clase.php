@@ -35,7 +35,7 @@ class DataObjects_Clase extends DataObjects_Basica
 {
     var $__table = 'clase';                           // table name
     var $id_municipio;                    // int4(4)  multiple_key
-    var $id_tipo_clase;                   // varchar(-1)
+    var $id_tclase;                   // varchar(-1)
     var $id_departamento;                 // int4(4)  multiple_key
 
     /**
@@ -51,7 +51,7 @@ class DataObjects_Clase extends DataObjects_Basica
             'nombre' => _('Nombre'),
             'id_departamento' => _('Departamento'),
             'id_municipio'=> _('Municipio'),
-            'id_tipo_clase'=> _('Tipo Clase'),
+            'id_tclase'=> _('Tipo Clase'),
             'fechacreacion' => _('Fecha de Creación'),
             'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
         );
@@ -65,13 +65,13 @@ class DataObjects_Clase extends DataObjects_Basica
     );
     var $fb_preDefOrder = array(
         'nombre', 'id_municipio',
-        'id_tipo_clase',
+        'id_tclase',
         'fechacreacion',
         'fechadeshabilitacion',
     );
     var $fb_fieldsToRender = array(
         'nombre', 'id_municipio',
-        'id_tipo_clase',
+        'id_tclase',
         'fechacreacion',
         'fechadeshabilitacion',
     );

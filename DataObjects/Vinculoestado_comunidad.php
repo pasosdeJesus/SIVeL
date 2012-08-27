@@ -36,15 +36,15 @@ class DataObjects_Vinculoestado_comunidad extends DB_DataObject_SIVeL
 {
 
     var $__table = 'vinculoestado_comunidad';                // table name
-    var $id_vinculo_estado;                  // int4(4)  multiple_key
+    var $id_vinculoestado;                  // int4(4)  multiple_key
     var $id_grupoper;                  // int4(4)  multiple_key
     var $id_caso;                  // int4(4)  multiple_key
 
 
-    var $fb_preDefOrder = array('id_vinculo_estado');
-    var $fb_fieldsToRender = array('id_vinculo_estado');
+    var $fb_preDefOrder = array('id_vinculoestado');
+    var $fb_fieldsToRender = array('id_vinculoestado');
     var $fb_addFormHeader = false;
-    var $fb_excludeFromAutoRules = array('id_vinculo_estado');
+    var $fb_excludeFromAutoRules = array('id_vinculoestado');
     /**
      * Constructora
      * return @void
@@ -54,7 +54,7 @@ class DataObjects_Vinculoestado_comunidad extends DB_DataObject_SIVeL
         parent::__construct();
 
         $this->fb_fieldLabels= array(
-           'id_vinculo_estado' => _('Vínculo con el Estado'),
+           'id_vinculoestado' => _('Vínculo con el Estado'),
         );
     }
 
@@ -73,7 +73,7 @@ class DataObjects_Vinculoestado_comunidad extends DB_DataObject_SIVeL
     function prepareLinkedDataObject(&$opts, &$field)
     {
         switch ($field) {
-        case 'id_vinculo_estado':
+        case 'id_vinculoestado':
             $opts->whereAdd('fechadeshabilitacion IS NULL');
             break;
 
@@ -107,7 +107,7 @@ class DataObjects_Vinculoestado_comunidad extends DB_DataObject_SIVeL
     function postGenerateForm(&$form, &$formbuilder)
     {
         parent::postGenerateForm($form, $formbuilder);
-        $sel =& $form->getElement('id_vinculo_estado');
+        $sel =& $form->getElement('id_vinculoestado');
         if (isset($sel) && !PEAR::isError($sel)) {
             $sel->setMultiple(true);
             $sel->setSize(5);

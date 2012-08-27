@@ -40,23 +40,23 @@ class DataObjects_Caso_ffrecuente extends DB_DataObject_SIVeL
     var $fecha;                           // date(4)  multiple_key
     var $ubicacion;                       // varchar(-1)
     var $clasificacion;                   // varchar(-1)
-    var $ubicacion_fisica;                // varchar(-1)
-    var $id_prensa;                       // int4(4)  multiple_key
+    var $ubicacionfisica;                // varchar(-1)
+    var $id_ffrecuente;                       // int4(4)  multiple_key
     var $id_caso;                         // int4(4)  multiple_key
 
 
-    var $fb_selectAddEmpty = array('id_prensa');
+    var $fb_selectAddEmpty = array('id_ffrecuente');
     var $fb_hidePrimaryKey = false;
     var $fb_preDefOrder = array(
-        'id_prensa', 'fecha', 'ubicacion',
-        'clasificacion', 'ubicacion_fisica'
+        'id_ffrecuente', 'fecha', 'ubicacion',
+        'clasificacion', 'ubicacionfisica'
     );
     var $fb_fieldsToRender = array(
-        'id_prensa', 'fecha', 'ubicacion',
-        'clasificacion', 'ubicacion_fisica'
+        'id_ffrecuente', 'fecha', 'ubicacion',
+        'clasificacion', 'ubicacionfisica'
     );
     var $fb_addFormHeader = false;
-    var $fb_excludeFromAutoRules = array('fecha', 'id_prensa');
+    var $fb_excludeFromAutoRules = array('fecha', 'id_ffrecuente');
 
     /**
      * Constructora
@@ -69,8 +69,8 @@ class DataObjects_Caso_ffrecuente extends DB_DataObject_SIVeL
             'fecha' => _('Fecha'),
             'ubicacion' => _('Ubicación'),
             'clasificacion' => _('Clasificación'),
-            'ubicacion_fisica' => _('Ubicación Física'),
-            'id_prensa' => _('Fuente')
+            'ubicacionfisica' => _('Ubicación Física'),
+            'id_ffrecuente' => _('Fuente')
         );
     }
 
@@ -149,7 +149,7 @@ class DataObjects_Caso_ffrecuente extends DB_DataObject_SIVeL
             }
         }
 
-        $e =& $form->getElement('ubicacion_fisica');
+        $e =& $form->getElement('ubicacionfisica');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(70);
             $e->setMaxlength(100);

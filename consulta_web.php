@@ -144,14 +144,14 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             $where .= ' AND caso.id IN '
                 . "(SELECT id_caso FROM acto, categoria WHERE
                 acto.id_categoria = categoria.id
-                AND categoria.id_tipo_violencia = '$pTvio'
+                AND categoria.id_tviolencia = '$pTvio'
                 UNION
                 SELECT id_caso FROM actocolectivo, categoria WHERE
                 actocolectivo.id_categoria = categoria.id
-                AND categoria.id_tipo_violencia = '$pTvio'
+                AND categoria.id_tviolencia = '$pTvio'
                 UNION
                 SELECT id_caso FROM caso_categoria_presponsable WHERE
-                id_tipo_violencia = '$pTvio')";
+                id_tviolencia = '$pTvio')";
         }
         if ($pClasificacion != '') {
             $ini = '(';
@@ -289,7 +289,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 "caso.id"
             );
             consulta_and(
-                $db, $where, "caso_presponsable.id_p_responsable",
+                $db, $where, "caso_presponsable.id_presponsable",
                 $pPresponsable
             );
             $tablas .= ', caso_presponsable';
@@ -307,7 +307,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             && isset($pFiini['Y']) && $pFiini['Y'] != ''
         ) {
             consulta_and(
-                $db, $where, "caso_funcionario.fecha_inicio",
+                $db, $where, "caso_funcionario.fechainicio",
                 arr_a_fecha($pFiini, true), ">="
             );
         }
@@ -315,7 +315,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             && isset($pFifin['Y']) && $pFifin['Y'] != ''
         ) {
             consulta_and(
-                $db, $where, "caso_funcionario.fecha_inicio",
+                $db, $where, "caso_funcionario.fechainicio",
                 arr_a_fecha($pFifin, false), "<="
             );
         }
@@ -335,7 +335,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             consulta_and_sinap($where, "victima.id_caso", "caso.id");
         }
         if ($pSsocial != '') {
-            consulta_and($db, $where, "victima.id_sector_social", $pSsocial);
+            consulta_and($db, $where, "victima.id_sectorsocial", $pSsocial);
         }
 
         if (trim($pNomvic) != '') {
@@ -603,19 +603,19 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $sel->setSize(5);
         ResConsulta::llenaSelCategoria(
             $db,
-            "SELECT id_tipo_violencia, id_supracategoria, " .
-            "id FROM categoria ORDER BY id_tipo_violencia," .
+            "SELECT id_tviolencia, id_supracategoria, " .
+            "id FROM categoria ORDER BY id_tviolencia," .
             "id_supracategoria, id;",
             $sel
         );
         if ($pCategoria == 'belicas') {
             $valscc = array();
             $d =&  objeto_tabla('categoria');
-            $d->id_tipo_violencia = 'C';
+            $d->id_tviolencia = 'C';
             $d->find();
             while ($d->fetch()) {
                 $fc = PagTipoViolencia::cadenaDeCodcat(
-                    $d->id_tipo_violencia,
+                    $d->id_tviolencia,
                     $d->id_supracategoria,
                     $d->id
                 );
@@ -626,11 +626,11 @@ class ConsultaWeb extends HTML_QuickForm_Page
         if ($pCategoria == 'nobelicas') {
             $valscc = array();
             $d =&  objeto_tabla('categoria');
-            $d->whereAdd('id_tipo_violencia<>\'C\'');
+            $d->whereAdd('id_tviolencia<>\'C\'');
             $d->find();
             while ($d->fetch()) {
                 $fc = PagTipoViolencia::cadenaDeCodcat(
-                    $d->id_tipo_violencia,
+                    $d->id_tviolencia,
                     $d->id_supracategoria,
                     $d->id
                 );

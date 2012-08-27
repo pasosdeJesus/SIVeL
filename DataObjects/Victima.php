@@ -48,40 +48,40 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
     var $id_caso;                         // int4(4)
     var $hijos;                            // varchar(-1)
     var $id_profesion;                    // int4(4)
-    var $id_rango_edad;                   // int4(4)
+    var $id_rangoedad;                   // int4(4)
     var $id_filiacion;                    // int4(4)
-    var $id_sector_social;                // int4(4)
+    var $id_sectorsocial;                // int4(4)
     var $id_organizacion;                 // int4(4)
-    var $id_vinculo_estado;               // int4(4)
-    var $id_organizacion_armada;          // int4(4)
+    var $id_vinculoestado;               // int4(4)
+    var $organizacionarmada;          // int4(4)
     var $id_etnia;
     var $id_iglesia;
     var $anotaciones;                       // varchar(-1)
     var $orientacionsexual;
 
     var $fb_preDefOrder = array('hijos',
-        'id_profesion', 'id_rango_edad', 'id_filiacion',
-        'id_sector_social', 'id_organizacion', 'id_vinculo_estado',
-        'id_organizacion_armada', 'id_etnia', 'id_iglesia',
+        'id_profesion', 'id_rangoedad', 'id_filiacion',
+        'id_sectorsocial', 'id_organizacion', 'id_vinculoestado',
+        'organizacionarmada', 'id_etnia', 'id_iglesia',
         'orientacionsexual','anotaciones'
     );
     var $fb_fieldsToRender = array('hijos',
-        'id_profesion', 'id_rango_edad', 'id_filiacion',
-        'id_sector_social', 'id_organizacion', 'id_vinculo_estado',
-        'id_organizacion_armada', 'id_etnia',
+        'id_profesion', 'id_rangoedad', 'id_filiacion',
+        'id_sectorsocial', 'id_organizacion', 'id_vinculoestado',
+        'organizacionarmada', 'id_etnia',
         'orientacionsexual', 'anotaciones'
     );
     var $fb_enumFields = array('orientacionsexual');
     var $fb_addFormHeader = false;
     var $fb_selectAddEmpty = array();
-    var $fb_fieldsRequired = array('id_profesion', 'id_rango_edad',
-        'id_filiacion', 'id_sector_social', 'id_organizacion',
-        'id_vinculo_estado', 'id_organizacion_armada', 'id_etnia',
+    var $fb_fieldsRequired = array('id_profesion', 'id_rangoedad',
+        'id_filiacion', 'id_sectorsocial', 'id_organizacion',
+        'id_vinculoestado', 'organizacionarmada', 'id_etnia',
         'orientacionsexual'
     );
     var $fb_excludeFromAutoRules = array('nombre', 'id_profesion',
-        'id_rango_edad', 'id_filiacion', 'id_sector_social',
-        'id_organizacion', 'id_vinculo_estado', 'id_organizacion_armada',
+        'id_rangoedad', 'id_filiacion', 'id_sectorsocial',
+        'id_organizacion', 'id_vinculoestado', 'organizacionarmada',
         'id_etnia', 'id_iglesia', 'orientacionsexual'
     );
     /**
@@ -95,12 +95,12 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
         $this->fb_fieldLabels= array(
             'hijos'=> _('Hijos'),
             'id_profesion'=> _('Profesión'),
-            'id_rango_edad'=> _('Rango de Edad'),
+            'id_rangoedad'=> _('Rango de Edad'),
             'id_filiacion'=> _('Filiación Política'),
-            'id_sector_social'=> _('Sector Social'),
+            'id_sectorsocial'=> _('Sector Social'),
             'id_organizacion'=> _('Organización'),
-            'id_vinculo_estado'=> _('Vínculo con el Estado'),
-            'id_organizacion_armada'=> _('Organización Armada Víctima'),
+            'id_vinculoestado'=> _('Vínculo con el Estado'),
+            'organizacionarmada'=> _('Organización Armada Víctima'),
             'id_etnia' => _('Etnia'),
             'id_iglesia' => _('Iglesia'),
             'anotaciones'=> _('Anotaciones'),
@@ -142,13 +142,13 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
     static function camposSinInfo()
     {
         return array(
-            'id_rango_edad'=> DataObjects_Rangoedad::idSinInfo(),
+            'id_rangoedad'=> DataObjects_Rangoedad::idSinInfo(),
             'id_profesion'=> DataObjects_Profesion::idSinInfo(),
             'id_filiacion' => DataObjects_Filiacion::idSinInfo(),
-            'id_sector_social' => DataObjects_Sectorsocial::idSinInfo(),
+            'id_sectorsocial' => DataObjects_Sectorsocial::idSinInfo(),
             'id_organizacion' => DataObjects_Organizacion::idSinInfo(),
-            'id_vinculo_estado' => DataObjects_Vinculoestado::idSinInfo(),
-            'id_organizacion_armada' =>
+            'id_vinculoestado' => DataObjects_Vinculoestado::idSinInfo(),
+            'organizacionarmada' =>
                 DataObjects_Presponsable::idSinInfo(),
             'id_etnia' =>
                 DataObjects_Etnia::idSinInfo(),
@@ -170,8 +170,8 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
     function prepareLinkedDataObject(&$opts, &$field)
     {
         switch ($field) {
-        case 'id_sector_social':
-        case 'id_vinculo_estado':
+        case 'id_sectorsocial':
+        case 'id_vinculoestado':
         case 'id_organizacion':
         case 'id_profesion':
         case 'id_filiacion':

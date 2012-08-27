@@ -386,7 +386,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
      * @param string &$merr    Colchon para mensajes de error
      *
      * @return bool Verdadero sii valida bien y autocompleta valores
-     *    (edad, anionac, mesnac, dianac, id_rango_edad),
+     *    (edad, anionac, mesnac, dianac, id_rangoedad),
      *    si hay error de validación queda en merr
      */
     function valida($fecharef, $valrango, &$valores, &$merr)
@@ -404,10 +404,10 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
                     $valores['anionac'] = $fhanio - (int)$valores['edad'];
                 }
         if ($valrango
-            && $valores['id_rango_edad'] != DataObjects_Rangoedad::idSinInfo()
+            && $valores['id_rangoedad'] != DataObjects_Rangoedad::idSinInfo()
                 && $valores['anionac'] != ''
             ) {
-                $r = (int)$valores['id_rango_edad'];
+                $r = (int)$valores['id_rangoedad'];
                 //print_r($valores);
                 $e = edad_de_fechanac(
                     (int)$valores['anionac'], $fhanio,
@@ -433,7 +433,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
                     );
                     return false;
                 }
-                $valores['id_rango_edad'] = $re;
+                $valores['id_rangoedad'] = $re;
             }
         return true;
     }

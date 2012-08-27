@@ -196,28 +196,28 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 $db,
                 $obs, $r, 'intervalo', 'intervalo', '', 0
             );
-            $dcaso->gr_confiabilidad = str_pad(
+            $dcaso->grconfiabilidad = str_pad(
                 dato_en_obs(
                     $r,
-                    'gr_confiabilidad'
+                    'grconfiabilidad'
                 ), 5
             );
-            $dcaso->gr_esclarecimiento = str_pad(
+            $dcaso->gresclarecimiento = str_pad(
                 dato_en_obs(
                     $r,
-                    'gr_esclarecimiento'
+                    'gresclarecimiento'
                 ), 5
             );
-            $dcaso->gr_impunidad = str_pad(
+            $dcaso->grimpunidad = str_pad(
                 dato_en_obs(
                     $r,
-                    'gr_impunidad'
+                    'grimpunidad'
                 ), 5
             );
-            $dcaso->gr_informacion = str_pad(
+            $dcaso->grinformacion = str_pad(
                 dato_en_obs(
                     $r,
-                    'gr_informacion'
+                    'grinformacion'
                 ), 5
             );
             $dcaso->bienes = dato_en_obs($r, 'bienes');
@@ -271,7 +271,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 '', $obs
             );
             if ($orgfuente > 0) {
-                $anexof->id_prensa = $orgfuente;
+                $anexof->id_ffrecuente = $orgfuente;
                 $anexof->fecha_prensa = $fecha;
                 $anexof->update();
             }
@@ -288,7 +288,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     _('Organización responsable incluida automáticamente'),
                     'Indirecta', $obs
                 );
-                $anexof->id_fuente_directa = $orgfuente;
+                $anexof->id_fotra = $orgfuente;
                 $anexof->update();
             }
             $yaesta['PagOtrasFuentes'] = true;
@@ -430,7 +430,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         if ($idredad == -1) {
                             $idredad = DataObjects_Rangoedad::idSinInfo();
                         }
-                        $dvictima->id_rango_edad = $idredad;
+                        $dvictima->id_rangoedad = $idredad;
                         foreach (array('ocupacion' => 'profesion',
                             'iglesia' => 'filiacion',
                             'sector_condicion' => 'sectorsocial',
@@ -553,7 +553,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     if (!empty($acto->id_victima_individual)) {
                         $dacto= objeto_tabla('acto');
                         $dacto->id_caso = $idcaso;
-                        $dacto->id_p_responsable = $pr;
+                        $dacto->id_presponsable = $pr;
                         $dacto->id_categoria = $id_categoria;
                         if (!isset($id_pers[(string)$acto->id_victima_individual])) {
                             repObs(
@@ -581,7 +581,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         }
                         $dactocolectivo = objeto_tabla('actocolectivo');
                         $dactocolectivo->id_caso = $idcaso;
-                        $dactocolectivo->id_p_responsable = $pr;
+                        $dactocolectivo->id_presponsable = $pr;
                         $dactocolectivo->id_categoria = $id_categoria;
                         $dactocolectivo->id_grupoper = $cg;
                         if (!$dactocolectivo->insert()) {

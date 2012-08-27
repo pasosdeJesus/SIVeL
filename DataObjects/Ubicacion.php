@@ -42,7 +42,7 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     var $id_clase;                        // int4(4)
     var $id_municipio;                    // int4(4)
     var $id_departamento;                 // int4(4)
-    var $id_tipo_sitio;                   // varchar(-1)
+    var $id_trelacionsitio;                   // varchar(-1)
     var $id_caso;                         // varchar(-1)
     var $latitud;
     var $longitud;
@@ -51,10 +51,10 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
 
     var $fb_preDefOrder = array(
         'id_departamento', 'id_municipio',
-        'id_clase', 'lugar', 'sitio', 'latitud', 'longitud', 'id_tipo_sitio'
+        'id_clase', 'lugar', 'sitio', 'latitud', 'longitud', 'id_trelacionsitio'
     );
     var $fb_fieldsToRender = array(
-        'lugar', 'sitio', 'latitud', 'longitud', 'id_tipo_sitio'
+        'lugar', 'sitio', 'latitud', 'longitud', 'id_trelacionsitio'
     );
     var $fb_addFormHeader = false;
     var $fb_hidePrimaryKey = true;
@@ -72,18 +72,18 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
            'id_clase' => _('Centro Poblado'),
            'lugar' => _('Lugar'),
            'sitio' => _('Sitio'),
-           'id_tipo_sitio' => _('Tipo de Ubicación'),
+           'id_trelacionsitio' => _('Tipo de Ubicación'),
            'latitud' => _('Latitud'),
            'longitud' => _('Longitud'),
         );
     }
 
-    var $fb_excludeFromAutoRules = array('id_tipo_sitio');
+    var $fb_excludeFromAutoRules = array('id_trelacionsitio');
 
     static function camposSinInfo()
     {
         $a = array(
-            'id_tipo_sitio'=> DataObjects_Tsitio::idSinInfo(),
+            'id_trelacionsitio'=> DataObjects_Tsitio::idSinInfo(),
         );
         return $a;
     }
@@ -141,11 +141,11 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
 
         //parent::postGenerateForm($form, $formbuilder);
 
-        $e =& $form->getElement('id_tipo_sitio');
-        if (!isset($this->id_tipo_sitio)) {
-            $this->id_tipo_sitio = DataObjects_Tsitio::idSinInfo();
+        $e =& $form->getElement('id_trelacionsitio');
+        if (!isset($this->id_trelacionsitio)) {
+            $this->id_trelacionsitio = DataObjects_Tsitio::idSinInfo();
         }
-        $e->setValue($this->id_tipo_sitio);
+        $e->setValue($this->id_trelacionsitio);
         $e->_options = htmlentities_array($e->_options);
 
         $e =& $form->getElement('lugar');

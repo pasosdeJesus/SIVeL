@@ -84,7 +84,7 @@ class PagOtrasFuentes extends PagBaseMultiple
     function elimina(&$valores)
     {
         $this->iniVar();
-        if ($this->bcaso_fotra->_do->id_fuente_directa != null
+        if ($this->bcaso_fotra->_do->id_fotra != null
             && $this->bcaso_fotra->_do->fecha != null
         ) {
             $this->bcaso_fotra->_do->delete();
@@ -113,9 +113,9 @@ class PagOtrasFuentes extends PagBaseMultiple
         $do->id_caso = $idcaso;
 
         $result = hace_consulta(
-            $db, "SELECT  id_fuente_directa, fecha " .
+            $db, "SELECT  id_fotra, fecha " .
             " FROM caso_fotra, fotra " .
-            " WHERE id_caso='$idcaso' AND id_fuente_directa=id " .
+            " WHERE id_caso='$idcaso' AND id_fotra=id " .
             " ORDER BY nombre, fecha;"
         );
         $row = array();
@@ -129,13 +129,13 @@ class PagOtrasFuentes extends PagBaseMultiple
         }
         $_SESSION['fd_total'] = $tot;
         if ($_SESSION['fd_pag'] < 0 || $_SESSION['fd_pag'] >= $tot) {
-            $do->id_fuente_directa = null;
+            $do->id_fotra = null;
         } else {
-            $do->id_fuente_directa = $idp[$_SESSION['fd_pag']];
+            $do->id_fotra = $idp[$_SESSION['fd_pag']];
             $do->fecha = $idp2[$_SESSION['fd_pag']];
             $do->find();
             $do->fetch();
-            $do_fd->id = $do->id_fuente_directa;
+            $do_fd->id = $do->id_fotra;
             $do_fd->find();
             $do_fd->fetch();
         }
@@ -245,7 +245,7 @@ class PagOtrasFuentes extends PagBaseMultiple
                 unset($_SESSION['nuevo_copia_id']);
 
                 foreach (array('fotra' => 'id',
-                    'caso_fotra' => 'id_fuente_directa'
+                    'caso_fotra' => 'id_fotra'
                 ) as $n => $k
                 ) {
                     $d =& objeto_tabla($n);
@@ -324,8 +324,8 @@ class PagOtrasFuentes extends PagBaseMultiple
     {
         $es_vacio = ($valores['nombre'] == null || $valores['nombre'] == '')
             && ($valores['anotacion'] == null || $valores['anotacion'] == '')
-            && ($valores['ubicacion_fisica'] == null
-                || $valores['ubicacion_fisica'] == ''
+            && ($valores['ubicacionfisica'] == null
+                || $valores['ubicacionfisica'] == ''
             ) ;
 
         if ($es_vacio) {
@@ -365,7 +365,7 @@ class PagOtrasFuentes extends PagBaseMultiple
             }
         }
 
-        if ($this->bcaso_fotra->_do->id_fuente_directa != null
+        if ($this->bcaso_fotra->_do->id_fotra != null
             && $this->bcaso_fotra->_do->fecha != null
         ) {
             $this->bcaso_fotra->_do->delete();
@@ -403,7 +403,7 @@ class PagOtrasFuentes extends PagBaseMultiple
             $this->bfotra->_do->insert();
         }
 
-        $this->bcaso_fotra->_do->id_fuente_directa
+        $this->bcaso_fotra->_do->id_fotra
             = $this->bfotra->_do->id;
         $ret = @$this->process(
             array(&$this->bcaso_fotra,
@@ -434,7 +434,7 @@ class PagOtrasFuentes extends PagBaseMultiple
     {
         prepara_consulta_gen(
             $w, $t, $idcaso, 'caso_fotra',
-            'fotra', 'id_fuente_directa', true
+            'fotra', 'id_fotra', true
         );
     }
 
@@ -464,13 +464,13 @@ class PagOtrasFuentes extends PagBaseMultiple
         $dfdc->id_caso = $idcaso;
         $dfdc->fecha = $fecha;
         if (!empty($ubif)) {
-            $dfdc->ubicacion_fisica = $ubif;
+            $dfdc->ubicacionfisica = $ubif;
         }
         $dfdc->anotacion = $anota;
         if ($tipof != null) {
-            $op = $dfdc->fb_enumOptions['tipo_fuente'];
+            $op = $dfdc->fb_enumOptions['tfuente'];
             if (in_array($tipof, $op)) {
-                $dfdc->tipo_fuente = array_search($tipof, $op);
+                $dfdc->tfuente = array_search($tipof, $op);
             }
         }
         $rp = hace_consulta(
@@ -483,11 +483,11 @@ class PagOtrasFuentes extends PagBaseMultiple
         if ($nr == 0) {
             $dfd->nombre = $nomf;
             $dfd->insert();
-            $dfdc->id_fuente_directa = $dfd->id;
+            $dfdc->id_fotra = $dfd->id;
         } else {
             $row = array();
             $rp->fetchInto($row);
-            $dfdc->id_fuente_directa = $row[0];
+            $dfdc->id_fotra = $row[0];
             if ($rp->fetchInto($row)) {
                 repObs(
                     _("Hay ") . $nr .
@@ -499,7 +499,7 @@ class PagOtrasFuentes extends PagBaseMultiple
         }
         $dfdc->insert();
 
-        return $dfdc->id_fuente_directa;
+        return $dfdc->id_fotra;
     }
 
     /**
@@ -535,7 +535,7 @@ class PagOtrasFuentes extends PagBaseMultiple
                     $db, $idcaso, utf8_decode($nomf), $fecha,
                     utf8_decode((string)$fuente->ubicacion_fuente),
                     dato_en_obs($fuente, 'anotacion'),
-                    dato_en_obs($fuente, 'tipo_fuente'),
+                    dato_en_obs($fuente, 'tfuente'),
                     $obs
                 );
             }

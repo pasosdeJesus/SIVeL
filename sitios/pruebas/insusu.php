@@ -31,7 +31,7 @@ $_REQUEST['id_usuario'] = $_POST['id_usuario'] = 'inv1';
 $_REQUEST['password'] = $_POST['password'] = 'b';
 $_REQUEST['nombre'] = $_POST['nombre'] = 'c';
 $_REQUEST['descripcion'] = $_POST['descripcion'] = 'd';
-$_REQUEST['id_rol'] = $_POST['id_rol'] = '1';
+$_REQUEST['rol'] = $_POST['rol'] = '1';
 $_REQUEST['añadir'] = $_POST['añadir'] = 'Añadir';
 $_REQUEST['evita_csrf'] = $_SESSION['sin_csrf'] = $_POST['evita_csrf'] = 1234;
 

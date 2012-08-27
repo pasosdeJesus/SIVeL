@@ -59,8 +59,8 @@ class EliminaRel extends HTML_QuickForm_Action
         assert($_REQUEST['eliminarel'] != null);
 
         $dvictima=& objeto_tabla('persona_trelacion');
-        list($dvictima->id_persona1, $dvictima->id_persona2,
-            $dvictima->id_tipo
+        list($dvictima->persona1, $dvictima->persona2,
+            $dvictima->id_trelacion
         ) = explode(':', var_escapa($_REQUEST['eliminarel']));
         $dvictima->delete();
         $page->_submitValues = array();
@@ -213,7 +213,7 @@ class PagVictimaIndividual extends PagBaseMultiple
             $dpersona->id = $dvictima->id_persona;
             $dpersona->find();
             $dpersona->fetch();
-            $drelacion->id_persona1 = $dvictima->id_persona;
+            $drelacion->persona1 = $dvictima->id_persona;
             $drelacion->fetch();
         }
 
@@ -594,26 +594,26 @@ class PagVictimaIndividual extends PagBaseMultiple
         $es_vacio = $es_vacio && (!isset($valores['id_profesion'])
             || $valores['id_profesion'] == DataObjects_Profesion::idSinInfo()
         );
-        $es_vacio = $es_vacio && (!isset($valores['id_rango_edad'])
-            || $valores['id_rango_edad'] == DataObjects_Rangoedad::idSinInfo()
+        $es_vacio = $es_vacio && (!isset($valores['id_rangoedad'])
+            || $valores['id_rangoedad'] == DataObjects_Rangoedad::idSinInfo()
         );
         $es_vacio = $es_vacio && (!isset($valores['id_filiacion'])
             || $valores['id_filiacion'] == DataObjects_Filiacion::idSinInfo()
         );
         $sssin = DataObjects_Sectorsocial::idSinInfo();
-        $es_vacio = $es_vacio && (!isset($valores['id_sector_social'])
-            || $valores['id_sector_social'] == $sssin
+        $es_vacio = $es_vacio && (!isset($valores['id_sectorsocial'])
+            || $valores['id_sectorsocial'] == $sssin
         );
         $es_vacio = $es_vacio && (!isset($valores['id_organizacion'])
             || $valores['id_organizacion']==
             DataObjects_Organizacion::idSinInfo()
         );
-        $es_vacio = $es_vacio && (!isset($valores['id_vinculo_estado'])
-            || $valores['id_vinculo_estado']==
+        $es_vacio = $es_vacio && (!isset($valores['id_vinculoestado'])
+            || $valores['id_vinculoestado']==
             DataObjects_Vinculoestado::idSinInfo()
         );
-        $es_vacio = $es_vacio && (!isset($valores['id_organizacion_armada'])
-            || $valores['id_organizacion_armada']==
+        $es_vacio = $es_vacio && (!isset($valores['organizacionarmada'])
+            || $valores['organizacionarmada']==
             DataObjects_Presponsable::idSinInfo()
         );
         $es_vacio = $es_vacio && (!isset($valores['id_antecedente'])
@@ -686,10 +686,10 @@ class PagVictimaIndividual extends PagBaseMultiple
         }
         if ($procFam) {
             $nper =& objeto_tabla('persona');
-            if (isset($valores['id_persona2'])
-                && (int)$valores['id_persona2'] > 0
+            if (isset($valores['persona2'])
+                && (int)$valores['persona2'] > 0
             ) {
-                $nper->get((int)$valores['id_persona2']);
+                $nper->get((int)$valores['persona2']);
                 $nper->nombres = var_escapa($valores['fnombres'], $db);
                 $nper->apellidos = var_escapa($valores['fapellidos'], $db);
                 $nper->update();
@@ -699,11 +699,11 @@ class PagVictimaIndividual extends PagBaseMultiple
                 $nper->sexo = 'S';
                 $nper->insert();
             }
-            $this->bpersona_trelacion->_do->id_persona1
+            $this->bpersona_trelacion->_do->persona1
                 = $this->bpersona->_do->id;
-            $this->bpersona_trelacion->_do->id_persona2
+            $this->bpersona_trelacion->_do->persona2
                 = $nper->id;
-            $this->bpersona_trelacion->_do->id_tipo
+            $this->bpersona_trelacion->_do->id_trelacion
                 = var_escapa($valores['ftipo'], $db, 5);
             $this->bpersona_trelacion->_do->observaciones
                 = var_escapa($valores['fobservaciones'], $db);

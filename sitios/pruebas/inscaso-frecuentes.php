@@ -25,13 +25,13 @@ require_once "ambiente.php";
 /*** FUENTES FRECUENTES ***/
 
 $post = array();
-$post['id_prensa'] = '1';
+$post['id_ffrecuente'] = '1';
 $post['fecha']['d'] = '10';
 $post['fecha']['M'] = '10';
 $post['fecha']['Y'] = '2007';
 $post['ubicacion'] = 'ubicación';
 $post['clasificacion'] = 'clasificacion';
-$post['ubicacion_fisica'] = 'ubicacion';
+$post['ubicacionfisica'] = 'ubicacion';
 $post['_qf_frecuentes_siguienteMultiple'] = 'Fuente siguiente';
 $post['_qf_default'] = 'frecuentes:siguiente';
 pasaPestanaFicha($db, array("caso_ffrecuente"), $post, 1);

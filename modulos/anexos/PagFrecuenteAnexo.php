@@ -49,15 +49,15 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
     function elimina(&$valores)
     {
         $this->iniVar();
-        if ($this->bcaso_ffrecuente->_do->id_prensa != null
+        if ($this->bcaso_ffrecuente->_do->id_ffrecuente != null
             && $this->bcaso_ffrecuente->_do->fecha != null
         ) {
             $idcaso = $this->bcaso_ffrecuente->_do->id_caso;
             $vf = "'{$this->bcaso_ffrecuente->_do->fecha}'";
-            $vp = "'{$this->bcaso_ffrecuente->_do->id_prensa}'";
-            $q =  "UPDATE anexo SET fecha_prensa=NULL, id_prensa=NULL" .
+            $vp = "'{$this->bcaso_ffrecuente->_do->id_ffrecuente}'";
+            $q =  "UPDATE anexo SET fecha_prensa=NULL, id_ffrecuente=NULL" .
                 " WHERE id_caso='$idcaso' AND fecha_prensa=$vf " .
-                " AND id_prensa=$vp";
+                " AND id_ffrecuente=$vp";
             $db = $this->bcaso_ffrecuente->_do->getDatabaseConnection();
             hace_consulta($db, $q, false) ;
         }
@@ -100,15 +100,15 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
         if (!isset($_SESSION['forma_modo'])
             || $_SESSION['forma_modo'] != 'busqueda'
         ) {
-            if ($this->bcaso_ffrecuente->_do->id_prensa != null) {
-                $cor = "OR (id_prensa=" .
-                    "'{$this->bcaso_ffrecuente->_do->id_prensa}' " .
+            if ($this->bcaso_ffrecuente->_do->id_ffrecuente != null) {
+                $cor = "OR (id_ffrecuente=" .
+                    "'{$this->bcaso_ffrecuente->_do->id_ffrecuente}' " .
                     "AND fecha_prensa='{$this->bcaso_ffrecuente->_do->fecha}')";
             } else {
                 $cor = "";
             }
-            $condb = "AND id_fuente_directa IS NULL " .
-            "AND (id_prensa IS NULL $cor)  " ;
+            $condb = "AND id_fotra IS NULL " .
+            "AND (id_ffrecuente IS NULL $cor)  " ;
             $an = $this->addElement(
                 'select', 'id_anexo', 'Anexo',
                 array()
@@ -142,10 +142,10 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
 
         $puesto = false;
         $sel = $this->getElement('id_anexo');
-        if ($this->bcaso_ffrecuente->_do->id_prensa != null) {
+        if ($this->bcaso_ffrecuente->_do->id_ffrecuente != null) {
             $danexo = objeto_tabla('anexo');
             $danexo->id_caso = $_SESSION['basicos_id'];
-            $danexo->id_prensa = $this->bcaso_ffrecuente->_do->id_prensa;
+            $danexo->id_ffrecuente = $this->bcaso_ffrecuente->_do->id_ffrecuente;
             $danexo->id_fecha_prensa = $this->bcaso_ffrecuente->_do->fecha;
             $danexo->find();
             if ($danexo->fetch()) {
@@ -179,21 +179,21 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
         $db = $this->iniVar();
 
         $r = parent::procesa($valores);
-        if (!es_objeto_nulo($this->bcaso_ffrecuente->_do->id_prensa)
+        if (!es_objeto_nulo($this->bcaso_ffrecuente->_do->id_ffrecuente)
             && !es_objeto_nulo($this->bcaso_ffrecuente->_do->fecha)
         ) {
             $vf = "'{$this->bcaso_ffrecuente->_do->fecha}'";
-            $vp = "'{$this->bcaso_ffrecuente->_do->id_prensa}'";
+            $vp = "'{$this->bcaso_ffrecuente->_do->id_ffrecuente}'";
             if (isset($valores['id_anexo'])
                 && $valores['id_anexo'] != ''
             ) {
                 $ida = var_escapa($valores['id_anexo'], $db);
-                $q =  "UPDATE anexo SET fecha_prensa=$vf, id_prensa=$vp " .
+                $q =  "UPDATE anexo SET fecha_prensa=$vf, id_ffrecuente=$vp " .
                     "WHERE id_caso='$idcaso' AND id='$ida'";
             } else {
-                $q =  "UPDATE anexo SET fecha_prensa=NULL, id_prensa=NULL" .
+                $q =  "UPDATE anexo SET fecha_prensa=NULL, id_ffrecuente=NULL" .
                     " WHERE id_caso='$idcaso' AND fecha_prensa=$vf " .
-                    " AND id_prensa=$vp";
+                    " AND id_ffrecuente=$vp";
             }
             //echo $q;
             hace_consulta($db, $q, false) ;

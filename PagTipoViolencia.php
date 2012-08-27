@@ -43,7 +43,7 @@ class CamTipoViolencia extends HTML_QuickForm_Action
     function perform(&$page, $actionName)
     {
         $_SESSION['camTipoViolencia']
-            = (int)$page->_submitValues['id_tipo_violencia'];
+            = (int)$page->_submitValues['id_tviolencia'];
         $pageName =  $page->getAttribute('id');
         $data     =& $page->controller->container();
         $data['values'][$pageName] = $page->exportValues();

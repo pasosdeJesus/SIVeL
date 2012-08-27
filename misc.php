@@ -527,7 +527,7 @@ function res_valida(&$db, $mens, $cons, $confunc = false)
         hace_consulta(
             $db,
             "CREATE VIEW primerfuncionario AS
-            SELECT id_caso, MIN(fecha_inicio) AS fecha_inicio,
+            SELECT id_caso, MIN(fechainicio) AS fechainicio,
             FIRST(id_funcionario) AS id_funcionario
             FROM caso_funcionario
             GROUP BY id_caso ORDER BY id_caso;", false, false
@@ -899,7 +899,7 @@ function enlaces_casos_persona_html(
     }
 
     $q = "SELECT id_caso FROM persona_trelacion, victima
-        WHERE id_persona1 = id_persona AND id_persona2 = '$idp'";
+        WHERE persona1 = id_persona AND persona2 = '$idp'";
     $r = hace_consulta($db, $q);
     $campos = array();
     $sep = "";
@@ -1405,7 +1405,7 @@ function caso_funcionario($idcaso)
     $dfc->id_caso = $idcaso;
     $dfc->id_funcionario = $_SESSION['id_funcionario'];
     if ($dfc->find()<1) {
-        $dfc->fecha_inicio = date('Y-m-d H:i');
+        $dfc->fechainicio = date('Y-m-d H:i');
         $dfc->insert();
     }
 }
@@ -2161,7 +2161,7 @@ function a_elementos_xml(&$r, $ind, $ad, $ren = null)
  * @return void
      */
 function dato_relacionado(&$ad, $tabla,
-    $id, $camporel = 'id_sector_social', $camponombre = 'nombre'
+    $id, $camporel = 'id_sectorsocial', $camponombre = 'nombre'
 ) {
     $do = objeto_tabla($tabla);
     foreach ($id as $vc => $vv) {

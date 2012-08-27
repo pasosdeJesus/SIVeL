@@ -75,8 +75,8 @@ class PagEvaluacion extends PagBaseSimple
     function formularioAgrega(&$db, $idcaso)
     {
         $this->bcaso->_do->fb_fieldsToRender = array(
-            'gr_confiabilidad',
-            'gr_esclarecimiento', 'gr_impunidad', 'gr_informacion'
+            'grconfiabilidad',
+            'gresclarecimiento', 'grimpunidad', 'grinformacion'
         );
         $this->bcaso->_do->fb_preDefOrder
             = $this->bcaso->_do->fb_fieldsToRender;
@@ -142,20 +142,20 @@ class PagEvaluacion extends PagBaseSimple
         $dCaso->fetch();
 
         consulta_and(
-            $db, $w, "caso.gr_confiabilidad",
-            $dCaso->gr_confiabilidad
+            $db, $w, "caso.grconfiabilidad",
+            $dCaso->grconfiabilidad
         );
         consulta_and(
-            $db, $w, "caso.gr_esclarecimiento",
-            $dCaso->gr_esclarecimiento
+            $db, $w, "caso.gresclarecimiento",
+            $dCaso->gresclarecimiento
         );
         consulta_and(
-            $db, $w, "caso.gr_impunidad",
-            $dCaso->gr_impunidad
+            $db, $w, "caso.grimpunidad",
+            $dCaso->grimpunidad
         );
         consulta_and(
-            $db, $w, "caso.gr_informacion",
-            $dCaso->gr_informacion
+            $db, $w, "caso.grinformacion",
+            $dCaso->grinformacion
         );
     }
 

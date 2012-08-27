@@ -46,13 +46,13 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
     var $sexo;                            // varchar(-1)  not null
     var $id_resultado_agresion;           // int4(4)
     var $id_profesion;                    // int4(4)
-    var $id_rango_edad;                   // int4(4)
+    var $id_rangoedad;                   // int4(4)
     var $id_filiacion;                    // int4(4)
-    var $id_sector_social;                // int4(4)
+    var $id_sectorsocial;                // int4(4)
     var $id_organizacion;                 // int4(4)
-    var $id_vinculo_estado;               // int4(4)
+    var $id_vinculoestado;               // int4(4)
     var $id_caso;                         // int4(4)
-    var $id_organizacion_armada;          // int4(4)
+    var $organizacionarmada;          // int4(4)
 
     /**
      * Constructora
@@ -68,13 +68,13 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
             'alias'=> _('Alias'),
             'edad'=> _('Edad'),
             'sexo'=> _('Sexo'),
-            'id_rango_edad' => _('Rango de Edad'),
-            'id_sector_social'=> _('Sector Social'),
-            'id_vinculo_estado'=> _('Vínculo Estado'),
+            'id_rangoedad' => _('Rango de Edad'),
+            'id_sectorsocial'=> _('Sector Social'),
+            'id_vinculoestado'=> _('Vínculo Estado'),
             'id_filiacion'=> _('Filiación Política'),
             'id_profesion'=> _('Profesion'),
             'id_organizacion'=> _('Organización Social'),
-            'id_organizacion_armada'=> _('Organización Armada'),
+            'organizacionarmada'=> _('Organización Armada'),
             'id_resultado_agresion'=> _('Resultado Agresión')
         );
 
@@ -83,14 +83,14 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
 
 
     var $fb_preDefOrder = array('nombre', 'alias', 'edad', 'sexo',
-        'id_rango_edad', 'id_sector_social', 'id_vinculo_estado',
+        'id_rangoedad', 'id_sectorsocial', 'id_vinculoestado',
          'id_filiacion', 'id_profesion', 'id_organizacion',
-        'id_organizacion_armada', 'id_resultado_agresion'
+        'organizacionarmada', 'id_resultado_agresion'
     );
     var $fb_fieldsToRender = array('nombre', 'alias', 'edad', 'sexo',
-        'id_rango_edad', 'id_sector_social', 'id_vinculo_estado',
+        'id_rangoedad', 'id_sectorsocial', 'id_vinculoestado',
          'id_filiacion', 'id_profesion', 'id_organizacion',
-        'id_organizacion_armada', 'id_resultado_agresion'
+        'organizacionarmada', 'id_resultado_agresion'
     );
     var $fb_enumFields = array('sexo');
     var $es_enumOptions = array('sexo' => array('F' => 'Femenino',
@@ -133,13 +133,13 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
     {
         return array(
             'sexo'=>'S',
-            'id_rango_edad'=> DataObjects_Rangoedad::idSinInfo(),
+            'id_rangoedad'=> DataObjects_Rangoedad::idSinInfo(),
             'id_profesion'=> DataObjects_Profesion::idSinInfo(),
             'id_filiacion' => DataObjects_Filiacion::idSinInfo(),
-            'id_sector_social' => DataObjects_Sectorsocial::idSinInfo(),
+            'id_sectorsocial' => DataObjects_Sectorsocial::idSinInfo(),
             'id_organizacion' => DataObjects_Organizacion::idSinInfo(),
-            'id_vinculo_estado' => DataObjects_Vinculoestado::idSinInfo(),
-            'id_organizacion_armada' =>
+            'id_vinculoestado' => DataObjects_Vinculoestado::idSinInfo(),
+            'organizacionarmada' =>
                 DataObjects_Presponsable::idSinInfo(),
         );
     }
@@ -190,21 +190,21 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
             $e->setLabel($GLOBALS['etiqueta']['sexo']);
         }  */
 
-        $e =& $form->getElement('id_rango_edad');
+        $e =& $form->getElement('id_rangoedad');
         if (isset($e) && !PEAR::isError($e)
             && isset($GLOBALS['etiqueta']['rangoedad'])
         ) {
             $e->setLabel($GLOBALS['etiqueta']['rangoedad']);
         }
 
-        $e =& $form->getElement('id_sector_social');
+        $e =& $form->getElement('id_sectorsocial');
         if (isset($e) && !PEAR::isError($e)
             && isset($GLOBALS['etiqueta']['sectorsocial'])
         ) {
             $e->setLabel($GLOBALS['etiqueta']['sectorsocial']);
         }
 
-        $e =& $form->getElement('id_vinculo_estado');
+        $e =& $form->getElement('id_vinculoestado');
         if (isset($e) && !PEAR::isError($e)
             && isset($GLOBALS['etiqueta']['vinculoestado'])
         ) {
@@ -232,7 +232,7 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
             $e->setLabel($GLOBALS['etiqueta']['organizacion']);
         }
 
-        $e =& $form->getElement('id_organizacion_armada');
+        $e =& $form->getElement('organizacionarmada');
         if (isset($e) && !PEAR::isError($e)
             && isset($GLOBALS['etiqueta']['organizacion_armada'])
         ) {

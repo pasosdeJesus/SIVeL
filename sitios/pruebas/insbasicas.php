@@ -122,7 +122,7 @@ $c += instablabasica(
 
 $c += instablabasica(
     'ffrecuente', 'nombre', 'ffrecuente1',
-    array('tipo_fuente' => 'Indirecta')
+    array('tfuente' => 'Indirecta')
 );
 
 $c += instablabasica(
@@ -150,13 +150,13 @@ $c += instablabasica(
 );
 $c += instablabasica(
     'supracategoria', 'nombre', 'supra1',
-    array('id_tipo_violencia' => 'T', 'id' => 1000, 'fechacreacion' => $fc)
+    array('id_tviolencia' => 'T', 'id' => 1000, 'fechacreacion' => $fc)
 );
 $c += instablabasica(
     'categoria', 'nombre', 'cat1',
     array('id_supracategoria' => 'T:1000',
         'id' => 1000,
-        'col_rep_consolidado' => 1,
+        'id_pconsolidado' => 1,
         'tipocat' => 'I',
         'fechacreacion' => $fc
     )

@@ -119,7 +119,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
     {
         $n = 1;
         $sep = "";
-        $q = "SELECT DISTINCT id_p_responsable " .
+        $q = "SELECT DISTINCT id_presponsable " .
             " FROM acto ORDER BY 1";
         //die("q es $q<br>");
         $result = hace_consulta($db, $q);
@@ -248,7 +248,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         }
         $tablas = $tgeo . $tablas;
 
-        $q = "SELECT MAX(col_rep_consolidado) FROM categoria;";
+        $q = "SELECT MAX(id_pconsolidado) FROM categoria;";
         $ncol = $db->getOne($q);
 
         if (PEAR::isError($ncol)) {
@@ -260,8 +260,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
         $d->orderBy('id');
         $d->find();
         while ($d->fetch()) {
-            if (isset($d->col_rep_consolidado) && $d->col_rep_consolidado > 0) {
-                $ic = chr($d->col_rep_consolidado+64);
+            if (isset($d->id_pconsolidado) && $d->id_pconsolidado > 0) {
+                $ic = chr($d->id_pconsolidado+64);
             } else {
                 $ic = chr($ncol+65);
             }
@@ -324,7 +324,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 /* Se hace así porque puede haber casos que no
                     tengan asociado funcionario --cuando vienen de otro
                     banco (?), antiguos*/
-                $q = "SELECT MIN(fecha_inicio) FROM caso_funcionario " .
+                $q = "SELECT MIN(fechainicio) FROM caso_funcionario " .
                     " WHERE id_caso='" . $row[0] . "';";
                 $rfc = hace_consulta($db, $q);
                 if ($rfc->fetchInto($minf)) {
@@ -507,7 +507,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 $pr_sep = $presp = "";
 
                 while ($acto->fetch()) {
-                    $d = $acto->getLink('id_p_responsable');
+                    $d = $acto->getLink('id_presponsable');
                     $apr[$d->id] = $r_presp[$d->id];
                 }
                 foreach ($apr as $id => $pr) {

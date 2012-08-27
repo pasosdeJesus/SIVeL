@@ -171,7 +171,7 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
             ubicacion.id_caso = caso.id AND
             resagresion.id = id_resultado_agresion AND
             caso.id = combatiente.id_caso AND
-            presponsable.id = id_organizacion_armada";
+            presponsable.id = organizacionarmada";
 /*        foreach (array("municipio", "clase") as $t) {
             $q .= " UNION SELECT presponsable.nombre,
                 {$t}_caso.id_departamento, {$t}_caso.id_municipio,
@@ -181,7 +181,7 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
                 WHERE $where AND {$t}_caso.id_caso = caso.id AND
                 resagresion.id = id_resultado_agresion AND
                 caso.id = combatiente.id_caso AND
-                presponsable.id = id_organizacion_armada";
+                presponsable.id = organizacionarmada";
 } */
         $q .= " )";
         //echo "q= $q";
@@ -288,7 +288,7 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
     {
         $this->HTML_QuickForm_Page('estadisticas', 'post', '_self', null);
 
-        $this->addAction('id_tipo_violencia', new CamTipoViolencia());
+        $this->addAction('id_tviolencia', new CamTipoViolencia());
 
         $this->addAction('consulta', new AccionEstadisticasComb());
     }
@@ -303,10 +303,10 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
     function idTipoViolencia()
     {
         $ntipoviolencia= null;
-        if (isset($this->_submitValues['id_tipo_violencia'])) {
-            $ntipoviolencia = (int)$this->_submitValues['id_tipo_violencia'] ;
-        } else if (isset($_SESSION['id_tipo_violencia'])) {
-            $ntipoviolencia = $_SESSION['id_tipo_violencia'] ;
+        if (isset($this->_submitValues['id_tviolencia'])) {
+            $ntipoviolencia = (int)$this->_submitValues['id_tviolencia'] ;
+        } else if (isset($_SESSION['id_tviolencia'])) {
+            $ntipoviolencia = $_SESSION['id_tviolencia'] ;
         }
         return $ntipoviolencia;
     }

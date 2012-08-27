@@ -35,12 +35,12 @@ class DataObjects_Caso_categoria_presponsable extends DB_DataObject_SIVeL
 {
 
     var $__table = 'caso_categoria_presponsable';    // table name
-    var $id_tipo_violencia;               // varchar(-1)  multiple_key
+    var $id_tviolencia;               // varchar(-1)  multiple_key
     var $id_supracategoria;               // int4(4)  multiple_key
     var $id_categoria;                    // int4(4)  multiple_key
     var $id;                              // int4(4)  multiple_key
     var $id_caso;                         // int4(4)  multiple_key
-    var $id_p_responsable;                // int4(4)  multiple_key
+    var $id_presponsable;                // int4(4)  multiple_key
 
 
     var $fb_hidePrimaryKey = true;

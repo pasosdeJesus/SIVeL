@@ -2255,7 +2255,50 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Renombrando tablas para seguir estándares SQL');
 }
 
+$idac = '1.2-rc1';
+if (!aplicado($idac)) {
+    foreach(array(
+        array("caso", "gr_confiabilidad", "grconfiabilidad"),
+        array("caso", "gr_esclarecimiento", "gresclarecimiento"),
+        array("caso", "gr_impunidad", "grimpunidad"),
+        array("caso", "gr_informacion", "grinformacion"),
+        array("pconsolidado", "no_columna", "id"),
+        array("supracategoria", "id_tipo_violencia", "id_tviolencia"),
+        array("categoria", "col_rep_consolidado", "id_pconsolidado"),
+        array("categoria", "contada_en", "contadaen"),
+        array("clase", "id_tipo_clase", "id_tclase"),
+        array("ffrecuente", "tipo_fuente", "tfuente"),
+        array("presponsable_caso", "id_p_responsable", "id_presponsable"),
+        array("caso_categoria_presponsable", "id_tipo_violencia", "id_tviolencia"),
+        array("ubicacion", "id_tipo_sitio", "id_tipositio"),
+        array("usuario", "id_rol", "rol"),
+        array("usuario", "dias_edicion_caso", "diasedicion"),
+        array("victima", "id_rango_edad", "id_rangoedad"),
+        array("victima", "id_sector_social", "id_sectorsocial"),
+        array("victima", "id_vinculo_estado", "id_vinculoestado"),
+        array("victima", "id_organizacion_armada", "organizacionarmada"),
+        array("presponsable", "id_papa", "papa"),
+        array("persona_trelacion", "id_persona1", "persona1"),
+        array("persona_trelacion", "id_persona2", "persona2"),
+        array("persona_trelacion", "id_tipo", "id_trelacion"),
+        array("caso", "personas_aprox", "personasaprox"),
+        array("caso", "ubicacion_fisica", "ubicacionfisica"),
+        array("caso", "id_prensa", "id_ffrecuente"),
+        array("caso", "id_fuente_directa", "id_fotra"),
+        array("caso", "fecha_inicio", "fechainicio"),
+    ) as $v) {
+        $tabla = $v[0];
+        $ant = $v[1];
+        $nue = $v[2];
+        hace_consulta(
+            $db,
+            "ALTER TABLE $tabla RENAME COLUMN $ant TO $nue", false
+        ); 
+    }
 
+    die("x");
+    aplicaact($act, $idac, 'Renombrando campos para seguir estándares SQL');
+}
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {

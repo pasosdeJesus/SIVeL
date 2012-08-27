@@ -37,12 +37,12 @@ class DataObjects_Victimacolectiva extends DB_DataObject_SIVeL
     var $__table = 'victimacolectiva';               // table name
     var $id_grupoper;                     // int4(4)  not_null primary_key
     var $id_caso;                     // int4(4)  not_null primary_key
-    var $personas_aprox;                  // int4(4)
-    var $id_organizacion_armada;          // int4(4)
+    var $personasaprox;                  // int4(4)
+    var $organizacionarmada;          // int4(4)
 
-    var $fb_preDefOrder = array('personas_aprox', 'id_organizacion_armada', );
-    var $fb_fieldsToRender = array('personas_aprox',
-        'id_organizacion_armada'
+    var $fb_preDefOrder = array('personasaprox', 'organizacionarmada', );
+    var $fb_fieldsToRender = array('personasaprox',
+        'organizacionarmada'
     );
     var $fb_addFormHeader = false;
     /**
@@ -54,8 +54,8 @@ class DataObjects_Victimacolectiva extends DB_DataObject_SIVeL
         parent::__construct();
 
         $this->fb_fieldLabels= array(
-           'id_organizacion_armada'=> _('Organización Armada Víctima'),
-           'personas_aprox' => _('Num. Aprox. Personas'),
+           'organizacionarmada'=> _('Organización Armada Víctima'),
+           'personasaprox' => _('Num. Aprox. Personas'),
         );
     }
 
@@ -68,9 +68,9 @@ class DataObjects_Victimacolectiva extends DB_DataObject_SIVeL
      *
      * @return Valor para BD
      */
-    function setpersonas_aprox($value)
+    function setpersonasaprox($value)
     {
-        $this->personas_aprox= ($value == '') ? 'null' : $value;
+        $this->personasaprox= ($value == '') ? 'null' : $value;
     }
 
     /**
@@ -82,9 +82,9 @@ class DataObjects_Victimacolectiva extends DB_DataObject_SIVeL
      */
     function preGenerateForm(&$formbuilder)
     {
-        if (!isset($this->id_organizacion_armada)) {
+        if (!isset($this->organizacionarmada)) {
             include_once "Presponsable.php";
-            $this->id_organizacion_armada =
+            $this->organizacionarmada =
                 DataObjects_Presponsable::idSinInfo();
         }
     }
@@ -101,11 +101,11 @@ class DataObjects_Victimacolectiva extends DB_DataObject_SIVeL
     {
         parent::postGenerateForm($form, $formbuilder);
 
-        $sel =& $form->getElement('personas_aprox');
+        $sel =& $form->getElement('personasaprox');
         if (isset($sel) && !PEAR::isError($sel)) {
             $sel->setSize(5);
         }
-        if (isset($this->personas_aprox) && $this->personas_aprox == 'null') {
+        if (isset($this->personasaprox) && $this->personasaprox == 'null') {
             $sel->setValue('');
         }
     }
@@ -127,7 +127,7 @@ class DataObjects_Victimacolectiva extends DB_DataObject_SIVeL
     {
         return array(
             'vinculoestado_comunidad' =>
-            array('vinculoestado_comunidad', 'id_vinculo_estado'),
+            array('vinculoestado_comunidad', 'id_vinculoestado'),
             'comunidad_profesion' =>
             array('profesion', 'id_profesion'),
             'antecedente_comunidad' =>

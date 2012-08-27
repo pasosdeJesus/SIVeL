@@ -37,7 +37,7 @@ class DataObjects_Caso_funcionario extends DB_DataObject_SIVeL
     var $__table = 'caso_funcionario';                // table name
     var $id_funcionario;                  // int4(4)  multiple_key
     var $id_caso;                         // int4(4)  multiple_key
-    var $fecha_inicio;                    // date(4)
+    var $fechainicio;                    // date(4)
 
 
     var $fb_hidePrimaryKey = true;

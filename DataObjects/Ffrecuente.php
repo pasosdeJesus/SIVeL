@@ -31,7 +31,7 @@ require_once 'DataObjects/Basica.php';
 class DataObjects_Ffrecuente extends DataObjects_Basica
 {
     var $__table = 'ffrecuente';                          // table name
-    var $tipo_fuente;                     // varchar(-1)  not_null
+    var $tfuente;                     // varchar(-1)  not_null
 
     /**
      * Constructora
@@ -43,7 +43,7 @@ class DataObjects_Ffrecuente extends DataObjects_Basica
 
         $this->nom_tabla = _('Fuentes frecuentes');
         $this->fb_fieldLabels= array(
-            'tipo_fuente'=> _('Tipo de Fuente'),
+            'tfuente'=> _('Tipo de Fuente'),
             'fechacreacion' => _('Fecha de Creación'),
             'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
         );
@@ -51,28 +51,28 @@ class DataObjects_Ffrecuente extends DataObjects_Basica
     }
 
 
-    var $fb_enumFields = array('tipo_fuente');
+    var $fb_enumFields = array('tfuente');
     var $es_enumOptions = array(
-        'tipo_fuente' => array(
+        'tfuente' => array(
             'Directa' => 'Directa',
             'Indirecta' => 'Indirecta'
         )
     );
     var $fb_preDefOrder = array(
         'nombre',
-        'tipo_fuente',
+        'tfuente',
         'fechacreacion',
         'fechadeshabilitacion',
     );
     var $fb_fieldsToRender = array(
         'nombre',
-        'tipo_fuente',
+        'tfuente',
         'fechacreacion',
         'fechadeshabilitacion',
     );
     var $fb_fieldsRequired = array(
         'nombre',
-        'tipo_fuente',
+        'tfuente',
         'fechacreacion',
     );
 

@@ -38,9 +38,9 @@ class DataObjects_Categoria extends DataObjects_Basica
     var $id;                              // int4(4)  not_null primary_key
     var $nombre;                          // varchar(-1)  not_null
     var $id_supracategoria;               // int4(4)
-    var $id_tipo_violencia;               // varchar(-1)
-    var $col_rep_consolidado;              // int4(4)
-    var $contada_en;                      // int4(4)
+    var $id_tviolencia;               // varchar(-1)
+    var $id_pconsolidado;              // int4(4)
+    var $contadaen;                      // int4(4)
     var $tipocat;                      // char
     var $fechacreacion;                  // date(4)  not_null
     var $fechadeshabilitacion;           // date(4)
@@ -56,28 +56,28 @@ class DataObjects_Categoria extends DataObjects_Basica
         $this->nom_tabla = _('Categoria');
         $this->fb_fieldLabels = array('id' => _('Código de Categoría'),
             'id_supracategoria' => _('Supracategoria'),
-            'id_tipo_violencia' => _('Tipo de Violencia'),
+            'id_tviolencia' => _('Tipo de Violencia'),
             'nombre' => _('Nombre'),
             'fechacreacion' => _('Fecha de Creación'),
             'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
-            'col_rep_consolidado' => _('Columna en Rep. Consolidado'),
-            'contada_en' => _('Contada también como Categoria'),
+            'id_pconsolidado' => _('Columna en Rep. Consolidado'),
+            'contadaen' => _('Contada también como Categoria'),
             'tipocat' => _('Tipo de Categoria')
         );
     }
 
 
     var $fb_linkDisplayFields = array('nombre',
-        'id_tipo_violencia',
+        'id_tviolencia',
         'id_supracategoria'
     );
     var $fb_preDefOrder = array('id', 'nombre', 'fechacreacion',
-        'fechadeshabilitacion', 'id_supracategoria', 'col_rep_consolidado',
-        'contada_en', 'tipocat'
+        'fechadeshabilitacion', 'id_supracategoria', 'id_pconsolidado',
+        'contadaen', 'tipocat'
     );
     var $fb_fieldsToRender = array('id', 'nombre', 'fechacreacion',
-        'fechadeshabilitacion', 'id_supracategoria', 'col_rep_consolidado',
-        'contada_en', 'tipocat'
+        'fechadeshabilitacion', 'id_supracategoria', 'id_pconsolidado',
+        'contadaen', 'tipocat'
     );
    var $fb_selectAddEmpty = array('fechadeshabilitacion');
     var $fb_hidePrimaryKey = false;
@@ -107,9 +107,9 @@ class DataObjects_Categoria extends DataObjects_Basica
      *
      * @return Valor para BD
      */
-    function setcontada_en($valor)
+    function setcontadaen($valor)
     {
-        $this->contada_en= ($valor == '') ? 'null' : $valor;
+        $this->contadaen= ($valor == '') ? 'null' : $valor;
     }
 
     /**
@@ -122,7 +122,7 @@ class DataObjects_Categoria extends DataObjects_Basica
     function setid_supracategoria($valor)
     {
         $a = explode(':', $valor);
-        $this->id_tipo_violencia = $a[0];
+        $this->id_tviolencia = $a[0];
         $this->id_supracategoria = $a[1];
     }
 
@@ -181,12 +181,12 @@ class DataObjects_Categoria extends DataObjects_Basica
         $q = "SELECT tviolencia.id || ':' || supracategoria.id,
             supracategoria.nombre || ' (' || tviolencia.nombre || ')'
             FROM supracategoria, tviolencia
-            WHERE tviolencia.id = supracategoria.id_tipo_violencia";
+            WHERE tviolencia.id = supracategoria.id_tviolencia";
         $op = $db->getAssoc($q);
         sin_error_pear($op);
         $r = $s->loadArray(htmlentities_array($op));
         $s->setValue(
-            $this->id_tipo_violencia.':' .
+            $this->id_tviolencia.':' .
             $this->id_supracategoria
         );
 /*        $f =& $form->getElement('fechadeshabilitacion');

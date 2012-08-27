@@ -33,7 +33,7 @@ class DataObjects_Despacho extends DataObjects_Basica
 {
     var $__table = 'despacho';                         // table name
 
-    var $id_tipo;                              // int4(4)  not_null
+    var $id_trelacion;                              // int4(4)  not_null
     var $observaciones;                        // varchar(-1)  not_null
 
     /**
@@ -45,14 +45,14 @@ class DataObjects_Despacho extends DataObjects_Basica
         parent::__construct();
 
         $this->nom_tabla = _('Despacho de una actuación judicial');
-        $this->fb_fieldLabels['id_tipo'] = _('Tipo de Proceso');
+        $this->fb_fieldLabels['id_trelacion'] = _('Tipo de Proceso');
 
     }
 
 
     var $fb_preDefOrder = array(
         'id',
-        'id_tipo',
+        'id_trelacion',
         'nombre',
         'observaciones',
         'fechacreacion',
@@ -60,7 +60,7 @@ class DataObjects_Despacho extends DataObjects_Basica
     );
 
     var $fb_fieldsToRender = array(
-        'id_tipo',
+        'id_trelacion',
         'nombre',
         'observaciones',
         'fechacreacion',
@@ -69,13 +69,13 @@ class DataObjects_Despacho extends DataObjects_Basica
 
     var $fb_addFormHeader = false;
     var $fb_fieldsRequired = array(
-        'id_tipo',
+        'id_trelacion',
         'nombre',
         'fechacreacion'
     );
     var $fb_linkDisplayFields = array(
         'nombre',
-        'id_tipo',
+        'id_trelacion',
     );
 
     /**

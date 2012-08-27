@@ -243,8 +243,8 @@ class PagEtiquetas extends PagBaseSimple
                          $duc->id_anotacion, "=", "AND"
                      );
                  }
-                 if (isset($duc->ubicacion_fisica)
-                     && $duc->ubicacion_fisica != ''
+                 if (isset($duc->ubicacionfisica)
+                     && $duc->ubicacionfisica != ''
                      )
                  {
                      consulta_and(

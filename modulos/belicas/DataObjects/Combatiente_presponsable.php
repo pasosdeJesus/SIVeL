@@ -31,7 +31,7 @@ require_once 'DB_DataObject_SIVeL.php';
 class DataObjects_Combatiente_presponsable extends DB_DataObject_SIVeL
 {
     var $__table = 'combatiente_presponsable';    // table name
-    var $id_p_responsable;                // int4(4)  multiple_key
+    var $id_presponsable;                // int4(4)  multiple_key
     var $id_combatiente;                  // int4(4)  multiple_key
 
     /**

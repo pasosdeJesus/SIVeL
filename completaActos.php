@@ -33,19 +33,19 @@ echo "Individuales<br>";
 hace_consulta($db, "DROP VIEW replicadas", false, false);
 hace_consulta(
     $db, "CREATE VIEW replicadas AS " .
-    " SELECT id_p_responsable, contada_en, id_persona, id_caso " .
+    " SELECT id_presponsable, contadaen, id_persona, id_caso " .
     " FROM acto, categoria WHERE acto.id_categoria=categoria.id " .
-    " AND categoria.contada_en IS NOT NULL ORDER BY id;"
+    " AND categoria.contadaen IS NOT NULL ORDER BY id;"
 );
-$pres = " FROM replicadas WHERE (id_p_responsable, contada_en, " .
-    " id_persona, id_caso) NOT IN (select id_p_responsable, " .
+$pres = " FROM replicadas WHERE (id_presponsable, contadaen, " .
+    " id_persona, id_caso) NOT IN (select id_presponsable, " .
     " id_categoria, id_persona, id_caso from acto)";
 $s = "SELECT COUNT(*) $pres";
 $ni = $db->getOne($s);
 sin_error_pear($ni);
 echo " Se insertarán " . (int)$ni . " actos<br>";
 hace_consulta(
-    $db, "INSERT INTO acto (id_p_responsable, id_categoria, " .
+    $db, "INSERT INTO acto (id_presponsable, id_categoria, " .
     " id_persona, id_caso) SELECT * $pres"
 );
 hace_consulta($db, "DROP VIEW replicadas");
@@ -55,14 +55,14 @@ echo "Colectivos<br>";
 hace_consulta($db, "DROP VIEW replicadasc", false, false);
 hace_consulta(
     $db, "CREATE VIEW replicadasc AS " .
-    " SELECT id_p_responsable, contada_en, id_grupoper, id_caso " .
+    " SELECT id_presponsable, contadaen, id_grupoper, id_caso " .
     " FROM actocolectivo, categoria " .
     " WHERE actocolectivo.id_categoria=categoria.id " .
-    " AND categoria.contada_en IS NOT NULL ORDER BY id;"
+    " AND categoria.contadaen IS NOT NULL ORDER BY id;"
 );
 $pres = " FROM replicadasc " .
-    " WHERE (id_p_responsable, contada_en, id_grupoper, id_caso) " .
-    " NOT IN (SELECT id_p_responsable, id_categoria, id_grupoper, id_caso " .
+    " WHERE (id_presponsable, contadaen, id_grupoper, id_caso) " .
+    " NOT IN (SELECT id_presponsable, id_categoria, id_grupoper, id_caso " .
     " FROM actocolectivo)";
 $s = "SELECT COUNT(*) $pres ";
 $ni = $db->getOne($s);
@@ -70,7 +70,7 @@ sin_error_pear($ni);
 echo " Se insertarán " . (int)$ni . " actos colectivos<br>";
 hace_consulta(
     $db, "INSERT INTO actocolectivo " .
-    " (id_p_responsable, id_categoria, id_grupoper, id_caso) SELECT * $pres"
+    " (id_presponsable, id_categoria, id_grupoper, id_caso) SELECT * $pres"
 );
 hace_consulta($db, "DROP VIEW replicadasc");
 
@@ -82,27 +82,27 @@ echo '<table width="100%">' .
     '</div></b></td></table>';
 /* Completa casos de paramilitares en DIH en DH
 
- CREATE VIEW parasdh AS select id_p_responsable, categoria.id, id_persona, id_caso
+ CREATE VIEW parasdh AS select id_presponsable, categoria.id, id_persona, id_caso
   FROM acto, categoria
-  WHERE acto.id_categoria = categoria.contada_en and id_p_responsable = '14';
-  SELECT * from parasdh WHERE (id_p_responsable, id, id_persona, id_caso)
-  NOT IN (SELECT id_p_responsable, id_categoria, id_persona, id_caso FROM acto);
-  INSERT INTO acto (id_p_responsable, id_categoria, id_persona, id_caso)
-  SELECT * from parasdh WHERE (id_p_responsable, id, id_persona, id_caso)
-  NOT IN (SELECT id_p_responsable, id_categoria, id_persona, id_caso FROM acto);
+  WHERE acto.id_categoria = categoria.contadaen and id_presponsable = '14';
+  SELECT * from parasdh WHERE (id_presponsable, id, id_persona, id_caso)
+  NOT IN (SELECT id_presponsable, id_categoria, id_persona, id_caso FROM acto);
+  INSERT INTO acto (id_presponsable, id_categoria, id_persona, id_caso)
+  SELECT * from parasdh WHERE (id_presponsable, id, id_persona, id_caso)
+  NOT IN (SELECT id_presponsable, id_categoria, id_persona, id_caso FROM acto);
   DROP VIEW parasdh;
 
- CREATE VIEW parasdhc AS select id_p_responsable, categoria.id, id_grupoper, id_caso
+ CREATE VIEW parasdhc AS select id_presponsable, categoria.id, id_grupoper, id_caso
   FROM actocolectivo, categoria
-  WHERE actocolectivo.id_categoria = categoria.contada_en
-  AND id_p_responsable = '14';
-  SELECT * from parasdhc WHERE (id_p_responsable, id, id_grupoper, id_caso)
-  NOT IN (SELECT id_p_responsable, id_categoria, id_grupoper, id_caso
+  WHERE actocolectivo.id_categoria = categoria.contadaen
+  AND id_presponsable = '14';
+  SELECT * from parasdhc WHERE (id_presponsable, id, id_grupoper, id_caso)
+  NOT IN (SELECT id_presponsable, id_categoria, id_grupoper, id_caso
   FROM actocolectivo
 );
-  INSERT INTO actocolectivo (id_p_responsable, id_categoria, id_grupoper, id_caso)
-  SELECT * from parasdhc WHERE (id_p_responsable, id, id_grupoper, id_caso)
-  NOT IN (SELECT id_p_responsable, id_categoria, id_grupoper, id_caso
+  INSERT INTO actocolectivo (id_presponsable, id_categoria, id_grupoper, id_caso)
+  SELECT * from parasdhc WHERE (id_presponsable, id, id_grupoper, id_caso)
+  NOT IN (SELECT id_presponsable, id_categoria, id_grupoper, id_caso
   FROM actocolectivo
 );
   DROP VIEW parasdhc;

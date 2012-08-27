@@ -59,11 +59,11 @@ if (!aplicado($idac)) {
         false
     );
     $r = hace_consulta(
-        $db, "ALTER TABLE anexo ADD COLUMN id_prensa INTEGER " .
+        $db, "ALTER TABLE anexo ADD COLUMN id_ffrecuente INTEGER " .
         "REFERENCES ffrecuente", false
     );
     $r = hace_consulta(
-        $db, "ALTER TABLE anexo ADD COLUMN id_fuente_directa " .
+        $db, "ALTER TABLE anexo ADD COLUMN id_fotra " .
         "INTEGER REFERENCES fotra", false
     );
 

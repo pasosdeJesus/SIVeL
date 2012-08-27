@@ -321,7 +321,7 @@ class Busqueda extends HTML_QuickForm_Action
             && $pFiini['Y'] != ''
         ) {
                 consulta_and(
-                    $db, $w, "caso_funcionario.fecha_inicio",
+                    $db, $w, "caso_funcionario.fechainicio",
                     arr_a_fecha($pFiini, true), ">="
                 );
         }
@@ -329,7 +329,7 @@ class Busqueda extends HTML_QuickForm_Action
             && $pFifin['Y'] != ''
         ) {
                 consulta_and(
-                    $db, $w, "caso_funcionario.fecha_inicio",
+                    $db, $w, "caso_funcionario.fechainicio",
                     arr_a_fecha($pFifin, false), "<="
                 );
         }

@@ -37,7 +37,7 @@ res_valida(
     "SELECT caso.id, caso.fecha, fotra.nombre
     FROM caso_fotra, caso, fotra
     WHERE caso_fotra.id_caso = caso.id
-    AND caso_fotra.id_fuente_directa = fotra.id
+    AND caso_fotra.id_fotra = fotra.id
     AND caso_fotra.fecha < caso.fecha order by fecha;"
 );
 
@@ -45,7 +45,7 @@ res_valida(
     $db, _("Casos con fecha de fuente frecuente anterior a la del caso"),
     "SELECT caso.id, caso.fecha, ffrecuente.nombre
     FROM caso_ffrecuente, ffrecuente, caso
-    WHERE caso_ffrecuente.id_caso = caso.id AND caso_ffrecuente.id_prensa = ffrecuente.id
+    WHERE caso_ffrecuente.id_caso = caso.id AND caso_ffrecuente.id_ffrecuente = ffrecuente.id
     AND caso_ffrecuente.fecha < caso.fecha
     ORDER BY fecha;"
 );
@@ -53,7 +53,7 @@ res_valida(
 hace_consulta($db, "DROP VIEW y", false, false);
 hace_consulta(
     $db, "CREATE VIEW y AS SELECT caso.id, " .
-    " min(caso_funcionario.fecha_inicio) " .
+    " min(caso_funcionario.fechainicio) " .
     " FROM caso_funcionario, caso " .
     " WHERE caso.id>'35000' AND caso.id=caso_funcionario.id_caso " .
     " GROUP BY caso.id order by caso.id"
@@ -64,7 +64,7 @@ res_valida(
     FROM y, caso, caso_funcionario, funcionario
     WHERE y.id = caso.id AND y.min <= caso.fecha
     AND caso_funcionario.id_caso = caso.id
-    AND caso_funcionario.fecha_inicio = y.min
+    AND caso_funcionario.fechainicio = y.min
     AND caso_funcionario.id_funcionario = funcionario.id;"
 );
 

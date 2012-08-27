@@ -1044,14 +1044,14 @@ function extrae_per(&$db)
         $aper[$pe->id][2] = $vcasos; // Casos en los que es víctima
         $fcasos = array(); // Casos en los que es familiar
         $cr = objeto_tabla('Persona_trelacion');
-        $cr->orderBy('id_persona1');
-        $cr->id_persona2=$pe->id;
+        $cr->orderBy('persona1');
+        $cr->persona2=$pe->id;
         $cr->find();
         if ($cr->fetch()) {
-            //echo "--OJO Encontrado como familiar de ".$cr->id_persona1."\n";
+            //echo "--OJO Encontrado como familiar de ".$cr->persona1."\n";
             $cvi = objeto_tabla('Victima');
             $cvi->orderBy('id_caso');
-            $cvi->id_persona = $cr->id_persona1;
+            $cvi->id_persona = $cr->persona1;
             $cvi->find();
             while ($cvi->fetch()) {
                 $fcasos[$cvi->id_caso] = $cvi->id_caso;
@@ -1135,11 +1135,11 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
     $dvictimacol= objeto_tabla('victimacolectiva');
     $dvictimacol->id_caso = $idcaso;
     $dvictimacol->id_grupoper = $idgr;
-    $dvictimacol->personas_aprox = dato_en_obs($grupo, 'personas_aprox');
+    $dvictimacol->personasaprox = dato_en_obs($grupo, 'personasaprox');
     $dvictimacol->anotaciones = dato_en_obs($grupo, 'anotaciones');
     $oa = dato_en_obs($grupo, 'organizacion_armada');
     if ($oa != '') {
-        $dvictimacol->id_organizacion_armada
+        $dvictimacol->organizacionarmada
             = (int)conv_basica(
                 $db, 'presponsable', $oa, $obs
             );
@@ -1474,7 +1474,7 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
     //echo "OJO asignando id_presp[$idp] = $pr<br>";
     $dpresp = objeto_tabla('caso_presponsable');
     $dpresp->id_caso = $idcaso;
-    $dpresp->id_p_responsable = $pr;
+    $dpresp->id_presponsable = $pr;
     $dpresp->tipo = 0;
     $dpresp->id = 1;
     foreach (array('bloque', 'frente', 'brigada',
@@ -1492,7 +1492,7 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
     if (!$dpresp->insert()) {
         repObs(
             "No pudo insertar p. resp '" .
-            $dpresp->id_p_responsable . "'",
+            $dpresp->id_presponsable . "'",
             $obs
         );
     }
@@ -1503,7 +1503,7 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
             );
             $ocp = objeto_tabla('caso_categoria_presponsable');
             $ocp->id_caso = $idcaso;
-            $ocp->id_p_responsable = $pr;
+            $ocp->id_presponsable = $pr;
             $ocp->id = $dpresp->id;
             $ocp->id_categoria = $idc;
             $ocat = objeto_tabla('Categoria');
@@ -1515,8 +1515,8 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
                     $obs
                 );
             } else {
-                $ocp->id_tipo_violencia
-                    = $ocat->id_tipo_violencia;
+                $ocp->id_tviolencia
+                    = $ocat->id_tviolencia;
                 $ocp->id_supracategoria
                     = $ocat->id_supracategoria;
                 $ocp->insert();

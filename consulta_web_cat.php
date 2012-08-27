@@ -40,7 +40,7 @@ if ($dt->find() == 0) {
 $dt->fetch();
 
 $ds =& objeto_tabla('supracategoria');
-$ds->id_tipo_violencia = $t;
+$ds->id_tviolencia = $t;
 $ds->id = $s;
 if ($ds->find() == 0) {
     die("No existe supracategoria " . htmlentities($s, ENT_COMPAT, 'UTF-8'));
@@ -48,7 +48,7 @@ if ($ds->find() == 0) {
 $ds->fetch();
 
 $dc =& objeto_tabla('categoria');
-$dc->id_tipo_violencia = $t;
+$dc->id_tviolencia = $t;
 $dc->id_supracategoria = $s;
 $dc->id = $c;
 if ($dc->find() == 0) {

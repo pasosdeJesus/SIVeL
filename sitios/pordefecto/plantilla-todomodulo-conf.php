@@ -418,16 +418,16 @@ $GLOBALS['etiqueta'] = array(
     'sitio' => 'Sitio',
 
 // Fuente frecuente
-    'id_prensa' => 'Fuente',
+    'id_ffrecuente' => 'Fuente',
     'fecha_fuente' => 'Fecha',
     'ubicacion_fuente' => 'Ubicación',
     'clasificacion_fuente' => 'Clasificación',
-    'ubicacion_fisica' => 'Ubicación Física',
+    'ubicacionfisica' => 'Ubicación Física',
 
 // Otras fuentes
     'nombre' => 'Nombre',
-    'ubicacion_fisica' => 'Ubicación Física',
-    'tipo_fuente' => 'Tipo de Fuente',
+    'ubicacionfisica' => 'Ubicación Física',
+    'tfuente' => 'Tipo de Fuente',
     'anotacion' => 'Anotacion',
 
 // Tipo de violencia
@@ -470,7 +470,7 @@ $GLOBALS['etiqueta'] = array(
     'victimas_colectivas'=> 'Víctimas Colectivas',
 //   'nombre' => 'Nombre',
 //   'organizacion_armada'=> 'Organización Armada Víctima',
-    'personas_aprox' => 'Num. Aprox. Personas',
+    'personasaprox' => 'Num. Aprox. Personas',
     'anotacion' => 'Anotaciones',
 
 //    'tviolencia' =>
@@ -505,10 +505,10 @@ $GLOBALS['etiqueta'] = array(
     'memo' => 'Memo',
 
 //Evaluación
-    'gr_confiabilidad' => 'Gr. Confiabilidad Fuente',
-    'gr_esclarecimiento' => 'Gr.Esclarecimiento',
-    'gr_impunidad' => 'Gr. Impunidad',
-    'gr_informacion' => 'Gr. Informacion',
+    'grconfiabilidad' => 'Gr. Confiabilidad Fuente',
+    'gresclarecimiento' => 'Gr.Esclarecimiento',
+    'grimpunidad' => 'Gr. Impunidad',
+    'grinformacion' => 'Gr. Informacion',
 
 // Otros
     'analista' => 'Analista',

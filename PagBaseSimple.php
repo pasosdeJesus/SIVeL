@@ -678,14 +678,14 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
                             $vp = 1;
                         }
                         if ($v1 != null) {
-                            if ($c == 'id_rango_edad') {
+                            if ($c == 'id_rangoedad') {
                                 $v1 = $de1->rango;
                             } else {
                                 $v1 = $de1->nombre;
                             }
                         }
                         if ($v2 != null) {
-                            if ($c == 'id_rango_edad') {
+                            if ($c == 'id_rangoedad') {
                                 $v2 = $de2->rango;
                             } else {
                                 $v2 = $de2->nombre;

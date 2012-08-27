@@ -65,7 +65,7 @@ function rotulos_orden_cons(&$q, $pOrdenar)
             'pconsolidado.peso as peso ' .
             ' FROM pconsolidado,' .
             'categoria, acto, (' . $q . ') AS sub WHERE ' .
-            '(pconsolidado.no_columna=categoria.col_rep_consolidado ' .
+            '(pconsolidado.id=categoria.id_pconsolidado ' .
             ' AND categoria.id=acto.id_categoria ' .
             ' AND acto.id_caso=sub.id ' .
             $excvi.
@@ -74,7 +74,7 @@ function rotulos_orden_cons(&$q, $pOrdenar)
             'UNION (SELECT subc.*, pconsolidado.peso ' .
             'FROM pconsolidado,' .
             'categoria, actocolectivo, (' . $q . ') AS subc WHERE ' .
-            '(pconsolidado.no_columna=categoria.col_rep_consolidado ' .
+            '(pconsolidado.id=categoria.id_pconsolidado ' .
             'AND categoria.id = actocolectivo.id_categoria ' .
             'AND actocolectivo.id_caso = subc.id ' .
             $excvc.
@@ -83,7 +83,7 @@ function rotulos_orden_cons(&$q, $pOrdenar)
             ' UNION (SELECT subo.*, pconsolidado.peso ' .
             'FROM pconsolidado,' .
             'categoria, caso_categoria_presponsable, (' . $q . ') AS subo WHERE ' .
-            '(pconsolidado.no_columna=categoria.col_rep_consolidado ' .
+            '(pconsolidado.id=categoria.id_pconsolidado ' .
             'AND categoria.id = caso_categoria_presponsable.id_categoria ' .
             'AND caso_categoria_presponsable.id_caso = subo.id) ' .
             ')) AS subt ORDER BY subt.peso, subt.fecha ';
@@ -212,7 +212,7 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
             $dprespcaso->find();
             $sep = "Presuntos Responsables: ";
             while ($dprespcaso->fetch()) {
-                $dresponsable = $dprespcaso->getLink('id_p_responsable');
+                $dresponsable = $dprespcaso->getLink('id_presponsable');
                 $r .= $sep . trim($dresponsable->nombre);
                 $sep = " - ";
             }
@@ -225,19 +225,19 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
             $dacto->find();
             while ($dacto->fetch()) {
                 $dcategoria = $dacto->getLink('id_categoria');
-                $dtipoviolencia = $dcategoria->getLink('id_tipo_violencia');
+                $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
-                $dsupracategoria->id_tipo_violencia =
-                    $dcategoria->id_tipo_violencia;
+                $dsupracategoria->id_tviolencia =
+                    $dcategoria->id_tviolencia;
                 $dsupracategoria->find(1);
 
-                if ($dcategoria->col_rep_consolidado == null) {
+                if ($dcategoria->id_pconsolidado == null) {
                     echo "<hr>La categoria " . (int)$dcategoria->id .
                         " no tiene asociada " .
                         "una columna del reporte consolidado\n<hr>";
                 }
-                $drot = $dcategoria->getLink('col_rep_consolidado');
+                $drot = $dcategoria->getLink('id_pconsolidado');
                 $lr[trim($drot->rotulo)] = trim($drot->rotulo);
                 if ($peso == 0 || $drot->peso < $peso) {
                     $peso = $drot->peso;
@@ -250,19 +250,19 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
             $dactocolectivo->find();
             while ($dactocolectivo->fetch()) {
                 $dcategoria = $dactocolectivo->getLink('id_categoria');
-                $dtipoviolencia = $dcategoria->getLink('id_tipo_violencia');
+                $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
-                $dsupracategoria->id_tipo_violencia =
-                    $dcategoria->id_tipo_violencia;
+                $dsupracategoria->id_tviolencia =
+                    $dcategoria->id_tviolencia;
                 $dsupracategoria->find(1);
 
-                if ($dcategoria->col_rep_consolidado == null) {
+                if ($dcategoria->id_pconsolidado == null) {
                     echo "<hr>La categoria " . (int)$dcategoria->id .
                         " no tiene asociada " .
                         "una columna del reporte consolidado\n<hr>";
                 }
-                $drot = $dcategoria->getLink('col_rep_consolidado');
+                $drot = $dcategoria->getLink('id_pconsolidado');
                 $lr[trim($drot->rotulo)] = trim($drot->rotulo);
                 if ($peso == 0 || $drot->peso < $peso) {
                     $peso = $drot->peso;
@@ -275,19 +275,19 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
             $catpresp->find();
             while ($catpresp->fetch()) {
                 $dcategoria = $catpresp->getLink('id_categoria');
-                $dtipoviolencia = $dcategoria->getLink('id_tipo_violencia');
+                $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
-                $dsupracategoria->id_tipo_violencia =
-                    $dcategoria->id_tipo_violencia;
+                $dsupracategoria->id_tviolencia =
+                    $dcategoria->id_tviolencia;
                 $dsupracategoria->find(1);
 
-                if ($dcategoria->col_rep_consolidado == null) {
+                if ($dcategoria->id_pconsolidado == null) {
                     echo "<hr>La categoria " . (int)$dcategoria->id .
                         " no tiene asociada " .
                         "una columna del reporte consolidado\n<hr>";
                 } else {
-                    $drot = $dcategoria->getLink('col_rep_consolidado');
+                    $drot = $dcategoria->getLink('id_pconsolidado');
                     $lr[trim($drot->rotulo)] = trim($drot->rotulo);
                     if ($peso == 0 || $drot->peso < $peso) {
                         $peso = $drot->peso;

@@ -38,23 +38,23 @@ class DataObjects_Caso_fotra extends DB_DataObject_SIVeL
 
     var $__table = 'caso_fotra';             // table name
     var $id_caso;                         // int4(4)  multiple_key
-    var $id_fuente_directa;               // int4(4)  multiple_key
+    var $id_fotra;               // int4(4)  multiple_key
     var $anotacion;                       // varchar(-1)
     var $fecha;                           // date(4)  multiple_key
-    var $ubicacion_fisica;                // varchar(-1)
-    var $tipo_fuente;                     // varchar(-1)
+    var $ubicacionfisica;                // varchar(-1)
+    var $tfuente;                     // varchar(-1)
 
 
     var $fb_addFormHeader = false;
-    //var $fb_selectAddEmpty = array('id_fuente_directa');
+    //var $fb_selectAddEmpty = array('id_fotra');
     var $fb_preDefOrder = array('anotacion', 'fecha',
-        'ubicacion_fisica', 'tipo_fuente'
+        'ubicacionfisica', 'tfuente'
     );
     var $fb_fieldsToRender = array('anotacion', 'fecha',
-        'ubicacion_fisica', 'tipo_fuente'
+        'ubicacionfisica', 'tfuente'
     );
-    var $fb_enumFields = array('tipo_fuente');
-    var $fb_enumOptions = array('tipo_fuente' =>
+    var $fb_enumFields = array('tfuente');
+    var $fb_enumOptions = array('tfuente' =>
         array('Directa', 'Indirecta')
     );
     var $fb_excludeFromAutoRules = array('fecha');
@@ -69,8 +69,8 @@ class DataObjects_Caso_fotra extends DB_DataObject_SIVeL
         $this->fb_fieldLabels= array(
            'anotacion' => _('Anotación'),
            'fecha' => _('Fecha'),
-           'ubicacion_fisica' => _('Ubicación Física'),
-           'tipo_fuente' => _('Tipo de Fuente'),
+           'ubicacionfisica' => _('Ubicación Física'),
+           'tfuente' => _('Tipo de Fuente'),
         );
     }
 
@@ -105,8 +105,8 @@ class DataObjects_Caso_fotra extends DB_DataObject_SIVeL
     {
         $this->fb_preDefElements = array('id_caso' =>
             HTML_QuickForm::createElement('hidden', 'id_caso'),
-            'id_fuente_directa' =>
-            HTML_QuickForm::createElement('hidden', 'id_fuente_directa'),
+            'id_fotra' =>
+            HTML_QuickForm::createElement('hidden', 'id_fotra'),
         );
     }
 
@@ -144,7 +144,7 @@ class DataObjects_Caso_fotra extends DB_DataObject_SIVeL
         }
 
 
-        $e =& $form->getElement('ubicacion_fisica');
+        $e =& $form->getElement('ubicacionfisica');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(70);
             $e->setMaxlength(100);
@@ -168,12 +168,12 @@ class DataObjects_Caso_fotra extends DB_DataObject_SIVeL
      */
     function preProcessForm(&$valores, &$formbuilder)
     {
-        if ($this->id_fuente_directa != null
-            && (!isset($valores['id_fuente_directa'])
-            || $valores['id_fuente_directa'] == ''
+        if ($this->id_fotra != null
+            && (!isset($valores['id_fotra'])
+            || $valores['id_fotra'] == ''
         )
         ) {
-            $valores['id_fuente_directa'] = $this->id_fuente_directa;
+            $valores['id_fotra'] = $this->id_fotra;
         }
     }
 

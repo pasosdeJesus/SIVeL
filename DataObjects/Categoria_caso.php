@@ -36,7 +36,7 @@ class DataObjects_Categoria_caso extends DB_DataObject_SIVeL
 
     var $__table = 'categoria_caso';                  // table name
     var $id_caso;                         // int4(4)  multiple_key
-    var $id_tipo_violencia;               // varchar(-1)  multiple_key
+    var $id_tviolencia;               // varchar(-1)  multiple_key
     var $id_supracategoria;               // int4(4)  multiple_key
     var $id_categoria;                    // int4(4)  multiple_key
 
@@ -85,7 +85,7 @@ class DataObjects_Categoria_caso extends DB_DataObject_SIVeL
                 $db->getAssoc(
                     "SELECT id, nombre " .
                     "FROM supracategoria WHERE " .
-                    "id_tipo_violencia='$idtvio';"
+                    "id_tviolencia='$idtvio';"
                 )
             );
             foreach ($scat as $idscat => $nomscat) {
@@ -93,7 +93,7 @@ class DataObjects_Categoria_caso extends DB_DataObject_SIVeL
                     $db->getAssoc(
                         "SELECT id, nombre " .
                         "FROM categoria WHERE " .
-                        "id_tipo_violencia='$idtvio' AND " .
+                        "id_tviolencia='$idtvio' AND " .
                         "id_supracategoria='$idscat';"
                     )
                 );

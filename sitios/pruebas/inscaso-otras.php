@@ -26,13 +26,13 @@ require_once "ambiente.php";
 
 $post = array();
 $post['nombre'] = 'n';
-$post['id'] = $post['id_fuente_directa'] = '';
+$post['id'] = $post['id_fotra'] = '';
 $post['anotacion'] = 'a';
 $post['fecha']['d'] = '15';
 $post['fecha']['M'] = '10';
 $post['fecha']['Y'] = '2007';
-$post['ubicacion_fisica'] = 'ubicación';
-$post['tipo_fuente'] = '0';
+$post['ubicacionfisica'] = 'ubicación';
+$post['tfuente'] = '0';
 $post['_qf_otras_siguienteMultiple'] = 'Fuente siguiente';
 $post['_qf_default'] = 'otras:siguiente';
 pasaPestanaFicha($db, array("fotra"), $post, 1);

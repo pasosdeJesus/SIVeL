@@ -69,20 +69,20 @@ class DataObjects_Persona_trelacion extends DB_DataObject_SIVeL
 {
 
     var $__table = 'persona_trelacion';         // table name
-    var $id_persona1;                           // int4(4)  not_null primary_key
-    var $id_persona2;                           // int4(4)  not_null primary_key
-    var $id_tipo;                              // varchar(-1)  not_null
+    var $persona1;                           // int4(4)  not_null primary_key
+    var $persona2;                           // int4(4)  not_null primary_key
+    var $id_trelacion;                              // varchar(-1)  not_null
     var $observaciones;                    // varchar(-1)  not_null
 
 
 
 
-    var $fb_preDefOrder = array('id_tipo', 'observaciones');
-    var $fb_fieldsToRender = array('id_tipo', 'observaciones');
+    var $fb_preDefOrder = array('id_trelacion', 'observaciones');
+    var $fb_fieldsToRender = array('id_trelacion', 'observaciones');
     var $fb_addFormHeader = false;
     var $fb_selectAddEmpty = array();
-    var $fb_fieldsRequired = array('id_tipo');
-    var $fb_hidePrimaryKey = array('id_tipo');
+    var $fb_fieldsRequired = array('id_trelacion');
+    var $fb_hidePrimaryKey = array('id_trelacion');
     /**
      * Constructora
      * return @void
@@ -145,13 +145,13 @@ class DataObjects_Persona_trelacion extends DB_DataObject_SIVeL
             '</tr></thead><tbody>';
         $p = clone $formbuilder->_do;
         $db = $p->getDatabaseConnection();
-        $p->id_persona2=null;
-        $p->id_tipo = null;
+        $p->persona2=null;
+        $p->id_trelacion = null;
         $p->observaciones = null;
         $p->find();
-        while ($p->id_persona1!=null && $p->fetch()) {
-            $dp = $p->getLink('id_persona2');
-            $dt = $p->getLink('id_tipo');
+        while ($p->persona1!=null && $p->fetch()) {
+            $dp = $p->getLink('persona2');
+            $dt = $p->getLink('id_trelacion');
             $comovic = "";
             $comofam = "";
             enlaces_casos_persona_html(
@@ -167,14 +167,14 @@ class DataObjects_Persona_trelacion extends DB_DataObject_SIVeL
                 '<td>' . $p->observaciones.'</td>' .
                 '<td>' . $comovic . $comofam . '</td>' .
                 '<td><a href="'.$_SERVER['PHP_SELF'] . '?eliminarel=' .
-                $p->id_persona1.":".$p->id_persona2.":".$p->id_tipo.
+                $p->persona1.":".$p->persona2.":".$p->id_trelacion.
                 '">'. _('Eliminar') . '</a></td>';
         }
         $t .= '</tbody></table>';
         $sel =& $form->addElement(
             'static', 'familiares', _('Familiares'), $t
         );
-        $form->removeElement('id_persona1');
+        $form->removeElement('persona1');
 
         $fm = array();
         $sel =& $form->createElement('text', 'fnombres', 'fnombres');

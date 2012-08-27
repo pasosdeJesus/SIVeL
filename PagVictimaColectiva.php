@@ -365,7 +365,7 @@ class PagVictimaColectiva extends PagBaseMultiple
             $this->bvictimacolectiva->_do->fb_fieldsToRender,
             array(
             'id_antecedente', 'id_rango',
-            'id_sector', 'id_vinculo_estado', 'id_filiacion',
+            'id_sector', 'id_vinculoestado', 'id_filiacion',
             'id_profesion', 'id_organizacion'
             )
         );
@@ -400,7 +400,7 @@ class PagVictimaColectiva extends PagBaseMultiple
             $r = array('antecedente_comunidad' => 'id_antecedente',
                 'comunidad_rangoedad' =>  'id_rango',
                 'comunidad_sectorsocial' =>  'id_sector',
-                'vinculoestado_comunidad' =>  'id_vinculo_estado',
+                'vinculoestado_comunidad' =>  'id_vinculoestado',
                 'comunidad_filiacion' =>  'id_filiacion',
                 'comunidad_profesion' =>  'id_profesion',
                 'comunidad_organizacion' =>  'id_organizacion'
@@ -445,7 +445,7 @@ class PagVictimaColectiva extends PagBaseMultiple
             $this->bvinculoestado_comunidad->_do->find();
             while ($this->bvinculoestado_comunidad->_do->fetch()) {
                 $valscve[]
-                    = $this->bvinculoestado_comunidad->_do->id_vinculo_estado;
+                    = $this->bvinculoestado_comunidad->_do->id_vinculoestado;
             }
 
             $this->bcomunidad_filiacion->_do->find();
@@ -465,16 +465,16 @@ class PagVictimaColectiva extends PagBaseMultiple
             $v['id_antecedente'] = $valsca;
             $v['id_rango'] = $valscre;
             $v['id_sector'] = $valscss;
-            $v['id_vinculo_estado'] = $valscve;
+            $v['id_vinculoestado'] = $valscve;
             $v['id_filiacion'] = $valscfc;
             $v['id_profesion'] = $valscpro;
             $v['id_organizacion'] = $valscoc;
-            $v['id_organizacion_armada']
-                = $this->bvictimacolectiva->_do->id_organizacion_armada;
-            $v['personas_aprox']
-                = isset($this->bvictimacolectiva->_do->personas_aprox)
-                && $this->bvictimacolectiva->_do->personas_aprox != 'null' ?
-                $this->bvictimacolectiva->_do->personas_aprox :
+            $v['organizacionarmada']
+                = $this->bvictimacolectiva->_do->organizacionarmada;
+            $v['personasaprox']
+                = isset($this->bvictimacolectiva->_do->personasaprox)
+                && $this->bvictimacolectiva->_do->personasaprox != 'null' ?
+                $this->bvictimacolectiva->_do->personasaprox :
                 '';
         }
         establece_valores_form($this, $campos, $v);
@@ -588,8 +588,8 @@ class PagVictimaColectiva extends PagBaseMultiple
     {
         $es_vacio = (!isset($valores['nombre']) || $valores['nombre'] == '')
             && (!isset($valores['anotacion']) || $valores['anotacion'] == '')
-            && (!isset($valores['personas_aprox'])
-            || $valores['personas_aprox'] == ''
+            && (!isset($valores['personasaprox'])
+            || $valores['personasaprox'] == ''
             )
             && (!isset($valores['id_antecedente'])
             || $valores['id_antecedente'] == array()
@@ -600,8 +600,8 @@ class PagVictimaColectiva extends PagBaseMultiple
             && (!isset($valores['id_sector'])
             || $valores['id_sector'] == array()
             )
-            && (!isset($valores['id_vinculo_estado'])
-            || $valores['id_vinculo_estado'] == array()
+            && (!isset($valores['id_vinculoestado'])
+            || $valores['id_vinculoestado'] == array()
             )
             && (!isset($valores['id_filiacion'])
             || $valores['id_filiacion'] == array()
@@ -705,12 +705,12 @@ class PagVictimaColectiva extends PagBaseMultiple
             }
         }
 
-        if (isset($valores['id_vinculo_estado'])) {
-            foreach (var_escapa($valores['id_vinculo_estado']) as $k => $v) {
+        if (isset($valores['id_vinculoestado'])) {
+            foreach (var_escapa($valores['id_vinculoestado']) as $k => $v) {
                 $this->bvinculoestado_comunidad->_do->id_grupoper
                     = $idgrupoper;
                 $this->bvinculoestado_comunidad->_do->id_caso = $idcaso;
-                $this->bvinculoestado_comunidad->_do->id_vinculo_estado
+                $this->bvinculoestado_comunidad->_do->id_vinculoestado
                     = (int)var_escapa($v, $db);
                 $this->bvinculoestado_comunidad->_do->insert();
             }
@@ -773,7 +773,7 @@ class PagVictimaColectiva extends PagBaseMultiple
                     'vinculoestado_comunidad', 'comunidad_filiacion',
                     'comunidad_profesion', 'comunidad_organizacion'
             ),
-            'id_grupoper', array('personas_aprox'), 'id_grupoper'
+            'id_grupoper', array('personasaprox'), 'id_grupoper'
         );
     }
 

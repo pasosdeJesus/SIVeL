@@ -201,16 +201,16 @@ $GLOBALS['etiqueta'] = array(
     'sitio' => _('Sitio'),
 
 // Fuente frecuente
-    'id_prensa' => _('Fuente'),
+    'id_ffrecuente' => _('Fuente'),
     'fecha_fuente' => _('Fecha'),
     'ubicacion_fuente' => _('Ubicación'),
     'clasificacion_fuente' => _('Clasificación'),
-    'ubicacion_fisica' => _('Ubicación Física'),
+    'ubicacionfisica' => _('Ubicación Física'),
 
 // Otras fuentes
     'nombre' => _('Nombre'),
-    'ubicacion_fisica' => _('Ubicación Física'),
-    'tipo_fuente' => _('Tipo de Fuente'),
+    'ubicacionfisica' => _('Ubicación Física'),
+    'tfuente' => _('Tipo de Fuente'),
     'anotacion' => _('Anotacion'),
 
 // Tipo de violencia
@@ -253,7 +253,7 @@ $GLOBALS['etiqueta'] = array(
     'victimas_colectivas'=> _('Víctimas Colectivas'),
 //   'nombre' => _('Nombre'),
 //   'organizacion_armada'=> _('Organización Armada Víctima'),
-    'personas_aprox' => _('Num. Aprox. Personas'),
+    'personasaprox' => _('Num. Aprox. Personas'),
     'anotacion' => _('Anotaciones'),
 
 //    'tviolencia' =>
@@ -288,10 +288,10 @@ $GLOBALS['etiqueta'] = array(
     'memo' => _('Memo'),
 
 //Evaluación
-    'gr_confiabilidad' => _('Gr. Confiabilidad Fuente'),
-    'gr_esclarecimiento' => _('Gr.Esclarecimiento'),
-    'gr_impunidad' => _('Gr. Impunidad'),
-    'gr_informacion' => _('Gr. Informacion'),
+    'grconfiabilidad' => _('Gr. Confiabilidad Fuente'),
+    'gresclarecimiento' => _('Gr.Esclarecimiento'),
+    'grimpunidad' => _('Gr. Impunidad'),
+    'grinformacion' => _('Gr. Informacion'),
 
 // Otros
     'analista' => _('Analista'),

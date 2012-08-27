@@ -42,7 +42,7 @@ if (!aplicado($idac)) {
     $r = hace_consulta(
         $db, "CREATE TABLE despacho (
             id  INTEGER PRIMARY KEY DEFAULT (nextval('despacho_seq')),
-            id_tipo INTEGER NOT NULL REFERENCES tproceso,
+            id_trelacion INTEGER NOT NULL REFERENCES tproceso,
             nombre VARCHAR(150) NOT NULL,
             observaciones VARCHAR(500)
         ); ", false
@@ -51,7 +51,7 @@ if (!aplicado($idac)) {
     $r = hace_consulta(
         $db, "CREATE TABLE etapa (
             id  INTEGER PRIMARY KEY DEFAULT (nextval('etapa_seq')),
-            id_tipo INTEGER NOT NULL REFERENCES tproceso,
+            id_trelacion INTEGER NOT NULL REFERENCES tproceso,
             nombre VARCHAR(50) NOT NULL,
             observaciones VARCHAR(200)
         ); ", false
@@ -61,7 +61,7 @@ if (!aplicado($idac)) {
         $db, "CREATE TABLE proceso (
             id  INTEGER PRIMARY KEY DEFAULT (nextval('proceso_seq')),
             id_caso INTEGER REFERENCES caso NOT NULL,
-            id_tipo INTEGER NOT NULL REFERENCES tproceso,
+            id_trelacion INTEGER NOT NULL REFERENCES tproceso,
             id_etapa INTEGER NOT NULL REFERENCES etapa,
             proximafecha DATE,
             demandante  VARCHAR(100),
@@ -87,7 +87,7 @@ if (!aplicado($idac)) {
         $db, "CREATE TABLE accion (
             id      INTEGER PRIMARY KEY DEFAULT (nextval('accion_seq')),
             id_proceso INTEGER NOT NULL REFERENCES proceso,
-            id_tipo_accion INTEGER REFERENCES taccion NOT NULL,
+            id_trelacion_accion INTEGER REFERENCES taccion NOT NULL,
             id_despacho INTEGER REFERENCES despacho NOT NULL,
             fecha DATE NOT NULL,
             numero_radicado VARCHAR(50),
@@ -99,12 +99,12 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Seguimiento Judicial');
 }
 
-// alter table despacho add column id_tipo INTEGER REFERENCES tproceso;
-// update despacho SET id_tipo = '2';
-// update despacho SET id_tipo = '3' where id in ('129', '130', '99', '119');
-// update despacho SET id_tipo = '4' where id in ('20', '30');
-// update despacho SET id_tipo = '7' where id in ('40', '93', '112', '137', '139' );
-// update despacho SET id_tipo = '1' where id in ('10');
+// alter table despacho add column id_trelacion INTEGER REFERENCES tproceso;
+// update despacho SET id_trelacion = '2';
+// update despacho SET id_trelacion = '3' where id in ('129', '130', '99', '119');
+// update despacho SET id_trelacion = '4' where id in ('20', '30');
+// update despacho SET id_trelacion = '7' where id in ('40', '93', '112', '137', '139' );
+// update despacho SET id_trelacion = '1' where id in ('10');
 $idac = 'sjud-d1';
 if (!aplicado($idac)) {
     $na = 'modulos/segjudicial/datos.sql';

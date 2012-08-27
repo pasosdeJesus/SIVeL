@@ -390,7 +390,7 @@ class PagUbicacion extends PagBaseMultiple
             $mun->setValue($nmunicipio);
             $options = array('' => '') + htmlentities_array(
                 $db->getAssoc(
-                    "SELECT id, nombre || ' (' || id_tipo_clase || ')'
+                    "SELECT id, nombre || ' (' || id_tclase || ')'
                     FROM clase
                     WHERE id_departamento = '$ndepartamento'
                     AND id_municipio = '$nmunicipio' ORDER BY nombre"
@@ -674,10 +674,10 @@ class PagUbicacion extends PagBaseMultiple
                         (double)($du->longitud), '=', 'AND'
                     );
                 }
-                if ($du->id_tipo_sitio != 1) {
+                if ($du->id_trelacionsitio != 1) {
                     consulta_and(
-                        $db, $w2, "ubicacion.id_tipo_sitio",
-                        (int)($du->id_tipo_sitio), '=', 'AND'
+                        $db, $w2, "ubicacion.id_trelacionsitio",
+                        (int)($du->id_trelacionsitio), '=', 'AND'
                     );
                 }
 
@@ -757,9 +757,9 @@ class PagUbicacion extends PagBaseMultiple
             $db, $obs, $r, 'tsitio', 'tsitio', '', ''
         );
         if (isset($idtipositio) && $idtipositio != null) {
-            $dubicacion->id_tipo_sitio = $idtipositio;
+            $dubicacion->id_trelacionsitio = $idtipositio;
         } else {
-            $dubicacion->id_tipo_sitio
+            $dubicacion->id_trelacionsitio
                 = DataObjects_Tsitio::idSinInfo();
         }
         if (isset($r->latitud)) {

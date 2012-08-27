@@ -163,7 +163,7 @@ $GLOBALS['m_opcion_rol'] = array (
  */
 function sacaOpciones($usuario, &$db, &$op, &$rol)
 {
-    $q = "SELECT id_rol FROM usuario " .
+    $q = "SELECT rol FROM usuario " .
         "WHERE id_usuario='" .  $usuario . "';";
     $result = hace_consulta_aut($db, $q);
     $row = array();

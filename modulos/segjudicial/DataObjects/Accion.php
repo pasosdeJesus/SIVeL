@@ -39,7 +39,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
     var $__table = 'accion';                    // table name
     var $id;
     var $id_proceso;
-    var $id_tipo_accion;
+    var $id_trelacion_accion;
     var $id_despacho;
     var $fecha;
     var $numero_radicado;                // varchar(-1)
@@ -48,10 +48,10 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
 
 
     var $fb_hidePrimaryKey = true;
-    var $fb_preDefOrder = array('id_tipo_accion', 'id_despacho', 'fecha',
+    var $fb_preDefOrder = array('id_trelacion_accion', 'id_despacho', 'fecha',
          'numero_radicado', 'observaciones_accion', 'respondido'
      );
-    var $fb_fieldsToRender = array('id_tipo_accion', 'id_despacho', 'fecha',
+    var $fb_fieldsToRender = array('id_trelacion_accion', 'id_despacho', 'fecha',
          'numero_radicado', 'observaciones_accion', 'respondido'
      );
     var $fb_addFormHeader = true;
@@ -64,7 +64,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
         parent::__construct();
 
         $this->fb_fieldLabels= array(
-           'id_tipo_accion'        => _('Tipo de Acción'),
+           'id_trelacion_accion'        => _('Tipo de Acción'),
            'id_despacho'           => _('Despacho'),
            'fecha'                 => _('Fecha de la Acción'),
            'numero_radicado'       => _('No. Radicado'),
@@ -86,7 +86,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
     static function camposSinInfo()
     {
         return array(
-            'id_tipo_accion'    => DataObjects_Taccion::idSinInfo(),
+            'id_trelacion_accion'    => DataObjects_Taccion::idSinInfo(),
             'id_despacho'       => DataObjects_Despacho::idSinInfo(),
         );
     }
@@ -164,7 +164,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
         $res =& $form->removeElement('respondido');
         $fa[] =& $form->removeElement('id');
         $fa[] =& $form->removeElement('id_proceso');
-        $fa[] =& $form->removeElement('id_tipo_accion');
+        $fa[] =& $form->removeElement('id_trelacion_accion');
         $fa[] =& $form->removeElement('id_despacho');
         $sf = $fa[] =& $form->removeElement('fecha');
         $sf->setLabel(_('Fecha de la Acción'));
@@ -185,9 +185,9 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
         $p->orderby('fecha desc');
         $p->find();
         while ($p->id_proceso != null && $p->fetch()) {
-            $dtipo = $p->getLink('id_tipo_accion');
+            $dtipo = $p->getLink('id_trelacion_accion');
             $ddespacho = $p->getLink('id_despacho');
-            $n = "fobs_{$p->id_proceso}_{$p->id_tipo_accion}_" .
+            $n = "fobs_{$p->id_proceso}_{$p->id_trelacion_accion}_" .
                 "{$p->id_despacho}_{$p->fecha}";
             $t .= "<tr><td>"
                 . htmlentities($dtipo->nombre, ENT_COMPAT, 'UTF-8')

@@ -114,4 +114,32 @@ s/vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:/vim: set expandta
 s/autenticaUsuario(\$dsn, \$accno/autenticaUsuario($dsn/g
 s/htmlentities(\([^,)]*\))/htmlentities(\1, ENT_COMPAT, 'UTF-8')/g
 s/parent::construct/parent::__construct/g
-s/id_resagresion/id_resultado_agresion/g
+s/gr_confiabilidad/grconfiabilidad/g
+s/gr_esclarecimiento/gresclarecimiento/g
+s/gr_impunidad/grimpunidad/g
+s/gr_informacion/grinformacion/g
+s/no_columna/id/g
+s/id_tipo_violencia/id_tviolencia/g
+s/col_rep_consolidado/id_pconsolidado/g
+s/contada_en/contadaen/g
+s/id_tipo_clase/id_tclase/g
+s/tipo_fuente/tfuente/g
+s/id_p_responsable/id_presponsable/g
+s/tipo_violencia/tipoviolencia/g
+s/id_tipo_sitio/id_tipositio/g
+s/id_rol/rol/g
+s/dias_edicion_caso/diasedicion/g
+s/id_rango_edad/id_rangoedad/g
+s/id_sector_social/id_sectorsocial/g
+s/id_vinculo_estado/id_vinculoestado/g
+s/id_organizacion_armada/organizacionarmada/g
+s/id_papa/papa/g
+s/id_persona1/persona1/g
+s/id_persona2/persona2/g
+s/id_tipo/id_trelacion/g
+s/personas_aprox/personasaprox/g
+s/ubicacion_fisica/ubicacionfisica/g
+s/id_prensa/id_ffrecuente/g
+s/id_fuente_directa/id_fotra/g
+s/fecha_inicio/fechainicio/g
+

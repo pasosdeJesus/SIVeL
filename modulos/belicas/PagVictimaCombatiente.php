@@ -352,15 +352,15 @@ class PagVictimaCombatiente extends PagBaseMultiple
             && (!isset($valores['alias']) || $valores['alias'] == '')
             && (!isset($valores['edad']) || $valores['edad'] == '')
             && (!isset($valores['sexo']) || $valores['sexo'] == 'S')
-            && (!isset($valores['id_rango_edad'])
-            || $valores['id_rango_edad']==DataObjects_Rangoedad::idSinInfo()
+            && (!isset($valores['id_rangoedad'])
+            || $valores['id_rangoedad']==DataObjects_Rangoedad::idSinInfo()
             )
-            && (!isset($valores['id_sector_social'])
-            || $valores['id_sector_social']==
+            && (!isset($valores['id_sectorsocial'])
+            || $valores['id_sectorsocial']==
                 DataObjects_Sectorsocial::idSinInfo()
             )
-            && (!isset($valores['id_vinculo_estado'])
-            || $valores['id_vinculo_estado']==
+            && (!isset($valores['id_vinculoestado'])
+            || $valores['id_vinculoestado']==
                 DataObjects_Vinculoestado::idSinInfo()
                 )
             && (!isset($valores['id_filiacion'])
@@ -373,8 +373,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
             || $valores['id_organizacion']==
                 DataObjects_Organizacion::idSinInfo()
             )
-            && (!isset($valores['id_organizacion_armada'])
-            || $valores['id_organizacion_armada']==
+            && (!isset($valores['organizacionarmada'])
+            || $valores['organizacionarmada']==
                 DataObjects_Presponsable::idSinInfo()
                 )
             ;
@@ -385,10 +385,10 @@ class PagVictimaCombatiente extends PagBaseMultiple
             return false;
         }
         verifica_sin_CSRF($valores);
-        if ($valores['id_rango_edad']!=DataObjects_Rangoedad::idSinInfo()
+        if ($valores['id_rangoedad']!=DataObjects_Rangoedad::idSinInfo()
             && $valores['edad'] != ''
         ) {
-            $r = (int)var_escapa($valores['id_rango_edad'], $db);
+            $r = (int)var_escapa($valores['id_rangoedad'], $db);
             $e = var_escapa($valores['edad'], $db);
             if (!verifica_edad_y_rango($e, $r)) {
                 error_valida(
@@ -406,7 +406,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
                 );
                 return false;
             }
-            $valores['id_rango_edad'] = $re;
+            $valores['id_rangoedad'] = $re;
         }
 
         if ((!isset($_SESSION['forma_modo'])
@@ -509,12 +509,12 @@ class PagVictimaCombatiente extends PagBaseMultiple
             $r .= $dresultado->nombre;
             $dresultado = $dcombatiente->getLink('id_resultado_agresion');
             $r .= " (".trim($dresultado->nombre).")";
-            if ($dcombatiente->id_sector_social!=
+            if ($dcombatiente->id_sectorsocial!=
                 DataObjects_Sectorsocial::idSinInfo()
             ) {
                     $r .= "\n    ".$GLOBALS['etiqueta']['sectorsocial'] . ": ";
                     $dsectorsocial = $dcombatiente->
-                        getLink('id_sector_social');
+                        getLink('id_sectorsocial');
                     $r .= $dsectorsocial->nombre;
                 }
             if ($dcombatiente->id_profesion!=
@@ -524,13 +524,13 @@ class PagVictimaCombatiente extends PagBaseMultiple
                     $dprofesion = $dcombatiente->getLink('id_profesion');
                     $r .= $dprofesion->nombre;
                 }
-            if ($dcombatiente->id_organizacion_armada!=
+            if ($dcombatiente->organizacionarmada!=
                 DataObjects_Presponsable::idSinInfo()
             ) {
                     $r .= "\n    " .
                         $GLOBALS['etiqueta']['organizacion_armada'] . ": ";
                     $dorgarmada = $dcombatiente->
-                        getLink('id_organizacion_armada');
+                        getLink('organizacionarmada');
                     $r .= $dorgarmada->nombre;
                 }
             $sep = "\n\n    ";
@@ -551,11 +551,11 @@ class PagVictimaCombatiente extends PagBaseMultiple
         $r ="";
         while ($dcombatiente->fetch()) {
             $r .= trim($dcombatiente->nombre);
-            if ($dcombatiente->id_organizacion_armada!=
+            if ($dcombatiente->organizacionarmada!=
                 DataObjects_Presponsable::idSinInfo()
             ) {
                     $dorg = $dcombatiente->
-                        getLink('id_organizacion_armada');
+                        getLink('organizacionarmada');
                     $r .= " / ".trim($dorg->nombre);
                 }
             if (isset($dcombatiente->id_resultado_agresion)) {
@@ -574,7 +574,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
         $q = "SELECT COUNT(id_combatiente) FROM " .
         "combatiente_presponsable, combatiente WHERE " .
         "combatiente.id_caso='" . $idcaso . "' AND " .
-        "id_p_responsable='" . $idpres . "' AND " .
+        "id_presponsable='" . $idpres . "' AND " .
         "combatiente.id=id_combatiente";
         $nr = $db->getOne($q);
         if ($nr > 0) {

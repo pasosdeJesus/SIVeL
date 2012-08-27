@@ -472,7 +472,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
             $cls = array('Contextos' => array('caso_contexto', 'id_contexto'),
             'Antecedentes' => array('antecedente_caso', 'id_antecedente'));
             // 'caso_presponsable' => array(
-            // 'caso_presponsable', 'id_caso,id_p_responsable,id'));
+            // 'caso_presponsable', 'id_caso,id_presponsable,id'));
         }
         foreach ($cls as $eti => $clm) {
             if (count($clm) == 2) {

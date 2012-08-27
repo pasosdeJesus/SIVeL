@@ -37,7 +37,7 @@ class DataObjects_Caso_presponsable extends DB_DataObject_SIVeL
 
     var $__table = 'caso_presponsable';     // table name
     var $id_caso;                         // int4(4)  multiple_key
-    var $id_p_responsable;                // int4(4)  multiple_key
+    var $id_presponsable;                // int4(4)  multiple_key
     var $tipo;                            // int4(4)  not_null
     var $bloque;                          // varchar(-1)
     var $frente;                          // varchar(-1)
@@ -47,11 +47,11 @@ class DataObjects_Caso_presponsable extends DB_DataObject_SIVeL
     var $otro;                            // varchar(-1)
     var $id;                              // int4(4)  multiple_key
 
-    var $fb_preDefOrder = array('id_p_responsable',
+    var $fb_preDefOrder = array('id_presponsable',
         'tipo', 'bloque', 'frente', 'division', 'brigada', 'batallon',
         'otro'
     );
-    var $fb_fieldsToRender = array('id_p_responsable',
+    var $fb_fieldsToRender = array('id_presponsable',
         'tipo', 'bloque', 'frente', 'division', 'brigada', 'batallon',
         'otro'
     );
@@ -61,14 +61,14 @@ class DataObjects_Caso_presponsable extends DB_DataObject_SIVeL
     )
     );
     var $fb_addFormHeader = false;
-    var $fb_excludeFromAutoRules = array('id_p_responsable', 'tipo');
+    var $fb_excludeFromAutoRules = array('id_presponsable', 'tipo');
 
     function __construct()
     {
         parent::__construct();
 
         $this->fb_fieldLabels = array (
-            'id_p_responsable' => _('Presunto Responsable'),
+            'id_presponsable' => _('Presunto Responsable'),
             'tipo' => _('Bando'),
             'bloque' => _('Bloque'),
             'frente' => _('Frente'),
@@ -107,8 +107,8 @@ class DataObjects_Caso_presponsable extends DB_DataObject_SIVeL
             HTML_QuickForm::createElement('hidden', 'id_caso')
         );
 
-        if (!isset($this->id_p_responsable)) {
-            $this->id_p_responsable= '';
+        if (!isset($this->id_presponsable)) {
+            $this->id_presponsable= '';
         }
         $formbuilder->enumOptionsCallback = array($this,
             "enumCallback"
@@ -126,7 +126,7 @@ class DataObjects_Caso_presponsable extends DB_DataObject_SIVeL
     function postGenerateForm(&$form, &$formbuilder)
     {
         parent::postGenerateForm($form, $formbuilder);
-        $e =& $form->getElement('id_p_responsable');
+        $e =& $form->getElement('id_presponsable');
         $e->addOption('', '');
 
         $sel =& $form->getElement('bloque');
@@ -178,7 +178,7 @@ class DataObjects_Caso_presponsable extends DB_DataObject_SIVeL
     {
         parent::aRelato($ar, $dad);
 
-        $pr = $this->getLink('id_p_responsable');
+        $pr = $this->getLink('id_presponsable');
         $ar['nombre'] = $pr->nombre;
 
         return $ar;

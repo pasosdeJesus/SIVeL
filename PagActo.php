@@ -107,7 +107,7 @@ class EliminaActo extends HTML_QuickForm_Action
         assert($_REQUEST['eliminaacto'] != null);
 
         $dacto=& objeto_tabla('acto');
-        list($dacto->id_p_responsable, $dacto->id_categoria,
+        list($dacto->id_presponsable, $dacto->id_categoria,
             $dacto->id_persona
         ) = explode(':', var_escapa($_REQUEST['eliminaacto']));
         $dacto->id_caso = $_SESSION['basicos_id'];
@@ -144,7 +144,7 @@ class EliminaActocolectivo extends HTML_QuickForm_Action
         assert($_REQUEST['eliminaactocolectivo'] != null);
 
         $dactocolectivo = & objeto_tabla('actocolectivo');
-        list($dactocolectivo->id_p_responsable, $dactocolectivo->id_categoria,
+        list($dactocolectivo->id_presponsable, $dactocolectivo->id_categoria,
             $dactocolectivo->id_grupoper
         ) = explode(':', var_escapa($_REQUEST['eliminaactocolectivo']));
         $dactocolectivo->id_caso = $_SESSION['basicos_id'];
@@ -221,8 +221,8 @@ class PagActo extends PagBaseSimple
 
         $dacto->id_caso = $idcaso;
         $dactocolectivo->id_caso = $idcaso;
-        $dacto->orderBy('id_p_responsable, id_categoria, id_persona');
-        $dactocolectivo->orderBy('id_p_responsable, id_categoria, id_grupoper');
+        $dacto->orderBy('id_presponsable, id_categoria, id_persona');
+        $dactocolectivo->orderBy('id_presponsable, id_categoria, id_grupoper');
 
         $this->bacto =& DB_DataObject_FormBuilder::create(
             $dacto,
@@ -300,10 +300,10 @@ class PagActo extends PagBaseSimple
         $sel->setSize(5);
         $op = htmlentities_array(
             $db->getAssoc(
-                "SELECT id_p_responsable, nombre
+                "SELECT id_presponsable, nombre
                 FROM caso_presponsable, presponsable
                 WHERE id_caso = $idcaso AND
-                presponsable.id = id_p_responsable
+                presponsable.id = id_presponsable
                 ORDER BY nombre"
             )
         );
@@ -315,10 +315,10 @@ class PagActo extends PagBaseSimple
         $sel->setSize(5);
         $op = htmlentities_array(
             $db->getAssoc(
-                "SELECT id, id_tipo_violencia || id || ' ' || nombre
+                "SELECT id, id_tviolencia || id || ' ' || nombre
                 FROM categoria
                 WHERE tipocat = 'I'  AND fechadeshabilitacion IS NULL
-                ORDER BY id_tipo_violencia, id"
+                ORDER BY id_tviolencia, id"
             )
         );
         $sel->loadArray($op);
@@ -362,10 +362,10 @@ class PagActo extends PagBaseSimple
             $sel->setSize(5);
             $op = htmlentities_array(
                 $db->getAssoc(
-                    "SELECT id_p_responsable, nombre " .
+                    "SELECT id_presponsable, nombre " .
                     " FROM caso_presponsable, presponsable " .
                     " WHERE id_caso=$idcaso AND " .
-                    "presponsable.id=id_p_responsable " .
+                    "presponsable.id=id_presponsable " .
                     "ORDER BY nombre "
                 )
             );
@@ -379,10 +379,10 @@ class PagActo extends PagBaseSimple
             $sel->setSize(5);
             $op = htmlentities_array(
                 $db->getAssoc(
-                    "SELECT id, id_tipo_violencia || id || ' ' || nombre
+                    "SELECT id, id_tviolencia || id || ' ' || nombre
                     FROM categoria
                     WHERE tipocat = 'C' AND fechadeshabilitacion IS NULL
-                    ORDER BY id_tipo_violencia, id"
+                    ORDER BY id_tviolencia, id"
                 )
             );
             $sel->loadArray($op);
@@ -504,7 +504,7 @@ class PagActo extends PagBaseSimple
                 foreach (var_escapa($valores['categorias']) as $ca) {
                     foreach (var_escapa($valores['victimas']) as $vi) {
                         $da->id_caso = $idcaso;
-                        $da->id_p_responsable = $pr;
+                        $da->id_presponsable = $pr;
                         $da->id_categoria = $ca;
                         $da->id_persona = $vi;
                         if ($da->find() == 0) {
@@ -523,7 +523,7 @@ class PagActo extends PagBaseSimple
                 foreach (var_escapa($valores['categoriascol']) as $ca) {
                     foreach (var_escapa($valores['victimascol']) as $vi) {
                         $dactocol->id_caso = $idcaso;
-                        $dactocol->id_p_responsable = $pr;
+                        $dactocol->id_presponsable = $pr;
                         $dactocol->id_categoria = $ca;
                         $dactocol->id_grupoper = $vi;
                         if ($dactocol->find() == 0) {
