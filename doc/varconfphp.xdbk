@@ -1,48 +1,52 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<varlistentry><term><literal>organizacion_responsable</literal></term>
-<listitem><para> Organización responsable, aparecerá al exportar relatos</para></listitem></varlistentry>
-<varlistentry><term><literal>derechos</literal></term>
-<listitem><para> Derechos de reproducción por defecto, aparecerán al exportar relatos</para></listitem></varlistentry>
 <varlistentry><term><literal>DIR_RELATOS</literal></term>
-<listitem><para> Derechos de reproducción por defecto, aparecerán al exportar relatos</para></listitem></varlistentry>
-<varlistentry><term><literal>PREF_RELATOS</literal></term>
-<listitem><para> Derechos de reproducción por defecto, aparecerán al exportar relatos</para></listitem></varlistentry>
+<listitem><para> Directorio del sitio relativo a $dirserv</para></listitem></varlistentry>
 <varlistentry><term><literal>estilo_nombres</literal></term>
-<listitem><para> Derechos de reproducción por defecto, aparecerán al exportar relatos</para></listitem></varlistentry>
+<listitem><para> Directorio del sitio relativo a $dirserv</para></listitem></varlistentry>
+<varlistentry><term><literal>organizacion_responsable</literal></term>
+<listitem><para> OrganizaciÃ³n responsable, aparecerÃ¡ al exportar relatos</para></listitem></varlistentry>
+<varlistentry><term><literal>PREF_RELATOS</literal></term>
+<listitem><para> OrganizaciÃ³n responsable, aparecerÃ¡ al exportar relatos</para></listitem></varlistentry>
+<varlistentry><term><literal>derechos</literal></term>
+<listitem><para> Derechos de reproducciÃ³n por defecto, aparecerÃ¡n al exportar relatos</para></listitem></varlistentry>
 <varlistentry><term><literal>iglesias_cristianas</literal></term>
 <listitem><para> Incluir iglesias cristianas en ficha</para></listitem></varlistentry>
-<varlistentry><term><literal>ficha_color_fondo</literal></term>
-<listitem><para> Incluir iglesias cristianas en ficha</para></listitem></varlistentry>
-<varlistentry><term><literal>dir_anexos</literal></term>
-<listitem><para> Directorio donde se almacenan anexos</para></listitem></varlistentry>
+<varlistentry><term><literal>consulta_web_fecha_max</literal></term>
+<listitem><para> Fecha mÃ¡xima de caso por usar en consulta web.</para></listitem></varlistentry>
+<varlistentry><term><literal>consulta_web_fecha_min</literal></term>
+<listitem><para> Fecha mÃ­nima de caso por consultar en web</para></listitem></varlistentry>
+<varlistentry><term><literal>consulta_web_max</literal></term>
+<listitem><para> MÃ¡ximo de registros por retornar en una consulta web (0 es ilimitado)</para></listitem></varlistentry>
+<varlistentry><term><literal>anio_min</literal></term>
+<listitem><para> AÃ±o mÃ­nimo que puede elegirse en fechas de la Ficha</para></listitem></varlistentry>
+<varlistentry><term><literal>actoscolectivos</literal></term>
+<listitem><para> Indica si en la pestaÃ±a Actos deben presentarse actos colectivos</para></listitem></varlistentry>
 <varlistentry><term><literal>reporte_tabla_fila_totales</literal></term>
-<listitem><para> Directorio donde se almacenan anexos</para></listitem></varlistentry>
-<varlistentry><term><literal>modulo</literal></term>
-<listitem><para> Directorio donde se almacenan anexos</para></listitem></varlistentry>
+<listitem><para> Indica si en la pestaÃ±a Actos deben presentarse actos colectivos</para></listitem></varlistentry>
 <varlistentry><term><literal>PALABRA_SITIO</literal></term>
 <listitem><para> Palabra clave para algunos cifrados.</para></listitem></varlistentry>
 <varlistentry><term><literal>deshabilita_manejo_usuarios</literal></term>
 <listitem><para> Deshabilita operaciones con usuarios</para></listitem></varlistentry>
+<varlistentry><term><literal>DB_Debug</literal></term>
+<listitem><para> Nivel de depuraciÃ³n para DB_DataObject. 0 a 5.</para></listitem></varlistentry>
+<varlistentry><term><literal>ficha_tabuladores</literal></term>
+<listitem><para> PestaÃ±as de la Ficha  de captura</para></listitem></varlistentry>
+<varlistentry><term><literal>nueva_ficha_tabuladores</literal></term>
+<listitem><para> Solicitudes de nuevas pestaÃ±as en ficha de captura</para></listitem></varlistentry>
+<varlistentry><term><literal>ficha_color_fondo</literal></term>
+<listitem><para></para></listitem></varlistentry>
 <varlistentry><term><literal>MENS_ORTOGRAFIA</literal></term>
-<listitem><para> Mensaje por presentar si se encuentran fallas ortográficas al validar</para></listitem></varlistentry>
+<listitem><para> Mensaje por presentar si se encuentran fallas ortogrÃ¡ficas al validar</para></listitem></varlistentry>
 <varlistentry><term><literal>REPORTA_FALLAS</literal></term>
-<listitem><para> Mensaje por presentar en la página principal para indicar donde reportar fallas.</para></listitem></varlistentry>
+<listitem><para> Mensaje por presentar en la pÃ¡gina principal para indicar donde reportar fallas.</para></listitem></varlistentry>
 <varlistentry><term><literal>ancho-tabla</literal></term>
 <listitem><para> Ancho en porcentaje de tablas en reporte general.</para></listitem></varlistentry>
 <varlistentry><term><literal>reporte_indenta_victimas</literal></term>
-<listitem><para> Determina si se indentan o no víctimas en reporte general y revista</para></listitem></varlistentry>
-<varlistentry><term><literal>consulta_web_fecha_max</literal></term>
-<listitem><para> Fecha máxima de caso por usar en consulta web.</para></listitem></varlistentry>
-<varlistentry><term><literal>consulta_web_fecha_min</literal></term>
-<listitem><para> Fecha mínima de caso por consultar en web</para></listitem></varlistentry>
-<varlistentry><term><literal>consulta_web_max</literal></term>
-<listitem><para> Máximo de registros por retornar en una consulta web (0 es ilimitado)</para></listitem></varlistentry>
-<varlistentry><term><literal>anio_min</literal></term>
-<listitem><para> Año mínimo que puede elegirse en fechas de la Ficha</para></listitem></varlistentry>
+<listitem><para> Determina si se indentan o no vÃ­ctimas en reporte general y revista</para></listitem></varlistentry>
 <varlistentry><term><literal>receptor_correo</literal></term>
-<listitem><para> Dirección de correo a la cual enviar mensajes cifrados.</para></listitem></varlistentry>
+<listitem><para> DirecciÃ³n de correo a la cual enviar mensajes cifrados.</para></listitem></varlistentry>
 <varlistentry><term><literal>emisor_correo</literal></term>
-<listitem><para> Dirección de la cual provendrán mensajes cifrados.</para></listitem></varlistentry>
+<listitem><para> DirecciÃ³n de la cual provendrÃ¡n mensajes cifrados.</para></listitem></varlistentry>
 <varlistentry><term><literal>cabezote_consulta_web</literal></term>
 <listitem><para> Cabezote en consulta_web.</para></listitem></varlistentry>
 <varlistentry><term><literal>pie_consulta_web</literal></term>
@@ -54,18 +58,26 @@
 <varlistentry><term><literal>pie_consulta_web_correo</literal></term>
 <listitem><para> Pie para enviar correos desde consulta_web.</para></listitem></varlistentry>
 <varlistentry><term><literal>cabezote_principal</literal></term>
-<listitem><para> Archivo HTML que se pone como cabezote (antes del menú) del menú principal</para></listitem></varlistentry>
+<listitem><para> Archivo HTML que se pone como cabezote (antes del menÃº) del menÃº principal</para></listitem></varlistentry>
 <varlistentry><term><literal>centro_principal</literal></term>
-<listitem><para> Archivo HTML que se pone en el centro del menú principal</para></listitem></varlistentry>
+<listitem><para> Archivo HTML que se pone en el centro del menÃº principal</para></listitem></varlistentry>
 <varlistentry><term><literal>fondo</literal></term>
 <listitem><para> Imagen de fondo</para></listitem></varlistentry>
-<varlistentry><term><literal>actoscolectivos</literal></term>
-<listitem><para> Indica si en la pestaña Actos deben presentarse actos colectivos</para></listitem></varlistentry>
-<varlistentry><term><literal>ficha_tabuladores</literal></term>
-<listitem><para> Pestañas de la Ficha  de captura</para></listitem></varlistentry>
 <varlistentry><term><literal>menu_tablas_basicas</literal></term>
-<listitem><para> Tablas básicas</para></listitem></varlistentry>
+<listitem><para> Tablas bÃ¡sicas</para></listitem></varlistentry>
 <varlistentry><term><literal>etiqueta</literal></term>
 <listitem><para> Etiquetas que aparecen en la interfaz</para></listitem></varlistentry>
 <varlistentry><term><literal>cw_ncampos</literal></term>
+<listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
+<varlistentry><term><literal>m_rol</literal></term>
+<listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
+<varlistentry><term><literal>m_opcion</literal></term>
+<listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
+<varlistentry><term><literal>mes</literal></term>
+<listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
+<varlistentry><term><literal>mes_corto</literal></term>
+<listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
+<varlistentry><term><literal>mreglareq</literal></term>
+<listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
+<varlistentry><term><literal>mreglavio</literal></term>
 <listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
