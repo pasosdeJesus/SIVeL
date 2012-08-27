@@ -40,7 +40,7 @@ hace_consulta(
 $pres = " FROM replicadas WHERE (id_p_responsable, contada_en, " .
     " id_persona, id_caso) NOT IN (select id_p_responsable, " .
     " id_categoria, id_persona, id_caso from acto)";
-$s = "SELECT COUNT(*) FROM $pres";
+$s = "SELECT COUNT(*) $pres";
 $ni = $db->getOne($s);
 sin_error_pear($ni);
 echo " Se insertarán " . (int)$ni . " actos<br>";
@@ -64,7 +64,7 @@ $pres = " FROM replicadasc " .
     " WHERE (id_p_responsable, contada_en, id_grupoper, id_caso) " .
     " NOT IN (SELECT id_p_responsable, id_categoria, id_grupoper, id_caso " .
     " FROM actocolectivo)";
-$s = "SELECT COUNT(*) FROM $pres ";
+$s = "SELECT COUNT(*) $pres ";
 $ni = $db->getOne($s);
 sin_error_pear($ni);
 echo " Se insertarán " . (int)$ni . " actos colectivos<br>";
