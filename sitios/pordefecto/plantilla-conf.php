@@ -41,6 +41,7 @@ $dirsitio = "sitios/sivel12";
  */
 $GLOBALS['PALABRA_SITIO'] = 'sigamos el ejemplo de Jesús';
 
+
 // RELATOS
 
 /** Organización responsable, aparecerá al exportar relatos

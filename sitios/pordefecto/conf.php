@@ -159,6 +159,10 @@ $GLOBALS['PALABRA_SITIO'] = 'sigamos el ejemplo de Jesús';
  */
 $GLOBALS['deshabilita_manejo_usuarios'] = false;
 
+/** Nivel de depuración para DB_DataObject. 0 a 5.
+ * @global string $GLOBALS['DB_Debug']
+ */
+$GLOBALS['DB_Debug'] = 0;
 
 /** Pestañas de la Ficha  de captura
     'id', 'Clase', 'orden en eliminación (no rep)' */

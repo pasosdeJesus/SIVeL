@@ -2260,7 +2260,7 @@ if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {
         if ($a['title'] == 'Reportes'
-            || $a['sub'][0]['url'] == 'parametros_reporte_consolidado'
+            || $a['sub'][0]['url'] == 'pconsolidado'
         ) {
             $hayrep = true;
         }
@@ -2269,7 +2269,7 @@ if (isset($GLOBALS['menu_tablas_basicas'])) {
         echo "<font color='red'>En el arreglo <tt>menu_tablas_basicas</tt> " .
             "del archivo <tt>" .
             htmlentities(
-                $_SESSION['dirsitio'] . "/conf.php", ENT_COMPAT, 'UTF-8'
+                $_SESSION['dirsitio'] . "/conf_int.php", ENT_COMPAT, 'UTF-8'
             ) . "</tt> falta:
 <pre>
     array('title' => 'Reportes', 'url'=> null, 'sub' => array(

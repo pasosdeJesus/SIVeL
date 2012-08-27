@@ -43,7 +43,7 @@ $options = array(
     'require_prefix' => 'DataObjects/',
     'class_prefix' => 'DataObjects_',
     'extends_location' => 'DataObjects_',
-    'debug' => '0',
+    'debug' => isset($GLOBALS['DB_Debug']) ? $GLOBALS['DB_Debug'] : '0',
 );
 
 $_DB_DATAOBJECT_FORMBUILDER['CONFIG'] = array (
