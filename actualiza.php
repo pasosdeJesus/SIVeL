@@ -2281,7 +2281,7 @@ if (!aplicado($idac)) {
         array("persona_trelacion", "id_persona1", "persona1"),
         array("persona_trelacion", "id_persona2", "persona2"),
         array("persona_trelacion", "id_tipo", "id_trelacion"),
-        array("caso", "personas_aprox", "personasaprox"),
+        array("victimacolectiva", "personas_aprox", "personasaprox"),
         array("caso", "ubicacion_fisica", "ubicacionfisica"),
         array("caso", "id_prensa", "id_ffrecuente"),
         array("caso", "id_fuente_directa", "id_fotra"),
