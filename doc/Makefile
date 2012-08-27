@@ -109,8 +109,9 @@ limpia:
 ../Derechos.txt: html/index.html 
 	$(W3M) $(W3M_OPT) -dump html/index.html | awk -f herram/conthtmldoc.awk | awk '/.*/ {if (e>=1) { print $$0; }} /Documentación/ { e=e+1; } BEGIN { e=0; } ' > ../Derechos.txt
 
-varconfphp.xdbk: ../sitios/pordefecto/conf.php.plantilla
+varconfphp.xdbk: ../sitios/pordefecto/conf.php ../sitios/pordefecto/conf_int.php
 	echo "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" > varconfphp.xdbk
-	awk -f herram/convar.awk ../sitios/pordefecto/conf.php.plantilla >> varconfphp.xdbk
+	awk -f herram/convar.awk ../sitios/pordefecto/conf.php >> varconfphp.xdbk
+	awk -f herram/convar.awk ../sitios/pordefecto/conf_int.php >> varconfphp.xdbk
 
 

@@ -1,34 +1,22 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
 <variablelist>
-	<varlistentry><term>Versión 1.2a1 (Oct.2012)</term>
+	<varlistentry><term>Versión 1.2a1 (Ago.2012)</term>
 		<listitem>
 			<para><itemizedlist>
 					<listitem>
-						<para>Configuración más sencilla de módulos.  Basta agregar el módulo en la variable <literal>modulos</literal> del archivo de configuración del sitio y desde el menú principal elegir 
-<menuchoice><guimenu>Otros</guimenu><guimenuitem>Actualizar</guimenuitem></menuchoice>.  
+						<para>Para usuarios finales: Activado Soporte de Idiomas Nativos y UTF8. Permite especificar al usuario el idioma que prefiere para la interfaz y la traduce a ese idioma.  En el momento hay traducciones a español e inglés.
 						</para>
 					</listitem>
-
-
 					<listitem>
-						<para>Activa PostGIS al crear base de datos
+						<para>Administradores: Se dividió el archivo de configuración en una parte para servidor (e.g base de datos y módulos) y otra para interfaz.  Activa PostGIS al crear base de datos.
+							Configuración más sencilla de módulos.  Basta agregar el módulo en la variable <literal>modulos</literal> del archivo de configuración del sitio y desde el menú principal elegir 
+							<menuchoice><guimenu>Otros</guimenu><guimenuitem>Actualizar</guimenuitem></menuchoice>.  
 						</para>
 					</listitem>
-
 					<listitem>
-						<para>Activado Soporte de Idiomas Nativos. Permite especificar al usuario el idioma que prefiere para la interfaz y la traduce a ese idioma.  En el momento hay traducciones a español e inglés.
-						</para>
+						<para>Para desarrolladores: programadoresafinado para PHP 5.3. Base de datos debe estar en UTF-8.  Salida enviada al navegador en UTF-8. Fuentes en UTF-8. Estándares de nomenclatura SQL.</para>
 					</listitem>
-                    <listitem>
-                        <para>Codificación de caracteres: Base de datos debe estar en UTF-8.  Salida enviada al navegador en UTF-8. Fuentes en UTF-8. </para>
-		</listitem>
-		<listitem>
-			<para>Administradores: Se dividió el archivo de configuración en una parte para servidor (e.g base de datos y módulos) y otra para interfaz.</para>
-		</listitem>
-		<listitem>
-			<para>Otras mejoras: afinado para PHP 5.3</para>
-		</listitem>
 			</itemizedlist></para>
 		</listitem>
 	</varlistentry>
