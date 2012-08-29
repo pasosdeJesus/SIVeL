@@ -101,6 +101,39 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Renombra tablas');
 }
 
+$idac = '1.2-bel2';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db,
+        "ALTER TABLE combatiente RENAME COLUMN id_resultado_agresion TO "
+        . "resagresion", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE combatiente RENAME COLUMN id_rango_edad TO "
+        . "id_rangoedad", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE combatiente RENAME COLUMN id_sector_social TO "
+        . "id_sectorsocial", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE combatiente RENAME COLUMN id_vinculo_estado TO "
+        . "id_vinculoestado", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE combatiente RENAME COLUMN id_organizacion_armada TO "
+        . "organizacionarmada", false
+    );
+
+
+    aplicaact($act, $idac, 'Renombra tablas');
+}
+
+
 echo "Actualizando indices<br>";
 actualiza_indice($db, 'combatiente');
 

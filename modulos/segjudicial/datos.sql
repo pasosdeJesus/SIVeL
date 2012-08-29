@@ -1,6 +1,8 @@
 -- Datos aportados por Humanidad Vigente
 -- Dominio público con autorización de Yenly Mendez (Nov.2009)
 
+SET client_encoding = 'LATIN1';
+
 INSERT INTO tipo_proceso (id, nombre, observaciones) VALUES (2, 'PENAL ORDINARIO', '');
 INSERT INTO tipo_proceso (id, nombre, observaciones) VALUES (3, 'PENAL MILITAR', '');
 INSERT INTO tipo_proceso (id, nombre, observaciones) VALUES (4, 'ADMINISTRATIVO', '');

@@ -62,9 +62,9 @@ CREATE TABLE caso (
 CREATE SEQUENCE pconsolidado_seq;
 
 CREATE TABLE pconsolidado (
-	id INTEGER PRIMARY KEY DEFAULT (nextval('parametros_reporte_consolidado_seq')),
+	id INTEGER PRIMARY KEY DEFAULT (nextval('pconsolidado_seq')),
 	rotulo VARCHAR(25) NOT NULL,
-	VARCHAR(25) NOT NULL,
+	tipoviolencia VARCHAR(25) NOT NULL,
 	clasificacion VARCHAR(25) NOT NULL,
 	peso	INTEGER DEFAULT '0',
 	fechacreacion DATE NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE categoria (
 	),
 	id_supracategoria INTEGER NOT NULL,
 	id_tviolencia VARCHAR(1) NOT NULL REFERENCES tviolencia,
-	id_pconsolidado INTEGER REFERENCES parametros_reporte_consolidado (id),
+	id_pconsolidado INTEGER REFERENCES pconsolidado (id),
 	contadaen INTEGER REFERENCES categoria,
 	tipocat	CHAR DEFAULT 'I' CHECK (
 		tipocat='I' OR tipocat='C' OR tipocat='O'
@@ -604,9 +604,9 @@ CREATE TABLE caso_ffrecuente (
 	ubicacion VARCHAR(100),  -- En interfaz descripción página
 	clasificacion VARCHAR(100), -- Categoria que esta fuente clasifica 
 	ubicacionfisica VARCHAR(100),
-	id_prensa INTEGER REFERENCES ffrecuente,
+	id_ffrecuente INTEGER REFERENCES ffrecuente,
 	id_caso	INTEGER REFERENCES caso,
-	PRIMARY KEY(fecha, id_prensa,id_caso)
+	PRIMARY KEY(fecha, id_ffrecuente, id_caso)
 );
 
 CREATE TABLE comunidad_filiacion (

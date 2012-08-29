@@ -15,8 +15,8 @@ CREATE TABLE anexo (
 	fecha   DATE NOT NULL,
 	descripcion     VARCHAR(1500) NOT NULL,
 	archivo VARCHAR(255) NOT NULL,
-	id_prensa INTEGER REFERENCES prensa,
-	fecha_prensa DATE,
-	id_fuente_directa INTEGER REFERENCES fuente_directa
+	id_ffrecuente INTEGER REFERENCES ffrecuente,
+	fechaffrecuente DATE,
+	id_fotra INTEGER REFERENCES fotra
 );
 

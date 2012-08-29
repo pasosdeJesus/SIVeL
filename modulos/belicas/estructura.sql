@@ -8,7 +8,7 @@ CREATE TABLE combatiente (
 	alias VARCHAR(100),
 	edad INTEGER CHECK (edad IS NULL OR edad>=0), 
 	sexo	CHAR(1)  NOT NULL CHECK (sexo='S' OR sexo='M' OR sexo='F'), 
-	id_resultado_agresion INTEGER NOT NULL REFERENCES resultado_agresion,
+	id_resagresion INTEGER NOT NULL REFERENCES resagresion,
 	id_profesion INTEGER REFERENCES profesion,
 	id_rango_edad	INTEGER REFERENCES rango_edad,
 	id_filiacion	INTEGER	REFERENCES filiacion,

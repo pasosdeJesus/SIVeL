@@ -1,4 +1,6 @@
 
+SET client_encoding = 'LATIN1';
+
 INSERT INTO etiqueta (id, nombre, observaciones) 
 	VALUES ('1', 'SINCODH:PUBLICO', 'El documento es público');
 INSERT INTO etiqueta (id, nombre, observaciones) 
