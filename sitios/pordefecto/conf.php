@@ -189,3 +189,105 @@ $GLOBALS['nueva_ficha_tabuladores'] = array();
 $modulos = "modulos/anexos modulos/etiquetas modulos/mapag";
 
 
+// ROLES Y OPCIONES MENU
+
+/** Roles
+ * @global string $GLOBALS['m_rol']
+ */
+$GLOBALS['m_rol'] = array (
+    1 => _('Administrador'),
+    2 => _('Analista'),
+    3 => _('Consulta'),
+    4 => _('Ayudante'),
+);
+
+
+/** Opciones del menú principal
+ * @global string $GLOBALS['m_opcion']
+ */
+$GLOBALS['m_opcion'] = array (
+    10 => array('nombre' => _('Administración'), 'idpapa' => 0, 'url' => NULL),
+    11 => array(
+        'nombre' => _('Tablas Básicas'), 'idpapa' => 10,
+        'url' => 'tablas_basicas'
+    ),
+    12 => array('nombre' => _('Usuarios'), 'idpapa' => 10, 'url' => 'usyroles'),
+    20 => array('nombre' => _('Caso'), 'idpapa' => 0, 'url' => NULL),
+    21 => array('nombre' => _('Ficha'), 'idpapa' => 20, 'url' => 'captura_caso'),
+    30 => array('nombre' => _('Consultas'), 'idpapa' => 0, 'url' => NULL ),
+    31 => array(
+        'nombre' => _('Consulta Detallada'), 'idpapa' => 30, 'url' => 'consulta'
+    ),
+    32 => array(
+        'nombre' => _('Consulta Web'), 'idpapa' => 30, 'url' => 'consulta_web'
+    ),
+    40 => array('nombre' => _('Reportes'), 'idpapa' => 0, 'url' => NULL),
+    41 => array(
+        'nombre' => _('Revista'), 'idpapa' => 40,
+        'url' => 'consulta_web?mostrar=revista&sincampos=caso_id'
+    ),
+    42 => array(
+        'nombre' => _('General'), 'idpapa' => 40,
+        'url' => 'consulta_web?mostrar=general'
+    ),
+    43 => array(
+        'nombre' => _('Consolidado'), 'idpapa' => 40, 'url' => 'consolidado'
+    ),
+    44 => array(
+        'nombre' => _('General por Localizacion'), 'idpapa' => 40,
+        'url' => 'consulta_web?mostrar=general&orden=localizacion'
+    ),
+    45 => array(
+        'nombre' => _('Revista con código'), 'idpapa' => 40,
+        'url' => 'consulta_web?mostrar=revista'
+    ),
+    50 => array('nombre' => _('Conteos'), 'idpapa' => 0, 'url' => NULL),
+    51 => array(
+        'nombre' => _('V. Individuales'), 'idpapa' => 50,
+        'url' => 'estadisticas'
+    ),
+    60 => array('nombre' => _('Otros'), 'idpapa' => 0, 'url' => NULL),
+    61 => array(
+        'nombre' => _('Importar Relatos'), 'idpapa' => 60,
+        'url' => 'importaRelato'
+    ),
+    62 => array(
+        'nombre' => _('Completar Actos'), 'idpapa' => 60,
+        'url' => 'completaActos'
+    ),
+    63 => array(
+        'nombre' => _('Actualizar'), 'idpapa' => 60,
+        'url' => 'actualiza'
+    ),
+    64 => array('nombre' => _('Validar'), 'idpapa' => 60, 'url' => 'valida'),
+    65 => array(
+        'nombre' => _('Buscar repetidos'), 'idpapa' => 60,
+        'url' => 'buscaRepetidos'
+    ),
+    69 => array('nombre' => _('Salir'), 'idpapa' => 60, 'url' => 'terminar'),
+);
+
+/** Roles para los que está disponible cada opción del menú
+ * @global string $GLOBALS['m_opcion']
+ */
+$GLOBALS['m_opcion_rol'] = array (
+    0 => array(1, 2, 3, 4),
+    11 => array(1),
+    12 => array(1),
+    21 => array(1, 2),
+    31 => array(1, 2, 3),
+    41 => array(1, 2),
+    42 => array(1, 2, 4),
+    43 => array(1),
+    51 => array(1),
+    44 => array(1, 2),
+    45 => array(1, 2),
+    60 => array(1, 2, 3, 4),
+    61 => array(1, 2, 3),
+    62 => array(1),
+    63 => array(1),
+    64 => array(1, 2, 3),
+    65 => array(1, 2, 3),
+);
+
+

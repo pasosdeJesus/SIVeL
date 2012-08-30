@@ -130,7 +130,7 @@ if (!aplicado($idac)) {
     );
 
 
-    aplicaact($act, $idac, 'Renombra tablas');
+    aplicaact($act, $idac, 'Renombra campos');
 }
 
 
