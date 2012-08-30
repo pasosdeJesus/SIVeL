@@ -55,8 +55,8 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
             $idcaso = $this->bcaso_ffrecuente->_do->id_caso;
             $vf = "'{$this->bcaso_ffrecuente->_do->fecha}'";
             $vp = "'{$this->bcaso_ffrecuente->_do->id_ffrecuente}'";
-            $q =  "UPDATE anexo SET fecha_prensa=NULL, id_ffrecuente=NULL" .
-                " WHERE id_caso='$idcaso' AND fecha_prensa=$vf " .
+            $q =  "UPDATE anexo SET fechaffrecuente=NULL, id_ffrecuente=NULL" .
+                " WHERE id_caso='$idcaso' AND fechaffrecuente=$vf " .
                 " AND id_ffrecuente=$vp";
             $db = $this->bcaso_ffrecuente->_do->getDatabaseConnection();
             hace_consulta($db, $q, false) ;
@@ -103,7 +103,7 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
             if ($this->bcaso_ffrecuente->_do->id_ffrecuente != null) {
                 $cor = "OR (id_ffrecuente=" .
                     "'{$this->bcaso_ffrecuente->_do->id_ffrecuente}' " .
-                    "AND fecha_prensa='{$this->bcaso_ffrecuente->_do->fecha}')";
+                    "AND fechaffrecuente='{$this->bcaso_ffrecuente->_do->fecha}')";
             } else {
                 $cor = "";
             }
@@ -146,7 +146,7 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
             $danexo = objeto_tabla('anexo');
             $danexo->id_caso = $_SESSION['basicos_id'];
             $danexo->id_ffrecuente = $this->bcaso_ffrecuente->_do->id_ffrecuente;
-            $danexo->id_fecha_prensa = $this->bcaso_ffrecuente->_do->fecha;
+            $danexo->id_fechaffrecuente = $this->bcaso_ffrecuente->_do->fecha;
             $danexo->find();
             if ($danexo->fetch()) {
                 $sel->setValue($danexo->id);
@@ -188,11 +188,11 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
                 && $valores['id_anexo'] != ''
             ) {
                 $ida = var_escapa($valores['id_anexo'], $db);
-                $q =  "UPDATE anexo SET fecha_prensa=$vf, id_ffrecuente=$vp " .
+                $q =  "UPDATE anexo SET fechaffrecuente=$vf, id_ffrecuente=$vp " .
                     "WHERE id_caso='$idcaso' AND id='$ida'";
             } else {
-                $q =  "UPDATE anexo SET fecha_prensa=NULL, id_ffrecuente=NULL" .
-                    " WHERE id_caso='$idcaso' AND fecha_prensa=$vf " .
+                $q =  "UPDATE anexo SET fechaffrecuente=NULL, id_ffrecuente=NULL" .
+                    " WHERE id_caso='$idcaso' AND fechaffrecuente=$vf " .
                     " AND id_ffrecuente=$vp";
             }
             //echo $q;

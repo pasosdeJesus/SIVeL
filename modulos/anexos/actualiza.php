@@ -70,6 +70,25 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Anexos relacionados con fuentes');
 }
 
+$idac = 'an-1.2';
+if (!aplicado($idac)) {
+    $r = hace_consulta(
+        $db, "ALTER TABLE anexo RENAME COLUMN id_prensa TO id_ffrecuente",
+        false
+    );
+    $r = hace_consulta(
+        $db, "ALTER TABLE anexo RENAME COLUMN id_fuente_directa TO id_fotra",
+        false
+    );
+    $r = hace_consulta(
+        $db, "ALTER TABLE anexo RENAME COLUMN fecha_prensa TO fechaffrecuente",
+        false
+    );
+
+
+    aplicaact($act, $idac, 'Renombrando campos');
+}
+
 
 echo "Actualizando indices<br>";
 actualiza_indice($db, 'anexo');

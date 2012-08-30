@@ -36,7 +36,7 @@ class DataObjects_Anexo extends DB_DataObject_SIVeL
     var $descripcion;                     // varchar(-1)
     var $archivo;                        // varchar(-1)
     var $id_ffrecuente;
-    var $fecha_prensa;
+    var $fechaffrecuente;
     var $id_fotra;
 
     var $nom_tabla = "Anexo";
