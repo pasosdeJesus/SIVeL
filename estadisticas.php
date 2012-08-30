@@ -20,7 +20,7 @@ require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
 
 $aut_usuario = "";
-autenticaUsuario($dsn, $aut_usuario, 21);
+autentica_usuario($dsn, $aut_usuario, 21);
 
 require_once $_SESSION['dirsitio'] . "/conf_int.php";
 require_once 'HTML/QuickForm/Controller.php';

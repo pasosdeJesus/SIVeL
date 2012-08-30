@@ -489,7 +489,7 @@ class PagOtrasFuentes extends PagBaseMultiple
             $rp->fetchInto($row);
             $dfdc->id_fotra = $row[0];
             if ($rp->fetchInto($row)) {
-                repObs(
+                rep_obs(
                     _("Hay ") . $nr .
                     _("fuentes no frecuentes con nombre como ")
                     .  $fuente->nombre_fuente
@@ -520,12 +520,12 @@ class PagOtrasFuentes extends PagBaseMultiple
             $idffrecuente = null;
             $nomf = $fuente->nombre_fuente;
             if (empty($fuente->fecha_fuente)) {
-                repObs(
+                rep_obs(
                     _("No se incluyó fuente sin fecha: ") .
                     $fuente->asXML()
                 );
             } else if (empty($fuente->nombre_fuente)) {
-                repObs(
+                rep_obs(
                     _("No se incluyó fuente sin nombre: ") .
                     $fuente->asXML()
                 );

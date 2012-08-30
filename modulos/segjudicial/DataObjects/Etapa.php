@@ -30,7 +30,7 @@ require_once 'DataObjects/Basica.php';
 class DataObjects_Etapa extends DataObjects_Basica
 {
     var $__table = 'etapa';                         // table name
-    var $id_trelacion;                              // int4(4)  not_null
+    var $id_tproceso;                              // int4(4)  not_null
     var $observaciones;                        // varchar(-1)  not_null
 
     /**
@@ -42,20 +42,20 @@ class DataObjects_Etapa extends DataObjects_Basica
         parent::__construct();
 
         $this->nom_tabla = _('Etapa');
-        $this->fb_fieldLabels['id_trelacion'] = _('Tipo de Proceso');
+        $this->fb_fieldLabels['id_tproceso'] = _('Tipo de Proceso');
     }
 
 
     var $fb_preDefOrder = array(
         'id',
-        'id_trelacion',
+        'id_tproceso',
         'nombre',
         'observaciones',
         'fechacreacion',
         'fechadeshabilitacion',
     );
     var $fb_fieldsToRender = array(
-        'id_trelacion',
+        'id_tproceso',
         'nombre',
         'observaciones',
         'fechacreacion',
@@ -63,13 +63,13 @@ class DataObjects_Etapa extends DataObjects_Basica
     );
     var $fb_addFormHeader = false;
     var $fb_fieldsRequired = array(
-        'id_trelacion',
+        'id_tproceso',
         'nombre',
         'fechacreacion',
     );
     var $fb_linkDisplayFields = array(
         'nombre',
-        'id_trelacion',
+        'id_tproceso',
     );
 
      /**

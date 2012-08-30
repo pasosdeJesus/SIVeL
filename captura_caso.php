@@ -24,7 +24,7 @@ if (!isset($dsn)) {
 }
 $aut_usuario = "";
 $accno = "";
-autenticaUsuario($dsn, $aut_usuario, 31);
+autentica_usuario($dsn, $aut_usuario, 31);
 
 
 require_once 'HTML/QuickForm/Controller.php';
@@ -307,7 +307,7 @@ class CapturaCaso extends HTML_QuickForm_Controller
      *
      * @return void
      */
-    function creaTabuladores(&$page, $attributes = null)
+    function crea_tabuladores(&$page, $attributes = null)
     {
         $here = $attributes = HTML_Common::_parseAttributes($attributes);
         $here['disabled'] = 'disabled';
@@ -398,11 +398,11 @@ class CapturaCaso extends HTML_QuickForm_Controller
         if (!isset($_SESSION['forma_modo'])
             || $_SESSION['forma_modo'] != 'busqueda'
         ) {
-                $this->deshabilitaBotones($page, array('busqueda'));
+                $this->deshabilita_botones($page, array('busqueda'));
         } else {
-                $this->deshabilitaBotones($page, array('reporte'));
-                $this->deshabilitaBotones($page, array('elimina_caso'));
-                $this->deshabilitaBotones($page, array('casonuevo'));
+                $this->deshabilita_botones($page, array('reporte'));
+                $this->deshabilita_botones($page, array('elimina_caso'));
+                $this->deshabilita_botones($page, array('casonuevo'));
         }
     }
 
@@ -417,7 +417,7 @@ class CapturaCaso extends HTML_QuickForm_Controller
      *
      * @return void
      */
-    function habilitaBotones(&$page, $events = array())
+    function habilita_botones(&$page, $events = array())
     {
         if (!is_a($page, 'HTML_QuickForm_Page')) {
             die("page no es HTML_QuickForm_page");
@@ -451,7 +451,7 @@ class CapturaCaso extends HTML_QuickForm_Controller
      *
      * @return void
      */
-    function deshabilitaBotones(&$page, $events = array())
+    function deshabilita_botones(&$page, $events = array())
     {
         if (!is_a($page, 'HTML_QuickForm_Page')) {
             die("page no es HTML_QuickForm_page");
@@ -488,7 +488,7 @@ if (isset($_GET['limpia']) && $_GET['limpia'] == 1) {
 //die("abc");
 
 $opciones = array();
-$nv = "_auth_".nomSesion();
+$nv = "_auth_".nom_sesion();
 if (isset($_SESSION[$nv]['username']) || $opciones == array()) {
     $d = objeto_tabla('caso');
     if (PEAR::isError($d)) {
@@ -496,7 +496,7 @@ if (isset($_SESSION[$nv]['username']) || $opciones == array()) {
     }
     $db =& $d->getDatabaseConnection();
     $rol = "";
-    sacaOpciones($_SESSION[$nv]['username'], $db, $opciones, $rol);
+    saca_opciones($_SESSION[$nv]['username'], $db, $opciones, $rol);
 }
 
 $captura = new CapturaCaso($opciones);

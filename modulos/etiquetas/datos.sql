@@ -22,21 +22,21 @@ INSERT INTO etiqueta (id, nombre, observaciones)
 INSERT INTO etiqueta (id, nombre, observaciones) 
 	VALUES ('10', 'DIA_INEXACTO', 'El dia del caso es inexacto');
 
-INSERT INTO actualizacion_base (id, fecha, descripcion) 
+INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('eti-1', '2011-02-22', 'Creación de tablas');
-INSERT INTO actualizacion_base (id, fecha, descripcion) 
+INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('eti-c1', '2011-02-22', 'Actualiza módulo antiguo');
-INSERT INTO actualizacion_base (id, fecha, descripcion) 
+INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('eti-d1', '2011-02-22', 'Actualiza módulo antiguo');
-INSERT INTO actualizacion_base (id, fecha, descripcion) 
+INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('eti-ir', '2011-02-22', 'Importado de Relato');
-INSERT INTO actualizacion_base (id, fecha, descripcion) 
+INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('eti-col', '2011-02-22', 'Colores');
-INSERT INTO actualizacion_base (id, fecha, descripcion) 
+INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('eti-er', '2011-05-07', 'Error en importación');
-INSERT INTO actualizacion_base (id, fecha, descripcion) 
+INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('eti-fi', '2011-07-19', 'Etiqueta fecha inexacta');
-INSERT INTO actualizacion_base (id, fecha, descripcion) 
+INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('eti-fe', '2011-07-19', 'Fechas en tablas básicas');
 
 

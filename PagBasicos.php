@@ -760,7 +760,7 @@ class PagBasicos extends PagBaseSimple
      */
     function formularioValores(&$db, $idcaso)
     {
-        $this->controller->deshabilitaBotones(
+        $this->controller->deshabilita_botones(
             $this,
             array('anterior','elimina')
         );

@@ -1005,7 +1005,12 @@ function sin_error_pear($do, $msg = "")
 {
     if (PEAR::isError($do)) {
         //debug_print_backtrace();
-        die_esc(trim($msg . " ") . $do->getMessage() . " - " . $do->getUserInfo());
+        echo_esc(trim($msg . " ") . $do->getMessage() . " - " . $do->getUserInfo());
+        echo "<br>" . _("&iquest;Ya") . " <a href='actualiza.php'>"
+            . _("actualiz&oacute;") . "</a> "
+            . _("y regener&oacute; esquema?");
+
+        exit(1);
     }
 }
 

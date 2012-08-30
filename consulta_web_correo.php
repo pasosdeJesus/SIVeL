@@ -257,7 +257,7 @@ class ConsultaWebCorreo extends HTML_QuickForm_Page
 }
 
 /* No autenticamos porque pueden usarlo usuarios no autenticados */
-$snru = nomSesion();
+$snru = nom_sesion();
 if (!isset($_SESSION) || session_name()!=$snru) {
     session_name($snru);
     session_start();

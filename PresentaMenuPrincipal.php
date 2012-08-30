@@ -97,7 +97,7 @@ class PresentaMenuPrincipal extends HTML_Menu_Renderer
         } else {
             $this->_html .= "<a href='" . $node['url'] . "'>";
         }
-        $this->_html .= $node['title'];
+        $this->_html .= _($node['title']);
         if ($level == 0) {
             $this->_html .= "</strong>";
             $this->_html .= "<ul>\n";

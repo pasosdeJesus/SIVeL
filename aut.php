@@ -103,7 +103,7 @@ function idioma($l = "es_CO")
  *
  * @return  Nada
  */
-function loginFunction()
+function login_function()
 {
     echo "<form method=\"post\" action=\"" .
         htmlspecialchars($_SERVER['PHP_SELF']) . "\">";
@@ -126,7 +126,7 @@ function loginFunction()
  *
  * @return  Nada
  */
-function noLoginFunction()
+function no_login_function()
 {
 }
 
@@ -142,7 +142,7 @@ function noLoginFunction()
  *
  * @return  Nada
  */
-function sacaOpciones($usuario, &$db, &$op, &$rol)
+function saca_opciones($usuario, &$db, &$op, &$rol)
 {
     $q = "SELECT rol FROM usuario " .
         "WHERE id='" .  $usuario . "';";
@@ -166,7 +166,7 @@ function sacaOpciones($usuario, &$db, &$op, &$rol)
  *
  * @return string Nombre de la sesión
  */
-function nomSesion()
+function nom_sesion()
 {
     $sru = $_SERVER['REQUEST_URI'];
     if (($l = strrpos($sru, '/')) === false) {
@@ -199,10 +199,10 @@ function nomSesion()
  *
  * @return mixed Conectar base de datos
  */
-function autenticaUsuario($dsn,  &$usuario, $opcion)
+function autentica_usuario($dsn,  &$usuario, $opcion)
 {
     $accno = _("Acceso no autorizado");
-    $snru = nomSesion();
+    $snru = nom_sesion();
     if (!isset($_SESSION) || session_name() != $snru) {
         session_name($snru);
         session_start();
@@ -245,9 +245,9 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
         "passwordcol" => "password",
         "cryptType" => 'sha1',
     );
-    $a = new Auth("DB", $params, "loginFunction");
+    $a = new Auth("DB", $params, "login_function");
     $a->setSessionName($snru);
-    //echo "En autenticaUsuario OJO sesion:"; print_r($a->session);
+    //echo "En autentica_usuario OJO sesion:"; print_r($a->session);
     $a->start();
     //echo "OJO snru=$snru"; die("x");
     if ($a->checkAuth()) {
@@ -258,7 +258,7 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
         $a->setExpire($texp);
         $a->setIdle($texp / 2);
 
-        $_SESSION['dirsitio'] = localizaConf();
+        $_SESSION['dirsitio'] = localiza_conf();
 
         //echo "<script>alert(document.cookie);</script>";
         $usuario = $a->getUsername();
@@ -271,7 +271,7 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
             //Prevenir session fixation
             //http://shiflett.org/articles/session-fixation
             session_regenerate_id();
-            sacaOpciones($usuario, $db, $op, $rol);
+            saca_opciones($usuario, $db, $op, $rol);
             if (count($op) == 0) {
                 echo "No tiene opciones este usuario, " .
                     "¿seguro la base está bien inicializada?";
@@ -316,7 +316,7 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
                 "passwordcol" => "password",
                 "cryptType" => 'md5',
             );
-            $b = new Auth("DB", $params, "noLoginFunction");
+            $b = new Auth("DB", $params, "no_login_function");
             $b->setSessionName($snru);
             $b->start();
             if ($b->checkAuth()) {
@@ -348,7 +348,7 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
                     ' Por favor autentiquese nuevamente'
                 );
                 echo $htmljs->endScript();
-                cierraSesion($dsn);
+                cierra_sesion($dsn);
                 exit(1);
             }
         }
@@ -359,15 +359,15 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
 
 
 /**
- * Cierra sesión iniciada con autenticaUsuario.
+ * Cierra sesión iniciada con autentica_usuario.
  *
  * @param string $dsn URL de base de datos
  *
  * @return nada
  */
-function cierraSesion($dsn)
+function cierra_sesion($dsn)
 {
-    $snru = nomSesion();
+    $snru = nom_sesion();
     if (!isset($_SESSION) || session_name() != $snru) {
         session_name($snru);
         session_start();
@@ -378,9 +378,9 @@ function cierraSesion($dsn)
         "usernamecol" => "id",
         "passwordcol" => "password"
     );
-    $a = new Auth("DB", $params, "loginFunction");
+    $a = new Auth("DB", $params, "login_function");
     $a->setSessionName($snru);
-    $nv = "_auth_" . nomSesion();
+    $nv = "_auth_" . nom_sesion();
     unset($_SESSION[$nv]);
     unset($_SESSION['_authession']);
     unset($_SESSION['id_funcionario']);
@@ -397,7 +397,7 @@ function cierraSesion($dsn)
  *
  * @return nada
  */
-function localizaConf()
+function localiza_conf()
 {
     global $dirsitio;
     $pbase = 'sivel';
@@ -424,8 +424,8 @@ function localizaConf()
     $pbase = $nn;
 
     $pref = "";
-    if (isset($_SESSION['localizaConf_pref'])) {
-        $pref = $_SESSION['localizaConf_pref'];
+    if (isset($_SESSION['localiza_conf_pref'])) {
+        $pref = $_SESSION['localiza_conf_pref'];
     }
     $dirsitio = $pref . "sitios/".strtoupper($n);
     $dirsitios = array(
@@ -476,6 +476,6 @@ function localizaConf()
     return $dirsitio;
 }
 
-$_SESSION['dirsitio'] = localizaConf();
+$_SESSION['dirsitio'] = localiza_conf();
 
 ?>

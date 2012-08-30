@@ -184,7 +184,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
             }
         }
         $idcaso = $_SESSION['basicos_id'];
-        $this->controller->creaTabuladores($this, array('class' => 'flat'));
+        $this->controller->crea_tabuladores($this, array('class' => 'flat'));
 
         $comp = isset($_SESSION['forma_modo'])
             && $_SESSION['forma_modo'] == 'busqueda'
@@ -543,7 +543,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      *
      * @return void
      */
-    static function actGlobales()
+    static function act_globales()
     {
     }
 

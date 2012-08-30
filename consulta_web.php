@@ -650,7 +650,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $aut_usuario = "";
         if (isset($_SESSION['id_funcionario'])) {
             include $_SESSION['dirsitio'] . "/conf.php";
-            autenticaUsuario($dsn, $aut_usuario, 0);
+            autentica_usuario($dsn, $aut_usuario, 0);
         }
 
 
@@ -746,7 +746,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
                     );
                 } else {
                     echo_esc(
-                        _("Falta ") . $f . _("de")
+                        _("Falta ") . $f . " " . _("de")
                         . " consultaweb_ordenarpor[$k]"
                     );
                 }
@@ -822,8 +822,8 @@ class ConsultaWeb extends HTML_QuickForm_Page
                     );
                 } else {
                     echo_esc(
-                        _("Falta") . " " . $f .
-                        _("de") . "consultaWebFormaPresentacion[$k]"
+                        _("Falta") . " " . $f . " " .
+                        _("de") . " consultaWebFormaPresentacion[$k]"
                     );
                 }
             }
@@ -957,7 +957,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
  */
 function runController()
 {
-    $snru = nomSesion();
+    $snru = nom_sesion();
     if (!isset($_SESSION) || session_name()!=$snru) {
         session_name($snru);
         session_start();
@@ -970,7 +970,7 @@ function runController()
         $d = objeto_tabla('caso');
         $db =& $d->getDatabaseConnection();
         $rol = "";
-        sacaOpciones($_SESSION[$nv]['username'], $db, $opciones, $rol);
+        saca_opciones($_SESSION[$nv]['username'], $db, $opciones, $rol);
         idioma('en_US');
         include_once $_SESSION['dirsitio'] . "/conf_int.php";
     }

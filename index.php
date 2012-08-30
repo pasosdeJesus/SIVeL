@@ -22,7 +22,7 @@ require_once 'misc.php';
 require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $aut_usuario, 0);
+$db = autentica_usuario($dsn, $aut_usuario, 0);
 require_once $_SESSION['dirsitio'] . '/conf_int.php';
 
 
@@ -131,7 +131,7 @@ function inicializa(&$db)
     $_SESSION['forma_modo'] = 'editar';
     $idbus = $GLOBALS['idbus'];
     if ($idbus <= 0) {
-        eliminaCaso($db, $idbus);
+        elimina_caso($db, $idbus);
     } else {
         die(
             "Variable Global idbus con id. de caso para búsquedas debería " .

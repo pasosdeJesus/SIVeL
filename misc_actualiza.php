@@ -31,7 +31,7 @@ require_once "DataObjects/Categoria.php";
  *
  * @return null si no encuentra variable
  */
-function valVarConf($a, $v)
+function val_var_conf($a, $v)
 {
     assert($v != "");
     if (!($f = fopen($a, "r"))) {
@@ -58,7 +58,7 @@ function valVarConf($a, $v)
  *
  * @return array vector de variables
  **/
-function extraeVarPHP($f)
+function extrae_var_php($f)
 {
     $source = file_get_contents($f);
     $tokens = token_get_all($source);
@@ -154,7 +154,7 @@ function extraeVarPHP($f)
  *
  * @return void
  */
-function muestraVarPhpEnHTML($avar)
+function muestra_var_php_html($avar)
 {
     echo "<pre>";
     foreach ($avar as $nv => $ld) {
@@ -174,7 +174,7 @@ function muestraVarPhpEnHTML($avar)
  *
  * @return string null si no encuentra variable
  */
-function valVarConfPHP($a, $v)
+function val_var_confPHP($a, $v)
 {
     assert($v != "");
     if (!($f = fopen($a, "r"))) {

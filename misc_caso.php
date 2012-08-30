@@ -31,7 +31,7 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
 }
 
 /**
- * eliminaCaso(db, idcaso) elimina el caso número idcaso usando la conexión
+ * elimina_caso(db, idcaso) elimina el caso número idcaso usando la conexión
  * a la base db.
  *
  * @param handle  &$db    Conexión a base de datos
@@ -39,7 +39,7 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
  *
  * @return void
  */
-function eliminaCaso(&$db, $idcaso)
+function elimina_caso(&$db, $idcaso)
 {
     if (!isset($idcaso) || $idcaso == "") {
         die("Sólo se eliminan casos ya ingresados");
@@ -71,22 +71,22 @@ function eliminaCaso(&$db, $idcaso)
 
 
 /**
- * Llama función actGlobales de cada una de los tabuladores de la
+ * Llama función act_globales de cada una de los tabuladores de la
  * ficha de captura.
  *
  * @return void
  */
-function actGlobales()
+function act_globales()
 {
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
         list($n, $c, $o) = $tab;
         if (($d = strrpos($c, "/"))>0) {
             $c = substr($c, $d+1);
         }
-        if (is_callable(array($c, 'actGlobales'))) {
-            call_user_func_array(array($c, 'actGlobales'), array());
+        if (is_callable(array($c, 'act_globales'))) {
+            call_user_func_array(array($c, 'act_globales'), array());
         } else {
-            echo_esc("Falta actGlobales en ($n, $c)");
+            echo_esc("Falta act_globales en ($n, $c)");
         }
     }
 }

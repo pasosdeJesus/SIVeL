@@ -217,7 +217,7 @@ function pasaPestanaFicha(&$db, $tabla_prueba, $post, $basicos_id = null,
  *
  * @return string Nombre de la sesión
  */
-function nomSesion2()
+function nom_sesion2()
 {
     $sru = $_SERVER['REQUEST_URI'];
     if (($l = strrpos($sru, '/')) === false) {
@@ -252,7 +252,7 @@ $_REQUEST['password'] = $_POST['password'] = 'sivelpruebas';
 $_REQUEST['evita_csrf'] = $_SESSION['sin_csrf'] = $_POST['evita_csrf'] = 1234;
 
 
-$snru = nomSesion2();
+$snru = nom_sesion2();
 if (!isset($_SESSION) || session_name() != $snru) {
     session_name($snru);
     session_start();
@@ -264,7 +264,7 @@ $params = array(
     "passwordcol" => "password",
     "cryptType" => 'sha1',
 );
-$a = new Auth("DB", $params, "loginFunction");
+$a = new Auth("DB", $params, "login_function");
 $a->enableLogging = true;
 $a->setSessionName($snru);
 $a->setAuth('sivelpruebas');

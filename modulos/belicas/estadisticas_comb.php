@@ -413,7 +413,7 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
 function muestra($dsn, $accno)
 {
     $aut_usuario = "";
-    autenticaUsuario($dsn, $aut_usuario, 21);
+    autentica_usuario($dsn, $aut_usuario, 21);
 
     $wizard =& new HTML_QuickForm_Controller('EstadisticasComb', false);
     $consweb = new PagEstadisticasComb($mreq);

@@ -23,7 +23,7 @@ require_once "misc.php";
 require_once "DB/DataObject/FormBuilder.php";
 
 $aut_usuario = "";
-autenticaUsuario($dsn, $aut_usuario, 12);
+autentica_usuario($dsn, $aut_usuario, 12);
 $tabla = 'usuario';
 
 $d = objeto_tabla($tabla);

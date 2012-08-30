@@ -20,7 +20,7 @@ require_once "misc.php";
 require_once "DataObjects/Categoria.php";
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $aut_usuario, 62);
+$db = autentica_usuario($dsn, $aut_usuario, 62);
 
 $t = 'Completa actos ' . date('Y-m-d H:m');
 encabezado_envia($t);

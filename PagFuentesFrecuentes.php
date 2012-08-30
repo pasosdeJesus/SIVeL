@@ -381,7 +381,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     {
         prepara_consulta_gen(
             $w, $t, $idcaso,
-            'caso_ffrecuente', _('Ffrecuente'), 'id_ffrecuente', false
+            'caso_ffrecuente', 'ffrecuente', 'id_ffrecuente', false
         );
         // echo "OJO w=$w";
     }
@@ -413,7 +413,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
         if ($rp->fetchInto($row)) {
             $idffrecuente = $row[0];
             if ($rp->fetchInto($row)) {
-                repObs(
+                rep_obs(
                     "Hay $nr fuentes frecuentes con nombre como " .
                     $fuente->nombre_fuente .
                     ", escogido el primero\n", $obs
@@ -455,12 +455,12 @@ class PagFuentesFrecuentes extends PagBaseMultiple
             $idffrecuente = null;
             $nomf = utf8_decode($fuente->nombre_fuente);
             if (empty($fuente->fecha_fuente)) {
-                repObs(
+                rep_obs(
                     _("No se incluyó fuente sin fecha: ") .
                     $fuente->asXML(), $obs
                 );
             } else if (empty($fuente->nombre_fuente)) {
-                repObs(
+                rep_obs(
                     _("No se incluyó fuente sin nombre: ") .
                     $fuente->asXML(), $obs
                 );

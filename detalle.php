@@ -23,7 +23,7 @@ require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once "misc.php";
 
 $aut_usuario = "";
-autenticaUsuario($dsn, $aut_usuario, 11);
+autentica_usuario($dsn, $aut_usuario, 11);
 
 require_once $_SESSION['dirsitio'] . '/conf_int.php';
 require_once "misc_caso.php";
@@ -34,7 +34,7 @@ if (!isset($_REQUEST['tabla'])) {
 }
 $tabla = var_req_escapa('tabla');
 
-actGlobales();
+act_globales();
 $u = html_menu_toma_url($GLOBALS['menu_tablas_basicas']);
 if (!in_array($tabla, $u)) {
     die(_("La tabla '") . $tabla . _("' no es básica"));

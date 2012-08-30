@@ -23,11 +23,11 @@ require_once 'misc.php';
 require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $aut_usuario, 0);
+$db = autentica_usuario($dsn, $aut_usuario, 0);
 require_once $_SESSION['dirsitio'] . '/conf_int.php';
 require_once 'misc.php';
 
-cierraSesion($dsn);
+cierra_sesion($dsn);
 encabezado_envia(_('Cerrando sesión'));
 //echo "<html><head><title>"
 //    . _('SIVeL: Sistema de Información de Violencia Política en Línea')

@@ -133,7 +133,7 @@ class PagEtiquetas extends PagBaseSimple
      {
         /*if (!isset($_SESSION['forma_modo'])
         || $_SESSION['forma_modo'] != 'busqueda') {
-            $this->controller->deshabilitaBotones($this, array('siguiente'));
+            $this->controller->deshabilita_botones($this, array('siguiente'));
         } */
      }
 
@@ -299,7 +299,7 @@ class PagEtiquetas extends PagBaseSimple
       *
       * @return void
       */
-     static function actGlobales()
+     static function act_globales()
      {
          html_menu_agrega_submenu(
              $GLOBALS['menu_tablas_basicas'],

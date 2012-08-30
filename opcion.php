@@ -18,7 +18,7 @@ require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
 
 /*$aut_usuario = "";
-$db = autenticaUsuario($dsn, $aut_usuario, 0);
+$db = autentica_usuario($dsn, $aut_usuario, 0);
 Debe autenticarse en la función muestra del modulo */
 
 if (!isset($_REQUEST['num'])) {

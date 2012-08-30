@@ -18,7 +18,7 @@ require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $aut_usuario, 21);
+$db = autentica_usuario($dsn, $aut_usuario, 21);
 
 require_once $_SESSION['dirsitio'] . '/conf_int.php';
 require_once "confv.php";
@@ -38,21 +38,21 @@ if (!in_array(63, $_SESSION['opciones'])) {
     include "terminar.php";
     die("");
 }
-$db = autenticaUsuario($dsn, $aut_usuario, 63);
+$db = autentica_usuario($dsn, $aut_usuario, 63);
 
-function regeneraEsquemas()
+function regenera_esquemas()
 {
     global $dirserv, $dirsitio, $dbnombre, $dirchroot, $modulos;
     $nini = "$dirserv/$dirsitio/DataObjects/$dbnombre.ini";
     $nlinksini = "$dirserv/$dirsitio/DataObjects/$dbnombre.links.ini";
     $nestini = "$dirserv/$dirsitio/DataObjects/estructura-dataobject.ini";
     if (is_writable($nini) && is_writable($nlinksini)) {
-        leeEstructura($dirserv, $dbnombre, "$dirserv/$dirsitio", "w");
+        lee_escritura($dirserv, $dbnombre, "$dirserv/$dirsitio", "w");
         foreach (explode(" ", $modulos) as $i) {
-            leeEstructura("$dirserv/$i", $dbnombre, "$dirserv/$dirsitio", "a");
+            lee_escritura("$dirserv/$i", $dbnombre, "$dirserv/$dirsitio", "a");
         }
         if (file_exists($nestini)) {
-            leeEstructura(
+            lee_escritura(
                 "$dirserv/$dirsitio", $dbnombre, "$dirserv/$dirsitio", "a"
             );
         }
@@ -98,7 +98,7 @@ if (PEAR::isError($r)) {
     $r = $db->query(
         'ALTER TABLE actualizacion_base RENAME TO actualizacionbase'
     );
-    regeneraEsquemas();
+    regenera_esquemas();
 }
 
 
@@ -2257,7 +2257,7 @@ if (!aplicado($idac)) {
 
 $idac = '1.2-rc1';
 if (!aplicado($idac)) {
-    foreach(array(
+    foreach (array(
         array("acto", "id_p_responsable", "id_presponsable"),
         array("actocolectivo", "id_p_responsable", "id_presponsable"),
         array("caso", "gr_confiabilidad", "grconfiabilidad"),
@@ -2306,7 +2306,7 @@ if (!aplicado($idac)) {
         hace_consulta(
             $db,
             "ALTER TABLE $tabla RENAME COLUMN $ant TO $nue", false
-        ); 
+        );
     }
 
     aplicaact($act, $idac, 'Renombrando campos para seguir estándares SQL');
@@ -2341,7 +2341,7 @@ if (isset($GLOBALS['menu_tablas_basicas'])) {
 
 
 // Creando esquema
-regeneraEsquemas();
+regenera_esquemas();
 
 /**
  * Agrega el contendio del archivo $fuente al $destino
@@ -2352,7 +2352,7 @@ regeneraEsquemas();
  *
  * @return void
  */
-function agregaArchivo($fuente, $destino, $modo = "w")
+function agrega_archivo($fuente, $destino, $modo = "w")
 {
     if (!($fen = fopen($fuente, "r"))) {
         die ("No se pudo leer $fuente");
@@ -2383,7 +2383,7 @@ function agregaArchivo($fuente, $destino, $modo = "w")
  *
  * @return void
  */
-function leeEstructura($nd, $dbnombre, $dirap, $modo)
+function lee_escritura($nd, $dbnombre, $dirap, $modo)
 {
     if (!file_exists("$nd/DataObjects/estructura-dataobject.ini")) {
         echo "No puede leerse "
@@ -2394,7 +2394,7 @@ function leeEstructura($nd, $dbnombre, $dirap, $modo)
             . "<br>";
         return;
     }
-    agregaArchivo(
+    agrega_archivo(
         "$nd/DataObjects/estructura-dataobject.ini",
         "$dirap/DataObjects/$dbnombre.ini", $modo
     );
@@ -2402,7 +2402,7 @@ function leeEstructura($nd, $dbnombre, $dirap, $modo)
     if (!file_exists("$nd/DataObjects/estructura-dataobject.links.ini")) {
         die("No puede leerse $nd/DataObjects/estructura-dataobject.ini");
     }
-    agregaArchivo(
+    agrega_archivo(
         "$nd/DataObjects/estructura-dataobject.links.ini",
         "$dirap/DataObjects/$dbnombre.links.ini", $modo
     );

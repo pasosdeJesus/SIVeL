@@ -118,8 +118,10 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
                 $condb .
                 "ORDER BY archivo ";
             //echo $q;
+            $a = $db->getAssoc($q);
+            sin_error_pear($a);
             $options = array('' => '') +
-                htmlentities_array($db->getAssoc($q));
+                htmlentities_array($a);
             $an->loadArray($options);
         }
 

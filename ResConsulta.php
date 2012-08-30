@@ -691,7 +691,7 @@ class ResConsulta
             include $_SESSION['dirsitio'] . "/conf.php";
 
             $aut_usuario = "";
-            autenticaUsuario($dsn, $aut_usuario, 0);
+            autentica_usuario($dsn, $aut_usuario, 0);
             if (in_array(42, $_SESSION['opciones'])) {
                 $esadmin = true;
             }
@@ -1790,7 +1790,7 @@ class ResConsulta
         ) {
             include $_SESSION['dirsitio'] . "/conf.php";
             $aut_usuario = "";
-            autenticaUsuario($dsn, $aut_usuario, 0);
+            autentica_usuario($dsn, $aut_usuario, 0);
             if (!in_array(42, $_SESSION['opciones'])) {
                 die('No autorizado');
             }

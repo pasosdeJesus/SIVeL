@@ -103,7 +103,7 @@ class PagEvaluacion extends PagBaseSimple
         if (!isset($_SESSION['forma_modo'])
             || $_SESSION['forma_modo'] != 'busqueda'
         ) {
-            $this->controller->deshabilitaBotones($this, array('siguiente'));
+            $this->controller->deshabilita_botones($this, array('siguiente'));
         }
     }
 

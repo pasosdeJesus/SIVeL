@@ -292,7 +292,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
         } else {
             $db = $this->$cm->_do->getDatabaseConnection();
         }
-        $this->controller->creaTabuladores($this, array('class' => 'flat'));
+        $this->controller->crea_tabuladores($this, array('class' => 'flat'));
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
             die(_("Bug: idcaso no debería ser null"));

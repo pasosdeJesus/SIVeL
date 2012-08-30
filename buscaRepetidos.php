@@ -20,7 +20,7 @@ require_once "misc.php";
 
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $aut_usuario, 65);
+$db = autentica_usuario($dsn, $aut_usuario, 65);
 
 $t = _('Reporte de casos repetidos');
 encabezado_envia($t);

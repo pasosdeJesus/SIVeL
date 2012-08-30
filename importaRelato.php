@@ -16,7 +16,7 @@
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
 $aut_usuario = "";
-autenticaUsuario($dsn, $aut_usuario, 61);
+autentica_usuario($dsn, $aut_usuario, 61);
 
 require_once $_SESSION['dirsitio'] . "/conf_int.php";
 require_once "misc.php";
@@ -392,7 +392,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             foreach ($r->victima as $victima) {
                 if (!empty($victima->id_persona)) {
                     if (!isset($id_pers[(string)$victima->id_persona])) {
-                        repObs(
+                        rep_obs(
                             sprintf(
                                 _("Acto: No hay definida persona con id '%s'"),
                                 (string)$acto->id_victima_individual
@@ -486,7 +486,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             $m .= $dvictima->getMessage() . " "
                                 . $dvictima->getUserInfo();
                         }
-                        repObs($m, $obs);
+                        rep_obs($m, $obs);
                     }
                     foreach (array('antecedentes' => 'antecedente',  )
                         as $cs => $cs2
@@ -536,7 +536,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             $db, $idcaso, $idp, $g, $id_presp, $obs
                         );
                     } else {
-                        repObs(
+                        rep_obs(
                             _("No hay datos de p. resp.") . " '" .
                             $idp . "'", $obs
                         );
@@ -556,7 +556,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         $dacto->id_presponsable = $pr;
                         $dacto->id_categoria = $id_categoria;
                         if (!isset($id_pers[(string)$acto->id_victima_individual])) {
-                            repObs(
+                            rep_obs(
                                 _("No hay definida persona con id.") ." '" .
                                 ((string)$acto->id_victima_individual) . "'",
                                 $obs
@@ -585,7 +585,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         $dactocolectivo->id_categoria = $id_categoria;
                         $dactocolectivo->id_grupoper = $cg;
                         if (!$dactocolectivo->insert()) {
-                            repObs(
+                            rep_obs(
                                 _("Acto: No pudo insertar acto col.")
                                 . " '$cg', '"
                                 . ((string)$acto->id_grupo_victima) . "'",
@@ -593,11 +593,11 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             );
                         }
                     } else {
-                        repObs(_("No es individual ni colectiva"), $obs);
+                        rep_obs(_("No es individual ni colectiva"), $obs);
                         print_r($acto);
                     }
                 } else {
-                    repObs(_("Agresión particular vacía"), $obs);
+                    rep_obs(_("Agresión particular vacía"), $obs);
                 }
             }
             $yaesta['PagActo'] = true;

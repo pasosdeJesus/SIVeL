@@ -31,7 +31,7 @@ require_once "DB/DataObject/FormBuilder.php";
 
 //die("x");
 $aut_usuario = "";
-autenticaUsuario($dsn, $aut_usuario, 11);
+autentica_usuario($dsn, $aut_usuario, 11);
 
 echo "Si paso autenticausuario\n";
 

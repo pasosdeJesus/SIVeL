@@ -24,7 +24,7 @@ require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once 'DataObjects/Caso.php';
 
 $aut_usuario = "";
-autenticaUsuario($dsn, $aut_usuario, 21);
+autentica_usuario($dsn, $aut_usuario, 21);
 
 $idbus = $GLOBALS['idbus'];
 $_SESSION['basicos_id'] = $idbus;
@@ -36,7 +36,7 @@ if (PEAR::isError($dCaso)) {
 }
 $db =& $dCaso->getDatabaseConnection();
 
-eliminaCaso($db, $idbus);
+elimina_caso($db, $idbus);
 
 header('Location: captura_caso.php');
 

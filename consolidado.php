@@ -20,7 +20,7 @@
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
 $aut_usuario = "";
-autenticaUsuario($dsn, $aut_usuario, 43);
+autentica_usuario($dsn, $aut_usuario, 43);
 
 require_once $_SESSION['dirsitio'] . "/conf_int.php";
 
@@ -645,7 +645,7 @@ class PagConsolidado extends HTML_QuickForm_Page
         if (isset($_SESSION['id_funcionario'])) {
             $aut_usuario = "";
             include $_SESSION['dirsitio'] . "/conf.php";
-            autenticaUsuario($dsn, $aut_usuario, 0);
+            autentica_usuario($dsn, $aut_usuario, 0);
             if (in_array(42, $_SESSION['opciones'])) {
                 $e =& $this->addElement(
                     'date', 'fincdesde',

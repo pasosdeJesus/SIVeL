@@ -38,7 +38,7 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
     var $__table = 'proceso';                       // table name
     var $id;                              // int4(4)  not_null primary_key
     var $id_caso;                              // int4(4)  not_null primary_key
-    var $id_trelacion;                        // int4(4)
+    var $id_tproceso;                        // int4(4)
     var $id_etapa;                        // int4(4)
     var $proximafecha;                         // date
     var $demandante;                           // varchar(-1)
@@ -57,7 +57,7 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
 
         $this->nom_tabla = _('Proceso');
         $this->fb_fieldLabels = array(
-            'id_trelacion' => _('Tipo'),
+            'id_tproceso' => _('Tipo'),
             'id_etapa' => _('Etapa'),
             'proximafecha' => _('Próxima fecha'),
             'demandante' => _('Demandante'),
@@ -71,12 +71,12 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
 
 
     var $fb_preDefOrder = array(
-        'id_trelacion', 'proximafecha',
+        'id_tproceso', 'proximafecha',
         'demandante', 'demandado', 'poderdante', 'telefono',
         'observaciones',
     );
     var $fb_fieldsToRender = array(
-        'id_trelacion', 'proximafecha',
+        'id_tproceso', 'proximafecha',
         'demandante', 'demandado', 'poderdante', 'telefono',
         'observaciones',
     );
@@ -88,7 +88,7 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
     static function camposSinInfo()
     {
         return array(
-            'id_trelacion'=> DataObjects_Tproceso::idSinInfo(),
+            'id_tproceso'=> DataObjects_Tproceso::idSinInfo(),
             'id_etapa'=> DataObjects_Etapa::idSinInfo(),
         );
     }
@@ -125,7 +125,7 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
         parent::postGenerateForm($form, $formbuilder);
 
 //        $sel =& $form->removeElement('id_etapa');
-        $sel =& $form->getElement('id_trelacion');
+        $sel =& $form->getElement('id_tproceso');
         $p = objeto_tabla('proceso');
         $db = $p->getDatabaseConnection();
 
@@ -138,7 +138,7 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
         );
         $sel->setMainOptions($mainOptions);
 
-        $result = $db->query("SELECT id_trelacion, id, nombre FROM etapa ORDER BY 1,2");
+        $result = $db->query("SELECT id_tproceso, id, nombre FROM etapa ORDER BY 1,2");
         while ($result->fetchInto($row)) {
             $secOptions[$row[0]][$row[1]] = $row[2];
         }

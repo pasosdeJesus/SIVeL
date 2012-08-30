@@ -26,7 +26,7 @@ require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once 'misc.php';
 
 $aut_usuario = "";
-autenticaUsuario($dsn, $aut_usuario, 11);
+autentica_usuario($dsn, $aut_usuario, 11);
 
 require_once $_SESSION['dirsitio'] . '/conf_int.php';
 require_once 'misc_caso.php';
@@ -36,7 +36,7 @@ encabezado_envia(_("Tablas Básicas"));
 require_once 'HTML/Menu.php';
 require_once 'HTML/Menu/DirectTreeRenderer.php';
 
-actGlobales();
+act_globales();
 
 $menu = new HTML_Menu($GLOBALS['menu_tablas_basicas'], 'sitemap');
 $rend = new HTML_Menu_DirectTreeRenderer();

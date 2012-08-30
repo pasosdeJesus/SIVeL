@@ -24,7 +24,7 @@
  *
  * @return void
  **/
-function repObs($nobs, &$obs, $coneco = false)
+function rep_obs($nobs, &$obs, $coneco = false)
 {
     $obs .= " " . $nobs;
     if ($coneco) {
@@ -65,7 +65,7 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
     }
     if (!isset($d->id)) {
         $nom2 = $d->$ncamp
-            = a_mayusculas(sinTildes(var_escapa($nom0, $db)));
+            = a_mayusculas(sin_tildes(var_escapa($nom0, $db)));
         $d->find(1);
     }
     if (!isset($d->id)) {
@@ -82,7 +82,7 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
         }
 
         if (PEAR::isError($r) || $r == null) {
-            repObs("-- $tabla: desconocido '$nombre'", $obs);
+            rep_obs("-- $tabla: desconocido '$nombre'", $obs);
             if ($sininf
                 && is_callable(array("DataObjects_$tabla", 'idSinInfo'))
             ) {
@@ -99,7 +99,7 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
             $d->id = $r;
             $d->find(1);
             if (trim($d->$ncamp) != trim($nom0)) {
-                repObs(
+                rep_obs(
                     "$tabla: elegido registro '$r' con nombre '" .
                     $d->$ncamp . "' que es similar a '$nom0'", $obs
                 );
@@ -139,7 +139,7 @@ function conv_violacion(&$db, $tipoi, $id_presp, &$obs)
         die($d->getMessage());
     }
     if (!isset($d->id)) {
-        repObs("Tipo de Violencia desconocido '$tipo'\n", $obs);
+        rep_obs("Tipo de Violencia desconocido '$tipo'\n", $obs);
         $pr = 0;
     } else {
         $pr = $d->id;
@@ -155,7 +155,7 @@ function conv_violacion(&$db, $tipoi, $id_presp, &$obs)
  *
  * @return Cadena sin tildes
  */
-function sinTildes($s)
+function sin_tildes($s)
 {
     $r = str_replace(
         array('á', 'é', 'í', 'ó', 'ú', 'ü', 'Á', 'É', 'Í',
@@ -222,7 +222,7 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
             die($d->getMessage());
         }
         if (!isset($d->id)) {
-            repObs(
+            rep_obs(
                 "Localización: Departamento desconocido '$departamento'",
                 $obs
             );
@@ -279,14 +279,14 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
             $idm = $rows[0];
             $idd = $rows[1];
             if ($cmun->fetchInto($rows)) {
-                repObs(
+                rep_obs(
                     "Hay $nr municipios en departamento $idd " .
                     "con nombre como $municipio, " .
                     "escogido el primero\n", $obs
                 );
             }
         } else {
-            repObs(
+            rep_obs(
                 "Localización: Municipio desconocido '$municipio'",
                 $obs
             );
@@ -342,13 +342,13 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
             $idd = $rows[1];
             $idm = $rows[2];
             if ($ccla->fetchInto($rows)) {
-                repObs(
+                rep_obs(
                     "Hay $nr clases con nombre como $cenp, " .
                     "escogido el primero\n", $obs
                 );
             }
         } else {
-            repObs(
+            rep_obs(
                 "Localización: Clase desconocida '$cenp' en municipio " .
                 "'$idm' y departamento '$idd'",
                 $obs
@@ -498,7 +498,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
         $dia_s = 1;
         $mes_s = (int)$v[0];
         $anio_s = $a;
-        repObs(
+        rep_obs(
             "Fecha incompleta '$fecha' convertida a $dia_s . $mes_s . $anio_s",
             $obs
         );
@@ -561,7 +561,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                     $dia_s = 1;
                     $mes_s = $nummesp[$pu[0]];
                     $anio_s = str_replace('.', '', $pu[2]);
-                    repObs(
+                    rep_obs(
                         "Fecha incompleta '$fecha' convertida a " .
                         "1 . $mes_s . $anio_s", $obs
                     );
@@ -574,7 +574,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                     $dia_s = 1;
                     $mes_s = 1;
                     $anio_s = (int)$pu[0];
-                    repObs(
+                    rep_obs(
                         "Fecha incompleta '$fecha' convertida a " .
                         "$dia_s . $mes_s . $anio_s", $obs
                     );
@@ -597,7 +597,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                     $dia_s = (int)$pu[0];
                     $mes_s = $nummesp[$pu[2]];
                     $anio_s = 1970;
-                    repObs(
+                    rep_obs(
                         "Fecha incompleta '$fecha' convertida a " .
                         "$dia_s . $mes_s . $anio_s", $obs
                     );
@@ -605,7 +605,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                     if ($depura) {
                         echo "caso 6.1.5";
                     }
-                    repObs(
+                    rep_obs(
                         "Fecha con formato no reconocido $fechan",
                         $obs
                     );
@@ -638,7 +638,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                 $dia_s = 1;
                 $mes_s = $nummesp[$pu[1]];
                 $anio_s = $pu[3];
-                repObs(
+                rep_obs(
                     "Fecha incompleta '$fecha' convertida a " .
                     "$dia_s . $mes_s . $anio_s", $obs
                 );
@@ -651,7 +651,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                 $dia_s = 1;
                 $mes_s = 1;
                 $anio_s = $pu[3];
-                repObs(
+                rep_obs(
                     "Fecha incompleta '$fecha' convertida a " .
                     "$dia_s . $mes_s . $anio_s", $obs
                 );
@@ -664,7 +664,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                 $dia_s = 1;
                 $mes_s = 1;
                 $anio_s = $pu[4];
-                repObs(
+                rep_obs(
                     "Fecha incompleta '$fecha' convertida a " .
                     "$dia_s . $mes_s . $anio_s", $obs
                 );
@@ -677,7 +677,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                 $dia_s = 1;
                 $mes_s = 1;
                 $anio_s = (int)$pu[6];
-                repObs(
+                rep_obs(
                     "Fecha incompleta '$fecha' convertida a " .
                     "$dia_s . $mes_s . $anio_s", $obs
                 );
@@ -691,7 +691,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                 $dia_s = 1;
                 $mes_s = $nummesp[$pu[3]];
                 $anio_s = $pu[4];
-                repObs(
+                rep_obs(
                     "Fecha incompleta '$fecha' convertida a " .
                     "$dia_s . $mes_s . $anio_s", $obs
                 );
@@ -704,7 +704,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                 $dia_s = 1;
                 $mes_s = 1;
                 $anio_s = $pu[4];
-                repObs(
+                rep_obs(
                     "Fecha incompleta '$fecha' convertida a " .
                     "$dia_s . $mes_s . $anio_s", $obs
                 );
@@ -717,7 +717,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                 $dia_s = 1;
                 $mes_s = 1;
                 $anio_s = $pu[1];
-                repObs(
+                rep_obs(
                     "Fecha incompleta '$fecha' convertida a " .
                     "$dia_s . $mes_s . $anio_s", $obs
                 );
@@ -728,7 +728,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                 $dia_s = 1;
                 $mes_s = 1;
                 $anio_s = (int)$v[0];
-                repObs(
+                rep_obs(
                     "Fecha incompleta '$fecha' convertida a " .
                     "$dia_s . $mes_s . $anio_s", $obs
                 );
@@ -739,7 +739,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                 $dia_s = 1;
                 $mes_s = 1;
                 $anio_s = (int)$pu[0];
-                repObs(
+                rep_obs(
                     "Fecha incompleta '$fecha' convertida a " .
                     "$dia_s . $mes_s . $anio_s", $obs
                 );
@@ -777,12 +777,12 @@ function conv_fecha($fecha, &$obs, $depura = false)
                     $dia_s = 1;
                     $mes_s = 1;
                     $anio_s = $vg[0];
-                    repObs(
+                    rep_obs(
                         "Fecha incompleta '$fecha' convertida a " .
                         "$dia_s . $mes_s . $anio_s", $obs
                     );
                 } else {
-                    repObs(
+                    rep_obs(
                         "Fecha con formato no reconocido $fecha, " .
                         "se esperaban 3 partes", $obs
                     );
@@ -798,18 +798,18 @@ function conv_fecha($fecha, &$obs, $depura = false)
         $t = $mes_s;
         $mes_s = $dia_s;
         $dia_s = $t;
-        repObs("Fecha intercambiando mes y día $fecha", $obs);
+        rep_obs("Fecha intercambiando mes y día $fecha", $obs);
     }
     if ($anio_s < 1900 || $anio_s>(int)date('Y')) {
-        repObs("Fecha: año errado ($fecha), dejando 1970.", $obs);
+        rep_obs("Fecha: año errado ($fecha), dejando 1970.", $obs);
         $anio_s = 1970;
     }
     if ($mes_s < 1 || $mes_s > 12) {
-        repObs(" Fecha: mes errado ($fecha), dejando 1.", $obs);
+        rep_obs(" Fecha: mes errado ($fecha), dejando 1.", $obs);
         $mes_s = 1;
     }
     if ($dia_s < 1 || $dia_s > $diasmes[$mes_s]) {
-        repObs(" Fecha: dia errado ($fecha), dejando 1.", $obs);
+        rep_obs(" Fecha: dia errado ($fecha), dejando 1.", $obs);
         $dia_s = 1;
     }
 
@@ -964,7 +964,7 @@ function conv_persona(&$db, &$aper, &$obs, $nom, $ap, $anionac,
             if (strcasecmp($anombres, $nombres) == 0
                 && strcasecmp($aapellidos, $apellidos) == 0
             ) {
-                repObs(
+                rep_obs(
                     " Persona repetida $k - '$nomap' $cper.",
                     $obs
                 );
@@ -973,7 +973,7 @@ function conv_persona(&$db, &$aper, &$obs, $nom, $ap, $anionac,
             } else if (levenshtein($anombres, $nombres)<3
                 && levenshtein($aapellidos, $apellidos)<3
             ) {
-                repObs(
+                rep_obs(
                     "Persona posiblemente repetida $k - '$anombres' " .
                     "'$aapellidos' -- '$nombres' '$apellidos' $cper ",
                     $obs
@@ -1107,14 +1107,14 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
             $sep = ", ";
         }
         if ($anombre == $nombre) {
-            repObs(
+            rep_obs(
                 "-- Usando grupo existente $k - $nombre $cper.\n",
                 $obs
             );
             $idgr = $k;
             break;
         } else if (levenshtein($anombre, $nombre)<3) {
-            repObs(
+            rep_obs(
                 "-- Grupo posiblemente existente $k - " .
                 "'$anombre'  -- '$nombre' $cper", $obs
             );
@@ -1124,7 +1124,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
         $dgrupo = objeto_tabla('grupoper');
         $dgrupo->nombre = $nombre;
         if (!$dgrupo->insert()) {
-            repObs("No pudo insertarse grupo '$nombre'");
+            rep_obs("No pudo insertarse grupo '$nombre'");
             return 0;
         }
         $idgr = $dgrupo->id;
@@ -1145,7 +1145,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
             );
     }
     if (!$dvictimacol->insert()) {
-        repObs(
+        rep_obs(
             "Acto: No pudo insertar víctima col. '$idgr', '",
             $obs
         );
@@ -1166,7 +1166,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
                 $pl = explode(':', $l[$idt]); //vinculoestado:id
                 $drviccol->$idt = (int)conv_basica($db, $pl[0], $v, $obs);
                 if (!$drviccol->insert()) {
-                    repObs(
+                    rep_obs(
                         "Colectiva: No pudo insertar '$v' en "
                         . " $t:$idt,$id_caso,$id_grupoper\n", $obs
                     );
@@ -1490,7 +1490,7 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
         $dpresp->otro = $nomg;
     }
     if (!$dpresp->insert()) {
-        repObs(
+        rep_obs(
             "No pudo insertar p. resp '" .
             $dpresp->id_presponsable . "'",
             $obs
@@ -1510,7 +1510,7 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
             $ocat->id = (int)$idc;
             $ocat->find(1); $ocat->fetch();
             if (PEAR::isError($ocat)) {
-                repObs(
+                rep_obs(
                     "No se reconoció categoria $ag",
                     $obs
                 );

@@ -22,7 +22,7 @@ require_once "misc_actualiza.php";
 
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $aut_usuario, 21);
+$db = autentica_usuario($dsn, $aut_usuario, 21);
 
 
 $act = objeto_tabla('Actualizacionbase');

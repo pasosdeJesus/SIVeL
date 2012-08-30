@@ -39,20 +39,20 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
     var $__table = 'accion';                    // table name
     var $id;
     var $id_proceso;
-    var $id_trelacion_accion;
+    var $id_taccion;
     var $id_despacho;
     var $fecha;
-    var $numero_radicado;                // varchar(-1)
-    var $observaciones_accion;                // varchar(-1)
+    var $numeroradicado;                // varchar(-1)
+    var $observacionesaccion;                // varchar(-1)
     var $respondido;                // varchar(-1)
 
 
     var $fb_hidePrimaryKey = true;
-    var $fb_preDefOrder = array('id_trelacion_accion', 'id_despacho', 'fecha',
-         'numero_radicado', 'observaciones_accion', 'respondido'
+    var $fb_preDefOrder = array('id_taccion', 'id_despacho', 'fecha',
+         'numeroradicado', 'observacionesaccion', 'respondido'
      );
-    var $fb_fieldsToRender = array('id_trelacion_accion', 'id_despacho', 'fecha',
-         'numero_radicado', 'observaciones_accion', 'respondido'
+    var $fb_fieldsToRender = array('id_taccion', 'id_despacho', 'fecha',
+         'numeroradicado', 'observacionesaccion', 'respondido'
      );
     var $fb_addFormHeader = true;
     /**
@@ -64,17 +64,17 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
         parent::__construct();
 
         $this->fb_fieldLabels= array(
-           'id_trelacion_accion'        => _('Tipo de Acción'),
+           'id_taccion'        => _('Tipo de Acción'),
            'id_despacho'           => _('Despacho'),
            'fecha'                 => _('Fecha de la Acción'),
-           'numero_radicado'       => _('No. Radicado'),
-           'observaciones_accion'  => _('Observaciones'),
+           'numeroradicado'       => _('No. Radicado'),
+           'observacionesaccion'  => _('Observaciones'),
            'respondido'            => _('Respondido'),
         );
         $this->nom_tabla = _('Acción');
     }
 
-    var $fb_textFields = array ('observaciones_accion');
+    var $fb_textFields = array ('observacionesaccion');
     var $fb_booleanFields = array ('respondido');
 
 
@@ -86,7 +86,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
     static function camposSinInfo()
     {
         return array(
-            'id_trelacion_accion'    => DataObjects_Taccion::idSinInfo(),
+            'id_taccion'    => DataObjects_Taccion::idSinInfo(),
             'id_despacho'       => DataObjects_Despacho::idSinInfo(),
         );
     }
@@ -160,15 +160,15 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
 } */
 
         $fa = array();
-        $obs =& $form->removeElement('observaciones_accion');
+        $obs =& $form->removeElement('observacionesaccion');
         $res =& $form->removeElement('respondido');
         $fa[] =& $form->removeElement('id');
         $fa[] =& $form->removeElement('id_proceso');
-        $fa[] =& $form->removeElement('id_trelacion_accion');
+        $fa[] =& $form->removeElement('id_taccion');
         $fa[] =& $form->removeElement('id_despacho');
         $sf = $fa[] =& $form->removeElement('fecha');
         $sf->setLabel(_('Fecha de la Acción'));
-        $fa[] =& $form->removeElement('numero_radicado');
+        $fa[] =& $form->removeElement('numeroradicado');
         $fa[] =& $obs;
         $fa[] = $res;
 
@@ -185,9 +185,9 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
         $p->orderby('fecha desc');
         $p->find();
         while ($p->id_proceso != null && $p->fetch()) {
-            $dtipo = $p->getLink('id_trelacion_accion');
+            $dtipo = $p->getLink('id_taccion');
             $ddespacho = $p->getLink('id_despacho');
-            $n = "fobs_{$p->id_proceso}_{$p->id_trelacion_accion}_" .
+            $n = "fobs_{$p->id_proceso}_{$p->id_taccion}_" .
                 "{$p->id_despacho}_{$p->fecha}";
             $t .= "<tr><td>"
                 . htmlentities($dtipo->nombre, ENT_COMPAT, 'UTF-8')
@@ -196,9 +196,9 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
                 . "</td><td>"
                 . htmlentities($p->fecha, ENT_COMPAT, 'UTF-8')
                 . "</td><td>"
-                . htmlentities($p->numero_radicado, ENT_COMPAT, 'UTF-8')
+                . htmlentities($p->numeroradicado, ENT_COMPAT, 'UTF-8')
                 . "</td><td>"
-                . htmlentities($p->observaciones_accion, ENT_COMPAT, 'UTF-8')
+                . htmlentities($p->observacionesaccion, ENT_COMPAT, 'UTF-8')
                 . "</td><td>" . ($p->respondido == 't' ? _('Si') : _('No'))
                 . "</td><td><a href=\"{$_SERVER['PHP_SELF']}?eliminaaccionj="
                 . $p->id . "\">" . _('Eliminar') . "</a></td>";
@@ -219,13 +219,13 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
         );
         $form->addElement($sel);
 
-        $e =& $form->getElement('numero_radicado');
+        $e =& $form->getElement('numeroradicado');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(55);
             $e->setMaxLength(50);
         }
 
-        $e =& $form->getElement('observaciones_accion');
+        $e =& $form->getElement('observacionesaccion');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setCols(75);
             $e->setRows(2);

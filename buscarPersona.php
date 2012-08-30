@@ -28,7 +28,7 @@ function muestra()
     global $dsn, $accno;
 
     $aut_usuario = "";
-    $db = autenticaUsuario($dsn, $aut_usuario, 0);
+    $db = autentica_usuario($dsn, $aut_usuario, 0);
     $nombres = trim(utf8_decode(var_req_escapa('nombres', $db, 100)));
     $apellidos  = trim(utf8_decode(var_req_escapa('apellidos', $db, 100)));
     $rol = var_req_escapa('rol', $db, 32);

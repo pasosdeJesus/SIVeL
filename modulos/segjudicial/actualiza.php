@@ -23,7 +23,7 @@ require_once "misc_actualiza.php";
 
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $aut_usuario, 21);
+$db = autentica_usuario($dsn, $aut_usuario, 21);
 
 
 $act = objeto_tabla('Actualizacionbase');
@@ -147,6 +147,36 @@ if (!aplicado($idac)) {
         );
 
     aplicaact($act, $idac, 'Renombra tablas');
+}
+
+$idac = '1.2-sjrc';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db,
+        "ALTER TABLE despacho RENAME COLUMN id_tipo TO id_tproceso", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE etapa RENAME COLUMN id_tipo TO id_tproceso", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE proceso RENAME COLUMN id_tipo TO id_tproceso", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE accion RENAME COLUMN id_tipo_accion TO id_taccion", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE accion RENAME COLUMN observaciones_accion TO observacionesaccion", false
+    );
+    hace_consulta(
+        $db,
+        "ALTER TABLE accion RENAME COLUMN numero_radicado TO numeroradicado", false
+    );
+
+    aplicaact($act, $idac, 'Renombra campos');
 }
 
 echo "Actualizando indices<br>";

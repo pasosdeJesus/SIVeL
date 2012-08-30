@@ -29,6 +29,20 @@ $GLOBALS['misc_ordencons'][0] = "rotulos_orden_cons";
 // cuya filiación es SIN INFORMACIÓN
 $GLOBALS['estrotulos_excluirsinfiliacion'] = false;
 
+$GLOBALS['m_opcion'][53] = array(
+    'nombre' =>  _('Individuales con Rotulos de Rep. Cons.'), 
+    'idpapa' => 50, 
+    'url' => 'opcion?num=100'
+);
+$GLOBALS['m_opcion'][53] = array(
+    'nombre' =>  _('Colectivas con Rotulos de Rep. Cons.'), 
+    'idpapa' => 50, 
+    'url' => 'opcion?num=101'
+);
 
+$GLOBALS['m_opcion_rol'][53] = array(1, 2);
+$GLOBALS['m_opcion_rol'][54] = array(1, 2);
+
+require_once "modulos/estrotulos/reporte_rotulos.php";
 
 

@@ -19,7 +19,7 @@ require_once "confv.php";
 require_once "misc.php";
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $aut_usuario, 64);
+$db = autentica_usuario($dsn, $aut_usuario, 64);
 
 $t = _("Reporte de consistencia del") ." " . date("Y-m-d H:m");
 encabezado_envia($t);

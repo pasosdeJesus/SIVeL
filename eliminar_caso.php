@@ -23,12 +23,12 @@ require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once 'misc_caso.php';
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $aut_usuario, 21);
+$db = autentica_usuario($dsn, $aut_usuario, 21);
 
 encabezado_envia();
 $idcaso = $_SESSION['basicos_id'];
 
-eliminaCaso($db, $idcaso);
+elimina_caso($db, $idcaso);
 
 echo "Caso " . $idcaso . " eliminado<br/>";
 echo '<table border="0" width="100%" ' .
