@@ -126,7 +126,7 @@ s/id_tipo_clase/id_tclase/g
 s/tipo_fuente/tfuente/g
 s/id_p_responsable/id_presponsable/g
 s/tipo_violencia/tipoviolencia/g
-s/id_tipo_sitio/id_tipositio/g
+s/id_tipositio/id_tsitio/g
 s/id_rol/rol/g
 s/dias_edicion_caso/diasedicion/g
 s/id_rango_edad/id_rangoedad/g

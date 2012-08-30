@@ -36,7 +36,7 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
 {
 
     var $__table = 'usuario';                         // table name
-    var $id_usuario;                      // varchar(-1)  not_null primary_key
+    var $id;                      // varchar(-1)  not_null primary_key
     var $password;                        // varchar(-1)  not_null
     var $nombre;                          // varchar(-1)
     var $descripcion;                     // varchar(-1)
@@ -55,7 +55,7 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
 
         $this->nom_tabla = _("Usuario");
         $this->fb_fieldLabels= array(
-            'id_usuario' => _('Identificación'),
+            'id' => _('Identificación'),
             'password' => _('Clave'),
             'nombre' => _('Nombre'),
             'descripcion' => _('Descripcion'),
@@ -78,15 +78,15 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
     }
 
     var $fb_preDefOrder = array(
-        'id_usuario', 'password', 'nombre', 'descripcion', 'rol',
+        'id', 'password', 'nombre', 'descripcion', 'rol',
         'idioma'
     );
     var $fb_fieldsToRender = array(
-        'id_usuario', 'password', 'nombre', 'descripcion', 'rol',
+        'id', 'password', 'nombre', 'descripcion', 'rol',
         'idioma'
     );
-    var $fb_linkDisplayFields = array('id_usuario');
-    var $fb_select_display_field= 'id_usuario';
+    var $fb_linkDisplayFields = array('id');
+    var $fb_select_display_field= 'id';
     var $fb_hidePrimaryKey = false;
 
     var $fb_enumFields = array('rol', 'idioma');

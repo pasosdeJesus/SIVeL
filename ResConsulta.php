@@ -202,7 +202,7 @@ class ResConsulta
             " tsitio.nombre " .
             " FROM ubicacion, tsitio, departamento, municipio, clase " .
             " WHERE ubicacion.id_caso='$idcaso' " .
-            " AND ubicacion.id_trelacionsitio=tsitio.id " .
+            " AND ubicacion.id_tsitio=tsitio.id " .
             " AND ubicacion.id_departamento=departamento.id " .
             " AND ubicacion.id_municipio=municipio.id " .
             " AND ubicacion.id_clase=clase.id " .
@@ -226,7 +226,7 @@ class ResConsulta
             " tsitio.nombre " .
             " FROM ubicacion, tsitio, departamento, municipio " .
             " WHERE ubicacion.id_caso='$idcaso' " .
-            " AND ubicacion.id_trelacionsitio=tsitio.id " .
+            " AND ubicacion.id_tsitio=tsitio.id " .
             " AND ubicacion.id_departamento=departamento.id " .
             " AND municipio.id_departamento=departamento.id " .
             " AND ubicacion.id_municipio=municipio.id " .
@@ -247,7 +247,7 @@ class ResConsulta
             " tsitio.nombre " .
             " FROM ubicacion, tsitio, departamento " .
             " WHERE ubicacion.id_caso='$idcaso' " .
-            " AND ubicacion.id_trelacionsitio=tsitio.id " .
+            " AND ubicacion.id_tsitio=tsitio.id " .
             " AND ubicacion.id_departamento=departamento.id " .
             " AND ubicacion.id_municipio IS NULL " .
             " AND ubicacion.id_clase IS NULL " .
@@ -1640,7 +1640,7 @@ class ResConsulta
                     " cla: " . $dubicacion->id_clase .
                     " longitud: " . $dubicacion->longitud .
                     " latitud: " . $dubicacion->latitud .
-                    " tipositio: " . $dubicacion->id_trelacionsitio;
+                    " tipositio: " . $dubicacion->id_tsitio;
             }
             if ($nubi > 1) {
                 $arotros['observaciones{tipo->etiqueta:IMPORTA_RELATO}']
@@ -1668,7 +1668,7 @@ class ResConsulta
                     'centro_poblado', 'longitud', 'latitud')
                 )
             );
-            $ts = $dubicacion->getLink('id_trelacionsitio');
+            $ts = $dubicacion->getLink('id_tsitio');
             $ubisitio = $dubicacion->sitio;
             $ubilugar = $dubicacion->lugar;
             $ubitipositio = isset($ts->nombre) ? $ts->nombre : '';

@@ -58,7 +58,7 @@ if (!isset($_GET['id'])) {
     $e =& $f->createElement('submit', 'añadir', _('Añadir'));
     $ed[] =& $e;
 } else {
-    $s=& $f->getElement('id_usuario');
+    $s=& $f->getElement('id');
     $s->freeze();
     $e =& $f->createElement('submit', 'actualizar', _('Actualizar'));
     $ed[] =& $e;
@@ -92,7 +92,7 @@ if ($actsincambiarclave || $f->validate()) {
         || isset($f->_submitValues['añadir'])
     ) {
         $res = $f->process(array($b, 'processForm'), false);
-        if ($_SESSION['id_usuario'] == $f->_submitValues['id_usuario']) {
+        if ($_SESSION['id_usuario'] == $f->_submitValues['id']) {
             idioma($f->_submitValues['idioma']);
         }
         if (isset($f->_submitValues['añadir']) ) {
@@ -103,7 +103,7 @@ if ($actsincambiarclave || $f->validate()) {
             $q = "INSERT INTO funcionario (anotacion, nombre) " .
                 " VALUES ('"
                 . var_escapa($f->_submitValues['descripcion'], $db) . "', '"
-                . var_escapa($f->_submitValues['id_usuario'], $db) . "')";
+                . var_escapa($f->_submitValues['id'], $db) . "')";
             //echo $q;
             hace_consulta($db, $q);
         }

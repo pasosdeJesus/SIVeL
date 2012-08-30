@@ -35,16 +35,16 @@ class DataObjects_Comunidad_rangoedad extends DB_DataObject_SIVeL
 {
 
     var $__table = 'comunidad_rangoedad';            // table name
-    var $id_rango;                        // int4(4)  multiple_key
+    var $id_rangoedad;                        // int4(4)  multiple_key
     var $id_grupoper;                  // int4(4)  multiple_key
     var $id_caso;                  // int4(4)  multiple_key
 
 
 
-    var $fb_preDefOrder = array('id_rango');
-    var $fb_fieldsToRender = array('id_rango');
+    var $fb_preDefOrder = array('id_rangoedad');
+    var $fb_fieldsToRender = array('id_rangoedad');
     var $fb_addFormHeader = false;
-    var $fb_excludeFromAutoRules = array('id_rango');
+    var $fb_excludeFromAutoRules = array('id_rangoedad');
     /**
      * Constructora
      * return @void
@@ -54,7 +54,7 @@ class DataObjects_Comunidad_rangoedad extends DB_DataObject_SIVeL
         parent::__construct();
 
         $this->fb_fieldLabels= array(
-           'id_rango' => _('Rangos de Edades'),
+           'id_rangoedad' => _('Rangos de Edades'),
         );
     }
 
@@ -88,7 +88,7 @@ class DataObjects_Comunidad_rangoedad extends DB_DataObject_SIVeL
     function postGenerateForm(&$form, &$formbuilder)
     {
         parent::postGenerateForm($form, $formbuilder);
-        $sel =& $form->getElement('id_rango');
+        $sel =& $form->getElement('id_rangoedad');
         if (isset($sel) && !PEAR::isError($sel)) {
             $sel->setSize(5);
             $sel->setMultiple(true);

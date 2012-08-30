@@ -46,7 +46,7 @@ $d->find();
 
 while ($d->fetch()) {
     $vd = get_object_vars($d);
-    $t = $vd['nombre'] . " (" . $vd['id_usuario'] . ")";
+    $t = $vd['nombre'] . " (" . $vd['id'] . ")";
 
     $pk = "";
     if (is_array($k)) {

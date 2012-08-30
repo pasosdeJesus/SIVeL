@@ -249,8 +249,7 @@ CREATE TABLE fotra (
 
 CREATE SEQUENCE funcionario_seq;
 
--- Podria dejarse solo usuario con un campo para indicar que usuarios
--- pueden entrar en el momento y cuales ya no (?).
+-- nombre es un id de la tabla usuario en caso de que aun este activo
 CREATE TABLE funcionario (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('funcionario_seq')),
 	anotacion VARCHAR(50),
@@ -596,7 +595,7 @@ CREATE TABLE caso_categoria_presponsable (
 );
 
 
--- Algunos campos ubicación, clasificacion y ubicacion_fisica son NULL (no pueden ser llave).
+-- Algunos campos ubicación, clasificacion y ubicacionfisica son NULL (no pueden ser llave).
 -- Puede mejorarse clasificacion, para que esté relacionada con clasificacion
 -- del caso
 CREATE TABLE caso_ffrecuente (
@@ -604,7 +603,7 @@ CREATE TABLE caso_ffrecuente (
 	ubicacion VARCHAR(100),  -- En interfaz descripción página
 	clasificacion VARCHAR(100), -- Categoria que esta fuente clasifica 
 	ubicacionfisica VARCHAR(100),
-	id_prensa INTEGER REFERENCES ffrecuente,
+	id_ffrecuente INTEGER REFERENCES ffrecuente,
 	id_caso	INTEGER REFERENCES caso,
 	PRIMARY KEY(fecha, id_prensa,id_caso)
 );
@@ -638,7 +637,7 @@ CREATE TABLE caso_fotra (
 CREATE TABLE caso_funcionario (
 	id_funcionario INTEGER REFERENCES funcionario,
 	id_caso INTEGER REFERENCES caso,
-	fecha_inicio DATE,
+	fechainicio DATE,
 	PRIMARY KEY(id_funcionario, id_caso)
 );
 

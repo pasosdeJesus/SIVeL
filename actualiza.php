@@ -2098,7 +2098,7 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db,
         "ALTER TABLE vinculo_estado_comunidad RENAME TO "
-        . "vinculoestado_comunidad ", false
+        . "comunidad_vinculoestado", false
     );
 
     aplicaact($act, $idac, 'Renombrando tablas vinculoestado');
@@ -2258,34 +2258,47 @@ if (!aplicado($idac)) {
 $idac = '1.2-rc1';
 if (!aplicado($idac)) {
     foreach(array(
+        array("acto", "id_p_responsable", "id_presponsable"),
+        array("actocolectivo", "id_p_responsable", "id_presponsable"),
         array("caso", "gr_confiabilidad", "grconfiabilidad"),
         array("caso", "gr_esclarecimiento", "gresclarecimiento"),
         array("caso", "gr_impunidad", "grimpunidad"),
         array("caso", "gr_informacion", "grinformacion"),
+        array("caso_categoria_presponsable", "id_p_responsable", "id_presponsable"),
+        array("caso_categoria_presponsable", "id_tipo_violencia", "id_tviolencia"),
+        array("caso_presponsable", "id_p_responsable", "id_presponsable"),
+        array("caso_fotra", "ubicacion_fisica", "ubicacionfisica"),
+        array("caso_fotra", "tipo_fuente", "tfuente"),
         array("pconsolidado", "no_columna", "id"),
+        array("pconsolidado", "tipo_violencia", "tipoviolencia"),
         array("supracategoria", "id_tipo_violencia", "id_tviolencia"),
         array("categoria", "col_rep_consolidado", "id_pconsolidado"),
         array("categoria", "contada_en", "contadaen"),
+        array("categoria", "id_tipo_violencia", "id_tviolencia"),
         array("clase", "id_tipo_clase", "id_tclase"),
+        array("comunidad_rangoedad", "id_rango", "id_rangoedad"),
+        array("comunidad_sectorsocial", "id_sector", "id_sectorsocial"),
         array("ffrecuente", "tipo_fuente", "tfuente"),
         array("presponsable_caso", "id_p_responsable", "id_presponsable"),
-        array("caso_categoria_presponsable", "id_tipo_violencia", "id_tviolencia"),
-        array("ubicacion", "id_tipo_sitio", "id_tipositio"),
+        array("ubicacion", "id_tipo_sitio", "id_tsitio"),
         array("usuario", "id_rol", "rol"),
+        array("usuario", "id_usuario", "id"),
         array("usuario", "dias_edicion_caso", "diasedicion"),
         array("victima", "id_rango_edad", "id_rangoedad"),
         array("victima", "id_sector_social", "id_sectorsocial"),
         array("victima", "id_vinculo_estado", "id_vinculoestado"),
         array("victima", "id_organizacion_armada", "organizacionarmada"),
+        array("comunidad_vinculoestado", "id_vinculo_estado", "id_vinculoestado"),
         array("presponsable", "id_papa", "papa"),
         array("persona_trelacion", "id_persona1", "persona1"),
         array("persona_trelacion", "id_persona2", "persona2"),
         array("persona_trelacion", "id_tipo", "id_trelacion"),
         array("victimacolectiva", "personas_aprox", "personasaprox"),
-        array("caso", "ubicacion_fisica", "ubicacionfisica"),
-        array("caso", "id_prensa", "id_ffrecuente"),
-        array("caso", "id_fuente_directa", "id_fotra"),
-        array("caso", "fecha_inicio", "fechainicio"),
+        array("victimacolectiva", "id_organizacion_armada", "organizacionarmada"),
+        array("caso_ffrecuente", "ubicacion_fisica", "ubicacionfisica"),
+        array("caso_ffrecuente", "id_prensa", "id_ffrecuente"),
+        array("caso_fotra", "id_fuente_directa", "id_fotra"),
+        array("caso_funcionario", "fecha_inicio", "fechainicio"),
     ) as $v) {
         $tabla = $v[0];
         $ant = $v[1];
@@ -2296,7 +2309,6 @@ if (!aplicado($idac)) {
         ); 
     }
 
-    die("x");
     aplicaact($act, $idac, 'Renombrando campos para seguir estándares SQL');
 }
 if (isset($GLOBALS['menu_tablas_basicas'])) {

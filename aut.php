@@ -35,13 +35,19 @@ require_once "confv.php";
  * @return object Resultado
  */
 
-function hace_consulta_aut(&$db, $q)
+function hace_consulta_aut(&$db, $q, $finerror = true)
 {
     $result = $db->query($q);
     if (PEAR::isError($result)) {
-        die(htmlentities(
+        echo htmlentities(
             $result->getMessage() . " - " . $result->getUserInfo()
-        ));
+        );
+        echo "<br>" . _("&iquest;Ya") . " <a href='actualiza.php'>"
+            . _("actualiz&oacute;") . "</a> "
+            . _("y regener&oacute; esquema?");
+        if ($finerror) {
+            exit(1);
+        }
     }
     return $result;
 }
@@ -164,8 +170,8 @@ $GLOBALS['m_opcion_rol'] = array (
 function sacaOpciones($usuario, &$db, &$op, &$rol)
 {
     $q = "SELECT rol FROM usuario " .
-        "WHERE id_usuario='" .  $usuario . "';";
-    $result = hace_consulta_aut($db, $q);
+        "WHERE id='" .  $usuario . "';";
+    $result = hace_consulta_aut($db, $q, true);
     $row = array();
     if ($result->fetchInto($row)) {
         $rol = $row[0];
@@ -235,10 +241,32 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
     }
     $db1 = new DB();
     $db->query('SET client_encoding TO UTF8');
+    $q = "SELECT COUNT(id) FROM usuario";
+    $result = hace_consulta_aut($db, $q, false);
+    if (PEAR::isError($result)) {
+        echo "<br>" . _("Intentado actualizar usuario") ;
+        $result = hace_consulta_aut(
+            $db, "ALTER TABLE usuario RENAME COLUMN id_rol TO rol", false
+        );
+        $result = hace_consulta_aut(
+            $db, "ALTER TABLE usuario RENAME COLUMN id_usuario TO id", false
+        );
+        $result = hace_consulta_aut($db, $q, false);
+    }
+    if (PEAR::isError($result)) {
+        echo "<br>" . _("No pudo emplear tabla de usuarios");
+        exit(1);
+    }
+    $n = array();
+    $result->fetchInto($n);
+    if ((int)$n[0] == 0) {
+        die("No hay usuarios en la base de datos creelos desde una terminal");
+    }
+
     $params = array(
         "dsn" => $dsn,
         "table" => "usuario",
-        "usernamecol" => "id_usuario",
+        "usernamecol" => "id",
         "passwordcol" => "password",
         "cryptType" => 'sha1',
     );
@@ -284,7 +312,7 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
             $_SESSION['id_usuario'] = $usuario;
             $_SESSION['id_funcionario'] = $idf;
             $q = "SELECT idioma FROM usuario " .
-                "WHERE id_usuario='" . $usuario . "';";
+                "WHERE id='" . $usuario . "';";
             $result = hace_consulta_aut($db, $q);
             $row = array();
             if ($result->fetchInto($row)) {
@@ -309,7 +337,7 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
             $params = array(
                 "dsn" => $dsn,
                 "table" => "usuario",
-                "usernamecol" => "id_usuario",
+                "usernamecol" => "id",
                 "passwordcol" => "password",
                 "cryptType" => 'md5',
             );
@@ -336,7 +364,7 @@ function autenticaUsuario($dsn,  &$usuario, $opcion)
                     "ALTER TABLE usuario RENAME COLUMN npass TO password;"
                 );
                 $q = "UPDATE usuario SET password='$clavesha1' WHERE " .
-                    "id_usuario='$un';";
+                    "id='$un';";
                 hace_consulta_aut($db, $q);
                 $htmljs = new HTML_Javascript();
                 echo $htmljs->startScript();
@@ -372,7 +400,7 @@ function cierraSesion($dsn)
     $params = array(
         "dsn" => $dsn,
         "table" => "usuario",
-        "usernamecol" => "id_usuario",
+        "usernamecol" => "id",
         "passwordcol" => "password"
     );
     $a = new Auth("DB", $params, "loginFunction");

@@ -35,15 +35,15 @@ class DataObjects_Comunidad_sectorsocial extends DB_DataObject_SIVeL
 {
 
     var $__table = 'comunidad_sectorsocial';         // table name
-    var $id_sector;                       // int4(4)  multiple_key
+    var $id_sectorsocial;                       // int4(4)  multiple_key
     var $id_grupoper;                  // int4(4)  multiple_key
     var $id_caso;                  // int4(4)  multiple_key
 
 
-    var $fb_preDefOrder = array('id_sector');
-    var $fb_fieldsToRender = array('id_sector');
+    var $fb_preDefOrder = array('id_sectorsocial');
+    var $fb_fieldsToRender = array('id_sectorsocial');
     var $fb_addFormHeader = false;
-    var $fb_excludeFromAutoRules = array('id_sector');
+    var $fb_excludeFromAutoRules = array('id_sectorsocial');
     /**
      * Constructora
      * return @void
@@ -53,7 +53,7 @@ class DataObjects_Comunidad_sectorsocial extends DB_DataObject_SIVeL
         parent::__construct();
 
         $this->fb_fieldLabels= array(
-           'id_sector' => _('Sector Social'),
+           'id_sectorsocial' => _('Sector Social'),
         );
     }
 
@@ -94,7 +94,7 @@ class DataObjects_Comunidad_sectorsocial extends DB_DataObject_SIVeL
                 $_SESSION['basicos_id'] . '\')';
             $opts->whereAdd($q);
             break;
-        case 'id_sector':
+        case 'id_sectorsocial':
             $opts->whereAdd('fechadeshabilitacion IS NULL');
             break;
         }
@@ -111,7 +111,7 @@ class DataObjects_Comunidad_sectorsocial extends DB_DataObject_SIVeL
     function postGenerateForm(&$form, &$formbuilder)
     {
         parent::postGenerateForm($form, $formbuilder);
-        $sel =& $form->getElement('id_sector');
+        $sel =& $form->getElement('id_sectorsocial');
         if (isset($sel) && !PEAR::isError($sel)) {
             $sel->setMultiple(true);
             $sel->setSize(5);

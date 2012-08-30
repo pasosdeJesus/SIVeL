@@ -674,10 +674,10 @@ class PagUbicacion extends PagBaseMultiple
                         (double)($du->longitud), '=', 'AND'
                     );
                 }
-                if ($du->id_trelacionsitio != 1) {
+                if ($du->id_tsitio != 1) {
                     consulta_and(
-                        $db, $w2, "ubicacion.id_trelacionsitio",
-                        (int)($du->id_trelacionsitio), '=', 'AND'
+                        $db, $w2, "ubicacion.id_tsitio",
+                        (int)($du->id_tsitio), '=', 'AND'
                     );
                 }
 
@@ -757,9 +757,9 @@ class PagUbicacion extends PagBaseMultiple
             $db, $obs, $r, 'tsitio', 'tsitio', '', ''
         );
         if (isset($idtipositio) && $idtipositio != null) {
-            $dubicacion->id_trelacionsitio = $idtipositio;
+            $dubicacion->id_tsitio = $idtipositio;
         } else {
-            $dubicacion->id_trelacionsitio
+            $dubicacion->id_tsitio
                 = DataObjects_Tsitio::idSinInfo();
         }
         if (isset($r->latitud)) {
