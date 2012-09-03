@@ -54,4 +54,6 @@ INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-sm', '2012-0
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-lu', '2012-07-29', 'Usuarios con idioma');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-rt', '2012-08-25', 'Renombrando tablas');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-rt2', '2012-08-25', 'Renombrando tablas II');
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-rt3', '2012-08-25', 'Renombrando tablas III');
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-rc1', '2012-08-25', 'Renombrando campos I');
  

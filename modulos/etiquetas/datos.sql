@@ -38,5 +38,7 @@ INSERT INTO actualizacionbase (id, fecha, descripcion)
 	VALUES ('eti-fi', '2011-07-19', 'Etiqueta fecha inexacta');
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('eti-fe', '2011-07-19', 'Fechas en tablas básicas');
+INSERT INTO actualizacionbase (id, fecha, descripcion) 
+	VALUES ('1.2-re', '2011-07-19', 'Renombra tablas');
 
 

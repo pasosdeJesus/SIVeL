@@ -2311,6 +2311,8 @@ if (!aplicado($idac)) {
 
     aplicaact($act, $idac, 'Renombrando campos para seguir estándares SQL');
 }
+
+
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {

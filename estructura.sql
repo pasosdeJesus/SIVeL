@@ -562,7 +562,7 @@ CREATE TABLE caso_contexto (
 	PRIMARY KEY(id_caso, id_contexto)
 );
 
-CREATE TABLE presponsable_caso (
+CREATE TABLE caso_presponsable (
 	id_caso INTEGER REFERENCES caso,
 	id_presponsable INTEGER REFERENCES presponsable,
 	tipo	INTEGER	NOT NULL,
@@ -590,7 +590,7 @@ CREATE TABLE caso_categoria_presponsable (
 	FOREIGN KEY (id_supracategoria, id_tviolencia) 
 	REFERENCES supracategoria (id, id_tviolencia),
 	FOREIGN KEY (id, id_caso, id_presponsable)
-	REFERENCES presponsable_caso (id, id_caso, 
+	REFERENCES caso_presponsable (id, id_caso, 
 		id_presponsable)
 );
 

@@ -76,7 +76,7 @@ echo -n "Clave: ";
 stty -echo; read clave; stty echo
 
 clavesha1=$($PHP -n -r "echo sha1('$clave');")
-q="SET client_encoding to 'UTF8'; INSERT INTO usuario(id_usuario, password, nombre, descripcion, id_rol, idioma)  VALUES ('$id', '$clavesha1', '$nombre', '$descripcion', '$sidrol', '$idsel'); INSERT INTO funcionario(anotacion, nombre) VALUES ('$anotacion', '$id');" 
+q="SET client_encoding to 'UTF8'; INSERT INTO usuario(id, password, nombre, descripcion, rol, idioma)  VALUES ('$id', '$clavesha1', '$nombre', '$descripcion', '$sidrol', '$idsel'); INSERT INTO funcionario(anotacion, nombre) VALUES ('$anotacion', '$id');" 
 echo $q;
 ../../bin/psql.sh -c "$q"
 

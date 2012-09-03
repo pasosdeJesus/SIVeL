@@ -168,3 +168,5 @@ INSERT INTO taccion (id, nombre, observaciones) VALUES (2001, 'AUDIENCIA DE CONC
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('sjud-1', '2011-10-19', 'Seguimiento Judicial');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('sjud-d1', '2011-10-19', 'Datos de Seguimiento Judicial');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('sj-fe', '2011-10-19', 'Fechas en tablas básicas');
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-rs', '2012-08-29', 'Renombra tablas');
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-sjrc', '2012-08-29', 'Renombra campos');
