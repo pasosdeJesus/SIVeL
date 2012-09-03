@@ -169,6 +169,12 @@ class PagEtiquetas extends PagBaseSimple
              error_valida(_('Faltó fecha y/o etiqueta'), $valores);
              return false;
          }
+        if (in_array(31, $_SESSION['opciones']) &&
+            !in_array(21, $_SESSION['opciones'])
+        ) {
+            return true;
+        }
+
 
          $db = $this->iniVar();
 

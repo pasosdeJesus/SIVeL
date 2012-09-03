@@ -570,6 +570,13 @@ class PagUbicacion extends PagBaseMultiple
             return false;
         }
         verifica_sin_CSRF($valores);
+        if (in_array(31, $_SESSION['opciones']) &&
+            !in_array(21, $_SESSION['opciones'])
+        ) {
+            return true;
+        }
+
+
         $db = $this->iniVar();
 
         $idcaso = $_SESSION['basicos_id'];

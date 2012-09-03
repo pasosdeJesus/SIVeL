@@ -174,6 +174,13 @@ class PagOtraAnexo extends PagOtrasFuentes
         $db = $this->iniVar();
 
         $r = parent::procesa($valores);
+        if (in_array(31, $_SESSION['opciones']) &&
+            !in_array(21, $_SESSION['opciones'])
+        ) {
+            return true;
+        }
+
+
         if ($this->bcaso_fotra->_do->id_fotra != null) {
             $vf = "'{$this->bcaso_fotra->_do->id_fotra}'";
             if (isset($valores['id_anexo']) && $valores['id_anexo'] != '') {

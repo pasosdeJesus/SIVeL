@@ -273,7 +273,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             session_regenerate_id();
             saca_opciones($usuario, $db, $op, $rol);
             if (count($op) == 0) {
-                echo "No tiene opciones este usuario, " .
+                echo "Este usuario no tiene opciones, " .
                     "¿seguro la base está bien inicializada?";
             }
             $_SESSION['opciones'] = $op;

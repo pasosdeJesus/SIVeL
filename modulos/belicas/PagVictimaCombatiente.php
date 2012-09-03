@@ -426,6 +426,12 @@ class PagVictimaCombatiente extends PagBaseMultiple
                 return false;
             }
         }
+        if (in_array(31, $_SESSION['opciones']) &&
+            !in_array(21, $_SESSION['opciones'])
+        ) {
+            return true;
+        }
+
 
         if (!isset($valores['id']) || $valores['id'] == '') {
             $valores['id'] = null;

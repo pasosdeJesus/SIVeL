@@ -223,9 +223,9 @@ class CapturaCaso extends HTML_QuickForm_Controller
 
         $nobus = !isset($_SESSION['forma_modo'])
             || $_SESSION['forma_modo'] != 'busqueda' ;
-        if (!in_array(21, $this->opciones) && $nobus) {
+/*        if (!in_array(21, $this->opciones) && $nobus) {
             die($GLOBALS['accno'] . " (3)");
-        }
+} */
         $mreq = '<span style = "font-size:80%; color:#ff0000;">*</span>' .
             '<span style = "font-size:80%;"> '
             . _('marca un campo requerido') . '</span>';

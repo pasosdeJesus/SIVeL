@@ -181,6 +181,13 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
         $db = $this->iniVar();
 
         $r = parent::procesa($valores);
+        if (in_array(31, $_SESSION['opciones']) &&
+            !in_array(21, $_SESSION['opciones'])
+        ) {
+            return true;
+        }
+
+
         if (!es_objeto_nulo($this->bcaso_ffrecuente->_do->id_ffrecuente)
             && !es_objeto_nulo($this->bcaso_ffrecuente->_do->fecha)
         ) {

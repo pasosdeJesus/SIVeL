@@ -643,6 +643,12 @@ class PagVictimaIndividual extends PagBaseMultiple
             error_valida(_('Cantidad de hijos fuera de rango'), $valores);
             return false;
         }
+        if (in_array(31, $_SESSION['opciones']) &&
+            !in_array(21, $_SESSION['opciones'])
+        ) {
+            return true;
+        }
+
 
         if (!isset($valores['id_persona']) || $valores['id_persona'] == '') {
             $valores['id_persona'] = null;
