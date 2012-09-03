@@ -73,119 +73,119 @@ INSERT INTO profesion(id, nombre, fechacreacion) VALUES (22, 'SIN INFORMACIÓN', 
 
 SELECT setval('profesion_seq', max(id)) FROM profesion;
 
--- rango_edad
+-- rangoedad
 
-INSERT INTO rango_edad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (1, 'R1', 'De 0 a 15 Años', '0', '15', '2001-03-23');
-INSERT INTO rango_edad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (2, 'R2', 'De 16 a 25 Años', '16', '25', '2001-03-23');
-INSERT INTO rango_edad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (3, 'R3', 'De 26 a 45 Años', '26', '45', '2001-03-23');
-INSERT INTO rango_edad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (4, 'R4', 'De 46 a 60', '46', '60', '2001-03-23');
-INSERT INTO rango_edad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (5, 'R5', 'De 61 en Adelante', '61', '130', '2001-03-23');
-INSERT INTO rango_edad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (6, 'SN', 'SIN INFORMACIÓN', '-1', '-1', '2001-03-23');
+INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (1, 'R1', 'De 0 a 15 Años', '0', '15', '2001-03-23');
+INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (2, 'R2', 'De 16 a 25 Años', '16', '25', '2001-03-23');
+INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (3, 'R3', 'De 26 a 45 Años', '26', '45', '2001-03-23');
+INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (4, 'R4', 'De 46 a 60', '46', '60', '2001-03-23');
+INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (5, 'R5', 'De 61 en Adelante', '61', '130', '2001-03-23');
+INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (6, 'SN', 'SIN INFORMACIÓN', '-1', '-1', '2001-03-23');
 
-SELECT setval('rango_edad_seq', max(id)) FROM rango_edad;
+SELECT setval('rangoedad_seq', max(id)) FROM rangoedad;
 
 -- resultado agresion
 
-INSERT INTO resultado_agresion(id, nombre, fechacreacion) VALUES (1, 'MUERTO', '2001-01-01');
-INSERT INTO resultado_agresion(id, nombre, fechacreacion) VALUES (2, 'HERIDO', '2001-01-01');
-INSERT INTO resultado_agresion(id, nombre, fechacreacion) VALUES (3, 'PRIVADO DE LA LIBERTAD', '2001-01-01');
+INSERT INTO resagresion(id, nombre, fechacreacion) VALUES (1, 'MUERTO', '2001-01-01');
+INSERT INTO resagresion(id, nombre, fechacreacion) VALUES (2, 'HERIDO', '2001-01-01');
+INSERT INTO resagresion(id, nombre, fechacreacion) VALUES (3, 'PRIVADO DE LA LIBERTAD', '2001-01-01');
 
-SELECT setval('resultado_agresion_seq', max(id)) FROM resultado_agresion;
+SELECT setval('resagresion_seq', max(id)) FROM resagresion;
 
 -- sector social
 
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (1, 'CAMPESINO', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (2, 'INDIGENA', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (3, 'OBRERO', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (4, 'COMERCIANTE', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (5, 'EMPLEADO', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (6, 'TRABAJADOR INDEPENDIENTE', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (7, 'PROFESIONAL', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (8, 'EMPRESARIO', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (9, 'INDUSTRIAL', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (10, 'HACENDADO', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (11, 'MARGINADO', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (12, 'TRABAJADOR (A) SEXUAL', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (13, 'DESEMPLEADO (A)', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (14, 'OTRO', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (15, 'SIN INFORMACIÓN', '2001-01-01');
-INSERT INTO sector_social(id, nombre, fechacreacion) VALUES (16, 'TRANSPORTADOR', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (1, 'CAMPESINO', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (2, 'INDIGENA', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (3, 'OBRERO', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (4, 'COMERCIANTE', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (5, 'EMPLEADO', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (6, 'TRABAJADOR INDEPENDIENTE', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (7, 'PROFESIONAL', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (8, 'EMPRESARIO', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (9, 'INDUSTRIAL', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (10, 'HACENDADO', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (11, 'MARGINADO', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (12, 'TRABAJADOR (A) SEXUAL', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (13, 'DESEMPLEADO (A)', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (14, 'OTRO', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (15, 'SIN INFORMACIÓN', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (16, 'TRANSPORTADOR', '2001-01-01');
 
-SELECT setval('sector_social_seq', max(id)) FROM sector_social;
+SELECT setval('sectorsocial_seq', max(id)) FROM sectorsocial;
 
--- vinculo_estado
+-- vinculoestado
 
 
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (1, 'CONGRESO', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (2, 'PRESIDENCIA', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (3, 'MINISTERIOS', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (4, 'DEPTOS. ADMINISTRATIVOS', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (5, 'EMP. IND. Y COM. DEL EST.', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (6, 'SUPERINTENDENCIAS', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (7, 'CONS. SUP. DE LA JUDICAT.', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (8, 'CORT. SUPREMA DE JUSTICIA', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (9, 'CORTE CONSTITUCIONAL', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (10, 'FISCALIA GRAL DE LA NAC.', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (11, 'CONSEJO NACIONAL ELECTOR.', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (12, 'REGIS. NAL DEL EST. CIVIL', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (13, 'PROCURADURIA GENERAL', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (38, 'SIN INFORMACIÓN', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (14, 'CONTRALORIA GENERAL DE R.', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (15, 'DEFENSORIA DEL PUEBLO', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (16, 'ASAMBLEA DEPARTAMENTAL', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (17, 'GOBERNACION', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (18, 'SECRETARIAS (DTO.)', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (19, 'EMPRESAS PUBLICAS DTALES.', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (20, 'TRIBUNALES DTALES.', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (21, 'REGISTRADURIA DTAL.', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (22, 'CONTRALORIA DTAL.', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (23, 'PROCURADURIA DTAL.', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (24, 'DEFENSORIA DTAL.', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (25, 'CONCEJO MUNICIPAL', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (26, 'ALCALDIA', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (27, 'SECRETARIAS MPALES.', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (28, 'EMPRESAS PUBLICAS MPALES.', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (29, 'JUZGADOS (MPALES.)', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (30, 'PROCURADURIA DELEGADA', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (31, 'DEFENSORIA (MPAL.)', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (32, 'PERSONERIA', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (33, 'CONTRALORIA (MPAL.)', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (34, 'JUNTAS ADMINIST. LOCALES', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (35, 'ALCALDIA MENOR', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (36, 'SECRETARIAS LOCALES', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (37, 'CASAS DE JUSTICIA', '2001-01-01');
-INSERT INTO vinculo_estado(id, nombre, fechacreacion) VALUES (39, 'TRIBUNALES', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (1, 'CONGRESO', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (2, 'PRESIDENCIA', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (3, 'MINISTERIOS', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (4, 'DEPTOS. ADMINISTRATIVOS', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (5, 'EMP. IND. Y COM. DEL EST.', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (6, 'SUPERINTENDENCIAS', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (7, 'CONS. SUP. DE LA JUDICAT.', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (8, 'CORT. SUPREMA DE JUSTICIA', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (9, 'CORTE CONSTITUCIONAL', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (10, 'FISCALIA GRAL DE LA NAC.', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (11, 'CONSEJO NACIONAL ELECTOR.', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (12, 'REGIS. NAL DEL EST. CIVIL', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (13, 'PROCURADURIA GENERAL', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (38, 'SIN INFORMACIÓN', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (14, 'CONTRALORIA GENERAL DE R.', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (15, 'DEFENSORIA DEL PUEBLO', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (16, 'ASAMBLEA DEPARTAMENTAL', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (17, 'GOBERNACION', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (18, 'SECRETARIAS (DTO.)', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (19, 'EMPRESAS PUBLICAS DTALES.', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (20, 'TRIBUNALES DTALES.', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (21, 'REGISTRADURIA DTAL.', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (22, 'CONTRALORIA DTAL.', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (23, 'PROCURADURIA DTAL.', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (24, 'DEFENSORIA DTAL.', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (25, 'CONCEJO MUNICIPAL', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (26, 'ALCALDIA', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (27, 'SECRETARIAS MPALES.', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (28, 'EMPRESAS PUBLICAS MPALES.', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (29, 'JUZGADOS (MPALES.)', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (30, 'PROCURADURIA DELEGADA', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (31, 'DEFENSORIA (MPAL.)', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (32, 'PERSONERIA', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (33, 'CONTRALORIA (MPAL.)', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (34, 'JUNTAS ADMINIST. LOCALES', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (35, 'ALCALDIA MENOR', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (36, 'SECRETARIAS LOCALES', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (37, 'CASAS DE JUSTICIA', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (39, 'TRIBUNALES', '2001-01-01');
 
-SELECT setval('vinculo_estado_seq', max(id)) FROM vinculo_estado;
+seLECT setval('vinculoestado_seq', max(id)) FROM vinculoestado;
 
--- tipo_relacion inicialmente de parametros:ParentesecoFamiliar
-INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones, fechacreacion) 
+-- trelacion inicialmente de parametros:ParentesecoFamiliar
+INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
 VALUES ('AB', 'Abuela', true, NULL, '2001-01-01');
-INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones, fechacreacion) 
+INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
 VALUES ('AO','Abuelo', true, NULL, '2001-01-01');
-INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones, fechacreacion) 
+INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
 VALUES ('CO','Conyuge y/o Companero Permanente', false, NULL, '2001-01-01');
-INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones, fechacreacion) 
+INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
 VALUES ('HA','Hija', true, NULL, '2001-01-01');
-INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones, fechacreacion) 
+INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
 VALUES ('HE','Hermano', false, NULL, '2001-01-01');
-INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones, fechacreacion) 
+INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
 VALUES ('HI','Hijo', true, NULL, '2001-01-01');
-INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones, fechacreacion) 
+INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
 VALUES ('HR','Hermana', false, NULL, '2001-01-01');
-INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones, fechacreacion) 
+INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
 VALUES ('MA','Madrina', true, NULL, '2001-01-01');
-INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones, fechacreacion) 
+INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
 VALUES ('ME','Madre', true, NULL, '2001-01-01');
-INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones, fechacreacion) 
+INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
 VALUES ('PA','Padre', true, NULL, '2001-01-01');
-INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones, fechacreacion) 
+INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
 VALUES ('PO','Padrino', true, NULL, '2001-01-01');
-INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones, fechacreacion) 
+INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
 VALUES ('TA','Tia', true, NULL, '2001-01-01');
-INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones, fechacreacion) 
+INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
 VALUES ('TO','Tio', true, NULL, '2001-01-01');
-INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones, fechacreacion) 
+INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
 VALUES ('SI','SIN INFORMACION', true, NULL, '2001-01-01');
 
 

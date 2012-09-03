@@ -10,11 +10,11 @@ CREATE TABLE combatiente (
 	sexo	CHAR(1)  NOT NULL CHECK (sexo='S' OR sexo='M' OR sexo='F'), 
 	id_resagresion INTEGER NOT NULL REFERENCES resagresion,
 	id_profesion INTEGER REFERENCES profesion,
-	id_rangoedad	INTEGER REFERENCES rango_edad,
+	id_rangoedad	INTEGER REFERENCES rangoedad,
 	id_filiacion	INTEGER	REFERENCES filiacion,
-	id_sectorsocial	INTEGER	REFERENCES sector_social,
+	id_sectorsocial	INTEGER	REFERENCES sectorsocial,
 	id_organizacion	INTEGER REFERENCES organizacion,
-	id_vinculoestado INTEGER REFERENCES vinculo_estado,
+	id_vinculoestado INTEGER REFERENCES vinculoestado,
 	id_caso	INTEGER REFERENCES caso,
 	organizacion_armada INTEGER REFERENCES presponsable
 );

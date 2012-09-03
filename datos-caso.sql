@@ -36,12 +36,12 @@ INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacio
 INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacion) VALUES (25, 'COLECTIVO CONFINADO', 'DIH', 'INTEGRIDAD', '2001-01-01');
 
 
---  tipoviolencia
+--  tviolencia
 
-INSERT INTO tipoviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacion) VALUES ('A', 'VIOLACIONES A LOS DERECHOS HUMANOS', 'DH', '2000-07-24', NULL);
-INSERT INTO tipoviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacion) VALUES ('B', 'VIOLENCIA POLÍTICO SOCIAL', 'VPS', '2000-07-24', NULL);
-INSERT INTO tipoviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacion) VALUES ('C', 'ACCIONES BÉLICAS', 'BELICAS', '2000-07-24', NULL);
-INSERT INTO tipoviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacion) VALUES ('D', 'INFRACCIONES AL DIH', 'DIH', '2000-07-24', NULL);
+INSERT INTO tviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacion) VALUES ('A', 'VIOLACIONES A LOS DERECHOS HUMANOS', 'DH', '2000-07-24', NULL);
+INSERT INTO tviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacion) VALUES ('B', 'VIOLENCIA POLÍTICO SOCIAL', 'VPS', '2000-07-24', NULL);
+INSERT INTO tviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacion) VALUES ('C', 'ACCIONES BÉLICAS', 'BELICAS', '2000-07-24', NULL);
+INSERT INTO tviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacion) VALUES ('D', 'INFRACCIONES AL DIH', 'DIH', '2000-07-24', NULL);
 
 -- supracategoria
 
@@ -258,49 +258,49 @@ SELECT setval('contexto_seq', max(id)) FROM contexto;
 
 
 
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (39, 'POLO ESTATAL', '2009-09-20', NULL, NULL);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (40, 'POLO INSURGENTE', '2009-09-20', NULL, NULL);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (1, 'ESTADO COLOMBIANO', '2001-01-30', NULL, NULL);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (2, 'FUERZA PUBLICA', '2001-01-30', NULL, 1);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (7, 'POLICÍA', '2001-01-30', NULL, 2);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (36, 'OTROS', '2001-06-13', NULL, NULL);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (24, 'AGENTE EXTRANJERO', '2001-01-30', NULL, '36');
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (25, 'GUERRILLA', '2001-01-30', NULL, NULL);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (32, 'ERG', '2001-01-30', NULL, 25);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (33, 'GRUPOS DE INTOLERANCIA SOCIAL', '2001-01-30', NULL, NULL);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (34, 'INFORMACION CONTRADICTORIA', '2001-01-30', NULL, NULL);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (35, 'SIN INFORMACIÓN', '2001-01-30', NULL, NULL);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (37, 'COMBATIENTES', '2004-01-20', NULL, NULL);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (4, 'EJERCITO', '2001-01-30', NULL, 2);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (5, 'ARMADA', '2001-01-30', NULL, 2);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (6, 'FUERZA AEREA', '2001-01-30', NULL, 2);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (3, 'FUERZAS MILITARES', '2001-01-30', NULL, 2);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (8, 'GAULA', '2001-01-30', NULL, 3);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (9, 'SIJIN', '2001-01-30', NULL, 7);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (10, 'DIJIN', '2001-01-30', NULL, 7);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (11, 'INPEC', '2001-01-30', NULL, 2);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (12, 'DAS', '2001-01-30', NULL, 2);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (38, 'FISCALIA', '2004-07-14', NULL, 1);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (13, 'CTI', '2001-01-30', NULL, 38);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (14, 'PARAMILITARES', '2001-01-30', NULL, 1);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (15, 'AUC', '2001-01-30', NULL, 14);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (16, 'ACCU', '2001-01-30', NULL, 14);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (17, 'AUTODEFENSAS DE PUERTO BOYACA', '2001-01-30', NULL, 14);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (18, 'AUTODEFENSAS DE RAMON ISAZA', '2001-01-30', NULL, 14);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (19, 'AUTODEFENSAS DE LOS LLANOS ORIENTALES', '2001-01-30', NULL, 14);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (20, 'AUTODEFENSAS DE SANTANDER Y SUR DEL CESAR', '2001-01-30', NULL, 14);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (21, 'AUTODEFENSAS DE CASANARE', '2001-01-30', NULL, 14);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (22, 'AUTODEFENSAS DE CUNDINAMARCA', '2001-01-30', NULL, 14);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (23, 'AUTODEFENSAS CAMPESINAS DEL MAGDALENA MEDIO, ACMM', '2001-01-30', NULL, 14);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (26, 'MILICIAS', '2001-01-30', NULL, 25);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (27, 'FARC-EP', '2001-01-30', NULL, 25);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (28, 'ELN', '2001-01-30', NULL, 25);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (29, 'MOVIMIENTO JAIME BATEMAN CAYON', '2001-01-30', NULL, 25);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (30, 'ERP', '2001-01-30', NULL, 25);
-INSERT INTO presuntos_responsables (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (31, 'EPL', '2001-01-30', NULL, 25);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (39, 'POLO ESTATAL', '2009-09-20', NULL, NULL);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (40, 'POLO INSURGENTE', '2009-09-20', NULL, NULL);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (1, 'ESTADO COLOMBIANO', '2001-01-30', NULL, NULL);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (2, 'FUERZA PUBLICA', '2001-01-30', NULL, 1);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (7, 'POLICÍA', '2001-01-30', NULL, 2);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (36, 'OTROS', '2001-06-13', NULL, NULL);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (24, 'AGENTE EXTRANJERO', '2001-01-30', NULL, '36');
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (25, 'GUERRILLA', '2001-01-30', NULL, NULL);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (32, 'ERG', '2001-01-30', NULL, 25);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (33, 'GRUPOS DE INTOLERANCIA SOCIAL', '2001-01-30', NULL, NULL);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (34, 'INFORMACION CONTRADICTORIA', '2001-01-30', NULL, NULL);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (35, 'SIN INFORMACIÓN', '2001-01-30', NULL, NULL);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (37, 'COMBATIENTES', '2004-01-20', NULL, NULL);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (4, 'EJERCITO', '2001-01-30', NULL, 2);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (5, 'ARMADA', '2001-01-30', NULL, 2);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (6, 'FUERZA AEREA', '2001-01-30', NULL, 2);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (3, 'FUERZAS MILITARES', '2001-01-30', NULL, 2);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (8, 'GAULA', '2001-01-30', NULL, 3);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (9, 'SIJIN', '2001-01-30', NULL, 7);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (10, 'DIJIN', '2001-01-30', NULL, 7);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (11, 'INPEC', '2001-01-30', NULL, 2);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (12, 'DAS', '2001-01-30', NULL, 2);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (38, 'FISCALIA', '2004-07-14', NULL, 1);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (13, 'CTI', '2001-01-30', NULL, 38);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (14, 'PARAMILITARES', '2001-01-30', NULL, 1);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (15, 'AUC', '2001-01-30', NULL, 14);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (16, 'ACCU', '2001-01-30', NULL, 14);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (17, 'AUTODEFENSAS DE PUERTO BOYACA', '2001-01-30', NULL, 14);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (18, 'AUTODEFENSAS DE RAMON ISAZA', '2001-01-30', NULL, 14);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (19, 'AUTODEFENSAS DE LOS LLANOS ORIENTALES', '2001-01-30', NULL, 14);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (20, 'AUTODEFENSAS DE SANTANDER Y SUR DEL CESAR', '2001-01-30', NULL, 14);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (21, 'AUTODEFENSAS DE CASANARE', '2001-01-30', NULL, 14);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (22, 'AUTODEFENSAS DE CUNDINAMARCA', '2001-01-30', NULL, 14);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (23, 'AUTODEFENSAS CAMPESINAS DEL MAGDALENA MEDIO, ACMM', '2001-01-30', NULL, 14);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (26, 'MILICIAS', '2001-01-30', NULL, 25);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (27, 'FARC-EP', '2001-01-30', NULL, 25);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (28, 'ELN', '2001-01-30', NULL, 25);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (29, 'MOVIMIENTO JAIME BATEMAN CAYON', '2001-01-30', NULL, 25);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (30, 'ERP', '2001-01-30', NULL, 25);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (31, 'EPL', '2001-01-30', NULL, 25);
 
 
-SELECT setval('presuntos_responsables_seq', max(id)) FROM presuntos_responsables;
+SELECT setval('presponsable_seq', max(id)) FROM presponsable;
 
 
 -- antecedentes

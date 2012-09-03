@@ -379,7 +379,7 @@ CREATE TABLE ubicacion (
 ); 
 
 CREATE TABLE usuario (
-	id_usuario VARCHAR(15) PRIMARY KEY,
+	id VARCHAR(15) PRIMARY KEY,
 	password VARCHAR(64) NOT NULL,
 	nombre VARCHAR(50),
 	descripcion VARCHAR(50),
