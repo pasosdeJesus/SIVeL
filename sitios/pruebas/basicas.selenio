@@ -1608,7 +1608,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id_papa</td>
+	<td>papa</td>
 	<td>label=AGENTE EXTRANJERO</td>
 </tr>
 <tr>
@@ -2058,7 +2058,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>tipo_violencia</td>
+	<td>tipoviolencia</td>
 	<td>x</td>
 </tr>
 <tr>

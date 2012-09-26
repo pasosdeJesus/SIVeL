@@ -421,8 +421,8 @@ class PagPResponsables extends PagBaseMultiple
             return false;
         }
         verifica_sin_CSRF($valores);
-        if (in_array(31, $_SESSION['opciones']) &&
-            !in_array(21, $_SESSION['opciones'])
+        if (in_array(31, $_SESSION['opciones'])
+            && !in_array(21, $_SESSION['opciones'])
         ) {
             return true;
         }

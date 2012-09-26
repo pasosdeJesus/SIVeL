@@ -19,10 +19,10 @@
 $GLOBALS['modulo'][300] = 'modulos/mapag/index.php';
 
 $GLOBALS['m_opcion'][491] = array(
-    'nombre' => 'Mapa en Googlemap', 
-    'idpapa' => 40, 
+    'nombre' => 'Mapa en Googlemap',
+    'idpapa' => 40,
     'url' => 'opcion?num=300',
 );
 
-  
+
 

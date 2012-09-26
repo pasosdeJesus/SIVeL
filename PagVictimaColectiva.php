@@ -631,8 +631,8 @@ class PagVictimaColectiva extends PagBaseMultiple
             error_valida('Falta nombre de víctima colectiva', $valores);
             return false;
         }
-        if (in_array(31, $_SESSION['opciones']) &&
-            !in_array(21, $_SESSION['opciones'])
+        if (in_array(31, $_SESSION['opciones'])
+            && !in_array(21, $_SESSION['opciones'])
         ) {
             return true;
         }

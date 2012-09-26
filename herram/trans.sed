@@ -140,3 +140,5 @@ s/tipo_accion/taccion/g
 s/observaciones_accion/observacionesaccion/g
 s/numero_radicado/numeroradicado/g
 s/trelacion_accion/taccion/g
+s/DataObjects\/Tipo_sitio.php/DataObjects\/Tsitio.php/g
+s/funcionario_caso/caso_funcionario/g

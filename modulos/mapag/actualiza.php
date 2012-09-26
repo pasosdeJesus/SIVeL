@@ -16,25 +16,19 @@
 /** Actualiza base de datos después de actualizar fuentes */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
+
+$aut_usuario = "";
+$db = autentica_usuario($dsn, $aut_usuario, 21);
+
+require_once $_SESSION['dirsitio'] . '/conf_int.php';
 require_once "confv.php";
 require_once "misc.php";
 require_once "misc_actualiza.php";
 
 
-$aut_usuario = "";
-$db = autentica_usuario($dsn, $aut_usuario, 21);
 
 
 $act = objeto_tabla('Actualizacionbase');
 
-$idac = 'mg-1';
-if (!aplicado($idac)) {
-
-    hace_consulta($db, "INSERT INTO opcion (id_opcion, descripcion, id_mama, nomid) VALUES ('491', 'Mapa en Googlemap', '40', 'opcion?num=300')", false);
-
-    aplicaact(
-        $act, $idac, 'Opción del menú para ingresar al mapa'
-    );
-}
 
 ?>

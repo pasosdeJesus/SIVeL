@@ -30,13 +30,13 @@ $GLOBALS['misc_ordencons'][0] = "rotulos_orden_cons";
 $GLOBALS['estrotulos_excluirsinfiliacion'] = false;
 
 $GLOBALS['m_opcion'][53] = array(
-    'nombre' =>  _('Individuales con Rotulos de Rep. Cons.'), 
-    'idpapa' => 50, 
+    'nombre' =>  _('Individuales con Rotulos de Rep. Cons.'),
+    'idpapa' => 50,
     'url' => 'opcion?num=100'
 );
 $GLOBALS['m_opcion'][53] = array(
-    'nombre' =>  _('Colectivas con Rotulos de Rep. Cons.'), 
-    'idpapa' => 50, 
+    'nombre' =>  _('Colectivas con Rotulos de Rep. Cons.'),
+    'idpapa' => 50,
     'url' => 'opcion?num=101'
 );
 

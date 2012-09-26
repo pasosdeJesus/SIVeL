@@ -120,7 +120,7 @@ if (test "$SALTAINI" != "1") then {
 	fuenteschrootsed=`echo $fuentes | sed -e "s/$chres//g" | sed -e "s/\//\\\\\\\\\//g"`;
 
 
-	sed -e "s/^ *\$dbservidor *=.*/\$dbservidor = \"unix($chres$dschrootsed)\";/g" sitios/pordefecto/conf.php.plantilla | 
+	sed -e "s/^ *\$dbservidor *=.*/\$dbservidor = \"unix($chres$dschrootsed)\";/g" sitios/pordefecto/conf.php | 
 	sed -e "s/^ *\$dbusuario *=.*/\$dbusuario = \"$dbusuario\";/g"  |
 	sed -e "s/^ *\$dbclave *=.*/\$dbclave = \"$dbclave\";/g"  |
 	sed -e "s/^ *\$dbnombre *=.*/\$dbnombre = \"sivelpruebas\";/g"  |

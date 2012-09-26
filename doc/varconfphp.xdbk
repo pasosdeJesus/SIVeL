@@ -33,6 +33,12 @@
 <listitem><para> Pestañas de la Ficha  de captura</para></listitem></varlistentry>
 <varlistentry><term><literal>nueva_ficha_tabuladores</literal></term>
 <listitem><para> Solicitudes de nuevas pestañas en ficha de captura</para></listitem></varlistentry>
+<varlistentry><term><literal>m_rol</literal></term>
+<listitem><para> Roles</para></listitem></varlistentry>
+<varlistentry><term><literal>m_opcion</literal></term>
+<listitem><para> Opciones del menú principal</para></listitem></varlistentry>
+<varlistentry><term><literal>m_opcion_rol</literal></term>
+<listitem><para> Roles para los que está disponible cada opción del menú</para></listitem></varlistentry>
 <varlistentry><term><literal>ficha_color_fondo</literal></term>
 <listitem><para></para></listitem></varlistentry>
 <varlistentry><term><literal>MENS_ORTOGRAFIA</literal></term>
@@ -68,10 +74,6 @@
 <varlistentry><term><literal>etiqueta</literal></term>
 <listitem><para> Etiquetas que aparecen en la interfaz</para></listitem></varlistentry>
 <varlistentry><term><literal>cw_ncampos</literal></term>
-<listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
-<varlistentry><term><literal>m_rol</literal></term>
-<listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
-<varlistentry><term><literal>m_opcion</literal></term>
 <listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
 <varlistentry><term><literal>mes</literal></term>
 <listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
