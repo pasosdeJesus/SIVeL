@@ -592,10 +592,16 @@ class PagOtrasFuentes extends PagBaseMultiple
      * acuerdo a las preferencias especificadas en $sol.
      * @see PagBaseSimple
      */
-    static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls)
-    {
+    static function mezcla(&$db, $sol, $id1, $id2, $idn, 
+        $cls=array('caso_fotra')
+    ) {
         //echo "OJO PagOtrasFuentes::mezcla(db, ";
-        //print_r($sol); echo ", $id1, $id2, $idn, $t)<br> ";
+        //print_r($sol); echo ", $id1, $id2, $idn, ";print_r($cls);echo ")<br> ";
+        assert($id1 != $id2);
+        assert($id2 != $idn);
+        if (!is_array($cls)) {
+            $cls = array($cls);
+        }
         foreach ($cls as $t) {
             if ($t == 'anexo') {
                 $pl = 'id';
@@ -606,22 +612,24 @@ class PagOtrasFuentes extends PagBaseMultiple
             $d2 = objeto_tabla($t);
             $d1->id_caso = $id1;
             $d2->id_caso = $id2;
-            $d1->find();
-            while ($d1->fetch()) {
-                $dd = objeto_tabla($t);
-                $dd->id_caso = $idn;
-                foreach (array_merge(array($pl), $dd->fb_fieldLabels)
-                    as $c => $cf
-                ) {
-                    //echo "OJO 1 c=$c, d1->c=" . $d1->$c . "<br>";
-                    $dd->$c = $d1->$c;
+            if ($id1 != $idn) {
+                $d1->find();
+                while ($d1->fetch()) {
+                    $dd = objeto_tabla($t);
+                    $dd->id_caso = $idn;
+                    foreach (array_merge(array($pl), $dd->fb_fieldLabels)
+                        as $c => $cf
+                    ) {
+                        //echo "OJO 1 c=$c, d1->c=" . $d1->$c . "<br>";
+                        $dd->$c = $d1->$c;
+                    }
+                    //echo "OJO 1 insertado dd"; print_r($dd);
+                    $dd->insert();
                 }
-                $dd->insert();
-                //echo "OJO 1 insertado dd"; print_r($dd);
             }
             $d2->find();
             while ($d2->fetch()) {
-                //echo "copiando de nuevo d1<br>";
+                //echo "OJO copiando de nuevo d1<br>";
                 $dd = objeto_tabla($t);
                 $dd->id_caso = $idn;
                 foreach (array_merge(array($pl), $dd->fb_fieldLabels)
@@ -630,8 +638,8 @@ class PagOtrasFuentes extends PagBaseMultiple
                     //echo "OJO 2 c=$c, d2->c=" . $d2->$c . "<br>";
                     $dd->$c = $d2->$c;
                 }
+                //echo "OJO 2 insertado dd"; print_r($dd); 
                 $dd->insert();
-                //echo "OJO 2 insertado dd"; print_r($dd); //$dd->insert();
             }
             //print_r($dd);
         }

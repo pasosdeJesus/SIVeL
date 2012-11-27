@@ -617,7 +617,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
         );
         //print_r($enl); die("x");
         foreach ($cls as $cl) {
-            //echo "cl=$cl ";
+            //echo "OJO cl=$cl ";
             $d1 = objeto_tabla($cl);
             if ($cl == 'caso') {
                 $d1->id = $id1;
@@ -633,7 +633,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
             }
             $d2->find(1);
             foreach ($d1->fb_fieldLabels as $c => $et) {
-                //echo "<br>c=$c ";
+                //echo "<br>OJO c=$c ";
                 $v1 = $v2 = "";
                 $vp = 1;
                 if (trim($d2->$c) != trim($d1->$c)) {
@@ -721,7 +721,8 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      *   compara.
      * @param integer $id1 Código de primer caso
      * @param integer $id2 Código de segundo caso
-     * @param integer $idn Código del caso en el que aplicará los cambios
+     * @param integer $idn Código de nuevo caso en el que aplicará 
+     *      los cambios o $id1 si mezcla lo del segundo dentro del primero
      * @param arrayer $cls Especificación de tablas por mezclar
      *
      * @return Mezcla valores de los casos $id1 e $id2 en el caso $idn de
@@ -729,34 +730,45 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      */
     static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls)
     {
-        //echo "OJO PagBaseSimple::mezcla(db, ";
+        assert($id1 != $id2);
+        assert($id2 != $idn);
+        assert($db != null);
+        //echo "OJO PagBaseSimple::mezcla(db, "; 
         //print_r($sol); echo ", $id1, $id2, $idn, ";
         //print_r($cls); echo ")<br> ";
         if (!is_array($cls)) {
             $cls = array($cls);
         }
+        $nuevo = $id1 != $idn;
         foreach ($cls as $t) {
             $d1 = objeto_tabla($t);
             $d2 = objeto_tabla($t);
-            $dd = objeto_tabla($t);
+            if ($nuevo) { 
+                $dd = objeto_tabla($t);
+                if ($t == 'caso') {
+                    $dd->id = $idn;
+                } else {
+                    $dd->id_caso = $idn;
+                } 
+            }
             if ($t == 'caso') {
                 $d1->id = $id1;
                 $d2->id = $id2;
-                $dd->id = $idn;
             } else {
                 $d1->id_caso = $id1;
                 $d2->id_caso = $id2;
-                $dd->id_caso = $idn;
             }
-            $d1->find(1);
+            $rbusca1 = $d1->find(1);
             $d2->find(1);
-            if ($t == 'casoreiniciar' || $t == 'carpeta') {
-                hace_consulta(
-                    $db, "INSERT INTO $t (id_caso) VALUES ('$idn');"
-                );
-            }
-            $dd->find();
-            $nuevodd = !$dd->fetch();
+            if ($nuevo || ($id1 == $idn && $rbusca1 == 0)) {
+                if ($t == 'casoreiniciar' || $t == 'carpeta') {
+                    hace_consulta(
+                        $db, "INSERT INTO $t (id_caso) VALUES ('$idn');"
+                    );
+                }
+            } else {
+                $dd =& $d1;
+            } 
 
             foreach ($d1->fb_fieldLabels as $c => $et) {
                 //echo "<br>OJO c=$c ";
@@ -768,32 +780,30 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
                 if (isset($sol[$t][$c])) {
                     $vp = $sol[$t][$c];
                 }
-                if ($vp == 1) {
-                    //echo "  Elegido 1<br>";
+                if ($vp == 1 && !$nuevo) {
+                    //echo "  OJO Elegido 1<br>";
                     $dd->$c = $d1->$c;
                 } else {
-                    //echo "  Elegido 2<br>";
+                    //echo "  OJO Elegido 2<br>";
                     $dd->$c = $d2->$c;
                 }
             }
-            if ($nuevodd) {
-                //echo "nuevodd=$nuevodd";
-                //echo $t;
+            if ($nuevo) {
                 $dd->id_caso = $idn;
             }
             if ($t != 'caso'  && ($dd->id_caso == null
                 || ($t == 'ubicacion' && $dd->id == null)
-                || $nuevodd)
+                || $nuevo)
             ) {
-                    //echo "OJO insertando";
+                //echo "OJO insertando";
                 $dd->id_caso = $idn;
-                //echo "Antes: "; print_r($dd);
+                //echo "OJO Antes: "; print_r($dd); 
                 $dd->insert();
             } else if ($t == 'caso' || $dd->id_caso == $idn) {
-                //echo "OJO actualizando";
+                //echo "OJO actualizando"; print_r($dd);  //die("x");
                 $dd->update();
             }
-            //echo "Después: "; print_r($dd);
+            //echo "<br>OJO Después: "; print_r($dd);
         }
     }
 

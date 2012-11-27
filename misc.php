@@ -976,6 +976,18 @@ function die_esc($mens)
     die(htmlentities($mens, ENT_COMPAT, 'UTF-8'));
 }
 
+/**
+ * Retorna HTML con enlace para editar un caso
+ *
+ * @param int $idc Código del caso
+ *
+ * @return string cadena HTML con enlace para editar caso $idc
+ */
+function enlace_edita($idc) 
+{
+    $idn = (int)$idc;
+    return "<a href='captura_caso.php?modo=edita&id=$idn'>$idn</a>";
+}
 
 /**
  * Muestra mensaje escapandolo antes para presentar en navegador
@@ -984,7 +996,7 @@ function die_esc($mens)
  * @param bool   $nl   Nueva linea tras mensaje
  *
  * @return void
-     */
+ */
 function echo_esc($mens, $nl = true)
 {
     echo htmlentities($mens, ENT_COMPAT, 'UTF-8');

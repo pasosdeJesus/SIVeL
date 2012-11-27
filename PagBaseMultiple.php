@@ -375,7 +375,9 @@ abstract class PagBaseMultiple extends PagBaseSimple
     {
         //echo "OJO PagBaseMultiple::compara(db, r, $id1, $id2, {";
         //print_r($a); echo "})<br>";
-        if ($cls == null || (count($cls) == 1 && $cls[0] == 'caso_contexto')) {
+        if ($cls == null || (is_array($cls) 
+            && count($cls) == 1 && current($cls) == 'caso_contexto')
+        ) {
             $cls = array('Contextos' => array('caso_contexto', 'id_contexto'),
                 'Antecedentes' => array('antecedente_caso', 'id_antecedente'));
         }
@@ -408,7 +410,9 @@ abstract class PagBaseMultiple extends PagBaseSimple
                         $$nomv .= $sep;
                         foreach ($ac as $n) {
                             //echo "  OJO n=$n<br>";
-                            $$nomv .= " " . $dr->$n;
+                            if (isset($dr->$n)) {
+                                $$nomv .= " " . $dr->$n;
+                            }
                         }
                     }
                     $sep = ", ";
@@ -466,8 +470,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
             $GLOBALS['dbnombre'] . ".ini",
             true
             );
-        */
-        //print_r($tab); die("x");
+         */
         if ($cls == 'caso_contexto') {
             $cls = array('Contextos' => array('caso_contexto', 'id_contexto'),
             'Antecedentes' => array('antecedente_caso', 'id_antecedente'));
@@ -482,14 +485,22 @@ abstract class PagBaseMultiple extends PagBaseSimple
                 list($cl, $ck, $clsol) = $clm;
             }
             //echo "OJO cl=$cl, ck=$ck,clsol=$clsol<br> ";
+            if ($idn == $id1 && isset($sol[$clsol][$ck]) 
+                && $sol[$clsol][$ck] == 1
+            ) {
+                //echo "OJO saltando cuando nuevo es 1";
+                continue;
+            }
             $de = objeto_tabla($cl);
             $eti = $de->nom_tabla;
-            if ($sol[$clsol][$ck] == 1) {
+            if (isset($sol[$clsol][$ck]) && $sol[$clsol][$ck] == 1) {
                 //echo "OJO caso 1";
                 $de->id_caso = $id1;
-            } else {
+            } else if (isset($sol[$clsol][$ck]) && $sol[$clsol][$ck] == 2) {
                 //echo "OJO caso 2";
                 $de->id_caso = $id2;
+            } else {
+                continue;
             }
             // aqui tocaría por las llaves primarias que no esten en ck
             // y no solo id_caso
