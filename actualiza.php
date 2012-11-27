@@ -2312,6 +2312,18 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Renombrando campos para seguir estándares SQL');
 }
 
+/*$idac = '1.2-rt4';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db,
+        "ALTER TABLE vinculoestado_comunidad RENAME TO "
+        . "comunidad_vinculoestado", false
+    );
+
+    die("x");
+    aplicaact($act, $idac, 'Renombrando tablas');
+} */
+
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;

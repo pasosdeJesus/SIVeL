@@ -142,3 +142,10 @@ s/numero_radicado/numeroradicado/g
 s/trelacion_accion/taccion/g
 s/DataObjects\/Tipo_sitio.php/DataObjects\/Tsitio.php/g
 s/funcionario_caso/caso_funcionario/g
+s/id_persona1/persona1/g
+s/id_persona2/persona2/g
+s/bicacion_up/bicacionup/g
+s/stado_cargo/stadocargo/g
+s/vinculoestado_comunidad/comunidad_vinculoestado/g
+s/Vinculoestado_comunidad/Comunidad_vinculoestado/g
+s/id_p_responsable/id_presponsable/g

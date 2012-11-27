@@ -110,7 +110,7 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
             $condb = "AND id_fotra IS NULL " .
             "AND (id_ffrecuente IS NULL $cor)  " ;
             $an = $this->addElement(
-                'select', 'id_anexo', 'Anexo',
+                'select', 'id_anexo', _('Anexo'),
                 array()
             );
             $q = "SELECT  id, archivo FROM anexo " .

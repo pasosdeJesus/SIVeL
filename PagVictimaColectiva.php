@@ -53,7 +53,7 @@ class PagVictimaColectiva extends PagBaseMultiple
     var $bcomunidad_sectorsocial;
 
     /** Vínculos con estado */
-    var $bvinculoestado_comunidad;
+    var $bcomunidad_vinculoestado;
 
     /** Filiaciones */
     var $bcomunidad_filiacion;
@@ -89,7 +89,7 @@ class PagVictimaColectiva extends PagBaseMultiple
         $this->bantecedente_comunidad = null;
         $this->bcomunidad_rangoedad = null;
         $this->bcomunidad_sectorsocial = null;
-        $this->bvinculoestado_comunidad = null;
+        $this->bcomunidad_vinculoestado = null;
         $this->bcomunidad_filiacion = null;
         $this->bcomunidad_profesion = null;
         $this->bcomunidad_organizacion = null;
@@ -127,7 +127,7 @@ class PagVictimaColectiva extends PagBaseMultiple
         'antecedente_comunidad',
         'comunidad_rangoedad',
         'comunidad_sectorsocial',
-        'vinculoestado_comunidad',
+        'comunidad_vinculoestado',
         'comunidad_filiacion',
         'comunidad_profesion',
         'comunidad_organizacion',
@@ -157,8 +157,8 @@ class PagVictimaColectiva extends PagBaseMultiple
             objeto_tabla('comunidad_rangoedad');
         $dcomunidad_sectorsocial =&
             objeto_tabla('comunidad_sectorsocial');
-        $dvinculoestado_comunidad =&
-            objeto_tabla('vinculoestado_comunidad');
+        $dcomunidad_vinculoestado =&
+            objeto_tabla('comunidad_vinculoestado');
         $dcomunidad_filiacion =& objeto_tabla('comunidad_filiacion');
         $dcomunidad_profesion =& objeto_tabla('comunidad_profesion');
         $dcomunidad_organizacion =&
@@ -199,8 +199,8 @@ class PagVictimaColectiva extends PagBaseMultiple
         $dcomunidad_rangoedad->id_caso= $idcaso;
         $dcomunidad_sectorsocial->id_grupoper = $idgrupoper;
         $dcomunidad_sectorsocial->id_caso = $idcaso;
-        $dvinculoestado_comunidad->id_grupoper = $idgrupoper;
-        $dvinculoestado_comunidad->id_caso = $idcaso;
+        $dcomunidad_vinculoestado->id_grupoper = $idgrupoper;
+        $dcomunidad_vinculoestado->id_caso = $idcaso;
         $dcomunidad_filiacion->id_grupoper = $idgrupoper;
         $dcomunidad_filiacion->id_caso= $idcaso;
         $dcomunidad_profesion->id_grupoper= $idgrupoper;
@@ -239,8 +239,8 @@ class PagVictimaColectiva extends PagBaseMultiple
             'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
         );
-        $this->bvinculoestado_comunidad =& DB_DataObject_FormBuilder::create(
-            $dvinculoestado_comunidad,
+        $this->bcomunidad_vinculoestado =& DB_DataObject_FormBuilder::create(
+            $dcomunidad_vinculoestado,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
             'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
@@ -327,9 +327,9 @@ class PagVictimaColectiva extends PagBaseMultiple
         $this->bcomunidad_sectorsocial->useForm($this);
         $this->bcomunidad_sectorsocial->getForm();
 
-        $this->bvinculoestado_comunidad->createSubmit = 0;
-        $this->bvinculoestado_comunidad->useForm($this);
-        $this->bvinculoestado_comunidad->getForm();
+        $this->bcomunidad_vinculoestado->createSubmit = 0;
+        $this->bcomunidad_vinculoestado->useForm($this);
+        $this->bcomunidad_vinculoestado->getForm();
 
         $this->bcomunidad_filiacion->createSubmit = 0;
         $this->bcomunidad_filiacion->useForm($this);
@@ -400,7 +400,7 @@ class PagVictimaColectiva extends PagBaseMultiple
             $r = array('antecedente_comunidad' => 'id_antecedente',
                 'comunidad_rangoedad' =>  'id_rango',
                 'comunidad_sectorsocial' =>  'id_sector',
-                'vinculoestado_comunidad' =>  'id_vinculoestado',
+                'comunidad_vinculoestado' =>  'id_vinculoestado',
                 'comunidad_filiacion' =>  'id_filiacion',
                 'comunidad_profesion' =>  'id_profesion',
                 'comunidad_organizacion' =>  'id_organizacion'
@@ -442,10 +442,10 @@ class PagVictimaColectiva extends PagBaseMultiple
                 $valscss[] = $this->bcomunidad_sectorsocial->_do->id_sector;
             }
 
-            $this->bvinculoestado_comunidad->_do->find();
-            while ($this->bvinculoestado_comunidad->_do->fetch()) {
+            $this->bcomunidad_vinculoestado->_do->find();
+            while ($this->bcomunidad_vinculoestado->_do->fetch()) {
                 $valscve[]
-                    = $this->bvinculoestado_comunidad->_do->id_vinculoestado;
+                    = $this->bcomunidad_vinculoestado->_do->id_vinculoestado;
             }
 
             $this->bcomunidad_filiacion->_do->find();
@@ -517,7 +517,7 @@ class PagVictimaColectiva extends PagBaseMultiple
             );
             hace_consulta(
                 $db, "DELETE " .
-                " FROM vinculoestado_comunidad " .
+                " FROM comunidad_vinculoestado " .
                 " WHERE id_caso=$idcaso " .
                 " AND id_grupoper='$idgrupoper'"
             );
@@ -713,12 +713,12 @@ class PagVictimaColectiva extends PagBaseMultiple
 
         if (isset($valores['id_vinculoestado'])) {
             foreach (var_escapa($valores['id_vinculoestado']) as $k => $v) {
-                $this->bvinculoestado_comunidad->_do->id_grupoper
+                $this->bcomunidad_vinculoestado->_do->id_grupoper
                     = $idgrupoper;
-                $this->bvinculoestado_comunidad->_do->id_caso = $idcaso;
-                $this->bvinculoestado_comunidad->_do->id_vinculoestado
+                $this->bcomunidad_vinculoestado->_do->id_caso = $idcaso;
+                $this->bcomunidad_vinculoestado->_do->id_vinculoestado
                     = (int)var_escapa($v, $db);
-                $this->bvinculoestado_comunidad->_do->insert();
+                $this->bcomunidad_vinculoestado->_do->insert();
             }
         }
 
@@ -776,7 +776,7 @@ class PagVictimaColectiva extends PagBaseMultiple
             $w, $t, $idcaso, 'victimacolectiva',
             '', '', false, array('antecedente_comunidad',
                     'comunidad_rangoedad', 'comunidad_sectorsocial',
-                    'vinculoestado_comunidad', 'comunidad_filiacion',
+                    'comunidad_vinculoestado', 'comunidad_filiacion',
                     'comunidad_profesion', 'comunidad_organizacion'
             ),
             'id_grupoper', array('personasaprox'), 'id_grupoper'

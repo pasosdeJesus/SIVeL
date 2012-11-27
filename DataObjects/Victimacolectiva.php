@@ -126,8 +126,8 @@ class DataObjects_Victimacolectiva extends DB_DataObject_SIVeL
     function tradRelato()
     {
         return array(
-            'vinculoestado_comunidad' =>
-            array('vinculoestado_comunidad', 'id_vinculoestado'),
+            'comunidad_vinculoestado' =>
+            array('comunidad_vinculoestado', 'id_vinculoestado'),
             'comunidad_profesion' =>
             array('profesion', 'id_profesion'),
             'antecedente_comunidad' =>

@@ -1843,9 +1843,8 @@ class ResConsulta
                     'ubicacionfisica' => 'ubicacion_fuente',
                     'tfuente' => 'observaciones{tipo->tipofuente}')
                 );
-                $ia2 = $dfuentedirectacaso->tfuente;
                 $arfuente['observaciones{tipo->tipofuente}']
-                    = $dfuentedirectacaso->fb_enumOptions['tfuente'][$ia2];
+                    = $dfuentedirectacaso->tfuente;//$dfuentedirectacaso->fb_enumOptions['tfuente'][$ia2];
                 $r .= "  <fuente>\n";
                 a_elementos_xml($r, 4, $arfuente);
                 $r .= "  </fuente>\n";
@@ -1865,10 +1864,12 @@ class ResConsulta
 
 
             $r .= "  <!-- Otros -->\n";
-            $dinter = $dcaso->getLink('id_intervalo');
-            $arotros['observaciones{tipo->intervalo}'] = $dinter->nombre;
-            $dinter->free();
-            unset($dinter);
+            if (isset($dcaso->id_intervalo)) {
+                $dinter = $dcaso->getLink('id_intervalo');
+                $arotros['observaciones{tipo->intervalo}'] = $dinter->nombre;
+                $dinter->free();
+                unset($dinter);
+            }
 
             $fr = lista_relacionados(
                 'caso_frontera',

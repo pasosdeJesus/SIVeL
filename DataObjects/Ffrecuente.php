@@ -50,7 +50,6 @@ class DataObjects_Ffrecuente extends DataObjects_Basica
 
     }
 
-
     var $fb_enumFields = array('tfuente');
     var $es_enumOptions = array(
         'tfuente' => array(

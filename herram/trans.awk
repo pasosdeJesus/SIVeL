@@ -64,11 +64,16 @@ function transear(sa)
 	}
 }
 
+/ * @version/ {
+	$0 = "";
+	saltadb = 1;
+}
+
 # Package documentado en DocBlock
 /^ *\* *@package / {
 	haypackage = 1;
 	if (phpv5 == 0) {
-		salta = 1;
+		saltadb = 1;
 	}
 }
 
@@ -78,10 +83,10 @@ function transear(sa)
 		if (depura == 1) {
 			print "db concatena" ;
 		}
-		if (salta != 1) {
+		if (saltadb != 1) {
 			db = db "\n" $0;
 		} else {
-			salta = 0;
+			saltadb = 0;
 		}
 	}
 }
@@ -496,7 +501,7 @@ END {
 
 BEGIN {
 	depura = 0;
-	salta = 0;
+	saltadb = 0;
 	phpv5 = 0;
 	haysee = 0;
 	cierracor = "\n";

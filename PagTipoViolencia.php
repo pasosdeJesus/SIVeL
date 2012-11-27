@@ -452,16 +452,14 @@ class PagTipoViolencia extends PagBaseSimple
      */
     static function compara(&$db, &$r, $id1, $id2, $cls = array('caso'))
     {
-        //echo "PagTipoViolencia::compara(db, r, $id1, $id2, a)";
-        //print_r($cls); echo "<br>";
+        #echo "OJO PagTipoViolencia::compara(db, r, $id1, $id2, a)";
         if ($cls == null || (count($cls) == 1 && $cls[0] == 'caso_contexto')) {
             $cls = array('Contextos' => array('caso_contexto', 'id_contexto'),
                 'Antecedentes' => array('antecedente_caso', 'id_antecedente'));
         }
-        //print_r($cls);
         //PagBaseSimple::compara($db, $r, $id1, $id2, array('caso'));
-        foreach ($cls as $eti => $cls) {
-            list($cl, $c) = $cls;
+        foreach ($cls as $eti => $clm) {
+            list($cl, $c) = $clm;
             //echo "OJO cl=$cl, c=$c<br> ";
             $v1 = $v2 = "";
             $d1 = objeto_tabla($cl);
@@ -469,12 +467,12 @@ class PagTipoViolencia extends PagBaseSimple
             $d1->find();
             $sep = "";
             while ($d1->fetch()) {
-                //echo "d1 fetched " . $d1->$c . "<br>";
+                #echo "OJO d1 fetched " . $d1->$c . "<br>";
                 $d = $d1->getLink($c);
                 $v1 .= $sep . $d->nombre;
                 $sep = ", ";
             }
-            //echo "v1=$v1<br>";
+            #echo "OJO v1=$v1<br>";
             $d2 = objeto_tabla($cl);
             $d2->id_caso = $id2;
             $d2->find();
@@ -535,6 +533,9 @@ class PagTipoViolencia extends PagBaseSimple
             if (isset($sol[$cl][$c]) && $sol[$cl][$c] == 1) {
                 //echo "OJO caso 1";
                 $de->id_caso = $id1;
+                if ($idn == $id1) {
+                    return;
+                }
             } else {
                 //echo "OJO caso 2";
                 $de->id_caso = $id2;
