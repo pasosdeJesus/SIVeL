@@ -614,7 +614,7 @@ class PagConsolidado extends HTML_QuickForm_Page
         if ($cy < 2005) {
             $cy = 2005;
         }
-    $slan = isset($_SESSION['LANG']) ?  $_SESSION['LANG'] : 'es';
+        $slan = isset($_SESSION['LANG']) ?  $_SESSION['LANG'] : 'es';
         $e =& $this->addElement(
             'date', 'fini', _('Desde'),
             array('language' => $slan, 'addEmptyOption' => true,

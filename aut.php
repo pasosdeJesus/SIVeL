@@ -29,8 +29,9 @@ require_once "confv.php";
 /**
  * Realiza una consulta SQL y retorna resultado
  *
- * @param object &$db Base de datos
- * @param string $q   Consulta
+ * @param object &$db      Base de datos
+ * @param string $q        Consulta
+ * @param bool   $finerror Verdadero indica que termina si hay error
  *
  * @return object Resultado
  */
@@ -91,7 +92,11 @@ function idioma($l = "es_CO")
     bind_textdomain_codeset($td, 'UTF-8');
     textdomain($td);
     if ($l == "en_US" && "Fuente" == _("Fuente")) {
-        echo htmlentities("Error al inicializar idioma $l", ENT_COMPAT, 'UTF-8') . "<br>";
+        echo 
+            htmlentities(
+                "Error al inicializar idioma $l", ENT_COMPAT, 'UTF-8'
+            ) 
+            . "<br>";
         debug_print_backtrace();
         die();
     }
@@ -219,7 +224,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
     $q = "SELECT COUNT(id) FROM usuario";
     $result = hace_consulta_aut($db, $q, false);
     if (PEAR::isError($result)) {
-        echo "<br>" . _("Intentado actualizar usuario") ;
+        echo "<br>" . _("Intentado actualizar usuario");
         $result = hace_consulta_aut(
             $db, "ALTER TABLE usuario RENAME COLUMN id_rol TO rol", false
         );

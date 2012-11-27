@@ -139,16 +139,16 @@ class ResConsulta
     /**
      * Constructora
      *
-     * @param array  &$campos      Campos por mostrar id => nombre
-     * @param handle &$db          Conexión a base de datos
-     * @param string &$resultado   Resultado de consulta tiene caso.id
-     * @param array  &$conv        Convertir id de campos a base de datos
-     * @param string $mostrar      Forma de presentacion (rev., gen., tabla)
-     * @param array  $detallesform Partir  memo en varias lineas
-     * @param array  $ordCasos     Orden de los casos por mostrar
-     * @param array  $busca_pr     Opciones de mostrar info.
-     * @param array  $ordenar      Ordenar
-     * @param object &$primnom     Nombre y apellido
+     * @param array   &$campos      Campos por mostrar id => nombre
+     * @param handle  &$db          Conexión a base de datos
+     * @param string  &$resultado   Resultado de consulta tiene caso.id
+     * @param array   &$conv        Convertir id de campos a base de datos
+     * @param string  $mostrar      Forma de presentacion (rev., gen., tabla)
+     * @param array   $detallesform Partir  memo en varias lineas
+     * @param array   $ordCasos     Orden de los casos por mostrar
+     * @param array   $busca_pr     Opciones de mostrar info.
+     * @param array   $ordenar      Ordenar
+     * @param boolean $primnom      Nombre y apellido
      *
      * @return void
      */
@@ -315,7 +315,7 @@ class ResConsulta
      * @param integer $id_persona Id.
      * @param integer &$indid     Indid
      * @param object  &$edp       edp
-     * @param object  &$primnom   Nombre y apellido
+     * @param boolean $primnom    Nombre y apellido
      *
      * @return Total de víctimas
      */
@@ -332,10 +332,10 @@ class ResConsulta
         while ($result->fetchInto($row)) {
             $idp[] = $row[0];
             if ($primnom) {
-                 $ndp[] = $row[1] . " " . $row[2];
-             } else {
-                 $ndp[] = $row[2] . " " . $row[1];
-             }
+                $ndp[] = $row[1] . " " . $row[2];
+            } else {
+                $ndp[] = $row[2] . " " . $row[1];
+            }
             $edp[] = $row[3];
             if (isset($id_persona) && $id_persona== $row[0]) {
                 $indid = $tot;
@@ -1097,6 +1097,7 @@ class ResConsulta
      * @param array   $conv      Conversiones
      * @param array   $sal       Para conversiones con $conv
      * @param boolean $retroalim Con boton de retroalimentación
+     * @param boolean $primnom   Nombre y apellido
      *
      * @return string Fila en HTML
      */
@@ -1844,7 +1845,8 @@ class ResConsulta
                     'tfuente' => 'observaciones{tipo->tipofuente}')
                 );
                 $arfuente['observaciones{tipo->tipofuente}']
-                    = $dfuentedirectacaso->tfuente;//$dfuentedirectacaso->fb_enumOptions['tfuente'][$ia2];
+                    = $dfuentedirectacaso->tfuente;
+                    //$dfuentedirectacaso->fb_enumOptions['tfuente'][$ia2];
                 $r .= "  <fuente>\n";
                 a_elementos_xml($r, 4, $arfuente);
                 $r .= "  </fuente>\n";

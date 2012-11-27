@@ -1992,8 +1992,8 @@ function objeto_tabla($nom)
  * @return integer Código en tabla o -1 si no lo encuentra
  */
 function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
-    $ncamp = "nombre") 
-{
+    $ncamp = "nombre"
+) {
     //echo "OJO conv_basica(db, $tabla, $nombre, $obs)<br>";
     $d = objeto_tabla($tabla);
     $nom0 = $d->$ncamp = ereg_replace(

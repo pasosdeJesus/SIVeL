@@ -45,7 +45,8 @@ res_valida(
     $db, _("Casos con fecha de fuente frecuente anterior a la del caso"),
     "SELECT caso.id, caso.fecha, ffrecuente.nombre
     FROM caso_ffrecuente, ffrecuente, caso
-    WHERE caso_ffrecuente.id_caso = caso.id AND caso_ffrecuente.id_ffrecuente = ffrecuente.id
+    WHERE caso_ffrecuente.id_caso = caso.id 
+    AND caso_ffrecuente.id_ffrecuente = ffrecuente.id
     AND caso_ffrecuente.fecha < caso.fecha
     ORDER BY fecha;"
 );

@@ -452,7 +452,7 @@ class PagTipoViolencia extends PagBaseSimple
      */
     static function compara(&$db, &$r, $id1, $id2, $cls = array('caso'))
     {
-        #echo "OJO PagTipoViolencia::compara(db, r, $id1, $id2, a)";
+        //echo "OJO PagTipoViolencia::compara(db, r, $id1, $id2, a)";
         if ($cls == null || (count($cls) == 1 && $cls[0] == 'caso_contexto')) {
             $cls = array('Contextos' => array('caso_contexto', 'id_contexto'),
                 'Antecedentes' => array('antecedente_caso', 'id_antecedente'));
@@ -467,12 +467,12 @@ class PagTipoViolencia extends PagBaseSimple
             $d1->find();
             $sep = "";
             while ($d1->fetch()) {
-                #echo "OJO d1 fetched " . $d1->$c . "<br>";
+                //echo "OJO d1 fetched " . $d1->$c . "<br>";
                 $d = $d1->getLink($c);
                 $v1 .= $sep . $d->nombre;
                 $sep = ", ";
             }
-            #echo "OJO v1=$v1<br>";
+            //echo "OJO v1=$v1<br>";
             $d2 = objeto_tabla($cl);
             $d2->id_caso = $id2;
             $d2->find();

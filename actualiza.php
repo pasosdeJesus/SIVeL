@@ -40,6 +40,13 @@ if (!in_array(63, $_SESSION['opciones'])) {
 }
 $db = autentica_usuario($dsn, $aut_usuario, 63);
 
+/**
+ * Regenera esquemas para base de datos base.ini y base.links.in
+ * sacando informacion de los archivos estructura.ini y estructura.links.ini
+ * de SIVeL basico y de los modulos.
+ *
+ * @return void
+ */
 function regenera_esquemas()
 {
     global $dirserv, $dirsitio, $dbnombre, $dirchroot, $modulos;
@@ -2221,7 +2228,7 @@ if (!aplicado($idac)) {
         "ALTER SEQUENCE parametros_reporte_consolidado_seq RENAME TO "
         . "pconsolidado_seq ", false
     );
-    hace_consulta(#
+    hace_consulta(
         $db,
         "ALTER TABLE prensa RENAME TO "
         . "ffrecuente", false
@@ -2236,12 +2243,12 @@ if (!aplicado($idac)) {
         "ALTER TABLE escrito_caso RENAME TO "
         . "caso_ffrecuente", false
     );
-    hace_consulta(#
+    hace_consulta(
         $db,
         "ALTER TABLE fuente_directa RENAME TO "
         . "fotra", false
     );
-    hace_consulta(#
+    hace_consulta(
         $db,
         "ALTER SEQUENCE fuente_directa_seq RENAME TO "
         . "fotra_seq ", false

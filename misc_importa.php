@@ -744,8 +744,10 @@ function conv_fecha($fecha, &$obs, $depura = false)
  * @param object &$idsiguales     Arreglo para completar con iguales
  * @param object &$idssimilares   Arreglo para completar con similares
  * @param array  $aper            Listado de personas de la base
- * @param string $nom             Nombre buscado, si es null supone que se busca apellidos nombres que vienen en $ap
- * @param string $ap              Apellido buscado, si es null supone que se busca nombres apellidos que vienen en $nom
+ * @param string $nom             Nombre buscado, 
+ *      si es null supone que se busca apellidos nombres que vienen en $ap
+ * @param string $ap              Apellido buscado, 
+ *      si es null supone que se busca nombres apellidos que vienen en $nom
  * @param string $mdlev           Distancia Levenshtein maxima para similares
  * @param string $anionac         Año de nacimiento
  * @param string $mesnac          Mes de nacimiento
@@ -766,7 +768,7 @@ function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper,
     $sexo = 'S', $id_departamento = null, $id_municipio = null,
     $id_clase = null, $tipodocumento = null, $numerodocumento = null
 ) {
-    //echo "OJO ubica_persona(db, idsiguales, idssimilares, aper, $nom, $ap, $mdlev, ...)<br>";
+    //echo "OJO ubica_persona(nom=$nom, $ap, $mdlev, ...)<br>";
     $idper = -1;
     if (isset($GLOBALS['estilo_nombres'])
         && $GLOBALS['estilo_nombres'] == 'MAYUSCULAS'
@@ -810,7 +812,9 @@ function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper,
 
             $anomap = trim(trim($anombres) . " " . trim($aapellidos));
             $aapnom = trim(trim($aapellidos) . " " . trim($anombres));
-            //echo "OJO comp $anombres, $nombres y $aapellidos, $apellidos, anomap=$anomap, aapnom=$aapnom, nomap=$nomap, apnom=$apnom<br>";
+            //echo "OJO comp $anombres, $nombres y $aapellidos, "
+            //. "$apellidos, anomap=$anomap, aapnom=$aapnom, "
+            //. "nomap=$nomap, apnom=$apnom<br>";
             if ((strcasecmp($anombres, $nombres) == 0
                 && strcasecmp($aapellidos, $apellidos) == 0)
                 || (strcasecmp($anomap, $nomap) == 0)
@@ -823,7 +827,7 @@ function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper,
                 $da = levenshtein($aapellidos, $apellidos);
                 $dna = levenshtein($anomap, $nomap);
                 $dan = levenshtein($aapnom, $apnom);
-                //echo "OJO lev mdlev=$mdlev, dn=$dn, da=$da, dna=$dna, dan=$dan<br>";
+                //echo "OJO mdlev=$mdlev,dn=$dn,da=$da,dna=$dna,dan=$dan<br>";
                 if (($dn <= $mdlev && $da <= $mdlev) || $dna <= $mdlev 
                     || $dan <= $mdlev
                 ) {
@@ -965,7 +969,7 @@ function extrae_per(&$db)
     $rp = hace_consulta(
         $db, 'SELECT id, nombres, apellidos FROM persona ORDER BY id'
     );
-/*    $row = array():
+    /*$row = array():
     $pe = objeto_tabla('persona');
     $pe->orderBy('id');
     $pe->find(); */
@@ -976,7 +980,7 @@ function extrae_per(&$db)
             $db, "SELECT id_caso FROM victima WHERE id_persona='$idp' " 
             . " ORDER BY id_caso"
         );
-/*        $cvi = objeto_tabla('victima');
+        /* $cvi = objeto_tabla('victima');
         $cvi->orderBy('id_caso');
         $cvi->id_persona = $idp;
         $cvi->find(); */
@@ -987,7 +991,8 @@ function extrae_per(&$db)
         }
 
         $rf = hace_consulta(
-            $db, "SELECT DISTINCT id_caso, persona1 FROM persona_trelacion, victima " 
+            $db, "SELECT DISTINCT id_caso, persona1 "
+            . " FROM persona_trelacion, victima " 
             . " WHERE persona2='$idp' AND id_persona=persona1" 
             . " ORDER BY persona1"
         );
@@ -997,7 +1002,7 @@ function extrae_per(&$db)
             $fcasos[$datf[0]] = $datf[0];
         }
 
-/*        $cr = objeto_tabla('persona_trelacion');
+        /*$cr = objeto_tabla('persona_trelacion');
         $cr->orderBy('persona1');
         $cr->persona2=$idp;
         $cr->find();
