@@ -994,6 +994,22 @@ function echo_esc($mens, $nl = true)
 }
 
 /**
+ * Muestra mensaje escapandolo y después mensaje recordando actualizar
+ *
+ * @param string $mens Mensaje por mostrar
+ *
+ * @return void
+ */
+function die_act($mens)
+{
+    echo_esc($mens);
+    echo "<br>" . _("&iquest;Ya") . " <a href='actualiza.php'>"
+            . _("actualiz&oacute;") . "</a> " . _("y regener&oacute; esquema?");
+
+    exit(1);
+}
+
+/**
  * Si el objeto es error, presenta mensaje y termina.
  *
  * @param object $do  Objeto por examinar
@@ -1004,13 +1020,11 @@ function echo_esc($mens, $nl = true)
 function sin_error_pear($do, $msg = "")
 {
     if (PEAR::isError($do)) {
+        die_act(
+            trim($msg . " ") . $do->getMessage() . 
+            " - " . $do->getUserInfo()
+        );
         //debug_print_backtrace();
-        echo_esc(trim($msg . " ") . $do->getMessage() . " - " . $do->getUserInfo());
-        echo "<br>" . _("&iquest;Ya") . " <a href='actualiza.php'>"
-            . _("actualiz&oacute;") . "</a> "
-            . _("y regener&oacute; esquema?");
-
-        exit(1);
     }
 }
 
@@ -1385,7 +1399,6 @@ function ref_dataobject($base, $tabla)
     return $r;
 
 }
-
 
 
 /**
@@ -1951,6 +1964,86 @@ function objeto_tabla($nom)
     sin_error_pear($do);
 
     return $do;
+}
+
+
+/**
+ * Busca dato en una tabla básica
+ *
+ * @param object &$db    Conexión a base de datos
+ * @param string $tabla  Tabla en la cual buscar
+ * @param string $nombre Nombre por buscar
+ * @param string &$obs   Colchon para agregar observaciones
+ * @param bool   $sininf Si no esta retornar código del dato SIN INFORMACIÓN?
+ * @param string $ncamp  Nombre del campo con el cual comparar
+ *
+ * @return integer Código en tabla o -1 si no lo encuentra
+ */
+function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
+    $ncamp = "nombre") 
+{
+    //echo "OJO conv_basica(db, $tabla, $nombre, $obs)<br>";
+    $d = objeto_tabla($tabla);
+    $nom0 = $d->$ncamp = ereg_replace(
+        "  *", " ",
+        trim(var_escapa($nombre, $db))
+    );
+    $d->find(1);
+    if (PEAR::isError($d)) {
+        die($d->getMessage());
+    }
+    $nom1 = a_mayusculas($nom0);
+    if (!isset($d->id)) {
+        $d->$ncamp= $nom1;
+        $d->find(1);
+    }
+    if (!isset($d->id)) {
+        $nom2 = $d->$ncamp
+            = a_mayusculas(sin_tildes(var_escapa($nom0, $db)));
+        $d->find(1);
+    }
+    if (!isset($d->id)) {
+        $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom0}%'";
+        $r = $db->getOne($q);
+        if (PEAR::isError($r) || $r == null) {
+            $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom1}%'";
+            $r = $db->getOne($q);
+        }
+        if (PEAR::isError($r) || $r == null) {
+            $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom2}%'";
+            //echo " q=$q";
+            $r = $db->getOne($q);
+        }
+
+        if (PEAR::isError($r) || $r == null) {
+            rep_obs("-- $tabla: desconocido '$nombre'", $obs);
+            if ($sininf
+                && is_callable(array("DataObjects_$tabla", 'idSinInfo'))
+            ) {
+                $r = call_user_func(
+                    array("DataObjects_$tabla",
+                    "idSinInfo"
+                    )
+                );
+            } else {
+                $r = -1;
+            }
+        } else {
+            $d = objeto_tabla($tabla);
+            $d->id = $r;
+            $d->find(1);
+            if (trim($d->$ncamp) != trim($nom0)) {
+                rep_obs(
+                    "$tabla: elegido registro '$r' con nombre '" .
+                    $d->$ncamp . "' que es similar a '$nom0'", $obs
+                );
+            }
+        }
+    } else {
+        $r = $d->id;
+    }
+
+    return $r;
 }
 
 /**

@@ -33,85 +33,6 @@ function rep_obs($nobs, &$obs, $coneco = false)
 }
 
 
-/**
- * Busca dato en una tabla básica
- *
- * @param object &$db    Conexión a base de datos
- * @param string $tabla  Tabla en la cual buscar
- * @param string $nombre Nombre por buscar
- * @param string &$obs   Colchon para agregar observaciones
- * @param bool   $sininf Si no esta retornar código del dato SIN INFORMACIÓN?
- * @param string $ncamp  Nombre del campo con el cual comparar
- *
- * @return integer Código en tabla o -1 si no lo encuentra
- */
-function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
-    $ncamp = "nombre"
-) {
-    //echo "OJO conv_basica(db, $tabla, $nombre, $obs)<br>";
-    $d = objeto_tabla($tabla);
-    $nom0 = $d->$ncamp = ereg_replace(
-        "  *", " ",
-        trim(var_escapa($nombre, $db))
-    );
-    $d->find(1);
-    if (PEAR::isError($d)) {
-        die($d->getMessage());
-    }
-    $nom1 = a_mayusculas($nom0);
-    if (!isset($d->id)) {
-        $d->$ncamp= $nom1;
-        $d->find(1);
-    }
-    if (!isset($d->id)) {
-        $nom2 = $d->$ncamp
-            = a_mayusculas(sin_tildes(var_escapa($nom0, $db)));
-        $d->find(1);
-    }
-    if (!isset($d->id)) {
-        $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom0}%'";
-        $r = $db->getOne($q);
-        if (PEAR::isError($r) || $r == null) {
-            $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom1}%'";
-            $r = $db->getOne($q);
-        }
-        if (PEAR::isError($r) || $r == null) {
-            $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom2}%'";
-            //echo " q=$q";
-            $r = $db->getOne($q);
-        }
-
-        if (PEAR::isError($r) || $r == null) {
-            rep_obs("-- $tabla: desconocido '$nombre'", $obs);
-            if ($sininf
-                && is_callable(array("DataObjects_$tabla", 'idSinInfo'))
-            ) {
-                $r = call_user_func(
-                    array("DataObjects_$tabla",
-                    "idSinInfo"
-                    )
-                );
-            } else {
-                $r = -1;
-            }
-        } else {
-            $d = objeto_tabla($tabla);
-            $d->id = $r;
-            $d->find(1);
-            if (trim($d->$ncamp) != trim($nom0)) {
-                rep_obs(
-                    "$tabla: elegido registro '$r' con nombre '" .
-                    $d->$ncamp . "' que es similar a '$nom0'", $obs
-                );
-            }
-        }
-    } else {
-        $r = $d->id;
-    }
-
-    return $r;
-}
-
 
 /**
  * Convierte violación
@@ -823,8 +744,8 @@ function conv_fecha($fecha, &$obs, $depura = false)
  * @param object &$idsiguales     Arreglo para completar con iguales
  * @param object &$idssimilares   Arreglo para completar con similares
  * @param array  $aper            Listado de personas de la base
- * @param string $nom             Nombre buscado
- * @param string $ap              Apellido buscado
+ * @param string $nom             Nombre buscado, si es null supone que se busca apellidos nombres que vienen en $ap
+ * @param string $ap              Apellido buscado, si es null supone que se busca nombres apellidos que vienen en $nom
  * @param string $mdlev           Distancia Levenshtein maxima para similares
  * @param string $anionac         Año de nacimiento
  * @param string $mesnac          Mes de nacimiento
@@ -845,6 +766,7 @@ function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper,
     $sexo = 'S', $id_departamento = null, $id_municipio = null,
     $id_clase = null, $tipodocumento = null, $numerodocumento = null
 ) {
+    //echo "OJO ubica_persona(db, idsiguales, idssimilares, aper, $nom, $ap, $mdlev, ...)<br>";
     $idper = -1;
     if (isset($GLOBALS['estilo_nombres'])
         && $GLOBALS['estilo_nombres'] == 'MAYUSCULAS'
@@ -862,6 +784,8 @@ function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper,
     }
 
     $nomap = trim(trim($nombres) . " " . trim($apellidos));
+    $apnom = trim(trim($apellidos) . " " . trim($nombres));
+    //echo "OJO nomap=$nomap, apnom=$apnom<br>";
     if ($nomap != 'NN' && $nomap != 'N N' && $nomap != 'N.N'
         && $nomap != 'N.N.' && $nomap != 'N N.'
         && substr($nomap, 0, 4) != 'N.N '
@@ -885,17 +809,25 @@ function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper,
             }
 
             $anomap = trim(trim($anombres) . " " . trim($aapellidos));
-            //echo "OJO comp $anombres, $nombres y $aapellidos, $apellidos<br>";
+            $aapnom = trim(trim($aapellidos) . " " . trim($anombres));
+            //echo "OJO comp $anombres, $nombres y $aapellidos, $apellidos, anomap=$anomap, aapnom=$aapnom, nomap=$nomap, apnom=$apnom<br>";
             if ((strcasecmp($anombres, $nombres) == 0
                 && strcasecmp($aapellidos, $apellidos) == 0)
                 || (strcasecmp($anomap, $nomap) == 0)
+                || (strcasecmp($aapnom, $apnom) == 0)
             ) {
+                //echo "OJO iguales<br>";
                 $idsiguales[] = $k;
             } else {
                 $dn = levenshtein($anombres, $nombres);
                 $da = levenshtein($aapellidos, $apellidos);
                 $dna = levenshtein($anomap, $nomap);
-                if (($dn <= $mdlev && $da <= $mdlev) || $dna < $mdlev) {
+                $dan = levenshtein($aapnom, $apnom);
+                //echo "OJO lev mdlev=$mdlev, dn=$dn, da=$da, dna=$dna, dan=$dan<br>";
+                if (($dn <= $mdlev && $da <= $mdlev) || $dna <= $mdlev 
+                    || $dan <= $mdlev
+                ) {
+                    //echo "OJO similares<br>";
                     $idssimilares[] = $k;
                 }
             }
@@ -1017,7 +949,9 @@ function conv_persona(&$db, &$aper, &$obs, $nom, $ap, $anionac,
  * @param object &$db Conexion a base de datos
  *
  * @return array($aper, $maxidper) arreglo
- * de personas indexado por identificación en base, maxima identificación
+ * de personas indexado por identificación en base, maxima identificación.
+ * Cada entrada tiene es 
+ *   idpersona => array(nombre, apellido, casoscomovictima, casoscomofamiliar)
  */
 function extrae_per(&$db)
 {
@@ -1028,24 +962,44 @@ function extrae_per(&$db)
     $options['dont_die'] = true;
 
     $maxidper = 0;
-    $pe = objeto_tabla('Persona');
+    $rp = hace_consulta(
+        $db, 'SELECT id, nombres, apellidos FROM persona ORDER BY id'
+    );
+/*    $row = array():
+    $pe = objeto_tabla('persona');
     $pe->orderBy('id');
-    $pe->find();
-    while ($pe->fetch()) {
-        $aper[$pe->id] = array(0=>$pe->nombres, 1=>$pe->apellidos);
-        $cvi = objeto_tabla('victima');
+    $pe->find(); */
+    $datp= array();
+    while ($rp->fetchInto($datp)) {
+        $idp = $datp[0];
+        $rv = hace_consulta(
+            $db, "SELECT id_caso FROM victima WHERE id_persona='$idp' " 
+            . " ORDER BY id_caso"
+        );
+/*        $cvi = objeto_tabla('victima');
         $cvi->orderBy('id_caso');
-        $cvi->id_persona = $pe->id;
-        $cvi->find();
+        $cvi->id_persona = $idp;
+        $cvi->find(); */
         $vcasos = array();
-        while ($cvi->fetch()) {
-            $vcasos[$cvi->id_caso] = $cvi->id_caso;
+        $datv = array();
+        while ($rv->fetchInto($datv)) {
+            $vcasos[$datv[0]] = $datv[0];
         }
-        $aper[$pe->id][2] = $vcasos; // Casos en los que es víctima
+
+        $rf = hace_consulta(
+            $db, "SELECT DISTINCT id_caso, persona1 FROM persona_trelacion, victima " 
+            . " WHERE persona2='$idp' AND id_persona=persona1" 
+            . " ORDER BY persona1"
+        );
         $fcasos = array(); // Casos en los que es familiar
-        $cr = objeto_tabla('Persona_trelacion');
+        $datf = array();
+        while ($rf->fetchInto($datf)) {
+            $fcasos[$datf[0]] = $datf[0];
+        }
+
+/*        $cr = objeto_tabla('persona_trelacion');
         $cr->orderBy('persona1');
-        $cr->persona2=$pe->id;
+        $cr->persona2=$idp;
         $cr->find();
         if ($cr->fetch()) {
             //echo "--OJO Encontrado como familiar de ".$cr->persona1."\n";
@@ -1056,11 +1010,16 @@ function extrae_per(&$db)
             while ($cvi->fetch()) {
                 $fcasos[$cvi->id_caso] = $cvi->id_caso;
             }
-        }
-        $aper[$pe->id][3] = $fcasos; // Casos en los que es familiar
+        } */
 
-        if ($maxidper < $pe->id) {
-            $maxidper = $pe->id;
+        if ($maxidper < $idp) {
+            $maxidper = $idp;
+        }
+        if (count($vcasos) > 0 || count($fcasos) > 0) {
+            $aper[$idp][0] = $datp[1];
+            $aper[$idp][1] = $datp[2];
+            $aper[$idp][2] = $vcasos; // Casos en los que es víctima
+            $aper[$idp][3] = $fcasos; // Casos en los que es familiar
         }
     }
 
