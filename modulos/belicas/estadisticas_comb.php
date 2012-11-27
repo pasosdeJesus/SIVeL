@@ -410,7 +410,7 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
 
 }
 
-function muestra($dsn, $accno)
+function muestra($dsn)
 {
     $aut_usuario = "";
     autentica_usuario($dsn, $aut_usuario, 21);

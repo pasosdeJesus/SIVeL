@@ -31,5 +31,5 @@ if (!isset($GLOBALS['modulo'][(int)$_REQUEST['num']])) {
 }
 
 require_once $GLOBALS['modulo'][(int)$_REQUEST['num']];
-muestra($dsn, $accno);
+muestra($dsn);
 ?>

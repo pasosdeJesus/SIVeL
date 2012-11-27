@@ -622,7 +622,7 @@ function buildForm()
 /**
  * Presenta formulario filtro o estadística
  */
-function muestra($dsn, $accno)
+function muestra($dsn)
 {
     $aut_usuario = "";
     autentica_usuario($dsn, $aut_usuario, 21);
