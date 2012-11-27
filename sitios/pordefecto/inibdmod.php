@@ -93,6 +93,7 @@ foreach ($GLOBALS['remplaza_ficha_tabuladores'] as $a) {
 
 
 foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
+//    echo "<hr>OJO nueva a="; var_dump($a); echo "<br>";
     $puesto = $a[0];
     $nom = $a[1];
     $arc = $a[2];
@@ -116,6 +117,7 @@ foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
             $nft[$nf + 1] = $f;
         }
     }
+//        echo "OJO nft="; print_r($nft); echo "<br>";
     $GLOBALS['ficha_tabuladores'] = $nft;
 }
 
