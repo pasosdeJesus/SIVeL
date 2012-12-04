@@ -850,6 +850,88 @@ class PagVictimaIndividual extends PagBaseMultiple
     }
 
 
+    /**
+     * Mezcla victimas de los casos $id1 e $id2 en el caso $idn
+     *
+     * @param object  &$db Conexión a base de datos
+     * @param integer $id1 Código de primer caso
+     * @param integer $id2 Código de segundo caso
+     * @param integer $idn Código del caso en el que aplicará los cambios
+     *
+     * @return Mezcla valores de las victimas de $id2 en $idn si $idn==$id1
+     * intentando poner los datos con más información.
+     * @see PagBaseSimple
+     */
+    static function mezclaUno(&$db, $id1, $id2, $idn, $tablavic)
+    {
+        //echo "OJO mezclaUno(db, $id1, $id2, $idn, $tablavic)<br>";
+        if ($id1 == $idn) {  // Completar del segundo lo que se pueda
+            $dn = objeto_tabla($tablavic);
+            $dn->id_caso = $id1;
+            $dn->find();
+            while ($dn->fetch()) {
+                $dp1 = $dn->getLink('id_persona');
+                //echo "OJO dp1->id={$dp1->id}<br>";
+                $idp2 = consulta_uno(
+                    $db, "SELECT $tablavic.id_persona "
+                    . " FROM $tablavic, persona "
+                    . " WHERE $tablavic.id_caso={$id2} "
+                    . " AND $tablavic.id_persona=persona.id "
+                    . " AND persona.nombres='{$dp1->nombres}' "
+                    . " AND persona.apellidos='{$dp1->apellidos}'", false
+
+                );
+                if ($idp2 == -1) {
+                    continue;
+                }
+                //echo "OJO idp2=$idp2<br>";
+                $dp2 = objeto_tabla('Persona');
+                $dp2->id = $idp2;
+                $dp2->find(1);
+                foreach ($dp1->fb_fieldLabels as $ftr => $nf) {
+                    //echo "OJO ftr=$ftr<br>";
+                    $vdf = "";
+                    $dse1 = $dp1->getLink($ftr);
+                    if ($dse1 && method_exists($dse1, 'idSinInfo')) {
+                        $vdf = $dse1->idSinInfo();
+                    }
+                    if ($dp1->$ftr == $vdf && $dp2->$ftr != $vdf 
+                        && $dp2->$ftr != ""
+                    ) {
+                        //echo "OJO Persona cambiaria '$ftr' de '{$dp1->$ftr}' a '{$dp2->$ftr}'<br>";
+                        $dp1->$ftr = $dp2->$ftr;
+                    }
+                }
+                $dp1->update(); 
+                $de = objeto_tabla($tablavic);
+                $de->id_caso = $id2;
+                $de->id_persona = $idp2;
+                $de->find(1);
+                //echo "OJO vict comp"; var_dump($de); echo "<br>";
+                foreach ($dn->fb_fieldLabels as $ftr => $nf) {
+                    $vdf = "";
+                    $dse1 = $de->getLink($ftr);
+                    if ($dse1 && method_exists($dse1, 'idSinInfo')) {
+                        $vdf = $dse1->idSinInfo();
+                    }
+                    //echo "OJO ftr=$ftr, vdf=$vdf, dn->ftr={$dn->$ftr}, de->ftr={$de->$ftr}<br>";
+                    if (isset($dn->$ftr) && isset($e->$ftr) &&
+                        (is_null($dn->$ftr) || $dn->$ftr === "" ||
+                        ($dn->$ftr == $vdf && $de->$ftr != "" 
+                            && $de->$ftr != $vdf))
+                    ) {
+                        //echo "OJO Víctima cambiaria '$ftr' de '{$dn->$ftr}' a '{$de->$ftr}' (vdf es '$vdf')<br>";
+                        $dn->$ftr = $de->$ftr;
+                    }
+                }
+                //echo "OJO actualizando victima<br>";  var_dump($dn); 
+                $dn->update();
+                //die("OJO x");
+            }
+        }
+
+    }
+
 
     /**
      * Mezcla valores de los casos $id1 e $id2 en el caso $idn de
@@ -873,11 +955,13 @@ class PagVictimaIndividual extends PagBaseMultiple
      */
     static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls)
     {
+        //echo "OJO PagVictimaIndividual::mezcla(db, sol, $id1, $id2, $idn, cls)<br>";
         parent::mezcla(
             $db, $sol, $id1, $id2, $idn,
             array('Victimas Individuales'
             => array('victima', 'id_persona'))
         );
+        PagVictimaIndividual::mezclaUno($db, $id1, $id2, $idn, 'Victima');
     }
 
 }
