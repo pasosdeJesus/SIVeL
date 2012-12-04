@@ -47,7 +47,7 @@ class VerAnexo extends HTML_QuickForm_Action
      */
     function perform(&$page, $actionName)
     {
-        //echo "<hr>"; debug_print_backtrace(); die("x");
+        //echo "OJO <hr>"; debug_print_backtrace(); //die("x");
         if ($page->procesa($page->_submitValues)) {
             if (isset($page->_submitValues['archivo'])) {
                 $nombre = var_escapa($page->_submitValues['archivo']);
@@ -61,6 +61,7 @@ class VerAnexo extends HTML_QuickForm_Action
                     );
                 }
                 $arch = $GLOBALS['dir_anexos'] . "/" . $nombre;
+                //echo "OJO arch=$arch<br>";
                 if (!file_exists($arch)) {
                     die("No existe el archivo especificado");
                 }

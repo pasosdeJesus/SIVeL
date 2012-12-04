@@ -621,7 +621,9 @@ class PagOtrasFuentes extends PagBaseMultiple
                         as $c => $cf
                     ) {
                         //echo "OJO 1 c=$c, d1->c=" . $d1->$c . "<br>";
-                        $dd->$c = $d1->$c;
+                        if (isset($d1->$c)) {
+                            $dd->$c = $d1->$c;
+                        }
                     }
                     //echo "OJO 1 insertado dd"; print_r($dd);
                     $dd->insert();
@@ -636,7 +638,9 @@ class PagOtrasFuentes extends PagBaseMultiple
                     as $c => $cf
                 ) {
                     //echo "OJO 2 c=$c, d2->c=" . $d2->$c . "<br>";
-                    $dd->$c = $d2->$c;
+                    if (isset($d2->$c)) {
+                        $dd->$c = $d2->$c;
+                    }
                 }
                 //echo "OJO 2 insertado dd"; print_r($dd); 
                 $dd->insert();

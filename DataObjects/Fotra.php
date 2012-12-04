@@ -87,8 +87,10 @@ class DataObjects_Fotra extends DB_DataObject_SIVeL
         parent::postGenerateForm($form, $formbuilder);
         $e =& $form->getElement('nombre');
         if (isset($e) && !PEAR::isError($e)) {
-            $e->setSize(70);
-            $e->setMaxlength(200);
+            if (method_exists($e, "setSize")) {
+                $e->setSize(70);
+                $e->setMaxlength(200);
+            }
         }
     }
 

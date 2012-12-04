@@ -42,7 +42,7 @@ function hastapunto($s) {
     return $p;
 }
 
-function muestra($dsn, $accno)
+function muestra($dsn)
 {
     $aut_usuario = "";
     $db = autentica_usuario($dsn, $accno, $aut_usuario, 31);
@@ -98,7 +98,7 @@ function muestra($dsn, $accno)
     echo "<input type='hidden' name='id1' value='$id1'/>";
     echo "<input type='hidden' name='id2' value='$id2'/>";
     echo "<table border='1'>";
-    echo "<tr><td>Dato</td><td colspan='2'>Caso 1</td><td colspan='2'>Caso 2</td><td>Nuevo</td></tr>";
+    echo "<tr><th>Dato</th><th colspan='2'>Caso 1</th><th colspan='2'>Caso 2</th><th>Nuevo</th></tr>";
     foreach($r as $i => $v) {
         $check1 = "checked='checked'";
         $check2 = "";
@@ -110,11 +110,17 @@ function muestra($dsn, $accno)
             $check2 = "checked='checked'";
             $check1 ="";
         }
-        echo "<tr><td>" 
-            . htmlentities($v[0]) . "</td><td>" 
-            . htmlentities($v[1]) . "</td><td>"
+        $nc_html = htmlentities($v[0]);
+        $v1_html = htmlentities($v[1]);
+        $v2_html = htmlentities($v[2]);
+        if ($nc_html == "C&oacute;digo") {
+            $v1_html = enlace_edita($v[1]);
+            $v2_html = enlace_edita($v[2]);
+        }
+        echo "<tr><td>" . $nc_html . "</td><td>" 
+            . $v1_html . "</td><td>"
             . "<input type='radio' name='$i' value='1' $check1></td><td>"
-            . htmlentities($v[2]) . "</td><td>"
+            . $v2_html . "</td><td>"
             . "<input type='radio' name='$i' value='2' $check2></td>";
         if ($check3 != "") {
             echo "<td>"

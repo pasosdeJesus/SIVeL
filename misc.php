@@ -1076,19 +1076,24 @@ function hace_consulta(&$db, $q, $finenerror = true, $muestraerror = true)
  *
  * @param handle &$db Conexióna BD
  * @param string $q   Consulta
+ * @param bool   $t   Termina?
  *
- * @return resultado de la consulta. si no hay 1 resultado o errores termina.
-     */
-function retorna_uno_o_termina(&$db, $q)
+ * @return primer campo del resultado de la consulta. 
+ *      Si no hay uno retorna -1 o termina
+ */
+function consulta_uno(&$db, $q, $t = true)
 {
     $res = hace_consulta($db, $q);
     if (($nr = $res->numRows()) != 1) {
-        die_esc(
-            sprintf(
-                _("Se esperaba un resultado y no %s de consulta \"%s\""),
-                $nr, $q
-            )
-        );
+        if ($t) { 
+            die_esc(
+                sprintf(
+                    _("Se esperaba un resultado y no %s de consulta \"%s\""),
+                    $nr, $q
+                )
+            );
+        }
+        return -1;
     }
     $reg = array();
     $res->fetchInto($reg);

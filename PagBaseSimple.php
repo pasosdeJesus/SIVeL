@@ -750,6 +750,8 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
                 } else {
                     $dd->id_caso = $idn;
                 } 
+            } else {
+                $dd = $d1;
             }
             if ($t == 'caso') {
                 $d1->id = $id1;
@@ -766,9 +768,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
                         $db, "INSERT INTO $t (id_caso) VALUES ('$idn');"
                     );
                 }
-            } else {
-                $dd =& $d1;
-            } 
+            }
 
             foreach ($d1->fb_fieldLabels as $c => $et) {
                 //echo "<br>OJO c=$c ";

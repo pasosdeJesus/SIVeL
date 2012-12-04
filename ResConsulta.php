@@ -1427,7 +1427,7 @@ class ResConsulta
                     $op = $drelp->getLink('persona2');
                     $tr = $drelp->getLink('id_trelacion');
                     $relp .= $sep . $tr->nombre . " " . $op->nombres .
-                        ", " .  $op->apellidos . ". " . $op->observaciones;
+                        ", " .  $op->apellidos ;
                     $sep = "; ";
                 }
                 $drelp->free();

@@ -80,7 +80,7 @@ class PagPResponsables extends PagBaseMultiple
     function elimina(&$valores)
     {
         if ($valores['id'] != null) {
-            $do =& objeto_tabla('caso_presponsables');
+            $do =& objeto_tabla('caso_presponsable');
             $db =& $do->getDatabaseConnection();
             $do->id_caso = $_SESSION['basicos_id'];
             $do->id_presponsable
