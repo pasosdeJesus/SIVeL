@@ -1,6 +1,6 @@
 #!/bin/sh
-# Pruebas de regresiÛn.
-# Dominio p˙blico. 2007. vtamara@pasosdeJesus.org
+# Pruebas de regresi√≥n.
+# Dominio p√∫blico. 2007. vtamara@pasosdeJesus.org
 
 . ./confv.sh
 
@@ -9,8 +9,8 @@ function die {
 	exit 1;
 }
 
-# Genera DataObject.ini con el nivel de depuraciÛn especificado en primer 
-# par·metro
+# Genera DataObject.ini con el nivel de depuraci√≥n especificado en primer 
+# par√°metro
 function genDataObject {
 	depura=$1;
 #	sed -e "s/\(database *=.*(\).*).*\"/\1$ds)sivel-prueba\"/g;s/schema_location *=.*/schema_location=$fuentes/g;s/class_location *=.*/class_location=$fuentes/g;s/debug *=.*/debug=$depura/g" ../DataObject.ini > DataObject.ini
@@ -19,7 +19,7 @@ function genDataObject {
 
 function prueba {
 	a=$1;          # Archivo PHP
-	d=$2;          # DescripciÛn
+	d=$2;          # Descripci√≥n
 	sal=$3;        # 
 	saca="$4";     # Que lineas sacar del resultado para comparar
 	sintab="$5";   # 
@@ -52,7 +52,7 @@ function prueba {
 		$PHP -n $a >> sitios/pruebas/pruebas.bitacora 2>&1
 	} fi;
 	if (test "$?" != "0") then {
-		echo " FallÛ";
+		echo " Fall√≥";
 	} else {
 		echo " OK";
 	} fi;
@@ -70,7 +70,7 @@ function prueba {
 
 		diff -b sitios/pruebas/salida/$otrocomp.tmp sitios/pruebas/esperado/$otrocomp > /dev/null
         if (test "$?" != "0") then {
-            echo " 2-FallÛ ";
+            echo " 2-Fall√≥ ";
         } else {
             echo " 2-OK";
         } fi;
@@ -78,7 +78,7 @@ function prueba {
 
 }
 
-echo "Pruebas de regresiÛn"
+echo "Pruebas de regresi√≥n"
 
 if (test ! -f sitios/pruebas/pruebas.sh) then {
 	echo "Ejecute desde el directorio con las fuentes de SIVeL";
@@ -97,7 +97,7 @@ if (test "$SALTAINI" != "1") then {
 
 	csitios=`cd sitios ; ls | grep -v CVS | grep -v nuevo.sh | grep -v pordefecto | grep -v pruebas`;
 	if (test "$csitios" = "") then {
-		die "Primero debe configurar y usar alg˙n sitio";
+		die "Primero debe configurar y usar alg√∫n sitio";
 	} fi;
 	dirplant="";
 	for i in $csitios; do 
@@ -142,18 +142,18 @@ if (test "$SALTAINI" != "1") then {
 
 	(cd sitios/pruebas ; ../../bin/creaesquema.sh)
 
-	echo "ConfiguraciÛn completada";
+	echo "Configuraci√≥n completada";
 
 	. sitios/pruebas/vardb.sh
 
 
-	echo "Se emplear· una base nueva de nombre $dbnombre del usuario $dbusuario "
-	echo -n "(se borrar·, no la utilice!) ";
+	echo "Se emplear√° una base nueva de nombre $dbnombre del usuario $dbusuario "
+	echo -n "(se borrar√°, no la utilice!) ";
 	echo "[Enter] para comenzar";
 	date > sitios/pruebas/pruebas.bitacora
 	(cd sitios/pruebas ; RUTASQL=../../ SIN_DATOS=1 ../../bin/creapg.sh >> pruebas.bitacora 2>&1)
 	if (test "$?" != "0") then {
-		die "FallÛ creaciÛn de la base";
+		die "Fall√≥ creaci√≥n de la base";
 	} fi;
 	RUTASQL=./
 	if (test -f ${RUTASQL}datos-us.sql) then {
@@ -172,22 +172,22 @@ if (test "$SALTAINI" != "1") then {
 $PHP -n -r 'phpinfo();' | grep -v "^[^ a-z]* =>" >> sitios/pruebas/pruebas.bitacora 2>&1
 
 #function x {
-prueba sitios/pruebas/autentica.php "AutenticaciÛn"
+prueba sitios/pruebas/autentica.php "Autenticaci√≥n"
 prueba sitios/pruebas/pactualiza.php "Actualiza"
 prueba sitios/pruebas/insdep.php "Inserta departamento"
 prueba sitios/pruebas/actdep.php "Actualiza departamento"
-prueba sitios/pruebas/insbasicas.php "Inserta en tablas b·sicas"
+prueba sitios/pruebas/insbasicas.php "Inserta en tablas b√°sicas"
 prueba sitios/pruebas/insusu.php "Inserta usuario"
 prueba sitios/pruebas/inscaso-basico.php "Inserta un caso basico"
-prueba sitios/pruebas/inscaso-basico-valida.php "Verifica inserciÛn caso"
+prueba sitios/pruebas/inscaso-basico-valida.php "Verifica inserci√≥n caso"
 prueba sitios/pruebas/inscaso-ubicacion.php " - Ubicacion"
 prueba sitios/pruebas/inscaso-frecuentes.php " - Fuentes frecuentes"
 prueba sitios/pruebas/inscaso-otras.php " - Otras fuentes"
 prueba sitios/pruebas/inscaso-contexto.php " - Contexto"
 prueba sitios/pruebas/inscaso-contexto-valida.php " - Valida Contexto"
 prueba sitios/pruebas/inscaso-presponsable.php " - Presunto Responsable"
-prueba sitios/pruebas/inscaso-victima.php " - VÌctima"
-prueba sitios/pruebas/inscaso-victimaColectiva.php " - VÌctima Colectiva"
+prueba sitios/pruebas/inscaso-victima.php " - V√≠ctima"
+prueba sitios/pruebas/inscaso-victimaColectiva.php " - V√≠ctima Colectiva"
 prueba sitios/pruebas/inscaso-acto.php " - Actos"
 prueba sitios/pruebas/inscaso-memo.php " - Memo"
 prueba sitios/pruebas/inscaso-memo-valida.php " - Valida Memo"
@@ -199,9 +199,9 @@ prueba sitios/pruebas/inscaso-valrepgen.php " - Validar y Reporte General" valre
 prueba sitios/pruebas/reprevista.php " - Reporte Revista" reprevista
 prueba sitios/pruebas/reprevista-filtros.php " - Filtros en Reporte Revista" reprevista-filtros
 prueba sitios/pruebas/repconsolidado.php " - Reporte Consolidado" repconsolidado
-prueba sitios/pruebas/estadisticas.php " - EstadÌsticas " estadisticas
-prueba sitios/pruebas/novalida-basicos.php " - ValidaciÛn b·sicos" novalida-basicos
-prueba sitios/pruebas/novalida-frecuentes.php " - ValidaciÛn frecuentes" novalida-frecuentes "" "1"
+prueba sitios/pruebas/estadisticas.php " - Estad√≠sticas " estadisticas
+prueba sitios/pruebas/novalida-basicos.php " - Validaci√≥n b√°sicos" novalida-basicos
+prueba sitios/pruebas/novalida-frecuentes.php " - Validaci√≥n frecuentes" novalida-frecuentes "" "1"
 prueba sitios/pruebas/externa.php " - Consulta externa" externa
 prueba sitios/pruebas/relato.php " - Exporta Relato " relato
 prueba sitios/pruebas/imprelato.php " - Importa Relato " imprelato "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*" "" "resimp.xrlt.espreg" "Warning" "fecha_fuente" "D -"
