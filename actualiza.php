@@ -218,7 +218,7 @@ if (!aplicado($idact)) {
         "COLUMN id_resultado_agresion SET NOT NULL"
     );
 
-    // Consistencia en demográficas, no sabe y otros = SIN INFORMACION
+    // Consistencia en demográficas, no sabe y otros = SIN INFORMACIÓN
     hace_consulta(
         $db, "UPDATE victima SET id_rango_edad='6' " .
         "WHERE id_rango_edad IS NULL"
@@ -578,7 +578,7 @@ if (!aplicado($idac)) {
         ")", false
     );
     hace_consulta(
-        $db, "INSERT INTO tipo_sitio VALUES (1, 'SIN INFORMACION')",
+        $db, "INSERT INTO tipo_sitio VALUES (1, 'SIN INFORMACIÓN')",
         false
     );
     hace_consulta($db, "INSERT INTO tipo_sitio VALUES (2, 'URBANO')", false);
@@ -1469,7 +1469,7 @@ if (!aplicado($idac)) {
     );
     $r = hace_consulta(
         $db, "INSERT INTO tipo_relacion (id, nombre, dirigido, observaciones)
-        VALUES ('SI','SIN INFORMACION', true, NULL)", false
+        VALUES ('SI','SIN INFORMACIÓN', true, NULL)", false
     );
 
     aplicaact($act, $idac, 'Tipos de relaciones familiares');
@@ -2318,6 +2318,35 @@ if (!aplicado($idac)) {
 
     aplicaact($act, $idac, 'Renombrando campos para seguir estándares SQL');
 }
+
+$idac = '1.2-gc';
+if (!aplicado($idac)) {
+    foreach (array('departamento', 'municipio', 'clase') as $tabla) {
+        hace_consulta(
+            $db, "ALTER TABLE $tabla " .
+            " ADD COLUMN latitud FLOAT", false
+        );
+        hace_consulta(
+            $db, "ALTER TABLE $tabla " .
+            " ADD COLUMN longitud FLOAT", false
+        );
+    }
+    hace_consulta(
+        $db, "ALTER TABLE tclase ALTER COLUMN id TYPE VARCHAR(10)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE clase ALTER COLUMN id_tclase TYPE VARCHAR(10)", false
+    );
+
+    aplicaact($act, $idac, 'Latitude y Longitud en departamento, municipio y clase');
+}
+
+$idac = '1.1-dp';
+if (!aplicado($idac)) {
+    consulta_archivo(&$db, 'act-nom2012.sql');
+    aplicaact($act, $idac, 'Actualiza información geográfica de acuerdo a DIVIPOLA 2012');
+}
+
 
 /*$idac = '1.2-rt4';
 if (!aplicado($idac)) {

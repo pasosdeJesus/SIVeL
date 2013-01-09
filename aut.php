@@ -422,11 +422,18 @@ function localiza_conf()
     }
     $n = str_replace("/", "_", $n);
     $n = str_replace("~", "", $n);
-    while (substr($n, strlen($n)-1, 1)=='_') {
+    while (substr($n, strlen($n)-1, 1) == '_') {
         $n = substr($n, 0, strlen($n)-1);
     }
-    $nn = substr($n, strpos($n, "_") + 1);
+    if (strpos($n, "_")) {
+        $nn = substr($n, strpos($n, "_") + 1);
+    } else  if (($pp = strpos($n, ".")) == true) {
+        $nn = substr($n, 0, $pp);
+    } else {
+        $nn = $n;
+    }
     $pbase = $nn;
+    //echo "OJO pbase=$pbase<br>";
 
     $pref = "";
     if (isset($_SESSION['localiza_conf_pref'])) {
@@ -455,7 +462,7 @@ function localiza_conf()
     if (!$existe) {
         global $CHROOTDIR;
         encabezado_envia('Error');
-        echo "No existe configuración '"
+        echo "No existe configuraci&oacute;n '"
             . htmlentities($dirsitio, ENT_COMPAT, 'UTF-8') . "'<br>";
         $r = dirname($_SERVER['PATH_TRANSLATED']) . "/sitios";
         $rs = $CHROOTDIR . $r;

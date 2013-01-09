@@ -135,6 +135,8 @@ CREATE SEQUENCE departamento_seq;
 CREATE TABLE departamento (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('departamento_seq')),
 	nombre VARCHAR(500) NOT NULL,
+	latitud FLOAT,
+	longitud FLOAT,
 	fechacreacion	DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -145,11 +147,16 @@ CREATE TABLE departamento (
 
 CREATE SEQUENCE municipio_seq;
 
+-- Convencion en nombre del municipio, a continuacion del nombre entre parentesis puede venir un nombre alternativo.  Bien porque historicamente se conociera de otra forma o bien el nombre de la cabecera municipal si es diferente al nombre del municipio.  Si se requieren varios nombres alternativos separarlos dentro del paréntesis con comas.
+-- Preferimos la comunidad (directa, wikipedia, alcaldias y despues Divipola) pues hay municipios que no estan en el DIVIPOLA. Por ejemplo consultando el 3.Ene.2013 http://www.dane.gov.co/index.php?option=com_content&view=article&id=1770&Itemid=92 no se encuentra SAN JOSÉ DE OCUNE, VICHADA, si está pero sin alcalde en http://www.portalterritorial.gov.co/dir_vichada.shtml, tampoco esta en Openstreetmap, si esta en http://en.wikipedia.org/wiki/San_Jose_de_Ocune
+-- Hay nombres que cambian, por ejemplo en 3.Ene.2012 no hay CERRO DE SAN ANTONIO en MAGDALENA, se encunetra CERRO SAN ANTONIO, aunque la pagina de la alcaldia es http://www.cerrodesanantonio-magdalena.gov.co/index.shtml
 CREATE TABLE municipio (
 	id INTEGER NOT NULL DEFAULT(nextval('municipio_seq')),
 	nombre VARCHAR(500) NOT NULL,
 	id_departamento INTEGER NOT NULL REFERENCES departamento 
 	ON DELETE CASCADE,
+	latitud FLOAT,
+	longitud FLOAT,
 	fechacreacion	DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -167,6 +174,8 @@ CREATE TABLE clase (
 	id_departamento INTEGER REFERENCES departamento ON DELETE CASCADE,
 	id_municipio INTEGER,
 	id_tclase VARCHAR(3) REFERENCES tclase, 
+	latitud FLOAT,
+	longitud FLOAT,
 	fechacreacion	DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
