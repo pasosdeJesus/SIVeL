@@ -76,6 +76,7 @@ UPDATE municipio SET nombre='BELÉN' WHERE id_departamento = '15' AND id = '87' 
 UPDATE municipio SET nombre='BELÉN' WHERE id_departamento = '52' AND id = '83' ; -- BELEN
 UPDATE municipio SET nombre='BETÉITIVA' WHERE id_departamento = '15' AND id = '92' ; -- BETEITIVA
 UPDATE municipio SET nombre='BOJACÁ' WHERE id_departamento = '25' AND id = '99' ; -- BOJACA
+UPDATE municipio SET nombre='BOLÍVAR (CIUDAD BOLÍVAR)' WHERE id_departamento = '5' AND id = '101' ; -- BOLÍVAR
 UPDATE municipio SET nombre='BOYACÁ' WHERE id_departamento = '15' AND id = '104' ; -- BOYACA
 UPDATE municipio SET nombre='BURITICÁ' WHERE id_departamento = '5' AND id = '113' ; -- BURITICA
 UPDATE municipio SET nombre='BUSBANZÁ' WHERE id_departamento = '15' AND id = '114' ; -- BUSBANZA
