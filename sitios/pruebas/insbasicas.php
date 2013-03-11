@@ -139,7 +139,7 @@ $c += instablabasica(
 
 $c += instablabasica(
     'pconsolidado', 'rotulo', 'rotulo1',
-    array('tviolencia' => 'UNA',
+    array('tipoviolencia' => 'UNA',
     'clasificacion' => 'OTRA'
     )
 );

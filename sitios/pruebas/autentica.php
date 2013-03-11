@@ -29,7 +29,6 @@ require_once "misc.php";
 require_once "misc_caso.php";
 require_once "DB/DataObject/FormBuilder.php";
 
-//die("x");
 $aut_usuario = "";
 autentica_usuario($dsn, $aut_usuario, 11);
 

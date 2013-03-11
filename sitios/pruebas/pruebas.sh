@@ -120,21 +120,32 @@ if (test "$SALTAINI" != "1") then {
 	fuenteschrootsed=`echo $fuentes | sed -e "s/$chres//g" | sed -e "s/\//\\\\\\\\\//g"`;
 
 
-	sed -e "s/^ *\$dbservidor *=.*/\$dbservidor = \"unix($chres$dschrootsed)\";/g" sitios/pordefecto/conf.php | 
+	( cat sitios/pordefecto/plantilla-conf.php; ) | 
+	sed -e "s/^ *\$dbservidor *=.*/\$dbservidor = \"unix($chres$dschrootsed)\";/g" |
 	sed -e "s/^ *\$dbusuario *=.*/\$dbusuario = \"$dbusuario\";/g"  |
 	sed -e "s/^ *\$dbclave *=.*/\$dbclave = \"$dbclave\";/g"  |
 	sed -e "s/^ *\$dbnombre *=.*/\$dbnombre = \"sivelpruebas\";/g"  |
-	sed -e "s/^ *\$dirchroot *=.*/\$dirchroot = \"\";/g"  |
 	sed -e "s/^ *\$dirserv *=.*/\$dirserv = \"$chres$fuenteschrootsed\";/g"  |
 	sed -e "s/^ *\$dirsitio *=.*/\$dirsitio = \"sitios\/pruebas\";/g"  |
 	sed -e "s/^ *\$GLOBALS\['dir_anexos'\] *=.*/\$GLOBALS['dir_anexos'] = \"sitios\/pruebas\/esperado\";/g"  |
 	sed -e "s/^ *\$socketopt *=.*/\$socketopt = \"-h $dssed\";/g"  > sitios/pruebas/conf.php
-
+	ed sitios/pruebas/conf.php >/dev/null 2>&1 <<EOF
+/inibdmod.php
+i
+\$dbservidor="unix($SOCKPSQL)";
+\$dirchroot="";
+\$GLOBALS['DB_Debug'] = 0;
+.
+w
+q
+EOF
 	chmod o-rwx sitios/pruebas/conf.php
 	sudo chgrp www sitios/pruebas/conf.php
 	chmod g-wx+r sitios/pruebas/conf.php
 
-	sed -e "s/^ *dirap=.*/dirap=\"$fuentessed\/sitios\/pruebas\"/g" sitios/pordefecto/vardb.sh.plantilla > sitios/pruebas/vardb.sh
+	sed -e "s/^ *dirap=.*/dirap=\"$fuentessed\/sitios\/pruebas\"/g" sitios/pordefecto/plantilla-vardb.sh > sitios/pruebas/vardb.sh
+
+	cp sitios/pordefecto/plantilla-conf_int.php sitios/pruebas/conf_int.php
 
 	mkdir -p sitios/pruebas/DataObjects
 #	cp $dirplant/DataObjects/$nombase.ini sitios/pruebas/sivelpruebas.ini
@@ -161,7 +172,7 @@ if (test "$SALTAINI" != "1") then {
 		echo $cmd;
 		eval $cmd;
 	} fi;
-	cmd="psql $socketopt -U $dbusuario -d $dbnombre -c \"SET client_encoding to 'LATIN1'; INSERT INTO usuario(id_usuario, password, nombre, descripcion, id_rol) VALUES ('sivelpruebas', 'c2b96950b73332b8386406b6bee5f5db73a2bb7d', '', '', '1'); INSERT INTO funcionario(anotacion, nombre) VALUES ('', 'sivelpruebas'); \"";
+	cmd="psql $socketopt -U $dbusuario -d $dbnombre -c \"SET client_encoding to 'LATIN1'; INSERT INTO usuario(id, password, nombre, descripcion, rol) VALUES ('sivelpruebas', 'c2b96950b73332b8386406b6bee5f5db73a2bb7d', '', '', '1'); INSERT INTO funcionario(anotacion, nombre) VALUES ('', 'sivelpruebas'); \"";
 	echo $cmd;
 	echo "Por evaluar";
 	eval $cmd;
@@ -171,7 +182,7 @@ if (test "$SALTAINI" != "1") then {
 
 $PHP -n -r 'phpinfo();' | grep -v "^[^ a-z]* =>" >> sitios/pruebas/pruebas.bitacora 2>&1
 
-#function x {
+function x {
 prueba sitios/pruebas/autentica.php "Autenticación"
 prueba sitios/pruebas/pactualiza.php "Actualiza"
 prueba sitios/pruebas/insdep.php "Inserta departamento"
@@ -197,7 +208,9 @@ prueba sitios/pruebas/inscaso-evaluacion.php " - Evaluacion"
 prueba sitios/pruebas/inscaso-evaluacion-valida.php " - Valida Evaluacion"
 prueba sitios/pruebas/inscaso-valrepgen.php " - Validar y Reporte General" valrepgen "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*"
 prueba sitios/pruebas/reprevista.php " - Reporte Revista" reprevista
+}
 prueba sitios/pruebas/reprevista-filtros.php " - Filtros en Reporte Revista" reprevista-filtros
+exit 1;
 prueba sitios/pruebas/repconsolidado.php " - Reporte Consolidado" repconsolidado
 prueba sitios/pruebas/estadisticas.php " - Estadísticas " estadisticas
 prueba sitios/pruebas/novalida-basicos.php " - Validación básicos" novalida-basicos

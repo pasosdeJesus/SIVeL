@@ -26,6 +26,7 @@ $aut_usuario = "";
 $accno = "";
 autentica_usuario($dsn, $aut_usuario, 31);
 
+require_once $_SESSION['dirsitio'] . "/conf_int.php";
 
 require_once 'HTML/QuickForm/Controller.php';
 require_once 'HTML/QuickForm/Action/Direct.php';

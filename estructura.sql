@@ -512,7 +512,7 @@ CREATE TABLE victimacolectiva (
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	personasaprox INTEGER,
-	organizacion_armada INTEGER REFERENCES presponsable,
+	organizacionarmada INTEGER REFERENCES presponsable,
 	PRIMARY KEY(id_grupoper, id_caso)
 );
 

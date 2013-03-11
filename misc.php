@@ -1033,7 +1033,7 @@ function sin_error_pear($do, $msg = "")
 {
     if (PEAR::isError($do)) {
         die_act(
-            trim($msg . " ") . $do->getMessage() . 
+            "Error " . trim($msg . " ") . $do->getMessage() . 
             " - " . $do->getUserInfo()
         );
         //debug_print_backtrace();
@@ -1977,6 +1977,7 @@ function objeto_tabla($nom)
 {
     assert($nom != '');
     $db = new DB_DataObject();
+    sin_error_pear($db);
     $do = $db->factory($nom);
     sin_error_pear($do);
 

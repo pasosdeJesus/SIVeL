@@ -22,12 +22,12 @@ if (PHP_SAPI !== 'cli') {
 }
 require_once "ambiente.php";
 
-$na = (int)$db->getOne("SELECT COUNT(id_usuario) FROM usuario;");
+$na = (int)$db->getOne("SELECT COUNT(id) FROM usuario;");
 
 echo "\nna=$na";
 $_REQUEST = $_POST = $_GET = array();
 $_REQUEST['_qf__dataobjects_usuario'] = $_POST['_qf__dataobjects_usuario'] = '';
-$_REQUEST['id_usuario'] = $_POST['id_usuario'] = 'inv1';
+$_REQUEST['id'] = $_POST['id'] = 'inv1';
 $_REQUEST['password'] = $_POST['password'] = 'b';
 $_REQUEST['nombre'] = $_POST['nombre'] = 'c';
 $_REQUEST['descripcion'] = $_POST['descripcion'] = 'd';
@@ -41,7 +41,7 @@ require_once "detusyrol.php";
 
 
 /* Verificando */
-$nd = (int)$db->getOne("SELECT COUNT(id_usuario) FROM usuario;");
+$nd = (int)$db->getOne("SELECT COUNT(id) FROM usuario;");
 
 echo "insusu nd=$nd\n";
 

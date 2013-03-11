@@ -48,7 +48,7 @@ if (test -f /home/$usivel/.pgpass) then {
 
 mkdir -p $ns/DataObjects
 sed -e "s/dbnombre *= *\".*\"/dbnombre = \"$ns\"/g;s/dbclave *= *\".*\"/dbclave = \"$CLSIVELPG\"/g;s/dirsitio *= *\".*\"/dirsitio = \"sitios\/$ns\"/g;s/dirserv *= *\".*\"/dirserv = \"$edtchroot\"/g" pordefecto/$nomplant > $ns/conf.php
-sed -e "s/dirap *= *.*/dirap=$edts\/sitios\/$ns/g" pordefecto/vardb.sh > $ns/vardb.sh
+sed -e "s/dirap *= *.*/dirap=$edts\/sitios\/$ns/g" pordefecto/plantilla-vardb.sh > $ns/vardb.sh
 cp pordefecto/plantilla-conf_int.php $ns/conf_int.php
 sudo touch $ns/ultimoenvio.txt
 sudo chown -f www:www $ns/ultimoenvio.txt
