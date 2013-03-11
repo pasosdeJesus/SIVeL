@@ -64,6 +64,7 @@ function idioma($l = "es_CO")
 {
     global $LENGDISP;
     //echo "OJO idioma($l)<br>";
+    include "confv.php";
     $ld = explode(" ", $LENGDISP);
     if (!in_array($l, $ld)) {
         echo "El idioma '$l', se solicitó pero no está disponible.<br>";
