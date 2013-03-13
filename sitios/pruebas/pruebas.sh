@@ -34,7 +34,7 @@ function prueba {
 		mkdir -p sitios/pruebas/salida
 		$PHP -n $a | grep -v evita_csrf > sitios/pruebas/salida/$sal.tmp 2>&1
 		if (test "$saca" != "") then {
-			grep -v "$saca" sitios/pruebas/salida/$sal.tmp > sitios/pruebas/salida/$sal.espreg
+			grep -v Warning sitios/pruebas/salida/$sal.tmp | grep -v "$saca" > sitios/pruebas/salida/$sal.espreg
 			if (test "$saca4" != "") then {
 				cp sitios/pruebas/salida/$sal.espreg sitios/pruebas/salida/$sal.tmp2
 				grep -v "$saca4" sitios/pruebas/salida/$sal.tmp2 > sitios/pruebas/salida/$sal.espreg
@@ -127,7 +127,6 @@ if (test "$SALTAINI" != "1") then {
 	sed -e "s/^ *\$dbnombre *=.*/\$dbnombre = \"sivelpruebas\";/g"  |
 	sed -e "s/^ *\$dirserv *=.*/\$dirserv = \"$chres$fuenteschrootsed\";/g"  |
 	sed -e "s/^ *\$dirsitio *=.*/\$dirsitio = \"sitios\/pruebas\";/g"  |
-	sed -e "s/^ *\$GLOBALS\['dir_anexos'\] *=.*/\$GLOBALS['dir_anexos'] = \"sitios\/pruebas\/esperado\";/g"  |
 	sed -e "s/^ *\$socketopt *=.*/\$socketopt = \"-h $dssed\";/g"  > sitios/pruebas/conf.php
 	ed sitios/pruebas/conf.php >/dev/null 2>&1 <<EOF
 /inibdmod.php
@@ -135,6 +134,7 @@ i
 \$dbservidor="unix($SOCKPSQL)";
 \$dirchroot="";
 \$GLOBALS['DB_Debug'] = 0;
+\$GLOBALS['dir_anexos'] = "sitios/pruebas/esperado";
 .
 w
 q
@@ -208,15 +208,15 @@ prueba sitios/pruebas/inscaso-evaluacion.php " - Evaluacion"
 prueba sitios/pruebas/inscaso-evaluacion-valida.php " - Valida Evaluacion"
 prueba sitios/pruebas/inscaso-valrepgen.php " - Validar y Reporte General" valrepgen "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*"
 prueba sitios/pruebas/reprevista.php " - Reporte Revista" reprevista
-}
 prueba sitios/pruebas/reprevista-filtros.php " - Filtros en Reporte Revista" reprevista-filtros "Warning"
-exit 1;
 prueba sitios/pruebas/repconsolidado.php " - Reporte Consolidado" repconsolidado
 prueba sitios/pruebas/estadisticas.php " - Estadísticas " estadisticas
 prueba sitios/pruebas/novalida-basicos.php " - Validación básicos" novalida-basicos
 prueba sitios/pruebas/novalida-frecuentes.php " - Validación frecuentes" novalida-frecuentes "" "1"
 prueba sitios/pruebas/externa.php " - Consulta externa" externa
 prueba sitios/pruebas/relato.php " - Exporta Relato " relato
+}
 prueba sitios/pruebas/imprelato.php " - Importa Relato " imprelato "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*" "" "resimp.xrlt.espreg" "Warning" "fecha_fuente" "D -"
+exit 1;
 #}
 #prueba sitios/pruebas/mezcla.php " - Mezcla 2 Casos" mezcla
