@@ -58,7 +58,7 @@ function prueba {
 	} fi;
 	if (test "$otrocomp" != "") then {
 		if (test "$saca2" != "") then {
-			grep -v "$saca2" sitios/pruebas/salida/$otrocomp > sitios/pruebas/salida/$otrocomp.tmp
+			grep -v "$saca2" sitios/pruebas/salida/$otrocomp | grep -v "Warning" > sitios/pruebas/salida/$otrocomp.tmp
 			if (test "$saca3" != "") then {
 				cp sitios/pruebas/salida/$otrocomp.tmp sitios/pruebas/salida/$otrocomp.tmp2
 				grep -v "$saca3" sitios/pruebas/salida/$otrocomp.tmp2 > sitios/pruebas/salida/$otrocomp.tmp
@@ -219,5 +219,4 @@ prueba sitios/pruebas/relato.php " - Exporta Relato " relato
 
 prueba sitios/pruebas/imprelato.php " - Importa Relato " imprelato "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*" "" "resimp.xrlt.espreg" "Warning" "fecha_fuente" "D -"
 exit 1;
-#}
 #prueba sitios/pruebas/mezcla.php " - Mezcla 2 Casos" mezcla

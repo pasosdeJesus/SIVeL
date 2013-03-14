@@ -29,8 +29,8 @@ function muestra()
 
     $aut_usuario = "";
     $db = autentica_usuario($dsn, $aut_usuario, 0);
-    $nombres = trim(utf8_decode(var_req_escapa('nombres', $db, 100)));
-    $apellidos  = trim(utf8_decode(var_req_escapa('apellidos', $db, 100)));
+    $nombres = trim(var_req_escapa('nombres', $db, 100));
+    $apellidos  = trim(var_req_escapa('apellidos', $db, 100));
     $rol = var_req_escapa('rol', $db, 32);
     $pn = explode(' ', $nombres);
     $pa = explode(' ', $apellidos);

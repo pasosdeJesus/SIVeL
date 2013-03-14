@@ -1,19 +1,34 @@
-<hr><pre>CASO NO. <a href='captura_caso.php?modo=edita&id=2'>2</a>
-FECHA: 07-Agosto-2007 15:00 intervalo1  Tip. Ub: Tipo_sitio1
+
+
+
+
+
+
+
+
+
+<hr><pre>CASO No. <a href='captura_caso.php?modo=edita&id=2'>2</a>
+FECHA: 07-Agosto-2007 15:00 intervalo1  Tip. Ub: Tsitio1
 
 y / municipio1 / clase1
+Fuente: ffrecuente1 - ubicaci贸n - 10-Octubre-2007
+ffrecuente1 - ubicacion - 10-Octubre-2007
+ n - ubicaci贸n - 15-Octubre-2007
 
 Memo:
 </pre><table width='78%'><tr><td><tt>memo
 
-</tt></td></tr></table><pre>T1000. tipo1 - supra1 - cat1
+</tt></td></tr></table><pre>Contexto: contexto1
+T1000. tipo1 - supra1 - cat1
 
 Presunto Responsable: presuntos r1: &nbsp;&nbsp;T1000
-&nbsp;&nbsp;&nbsp;&nbsp;nombres apellidos - sector_social1 - profesion1 3 hijos. Filiaci髇 pol韙ica: filiacion1.   Organizaci髇 Social: organizacion1
+&nbsp;&nbsp;&nbsp;&nbsp;nombres apellidos - sectorsocial1 - profesion1 3 hijos. Filiaci贸n Pol铆tica: filiacion1.   Organizaci贸n Social: organizacion1
 
 
 
 ANALISTA(s):
 
-</pre>Observaciones:   Persona repetida 1 - 'nombres apellidos' , como v&iacute;ctima en casos 1. -- Usando grupo existente 1 - nombre , como v&iacute;ctima en casos 1.
-<br>
+</pre>Observaciones:   Persona repetida 1 - 'NOMBRES APELLIDOS' , como v&iacute;ctima en casos 1. -- presponsable: desconocido 'nombre'<br>
+
+
+
