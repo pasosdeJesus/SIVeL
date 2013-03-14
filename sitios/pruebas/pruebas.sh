@@ -182,7 +182,7 @@ EOF
 
 $PHP -n -r 'phpinfo();' | grep -v "^[^ a-z]* =>" >> sitios/pruebas/pruebas.bitacora 2>&1
 
-function x {
+#function x {
 prueba sitios/pruebas/autentica.php "Autenticación"
 prueba sitios/pruebas/pactualiza.php "Actualiza"
 prueba sitios/pruebas/insdep.php "Inserta departamento"
@@ -215,7 +215,8 @@ prueba sitios/pruebas/novalida-basicos.php " - Validación básicos" novalida-ba
 prueba sitios/pruebas/novalida-frecuentes.php " - Validación frecuentes" novalida-frecuentes "" "1"
 prueba sitios/pruebas/externa.php " - Consulta externa" externa
 prueba sitios/pruebas/relato.php " - Exporta Relato " relato
-}
+#}
+
 prueba sitios/pruebas/imprelato.php " - Importa Relato " imprelato "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*" "" "resimp.xrlt.espreg" "Warning" "fecha_fuente" "D -"
 exit 1;
 #}

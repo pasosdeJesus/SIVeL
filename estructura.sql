@@ -659,14 +659,13 @@ CREATE TABLE comunidad_organizacion (
 	PRIMARY KEY(id_organizacion, id_grupoper, id_caso)
 );
 
--- id_rango_edad en lugar de id_rango
 CREATE TABLE comunidad_rangoedad (
-	id_rango INTEGER REFERENCES rangoedad,
+	id_rangoedad INTEGER REFERENCES rangoedad,
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	FOREIGN KEY (id_grupoper, id_caso) REFERENCES 
 		victimacolectiva(id_grupoper, id_caso),
-	PRIMARY KEY(id_rango, id_grupoper, id_caso)
+	PRIMARY KEY(id_rangoedad, id_grupoper, id_caso)
 );
 
 
