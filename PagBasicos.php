@@ -20,8 +20,8 @@
  */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
-$aut_usuario = "";
-autentica_usuario($GLOBALS['dsn'], $aut_usuario, 31);
+/* Esto en funcion que lo requiere $aut_usuario = "";
+autentica_usuario($GLOBALS['dsn'], $aut_usuario, 31); */
 
 require_once $_SESSION['dirsitio'] . "/conf_int.php";
 

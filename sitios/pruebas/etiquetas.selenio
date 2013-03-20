@@ -88,7 +88,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>name=id_p_responsable</td>
+	<td>name=id_presponsable</td>
 	<td>label=ACCU</td>
 </tr>
 <tr>
