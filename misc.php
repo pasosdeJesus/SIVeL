@@ -462,14 +462,18 @@ function valida(&$page)
  *
  * @return void
      */
-function error_valida($msg, $valores, $iderr = '')
+function error_valida($msg, $valores, $iderr = '', $enhtml = false)
 {
     if (isset($valores) && is_array($valores) && count($valores) > 0) {
         $_SESSION['recuperaErrorValida'] = $valores;
     }
-    echo "<div class='regla'>"
-        .  htmlentities($msg, ENT_COMPAT, 'UTF-8')
-        . "</div>";
+    echo "<div class='regla'>";
+    if ($enhtml) {
+        echo $msg;
+    } else {
+        echo htmlentities($msg, ENT_COMPAT, 'UTF-8');
+    }
+    echo "</div>";
     if ($iderr != '') {
         $_SESSION[$iderr] = $msg;
     }

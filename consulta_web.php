@@ -467,6 +467,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $slan = "es";
         if (isset($_SESSION['LANG'])) {
             $slan = substr($_SESSION['LANG'], 0, 2);
+            idioma($_SESSION['LANG']);
         }
 
         encabezado_envia(_('Consulta Web'), $GLOBALS['cabezote_consulta_web']);
@@ -971,7 +972,7 @@ function runController()
         $db =& $d->getDatabaseConnection();
         $rol = "";
         saca_opciones($_SESSION[$nv]['username'], $db, $opciones, $rol);
-        idioma('es_CO');
+        //idioma('es_CO');
         include_once $_SESSION['dirsitio'] . "/conf_int.php";
     }
 

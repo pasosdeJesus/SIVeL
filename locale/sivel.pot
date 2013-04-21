@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sivel 1.2a1\n"
 "Report-Msgid-Bugs-To: vtamara@pasosdeJesus.org\n"
-"POT-Creation-Date: 2012-08-30 08:25-0500\n"
+"POT-Creation-Date: 2013-02-14 00:12-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -162,7 +162,7 @@ msgstr ""
 msgid "Ubicación"
 msgstr ""
 
-#: PagBasicos.php:887
+#: PagBasicos.php:893
 msgid "Falta fecha del caso"
 msgstr ""
 
@@ -175,7 +175,7 @@ msgstr ""
 msgid "Fuentes Frecuentes"
 msgstr ""
 
-#: PagFuentesFrecuentes.php:151 PagOtrasFuentes.php:179 aut.php:93
+#: PagFuentesFrecuentes.php:151 PagOtrasFuentes.php:179 aut.php:94
 #: DataObjects/Caso_ffrecuente.php:73 sitios/pordefecto/conf_int.php:204
 msgid "Fuente"
 msgstr ""
@@ -184,15 +184,15 @@ msgstr ""
 msgid "La fecha de la fuente debe ser posterior a la del caso"
 msgstr ""
 
-#: PagFuentesFrecuentes.php:326 PagOtrasFuentes.php:361
+#: PagFuentesFrecuentes.php:332 PagOtrasFuentes.php:368
 msgid "Fecha de fuente no puede ser anterior a la del caso"
 msgstr ""
 
-#: PagFuentesFrecuentes.php:459 PagOtrasFuentes.php:524
+#: PagFuentesFrecuentes.php:465 PagOtrasFuentes.php:531
 msgid "No se incluyó fuente sin fecha: "
 msgstr ""
 
-#: PagFuentesFrecuentes.php:464 PagOtrasFuentes.php:529
+#: PagFuentesFrecuentes.php:470 PagOtrasFuentes.php:536
 msgid "No se incluyó fuente sin nombre: "
 msgstr ""
 
@@ -210,15 +210,15 @@ msgstr ""
 msgid "Otras Fuentes"
 msgstr ""
 
-#: PagOtrasFuentes.php:493 PagPResponsables.php:394
+#: PagOtrasFuentes.php:500 PagPResponsables.php:394
 msgid "Hay "
 msgstr ""
 
-#: PagOtrasFuentes.php:494
+#: PagOtrasFuentes.php:501
 msgid "fuentes no frecuentes con nombre como "
 msgstr ""
 
-#: PagOtrasFuentes.php:496
+#: PagOtrasFuentes.php:503
 msgid ", escogida la primera"
 msgstr ""
 
@@ -314,7 +314,7 @@ msgstr ""
 msgid "Ingreso Hasta:"
 msgstr ""
 
-#: PagTipoViolencia.php:139 ResConsulta.php:2121
+#: PagTipoViolencia.php:139 ResConsulta.php:2124
 #: DataObjects/Caso_contexto.php:49 DataObjects/Caso_contexto.php:50
 #: DataObjects/Contexto.php:48 sitios/pordefecto/conf_int.php:165
 #: sitios/pordefecto/conf_int.php:217 sitios/pordefecto/conf_int.php:218
@@ -338,7 +338,7 @@ msgstr ""
 msgid "Mapa"
 msgstr ""
 
-#: PagUbicacion.php:783
+#: PagUbicacion.php:790
 msgid "idubicacion es 0"
 msgstr ""
 
@@ -379,7 +379,7 @@ msgstr ""
 msgid "Cantidad de hijos fuera de rango"
 msgstr ""
 
-#: PagVictimaIndividual.php:668
+#: PagVictimaIndividual.php:674
 msgid "Faltó nombre y/o apellido de familiar"
 msgstr ""
 
@@ -427,9 +427,9 @@ msgstr ""
 
 #: ResConsulta.php:769 ResConsulta.php:821 ResConsulta.php:835
 #: ResConsulta.php:965 ResConsulta.php:985 ResConsulta.php:1027
-#: ResConsulta.php:1055 ResConsulta.php:1069 ResConsulta.php:1283
-#: ResConsulta.php:2190 ResConsulta.php:2778 ResConsulta.php:2878
-#: ResConsulta.php:2896 consolidado.php:205 consolidado.php:219
+#: ResConsulta.php:1055 ResConsulta.php:1069 ResConsulta.php:1284
+#: ResConsulta.php:2193 ResConsulta.php:2781 ResConsulta.php:2881
+#: ResConsulta.php:2899 consolidado.php:205 consolidado.php:219
 #: consulta_web.php:231 consulta_web.php:248 consulta_web.php:379
 #: consulta_web.php:810 consulta_web.php:825 consulta_web.php:914
 #: estadisticas.php:260 estadisticas.php:564
@@ -437,8 +437,8 @@ msgid "Falta"
 msgstr ""
 
 #: ResConsulta.php:770 ResConsulta.php:821 ResConsulta.php:966
-#: ResConsulta.php:1028 ResConsulta.php:1055 ResConsulta.php:1283
-#: ResConsulta.php:2191 ResConsulta.php:2879 consolidado.php:206
+#: ResConsulta.php:1028 ResConsulta.php:1055 ResConsulta.php:1284
+#: ResConsulta.php:2194 ResConsulta.php:2882 consolidado.php:206
 #: consulta_web.php:232 consulta_web.php:380 consulta_web.php:811
 #: consulta_web.php:915
 msgid "en"
@@ -498,77 +498,77 @@ msgstr ""
 msgid "Falló"
 msgstr ""
 
-#: ResConsulta.php:1085 actualiza.php:2447 buscaRepetidos.php:60
+#: ResConsulta.php:1085 actualiza.php:2497 buscaRepetidos.php:60
 #: completaActos.php:81 consolidado.php:700 consulta_web.php:936
 #: detalle.php:83 detusyrol.php:71 estadisticas.php:355 estadisticas.php:616
 #: importaRelato.php:764 tabla.php:223 tablas_basicas.php:60 usyroles.php:72
-#: valida.php:118
+#: valida.php:119
 msgid "Men&uacute; Principal"
 msgstr ""
 
-#: ResConsulta.php:1235 ResConsulta.php:2274 consolidado.php:377
+#: ResConsulta.php:1236 ResConsulta.php:2277 consolidado.php:377
 #: consolidado.php:381 consolidado.php:386 sitios/pordefecto/conf_int.php:299
 #: sitios/pordefecto/conf_int.php:326 sitios/pordefecto/conf_int.php:391
 msgid "Víctimas"
 msgstr ""
 
-#: ResConsulta.php:1648
+#: ResConsulta.php:1649
 msgid "Tiene más de una ubicación"
 msgstr ""
 
-#: ResConsulta.php:1964
+#: ResConsulta.php:1967
 msgid "CASO No."
 msgstr ""
 
-#: ResConsulta.php:2030
+#: ResConsulta.php:2033
 msgid "Tip. Ub"
 msgstr ""
 
-#: ResConsulta.php:2301
+#: ResConsulta.php:2304
 msgid "PERSONA SIN IDENTIFICAR"
 msgstr ""
 
-#: ResConsulta.php:2303
+#: ResConsulta.php:2306
 msgid "PERSONAS SIN IDENTIFICAR"
 msgstr ""
 
-#: ResConsulta.php:2778 ResConsulta.php:2896
+#: ResConsulta.php:2781 ResConsulta.php:2899
 msgid "indicada en"
 msgstr ""
 
-#: actualiza.php:92 actualiza.php:95
+#: actualiza.php:99 actualiza.php:102
 msgid "Actualizando"
 msgstr ""
 
-#: aut.php:45 misc.php:1009 misc.php:1039
+#: aut.php:46 misc.php:1022 misc.php:1069
 msgid "&iquest;Ya"
 msgstr ""
 
-#: aut.php:46 misc.php:1010 misc.php:1040
+#: aut.php:47 misc.php:1023 misc.php:1070
 msgid "actualiz&oacute;"
 msgstr ""
 
-#: aut.php:47 misc.php:1011 misc.php:1041
+#: aut.php:48 misc.php:1023 misc.php:1071
 msgid "y regener&oacute; esquema?"
 msgstr ""
 
-#: aut.php:112 consulta_web.php:674 DataObjects/Usuario.php:56
+#: aut.php:117 consulta_web.php:674 DataObjects/Usuario.php:56
 msgid "Usuario"
 msgstr ""
 
-#: aut.php:114 DataObjects/Usuario.php:59 DataObjects/Usuario.php:138
+#: aut.php:119 DataObjects/Usuario.php:59 DataObjects/Usuario.php:138
 msgid "Clave"
 msgstr ""
 
-#: aut.php:204
+#: aut.php:209
 msgid "Acceso no autorizado"
 msgstr ""
 
-#: aut.php:222
+#: aut.php:227
 msgid "Intentado actualizar usuario"
 msgstr ""
 
-#: aut.php:232
+#: aut.php:237
 msgid "No pudo emplear tabla de usuarios"
 msgstr ""
 
@@ -596,7 +596,7 @@ msgstr ""
 msgid "Val. y Rep. Gen."
 msgstr ""
 
-#: captura_caso.php:231 sitios/pordefecto/conf_int.php:339
+#: captura_caso.php:228 sitios/pordefecto/conf_int.php:339
 msgid "marca un campo requerido"
 msgstr ""
 
@@ -774,7 +774,7 @@ msgstr ""
 msgid "No pasaron validaciones adicionales"
 msgstr ""
 
-#: detalle.php:91 detusyrol.php:78 misc.php:1658
+#: detalle.php:91 detusyrol.php:78 misc.php:1692
 msgid "Datos enviados no pasaron verificación CSRF"
 msgstr ""
 
@@ -980,43 +980,43 @@ msgstr ""
 msgid "%s: El valor que ha ingresado no es válido."
 msgstr ""
 
-#: misc.php:693
+#: misc.php:697
 #, php-format
 msgid "Error: No se encontró elemento %s en el formulario"
 msgstr ""
 
-#: misc.php:1033
+#: misc.php:1063
 msgid "Error"
 msgstr ""
 
-#: misc.php:1062
+#: misc.php:1095
 #, php-format
 msgid "Se esperaba un resultado y no %s de consulta \"%s\""
 msgstr ""
 
-#: misc.php:1258
+#: misc.php:1293
 #, php-format
 msgid "Falta %s de misc_ordencons[%s]"
 msgstr ""
 
-#: misc.php:1302
+#: misc.php:1337
 #, php-format
 msgid "No hay campo %s en tabla %s"
 msgstr ""
 
-#: misc.php:1407
+#: misc.php:1441
 msgid "No es funcionario"
 msgstr ""
 
-#: misc.php:1615
+#: misc.php:1649
 msgid "Identificación de rango desconocida"
 msgstr ""
 
-#: misc.php:1652
+#: misc.php:1686
 msgid "Debería existir variable para evitar CSRF en sesión."
 msgstr ""
 
-#: misc.php:2045
+#: misc.php:2159
 msgid "Errores ortográficos en memo"
 msgstr ""
 
@@ -1068,27 +1068,27 @@ msgstr ""
 msgid "Casos con fecha de fuente frecuente anterior a la del caso"
 msgstr ""
 
-#: valida.php:62
+#: valida.php:63
 msgid "Casos con fecha inicial de funcionario anterior o igual a la del caso"
 msgstr ""
 
-#: valida.php:72
+#: valida.php:73
 msgid "Casos sin funcionario"
 msgstr ""
 
-#: valida.php:79
+#: valida.php:80
 msgid "Casos con más de una ubicaci&oacute;n (salen duplicados en conteos)"
 msgstr ""
 
-#: valida.php:87
+#: valida.php:88
 msgid "Víctimas con categorias que no son para víctimas individuales"
 msgstr ""
 
-#: valida.php:98
+#: valida.php:99
 msgid "Víctimas colectivas con categorias que no son para víctimas colectivas"
 msgstr ""
 
-#: valida.php:107
+#: valida.php:108
 msgid "Registros en victimacolectiva que no est&aacute;n en actocolectivo"
 msgstr ""
 
@@ -1281,6 +1281,12 @@ msgstr ""
 
 #: DataObjects/Comunidad_rangoedad.php:57
 msgid "Rangos de Edades"
+msgstr ""
+
+#: DataObjects/Comunidad_vinculoestado.php:57 DataObjects/Victima.php:102
+#: DataObjects/Vinculoestado.php:43 sitios/pordefecto/conf_int.php:158
+#: sitios/pordefecto/conf_int.php:244
+msgid "Vínculo con el Estado"
 msgstr ""
 
 #: DataObjects/Etnia.php:46 DataObjects/Victima.php:104
@@ -1538,12 +1544,6 @@ msgstr ""
 msgid "Filiación Política"
 msgstr ""
 
-#: DataObjects/Victima.php:102 DataObjects/Vinculoestado.php:43
-#: DataObjects/Vinculoestado_comunidad.php:57
-#: sitios/pordefecto/conf_int.php:158 sitios/pordefecto/conf_int.php:244
-msgid "Vínculo con el Estado"
-msgstr ""
-
 #: DataObjects/Victima.php:103 DataObjects/Victimacolectiva.php:57
 #: sitios/pordefecto/conf_int.php:245
 msgid "Organización Armada Víctima"
@@ -1689,7 +1689,7 @@ msgstr ""
 msgid "Información implicado"
 msgstr ""
 
-#: sitios/pordefecto/conf_int.php:161 modulos/etiquetas/PagEtiquetas.php:306
+#: sitios/pordefecto/conf_int.php:161 modulos/etiquetas/PagEtiquetas.php:312
 msgid "Información caso"
 msgstr ""
 
@@ -1796,11 +1796,12 @@ msgstr ""
 msgid "Diciembre"
 msgstr ""
 
-#: modulos/anexos/PagAnexo.php:191
+#: modulos/anexos/PagAnexo.php:192
 msgid "Anexos"
 msgstr ""
 
-#: modulos/anexos/PagAnexo.php:192 modulos/anexos/PagOtraAnexo.php:108
+#: modulos/anexos/PagAnexo.php:193 modulos/anexos/PagFrecuenteAnexo.php:113
+#: modulos/anexos/PagOtraAnexo.php:108
 msgid "Anexo"
 msgstr ""
 
@@ -1815,6 +1816,14 @@ msgstr ""
 
 #: modulos/anexos/DataObjects/Anexo.php:61
 msgid "Id. Fuente Directa"
+msgstr ""
+
+#: modulos/estrotulos/conf.php:33
+msgid "Individuales con Rotulos de Rep. Cons."
+msgstr ""
+
+#: modulos/estrotulos/conf.php:38 modulos/belicas/conf.php:49
+msgid "Colectivas con Rotulos de Rep. Cons."
 msgstr ""
 
 #: modulos/belicas/PagVictimaCombatiente.php:175
@@ -1841,10 +1850,6 @@ msgstr ""
 msgid "Revista Memo NO Bélicas"
 msgstr ""
 
-#: modulos/belicas/conf.php:49
-msgid "Colectivas con Rotulos de Rep. Cons."
-msgstr ""
-
 #: modulos/belicas/DataObjects/Antecedente_combatiente.php:57
 #: modulos/belicas/DataObjects/Combatiente.php:65
 msgid "Combatiente"
@@ -1867,7 +1872,7 @@ msgid "Presunto Responsable Agrede Combatiente"
 msgstr ""
 
 #: modulos/etiquetas/PagEtiquetas.php:89 modulos/etiquetas/PagEtiquetas.php:90
-#: modulos/etiquetas/PagEtiquetas.php:469
+#: modulos/etiquetas/PagEtiquetas.php:475
 #: modulos/etiquetas/DataObjects/Caso_etiqueta.php:159
 msgid "Etiquetas"
 msgstr ""
@@ -1876,28 +1881,28 @@ msgstr ""
 msgid "Faltó fecha y/o etiqueta"
 msgstr ""
 
-#: modulos/etiquetas/PagEtiquetas.php:188
+#: modulos/etiquetas/PagEtiquetas.php:194
 msgid "No pudo insertar en base."
 msgstr ""
 
-#: modulos/etiquetas/PagEtiquetas.php:306
+#: modulos/etiquetas/PagEtiquetas.php:312
 msgid "Etiquetas para un caso"
 msgstr ""
 
-#: modulos/etiquetas/PagEtiquetas.php:328
+#: modulos/etiquetas/PagEtiquetas.php:334
 msgid "Criterio Etiqueta"
 msgstr ""
 
-#: modulos/etiquetas/PagEtiquetas.php:330
+#: modulos/etiquetas/PagEtiquetas.php:336
 msgid "tiene"
 msgstr ""
 
-#: modulos/etiquetas/PagEtiquetas.php:330
+#: modulos/etiquetas/PagEtiquetas.php:336
 msgid "no tiene"
 msgstr ""
 
-#: modulos/etiquetas/PagEtiquetas.php:335
-#: modulos/etiquetas/PagEtiquetas.php:348
+#: modulos/etiquetas/PagEtiquetas.php:341
+#: modulos/etiquetas/PagEtiquetas.php:354
 #: modulos/etiquetas/DataObjects/Caso_etiqueta.php:130
 msgid "Etiqueta"
 msgstr ""
