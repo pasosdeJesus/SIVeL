@@ -1,4 +1,18 @@
+
+Warning: strtotime(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected 'America/Bogota' for 'COT/-5.0/no DST' instead in /var/www/htdocs/sivel/PagFuentesFrecuentes.php on line 330
+
+Warning: strtotime(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected 'America/Bogota' for 'COT/-5.0/no DST' instead in /var/www/htdocs/sivel/PagFuentesFrecuentes.php on line 330
 <div class='regla'>Fecha de fuente no puede ser anterior a la del caso</div>
+Warning: date(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected 'America/Bogota' for 'COT/-5.0/no DST' instead in /var/www/pear/lib/Date/TimeZone.php on line 4717
+
+Warning: date(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected 'America/Bogota' for 'COT/-5.0/no DST' instead in /var/www/htdocs/sivel/DB_DataObject_SIVeL.php on line 113
+
+Warning: date(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected 'America/Bogota' for 'COT/-5.0/no DST' instead in /var/www/pear/lib/HTML/QuickForm/date.php on line 301
+
+Warning: date(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected 'America/Bogota' for 'COT/-5.0/no DST' instead in /var/www/pear/lib/HTML/QuickForm/date.php on line 301
+
+Warning: date(): It is not safe to rely on the system's timezone settings. You are *required* to use the date.timezone setting or the date_default_timezone_set() function. In case you used any of those methods and you are still getting this warning, you most likely misspelled the timezone identifier. We selected 'America/Bogota' for 'COT/-5.0/no DST' instead in /var/www/htdocs/sivel/DataObjects/Caso_ffrecuente.php on line 146
+
 <script type="text/javascript">
 //<![CDATA[
 function validate_frecuentes(frm) {
@@ -7,7 +21,7 @@ function validate_frecuentes(frm) {
   var _qfGroups = {};
   _qfMsg = '';
 
-  _qfGroups['fecha'] = {'fecha[d]': true, 'fecha[m]': true, 'fecha[Y]': true};
+  _qfGroups['fecha'] = {'fecha[d]': true, 'fecha[M]': true, 'fecha[Y]': true};
   value = new Array();
   var valueIdx = 0;
   for (var i = 0; i < frm.elements.length; i++) {
@@ -58,10 +72,10 @@ function validate_frecuentes(frm) {
 }
 //]]>
 </script>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html lang = "es">
+<!doctype html>
+<html>
 <head>
-<meta http-equiv = "Content-Type" content = "text/html; charset=ISO-8859-1">
+<meta charset = "UTF-8">
 <title>Ficha caso</title>
 <style type = "text/css">
 
@@ -109,7 +123,7 @@ function envia(que) {  document.forms[0]._qf_default.value = que; document.forms
 </script>
 <body><table class="maintable" align = "left"><colgroup><col width = "150" style = "colprin1"/><col/></colgroup><form action="sitios/pruebas/novalida-frecuentes.php" method="post" name="frecuentes" id="frecuentes" target="_self" onsubmit="try { var myValidator = validate_frecuentes; } catch(e) { return true; } return myValidator(this);">
 <tr>
-<td valign="top" align="left" colspan="2"><input class="flat" name="_qf_frecuentes_basicos" value="Datos básicos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_ubicacion" value="Ubicación" type="submit" />&nbsp;<input class="flat" disabled="disabled" name="_qf_frecuentes_frecuentes" value="Fuentes Frecuentes" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_otras" value="Otras Frecuentes" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_tipoViolencia" value="Contexto" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_pResponsables" value="Presuntos Responsables" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_victimaIndividual" value="Víctimas Individuales" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_victimaColectiva" value="Víctima Colectiva" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_acto" value="Actos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_memo" value="Memo" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_anexos" value="Anexos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_etiquetas" value="Etiquetas" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_evaluacion" value="Evaluación" type="submit" /></td>
+<td valign="top" align="left" colspan="2"><input class="flat" name="_qf_frecuentes_basicos" value="Datos bÃ¡sicos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_ubicacion" value="UbicaciÃ³n" type="submit" />&nbsp;<input class="flat" disabled="disabled" name="_qf_frecuentes_frecuentes" value="Fuentes Frecuentes" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_otras" value="Otras Fuentes" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_tipoViolencia" value="Contexto" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_pResponsables" value="Presuntos Responsables" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_victimaIndividual" value="VÃ­ctimas Individuales" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_victimaColectiva" value="VÃ­ctima Colectiva" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_acto" value="Actos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_memo" value="Memo" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_anexos" value="Anexos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_etiquetas" value="Etiquetas" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_evaluacion" value="EvaluaciÃ³n" type="submit" /></td>
 </tr><tr><th colspan = "2"><table width = "100%"><th align = "left">Fuentes Frecuentes (1/1)</th><th algin = "right">Caso 1</th></table></th></tr>
 <tr>
 <td align="right" valign="top"><b></b></td>
@@ -117,9 +131,9 @@ function envia(que) {  document.forms[0]._qf_default.value = que; document.forms
 </tr>
 <tr>
 <td align="right" valign="top"><b>Fuente</b></td>
-<td valign="top" align="left"><select name="id_prensa">
+<td valign="top" align="left"><select name="id_ffrecuente">
 <option value=""></option>
-<option value="1" selected="selected">prensa1</option>
+<option value="1" selected="selected">ffrecuente1</option>
 </select></td>
 </tr>
 <tr>
@@ -156,19 +170,19 @@ function envia(que) {  document.forms[0]._qf_default.value = que; document.forms
 <option value="29">29</option>
 <option value="30">30</option>
 <option value="31">31</option>
-</select>-<select name="fecha[m]">
-<option value="1">01</option>
-<option value="2">02</option>
-<option value="3">03</option>
-<option value="4">04</option>
-<option value="5">05</option>
-<option value="6">06</option>
-<option value="7">07</option>
-<option value="8">08</option>
-<option value="9">09</option>
-<option value="10" selected="selected">10</option>
-<option value="11">11</option>
-<option value="12">12</option>
+</select>-<select name="fecha[M]">
+<option value="1">Ene</option>
+<option value="2">Feb</option>
+<option value="3">Mar</option>
+<option value="4">Abr</option>
+<option value="5">May</option>
+<option value="6">Jun</option>
+<option value="7">Jul</option>
+<option value="8">Ago</option>
+<option value="9">Sep</option>
+<option value="10" selected="selected">Oct</option>
+<option value="11">Nov</option>
+<option value="12">Dic</option>
 </select>-<select name="fecha[Y]">
 <option value="1990">1990</option>
 <option value="1991">1991</option>
@@ -192,19 +206,31 @@ function envia(que) {  document.forms[0]._qf_default.value = que; document.forms
 <option value="2009">2009</option>
 <option value="2010">2010</option>
 <option value="2011">2011</option>
+<option value="2012">2012</option>
+<option value="2013">2013</option>
+<option value="2014">2014</option>
+<option value="2015">2015</option>
+<option value="2016">2016</option>
+<option value="2017">2017</option>
+<option value="2018">2018</option>
+<option value="2019">2019</option>
+<option value="2020">2020</option>
+<option value="2021">2021</option>
+<option value="2022">2022</option>
+<option value="2023">2023</option>
 </select></td>
 </tr>
 <tr>
-<td align="right" valign="top"><b>Ubicación</b></td>
-<td valign="top" align="left"><input name="ubicacion" type="text" value="ubicación" size="70" maxlength="100" /></td>
+<td align="right" valign="top"><b>UbicaciÃ³n</b></td>
+<td valign="top" align="left"><input name="ubicacion" type="text" value="ubicaciÃ³n" size="70" maxlength="100" /></td>
 </tr>
 <tr>
-<td align="right" valign="top"><b>Clasificación</b></td>
+<td align="right" valign="top"><b>ClasificaciÃ³n</b></td>
 <td valign="top" align="left"><input name="clasificacion" type="text" value="clasificacion" size="70" maxlength="100" /></td>
 </tr>
 <tr>
-<td align="right" valign="top"><b>Ubicación Física</b></td>
-<td valign="top" align="left"><input name="ubicacion_fisica" type="text" value="ubicacion" size="70" maxlength="100" /></td>
+<td align="right" valign="top"><b>UbicaciÃ³n FÃ­sica</b></td>
+<td valign="top" align="left"><input name="ubicacionfisica" type="text" value="ubicacion" size="70" maxlength="100" /></td>
 </tr>
 <tr>
 <td align="right" valign="top"><b>Anexo</b></td>
@@ -214,7 +240,6 @@ function envia(que) {  document.forms[0]._qf_default.value = que; document.forms
 </select></td>
 </tr><tr><th colspan = "2">&nbsp; </th></tr>
 <tr>
-<td valign="top" align="center" colspan="2"><input style="width:85px; padding:0; " name="_qf_frecuentes_anterior" value="&lt;&lt; Anterior" type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_reporte" value="Val. y Rep. Gen." type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_busqueda" value="Buscar" type="submit" disabled="true" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_menu" value="Menú" type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_elimina_caso" value="Elimina caso" type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_casonuevo" value="Caso nuevo" type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_siguiente" value="Siguiente &gt;&gt;" type="submit" /></td>
-</tr><input name="id_caso" type="hidden" value="1" />
+<td valign="top" align="center" colspan="2"><input style="width:85px; padding:0; " name="_qf_frecuentes_anterior" value="&lt;&lt; Anterior" type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_reporte" value="Val. y Rep. Gen." type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_busqueda" value="Buscar" type="submit" disabled="true" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_menu" value="MenÃº" type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_elimina_caso" value="Elimina caso" type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_casonuevo" value="Caso Nuevo" type="submit" />&nbsp;<input style="width:85px; padding:0; " name="_qf_frecuentes_siguiente" value="Siguiente &gt;&gt;" type="submit" /></td>
 <input name="_qf_default" type="hidden" value="frecuentes:siguiente" />
-</form></table></body></html>No insertaron datos de pestaña en tabla escrito_caso. Antes: 1, después: 1
+</form></table></body></html>No insertaron datos de pestaÃ±a en tabla caso_ffrecuente. Antes: 1, despuÃ©s: 1

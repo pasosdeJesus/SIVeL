@@ -30,7 +30,7 @@ function muestra()
     $aut_usuario = "";
     $db = autentica_usuario($dsn, $aut_usuario, 0);
 
-    $nombre = trim(utf8_decode(var_req_escapa('nombre', $db, 100)));
+    $nombre = trim(var_req_escapa('nombre', $db, 100));
     $pn = explode(' ', $nombre);
     $cn = array();
     foreach ($pn as $p) {

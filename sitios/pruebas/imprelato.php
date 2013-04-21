@@ -30,6 +30,7 @@ $post = array();
 $_POST['MAX_FILE_SIZE'] = 2097152;
 $_POST['_qf_default'] = 'importaRelato:importa';
 $_POST['_qf_importaRelato_importa'] = 'Importar';
+$_POST['intensivo'] = '1';
 
 $_FILES["archivo_sel"] = array(
     "name"=> "relato.espreg",

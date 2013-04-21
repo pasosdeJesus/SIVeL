@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<!DOCTYPE relatos PUBLIC "-//SINCODH/DTD relatos 0.96" "relatos.dtd">
+<?xml version="1.0" encoding="UTF8"?>
+<!DOCTYPE relatos PUBLIC "-//SINCODH/DTD relatos 0.97" "relatos.dtd">
 <?xml-stylesheet type="text/xsl" href="xrlat-a-html.xsl"?>
 <relatos><relato>
   <organizacion_responsable>D</organizacion_responsable>
-  <derechos>Dominio P�blico</derechos>
+  <derechos>Dominio Público</derechos>
   <id_relato>1</id_relato>
   <forma_compartir>privado</forma_compartir>
-  <titulo>T�tulo</titulo>
+  <titulo>Título</titulo>
   <hechos>memo</hechos>
   <!-- Victimas personas individuales -->
   <persona>
@@ -25,15 +25,13 @@
     <id_grupo>1</id_grupo>
     <nombre_grupo>nombre</nombre_grupo>
     <observaciones tipo="anotaciones">anotaciones</observaciones>
-    <observaciones tipo="personas_aprox">3</observaciones>
+    <observaciones tipo="personasaprox">3</observaciones>
     <observaciones tipo="organizacion_armada">presuntos r1</observaciones>
-    <observaciones tipo="vinculo_estado_comunidad">vinculo_estado1</observaciones>
+    <observaciones tipo="comunidad_vinculoestado">vinculoestado1</observaciones>
     <observaciones tipo="profesion">profesion1</observaciones>
     <observaciones tipo="antecedente">antecedente1</observaciones>
     <observaciones tipo="filiacion">filiacion1</observaciones>
     <observaciones tipo="organizacion">organizacion1</observaciones>
-    <observaciones tipo="rango_edad">SN; rango_edad1</observaciones>
-    <observaciones tipo="sector_social">sector_social1</observaciones>
   </grupo>
   <!-- Presuntos responsables -->
   <grupo>
@@ -51,14 +49,14 @@
   <victima>
     <id_persona>1</id_persona>
     <ocupacion>profesion1</ocupacion>
-    <sector_condicion>sector_social1</sector_condicion>
+    <sector_condicion>sectorsocial1</sector_condicion>
     <organizacion>organizacion1</organizacion>
     <observaciones tipo="hijos">3</observaciones>
     <observaciones tipo="filiacion">filiacion1</observaciones>
-    <observaciones tipo="vinculo_estado">vinculo_estado1</observaciones>
+    <observaciones tipo="vinculoestado">vinculoestado1</observaciones>
     <observaciones tipo="organizacion_armada">presuntos r1</observaciones>
     <observaciones tipo="anotaciones">anotaciones</observaciones>
-    <observaciones tipo="rango_edad">desc1</observaciones>
+    <observaciones tipo="rangoedad">desc1</observaciones>
     <observaciones tipo="antecedentes">antecedente1</observaciones>
   </victima>
   <!-- Presuntos responsables individuales -->
@@ -81,16 +79,32 @@
 
   <!-- Actos con Victimas Colectivas -->
 
+  <!-- Fuente frecuente -->
+  <fuente>
+    <nombre_fuente>ffrecuente1</nombre_fuente>
+    <fecha_fuente>2007-10-10</fecha_fuente>
+    <ubicacion_fuente>ubicacion</ubicacion_fuente>
+    <observaciones tipo="ubicacion">ubicación</observaciones>
+    <observaciones tipo="clasificacion">clasificacion</observaciones>
+  </fuente>
+  <!-- Fuente no frecuente -->
+  <fuente>
+    <nombre_fuente>n</nombre_fuente>
+    <fecha_fuente>2007-10-15</fecha_fuente>
+    <ubicacion_fuente>ubicación</ubicacion_fuente>
+    <observaciones tipo="anotacion">a</observaciones>
+    <observaciones tipo="tipofuente">0</observaciones>
+  </fuente>
   <!-- Otros -->
   <observaciones tipo="intervalo">intervalo1</observaciones>
-  <observaciones tipo="gr_confiabilidad">Alta</observaciones>
-  <observaciones tipo="gr_esclarecimiento">Alto</observaciones>
-  <observaciones tipo="gr_impunidad">Nula</observaciones>
-  <observaciones tipo="gr_informacion">Parc</observaciones>
+  <observaciones tipo="grconfiabilidad">Alta</observaciones>
+  <observaciones tipo="gresclarecimiento">Alto</observaciones>
+  <observaciones tipo="grimpunidad">Nula</observaciones>
+  <observaciones tipo="grinformacion">Parc</observaciones>
   <observaciones tipo="bienes">bienes</observaciones>
   <observaciones tipo="sitio">sitio</observaciones>
   <observaciones tipo="lugar">lugar</observaciones>
-  <observaciones tipo="tipo_sitio">tipo_sitio1</observaciones>
+  <observaciones tipo="tsitio">tsitio1</observaciones>
   <observaciones tipo="contexto">contexto1</observaciones>
   <observaciones tipo="antecedente">antecedente1</observaciones>
 </relato></relatos>

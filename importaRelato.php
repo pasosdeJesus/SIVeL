@@ -463,13 +463,12 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         }
                     }
                     foreach (array('filiacion' => 'filiacion',
-                        'vinculoestado' => 'vinculoestado',
-                        'organizacion_armada' => 'presponsable')
+                        'vinculoestado' => 'vinculoestado')
                         as $cs => $cs2
                     ) {
                         $ncs = "id_" . $cs;
                         //echo "OJO cs=$cs, ncs=$ncs<br>";
-                        $v = dato_en_obs($victima, $cs); // ya hace utf8_decode
+                        $v = dato_en_obs($victima, $cs);
                         if ($v != null) {
                             $dvictima->$ncs = (int)conv_basica(
                                 $db, $cs2,
@@ -477,6 +476,15 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             );
                         }
                         //echo "OJO dvictima->ncs=" .  $dvictima->$ncs . "<br>";
+                    }
+                    $v = dato_en_obs($victima, "organizacionarmada");
+                    if ($v == null) {
+                        $v = dato_en_obs($victima, "organizacion_armada");
+                    }
+                    if ($v != null) {
+                        $dvictima->organizacionarmada = (int)conv_basica(
+                            $db, 'presponsable', $v, $obs
+                        );
                     }
 
                     if (!$dvictima->insert()) {
@@ -486,13 +494,14 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             $m .= $dvictima->getMessage() . " "
                                 . $dvictima->getUserInfo();
                         }
+                        die("OJO dvictima -> " . $m);
                         rep_obs($m, $obs);
                     }
                     foreach (array('antecedentes' => 'antecedente',  )
                         as $cs => $cs2
                     ) {
                         //echo "OJO cs=$cs, cs2=$cs2<br>";
-                        $v = dato_en_obs($victima, $cs); // ya hace utf8_decode
+                        $v = dato_en_obs($victima, $cs); 
                         //echo "OJO v=$v<br>";
                         if ($v != null) {
                             $la = explode(';', $v);

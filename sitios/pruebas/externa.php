@@ -70,6 +70,7 @@ hace_consulta(
     $db, "INSERT INTO intervalo (id, nombre, rango, fechacreacion) " .
     " VALUES ('5', 'SIN INFORMACIÓN', 'SIN INFORMACIÓN', '2001-01-01');"
 );
+hace_consulta($db, "DELETE FROM rangoedad WHERE id='6'", false, false);
 hace_consulta(
     $db, "INSERT INTO rangoedad (id, nombre, rango, limiteinferior,
     limitesuperior, fechacreacion)

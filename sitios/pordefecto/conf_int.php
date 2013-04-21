@@ -103,12 +103,15 @@ $GLOBALS['pie_consulta_web_correo'] = '<hr/><a href="consulta_web.php">Consulta 
  */
 $GLOBALS['cabezote_principal'] = '';
 
+if (!isset($_GLOBALS['IDIOMAPORDEFECTO'])) {
+    $_GLOBALS['IDIOMAPORDEFECTO'] = "es_CO";
+}
+
 if (isset($_SESSION['LANG'])) {
     //echo "OJO en pordefecto/conf_int.php SESSION[LANG]=" . $_SESSION[LANG] . "<br>";
     $lang = $_SESSION['LANG'];
-    if (($pu = strpos($_SESSION['LANG'], '_')) > 0) {
-        $lang = substr($_SESSION['LANG'], 0, $pu);
-    }
+} else if (isset($_GLOBALS['IDIOMAPORDEFECTO'])) {
+    $lang = $GLOBALS['IDIOMAPORDEFECTO'];
 } else {
     echo "<font color='red'>No hay idioma definido en sitios/pordefecto/conf_int.php<br>";
     debug_print_backtrace();
@@ -116,6 +119,10 @@ if (isset($_SESSION['LANG'])) {
 
 if ($lang == "") {
     $lang = "es";
+} else {
+    if (($pu = strpos($lang, '_')) > 0) {
+        $lang = substr($lang, 0, $pu);
+    }
 }
 
 /** Archivo HTML que se pone en el centro del menú principal

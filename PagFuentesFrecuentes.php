@@ -459,13 +459,13 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     {
         foreach ($r->fuente as $fuente) {
             $idffrecuente = null;
-            $nomf = utf8_decode($fuente->nombre_fuente);
+            $nomf = $fuente->nombre_fuente;
             if (empty($fuente->fecha_fuente)) {
                 rep_obs(
                     _("No se incluyó fuente sin fecha: ") .
                     $fuente->asXML(), $obs
                 );
-            } else if (empty($fuente->nombre_fuente)) {
+            } else if (empty($nomf)) {
                 rep_obs(
                     _("No se incluyó fuente sin nombre: ") .
                     $fuente->asXML(), $obs
@@ -474,7 +474,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
                 $fecha = conv_fecha($fuente->fecha_fuente, $obs);
                 PagFuentesFrecuentes::busca_inserta(
                     $db, $idcaso, $nomf, $fecha,
-                    utf8_decode((string)$fuente->ubicacion_fuente),
+                    (string)$fuente->ubicacion_fuente,
                     dato_en_obs($fuente, 'ubicacion'),
                     dato_en_obs($fuente, 'clasificacion'),
                     $ubif, $ubi, $cla, $obs

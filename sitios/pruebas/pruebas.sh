@@ -34,7 +34,7 @@ function prueba {
 		mkdir -p sitios/pruebas/salida
 		$PHP -n $a | grep -v evita_csrf > sitios/pruebas/salida/$sal.tmp 2>&1
 		if (test "$saca" != "") then {
-			grep -v "$saca" sitios/pruebas/salida/$sal.tmp > sitios/pruebas/salida/$sal.espreg
+			grep -v Warning sitios/pruebas/salida/$sal.tmp | grep -v "$saca" > sitios/pruebas/salida/$sal.espreg
 			if (test "$saca4" != "") then {
 				cp sitios/pruebas/salida/$sal.espreg sitios/pruebas/salida/$sal.tmp2
 				grep -v "$saca4" sitios/pruebas/salida/$sal.tmp2 > sitios/pruebas/salida/$sal.espreg
@@ -58,7 +58,7 @@ function prueba {
 	} fi;
 	if (test "$otrocomp" != "") then {
 		if (test "$saca2" != "") then {
-			grep -v "$saca2" sitios/pruebas/salida/$otrocomp > sitios/pruebas/salida/$otrocomp.tmp
+			grep -v "$saca2" sitios/pruebas/salida/$otrocomp | grep -v "Warning" > sitios/pruebas/salida/$otrocomp.tmp
 			if (test "$saca3" != "") then {
 				cp sitios/pruebas/salida/$otrocomp.tmp sitios/pruebas/salida/$otrocomp.tmp2
 				grep -v "$saca3" sitios/pruebas/salida/$otrocomp.tmp2 > sitios/pruebas/salida/$otrocomp.tmp
@@ -120,21 +120,32 @@ if (test "$SALTAINI" != "1") then {
 	fuenteschrootsed=`echo $fuentes | sed -e "s/$chres//g" | sed -e "s/\//\\\\\\\\\//g"`;
 
 
-	sed -e "s/^ *\$dbservidor *=.*/\$dbservidor = \"unix($chres$dschrootsed)\";/g" sitios/pordefecto/conf.php | 
+	( cat sitios/pordefecto/plantilla-conf.php; ) | 
+	sed -e "s/^ *\$dbservidor *=.*/\$dbservidor = \"unix($chres$dschrootsed)\";/g" |
 	sed -e "s/^ *\$dbusuario *=.*/\$dbusuario = \"$dbusuario\";/g"  |
 	sed -e "s/^ *\$dbclave *=.*/\$dbclave = \"$dbclave\";/g"  |
 	sed -e "s/^ *\$dbnombre *=.*/\$dbnombre = \"sivelpruebas\";/g"  |
-	sed -e "s/^ *\$dirchroot *=.*/\$dirchroot = \"\";/g"  |
 	sed -e "s/^ *\$dirserv *=.*/\$dirserv = \"$chres$fuenteschrootsed\";/g"  |
 	sed -e "s/^ *\$dirsitio *=.*/\$dirsitio = \"sitios\/pruebas\";/g"  |
-	sed -e "s/^ *\$GLOBALS\['dir_anexos'\] *=.*/\$GLOBALS['dir_anexos'] = \"sitios\/pruebas\/esperado\";/g"  |
 	sed -e "s/^ *\$socketopt *=.*/\$socketopt = \"-h $dssed\";/g"  > sitios/pruebas/conf.php
-
+	ed sitios/pruebas/conf.php >/dev/null 2>&1 <<EOF
+/inibdmod.php
+i
+\$dbservidor="unix($SOCKPSQL)";
+\$dirchroot="";
+\$GLOBALS['DB_Debug'] = 0;
+\$GLOBALS['dir_anexos'] = "sitios/pruebas/esperado";
+.
+w
+q
+EOF
 	chmod o-rwx sitios/pruebas/conf.php
 	sudo chgrp www sitios/pruebas/conf.php
 	chmod g-wx+r sitios/pruebas/conf.php
 
-	sed -e "s/^ *dirap=.*/dirap=\"$fuentessed\/sitios\/pruebas\"/g" sitios/pordefecto/vardb.sh.plantilla > sitios/pruebas/vardb.sh
+	sed -e "s/^ *dirap=.*/dirap=\"$fuentessed\/sitios\/pruebas\"/g" sitios/pordefecto/plantilla-vardb.sh > sitios/pruebas/vardb.sh
+
+	cp sitios/pordefecto/plantilla-conf_int.php sitios/pruebas/conf_int.php
 
 	mkdir -p sitios/pruebas/DataObjects
 #	cp $dirplant/DataObjects/$nombase.ini sitios/pruebas/sivelpruebas.ini
@@ -161,7 +172,7 @@ if (test "$SALTAINI" != "1") then {
 		echo $cmd;
 		eval $cmd;
 	} fi;
-	cmd="psql $socketopt -U $dbusuario -d $dbnombre -c \"SET client_encoding to 'LATIN1'; INSERT INTO usuario(id_usuario, password, nombre, descripcion, id_rol) VALUES ('sivelpruebas', 'c2b96950b73332b8386406b6bee5f5db73a2bb7d', '', '', '1'); INSERT INTO funcionario(anotacion, nombre) VALUES ('', 'sivelpruebas'); \"";
+	cmd="psql $socketopt -U $dbusuario -d $dbnombre -c \"SET client_encoding to 'LATIN1'; INSERT INTO usuario(id, password, nombre, descripcion, rol) VALUES ('sivelpruebas', 'c2b96950b73332b8386406b6bee5f5db73a2bb7d', '', '', '1'); INSERT INTO funcionario(anotacion, nombre) VALUES ('', 'sivelpruebas'); \"";
 	echo $cmd;
 	echo "Por evaluar";
 	eval $cmd;
@@ -197,13 +208,15 @@ prueba sitios/pruebas/inscaso-evaluacion.php " - Evaluacion"
 prueba sitios/pruebas/inscaso-evaluacion-valida.php " - Valida Evaluacion"
 prueba sitios/pruebas/inscaso-valrepgen.php " - Validar y Reporte General" valrepgen "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*"
 prueba sitios/pruebas/reprevista.php " - Reporte Revista" reprevista
-prueba sitios/pruebas/reprevista-filtros.php " - Filtros en Reporte Revista" reprevista-filtros
+prueba sitios/pruebas/reprevista-filtros.php " - Filtros en Reporte Revista" reprevista-filtros "Warning"
 prueba sitios/pruebas/repconsolidado.php " - Reporte Consolidado" repconsolidado
 prueba sitios/pruebas/estadisticas.php " - Estadísticas " estadisticas
 prueba sitios/pruebas/novalida-basicos.php " - Validación básicos" novalida-basicos
 prueba sitios/pruebas/novalida-frecuentes.php " - Validación frecuentes" novalida-frecuentes "" "1"
 prueba sitios/pruebas/externa.php " - Consulta externa" externa
 prueba sitios/pruebas/relato.php " - Exporta Relato " relato
-prueba sitios/pruebas/imprelato.php " - Importa Relato " imprelato "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*" "" "resimp.xrlt.espreg" "Warning" "fecha_fuente" "D -"
 #}
+
+prueba sitios/pruebas/imprelato.php " - Importa Relato " imprelato "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*" "" "resimp.xrlt.espreg" "Warning" "fecha_fuente" "D -"
+exit 1;
 #prueba sitios/pruebas/mezcla.php " - Mezcla 2 Casos" mezcla

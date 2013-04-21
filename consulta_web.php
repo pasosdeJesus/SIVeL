@@ -648,11 +648,12 @@ class ConsultaWeb extends HTML_QuickForm_Page
         );
         $sel->loadArray($options);
 
-        $aut_usuario = "";
-        if (isset($_SESSION['id_funcionario'])) {
+        /*$aut_usuario = "";
+        if (!isset($_SESSION['id_funcionario'])) {
             include $_SESSION['dirsitio'] . "/conf.php";
             autentica_usuario($dsn, $aut_usuario, 0);
         }
+        echo "OJO <hr>"; var_dump($GLOBALS['ficha_tabuladores']); die("x");*/
 
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {

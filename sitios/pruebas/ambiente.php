@@ -238,7 +238,8 @@ function nom_sesion2()
     return $snru;
 }
 
-global $dsn; //definido en conf.php
+/** DSN de la base de datos.  */
+$dsn = "pgsql://$dbusuario:$dbclave@unix(/var/www/tmp)/$dbnombre";
 $opdb = array('debug' => 5);
 $db =& DB::connect($dsn, $opdb);
 if (PEAR::isError($db)) {

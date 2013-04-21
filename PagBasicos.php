@@ -14,9 +14,17 @@
  * Acceso: SÓLO DEFINICIONES
 */
 
+
 /**
  * Datos básicos del multi-formulario capturar caso
  */
+require_once "aut.php";
+require_once $_SESSION['dirsitio'] . "/conf.php";
+/* Esto en funcion que lo requiere $aut_usuario = "";
+autentica_usuario($GLOBALS['dsn'], $aut_usuario, 31); */
+
+require_once $_SESSION['dirsitio'] . "/conf_int.php";
+
 require_once 'HTML/QuickForm/Action.php';
 require_once 'PagBaseSimple.php';
 require_once 'DataObjects/Intervalo.php';
@@ -442,10 +450,11 @@ class ReporteGeneral extends HTML_QuickForm_Action
             )
         );
         $r = valida_caso($idcaso);
-        $html_rep = ResConsulta::reporteGeneralHtml(
-            $idcaso, null,
-            $GLOBALS['cw_ncampos']+array('m_fuentes'=>'Fuentes')
+        $campos = array_merge(
+            $GLOBALS['cw_ncampos'],
+            array('m_fuentes'=>'Fuentes')
         );
+        $html_rep = ResConsulta::reporteGeneralHtml( $idcaso, null,$campos);
         echo "<pre>";
         echo $html_rep;
         echo "</pre>";
