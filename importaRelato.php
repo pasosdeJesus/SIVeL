@@ -463,7 +463,8 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         }
                     }
                     foreach (array('filiacion' => 'filiacion',
-                        'vinculoestado' => 'vinculoestado')
+                        'vinculoestado' => 'vinculoestado',
+                        'organizacion_armada' => 'presponsable')
                         as $cs => $cs2
                     ) {
                         $ncs = "id_" . $cs;
@@ -494,8 +495,8 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             $m .= $dvictima->getMessage() . " "
                                 . $dvictima->getUserInfo();
                         }
-                        die("OJO dvictima -> " . $m);
                         rep_obs($m, $obs);
+                        break;
                     }
                     foreach (array('antecedentes' => 'antecedente',  )
                         as $cs => $cs2
