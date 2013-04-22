@@ -119,7 +119,7 @@ CREATE TABLE categoria (
 
 
 CREATE TABLE tclase (
-	id VARCHAR(3) PRIMARY KEY,
+	id VARCHAR(10) PRIMARY KEY,
 	nombre VARCHAR(500) NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
@@ -173,7 +173,7 @@ CREATE TABLE clase (
 	nombre VARCHAR(500) NOT NULL,
 	id_departamento INTEGER REFERENCES departamento ON DELETE CASCADE,
 	id_municipio INTEGER,
-	id_tclase VARCHAR(3) REFERENCES tclase, 
+	id_tclase VARCHAR(10) REFERENCES tclase, 
 	latitud FLOAT,
 	longitud FLOAT,
 	fechacreacion	DATE NOT NULL,
