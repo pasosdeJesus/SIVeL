@@ -539,8 +539,8 @@ class PagOtrasFuentes extends PagBaseMultiple
             } else {
                 $fecha = conv_fecha($fuente->fecha_fuente, $obs);
                 PagOtrasFuentes::busca_inserta(
-                    $db, $idcaso, $nomf, $fecha,
-                    (string)$fuente->ubicacion_fuente,
+                    $db, $idcaso, utf8_decode($nomf), $fecha,
+                    utf8_decode((string)$fuente->ubicacion_fuente),
                     dato_en_obs($fuente, 'anotacion'),
                     dato_en_obs($fuente, 'tfuente'),
                     $obs

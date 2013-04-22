@@ -730,12 +730,12 @@ class PagUbicacion extends PagBaseMultiple
         $dubicacion->id_caso = $idcaso;
         $departamento = ereg_replace(
             "  *", " ",
-            trim((string)$r->departamento)
+            trim(utf8_decode((string)$r->departamento))
         );
         if (isset($r->municipio)) {
             $munic = ereg_replace(
                 "  *", " ",
-                trim((string)$r->municipio)
+                trim(utf8_decode((string)$r->municipio))
             );
         } else {
             $munic = null;
@@ -743,7 +743,7 @@ class PagUbicacion extends PagBaseMultiple
         if (isset($r->centro_poblado)) {
             $cenp = ereg_replace(
                 "  *", " ",
-                trim((string)$r->centro_poblado)
+                trim(utf8_decode((string)$r->centro_poblado))
             );
         } else {
             $cenp = null;
