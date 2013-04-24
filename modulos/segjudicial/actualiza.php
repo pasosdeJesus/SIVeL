@@ -80,9 +80,8 @@ if (!aplicado($idac)) {
         ); ", false
     );
     $r = hace_consulta(
-        $db, "CREATE SEQUENCE accion_seq;
-    ", false
-);
+        $db, "CREATE SEQUENCE accion_seq;", false
+    );
     $r = hace_consulta(
         $db, "CREATE TABLE accion (
             id      INTEGER PRIMARY KEY DEFAULT (nextval('accion_seq')),
