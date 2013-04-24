@@ -207,6 +207,7 @@ function nom_sesion()
  */
 function autentica_usuario($dsn,  &$usuario, $opcion)
 {
+    //echo "OJO autentica opcion=$opcion, q=$q";
     $accno = _("Acceso no autorizado");
     $snru = nom_sesion();
     if (!isset($_SESSION) || session_name() != $snru) {
@@ -253,7 +254,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
     );
     $a = new Auth("DB", $params, "login_function");
     $a->setSessionName($snru);
-    //echo "En autentica_usuario OJO sesion:"; print_r($a->session);
+    //echo "<hr>En autentica_usuario $opcion OJO sesion:"; print_r($a->session);
     $a->start();
     //echo "OJO snru=$snru"; die("x");
     if ($a->checkAuth()) {
@@ -305,7 +306,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             idioma($_SESSION['idioma_usuario']);
         } else {
             idioma($_SESSION['es_CO']);
-        }
+	}
         if (in_array($opcion, $_SESSION['opciones'])) {
             return $db;
         }
@@ -426,7 +427,7 @@ function localiza_conf()
     while (substr($n, strlen($n)-1, 1) == '_') {
         $n = substr($n, 0, strlen($n)-1);
     }
-    if (strpos($n, "_")) {
+    if (strpos($n, "_") > 0) {
         $nn = substr($n, strpos($n, "_") + 1);
     } else  if (($pp = strpos($n, ".")) == true) {
         $nn = substr($n, 0, $pp);
@@ -434,7 +435,6 @@ function localiza_conf()
         $nn = $n;
     }
     $pbase = $nn;
-    //echo "OJO pbase=$pbase<br>";
 
     $pref = "";
     if (isset($_SESSION['localiza_conf_pref'])) {
@@ -452,7 +452,7 @@ function localiza_conf()
     foreach ($ri as $d) {
         foreach ($dirsitios as $ds) {
             $t = "$d/$ds/conf.php";
-            //trigger_error("OJO Probando t='$t'");
+            //echo("OJO Probando t='$t'");
             if (file_exists($t)) {
                 $dirsitio = "$d/$ds";
                 $existe = true;
@@ -485,7 +485,6 @@ function localiza_conf()
         pie_envia();
         exit(1);
     }
-    //trigger_error("OJO quedo dirsitio='$dirsitio'");
     return $dirsitio;
 }
 
