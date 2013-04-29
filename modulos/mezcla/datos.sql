@@ -1,8 +1,8 @@
 
 SET client_encoding = 'LATIN1';
-
-INSERT INTO actualizacionbase (nombre, observaciones)
-        VALUES ('MEZCLA_CASOS', 'El documento es público');
+SELECT setval('etiqueta_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM etiqueta) AS s;
+INSERT INTO etiqueta (nombre, observaciones)
+        VALUES ('MEZCLA_CASOS', 'Caso tras mezclar dos');
 
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('rep-1', '2011-02-23', 'Mezcla en menu');
