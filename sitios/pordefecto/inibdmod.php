@@ -73,6 +73,7 @@ foreach ($lm as $m) {
         require_once "$m/conf.php";
     }
 }
+//print_r($GLOBALS['ficha_tabuladores']);
 
 foreach ($GLOBALS['remplaza_ficha_tabuladores'] as $a) {
     $nom = $a[0];
@@ -91,9 +92,41 @@ foreach ($GLOBALS['remplaza_ficha_tabuladores'] as $a) {
     $GLOBALS['ficha_tabuladores'] = $nft;
 }
 
+foreach ($GLOBALS['elimina_ficha_tabuladores'] as $idf) {
+    for ($nf = 0;
+        $nf < count($GLOBALS['ficha_tabuladores']);
+        $nf++
+    ) {
+        $f = $GLOBALS['ficha_tabuladores'][$nf];
+        if ($f[0] == $idf) {
+            $puestoelim = $f[2];
+            $puesto = $nf;
+            break;
+        }
+    }
+    $nft = array();
+    for ($nf = 0;
+        $nf < count($GLOBALS['ficha_tabuladores']) - 1;
+        $nf++
+    ) {
+        $f = $GLOBALS['ficha_tabuladores'][$nf];
+        $fpe = $f[2];
+        if ($fpe > $puestoelim) {
+            $f[2] = $fpe - 1;
+        }
+        if ($nf < $puesto) {
+            $nft[$nf] = $f;
+        } else if ($nf >= $puesto) {
+            $nft[$nf] = $GLOBALS['ficha_tabuladores'][$nf + 1];
+        }
+    }
+    $GLOBALS['ficha_tabuladores'] = $nft;
+}
+//echo "<hr>";print_r($GLOBALS['ficha_tabuladores']); 
+
+
 
 foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
-//    echo "<hr>OJO nueva a="; var_dump($a); echo "<br>";
     $puesto = $a[0];
     $nom = $a[1];
     $arc = $a[2];
@@ -116,8 +149,8 @@ foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
         } else  {
             $nft[$nf + 1] = $f;
         }
+        //echo "OJO nft="; print_r($nft); echo "<br>";
     }
-//        echo "OJO nft="; print_r($nft); echo "<br>";
     $GLOBALS['ficha_tabuladores'] = $nft;
 }
 
