@@ -25,12 +25,10 @@ $aut_usuario = "";
 $db = autentica_usuario($dsn, $aut_usuario, 0);
 require_once $_SESSION['dirsitio'] . '/conf_int.php';
 
-
 require_once 'HTML/Menu.php';
 require_once 'confv.php';
 require_once 'misc_caso.php';
 require_once 'PresentaMenuPrincipal.php';
-
 
 /**
  * Lee menú de base de datos y construye una estructura apropiada para
