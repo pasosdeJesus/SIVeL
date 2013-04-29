@@ -58,3 +58,4 @@ INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-rt3', '2012-
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-rc1', '2012-08-25', 'Renombrando campos I');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.1-dp', '2013-01-25', 'Actualizacion DIVIPOLA 2012');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.1-dp1', '2013-01-25', 'Actualizacion DIVIPOLA 2012'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-gc', '2012-01-25', 'Latitud y Longitud en departamento, municipio y clase'); 
