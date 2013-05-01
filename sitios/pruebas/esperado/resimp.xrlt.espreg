@@ -1,5 +1,7 @@
 
+Warning: Cannot modify header information - headers already sent by (output started at /var/www/users/vtamara/SIVeL/misc_importa.php:724) in /var/www/users/vtamara/SIVeL/ResConsulta.php on line 726
 
+Warning: Cannot modify header information - headers already sent by (output started at /var/www/users/vtamara/SIVeL/misc_importa.php:724) in /var/www/users/vtamara/SIVeL/ResConsulta.php on line 727
 <?xml version="1.0" encoding="UTF8"?>
 <!DOCTYPE relatos PUBLIC "-//SINCODH/DTD relatos 0.97" "relatos.dtd">
 <?xml-stylesheet type="text/xsl" href="xrlat-a-html.xsl"?>
@@ -84,6 +86,7 @@
   <!-- Fuente frecuente -->
   <fuente>
     <nombre_fuente>ffrecuente1</nombre_fuente>
+    <fecha_fuente>2007-10-10</fecha_fuente>
     <ubicacion_fuente>ubicacion</ubicacion_fuente>
     <observaciones tipo="ubicacion">ubicación</observaciones>
     <observaciones tipo="clasificacion">clasificacion</observaciones>
@@ -91,6 +94,7 @@
   <!-- Fuente no frecuente -->
   <fuente>
     <nombre_fuente>n</nombre_fuente>
+    <fecha_fuente>2007-10-15</fecha_fuente>
     <ubicacion_fuente>ubicación</ubicacion_fuente>
     <observaciones tipo="anotacion">a</observaciones>
     <observaciones tipo="tipofuente">0</observaciones>
@@ -186,6 +190,7 @@
   <!-- Fuente frecuente -->
   <fuente>
     <nombre_fuente>ffrecuente1</nombre_fuente>
+    <fecha_fuente>2007-10-10</fecha_fuente>
     <ubicacion_fuente>ubicacion</ubicacion_fuente>
     <observaciones tipo="ubicacion">ubicación</observaciones>
     <observaciones tipo="clasificacion">clasificacion</observaciones>
@@ -193,15 +198,12 @@
   <!-- Fuente no frecuente -->
   <fuente>
     <nombre_fuente>ffrecuente1</nombre_fuente>
+    <fecha_fuente>2007-10-10</fecha_fuente>
     <ubicacion_fuente>ubicacion</ubicacion_fuente>
   </fuente>
   <fuente>
-    <nombre_fuente>n</nombre_fuente>
-    <ubicacion_fuente>ubicación</ubicacion_fuente>
-    <observaciones tipo="anotacion">a</observaciones>
-  </fuente>
-  <fuente>
     <nombre_fuente>D</nombre_fuente>
+    <fecha_fuente>2013-04-22</fecha_fuente>
     <ubicacion_fuente>1</ubicacion_fuente>
     <observaciones tipo="anotacion">Organización responsable incluida automáticamente</observaciones>
     <observaciones tipo="tipofuente">1</observaciones>

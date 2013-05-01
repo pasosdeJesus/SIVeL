@@ -32,7 +32,7 @@ function prueba {
 	if (test "$sal" != "") then {
 		genDataObject 0;
 		mkdir -p sitios/pruebas/salida
-		$PHP -n $a | grep -v evita_csrf > sitios/pruebas/salida/$sal.tmp 2>&1
+		$PHP -n $a | grep -v evita_csrf | grep -v Warning > sitios/pruebas/salida/$sal.tmp 2>&1
 		if (test "$saca" != "") then {
 			grep -v Warning sitios/pruebas/salida/$sal.tmp | grep -v "$saca" > sitios/pruebas/salida/$sal.espreg
 			if (test "$saca4" != "") then {
