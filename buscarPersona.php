@@ -60,17 +60,20 @@ function muestra()
     //echo "OJO q=\"$q\"<br>";
     $result = hace_consulta($db, $q);
 
-    echo_esc("Coincidencias: " . $result->numRows());
-    echo "<hr>";
     $row = array();
-    echo "<html><head><title>Personas</title></head>";
+    echo "<html><head>";
+    echo "  <title>Personas</title>";
+    echo "  <meta charset=\utf-8\">";
+    echo "</head>";
     echo "<body>";
     echo '<script language="JavaScript" src="sivel.js" type="text/javascript">'
         . '</script>';
+    echo_esc("Coincidencias: " . $result->numRows());
+    echo "<hr>";
     //echo "rol=$rol";
     echo "<table>";
     echo "<tr>" .
-        "<th>Nombres y apellidos</th><th>Víctima en</th><th>Familiar en</th>" .
+        "<th>Nombres y apellidos</th><th>V&iacute;ctima en</th><th>Familiar en</th>" .
         "</tr>";
 
     while ($result->fetchInto($row)) {
