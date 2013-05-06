@@ -1645,7 +1645,7 @@ class ResConsulta
             }
             if ($nubi > 1) {
                 $arotros['observaciones{tipo->etiqueta:IMPORTA_RELATO}']
-                    = date('Y-m-d') . " " .
+                    = @date('Y-m-d') . " " .
                     _("Tiene más de una ubicación") . ": $uobs";
             }
             $arubicacion = array();

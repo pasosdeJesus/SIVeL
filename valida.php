@@ -21,7 +21,7 @@ require_once "misc.php";
 $aut_usuario = "";
 $db = autentica_usuario($dsn, $aut_usuario, 64);
 
-$t = _("Reporte de consistencia del") ." " . date("Y-m-d H:m");
+$t = _("Reporte de consistencia del") ." " . @date("Y-m-d H:m");
 encabezado_envia($t);
 echo '<table width="100%"><td style="white-space: ' .
     ' nowrap; background-color: #CCCCCC;" align="left" ' .

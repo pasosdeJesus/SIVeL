@@ -379,7 +379,7 @@ class PagVictimasrep extends HTML_QuickForm_Page
 
 }
 
-function muestra($dsn, $accno)
+function muestra($dsn)
 {
     $aut_usuario = "";
     autentica_usuario($dsn, $accno, $aut_usuario, 31);

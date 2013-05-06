@@ -74,85 +74,88 @@ foreach ($lm as $m) {
     }
 }
 //print_r($GLOBALS['ficha_tabuladores']);
-
-foreach ($GLOBALS['remplaza_ficha_tabuladores'] as $a) {
-    $nom = $a[0];
-    $arc = $a[1];
-    $nft = array();
-    for ($nf = 0;
+if (isset($GLOBALS['remplaza_ficha_tabuladores'])) {
+    foreach ($GLOBALS['remplaza_ficha_tabuladores'] as $a) {
+        $nom = $a[0];
+        $arc = $a[1];
+        $nft = array();
+        for ($nf = 0;
         $nf < count($GLOBALS['ficha_tabuladores']);
         $nf++
-    ) {
-        $f = $GLOBALS['ficha_tabuladores'][$nf];
-        if ($f[0] == $nom) {
-            $f[1] = $arc;
+        ) {
+            $f = $GLOBALS['ficha_tabuladores'][$nf];
+            if ($f[0] == $nom) {
+                $f[1] = $arc;
+            }
+            $nft[$nf] = $f;
         }
-        $nft[$nf] = $f;
+        $GLOBALS['ficha_tabuladores'] = $nft;
     }
-    $GLOBALS['ficha_tabuladores'] = $nft;
 }
 
-foreach ($GLOBALS['elimina_ficha_tabuladores'] as $idf) {
-    for ($nf = 0;
+if (isset($GLOBALS['elimina_ficha_tabuladores'])) {
+    foreach ($GLOBALS['elimina_ficha_tabuladores'] as $idf) {
+        for ($nf = 0;
         $nf < count($GLOBALS['ficha_tabuladores']);
         $nf++
-    ) {
-        $f = $GLOBALS['ficha_tabuladores'][$nf];
-        if ($f[0] == $idf) {
-            $puestoelim = $f[2];
-            $puesto = $nf;
-            break;
+        ) {
+            $f = $GLOBALS['ficha_tabuladores'][$nf];
+            if ($f[0] == $idf) {
+                $puestoelim = $f[2];
+                $puesto = $nf;
+                break;
+            }
         }
-    }
-    $nft = array();
-    for ($nf = 0;
+        $nft = array();
+        for ($nf = 0;
         $nf < count($GLOBALS['ficha_tabuladores']) - 1;
         $nf++
-    ) {
-        $f = $GLOBALS['ficha_tabuladores'][$nf];
-        $fpe = $f[2];
-        if ($fpe > $puestoelim) {
-            $f[2] = $fpe - 1;
+        ) {
+            $f = $GLOBALS['ficha_tabuladores'][$nf];
+            $fpe = $f[2];
+            if ($fpe > $puestoelim) {
+                $f[2] = $fpe - 1;
+            }
+            if ($nf < $puesto) {
+                $nft[$nf] = $f;
+            } else if ($nf >= $puesto) {
+                $nft[$nf] = $GLOBALS['ficha_tabuladores'][$nf + 1];
+            }
         }
-        if ($nf < $puesto) {
-            $nft[$nf] = $f;
-        } else if ($nf >= $puesto) {
-            $nft[$nf] = $GLOBALS['ficha_tabuladores'][$nf + 1];
-        }
+        $GLOBALS['ficha_tabuladores'] = $nft;
     }
-    $GLOBALS['ficha_tabuladores'] = $nft;
 }
 //echo "<hr>";print_r($GLOBALS['ficha_tabuladores']); 
 
-
-
-foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
-    $puesto = $a[0];
-    $nom = $a[1];
-    $arc = $a[2];
-    $puestoelim = $a[3];
-    $nft = array();
-    for ($nf = 0;
+if (isset($GLOBALS['nueva_ficha_tabuladores'])) {
+    foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
+        $puesto = $a[0];
+        $nom = $a[1];
+        $arc = $a[2];
+        $puestoelim = $a[3];
+        $nft = array();
+        for ($nf = 0;
         $nf < count($GLOBALS['ficha_tabuladores']);
         $nf++
-    ) {
-        $f = $GLOBALS['ficha_tabuladores'][$nf];
-        $fpe = $f[2];
-        if ($fpe >= $puestoelim) {
-            $f[2] = $fpe + 1;
+        ) {
+            $f = $GLOBALS['ficha_tabuladores'][$nf];
+            $fpe = $f[2];
+            if ($fpe >= $puestoelim) {
+                $f[2] = $fpe + 1;
+            }
+            if ($nf < $puesto) {
+                $nft[$nf] = $f;
+            } else if ($nf == $puesto) {
+                $nft[$nf] = array($nom, $arc, $puestoelim);
+                $nft[$nf + 1] = $f;
+            } else  {
+                $nft[$nf + 1] = $f;
+            }
+            //echo "OJO nft="; print_r($nft); echo "<br>";
         }
-        if ($nf < $puesto) {
-            $nft[$nf] = $f;
-        } else if ($nf == $puesto) {
-            $nft[$nf] = array($nom, $arc, $puestoelim);
-            $nft[$nf + 1] = $f;
-        } else  {
-            $nft[$nf + 1] = $f;
-        }
-        //echo "OJO nft="; print_r($nft); echo "<br>";
+        $GLOBALS['ficha_tabuladores'] = $nft;
     }
-    $GLOBALS['ficha_tabuladores'] = $nft;
 }
 
+
 //var_dump($GLOBALS['ficha_tabuladores']);
-//die("x");
