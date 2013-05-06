@@ -2652,7 +2652,7 @@ class ResConsulta
                     }
                 }
                 if ($ra != "") {
-                    if ($indena) {
+                    if ($indenta) {
                         $r .= "\n";
                     } else {
                         $r .= "\n\n";
