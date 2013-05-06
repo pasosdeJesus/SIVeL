@@ -1409,6 +1409,9 @@ function conv_categoria(&$db, &$obs, $agr, $pr)
     if (($pi = strrpos($agr, "("))>0 && ($pd = strrpos($agr, ")"))>0) {
         $id_categoria = (int)substr($agr, $pi+1, $pd-$pi-1);
     }
+    if (strlen($agr)<5 && (int)(substr($agr, 1)) > 0) {
+        $id_categoria = (int)(substr($agr, 1));
+    }
     if ($id_categoria == 0) {
         $id_categoria = conv_violacion($db, $agr, $pr, $obs);
     }

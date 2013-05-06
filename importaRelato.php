@@ -167,6 +167,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $yaesta[$c] = false;
         }
 
+        encabezado_envia("Importa Relato");
         foreach ($relatos->relato as $r) {
             $obs = "";
             $id_presp = array();  // Presuntos responsables identificados
@@ -232,6 +233,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $yaesta['PagBasicos'] = true;
             $yaesta['PagMemo'] = true;
             $yaesta['PagEvaluacion'] = true;
+
 
             PagUbicacion::importaRelato($db, $r, $idcaso, $obs);
             $yaesta['PagUbicacion'] = true;
@@ -341,10 +343,19 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         }
                     }
                     $sexo = 'S';
-                    if (isset($persona->sexo)
-                        && ($persona->sexo == 'M' || $persona->sexo == 'F')
-                    ) {
-                        $sexo = $persona->sexo;
+                    if (isset($persona->sexo)) {
+                        switch (strtoupper($persona->sexo)) {
+                        case 'M':
+                        case 'MASCULINO':
+                            $sexo = 'M';
+                            break;
+                        case 'FEMENINO':
+                            $sexo = 'F';
+                            break;
+                        default:
+                            $sexo = 'S';
+                            break;
+                        }
                     }
                     $ndep = dato_en_obs($persona, 'departamento');
                     $nmun = dato_en_obs($persona, 'municipio');
@@ -469,12 +480,10 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         $ncs = "id_" . $cs;
                         //echo "OJO cs=$cs, ncs=$ncs<br>";
                         $v = dato_en_obs($victima, $cs);
-                        if ($v != null) {
-                            $dvictima->$ncs = (int)conv_basica(
-                                $db, $cs2,
-                                $v, $obs
-                            );
-                        }
+                        $dvictima->$ncs = (int)conv_basica(
+                            $db, $cs2,
+                            $v, $obs, true
+                        );
                         //echo "OJO dvictima->ncs=" .  $dvictima->$ncs . "<br>";
                     }
                     $v = dato_en_obs($victima, "organizacionarmada");
@@ -485,11 +494,12 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         $dvictima->organizacionarmada = (int)conv_basica(
                             $db, 'presponsable', $v, $obs
                         );
+                    } else {
+                        $dvictima->organizacionarmada = DataObjects_Presponsable::idSinInfo();
                     }
-
                     if (!$dvictima || !$dvictima->insert()) {
                         $m = _("No pudo insertar víctima") ." '"
-                            . $dvictima->id_persona . "' ";
+                            . $dvictima->id_persona . "'\n";
                         if (PEAR::isError($dvictima)) {
                             $m .= $dvictima->getMessage() . " "
                                 . $dvictima->getUserInfo();
@@ -533,9 +543,8 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 //echo "OJO acto->agresion_particular="
                 //    . $acto->agresion_particular . "<br>";
                 if (!empty($acto->agresion_particular)) {
-                    $idp = (int)$acto->id_presunto_grupo_responsable;
+                    $idp = (string)$acto->id_presunto_grupo_responsable;
                     $pr = null;
-                    // echo "OJO idp=$idp<br>";
                     if (isset($id_presp[$idp])) {
                         // Ya registrado presunto responsable
                         $pr = $id_presp[$idp];
@@ -750,9 +759,9 @@ class PagImportaRelato extends HTML_QuickForm_Page
             . 'número de casos en la base.'
         );
 
-        $this->addGroup(
+/*        $this->addGroup(
             $opch, null, 'Coordenadas', '&nbsp;', false
-        );
+        ); */
         agrega_control_CSRF($this);
 
         $prevnext = array();
