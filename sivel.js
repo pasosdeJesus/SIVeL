@@ -54,8 +54,8 @@ function enviar_persona(rol, id, nombres, apellidos, anionac, mesnac,
 	} else {
 		forma = window.opener.document.getElementById('victimaIndividual');
 		//alert(forma);
-		nuevo = forma.id_persona2.value == '';
-		forma.id_persona2.value = id;
+		nuevo = forma.persona2.value == '';
+		forma.persona2.value = id;
 		forma.fnombres.value = nombres;
 		forma.fapellidos.value = apellidos;
 		forma._qf_default = 'pResponsables:siguiente';

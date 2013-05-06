@@ -2209,7 +2209,7 @@ function crea_patron($ar)
                 }
             }
             $patron .= $np;
-            $u = $b[$i];
+            $u = $ni[$i];
         }
         $patron .= ".*";
         $inipat =" *";
