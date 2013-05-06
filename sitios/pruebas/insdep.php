@@ -30,7 +30,7 @@ $_REQUEST['_qf__dataobjects_departamento'] = '';
 $_POST['_qf__dataobjects_departamento'] = '';
 $_REQUEST['id'] = $_POST['id'] = '';
 $_REQUEST['nombre'] = $_POST['nombre'] = 'x';
-$fc = array('d' => date('d'), 'M' => date('m'), 'Y' => date('Y'));
+$fc = array('d' => @date('d'), 'M' => @date('m'), 'Y' => @date('Y'));
 $_REQUEST['fechacreacion'] = $_POST['fechacreacion'] = $fc;
 $_REQUEST['añadir'] = $_POST['añadir'] = 'Añadir';
 

@@ -50,7 +50,7 @@ function instablabasica($tabla, $llave_sec, $valor, $campos = array())
         '';
     $_REQUEST['id'] = $_POST['id'] = '';
     $_REQUEST[$llave_sec] = $_POST[$llave_sec] = $valor;
-    $fc = array('d' => date('d'), 'M' => date('m'), 'Y' => date('Y'));
+    $fc = array('d' => @date('d'), 'M' => @date('m'), 'Y' => @date('Y'));
     $_REQUEST['fechacreacion'] = $_POST['fechacreacion'] = $fc;
     foreach ($campos as $c => $v) {
         $_REQUEST[$c] = $_POST[$c] = $v;
@@ -76,7 +76,7 @@ function instablabasica($tabla, $llave_sec, $valor, $campos = array())
 }
 
 
-$fc = array('d' => date('d'), 'M' => date('m'), 'Y' => date('Y'));
+$fc = array('d' => @date('d'), 'M' => @date('m'), 'Y' => @date('Y'));
 $na = (int)$db->getOne("SELECT COUNT(nombre) FROM departamento;");
 
 $_REQUEST['tabla'] = $_GET['tabla'] = 'departamento';
