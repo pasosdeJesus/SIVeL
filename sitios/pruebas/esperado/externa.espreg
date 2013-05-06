@@ -1,8 +1,3 @@
-
-
-
-
-
 <!doctype html>
 <html>
 <head>

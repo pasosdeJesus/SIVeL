@@ -39,7 +39,7 @@ $_REQUEST['_qf__dataobjects_departamento'] = '';
 $_POST['_qf__dataobjects_departamento'] = '';
 $_REQUEST['id'] = $_POST['id'] = $_GET['id'] = "$iddep";
 $_REQUEST['nombre'] = $_POST['nombre'] = 'y';
-$fc = array('d' => date('d'), 'M' => date('m'), 'Y' => date('Y'));
+$fc = array('d' => @date('d'), 'M' => @date('m'), 'Y' => @date('Y'));
 $_REQUEST['fechacreacion'] = $_POST['fechacreacion'] = $fc;
 $_REQUEST['actualizar'] = $_POST['actualizar'] = 'Actualizar';
 $_REQUEST['evita_csrf'] = $_SESSION['sin_csrf'] = $_POST['evita_csrf'] = 1234;

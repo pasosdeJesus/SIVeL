@@ -1444,7 +1444,7 @@ function caso_funcionario($idcaso)
     $dfc->id_caso = $idcaso;
     $dfc->id_funcionario = $_SESSION['id_funcionario'];
     if ($dfc->find()<1) {
-        $dfc->fechainicio = date('Y-m-d H:i');
+        $dfc->fechainicio = @date('Y-m-d H:i');
         $dfc->insert();
     }
 }

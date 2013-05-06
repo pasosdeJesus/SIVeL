@@ -27,9 +27,11 @@ function prueba {
 	saca2="$7"      # Lineas por sacar de otrocomp
 	saca3="$8"      # Mas lineas por sacar de otrocomp
 	saca4="$9"      # Mas lineas por sacar del resultado principal
+
 	echo -n "$a $d : ";
 	echo -n "$a $d : " >> sitios/pruebas/pruebas.bitacora;
 	if (test "$sal" != "") then {
+	    echo -n " sal=$sal" >> sitios/pruebas/pruebas.bitacora;
 		genDataObject 0;
 		mkdir -p sitios/pruebas/salida
 		$PHP -n $a | grep -v evita_csrf | grep -v Warning > sitios/pruebas/salida/$sal.tmp 2>&1

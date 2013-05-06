@@ -238,7 +238,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
 
             $anexof = objeto_tabla('anexo');
             $anexof->id_caso = $idcaso;
-            $anexof->fecha = date('Y-m-d');
+            $anexof->fecha =  @date('Y-m-d');
             $anexof->archivo = '';
             $anexof->descripcion = sprintf(
                 _("Fuente extraida automaticamente de %s"), $narc
@@ -256,14 +256,13 @@ class AccionImportaRelato extends HTML_QuickForm_Action
 
             $anexof->archivo = $ax;
             $anexof->update();
-
             PagFuentesFrecuentes::importaRelato(
                 $db, $r, $idcaso,
                 $obs
             );
             $idffrecuente = null;
             $nomf = $r->organizacion_responsable;
-            $fecha = date('Y-m-d');
+            $fecha = @date('Y-m-d');
             $orgfuente = PagFuentesFrecuentes::busca_inserta(
                 $db, $idcaso, $nomf, $fecha,
                 $r->id_relato,
@@ -394,8 +393,8 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     if (!isset($id_pers[(string)$victima->id_persona])) {
                         rep_obs(
                             sprintf(
-                                _("Acto: No hay definida persona con id '%s'"),
-                                (string)$acto->id_victima_individual
+                                _("Víctima: No hay definida persona con id '%s'"),
+                                (string)$victima->id_persona
                             ),
                             $obs
                         );
@@ -488,7 +487,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         );
                     }
 
-                    if (!$dvictima->insert()) {
+                    if (!$dvictima || !$dvictima->insert()) {
                         $m = _("No pudo insertar víctima") ." '"
                             . $dvictima->id_persona . "' ";
                         if (PEAR::isError($dvictima)) {
@@ -656,11 +655,11 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             echo_esc(_("Observaciones"). ": $obs");
 
             $ec = objeto_tabla('caso_etiqueta');
-            $ec->fecha = date('Y-m-d');
+            $ec->fecha = @date('Y-m-d');
             $ec->id_caso = $idcaso;
             $ec->id_etiqueta = $idetiqueta;
             $ec->id_funcionario = $_SESSION['id_funcionario'];
-            $ec->fecha = date('Y-m-d');
+            $ec->fecha = @date('Y-m-d');
             $ec->observaciones = "";
             if (isset($r->id_relato)) {
                 $ec->observaciones = trim($r->id_relato);
@@ -669,15 +668,13 @@ class AccionImportaRelato extends HTML_QuickForm_Action
 
             if (trim($obs) != '') {
                 $ec = objeto_tabla('caso_etiqueta');
-                $ec->fecha = date('Y-m-d');
+                $ec->fecha = @date('Y-m-d');
                 $ec->id_caso = $idcaso;
                 $ec->id_etiqueta = $iderrorimportacion;
                 $ec->id_funcionario = $_SESSION['id_funcionario'];
                 $ec->observaciones = $obs;
                 $ec->insert();
             }
-
-
         }
 
     }

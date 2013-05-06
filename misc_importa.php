@@ -721,7 +721,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
         $dia_s = $t;
         rep_obs("Fecha intercambiando mes y día $fecha", $obs);
     }
-    if ($anio_s < 1900 || $anio_s>(int)date('Y')) {
+    if ($anio_s < 1900 || $anio_s>(int)@date('Y')) {
         rep_obs("Fecha: año errado ($fecha), dejando 1970.", $obs);
         $anio_s = 1970;
     }
@@ -1356,12 +1356,14 @@ function dato_en_obs(&$oxml, $id)
 function dato_basico_en_obs(&$db, &$obs, $oxml,
     $ntipoobs, $ntablabas, $ntablacaso, $idcaso, $sepv = null, $ncampo = ''
 ) {
+
+    $ret = 0;
     if ($ncampo == '') {
         $ncampo = $ntipoobs;
     }
-    //echo "OJO dato_basico_en_obs(db, observaciones, oxml, "
-    // . "ntipoobs=$netiqueta, ntablabas=$ntablabas, ntablacaso=$ntablacaso,"
-    // . " idcaso=$idcaso, sepv=$sepv)<br>";
+/*    echo "OJO dato_basico_en_obs(db, observaciones, oxml, "
+     . "ntipoobs=$netiqueta, ntablabas=$ntablabas, ntablacaso=$ntablacaso,"
+     . " idcaso=$idcaso, sepv=$sepv)<br>"; */
 
     $noms = dato_en_obs($oxml, $ntipoobs);
     if ($noms != null) {
@@ -1380,9 +1382,12 @@ function dato_basico_en_obs(&$db, &$obs, $oxml,
                 $dt->insert();
             }
         }
-        return $idb;
+        $ret = $idb;
+    } else {
+        $dt = objeto_tabla($ntablabas);
+        $ret = $dt->idSinInfo();
     }
-    return 0;
+    return $ret;
 }
 
 

@@ -222,9 +222,9 @@ class PagFuentesFrecuentes extends PagBaseMultiple
         ) {
             $f = $this->getElement('fecha');
             $da = $f->getValue();
-            $y = date('Y');
-            $m = date('m');
-            $d = date('d');
+            $y = @date('Y');
+            $m = @date('m');
+            $d = @date('d');
             if ($da['Y'][0] == ($GLOBALS['anio_min'] - 1)
                 || ($y == $da['Y'][0] && $d == $da['d'][0] && $m == $da['m'][0])
             ) {
