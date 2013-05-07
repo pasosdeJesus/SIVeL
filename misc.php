@@ -2048,7 +2048,10 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
         }
 
         if (PEAR::isError($r) || $r == null) {
-            rep_obs("-- $tabla: desconocido '$nombre'", $obs);
+            rep_obs(
+                "-- " . _($tabla) . ": " . _("desconocido") . 
+                " '$nombre'", $obs
+            );
             if ($sininf
                 && is_callable(array("DataObjects_$tabla", 'idSinInfo'))
             ) {

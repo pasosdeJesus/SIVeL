@@ -551,7 +551,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     } else if (isset($datgrupo[$idp])) {
                         $g = $datgrupo[$idp];
                         $pr = conv_presp(
-                            $db, $idcaso, $idp, $g, $id_presp, $obs
+                            $db, $idcaso, $idp, $g, $id_presp, $obs, true
                         );
                     } else {
                         rep_obs(
@@ -661,7 +661,9 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 $GLOBALS['cw_ncampos'] + array('m_fuentes' => 'Fuentes')
             );
             echo "<hr><pre>$html_rep</pre>";
-            echo_esc(_("Observaciones"). ": $obs");
+            if (trim($obs) != '') {
+                echo_esc(_("Observaciones"). ": $obs");
+            }
 
             $ec = objeto_tabla('caso_etiqueta');
             $ec->fecha = @date('Y-m-d');
