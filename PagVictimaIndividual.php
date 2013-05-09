@@ -789,6 +789,42 @@ class PagVictimaIndividual extends PagBaseMultiple
                     $w2 = $w4;
                 }
             }
+            if (is_array($subcons)) {
+                foreach($subcons as $subc) {
+                    $ds =& objeto_tabla($subc['tabla']);
+                    sin_error_pear($ds);
+                    $ds->id_caso = (int)$idcaso;
+                    $ds->id_persona = $duc->id_persona;
+                    if (@$ds->find(1) == 1) {
+                        $w5 = prepara_consulta_con_tabla(
+                            $ds, $subc['tabla'], '', '', false,
+                            array(), 'id_persona',
+                            array(), 'id_persona', array(), $tab
+                        );
+                        if ($w5 != "") {
+                            agrega_tabla($t, $subc['tabla']);
+                            consulta_and_sinap(
+                                $w, "victima.id_persona", 
+                                $subc['tabla'] . ".id_persona", "=", "AND"
+                            );
+                            consulta_and_sinap(
+                                $w, "victima.id_caso", 
+                                $subc['tabla'] . ".id_caso", "=", "AND"
+                            );
+                            $w5 .= ' AND victima.id_caso = '
+                                . $subc['tabla'] . '.id_caso AND '
+                                . ' victima.id_persona = '
+                                . $subc['tabla'] . '.id_persona ';
+                            $hayper = true;
+                            if ($w2 != "") {
+                                $w2 = $w5 . ' AND ' . $w2;
+                            } else {
+                                $w2 = $w5;
+                            }
+                        }
+                    }
+                }
+            }
             //echo "<hr>".$w2;
             if ($w2!="") {
                 $w3 = $w3=="" ? "($w2)" : "$w3 OR ($w2)";
