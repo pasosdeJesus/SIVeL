@@ -1444,7 +1444,7 @@ function caso_funcionario($idcaso)
     $dfc->id_caso = $idcaso;
     $dfc->id_funcionario = $_SESSION['id_funcionario'];
     if ($dfc->find()<1) {
-        $dfc->fechainicio = date('Y-m-d H:i');
+        $dfc->fechainicio = @date('Y-m-d H:i');
         $dfc->insert();
     }
 }
@@ -2006,6 +2006,16 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
 ) {
     //echo "OJO conv_basica(db, $tabla, $nombre, $obs)<br>";
     $d = objeto_tabla($tabla);
+    if ($sininf && ($nombre == null || $nombre == '')
+        && is_callable(array("DataObjects_$tabla", 'idSinInfo'))
+    ) {
+        $r = call_user_func(
+            array("DataObjects_$tabla",
+            "idSinInfo")
+        );
+        return $r;
+    } 
+
     $nom0 = $d->$ncamp = ereg_replace(
         "  *", " ",
         trim(var_escapa($nombre, $db))
@@ -2038,7 +2048,10 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
         }
 
         if (PEAR::isError($r) || $r == null) {
-            rep_obs("-- $tabla: desconocido '$nombre'", $obs);
+            rep_obs(
+                "-- " . _($tabla) . ": " . _("desconocido") . 
+                " '$nombre'", $obs
+            );
             if ($sininf
                 && is_callable(array("DataObjects_$tabla", 'idSinInfo'))
             ) {
@@ -2209,7 +2222,7 @@ function crea_patron($ar)
                 }
             }
             $patron .= $np;
-            $u = $b[$i];
+            $u = $ni[$i];
         }
         $patron .= ".*";
         $inipat =" *";

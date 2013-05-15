@@ -143,7 +143,7 @@ class DataObjects_Caso_ffrecuente extends DB_DataObject_SIVeL
             $e->_options['format'] = 'd-M-Y';
             $e->_options['addEmptyOption'] = true;
             $e->_options['minYear'] = $GLOBALS['anio_min'];
-            $e->_options['maxYear'] = date('Y');
+            $e->_options['maxYear'] = @date('Y');
             if (isset($GLOBALS['etiqueta']['fecha_fuente'])) {
                 $e->setLabel($GLOBALS['etiqueta']['fecha_fuente']);
             }

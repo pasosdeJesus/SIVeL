@@ -29,8 +29,8 @@ function muestra()
 
     $aut_usuario = "";
     $db = autentica_usuario($dsn, $aut_usuario, 0);
-    $nombres = trim(var_req_escapa('nombres', $db, 100));
-    $apellidos  = trim(var_req_escapa('apellidos', $db, 100));
+    $nombres = trim(utf8_decode(var_req_escapa('nombres', $db, 100)));
+    $apellidos  = trim(utf8_decode(var_req_escapa('apellidos', $db, 100)));
     $rol = var_req_escapa('rol', $db, 32);
     $pn = explode(' ', $nombres);
     $pa = explode(' ', $apellidos);
@@ -60,17 +60,20 @@ function muestra()
     //echo "OJO q=\"$q\"<br>";
     $result = hace_consulta($db, $q);
 
-    echo_esc("Coincidencias: " . $result->numRows());
-    echo "<hr>";
     $row = array();
-    echo "<html><head><title>Personas</title></head>";
+    echo "<html><head>";
+    echo "  <title>Personas</title>";
+    echo "  <meta charset=\utf-8\">";
+    echo "</head>";
     echo "<body>";
     echo '<script language="JavaScript" src="sivel.js" type="text/javascript">'
         . '</script>';
+    echo_esc("Coincidencias: " . $result->numRows());
+    echo "<hr>";
     //echo "rol=$rol";
     echo "<table>";
     echo "<tr>" .
-        "<th>Nombres y apellidos</th><th>Víctima en</th><th>Familiar en</th>" .
+        "<th>Nombres y apellidos</th><th>V&iacute;ctima en</th><th>Familiar en</th>" .
         "</tr>";
 
     while ($result->fetchInto($row)) {

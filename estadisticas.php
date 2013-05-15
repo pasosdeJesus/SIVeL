@@ -460,7 +460,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
             $slang = substr($_SESSION['LANG'], 0, 2);
         }
 
-        $cy = date('Y');
+        $cy = @date('Y');
         if ($cy < 2005) {
             $cy = 2005;
         }

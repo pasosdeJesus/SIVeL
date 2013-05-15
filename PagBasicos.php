@@ -20,17 +20,13 @@
  */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
-/* Esto en funcion que lo requiere $aut_usuario = "";
-autentica_usuario($GLOBALS['dsn'], $aut_usuario, 31); */
-
+$aut_usuario = "";
+autentica_usuario($GLOBALS['dsn'], $aut_usuario, 31); 
 require_once $_SESSION['dirsitio'] . "/conf_int.php";
-
 require_once 'HTML/QuickForm/Action.php';
 require_once 'PagBaseSimple.php';
 require_once 'DataObjects/Intervalo.php';
 require_once 'DataObjects/Caso.php';
-
-
 require_once 'HTML/QuickForm/Page.php';
 require_once 'HTML/QuickForm/Action/Display.php';
 require_once 'HTML/QuickForm/Action/Next.php';
@@ -39,8 +35,8 @@ require_once 'HTML/QuickForm/Action/Jump.php';
 require_once 'HTML/QuickForm/header.php';
 require_once 'HTML/QuickForm/date.php';
 require_once 'HTML/QuickForm/text.php';
-require_once 'ResConsulta.php';
 require_once 'HTML/Javascript.php';
+require_once 'ResConsulta.php';
 
 
 /**

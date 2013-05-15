@@ -196,11 +196,6 @@
     <ubicacion_fuente>ubicacion</ubicacion_fuente>
   </fuente>
   <fuente>
-    <nombre_fuente>n</nombre_fuente>
-    <ubicacion_fuente>ubicación</ubicacion_fuente>
-    <observaciones tipo="anotacion">a</observaciones>
-  </fuente>
-  <fuente>
     <nombre_fuente>D</nombre_fuente>
     <ubicacion_fuente>1</ubicacion_fuente>
     <observaciones tipo="anotacion">Organización responsable incluida automáticamente</observaciones>

@@ -186,7 +186,7 @@ class PagEtiquetas extends PagBaseSimple
                  (int)$valores['fetiqueta'];
              $this->bcaso_etiqueta->_do->id_funcionario =
                  (int)$_SESSION['id_funcionario'];
-             $this->bcaso_etiqueta->_do->fecha = date('Y-m-d');
+             $this->bcaso_etiqueta->_do->fecha = @date('Y-m-d');
              $this->bcaso_etiqueta->_do->observaciones =
                  var_escapa($valores['fobservaciones'], $db);
              //print_r($this->bcaso_etiqueta->_do);

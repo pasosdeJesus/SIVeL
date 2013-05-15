@@ -14,6 +14,7 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+require_once "DataObjects/Presponsable.php";
 
 /**
  * Reporta observación
@@ -60,7 +61,7 @@ function conv_violacion(&$db, $tipoi, $id_presp, &$obs)
         die($d->getMessage());
     }
     if (!isset($d->id)) {
-        rep_obs("Tipo de Violencia desconocido '$tipo'\n", $obs);
+        rep_obs(_("Tipo de Violencia desconocido") . " '$tipo'\n", $obs);
         $pr = 0;
     } else {
         $pr = $d->id;
@@ -144,8 +145,8 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
         }
         if (!isset($d->id)) {
             rep_obs(
-                "Localización: Departamento desconocido '$departamento'",
-                $obs
+                _("Localización: Departamento desconocido") . 
+                " '$departamento'", $obs
             );
             $idd = 1000;
         } else {
@@ -208,8 +209,8 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
             }
         } else {
             rep_obs(
-                "Localización: Municipio desconocido '$municipio'",
-                $obs
+                _("Localización: Municipio desconocido") .
+                " '$municipio'", $obs
             );
             $idm = 1000;
         }
@@ -270,8 +271,10 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
             }
         } else {
             rep_obs(
-                "Localización: Clase desconocida '$cenp' en municipio " .
-                "'$idm' y departamento '$idd'",
+                _("Localización: Clase desconocida ") . 
+                " '$cenp' " . _("en municipio") .
+                " '$idm' " . _("y departamento") .
+                " '$idd'",
                 $obs
             );
             $idc = 1000;
@@ -675,14 +678,16 @@ function conv_fecha($fecha, &$obs, $depura = false)
                 if (count($vg) == 3) {
                     $des = 'especial';
                     if ($vg[0] == '00') {
-                        $obs .= " Fecha: Dia desconocido. ($fecha)";
+                        $obs .= " " . _("Fecha: Dia desconocido") . 
+                            ". ($fecha)";
                         $dia_s = 1;
                         $des = 'incompleta';
                     } else {
                         $dia_s = (int)$vg[0];
                     }
                     if ($vg[1] == '00') {
-                        $obs .= " Fecha: Mes desconocido. ($fecha)";
+                        $obs .= " " . _("Fecha: Mes desconocido") .
+                           " ($fecha)";
                         $mes_s = 1;
                         $des = 'incompleta';
                     } else {
@@ -721,7 +726,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
         $dia_s = $t;
         rep_obs("Fecha intercambiando mes y día $fecha", $obs);
     }
-    if ($anio_s < 1900 || $anio_s>(int)date('Y')) {
+    if ($anio_s < 1900 || $anio_s>(int)@date('Y')) {
         rep_obs("Fecha: año errado ($fecha), dejando 1970.", $obs);
         $anio_s = 1970;
     }
@@ -1356,12 +1361,14 @@ function dato_en_obs(&$oxml, $id)
 function dato_basico_en_obs(&$db, &$obs, $oxml,
     $ntipoobs, $ntablabas, $ntablacaso, $idcaso, $sepv = null, $ncampo = ''
 ) {
+
+    $ret = 0;
     if ($ncampo == '') {
         $ncampo = $ntipoobs;
     }
-    //echo "OJO dato_basico_en_obs(db, observaciones, oxml, "
-    // . "ntipoobs=$netiqueta, ntablabas=$ntablabas, ntablacaso=$ntablacaso,"
-    // . " idcaso=$idcaso, sepv=$sepv)<br>";
+/*    echo "OJO dato_basico_en_obs(db, observaciones, oxml, "
+     . "ntipoobs=$netiqueta, ntablabas=$ntablabas, ntablacaso=$ntablacaso,"
+     . " idcaso=$idcaso, sepv=$sepv)<br>"; */
 
     $noms = dato_en_obs($oxml, $ntipoobs);
     if ($noms != null) {
@@ -1380,9 +1387,12 @@ function dato_basico_en_obs(&$db, &$obs, $oxml,
                 $dt->insert();
             }
         }
-        return $idb;
+        $ret = $idb;
+    } else {
+        $dt = objeto_tabla($ntablabas);
+        $ret = $dt->idSinInfo();
     }
-    return 0;
+    return $ret;
 }
 
 
@@ -1404,6 +1414,9 @@ function conv_categoria(&$db, &$obs, $agr, $pr)
     if (($pi = strrpos($agr, "("))>0 && ($pd = strrpos($agr, ")"))>0) {
         $id_categoria = (int)substr($agr, $pi+1, $pd-$pi-1);
     }
+    if (strlen($agr)<8 && (int)(substr($agr, 1)) > 0) {
+        $id_categoria = (int)(substr($agr, 1));
+    }
     if ($id_categoria == 0) {
         $id_categoria = conv_violacion($db, $agr, $pr, $obs);
     }
@@ -1420,19 +1433,28 @@ function conv_categoria(&$db, &$obs, $agr, $pr)
  * @param object $g         Datos del presunto responsable como grupo
  * @param array  &$id_presp Arreglo de pr. resp ya identificados
  * @param string &$obs      Colchon para reportar notas de conversión
+ * @param bool   $csinf     Si desconoce el presunto responsable pone SIN INFO
  *
  * @return integer Identificación de presunto responsable en base o -1 si no hay
  */
 
-function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
+function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs, 
+    $csinf = false)
 {
+    $ids = DataObjects_Presponsable::idSinInfo();
     $nomg = $g->nombre_grupo;
     $pr = conv_basica(
         $db, 'presponsable',
         $nomg, $obs, false
     );
+    $otro = "";
     if ($pr == -1) {
-        return -1;
+        if ($csinf) {
+            $pr = $ids;
+            $otro = $nomg;
+        } else {
+            return -1;
+        }
     }
     $id_presp[$idp] = $pr;
     //echo "OJO asignando id_presp[$idp] = $pr<br>";
@@ -1446,7 +1468,6 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs)
     ) {
         $dpresp->$c = dato_en_obs($g, $c);
     }
-    $ids = DataObjects_Presponsable::idSinInfo();
     if ($pr == $ids
         && $nomg != 'SIN INFORMACIÓN'
         && $nomg != 'SIN INFORMACION'

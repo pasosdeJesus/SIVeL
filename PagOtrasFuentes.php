@@ -269,9 +269,9 @@ class PagOtrasFuentes extends PagBaseMultiple
         ) {
             $f = $this->getElement('fecha');
             $da = $f->getValue();
-            $y = date('Y');
-            $m = date('m');
-            $d = date('d');
+            $y = @date('Y');
+            $m = @date('m');
+            $d = @date('d');
             if ($da['Y'][0] == ($GLOBALS['anio_min'] - 1)
                 || ($y == $da['Y'][0] && $d == $da['d'][0] && $m == $da['m'][0])
             ) {
@@ -539,8 +539,8 @@ class PagOtrasFuentes extends PagBaseMultiple
             } else {
                 $fecha = conv_fecha($fuente->fecha_fuente, $obs);
                 PagOtrasFuentes::busca_inserta(
-                    $db, $idcaso, $nomf, $fecha,
-                    (string)$fuente->ubicacion_fuente,
+                    $db, $idcaso, utf8_decode($nomf), $fecha,
+                    utf8_decode((string)$fuente->ubicacion_fuente),
                     dato_en_obs($fuente, 'anotacion'),
                     dato_en_obs($fuente, 'tfuente'),
                     $obs

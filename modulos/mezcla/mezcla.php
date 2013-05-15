@@ -83,7 +83,7 @@ function muestra($dsn)
     }
     $dec->id_etiqueta = $idet;
     $dec->id_funcionario = $_SESSION['id_funcionario'];
-    $dec->fecha = date('Y-m-d');
+    $dec->fecha = @date('Y-m-d');
     $r1 = ResConsulta::reporteRelato(
         $id1, $db, 
         $GLOBALS['cw_ncampos'] + array('m_fuentes' => 'Fuentes')

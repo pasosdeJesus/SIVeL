@@ -10,7 +10,8 @@ if (test ! -f ./vardb.sh -o ! -f conf.php) then {
 . ./vardb.sh
 
 rm -f $rlocal/$nommes $rlocal/$nommes.gz
-cmd="pg_dump --encoding=LATIN1 $socketopt --attribute-inserts --inserts -U $dbusuario -cO $dbnombre > $rlocal/$nommes"
+cmd="pg_dump --encoding=LATIN1 $socketopt --attribute-inserts --inserts -U $dbusuario -cO $dbnombre > $rlocal/$nommes-s"
 echo $cmd;
 eval $cmd;
+cp $rlocal/$nommes-s $rlocal/$nommes
 gzip $rlocal/$nommes

@@ -131,8 +131,8 @@ $copiaphp = false;
 $rremotos = "";
 
 /** Llave ssh. Generela con ssh-keygen sin clave, el dueño debe ser quien
- * ejecuta el script respaldo.sh */
-$llave = $dirchroot . $dirserv . $dirsitio . "/id_rsa";
+ * ejecuta el script respaldo.sh, no debe permitir lectura de nadie más */
+$llave = "/home/miusuario/.ssh/rsa_respaldo";
 
 
 // PUBLICACIÓN EN PÁGINA WEB

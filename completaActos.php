@@ -22,7 +22,7 @@ require_once "DataObjects/Categoria.php";
 $aut_usuario = "";
 $db = autentica_usuario($dsn, $aut_usuario, 62);
 
-$t = 'Completa actos ' . date('Y-m-d H:m');
+$t = 'Completa actos ' . @date('Y-m-d H:m');
 encabezado_envia($t);
 echo '<table width="100%">'
     . '<td style="white-space: nowrap; background-color: #CCCCCC;" '

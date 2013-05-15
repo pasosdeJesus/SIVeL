@@ -222,9 +222,9 @@ class PagFuentesFrecuentes extends PagBaseMultiple
         ) {
             $f = $this->getElement('fecha');
             $da = $f->getValue();
-            $y = date('Y');
-            $m = date('m');
-            $d = date('d');
+            $y = @date('Y');
+            $m = @date('m');
+            $d = @date('d');
             if ($da['Y'][0] == ($GLOBALS['anio_min'] - 1)
                 || ($y == $da['Y'][0] && $d == $da['d'][0] && $m == $da['m'][0])
             ) {
@@ -459,13 +459,13 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     {
         foreach ($r->fuente as $fuente) {
             $idffrecuente = null;
-            $nomf = $fuente->nombre_fuente;
+            $nomf = utf8_decode($fuente->nombre_fuente);
             if (empty($fuente->fecha_fuente)) {
                 rep_obs(
                     _("No se incluyó fuente sin fecha: ") .
                     $fuente->asXML(), $obs
                 );
-            } else if (empty($nomf)) {
+            } else if (empty($fuente->nombre_fuente)) {
                 rep_obs(
                     _("No se incluyó fuente sin nombre: ") .
                     $fuente->asXML(), $obs
@@ -474,7 +474,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
                 $fecha = conv_fecha($fuente->fecha_fuente, $obs);
                 PagFuentesFrecuentes::busca_inserta(
                     $db, $idcaso, $nomf, $fecha,
-                    (string)$fuente->ubicacion_fuente,
+                    utf8_decode((string)$fuente->ubicacion_fuente),
                     dato_en_obs($fuente, 'ubicacion'),
                     dato_en_obs($fuente, 'clasificacion'),
                     $ubif, $ubi, $cla, $obs
