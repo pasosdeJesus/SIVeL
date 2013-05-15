@@ -417,7 +417,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         break;
                     } else {
                         $dvictima = objeto_tabla('victima');
-                        print_r($dvictima);
                         $dvictima->id_caso = (int)$idcaso;
 
                         $hijos = dato_en_obs($victima, 'hijos');
