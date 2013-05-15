@@ -258,7 +258,7 @@ function aplicado($ver)
  */
 function aplicaact(&$act, $idac, $desc)
 {
-    $act->fecha = date('Y-M-d');
+    $act->fecha = @date('Y-M-d');
     $act->id = $idac;
     $act->descripcion = $desc;
     $act->insert();
@@ -347,7 +347,7 @@ function cambia_datos(&$db, $tabla, $deshabilitar, $agregar, $homologar,
 ) {
     foreach ($deshabilitar as $n) {
         $q = "UPDATE $tabla " .
-            " SET $cfechades = '" . date('Y-m-d') . "' " .
+            " SET $cfechades = '" . @date('Y-m-d') . "' " .
             " WHERE nombre = '$n'";
         //echo $q . "<br>";
         hace_consulta($db, $q, false);
@@ -355,7 +355,7 @@ function cambia_datos(&$db, $tabla, $deshabilitar, $agregar, $homologar,
     foreach ($agregar as $cod => $nom) {
         $q = "INSERT INTO $tabla " .
             "(id, nombre, $cfechacre) " .
-            " VALUES ('$cod', '$nom', '" . date('Y-m-d') . "')";
+            " VALUES ('$cod', '$nom', '" . @date('Y-m-d') . "')";
         //echo $q . "<br>";
         hace_consulta($db, $q, false);
     }

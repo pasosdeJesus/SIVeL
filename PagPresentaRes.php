@@ -253,7 +253,7 @@ class PagPresentaRes extends PagBaseSimple
         $prevnext[] =& $sel;
         $this->addGroup($prevnext, null, _('Detalles'), '&nbsp;', false);
 
-        $cy = date('Y');
+        $cy = @date('Y');
         if ($cy < 2005) {
             $cy = 2005;
         }

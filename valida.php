@@ -21,7 +21,7 @@ require_once "misc.php";
 $aut_usuario = "";
 $db = autentica_usuario($dsn, $aut_usuario, 64);
 
-$t = _("Reporte de consistencia del") ." " . date("Y-m-d H:m");
+$t = _("Reporte de consistencia del") ." " . @date("Y-m-d H:m");
 encabezado_envia($t);
 echo '<table width="100%"><td style="white-space: ' .
     ' nowrap; background-color: #CCCCCC;" align="left" ' .
@@ -72,12 +72,12 @@ res_valida(
 res_valida(
     $db, _("Casos sin funcionario"),
     "SELECT caso.id FROM caso
-    WHERE caso.id NOT IN (SELECT id_caso FROM caso_funcionario);"
+    WHERE caso.id NOT IN (SELECT id_caso FROM caso_funcionario) ORDER BY 1;"
 );
 
 res_valida(
     $db,
-    _("Casos con más de una ubicaci&oacute;n (salen duplicados en conteos)"),
+    _("Casos con más de una ubicación (salen duplicados en conteos)"),
     "SELECT id, c from (SELECT caso.id, count(ubicacion.id) AS c
     FROM caso, ubicacion WHERE caso.id = ubicacion.id_caso
     GROUP BY caso.id order by 2) AS f WHERE c >= 2"

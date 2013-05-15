@@ -2331,7 +2331,6 @@ if (!aplicado($idac)) {
             " ADD COLUMN longitud FLOAT", false
         );
     }
-
     aplicaact($act, $idac, 'Latitude y Longitud en departamento, municipio y clase');
 }
 
@@ -2343,8 +2342,15 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db, "ALTER TABLE clase ALTER COLUMN id_tclase TYPE VARCHAR(10)", false
     );
+
+
+    aplicaact($act, $idac, 'Actualiza info. geográfica con DIVIPOLA 2012');
+}
+
+$idac = '1.1-dp1';
+if (!aplicado($idac)) {
     consulta_archivo(&$db, 'act-nom2012.sql');
-    aplicaact($act, $idac, 'Actualiza información geográfica de acuerdo a DIVIPOLA 2012');
+    aplicaact($act, $idac, 'Actualiza info. geográfica con DIVIPOLA 2012');
 }
 
 

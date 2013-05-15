@@ -136,12 +136,12 @@ class AccionEnviaCorreo extends HTML_QuickForm_Action
             die($r->getMessage());
         }
 
-        $anno = date("Y");
-        $mes = date("m");
-        $dia = date("d");
-        $hora = date("H");
-        $minutos = date("i");
-        $segundos = date("s");
+        $anno = @date("Y");
+        $mes = @date("m");
+        $dia = @date("d");
+        $hora = @date("H");
+        $minutos = @date("i");
+        $segundos = @date("s");
 
         $text_message = "Hola " .
             "\n\nEste mensaje es un comentario enviado desde el web \n";

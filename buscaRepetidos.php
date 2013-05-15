@@ -28,7 +28,7 @@ echo '<table width="100%">'
     . '<td style="white-space: nowrap; background-color: #CCCCCC;" '
     . 'align="left" valign="top" colspan="2"><b>'
     . '<div align=center>' . $t . ' '
-    . date('Y-m-d H:m') . '</div></b></td></table><p/>';
+    . @date('Y-m-d H:m') . '</div></b></td></table><p/>';
 
 $res =& hace_consulta(
     $db, "SELECT c1.id, trim(c1.memo), count(c1.id) as num " .

@@ -110,7 +110,7 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
             'language' => $slan,
             'format' => 'd-M-Y',
             'minYear' => $GLOBALS['anio_min'],
-            'maxYear' => date('Y')+10
+            'maxYear' => @date('Y')+10
         );
     }
 

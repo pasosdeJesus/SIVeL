@@ -58,7 +58,7 @@
             <div class = "settings_element">
                 <div class = "left">Hasta:</div>
                 <div class = "right">
-                    <input type = "text" name="hasta" class="inputHasta" id="inputHasta" value="<?php echo date('Y-m-d') ?>" size="7" style="float:right;" />
+                    <input type = "text" name="hasta" class="inputHasta" id="inputHasta" value="<?php echo @date('Y-m-d') ?>" size="7" style="float:right;" />
                 </div>
                 <div class = "clear"></div>
             </div>

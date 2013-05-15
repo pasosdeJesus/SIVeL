@@ -348,7 +348,7 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
 
         //    $e =& $this->addElement('static', 'fini', 'Victimas ');
 
-        $cy = date('Y');
+        $cy = @date('Y');
         if ($cy < 2005) {
             $cy = 2005;
         }

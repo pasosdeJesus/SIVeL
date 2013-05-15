@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sivel 1.1cp1\n"
 "Report-Msgid-Bugs-To: vtamara@pasosdeJesus.org\n"
-"POT-Creation-Date: 2013-04-21 10:09-0500\n"
+"POT-Creation-Date: 2013-05-15 15:05-0500\n"
 "PO-Revision-Date: 2012-02-24 08:16-0500\n"
 "Last-Translator: Vladimir Tamara Patino <>\n"
 "Language-Team: English\n"
@@ -22,7 +22,7 @@ msgid "Definir etiquetas en fb_fieldLabels"
 msgstr "Define labels in fb_fieldLabels"
 
 #: PagActo.php:219 PagBaseMultiple.php:298 PagBaseSimple.php:92
-#: PagOtrasFuentes.php:111 PagPResponsables.php:126 PagUbicacion.php:189
+#: PagOtrasFuentes.php:111 PagPResponsables.php:126
 #: PagVictimaColectiva.php:170 PagVictimaIndividual.php:183
 msgid "Bug: idcaso no debería ser null"
 msgstr "Bug: idcaso should not be null"
@@ -87,82 +87,81 @@ msgstr "Next %s"
 msgid "Se esperaba un sólo registro, pero se encontraron %s."
 msgstr "One record was expected, but there were found %s"
 
-#: PagBasicos.php:259
+#: PagBasicos.php:255
 #, php-format
 msgid "¿Confirma eliminación del caso %s?"
 msgstr "Do you confirm deleting case %s?"
 
-#: PagBasicos.php:449
+#: PagBasicos.php:445
 #, php-format
 msgid "Reporte General del caso %s"
 msgstr "General Report of the case %s"
 
-#: PagBasicos.php:462
+#: PagBasicos.php:458
 msgid "Volver al Caso"
 msgstr "Return to Case"
 
-#: PagBasicos.php:463 captura_caso.php:209
+#: PagBasicos.php:459 captura_caso.php:209
 msgid "Caso Nuevo"
 msgstr "New Case"
 
-#: PagBasicos.php:465 captura_caso.php:208
+#: PagBasicos.php:461 captura_caso.php:208
 msgid "Menú"
 msgstr "Menu"
 
-#: PagBasicos.php:480
+#: PagBasicos.php:476
 msgid "No existe en el controlador la página"
 msgstr "There is no controller of page"
 
-#: PagBasicos.php:586
+#: PagBasicos.php:582
 msgid "Se esperaban 3 parametros en iniVar"
 msgstr "3 parameters expected in iniVar"
 
-#: PagBasicos.php:611
+#: PagBasicos.php:607
 msgid "Se esperaba un sólo registro, pero se encontraron"
 msgstr "One record was expected, there were found"
 
-#: PagBasicos.php:649
+#: PagBasicos.php:645
 msgid "Datos Básicos"
 msgstr "Basic Data"
 
-#: PagBasicos.php:650
+#: PagBasicos.php:646
 msgid "Básicos"
 msgstr "Basic"
 
-#: PagBasicos.php:678
+#: PagBasicos.php:674
 msgid "Fecha inicial"
 msgstr "Initial Date"
 
-#: PagBasicos.php:692
+#: PagBasicos.php:688
 msgid "Fecha final"
 msgstr "Final Date"
 
-#: PagBasicos.php:710 PagBasicos.php:728
+#: PagBasicos.php:706 PagBasicos.php:724
 msgid "No. Caso"
 msgstr "Id. Case"
 
-#: PagBasicos.php:714
+#: PagBasicos.php:710
 msgid "No. Caso por buscar: "
 msgstr "Id of Case to search: "
 
-#: PagBasicos.php:720 captura_caso.php:210
+#: PagBasicos.php:716 captura_caso.php:210
 msgid "Buscar"
 msgstr "Search"
 
-#: PagBasicos.php:726
+#: PagBasicos.php:722
 msgid "Deje en blanco si es nuevo"
 msgstr "Leave blank if it is new"
 
-#: PagBasicos.php:743 PagPresentaRes.php:117 PagUbicacion.php:245
-#: PagUbicacion.php:246 consolidado.php:376 consolidado.php:380
-#: consulta_web.php:725 estadisticas.php:583
+#: PagBasicos.php:739 PagPresentaRes.php:117 consolidado.php:376
+#: consolidado.php:380 consulta_web.php:725 estadisticas.php:583
 #: DataObjects/Caso_ffrecuente.php:70 sitios/pordefecto/conf_int.php:206
 #: sitios/pordefecto/conf_int.php:213 sitios/pordefecto/conf_int.php:311
 #: sitios/pordefecto/conf_int.php:332 sitios/pordefecto/conf_int.php:397
 msgid "Ubicación"
 msgstr "Location"
 
-#: PagBasicos.php:902
+#: PagBasicos.php:898
 msgid "Falta fecha del caso"
 msgstr "Missing date of case"
 
@@ -322,9 +321,19 @@ msgstr "Entered Until:"
 msgid "Contexto"
 msgstr "Context"
 
+#: PagUbicacion.php:189
+#, fuzzy
+msgid "Bug: idcaso no deberÃ­a ser null"
+msgstr "Bug: idcaso should not be null"
+
 #: PagUbicacion.php:196
 msgid "No pudo consultarse caso"
 msgstr "Couldn't use case"
+
+#: PagUbicacion.php:245 PagUbicacion.php:246
+#, fuzzy
+msgid "UbicaciÃ³n"
+msgstr "Location"
 
 #: PagUbicacion.php:440
 msgid "Ver mapa"
@@ -498,10 +507,10 @@ msgstr "out of sequence"
 msgid "Falló"
 msgstr "Failed"
 
-#: ResConsulta.php:1085 actualiza.php:2497 buscaRepetidos.php:60
+#: ResConsulta.php:1085 actualiza.php:2503 buscaRepetidos.php:60
 #: completaActos.php:81 consolidado.php:700 consulta_web.php:938
 #: detalle.php:83 detusyrol.php:71 estadisticas.php:355 estadisticas.php:616
-#: importaRelato.php:780 tabla.php:223 tablas_basicas.php:60 usyroles.php:72
+#: importaRelato.php:789 tabla.php:223 tablas_basicas.php:60 usyroles.php:72
 #: valida.php:119
 msgid "Men&uacute; Principal"
 msgstr "Main Menu"
@@ -560,15 +569,15 @@ msgstr "User"
 msgid "Clave"
 msgstr "Password"
 
-#: aut.php:210
+#: aut.php:211
 msgid "Acceso no autorizado"
 msgstr "Not authorized access"
 
-#: aut.php:228
+#: aut.php:229
 msgid "Intentado actualizar usuario"
 msgstr "Trying to update user"
 
-#: aut.php:238
+#: aut.php:239
 msgid "No pudo emplear tabla de usuarios"
 msgstr "Couldn't use user table"
 
@@ -888,57 +897,57 @@ msgstr "Decompress manually and import the decompressed file"
 msgid "No pudo cargarse"
 msgstr "Couldn't load"
 
-#: importaRelato.php:231
+#: importaRelato.php:232
 msgid "No pudo insertar caso "
 msgstr "Couldn't insert case "
 
-#: importaRelato.php:235
+#: importaRelato.php:236
 msgid "idcaso es 0"
 msgstr "idcaso is 0"
 
-#: importaRelato.php:249
+#: importaRelato.php:251
 #, php-format
 msgid "Fuente extraida automaticamente de %s"
 msgstr "Source extracted automatically of %s"
 
-#: importaRelato.php:275 importaRelato.php:293
+#: importaRelato.php:276 importaRelato.php:294
 msgid "Organización responsable incluida automáticamente"
 msgstr "Responsible organization included automatically"
 
-#: importaRelato.php:402
-#, php-format
+#: importaRelato.php:412
+#, fuzzy, php-format
 msgid "Acto: No hay definida persona con id '%s'"
-msgstr "Act: There is not a defined person with id '%s'"
+msgstr "Victim: There is not a person defined with id '%s'"
 
-#: importaRelato.php:498
+#: importaRelato.php:508
 msgid "No pudo insertar víctima"
 msgstr "Couldn't insert victim"
 
-#: importaRelato.php:556
+#: importaRelato.php:565
 msgid "No hay datos de p. resp."
 msgstr "There is no data of Alleg. Perp."
 
-#: importaRelato.php:576
+#: importaRelato.php:585
 msgid "No hay definida persona con id."
 msgstr "There is not definied a person with id."
 
-#: importaRelato.php:605
+#: importaRelato.php:614
 msgid "Acto: No pudo insertar acto col."
 msgstr "Act: Could not inserta col. act"
 
-#: importaRelato.php:612
+#: importaRelato.php:621
 msgid "No es individual ni colectiva"
 msgstr "Is not individual neither colective"
 
-#: importaRelato.php:616
+#: importaRelato.php:625
 msgid "Agresión particular vacía"
 msgstr "Empty particular agression"
 
-#: importaRelato.php:651
+#: importaRelato.php:660
 msgid "Falta importaRelato en"
 msgstr "Missing importaRelato in"
 
-#: importaRelato.php:662 DataObjects/Trelacion.php:45
+#: importaRelato.php:672 DataObjects/Trelacion.php:45
 #: modulos/etiquetas/DataObjects/Caso_etiqueta.php:112
 #: modulos/etiquetas/DataObjects/Caso_etiqueta.php:131
 #: modulos/segjudicial/DataObjects/Accion.php:71
@@ -947,28 +956,28 @@ msgstr "Missing importaRelato in"
 msgid "Observaciones"
 msgstr "Observations"
 
-#: importaRelato.php:714
+#: importaRelato.php:723
 msgid "Se requiere módulo anexos con variable dir_anexos"
 msgstr "Module attachment (anexos) is required with variable dir_anexos"
 
-#: importaRelato.php:718
+#: importaRelato.php:727
 #, php-format
 msgid "El directorio '%s' debería permitir escritura"
 msgstr "The directory '%s' must have permission to write"
 
-#: importaRelato.php:725
+#: importaRelato.php:734
 msgid "Se requiere módulo etiquetas"
 msgstr "The labels (etiquetas) module is required"
 
-#: importaRelato.php:746
+#: importaRelato.php:755
 msgid "Importa Relatos"
 msgstr "Import Story"
 
-#: importaRelato.php:753
+#: importaRelato.php:762
 msgid "Archivo con relatos"
 msgstr "File with stories"
 
-#: importaRelato.php:770
+#: importaRelato.php:779
 msgid "Importar"
 msgstr "Import"
 
@@ -1018,9 +1027,45 @@ msgstr "Identification of age group unknown"
 msgid "Debería existir variable para evitar CSRF en sesión."
 msgstr "There should be a variable to avoid CSRF in session"
 
-#: misc.php:2160
+#: misc.php:2052
+msgid "desconocido"
+msgstr "unkown"
+
+#: misc.php:2173
 msgid "Errores ortográficos en memo"
 msgstr "Ortographic errors in description"
+
+#: misc_importa.php:64
+msgid "Tipo de Violencia desconocido"
+msgstr "Unknown kind of Violence"
+
+#: misc_importa.php:148
+msgid "Localización: Departamento desconocido"
+msgstr "Location: Unknown department"
+
+#: misc_importa.php:212
+msgid "Localización: Municipio desconocido"
+msgstr "Location: Unknown municipality"
+
+#: misc_importa.php:274
+msgid "Localización: Clase desconocida "
+msgstr "Location: Unknown class"
+
+#: misc_importa.php:275
+msgid "en municipio"
+msgstr "in municipality"
+
+#: misc_importa.php:276
+msgid "y departamento"
+msgstr "and department"
+
+#: misc_importa.php:681
+msgid "Fecha: Dia desconocido"
+msgstr "Date: Unknown day"
+
+#: misc_importa.php:689
+msgid "Fecha: Mes desconocido"
+msgstr "Date: Unknown month"
 
 #: tabla.php:176
 msgid "Tabla "
@@ -1079,8 +1124,8 @@ msgid "Casos sin funcionario"
 msgstr "Cases without staff member"
 
 #: valida.php:80
-msgid "Casos con más de una ubicaci&oacute;n (salen duplicados en conteos)"
-msgstr "Cases with more than one ubication (they are duplicated in counting)"
+msgid "Casos con más de una ubicación (salen duplicados en conteos)"
+msgstr "Cases with more than one ubication (duplicated in countings)"
 
 #: valida.php:88
 msgid "Víctimas con categorias que no son para víctimas individuales"
@@ -1825,7 +1870,7 @@ msgstr "Id. Direct Source"
 
 #: modulos/estrotulos/conf.php:33
 msgid "Individuales con Rotulos de Rep. Cons."
-msgstr "Individual with Labels of Cons. Rep."
+msgstr "Individuals with Labels of Cons. Rep."
 
 #: modulos/estrotulos/conf.php:38 modulos/belicas/conf.php:49
 msgid "Colectivas con Rotulos de Rep. Cons."

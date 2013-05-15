@@ -169,6 +169,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $yaesta[$c] = false;
         }
 
+        encabezado_envia("Importa Relato");
         foreach ($relatos->relato as $r) {
             $obs = "";
             $id_presp = array();  // Presuntos responsables identificados
@@ -238,12 +239,13 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $yaesta['PagMemo'] = true;
             $yaesta['PagEvaluacion'] = true;
 
+
             PagUbicacion::importaRelato($db, $r, $idcaso, $obs);
             $yaesta['PagUbicacion'] = true;
 
             $anexof = objeto_tabla('anexo');
             $anexof->id_caso = $idcaso;
-            $anexof->fecha = date('Y-m-d');
+            $anexof->fecha =  @date('Y-m-d');
             $anexof->archivo = '';
             $anexof->descripcion = sprintf(
                 _("Fuente extraida automaticamente de %s"), $narc
@@ -261,14 +263,13 @@ class AccionImportaRelato extends HTML_QuickForm_Action
 
             $anexof->archivo = $ax;
             $anexof->update();
-
             PagFuentesFrecuentes::importaRelato(
                 $db, $r, $idcaso,
                 $obs
             );
             $idffrecuente = null;
             $nomf = $r->organizacion_responsable;
-            $fecha = date('Y-m-d');
+            $fecha = @date('Y-m-d');
             $orgfuente = PagFuentesFrecuentes::busca_inserta(
                 $db, $idcaso, $nomf, $fecha,
                 $r->id_relato,
@@ -347,10 +348,19 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         }
                     }
                     $sexo = 'S';
-                    if (isset($persona->sexo)
-                        && ($persona->sexo == 'M' || $persona->sexo == 'F')
-                    ) {
-                        $sexo = $persona->sexo;
+                    if (isset($persona->sexo)) {
+                        switch (strtoupper($persona->sexo)) {
+                        case 'M':
+                        case 'MASCULINO':
+                            $sexo = 'M';
+                            break;
+                        case 'FEMENINO':
+                            $sexo = 'F';
+                            break;
+                        default:
+                            $sexo = 'S';
+                            break;
+                        }
                     }
                     $ndep = dato_en_obs($persona, 'departamento');
                     $nmun = dato_en_obs($persona, 'municipio');
@@ -470,18 +480,17 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         }
                     }
                     foreach (array('filiacion' => 'filiacion',
-                        'vinculoestado' => 'vinculoestado')
+                        'vinculoestado' => 'vinculoestado',
+                        'organizacion_armada' => 'presponsable')
                         as $cs => $cs2
                     ) {
                         $ncs = "id_" . $cs;
                         //echo "OJO cs=$cs, ncs=$ncs<br>";
                         $v = dato_en_obs($victima, $cs);
-                        if ($v != null) {
-                            $dvictima->$ncs = (int)conv_basica(
-                                $db, $cs2,
-                                $v, $obs
-                            );
-                        }
+                        $dvictima->$ncs = (int)conv_basica(
+                            $db, $cs2,
+                            $v, $obs, true
+                        );
                         //echo "OJO dvictima->ncs=" .  $dvictima->$ncs . "<br>";
                     }
                     $v = dato_en_obs($victima, "organizacionarmada");
@@ -492,17 +501,18 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         $dvictima->organizacionarmada = (int)conv_basica(
                             $db, 'presponsable', $v, $obs
                         );
+                    } else {
+                        $dvictima->organizacionarmada = DataObjects_Presponsable::idSinInfo();
                     }
-
-                    if (!$dvictima->insert()) {
+                    if (!$dvictima || !$dvictima->insert()) {
                         $m = _("No pudo insertar víctima") ." '"
-                            . $dvictima->id_persona . "' ";
+                            . $dvictima->id_persona . "'\n";
                         if (PEAR::isError($dvictima)) {
                             $m .= $dvictima->getMessage() . " "
                                 . $dvictima->getUserInfo();
                         }
-                        die("OJO dvictima -> " . $m);
                         rep_obs($m, $obs);
+                        break;
                     }
                     foreach (array('antecedentes' => 'antecedente',  )
                         as $cs => $cs2
@@ -540,16 +550,15 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 //echo "OJO acto->agresion_particular="
                 //    . $acto->agresion_particular . "<br>";
                 if (!empty($acto->agresion_particular)) {
-                    $idp = (int)$acto->id_presunto_grupo_responsable;
+                    $idp = (string)$acto->id_presunto_grupo_responsable;
                     $pr = null;
-                    // echo "OJO idp=$idp<br>";
                     if (isset($id_presp[$idp])) {
                         // Ya registrado presunto responsable
                         $pr = $id_presp[$idp];
                     } else if (isset($datgrupo[$idp])) {
                         $g = $datgrupo[$idp];
                         $pr = conv_presp(
-                            $db, $idcaso, $idp, $g, $id_presp, $obs
+                            $db, $idcaso, $idp, $g, $id_presp, $obs, true
                         );
                     } else {
                         rep_obs(
@@ -659,14 +668,16 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 $GLOBALS['cw_ncampos'] + array('m_fuentes' => 'Fuentes')
             );
             echo "<hr><pre>$html_rep</pre>";
-            echo_esc(_("Observaciones"). ": $obs");
+            if (trim($obs) != '') {
+                echo_esc(_("Observaciones"). ": $obs");
+            }
 
             $ec = objeto_tabla('caso_etiqueta');
-            $ec->fecha = date('Y-m-d');
+            $ec->fecha = @date('Y-m-d');
             $ec->id_caso = $idcaso;
             $ec->id_etiqueta = $idetiqueta;
             $ec->id_funcionario = $_SESSION['id_funcionario'];
-            $ec->fecha = date('Y-m-d');
+            $ec->fecha = @date('Y-m-d');
             $ec->observaciones = "";
             if (isset($r->id_relato)) {
                 $ec->observaciones = trim($r->id_relato);
@@ -675,15 +686,13 @@ class AccionImportaRelato extends HTML_QuickForm_Action
 
             if (trim($obs) != '') {
                 $ec = objeto_tabla('caso_etiqueta');
-                $ec->fecha = date('Y-m-d');
+                $ec->fecha = @date('Y-m-d');
                 $ec->id_caso = $idcaso;
                 $ec->id_etiqueta = $iderrorimportacion;
                 $ec->id_funcionario = $_SESSION['id_funcionario'];
                 $ec->observaciones = $obs;
                 $ec->insert();
             }
-
-
         }
 
     }
@@ -759,9 +768,9 @@ class PagImportaRelato extends HTML_QuickForm_Page
             . 'número de casos en la base.'
         );
 
-        $this->addGroup(
+/*        $this->addGroup(
             $opch, null, 'Coordenadas', '&nbsp;', false
-        );
+        ); */
         agrega_control_CSRF($this);
 
         $prevnext = array();
