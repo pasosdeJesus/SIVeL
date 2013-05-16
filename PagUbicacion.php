@@ -1,21 +1,21 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * PÃ¡gina del multi-formulario para capturar caso (captura_caso.php).
+ * Página del multi-formulario para capturar caso (captura_caso.php).
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
- * @copyright 2004 Dominio pÃºblico. Sin garantÃ­as.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
+ * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
+ * @copyright 2004 Dominio público. Sin garantías.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * @link      http://sivel.sf.net
- * Acceso: SÃLO DEFINICIONES
+ * Acceso: SÓLO DEFINICIONES
  */
 
 /**
- * PestaÃ±a UbicaciÃ³n de la ficha de captura de un caso
+ * Pestaña Ubicación de la ficha de captura de un caso
  */
 require_once 'PagBaseMultiple.php';
 require_once 'DataObjects/Caso.php';
@@ -27,16 +27,16 @@ require_once 'DB/DataObject/Cast.php';
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
+ * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
  * @link     http://sivel.sf.net/tec
  */
 class CamDepartamento extends HTML_QuickForm_Action
 {
-    /** * Ejecuta acciÃ³n
+    /** * Ejecuta acción
      *
-     * @param object &$page      PÃ¡gina
-     * @param string $actionName AcciÃ³n
+     * @param object &$page      Página
+     * @param string $actionName Acción
      *
      * @return void
      */
@@ -58,17 +58,17 @@ class CamDepartamento extends HTML_QuickForm_Action
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
+ * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
  * @link     http://sivel.sf.net/tec
  */
 class CamMunicipio extends HTML_QuickForm_Action
 {
     /**
-     * Ejecuta acciÃ³n
+     * Ejecuta acción
      *
-     * @param object &$page      PÃ¡gina
-     * @param string $actionName AcciÃ³n
+     * @param object &$page      Página
+     * @param string $actionName Acción
      *
      * @return void
      */
@@ -91,19 +91,19 @@ class CamMunicipio extends HTML_QuickForm_Action
 
 
 /**
- * UbicaciÃ³n.
- * Ver documentaciÃ³n de funciones en clase base.
+ * Ubicación.
+ * Ver documentación de funciones en clase base.
  *
  * @category SIVeL
  * @package  SIVeL
- * @author   Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico.
+ * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
  * @link     http://sivel.sf.net/tec
  * @see      PagBaseMultiple
  */
 class PagUbicacion extends PagBaseMultiple
 {
-    /** UbicaciÃ³n independiente del caso */
+    /** Ubicación independiente del caso */
     var $bubicacion;
 
     var $pref = "fub";
@@ -112,7 +112,7 @@ class PagUbicacion extends PagBaseMultiple
 
     var $clase_modelo = 'ubicacion';
 
-    var $titulo = 'UbicaciÃ³n';
+    var $titulo = 'Ubicación';
 
     /**
      * Deja en blanco variables de este formulario
@@ -127,7 +127,7 @@ class PagUbicacion extends PagBaseMultiple
 
 
     /**
-     * Pone en null variables asociadas a tablas de la pestaÃ±a.
+     * Pone en null variables asociadas a tablas de la pestaña.
      *
      * @return null
      */
@@ -138,9 +138,9 @@ class PagUbicacion extends PagBaseMultiple
     }
 
     /**
-     * Retorna una identificaciÃ³n del registro actual.
+     * Retorna una identificación del registro actual.
      *
-     * @return string IdentifaciÃ³n
+     * @return string Identifación
      */
     function copiaId()
     {
@@ -172,12 +172,12 @@ class PagUbicacion extends PagBaseMultiple
     }
 
     /**
-     * Inicializa variables y datos de la pestaÃ±a.
-     * Ver documentaciÃ³n completa en clase base.
+     * Inicializa variables y datos de la pestaña.
+     * Ver documentación completa en clase base.
      *
      * @param array $apar Arreglo de parametros. Vacio aqui.
      *
-     * @return handle ConexiÃ³n a base de datos
+     * @return handle Conexión a base de datos
      */
     function iniVar($apar = null)
     {
@@ -186,7 +186,7 @@ class PagUbicacion extends PagBaseMultiple
         $db =& $dubicacion->getDatabaseConnection();
         $idcaso =& $_SESSION['basicos_id'];
         if (!isset($idcaso) || $idcaso == null) {
-            die(_("Bug: idcaso no deberÃ­a ser null"));
+            die(_("Bug: idcaso no debería ser null"));
         }
         $result = hace_consulta($db, "SELECT  id FROM caso WHERE id='$idcaso'");
         $row = array();
@@ -233,7 +233,7 @@ class PagUbicacion extends PagBaseMultiple
 
     /**
      * Constructora.
-     * Ver documentaciÃ³n completa en clase base.
+     * Ver documentación completa en clase base.
      *
      * @param string $nomForma Nombre
      *
@@ -242,8 +242,8 @@ class PagUbicacion extends PagBaseMultiple
     function PagUbicacion($nomForma)
     {
         parent::PagBaseMultiple($nomForma);
-        $this->titulo = _('UbicaciÃ³n');
-        $this->tcorto = _('UbicaciÃ³n');
+        $this->titulo = _('Ubicación');
+        $this->tcorto = _('Ubicación');
 
         PagUbicacion::nullVarUbicacion();
         $this->addAction('id_departamento', new CamDepartamento());
@@ -255,7 +255,7 @@ class PagUbicacion extends PagBaseMultiple
 
 
     /**
-     * IdentificaciÃ³n de departamento elegido por usuario.
+     * Identificación de departamento elegido por usuario.
      *
      * @param object &$form Formulario
      * @param object $def   Valor por defecto
@@ -282,7 +282,7 @@ class PagUbicacion extends PagBaseMultiple
     }
 
     /**
-     * IdentificaciÃ³n del municpio elegido por usuario.
+     * Identificación del municpio elegido por usuario.
      *
      * @param object &$form Formulario
      * @param object $def   Valor por defecto
@@ -305,7 +305,7 @@ class PagUbicacion extends PagBaseMultiple
     }
 
     /**
-     * IdentificaciÃ³n de la clase geogrÃ¡fica elegida por usuario
+     * Identificación de la clase geográfica elegida por usuario
      *
      * @param object &$form Formulario
      * @param object $def   Valor por defecto
@@ -329,11 +329,11 @@ class PagUbicacion extends PagBaseMultiple
      *
      * @param object &$db    Base de datos
      * @param object &$form  Formulario
-     * @param object $idpest IdentificaciÃ³n de la pestaÃ±a
+     * @param object $idpest Identificación de la pestaña
      * @param object $depdef Departamento por defecto
      * @param object $mundef Municipio por defecto
      *
-     * @return array Vector con 3 objetos para aÃ±adir al formulario:
+     * @return array Vector con 3 objetos para añadir al formulario:
      *  departamento, municipio y clase
      */
     static function creaCamposUbicacion(&$db, &$form,
@@ -405,9 +405,9 @@ class PagUbicacion extends PagBaseMultiple
 
     /**
      * Agrega elementos al formulario.
-     * Ver documentaciÃ³n completa en clase base.
+     * Ver documentación completa en clase base.
      *
-     * @param handle &$db    ConexiÃ³n a base de datos
+     * @param handle &$db    Conexión a base de datos
      * @param string $idcaso Id del caso
      *
      * @return void
@@ -450,7 +450,7 @@ class PagUbicacion extends PagBaseMultiple
     }
 
     /**
-     * Llena valores de ubicaciÃ³n en formulario.
+     * Llena valores de ubicación en formulario.
      *
      * @param handle  &$form  Formulario
      * @param integer $depdef Departamento por defecto
@@ -482,9 +482,9 @@ class PagUbicacion extends PagBaseMultiple
 
     /**
      * Llena valores del formulario.
-     * Ver documentaciÃ³n completa en clase base.
+     * Ver documentación completa en clase base.
      *
-     * @param handle  &$db    ConexiÃ³n a base de datos
+     * @param handle  &$db    Conexión a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -523,9 +523,9 @@ class PagUbicacion extends PagBaseMultiple
 
     /**
      * Elimina registros de tablas relacionadas con caso de este formulario.
-     * Ver documentaciÃ³n completa en clase base.
+     * Ver documentación completa en clase base.
      *
-     * @param handle  &$db    ConexiÃ³n a base de datos
+     * @param handle  &$db    Conexión a base de datos
      * @param integer $idcaso Id del caso
      *
      * @return void
@@ -541,11 +541,11 @@ class PagUbicacion extends PagBaseMultiple
 
     /**
      * Procesa valores del formulario enviados por el usuario.
-     * Ver documentaciÃ³n completa en clase base.
+     * Ver documentación completa en clase base.
      *
      * @param handle &$valores Valores ingresados por usuario
      *
-     * @return bool Verdadero si y solo si puede completarlo con Ã©xito
+     * @return bool Verdadero si y solo si puede completarlo con éxito
      * @see PagBaseSimple
      */
     function procesa(&$valores)
@@ -616,12 +616,12 @@ class PagUbicacion extends PagBaseMultiple
 
     /**
      * Prepara consulta SQL para buscar datos de este formulario.
-     * Ver documentaciÃ³n completa en clase base.
+     * Ver documentación completa en clase base.
      *
      * @param string &$w       Consulta que se construye
      * @param string &$t       Tablas
-     * @param object &$db      ConexiÃ³n a base de datos
-     * @param object $idcaso   IdentificaciÃ³n del caso
+     * @param object &$db      Conexión a base de datos
+     * @param object $idcaso   Identificación del caso
      * @param string &$subcons Subconsulta
      *
      * @return void
@@ -699,12 +699,12 @@ class PagUbicacion extends PagBaseMultiple
     }
 
     /**
-     * Importa de un relato SINCODH lo relacionado con UbicaciÃ³n
+     * Importa de un relato SINCODH lo relacionado con Ubicación
      * creando registros en la base de datos relacionados con el caso $idcaso
      *
-     * @param object &$db    ConexiÃ³n a base de datos
+     * @param object &$db    Conexión a base de datos
      * @param object $r      Relato en XML
-     * @param int    $idcaso NÃºmero de caso que se inserta
+     * @param int    $idcaso Número de caso que se inserta
      * @param string &$obs   Colchon para agregar notas de conversion
      *
      * @return void
@@ -793,20 +793,20 @@ class PagUbicacion extends PagBaseMultiple
 
 
     /**
-     * Compara datos relacionados con esta pestaÃ±a de los casos
-     * con identificaciÃ³n id1 e id2.
+     * Compara datos relacionados con esta pestaña de los casos
+     * con identificación id1 e id2.
      *
-     * @param object  &$db ConexiÃ³n a base de datos
-     * @param array   &$r  Para llenar resultados de comparaciÃ³n, cada
+     * @param object  &$db Conexión a base de datos
+     * @param array   &$r  Para llenar resultados de comparación, cada
      *   entrada es de la forma
      *      id_unica => ('etiqueta', 'valor1', 'valor2', pref)
      *   donde valor1 es valor en primer caso, valor2 es valor en segundo
-     *   caso y pref es 1 o 2 para indicar cual de los valores serÃ¡ por defecto
-     * @param integer $id1 CÃ³digo de primer caso
-     * @param integer $id2 CÃ³digo de segundo caso
-     * @param array   $cls EspecificaciÃ³n de las tablas por revisar.
+     *   caso y pref es 1 o 2 para indicar cual de los valores será por defecto
+     * @param integer $id1 Código de primer caso
+     * @param integer $id2 Código de segundo caso
+     * @param array   $cls Especificación de las tablas por revisar.
      *
-     * @return void AÃ±ade a $r datos de comparaciÃ³n
+     * @return void Añade a $r datos de comparación
      * @see PagBaseSimple
      */
     static function compara(&$db, &$r, $id1, $id2, $cls = array('caso'))
@@ -819,17 +819,17 @@ class PagUbicacion extends PagBaseMultiple
      * Mezcla valores de los casos $id1 e $id2 en el caso $idn de
      * acuerdo a las preferencias especificadas en $sol.
      *
-     * @param object  &$db ConexiÃ³n a base de datos
+     * @param object  &$db Conexión a base de datos
      * @param array   $sol Arreglo con solicitudes de cambios de la forma
      *   id_unica => (pref)
      *   donde pref es 1 si el valor relacionado con id_unica debe
      *   tomarse del caso $id1 o 2 si debe tomarse de $id2.  Las
-     *   identificaciones id_unica son las empleadas por la funciÃ³n
+     *   identificaciones id_unica son las empleadas por la función
      *   compara.
-     * @param integer $id1 CÃ³digo de primer caso
-     * @param integer $id2 CÃ³digo de segundo caso
-     * @param integer $idn CÃ³digo del caso en el que aplicarÃ¡ los cambios
-     * @param array   $cls EspecificaciÃ³n de tablas por mezclar
+     * @param integer $id1 Código de primer caso
+     * @param integer $id2 Código de segundo caso
+     * @param integer $idn Código del caso en el que aplicará los cambios
+     * @param array   $cls Especificación de tablas por mezclar
      *
      * @return Mezcla valores de los casos $id1 e $id2 en el caso $idn de
      * acuerdo a las preferencias especificadas en $sol.
