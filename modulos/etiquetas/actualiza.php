@@ -171,6 +171,22 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Renombra tablas');
 }
 
+$idac = '1.2-el';
+if (!aplicado($idac)) {
+
+    hace_consulta(
+        $db, "ALTER TABLE etiqueta ALTER nombre "
+        . " TYPE VARCHAR(500) COLLATE es_co_utf_8", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE etiqueta ALTER observaciones "
+        . " TYPE VARCHAR(500)", false
+    );
+
+    aplicaact($act, $idac, 'Localización');
+}
+
+
 echo "Actualizando indices<br>";
 actualiza_indice($db, 'etiqueta', 'id', 100);
 

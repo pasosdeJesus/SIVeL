@@ -17,7 +17,7 @@ CREATE SEQUENCE antecedente_seq;
 
 CREATE TABLE antecedente (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('antecedente_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	fechacreacion	DATE NOT NULL,
 	fechadeshabilitacion DATE CHECK (
 		fechadeshabilitacion IS NULL 
@@ -33,7 +33,7 @@ CREATE SEQUENCE intervalo_seq;
 -- Mejor inicio, fin (?)
 CREATE TABLE intervalo (
 	id INTEGER PRIMARY KEY DEFAULT (nextval('intervalo_seq')),
-	nombre VARCHAR(25) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	rango VARCHAR(25) NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
@@ -50,7 +50,7 @@ CREATE TABLE caso (
 	fecha DATE NOT NULL,
 	hora VARCHAR(10),
 	duracion VARCHAR(10),
-	memo	TEXT NOT NULL,
+	memo TEXT NOT NULL,
 	grconfiabilidad VARCHAR(5), 
 	gresclarecimiento VARCHAR(5),
 	grimpunidad VARCHAR(5),
@@ -63,7 +63,7 @@ CREATE SEQUENCE pconsolidado_seq;
 
 CREATE TABLE pconsolidado (
 	id INTEGER PRIMARY KEY DEFAULT (nextval('pconsolidado_seq')),
-	rotulo VARCHAR(25) NOT NULL,
+	rotulo VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	tipoviolencia VARCHAR(25) NOT NULL,
 	clasificacion VARCHAR(25) NOT NULL,
 	peso	INTEGER DEFAULT '0',
@@ -76,7 +76,7 @@ CREATE TABLE pconsolidado (
 
 CREATE TABLE  tviolencia (
 	id CHAR(1) PRIMARY KEY,
-	nombre VARCHAR(50) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	nomcorto VARCHAR(10) NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
@@ -87,7 +87,7 @@ CREATE TABLE  tviolencia (
 
 CREATE TABLE supracategoria (
 	id INTEGER NOT NULL,
-	nombre VARCHAR(50) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -100,7 +100,7 @@ CREATE TABLE supracategoria (
 
 CREATE TABLE categoria (
 	id INTEGER PRIMARY KEY,
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	fechacreacion	DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -120,7 +120,7 @@ CREATE TABLE categoria (
 
 CREATE TABLE tclase (
 	id VARCHAR(10) PRIMARY KEY,
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -134,7 +134,7 @@ CREATE SEQUENCE departamento_seq;
 
 CREATE TABLE departamento (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('departamento_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	latitud FLOAT,
 	longitud FLOAT,
 	fechacreacion	DATE NOT NULL,
@@ -152,7 +152,7 @@ CREATE SEQUENCE municipio_seq;
 -- Hay nombres que cambian, por ejemplo en 3.Ene.2012 no hay CERRO DE SAN ANTONIO en MAGDALENA, se encunetra CERRO SAN ANTONIO, aunque la pagina de la alcaldia es http://www.cerrodesanantonio-magdalena.gov.co/index.shtml
 CREATE TABLE municipio (
 	id INTEGER NOT NULL DEFAULT(nextval('municipio_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	id_departamento INTEGER NOT NULL REFERENCES departamento 
 	ON DELETE CASCADE,
 	latitud FLOAT,
@@ -170,7 +170,7 @@ CREATE SEQUENCE clase_seq;
 
 CREATE TABLE clase (
 	id INTEGER NOT NULL DEFAULT(nextval('clase_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	id_departamento INTEGER REFERENCES departamento ON DELETE CASCADE,
 	id_municipio INTEGER,
 	id_tclase VARCHAR(10) REFERENCES tclase, 
@@ -191,7 +191,7 @@ CREATE SEQUENCE contexto_seq;
 
 CREATE TABLE contexto (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('contexto_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	fechacreacion	DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -203,7 +203,7 @@ CREATE SEQUENCE etnia_seq;
 
 CREATE TABLE etnia (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('etnia_seq')),
-	nombre VARCHAR(200) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	descripcion VARCHAR(1000),
 	fechacreacion	DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
@@ -216,7 +216,7 @@ CREATE SEQUENCE iglesia_seq;
 
 CREATE TABLE iglesia (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('iglesia_seq')),
-	nombre VARCHAR(200) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	descripcion VARCHAR(1000),
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion DATE CHECK (
@@ -229,7 +229,7 @@ CREATE SEQUENCE filiacion_seq;
 
 CREATE TABLE filiacion (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('filiacion_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -241,7 +241,7 @@ CREATE SEQUENCE frontera_seq;
 
 CREATE TABLE frontera (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('frontera_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -253,7 +253,7 @@ CREATE SEQUENCE fotra_seq;
 
 CREATE TABLE fotra (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('fotra_seq')),
-	nombre VARCHAR(500) NOT NULL
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL
 );
 
 CREATE SEQUENCE funcionario_seq;
@@ -269,7 +269,7 @@ CREATE SEQUENCE organizacion_seq;
 
 CREATE TABLE organizacion (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('organizacion_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -281,7 +281,7 @@ CREATE SEQUENCE ffrecuente_seq;
 
 CREATE TABLE ffrecuente (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('ffrecuente_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	tfuente VARCHAR(25) NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
@@ -294,7 +294,7 @@ CREATE SEQUENCE presponsable_seq;
 
 CREATE TABLE presponsable (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('presponsable_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	papa INTEGER REFERENCES presponsable,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
@@ -307,7 +307,7 @@ CREATE SEQUENCE rangoedad_seq;
 
 CREATE TABLE rangoedad ( 
 	id INTEGER PRIMARY KEY DEFAULT(nextval('rangoedad_seq')),
-	nombre VARCHAR(20) NOT NULL,
+	nombre VARCHAR(20) COLLATE 'es_co_utf_8' NOT NULL,
 	rango VARCHAR(20) NOT NULL,
 	limiteinferior INTEGER NOT NULL DEFAULT '0',
 	limitesuperior INTEGER NOT NULL DEFAULT '0',
@@ -322,7 +322,7 @@ CREATE SEQUENCE region_seq;
 
 CREATE TABLE region (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('region_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -335,7 +335,7 @@ CREATE SEQUENCE resagresion_seq;
 
 CREATE TABLE resagresion (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('resagresion_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -347,7 +347,7 @@ CREATE SEQUENCE sectorsocial_seq;
 
 CREATE TABLE sectorsocial (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('sectorsocial_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -359,7 +359,7 @@ CREATE SEQUENCE tsitio_seq;
 
 CREATE TABLE tsitio (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('tsitio_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -371,8 +371,8 @@ CREATE SEQUENCE ubicacion_seq;
 
 CREATE TABLE ubicacion (
 	id INTEGER PRIMARY KEY DEFAULT (nextval('ubicacion_seq')),
-	lugar VARCHAR(260),
-	sitio VARCHAR(260),
+	lugar VARCHAR(500) COLLATE 'es_co_utf_8',
+	sitio VARCHAR(500) COLLATE 'es_co_utf_8',,
 	id_clase INTEGER,
 	id_municipio INTEGER,
 	id_departamento INTEGER REFERENCES departamento,
@@ -390,7 +390,7 @@ CREATE TABLE ubicacion (
 CREATE TABLE usuario (
 	id VARCHAR(15) PRIMARY KEY,
 	password VARCHAR(64) NOT NULL,
-	nombre VARCHAR(50),
+	nombre VARCHAR(50) COLLATE 'es_co_utf_8',
 	descripcion VARCHAR(50),
 	rol INTEGER CHECK (rol>='1' AND rol<='4'),
 	diasedicion INTEGER,
@@ -401,7 +401,7 @@ CREATE SEQUENCE vinculoestado_seq;
 
 CREATE TABLE vinculoestado (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('vinculoestado_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -413,7 +413,7 @@ CREATE SEQUENCE profesion_seq;
 
 CREATE TABLE profesion (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('profesion_seq')),
-	nombre VARCHAR(500) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -426,8 +426,8 @@ CREATE SEQUENCE persona_seq;
 
 CREATE TABLE persona (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('persona_seq')),
-	nombres VARCHAR(100) NOT NULL,
-	apellidos VARCHAR(100) NOT NULL,
+	nombres VARCHAR(100) COLLATE 'es_co_utf_8' NOT NULL,
+	apellidos VARCHAR(100) COLLATE 'es_co_utf_8' NOT NULL,
 	anionac         INTEGER,
 	mesnac          INTEGER CHECK (
 		mesnac IS NULL OR (mesnac>='1' AND mesnac<='12')
@@ -453,7 +453,7 @@ CREATE TABLE persona (
 
 CREATE TABLE trelacion (
 	id      CHAR(2) PRIMARY KEY,
-	nombre VARCHAR(50) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	dirigido BOOLEAN NOT NULL, ---false significa que persona2 también se re laciona con persona1 de la misma forma e.g papa serìa true mientras que hermanos serìa false.
 	observaciones VARCHAR(200),
 	fechacreacion DATE NOT NULL,
@@ -504,7 +504,7 @@ CREATE SEQUENCE grupoper_seq;
 
 CREATE TABLE grupoper (
 	id INTEGER PRIMARY KEY DEFAULT(nextval('grupoper_seq')),
-	nombre VARCHAR(150) NOT NULL,
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8' NOT NULL,
 	anotaciones VARCHAR(1000)
 );
 
