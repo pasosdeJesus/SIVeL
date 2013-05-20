@@ -342,8 +342,11 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             if ($where != "") {
                 $where .= " AND";
             }
-            $where .= " trim(trim(persona.nombres) || ' ' || " .
-                "trim(persona.apellidos)) ILIKE '%" . trim($pNomvic) . "%'";
+            $consNomVic =  trim(a_minusculas(sin_tildes($pNomvic)));
+            $consNomvic = preg_replace("/ +/", " & ", $consNomVic);
+            $where .= " to_tsvector('spanish', unaccent(persona.nombres) "
+                . " || ' ' || unaccent(persona.apellidos)) @@ "
+                . "to_tsquery('spanish', '$consNomvic')";
         }
 
         // Búsqueda por víctima no incluye combatientes para evitar sobreconteos

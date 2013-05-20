@@ -3,8 +3,8 @@
 CREATE SEQUENCE etiqueta_seq;
 CREATE TABLE etiqueta (
 	id      INTEGER PRIMARY KEY DEFAULT (nextval('etiqueta_seq')),
-	nombre VARCHAR(50) NOT NULL,
-	observaciones VARCHAR(200),
+	nombre VARCHAR(500) COLLATE 'es_co_utf_8'  NOT NULL,
+	observaciones VARCHAR(500),
 	fechacreacion	DATE NOT NULL DEFAULT '2001-01-01',
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );

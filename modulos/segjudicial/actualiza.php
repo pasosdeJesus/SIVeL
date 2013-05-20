@@ -178,6 +178,17 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Renombra campos');
 }
 
+$idac = '1.2-jl';
+if (!aplicado($idac)) {
+    foreach(array('tproceso', 'despacho', 'etapa', 'taccion', ) as $t) {
+        hace_consulta(
+            $db, "ALTER TABLE $t ALTER nombre "
+            . " TYPE VARCHAR(500) COLLATE es_co_utf_8", false
+        );
+    }
+    aplicaact($act, $idac, 'Localización');
+}
+
 echo "Actualizando indices<br>";
 actualiza_indice($db, 'tproceso');
 actualiza_indice($db, 'despacho');

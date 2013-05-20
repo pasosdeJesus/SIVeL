@@ -1,5 +1,5 @@
 <?php
-//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
+//  vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
  * Detecta víctimas repetidas
  *

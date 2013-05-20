@@ -2354,6 +2354,93 @@ if (!aplicado($idac)) {
 }
 
 
+$idac = '1.2-loc';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "CREATE COLLATION es_co_utf_8 (LOCALE = 'es_CO.UTF-8')", false
+    );
+    foreach(array(
+        'Antecedente', 'Categoria', 'Clase', 'Contexto',
+        'Departamento', 'Etnia', 'Ffrecuente', 'Filiacion', 'Frontera', 
+        'Fotra', 'Ffrecuente', 'Grupoper',
+        'Iglesia', 'Intervalo', 'Municipio', 'Organizacion', 
+        'Presponsable', 'Profesion', 'Rangoedad', 'Region', 'Resagresion', 
+        'Sectorsocial', 'Supracategoria', 'Tclase', 'Trelacion', 'Tsitio', 
+        'Tviolencia', 'Vinculoestado', 
+    ) as $t) {
+        hace_consulta(
+            $db, "ALTER TABLE $t ALTER nombre "
+            . " TYPE VARCHAR(500) COLLATE es_co_utf_8", false
+        );
+    }
+    hace_consulta(
+        $db, "ALTER TABLE persona ALTER nombres "
+        . " TYPE VARCHAR(100) COLLATE es_co_utf_8", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE persona ALTER apellidos "
+        . " TYPE VARCHAR(100) COLLATE es_co_utf_8", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ALTER nombre "
+        . " TYPE VARCHAR(50) COLLATE es_co_utf_8", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE ubicacion ALTER lugar "
+        . " TYPE VARCHAR(500) COLLATE es_co_utf_8", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE ubicacion ALTER sitio "
+        . " TYPE VARCHAR(500) COLLATE es_co_utf_8", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE pconsolidado ALTER rotulo "
+        . " TYPE VARCHAR(500) COLLATE es_co_utf_8", false
+    );
+
+    aplicaact($act, $idac, 'Localización');
+}
+
+
+$idac = '1.2-btc';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "CREATE EXTENSION unaccent", false
+    );
+    hace_consulta(
+        $db, "ALTER TEXT SEARCH DICTIONARY unaccent (RULES='unaccent')", false
+    );
+    hace_consulta(
+        $db, "ALTER FUNCTION unaccent(text) IMMUTABLE", false
+    );
+    hace_consulta(
+        $db, "CREATE INDEX persona_nombres_apellidos ON persona "
+        . " USING gin(to_tsvector('spanish', unaccent(persona.nombres) "
+        . "|| ' ' || unaccent(persona.apellidos)))", 
+        false
+    );
+    hace_consulta(
+        $db, "CREATE INDEX persona_apellidos_nombres ON persona "
+        . " USING gin(to_tsvector('spanish', unaccent(persona.apellidos) "
+        . " || ' ' || unaccent(persona.nombres)))", 
+        false
+    );
+    hace_consulta(
+        $db, "CREATE INDEX caso_titulo ON caso "
+        . " USING gin(to_tsvector('spanish', unaccent(caso.titulo))) ",
+        false
+    );
+    hace_consulta(
+        $db, "CREATE INDEX caso_memo ON caso "
+        . " USING gin(to_tsvector('spanish', unaccent(caso.memo))) ",
+        false
+    );
+
+    aplicaact($act, $idac, 'Búsqueda de textos');
+}
+
+
+
 /*$idac = '1.2-rt4';
 if (!aplicado($idac)) {
     hace_consulta(
