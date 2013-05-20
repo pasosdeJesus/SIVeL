@@ -772,7 +772,7 @@ class PagUbicacion extends PagBaseMultiple
         if (isset($r->latitud) && $r->latitud != '') {
             $dubicacion->latitud = (string)$r->latitud;
         }
-        if (isset($r->longitud) && $r->latitud != '') {
+        if (isset($r->longitud) && $r->longitud != '') {
             $dubicacion->longitud = (string)$r->longitud;
         }
         foreach (array('lugar', 'sitio') as $c) {

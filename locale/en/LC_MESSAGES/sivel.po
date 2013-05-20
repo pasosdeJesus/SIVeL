@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sivel 1.1cp1\n"
 "Report-Msgid-Bugs-To: vtamara@pasosdeJesus.org\n"
-"POT-Creation-Date: 2013-05-07 09:28-0500\n"
+"POT-Creation-Date: 2013-05-15 15:05-0500\n"
 "PO-Revision-Date: 2012-02-24 08:16-0500\n"
 "Last-Translator: Vladimir Tamara Patino <>\n"
 "Language-Team: English\n"
@@ -22,7 +22,7 @@ msgid "Definir etiquetas en fb_fieldLabels"
 msgstr "Define labels in fb_fieldLabels"
 
 #: PagActo.php:219 PagBaseMultiple.php:298 PagBaseSimple.php:92
-#: PagOtrasFuentes.php:111 PagPResponsables.php:126 PagUbicacion.php:189
+#: PagOtrasFuentes.php:111 PagPResponsables.php:126
 #: PagVictimaColectiva.php:170 PagVictimaIndividual.php:183
 msgid "Bug: idcaso no debería ser null"
 msgstr "Bug: idcaso should not be null"
@@ -153,9 +153,8 @@ msgstr "Search"
 msgid "Deje en blanco si es nuevo"
 msgstr "Leave blank if it is new"
 
-#: PagBasicos.php:739 PagPresentaRes.php:117 PagUbicacion.php:245
-#: PagUbicacion.php:246 consolidado.php:376 consolidado.php:380
-#: consulta_web.php:725 estadisticas.php:583
+#: PagBasicos.php:739 PagPresentaRes.php:117 consolidado.php:376
+#: consolidado.php:380 consulta_web.php:725 estadisticas.php:583
 #: DataObjects/Caso_ffrecuente.php:70 sitios/pordefecto/conf_int.php:206
 #: sitios/pordefecto/conf_int.php:213 sitios/pordefecto/conf_int.php:311
 #: sitios/pordefecto/conf_int.php:332 sitios/pordefecto/conf_int.php:397
@@ -322,9 +321,19 @@ msgstr "Entered Until:"
 msgid "Contexto"
 msgstr "Context"
 
+#: PagUbicacion.php:189
+#, fuzzy
+msgid "Bug: idcaso no deberÃ­a ser null"
+msgstr "Bug: idcaso should not be null"
+
 #: PagUbicacion.php:196
 msgid "No pudo consultarse caso"
 msgstr "Couldn't use case"
+
+#: PagUbicacion.php:245 PagUbicacion.php:246
+#, fuzzy
+msgid "UbicaciÃ³n"
+msgstr "Location"
 
 #: PagUbicacion.php:440
 msgid "Ver mapa"
@@ -501,7 +510,7 @@ msgstr "Failed"
 #: ResConsulta.php:1085 actualiza.php:2503 buscaRepetidos.php:60
 #: completaActos.php:81 consolidado.php:700 consulta_web.php:938
 #: detalle.php:83 detusyrol.php:71 estadisticas.php:355 estadisticas.php:616
-#: importaRelato.php:782 tabla.php:223 tablas_basicas.php:60 usyroles.php:72
+#: importaRelato.php:789 tabla.php:223 tablas_basicas.php:60 usyroles.php:72
 #: valida.php:119
 msgid "Men&uacute; Principal"
 msgstr "Main Menu"
@@ -884,61 +893,61 @@ msgstr "Missing support for Zlib in your PHP installation."
 msgid "Descomprima manualmente e importe el descomprimido"
 msgstr "Decompress manually and import the decompressed file"
 
-#: importaRelato.php:161
+#: importaRelato.php:163
 msgid "No pudo cargarse"
 msgstr "Couldn't load"
 
-#: importaRelato.php:227
+#: importaRelato.php:232
 msgid "No pudo insertar caso "
 msgstr "Couldn't insert case "
 
-#: importaRelato.php:231
+#: importaRelato.php:236
 msgid "idcaso es 0"
 msgstr "idcaso is 0"
 
-#: importaRelato.php:246
+#: importaRelato.php:251
 #, php-format
 msgid "Fuente extraida automaticamente de %s"
 msgstr "Source extracted automatically of %s"
 
-#: importaRelato.php:271 importaRelato.php:289
+#: importaRelato.php:276 importaRelato.php:294
 msgid "Organización responsable incluida automáticamente"
 msgstr "Responsible organization included automatically"
 
-#: importaRelato.php:407
-#, php-format
-msgid "Víctima: No hay definida persona con id '%s'"
+#: importaRelato.php:412
+#, fuzzy, php-format
+msgid "Acto: No hay definida persona con id '%s'"
 msgstr "Victim: There is not a person defined with id '%s'"
 
-#: importaRelato.php:501
+#: importaRelato.php:508
 msgid "No pudo insertar víctima"
 msgstr "Couldn't insert victim"
 
-#: importaRelato.php:558
+#: importaRelato.php:565
 msgid "No hay datos de p. resp."
 msgstr "There is no data of Alleg. Perp."
 
-#: importaRelato.php:578
+#: importaRelato.php:585
 msgid "No hay definida persona con id."
 msgstr "There is not definied a person with id."
 
-#: importaRelato.php:607
+#: importaRelato.php:614
 msgid "Acto: No pudo insertar acto col."
 msgstr "Act: Could not inserta col. act"
 
-#: importaRelato.php:614
+#: importaRelato.php:621
 msgid "No es individual ni colectiva"
 msgstr "Is not individual neither colective"
 
-#: importaRelato.php:618
+#: importaRelato.php:625
 msgid "Agresión particular vacía"
-msgstr "Empty partical agression"
+msgstr "Empty particular agression"
 
-#: importaRelato.php:653
+#: importaRelato.php:660
 msgid "Falta importaRelato en"
 msgstr "Missing importaRelato in"
 
-#: importaRelato.php:665 DataObjects/Trelacion.php:45
+#: importaRelato.php:672 DataObjects/Trelacion.php:45
 #: modulos/etiquetas/DataObjects/Caso_etiqueta.php:112
 #: modulos/etiquetas/DataObjects/Caso_etiqueta.php:131
 #: modulos/segjudicial/DataObjects/Accion.php:71
@@ -947,28 +956,28 @@ msgstr "Missing importaRelato in"
 msgid "Observaciones"
 msgstr "Observations"
 
-#: importaRelato.php:716
+#: importaRelato.php:723
 msgid "Se requiere módulo anexos con variable dir_anexos"
 msgstr "Module attachment (anexos) is required with variable dir_anexos"
 
-#: importaRelato.php:720
+#: importaRelato.php:727
 #, php-format
 msgid "El directorio '%s' debería permitir escritura"
 msgstr "The directory '%s' must have permission to write"
 
-#: importaRelato.php:727
+#: importaRelato.php:734
 msgid "Se requiere módulo etiquetas"
 msgstr "The labels (etiquetas) module is required"
 
-#: importaRelato.php:748
+#: importaRelato.php:755
 msgid "Importa Relatos"
 msgstr "Import Story"
 
-#: importaRelato.php:755
+#: importaRelato.php:762
 msgid "Archivo con relatos"
 msgstr "File with stories"
 
-#: importaRelato.php:772
+#: importaRelato.php:779
 msgid "Importar"
 msgstr "Import"
 

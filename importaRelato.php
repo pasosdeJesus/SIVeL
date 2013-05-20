@@ -158,6 +158,8 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         if (!$relatos) {
             $e = libxml_get_errors();
             var_dump($e);
+//            var_dump($cont);
+//            var_dump($relatos);
             die(_("No pudo cargarse") . " '" . $pArchivo . "'");
         }
 
@@ -197,6 +199,9 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 $db,
                 $obs, $r, 'intervalo', 'intervalo', '', 0
             );
+            if ($dcaso->id_intervalo == 0) {
+                $dcaso->id_intervalo = DataObjects_Intervalo::idSinInfo();
+            }
             $dcaso->grconfiabilidad = str_pad(
                 dato_en_obs(
                     $r,
@@ -404,11 +409,12 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     if (!isset($id_pers[(string)$victima->id_persona])) {
                         rep_obs(
                             sprintf(
-                                _("Víctima: No hay definida persona con id '%s'"),
+                                _("Acto: No hay definida persona con id '%s'"),
                                 (string)$victima->id_persona
                             ),
                             $obs
                         );
+                        break;
                     } else {
                         $dvictima = objeto_tabla('victima');
                         $dvictima->id_caso = (int)$idcaso;
