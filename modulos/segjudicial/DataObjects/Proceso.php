@@ -138,7 +138,9 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
         );
         $sel->setMainOptions($mainOptions);
 
-        $result = $db->query("SELECT id_tproceso, id, nombre FROM etapa ORDER BY 1,2");
+        $result = $db->query(
+            "SELECT id_tproceso, id, nombre FROM etapa ORDER BY 1,2"
+        );
         while ($result->fetchInto($row)) {
             $secOptions[$row[0]][$row[1]] = $row[2];
         }
