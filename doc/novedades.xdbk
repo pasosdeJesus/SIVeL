@@ -5,7 +5,7 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem>
-						<para>Para usuarios finales: Activado Soporte de Idiomas Nativos y UTF8. Permite especificar al usuario el idioma que prefiere para la interfaz y la traduce a ese idioma.  En el momento hay traducciones a español e inglés.  En consulta detallada en campos de texto (como nombre de víctima) se específica cualquiera con *.  Activada cotejación en español, el ordenamiento (por ejemplo en tablas básicos) ahora corresponde al del español.   Activada búsqueda completa de textos ignorando mayúsculas, minúsculas y tildes, usable al buscar por nombre en consulta web.
+						<para>Para usuarios finales: Activado Soporte de Idiomas Nativos y UTF8. Permite especificar al usuario el idioma que prefiere para la interfaz y la traduce a ese idioma.  En el momento hay traducciones a español e inglés.  En consulta detallada en campos de texto (como nombre de víctima) se específica cualquiera con *.  Activada cotejación en español, el ordenamiento (por ejemplo en tablas básicos) ahora corresponde al del español.   Activada búsqueda completa de textos ignorando mayúsculas, minúsculas y tildes, usable al buscar por nombre, por título y por descripción en consulta web.
 						</para>
 					</listitem>
 					<listitem>
