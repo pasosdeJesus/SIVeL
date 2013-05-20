@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <appendix id="call">
   <title>Public invitation to audit SIVeL 1.1</title> 
@@ -47,7 +47,7 @@
 				  web server with SSL in chroot,
 				  PostgreSQL and hardened PHP) and 
 				  uses data from
-				  <ulink url="http://www.nocheyniebla.org">Banco De Datos de Violencia Política, DH y DIH del CINEP</ulink>.
+				  <ulink url="http://www.nocheyniebla.org">Banco De Datos de Violencia PolÃ­tica, DH y DIH del CINEP</ulink>.
 			  </para>
 		  </listitem>
 		  <listitem>
@@ -82,9 +82,9 @@
 		  <listitem>
 			  <para>The data about yourself that you don't want to 
 				  publish in the list (for example your
-				  name), can be sent to Vladimir Támara Patiño
+				  name), can be sent to Vladimir TÃ¡mara PatiÃ±o
 				  vtamara@pasosdeJesus.org or by
-				  writing to Cr 5 #33B-02, Bogotá, Colombia 
+				  writing to Cr 5 #33B-02, BogotÃ¡, Colombia 
 				  (if you need to send encrypted information 
 				  you can use the PGP public key available
 				  at <ulink url="http://vtamara.pasosdeJesus.org/vtamara-pgp.txt"></ulink>).

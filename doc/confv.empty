@@ -1,31 +1,31 @@
-# Variables de configuraciÛn
+# Variables de configuraci√≥n
 
-# Las siguientes lÌneas definen variables de configuraciÛn que,
+# Las siguientes l√≠neas definen variables de configuraci√≥n que,
 # eventualmente, usted puede quedar cambiar para adaptar mejor estas fuentes
-# a sus necesidades --despuÈs de modificar este archivo ejecute conf.sh.  
+# a sus necesidades --despu√©s de modificar este archivo ejecute conf.sh.  
 
 # Note que la sintaxis de este archivo es apropiada para
-# ser usada por conf.sh, a continuaciÛn de cada variable debe haber
-# dos lÌneas con comentarios.  La primera describe la variable y la segunda
-# da una indicaciÛn de que hacer si ocurre alg˙n problema.
+# ser usada por conf.sh, a continuaci√≥n de cada variable debe haber
+# dos l√≠neas con comentarios.  La primera describe la variable y la segunda
+# da una indicaci√≥n de que hacer si ocurre alg√∫n problema.
 
 PROYECTO=docsivel
 # Nombre del proyecto
 #
 
 PRY_VERSION="1.2a1"
-# VersiÛn
+# Versi√≥n
 #
 
-PRY_DESC="DocumentaciÛn de SIVeL"
-# DescripciÛn corta
+PRY_DESC="Documentaci√≥n de SIVeL"
+# Descripci√≥n corta
 #
 
 FECHA_PROX="20/07/2011"
-# Fecha en la que esperamos liberar prÛxima versiÛn
+# Fecha en la que esperamos liberar pr√≥xima versi√≥n
 #
 
-URLSITE="http://sivel.sf.net/1.1/"
+URLSITE="http://sivel.sf.net/1.2/"
 # Sitio de desarrollo de este proyecto
 #
 
@@ -36,18 +36,18 @@ CVSPROYECTO="sivel.cvs.sourceforge.net:/cvsroot/sivel/doc"
 
 # Variables empleadas en fuentes
 
-# Las siguientes variables ser·n modificadas por conf.sh (normalmente no las debe editar)
+# Las siguientes variables ser√°n modificadas por conf.sh (normalmente no las debe editar)
 
 MES_ACT="octubre de 2002"
-# Mes de actualizaciÛn
+# Mes de actualizaci√≥n
 #
 
 FECHA_ACT=""
-# Fecha de la actualizaciÛn m·s reciente
+# Fecha de la actualizaci√≥n m√°s reciente
 #
 
 
-# UbicaciÛn y opciones 
+# Ubicaci√≥n y opciones 
 
 CATALOG_DSSSL=""
 # Catalogo de hojas DSSSL
@@ -58,7 +58,7 @@ DOCBOOK_DSSSL=""
 # Instale docbook-dsssl (http://docbook.sourceforge.net/projects/dsssl/)
 
 DOCBOOK_XML_DIR=""
-# VÌa del DTD de DocBook XML
+# V√≠a del DTD de DocBook XML
 # Disponible en http://www.docbook.org
 
 DOCBOOK_XSL=""
@@ -66,7 +66,7 @@ DOCBOOK_XSL=""
 # Instale docbook-xsl (http://docbook.sourceforge.net/projects/xsl/index.html)
 
 PAPEL="letter"
-# TamaÒo de papel, puede ser a4 o letter o alguno de los aceptados por gs
+# Tama√±o de papel, puede ser a4 o letter o alguno de los aceptados por gs
 # 
 
 REPASA_DOCBOOK_XSL_HTML="docbookrep_html.xsl"
@@ -74,24 +74,24 @@ REPASA_DOCBOOK_XSL_HTML="docbookrep_html.xsl"
 # 
 
 SGML_XML=""
-# DeclaraciÛn SGML de un documento XML
+# Declaraci√≥n SGML de un documento XML
 # Disponible junto con Docbook-DSSSL
 
 
 
-# MÈtodos
+# M√©todos
 
 ACT_PROC="act-scp"
-# Regla para actualizar sitio de publicaciÛn
+# Regla para actualizar sitio de publicaci√≥n
 # Las que hay por defecto son act-scp y act-ncftpput
 
 HTML_PROC="dbrep_html_xsltproc"
 # Regla para generar HTML
-# Las que est·n por defecto son: dbrep_html_xsltproc para generar en varios HTML con XSLTPROC, dbrep_html_jade para generar en varias p·ginas con Jade
+# Las que est√°n por defecto son: dbrep_html_xsltproc para generar en varios HTML con XSLTPROC, dbrep_html_jade para generar en varias p√°ginas con Jade
 
 PS_PROC="dbrep_ps_jade"
 # Regla para generar PostScript
-# Las que est·n por defecto son: dbrep_html_xsltproc para generar en varios HTML con XSLTPROC, dbrep_html_jade para generar en varias p·ginas con Jade
+# Las que est√°n por defecto son: dbrep_html_xsltproc para generar en varios HTML con XSLTPROC, dbrep_html_jade para generar en varias p√°ginas con Jade
 
 PDF_PROC="dbrep_pdf_ps"
 # Regla para generar PDF
@@ -103,7 +103,7 @@ PDF_PROC="dbrep_pdf_ps"
 
 AWK=""
 # Interprete POSIX Awk.  Empleado para transformar textos.
-# Herramienta tÌpica en sistemas Unix.
+# Herramienta t√≠pica en sistemas Unix.
 
 COLLATEINDEX=""
 # Programa auxiliar de DocBook para generar indices
@@ -115,14 +115,14 @@ CONVERT=""
 
 CP=""
 # Para copiar archivos
-# Herramienta tÌpica en sistemas Unix.
+# Herramienta t√≠pica en sistemas Unix.
 
 CVS=""
 # Para control de versiones
 # Sugerido http://www.opencvs.org
 
 DOT="dot-falta"
-# Convierte grafo en formato dotty a gr·fica
+# Convierte grafo en formato dotty a gr√°fica
 # Hace parte del paquete graphviz http://graphviz.org
 
 DVIPS=""
@@ -131,22 +131,22 @@ DVIPS=""
 
 ED=""
 # Line oriented text editor.  Empleado para transformar textos.
-# Herramienta tÌpica en sistemas Unix.
+# Herramienta t√≠pica en sistemas Unix.
 
 FIG2DEV="fig2dev-falta"
-# Convierte del formato de Xfig a gr·fica
+# Convierte del formato de Xfig a gr√°fica
 # Hace parte del paquete transfig
 
 FIND=""
 # Para ubicar archivos
-# Herramienta tÌpica en sistemas Unix.
+# Herramienta t√≠pica en sistemas Unix.
 
 GZIP=""
 # Compresor.
-# Herramienta tÌpica en sistemas Unix.
+# Herramienta t√≠pica en sistemas Unix.
 
 ISPELL=""
-# Corrector ortogr·fico internacional.
+# Corrector ortogr√°fico internacional.
 # http://fmg-www.cs.ucla.edu/fmg-members/geoff/ispell.html
 
 JADE=""
@@ -159,18 +159,18 @@ JADETEX=""
 
 MAKE=""
 # Ejecuta comandos requeridos
-# Herramienta est·ndar en sistemas Unix
+# Herramienta est√°ndar en sistemas Unix
 
 MKDIR=""
 # Crea directorios
-# Herramienta est·ndar en sistemas Unix
+# Herramienta est√°ndar en sistemas Unix
 
 MV=""
 # Mueve/renombra archivos
-# Herramienta est·ndar en sistemas Unix
+# Herramienta est√°ndar en sistemas Unix
 
 NCFTPPUT=""
-# Programa para transferir archivos desde lÌnea de comandos usando el protocolo FTP
+# Programa para transferir archivos desde l√≠nea de comandos usando el protocolo FTP
 # Es una herramienta del proyecto ncftp cliente http://www.ncftpd.com/
 
 PDFJADETEX=""
@@ -179,7 +179,7 @@ PDFJADETEX=""
 
 PERL=""
 # Interprete del lenguaje Perl.
-# Herramienta tÌpica en sistemas Unix.  http://www.perl.org
+# Herramienta t√≠pica en sistemas Unix.  http://www.perl.org
 
 PS2PDF=""
 # Conversor de PostScript a PDF
@@ -187,19 +187,19 @@ PS2PDF=""
 
 RM=""
 # Para eliminar archivos
-# Herramienta tÌpica en sistemas Unix.
+# Herramienta t√≠pica en sistemas Unix.
 
 SCP=""
-# Programa para transferir archivos desde la lÌnea de comandos usando SSH
+# Programa para transferir archivos desde la l√≠nea de comandos usando SSH
 # Es una herramienta del proyecto ssh  http://www.openssh.org
 
 SED=""
 # Stream Editor.  Empleado para transformar textos.
-# Herramienta tÌpica en sistemas Unix. 
+# Herramienta t√≠pica en sistemas Unix. 
 
 TAR=""
 # Empaquetador de archivos tar.
-# Herramienta tÌpica en sistemas Unix.
+# Herramienta t√≠pica en sistemas Unix.
    
 TIDY=""
 # Validador de HTML.
@@ -207,7 +207,7 @@ TIDY=""
 
 TOUCH=""
 # touch
-# Herramienta tÌpica en sistemas Unix. 
+# Herramienta t√≠pica en sistemas Unix. 
 
 W3M=""
 # Navegador de web en texto.
@@ -219,7 +219,7 @@ W3M_OPT=""
 
 XMLLINT=""
 # Validador de XML
-# xmllint est· disponible junto con xsltproc en http://xmlsoft.org/XSLT/ 
+# xmllint est√° disponible junto con xsltproc en http://xmlsoft.org/XSLT/ 
 
 XSLTPROC=""
 # Procesador de XSL xsltproc
@@ -227,21 +227,21 @@ XSLTPROC=""
 
 ZIP=""
 # Compresor zip.
-# Herramienta tÌpica en sistemas Unix.
+# Herramienta t√≠pica en sistemas Unix.
 
 
 
-# Rutas de instalaciÛn
+# Rutas de instalaci√≥n
 
 INSBIN="/usr/local/bin"
-# Directorio de instalaciÛn de binarios
+# Directorio de instalaci√≥n de binarios
 #
 
 INSDOC="/usr/local/share/doc/$PROYECTO"
-# Directorio para instalaciÛn de documentaciÛn Postscript y HTML
+# Directorio para instalaci√≥n de documentaci√≥n Postscript y HTML
 #
 
 INSDATA="/usr/local/share/$PROYECTO"
-# Directorio para instalaciÛn de datos del proyecto
+# Directorio para instalaci√≥n de datos del proyecto
 #
 

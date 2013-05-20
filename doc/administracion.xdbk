@@ -1,50 +1,50 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <chapter id="administracion" role="periodo" userlevel="p1">
-	<title>Administración</title>
+	<title>AdministraciÃ³n</title>
   <highlights role="logros">
   <itemizedlist>
-	  <listitem role="logro" id="ltablasbasicas"><para>Añade y elimina registros
-			  a tablas básicas.
+	  <listitem role="logro" id="ltablasbasicas"><para>AÃ±ade y elimina registros
+			  a tablas bÃ¡sicas.
 	  </para></listitem>
 	  <listitem role="logro" id="lcopias"><para>Puede hacer volcados de
 			  la base de  datos y sacar copias de forma segura.
 	  </para></listitem>
-	  <listitem role="logro" id="lconsultaweb"><para>Configura consulta web pública y retroalimentación por correo y puede descifrar los mensajes que
+	  <listitem role="logro" id="lconsultaweb"><para>Configura consulta web pÃºblica y retroalimentaciÃ³n por correo y puede descifrar los mensajes que
 			  reciba de la misma.</para></listitem>
 	  <listitem role="logro" id="logroa3"><para>Puede copiar los datos
-			  públicos de una instalación de SIVeL a otra.
+			  pÃºblicos de una instalaciÃ³n de SIVeL a otra.
     	  </para></listitem>
   </itemizedlist>
   </highlights>
-  <para>Un usuario con el rol de administrador, podrá realizar diversas
+  <para>Un usuario con el rol de administrador, podrÃ¡ realizar diversas
 	 operaciones desde la interfaz de SIVeL: administrar 
-	  usuarios, modificar tablas básicas (con opciones de algunos de los 
+	  usuarios, modificar tablas bÃ¡sicas (con opciones de algunos de los 
 	  campos de la ficha). Desde su cuenta en el sistema operativo
-	  podrá: sacar copias de respaldo manualmente, 
-	  programar copias automáticas y recuperar copias de respaldo
-	  (en la misma base o en otra nueva). También consideramos que
+	  podrÃ¡: sacar copias de respaldo manualmente, 
+	  programar copias automÃ¡ticas y recuperar copias de respaldo
+	  (en la misma base o en otra nueva). TambiÃ©n consideramos que
 	  debe realizar otras labores con el sistema operativo y la
 	  infraestructura de red como: actualizar SIVeL y la 
-	  distribución adJ del sistema operativo cuando se publiquen nuevas 
+	  distribuciÃ³n adJ del sistema operativo cuando se publiquen nuevas 
 	  versiones (cada 6 meses); auditar seguridad del servidor y 
 	  solucionar problemas en caso de fallas.
-	  Consideramos que también es importante para el administrador  
-	  sugerir mejoras a la infraestructura tecnológica 
+	  Consideramos que tambiÃ©n es importante para el administrador  
+	  sugerir mejoras a la infraestructura tecnolÃ³gica 
 	  (ver <xref linkend="infraestructura-tecnologica"/>) de su
-	  organización, capacitar y dar soporte a los usuarios y 
+	  organizaciÃ³n, capacitar y dar soporte a los usuarios y 
 	  en general consideramos que debe ayudar a garantizar que la 
-	  base esté disponible permanentemente sólo para los usuarios 
-	  autorizados de la organización.
+	  base estÃ© disponible permanentemente sÃ³lo para los usuarios 
+	  autorizados de la organizaciÃ³n.
   </para>
   <para>En la interfaz web un usuario que no tenga el rol de
-	  Administrador no podrá ingresar a modificar tablas básicas ni 
+	  Administrador no podrÃ¡ ingresar a modificar tablas bÃ¡sicas ni 
 	  a manejar usuarios. </para>
 
   <sect1 id="admin1">
 	  <title>Labores administrativas desde la interfaz web</title>
   <sect2 id="tablasbasicas">
-		<title>Tablas básicas</title>
+		<title>Tablas bÃ¡sicas</title>
 		<para>Pueden configurarse las tablas presentadas en la
 			siguiente figura:
 		</para>
@@ -52,12 +52,12 @@
         <screenshot><mediaobject><imageobject>
         <imagedata fileref="ptablasbasicas.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
         <imageobject><imagedata fileref="ptablasbasicas.png" format="PNG" align="center"></imagedata></imageobject>
-        <textobject><phrase>Tablas Básicas</phrase></textobject></mediaobject>
+        <textobject><phrase>Tablas BÃ¡sicas</phrase></textobject></mediaobject>
         </screenshot>
   </informalfigure>
 		<para>
-			Al elegir una de las tablas, verá los registros
-			que tiene y podrá bien crear uno nuevo (con
+			Al elegir una de las tablas, verÃ¡ los registros
+			que tiene y podrÃ¡ bien crear uno nuevo (con
 			el enlace <literal>Nuevo</literal> al final
 			de los registros) o bien elegir un registro
 			para actualizarlo o para eliminarlo.  La
@@ -69,19 +69,19 @@
         <screenshot><mediaobject><imageobject>
         <imagedata fileref="ptablafrecuente.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
         <imageobject><imagedata fileref="ptablafrecuente.png" format="PNG" align="center"></imagedata></imageobject>
-	<textobject><phrase>Edición de la tabla básica Fuentes Frecuentes</phrase></textobject></mediaobject>
+	<textobject><phrase>EdiciÃ³n de la tabla bÃ¡sica Fuentes Frecuentes</phrase></textobject></mediaobject>
         </screenshot>
   </informalfigure>
 
-  <para>Para no perder compatibilidad entre su instalación
+  <para>Para no perder compatibilidad entre su instalaciÃ³n
 	  de SIVeL y la de otras organizaciones, pero a la vez para
 	  permitirle personalizar el sistema a sus necesidades de
-	  sistematización de información, sugerimos no cambiar ni eliminar
-	  los registros de las tablas básicas, sino agregar
-	  los que necesite su organización y deshabilitar (poniendo una
-	  fecha de deshabilitación) los registros que no requiera.   En la 
+	  sistematizaciÃ³n de informaciÃ³n, sugerimos no cambiar ni eliminar
+	  los registros de las tablas bÃ¡sicas, sino agregar
+	  los que necesite su organizaciÃ³n y deshabilitar (poniendo una
+	  fecha de deshabilitaciÃ³n) los registros que no requiera.   En la 
 	  siguiente figura se
-	  presenta el formulario para añadir una nueva fuente frecuente:
+	  presenta el formulario para aÃ±adir una nueva fuente frecuente:
   	  </para>
 <informalfigure>
         <screenshot><mediaobject><imageobject>
@@ -91,53 +91,53 @@
         </screenshot>
   </informalfigure>
 
-  <para>Cada entrada (i.e registro) de una tabla básica tiene una llave, 
-	       que puede constar de uno o más datos (i.e campos) del registro.
-	     Al actualizar tablas básicas tenga en cuenta que no pueden
-	     modificarse las llaves. Por ejemplo en una categoría ya 
-	     ingresada no es posible modificar supracategoría o fecha
+  <para>Cada entrada (i.e registro) de una tabla bÃ¡sica tiene una llave, 
+	       que puede constar de uno o mÃ¡s datos (i.e campos) del registro.
+	     Al actualizar tablas bÃ¡sicas tenga en cuenta que no pueden
+	     modificarse las llaves. Por ejemplo en una categorÃ­a ya 
+	     ingresada no es posible modificar supracategorÃ­a o fecha
 	     de violencia.  Si requiere actualizar una llave en un registro,
-	     debe primero eliminarlo de la tabla básica y después volverlo a 
-	     añadir haciendo los cambios apropiados.</para>
-	<para>En general si añade datos a una tabla cuya llave sea un dato 
-	     numérico, no necesitará elegir un número para la llave pues
-	     el sistema lo hará automáticamente.</para>
+	     debe primero eliminarlo de la tabla bÃ¡sica y despuÃ©s volverlo a 
+	     aÃ±adir haciendo los cambios apropiados.</para>
+	<para>En general si aÃ±ade datos a una tabla cuya llave sea un dato 
+	     numÃ©rico, no necesitarÃ¡ elegir un nÃºmero para la llave pues
+	     el sistema lo harÃ¡ automÃ¡ticamente.</para>
 
   <para>
-	  En general la información de cada tabla básica es autoexplicativa,
-	  algunas que pueden requerir aclaración adicional son:
+	  En general la informaciÃ³n de cada tabla bÃ¡sica es autoexplicativa,
+	  algunas que pueden requerir aclaraciÃ³n adicional son:
 	  <itemizedlist>
 		  <listitem>
-			  <para>Categoría:  No se numeran
-				  automáticamente para que cada organización
-				  pueda proponer su codificación.
-				  El campo "Contada también como 
-				  Categoría" permite
-				  indicar que categorías se replican, para
+			  <para>CategorÃ­a:  No se numeran
+				  automÃ¡ticamente para que cada organizaciÃ³n
+				  pueda proponer su codificaciÃ³n.
+				  El campo "Contada tambiÃ©n como 
+				  CategorÃ­a" permite
+				  indicar que categorÃ­as se replican, para
 				  excluirlas de requerirse en conteos
 				  (ver <xref linkend="cconteos"></xref>).
- 	Por ejemplo toda ejecución extrajudicial
-			por persecución política (A10) también es un 
+ 	Por ejemplo toda ejecuciÃ³n extrajudicial
+			por persecuciÃ³n polÃ­tica (A10) tambiÃ©n es un 
 			Homicidio Intencional a Persona Protegida (D701) por lo
-			que en el registro A10 de la tabla Categoría el campo 
-			"Contada también como Categoría" debe ser 701.
+			que en el registro A10 de la tabla CategorÃ­a el campo 
+			"Contada tambiÃ©n como CategorÃ­a" debe ser 701.
 			  </para>
 		  </listitem>
 		  <listitem>
       <para>En la tabla <literal>Clase</literal> tenga en cuenta que no 
 	      es posible actualizar el municipio ---porque hace parte de la 
 	      llave primaria.  Si le resulta indispensable modificarlo,
-	      elimine primero el registro y añado uno nuevo con los
+	      elimine primero el registro y aÃ±ado uno nuevo con los
 	      datos corregidos. </para>
 		  </listitem>
 		  <listitem>
 			  <para>La tabla 
 				  <literal>Presuntos Responsables</literal>
-				  describe una jerarquía de estructuras,
+				  describe una jerarquÃ­a de estructuras,
 				  por ejemplo Paramilitares incluye AUC,
 				  ACCU, AUTODEFENSAS DEL CASANARE, etc; como
 				  puede visualizar al ingresar a esta tabla
-				  básica.</para>
+				  bÃ¡sica.</para>
 			  <para>
 Al ingresar o editar un presunto responsable
 se debe especificar si es subestructura
@@ -146,7 +146,7 @@ conceptual por defecto los presuntos
 responsable
 que no son subestructura son:
 POLO ESTATAL, POLO INSURGENTE,  OTROS y
-SIN INFORMACIÓN.  Los demás presuntos 
+SIN INFORMACI&Oacute;N.  Los demÃ¡s presuntos 
 responsables se clasifican como 
 subestructuras de estos o de otros que a su vez descienden de estos.
 No deben generarse ciclos al especificar subestructuras --por ejemplo
@@ -160,7 +160,7 @@ que un presunto responsable A sea subestructura de B y B
 	<sect2 id="usuarios">
 		<title>Usuarios</title>
 		<para>
-			Esta opción del menú presenta el listado de usuarios
+			Esta opciÃ³n del menÃº presenta el listado de usuarios
 			de la base (como se presenta en la figura)
 		</para>
 <informalfigure>
@@ -171,9 +171,9 @@ que un presunto responsable A sea subestructura de B y B
         </screenshot>
   </informalfigure>
 		<para>
-			Podrá añadir nuevos usuarios y sus contraseñas
+			PodrÃ¡ aÃ±adir nuevos usuarios y sus contraseÃ±as
 			(como se presenta en la siguiente figura), o cambiar 
-			datos, rol y contraseñas de usuarios ya existentes.
+			datos, rol y contraseÃ±as de usuarios ya existentes.
 		</para>
   <informalfigure>
         <screenshot><mediaobject><imageobject>
@@ -193,18 +193,18 @@ que un presunto responsable A sea subestructura de B y B
 	  <para>SIVeL 1.1 es multisitio es decir en el mismo directorio de 
 		  fuentes pueden configurarse diversas instancias de SIVeL 
 		  cada una con su base de datos.  
-		  Esto facilita la actualización de las fuentes.  </para>
+		  Esto facilita la actualizaciÃ³n de las fuentes.  </para>
 	  <para>Como las
-operaciones que se presentan a continuación deben realizarse desde una
+operaciones que se presentan a continuaciÃ³n deben realizarse desde una
 terminal con un interprete de comandos, recomendamos que lea al respecto
 (ver por ejemplo <xref linkend="basico_OpenBSD"></xref>) y que conozca la 
-ubicación de las fuentes de SIVeL y
+ubicaciÃ³n de las fuentes de SIVeL y
 del sitio o sitios que maneje.  Por ejemplo en adJ las fuentes de SIVeL
-estarán en <filename>/var/www/htdocs/sivel</filename>,  el sitio
-por defecto será <filename>sitios/sivel</filename> (o con ruta completa
+estarÃ¡n en <filename>/var/www/htdocs/sivel</filename>,  el sitio
+por defecto serÃ¡ <filename>sitios/sivel</filename> (o con ruta completa
 <filename>/var/www/htdocs/sivel/sitios/sivel</filename>).</para>
 	<sect2 id="copias-respaldo">
-		<title>Copias de respaldo y restauración</title>
+		<title>Copias de respaldo y restauraciÃ³n</title>
 		<para>
 			Hay varias herramientas relacionadas con copias
 			de respaldo que el administrador ejecuta desde 
@@ -217,11 +217,11 @@ por defecto será <filename>sitios/sivel</filename> (o con ruta completa
 						<para>Saca volcado de la base 
 (i.e un volcado es un archivo con instrucciones SQL para
 reconstruir la base completa), lo almacena 
-junto con los del último mes en el directorio de respaldo configurado 
+junto con los del Ãºltimo mes en el directorio de respaldo configurado 
 --por defecto es <filename>/var/www/resbase</filename> que en OpenBSD adJ 
-está cifrado.  </para>
+estÃ¡ cifrado.  </para>
 <warning><para>Los volcados generados con <filename>bin/pgdump.sh</filename>
-		incluyen las fuentes de información.  Debe mantenerlos 
+		incluyen las fuentes de informaciÃ³n.  Debe mantenerlos 
 		cifrados y con permisos que no permitan lectura
 		por parte de usuarios que no administren.</para></warning>
 
@@ -229,24 +229,24 @@ está cifrado.  </para>
 				</varlistentry>
 				<varlistentry><term><filename>../../bin/respaldo.sh</filename></term>
 					<listitem><para>Almacena volcado 
-junto con los de última semana y opcionalmente lo copia de forma segura (con 
+junto con los de Ãºltima semana y opcionalmente lo copia de forma segura (con 
 <literal>ssh</literal>) a otro(s) computador(es).</para>
-<warning><para>Las copias de envíe manténgalas  en directorios cifrados
+<warning><para>Las copias de envÃ­e mantÃ©ngalas  en directorios cifrados
 		en los computadores donde lleguen.
 </para></warning>
 <para>Especifique cada computador destino y usuario en la variable
 <literal>$rremotos</literal> separandolos con espacio, por ejemplo 
-un sólo destino sería 
+un sÃ³lo destino serÃ­a 
 <literal>jaime@miservidor.miong.org:copiascifradas/</literal>.  Para
-que pueda hacer automático el copiado, genere un par de llaves RSA sin
+que pueda hacer automÃ¡tico el copiado, genere un par de llaves RSA sin
 clave con <literal>ssh-keygen</literal>, configure la llave
 privada en la variable <literal>$llave</literal> y agregue la
-llave pública en el archivo <filename>~/.ssh/authorized_keys</filename>
-de la cuenta a la que enviará las copias.
+llave pÃºblica en el archivo <filename>~/.ssh/authorized_keys</filename>
+de la cuenta a la que enviarÃ¡ las copias.
 </para></listitem>
 				</varlistentry>
 				<varlistentry><term><filename>../../bin/restaura.sh</filename></term>
-					<listitem><para>Que permite restaurar un volcado SQL de la base de datos. Por ejemplo si el volcado está ubicado en <filename>/mnt/usb/volcado.sql</filename> para incluirlo en la base basta:
+					<listitem><para>Que permite restaurar un volcado SQL de la base de datos. Por ejemplo si el volcado estÃ¡ ubicado en <filename>/mnt/usb/volcado.sql</filename> para incluirlo en la base basta:
 							<screen>
 cd /var/www/htdocs/sivel/sitios/sivel
 ../../bin/restaura.sh /mnt/usb/volcado.sql
@@ -254,7 +254,7 @@ cd /var/www/htdocs/sivel/sitios/sivel
 <warning><para>Los volcados generados con <filename>bin/pgdump.sh</filename>
 		incluyen instrucciones para borrar las
 		tablas existentes antes de insertar los registros volcados.
-		Es decir al restaurarlos borran la información que hubiera
+		Es decir al restaurarlos borran la informaciÃ³n que hubiera
 		en la base.  
 </para></warning>
 Es posible editar los volcados antes de restaurarlos, para eso deben 
@@ -263,7 +263,7 @@ descomprimirse antes, por ejemplo:
 cp /var/www/resbase/sivel-dump-22.sql.gz /tmp/volcado.sql.gz
 gzip -d /tmp/volcado.sql.gz
 </screen>
-Si requiere editar un volcado para eliminar las líneas que borran
+Si requiere editar un volcado para eliminar las lÃ­neas que borran
 las tablas  (i.e las de la forma <literal>DROP TABLE</literal>) puede
 emplear:
 		<screen>
@@ -316,11 +316,11 @@ de respaldo generada con esta herramienta.
 	<sect3 id="volcado">
 		<title>Procedimiento de volcado en detalle</title>
 		<para>
-	Si no tiene una instalación de adJ estándar ajuste variables
+	Si no tiene una instalaciÃ³n de adJ estÃ¡ndar ajuste variables
 	relacionadas con volcados en el archivo
 	<filename>conf.php</filename> de su sitio,
 	en particular la variable <literal>rlocal</literal>
-	que debe indicar el directorio en el que quedarán los volcados
+	que debe indicar el directorio en el que quedarÃ¡n los volcados
 	generados con <filename>../../bin/pgdump.sh</filename>.
 		</para>
 		<para>
@@ -330,21 +330,21 @@ comandos:
 $ cd /var/www/htdocs/sivel/sitios/sivel
 $ ../../bin/pgdump.sh
 </screen>
-Al ejecutarlo se generará un archivo  de la forma
+Al ejecutarlo se generarÃ¡ un archivo  de la forma
 <filename>/var/www/resbase/sivel-dump-08.sql.gz</filename>, en lugar de
 <filename>/var/www/resbase/</filename> el directorio que haya configurado y
-en lugar de <literal>08</literal> el día del mes.
+en lugar de <literal>08</literal> el dÃ­a del mes.
 		</para>
 	</sect3>
 
     <sect3 id="restauracd">
-		<title>Procedimiento de restauración a partir de una copia en CD</title>
+		<title>Procedimiento de restauraciÃ³n a partir de una copia en CD</title>
         <para>
             
             <orderedlist>
                 <listitem>
                     <para>Saque una copia de respaldo de la base del sitio
-                        donde restaurará. Por ejemplo empleando rutas y
+                        donde restaurarÃ¡. Por ejemplo empleando rutas y
                         sitio por defecto:
                         <screen>
 cd /var/www/htdocs/sivel/sitios/sivel
@@ -358,7 +358,7 @@ cd /var/www/htdocs/sivel/sitios/sivel
                 </listitem>
                 <listitem>
                     <para>Ubiquese en el directorio del sitio en el que
-                        restaurará la base y ejecute importacd. Por ejemplo
+                        restaurarÃ¡ la base y ejecute importacd. Por ejemplo
                         empleando las rutas y sitios por defecto:
                         <screen>
 cd /var/www/htdocs/sivel/sitios/sivel
@@ -368,11 +368,11 @@ cd /var/www/htdocs/sivel/sitios/sivel
                 </listitem>
                 <listitem>
                     <para>Siga las instrucciones y cuando le presente
-                        los volcados disponibles eliga el más reciente cuyo
-                    tamaño no sea 0.</para>
+                        los volcados disponibles eliga el mÃ¡s reciente cuyo
+                    tamaÃ±o no sea 0.</para>
             </listitem>
             <listitem>
-                <para>Pruebe los datos que restauró.</para>
+                <para>Pruebe los datos que restaurÃ³.</para>
             </listitem>
             </orderedlist>
 
@@ -380,23 +380,23 @@ cd /var/www/htdocs/sivel/sitios/sivel
     </sect3>
 	
 	<sect3 id="respaldo-diario">
-		<title>Configuración de respaldo automático diario</title>
+		<title>ConfiguraciÃ³n de respaldo automÃ¡tico diario</title>
 		<para>
-Se recomienda que configure ejecución diaria de <filename>bin/resptodositio.sh</filename>.  Esto se hace por defecto en OpenBSD adJ con una tarea cron a 
+Se recomienda que configure ejecuciÃ³n diaria de <filename>bin/resptodositio.sh</filename>.  Esto se hace por defecto en OpenBSD adJ con una tarea cron a 
 las 12:00M.  </para>
 <para>Si desea verificar la tarea cron o configurarla en un sistema tipo
 	Unix, desde la cuenta que administra SIVeL en una terminal ejecute: 
 <screen>
 crontab -e
 	</screen>
-	Esto le permitirá editar un archivo al cual debe añadir una
-	línea, guardarlo y salir.  La línea es:
+	Esto le permitirÃ¡ editar un archivo al cual debe aÃ±adir una
+	lÃ­nea, guardarlo y salir.  La lÃ­nea es:
 	<screen>
 0 12 * * * cd /var/www/htdocs/sivel/ ; sudo rm /tmp/respaldo-*; ./bin/resptodositio.sh > /tmp/respaldo-stdout 2> /tmp/respaldo-stderr
 	</screen>
-	que indica ejecución de 3 ordenes todos los días del mes a
+	que indica ejecuciÃ³n de 3 ordenes todos los dÃ­as del mes a
 	las 12:00M. Es recomendable que pruebe las 3 ordenes
-    programadas ejecutando desde la línea de comandos y como el usuario
+    programadas ejecutando desde la lÃ­nea de comandos y como el usuario
     al cual programa la tarea:
 	<screen>
 cd /var/www/htdocs/sivel/ 
@@ -405,7 +405,7 @@ sudo rm /tmp/respaldo-*
 	</screen>
 	Tras ejecutarlas deben crearse volcados en
 	<filename>/var/www/resbase</filename> y transmitirse volcados
-	si lo configuró.
+	si lo configurÃ³.
 	Si no opera como esperaba revise los archivos
 	<filename>/tmp/respaldo-stdout</filename> y
 	<filename>/tmp/respaldo-stderr</filename>.
@@ -413,32 +413,32 @@ sudo rm /tmp/respaldo-*
 	</sect3>
 	</sect2>
 	<sect2 id="publicacion-web">
-		<title>Publicación web</title>
-		<para>Suponemos que tiene una segunda instalación de
+		<title>PublicaciÃ³n web</title>
+		<para>Suponemos que tiene una segunda instalaciÃ³n de
 			SIVeL --preferiblemente en un computador diferente
-			al de la base principal-- para consulta pública por
-			el web de los datos públicos (i.e sin fuentes).
-			Para actualizar esa segunda instalación debe:
+			al de la base principal-- para consulta pÃºblica por
+			el web de los datos pÃºblicos (i.e sin fuentes).
+			Para actualizar esa segunda instalaciÃ³n debe:
 			<orderedlist>
 				<listitem>
-					<para>En la instalación fuente
-asegúrese de configurar computador destino en la variable
+					<para>En la instalaciÃ³n fuente
+asegÃºrese de configurar computador destino en la variable
 <literal>$maquinaweb</literal>, por ejemplo <literal>miservidor.miong.org</literal>.
 El usuario destino en <literal>$usuarioact</literal> y el
-directorio donde quedará un volcado en el destino (la información
-que llegará a este directorio no incluye fuentes por lo que no
+directorio donde quedarÃ¡ un volcado en el destino (la informaciÃ³n
+que llegarÃ¡ a este directorio no incluye fuentes por lo que no
 requiere estar cifrada), por ejemplo <literal>/var/www/resbase</literal>.
 					</para>
 				</listitem>
 				<listitem>
-					<para>En la instalación fuente como
+					<para>En la instalaciÃ³n fuente como
 usuario administrador de SIVeL ejecute:
 						<screen>
 cd /var/www/htdocs/sivel/sitios/sivel
 ../../bin/actweb.sh
 						</screen>
-Este script generará un volcado, del cual eliminará las fuentes y
-enviará el volcado resultante con <literal>scp</literal> al destino 
+Este script generarÃ¡ un volcado, del cual eliminarÃ¡ las fuentes y
+enviarÃ¡ el volcado resultante con <literal>scp</literal> al destino 
 configurado con un nombre de la forma
 <literal>web-sf-sinf-22.sql.gz</literal>.
 					</para>
@@ -454,28 +454,28 @@ cd /var/www/htdocs/sivel/sitios/sivel
 					</para>
 				</listitem>
 				<listitem>
-                    <para>Pruebe el nuevo sitio.  También puede realizar
-                        algunas operaciones de verificación como contar
+                    <para>Pruebe el nuevo sitio.  TambiÃ©n puede realizar
+                        algunas operaciones de verificaciÃ³n como contar
                         cantidad de registros en cada tabla en fuente
-                        y en destino (ver siguiente sección).
+                        y en destino (ver siguiente secciÃ³n).
 					</para>
 				</listitem>
 			</orderedlist>
 		</para>
 		<!--		<para>
 			Otra posibilidad Desde Consulta Externa eliga el rango de datos 
-		       que exportará y publicará	Hay varias herramientas relacionadas con copias
+		       que exportarÃ¡ y publicarÃ¡	Hay varias herramientas relacionadas con copias
 	       </para> -->
        </sect2>	
        	<sect2 id="otras-operaciones-con-base">
             <title>Otras operaciones con la Base de Datos</title>
             <para>
-                Puede administrar usuarios desde la línea de comandos en
+                Puede administrar usuarios desde la lÃ­nea de comandos en
                 el directorio de un sitio con:
                 <variablelist>
                     <varlistentry><term><filename>../../bin/agus.sh</filename></term>
                         <listitem>
-                            <para>Para agregar un usuario. Al ejecutarlo podrá ingresar toda la información requerida.</para>
+                            <para>Para agregar un usuario. Al ejecutarlo podrÃ¡ ingresar toda la informaciÃ³n requerida.</para>
                         </listitem>
                     </varlistentry>
                     <varlistentry><term><filename>../../bin/elimus.sh juan</filename></term>
@@ -486,7 +486,7 @@ cd /var/www/htdocs/sivel/sitios/sivel
                 </variablelist>
                 Si olvida la clave de un usuario puede eliminarlo y volver
                 a crearlo o ingresara a la interfaz SQL y modificar el
-                condensado SHA256 con la clave (ver ejemplo más adelante).
+                condensado SHA256 con la clave (ver ejemplo mÃ¡s adelante).
             </para>
             <para>Para contar los registros de las tablas de la base empleada
                 por su sitio:
@@ -495,7 +495,7 @@ cd /var/www/htdocs/sivel/sitios/sivel
 ../../bin/cuenta.sh
                         </screen>
                     </para>
-                    <para>Puede familiarizarse más con
+                    <para>Puede familiarizarse mÃ¡s con
                         la estructura de la base de datos documentanda en 
                         este manual y explorarla con comandos SQL (con cuidado)
                         desde una interfaz interactiva plana que inicia
@@ -505,13 +505,13 @@ cd /var/www/htdocs/sivel/sitios/sivel
 ../../bin/psql.sh
                         </screen>
                         Por ejemplo para examinar las cuentas y condensados
-                        SHA de claves ejecute allí:
+                        SHA de claves ejecute allÃ­:
                         <screen>
 SELECT id_usuario, password FROM usuario;
                         </screen>
                         Si por ejemplo olvida la clave del usuario 
                         <literal>juan</literal> puede
-                        ponerle la clave <literal>noolvidar</literal> así:
+                        ponerle la clave <literal>noolvidar</literal> asÃ­:
                         <screen>
 UPDATE usuario SET password='1e6d8c848f4c51b9e01e5512ac4ae413de3e1840';
                         </screen>
@@ -519,8 +519,8 @@ UPDATE usuario SET password='1e6d8c848f4c51b9e01e5512ac4ae413de3e1840';
 
                     <para>Desde esa interfaz puede realizar otras operaciones
                         SQL como borrar, un ejemplo para eliminar acciones
-                        bélicas se incluye en un archivo de comandos que
-                        puede ejecutar así:
+                        bÃ©licas se incluye en un archivo de comandos que
+                        puede ejecutar asÃ­:
                         <screen>
 cd /var/www/htdocs/sivel/sitios/sivel
 ../../bin/elim-belicas.sh
@@ -532,25 +532,25 @@ cd /var/www/htdocs/sivel/sitios/sivel
         </sect2>
 
        <sect2 id="retroalimentacion">
-	<title>Retroalimentación por correo desde Consulta Web</title>
-	<para> La información complementada por un usuario en el
-		formulario que se ve tras oprimir el botón
-		'Comente Caso', será cifrada
+	<title>RetroalimentaciÃ³n por correo desde Consulta Web</title>
+	<para> La informaciÃ³n complementada por un usuario en el
+		formulario que se ve tras oprimir el botÃ³n
+		'Comente Caso', serÃ¡ cifrada
 		y enviada a una cuenta de correo.
 	</para>
 	<para>	Hay 3 aspectos por 
 		configurar:
 		<itemizedlist>
 			<listitem>
-				<para>Ubicación del programa
+				<para>UbicaciÃ³n del programa
 					<literal>openssl</literal>. 
-					Que típicamente será
+					Que tÃ­picamente serÃ¡
 					ubicado por el 
 					script <literal>bin/prep-chroot.sh</literal> 
 					en el directorio
 					<filename>/var/www/usr/sbin/</filename>
 					y autodetectado o especificado en el 
-					momento de la configuración con
+					momento de la configuraciÃ³n con
 					<literal>conf.sh</literal></para>
 			</listitem>
 			<listitem>
@@ -562,38 +562,38 @@ cd /var/www/htdocs/sivel/sitios/sivel
 					</para>
 			</listitem>
 			<listitem>
-				<para>Cuenta de correo que recibirá la 
-información cifrada. Especificada 
+				<para>Cuenta de correo que recibirÃ¡ la 
+informaciÃ³n cifrada. Especificada 
 en el archivo <filename>conf.sh</filename> del sitio en la variable 
 <literal>receptor_correo</literal>.</para>
 			</listitem>
 		</itemizedlist>
 		
-		En la cuenta configurada se recibirán dos correos por cada
-		retroalimentación, ambos con el mismo mensaje pero el primero 
+		En la cuenta configurada se recibirÃ¡n dos correos por cada
+		retroalimentaciÃ³n, ambos con el mismo mensaje pero el primero 
 		lo incluye en el cuerpo del mensaje en hexadecimal, mientras
 		que el segundo lo incluye en binario como adjunto.
 	</para>
 	<para>El adjunto puede guardarse en un archivo, digamos
 		<filename>/tmp/cifrado</filename>, y si la llave de
 		cifrado fuera la cadena `<literal>La llave</literal>',
-		podría descifrarse y guardarse en el archivo
+		podrÃ­a descifrarse y guardarse en el archivo
 		<filename>/tmp/descif</filename> con:
 		<screen>
 openssl bf -nosalt -d -in /tmp/cifrado -out /tmp/descif -k "La llave"
 		</screen>
 	</para>
-	<para>El mensaje en hexadecimal primero tendría que salvarse
+	<para>El mensaje en hexadecimal primero tendrÃ­a que salvarse
 		en un archivo, digamos <filename>/tmp/hex</filename>,
 		pasarse a binario, digamos al archivo 
-		<filename>/tmp/cifrado</filename> y después
-		descifrarse como se explicó en el párrafo anterior.
-		Para convertir de hexadecimal a binario podría
+		<filename>/tmp/cifrado</filename> y despuÃ©s
+		descifrarse como se explicÃ³ en el pÃ¡rrafo anterior.
+		Para convertir de hexadecimal a binario podrÃ­a
 		emplear el script <filename>herram/hex2bin.php</filename> 
 		distribuido
 		con las fuentes de SIVeL, que de estar ubicadas en
-		<filename>/var/www/htdocs/sivel</filename>, se emplearía
-		así:
+		<filename>/var/www/htdocs/sivel</filename>, se emplearÃ­a
+		asÃ­:
 		<screen>
 cd /var/www/htdocs/sivel
 php herram/hex2bin.php &lt; /tmp/hex &gt; /tmp/cifrado
@@ -601,21 +601,21 @@ php herram/hex2bin.php &lt; /tmp/hex &gt; /tmp/cifrado
 	</para>
 	</sect2>
     <sect2 id="nuevositio">
-	<title>Configuración de un nuevo sitio</title>
+	<title>ConfiguraciÃ³n de un nuevo sitio</title>
     <para>Dado que SIVeL 1.1 es multisitio es posible sobre una misma
-        instalación de fuentes, configurar diversos sitios cada uno con su
-        URL, autenticación y base de datos únicos.</para>
+        instalaciÃ³n de fuentes, configurar diversos sitios cada uno con su
+        URL, autenticaciÃ³n y base de datos Ãºnicos.</para>
     <para>Para agregar un nuevo sitio (digamos <literal>sivelmb</literal>) 
-        en una términal ubiquese en las fuentes de SIVeL ejecutando:
+        en una tÃ©rminal ubiquese en las fuentes de SIVeL ejecutando:
         <screen>
 cd /var/www/htdocs/sivel/sitios
 ./nuevo.sh sivelmb
         </screen>
-        a continuación agregue un punto de entrada en el servidor web,
+        a continuaciÃ³n agregue un punto de entrada en el servidor web,
         por ejemplo para ingresar desde el servidor con la URL
         <literal>https://127.0.0.1/sivelmb/</literal>, si las
-        fuentes de SIVeL están en <filename>/var/www/htdocs/sivel</filename>
-        agregué a la sección de Alias de 
+        fuentes de SIVeL estÃ¡n en <filename>/var/www/htdocs/sivel</filename>
+        agreguÃ© a la secciÃ³n de Alias de 
         <filename>/var/www/conf/httpd.conf</filename>.  Puede editar
 el archivo de configuracion con:
 
@@ -633,10 +633,10 @@ sudo sh /etc/rc.local
         </screen> 
 </para>
     <para>
-        Después cree un enlace que permita redireccionar a su nuevo
-        sitio, para determinar el nombre del enlace convierta los símbolos
-        '/' del URL a '_' y páselo a mayúsculas o aún más sencillo intente
-        ingresar al URL donde debe ver un mensaje que incluirá instrucciones
+        DespuÃ©s cree un enlace que permita redireccionar a su nuevo
+        sitio, para determinar el nombre del enlace convierta los sÃ­mbolos
+        '/' del URL a '_' y pÃ¡selo a mayÃºsculas o aÃºn mÃ¡s sencillo intente
+        ingresar al URL donde debe ver un mensaje que incluirÃ¡ instrucciones
 	para crear el enlace.
         Para este ejemplo desde el directorio 
         <filename>sitios</filename> ejecute:
@@ -654,28 +654,28 @@ ln -s sivelmb 127.0.0.1_SIVELMB
 	<sect2 id="swconsultaweb">
 		<title>Consulta</title>
 		<para>La consulta web puede emplearse sin 
-			autenticación aunque en tal caso cuenta con
-			menos filtros de búsqueda y puede tener
-			restricciones (fecha mínima, fecha máxima y
+			autenticaciÃ³n aunque en tal caso cuenta con
+			menos filtros de bÃºsqueda y puede tener
+			restricciones (fecha mÃ­nima, fecha mÃ¡xima y
 			cantidad de resultados,
 			ver <xref linkend="detalles-interfaz"></xref>).
 		</para>
 		<para>
 			Suponiendo que opera un SIVeL para consulta
-			pública en &URL-BASE;/consulta_web.php, puede
-			solicitar una consulta sin filtros de búsqueda y que
+			pÃºblica en &URL-BASE;/consulta_web.php, puede
+			solicitar una consulta sin filtros de bÃºsqueda y que
 			muestre todos los campos en formato de tabla en:
 			<screen>
 &URL-BASE;/consulta_web.php?_qf_consultaWeb_consulta=Consulta&amp;mostrar=tabla&amp;caso_memo=1&amp;caso_fecha=1&amp;m_ubicacion=1&amp;m_victimas=1&amp;m_presponsables=1&amp;m_tipificacion=1
 			</screen>
 Puede elegir menos campos poniendo 0 en lugar de 1 en los que no 
-requiera o no poniendolos, por ejemplo para ver sólo las fechas, agregue
-a la dirección base:
+requiera o no poniendolos, por ejemplo para ver sÃ³lo las fechas, agregue
+a la direcciÃ³n base:
 <screen>
 consulta_web.php?_qf_consultaWeb_consulta=Consulta&amp;mostrar=tabla&amp;caso_fecha=1
 </screen>
-Los filtros de búsqueda se agregan a lo anterior como se ejemplifica a 
-continuación:
+Los filtros de bÃºsqueda se agregan a lo anterior como se ejemplifica a 
+continuaciÃ³n:
 <variablelist>
 	<varlistentry><term>
 Titulo del caso es 5:
@@ -713,7 +713,7 @@ Departamento Santander (codigo 68 en DIVIPOLA):
 		</listitem>
 	</varlistentry>
 	<varlistentry><term>
-Municipio  Barrancabermeja de Santander (código 81 en DIVIPOLA):
+Municipio  Barrancabermeja de Santander (cÃ³digo 81 en DIVIPOLA):
 		</term>
 		<listitem>
 			<screen>
@@ -722,7 +722,7 @@ Municipio  Barrancabermeja de Santander (código 81 en DIVIPOLA):
 		</listitem>
 	</varlistentry>
 	<varlistentry><term>
-	Cabecera municipal Barrancabermeja (centro poblado con código 0 en el 
+	Cabecera municipal Barrancabermeja (centro poblado con cÃ³digo 0 en el 
 			municipio Barrancabermeja):
 		</term>
 		<listitem>
@@ -730,7 +730,7 @@ Municipio  Barrancabermeja de Santander (código 81 en DIVIPOLA):
 			id_departamento=68&amp;id_municipio=81&amp;id_clase=0
 		</screen>
 		<para>
-			Los datos geograficos están disponibles
+			Los datos geograficos estÃ¡n disponibles
 			en Internet (busque DIVIPOLA) o en SQL en las fuentes 
 			de SIVeL en el archivo 
 			<filename>datos-geo-col.sql</filename>.
@@ -739,22 +739,22 @@ Municipio  Barrancabermeja de Santander (código 81 en DIVIPOLA):
 	</varlistentry>
 
 	<varlistentry><term>
-Sólo ejecuciones extrajudiciales por persecución política
-(tipo de violencia Derechos Humanos A, supracategoría: Persecución política 1,
-Categoría: ejecución extrajudicial: 10):
+SÃ³lo ejecuciones extrajudiciales por persecuciÃ³n polÃ­tica
+(tipo de violencia Derechos Humanos A, supracategorÃ­a: PersecuciÃ³n polÃ­tica 1,
+CategorÃ­a: ejecuciÃ³n extrajudicial: 10):
 		</term>
 		<listitem>
 			<screen>
 			clasificacion[0]=A:1:10
 		</screen>
-		<para>El marco conceptual puede consultarlo en <xref linkend="marco"></xref>, o en SQL está en las fuentes de SIVeL en el archivo
+		<para>El marco conceptual puede consultarlo en <xref linkend="marco"></xref>, o en SQL estÃ¡ en las fuentes de SIVeL en el archivo
 			<filename>datos_caso.sql</filename></para>
 		</listitem>
 	</varlistentry>
 
 
 	<varlistentry><term>
-Ejecuciones por persecución o por intolerancia social:
+Ejecuciones por persecuciÃ³n o por intolerancia social:
 		</term>
 		<listitem>
 			<screen>
@@ -771,8 +771,8 @@ Presunto responsable Policia:
 			<screen>
 			presponsable=7
 		</screen>
-		<para>Los códigos los puede revisar desde 
-			Adminstración->Tablas Básicas o en
+		<para>Los cÃ³digos los puede revisar desde 
+			AdminstraciÃ³n->Tablas BÃ¡sicas o en
 			el archivo <filename>datos-caso.sql</filename>
 		</para>
 		</listitem>
@@ -786,7 +786,7 @@ Presunto responsable Policia:
 			<screen>
 			ssocial=1
 		</screen>
-		<para> Puede ver los código en Tablas Básicas o en
+		<para> Puede ver los cÃ³digo en Tablas BÃ¡sicas o en
 			el archivo <filename>datos-implicado.sql</filename>
 		</para>
 		</listitem>
@@ -794,7 +794,7 @@ Presunto responsable Policia:
 
 
 	<varlistentry><term>
-Nombre o apellido de la víctima incluyen cadena Orielao:
+Nombre o apellido de la vÃ­ctima incluyen cadena Orielao:
 		</term>
 		<listitem>
 			<screen>
@@ -806,7 +806,7 @@ Nombre o apellido de la víctima incluyen cadena Orielao:
 </variablelist>
 
 
-Con respecto a la forma de presentación de la información pueden
+Con respecto a la forma de presentaciÃ³n de la informaciÃ³n pueden
 emplearse las siguientes variables:
 <variablelist>
 	<varlistentry><term><literal>
@@ -827,8 +827,8 @@ mostrar
 				Puede ser <literal>tabla</literal>,
 				<literal>revista</literal> o
 				<literal>csv</literal>.
-				Para procesamiento automático seguramente
-				preferirá CSV (valores separados por comas).
+				Para procesamiento automÃ¡tico seguramente
+				preferirÃ¡ CSV (valores separados por comas).
 			</para>
 		</listitem>
 	</varlistentry>
@@ -837,7 +837,7 @@ m_varlineas
 	</literal></term>
 		<listitem>
 			<para>
-				Puede ser 0 o 1 si se quiere la descripción
+				Puede ser 0 o 1 si se quiere la descripciÃ³n
 				de cada caso en tabla o no.
 			</para>
 		</listitem>
@@ -848,7 +848,7 @@ m_tex
 		<listitem>
 			<para>
 				0, 1 para indicar si dese algunos detalles
-				de la presentación en TeX.
+				de la presentaciÃ³n en TeX.
 			</para>
 		</listitem>
 	</varlistentry>
@@ -858,7 +858,7 @@ caso_memo
 	</literal></term>
 		<listitem>
 			<para>
-				0, 1 para indicar inclusión de la descripción de cada caso.
+				0, 1 para indicar inclusiÃ³n de la descripciÃ³n de cada caso.
 			</para>
 		</listitem>
 	</varlistentry>
@@ -867,7 +867,7 @@ caso_fecha
 	</literal></term>
 		<listitem>
 			<para>
-				0, 1 para indicar inclusión de la fecha de cada caso.
+				0, 1 para indicar inclusiÃ³n de la fecha de cada caso.
 			</para>
 		</listitem>
 	</varlistentry>
@@ -876,7 +876,7 @@ m_ubicacion
 	</literal></term>
 		<listitem>
 			<para>
-				0, 1 para indicar inclusión de la localización geográfica.
+				0, 1 para indicar inclusiÃ³n de la localizaciÃ³n geogrÃ¡fica.
 			</para>
 		</listitem>
 	</varlistentry>
@@ -885,7 +885,7 @@ m_victima
 	</literal></term>
 		<listitem>
 			<para>
-				0, 1 para indicar inclusión de víctimas.
+				0, 1 para indicar inclusiÃ³n de vÃ­ctimas.
 			</para>
 		</listitem>
 	</varlistentry>
@@ -894,7 +894,7 @@ m_presponsable
 	</literal></term>
 		<listitem>
 			<para>
-				0, 1 para indicar inclusión de presuntos responsables.
+				0, 1 para indicar inclusiÃ³n de presuntos responsables.
 			</para>
 		</listitem>
 	</varlistentry>
@@ -903,7 +903,7 @@ m_tipificacion
 	</literal></term>
 		<listitem>
 			<para>
-				0, 1 para indicar inclusión de categoría(s) de violencia.
+				0, 1 para indicar inclusiÃ³n de categorÃ­a(s) de violencia.
 			</para>
 		</listitem>
 	</varlistentry>

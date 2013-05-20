@@ -1,101 +1,101 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <appendix id="llamado">
-  <title>Llamado público a auditar SIVeL 1.1</title> 
+  <title>Llamado pÃºblico a auditar SIVeL 1.1</title> 
 
   <para>Gracias a Dios podemos ofrecer 
 	  $300.000 pesos colombianos (aprox. $EU100) por cada falla 
 	  de seguridad encontrada y solucionada en SIVeL &PRY-VERSION; 
 	  (agradecemos los $150.000 adicionales ofrecidos por wiroal@riseup.net
 	  desde el 6.May.2010).  </para>
-  <para>Si sumercé pertenece a una organización donde se documentan
+  <para>Si sumercÃ© pertenece a una organizaciÃ³n donde se documentan
 	  infracciones al Derecho Internacional Humanitario o 
 	  violaciones a los Derechos Humanos con 
 	  SIVeL l@ invitamos a hacer donaciones para este
-	  llamado público de forma que la retribución aumente.  </para>
-  <para>Si sumercé es desarrollador(a) o interesad@ en seguridad informática 
+	  llamado pÃºblico de forma que la retribuciÃ³n aumente.  </para>
+  <para>Si sumercÃ© es desarrollador(a) o interesad@ en seguridad informÃ¡tica 
 	  l@ invitamos a buscar fallas de seguridad en SIVeL, bien
-	  experimentando en la instalación de prueba para este llamado,
-	  o bien haciendo su propia instalación siguiendo las 
-	  recomendaciones para el ambiente de ejecución (ver 
+	  experimentando en la instalaciÃ³n de prueba para este llamado,
+	  o bien haciendo su propia instalaciÃ³n siguiendo las 
+	  recomendaciones para el ambiente de ejecuciÃ³n (ver 
 	  <xref linkend="instalacion"/>),
-	  o bien auditando las fuentes de dominio público en PHP.
+	  o bien auditando las fuentes de dominio pÃºblico en PHP.
   </para>
   <para>
 	  Para reportar cada falla tenga en cuenta:
 	  <itemizedlist>
 		  <listitem>
-			  <para>Sumercé encontró la falla.  </para>
+			  <para>SumercÃ© encontrÃ³ la falla.  </para>
 		  </listitem>
 		  <listitem>
 			  <para>Cada falla debe ser replicable en la
-				  instalación de prueba.
+				  instalaciÃ³n de prueba.
 				  Busque tanto en el formulario que no 
-				  requiere autenticación:
+				  requiere autenticaciÃ³n:
 				  <ulink url="https://sivel11.pasosdeJesus.org/consulta_web.php"></ulink> ;
-				  como en otros componentes que no deberían
-				  permitir modificación de datos como
+				  como en otros componentes que no deberÃ­an
+				  permitir modificaciÃ³n de datos como
 				  usuario
 				  <literal>sivel11</literal> y
 				  clave <literal>sivel11</literal>:
 				  <ulink url="https://sivel11.pasosdeJesus.org/index.php"></ulink> ; o como administrador 
-				  <literal>adminsivel11</literal> y también
+				  <literal>adminsivel11</literal> y tambiÃ©n
 				  clave <literal>sivel11</literal>.
-				  Esta instalación opera 
-				  en la plataforma de ejecución
-				  recomendada (distribución
+				  Esta instalaciÃ³n opera 
+				  en la plataforma de ejecuciÃ³n
+				  recomendada (distribuciÃ³n
 				  <ulink url="https://aprendiendo.pasosdeJesus.org">adJ</ulink> &VER-OPENBSD; 
 				  de OpenBSD, servidor web con SSL en chroot,
-				  PostgreSQL con autenticación y hardened PHP)
+				  PostgreSQL con autenticaciÃ³n y hardened PHP)
 				  y opera con datos del 
-				  <ulink url="http://www.nocheyniebla.org">Banco De Datos de Violencia Política, DH y DIH del CINEP</ulink>.
+				  <ulink url="http://www.nocheyniebla.org">Banco De Datos de Violencia PolÃ­tica, DH y DIH del CINEP</ulink>.
 			  </para>
 		  </listitem>
 		  <listitem>
-			  <para>Su reporte debe incluir la metodología 
-				  que empleó para encontrarla y proponer una 
-				  solución para las fuentes de la 
+			  <para>Su reporte debe incluir la metodologÃ­a 
+				  que empleÃ³ para encontrarla y proponer una 
+				  soluciÃ³n para las fuentes de la 
 				  rama SIVEL1_1 disponibles en el repositorio
 				  CVS
 				  <ulink url="https://sourceforge.net/scm/?type=cvs&amp;group_id=104373"></ulink>. 
 				  (en el directorio <filename>doc</filename>
-				  de las fuentes hay ejemplos de auditorías 
+				  de las fuentes hay ejemplos de auditorÃ­as 
 				  anteriores).
 			  </para>
 		  </listitem>
 		  <listitem>
 			  <para>Para reportar la falla suscriba una 
-				  dirección de correo en la lista no moderada
-				  <ulink url="https://lists.sourceforge.net/lists/listinfo/sivel-desarrollo">sivel-desarrollo</ulink> y envíe 
-				  allí su reporte de dominio público 
+				  direcciÃ³n de correo en la lista no moderada
+				  <ulink url="https://lists.sourceforge.net/lists/listinfo/sivel-desarrollo">sivel-desarrollo</ulink> y envÃ­e 
+				  allÃ­ su reporte de dominio pÃºblico 
 				  (el hecho de reportar una falla en esa 
-				  lista confirma que su contribución es de 
-				  dominio público). </para>
+				  lista confirma que su contribuciÃ³n es de 
+				  dominio pÃºblico). </para>
 		  </listitem>
 		  <listitem>
-			  <para>Su aporte será evaluado y respondido en
+			  <para>Su aporte serÃ¡ evaluado y respondido en
 				  la misma lista y  en caso de que podamos
 				  reproducir la falla, 
-				  le entregaremos la retribución personalmente 
+				  le entregaremos la retribuciÃ³n personalmente 
 				  o por PayPal  o por transferencia bancaria.
 			  </para>
 		  </listitem>
 		  <listitem>
 			  <para>Los datos que no desee publicar en la lista 
 				  (por ejemplo su nombre) puede enviarlos 
-				  a Vladimir Támara Patiño
+				  a Vladimir TÃ¡mara PatiÃ±o
 				  vtamara@pasosdeJesus.org o escribiendo
-				  por correo postal a Cr 5 #33B-02, Bogotá,
-				  Colombia (si requiere enviar información 
-				  cifrada puede emplear la llave pública PGP
+				  por correo postal a Cr 5 #33B-02, BogotÃ¡,
+				  Colombia (si requiere enviar informaciÃ³n 
+				  cifrada puede emplear la llave pÃºblica PGP
 				  disponible en <ulink url="http://vtamara.pasosdeJesus.org/vtamara-pgp.txt"></ulink>).
 			  </para>
 		  </listitem>
 	  </itemizedlist>
   </para>
   <para>
-	  Agradecemos su interés en esta convocatoria pública, cuya versión
-	  más reciente está disponible en 
+	  Agradecemos su interÃ©s en esta convocatoria pÃºblica, cuya versiÃ³n
+	  mÃ¡s reciente estÃ¡ disponible en 
 	  <ulink url="http://sivel.sf.net/1.1/llamado.html"></ulink> Lo 
 	  invitamos a distribuirla solidariamente y sin cambios.
   </para>
