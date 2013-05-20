@@ -134,10 +134,8 @@ if (isset($GLOBALS['nueva_ficha_tabuladores'])) {
         $arc = $a[2];
         $puestoelim = $a[3];
         $nft = array();
-        for ($nf = 0;
-        $nf < count($GLOBALS['ficha_tabuladores']);
-        $nf++
-        ) {
+        $incluida = false;
+        for ($nf = 0; $nf < count($GLOBALS['ficha_tabuladores']); $nf++) {
             $f = $GLOBALS['ficha_tabuladores'][$nf];
             $fpe = $f[2];
             if ($fpe >= $puestoelim) {
@@ -148,14 +146,17 @@ if (isset($GLOBALS['nueva_ficha_tabuladores'])) {
             } else if ($nf == $puesto) {
                 $nft[$nf] = array($nom, $arc, $puestoelim);
                 $nft[$nf + 1] = $f;
+                $incluida = true;
             } else  {
                 $nft[$nf + 1] = $f;
             }
             //echo "OJO nft="; print_r($nft); echo "<br>";
         }
+        if (!$incluida) {
+            $nft[$nf] = array($nom, $arc, $puestoelim);
+        }
         $GLOBALS['ficha_tabuladores'] = $nft;
     }
 }
-
 
 //var_dump($GLOBALS['ficha_tabuladores']);
