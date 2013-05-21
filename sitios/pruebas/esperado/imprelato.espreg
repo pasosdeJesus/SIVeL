@@ -1,4 +1,34 @@
-<hr><pre>CASO No. <a href='captura_caso.php?modo=edita&id=2'>2</a>
+<!doctype html>
+<html>
+<head>
+<meta charset = "UTF-8">
+  <title>Importa Relato</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
+<!--Fuentes de dominio publico. Sin garantias. 2004-->
+<!-- http://sivel.sf.net -->
+<script language = "JavaScript">
+<!--
+function envia(que){
+    document.forms[0]._qf_default.value = que;
+    document.forms[0].submit();
+}
+// -->
+<!-- Contador por: Nannette Thacker -->
+<!-- http://www.shiningstar.net -->
+<!-- Original by :  Ronnie T. Moore -->
+<!-- Web Site:  The JavaScript Source -->
+<!-- Use one function for multiple text areas on a page -->
+<!-- Limit the number of characters per textarea -->
+<!-- Begin
+function textCounter(field, cntfield, maxlimit)
+{
+    if (field.value.length > maxlimit) // if too long...trim it!
+        field.value = field.value.substring(0, maxlimit);
+    // otherwise, update 'characters left' counter
+    else
+        cntfield.value = maxlimit - field.value.length;
+}
+//  End -->
+</script></head><body background = ""><hr><pre>CASO No. <a href='captura_caso.php?modo=edita&id=2'>2</a>
 FECHA: 07-Agosto-2007 15:00 intervalo1  Tip. Ub: Tsitio1
 
 y / municipio1 / clase1
