@@ -1816,7 +1816,7 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
         //echo "OJO campo = $campo, ";
         $tipo = $tab[$rel][$campo];
         $vdc = (string)$duc->$campo;
-        //echo "OJO tipo=$tipo, valor=" .  $duc->$campo . "<br>";
+        //echo "OJO tipo=$tipo, valor=" .  $duc->$campo . ", vdc=$vdc<br>";
         $ignora = false;
         $ignora |= $campo == 'id_caso';
         $ignora |= $vdc === '';
@@ -1847,10 +1847,12 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
         if (!$ignora) {
             if (($tipo & 2) && $tipo != 134 && $tipo !=18) {
                 // Cadena que no es fecha
-                consulta_and(
-                    $db, $w2, "$rel.$campo", "%" .trim($valor) . "%",
-                    ' ILIKE ', 'AND'
-                );
+                if (trim($valor) != '*')  {
+                    consulta_and(
+                        $db, $w2, "$rel.$campo", "%" .trim($valor) . "%",
+                        ' ILIKE ', 'AND'
+                    );
+                }
             } else {
                 consulta_and($db, $w2, "$rel.$campo", $valor, '=', 'AND');
             }
@@ -1891,7 +1893,7 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
                     }
                 }
                 if (!$ignora) {
-                    if (($tipo & 2) && ($tipo != 134)) {
+                    if (($tipo & 2) && ($tipo != 134) && $valor != '*') {
                         // Cadena que no es fecha
                         consulta_and(
                             $db, $w2, "$bas.$campo",

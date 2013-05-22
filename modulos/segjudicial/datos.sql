@@ -170,3 +170,4 @@ INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('sjud-d1', '2011-
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('sj-fe', '2011-10-19', 'Fechas en tablas básicas');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-rs', '2012-08-29', 'Renombra tablas');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-sjrc', '2012-08-29', 'Renombra campos');
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-jl', '2013-05-20', 'Localización');

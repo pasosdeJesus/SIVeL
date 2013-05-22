@@ -89,6 +89,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         $pPresponsable  = (int)var_req_escapa('presponsable', $db);
         $pSsocial   = (int)var_req_escapa('ssocial', $db);
         $pNomvic    = substr(var_req_escapa('nomvic', $db), 0, 32);
+        $pDesc      = substr(var_req_escapa('descripcion', $db), 0, 32);
         $pMFuentes  = (int)var_req_escapa('m_fuentes', $db);
         $pRetroalimentacion = (int)var_req_escapa('retroalimentacion', $db);
         $pVarLineas = (int)var_req_escapa('m_varlineas', $db);
@@ -116,8 +117,21 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             if ($where != "") {
                 $where .= " AND ";
             }
-            $where .= " (caso.titulo ILIKE '%" . trim($pTitulo) . "%') ";
+            $consTitulo =  trim(a_minusculas(sin_tildes($pTitulo)));
+            $consTitulo = preg_replace("/ +/", " & ", $consTitulo);
+            $where .= " to_tsvector('spanish', unaccent(caso.titulo)) "
+                . " @@ to_tsquery('spanish', '$consTitulo')";
         }
+        if (trim($pDesc) != '') {
+            if ($where != "") {
+                $where .= " AND ";
+            }
+            $consDesc =  trim(a_minusculas(sin_tildes($pDesc)));
+            $consDesc = preg_replace("/ +/", " & ", $consDesc);
+            $where .= " to_tsvector('spanish', unaccent(caso.memo)) "
+                . " @@ to_tsquery('spanish', '$consDesc')";
+        }
+
         if (isset($pFini['Y']) && $pFini['Y'] != '') {
             consulta_and(
                 $db, $where, "caso.fecha",
@@ -342,8 +356,11 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             if ($where != "") {
                 $where .= " AND";
             }
-            $where .= " trim(trim(persona.nombres) || ' ' || " .
-                "trim(persona.apellidos)) ILIKE '%" . trim($pNomvic) . "%'";
+            $consNomVic =  trim(a_minusculas(sin_tildes($pNomvic)));
+            $consNomvic = preg_replace("/ +/", " & ", $consNomVic);
+            $where .= " to_tsvector('spanish', unaccent(persona.nombres) "
+                . " || ' ' || unaccent(persona.apellidos)) @@ "
+                . "to_tsquery('spanish', '$consNomvic')";
         }
 
         // Búsqueda por víctima no incluye combatientes para evitar sobreconteos
@@ -647,6 +664,10 @@ class ConsultaWeb extends HTML_QuickForm_Page
             $db->getAssoc("SELECT id, nombre FROM sectorsocial")
         );
         $sel->loadArray($options);
+
+        $sel =& $this->addElement( 'text', 'descripcion', _('Descripción'));
+        $sel->setSize(80);
+
 
         /*$aut_usuario = "";
         if (!isset($_SESSION['id_funcionario'])) {

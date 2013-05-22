@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" [ 
 <!ENTITY % confv SYSTEM "confv.ent">
 <!ENTITY % personaliza SYSTEM "personaliza.ent">
@@ -24,38 +24,38 @@
 ]>
 
 <book lang="es">
-	<title>Documentación de SIVeL &PRY-VERSION;</title>
+	<title>DocumentaciÃ³n de SIVeL &PRY-VERSION;</title>
   <bookinfo>
-	  <title>Documentación de SIVeL &PRY-VERSION;</title>
+	  <title>DocumentaciÃ³n de SIVeL &PRY-VERSION;</title>
 	<!--	<author><firstname>Vladimir</firstname>
-		<surname>Támara Patiño</surname>
+		<surname>TÃ¡mara PatiÃ±o</surname>
 	</author> -->
-	<legalnotice><para>SIVeL se dedica a Dios y a las víctimas. 
-			Su código fuente se libera al Dominio Público, sin 
-			garantías. Oramos para que no sea utilizado por 
-			estructuras armadas.  Esta documentación fue
-			actualizada por última vez en &FECHA-ACT;</para>
-		<para>En Internet puede consultar la versión más
-			reciente de esta documentación en 
-			<ulink url="&URLSITE;"/>, así como la
-			<ulink url="&URLSITE;/tec/">documentación técnica</ulink> 	
+	<legalnotice><para>SIVeL se dedica a Dios y a las vÃ­ctimas. 
+			Su cÃ³digo fuente se libera al Dominio PÃºblico, sin 
+			garantÃ­as. Oramos para que no sea utilizado por 
+			estructuras armadas.  Esta documentaciÃ³n fue
+			actualizada por Ãºltima vez en &FECHA-ACT;</para>
+		<para>En Internet puede consultar la versiÃ³n mÃ¡s
+			reciente de esta documentaciÃ³n en 
+			<ulink url="&URLSITE;"/>, asÃ­ como la
+			<ulink url="&URLSITE;/tec/">documentaciÃ³n tÃ©cnica</ulink> 	
 			o bien descargar
 			<ulink url="http://sourceforge.net/projects/sivel/files/">el
-				código fuente de SIVeL</ulink> o esta
-			documentación en formato
+				cÃ³digo fuente de SIVeL</ulink> o esta
+			documentaciÃ³n en formato
 			<ulink url="&URLSITE;/&PROYECTO;-&PRY-VERSION;_html.tar.gz">HTML comprimido</ulink>.
 			<!--			<ulink url="&URLSITE;/&PROYECTO;-&PRY-VERSION;.ps.gz">
 				PostScript comprimido</ulink> y
 			<ulink url="&URLSITE;/&PROYECTO;-&PRY-VERSION;.pdf">PDF</ulink>. -->
 		</para>
-		<para>Lo invitamos a consultar versiones más recientes
+		<para>Lo invitamos a consultar versiones mÃ¡s recientes
 			y noticias relacionadas con SIVeL en 
 			<ulink url="http://sivel.sf.net"/>
 		</para>
 	</legalnotice>
   </bookinfo>
 
-  <!-- Introducción -->
+  <!-- IntroducciÃ³n -->
   &principios; 
   &ambiente; 
 

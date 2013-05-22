@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <appendix id="creditos">
-  <title>Créditos</title> 
+  <title>CrÃ©ditos</title> 
 
-  <para>Damos gracias primero a Dios y a Él encomendamos y dedicamos
+  <para>Damos gracias primero a Dios y a &Eacute;l encomendamos y dedicamos
 	  este proyecto. </para>
   <para>Se han empleado como referencia interfaces de usuario y datos
 	  (sin consultar fuentes ni estructuras de las bases) las 
@@ -20,37 +20,37 @@
 	  </itemizedlist>
   </para>
   <para>
-	  Ha ayudado con su autorización
+	  Ha ayudado con su autorizaciÃ³n
  <itemizedlist>
 	 <listitem>
 		 <para>
 	S. Javier Giraldo, coordinador del Banco de Datos de Derechos
-	Humanos, Derecho Internacional Humanitario y Violencia Política
+	Humanos, Derecho Internacional Humanitario y Violencia PolÃ­tica
 	del CINEP.
 		 </para>
 	 </listitem>
 	 </itemizedlist>
   </para>
   <para>
-	  Han aportado datos para las tablas básicas:
+	  Han aportado datos para las tablas bÃ¡sicas:
 	  <itemizedlist>
 		  <listitem>
 			  <para>
-	 Categorías de "Marco Conceptual", revista Noche y Niebla.
+	 CategorÃ­as de "Marco Conceptual", revista Noche y Niebla.
 	  http://www.nocheyniebla.org
 			  </para>
 		  </listitem>
 		  <listitem>
 			  <para>
-	 Información geográfica tomada del Departamento Nacional
-	  de Planeación, DANE y Banco de Datos de Derechos Humanos y
-	  Violencia Política.
+	 InformaciÃ³n geogrÃ¡fica tomada del Departamento Nacional
+	  de PlaneaciÃ³n, DANE y Banco de Datos de Derechos Humanos y
+	  Violencia PolÃ­tica.
 			  </para>
 		  </listitem>
 		  <listitem>
 			  <para>
 	Otros datos empleados en el Banco de Datos de Derechos Humanos y
-	  Violencia Política del CINEP.
+	  Violencia PolÃ­tica del CINEP.
 			  </para>
 		  </listitem>
 	  </itemizedlist>
@@ -67,46 +67,46 @@
 	</itemizedlist>
 </para>	
 <para>
-	A las fuentes de la versión 1.0, le hicieron auditorías de 
-	seguridad (ver sus reportes en las fuentes de la versión 1.0):
+	A las fuentes de la versiÃ³n 1.0, le hicieron auditorÃ­as de 
+	seguridad (ver sus reportes en las fuentes de la versiÃ³n 1.0):
 	<itemizedlist>
 		<listitem>
-			<para>Julio César Garcés Rios. (garcez@linuxmail.org)</para>
+			<para>Julio CÃ©sar GarcÃ©s Rios. (garcez@linuxmail.org)</para>
 		</listitem>
 		<listitem>
-			<para>Fernando Muñoz. (munozferna@gmail.com)</para>
+			<para>Fernando MuÃ±oz. (munozferna@gmail.com)</para>
 		</listitem>
 	</itemizedlist>
 </para>	
 <para>
-    Con respecto a módulos:
+    Con respecto a mÃ³dulos:
 	<itemizedlist>
 		<listitem>
 <para>
-	El módulo de seguimiento judicial y los datos relacionados han
+	El mÃ³dulo de seguimiento judicial y los datos relacionados han
 	sido aportados por Humanidad Vigente.
 </para>	
 		</listitem>
 		<listitem>
 <para>
-	El módulo de Etiquetas se desarrolló inicialmente para el OPI.
+	El mÃ³dulo de Etiquetas se desarrollÃ³ inicialmente para el OPI.
 </para>
 		</listitem>
 		<listitem>
 
 <para>
-	El módulo de Estadísticas por Rótulos se desarrolló inicialmente para Justapaz.
+	El mÃ³dulo de EstadÃ­sticas por RÃ³tulos se desarrollÃ³ inicialmente para Justapaz.
 </para>
 		</listitem>
 		<listitem>
 <para>
-	El módulo de Anexos se desarrolló inicialmente para Reiniciar.
+	El mÃ³dulo de Anexos se desarrollÃ³ inicialmente para Reiniciar.
 </para>
 		</listitem>
 		<listitem>
 <para>
-    El módulo de Georeferenciación sobre Googlemaps lo desarrollo 
-    Luca Urech &lt;lucaurech@yahoo.de&gt; para la Corporación Compromiso.
+    El mÃ³dulo de GeoreferenciaciÃ³n sobre Googlemaps lo desarrollo 
+    Luca Urech &lt;lucaurech@yahoo.de&gt; para la CorporaciÃ³n Compromiso.
 </para>
 		</listitem>
 	</itemizedlist>
@@ -117,24 +117,24 @@
 	Han ayudado a documentar:
 	<itemizedlist>
 		<listitem>
-			<para> Diana Garzón (artemisa1786@hotmail.com), quien 
-				preparó un manual para Humanidad
+			<para> Diana GarzÃ³n (artemisa1786@hotmail.com), quien 
+				preparÃ³ un manual para Humanidad
 				Vigente algunas de cuyas partes se incorporaron
-				a este manual con al autorización de 
+				a este manual con al autorizaciÃ³n de 
 				Humanidad Vigente.
 			</para>
 		</listitem>
 		<listitem>
 			<para>Shalom Wiebe (shalomwiebe@gmail.com), quien 
-				corrigió llamado en inglés.</para>
+				corrigiÃ³ llamado en inglÃ©s.</para>
 		</listitem>
 		<listitem>
-			<para>Vladimir Támara Patiño 
+			<para>Vladimir TÃ¡mara PatiÃ±o 
 				(vtamara@pasosdeJesus.org).  
 			</para>
 		</listitem>
 		<listitem>
-			<para>Eduard Hoyos escribió documentación
+			<para>Eduard Hoyos escribiÃ³ documentaciÃ³n
 				inicial para restaurar un volcado SQL.  
 			</para>
 		</listitem>
@@ -147,20 +147,20 @@
 	<itemizedlist>
 		<listitem>
 			<para>
-	Mauricio Rivera (mauricio.rivera.p@gmail.com) desarrolló una 
-    versión previa de la Consulta Web y quien además ideó el nombre
+	Mauricio Rivera (mauricio.rivera.p@gmail.com) desarrollÃ³ una 
+    versiÃ³n previa de la Consulta Web y quien ademÃ¡s ideÃ³ el nombre
     SIVeL.
 			</para>
 		</listitem>
 		<listitem>
 			<para>
-	Vladimir Támara Patiño (vtamara@pasosdeJesus.org).
+	Vladimir TÃ¡mara PatiÃ±o (vtamara@pasosdeJesus.org).
 			</para>
 		</listitem>
 	</itemizedlist>
 </para>
 	<para>
-		En sus albores, parte del código fue generado automáticamente con:
+		En sus albores, parte del cÃ³digo fue generado automÃ¡ticamente con:
 		<itemizedlist>
 			<listitem>
 				<para>
@@ -170,24 +170,24 @@
 		</itemizedlist>
 	</para>
 	<para>
-		El cabezote del menú principal y el fondo son aportes
+		El cabezote del menÃº principal y el fondo son aportes
 		de William Rozo (wiroal@nocheyniebla.org).
 	</para>
-	<para>Han ayudado a probar y reportar problemas: William Rozo (wiroal@nocheyniebla.org), Carlos Garaviz, Marcela Medina, Rosa Liliana Ortiz, Diana Garzón y Fabian Wilches</para>
+	<para>Han ayudado a probar y reportar problemas: William Rozo (wiroal@nocheyniebla.org), Carlos Garaviz, Marcela Medina, Rosa Liliana Ortiz, Diana GarzÃ³n y Fabian Wilches</para>
 
 <para>
-	Los colores y organización de la Ficha Caso son tomados de un generador 
+	Los colores y organizaciÃ³n de la Ficha Caso son tomados de un generador 
 	de barras de progreso del paquete HTML_Progress de Pear.   
 </para>
-<para>La idea de ofrecer retribución pública a quienes encuentren
+<para>La idea de ofrecer retribuciÃ³n pÃºblica a quienes encuentren
 	fallas de seguridad fue tomada de <literal>djbdns</literal> 
 	escrito por Daniel Bernstein.</para>
 <para>La nomenclatura de versiones se base en la de Mozilla Firefox.
 	</para>
 
 <para>
-	Entre otras empleamos las siguientes herramientas (ver un listado más
-	detallado en archivo Instala.txt de la distribución de fuentes):
+	Entre otras empleamos las siguientes herramientas (ver un listado mÃ¡s
+	detallado en archivo Instala.txt de la distribuciÃ³n de fuentes):
 	OpenBSD, PostgreSQL, Apache con mod_ssl, PHP, Pear.
 </para>
 

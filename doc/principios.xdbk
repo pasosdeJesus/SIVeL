@@ -1,94 +1,94 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <chapter id="principios">
 	<title>Principios</title>
 
-	<para>Para el desarrollo de este sistema de información se
+	<para>Para el desarrollo de este sistema de informaciÃ³n se
 		han procurado seguir los siguientes principios 
 		para manejo
-		de información sobre violencia política, 
+		de informaciÃ³n sobre violencia polÃ­tica, 
 		sugeridos
 		por el sacerdote jesuita Javier Giraldo:
 		<itemizedlist>
 			<listitem>
-				<para>Máxima accesibilidad</para>
+				<para>MÃ¡xima accesibilidad</para>
 			</listitem>
 			<listitem>
-				<para>Reserva de las fuentes de información</para>
+				<para>Reserva de las fuentes de informaciÃ³n</para>
 			</listitem>
 			<listitem>
-				<para>No comercialización de la información de las víctimas</para>
+				<para>No comercializaciÃ³n de la informaciÃ³n de las vÃ­ctimas</para>
 			</listitem>
 		</itemizedlist>
 	</para>
-    <para>Para maximizar accesibilidad y evitar comercialización de la 
-        información de las víctimas,
-		SIVeL y su documentación son de dominio público y están 
+    <para>Para maximizar accesibilidad y evitar comercializaciÃ³n de la 
+        informaciÃ³n de las vÃ­ctimas,
+		SIVeL y su documentaciÃ³n son de dominio pÃºblico y estÃ¡n 
 		disponibles en Internet sin costo (aunque recibimos
 		<ulink url="http://www.pasosdejesus.org/index.php?pag=ayudenos">donaciones</ulink> para 
 		ampliar el desarrollo).
-		Las herramientas informáticas recomendadas para operar SIVeL 
-		son también de dominio público o tienen licencias cercanas al dominio 
-		público (e.g licencia BSD, licencia MIT) o en su defecto 
-		son de fuentes abiertas (e.g licencia GPL), pero en ningún
+		Las herramientas informÃ¡ticas recomendadas para operar SIVeL 
+		son tambiÃ©n de dominio pÃºblico o tienen licencias cercanas al dominio 
+		pÃºblico (e.g licencia BSD, licencia MIT) o en su defecto 
+		son de fuentes abiertas (e.g licencia GPL), pero en ningÃºn
 		caso son de fuentes cerradas o con licenciamiento que requiera
-		el pago de regalías o que restringa la copia o la 
-		redistribución de copias.  
+		el pago de regalÃ­as o que restringa la copia o la 
+		redistribuciÃ³n de copias.  
 	</para>
 	<para>
-		Buscando garantizar la reserva de fuentes de información
+		Buscando garantizar la reserva de fuentes de informaciÃ³n
 		en los casos de violaciones a derechos humanos (DDHH),  
 		derecho internacional humanitario (DIH) y violencia
-		político social (VPS) hemos priorizado la seguridad en el 
+		polÃ­tico social (VPS) hemos priorizado la seguridad en el 
 		desarrollo de SIVeL:
 		<itemizedlist>
 			<listitem>
-				<para>El código fuente de SIVeL está
-					abierto y disponible públicamente 
-					(i.e fuentes abiertas).  También 
+				<para>El cÃ³digo fuente de SIVeL estÃ¡
+					abierto y disponible pÃºblicamente 
+					(i.e fuentes abiertas).  TambiÃ©n 
 					mantenemos abierta una convocatoria 
-					pública a 
+					pÃºblica a 
 					auditar las fuentes de SIVeL 
 					(ver <xref linkend="llamado"></xref>)
-					y la distribución de referencia,
+					y la distribuciÃ³n de referencia,
 		premiando con dinero a quien encuentre alguna falla.
 	</para>
 
 			</listitem>
 			<listitem>
-                <para>Su implantación y fuentes ya han sido 
+                <para>Su implantaciÃ³n y fuentes ya han sido 
 					auditadas tanto por los 
 		desarrolladores como por otras personas con experiencia 
-		en seguridad informática (ver <xref linkend="creditos"></xref>).
+		en seguridad informÃ¡tica (ver <xref linkend="creditos"></xref>).
 				</para>
 			</listitem>
 			<listitem>
 				<para>Recomendamos una plataforma de
-                    operación segura, madura y ampliamente 
+                    operaciÃ³n segura, madura y ampliamente 
                     auditada, i.e sistema operativo,
 				       herramientas complementarias y 
 				       configuraciones
-		(emplear una plataforma insegura haría
-		inútiles los esfuerzos con las fuentes de SIVeL).
+		(emplear una plataforma insegura harÃ­a
+		inÃºtiles los esfuerzos con las fuentes de SIVeL).
 				</para>
 			</listitem>
 			<listitem>
 				<para>Hemos contribuido en el desarrollo
-		de la distribución <application>Aprendiendo de 
-			Jesús (adJ)</application> 
-		conforme a la plataforma de operación recomendada, 
-		procurando que también sea segura, liviana, 
+		de la distribuciÃ³n <application>Aprendiendo de 
+			JesÃºs (adJ)</application> 
+		conforme a la plataforma de operaciÃ³n recomendada, 
+		procurando que tambiÃ©n sea segura, liviana, 
 		usable<footnote><para>Buscando un buen 
 				balance entre seguridad y facilidad.  
 		</para></footnote> y constituida por herramientas de
-		dominio público o de licencias cercanas.  </para>
+		dominio pÃºblico o de licencias cercanas.  </para>
 </listitem>
 		</itemizedlist>  			
 
 	<warning><para>Reconocemos como fallas de seguridad 
-			críticas sólo las que puedan explotarse en la 
-			plataforma de operación recomendada (i.e la 
-			configuración por defecto de la distribución 
-			Aprendiendo de Jesús 
+			crÃ­ticas sÃ³lo las que puedan explotarse en la 
+			plataforma de operaciÃ³n recomendada (i.e la 
+			configuraciÃ³n por defecto de la distribuciÃ³n 
+			Aprendiendo de JesÃºs 
 			<ulink url="http://aprendiendo.pasosdeJesus.org"/>).</para> </warning>
 
 	</para>

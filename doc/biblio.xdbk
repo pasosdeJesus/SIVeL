@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <bibliography>
       
@@ -17,7 +17,7 @@
 
 
 	<biblioentry id="aperturatotal">
-	  <title>Apertura total. Traducción</title>
+	  <title>Apertura total. TraducciÃ³n</title>
     <bibliomisc>Security Focus <ulink
 		    url="https://seguridad.pasosdejesus.org/?id=Apertura+Total"/></bibliomisc>
   </biblioentry>
@@ -32,7 +32,7 @@
       
   <biblioentry id="marco">
 	  <title>Marco Conceptual</title>
-    <bibliomisc>Banco de Datos de Derechos Humanos y Violencia Política. CINEP.  <ulink
+    <bibliomisc>Banco de Datos de Derechos Humanos y Violencia PolÃ­tica. CINEP.  <ulink
 		    url="http://www.nocheyniebla.org/files/u1/comun/marcoteorico.pdf"/>. 2008</bibliomisc>
   </biblioentry>
 
@@ -114,7 +114,7 @@
 
 
   <bibliomixed id="basico_OpenBSD">
-	  <title>Uso Básico de la distribución Aprendiendo de Jesús de OpenBSD</title>
+	  <title>Uso BÃ¡sico de la distribuciÃ³n Aprendiendo de JesÃºs de OpenBSD</title>
 	<bibliomisc><ulink
 			url="http://structio.sourceforge.net/guias/basico_OpenBSD">http://structio.sourceforge.net/guias/basico_OpenBSD</ulink> 2011</bibliomisc>
   </bibliomixed>
@@ -122,7 +122,7 @@
 
 
   <biblioentry id="bdp">
-  <title>Traducción de los evangelios de dominio público y abierta a mejoras</title>
+  <title>TraducciÃ³n de los evangelios de dominio pÃºblico y abierta a mejoras</title>
     <bibliomisc><ulink
 	url="http://de.geocities.com/nuestroamigoJesus/bdp">http://de.geocities.com/nuestroamigoJesus/bdp</ulink> 2003</bibliomisc>
   </biblioentry>

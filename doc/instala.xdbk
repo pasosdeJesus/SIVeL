@@ -1,65 +1,65 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <chapter id="instalacion">
-	<title>Instalación y Actualización</title>
+	<title>InstalaciÃ³n y ActualizaciÃ³n</title>
 
-	<para>La instalación será aún más fácil si destina un 
+	<para>La instalaciÃ³n serÃ¡ aÃºn mÃ¡s fÃ¡cil si destina un 
 		computador como servidor de SIVeL.  Si
 		debe emplear en el mismo computador otros sistemas
 		operativos se recomienda que destine un disco 
 		duro independiente para SIVeL y configure un gestor
 		de arranque que permita ingresar a uno o a otro en el
-		momento de arrancar el equipo.  En último caso también
+		momento de arrancar el equipo.  En Ãºltimo caso tambiÃ©n
 		es posible instalar en un mismo disco OpenBSD
 		y otros sistemas como Linux o Windows, para esto
-		asegúrese de dejar una partición primaria
+		asegÃºrese de dejar una particiÃ³n primaria
 		de al menos 2GB para OpenBSD (si se trata de un computador 
 		nuevo 
 		haga la solicitud al vendedor, si se trata de un computador 
-		donde ya está instalado Windows/Linux destine una de las
+		donde ya estÃ¡ instalado Windows/Linux destine una de las
 		particiones existentes o emplee una herramienta para
 		reparticionar como <literal>gparted</literal> desde un
 		CD con un instalador de Linux).</para>
 
 	<para>Para instalar puede descargar de Internet la imagen
-		ISO de la distribución Aprendiendo De Jesus (adJ) &VER-ADJ; 
+		ISO de la distribuciÃ³n Aprendiendo De Jesus (adJ) &VER-ADJ; 
 		(ver <ulink url="http://aprendiendo.pasosdeJesus.org"></ulink>)
 		y quemarla en un CD como imagen ISO (no como simple archivo
-		o de lo contrario no podrá arrancar su computador con esta).
-		AdJ es una distribución de OpenBSD con todos los 
-		paquetes requeridos por SIVeL, datos públicos
+		o de lo contrario no podrÃ¡ arrancar su computador con esta).
+		AdJ es una distribuciÃ³n de OpenBSD con todos los 
+		paquetes requeridos por SIVeL, datos pÃºblicos
 		del Banco de Datos de DH, DIH y VPS del CINEP y un 
-		script de instalación que instala y configura SIVeL y sus
+		script de instalaciÃ³n que instala y configura SIVeL y sus
 		prerrequisitos.  
 	</para>
 
-	<para>Por precaución saque copia de la información importante de
+	<para>Por precauciÃ³n saque copia de la informaciÃ³n importante de
 		su disco.  Inicie su computador con el CD.
 		Instale OpenBSD respondiendo las preguntas del instalador
-		estándar de OpenBSD --y teniendo cuidado de instalar justo
-		en el disco o partición que ha destinado para OpenBSD.  
-		Reinicie y configure arranque múltiple si es el caso. Una 
-		vez entre en su sistema recién instalado ejecute:
+		estÃ¡ndar de OpenBSD --y teniendo cuidado de instalar justo
+		en el disco o particiÃ³n que ha destinado para OpenBSD.  
+		Reinicie y configure arranque mÃºltiple si es el caso. Una 
+		vez entre en su sistema reciÃ©n instalado ejecute:
 		<screen>
 su -
 /inst-adJ.sh
 		</screen>
 		Responda las preguntas que le hace este archivo de
 		ordenes, recordando dejar PostgreSQL en un contenedor
-		cifrado, a continuación ejecute:
+		cifrado, a continuaciÃ³n ejecute:
 		<screen>
 /inst-sivel.sh
         </screen>
-        Este último script formulará otras preguntas breves incluyendo
-        primer usuario y clave para SIVeL y creará un primer sitio para usted.
-        Visitelo desde el servidor con un navegador en la dirección 
+        Este Ãºltimo script formularÃ¡ otras preguntas breves incluyendo
+        primer usuario y clave para SIVeL y crearÃ¡ un primer sitio para usted.
+        Visitelo desde el servidor con un navegador en la direcciÃ³n 
         https://127.0.0.1/ y una vez ingrese actualice desde el
-        menú <menuchoice><guimenu>Otros</guimenu><guimenuitem>Actualizar</guimenuitem></menuchoice>.  
+        menÃº <menuchoice><guimenu>Otros</guimenu><guimenuitem>Actualizar</guimenuitem></menuchoice>.  
 	</para>
 
-	<para>El resto de instrucciones de este capítulo, le servirán si 
+	<para>El resto de instrucciones de este capÃ­tulo, le servirÃ¡n si 
 		tiene inconvenientes con el procedimiento anterior o si 
-		desea aprender con una instalación menos automatizada 
+		desea aprender con una instalaciÃ³n menos automatizada 
 		o en otras plataformas.  </para>
 
 	<sect1 id="prerrequisitos">
@@ -69,19 +69,19 @@ su -
 				<listitem>
 					<para>
 Sistema tipo Unix, recomendamos OpenBSD &VER-OPENBSD;
-y en particular la distribución Aprendiendo de Jesús (ver <ulink url="http://aprendiendo.pasosdeJesus.org"></ulink>).
+y en particular la distribuciÃ³n Aprendiendo de JesÃºs (ver <ulink url="http://aprendiendo.pasosdeJesus.org"></ulink>).
 					</para>
 				</listitem>
 				<listitem>
 					<para>
-Para hacer pruebas durante la configuración puede emplear
+Para hacer pruebas durante la configuraciÃ³n puede emplear
 una consola y el navegador tipo texto <command>lynx</command>, 
 sin embargo se sugiere configurar X-Window 					(ver <ulink url="http://structio.sourceforge.net/guias/usuario_OpenBSD/sobre-la-instalacion.html#configuracion-de-xorg"></ulink>) y 
-un navegador gráfico como <command>mozilla-firefox</command>.</para>
+un navegador grÃ¡fico como <command>mozilla-firefox</command>.</para>
 				</listitem>
 				<listitem>
 					<para>
-Se sugiere crear dos contenedores cifrados en los que residirán
+Se sugiere crear dos contenedores cifrados en los que residirÃ¡n
 la base de datos y copias de respaldo respectivamente.  Cada una
 debe ser al menos de 100MB aunque se sugiere 700MB --para que quepa
 cada una en un CD por si desea mantener copias de respaldo (ver <ulink url="http://structio.sourceforge.net/guias/usuario_OpenBSD/configuracion-de-algunos-dispositivos.html#imagen-cifrada"></ulink>)-- o de 4GB si saca copias en DVD.
@@ -93,17 +93,17 @@ Servidor web con SSL, recomendamos Apache con <literal>mod_ssl</literal>
 (ver <ulink url="http://structio.sourceforge.net/guias/servidor_OpenBSD/apache.html#ssl"></ulink>).
 Sugerimos que lo ejecute con <command>chroot</command> en 
 <filename>/var/www</filename> y que cree el directorio 
-<filename>/var/www/tmp</filename> para que PostgreSQL ubique su socket allí, 
-con permisos de ejecución, lectura y escritura para todos.
+<filename>/var/www/tmp</filename> para que PostgreSQL ubique su socket allÃ­, 
+con permisos de ejecuciÃ³n, lectura y escritura para todos.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
 PostgreSQL (ver <ulink url="http://structio.sourceforge.net/guias/servidor_OpenBSD/postgresql.html#primera-instalaci%C3%B3n"></ulink>),
 sugerimos que la configure para usar sockets en 
-<filename>/var/www/tmp</filename>.  Así mismo se sugiere que active 
+<filename>/var/www/tmp</filename>.  AsÃ­ mismo se sugiere que active 
 autovaciado en <filename>/var/postgresql/data/postgresql.conf</filename>
-con las líneas:
+con las lÃ­neas:
 <screen>
 track_counts = on
 autovacuum = on
@@ -112,7 +112,7 @@ autovacuum = on
 				</listitem>
 				<listitem>
 					<para> 
-PHP 5 con módulo para PostgreSQL y Pear (ver instalación
+PHP 5 con mÃ³dulo para PostgreSQL y Pear (ver instalaciÃ³n
 de PHP 5 en <ulink url="http://structio.sourceforge.net/guias/servidor_OpenBSD/apache.html#php"></ulink>). 
 					</para>
 					<para>
@@ -125,7 +125,7 @@ session.auto_start = 1
 max_execution_time = 900
 max_input_time = 900
 </screen>
-así cada analista tendrá más tiempo de edición en algunos casos.
+asÃ­ cada analista tendrÃ¡ mÃ¡s tiempo de ediciÃ³n en algunos casos.
 					</para>
 					<para>
 Para instalar <command>pear</command> en OpenBSD, configure la variable 
@@ -141,12 +141,12 @@ sudo pkg_add pear
 					<para>
 Puede instalar 
 algunos paquetes estables de <application>pear</application> que 
-también están disponibles como paquetes de OpenBSD por ejemplo con:
+tambiÃ©n estÃ¡n disponibles como paquetes de OpenBSD por ejemplo con:
 <screen>
 sudo pkg_add pear-DB
 </screen>
 Otros paquetes estables para <application>pear</application>
-los puede instalar con una conexión a Internet por ejemplo con:
+los puede instalar con una conexiÃ³n a Internet por ejemplo con:
 <screen>
 sudo pear install Auth 
 sudo pear install HTML_Common
@@ -173,7 +173,7 @@ sudo pear install ./Validate-* </screen>
 					</para>
 				</listitem>
 				<!--				<listitem>
-					<para>La ejecución de algunos archivos
+					<para>La ejecuciÃ³n de algunos archivos
 						de comandos requieren un interprete de
 					comandos que soporte</para>
 			</listitem> -->
@@ -183,7 +183,7 @@ sudo pear install ./Validate-* </screen>
 	</sect1>
 
 	<sect1 id="pasos">
-		<title>Procedimiento de instalación</title>
+		<title>Procedimiento de instalaciÃ³n</title>
 
 		<para>
 
@@ -197,10 +197,10 @@ para sivel (digamos con login <literal>sivel</literal>).
 				<listitem>
 					<para>
 Instale en un directorio utilizable por Apache con SSL.
-Por ejemplo si las fuentes están en
+Por ejemplo si las fuentes estÃ¡n en
 <filename>~/Desktop/sivel-&PRY-VERSION;.tar.gz</filename> y va a 
 instalar en el directorio <filename>/var/www/htdocs/sivel</filename> que
-debería ser visible para Apache, emplee:
+deberÃ­a ser visible para Apache, emplee:
 <screen>
 cd /var/www/htdocs
 sudo mkdir sivel
@@ -213,8 +213,8 @@ cd /var/www/htdocs/sivel/
 sudo chown -R sivel:sivel .
 sudo chmod -R a+r .
 </screen>
-Después puede editar <filename>/var/www/conf/httpd.conf</filename>
-y cambiar algunas líneas de la configuracion de SSL (remplace 
+DespuÃ©s puede editar <filename>/var/www/conf/httpd.conf</filename>
+y cambiar algunas lÃ­neas de la configuracion de SSL (remplace 
 <literal>miServidor</literal> y 
 <literal>micorreo@midominio.org</literal> por valores apropiados para su caso):
 <screen>
@@ -243,7 +243,7 @@ exit
 				</listitem>
 				<listitem>
 					<para>
-Ejecute el archivo de ordenes de configuración:
+Ejecute el archivo de ordenes de configuraciÃ³n:
 <screen>
 cd /var/www/htdocs/sivel/
 ./conf.sh
@@ -260,18 +260,18 @@ cd /var/www/htdocs/sivel/sitios
 ./nuevo.sh sivel
 </screen>
 Este archivo de ordenes 
-copiará los archivo <filename>pordefecto/plantilla-conf.php</filename> 
+copiarÃ¡ los archivo <filename>pordefecto/plantilla-conf.php</filename> 
 y <filename>pordefecto/plantilla-vardb.sh</filename> como
 <filename>sivel/conf.php</filename> y <filename>sivel/vardb.sh</filename>
 cuadrando rutas y usuario de PostgreSQL (si requiere cambiar usuario
-o clave de PostgreSQL edite <filename>sivel/conf.php</filename>).  También
-inicializará la base de datos y los archivos relacionados, lo cual usted 
+o clave de PostgreSQL edite <filename>sivel/conf.php</filename>).  TambiÃ©n
+inicializarÃ¡ la base de datos y los archivos relacionados, lo cual usted 
 puede hacer manualmente con:
 <screen>
 cd /var/www/htdocs/sivel/sitios/sivel
 ../../bin/creapg.sh
 </screen>
-y el mismo archivo de ordenes le permitirá agregar el primer usuario al cual
+y el mismo archivo de ordenes le permitirÃ¡ agregar el primer usuario al cual
 debe darle el rol de administrador.  Si posteriormente requiere agregar
 otros usuarios para este sitio desde el interprete de comandos ejecute:
 <screen>
@@ -280,15 +280,15 @@ cd /var/www/htdocs/sivel/sitios/sivel
 </screen>
 </para>
 <para>
-	Este archivo de ordenes también pondrá un fondo por defecto que puede
+	Este archivo de ordenes tambiÃ©n pondrÃ¡ un fondo por defecto que puede
 	modificar cambiando en el directorio de su sitio el archivo 
 	<filename>fondo.jpg</filename>.
 </para>
 				</listitem>
 				<listitem>
 					<para>
-Desde un navegador abra el directorio en el que instaló.   Si lo requiere
-puede revisar errores en la bitácora de Apache (por defecto
+Desde un navegador abra el directorio en el que instalÃ³.   Si lo requiere
+puede revisar errores en la bitÃ¡cora de Apache (por defecto
 <filename>/var/www/log/error_log</filename>).
 					</para>
 				</listitem>
@@ -297,12 +297,12 @@ puede revisar errores en la bitácora de Apache (por defecto
 
 		</para>
 		<sect2 id="inst-opcional">
-			<title>Otros pasos de instalación opcionales</title>
+			<title>Otros pasos de instalaciÃ³n opcionales</title>
 
 			<orderedlist>
 				<listitem>
 					<para>
-Si desea generar la documentación:
+Si desea generar la documentaciÃ³n:
 <screen>
 cd /var/www/htdocs/sivel/doc
 ./conf.sh
@@ -319,29 +319,29 @@ make
 Si desea configurar un esquema de respaldos puede emplear
 los archivos de comandos <literal>../../bin/pgdump.sh</literal> y 
 <literal>../../bin/respaldo.sh</literal>, que facilitan hacer respaldo
-diario y mantener la copia del último mes en el computador local y
-opcionalmente de la última semana en un computador remoto. Requieren 
-<command>scp</command> y algunas variables de configuración de 
+diario y mantener la copia del Ãºltimo mes en el computador local y
+opcionalmente de la Ãºltima semana en un computador remoto. Requieren 
+<command>scp</command> y algunas variables de configuraciÃ³n de 
 <filename>conf.php</filename> (ver <xref linkend="copias-respaldo"></xref> y <xref linkend="respaldo-diario"></xref>).
 					</para>
 				</listitem>
 				<listitem>
-					<para>Para activar corrección
-ortográfica, instale 
+					<para>Para activar correcciÃ³n
+ortogrÃ¡fica, instale 
 <application>ispell</application> e <application>ispell-spanish</application>.
 Si Apache corre chroot en un directorio (digamos <filename>/var/www</filename>),
 cree en ese directorio la estructura de directorios que requieren
 <application>ispell</application> e <application>ispell-spanish</application>
-y copie lo básico de estos en la nueva estructura ---las librerías compartidas
+y copie lo bÃ¡sico de estos en la nueva estructura ---las librerÃ­as compartidas
 que <command>ispell</command> requiera puede verlas con 
-<command>ldd</command>.  Eventualmente podrá efectuar estas operaciones
+<command>ldd</command>.  Eventualmente podrÃ¡ efectuar estas operaciones
 con el script <literal>bin/prep-chroot.sh</literal> distribuido
 junto con las fuentes de SIVeL.
 </para>
 <para>
 	Una vez instale y pruebe <command>ispell</command> en el directorio
 	chroot, desde el directorio de fuentes de SIVeL verifique que la 
-	ruta esté especificada en <filename>confv.empty</filename> (variable 
+	ruta estÃ© especificada en <filename>confv.empty</filename> (variable 
 	<literal>CHROOT</literal>) y ejecute:
 	<screen>
 $ rm confv.sh
@@ -350,21 +350,21 @@ $ ./conf.sh
 	Finalmente puede editar <filename>conf.php</filename> en el 
 	directorio de su sitio para 
 	modificar el mensaje que se presenta cuando se encuentras errores
-	ortográficos 
+	ortogrÃ¡ficos 
 	(<literal>MENS_ORTOGRAFIA</literal>). </para>
-<para>Una vez en operación podrá agregar palabras que sean correctas en
-	el diccionario configurado (por defecto está en las fuentes de SIVeL con
-	nombre <filename>ispell.dic</filename>); una palabra por línea, sin
+<para>Una vez en operaciÃ³n podrÃ¡ agregar palabras que sean correctas en
+	el diccionario configurado (por defecto estÃ¡ en las fuentes de SIVeL con
+	nombre <filename>ispell.dic</filename>); una palabra por lÃ­nea, sin
 	dejar espacios a izquierda ni derecha.  Si va a agregar palabras
 	con tildes, cambie la vocal tildada por la vocal sin tilde pero con
-	un apostrofe como prefijo, por ejemplo la palabra "nación" se agrega
+	un apostrofe como prefijo, por ejemplo la palabra "naciÃ³n" se agrega
 	como "naci'on" (sin comillas).
 	</para>
 				</listitem>
 				<listitem>
 					<para>Para publicar la Consulta
 Web en Internet y activar 
-retroalimentación cifrada por correo vea 
+retroalimentaciÃ³n cifrada por correo vea 
 <xref linkend="retroalimentacion"></xref>.
 	</para>
 				</listitem>
@@ -372,7 +372,7 @@ retroalimentación cifrada por correo vea
    		</sect2>
 	</sect1>
 	<sect1 id="actualizacion-sivel">
-		<title>Actualización</title>
+		<title>ActualizaciÃ³n</title>
 		<para>Es importante:
 			<itemizedlist>
 				<listitem>
@@ -383,45 +383,45 @@ retroalimentación cifrada por correo vea
 						<literal>sivel-soporte@lists.sourceforge.net</literal></para>
 				</listitem>
 				<listitem>
-					<para>Capacitarse para realizar actualizaciones periódicas al sistema operativo y a SIVeL.</para>
+					<para>Capacitarse para realizar actualizaciones periÃ³dicas al sistema operativo y a SIVeL.</para>
 				</listitem>
 			</itemizedlist>
 		</para>
 
-		 <para>El proceso de actualización consta de dos partes: primero
-actualizar las fuentes y después ejecutar la herramienta de
-actualización <literal>actualiza.php</literal>.
+		 <para>El proceso de actualizaciÃ³n consta de dos partes: primero
+actualizar las fuentes y despuÃ©s ejecutar la herramienta de
+actualizaciÃ³n <literal>actualiza.php</literal>.
 </para>
 
 <sect2 id="actualiza-fuentes">
-        <title>Actualización de fuentes</title>
+        <title>ActualizaciÃ³n de fuentes</title>
 		<para>
-Para actualizar fuentes de un SIVeL genérico o con personalizaciones 
-simples (módulos, tablas básicas, interfaz y reinterpretaciones, 
-ver <xref linkend="personalizacion"></xref>) la actualización puede 
-hacerla un administrador de red siguiendo las instrucciones de esta sección.
+Para actualizar fuentes de un SIVeL genÃ©rico o con personalizaciones 
+simples (mÃ³dulos, tablas bÃ¡sicas, interfaz y reinterpretaciones, 
+ver <xref linkend="personalizacion"></xref>) la actualizaciÃ³n puede 
+hacerla un administrador de red siguiendo las instrucciones de esta secciÃ³n.
 		</para>
 
 		<para>
-Para actualizar fuentes con personalizaciones profundas (más que uso de 
-módulos existentes, refinamiento de tablas básicas y de variables de 
-configuración) es necesario que un desarrollador (con conocimientos de 
-PHP, SQL y seguridad informática) mezcle actualizaciones del SIVeL 
-genérico a las fuentes personalizadas.  
+Para actualizar fuentes con personalizaciones profundas (mÃ¡s que uso de 
+mÃ³dulos existentes, refinamiento de tablas bÃ¡sicas y de variables de 
+configuraciÃ³n) es necesario que un desarrollador (con conocimientos de 
+PHP, SQL y seguridad informÃ¡tica) mezcle actualizaciones del SIVeL 
+genÃ©rico a las fuentes personalizadas.  
 		</para>
 	<sect3 id="actualizacionmenor">
-		<title>Actualización de versiones menores (e.g 1.1b1 a 1.1b2)</title>
+		<title>ActualizaciÃ³n de versiones menores (e.g 1.1b1 a 1.1b2)</title>
 		<para>
-			Descargue fuentes de la versión 1.1 más recientes con uno de los siguientes métodos:
+			Descargue fuentes de la versiÃ³n 1.1 mÃ¡s recientes con uno de los siguientes mÃ©todos:
 			<orderedlist>
 				<!--								<listitem>
 					<para>De resultarle posible actualice 
 						el sistema operativo
-			completo empleando la distribución 
+			completo empleando la distribuciÃ³n 
 			<ulink url="http://aprendiendo.pasosdeJesus.org">AdJ</ulink> 
-			más reciente y el script de instalación
+			mÃ¡s reciente y el script de instalaciÃ³n
 			<filename>inst-sivel.sh</filename>.   De esta forma
-			asegurará tener versiones recientes de todos los
+			asegurarÃ¡ tener versiones recientes de todos los
 			componentes (particularmente PHP, PostgreSQL, Pear y
 			paquetes de Pear como 
 			<literal>DB_DataObject_FormBuilder</literal>),
@@ -430,7 +430,7 @@ genérico a las fuentes personalizadas.
 					</para>
 				</listitem>
 				<listitem>
-					<para>Si tiene instalado un paquete de SIVeL, al usuario que administra SIVeL debería bastarle ejecutar desde una terminal:
+					<para>Si tiene instalado un paquete de SIVeL, al usuario que administra SIVeL deberÃ­a bastarle ejecutar desde una terminal:
 						<screen>
 export PKG_PATH=ftp://ftp.pasosdeJesus.org/pub/AprendiendoDeJesus/4.7/paquetes/	
 sudo pkg_add -u sivel
@@ -440,12 +440,12 @@ cd /var/www/users/sivel
 				</listitem> -->
 				<listitem>
 					<para>
-Descargue las fuentes más recientes desde 
+Descargue las fuentes mÃ¡s recientes desde 
 <ulink url="http://sivel.sourceforge.net/1.1/"></ulink>, 
-ubiquelas en el servidor y descomprímalas.  Si las descarga con 
+ubiquelas en el servidor y descomprÃ­malas.  Si las descarga con 
 Firefox desde el servidor posiblemente quedaran en el directorio 
 <literal>Desktop</literal> de su cuenta personal por lo que puede 
-descomprimir y remplazar fuentes anteriores.  Usando OpenBSD adJ sería
+descomprimir y remplazar fuentes anteriores.  Usando OpenBSD adJ serÃ­a
 con:
 						<screen>
 cd ~/Desktop
@@ -457,7 +457,7 @@ cp -rf sivel-&PRY-VERSION;/* /var/www/htdocs/sivel/
 				</listitem>
 				<listitem>
 					<para>
-Si desea emplear las fuentes de desarrollo descárguelas y cópielas con 
+Si desea emplear las fuentes de desarrollo descÃ¡rguelas y cÃ³pielas con 
 <screen>
 cd ~
 mkdir tmp2
@@ -483,18 +483,18 @@ cvs -z3 -d:pserver:anonymous@sivel.cvs.sourceforge.net:/cvsroot/sivel update -rS
 			</orderedlist>
 		</para>
 		<para>
-Después debe asegurarse de tener configurado Apache para
-acceder a SIVeL en su nueva ubicación 
+DespuÃ©s debe asegurarse de tener configurado Apache para
+acceder a SIVeL en su nueva ubicaciÃ³n 
 <filename>/var/www/htdocs/sivel/</filename>. 
-Para esto edite el archivo de configuración con:
+Para esto edite el archivo de configuraciÃ³n con:
 <screen>
 sudo xfw /var/www/conf/httpd.conf
 </screen>
-Busque una línea con:
+Busque una lÃ­nea con:
 <screen>
 DocumentRoot "/var/www/users/sivel"
 </screen>
-y si la encuentra remplázela por:
+y si la encuentra remplÃ¡zela por:
 <screen>
 DocumentRoot "/var/www/htdocs/sivel"
 </screen>
@@ -507,27 +507,27 @@ sudo sh /etc/rc.local
 
 	</sect3>
 	<sect3 id="actualizaciondeunoaunouno">
-		<title>Actualización de la versión 1.0 a la versión 1.1</title>
-		<para>Esta actualización es bastante compleja, se
-			recomienda dejar su versión 1.0 utilizable con 
-			propósitos de auditoria y respaldo.
+		<title>ActualizaciÃ³n de la versiÃ³n 1.0 a la versiÃ³n 1.1</title>
+		<para>Esta actualizaciÃ³n es bastante compleja, se
+			recomienda dejar su versiÃ³n 1.0 utilizable con 
+			propÃ³sitos de auditoria y respaldo.
 		</para>
 		<para>
 <orderedlist>
 	<listitem>
 		<para>
-Actualice a la versión más reciente de SIVeL 1.0 (1.0.6 en el 
+Actualice a la versiÃ³n mÃ¡s reciente de SIVeL 1.0 (1.0.6 en el 
 momento de este escrito), siguiendo las instrucciones de 
 <ulink url="http://sivel.sourceforge.net/1.0/actualizacion-sivel.html"></ulink></para>
 	</listitem>
 	<listitem>
 		<para>
-Valide sus datos desde el menú Otros->Validar.  Examine el reporte y 
+Valide sus datos desde el menÃº Otros->Validar.  Examine el reporte y 
 corrija las inconsistencias en su base, puede ejecutar varias veces el 
-procedimiento de validación hasta asegurarse de tener datos consistentes.  
-Esto es muy importante porque para la conversión a 1.1 sólo esperamos 
+procedimiento de validaciÃ³n hasta asegurarse de tener datos consistentes.  
+Esto es muy importante porque para la conversiÃ³n a 1.1 sÃ³lo esperamos 
 que se conviertan datos correctos en datos correctos. 
-<warning><para>Los datos incorrectos o inconsistentes pueden perderse al convertirlos a la versión 1.1.</para></warning>
+<warning><para>Los datos incorrectos o inconsistentes pueden perderse al convertirlos a la versiÃ³n 1.1.</para></warning>
  </para>
 	</listitem>	
 	<listitem>
@@ -538,29 +538,29 @@ debe bastar para el usuario que administra SIVeL ejecutar desde una terminal:
 cd /var/www/htdocs/sivel
 bin/mueve.sh
 </screen>
-Que dejará las fuentes en <filename>/var/www/htdocs/sivel10</filename> 
+Que dejarÃ¡ las fuentes en <filename>/var/www/htdocs/sivel10</filename> 
 usando la base de datos <literal>sivel10</literal> con copia de sus datos
 y permite ingresar agregando <literal>sivel10/</literal> al URL base. 
 Por ejemplo <ulink url="http://127.0.0.1/sivel10/"></ulink> desde el
 mismo servidor.</para>
 <para>Si requiere reubicar en otro sitio consulte 
 <ulink url="http://sivel.sourceforge.net/1.0/admin2.html#copias-respaldo"></ulink></para>
-<para>Este script al terminar la reubicación, le sugerirá revisar el nuevo URL
-	y borrar las fuentes de la versión 1.0 de su ubicación anterior,
+<para>Este script al terminar la reubicaciÃ³n, le sugerirÃ¡ revisar el nuevo URL
+	y borrar las fuentes de la versiÃ³n 1.0 de su ubicaciÃ³n anterior,
 	presionando la tecla 's' y 'RETORNO'. Es recomendable que realice
-	esta acción.
+	esta acciÃ³n.
 	</para>
 	</listitem>
 	<listitem>
 		<para>
-Instale la versión de desarrollo de SIVeL 1.1, siguiendo los mismos pasos
+Instale la versiÃ³n de desarrollo de SIVeL 1.1, siguiendo los mismos pasos
 descritos en:
 			<xref linkend="actualizacionmenor"></xref>.
 		</para>
 	</listitem>
 	<listitem>
-		<para>Configúrela para que use la base legada de SIVeL 1.0.
-Si movió su sistema 1.0 como se describió en esta sección
+		<para>ConfigÃºrela para que use la base legada de SIVeL 1.0.
+Si moviÃ³ su sistema 1.0 como se describiÃ³ en esta secciÃ³n
 y dejo las ubicaciones por defecto, basta que ejecute:
 <screen>
 	cd /var/www/htdocs/sivel/
@@ -573,37 +573,37 @@ cd /var/www/htdocs/sivel/
 ./nuevo.sh sivel
 </screen>
 Si requiere conocer la clave del usuario SIVeL ubiquese en el directorio con 
-fuentes de la versión  1.0 y ejecute:
+fuentes de la versiÃ³n  1.0 y ejecute:
 <screen>
 sudo grep "dbclave *=" aut/conf.php
 </screen>
-Y ponga esa clave en el archivo de la nueva versión, que puede editar con:
+Y ponga esa clave en el archivo de la nueva versiÃ³n, que puede editar con:
 <screen>
 sudo xfw /var/www/htdocs/sivel/sitios/sivel/conf.php
 </screen>
-buscando <literal>dbclave</literal> y remplazando <literal>xyz</literal> por la clave que anotó.  Salve 
+buscando <literal>dbclave</literal> y remplazando <literal>xyz</literal> por la clave que anotÃ³.  Salve 
 y salga.
 </para>
 	</listitem>
 	<listitem>
-		<para>Haga utilizable su sitio con todas las formas de conexión que tenga a su base por ejemplo si típicamente desde la red local emplea: https://192.168.44.10 para ingresar a SIVeL ejecute:
+		<para>Haga utilizable su sitio con todas las formas de conexiÃ³n que tenga a su base por ejemplo si tÃ­picamente desde la red local emplea: https://192.168.44.10 para ingresar a SIVeL ejecute:
 			<screen>
 cd /var/www/htdocs/sivel/sitios/
 ln -s sivel 192.168.44.10
 			</screen>
 Haga lo mismo con otras ubicaciones, el nombre del 
-enlace que debe crear lo verá al intentar abrir SIVeL.
+enlace que debe crear lo verÃ¡ al intentar abrir SIVeL.
 		</para>
 	</listitem>
 	<listitem>
 		<para>
 Convierta sus datos.  Para esto basta que ejecute la 
-herramienta de actualización que debería estar disponible desde el mismo 
+herramienta de actualizaciÃ³n que deberÃ­a estar disponible desde el mismo 
 servidor en <ulink url="https://127.0.0.1/actualiza.php"></ulink>.
-Es posible que tenga que iniciar la sesión 2 o 3 veces mientras
+Es posible que tenga que iniciar la sesiÃ³n 2 o 3 veces mientras
 se actualiza en cada intento la forma de cifrado de las claves<footnote><para>En
         caso de que tenga incoveniente reiterativos con claves asegurese 
-        que en la base de datos se esté almacenando el condensado SHA256 
+        que en la base de datos se estÃ© almacenando el condensado SHA256 
         de la clave y no el antiguo MD5, esto lo puede hacer para el usuario 
         <literal>juan</literal> ejecutando desde el directorio
         del sitio:
@@ -615,19 +615,19 @@ se actualiza en cada intento la forma de cifrado de las claves<footnote><para>En
 	<listitem>
 		<para>
 			Audite los datos convertidos.  Por ejemplo
-			puede verificar que el número de casos coincidan,
-			así como los conteos por víctimas individuales.</para>
-		<para>Para hacer una auditoria más intensiva se sugiere que 
+			puede verificar que el nÃºmero de casos coincidan,
+			asÃ­ como los conteos por vÃ­ctimas individuales.</para>
+		<para>Para hacer una auditoria mÃ¡s intensiva se sugiere que 
 genere un reporte general de todos los casos del sistema 1.0 y un 
 reporte general en el 1.1 y los compare teniendo en cuenta que 
 ha cambiado un poco el formato del reporte general 
 (Si en su base ha registrado acciones 
-bélicas active el módulo respectivo antes de realizar las comparaciones).
+bÃ©licas active el mÃ³dulo respectivo antes de realizar las comparaciones).
 </para>
 <para>
-Abra dos pestañas en su navegador en una realice un reporte general con 
+Abra dos pestaÃ±as en su navegador en una realice un reporte general con 
 todos los datos de la base anterior y en la otra el mismo reporte en la 
-base nueva.  Después:
+base nueva.  DespuÃ©s:
 <screen>
 cd /var/www/htdocs/sivel/sitios/sivel
 mkdir compara-migra
@@ -637,15 +637,15 @@ Pegue los datos de la base anterior en un archivo que puede iniciar con:
 <screen>
 xfw anterior.txt
 </screen>
-Después pegue los del nuevo SIVeL en otro archivo digamos ábralo con:
+DespuÃ©s pegue los del nuevo SIVeL en otro archivo digamos Ã¡bralo con:
 <screen>
 xfw nuevo.txt
 </screen>
-A continuación compare diferencias entre ambos archivos con:
+A continuaciÃ³n compare diferencias entre ambos archivos con:
 <screen>
 diff anterior.txt nuevo.txt | less
 </screen>
-Verá sus resultados con el paginador less.
+VerÃ¡ sus resultados con el paginador less.
 </para>
 
 	</listitem>
@@ -656,52 +656,52 @@ Verá sus resultados con el paginador less.
 
 
 	<sect2 id="actualiza.php">
-		<title>Herramienta de actualización</title>
+		<title>Herramienta de actualizaciÃ³n</title>
 
 		<para>
-La ejecuta abriendo SIVeL con un navegador pero agregando a la dirección 
+La ejecuta abriendo SIVeL con un navegador pero agregando a la direcciÃ³n 
 <literal>actualiza.php</literal> 
-(e.g. desde el mismo servidor sería <ulink url="https://127.0.0.1/actualiza.php"></ulink>).
+(e.g. desde el mismo servidor serÃ­a <ulink url="https://127.0.0.1/actualiza.php"></ulink>).
 		</para>
 		<para>
-		Este mismo procedimiento debe realizarlo si activa módulos.</para>
+		Este mismo procedimiento debe realizarlo si activa mÃ³dulos.</para>
 	</sect2>
 
 	</sect1>
 	<sect1 id="pruebas-regresion">
-		<title>Pruebas de regresión</title>
+		<title>Pruebas de regresiÃ³n</title>
 		<para>Una vez instale o actualice SIVeL es recomendable que
-			ejecute las pruebas de regresión para verificar
+			ejecute las pruebas de regresiÃ³n para verificar
 			que en su plataforma opera como se espera.  
 		</para>
 
-	    <para>Hay 2 grupos de pruebas de regresión, unos se ejecutan
-		    en un entorno que emula la interacción del navegador
+	    <para>Hay 2 grupos de pruebas de regresiÃ³n, unos se ejecutan
+		    en un entorno que emula la interacciÃ³n del navegador
 		    con el servidor web y el otro se ejecuta
 		    desde el navegador Firefox empleando Selenium 
 		    <xref linkend="selenium"></xref>.
 	    </para>
 	    <sect2 id="pruebas-emulando">
 		    <title>Pruebas que emulan navegador y servidor</title>
-	    <para>Las pruebas de regresión que emulan navegador y servidor
-		    pueden emplearse después de iniciar un primer sitio
+	    <para>Las pruebas de regresiÃ³n que emulan navegador y servidor
+		    pueden emplearse despuÃ©s de iniciar un primer sitio
 		    (digamos <filename>sitios/sivel</filename>).
 		    Debe ejecutarlas como el usuario del sistema operativo
-		    que administra SIVeL pues eliminarán y crearán una base
+		    que administra SIVeL pues eliminarÃ¡n y crearÃ¡n una base
 			de datos con nombre <literal>sivel-prueba</literal>.
 		</para>
 			<warning><para>No use la base <literal>sivel-prueba</literal> 
-					porque será borrada cada vez que 
-					se ejecuten las pruebas de regresión.
+					porque serÃ¡ borrada cada vez que 
+					se ejecuten las pruebas de regresiÃ³n.
 			</para></warning>
 	    <para>Para ejecutarlas abra una terminal y pase al directorio con
 		    fuentes de SIVeL (eventualmente llega con
-		    <literal>cd /var/www/htdocs/sivel/</literal>). Después
+		    <literal>cd /var/www/htdocs/sivel/</literal>). DespuÃ©s
 		    ejecute:
 			<screen>
 sitios/pruebas/pruebas.sh
 			</screen>
-			Se presentará un resumen del resultado  de las pruebas,
+			Se presentarÃ¡ un resumen del resultado  de las pruebas,
 			si alguna falla, por favor reporte
 			el inconveniente en
 			<ulink url="http://sourceforge.net/tracker/?atid=637817&amp;group_id=104373&amp;func=browse"></ulink>
@@ -710,41 +710,41 @@ sitios/pruebas/pruebas.sh
 			los archivos de los directorios
 			<filename>sitios/pruebas/salida</filename> y
 			<filename>sitios/pruebas/esperado</filename>.
-			Estos archivos no incluyen información de sus
-			bases de datos, pero si de su instalación 
+			Estos archivos no incluyen informaciÃ³n de sus
+			bases de datos, pero si de su instalaciÃ³n 
 			de PostgreSQL, PHP y SIVeL.
 		</para>
     </sect2> 
     <sect2 id="pruebas-selenium">
 	    <title>Pruebas con Selenium</title>
-	    <para>Las pruebas con Selenium son más demoradas de preparar
+	    <para>Las pruebas con Selenium son mÃ¡s demoradas de preparar
 		    y de ejecutar. 
 		    Requieren Mozilla Firefox y el complemento Selenium IDE 
 		    (disponible en <xref linkend="selenium"></xref>).
 		    Una vez instale el complemento abralo
 		    desde <menuchoice><guimenu>Herramientas</guimenu><guimenuitem>Selenium IDE</guimenuitem></menuchoice>.  
-		    Desde el diálogo que se abre puede crear o reproducir
+		    Desde el diÃ¡logo que se abre puede crear o reproducir
 		    casos de prueba.  En el momento de este escrito hay 
-		    un caso de prueba para las tablas básicas en 
+		    un caso de prueba para las tablas bÃ¡sicas en 
 		    <filename>sites/pruebas/basicas.selenium</filename>.
 		    Este caso de prueba debe ejecutarse desde un
-		    SIVeL en operación y a diferencia del otro conjunto
+		    SIVeL en operaciÃ³n y a diferencia del otro conjunto
 		    de pruebas modifica datos, aunque procura hacerlo
 		    de forma controlada.  Este caso de prueba espera:
 		    <itemizedlist>
 			    <listitem>
-				    <para>Que se inicie desde el menú
+				    <para>Que se inicie desde el menÃº
 				    principal de SIVeL</para>
 		    </listitem>
 		    <listitem>
 			    <para>Que no se hayan borrado registros
-				    de las tablas básicas ni que se hayan
+				    de las tablas bÃ¡sicas ni que se hayan
 				    deshabilitado diversos registros en 
-				    diversas tablas básicas.</para>
+				    diversas tablas bÃ¡sicas.</para>
 		    </listitem>
 		    <listitem>
 			    <para>Que no existan registros en las tablas
-				    básicas con nombre <literal>x</literal>
+				    bÃ¡sicas con nombre <literal>x</literal>
 			    </para>
 		    </listitem>
 	    </itemizedlist>
@@ -752,12 +752,12 @@ sitios/pruebas/pruebas.sh
 	    <menuchoice><guimenu>File</guimenu><guimenuitem>Open Test Case</guimenuitem></menuchoice>, abra el archivo
 	    <filename>sites/pruebas/basicas.selenium</filename>
 	    y presione el boton de ejecutar.
-		Tendrá que esperar un buen tiempo mientras este
-	procedimiento prueba cada una de las tablas básicas 
-	(excepto Clase) modificando la fecha de deshabilitación
+		TendrÃ¡ que esperar un buen tiempo mientras este
+	procedimiento prueba cada una de las tablas bÃ¡sicas 
+	(excepto Clase) modificando la fecha de deshabilitaciÃ³n
 	de un registro existente, volviendolo a dejar en blanco
 	y creando un nuevo registro con nombre <literal>x</literal> que
-	después borra.  Si se detienen antes de concluir por favor envíe una 
+	despuÃ©s borra.  Si se detienen antes de concluir por favor envÃ­e una 
 	captura de pantalla tanto del navegador como de Selenium IDE a
 			<ulink url="http://sourceforge.net/tracker/?atid=637817&amp;group_id=104373&amp;func=browse"></ulink>.
 		</para>
