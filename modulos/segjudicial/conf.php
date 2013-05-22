@@ -18,4 +18,4 @@
 
 $GLOBALS['modulo'][400] = '';
 
-$GLOBALS['nueva_ficha_tabuladores'][] =  array(9,'segjudicial', 'modulos/segjudicial/PagSegJudicial', 9);
+$GLOBALS['nueva_ficha_tabuladores'][] =  array(9, 'segjudicial', 'modulos/segjudicial/PagSegJudicial', 9);

@@ -286,6 +286,9 @@ class PagSegJudicial extends PagBaseMultiple
         $vv = isset($this->bproceso->_do->id) ?
             $this->bproceso->_do->id: '';
 
+        $cq = $this->getElement('id_tproceso');
+        $id_tproceso= $cq->_elements[0];
+        $id_etapa = $cq->_elements[1];
         if ($vv != '') {
             $d =& objeto_tabla('proceso');
             $d->get($vv);
@@ -295,13 +298,13 @@ class PagSegJudicial extends PagBaseMultiple
                     $cq->setValue($d->$c);
                 }
             }
-            $cq = $this->getElement('id_tproceso');
-            $id_tproceso= $cq->_elements[0];
-            $id_etapa = $cq->_elements[1];
             $id_tproceso->setValue($d->id_tproceso);
             $id_etapa->setValue($d->id_etapa);
             //die("x");
+        } else {
+            $id_tproceso->setValue(DataObjects_Tproceso::idSinInfo());
         }
+
 
     }
 
@@ -343,8 +346,8 @@ class PagSegJudicial extends PagBaseMultiple
         $valores['id_etapa'] = (int)$valores['tipoetapa'][1];
         $es_vacio = (
             (!isset($valores['id_tproceso'])
-            || $valores['id_tproces'] === ''
-            || $valores['id_tproces'] == DataObjects_Tproceso::idSinInfo()
+            || $valores['id_tproceso'] === ''
+            || $valores['id_tproceso'] == DataObjects_Tproceso::idSinInfo()
             )
             || (!isset($valores['id_etapa'])
                 || $valores['id_etapa']==
