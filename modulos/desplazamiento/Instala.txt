@@ -1,0 +1,12 @@
+Desplazamiento
+
+1. En el archivo de configuración del sitio agregue modulos/desplazamiento
+   entre los módulos:
+		$modulos="modulos/desplazamiento";
+
+2. Desde un navegador abra la página de actualización de la base, por
+   ejemplo desde el mismo servidor con:
+	https://127.0.0.1/actualiza.php  
+   y siga las instrucciones que allí vea (en particular darle permiso
+   de escritura a los archivos .ini y .links.ini).
+
