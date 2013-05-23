@@ -1,6 +1,6 @@
 1. Prerrequisitos
 
-     * Sistema tipo Unix, recomendamos OpenBSD 4.9 y en particular la
+     * Sistema tipo Unix, recomendamos OpenBSD 5.3 y en particular la
        distribución Aprendiendo de Jesús (ver
        http://aprendiendo.pasosdeJesus.org).
      * Para hacer pruebas durante la configuración puede emplear una
@@ -73,7 +73,7 @@ sudo pear install ./Validate-*
     1. Aunque no es indispensable se recomienda que cree una cuenta para
        sivel (digamos con login sivel).
     2. Instale en un directorio utilizable por Apache con SSL. Por ejemplo
-       si las fuentes están en ~/Desktop/sivel-1.1.1.tar.gz y va a
+       si las fuentes están en ~/Desktop/sivel-1.2a1.tar.gz y va a
        instalar en el directorio /var/www/htdocs/sivel que debería ser
        visible para Apache, emplee:
 cd /var/www/htdocs
@@ -81,8 +81,8 @@ sudo mkdir sivel
 cd ~/
 mkdir -p tmp
 cd tmp
-tar xvfz ~/Desktop/sivel-1.1.1.tar.gz
-sudo cp -rf sivel-1.1.1/* /var/www/htdocs/sivel/
+tar xvfz ~/Desktop/sivel-1.2a1.tar.gz
+sudo cp -rf sivel-1.2a1/* /var/www/htdocs/sivel/
 cd /var/www/htdocs/sivel/
 sudo chown -R sivel:sivel .
 sudo chmod -R a+r .
@@ -114,7 +114,7 @@ cd /var/www/htdocs/sivel/sitios
 ./nuevo.sh sivel
 
        Este archivo de ordenes copiará los archivo
-       pordefecto/conf.php.plantilla y pordefecto/vardb.sh.plantilla como
+       pordefecto/plantilla-conf.php y pordefecto/plantilla-vardb.sh como
        sivel/conf.php y sivel/vardb.sh cuadrando rutas y usuario de
        PostgreSQL (si requiere cambiar usuario o clave de PostgreSQL edite
        sivel/conf.php). También inicializará la base de datos y los

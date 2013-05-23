@@ -21,7 +21,7 @@ PRY_DESC="Documentación de SIVeL"
 # Descripción corta
 #
 
-FECHA_PROX="20/07/2011"
+FECHA_PROX="20/03/2013"
 # Fecha en la que esperamos liberar próxima versión
 #
 
@@ -188,6 +188,10 @@ PS2PDF=""
 RM=""
 # Para eliminar archivos
 # Herramienta típica en sistemas Unix.
+
+RECODE=""
+# Para convertir entre diversas codificaciones
+# En OpenBSD incluida en el paquete recode
 
 SCP=""
 # Programa para transferir archivos desde la línea de comandos usando SSH
