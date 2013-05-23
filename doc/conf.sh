@@ -294,6 +294,7 @@ check "MV" "" "test -x \$MV" `which mv 2> /dev/null`
 check "MKDIR" "" "test -x \$MKDIR" `which mkdir 2> /dev/null`
 check "PERL" "optional" "test -x \$PERL" `which perl 2> /dev/null`
 check "RM" "" "test -x \$RM" `which rm 2> /dev/null`
+check "RECODE" "" "test -x \$RECODE" `which recode 2> /dev/null`
 check "SED" "" "test -x \$SED" `which sed 2> /dev/null`
 check "TAR" "" "test -x \$TAR" `which tar 2> /dev/null`
 check "TIDY" "optional" "test -x \$TIDY" `which tidy 2> /dev/null`
