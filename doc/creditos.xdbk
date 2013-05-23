@@ -4,12 +4,14 @@
   <title>Créditos</title> 
 
   <para>Damos gracias primero a Dios y a &Eacute;l encomendamos y dedicamos
-	  este proyecto. </para>
-  <para>Se han empleado como referencia interfaces de usuario y datos
-	  (sin consultar fuentes ni estructuras de las bases) las 
+      este proyecto. </para>
+  <para>En 2004 con autorización del sacerdote Javier Giraldo se emplearon 
+      como referencia inicial interfaces de usuario 
+      y datos (sin consultar fuentes ni estructuras de las bases) de las 
 	  siguientes bases de datos del 
-	  <ulink url="http://www.nocheyniebla.org">Banco de Datos de DDHH, DIH y VPS</ulink> 
-	  del <ulink url="http://www.cinep.org.co">CINEP</ulink>:
+      <ulink url="http://www.nocheyniebla.org">Banco de Datos de 
+          DDHH, DIH y VPS</ulink> del 
+      <ulink url="http://www.cinep.org.co">CINEP</ulink>:
 	  <itemizedlist>
 		  <listitem>
 			  <para> Base empleada de 1998 a 2000.</para>
@@ -20,37 +22,26 @@
 	  </itemizedlist>
   </para>
   <para>
-	  Ha ayudado con su autorización
- <itemizedlist>
-	 <listitem>
-		 <para>
-	S. Javier Giraldo, coordinador del Banco de Datos de Derechos
-	Humanos, Derecho Internacional Humanitario y Violencia Política
-	del CINEP.
-		 </para>
-	 </listitem>
-	 </itemizedlist>
-  </para>
-  <para>
-	  Han aportado datos para las tablas básicas:
+	  Los aportes iniciales para las tablas básicas provienen de:
 	  <itemizedlist>
 		  <listitem>
 			  <para>
 	 Categorías de "Marco Conceptual", revista Noche y Niebla.
-	  http://www.nocheyniebla.org
+     http://www.nocheyniebla.org
 			  </para>
 		  </listitem>
 		  <listitem>
 			  <para>
 	 Información geográfica tomada del Departamento Nacional
-	  de Planeación, DANE y Banco de Datos de Derechos Humanos y
+	  de Planeación, DANE, Banco de Datos de Derechos Humanos y
 	  Violencia Política.
 			  </para>
 		  </listitem>
 		  <listitem>
 			  <para>
 	Otros datos empleados en el Banco de Datos de Derechos Humanos y
-	  Violencia Política del CINEP.
+    Violencia Política del CINEP, así como por integrantes de la
+    Red de Bancos de Datos.
 			  </para>
 		  </listitem>
 	  </itemizedlist>
@@ -60,8 +51,8 @@
 	<itemizedlist>
 		<listitem>
 			<para>William Rozo Alvarez (wiroal@nocheyniebla.org), 
-                Juana, M, Juliana Villabono, Bernardo, Jerry Garavito,
-                Freddy.
+                Juana, Mauricio Giraldo, Juliana Villabono, 
+                Bernardo, Jerry Garavito, Freddy Rivera.
 			</para>
 		</listitem>
 	</itemizedlist>
@@ -83,32 +74,45 @@
 	<itemizedlist>
 		<listitem>
 <para>
-	El módulo de seguimiento judicial y los datos relacionados han
-	sido aportados por Humanidad Vigente.
+    El módulo de seguimiento judicial y los datos relacionados fueron
+    aportados en Nov.2009 por Humanidad Vigente con autorización de 
+    Yenly Mendez.
 </para>	
 		</listitem>
 		<listitem>
 <para>
-	El módulo de Etiquetas se desarrolló inicialmente para el OPI.
+    El módulo de Etiquetas se desarrolló inicialmente para el OPI
+    en 2006 con autorización de Santiago Camargo.
 </para>
 		</listitem>
 		<listitem>
 
 <para>
-	El módulo de Estadísticas por Rótulos se desarrolló inicialmente para Justapaz.
+    El módulo de Estadísticas por Rótulos se desarrolló inicialmente para 
+    Justapaz en 2007 con autorización de Jenny Neme. 
 </para>
 		</listitem>
 		<listitem>
 <para>
-	El módulo de Anexos se desarrolló inicialmente para Reiniciar.
+    El módulo de Anexos se desarrolló inicialmente para Reiniciar en 2006
+    con autorización de Jahel Quiroga.
 </para>
 		</listitem>
 		<listitem>
 <para>
     El módulo de Georeferenciación sobre Googlemaps lo desarrollo 
-    Luca Urech &lt;lucaurech@yahoo.de&gt; para la Corporación Compromiso.
+    Luca Urech &lt;lucaurech@yahoo.de&gt; para la Corporación Compromiso
+    en 2008 con autorización de Jorge Castellanos.
+</para>
+        </listitem>
+		<listitem>
+<para>
+    El módulo de Desplazamiento se desarrolló
+    inicialmente para el Servicio Jesuita de Refugiados en
+    Jun.2013 con autorización del sacerdote John Jairo Montoya.
 </para>
 		</listitem>
+
 	</itemizedlist>
 </para>	
 
@@ -148,13 +152,22 @@
 		<listitem>
 			<para>
 	Mauricio Rivera (mauricio.rivera.p@gmail.com) desarrolló una 
-    versión previa de la Consulta Web y quien además ideó el nombre
+    versión previa de la Consulta Web e ideó el nombre
     SIVeL.
 			</para>
-		</listitem>
+        </listitem>
 		<listitem>
 			<para>
-	Vladimir Támara Patiño (vtamara@pasosdeJesus.org).
+                Luca Urech &lt;lucaurech@yahoo.de&gt; desarrollo
+                módulo inicial de visualización en Google Maps.
+            </para>
+        </listitem>
+		<listitem>
+			<para>
+                Vladimir Támara Patiño (vtamara@pasosdeJesus.org), quien
+                ha desarrollado fuera del tiempo retribuido por CINEP
+                y con otras organizaciones con contrataciones que
+                liberan explicitamente al dominio público los desarrollos.
 			</para>
 		</listitem>
 	</itemizedlist>

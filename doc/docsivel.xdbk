@@ -31,8 +31,16 @@
 		<surname>Támara Patiño</surname>
 	</author> -->
 	<legalnotice><para>SIVeL se dedica a Dios y a las víctimas. 
-			Su código fuente se libera al Dominio Público, sin 
-			garantías. Oramos para que no sea utilizado por 
+            Su código fuente se libera al Dominio Público de
+            acuerdo a la legislación colombiana, sin 
+            garantías. Puede liberarse al dominio público porque
+            se ha desarrollado en tiempo no retribuido por empresa
+            u organización alguna o bajo
+            contratos o convenios que ceden lo desarrollado al dominio 
+            público. Puede ver la cesión al Dominio Público ante
+            la oficina de Derechos de Autor de Colombia en 
+            <ulink url="http://sivel.sf.net/registro-SIVeL.png"/>.
+            Oramos para que no sea utilizado por 
 			estructuras armadas.  Esta documentación fue
 			actualizada por última vez en &FECHA-ACT;</para>
 		<para>En Internet puede consultar la versión más
