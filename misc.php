@@ -31,7 +31,7 @@ require_once "DB_DataObject_SIVeL.php";
  * @name enc_relato
  */
 $GLOBALS['enc_relato']
-    = "<" ."?xml version=\"1.0\" encoding=\"UTF8\"?".">\n"
+    = "<" ."?xml version=\"1.0\" encoding=\"UTF-8\"?".">\n"
     . "<!DOCTYPE relatos PUBLIC \"-//SINCODH/DTD relatos 0.97\" "
     . "\"relatos.dtd\">\n"
     . '<'.'?xml-stylesheet type="text/xsl" href="xrlat-a-html.xsl"?'
@@ -78,7 +78,7 @@ function a_mayusculas($s)
         array('Á', 'É', 'Í', 'Ó', 'Ú', 'Ñ', 'Ü'),
         $s
     );
-    $r = mb_strtoupper($r, "UTF8");
+    $r = mb_strtoupper($r, 'UTF8');
     return $r;
 }
 
