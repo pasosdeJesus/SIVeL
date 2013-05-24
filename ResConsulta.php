@@ -54,6 +54,7 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
     // @codingStandardsIgnoreStart
     require_once "$c.php";
     // @codingStandardsIgnoreEnd
+    
 }
 
 

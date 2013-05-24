@@ -103,14 +103,14 @@ $GLOBALS['pie_consulta_web_correo'] = '<hr/><a href="consulta_web.php">Consulta 
  */
 $GLOBALS['cabezote_principal'] = '';
 
-if (!isset($_GLOBALS['IDIOMAPORDEFECTO'])) {
-    $_GLOBALS['IDIOMAPORDEFECTO'] = "es_CO";
+if (!isset($GLOBALS['IDIOMAPORDEFECTO'])) {
+    $GLOBALS['IDIOMAPORDEFECTO'] = "es_CO";
 }
 
 if (isset($_SESSION['LANG'])) {
     //echo "OJO en pordefecto/conf_int.php SESSION[LANG]=" . $_SESSION[LANG] . "<br>";
     $lang = $_SESSION['LANG'];
-} else if (isset($_GLOBALS['IDIOMAPORDEFECTO'])) {
+} else if (isset($GLOBALS['IDIOMAPORDEFECTO'])) {
     $lang = $GLOBALS['IDIOMAPORDEFECTO'];
 } else {
     echo "<font color='red'>No hay idioma definido en sitios/pordefecto/conf_int.php<br>";

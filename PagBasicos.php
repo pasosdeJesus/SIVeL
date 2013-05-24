@@ -20,8 +20,8 @@
  */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
-$aut_usuario = "";
-autentica_usuario($GLOBALS['dsn'], $aut_usuario, 31); 
+//$aut_usuario = "";
+//autentica_usuario($GLOBALS['dsn'], $aut_usuario, 31); 
 require_once $_SESSION['dirsitio'] . "/conf_int.php";
 require_once 'HTML/QuickForm/Action.php';
 require_once 'PagBaseSimple.php';
@@ -641,6 +641,8 @@ class PagBasicos extends PagBaseSimple
      */
     function PagBasicos($nomForma)
     {
+        $aut_usuario = "";
+        autentica_usuario($GLOBALS['dsn'], $aut_usuario, 31); 
         parent::PagBaseSimple($nomForma);
         $this->titulo = _('Datos Básicos');
         $this->tcorto = _('Básicos');
