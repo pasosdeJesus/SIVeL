@@ -1,6 +1,6 @@
 
 
-<?xml version="1.0" encoding="UTF8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE relatos PUBLIC "-//SINCODH/DTD relatos 0.97" "relatos.dtd">
 <?xml-stylesheet type="text/xsl" href="xrlat-a-html.xsl"?>
 <relatos><relato>
@@ -184,17 +184,7 @@
   <!-- Actos con Victimas Colectivas -->
 
   <!-- Fuente frecuente -->
-  <fuente>
-    <nombre_fuente>ffrecuente1</nombre_fuente>
-    <ubicacion_fuente>ubicacion</ubicacion_fuente>
-    <observaciones tipo="ubicacion">ubicación</observaciones>
-    <observaciones tipo="clasificacion">clasificacion</observaciones>
-  </fuente>
   <!-- Fuente no frecuente -->
-  <fuente>
-    <nombre_fuente>ffrecuente1</nombre_fuente>
-    <ubicacion_fuente>ubicacion</ubicacion_fuente>
-  </fuente>
   <fuente>
     <nombre_fuente>D</nombre_fuente>
     <ubicacion_fuente>1</ubicacion_fuente>
