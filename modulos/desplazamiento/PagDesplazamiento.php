@@ -228,20 +228,13 @@ class PagDesplazamiento extends PagBaseMultiple
     /**
     * @param procAc es true si y solo si debe añadirse Acción
     */
-    function procesa(&$valores, $procAc = false)
+    function procesa(&$valores)
     {
-        $valores['id_tdesplazamiento'] = (int)$valores['tipoetapa'][0];
-        $valores['id_etapa'] = (int)$valores['tipoetapa'][1];
-        $es_vacio = (
-            (!isset($valores['id_tdesplazamiento'])
-            || $valores['id_tdesplazamiento'] === ''
-            || $valores['id_tdesplazamiento'] == DataObjects_Tdesplazamiento::idSinInfo()
-            )
-            || (!isset($valores['id_etapa'])
-                || $valores['id_etapa']==
-                DataObjects_Etapa::idSinInfo()
-            )
-        );
+        $valores['fechaexpulsion'] = 
+            arr_a_fecha($valores['fechaexpulsion'], true);
+        $es_vacio = (!isset($valores['expulsion'])
+                || $valores['expulsion'] === ''
+            );
 
         if ($es_vacio) {
             return true;
@@ -257,39 +250,17 @@ class PagDesplazamiento extends PagBaseMultiple
         }
 
 
-        if (!isset($valores['id']) || $valores['id'] == '') {
-            $valores['id'] = null;
-            $db = $this->iniVar();
-        } else {
-            $db = $this->iniVar(array((int)$valores['id']));
-        }
+        $db = $this->iniVar(array((int)$valores['fechaexpulsion']));
         $dcaso = objeto_tabla('caso');
         if (PEAR::isError($dcaso)) {
             die($dcaso->getMessage());
         }
 
-        $ret = $this->process(array(&$this->bdesplazamiento, 'processForm'), false);
+        $ret = $this->process(
+            array(&$this->bdesplazamiento, 'processForm'), false
+        );
         if (PEAR::isError($ret)) {
             die($ret->getMessage());
-        }
-        if ($procAc) {
-            $nacc =& objeto_tabla('accion');
-            $nacc->fb_useMutators = true;
-            $nacc->id_desplazamiento = $this->bdesplazamiento->_do->id;
-            $nacc->id_taccion = (int)$valores['id_taccion'];
-            $nacc->id_despacho = (int)$valores['id_despacho'];
-            $nacc->fecha = arr_a_fecha(var_escapa($valores['fecha'], $db, 20));
-            $nacc->numeroradicado =
-                var_escapa($valores['numeroradicado'], $db);
-            $nacc->observacionesaccion =
-                var_escapa($valores['observacionesaccion'], $db);
-            $nacc->insert();
-            $nacc->respondido= isset($valores['respondido'])
-                && $valores['respondido'] == 1 ? 't' : 'f';
-            $q = "UPDATE accion SET respondido='".$nacc->respondido."' " .
-                " WHERE id='".$nacc->id."'";
-            hace_consulta($db, $q);
-            $procAc = false;
         }
 
         caso_funcionario($_SESSION['basicos_id']);
@@ -331,77 +302,6 @@ class PagDesplazamiento extends PagBaseMultiple
             $tot++;
         }
         return $tot;
-    }
-
-    static function iniCaptura()
-    {
-        if (isset($_REQUEST['eliminaaccionj'])) {
-            $_REQUEST['_qf_segjudicial_eliminaaccionj'] = true;
-        }
-    }
-
-    static function resConsultaInicio($mostrar, &$renglon, &$rtexto, $tot = 0)
-    {
-        if ($mostrar == "judicial") {
-            echo "<html><head><title>Tabla</title></head>";
-            echo "<body>";
-            echo "Consulta de " . (int)$tot . " casos. ";
-            echo "<p><table border=1 cellspacing=0 cellpadding=5>";
-            $renglon = "<tr>";
-            $rtexto = "";
-        }
-    }
-
-    static function resConsultaRegistro(&$db, $mostrar, $idcaso, $campos,
-        $conv, &$sal, &$retroalim)
-    {
-        if ($mostrar == "judicial") {
-            ResConsulta::filaTabla(
-                $db, $idcaso, $campos, $conv, $sal,
-                $retroalim
-            );
-        }
-    }
-
-    static function resConsultaFinal($mostrar)
-    {
-        if ($mostrar == "judicial") {
-            echo "</table>";
-        }
-    }
-
-    static function consultaWebCreaConsulta(&$db, $mostrar, &$where, &$tablas,
-        &$pOrdenar, &$campos)
-    {
-        if ($mostrar == "judicial") {
-            consulta_and_sinap($where, "desplazamiento.id_caso", "caso.id");
-            $tablas .= ", desplazamiento";
-            $oconv = array('desplazamiento_id', 'desplazamiento_proximafecha');
-            $pOrdenar = "fechajudicial";
-            $campos['desplazamiento_proximafecha'] = 'Próxima fecha';
-        }
-    }
-
-    static function consultaWebFormaPresentacion($mostrar, $opciones,
-        &$forma, &$ae, &$t)
-    {
-        if (isset($opciones) && in_array(42, $opciones)) {
-            $x =&  $forma->createElement(
-                'radio', 'mostrar',
-                'judicial', 'Tabla Judicial', 'judicial'
-            );
-            $ae[] =& $x;
-            if ($mostrar == 'judicial') {
-                $t =& $x;
-            }
-        }
-    }
-
-    static function consultaWebOrden(&$q, $pOrdenar)
-    {
-        if ($pOrdenar == 'fechajudicial') {
-            $q .= ' ORDER by desplazamiento.proximafecha';
-        }
     }
 
     /**
@@ -446,7 +346,6 @@ class PagDesplazamiento extends PagBaseMultiple
         );
     }
 
-
     /**
      * Compara datos relacionados con esta pestaña de los casos
      * con identificación id1 e id2.
@@ -471,7 +370,6 @@ class PagDesplazamiento extends PagBaseMultiple
             array('Desplazamiento' => array('desplazamiento', 'fechaexpulsion'))
         );
     }
-
 
     /**
      * Mezcla valores de los casos $id1 e $id2 en el caso $idn de

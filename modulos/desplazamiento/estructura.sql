@@ -6,9 +6,7 @@ SET client_encoding = 'UTF8';
 CREATE SEQUENCE clasifdesp_seq;
 CREATE TABLE clasifdesp (
 	id	INTEGER PRIMARY KEY DEFAULT (nextval('clasifdesp_seq')),
-	id_tproceso INTEGER NOT NULL REFERENCES tproceso,
 	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL,
-	observaciones VARCHAR(200),
 	fechacreacion	DATE NOT NULL DEFAULT '2013-05-24',
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
@@ -16,9 +14,7 @@ CREATE TABLE clasifdesp (
 CREATE SEQUENCE tipodesp_seq;
 CREATE TABLE tipodesp (
 	id	INTEGER PRIMARY KEY DEFAULT (nextval('tipodesp_seq')),
-	id_tproceso INTEGER NOT NULL REFERENCES tproceso,
 	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL,
-	observaciones VARCHAR(200),
 	fechacreacion	DATE NOT NULL DEFAULT '2013-05-24',
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
@@ -26,9 +22,7 @@ CREATE TABLE tipodesp (
 CREATE SEQUENCE causadesp_seq;
 CREATE TABLE causadesp (
 	id	INTEGER PRIMARY KEY DEFAULT (nextval('causadesp_seq')),
-	id_tproceso INTEGER NOT NULL REFERENCES tproceso,
 	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL,
-	observaciones VARCHAR(200),
 	fechacreacion	DATE NOT NULL DEFAULT '2013-05-24',
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
@@ -36,9 +30,7 @@ CREATE TABLE causadesp (
 CREATE SEQUENCE declaroante_seq;
 CREATE TABLE declaroante (
 	id	INTEGER PRIMARY KEY DEFAULT (nextval('declaroante_seq')),
-	id_tproceso INTEGER NOT NULL REFERENCES tproceso,
 	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL,
-	observaciones VARCHAR(200),
 	fechacreacion	DATE NOT NULL DEFAULT '2013-05-24',
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
@@ -46,9 +38,7 @@ CREATE TABLE declaroante (
 CREATE SEQUENCE inclusion_seq;
 CREATE TABLE inclusion (
 	id	INTEGER PRIMARY KEY DEFAULT (nextval('inclusion_seq')),
-	id_tproceso INTEGER NOT NULL REFERENCES tproceso,
 	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL,
-	observaciones VARCHAR(200),
 	fechacreacion	DATE NOT NULL DEFAULT '2013-05-24',
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
@@ -56,9 +46,7 @@ CREATE TABLE inclusion (
 CREATE SEQUENCE acreditacion_seq;
 CREATE TABLE acreditacion (
 	id	INTEGER PRIMARY KEY DEFAULT (nextval('acreditacion_seq')),
-	id_tproceso INTEGER NOT NULL REFERENCES tproceso,
 	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL,
-	observaciones VARCHAR(200),
 	fechacreacion	DATE NOT NULL DEFAULT '2013-05-24',
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
@@ -66,20 +54,17 @@ CREATE TABLE acreditacion (
 CREATE SEQUENCE modalidadtierra_seq;
 CREATE TABLE modalidadtierra (
 	id	INTEGER PRIMARY KEY DEFAULT (nextval('modalidadtierra_seq')),
-	id_tproceso INTEGER NOT NULL REFERENCES tproceso,
 	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL,
-	observaciones VARCHAR(200),
 	fechacreacion	DATE NOT NULL DEFAULT '2013-05-24',
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
 
-CREATE SEQUENCE tdesplazamiento_seq;
+CREATE SEQUENCE desplazamiento_seq;
 CREATE TABLE desplazamiento (
-	id	INTEGER PRIMARY KEY DEFAULT (nextval('tdesplazamiento_seq')),
     id_caso INTEGER,
-    fecha_expulsion DATE NOT NULL,
+    fechaexpulsion DATE NOT NULL,
 	expulsion INTEGER NOT NULL REFERENCES ubicacion(id),
-    fecha_llegada DATE NOT NULL,
+    fechallegada DATE NOT NULL,
 	llegada INTEGER NOT NULL REFERENCES ubicacion(id),
     id_clasifdesp INTEGER NOT NULL REFERENCES clasifdesp,
     id_tipodesp INTEGER NOT NULL REFERENCES tipodesp,
@@ -91,7 +76,7 @@ CREATE TABLE desplazamiento (
     hechosdeclarados VARCHAR(5000),
     fechadeclaracion DATE,
     departamentodecl INTEGER REFERENCES departamento,
-    municipiodecl INTEGER REFERENCES municipio,
+    municipiodecl INTEGER,
     id_declaroante INTEGER REFERENCES declaroante,
     id_inclusion  INTEGER REFERENCES inclusion,
     id_acreditacion INTEGER REFERENCES acreditacion,
@@ -106,6 +91,9 @@ CREATE TABLE desplazamiento (
     inmaterialesperdidos VARCHAR(5000),
     protegiorupta BOOL,
     documentostierra VARCHAR(5000),
+    FOREIGN KEY (municipiodecl, departamentodecl) REFERENCES
+        municipio (id, id_departamento),
+    PRIMARY KEY (id_caso, fechaexpulsion)
 );
 
 
