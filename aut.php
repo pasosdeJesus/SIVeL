@@ -207,7 +207,7 @@ function nom_sesion()
  */
 function autentica_usuario($dsn,  &$usuario, $opcion)
 {
-    //echo "OJO autentica opcion=$opcion, q=$q";
+    //echo "OJO autentica opcion=$opcion, usuario=$usuario, dsn=$dsn";
     $accno = _("Acceso no autorizado");
     $snru = nom_sesion();
     if (!isset($_SESSION) || session_name() != $snru) {
@@ -233,6 +233,11 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         $result = hace_consulta_aut(
             $db, "ALTER TABLE usuario RENAME COLUMN id_usuario TO id", false
         );
+        hace_consulta_aut(
+            $db, "ALTER TABLE usuario ADD COLUMN idioma "
+            . " VARCHAR(6) NOT NULL DEFAULT 'es_CO'", false
+        );
+
         $result = hace_consulta_aut($db, $q, false);
     }
     if (PEAR::isError($result)) {
@@ -256,7 +261,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
     $a->setSessionName($snru);
     //echo "<hr>En autentica_usuario $opcion OJO sesion:"; print_r($a->session);
     $a->start();
-    //echo "OJO snru=$snru"; die("x");
+    //echo "OJO snru=$snru"; 
     if ($a->checkAuth()) {
         ini_set('session.cookie_httponly', true);
         ini_set('session.cookie_secure', true);
@@ -269,7 +274,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
 
         //echo "<script>alert(document.cookie);</script>";
         $usuario = $a->getUsername();
-        if (!isset($_SESSION['opciones'])
+        if (!isset($_SESSION['opciones']) || count($_SESSION['opciones']) == 0
             || !isset($_SESSION['id_funcionario'])
         ) {
             $op = array();
@@ -295,9 +300,9 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             $_SESSION['id_funcionario'] = $idf;
             $q = "SELECT idioma FROM usuario " .
                 "WHERE id='" . $usuario . "';";
-            $result = hace_consulta_aut($db, $q);
+            $result = hace_consulta_aut($db, $q, false);
             $row = array();
-            if ($result->fetchInto($row)) {
+            if (!PEAR::isError($result) && $result->fetchInto($row)) {
                 $lang = $row[0];
             }
             $_SESSION['idioma_usuario'] = $lang;

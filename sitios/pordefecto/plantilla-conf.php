@@ -31,10 +31,10 @@ $dbusuario = "sivel";
 $dbclave = "incocAcEd2";
 
 /** Directorio de fuentes en servidor web */
-$dirserv = "/users/vtamara/sivel12/";
+$dirserv = "/htdocs/sivel/";
 
 /** Directorio del sitio relativo a $dirserv */
-$dirsitio = "sitios/sivel12";
+$dirsitio = "sitios/sivel";
 
 /** Palabra clave para algunos cifrados.
  * @global string $GLOBALS['PALABRA_SITIO']
