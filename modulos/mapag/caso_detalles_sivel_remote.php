@@ -17,19 +17,30 @@
  */
 
 require_once "../../misc.php";
+require_once "mapag_misc.php";
 
-$pu = parse_url($_SERVER['HTTP_REFERER']);
-$host = $pu['scheme'] . '://' . $pu['host'] . dirname($pu['path']);
+$host = determina_host();
+
+if (!isset($_GET['codigo'])) {
+    header("Content-type: application/json"); 
+    echo "{}";
+    return;
+}
 $id_caso = (int) $_GET['codigo'];
 
-$requestUrl = $host . "/consulta_web.php?_qf_consultaWeb_consulta=Consulta&mostrar=relato&caso_memo=1&m_victimas=1&m_presponsables=1&m_ubicacion=1&m_tipificacion=1&id_casos=" . $id_caso; //archivo XML de Sivel
+$requestUrl = $host . "/consulta_web.php?_qf_consultaWeb_consulta=Consulta"
+    . "&mostrar=relato&caso_memo=1&m_victimas=1&m_presponsables=1"
+    . "&m_ubicacion=1&m_tipificacion=1&id_casos=" . $id_caso; 
 
 // generar documento JSON
 if (!empty($id_caso) && $id_caso != 0) {
-
-	// carga datos del archivo XML de Sivel
-    $xmlSivel = simplexml_load_string(file_get_contents($requestUrl)) 
-        or die("No puede cargarse del url '" . $requestUrl . "'");
+    // carga datos del archivo XML de Sivel
+    $ca = file_get_contents($requestUrl);
+    $xmlSivel = simplexml_load_string($ca);
+    if ($xmlSivel === FALSE) {
+        errores_xml($xmlSivel, $ca);
+        die("No pudo cargarse del url '" . $requestUrl . "'");
+    }
     // todo bien, crear documento json
     $presp = array();
 	foreach ($xmlSivel->relato->grupo as $grupo) {
@@ -38,9 +49,11 @@ if (!empty($id_caso) && $id_caso != 0) {
 		}
 	}
 	$victimas = array();
-	foreach ($xmlSivel->relato->persona as $persona) {
+    foreach ($xmlSivel->relato->persona as $persona) {
 		if (!empty($persona->nombre)) {
-            $victimas[(string)$persona->id_persona] = (string)$persona->nombre;
+            $victimas[(string)$persona->id_persona] = 
+                trim(trim((string)$persona->nombre) . " " . 
+                trim((string)$persona->apellido));
         }
 	}
     $rta = array();
