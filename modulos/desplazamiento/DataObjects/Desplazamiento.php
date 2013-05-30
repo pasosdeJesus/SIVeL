@@ -256,14 +256,46 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
     {
         parent::postGenerateForm($form, $formbuilder);
 
-        $sel =& $form->getElement('id_caso');
         $p = objeto_tabla('caso');
         $db = $p->getDatabaseConnection();
+        $c =& $form->getElement('id_caso');
+        $idcaso = $c->getValue();
 
         $seln =& $form->getElement('fechaexpulsion');
         if ($this->fechaexpulsion != null && $this->fechaexpulsion > 0) {
             $seln->freeze();
         }
+
+        $s =& $form->getElement('expulsion');
+        $s->_options = array();
+        $q = "SELECT ubicacion.id, trim(departamento.nombre || ', ' || lugar) 
+            FROM ubicacion, departamento
+            WHERE ubicacion.id_caso='$idcaso'
+            AND ubicacion.id_municipio IS NULL 
+            AND ubicacion.id_departamento = departamento.id
+            UNION SELECT ubicacion.id, trim(municipio.nombre || ', ' || 
+            departamento.nombre || ', ' || lugar)
+            FROM ubicacion, departamento, municipio
+            WHERE ubicacion.id_caso='$idcaso'
+            AND ubicacion.id_municipio = municipio.id
+            AND ubicacion.id_departamento = municipio.id_departamento
+            AND municipio.id_departamento = departamento.id";
+        $op = $db->getAssoc($q);
+        sin_error_pear($op);
+        $r = $s->loadArray(htmlentities_array($op));
+        $s->setValue(
+            $this->expulsion
+        );
+
+        $s =& $form->getElement('llegada');
+        $s->_options = array();
+        $op = $db->getAssoc($q);
+        sin_error_pear($op);
+        $r = $s->loadArray(htmlentities_array($op));
+        $s->setValue(
+            $this->expulsion
+        );
+
 
 /*        $e =& $form->getElement('demandante');
         if (isset($e) && !PEAR::isError($e)) {
