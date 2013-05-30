@@ -2343,7 +2343,6 @@ if (!aplicado($idac)) {
         $db, "ALTER TABLE clase ALTER COLUMN id_tclase TYPE VARCHAR(10)", false
     );
 
-
     aplicaact($act, $idac, 'Actualiza info. geográfica con DIVIPOLA 2012');
 }
 
@@ -2351,6 +2350,35 @@ $idac = '1.1-dp1';
 if (!aplicado($idac)) {
     consulta_archivo(&$db, 'act-nom2012.sql');
     aplicaact($act, $idac, 'Actualiza info. geográfica con DIVIPOLA 2012');
+}
+
+$idac = '1.2-co';
+if (!aplicado($idac)) {
+    consulta_archivo(&$db, 'act-coor.sql');
+    aplicaact($act, $idac, 'Agrega coordenadas a departamentos y municipios');
+}
+
+$idac = '1.2-coc';
+if (!aplicado($idac)) {
+    $n = (int)$db->getOne(
+        "SELECT COUNT(*) FROM ubicacion, municipio 
+        WHERE municipio.id_departamento=ubicacion.id_departamento 
+        AND municipio.id=ubicacion.id_municipio
+        AND ubicacion.latitud IS NULL; "
+    );
+    echo_esc("  Agregando coordenadas a $n ubicaciones con municipio");
+    echo "<br>";
+    hace_consulta(
+        $db, "UPDATE ubicacion 
+        SET latitud = municipio.latitud+random()/1000-0.0005, 
+        longitud=municipio.longitud+random()/1000-0.0005 
+        FROM municipio 
+        WHERE municipio.id_departamento=ubicacion.id_departamento 
+        AND municipio.id=ubicacion.id_municipio
+        AND ubicacion.latitud IS NULL; "
+    );
+
+    aplicaact($act, $idac, 'Agrega coordenadas a casos que no tienen');
 }
 
 
