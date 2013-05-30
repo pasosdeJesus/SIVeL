@@ -15,6 +15,21 @@
  */
 
 
+if ($_SESSION['dirsitio'] != $dirsitio) {
+    $n1 = $_SESSION['dirsitio'] . "/conf.php";
+    $n2 = $dirsitio . "/conf.php";
+    $s1 = stat($n1);
+    $s2 = stat($n2);
+    if (!isset($s1[1]) || !isset($s2[1]) || $s1[1] != $s2[1]) {
+        echo "<hr>$n1: ";var_dump($s1); 
+        echo "<hr>$n2: ";var_dump($s2);
+        echo "<hr>Son diferentes \$_SESSION['dirsitio'] "
+            . " y \$GLOBALS['dirsitio']<br>";
+        echo "Configurar primero<hr>";
+        exit(1);
+    }
+}
+
 // Mejor no empleamos sobrecarga porque no funciona en
 // diversas versiones de PHP
 if (!defined('DB_DATAOBJECT_NO_OVERLOAD')) {

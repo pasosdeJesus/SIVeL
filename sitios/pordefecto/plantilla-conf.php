@@ -28,13 +28,13 @@ $dbnombre = "sivel12";
 $dbusuario = "sivel";
 
 /** Clave del usuario ante el MBD */
-$dbclave = "incocAcEd2";
+$dbclave = "super";
 
 /** Directorio de fuentes en servidor web */
-$dirserv = "/users/vtamara/sivel12/";
+$dirserv = "/htdocs/sivel/";
 
 /** Directorio del sitio relativo a $dirserv */
-$dirsitio = "sitios/sivel12";
+$dirsitio = "sitios/sivel";
 
 /** Palabra clave para algunos cifrados.
  * @global string $GLOBALS['PALABRA_SITIO']
@@ -63,6 +63,11 @@ $GLOBALS['derechos'] = 'Dominio Público';
 
 /** Módulos empleados (relativos a directorio con fuentes) */
 $modulos = "modulos/anexos modulos/etiquetas modulos/mapag";
+
+
+if (file_exists($_SESSION['dirsitio'] . '/conf-particular.php')) {
+    require $_SESSION['dirsitio'] . '/conf-particular.php';
+}
 
 require 'sitios/pordefecto/inibdmod.php';
 
