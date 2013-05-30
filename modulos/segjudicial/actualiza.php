@@ -86,13 +86,13 @@ if (!aplicado($idac)) {
         $db, "CREATE TABLE accion (
             id      INTEGER PRIMARY KEY DEFAULT (nextval('accion_seq')),
             id_proceso INTEGER NOT NULL REFERENCES proceso,
-            id_taccion REFERENCES taccion NOT NULL,
-            id_despacho INTEGER REFERENCES despacho NOT NULL,
+            id_taccion INTEGER NOT NULL REFERENCES taccion,
+            id_despacho INTEGER NOT NULL REFERENCES despacho,
             fecha DATE NOT NULL,
             numero_radicado VARCHAR(50),
             observaciones_accion    VARCHAR(4000),
             respondido  BOOLEAN
-        ); ", false
+        ); "
     );
 
     aplicaact($act, $idac, 'Seguimiento Judicial');
