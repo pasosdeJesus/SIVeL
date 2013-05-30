@@ -16,6 +16,7 @@
 
 require_once 'PagBaseMultiple.php';
 require_once 'ResConsulta.php';
+require_once 'PagUbicacion.php';
 require_once 'HTML/QuickForm/Action.php';
 
 require_once 'DataObjects/Acreditacion.php';
@@ -94,10 +95,6 @@ class PagDesplazamiento extends PagBaseMultiple
      */
     function iniVar($aper = null)
     {
-        $id_persona = null;
-        if (isset($aper) && count($aper) == 1) {
-            $id_persona = $aper[0];
-        }
         $ddesplazamiento =& objeto_tabla('desplazamiento');
 
         $db =& $ddesplazamiento->getDatabaseConnection();
@@ -107,9 +104,7 @@ class PagDesplazamiento extends PagBaseMultiple
             die("Bug: idcaso no debería ser null");
         }
 
-        $idp = array();
-        $ndp = array();
-        $edp = array();
+        $idf = array();
         $indid = -1;
         $tot = PagDesplazamiento::extrae_desplazamientos($idcaso, $db, $idf);
 
@@ -153,6 +148,13 @@ class PagDesplazamiento extends PagBaseMultiple
         $this->titulo  = _('Desplazamiento');
         $this->tcorto  = _('Desplazamiento');
 
+        $this->addAction(
+            'departamentodecl', new CamDepartamento('departamentodecl')
+        );
+        $this->addAction(
+            'municipiodecl', 
+            new CamMunicipio('departamentodecl', 'municipiodecl')
+        );
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
     }
@@ -175,12 +177,25 @@ class PagDesplazamiento extends PagBaseMultiple
             ? $this->bdesplazamiento->_do->fechaexpulsion : '';
         $this->addElement('');
 
+        list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
+            $db, $this, 'desplazamiento',
+            $this->bdesplazamiento->_do->departamentodecl,
+            $this->bdesplazamiento->_do->municipiodecl,
+            'departamentodecl', 'municipiodecl'
+        );
+        $gr[] =& $dep;
+        $gr[] =& $mun;
+
         $_SESSION['pagDesplazamiento_id'] = $vv;
+        $this->addGroup(
+            $gr, 'sitiodeclaracion', _('Declaro en'), '&nbsp;', false
+        );
 
         $this->bdesplazamiento->createSubmit = 0;
         $this->bdesplazamiento->useForm($this);
         $this->bdesplazamiento->getForm($this);
-    }
+
+         }
 
     /**
      * Llena valores del formulario.
@@ -196,6 +211,19 @@ class PagDesplazamiento extends PagBaseMultiple
     {
         $vv = isset($this->bdesplazamiento->_do->fechaexpulsion) ?
             $this->bdesplazamiento->_do->fechaexpulsion : '';
+
+        valores_pordefecto_form($this->bdesplazamiento->_do, $this);
+        if ($vv != '') {
+            $e =& $this->getElement('sitiodeclaracion');
+            $dep =& $e->_elements[0];
+            $mun =& $e->_elements[1];
+            PagUbicacion::valoresUbicacion(
+                $this, $this->bdesplazamiento->_do->departamentodecl,
+                $this->bdesplazamiento->_do->municipiodecl, null,
+                $dep, $mun, null
+            );
+        }
+
     }
 
     function eliminaDesplazamiento($ddesplazamiento, $elimProc = false)
@@ -203,7 +231,9 @@ class PagDesplazamiento extends PagBaseMultiple
         assert($ddesplazamiento != null);
         assert($ddesplazamiento->fechaexpulsion != null);
         $db =& $ddesplazamiento->getDatabaseConnection();
-        $q = "DELETE FROM desplazamiento WHERE fechaexpulsion='{$ddesplazamiento->fechaexpulsion}' AND id_caso={$_SESSION['id_basico']}";
+        $q = "DELETE FROM desplazamiento WHERE fechaexpulsion=' "
+            . "{$ddesplazamiento->fechaexpulsion}' "
+            . " AND id_caso={$_SESSION['basicos_id']}";
         $result = hace_consulta($db, $q);
         if ($elimProc) {
         }
@@ -230,8 +260,8 @@ class PagDesplazamiento extends PagBaseMultiple
     */
     function procesa(&$valores)
     {
-        $valores['fechaexpulsion'] = 
-            arr_a_fecha($valores['fechaexpulsion'], true);
+        $fechaex = arr_a_fecha($valores['fechaexpulsion'], true); 
+
         $es_vacio = (!isset($valores['expulsion'])
                 || $valores['expulsion'] === ''
             );
@@ -249,13 +279,31 @@ class PagDesplazamiento extends PagBaseMultiple
             return true;
         }
 
-
-        $db = $this->iniVar(array((int)$valores['fechaexpulsion']));
+        $db = $this->iniVar();
         $dcaso = objeto_tabla('caso');
         if (PEAR::isError($dcaso)) {
             die($dcaso->getMessage());
         }
-
+        $idcaso = $_SESSION['basicos_id'];
+        $q = "SELECT COUNT(*) FROM desplazamiento WHERE id_caso='$idcaso' "
+            . " AND fechaexpulsion='$fechaex';";
+        $this->bdesplazamiento->useMutators = true;
+        $nr = $db->getOne($q);
+        if ($nr == 0) {
+            $this->bdesplazamiento->forceQueryType(
+                DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
+            );
+/*            print_r($valores);
+            $q = "INSERT INTO desplazamiento (id_caso, fechaexpulsion,
+            expulsion, fechallegada, llegada, ) " .
+                " VALUES ('$idcaso', '$fechaex');";
+            $r = hace_consulta($db, $q); */
+        } else {
+            $this->bdesplazamiento->forceQueryType(
+                DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEUPDATE
+            );
+        }
+ 
         $ret = $this->process(
             array(&$this->bdesplazamiento, 'processForm'), false
         );
@@ -263,7 +311,7 @@ class PagDesplazamiento extends PagBaseMultiple
             die($ret->getMessage());
         }
 
-        caso_funcionario($_SESSION['basicos_id']);
+        caso_funcionario($idcaso);
         return  $ret;
     }
 

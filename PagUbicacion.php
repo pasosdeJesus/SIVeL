@@ -33,6 +33,20 @@ require_once 'DB/DataObject/Cast.php';
  */
 class CamDepartamento extends HTML_QuickForm_Action
 {
+    var $nomcampodep = 'id_departamento';
+
+    /**
+     * Constructora
+     *
+     * @param string $nomcampo Nombre del campo con municipio en formulario
+     *
+     * @return void
+     */
+    function CamDepartamento($nomcampodep = 'id_departamento') 
+    {
+        $this->nomcampodep = $nomcampodep;
+    }
+
     /** * Ejecuta acción
      *
      * @param object &$page      Página
@@ -43,7 +57,7 @@ class CamDepartamento extends HTML_QuickForm_Action
     function perform(&$page, $actionName)
     {
         $_SESSION['camDepartamento']
-            = (int)$page->_submitValues['id_departamento'];
+            = (int)$page->_submitValues[$this->nomcampodep];
         $_SESSION['camMunicipio'] = '';
         $pageName =  $page->getAttribute('id');
         $data     =& $page->controller->container();
@@ -64,6 +78,25 @@ class CamDepartamento extends HTML_QuickForm_Action
  */
 class CamMunicipio extends HTML_QuickForm_Action
 {
+
+    var $nomcampodep = 'id_departamento';
+    var $nomcampomun = 'id_municipio';
+
+    /**
+     * Constructora
+     *
+     * @param string $nomcampo Nombre del campo con municipio en formulario
+     *
+     * @return void
+     */
+    function CamMunicipio($nomcampodep = 'id_departamento',
+        $nomcampomun = 'id_municipio') 
+    {
+        $this->nomcampodep = $nomcampodep;
+        $this->nomcampomun = $nomcampomun;
+    }
+
+
     /**
      * Ejecuta acción
      *
@@ -74,11 +107,10 @@ class CamMunicipio extends HTML_QuickForm_Action
      */
     function perform(&$page, $actionName)
     {
-
         $_SESSION['camDepartamento']
-            = (int)$page->_submitValues['id_departamento'];
+            = (int)$page->_submitValues[$this->nomcampodep];
         $_SESSION['camMunicipio']
-            = (int)$page->_submitValues['id_municipio'];
+            = (int)$page->_submitValues[$this->nomcampomun];
         $pageName =  $page->getAttribute('id');
         $data     =& $page->controller->container();
         $data['values'][$pageName] = $page->exportValues();
@@ -262,14 +294,16 @@ class PagUbicacion extends PagBaseMultiple
      *
      * @return string id de departamento
      */
-    static function retIdDepartamento(&$form, $def = null)
+    static function retIdDepartamento(&$form, $def = null, 
+        $nomcampodep = 'id_departamento')
     {
         $ndepartamento = null;
-        if (isset($form->_submitValues['id_departamento'])) {
-            $ndepartamento = (int)$form->_submitValues['id_departamento'];
-        } else if (isset($_REQUEST['id_departamento'])) {
-            $ndepartamento = (int)$_REQUEST['id_departamento'];
-        } else if (isset($_SESSION['camDepartamento'])
+        if (isset($form->_submitValues[$nomcampodep])) {
+            $ndepartamento = (int)$form->_submitValues[$nomcampodep];
+        } /*else if (isset($_REQUEST[$nomcampodep])) {
+            echo "OJO retIdDepartamento caso 2<br>";
+            $ndepartamento = (int)$_REQUEST[$nomcampodep];
+        } */else if (isset($_SESSION['camDepartamento'])
             && $_SESSION['camDepartamento'] != ''
         ) {
             $ndepartamento = $_SESSION['camDepartamento'] ;
@@ -289,11 +323,12 @@ class PagUbicacion extends PagBaseMultiple
      *
      * @return string id de municipio
      */
-    static function retIdMunicipio(&$form, $def = null)
+    static function retIdMunicipio(&$form, $def = null,
+        $nomcampomun = 'id_municipio')
     {
         $nmunicipio = null;
-        if (isset($form->_submitValues['id_municipio'])) {
-            $nmunicipio = (int)$form->_submitValues['id_municipio'] ;
+        if (isset($form->_submitValues[$nomcampomun])) {
+            $nmunicipio = (int)$form->_submitValues[$nomcampomun] ;
         } else if (isset($_SESSION['camMunicipio'])) {
             $nmunicipio = $_SESSION['camMunicipio'] ;
         } else if (isset($def) && $def != null
@@ -312,11 +347,11 @@ class PagUbicacion extends PagBaseMultiple
      *
      * @return string id de clase
      */
-    function retIdClase(&$form, $def = null)
+    function retIdClase(&$form, $def = null, $nomcampoclase = 'id_clase')
     {
         $nclase = null;
-        if (isset($form->_submitValues['id_clase'])) {
-            $nclase= (int)$form->_submitValues['id_clase'] ;
+        if (isset($form->_submitValues[$nomcampoclase])) {
+            $nclase= (int)$form->_submitValues[$nomcampoclase] ;
         } else if (isset($def) && $def != null) {
             $nclase = $def;
         }
@@ -337,13 +372,14 @@ class PagUbicacion extends PagBaseMultiple
      *  departamento, municipio y clase
      */
     static function creaCamposUbicacion(&$db, &$form,
-        $idpest, $depdef, $mundef
+        $idpest, $depdef, $mundef, $nomcampodep = 'id_departamento',
+        $nomcampomun = 'id_municipio', $nomcampoclase = 'id_clase'
     ) {
         if (PEAR::isError($db)) {
             die($db->getMessage()." - ".$db->getUserInfo());
         }
         $dep =& $form->createElement(
-            'select', 'id_departamento',
+            'select', $nomcampodep,
             $GLOBALS['etiqueta']['departamento'],
             array()
         );
@@ -354,25 +390,27 @@ class PagUbicacion extends PagBaseMultiple
         );
         $dep->loadArray($options);
         $dep->updateAttributes(
-            array('onchange' => "envia('$idpest:id_departamento')")
+            array('onchange' => "envia('$idpest:$nomcampodep')")
         );
 
         $mun =& $form->createElement(
-            'select', 'id_municipio',
+            'select', $nomcampomun,
             $GLOBALS['etiqueta']['municipio'],
             array()
         );
         $mun->updateAttributes(
-            array('onchange' => "envia('$idpest:id_municipio')")
+            array('onchange' => "envia('$idpest:$nomcampomun')")
         );
 
         $cla =& $form->createElement(
-            'select', 'id_clase',
+            'select', $nomcampoclase,
             $GLOBALS['etiqueta']['clase'],
             array()
         );
 
-        $ndepartamento= PagUbicacion::retIdDepartamento($form, $depdef);
+        $ndepartamento = PagUbicacion::retIdDepartamento(
+            $form, $depdef, $nomcampodep
+        );
         //die("ndepartamento=$ndepartamento");
         if ($ndepartamento !== null) {
             $dep->setValue($ndepartamento);
@@ -385,7 +423,9 @@ class PagUbicacion extends PagBaseMultiple
             $mun->loadArray($options);
             $cla->loadArray(array());
         }
-        $nmunicipio = PagUbicacion::retIdMunicipio($form, $mundef);
+        $nmunicipio = PagUbicacion::retIdMunicipio(
+            $form, $mundef, $nomcampomun
+        );
         if ((int)$nmunicipio != 0) {
             $mun->setValue($nmunicipio);
             $options = array('' => '') + htmlentities_array(
@@ -492,10 +532,20 @@ class PagUbicacion extends PagBaseMultiple
      */
     function formularioValores(&$db, $idcaso)
     {
-
+        $tot = $_SESSION['fub_total'];
+        $ni = $_SESSION['fub_pag'];
+         
         $dep =& $this->getElement('id_departamento');
         $mun =& $this->getElement('id_municipio');
         $cla =& $this->getElement('id_clase');
+
+        if ($ni >= $tot) {
+            $dep->setValue("");
+            $mun->setValue(null);
+            $cla->setValue(null);
+        } else {
+            $dep->setValue($this->bubicacion->_do->id_departamento);
+        }
         PagUbicacion::valoresUbicacion(
             $this, $this->bubicacion->_do->id_departamento,
             $this->bubicacion->_do->id_municipio,
@@ -602,6 +652,10 @@ class PagUbicacion extends PagBaseMultiple
             $this->bubicacion->forceQueryType(
                 DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEUPDATE
             );
+        }
+        if ($this->bubicacion->_do->id_municipio == 0 || $this->bubicacion->_do->id_municipio == NULL || $this->bubicacion->_do->id_municipio == '') {
+            
+            $this->bubicacion->_do->id_municipio = DB_DataObject_Cast::sql('NULL');
         }
         $ret = $this->process(array(&$this->bubicacion, 'processForm'), false);
         if (PEAR::isError($ret)) {

@@ -87,6 +87,6 @@ class DataObjects_Municipio extends DataObjects_Basica
         $form->removeElement('id');
     }
 
-
+    var $fb_linkDisplayLevel = 3;
 }
 ?>
