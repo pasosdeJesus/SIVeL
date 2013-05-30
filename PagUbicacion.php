@@ -507,15 +507,15 @@ class PagUbicacion extends PagBaseMultiple
         $dep, $mun, $cla
     ) {
         $ndepartamento = PagUbicacion::retIdDepartamento($form, $depdef);
-        if ($ndepartamento != null) {
+        if ($ndepartamento != null && $dep != null) {
             $dep->setValue($ndepartamento);
         }
         $nmunicipio = PagUbicacion::retIdMunicipio($form, $mundef);
-        if ($nmunicipio != null) {
+        if ($nmunicipio != null && $mun != null) {
             $mun->setValue($nmunicipio);
         }
         $nclase = PagUbicacion::retIdClase($form, $cladef);
-        if ($nclase != null) {
+        if ($nclase != null && $cla != null) {
             $cla->setValue($nclase);
         }
     }
