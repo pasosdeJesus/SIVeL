@@ -120,6 +120,9 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
 
     }
 
+
+    var $fb_selectAddEmpty = array('expulsion');
+
     var $fb_hidePrimaryKey = false;
 
     var $fb_preDefOrder = array(
@@ -136,8 +139,6 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         'declaro' ,
         'hechosdeclarados' ,
         'fechadeclaracion' ,
-        'departamentodecl' ,
-        'municipiodecl' ,
         'id_declaroante' ,
         'id_inclusion' ,
         'id_acreditacion' ,
@@ -167,8 +168,6 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         'declaro' ,
         'hechosdeclarados' ,
         'fechadeclaracion' ,
-        'departamentodecl' ,
-        'municipiodecl' ,
         'id_declaroante' ,
         'id_inclusion' ,
         'id_acreditacion' ,
@@ -185,6 +184,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         'documentostierra' ,
 
     );
+    var $fb_linkDisplayLevel = 2;
     var $fb_addFormHeader = false;
     var $fb_textFields = array(
         'descripcion',
@@ -194,7 +194,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         'inmaterialesperdidos',
         'documentostierra',
     );
-    var $fb_boolFields = array(
+    var $fb_booleanFields = array(
         'retornado',
         'reubicado',
         'connacionalretorno',
@@ -202,7 +202,17 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         'connacionaldeportado',
         'protegiorupta',
     );
-
+    var $fb_enumFields = array(
+        'declaro'
+    );
+    var $es_enumOptions = array(
+        'declaro' => array(
+            'S' => 'SI',
+            'N' => 'NO', 
+            'R'=> 'NO SABE/NO RESPONDE'
+        ),
+    );
+ 
     static function camposSinInfo()
     {
         return array(
@@ -214,6 +224,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
             'id_inclusion'=> DataObjects_Inclusion::idSinInfo(),
             'id_acreditacion'=> DataObjects_Acreditacion::idSinInfo(),
             'id_modalidadtierra'=> DataObjects_Modalidadtierra::idSinInfo(),
+            'declaro'=> 'R',
         );
     }
 
@@ -248,6 +259,11 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         $sel =& $form->getElement('id_caso');
         $p = objeto_tabla('caso');
         $db = $p->getDatabaseConnection();
+
+        $seln =& $form->getElement('fechaexpulsion');
+        if ($this->fechaexpulsion != null && $this->fechaexpulsion > 0) {
+            $seln->freeze();
+        }
 
 /*        $e =& $form->getElement('demandante');
         if (isset($e) && !PEAR::isError($e)) {
