@@ -1,9 +1,9 @@
--- Datos para tablas b·sicas
--- InformaciÛn sobre implicados tomada del Banco de 
+-- Datos para tablas b√°sicas
+-- Informaci√≥n sobre implicados tomada del Banco de 
 -- Datos de Derechos Humanos y Violencia Politica.
--- Dominio p˙blico. 2004. Sin garantÌas.
+-- Dominio p√∫blico. 2004. Sin garant√≠as.
 
-SET client_encoding = 'LATIN1';
+SET client_encoding = 'UTF8';
 
 
 --  filiacion
@@ -17,11 +17,11 @@ INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (6, 'DERECHA', '2001-01-
 INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (7, 'DESMOVILIZADOS', '2001-01-01');
 INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (8, 'CIVICO POLITICOS ELECTORA', '2001-01-01');
 INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (9, 'OTRO', '2001-01-01');
-INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (10, 'SIN INFORMACI”N', '2001-01-01');
-INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (11, 'UNI”N PATRÕOTICA', '2001-01-01');
+INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (10, 'SIN INFORMACI√ìN', '2001-01-01');
+INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (11, 'UNI√ìN PATR√çOTICA', '2001-01-01');
 INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (12, 'COMUNISTA', '2001-01-01');
-INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (13, 'POLO DEMOCR¡TICO', '2001-01-01');
-INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (14, 'FRENTE SOCIAL Y POLÕTICO', '2001-01-01');
+INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (13, 'POLO DEMOCR√ÅTICO', '2001-01-01');
+INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (14, 'FRENTE SOCIAL Y POL√çTICO', '2001-01-01');
 
 SELECT setval('filiacion_seq', max(id)) FROM filiacion;
 
@@ -42,7 +42,7 @@ INSERT INTO organizacion(id, nombre, fechacreacion) VALUES (12, 'GREMIAL', '2001
 INSERT INTO organizacion(id, nombre, fechacreacion) VALUES (13, 'JUVENIL', '2001-01-01');
 INSERT INTO organizacion(id, nombre, fechacreacion) VALUES (14, 'AMBIENTALISTA', '2001-01-01');
 INSERT INTO organizacion(id, nombre, fechacreacion) VALUES (15, 'OTRA', '2001-01-01');
-INSERT INTO organizacion(id, nombre, fechacreacion) VALUES (16, 'SIN INFORMACI”N', '2001-01-01');
+INSERT INTO organizacion(id, nombre, fechacreacion) VALUES (16, 'SIN INFORMACI√ìN', '2001-01-01');
 
 SELECT setval('organizacion_seq', max(id)) FROM organizacion;
 
@@ -69,18 +69,18 @@ INSERT INTO profesion(id, nombre, fechacreacion) VALUES (18, 'SOCIOLOGO', '2001-
 INSERT INTO profesion(id, nombre, fechacreacion) VALUES (19, 'TRABAJADOR SOCIAL', '2001-01-01');
 INSERT INTO profesion(id, nombre, fechacreacion) VALUES (20, 'ADMINISTRADOR PUBLICO', '2001-01-01');
 INSERT INTO profesion(id, nombre, fechacreacion) VALUES (21, 'OTRO', '2001-01-01');
-INSERT INTO profesion(id, nombre, fechacreacion) VALUES (22, 'SIN INFORMACI”N', '2001-01-01');
+INSERT INTO profesion(id, nombre, fechacreacion) VALUES (22, 'SIN INFORMACI√ìN', '2001-01-01');
 
 SELECT setval('profesion_seq', max(id)) FROM profesion;
 
 -- rangoedad
 
-INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (1, 'R1', 'De 0 a 15 AÒos', '0', '15', '2001-03-23');
-INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (2, 'R2', 'De 16 a 25 AÒos', '16', '25', '2001-03-23');
-INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (3, 'R3', 'De 26 a 45 AÒos', '26', '45', '2001-03-23');
+INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (1, 'R1', 'De 0 a 15 A√±os', '0', '15', '2001-03-23');
+INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (2, 'R2', 'De 16 a 25 A√±os', '16', '25', '2001-03-23');
+INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (3, 'R3', 'De 26 a 45 A√±os', '26', '45', '2001-03-23');
 INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (4, 'R4', 'De 46 a 60', '46', '60', '2001-03-23');
 INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (5, 'R5', 'De 61 en Adelante', '61', '130', '2001-03-23');
-INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (6, 'SN', 'SIN INFORMACI”N', '-1', '-1', '2001-03-23');
+INSERT INTO rangoedad (id, nombre, rango, limiteinferior, limitesuperior, fechacreacion) VALUES (6, 'SN', 'SIN INFORMACI√ìN', '-1', '-1', '2001-03-23');
 
 SELECT setval('rangoedad_seq', max(id)) FROM rangoedad;
 
@@ -108,7 +108,7 @@ INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (11, 'MARGINADO', '20
 INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (12, 'TRABAJADOR (A) SEXUAL', '2001-01-01');
 INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (13, 'DESEMPLEADO (A)', '2001-01-01');
 INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (14, 'OTRO', '2001-01-01');
-INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (15, 'SIN INFORMACI”N', '2001-01-01');
+INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (15, 'SIN INFORMACI√ìN', '2001-01-01');
 INSERT INTO sectorsocial(id, nombre, fechacreacion) VALUES (16, 'TRANSPORTADOR', '2001-01-01');
 
 SELECT setval('sectorsocial_seq', max(id)) FROM sectorsocial;
@@ -129,7 +129,7 @@ INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (10, 'FISCALIA GRAL 
 INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (11, 'CONSEJO NACIONAL ELECTOR.', '2001-01-01');
 INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (12, 'REGIS. NAL DEL EST. CIVIL', '2001-01-01');
 INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (13, 'PROCURADURIA GENERAL', '2001-01-01');
-INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (38, 'SIN INFORMACI”N', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (38, 'SIN INFORMACI√ìN', '2001-01-01');
 INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (14, 'CONTRALORIA GENERAL DE R.', '2001-01-01');
 INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (15, 'DEFENSORIA DEL PUEBLO', '2001-01-01');
 INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (16, 'ASAMBLEA DEPARTAMENTAL', '2001-01-01');
@@ -191,30 +191,30 @@ VALUES ('SI','SIN INFORMACION', true, NULL, '2001-01-01');
 
 -- etnia
 
-INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (1, 'SIN INFORMACI”N', '', '2011-04-26');
+INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (1, 'SIN INFORMACI√ìN', '', '2011-04-26');
 
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (2, 'Mestizos', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (3, 'Blancos', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (4, 'Negros', '', '2011-04-29');
-INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (5, 'IndÌgenas', '', '2011-04-29');
+INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (5, 'Ind√≠genas', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (6, 'Achagua', '', '2011-04-29');
-INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (7, 'AndakÌ', '', '2011-04-29');
+INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (7, 'Andak√≠', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (8, 'Andoque', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (9, 'Arhuaco', '', '2011-04-29');
-INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (10, 'Aw·', '', '2011-04-29');
+INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (10, 'Aw√°', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (11, 'Bara', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (12, 'Barasana', '', '2011-04-29');
-INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (13, 'BarÌ', '', '2011-04-29');
-INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (14, 'Cams·', '', '2011-04-29');
+INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (13, 'Bar√≠', '', '2011-04-29');
+INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (14, 'Cams√°', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (15, 'Carijona', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (16, 'Cocama', '', '2011-04-29');
-INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (17, 'Cof·n', '', '2011-04-29');
+INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (17, 'Cof√°n', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (18, 'Coreguaje', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (19, 'Cubeo', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (20, 'Cuiba', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (21, 'Chimila', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (22, 'Desano', '', '2011-04-29');
-INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (23, 'Ember·', '', '2011-04-29');
+INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (23, 'Ember√°', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (24, 'Chimila', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (25, 'Guambiano', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (26, 'Guanano', '', '2011-04-29');
@@ -227,7 +227,7 @@ INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (32, 'Kogui', 
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (33, 'Kurripako', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (34, 'Macuna', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (35, 'Macaguane', '', '2011-04-29');
-INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (36, 'Mocan·', '', '2011-04-29');
+INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (36, 'Mocan√°', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (37, 'Muisca', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (38, 'Nasa', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (39, 'Nukak', '', '2011-04-29');
@@ -242,9 +242,9 @@ INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (47, 'Siona', 
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (48, 'Tatuyo', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (49, 'Tinigua', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (50, 'Tucano', '', '2011-04-29');
-INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (51, 'Umbr·', '', '2011-04-29');
+INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (51, 'Umbr√°', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (52, 'U''wa', '', '2011-04-29');
-INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (53, 'Way˙u', '', '2011-04-29');
+INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (53, 'Way√∫u', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (54, 'Wiwa', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (55, 'Wounaan', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (56, 'Yagua', '', '2011-04-29');
@@ -254,9 +254,9 @@ INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (59, 'Yukpa', 
 
 -- iglesia
 
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (1, 'SIN INFORMACI”N', '', '2011-04-26');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (1, 'SIN INFORMACI√ìN', '', '2011-04-26');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (10, 'Iglesia Cristiana no Identificada', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (15, 'AIEC - AsociaciÛn de Iglesias EvangÈlicas del Caribe', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (15, 'AIEC - Asociaci√≥n de Iglesias Evang√©licas del Caribe', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (19, 'Iglesia Interamericana de Colombia', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (21, 'Iglesia Alianza Cristiana Misionera', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (22, 'Iglesia Menonita', '', '2011-05-06');
@@ -266,12 +266,12 @@ INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (25, 'Iglesi
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (27, 'Iglesia Movimiento Misionero Mundial', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (29, 'Iglesia Palabra de Vida (AIEC)', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (30, 'Comunidad Cristiana de Fe', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (31, 'IUMEC - Iglesia UniÛn Misionera EvangÈlica de Colombia', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (31, 'IUMEC - Iglesia Uni√≥n Misionera Evang√©lica de Colombia', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (32, 'Iglesia Bethesda', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (33, 'Iglesia Cristo Viene Pronto', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (34, 'Iglesia Cristo Reina', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (35, 'Iglesia Pentecostal Unida de Colombia', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (36, 'Iglesia Cristiana UniÛn', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (36, 'Iglesia Cristiana Uni√≥n', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (37, 'Centro de Fe y Esperanza', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (38, 'Iglesia Tiberia', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (39, 'Iglesia Luz y Vida', '', '2011-05-06');
@@ -282,7 +282,7 @@ INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (43, 'Iglesi
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (44, 'Iglesia Cruzada Cristiana', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (45, 'Iglesia Presbiteriana', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (46, 'Iglesia Remanso de Paz', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (47, 'Iglesia CatÛlica', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (47, 'Iglesia Cat√≥lica', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (48, 'Iglesia Pentecostal', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (49, 'Iglesia Asambleas de Dios', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (50, 'Iglesia Monte Horeb', '', '2011-05-06');
@@ -291,38 +291,38 @@ INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (52, 'Iglesi
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (53, 'Iglesia Bautista', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (54, 'Iglesia Panamericana', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (55, 'Iglesia Hermanos Menonitas', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (56, 'Iglesia ApostÛlica', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (56, 'Iglesia Apost√≥lica', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (57, 'Iglesia Palabra de Vida', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (58, 'Iglesia Cristo Centro', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (59, 'Iglesia Libre', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (60, 'MisiÛn Interamericana de Colombia', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (61, 'Iglesia EvangÈlica Las Palomas', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (62, 'MisiÛn Cornerstone', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (63, 'Iglesia EvangÈlica Templo de BelÈn ', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (60, 'Misi√≥n Interamericana de Colombia', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (61, 'Iglesia Evang√©lica Las Palomas', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (62, 'Misi√≥n Cornerstone', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (63, 'Iglesia Evang√©lica Templo de Bel√©n ', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (64, 'Iglesia El Verbo', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (65, 'Iglesia Aposento Alto', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (66, 'Casa de OraciÛn de Rioacha', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (66, 'Casa de Oraci√≥n de Rioacha', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (67, 'Iglesia Luterana', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (68, 'Iglesia Evangelio Vivo', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (69, 'Iglesias Puertas al Cielo', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (70, 'Iglesia Luz y Verdad', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (71, 'Iglesia Adventista', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (72, 'Iglesia Casa de Dios', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (73, 'IntegraciÛn Cristiana de Fe y OraciÛn (ICFO)', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (74, 'Iglesia Centro Cristiano SiloÈ', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (73, 'Integraci√≥n Cristiana de Fe y Oraci√≥n (ICFO)', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (74, 'Iglesia Centro Cristiano Silo√©', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (75, 'Iglesia Misionera Mundial', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (76, 'Iglesia Nueva Vida ', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (77, 'Iglesia PÈrgamo', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (77, 'Iglesia P√©rgamo', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (78, 'Iglesia Los Efesios', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (79, 'Iglesia Cristo mi ˙nica esperanza', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (79, 'Iglesia Cristo mi √∫nica esperanza', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (80, 'Iglesia Sardi', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (81, 'Iglesia Alianza Colombiana', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (82, 'Iglesia Puertas Abiertas', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (85, 'Iglesia UniÛn Misionera', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (85, 'Iglesia Uni√≥n Misionera', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (83, 'Iglesia Cristo Te Llama', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (84, 'Iglesia Confraternidad', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (86, 'Centro de Amor y Fe', '', '2011-05-06');
-INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (87, 'Iglesia Carism·tica VisiÛn a las Naciones ', '', '2011-05-06');
+INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (87, 'Iglesia Carism√°tica Visi√≥n a las Naciones ', '', '2011-05-06');
 INSERT INTO iglesia (id, nombre, descripcion, fechacreacion) VALUES (88, 'Iglesia Agua de Vida', '', '2011-05-06');
 
 

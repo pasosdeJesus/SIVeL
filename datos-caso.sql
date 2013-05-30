@@ -1,11 +1,11 @@
--- Datos para tablas b·sicas
--- InformaciÛn sobre caso tomada del Banco de
+-- Datos para tablas b√°sicas
+-- Informaci√≥n sobre caso tomada del Banco de
 -- Datos de Derechos Humanos y Violencia Politica.
 -- Categorias de "Marco Conceptual" revista Noche y Niebla.
 --    http://www.nocheyniebla.org
--- Dominio p˙blico. 2004. Sin garantÌas.
+-- Dominio p√∫blico. 2004. Sin garant√≠as.
 
-SET client_encoding = 'LATIN1';
+SET client_encoding = 'UTF8';
 
 -- pconsolidado
 
@@ -25,9 +25,9 @@ INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacio
 INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacion) VALUES (14, 'HERIDOS', 'VP', 'INTEGRIDAD', '2001-01-01');
 INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacion) VALUES (15, 'ATENTADOS', 'VP', 'INTEGRIDAD', '2001-01-01');
 INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacion) VALUES (16, 'AMENAZAS', 'VP', 'INTEGRIDAD', '2001-01-01');
-INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacion) VALUES (17, 'DESAPARICI”N', 'DH', 'LIBERTAD', '2001-01-01');
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacion) VALUES (17, 'DESAPARICI√ìN', 'DH', 'LIBERTAD', '2001-01-01');
 INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacion) VALUES (18, 'DETENCION ARBITRARIA', 'DH', 'LIBERTAD', '2001-01-01');
-INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacion) VALUES (19, 'DEPORTACI”N', 'DH', 'LIBERTAD', '2001-01-01');
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacion) VALUES (19, 'DEPORTACI√ìN', 'DH', 'LIBERTAD', '2001-01-01');
 INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacion) VALUES (20, 'RECLUTAMIENTO DE MENORES', 'DIH', 'LIBERTAD', '2001-01-01');
 INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacion) VALUES (21, 'TOMA DE REHENES', 'DIH', 'LIBERTAD', '2001-01-01');
 INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacion) VALUES (22, 'ESCUDO', 'DIH', 'LIBERTAD', '2001-01-01');
@@ -39,21 +39,20 @@ INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, fechacreacio
 --  tviolencia
 
 INSERT INTO tviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacion) VALUES ('A', 'VIOLACIONES A LOS DERECHOS HUMANOS', 'DH', '2000-07-24', NULL);
-INSERT INTO tviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacion) VALUES ('B', 'VIOLENCIA POLÕTICO SOCIAL', 'VPS', '2000-07-24', NULL);
-INSERT INTO tviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacion) VALUES ('C', 'ACCIONES B…LICAS', 'BELICAS', '2000-07-24', NULL);
+INSERT INTO tviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacion) VALUES ('B', 'VIOLENCIA POL√çTICO SOCIAL', 'VPS', '2000-07-24', NULL);
+INSERT INTO tviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacion) VALUES ('C', 'ACCIONES B√âLICAS', 'BELICAS', '2000-07-24', NULL);
 INSERT INTO tviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacion) VALUES ('D', 'INFRACCIONES AL DIH', 'DIH', '2000-07-24', NULL);
 
 -- supracategoria
 
-INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (1, 'PERSECUCI”N POLÕTICA', '2000-07-26', NULL, 'B');
-INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (2, 'ABUSO DE AUTORIDAD', '2000-07-26', NULL, 'A');
+INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (1, 'PERSECUCI√ìN POL√çTICA', '2000-07-26', NULL, 'B');
 INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (3, 'INTOLERANCIA SOCIAL', '2000-07-26', NULL, 'A');
-INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (1, 'PERSECUCI”N POLÕTICA', '2000-07-26', NULL, 'A');
+INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (1, 'PERSECUCI√ìN POL√çTICA', '2000-07-26', NULL, 'A');
 INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (2, 'INTOLERANCIA SOCIAL', '2000-07-26', NULL, 'B');
-INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (1, 'B…LICAS', '2000-07-26', NULL, 'C');
+INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (1, 'B√âLICAS', '2000-07-26', NULL, 'C');
 INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (1, 'PERSONAS', '2000-07-26', NULL, 'D');
 INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (2, 'BIENES', '2000-07-26', NULL, 'D');
-INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (3, 'M…TODOS', '2000-07-26', NULL, 'D');
+INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (3, 'M√âTODOS', '2000-07-26', NULL, 'D');
 
 
 --categoria
@@ -65,7 +64,7 @@ INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategori
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (501, '2001-05-23', NULL, 2, 'B', NULL, 'COLECTIVO DESPLAZADO', 'C');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (902, '2001-07-11', NULL, 3, 'D', NULL, 'DESPLAZAMIENTO FORZADO COLECTIVO', 'O');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (102, '2001-07-11', NULL, 1, 'A', NULL, 'COLECTIVO DESPLAZADO', 'C');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (79, '2002-07-23', '2002-07-23', 1, 'D', NULL, 'DESAPARICI”N', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (79, '2002-07-23', '2002-07-23', 1, 'D', NULL, 'DESAPARICI√ìN', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (15, '2000-08-09', NULL, 1, 'A', 7, 'AMENAZA', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (16, '2000-08-09', NULL, 1, 'A', 6, 'ATENTADO', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (18, '2000-08-09', NULL, 1, 'A', NULL, 'COLECTIVO AMENAZADO', 'C');
@@ -89,10 +88,10 @@ INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategori
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (47, '2000-08-09', NULL, 1, 'B', 13, 'TORTURA', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (49, '2000-08-09', NULL, 1, 'B', NULL, 'COLECTIVO AMENAZADO', 'C');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (420, '2010-04-17', NULL, 1, 'B', NULL, 'VIOLENCIA SEXUAL', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (421, '2010-04-17', NULL, 1, 'B', NULL, 'VIOLACI”N', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (421, '2010-04-17', NULL, 1, 'B', NULL, 'VIOLACI√ìN', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (422, '2010-04-17', NULL, 1, 'B', NULL, 'EMBARAZO FORZADO', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (423, '2010-04-17', NULL, 1, 'B', NULL, 'PROSTITUCI”N FORZADA', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (424, '2010-04-17', NULL, 1, 'B', NULL, 'ESTERILIZACI”N FORZADA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (423, '2010-04-17', NULL, 1, 'B', NULL, 'PROSTITUCI√ìN FORZADA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (424, '2010-04-17', NULL, 1, 'B', NULL, 'ESTERILIZACI√ìN FORZADA', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (425, '2010-04-17', NULL, 1, 'B', NULL, 'ESCLAVITUD SEXUAL', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (426, '2010-04-17', NULL, 1, 'B', NULL, 'ABUSO SEXUAL', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (427, '2010-04-17', NULL, 1, 'B', NULL, 'ABORTO FORZADO', 'I');
@@ -107,8 +106,8 @@ INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategori
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (69, '2000-08-09', NULL, 1, 'C', NULL, 'SABOTAJE', 'O');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (701, '2000-08-09', NULL, 1, 'D', 2, 'HOMICIDIO INTENCIONAL PERSONA PROTEGIDA', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (702, '2000-08-09', NULL, 1, 'D', 10, 'HERIDO INTENCIONAL PERSONA PROTEGIDA', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (703, '2000-08-09', NULL, 1, 'D', 2, 'CIVIL MUERTO EN ACCIONES B…LICAS', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (704, '2000-08-09', NULL, 1, 'D', 10, 'CIVIL HERIDO EN ACCIONES B…LICAS', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (703, '2000-08-09', NULL, 1, 'D', 2, 'CIVIL MUERTO EN ACCIONES B√âLICAS', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (704, '2000-08-09', NULL, 1, 'D', 10, 'CIVIL HERIDO EN ACCIONES B√âLICAS', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (706, '2000-08-09', NULL, 1, 'D', NULL, 'COLECTIVO AMENAZADO', 'C');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (72, '2000-08-09', NULL, 1, 'D', 9, 'TORTURA', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (73, '2000-08-09', NULL, 1, 'D', 11, 'AMENAZA', 'I');
@@ -122,81 +121,81 @@ INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategori
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (401, '2001-05-23', NULL, 1, 'B', NULL, 'COLECTIVO DESPLAZADO', 'C');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (903, '2001-07-11', NULL, 1, 'D', NULL, 'COLECTIVO DESPLAZADO', 'C');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (92, '2001-08-09', NULL, 3, 'D', NULL, 'ARMA PROHIBIDA', 'O');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (10, '2001-07-26', NULL, 1, 'A', 1, 'EJECUCI”N EXTRAJUDICIAL', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (10, '2001-07-26', NULL, 1, 'A', 1, 'EJECUCI√ìN EXTRAJUDICIAL', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (12, '2001-07-26', NULL, 1, 'A', 4, 'TORTURA', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (20, '2001-07-26', NULL, 2, 'A', 1, 'EJECUCI”N EXTRAJUDICIAL', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (14, '2001-08-09', NULL, 1, 'A', 18, 'DETENCI”N ARBITRARIA', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (11, '2001-07-26', NULL, 1, 'A', 17, 'DESAPARICI”N', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (101, '2001-05-23', NULL, 1, 'A', NULL, 'DEPORTACI”N', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (21, '2001-08-09', NULL, 2, 'A', 17, 'DESAPARICI”N', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (24, '2001-08-09', NULL, 2, 'A', 18, 'DETENCI”N ARBITRARIA', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (30, '2001-08-09', NULL, 3, 'A', 1, 'EJECUCI”N EXTRAJUDICIAL', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (301, '2001-05-23', NULL, 3, 'A', 18, 'DETENCI”N ARBITRARIA', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (302, '2001-05-23', NULL, 3, 'A', 17, 'DESAPARICI”N', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (20, '2001-07-26', NULL, 2, 'A', 1, 'EJECUCI√ìN EXTRAJUDICIAL', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (14, '2001-08-09', NULL, 1, 'A', 18, 'DETENCI√ìN ARBITRARIA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (11, '2001-07-26', NULL, 1, 'A', 17, 'DESAPARICI√ìN', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (101, '2001-05-23', NULL, 1, 'A', NULL, 'DEPORTACI√ìN', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (21, '2001-08-09', NULL, 2, 'A', 17, 'DESAPARICI√ìN', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (24, '2001-08-09', NULL, 2, 'A', 18, 'DETENCI√ìN ARBITRARIA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (30, '2001-08-09', NULL, 3, 'A', 1, 'EJECUCI√ìN EXTRAJUDICIAL', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (301, '2001-05-23', NULL, 3, 'A', 18, 'DETENCI√ìN ARBITRARIA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (302, '2001-05-23', NULL, 3, 'A', 17, 'DESAPARICI√ìN', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (48, '2001-08-09', NULL, 1, 'B', 22, 'RAPTO', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (58, '2001-08-09', NULL, 2, 'B', 22, 'DESAPARICI”N', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (58, '2001-08-09', NULL, 2, 'B', 22, 'DESAPARICI√ìN', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (64, '2001-08-09', NULL, 1, 'C', NULL, 'CAMPO MINADO', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (65, '2001-08-09', NULL, 1, 'C', NULL, 'BOMBARDEOS / AMETRALLAMIENTO', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (66, '2001-08-09', NULL, 1, 'C', NULL, 'BLOQUEO DE VÌAS', 'O');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (68, '2001-08-09', NULL, 1, 'C', NULL, 'INCURSI”N', 'O');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (74, '2001-08-09', NULL, 1, 'D', 21, 'TOMA DE REH…N', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (66, '2001-08-09', NULL, 1, 'C', NULL, 'BLOQUEO DE V√çAS', 'O');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (68, '2001-08-09', NULL, 1, 'C', NULL, 'INCURSI√ìN', 'O');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (74, '2001-08-09', NULL, 1, 'D', 21, 'TOMA DE REH√âN', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (87, '2001-08-09', NULL, 1, 'D', 2, 'MUERTO EN ATAQUE A BIENES CIVILES', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (88, '2001-08-09', NULL, 1, 'D', 10, 'HERIDO EN ATAQUE A BIENES CIVILES', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (97, '2001-08-09', NULL, 1, 'D', 2, 'MUERTO POR M…TODOS Y MEDIOS ILÕCITOS', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (98, '2001-08-09', NULL, 1, 'D', 10, 'HERIDO POR M…TODOS Y MEDIOS ILÕCITOS', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (97, '2001-08-09', NULL, 1, 'D', 2, 'MUERTO POR M√âTODOS Y MEDIOS IL√çCITOS', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (98, '2001-08-09', NULL, 1, 'D', 10, 'HERIDO POR M√âTODOS Y MEDIOS IL√çCITOS', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (904, '2001-07-11', NULL, 1, 'D', NULL, 'ESCUDO', 'C');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (84, '2001-08-09', NULL, 2, 'D', NULL, 'INFRACCI”N CONTRA EL MEDIO AMBIENTE', 'O');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (85, '2001-08-09', NULL, 2, 'D', NULL, 'INFRACCI”N CONTRA BIENES CULTURALES Y RELIGIOSOS', 'O');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (84, '2001-08-09', NULL, 2, 'D', NULL, 'INFRACCI√ìN CONTRA EL MEDIO AMBIENTE', 'O');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (85, '2001-08-09', NULL, 2, 'D', NULL, 'INFRACCI√ìN CONTRA BIENES CULTURALES Y RELIGIOSOS', 'O');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (86, '2001-08-09', NULL, 2, 'D', NULL, 'BIENES INDISPENSABLES PARA LA SUPERV. DE LA POB.', 'O');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (89, '2001-08-09', NULL, 2, 'D', NULL, 'INFRACCI”N CONTRA LA ESTRUCTURA VIAL', 'O');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (93, '2001-08-09', NULL, 3, 'D', NULL, 'MINA ILÕCITA / ARMA TRAMPA', 'O');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (707, '2001-07-11', NULL, 3, 'D', NULL, 'INFRACCI”N CONTRA MISI”N MEDICA', 'O');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (708, '2001-07-11', NULL, 3, 'D', NULL, 'INFRACCI”N CONTRA MISI”N RELIGIOSA', 'O');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (709, '2001-07-11', NULL, 3, 'D', NULL, 'INFRACCI”N CONTRA MISI”N HUMANITARIA', 'O');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (89, '2001-08-09', NULL, 2, 'D', NULL, 'INFRACCI√ìN CONTRA LA ESTRUCTURA VIAL', 'O');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (93, '2001-08-09', NULL, 3, 'D', NULL, 'MINA IL√çCITA / ARMA TRAMPA', 'O');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (707, '2001-07-11', NULL, 3, 'D', NULL, 'INFRACCI√ìN CONTRA MISI√ìN MEDICA', 'O');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (708, '2001-07-11', NULL, 3, 'D', NULL, 'INFRACCI√ìN CONTRA MISI√ìN RELIGIOSA', 'O');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (709, '2001-07-11', NULL, 3, 'D', NULL, 'INFRACCI√ìN CONTRA MISI√ìN HUMANITARIA', 'O');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (801, '2001-07-26', NULL, 2, 'D', NULL, 'ATAQUE A OBRAS / INSTALACIONES QUE CONT. FUERZAS PELIGROSAS', 'O');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (910, '2006-07-12', NULL, 1, 'C', NULL, 'ENFRENTAMIENTO - INTERNO', 'I');
 
 
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (196, '2008-10-20', NULL, 1, 'A', NULL, 'V.S. - ABUSO SEXUAL', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (197, '2010-04-17', NULL, 1, 'A', 12, 'V.S. - ABORTO FORZADO', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (291, '2008-10-20', NULL, 2, 'A', 8, 'V.S. - VIOLACI”N', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (291, '2008-10-20', NULL, 2, 'A', 8, 'V.S. - VIOLACI√ìN', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (292, '2008-10-20', NULL, 2, 'A', 8, 'V.S. - EMBARAZO FORZADO', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (293, '2008-10-20', NULL, 2, 'A', 8, 'V.S. - PROSTITUCI”N FORZADA', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (294, '2008-10-20', NULL, 2, 'A', 8, 'V.S. - ESTERILIZACI”N FORZADA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (293, '2008-10-20', NULL, 2, 'A', 8, 'V.S. - PROSTITUCI√ìN FORZADA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (294, '2008-10-20', NULL, 2, 'A', 8, 'V.S. - ESTERILIZACI√ìN FORZADA', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (295, '2008-10-20', NULL, 2, 'A', 8, 'V.S. - ESCLAVITUD SEXUAL', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (296, '2008-10-20', NULL, 2, 'A', NULL, 'V.S. - ABUSO SEXUAL', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (297, '2010-04-17', NULL, 2, 'A', NULL, 'V.S. - ABORTO FORZADO', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (391, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - VIOLACI”N', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (391, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - VIOLACI√ìN', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (392, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - EMBARAZO FORZADO', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (393, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - PROSTITUCI”N FORZADA', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (394, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - ESTERILIZACI”N FORZADA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (393, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - PROSTITUCI√ìN FORZADA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (394, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - ESTERILIZACI√ìN FORZADA', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (395, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - ESCLAVITUD SEXUAL', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (396, '2008-10-20', NULL, 3, 'A', 8, 'V.S. - ABUSO SEXUAL', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (397, '2010-04-17', NULL, 3, 'A', 8, 'V.S. - ABORTO FORZADO', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (771, '2008-10-20', NULL, 1, 'D', 12, 'VIOLACI”N', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (771, '2008-10-20', NULL, 1, 'D', 12, 'VIOLACI√ìN', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (772, '2008-10-20', NULL, 1, 'D', 12, 'EMBARAZO FORZADO', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (773, '2008-10-20', NULL, 1, 'D', 12, 'PROSTITUCI”N FORZADA', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (774, '2008-10-20', NULL, 1, 'D', 12, 'ESTERILIZACI”N FORZADA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (773, '2008-10-20', NULL, 1, 'D', 12, 'PROSTITUCI√ìN FORZADA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (774, '2008-10-20', NULL, 1, 'D', 12, 'ESTERILIZACI√ìN FORZADA', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (775, '2008-10-20', NULL, 1, 'D', 12, 'ESCLAVITUD SEXUAL', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (776, '2008-10-20', NULL, 1, 'D', 12, 'ABUSO SEXUAL', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (777, '2010-04-17', NULL, 1, 'D', 12, 'ABORTO FORZADO', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (191, '2008-10-20', NULL, 1, 'A', 8, 'V.S. - VIOLACI”N', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (191, '2008-10-20', NULL, 1, 'A', 8, 'V.S. - VIOLACI√ìN', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (192, '2008-10-20', NULL, 1, 'A', 8, 'V.S. - EMBARAZO FORZADO', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (193, '2008-10-20', NULL, 1, 'A', 8, 'V.S. - PROSTITUCI”N FORZADA', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (194, '2008-10-20', NULL, 1, 'A', 8, 'V.S. - ESTERILIZACI”N FORZADA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (193, '2008-10-20', NULL, 1, 'A', 8, 'V.S. - PROSTITUCI√ìN FORZADA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (194, '2008-10-20', NULL, 1, 'A', 8, 'V.S. - ESTERILIZACI√ìN FORZADA', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (195, '2008-10-20', NULL, 1, 'A', 8, 'V.S. - ESCLAVITUD SEXUAL', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (906, '2008-10-21', NULL, 1, 'D', NULL, 'CONFINAMIENTO COMO REPRESALIA O CASTIGO COLECTIVO', 'C');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (104, '2008-10-17', NULL, 1, 'A', 25, 'CONFINAMIENTO COMO REPRESALIA O CASTIGO COLECTIVO', 'C');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (520, '2011-07-07', NULL, 2, 'B', 12, 'VIOLENCIA SEXUAL', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (521, '2011-07-07', NULL, 2, 'B', 12, 'VIOLACI”N', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (521, '2011-07-07', NULL, 2, 'B', 12, 'VIOLACI√ìN', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (522, '2011-07-07', NULL, 2, 'B', 12, 'EMBARAZO FORZADO', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (523, '2011-07-07', NULL, 2, 'B', 12, 'PROSTITUCI”N FORZADA', 'I');
-INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (524, '2011-07-07', NULL, 2, 'B', 12, 'ESTERILIZACI”N FORZADA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (523, '2011-07-07', NULL, 2, 'B', 12, 'PROSTITUCI√ìN FORZADA', 'I');
+INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (524, '2011-07-07', NULL, 2, 'B', 12, 'ESTERILIZACI√ìN FORZADA', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (525, '2011-07-07', NULL, 2, 'B', 12, 'ESCLAVITUD SEXUAL', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (526, '2011-07-07', NULL, 2, 'B', 12, 'ABUSO SEXUAL', 'I');
 INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, nombre, tipocat) VALUES (527, '2011-07-07', NULL, 2, 'B', 12, 'ABORTO FORZADO', 'I');
 
---otras deshabilitadas pero empleadas despuÈs del 2001:
+--otras deshabilitadas pero empleadas despu√©s del 2001:
 --INSERT INTO categoria VALUES ('31', 'DESAPARICION', '2002-07-16', '2002-07-16', '3', 'A');
 --INSERT INTO categoria VALUES ('17', 'SECUESTRO', '2002-07-16', '2002-07-16', '1', 'A');
 --INSERT INTO categoria VALUES ('99', 'DESPLAZAMIENTO FORZADO', '2000-08-09', '2001-05-23', '3', 'D');
@@ -220,12 +219,12 @@ UPDATE categoria SET contadaen = '777' WHERE id='197';
 UPDATE categoria SET contadaen = '906' WHERE id='104';
 
 -- contexto
-INSERT INTO contexto (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (1,'MILITARIZACI”N','2001-01-29', NULL);
-INSERT INTO contexto (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (2,'PARAMILITARIZACI”N','2001-01-29', NULL);
+INSERT INTO contexto (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (1,'MILITARIZACI√ìN','2001-01-29', NULL);
+INSERT INTO contexto (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (2,'PARAMILITARIZACI√ìN','2001-01-29', NULL);
 INSERT INTO contexto (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (3,'PRESENCIA GUERRILLERA','2001-01-29', NULL);
 INSERT INTO contexto (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (4,'PRESENCIA DE MILICIAS','2001-01-29', NULL);
-INSERT INTO contexto (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (5,'ACCIONES B…LICAS','2001-01-29', NULL);
-INSERT INTO contexto (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (6,'PARO CÕVICO','2001-01-29', NULL);
+INSERT INTO contexto (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (5,'ACCIONES B√âLICAS','2001-01-29', NULL);
+INSERT INTO contexto (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (6,'PARO C√çVICO','2001-01-29', NULL);
 INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (7,'MANIFESTACIONES','2001-01-29', NULL);
 INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (8,'PROTESTA','2001-01-29', NULL);
 INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (9,'OCUPACIONES','2001-01-29', NULL);
@@ -234,23 +233,23 @@ INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (28
 INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (10,'PARO AGRARIO','2001-01-29', NULL);
 INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (11,'MARCHA CAMPESINA','2001-01-29', NULL);
 INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (12,'TOMA DE TIERRAS','2001-01-29', NULL);
-INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (13,'ENCLAVES ECON”MICOS','2001-01-29', NULL);
-INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (14,'CULTIVOS DE USO ILÕCITO','2001-01-29', NULL);
+INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (13,'ENCLAVES ECON√ìMICOS','2001-01-29', NULL);
+INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (14,'CULTIVOS DE USO IL√çCITO','2001-01-29', NULL);
 INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (15,'CONFLICTOS LABORALES','2001-01-29', NULL);
 INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (16,'CONFLICTOS ESTUDIANTILES','2001-01-29', NULL);
-INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (17,'PROBL. …TNICA (NEG.E IN.)','2001-01-29', NULL);
-INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (18,'PROBLEM¡TICA FRONTERIZA','2001-01-29', NULL);
-INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (19,'PROBLEM¡TICA AMBIENTAL','2001-01-29', NULL);
-INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (20,'PROBLEM¡TICA CARCELARIA','2001-01-29', NULL);
+INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (17,'PROBL. √âTNICA (NEG.E IN.)','2001-01-29', NULL);
+INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (18,'PROBLEM√ÅTICA FRONTERIZA','2001-01-29', NULL);
+INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (19,'PROBLEM√ÅTICA AMBIENTAL','2001-01-29', NULL);
+INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (20,'PROBLEM√ÅTICA CARCELARIA','2001-01-29', NULL);
 INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (21,'DESALOJOS','2001-01-29', NULL);
-INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (22,'PROCESOS DE PAZ O DI¡LOGO','2001-01-29', NULL);
+INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (22,'PROCESOS DE PAZ O DI√ÅLOGO','2001-01-29', NULL);
 INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (23,'PROCESOS ELECTORALES','2001-01-29', NULL);
-INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (24,'CAMPA—AS DE INTOLERANCIA','2001-01-29', NULL);
-INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (25,'PERSECUSI”N A ORGANIZACION','2001-01-29', NULL);
+INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (24,'CAMPA√ëAS DE INTOLERANCIA','2001-01-29', NULL);
+INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (25,'PERSECUSI√ìN A ORGANIZACION','2001-01-29', NULL);
 INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (26,'OTROS','2001-01-29', NULL);
 INSERT INTO contexto(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (29,'FALSO POSITIVO','2010-01-29', NULL);
 INSERT INTO contexto (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('30', 'INTOLERANCIA SOCIAL', '2011-04-26', NULL);
-INSERT INTO contexto (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('31', 'SEGURIDAD INFORM¡TICA', '2011-04-28', NULL);
+INSERT INTO contexto (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('31', 'SEGURIDAD INFORM√ÅTICA', '2011-04-28', NULL);
 
 SELECT setval('contexto_seq', max(id)) FROM contexto;
 
@@ -262,14 +261,14 @@ INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa)
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (40, 'POLO INSURGENTE', '2009-09-20', NULL, NULL);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (1, 'ESTADO COLOMBIANO', '2001-01-30', NULL, NULL);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (2, 'FUERZA PUBLICA', '2001-01-30', NULL, 1);
-INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (7, 'POLICÕA', '2001-01-30', NULL, 2);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (7, 'POLIC√çA', '2001-01-30', NULL, 2);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (36, 'OTROS', '2001-06-13', NULL, NULL);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (24, 'AGENTE EXTRANJERO', '2001-01-30', NULL, '36');
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (25, 'GUERRILLA', '2001-01-30', NULL, NULL);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (32, 'ERG', '2001-01-30', NULL, 25);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (33, 'GRUPOS DE INTOLERANCIA SOCIAL', '2001-01-30', NULL, NULL);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (34, 'INFORMACION CONTRADICTORIA', '2001-01-30', NULL, NULL);
-INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (35, 'SIN INFORMACI”N', '2001-01-30', NULL, NULL);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (35, 'SIN INFORMACI√ìN', '2001-01-30', NULL, NULL);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (37, 'COMBATIENTES', '2004-01-20', NULL, NULL);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (4, 'EJERCITO', '2001-01-30', NULL, 2);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (5, 'ARMADA', '2001-01-30', NULL, 2);
@@ -316,10 +315,10 @@ INSERT INTO antecedente(id, nombre, fechacreacion, fechadeshabilitacion) VALUES 
 INSERT INTO antecedente(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (8,'SECUESTRO','2001-01-29', NULL);
 INSERT INTO antecedente(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (9,'DESPLAZAMIENTO','2001-01-29', NULL);
 INSERT INTO antecedente(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (10,'SEGUIMIENTO','2001-01-29', NULL);
-INSERT INTO antecedente(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (11,'SE—ALAMIENTO','2001-01-29', NULL);
+INSERT INTO antecedente(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (11,'SE√ëALAMIENTO','2001-01-29', NULL);
 INSERT INTO antecedente(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (12,'TORTURA','2001-01-29', NULL);
 INSERT INTO antecedente(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (13,'OTRO','2001-01-29', NULL);
-INSERT INTO antecedente(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (14,'SIN INFORMACI”N','2001-01-29', NULL);
+INSERT INTO antecedente(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (14,'SIN INFORMACI√ìN','2001-01-29', NULL);
 INSERT INTO antecedente(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (15,'PILLAJE','2006-08-18', NULL);
 INSERT INTO antecedente(id, nombre, fechacreacion, fechadeshabilitacion) VALUES (16,'MASACRE','2006-08-18', NULL);
 
@@ -328,10 +327,10 @@ SELECT setval('antecedente_seq', max(id)) FROM antecedente;
 -- intervalo
 
 INSERT INTO intervalo(id, nombre, rango, fechacreacion, fechadeshabilitacion) VALUES ('1', 'MADRUGADA', '00:00 A 05:59', '2001-01-01', NULL);
-INSERT INTO intervalo(id, nombre, rango, fechacreacion, fechadeshabilitacion) VALUES ('2', 'MA—ANA', '06:00 A 12:59', '2001-01-01', NULL);
+INSERT INTO intervalo(id, nombre, rango, fechacreacion, fechadeshabilitacion) VALUES ('2', 'MA√ëANA', '06:00 A 12:59', '2001-01-01', NULL);
 INSERT INTO intervalo(id, nombre, rango, fechacreacion, fechadeshabilitacion) VALUES ('3', 'TARDE', '13:00 A 18:59', '2001-01-01', NULL);
 INSERT INTO intervalo(id, nombre, rango, fechacreacion, fechadeshabilitacion) VALUES ('4', 'NOCHE', '19:00 A 24:59', '2001-01-01', NULL);
-INSERT INTO intervalo(id, nombre, rango, fechacreacion, fechadeshabilitacion) VALUES ('5', 'SIN INFORMACI”N', 'SIN INFORMACI”N', '2001-01-01', NULL);
+INSERT INTO intervalo(id, nombre, rango, fechacreacion, fechadeshabilitacion) VALUES ('5', 'SIN INFORMACI√ìN', 'SIN INFORMACI√ìN', '2001-01-01', NULL);
 
 SELECT setval('intervalo_seq', max(id)) FROM intervalo;
 
