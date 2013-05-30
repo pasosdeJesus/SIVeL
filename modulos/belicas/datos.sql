@@ -1,9 +1,9 @@
 
-SET client_encoding = 'LATIN1';
+SET client_encoding = 'UTF8';
 
 
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
-	VALUES ('sbel-1', '2011-02-23', 'Creación de tablas');
+	VALUES ('sbel-1', '2011-02-23', 'CreaciÃ³n de tablas');
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('sbel-2', '2011-02-23', 'Menus');
 INSERT INTO actualizacionbase (id, fecha, descripcion) 

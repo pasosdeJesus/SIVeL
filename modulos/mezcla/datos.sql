@@ -1,5 +1,5 @@
 
-SET client_encoding = 'LATIN1';
+SET client_encoding = 'UTF8';
 SELECT setval('etiqueta_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM etiqueta) AS s;
 INSERT INTO etiqueta (nombre, observaciones)
         VALUES ('MEZCLA_CASOS', 'Caso tras mezclar dos');

@@ -1,5 +1,5 @@
 
-SET client_encoding = 'LATIN1';
+SET client_encoding = 'UTF8';
 
 -- Anexos
 

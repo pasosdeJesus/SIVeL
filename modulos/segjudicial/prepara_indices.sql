@@ -1,5 +1,5 @@
 
-SET client_encoding = 'LATIN1';
+SET client_encoding = 'UTF8';
 
 SELECT setval('taccion_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM taccion) AS s;
 SELECT setval('tproceso_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM tproceso) AS s;

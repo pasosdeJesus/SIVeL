@@ -1,5 +1,5 @@
 
-SET client_encoding = 'LATIN1';
+SET client_encoding = 'UTF8';
 
 -- Acciones judiciales
 
@@ -62,7 +62,7 @@ CREATE TABLE taccion (
 
 CREATE SEQUENCE accion_seq;
 
--- InspiraciÛn inicial en base de Reiniciar m·s sugerencias de Claudia
+-- Inspiraci√≥n inicial en base de Reiniciar m√°s sugerencias de Claudia
 CREATE TABLE accion (
 	id      INTEGER PRIMARY KEY DEFAULT (nextval('accion_seq')),
 	id_proceso INTEGER NOT NULL REFERENCES proceso,
