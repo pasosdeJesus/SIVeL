@@ -214,6 +214,9 @@ MÓDULO BÉLICAS
 - Organizar
 - En tabla a cada víctima combatiente agregar resultado de agresión
 	  y código de grupo armado al que pertenecia.
+- Belicas deberia permitir mas de una agresion e.g a la misma victima
+  herido y privado de la libertad.
+- Falta enlace "Menu principal " en conteo de combatientes
  
 
 6. FUENTES

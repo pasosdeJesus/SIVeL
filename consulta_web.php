@@ -236,7 +236,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 call_user_func_array(
                     array($c, 'consultaWebCreaConsulta'),
                     array(
-                        $db, $pMostrar, &$where, &$tablas,
+                        &$db, $pMostrar, &$where, &$tablas,
                         &$pOrdenar, &$campos
                     )
                 );

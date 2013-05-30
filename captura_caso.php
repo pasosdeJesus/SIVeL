@@ -482,8 +482,6 @@ if (isset($_GET['limpia']) && $_GET['limpia'] == 1) {
     unset_var_session();
 }
 
-//ambiente();
-//die("abc");
 
 $opciones = array();
 $nv = "_auth_".nom_sesion();

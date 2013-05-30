@@ -44,6 +44,7 @@ $options = array(
     'class_prefix' => 'DataObjects_',
     'extends_location' => 'DataObjects_',
     'debug' => isset($GLOBALS['DB_Debug']) ? $GLOBALS['DB_Debug'] : '0',
+#    'disable_null_strings' => 'full'
 );
 
 $_DB_DATAOBJECT_FORMBUILDER['CONFIG'] = array (

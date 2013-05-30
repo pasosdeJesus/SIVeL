@@ -49,6 +49,10 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
 
 
 
+    var $fb_linkDisplayFields = array(
+        'id_municipio,id_departamento', 'id_departamento', 'lugar'
+    );
+    var $fb_linkDisplayLevel = 0;
     var $fb_preDefOrder = array(
         'id_departamento', 'id_municipio',
         'id_clase', 'lugar', 'sitio', 'latitud', 'longitud', 'id_tsitio'
