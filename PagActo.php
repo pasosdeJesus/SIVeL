@@ -253,8 +253,6 @@ class PagActo extends PagBaseSimple
     function PagActo($nomForma)
     {
         parent::PagBaseSimple($nomForma);
-        $this->titulo = _('Actos');
-        $this->tcorto = _('Actos');
 
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
@@ -265,9 +263,9 @@ class PagActo extends PagBaseSimple
         $this->addAction('eliminaacto', new EliminaActo());
         $this->addAction('eliminaactocolectivo', new EliminaActocolectivo());
 
-        if (isset($GLOBALS['etiqueta']['actos'])) {
-            $this->titulo = $GLOBALS['etiqueta']['actos'];
-            $this->tcorto = $GLOBALS['etiqueta']['actos'];
+        if (isset($GLOBALS['etiqueta']['Actos'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Actos'];
+            $this->tcorto = $GLOBALS['etiqueta']['Actos'];
         }
     }
 

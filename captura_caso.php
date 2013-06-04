@@ -237,6 +237,9 @@ class CapturaCaso extends HTML_QuickForm_Controller
             } else {
                 $clpag =& new $cl($pag);
             }
+            if (!isset($GLOBALS['etiqueta'][$cl])) {
+                $GLOBALS['etiqueta'][$cl] = $clpag->titulo;
+            }
             $this->addPage($clpag);
             $this->addAction($pag, new Salta());
         }
