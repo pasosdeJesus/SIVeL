@@ -147,7 +147,10 @@ class PagDesplazamiento extends PagBaseMultiple
         parent::PagBaseMultiple($nomForma);
         $this->titulo  = _('Desplazamiento');
         $this->tcorto  = _('Desplazamiento');
-
+        if (isset($GLOBALS['etiqueta']['Desplazamiento'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Desplazamiento'];
+            $this->tcorto = $GLOBALS['etiqueta']['Desplazamiento'];
+        }
         $this->addAction(
             'departamentodecl', new CamDepartamento('departamentodecl')
         );

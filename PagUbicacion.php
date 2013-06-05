@@ -276,7 +276,10 @@ class PagUbicacion extends PagBaseMultiple
         parent::PagBaseMultiple($nomForma);
         $this->titulo = _('Ubicación');
         $this->tcorto = _('Ubicación');
-
+        if (isset($GLOBALS['etiqueta']['Ubicacion'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Ubicacion'];
+            $this->tcorto = $GLOBALS['etiqueta']['Ubicacion'];
+        }
         PagUbicacion::nullVarUbicacion();
         $this->addAction('id_departamento', new CamDepartamento());
         $this->addAction('id_municipio', new CamMunicipio());

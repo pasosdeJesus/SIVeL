@@ -173,6 +173,10 @@ class PagVictimaCombatiente extends PagBaseMultiple
         parent::PagBaseMultiple($nomForma);
         $this->titulo  = _('Víctima Combatiente');
         $this->tcorto  = _('Comb.');
+        if (isset($GLOBALS['etiqueta']['Victima Combatiente'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Victima Combatiente'];
+            $this->tcorto = $GLOBALS['etiqueta']['Victima Combatiente'];
+        }
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
     }

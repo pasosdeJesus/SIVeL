@@ -191,7 +191,10 @@ class PagAnexo extends PagBaseMultiple
 
         $this->titulo  = _('Anexos');
         $this->tcorto = _('Anexo');
-
+        if (isset($GLOBALS['etiqueta']['Anexos'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Anexos'];
+            $this->tcorto = $GLOBALS['etiqueta']['Anexos'];
+        }
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
         $this->addAction('veranexo', new VerAnexo());

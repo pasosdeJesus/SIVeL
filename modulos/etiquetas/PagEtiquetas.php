@@ -88,7 +88,10 @@ class PagEtiquetas extends PagBaseSimple
         parent::PagBaseSimple($nomForma, $this->titulo);
         $this->titulo  = _('Etiquetas');
         $this->tcorto  = _('Etiquetas');
-
+        if (isset($GLOBALS['etiqueta']['Etiquetas'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Etiquetas'];
+            $this->tcorto = $GLOBALS['etiqueta']['Etiquetas'];
+        }
         $this->addAction('process', new Terminar());
 /*        if (isset($_SESSION['forma_modo'])
             && $_SESSION['forma_modo'] == 'busqueda') {

@@ -265,7 +265,10 @@ class PagVictimaIndividual extends PagBaseMultiple
         parent::PagBaseMultiple($nomForma);
         $this->titulo = _('Víctimas Individuales');
         $this->tcorto = _('Víctima');
-
+        if (isset($GLOBALS['etiqueta']['Victimas Individuales'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Victimas Individuales'];
+            $this->tcorto = $GLOBALS['etiqueta']['Victimas Individuales'];
+        }
 
         PagUbicacion::nullVarUbicacion();
         $this->addAction('id_departamento', new CamDepartamento());

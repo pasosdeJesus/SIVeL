@@ -320,10 +320,11 @@ class CapturaCaso extends HTML_QuickForm_Controller
             if (($d = strrpos($cls, "/"))>0) {
                 $cls = substr($cls, $d+1);
             }
-            $varc = get_class_vars($cls);
+            $ocls = new $cls("");
             $titulo = isset($GLOBALS['etiqueta'][$cls]) ?
-                $GLOBALS['etiqueta'][$cls] : _($varc['titulo']);
-            //echo "OJO cls=$cls, titulo=$titulo, varc=$varc<br>";
+                $GLOBALS['etiqueta'][$cls] : 
+                isset($ocls->titulo) ? $ocls->titulo : "Título";
+            //echo "OJO cls=$cls, ocls->titulo= {$ocls->titulo}, titulo=$titulo<br>";
             //var_dump($varc);
             $attrs = ($pageName == $event) ? $here : $attributes;
             $jump[] =& $page->createElement(

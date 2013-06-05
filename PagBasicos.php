@@ -647,6 +647,10 @@ class PagBasicos extends PagBaseSimple
         $this->titulo = _('Datos Básicos');
         $this->tcorto = _('Básicos');
 
+        if (isset($GLOBALS['etiqueta']['Basicos'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Basicos'];
+            $this->tcorto = $GLOBALS['etiqueta']['Basicos'];
+        }
 
         $this->addAction('buscar', new BuscarId());
         $this->addAction('siguiente', new Siguiente());

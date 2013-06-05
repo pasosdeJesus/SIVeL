@@ -281,12 +281,12 @@ class PagVictimaColectiva extends PagBaseMultiple
         parent::PagBaseMultiple($nomForma);
         $this->titulo = _('Víctimas Colectivas');
         $this->tcorto = _('Vic. colectiva');
-
+        if (isset($GLOBALS['etiqueta']['Victimas Colectivas'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Victimas Colectivas'];
+            $this->tcorto = $GLOBALS['etiqueta']['Victimas Colectivas'];
+        }
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
-        if (isset($GLOBALS['etiqueta']['victimas_colectivas'])) {
-            $this->titulo = $GLOBALS['etiqueta']['victimas_colectivas'];
-        }
     }
 
 

@@ -137,14 +137,12 @@ class PagTipoViolencia extends PagBaseSimple
         parent::PagBaseSimple($nomForma);
 
         $this->titulo = _('Contexto');
-
+        if (isset($GLOBALS['etiqueta']['Contexto'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Contexto'];
+            $this->tcorto = $GLOBALS['etiqueta']['Contexto'];
+        }
         $this->addAction('siguiente', new Siguiente('salvaTipoViolencia'));
         $this->addAction('anterior', new Anterior('salvaTipoViolencia'));
-
-        if (isset($GLOBALS['etiqueta']['clasificacion'])) {
-            $this->titulo = $this->tcorto
-                = $GLOBALS['etiqueta']['clasificacion'];
-        }
     }
 
 

@@ -149,7 +149,10 @@ class PagFuentesFrecuentes extends PagBaseMultiple
 
         $this->titulo = _('Fuentes Frecuentes');
         $this->tcorto = _('Fuente');
-
+        if (isset($GLOBALS['etiqueta']['Fuentes Frecuentes'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Fuentes Frecuentes'];
+            $this->tcorto = $GLOBALS['etiqueta']['Fuentes Frecuentes'];
+        }
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
     }

@@ -232,7 +232,10 @@ class PagSegJudicial extends PagBaseMultiple
         parent::PagBaseMultiple($nomForma);
         $this->titulo  = _('Seguimiento Judicial');
         $this->tcorto  = _('Seg. Jud.');
-
+        if (isset($GLOBALS['etiqueta']['Seguimiento Judicial'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Seguimiento Judicial'];
+            $this->tcorto = $GLOBALS['etiqueta']['Seguimiento Judicial'];
+        }
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
         $this->addAction('eliminaaccionj', new EliminaAccionJ());
