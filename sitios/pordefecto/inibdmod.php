@@ -73,6 +73,7 @@ $_DB_DATAOBJECT_FORMBUILDER['CONFIG'] = array (
 );
 
 
+if (!function_exists("esta_nueva_ficha")) {
 /** 
  * Determina si una ficha con la identificación dada ya está en las
  * programas para agregar
@@ -94,6 +95,7 @@ function esta_nueva_ficha($id)
         }
     }
     return false;
+}
 }
 
 /* Rutas en particular donde haya subdirectorios DataObjects */
