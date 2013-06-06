@@ -19,9 +19,11 @@ if (!isset($GLOBALS['dir_anexos'])) {
     $GLOBALS['dir_anexos'] = '/resbase/anexos';
 }
 
-$GLOBALS['nueva_ficha_tabuladores'][] =  array(
-    10,'anexos', 'modulos/anexos/PagAnexo', 10
-);
+if (!esta_nueva_ficha('anexos')) {
+    $GLOBALS['nueva_ficha_tabuladores'][] =  array(
+        10, 'anexos', 'modulos/anexos/PagAnexo', 10
+    );
+}
 
 $GLOBALS['remplaza_ficha_tabuladores'][] =  array(
     'frecuentes', 'modulos/anexos/PagFrecuenteAnexo'

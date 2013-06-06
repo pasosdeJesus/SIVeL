@@ -201,6 +201,17 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
         }
         //fechacreacion la dejamos en valor por defecto
 
+        // Espacio amplio para campos de texto por defecto
+        if (isset($this->fb_textFields)) {
+            foreach($this->fb_textFields as $t) {
+                $e =& $form->getElement($t);
+                if (isset($e) && !PEAR::isError($e)) {
+                    $e->setCols(75);
+                    $e->setRows(2);
+                }
+            }
+        }
+
     }
 
     /**

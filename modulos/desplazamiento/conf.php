@@ -16,5 +16,9 @@
 
 // Opciones del menú
 
-$GLOBALS['nueva_ficha_tabuladores'][] =  array(9, 'desplazamiento', 'modulos/desplazamiento/PagDesplazamiento', 10);
+if (!esta_nueva_ficha('desplazamiento')) {
+    $GLOBALS['nueva_ficha_tabuladores'][] =  array(
+        5, 'desplazamiento', 'modulos/desplazamiento/PagDesplazamiento', 10
+    );
+}
 

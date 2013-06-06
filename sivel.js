@@ -1,12 +1,12 @@
 /** Funciones varias en JavaScript 
- * @author Vladimir Támara Patiño. vtamara@pasosdeJesus.org. 2007. 
- * Dominio público.
+ * @author Vladimir TÃ¡mara PatiÃ±o. vtamara@pasosdeJesus.org. 2007. 
+ * Dominio pÃºblico.
  */
 
-/* Esta función toma ídeas de https://linea.davivienda.com/funciones.js
+/* Esta funciÃ³n toma Ã­deas de https://linea.davivienda.com/funciones.js
    que a su vez parece inspirado en 
 	http://developer.mozilla.org/en/docs/DOM:window.open
-   Documentación:
+   DocumentaciÃ³n:
 	http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Guide
  */
 function abrirBusquedaPersona(rol) {
@@ -64,7 +64,7 @@ function enviar_persona(rol, id, nombres, apellidos, anionac, mesnac,
 	if (!nuevo) {
 		forma.submit();
 	} else {
-		//echo "Si tiene familiares aparecerán despúes de enviar este formulario";
+		//echo "Si tiene familiares aparecerÃ¡n despÃºes de enviar este formulario";
 	}
 	window.close();
 }
@@ -86,8 +86,25 @@ function enviar_grupoper(id, nombre, anotaciones)
 		forma.submit();
 	}
 	else {
-		//echo "Si tiene familiares aparecerán despúes de enviar este formulario";
+		//echo "Si tiene familiares aparecerÃ¡n despÃºes de enviar este formulario";
 	}
 	window.close();
 }
 
+
+$(function() {
+	function log( message ) {
+		$( "<div>" ).text( message ).prependTo( "#log" );
+		$( "#log" ).scrollTop( 0 );
+	}
+
+	$( "#nombres_autocompleta" ).autocomplete({
+		source: "json_persona.php",
+		minLength: 2,
+		select: function( event, ui ) {
+		log( ui.item ?
+			"Selected: " + ui.item.value + " aka " + ui.item.id :
+			"Nothing selected, input was " + this.value );
+		}
+	});
+});

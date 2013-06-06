@@ -104,7 +104,21 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
 <title>Ficha caso</title>
 <style type = "text/css">
 {%style%}
+.ui-autocomplete-loading {
+    background: white url(\'imagen/ajax-loader.gif\') right center no-repeat;
+}
+.ui-autocomplete {
+    max-height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+/* IE 6 no soporta max-height */
+* html .ui-autocomplete {
+    height: 100px;
+}
 </style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script type = "text/javascript" src="sivel.js" type="text/javascript"></script>
 <script type = "text/javascript">
 <!--
@@ -237,6 +251,9 @@ class CapturaCaso extends HTML_QuickForm_Controller
             } else {
                 $clpag =& new $cl($pag);
             }
+            if (!isset($GLOBALS['etiqueta'][$cl])) {
+                $GLOBALS['etiqueta'][$cl] = $clpag->titulo;
+            }
             $this->addPage($clpag);
             $this->addAction($pag, new Salta());
         }
@@ -317,10 +334,11 @@ class CapturaCaso extends HTML_QuickForm_Controller
             if (($d = strrpos($cls, "/"))>0) {
                 $cls = substr($cls, $d+1);
             }
-            $varc = get_class_vars($cls);
+            $ocls = new $cls("");
             $titulo = isset($GLOBALS['etiqueta'][$cls]) ?
-                $GLOBALS['etiqueta'][$cls] : _($varc['titulo']);
-            //echo "OJO cls=$cls, titulo=$titulo, varc=$varc<br>";
+                $GLOBALS['etiqueta'][$cls] : 
+                isset($ocls->titulo) ? $ocls->titulo : "Título";
+            //echo "OJO cls=$cls, ocls->titulo= {$ocls->titulo}, titulo=$titulo<br>";
             //var_dump($varc);
             $attrs = ($pageName == $event) ? $here : $attributes;
             $jump[] =& $page->createElement(

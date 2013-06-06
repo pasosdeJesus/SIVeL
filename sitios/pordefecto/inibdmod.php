@@ -73,6 +73,29 @@ $_DB_DATAOBJECT_FORMBUILDER['CONFIG'] = array (
 );
 
 
+/** 
+ * Determina si una ficha con la identificación dada ya está en las
+ * programas para agregar
+ *
+ * @param arrary nuevas Arreglo de nuevas fichas
+ * @param string id     Id de ficha
+ *
+ * @return true sii una ficha con la id dada ya está en nuevas
+ */
+function esta_nueva_ficha($id) 
+{
+    foreach($GLOBALS['nueva_ficha_tabuladores'] as $a) {
+        $puesto = $a[0];
+        $nom = $a[1];
+        $arc = $a[2];
+        $puestoelim = $a[3];
+        if ($nom == $id) {
+            return true;
+        }
+    }
+    return false;
+}
+
 /* Rutas en particular donde haya subdirectorios DataObjects */
 $rutas_include = ini_get('include_path').
     ":.:$dirserv:$dirserv/$dirsitio:$dirsitio:";

@@ -50,7 +50,10 @@ class PagEvaluacion extends PagBaseSimple
     {
         parent::PagBaseSimple($nomForma);
         $this->titulo = _('Evaluación');
-
+        if (isset($GLOBALS['etiqueta']['Evaluacion'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Evaluacion'];
+            $this->tcorto = $GLOBALS['etiqueta']['Evaluacion'];
+        }
         $this->addAction('process', new Terminar());
         if (isset($_SESSION['forma_modo'])
             && $_SESSION['forma_modo'] == 'busqueda'

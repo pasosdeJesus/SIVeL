@@ -177,7 +177,10 @@ class PagOtrasFuentes extends PagBaseMultiple
         parent::PagBaseMultiple($nomForma);
         $this->titulo = _('Otras Fuentes');
         $this->tcorto = _('Fuente');
-
+        if (isset($GLOBALS['etiqueta']['Otras Fuentes'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Otras Fuentes'];
+            $this->tcorto = $GLOBALS['etiqueta']['Otras Fuentes'];
+        }
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
     }
