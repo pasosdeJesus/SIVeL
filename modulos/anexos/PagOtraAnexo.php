@@ -60,6 +60,24 @@ class PagOtraAnexo extends PagOtrasFuentes
         parent::elimina($valores);
     }
 
+    /**
+     * Elimina registros de tablas relacionadas con caso de este formulario.
+     * Ver documentación completa en clase base.
+     *
+     * @param handle  &$db    Conexión a base de datos
+     * @param integer $idcaso Id del caso
+     *
+     * @return void
+     * @see PagBaseSimple
+     */
+    static function eliminaDep(&$db, $idcaso)
+    {
+        parent::eliminaDep($db, $idcaso);
+        $q =  "UPDATE anexo SET id_fotra=NULL " .
+            "WHERE id_caso='$idcaso'";
+        hace_consulta($db, $q, false) ;
+    }
+
 
     /**
      * Constructora.

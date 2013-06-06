@@ -7,15 +7,15 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2011 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2011 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: victimasrep.php,v 1.1 2012/01/11 17:41:30 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Detecta víctimas repetidas
+ * Detecta vÃ­ctimas repetidas
  */
 
 require_once "aut.php";
@@ -46,6 +46,7 @@ function muestra($dsn)
 {
     $aut_usuario = "";
     $db = autentica_usuario($dsn, $accno, $aut_usuario, 31);
+    encabezado_envia("ComparaciÃ³n y mezcla de 2 casos");
 
     $nid = 0;
     $id1 = 0;
@@ -75,7 +76,7 @@ function muestra($dsn)
         $id2 = $t;
     }
     echo "Se unir&aacute;n fuentes y anexos de los dos casos";
-    $r = array('caso_id' => array('Código', $id1, $id2, 3)); 
+    $r = array('caso_id' => array('CÃ³digo', $id1, $id2, 3)); 
     // 'Id' => array('Etiqueta', 'Valor 1', 'Valor 2', 'preferido 1 or 2')
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
         list($n, $c, $o) = $tab;
@@ -110,9 +111,9 @@ function muestra($dsn)
             $check2 = "checked='checked'";
             $check1 ="";
         }
-        $nc_html = htmlentities($v[0]);
-        $v1_html = htmlentities($v[1]);
-        $v2_html = htmlentities($v[2]);
+        $nc_html = htmlentities($v[0], ENT_COMPAT, 'UTF-8');
+        $v1_html = htmlentities($v[1], ENT_COMPAT, 'UTF-8');
+        $v2_html = htmlentities($v[2], ENT_COMPAT, 'UTF-8');
         if ($nc_html == "C&oacute;digo") {
             $v1_html = enlace_edita($v[1]);
             $v2_html = enlace_edita($v[2]);
