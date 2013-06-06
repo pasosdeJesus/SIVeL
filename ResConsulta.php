@@ -45,6 +45,7 @@ require_once 'DataObjects/Sectorsocial.php';
 require_once 'DataObjects/Profesion.php';
 require_once 'DataObjects/Presponsable.php';
 require_once 'DataObjects/Caso_etiqueta.php';
+require_once 'PagTipoViolencia.php';
 
 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
     list($n, $c, $o) = $tab;

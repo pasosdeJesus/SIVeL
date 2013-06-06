@@ -104,7 +104,21 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
 <title>Ficha caso</title>
 <style type = "text/css">
 {%style%}
+.ui-autocomplete-loading {
+    background: white url(\'imagen/ajax-loader.gif\') right center no-repeat;
+}
+.ui-autocomplete {
+    max-height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+/* IE 6 no soporta max-height */
+* html .ui-autocomplete {
+    height: 100px;
+}
 </style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script type = "text/javascript" src="sivel.js" type="text/javascript"></script>
 <script type = "text/javascript">
 <!--

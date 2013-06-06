@@ -225,6 +225,11 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
         if (isset($this->hijos) && $this->hijos == 'null') {
             $sel->setValue('');
         }
+        $sel =& $form->getElement('anotaciones');
+        if (isset($sel) && !PEAR::isError($sel)) {
+            $sel->setSize(75);
+        }
+
     }
 
 
