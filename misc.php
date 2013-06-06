@@ -464,6 +464,9 @@ function valida(&$page)
      */
 function error_valida($msg, $valores, $iderr = '', $enhtml = false)
 {
+    if (!headers_sent()) {
+        encabezado_envia();
+    }
     if (isset($valores) && is_array($valores) && count($valores) > 0) {
         $_SESSION['recuperaErrorValida'] = $valores;
     }

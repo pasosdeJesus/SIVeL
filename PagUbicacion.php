@@ -386,10 +386,8 @@ class PagUbicacion extends PagBaseMultiple
             $GLOBALS['etiqueta']['departamento'],
             array()
         );
-        $options = array('' => '') + htmlentities_array(
-            $db->getAssoc(
-                "SELECT  id, nombre FROM departamento ORDER BY nombre"
-            )
+        $options = array('' => '') + $db->getAssoc(
+            "SELECT  id, nombre FROM departamento ORDER BY nombre"
         );
         $dep->loadArray($options);
         $dep->updateAttributes(
@@ -417,11 +415,9 @@ class PagUbicacion extends PagBaseMultiple
         //die("ndepartamento=$ndepartamento");
         if ($ndepartamento !== null) {
             $dep->setValue($ndepartamento);
-            $options = array('' => '') + htmlentities_array(
-                $db->getAssoc(
-                    "SELECT  id, nombre FROM municipio " .
-                    " WHERE id_departamento='$ndepartamento' ORDER BY nombre"
-                )
+            $options = array('' => '') + $db->getAssoc(
+                "SELECT  id, nombre FROM municipio " .
+                " WHERE id_departamento='$ndepartamento' ORDER BY nombre"
             );
             $mun->loadArray($options);
             $cla->loadArray(array());
@@ -431,13 +427,11 @@ class PagUbicacion extends PagBaseMultiple
         );
         if ((int)$nmunicipio != 0) {
             $mun->setValue($nmunicipio);
-            $options = array('' => '') + htmlentities_array(
-                $db->getAssoc(
-                    "SELECT id, nombre || ' (' || id_tclase || ')'
-                    FROM clase
-                    WHERE id_departamento = '$ndepartamento'
-                    AND id_municipio = '$nmunicipio' ORDER BY nombre"
-                )
+            $options = array('' => '') + $db->getAssoc(
+                "SELECT id, nombre || ' (' || id_tclase || ')'
+                FROM clase
+                WHERE id_departamento = '$ndepartamento'
+                AND id_municipio = '$nmunicipio' ORDER BY nombre"
             );
             $cla->loadArray($options);
         }
