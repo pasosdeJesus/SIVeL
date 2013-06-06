@@ -336,9 +336,13 @@ class PagVictimaIndividual extends PagBaseMultiple
             }
         }
 
-        $this->bpersona_trelacion->createSubmit = 0;
-        $this->bpersona_trelacion->useForm($this);
-        $f =& $this->bpersona_trelacion->getForm($this);
+        if (!isset($GLOBALS['familiaresvictima'])
+            || $GLOBALS['familiaresvictima']
+        ) {
+            $this->bpersona_trelacion->createSubmit = 0;
+            $this->bpersona_trelacion->useForm($this);
+            $f =& $this->bpersona_trelacion->getForm($this);
+        }
 
         if (isset($GLOBALS['iglesias_cristianas'])
             && $GLOBALS['iglesias_cristianas']
@@ -676,6 +680,21 @@ class PagVictimaIndividual extends PagBaseMultiple
         ) {
                 error_valida(_('Faltó nombre y/o apellido de familiar'), $valores);
                 return false;
+        }
+    
+        if (isset($GLOBALS['estilo_nombres'])
+            && $GLOBALS['estilo_nombres'] == 'MAYUSCULAS'
+        ) {
+            $valores['nombres'] = a_mayusculas(trim($valores['nombres']));
+            $valores['apellidos'] = a_mayusculas(trim($valores['apellidos']));
+        } else if (isset($GLOBALS['estilo_nombres'])
+            && $GLOBALS['estilo_nombres'] == 'a_minusculas'
+        ) {
+            $valores['nombres'] = prim_may(trim($valores['nombres']));
+            $valores['apellidos'] = prim_may(trim($valores['apellidos']));
+        } else {
+            $valores['nombres'] = trim($valores['nombres']);
+            $valores['apellidos'] = trim($valores['apellidos']);
         }
 
         $ret = $this->process(array(&$this->bpersona, 'processForm'), false);
