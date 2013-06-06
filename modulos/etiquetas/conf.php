@@ -18,4 +18,8 @@
 
 $GLOBALS['modulo'][500] = '';
 
-$GLOBALS['nueva_ficha_tabuladores'][] =  array(11,'etiquetas', 'modulos/etiquetas/PagEtiquetas', 11);
+if (!esta_nueva_ficha('etiquetas')) {
+    $GLOBALS['nueva_ficha_tabuladores'][] =  array(
+        11, 'etiquetas', 'modulos/etiquetas/PagEtiquetas', 11
+    );
+}
