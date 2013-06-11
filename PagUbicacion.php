@@ -58,6 +58,7 @@ class CamDepartamento extends HTML_QuickForm_Action
     {
         $_SESSION['camDepartamento']
             = (int)$page->_submitValues[$this->nomcampodep];
+        //echo "OJO perform session=" .$_SESSION['camDepartamento'] . "<br>";
         $_SESSION['camMunicipio'] = '';
         $pageName =  $page->getAttribute('id');
         $data     =& $page->controller->container();
@@ -107,6 +108,7 @@ class CamMunicipio extends HTML_QuickForm_Action
      */
     function perform(&$page, $actionName)
     {
+        //echo "OJO perform Municipio<br>";
         $_SESSION['camDepartamento']
             = (int)$page->_submitValues[$this->nomcampodep];
         $_SESSION['camMunicipio']
@@ -153,8 +155,8 @@ class PagUbicacion extends PagBaseMultiple
      */
     static function nullVarUbicacion()
     {
-        unset($_SESSION['camDepartamento']);
-        unset($_SESSION['camMunicipio']);
+        /*unset($_SESSION['camDepartamento']);
+        unset($_SESSION['camMunicipio']);*/
     }
 
 
@@ -301,6 +303,7 @@ class PagUbicacion extends PagBaseMultiple
         $nomcampodep = 'id_departamento')
     {
         $ndepartamento = null;
+        //die("retIdDepartamento session=" .$_SESSION['camDepartamento']);
         if (isset($form->_submitValues[$nomcampodep])) {
             $ndepartamento = (int)$form->_submitValues[$nomcampodep];
         } /*else if (isset($_REQUEST[$nomcampodep])) {
@@ -658,7 +661,6 @@ class PagUbicacion extends PagBaseMultiple
         if (PEAR::isError($ret)) {
             die($ret->getMessage());
         }
-
         unset($_SESSION['camDepartamento']);
         unset($_SESSION['camMunicipio']);
         caso_funcionario($_SESSION['basicos_id']);

@@ -1039,11 +1039,11 @@ function die_act($mens)
 function sin_error_pear($do, $msg = "")
 {
     if (PEAR::isError($do)) {
+        debug_print_backtrace();
         die_act(
             "Error " . trim($msg . " ") . $do->getMessage() . 
             " - " . $do->getUserInfo()
         );
-        //debug_print_backtrace();
     }
 }
 

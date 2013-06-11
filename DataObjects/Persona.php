@@ -184,6 +184,22 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
     }
 
     /**
+     * Modifica numero de doc antes de incluirlo en base de datos.
+     * Para funcionar con versiones nuevas de DB_DataObject requiere
+     * <b>useMutator</b> en <b>true</b>
+     *
+     * @param string $value Valor recibido de formulario
+     *
+     * @return Valor para base de datos
+     */
+    function setnumerodocumento($value)
+    {
+        $this->numerodocumento = ((int)$value == 0) ? 
+            DB_DataObject_Cast::sql('NULL') : $value;
+    }
+
+
+    /**
      * Campos que pueden ser SIN INFORMACION y el código correspondiente
      *
      * @return array Arreglo de campos que pueden ser sin información

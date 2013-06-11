@@ -461,7 +461,7 @@ CREATE TABLE persona (
 	id_clase        INTEGER,
 	-- Verificar en interfaz
 	tipodocumento VARCHAR(2),
-	numerodocumento VARCHAR(50)
+	numerodocumento BIGINT
 );
 
 CREATE INDEX persona_nombres_apellidos ON persona 

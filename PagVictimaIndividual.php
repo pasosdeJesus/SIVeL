@@ -234,6 +234,7 @@ class PagVictimaIndividual extends PagBaseMultiple
             )
         );
         $this->bpersona->useMutators = true;
+        $this->bpersona->fb_useMutators = true;
         $this->bpersona_trelacion=& DB_DataObject_FormBuilder::create(
             $drelacion,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
