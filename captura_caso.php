@@ -102,6 +102,8 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
 <head>
 <meta charset = "UTF-8">
 <title>Ficha caso</title>
+<link rel="stylesheet" href="lib/jqueryui-1.10.3/themes/smoothness/jquery-ui.css" />
+<link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <style type = "text/css">
 {%style%}
 .ui-autocomplete-loading {
@@ -117,8 +119,8 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
     height: 100px;
 }
 </style>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="lib/jquery-1.9.1/jquery.min.js"></script>
+<script src="lib/jqueryui-1.10.3/jquery-ui.min.js"></script>
 <script type = "text/javascript" src="sivel.js" type="text/javascript"></script>
 <script type = "text/javascript">
 <!--
