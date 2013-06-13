@@ -41,7 +41,7 @@ if (strlen($consNomvic) > 0) {
 $where = " to_tsvector('spanish', unaccent(persona.nombres) "
     . " || ' ' || unaccent(persona.apellidos)) @@ "
     . "to_tsquery('spanish', '$consNomvic')";
-$qstring = "SELECT nombres || ' ' || apellidos, id FROM persona WHERE $where";
+$qstring = "SELECT trim(nombres || ' ' || apellidos), id || ';' || char_length(nombres) || ';' || char_length(apellidos) FROM persona WHERE $where";
 //trigger_error("$qstring");
 $res = hace_consulta($db, $qstring);
 
@@ -49,7 +49,7 @@ $row = array();
 $resrow = array();
 $row_set = array();
 while ($res->fetchInto($row)) {
-		$resrow['id'] = (int)$row[1];
+		$resrow['id'] = $row[1];
 		$resrow['value'] = stripslashes($row[0]);
 		$row_set[] = $resrow;
 }
