@@ -629,10 +629,12 @@ class PagVictimaIndividual extends PagBaseMultiple
         );
 
         if ($es_vacio) {
+            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return true;
         }
 
         if (!$this->validate() ) {
+            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return false;
         }
 
@@ -641,6 +643,7 @@ class PagVictimaIndividual extends PagBaseMultiple
         if ($nobus
             && (!isset($valores['nombres']) || trim($valores['nombres'])=='')
         ) {
+            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             error_valida(_('Falta nombre de víctima'), $valores);
             return false;
         }
@@ -648,12 +651,14 @@ class PagVictimaIndividual extends PagBaseMultiple
         if (isset($valores['hijos'])
             && ((int)$valores['hijos'] < 0 || (int)$valores['hijos'] > 100)
         ) {
+            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             error_valida(_('Cantidad de hijos fuera de rango'), $valores);
             return false;
         }
         if (in_array(31, $_SESSION['opciones'])
             && !in_array(21, $_SESSION['opciones'])
         ) {
+            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return true;
         }
 
@@ -758,6 +763,8 @@ class PagVictimaIndividual extends PagBaseMultiple
                 }
             }
         }
+        PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
+
         //$bt->setMarker("procesa: antes de caso_funcionario");
         caso_funcionario($_SESSION['basicos_id']);
         //$bt->_Benchmark_Timer();

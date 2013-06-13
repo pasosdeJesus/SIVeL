@@ -153,10 +153,16 @@ class PagUbicacion extends PagBaseMultiple
      *
      * @return void
      */
-    static function nullVarUbicacion()
+    static function nullVarUbicacion($nomcampodep = '', $nomcampomun = '')
     {
-        /*unset($_SESSION['camDepartamento']);
-        unset($_SESSION['camMunicipio']);*/
+        unset($_SESSION['camDepartamento']);
+        unset($_SESSION['camMunicipio']);
+        if ($nomcampodep != '') {
+            unset($_REQUEST[$nomcampodep]);
+        }
+        if ($nomcampomun != '') {
+            unset($_REQUEST[$nomcampomun]);
+        }
     }
 
 
@@ -168,7 +174,6 @@ class PagUbicacion extends PagBaseMultiple
     function nullVar()
     {
         $this->bubicacion = null;
-        PagUbicacion::nullVarUbicacion();
     }
 
     /**
@@ -282,7 +287,6 @@ class PagUbicacion extends PagBaseMultiple
             $this->titulo = $GLOBALS['etiqueta']['Ubicacion'];
             $this->tcorto = $GLOBALS['etiqueta']['Ubicacion'];
         }
-        PagUbicacion::nullVarUbicacion();
         $this->addAction('id_departamento', new CamDepartamento());
         $this->addAction('id_municipio', new CamMunicipio());
 
@@ -293,6 +297,8 @@ class PagUbicacion extends PagBaseMultiple
 
     /**
      * Identificación de departamento elegido por usuario.
+     * Recuerde llamar PagUbicacion::nullVarUbicacion
+     * al terminar la función procesa (con o sin exito).
      *
      * @param object &$form Formulario
      * @param object $def   Valor por defecto
@@ -303,26 +309,40 @@ class PagUbicacion extends PagBaseMultiple
         $nomcampodep = 'id_departamento')
     {
         $ndepartamento = null;
-        //die("retIdDepartamento session=" .$_SESSION['camDepartamento']);
+        /*echo "OJO retIdDepartamento(form, def=$def, $nomcampodep).  "
+            . " Session=" . (isset($_SESSION['camDepartamento']) 
+            ? $_SESSION['camDepartamento'] :  "null")
+            . ", _submitValues:"; print_r($form->_submitValues);  
+        echo "OJO REQUEST:" ; print_r($_REQUEST); echo "<br>"; */
         if (isset($form->_submitValues[$nomcampodep])) {
+            //echo "OJO Caso 1<br>";
             $ndepartamento = (int)$form->_submitValues[$nomcampodep];
-        } /*else if (isset($_REQUEST[$nomcampodep])) {
-            echo "OJO retIdDepartamento caso 2<br>";
+        } else if (isset($_REQUEST[$nomcampodep]) 
+            && $_REQUEST[$nomcampodep] != ''
+        ) {
+            //echo "OJO retIdDepartamento caso 2<br>";
             $ndepartamento = (int)$_REQUEST[$nomcampodep];
-        } */else if (isset($_SESSION['camDepartamento'])
+        } else if (isset($_SESSION['camDepartamento'])
             && $_SESSION['camDepartamento'] != ''
         ) {
+            //echo "OJO caso 3<br>";
             $ndepartamento = $_SESSION['camDepartamento'] ;
         } else if (isset($def) && $def != null
             && $def != DB_DataObject_Cast::sql('NULL')
         ) {
+            //echo "OJO caso 4<br>";
             $ndepartamento = $def;
         }
+        //echo  "OJO salida ndepartamento=$ndepartamento<br>";
+        unset($_SESSION['camDepartamento']) ;
         return $ndepartamento;
     }
 
     /**
      * Identificación del municpio elegido por usuario.
+     * Recuerde llamar PagUbicacion::nullVarUbicacion
+     * al terminar la función procesa (con o sin exito).
+     * procesa en la pestaña que use esta función.
      *
      * @param object &$form Formulario
      * @param object $def   Valor por defecto
@@ -332,16 +352,32 @@ class PagUbicacion extends PagBaseMultiple
     static function retIdMunicipio(&$form, $def = null,
         $nomcampomun = 'id_municipio')
     {
+        /* echo "OJO retIdMunicipio(form, def=$def, $nomcampomun).  Session=" 
+            . (isset($_SESSION['camMunicipio']) 
+            ? $_SESSION['camMunicipio'] :  "null")
+            . ", _submitValues:"; print_r($form->_submitValues); 
+        echo "OJO REQUEST:" ; print_r($_REQUEST); echo "<br>";*/
+
         $nmunicipio = null;
         if (isset($form->_submitValues[$nomcampomun])) {
+            //echo "OJO Caso 1<br>";
             $nmunicipio = (int)$form->_submitValues[$nomcampomun] ;
+        } else if (isset($_REQUEST[$nomcampomun]) 
+            && $_REQUEST[$nomcampomun] != ''
+        ) {
+            //echo "OJO Caso 2<br>";
+            $nmunicipio = (int)$_REQUEST[$nomcampomun];
         } else if (isset($_SESSION['camMunicipio'])) {
+            //echo "OJO Caso 3<br>";
             $nmunicipio = $_SESSION['camMunicipio'] ;
         } else if (isset($def) && $def != null
             && $def != DB_DataObject_Cast::sql('NULL')
         ) {
+            //echo "OJO Caso 4<br>";
             $nmunicipio = $def;
         }
+        unset($_SESSION['camMunicipio']) ;
+        //echo "OJO nmunicipio=$nmunicipio";
         return $nmunicipio;
     }
 
@@ -415,7 +451,6 @@ class PagUbicacion extends PagBaseMultiple
         $ndepartamento = PagUbicacion::retIdDepartamento(
             $form, $depdef, $nomcampodep
         );
-        //die("ndepartamento=$ndepartamento");
         if ($ndepartamento !== null) {
             $dep->setValue($ndepartamento);
             $options = array('' => '') + $db->getAssoc(
@@ -428,14 +463,16 @@ class PagUbicacion extends PagBaseMultiple
         $nmunicipio = PagUbicacion::retIdMunicipio(
             $form, $mundef, $nomcampomun
         );
-        if ((int)$nmunicipio != 0) {
+        if ((int)$nmunicipio != 0 && $ndepartamento !== null) {
             $mun->setValue($nmunicipio);
-            $options = array('' => '') + $db->getAssoc(
+            $a = $db->getAssoc(
                 "SELECT id, nombre || ' (' || id_tclase || ')'
                 FROM clase
                 WHERE id_departamento = '$ndepartamento'
                 AND id_municipio = '$nmunicipio' ORDER BY nombre"
             );
+            sin_error_pear($a);
+            $options = array('' => '') + $a;
             $cla->loadArray($options);
         }
 
@@ -504,17 +541,25 @@ class PagUbicacion extends PagBaseMultiple
      * @see PagBaseSimple
      */
     static function valoresUbicacion(&$form, $depdef, $mundef, $cladef,
-        $dep, $mun, $cla
+        $dep, $mun, $cla, $nomcampodep = 'id_departamento',
+        $nomcampomun = 'id_municipio',
+        $nomcampocla = 'id_clase'
     ) {
-        $ndepartamento = PagUbicacion::retIdDepartamento($form, $depdef);
+        $ndepartamento = PagUbicacion::retIdDepartamento(
+            $form, $depdef, $nomcampodep
+        );
         if ($ndepartamento != null && $dep != null) {
             $dep->setValue($ndepartamento);
         }
-        $nmunicipio = PagUbicacion::retIdMunicipio($form, $mundef);
+        $nmunicipio = PagUbicacion::retIdMunicipio(
+            $form, $mundef, $nomcampomun
+        );
         if ($nmunicipio != null && $mun != null) {
             $mun->setValue($nmunicipio);
         }
-        $nclase = PagUbicacion::retIdClase($form, $cladef);
+        $nclase = PagUbicacion::retIdClase(
+            $form, $cladef, $nomcampocla
+        );
         if ($nclase != null && $cla != null) {
             $cla->setValue($nclase);
         }
@@ -614,15 +659,18 @@ class PagUbicacion extends PagBaseMultiple
         ;
 
         if ($es_vacio) {
+            //PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return true;
         }
         if (!$this->validate() ) {
+            //PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return false;
         }
         verifica_sin_CSRF($valores);
         if (in_array(31, $_SESSION['opciones'])
             && !in_array(21, $_SESSION['opciones'])
         ) {
+            //PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return true;
         }
 
@@ -661,8 +709,8 @@ class PagUbicacion extends PagBaseMultiple
         if (PEAR::isError($ret)) {
             die($ret->getMessage());
         }
-        unset($_SESSION['camDepartamento']);
-        unset($_SESSION['camMunicipio']);
+
+        PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
         caso_funcionario($_SESSION['basicos_id']);
         return  true;
     }
