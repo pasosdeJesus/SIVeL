@@ -341,8 +341,15 @@ class PagSegJudicial extends PagBaseMultiple
     }
 
     /**
-    * @param procAc es true si y solo si debe añadirse Acción
-    */
+     * Procesa valores del formulario enviados por el usuario.
+     * Ver documentación completa en clase base.
+     *
+     * @param handle &$valores Valores ingresados por usuario
+     * @param procAc es true si y solo si debe añadirse Acción
+     *
+     * @return bool Verdadero si y solo si puede completarlo con éxito
+     * @see PagBaseSimple
+     */
     function procesa(&$valores, $procAc = false)
     {
         $valores['id_tproceso'] = (int)$valores['tipoetapa'][0];

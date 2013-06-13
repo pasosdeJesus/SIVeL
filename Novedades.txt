@@ -9,9 +9,10 @@ Apéndice A. Novedades
             (como nombre de víctima) se específica cualquiera con *.
             Activada cotejación en español, el ordenamiento ahora
             corresponde al del español (por ejemplo en tablas básicas).
-            Activada búsqueda completa de textos ignorando mayúsculas,
+            Activada búsqueda de textos completos ignorando mayúsculas,
             minúsculas y tildes, usable al buscar por nombre, por título y
-            por descripción en consulta web.
+            por descripción en consulta web. Módulo de georeferenciación
+            en Google Maps convertido a la versión 3 del API.
           + Administradores: Se dividió el archivo de configuración en una
             parte para servidor (e.g base de datos y módulos) y otra para
             interfaz. Activa PostGIS al crear base de datos. Configuración
