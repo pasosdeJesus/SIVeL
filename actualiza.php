@@ -2433,7 +2433,7 @@ if (!aplicado($idac)) {
 $idac = '1.2-btc';
 if (!aplicado($idac)) {
     hace_consulta(
-        $db, "CREATE EXTENSION unaccent" 
+        $db, "CREATE EXTENSION unaccent", false
     );
     hace_consulta(
         $db, "ALTER TEXT SEARCH DICTIONARY unaccent (RULES='unaccent')", false
@@ -2467,6 +2467,27 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Búsqueda de textos');
 }
 
+$idac = '1.2-idn';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "UPDATE persona SET numerodocumento = "
+        . " regexp_replace(numerodocumento, '[^0-9]', '', 'g') ", false
+    );
+    hace_consulta(
+        $db, "UPDATE persona SET numerodocumento = NULL "
+        . " WHERE numerodocumento = '' ", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE persona ALTER numerodocumento TYPE BIGINT USING 
+        CAST (numerodocumento AS BIGINT)"
+    );
+
+    hace_consulta(
+        $db, "ALTER TABLE persona ADD CONSTRAINT numerodocumento_key "
+        . " UNIQUE (tipodocumento, numerodocumento)"
+    );
+    aplicaact($act, $idac, 'Numero de documento entero');
+}
 
 
 /*$idac = '1.2-rt4';
