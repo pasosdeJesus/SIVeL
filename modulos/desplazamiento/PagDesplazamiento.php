@@ -223,7 +223,7 @@ class PagDesplazamiento extends PagBaseMultiple
             PagUbicacion::valoresUbicacion(
                 $this, $this->bdesplazamiento->_do->departamentodecl,
                 $this->bdesplazamiento->_do->municipiodecl, null,
-                $dep, $mun, null
+                $dep, $mun, null, 'departamentodecl', 'municipiodecl'
             );
         }
 
@@ -270,15 +270,18 @@ class PagDesplazamiento extends PagBaseMultiple
             );
 
         if ($es_vacio) {
+            PagUbicacion::nullVarUbicacion('municipiodecl', 'departamentodecl');
             return true;
         }
 
         if (!$this->validate() ) {
+            PagUbicacion::nullVarUbicacion('municipiodecl', 'departamentodecl');
             return false;
         }
         if (in_array(31, $_SESSION['opciones'])
             && !in_array(21, $_SESSION['opciones'])
         ) {
+            PagUbicacion::nullVarUbicacion('municipiodecl', 'departamentodecl');
             return true;
         }
 
@@ -313,6 +316,8 @@ class PagDesplazamiento extends PagBaseMultiple
         if (PEAR::isError($ret)) {
             die($ret->getMessage());
         }
+
+        PagUbicacion::nullVarUbicacion('municipiodecl', 'departamentodecl');
 
         caso_funcionario($idcaso);
         return  $ret;

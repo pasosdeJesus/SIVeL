@@ -62,7 +62,9 @@ done;
 
 verificaDataobject ${dirap}
 
-	
+echo "" > $dirap/DataObjects/$dbnombre.ini
+echo "" > $dirap/DataObjects/$dbnombre.links.ini
+
 leeEstructura ${dirfuentes}
 
 for i in $modulos; do

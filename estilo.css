@@ -170,11 +170,11 @@ margin-left: -6px;
 margin-top: 2px;
 }
 
-ul.nav li:hover>ul{
+ul.nav li:hover>ul {
 display : block;
 }
 
-.nav ul li a{
+.nav ul li a {
 display: block;
 padding: 2px 10px;
 }
@@ -189,22 +189,34 @@ color: #006903;
 }
 
 ul.nav li:hover,
-.nav ul li a:hover{
+.nav ul li a:hover {
 background-color: #369;
 color: #fff;
 }
 
 ul.nav li:active,
-.nav ul li a:active{
+.nav ul li a:active {
 background-color: #036;
 color: #fff;
 }
 
-ul.nav,
-.nav ul{
+ul.nav, .nav ul {
 border: 1px solid #369;
 }
 
-.nav a{
+.nav a {
 text-decoration: none;
+}
+
+
+/* http://stackoverflow.com/questions/1702186/set-width-of-dropdown-element-in-html-select-dropdown-options */
+span.multiselect {
+	width:10px;
+}
+select.multiselect {
+	width:200px;
+}
+
+select.multiselect option {
+	width:200px;
 }

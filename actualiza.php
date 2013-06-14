@@ -2489,6 +2489,36 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Numero de documento entero');
 }
 
+$idac = '1.2-ext';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "INSERT INTO departamento 
+        (id, nombre, latitud, longitud, fechacreacion, fechadeshabilitacion) 
+        VALUES (10000, 'EXTERIOR', NULL, NULL, '2013-06-13', NULL);", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO municipio
+        (id, nombre, id_departamento, latitud, longitud, 
+        fechacreacion, fechadeshabilitacion)
+        (SELECT id, nombre, 10000, latitud, longitud,
+        fechacreacion, fechadeshabilitacion FROM municipio
+        WHERE id_departamento='0');", false
+    );
+    foreach(array('clase', 'ubicacion', 'persona') as $t) {
+        hace_consulta(
+            $db, "UPDATE $t SET id_departamento = 10000
+            WHERE id_departamento = 0", false
+        );
+    }
+    hace_consulta(
+        $db, "DELETE FROM municipio WHERE id_departamento = '0'", false
+    );
+    hace_consulta(
+        $db, "DELETE FROM departamento WHERE id = '0'", false
+    );
+    aplicaact($act, $idac, 'Cambio de código EXTERIOR de 0 a 10000');
+}
+
 
 /*$idac = '1.2-rt4';
 if (!aplicado($idac)) {

@@ -93,18 +93,30 @@ function enviar_grupoper(id, nombre, anotaciones)
 
 
 $(function() {
-	function log( message ) {
-		$( "<div>" ).text( message ).prependTo( "#log" );
-		$( "#log" ).scrollTop( 0 );
-	}
+ 
+	function sel_contacto( label, id ) {
+		cs = id.split(";");
+		id = parseInt(cs[0]);
+		tn = parseInt(cs[1]);
+		ta = parseInt(cs[2]);
+		nom = label.substring(0, tn);
+		ap = label.substring(tn + 1, tn + 1 + ta);
 
-	$( "#nombres_autocompleta" ).autocomplete({
-		source: "json_persona.php",
-		minLength: 2,
-		select: function( event, ui ) {
-		log( ui.item ?
-			"Selected: " + ui.item.value + " aka " + ui.item.id :
-			"Nothing selected, input was " + this.value );
-		}
-	});
+		$( "#contactoapellidos" ).val(ap); 
+		$( "#contactonombres" ).val(nom); 
+		$( "#idcontacto" ).val(id); 
+		$( "#contactonombres" ).autocomplete("disable");
+	}
+ 
+    $( "#contactonombres" ).autocomplete({
+      source: "json_persona.php",
+      minLength: 2,
+      select: function( event, ui ) {
+	      if (ui.item) {
+		      sel_contacto(ui.item.value, ui.item.id);
+		      event.stopPropagation();
+		      event.preventDefault();
+	      }
+      }
+    });
 });

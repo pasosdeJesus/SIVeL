@@ -62,3 +62,4 @@ INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-gc', '2012-0
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-loc', '2013-05-20', 'Localización'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-btc', '2013-05-20', 'Búsqueda de textos'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-idn', '2013-06-06', 'Número de documento entero'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-ext', '2013-06-12', 'Cambio código departamento Exterior de 0 a 1000'); 
