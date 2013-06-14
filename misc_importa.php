@@ -81,13 +81,13 @@ function sin_tildes($s)
 {
     $r = str_replace(
         array('á', 'é', 'í', 'ó', 'ú', 'ü', 'Á', 'É', 'Í', 'Ó', 'Ú', 'Ü', 'ñ', 'Ñ'),
-        array('a', 'e', 'i', 'o', 'u', 'u', 'A', 'E', 'I', 'O', 'U', 'U', 'ni', 'NI'),
+        array('a', 'e', 'i', 'o', 'u', 'u', 'A', 'E', 'I', 'O', 'U', 'U', 'n', 'N'),
         $s
     );
     $r = str_replace(
         array("\xe1", "\xe9", "\xed", "\xf3", "\xfa", "\xfc", "\xc1", 
         "\xc9", "\xcd", "\xd3", "\xda", "\xdc", "\xf1", "\xd1"),
-        array('a', 'e', 'i', 'o', 'u', 'u', 'A', 'E', 'I', 'O', 'U', 'U', 'ni', 'NI'),
+        array('a', 'e', 'i', 'o', 'u', 'u', 'A', 'E', 'I', 'O', 'U', 'U', 'n', 'N'),
         $r
     );
         

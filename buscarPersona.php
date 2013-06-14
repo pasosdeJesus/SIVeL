@@ -17,6 +17,7 @@ require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . "/conf.php";
 require_once "DataObjects/Persona.php";
 require_once 'misc.php';
+require_once 'misc_importa.php';
 
 /**
  * Muestra lista de personas en base
@@ -32,32 +33,24 @@ function muestra()
     $nombres = trim(utf8_decode(var_req_escapa('nombres', $db, 100)));
     $apellidos  = trim(utf8_decode(var_req_escapa('apellidos', $db, 100)));
     $rol = var_req_escapa('rol', $db, 32);
-    $pn = explode(' ', $nombres);
-    $pa = explode(' ', $apellidos);
-    $cn = array();
-    foreach ($pn as $p) {
-        if ($p != '') {
-            $cn[] = $p;
-        }
-    }
-    foreach ($pa as $p) {
-        if ($p != '') {
-            $cn[] = $p;
-        }
-    }
 
-    $patron = crea_patron($cn);
-
-    //echo "OJO nombres=$nombres, apellidos=$apellidos, b=$b, patron='$patron'";
+    $pNomvic = trim($nombres . " " . $apellidos);
+    //echo "OJO nombres=$nombres, apellidos=$apellidos";
     $x =&  objeto_tabla('persona');
-    $q = "SELECT id, nombres, apellidos, anionac, mesnac, dianac, sexo, " .
-        " id_departamento, id_municipio, id_clase, tipodocumento, " .
-        " numerodocumento " .
-        " FROM persona " .
-        " WHERE (nombres || apellidos NOT IN ('NN', 'N.N', 'N.N.')) " .
-        " AND ((nombres || apellidos) ~* '$patron') " .
-        " ORDER BY nombres, apellidos ";
-    //echo "OJO q=\"$q\"<br>";
+    $consNomVic =  trim(a_minusculas(sin_tildes($pNomvic)));
+    $consNomvic = preg_replace("/ +/", " & ", $consNomVic);
+    $where = " to_tsvector('spanish', unaccent(persona.nombres) "
+        . " || ' ' || unaccent(persona.apellidos)) @@ "
+        . "to_tsquery('spanish', '$consNomvic')";
+    $q = "SELECT id, nombres, apellidos, anionac, mesnac, dianac, "
+        . "sexo, id_departamento, id_municipio, id_clase, "
+        . "tipodocumento, numerodocumento " 
+        . " FROM persona " 
+        . " WHERE " . $where
+        . " ORDER by nombres, apellidos "; 
+
+
+    echo "OJO q=\"$q\"<br>";
     $result = hace_consulta($db, $q);
 
     $row = array();
