@@ -23,7 +23,7 @@ INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('CI
 INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('TEBF', 'TERRITORIOS ESPECIALES BIODIVERSOS Y FRONTERIZOS', '2013-01-04', NULL);
 
 
-INSERT INTO departamento (id, nombre, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'EXTERIOR', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO departamento (id, nombre, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10000, 'EXTERIOR', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO departamento (id, nombre, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (91, 'AMAZONAS', -1.81887960000000004, -71.3423095454544978, '2001-01-01', NULL);
 INSERT INTO departamento (id, nombre, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'ANTIOQUIA', 6.55021133387096022, -75.5540034427420011, '2001-01-01', NULL);
 INSERT INTO departamento (id, nombre, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (81, 'ARAUCA', 6.66059525714285972, -71.2608333428571967, '2001-01-01', NULL);
@@ -70,7 +70,7 @@ SELECT setval('frontera_seq', max(id)) FROM frontera;
 
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (110, 'BARRANCA DE UPÍA', 50, 4.57555560000000039, -72.9611110999999966, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (83, 'BELÉN', 52, 1.59749999999999992, -77.0174999999999983, '2001-01-01', NULL);
-INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'BRASIL', 0, -8.46661450000000038, -51.3333975999999979, '2001-01-01', NULL);
+INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'BRASIL', 10000, -8.46661450000000038, -51.3333975999999979, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (150, 'CASTILLA LA NUEVA', 50, 3.79999999999999982, -73.5833333000000067, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (240, 'CHACHAGÜÍ', 52, 1.35943053925137991, -77.2836685180664062, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (189, 'CIÉNAGA', 47, 10.8333332999999996, -74.0833333000000067, '2001-01-01', NULL);
@@ -165,7 +165,7 @@ INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacrea
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (785, 'SUCRE', 19, 2.03333329999999979, -76.9166666999999933, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (798, 'TENERIFE', 47, 10, -74.6666666999999933, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (847, 'URIBIA', 44, 11.9166667000000004, -72, '2001-01-01', NULL);
-INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'VENEZUELA', 0, 8.00187090000000012, -66.110931800000003, '2001-01-01', NULL);
+INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'VENEZUELA', 10000, 8.00187090000000012, -66.110931800000003, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'VILLAVICENCIO', 50, 4.15333329999999989, -73.6350000000000051, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (711, 'VISTAHERMOSA', 50, 3.08638890000000021, -73.7513888999999949, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (54, 'ARGELIA', 76, 4.70000000000000018, -76.1333333000000039, '2001-01-01', NULL);
@@ -935,7 +935,7 @@ INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacrea
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (215, 'CÓRDOBA', 52, 0.78333330000000001, -77.3333333000000067, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (236, 'DOLORES', 73, 3.66666669999999995, -74.75, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (170, 'DOSQUEBRADAS', 66, 4.83472219999999986, -75.6724999999999994, '2001-01-01', NULL);
-INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'ECUADOR', 0, -1.33976680000000004, -79.3666965000000033, '2001-01-01', NULL);
+INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'ECUADOR', 10000, -1.33976680000000004, -79.3666965000000033, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (250, 'EL BAGRE', 5, 7.59416669999999971, -74.8119444000000016, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (245, 'EL CARMEN', 27, 6.39799999999999969, -77.3253799999999956, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (244, 'EL CARMEN DE BOLÍVAR', 13, 9.75, -75.1666666999999933, '2001-01-01', NULL);
@@ -1052,13 +1052,13 @@ INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacrea
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (524, 'PALESTINA', 17, 5.08333329999999961, -75.6666666999999933, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (523, 'PALMITO', 70, 9.33333329999999961, -75.5499999999999972, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (520, 'PAMPLONITA', 54, 7.5, -72.5833333000000067, '2001-01-01', NULL);
-INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PANAMA', 0, 8.30960669999999979, -81.3066246000000064, '2001-01-01', NULL);
+INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PANAMA', 10000, 8.30960669999999979, -81.3066246000000064, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (524, 'PANDI', 25, 4.25, -74.5, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (522, 'PANQUEBA', 15, 6.5, -72.4166666999999933, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (250, 'PAZ DE ARIPORO', 85, 5.88333330000000032, -71.9000000000000057, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (537, 'PAZ DE RÍO', 15, 6.08333329999999961, -72.75, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PEREIRA', 66, 4.81333330000000004, -75.696111099999996, '2001-01-01', NULL);
-INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'PERU', 0, -6.8699697000000004, -75.0458514999999977, '2001-01-01', NULL);
+INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'PERU', 10000, -6.8699697000000004, -75.0458514999999977, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (533, 'PIAMONTE', 19, 7.78333329999999979, -75.2000000000000028, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (549, 'PINCHOTE', 68, 6.58333329999999961, -73.1666666999999933, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (550, 'PISBA', 15, 5.74277779999999982, -72.4894443999999964, '2001-01-01', NULL);
