@@ -631,7 +631,6 @@ function unset_var_session()
      */
 function establece_valores_form(&$pag, $campos, $valores)
 {
-
     foreach ($campos as $c) {
         $e =& $pag->getElement($c);
         if (!PEAR::isError($e) && isset($valores[$c])) {

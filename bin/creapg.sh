@@ -119,7 +119,6 @@ if (test "$SIN_ESQUEMA" = "1") then {
 echo "" > $dirap/DataObjects/$dbnombre.ini
 echo "" > $dirap/DataObjects/$dbnombre.links.ini
 
-
 leeEstructura ${RUTASQL}
 
 for i in $modulos; do

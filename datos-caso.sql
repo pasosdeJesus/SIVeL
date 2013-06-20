@@ -45,10 +45,11 @@ INSERT INTO tviolencia (id, nombre, nomcorto, fechacreacion, fechadeshabilitacio
 
 -- supracategoria
 
-INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (1, 'PERSECUCIÓN POLÍTICA', '2000-07-26', NULL, 'B');
-INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (3, 'INTOLERANCIA SOCIAL', '2000-07-26', NULL, 'A');
 INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (1, 'PERSECUCIÓN POLÍTICA', '2000-07-26', NULL, 'A');
+INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (2, 'ABUSO DE AUTORIDAD', '2000-07-26', NULL, 'A');
+INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (3, 'INTOLERANCIA SOCIAL', '2000-07-26', NULL, 'A');
 INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (2, 'INTOLERANCIA SOCIAL', '2000-07-26', NULL, 'B');
+INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (1, 'PERSECUCIÓN POLÍTICA', '2000-07-26', NULL, 'B');
 INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (1, 'BÉLICAS', '2000-07-26', NULL, 'C');
 INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (1, 'PERSONAS', '2000-07-26', NULL, 'D');
 INSERT INTO supracategoria (id, nombre, fechacreacion, fechadeshabilitacion, id_tviolencia) VALUES (2, 'BIENES', '2000-07-26', NULL, 'D');
