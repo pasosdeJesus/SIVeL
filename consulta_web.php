@@ -281,20 +281,20 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 $db, $where, "ubicacion.id_departamento", $pIdDepartamento
             );
             consulta_and($db, $where, "ubicacion.id_municipio", $pIdMunicipio);
-            $tablas .= ", ubicacion";
+            agrega_tabla($tablas, 'ubicacion');
         } else if ($pIdDepartamento != '') {
             consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
             consulta_and(
                 $db, $where, "ubicacion.id_departamento", $pIdDepartamento
             );
-            $tablas .= ", ubicacion";
+            agrega_tabla($tablas, 'ubicacion');
         }
         if ($pConcoordenadas) {
             consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
             consulta_and_sinap(
                 $where, "ubicacion.latitud", "NULL", " IS NOT "
             );
-            $tablas .= ", ubicacion";
+            agrega_tabla($tablas, 'ubicacion');
         }
 
         if ($pPresponsable != '') {
@@ -306,7 +306,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 $db, $where, "caso_presponsable.id_presponsable",
                 $pPresponsable
             );
-            $tablas .= ', caso_presponsable';
+            agrega_tabla($tablas, 'caso_presponsable');
         }
 
 
@@ -314,7 +314,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             && ($pUsuario != '' || (isset($pFiini['Y']) && $pFiini['Y'] != '')
             || (isset($pFifin['Y']) && $pFifin['Y'] != ''))
         ) {
-            $tablas .= ", caso_funcionario";
+            agrega_tabla($tablas, 'caso_funcionario');
             consulta_and_sinap($where, "caso_funcionario.id_caso", "caso.id");
         }
         if (in_array(42, $page->opciones)
@@ -341,11 +341,11 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         }
 
         if ($pNomvic != "") {
-            $tablas .= ", persona";
+            agrega_tabla($tablas, 'persona');
             consulta_and_sinap($where, "victima.id_persona", "persona.id");
         }
         if ($pNomvic != "" || $pSsocial != "") {
-            $tablas .= ", victima";
+            agrega_tabla($tablas, 'victima');
             consulta_and_sinap($where, "victima.id_caso", "caso.id");
         }
         if ($pSsocial != '') {

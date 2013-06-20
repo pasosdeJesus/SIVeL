@@ -235,7 +235,7 @@ $GLOBALS['m_opcion'] = array (
     ),
     44 => array(
         'nombre' => _('General por Localizacion'), 'idpapa' => 40,
-        'url' => 'consulta_web?mostrar=general&orden=localizacion'
+        'url' => 'consulta_web?mostrar=general&orden=ubicacion'
     ),
     45 => array(
         'nombre' => _('Revista con código'), 'idpapa' => 40,
