@@ -686,31 +686,37 @@ function toma_elemento_recc($form, $nom, $yaanalizados = array())
  *
  * @param object $d    DB_DataObject
  * @param object $form HTML_QuickForm
+ * @param bool   $merr Si debe mostrar errores
  *
  * @return void
-     */
-function valores_pordefecto_form($d, $form)
+ */
+function valores_pordefecto_form($d, $form, $merr = true)
 {
+    //echo "OJO valores_pordefecto_form(d, {$d->__table}, form)<br>";
     foreach ($d->fb_fieldsToRender as $c) {
+        //echo "OJO c=$c<br>";
         $cq = toma_elemento_recc($form, $c);
-        if ($cq == null || PEAR::isError($cq)) {
+        if (($cq == null || PEAR::isError($cq)) && $merr) {
             echo_esc(
                 sprintf(
-                    _("Error: No se encontró elemento %s en el formulario")
-                    . "<br>", $c
+                    _("Error: No se encontró elemento %s en el formulario %s")
+                    . "<br>", $c, $d->__table
                 )
             );
         }
-        if (isset($d->fb_booleanFields)
-            && in_array($c, $d->fb_booleanFields)
-        ) {
-            if ((!isset($d->$c) || $d->$c===0 || $d->$c==='f')) {
-                $cq->setValue(0);
-            } else {
-                $cq->setValue(1);
+
+        if (is_callable($cq, 'setValue')) {
+            if (isset($d->fb_booleanFields)
+                && in_array($c, $d->fb_booleanFields)
+            ) {
+                if ((!isset($d->$c) || $d->$c===0 || $d->$c==='f')) {
+                    $cq->setValue(0);
+                } else {
+                    $cq->setValue(1);
+                }
+            } else if ($cq != null) {
+                $cq->setValue($d->$c);
             }
-        } else {
-            $cq->setValue($d->$c);
         }
     }
 }
@@ -1545,9 +1551,10 @@ function var_req_escapa($nv, $db = null, $maxlong = 1024)
  * Convierte un arreglo para fechas a una fecha.
  * Mes y día pueden ser '' y supone valores por defecto (1).
  *
- * @param array $f     Arreglo con indices Y, M, d, el valor $f['Y'] no puede ser ''
+ * @param array $f     Arreglo con indices Y, M, d, el valor $f['Y'] 
+ *                      no puede ser ''
  * @param bool  $desde Si es cierto completa suponiendo que es una fecha Desde,
- *                     de lo contrario compelta suponiendo que es una fecha Hasta.
+ *                     de lo contrario completa como fecha Hasta.
  *
  * @return string Fecha
      */
@@ -1759,7 +1766,7 @@ function agrega_tabla(&$t, $nt)
  * @param integer $tipo  Valores numérico como el empleado por DB_DataObject
  *
  * @return integer Valor del campo del objeto recibido convertido al tipo
-     */
+ */
 function convierte_valor(&$do, $campo, $tipo)
 {
     //echo "convierte_valor(do, $campo, $tipo)<br>";
@@ -1770,6 +1777,53 @@ function convierte_valor(&$do, $campo, $tipo)
     }
 }
 
+
+/**
+ * Asigna un campo de un DataObject con el valor recibido del formulario
+ *
+ * @param array   $valor Valor por asignar
+ * @param object  $tabla Tabla 
+ * @param object  $campo Campo de tabla $tabla
+ * @param array   $estbd   Estructura de base sacada de .ini.  Si es null esta
+ *                       función la llena
+ *
+ * @return Valor asignable a un campo $campo del DataObject de tabla $rel
+ */
+function valor_fb2do($valor, $rel, $campo, &$estbd)
+{
+    //echo "OJO valor_fb2do($valor, $rel, $campo, estbd)<br>";
+    if ($estbd== null || !isset($estbd)) {
+        $estbd = parse_ini_file(
+            $_SESSION['dirsitio'] . "/DataObjects/" .
+            $GLOBALS['dbnombre'] . ".ini",
+            true
+        );
+    }
+    $tipo = $estbd[$rel][$campo];
+    //echo "OJO valor_fb2do, tipo=$tipo";
+    if ($tipo & 1) {
+        if (isset($valor)) {
+            $ret = (int)$valor;
+        } else {
+            $ret = null;
+        }
+    } else if ($tipo == 18 || $tipo == 146) {
+        $ret = ($valor == 1) ? 't' : 'f';
+    } else if ($tipo & 6) {
+        if (is_array($valor)) {
+            $ret = arr_a_fecha($valor);
+        } else {
+            $ret = (string)$valor;
+        }
+    } else if ($tipo & 2) {
+        $ret = $valor;
+    } else {
+        $ret = $valor;
+    }
+    //echo "OJO ret=$ret";
+
+    return $ret;
+}
 
 
 /**
@@ -1789,7 +1843,7 @@ function convierte_valor(&$do, $campo, $tipo)
  * @param array   $fignora Si un campo de tipo bool es false ignora
  *
  * @return string Consulta SQL
-     */
+ */
 function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
     $otrast = array(), $iotrast = '', $nonulos = array(), $irelot = "id",
     $masenl = array(), $tab = null, $fignora = true
