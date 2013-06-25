@@ -114,7 +114,7 @@ foreach ($lm as $m) {
         require_once "$m/conf.php";
     }
 }
-//print_r($GLOBALS['ficha_tabuladores']);
+//echo "OJO antes de remplaza<hr>" ;print_r($GLOBALS['ficha_tabuladores']);
 if (isset($GLOBALS['remplaza_ficha_tabuladores'])) {
     foreach ($GLOBALS['remplaza_ficha_tabuladores'] as $a) {
         $nom = $a[0];
@@ -134,6 +134,7 @@ if (isset($GLOBALS['remplaza_ficha_tabuladores'])) {
     }
 }
 
+//echo "OJO antes de elimina<hr>" ;print_r($GLOBALS['ficha_tabuladores']);
 if (isset($GLOBALS['elimina_ficha_tabuladores'])) {
     foreach ($GLOBALS['elimina_ficha_tabuladores'] as $idf) {
         for ($nf = 0;
@@ -166,8 +167,8 @@ if (isset($GLOBALS['elimina_ficha_tabuladores'])) {
         $GLOBALS['ficha_tabuladores'] = $nft;
     }
 }
-//echo "<hr>";print_r($GLOBALS['ficha_tabuladores']); 
 
+//echo "OJO antes de nuevas<hr>" ;print_r($GLOBALS['ficha_tabuladores']);
 if (isset($GLOBALS['nueva_ficha_tabuladores'])) {
     foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
         $puesto = $a[0];
