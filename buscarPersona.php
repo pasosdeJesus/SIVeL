@@ -50,7 +50,7 @@ function muestra()
         . " ORDER by nombres, apellidos "; 
 
 
-    echo "OJO q=\"$q\"<br>";
+    //echo "OJO q=\"$q\"<br>";
     $result = hace_consulta($db, $q);
 
     $row = array();

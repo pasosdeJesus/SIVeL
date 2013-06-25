@@ -124,7 +124,6 @@ function muestra($dsn)
         if (($d = strrpos($c, "/")) > 0) {
             $c = substr($c, $d + 1);
         }
-        //echo "OJO c=$c<br>";
         $o = new $c('f');
         if (is_callable(array($c, 'mezcla'))) {
             call_user_func_array(

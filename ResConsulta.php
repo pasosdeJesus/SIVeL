@@ -1106,7 +1106,7 @@ class ResConsulta
     static function filaTabla($db, $idcaso, $campos, $conv, $sal,
         $retroalim = true, $primnom = true
     ) {
-        //echo "OJO filaTabal(db, $idcaso, campos, conv, sal, retroalim);<br>";
+        //echo "OJO filaTabla(db, $idcaso, campos, conv, sal, retroalim);<br>";
         $col = "#FFFFFF";
         $dec = objeto_tabla('caso_etiqueta');
         if (!PEAR::isError($dec)) {
@@ -1267,6 +1267,7 @@ class ResConsulta
                 $sal[$conv[$cc]] . "'>";
                 $vr = $sal[$conv[$cc]];
                 $vrpost = "</a>";
+                //echo "OJO 1 cc=$cc,  vr = $vr <br>";
             } else if (isset($conv[$cc]) && isset($sal[$conv[$cc]])) {
                 $vr = trim($sal[$conv[$cc]]);
             } else {
@@ -1289,6 +1290,7 @@ class ResConsulta
                     }
                 }
             }
+            //echo "OJO 1 cc=$cc,  vr = $vr <br>";
             $escon[$cc] = $vrescon == '' ? $vr : $vrescon;
             $html_renglon .= $vrpre . strip_tags($vr) . $vrpost . "</td>";
         }
@@ -1791,7 +1793,8 @@ class ResConsulta
         if (isset($campos['m_fuentes'])
             && isset($_SESSION['id_funcionario'])
         ) {
-            include $_SESSION['dirsitio'] . "/conf.php";
+            //            include $_SESSION['dirsitio'] . "/conf.php";
+            global $dsn;
             $aut_usuario = "";
             autentica_usuario($dsn, $aut_usuario, 0);
             if (!in_array(42, $_SESSION['opciones'])) {
@@ -1860,6 +1863,7 @@ class ResConsulta
             $dfuentedirectacaso->free();
             unset($dfuentedirectacaso);
         }
+
         if (isset($campos['caso_memo'])) {
             //        $r .= "<acciones_juridicas>"
             //        $r .= "<otras_acciones>"
