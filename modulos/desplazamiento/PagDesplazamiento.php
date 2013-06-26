@@ -381,11 +381,6 @@ class PagDesplazamiento extends PagBaseMultiple
         );
         html_menu_agrega_submenu(
             $GLOBALS['menu_tablas_basicas'],
-            'Desplazamiento', 'Causas',
-            'acreditacion', null
-        );
-        html_menu_agrega_submenu(
-            $GLOBALS['menu_tablas_basicas'],
             'Desplazamiento', 'Entidades para declarar',
             'declaroante', null
         );

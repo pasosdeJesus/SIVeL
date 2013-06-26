@@ -19,14 +19,6 @@ CREATE TABLE tipodesp (
 	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
 );
 
-CREATE SEQUENCE causadesp_seq;
-CREATE TABLE causadesp (
-	id	INTEGER PRIMARY KEY DEFAULT (nextval('causadesp_seq')),
-	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL,
-	fechacreacion	DATE NOT NULL DEFAULT '2013-05-24',
-	fechadeshabilitacion	DATE CHECK (fechadeshabilitacion IS NULL OR fechadeshabilitacion>=fechacreacion)
-);
-
 CREATE SEQUENCE declaroante_seq;
 CREATE TABLE declaroante (
 	id	INTEGER PRIMARY KEY DEFAULT (nextval('declaroante_seq')),
@@ -68,8 +60,6 @@ CREATE TABLE desplazamiento (
 	llegada INTEGER NOT NULL REFERENCES ubicacion(id),
     id_clasifdesp INTEGER NOT NULL REFERENCES clasifdesp,
     id_tipodesp INTEGER NOT NULL REFERENCES tipodesp,
-    id_presponsable INTEGER NOT NULL REFERENCES presponsable,
-    id_causadesp INTEGER NOT NULL REFERENCES causadesp,
     descripcion VARCHAR(5000), 
     otrosdatos VARCHAR(1000), 
     declaro CHAR CHECK (declaro = 'S' OR declaro = 'N' OR declaro = 'R'),
