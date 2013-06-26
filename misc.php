@@ -694,7 +694,7 @@ function valores_pordefecto_form($d, $form, $merr = true)
 {
     //echo "OJO valores_pordefecto_form(d, {$d->__table}, form)<br>";
     foreach ($d->fb_fieldsToRender as $c) {
-        //echo "OJO c=$c<br>";
+        //echo "<hr>OJO c=$c<br>";
         $cq = toma_elemento_recc($form, $c);
         if (($cq == null || PEAR::isError($cq)) && $merr) {
             echo_esc(
@@ -703,18 +703,19 @@ function valores_pordefecto_form($d, $form, $merr = true)
                     . "<br>", $c, $d->__table
                 )
             );
-        }
-
-        if (is_callable($cq, 'setValue')) {
+        } else if ($cq != null && is_callable(array($cq, 'setValue'))) {
+            //echo "OJO setValue callable<br>";
             if (isset($d->fb_booleanFields)
                 && in_array($c, $d->fb_booleanFields)
             ) {
+                //echo "OJO booleano<br>";
                 if ((!isset($d->$c) || $d->$c===0 || $d->$c==='f')) {
                     $cq->setValue(0);
                 } else {
                     $cq->setValue(1);
                 }
-            } else if ($cq != null) {
+            } else {
+                //echo "OJO poniendo valor {$d->$c}<br>";
                 $cq->setValue($d->$c);
             }
         }

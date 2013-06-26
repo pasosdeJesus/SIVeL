@@ -67,7 +67,6 @@ if (!aplicado($idac)) {
 echo "Actualizando indices<br>";
 actualiza_indice($db, 'clasifdesp');
 actualiza_indice($db, 'tipodesp');
-actualiza_indice($db, 'causadesp');
 actualiza_indice($db, 'declaroante');
 actualiza_indice($db, 'inclusion');
 actualiza_indice($db, 'acreditacion');
