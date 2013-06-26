@@ -22,7 +22,6 @@ require_once 'DB_DataObject_SIVeL.php';
 require_once  $GLOBALS['dirsitio'] . "/conf.php";
 
 require_once "Acreditacion.php";
-require_once "Causadesp.php";
 require_once "Clasifdesp.php";
 require_once "Inclusion.php";
 require_once "Declaroante.php";
@@ -54,7 +53,6 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
 	var $id_clasifdesp;
 	var $id_tipodesp;
 	var $id_presponsable;
-	var $id_causadesp;
 	var $descripcion;
 	var $otrosdatos;
 	var $declaro;
@@ -94,7 +92,6 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
             'id_clasifdesp' => _('Clasificación'),
             'id_tipodesp' => _('Tipo'),
             'id_presponsable' => _('Presunto Responsable'),
-            'id_causadesp' => _('Causa'),
             'descripcion' => _('Descripción'),
             'otrosdatos' => _('Otros Datos'),
             'declaro' => _('Declaró'),
@@ -132,8 +129,6 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         'llegada' ,
         'id_clasifdesp' ,
         'id_tipodesp' ,
-        'id_presponsable' ,
-        'id_causadesp' ,
         'descripcion' ,
         'otrosdatos' ,
         'declaro' ,
@@ -161,8 +156,6 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         'llegada' ,
         'id_clasifdesp' ,
         'id_tipodesp' ,
-        'id_presponsable' ,
-        'id_causadesp' ,
         'descripcion' ,
         'otrosdatos' ,
         'declaro' ,
@@ -218,7 +211,6 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         return array(
             'id_clasifdesp'=> DataObjects_Clasifdesp::idSinInfo(),
             'id_tipodesp'=> DataObjects_Tipodesp::idSinInfo(),
-            'id_causadesp'=> DataObjects_Causadesp::idSinInfo(),
             'id_presponsable'=> DataObjects_Presponsable::idSinInfo(),
             'id_declaroante'=> DataObjects_Declaroante::idSinInfo(),
             'id_inclusion'=> DataObjects_Inclusion::idSinInfo(),
