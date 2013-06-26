@@ -16,19 +16,6 @@ INSERT INTO tipodesp (id, nombre) VALUES (1, 'GOTA A GOTA');
 INSERT INTO tipodesp (id, nombre) VALUES (2, 'MASIVO');
 INSERT INTO tipodesp (id, nombre) VALUES (3, 'FAMILIAR');
 
-INSERT INTO causadesp (id, nombre) VALUES (0, 'SIN INFORMACIÓN');
-INSERT INTO causadesp (id, nombre) VALUES (1, 'AMENAZAS DIRECTAS');
-INSERT INTO causadesp (id, nombre) VALUES (2, 'AMENAZAS INDIRECTAS');
-INSERT INTO causadesp (id, nombre) VALUES (3, 'AMETRALLAMIENTOS/BOMBARDEO');
-INSERT INTO causadesp (id, nombre) VALUES (4, 'ATENTADO');
-INSERT INTO causadesp (id, nombre) VALUES (5, 'CAMPAÑAS DE INTOLERANCIA');
-INSERT INTO causadesp (id, nombre) VALUES (6, 'CAMPOS MINAODS/MUNICIONES SIN DETONAR');
-INSERT INTO causadesp (id, nombre) VALUES (7, 'CONFRONTACIONES POR ACTORES ARMADOS');
-INSERT INTO causadesp (id, nombre) VALUES (8, 'DESAPARICIÓN FORZADA');
-INSERT INTO causadesp (id, nombre) VALUES (10, 'EJECUCIÓN EXTRAJUDICIAL');
-INSERT INTO causadesp (id, nombre) VALUES (11, 'ERRADICACIÓN Y FUMIGACIONES');
-
-
 INSERT INTO declaroante (id, nombre) VALUES (0, 'SIN INFORMACIÓN');
 INSERT INTO declaroante (id, nombre) VALUES (1, 'PERSONERIA MUNICIPAL');
 INSERT INTO declaroante (id, nombre) VALUES (2, 'DEFENSORIA REGIONAL');
