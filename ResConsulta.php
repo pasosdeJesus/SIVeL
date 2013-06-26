@@ -1331,7 +1331,6 @@ class ResConsulta
     static function reporteRelato($idcaso, $db = null,
         $campos = array(), $varlin = true
     ) {
-        //echo "OJO Entrando a reporteRelato: " . memory_get_usage() ."<br>";
         $arotros = array(); // Para poner observaciones al final
         $dcaso = objeto_tabla('caso');
         $dcaso->get('id', $idcaso);
