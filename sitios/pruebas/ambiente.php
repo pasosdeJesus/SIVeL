@@ -56,6 +56,7 @@ $_SESSION['opciones'][13] = 48;
 $_SESSION['opciones'][14] = 49;
 $_SESSION['opciones'][15] = 60;
 
+$_SESSION['dirsitio'] = 'sitios/pruebas';
 
 $_SERVER['SERVER_NAME'] = '127.0.0.1';
 $_SERVER['REQUEST_URI'] = 'pruebas';  // así lo pone insdep.php

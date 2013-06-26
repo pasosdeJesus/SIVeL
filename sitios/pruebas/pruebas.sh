@@ -60,24 +60,20 @@ function prueba {
 	} fi;
 	if (test "$otrocomp" != "") then {
 		if (test "$saca2" != "") then {
-			grep -v "$saca2" sitios/pruebas/salida/$otrocomp | grep -v "Warning" > sitios/pruebas/salida/$otrocomp.tmp
-			if (test "$saca3" != "") then {
-				cp sitios/pruebas/salida/$otrocomp.tmp sitios/pruebas/salida/$otrocomp.tmp2
-				grep -v "$saca3" sitios/pruebas/salida/$otrocomp.tmp2 > sitios/pruebas/salida/$otrocomp.tmp
-
-			} fi;
-		} else {
 			cp sitios/pruebas/salida/$otrocomp sitios/pruebas/salida/$otrocomp.tmp
+			grep -v "$saca2" sitios/pruebas/salida/$otrocomp.tmp | grep -v "Warning" > sitios/pruebas/salida/$otrocomp
+			if (test "$saca3" != "") then {
+				cp sitios/pruebas/salida/$otrocomp sitios/pruebas/salida/$otrocomp.tmp2
+				grep -v "$saca3" sitios/pruebas/salida/$otrocomp.tmp2 > sitios/pruebas/salida/$otrocomp
+			} fi;
+		}  fi;
+		diff -b sitios/pruebas/salida/$otrocomp sitios/pruebas/esperado/$otrocomp > /dev/null
+		if (test "$?" != "0") then {
+			echo " 2-Falló ";
+		} else {
+		echo " 2-OK";
 		} fi;
-
-		diff -b sitios/pruebas/salida/$otrocomp.tmp sitios/pruebas/esperado/$otrocomp > /dev/null
-        if (test "$?" != "0") then {
-            echo " 2-Falló ";
-        } else {
-            echo " 2-OK";
-        } fi;
-    } fi;
-
+	} fi;
 }
 
 echo "Pruebas de regresión"
@@ -109,9 +105,18 @@ if (test "$SALTAINI" != "1") then {
 	done
 	echo "Copiando datos de usuario de $dirplant";
 
-	dbusuario=`grep "\\\$dbusuario *=" $dirplant/conf.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
-	dbclave=`grep "\\\$dbclave *=" $dirplant/conf.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
-	nombase=`grep "\\\$dbnombre *=" $dirplant/conf.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
+	dbusuario=`grep "\\\$dbusuario *=" $dirplant/conf-particular.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
+	if (test "$dbusuario" = "") then {
+		dbusuario=`grep "\\\$dbusuario *=" $dirplant/conf.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
+	} fi;
+	dbclave=`grep "\\\$dbclave *=" $dirplant/conf-particular.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
+	if (test "$dbclave" = "") then {
+		dbclave=`grep "\\\$dbclave *=" $dirplant/conf.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
+	} fi;
+	nombase=`grep "\\\$dbnombre *=" $dirplant/conf-particular.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
+	if (test "$nombase" = "") then {
+		nombase=`grep "\\\$dbnombre *=" $dirplant/conf.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
+	} fi;
 
 	chres=`echo $CHROOTDIR | sed -e "s/\//\\\\\\\\\//g"`;
 	ds=`echo $SOCKPSQL | sed -e "s/.s.PGSQL.*//g;"`;
@@ -157,7 +162,7 @@ EOF
 
 	echo "Configuración completada";
 
-	. sitios/pruebas/vardb.sh
+	cd sitios/pruebas ; . ./vardb.sh ; cd ../..
 
 
 	echo "Se empleará una base nueva de nombre $dbnombre del usuario $dbusuario "
@@ -208,6 +213,7 @@ prueba sitios/pruebas/inscaso-anexos.php " - Anexo"
 prueba sitios/pruebas/inscaso-etiqueta.php " - Etiqueta"
 prueba sitios/pruebas/inscaso-evaluacion.php " - Evaluacion"
 prueba sitios/pruebas/inscaso-evaluacion-valida.php " - Valida Evaluacion"
+#}
 prueba sitios/pruebas/inscaso-valrepgen.php " - Validar y Reporte General" valrepgen "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*"
 prueba sitios/pruebas/reprevista.php " - Reporte Revista" reprevista
 prueba sitios/pruebas/reprevista-filtros.php " - Filtros en Reporte Revista" reprevista-filtros "Warning"

@@ -30,12 +30,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -74,12 +74,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -118,12 +118,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -162,12 +162,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -206,12 +206,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -250,12 +250,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -294,12 +294,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -338,12 +338,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -382,12 +382,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -426,12 +426,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -470,12 +470,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -514,12 +514,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -558,12 +558,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -602,12 +602,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -646,12 +646,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -690,12 +690,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
@@ -733,12 +733,12 @@ function textCounter(field, cntfield, maxlimit)
 }
 //  End -->
 </script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign=top>Código</th><th valign=top>Descripción</th><th valign=top>Fecha</th><th valign=top>Víctimas</th><th valign=top>Pr. Resp.</th><th valign=top>Tipificación</th><th valign=top>Fuentes</th><th valign=top>Retroalimentación</th></tr>
-<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>apellidos nombres (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
+<tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) T1000, nombre (3) | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
 <input type="hidden" name="caso_memo" value="memo">
 <input type="hidden" name="caso_fecha" value="2007-08-07">
-<input type="hidden" name="m_victimas" value="apellidos nombres T1000, nombre (3)">
+<input type="hidden" name="m_victimas" value="APELLIDOS NOMBRES T1000, nombre (3)">
 <input type="hidden" name="m_presponsables" value="presuntos r1">
 <input type="hidden" name="m_tipificacion" value="T:1000:1000 supra1:cat1">
 <input type="hidden" name="m_fuentes" value="ffrecuente1 2007-10-10">
