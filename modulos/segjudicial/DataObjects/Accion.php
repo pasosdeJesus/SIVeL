@@ -54,7 +54,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
     var $fb_fieldsToRender = array('id_taccion', 'id_despacho', 'fecha',
          'numeroradicado', 'observacionesaccion', 'respondido'
      );
-    var $fb_addFormHeader = true;
+
     /**
      * Constructora
      * return @void
@@ -76,7 +76,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
 
     var $fb_textFields = array ('observacionesaccion');
     var $fb_booleanFields = array ('respondido');
-
+    var $fb_addFormHeader = false;
 
     /**
      * Campos que pueden ser SIN INFORMACION y el código correspondiente
@@ -132,8 +132,9 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
                 $this->$c = $csin[$c];
             }
         }
-        $this->fb_preDefElements = array('id_proceso' =>
-                    HTML_QuickForm::createElement('hidden', 'id_proceso')
+        $this->fb_preDefElements = array(
+            'id_proceso' =>
+            HTML_QuickForm::createElement('hidden', 'id_proceso'),
         );
     }
 
@@ -204,6 +205,9 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
                 . $p->id . "\">" . _('Eliminar') . "</a></td>";
         }
         $t .= '</table>';
+        $form->addElement(
+            'header', 'Acciones Realizadas', 'Acciones Realizadas'
+        );
         $sel =& $form->addElement('static', null, '', $t);
 
         foreach ($fa as $e) {

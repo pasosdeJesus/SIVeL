@@ -6,7 +6,9 @@
 # Directorio donde reside la aplicación
 dirap=/var/www/htdocs/sivel//sitios/sivel
 
-. ./vardb-particular.sh
+if (test -f ./vardb-particular.sh) then {
+	. ./vardb-particular.sh
+} fi;
 
 . ../pordefecto/vardb.sh
 

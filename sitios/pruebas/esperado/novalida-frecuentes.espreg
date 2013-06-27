@@ -68,6 +68,8 @@ function validate_frecuentes(frm) {
 <head>
 <meta charset = "UTF-8">
 <title>Ficha caso</title>
+<link rel="stylesheet" href="lib/jqueryui-1.10.3/themes/smoothness/jquery-ui.css" />
+<link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <style type = "text/css">
 
 body {
@@ -105,7 +107,21 @@ input.flat {
   border-color: #996;
 }
 
+.ui-autocomplete-loading {
+    background: white url('imagen/ajax-loader.gif') right center no-repeat;
+}
+.ui-autocomplete {
+    max-height: 100px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+/* IE 6 no soporta max-height */
+* html .ui-autocomplete {
+    height: 100px;
+}
 </style>
+<script src="lib/jquery-1.9.1/jquery.min.js"></script>
+<script src="lib/jqueryui-1.10.3/jquery-ui.min.js"></script>
 <script type = "text/javascript" src="sivel.js" type="text/javascript"></script>
 <script type = "text/javascript">
 <!--
@@ -114,7 +130,7 @@ function envia(que) {  document.forms[0]._qf_default.value = que; document.forms
 </script>
 <body><table class="maintable" align = "left"><colgroup><col width = "150" style = "colprin1"/><col/></colgroup><form action="sitios/pruebas/novalida-frecuentes.php" method="post" name="frecuentes" id="frecuentes" target="_self" onsubmit="try { var myValidator = validate_frecuentes; } catch(e) { return true; } return myValidator(this);">
 <tr>
-<td valign="top" align="left" colspan="2"><input class="flat" name="_qf_frecuentes_basicos" value="Datos básicos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_ubicacion" value="Ubicación" type="submit" />&nbsp;<input class="flat" disabled="disabled" name="_qf_frecuentes_frecuentes" value="Fuentes Frecuentes" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_otras" value="Otras Fuentes" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_tipoViolencia" value="Contexto" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_pResponsables" value="Presuntos Responsables" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_victimaIndividual" value="Víctimas Individuales" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_victimaColectiva" value="Víctima Colectiva" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_acto" value="Actos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_memo" value="Memo" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_anexos" value="Anexos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_etiquetas" value="Etiquetas" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_evaluacion" value="Evaluación" type="submit" /></td>
+<td valign="top" align="left" colspan="2"><input class="flat" name="_qf_frecuentes_basicos" value="Datos Básicos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_ubicacion" value="Ubicación" type="submit" />&nbsp;<input class="flat" disabled="disabled" name="_qf_frecuentes_frecuentes" value="Fuentes Frecuentes" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_otras" value="Otras Fuentes" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_tipoViolencia" value="Contexto" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_pResponsables" value="Presuntos Responsables" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_victimaIndividual" value="Víctimas Individuales" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_victimaColectiva" value="Víctimas Colectivas" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_acto" value="Actos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_memo" value="Memo" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_anexos" value="Anexos" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_etiquetas" value="Etiquetas" type="submit" />&nbsp;<input class="flat" name="_qf_frecuentes_evaluacion" value="Evaluación" type="submit" /></td>
 </tr><tr><th colspan = "2"><table width = "100%"><th align = "left">Fuentes Frecuentes (1/1)</th><th algin = "right">Caso 1</th></table></th></tr>
 <tr>
 <td align="right" valign="top"><b></b></td>
