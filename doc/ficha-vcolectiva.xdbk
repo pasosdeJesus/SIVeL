@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="victimacolectiva">
+	<title>Víctima Colectiva</title>
+
+	<para>
+En un hecho de violencia con muchas víctimas, si la cantidad
+precisa de víctimas se conoce, es importante especificarlas todas
+y cada una como víctimas individuales (a&uacute;n cuando deba usarse
+como nombre NN).   Esta pestaña de víctimas colectivas se reserva
+para casos en los que el n&uacute;mero de personas afectadas no puede
+determinarse (e.g. una fumigaci&oacute;n).  Por ser un n&uacute;mero aproximado
+el que puede especificarse, las víctimas colectivas no se incluyen 
+en los conteos (ver <xref linkend="cconteos"></xref>).
+	</para>
+
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichavictimacolectiva.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichavictimacolectiva.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Víctima Colectiva</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+
+	<para>
+
+Los campos de esta ficha son prácticamente los mismos de
+víctima individual. Y también es posible relacionar una víctima colectiva de
+otro caso con el enlace "Buscar Grupo".  Las novedades son:
+		<itemizedlist>
+			<listitem>
+				<para>
+Nombre: Se refiere al nombre de la comunidad afectada.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Num. Aprox. Personas: Se especifica con cifras la cantidad de víctimas.
+
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+En los demás campos es posible elegir más de una opci&oacute;n, para especificar
+la variedad de profesiones, rangos de edad, antecedentes, etc. de los
+integrantes del grupo.
+
+				</para>
+			</listitem>
+		</itemizedlist>
+
+Los botones de la parte inferior permiten especificar
+más de una víctima colectiva.
+	</para>
+</sect3>
+

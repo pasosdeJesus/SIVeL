@@ -8,11 +8,41 @@
 %infoversion;
 <!ENTITY principios SYSTEM "principios.xdbk">
 <!ENTITY ambiente SYSTEM "ambiente.xdbk">
-<!ENTITY uso SYSTEM "uso.xdbk">
+<!ENTITY uso-intro SYSTEM "uso-intro.xdbk">
+<!ENTITY uso-autentica SYSTEM "uso-autentica.xdbk">
+<!ENTITY uso-consultaweb SYSTEM "uso-consultaweb.xdbk">
+
+<!ENTITY ficha-intro SYSTEM "ficha-intro.xdbk">
+<!ENTITY ficha-basicos SYSTEM "ficha-basicos.xdbk">
+<!ENTITY ficha-ubicacion SYSTEM "ficha-ubicacion.xdbk">
+<!ENTITY ficha-frecuentes SYSTEM "ficha-frecuentes.xdbk">
+<!ENTITY ficha-otras SYSTEM "ficha-otras.xdbk">
+<!ENTITY ficha-contexto SYSTEM "ficha-contexto.xdbk">
+<!ENTITY ficha-presponsables SYSTEM "ficha-presponsables.xdbk">
+<!ENTITY ficha-vindividual SYSTEM "ficha-vindividual.xdbk">
+<!ENTITY ficha-vcolectiva SYSTEM "ficha-vcolectiva.xdbk">
+<!ENTITY ficha-actos SYSTEM "ficha-actos.xdbk">
+<!ENTITY ficha-memo SYSTEM "ficha-memo.xdbk">
+<!ENTITY ficha-anexos SYSTEM "../modulos/anexos/doc/ficha-anexos.xdbk">
+<!ENTITY ficha-etiquetas SYSTEM "../modulos/etiquetas/doc/ficha-etiquetas.xdbk">
+<!ENTITY ficha-evaluacion SYSTEM "ficha-evaluacion.xdbk">
+
+<!ENTITY uso-reportes SYSTEM "uso-reportes.xdbk">
+<!ENTITY uso-cconteos SYSTEM "uso-cconteos.xdbk">
+<!ENTITY uso-cintercambio SYSTEM "uso-cintercambio.xdbk">
+
 <!ENTITY administracion SYSTEM "administracion.xdbk">
 <!ENTITY instala SYSTEM "instala.xdbk">
 <!ENTITY pautas SYSTEM "para-recoger-datos.xdbk">
-<!ENTITY personalizacion SYSTEM "personalizacion.xdbk">
+
+<!ENTITY per-intro SYSTEM "per-intro.xdbk">
+<!ENTITY per-interfaz SYSTEM "per-interfaz.xdbk">
+<!ENTITY per-reint SYSTEM "per-reint.xdbk">
+<!ENTITY per-modulos SYSTEM "per-modulos.xdbk">
+<!ENTITY per-sitio SYSTEM "per-sitio.xdbk">
+<!ENTITY per-fuentes SYSTEM "per-fuentes.xdbk">
+<!ENTITY per-seguridad SYSTEM "per-seguridad.xdbk">
+
 <!ENTITY varconfphp SYSTEM "varconfphp.xdbk">
 
 <!ENTITY novedades SYSTEM "novedades.xdbk">
@@ -33,14 +63,10 @@
 	<legalnotice><para>SIVeL se dedica a Dios y a las víctimas. 
             Su código fuente se libera al Dominio Público de
             acuerdo a la legislación colombiana, sin 
-            garantías. Puede liberarse al dominio público porque
-            se ha desarrollado en tiempo no retribuido por empresa
-            u organización alguna o bajo
-            contratos o convenios que ceden lo desarrollado al dominio 
-            público. Puede ver la cesión al Dominio Público ante
-            la oficina de Derechos de Autor de Colombia en 
-            <ulink url="http://sivel.sf.net/registro-SIVeL.png"/>.
-            Oramos para que no sea utilizado por 
+	    garantías, está registrada como obra de dominio público
+	    ante la oficina de Derechos de Autor de Colombia desde
+	    el 10 de Mayo de 2011. 
+	    Oramos para que no sea utilizado por 
 			estructuras armadas.  Esta documentación fue
 			actualizada por última vez en &FECHA-ACT;</para>
 		<para>En Internet puede consultar la versión más
@@ -64,15 +90,77 @@
   </bookinfo>
 
   <!-- Introducción -->
-  &principios; 
-  &ambiente; 
 
-  <!-- Tema -->
-  &uso;
+<chapter id="principios">
+	<title>Principios</title>
+	&principios; 
+</chapter>
+<chapter id="ambiente">
+	<title>Ambiente de operación</title>
+  &ambiente; 
+</chapter>
+
+<!-- Tema -->
+
+<chapter id="uso" role="periodo" userlevel="p1">
+	<title>Uso</title>
+	&uso-intro;
+	&uso-autentica;
+	&uso-consultaweb;
+	<sect1 id="actualizacion">
+		<title>Ingreso de nuevos casos y actualizaci&oacute;n</title>
+		&pautas;
+		<sect2 id="ficha">
+			<title>Ficha</title>
+
+			&ficha-intro;
+			&ficha-basicos;
+			&ficha-ubicacion;
+			&ficha-frecuentes;
+			&ficha-otras;
+			&ficha-contexto;
+			&ficha-presponsables;
+			&ficha-vindividual;
+			&ficha-vcolectiva;
+			&ficha-actos;
+			&ficha-memo;
+			&ficha-anexos;
+			&ficha-etiquetas;
+			&ficha-evaluacion;
+
+		</sect2>
+	</sect1>
+	&uso-reportes;
+	&uso-cconteos;
+	&uso-cintercambio;
+</chapter>
   &administracion;
   &instala; 
-  &personalizacion;
-  
+
+  <chapter id="personalizacion" role="periodo" userlevel="p2">
+	<title>Personalización</title>
+  &per-intro;
+  <sect1 id="tablas-basicas">
+	  <title>Tablas básicas</title>
+	  <highlights role="logros">
+		  <itemizedlist>
+			  <listitem role="indicador" id="logro4.ind1"><para>Puede ver y editar información disponible en tablas básicas</para></listitem>
+			  <listitem role="indicador" id="logro4.ind2"><para>Puede añadir o eliminar registros a tablas básicas</para></listitem>
+		  </itemizedlist>
+	  </highlights>
+
+	  <para>Es la forma más directa de personalización como se explica
+		  en la sección correspondiente 
+		  (ver <xref linkend="tablasbasicas"></xref>).
+	  </para>
+  </sect1>
+  &per-interfaz;
+  &per-reint;
+  &per-modulos;
+  &per-sitio;
+  &per-fuentes;
+  &per-seguridad;
+  </chapter>
 
   <!-- Apendeices -->
   <appendix id="novedades">

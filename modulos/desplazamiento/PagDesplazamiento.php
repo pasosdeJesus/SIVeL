@@ -215,7 +215,25 @@ class PagDesplazamiento extends PagBaseMultiple
             $this->bdesplazamiento->_do->fechaexpulsion : '';
 
         valores_pordefecto_form($this->bdesplazamiento->_do, $this);
-        if ($vv != '') {
+        if ($vv == '') {
+            $dcaso = objeto_tabla('caso');
+            $dcaso->id = $_SESSION['basicos_id'];
+            $dcaso->find();
+            $dcaso->fetch(1);
+            $pf = explode('-', $dcaso->fecha);
+            $f =& $this->getElement('fechaexpulsion');
+            $f->setValue(array(
+                'd' => $pf[2],
+                'm' => $pf[1],
+                'Y' => $pf[0]
+            ));
+            $f =& $this->getElement('fechallegada');
+            $f->setValue(array(
+                'd' => $pf[2],
+                'm' => $pf[1],
+                'Y' => $pf[0]
+            ));
+        } else {
             $e =& $this->getElement('sitiodeclaracion');
             $dep =& $e->_elements[0];
             $mun =& $e->_elements[1];

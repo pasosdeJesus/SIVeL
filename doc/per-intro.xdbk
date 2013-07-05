@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<highlights role="logros">
+	<itemizedlist>
+		<listitem role="logro" id="logro4"><para>Identifica posibilidades de personalización de SIVeL
+		</para></listitem>
+		<listitem role="logro" id="logro5"><para>Dependiendo de su interés y experiencia personaliza SIVeL.
+		</para></listitem>
+	</itemizedlist>
+</highlights>
+
+<para>SIVeL puede personalizarse para adaptarse mejor a su proyecto,
+	al menos de 5 formas: 
+	<itemizedlist>
+		<listitem>
+			<para>Configurando detalles de la interfaz (i.e
+				la presentación que ven los usuarios finales 
+				cuando abren SIVeL en un navegador).</para>
+		</listitem>
+		<listitem>
+			<para>Modificando tablas básicas para que 
+				reflejen mejor los datos de su proyecto (por 
+				ejemplo las posibles profesiones de las 
+				víctimas, los posibles sectores sociales 
+				e incluso la tipificación de violencia).</para>
+			<para>Aunque para mantener posibilidad de 
+				intercambiar datos entre diversas instalaciones o personalizaciones de SIVeL, 
+				para modificarlas tener en cuenta:
+				<itemizedlist>
+					<listitem>
+						<para>Los valores que no desean usarse, no eliminarlos sino deshabilitarlos, poniendoles una fecha de deshabilitación.
+						</para>
+					</listitem>
+					<listitem>
+						<para>Si se desean nuevos valores, añadirlos sin modificar los existentes.
+						</para>
+					</listitem>
+					<listitem>
+						<para>Procurar no cambiar los 
+							valores existentes y estándar de SIVeL, en caso de cambiarlos los nuevos 
+							valores que usen los códigos anteriores deben homologar los anteriores.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</listitem>
+		<listitem>
+			<para>Empleando campos existentes que su proyecto 
+				no requiere para representar otros que si 
+				requiere.  Por ejemplo si su proyecto 
+				requiere especificar etnia 
+				de una víctima, más que el sector social
+				al que pertenece, puede emplear el campo
+				sector social y adaptar la tabla para
+				que tenga justamente las etnias posibles.
+			</para>
+		</listitem>
+		<listitem>
+			<para>Extendiendo las fuentes o modificandolas.  Lo cual es plenamente
+				legal --aunque nos alegraría mucho que
+				compartiera sus cambios en la lista
+				<email>sivel-desarrollo@lists.sourceforge.net</email>.
+			</para>
+		</listitem>
+	</itemizedlist>
+
+</para>

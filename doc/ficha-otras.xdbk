@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="otrasfuentes">
+	<title>Otras Fuentes</title>
+
+	<para>
+Permite especificar personas que han aportado informaci&oacute;n para el caso.    
+Esta informaci&oacute;n no sale en los reportes tipo revista y es la que más 
+debe proteger su organizaci&oacute;n para evitarle riesgos a quienes
+dan informaci&oacute;n.
+	</para>
+
+
+	<informalfigure> 
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichaotras.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichaotras.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Otras Fuentes</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+
+	<para>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+Nombre: En esta casilla se menciona si hubo testigos de los acontecimientos, 
+como también personas que rindieron testimonio sobre el caso.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Anotaciones: Con respecto a la persona o al testimonio.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Fecha: En la que la persona aport&oacute; la informaci&oacute;n.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Ubicaci&oacute;n física:  Donde se almacena la fuente física (casete, papel, o 
+un URL).
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Tipo de fuente: Directa o Indirecta.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Anexo: Permite elegir uno de los anexos del casos 
+(ver <xref linkend="anexos"></xref>), indicando así que la fuente
+es justamente ese anexo.
+				</para>
+			</listitem>
+
+		</itemizedlist>
+
+En la parte inferior de esta pestaña hay botones análogos a los de otras
+(ver <xref linkend="ubicacion"/>).
+	</para>
+</sect3>

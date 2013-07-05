@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="detalles-interfaz">
+	<title>Detalles de la interfaz de usuario</title>
+	<para>
+		El logo que se presenta en el fondo, el texto central
+		y otros elementos del menú principal pueden cambiarse
+		creando páginas HTML y referenciandolas en algunas
+		variables del archivo <filename>conf.php</filename> de
+		su sitio como <literal>cabezote_principal</literal>,
+		<literal>pie_principal</literal> y <literal>fondo</literal>.
+		Los estilos empleados pueden
+		configurarse en la hoja <literal>estilo.css</literal>.
+	</para>
+	<para> La única página que no requiere autenticación es
+		<filename>consulta_web.php</filename><footnote><para>Aunque
+				si ingresa un usuario autenticado del rol 
+				apropiado puede mostrar más opciones</para></footnote> 
+		que puede habilitar para que los casos de su organización 
+		sean consultados desde el web.   
+		Por seguridad, se recomienda que la base 
+		pública sea una segunda base, copia de la información 
+		pública de la base real.
+	</para>
+	<para>Algunos detalles de la interfaz también pueden
+		configurarse en variables del archivo
+		<filename>conf.php</filename> de su sitio.  A continuación
+		se listan las variables de configuración, algunas
+		se tratan en detalle en las siguientes secciones:
+		<variablelist>
+			&varconfphp;
+		</variablelist> 
+	</para>
+</sect1>
+

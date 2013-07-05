@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="reportes">
+	<title>Reportes</title>
+	<para>Los reportes permiten ver con cierto nivel de detalle y
+		con cierto formato la informaci&oacute;n recolectada o parte de la 
+		
+		misma.   En realidad todos, excepto Reporte Consolidado
+		y Consulta Externa son la misma Consulta Web 
+		(ver <xref linkend="consultaweb"></xref>)
+		pero con algunas categorías señaladas para diferenciar 
+		Bélicas de No-Bélicas y una forma de presentaci&oacute;n diferente
+		a la tabla.
+	</para>
+	<para>	En la figura siguiente se presenta la
+		selecci&oacute;n que hace en el formulario consulta web el
+		<literal>Reporte Revista No Bélicas</literal>.
+	</para>
+  <informalfigure>
+	<screenshot><mediaobject><imageobject>
+	<imagedata fileref="preporterevistanobelicas.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+	<imageobject><imagedata fileref="preporterevistanobelicas.png" format="PNG" align="center"></imagedata></imageobject>
+	<textobject><phrase>Reporte Revista No Bélicas</phrase></textobject></mediaobject>
+	</screenshot>
+  </informalfigure>
+
+
+  <para>
+	  Las formas de presentaci&oacute;n para reportes son:
+		<itemizedlist>
+			<listitem>
+				<para>General: presenta de cada
+					caso prácticamente toda la 
+					informaci&oacute;n.</para>
+				<warning><para>
+Los reportes que incluyan fuentes de informaci&oacute;n,
+no debe compartirse fuera de la organizaci&oacute;n.   
+Se espera que esta forma de presentaci&oacute;n sea utilizada en procesos de 
+revisi&oacute;n al interior de la organizaci&oacute;n.
+</para></warning>
+		</listitem>
+			<listitem>
+				<para>Revista: de cada caso presenta
+					s&oacute;lo la informaci&oacute;n publicable. 
+					Para pegar en un procesador de
+					texto es recomendable desmarcar
+					<literal>Memo en varias líneas</literal>
+					en el formulario de la consulta web.
+				</para>
+			</listitem>
+		</itemizedlist>
+	</para>
+	<para>
+	El <literal>Reporte Consolidado</literal> presenta informaci&oacute;n
+	por víctimas. Se trata de un listado de las víctimas ordenado 
+	alfabéticamente junto con un resumen de la violencia 
+	que sufri&oacute; marcada con X en una tabla y c&oacute;digos de sus
+	presuntos responsables.  El filtro de esta consulta es más simple
+	que el de la consulta web, pues s&oacute;lo permite filtrar por
+	una localizaci&oacute;n geográfica y/o un rango de tiempo del caso
+	y/o un rango de tiempo para el ingreso del caso a la base.
+	</para>
+	<informalfigure>
+	<screenshot><mediaobject><imageobject>
+	<imagedata fileref="preporteconsolidado.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+	<imageobject><imagedata fileref="preporteconsolidado.png" format="PNG" align="center"></imagedata></imageobject>
+	<textobject><phrase>Reporte Consolidado</phrase></textobject></mediaobject>
+	</screenshot>
+</informalfigure>
+	<para>
+		La <literal>Consulta Externa</literal> presenta la
+		misma ficha de captura, para permitirle establecer
+		condiciones para una b&uacute;squeda.
+		Los campos que deje en blanco o 'SIN INFORMACI&Oacute;N'
+		especifican que no hay condici&oacute;n (los registros
+		resultantes de la b&uacute;squeda pueden tener cualquier valor
+		en tales campos).
+		Los campos que deje en algun valor especifican que 
+		busca registros que tengan ese valor.
+	</para>
+	<para>
+		Al presionar el bot&oacute;n <literal>Buscar</literal> en general 
+		se buscarán registros que cumplan todas
+		las condiciones que haya establecido.  Sin embargo en 
+		pestañas como localizaci&oacute;n y fuente frecuente
+		que permiten ingresar más de una, si ingresa varias
+		se buscarán registros que cumplan al menos una.
+		De manera análoga si especifica diversos tipos de
+		violencia se buscarán casos con al menos uno.
+	</para>
+	<para>
+		Al emplear esta consulta notará que algunos campos
+		que en la ficha deben llenarse 
+		---como las fechas--- pueden dejarse en blanco.
+	</para>
+
+</sect1>
+

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="presuntosresponsables">
+	<title>Presuntos Responsables</title>
+
+
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichapresponsables.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichapresponsables.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Presuntos Responsables</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+
+	<para>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+Presunto responsable: Permite elegir uno de los configurados
+en la tabla básica Presuntos Responsables (ver <xref linkend="tablasbasicas"/>)
+---que incluye SIN INFORMACI&Oacute;N como posible opci&oacute;n.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Bloque: Hace referencia a un bloque paramilitar.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Frente: Un frente armado de la guerrilla.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Brigada: Del ejercito.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Batall&oacute;n: Del ejercito.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Divisi&oacute;n
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Otro: Permite especificar responsabilidad individual,  como nombres, 
+cargos, alías o n&uacute;mero de integrantes.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Otras agresiones: Presenta la lista de categorías de violencia que
+no son contra víctimas para elegir las que se requieran para el caso
+(puede seleccionar varias en Firefox manteniendo presionada la tecla Control 
+mientras elige con el rat&oacute;n). 
+Si  hay varios presuntos responsables en un caso, cada uno puede tener una
+clasificaci&oacute;n diferente.
+				</para>
+			</listitem>
+
+		</itemizedlist>
+Los botones de la parte inferior permiten especificar
+más de una víctima colectiva.
+	</para>
+</sect3>

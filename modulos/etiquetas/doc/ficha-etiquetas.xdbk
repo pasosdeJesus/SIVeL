@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="etiquetas">
+	<title>Etiquetas</title>
+
+
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichaetiqueta.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichaetiquetas.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Etiquetas</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+	<para>
+		Permite poner etiquetas con comentarios al caso.  Note que debe
+		elegir una de las etiquetas (las cuales se 
+		especificar en la tabla básica Etiqueta), opcionalmente poner
+		un comentario y presionar el bot&oacute;n Añadir.  
+		Es posible cambiar los comentarios --por ejemplo si se emplean
+		etiquetas para marcar casos que deben revisarse, una vez revisados
+		debe quitarse o cambiarse el comentario.
+	</para>
+	<para>Hay algunas etiquetas con nombres de colores (por defecto
+		ROJO, AMARILLO, AZUL y VERDE), que de agregarse a un caso,
+		harán que el caso se presenten con ese color en la consulta
+		en forma de tabla.
+		Puede definirse un nuevo color, creando una nueva etiqueta (desde
+		el men&uacute; Tablas Básicas, ver <xref linkend="tablasbasicas"></xref>) 
+		con el 
+		nombre del color (digamos C&Iacute;AN cuyos componentes RGB en hexadecimal 
+		son 00FFFF) y poniendo una observaci&oacute;n de la forma 'Color #00FFFF.'
+	</para>
+
+</sect3>
+

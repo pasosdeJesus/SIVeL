@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="cconteos">
+	<title>Conteos</title>
+	<para>Aunque los conteos son una herramienta bastante empleada
+		en el contexto de SIVeL, y aunque pueden en algunos casos
+		dar pistas del desarrollo/retroceso del conflicto,
+		esconden la humanidad de las víctimas por lo que 
+		sugerimos emplearlos como complemento y no como sustituto
+		de la descripci&oacute;n detallada de cada caso.
+	</para>
+	<para>Pueden hacerse conteos de víctimas civiles individuales y si
+		configur&oacute; el m&oacute;dulo bélicas, también de víctimas combatientes.  
+		Tenga en cuenta que en los conteos 
+		no se incluyen víctimas colectivas (ver raz&oacute;n
+		en <xref linkend="victimacolectiva"></xref>).
+	</para>
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pconteovindividuales.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pconteovindividuales.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Formulario de Conteo por Víctimas Individuales</phrase></textobject></mediaobject>
+	</screenshot>
+	</informalfigure>	
+	<para>Los datos por contabilizar podrían filtrarse por rango
+		de fechas, tipo de violencia y supracategoría del tipo de
+        violencia.  En general se contabilizarán victimizaciones 
+        --excepto la consulta por Presuntos Responsables que contabilizan 
+        actos<footnote><para>La diferencia entre victimizaci&oacute;n (o violaci&oacute;n) 
+                y acto es que el primero no tiene en cuenta al presunto 
+                responsable mientras que el segundo si.  Por ejemplo un 
+                hecho de violencia donde una víctima es ejecutada por 
+                3 presuntos responsables se contabiliza como 1 victimizaci&oacute;n, 
+                pero como 3 actos. </para></footnote>.  
+        La siguiente figura presenta un conteo desagregado
+        por departamento.
+    </para>
+
+    <informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="presconteo2.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="presconteo2.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Conteo por Víctimas Individuales con Departamento</phrase></textobject></mediaobject>
+	</screenshot>
+	</informalfigure>
+	
+
+    <para>
+        En estos resultados, la cuenta por defecto se desagrega por 
+        localizaci&oacute;n geográfica 
+		(departamento y/o municipio) y puede desagregarse por 
+		otros criterios: Presunto responsable, Sector social, 
+		Sexo, Rango de Edad, Filiaci&oacute;n y Tiempo (i.e por meses).
+	</para>
+		<para>El resultado incluirá conteos por las categorías
+			de violencia, desagregadas por el criterio
+			indicado en el campo "Seg&uacute;n" y por localizaci&oacute;n
+			geográfica.  Por ejemplo a continuaci&oacute;n se presenta
+			parte de un resultado desagregando "Seg&uacute;n" presunto
+			responsable, pero sin desagregar por localizaci&oacute;n
+			geográfica (se desmarco Departamento y Municipio
+			en el formulario).
+		</para>
+		<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="presconteo.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="presconteo.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Conteo por Víctimas Individuales seg&uacute;n Actos de Presuntos Responsables</phrase></textobject></mediaobject>
+	</screenshot>
+	</informalfigure>
+	
+	
+	<para>
+Si se marca "Excluir Categorías Repetidas"
+no se contarán las categorías replicadas, las cuales
+se señalan en la tabla básica Categoría en el campo
+"Contada también como categoría" 
+(ver <xref linkend="tablasbasicas"></xref>).
+Por ejemplo en el caso del marco conceptual por 
+defecto, no se cuentan A10 (Ejecuciones 
+extrajudiciales por violencia política) por cuanto ya 
+están contada como D701 (Homicidio a persona protegida).
+		</para>
+		<warning><para>Si deja marcada la opci&oacute;n 'Municipio' s&oacute;lo se 
+			contarán casos cuyo municipio sea conocido.</para></warning>
+		<para>La tabla resultante puede copiarse y pegarse en
+			una hoja de cálculo para agregar informaci&oacute;n y 
+			generar gráficos.</para>
+</sect1>
+
