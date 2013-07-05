@@ -2520,6 +2520,24 @@ if (!aplicado($idac)) {
 }
 
 
+$idac = '1.2-tb';
+if (!aplicado($idac)) {
+
+    hace_consulta(
+        $db, "INSERT INTO vinculoestado(id, nombre, fechacreacion) 
+        VALUES (40, 'VICEPRESIDENCIA', '2013-07-05')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO organizacion(id, nombre, fechacreacion) 
+        VALUES (17, 'VÍCTIMAS', '2013-07-05')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO etnia (id, nombre, descripcion, fechacreacion) 
+        VALUES (60, 'ROM', '', '2013-07-05')", false
+    );
+
+    aplicaact($act, $idac, 'Aumentadas tablas básicas');
+}
 /*$idac = '1.2-rt4';
 if (!aplicado($idac)) {
     hace_consulta(

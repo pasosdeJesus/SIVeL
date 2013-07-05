@@ -405,11 +405,12 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      * @param string &$tablas   Tablas incluidas en consulta
      * @param array  &$pOrdenar Forma de ordenamiento
      * @param array  &$campos   Campos por mostrar
+     * @param array  &$oconv    Otros campos por incluir en consulta
      *
      * @return void
      */
     static function consultaWebCreaConsulta(&$db, $mostrar, &$where,
-        &$tablas, &$pOrdenar, &$campos
+        &$tablas, &$pOrdenar, &$campos, &$oconv
     ) {
     }
 

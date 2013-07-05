@@ -71,15 +71,19 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
         parent::__construct();
 
         $this->fb_fieldLabels= array(
-           'id_departamento' => _('Departamento'),
-           'id_municipio' => _('Municipio'),
-           'id_clase' => _('Centro Poblado'),
-           'lugar' => _('Lugar'),
-           'sitio' => _('Sitio'),
-           'id_tsitio' => _('Tipo de Ubicación'),
-           'latitud' => _('Latitud'),
-           'longitud' => _('Longitud'),
+            'id_departamento' => _('Departamento'),
+            'id_municipio' => _('Municipio'),
+            'id_clase' => _('Centro Poblado'),
+            'lugar' => _('Lugar'),
+            'sitio' => _('Sitio'),
+            'id_tsitio' => _('Tipo de Ubicación'),
+            'latitud' => _('Latitud'),
+            'longitud' => _('Longitud'),
         );
+        if (isset($GLOBALS['etiqueta']['ubicacionlugar'])) {
+            $this->fb_fieldLabels['lugar'] = 
+                $GLOBALS['etiqueta']['ubicacionlugar'];
+        }
     }
 
     var $fb_excludeFromAutoRules = array('id_tsitio');

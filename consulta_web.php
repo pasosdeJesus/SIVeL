@@ -228,6 +228,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         }
 
 
+        $oconv = array(); // Otros campos que deben incluirse como resultado de consultado además de conv
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
             list($n, $c, $o) = $tab;
             if (($d = strrpos($c, "/"))>0) {
@@ -238,7 +239,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                     array($c, 'consultaWebCreaConsulta'),
                     array(
                         &$db, $pMostrar, &$where, &$tablas,
-                        &$pOrdenar, &$campos
+                        &$pOrdenar, &$campos, &$oconv
                     )
                 );
             } else {
@@ -255,7 +256,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                         $f,
                         array(
                             $db, $pMostrar, &$where, &$tablas,
-                            &$pOrdenar, &$campos, $page
+                            &$pOrdenar, &$campos, &$oconv, $page
                         )
                     );
                 } else {
@@ -373,6 +374,10 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             $q .= $sep . str_replace("_", ".", $k);
             $sep = ", ";
         }
+        foreach ($oconv as $k) {
+            $q .= $sep . str_replace("_", ".", $k);
+        }
+
         $q .= " FROM " . $tablas
             ."  WHERE caso.id<>'" . $GLOBALS['idbus'] . "'" ;
         if ($where != "") {
@@ -853,10 +858,14 @@ class ConsultaWeb extends HTML_QuickForm_Page
             }
         }
 
-        $x =& $this->createElement('radio', 'mostrar', 'csv', _('CSV'), 'csv');
-        $ae[] =&  $x;
-        if ($pMostrar == 'csv') {
-            $t =& $x;
+        if (!isset($GLOBALS['consultaweb_sin_csv'])) {
+            $x =& $this->createElement(
+                'radio', 'mostrar', 'csv', _('CSV'), 'csv'
+            );
+            $ae[] =&  $x;
+            if ($pMostrar == 'csv') {
+                $t =& $x;
+            }
         }
 
         $this->addGroup($ae, null, _('Forma de presentación'), '&nbsp;', false);
