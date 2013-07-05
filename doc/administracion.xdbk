@@ -190,7 +190,7 @@ que un presunto responsable A sea subestructura de B y B
 
   <sect1 id="admin2">
 	  <title>Labores administrativas desde el interprete de comandos</title>
-	  <para>SIVeL 1.1 es multisitio es decir en el mismo directorio de 
+	  <para>SIVeL es multisitio es decir en el mismo directorio de 
 		  fuentes pueden configurarse diversas instancias de SIVeL 
 		  cada una con su base de datos.  
 		  Esto facilita la actualización de las fuentes.  </para>
@@ -602,7 +602,7 @@ php herram/hex2bin.php &lt; /tmp/hex &gt; /tmp/cifrado
 	</sect2>
     <sect2 id="nuevositio">
 	<title>Configuración de un nuevo sitio</title>
-    <para>Dado que SIVeL 1.1 es multisitio es posible sobre una misma
+    <para>Dado que SIVeL es multisitio es posible sobre una misma
         instalación de fuentes, configurar diversos sitios cada uno con su
         URL, autenticación y base de datos únicos.</para>
     <para>Para agregar un nuevo sitio (digamos <literal>sivelmb</literal>) 
@@ -657,8 +657,7 @@ ln -s sivelmb 127.0.0.1_SIVELMB
 			autenticación aunque en tal caso cuenta con
 			menos filtros de búsqueda y puede tener
 			restricciones (fecha mínima, fecha máxima y
-			cantidad de resultados,
-			ver <xref linkend="detalles-interfaz"></xref>).
+			cantidad de resultados).
 		</para>
 		<para>
 			Suponiendo que opera un SIVeL para consulta

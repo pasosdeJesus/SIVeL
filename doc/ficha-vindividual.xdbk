@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="victimaindividual">
+	<title>Víctima Individual</title>
+
+
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichavictimaindividual.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichavictimaindividual.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Víctima Individual</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+
+	<para>
+
+Antes de ingresar un caso es conveniente que busque si los nombres
+de víctimas ya están en otros casos y de ser así que busque aclarar
+si se trata de personas diferentes hom&oacute;nimas, o realmente de la misma
+persona.
+	</para>
+	<para>
+En el momento de ingresar una víctima en un caso, teclee parte del
+nombre y/o del apellido y pulse sobre el enlace "Buscar persona." 
+En el caso de un familiar teclee parte del nombre y/o apellido
+del familiar y pulse sobre el enlace "Buscar".  Con esto se
+abrirá una nueva ventana con los nombres de víctimas que 
+se parezcan al que tecle&oacute;, también aparecerán enlaces a los casos
+en los que la persona aparezca como víctima o como familiar,
+esos enlaces lo dirigen a un reporte general del caso en otra
+pestaña por lo que puede emplearlos tranquilamente para verificar
+si la persona que busca efectivamente es la que se referencia en
+los otros casos.   Cuando ubiqué la persona en la ventana con
+nombres de personas presione sobre el nombre de la persona.
+Sugerimos que haga esto para que se completen automáticamente los datos
+conocidos de esa persona (e.g. Procedencia, Documento de Identidad, Nombres,
+Apellidos, Fecha de Nacimiento y Sexo) y para que quede la misma persona
+relacionada en los dos casos.  
+	</para>
+
+	<itemizedlist>
+		<listitem>
+			<para>
+Procedencia: Sitio de nacimiento de la persona.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+Documento de Identidad: Especifique el tipo y el n&uacute;mero.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+Nombres y Apellidos: Se recomienda escribirlos en may&uacute;sculas y con tildes.
+			</para>
+		</listitem>
+
+		<listitem>
+			<para>
+Fecha de Nacimiento o Edad: Especifique una de las 2 (edad se refiere
+a la edad en el momento de los hechos).
+			</para>
+		</listitem>
+
+		<listitem>
+			<para>
+Hijos y Sexo: Permite especificar informaci&oacute;n demográfica 
+(hijos se refiere a cantidad en el momento de los hechos).
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+Profesi&oacute;n: Configurables en la tabla básica del mismo nombre.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+Rango de edad: Debe ser acorde con la edad (a menos que no se haya 
+especificado edad).  Si especific&oacute; la edad, puede dejar esta casilla
+SIN INFORMACI&Oacute;N y el sistema pondrá el rango correspondiente.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+Filiaci&oacute;n política: Opciones configurables en la tabla básica
+del mismo  nombre.
+			</para>
+		</listitem>
+
+		<listitem>
+			<para>
+Organizaci&oacute;n Social: Si la víctima hace parte de una organizaci&oacute;n.
+Los posibles tipos de organizaciones pueden configurarse en la tabla
+básica del mismo nombre.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+Sector Social: De la víctima.  
+Se configuran en la tabla básica del mismo nombre.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+Vínculo Estado: Se selecciona informaci&oacute;n si la víctima tenía 
+alg&uacute;n vínculo con el Estado (e.g. GOBERNACI&Oacute;N, 
+CONCEJO MUNICIPAL, ALCALD&Iacute;A).
+Los posibles vínculos se configuran en una tabla básica.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+Organizaci&oacute;n Armada: Esta casilla se llena si la víctima hacía parte de 
+una organizaci&oacute;n armada legal o ilegal.  Las opciones corresponden
+a la tabla básica Presunto Responsable.
+			</para>
+		</listitem>
+
+		<listitem>
+			<para>
+Antecedentes: de la víctima.  Las opciones provienen de la tabla básica
+del mismo nombre.
+			</para>
+		</listitem>
+	</itemizedlist>
+	<para>
+Los botones de la parte inferior permiten
+especificar más de una víctima de forma
+análoga a otras pestañas (ver <xref linkend="ubicacion"/>).
+	</para>
+</sect3>
+

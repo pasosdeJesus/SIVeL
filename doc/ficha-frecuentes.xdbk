@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="fuentesfrecuentes">
+	<title>Fuentes Frecuentes</title>
+
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichafrecuentes.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichafrecuentes.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Fuentes frecuentes</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+
+	<para>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+Fuente: Permite elegir una de las fuentes configuradas en tablas básicas
+(ver <xref linkend="tablasbasicas"/>).
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Fecha: De la fuente, debe ser posterior a la fecha del hecho.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Ubicaci&oacute;n: N&uacute;mero de la página del documento o 
+secci&oacute;n donde se encuentra la informaci&oacute;n.
+
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Clasificaci&oacute;n: Se referencia los c&oacute;digos de los tipos de 
+violencia que la fuente describe (ver <xref linkend="actos"/>).
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Ubicaci&oacute;n física: Referencia el sitio físico donde la 
+organizaci&oacute;n almacena la fuente (e.g carpeta DH, caja fuerte, etc.) 
+o una URL.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Anexo: Permite elegir uno de los anexos del casos 
+(ver <xref linkend="anexos"></xref>), indicando así que la fuente
+frecuente es justamente ese anexo.
+				</para>
+			</listitem>
+
+		</itemizedlist>
+
+En la parte inferior hay botones que permiten especificar más
+de una fuente frecuente para el caso.  Son análogos a los de la
+pestaña Localizaci&oacute;n (ver <xref linkend="ubicacion"/>).
+	</para>
+</sect3>
+

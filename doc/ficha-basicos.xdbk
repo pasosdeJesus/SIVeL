@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="basicos">
+	<title>Datos Básicos</title>
+
+	<para>
+Entre los datos básicos de un caso el indispensable 
+es la fecha.  Si desconoce o no requiere especificar
+otros, en esta y en otras pestañas déjelos en blanco o
+si en cuadros de selección en la
+opci&oacute;n <literal>SIN INFORMACI&Oacute;N</literal>.
+	</para>
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichabasicos.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichabasicos.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Datos básicos</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+	<para>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+No. Caso: Junto con el bot&oacute;n <literal>Buscar</literal> que está a su 
+lado, permite buscar un caso por n&uacute;mero. 
+				</para>
+			</listitem> 
+			<listitem>
+				<para>
+Titulo:
+Permite poner un título al caso.   C&oacute;mo la consulta web permite buscar
+por título, si tiene una publicaci&oacute;n peri&oacute;dica
+es práctico que ponga como título el n&uacute;mero de la edici&oacute;n en la que 
+apareci&oacute; el caso. También podría poner detalles del estado del caso 
+(por ejemplo Incompleto).
+				</para>
+			</listitem> 
+			<listitem>
+				<para>
+Fecha: 
+Especifica la fecha del hecho.  Es un campo indispensable, si no conoce la
+fecha del hecho puede acordar una convenci&oacute;n por ejemplo 15 para un día
+desconocido, Jun para un mes desconocido y el año en curso cuando el
+año es desconocido.  En estos caso incluya una anotaci&oacute;n en el 
+Memo (ver <xref linkend="memo"/>) que indique la necesidad de conseguir 
+más informaci&oacute;n o que explique la ausencia, y añada la
+etiqueta <literal>MES_INEXACTO</literal> o bien 
+<literal>DIA_INEXACTO</literal>.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Hora y duraci&oacute;n de los hechos en caso de conocerse.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Intervalo: 
+Empleelo si no conoce la hora.  Puede cambiar las opciones desde la 
+tabla básica correspondiente.  (Ver <xref linkend="tablasbasicas"/>).
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Regi&oacute;n:						
+Márquela en caso de que no conozca el departamento donde ocurri&oacute; el hecho,
+teniendo en cuenta que el caso no saldrá en estadísticas si no específica 
+un departamento.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Frontera:
+Especifíquela si el caso ocurre en alguna frontera.  Si el caso ocurre
+fuera del país puede especificarlo en la pestaña siguiente (ver <xref linkend="ubicacion"/>).
+				</para>
+			</listitem>
+		</itemizedlist>
+
+	</para>
+
+	<para>
+En la parte inferior de todas las pestañas aparecen los siguientes botones:
+
+		<itemizedlist>
+			<listitem>
+				<para>
+					Anterior: Conduce a la pestaña precedente.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Val. y Rep. Ger: Genera un reporte general y valida informaci&oacute;n 
+reportando pestañas que falten por llenar del caso y errores 
+ortográficos en el memo.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Men&uacute;: Conduce al men&uacute; principal.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Elimina caso: Permite eliminar el caso que se edita, previa confirmaci&oacute;n 
+por parte del usuario.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Caso nuevo: Inicia edici&oacute;n de un caso nuevo.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Siguiente: Conduce a la pestaña siguiente.
+				</para>
+			</listitem>
+		</itemizedlist>
+	</para>
+</sect3>

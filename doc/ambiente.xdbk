@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<chapter id="ambiente">
-	<title>Ambiente de operación</title>
-
 	<para>SIVeL puede emplearse en un banco de documentación
 		de violaciones a DDHH, DIH y VPS, por esto además de personas
 		capacitadas, requiere una infraestructura tecnológica en la 
@@ -394,4 +391,3 @@ de las víctimas.
 </itemizedlist>
 					</para>
 				</sect1>
-</chapter>
