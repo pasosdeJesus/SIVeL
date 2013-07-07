@@ -492,7 +492,7 @@ class PagSegJudicial extends PagBaseMultiple
     }
 
     static function consultaWebCreaConsulta(&$db, $mostrar, &$where, &$tablas,
-        &$pOrdenar, &$campos)
+        &$pOrdenar, &$campos, &$oconv)
     {
         if ($mostrar == "judicial") {
             consulta_and_sinap($where, "proceso.id_caso", "caso.id");

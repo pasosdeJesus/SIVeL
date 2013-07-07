@@ -960,7 +960,7 @@ class ResConsulta
                                 array($c, 'resConsultaRegistro'),
                                 array(&$this->db, $this->mostrar,
                                 $idcaso, $this->campos,
-                                $this->conv, $sal, $retroalim)
+                                $this->conv, &$sal, &$retroalim)
                             );
                         } else {
                             echo_esc(

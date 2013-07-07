@@ -97,7 +97,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
             'departamentodecl' => _('Departamento Declaración'),
             'municipiodecl' => _('Municipio Declaración'),
             'id_declaroante' => _('Declaro Ante'),
-            'id_inclusion' => _('Inclusión'),
+            'id_inclusion' => _('Inclusión RUV'),
             'id_acreditacion' => _('Acreditación'),
             'retornado' => _('Retornado'),
             'reubicado' => _('Reubicado'),
@@ -285,33 +285,8 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         );
 
 
-/*        $e =& $form->getElement('demandante');
-        if (isset($e) && !PEAR::isError($e)) {
-            $e->setSize(55);
-            $e->setMaxLength(100);
-        }
-        $e =& $form->getElement('demandado');
-        if (isset($e) && !PEAR::isError($e)) {
-            $e->setSize(55);
-            $e->setMaxLength(100);
-        }
-        $e =& $form->getElement('poderdante');
-        if (isset($e) && !PEAR::isError($e)) {
-            $e->setSize(55);
-            $e->setMaxLength(100);
-        }
-        $e =& $form->getElement('telefono');
-        if (isset($e) && !PEAR::isError($e)) {
-            $e->setSize(55);
-            $e->setMaxLength(50);
-        }
-        $e =& $form->getElement('observaciones');
-        if (isset($e) && !PEAR::isError($e)) {
-            $e->setCols(75);
-            $e->setRows(2);
-        }
-        $e =& $form->getElement('id');
-        $e =& $form->addElement('hidden', 'id_desplazamiento', $e->getValue()); */
+        $s =& $form->getElement('otrosdatos');
+        $s->setSize(75);
     }
 }
 

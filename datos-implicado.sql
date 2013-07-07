@@ -43,6 +43,7 @@ INSERT INTO organizacion(id, nombre, fechacreacion) VALUES (13, 'JUVENIL', '2001
 INSERT INTO organizacion(id, nombre, fechacreacion) VALUES (14, 'AMBIENTALISTA', '2001-01-01');
 INSERT INTO organizacion(id, nombre, fechacreacion) VALUES (15, 'OTRA', '2001-01-01');
 INSERT INTO organizacion(id, nombre, fechacreacion) VALUES (16, 'SIN INFORMACIÓN', '2001-01-01');
+INSERT INTO organizacion(id, nombre, fechacreacion) VALUES (17, 'VÍCTIMAS', '2013-07-05');
 
 SELECT setval('organizacion_seq', max(id)) FROM organizacion;
 
@@ -155,8 +156,9 @@ INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (35, 'ALCALDIA MENOR
 INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (36, 'SECRETARIAS LOCALES', '2001-01-01');
 INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (37, 'CASAS DE JUSTICIA', '2001-01-01');
 INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (39, 'TRIBUNALES', '2001-01-01');
+INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (40, 'VICEPRESIDENCIA', '2013-07-05');
 
-seLECT setval('vinculoestado_seq', max(id)) FROM vinculoestado;
+SELECT setval('vinculoestado_seq', max(id)) FROM vinculoestado;
 
 -- trelacion inicialmente de parametros:ParentesecoFamiliar
 INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
@@ -251,6 +253,7 @@ INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (56, 'Yagua', 
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (57, 'Yanacona', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (58, 'Yucuna', '', '2011-04-29');
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (59, 'Yukpa', '', '2011-04-29');
+INSERT INTO etnia (id, nombre, descripcion, fechacreacion) VALUES (60, 'ROM', '', '2013-07-05');
 
 -- iglesia
 
