@@ -68,8 +68,9 @@
                     value="<?php 
     $d = new DateTime(); 
     $d->sub(new DateInterval('P6M')); 
-    echo $d->format('Y-m-d'); ?>" 
-                    size="7" style="float:right;" />
+    echo isset($GLOBALS['mapag_fechadesde']) ? $GLOBALS['mapag_fechadesde'] :
+        $d->format('Y-m-d'); ?>" 
+                    size="11" style="float:right;" />
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -78,8 +79,10 @@
 				<div class="right">
                     <input type="text" name="hasta" class="inputHasta" 
                         id="inputHasta" 
-                        value="<?php echo date('Y-m-d') ?>" 
-                        size="7" style="float:right;" />
+                        value="<?php
+    echo isset($GLOBALS['mapag_fechahasta']) ? $GLOBALS['mapag_fechahasta'] :
+        date('Y-m-d') ?>" 
+                        size="11" style="float:right;" />
 				</div>
 				<div class="clear"></div>
 			</div>
