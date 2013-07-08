@@ -124,6 +124,12 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
         $this->latitud = ($value == '') ? 'null' : $value;
     }
 
+    function setid_municipio($value)
+    {
+        $this->id_municipio = ($value == '') ? 'null' : (int)$value;
+    }
+
+
     /**
      * Prepara antes de generar formulario.
      *

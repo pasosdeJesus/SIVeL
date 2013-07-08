@@ -174,6 +174,8 @@ class PagUbicacion extends PagBaseMultiple
     function nullVar()
     {
         $this->bubicacion = null;
+        PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
+        //$this->nullVarUbicacion();
     }
 
     /**

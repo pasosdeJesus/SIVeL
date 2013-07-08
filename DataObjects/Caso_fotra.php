@@ -47,15 +47,15 @@ class DataObjects_Caso_fotra extends DB_DataObject_SIVeL
 
     var $fb_addFormHeader = false;
     //var $fb_selectAddEmpty = array('id_fotra');
-    var $fb_preDefOrder = array('anotacion', 'fecha',
-        'ubicacionfisica', 'tfuente'
+    var $fb_preDefOrder = array(
+        'anotacion', 'fecha', 'ubicacionfisica', 'tfuente'
     );
-    var $fb_fieldsToRender = array('anotacion', 'fecha',
-        'ubicacionfisica', 'tfuente'
+    var $fb_fieldsToRender = array(
+        'anotacion', 'fecha', 'ubicacionfisica', 'tfuente'
     );
     var $fb_enumFields = array('tfuente');
-    var $fb_enumOptions = array('tfuente' =>
-        array('Directa', 'Indirecta')
+    var $fb_enumOptions = array(
+        'tfuente' => array('Directa', 'Indirecta')
     );
     var $fb_excludeFromAutoRules = array('fecha');
     /**

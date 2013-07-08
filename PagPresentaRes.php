@@ -71,7 +71,7 @@ class PagPresentaRes extends PagBaseSimple
      *
      * @return void
      */
-    function PagPresentaRes($nomForma, $opciones)
+    function PagPresentaRes($nomForma, $opciones = null)
     {
         parent::PagBaseSimple($nomForma);
         $this->titulo = _('Forma de Presentar Resultados');
