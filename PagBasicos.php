@@ -675,7 +675,8 @@ class PagBasicos extends PagBaseSimple
         ) {  //Busqueda
             $this->addElement('hidden', 'id', $GLOBALS['idbus']);
 
-            $slan = isset($_SESSION['LANG']) ?  $_SESSION['LANG'] : 'es';
+            $slan = isset($_SESSION['LANG']) ?  
+                substr($_SESSION['LANG'], 0, 2) : 'es';
             $e =& $this->addElement(
                 'date', 'fini', _('Fecha inicial'),
                 array('language' => $slan, 'addEmptyOption' => true,
