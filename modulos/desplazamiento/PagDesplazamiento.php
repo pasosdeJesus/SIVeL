@@ -281,6 +281,7 @@ class PagDesplazamiento extends PagBaseMultiple
     function procesa(&$valores)
     {
         $fechaex = arr_a_fecha($valores['fechaexpulsion'], true); 
+        $fechall = arr_a_fecha($valores['fechallegada'], true); 
 
         $es_vacio = (!isset($valores['expulsion'])
                 || $valores['expulsion'] === ''
@@ -295,6 +296,14 @@ class PagDesplazamiento extends PagBaseMultiple
             PagUbicacion::nullVarUbicacion('municipiodecl', 'departamentodecl');
             return false;
         }
+        if ($fechall < $fechaex) {
+            error_valida(
+                _('Fecha de llegada no puede ser anterior a la de expulsión'),
+                $valores
+            );
+            return false;
+        }
+
         if (in_array(31, $_SESSION['opciones'])
             && !in_array(21, $_SESSION['opciones'])
         ) {
@@ -312,15 +321,22 @@ class PagDesplazamiento extends PagBaseMultiple
             . " AND fechaexpulsion='$fechaex';";
         $this->bdesplazamiento->useMutators = true;
         $nr = $db->getOne($q);
+        if ($this->bdesplazamiento->_do->fechaexpulsion == null ||
+            $this->bdesplazamiento->_do->fechaexpulsion == ''
+        ) {
+            if ($nr > 0) {
+                error_valida(
+                    _('Ya había desplazamiento con esa fecha de expulsión'),
+                    $valores
+                );
+                return false;
+            }
+        }
+
         if ($nr == 0) {
             $this->bdesplazamiento->forceQueryType(
                 DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
             );
-/*            print_r($valores);
-            $q = "INSERT INTO desplazamiento (id_caso, fechaexpulsion,
-            expulsion, fechallegada, llegada, ) " .
-                " VALUES ('$idcaso', '$fechaex');";
-            $r = hace_consulta($db, $q); */
         } else {
             $this->bdesplazamiento->forceQueryType(
                 DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEUPDATE
