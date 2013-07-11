@@ -224,13 +224,13 @@ class PagDesplazamiento extends PagBaseMultiple
             $f =& $this->getElement('fechaexpulsion');
             $f->setValue(array(
                 'd' => $pf[2],
-                'm' => $pf[1],
+                'M' => $pf[1],
                 'Y' => $pf[0]
             ));
             $f =& $this->getElement('fechallegada');
             $f->setValue(array(
                 'd' => $pf[2],
-                'm' => $pf[1],
+                'M' => $pf[1],
                 'Y' => $pf[0]
             ));
         } else {
