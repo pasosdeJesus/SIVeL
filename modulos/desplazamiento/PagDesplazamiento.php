@@ -288,12 +288,12 @@ class PagDesplazamiento extends PagBaseMultiple
             );
 
         if ($es_vacio) {
-            PagUbicacion::nullVarUbicacion('municipiodecl', 'departamentodecl');
+            PagUbicacion::nullVarUbicacion('departamentodecl', 'municipiodecl');
             return true;
         }
 
         if (!$this->validate() ) {
-            PagUbicacion::nullVarUbicacion('municipiodecl', 'departamentodecl');
+            PagUbicacion::nullVarUbicacion('departamentodecl', 'municipiodecl');
             return false;
         }
         if ($fechall < $fechaex) {
@@ -307,7 +307,7 @@ class PagDesplazamiento extends PagBaseMultiple
         if (in_array(31, $_SESSION['opciones'])
             && !in_array(21, $_SESSION['opciones'])
         ) {
-            PagUbicacion::nullVarUbicacion('municipiodecl', 'departamentodecl');
+            PagUbicacion::nullVarUbicacion('departamentodecl', 'municipiodecl');
             return true;
         }
 
@@ -350,7 +350,7 @@ class PagDesplazamiento extends PagBaseMultiple
             die($ret->getMessage());
         }
 
-        PagUbicacion::nullVarUbicacion('municipiodecl', 'departamentodecl');
+        PagUbicacion::nullVarUbicacion('departamentodecl', 'municipiodecl');
 
         caso_funcionario($idcaso);
         return  $ret;
