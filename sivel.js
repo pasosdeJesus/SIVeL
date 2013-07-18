@@ -91,6 +91,31 @@ function enviar_grupoper(id, nombre, anotaciones)
 	window.close();
 }
 
+// Basada en función de Luca Urech <lucaurech@yahoo.de>
+function llenaMunicipio(iddep, idmun) {
+	var dep = $("#" + iddep).val();
+	var par = { 
+		id_departamento: dep
+       	};
+	var x = $.getJSON("json_municipios.php", par);
+	x.done(function( data ) {
+		var op = '<option value=""></option>';
+		$.each( data, function ( i, item ) {
+			op += '<option value="' 
+			+ item.id + '">' + item.nombre
+			+ '</option>';
+		});
+		$("#" + idmun ).html(op);
+	});
+	x.error(function() {
+		alert('Problema leyendo Municipios');
+	});
+	if (dep == 0) {
+		$("#" + idmun).attr("disabled", true);
+	} else {
+		$("#" + idmun).attr("disabled", false);
+	}
+}
 
 $(function() {
  

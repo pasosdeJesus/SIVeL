@@ -119,7 +119,7 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
     height: 100px;
 }
 </style>
-<script src="lib/jquery-1.9.1/jquery.min.js"></script>
+<script src="lib/jquery-1.10.2.js"></script>
 <script src="lib/jqueryui-1.10.3/jquery-ui.min.js"></script>
 <script type = "text/javascript" src="sivel.js" type="text/javascript"></script>
 <script type = "text/javascript">

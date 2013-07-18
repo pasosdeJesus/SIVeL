@@ -48,8 +48,10 @@ sudo pear install PHP_CodeSniffer
 herram/estandares.sh
 			</screen>
 			Los errores quedarán en el archivo 
-			<filename>/tmp/e</filename>
+			<filename>/tmp/e</filename>.
 		</para>
+		<para>Las fuentes en Javascript seguirán la guía de éstilo de
+			Google <xref linkend="javascriptgoogle"></xref></para>
 	</sect2>
 
 
