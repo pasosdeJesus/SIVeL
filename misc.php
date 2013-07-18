@@ -459,6 +459,7 @@ function valida(&$page)
  * @param string $msg     Mensaje de error
  * @param array  $valores Valores del formulario por recuperar
  * @param string $iderr   Si es no nulo variable de sesión donde ponerlo
+ * @param string $enhtml  Mensaje en HTML
  *
  * @return void
      */
@@ -1782,11 +1783,11 @@ function convierte_valor(&$do, $campo, $tipo)
 /**
  * Asigna un campo de un DataObject con el valor recibido del formulario
  *
- * @param array   $valor Valor por asignar
- * @param object  $tabla Tabla 
- * @param object  $campo Campo de tabla $tabla
- * @param array   $estbd   Estructura de base sacada de .ini.  Si es null esta
- *                       función la llena
+ * @param array   $valor  Valor por asignar
+ * @param object  $rel    Tabla 
+ * @param object  $campo  Campo de tabla $tabla
+ * @param array   &$estbd Estructura de base sacada de .ini.  Si es null esta
+ *                        función la llena
  *
  * @return Valor asignable a un campo $campo del DataObject de tabla $rel
  */
@@ -1904,7 +1905,7 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
         if (!$ignora) {
             if (($tipo & 2) && $tipo != 134 && $tipo !=18) {
                 // Cadena que no es fecha
-                if (trim($valor) != '*')  {
+                if (trim($valor) != '*') {
                     consulta_and(
                         $db, $w2, "$rel.$campo", "%" .trim($valor) . "%",
                         ' ILIKE ', 'AND'

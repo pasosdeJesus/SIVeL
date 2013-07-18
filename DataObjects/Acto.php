@@ -58,7 +58,7 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
            'id_categoria' => _('Categoria'),
            'id_persona' => _('Persona'),
            'id_caso' => _('Caso'),
-       );
+        );
     }
 
 
@@ -91,7 +91,9 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
                 . "</td><td>" . $ca->id_tviolencia
                 . (int)$ca->id . " "
                 . htmlentities($ca->nombre, ENT_COMPAT, 'UTF-8') . "</td>"
-                . "<td>" . htmlentities("{$vi->nombres}  {$vi->apellidos}", ENT_COMPAT, 'UTF-8')
+                . "<td>" . htmlentities(
+                    "{$vi->nombres}  {$vi->apellidos}", ENT_COMPAT, 'UTF-8'
+                )
                 . "</td>"
                 . "<td><a href='{$_SERVER['PHP_SELF']}?eliminaacto="
                 . (int)$p->id_presponsable . ":"

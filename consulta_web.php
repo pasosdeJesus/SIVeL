@@ -228,7 +228,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         }
 
 
-        $oconv = array(); // Otros campos que deben incluirse como resultado de consultado además de conv
+        $oconv = array(); // Campos resultado además de conv
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
             list($n, $c, $o) = $tab;
             if (($d = strrpos($c, "/"))>0) {
@@ -671,7 +671,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         );
         $sel->loadArray($options);
 
-        $sel =& $this->addElement( 'text', 'descripcion', _('Descripción'));
+        $sel =& $this->addElement('text', 'descripcion', _('Descripción'));
         $sel->setSize(80);
 
 

@@ -450,7 +450,7 @@ class ReporteGeneral extends HTML_QuickForm_Action
             $GLOBALS['cw_ncampos'],
             array('m_fuentes'=>'Fuentes')
         );
-        $html_rep = ResConsulta::reporteGeneralHtml( $idcaso, null,$campos);
+        $html_rep = ResConsulta::reporteGeneralHtml($idcaso, null, $campos);
         echo "<pre>";
         echo $html_rep;
         echo "</pre>";

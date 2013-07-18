@@ -2387,7 +2387,7 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db, "CREATE COLLATION es_co_utf_8 (LOCALE = 'es_CO.UTF-8')", false
     );
-    foreach(array(
+    foreach (array(
         'Antecedente', 'Categoria', 'Clase', 'Contexto',
         'Departamento', 'Etnia', 'Ffrecuente', 'Filiacion', 'Frontera', 
         'Fotra', 'Ffrecuente', 'Grupoper',
@@ -2504,7 +2504,7 @@ if (!aplicado($idac)) {
         fechacreacion, fechadeshabilitacion FROM municipio
         WHERE id_departamento='0');", false
     );
-    foreach(array('clase', 'ubicacion', 'persona') as $t) {
+    foreach (array('clase', 'ubicacion', 'persona') as $t) {
         hace_consulta(
             $db, "UPDATE $t SET id_departamento = 10000
             WHERE id_departamento = 0", false

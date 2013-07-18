@@ -31,7 +31,7 @@ require_once 'DB_DataObject_SIVeL.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Antecedente_caso extends DB_DataObject_SIVeL
+class DataObjects_Antecedente_Caso extends DB_DataObject_SIVeL
 {
 
     var $__table = 'antecedente_caso';                // table name

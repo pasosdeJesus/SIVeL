@@ -80,8 +80,14 @@ function conv_violacion(&$db, $tipoi, $id_presp, &$obs)
 function sin_tildes($s)
 {
     $r = str_replace(
-        array('á', 'é', 'í', 'ó', 'ú', 'ü', 'Á', 'É', 'Í', 'Ó', 'Ú', 'Ü', 'ñ', 'Ñ'),
-        array('a', 'e', 'i', 'o', 'u', 'u', 'A', 'E', 'I', 'O', 'U', 'U', 'n', 'N'),
+        array(
+            'á', 'é', 'í', 'ó', 'ú', 'ü', 'Á', 'É', 'Í', 
+            'Ó', 'Ú', 'Ü', 'ñ', 'Ñ'
+        ),
+        array(
+            'a', 'e', 'i', 'o', 'u', 'u', 'A', 'E', 'I', 
+            'O', 'U', 'U', 'n', 'N'
+        ),
         $s
     );
     $r = str_replace(
