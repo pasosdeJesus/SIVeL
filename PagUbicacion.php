@@ -483,6 +483,92 @@ class PagUbicacion extends PagBaseMultiple
 
 
     /**
+     * Modifica campos interdependientes Departamento/Muncipio/Clase
+     *
+     * @param object &$db     Base de datos
+     * @param object &$form   Formulario
+     * @param object &$do     DataObject donde estan los campos
+     * @param object $nomcdep Nombre campo departamento
+     * @param object $nomcmun Nombre campo municipio
+     * @param object $nomccla Nombre campo clase
+     *
+     */
+    static function modCamposUbicacion(&$form, &$do,
+        $nomcdep = 'id_departamento', 
+        $nomcmun = 'id_municipio', $nomccla = 'id_clase'
+    ) {
+        if (PEAR::isError($do)) {
+            die($do->getMessage()." - ".$do->getUserInfo());
+        }
+
+        $d = $m = $c = null;
+        $d =& $form->getElement($nomcdep);
+        if ($nomcmun == null) {
+            $d->updateAttributes(array(
+                "id" => "$nomcdep",
+            ));
+        } else {
+            $d->updateAttributes(array(
+                "id" => "$nomcdep",
+                "onchange" => "llenaMunicipio('$nomcdep', "
+                . "'$nomcmun')"
+            ));
+            $m =& $form->getElement($nomcmun);
+            if ($nomccla == null) {
+                $m->updateAttributes(array(
+                    "id" => "$nomcmun",
+                ));
+            } else {
+                $d->updateAttributes(array(
+                    "id" => "$nomcmun",
+                    "onchange" => "llenaClase('$nomcdep', "
+                    . "'$nomcmun', '$nomccla')"
+                ));
+                $c =& $form->getElement($nomccla);
+                $c->updateAttributes(array(
+                    "id" => "$nomccla",
+                ));
+            }
+        }
+        if ($do->$nomcdep != null && $m != null) {
+            $m->_options = array();
+            $db =& $do->getDatabaseConnection();
+            $options = htmlentities_array(
+                $db->getAssoc(
+                    "SELECT id, nombre FROM municipio WHERE id_departamento='"
+                    . $do->$nomcdep . "' "
+                    . " ORDER BY nombre"
+                )
+            );
+            $m->loadArray($options);
+            if ($nomcmun != null && $do->$nomcmun != null && $c != null) {
+                $c->_options = array();
+                $options = htmlentities_array(
+                    $db->getAssoc(
+                        "SELECT id, nombre FROM clase WHERE id_departamento='"
+                        . $do->$nomcdep . "' "
+                        . " AND id_municipio='" .$do->$nomcmun . "' "
+                        . " ORDER BY nombre"
+                    )
+                );
+                $c->loadArray($options);
+            } else  if ($c != null) {
+                $c->updateAttributes(array(
+                    "id" => "$nomccla",
+                    "disabled" => "true")
+                );
+            }
+        } else  if ($m != null) {
+            $m->updateAttributes(array(
+                "id" => "$nomcmun",
+                "disabled" => "true")
+            );
+        }
+
+    }
+
+
+    /**
      * Agrega elementos al formulario.
      * Ver documentación completa en clase base.
      *
