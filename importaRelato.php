@@ -158,8 +158,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         if (!$relatos) {
             $e = libxml_get_errors();
             var_dump($e);
-//            var_dump($cont);
-//            var_dump($relatos);
             die(_("No pudo cargarse") . " '" . $pArchivo . "'");
         }
 
@@ -501,7 +499,8 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                             $db, 'presponsable', $v, $obs
                         );
                     } else {
-                        $dvictima->organizacionarmada = DataObjects_Presponsable::idSinInfo();
+                        $dvictima->organizacionarmada
+                            = DataObjects_Presponsable::idSinInfo();
                     }
                     if (!$dvictima || !$dvictima->insert()) {
                         $m = _("No pudo insertar víctima") ." '"
@@ -767,7 +766,7 @@ class PagImportaRelato extends HTML_QuickForm_Page
             . 'número de casos en la base.'
         );
 
-/*        $this->addGroup(
+        /* $this->addGroup(
             $opch, null, 'Coordenadas', '&nbsp;', false
         ); */
         agrega_control_CSRF($this);

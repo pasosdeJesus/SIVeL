@@ -66,7 +66,8 @@ function muestra()
     //echo "rol=$rol";
     echo "<table>";
     echo "<tr>" .
-        "<th>Nombres y apellidos</th><th>V&iacute;ctima en</th><th>Familiar en</th>" .
+        "<th>Nombres y apellidos</th><th>V&iacute;ctima en</th>" .
+        "<th>Familiar en</th>" .
         "</tr>";
 
     while ($result->fetchInto($row)) {

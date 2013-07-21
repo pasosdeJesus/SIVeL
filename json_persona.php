@@ -30,7 +30,9 @@ if (!isset($_GET['term'])) {
     encabezado_envia();
     die("Error: Falta variable <i>term</i> con nombre buscado");
 }
-$term = trim(strip_tags($_GET['term'])); //retrieve the search term that autocomplete sends
+//retrieve the search term that autocomplete sends
+$term = trim(strip_tags($_GET['term'])); 
+
 
 //trigger_error("term=$term");
 $consNomVic =  trim(a_minusculas(sin_tildes($term)));
@@ -41,7 +43,9 @@ if (strlen($consNomvic) > 0) {
 $where = " to_tsvector('spanish', unaccent(persona.nombres) "
     . " || ' ' || unaccent(persona.apellidos)) @@ "
     . "to_tsquery('spanish', '$consNomvic')";
-$qstring = "SELECT trim(nombres || ' ' || apellidos), id || ';' || char_length(nombres) || ';' || char_length(apellidos) FROM persona WHERE $where";
+$qstring = "SELECT trim(nombres || ' ' || apellidos), "
+    . " id || ';' || char_length(nombres) || ';' || char_length(apellidos) "
+    . " FROM persona WHERE $where";
 //trigger_error("$qstring");
 $res = hace_consulta($db, $qstring);
 
@@ -49,9 +53,9 @@ $row = array();
 $resrow = array();
 $row_set = array();
 while ($res->fetchInto($row)) {
-		$resrow['id'] = $row[1];
-		$resrow['value'] = stripslashes($row[0]);
-		$row_set[] = $resrow;
+    $resrow['id'] = $row[1];
+    $resrow['value'] = stripslashes($row[0]);
+    $row_set[] = $resrow;
 }
 
 echo json_encode($row_set);

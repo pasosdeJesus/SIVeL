@@ -254,7 +254,8 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
     );
     $a = new Auth("DB", $params, "login_function");
     $a->setSessionName($snru);
-    //echo "<hr>OJO En autentica_usuario $opcion Auth sesion:"; print_r($a->session); echo "<br>";
+    //echo "<hr>OJO autentica_usuario $opcion Auth sesion:"; 
+    //print_r($a->session); echo "<br>";
     $a->start();
     //echo "OJO snru=$snru"; die("x");
     if ($a->checkAuth()) {
@@ -308,7 +309,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             idioma($_SESSION['idioma_usuario']);
         } else {
             idioma($_SESSION['es_CO']);
-	}
+        }
         if (in_array($opcion, $_SESSION['opciones'])) {
             return $db;
         }
@@ -431,7 +432,7 @@ function localiza_conf()
     }
     if (strpos($n, "_") > 0) {
         $nn = substr($n, strpos($n, "_") + 1);
-    } else  if (($pp = strpos($n, ".")) == true) {
+    } else if (($pp = strpos($n, ".")) == true) {
         $nn = substr($n, 0, $pp);
     } else {
         $nn = $n;
