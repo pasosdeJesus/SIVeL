@@ -796,7 +796,9 @@ function encabezado_envia($titulo = null, $cabezote = '')
     echo '<' . '!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-1.10.2.js"></script> 
+  <script src="sivel.js"></script> 
 ';
     if (isset($titulo)) {
         echo '  <title>' . htmlentities($titulo, ENT_COMPAT, 'UTF-8') . '</title>';

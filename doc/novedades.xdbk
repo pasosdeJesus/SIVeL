@@ -5,7 +5,7 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem>
-						<para>Para usuarios finales: Activado Soporte de Idiomas Nativos y codificación UTF8. Permite especificar al usuario el idioma que prefiere para la interfaz, en el momento hay traducciones a español e inglés.  En consulta detallada en campos de texto (como nombre de víctima) se específica cualquiera con *.  Activada cotejación en español, el ordenamiento  ahora corresponde al del español (por ejemplo en tablas básicas).   Activada búsqueda de textos completos ignorando mayúsculas, minúsculas y tildes, usable al buscar por nombre, por título y por descripción en consulta web.  Módulo de georeferenciación en Google Maps convertido a la versión 3 del API.
+						<para>Para usuarios finales: Activado Soporte de Idiomas Nativos y codificación UTF8. Permite especificar al usuario el idioma que prefiere para la interfaz, en el momento hay traducciones a español e inglés.  En consulta detallada en campos de texto (como nombre de víctima) se específica cualquiera con *.  Activada cotejación en español, el ordenamiento  ahora corresponde al del español (por ejemplo en tablas básicas).   Activada búsqueda de textos completos ignorando mayúsculas, minúsculas y tildes, usable al buscar por nombre, por título y por descripción en consulta web.  Módulo de georeferenciación en Google Maps convertido a la versión 3 del API.  Controles más interactivos para elegir ubicación.
 						</para>
 					</listitem>
 					<listitem>

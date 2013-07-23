@@ -503,12 +503,13 @@ class PagUbicacion extends PagBaseMultiple
      * @param object $nomccla Nombre campo clase
      *
      */
-    static function modCamposUbicacion(&$form, &$do,
-        $nomcdep = 'id_departamento', 
-        $nomcmun = 'id_municipio', $nomccla = 'id_clase'
+    static function modCamposUbicacion(&$db, &$form, 
+        $nomcdep = 'id_departamento', $nomcmun = 'id_municipio', 
+        $nomccla = 'id_clase', $vdep = null, $vmun = null, $vcla = null
     ) {
-        if (PEAR::isError($do)) {
-            die($do->getMessage()." - ".$do->getUserInfo());
+        //echo "OJO modCamposUbicacion(db, form, nomcdep=$nomcdep, nomcmun=$nomcmun, nomccla=$nomccla, vdep=$vdep, vmun=$vmun, vcla=$vcla)<br>";
+        if (PEAR::isError($db)) {
+            die($db->getMessage()." - ".$db->getUserInfo());
         }
 
         $d = $m = $c = null;
@@ -521,7 +522,7 @@ class PagUbicacion extends PagBaseMultiple
             $d->updateAttributes(array(
                 "id" => "$nomcdep",
                 "onchange" => "llenaMunicipio('$nomcdep', "
-                . "'$nomcmun')"
+                . "'$nomcmun', '$nomccla')"
             ));
             $m =& $form->getElement($nomcmun);
             if ($nomccla == null) {
@@ -529,7 +530,7 @@ class PagUbicacion extends PagBaseMultiple
                     "id" => "$nomcmun",
                 ));
             } else {
-                $d->updateAttributes(array(
+                $m->updateAttributes(array(
                     "id" => "$nomcmun",
                     "onchange" => "llenaClase('$nomcdep', "
                     . "'$nomcmun', '$nomccla')"
@@ -540,28 +541,39 @@ class PagUbicacion extends PagBaseMultiple
                 ));
             }
         }
-        if ($do->$nomcdep != null && $m != null) {
+        $options = array('' => '') + htmlentities_array(
+            $db->getAssoc(
+                "SELECT id, nombre FROM departamento "
+                . " ORDER BY nombre"
+            )
+        );
+        $d->loadArray($options);
+        if ($vdep != null && $m != null) {
+            $d->setValue($vdep);
             $m->_options = array();
-            $db =& $do->getDatabaseConnection();
             $options = htmlentities_array(
                 $db->getAssoc(
                     "SELECT id, nombre FROM municipio WHERE id_departamento='"
-                    . $do->$nomcdep . "' "
+                    . $vdep . "' "
                     . " ORDER BY nombre"
                 )
             );
             $m->loadArray($options);
-            if ($nomcmun != null && $do->$nomcmun != null && $c != null) {
+            if ($nomcmun != null && $vmun != null && $c != null) {
+                $m->setValue($vmun);
                 $c->_options = array();
                 $options = htmlentities_array(
                     $db->getAssoc(
                         "SELECT id, nombre FROM clase WHERE id_departamento='"
-                        . $do->$nomcdep . "' "
-                        . " AND id_municipio='" .$do->$nomcmun . "' "
+                        . $vdep . "' "
+                        . " AND id_municipio='" .$vmun . "' "
                         . " ORDER BY nombre"
                     )
                 );
                 $c->loadArray($options);
+                if ($vcla != null) {
+                    $c->setValue($vcla);
+                }
             } else  if ($c != null) {
                 $c->updateAttributes(array(
                     "id" => "$nomccla",
@@ -571,6 +583,10 @@ class PagUbicacion extends PagBaseMultiple
         } else  if ($m != null) {
             $m->updateAttributes(array(
                 "id" => "$nomcmun",
+                "disabled" => "true")
+            );
+            $c->updateAttributes(array(
+                "id" => "$nomccla",
                 "disabled" => "true")
             );
         }

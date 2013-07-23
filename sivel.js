@@ -92,7 +92,7 @@ function enviar_grupoper(id, nombre, anotaciones)
 }
 
 // Basada en función de Luca Urech <lucaurech@yahoo.de>
-function llenaMunicipio(iddep, idmun) {
+function llenaMunicipio(iddep, idmun, idcla) {
 	var dep = $("#" + iddep).val();
 	var par = { 
 		id_departamento: dep
@@ -106,16 +106,48 @@ function llenaMunicipio(iddep, idmun) {
 			+ '</option>';
 		});
 		$("#" + idmun ).html(op);
+		$("#" + idcla).html('');
 	});
-	x.error(function() {
-		alert('Problema leyendo Municipios');
+	x.error(function(m1, m2, m3) {
+		alert('Problema leyendo Municipios' + m1 + m2 + m3);
 	});
+	if (idcla != '') {
+		$("#" + idcla).attr("disabled", true);
+	}
 	if (dep == 0) {
 		$("#" + idmun).attr("disabled", true);
 	} else {
 		$("#" + idmun).attr("disabled", false);
 	}
 }
+
+function llenaClase(iddep, idmun, idcla) {
+	var dep = +$("#" + iddep).val();
+	var mun = +$("#" + idmun).val();
+	var par = { 
+		id_departamento: dep,
+		id_municipio: mun,
+       	};
+	var x = $.getJSON("json_clases.php", par);
+	x.done(function( data ) {
+		var op = '<option value=""></option>';
+		$.each( data, function ( i, item ) {
+			op += '<option value="' 
+			+ item.id + '">' + item.nombre
+			+ '</option>';
+		});
+		$("#" + idcla).html(op);
+	});
+	x.error(function(m1, m2, m3) {
+		alert('Problema leyendo Clase ' + x + m1 + m2 + m3);
+	});
+	if (dep == 0 || mun == 0) {
+		$("#" + idcla).attr("disabled", true);
+	} else {
+		$("#" + idcla).attr("disabled", false);
+	}
+}
+
 
 $(function() {
  
@@ -132,7 +164,7 @@ $(function() {
 		$( "#idcontacto" ).val(id); 
 		$( "#contactonombres" ).autocomplete("disable");
 	}
- 
+
     $( "#contactonombres" ).autocomplete({
       source: "json_persona.php",
       minLength: 2,
