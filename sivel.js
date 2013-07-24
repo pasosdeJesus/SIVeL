@@ -121,6 +121,7 @@ function llenaMunicipio(iddep, idmun, idcla) {
 	}
 }
 
+// Completa cuadro de selección para clase de acuerdo a depto y muncpio.
 function llenaClase(iddep, idmun, idcla) {
 	var dep = +$("#" + iddep).val();
 	var mun = +$("#" + idmun).val();
@@ -148,32 +149,43 @@ function llenaClase(iddep, idmun, idcla) {
 	}
 }
 
-
-$(function() {
- 
-	function sel_contacto( label, id ) {
-		cs = id.split(";");
-		id = parseInt(cs[0]);
-		tn = parseInt(cs[1]);
-		ta = parseInt(cs[2]);
-		nom = label.substring(0, tn);
-		ap = label.substring(tn + 1, tn + 1 + ta);
-
-		$( "#contactoapellidos" ).val(ap); 
-		$( "#contactonombres" ).val(nom); 
-		$( "#idcontacto" ).val(id); 
-		$( "#contactonombres" ).autocomplete("disable");
+// Elije una persona
+function sel_contacto( label, id, urls, cnom, cape, cdoc, ccasos, cid) {
+	cs = id.split(";");
+	var pl = [];
+	var ini = 0;
+	for(var i=1; i < cs.length; i++) {
+		t = parseInt(cs[i]);
+		pl[i] = label.substring(ini, ini + t);
+		ini = ini + t + 1;
 	}
 
-    $( "#contactonombres" ).autocomplete({
-      source: "json_persona.php",
-      minLength: 2,
-      select: function( event, ui ) {
-	      if (ui.item) {
-		      sel_contacto(ui.item.value, ui.item.id);
-		      event.stopPropagation();
-		      event.preventDefault();
-	      }
-      }
-    });
-});
+	$("#" + cnom).val(pl[1]).attr('disabled', true); 
+	$("#" + cape).val(pl[2]).attr('disabled', true); 
+	$("#" + cdoc).val(pl[3]).attr('disabled', true); 
+	$("#" + ccasos).html(urls); 
+	$("#" + cid).val(cs[0]); 
+	$("#" + cnom).autocomplete("disable");
+}
+
+// Activa completación por nombre, apellido e identificación de persona
+function autocompleta_persona(cnom, cape, cdoc, ccasos, cid) {
+	var v = $("#" + cnom).data('autocompleta');
+	if (v != 1) {
+		$("#" + cnom).data('autocompleta', 1);
+		$("#" + cnom).autocomplete({
+			source: "json_persona.php",
+			minLength: 2,
+			select: function( event, ui ) {
+				if (ui.item) {
+					sel_contacto(ui.item.value, ui.item.id, 
+						ui.item.urls,
+						cnom, cape, cdoc, ccasos, cid);
+					event.stopPropagation();
+					event.preventDefault();
+				}
+			}
+		});
+	}
+}
+

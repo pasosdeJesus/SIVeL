@@ -2454,6 +2454,21 @@ if (!aplicado($idac)) {
         false
     );
     hace_consulta(
+        $db, "CREATE INDEX persona_nombres_apellidos_doc ON persona "
+        . " USING gin(to_tsvector('spanish', unaccent(persona.nombres) "
+        . "|| ' ' || unaccent(persona.apellidos) "
+        . "|| ' ' || persona.numerodocumento)", 
+        false
+    );
+    hace_consulta(
+        $db, "CREATE INDEX persona_apellidos_nombres_doc ON persona "
+        . " USING gin(to_tsvector('spanish', unaccent(persona.apellidos) "
+        . " || ' ' || unaccent(persona.nombres) "
+        . " || ' ' || persona.numerodocumento)", 
+        false
+    );
+
+    hace_consulta(
         $db, "CREATE INDEX caso_titulo ON caso "
         . " USING gin(to_tsvector('spanish', unaccent(caso.titulo))) ",
         false

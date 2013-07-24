@@ -914,8 +914,11 @@ function enlaces_casos_persona_html(
         }
     }
 
+    $penc = isset($GLOBALS['persona_en_caso']) ? 
+        str_replace("idp", $idp, $GLOBALS['persona_en_caso']) : '';
     $q = "SELECT id_caso FROM persona_trelacion, victima
-        WHERE persona1 = id_persona AND persona2 = '$idp'";
+        WHERE persona1 = id_persona AND persona2 = '$idp' "
+        . $penc ;
     $r = hace_consulta($db, $q);
     $campos = array();
     $sep = "";
