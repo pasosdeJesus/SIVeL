@@ -472,6 +472,16 @@ CREATE INDEX persona_apellidos_nombres ON persona
 USING gin(to_tsvector('spanish', unaccent(persona.apellidos)
 		|| ' ' || unaccent(persona.nombres)));
 
+CREATE INDEX persona_nombres_apellidos_doc ON persona 
+USING gin(to_tsvector('spanish', unaccent(persona.nombres) 
+	|| ' ' || unaccent(persona.apellidos) 
+	|| ' ' || COALESCE(persona.numerodocumento::TEXT, '')));
+
+CREATE INDEX persona_apellidos_nombres_doc ON persona 
+USING gin(to_tsvector('spanish', unaccent(persona.apellidos) 
+	 || ' ' || unaccent(persona.nombres) 
+	 || ' ' || COALESCE(persona.numerodocumento::TEXT, '')));
+
 CREATE TABLE trelacion (
 	id      CHAR(2) PRIMARY KEY,
 	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL,

@@ -459,6 +459,7 @@ function valida(&$page)
  * @param string $msg     Mensaje de error
  * @param array  $valores Valores del formulario por recuperar
  * @param string $iderr   Si es no nulo variable de sesión donde ponerlo
+ * @param string $enhtml  Mensaje en HTML
  *
  * @return void
      */
@@ -795,7 +796,9 @@ function encabezado_envia($titulo = null, $cabezote = '')
     echo '<' . '!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-1.10.2.js"></script> 
+  <script src="sivel.js"></script> 
 ';
     if (isset($titulo)) {
         echo '  <title>' . htmlentities($titulo, ENT_COMPAT, 'UTF-8') . '</title>';
@@ -911,8 +914,11 @@ function enlaces_casos_persona_html(
         }
     }
 
+    $penc = isset($GLOBALS['persona_en_caso']) ? 
+        str_replace("idp", $idp, $GLOBALS['persona_en_caso']) : '';
     $q = "SELECT id_caso FROM persona_trelacion, victima
-        WHERE persona1 = id_persona AND persona2 = '$idp'";
+        WHERE persona1 = id_persona AND persona2 = '$idp' "
+        . $penc ;
     $r = hace_consulta($db, $q);
     $campos = array();
     $sep = "";
@@ -1782,11 +1788,11 @@ function convierte_valor(&$do, $campo, $tipo)
 /**
  * Asigna un campo de un DataObject con el valor recibido del formulario
  *
- * @param array   $valor Valor por asignar
- * @param object  $tabla Tabla 
- * @param object  $campo Campo de tabla $tabla
- * @param array   $estbd   Estructura de base sacada de .ini.  Si es null esta
- *                       función la llena
+ * @param array   $valor  Valor por asignar
+ * @param object  $rel    Tabla 
+ * @param object  $campo  Campo de tabla $tabla
+ * @param array   &$estbd Estructura de base sacada de .ini.  Si es null esta
+ *                        función la llena
  *
  * @return Valor asignable a un campo $campo del DataObject de tabla $rel
  */
@@ -1904,7 +1910,7 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
         if (!$ignora) {
             if (($tipo & 2) && $tipo != 134 && $tipo !=18) {
                 // Cadena que no es fecha
-                if (trim($valor) != '*')  {
+                if (trim($valor) != '*') {
                     consulta_and(
                         $db, $w2, "$rel.$campo", "%" .trim($valor) . "%",
                         ' ILIKE ', 'AND'

@@ -105,6 +105,14 @@ $GLOBALS['anio_min']=1990;
 */
 $GLOBALS['actoscolectivos'] = true;
 
+/** Consulta adicional para determinar casos en los que aparece una
+ * persona además de lo estándar de SIVeL básico (ver json_persona.php).
+ * Emplear id para comparar identificación de persona.
+ * @global bool $GLOBALS['persona_en_caso']
+*/
+$GLOBALS['persona_en_caso'] = '';
+
+
 // Opciones de Reporte Tabla
 $GLOBALS['reporte_tabla_fila_totales'] = false;
 

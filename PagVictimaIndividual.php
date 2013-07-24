@@ -820,7 +820,7 @@ class PagVictimaIndividual extends PagBaseMultiple
                 }
             }
             if (is_array($subcons)) {
-                foreach($subcons as $subc) {
+                foreach ($subcons as $subc) {
                     $ds =& objeto_tabla($subc['tabla']);
                     sin_error_pear($ds);
                     $ds->id_caso = (int)$idcaso;
@@ -919,10 +919,11 @@ class PagVictimaIndividual extends PagBaseMultiple
     /**
      * Mezcla victimas de los casos $id1 e $id2 en el caso $idn
      *
-     * @param object  &$db Conexión a base de datos
-     * @param integer $id1 Código de primer caso
-     * @param integer $id2 Código de segundo caso
-     * @param integer $idn Código del caso en el que aplicará los cambios
+     * @param object  &$db      Conexión a base de datos
+     * @param integer $id1      Código de primer caso
+     * @param integer $id2      Código de segundo caso
+     * @param integer $idn      Código del caso en el que aplicará los cambios
+     * @param integer $tablavic Tabla victima
      *
      * @return Mezcla valores de las victimas de $id2 en $idn si $idn==$id1
      * intentando poner los datos con más información.
@@ -945,7 +946,6 @@ class PagVictimaIndividual extends PagBaseMultiple
                     . " AND $tablavic.id_persona=persona.id "
                     . " AND persona.nombres='{$dp1->nombres}' "
                     . " AND persona.apellidos='{$dp1->apellidos}'", false
-
                 );
                 if ($idp2 == -1) {
                     continue;
@@ -964,7 +964,7 @@ class PagVictimaIndividual extends PagBaseMultiple
                     if ($dp1->$ftr == $vdf && $dp2->$ftr != $vdf 
                         && $dp2->$ftr != ""
                     ) {
-                        //echo "OJO Persona cambiaria '$ftr' de '{$dp1->$ftr}' a '{$dp2->$ftr}'<br>";
+                        //echo "OJO '$ftr': '{$dp1->$ftr}'->'{$dp2->$ftr}'<br>";
                         $dp1->$ftr = $dp2->$ftr;
                     }
                 }
@@ -980,13 +980,11 @@ class PagVictimaIndividual extends PagBaseMultiple
                     if ($dse1 && method_exists($dse1, 'idSinInfo')) {
                         $vdf = $dse1->idSinInfo();
                     }
-                    //echo "OJO ftr=$ftr, vdf=$vdf, dn->ftr={$dn->$ftr}, de->ftr={$de->$ftr}<br>";
-                    if (isset($dn->$ftr) && isset($e->$ftr) &&
-                        (is_null($dn->$ftr) || $dn->$ftr === "" ||
-                        ($dn->$ftr == $vdf && $de->$ftr != "" 
-                            && $de->$ftr != $vdf))
+                    if (isset($dn->$ftr) && isset($e->$ftr) 
+                        && (is_null($dn->$ftr) || $dn->$ftr === "" 
+                        || ($dn->$ftr == $vdf && $de->$ftr != "" 
+                        && $de->$ftr != $vdf))
                     ) {
-                        //echo "OJO Víctima cambiaria '$ftr' de '{$dn->$ftr}' a '{$de->$ftr}' (vdf es '$vdf')<br>";
                         $dn->$ftr = $de->$ftr;
                     }
                 }
@@ -1021,7 +1019,7 @@ class PagVictimaIndividual extends PagBaseMultiple
      */
     static function mezcla(&$db, $sol, $id1, $id2, $idn, $cls)
     {
-        //echo "OJO PagVictimaIndividual::mezcla(db, sol, $id1, $id2, $idn, cls)<br>";
+        //echo "OJO PagVI::mezcla(db, sol, $id1, $id2, $idn, cls)<br>";
         parent::mezcla(
             $db, $sol, $id1, $id2, $idn,
             array('Victimas Individuales'

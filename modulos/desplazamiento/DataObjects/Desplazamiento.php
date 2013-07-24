@@ -270,7 +270,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
             AND municipio.id_departamento = departamento.id";
         $op = $db->getAssoc($q);
         sin_error_pear($op);
-        $r = $s->loadArray(htmlentities_array($op));
+        $r = $s->loadArray(array('' => '') + htmlentities_array($op));
         $s->setValue(
             $this->expulsion
         );

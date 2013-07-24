@@ -207,7 +207,7 @@ function nom_sesion()
  */
 function autentica_usuario($dsn,  &$usuario, $opcion)
 {
-    //echo "OJO autentica opcion=$opcion, q=$q";
+    //echo "OJO autentica dsn=$dsn, usuario=$usuario, opcion=$opcion<br>";
     $accno = _("Acceso no autorizado");
     $snru = nom_sesion();
     if (!isset($_SESSION) || session_name() != $snru) {
@@ -254,7 +254,8 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
     );
     $a = new Auth("DB", $params, "login_function");
     $a->setSessionName($snru);
-    //echo "<hr>En autentica_usuario $opcion OJO sesion:"; print_r($a->session);
+    //echo "<hr>OJO autentica_usuario $opcion Auth sesion:"; 
+    //print_r($a->session); echo "<br>";
     $a->start();
     //echo "OJO snru=$snru"; die("x");
     if ($a->checkAuth()) {
@@ -277,7 +278,9 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
 
             //Prevenir session fixation
             //http://shiflett.org/articles/session-fixation
-            session_regenerate_id();
+            if (!headers_sent()) {
+                session_regenerate_id();
+            }
             saca_opciones($usuario, $db, $op, $rol);
             if (count($op) == 0) {
                 echo "Este usuario no tiene opciones, " .
@@ -306,7 +309,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             idioma($_SESSION['idioma_usuario']);
         } else {
             idioma($_SESSION['es_CO']);
-	}
+        }
         if (in_array($opcion, $_SESSION['opciones'])) {
             return $db;
         }
@@ -429,7 +432,7 @@ function localiza_conf()
     }
     if (strpos($n, "_") > 0) {
         $nn = substr($n, strpos($n, "_") + 1);
-    } else  if (($pp = strpos($n, ".")) == true) {
+    } else if (($pp = strpos($n, ".")) == true) {
         $nn = substr($n, 0, $pp);
     } else {
         $nn = $n;
@@ -452,7 +455,7 @@ function localiza_conf()
     foreach ($ri as $d) {
         foreach ($dirsitios as $ds) {
             $t = "$d/$ds/conf.php";
-            //echo("OJO Probando t='$t'");
+            //echo("OJO Probando t='$t'<br>");
             if (file_exists($t)) {
                 $dirsitio = "$d/$ds";
                 $existe = true;
@@ -485,6 +488,7 @@ function localiza_conf()
         pie_envia();
         exit(1);
     }
+    //echo "OJO retornando $dirsitio<br>";
     return $dirsitio;
 }
 

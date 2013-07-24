@@ -14,4 +14,4 @@ cmd="pg_dump --encoding=UTF8 $socketopt --attribute-inserts --inserts -U $dbusua
 echo $cmd;
 eval $cmd;
 cp $rlocal/$n-s $rlocal/$nommes
-gzip $rlocal/$nommes
+gzip -f $rlocal/$nommes

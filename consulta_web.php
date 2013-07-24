@@ -228,7 +228,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         }
 
 
-        $oconv = array(); // Otros campos que deben incluirse como resultado de consultado además de conv
+        $oconv = array(); // Campos resultado además de conv
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
             list($n, $c, $o) = $tab;
             if (($d = strrpos($c, "/"))>0) {
@@ -467,9 +467,6 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $this->opciones = $opciones;
         $this->HTML_QuickForm_Page('consultaWeb', 'post', '_self', null);
 
-        $this->addAction('id_departamento', new CamDepartamento());
-        $this->addAction('id_municipio', new CamMunicipio());
-
         $this->addAction('consulta', new AccionConsultaWeb());
     }
 
@@ -523,7 +520,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
             'select', 'id_departamento',
             _('Departamento') . ': ', array()
         );
-        $options= array('' => '') + htmlentities_array(
+/*        $options= array('' => '') + htmlentities_array(
             $db->getAssoc(
                 "SELECT  id, nombre FROM departamento " .
                 "ORDER BY nombre"
@@ -534,24 +531,34 @@ class ConsultaWeb extends HTML_QuickForm_Page
             array('onchange' =>
             'envia(\'consultaWeb:id_departamento\')'
             )
-        );
+        ); */
 
         $mun =& $this->addElement(
             'select', 'id_municipio',
             _('Municipio') .': ', array()
         );
-        $mun->updateAttributes(
+/*        $mun->updateAttributes(
             array('onchange' =>
             'envia(\'consultaWeb:id_municipio\')'
             )
-        );
+        ); */
 
         $cla =& $this->addElement(
             'select', 'id_clase',
             _('Centro Poblado') . ': ', array()
         );
-
-        $ndepartamento = ret_id_departamento($this);
+        $vdep = isset($this->_submitValues['id_departamento']) ?
+           $this->_submitValues['id_departamento'] : null;
+        $vmun = isset($this->_submitValues['id_municipio']) ?
+           $this->_submitValues['id_municipio'] : null;
+        $vcla = isset($this->_submitValues['id_clase']) ?
+           $this->_submitValues['id_clase'] : null;
+        PagUbicacion::modCamposUbicacion(
+            $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
+            $vdep, $vmun, $vcla
+        );
+         
+/*        $ndepartamento = ret_id_departamento($this);
         if ($ndepartamento != null) {
             $dep->setValue($ndepartamento);
             $options= array('' => '') + htmlentities_array(
@@ -574,7 +581,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
                 )
             );
             $cla->loadArray($options);
-        }
+        } */
 
         $sel =& $this->addElement(
             'text', 'nomvic',
@@ -671,7 +678,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         );
         $sel->loadArray($options);
 
-        $sel =& $this->addElement( 'text', 'descripcion', _('Descripción'));
+        $sel =& $this->addElement('text', 'descripcion', _('Descripción'));
         $sel->setSize(80);
 
 

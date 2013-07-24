@@ -119,6 +119,11 @@
 			url="http://structio.sourceforge.net/guias/basico_OpenBSD">http://structio.sourceforge.net/guias/basico_OpenBSD</ulink> 2011</bibliomisc>
   </bibliomixed>
 
+  <biblioentry id="javascriptgoogl">
+    <title>Google JavaScript Style Guide</title>
+    <bibliomisc><ulink url="http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml"/>.  Rev 2.82. 2013</bibliomisc>
+  </biblioentry>
+
 
 
   <biblioentry id="bdp">

@@ -203,7 +203,7 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
 
         // Espacio amplio para campos de texto por defecto
         if (isset($this->fb_textFields)) {
-            foreach($this->fb_textFields as $t) {
+            foreach ($this->fb_textFields as $t) {
                 $e =& $form->getElement($t);
                 if (isset($e) && !PEAR::isError($e)) {
                     $e->setCols(75);

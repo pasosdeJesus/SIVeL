@@ -91,32 +91,101 @@ function enviar_grupoper(id, nombre, anotaciones)
 	window.close();
 }
 
-
-$(function() {
- 
-	function sel_contacto( label, id ) {
-		cs = id.split(";");
-		id = parseInt(cs[0]);
-		tn = parseInt(cs[1]);
-		ta = parseInt(cs[2]);
-		nom = label.substring(0, tn);
-		ap = label.substring(tn + 1, tn + 1 + ta);
-
-		$( "#contactoapellidos" ).val(ap); 
-		$( "#contactonombres" ).val(nom); 
-		$( "#idcontacto" ).val(id); 
-		$( "#contactonombres" ).autocomplete("disable");
+// Basada en función de Luca Urech <lucaurech@yahoo.de>
+function llenaMunicipio(iddep, idmun, idcla) {
+	var dep = $("#" + iddep).val();
+	var par = { 
+		id_departamento: dep
+       	};
+	var x = $.getJSON("json_municipios.php", par);
+	x.done(function( data ) {
+		var op = '<option value=""></option>';
+		$.each( data, function ( i, item ) {
+			op += '<option value="' 
+			+ item.id + '">' + item.nombre
+			+ '</option>';
+		});
+		$("#" + idmun ).html(op);
+		$("#" + idcla).html('');
+	});
+	x.error(function(m1, m2, m3) {
+		alert('Problema leyendo Municipios' + m1 + m2 + m3);
+	});
+	if (idcla != '') {
+		$("#" + idcla).attr("disabled", true);
 	}
- 
-    $( "#contactonombres" ).autocomplete({
-      source: "json_persona.php",
-      minLength: 2,
-      select: function( event, ui ) {
-	      if (ui.item) {
-		      sel_contacto(ui.item.value, ui.item.id);
-		      event.stopPropagation();
-		      event.preventDefault();
-	      }
-      }
-    });
-});
+	if (dep == 0) {
+		$("#" + idmun).attr("disabled", true);
+	} else {
+		$("#" + idmun).attr("disabled", false);
+	}
+}
+
+// Completa cuadro de selección para clase de acuerdo a depto y muncpio.
+function llenaClase(iddep, idmun, idcla) {
+	var dep = +$("#" + iddep).val();
+	var mun = +$("#" + idmun).val();
+	var par = { 
+		id_departamento: dep,
+		id_municipio: mun,
+       	};
+	var x = $.getJSON("json_clases.php", par);
+	x.done(function( data ) {
+		var op = '<option value=""></option>';
+		$.each( data, function ( i, item ) {
+			op += '<option value="' 
+			+ item.id + '">' + item.nombre
+			+ '</option>';
+		});
+		$("#" + idcla).html(op);
+	});
+	x.error(function(m1, m2, m3) {
+		alert('Problema leyendo Clase ' + x + m1 + m2 + m3);
+	});
+	if (dep == 0 || mun == 0) {
+		$("#" + idcla).attr("disabled", true);
+	} else {
+		$("#" + idcla).attr("disabled", false);
+	}
+}
+
+// Elije una persona
+function sel_contacto( label, id, urls, cnom, cape, cdoc, ccasos, cid) {
+	cs = id.split(";");
+	var pl = [];
+	var ini = 0;
+	for(var i=1; i < cs.length; i++) {
+		t = parseInt(cs[i]);
+		pl[i] = label.substring(ini, ini + t);
+		ini = ini + t + 1;
+	}
+
+	$("#" + cnom).val(pl[1]).attr('disabled', true); 
+	$("#" + cape).val(pl[2]).attr('disabled', true); 
+	$("#" + cdoc).val(pl[3]).attr('disabled', true); 
+	$("#" + ccasos).html(urls); 
+	$("#" + cid).val(cs[0]); 
+	$("#" + cnom).autocomplete("disable");
+}
+
+// Activa completación por nombre, apellido e identificación de persona
+function autocompleta_persona(cnom, cape, cdoc, ccasos, cid) {
+	var v = $("#" + cnom).data('autocompleta');
+	if (v != 1) {
+		$("#" + cnom).data('autocompleta', 1);
+		$("#" + cnom).autocomplete({
+			source: "json_persona.php",
+			minLength: 2,
+			select: function( event, ui ) {
+				if (ui.item) {
+					sel_contacto(ui.item.value, ui.item.id, 
+						ui.item.urls,
+						cnom, cape, cdoc, ccasos, cid);
+					event.stopPropagation();
+					event.preventDefault();
+				}
+			}
+		});
+	}
+}
+

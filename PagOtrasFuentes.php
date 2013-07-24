@@ -285,7 +285,7 @@ class PagOtrasFuentes extends PagBaseMultiple
                         $lm => '',
                         'Y' => '' 
                     )
-                    );
+                );
             }
         }
 
