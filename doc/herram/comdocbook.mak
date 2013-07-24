@@ -59,8 +59,8 @@ dbrep_html_xsltproc: $(PROYECTO)-4.1.2.$(EXT_DOCBOOK) $(INDEX) $(SOURCES) $(IMAG
 dbrep_html_xsltproc_single: $(PROYECTO)-4.1.2.$(EXT_DOCBOOK) $(INDEX) $(SOURCES) $(IMAGES) $(XSLT_HTML) 
 	mkdir -p $(HTML_DIR)
 	for i in $(IMAGES) ; do $(CP) $$i $(HTML_DIR)/`basename $$i`; done 
-	$(XSLTPROC) --catalogs --nonet $(XSLT_HTML) $(PROYECTO)-4.1.2.$(EXT_DOCBOOK) > $(HTML_TARGET).bak
-	$(SED) -e "s/­/-/g" $(HTML_TARGET).bak > $(HTML_TARGET)
+	$(XSLTPROC) --catalogs --nonet $(XSLT_HTML) $(PROYECTO)-4.1.2.$(EXT_DOCBOOK) > html/todo.html.bak
+	$(SED) -e "s/­/-/g" html/todo.html.bak > html/todo.html
 	$(OTHER_HTML)
 
 

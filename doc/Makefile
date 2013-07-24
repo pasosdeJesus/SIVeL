@@ -24,7 +24,7 @@ SOURCES=$(PROYECTO).xdbk principios.xdbk ambiente.xdbk instala.xdbk \
 	uso-cintercambio.xdbk administracion.xdbk \
 	per-intro.xdbk per-interfaz.xdbk per-reint.xdbk per-modulos.xdbk \
 	per-sitio.xdbk per-fuentes.xdbk per-seguridad.xdbk \
-	creditos.xdbk novedades.xdbk varconfphp.xdbk
+	creditos.xdbk novedades.xdbk varconfphp.xdbk personaliza.ent
 # Listado de fuentes XML. Preferiblemente en el orden de inclusión
 
 IMAGES= img/home.png img/prev.png img/toc-minus.png img/blank.png \
@@ -149,4 +149,7 @@ varconfphp.xdbk: ../sitios/pordefecto/conf.php ../sitios/pordefecto/conf_int.php
 	awk -f herram/convar.awk ../sitios/pordefecto/conf.php >> varconfphp.xdbk
 	awk -f herram/convar.awk ../sitios/pordefecto/conf_int.php >> varconfphp.xdbk
 
+personaliza.ent: personaliza.ent.plantilla
+	if (test -f personaliza.ent) then { cp personaliza.ent personaliza.ent.copia; } fi
+	cp personaliza.ent.plantilla personaliza.ent
 
