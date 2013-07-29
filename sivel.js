@@ -160,9 +160,9 @@ function sel_contacto( label, id, urls, cnom, cape, cdoc, ccasos, cid) {
 		ini = ini + t + 1;
 	}
 
-	$("#" + cnom).val(pl[1]).attr('disabled', true); 
-	$("#" + cape).val(pl[2]).attr('disabled', true); 
-	$("#" + cdoc).val(pl[3]).attr('disabled', true); 
+	$("#" + cnom).val(pl[1]).attr('readonly', true); 
+	$("#" + cape).val(pl[2]).attr('readonly', true); 
+	$("#" + cdoc).val(pl[3]).attr('readonly', true); 
 	$("#" + ccasos).html(urls); 
 	$("#" + cid).val(cs[0]); 
 	$("#" + cnom).autocomplete("disable");

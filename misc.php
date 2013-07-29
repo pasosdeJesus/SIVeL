@@ -471,13 +471,15 @@ function error_valida($msg, $valores, $iderr = '', $enhtml = false)
     if (isset($valores) && is_array($valores) && count($valores) > 0) {
         $_SESSION['recuperaErrorValida'] = $valores;
     }
-    echo "<div class='regla'>";
+    echo "<script>";
     if ($enhtml) {
-        echo $msg;
+        echo "$(document).ready(function () {alert('$msg');});";
     } else {
-        echo htmlentities($msg, ENT_COMPAT, 'UTF-8');
+        echo "$(document).ready(function () {alert('" 
+            . htmlentities($msg, ENT_COMPAT, 'UTF-8')
+            . "');});";
     }
-    echo "</div>";
+    echo "</script>";
     if ($iderr != '') {
         $_SESSION[$iderr] = $msg;
     }

@@ -72,7 +72,7 @@ foreach($partes as $p) {
 }
 $qstring = "SELECT TRIM($s), $l FROM persona WHERE $where ORDER BY 1";
 
-//trigger_error("$qstring");
+//trigger_error("$qstring"); 
 $res = hace_consulta($db, $qstring);
 
 $row = array();
