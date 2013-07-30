@@ -680,6 +680,20 @@ class PagVictimaIndividual extends PagBaseMultiple
             return false;
         }
 
+        if (isset($valores['numerodocumento']) 
+            && (int)$valores['numerodocumento'] > 0
+        ){
+            $q = "SELECT id FROM persona WHERE numerodocumento='"
+                . (int)$valores['numerodocumento'] . "'";
+            $r = hace_consulta($db, $q); $row = array(); if ($r->fetchInto($row)) {
+                if (!isset($this->bpersona->_do->id) 
+                    || $row[0] != $this->bpersona->_do->id
+                ) {
+                    error_valida(_('Numero de documento repetido'), $valores);
+                    return false;
+                }
+            }
+        }
         if ($procFam
             && (!isset($valores['fnombres']) || $valores['fnombres'] == '')
             && (!isset($valores['fapellidos']) || $valores['fapellidos'] == '')

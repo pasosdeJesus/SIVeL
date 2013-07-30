@@ -600,23 +600,12 @@ class PagVictimaColectiva extends PagBaseMultiple
             && (!isset($valores['id_sector'])
             || $valores['id_sector'] == array()
             )
-            && (!isset($valores['id_vinculoestado'])
-            || $valores['id_vinculoestado'] == array()
-            )
-            && (!isset($valores['id_filiacion'])
-            || $valores['id_filiacion'] == array()
-            )
-            && (!isset($valores['id_profesion'])
-            || $valores['id_profesion'] == array()
-            )
-            && (!isset($valores['id_organizacion'])
-            || $valores['id_organizacion'] == array()
-            )
         ;
 
         if ($es_vacio) {
             return true;
         }
+        print_r($valores); 
         if (!$this->validate() ) {
             return false;
         }

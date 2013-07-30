@@ -585,10 +585,12 @@ class PagUbicacion extends PagBaseMultiple
                 "id" => "$nomcmun",
                 "disabled" => "true")
             );
-            $c->updateAttributes(array(
-                "id" => "$nomccla",
-                "disabled" => "true")
-            );
+            if (isset($c)) {
+                $c->updateAttributes(array(
+                    "id" => "$nomccla",
+                    "disabled" => "true")
+                );
+            }
         }
 
     }

@@ -471,13 +471,15 @@ function error_valida($msg, $valores, $iderr = '', $enhtml = false)
     if (isset($valores) && is_array($valores) && count($valores) > 0) {
         $_SESSION['recuperaErrorValida'] = $valores;
     }
-    echo "<div class='regla'>";
+    echo "<script>";
     if ($enhtml) {
-        echo $msg;
+        echo "$(document).ready(function () {alert('$msg');});";
     } else {
-        echo htmlentities($msg, ENT_COMPAT, 'UTF-8');
+        echo "$(document).ready(function () {alert('" 
+            . htmlentities($msg, ENT_COMPAT, 'UTF-8')
+            . "');});";
     }
-    echo "</div>";
+    echo "</script>";
     if ($iderr != '') {
         $_SESSION[$iderr] = $msg;
     }
@@ -950,8 +952,11 @@ function enlaces_casos_persona_html(
         }
     }
 
+    $penc = isset($GLOBALS['persona_en_caso']) ? 
+        str_replace("idp", $idp, $GLOBALS['persona_en_caso']) : '';
     $q = "SELECT id_caso FROM persona_trelacion, victima
-        WHERE persona1 = id_persona AND persona2 = '$idp'";
+        WHERE persona1 = id_persona AND persona2 = '$idp' "
+        . $penc ;
     $r = hace_consulta($db, $q);
     $campos = array();
     $sep = "";
