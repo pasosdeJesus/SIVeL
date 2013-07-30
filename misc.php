@@ -678,6 +678,37 @@ function toma_elemento_recc($form, $nom, $yaanalizados = array())
 }
 
 
+/** 
+ * Retorna valor SIN INFORMACION del campo $c del DataObject $do
+ */
+function valorSinInfo(&$do, $c)
+{
+    global $dbnombre;
+    $v = null;
+    $exc = isset(
+        $GLOBALS['_DB_DATAOBJECT']['LINKS'][$dbnombre][$do->__table][$c]
+    );
+    if ($exc) {
+        $rel = $GLOBALS['_DB_DATAOBJECT']['LINKS'][$dbnombre][$do->__table][$c];
+        $pd = strpos($rel, ':');
+        $ndo = substr($rel, 0, $pd);
+        $or = objeto_tabla($ndo);
+        if (!PEAR::isError($or) 
+            && is_callable(array($or, 'idSinInfo'))) {
+                $v = $or->idSinInfo();
+                //echo "OJO sacando valor {$v}<br>";
+                if (is_array($v)) {
+                    if (isset($v[$c])) {
+                        $v = $v[$c];
+                    } else {
+                        $v = null;
+                    }
+                }
+            }
+    }
+    return $v;
+}
+
 /**
  * Pone valores por defecto en una pestaña, para ser llamado desde
  * formularioValores
@@ -716,8 +747,13 @@ function valores_pordefecto_form($d, $form, $merr = true)
                     $cq->setValue(1);
                 }
             } else {
-                //echo "OJO poniendo valor {$d->$c}<br>";
-                $cq->setValue($d->$c);
+                if (!isset($d->$c) || $d->$c == null) {
+                    $v = valorSinInfo($d, $c);
+                } else {
+                    $v = $d->$c;
+                    //echo "OJO poniendo valor {$v}<br>";
+                }
+                $cq->setValue($v);
             }
         }
     }
