@@ -437,7 +437,7 @@ class ResConsulta
     function extraeColectivas($idcaso, &$db, &$idp, &$ndp, &$cdp,
         $id_grupoper, &$indid, &$totelem
     ) {
-        $q = "SELECT  id_grupoper, nombre, personasaprox " .
+        $q = "SELECT id_grupoper, nombre, personasaprox " .
             " FROM victimacolectiva, grupoper " .
             " WHERE victimacolectiva.id_grupoper=grupoper.id " .
             " AND id_caso='$idcaso' ORDER BY id_grupoper;";
@@ -1203,40 +1203,43 @@ class ResConsulta
                 $indid = -1;
                 $idind = -1;
                 $nind = -1; $totelem = 0;
-                $totv+=ResConsulta::extraeColectivas(
-                    $idcaso,
-                    $db, $idp, $ndp, $cdp, null, $ind, $totelem
-                );
-                $bk = $k;
-                for (; $k < count($ndp); $k++) {
-                    $q = "SELECT id_tviolencia, id_supracategoria, " .
-                    " id_categoria " .
-                    " FROM actocolectivo, categoria " .
-                    " WHERE id_grupoper='". (int)$idp[$k] . "' " .
-                    " AND id_caso='". (int)$idcaso . "' " .
-                    " AND actocolectivo.id_categoria=categoria.id"
-                    ;
-                    $result = hace_consulta($db, $q);
-                    $row = array();
-                    $septip = " "; $tip = "";
-                    $vrescon .= $seploc . trim($ndp[$k]);
-                    while ($result->fetchInto($row)) {
-                        $tip .= $septip . "<a href='consulta_web_cat.php?t = " .
-                        $row[0] . "&s = ".$row[1] . "&c = ".$row[2] . "'>" .
-                        $row[0] . $row[2] . "</a>";
-                        $vrescon .= $septip . $row[0] . $row[2];
-                        $septip = ", ";
-                    }
-                    $vr .= $seploc . $ndp[$k] . $tip;
-                    if ((int)$cdp[$k - $bk] > 0) {
-                        $vr .= " (".$cdp[$k - $bk] . ")";
-                        $vrescon .= " (".(int)$cdp[$k - $bk] . ")";
-                    }
-                    $seploc = ", ";
+                if (!isset($GLOBALS['actoscolectivos']) 
+                    || $GLOBALS['actoscolectivos'] == true
+                ) {
+                        $totv+=ResConsulta::extraeColectivas(
+                            $idcaso,
+                            $db, $idp, $ndp, $cdp, null, $ind, $totelem
+                        );
+                        $bk = $k;
+                        for (; $k < count($ndp); $k++) {
+                            $q = "SELECT id_tviolencia, id_supracategoria, " .
+                                " id_categoria " .
+                                " FROM actocolectivo, categoria " .
+                                " WHERE id_grupoper='". (int)$idp[$k] . "' " .
+                                " AND id_caso='". (int)$idcaso . "' " .
+                                " AND actocolectivo.id_categoria=categoria.id"
+                                ;
+                            $result = hace_consulta($db, $q);
+                            $row = array();
+                            $septip = " "; $tip = "";
+                            $vrescon .= $seploc . trim($ndp[$k]);
+                            while ($result->fetchInto($row)) {
+                                $tip .= $septip . "<a href='consulta_web_cat.php?t = " .
+                                    $row[0] . "&s = ".$row[1] . "&c = ".$row[2] . "'>" .
+                                    $row[0] . $row[2] . "</a>";
+                                $vrescon .= $septip . $row[0] . $row[2];
+                                $septip = ", ";
+                            }
+                            $vr .= $seploc . $ndp[$k] . $tip;
+                            if ((int)$cdp[$k - $bk] > 0) {
+                                $vr .= " (".$cdp[$k - $bk] . ")";
+                                $vrescon .= " (".(int)$cdp[$k - $bk] . ")";
+                            }
+                            $seploc = ", ";
+                        }
+
+                        $vrpost = " | " . _("Víctimas") . ":".$totv;
                 }
-
-                $vrpost = " | " . _("Víctimas") . ":".$totv;
-
             } else if ($cc == 'm_tipificacion') {
                 $idp = array(); // Identificaciones
                 $ndp = array();
