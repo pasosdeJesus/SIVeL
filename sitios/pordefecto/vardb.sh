@@ -15,7 +15,7 @@ function valconf {
 		exit 1; 
 	} fi;
 	res="ImP0S1BLi"
-	for a in $dirap/conf-particular.php $dirap/conf.php $dirap/../pordefecto/conf.php; do
+	for a in $dirap/conf-local.php $dirap/conf.php $dirap/../pordefecto/conf.php; do
 		if (test "$res" = "ImP0S1BLi") then {
 			grep "\$$nv *=" $a 2> /dev/null > /dev/null
 			if (test "$?" = "0") then {
@@ -24,7 +24,7 @@ function valconf {
 		} fi;
 	done;
 	if (test "$res" = "ImP0S1BLi") then {
-		echo "No está la variable $nv en $dirap/conf-particular.php ni en $dirap/conf.php ni en $dirap/../pordefecto/conf.php. Asegurese de ejecutar actualiza.php";
+		echo "No está la variable $nv en $dirap/conf-local.php ni en $dirap/conf.php ni en $dirap/../pordefecto/conf.php. Asegurese de ejecutar actualiza.php";
 		exit 1;
 	} fi;
 	cmd="$nv=\"$res\";";

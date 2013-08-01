@@ -212,7 +212,7 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
                 } else if (isset($this->fb_booleanFields) 
                     && in_array($c, $this->fb_booleanFields)
                 ) {
-                    $t .= $p->$c ? "Si" : "No";
+                    $t .= $p->$c === true || $p->$c === 't' ? "Si" : "No";
                 } else {
                     $t .= $p->$c;
                 }

@@ -65,8 +65,8 @@ $GLOBALS['derechos'] = 'Dominio Público';
 $modulos = "modulos/anexos modulos/etiquetas modulos/mapag";
 
 
-if (file_exists($_SESSION['dirsitio'] . '/conf-particular.php')) {
-    require $_SESSION['dirsitio'] . '/conf-particular.php';
+if (file_exists($_SESSION['dirsitio'] . '/conf-local.php')) {
+    require $_SESSION['dirsitio'] . '/conf-local.php';
 }
 
 require 'sitios/pordefecto/inibdmod.php';
