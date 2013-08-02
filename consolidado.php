@@ -198,7 +198,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             if (is_callable(array($ctab, 'consolidadoCreaConsulta'))) {
                 call_user_func_array(
                     array($ctab, 'consolidadoCreaConsulta'),
-                    array($db, &$where, &$tablas)
+                    array(&$db, &$where, &$tablas)
                 );
             } else {
                 echo_esc(

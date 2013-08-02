@@ -2,7 +2,9 @@
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -46,7 +48,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -90,7 +94,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -134,7 +140,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -178,7 +186,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -222,7 +232,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -266,7 +278,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -310,7 +324,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -354,7 +370,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -398,7 +416,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -442,7 +462,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -486,7 +508,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -530,7 +554,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -574,7 +600,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -618,7 +646,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -662,7 +692,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -705,7 +737,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Todas las restricciones<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -748,7 +782,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Código errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -779,7 +815,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Título errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -810,7 +848,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Departamento errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -841,7 +881,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Municipio errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -872,7 +914,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Clase errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -903,7 +947,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Nombre errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -934,7 +980,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Dia final errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -965,7 +1013,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Mes final errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -996,7 +1046,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Año final errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1027,7 +1079,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Día inicial errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1058,7 +1112,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Mes inicial errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1089,7 +1145,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Año inicial errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1120,7 +1178,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** P. Resp errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1151,7 +1211,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Sector Social errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1182,7 +1244,9 @@ function textCounter(field, cntfield, maxlimit)
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Usuario errado<!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1214,7 +1278,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1246,7 +1312,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1278,7 +1346,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1310,7 +1380,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1342,7 +1414,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1374,7 +1448,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1406,7 +1482,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1438,7 +1516,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1470,7 +1550,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1502,7 +1584,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -1534,7 +1618,9 @@ function textCounter(field, cntfield, maxlimit)
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Consulta Web</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->

@@ -95,7 +95,7 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
         $this->fb_fieldLabels= array(
             'hijos'=> _('Hijos'),
             'id_profesion'=> _('Profesión'),
-            'id_rangoedad'=> _('Rango de Edad'),
+            'id_rangoedad'=> _('Rango de Edad en Hecho'),
             'id_filiacion'=> _('Filiación Política'),
             'id_sectorsocial'=> _('Sector Social'),
             'id_organizacion'=> _('Organización'),

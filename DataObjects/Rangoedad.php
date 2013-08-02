@@ -64,6 +64,7 @@ class DataObjects_Rangoedad extends DataObjects_Basica
     var $fb_select_display_field = 'rango';
     var $fb_linkOrderFields = array('nombre');
     var $fb_preDefOrder = array(
+        'id',
         'nombre',
         'rango',
         'limiteinferior',

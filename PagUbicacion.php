@@ -548,7 +548,8 @@ class PagUbicacion extends PagBaseMultiple
             )
         );
         $d->loadArray($options);
-        if ($vdep != null && $m != null) {
+        if ($vdep != null && $m != null 
+            && $vdep != DB_DataObject_Cast::sql('NULL')) {
             $d->setValue($vdep);
             $m->_options = array();
             $options = htmlentities_array(
@@ -592,7 +593,6 @@ class PagUbicacion extends PagBaseMultiple
                 );
             }
         }
-
     }
 
 

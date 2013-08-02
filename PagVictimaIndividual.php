@@ -377,7 +377,19 @@ class PagVictimaIndividual extends PagBaseMultiple
         $vv = isset($this->bvictima->_do->id_persona) ?
             $this->bvictima->_do->id_persona : '';
         $valsca = array();
+        $idcaso =& $_SESSION['basicos_id'];
+        $dcaso = objeto_tabla('caso');
+
         if ($vv != '') {
+            $dcaso->get($idcaso);
+            $pf = fecha_a_arr($dcaso->fecha);
+            $ht =& $this->getElement('aniocaso');
+            $ht->setValue($pf['Y']);
+            $ht =& $this->getElement('mescaso');
+            $ht->setValue($pf['m']);
+            $ht =& $this->getElement('diacaso');
+            $ht->setValue($pf['d']);
+
             $e =& $this->getElement('procedencia');
             $dep =& $e->_elements[0];
             $mun =& $e->_elements[1];
@@ -404,27 +416,22 @@ class PagVictimaIndividual extends PagBaseMultiple
             $ssexo =& $g->_elements[3];
             $ssexo->setValue($fsexo);
 
-            $idcaso =& $_SESSION['basicos_id'];
-            $dcaso = objeto_tabla('caso');
-            $dcaso->get($idcaso);
-            $pf = fecha_a_arr($dcaso->fecha);
-
-            $ht =& $this->getElement('aniocaso');
-            $ht->setValue($pf['Y']);
-            $ht =& $this->getElement('mescaso');
-            $ht->setValue($pf['M']);
-            $ht =& $this->getElement('diacaso');
-            $ht->setValue($pf['d']);
-
             $sedad =& $g->_elements[5];
             if ($fanio > 0) {
                 $na = edad_de_fechanac(
                     $fanio, $pf['Y'], $fmes,
-                    $pf['M'], $fdia, $pf['d']
+                    $pf['m'], $fdia, $pf['d']
                 );
                 $sedad->setValue($na);
             }
-
+            $sedadactual =& $g->_elements[7];
+            if ($fanio > 0) {
+                $na = edad_de_fechanac(
+                    $fanio, date('Y'), $fmes,
+                    date('m'), $fdia, date('d')
+                );
+                $sedadactual->setValue($na);
+            }
 
             foreach ($this->bvictima->_do->fb_fieldsToRender as $c) {
                 $cq = $this->getElement($c);

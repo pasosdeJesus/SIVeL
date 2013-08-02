@@ -72,7 +72,7 @@ function muestra()
 
     while ($result->fetchInto($row)) {
         echo "<tr>";
-        echo '<td><a href="#" onClick="enviar_persona(\''
+        echo '<td><a href="#" onClick="enviarPersona(\''
             . htmlentities($rol, ENT_COMPAT, 'UTF-8') . '\'';
         $html_sep = ", ";
         foreach ($row as $v) {

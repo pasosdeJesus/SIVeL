@@ -65,7 +65,7 @@ function muestra()
         "</tr>";
     while ($result->fetchInto($row)) {
         echo "<tr>";
-        echo '<td><a href="#" onClick="enviar_grupoper(';
+        echo '<td><a href="#" onClick="enviarGrupoPer(';
         $html_sep = "";
         foreach ($row as $v) {
             echo $html_sep . "'" . htmlentities($v, ENT_COMPAT, 'UTF-8') . "'";

@@ -152,7 +152,8 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
      */
     function setanionac($value)
     {
-        $this->anionac= ($value == 0) ? null : $value;
+        $this->anionac= ($value == '' || $value == 0) ?  
+            DB_DataObject_Cast::sql('NULL') : $value;
     }
 
     /**
@@ -166,7 +167,8 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
      */
     function setmesnac($value)
     {
-        $this->mesnac= ($value == 0) ? null : $value;
+        $this->mesnac= ($value == '' || $value == 0) ? 
+            DB_DataObject_Cast::sql('NULL') : $value;
     }
 
     /**
@@ -180,7 +182,8 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
      */
     function setdianac($value)
     {
-        $this->dianac= ($value == 0) ? null : $value;
+        $this->dianac= ($value == '' || $value == 0) ? 
+            DB_DataObject_Cast::sql('NULL') : $value;
     }
 
     /**
@@ -328,30 +331,47 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         $gr[] =& $sel;
         $form->removeElement('sexo');
 
-        $seln =& $form->createElement('static', 'pi', '', '(Edad:');
+        $seln =& $form->createElement(
+            'static', 'pi', '', _('Edad en hecho') . ':'
+        );
         $gr[] =& $seln;
 
-        $seln =& $form->createElement('text', 'edad', _('Edad'));
+        $seln =& $form->createElement('text', 'edad', _('Edad en hecho'));
         $seln->setSize(3);
         $seln->setMaxlength(3);
         $gr[] =& $seln;
-        if ($this->anionac != null && $this->anionac > 0) {
+/*        if ($this->anionac != null && $this->anionac > 0) {
             $na ='19';  // el valor lo pone formularioValores de PagVictimaIndividual
             //            $na = edad_de_fechanac($this->anionac, $aniohecho, $this->mesnac, $meshecho, $this->dianac, $diahecho)
             $seln->setValue($na);
             $seln->freeze();
-        }
-        $seln =& $form->createElement('static', 'pd', '', ')');
+        } */
+/*        $seln =& $form->createElement('static', 'pd', '', ')');
+            $gr[] =& $seln; */
+
+        $seln =& $form->createElement(
+            'static', 'pia', '', _('Edad actual') . ':', array(
+                'id' => 'edadactual',
+                'onchange' => 'cambiaEdadActual()'
+        ));
         $gr[] =& $seln;
+        $seln =& $form->createElement('text', 'edadactual', _('Edad actual'));
+        $seln->setSize(3);
+        $seln->setMaxlength(3);
+        $gr[] =& $seln;
+
 
         $form->addGroup(
             $gr, 'nacimiento', _('Fecha Nac. y Sexo'),
             '&nbsp;', false
         );
-
         $form->addElement('hidden', 'aniocaso', '', '');
         $form->addElement('hidden', 'mescaso', '', '');
         $form->addElement('hidden', 'diacaso', '', '');
+
+        $form->addElement('hidden', 'anioactual', date('Y'));
+        $form->addElement('hidden', 'mesactual', date('m'));
+        $form->addElement('hidden', 'diaactual', date('d')); 
     }
 
 
@@ -411,7 +431,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             $fecharef = fecha_a_arr($fecharef);
         }
         $fhanio = $fecharef['Y'];
-        $fhmes = $fecharef['M'];
+        $fhmes = $fecharef['m'];
         $fhdia = $fecharef['d'];
 
         if ((int)$valores['edad'] > 0
