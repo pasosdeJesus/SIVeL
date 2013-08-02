@@ -15,7 +15,7 @@ hoy=`date "+%Y-%m-%d"`
 anio=`date "+%Y"`
 
 
-echo "estructura.sql"
+echo -n "estructura.sql - "
 grep -q "CREATE  *TABLE  *$tm " estructura.sql 2> /dev/null
 if (test "$?" != "0") then {
 	cat >> estructura.sql <<EOF
@@ -27,32 +27,42 @@ CREATE TABLE $tm (
 	fechadeshabilitacion DATE CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 EOF
+	echo " - Modificado"
+} else {
+	echo " - Mantenido"
 } fi;
 
 
-awk "/^ *\);/ { ent = 0; } /.*/ { if (ent == 1) { print \$0; } } /CREATE  *TABLE  *$tm / { ent = 1; }" estructura.sql | grep -e "INTEGER" -e VARCHAR -e DATE > /tmp/campos
+awk "/^ *\);/ { ent = 0; } /.*/ { if (ent == 1) { print \$0; } } /CREATE  *TABLE  *$tm / { ent = 1; }" estructura.sql | grep -e "INTEGER" -e VARCHAR -e DATE -e BOOL > /tmp/campos
 
-echo "estructura_databoject.ini"
+echo -n "estructura_databoject.ini - "
 grep -q "\[$tm\]" DataObjects/estructura-dataobject.ini 2>/dev/null
 if (test "$?" != "0") then {
 	echo "[${tm}]" >> DataObjects/estructura-dataobject.ini
-	sed -e "s/^[^a-zA-Z_]*\([a-zA-Z_]*\) *INTEGER.*PRIMARY KEY.*/\1 = 129/g;s/^[^a-zA-Z_]*\([a-zA-Z_]*\) *INTEGER.*NOT NULL.*/\1 = 129/g;s/^[^a-zA-Z_]*\([a-zA-Z_]*\) *INTEGER.*/\1 = 1/g;s/^[^a-zA-Z_]*\([a-zA-Z_]*\) *VARCHAR.*NOT NULL.*/\1 = 130/g;s/^[^a-zA-Z_]*\([a-zA-Z_]*\) *VARCHAR.*/\1 = 2/g;s/^[^a-zA-Z_]*\([a-zA-Z_]*\) *DATE.*NOT NULL.*/\1 = 134/g;s/^[^a-zA-Z_]*\([a-zA-Z_]*\) *DATE.*/\1 = 6/g;s/^[^a-zA-Z_]*\([a-zA-Z_]*\) *BOOL.*/\1 = 18/g" /tmp/campos >> DataObjects/estructura-dataobject.ini
+	sed -e "s/^[^a-zA-Z_]*\([a-zA-Z_]*\).*INTEGER.*PRIMARY KEY.*/\1 = 129/g;s/^[^a-zA-Z_]*\([a-zA-Z_]*\).*INTEGER.*NOT NULL.*/\1 = 129/g;s/^[^a-zA-Z_]*\([a-zA-Z_]*\).*INTEGER.*/\1 = 1/g;s/^[^a-zA-Z_]*\([a-zA-Z_]*\).*VARCHAR.*NOT NULL.*/\1 = 130/g;s/^[^a-zA-Z_]*\([a-zA-Z_]*\).*VARCHAR.*/\1 = 2/g;s/^[^a-zA-Z_]*\([a-zA-Z_]*\).*DATE.*NOT NULL.*/\1 = 134/g;s/^[^a-zA-Z_]*\([a-zA-Z_]*\).*DATE.*/\1 = 6/g;s/^[^a-zA-Z_]*\([a-zA-Z_]*\).*BOOL.*/\1 = 18/g" /tmp/campos >> DataObjects/estructura-dataobject.ini
 	cat >> DataObjects/estructura-dataobject.ini <<EOF
 [${tm}__keys]
 id = K
 
 EOF
+	echo " - Modificado"
+} else {
+	echo " - Mantenido"
 } fi;
 
-echo "estructura_databoject.links.ini"
+echo -n "estructura_databoject.links.ini - "
 grep -q "\[$tm\]" DataObjects/estructura-dataobject.links.ini 2>/dev/null
 if (test "$?" != "0") then {
 	grep "REFERENCES" /tmp/campos > /tmp/ref
 	if (test -s /tmp/ref) then {
 		echo "" >> DataObjects/estructura-dataobject.links.ini
 		echo "[$tm]" >> DataObjects/estructura-dataobject.links.ini
-		sed -e "s/^[^A-Za-z_]*\([a-zA-Z_]*\).*REFERENCES \([a-zA-Z]*\),/\1 = \2:id/g" /tmp/ref >> DataObjects/estructura-dataobject.links.ini
+		sed -e "s/^[^A-Za-z_]*\([a-zA-Z_]*\).*REFERENCES \([a-zA-Z_]*\).*,.*/\1 = \2:id/g" /tmp/ref >> DataObjects/estructura-dataobject.links.ini
 	} fi;
+	echo " - Modificado"
+} else {
+	echo " - Mantenido"
+
 } fi;
 
 grep -q fechacreacion /tmp/campos
@@ -62,7 +72,7 @@ if (test "$?" = "0") then {
 	basica=0;
 } fi;
 
-echo "DataObjects"
+echo -n "DataObjects/$tg.php - "
 if (test ! -f "DataObjects/$tg.php") then {
 	grep -q fechacreacion /tmp/campos
 	if (test "$?" = "0") then {
@@ -178,7 +188,11 @@ EOF
 
     var \$fb_textFields = array ();
     var \$fb_enumFields = array();
-    var \$fb_booleanFields = array();
+    var \$fb_booleanFields = array(
+EOF
+	grep BOOL /tmp/campos | sed -e "s/^[^a-zA-Z_]*\([a-zA-Z_]*\) *.*/        '\1',/g;" >> DataObjects/$tg.php
+	cat >> DataObjects/$tg.php <<EOF
+    );
 
     /**
      * Prepara antes de generar formulario.
@@ -211,10 +225,16 @@ EOF
 }
 ?>
 EOF
+	echo " - Modificado"
+} else {
+	echo " - Mantenido"
 } fi;
 
-echo "datos.sql"
+echo -n "datos.sql - "
 grep -q "INSERT INTO $tm " datos.sql 2>/dev/null
 if (test "$?" != "0") then {
 	echo "INSERT INTO $tm (id, nombre, fechacreacion) VALUES (0, 'SIN INFORMACIÓN', '$hoy');" >> datos.sql
+	echo " - Modificado"
+} else {
+	echo " - Mantenido"
 } fi;	
