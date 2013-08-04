@@ -133,21 +133,21 @@ function limpiarFechaNac()
  */
 function edadDeFechaNac(anioref, mesref, diaref)
 {
-	var anionac= $("[name='anionac']").val();
-	var mesnac= $("[name='mesnac']").val();
-	var dianac= $("[name='dianac']").val();
+	var anionac= +$("[name='anionac']").val();
+	var mesnac= +$("[name='mesnac']").val();
+	var dianac= +$("[name='dianac']").val();
 
 	//alert("OJO edad_de_fechanac anionac=" + anionac + ", anioref=" + anioref+ ", mesnac=" + mesnac + ", mesref=" + mesref+ ", dianac=" + dianac + ", diaref=" + diaref);
 	if (anionac == '') {
 		return -1;
 	}
 	na = anioref-anionac;
-	if (mesnac != undefined && mesnac != '' 
-			&& mesref != undefined && mesref!= '' 
+	if (mesnac != undefined && mesnac != '' && mesnac > 0
+			&& mesref != undefined && mesref!= '' && mesref > 0
 			&& mesnac <= mesref) {
 		if (mesnac < mesref || (dianac != undefined && dianac != '' 
-					&& diaref != undefined && diaref!= '' 
-					&& dianac < diaref)
+                    && dianac > 0 && diaref != undefined && diaref!= '' 
+                    && diaref > 0 && dianac < diaref)
 		   ) {
 			na--;
 		}
