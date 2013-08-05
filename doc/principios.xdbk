@@ -40,15 +40,12 @@
 		desarrollo de SIVeL:
 		<itemizedlist>
 			<listitem>
-				<para>El código fuente de SIVeL está
-					abierto y disponible públicamente 
-					(i.e fuentes abiertas).  También 
-					mantenemos abierta una convocatoria 
-					pública a 
-					auditar las fuentes de SIVeL 
-					(ver <xref linkend="llamado"></xref>)
-					y la distribución de referencia,
-		premiando con dinero a quien encuentre alguna falla.
+				<para>
+El código fuente de SIVeL está abierto y disponible públicamente 
+(i.e fuentes abiertas).  También mantenemos abierta una convocatoria 
+pública a auditar las fuentes de SIVeL (ver <xref linkend="llamado"></xref>)
+y la distribución de referencia, premiando con dinero a quien encuentre 
+alguna falla de seguridad.
 	</para>
 
 			</listitem>

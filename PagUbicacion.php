@@ -555,7 +555,7 @@ class PagUbicacion extends PagBaseMultiple
             && $vdep != DB_DataObject_Cast::sql('NULL')) {
             $d->setValue($vdep);
             $m->_options = array();
-            $options = htmlentities_array(
+            $options = array('' => '') + htmlentities_array(
                 $db->getAssoc(
                     "SELECT id, nombre FROM municipio WHERE id_departamento='"
                     . $vdep . "' "
@@ -566,7 +566,7 @@ class PagUbicacion extends PagBaseMultiple
             if ($nomcmun != null && $vmun != null && $c != null) {
                 $m->setValue($vmun);
                 $c->_options = array();
-                $options = htmlentities_array(
+                $options = array('' => '') + hhtmlentities_array(
                     $db->getAssoc(
                         "SELECT id, nombre FROM clase WHERE id_departamento='"
                         . $vdep . "' "
