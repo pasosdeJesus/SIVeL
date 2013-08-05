@@ -441,18 +441,18 @@ class PagUbicacion extends PagBaseMultiple
             "SELECT  id, nombre FROM departamento ORDER BY nombre"
         );
         $dep->loadArray($options);
-        $dep->updateAttributes(
+/*        $dep->updateAttributes(
             array('onchange' => "envia('$idpest:$nomcampodep')")
-        );
+        ); */
 
         $mun =& $form->createElement(
             'select', $nomcampomun,
             $GLOBALS['etiqueta']['municipio'],
             array()
         );
-        $mun->updateAttributes(
+/*        $mun->updateAttributes(
             array('onchange' => "envia('$idpest:$nomcampomun')")
-        );
+        ); */
 
         $cla =& $form->createElement(
             'select', $nomcampoclase,
@@ -514,6 +514,7 @@ class PagUbicacion extends PagBaseMultiple
 
         $d = $m = $c = null;
         $d =& $form->getElement($nomcdep);
+        sin_error_pear($d);
         if ($nomcmun == null) {
             $d->updateAttributes(array(
                 "id" => "$nomcdep",
@@ -525,6 +526,7 @@ class PagUbicacion extends PagBaseMultiple
                 . "'$nomcmun', '$nomccla')"
             ));
             $m =& $form->getElement($nomcmun);
+            sin_error_pear($m);
             if ($nomccla == null) {
                 $m->updateAttributes(array(
                     "id" => "$nomcmun",
@@ -536,6 +538,7 @@ class PagUbicacion extends PagBaseMultiple
                     . "'$nomcmun', '$nomccla')"
                 ));
                 $c =& $form->getElement($nomccla);
+                sin_error_pear($c);
                 $c->updateAttributes(array(
                     "id" => "$nomccla",
                 ));
@@ -612,19 +615,16 @@ class PagUbicacion extends PagBaseMultiple
         $vv = isset($this->bubicacion->id) ? $this->bubicacion->id : '';
         $this->addElement('hidden', 'id', $vv);
 
-        list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
-            $db, $this, 'ubicacion',
-            $this->bubicacion->_do->id_departamento,
-            $this->bubicacion->_do->id_municipio
-        );
-
-        $this->addElement($dep);
-        $this->addElement($mun);
-        $this->addElement($cla);
-
         $this->bubicacion->createSubmit = 0;
         $this->bubicacion->useForm($this);
         $this->bubicacion->getForm($this);
+
+        PagUbicacion::modCamposUbicacion(
+            $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
+            $this->bubicacion->_do->id_departamento, 
+            $this->bubicacion->_do->id_municipio, 
+            $this->bubicacion->_do->id_clase
+        );
 
         if (isset($this->bubicacion->_do->latitud)
             && isset($this->bubicacion->_do->longitud)
