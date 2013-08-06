@@ -2553,17 +2553,23 @@ if (!aplicado($idac)) {
 
     aplicaact($act, $idac, 'Aumentadas tablas básicas');
 }
-/*$idac = '1.2-rt4';
+$idac = '1.2-pr1';
 if (!aplicado($idac)) {
     hace_consulta(
-        $db,
-        "ALTER TABLE vinculoestado_comunidad RENAME TO "
-        . "comunidad_vinculoestado", false
+        $db, "UPDATE presponsable set papa='39' WHERE id='1'", false
+    );
+    hace_consulta(
+        $db, "UPDATE presponsable set papa='39' WHERE id='14'", false
+    );
+    hace_consulta(
+        $db, "UPDATE presponsable set papa='40' WHERE id='25'", false
+    );
+    hace_consulta(
+        $db, "UPDATE presponsable set papa='36' WHERE id='33'", false
     );
 
-    die("x");
     aplicaact($act, $idac, 'Renombrando tablas');
-} */
+} 
 
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
