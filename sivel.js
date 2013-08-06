@@ -186,16 +186,41 @@ function ponerRangoEdad() {
 
 // UBICACIÓN
 
+
+// Llena coordenada con datos de latitud y longitud genericos de
+// acuerdo al departamento, municipio o clase suministrados
+function poneCoord(par) {
+    var lat = $("[name='latitud']");
+    var lon = $("[name='longitud']");
+    if (lat.length > 0 && lon.length > 0) {
+        var y = $.getJSON("json_busca.php", par);
+        y.done(function( data ) {
+            if (data.length <= 0) {
+                alert('No se encontró ' + par.tabla);
+            } else {
+                var d = data.pop();
+                lat.val(d.latitud);
+                lon.val(d.longitud);
+            }
+        });
+        y.error(function(m1, m2, m3) {
+            alert('Problema leyendo ' + par.tabla+ ' ' + m1 + m2 + m3);
+        });
+    }
+}
+
+
 /**
  * Completa municipio
  * Basada en función de Luca Urech <lucaurech@yahoo.de>
  */
 function llenaMunicipio(iddep, idmun, idcla) {
 	var dep = $("#" + iddep).val();
-	var par = { 
-		id_departamento: dep
-       	};
-	var x = $.getJSON("json_municipios.php", par);
+    var par = { 
+        tabla: 'municipio',
+        id_departamento: dep
+    };
+	var x = $.getJSON("json_busca.php", par);
 	x.done(function( data ) {
 		var op = '<option value=""></option>';
 		$.each( data, function ( i, item ) {
@@ -209,7 +234,12 @@ function llenaMunicipio(iddep, idmun, idcla) {
 	x.error(function(m1, m2, m3) {
 		alert('Problema leyendo Municipios' + m1 + m2 + m3);
 	});
-	if (idcla != '') {
+    par = { 
+        tabla: 'departamento',
+        id: dep
+    };
+    poneCoord(par);
+    if (idcla != '') {
 		$("#" + idcla).attr("disabled", true);
 	}
 	if (dep == 0) {
@@ -227,10 +257,11 @@ function llenaClase(iddep, idmun, idcla) {
 	var dep = +$("#" + iddep).val();
 	var mun = +$("#" + idmun).val();
 	var par = { 
+        tabla: 'clase',
 		id_departamento: dep,
 		id_municipio: mun,
        	};
-	var x = $.getJSON("json_clases.php", par);
+	var x = $.getJSON("json_busca.php", par);
 	x.done(function( data ) {
 		var op = '<option value=""></option>';
 		$.each( data, function ( i, item ) {
@@ -243,6 +274,12 @@ function llenaClase(iddep, idmun, idcla) {
 	x.error(function(m1, m2, m3) {
 		alert('Problema leyendo Clase ' + x + m1 + m2 + m3);
 	});
+    par = { 
+        tabla: 'municipio',
+        id_departamento: dep,
+        id: mun,
+    };
+    poneCoord(par);
 	if (dep == 0 || mun == 0) {
 		$("#" + idcla).attr("disabled", true);
 	} else {
@@ -250,6 +287,25 @@ function llenaClase(iddep, idmun, idcla) {
 	}
 }
 
+
+/** 
+ * Completa latitud y longitud a partir de departamento/municipio/clase
+ * dados por el usuario
+ */
+function llenaCoord(iddep, idmun, idcla) {
+	var dep = $("#" + iddep).val();
+    var mun = +$("#" + idmun).val();
+	var cla = +$("#" + idcla).val();
+    par = { 
+        tabla: 'clase',
+        id_departamento: dep,
+        id_municipio: mun,
+        id: cla,
+    };
+    // Por el momento no ponemos coordenadas en caso de clase porque 
+    // falta la información de dominio público de ubicación de clases 
+    // poneCoord(par);
+}
 
 // AUTOCOMPLETACIÓN PERSONA
 
@@ -303,7 +359,7 @@ function autocompletaPersona(cnom, cape, cdoc, ccasos, cid) {
 
 $( document ).ready(function () {
 
-    if ($("[name='aniocaso']") != undefined) {
+    if ($("[name='aniocaso']").length > 0) {
         var aniocaso = $("[name='aniocaso']").val();
         var mescaso = $("[name='mescaso']").val();
         var diacaso = $("[name='diacaso']").val();

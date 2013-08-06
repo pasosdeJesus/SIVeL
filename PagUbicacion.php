@@ -541,6 +541,8 @@ class PagUbicacion extends PagBaseMultiple
                 sin_error_pear($c);
                 $c->updateAttributes(array(
                     "id" => "$nomccla",
+                    "onchange" => "llenaCoord('$nomcdep', "
+                    . "'$nomcmun', '$nomccla')"
                 ));
             }
         }
@@ -566,7 +568,7 @@ class PagUbicacion extends PagBaseMultiple
             if ($nomcmun != null && $vmun != null && $c != null) {
                 $m->setValue($vmun);
                 $c->_options = array();
-                $options = array('' => '') + hhtmlentities_array(
+                $options = array('' => '') + htmlentities_array(
                     $db->getAssoc(
                         "SELECT id, nombre FROM clase WHERE id_departamento='"
                         . $vdep . "' "
