@@ -54,14 +54,15 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     );
     var $fb_linkDisplayLevel = 0;
     var $fb_preDefOrder = array(
-        'id_departamento', 'id_municipio',
-        'id_clase', 'lugar', 'sitio', 'latitud', 'longitud', 'id_tsitio'
+        'id_departamento', 'id_municipio', 'id_clase', 
+        'lugar', 'sitio', 'latitud', 'longitud', 'id_tsitio'
     );
     var $fb_fieldsToRender = array(
         'lugar', 'sitio', 'latitud', 'longitud', 'id_tsitio'
     );
     var $fb_addFormHeader = false;
     var $fb_hidePrimaryKey = true;
+
     /**
      * Constructora
      * return @void
@@ -121,12 +122,14 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     */
     function setlatitud($value)
     {
-        $this->latitud = ($value == '') ? 'null' : $value;
+        $this->latitud = ($value == '') ? 
+            DB_DataObject_Cast::sql('NULL') : $value;
     }
 
     function setid_municipio($value)
     {
-        $this->id_municipio = ($value == '') ? 'null' : (int)$value;
+        $this->id_municipio = ($value == '') ? 
+            DB_DataObject_Cast::sql('NULL') : (int)$value;
     }
 
 
@@ -140,6 +143,13 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     function preGenerateForm(&$formbuilder)
     {
         parent::preGenerateForm($formbuilder);
+/*        $this->fb_preDefElements = array(
+            'id_departamento' => 
+            HTML_QuickForm::createElement('select', 'id_departamento',
+                $GLOBALS['etiqueta']['departamento'],
+                array()
+            )
+        ); */
     }
 
     /**
@@ -173,6 +183,25 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
             $e->setMaxlength(200);
         }
         $e =& $form->getElement('id');
+        $dep =& $form->createElement(
+            'select', 'id_departamento',
+            $GLOBALS['etiqueta']['departamento'],
+            array()
+        ); 
+        $form->insertElementBefore($dep, 'lugar');
+        $mun =& $form->createElement(
+            'select', 'id_municipio',
+            $GLOBALS['etiqueta']['municipio'],
+            array()
+        );
+        $form->insertElementBefore($mun, 'lugar');
+        $cla =& $form->createElement(
+            'select', 'id_clase',
+            $GLOBALS['etiqueta']['clase'],
+            array()
+        ); 
+        $form->insertElementBefore($cla, 'lugar');
+
     }
 
 
