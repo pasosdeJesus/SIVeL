@@ -4,7 +4,7 @@
 
 	<para>
 La ubicaci&oacute;n de un caso se específica en esta
-pestaña de acuerdo al DIVIPOLA (Divisi&oacute;n Político
+pestaña de acuerdo al DIVIPOLA 2012 (Divisi&oacute;n Político
 Administrativa del país de acuerdo al DANE).
 Si entre las opciones que se le presentan no está el que 
 busca puede agregar el departamento, municipio o centro poblado en la 
@@ -28,13 +28,17 @@ tabla básica correspondiente.
 Departamento: 
 Si el caso ocurre fuera del país elija <literal>Exterior</literal>.
 Si no conoce el departamento especifique la regi&oacute;n en la pestaña
-anterior (ver <xref linkend="basicos"/>).
+anterior (ver <xref linkend="basicos"/>).  Al elegir uno se 
+cambiará la latitud y longitud para poner un punto cerecano 
+al centro del departamento.
 				</para>
 			</listitem>
 			<listitem>
 				<para>
 Municipio: 
 Una vez elija el departamento puede elegirse entre sus municipios. 
+Al alegirlo se cambiará la latitud y longitud para poner uno punto
+cercano al centro del municipio.
 				</para>
 			</listitem>
 			<listitem>
