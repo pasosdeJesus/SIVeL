@@ -260,13 +260,13 @@ SELECT setval('contexto_seq', max(id)) FROM contexto;
 
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (39, 'POLO ESTATAL', '2009-09-20', NULL, NULL);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (40, 'POLO INSURGENTE', '2009-09-20', NULL, NULL);
-INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (1, 'ESTADO COLOMBIANO', '2001-01-30', 39, NULL);
-INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (2, 'FUERZA PUBLICA', '2001-01-30', NULL, 1);
-INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (7, 'POLICÍA', '2001-01-30', NULL, 2);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (1, 'ESTADO COLOMBIANO', '2001-01-30', NULL, '39');
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (2, 'FUERZA PUBLICA', '2001-01-30', NULL, '1');
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (7, 'POLICÍA', '2001-01-30', NULL, '2');
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (36, 'OTROS', '2001-06-13', NULL, NULL);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (24, 'AGENTE EXTRANJERO', '2001-01-30', NULL, '36');
-INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (25, 'GUERRILLA', '2001-01-30', 40, NULL);
-INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (32, 'ERG', '2001-01-30', NULL, 25);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (25, 'GUERRILLA', '2001-01-30', NULL, '40');
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (32, 'ERG', '2001-01-30', NULL, '25');
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (33, 'GRUPOS DE INTOLERANCIA SOCIAL', '2001-01-30', NULL, '36');
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (34, 'INFORMACION CONTRADICTORIA', '2001-01-30', NULL, NULL);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (35, 'SIN INFORMACIÓN', '2001-01-30', NULL, NULL);
@@ -282,7 +282,7 @@ INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa)
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (12, 'DAS', '2001-01-30', NULL, 2);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (38, 'FISCALIA', '2004-07-14', NULL, 1);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (13, 'CTI', '2001-01-30', NULL, 38);
-INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (14, 'PARAMILITARES', '2001-01-30', 39, 1);
+INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (14, 'PARAMILITARES', '2001-01-30', NULL,'39');
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (15, 'AUC', '2001-01-30', NULL, 14);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (16, 'ACCU', '2001-01-30', NULL, 14);
 INSERT INTO presponsable (id, nombre, fechacreacion, fechadeshabilitacion, papa) VALUES (17, 'AUTODEFENSAS DE PUERTO BOYACA', '2001-01-30', NULL, 14);
