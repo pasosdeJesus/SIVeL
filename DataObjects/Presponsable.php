@@ -98,7 +98,7 @@ class DataObjects_Presponsable extends DataObjects_Basica
     /**
      * Ajusta formulario generado.
      *
-     * @param object &$form      Formulario HTML_QuickForm
+     * @param object &$form        Formulario HTML_QuickForm
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
@@ -118,6 +118,11 @@ class DataObjects_Presponsable extends DataObjects_Basica
         return 35;
     }
 
+    /**
+     * Valor por usar en relato
+     *
+     * @return string identificación
+     */
     function valorRelato()
     {
         return $this->id;

@@ -4,7 +4,8 @@
  <description>Estándares de Pear con convenciones de nombres de Orange</description>
 
  <rule ref="PEAR">
-  <exclude name="PEAR.NamingConventions.ValidFunctionName"/>
+	 <exclude name="PEAR.NamingConventions.ValidFunctionName"/>
+	 <exclude name="PEAR.NamingConventions.ValidClassName"/>
  </rule>
 
 </ruleset>

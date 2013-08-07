@@ -7,9 +7,9 @@
 					<listitem>
 						<para>
 Usabilidad: agrega automáticamente latitud y longitud al elegir 
-departamento o municipio en pestaña Ubicación.  Control AJAX más eficiente para 
+departamento o municipio en pestaña Ubicación; control AJAX más eficiente para 
 elegir departamento, municipio y clase en pestañas Ubicación y 
-Víctima Individual.  
+Víctima Individual; alerta para reportar errores de validación.  
 </para>
 					</listitem>
 					<listitem>

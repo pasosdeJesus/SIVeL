@@ -178,8 +178,6 @@ class PagUbicacion extends PagBaseMultiple
     function nullVar()
     {
         $this->bubicacion = null;
-        PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
-        //$this->nullVarUbicacion();
     }
 
     /**
@@ -514,6 +512,7 @@ class PagUbicacion extends PagBaseMultiple
 
         $d = $m = $c = null;
         $d =& $form->getElement($nomcdep);
+        $d =& toma_elemento_recc($form, $nomcdep);
         sin_error_pear($d);
         if ($nomcmun == null) {
             $d->updateAttributes(array(
@@ -525,7 +524,7 @@ class PagUbicacion extends PagBaseMultiple
                 "onchange" => "llenaMunicipio('$nomcdep', "
                 . "'$nomcmun', '$nomccla')"
             ));
-            $m =& $form->getElement($nomcmun);
+            $m =& toma_elemento_recc($form, $nomcmun);
             sin_error_pear($m);
             if ($nomccla == null) {
                 $m->updateAttributes(array(
@@ -537,7 +536,8 @@ class PagUbicacion extends PagBaseMultiple
                     "onchange" => "llenaClase('$nomcdep', "
                     . "'$nomcmun', '$nomccla')"
                 ));
-                $c =& $form->getElement($nomccla);
+                //$c =& $form->getElement($nomccla);
+                $c =& toma_elemento_recc($form, $nomccla);
                 sin_error_pear($c);
                 $c->updateAttributes(array(
                     "id" => "$nomccla",
@@ -780,18 +780,15 @@ class PagUbicacion extends PagBaseMultiple
         ;
 
         if ($es_vacio) {
-            //PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return true;
         }
         if (!$this->validate() ) {
-            //PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return false;
         }
         verifica_sin_CSRF($valores);
         if (in_array(31, $_SESSION['opciones'])
             && !in_array(21, $_SESSION['opciones'])
         ) {
-            //PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return true;
         }
 
@@ -835,7 +832,6 @@ class PagUbicacion extends PagBaseMultiple
             die($ret->getMessage());
         }
 
-        PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
         caso_funcionario($_SESSION['basicos_id']);
         return  true;
     }

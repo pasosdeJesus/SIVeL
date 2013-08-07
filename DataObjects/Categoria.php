@@ -79,7 +79,7 @@ class DataObjects_Categoria extends DataObjects_Basica
         'fechadeshabilitacion', 'id_supracategoria', 'id_pconsolidado',
         'contadaen', 'tipocat'
     );
-   var $fb_selectAddEmpty = array('fechadeshabilitacion');
+    var $fb_selectAddEmpty = array('fechadeshabilitacion');
     var $fb_hidePrimaryKey = false;
     var $fb_enumFields = array('tipocat');
     var $es_enumOptions = array('tipocat' => array('I' => 'Individual',
@@ -189,14 +189,6 @@ class DataObjects_Categoria extends DataObjects_Basica
             $this->id_tviolencia.':' .
             $this->id_supracategoria
         );
-/*        $f =& $form->getElement('fechadeshabilitacion');
-        if (!isset($this->fechadeshabilitacion)
-        || $this->fechadeshabilitacion == ''
-        ) {
-            $f->_elements[0]->setValue('');
-            $f->_elements[1]->setValue('');
-            $f->_elements[2]->setValue('');
-        } */
     }
 
     /**

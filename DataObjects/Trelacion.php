@@ -21,6 +21,17 @@
 require_once 'DB_DataObject_SIVeL.php';
 require_once 'HTML/QuickForm/Action.php';
 
+/**
+ * Definicion para la tabla trelacion
+ * Ver documentación de DataObjects_Basica.
+ *
+ * @category SIVeL
+ * @package  SIVeL
+ * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @link     http://sivel.sf.net/tec
+ * @see      DataObjects_Basica
+ */
 class DataObjects_Trelacion extends DataObjects_Basica
 {
     var $__table = 'trelacion';         // table name

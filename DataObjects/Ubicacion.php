@@ -82,13 +82,18 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
             'longitud' => _('Longitud'),
         );
         if (isset($GLOBALS['etiqueta']['ubicacionlugar'])) {
-            $this->fb_fieldLabels['lugar'] = 
-                $GLOBALS['etiqueta']['ubicacionlugar'];
+            $this->fb_fieldLabels['lugar'] 
+                = $GLOBALS['etiqueta']['ubicacionlugar'];
         }
     }
 
     var $fb_excludeFromAutoRules = array('id_tsitio');
 
+    /**
+     * Campos y valores SIN INFORMACION
+     *
+     * @return array Arreglo con campo y valor SIN INFORMACION
+     */
     static function camposSinInfo()
     {
         $a = array(
@@ -126,6 +131,15 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
             DB_DataObject_Cast::sql('NULL') : $value;
     }
 
+    /**
+    * Modifica valor de municipio antes de incluirlo en base de datos.
+    * Para funcionar con versiones nuevas de DB_DataObject requiere
+    * <b>useMutator</b> en <b>true</b>
+    *
+    * @param string $value Valor recibido de formulario
+    *
+    * @return Valor para base de datos
+    */
     function setid_municipio($value)
     {
         $this->id_municipio = ($value == '') ? 
@@ -143,13 +157,6 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     function preGenerateForm(&$formbuilder)
     {
         parent::preGenerateForm($formbuilder);
-/*        $this->fb_preDefElements = array(
-            'id_departamento' => 
-            HTML_QuickForm::createElement('select', 'id_departamento',
-                $GLOBALS['etiqueta']['departamento'],
-                array()
-            )
-        ); */
     }
 
     /**
@@ -208,8 +215,8 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     /**
      * Convierte registro a relato (arreglo de elementos) que agrega a $ar
      *
-     * @param object &$ar   Arreglo de elementos
-     * @param object &$dad  Datos adicionales para conversión
+     * @param object &$ar Arreglo de elementos
+     * @param object $dad Datos adicionales para conversión
      *
      * @return void
      */

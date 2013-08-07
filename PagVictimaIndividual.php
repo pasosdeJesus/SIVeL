@@ -113,7 +113,6 @@ class PagVictimaIndividual extends PagBaseMultiple
         $this->bpersona = null;
         $this->persona_trelacion = null;
         $this->bantecedente_victima = null;
-        PagUbicacion::nullVarUbicacion();
     }
 
     /**
@@ -271,7 +270,6 @@ class PagVictimaIndividual extends PagBaseMultiple
             $this->tcorto = $GLOBALS['etiqueta']['Victimas Individuales'];
         }
 
-        PagUbicacion::nullVarUbicacion();
         $this->addAction('id_departamento', new CamDepartamento());
         $this->addAction('id_municipio', new CamMunicipio());
 
@@ -302,22 +300,48 @@ class PagVictimaIndividual extends PagBaseMultiple
 
         $_SESSION['pagVictimaIndividual_id_persona'] = $vv;
 
-        list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
+/*        list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
             $db, $this, 'victimaIndividual',
             $this->bpersona->_do->id_departamento,
             $this->bpersona->_do->id_municipio
+        ); */
+
+        $this->bpersona->createSubmit = 0;
+        $this->bpersona->useForm($this);
+        $this->bpersona->getForm($this);
+
+
+        $dep =& $this->createElement(
+            'select', 'id_departamento',
+            $GLOBALS['etiqueta']['departamento'],
+            array()
+        ); 
+        $mun =& $this->createElement(
+            'select', 'id_municipio',
+            $GLOBALS['etiqueta']['municipio'],
+            array()
         );
+        $cla =& $this->createElement(
+            'select', 'id_clase',
+            $GLOBALS['etiqueta']['clase'],
+            array()
+        ); 
 
         $gr = array();
         $gr[] =& $dep;
         $gr[] =& $mun;
         $gr[] =& $cla;
 
-        $this->addGroup($gr, 'procedencia', _('Procedencia'), '&nbsp;', false);
-
-        $this->bpersona->createSubmit = 0;
-        $this->bpersona->useForm($this);
-        $this->bpersona->getForm($this);
+        $this->addGroup(
+            $gr, 'procedencia', _('Lugar de Nacimiento'), 
+            '&nbsp;', false
+        );
+        PagUbicacion::modCamposUbicacion(
+            $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
+            $this->bpersona->_do->id_departamento, 
+            $this->bpersona->_do->id_municipio, 
+            $this->bpersona->_do->id_clase
+        );
 
         if (isset($this->bvictima->_do->id_persona)) {
             $comovic = "";
@@ -636,12 +660,10 @@ class PagVictimaIndividual extends PagBaseMultiple
         );
 
         if ($es_vacio) {
-            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return true;
         }
 
         if (!$this->validate() ) {
-            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return false;
         }
 
@@ -650,7 +672,6 @@ class PagVictimaIndividual extends PagBaseMultiple
         if ($nobus
             && (!isset($valores['nombres']) || trim($valores['nombres'])=='')
         ) {
-            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             error_valida(_('Falta nombre de víctima'), $valores);
             return false;
         }
@@ -658,14 +679,12 @@ class PagVictimaIndividual extends PagBaseMultiple
         if (isset($valores['hijos'])
             && ((int)$valores['hijos'] < 0 || (int)$valores['hijos'] > 100)
         ) {
-            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             error_valida(_('Cantidad de hijos fuera de rango'), $valores);
             return false;
         }
         if (in_array(31, $_SESSION['opciones'])
             && !in_array(21, $_SESSION['opciones'])
         ) {
-            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return true;
         }
 
@@ -784,7 +803,6 @@ class PagVictimaIndividual extends PagBaseMultiple
                 }
             }
         }
-        PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
 
         //$bt->setMarker("procesa: antes de caso_funcionario");
         caso_funcionario($_SESSION['basicos_id']);

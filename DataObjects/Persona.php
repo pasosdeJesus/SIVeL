@@ -51,12 +51,14 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
 
 
-    var $fb_preDefOrder = array('nombres', 'apellidos', 'anionac',
+    var $fb_preDefOrder = array(
+        'nombres', 'apellidos', 'anionac',
         'mesnac', 'dianac', 'sexo',   'tipodocumento',
-        'numerodocumento'
+        'numerodocumento','id_departamento', 'id_municipio', 'id_clase'
     );
 
-    var $fb_fieldsToRender = array('nombres', 'apellidos', 'anionac',
+    var $fb_fieldsToRender = array(
+        'nombres', 'apellidos', 'anionac',
         'mesnac', 'dianac', 'sexo',   'tipodocumento',
         'numerodocumento'
     );
@@ -245,7 +247,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
     /**
      * Ajusta formulario generado.
      *
-     * @param object &$form      Formulario HTML_QuickForm
+     * @param object &$form        Formulario HTML_QuickForm
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
@@ -301,7 +303,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
         if ($this->id == null) {
             $sel =& $form->createElement(
-                'static','','',
+                'static', '', '',
                 "<a href=\"javascript:abrirBusquedaPersona('persona')\">" .
                 _("Buscar persona") . "</a>"
             );
@@ -340,26 +342,18 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         $seln->setSize(3);
         $seln->setMaxlength(3);
         $gr[] =& $seln;
-/*        if ($this->anionac != null && $this->anionac > 0) {
-            $na ='19';  // el valor lo pone formularioValores de PagVictimaIndividual
-            //            $na = edad_de_fechanac($this->anionac, $aniohecho, $this->mesnac, $meshecho, $this->dianac, $diahecho)
-            $seln->setValue($na);
-            $seln->freeze();
-        } */
-/*        $seln =& $form->createElement('static', 'pd', '', ')');
-            $gr[] =& $seln; */
 
         $seln =& $form->createElement(
             'static', 'pia', '', _('Edad actual') . ':', array(
                 'id' => 'edadactual',
                 'onchange' => 'cambiaEdadActual()'
-        ));
+            )
+        );
         $gr[] =& $seln;
         $seln =& $form->createElement('text', 'edadactual', _('Edad actual'));
         $seln->setSize(3);
         $seln->setMaxlength(3);
         $gr[] =& $seln;
-
 
         $form->addGroup(
             $gr, 'nacimiento', _('Fecha Nac. y Sexo'),
@@ -389,7 +383,11 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
 
     /** Convierte registro a relato (arreglo de elementos) que agrega a $ar
-     * dad son datos adicionales que pueden requerirse para la conversión.
+     *
+     * @param array &$ar Arreglo con elementos
+     * @param array $dad Datos adicionales para conversión
+     *
+     * @return $ar modificado
      */
     function aRelato(&$ar, $dad = array())
     {
@@ -416,6 +414,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
     /**
      * Valida datos de persona recibidos por formulario
+     *
      * @param string $fecharef Fecha de referencia para calcular año nac.
      * @param bool   $valrango Decide si se valida/autocompleta rango de edad
      * @param array  &$valores Valores recibidos en formulario
@@ -436,41 +435,41 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
         if ((int)$valores['edad'] > 0
             && (!isset($valores['anionac']) || $valores['anionac'] == '')
-                ) {
-                    $valores['anionac'] = $fhanio - (int)$valores['edad'];
-                }
+        ) {
+            $valores['anionac'] = $fhanio - (int)$valores['edad'];
+        }
         if ($valrango
             && $valores['id_rangoedad'] != DataObjects_Rangoedad::idSinInfo()
-                && $valores['anionac'] != ''
-            ) {
-                $r = (int)$valores['id_rangoedad'];
-                //print_r($valores);
-                $e = edad_de_fechanac(
-                    (int)$valores['anionac'], $fhanio,
-                    (int)$valores['mesnac'], $fhmes,
-                    (int)$valores['dianac'], $fhdia
-                );
-                if (!verifica_edad_y_rango($e, $r)) {
-                    $merr = _("La edad ") . (int)$e .
-                        _(" (fecha del hecho menos fecha de nacimiento) ") .
-                        _(" debe corresponder al rango de edad");
-                    return false;
-                }
-            } else if ($valrango && $valores['anionac'] != '') { //Autocompleta
-                $e = edad_de_fechanac(
-                    (int)$valores['anionac'], $fhanio,
-                    (int)$valores['anionac'], $fhmes,
-                    (int)$valores['dianac'], $fhdia
-                );
-                $re = rango_de_edad($e);
-                if ($re == 0) {
-                    $merr = _(
-                        'La fecha de nacimiento no corresponde a un rango'
-                    );
-                    return false;
-                }
-                $valores['id_rangoedad'] = $re;
+            && $valores['anionac'] != ''
+        ) {
+            $r = (int)$valores['id_rangoedad'];
+            //print_r($valores);
+            $e = edad_de_fechanac(
+                (int)$valores['anionac'], $fhanio,
+                (int)$valores['mesnac'], $fhmes,
+                (int)$valores['dianac'], $fhdia
+            );
+            if (!verifica_edad_y_rango($e, $r)) {
+                $merr = _("La edad ") . (int)$e .
+                    _(" (fecha del hecho menos fecha de nacimiento) ") .
+                    _(" debe corresponder al rango de edad");
+                return false;
             }
+        } else if ($valrango && $valores['anionac'] != '') { //Autocompleta
+            $e = edad_de_fechanac(
+                (int)$valores['anionac'], $fhanio,
+                (int)$valores['anionac'], $fhmes,
+                (int)$valores['dianac'], $fhdia
+            );
+            $re = rango_de_edad($e);
+            if ($re == 0) {
+                $merr = _(
+                    'La fecha de nacimiento no corresponde a un rango'
+                );
+                return false;
+            }
+            $valores['id_rangoedad'] = $re;
+        }
         return true;
     }
 

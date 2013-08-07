@@ -129,7 +129,7 @@ class DataObjects_Basica extends DB_DataObject_SIVeL
      * Validaciones adicionales a valores pasados por el formulario y que
      * se pretenden agregar a la base
      *
-     * @param array $values  Valores pasados por formulario de la tabla básica
+     * @param array $values Valores pasados por formulario de la tabla básica
      *
      * @return bool da verdadero si y solo si pasa validaciones adicionales, si
      * no pasa validaciones debe presentar razón con echo
