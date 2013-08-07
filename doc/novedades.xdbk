@@ -26,7 +26,7 @@ ignorando mayúsculas, minúsculas y tildes, usable al buscar por nombre, por
 título y por descripción en consulta web.  
 En consulta detallada en campos de texto (como nombre de víctima) se 
 específica cualquiera con *.    
-					</listitem>
+					</para></listitem>
 					<listitem><para>
 Módulo de georeferenciación en Google Maps convertido a la versión 3 del API.  
 						</para>
@@ -34,9 +34,9 @@ Módulo de georeferenciación en Google Maps convertido a la versión 3 del API.
 					<listitem>
 						<para>
 Administradores: Se dividió el archivo de configuración en una parte para 
-servidor (e.g base de datos y módulos) y otra para interfaz.  
+servidor (e.g base de datos y módulos) y otra para interfaz.
 Activa PostGIS al crear base de datos.
-Configuración más sencilla de módulos.  Basta agregar el módulo en la 
+Configuración más sencilla de módulos,  basta agregar el módulo en la 
 variable <literal>modulos</literal> del archivo de configuración del sitio 
 y desde el menú principal elegir 
 <menuchoice><guimenu>Otros</guimenu><guimenuitem>Actualizar</guimenuitem></menuchoice>.  
@@ -44,9 +44,22 @@ y desde el menú principal elegir
 					</listitem>
 					<listitem>
 						<para>
-Desarrolladores: Afinado para PHP 5.3. Base de datos debe estar en UTF-8.  
-Salida enviada al navegador en UTF-8. Fuentes en UTF-8. 
-Estándares de nomenclatura SQL y Javascript.</para>
+Desarrolladores: Fuentes migradas a github.
+Afinado para PHP 5.3. Base de datos debe estar en UTF-8.  
+Salida enviada al navegador en UTF-8. Fuentes en UTF-8.  
+Estándares de nomenclatura SQL y Javascript.  Archivo de comandos
+<filename>herram/creatabla.sh</filename> que genera automaticamente
+estructura de tabla básica y/o a partir de la estructura en estructura.sql 
+genera la clase en el directorio DataObject y los datos en 
+<filename>DataObjects/estructura-dataobject.ini</filename> y 
+<filename>DataObjects/estructura-dataobject.links.ini</filename>.
+Clase <filename>DataObject/Multitabla</filename> para extender
+y facilitar personalizaciones con un control de 
+multitabla (similar al de familiar en Victima Individual).
+Clase <filename>PagBaseMultiplePartes</filename> para extender
+y facilitar creación de pestañas con partes provenientes de diversos
+DataObject.
+					</para>
 					</listitem>
 			</itemizedlist></para>
 		</listitem>
