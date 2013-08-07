@@ -188,7 +188,7 @@ function ponerRangoEdad() {
 
 
 // Llena coordenada con datos de latitud y longitud genericos de
-// acuerdo al departamento, municipio o clase suministrados
+// acuerdo al departamento, municipio o clase suministrados en par
 function poneCoord(par) {
     var lat = $("[name='latitud']");
     var lon = $("[name='longitud']");
@@ -199,8 +199,10 @@ function poneCoord(par) {
                 alert('No se encontró ' + par.tabla);
             } else {
                 var d = data.pop();
-                lat.val(d.latitud);
-                lon.val(d.longitud);
+                nla = +d.latitud + Math.random()/1000-0.0005
+                lat.val(nla);
+                nlo = +d.longitud + Math.random()/1000-0.0005
+                lon.val(nlo);
             }
         });
         y.error(function(m1, m2, m3) {
