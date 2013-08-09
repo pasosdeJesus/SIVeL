@@ -406,13 +406,13 @@ class PagVictimaIndividual extends PagBaseMultiple
 
         if ($vv != '') {
             $dcaso->get($idcaso);
-            $pf = fecha_a_arr($dcaso->fecha);
+/*            $pf = fecha_a_arr($dcaso->fecha);
             $ht =& $this->getElement('aniocaso');
             $ht->setValue($pf['Y']);
             $ht =& $this->getElement('mescaso');
             $ht->setValue($pf['m']);
             $ht =& $this->getElement('diacaso');
-            $ht->setValue($pf['d']);
+            $ht->setValue($pf['d']); */
 
             $e =& $this->getElement('procedencia');
             $dep =& $e->_elements[0];
@@ -430,7 +430,7 @@ class PagVictimaIndividual extends PagBaseMultiple
             $fanio = $this->bpersona->_do->anionac;
             $fsexo = $this->bpersona->_do->sexo;
 
-            $g =& $this->getElement('nacimiento');
+/*            $g =& $this->getElement('nacimiento');
             $sanio =& $g->_elements[0];
             $sanio->setValue($fanio);
             $smes =& $g->_elements[1];
@@ -456,7 +456,7 @@ class PagVictimaIndividual extends PagBaseMultiple
                 );
                 $sedadactual->setValue($na);
             }
-
+ */
             foreach ($this->bvictima->_do->fb_fieldsToRender as $c) {
                 $cq = $this->getElement($c);
                 if (!PEAR::isError($cq) && isset($this->bvictima->_do->$c)) {

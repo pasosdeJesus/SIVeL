@@ -315,17 +315,35 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             '&nbsp;', false
         );
 
+        $idcaso = $_SESSION['basicos_id'];
+        $dcaso = objeto_tabla('caso');
+        $dcaso->get($idcaso);
+        $pf = fecha_a_arr($dcaso->fecha);
+        $form->addElement('hidden', 'aniocaso', $pf['Y']);
+        $form->addElement('hidden', 'mescaso', $pf['m']);
+        $form->addElement('hidden', 'diacaso', $pf['d']);
+
+        $form->addElement('hidden', 'anioactual', date('Y'));
+        $form->addElement('hidden', 'mesactual', date('m'));
+        $form->addElement('hidden', 'diaactual', date('d')); 
+
+        $fmes = $this->mesnac;
+        $fdia = $this->dianac;
+        $fanio = (int)$this->anionac;
         $gr = array();
 
         $sel =& $form->getElement('anionac');
+        $sel->setValue($fanio);
         $gr[] =& $sel;
         $form->removeElement('anionac');
 
         $sel =& $form->getElement('mesnac');
+        $sel->setValue($fmes);
         $gr[] =& $sel;
         $form->removeElement('mesnac');
 
         $sel =& $form->getElement('dianac');
+        $sel->setValue($fdia);
         $gr[] =& $sel;
         $form->removeElement('dianac');
 
@@ -337,8 +355,14 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             'static', 'pi', '', _('Edad en hecho') . ':'
         );
         $gr[] =& $seln;
-
         $seln =& $form->createElement('text', 'edad', _('Edad en hecho'));
+        if ($fanio > 0) {
+            $na = edad_de_fechanac(
+                $fanio, $pf['Y'], $fmes,
+                $pf['m'], $fdia, $pf['d']
+            );
+            $seln->setValue($na);
+        }
         $seln->setSize(3);
         $seln->setMaxlength(3);
         $gr[] =& $seln;
@@ -353,19 +377,52 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         $seln =& $form->createElement('text', 'edadactual', _('Edad actual'));
         $seln->setSize(3);
         $seln->setMaxlength(3);
+        if ($fanio > 0) {
+            $na = edad_de_fechanac(
+                $fanio, date('Y'), $fmes,
+                date('m'), $fdia, date('d')
+            );
+            $seln->setValue($na);
+        }
+
         $gr[] =& $seln;
 
+        /*      
+            $fmes = $this->bpersona->_do->mesnac;
+            $fdia = $this->bpersona->_do->dianac;
+            $fanio = $this->bpersona->_do->anionac;
+            $fsexo = $this->bpersona->_do->sexo;
+            $g =& $this->getElement('nacimiento');
+            $sanio =& $g->_elements[0];
+            $sanio->setValue($fanio);
+            $smes =& $g->_elements[1];
+            $smes->setValue($fmes);
+            $sdia =& $g->_elements[2];
+            $sdia->setValue($fdia);
+            $ssexo =& $g->_elements[3];
+            $ssexo->setValue($fsexo);
+
+            $sedad =& $g->_elements[5];
+            if ($fanio > 0) {
+                $na = edad_de_fechanac(
+                    $fanio, $pf['Y'], $fmes,
+                    $pf['m'], $fdia, $pf['d']
+                );
+                $sedad->setValue($na);
+            }
+            $sedadactual =& $g->_elements[7];
+            if ($fanio > 0) {
+                $na = edad_de_fechanac(
+                    $fanio, date('Y'), $fmes,
+                    date('m'), $fdia, date('d')
+                );
+                $sedadactual->setValue($na);
+            }
+ */
         $form->addGroup(
             $gr, 'nacimiento', _('Fecha Nac. y Sexo'),
             '&nbsp;', false
         );
-        $form->addElement('hidden', 'aniocaso', '', '');
-        $form->addElement('hidden', 'mescaso', '', '');
-        $form->addElement('hidden', 'diacaso', '', '');
-
-        $form->addElement('hidden', 'anioactual', date('Y'));
-        $form->addElement('hidden', 'mesactual', date('m'));
-        $form->addElement('hidden', 'diaactual', date('d')); 
     }
 
 

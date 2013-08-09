@@ -206,7 +206,8 @@ function poneCoord(par) {
             }
         });
         y.error(function(m1, m2, m3) {
-            alert('Problema leyendo ' + par.tabla+ ' ' + m1 + m2 + m3);
+            alert('Problema leyendo ' + par.tabla+ ' ' + m1 
+                + ' ' + m2 + ' ' + m3);
         });
     }
 }
