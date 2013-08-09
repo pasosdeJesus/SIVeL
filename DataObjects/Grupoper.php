@@ -169,6 +169,7 @@ class DataObjects_Grupoper extends DB_DataObject_SIVeL
 
 
     /** Convierte registro a relato (arreglo de elementos) que agrega a $ar
+     *
      *  @param array &$ar Arreglo de elementos para relato
      *  @param array $dad Datos adicionales para la conversión
      *

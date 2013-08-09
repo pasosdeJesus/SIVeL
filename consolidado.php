@@ -59,11 +59,6 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
  */
 class AccionConsolidado extends HTML_QuickForm_Action
 {
-
-    /*
-     *
-     */
-
     /**
      * Presenta categorias que conformaran cada columna de la tabla.
      * Depuración
@@ -139,8 +134,6 @@ class AccionConsolidado extends HTML_QuickForm_Action
             $l++;
         }
     }
-
-
 
     /**
      * Realiza consulta
@@ -602,13 +595,16 @@ class PagConsolidado extends HTML_QuickForm_Page
 
         $e =& $this->addElement('header', null, _('Reporte consolidado'));
 
-        list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
-            $db, $this, 'victimaIndividual', null, null
+        list($dep, $mun, $cla) = PagUbicacion::creaCampos(
+            $this, 'id_departamento', 'id_municipio', 'id_clase'
         );
-
         $this->addElement($dep);
         $this->addElement($mun);
         $this->addElement($cla);
+        PagUbicacion::modCampos(
+            $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
+            null, null, null
+        );
 
         $cy = @date('Y');
         if ($cy < 2005) {

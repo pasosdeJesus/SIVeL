@@ -109,7 +109,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $cpartes = $cll::PARTES;
         if (isset($this->$bcm->_do->$ll)) {
             $partes = array_diff(
-                explode(' ', $partes), array($cll::CLASEMODELO)
+                explode(' ', $cpartes), array($cll::clasemodelo)
             );
             for ($i = 0; $i < 2; $i++) {
                 foreach ($partes as $t) {
@@ -121,7 +121,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                     }
                 }
             }
-            $this->eliminaBaseMultiplePartes(
+            $this->eliminaClaseModelo(
                 $this->$bcm->_do, true
             );
             $_SESSION[$this->pref.'_total']--;
@@ -579,7 +579,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                 $do = objeto_tabla($b);
                 html_menu_agrega_submenu(
                     $GLOBALS['menu_tablas_basicas'],
-                    $nid, $do->nomtabla,
+                    $nid, $do->nom_tabla,
                     '$b', null
                 );
             }

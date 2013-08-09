@@ -4,20 +4,37 @@
 	<varlistentry><term>Versión 1.2a1 (Ago.2013)</term>
 		<listitem>
 			<para><itemizedlist>
-					<listitem>
-						<para>
+					<listitem><para>
+Modulo nuevo <literal>desplazamiento</literal> para registrar desplazamiento. 
+Requiere que en el caso se registren dos o más ubicaciones por donde
+se han desplazado las víctimas. Agradecemos al
+SJR Colombia por financiar este desarrollo de dominio público.  
+					</para></listitem>
+					<listitem><para>
+Modulo experimental <literal>mezcla</literal> para mezclar casos.
+Ayuda a mezclar dos casos identificados por sus códigos
+o permite elegir 2 casos entre un listado de posibles repetidos.  
+Puede mezclar bien uno en otro o bien crear un caso nuevo con el
+resultado de la mezcla. Por ser experimental se
+recomienda examinar caso resultante.
+Agradecemos a Reiniciar por financiar este desarrollo de dominio público.  
+					</para></listitem>
+					<listitem><para>
 Usabilidad: agrega automáticamente latitud y longitud al elegir 
 departamento o municipio en pestaña Ubicación; control AJAX más eficiente para 
-elegir departamento, municipio y clase en pestañas Ubicación y 
-Víctima Individual; alerta para reportar errores de validación.  
-</para>
-					</listitem>
+elegir departamento, municipio y clase (por ejemplo en
+Consulta Web o en pestañas Ubicación y Víctima Individual); 
+permite especificar edad actual de una víctima, autocompleta año de nacimiento, edad en hecho, edad actual y rango de edad cuando uno de estos se cambia;
+alerta para reportar errores de validación.  
+					</para></listitem>
 					<listitem>
 						<para>
 Internacionalización y localización: Activado Soporte de Idiomas 
 Nativos y codificación UTF8. Permite especificar al usuario el idioma 
 que prefiere para la interfaz, en el momento hay traducciones a español e 
-inglés.  Activada cotejación en español, el ordenamiento  ahora corresponde al del español (por ejemplo en tablas básicas). 
+inglés.  Activada cotejación en español, el ordenamiento  ahora corresponde 
+al del español (por ejemplo en reporte revista por localización o en 
+tablas básicas). 
 						</para>
 					</listitem>
 					<listitem><para>
@@ -58,7 +75,12 @@ y facilitar personalizaciones con un control de
 multitabla (similar al de familiar en Victima Individual).
 Clase <filename>PagBaseMultiplePartes</filename> para extender
 y facilitar creación de pestañas con partes provenientes de diversos
-DataObject.
+DataObject.  
+Se actualiza traducción de fuentes con <filename>herram/intl.sh</filename>.
+Para personalizaciones que se desarrollen en diferentes 
+entornos puede especificarse configuración particular a cada entorno
+en <filename>conf-local.php</filename>, <filename>conf_int-local.php</filename>
+y <filename>vardb-local.sh</filename>.
 					</para>
 					</listitem>
 			</itemizedlist></para>
