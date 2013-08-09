@@ -300,17 +300,13 @@ class PagVictimaIndividual extends PagBaseMultiple
 
         $_SESSION['pagVictimaIndividual_id_persona'] = $vv;
 
-/*        list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
-            $db, $this, 'victimaIndividual',
-            $this->bpersona->_do->id_departamento,
-            $this->bpersona->_do->id_municipio
-        ); */
-
         $this->bpersona->createSubmit = 0;
         $this->bpersona->useForm($this);
         $this->bpersona->getForm($this);
 
-
+        list($dep, $mun, $cla) = PagUbicacion::creaCampos(
+            $this, 'id_departamento', 'id_municipio', 'id_clase'
+        );
         $dep =& $this->createElement(
             'select', 'id_departamento',
             $GLOBALS['etiqueta']['departamento'],
@@ -336,7 +332,7 @@ class PagVictimaIndividual extends PagBaseMultiple
             $gr, 'procedencia', _('Lugar de Nacimiento'), 
             '&nbsp;', false
         );
-        PagUbicacion::modCamposUbicacion(
+        PagUbicacion::modCampos(
             $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
             $this->bpersona->_do->id_departamento, 
             $this->bpersona->_do->id_municipio, 
