@@ -190,8 +190,10 @@ class PagDesplazamiento extends PagBaseMultiple
             $gr, 'sitiodeclaracion', _('Declaro en'), '&nbsp;', false
         );
         PagUbicacion::modCampos(
-            $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
-            null, null, null
+            $db, $this, 'departamentodecl', 'municipiodecl', null,
+            $this->bdesplazamiento->_do->departamentodecl, 
+            $this->bdesplazamiento->_do->municipiodecl, 
+            null
         );
         $this->bdesplazamiento->createSubmit = 0;
         $this->bdesplazamiento->useForm($this);

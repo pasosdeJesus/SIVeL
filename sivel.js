@@ -195,9 +195,7 @@ function poneCoord(par) {
     if (lat.length > 0 && lon.length > 0) {
         var y = $.getJSON("json_busca.php", par);
         y.done(function( data ) {
-            if (data.length <= 0) {
-                alert('No se encontró ' + par.tabla);
-            } else {
+            if (data.length > 0) {
                 var d = data.pop();
                 nla = +d.latitud + Math.random()/1000-0.0005
                 lat.val(nla);
@@ -206,8 +204,13 @@ function poneCoord(par) {
             }
         });
         y.error(function(m1, m2, m3) {
-            alert('Problema leyendo ' + par.tabla+ ' ' + m1 
-                + ' ' + m2 + ' ' + m3);
+            ar = "";
+            sep = "";
+            for(var i in par) {
+                ar = ar + sep + i + ":" + par[i];
+                sep = ", ";
+            }
+            alert('Problema leyendo ' + ar + ". " + m1 + ' ' + m2 + ' ' + m3);
         });
     }
 }
@@ -218,38 +221,43 @@ function poneCoord(par) {
  * Basada en función de Luca Urech <lucaurech@yahoo.de>
  */
 function llenaMunicipio(iddep, idmun, idcla) {
-	var dep = $("#" + iddep).val();
+    var dep = $("#" + iddep).val();
     var par = { 
         tabla: 'municipio',
         id_departamento: dep
     };
-	var x = $.getJSON("json_busca.php", par);
-	x.done(function( data ) {
-		var op = '<option value=""></option>';
-		$.each( data, function ( i, item ) {
-			op += '<option value="' 
-			+ item.id + '">' + item.nombre
-			+ '</option>';
-		});
-		$("#" + idmun ).html(op);
-		$("#" + idcla).html('');
-	});
-	x.error(function(m1, m2, m3) {
-		alert('Problema leyendo Municipios' + m1 + m2 + m3);
-	});
-    par = { 
-        tabla: 'departamento',
-        id: dep
-    };
-    poneCoord(par);
+    if (+dep > 0) {
+        var x = $.getJSON("json_busca.php", par);
+        x.done(function( data ) {
+            var op = '<option value=""></option>';
+            $.each( data, function ( i, item ) {
+                op += '<option value="' 
+                + item.id + '">' + item.nombre
+                + '</option>';
+            });
+            $("#" + idmun ).html(op);
+            $("#" + idcla).html('');
+        });
+        x.error(function(m1, m2, m3) {
+            alert(
+                'Problema leyendo Municipios de ' + dep + ' ' + m1 + ' ' 
+                + m2 + ' ' + m3
+                );
+        });
+        par = { 
+            tabla: 'departamento',
+            id: dep
+        };
+        poneCoord(par);
+        $("#" + idmun).attr("disabled", false);
+    } else  {
+        $("#" + idmun).val("");
+        $("#" + idmun).attr("disabled", true);
+    }
     if (idcla != '') {
-		$("#" + idcla).attr("disabled", true);
-	}
-	if (dep == 0) {
-		$("#" + idmun).attr("disabled", true);
-	} else {
-		$("#" + idmun).attr("disabled", false);
-	}
+        $("#" + idcla).val("");
+        $("#" + idcla).attr("disabled", true);
+    }
 }
 
 

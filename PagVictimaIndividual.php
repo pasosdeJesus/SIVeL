@@ -307,22 +307,6 @@ class PagVictimaIndividual extends PagBaseMultiple
         list($dep, $mun, $cla) = PagUbicacion::creaCampos(
             $this, 'id_departamento', 'id_municipio', 'id_clase'
         );
-        $dep =& $this->createElement(
-            'select', 'id_departamento',
-            $GLOBALS['etiqueta']['departamento'],
-            array()
-        ); 
-        $mun =& $this->createElement(
-            'select', 'id_municipio',
-            $GLOBALS['etiqueta']['municipio'],
-            array()
-        );
-        $cla =& $this->createElement(
-            'select', 'id_clase',
-            $GLOBALS['etiqueta']['clase'],
-            array()
-        ); 
-
         $gr = array();
         $gr[] =& $dep;
         $gr[] =& $mun;

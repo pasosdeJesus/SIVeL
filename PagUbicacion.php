@@ -340,17 +340,19 @@ class PagUbicacion extends PagBaseMultiple
         $nomccla = 'id_clase', $vdep = null, $vmun = null, $vcla = null
     ) {
         assert($nomcdep != null);
-        //echo "OJO modCampos(db, form, nomcdep=$nomcdep, "
-        // . "nomcmun=$nomcmun, nomccla=$nomccla, vdep=$vdep, "
-        // . "vmun=$vmun, vcla=$vcla)<br>";
+        /*echo "OJO modCampos(db, form, nomcdep=$nomcdep, "
+         . "nomcmun=$nomcmun, nomccla=$nomccla, vdep=$vdep, "
+         . "vmun=$vmun, vcla=$vcla)<br>"; */
         if (PEAR::isError($db)) {
             die($db->getMessage()." - ".$db->getUserInfo());
         }
 
         $d = $m = $c = null;
-        $d =& $form->getElement($nomcdep);
         $d =& toma_elemento_recc($form, $nomcdep);
         sin_error_pear($d);
+        if ($d == null) {
+            die("d es null");
+        }
         if ($nomcmun == null) {
             $d->updateAttributes(array(
                 "id" => "$nomcdep",
@@ -373,7 +375,6 @@ class PagUbicacion extends PagBaseMultiple
                     "onchange" => "llenaClase('$nomcdep', "
                     . "'$nomcmun', '$nomccla')"
                 ));
-                //$c =& $form->getElement($nomccla);
                 $c =& toma_elemento_recc($form, $nomccla);
                 sin_error_pear($c);
                 $c->updateAttributes(array(
