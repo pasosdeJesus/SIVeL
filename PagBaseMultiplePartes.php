@@ -539,7 +539,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         parent::act_globales();
         $cll = get_called_class();
         $cbasicas = $cll::BASICAS;
-        $nid = 'A' . $cll::clasemodelo;
+        $nid = _($cll::titulo);
         if (isset($cbasicas) && $cbasicas != '') {
             html_menu_agrega_submenu(
                 $GLOBALS['menu_tablas_basicas'],
@@ -550,8 +550,8 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                 $do = objeto_tabla($b);
                 html_menu_agrega_submenu(
                     $GLOBALS['menu_tablas_basicas'],
-                    $nid, $do->nomtabla,
-                    '$b', null
+                    $nid, $do->nom_tabla,
+                    "$b", null
                 );
             }
         }
