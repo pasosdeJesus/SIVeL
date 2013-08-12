@@ -487,7 +487,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             $fecharef = fecha_a_arr($fecharef);
         }
         $fhanio = $fecharef['Y'];
-        $fhmes = $fecharef['m'];
+        $fhmes = isset($fecharef['m']) ? $fecharef['m'] : $fecharef['M'];
         $fhdia = $fecharef['d'];
 
         if ((int)$valores['edad'] > 0
