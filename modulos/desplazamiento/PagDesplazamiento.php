@@ -179,11 +179,8 @@ class PagDesplazamiento extends PagBaseMultiple
             ? $this->bdesplazamiento->_do->fechaexpulsion : '';
         $this->addElement('');
 
-        list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
-            $db, $this, 'desplazamiento',
-            $this->bdesplazamiento->_do->departamentodecl,
-            $this->bdesplazamiento->_do->municipiodecl,
-            'departamentodecl', 'municipiodecl'
+        list($dep, $mun, $cla) = PagUbicacion::creaCampos(
+            $this, 'departamentodecl', 'municipiodecl', 'clasedecl'
         );
         $gr[] =& $dep;
         $gr[] =& $mun;
@@ -192,7 +189,12 @@ class PagDesplazamiento extends PagBaseMultiple
         $this->addGroup(
             $gr, 'sitiodeclaracion', _('Declaro en'), '&nbsp;', false
         );
-
+        PagUbicacion::modCampos(
+            $db, $this, 'departamentodecl', 'municipiodecl', null,
+            $this->bdesplazamiento->_do->departamentodecl, 
+            $this->bdesplazamiento->_do->municipiodecl, 
+            null
+        );
         $this->bdesplazamiento->createSubmit = 0;
         $this->bdesplazamiento->useForm($this);
         $this->bdesplazamiento->getForm($this);
@@ -288,12 +290,10 @@ class PagDesplazamiento extends PagBaseMultiple
             );
 
         if ($es_vacio) {
-            PagUbicacion::nullVarUbicacion('departamentodecl', 'municipiodecl');
             return true;
         }
 
         if (!$this->validate() ) {
-            PagUbicacion::nullVarUbicacion('departamentodecl', 'municipiodecl');
             return false;
         }
         if ($fechall < $fechaex) {
@@ -307,7 +307,6 @@ class PagDesplazamiento extends PagBaseMultiple
         if (in_array(31, $_SESSION['opciones'])
             && !in_array(21, $_SESSION['opciones'])
         ) {
-            PagUbicacion::nullVarUbicacion('departamentodecl', 'municipiodecl');
             return true;
         }
 
@@ -349,8 +348,6 @@ class PagDesplazamiento extends PagBaseMultiple
         if (PEAR::isError($ret)) {
             die($ret->getMessage());
         }
-
-        PagUbicacion::nullVarUbicacion('departamentodecl', 'municipiodecl');
 
         caso_funcionario($idcaso);
         return  $ret;

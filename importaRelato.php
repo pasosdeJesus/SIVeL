@@ -652,7 +652,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     if (is_callable(array($c, 'importaRelato'))) {
                         call_user_func_array(
                             array($c, 'importaRelato'),
-                            array($db, $r, $idcaso, &$obs)
+                            array(&$db, $r, $idcaso, &$obs)
                         );
                     } else {
                         echo_esc(_("Falta importaRelato en") . " $n, $c");

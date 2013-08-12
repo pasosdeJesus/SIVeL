@@ -21,8 +21,10 @@
 <listitem><para> Año mínimo que puede elegirse en fechas de la Ficha</para></listitem></varlistentry>
 <varlistentry><term><literal>actoscolectivos</literal></term>
 <listitem><para> Indica si en la pestaña Actos deben presentarse actos colectivos</para></listitem></varlistentry>
+<varlistentry><term><literal>persona_en_caso</literal></term>
+<listitem><para> Consulta adicional para determinar casos en los que aparece una</para></listitem></varlistentry>
 <varlistentry><term><literal>reporte_tabla_fila_totales</literal></term>
-<listitem><para> Indica si en la pestaña Actos deben presentarse actos colectivos</para></listitem></varlistentry>
+<listitem><para> Consulta adicional para determinar casos en los que aparece una</para></listitem></varlistentry>
 <varlistentry><term><literal>PALABRA_SITIO</literal></term>
 <listitem><para> Palabra clave para algunos cifrados.</para></listitem></varlistentry>
 <varlistentry><term><literal>deshabilita_manejo_usuarios</literal></term>

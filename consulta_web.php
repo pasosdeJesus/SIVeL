@@ -553,7 +553,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
            $this->_submitValues['id_municipio'] : null;
         $vcla = isset($this->_submitValues['id_clase']) ?
            $this->_submitValues['id_clase'] : null;
-        PagUbicacion::modCamposUbicacion(
+        PagUbicacion::modCampos(
             $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
             $vdep, $vmun, $vcla
         );

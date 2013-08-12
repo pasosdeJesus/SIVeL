@@ -54,8 +54,8 @@ class DataObjects_Supracategoria extends DataObjects_Basica
     var $fb_select_display_field = 'nombre';
     var $fb_hidePrimaryKey = false;
     var $fb_preDefOrder = array(
-        'id_tviolencia',
         'id',
+        'id_tviolencia',
         'nombre',
         'fechacreacion',
         'fechadeshabilitacion',
@@ -92,7 +92,7 @@ class DataObjects_Supracategoria extends DataObjects_Basica
     /**
      * Ajusta formulario generado.
      *
-     * @param object &$form      Formulario HTML_QuickForm
+     * @param object &$form        Formulario HTML_QuickForm
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void

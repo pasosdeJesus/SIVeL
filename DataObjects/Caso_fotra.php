@@ -113,7 +113,7 @@ class DataObjects_Caso_fotra extends DB_DataObject_SIVeL
     /**
      * Ajusta formulario generado.
      *
-     * @param object &$form      Formulario HTML_QuickForm
+     * @param object &$form        Formulario HTML_QuickForm
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
@@ -126,15 +126,12 @@ class DataObjects_Caso_fotra extends DB_DataObject_SIVeL
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(70);
             $e->setMaxlength(100);
-/*            if (isset($GLOBALS['etiqueta']['ubicacion_fuente'])) {
-                $e->setLabel($GLOBALS['etiqueta']['ubicacion_fuente']);
-} */
         }
 
         $e =& $form->getElement('fecha');
         if (isset($e) && !PEAR::isError($e)) {
             $e->_options['language'] = isset($_SESSION['LANG'])
-        ? $_SESSION['LANG'] : 'es';
+                ? $_SESSION['LANG'] : 'es';
             $e->_options['format'] = 'dMY';
             $e->_options['addEmptyOption'] = true;
             $e->_options['minYear'] = $GLOBALS['anio_min'];
@@ -161,7 +158,7 @@ class DataObjects_Caso_fotra extends DB_DataObject_SIVeL
     /**
      * Prepara procesamiento de formulario diligenciado
      *
-     * @param array  &$valores   Valores llenados por usuario
+     * @param array  &$valores     Valores llenados por usuario
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
@@ -170,8 +167,7 @@ class DataObjects_Caso_fotra extends DB_DataObject_SIVeL
     {
         if ($this->id_fotra != null
             && (!isset($valores['id_fotra'])
-            || $valores['id_fotra'] == ''
-        )
+            || $valores['id_fotra'] == '')
         ) {
             $valores['id_fotra'] = $this->id_fotra;
         }

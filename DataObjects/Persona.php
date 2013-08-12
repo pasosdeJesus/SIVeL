@@ -51,12 +51,14 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
 
 
-    var $fb_preDefOrder = array('nombres', 'apellidos', 'anionac',
+    var $fb_preDefOrder = array(
+        'nombres', 'apellidos', 'anionac',
         'mesnac', 'dianac', 'sexo',   'tipodocumento',
-        'numerodocumento'
+        'numerodocumento','id_departamento', 'id_municipio', 'id_clase'
     );
 
-    var $fb_fieldsToRender = array('nombres', 'apellidos', 'anionac',
+    var $fb_fieldsToRender = array(
+        'nombres', 'apellidos', 'anionac',
         'mesnac', 'dianac', 'sexo',   'tipodocumento',
         'numerodocumento'
     );
@@ -152,7 +154,8 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
      */
     function setanionac($value)
     {
-        $this->anionac= ($value == 0) ? null : $value;
+        $this->anionac= ($value == '' || $value == 0) ?  
+            DB_DataObject_Cast::sql('NULL') : $value;
     }
 
     /**
@@ -166,7 +169,8 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
      */
     function setmesnac($value)
     {
-        $this->mesnac= ($value == 0) ? null : $value;
+        $this->mesnac= ($value == '' || $value == 0) ? 
+            DB_DataObject_Cast::sql('NULL') : $value;
     }
 
     /**
@@ -180,7 +184,8 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
      */
     function setdianac($value)
     {
-        $this->dianac= ($value == 0) ? null : $value;
+        $this->dianac= ($value == '' || $value == 0) ? 
+            DB_DataObject_Cast::sql('NULL') : $value;
     }
 
     /**
@@ -242,7 +247,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
     /**
      * Ajusta formulario generado.
      *
-     * @param object &$form      Formulario HTML_QuickForm
+     * @param object &$form        Formulario HTML_QuickForm
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
@@ -298,7 +303,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
         if ($this->id == null) {
             $sel =& $form->createElement(
-                'static','','',
+                'static', '', '',
                 "<a href=\"javascript:abrirBusquedaPersona('persona')\">" .
                 _("Buscar persona") . "</a>"
             );
@@ -310,17 +315,35 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             '&nbsp;', false
         );
 
+        $idcaso = $_SESSION['basicos_id'];
+        $dcaso = objeto_tabla('caso');
+        $dcaso->get($idcaso);
+        $pf = fecha_a_arr($dcaso->fecha);
+        $form->addElement('hidden', 'aniocaso', $pf['Y']);
+        $form->addElement('hidden', 'mescaso', $pf['m']);
+        $form->addElement('hidden', 'diacaso', $pf['d']);
+
+        $form->addElement('hidden', 'anioactual', date('Y'));
+        $form->addElement('hidden', 'mesactual', date('m'));
+        $form->addElement('hidden', 'diaactual', date('d')); 
+
+        $fmes = $this->mesnac;
+        $fdia = $this->dianac;
+        $fanio = (int)$this->anionac;
         $gr = array();
 
         $sel =& $form->getElement('anionac');
+        $sel->setValue($fanio);
         $gr[] =& $sel;
         $form->removeElement('anionac');
 
         $sel =& $form->getElement('mesnac');
+        $sel->setValue($fmes);
         $gr[] =& $sel;
         $form->removeElement('mesnac');
 
         $sel =& $form->getElement('dianac');
+        $sel->setValue($fdia);
         $gr[] =& $sel;
         $form->removeElement('dianac');
 
@@ -328,30 +351,78 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         $gr[] =& $sel;
         $form->removeElement('sexo');
 
-        $seln =& $form->createElement('static', 'pi', '', '(Edad:');
+        $seln =& $form->createElement(
+            'static', 'pi', '', _('Edad en hecho') . ':'
+        );
         $gr[] =& $seln;
-
-        $seln =& $form->createElement('text', 'edad', _('Edad'));
+        $seln =& $form->createElement('text', 'edad', _('Edad en hecho'));
+        if ($fanio > 0) {
+            $na = edad_de_fechanac(
+                $fanio, $pf['Y'], $fmes,
+                $pf['m'], $fdia, $pf['d']
+            );
+            $seln->setValue($na);
+        }
         $seln->setSize(3);
         $seln->setMaxlength(3);
         $gr[] =& $seln;
-        if ($this->anionac != null && $this->anionac > 0) {
-            $na ='19';  // el valor lo pone formularioValores de PagVictimaIndividual
-            //            $na = edad_de_fechanac($this->anionac, $aniohecho, $this->mesnac, $meshecho, $this->dianac, $diahecho)
+
+        $seln =& $form->createElement(
+            'static', 'pia', '', _('Edad actual') . ':', array(
+                'id' => 'edadactual',
+                'onchange' => 'cambiaEdadActual()'
+            )
+        );
+        $gr[] =& $seln;
+        $seln =& $form->createElement('text', 'edadactual', _('Edad actual'));
+        $seln->setSize(3);
+        $seln->setMaxlength(3);
+        if ($fanio > 0) {
+            $na = edad_de_fechanac(
+                $fanio, date('Y'), $fmes,
+                date('m'), $fdia, date('d')
+            );
             $seln->setValue($na);
-            $seln->freeze();
         }
-        $seln =& $form->createElement('static', 'pd', '', ')');
+
         $gr[] =& $seln;
 
+        /*      
+            $fmes = $this->bpersona->_do->mesnac;
+            $fdia = $this->bpersona->_do->dianac;
+            $fanio = $this->bpersona->_do->anionac;
+            $fsexo = $this->bpersona->_do->sexo;
+            $g =& $this->getElement('nacimiento');
+            $sanio =& $g->_elements[0];
+            $sanio->setValue($fanio);
+            $smes =& $g->_elements[1];
+            $smes->setValue($fmes);
+            $sdia =& $g->_elements[2];
+            $sdia->setValue($fdia);
+            $ssexo =& $g->_elements[3];
+            $ssexo->setValue($fsexo);
+
+            $sedad =& $g->_elements[5];
+            if ($fanio > 0) {
+                $na = edad_de_fechanac(
+                    $fanio, $pf['Y'], $fmes,
+                    $pf['m'], $fdia, $pf['d']
+                );
+                $sedad->setValue($na);
+            }
+            $sedadactual =& $g->_elements[7];
+            if ($fanio > 0) {
+                $na = edad_de_fechanac(
+                    $fanio, date('Y'), $fmes,
+                    date('m'), $fdia, date('d')
+                );
+                $sedadactual->setValue($na);
+            }
+ */
         $form->addGroup(
             $gr, 'nacimiento', _('Fecha Nac. y Sexo'),
             '&nbsp;', false
         );
-
-        $form->addElement('hidden', 'aniocaso', '', '');
-        $form->addElement('hidden', 'mescaso', '', '');
-        $form->addElement('hidden', 'diacaso', '', '');
     }
 
 
@@ -369,7 +440,11 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
 
     /** Convierte registro a relato (arreglo de elementos) que agrega a $ar
-     * dad son datos adicionales que pueden requerirse para la conversión.
+     *
+     * @param array &$ar Arreglo con elementos
+     * @param array $dad Datos adicionales para conversión
+     *
+     * @return $ar modificado
      */
     function aRelato(&$ar, $dad = array())
     {
@@ -396,6 +471,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
     /**
      * Valida datos de persona recibidos por formulario
+     *
      * @param string $fecharef Fecha de referencia para calcular año nac.
      * @param bool   $valrango Decide si se valida/autocompleta rango de edad
      * @param array  &$valores Valores recibidos en formulario
@@ -411,46 +487,46 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             $fecharef = fecha_a_arr($fecharef);
         }
         $fhanio = $fecharef['Y'];
-        $fhmes = $fecharef['M'];
+        $fhmes = $fecharef['m'];
         $fhdia = $fecharef['d'];
 
         if ((int)$valores['edad'] > 0
             && (!isset($valores['anionac']) || $valores['anionac'] == '')
-                ) {
-                    $valores['anionac'] = $fhanio - (int)$valores['edad'];
-                }
+        ) {
+            $valores['anionac'] = $fhanio - (int)$valores['edad'];
+        }
         if ($valrango
             && $valores['id_rangoedad'] != DataObjects_Rangoedad::idSinInfo()
-                && $valores['anionac'] != ''
-            ) {
-                $r = (int)$valores['id_rangoedad'];
-                //print_r($valores);
-                $e = edad_de_fechanac(
-                    (int)$valores['anionac'], $fhanio,
-                    (int)$valores['mesnac'], $fhmes,
-                    (int)$valores['dianac'], $fhdia
-                );
-                if (!verifica_edad_y_rango($e, $r)) {
-                    $merr = _("La edad ") . (int)$e .
-                        _(" (fecha del hecho menos fecha de nacimiento) ") .
-                        _(" debe corresponder al rango de edad");
-                    return false;
-                }
-            } else if ($valrango && $valores['anionac'] != '') { //Autocompleta
-                $e = edad_de_fechanac(
-                    (int)$valores['anionac'], $fhanio,
-                    (int)$valores['anionac'], $fhmes,
-                    (int)$valores['dianac'], $fhdia
-                );
-                $re = rango_de_edad($e);
-                if ($re == 0) {
-                    $merr = _(
-                        'La fecha de nacimiento no corresponde a un rango'
-                    );
-                    return false;
-                }
-                $valores['id_rangoedad'] = $re;
+            && $valores['anionac'] != ''
+        ) {
+            $r = (int)$valores['id_rangoedad'];
+            //print_r($valores);
+            $e = edad_de_fechanac(
+                (int)$valores['anionac'], $fhanio,
+                (int)$valores['mesnac'], $fhmes,
+                (int)$valores['dianac'], $fhdia
+            );
+            if (!verifica_edad_y_rango($e, $r)) {
+                $merr = _("La edad ") . (int)$e .
+                    _(" (fecha del hecho menos fecha de nacimiento) ") .
+                    _(" debe corresponder al rango de edad");
+                return false;
             }
+        } else if ($valrango && $valores['anionac'] != '') { //Autocompleta
+            $e = edad_de_fechanac(
+                (int)$valores['anionac'], $fhanio,
+                (int)$valores['anionac'], $fhmes,
+                (int)$valores['dianac'], $fhdia
+            );
+            $re = rango_de_edad($e);
+            if ($re == 0) {
+                $merr = _(
+                    'La fecha de nacimiento no corresponde a un rango'
+                );
+                return false;
+            }
+            $valores['id_rangoedad'] = $re;
+        }
         return true;
     }
 

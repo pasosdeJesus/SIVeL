@@ -329,14 +329,17 @@ class PagVictimasrep extends HTML_QuickForm_Page
             'Reporte para identificar v&iacute;ctimas repetidas'
         );
 
-        list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
-            $db, $this, 'victimaIndividual', 
-            0, 0
+        list($dep, $mun, $cla) = PagUbicacion::creaCampos(
+            $this, 'id_departamento', 'id_municipio', 'id_clase'
         );
-
         $this->addElement($dep);
         $this->addElement($mun);
         $this->addElement($cla);
+        PagUbicacion::modCampos(
+            $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
+            null, null, null
+        );
+
 
         $cy = @date('Y');
         if ($cy < 2005) {

@@ -95,7 +95,7 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
         $this->fb_fieldLabels= array(
             'hijos'=> _('Hijos'),
             'id_profesion'=> _('Profesión'),
-            'id_rangoedad'=> _('Rango de Edad'),
+            'id_rangoedad'=> _('Rango de Edad en Hecho'),
             'id_filiacion'=> _('Filiación Política'),
             'id_sectorsocial'=> _('Sector Social'),
             'id_organizacion'=> _('Organización'),
@@ -213,7 +213,7 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
     /**
      * Ajusta formulario generado.
      *
-     * @param object &$form      Formulario HTML_QuickForm
+     * @param object &$form        Formulario HTML_QuickForm
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
@@ -237,10 +237,10 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
      * Convierte registro a relato (arreglo de elementos) que agrega a $ar
      * dad son datos adicionales que pueden requerirse para la conversión.
      *
-     * @param array $ar  Arreglo con elementos
+     * @param array &$ar Arreglo con elementos
      * @param array $dad Datos adicionales para conversión
      *
-     * @return $ar modificado
+     * @return array $ar modificado
      */
     function aRelato(&$ar, $dad = array())
     {
@@ -252,11 +252,10 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
             array('id_departamento', 'id_municipio', 'id_clase')
         );
         $dpersona->aRelato($ar, $dad);
-        $ar['docid'] =
-            trim(
-                $dpersona->tipodocumento . " " .
-                $dpersona->numerodocumento
-            );
+        $ar['docid'] = trim(
+            $dpersona->tipodocumento . " " .
+            $dpersona->numerodocumento
+        );
         if ($dpersona->anionac != '') {
             $m = $dpersona->mesnac != '' ? $dpersona->mesnac : '06';
             $d = $dpersona->dianac != '' ? $dpersona->dianac : '15';

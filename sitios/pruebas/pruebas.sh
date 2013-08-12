@@ -105,19 +105,27 @@ if (test "$SALTAINI" != "1") then {
 	done
 	echo "Copiando datos de usuario de $dirplant";
 
-	dbusuario=`grep "\\\$dbusuario *=" $dirplant/conf-particular.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
+	dbusuario="";
+	if (test -f "$dirplant/conf-local.php") then {
+		dbusuario=`grep "\\\$dbusuario *=" $dirplant/conf-local.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
+	} fi;
 	if (test "$dbusuario" = "") then {
 		dbusuario=`grep "\\\$dbusuario *=" $dirplant/conf.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
 	} fi;
-	dbclave=`grep "\\\$dbclave *=" $dirplant/conf-particular.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
+	dbclave="";
+	if (test -f "$dirplant/conf-local.php") then {
+		dbclave=`grep "\\\$dbclave *=" $dirplant/conf-local.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
+	} fi;
 	if (test "$dbclave" = "") then {
 		dbclave=`grep "\\\$dbclave *=" $dirplant/conf.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
 	} fi;
-	nombase=`grep "\\\$dbnombre *=" $dirplant/conf-particular.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
+	nombase="";
+	if (test -f "$dirplant/conf-local.php") then {
+		nombase=`grep "\\\$dbnombre *=" $dirplant/conf-local.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
+	} fi;
 	if (test "$nombase" = "") then {
 		nombase=`grep "\\\$dbnombre *=" $dirplant/conf.php | sed -e 's/.*=.*"\([^"]*\)".*$/\1/g' 2> /dev/null`;
 	} fi;
-
 	chres=`echo $CHROOTDIR | sed -e "s/\//\\\\\\\\\//g"`;
 	ds=`echo $SOCKPSQL | sed -e "s/.s.PGSQL.*//g;"`;
 	dssed=`echo $ds | sed -e "s/\//\\\\\\\\\//g"`;
@@ -213,7 +221,6 @@ prueba sitios/pruebas/inscaso-anexos.php " - Anexo"
 prueba sitios/pruebas/inscaso-etiqueta.php " - Etiqueta"
 prueba sitios/pruebas/inscaso-evaluacion.php " - Evaluacion"
 prueba sitios/pruebas/inscaso-evaluacion-valida.php " - Valida Evaluacion"
-#}
 prueba sitios/pruebas/inscaso-valrepgen.php " - Validar y Reporte General" valrepgen "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*"
 prueba sitios/pruebas/reprevista.php " - Reporte Revista" reprevista
 prueba sitios/pruebas/reprevista-filtros.php " - Filtros en Reporte Revista" reprevista-filtros "Warning"

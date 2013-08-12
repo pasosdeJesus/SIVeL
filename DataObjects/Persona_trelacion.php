@@ -109,7 +109,7 @@ class DataObjects_Persona_trelacion extends DB_DataObject_SIVeL
     /**
      * Prepara antes de generar formulario.
      *
-     * @param object &$form Generador DataObject_FormBuilder
+     * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
      */
@@ -203,22 +203,18 @@ class DataObjects_Persona_trelacion extends DB_DataObject_SIVeL
             new AgregarFamiliar()
         );
         $sel =& $form->createElement(
-            'static','','',
+            'static', '', '',
             "<a href=\"javascript:abrirBusquedaPersona('relacionado')\">" .
             "Buscar</a>"
         );
         $fm[] =& $sel;
 
         $sel =& $form->createElement(
-            'submit',
-            $form->getButtonName('agregarFamiliar'),'Añadir'
+            'submit', $form->getButtonName('agregarFamiliar'), 'Añadir'
         );
         $fm[] =& $sel;
 
-        $form->addGroup(
-            $fm, 'familiar', '',
-            '&nbsp;', false
-        );
+        $form->addGroup($fm, 'familiar', '', '&nbsp;', false);
 
     }
 

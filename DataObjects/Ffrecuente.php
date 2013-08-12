@@ -58,6 +58,7 @@ class DataObjects_Ffrecuente extends DataObjects_Basica
         )
     );
     var $fb_preDefOrder = array(
+        'id',
         'nombre',
         'tfuente',
         'fechacreacion',

@@ -45,7 +45,7 @@ class BaseAgrega extends HTML_QuickForm_Action
     function perform(&$page, $actionName)
     {
         $do = objeto_tabla($this->tabla);
-        foreach($do->fb_fieldsToRender as $k) {
+        foreach ($do->fb_fieldsToRender as $k) {
             if (isset($_REQUEST['f' . $k])) {
                 $page->_submitValues[$k] = $_REQUEST['f' . $k];
             }
@@ -90,7 +90,7 @@ class BaseElimina extends HTML_QuickForm_Action
 
         $do =& objeto_tabla($this->tabla);
         $a = explode(':', var_escapa($_REQUEST[$nb]));
-        foreach($a as $i => $v) {
+        foreach ($a as $i => $v) {
             $nc = $do->llaveselimina[$i];
             $do->$nc = $v;
         }
@@ -171,7 +171,7 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
      */
     function preGenerateForm(&$formbuilder)
     {
-	    parent::preGenerateForm($formbuilder);
+        parent::preGenerateForm($formbuilder);
     }
 
 
@@ -189,22 +189,22 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
 
         $t = '<table id="tabla' . $this->__table 
             . '" width="100%"><thead><tr>';
-        foreach($this->fb_fieldsToRender as $c) {
+        foreach ($this->fb_fieldsToRender as $c) {
             $t .= "<th>" . $this->fb_fieldLabels[$c] . "</th>";
         }
         $t .= '<th></th></thead><tbody>';
         $p = objeto_tabla($this->__table);
         $db = $p->getDatabaseConnection();
-        foreach($this->fb_fieldLabels as $c => $l) {
+        foreach ($this->fb_fieldLabels as $c => $l) {
             $p->$c = null;
         }
-        foreach($this->llavescomunes as $c) {
+        foreach ($this->llavescomunes as $c) {
             $p->$c = $this->$c;
         }
         $p->find();
         while ($p->$c != null && $p->fetch()) {
             $t .= "<tr> ";
-            foreach($this->fb_fieldsToRender as $c) {
+            foreach ($this->fb_fieldsToRender as $c) {
                 $t .= "<td>";
                 if (isset($this->camposselect[$c])) {
                     $dd = $p->getLink($c);
@@ -222,7 +222,7 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
                 . $form->getButtonName($this->botonelimina) 
                 . "=";
             $sep = "";
-            foreach($this->llaveselimina as $k) {
+            foreach ($this->llaveselimina as $k) {
                 $t .= $sep . $p->$k;
                 $sep = ":";
             }
@@ -234,7 +234,7 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
         );
 
         $fm = array();
-        foreach($this->fb_fieldsToRender as $c) {
+        foreach ($this->fb_fieldsToRender as $c) {
             $sel =& $form->removeElement($c);
             $sel->setName('f' . $c);
             if (isset($this->camposselect[$c])) {
@@ -243,11 +243,12 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
                 );
                 $sel->loadArray(
                     htmlentities_array(
-                        $db->getAssoc("SELECT id, nombre "
-                        . " FROM {$this->camposselect[$c]} "
-                        . " ORDER BY nombre")
-                    )
-                );
+                        $db->getAssoc(
+                            "SELECT id, nombre "
+                            . " FROM {$this->camposselect[$c]} "
+                            . " ORDER BY nombre")
+                        )
+                    );
             }
             $sel->setValue(null);
             $fm[] =& $sel;

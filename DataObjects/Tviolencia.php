@@ -96,8 +96,8 @@ class DataObjects_Tviolencia extends DataObjects_Basica
      */
     function getfechadeshabilitacion($valor)
     {
-        $this->fechadeshabilitacion =
-            ($valor == '0000-00-00') ? 'null' : $valor;
+        $this->fechadeshabilitacion = ($valor == '0000-00-00') 
+            ? 'null' : $valor;
     }
 
 
@@ -105,7 +105,7 @@ class DataObjects_Tviolencia extends DataObjects_Basica
     /**
      * Ajusta formulario generado.
      *
-     * @param object &$form      Formulario HTML_QuickForm
+     * @param object &$form        Formulario HTML_QuickForm
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void

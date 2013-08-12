@@ -25,8 +25,7 @@ require_once 'HTML/QuickForm/Action.php';
 /**
  * Pestaña BaseMultiplePartes
  * Ver documentación de funciones en clase base.
- * @package SIVeL
- * @category SIVeL
+ *
  * @package  SIVeL
  * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
  * @license  Dominio público.
@@ -36,10 +35,10 @@ class PagBaseMultiplePartes extends PagBaseMultiple
 {
 
     /** Nombre de una clase DataObject característica de este formulario */
-    const clasemodelo = 'basemultiplepartes';
+    const CLASEMODELO = 'basemultiplepartes';
 
     // La llave sería id_caso junto con esta, por ahora una sola
-    const llavecomp = 'id_otratabla';
+    const LLAVECOMP = 'id_otratabla';
 
     /**
      * Definimos variables para subformularios (a su vez descendientes de
@@ -91,8 +90,8 @@ class PagBaseMultiplePartes extends PagBaseMultiple
     function copiaId()
     {
         $cll = get_called_class();
-        $bcm = "b" . $cll::clasemodelo;
-        $ll = $cll::llavecomp;
+        $bcm = "b" . $cll::CLASEMODELO;
+        $ll = $cll::LLAVECOMP;
         $a = array(
             $this->$bcm->_do->id_caso, 
             $this->$bcm->_do->$ll
@@ -105,12 +104,12 @@ class PagBaseMultiplePartes extends PagBaseMultiple
     {
         $this->iniVar();
         $cll = get_called_class();
-        $bcm = "b" . $cll::clasemodelo;
-        $ll = $cll::llavecomp;
+        $bcm = "b" . $cll::CLASEMODELO;
+        $ll = $cll::LLAVECOMP;
         $cpartes = $cll::PARTES;
         if (isset($this->$bcm->_do->$ll)) {
             $partes = array_diff(
-                explode(' ', $partes), array($cll::clasemodelo)
+                explode(' ', $cpartes), array($cll::clasemodelo)
             );
             for ($i = 0; $i < 2; $i++) {
                 foreach ($partes as $t) {
@@ -122,7 +121,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                     }
                 }
             }
-            $this->eliminaBaseMultiplePartes(
+            $this->eliminaClaseModelo(
                 $this->$bcm->_do, true
             );
             $_SESSION[$this->pref.'_total']--;
@@ -134,17 +133,17 @@ class PagBaseMultiplePartes extends PagBaseMultiple
      * Inicializa variables y datos de la pestaña.
      * Ver documentación completa en clase base.
      *
-     * @param array $apar Arreglo de parametros. Vacio aqui.
+     * @param array $aper Arreglo de parametros. Vacio aqui.
      *
      * @return handle Conexión a base de datos
      */
     function iniVar($aper = null)
     {
         $cll = get_called_class();
-        $cm = $cll::clasemodelo;
+        $cm = $cll::CLASEMODELO;
         $bcm = "b" . $cm;
         $dcm =& objeto_tabla($cm);
-        $ll = $cll::llavecomp;
+        $ll = $cll::LLAVECOMP;
         $cpartes = $cll::PARTES;
         $db =& $dcm->getDatabaseConnection();
 
@@ -216,7 +215,6 @@ class PagBaseMultiplePartes extends PagBaseMultiple
      * Ver documentación completa en clase base.
      *
      * @param string $nomForma Nombre
-     * @param string $mreq     Mensaje de dato requerido
      *
      * @return void
      */
@@ -276,7 +274,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
     {
         $cll = get_called_class();
         $cpartes = $cll::PARTES;
-        $bcm = "b" . $cll::clasemodelo;
+        $bcm = "b" . $cll::CLASEMODELO;
         valores_pordefecto_form($this->$bcm->_do, $this);
         foreach (explode(' ', $cpartes) as $t) {
             $nb = 'b' . $t;
@@ -287,21 +285,30 @@ class PagBaseMultiplePartes extends PagBaseMultiple
      
     /**
      * Elimina clasemodelo
+     *
+     * @param object $dcm DataObject de la clase modelo
+     *
+     * @return void
      */
-    function eliminaClasemodelo($dcm, $elimProc = false)
+    function eliminaClasemodelo($dcm)
     {
         assert($dcm != null);
         assert($dcm->id_caso != null);
         $db =& $dcm->getDatabaseConnection();
         $cll = get_called_class();
-        $cm = $cll::clasemodelo;
+        $cm = $cll::CLASEMODELO;
         $q = "DELETE FROM $cm WHERE id_caso={$_SESSION['basicos_id']}";
         $result = hace_consulta($db, $q);
     }
     
     /** 
-     * eliminaDep($db, $idcaso) elimina victimas de la base $db presentados
+     * eliminaDep($db, $idcaso) elimina datos de la base $db presentados
      * en este formulario, que dependen del caso $idcaso 
+     *
+     * @param object  $db     Conexión a base
+     * @param integer $idcaso Identificación del caso
+     *
+     * @return void
      */
     static function eliminaDep(&$db, $idcaso)
     {
@@ -311,9 +318,9 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $cll = get_called_class();
         $cpartes = $cll::PARTES;
         $partes = array_reverse(
-            array_diff(explode(' ', $cpartes), array($cll::clasemodelo))
+            array_diff(explode(' ', $cpartes), array($cll::CLASEMODELO))
         );
-        $ll = $cll::llavecomp;
+        $ll = $cll::LLAVECOMP;
         foreach ($partes as $t) {
             $do =& objeto_tabla($t);
             sin_error_pear($do);
@@ -331,7 +338,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                 $do->delete();
             }
         }
-        $dcm =& objeto_tabla($cll::clasemodelo);
+        $dcm =& objeto_tabla($cll::CLASEMODELO);
         sin_error_pear($dcm);
         $dcm->id_caso = $idcaso;
         $dcm->find();
@@ -342,15 +349,20 @@ class PagBaseMultiplePartes extends PagBaseMultiple
     }
 
     /**
-    * @param valores Recibios de formulario
-    */
+     * Procesa datos del formulario insertando o actualizando
+     *
+     * @param array  &$valores  Recibios de formulario
+     * @param string $otratabla Otra tabla
+     *
+     * @return void
+     */
     function procesa(&$valores, $otratabla = '')
     {
 
         //echo "OJO PagAyudahumanitaria::procesa(" ; print_r($valores); echo ")<br>";
         $cll = get_called_class();
-        $ll = $cll::llavecomp;
-        $cm = $cll::clasemodelo;
+        $ll = $cll::LLAVECOMP;
+        $cm = $cll::CLASEMODELO;
         $cpartes = $cll::PARTES;
         $bcm = "b" . $cm;
         $es_vacio = (!isset($valores[$ll])
@@ -486,16 +498,33 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                 die($ret->getMessage());
             }
         }
-
         caso_funcionario($idcaso);
         return  $ret;
     }
 
+    /**
+     * Para consulta detallada
+     *
+     * @param string  &$w       consulta que se arma
+     * @param string  &$t       Tablas involucradas
+     * @param object  &$db      Conexión a base de datos
+     * @param integer $idcaso   Identificación del caso
+     * @param string  &$subcons Subconsulta$idcaso  Identificación del caso
+     *
+     * @return void Modifica parametros
+     */
     function datosBusqueda(&$w, &$t, &$db, $idcaso, &$subcons)
     {
 
     }
 
+    /**
+     * Interrumpe controlador
+     *
+     * @param string $action Accion solicitada
+     *
+     * @return void
+     */
     function handle($action)
     {
         //print_r($this->_actions);
@@ -516,8 +545,8 @@ class PagBaseMultiplePartes extends PagBaseMultiple
     function extrae_clasemodelo($idcaso, &$db, &$ida)
     {
         $cll = get_called_class();
-        $ll = $cll::llavecomp;
-        $cm = $cll::clasemodelo;
+        $ll = $cll::LLAVECOMP;
+        $cm = $cll::CLASEMODELO;
         $q = "SELECT $ll FROM $cm WHERE " 
             . "$cm.id_caso='" . (int)$idcaso 
             . "' ORDER BY $ll DESC";

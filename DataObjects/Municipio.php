@@ -59,6 +59,7 @@ class DataObjects_Municipio extends DataObjects_Basica
 
     var $fb_linkDisplayFields = array('nombre', 'id_departamento');
     var $fb_preDefOrder = array(
+        'id',
         'id_departamento',
         'nombre',
         'fechacreacion',

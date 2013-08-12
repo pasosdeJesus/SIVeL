@@ -1,7 +1,9 @@
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Conteos Victimizaciones Individuales</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -31,7 +33,9 @@ function textCounter(field, cntfield, maxlimit)
 </script></head><body background = ""><!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
 <link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->

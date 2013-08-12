@@ -116,7 +116,7 @@ class DataObjects_Grupoper extends DB_DataObject_SIVeL
     /**
      * Ajusta formulario generado.
      *
-     * @param object &$form      Formulario HTML_QuickForm
+     * @param object &$form        Formulario HTML_QuickForm
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
@@ -143,7 +143,6 @@ class DataObjects_Grupoper extends DB_DataObject_SIVeL
 
         $gr = array();
         $sel =& $form->getElement('id');
-//        $sel->freeze();
         $gr[] =& $sel;
         $form->removeElement('id');
 
@@ -157,7 +156,7 @@ class DataObjects_Grupoper extends DB_DataObject_SIVeL
         $form->removeElement('anotaciones');
 
         $sel =& $form->createElement(
-            'static','','',
+            'static', '', '',
             "<a href=\"javascript:abrirBusquedaGrupoper()\">"
             . _("Buscar Grupo") . "</a>"
         );
@@ -170,7 +169,11 @@ class DataObjects_Grupoper extends DB_DataObject_SIVeL
 
 
     /** Convierte registro a relato (arreglo de elementos) que agrega a $ar
-     * dad son datos adicionales que pueden requerirse para la conversión.
+     *
+     *  @param array &$ar Arreglo de elementos para relato
+     *  @param array $dad Datos adicionales para la conversión
+     *
+     *  @return Array $ar modificado
      */
     function aRelato(&$ar, $dad = array())
     {

@@ -2035,15 +2035,12 @@ if (!aplicado($idac)) {
         $db, "ALTER TABLE usuario DROP CONSTRAINT usuario_id_rol_fkey", false
     );
     hace_consulta(
-        $db, "ALTER TABLE usuario CONSTRAINT usuario_id_rol_fkey", false
-    );
-    hace_consulta(
-        $db, "ALTER TABLE usuario CONSTRAINT usuario_id_rol_fkey", false
+        $db, "ALTER TABLE usuario DROP CONSTRAINT usuario_id_rol_check", false
     );
     hace_consulta(
         $db,
         "ALTER TABLE usuario ADD CONSTRAINT usuario_id_rol_check "
-        . " CHECK (id_rol>='1' AND id_rol<='4')", false
+        . " CHECK (rol>='1' AND rol<='4')", false
     );
     hace_consulta($db, 'DROP TABLE rol', false);
     hace_consulta($db, 'DROP SEQUENCE rol_seq', false);
@@ -2457,14 +2454,14 @@ if (!aplicado($idac)) {
         $db, "CREATE INDEX persona_nombres_apellidos_doc ON persona "
         . " USING gin(to_tsvector('spanish', unaccent(persona.nombres) "
         . "|| ' ' || unaccent(persona.apellidos) "
-        . "|| ' ' || persona.numerodocumento)", 
+        . "|| ' ' || persona.numerodocumento))", 
         false
     );
     hace_consulta(
         $db, "CREATE INDEX persona_apellidos_nombres_doc ON persona "
         . " USING gin(to_tsvector('spanish', unaccent(persona.apellidos) "
         . " || ' ' || unaccent(persona.nombres) "
-        . " || ' ' || persona.numerodocumento)", 
+        . " || ' ' || persona.numerodocumento))", 
         false
     );
 
@@ -2496,7 +2493,9 @@ if (!aplicado($idac)) {
         $db, "ALTER TABLE persona ALTER numerodocumento TYPE BIGINT USING 
         CAST (numerodocumento AS BIGINT)"
     );
-
+    hace_consulta(
+        $db, "ALTER TABLE persona DROP CONSTRAINT numerodocumento_key ", false
+    );
     hace_consulta(
         $db, "ALTER TABLE persona ADD CONSTRAINT numerodocumento_key "
         . " UNIQUE (tipodocumento, numerodocumento)"
@@ -2553,17 +2552,23 @@ if (!aplicado($idac)) {
 
     aplicaact($act, $idac, 'Aumentadas tablas básicas');
 }
-/*$idac = '1.2-rt4';
+$idac = '1.2-pr1';
 if (!aplicado($idac)) {
     hace_consulta(
-        $db,
-        "ALTER TABLE vinculoestado_comunidad RENAME TO "
-        . "comunidad_vinculoestado", false
+        $db, "UPDATE presponsable set papa='39' WHERE id='1'", false
+    );
+    hace_consulta(
+        $db, "UPDATE presponsable set papa='39' WHERE id='14'", false
+    );
+    hace_consulta(
+        $db, "UPDATE presponsable set papa='40' WHERE id='25'", false
+    );
+    hace_consulta(
+        $db, "UPDATE presponsable set papa='36' WHERE id='33'", false
     );
 
-    die("x");
     aplicaact($act, $idac, 'Renombrando tablas');
-} */
+} 
 
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {

@@ -149,26 +149,6 @@ class PagUbicacion extends PagBaseMultiple
 
     var $titulo = 'Ubicación';
 
-    /**
-     * Deja en blanco variables de este formulario
-     *
-     * @param string $nomcampodep Nombre del campo con departamento
-     * @param string $nomcampomun Nombre del campo con municipio
-     *
-     * @return void
-     */
-    static function nullVarUbicacion($nomcampodep = '', $nomcampomun = '')
-    {
-        unset($_SESSION['camDepartamento']);
-        unset($_SESSION['camMunicipio']);
-        if ($nomcampodep != '') {
-            unset($_REQUEST[$nomcampodep]);
-        }
-        if ($nomcampomun != '') {
-            unset($_REQUEST[$nomcampomun]);
-        }
-    }
-
 
     /**
      * Pone en null variables asociadas a tablas de la pestaña.
@@ -178,8 +158,6 @@ class PagUbicacion extends PagBaseMultiple
     function nullVar()
     {
         $this->bubicacion = null;
-        PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
-        //$this->nullVarUbicacion();
     }
 
     /**
@@ -300,192 +278,43 @@ class PagUbicacion extends PagBaseMultiple
         $this->addAction('anterior', new Anterior());
     }
 
-
     /**
-     * Identificación de departamento elegido por usuario.
-     * Recuerde llamar PagUbicacion::nullVarUbicacion
-     * al terminar la función procesa (con o sin exito).
+     * Crea campos departamento, municipio y clase en blanco para
+     * completar con la función modCampos
      *
-     * @param object &$form       Formulario
-     * @param object $def         Valor por defecto
-     * @param string $nomcampodep Nombre del campo con departamento
+     * @param object &$db     Base de datos
+     * @param object &$form   Formulario
+     * @param object &$do     DataObject donde estan los campos
+     * @param object $nomcdep Nombre campo departamento
+     * @param object $nomcmun Nombre campo municipio
+     * @param object $nomccla Nombre campo clase
      *
-     * @return string id de departamento
+     * @return array Con elementos para formulario (dep, mun, clase)
      */
-    static function retIdDepartamento(&$form, $def = null, 
-        $nomcampodep = 'id_departamento'
-    ) {
-        $ndepartamento = null;
-        /*echo "OJO retIdDepartamento(form, def=$def, $nomcampodep).  "
-            . " Session=" . (isset($_SESSION['camDepartamento']) 
-            ? $_SESSION['camDepartamento'] :  "null")
-            . ", _submitValues:"; print_r($form->_submitValues);  
-        echo "OJO REQUEST:" ; print_r($_REQUEST); echo "<br>"; */
-        if (isset($form->_submitValues[$nomcampodep])) {
-            //echo "OJO Caso 1<br>";
-            $ndepartamento = (int)$form->_submitValues[$nomcampodep];
-        } else if (isset($_REQUEST[$nomcampodep]) 
-            && $_REQUEST[$nomcampodep] != ''
-        ) {
-            //echo "OJO retIdDepartamento caso 2<br>";
-            $ndepartamento = (int)$_REQUEST[$nomcampodep];
-        } else if (isset($_SESSION['camDepartamento'])
-            && $_SESSION['camDepartamento'] != ''
-        ) {
-            //echo "OJO caso 3<br>";
-            $ndepartamento = $_SESSION['camDepartamento'] ;
-        } else if (isset($def) && $def != null
-            && $def != DB_DataObject_Cast::sql('NULL')
-        ) {
-            //echo "OJO caso 4<br>";
-            $ndepartamento = $def;
-        }
-        //echo  "OJO salida ndepartamento=$ndepartamento<br>";
-        unset($_SESSION['camDepartamento']) ;
-        return $ndepartamento;
-    }
-
-    /**
-     * Identificación del municpio elegido por usuario.
-     * Recuerde llamar PagUbicacion::nullVarUbicacion
-     * al terminar la función procesa (con o sin exito).
-     * procesa en la pestaña que use esta función.
-     *
-     * @param object &$form       Formulario
-     * @param object $def         Valor por defecto
-     * @param string $nomcampomun Nombre del campo con municipio
-     *
-     * @return string id de municipio
-     */
-    static function retIdMunicipio(&$form, $def = null,
-        $nomcampomun = 'id_municipio'
-    ) {
-        /* echo "OJO retIdMunicipio(form, def=$def, $nomcampomun).  Session=" 
-            . (isset($_SESSION['camMunicipio']) 
-            ? $_SESSION['camMunicipio'] :  "null")
-            . ", _submitValues:"; print_r($form->_submitValues); 
-        echo "OJO REQUEST:" ; print_r($_REQUEST); echo "<br>";*/
-
-        $nmunicipio = null;
-        if (isset($form->_submitValues[$nomcampomun])) {
-            //echo "OJO Caso 1<br>";
-            $nmunicipio = (int)$form->_submitValues[$nomcampomun] ;
-        } else if (isset($_REQUEST[$nomcampomun]) 
-            && $_REQUEST[$nomcampomun] != ''
-        ) {
-            //echo "OJO Caso 2<br>";
-            $nmunicipio = (int)$_REQUEST[$nomcampomun];
-        } else if (isset($_SESSION['camMunicipio'])) {
-            //echo "OJO Caso 3<br>";
-            $nmunicipio = $_SESSION['camMunicipio'] ;
-        } else if (isset($def) && $def != null
-            && $def != DB_DataObject_Cast::sql('NULL')
-        ) {
-            //echo "OJO Caso 4<br>";
-            $nmunicipio = $def;
-        }
-        unset($_SESSION['camMunicipio']) ;
-        //echo "OJO nmunicipio=$nmunicipio";
-        return $nmunicipio;
-    }
-
-    /**
-     * Identificación de la clase geográfica elegida por usuario
-     *
-     * @param object &$form         Formulario
-     * @param object $def           Valor por defecto
-     * @param string $nomcampoclase Nombre del campo con clase
-     *
-     * @return string id de clase
-     */
-    function retIdClase(&$form, $def = null, $nomcampoclase = 'id_clase')
+    static function creaCampos(&$form, $iddep = 'id_departamento', 
+        $idmun = 'id_municipio', $idcla = 'id_clase')
     {
-        $nclase = null;
-        if (isset($form->_submitValues[$nomcampoclase])) {
-            $nclase= (int)$form->_submitValues[$nomcampoclase] ;
-        } else if (isset($def) && $def != null) {
-            $nclase = $def;
-        }
-        return $nclase;
-    }
-
-
-    /**
-     * Crea campos interdependientes Departamento/Muncipio/Clase
-     *
-     * @param object &$db           Base de datos
-     * @param object &$form         Formulario
-     * @param object $idpest        Identificación de la pestaña
-     * @param object $depdef        Departamento por defecto
-     * @param object $mundef        Municipio por defecto
-     * @param string $nomcampodep   Nombre del campo con depto
-     * @param string $nomcampomun   Nombre del campo con municipio
-     * @param string $nomcampoclase Nombre del campo con clase
-     *
-     * @return array Vector con 3 objetos para añadir al formulario:
-     *  departamento, municipio y clase
-     */
-    static function creaCamposUbicacion(&$db, &$form,
-        $idpest, $depdef, $mundef, $nomcampodep = 'id_departamento',
-        $nomcampomun = 'id_municipio', $nomcampoclase = 'id_clase'
-    ) {
-        if (PEAR::isError($db)) {
-            die($db->getMessage()." - ".$db->getUserInfo());
-        }
+        assert($iddep != null);
         $dep =& $form->createElement(
-            'select', $nomcampodep,
+            'select', $iddep,
             $GLOBALS['etiqueta']['departamento'],
             array()
-        );
-        $options = array('' => '') + $db->getAssoc(
-            "SELECT  id, nombre FROM departamento ORDER BY nombre"
-        );
-        $dep->loadArray($options);
-        $dep->updateAttributes(
-            array('onchange' => "envia('$idpest:$nomcampodep')")
-        );
-
-        $mun =& $form->createElement(
-            'select', $nomcampomun,
-            $GLOBALS['etiqueta']['municipio'],
-            array()
-        );
-        $mun->updateAttributes(
-            array('onchange' => "envia('$idpest:$nomcampomun')")
-        );
-
-        $cla =& $form->createElement(
-            'select', $nomcampoclase,
-            $GLOBALS['etiqueta']['clase'],
-            array()
-        );
-
-        $ndepartamento = PagUbicacion::retIdDepartamento(
-            $form, $depdef, $nomcampodep
-        );
-        if ($ndepartamento !== null) {
-            $dep->setValue($ndepartamento);
-            $options = array('' => '') + $db->getAssoc(
-                "SELECT  id, nombre FROM municipio " .
-                " WHERE id_departamento='$ndepartamento' ORDER BY nombre"
+        ); 
+        $mun = null;
+        if ($idmun != null) {
+            $mun =& $form->createElement(
+                'select', $idmun,
+                $GLOBALS['etiqueta']['municipio'],
+                array()
             );
-            $mun->loadArray($options);
-            $cla->loadArray(array());
         }
-        $nmunicipio = PagUbicacion::retIdMunicipio(
-            $form, $mundef, $nomcampomun
-        );
-        if ((int)$nmunicipio != 0 && $ndepartamento !== null) {
-            $mun->setValue($nmunicipio);
-            $a = $db->getAssoc(
-                "SELECT id, nombre || ' (' || id_tclase || ')'
-                FROM clase
-                WHERE id_departamento = '$ndepartamento'
-                AND id_municipio = '$nmunicipio' ORDER BY nombre"
-            );
-            sin_error_pear($a);
-            $options = array('' => '') + $a;
-            $cla->loadArray($options);
+        $cla = null;
+        if ($idcla != null) {
+            $cla =& $form->createElement(
+                'select', $idcla,
+                $GLOBALS['etiqueta']['clase'],
+                array()
+            ); 
         }
 
         return array($dep, $mun, $cla);
@@ -497,23 +326,33 @@ class PagUbicacion extends PagBaseMultiple
      *
      * @param object &$db     Base de datos
      * @param object &$form   Formulario
-     * @param object &$do     DataObject donde estan los campos
      * @param object $nomcdep Nombre campo departamento
      * @param object $nomcmun Nombre campo municipio
      * @param object $nomccla Nombre campo clase
+     * @param int    $vdep    Valor inicial de departamento
+     * @param int    $vmun    Valor inicial de municipio
+     * @param int    $vcla    Valor inicial de clase
      *
+     * @return void
      */
-    static function modCamposUbicacion(&$db, &$form, 
+    static function modCampos(&$db, &$form, 
         $nomcdep = 'id_departamento', $nomcmun = 'id_municipio', 
         $nomccla = 'id_clase', $vdep = null, $vmun = null, $vcla = null
     ) {
-        //echo "OJO modCamposUbicacion(db, form, nomcdep=$nomcdep, nomcmun=$nomcmun, nomccla=$nomccla, vdep=$vdep, vmun=$vmun, vcla=$vcla)<br>";
+        assert($nomcdep != null);
+        /*echo "OJO modCampos(db, form, nomcdep=$nomcdep, "
+         . "nomcmun=$nomcmun, nomccla=$nomccla, vdep=$vdep, "
+         . "vmun=$vmun, vcla=$vcla)<br>"; */
         if (PEAR::isError($db)) {
             die($db->getMessage()." - ".$db->getUserInfo());
         }
 
         $d = $m = $c = null;
-        $d =& $form->getElement($nomcdep);
+        $d =& toma_elemento_recc($form, $nomcdep);
+        sin_error_pear($d);
+        if ($d == null) {
+            die("d es null");
+        }
         if ($nomcmun == null) {
             $d->updateAttributes(array(
                 "id" => "$nomcdep",
@@ -524,7 +363,8 @@ class PagUbicacion extends PagBaseMultiple
                 "onchange" => "llenaMunicipio('$nomcdep', "
                 . "'$nomcmun', '$nomccla')"
             ));
-            $m =& $form->getElement($nomcmun);
+            $m =& toma_elemento_recc($form, $nomcmun);
+            sin_error_pear($m);
             if ($nomccla == null) {
                 $m->updateAttributes(array(
                     "id" => "$nomcmun",
@@ -535,9 +375,12 @@ class PagUbicacion extends PagBaseMultiple
                     "onchange" => "llenaClase('$nomcdep', "
                     . "'$nomcmun', '$nomccla')"
                 ));
-                $c =& $form->getElement($nomccla);
+                $c =& toma_elemento_recc($form, $nomccla);
+                sin_error_pear($c);
                 $c->updateAttributes(array(
                     "id" => "$nomccla",
+                    "onchange" => "llenaCoord('$nomcdep', "
+                    . "'$nomcmun', '$nomccla')"
                 ));
             }
         }
@@ -548,51 +391,58 @@ class PagUbicacion extends PagBaseMultiple
             )
         );
         $d->loadArray($options);
-        if ($vdep != null && $m != null) {
+        if ($vdep != null && $vdep != DB_DataObject_Cast::sql('NULL')) {
             $d->setValue($vdep);
-            $m->_options = array();
-            $options = htmlentities_array(
-                $db->getAssoc(
-                    "SELECT id, nombre FROM municipio WHERE id_departamento='"
-                    . $vdep . "' "
-                    . " ORDER BY nombre"
-                )
-            );
-            $m->loadArray($options);
-            if ($nomcmun != null && $vmun != null && $c != null) {
-                $m->setValue($vmun);
-                $c->_options = array();
-                $options = htmlentities_array(
+            if ($m != null) {
+                $m->_options = array();
+                $options = array('' => '') + htmlentities_array(
                     $db->getAssoc(
-                        "SELECT id, nombre FROM clase WHERE id_departamento='"
-                        . $vdep . "' "
-                        . " AND id_municipio='" .$vmun . "' "
+                        "SELECT id, nombre FROM municipio "
+                        . "WHERE id_departamento='" . (int)$vdep . "' "
                         . " ORDER BY nombre"
                     )
                 );
-                $c->loadArray($options);
-                if ($vcla != null) {
-                    $c->setValue($vcla);
+                $m->loadArray($options);
+                if ($vmun != null 
+                    && $vmun != DB_DataObject_Cast::sql('NULL')
+                ) {
+                    $m->setValue($vmun);
+                    if ($c != null) {
+                        $c->_options = array();
+                        $options = array('' => '') + htmlentities_array(
+                            $db->getAssoc(
+                                "SELECT id, nombre FROM clase "
+                                . " WHERE id_departamento='" . (int)$vdep . "' "
+                                . " AND id_municipio='" .(int)$vmun . "' "
+                                . " ORDER BY nombre"
+                            )
+                        );
+                        $c->loadArray($options);
+                        if ($vcla != null
+                            && $vcla != DB_DataObject_Cast::sql('NULL')
+                        ) {
+                            $c->setValue($vcla);
+                        }
+                    }
+                } else  if ($c != null) {
+                    $c->updateAttributes(array(
+                        "id" => "$nomccla",
+                        "disabled" => "true")
+                    );
                 }
-            } else  if ($c != null) {
-                $c->updateAttributes(array(
-                    "id" => "$nomccla",
-                    "disabled" => "true")
-                );
             }
         } else  if ($m != null) {
             $m->updateAttributes(array(
                 "id" => "$nomcmun",
                 "disabled" => "true")
             );
-            if (isset($c)) {
+            if ($c != null) {
                 $c->updateAttributes(array(
                     "id" => "$nomccla",
                     "disabled" => "true")
                 );
             }
         }
-
     }
 
 
@@ -612,19 +462,16 @@ class PagUbicacion extends PagBaseMultiple
         $vv = isset($this->bubicacion->id) ? $this->bubicacion->id : '';
         $this->addElement('hidden', 'id', $vv);
 
-        list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
-            $db, $this, 'ubicacion',
-            $this->bubicacion->_do->id_departamento,
-            $this->bubicacion->_do->id_municipio
-        );
-
-        $this->addElement($dep);
-        $this->addElement($mun);
-        $this->addElement($cla);
-
         $this->bubicacion->createSubmit = 0;
         $this->bubicacion->useForm($this);
         $this->bubicacion->getForm($this);
+
+        PagUbicacion::modCampos(
+            $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
+            $this->bubicacion->_do->id_departamento, 
+            $this->bubicacion->_do->id_municipio, 
+            $this->bubicacion->_do->id_clase
+        );
 
         if (isset($this->bubicacion->_do->latitud)
             && isset($this->bubicacion->_do->longitud)
@@ -664,21 +511,15 @@ class PagUbicacion extends PagBaseMultiple
         $nomcampomun = 'id_municipio',
         $nomcampocla = 'id_clase'
     ) {
-        $ndepartamento = PagUbicacion::retIdDepartamento(
-            $form, $depdef, $nomcampodep
-        );
+        $ndepartamento = $depdef;
         if ($ndepartamento != null && $dep != null) {
             $dep->setValue($ndepartamento);
         }
-        $nmunicipio = PagUbicacion::retIdMunicipio(
-            $form, $mundef, $nomcampomun
-        );
+        $nmunicipio = $mundef;
         if ($nmunicipio != null && $mun != null) {
             $mun->setValue($nmunicipio);
         }
-        $nclase = PagUbicacion::retIdClase(
-            $form, $cladef, $nomcampocla
-        );
+        $nclase = $cladef;
         if ($nclase != null && $cla != null) {
             $cla->setValue($nclase);
         }
@@ -778,18 +619,15 @@ class PagUbicacion extends PagBaseMultiple
         ;
 
         if ($es_vacio) {
-            //PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return true;
         }
         if (!$this->validate() ) {
-            //PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return false;
         }
         verifica_sin_CSRF($valores);
         if (in_array(31, $_SESSION['opciones'])
             && !in_array(21, $_SESSION['opciones'])
         ) {
-            //PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return true;
         }
 
@@ -833,7 +671,6 @@ class PagUbicacion extends PagBaseMultiple
             die($ret->getMessage());
         }
 
-        PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
         caso_funcionario($_SESSION['basicos_id']);
         return  true;
     }

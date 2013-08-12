@@ -473,11 +473,13 @@ function error_valida($msg, $valores, $iderr = '', $enhtml = false)
     }
     echo "<script>";
     if ($enhtml) {
-        echo "$(document).ready(function () {alert('$msg');});";
+        //echo "$(document).ready(function () {alert('$msg');});";
+        echo "alert('$msg');";
     } else {
-        echo "$(document).ready(function () {alert('" 
+        echo "alert('" . htmlentities($msg, ENT_COMPAT, 'UTF-8') . "');";
+        /*echo "$(document).ready(function () {alert('" 
             . htmlentities($msg, ENT_COMPAT, 'UTF-8')
-            . "');});";
+            . "');});";*/
     }
     echo "</script>";
     if ($iderr != '') {
@@ -835,7 +837,7 @@ function encabezado_envia($titulo = null, $cabezote = '')
 <html>
 <head>
   <meta charset = "UTF-8">
-  <script src="lib/jquery-1.10.2.js"></script> 
+  <script src="lib/jquery-2.0.3.min.js"></script> 
   <script src="sivel.js"></script> 
 ';
     if (isset($titulo)) {
@@ -1633,7 +1635,7 @@ function arr_a_fecha($f, $desde = true)
     $fb =& DB_DataObject_FormBuilder::create($dcaso);
 
     $ft = array('Y' => (int)$f['Y'],
-        'M' => (int)$mes,
+        'm' => (int)$mes,
         'd' => (int)$dia
     );
 
@@ -1647,7 +1649,7 @@ function arr_a_fecha($f, $desde = true)
  *
  * @param array $f Fecha por convertir en formato AAAA-MM-DD
  *
- * @return array 'Y' => año, 'M' => mes, 'd' => día
+ * @return array 'Y' => año, 'm' => mes, 'd' => día
      */
 function fecha_a_arr($f)
 {
@@ -1655,7 +1657,7 @@ function fecha_a_arr($f)
     $pf = explode('-', $f);
     assert(count($pf) == 3);
     $ar['Y'] = (int)$pf[0];
-    $ar['M'] = (int)$pf[1];
+    $ar['m'] = (int)$pf[1];
     $ar['d'] = (int)$pf[2];
     return $ar;
 }

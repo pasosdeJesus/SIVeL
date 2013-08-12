@@ -113,7 +113,6 @@ class PagVictimaIndividual extends PagBaseMultiple
         $this->bpersona = null;
         $this->persona_trelacion = null;
         $this->bantecedente_victima = null;
-        PagUbicacion::nullVarUbicacion();
     }
 
     /**
@@ -271,7 +270,6 @@ class PagVictimaIndividual extends PagBaseMultiple
             $this->tcorto = $GLOBALS['etiqueta']['Victimas Individuales'];
         }
 
-        PagUbicacion::nullVarUbicacion();
         $this->addAction('id_departamento', new CamDepartamento());
         $this->addAction('id_municipio', new CamMunicipio());
 
@@ -302,22 +300,28 @@ class PagVictimaIndividual extends PagBaseMultiple
 
         $_SESSION['pagVictimaIndividual_id_persona'] = $vv;
 
-        list($dep, $mun, $cla) = PagUbicacion::creaCamposUbicacion(
-            $db, $this, 'victimaIndividual',
-            $this->bpersona->_do->id_departamento,
-            $this->bpersona->_do->id_municipio
-        );
+        $this->bpersona->createSubmit = 0;
+        $this->bpersona->useForm($this);
+        $this->bpersona->getForm($this);
 
+        list($dep, $mun, $cla) = PagUbicacion::creaCampos(
+            $this, 'id_departamento', 'id_municipio', 'id_clase'
+        );
         $gr = array();
         $gr[] =& $dep;
         $gr[] =& $mun;
         $gr[] =& $cla;
 
-        $this->addGroup($gr, 'procedencia', _('Procedencia'), '&nbsp;', false);
-
-        $this->bpersona->createSubmit = 0;
-        $this->bpersona->useForm($this);
-        $this->bpersona->getForm($this);
+        $this->addGroup(
+            $gr, 'procedencia', _('Lugar de Nacimiento'), 
+            '&nbsp;', false
+        );
+        PagUbicacion::modCampos(
+            $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
+            $this->bpersona->_do->id_departamento, 
+            $this->bpersona->_do->id_municipio, 
+            $this->bpersona->_do->id_clase
+        );
 
         if (isset($this->bvictima->_do->id_persona)) {
             $comovic = "";
@@ -377,7 +381,19 @@ class PagVictimaIndividual extends PagBaseMultiple
         $vv = isset($this->bvictima->_do->id_persona) ?
             $this->bvictima->_do->id_persona : '';
         $valsca = array();
+        $idcaso =& $_SESSION['basicos_id'];
+        $dcaso = objeto_tabla('caso');
+
         if ($vv != '') {
+            $dcaso->get($idcaso);
+/*            $pf = fecha_a_arr($dcaso->fecha);
+            $ht =& $this->getElement('aniocaso');
+            $ht->setValue($pf['Y']);
+            $ht =& $this->getElement('mescaso');
+            $ht->setValue($pf['m']);
+            $ht =& $this->getElement('diacaso');
+            $ht->setValue($pf['d']); */
+
             $e =& $this->getElement('procedencia');
             $dep =& $e->_elements[0];
             $mun =& $e->_elements[1];
@@ -394,7 +410,7 @@ class PagVictimaIndividual extends PagBaseMultiple
             $fanio = $this->bpersona->_do->anionac;
             $fsexo = $this->bpersona->_do->sexo;
 
-            $g =& $this->getElement('nacimiento');
+/*            $g =& $this->getElement('nacimiento');
             $sanio =& $g->_elements[0];
             $sanio->setValue($fanio);
             $smes =& $g->_elements[1];
@@ -404,28 +420,23 @@ class PagVictimaIndividual extends PagBaseMultiple
             $ssexo =& $g->_elements[3];
             $ssexo->setValue($fsexo);
 
-            $idcaso =& $_SESSION['basicos_id'];
-            $dcaso = objeto_tabla('caso');
-            $dcaso->get($idcaso);
-            $pf = fecha_a_arr($dcaso->fecha);
-
-            $ht =& $this->getElement('aniocaso');
-            $ht->setValue($pf['Y']);
-            $ht =& $this->getElement('mescaso');
-            $ht->setValue($pf['M']);
-            $ht =& $this->getElement('diacaso');
-            $ht->setValue($pf['d']);
-
             $sedad =& $g->_elements[5];
             if ($fanio > 0) {
                 $na = edad_de_fechanac(
                     $fanio, $pf['Y'], $fmes,
-                    $pf['M'], $fdia, $pf['d']
+                    $pf['m'], $fdia, $pf['d']
                 );
                 $sedad->setValue($na);
             }
-
-
+            $sedadactual =& $g->_elements[7];
+            if ($fanio > 0) {
+                $na = edad_de_fechanac(
+                    $fanio, date('Y'), $fmes,
+                    date('m'), $fdia, date('d')
+                );
+                $sedadactual->setValue($na);
+            }
+ */
             foreach ($this->bvictima->_do->fb_fieldsToRender as $c) {
                 $cq = $this->getElement($c);
                 if (!PEAR::isError($cq) && isset($this->bvictima->_do->$c)) {
@@ -629,12 +640,10 @@ class PagVictimaIndividual extends PagBaseMultiple
         );
 
         if ($es_vacio) {
-            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return true;
         }
 
         if (!$this->validate() ) {
-            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return false;
         }
 
@@ -643,7 +652,6 @@ class PagVictimaIndividual extends PagBaseMultiple
         if ($nobus
             && (!isset($valores['nombres']) || trim($valores['nombres'])=='')
         ) {
-            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             error_valida(_('Falta nombre de víctima'), $valores);
             return false;
         }
@@ -651,14 +659,12 @@ class PagVictimaIndividual extends PagBaseMultiple
         if (isset($valores['hijos'])
             && ((int)$valores['hijos'] < 0 || (int)$valores['hijos'] > 100)
         ) {
-            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             error_valida(_('Cantidad de hijos fuera de rango'), $valores);
             return false;
         }
         if (in_array(31, $_SESSION['opciones'])
             && !in_array(21, $_SESSION['opciones'])
         ) {
-            PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
             return true;
         }
 
@@ -777,7 +783,6 @@ class PagVictimaIndividual extends PagBaseMultiple
                 }
             }
         }
-        PagUbicacion::nullVarUbicacion('id_departamento', 'id_municipio');
 
         //$bt->setMarker("procesa: antes de caso_funcionario");
         caso_funcionario($_SESSION['basicos_id']);

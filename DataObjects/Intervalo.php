@@ -52,6 +52,7 @@ class DataObjects_Intervalo extends DataObjects_Basica
     }
 
     var $fb_preDefOrder = array(
+        'id',
         'nombre',
         'rango',
         'fechacreacion',
