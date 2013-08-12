@@ -31,7 +31,7 @@ require_once 'ResConsulta.php';
  * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
  * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
  * @link     http://sivel.sf.net/tec
- * @see PagFuentesFrecuentes
+ * @see      PagFuentesFrecuentes
  */
 class PagFrecuenteAnexo extends PagFuentesFrecuentes
 {
@@ -59,7 +59,7 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
                 " WHERE id_caso='$idcaso' AND fechaffrecuente=$vf " .
                 " AND id_ffrecuente=$vp";
             $db = $this->bcaso_ffrecuente->_do->getDatabaseConnection();
-            hace_consulta($db, $q, false) ;
+            hace_consulta($db, $q, false);
         }
 
         parent::elimina($valores);
@@ -160,8 +160,8 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
             }
         }
         if ((!isset($_SESSION['forma_modo'])
-            || $_SESSION['forma_modo'] != 'busqueda'
-        ) && !$puesto
+            || $_SESSION['forma_modo'] != 'busqueda') 
+            && !$puesto
         ) {
             $sel->setValue('');
         }
@@ -209,7 +209,7 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
                     " AND id_ffrecuente=$vp";
             }
             //echo $q;
-            hace_consulta($db, $q, false) ;
+            hace_consulta($db, $q, false);
         }
 
         caso_funcionario($_SESSION['basicos_id']);

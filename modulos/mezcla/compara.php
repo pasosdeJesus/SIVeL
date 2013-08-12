@@ -33,6 +33,13 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
     // @codingStandardsIgnoreEnd
 }
 
+/**
+ * Retorna subcadena izquierda de $s hasta el punto
+ *
+ * @param string $s Cadena
+ *
+ * @return Prfijo izquierdo de z hasta .
+ */
 function hastapunto($s) {
     $p = strpos($s, '.');
     $r = $s;
@@ -42,6 +49,13 @@ function hastapunto($s) {
     return $p;
 }
 
+/**
+ * Punto de entrada
+ *
+ * @param string $dsn URl de la base
+ *
+ * @return void
+ */
 function muestra($dsn)
 {
     $aut_usuario = "";

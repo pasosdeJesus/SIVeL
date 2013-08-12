@@ -28,7 +28,7 @@ require_once 'misc.php';
  * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
  * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
  * @link     http://sivel.sf.net/tec
- * @see PagBaseSimple
+ * @see      PagBaseSimple
  */
 class PagEtiquetas extends PagBaseSimple
 {
@@ -53,7 +53,7 @@ class PagEtiquetas extends PagBaseSimple
      * Inicializa variables y datos de la pestaña.
      * Ver documentación completa en clase base.
      *
-     * @param array $apar Arreglo de parametros. Vacio aqui.
+     * @param array $aper Arreglo de parametros. Vacio aqui.
      *
      * @return handle Conexión a base de datos
      */
@@ -79,7 +79,6 @@ class PagEtiquetas extends PagBaseSimple
      * Ver documentación completa en clase base.
      *
      * @param string $nomForma Nombre
-     * @param string $mreq     Mensaje de dato requerido
      *
      * @return void
      */
@@ -99,7 +98,7 @@ class PagEtiquetas extends PagBaseSimple
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
         $this->addAction('agregarEtiqueta', new AgregarEtiqueta());
-        $this->addAction('eliminaest', new EliminaEst ());
+        $this->addAction('eliminaest', new EliminaEst());
     }
 
 
@@ -132,13 +131,9 @@ class PagEtiquetas extends PagBaseSimple
      * @return void
      * @see PagBaseSimple
      */
-     function formularioValores(&$db, $idcaso)
-     {
-        /*if (!isset($_SESSION['forma_modo'])
-        || $_SESSION['forma_modo'] != 'busqueda') {
-            $this->controller->deshabilita_botones($this, array('siguiente'));
-        } */
-     }
+    function formularioValores(&$db, $idcaso)
+    {
+    }
 
     /**
      * Elimina registros de tablas relacionadas con caso de este formulario.
@@ -156,7 +151,7 @@ class PagEtiquetas extends PagBaseSimple
          assert(isset($idcaso));
          $result = hace_consulta(
              $db, "DELETE FROM caso_etiqueta WHERE " .
-            "id_caso='$idcaso'"
+             "id_caso='$idcaso'"
         );
      }
 
@@ -179,41 +174,41 @@ class PagEtiquetas extends PagBaseSimple
         }
 
 
-         $db = $this->iniVar();
+        $db = $this->iniVar();
 
-         $idcaso = $_SESSION['basicos_id'];
-         // Procesamiento
-         if ($agregaEtiqueta) {
-             $this->bcaso_etiqueta->_do->id_caso = (int)$idcaso;
-             $this->bcaso_etiqueta->_do->id_etiqueta =
-                 (int)$valores['fetiqueta'];
-             $this->bcaso_etiqueta->_do->id_funcionario =
-                 (int)$_SESSION['id_funcionario'];
-             $this->bcaso_etiqueta->_do->fecha = @date('Y-m-d');
-             $this->bcaso_etiqueta->_do->observaciones =
-                 var_escapa($valores['fobservaciones'], $db);
-             //print_r($this->bcaso_etiqueta->_do);
-             $r = $this->bcaso_etiqueta->_do->insert();
-             sin_error_pear($r, _('No pudo insertar en base.'));
-             $agregaEtiqueta = false;
-         }
+        $idcaso = $_SESSION['basicos_id'];
+        // Procesamiento
+        if ($agregaEtiqueta) {
+            $this->bcaso_etiqueta->_do->id_caso = (int)$idcaso;
+            $this->bcaso_etiqueta->_do->id_etiqueta =
+                (int)$valores['fetiqueta'];
+            $this->bcaso_etiqueta->_do->id_funcionario =
+                (int)$_SESSION['id_funcionario'];
+            $this->bcaso_etiqueta->_do->fecha = @date('Y-m-d');
+            $this->bcaso_etiqueta->_do->observaciones =
+                var_escapa($valores['fobservaciones'], $db);
+            //print_r($this->bcaso_etiqueta->_do);
+            $r = $this->bcaso_etiqueta->_do->insert();
+            sin_error_pear($r, _('No pudo insertar en base.'));
+            $agregaEtiqueta = false;
+        }
 
-         // Actualizamos observaciones
-         foreach ($valores as $i => $v) {
-             if (substr($i, 0, 5)=='fobs_') {
-                 $po = explode('_', $i);
-                 $dec =& objeto_tabla('caso_etiqueta');
-                 $dec->id_caso = $idcaso;
-                 $dec->id_etiqueta = $po[2];
-                 $dec->id_funcionario = $po[3];
-                 $dec->fecha = $po[4];
-                 $dec->observaciones = $v;
-                 $dec->update();
-             }
-         }
+        // Actualizamos observaciones
+        foreach ($valores as $i => $v) {
+            if (substr($i, 0, 5)=='fobs_') {
+                $po = explode('_', $i);
+                $dec =& objeto_tabla('caso_etiqueta');
+                $dec->id_caso = $idcaso;
+                $dec->id_etiqueta = $po[2];
+                $dec->id_funcionario = $po[3];
+                $dec->fecha = $po[4];
+                $dec->observaciones = $v;
+                $dec->update();
+            }
+        }
 
-         caso_funcionario($_SESSION['basicos_id']);
-         return  $ret;
+        caso_funcionario($_SESSION['basicos_id']);
+        return  $ret;
      }
 
 
@@ -420,11 +415,10 @@ class PagEtiquetas extends PagBaseSimple
       * @return void
       */
      static function consultaWebCreaConsulta(&$db, $mostrar, &$where, &$tablas,
-         &$pOrdenar, &$campos)
-     {
+         &$pOrdenar, &$campos
+     ) {
          PagEtiquetas::estadisticasIndCreaConsulta($db, $where, $tablas);
      }
-
 
 
     /**
@@ -444,9 +438,9 @@ class PagEtiquetas extends PagBaseSimple
     /**
      * Llamada desde consolidado para completar consulta SQL en caso
      *
-     * @param object &$db       Conexión a B.D
-     * @param string &$where    Consulta SQL por completar
-     * @param string &$tablas   Tablas incluidas en consulta
+     * @param object &$db     Conexión a B.D
+     * @param string &$where  Consulta SQL por completar
+     * @param string &$tablas Tablas incluidas en consulta
      *
      * @return void
      */
@@ -464,28 +458,28 @@ class PagEtiquetas extends PagBaseSimple
       *
       * @return void
       */
-     static function reporteGeneralRegistroHtml(&$db, $campos, $idcaso)
-     {
-         $idcaso = (int)$idcaso;
-         $r = "";
-         if (isset($campos['m_fuentes'])) {
-             $c = hace_consulta($db, "SELECT nombre, caso_etiqueta.observaciones
-                 FROM etiqueta, caso_etiqueta
-                 WHERE etiqueta.id = caso_etiqueta.id_etiqueta
-                 AND caso_etiqueta.id_caso = '$idcaso'"
-             );
-             $reg = array();
-             $sep = _("Etiquetas") . ": \n   ";
-             while ($c->fetchInto($reg)) {
-                 $r .= $sep . trim($reg[0]);
-                 if (trim($reg[1]) != "") {
-                     $r .= ": " . $reg[1];
-                 }
-                 $sep = "\n   ";
-             }
-         }
-         return $r;
-     }
+    static function reporteGeneralRegistroHtml(&$db, $campos, $idcaso)
+    {
+        $idcaso = (int)$idcaso;
+        $r = "";
+        if (isset($campos['m_fuentes'])) {
+            $c = hace_consulta($db, "SELECT nombre, caso_etiqueta.observaciones
+                FROM etiqueta, caso_etiqueta
+                WHERE etiqueta.id = caso_etiqueta.id_etiqueta
+                AND caso_etiqueta.id_caso = '$idcaso'"
+            );
+            $reg = array();
+            $sep = _("Etiquetas") . ": \n   ";
+            while ($c->fetchInto($reg)) {
+                $r .= $sep . trim($reg[0]);
+                if (trim($reg[1]) != "") {
+                    $r .= ": " . $reg[1];
+                }
+                $sep = "\n   ";
+            }
+        }
+        return $r;
+    }
 
 
 

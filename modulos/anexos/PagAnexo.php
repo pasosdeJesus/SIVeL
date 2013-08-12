@@ -25,8 +25,6 @@ require_once 'HTML/QuickForm/Action.php';
 /**
  * Acción que responde al botón ver anexo
  *
- * @category SIVeL
- *
  * PHP version 5
  *
  * @category SIVeL
@@ -65,7 +63,8 @@ class VerAnexo extends HTML_QuickForm_Action
                 if (!file_exists($arch)) {
                     die("No existe el archivo especificado");
                 }
-                $nombre = substr($nombre, strlen($inin));  // Eliminado número de caso
+                $nombre = substr($nombre, strlen($inin));  
+                // Eliminado número de caso
                 $ps = (int)strpos($nombre, "_");
                 if ($ps < 1) {
                     die("El nombre del archivo no es estándar");
@@ -89,6 +88,18 @@ class VerAnexo extends HTML_QuickForm_Action
     }
 }
 
+
+/**
+ * Anexo
+ * Ver documentación de funciones en clase base.
+ *
+ * @category SIVeL
+ * @package  SIVeL
+ * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @link     http://sivel.sf.net/tec
+ * @see      PagBaseMultiple
+ */
 class PagAnexo extends PagBaseMultiple
 {
     var $banexo;
@@ -121,6 +132,13 @@ class PagAnexo extends PagBaseMultiple
         return $this->banexo->id;
     }
 
+    /**
+     * Elimina de base de datos el registro actual.
+     *
+     * @param array &$valores Valores enviados por formulario.
+     *
+     * @return null
+     */
     function elimina(&$values)
     {
         $this->iniVar();
@@ -135,7 +153,7 @@ class PagAnexo extends PagBaseMultiple
      * Inicializa variables y datos de la pestaña.
      * Ver documentación completa en clase base.
      *
-     * @param array $apar Arreglo de parametros. Vacio aqui.
+     * @param array $aper Arreglo de parametros. Vacio aqui.
      *
      * @return handle Conexión a base de datos
      */
@@ -275,7 +293,8 @@ class PagAnexo extends PagBaseMultiple
      */
     function procesa(&$valores)
     {
-        $es_vacio=!isset($valores['descripcion'])
+        $es_vacio
+            = !isset($valores['descripcion'])
             || $valores['descripcion'] == '';
 
         if ($es_vacio) {
@@ -339,7 +358,19 @@ class PagAnexo extends PagBaseMultiple
         return  $ret;
     }
 
-
+    /**
+     * Prepara consulta SQL para buscar datos de este formulario.
+     * Ver documentación completa en clase base.
+     *
+     * @param string &$w       Consulta que se construye
+     * @param string &$t       Tablas
+     * @param object &$db      Conexión a base de datos
+     * @param object $idcaso   Identificación del caso
+     * @param string &$subcons Subconsulta
+     *
+     * @return void
+     * @see PagBaseSimple
+     */
     function datosBusqueda(&$w, &$t, &$db, $idcaso, &$subcons)
     {
         consulta_or_muchos($w, $t, 'anexo');
@@ -349,10 +380,11 @@ class PagAnexo extends PagBaseMultiple
      * Compara datos relacionados con esta pestaña de los casos
      * con identificación id1 e id2.
      *
-     * @param object  $db  Conexión a base de datos
-     * @param array   $r   Resultados de comparación
+     * @param object  &$db Conexión a base de datos
+     * @param array   &$r  Resultados de comparación
      * @param integer $id1 Código de primer caso
      * @param integer $id2 Código de segundo caso
+     * @param array   $a   Arreglo
      *
      * @return Añade a $r datos de comparación
      * @see PagBaseSimple

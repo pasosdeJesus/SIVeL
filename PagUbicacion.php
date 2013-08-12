@@ -282,18 +282,16 @@ class PagUbicacion extends PagBaseMultiple
      * Crea campos departamento, municipio y clase en blanco para
      * completar con la función modCampos
      *
-     * @param object &$db     Base de datos
-     * @param object &$form   Formulario
-     * @param object &$do     DataObject donde estan los campos
-     * @param object $nomcdep Nombre campo departamento
-     * @param object $nomcmun Nombre campo municipio
-     * @param object $nomccla Nombre campo clase
+     * @param object &$form Formulario
+     * @param object $iddep Nombre campo departamento
+     * @param object $idmun Nombre campo municipio
+     * @param object $idcla Nombre campo clase
      *
      * @return array Con elementos para formulario (dep, mun, clase)
      */
     static function creaCampos(&$form, $iddep = 'id_departamento', 
-        $idmun = 'id_municipio', $idcla = 'id_clase')
-    {
+        $idmun = 'id_municipio', $idcla = 'id_clase'
+    ) {
         assert($iddep != null);
         $dep =& $form->createElement(
             'select', $iddep,
@@ -354,9 +352,7 @@ class PagUbicacion extends PagBaseMultiple
             die("d es null");
         }
         if ($nomcmun == null) {
-            $d->updateAttributes(array(
-                "id" => "$nomcdep",
-            ));
+            $d->updateAttributes(array("id" => "$nomcdep"));
         } else {
             $d->updateAttributes(array(
                 "id" => "$nomcdep",
@@ -424,22 +420,19 @@ class PagUbicacion extends PagBaseMultiple
                             $c->setValue($vcla);
                         }
                     }
-                } else  if ($c != null) {
-                    $c->updateAttributes(array(
-                        "id" => "$nomccla",
-                        "disabled" => "true")
+                } else if ($c != null) {
+                    $c->updateAttributes( 
+                        array("id" => "$nomccla", "disabled" => "true")
                     );
                 }
             }
-        } else  if ($m != null) {
-            $m->updateAttributes(array(
-                "id" => "$nomcmun",
-                "disabled" => "true")
+        } else if ($m != null) {
+            $m->updateAttributes(
+                array("id" => "$nomcmun", "disabled" => "true")
             );
             if ($c != null) {
-                $c->updateAttributes(array(
-                    "id" => "$nomccla",
-                    "disabled" => "true")
+                $c->updateAttributes(
+                    array("id" => "$nomccla", "disabled" => "true")
                 );
             }
         }
@@ -492,16 +485,16 @@ class PagUbicacion extends PagBaseMultiple
     /**
      * Llena valores de ubicación en formulario.
      *
-     * @param handle  &$form         Formulario
-     * @param integer $depdef        Departamento por defecto
-     * @param integer $mundef        Municipio por defecto
-     * @param integer $cladef        Clase por defecto
-     * @param integer $dep           Objeto departamento en formulario
-     * @param integer $mun           Objeto municipio en formulario
-     * @param integer $cla           Objeto clase en formulario
-     * @param string  $nomcampodep   Nombre del campo con depto
-     * @param string  $nomcampomun   Nombre del campo con municipio
-     * @param string  $nomcampoclase Nombre del campo con clase
+     * @param handle  &$form       Formulario
+     * @param integer $depdef      Departamento por defecto
+     * @param integer $mundef      Municipio por defecto
+     * @param integer $cladef      Clase por defecto
+     * @param integer $dep         Objeto departamento en formulario
+     * @param integer $mun         Objeto municipio en formulario
+     * @param integer $cla         Objeto clase en formulario
+     * @param string  $nomcampodep Nombre del campo con depto
+     * @param string  $nomcampomun Nombre del campo con municipio
+     * @param string  $nomcampocla Nombre del campo con clase
      *
      * @return void
      * @see PagBaseSimple

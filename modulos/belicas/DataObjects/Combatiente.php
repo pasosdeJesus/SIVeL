@@ -119,9 +119,9 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
      *
      * @return Valor para BD
      */
-    function setedad($value)
+    function setedad($valor)
     {
-        $this->edad= ($value == '') ? 'null' : $value;
+        $this->edad= ($valor == '') ? 'null' : $valor;
     }
 
     /**
@@ -161,34 +161,19 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
         if (isset($sel) && !PEAR::isError($sel)) {
             $sel->setSize(70);
             $sel->setMaxlength(100);
-/*            if (isset($GLOBALS['etiqueta']['nombre'])) {
-                $sel->setLabel($GLOBALS['etiqueta']['nombre']);
-} */
         }
 
         $e =& $form->getElement('alias');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(70);
             $e->setMaxlength(100);
-/*            if (isset($GLOBALS['etiqueta']['alias'])) {
-                $e->setLabel($GLOBALS['etiqueta']['alias']);
-}*/
         }
 
         $e =& $form->getElement('edad');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(5);
             $e->setMaxlength(5);
-/*            if (isset($GLOBALS['etiqueta']['edad'])) {
-                $e->setLabel($GLOBALS['etiqueta']['edad']);
-}*/
         }
-/*        $e =& $form->getElement('sexo');
-        if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['sexo'])
-        ) {
-            $e->setLabel($GLOBALS['etiqueta']['sexo']);
-        }  */
 
         $e =& $form->getElement('id_rangoedad');
         if (isset($e) && !PEAR::isError($e)

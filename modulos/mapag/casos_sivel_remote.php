@@ -8,10 +8,10 @@
  * @category  SIVeL
  * @package   SIVeL
  * @author    Luca Urech <lucaurech@yahoo.de> 
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org> integrando a SIVeL y exportando a JSON
+ * @author    Vladimir Támara <vtamara@pasosdeJesus.org> 
+ *   integrando a SIVeL y exportando a JSON
  * @copyright 2011 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   $Id: casos_sivel_remote.php,v 1.1.2.10 2013/04/15 14:10:40 vtamara Exp $
  * Acceso: CONSULTA PÚBLICA
  * @link      http://sivel.sf.net
  */
@@ -60,7 +60,7 @@ if (strpos($ca, "Por favor refine su consulta") !== false) {
 $casos = array();
 // carga datos del archivo XML de Sivel
 $xmlSivel = simplexml_load_string($ca);
-if ($xmlSivel === FALSE) {
+if ($xmlSivel === false) {
     errores_xml($xmlSivel, $ca);
     die("El url '" . $requestUrl . "' no está cargando");
 }

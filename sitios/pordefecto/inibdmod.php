@@ -33,7 +33,7 @@ if ($_SESSION['dirsitio'] != $dirsitio) {
 // Mejor no empleamos sobrecarga porque no funciona en
 // diversas versiones de PHP
 if (!defined('DB_DATAOBJECT_NO_OVERLOAD')) {
-    define('DB_DATAOBJECT_NO_OVERLOAD',1);
+    define('DB_DATAOBJECT_NO_OVERLOAD', 1);
 }
 
 if (!isset($dbusuario)) {
@@ -59,7 +59,7 @@ $options = array(
     'class_prefix' => 'DataObjects_',
     'extends_location' => 'DataObjects_',
     'debug' => isset($GLOBALS['DB_Debug']) ? $GLOBALS['DB_Debug'] : '0',
-#    'disable_null_strings' => 'full'
+    //'disable_null_strings' => 'full'
 );
 
 $_DB_DATAOBJECT_FORMBUILDER['CONFIG'] = array (
@@ -74,28 +74,28 @@ $_DB_DATAOBJECT_FORMBUILDER['CONFIG'] = array (
 
 
 if (!function_exists("esta_nueva_ficha")) {
-/** 
- * Determina si una ficha con la identificación dada ya está en las
- * programas para agregar
- *
- * @param arrary nuevas Arreglo de nuevas fichas
- * @param string id     Id de ficha
- *
- * @return true sii una ficha con la id dada ya está en nuevas
- */
-function esta_nueva_ficha($id) 
-{
-    foreach($GLOBALS['nueva_ficha_tabuladores'] as $a) {
-        $puesto = $a[0];
-        $nom = $a[1];
-        $arc = $a[2];
-        $puestoelim = $a[3];
-        if ($nom == $id) {
-            return true;
+    /** 
+     * Determina si una ficha con la identificación dada ya está en las
+     * programas para agregar
+     *
+     * @param arrary nuevas Arreglo de nuevas fichas
+     * @param string id     Id de ficha
+     *
+     * @return true sii una ficha con la id dada ya está en nuevas
+     */
+    function esta_nueva_ficha($id) 
+    {
+        foreach($GLOBALS['nueva_ficha_tabuladores'] as $a) {
+            $puesto = $a[0];
+            $nom = $a[1];
+            $arc = $a[2];
+            $puestoelim = $a[3];
+            if ($nom == $id) {
+                return true;
+            }
         }
+        return false;
     }
-    return false;
-}
 }
 
 /* Rutas en particular donde haya subdirectorios DataObjects */
@@ -111,7 +111,7 @@ ini_set('include_path', $rutas_include);
 
 foreach ($lm as $m) {
     if (file_exists("$m/conf.php")) {
-        require_once "$m/conf.php";
+        include_once "$m/conf.php";
     }
 }
 //echo "OJO antes de remplaza<hr>" ;print_r($GLOBALS['ficha_tabuladores']);
@@ -189,7 +189,7 @@ if (isset($GLOBALS['nueva_ficha_tabuladores'])) {
                 $nft[$nf] = array($nom, $arc, $puestoelim);
                 $nft[$nf + 1] = $f;
                 $incluida = true;
-            } else  {
+            } else {
                 $nft[$nf + 1] = $f;
             }
             //echo "OJO nft="; print_r($nft); echo "<br>";

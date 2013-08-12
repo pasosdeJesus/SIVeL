@@ -42,15 +42,23 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
  *
  * @return Subcadena de $s
  */
-function subizq_hasta_car($s, $c) {
+function subizq_hasta_car($s, $c)
+{
     $p = strpos($s, $c);
     $r = $s;
-    if ($p !== FALSE) {
+    if ($p !== false) {
         $r = substr($s, 0, $p); 
     }
     return $r;
 }
 
+/**
+ * Punto de entrada a formulario
+ * 
+ * @param string $dsn URL a base de datos
+ *
+ * @return void
+ */
 function muestra($dsn)
 {
     global $db;
@@ -64,7 +72,7 @@ function muestra($dsn)
         die_esc("Los códigos de los casos por mezclar deben ser diferentes");
     }
     $r = array();
-    foreach($_POST as $l => $v) {
+    foreach ($_POST as $l => $v) {
         $t = subizq_hasta_car($l, '-');
         if ($t != $l) {
             $c = substr($l, strlen($t) + 1);

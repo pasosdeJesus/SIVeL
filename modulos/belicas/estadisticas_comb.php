@@ -46,11 +46,13 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
     /**
      * Muestra un dato
      *
-     * @param string  $t    Selector
-     * @param unknown $np   Nombre de organización
-     * @param unknown $ndep Departamento
-     * @param unknown $nmun Municipio
-     * @param array   $res  Vector con otros
+     * @param string  $t           Selector
+     * @param unknown $np          Nombre de organización
+     * @param unknown $cdep        Departamento
+     * @param unknown $html_nomdep Nombre Departamento
+     * @param unknown $cmun        Municipio
+     * @param unknown $nommun      Nombre Municipio
+     * @param array   $res         Vector con otros
      *
      * @return void
      * @access public
@@ -60,14 +62,14 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
         if ($t == 'Organización') {
             echo "<td>" . htmlentities($np, ENT_COMPAT, 'UTF-8') . "</td>";
         } elseif ($t == 'C. Dep.') {
-           echo "<td>" . htmlentities($cdep, ENT_COMPAT, 'UTF-8') . "</td>";
+            echo "<td>" . htmlentities($cdep, ENT_COMPAT, 'UTF-8') . "</td>";
         } elseif ($t == 'Dep.') {
             // Escapado tras consulta
-           echo "<td>" . $html_nomdep . "</td>";
+            echo "<td>" . $html_nomdep . "</td>";
         } elseif ($t == 'C. Mun.') {
-           echo "<td>" . htmlentities($cmun, ENT_COMPAT, 'UTF-8') . "</td>";
+            echo "<td>" . htmlentities($cmun, ENT_COMPAT, 'UTF-8') . "</td>";
         } elseif ($t == 'Mun.') {
-           echo "<td>" . htmlentities($nommun, ENT_COMPAT, 'UTF-8') . "</td>";
+            echo "<td>" . htmlentities($nommun, ENT_COMPAT, 'UTF-8') . "</td>";
         } else {
             echo "<td>" .
                 (isset($res[$t]) ? (int)$res[$t] : 0) ."</td>";
@@ -172,17 +174,6 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
             resagresion.id = id_resultado_agresion AND
             caso.id = combatiente.id_caso AND
             presponsable.id = organizacionarmada";
-/*        foreach (array("municipio", "clase") as $t) {
-            $q .= " UNION SELECT presponsable.nombre,
-                {$t}_caso.id_departamento, {$t}_caso.id_municipio,
-                resagresion.nombre, combatiente.id
-                FROM resagresion, caso, {$t}_caso, combatiente,
-                presponsable
-                WHERE $where AND {$t}_caso.id_caso = caso.id AND
-                resagresion.id = id_resultado_agresion AND
-                caso.id = combatiente.id_caso AND
-                presponsable.id = organizacionarmada";
-} */
         $q .= " )";
         //echo "q= $q";
         hace_consulta($db, "$q");
@@ -410,6 +401,11 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
 
 }
 
+/** 
+ * Punto de entrada
+ *
+ * @return void
+ */
 function muestra($dsn)
 {
     $aut_usuario = "";

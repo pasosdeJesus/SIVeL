@@ -98,12 +98,6 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Seguimiento Judicial');
 }
 
-// alter table despacho add column id_tproces INTEGER REFERENCES tproceso;
-// update despacho SET id_tproceso = '2';
-// update despacho SET id_tproceso = '3' where id in ('129', '130', '99', '119');
-// update despacho SET id_tproceso = '4' where id in ('20', '30');
-// update despacho SET id_tproceso = '7' where id in ('40', '93', '112', '137', '139' );
-// update despacho SET id_tproceso = '1' where id in ('10');
 $idac = 'sjud-d1';
 if (!aplicado($idac)) {
     $na = 'modulos/segjudicial/datos.sql';
@@ -168,11 +162,13 @@ if (!aplicado($idac)) {
     );
     hace_consulta(
         $db,
-        "ALTER TABLE accion RENAME COLUMN observaciones_accion TO observacionesaccion", false
+        "ALTER TABLE accion RENAME COLUMN observaciones_accion 
+        TO observacionesaccion", false
     );
     hace_consulta(
         $db,
-        "ALTER TABLE accion RENAME COLUMN numero_radicado TO numeroradicado", false
+        "ALTER TABLE accion RENAME COLUMN numero_radicado TO numeroradicado", 
+        false
     );
 
     aplicaact($act, $idac, 'Renombra campos');
@@ -180,7 +176,7 @@ if (!aplicado($idac)) {
 
 $idac = '1.2-jl';
 if (!aplicado($idac)) {
-    foreach(array('tproceso', 'despacho', 'etapa', 'taccion', ) as $t) {
+    foreach (array('tproceso', 'despacho', 'etapa', 'taccion', ) as $t) {
         hace_consulta(
             $db, "ALTER TABLE $t ALTER nombre "
             . " TYPE VARCHAR(500) COLLATE es_co_utf_8", false

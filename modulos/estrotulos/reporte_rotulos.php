@@ -18,11 +18,13 @@
 /**
  * Agrega tipo de orden a consulta web
  *
- * @param string pOrden   Orden por poner
- * @param array  opciones Opciones del usuario autenticado
- * @param object obj      Objeto HTML_QuickForm con formulario
- * @param array  ae       Arreglo de opciones de ordenamiento
- * @param object t        Opción por defecto
+ * @param string $pOrden   Orden por poner
+ * @param array  $opciones Opciones del usuario autenticado
+ * @param object $obj      Objeto HTML_QuickForm con formulario
+ * @param array  &$ae      Arreglo de opciones de ordenamiento
+ * @param object &$t       Opción por defecto
+ *
+ * @return void Modifica $ae y $t
  */
 function rotulos_cwebordenar($pOrden, $opciones, $obj, &$ae, &$t)
 {
@@ -40,9 +42,10 @@ function rotulos_cwebordenar($pOrden, $opciones, $obj, &$ae, &$t)
 /**
  * Agrega orden a consulta
  *
- * @param string q        Restricciones
- * @param string pOrdenar Forma de ordenamiento
- * @return void  Modifica q
+ * @param string &$q       Restricciones
+ * @param string $pOrdenar Forma de ordenamiento
+ *
+ * @return void  Modifica $q
  */
 function rotulos_orden_cons(&$q, $pOrdenar)
 {
@@ -96,10 +99,11 @@ function rotulos_orden_cons(&$q, $pOrdenar)
 /**
  * Comienzo de un regitro en reporte revista
  *
- * @param object db Base de datos
- * @param array  campos por mostrar
- * @param string idcaso Código de caso
- * @param string numcaso Número de caso
+ * @param object $db      Base de datos
+ * @param array  $campos  por mostrar
+ * @param string $idcaso  Código de caso
+ * @param string $numcaso Número de caso
+ *
  * @return string Cadena por añadir al comienzo
  */
 function rotulos_inicial(&$db, $campos, $idcaso, $numcaso)
@@ -188,13 +192,13 @@ function rotulos_inicial(&$db, $campos, $idcaso, $numcaso)
 /**
  * Termina un regitro en reporte revista
  *
- * @param object db Base de datos
- * @param array  campos por mostrar
- * @param string idcaso Código de caso
- * @param string numcaso Número de caso
+ * @param object &$db     Base de datos
+ * @param array  $campos  por mostrar
+ * @param string $idcaso  Código de caso
+ * @param string $numcaso Número de caso
+ *
  * @return string Cadena por añadir al final
  */
-
 function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
 {
     //echo "OJO rotulos_final de idcaso=$idcaso, numcaso=$numcaso<br>";

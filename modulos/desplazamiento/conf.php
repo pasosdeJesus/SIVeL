@@ -9,7 +9,7 @@
  * @package   SIVeL
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2013 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin Garantías.
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */

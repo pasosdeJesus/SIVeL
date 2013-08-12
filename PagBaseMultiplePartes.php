@@ -30,7 +30,7 @@ require_once 'HTML/QuickForm/Action.php';
  * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
  * @license  Dominio público.
  * @link     http://sivel.sf.net/tec
-*/
+ */
 class PagBaseMultiplePartes extends PagBaseMultiple
 {
 
@@ -63,6 +63,9 @@ class PagBaseMultiplePartes extends PagBaseMultiple
 
     /** Titulo que aparecerá en formulario */
     var $titulo = 'Tabla Principal';
+    
+    /** Titulo que aparecerá en Tablas Básicas*/
+    const TITULO = 'Tabla Principal';
 
     var $nuevaCopia = false;
 
@@ -100,6 +103,13 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         return $a;
     }
 
+    /**
+     * Elimina de base de datos el registro actual.
+     *
+     * @param array &$valores Valores enviados por formulario.
+     *
+     * @return null
+     */
     function elimina(&$values)
     {
         $this->iniVar();
@@ -109,7 +119,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $cpartes = $cll::PARTES;
         if (isset($this->$bcm->_do->$ll)) {
             $partes = array_diff(
-                explode(' ', $cpartes), array($cll::clasemodelo)
+                explode(' ', $cpartes), array($cll::CLASEMODELO)
             );
             for ($i = 0; $i < 2; $i++) {
                 foreach ($partes as $t) {
@@ -305,7 +315,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
      * eliminaDep($db, $idcaso) elimina datos de la base $db presentados
      * en este formulario, que dependen del caso $idcaso 
      *
-     * @param object  $db     Conexión a base
+     * @param object  &$db    Conexión a base
      * @param integer $idcaso Identificación del caso
      *
      * @return void
@@ -389,8 +399,8 @@ class PagBaseMultiplePartes extends PagBaseMultiple
             ." AND $ll='$vll'";
         $nr = (int)$db->getOne($q);
         //echo "<hr>OJO q=$q, nr=$nr<br>";
-        if ($this->$bcm->_do->$ll == null || 
-            $this->$bcm->_do->$ll == ''
+        if ($this->$bcm->_do->$ll == null 
+            || $this->$bcm->_do->$ll == ''
         ) {
             if ($nr > 0) {
                 error_valida(
@@ -405,11 +415,6 @@ class PagBaseMultiplePartes extends PagBaseMultiple
             $this->$bcm->forceQueryType(
                 DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
             );
-/*            print_r($valores);
-            $q = "INSERT INTO ayudahumanitaria (id_caso, fechaexpulsion,
-            expulsion, fechallegada, llegada, ) " .
-                " VALUES ('$idcaso', '$fechaex');";
-            $r = hace_consulta($db, $q); */
         } else {
             $this->$bcm->forceQueryType(
                 DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEUPDATE
@@ -433,10 +438,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
             $nb = 'b' . $t;
             $keys = $this->$nb->_do->keys();
             $vk = array();
-            foreach($keys as $k) {
-/*                if (isset($this->$nb->_do->$k)) {
-                    $vk[$k] = $this->$nb->_do->$k;
-} else { */
+            foreach ($keys as $k) {
                 $vk[$k] = null;
                 if (isset($valores[$k])) {
                     //echo "OJO 2 k=$k, valores[k]=" . $valores[$k] . "<br>";
@@ -445,7 +447,6 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                     );
                 } 
             }
-
             if (!isset($this->partesmulti[$t])) {
                 $this->$nb->forceQueryType(
                     DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
@@ -453,7 +454,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                 $q = "SELECT COUNT(*) FROM $t WHERE ";
                 $sep = " ";
                 $haynull = false;
-                foreach($vk as $k => $v) {
+                foreach ($vk as $k => $v) {
                     // echo "OJO k=$k, v=$v<br>";
                     if ($v == null) {
                         $haynull = true;
@@ -536,9 +537,9 @@ class PagBaseMultiplePartes extends PagBaseMultiple
      * Extrae tablaprincipal de un caso y retorna su información en 
      * vectores
      *
-     *  @param integer $idcaso  Id. del Caso
-     *  @param object  &$db     Conexión a BD
-     *  @param array   &$ida    Para retornar llaves primarias
+     *  @param integer $idcaso Id. del Caso
+     *  @param object  &$db    Conexión a BD
+     *  @param array   &$ida   Para retornar llaves primarias
      *
      *  @return integer Cantidad de tablaprincipal retornados
      **/
@@ -568,7 +569,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         parent::act_globales();
         $cll = get_called_class();
         $cbasicas = $cll::BASICAS;
-        $nid = _($cll::titulo);
+        $nid = _($cll::TITULO);
         if (isset($cbasicas) && $cbasicas != '') {
             html_menu_agrega_submenu(
                 $GLOBALS['menu_tablas_basicas'],
@@ -607,7 +608,10 @@ class PagBaseMultiplePartes extends PagBaseMultiple
     {
         PagBaseMultiple::compara(
             $db, $r, $id1, $id2,
-            array('BaseMultiplePartes' => array('basemultiplepartes', 'fechaatencion'))
+            array(
+                'BaseMultiplePartes' => 
+                array('basemultiplepartes', 'fechaatencion')
+            )
         );
     }
 

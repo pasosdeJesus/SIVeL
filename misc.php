@@ -684,6 +684,11 @@ function toma_elemento_recc($form, $nom, $yaanalizados = array())
 
 /** 
  * Retorna valor SIN INFORMACION del campo $c del DataObject $do
+ *
+ * @param object $do DataObject
+ * @param string $c  Campo
+ *
+ * @return integer Que corresonde al valor SIN INFORMACION
  */
 function valorSinInfo(&$do, $c)
 {
@@ -698,17 +703,18 @@ function valorSinInfo(&$do, $c)
         $ndo = substr($rel, 0, $pd);
         $or = objeto_tabla($ndo);
         if (!PEAR::isError($or) 
-            && is_callable(array($or, 'idSinInfo'))) {
-                $v = $or->idSinInfo();
-                //echo "OJO sacando valor {$v}<br>";
-                if (is_array($v)) {
-                    if (isset($v[$c])) {
-                        $v = $v[$c];
-                    } else {
-                        $v = null;
-                    }
+            && is_callable(array($or, 'idSinInfo'))
+        ) {
+            $v = $or->idSinInfo();
+            //echo "OJO sacando valor {$v}<br>";
+            if (is_array($v)) {
+                if (isset($v[$c])) {
+                    $v = $v[$c];
+                } else {
+                    $v = null;
                 }
             }
+        }
     }
     return $v;
 }

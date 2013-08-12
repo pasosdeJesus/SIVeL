@@ -126,7 +126,10 @@ input.flat {
 <script type = "text/javascript" src="sivel.js" type="text/javascript"></script>
 <script type = "text/javascript">
 <!--
-function envia(que) {  document.forms[0]._qf_default.value = que; document.forms[0].submit(); }
+function envia(que) {
+  document.forms[0]._qf_default.value = que;
+ document.forms[0].submit(); 
+}
 -->
 </script>
 <body><table class="maintable" align = "left"><colgroup><col width = "150" style = "colprin1"/><col/></colgroup><form action="sitios/pruebas/novalida-frecuentes.php" method="post" name="frecuentes" id="frecuentes" target="_self" onsubmit="try { var myValidator = validate_frecuentes; } catch(e) { return true; } return myValidator(this);">

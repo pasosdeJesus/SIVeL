@@ -1376,7 +1376,7 @@ function dato_basico_en_obs(&$db, &$obs, $oxml,
     if ($ncampo == '') {
         $ncampo = $ntipoobs;
     }
-/*    echo "OJO dato_basico_en_obs(db, observaciones, oxml, "
+    /*echo "OJO dato_basico_en_obs(db, observaciones, oxml, "
      . "ntipoobs=$netiqueta, ntablabas=$ntablabas, ntablacaso=$ntablacaso,"
      . " idcaso=$idcaso, sepv=$sepv)<br>"; */
 
@@ -1449,8 +1449,8 @@ function conv_categoria(&$db, &$obs, $agr, $pr)
  */
 
 function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs, 
-    $csinf = false)
-{
+    $csinf = false
+) {
     $ids = DataObjects_Presponsable::idSinInfo();
     $nomg = $g->nombre_grupo;
     $pr = conv_basica(

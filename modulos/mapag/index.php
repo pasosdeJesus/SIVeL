@@ -10,9 +10,9 @@
  * @author    Luca Urech <lucaurech@yahoo.de>
  * @copyright 2009 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   $Id: index.php,v 1.1.2.8 2013/04/15 14:11:26 vtamara Exp $
- * Acceso: CONSULTA PÚBLICA
  * @link      http://sivel.sf.net
+ *
+ * Acceso: CONSULTA PÚBLICA
  */
 
 ?><!DOCTYPE html>

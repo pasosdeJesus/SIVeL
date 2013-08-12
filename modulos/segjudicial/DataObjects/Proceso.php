@@ -85,6 +85,11 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
         'observaciones',
     );
 
+    /**
+     * Retorna campos sin informacion y valores
+     *
+     * @return array Campos sin información y sus valores
+     */
     static function camposSinInfo()
     {
         return array(
@@ -97,7 +102,7 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
     /**
      * Prepara antes de generar formulario.
      *
-     * @param object &$$formbuilder Generador DataObject_FormBuilder
+     * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
      */
@@ -124,7 +129,6 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
     {
         parent::postGenerateForm($form, $formbuilder);
 
-//        $sel =& $form->removeElement('id_etapa');
         $sel =& $form->getElement('id_tproceso');
         $p = objeto_tabla('proceso');
         $db = $p->getDatabaseConnection();

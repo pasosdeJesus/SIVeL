@@ -38,7 +38,7 @@ require_once 'DataObjects/Tproceso.php';
  * @category SIVeL
  * @package  SIVeL
  * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * @link     http://sivel.sf.net/tec
  */
 class AgregarAccionJ extends HTML_QuickForm_Action
@@ -64,12 +64,12 @@ class AgregarAccionJ extends HTML_QuickForm_Action
 
 
 /**
-* Responde a eliminación de una acción
- * @package SIVeL
+ * Responde a eliminación de una acción
+ *
  * @category SIVeL
  * @package  SIVeL
  * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
- * @license  Dominio público.
+ * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * @link     http://sivel.sf.net/tec
 */
 class EliminaAccionJ extends HTML_QuickForm_Action
@@ -142,6 +142,13 @@ class PagSegJudicial extends PagBaseMultiple
         return $this->bproceso->_do->id;
     }
 
+    /**
+     * Elimina de base de datos el registro actual.
+     *
+     * @param array &$valores Valores enviados por formulario.
+     *
+     * @return null
+     */
     function elimina(&$values)
     {
         $this->iniVar();
@@ -311,6 +318,15 @@ class PagSegJudicial extends PagBaseMultiple
 
     }
 
+
+    /**
+     * Elimina de base de datos datos relacionados con un proceso
+     *
+     * @param object $dproceso DataObject
+     * @param bool   $elimProc Además elinar proceso?
+     *
+     * @return null
+     */
     function eliminaProceso($dproceso, $elimProc = false)
     {
         assert($dproceso != null);
@@ -324,8 +340,15 @@ class PagSegJudicial extends PagBaseMultiple
         }
     }
 
-    /** eliminaDep($db, $idcaso) elimina victimas de la base $db presentados
-            en este formulario, que dependen del caso $idcaso */
+    /**
+     * eliminaDep($db, $idcaso) elimina victimas de la base $db presentados
+     * en este formulario, que dependen del caso $idcaso 
+     *
+     * @param object &$db    Conexión a base
+     * @param int    $idcaso Id del caso
+     *
+     * @return void
+     */
     static function eliminaDep(&$db, $idcaso)
     {
         assert($db != null);
@@ -418,27 +441,34 @@ class PagSegJudicial extends PagBaseMultiple
         return  $ret;
     }
 
+
+    /**
+     * Prepara consulta SQL para buscar datos de este formulario.
+     * Ver documentación completa en clase base.
+     *
+     * @param string &$w       Consulta que se construye
+     * @param string &$t       Tablas
+     * @param object &$db      Conexión a base de datos
+     * @param object $idcaso   Identificación del caso
+     * @param string &$subcons Subconsulta
+     *
+     * @return void
+     * @see PagBaseSimple
+     */
     function datosBusqueda(&$w, &$t, &$db, $idcaso, &$subcons)
     {
 
     }
 
-    function handle($action)
-    {
-//        echo "handle($action)";
-//        print_r($this->_actions);
-//        die("s");
-        parent::handle($action);
-    }
-
-    /** Extrae procesos de un caso y retorna su información en varios
-     *  vectores
+    /** 
+     * Extrae procesos de un caso y retorna su información en varios
+     * vectores
      *
-     *  @param integer $idcaso  Id. del Caso
-     *  @param object  &$db     Conexión a BD
-     *  @param array   &$idp    Para retornar identificación de procesos
+     * @param integer $idcaso  Id. del Caso
+     * @param object  &$db     Conexión a BD
+     * @param array   &$idp    Para retornar identificación de procesos
      *
-     *  @return integer Cantidad de procesos retornados
+     * @return integer Cantidad de procesos retornados
      **/
     function extrae_procesos($idcaso, &$db, &$idp)
     {
@@ -454,6 +484,13 @@ class PagSegJudicial extends PagBaseMultiple
         return $tot;
     }
 
+
+    /**
+     * Llamada cuando se inicia captura de ficha
+     *
+     * @return void
+     * @see PagBaseSimple
+     */
     static function iniCaptura()
     {
         if (isset($_REQUEST['eliminaaccionj'])) {
@@ -461,6 +498,17 @@ class PagSegJudicial extends PagBaseMultiple
         }
     }
 
+    /**
+     * Llamada en cada inicio de una consulta ResConsulta.
+     * Hace posible nuevos tipos de consulta.
+     *
+     * @param string $mostrar  Forma de mostrar consulta
+     * @param string &$renglon Llena como iniciar consulta
+     * @param string &$rtexto  Llena texto inicial de consula
+     * @param array  $tot      Total de casos en consulta
+     *
+     * @return void
+     */
     static function resConsultaInicio($mostrar, &$renglon, &$rtexto, $tot = 0)
     {
         if ($mostrar == "judicial") {
@@ -473,6 +521,20 @@ class PagSegJudicial extends PagBaseMultiple
         }
     }
 
+    /**
+     * Llamada para mostrar un registro en ResConsulta.
+     * Hace posible nuevos tipos de consulta.
+     *
+     * @param object  &$db       Conexión a B.D
+     * @param string  $mostrar   Forma de mostrar consulta
+     * @param int     $idcaso    Código de caso
+     * @param array   $campos    Campos por mostrar
+     * @param array   $conv      Conversiones
+     * @param array   $sal       Para conversiones con $conv
+     * @param boolean $retroalim Con boton de retroalimentación
+     *
+     * @return string Fila en HTML
+     */
     static function resConsultaRegistro(&$db, $mostrar, $idcaso, $campos,
         $conv, &$sal, &$retroalim)
     {
@@ -484,6 +546,15 @@ class PagSegJudicial extends PagBaseMultiple
         }
     }
 
+
+    /**
+     * Llamada al final de una consulta ResConsulta.
+     * Hace posible nuevos tipos de consulta.
+     *
+     * @param string $mostrar Forma de mostrar consulta
+     *
+     * @return void
+     */
     static function resConsultaFinal($mostrar)
     {
         if ($mostrar == "judicial") {
@@ -491,6 +562,19 @@ class PagSegJudicial extends PagBaseMultiple
         }
     }
 
+    /**
+     * Llamada desde consulta_web para completar consulta SQL en caso
+     *
+     * @param object &$db       Conexión a B.D
+     * @param string $mostrar   Forma de mostrar consulta
+     * @param string &$where    Consulta SQL por completar
+     * @param string &$tablas   Tablas incluidas en consulta
+     * @param array  &$pOrdenar Forma de ordenamiento
+     * @param array  &$campos   Campos por mostrar
+     * @param array  &$oconv    Otros campos por incluir en consulta
+     *
+     * @return void
+     */
     static function consultaWebCreaConsulta(&$db, $mostrar, &$where, &$tablas,
         &$pOrdenar, &$campos, &$oconv)
     {
@@ -503,6 +587,18 @@ class PagSegJudicial extends PagBaseMultiple
         }
     }
 
+    /**
+     * Llamada desde consulta_web al generar formulario en porción
+     * `Forma de presentación'
+     *
+     * @param string $mostrar  Forma de mostrar consulta
+     * @param array  $opciones Opciones de menu del usuario
+     * @param object &$forma   Formulario
+     * @param array  &$ae      Grupo de elementos que conforman Forma de pres.
+     * @param array  &$t       Si está marcado lo pone en el elemento creado
+     *
+     * @return void
+     */
     static function consultaWebFormaPresentacion($mostrar, $opciones,
         &$forma, &$ae, &$t)
     {
@@ -517,7 +613,16 @@ class PagSegJudicial extends PagBaseMultiple
             }
         }
     }
-
+ 
+    /**
+     * Llamada desde consulta_web para completar consulta poniendo una
+     * política de ordenamiento
+     *
+     * @param object &$q       Consulta por modificar
+     * @param string $pOrdenar Criterio de ordenamiento
+     *
+     * @return void
+     */
     static function consultaWebOrden(&$q, $pOrdenar)
     {
         if ($pOrdenar == 'fechajudicial') {
@@ -527,6 +632,8 @@ class PagSegJudicial extends PagBaseMultiple
 
     /**
      * Llamada para inicializar variables globales
+     *
+     * @return void
      */
     static function act_globales()
     {

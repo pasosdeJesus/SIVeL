@@ -107,8 +107,6 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
     /**
     * Convierte de base de datos a formulario
     *
-    * @param string $value Valor recibido de formulario
-    *
     * @return Valor para base de datos
     */
     function getrespondido()
@@ -142,7 +140,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
     /**
      * Ajusta formulario generado.
      *
-     * @param object &$form      Formulario HTML_QuickForm
+     * @param object &$form        Formulario HTML_QuickForm
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
@@ -150,15 +148,6 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
     function postGenerateForm(&$form, &$formbuilder)
     {
         parent::postGenerateForm($form, $formbuilder);
-
-/*        foreach ($this->fb_fieldsToRender as $c) {
-            $e =& $form->getElement($c);
-            if (isset($e) && !PEAR::isError($e)
-                && isset($GLOBALS['etiqueta'][$c])
-            ) {
-                $e->setLabel($GLOBALS['etiqueta'][$c]);
-            }
-} */
 
         $fa = array();
         $obs =& $form->removeElement('observacionesaccion');
