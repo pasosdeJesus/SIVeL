@@ -93,7 +93,9 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             consulta_and($bd, $where, "caso.fecha", arr_a_fecha($pFini, true), ">=");
         }
         if ($pFfin['Y'] != '') {
-           consulta_and($bd, $where, "caso.fecha", arr_a_fecha($pFfin, false), "<=");
+            consulta_and(
+                $bd, $where, "caso.fecha", arr_a_fecha($pFfin, false), "<="
+            );
         }
 
         $tablaSegun = $titSegun = "";
@@ -487,6 +489,11 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
     }
 
 
+    /**
+     * Crear formulario
+     *
+     * @return void
+     */
     function buildForm()
     {
         encabezado_envia();
@@ -633,7 +640,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
 /**
  * Presenta formulario filtro o estadística
  *
- * @param dsn URL de base de datos
+ * @param string $dsn URL de base de datos
  *
  * @return void
  */

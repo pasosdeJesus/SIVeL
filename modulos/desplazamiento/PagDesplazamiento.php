@@ -82,7 +82,7 @@ class PagDesplazamiento extends PagBaseMultiple
      *
      * @return null
      */
-    function elimina(&$values)
+    function elimina(&$valores)
     {
         $this->iniVar();
         if (isset($this->bdesplazamiento->_do->fechaexpulsion)) {
@@ -233,11 +233,11 @@ class PagDesplazamiento extends PagBaseMultiple
             $f =& $this->getElement('fechaexpulsion');
             $f->setValue(array('d' => $pf[2], 'M' => $pf[1], 'Y' => $pf[0]));
             $f =& $this->getElement('fechallegada');
-            $f->setValue(array(
-                'd' => $pf[2],
+            $f->setValue(
+                array('d' => $pf[2],
                 'M' => $pf[1],
-                'Y' => $pf[0]
-            ));
+                'Y' => $pf[0])
+            );
         } else {
             $e =& $this->getElement('sitiodeclaracion');
             $dep =& $e->_elements[0];
@@ -254,7 +254,6 @@ class PagDesplazamiento extends PagBaseMultiple
      * Elimina un registro 
      *
      * @param object $ddesplazamiento DataObject
-     * @param bool   $elimProc  
      * 
      * @return  void
      */
@@ -295,7 +294,7 @@ class PagDesplazamiento extends PagBaseMultiple
     /**
      * Procesa
      *
-     * @param array $valores del formulario
+     * @param array &$valores del formulario
      *
      * @return bool V sii pudo procesar
      */
@@ -339,8 +338,8 @@ class PagDesplazamiento extends PagBaseMultiple
             . " AND fechaexpulsion='$fechaex';";
         $this->bdesplazamiento->useMutators = true;
         $nr = $db->getOne($q);
-        if ($this->bdesplazamiento->_do->fechaexpulsion == null ||
-            $this->bdesplazamiento->_do->fechaexpulsion == ''
+        if ($this->bdesplazamiento->_do->fechaexpulsion == null 
+            || $this->bdesplazamiento->_do->fechaexpulsion == ''
         ) {
             if ($nr > 0) {
                 error_valida(
@@ -393,9 +392,9 @@ class PagDesplazamiento extends PagBaseMultiple
     /** Extrae desplazamientos de un caso y retorna su información en 
      *  vectores
      *
-     *  @param integer $idcaso  Id. del Caso
-     *  @param object  &$db     Conexión a BD
-     *  @param array   &$idf    Para retornar fechas
+     *  @param integer $idcaso Id. del Caso
+     *  @param object  &$db    Conexión a BD
+     *  @param array   &$idf   Para retornar fechas
      *
      *  @return integer Cantidad de desplazamientos retornados
      **/
@@ -416,6 +415,8 @@ class PagDesplazamiento extends PagBaseMultiple
 
     /**
      * Llamada para inicializar variables globales
+     *
+     * @return void
      */
     static function act_globales()
     {

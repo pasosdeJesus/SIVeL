@@ -111,7 +111,7 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
         }
 
         if ($pSegun == 'id_rangoedad') {
-            consulta_and_sinap($where, "victima.id_rangoedad","rangoedad.id");
+            consulta_and_sinap($where, "victima.id_rangoedad", "rangoedad.id");
             $campoSegun = "id_rangoedad";
             $cfSegun = "rangoedad.rango";
             $tablaSegun = "rangoedad, ";
@@ -445,6 +445,11 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
     }
 
 
+    /** 
+     * Retorna id del tipo de violencia
+     *
+     * @return string id
+     */
     function idTipoViolencia()
     {
         $ntipoviolencia= null;
@@ -456,7 +461,11 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
         return $ntipoviolencia;
     }
 
-
+    /** 
+     * Retorna id de la categoria
+     *
+     * @return string id
+     */
     function idSupracategoria()
     {
         $nclase = null;
@@ -467,6 +476,11 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
     }
 
 
+    /** 
+     * Construye formulario
+     * 
+     * @return void
+     */
     function buildForm()
     {
         encabezado_envia();
@@ -474,7 +488,9 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
         $x =&  objeto_tabla('departamento');
         $db = $x->getDatabaseConnection();
 
-        $e =& $this->addElement('header', null, 'Estadísticas Victimas Individuales');
+        $e =& $this->addElement(
+            'header', null, 'Estadísticas Victimas Individuales'
+        );
         $e =& $this->addElement('hidden', 'num', (int)$_REQUEST['num']);
 
         //    $e =& $this->addElement('static', 'fini', 'Victimas ');
@@ -488,17 +504,15 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
         $e =& $this->addElement(
             'date', 'fini', 'Desde: ',
             array('language' => $slan, 'addEmptyOption' => true,
-            'minYear' => '1990', 'maxYear' => $cy
-        )
-    );
+            'minYear' => '1990', 'maxYear' => $cy)
+        );
         $e->setValue(($cy - 1) . "-01-01");
 
         $e =& $this->addElement(
             'date', 'ffin', 'Hasta',
             array('language' => $slan, 'addEmptyOption' => true,
-            'minYear' => '1990', 'maxYear' => $cy
-        )
-    );
+            'minYear' => '1990', 'maxYear' => $cy)
+        );
         $e->setValue(($cy  - 1) . "-12-31");
 
         $tipo =& $this->addElement(
@@ -514,9 +528,8 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
         $tipo->loadArray($options);
         $tipo->updateAttributes(
             array('onchange' =>
-            'envia(\'estadisticas:id_tviolencia\')'
-        )
-    );
+            'envia(\'estadisticas:id_tviolencia\')')
+        );
 
         $supra =& $this->addElement(
             'select', 'id_supracategoria',
@@ -621,7 +634,7 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
 /**
  * Presenta formulario filtro o estadística
  *
- * @param dsn URL base
+ * @param string $dsn URL base
  *
  * @return void
  */

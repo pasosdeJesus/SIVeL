@@ -83,7 +83,7 @@ function muestra($dsn)
 
     $dec = objeto_tabla('caso_etiqueta');
     $obs = "";
-    $idet = (int)conv_basica (
+    $idet = (int)conv_basica(
         $db, 'etiqueta', 'MEZCLA_CASOS', $obs, false, 'nombre'
     );
     if ($idet == -1) {
@@ -125,7 +125,7 @@ function muestra($dsn)
 
     echo "<p>Mezclando informaci&oacute;n de casos " .
         enlace_edita($id1) . " y " .
-        enlace_edita( $id2) . " en caso " .
+        enlace_edita($id2) . " en caso " .
         enlace_edita($idn) . "</p><hr>";
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
         list($n, $c, $o) = $tab;

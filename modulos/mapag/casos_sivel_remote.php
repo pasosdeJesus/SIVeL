@@ -9,7 +9,6 @@
  * @package   SIVeL
  * @author    Luca Urech <lucaurech@yahoo.de> 
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org> 
- *   integrando a SIVeL y exportando a JSON
  * @copyright 2011 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * Acceso: CONSULTA PÚBLICA
@@ -25,12 +24,12 @@ $host = determina_host();
 // leer filtros desde los parametros GET
 $filtro = array(
     'desde' => (!empty($_GET['desde'])) 
-        ? var_req_escapa('desde') : "2007-01-01",
-	'hasta' => var_req_escapa('hasta'),
-	'departamento' => var_req_escapa('departamento'),
-	'prresp' => var_req_escapa('prresp'),
-	'tvio' => var_req_escapa('tvio'),
-);
+    ? var_req_escapa('desde') : "2007-01-01",
+        'hasta' => var_req_escapa('hasta'),
+        'departamento' => var_req_escapa('departamento'),
+        'prresp' => var_req_escapa('prresp'),
+        'tvio' => var_req_escapa('tvio'),
+    );
 
 // generar cadena de solicitud para sivel consulta web (responde XML)
 $requestUrl = $host . "consulta_web.php?_qf_consultaWeb_consulta=" 
@@ -52,7 +51,7 @@ $requestUrl .= (!empty($filtro['tvio'])) ?
     "&tipo_violencia=" . $filtro['tvio'] : "";
 //trigger_error($requestUrl);
 if (($ca = file_get_contents($requestUrl)) === false) {
-	die('No pudo leerse URL: \'' . $requestUrl . '\'');
+    die('No pudo leerse URL: \'' . $requestUrl . '\'');
 }
 if (strpos($ca, "Por favor refine su consulta") !== false) {
     die($ca);

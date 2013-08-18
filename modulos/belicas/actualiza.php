@@ -78,7 +78,9 @@ if (!aplicado($idac)) {
     );
     hace_consulta(
         $db, "INSERT INTO opcion VALUES ('47', 'Revista Memo Bélicas', 40, 
-        'consulta_web?mostrar=revista&categoria=belicas&sincampos=caso_id,m_victimas,m_presponsables,m_tipificacion,m_fuentes')", 
+        'consulta_web?mostrar=revista&categoria'
+        . '=belicas&sincampos=caso_id,m_victimas,m_presponsables,'
+        . 'm_tipificacion,m_fuentes')", 
         false
     );
     hace_consulta(
@@ -88,7 +90,9 @@ if (!aplicado($idac)) {
     );
     hace_consulta(
         $db, "INSERT INTO opcion VALUES ('49', 'Revista Memo NO Bélicas', 40, 
-        'consulta_web?mostrar=revista&categoria=nobelicas&sincampos=caso_id,m_victimas, m_presponsables, m_tipificacion, m_fuentes')", 
+        'consulta_web?mostrar=revista&categoria=nobelicas'
+        . '&sincampos=caso_id,m_victimas,m_presponsables,'
+        . 'm_tipificacion, m_fuentes')", 
         false
     );
     hace_consulta(

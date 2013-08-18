@@ -26,6 +26,7 @@ require_once 'HTML/QuickForm/Action.php';
  * Pestaña BaseMultiplePartes
  * Ver documentación de funciones en clase base.
  *
+ * @category SIVeL
  * @package  SIVeL
  * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
  * @license  Dominio público.
@@ -110,7 +111,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
      *
      * @return null
      */
-    function elimina(&$values)
+    function elimina(&$valores)
     {
         $this->iniVar();
         $cll = get_called_class();
@@ -472,7 +473,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                     }
                     //echo "OJO 3 procesando<br>";
                     if (!isset($otratabla) || $otratabla == $t) {
-                        $ret = $this->process( 
+                        $ret = $this->process(
                             array(&$this->$nb, 'processForm'), 
                             false
                         );
@@ -563,6 +564,8 @@ class PagBaseMultiplePartes extends PagBaseMultiple
 
     /**
      * Llamada para inicializar variables globales
+     *
+     * @return void
      */
     static function act_globales()
     {

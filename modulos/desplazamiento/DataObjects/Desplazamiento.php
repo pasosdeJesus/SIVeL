@@ -203,11 +203,11 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         ),
     );
 
-   /**
-    * Retorna campos sin información
-    *
-    * @return array Campos que podrían ser sin información y su valor
-    */ 
+    /**
+     * Retorna campos sin información
+     *
+     * @return array Campos que podrían ser sin información y su valor
+     */ 
     static function camposSinInfo()
     {
         return array(

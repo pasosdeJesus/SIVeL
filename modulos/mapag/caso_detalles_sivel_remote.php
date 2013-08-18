@@ -9,7 +9,6 @@
  * @package   SIVeL
  * @author    Luca Urech <lucaurech@yahoo.de>
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org> 
- *    integración con SIVeL y exportando a JSON
  * @copyright 2011 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * Acceso: CONSULTA PÚBLICA
@@ -43,19 +42,21 @@ if (!empty($id_caso) && $id_caso != 0) {
     }
     // todo bien, crear documento json
     $presp = array();
-	foreach ($xmlSivel->relato->grupo as $grupo) {
-		if (!empty($grupo->nombre_grupo)) {
+    foreach ($xmlSivel->relato->grupo as $grupo) {
+        if (!empty($grupo->nombre_grupo)) {
             $presp[(string)$grupo->id_grupo] = (string)$grupo->nombre_grupo;
-		}
-	}
-	$victimas = array();
-    foreach ($xmlSivel->relato->persona as $persona) {
-		if (!empty($persona->nombre)) {
-            $victimas[(string)$persona->id_persona] = 
-                trim(trim((string)$persona->nombre) . " " . 
-                trim((string)$persona->apellido));
         }
-	}
+    }
+    $victimas = array();
+    foreach ($xmlSivel->relato->persona as $persona) {
+        if (!empty($persona->nombre)) {
+            $victimas[(string)$persona->id_persona] 
+                = trim(
+                    trim((string)$persona->nombre) . " " 
+                    . trim((string)$persona->apellido)
+                );
+        }
+    }
     $rta = array();
     $rta["caso"] = array(
         'id' => $id_caso,

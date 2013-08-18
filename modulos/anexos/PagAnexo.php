@@ -139,7 +139,7 @@ class PagAnexo extends PagBaseMultiple
      *
      * @return null
      */
-    function elimina(&$values)
+    function elimina(&$valores)
     {
         $this->iniVar();
         if ($this->banexo->_do->id != null) {
@@ -199,7 +199,6 @@ class PagAnexo extends PagBaseMultiple
      * Ver documentación completa en clase base.
      *
      * @param string $nomForma Nombre
-     * @param string $mreq     Mensaje de dato requerido
      *
      * @return void
      */
@@ -316,8 +315,8 @@ class PagAnexo extends PagBaseMultiple
             $this->banexo->dateToDatabaseCallback,
             var_escapa($valores['fecha'], $db)
         );
-        $this->banexo->_do->descripcion =
-            var_escapa($valores['descripcion'], $db);
+        $this->banexo->_do->descripcion 
+            = var_escapa($valores['descripcion'], $db);
 
         if (!isset($this->banexo->_do->id) || $this->banexo->_do->id <= 0) {
             $f = $this->banexo->getForm();
@@ -402,6 +401,7 @@ class PagAnexo extends PagBaseMultiple
      * @param integer $id1 Código de primer caso
      * @param integer $id2 Código de segundo caso
      * @param integer $idn Código del caso en el que aplicará los cambios
+     * @param integer $t   Tabla
      *
      * @return Mezcla valores de los casos $id1 e $id2 en el caso $idn de
      * acuerdo a las preferencias especificadas en $sol.

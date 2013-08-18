@@ -343,7 +343,7 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
         if ($cy < 2005) {
             $cy = 2005;
         }
-    $slan = isset($_SESSION['LANG']) ? $_SESSION['LANG'] : 'es';
+        $slan = isset($_SESSION['LANG']) ? $_SESSION['LANG'] : 'es';
 
         $e =& $this->addElement(
             'date', 'fini', 'Desde: ',
@@ -387,9 +387,8 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
             "Menú Principal</a></div>";
         $e =& $this->addElement('header', null, $tpie);
 
-    $num = (int)$_REQUEST['num'];
-    $this->addElement('hidden', 'num', $num);
-
+        $num = (int)$_REQUEST['num'];
+        $this->addElement('hidden', 'num', $num);
 
         if (!isset($_POST['evita_csrf'])) {
             agrega_control_CSRF($this);
@@ -403,6 +402,8 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
 
 /** 
  * Punto de entrada
+ *
+ * @param string $dsn URL de base de datos
  *
  * @return void
  */
