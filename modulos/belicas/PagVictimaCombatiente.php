@@ -538,7 +538,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
                 $dprofesion = $dcombatiente->getLink('id_profesion');
                 $r .= $dprofesion->nombre;
             }
-            $sinp = DataObjects_Presponsable::idSinInfo() ;
+            $sinp = DataObjects_Presponsable::idSinInfo();
             if ($dcombatiente->organizacionarmada != $sinp) {
                 $r .= "\n    " .
                     $GLOBALS['etiqueta']['organizacion_armada'] . ": ";
