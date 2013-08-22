@@ -31,15 +31,17 @@ $accno = "Acceso no autorizado\n";
 /** Mensaje por presentar si se encuentran fallas ortográficas al validar
  * @global string $GLOBALS['MENS_ORTOGRAFIA']
  */
-$GLOBALS['MENS_ORTOGRAFIA'] = 'Las palabras que estén bien por favor agreguelas al diccionario (%l).';
+$GLOBALS['MENS_ORTOGRAFIA'] 
+    = 'Las palabras que estén bien por favor agreguelas al diccionario (%l).';
 
 /** Mensaje por presentar en la página principal para indicar donde reportar fallas.
  * @global string $GLOBALS['REPORTA_FALLAS']
  */
 $GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">"
     . _('Documentaci&oacute;n')
-    . "</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>"
-    . _("Por favor reporte fallas o requerimientos en el sistema de seguimiento disponible")
+    . "</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" "
+    . " target=\"2\">DIVIPOLA</a><br>"
+    . _("Favor reportar fallas o requerimientos en el sistema de seguimiento")
     . " <a href='https://github.com/pasosdeJesus/SIVeL/issues'>"
     . _("en l&iacute;nea") . "</a>";
 
@@ -83,7 +85,9 @@ $GLOBALS['pie_consulta_web'] = '';
  * Dejar '&nbsp;' si no hay
  * @global string $GLOBALS['pie_consulta_web_publica']
  */
-$GLOBALS['pie_consulta_web_publica'] = '<div align="right"><a href="http://sivel.sourceforge.net/1.1/consultaweb.html">' . _('Documentación') .'</a></div>';
+$GLOBALS['pie_consulta_web_publica'] = '<div align="right">'
+    . '<a href="http://sivel.sourceforge.net/1.1/consultaweb.html">' 
+    . _('Documentación') .'</a></div>';
 
 /** Cabezote para enviar correos desde consulta_web.
  * Dejar '' si no hay
@@ -95,7 +99,8 @@ $GLOBALS['cabezote_consulta_web_correo'] = '';
  * Dejar '' si no hay
  * @global string $GLOBALS['pie_consulta_web_correo']
  */
-$GLOBALS['pie_consulta_web_correo'] = '<hr/><a href="consulta_web.php">Consulta web</a>';
+$GLOBALS['pie_consulta_web_correo'] = '<hr/><a href="consulta_web.php">' 
+    . 'Consulta web</a>';
 
 /** Archivo HTML que se pone como cabezote (antes del menú) del menú principal
  * Dejar '' si no hay
@@ -108,12 +113,12 @@ if (!isset($GLOBALS['IDIOMAPORDEFECTO'])) {
 }
 
 if (isset($_SESSION['LANG'])) {
-    //echo "OJO en pordefecto/conf_int.php SESSION[LANG]=" . $_SESSION[LANG] . "<br>";
     $lang = $_SESSION['LANG'];
 } else if (isset($GLOBALS['IDIOMAPORDEFECTO'])) {
     $lang = $GLOBALS['IDIOMAPORDEFECTO'];
 } else {
-    echo "<font color='red'>No hay idioma definido en sitios/pordefecto/conf_int.php<br>";
+    echo "<font color='red'>No hay idioma definido en "
+        . " sitios/pordefecto/conf_int.php<br>";
     debug_print_backtrace();
 }
 
@@ -134,9 +139,7 @@ $GLOBALS['centro_principal'] = 'centro_principal-' . $lang . '.html';
 /** Imagen de fondo
  * @global string $GLOBALS['fondo']
  */
-$GLOBALS['fondo']= ''; #$dirsitio . '/fondo.jpg';
-
-
+$GLOBALS['fondo']= ''; //$dirsitio . '/fondo.jpg';
 
 
 /** Tablas básicas */
@@ -156,27 +159,34 @@ $GLOBALS['menu_tablas_basicas'] = array(
         array('title'=>_('Etnia'), 'url'=>'etnia', 'sub'=>null),
         array('title'=>_('Filiación'), 'url'=>'filiacion', 'sub'=>null),
         array('title'=>_('Iglesia'), 'url'=>'iglesia', 'sub'=>null),
-        array('title'=>_('Organización Social'), 'url'=>'organizacion', 'sub'=>null),
+        array('title'=>_('Organización Social'), 
+            'url'=>'organizacion', 'sub'=>null),
         array('title'=>_('Profesión'), 'url'=>'profesion', 'sub'=>null),
         array('title'=>_('Rango de Edad'), 'url'=>'rangoedad', 'sub'=>null),
-        array('title'=>_('Resultado Agresión'), 'url'=>'resagresion', 'sub'=>null),
+        array('title'=>_('Resultado Agresión'), 
+            'url'=>'resagresion', 'sub'=>null),
         array('title'=>_('Sector Social'), 'url'=>'sectorsocial', 'sub'=>null),
         array('title'=>_('Tipo de Relación'), 'url'=>'trelacion', 'sub'=>null),
-        array('title'=>_('Vínculo con el Estado'), 'url'=>'vinculoestado', 'sub'=>null),
+        array('title'=>_('Vínculo con el Estado'), 
+            'url'=>'vinculoestado', 'sub'=>null),
         ),
     ),
     array('title'=>_('Información caso'), 'url'=> null, 'sub' => array(
-        array('title'=>_('Tipo de Violencia'), 'url'=>'tviolencia', 'sub'=>null),
-        array('title'=>_('Supracategoria'), 'url'=>'supracategoria', 'sub'=>null),
+        array('title'=>_('Tipo de Violencia'), 
+            'url'=>'tviolencia', 'sub'=>null),
+        array('title'=>_('Supracategoria'), 
+            'url'=>'supracategoria', 'sub'=>null),
         array('title'=>_('Categoria'), 'url'=>'categoria', 'sub'=>null),
         array('title'=>_('Contexto'), 'url'=>'contexto', 'sub'=>null),
-        array('title'=>_('Presuntos Responsables'), 'url'=>'presponsable', 'sub'=>null),
+        array('title'=>_('Presuntos Responsables'), 
+            'url'=>'presponsable', 'sub'=>null),
         array('title'=>_('Antecedentes'), 'url'=>'antecedente', 'sub'=>null),
         array('title'=>_('Intervalo'), 'url'=>'intervalo', 'sub'=>null),
         ),
     ),
     array('title'=>_('Información Fuentes'), 'url'=> null, 'sub' => array(
-        array('title'=>_('Fuentes Frecuentes'), 'url'=>'ffrecuente', 'sub'=>null),
+        array('title'=>_('Fuentes Frecuentes'), 
+            'url'=>'ffrecuente', 'sub'=>null),
         ),
     ),
     array('title'=>_('Reportes'), 'url'=> null, 'sub' => array(
@@ -333,8 +343,6 @@ $GLOBALS['cw_ncampos'] = array('caso_id' => _('Código'),
     'm_victimas' => _('Víctimas'),
     'm_presponsables' => _('Pr. Resp.'),
     'm_tipificacion' => _('Tipificación'),
-    #'m_observaciones' => 'Observaciones',
-    #'m_anexos' => 'Anexos',
 );
 
 

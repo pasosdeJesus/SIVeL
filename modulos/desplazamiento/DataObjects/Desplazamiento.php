@@ -44,34 +44,34 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
 
     var $__table = 'desplazamiento';                       // table name
 
-	var $id_caso;
-	var $fechaexpulsion;
-	var $expulsion;
-	var $fechallegada;
-	var $llegada;
-	var $id_clasifdesp;
-	var $id_tipodesp;
-	var $descripcion;
-	var $otrosdatos;
-	var $declaro;
-	var $hechosdeclarados;
-	var $fechadeclaracion;
-	var $departamentodecl;
-	var $municipiodecl;
-	var $id_declaroante;
-	var $id_inclusion;
-	var $id_acreditacion;
-	var $retornado;
-	var $reubicado;
-	var $connacionalretorno;
-	var $acompestado;
-	var $connacionaldeportado;
-	var $oficioantes;
-	var $id_modalidadtierra;
-	var $materialesperdidos;
-	var $inmaterialesperdidos;
-	var $protegiorupta;
-	var $documentostierra;
+    var $id_caso;
+    var $fechaexpulsion;
+    var $expulsion;
+    var $fechallegada;
+    var $llegada;
+    var $id_clasifdesp;
+    var $id_tipodesp;
+    var $descripcion;
+    var $otrosdatos;
+    var $declaro;
+    var $hechosdeclarados;
+    var $fechadeclaracion;
+    var $departamentodecl;
+    var $municipiodecl;
+    var $id_declaroante;
+    var $id_inclusion;
+    var $id_acreditacion;
+    var $retornado;
+    var $reubicado;
+    var $connacionalretorno;
+    var $acompestado;
+    var $connacionaldeportado;
+    var $oficioantes;
+    var $id_modalidadtierra;
+    var $materialesperdidos;
+    var $inmaterialesperdidos;
+    var $protegiorupta;
+    var $documentostierra;
 
     /**
      * Constructora
@@ -202,7 +202,12 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
             'R'=> 'NO SABE/NO RESPONDE'
         ),
     );
- 
+
+    /**
+     * Retorna campos sin información
+     *
+     * @return array Campos que podrían ser sin información y su valor
+     */ 
     static function camposSinInfo()
     {
         return array(
@@ -220,7 +225,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
     /**
      * Prepara antes de generar formulario.
      *
-     * @param object &$$formbuilder Generador DataObject_FormBuilder
+     * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
      */

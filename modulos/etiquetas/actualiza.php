@@ -35,9 +35,8 @@ if (!aplicado($idac)) {
         $db, "CREATE TABLE etiqueta (
         id      INTEGER PRIMARY KEY DEFAULT (nextval('etiqueta_seq')),
         nombre VARCHAR(50) NOT NULL,
-        observaciones VARCHAR(200) NOT NULL
-    )", false
-);
+        observaciones VARCHAR(200) NOT NULL)", false
+    );
     $r = hace_consulta(
         $db, "CREATE TABLE caso_etiqueta (
         id_caso      INTEGER REFERENCES caso NOT NULL,
@@ -45,9 +44,8 @@ if (!aplicado($idac)) {
         id_funcionario INTEGER REFERENCES funcionario NOT NULL,
         fecha   DATE NOT NULL,
         observaciones VARCHAR(5000),
-        PRIMARY KEY (id_caso, id_etiqueta,  id_funcionario, fecha)
-    );", false
-);
+        PRIMARY KEY (id_caso, id_etiqueta,  id_funcionario, fecha));", false
+    );
 
     aplicaact($act, $idac, 'Tablas para etiquetas');
 }

@@ -386,13 +386,6 @@ class PagVictimaIndividual extends PagBaseMultiple
 
         if ($vv != '') {
             $dcaso->get($idcaso);
-/*            $pf = fecha_a_arr($dcaso->fecha);
-            $ht =& $this->getElement('aniocaso');
-            $ht->setValue($pf['Y']);
-            $ht =& $this->getElement('mescaso');
-            $ht->setValue($pf['m']);
-            $ht =& $this->getElement('diacaso');
-            $ht->setValue($pf['d']); */
 
             $e =& $this->getElement('procedencia');
             $dep =& $e->_elements[0];
@@ -410,33 +403,6 @@ class PagVictimaIndividual extends PagBaseMultiple
             $fanio = $this->bpersona->_do->anionac;
             $fsexo = $this->bpersona->_do->sexo;
 
-/*            $g =& $this->getElement('nacimiento');
-            $sanio =& $g->_elements[0];
-            $sanio->setValue($fanio);
-            $smes =& $g->_elements[1];
-            $smes->setValue($fmes);
-            $sdia =& $g->_elements[2];
-            $sdia->setValue($fdia);
-            $ssexo =& $g->_elements[3];
-            $ssexo->setValue($fsexo);
-
-            $sedad =& $g->_elements[5];
-            if ($fanio > 0) {
-                $na = edad_de_fechanac(
-                    $fanio, $pf['Y'], $fmes,
-                    $pf['m'], $fdia, $pf['d']
-                );
-                $sedad->setValue($na);
-            }
-            $sedadactual =& $g->_elements[7];
-            if ($fanio > 0) {
-                $na = edad_de_fechanac(
-                    $fanio, date('Y'), $fmes,
-                    date('m'), $fdia, date('d')
-                );
-                $sedadactual->setValue($na);
-            }
- */
             foreach ($this->bvictima->_do->fb_fieldsToRender as $c) {
                 $cq = $this->getElement($c);
                 if (!PEAR::isError($cq) && isset($this->bvictima->_do->$c)) {
@@ -688,10 +654,11 @@ class PagVictimaIndividual extends PagBaseMultiple
 
         if (isset($valores['numerodocumento']) 
             && (int)$valores['numerodocumento'] > 0
-        ){
+        ) {
             $q = "SELECT id FROM persona WHERE numerodocumento='"
                 . (int)$valores['numerodocumento'] . "'";
-            $r = hace_consulta($db, $q); $row = array(); if ($r->fetchInto($row)) {
+            $r = hace_consulta($db, $q); $row = array(); 
+            if ($r->fetchInto($row)) {
                 if (!isset($this->bpersona->_do->id) 
                     || $row[0] != $this->bpersona->_do->id
                 ) {

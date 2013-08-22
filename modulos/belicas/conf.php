@@ -9,7 +9,7 @@
  * @package   SIVeL
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2012 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -37,7 +37,9 @@ $GLOBALS['m_opcion'][46] = array(
 $GLOBALS['m_opcion'][47] = array(
     'nombre' => _('Revista Memo Bélicas'),
     'idpapa' => 40,
-    'url' => 'consulta_web?mostrar=revista&categoria=belicas&sincampos=caso_id,m_victimas,m_presponsables,m_tipificacion,m_fuentes'
+    'url' => 'consulta_web?mostrar=revista&categoria=belicas&' 
+    . 'sincampos=caso_id,m_victimas,m_presponsables,'
+    . 'm_tipificacion,m_fuentes'
 );
 $GLOBALS['m_opcion'][48] = array(
     'nombre' => _('Revista NO Bélicas'),
@@ -47,7 +49,9 @@ $GLOBALS['m_opcion'][48] = array(
 $GLOBALS['m_opcion'][49] = array(
     'nombre' => _('Revista Memo NO Bélicas'),
     'idpapa' => 40,
-    'url' => 'consulta_web?mostrar=revista&categoria=nobelicas&sincampos=caso_id,m_victimas,m_presponsables,m_tipificacion,m_fuentes'
+    'url' => 'consulta_web?mostrar=revista&categoria='
+    . 'nobelicas&sincampos=caso_id,m_victimas,m_presponsables,'
+    . 'm_tipificacion,m_fuentes'
 );
 $GLOBALS['m_opcion'][54] = array(
     'nombre' => _('Colectivas con Rotulos de Rep. Cons.'),

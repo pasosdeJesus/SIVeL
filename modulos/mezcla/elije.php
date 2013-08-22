@@ -217,7 +217,8 @@ class AccionVictimasrep extends HTML_QuickForm_Action
         echo "<p>Total de casos con v&iacute;ctima: $tv</p>";
         $suma = array();
         echo "<form  action='opcion.php?num=1004' method='post' target='_blank'>";
-        echo "<input name='Comparar' type='submit' class='form' id='Comparar' value='Comparar'>";
+        echo "<input name='Comparar' type='submit' class='form' id='Comparar' "
+            . " value='Comparar'>";
         echo "<table border='1'>\n";
         echo "<tr>";
         echo "<td>IdCaso</td><td>IdVic</td>";
@@ -233,7 +234,6 @@ class AccionVictimasrep extends HTML_QuickForm_Action
             $u->id_caso = $idcaso;
             if ($u->find() == 0) {
                 $ubi = "";
-                //echo "<br/><font color='red'>Caso sin ubicacion: " .  "$idcaso</font>";
             } else {
                 $u->fetch();
                 $d = $u->getLink('id_departamento');
@@ -314,9 +314,9 @@ class PagVictimasrep extends HTML_QuickForm_Page
         $db = $x->getDatabaseConnection();
 
         $e =& $this->addElement('header', null, 'Compara dos casos por número');
-        $e =& $this->addElement('text', 'id1' );
+        $e =& $this->addElement('text', 'id1');
         $e->setSize(7);
-        $e =& $this->addElement('text', 'id2' );
+        $e =& $this->addElement('text', 'id2');
         $e->setSize(7);
 
         $e =& $this->addElement(
@@ -382,6 +382,13 @@ class PagVictimasrep extends HTML_QuickForm_Page
 
 }
 
+/**
+ * Punto de entrada al formulario
+ *
+ * @param string $dsn URL a base de datos
+ *
+ * @return void
+ */
 function muestra($dsn)
 {
     $aut_usuario = "";

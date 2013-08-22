@@ -18,11 +18,13 @@
 /**
  * Agrega tipo de orden a consulta web
  *
- * @param string pOrden   Orden por poner
- * @param array  opciones Opciones del usuario autenticado
- * @param object obj      Objeto HTML_QuickForm con formulario
- * @param array  ae       Arreglo de opciones de ordenamiento
- * @param object t        Opción por defecto
+ * @param string $pOrden   Orden por poner
+ * @param array  $opciones Opciones del usuario autenticado
+ * @param object $obj      Objeto HTML_QuickForm con formulario
+ * @param array  &$ae      Arreglo de opciones de ordenamiento
+ * @param object &$t       Opción por defecto
+ *
+ * @return void Modifica $ae y $t
  */
 function rotulos_cwebordenar($pOrden, $opciones, $obj, &$ae, &$t)
 {
@@ -40,9 +42,10 @@ function rotulos_cwebordenar($pOrden, $opciones, $obj, &$ae, &$t)
 /**
  * Agrega orden a consulta
  *
- * @param string q        Restricciones
- * @param string pOrdenar Forma de ordenamiento
- * @return void  Modifica q
+ * @param string &$q       Restricciones
+ * @param string $pOrdenar Forma de ordenamiento
+ *
+ * @return void  Modifica $q
  */
 function rotulos_orden_cons(&$q, $pOrdenar)
 {
@@ -51,7 +54,8 @@ function rotulos_orden_cons(&$q, $pOrdenar)
     if ($pOrdenar == 'rotulo') {
         $excvi = $excvc = '';
         if (isset($GLOBALS['estrotulos_excluirsinfiliacion'])
-            && $GLOBALS['estrotulos_excluirsinfiliacion']) {
+            && $GLOBALS['estrotulos_excluirsinfiliacion']
+        ) {
             $excvi = ' AND acto.id_persona IN ' .
             '(SELECT id_persona FROM victima WHERE id_filiacion<>\'' .
             DataObjects_Filiacion::idSinInfo() . '\') ';
@@ -96,10 +100,11 @@ function rotulos_orden_cons(&$q, $pOrdenar)
 /**
  * Comienzo de un regitro en reporte revista
  *
- * @param object db Base de datos
- * @param array  campos por mostrar
- * @param string idcaso Código de caso
- * @param string numcaso Número de caso
+ * @param object &$db     Base de datos
+ * @param array  $campos  por mostrar
+ * @param string $idcaso  Código de caso
+ * @param string $numcaso Número de caso
+ *
  * @return string Cadena por añadir al comienzo
  */
 function rotulos_inicial(&$db, $campos, $idcaso, $numcaso)
@@ -145,15 +150,13 @@ function rotulos_inicial(&$db, $campos, $idcaso, $numcaso)
             } else {
                 $r .= $sep . $nvt;
                 if (isset($dvictima->id_profesion)
-                && $dvictima->id_profesion !=
-                DataObjects_Profesion::idSinInfo()
+                    && $dvictima->id_profesion != DataObjects_Profesion::idSinInfo()
                 ) {
                     $dprofesion = $dvictima->getLink('id_profesion');
                     $r .= " - " .
                         prim_may(trim(strip_tags($dprofesion->nombre)));
                 }
-                if ($dvictima->id_filiacion !=
-                DataObjects_Filiacion::idSinInfo()
+                if ($dvictima->id_filiacion != DataObjects_Filiacion::idSinInfo()
                 ) {
                     $dfiliacion = $dvictima->getLink('id_filiacion');
                     $r .= " - " .
@@ -188,13 +191,13 @@ function rotulos_inicial(&$db, $campos, $idcaso, $numcaso)
 /**
  * Termina un regitro en reporte revista
  *
- * @param object db Base de datos
- * @param array  campos por mostrar
- * @param string idcaso Código de caso
- * @param string numcaso Número de caso
+ * @param object &$db     Base de datos
+ * @param array  $campos  por mostrar
+ * @param string $idcaso  Código de caso
+ * @param string $numcaso Número de caso
+ *
  * @return string Cadena por añadir al final
  */
-
 function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
 {
     //echo "OJO rotulos_final de idcaso=$idcaso, numcaso=$numcaso<br>";
@@ -228,8 +231,8 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
                 $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
-                $dsupracategoria->id_tviolencia =
-                    $dcategoria->id_tviolencia;
+                $dsupracategoria->id_tviolencia 
+                    = $dcategoria->id_tviolencia;
                 $dsupracategoria->find(1);
 
                 if ($dcategoria->id_pconsolidado == null) {
@@ -253,8 +256,8 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
                 $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
-                $dsupracategoria->id_tviolencia =
-                    $dcategoria->id_tviolencia;
+                $dsupracategoria->id_tviolencia 
+                    = $dcategoria->id_tviolencia;
                 $dsupracategoria->find(1);
 
                 if ($dcategoria->id_pconsolidado == null) {
@@ -278,8 +281,8 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
                 $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
-                $dsupracategoria->id_tviolencia =
-                    $dcategoria->id_tviolencia;
+                $dsupracategoria->id_tviolencia
+                    = $dcategoria->id_tviolencia;
                 $dsupracategoria->find(1);
 
                 if ($dcategoria->id_pconsolidado == null) {

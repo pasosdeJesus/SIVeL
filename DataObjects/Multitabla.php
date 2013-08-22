@@ -246,9 +246,10 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
                         $db->getAssoc(
                             "SELECT id, nombre "
                             . " FROM {$this->camposselect[$c]} "
-                            . " ORDER BY nombre")
+                            . " ORDER BY nombre"
                         )
-                    );
+                    )
+                );
             }
             $sel->setValue(null);
             $fm[] =& $sel;

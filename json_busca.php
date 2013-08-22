@@ -41,7 +41,7 @@ if (isset($_GET['tabla'])) {
     sin_error_pear($db);
     $q = "SELECT * FROM $tabla WHERE fechadeshabilitacion IS NULL ";
     $sep = " AND ";
-    foreach($_GET as $cs => $vs) {
+    foreach ($_GET as $cs => $vs) {
         $c = var_escapa($cs);
         if (in_array($c, $do->fb_preDefOrder)) {
             $v = var_escapa($vs);
@@ -54,7 +54,7 @@ if (isset($_GET['tabla'])) {
     $r = hace_consulta($db, $q);
     sin_error_pear($r);
     $row = array();
-    while ($r->fetchInto($row)){
+    while ($r->fetchInto($row)) {
         $ret[] = $row;
     }
 }

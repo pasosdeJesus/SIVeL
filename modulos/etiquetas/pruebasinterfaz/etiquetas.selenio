@@ -72,18 +72,38 @@
 	<td></td>
 </tr>
 <tr>
-	<td>selectAndWait</td>
+	<td>select</td>
 	<td>name=id_departamento</td>
 	<td>label=AMAZONAS</td>
 </tr>
 <tr>
-	<td>selectAndWait</td>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
 	<td>name=id_municipio</td>
 	<td>label=LA CHORRERA</td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>name=_qf_ubicacion_pResponsables</td>
+	<td>name=_qf_ubicacion_frecuentes</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>name=id_ffrecuente</td>
+	<td>label=B7 - BOYACA 7 DIAS</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_frecuentes_pResponsables</td>
 	<td></td>
 </tr>
 <tr>
@@ -107,8 +127,18 @@
 	<td>X</td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>name=_qf_victimaIndividual_acto</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -133,7 +163,17 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>name=_qf_acto_etiquetas</td>
+	<td>name=_qf_acto_memo</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>css=textarea[name=&quot;memo&quot;]</td>
+	<td>x</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>name=_qf_memo_etiquetas</td>
 	<td></td>
 </tr>
 <tr>
@@ -218,7 +258,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Menu</td>
+	<td>link=Menú</td>
 	<td></td>
 </tr>
 <tr>
@@ -314,6 +354,11 @@
 <tr>
 	<td>clickAndWait</td>
 	<td>name=eliminar</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>css=a &gt; b</td>
 	<td></td>
 </tr>
 </tbody></table>

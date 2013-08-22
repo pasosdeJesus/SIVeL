@@ -53,11 +53,11 @@ if (!aplicado($idac)) {
 
     hace_consulta(
         $db, "CREATE TABLE antecedente_combatiente (
-        id_antecedente INTEGER REFERENCES antecedente,
-        id_combatiente INTEGER REFERENCES combatiente,
-        PRIMARY KEY(id_antecedente, id_combatiente)
-    )", false
-);
+            id_antecedente INTEGER REFERENCES antecedente,
+            id_combatiente INTEGER REFERENCES combatiente,
+            PRIMARY KEY(id_antecedente, id_combatiente)
+        )", false
+    );
 
     aplicaact($act, $idac, 'Tablas bélicas');
 }
@@ -65,12 +65,41 @@ if (!aplicado($idac)) {
 $idac = 'sbel-2';
 if (!aplicado($idac)) {
 
-    hace_consulta($db, "INSERT INTO opcion (id_opcion, descripcion, id_mama, nomid) VALUES ('52', 'V. Combatientes', '50', 'opcion?num=200')", false);
-    hace_consulta($db, "INSERT INTO opcion VALUES ('46', 'Revista Bélicas', 40, 'consulta_web?mostrar=revista&categoria=belicas&sincampos=caso_id')", false);
-    hace_consulta($db, "INSERT INTO opcion VALUES ('47', 'Revista Memo Bélicas', 40, 'consulta_web?mostrar=revista&categoria=belicas&sincampos=caso_id,m_victimas,m_presponsables,m_tipificacion,m_fuentes')", false);
-    hace_consulta($db, "INSERT INTO opcion VALUES ('48', 'Revista NO Bélicas', 40, 'consulta_web?mostrar=revista&categoria=nobelicas&sincampos=caso_id')", false);
-    hace_consulta($db, "INSERT INTO opcion VALUES ('49', 'Revista Memo NO Bélicas', 40, 'consulta_web?mostrar=revista&categoria=nobelicas&sincampos=caso_id,m_victimas, m_presponsables, m_tipificacion, m_fuentes')", false);
-    hace_consulta($db, "INSERT INTO opcion (id_opcion, descripcion, id_mama, nomid) VALUES ('54', 'Colectivas con Rotulos de Rep. Cons.', '50', 'opcion?num=101')", false);
+    hace_consulta(
+        $db, "INSERT INTO opcion 
+        (id_opcion, descripcion, id_mama, nomid) 
+        VALUES ('52', 'V. Combatientes', '50', 'opcion?num=200')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO opcion 
+        VALUES ('46', 'Revista Bélicas', 40, 
+        'consulta_web?mostrar=revista&categoria=belicas&sincampos=caso_id')", 
+        false
+    );
+    hace_consulta(
+        $db, "INSERT INTO opcion VALUES ('47', 'Revista Memo Bélicas', 40, 
+        'consulta_web?mostrar=revista&categoria'
+        . '=belicas&sincampos=caso_id,m_victimas,m_presponsables,'
+        . 'm_tipificacion,m_fuentes')", 
+        false
+    );
+    hace_consulta(
+        $db, "INSERT INTO opcion VALUES ('48', 'Revista NO Bélicas', 40, 
+        'consulta_web?mostrar=revista&categoria=nobelicas&sincampos=caso_id')", 
+        false
+    );
+    hace_consulta(
+        $db, "INSERT INTO opcion VALUES ('49', 'Revista Memo NO Bélicas', 40, 
+        'consulta_web?mostrar=revista&categoria=nobelicas'
+        . '&sincampos=caso_id,m_victimas,m_presponsables,'
+        . 'm_tipificacion, m_fuentes')", 
+        false
+    );
+    hace_consulta(
+        $db, "INSERT INTO opcion (id_opcion, descripcion, id_mama, nomid) 
+        VALUES ('54', 'Colectivas con Rotulos de Rep. Cons.', '50', 
+        'opcion?num=101')", false
+    );
 
     aplicaact($act, $idac, 'Opciones de bélicas en menu');
 }

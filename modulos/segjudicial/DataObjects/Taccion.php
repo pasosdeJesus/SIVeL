@@ -60,6 +60,11 @@ class DataObjects_Taccion extends DataObjects_Basica
         'fechadeshabilitacion',
     );
 
+    /**
+     * Retorna valor SIN INFORMACION 
+     *
+     * @return integer valor SIN INFORMACION
+     */
     static function idSinInfo()
     {
         return 1;
