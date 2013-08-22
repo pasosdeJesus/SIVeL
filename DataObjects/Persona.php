@@ -386,39 +386,6 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         }
 
         $gr[] =& $seln;
-
-        /*      
-            $fmes = $this->bpersona->_do->mesnac;
-            $fdia = $this->bpersona->_do->dianac;
-            $fanio = $this->bpersona->_do->anionac;
-            $fsexo = $this->bpersona->_do->sexo;
-            $g =& $this->getElement('nacimiento');
-            $sanio =& $g->_elements[0];
-            $sanio->setValue($fanio);
-            $smes =& $g->_elements[1];
-            $smes->setValue($fmes);
-            $sdia =& $g->_elements[2];
-            $sdia->setValue($fdia);
-            $ssexo =& $g->_elements[3];
-            $ssexo->setValue($fsexo);
-
-            $sedad =& $g->_elements[5];
-            if ($fanio > 0) {
-                $na = edad_de_fechanac(
-                    $fanio, $pf['Y'], $fmes,
-                    $pf['m'], $fdia, $pf['d']
-                );
-                $sedad->setValue($na);
-            }
-            $sedadactual =& $g->_elements[7];
-            if ($fanio > 0) {
-                $na = edad_de_fechanac(
-                    $fanio, date('Y'), $fmes,
-                    date('m'), $fdia, date('d')
-                );
-                $sedadactual->setValue($na);
-            }
- */
         $form->addGroup(
             $gr, 'nacimiento', _('Fecha Nac. y Sexo'),
             '&nbsp;', false

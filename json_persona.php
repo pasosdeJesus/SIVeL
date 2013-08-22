@@ -65,7 +65,7 @@ $s = "";
 $l = " id ";
 $seps = "";
 $sepl = " || ';' || ";
-foreach($partes as $p) {
+foreach ($partes as $p) {
     $s .= $seps . $p;
     $l .= $sepl . "char_length($p)";
     $seps = " || ' ' || ";

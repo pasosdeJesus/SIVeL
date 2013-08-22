@@ -16,7 +16,8 @@
  */
 
 /** Servidor/socket del Motor de bases de datos */
-$dbservidor = "unix(/tmp)"; # Si prefiere TCP/IP (no recomendado) use tcp(localhost)
+// Si prefiere TCP/IP (no recomendado) use tcp(localhost)
+$dbservidor = "unix(/tmp)"; 
 
 /** Nombre de base de datos */
 $dbnombre = "sivel";
@@ -214,22 +215,22 @@ $GLOBALS['m_rol'] = array (
  * @global string $GLOBALS['m_opcion']
  */
 $GLOBALS['m_opcion'] = array (
-    10 => array('nombre' => _('Administración'), 'idpapa' => 0, 'url' => NULL),
+    10 => array('nombre' => _('Administración'), 'idpapa' => 0, 'url' => null),
     11 => array(
         'nombre' => _('Tablas Básicas'), 'idpapa' => 10,
         'url' => 'tablas_basicas'
     ),
     12 => array('nombre' => _('Usuarios'), 'idpapa' => 10, 'url' => 'usyroles'),
-    20 => array('nombre' => _('Caso'), 'idpapa' => 0, 'url' => NULL),
+    20 => array('nombre' => _('Caso'), 'idpapa' => 0, 'url' => null),
     21 => array('nombre' => _('Ficha'), 'idpapa' => 20, 'url' => 'captura_caso'),
-    30 => array('nombre' => _('Consultas'), 'idpapa' => 0, 'url' => NULL ),
+    30 => array('nombre' => _('Consultas'), 'idpapa' => 0, 'url' => null ),
     31 => array(
         'nombre' => _('Consulta Detallada'), 'idpapa' => 30, 'url' => 'consulta'
     ),
     32 => array(
         'nombre' => _('Consulta Web'), 'idpapa' => 30, 'url' => 'consulta_web'
     ),
-    40 => array('nombre' => _('Reportes'), 'idpapa' => 0, 'url' => NULL),
+    40 => array('nombre' => _('Reportes'), 'idpapa' => 0, 'url' => null),
     41 => array(
         'nombre' => _('Revista'), 'idpapa' => 40,
         'url' => 'consulta_web?mostrar=revista&sincampos=caso_id'
@@ -249,12 +250,12 @@ $GLOBALS['m_opcion'] = array (
         'nombre' => _('Revista con código'), 'idpapa' => 40,
         'url' => 'consulta_web?mostrar=revista'
     ),
-    50 => array('nombre' => _('Conteos'), 'idpapa' => 0, 'url' => NULL),
+    50 => array('nombre' => _('Conteos'), 'idpapa' => 0, 'url' => null),
     51 => array(
         'nombre' => _('V. Individuales'), 'idpapa' => 50,
         'url' => 'estadisticas'
     ),
-    60 => array('nombre' => _('Otros'), 'idpapa' => 0, 'url' => NULL),
+    60 => array('nombre' => _('Otros'), 'idpapa' => 0, 'url' => null),
     61 => array(
         'nombre' => _('Importar Relatos'), 'idpapa' => 60,
         'url' => 'importaRelato'

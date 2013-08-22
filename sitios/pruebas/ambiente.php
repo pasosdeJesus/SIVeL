@@ -24,18 +24,21 @@ if (PHP_SAPI !== 'cli') {
 
 
 $include_path = ini_get("include_path");
-ini_set("include_path", $include_path . ":/var/www/pear/lib:.:..:../..:../../DataObjects/");
+ini_set(
+    "include_path", $include_path 
+    . ":/var/www/pear/lib:.:..:../..:../../DataObjects/"
+);
 
 
 $_COOKIE['PHPSESSID'] = 'vr3gae8jvi47847dfnutd6rkr7';
-$_SESSION['_auth_PHPSESSID']['registered'] =
-    $_SESSION['_authsession']['registered'] = '1';
-$_SESSION['_auth_PHPSESSID']['username'] =
-    $_SESSION['_authsession']['username'] = 'sivel-prueba';
-$_SESSION['_auth_PHPSESSID']['timestamp'] =
-    $_SESSION['_authsession']['timestamp'] = '1150453479';
-$_SESSION['_auth_PHPSESSID']['idle'] =
-    $_SESSION['_authsession']['idle'] = '1150454683';
+$_SESSION['_auth_PHPSESSID']['registered'] 
+    = $_SESSION['_authsession']['registered'] = '1';
+$_SESSION['_auth_PHPSESSID']['username'] 
+    = $_SESSION['_authsession']['username'] = 'sivel-prueba';
+$_SESSION['_auth_PHPSESSID']['timestamp'] 
+    = $_SESSION['_authsession']['timestamp'] = '1150453479';
+$_SESSION['_auth_PHPSESSID']['idle'] 
+    = $_SESSION['_authsession']['idle'] = '1150454683';
 $_SESSION['id_funcionario'] = '1';
 
 
@@ -67,29 +70,29 @@ require_once "Auth.php";
 require_once "DB.php";
 require_once "conf.php";
 
-
 /**
  * Verifica inserción en una o más tablas
- * @param object &$db Conexión a base
- * @param array  $tabla_prueba Tablas por revisar
- * @param array  $na  Número de registros antes de inserción
- * @param bool   $terminaError Salir ante el primer error con exit(1)
+ *
+ * @param object &$db     Conexión a base
+ * @param array  $tprueba Tablas por revisar
+ * @param array  $na      Número de registros antes de inserción
  *
  * @return Retorna cantidad de errores de validación.  Hay error en una
  * de las tablas si la cuenta de registros es una más que la de $na
  */
-function verificaInsercion(&$db, $tabla_prueba, $na)
+function verificaInsercion(&$db, $tprueba, $na)
 {
     if (!isset($db) || PEAR::isError($db)) {
         echo "Error en conexión " . $db->getMesssage();
         exit(1);
     }
-//    echo "OJO verificaInsercion(db, " . count($tabla_prueba) . ", " .  count($na) . "\n";
-    assert(count($tabla_prueba) == count($na));
+    //echo "OJO verificaInsercion(db, " . count($tprueba) . ", " 
+    //.  count($na) . "\n";
+    assert(count($tprueba) == count($na));
 
     $nume = 0;
     /* Verificando */
-    foreach ($tabla_prueba as $nt) {
+    foreach ($tprueba as $nt) {
         $q = "SELECT COUNT(*) FROM $nt";
         $nd[$nt] = (int)($db->getOne($q));
         //echo " nd[nt] = $nd[$nt] ";
@@ -117,8 +120,8 @@ function verificaInsercion(&$db, $tabla_prueba, $na)
  * @return nada
  */
 function pasaPestanaFicha(&$db, $tabla_prueba, $post, $basicos_id = null,
-    $terminaError = true, $files = null)
-{
+    $terminaError = true, $files = null
+) {
 
     if (!isset($db) || PEAR::isError($db)) {
         echo "Error en conexión " . $db->getMesssage();
@@ -148,8 +151,8 @@ function pasaPestanaFicha(&$db, $tabla_prueba, $post, $basicos_id = null,
     $_SESSION['__container']['defaults']['cellsize']['count'] = '10';
     $_SESSION['__container']['defaults']['cellcolor']['active'] = '#006600';
     $_SESSION['__container']['defaults']['cellcolor']['inactive'] = '#CCCCCC';
-    $_SESSION['__container']['defaults']['cellfont']['family'] =
-        'Courier, Verdana';
+    $_SESSION['__container']['defaults']['cellfont']['family'] 
+        = 'Courier, Verdana';
     $_SESSION['__container']['defaults']['cellfont']['size'] = '8';
     $_SESSION['__container']['defaults']['cellfont']['color'] = '#000000';
     $_SESSION['__container']['defaults']['stringpainted'] = '';
@@ -159,8 +162,8 @@ function pasaPestanaFicha(&$db, $tabla_prueba, $post, $basicos_id = null,
     $_SESSION['__container']['defaults']['stringsize']['bgcolor'] = '#FFFFFF';
     $_SESSION['__container']['defaults']['stringvalign'] = 'right';
     $_SESSION['__container']['defaults']['stringalign'] = 'right';
-    $_SESSION['__container']['defaults']['stringfont']['family'] =
-        'Verdana, Arial, Helvetica, sans-serif';
+    $_SESSION['__container']['defaults']['stringfont']['family'] 
+        = 'Verdana, Arial, Helvetica, sans-serif';
     $_SESSION['__container']['defaults']['stringfont']['size'] = '10';
     $_SESSION['__container']['defaults']['stringfont']['color'] = '#000000';
     $_SESSION['__container']['defaults']['phpcss']['P'] = '1';
@@ -179,7 +182,6 @@ function pasaPestanaFicha(&$db, $tabla_prueba, $post, $basicos_id = null,
 
     $_SERVER['SERVER_NAME'] = '127.0.0.1';
     $_SERVER['HTTP_X_FORWARDED_SERVER'] = '';
-//    $_SERVER['SERVER_NAME'] = '';
     $_SERVER['REQUEST_URI'] = 'pruebas';
 
     $_SESSION['sin_csrf'] =  $post['evita_csrf'] = 1234;
@@ -202,8 +204,7 @@ function pasaPestanaFicha(&$db, $tabla_prueba, $post, $basicos_id = null,
         $_FILES = $files;
     }
 
-    require "captura_caso.php";
-    //echo "OJO paso captura_caso.php pasaPestanaFicha(db, $tabla_prueba, $post, $basicos_id, $terminaErro)";
+    include "captura_caso.php";
 
     $nume = verificaInsercion($db, $tabla_prueba, $na);
     if ($terminaError && $nume > 0) {

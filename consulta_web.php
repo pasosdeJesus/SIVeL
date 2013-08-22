@@ -520,28 +520,10 @@ class ConsultaWeb extends HTML_QuickForm_Page
             'select', 'id_departamento',
             _('Departamento') . ': ', array()
         );
-/*        $options= array('' => '') + htmlentities_array(
-            $db->getAssoc(
-                "SELECT  id, nombre FROM departamento " .
-                "ORDER BY nombre"
-            )
-        );
-        $dep->loadArray($options);
-        $dep->updateAttributes(
-            array('onchange' =>
-            'envia(\'consultaWeb:id_departamento\')'
-            )
-        ); */
-
         $mun =& $this->addElement(
             'select', 'id_municipio',
             _('Municipio') .': ', array()
         );
-/*        $mun->updateAttributes(
-            array('onchange' =>
-            'envia(\'consultaWeb:id_municipio\')'
-            )
-        ); */
 
         $cla =& $this->addElement(
             'select', 'id_clase',
@@ -558,31 +540,6 @@ class ConsultaWeb extends HTML_QuickForm_Page
             $vdep, $vmun, $vcla
         );
          
-/*        $ndepartamento = ret_id_departamento($this);
-        if ($ndepartamento != null) {
-            $dep->setValue($ndepartamento);
-            $options= array('' => '') + htmlentities_array(
-                $db->getAssoc(
-                    "SELECT  id, nombre FROM municipio " .
-                    "WHERE id_departamento='$ndepartamento' ORDER BY nombre"
-                )
-            );
-            $mun->loadArray($options);
-            $cla->loadArray(array());
-        }
-        $nmunicipio = ret_id_municipio($this);
-        if ($nmunicipio != null && $ndepartamento != null) {
-            $mun->setValue($nmunicipio);
-            $options = array('' => '') + htmlentities_array(
-                $db->getAssoc(
-                    "SELECT id, nombre FROM clase " .
-                    "WHERE id_departamento='$ndepartamento' AND " .
-                    "id_municipio='$nmunicipio' ORDER BY nombre"
-                )
-            );
-            $cla->loadArray($options);
-        } */
-
         $sel =& $this->addElement(
             'text', 'nomvic',
             _('Nombre o apellido de la víctima')

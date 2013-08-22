@@ -31,7 +31,7 @@ require_once 'ResConsulta.php';
  * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
  * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
  * @link     http://sivel.sf.net/tec
- * @see PagOtrasFuentes
+ * @see      PagOtrasFuentes
  */
 class PagOtraAnexo extends PagOtrasFuentes
 {
@@ -54,7 +54,7 @@ class PagOtraAnexo extends PagOtrasFuentes
             $q =  "UPDATE anexo SET id_fotra=NULL " .
                 "WHERE id_caso='$idcaso' AND id_fotra=$vf";
             $db = $this->bcaso_fotra->_do->getDatabaseConnection();
-            hace_consulta($db, $q, false) ;
+            hace_consulta($db, $q, false);
         }
 
         parent::elimina($valores);
@@ -75,7 +75,7 @@ class PagOtraAnexo extends PagOtrasFuentes
         parent::eliminaDep($db, $idcaso);
         $q =  "UPDATE anexo SET id_fotra=NULL " .
             "WHERE id_caso='$idcaso'";
-        hace_consulta($db, $q, false) ;
+        hace_consulta($db, $q, false);
     }
 
 
@@ -160,8 +160,8 @@ class PagOtraAnexo extends PagOtrasFuentes
         if ($this->bcaso_fotra->_do->id_fotra != null) {
             $danexo = objeto_tabla('anexo');
             $danexo->id_caso = $_SESSION['basicos_id'];
-            $danexo->id_fotra =
-                $this->bcaso_fotra->_do->id_fotra;
+            $danexo->id_fotra 
+                = $this->bcaso_fotra->_do->id_fotra;
             $danexo->find();
             if ($danexo->fetch()) {
                 $sel->setValue($danexo->id);
@@ -171,8 +171,8 @@ class PagOtraAnexo extends PagOtrasFuentes
 
 
         if ((!isset($_SESSION['forma_modo'])
-            || $_SESSION['forma_modo'] != 'busqueda'
-        ) && !$puesto
+            || $_SESSION['forma_modo'] != 'busqueda') 
+            && !$puesto
         ) {
             $sel->setValue('');
         }
@@ -214,7 +214,7 @@ class PagOtraAnexo extends PagOtrasFuentes
                     " WHERE id_caso='$idcaso' AND id_fotra=$vf";
             }
             //echo $q;
-            hace_consulta($db, $q, false) ;
+            hace_consulta($db, $q, false);
         }
 
         caso_funcionario($_SESSION['basicos_id']);

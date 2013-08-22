@@ -350,7 +350,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
                 $nf++;
             }
             echo "</table>";
-            if ($nf > 0) {
+            if ($nf >= 0) {
                 echo '<div align = "right"><a href = "index.php">' .
                     '<b>' . _('Men&uacute; Principal') . '</b></a></div>';
             }

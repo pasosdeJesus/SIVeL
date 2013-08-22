@@ -16,7 +16,8 @@
  */
 
 /** Servidor/socket del Motor de bases de datos */
-$dbservidor = "unix(/tmp)"; # Si prefiere TCP/IP (no recomendado) use tcp(localhost)
+$dbservidor = "unix(/tmp)"; 
+// Si prefiere TCP/IP (no recomendado) use tcp(localhost)
 
 /** Nombre de base de datos */
 $dbnombre = "sivel";
@@ -130,7 +131,7 @@ $opscpweb = "";
 // Mejor no empleamos sobrecarga porque no funciona en
 // diversas versiones de PHP
 if (!defined('DB_DATAOBJECT_NO_OVERLOAD')) {
-    define('DB_DATAOBJECT_NO_OVERLOAD',1);
+    define('DB_DATAOBJECT_NO_OVERLOAD', 1);
 }
 
 /** DSN de la base de datos.  */
@@ -165,7 +166,8 @@ $_DB_DATAOBJECT_FORMBUILDER['CONFIG'] = array (
 // MODULOS
 
 /** Módulos empleados (relativos a directorio con fuentes) */
-$modulos = "modulos/anexos modulos/etiquetas modulos/belicas modulos/segjudicial modulos/estrotulos modulos/mapag";
+$modulos = "modulos/anexos modulos/etiquetas modulos/belicas "
+    . "modulos/segjudicial modulos/estrotulos modulos/mapag";
 
 /** Directorio donde se almacenan anexos */
 $GLOBALS['dir_anexos'] = '/resbase/anexos';
@@ -216,17 +218,23 @@ $GLOBALS['deshabilita_manejo_usuarios'] = false;
 /** Mensaje por presentar si se encuentran fallas ortográficas al validar
  * @global string $GLOBALS['MENS_ORTOGRAFIA']
  */
-$GLOBALS['MENS_ORTOGRAFIA'] = 'Las palabras que estén bien por favor agreguelas al diccionario (%l).';
+$GLOBALS['MENS_ORTOGRAFIA'] = 'Las palabras que estén bien '
+    . 'por favor agreguelas al diccionario (%l).';
 
 /** Deshabilita operaciones con usuarios
  * @global string $GLOBALS['deshabilita_manejo_usuarios']
  */
 $GLOBALS['deshabilita_manejo_usuarios'] = false;
 
-/** Mensaje por presentar en la página principal para indicar donde reportar fallas.
+/** Mensaje por presentar en página ppal para indicar donde reportar fallas.
  * @global string $GLOBALS['REPORTA_FALLAS']
  */
-$GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">Documentación</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" target=\"2\">DIVIPOLA</a><br>Por favor reporte fallas o requerimientos en el sistema de seguimiento disponible <a href='http://sourceforge.net/tracker/?group_id=104373&atid=637817'>en línea</a>";
+$GLOBALS['REPORTA_FALLAS'] = "<a href=\"http://sivel.sf.net/\">Documentación"
+    . "</a><br><a href=\"http://190.25.231.236/Divipola/Divipola.asp\" " 
+    . "target=\"2\">DIVIPOLA</a><br>Por favor reporte fallas o "
+    . "requerimientos en el sistema de seguimiento disponible "
+    . "<a href='http://sourceforge.net/tracker/?group_id=104373&atid=637817'>"
+    . "en línea</a>";
 
 /** Ancho en porcentaje de tablas en reporte general.
  * Puede cambiarse en caso de que tenga problemas al imprimir (por ejemplo
@@ -287,7 +295,9 @@ $GLOBALS['pie_consulta_web'] = '';
  * Dejar '&nbsp;' si no hay
  * @global string $GLOBALS['pie_consulta_web_publica']
  */
-$GLOBALS['pie_consulta_web_publica'] = '<div align="right"><a href="http://sivel.sourceforge.net/1.1/consultaweb.html">Documentación</a></div>';
+$GLOBALS['pie_consulta_web_publica'] = '<div align="right">'
+    . '<a href="http://sivel.sourceforge.net/1.1/consultaweb.html">'
+    . 'Documentación</a></div>';
 
 /** Cabezote para enviar correos desde consulta_web.
  * Dejar '' si no hay
@@ -299,7 +309,8 @@ $GLOBALS['cabezote_consulta_web_correo'] = '';
  * Dejar '' si no hay
  * @global string $GLOBALS['pie_consulta_web_correo']
  */
-$GLOBALS['pie_consulta_web_correo'] = '<hr/><a href="consulta_web.php">Consulta web</a>';
+$GLOBALS['pie_consulta_web_correo'] 
+    = '<hr/><a href="consulta_web.php">Consulta web</a>';
 
 /** Archivo HTML que se pone como cabezote (antes del menú) del menú principal
  * Dejar '' si no hay
@@ -364,13 +375,15 @@ $GLOBALS['menu_tablas_basicas'] = array(
         array('title'=>'Etnia', 'url'=>'etnia', 'sub'=>null),
         array('title'=>'Filiación', 'url'=>'filiacion', 'sub'=>null),
         array('title'=>'Iglesia', 'url'=>'iglesia', 'sub'=>null),
-        array('title'=>'Organización social', 'url'=>'organizacion', 'sub'=>null),
+        array('title'=>'Organización social', 
+            'url'=>'organizacion', 'sub'=>null),
         array('title'=>'Profesión', 'url'=>'profesion', 'sub'=>null),
         array('title'=>'Rango edad', 'url'=>'rangoedad', 'sub'=>null),
         array('title'=>'Resultado agresión', 'url'=>'resagresion', 'sub'=>null),
         array('title'=>'Sector Social', 'url'=>'sectorsocial', 'sub'=>null),
         array('title'=>'Tipo de Relación', 'url'=>'trelacion', 'sub'=>null),
-        array('title'=>'Vínculo con el estado', 'url'=>'vinculoestado', 'sub'=>null),
+        array('title'=>'Vínculo con el estado', 
+            'url'=>'vinculoestado', 'sub'=>null),
         ),
     ),
     array('title' => 'Información caso', 'url'=> null, 'sub' => array(
@@ -543,8 +556,6 @@ $GLOBALS['cw_ncampos'] = array('caso_id' => 'Código',
     'm_victimas' => 'Víctimas',
     'm_presponsables' => 'Pr. Resp.',
     'm_tipificacion' => 'Tipificación',
-    #'m_observaciones' => 'Observaciones',
-    #'m_anexos' => 'Anexos',
 );
 
 

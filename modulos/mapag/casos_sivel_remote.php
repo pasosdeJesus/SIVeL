@@ -8,10 +8,9 @@
  * @category  SIVeL
  * @package   SIVeL
  * @author    Luca Urech <lucaurech@yahoo.de> 
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org> integrando a SIVeL y exportando a JSON
+ * @author    Vladimir Támara <vtamara@pasosdeJesus.org> 
  * @copyright 2011 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   $Id: casos_sivel_remote.php,v 1.1.2.10 2013/04/15 14:10:40 vtamara Exp $
  * Acceso: CONSULTA PÚBLICA
  * @link      http://sivel.sf.net
  */
@@ -25,12 +24,12 @@ $host = determina_host();
 // leer filtros desde los parametros GET
 $filtro = array(
     'desde' => (!empty($_GET['desde'])) 
-        ? var_req_escapa('desde') : "2007-01-01",
-	'hasta' => var_req_escapa('hasta'),
-	'departamento' => var_req_escapa('departamento'),
-	'prresp' => var_req_escapa('prresp'),
-	'tvio' => var_req_escapa('tvio'),
-);
+    ? var_req_escapa('desde') : "2007-01-01",
+        'hasta' => var_req_escapa('hasta'),
+        'departamento' => var_req_escapa('departamento'),
+        'prresp' => var_req_escapa('prresp'),
+        'tvio' => var_req_escapa('tvio'),
+    );
 
 // generar cadena de solicitud para sivel consulta web (responde XML)
 $requestUrl = $host . "consulta_web.php?_qf_consultaWeb_consulta=" 
@@ -52,7 +51,7 @@ $requestUrl .= (!empty($filtro['tvio'])) ?
     "&tipo_violencia=" . $filtro['tvio'] : "";
 //trigger_error($requestUrl);
 if (($ca = file_get_contents($requestUrl)) === false) {
-	die('No pudo leerse URL: \'' . $requestUrl . '\'');
+    die('No pudo leerse URL: \'' . $requestUrl . '\'');
 }
 if (strpos($ca, "Por favor refine su consulta") !== false) {
     die($ca);
@@ -60,7 +59,7 @@ if (strpos($ca, "Por favor refine su consulta") !== false) {
 $casos = array();
 // carga datos del archivo XML de Sivel
 $xmlSivel = simplexml_load_string($ca);
-if ($xmlSivel === FALSE) {
+if ($xmlSivel === false) {
     errores_xml($xmlSivel, $ca);
     die("El url '" . $requestUrl . "' no está cargando");
 }
