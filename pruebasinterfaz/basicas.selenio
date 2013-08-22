@@ -1427,6 +1427,11 @@
 	<td>c</td>
 </tr>
 <tr>
+	<td>select</td>
+	<td>name=id_supracategoria</td>
+	<td>label=PERSECUCIÓN POLÍTICA (VIOLENCIA POLÍTICO SOCIAL)</td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>añadir</td>
 	<td></td>
@@ -1438,7 +1443,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>eliminar</td>
+	<td>name=eliminar</td>
 	<td></td>
 </tr>
 <tr>
