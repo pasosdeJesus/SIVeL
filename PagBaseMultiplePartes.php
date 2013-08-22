@@ -109,7 +109,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $cpartes = $cll::PARTES;
         if (isset($this->$bcm->_do->$ll)) {
             $partes = array_diff(
-                explode(' ', $cpartes), array($cll::clasemodelo)
+                explode(' ', $cpartes), array($cll::CLASEMODELO)
             );
             for ($i = 0; $i < 2; $i++) {
                 foreach ($partes as $t) {
