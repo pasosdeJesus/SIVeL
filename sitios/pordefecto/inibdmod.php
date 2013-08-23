@@ -102,6 +102,7 @@ if (!function_exists("esta_nueva_ficha")) {
     }
 }
 
+global $modulos;
 /* Rutas en particular donde haya subdirectorios DataObjects */
 $rutas_include = ini_get('include_path').
     ":.:$dirserv:$dirserv/$dirsitio:$dirsitio:";
