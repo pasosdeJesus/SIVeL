@@ -66,7 +66,7 @@ $modulos = "modulos/anexos modulos/etiquetas modulos/mapag";
 
 
 if (file_exists($_SESSION['dirsitio'] . '/conf-local.php')) {
-    include_once $_SESSION['dirsitio'] . '/conf-local.php';
+    include $_SESSION['dirsitio'] . '/conf-local.php';
 }
 
 require 'sitios/pordefecto/inibdmod.php';
