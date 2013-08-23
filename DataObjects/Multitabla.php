@@ -205,19 +205,19 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
         $p->find();
         while ($p->$c != null && $p->fetch()) {
             $t .= "<tr> ";
-            foreach ($this->fb_fieldsToRender as $c) {
+            foreach ($this->fb_fieldsToRender as $ca) {
                 $t .= "<td>";
-                if (isset($this->camposselect[$c])) {
-                    $dd = $p->getLink($c);
+                if (isset($this->camposselect[$ca])) {
+                    $dd = $p->getLink($ca);
                     $t .= $dd->nombre;
                 } else if (isset($this->fb_booleanFields) 
                     && in_array($c, $this->fb_booleanFields)
                 ) {
-                    $t .= $p->$c === true || $p->$c === 't' ? "Si" : "No";
+                    $t .= $p->$ca === true || $p->$ca === 't' ? "Si" : "No";
                 } else {
-                    $t .= $p->$c;
+                    $t .= $p->$ca;
                 }
-                $t .= "</td>";
+                $t .= "</td>"; 
             }
             $t .= "<td><a href='{$_SERVER['PHP_SELF']}?" 
                 . $form->getButtonName($this->botonelimina) 
@@ -233,7 +233,6 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
         $sel =& $form->addElement(
             'static', 't' . $this->__table, $this->nom_tabla, $t
         );
-
         $fm = array();
         foreach ($this->fb_fieldsToRender as $c) {
             $sel =& $form->removeElement($c);
@@ -243,11 +242,13 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
                     'select', 'f' . $c, 'f' . $c, array()
                 );
                 $sel->loadArray(
-                    htmlentities_array( $db->getAssoc(
+                    htmlentities_array(
+                        $db->getAssoc(
                             "SELECT id, nombre "
                             . " FROM {$this->camposselect[$c]} "
                             . " ORDER BY nombre"
-                    ))
+                        )
+                    )
                 );
             }
             $sel->setValue(null);

@@ -14,7 +14,7 @@ INSERT INTO etiqueta (id, nombre, observaciones)
 INSERT INTO etiqueta (id, nombre, observaciones) 
         VALUES ('6', 'VERDE', 'Color #00FF00');
 INSERT INTO etiqueta (id, nombre, observaciones) 
-        VALUES ('7', 'AZUL', 'Color #0000FF');
+        VALUES ('7', 'AZUL', 'Color #2020FF');
 INSERT INTO etiqueta (id, nombre, observaciones) 
         VALUES ('8', 'AMARILLO', 'Color #FFFF00'); 
 INSERT INTO etiqueta (id, nombre, observaciones)

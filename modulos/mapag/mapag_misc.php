@@ -21,7 +21,8 @@
  *
  * @return string servidor
  */
-function determina_host() {
+function determina_host() 
+{
     if (isset($_SERVER['HTTP_REFERER'])) {
         $pu = parse_url($_SERVER['HTTP_REFERER']); 
     } else {
@@ -78,11 +79,12 @@ function display_xml_error($error, $xml)
  * Presenta errores en lectura XML
  *
  * @param object $xml Objeto
- * @param string $ca
+ * @param string $ca  Unparsed xml string
  *
  * @return void
  */
-function errores_xml($xml, $ca) {
+function errores_xml($xml, $ca) 
+{
     $lxml = explode("\n", $ca);
     $errors = libxml_get_errors();
     foreach ($errors as $error) {

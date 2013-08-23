@@ -113,7 +113,6 @@ if (!isset($GLOBALS['IDIOMAPORDEFECTO'])) {
 }
 
 if (isset($_SESSION['LANG'])) {
-    //echo "OJO en pordefecto/conf_int.php SESSION[LANG]=" . $_SESSION[LANG] . "<br>";
     $lang = $_SESSION['LANG'];
 } else if (isset($GLOBALS['IDIOMAPORDEFECTO'])) {
     $lang = $GLOBALS['IDIOMAPORDEFECTO'];
@@ -140,9 +139,7 @@ $GLOBALS['centro_principal'] = 'centro_principal-' . $lang . '.html';
 /** Imagen de fondo
  * @global string $GLOBALS['fondo']
  */
-$GLOBALS['fondo']= ''; #$dirsitio . '/fondo.jpg';
-
-
+$GLOBALS['fondo']= ''; //$dirsitio . '/fondo.jpg';
 
 
 /** Tablas básicas */
@@ -162,27 +159,34 @@ $GLOBALS['menu_tablas_basicas'] = array(
         array('title'=>_('Etnia'), 'url'=>'etnia', 'sub'=>null),
         array('title'=>_('Filiación'), 'url'=>'filiacion', 'sub'=>null),
         array('title'=>_('Iglesia'), 'url'=>'iglesia', 'sub'=>null),
-        array('title'=>_('Organización Social'), 'url'=>'organizacion', 'sub'=>null),
+        array('title'=>_('Organización Social'), 
+            'url'=>'organizacion', 'sub'=>null),
         array('title'=>_('Profesión'), 'url'=>'profesion', 'sub'=>null),
         array('title'=>_('Rango de Edad'), 'url'=>'rangoedad', 'sub'=>null),
-        array('title'=>_('Resultado Agresión'), 'url'=>'resagresion', 'sub'=>null),
+        array('title'=>_('Resultado Agresión'), 
+            'url'=>'resagresion', 'sub'=>null),
         array('title'=>_('Sector Social'), 'url'=>'sectorsocial', 'sub'=>null),
         array('title'=>_('Tipo de Relación'), 'url'=>'trelacion', 'sub'=>null),
-        array('title'=>_('Vínculo con el Estado'), 'url'=>'vinculoestado', 'sub'=>null),
+        array('title'=>_('Vínculo con el Estado'), 
+            'url'=>'vinculoestado', 'sub'=>null),
         ),
     ),
     array('title'=>_('Información caso'), 'url'=> null, 'sub' => array(
-        array('title'=>_('Tipo de Violencia'), 'url'=>'tviolencia', 'sub'=>null),
-        array('title'=>_('Supracategoria'), 'url'=>'supracategoria', 'sub'=>null),
+        array('title'=>_('Tipo de Violencia'), 
+            'url'=>'tviolencia', 'sub'=>null),
+        array('title'=>_('Supracategoria'), 
+            'url'=>'supracategoria', 'sub'=>null),
         array('title'=>_('Categoria'), 'url'=>'categoria', 'sub'=>null),
         array('title'=>_('Contexto'), 'url'=>'contexto', 'sub'=>null),
-        array('title'=>_('Presuntos Responsables'), 'url'=>'presponsable', 'sub'=>null),
+        array('title'=>_('Presuntos Responsables'), 
+            'url'=>'presponsable', 'sub'=>null),
         array('title'=>_('Antecedentes'), 'url'=>'antecedente', 'sub'=>null),
         array('title'=>_('Intervalo'), 'url'=>'intervalo', 'sub'=>null),
         ),
     ),
     array('title'=>_('Información Fuentes'), 'url'=> null, 'sub' => array(
-        array('title'=>_('Fuentes Frecuentes'), 'url'=>'ffrecuente', 'sub'=>null),
+        array('title'=>_('Fuentes Frecuentes'), 
+            'url'=>'ffrecuente', 'sub'=>null),
         ),
     ),
     array('title'=>_('Reportes'), 'url'=> null, 'sub' => array(
@@ -339,8 +343,6 @@ $GLOBALS['cw_ncampos'] = array('caso_id' => _('Código'),
     'm_victimas' => _('Víctimas'),
     'm_presponsables' => _('Pr. Resp.'),
     'm_tipificacion' => _('Tipificación'),
-    #'m_observaciones' => 'Observaciones',
-    #'m_anexos' => 'Anexos',
 );
 
 

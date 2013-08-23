@@ -673,6 +673,7 @@ class ResConsulta
     function aHtml($retroalim = true,
         $html_enlace1=null
     ) {
+        //echo "OJO aHtml";
         if ($html_enlace1 == null) {
             $html_enlace1 = '<a href = "consulta_web.php">'
                 . _('Consulta Web') . '</a>, ';
@@ -691,7 +692,7 @@ class ResConsulta
         $esadmin = false;
         if (isset($_SESSION['id_funcionario'])) {
             include $_SESSION['dirsitio'] . "/conf.php";
-
+            global $dsn;
             $aut_usuario = "";
             autentica_usuario($dsn, $aut_usuario, 0);
             if (in_array(42, $_SESSION['opciones'])) {

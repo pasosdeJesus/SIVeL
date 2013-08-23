@@ -72,9 +72,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         if (PEAR::isError($d)) {
             die($d->getMessage());
         }
-        $fb =& DB_DataObject_FormBuilder::create($d);
         $db =& $d->getDatabaseConnection();
-
         $pFini      = var_req_escapa('fini', $db);
         $pFfin      = var_req_escapa('ffin', $db);
         $pFiini     = var_req_escapa('fiini', $db);
@@ -405,9 +403,8 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             }
         }
 
-
         $result = hace_consulta($db, $q);
-
+        sin_error_pear($result);
         foreach ($GLOBALS['cw_ncampos'] as $idc => $dc) {
             if (isset($_REQUEST[$idc]) && $_REQUEST[$idc] == 1) {
                 $campos[$idc] = $dc;

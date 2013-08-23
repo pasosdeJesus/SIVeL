@@ -87,6 +87,7 @@ class EliminaEst extends HTML_QuickForm_Action
 class DataObjects_Caso_etiqueta extends DB_DataObject_SIVeL
 {
     var $__table = 'caso_etiqueta';                         // table name
+    var $nom_tabla = 'Etiquetas de un caso';
     var $id_caso;                          // int4(4)  not_null primary_key
     var $id_etiqueta;                        // int4(4)  not_null primary_key
     var $id_funcionario;                   // varchar(-1)  not_null
@@ -170,7 +171,7 @@ class DataObjects_Caso_etiqueta extends DB_DataObject_SIVeL
         $fm[] =& $sel;
         $sel =& $form->createElement('select', 'fetiqueta', 'fetiqueta', array());
         $sel->loadArray(
-            htmlentities_array( 
+            htmlentities_array(
                 $db->getAssoc("SELECT id, nombre FROM etiqueta ORDER BY 2")
             )
         );

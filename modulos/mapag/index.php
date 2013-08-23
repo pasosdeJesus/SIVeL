@@ -25,29 +25,38 @@
    <!-- Elementos de interfaz -->
     <link rel="stylesheet" media="screen" type="text/css" 
         href="modulos/mapag/css/mapa.css" />
-    <link rel="stylesheet" media="screen" type="text/css" href="https://raw.github.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/datepicker.css" />
+    <link rel="stylesheet" media="screen" type="text/css" 
+        href="https://raw.github.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/datepicker.css" />
     <script type="text/javascript" 
-        src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+        src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js">
+    </script>
     <script type="text/javascript" 
-        src="https://raw.github.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/datepicker.js"></script>
+        src="https://raw.github.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/datepicker.js">
+    </script>
     <script type="text/javascript" 
-        src="https://raw.github.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/eye.js"></script>
+        src="https://raw.github.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/eye.js">
+    </script>
     <script type="text/javascript" 
-        src="https://raw.github.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/utils.js"></script>
+        src="https://raw.github.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/utils.js">
+    </script>
     <!-- script type="text/javascript" 
         src="modulos/mapag/js/datepicker_mapa.js"></script -->
 	<!-- Mapas -->
     <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVATZz-dHXuzNkySAo1O2VQ30ixzhwf7w&sensor=false&language=es&region=CO">
     <script type="text/javascript" 
-        src="https://gmaps-utility-library.googlecode.com/svn/trunk/markerclusterer/1.0/src/markerclusterer.js"></script>
+        src="https://gmaps-utility-library.googlecode.com/svn/trunk/markerclusterer/1.0/src/markerclusterer.js">
+    </script>
     <script type="text/javascript" 
-        src="https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer.js"></script>
+        src="https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer.js">
+    </script>
     <script type="text/javascript" 
-        src="https://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble.js"></script>
+        src="https://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble.js">
+    </script>
     <script type="text/javascript" src="modulos/mapag/js/mapa.js"></script>
     <script type="text/javascript" 
-        src="modulos/mapag/js/municipios_autopopulate.js"></script>
+        src="modulos/mapag/js/municipios_autopopulate.js">
+    </script>
 </head>
 
 <body onload="initialize()">
@@ -97,73 +106,78 @@
 					<option value="0">Mostrar todos</option>
                     <option value="">-----------------------</option>
 <?php
-    $d = objeto_tabla('departamento');
-    $d->find();
-    while ($d->fetch()) {
-        echo "<option value=\"" . (int)$d->id . "\">";
-        echo htmlentities($d->nombre, ENT_QUOTES, "UTF-8") . "</option>\n";
-    }
+$d = objeto_tabla('departamento');
+$d->find();
+while ($d->fetch()) {
+    echo "<option value=\"" . (int)$d->id . "\">";
+    echo htmlentities($d->nombre, ENT_QUOTES, "UTF-8") . "</option>\n";
+}
 ?>
 					</select>
                 		</div>
               		</div>
 			<div class="clear"></div>
-		</div>
-		<div class="settings_box" id="settings_box3">
-			<h3>Otros Filtros</h3>
-			<div class="settings_element">
-				<div class="left">P. Resp:</div>
-				<div class="right">
-					<select name="prresp" id="prresp" style="width:150px;">
-						<option value="0">Mostrar todos</option>
+        </div>
+        <div class="settings_box" id="settings_box3">
+            <h3>Otros Filtros</h3>
+            <div class="settings_element">
+                <div class="left">P. Resp:</div>
+                <div class="right">
+                    <select name="prresp" id="prresp" style="width:150px;">
+                        <option value="0">Mostrar todos</option>
                         <option value="">-----------------------</option>
 <?php
-	$d = objeto_tabla('presponsable');
-	$d->find();
-	while ($d->fetch()) {
-	    echo "<option value=\"" . (int)$d->id . "\">";
-	    echo htmlentities($d->nombre, ENT_QUOTES, "UTF-8") . "</option>\n";
-	}
+$d = objeto_tabla('presponsable');
+$d->find();
+while ($d->fetch()) {
+    echo "<option value=\"" . (int)$d->id . "\">";
+    echo htmlentities($d->nombre, ENT_QUOTES, "UTF-8") . "</option>\n";
+}
 ?>
-					</select>
-				 </div>
-			</div>
-			<div class="settings_element">
-				<div class="left">Violencia:</div>
-				<div class="right">
-					<select name="tvio" id="tvio" style="width:150px;">
-						<option value="0">Mostrar todos</option>
-                    	<option value="">-----------------------</option>
+                    </select>
+                 </div>
+            </div>
+            <div class="settings_element">
+                <div class="left">Violencia:</div>
+                <div class="right">
+                    <select name="tvio" id="tvio" style="width:150px;">
+                        <option value="0">Mostrar todos</option>
+                        <option value="">-----------------------</option>
 <?php
-	$d = objeto_tabla('tviolencia');
-	$d->find();
-	while ($d->fetch()) {
-	    echo "<option value=\"" . $d->id . "\">";
-	    echo htmlentities($d->nombre, ENT_QUOTES, "UTF-8") . "</option>\n";
-	}
+$d = objeto_tabla('tviolencia');
+$d->find();
+while ($d->fetch()) {
+    echo "<option value=\"" . $d->id . "\">";
+    echo htmlentities($d->nombre, ENT_QUOTES, "UTF-8") . "</option>\n";
+}
 ?>
-					</select>
-				 </div>
-			</div>
+                    </select>
+                 </div>
+            </div>
 
-		</div>
-		<div class="clear"></div>
-		<div class="submit_box">
+        </div>
+        <div class="clear"></div>
+        <div class="submit_box">
             <input type="button" class="button" value="Filtrar casos" 
                 onclick="addCases(true); return false;"/> 
             <span id="nrcasos" class="nrcasos"></span>
-		</div>
-		</form>
-	</div>
-	
+        </div>
+        </form>
+    </div>
+
 </div>
 
 </body>
 
 </html>
 <?php
-	function muestra()
-	{
-		// No autenticamos porque es consulta pública
-	}
+/**
+ * Punto de entrada
+ *
+ * @return void
+ */
+function muestra()
+{
+    // No autenticamos porque es consulta pública
+}
 ?>
