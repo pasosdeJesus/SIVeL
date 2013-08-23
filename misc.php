@@ -685,8 +685,8 @@ function toma_elemento_recc($form, $nom, $yaanalizados = array())
 /** 
  * Retorna valor SIN INFORMACION del campo $c del DataObject $do
  *
- * @param object $do DataObject
- * @param string $c  Campo
+ * @param object &$do DataObject
+ * @param string $c   Campo
  *
  * @return integer Que corresonde al valor SIN INFORMACION
  */
@@ -1834,10 +1834,10 @@ function convierte_valor(&$do, $campo, $tipo)
 /**
  * Asigna un campo de un DataObject con el valor recibido del formulario
  *
- * @param array   $valor  Valor por asignar
- * @param object  $rel    Tabla 
- * @param object  $campo  Campo de tabla $tabla
- * @param array   &$estbd Estructura de base sacada de .ini.  Si es null esta
+ * @param array  $valor  Valor por asignar
+ * @param object $rel    Tabla 
+ * @param object $campo  Campo de tabla $tabla
+ * @param array  &$estbd Estructura de base sacada de .ini.  Si es null esta
  *                        función la llena
  *
  * @return Valor asignable a un campo $campo del DataObject de tabla $rel

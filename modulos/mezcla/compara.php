@@ -40,10 +40,11 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
  *
  * @return Prfijo izquierdo de z hasta .
  */
-function hastapunto($s) {
+function hastapunto($s) 
+{
     $p = strpos($s, '.');
     $r = $s;
-    if ($p !== FALSE) {
+    if ($p !== false) {
         $r = substr($s, 0, $p); 
     }
     return $p;
@@ -66,9 +67,9 @@ function muestra($dsn)
     $id1 = 0;
     $id2 = 0;
     $err = "";
-    foreach($_POST as $l => $v) {
+    foreach ($_POST as $l => $v) {
         if (substr($l, 0, 2) == 'id') {
-            if  ($nid == 0) {
+            if ($nid == 0) {
                 $id1 = (int)substr($l, 2);
             } elseif ($nid == 1) {
                 $id2 = (int)substr($l, 2);
@@ -99,7 +100,7 @@ function muestra($dsn)
         }
         //echo "OJO $n $c $o<br>";
         if (is_callable(array($c, 'compara'))) {
-            #echo "OJO compara<br>";
+            //echo "OJO compara<br>";
             call_user_func_array(
                 array($c, 'compara'),
                 array(&$db, &$r, $id1, $id2, null)
@@ -113,8 +114,9 @@ function muestra($dsn)
     echo "<input type='hidden' name='id1' value='$id1'/>";
     echo "<input type='hidden' name='id2' value='$id2'/>";
     echo "<table border='1'>";
-    echo "<tr><th>Dato</th><th colspan='2'>Caso 1</th><th colspan='2'>Caso 2</th><th>Nuevo</th></tr>";
-    foreach($r as $i => $v) {
+    echo "<tr><th>Dato</th><th colspan='2'>Caso 1<"
+        . "/th><th colspan='2'>Caso 2</th><th>Nuevo</th></tr>";
+    foreach ($r as $i => $v) {
         $check1 = "checked='checked'";
         $check2 = "";
         $check3 = "";

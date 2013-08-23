@@ -354,30 +354,30 @@ class PagUbicacion extends PagBaseMultiple
         if ($nomcmun == null) {
             $d->updateAttributes(array("id" => "$nomcdep"));
         } else {
-            $d->updateAttributes(array(
-                "id" => "$nomcdep",
-                "onchange" => "llenaMunicipio('$nomcdep', "
-                . "'$nomcmun', '$nomccla')"
-            ));
+            $d->updateAttributes(
+                array(
+                    "id" => "$nomcdep",
+                    "onchange" => "llenaMunicipio('$nomcdep', "
+                    . "'$nomcmun', '$nomccla')"
+                )
+            );
             $m =& toma_elemento_recc($form, $nomcmun);
             sin_error_pear($m);
             if ($nomccla == null) {
-                $m->updateAttributes(array(
-                    "id" => "$nomcmun",
-                ));
+                $m->updateAttributes(array("id" => "$nomcmun"));
             } else {
-                $m->updateAttributes(array(
-                    "id" => "$nomcmun",
+                $m->updateAttributes(
+                    array("id" => "$nomcmun",
                     "onchange" => "llenaClase('$nomcdep', "
-                    . "'$nomcmun', '$nomccla')"
-                ));
+                    . "'$nomcmun', '$nomccla')")
+                );
                 $c =& toma_elemento_recc($form, $nomccla);
                 sin_error_pear($c);
-                $c->updateAttributes(array(
-                    "id" => "$nomccla",
+                $c->updateAttributes(
+                    array("id" => "$nomccla",
                     "onchange" => "llenaCoord('$nomcdep', "
-                    . "'$nomcmun', '$nomccla')"
-                ));
+                    . "'$nomcmun', '$nomccla')")
+                );
             }
         }
         $options = array('' => '') + htmlentities_array(
@@ -421,7 +421,7 @@ class PagUbicacion extends PagBaseMultiple
                         }
                     }
                 } else if ($c != null) {
-                    $c->updateAttributes( 
+                    $c->updateAttributes(
                         array("id" => "$nomccla", "disabled" => "true")
                     );
                 }

@@ -137,7 +137,7 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db,
         "ALTER SEQUENCE tipo_proceso_seq RENAME TO tproceso_seq ", false
-        );
+    );
 
     aplicaact($act, $idac, 'Renombra tablas');
 }

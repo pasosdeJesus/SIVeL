@@ -40,7 +40,7 @@ $_REQUEST['evita_csrf'] = $_SESSION['sin_csrf'] = $_POST['evita_csrf'] = 1234;
 
 require_once "PEAR.php";
 
-$s =& PEAR::getStaticProperty('DB_DataObject','options');
+$s =& PEAR::getStaticProperty('DB_DataObject', 'options');
 
 require_once "detalle.php";
 

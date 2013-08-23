@@ -78,14 +78,13 @@ if (!function_exists("esta_nueva_ficha")) {
      * Determina si una ficha con la identificación dada ya está en las
      * programas para agregar
      *
-     * @param arrary nuevas Arreglo de nuevas fichas
-     * @param string id     Id de ficha
+     * @param string $id Id de ficha
      *
      * @return true sii una ficha con la id dada ya está en nuevas
      */
     function esta_nueva_ficha($id) 
     {
-        foreach($GLOBALS['nueva_ficha_tabuladores'] as $a) {
+        foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
             $puesto = $a[0];
             $nom = $a[1];
             $arc = $a[2];

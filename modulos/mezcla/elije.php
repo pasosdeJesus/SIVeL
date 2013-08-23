@@ -385,7 +385,7 @@ class PagVictimasrep extends HTML_QuickForm_Page
 /**
  * Punto de entrada al formulario
  *
- * @param dsn URL a base de datos
+ * @param string $dsn URL a base de datos
  *
  * @return void
  */

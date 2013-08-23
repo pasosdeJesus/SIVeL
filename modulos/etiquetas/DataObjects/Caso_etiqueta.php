@@ -170,7 +170,7 @@ class DataObjects_Caso_etiqueta extends DB_DataObject_SIVeL
         $fm[] =& $sel;
         $sel =& $form->createElement('select', 'fetiqueta', 'fetiqueta', array());
         $sel->loadArray(
-            htmlentities_array( 
+            htmlentities_array(
                 $db->getAssoc("SELECT id, nombre FROM etiqueta ORDER BY 2")
             )
         );
