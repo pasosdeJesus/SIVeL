@@ -2668,10 +2668,6 @@ function lee_escritura($nd, $dbnombre, $dirap, $modo)
     );
 }
 
-
-
-
-
 if (!isset($_SESSION['SIN_INDICES']) || !$_SESSION['SIN_INDICES']) {
     echo "Actualizando indices<br>";
     $na = "prepara_indices.sql";
