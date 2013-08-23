@@ -14,6 +14,7 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+global $dirsitio;
 
 if ($_SESSION['dirsitio'] != $dirsitio) {
     $n1 = $_SESSION['dirsitio'] . "/conf.php";
