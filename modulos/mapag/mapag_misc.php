@@ -32,6 +32,9 @@ function determina_host()
         $pu['path'] = str_replace("modulos/mapag/", "", $_SERVER['REQUEST_URI']);
     }
     $host = $pu['scheme'] . '://' . $pu['host'] . dirname($pu['path']);
+    if ($host[strlen($host) - 1] != '/') {
+        $host .= "/";
+    }
     //trigger_error("host=$host");
     //trigger_error(var_export($pu, true));
     //trigger_error(print_r($_GET,true));
