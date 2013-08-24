@@ -61,7 +61,8 @@ y desde el menú principal elegir
 					</listitem>
 					<listitem>
 						<para>
-Desarrolladores: Fuentes migradas a github.
+Desarrolladores: Fuentes migradas a 
+<ulink url="https://github.com/pasosdeJesus/SIVeL">github</ulink>. 
 Afinado para PHP 5.3. Base de datos debe estar en UTF-8.  
 Salida enviada al navegador en UTF-8. Fuentes en UTF-8.  
 Estándares de nomenclatura SQL y Javascript.  Archivo de comandos
