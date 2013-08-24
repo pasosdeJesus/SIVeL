@@ -2,6 +2,14 @@
 SET client_encoding = 'UTF8';
 
 
+--INSERT INTO resagresion(id, nombre, fechacreacion) VALUES (1, 'MUERTO', '2001-01-01');
+--INSERT INTO resagresion(id, nombre, fechacreacion) VALUES (2, 'HERIDO', '2001-01-01');
+--INSERT INTO resagresion(id, nombre, fechacreacion) VALUES (3, 'PRIVADO DE LA LIBERTAD', '2001-01-01');
+
+--SELECT setval('resagresion_seq', max(id)) FROM resagresion;
+
+
+
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('sbel-1', '2011-02-23', 'Creación de tablas');
 INSERT INTO actualizacionbase (id, fecha, descripcion) 

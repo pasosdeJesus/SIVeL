@@ -727,6 +727,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
                 $t =& $x;
             }
         }
+        $r = "";
         if (isset($GLOBALS['consultaweb_ordenarpor'])) {
             foreach ($GLOBALS['consultaweb_ordenarpor'] as $k => $f) {
                 if (is_callable($f)) {

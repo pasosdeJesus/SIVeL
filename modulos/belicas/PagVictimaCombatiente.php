@@ -422,8 +422,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
                 error_valida('Falta nombre de víctima', $valores);
                 return false;
             }
-            if (!isset($valores['id_resultado_agresion'])
-                || $valores['id_resultado_agresion'] == ''
+            if (!isset($valores['id_resagresion'])
+                || $valores['id_resagresion'] == ''
             ) {
                 error_valida('Falta resultado de agresión', $valores);
                 return false;
@@ -494,7 +494,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             $w, $t, $idcaso, 'combatiente',
             '', '', false, array('antecedente_combatiente'),
             'id_combatiente',
-            array('edad', 'id_resultado_agresion')
+            array('edad', 'id_resagresion')
         );
 
     }
@@ -521,9 +521,9 @@ class PagVictimaCombatiente extends PagBaseMultiple
         while ($dcombatiente->fetch()) {
             $r .= $sep . trim($dcombatiente->nombre);
             $r .= "\n    ".$GLOBALS['etiqueta']['resagresion'] . ": ";
-            $dresultado = $dcombatiente->getLink('id_resultado_agresion');
+            $dresultado = $dcombatiente->getLink('id_resagresion');
             $r .= $dresultado->nombre;
-            $dresultado = $dcombatiente->getLink('id_resultado_agresion');
+            $dresultado = $dcombatiente->getLink('id_resagresion');
             $r .= " (".trim($dresultado->nombre).")";
             $sins = DataObjects_Sectorsocial::idSinInfo();
             if ($dcombatiente->id_sectorsocial != $sins) {
@@ -578,8 +578,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
                 $dorg = $dcombatiente->getLink('organizacionarmada');
                 $r .= " / ".trim($dorg->nombre);
             }
-            if (isset($dcombatiente->id_resultado_agresion)) {
-                $dresultado = $dcombatiente->getLink('id_resultado_agresion');
+            if (isset($dcombatiente->id_resagresion)) {
+                $dresultado = $dcombatiente->getLink('id_resagresion');
                 $r .= " ".trim($dresultado->nombre);
             }
             $r .= "\n";

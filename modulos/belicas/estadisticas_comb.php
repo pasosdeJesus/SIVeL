@@ -171,7 +171,7 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
             combatiente, presponsable
             WHERE $where AND
             ubicacion.id_caso = caso.id AND
-            resagresion.id = id_resultado_agresion AND
+            resagresion.id = id_resagresion AND
             caso.id = combatiente.id_caso AND
             presponsable.id = organizacionarmada";
         $q .= " )";
@@ -413,6 +413,7 @@ function muestra($dsn)
     autentica_usuario($dsn, $aut_usuario, 21);
 
     $wizard =& new HTML_QuickForm_Controller('EstadisticasComb', false);
+    global $mreq;
     $consweb = new PagEstadisticasComb($mreq);
 
     $wizard->addPage($consweb);
