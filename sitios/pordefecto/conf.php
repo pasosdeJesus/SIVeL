@@ -97,7 +97,7 @@ $GLOBALS['consulta_web_fecha_max'] = '2024-11-30';
 /** Fecha mínima de caso por consultar en web
  * @global string $GLOBALS['consulta_web_fecha_min']
  */
-$GLOBALS['consulta_web_fecha_min'] = '2001-1-1';
+$GLOBALS['consulta_web_fecha_min'] = '1990-1-1';
 
 /** Máximo de registros por retornar en una consulta web (0 es ilimitado)
  * @global string $GLOBALS['consulta_web_max']
