@@ -51,6 +51,12 @@
 <listitem><para> Ancho en porcentaje de tablas en reporte general.</para></listitem></varlistentry>
 <varlistentry><term><literal>reporte_indenta_victimas</literal></term>
 <listitem><para> Determina si se indentan o no víctimas en reporte general y revista</para></listitem></varlistentry>
+<varlistentry><term><literal>reptabla_nonacimiento</literal></term>
+<listitem><para> Evitar mostrar año de nacimiento en reporte tabla</para></listitem></varlistentry>
+<varlistentry><term><literal>reptabla_noagresion</literal></term>
+<listitem><para> Evitar mostrar categorias de agresiones junto a víctima en reporte tabla</para></listitem></varlistentry>
+<varlistentry><term><literal>reptabla_separa_ubicacion</literal></term>
+<listitem><para> Separar departamento y municipio en columas aparte</para></listitem></varlistentry>
 <varlistentry><term><literal>receptor_correo</literal></term>
 <listitem><para> Dirección de correo a la cual enviar mensajes cifrados.</para></listitem></varlistentry>
 <varlistentry><term><literal>emisor_correo</literal></term>

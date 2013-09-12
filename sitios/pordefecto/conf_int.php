@@ -57,6 +57,20 @@ $GLOBALS['ancho-tabla'] = "78%";
  */
 $GLOBALS['reporte_indenta_victimas'] = true;
 
+/** Evitar mostrar año de nacimiento en reporte tabla
+ * @global string $GLOBALS['reptabla_nonacimiento']
+ */
+$GLOBALS['reptabla_nonacimiento'] = false;
+
+/** Evitar mostrar categorias de agresiones junto a víctima en reporte tabla
+ * @global string $GLOBALS['reptabla_noagresion']
+ */
+$GLOBALS['reptabla_noagresion'] = false;
+
+/** Separar departamento y municipio en columas aparte
+ * @global string $GLOBALS['reptabla_separa_ubicacion']
+ */
+$GLOBALS['reptabla_separa_ubicacion'] = false;
 
 
 /** Dirección de correo a la cual enviar mensajes cifrados.

@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
+	<varlistentry><term>Versión 1.2b1 (Sep.2013)</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem><para>
+Añadidas variable de configuración para controlar presentación de 
+reporte tabla: $GLOBALS['reptabla_nonacimiento'], 
+$GLOBALS['reptabla_noagresion'] y
+$GLOBALS['reptabla_separa_ubicacion'] (que separa ubicación en 2 columnas para
+municipio y departamento).
+					</para></listitem>
+					<listitem><para>
+					</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
 	<varlistentry><term>Versión 1.2a1 (Ago.2013)</term>
 		<listitem>
 			<para><itemizedlist>
