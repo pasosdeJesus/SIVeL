@@ -520,7 +520,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
         $r = "";
         while ($dcombatiente->fetch()) {
             $r .= $sep . trim($dcombatiente->nombre);
-            $r .= "\n    ".$GLOBALS['etiqueta']['resagresion'] . ": ";
+            $r .= "\n    ".$GLOBALS['etiqueta']['id_resagresion'] . ": ";
             $dresultado = $dcombatiente->getLink('id_resagresion');
             $r .= $dresultado->nombre;
             $dresultado = $dcombatiente->getLink('id_resagresion');
