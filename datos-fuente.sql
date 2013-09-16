@@ -1,14 +1,14 @@
--- Datos para tablas básicas
--- Información sobre fuentes tomada del Banco de 
+-- Datos para tablas bÃ¡sicas
+-- InformaciÃ³n sobre fuentes tomada del Banco de 
 -- Datos de Derechos Humanos y Violencia Politica.
--- Dominio público. 2004. Sin garantías.
+-- Dominio pÃºblico. 2004. Sin garantÃ­as.
 
-SET client_encoding = 'LATIN1';
+SET client_encoding = 'UTF8';
 
 -- ffrecuente
 
 
-INSERT INTO ffrecuente(id, nombre, tfuente, fechacreacion) VALUES (0,'SIN INFORMACIÓN','Indirecta', '2001-01-01');
+INSERT INTO ffrecuente(id, nombre, tfuente, fechacreacion) VALUES (0,'SIN INFORMACIÃ“N','Indirecta', '2001-01-01');
 INSERT INTO ffrecuente(id, nombre, tfuente, fechacreacion) VALUES (1,'T - EL TIEMPO','Indirecta', '2001-01-01');
 INSERT INTO ffrecuente(id, nombre, tfuente, fechacreacion) VALUES (2,'E - EL ESPECTADOR','Indirecta', '2001-01-01');
 INSERT INTO ffrecuente(id, nombre, tfuente, fechacreacion) VALUES (3,'C - EL COLOMBIANO','Indirecta', '2001-01-01');

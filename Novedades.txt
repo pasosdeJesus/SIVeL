@@ -1,25 +1,63 @@
 Apéndice A. Novedades
 
-   Versión 1.2a1 (May.2012)
+   Versión 1.2a1 (Ago.2013)
 
-          + Para usuarios finales: Activado Soporte de Idiomas Nativos y
-            codificación UTF8. Permite especificar al usuario el idioma
-            que prefiere para la interfaz, en el momento hay traducciones
-            a español e inglés. En consulta detallada en campos de texto
-            (como nombre de víctima) se específica cualquiera con *.
-            Activada cotejación en español, el ordenamiento ahora
-            corresponde al del español (por ejemplo en tablas básicas).
-            Activada búsqueda completa de textos ignorando mayúsculas,
+          + Modulo nuevo desplazamiento para registrar desplazamiento.
+            Requiere que en el caso se registren dos o más ubicaciones por
+            donde se han desplazado las víctimas. Agradecemos al SJR
+            Colombia por financiar este desarrollo de dominio público.
+          + Modulo experimental mezcla para mezclar casos. Ayuda a mezclar
+            dos casos identificados por sus códigos o permite elegir 2
+            casos entre un listado de posibles repetidos. Puede mezclar
+            bien uno en otro o bien crear un caso nuevo con el resultado
+            de la mezcla. Por ser experimental se recomienda examinar caso
+            resultante. Agradecemos a Reiniciar por financiar este
+            desarrollo de dominio público.
+          + Usabilidad: agrega automáticamente latitud y longitud al
+            elegir departamento o municipio en pestaña Ubicación; control
+            AJAX más eficiente para elegir departamento, municipio y clase
+            (por ejemplo en Consulta Web o en pestañas Ubicación y Víctima
+            Individual); permite especificar edad actual de una víctima,
+            autocompleta año de nacimiento, edad en hecho, edad actual y
+            rango de edad cuando uno de estos se cambia; alerta para
+            reportar errores de validación.
+          + Internacionalización y localización: Activado Soporte de
+            Idiomas Nativos y codificación UTF8. Permite especificar al
+            usuario el idioma que prefiere para la interfaz, en el momento
+            hay traducciones a español e inglés. Activada cotejación en
+            español, el ordenamiento ahora corresponde al del español (por
+            ejemplo en reporte revista por localización o en tablas
+            básicas).
+          + Activada búsqueda de textos completos ignorando mayúsculas,
             minúsculas y tildes, usable al buscar por nombre, por título y
-            por descripción en consulta web.
+            por descripción en consulta web. En consulta detallada en
+            campos de texto (como nombre de víctima) se específica
+            cualquiera con *.
+          + Módulo de georeferenciación en Google Maps convertido a la
+            versión 3 del API.
           + Administradores: Se dividió el archivo de configuración en una
             parte para servidor (e.g base de datos y módulos) y otra para
             interfaz. Activa PostGIS al crear base de datos. Configuración
-            más sencilla de módulos. Basta agregar el módulo en la
+            más sencilla de módulos, basta agregar el módulo en la
             variable modulos del archivo de configuración del sitio y
             desde el menú principal elegir Otros->Actualizar.
-          + Para desarrolladores: Afinado para PHP 5.3. Base de datos debe
-            estar en UTF-8. Salida enviada al navegador en UTF-8. Fuentes
-            en UTF-8. Estándares de nomenclatura SQL.
+          + Desarrolladores: Fuentes migradas a github. Afinado para PHP
+            5.3. Base de datos debe estar en UTF-8. Salida enviada al
+            navegador en UTF-8. Fuentes en UTF-8. Estándares de
+            nomenclatura SQL y Javascript. Archivo de comandos
+            herram/creatabla.sh que genera automaticamente estructura de
+            tabla básica y/o a partir de la estructura en estructura.sql
+            genera la clase en el directorio DataObject y los datos en
+            DataObjects/estructura-dataobject.ini y
+            DataObjects/estructura-dataobject.links.ini. Clase
+            DataObject/Multitabla para extender y facilitar
+            personalizaciones con un control de multitabla (similar al de
+            familiar en Victima Individual). Clase PagBaseMultiplePartes
+            para extender y facilitar creación de pestañas con partes
+            provenientes de diversos DataObject. Se actualiza traducción
+            de fuentes con herram/intl.sh. Para personalizaciones que se
+            desarrollen en diferentes entornos puede especificarse
+            configuración particular a cada entorno en conf-local.php,
+            conf_int-local.php y vardb-local.sh.
 
    El historial de la versión 1.1 puede verse en el manual de esa versión.

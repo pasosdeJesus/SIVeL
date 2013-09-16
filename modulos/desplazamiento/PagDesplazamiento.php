@@ -16,10 +16,10 @@
 
 require_once 'PagBaseMultiple.php';
 require_once 'ResConsulta.php';
+require_once 'PagUbicacion.php';
 require_once 'HTML/QuickForm/Action.php';
 
 require_once 'DataObjects/Acreditacion.php';
-require_once 'DataObjects/Causadesp.php';
 require_once 'DataObjects/Clasifdesp.php';
 require_once 'DataObjects/Declaroante.php';
 require_once 'DataObjects/Desplazamiento.php';
@@ -31,7 +31,7 @@ require_once 'DataObjects/Tipodesp.php';
 /**
  * Página Desplazamiento
  * Ver documentación de funciones en clase base.
- * @package SIVeL
+ *
  * @category SIVeL
  * @package  SIVeL
  * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
@@ -74,11 +74,19 @@ class PagDesplazamiento extends PagBaseMultiple
         );
     }
 
-    function elimina(&$values)
+
+    /**
+     * Elimina de base de datos el registro actual.
+     *
+     * @param array &$valores Valores enviados por formulario.
+     *
+     * @return null
+     */
+    function elimina(&$valores)
     {
         $this->iniVar();
         if (isset($this->bdesplazamiento->_do->fechaexpulsion)) {
-            $this->eliminaDesplazamiento($this->bdesplazamiento->_do, true);
+            $this->eliminaDesplazamiento($this->bdesplazamiento->_do);
             $_SESSION[$this->pref.'_total']--;
         }
     }
@@ -88,16 +96,12 @@ class PagDesplazamiento extends PagBaseMultiple
      * Inicializa variables y datos de la pestaña.
      * Ver documentación completa en clase base.
      *
-     * @param array $apar Arreglo de parametros. Vacio aqui.
+     * @param array $aper Arreglo de parametros. Vacio aqui.
      *
      * @return handle Conexión a base de datos
      */
     function iniVar($aper = null)
     {
-        $id_persona = null;
-        if (isset($aper) && count($aper) == 1) {
-            $id_persona = $aper[0];
-        }
         $ddesplazamiento =& objeto_tabla('desplazamiento');
 
         $db =& $ddesplazamiento->getDatabaseConnection();
@@ -107,9 +111,7 @@ class PagDesplazamiento extends PagBaseMultiple
             die("Bug: idcaso no debería ser null");
         }
 
-        $idp = array();
-        $ndp = array();
-        $edp = array();
+        $idf = array();
         $indid = -1;
         $tot = PagDesplazamiento::extrae_desplazamientos($idcaso, $db, $idf);
 
@@ -120,8 +122,8 @@ class PagDesplazamiento extends PagBaseMultiple
         ) {
             $ddesplazamiento->fechaexpulsion = null;
         } else {
-            $ddesplazamiento->fechaexpulsion = 
-                $idf[$_SESSION[$this->pref.'_pag']];
+            $ddesplazamiento->fechaexpulsion 
+                = $idf[$_SESSION[$this->pref.'_pag']];
             $ddesplazamiento->id_caso = $idcaso;
             $ddesplazamiento->find();
             $ddesplazamiento->fetch();
@@ -143,7 +145,6 @@ class PagDesplazamiento extends PagBaseMultiple
      * Ver documentación completa en clase base.
      *
      * @param string $nomForma Nombre
-     * @param string $mreq     Mensaje de dato requerido
      *
      * @return void
      */
@@ -152,7 +153,17 @@ class PagDesplazamiento extends PagBaseMultiple
         parent::PagBaseMultiple($nomForma);
         $this->titulo  = _('Desplazamiento');
         $this->tcorto  = _('Desplazamiento');
-
+        if (isset($GLOBALS['etiqueta']['Desplazamiento'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Desplazamiento'];
+            $this->tcorto = $GLOBALS['etiqueta']['Desplazamiento'];
+        }
+        $this->addAction(
+            'departamentodecl', new CamDepartamento('departamentodecl')
+        );
+        $this->addAction(
+            'municipiodecl', 
+            new CamMunicipio('departamentodecl', 'municipiodecl')
+        );
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
     }
@@ -175,11 +186,26 @@ class PagDesplazamiento extends PagBaseMultiple
             ? $this->bdesplazamiento->_do->fechaexpulsion : '';
         $this->addElement('');
 
-        $_SESSION['pagDesplazamiento_id'] = $vv;
+        list($dep, $mun, $cla) = PagUbicacion::creaCampos(
+            $this, 'departamentodecl', 'municipiodecl', 'clasedecl'
+        );
+        $gr[] =& $dep;
+        $gr[] =& $mun;
 
+        $_SESSION['pagDesplazamiento_id'] = $vv;
+        $this->addGroup(
+            $gr, 'sitiodeclaracion', _('Declaro en'), '&nbsp;', false
+        );
+        PagUbicacion::modCampos(
+            $db, $this, 'departamentodecl', 'municipiodecl', null,
+            $this->bdesplazamiento->_do->departamentodecl, 
+            $this->bdesplazamiento->_do->municipiodecl, 
+            null
+        );
         $this->bdesplazamiento->createSubmit = 0;
         $this->bdesplazamiento->useForm($this);
         $this->bdesplazamiento->getForm($this);
+
     }
 
     /**
@@ -196,21 +222,61 @@ class PagDesplazamiento extends PagBaseMultiple
     {
         $vv = isset($this->bdesplazamiento->_do->fechaexpulsion) ?
             $this->bdesplazamiento->_do->fechaexpulsion : '';
+
+        valores_pordefecto_form($this->bdesplazamiento->_do, $this);
+        if ($vv == '') {
+            $dcaso = objeto_tabla('caso');
+            $dcaso->id = $_SESSION['basicos_id'];
+            $dcaso->find();
+            $dcaso->fetch(1);
+            $pf = explode('-', $dcaso->fecha);
+            $f =& $this->getElement('fechaexpulsion');
+            $f->setValue(array('d' => $pf[2], 'M' => $pf[1], 'Y' => $pf[0]));
+            $f =& $this->getElement('fechallegada');
+            $f->setValue(
+                array('d' => $pf[2],
+                'M' => $pf[1],
+                'Y' => $pf[0])
+            );
+        } else {
+            $e =& $this->getElement('sitiodeclaracion');
+            $dep =& $e->_elements[0];
+            $mun =& $e->_elements[1];
+            PagUbicacion::valoresUbicacion(
+                $this, $this->bdesplazamiento->_do->departamentodecl,
+                $this->bdesplazamiento->_do->municipiodecl, null,
+                $dep, $mun, null, 'departamentodecl', 'municipiodecl'
+            );
+        }
     }
 
-    function eliminaDesplazamiento($ddesplazamiento, $elimProc = false)
+    /**
+     * Elimina un registro 
+     *
+     * @param object $ddesplazamiento DataObject
+     * 
+     * @return  void
+     */
+    function eliminaDesplazamiento($ddesplazamiento)
     {
         assert($ddesplazamiento != null);
         assert($ddesplazamiento->fechaexpulsion != null);
         $db =& $ddesplazamiento->getDatabaseConnection();
-        $q = "DELETE FROM desplazamiento WHERE fechaexpulsion='{$ddesplazamiento->fechaexpulsion}' AND id_caso={$_SESSION['id_basico']}";
+        $q = "DELETE FROM desplazamiento WHERE fechaexpulsion=' "
+            . "{$ddesplazamiento->fechaexpulsion}' "
+            . " AND id_caso={$_SESSION['basicos_id']}";
         $result = hace_consulta($db, $q);
-        if ($elimProc) {
-        }
     }
 
-    /** eliminaDep($db, $idcaso) elimina victimas de la base $db presentados
-            en este formulario, que dependen del caso $idcaso */
+    /**
+     * eliminaDep($db, $idcaso) elimina victimas de la base $db presentados 
+     * en este formulario, que dependen del caso $idcaso 
+     *
+     * @param object &$db    Conexión a base de datos
+     * @param int    $idcaso Id del Caso.
+     *
+     * @return void
+     */
     static function eliminaDep(&$db, $idcaso)
     {
         assert($db != null);
@@ -226,12 +292,17 @@ class PagDesplazamiento extends PagBaseMultiple
     }
 
     /**
-    * @param procAc es true si y solo si debe añadirse Acción
-    */
+     * Procesa
+     *
+     * @param array &$valores del formulario
+     *
+     * @return bool V sii pudo procesar
+     */
     function procesa(&$valores)
     {
-        $valores['fechaexpulsion'] = 
-            arr_a_fecha($valores['fechaexpulsion'], true);
+        $fechaex = arr_a_fecha($valores['fechaexpulsion'], true); 
+        $fechall = arr_a_fecha($valores['fechallegada'], true); 
+
         $es_vacio = (!isset($valores['expulsion'])
                 || $valores['expulsion'] === ''
             );
@@ -243,19 +314,52 @@ class PagDesplazamiento extends PagBaseMultiple
         if (!$this->validate() ) {
             return false;
         }
+        if ($fechall < $fechaex) {
+            error_valida(
+                _('Fecha de llegada no puede ser anterior a la de expulsión'),
+                $valores
+            );
+            return false;
+        }
+
         if (in_array(31, $_SESSION['opciones'])
             && !in_array(21, $_SESSION['opciones'])
         ) {
             return true;
         }
 
-
-        $db = $this->iniVar(array((int)$valores['fechaexpulsion']));
+        $db = $this->iniVar();
         $dcaso = objeto_tabla('caso');
         if (PEAR::isError($dcaso)) {
             die($dcaso->getMessage());
         }
+        $idcaso = $_SESSION['basicos_id'];
+        $q = "SELECT COUNT(*) FROM desplazamiento WHERE id_caso='$idcaso' "
+            . " AND fechaexpulsion='$fechaex';";
+        $this->bdesplazamiento->useMutators = true;
+        $nr = $db->getOne($q);
+        if ($this->bdesplazamiento->_do->fechaexpulsion == null 
+            || $this->bdesplazamiento->_do->fechaexpulsion == ''
+        ) {
+            if ($nr > 0) {
+                error_valida(
+                    _('Ya había desplazamiento con esa fecha de expulsión'),
+                    $valores
+                );
+                return false;
+            }
+        }
 
+        if ($nr == 0) {
+            $this->bdesplazamiento->forceQueryType(
+                DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
+            );
+        } else {
+            $this->bdesplazamiento->forceQueryType(
+                DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEUPDATE
+            );
+        }
+ 
         $ret = $this->process(
             array(&$this->bdesplazamiento, 'processForm'), false
         );
@@ -263,29 +367,34 @@ class PagDesplazamiento extends PagBaseMultiple
             die($ret->getMessage());
         }
 
-        caso_funcionario($_SESSION['basicos_id']);
+        caso_funcionario($idcaso);
         return  $ret;
     }
 
+    /**
+     * Prepara consulta SQL para buscar datos de este formulario.
+     * Ver documentación completa en clase base.
+     *
+     * @param string &$w       Consulta que se construye
+     * @param string &$t       Tablas
+     * @param object &$db      Conexión a base de datos
+     * @param object $idcaso   Identificación del caso
+     * @param string &$subcons Subconsulta
+     *
+     * @return void
+     * @see PagBaseSimple
+     */
     function datosBusqueda(&$w, &$t, &$db, $idcaso, &$subcons)
     {
 
     }
 
-    function handle($action)
-    {
-//        echo "handle($action)";
-//        print_r($this->_actions);
-//        die("s");
-        parent::handle($action);
-    }
-
     /** Extrae desplazamientos de un caso y retorna su información en 
      *  vectores
      *
-     *  @param integer $idcaso  Id. del Caso
-     *  @param object  &$db     Conexión a BD
-     *  @param array   &$idf    Para retornar fechas
+     *  @param integer $idcaso Id. del Caso
+     *  @param object  &$db    Conexión a BD
+     *  @param array   &$idf   Para retornar fechas
      *
      *  @return integer Cantidad de desplazamientos retornados
      **/
@@ -306,6 +415,8 @@ class PagDesplazamiento extends PagBaseMultiple
 
     /**
      * Llamada para inicializar variables globales
+     *
+     * @return void
      */
     static function act_globales()
     {
@@ -323,11 +434,6 @@ class PagDesplazamiento extends PagBaseMultiple
             $GLOBALS['menu_tablas_basicas'],
             'Desplazamiento', 'Tipos',
             'tipodesp', null
-        );
-        html_menu_agrega_submenu(
-            $GLOBALS['menu_tablas_basicas'],
-            'Desplazamiento', 'Causas',
-            'acreditacion', null
         );
         html_menu_agrega_submenu(
             $GLOBALS['menu_tablas_basicas'],

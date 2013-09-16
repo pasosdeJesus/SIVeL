@@ -31,8 +31,16 @@ $act = objeto_tabla('Actualizacionbase');
 $idac = 'rot-1';
 if (!aplicado($idac)) {
 
-    hace_consulta($db, "INSERT INTO opcion (id_opcion, descripcion, id_mama, nomid) VALUES ('53', 'Individuales con Rotulos de Rep. Cons.', '50', 'opcion?num=100')", false);
-    hace_consulta($db, "INSERT INTO opcion (id_opcion, descripcion, id_mama, nomid) VALUES ('54', 'Colectivas con Rotulos de Rep. Cons.', '50', 'opcion?num=101')", false);
+    hace_consulta(
+        $db, "INSERT INTO opcion (id_opcion, descripcion, id_mama, nomid) 
+        VALUES ('53', 'Individuales con Rotulos de Rep. Cons.', '50', 
+        'opcion?num=100')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO opcion (id_opcion, descripcion, id_mama, nomid) 
+        VALUES ('54', 'Colectivas con Rotulos de Rep. Cons.', '50', 
+        'opcion?num=101')", false
+    );
 
     aplicaact(
         $act, $idac, 'Opciones menu'

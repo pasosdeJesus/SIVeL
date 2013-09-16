@@ -67,19 +67,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>selectAndWait</td>
+	<td>select</td>
 	<td>id_departamento</td>
 	<td>label=ANTIOQUIA</td>
 </tr>
 <tr>
-	<td>selectAndWait</td>
+	<td>pause</td>
+	<td>2000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
 	<td>id_municipio</td>
 	<td>label=ABEJORRAL</td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>1500</td>
+	<td></td>
+</tr>
+<tr>
 	<td>select</td>
 	<td>id_clase</td>
-	<td>label=ABEJORRAL (CM)</td>
+	<td>label=ABEJORRAL</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -103,7 +113,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id_tipo_sitio</td>
+	<td>name=id_tsitio</td>
 	<td>label=URBANO</td>
 </tr>
 <tr>
@@ -113,7 +123,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>name=id_prensa</td>
+	<td>name=id_ffrecuente</td>
 	<td>label=B7 - BOYACA 7 DIAS</td>
 </tr>
 <tr>
@@ -138,7 +148,7 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>ubicacion_fisica</td>
+	<td>ubicacionfisica</td>
 	<td>ubig</td>
 </tr>
 <tr>
@@ -158,12 +168,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>ubicacion_fisica</td>
+	<td>ubicacionfisica</td>
 	<td>ubi</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>tipo_fuente</td>
+	<td>name=tfuente</td>
 	<td>label=Directa</td>
 </tr>
 <tr>
@@ -188,7 +198,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id_p_responsable</td>
+	<td>name=id_presponsable</td>
 	<td>label=ACCU</td>
 </tr>
 <tr>
@@ -247,24 +257,29 @@
 	<td></td>
 </tr>
 <tr>
-	<td>selectAndWait</td>
+	<td>select</td>
 	<td>id_departamento</td>
 	<td>label=ARAUCA</td>
 </tr>
 <tr>
-	<td>selectAndWait</td>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
 	<td>id_municipio</td>
 	<td>label=ARAUCA</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>tipodocumento</td>
 	<td>label=Cédula de Extranjería</td>
-</tr>
-<tr>
-	<td>type</td>
-	<td>numerodocumento</td>
-	<td>333</td>
 </tr>
 <tr>
 	<td>type</td>
@@ -293,7 +308,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id_rango_edad</td>
+	<td>name=id_rangoedad</td>
 	<td>label=SIN INFORMACIÓN</td>
 </tr>
 <tr>
@@ -303,7 +318,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id_sector_social</td>
+	<td>id_sectorsocial</td>
 	<td>label=EMPRESARIO</td>
 </tr>
 <tr>
@@ -313,7 +328,7 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>id_vinculo_estado</td>
+	<td>id_vinculoestado</td>
 	<td>label=JUNTAS ADMINIST. LOCALES</td>
 </tr>
 <tr>
@@ -343,12 +358,12 @@
 </tr>
 <tr>
 	<td>type</td>
-	<td>personas_aprox</td>
+	<td>personasaprox</td>
 	<td>4</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>id_organizacion_armada</td>
+	<td>name=organizacionarmada</td>
 	<td>label=SIJIN</td>
 </tr>
 <tr>
@@ -358,17 +373,17 @@
 </tr>
 <tr>
 	<td>addSelection</td>
-	<td>id_rango[]</td>
+	<td>name=id_rangoedad[]</td>
 	<td>label=De 0 a 15 Años</td>
 </tr>
 <tr>
 	<td>addSelection</td>
-	<td>id_sector[]</td>
+	<td>id_sectorsocial[]</td>
 	<td>label=EMPRESARIO</td>
 </tr>
 <tr>
 	<td>addSelection</td>
-	<td>id_vinculo_estado[]</td>
+	<td>id_vinculoestado[]</td>
 	<td>label=ASAMBLEA DEPARTAMENTAL</td>
 </tr>
 <tr>
@@ -403,8 +418,8 @@
 </tr>
 <tr>
 	<td>addSelection</td>
-	<td>victimas[]</td>
-	<td>label=nombre apellido</td>
+	<td>name=victimas[]</td>
+	<td>label=NOMBRE APELLIDO</td>
 </tr>
 <tr>
 	<td>addSelection</td>
@@ -478,22 +493,22 @@
 </tr>
 <tr>
 	<td>select</td>
-	<td>gr_confiabilidad</td>
+	<td>name=grconfiabilidad</td>
 	<td>label=Media</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>gr_esclarecimiento</td>
+	<td>gresclarecimiento</td>
 	<td>label=Alto</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>gr_impunidad</td>
+	<td>grimpunidad</td>
 	<td>label=Nula</td>
 </tr>
 <tr>
 	<td>select</td>
-	<td>gr_informacion</td>
+	<td>grinformacion</td>
 	<td>label=Total</td>
 </tr>
 <tr>

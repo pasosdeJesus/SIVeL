@@ -1,7 +1,9 @@
 <!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
   <title>Importa Relato</title><link rel = "stylesheet" type = "text/css" href = "estilo.css" />
 <!--Fuentes de dominio publico. Sin garantias. 2004-->
 <!-- http://sivel.sf.net -->
@@ -40,7 +42,7 @@ Memo:
 T1000. tipo1 - supra1 - cat1
 
 Presunto Responsable: presuntos r1: &nbsp;&nbsp;T1000
-&nbsp;&nbsp;&nbsp;&nbsp;nombres apellidos - sectorsocial1 - profesion1 3 hijos. Filiación Política: filiacion1.   Organización Social: organizacion1
+&nbsp;&nbsp;&nbsp;&nbsp;NOMBRES APELLIDOS - sectorsocial1 - profesion1 3 hijos. Filiación Política: filiacion1.   Organización Social: organizacion1
 
 
 

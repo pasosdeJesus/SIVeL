@@ -18,6 +18,7 @@
 /**
  * Consulta web.
  */
+
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
 require_once 'HTML/QuickForm/Controller.php';
@@ -71,9 +72,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         if (PEAR::isError($d)) {
             die($d->getMessage());
         }
-        $fb =& DB_DataObject_FormBuilder::create($d);
         $db =& $d->getDatabaseConnection();
-
         $pFini      = var_req_escapa('fini', $db);
         $pFfin      = var_req_escapa('ffin', $db);
         $pFiini     = var_req_escapa('fiini', $db);
@@ -227,6 +226,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         }
 
 
+        $oconv = array(); // Campos resultado además de conv
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
             list($n, $c, $o) = $tab;
             if (($d = strrpos($c, "/"))>0) {
@@ -236,8 +236,8 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 call_user_func_array(
                     array($c, 'consultaWebCreaConsulta'),
                     array(
-                        $db, $pMostrar, &$where, &$tablas,
-                        &$pOrdenar, &$campos
+                        &$db, $pMostrar, &$where, &$tablas,
+                        &$pOrdenar, &$campos, &$oconv
                     )
                 );
             } else {
@@ -254,7 +254,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                         $f,
                         array(
                             $db, $pMostrar, &$where, &$tablas,
-                            &$pOrdenar, &$campos, $page
+                            &$pOrdenar, &$campos, &$oconv, $page
                         )
                     );
                 } else {
@@ -281,20 +281,20 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 $db, $where, "ubicacion.id_departamento", $pIdDepartamento
             );
             consulta_and($db, $where, "ubicacion.id_municipio", $pIdMunicipio);
-            $tablas .= ", ubicacion";
+            agrega_tabla($tablas, 'ubicacion');
         } else if ($pIdDepartamento != '') {
             consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
             consulta_and(
                 $db, $where, "ubicacion.id_departamento", $pIdDepartamento
             );
-            $tablas .= ", ubicacion";
+            agrega_tabla($tablas, 'ubicacion');
         }
         if ($pConcoordenadas) {
             consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
             consulta_and_sinap(
                 $where, "ubicacion.latitud", "NULL", " IS NOT "
             );
-            $tablas .= ", ubicacion";
+            agrega_tabla($tablas, 'ubicacion');
         }
 
         if ($pPresponsable != '') {
@@ -306,7 +306,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 $db, $where, "caso_presponsable.id_presponsable",
                 $pPresponsable
             );
-            $tablas .= ', caso_presponsable';
+            agrega_tabla($tablas, 'caso_presponsable');
         }
 
 
@@ -314,7 +314,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             && ($pUsuario != '' || (isset($pFiini['Y']) && $pFiini['Y'] != '')
             || (isset($pFifin['Y']) && $pFifin['Y'] != ''))
         ) {
-            $tablas .= ", caso_funcionario";
+            agrega_tabla($tablas, 'caso_funcionario');
             consulta_and_sinap($where, "caso_funcionario.id_caso", "caso.id");
         }
         if (in_array(42, $page->opciones)
@@ -341,11 +341,11 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         }
 
         if ($pNomvic != "") {
-            $tablas .= ", persona";
+            agrega_tabla($tablas, 'persona');
             consulta_and_sinap($where, "victima.id_persona", "persona.id");
         }
         if ($pNomvic != "" || $pSsocial != "") {
-            $tablas .= ", victima";
+            agrega_tabla($tablas, 'victima');
             consulta_and_sinap($where, "victima.id_caso", "caso.id");
         }
         if ($pSsocial != '') {
@@ -372,6 +372,10 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             $q .= $sep . str_replace("_", ".", $k);
             $sep = ", ";
         }
+        foreach ($oconv as $k) {
+            $q .= $sep . str_replace("_", ".", $k);
+        }
+
         $q .= " FROM " . $tablas
             ."  WHERE caso.id<>'" . $GLOBALS['idbus'] . "'" ;
         if ($where != "") {
@@ -399,9 +403,8 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             }
         }
 
-
         $result = hace_consulta($db, $q);
-
+        sin_error_pear($result);
         foreach ($GLOBALS['cw_ncampos'] as $idc => $dc) {
             if (isset($_REQUEST[$idc]) && $_REQUEST[$idc] == 1) {
                 $campos[$idc] = $dc;
@@ -461,9 +464,6 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $this->opciones = $opciones;
         $this->HTML_QuickForm_Page('consultaWeb', 'post', '_self', null);
 
-        $this->addAction('id_departamento', new CamDepartamento());
-        $this->addAction('id_municipio', new CamMunicipio());
-
         $this->addAction('consulta', new AccionConsultaWeb());
     }
 
@@ -517,59 +517,26 @@ class ConsultaWeb extends HTML_QuickForm_Page
             'select', 'id_departamento',
             _('Departamento') . ': ', array()
         );
-        $options= array('' => '') + htmlentities_array(
-            $db->getAssoc(
-                "SELECT  id, nombre FROM departamento " .
-                "ORDER BY nombre"
-            )
-        );
-        $dep->loadArray($options);
-        $dep->updateAttributes(
-            array('onchange' =>
-            'envia(\'consultaWeb:id_departamento\')'
-            )
-        );
-
         $mun =& $this->addElement(
             'select', 'id_municipio',
             _('Municipio') .': ', array()
-        );
-        $mun->updateAttributes(
-            array('onchange' =>
-            'envia(\'consultaWeb:id_municipio\')'
-            )
         );
 
         $cla =& $this->addElement(
             'select', 'id_clase',
             _('Centro Poblado') . ': ', array()
         );
-
-        $ndepartamento = ret_id_departamento($this);
-        if ($ndepartamento != null) {
-            $dep->setValue($ndepartamento);
-            $options= array('' => '') + htmlentities_array(
-                $db->getAssoc(
-                    "SELECT  id, nombre FROM municipio " .
-                    "WHERE id_departamento='$ndepartamento' ORDER BY nombre"
-                )
-            );
-            $mun->loadArray($options);
-            $cla->loadArray(array());
-        }
-        $nmunicipio = ret_id_municipio($this);
-        if ($nmunicipio != null && $ndepartamento != null) {
-            $mun->setValue($nmunicipio);
-            $options = array('' => '') + htmlentities_array(
-                $db->getAssoc(
-                    "SELECT id, nombre FROM clase " .
-                    "WHERE id_departamento='$ndepartamento' AND " .
-                    "id_municipio='$nmunicipio' ORDER BY nombre"
-                )
-            );
-            $cla->loadArray($options);
-        }
-
+        $vdep = isset($this->_submitValues['id_departamento']) ?
+           $this->_submitValues['id_departamento'] : null;
+        $vmun = isset($this->_submitValues['id_municipio']) ?
+           $this->_submitValues['id_municipio'] : null;
+        $vcla = isset($this->_submitValues['id_clase']) ?
+           $this->_submitValues['id_clase'] : null;
+        PagUbicacion::modCampos(
+            $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
+            $vdep, $vmun, $vcla
+        );
+         
         $sel =& $this->addElement(
             'text', 'nomvic',
             _('Nombre o apellido de la víctima')
@@ -665,7 +632,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         );
         $sel->loadArray($options);
 
-        $sel =& $this->addElement( 'text', 'descripcion', _('Descripción'));
+        $sel =& $this->addElement('text', 'descripcion', _('Descripción'));
         $sel->setSize(80);
 
 
@@ -760,6 +727,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
                 $t =& $x;
             }
         }
+        $r = "";
         if (isset($GLOBALS['consultaweb_ordenarpor'])) {
             foreach ($GLOBALS['consultaweb_ordenarpor'] as $k => $f) {
                 if (is_callable($f)) {
@@ -852,10 +820,14 @@ class ConsultaWeb extends HTML_QuickForm_Page
             }
         }
 
-        $x =& $this->createElement('radio', 'mostrar', 'csv', _('CSV'), 'csv');
-        $ae[] =&  $x;
-        if ($pMostrar == 'csv') {
-            $t =& $x;
+        if (!isset($GLOBALS['consultaweb_sin_csv'])) {
+            $x =& $this->createElement(
+                'radio', 'mostrar', 'csv', _('CSV'), 'csv'
+            );
+            $ae[] =&  $x;
+            if ($pMostrar == 'csv') {
+                $t =& $x;
+            }
         }
 
         $this->addGroup($ae, null, _('Forma de presentación'), '&nbsp;', false);

@@ -7,15 +7,15 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2011 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2011 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $Id: victimasrep.php,v 1.1 2012/01/11 17:41:30 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
 /**
- * Detecta víctimas repetidas
+ * Detecta vÃ­ctimas repetidas
  */
 
 require_once "aut.php";
@@ -33,27 +33,43 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
     // @codingStandardsIgnoreEnd
 }
 
-function hastapunto($s) {
+/**
+ * Retorna subcadena izquierda de $s hasta el punto
+ *
+ * @param string $s Cadena
+ *
+ * @return Prfijo izquierdo de z hasta .
+ */
+function hastapunto($s) 
+{
     $p = strpos($s, '.');
     $r = $s;
-    if ($p !== FALSE) {
+    if ($p !== false) {
         $r = substr($s, 0, $p); 
     }
     return $p;
 }
 
+/**
+ * Punto de entrada
+ *
+ * @param string $dsn URl de la base
+ *
+ * @return void
+ */
 function muestra($dsn)
 {
     $aut_usuario = "";
     $db = autentica_usuario($dsn, $accno, $aut_usuario, 31);
+    encabezado_envia("ComparaciÃ³n y mezcla de 2 casos");
 
     $nid = 0;
     $id1 = 0;
     $id2 = 0;
     $err = "";
-    foreach($_POST as $l => $v) {
+    foreach ($_POST as $l => $v) {
         if (substr($l, 0, 2) == 'id') {
-            if  ($nid == 0) {
+            if ($nid == 0) {
                 $id1 = (int)substr($l, 2);
             } elseif ($nid == 1) {
                 $id2 = (int)substr($l, 2);
@@ -75,7 +91,7 @@ function muestra($dsn)
         $id2 = $t;
     }
     echo "Se unir&aacute;n fuentes y anexos de los dos casos";
-    $r = array('caso_id' => array('Código', $id1, $id2, 3)); 
+    $r = array('caso_id' => array('CÃ³digo', $id1, $id2, 3)); 
     // 'Id' => array('Etiqueta', 'Valor 1', 'Valor 2', 'preferido 1 or 2')
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
         list($n, $c, $o) = $tab;
@@ -84,7 +100,7 @@ function muestra($dsn)
         }
         //echo "OJO $n $c $o<br>";
         if (is_callable(array($c, 'compara'))) {
-            #echo "OJO compara<br>";
+            //echo "OJO compara<br>";
             call_user_func_array(
                 array($c, 'compara'),
                 array(&$db, &$r, $id1, $id2, null)
@@ -98,8 +114,9 @@ function muestra($dsn)
     echo "<input type='hidden' name='id1' value='$id1'/>";
     echo "<input type='hidden' name='id2' value='$id2'/>";
     echo "<table border='1'>";
-    echo "<tr><th>Dato</th><th colspan='2'>Caso 1</th><th colspan='2'>Caso 2</th><th>Nuevo</th></tr>";
-    foreach($r as $i => $v) {
+    echo "<tr><th>Dato</th><th colspan='2'>Caso 1<"
+        . "/th><th colspan='2'>Caso 2</th><th>Nuevo</th></tr>";
+    foreach ($r as $i => $v) {
         $check1 = "checked='checked'";
         $check2 = "";
         $check3 = "";
@@ -110,9 +127,9 @@ function muestra($dsn)
             $check2 = "checked='checked'";
             $check1 ="";
         }
-        $nc_html = htmlentities($v[0]);
-        $v1_html = htmlentities($v[1]);
-        $v2_html = htmlentities($v[2]);
+        $nc_html = htmlentities($v[0], ENT_COMPAT, 'UTF-8');
+        $v1_html = htmlentities($v[1], ENT_COMPAT, 'UTF-8');
+        $v2_html = htmlentities($v[2], ENT_COMPAT, 'UTF-8');
         if ($nc_html == "C&oacute;digo") {
             $v1_html = enlace_edita($v[1]);
             $v2_html = enlace_edita($v[2]);

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="activando-modulos">
+	<title>Activar módulos</title>
+	<para>
+		SIVeL &PRY-VERSION; incluye diversos módulos 
+		que puede activar típicamente editando el archivo
+		<filename>conf.php</filename> del sitio al que agregará
+		el módulo y ejecutando el script 
+		<literal>actualiza.php</literal> 
+		como cuando hace actualizaciones 
+		(ver <xref linkend="actualizacion-sivel"></xref>).
+	</para>
+	<para>
+		Los módulos disponibles son:
+		<orderedlist>
+			<listitem>
+				<para><emphasis>anexos</emphasis> Para anexar 
+					archivos a casos. 
+					Directorio 
+					<filename>modulos/anexos</filename></para>
+			</listitem>
+			<listitem>
+				<para><emphasis>belicas</emphasis> Para 
+					registrar acciones bélicas y generar 
+					reportes de estas. Directorio 
+					<filename>modulos/anexos</filename></para>
+			</listitem>
+			<listitem>
+				<para><emphasis>estrotulos</emphasis> 
+					Estadísticas por rótulos del reporte 
+					consolidado. Directorio 
+					<filename>modulos/anexos</filename></para>
+			</listitem>
+			<listitem>
+				<para><emphasis>etiquetas</emphasis> Poner 
+					etiquetas y observaciones a casos. 
+					Directorio <filename>modulos/etiquetas</filename></para>
+			</listitem>
+			<listitem>
+				<para><emphasis>mapag</emphasis> Georeferenciación 
+					sobre mapas de Googlemaps.</para>
+			</listitem>
+			<listitem>
+				<para><emphasis>segjudicial</emphasis> Para 
+					hacer seguimiento judicial a casos. 
+					Directorio <filename>modulos/segjudicial</filename></para>
+			</listitem>
+
+		</orderedlist>
+	</para>
+	<para>
+		Vea instrucciones más detallas para cada módulo 
+		en el archivo <filename>Instala.txt</filename> ubicado 
+		en el directorio del módulo.
+	</para>
+
+</sect1>

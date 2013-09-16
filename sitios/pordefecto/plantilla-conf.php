@@ -21,18 +21,23 @@ require 'sitios/pordefecto/conf.php';
 // LAS POSIBLES OPCIONES DE CONFIGURACIÓN TOMELAS DE sitios/pordefecto/conf.php
 // ASÍ COMO DE LOS ARCHIVOS conf.php DE LOS MÓDULOS del directorio modulos/
 
+global $dbnombre;
 /** Nombre de base de datos */
 $dbnombre = "sivel12";
 
+global $dbusuario;
 /** Usuario del MBD */
 $dbusuario = "sivel";
 
+global $dbclave;
 /** Clave del usuario ante el MBD */
-$dbclave = "incocAcEd2";
+$dbclave = "super";
 
+global $dirserv;
 /** Directorio de fuentes en servidor web */
 $dirserv = "/htdocs/sivel/";
 
+global $dirsitio;
 /** Directorio del sitio relativo a $dirserv */
 $dirsitio = "sitios/sivel";
 
@@ -61,8 +66,14 @@ $GLOBALS['PREF_RELATOS'] = 'org';
  */
 $GLOBALS['derechos'] = 'Dominio Público';
 
+global $modulos;
 /** Módulos empleados (relativos a directorio con fuentes) */
 $modulos = "modulos/anexos modulos/etiquetas modulos/mapag";
+
+
+if (file_exists($_SESSION['dirsitio'] . '/conf-local.php')) {
+    include $_SESSION['dirsitio'] . '/conf-local.php';
+}
 
 require 'sitios/pordefecto/inibdmod.php';
 

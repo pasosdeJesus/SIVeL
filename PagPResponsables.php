@@ -188,7 +188,10 @@ class PagPResponsables extends PagBaseMultiple
         parent::PagBaseMultiple($nomForma);
         $this->titulo = _('Presuntos Responsables');
         $this->tcorto = _('P. Resp.');
-
+        if (isset($GLOBALS['etiqueta']['Presuntos Responsables'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Presuntos Responsables'];
+            $this->tcorto = $GLOBALS['etiqueta']['Presuntos Responsables'];
+        }
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
     }

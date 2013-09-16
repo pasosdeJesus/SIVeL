@@ -59,7 +59,7 @@ class DataObjects_Actocolectivo extends DB_DataObject_SIVeL
            'id_categoria' => _('Categoria'),
            'id_grupoper' => _('Grupo de Personas'),
            'id_caso' => _('Caso'),
-       );
+        );
     }
 
 

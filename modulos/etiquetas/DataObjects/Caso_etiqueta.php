@@ -30,6 +30,7 @@ require_once 'HTML/QuickForm/Action.php';
 class AgregarEtiqueta extends HTML_QuickForm_Action
 {
     /**
+     * Responde a boton agregar etiqueta
      *
      * @param object &$page      Página
      * @param string $actionName Acción
@@ -41,7 +42,6 @@ class AgregarEtiqueta extends HTML_QuickForm_Action
         if ($page->procesa($page->_submitValues, true)) {
             $page->_submitValues = array();
             $page->_defaultValues = array();
-     //       $page->nullVar();
         }
         $page->handle('display');
     }
@@ -87,6 +87,7 @@ class EliminaEst extends HTML_QuickForm_Action
 class DataObjects_Caso_etiqueta extends DB_DataObject_SIVeL
 {
     var $__table = 'caso_etiqueta';                         // table name
+    var $nom_tabla = 'Etiquetas de un caso';
     var $id_caso;                          // int4(4)  not_null primary_key
     var $id_etiqueta;                        // int4(4)  not_null primary_key
     var $id_funcionario;                   // varchar(-1)  not_null
@@ -148,7 +149,8 @@ class DataObjects_Caso_etiqueta extends DB_DataObject_SIVeL
             $t .= '<tr><td>' . $p->fecha . '</td><td>'
                 . htmlentities($dp->nombre, ENT_COMPAT, 'UTF-8') . '</td>'
                 . '<td><textarea name="' . $n . '" cols="20" rows="3">'
-                . htmlentities($p->observaciones, ENT_COMPAT, 'UTF-8') . '</textarea></td><td>'
+                . htmlentities($p->observaciones, ENT_COMPAT, 'UTF-8') 
+                . '</textarea></td><td>'
                 . $fn->nombre . '</td><td><a href="'
                 . htmlspecialchars($_SERVER['PHP_SELF']) . '?eliminaest='
                 . (int)$p->id_caso . ":" . (int)$p->id_etiqueta . ":"
@@ -170,8 +172,9 @@ class DataObjects_Caso_etiqueta extends DB_DataObject_SIVeL
         $sel =& $form->createElement('select', 'fetiqueta', 'fetiqueta', array());
         $sel->loadArray(
             htmlentities_array(
-                $db->getAssoc("SELECT id, nombre FROM etiqueta ORDER BY 2"))
-            );
+                $db->getAssoc("SELECT id, nombre FROM etiqueta ORDER BY 2")
+            )
+        );
         $fm[] =& $sel;
         $sel =& $form->createElement(
             'textarea', 'fobservaciones',
@@ -186,7 +189,7 @@ class DataObjects_Caso_etiqueta extends DB_DataObject_SIVeL
         );
         $sel =& $form->createElement(
             'submit',
-            $form->getButtonName('agregarEtiqueta'),_('Añadir')
+            $form->getButtonName('agregarEtiqueta'), _('Añadir')
         );
         $fm[] =& $sel;
 

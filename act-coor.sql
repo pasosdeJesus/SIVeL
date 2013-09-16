@@ -17,6 +17,7 @@
 
 -- Las coordenadas de departamentos son promedio de coordenada de los municipios excepto cuando el promedio está fuera del departamento (BOLÍVAR, SAN ANDRES y RISARALDA)
 
+SET CLIENT_ENCODING='UTF8';
 
 UPDATE departamento SET latitud='-1.8188796', longitud='-71.3423095454545' WHERE id='91'; -- AMAZONAS
 UPDATE departamento SET latitud='6.55021133387096', longitud='-75.554003442742' WHERE id='5'; -- ANTIOQUIA

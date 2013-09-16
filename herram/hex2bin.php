@@ -17,11 +17,11 @@
  * Convierte de hexadecimal a binario
  */
 
-    if (PHP_SAPI !== 'cli') {
-        die("Acceso: INTERPRETE DE COMANDOS");
-    }
-    $cad = "";
-    fscanf(STDIN, "%s\n", $cad);
-    $adjunto_r = pack("H*", $cad);
-    echo "$adjunto_r";
+if (PHP_SAPI !== 'cli') {
+    die("Acceso: INTERPRETE DE COMANDOS");
+}
+$cad = "";
+fscanf(STDIN, "%s\n", $cad);
+$adjunto_r = pack("H*", $cad);
+echo "$adjunto_r";
 ?>

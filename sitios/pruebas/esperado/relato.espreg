@@ -11,8 +11,8 @@
   <!-- Victimas personas individuales -->
   <persona>
     <id_persona>1</id_persona>
-    <nombre>nombres</nombre>
-    <apellido>apellidos</apellido>
+    <nombre>NOMBRES</nombre>
+    <apellido>APELLIDOS</apellido>
     <docid>CC 1</docid>
     <fecha_nacimiento>2006-1-1</fecha_nacimiento>
     <sexo>F</sexo>

@@ -46,11 +46,13 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
     /**
      * Muestra un dato
      *
-     * @param string  $t    Selector
-     * @param unknown $np   Nombre de organización
-     * @param unknown $ndep Departamento
-     * @param unknown $nmun Municipio
-     * @param array   $res  Vector con otros
+     * @param string  $t           Selector
+     * @param unknown $np          Nombre de organización
+     * @param unknown $cdep        Departamento
+     * @param unknown $html_nomdep Nombre Departamento
+     * @param unknown $cmun        Municipio
+     * @param unknown $nommun      Nombre Municipio
+     * @param array   $res         Vector con otros
      *
      * @return void
      * @access public
@@ -60,14 +62,14 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
         if ($t == 'Organización') {
             echo "<td>" . htmlentities($np, ENT_COMPAT, 'UTF-8') . "</td>";
         } elseif ($t == 'C. Dep.') {
-           echo "<td>" . htmlentities($cdep, ENT_COMPAT, 'UTF-8') . "</td>";
+            echo "<td>" . htmlentities($cdep, ENT_COMPAT, 'UTF-8') . "</td>";
         } elseif ($t == 'Dep.') {
             // Escapado tras consulta
-           echo "<td>" . $html_nomdep . "</td>";
+            echo "<td>" . $html_nomdep . "</td>";
         } elseif ($t == 'C. Mun.') {
-           echo "<td>" . htmlentities($cmun, ENT_COMPAT, 'UTF-8') . "</td>";
+            echo "<td>" . htmlentities($cmun, ENT_COMPAT, 'UTF-8') . "</td>";
         } elseif ($t == 'Mun.') {
-           echo "<td>" . htmlentities($nommun, ENT_COMPAT, 'UTF-8') . "</td>";
+            echo "<td>" . htmlentities($nommun, ENT_COMPAT, 'UTF-8') . "</td>";
         } else {
             echo "<td>" .
                 (isset($res[$t]) ? (int)$res[$t] : 0) ."</td>";
@@ -169,20 +171,9 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
             combatiente, presponsable
             WHERE $where AND
             ubicacion.id_caso = caso.id AND
-            resagresion.id = id_resultado_agresion AND
+            resagresion.id = id_resagresion AND
             caso.id = combatiente.id_caso AND
             presponsable.id = organizacionarmada";
-/*        foreach (array("municipio", "clase") as $t) {
-            $q .= " UNION SELECT presponsable.nombre,
-                {$t}_caso.id_departamento, {$t}_caso.id_municipio,
-                resagresion.nombre, combatiente.id
-                FROM resagresion, caso, {$t}_caso, combatiente,
-                presponsable
-                WHERE $where AND {$t}_caso.id_caso = caso.id AND
-                resagresion.id = id_resultado_agresion AND
-                caso.id = combatiente.id_caso AND
-                presponsable.id = organizacionarmada";
-} */
         $q .= " )";
         //echo "q= $q";
         hace_consulta($db, "$q");
@@ -352,7 +343,7 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
         if ($cy < 2005) {
             $cy = 2005;
         }
-    $slan = isset($_SESSION['LANG']) ? $_SESSION['LANG'] : 'es';
+        $slan = isset($_SESSION['LANG']) ? $_SESSION['LANG'] : 'es';
 
         $e =& $this->addElement(
             'date', 'fini', 'Desde: ',
@@ -396,9 +387,8 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
             "Menú Principal</a></div>";
         $e =& $this->addElement('header', null, $tpie);
 
-    $num = (int)$_REQUEST['num'];
-    $this->addElement('hidden', 'num', $num);
-
+        $num = (int)$_REQUEST['num'];
+        $this->addElement('hidden', 'num', $num);
 
         if (!isset($_POST['evita_csrf'])) {
             agrega_control_CSRF($this);
@@ -410,12 +400,20 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
 
 }
 
+/** 
+ * Punto de entrada
+ *
+ * @param string $dsn URL de base de datos
+ *
+ * @return void
+ */
 function muestra($dsn)
 {
     $aut_usuario = "";
     autentica_usuario($dsn, $aut_usuario, 21);
 
     $wizard =& new HTML_QuickForm_Controller('EstadisticasComb', false);
+    global $mreq;
     $consweb = new PagEstadisticasComb($mreq);
 
     $wizard->addPage($consweb);

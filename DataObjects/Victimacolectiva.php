@@ -84,15 +84,14 @@ class DataObjects_Victimacolectiva extends DB_DataObject_SIVeL
     {
         if (!isset($this->organizacionarmada)) {
             include_once "Presponsable.php";
-            $this->organizacionarmada =
-                DataObjects_Presponsable::idSinInfo();
+            $this->organizacionarmada = DataObjects_Presponsable::idSinInfo();
         }
     }
 
     /**
      * Ajusta formulario generado.
      *
-     * @param object &$form      Formulario HTML_QuickForm
+     * @param object &$form        Formulario HTML_QuickForm
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
@@ -112,6 +111,8 @@ class DataObjects_Victimacolectiva extends DB_DataObject_SIVeL
 
     /**
      * Cadena para un texto XML que identifica el registro
+     *
+     * @return string Identificacion
      **/
     function valorRelato()
     {

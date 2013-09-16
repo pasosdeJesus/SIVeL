@@ -56,15 +56,16 @@ class DataObjects_Categoria_caso extends DB_DataObject_SIVeL
      * @return Formulario generado
      */
     function &getForm2(&$db, &$f, $action = false, $target = '_self',
-        $formName = 'CategoriaCaso', $method = 'post')
-    {
+        $formName = 'CategoriaCaso', $method = 'post'
+    ) {
         if (!$action) {
             $action = htmlspecialchars($_SERVER['REQUEST_URI']);
         }
         if ($f == null) {
-            $f = new HTML_QuickForm($formName, $method, $action,
-            $target, null
-        );
+            $f = new HTML_QuickForm(
+                $formName, $method, $action,
+                $target, null
+            );
         }
 
         $sel=&$f->addElement(

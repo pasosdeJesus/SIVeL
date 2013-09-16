@@ -1,4 +1,14 @@
+CREATE SEQUENCE resagresion_seq;
 
+CREATE TABLE resagresion (
+	id INTEGER PRIMARY KEY DEFAULT(nextval('resagresion_seq')),
+	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL,
+	fechacreacion	DATE NOT NULL,
+	fechadeshabilitacion DATE CHECK (
+		fechadeshabilitacion IS NULL 
+		OR fechadeshabilitacion>=fechacreacion
+	)
+);	
 
 CREATE SEQUENCE combatiente_seq;
 

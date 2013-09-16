@@ -459,21 +459,29 @@ function valida(&$page)
  * @param string $msg     Mensaje de error
  * @param array  $valores Valores del formulario por recuperar
  * @param string $iderr   Si es no nulo variable de sesión donde ponerlo
+ * @param string $enhtml  Mensaje en HTML
  *
  * @return void
      */
 function error_valida($msg, $valores, $iderr = '', $enhtml = false)
 {
+    if (!headers_sent()) {
+        encabezado_envia();
+    }
     if (isset($valores) && is_array($valores) && count($valores) > 0) {
         $_SESSION['recuperaErrorValida'] = $valores;
     }
-    echo "<div class='regla'>";
+    echo "<script>";
     if ($enhtml) {
-        echo $msg;
+        //echo "$(document).ready(function () {alert('$msg');});";
+        echo "alert('$msg');";
     } else {
-        echo htmlentities($msg, ENT_COMPAT, 'UTF-8');
+        echo "alert('" . htmlentities($msg, ENT_COMPAT, 'UTF-8') . "');";
+        /*echo "$(document).ready(function () {alert('" 
+            . htmlentities($msg, ENT_COMPAT, 'UTF-8')
+            . "');});";*/
     }
-    echo "</div>";
+    echo "</script>";
     if ($iderr != '') {
         $_SESSION[$iderr] = $msg;
     }
@@ -628,7 +636,6 @@ function unset_var_session()
      */
 function establece_valores_form(&$pag, $campos, $valores)
 {
-
     foreach ($campos as $c) {
         $e =& $pag->getElement($c);
         if (!PEAR::isError($e) && isset($valores[$c])) {
@@ -675,6 +682,43 @@ function toma_elemento_recc($form, $nom, $yaanalizados = array())
 }
 
 
+/** 
+ * Retorna valor SIN INFORMACION del campo $c del DataObject $do
+ *
+ * @param object &$do DataObject
+ * @param string $c   Campo
+ *
+ * @return integer Que corresonde al valor SIN INFORMACION
+ */
+function valorSinInfo(&$do, $c)
+{
+    global $dbnombre;
+    $v = null;
+    $exc = isset(
+        $GLOBALS['_DB_DATAOBJECT']['LINKS'][$dbnombre][$do->__table][$c]
+    );
+    if ($exc) {
+        $rel = $GLOBALS['_DB_DATAOBJECT']['LINKS'][$dbnombre][$do->__table][$c];
+        $pd = strpos($rel, ':');
+        $ndo = substr($rel, 0, $pd);
+        $or = objeto_tabla($ndo);
+        if (!PEAR::isError($or) 
+            && is_callable(array($or, 'idSinInfo'))
+        ) {
+            $v = $or->idSinInfo();
+            //echo "OJO sacando valor {$v}<br>";
+            if (is_array($v)) {
+                if (isset($v[$c])) {
+                    $v = $v[$c];
+                } else {
+                    $v = null;
+                }
+            }
+        }
+    }
+    return $v;
+}
+
 /**
  * Pone valores por defecto en una pestaña, para ser llamado desde
  * formularioValores
@@ -684,31 +728,43 @@ function toma_elemento_recc($form, $nom, $yaanalizados = array())
  *
  * @param object $d    DB_DataObject
  * @param object $form HTML_QuickForm
+ * @param bool   $merr Si debe mostrar errores
  *
  * @return void
-     */
-function valores_pordefecto_form($d, $form)
+ */
+function valores_pordefecto_form($d, $form, $merr = true)
 {
+    //echo "OJO valores_pordefecto_form(d, {$d->__table}, form)<br>";
     foreach ($d->fb_fieldsToRender as $c) {
+        //echo "<hr>OJO c=$c<br>";
         $cq = toma_elemento_recc($form, $c);
-        if ($cq == null || PEAR::isError($cq)) {
+        if (($cq == null || PEAR::isError($cq)) && $merr) {
             echo_esc(
                 sprintf(
-                    _("Error: No se encontró elemento %s en el formulario")
-                    . "<br>", $c
+                    _("Error: No se encontró elemento %s en el formulario %s")
+                    . "<br>", $c, $d->__table
                 )
             );
-        }
-        if (isset($d->fb_booleanFields)
-            && in_array($c, $d->fb_booleanFields)
-        ) {
-            if ((!isset($d->$c) || $d->$c===0 || $d->$c==='f')) {
-                $cq->setValue(0);
+        } else if ($cq != null && is_callable(array($cq, 'setValue'))) {
+            //echo "OJO setValue callable<br>";
+            if (isset($d->fb_booleanFields)
+                && in_array($c, $d->fb_booleanFields)
+            ) {
+                //echo "OJO booleano<br>";
+                if ((!isset($d->$c) || $d->$c===0 || $d->$c==='f')) {
+                    $cq->setValue(0);
+                } else {
+                    $cq->setValue(1);
+                }
             } else {
-                $cq->setValue(1);
+                if (!isset($d->$c) || $d->$c == null) {
+                    $v = valorSinInfo($d, $c);
+                } else {
+                    $v = $d->$c;
+                    //echo "OJO poniendo valor {$v}<br>";
+                }
+                $cq->setValue($v);
             }
-        } else {
-            $cq->setValue($d->$c);
         }
     }
 }
@@ -786,7 +842,9 @@ function encabezado_envia($titulo = null, $cabezote = '')
     echo '<' . '!doctype html>
 <html>
 <head>
-<meta charset = "UTF-8">
+  <meta charset = "UTF-8">
+  <script src="lib/jquery-2.0.3.min.js"></script> 
+  <script src="sivel.js"></script> 
 ';
     if (isset($titulo)) {
         echo '  <title>' . htmlentities($titulo, ENT_COMPAT, 'UTF-8') . '</title>';
@@ -902,8 +960,11 @@ function enlaces_casos_persona_html(
         }
     }
 
+    $penc = isset($GLOBALS['persona_en_caso']) ? 
+        str_replace("idp", $idp, $GLOBALS['persona_en_caso']) : '';
     $q = "SELECT id_caso FROM persona_trelacion, victima
-        WHERE persona1 = id_persona AND persona2 = '$idp'";
+        WHERE persona1 = id_persona AND persona2 = '$idp' "
+        . $penc ;
     $r = hace_consulta($db, $q);
     $campos = array();
     $sep = "";
@@ -1036,11 +1097,11 @@ function die_act($mens)
 function sin_error_pear($do, $msg = "")
 {
     if (PEAR::isError($do)) {
+        debug_print_backtrace();
         die_act(
             "Error " . trim($msg . " ") . $do->getMessage() . 
             " - " . $do->getUserInfo()
         );
-        //debug_print_backtrace();
     }
 }
 
@@ -1543,9 +1604,10 @@ function var_req_escapa($nv, $db = null, $maxlong = 1024)
  * Convierte un arreglo para fechas a una fecha.
  * Mes y día pueden ser '' y supone valores por defecto (1).
  *
- * @param array $f     Arreglo con indices Y, M, d, el valor $f['Y'] no puede ser ''
+ * @param array $f     Arreglo con indices Y, M, d, el valor $f['Y'] 
+ *                      no puede ser ''
  * @param bool  $desde Si es cierto completa suponiendo que es una fecha Desde,
- *                     de lo contrario compelta suponiendo que es una fecha Hasta.
+ *                     de lo contrario completa como fecha Hasta.
  *
  * @return string Fecha
      */
@@ -1579,7 +1641,7 @@ function arr_a_fecha($f, $desde = true)
     $fb =& DB_DataObject_FormBuilder::create($dcaso);
 
     $ft = array('Y' => (int)$f['Y'],
-        'M' => (int)$mes,
+        'm' => (int)$mes,
         'd' => (int)$dia
     );
 
@@ -1593,7 +1655,7 @@ function arr_a_fecha($f, $desde = true)
  *
  * @param array $f Fecha por convertir en formato AAAA-MM-DD
  *
- * @return array 'Y' => año, 'M' => mes, 'd' => día
+ * @return array 'Y' => año, 'm' => mes, 'd' => día
      */
 function fecha_a_arr($f)
 {
@@ -1601,7 +1663,7 @@ function fecha_a_arr($f)
     $pf = explode('-', $f);
     assert(count($pf) == 3);
     $ar['Y'] = (int)$pf[0];
-    $ar['M'] = (int)$pf[1];
+    $ar['m'] = (int)$pf[1];
     $ar['d'] = (int)$pf[2];
     return $ar;
 }
@@ -1757,7 +1819,7 @@ function agrega_tabla(&$t, $nt)
  * @param integer $tipo  Valores numérico como el empleado por DB_DataObject
  *
  * @return integer Valor del campo del objeto recibido convertido al tipo
-     */
+ */
 function convierte_valor(&$do, $campo, $tipo)
 {
     //echo "convierte_valor(do, $campo, $tipo)<br>";
@@ -1768,6 +1830,53 @@ function convierte_valor(&$do, $campo, $tipo)
     }
 }
 
+
+/**
+ * Asigna un campo de un DataObject con el valor recibido del formulario
+ *
+ * @param array  $valor  Valor por asignar
+ * @param object $rel    Tabla 
+ * @param object $campo  Campo de tabla $tabla
+ * @param array  &$estbd Estructura de base sacada de .ini.  Si es null esta
+ *                        función la llena
+ *
+ * @return Valor asignable a un campo $campo del DataObject de tabla $rel
+ */
+function valor_fb2do($valor, $rel, $campo, &$estbd)
+{
+    //echo "OJO valor_fb2do($valor, $rel, $campo, estbd)<br>";
+    if ($estbd== null || !isset($estbd)) {
+        $estbd = parse_ini_file(
+            $_SESSION['dirsitio'] . "/DataObjects/" .
+            $GLOBALS['dbnombre'] . ".ini",
+            true
+        );
+    }
+    $tipo = $estbd[$rel][$campo];
+    //echo "OJO valor_fb2do, tipo=$tipo";
+    if ($tipo & 1) {
+        if (isset($valor)) {
+            $ret = (int)$valor;
+        } else {
+            $ret = null;
+        }
+    } else if ($tipo == 18 || $tipo == 146) {
+        $ret = ($valor == 1) ? 't' : 'f';
+    } else if ($tipo & 6) {
+        if (is_array($valor)) {
+            $ret = arr_a_fecha($valor);
+        } else {
+            $ret = (string)$valor;
+        }
+    } else if ($tipo & 2) {
+        $ret = $valor;
+    } else {
+        $ret = $valor;
+    }
+    //echo "OJO ret=$ret";
+
+    return $ret;
+}
 
 
 /**
@@ -1787,7 +1896,7 @@ function convierte_valor(&$do, $campo, $tipo)
  * @param array   $fignora Si un campo de tipo bool es false ignora
  *
  * @return string Consulta SQL
-     */
+ */
 function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
     $otrast = array(), $iotrast = '', $nonulos = array(), $irelot = "id",
     $masenl = array(), $tab = null, $fignora = true
@@ -1847,7 +1956,7 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
         if (!$ignora) {
             if (($tipo & 2) && $tipo != 134 && $tipo !=18) {
                 // Cadena que no es fecha
-                if (trim($valor) != '*')  {
+                if (trim($valor) != '*') {
                     consulta_and(
                         $db, $w2, "$rel.$campo", "%" .trim($valor) . "%",
                         ' ILIKE ', 'AND'

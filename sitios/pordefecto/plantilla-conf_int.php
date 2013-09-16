@@ -33,4 +33,8 @@ require 'sitios/pordefecto/conf_int.php';
 $GLOBALS['ficha_color_fondo'] = '#EEE';
 
 
+if (file_exists($_SESSION['dirsitio'] . '/conf_int-local.php')) {
+    include_once $_SESSION['dirsitio'] . '/conf_int-local.php';
+}
+
 require 'sitios/pordefecto/iniint.php';

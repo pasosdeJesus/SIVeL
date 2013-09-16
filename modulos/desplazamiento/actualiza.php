@@ -48,10 +48,25 @@ if (!aplicado($idac)) {
     }
 }
 
+
+$idac = 'des-ext';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "UPDATE desplazamiento SET departamentodecl = 10000
+        WHERE departamentodecl = 0", false
+    );
+    hace_consulta(
+        $db, "DELETE FROM municipio WHERE id_departamento = '0'", false
+    );
+    hace_consulta(
+        $db, "DELETE FROM departamento WHERE id = '0'", false
+    );
+    aplicaact($act, $idac, 'Cambio de código EXTERIOR de 0 a 10000');
+}
+
 echo "Actualizando indices<br>";
 actualiza_indice($db, 'clasifdesp');
 actualiza_indice($db, 'tipodesp');
-actualiza_indice($db, 'causadesp');
 actualiza_indice($db, 'declaroante');
 actualiza_indice($db, 'inclusion');
 actualiza_indice($db, 'acreditacion');

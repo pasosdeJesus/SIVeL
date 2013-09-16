@@ -38,7 +38,7 @@ require_once 'DataObjects/Resagresion.php';
  * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
  * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
  * @link     http://sivel.sf.net/tec
- * @see PagBaseMultiple
+ * @see      PagBaseMultiple
  */
 class PagVictimaCombatiente extends PagBaseMultiple
 {
@@ -98,7 +98,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
      /**
      * Inicializa variables.
      *
-     * @param array $apar Arreglo de parametros. Consta de
+     * @param array $aper Arreglo de parametros. Consta de
      *  0=>id_combatiente Id  de víctima combatiente
      *
      * @return handle Conexión a base de datos
@@ -147,12 +147,13 @@ class PagVictimaCombatiente extends PagBaseMultiple
             )
         );
         $this->bcombatiente->useMutators = true;
-        $this->bantecedente_combatiente =&
-            DB_DataObject_FormBuilder::create(
+        $this->bantecedente_combatiente 
+            =& DB_DataObject_FormBuilder::create(
                 $dantecedente_combatiente,
-            array('requiredRuleMessage' => $GLOBALS['mreglareq'],
-                'ruleViolationMessage' => $GLOBALS['mreglavio']
-            )
+                array(
+                    'requiredRuleMessage' => $GLOBALS['mreglareq'],
+                    'ruleViolationMessage' => $GLOBALS['mreglavio']
+                )
             );
 
         return $db;
@@ -164,7 +165,6 @@ class PagVictimaCombatiente extends PagBaseMultiple
      * Ver documentación completa en clase base.
      *
      * @param string $nomForma Nombre
-     * @param string $mreq     Mensaje de dato requerido
      *
      * @return void
      */
@@ -173,6 +173,10 @@ class PagVictimaCombatiente extends PagBaseMultiple
         parent::PagBaseMultiple($nomForma);
         $this->titulo  = _('Víctima Combatiente');
         $this->tcorto  = _('Comb.');
+        if (isset($GLOBALS['etiqueta']['Victima Combatiente'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Victima Combatiente'];
+            $this->tcorto = $GLOBALS['etiqueta']['Victima Combatiente'];
+        }
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
     }
@@ -264,8 +268,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
             if ($vv != '') {
                 $this->bantecedente_combatiente->_do->find();
                 while ($this->bantecedente_combatiente->_do->fetch()) {
-                    $valsca[] =
-                        $this->bantecedente_combatiente->_do->id_antecedente;
+                    $valsca[] 
+                        = $this->bantecedente_combatiente->_do->id_antecedente;
                 }
             }
             $v['id_antecedente'] = $valsca;
@@ -298,8 +302,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
             $idcombatiente = $dcombatiente->id;
             $result = hace_consulta(
                 $db, "DELETE FROM antecedente_combatiente " .
-                    "WHERE id_combatiente='$idcombatiente'"
-                );
+                "WHERE id_combatiente='$idcombatiente'"
+            );
             if ($elimcombatiente) {
                 $dcombatiente->delete();
             }
@@ -410,8 +414,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
         }
 
         if ((!isset($_SESSION['forma_modo'])
-            || $_SESSION['forma_modo'] != 'busqueda'
-        )
+            || $_SESSION['forma_modo'] != 'busqueda')
         ) {
             if (!isset($valores['nombre'])
                 || trim($valores['nombre']) == ''
@@ -419,8 +422,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
                 error_valida('Falta nombre de víctima', $valores);
                 return false;
             }
-            if (!isset($valores['id_resultado_agresion'])
-                    || $valores['id_resultado_agresion'] == ''
+            if (!isset($valores['id_resagresion'])
+                || $valores['id_resagresion'] == ''
             ) {
                 error_valida('Falta resultado de agresión', $valores);
                 return false;
@@ -456,15 +459,12 @@ class PagVictimaCombatiente extends PagBaseMultiple
             } else {
                 $this->eliminaVic($this->bcombatiente->_do, false);
             }
-/*            $q = "DELETE FROM antecedente_combatiente " .
-                "WHERE id_combatiente='$idcombatiente'";
-            $result = hace_consulta($db, $q); */
             if (isset($valores['id_antecedente'])) {
                 foreach (var_escapa($valores['id_antecedente']) as $k => $v) {
-                    $this->bantecedente_combatiente->_do->id_combatiente =
-                        $idcombatiente;
-                    $this->bantecedente_combatiente->_do->id_antecedente =
-                        (int)var_escapa($v, $db);
+                    $this->bantecedente_combatiente->_do->id_combatiente 
+                        = $idcombatiente;
+                    $this->bantecedente_combatiente->_do->id_antecedente 
+                        = (int)var_escapa($v, $db);
                     $this->bantecedente_combatiente->_do->insert();
                 }
             }
@@ -481,7 +481,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
      *
      * @param string &$w       Consulta que se construye
      * @param string &$t       Tablas
-     * @param object &$dCaso   Objeto con caso
+     * @param string &$db      Conexión a base de datos
+     * @param object $idcaso   Identificación caso
      * @param string &$subcons Subconsulta
      *
      * @return void
@@ -493,12 +494,21 @@ class PagVictimaCombatiente extends PagBaseMultiple
             $w, $t, $idcaso, 'combatiente',
             '', '', false, array('antecedente_combatiente'),
             'id_combatiente',
-            array('edad', 'id_resultado_agresion')
+            array('edad', 'id_resagresion')
         );
 
     }
 
 
+    /**
+     * Llamada para completar registro por mostrar en Reporte General.
+     *
+     * @param object &$db    Conexión a B.D
+     * @param array  $campos Campos por mostrar
+     * @param int    $idcaso Código de caso
+     *
+     * @return void
+     */
     static function reporteGeneralRegistroHtml(&$db, $campos, $idcaso)
     {
         // Victimas combatientes
@@ -511,40 +521,46 @@ class PagVictimaCombatiente extends PagBaseMultiple
         while ($dcombatiente->fetch()) {
             $r .= $sep . trim($dcombatiente->nombre);
             $r .= "\n    ".$GLOBALS['etiqueta']['resagresion'] . ": ";
-            $dresultado = $dcombatiente->getLink('id_resultado_agresion');
+            $dresultado = $dcombatiente->getLink('id_resagresion');
             $r .= $dresultado->nombre;
-            $dresultado = $dcombatiente->getLink('id_resultado_agresion');
+            $dresultado = $dcombatiente->getLink('id_resagresion');
             $r .= " (".trim($dresultado->nombre).")";
-            if ($dcombatiente->id_sectorsocial!=
-                DataObjects_Sectorsocial::idSinInfo()
-            ) {
-                    $r .= "\n    ".$GLOBALS['etiqueta']['sectorsocial'] . ": ";
-                    $dsectorsocial = $dcombatiente->
-                        getLink('id_sectorsocial');
-                    $r .= $dsectorsocial->nombre;
-                }
-            if ($dcombatiente->id_profesion!=
-                DataObjects_Profesion::idSinInfo()
-            ) {
-                    $r .= "\n    ".$GLOBALS['etiqueta']['profesion'] . ": ";
-                    $dprofesion = $dcombatiente->getLink('id_profesion');
-                    $r .= $dprofesion->nombre;
-                }
-            if ($dcombatiente->organizacionarmada!=
-                DataObjects_Presponsable::idSinInfo()
-            ) {
-                    $r .= "\n    " .
-                        $GLOBALS['etiqueta']['organizacion_armada'] . ": ";
-                    $dorgarmada = $dcombatiente->
-                        getLink('organizacionarmada');
-                    $r .= $dorgarmada->nombre;
-                }
+            $sins = DataObjects_Sectorsocial::idSinInfo();
+            if ($dcombatiente->id_sectorsocial != $sins) {
+                $r .= "\n    ".$GLOBALS['etiqueta']['sectorsocial'] . ": ";
+                $dsectorsocial = $dcombatiente->
+                    getLink('id_sectorsocial');
+                $r .= $dsectorsocial->nombre;
+            }
+            $sinp = DataObjects_Profesion::idSinInfo();
+            if ($dcombatiente->id_profesion != $sinp) {
+                $r .= "\n    ".$GLOBALS['etiqueta']['profesion'] . ": ";
+                $dprofesion = $dcombatiente->getLink('id_profesion');
+                $r .= $dprofesion->nombre;
+            }
+            $sinp = DataObjects_Presponsable::idSinInfo();
+            if ($dcombatiente->organizacionarmada != $sinp) {
+                $r .= "\n    " .
+                    $GLOBALS['etiqueta']['organizacion_armada'] . ": ";
+                $dorgarmada = $dcombatiente->
+                    getLink('organizacionarmada');
+                $r .= $dorgarmada->nombre;
+            }
             $sep = "\n\n    ";
         }
 
         return $r;
     }
 
+    /**
+     * Retorna en HTML reporte revista de un caso
+     * 
+     * @param object &$db    Conexión a base de datos
+     * @param array  $campos Campos por mostrar
+     * @param int    $idcaso Código del caso
+     *
+     * @return string html
+     */
     static function reporteRevistaRegistroHtml(&$db, $campos, $idcaso)
     {
         $dcombatiente = objeto_tabla('combatiente');
@@ -557,16 +573,13 @@ class PagVictimaCombatiente extends PagBaseMultiple
         $r ="";
         while ($dcombatiente->fetch()) {
             $r .= trim($dcombatiente->nombre);
-            if ($dcombatiente->organizacionarmada!=
-                DataObjects_Presponsable::idSinInfo()
-            ) {
-                    $dorg = $dcombatiente->
-                        getLink('organizacionarmada');
-                    $r .= " / ".trim($dorg->nombre);
-                }
-            if (isset($dcombatiente->id_resultado_agresion)) {
-                $dresultado = $dcombatiente->
-                    getLink('id_resultado_agresion');
+            $sinp = DataObjects_Presponsable::idSinInfo();
+            if ($dcombatiente->organizacionarmada != $sinp) {
+                $dorg = $dcombatiente->getLink('organizacionarmada');
+                $r .= " / ".trim($dorg->nombre);
+            }
+            if (isset($dcombatiente->id_resagresion)) {
+                $dresultado = $dcombatiente->getLink('id_resagresion');
                 $r .= " ".trim($dresultado->nombre);
             }
             $r .= "\n";
@@ -575,20 +588,25 @@ class PagVictimaCombatiente extends PagBaseMultiple
     }
 
 
+    /** 
+     * Verifica integridad referencial
+     *
+     * @return bool V sii hay integridad
+     */
     function integridad_ref_tipoviolencia()
     {
-        $q = "SELECT COUNT(id_combatiente) FROM " .
-        "combatiente_presponsable, combatiente WHERE " .
-        "combatiente.id_caso='" . $idcaso . "' AND " .
-        "id_presponsable='" . $idpres . "' AND " .
-        "combatiente.id=id_combatiente";
+        $q = "SELECT COUNT(id_combatiente) FROM "
+            . "combatiente_presponsable, combatiente WHERE "
+            . "combatiente.id_caso='" . $idcaso . "' AND "
+            . "id_presponsable='" . $idpres . "' AND "
+            . "combatiente.id=id_combatiente";
         $nr = $db->getOne($q);
         if ($nr > 0) {
             error_valida(
-                'Hay ' . $nr . ' victima(s) ' .
-            'combatiente(s) con el presunto responsable que ' .
-            ' quiere ' . $accion . '.<br>  ' .
-            ' Por favor cambiela(s) antes', $valores
+                'Hay ' . $nr . ' victima(s) ' 
+                . 'combatiente(s) con el presunto responsable que ' 
+                . ' quiere ' . $accion . '.<br>  ' 
+                . ' Por favor cambiela(s) antes', $valores
             );
             return false;
         }

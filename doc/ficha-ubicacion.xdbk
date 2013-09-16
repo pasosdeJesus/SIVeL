@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="ubicacion">
+	<title>Ubicaci&oacute;n</title>
+
+	<para>
+La ubicaci&oacute;n de un caso se específica en esta
+pestaña de acuerdo al DIVIPOLA 2012 (Divisi&oacute;n Político
+Administrativa del país de acuerdo al DANE).
+Si entre las opciones que se le presentan no está el que 
+busca puede agregar el departamento, municipio o centro poblado en la 
+tabla básica correspondiente.
+	</para>
+
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichaubicacion.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichaubicacion.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Ubicaci&oacute;n</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+
+	<para>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+Departamento: 
+Si el caso ocurre fuera del país elija <literal>Exterior</literal>.
+Si no conoce el departamento especifique la regi&oacute;n en la pestaña
+anterior (ver <xref linkend="basicos"/>).  Al elegir uno se 
+cambiará la latitud y longitud para poner un punto cerecano 
+al centro del departamento.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Municipio: 
+Una vez elija el departamento puede elegirse entre sus municipios. 
+Al alegirlo se cambiará la latitud y longitud para poner uno punto
+cercano al centro del municipio.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Clase:  Una vez llene el municipio, aparecen posibles centros poblados 
+y sitios de un municipio de acuerdo a 
+la Divisi&oacute;n Político Administrativa.
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>
+Lugar: 
+Precisa un poco más donde ocurrieron los hecho. e.g. Vereda en casos rurales 
+y Barrio en casos urbanos.
+				</para>
+			</listitem>
+			<listitem><para>
+Sitio:
+Precisa a&uacute;n más la ubicaci&oacute;n de los hechos. e.g. Casa, Finca, Direcci&oacute;n.
+			</para></listitem>
+			<listitem><para>
+Latitud:
+En decimal, si requiere convertir de grados, minutos y segundos a decimal 
+puede emplear <ulink url="http://segdeha.com/e/convert_lat_long/"></ulink>.
+			</para></listitem>
+			<listitem><para>
+Longitud:
+En decimal.  Una vez almacene la informaci&oacute;n y vuelva a esta pestaña verá
+un enlace a las coordenadas que ingres&oacute; en OpenStreetmap.
+			</para></listitem>
+			<listitem>
+				<para>
+Tipo de ubicaci&oacute;n: 
+Permite especificar si el caso ocurri&oacute; en zona rural o urbana o en ambas. 
+				</para>
+			</listitem>
+
+		</itemizedlist>
+
+
+En la parte inferior de algunas pestañas, aparecen botones análogos
+a los de esta, los cuales le permiten especificar más de una ubicaci&oacute;n
+(podría ser &uacute;til por ejemplo en casos de desplazamiento, aunque la 
+ubicaci&oacute;n principal es la primera).   Estos botones se relacionan con
+los datos en el centro del encabezado
+(<literal>-/0</literal> en este ejemplo), que indica el n&uacute;mero de 
+ubicaci&oacute;n en el que está o <literal>-</literal> si es una nueva
+ubicaci&oacute;n , y el total de ubicaciones ya asociadas al caso.
+
+		<itemizedlist>
+			<listitem>
+				<para>
+Eliminar: Descarta la ubicaci&oacute;n que está examinando
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Nueva: Ingresa ubicaci&oacute;n editada y genera una nueva.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Nueva copia: Ingresaría la ubicaci&oacute;n editada y generaría una nueva como 
+copia de la actual.   Aunque no es muy &uacute;til en el caso de ubicaciones
+(por eso está deshabilitado) en otras pestaña (por ejemplo las de víctimas)
+es muy &uacute;til para ingresar varias víctimas con características similares.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Ubicaci&oacute;n anterior: Ingresa la ubicaci&oacute;n editada y conduce a 
+la anterior.  Las ubicaciones se numeran por orden alfabético no por el 
+orden en el que las ingrese.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Ubicaci&oacute;n siguiente: Ingresa la ubicaci&oacute;n editada y conduce a la 
+siguiente.
+				</para>
+			</listitem>
+		</itemizedlist>
+	</para>
+
+
+</sect3>

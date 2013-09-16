@@ -41,13 +41,13 @@ if (!aplicado($idac)) {
     $r = hace_consulta($db, "CREATE SEQUENCE anexo_seq;", false);
     $r = hace_consulta(
         $db, "CREATE TABLE anexo (
-        id      INTEGER PRIMARY KEY DEFAULT (nextval('anexo_seq')),
-        id_caso INTEGER REFERENCES caso NOT NULL,
-        fecha   DATE NOT NULL,
-        descripcion     VARCHAR(1500) NOT NULL,
-        archivo VARCHAR(255) NOT NULL
-    );", false
-);
+            id      INTEGER PRIMARY KEY DEFAULT (nextval('anexo_seq')),
+            id_caso INTEGER REFERENCES caso NOT NULL,
+            fecha   DATE NOT NULL,
+            descripcion     VARCHAR(1500) NOT NULL,
+            archivo VARCHAR(255) NOT NULL
+        );", false
+    );
 
     aplicaact($act, $idac, 'Anexos');
 }

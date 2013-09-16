@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="actos">
+	<title>Actos</title>
+
+	<para>
+		<informalfigure>
+			<screenshot><mediaobject><imageobject>
+						<imagedata fileref="pfichaactos.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+					<imageobject><imagedata fileref="pfichaactos.png" format="PNG" align="center"></imagedata></imageobject>
+					<textobject><phrase>Actos</phrase></textobject></mediaobject>
+			</screenshot>
+		</informalfigure>
+
+Permite especificar las agresiones, indicando quien le hizo que a quien.  
+Es decir especificando o marcando uno o más presuntos responsables, una
+o más categorías de violencia y una o más víctimas.
+Las categorías de violencia son las especificadas en
+<literal>Tipo de Violencia</literal>, <literal>Supracategoría</literal> y 
+<literal>Categoría</literal> (ver <xref linkend="tablasbasicas"/>).
+Puede elegir varios presuntos responsables o varias categorías o varias
+víctimas (desde Firefox presionando la tecla Control
+mientras con el bot&oacute;n del rat&oacute;n se marcan las diversas opciones).  Y una
+vez las elija, presione el bot&oacute;n Añadir.
+	</para>
+	<para>
+Por defecto SIVeL incluye como tipología el Marco Conceptual de la
+revista Noche y Niebla el cual tiene 4 tipos de violencia:
+Derechos Humanos (A), Violencia Socio Política (B), Acciones Bélicas (C)
+y Derecho Internacional Humanitario.  Las  supracategorías en 
+el tipo de violencia Derechos Humanos ---para crímenes cometidos
+por agentes estatales) tiene c&oacute;digos así:
+De A10 - A19 y A101 - A150 son de PERSECUCI&Oacute;N POL&Iacute;TICA; de A22 - A29 son 
+ABUSO DE AUTORIDAD; de A30 - A39 y A301 - A302 son INTOLERANCIA SOCIAL.
+En Violencia Socio Política (que se usa cuando el presunto responsable
+es desconocido pero se nota una m&oacute;vil político) las supracategorías son: 
+de B40 - B49 son de PERSECUCI&Oacute;N POL&Iacute;TICA; de B50 - B501 son INTOLERANCIA 
+SOCIAL.
+Los c&oacute;digos de C62 a C500 son de B&Eacute;LICAS (confrontaciones armadas entre
+agentes del estado y grupos guerrilleros).  Del D72 - D904 son DIH (crímenes
+tipificados en el Derecho Internacional Humanitario cometidos bien
+por agentes estatales o bien por grupos guerrilleros), cuyas
+supracategorías son PERSONAS, BIENES y M&Eacute;TODOS.
+	</para>
+
+
+</sect3>
+

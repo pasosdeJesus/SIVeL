@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="evaluacion">
+	<title>Evaluaci&oacute;n</title>
+
+
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichaevaluacion.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichaevaluacion.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Evaluaci&oacute;n</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+	<para>
+Permite calificar el caso de acuerdo a: Grado de confiabilidad de las
+fuentes, Grado de esclarecimiento, Grado de impunidad y Grado de 
+Informaci&oacute;n.
+	</para>
+</sect3>
+

@@ -54,7 +54,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
     var $fb_fieldsToRender = array('id_taccion', 'id_despacho', 'fecha',
          'numeroradicado', 'observacionesaccion', 'respondido'
      );
-    var $fb_addFormHeader = true;
+
     /**
      * Constructora
      * return @void
@@ -76,7 +76,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
 
     var $fb_textFields = array ('observacionesaccion');
     var $fb_booleanFields = array ('respondido');
-
+    var $fb_addFormHeader = false;
 
     /**
      * Campos que pueden ser SIN INFORMACION y el código correspondiente
@@ -107,8 +107,6 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
     /**
     * Convierte de base de datos a formulario
     *
-    * @param string $value Valor recibido de formulario
-    *
     * @return Valor para base de datos
     */
     function getrespondido()
@@ -132,8 +130,9 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
                 $this->$c = $csin[$c];
             }
         }
-        $this->fb_preDefElements = array('id_proceso' =>
-                    HTML_QuickForm::createElement('hidden', 'id_proceso')
+        $this->fb_preDefElements = array(
+            'id_proceso' =>
+            HTML_QuickForm::createElement('hidden', 'id_proceso'),
         );
     }
 
@@ -141,7 +140,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
     /**
      * Ajusta formulario generado.
      *
-     * @param object &$form      Formulario HTML_QuickForm
+     * @param object &$form        Formulario HTML_QuickForm
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
@@ -149,15 +148,6 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
     function postGenerateForm(&$form, &$formbuilder)
     {
         parent::postGenerateForm($form, $formbuilder);
-
-/*        foreach ($this->fb_fieldsToRender as $c) {
-            $e =& $form->getElement($c);
-            if (isset($e) && !PEAR::isError($e)
-                && isset($GLOBALS['etiqueta'][$c])
-            ) {
-                $e->setLabel($GLOBALS['etiqueta'][$c]);
-            }
-} */
 
         $fa = array();
         $obs =& $form->removeElement('observacionesaccion');
@@ -204,6 +194,9 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
                 . $p->id . "\">" . _('Eliminar') . "</a></td>";
         }
         $t .= '</table>';
+        $form->addElement(
+            'header', 'Acciones Realizadas', 'Acciones Realizadas'
+        );
         $sel =& $form->addElement('static', null, '', $t);
 
         foreach ($fa as $e) {

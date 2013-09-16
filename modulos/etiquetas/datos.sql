@@ -1,20 +1,20 @@
 
-SET client_encoding = 'LATIN1';
+SET client_encoding = 'UTF8';
 
 INSERT INTO etiqueta (id, nombre, observaciones) 
-	VALUES ('1', 'SINCODH:PUBLICO', 'El documento es p鷅lico');
+	VALUES ('1', 'SINCODH:PUBLICO', 'El documento es p煤blico');
 INSERT INTO etiqueta (id, nombre, observaciones) 
 	VALUES ('2', 'SINCODH:PRIVADO', 'El documento es privado');
 INSERT INTO etiqueta (id, nombre, observaciones) 
        	VALUES ('3', 'IMPORTA_RELATO', 'Relato importado');
 INSERT INTO etiqueta (id, nombre, observaciones) 
-        VALUES ('4', 'ERROR_IMPORTACI覰', 'Error en importaci髇');
+        VALUES ('4', 'ERROR_IMPORTACI脫N', 'Error en importaci贸n');
 INSERT INTO etiqueta (id, nombre, observaciones) 
         VALUES ('5', 'ROJO', 'Color #FF0000');
 INSERT INTO etiqueta (id, nombre, observaciones) 
         VALUES ('6', 'VERDE', 'Color #00FF00');
 INSERT INTO etiqueta (id, nombre, observaciones) 
-        VALUES ('7', 'AZUL', 'Color #0000FF');
+        VALUES ('7', 'AZUL', 'Color #2020FF');
 INSERT INTO etiqueta (id, nombre, observaciones) 
         VALUES ('8', 'AMARILLO', 'Color #FFFF00'); 
 INSERT INTO etiqueta (id, nombre, observaciones)
@@ -23,24 +23,24 @@ INSERT INTO etiqueta (id, nombre, observaciones)
 	VALUES ('10', 'DIA_INEXACTO', 'El dia del caso es inexacto');
 
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
-	VALUES ('eti-1', '2011-02-22', 'Creaci髇 de tablas');
+	VALUES ('eti-1', '2011-02-22', 'Creaci贸n de tablas');
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
-	VALUES ('eti-c1', '2011-02-22', 'Actualiza m骴ulo antiguo');
+	VALUES ('eti-c1', '2011-02-22', 'Actualiza m贸dulo antiguo');
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
-	VALUES ('eti-d1', '2011-02-22', 'Actualiza m骴ulo antiguo');
+	VALUES ('eti-d1', '2011-02-22', 'Actualiza m贸dulo antiguo');
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('eti-ir', '2011-02-22', 'Importado de Relato');
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('eti-col', '2011-02-22', 'Colores');
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
-	VALUES ('eti-er', '2011-05-07', 'Error en importaci髇');
+	VALUES ('eti-er', '2011-05-07', 'Error en importaci贸n');
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('eti-fi', '2011-07-19', 'Etiqueta fecha inexacta');
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
-	VALUES ('eti-fe', '2011-07-19', 'Fechas en tablas b醩icas');
+	VALUES ('eti-fe', '2011-07-19', 'Fechas en tablas b谩sicas');
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
 	VALUES ('1.2-re', '2011-07-19', 'Renombra tablas');
 INSERT INTO actualizacionbase (id, fecha, descripcion) 
-	VALUES ('1.2-el', '2011-07-19', 'Localizaci髇');
+	VALUES ('1.2-el', '2011-07-19', 'Localizaci贸n');
 
 

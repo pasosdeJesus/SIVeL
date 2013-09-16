@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="cintercambio">
+	<title>Intercambio de casos</title>
+	<para>Para intercambiar casos con otros sistemas de informaci&oacute;n
+		o con otras instalaciones de SIVeL puede emplear el 
+		relato del SINCODH.  Se trata de un formato XML al cual
+		SIVeL puede exportar e importar.
+	</para>
+
+	<sect2 id="cexportar">
+	<title>Exportar casos</title>
+	<para>Para exportar uno o más casos realice una consulta (bien sea 
+		detallada o bien sea web) cuyo resultado conste justamente de
+		los casos que desee exportar. En "Forma de Presentaci&oacute;n"
+		elija "Relato XML."  Así cuando realice
+		la b&uacute;squeda se generará un archivo con los casos (digamos
+		que lo llama <filename>casos1.xrlt</filename>),
+		el cual podrá guardar para enviar o utilizarlo posteriormente
+		en otro sistema de informaci&oacute;n.
+	</para>
+	<warning><para>Se excluya Fuentes de los "Campos por mostrar" en
+			la consulta, de manera que sus fuentes no hagan 
+			parte del relato. Justamente para mantener el
+			principio de reserva de fuentes.
+	</para></warning>
+	<para>Cada relato exportado tendrá el nombre de organizaci&oacute;n y
+		los derechos de reproducci&oacute;n que haya especificado
+		en las variables <literal>organizacion_responsable</literal>
+		y <literal>derechos</literal> del archivo
+		de configuracion de su sitio (<filename>conf.php</filename>).
+	</para>
+</sect2>
+
+	<sect2 id="cimportar">
+	<title>Importar casos</title>
+	<para>Para importar uno o más casos desde el men&uacute; principal
+		elija Otros->Importar Relatos, seleccione el archivo con 
+		el/los relatos por importar y presione el bot&oacute;n Importar.
+	</para>
+	<para>A continuaci&oacute;n empezará a ver reportes
+		de los relatos importados junto con el n&uacute;mero con el
+		que cada uno quede.
+	</para>
+	<para>Por favor vea las observaciones que este reporte pueda incluir
+		y que describen problemas en la conversi&oacute;n.   
+		Esas observaciones quedan como etiquetas de los casos
+		con problemas, posteriormente puede consultarlas --y eliminar
+		la etiqueta cuando resuelva el problema-- desde la
+		Consulta Web eligiendo la etiqueta IMPORTA_RELATO.
+	</para>
+	</sect2>
+
+</sect1>

@@ -9,7 +9,7 @@
  * @package   SIVeL
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2012 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -18,4 +18,8 @@
 
 $GLOBALS['modulo'][400] = '';
 
-$GLOBALS['nueva_ficha_tabuladores'][] =  array(9, 'segjudicial', 'modulos/segjudicial/PagSegJudicial', 9);
+if (!esta_nueva_ficha('segjudicial')) {
+    $GLOBALS['nueva_ficha_tabuladores'][] =  array(
+        9, 'segjudicial', 'modulos/segjudicial/PagSegJudicial', 9
+    );
+}

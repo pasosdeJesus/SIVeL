@@ -15,27 +15,36 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+global $dbservidor;
 /** Servidor/socket del Motor de bases de datos */
-$dbservidor = "unix(/tmp)"; # Si prefiere TCP/IP (no recomendado) use tcp(localhost)
+// Si prefiere TCP/IP (no recomendado) use tcp(localhost)
+$dbservidor = "unix(/tmp)"; 
 
+global $dbnombre;
 /** Nombre de base de datos */
 $dbnombre = "sivel";
 
+global $dbusuario;
 /** Usuario del MBD */
 $dbusuario = "sivel";
 
+global $dbclave;
 /** Clave del usuario ante el MBD */
 $dbclave = "xyz";
 
+global $socketopt;
 /** Opciones especiales para acceder base de datos desde consola */
 $socketopt = "-h /var/www/tmp";
 
+global $dirchroot;
 /** Directorio en el que correo servidor web */
 $dirchroot = "/var/www";
 
+global $dirserv;
 /** Directorio de fuentes en servidor web */
 $dirserv = "/htdocs/sivel";
 
+global $dirsitio;
 /** Directorio del sitio relativo a $dirserv */
 $dirsitio = "sitios/sivel";
 
@@ -88,7 +97,7 @@ $GLOBALS['consulta_web_fecha_max'] = '2024-11-30';
 /** Fecha mínima de caso por consultar en web
  * @global string $GLOBALS['consulta_web_fecha_min']
  */
-$GLOBALS['consulta_web_fecha_min'] = '2001-1-1';
+$GLOBALS['consulta_web_fecha_min'] = '1990-1-1';
 
 /** Máximo de registros por retornar en una consulta web (0 es ilimitado)
  * @global string $GLOBALS['consulta_web_max']
@@ -105,20 +114,31 @@ $GLOBALS['anio_min']=1990;
 */
 $GLOBALS['actoscolectivos'] = true;
 
+/** Consulta adicional para determinar casos en los que aparece una
+ * persona además de lo estándar de SIVeL básico (ver json_persona.php).
+ * Emplear id para comparar identificación de persona.
+ * @global bool $GLOBALS['persona_en_caso']
+*/
+$GLOBALS['persona_en_caso'] = '';
+
+
 // Opciones de Reporte Tabla
 $GLOBALS['reporte_tabla_fila_totales'] = false;
 
 
 // VOLCADOS  - COPIAS DE RESPALDO LOCALES
 
+global $imagenrlocal;
 /** Contenedor cifrado de volcados */
 $imagenrlocal = "/var/resbase.img";
 
+global $rlocal;
 /** Directorio local donde quedara volcado diarío del último mes
  * Se espera que se almacene en el contenedor cifrado.
  */
 $rlocal = "/var/www/resbase";
 
+global $copiaphp;
 /**
  * Se copian fuentes de PHP en directorio de respaldos?
  */
@@ -126,10 +146,12 @@ $copiaphp = false;
 
 // COPIAS DE RESPALDO REMOTAS
 
+global $rremotos;
 /** Destinos a los cuales copiar volcado diario de la última semana.
  * e.g "usuario1@maquina1: usuario2@maquina2:" */
 $rremotos = "";
 
+global $llave;
 /** Llave ssh. Generela con ssh-keygen sin clave, el dueño debe ser quien
  * ejecuta el script respaldo.sh, no debe permitir lectura de nadie más */
 $llave = "/home/miusuario/.ssh/rsa_respaldo";
@@ -137,15 +159,19 @@ $llave = "/home/miusuario/.ssh/rsa_respaldo";
 
 // PUBLICACIÓN EN PÁGINA WEB
 
+global $usuarioact;
 /**  Usuario */
 $usuarioact = "sivel";
 
+global $maquinaweb;
 /** Comptuador al cual copiar */
 $maquinaweb = "otramaquina";
 
+global $dirweb;
 /** Directorio */
 $dirweb = "/tmp";
 
+global $opscpweb;
 /** Opciones para scp de actweb, e.g -i ... */
 $opscpweb = "";
 
@@ -184,7 +210,7 @@ $GLOBALS['ficha_tabuladores'] = array(
 $GLOBALS['nueva_ficha_tabuladores'] = array();
 
 // MODULOS
-
+global $modulos;
 /** Módulos empleados (relativos a directorio con fuentes) */
 $modulos = "modulos/anexos modulos/etiquetas modulos/mapag";
 
@@ -206,22 +232,22 @@ $GLOBALS['m_rol'] = array (
  * @global string $GLOBALS['m_opcion']
  */
 $GLOBALS['m_opcion'] = array (
-    10 => array('nombre' => _('Administración'), 'idpapa' => 0, 'url' => NULL),
+    10 => array('nombre' => _('Administración'), 'idpapa' => 0, 'url' => null),
     11 => array(
         'nombre' => _('Tablas Básicas'), 'idpapa' => 10,
         'url' => 'tablas_basicas'
     ),
     12 => array('nombre' => _('Usuarios'), 'idpapa' => 10, 'url' => 'usyroles'),
-    20 => array('nombre' => _('Caso'), 'idpapa' => 0, 'url' => NULL),
+    20 => array('nombre' => _('Caso'), 'idpapa' => 0, 'url' => null),
     21 => array('nombre' => _('Ficha'), 'idpapa' => 20, 'url' => 'captura_caso'),
-    30 => array('nombre' => _('Consultas'), 'idpapa' => 0, 'url' => NULL ),
+    30 => array('nombre' => _('Consultas'), 'idpapa' => 0, 'url' => null ),
     31 => array(
         'nombre' => _('Consulta Detallada'), 'idpapa' => 30, 'url' => 'consulta'
     ),
     32 => array(
         'nombre' => _('Consulta Web'), 'idpapa' => 30, 'url' => 'consulta_web'
     ),
-    40 => array('nombre' => _('Reportes'), 'idpapa' => 0, 'url' => NULL),
+    40 => array('nombre' => _('Reportes'), 'idpapa' => 0, 'url' => null),
     41 => array(
         'nombre' => _('Revista'), 'idpapa' => 40,
         'url' => 'consulta_web?mostrar=revista&sincampos=caso_id'
@@ -235,18 +261,18 @@ $GLOBALS['m_opcion'] = array (
     ),
     44 => array(
         'nombre' => _('General por Localizacion'), 'idpapa' => 40,
-        'url' => 'consulta_web?mostrar=general&orden=localizacion'
+        'url' => 'consulta_web?mostrar=general&orden=ubicacion'
     ),
     45 => array(
         'nombre' => _('Revista con código'), 'idpapa' => 40,
         'url' => 'consulta_web?mostrar=revista'
     ),
-    50 => array('nombre' => _('Conteos'), 'idpapa' => 0, 'url' => NULL),
+    50 => array('nombre' => _('Conteos'), 'idpapa' => 0, 'url' => null),
     51 => array(
         'nombre' => _('V. Individuales'), 'idpapa' => 50,
         'url' => 'estadisticas'
     ),
-    60 => array('nombre' => _('Otros'), 'idpapa' => 0, 'url' => NULL),
+    60 => array('nombre' => _('Otros'), 'idpapa' => 0, 'url' => null),
     61 => array(
         'nombre' => _('Importar Relatos'), 'idpapa' => 60,
         'url' => 'importaRelato'

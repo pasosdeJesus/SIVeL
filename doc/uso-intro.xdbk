@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<highlights role="logros">
+	<itemizedlist>
+		<listitem role="logro" id="iniciar"><para>Puede iniciar una sesi&oacute;n y 
+				distinguir posibilidad de uso seg&uacute;n el rol.
+		</para></listitem>
+		<listitem role="logro" id="buscar"><para>Puede buscar casos por c&oacute;digo y otros criterios y examinarlos tanto en reportes como individualmente
+		</para></listitem>
+		<listitem role="logro" id="actualizar"><para>Puede actualizar 
+				informaci&oacute;n de un caso o agregar casos nuevos
+		</para></listitem>
+		<listitem role="logro" id="eliminar"><para>Puede eliminar un caso
+		</para></listitem>
+		<listitem role="logro" id="conteos"><para>Puede generar conteos de 
+				víctimas o casos, filtrando por rangos de tiempo y 
+				desagregando/agregando seg&uacute;n diversos criterios.
+		</para></listitem>
+	</itemizedlist>
+</highlights>
+<!--NTRODUCCI&Oacute;N DE CASOS DIGITALES: En caso de que la informaci&oacute;n que se encuentre sobre los casos sea digital, se recomienda ingresar a la base de datos normalmente y luego ingresar a otro computador conectado a la red interna de Humanidad Vigente. Para poder trabajar con los dos sistemas operativos se puede acceder a Mozilla Firefox y entrar al hipervínculo que conduce a la base de datos (así la informaci&oacute;n se podrá simplemente cortar y pegar, además de poder guardar las bases de datos como páginas Web). En caso de pérdida del n&uacute;mero de servidor, digitar en la barra de direcci&oacute;n:  https://100.100.100.125  -->
+<para>SIVeL es una aplicaci&oacute;n web por lo que se usa con un navegador
+	que soporte Javascript.
+	En el momento de este escrito, por economía,
+	seguridad y velocidad sugerimos 
+	<ulink url="http://www.mozilla.org">Mozilla-Firefox</ulink> y
+	<ulink url="http://chrome.google.com">Chromium</ulink>.
+	En cuanto a sistema operativo, como los virus evidencian potenciales 
+	huecos de seguridad que pueden hacer perder los esfuerzos de 
+	seguridad de SIVeL, recomendamos emplearlo desde computadores 
+	con OpenBSD o en su defecto Linux.
+</para>
+<para> Hemos procurado que la operaci&oacute;n de SIVeL sea simple, basta que 
+	tenga en cuenta generalidades de la interacci&oacute;n con su navegador
+	por ejemplo si emplea los recomendados:
+	<itemizedlist>
+		<listitem>
+			<para>
+				Los cuadros de selecci&oacute;n única son desplegables y
+				s&oacute;lo permiten elegir una opci&oacute;n
+				<informalfigure>
+					<screenshot><mediaobject><imageobject>
+								<imagedata fileref="selunica.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+							<imageobject><imagedata fileref="selunica.png" format="PNG" align="center"></imagedata></imageobject>
+							<textobject><phrase>Cuadro de Selección Única</phrase></textobject></mediaobject>
+					</screenshot>
+				</informalfigure>
+			</para>
+			<para>
+				Los cuadros de selecci&oacute;n múltiple 
+				permiten seleccionar/deseleccionar varias opciones.  Para hacerlo
+				presione la tecla <keycap>Control</keycap>
+				mientras pulsa el bot&oacute;n izquierdo del ratón.
+				<informalfigure>
+					<screenshot><mediaobject><imageobject>
+								<imagedata fileref="selmultiple.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+							<imageobject><imagedata fileref="selmultiple.png" format="PNG" align="center"></imagedata></imageobject>
+							<textobject><phrase>Cuadro de Selección Múltiple</phrase></textobject></mediaobject>
+					</screenshot>
+				</informalfigure>
+
+			</para>
+		</listitem>
+		<listitem>
+			<para>En cuadros de selecci&oacute;n podrá
+				comenzar a escribir la palabra con la que comienza 
+				la opci&oacute;n que desea elegir.
+			</para>
+		</listitem>
+	</itemizedlist>
+
+</para>

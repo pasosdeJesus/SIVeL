@@ -64,7 +64,7 @@ class DataObjects_Clase extends DataObjects_Basica
         'id_municipio'
     );
     var $fb_preDefOrder = array(
-        'nombre', 'id_municipio',
+        'nombre', 'id_departamento', 'id_municipio',
         'id_tclase',
         'fechacreacion',
         'fechadeshabilitacion',

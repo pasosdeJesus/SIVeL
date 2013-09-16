@@ -11,10 +11,41 @@ USERACT=$(USERCVS),sivel
 
 EXT_DOCBOOK=xdbk
 
-SOURCES=$(PROYECTO).$(EXT_DOCBOOK) principios.$(EXT_DOCBOOK) ambiente.$(EXT_DOCBOOK) instala.$(EXT_DOCBOOK) uso.$(EXT_DOCBOOK) administracion.$(EXT_DOCBOOK) personalizacion.$(EXT_DOCBOOK) creditos.$(EXT_DOCBOOK) novedades.$(EXT_DOCBOOK) varconfphp.$(EXT_DOCBOOK)
+SOURCES=$(PROYECTO).xdbk principios.xdbk ambiente.xdbk instala.xdbk \
+	uso-intro.xdbk uso-intro.xdbk  uso-autentica.xdbk \
+	uso-consultaweb.xdbk ficha-intro.xdbk ficha-basicos.xdbk \
+	ficha-ubicacion.xdbk ficha-frecuentes.xdbk ficha-otras.xdbk \
+	ficha-contexto.xdbk ficha-presponsables.xdbk ficha-vindividual.xdbk \
+	ficha-vcolectiva.xdbk ficha-actos.xdbk ficha-memo.xdbk \
+	../modulos/anexos/doc/ficha-anexos.xdbk \
+	../modulos/etiquetas/doc/ficha-etiquetas.xdbk \
+	ficha-evaluacion.xdbk \
+	uso-consultaweb.xdbk uso-reportes.xdbk  uso-cconteos.xdbk \
+	uso-cintercambio.xdbk administracion.xdbk \
+	per-intro.xdbk per-interfaz.xdbk per-reint.xdbk per-modulos.xdbk \
+	per-sitio.xdbk per-fuentes.xdbk per-seguridad.xdbk \
+	creditos.xdbk novedades.xdbk varconfphp.xdbk personaliza.ent
 # Listado de fuentes XML. Preferiblemente en el orden de inclusión
 
-IMAGES=img/home.png img/prev.png img/toc-minus.png img/blank.png img/important.png img/toc-plus.png img/caution.png img/next.png img/tip.png img/up.png img/draft.png img/note.png img/toc-blank.png img/warning.png img/nivel1.png img/nivel2.png img/nivel3.png img/nivel4.png img/nivel5.png img/nivel6.png img/pfichabasicos.png img/pfichaubicacion.png img/pfichafrecuentes.png img/pfichaotras.png img/pfichacontexto.png img/pfichapresponsables.png img/pfichavictimaindividual.png img/pfichavictimacolectiva.png img/pfichavictimacombatiente.png img/pfichaactos.png img/pfichamemo.png img/pfichaanexos.png img/pfichaetiquetas.png img/pfichaevaluacion.png img/pconsultaweb.png img/pautentica.png img/pmenu.png img/peditafrecuente.png img/pnuevafrecuente.png img/preporteconsolidado.png img/preporterevistanobelicas.png img/ptablasbasicas.png img/ptablasbasicas-noautorizado.png img/pusuarios.png img/pusuarionuevo.png img/ptablafrecuente.png img/pconteovindividuales.png img/presconteo.png img/presconteo2.png img/estructura.png img/arqseg.png
+IMAGES= img/home.png img/prev.png img/toc-minus.png img/blank.png \
+	img/important.png img/toc-plus.png img/caution.png img/next.png \
+	img/tip.png img/up.png img/draft.png img/note.png img/toc-blank.png \
+	img/warning.png img/nivel1.png img/nivel2.png img/nivel3.png \
+	img/nivel4.png img/nivel5.png img/nivel6.png img/pfichabasicos.png \
+	img/pfichaubicacion.png img/pfichafrecuentes.png img/pfichaotras.png \
+	img/pfichacontexto.png img/pfichapresponsables.png \
+	img/pfichavictimaindividual.png img/pfichavictimacolectiva.png \
+	img/pfichavictimacombatiente.png img/pfichaactos.png \
+	img/pfichamemo.png \
+	../modulos/anexos/doc/img/pfichaanexos.png \
+	../modulos/etiquetas/doc/img/pfichaetiquetas.png \
+	img/pfichaevaluacion.png img/pconsultaweb.png img/pautentica.png \
+	img/pmenu.png img/peditafrecuente.png img/pnuevafrecuente.png \
+	img/preporteconsolidado.png img/preporterevistanobelicas.png \
+	img/ptablasbasicas.png img/ptablasbasicas-noautorizado.png \
+	img/pusuarios.png img/pusuarionuevo.png img/ptablafrecuente.png \
+	img/pconteovindividuales.png img/presconteo.png img/presconteo2.png \
+	img/estructura.png img/arqseg.png img/selunica.png img/selmultiple.png
 
 # Listado de imagenes, preferiblemente en formato PNG 
 # Note que desde home.png son estandar en DocBook
@@ -40,7 +71,7 @@ DSSSL_HTML=estilo.dsl\#html
 OTHER_HTML=
 
 
-INDEX=indice.$(EXT_DOCBOOK)
+INDEX=indice.xdbk
 # Si habrá un índice, nombre del archivo con el que debe generarse (incluirlo al final del documento)
 
 
@@ -118,4 +149,7 @@ varconfphp.xdbk: ../sitios/pordefecto/conf.php ../sitios/pordefecto/conf_int.php
 	awk -f herram/convar.awk ../sitios/pordefecto/conf.php >> varconfphp.xdbk
 	awk -f herram/convar.awk ../sitios/pordefecto/conf_int.php >> varconfphp.xdbk
 
+personaliza.ent: personaliza.ent.plantilla
+	if (test -f personaliza.ent) then { cp personaliza.ent personaliza.ent.copia; } fi
+	cp personaliza.ent.plantilla personaliza.ent
 

@@ -78,8 +78,6 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
 
         $cons = 'cons';
         $cons2="cons2";
-/*        $cons21="cons21";
-        $cons22="cons22"; */
         $where = "";
 
         consulta_and(
@@ -95,7 +93,9 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             consulta_and($bd, $where, "caso.fecha", arr_a_fecha($pFini, true), ">=");
         }
         if ($pFfin['Y'] != '') {
-           consulta_and($bd, $where, "caso.fecha", arr_a_fecha($pFfin, false), "<=");
+            consulta_and(
+                $bd, $where, "caso.fecha", arr_a_fecha($pFfin, false), "<="
+            );
         }
 
         $tablaSegun = $titSegun = "";
@@ -120,14 +120,12 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         }
 
         if ($pSegun == 'id_rangoedad') {
-/*            consulta_and_sinap($where, "victima.id_rangoedad","rangoedad.id");
-            $tablas .= ", rangoedad"; */
             $campoSegun = "id_rangoedad";
             $cfSegun = "rangoedad.rango";
             $tablaSegun = "rangoedad, ";
             $condSegun = "AND rangoedad.id=$cons2.id_rangoedad";
             $titSegun = 'Edad';
-        }  else if ($pSegun == 'sexo') {
+        } else if ($pSegun == 'sexo') {
             $campoSegun = "sexo";
             $cfSegun = "sexo";
             $tablaSegun = "";
@@ -170,8 +168,9 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             $condSegun = "AND sectorsocial.id=$cons2.id_sectorsocial";
             $titSegun = 'Sector Social';
         } else if ($pSegun == 'meses') {
-            $campoSegun = "extract(year from fecha) || '-' || lpad(cast(extract(month from fecha) as text), 2, cast('0' as text))";
-
+            $campoSegun = "extract(year from fecha) || '-' || "
+                . " lpad(cast(extract(month from fecha) as text), 2, "
+                . " cast('0' as text))";
             $cfSegun = "meses";
             $tablaSegun= "";
             $titSegun = 'Mes';
@@ -205,7 +204,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         }
         $tCat .= '';
         $tQue .= "victimacolectiva, grupoper $tCat, ";
-        consulta_and_sinap($where, "actocolectivo.id_caso","caso.id");
+        consulta_and_sinap($where, "actocolectivo.id_caso", "caso.id");
         consulta_and_sinap(
             $where, "actocolectivo.id_grupoper",
             "grupoper.id"
@@ -257,8 +256,8 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         if ($where != "") {
             $q1 .= " AND ".$where;
         }
-        hace_consulta($db, "DROP VIEW $cons22", false, false);
-        hace_consulta($db, "DROP VIEW $cons21", false, false);
+        //hace_consulta($db, "DROP VIEW $cons22", false, false);
+        //hace_consulta($db, "DROP VIEW $cons21", false, false);
         hace_consulta($db, "DROP VIEW $cons2", false, false);
         hace_consulta($db, "DROP VIEW $cons", false, false);
         //echo "q1 es $q1<hr>";
@@ -285,8 +284,8 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             $result->getMessage()."'"
             );
         }
-// El método para departamento y municipio es machete porque cuando
-// no hay asigna santa-marta y así saldría e.g PUTUMAYO    SANTA MARTA
+        // El método para departamento y municipio es machete porque cuando
+        // no hay asigna santa-marta y así saldría e.g PUTUMAYO    SANTA MARTA
         $q3 = "SELECT $cfSegun3 $tDep $tMun
             TRIM(pconsolidado.rotulo),
             SUM($cons2.personasaprox)
@@ -342,7 +341,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
                 for ($i = 0; $i < $nc-2; $i++) {
                     $celda[$nf][$cab[$i]] = $row[$i];
                 }
-            //    echo $nf . "<br>";
+                //echo $nf . "<br>";
                 $tfil[$nf]=1;
                 //$tcol[$row[$nc-2]]=1;
                 $celda[$nf][$row[$nc-2]] = $row[$nc-1];
@@ -369,7 +368,7 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
                 foreach ($tcol as $c => $t2) {
                     echo "<td>";
                     if (isset($celda[$f][$c])) {
-                        echo htmlentities($celda[$f][$c], ENT_COMPAT, 'UTF-8'); # . " " . $sfil;
+                        echo htmlentities($celda[$f][$c], ENT_COMPAT, 'UTF-8');
                         if ($ncol >= $colenc) {
                             $scol[$c] += (int)$celda[$f][$c];
                             $sfil += (int)$celda[$f][$c];
@@ -427,9 +426,6 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
                 echo "\n";
             }
         }
-
-/*        $r=new ExportaResultados($db, $result); $r->aHtml(); */
-
     }
 }
 
@@ -450,9 +446,6 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
      * Constructora.
      * Ver documentación completa en clase base.
      *
-     * @param string $nomForma Nombre
-     * @param string $mreq     Mensaje de dato requerido
-     *
      * @return void
      */
     function PagEstadisticasCol()
@@ -465,8 +458,13 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
     }
 
 
+    /** 
+     * Retorna id del tipo de violencia
+     *
+     * @return string id
+     */
     function idTipoViolencia()
-{
+    {
         $ntipoviolencia= null;
         if (isset($this->_submitValues['id_tviolencia'])) {
             $ntipoviolencia = (int)$this->_submitValues['id_tviolencia'] ;
@@ -476,7 +474,11 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
         return $ntipoviolencia;
     }
 
-
+    /** 
+     * Retorna id de la supracategoria
+     *
+     * @return string id
+     */
     function idSupracategoria()
     {
         $nclase = null;
@@ -487,6 +489,11 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
     }
 
 
+    /**
+     * Crear formulario
+     *
+     * @return void
+     */
     function buildForm()
     {
         encabezado_envia();
@@ -632,6 +639,10 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
 
 /**
  * Presenta formulario filtro o estadística
+ *
+ * @param string $dsn URL de base de datos
+ *
+ * @return void
  */
 function muestra($dsn)
 {

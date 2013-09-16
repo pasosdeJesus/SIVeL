@@ -32,7 +32,7 @@ require_once $_SESSION['dirsitio'] . '/conf.php';
  * @author   Vladimir Támara <vtamara@pasosdeJesus.org>
  * @license  https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público.
  * @link     http://sivel.sf.net/tec
- * @see DB_DataObject_SIVe
+ * @see      DB_DataObject_SIVe
  */
 class DataObjects_Caso extends DB_DataObject_SIVeL
 {
@@ -104,9 +104,9 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
     {
         parent::__construct();
 
-    /**
-     * Nombres por presentar para cada campo.
-     */
+        /**
+         * Nombres por presentar para cada campo.
+         */
         $this->fb_fieldLabels= array(
            'titulo' => _('Nombre'),
            'fecha' => _('Fecha'),
@@ -219,10 +219,6 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(55);
             $e->setMaxlength(50);
-/*            if (isset($GLOBALS['etiqueta']['titulo'])) {
-                $e->setLabel($GLOBALS['etiqueta']['titulo']);
-}*/
-
         }
 
         $e =& $form->getElement('fecha');
@@ -238,75 +234,23 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(10);
             $e->setMaxlength(10);
-            /*if (isset($GLOBALS['etiqueta']['hora'])) {
-                $e->setLabel($GLOBALS['etiqueta']['hora']);
-            }*/
         }
 
         $e =& $form->getElement('duracion');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(10);
             $e->setMaxlength(10);
-            /*if (isset($GLOBALS['etiqueta']['duracion'])) {
-                $e->setLabel($GLOBALS['etiqueta']['duracion']);
-            } */
         }
 
         $e =& $form->getElement('memo');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setCols(75);
             $e->setRows(18);
-            /*if (isset($GLOBALS['etiqueta']['memo'])) {
-                $e->setLabel($GLOBALS['etiqueta']['memo']);
-            } */
         }
-
-/*        $e =& $form->getElement('grconfiabilidad');
-        if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['grconfiabilidad'])
-        ) {
-                $e->setLabel($GLOBALS['etiqueta']['grconfiabilidad']);
-        }
-
-        $e =& $form->getElement('gresclarecimiento');
-        if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['gresclarecimiento'])
-        ) {
-                $e->setLabel($GLOBALS['etiqueta']['gresclarecimiento']);
-        }
-
-        $e =& $form->getElement('grimpunidad');
-        if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['grimpunidad'])
-        ) {
-                $e->setLabel($GLOBALS['etiqueta']['grimpunidad']);
-        }
-
-        $e =& $form->getElement('grinformacion');
-        if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['grinformacion'])
-        ) {
-            $e->setLabel($GLOBALS['etiqueta']['grinformacion']);
-        }
-
-        $e =& $form->getElement('id_intervalo');
-        if (isset($e) && !PEAR::isError($e)
-            && $e->getType() == 'select'
-        ) {
-            $e =& $form->getElement('id_intervalo');
-            if (isset($GLOBALS['etiqueta']['intervalo'])) {
-                $e->setLabel($GLOBALS['etiqueta']['intervalo']);
-            }
-            $e->_options = htmlentities_array($e->_options);
-        }
- */
         $e =& $form->getElement('bienes');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setCols(70);
             $e->setRows(1);
-/*            if (isset($GLOBALS['etiqueta']['bienes'])) {
-                $e->setLabel($GLOBALS['etiqueta']['bienes']);
-} */
         }
 
     }
@@ -314,17 +258,14 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
     /**
      * Convierte registro a relato (arreglo de elementos) que agrega a $ar
      *
-     * @param object &$ar   Arreglo de elementos
-     * @param object &$dad  Datos adicionales para conversión
+     * @param object &$ar Arreglo de elementos
+     * @param object $dad Datos adicionales para conversión
      *
      * @return void
      */
     function aRelato(&$ar, $dad = array())
     {
         parent::aRelato($ar, $dad);
-//        $ar['hechos'] = $this->memo;
-//        $ar['hora'] = $this->hora;
-//        $ar['duracion'] = $this->duracion;
         return $ar;
     }
 

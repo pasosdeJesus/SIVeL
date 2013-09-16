@@ -10,13 +10,19 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org> 
  * @copyright 2013 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   $$
+ * @version   GIT:
  * Acceso: CONSULTA PÚBLICA
  * @link      http://sivel.sf.net
  */
 
 
-function determina_host() {
+/**
+ * Retorna servidor
+ *
+ * @return string servidor
+ */
+function determina_host() 
+{
     if (isset($_SERVER['HTTP_REFERER'])) {
         $pu = parse_url($_SERVER['HTTP_REFERER']); 
     } else {
@@ -25,14 +31,25 @@ function determina_host() {
         $pu['host'] = $_SERVER['HTTP_HOST'];
         $pu['path'] = str_replace("modulos/mapag/", "", $_SERVER['REQUEST_URI']);
     }
-    $host = $pu['scheme'] . '://' . $pu['host'] . dirname($pu['path']) . "/";
-//trigger_error("host=$host");
-//trigger_error(var_export($pu, true));
-//trigger_error(print_r($_GET,true));
+    $host = $pu['scheme'] . '://' . $pu['host'] . dirname($pu['path']);
+    if ($host[strlen($host) - 1] != '/') {
+        $host .= "/";
+    }
+    //trigger_error("host=$host");
+    //trigger_error(var_export($pu, true));
+    //trigger_error(print_r($_GET,true));
 
     return $host;
 }
 
+/**
+ * Retorna error en lectura XML
+ * 
+ * @param string $error Descripcion
+ * @param object $xml   Objeto
+ *
+ * @return string mensaje de error
+ */
 function display_xml_error($error, $xml)
 {
     $return  = $xml[$error->line - 1] . "\n";
@@ -61,7 +78,16 @@ function display_xml_error($error, $xml)
     return "$return\n\n--------------------------------------------\n\n";
 }
 
-function errores_xml($xml, $ca) {
+/**
+ * Presenta errores en lectura XML
+ *
+ * @param object $xml Objeto
+ * @param string $ca  Unparsed xml string
+ *
+ * @return void
+ */
+function errores_xml($xml, $ca) 
+{
     $lxml = explode("\n", $ca);
     $errors = libxml_get_errors();
     foreach ($errors as $error) {

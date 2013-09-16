@@ -1,5 +1,5 @@
 
-SET client_encoding = 'LATIN1';
+SET client_encoding = 'UTF8';
 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('anexo-1', '2011-02-22', 'crea');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('anexo-1b', '2011-02-22', 'completa');

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="contexto">
+	<title>Contexto</title>
+
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichacontexto.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichacontexto.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Contexto</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+
+	<para>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+Contexto: en el que ocurri&oacute; el hecho de violencia.
+Los posibles contextos pueden configurarse en las tablas básicas
+(ver <xref linkend="tablasbasicas"/>).
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Antecedentes: al hecho de violencia.
+Son configurables en la tabla básica Antecedentes.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Bienes Afectados: Listado de bienes robados o destruidos durante el hecho.
+				</para>
+			</listitem>
+
+
+		</itemizedlist>
+
+	</para>
+</sect3>
+

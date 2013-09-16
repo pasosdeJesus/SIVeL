@@ -2035,15 +2035,12 @@ if (!aplicado($idac)) {
         $db, "ALTER TABLE usuario DROP CONSTRAINT usuario_id_rol_fkey", false
     );
     hace_consulta(
-        $db, "ALTER TABLE usuario CONSTRAINT usuario_id_rol_fkey", false
-    );
-    hace_consulta(
-        $db, "ALTER TABLE usuario CONSTRAINT usuario_id_rol_fkey", false
+        $db, "ALTER TABLE usuario DROP CONSTRAINT usuario_id_rol_check", false
     );
     hace_consulta(
         $db,
         "ALTER TABLE usuario ADD CONSTRAINT usuario_id_rol_check "
-        . " CHECK (id_rol>='1' AND id_rol<='4')", false
+        . " CHECK (rol>='1' AND rol<='4')", false
     );
     hace_consulta($db, 'DROP TABLE rol', false);
     hace_consulta($db, 'DROP SEQUENCE rol_seq', false);
@@ -2387,7 +2384,7 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db, "CREATE COLLATION es_co_utf_8 (LOCALE = 'es_CO.UTF-8')", false
     );
-    foreach(array(
+    foreach (array(
         'Antecedente', 'Categoria', 'Clase', 'Contexto',
         'Departamento', 'Etnia', 'Ffrecuente', 'Filiacion', 'Frontera', 
         'Fotra', 'Ffrecuente', 'Grupoper',
@@ -2433,7 +2430,7 @@ if (!aplicado($idac)) {
 $idac = '1.2-btc';
 if (!aplicado($idac)) {
     hace_consulta(
-        $db, "CREATE EXTENSION unaccent" 
+        $db, "CREATE EXTENSION unaccent", false
     );
     hace_consulta(
         $db, "ALTER TEXT SEARCH DICTIONARY unaccent (RULES='unaccent')", false
@@ -2454,6 +2451,21 @@ if (!aplicado($idac)) {
         false
     );
     hace_consulta(
+        $db, "CREATE INDEX persona_nombres_apellidos_doc ON persona "
+        . " USING gin(to_tsvector('spanish', unaccent(persona.nombres) "
+        . "|| ' ' || unaccent(persona.apellidos) "
+        . "|| ' ' || persona.numerodocumento))", 
+        false
+    );
+    hace_consulta(
+        $db, "CREATE INDEX persona_apellidos_nombres_doc ON persona "
+        . " USING gin(to_tsvector('spanish', unaccent(persona.apellidos) "
+        . " || ' ' || unaccent(persona.nombres) "
+        . " || ' ' || persona.numerodocumento))", 
+        false
+    );
+
+    hace_consulta(
         $db, "CREATE INDEX caso_titulo ON caso "
         . " USING gin(to_tsvector('spanish', unaccent(caso.titulo))) ",
         false
@@ -2467,19 +2479,96 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Búsqueda de textos');
 }
 
-
-
-/*$idac = '1.2-rt4';
+$idac = '1.2-idn';
 if (!aplicado($idac)) {
     hace_consulta(
-        $db,
-        "ALTER TABLE vinculoestado_comunidad RENAME TO "
-        . "comunidad_vinculoestado", false
+        $db, "UPDATE persona SET numerodocumento = "
+        . " regexp_replace(numerodocumento, '[^0-9]', '', 'g') ", false
+    );
+    hace_consulta(
+        $db, "UPDATE persona SET numerodocumento = NULL "
+        . " WHERE numerodocumento = '' ", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE persona ALTER numerodocumento TYPE BIGINT USING 
+        CAST (numerodocumento AS BIGINT)"
+    );
+    hace_consulta(
+        $db, "ALTER TABLE persona DROP CONSTRAINT numerodocumento_key ", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE persona ADD CONSTRAINT numerodocumento_key "
+        . " UNIQUE (tipodocumento, numerodocumento)"
+    );
+    aplicaact($act, $idac, 'Numero de documento entero');
+}
+
+$idac = '1.2-ext';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "INSERT INTO departamento 
+        (id, nombre, latitud, longitud, fechacreacion, fechadeshabilitacion) 
+        VALUES (10000, 'EXTERIOR', NULL, NULL, '2013-06-13', NULL);", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO municipio
+        (id, nombre, id_departamento, latitud, longitud, 
+        fechacreacion, fechadeshabilitacion)
+        (SELECT id, nombre, 10000, latitud, longitud,
+        fechacreacion, fechadeshabilitacion FROM municipio
+        WHERE id_departamento='0');", false
+    );
+    foreach (array('clase', 'ubicacion', 'persona') as $t) {
+        hace_consulta(
+            $db, "UPDATE $t SET id_departamento = 10000
+            WHERE id_departamento = 0", false
+        );
+    }
+    hace_consulta(
+        $db, "DELETE FROM municipio WHERE id_departamento = '0'", false
+    );
+    hace_consulta(
+        $db, "DELETE FROM departamento WHERE id = '0'", false
+    );
+    aplicaact($act, $idac, 'Cambio de código EXTERIOR de 0 a 10000');
+}
+
+
+$idac = '1.2-tb';
+if (!aplicado($idac)) {
+
+    hace_consulta(
+        $db, "INSERT INTO vinculoestado(id, nombre, fechacreacion) 
+        VALUES (40, 'VICEPRESIDENCIA', '2013-07-05')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO organizacion(id, nombre, fechacreacion) 
+        VALUES (17, 'VÍCTIMAS', '2013-07-05')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO etnia (id, nombre, descripcion, fechacreacion) 
+        VALUES (60, 'ROM', '', '2013-07-05')", false
     );
 
-    die("x");
+    aplicaact($act, $idac, 'Aumentadas tablas básicas');
+}
+$idac = '1.2-pr1';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "UPDATE presponsable set papa='39' WHERE id='1'", false
+    );
+    hace_consulta(
+        $db, "UPDATE presponsable set papa='39' WHERE id='14'", false
+    );
+    hace_consulta(
+        $db, "UPDATE presponsable set papa='40' WHERE id='25'", false
+    );
+    hace_consulta(
+        $db, "UPDATE presponsable set papa='36' WHERE id='33'", false
+    );
+
     aplicaact($act, $idac, 'Renombrando tablas');
-} */
+} 
 
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
@@ -2578,10 +2667,6 @@ function lee_escritura($nd, $dbnombre, $dirap, $modo)
         "$dirap/DataObjects/$dbnombre.links.ini", $modo
     );
 }
-
-
-
-
 
 if (!isset($_SESSION['SIN_INDICES']) || !$_SESSION['SIN_INDICES']) {
     echo "Actualizando indices<br>";

@@ -110,9 +110,6 @@ class DataObjects_Comunidad_filiacion extends DB_DataObject_SIVeL
         if (isset($sel) && !PEAR::isError($sel)) {
             $sel->setMultiple(true);
             $sel->setSize(5);
-/*            if (isset($GLOBALS['etiqueta']['filiacion'])) {
-                $sel->setLabel($GLOBALS['etiqueta']['filiacion']);
-} */
         }
 
         $form->removeElement('id_grupoper');

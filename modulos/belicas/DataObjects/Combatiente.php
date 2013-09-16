@@ -44,7 +44,7 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
     var $alias;                           // varchar(-1)
     var $edad;                            // int4(4)
     var $sexo;                            // varchar(-1)  not null
-    var $id_resultado_agresion;           // int4(4)
+    var $id_resagresion;           // int4(4)
     var $id_profesion;                    // int4(4)
     var $id_rangoedad;                   // int4(4)
     var $id_filiacion;                    // int4(4)
@@ -75,7 +75,7 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
             'id_profesion'=> _('Profesion'),
             'id_organizacion'=> _('Organización Social'),
             'organizacionarmada'=> _('Organización Armada'),
-            'id_resultado_agresion'=> _('Resultado Agresión')
+            'id_resagresion'=> _('Resultado Agresión')
         );
 
 
@@ -85,12 +85,12 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
     var $fb_preDefOrder = array('nombre', 'alias', 'edad', 'sexo',
         'id_rangoedad', 'id_sectorsocial', 'id_vinculoestado',
          'id_filiacion', 'id_profesion', 'id_organizacion',
-        'organizacionarmada', 'id_resultado_agresion'
+        'organizacionarmada', 'id_resagresion'
     );
     var $fb_fieldsToRender = array('nombre', 'alias', 'edad', 'sexo',
         'id_rangoedad', 'id_sectorsocial', 'id_vinculoestado',
          'id_filiacion', 'id_profesion', 'id_organizacion',
-        'organizacionarmada', 'id_resultado_agresion'
+        'organizacionarmada', 'id_resagresion'
     );
     var $fb_enumFields = array('sexo');
     var $es_enumOptions = array('sexo' => array('F' => 'Femenino',
@@ -119,9 +119,9 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
      *
      * @return Valor para BD
      */
-    function setedad($value)
+    function setedad($valor)
     {
-        $this->edad= ($value == '') ? 'null' : $value;
+        $this->edad= ($valor == '') ? 'null' : $valor;
     }
 
     /**
@@ -161,34 +161,19 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
         if (isset($sel) && !PEAR::isError($sel)) {
             $sel->setSize(70);
             $sel->setMaxlength(100);
-/*            if (isset($GLOBALS['etiqueta']['nombre'])) {
-                $sel->setLabel($GLOBALS['etiqueta']['nombre']);
-} */
         }
 
         $e =& $form->getElement('alias');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(70);
             $e->setMaxlength(100);
-/*            if (isset($GLOBALS['etiqueta']['alias'])) {
-                $e->setLabel($GLOBALS['etiqueta']['alias']);
-}*/
         }
 
         $e =& $form->getElement('edad');
         if (isset($e) && !PEAR::isError($e)) {
             $e->setSize(5);
             $e->setMaxlength(5);
-/*            if (isset($GLOBALS['etiqueta']['edad'])) {
-                $e->setLabel($GLOBALS['etiqueta']['edad']);
-}*/
         }
-/*        $e =& $form->getElement('sexo');
-        if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['sexo'])
-        ) {
-            $e->setLabel($GLOBALS['etiqueta']['sexo']);
-        }  */
 
         $e =& $form->getElement('id_rangoedad');
         if (isset($e) && !PEAR::isError($e)
@@ -239,11 +224,11 @@ class DataObjects_Combatiente extends DB_DataObject_SIVeL
             $e->setLabel($GLOBALS['etiqueta']['organizacion_armada']);
         }
 
-        $e =& $form->getElement('id_resultado_agresion');
+        $e =& $form->getElement('id_resagresion');
         if (isset($e) && !PEAR::isError($e)
-            && isset($GLOBALS['etiqueta']['resagresion'])
+            && isset($GLOBALS['etiqueta']['id_resagresion'])
         ) {
-            $e->setLabel($GLOBALS['etiqueta']['resagresion']);
+            $e->setLabel($GLOBALS['etiqueta']['id_resagresion']);
         }
 
     }

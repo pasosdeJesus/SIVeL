@@ -461,7 +461,7 @@ CREATE TABLE persona (
 	id_clase        INTEGER,
 	-- Verificar en interfaz
 	tipodocumento VARCHAR(2),
-	numerodocumento VARCHAR(50)
+	numerodocumento BIGINT
 );
 
 CREATE INDEX persona_nombres_apellidos ON persona 
@@ -471,6 +471,16 @@ USING gin(to_tsvector('spanish', unaccent(persona.nombres)
 CREATE INDEX persona_apellidos_nombres ON persona 
 USING gin(to_tsvector('spanish', unaccent(persona.apellidos)
 		|| ' ' || unaccent(persona.nombres)));
+
+CREATE INDEX persona_nombres_apellidos_doc ON persona 
+USING gin(to_tsvector('spanish', unaccent(persona.nombres) 
+	|| ' ' || unaccent(persona.apellidos) 
+	|| ' ' || COALESCE(persona.numerodocumento::TEXT, '')));
+
+CREATE INDEX persona_apellidos_nombres_doc ON persona 
+USING gin(to_tsvector('spanish', unaccent(persona.apellidos) 
+	 || ' ' || unaccent(persona.nombres) 
+	 || ' ' || COALESCE(persona.numerodocumento::TEXT, '')));
 
 CREATE TABLE trelacion (
 	id      CHAR(2) PRIMARY KEY,

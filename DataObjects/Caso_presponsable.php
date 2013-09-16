@@ -63,6 +63,9 @@ class DataObjects_Caso_presponsable extends DB_DataObject_SIVeL
     var $fb_addFormHeader = false;
     var $fb_excludeFromAutoRules = array('id_presponsable', 'tipo');
 
+    /**
+     * Constructora
+     */
     function __construct()
     {
         parent::__construct();
@@ -118,7 +121,7 @@ class DataObjects_Caso_presponsable extends DB_DataObject_SIVeL
     /**
      * Ajusta formulario generado.
      *
-     * @param object &$form      Formulario HTML_QuickForm
+     * @param object &$form        Formulario HTML_QuickForm
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void

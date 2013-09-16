@@ -1,5 +1,5 @@
 
-SET client_encoding = 'LATIN1';
+SET client_encoding = 'UTF8';
 
 SELECT setval('antecedente_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM antecedente) AS s;
 SELECT setval('caso_seq', MAX(id)) FROM caso;

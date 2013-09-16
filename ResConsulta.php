@@ -45,6 +45,7 @@ require_once 'DataObjects/Sectorsocial.php';
 require_once 'DataObjects/Profesion.php';
 require_once 'DataObjects/Presponsable.php';
 require_once 'DataObjects/Caso_etiqueta.php';
+require_once 'PagTipoViolencia.php';
 
 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
     list($n, $c, $o) = $tab;
@@ -267,6 +268,41 @@ class ResConsulta
         return $tot;
     }
 
+    /**
+     * Retorna cadena con ubicaciones como 2 columnas en HTML 
+     *
+     * @param handel  &$db    Conexión a BD
+     * @param integer $idcaso Id. del caso
+     *
+     * @return string ubicaciones
+     */
+    function ubicacion_separada_html(&$db, $idcaso)
+    {
+        $idd = array(); // Identificaciones
+        $idm = array();
+        $idc = array();
+        $ndd = array(); // Nombres
+        $ndm = array();
+        $ndc = array();
+        $tdu = array();
+        ResConsulta::extraeUbicacionCaso(
+            $idcaso,
+            $db, $idd, $ndd, $idm, $ndm, $idc, $ndc, $tdu
+        );
+        $seploc = "";
+        $vr = "";
+        $cdep = "";
+        $cmun = "";
+        $sep = "";
+        foreach ($ndd as $k => $nd) {
+            $cdep = $sep . htmlentities(trim($nd), ENT_COMPAT, 'UTF-8');
+            $cmun = $sep . htmlentities(trim($ndm[$k]), ENT_COMPAT, 'UTF-8');
+            $sep = "<br/>";
+        }
+        $vr = "$cmun</td><td valign='top'>$cdep";
+        return $vr;
+    }
+
 
     /**
      * Retorna cadena con ubicaciones
@@ -436,7 +472,7 @@ class ResConsulta
     function extraeColectivas($idcaso, &$db, &$idp, &$ndp, &$cdp,
         $id_grupoper, &$indid, &$totelem
     ) {
-        $q = "SELECT  id_grupoper, nombre, personasaprox " .
+        $q = "SELECT id_grupoper, nombre, personasaprox " .
             " FROM victimacolectiva, grupoper " .
             " WHERE victimacolectiva.id_grupoper=grupoper.id " .
             " AND id_caso='$idcaso' ORDER BY id_grupoper;";
@@ -672,6 +708,7 @@ class ResConsulta
     function aHtml($retroalim = true,
         $html_enlace1=null
     ) {
+        //echo "OJO aHtml";
         if ($html_enlace1 == null) {
             $html_enlace1 = '<a href = "consulta_web.php">'
                 . _('Consulta Web') . '</a>, ';
@@ -690,7 +727,7 @@ class ResConsulta
         $esadmin = false;
         if (isset($_SESSION['id_funcionario'])) {
             include $_SESSION['dirsitio'] . "/conf.php";
-
+            global $dsn;
             $aut_usuario = "";
             autentica_usuario($dsn, $aut_usuario, 0);
             if (in_array(42, $_SESSION['opciones'])) {
@@ -753,7 +790,15 @@ class ResConsulta
             $html_renglon = "<tr>";
             $rtexto = "";
             foreach ($this->campos as $cc => $nc) {
-                $html_renglon = "$html_renglon<th valign=top>$nc</th>";
+                if ($cc == 'm_ubicacion' 
+                    && isset($GLOBALS['reptabla_separa_ubicacion']) 
+                    && $GLOBALS['reptabla_separa_ubicacion'] 
+                ) {
+                    $html_renglon = "$html_renglon<th colspan='2' valign='top'>"
+                        . "$nc</th>";
+                } else {
+                    $html_renglon = "$html_renglon<th valign='top'>$nc</th>";
+                }
                 $rtexto = "$rtexto\n$nc";
                 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
                     list($n, $c, $o) = $tab;
@@ -959,7 +1004,7 @@ class ResConsulta
                                 array($c, 'resConsultaRegistro'),
                                 array(&$this->db, $this->mostrar,
                                 $idcaso, $this->campos,
-                                $this->conv, $sal, $retroalim)
+                                $this->conv, &$sal, &$retroalim)
                             );
                         } else {
                             echo_esc(
@@ -1105,7 +1150,7 @@ class ResConsulta
     static function filaTabla($db, $idcaso, $campos, $conv, $sal,
         $retroalim = true, $primnom = true
     ) {
-        //echo "OJO filaTabal(db, $idcaso, campos, conv, sal, retroalim);<br>";
+        //echo "OJO filaTabla(db, $idcaso, campos, conv, sal, retroalim);<br>";
         $col = "#FFFFFF";
         $dec = objeto_tabla('caso_etiqueta');
         if (!PEAR::isError($dec)) {
@@ -1126,12 +1171,21 @@ class ResConsulta
         foreach ($campos as $cc => $nc) {
             $html_renglon .= "<td valign='top'>";
             $sep = "";
-            $vr = $vrescon = $vrpre = $vrpost = "";
+            $vr_html = $vrescon = $vrpre = $vrpost = "";
             // No se sacaron responsables y demás directamente en
             // la consulta por dificultad en el caso de ubicación
             // pues la información puede provenir de diversas tablas
             if ($cc == 'm_ubicacion') {
-                $vr .= ResConsulta::ubicacion($db, $idcaso);
+                if ($GLOBALS['reptabla_separa_ubicacion']) {
+                    $vr_html .= ResConsulta::ubicacion_separada_html(
+                        $db, $idcaso
+                    );
+                } else {
+                    $vr_html .= strip_tags(
+                        ResConsulta::ubicacion($db, $idcaso)
+                    );
+                }
+
             } else if ($cc == 'm_presponsables') {
                 $idp = array(); // Identificaciones
                 $idp2=array();
@@ -1142,7 +1196,7 @@ class ResConsulta
                 );
                 $seploc = "";
                 foreach ($ndp as $k => $np) {
-                    $vr .= $seploc . trim($np);
+                    $vr_html .= $seploc . strip_tags(trim($np));
                     $seploc = ", ";
                 }
             } else if ($cc == 'm_fuentes') {
@@ -1158,8 +1212,8 @@ class ResConsulta
                 $seploc = "";
                 while ($dff->fetch()) {
                     $des = $dff->getLink('id_ffrecuente');
-                    $vr .= $seploc . trim($des->nombre)." " .
-                        $dff->fecha;
+                    $vr_html .= $seploc . strip_tags(trim($des->nombre)) 
+                        . " " . $dff->fecha;
                     $seploc = ", ";
                 }
             } else if ($cc == 'm_victimas') {
@@ -1184,58 +1238,72 @@ class ResConsulta
                     $result = hace_consulta($db, $q);
                     $row = array();
                     $septip = " "; $tip = "";
-                    $vrescon .= $seploc . trim($ndp[$k]);
-                    while ($result->fetchInto($row)) {
-                        $tip .= $septip . "<a href='consulta_web_cat.php?t = " .
-                        $row[0] . "&s = ".$row[1] . "&c = ".$row[2] . "'>" .
-                        $row[0] . $row[2] . "</a>";
-                        $vrescon .= $septip . $row[0] . $row[2];
-                        $septip = ", ";
+                    if (!isset($GLOBALS['reptabla_noagresion']) 
+                        || !$GLOBALS['reptabla_noagresion']
+                    ) {
+                        $vrescon .= $seploc . trim($ndp[$k]);
+                        while ($result->fetchInto($row)) {
+                            $tip .= $septip 
+                                . "<a href='consulta_web_cat.php?t = " 
+                                .  $row[0] . "&s = ".$row[1] . "&c = "
+                                . $row[2] . "'>" . $row[0] 
+                                . $row[2] . "</a>";
+                            $vrescon .= $septip . $row[0] . $row[2];
+                            $septip = ", ";
+                        }
                     }
                     $med = "";
-                    if (isset($edp[$k]) && $edp[$k] > 0) {
-                        $med = " (".$edp[$k] . ")";
+                    if (!isset($GLOBALS['reptabla_nonacimiento']) 
+                        || !$GLOBALS['reptabla_nonacimiento']
+                    ) {
+                        if (isset($edp[$k]) && $edp[$k] > 0) {
+                            $med = " (".$edp[$k] . ")";
+                        }
                     }
-                    $vr .= $seploc . $ndp[$k] . $med . $tip;
+                    $vr_html .= $seploc . strip_tags($ndp[$k]) . $med . $tip;
                     $seploc = ", ";
                 }
                 $indid = -1;
                 $idind = -1;
                 $nind = -1; $totelem = 0;
-                $totv+=ResConsulta::extraeColectivas(
-                    $idcaso,
-                    $db, $idp, $ndp, $cdp, null, $ind, $totelem
-                );
-                $bk = $k;
-                for (; $k < count($ndp); $k++) {
-                    $q = "SELECT id_tviolencia, id_supracategoria, " .
-                    " id_categoria " .
-                    " FROM actocolectivo, categoria " .
-                    " WHERE id_grupoper='". (int)$idp[$k] . "' " .
-                    " AND id_caso='". (int)$idcaso . "' " .
-                    " AND actocolectivo.id_categoria=categoria.id"
-                    ;
-                    $result = hace_consulta($db, $q);
-                    $row = array();
-                    $septip = " "; $tip = "";
-                    $vrescon .= $seploc . trim($ndp[$k]);
-                    while ($result->fetchInto($row)) {
-                        $tip .= $septip . "<a href='consulta_web_cat.php?t = " .
-                        $row[0] . "&s = ".$row[1] . "&c = ".$row[2] . "'>" .
-                        $row[0] . $row[2] . "</a>";
-                        $vrescon .= $septip . $row[0] . $row[2];
-                        $septip = ", ";
+                if (!isset($GLOBALS['actoscolectivos']) 
+                    || $GLOBALS['actoscolectivos'] == true
+                ) {
+                    $totv+=ResConsulta::extraeColectivas(
+                        $idcaso,
+                        $db, $idp, $ndp, $cdp, null, $ind, $totelem
+                    );
+                    $bk = $k;
+                    for (; $k < count($ndp); $k++) {
+                        $q = "SELECT id_tviolencia, id_supracategoria, " .
+                            " id_categoria " .
+                            " FROM actocolectivo, categoria " .
+                            " WHERE id_grupoper='". (int)$idp[$k] . "' " .
+                            " AND id_caso='". (int)$idcaso . "' " .
+                            " AND actocolectivo.id_categoria=categoria.id"
+                            ;
+                        $result = hace_consulta($db, $q);
+                        $row = array();
+                        $septip = " "; $tip = "";
+                        $vrescon .= $seploc . trim($ndp[$k]);
+                        while ($result->fetchInto($row)) {
+                            $tip .= $septip 
+                                . "<a href='consulta_web_cat.php?t = " 
+                                .  $row[0] . "&s = ".$row[1] . "&c = ".$row[2] 
+                                . "'>" .  $row[0] . $row[2] . "</a>";
+                            $vrescon .= $septip . $row[0] . $row[2];
+                            $septip = ", ";
+                        }
+                        $vr_html .= $seploc . strip_tags($ndp[$k]) . $tip;
+                        if ((int)$cdp[$k - $bk] > 0) {
+                            $vr_html .= " (". strip_tags($cdp[$k - $bk]) . ")";
+                            $vrescon .= " (".(int)$cdp[$k - $bk] . ")";
+                        }
+                        $seploc = ", ";
                     }
-                    $vr .= $seploc . $ndp[$k] . $tip;
-                    if ((int)$cdp[$k - $bk] > 0) {
-                        $vr .= " (".$cdp[$k - $bk] . ")";
-                        $vrescon .= " (".(int)$cdp[$k - $bk] . ")";
-                    }
-                    $seploc = ", ";
+
+                    $vrpost = " | " . _("Víctimas") . ":".$totv;
                 }
-
-                $vrpost = " | " . _("Víctimas") . ":".$totv;
-
             } else if ($cc == 'm_tipificacion') {
                 $idp = array(); // Identificaciones
                 $ndp = array();
@@ -1256,27 +1324,28 @@ class ResConsulta
                     "ORDER BY id_tviolencia," .
                     "id_supracategoria, id_categoria;", $ncat, array(1, 2)
                 );
-                $vr = $seploc = "";
+                $vr_html = $seploc = "";
                 foreach ($ncat as $k => $nc) {
-                    $vr .= $seploc . $k . " ".$nc;
+                    $vr_html .= $seploc . strip_tags($k) . " ".strip_tags($nc);
                     $seploc = ",  ";
                 }
             } else if ($cc == 'caso_id') {
                 $vrpre = "<a href='captura_caso.php?modo=edita&id=" .
                 $sal[$conv[$cc]] . "'>";
-                $vr = $sal[$conv[$cc]];
+                $vr_html = strip_tags($sal[$conv[$cc]]);
                 $vrpost = "</a>";
+                //echo "OJO 1 cc=$cc,  vr = $vr <br>";
             } else if (isset($conv[$cc]) && isset($sal[$conv[$cc]])) {
-                $vr = trim($sal[$conv[$cc]]);
+                $vr_html = strip_tags(trim($sal[$conv[$cc]]));
             } else {
-                $vr = '';
+                $vr_html = '';
                 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
                     list($n, $c, $o) = $tab;
                     if (($d = strrpos($c, "/"))>0) {
                         $c = substr($c, $d+1);
                     }
                     if (is_callable(array($c, 'resConsultaFilaTabla'))) {
-                        $vr .= call_user_func_array(
+                        $vr_html .= call_user_func_array(
                             array($c, 'resConsultaFilaTabla'),
                             array(&$db, $cc, $idcaso)
                         );
@@ -1288,8 +1357,9 @@ class ResConsulta
                     }
                 }
             }
-            $escon[$cc] = $vrescon == '' ? $vr : $vrescon;
-            $html_renglon .= $vrpre . strip_tags($vr) . $vrpost . "</td>";
+            //echo "OJO 1 cc=$cc,  vr = $vr <br>";
+            $escon[$cc] = $vrescon == '' ? $vr_html : $vrescon;
+            $html_renglon .= $vrpre . $vr_html . $vrpost . "</td>";
         }
         echo "$html_renglon\n";
         if ($retroalim) {
@@ -1328,7 +1398,6 @@ class ResConsulta
     static function reporteRelato($idcaso, $db = null,
         $campos = array(), $varlin = true
     ) {
-        //echo "OJO Entrando a reporteRelato: " . memory_get_usage() ."<br>";
         $arotros = array(); // Para poner observaciones al final
         $dcaso = objeto_tabla('caso');
         $dcaso->get('id', $idcaso);
@@ -1790,7 +1859,8 @@ class ResConsulta
         if (isset($campos['m_fuentes'])
             && isset($_SESSION['id_funcionario'])
         ) {
-            include $_SESSION['dirsitio'] . "/conf.php";
+            //            include $_SESSION['dirsitio'] . "/conf.php";
+            global $dsn;
             $aut_usuario = "";
             autentica_usuario($dsn, $aut_usuario, 0);
             if (!in_array(42, $_SESSION['opciones'])) {
@@ -1859,6 +1929,7 @@ class ResConsulta
             $dfuentedirectacaso->free();
             unset($dfuentedirectacaso);
         }
+
         if (isset($campos['caso_memo'])) {
             //        $r .= "<acciones_juridicas>"
             //        $r .= "<otras_acciones>"

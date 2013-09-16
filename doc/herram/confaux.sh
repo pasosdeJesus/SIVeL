@@ -11,7 +11,10 @@
 # between quotes ALWAYS.
 # Things to improve: NLS, other tests (libraries, functions, functionality of tools)
 
-rutaconfsh="herram"
+
+if (test "$rutaconfsh" = "") then {
+	rutaconfsh=herram
+} fi;
 
 # Set to 1 if debuggin information is desired.
 debug=0;

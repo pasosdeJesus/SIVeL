@@ -44,6 +44,10 @@ class DataObjects_Departamento extends DataObjects_Basica
         parent::__construct();
         $this->nom_tabla = _('Departamento');
     }
+
+    var $fb_linkDisplayFields = array('nombre');
+
+    var $fb_linkDisplayLevel = 1;
 }
 
 ?>

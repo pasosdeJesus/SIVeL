@@ -450,7 +450,7 @@ class ReporteGeneral extends HTML_QuickForm_Action
             $GLOBALS['cw_ncampos'],
             array('m_fuentes'=>'Fuentes')
         );
-        $html_rep = ResConsulta::reporteGeneralHtml( $idcaso, null,$campos);
+        $html_rep = ResConsulta::reporteGeneralHtml($idcaso, null, $campos);
         echo "<pre>";
         echo $html_rep;
         echo "</pre>";
@@ -647,6 +647,10 @@ class PagBasicos extends PagBaseSimple
         $this->titulo = _('Datos Básicos');
         $this->tcorto = _('Básicos');
 
+        if (isset($GLOBALS['etiqueta']['Basicos'])) {
+            $this->titulo = $GLOBALS['etiqueta']['Basicos'];
+            $this->tcorto = $GLOBALS['etiqueta']['Basicos'];
+        }
 
         $this->addAction('buscar', new BuscarId());
         $this->addAction('siguiente', new Siguiente());
@@ -671,7 +675,8 @@ class PagBasicos extends PagBaseSimple
         ) {  //Busqueda
             $this->addElement('hidden', 'id', $GLOBALS['idbus']);
 
-            $slan = isset($_SESSION['LANG']) ?  $_SESSION['LANG'] : 'es';
+            $slan = isset($_SESSION['LANG']) ?  
+                substr($_SESSION['LANG'], 0, 2) : 'es';
             $e =& $this->addElement(
                 'date', 'fini', _('Fecha inicial'),
                 array('language' => $slan, 'addEmptyOption' => true,

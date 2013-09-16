@@ -9,7 +9,7 @@
  * @package   SIVeL
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2012 Dominio público. Sin garantías.
- * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * @link      http://sivel.sf.net
  * Acceso: SÓLO DEFINICIONES
  */
@@ -19,9 +19,11 @@ if (!isset($GLOBALS['dir_anexos'])) {
     $GLOBALS['dir_anexos'] = '/resbase/anexos';
 }
 
-$GLOBALS['nueva_ficha_tabuladores'][] =  array(
-    10,'anexos', 'modulos/anexos/PagAnexo', 10
-);
+if (!esta_nueva_ficha('anexos')) {
+    $GLOBALS['nueva_ficha_tabuladores'][] =  array(
+        10, 'anexos', 'modulos/anexos/PagAnexo', 10
+    );
+}
 
 $GLOBALS['remplaza_ficha_tabuladores'][] =  array(
     'frecuentes', 'modulos/anexos/PagFrecuenteAnexo'

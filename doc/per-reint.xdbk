@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="casos-personalizacion">
+	<title>Casos de personalización reinterpretando</title>
+	<para>
+		Algunos  nombres en la interfaz de usuario pueden
+		cambiarse desde un sólo sitio para que una organización
+		pueda reinterpretar uno o más campos típicos de SIVeL
+		(aunque no es lo más recomendable si se piensa en
+		compartir información con otras organizaciones que empleen
+		SIVeL).
+	</para> 
+	<para>Lo que queremos decir con reinterpretar posiblemente
+		se entienda con un ejemplo: En una organización 
+		donde se registran casos relacionados con 
+		iglesias, se prefirió emplear la tabla filiación 
+		política para registrar la iglesia de la víctima.
+	</para>
+	<para>En tal caso basta editar valores de la variable
+		<literal>etiqueta</literal> del archivo
+		<filename>conf.php</filename> que está en
+		el directorio de su sitio (e.g 
+		<filename>sitios/sivel</filename>).  Este archivo
+		está organizado en el mismo orden de las pestañas
+		de la ficha de captura. Para el ejemplo
+		mencionado bastaría añadir datos con iglesias
+		a la tabla básica Filiación, deshabilitar los
+		originales y cambiar la línea:
+		<screen>
+			'filiacion'=> 'Filiación política',
+		</screen>
+		por
+		<screen>
+			'filiacion'=> 'Iglesia',
+		</screen>
+	</para>
+</sect1>

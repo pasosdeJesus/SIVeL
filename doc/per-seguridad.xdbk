@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="seguridad">
+<title>Algunos lineamientos de seguridad informática</title>
+<para>
+En aplicaciones web es común encontrar fallas de
+seguridad.   Entre las causas están: debilidades
+en las fuentes o en los programas de las que 
+dependen, labores o procedimientos administrativos
+insuficientes, exceso de confianza de desarrolladores,
+administradores y usuarios.  Algunos lineamientos son:
+
+	<itemizedlist>
+		<listitem>
+			<para>Confiar 100% en Dios y sólo en Dios.</para>
+		</listitem>
+		<listitem>
+			<para>
+				Emplear aplicaciones de fuentes abiertas pues 
+				resultan auditables y sus desarrolladores no 
+				se confian en la 'seguridad por 
+				inobservabilidad.'
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Preferir aplicaciones cuyos desarrolladores 
+				acudan a políticas de apertura total 
+				en cuanto a fallas de seguridad (ver 
+				<xref linkend="aperturatotal"></xref>).
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Preferir aplicaciones y protocolos que empleen 
+				cifrado fuerte. Cifrar datos sensibles.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Emplear aplicaciones que tengan bajo registro
+				de vulnerabilidades y cuyas fallan sean cerradas
+				tan pronto como son encontradas (ver <xref linkend="secunia"></xref>).
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Mantener actualizadas fuentes, librerías, 
+				lenguajes, ambientes de desarrollo y sistema 
+				operativo.  Es buen hábito actualizar todo 
+				esto cada 6 meses.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				No emplear claves fáciles. Mejor que sean 
+				palabras de más de 8 caracteres que no 
+				aparezcan en diccionario alguno, con 
+				mayúsculas, minúsculas, números y símbolos.  
+				Procurar cambiarlas al menos cada 6 meses.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Documentarse sobre posibles fallas de seguridad
+			       	en el lenguaje de programación empleado y
+				como cerrarlas.  Para el caso de PHP puede 
+				consultar <xref linkend="crashcourse"></xref>.  
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Hacer auditorias o verificaciones de seguridad 
+				o de vulnerabilidades de la aplicación.  
+				En el caso de SIVeL además de solicitar 
+				auditorias externas públicas que dieron 
+				resultados en el 2008, hemos realizado una 
+				verificación interna
+				con el estándar OWASP ASVS de 2009
+				(ver en fuentes en 
+				<filename>doc/owasp-asvs-SIVeL.odt</filename>).
+			</para>
+		</listitem>
+
+	</itemizedlist>
+
+</para>
+</sect1>

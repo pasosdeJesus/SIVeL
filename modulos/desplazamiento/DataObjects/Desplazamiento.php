@@ -22,12 +22,10 @@ require_once 'DB_DataObject_SIVeL.php';
 require_once  $GLOBALS['dirsitio'] . "/conf.php";
 
 require_once "Acreditacion.php";
-require_once "Causadesp.php";
 require_once "Clasifdesp.php";
 require_once "Inclusion.php";
 require_once "Declaroante.php";
 require_once "Modalidadtierra.php";
-require_once "DataObjects/Presponsable.php";
 require_once "Tipodesp.php";
 
 /**
@@ -46,36 +44,34 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
 
     var $__table = 'desplazamiento';                       // table name
 
-	var $id_caso;
-	var $fechaexpulsion;
-	var $expulsion;
-	var $fechallegada;
-	var $llegada;
-	var $id_clasifdesp;
-	var $id_tipodesp;
-	var $id_presponsable;
-	var $id_causadesp;
-	var $descripcion;
-	var $otrosdatos;
-	var $declaro;
-	var $hechosdeclarados;
-	var $fechadeclaracion;
-	var $departamentodecl;
-	var $municipiodecl;
-	var $id_declaroante;
-	var $id_inclusion;
-	var $id_acreditacion;
-	var $retornado;
-	var $reubicado;
-	var $connacionalretorno;
-	var $acompestado;
-	var $connacionaldeportado;
-	var $oficioantes;
-	var $id_modalidadtierra;
-	var $materialesperdidos;
-	var $inmaterialesperdidos;
-	var $protegiorupta;
-	var $documentostierra;
+    var $id_caso;
+    var $fechaexpulsion;
+    var $expulsion;
+    var $fechallegada;
+    var $llegada;
+    var $id_clasifdesp;
+    var $id_tipodesp;
+    var $descripcion;
+    var $otrosdatos;
+    var $declaro;
+    var $hechosdeclarados;
+    var $fechadeclaracion;
+    var $departamentodecl;
+    var $municipiodecl;
+    var $id_declaroante;
+    var $id_inclusion;
+    var $id_acreditacion;
+    var $retornado;
+    var $reubicado;
+    var $connacionalretorno;
+    var $acompestado;
+    var $connacionaldeportado;
+    var $oficioantes;
+    var $id_modalidadtierra;
+    var $materialesperdidos;
+    var $inmaterialesperdidos;
+    var $protegiorupta;
+    var $documentostierra;
 
     /**
      * Constructora
@@ -93,8 +89,6 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
             'llegada' => _('Sitio de Llegada'),
             'id_clasifdesp' => _('Clasificación'),
             'id_tipodesp' => _('Tipo'),
-            'id_presponsable' => _('Presunto Responsable'),
-            'id_causadesp' => _('Causa'),
             'descripcion' => _('Descripción'),
             'otrosdatos' => _('Otros Datos'),
             'declaro' => _('Declaró'),
@@ -103,7 +97,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
             'departamentodecl' => _('Departamento Declaración'),
             'municipiodecl' => _('Municipio Declaración'),
             'id_declaroante' => _('Declaro Ante'),
-            'id_inclusion' => _('Inclusión'),
+            'id_inclusion' => _('Inclusión RUV'),
             'id_acreditacion' => _('Acreditación'),
             'retornado' => _('Retornado'),
             'reubicado' => _('Reubicado'),
@@ -120,6 +114,9 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
 
     }
 
+
+    var $fb_selectAddEmpty = array('expulsion');
+
     var $fb_hidePrimaryKey = false;
 
     var $fb_preDefOrder = array(
@@ -129,15 +126,11 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         'llegada' ,
         'id_clasifdesp' ,
         'id_tipodesp' ,
-        'id_presponsable' ,
-        'id_causadesp' ,
         'descripcion' ,
         'otrosdatos' ,
         'declaro' ,
         'hechosdeclarados' ,
         'fechadeclaracion' ,
-        'departamentodecl' ,
-        'municipiodecl' ,
         'id_declaroante' ,
         'id_inclusion' ,
         'id_acreditacion' ,
@@ -160,15 +153,11 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         'llegada' ,
         'id_clasifdesp' ,
         'id_tipodesp' ,
-        'id_presponsable' ,
-        'id_causadesp' ,
         'descripcion' ,
         'otrosdatos' ,
         'declaro' ,
         'hechosdeclarados' ,
         'fechadeclaracion' ,
-        'departamentodecl' ,
-        'municipiodecl' ,
         'id_declaroante' ,
         'id_inclusion' ,
         'id_acreditacion' ,
@@ -185,6 +174,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         'documentostierra' ,
 
     );
+    var $fb_linkDisplayLevel = 2;
     var $fb_addFormHeader = false;
     var $fb_textFields = array(
         'descripcion',
@@ -194,7 +184,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         'inmaterialesperdidos',
         'documentostierra',
     );
-    var $fb_boolFields = array(
+    var $fb_booleanFields = array(
         'retornado',
         'reubicado',
         'connacionalretorno',
@@ -202,18 +192,32 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         'connacionaldeportado',
         'protegiorupta',
     );
+    var $fb_enumFields = array(
+        'declaro'
+    );
+    var $es_enumOptions = array(
+        'declaro' => array(
+            'S' => 'SI',
+            'N' => 'NO', 
+            'R'=> 'NO SABE/NO RESPONDE'
+        ),
+    );
 
+    /**
+     * Retorna campos sin información
+     *
+     * @return array Campos que podrían ser sin información y su valor
+     */ 
     static function camposSinInfo()
     {
         return array(
             'id_clasifdesp'=> DataObjects_Clasifdesp::idSinInfo(),
             'id_tipodesp'=> DataObjects_Tipodesp::idSinInfo(),
-            'id_causadesp'=> DataObjects_Causadesp::idSinInfo(),
-            'id_presponsable'=> DataObjects_Presponsable::idSinInfo(),
             'id_declaroante'=> DataObjects_Declaroante::idSinInfo(),
             'id_inclusion'=> DataObjects_Inclusion::idSinInfo(),
             'id_acreditacion'=> DataObjects_Acreditacion::idSinInfo(),
             'id_modalidadtierra'=> DataObjects_Modalidadtierra::idSinInfo(),
+            'declaro'=> 'R',
         );
     }
 
@@ -221,7 +225,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
     /**
      * Prepara antes de generar formulario.
      *
-     * @param object &$$formbuilder Generador DataObject_FormBuilder
+     * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
      */
@@ -245,37 +249,49 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
     {
         parent::postGenerateForm($form, $formbuilder);
 
-        $sel =& $form->getElement('id_caso');
         $p = objeto_tabla('caso');
         $db = $p->getDatabaseConnection();
+        $c =& $form->getElement('id_caso');
+        $idcaso = $c->getValue();
 
-/*        $e =& $form->getElement('demandante');
-        if (isset($e) && !PEAR::isError($e)) {
-            $e->setSize(55);
-            $e->setMaxLength(100);
+        $seln =& $form->getElement('fechaexpulsion');
+        if ($this->fechaexpulsion != null && $this->fechaexpulsion > 0) {
+            $seln->freeze();
         }
-        $e =& $form->getElement('demandado');
-        if (isset($e) && !PEAR::isError($e)) {
-            $e->setSize(55);
-            $e->setMaxLength(100);
-        }
-        $e =& $form->getElement('poderdante');
-        if (isset($e) && !PEAR::isError($e)) {
-            $e->setSize(55);
-            $e->setMaxLength(100);
-        }
-        $e =& $form->getElement('telefono');
-        if (isset($e) && !PEAR::isError($e)) {
-            $e->setSize(55);
-            $e->setMaxLength(50);
-        }
-        $e =& $form->getElement('observaciones');
-        if (isset($e) && !PEAR::isError($e)) {
-            $e->setCols(75);
-            $e->setRows(2);
-        }
-        $e =& $form->getElement('id');
-        $e =& $form->addElement('hidden', 'id_desplazamiento', $e->getValue()); */
+
+        $s =& $form->getElement('expulsion');
+        $s->_options = array();
+        $q = "SELECT ubicacion.id, trim(departamento.nombre || ', ' || lugar) 
+            FROM ubicacion, departamento
+            WHERE ubicacion.id_caso='$idcaso'
+            AND ubicacion.id_municipio IS NULL 
+            AND ubicacion.id_departamento = departamento.id
+            UNION SELECT ubicacion.id, trim(municipio.nombre || ', ' || 
+            departamento.nombre || ', ' || lugar)
+            FROM ubicacion, departamento, municipio
+            WHERE ubicacion.id_caso='$idcaso'
+            AND ubicacion.id_municipio = municipio.id
+            AND ubicacion.id_departamento = municipio.id_departamento
+            AND municipio.id_departamento = departamento.id";
+        $op = $db->getAssoc($q);
+        sin_error_pear($op);
+        $r = $s->loadArray(array('' => '') + htmlentities_array($op));
+        $s->setValue(
+            $this->expulsion
+        );
+
+        $s =& $form->getElement('llegada');
+        $s->_options = array();
+        $op = $db->getAssoc($q);
+        sin_error_pear($op);
+        $r = $s->loadArray(htmlentities_array($op));
+        $s->setValue(
+            $this->expulsion
+        );
+
+
+        $s =& $form->getElement('otrosdatos');
+        $s->setSize(75);
     }
 }
 

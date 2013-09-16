@@ -35,11 +35,7 @@ class DataObjects_Presponsable extends DataObjects_Basica
 {
 
     var $__table = 'presponsable';          // table name
-    var $id;                              // int4(4)  not_null primary_key
-    var $nombre;                          // varchar(-1)  not_null
     var $papa;                            // int4
-    var $fechacreacion;                  // date(4)  not_null
-    var $fechadeshabilitacion;           // date(4)
 
     /**
      * Constructora
@@ -65,6 +61,7 @@ class DataObjects_Presponsable extends DataObjects_Basica
     var $fb_hidePrimaryKey = true;
     var $fb_selectAddEmpty = array('fechadeshabilitacion', 'papa');
     var $fb_preDefOrder = array(
+        'id',
         'nombre',
         'papa',
         'fechacreacion',
@@ -101,7 +98,7 @@ class DataObjects_Presponsable extends DataObjects_Basica
     /**
      * Ajusta formulario generado.
      *
-     * @param object &$form      Formulario HTML_QuickForm
+     * @param object &$form        Formulario HTML_QuickForm
      * @param object &$formbuilder Generador DataObject_FormBuilder
      *
      * @return void
@@ -121,6 +118,11 @@ class DataObjects_Presponsable extends DataObjects_Basica
         return 35;
     }
 
+    /**
+     * Valor por usar en relato
+     *
+     * @return string identificación
+     */
     function valorRelato()
     {
         return $this->id;

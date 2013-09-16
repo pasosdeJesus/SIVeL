@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter id="principios">
-	<title>Principios</title>
 
 	<para>Para el desarrollo de este sistema de información se
 		han procurado seguir los siguientes principios 
@@ -42,15 +40,12 @@
 		desarrollo de SIVeL:
 		<itemizedlist>
 			<listitem>
-				<para>El código fuente de SIVeL está
-					abierto y disponible públicamente 
-					(i.e fuentes abiertas).  También 
-					mantenemos abierta una convocatoria 
-					pública a 
-					auditar las fuentes de SIVeL 
-					(ver <xref linkend="llamado"></xref>)
-					y la distribución de referencia,
-		premiando con dinero a quien encuentre alguna falla.
+				<para>
+El código fuente de SIVeL está abierto y disponible públicamente 
+(i.e fuentes abiertas).  También mantenemos abierta una convocatoria 
+pública a auditar las fuentes de SIVeL (ver <xref linkend="llamado"></xref>)
+y la distribución de referencia, premiando con dinero a quien encuentre 
+alguna falla de seguridad.
 	</para>
 
 			</listitem>
@@ -73,8 +68,8 @@
 			</listitem>
 			<listitem>
 				<para>Hemos contribuido en el desarrollo
-		de la distribución <application>Aprendiendo de 
-			Jesús (adJ)</application> 
+del sistema operativo OpenBSD y su distribución 
+<application>Aprendiendo de Jesús (adJ)</application>  
 		conforme a la plataforma de operación recomendada, 
 		procurando que también sea segura, liviana, 
 		usable<footnote><para>Buscando un buen 
@@ -92,4 +87,3 @@
 			<ulink url="http://aprendiendo.pasosdeJesus.org"/>).</para> </warning>
 
 	</para>
-</chapter>

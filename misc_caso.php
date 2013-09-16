@@ -46,13 +46,15 @@ function elimina_caso(&$db, $idcaso)
     }
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
         list($n, $c, $o) = $tab;
-        $bo[$o] = $c;
+        //echo "OJO 1 o=$o, c=$c<br>";
+        $bo[$o.$c] = $c;
     }
     ksort($bo);
     foreach ($bo as $k => $c) {
         if (($d = strrpos($c, "/"))>0) {
             $c = substr($c, $d+1);
         }
+        //echo "OJO c=$c<br>";
         if (is_callable(array($c, 'eliminaDep'))) {
             call_user_func(array($c, 'eliminaDep'), $db, $idcaso);
         } else {
@@ -65,6 +67,12 @@ function elimina_caso(&$db, $idcaso)
     $res = hace_consulta($db, $q);
 
     if (PEAR::isError($res)) {
+        foreach ($bo as $k => $c) {
+            if (($d = strrpos($c, "/"))>0) {
+                $c = substr($c, $d+1);
+            }
+            echo "Se intentó eliminar $c<br>";
+        }
         die($res->getMessage() ." - " . $res->getUserInfo());
     }
 }

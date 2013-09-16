@@ -49,15 +49,20 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
 
 
 
+    var $fb_linkDisplayFields = array(
+        'id_municipio,id_departamento', 'id_departamento', 'lugar'
+    );
+    var $fb_linkDisplayLevel = 0;
     var $fb_preDefOrder = array(
-        'id_departamento', 'id_municipio',
-        'id_clase', 'lugar', 'sitio', 'latitud', 'longitud', 'id_tsitio'
+        'id_departamento', 'id_municipio', 'id_clase', 
+        'lugar', 'sitio', 'latitud', 'longitud', 'id_tsitio'
     );
     var $fb_fieldsToRender = array(
         'lugar', 'sitio', 'latitud', 'longitud', 'id_tsitio'
     );
     var $fb_addFormHeader = false;
     var $fb_hidePrimaryKey = true;
+
     /**
      * Constructora
      * return @void
@@ -67,19 +72,28 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
         parent::__construct();
 
         $this->fb_fieldLabels= array(
-           'id_departamento' => _('Departamento'),
-           'id_municipio' => _('Municipio'),
-           'id_clase' => _('Centro Poblado'),
-           'lugar' => _('Lugar'),
-           'sitio' => _('Sitio'),
-           'id_tsitio' => _('Tipo de Ubicación'),
-           'latitud' => _('Latitud'),
-           'longitud' => _('Longitud'),
+            'id_departamento' => _('Departamento'),
+            'id_municipio' => _('Municipio'),
+            'id_clase' => _('Centro Poblado'),
+            'lugar' => _('Lugar'),
+            'sitio' => _('Sitio'),
+            'id_tsitio' => _('Tipo de Ubicación'),
+            'latitud' => _('Latitud'),
+            'longitud' => _('Longitud'),
         );
+        if (isset($GLOBALS['etiqueta']['ubicacionlugar'])) {
+            $this->fb_fieldLabels['lugar'] 
+                = $GLOBALS['etiqueta']['ubicacionlugar'];
+        }
     }
 
     var $fb_excludeFromAutoRules = array('id_tsitio');
 
+    /**
+     * Campos y valores SIN INFORMACION
+     *
+     * @return array Arreglo con campo y valor SIN INFORMACION
+     */
     static function camposSinInfo()
     {
         $a = array(
@@ -113,8 +127,25 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     */
     function setlatitud($value)
     {
-        $this->latitud = ($value == '') ? 'null' : $value;
+        $this->latitud = ($value == '') ? 
+            DB_DataObject_Cast::sql('NULL') : $value;
     }
+
+    /**
+    * Modifica valor de municipio antes de incluirlo en base de datos.
+    * Para funcionar con versiones nuevas de DB_DataObject requiere
+    * <b>useMutator</b> en <b>true</b>
+    *
+    * @param string $value Valor recibido de formulario
+    *
+    * @return Valor para base de datos
+    */
+    function setid_municipio($value)
+    {
+        $this->id_municipio = ($value == '') ? 
+            DB_DataObject_Cast::sql('NULL') : (int)$value;
+    }
+
 
     /**
      * Prepara antes de generar formulario.
@@ -159,14 +190,33 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
             $e->setMaxlength(200);
         }
         $e =& $form->getElement('id');
+        $dep =& $form->createElement(
+            'select', 'id_departamento',
+            $GLOBALS['etiqueta']['departamento'],
+            array()
+        ); 
+        $form->insertElementBefore($dep, 'lugar');
+        $mun =& $form->createElement(
+            'select', 'id_municipio',
+            $GLOBALS['etiqueta']['municipio'],
+            array()
+        );
+        $form->insertElementBefore($mun, 'lugar');
+        $cla =& $form->createElement(
+            'select', 'id_clase',
+            $GLOBALS['etiqueta']['clase'],
+            array()
+        ); 
+        $form->insertElementBefore($cla, 'lugar');
+
     }
 
 
     /**
      * Convierte registro a relato (arreglo de elementos) que agrega a $ar
      *
-     * @param object &$ar   Arreglo de elementos
-     * @param object &$dad  Datos adicionales para conversión
+     * @param object &$ar Arreglo de elementos
+     * @param object $dad Datos adicionales para conversión
      *
      * @return void
      */
