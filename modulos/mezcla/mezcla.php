@@ -71,16 +71,6 @@ function muestra($dsn)
     if ($id1 == $id2) {
         die_esc("Los códigos de los casos por mezclar deben ser diferentes");
     }
-    $r = array();
-    foreach ($_POST as $l => $v) {
-        $t = subizq_hasta_car($l, '-');
-        if ($t != $l) {
-            $c = substr($l, strlen($t) + 1);
-            //$nid = $t . "-" . $c;
-            $r[$t][$c] = $v;
-        }
-    }
-
     $dec = objeto_tabla('caso_etiqueta');
     $obs = "";
     $idet = (int)conv_basica(
@@ -101,11 +91,13 @@ function muestra($dsn)
         $GLOBALS['cw_ncampos'] + array('m_fuentes' => 'Fuentes')
     );
 
+    $invertido = false;
     if ($nid == 1 || $nid == 2) {
         if ($nid == 2) {  // Asegura mezclar siempre segundo en primero
             $idt= $id1;
             $id1 = $id2;
             $id2 = $idt;
+            $invertido = true;
         }
         $idn = $id1;
         $dec->observaciones = "Caso original ($id1): " . strip_tags($r1)
@@ -119,7 +111,24 @@ function muestra($dsn)
         $dec->observaciones = "Primer caso ($id1): " . strip_tags($r1)
             . "\nSegundo caso ($id2): " . strip_tags($r2);
     }
-    
+    $r = array();
+    foreach ($_POST as $l => $v) {
+        $t = subizq_hasta_car($l, '-');
+        if ($t != $l) {
+            $c = substr($l, strlen($t) + 1);
+            //$nid = $t . "-" . $c;
+            if ($invertido) {
+                if ($v == 1) {
+                    $r[$t][$c] = 2;
+                } else {
+                    $r[$t][$c] = 1;
+                }
+            } else {
+                $r[$t][$c] = $v;
+            }
+        }
+    }
+
     $dec->id_caso = $idn;
     $dec->insert();
 

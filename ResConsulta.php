@@ -353,11 +353,12 @@ class ResConsulta
      * @param integer &$indid     Indid
      * @param object  &$edp       edp
      * @param boolean $primnom    Nombre y apellido
+     * @param boolean $septd      Emplear como separador </td><td> y quitar tags
      *
      * @return Total de víctimas
      */
     function extraeVictimas($idcaso, &$db, &$idp, &$ndp,
-        $id_persona, &$indid, &$edp, $primnom = true
+        $id_persona, &$indid, &$edp, $primnom = true, $septd = false
     ) {
         $q = "SELECT  id_persona, nombres, apellidos, anionac " .
             " FROM victima, persona " .
@@ -366,12 +367,25 @@ class ResConsulta
         $result = hace_consulta($db, $q);
         $row = array();
         $tot = 0;
+
+        if ($septd) {
+            $sepm ="</td><td>";
+        } else {
+            $sepm =" ";
+        } 
         while ($result->fetchInto($row)) {
             $idp[] = $row[0];
-            if ($primnom) {
-                $ndp[] = $row[1] . " " . $row[2];
+            if ($septd) {
+                $nom = strip_tags($row[1]);
+                $ap = strip_tags($row[2]);
             } else {
-                $ndp[] = $row[2] . " " . $row[1];
+                $nom = $row[1];
+                $ap = $row[2];
+            }
+            if ($primnom) {
+                $ndp[] = $nom . $sepm . $ap;
+            } else {
+                $ndp[] = $ap . $sepm . $nom;
             }
             $edp[] = $row[3];
             if (isset($id_persona) && $id_persona== $row[0]) {
@@ -793,6 +807,12 @@ class ResConsulta
                 if ($cc == 'm_ubicacion' 
                     && isset($GLOBALS['reptabla_separa_ubicacion']) 
                     && $GLOBALS['reptabla_separa_ubicacion'] 
+                ) {
+                    $html_renglon = "$html_renglon<th colspan='2' valign='top'>"
+                        . "$nc</th>";
+                } elseif ($cc == 'm_victimas' 
+                    && isset($GLOBALS['reptabla_separa_nomap']) 
+                    && $GLOBALS['reptabla_separa_nomap'] 
                 ) {
                     $html_renglon = "$html_renglon<th colspan='2' valign='top'>"
                         . "$nc</th>";
@@ -1218,16 +1238,18 @@ class ResConsulta
                 }
             } else if ($cc == 'm_victimas') {
                 $idp = array(); // Identificaciones
-                $ndp = array();
+                $ndp_html = array();
                 $edp = array();
                 $indid = -1;
                 $totv = ResConsulta::extraeVictimas(
                     $idcaso,
-                    $db, $idp, $ndp, null, $indid, $edp, $primnom
+                    $db, $idp, $ndp_html, null, $indid, $edp, $primnom,
+                    isset($GLOBALS['reptabla_separa_nomap'])
+                    && $GLOBALS['reptabla_separa_nomap']
                 );
                 $k = 0;
                 $seploc = "";
-                for ($k = 0; $k < count($ndp); $k++) {
+                for ($k = 0; $k < count($ndp_html); $k++) {
                     $q = "SELECT id_tviolencia, id_supracategoria, " .
                     "id_categoria " .
                     " FROM acto, categoria " .
@@ -1241,7 +1263,7 @@ class ResConsulta
                     if (!isset($GLOBALS['reptabla_noagresion']) 
                         || !$GLOBALS['reptabla_noagresion']
                     ) {
-                        $vrescon .= $seploc . trim($ndp[$k]);
+                        $vrescon .= $seploc . trim($ndp_html[$k]);
                         while ($result->fetchInto($row)) {
                             $tip .= $septip 
                                 . "<a href='consulta_web_cat.php?t = " 
@@ -1260,7 +1282,7 @@ class ResConsulta
                             $med = " (".$edp[$k] . ")";
                         }
                     }
-                    $vr_html .= $seploc . strip_tags($ndp[$k]) . $med . $tip;
+                    $vr_html .= $seploc . $ndp_html[$k] . $med . $tip;
                     $seploc = ", ";
                 }
                 $indid = -1;
