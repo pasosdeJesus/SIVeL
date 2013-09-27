@@ -5,11 +5,22 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>
+Añadidas variables de configuración para añadir validaciones:
+$GLOBALS['validaciones_tipicas'], 
+$GLOBALS['gancho_valida_caso'], 
+$GLOBALS['gancho_valida_base'].
+					</para></listitem>
+					<listitem><para>
+Añadido archivo de comandos <literal>bin/elimcaso.sh</literal> que ayuda a 
+eliminar un caso dado el código
+					</para></listitem>
+					<listitem><para>
 Añadidas variable de configuración para controlar presentación de 
 reporte tabla: $GLOBALS['reptabla_nonacimiento'], 
-$GLOBALS['reptabla_noagresion'] y
+$GLOBALS['reptabla_noagresion'], 
 $GLOBALS['reptabla_separa_ubicacion'] (que separa ubicación en 2 columnas para
-municipio y departamento).
+municipio y departamento) y 
+$GLOBALS['reptabla_separa_nomap'] (que separa nombres y apellidos en 2 columnas).
 					</para></listitem>
 					<listitem><para>
 					</para></listitem>

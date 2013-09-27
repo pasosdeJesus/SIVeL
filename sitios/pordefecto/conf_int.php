@@ -72,6 +72,10 @@ $GLOBALS['reptabla_noagresion'] = false;
  */
 $GLOBALS['reptabla_separa_ubicacion'] = false;
 
+/** Separar nombre y apellido en columas aparte
+ * @global string $GLOBALS['reptabla_separa_nomap']
+ */
+$GLOBALS['reptabla_separa_nomap'] = false;
 
 /** Dirección de correo a la cual enviar mensajes cifrados.
  * @global string $GLOBALS['receptor_correo']
@@ -82,6 +86,23 @@ $GLOBALS['receptor_correo'] = 'sivel@localhost';
  * @global string $GLOBALS['emisor_correo']
  */
 $GLOBALS['emisor_correo'] = 'bancodat@nocheyniebla.org';
+
+/** Validaciones indice es mensaje de error y valor es consulta SQL
+ * @global string $GLOBALS['validaciones_tipicas']
+ */
+$GLOBALS['validaciones_tipicas'] = array();
+
+/** Funciones para validar caso de manera más compleja que con 
+ * validaciones_tipicas
+ * @global string $GLOBALS['gancho_valida_caso']
+ */
+$GLOBALS['gancho_valida_caso'] = array();
+
+/** Funciones para validar base de datos de manera más compleja que con 
+ * validaciones_tipicas
+ * @global string $GLOBALS['gancho_valida_base']
+ */
+$GLOBALS['gancho_valida_base'] = array();
 
 /** Cabezote en consulta_web.
  * Dejar '' si no hay
