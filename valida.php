@@ -112,6 +112,23 @@ res_valida(
     AND id NOT IN (SELECT id_grupoper FROM actocolectivo)"
 );
 
+foreach ($GLOBALS['validaciones_tipicas'] as $desc => $sql) {
+    res_valida($db, _("Casos") . " " . $desc, $sql);
+}
+
+
+if (isset($GLOBALS['gancho_valida_base'])) {
+    foreach ($GLOBALS['gancho_valida_base'] as $k => $f) {
+        if (is_callable($f)) {
+            call_user_func_array(
+                $f,
+                array($db)
+            );
+        } else {
+            echo_esc(_("Falta") . " $k - $f");
+        }
+    }
+}
 
 echo '<table width="100%">
     <td style = "white-space: nowrap; background-color: #CCCCCC;"
