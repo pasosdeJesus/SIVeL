@@ -57,10 +57,18 @@
 <listitem><para> Evitar mostrar categorias de agresiones junto a víctima en reporte tabla</para></listitem></varlistentry>
 <varlistentry><term><literal>reptabla_separa_ubicacion</literal></term>
 <listitem><para> Separar departamento y municipio en columas aparte</para></listitem></varlistentry>
+<varlistentry><term><literal>reptabla_separa_nomap</literal></term>
+<listitem><para> Separar nombre y apellido en columas aparte</para></listitem></varlistentry>
 <varlistentry><term><literal>receptor_correo</literal></term>
 <listitem><para> Dirección de correo a la cual enviar mensajes cifrados.</para></listitem></varlistentry>
 <varlistentry><term><literal>emisor_correo</literal></term>
 <listitem><para> Dirección de la cual provendrán mensajes cifrados.</para></listitem></varlistentry>
+<varlistentry><term><literal>validaciones_tipicas</literal></term>
+<listitem><para> Validaciones indice es mensaje de error y valor es consulta SQL</para></listitem></varlistentry>
+<varlistentry><term><literal>gancho_valida_caso</literal></term>
+<listitem><para> Funciones para validar caso de manera más compleja que con </para></listitem></varlistentry>
+<varlistentry><term><literal>gancho_valida_base</literal></term>
+<listitem><para> Funciones para validar base de datos de manera más compleja que con </para></listitem></varlistentry>
 <varlistentry><term><literal>cabezote_consulta_web</literal></term>
 <listitem><para> Cabezote en consulta_web.</para></listitem></varlistentry>
 <varlistentry><term><literal>pie_consulta_web</literal></term>
