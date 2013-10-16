@@ -47,6 +47,29 @@ $GLOBALS['idbus']=-1;
 /* -------- OPERACIONES CON CADENAS */
 
 /**
+ * Convierte un nombre a una forma normal en español.  En mayúsculas, 
+ * sin espacios redundantes y sin tildes.
+ *
+ * @param string $s Nombre
+ *
+ * @return string Convertido a "forma normal"
+ */
+function a_forma_normal($s)
+{
+    $r = a_mayusculas($s);
+    $r = trim($r);
+    $r = preg_replace("/  +/", "", $r);
+    $r = str_replace(
+        array('Á', 'É', 'Í', 'Ó', 'Ú', 'á', 'é', 'í', 'ó', 'ú'),
+        array('A', 'E', 'I', 'O', 'U', 'A', 'E', 'I', 'O', 'U'), 
+        $r
+    );
+
+    return $r;
+}
+
+
+/**
  * Convierte a minúsculas textos en español
  *
  * @param string $s Cadena
@@ -472,15 +495,12 @@ function error_valida($msg, $valores, $iderr = '', $enhtml = false)
         $_SESSION['recuperaErrorValida'] = $valores;
     }
     echo "<script>";
-    if ($enhtml) {
+    /*    if ($enhtml) { */
         //echo "$(document).ready(function () {alert('$msg');});";
         echo "alert('$msg');";
-    } else {
+/*    } else {
         echo "alert('" . htmlentities($msg, ENT_COMPAT, 'UTF-8') . "');";
-        /*echo "$(document).ready(function () {alert('" 
-            . htmlentities($msg, ENT_COMPAT, 'UTF-8')
-            . "');});";*/
-    }
+        } */
     echo "</script>";
     if ($iderr != '') {
         $_SESSION[$iderr] = $msg;
