@@ -203,6 +203,33 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             DB_DataObject_Cast::sql('NULL') : $value;
     }
 
+    /**
+     * Modifica nombres antes de incluirlos.
+     * Para funcionar con versiones nuevas de DB_DataObject requiere
+     * <b>useMutator</b> en <b>true</b>
+     *
+     * @param string $value Valor recibido de formulario
+     *
+     * @return void
+     */
+    function setnombres($value)
+    {
+        $this->nombres = trim(preg_replace('/\s\s+/', ' ', $value));
+    }
+
+    /**
+     * Modifica apellidos antes de incluirlos.
+     * Para funcionar con versiones nuevas de DB_DataObject requiere
+     * <b>useMutator</b> en <b>true</b>
+     *
+     * @param string $value Valor recibido de formulario
+     *
+     * @return void
+     */
+    function setapellidos($value)
+    {
+        $this->apellidos = trim(preg_replace('/\s\s+/', ' ', $value));
+    }
 
     /**
      * Campos que pueden ser SIN INFORMACION y el código correspondiente
