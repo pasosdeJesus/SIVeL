@@ -369,7 +369,7 @@ class ResConsulta
         $tot = 0;
 
         if ($septd) {
-            $sepm ="</td><td>";
+            $sepm ="</td><td valign='top'>";
         } else {
             $sepm =" ";
         } 
