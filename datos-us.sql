@@ -66,3 +66,4 @@ INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-btc', '2013-
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-idn', '2013-06-06', 'Número de documento entero'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-ext', '2013-06-12', 'Cambio código departamento Exterior de 0 a 1000'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-tb', '2013-06-12', 'Agrega vincuos con estado'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-sx', '2013-10-04', 'Funcion soundex en español'); 
