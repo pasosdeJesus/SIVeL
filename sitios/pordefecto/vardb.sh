@@ -28,7 +28,7 @@ function valconf {
 		exit 1;
 	} fi;
 	cmd="$nv=\"$res\";";
-	#echo "OJO $cmd";
+	#echo "OJO valconf: $cmd";
 	eval "$cmd";
 }
 

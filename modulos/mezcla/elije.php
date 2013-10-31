@@ -55,10 +55,26 @@ class AccionComparaDos extends HTML_QuickForm_Action
      */
     function perform(&$page, $actionName)
     {
-        $pId1   = var_post_escapa('id1', $db);
-        $pId2   = var_post_escapa('id2', $db);
+        $pIds   = var_post_escapa('ids');
+        $a = explode(" ", $pIds);
+        if (count($a) < 2 || count($a) % 2 != 0) {
+            error_valida(
+                "Debe ingresar parejas de códigos separados por espacio", 
+                null
+            );
+            return false;
+        }
+        foreach($a as $nc) {
+            if ($nc != (int)$nc) {
+                error_valida(
+                    "Debe ingresar parejas de códigos separados por espacio", 
+                    null
+                );
+                return false;
+            }
+        }
 
-        header("Location: opcion.php?num=1004&id1=$pId1&id2=$pId2");
+        header("Location: opcion.php?num=1004&ids=$pIds");
 
         die("compara");
     }
@@ -313,11 +329,11 @@ class PagVictimasrep extends HTML_QuickForm_Page
         $x =&  objeto_tabla('departamento');
         $db = $x->getDatabaseConnection();
 
-        $e =& $this->addElement('header', null, 'Compara dos casos por número');
-        $e =& $this->addElement('text', 'id1');
-        $e->setSize(7);
-        $e =& $this->addElement('text', 'id2');
-        $e->setSize(7);
+        $e =& $this->addElement(
+            'header', null, 'Compara pares de casos por código'
+        );
+        $e =& $this->addElement('text', 'ids');
+        $e->setSize(80);
 
         $e =& $this->addElement(
             'submit',

@@ -62,6 +62,7 @@ function elimina_caso(&$db, $idcaso)
         }
     }
     $q = "DELETE FROM caso_funcionario WHERE id_caso='$idcaso'";
+    //echo "OJO q=$q<br>";
     hace_consulta($db, $q);
     $q = "DELETE FROM caso WHERE id='$idcaso'";
     $res = hace_consulta($db, $q);
