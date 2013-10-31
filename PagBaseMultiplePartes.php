@@ -301,14 +301,18 @@ class PagBaseMultiplePartes extends PagBaseMultiple
      *
      * @return void
      */
-    function eliminaClasemodelo($dcm)
+    function eliminaClasemodelo($dcm, $idcaso = null)
     {
         assert($dcm != null);
         assert($dcm->id_caso != null);
+        if ($idcaso == null) {
+            $idcaso = $_SESSION['basicos_id'];
+        }
+        //echo "OJO eliminaClasemodelo({$dcm->__table}, $idcaso)<br>";
         $db =& $dcm->getDatabaseConnection();
         $cll = get_called_class();
         $cm = $cll::CLASEMODELO;
-        $q = "DELETE FROM $cm WHERE id_caso={$_SESSION['basicos_id']}";
+        $q = "DELETE FROM $cm WHERE id_caso={$idcaso}";
         $result = hace_consulta($db, $q);
     }
     
@@ -333,6 +337,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         );
         $ll = $cll::LLAVECOMP;
         foreach ($partes as $t) {
+            //echo "OJO t=$t<br>";
             $do =& objeto_tabla($t);
             sin_error_pear($do);
             $do->id_caso = $idcaso;
@@ -342,6 +347,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                 $cp[] = $do->$ll;
             }
             foreach ($cp as $num) {
+                //echo "OJO num=$num<br>";
                 $do =& objeto_tabla($t);
                 $do->id_caso = $idcaso;
                 $do->$ll = $num;
@@ -349,12 +355,15 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                 $do->delete();
             }
         }
+        //echo "OJO $cll::CLASEMODELO<br>";
         $dcm =& objeto_tabla($cll::CLASEMODELO);
         sin_error_pear($dcm);
         $dcm->id_caso = $idcaso;
         $dcm->find();
         while ($dcm->fetch()) {
-            self::eliminaClasemodelo($dcm);
+            //echo "OJO llama eliminaClaseModelo($dcm->__table)<br>";
+            //print_r($dcm);
+            self::eliminaClasemodelo($dcm, $idcaso);
             $dcm->delete();
         }
     }
