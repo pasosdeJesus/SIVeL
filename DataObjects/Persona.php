@@ -524,6 +524,37 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         return true;
     }
 
+    /**
+     * Mezcla automáticamente datos de otro objeto
+     */
+    function mezclaAutom($otro, &$obs)
+    {
+        if ($this->sexo == 'S' && ($otro->sexo == 'M' || $otro->sexo == 'F')) {
+            $this->sexo = $otro->sexo;
+            $obs .= " persona.sexo={$this->sexo}";
+        }
+        // Remplaza sin concatenar cuando hay null o vacío
+        foreach(array('nombres', 'apellidos', 'tipodocumento') as $c) {
+            if (($this->$c == null || trim($this->$c) == '') 
+                && $otro->$c != null && trim($otro->$c) != ''
+            ) {
+                $this->$c = $otro->$c;
+                $obs .= " persona.$c={$this->$c}";
+            }
+        }
+        // Remplaza enteros cuando hay null
+        foreach(array(
+            'anionac', 'mesnac', 'dianac',
+            'id_departamento', 'id_municipio', 'id_clase', 
+            'numerodocumento'
+        ) as $c) {
+            if ($this->$c == null && $otro->$c != null) {
+                $this->$c = $otro->$c;
+                $obs .= " persona.$c={$this->$c}";
+            }
+        }
+
+    }
 }
 
 ?>
