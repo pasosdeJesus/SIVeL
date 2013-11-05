@@ -22,8 +22,9 @@ Añadidas variable de configuración para controlar presentación de
 reporte tabla: $GLOBALS['reptabla_nonacimiento'], 
 $GLOBALS['reptabla_noagresion'], 
 $GLOBALS['reptabla_separa_ubicacion'] (que separa ubicación en 2 columnas para
-municipio y departamento) y 
-$GLOBALS['reptabla_separa_nomap'] (que separa nombres y apellidos en 2 columnas).
+municipio y departamento),
+$GLOBALS['reptabla_separa_nomap'] (que separa nombres y apellidos en 2 columnas) y
+$GLOBALS['reptabla_tipificacion_breve'] (que presenta tipificación sin código ni supracategoria).
 					</para></listitem>
 					<listitem><para>
 					</para></listitem>

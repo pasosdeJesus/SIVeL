@@ -77,6 +77,11 @@ $GLOBALS['reptabla_separa_ubicacion'] = false;
  */
 $GLOBALS['reptabla_separa_nomap'] = false;
 
+/** En reporte tabla mostrar forma resumida de agresión
+ * @global string $GLOBALS['reptabla_tipificacion_breve']
+ */
+$GLOBALS['reptabla_tipificacion_breve'] = false;
+
 /** Dirección de correo a la cual enviar mensajes cifrados.
  * @global string $GLOBALS['receptor_correo']
  */
