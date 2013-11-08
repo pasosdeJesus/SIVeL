@@ -66,7 +66,9 @@ function muestra($dsn)
     echo "Se mezclará los segundos casos en los primeros y se eliminaran los segundos.";
     echo "<form action='opcion.php?num=1005' method='POST' target='_blank'>";
     echo "<center><table border='1'>";
-    echo "<tr><th colspan='2'>Primero</th><th colspan='2'>Segundo</th><th>Confirma</th></tr>";
+    echo "<tr><th>Código</th><th>Fecha</th>"
+        . "<th>Departamento</th><th>Víctimas</th><th>Descripción</th>"
+        . "<th>Confirma</th></tr>";
 
     if (!isset($_GET['ids'])) {
         error_valida(
@@ -86,34 +88,40 @@ function muestra($dsn)
         } else {
             $id2 = $id;
         }
-        $err = "";
-        $nid = 2;
-        if ($nid != 2 || $id1 <=0 || $id2 <= 0 || $id1 == $id2) {
-            error_valida("Debe se&ntilde;alar dos casos en lugar de $nid", null);
-            return false;
-        }
-        $v1_html = enlace_edita($id1);
-        $v2_html = enlace_edita($id2);
-        $r1 = ResConsulta::reporteRelato(
-            $id1, $db, 
-            $GLOBALS['cw_ncampos'] + array('m_fuentes' => 'Fuentes')
-        );
-        $r2 = ResConsulta::reporteRelato(
-            $id2, $db, 
-            $GLOBALS['cw_ncampos'] + array('m_fuentes' => 'Fuentes')
-        );
-        echo "<tr>"
-            . "</td>"
-            . "<td>" . $v1_html . "</td>"
-            . "<td>" . $r1 . "</td>"
-            . "<td>" . $v2_html . "</td>"
-            . "<td>" . $r2 . "</td>"
-            . "<td>" 
-            . "<input type='checkbox' name='m_{$id1}_{$id2}' checked/>"
-            . "</td>"
-            . "</tr>";
+        $par[] = array($id1, $id2);
         $id1 = null;
         $id2 = null;
+    }
+    foreach($par as $p) {
+        list($id1, $id2) = $p;
+        foreach($p as $id) {
+            $c = "SELECT DISTINCT caso.id, caso.fecha,
+                array(select departamento.nombre from departamento, ubicacion
+                where departamento.id=ubicacion.id_departamento 
+                and ubicacion.id_caso=caso.id),
+            array(select persona.nombres || ' ' || persona.apellidos
+            from victima, persona where victima.id_persona=persona.id
+            and victima.id_caso=caso.id), caso.memo
+            FROM caso where caso.id = $id";
+            $r = hace_consulta($db, $c);
+            sin_error_pear($r);
+            $rows = array();
+            $r->fetchInto($rows);
+            foreach($rows as $n => $c) {
+                if ($n == 0) {
+                    $v1_html = enlace_edita($c);
+                } else {
+                    $v1_html = $c;
+                }
+                echo "<td>" . $v1_html . "</td>";
+            }
+            if ($id == $id1) {
+                echo "<td rowspan='2'>" 
+                    . "<input type='checkbox' name='m_{$id1}_{$id2}' checked/>"
+                    . "</td>";
+            } 
+            echo "</tr>\n";
+        }
     }
     echo "</table></center>";
     echo "<center><input type='submit' value='Mezclar Segundo en Primero y Eliminar Segundo'/></center>";

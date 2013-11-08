@@ -650,7 +650,7 @@ function muestra($dsn)
     echo "<p>Referencia de mezclados:</p>";
     echo "<center><table border='1'>";
     echo "<tr><th>Código inicial</th><th>Mezclado en</th></tr>";
-    asort($mezcladoen);
+    ksort($mezcladoen);
     foreach($mezcladoen as $id2 => $id1) {
         echo "<tr><td>$id2</td><td>$id1</td></tr>";
     }
