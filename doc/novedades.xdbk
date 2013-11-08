@@ -5,6 +5,9 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>
+Reimplementado módulo de mezcla.
+					</para></listitem>
+					<listitem><para>
 Función soundexesp, agradecimiento a Oliver Mazariegos de Grupo Vesica.
 					</para></listitem>
 					<listitem><para>
