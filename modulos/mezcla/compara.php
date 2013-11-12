@@ -63,23 +63,21 @@ function muestra($dsn)
     $db = autentica_usuario($dsn, $accno, $aut_usuario, 31);
     encabezado_envia("Comparación y mezcla de 2 casos");
 
-    echo "Se mezclará los segundos casos en los primeros y se eliminaran los segundos.";
-    echo "<form action='opcion.php?num=1005' method='POST' target='_blank'>";
-    echo "<center><table border='1'>";
-    echo "<tr><th>Código</th><th>Fecha</th>"
-        . "<th>Departamento</th><th>Víctimas</th><th>Descripción</th>"
-        . "<th>Confirma</th></tr>";
-
-    if (!isset($_GET['ids'])) {
-        error_valida(
-            "No hay parejas de casos "
-            . "(si es el caso intente con menos)", null
-        );
-        return false;
+    if (isset($_SESSION['mezcla_ids'])) {
+        $pIds = $_SESSION['mezcla_ids'];
+        unset($_SESSION['mezcla_ids']);
+    } else {
+        if (!isset($_REQUEST['ids'])) {
+            error_valida(
+                "No hay parejas de casos "
+                . "(si es el caso intente con menos)", null
+            );
+            return false;
+        }
+        $pIds   = var_escapa($_REQUEST['ids']);
     }
 
-    $pIds   = var_escapa($_GET['ids']);
-    $pp = preg_split("/[\s]+/", $pIds);
+   $pp = preg_split("/[\s]+/", $pIds);
     $id1 = $id2 = null;
     foreach($pp as $id) {
         if ($id1 == null) {
@@ -92,8 +90,26 @@ function muestra($dsn)
         $id1 = null;
         $id2 = null;
     }
+
+    echo "<p>Por mezclar " . count($par) . " parejas de casos</p>";
+    echo "<p>Se mezclará los segundos casos en los primeros y se eliminaran los segundos.</p>";
+    echo "<form action='opcion.php?num=1005' method='POST' target='_blank'>";
+    echo "<center><table border='1'>";
+    echo "<tr><th>Código</th><th>Fecha</th>"
+        . "<th>Departamento</th><th>Víctimas</th><th>Descripción</th>"
+        . "<th>Confirma</th></tr>";
+
+
+    $col1 = "#FFFFFF";
+    $col2 = "#BBBBBB";
+    $coltr = $col1;
     foreach($par as $p) {
         list($id1, $id2) = $p;
+        if ($coltr == $col1) {
+            $coltr = $col2;
+        } else {
+            $coltr = $col1;
+        }
         foreach($p as $id) {
             $c = "SELECT DISTINCT caso.id, caso.fecha,
                 array(select departamento.nombre from departamento, ubicacion
@@ -105,6 +121,7 @@ function muestra($dsn)
             FROM caso where caso.id = $id";
             $r = hace_consulta($db, $c);
             sin_error_pear($r);
+            echo "<tr style='background-color:$coltr;'>\n";
             $rows = array();
             $r->fetchInto($rows);
             foreach($rows as $n => $c) {
