@@ -140,14 +140,17 @@ function subizq_hasta_car($s, $c)
  * Mezcla información del caso id2 dentro de id1
  * o dejando en observaciones cuando no puede
  * 
- * @param integer $id1   Primer caso
- * @param integer $id2   Segundo caso
- * @param bool    $elim2 Elimina segundo tras mezclar?
- * @param string  &$obs  Colchon de observaciones
+ * @param integer $id1    Primer caso
+ * @param integer $id2    Segundo caso
+ * @param bool    $elim2  Elimina segundo tras mezclar?
+ * @param string  &$obs   Colchon de observaciones
+ * @param string  &$rvic   Retorna aqui víctimas tras mezclas
+ * @param string  &$fecha Retorna aqui fecha tras mezcla
+ * @param string  &$rdep   Retorna aqui departamento tras mezcla
  *
  * @return bool Si logra completar mezcla
  */
-function mezclaen($id1, $id2, $elim2, &$obs) {
+function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
     $dc = objeto_tabla('caso');
     $db = $dc->getDatabaseConnection();
     $estbd = parse_ini_file(
@@ -204,7 +207,7 @@ function mezclaen($id1, $id2, $elim2, &$obs) {
     $do1->mezclaAutom($do2, $obs);
     $do1->update();
     sin_error_pear($do1);
-    $fechacaso = $do1->fecha;
+    $fecha = $do1->fecha;
     unset($ref['caso:id']['caso']);
     
     //echo "OJO Víctima<br>";
@@ -232,6 +235,7 @@ function mezclaen($id1, $id2, $elim2, &$obs) {
     $dp1->mezclaAutom($dp2, $obs);
     $dp1->update();
     sin_error_pear($dp1);
+    $rvic = $dp1->nombres . " " . $dp1->apellidos;
     unset($ref['caso:id']['victima']);
     unset($ref['presponsable:id']['victima']);
     unset($ref['persona:id']['victima']);
@@ -380,7 +384,7 @@ function mezclaen($id1, $id2, $elim2, &$obs) {
             }
             $dot1->find();
             if (!$dot1->fetch()) {
-                $dot1->fecha = $fechacaso;
+                $dot1->fecha = $fecha;
                 $dot1->insert();
                 sin_error_pear($dot1);
                 $obs .= " Asociado actoreiniciar(id_persona:{$dot1->id_persona},id_categoria:{$dot1->id_categoria},fecha:{$dot1->fecha})";
@@ -482,6 +486,10 @@ function mezclaen($id1, $id2, $elim2, &$obs) {
                 if (isset($do2->id)) {
                     $mapk[$t][$do2->id] = $do1->id;
                 }
+            }
+            if ($t == "ubicacion" && $do1->id_departamento != null) {
+                $ddep = $do1->getLink('id_departamento');
+                $rdep = $ddep->nombre;
             }
         }
         foreach($estbd[$t] as $c => $tip) {
@@ -634,9 +642,10 @@ function muestra($dsn)
             echo "<td>{$row[$i]}</td>";
 } */
         $obs2 = "";
-        if (mezclaen($id1, $id2, true, $obs2)) {
+        $fecha = ""; $dep = ""; $vic = "";
+        if (mezclaen($id1, $id2, true, $obs2, $vic, $fecha, $dep)) {
             $tmez++;
-            $mezcladoen[$id2] = $id1;
+            $mezcladoen[$id2] = array($id1, $fecha, $dep, $vic);
         }
         echo "<td>$obs2</td>";
         echo "</tr>\n";
@@ -649,10 +658,14 @@ function muestra($dsn)
     echo "<p>Casos mezclados: " . $tmez . "</p>";
     echo "<p>Referencia de mezclados:</p>";
     echo "<center><table border='1'>";
-    echo "<tr><th>Código inicial</th><th>Mezclado en</th></tr>";
+    echo "<tr><th>Código inicial</th><th>Mezclado en</th><th>Fecha</th><th>Ubicación</th><th>Víctima(s)</th></tr>";
     ksort($mezcladoen);
-    foreach($mezcladoen as $id2 => $id1) {
-        echo "<tr><td>$id2</td><td>$id1</td></tr>";
+    foreach($mezcladoen as $id2 => $l) {
+        list($id1, $rvic, $rfec, $rdep) = each($l);
+        echo "<tr>";
+        echo "<td>$id2</td><td>$id1</td>";
+        echo "<td>$rvic</td><td>$rfec</td><td>$rdep</td>";
+        echo "</tr>";
     }
     echo "</table></center>";
 
