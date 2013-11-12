@@ -1137,6 +1137,11 @@ function sin_error_pear($do, $msg = "")
      */
 function hace_consulta(&$db, $q, $finenerror = true, $muestraerror = true)
 {
+    if ($db == null || !($db instanceof PEAR)) {
+        echo "db no es objeto PEAR<br>";
+        debug_print_backtrace();
+        exit(1);
+    }
     $res = $db->query($q);
     if (PEAR::isError($res)) {
         if ($muestraerror) {
