@@ -1348,7 +1348,16 @@ class ResConsulta
                 );
                 $vr_html = $seploc = "";
                 foreach ($ncat as $k => $nc) {
-                    $vr_html .= $seploc . strip_tags($k) . " ".strip_tags($nc);
+                    if (isset($GLOBALS['reptabla_tipificacion_breve']) 
+                        && $GLOBALS['reptabla_tipificacion_breve'] === true
+//                        && strpos($nc, ":")
+                    ) { 
+                        $nc = substr($nc, strpos($nc, ":") + 1);
+                        $vr_html .= $seploc . strip_tags($nc);
+                    } else {
+                        $vr_html .= $seploc . strip_tags($k) 
+                            . " ".strip_tags($nc);
+                    }
                     $seploc = ",  ";
                 }
             } else if ($cc == 'caso_id') {
