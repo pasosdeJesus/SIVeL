@@ -30,6 +30,8 @@ $GLOBALS['reptabla_separa_nomap'] (que separa nombres y apellidos en 2 columnas)
 $GLOBALS['reptabla_tipificacion_breve'] (que presenta tipificación sin código ni supracategoria).
 					</para></listitem>
 					<listitem><para>
+Fallas resueltas: Al buscar por consulta deallada en pestaña ubicación no 
+pone automáticamente latitud y longitud. Agradecemos reporte a Miltón Mejía.
 					</para></listitem>
 			</itemizedlist></para>
 		</listitem>
