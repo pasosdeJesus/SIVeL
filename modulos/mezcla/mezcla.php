@@ -645,7 +645,7 @@ function muestra($dsn)
         $fecha = ""; $dep = ""; $vic = "";
         if (mezclaen($id1, $id2, true, $obs2, $vic, $fecha, $dep)) {
             $tmez++;
-            $mezcladoen[$id2] = array($id1, $fecha, $dep, $vic);
+            $mezcladoen[$id2] = array($id1, $vic, $fecha, $dep);
         }
         echo "<td>$obs2</td>";
         echo "</tr>\n";
@@ -658,10 +658,13 @@ function muestra($dsn)
     echo "<p>Casos mezclados: " . $tmez . "</p>";
     echo "<p>Referencia de mezclados:</p>";
     echo "<center><table border='1'>";
-    echo "<tr><th>Código inicial</th><th>Mezclado en</th><th>Fecha</th><th>Ubicación</th><th>Víctima(s)</th></tr>";
+    echo "<tr><th>Código inicial</th><th>Mezclado en</th><th>Víctima(s)</th><th>Fecha</th><th>Ubicación</th></tr>";
     ksort($mezcladoen);
     foreach($mezcladoen as $id2 => $l) {
-        list($id1, $rvic, $rfec, $rdep) = each($l);
+        $id1 = $l[0]; 
+        $rvic = $l[1];
+        $rfec = $l[2];
+        $rdep = $l[3];
         echo "<tr>";
         echo "<td>$id2</td><td>$id1</td>";
         echo "<td>$rvic</td><td>$rfec</td><td>$rdep</td>";
