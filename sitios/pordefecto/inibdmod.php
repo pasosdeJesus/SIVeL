@@ -14,6 +14,7 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+global $dirsitio;
 
 if ($_SESSION['dirsitio'] != $dirsitio) {
     $n1 = $_SESSION['dirsitio'] . "/conf.php";
@@ -40,6 +41,11 @@ if (!isset($dbusuario)) {
     die("inibdmod.php debe incluirse después de incluir conf.php de un sitio");
 }
 
+global $dsn;
+global $dbusuario;
+global $dbclave;
+global $dbservidor;
+global $dbnombre;
 /** DSN de la base de datos.  */
 $dsn = "pgsql://$dbusuario:$dbclave@$dbservidor/$dbnombre";
 
@@ -51,17 +57,16 @@ require_once 'DB/DataObject/FormBuilder.php';
 global $pear;
 $pear = new PEAR();
 $options =& $pear->getStaticProperty('DB_DataObject', 'options');
-$options = array(
-    'database' => $dsn,
-    'schema_location' => $dirsitio . '/DataObjects',
-    'class_location' => 'DataObjects/',
-    'require_prefix' => 'DataObjects/',
-    'class_prefix' => 'DataObjects_',
-    'extends_location' => 'DataObjects_',
-    'debug' => isset($GLOBALS['DB_Debug']) ? $GLOBALS['DB_Debug'] : '0',
+$options['database'] = $dsn;
+$options['schema_location'] = $dirsitio . '/DataObjects';
+$options['class_location'] = 'DataObjects/';
+$options['require_prefix'] = 'DataObjects/';
+$options['class_prefix'] = 'DataObjects_';
+$options['extends_location'] = 'DataObjects_';
+$options['debug'] = isset($GLOBALS['DB_Debug']) ? $GLOBALS['DB_Debug'] : '0';
     //'disable_null_strings' => 'full'
-);
 
+global $_DB_DATAOBJECT_FORMBUILDER;
 $_DB_DATAOBJECT_FORMBUILDER['CONFIG'] = array (
     'select_display_field' => 'nombre',
     'hidePrimaryKey' => false,
@@ -97,6 +102,7 @@ if (!function_exists("esta_nueva_ficha")) {
     }
 }
 
+global $modulos;
 /* Rutas en particular donde haya subdirectorios DataObjects */
 $rutas_include = ini_get('include_path').
     ":.:$dirserv:$dirserv/$dirsitio:$dirsitio:";

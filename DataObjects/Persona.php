@@ -203,6 +203,33 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             DB_DataObject_Cast::sql('NULL') : $value;
     }
 
+    /**
+     * Modifica nombres antes de incluirlos.
+     * Para funcionar con versiones nuevas de DB_DataObject requiere
+     * <b>useMutator</b> en <b>true</b>
+     *
+     * @param string $value Valor recibido de formulario
+     *
+     * @return void
+     */
+    function setnombres($value)
+    {
+        $this->nombres = trim(preg_replace('/\s\s+/', ' ', $value));
+    }
+
+    /**
+     * Modifica apellidos antes de incluirlos.
+     * Para funcionar con versiones nuevas de DB_DataObject requiere
+     * <b>useMutator</b> en <b>true</b>
+     *
+     * @param string $value Valor recibido de formulario
+     *
+     * @return void
+     */
+    function setapellidos($value)
+    {
+        $this->apellidos = trim(preg_replace('/\s\s+/', ' ', $value));
+    }
 
     /**
      * Campos que pueden ser SIN INFORMACION y el código correspondiente
@@ -497,6 +524,37 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         return true;
     }
 
+    /**
+     * Mezcla automáticamente datos de otro objeto
+     */
+    function mezclaAutom($otro, &$obs)
+    {
+        if ($this->sexo == 'S' && ($otro->sexo == 'M' || $otro->sexo == 'F')) {
+            $this->sexo = $otro->sexo;
+            $obs .= " persona.sexo={$this->sexo}";
+        }
+        // Remplaza sin concatenar cuando hay null o vacío
+        foreach(array('nombres', 'apellidos', 'tipodocumento') as $c) {
+            if (($this->$c == null || trim($this->$c) == '') 
+                && $otro->$c != null && trim($otro->$c) != ''
+            ) {
+                $this->$c = $otro->$c;
+                $obs .= " persona.$c={$this->$c}";
+            }
+        }
+        // Remplaza enteros cuando hay null
+        foreach(array(
+            'anionac', 'mesnac', 'dianac',
+            'id_departamento', 'id_municipio', 'id_clase', 
+            'numerodocumento'
+        ) as $c) {
+            if ($this->$c == null && $otro->$c != null) {
+                $this->$c = $otro->$c;
+                $obs .= " persona.$c={$this->$c}";
+            }
+        }
+
+    }
 }
 
 ?>

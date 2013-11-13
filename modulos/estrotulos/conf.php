@@ -34,7 +34,7 @@ $GLOBALS['m_opcion'][53] = array(
     'idpapa' => 50,
     'url' => 'opcion?num=100'
 );
-$GLOBALS['m_opcion'][53] = array(
+$GLOBALS['m_opcion'][54] = array(
     'nombre' =>  _('Colectivas con Rotulos de Rep. Cons.'),
     'idpapa' => 50,
     'url' => 'opcion?num=101'

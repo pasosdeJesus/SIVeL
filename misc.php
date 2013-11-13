@@ -47,6 +47,29 @@ $GLOBALS['idbus']=-1;
 /* -------- OPERACIONES CON CADENAS */
 
 /**
+ * Convierte un nombre a una forma normal en español.  En mayúsculas, 
+ * sin espacios redundantes y sin tildes.
+ *
+ * @param string $s Nombre
+ *
+ * @return string Convertido a "forma normal"
+ */
+function a_forma_normal($s)
+{
+    $r = a_mayusculas($s);
+    $r = trim($r);
+    $r = preg_replace("/  +/", "", $r);
+    $r = str_replace(
+        array('Á', 'É', 'Í', 'Ó', 'Ú', 'á', 'é', 'í', 'ó', 'ú'),
+        array('A', 'E', 'I', 'O', 'U', 'A', 'E', 'I', 'O', 'U'), 
+        $r
+    );
+
+    return $r;
+}
+
+
+/**
  * Convierte a minúsculas textos en español
  *
  * @param string $s Cadena
@@ -462,7 +485,7 @@ function valida(&$page)
  * @param string $enhtml  Mensaje en HTML
  *
  * @return void
-     */
+ */
 function error_valida($msg, $valores, $iderr = '', $enhtml = false)
 {
     if (!headers_sent()) {
@@ -472,15 +495,12 @@ function error_valida($msg, $valores, $iderr = '', $enhtml = false)
         $_SESSION['recuperaErrorValida'] = $valores;
     }
     echo "<script>";
-    if ($enhtml) {
+    /*    if ($enhtml) { */
         //echo "$(document).ready(function () {alert('$msg');});";
         echo "alert('$msg');";
-    } else {
+/*    } else {
         echo "alert('" . htmlentities($msg, ENT_COMPAT, 'UTF-8') . "');";
-        /*echo "$(document).ready(function () {alert('" 
-            . htmlentities($msg, ENT_COMPAT, 'UTF-8')
-            . "');});";*/
-    }
+        } */
     echo "</script>";
     if ($iderr != '') {
         $_SESSION[$iderr] = $msg;
@@ -1117,6 +1137,11 @@ function sin_error_pear($do, $msg = "")
      */
 function hace_consulta(&$db, $q, $finenerror = true, $muestraerror = true)
 {
+    if ($db == null || !($db instanceof PEAR)) {
+        echo "db no es objeto PEAR<br>";
+        debug_print_backtrace();
+        exit(1);
+    }
     $res = $db->query($q);
     if (PEAR::isError($res)) {
         if ($muestraerror) {
@@ -2208,11 +2233,12 @@ function es_objeto_nulo($do)
 /**
  * Validaciones globales de un caso
  *
- * @param integer $idcaso Identificación de caso por validar.
+ * @param integer $idcaso    Identificación de caso por validar.
+ * @param string  &$buf_html Arreglo de errores retornados escapados
  *
  * @return bool Validado
-     */
-function valida_caso($idcaso)
+ */
+function valida_caso($idcaso, &$buf_html)
 {
     $valr = true;
     $dcaso = objeto_tabla('caso');
@@ -2229,7 +2255,7 @@ function valida_caso($idcaso)
         "WHERE id_caso='" . $idcaso . "';";
     $nfue+=(int)$db->getOne($q);
     if ($nfue <= 0) {
-        error_valida('Falta fuente.', array());
+        $buf_html[] = _('Falta fuente.');
         $valr = false;
     }
     $q = "SELECT COUNT(*) FROM acto " .
@@ -2242,14 +2268,14 @@ function valida_caso($idcaso)
         "WHERE id_caso='" . $idcaso . "';";
     $ncat += (int)$db->getOne($q);
     if ($ncat <= 0) {
-        error_valida('Falta tipo de violencia.', array());
+        $buf_html[] = _('Falta tipo de violencia.');
         $valr = false;
     }
     $q = "SELECT COUNT(*) FROM caso_presponsable " .
         "WHERE id_caso='" . $idcaso . "';";
     $npresp = (int)$db->getOne($q);
     if ($npresp <= 0) {
-        error_valida('Falta presunto responsable.', array());
+        $buf_html[] = _('Falta presunto responsable.');
         $valr = false;
     }
     $q = "SELECT COUNT(*) FROM victima " .
@@ -2262,13 +2288,42 @@ function valida_caso($idcaso)
         "WHERE id_caso='" . $idcaso . "';";
     @$nvic+=(int)$db->getOne($q);
     if ($nvic <= 0) {
-        error_valida('Falta victima.', array());
+        $buf_html[] = _('Falta víctima.');
         $valr = false;
     }
     $dcaso->get($idcaso);
     if (trim($dcaso->memo)=='') {
-        error_valida('Falta memo.', array());
+        $buf_html[] = _('Falta memo.');
         $valr = false;
+    }
+
+    if (isset($GLOBALS['validaciones_tipicas']) 
+        && is_array($GLOBALS['validaciones_tipicas'])
+    ) {
+        foreach ($GLOBALS['validaciones_tipicas'] as $desc => $sql) {
+            $q = "SELECT COUNT(s.id_caso) 
+                FROM ($sql) AS s 
+                WHERE s.id_caso = '$idcaso'";
+            $prob = $db->getOne($q);
+            sin_error_pear($prob);
+            if ((int)$prob > 0) {
+                $buf_html[] = _("Caso") . " " . $desc;
+                $valr = false;
+            }
+        }
+    }
+    if (isset($GLOBALS['gancho_valida_caso'])) {
+        foreach ($GLOBALS['gancho_valida_caso'] as $k => $f) {
+            if (is_callable($f)) {
+                $r = call_user_func_array(
+                    $f,
+                    array($idcaso, &$buf_html)
+                ) && $r;
+            } else {
+                echo_esc(_("Falta") . " $k - $f");
+            }
+            //print_r($buf_html); die("x $k - $f - $r");
+        }
     }
     if (isset($GLOBALS['ISPELL']) && $GLOBALS['ISPELL'] != '') {
         $cmd = "";
@@ -2280,19 +2335,15 @@ function valida_caso($idcaso)
         }
         $r=`$cmd`;
         if ($r != "") {
-            error_valida(
-                _("Errores ortográficos en memo") . ": $r<br>" .
+            $buf_html[] = _("Errores ortográficos en memo") . ": $r<br>" .
                 str_replace(
                     '%l', $GLOBALS['CHROOTDIR'] . getcwd() . "/" .
                     $GLOBALS['DICCIONARIO'], $GLOBALS['MENS_ORTOGRAFIA']
-                ),
-                array()
-            );
+                );
         }
     }
-    if (!$valr) {
-        echo "<hr>";
-    }
+
+
     return $valr;
 }
 

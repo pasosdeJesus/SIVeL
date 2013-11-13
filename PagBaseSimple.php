@@ -808,7 +808,6 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
         }
     }
 
-
 }
 
 ?>

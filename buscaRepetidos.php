@@ -33,7 +33,7 @@ echo '<table width="100%">'
 $res =& hace_consulta(
     $db, "SELECT c1.id, trim(c1.memo), count(c1.id) as num " .
     " FROM caso c1 JOIN caso c2 ON c1.memo=c2.memo " .
-    " GROUP BY c1.id, c1.memo having count(c2.memo) > 1 " .
+    " GROUP BY c1.id, c1.memo HAVING count(c2.memo) > 1 " .
     " ORDER BY c1.memo, c1.id"
 );
 

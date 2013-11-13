@@ -41,6 +41,25 @@ class DataObjects_Caso_funcionario extends DB_DataObject_SIVeL
 
 
     var $fb_hidePrimaryKey = true;
+
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        /**
+         * Nombres por presentar para cada campo.
+         */
+        $this->fb_fieldLabels= array(
+           'id_funcionario' => _('Funcionario'),
+           'id_caso' => _('Caso'),
+           'fechainicio' => _('Fecha en la que inicio el caso'),
+        );
+    }
+
 }
 
 ?>
