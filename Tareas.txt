@@ -1,6 +1,8 @@
 
 1.2 o posteriores
 
+Usar bcrypt con PHP-5.5 como en ruby
+
 Etnias: tikuna, zenu
 
 Consulta detallada buscar por procedencia de víctima
