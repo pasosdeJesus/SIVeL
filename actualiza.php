@@ -2345,13 +2345,19 @@ if (!aplicado($idac)) {
 
 $idac = '1.1-dp1';
 if (!aplicado($idac)) {
-    consulta_archivo(&$db, 'act-nom2012.sql');
+    consulta_archivo($db, 'act-nom2012.sql');
     aplicaact($act, $idac, 'Actualiza info. geográfica con DIVIPOLA 2012');
+}
+
+$idac = '1.1-dp13';
+if (!aplicado($idac)) {
+    consulta_archivo($db, 'act-nom2013.sql');
+    aplicaact($act, $idac, 'Actualiza info. geográfica con DIVIPOLA 2013');
 }
 
 $idac = '1.2-co';
 if (!aplicado($idac)) {
-    consulta_archivo(&$db, 'act-coor.sql');
+    consulta_archivo($db, 'act-coor.sql');
     aplicaact($act, $idac, 'Agrega coordenadas a departamentos y municipios');
 }
 
