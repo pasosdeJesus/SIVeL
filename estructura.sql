@@ -121,6 +121,7 @@ BEGIN
 	RETURN soundex;	
 END;	
 $$
+;
 
 CREATE TABLE actualizacionbase (
 	id VARCHAR(10) PRIMARY KEY,
