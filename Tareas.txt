@@ -13,6 +13,7 @@ Falta consulta detallada al especificar
 	víctimas colectivas (sin org. arm), individuales (info. persona), 
 	actos, módulos seguimiento, anexos (sólo descripción),
 
+Que guarde filtro de consulta para repetir con cambios menores. Rosita.
 
 Actualizar Etnia  y DIVIPOLA
 Seguir completando herram/buscafallas.sh

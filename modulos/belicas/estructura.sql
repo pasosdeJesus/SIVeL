@@ -26,7 +26,7 @@ CREATE TABLE combatiente (
 	id_organizacion	INTEGER REFERENCES organizacion,
 	id_vinculoestado INTEGER REFERENCES vinculoestado,
 	id_caso	INTEGER REFERENCES caso,
-	organizacion_armada INTEGER REFERENCES presponsable
+	organizacionarmada INTEGER REFERENCES presponsable
 );
 
 

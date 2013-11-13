@@ -276,6 +276,76 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
         }
     }
 
+    /**
+     * Mezcla automáticamente datos de otro objeto
+     */
+    function mezclaAutom($otro, &$obs)
+    {
+        $alfinal = array();
+        $t = $this->table();
+        foreach ($this->fb_fieldLabels as $v => $et) {
+            if ($otro->$v != $this->$v) {
+                //$obs .= " OJO diferentes $v - {$t[$v]} - {$this->$v} - {$otro->$v}. ";
+                if ((($t[$v] & DB_DATAOBJECT_STR) 
+                    || ($t[$v] & DB_DATAOBJECT_TXT))
+                    && !($t[$v] & DB_DATAOBJECT_DATE)
+                ) {
+                    //$obs .= " OJO texto";
+                    if (trim($otro->$v) != "" 
+                        && strstr($this->$v, $otro->$v) == FALSE
+                    ) {
+                        // Si no está concatenamos texto
+                        if (trim($this->$v) == "") {
+                            $this->$v = $otro->$v;
+                            $obs .= " ={$this->__table}.$v";
+                        } else {
+                            $this->$v .= ". " . $otro->$v;
+                            $obs .= " +{$this->__table}.$v";
+                        }
+                    }
+                } elseif ($t[$v] == DB_DATAOBJECT_BOOL) {
+                    // O lógico para booleanos
+                    $this->$v |= $otro->$v;
+                    $obs .= " +{$this->__table}.$v: '" . 
+                        ($otro->$v ? 'V' : 'F') . "'";
+                } elseif ($this->$v == null) {
+                    // Si es vacío mezclamos
+                    $this->$v = $otro->$v;
+                    $obs .= " ={$this->__table}.$v: '" . 
+                        $otro->$v . "'";
+                } elseif ($otro->$v == null || $otro->$v === "") {
+                } else {
+                    $l =$this->links();
+                    if (isset($l[$v])) {
+                        $tr = $this->getLink($v);
+                        $tro = $otro->getLink($v);
+                        $vpm = $otro->$v;
+                        if (isset($tro->nombre)) {
+                            $vpm = $tro->nombre;
+                        }    
+                        $sin = -1;
+                        if (method_exists($tr, "idSinInfo")) {
+                            $sin = $tr->idSinInfo();
+                        }
+                        if ($sin != -1 && $this->$v == $sin) {
+                            // Actual es SIN INFO
+                            $this->$v = $otro->$v;
+                            $obs .= " S={$this->__table}.$v: '" . 
+                                $vpm . "'";
+                        } else {
+                            $obs .= " No se mezcló {$this->__table}.$v: '" 
+                                . $vpm . "'";
+                        }
+                    } else {
+                        // Los demás tipos no los podemos mezclar
+                        $obs .= " No se mezcló {$this->__table}.$v: '" . 
+                            $otro->$v . "'";
+                    }
+                }
+            }
+        }
+    }
+
 
 }
 

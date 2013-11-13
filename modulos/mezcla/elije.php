@@ -33,6 +33,17 @@ require_once 'PagUbicacion.php';
 require_once 'ResConsulta.php';
 require_once 'misc.php';
 
+foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
+    list($n, $c, $o) = $tab;
+    if (($d = strrpos($c, "/"))>0) {
+        $c = substr($c, $d+1);
+    }
+    // @codingStandardsIgnoreStart
+    require_once "$c.php";
+    // @codingStandardsIgnoreEnd
+}
+
+
 
 /**
  * Acción que responde al boton Comparar dos caso por numero
@@ -55,10 +66,45 @@ class AccionComparaDos extends HTML_QuickForm_Action
      */
     function perform(&$page, $actionName)
     {
-        $pId1   = var_post_escapa('id1', $db);
-        $pId2   = var_post_escapa('id2', $db);
+        $pIds = "";
+        foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
+            list($n, $c, $o) = $tab;
+            if (($d = strrpos($c, "/"))>0) {
+                $c = substr($c, $d+1);
+            }
+            if (is_callable(array($c, 'mezclaAccionFiltro'))) {
+                $pIds = call_user_func_array(
+                    array($c, 'mezclaAccionFiltro'),
+                    array(&$this)
+                );
+                if ($pIds != "") {
+                    break;
+                }
+            }
+        }
+        if ($pIds == "") { 
+            $pIds   = var_post_escapa('ids');
+        }
+        $a = explode(" ", $pIds);
+        if (count($a) < 2 || count($a) % 2 != 0) {
+            error_valida(
+                "Debe ingresar parejas de códigos separados por espacio "
+                . "(cuenta=" . count($a) . ")", null
+            );
+            return false;
+        }
+        foreach($a as $nc) {
+            if ($nc != (int)$nc) {
+                error_valida(
+                    "Debe ingresar parejas de códigos separados por espacio "
+                    . " nc=$nc", null
+                );
+                return false;
+            }
+        }
 
-        header("Location: opcion.php?num=1004&id1=$pId1&id2=$pId2");
+        $_SESSION['mezcla_ids'] = $pIds;
+        header("Location: opcion.php?num=1004&ids=$pIds");
 
         die("compara");
     }
@@ -313,11 +359,11 @@ class PagVictimasrep extends HTML_QuickForm_Page
         $x =&  objeto_tabla('departamento');
         $db = $x->getDatabaseConnection();
 
-        $e =& $this->addElement('header', null, 'Compara dos casos por número');
-        $e =& $this->addElement('text', 'id1');
-        $e->setSize(7);
-        $e =& $this->addElement('text', 'id2');
-        $e->setSize(7);
+        $e =& $this->addElement(
+            'header', null, 'Compara pares de casos por código'
+        );
+        $e =& $this->addElement('text', 'ids');
+        $e->setSize(80);
 
         $e =& $this->addElement(
             'submit',
@@ -366,6 +412,19 @@ class PagVictimasrep extends HTML_QuickForm_Page
         );
         $prevnext[] =& $sel;
         $this->addGroup($prevnext, null, '', '&nbsp;', false);
+
+        foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
+            list($n, $c, $o) = $tab;
+            if (($d = strrpos($c, "/"))>0) {
+                $c = substr($c, $d+1);
+            }
+            if (is_callable(array($c, 'mezclaFiltro'))) {
+                call_user_func_array(
+                    array($c, 'mezclaFiltro'),
+                    array(&$db, &$this)
+                );
+            }
+        }
 
         $tpie = "<div align=right><a href=\"index.php\">" .
             "Men&uacute; Principal</a></div>";

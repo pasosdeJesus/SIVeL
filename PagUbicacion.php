@@ -354,11 +354,18 @@ class PagUbicacion extends PagBaseMultiple
         if ($nomcmun == null) {
             $d->updateAttributes(array("id" => "$nomcdep"));
         } else {
+            $sincoord = "false";
+            if (isset($_SESSION['forma_modo'])
+                && $_SESSION['forma_modo'] == 'busqueda'
+            ) {  
+                $sincoord = "true";
+            }
+ 
             $d->updateAttributes(
                 array(
                     "id" => "$nomcdep",
                     "onchange" => "llenaMunicipio('$nomcdep', "
-                    . "'$nomcmun', '$nomccla')"
+                    . "'$nomcmun', '$nomccla', $sincoord)"
                 )
             );
             $m =& toma_elemento_recc($form, $nomcmun);
@@ -369,14 +376,14 @@ class PagUbicacion extends PagBaseMultiple
                 $m->updateAttributes(
                     array("id" => "$nomcmun",
                     "onchange" => "llenaClase('$nomcdep', "
-                    . "'$nomcmun', '$nomccla')")
+                    . "'$nomcmun', '$nomccla', $sincoord)")
                 );
                 $c =& toma_elemento_recc($form, $nomccla);
                 sin_error_pear($c);
                 $c->updateAttributes(
                     array("id" => "$nomccla",
                     "onchange" => "llenaCoord('$nomcdep', "
-                    . "'$nomcmun', '$nomccla')")
+                    . "'$nomcmun', '$nomccla', $sincoord)")
                 );
             }
         }
