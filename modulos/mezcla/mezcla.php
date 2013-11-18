@@ -649,7 +649,7 @@ function muestra($dsn)
         }
         echo "<td>$obs2</td>";
         echo "</tr>\n";
-        $dec->observaciones = $obs2 . "\n" . $obs1;
+        $dec->observaciones = var_escapa($obs2 . "\n" . $obs1, $db, 5000);
         $dec->insert();
         //if ($tmez == 1) { break; die("y"); }
     }
