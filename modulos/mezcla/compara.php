@@ -76,8 +76,9 @@ function muestra($dsn)
         }
         $pIds   = var_escapa($_REQUEST['ids']);
     }
-
-   $pp = preg_split("/[\s]+/", $pIds);
+    
+    $par = array();
+    $pp = preg_split("/[\s]+/", $pIds);
     $id1 = $id2 = null;
     foreach($pp as $id) {
         if ($id1 == null) {
