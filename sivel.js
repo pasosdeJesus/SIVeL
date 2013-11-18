@@ -224,7 +224,7 @@ function llenaMunicipio(iddep, idmun, idcla, sincoord) {
     var dep = $("#" + iddep).val();
     var par = { 
         tabla: 'municipio',
-        id_departamento: dep
+        id_departamento: dep,
     };
     if (+dep > 0) {
         var x = $.getJSON("json_busca.php", par);
