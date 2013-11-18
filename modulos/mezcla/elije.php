@@ -67,22 +67,23 @@ class AccionComparaDos extends HTML_QuickForm_Action
     function perform(&$page, $actionName)
     {
         $pIds = "";
-        foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
-            if (($d = strrpos($c, "/"))>0) {
-                $c = substr($c, $d+1);
-            }
-            if (is_callable(array($c, 'mezclaAccionFiltro'))) {
-                $pIds = call_user_func_array(
-                    array($c, 'mezclaAccionFiltro'),
-                    array(&$this)
-                );
-                if ($pIds != "") {
-                    break;
+        if (!isset($_REQUEST['ids'])) {
+            foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
+                list($n, $c, $o) = $tab;
+                if (($d = strrpos($c, "/"))>0) {
+                    $c = substr($c, $d+1);
+                }
+                if (is_callable(array($c, 'mezclaAccionFiltro'))) {
+                    $pIds = call_user_func_array(
+                        array($c, 'mezclaAccionFiltro'),
+                        array(&$this)
+                    );
+                    if ($pIds != "") {
+                        break;
+                    }
                 }
             }
-        }
-        if ($pIds == "") { 
+        } else {
             $pIds   = var_post_escapa('ids');
         }
         $a = explode(" ", $pIds);

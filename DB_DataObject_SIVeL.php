@@ -306,13 +306,13 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
                 } elseif ($t[$v] == DB_DATAOBJECT_BOOL) {
                     // O lógico para booleanos
                     $this->$v |= $otro->$v;
-                    $obs .= " +{$this->__table}.$v: '" . 
-                        ($otro->$v ? 'V' : 'F') . "'";
+                    $obs .= " +{$this->__table}.$v: \"" . 
+                        ($otro->$v ? 'V' : 'F') . "\"";
                 } elseif ($this->$v == null) {
                     // Si es vacío mezclamos
                     $this->$v = $otro->$v;
-                    $obs .= " ={$this->__table}.$v: '" . 
-                        $otro->$v . "'";
+                    $obs .= " ={$this->__table}.$v: \"" . 
+                        $otro->$v . "\"";
                 } elseif ($otro->$v == null || $otro->$v === "") {
                 } else {
                     $l =$this->links();
@@ -330,16 +330,16 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
                         if ($sin != -1 && $this->$v == $sin) {
                             // Actual es SIN INFO
                             $this->$v = $otro->$v;
-                            $obs .= " S={$this->__table}.$v: '" . 
-                                $vpm . "'";
+                            $obs .= " S={$this->__table}.$v: \"" . 
+                                $vpm . "\"";
                         } else {
-                            $obs .= " No se mezcló {$this->__table}.$v: '" 
-                                . $vpm . "'";
+                            $obs .= " No se mezcló {$this->__table}.$v: \"" 
+                                . $vpm . "\"";
                         }
                     } else {
                         // Los demás tipos no los podemos mezclar
-                        $obs .= " No se mezcló {$this->__table}.$v: '" . 
-                            $otro->$v . "'";
+                        $obs .= " No se mezcló {$this->__table}.$v: \"" . 
+                            $otro->$v . "\"";
                     }
                 }
             }

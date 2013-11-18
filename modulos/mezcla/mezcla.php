@@ -57,12 +57,13 @@ function inserta_con_plantilla($db, $estbd, $t, $camposcamb, $camposelim, $objd)
             //echo "OJO c=$c, tc=$tc<br>";
             $nc .= "$sep$c";
             if (isset($camposcamb[$c])) {
-                $vc .= "$sep'{$camposcamb[$c]}'";
+                $ve = "'" . var_escapa($camposcamb[$c], $db) . "'";
             } elseif ($objd->$c != null) {
-                $vc .= "$sep'{$objd->$c}'";
+                $ve = "'" . var_escapa($objd->$c, $db) . "'";
             } else {
-                $vc .= "${sep}NULL";
+                $ve = "NULL";
             }
+            $vc .= "$sep$ve";
             $sep = ", ";
         }
     }
@@ -449,7 +450,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
 
     //Otras tablas relacionadas con caso
     foreach($ref['caso:id'] as $t => $n) {
-        //echo "OJO Otro t=$t<br>";
+        echo "OJO Otro t=$t<br>";
         $do2 = objeto_tabla($t);
         $do2->id_caso = $id2;
         $do2->find();
@@ -499,7 +500,6 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
         }
         unset($ref['caso:id'][$t]);
     }
-
     //echo "OJO Proceso<br>";
     foreach($ref['proceso:id'] as $t => $n) {
         //echo "OJO Proceso t=$t<br>";
@@ -521,21 +521,6 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
         }
         unset($ref['proceso:id'][$t]);
     }
-         /*foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
-            if (($d = strrpos($c, "/")) > 0) {
-                $c = substr($c, $d + 1);
-            }
-            $o = new $c('f');
-            if (is_callable(array($c, 'mezcla'))) {
-                call_user_func_array(
-                    array($c, 'mezcla'),
-                    array(&$db, $r, $id1, $id2, $idn, $o->clase_modelo)
-                );
-            } else {
-                echo_esc("Falta mezcla en $n, $c");
-            } */
-
     if ($elim2) {
         if ($id1 != $id2) {
             elimina_caso($db, $id2);
