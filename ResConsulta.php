@@ -1911,8 +1911,12 @@ class ResConsulta
             while ($descritocaso->fetch()) {
                 $arfuente = array();
                 $dffrecuente = $descritocaso->getLink('id_ffrecuente');
-                $arfuente['nombre_fuente'] = $dffrecuente->nombre;
-                $dffrecuente->free();
+                if (isset($dffrecuente) && !PEAR::isError($dffrecuente)
+                    && isset($dffrecuente->nombre)
+                ) {
+                    $arfuente['nombre_fuente'] = $dffrecuente->nombre;
+                    $dffrecuente->free();
+                }
                 unset($dffrecuente);
                 $descritocaso->aRelato(
                     $arfuente,
@@ -1938,7 +1942,10 @@ class ResConsulta
             while ($dfuentedirectacaso->fetch()) {
                 $dfd = $dfuentedirectacaso->getLink('id_fotra');
                 $arfuente = array();
-                $arfuente['nombre_fuente'] = $dfd->nombre;
+                if (isset($dfd) && !PEAR::isError($dfd)) {
+                    $arfuente['nombre_fuente'] = $dfd->nombre;
+                }
+
                 $dfuentedirectacaso->aRelato(
                     $arfuente,
                     array('anotacion' => 'observaciones{tipo->anotacion}',
@@ -1954,10 +1961,14 @@ class ResConsulta
                 $r .= "  </fuente>\n";
                 unset($ia2);
                 unset($arfuente);
-                $dfd->free();
+                if (isset($dfd) && !PEAR::isError($dfd)) {
+                    $dfd->free();
+                }
                 unset($dfd);
             }
-            $dfuentedirectacaso->free();
+            if (isset($dfuentedirectacaso) && !PEAR::isError($dfuentedirectacaso)) {
+                $dfuentedirectacaso->free();
+            }
             unset($dfuentedirectacaso);
         }
 
