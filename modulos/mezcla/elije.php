@@ -104,7 +104,7 @@ class AccionComparaDos extends HTML_QuickForm_Action
         }
 
         $_SESSION['mezcla_ids'] = $pIds;
-        header("Location: opcion.php?num=1004&ids=$pIds");
+        header("Location: opcion.php?num=1004&ids=sesion");
 
         die("compara");
     }
