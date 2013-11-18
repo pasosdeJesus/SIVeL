@@ -77,10 +77,10 @@ res_valida(
 
 res_valida(
     $db,
-    _("Casos con más de una ubicación (salen duplicados en conteos)"),
+    _("Casos que no tienen una sóla ubicación (mal en conteos)"),
     "SELECT id, c from (SELECT caso.id, count(ubicacion.id) AS c
     FROM caso, ubicacion WHERE caso.id = ubicacion.id_caso
-    GROUP BY caso.id order by 2) AS f WHERE c >= 2"
+    GROUP BY caso.id order by 2) AS f WHERE c <> 1"
 );
 
 
