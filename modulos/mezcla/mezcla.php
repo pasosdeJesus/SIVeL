@@ -450,7 +450,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
 
     //Otras tablas relacionadas con caso
     foreach($ref['caso:id'] as $t => $n) {
-        echo "OJO Otro t=$t<br>";
+        //echo "OJO Otro t=$t<br>";
         $do2 = objeto_tabla($t);
         $do2->id_caso = $id2;
         $do2->find();
