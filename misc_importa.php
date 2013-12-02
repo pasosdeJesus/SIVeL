@@ -346,7 +346,7 @@ function conv_dia_mes_anio($d, $m, $a, $orig, &$dia_s, &$mes_s, &$anio_s, &$obs)
  * @param string  &$obs   Colchon para agregar observaciones
  * @param boolean $depura Mensajes de depuración?
  *
- * @return array (d, m, c) Identificaciones de departamento, municipio y clase
+ * @return string En formato aaaa-mm-dd
  */
 function conv_fecha($fecha, &$obs, $depura = false)
 {
@@ -476,6 +476,10 @@ function conv_fecha($fecha, &$obs, $depura = false)
                 $dia_s = (int)$pe[2];
                 $mes_s = (int)$pe[1];
                 $anio_s = (int)$pe[0];
+            } else if ($pe[2] > 1900) { // Suponemos que es dia-mes-año
+                $dia_s = (int)$pe[0];
+                $mes_s = $nummesp[$pe[1]];
+                $anio_s = (int)$pe[2];
             }
         } else {
             $pu = explode(" ", $v[0]);
