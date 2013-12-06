@@ -753,7 +753,8 @@ function conv_fecha($fecha, &$obs, $depura = false)
         $dia_s = 1;
     }
 
-    return $anio_s . "-" . $mes_s . "-".$dia_s;
+    return sprintf("%04d", $anio_s) . "-" . sprintf("%02d", $mes_s) . "-".
+        sprintf("%02d", $dia_s);
 }
 
 /**
