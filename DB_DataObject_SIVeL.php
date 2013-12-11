@@ -332,13 +332,19 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
                             $this->$v = $otro->$v;
                             $obs .= " S={$this->__table}.$v: \"" . 
                                 $vpm . "\"";
+                        } elseif (isset($tr->nombre) 
+                            && $tr->nombre == "POR DETERMINAR"
+                        ) {
+                            $this->$v = $otro->$v;
+                            $obs .= " P={$this->__table}.$v: \"" . 
+                                $vpm . "\"";
                         } else {
                             $obs .= " No se mezcló {$this->__table}.$v: \"" 
                                 . $vpm . "\"";
                         }
                     } else {
                         // Los demás tipos no los podemos mezclar
-                        $obs .= " No se mezcló {$this->__table}.$v: \"" . 
+                        $obs .= " No se puede mezclar {$this->__table}.$v: \"" . 
                             $otro->$v . "\"";
                     }
                 }

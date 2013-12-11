@@ -67,9 +67,10 @@ class AccionComparaDos extends HTML_QuickForm_Action
     function perform(&$page, $actionName)
     {
         $pIds = "";
-        if (!isset($_REQUEST['ids'])) {
+        if (!isset($_REQUEST['ids']) || $_REQUEST['ids'] == '') {
             foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
                 list($n, $c, $o) = $tab;
+                //echo "OJO $n, $c, $o<br>";
                 if (($d = strrpos($c, "/"))>0) {
                     $c = substr($c, $d+1);
                 }
@@ -151,11 +152,11 @@ class AccionVictimasrep extends HTML_QuickForm_Action
                 $rot = '';
             }
             if ($n<($ncol+1) || ($pResto && $n==($ncol+1))) {
-                $html_l = $sep . "<b>" . htmlentities($l) 
-                    . " " . htmlentities($rot) . ":</b>";
+                $html_l = $sep . "<b>" . htmlentities($l, ENT_COMPAT, 'UTF-8') 
+                    . " " . htmlentities($rot, ENT_COMPAT, 'UTF-8') . ":</b>";
                 echo $html_l;
                 foreach ($lc as $cc) {
-                    echo htmlentities($cc) . " ";
+                    echo htmlentities($cc, ENT_COMPAT, 'UTF-8') . " ";
                 }
                 $sep = "; ";
             }
@@ -304,9 +305,9 @@ class AccionVictimasrep extends HTML_QuickForm_Action
             echo "<td><a href='captura_caso.php?modo=edita&id=" .
                 (int)$idcaso . "'>" . (int)$idcaso . "</a></td>";
             echo "<td>" . (int)$idvic . "</td>";
-            echo "<td>" . htmlentities($fecha) . "</td><td>" . 
-                    htmlentities($ubi) . "</td><td>" .
-                    trim(htmlentities($nom)) . "</td>";
+            echo "<td>" . htmlentities($fecha, ENT_COMPAT, 'UTF-8') . "</td><td>" . 
+                    htmlentities($ubi, ENT_COMPAT, 'UTF-8') . "</td><td>" .
+                    trim(htmlentities($nom, ENT_COMPAT, 'UTF-8')) . "</td>";
             echo "<td><input name='id" . (int)$idcaso .  "' "
                 . " type=\"checkbox\"/></td>";
             echo "</tr>";
@@ -453,6 +454,7 @@ function muestra($dsn)
 {
     $aut_usuario = "";
     autentica_usuario($dsn, $accno, $aut_usuario, 31);
+    encabezado_envia('Elegir');
 
     $wizard =& new HTML_QuickForm_Controller('Victimasrep', false);
     $consweb = new PagVictimasrep();
