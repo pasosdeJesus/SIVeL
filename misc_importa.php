@@ -436,8 +436,8 @@ function conv_fecha($fecha, &$obs, $depura = false)
             "Fecha incompleta '$fecha' convertida a $dia_s . $mes_s . $anio_s",
             $obs
         );
-    } else if (count($v)==4 && (int)$v[0] > 0 && (int)$v[2] > 0 && (int)$v[3] > 0
-        && $v[1] == ''
+    } else if (count($v)==4 && (int)$v[0] > 0 && (int)$v[2] > 0 
+        && (int)$v[3] > 0 && $v[1] == ''
     ) {
 
         if ($depura) {
@@ -465,17 +465,24 @@ function conv_fecha($fecha, &$obs, $depura = false)
         $anio_s = $v[1];
     } else {
         if ($depura) {
-            echo "caso 6";
+            echo "caso 7";
         }
         $pe = explode("-", $v[0]);
         if (count($pe) == 3) {
             if ($pe[0] > 1900) {
                 if ($depura) {
-                    echo "caso 6.0";
+                    echo "caso 7.0";
                 }
                 $dia_s = (int)$pe[2];
-                $mes_s = (int)$pe[1];
+                $mes_s = $nummesp[$pe[1]];
                 $anio_s = (int)$pe[0];
+            } else if ($pe[2] > 1900) {
+                if ($depura) {
+                    echo "caso 7.1";
+                }
+                $dia_s = (int)$pe[0];
+                $mes_s = $nummesp[$pe[1]];
+                $anio_s = (int)$pe[2];
             }
         } else {
             $pu = explode(" ", $v[0]);
