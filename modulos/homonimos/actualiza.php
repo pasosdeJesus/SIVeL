@@ -31,7 +31,7 @@ $act = objeto_tabla('Actualizacionbase');
 $idac = 'hom-1';
 if (!aplicado($idac)) {
     $r = hace_consulta(
-        $db, "CREATE TABLE hominimosim (
+        $db, "CREATE TABLE homonimosim (
             id_persona1 INTEGER REFERENCES persona,
             id_persona2 INTEGER CHECK (id_persona2 > id_persona1) REFERENCES persona,
 
