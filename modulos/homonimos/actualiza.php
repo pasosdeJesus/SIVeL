@@ -38,6 +38,12 @@ if (!aplicado($idac)) {
             PRIMARY KEY(id_persona1, id_persona2)
         );", false
     );
+    $r = hace_consulta(
+        $db, "CREATE VIEW homonimia AS (
+            SELECT id_persona1, id_persona2 FROM homonimosim 
+            UNION SELECT id_persona2, id_persona1 FROM homonimosim
+        );", false
+    );
     aplicaact($act, $idac, 'Homonimos');
 }
 
