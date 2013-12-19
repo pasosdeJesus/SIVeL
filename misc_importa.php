@@ -1529,4 +1529,32 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs,
     return $pr;
 }
 
+function divide_apellidos_nombres($apnom, &$apellidos, &$nombres) 
+{
+    $r = preg_replace("/\s+/", " ", $apnom);
+    //echo "OJO divide_ap nomap=$apnom r=$r";
+    $p = explode(" ", $r);
+    if (count($p) >= 4)  {
+        //echo "OJO caso 1";
+        $apellidos = $p[0] . " " . $p[1];
+        $sep = $nombres = "";
+        for($i = 2; $i < count($p); $i++) {
+            $nombres .= $sep . $p[$i];
+            $sep = " ";
+        }
+    } else if (count($p) == 3) {
+        //echo "OJO caso 2";
+        $apellidos = $p[0] . " " . $p[1];
+        $nombres = $p[2];
+    } else if (count($p) == 2) {
+        //echo "OJO caso 3";
+        $apellidos = $p[0];
+        $nombres = $p[1];
+    } else {
+        //echo "OJO caso 4";
+        $apellidos = $p[0];
+        $nombres = "N";
+    }
+    //die("x");
+}
 ?>
