@@ -1,0 +1,216 @@
+<%- if current_usuario.nil?  %>
+	<li><a href="usuarios/sign_in">Iniciar Sesión</a>
+<%- else  %>
+<article>
+<div data-role="page" id="page1">
+	<div data-role="header">
+		<h1>SIVeL 2. Captura de Caso</h1>
+	</div>
+	<div data-role="content">
+		<form action="http://" method="POST">
+			<div class="accordion" id="accordion2">
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+							Datos Básicos
+						</a>
+					</div>
+					<div id="collapseOne" class="accordion-body collapse in">
+						<div class="accordion-inner">
+							<div data-role="fieldcontain">
+								<label for="text1">Fecha Recepción</label>
+								<input type="text" id="text1">
+							</div>
+							<div class="ui-grid-a">
+								<div class="ui-block-a">
+									<span>Asesor</span>
+								</div>
+								<div class="ui-block-b">
+									<select data-native-menu="false">
+										<option value="Value">Merida</option>
+										<option value="Value">Barquisimeto</option>
+										<option value="Value">Oficina 3</option>
+									</select>
+								</div>
+							</div>
+							<div class="ui-grid-a">
+								<div class="ui-block-a">
+									<span>Región</span>
+								</div>
+								<div class="ui-block-b">
+									<select data-native-menu="false">
+										<option value="Value">Merida</option>
+										<option value="Value">Barquisimeto</option>
+										<option value="Value">Oficina 3</option>
+									</select>
+								</div>
+							</div>
+							<div class="ui-grid-c">
+								<div class="ui-block-a">
+									<span>Contacto</span>
+								</div>
+								<div class="ui-block-b">
+									<div data-role="fieldcontain">
+										<label for="text2"></label>
+										<input type="text" id="text2" value="Nombres">
+									</div>
+								</div>
+								<div class="ui-block-c">
+									<div data-role="fieldcontain">
+										<label for="text3"></label>
+										<input type="text" id="text3" value="Apellidos">
+									</div>
+								</div>
+								<div class="ui-block-d">
+									<div data-role="fieldcontain">
+										<label for="text4"></label>
+										<input type="text" id="text4" value="Identificacion">
+									</div>
+								</div>
+							</div>
+							<div data-role="fieldcontain">
+								<label for="text5">Dirección</label>
+								<input type="text" id="text5">
+							</div>
+							<div data-role="fieldcontain">
+								<label for="text6">Teléfono</label>
+								<input type="text" id="text6">
+							</div>
+							<textarea>¿Cómo supo del SJR?</textarea>
+							<div data-role="fieldcontain">
+								<label for="text7">Fecha del Desplazamiento</label>
+								<input type="text" id="text7">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+Víctimas Individuales
+						</a>
+					</div>
+					<div id="collapseTwo" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseTres">
+Contacto
+						</a>
+					</div>
+					<div id="collapseTres" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#collapseCuatro">
+Ubicación
+						</a>
+					</div>
+					<div id="collapseCuatro" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion5" href="#collapseCinco">
+Desplazamientos
+						</a>
+					</div>
+					<div id="collapseCinco" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion6" href="#collapseSeis">
+Presuntos Responsables
+						</a>
+					</div>
+					<div id="collapseSeis" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion7" href="#collapseSiete">
+Causas/Antecedentes
+						</a>
+					</div>
+					<div id="collapseSiete" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion8" href="#collapseOcho"> 
+							Ayudas SJR
+						</a>
+					</div>
+					<div id="collapseOcho" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion9" href="#collapseNueve"> 
+							Anexos
+						</a>
+					</div>
+					<div id="collapseNueve" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion10" href="#collapseDiez"> 
+							Etiquetas
+						</a>
+					</div>
+					<div id="collapseDiez" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+				</div>
+				</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+</article>
+<% end -%>

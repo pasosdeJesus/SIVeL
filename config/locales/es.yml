@@ -1,0 +1,18 @@
+
+es:
+  activerecord:
+    attributes:
+      actividad: 
+        id: Identificación
+        numero: Número
+        minutos: Minutos
+        nombre:  Nombre
+        areas:  Áreas
+        objetivo: Objetivo
+        proyecto:  Proyecto
+        resultado: Resultado
+        fecha: Fecha
+        actividad:  Actividad
+        observaciones: Observaciones
+        created_at: Creado en
+

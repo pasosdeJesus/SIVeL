@@ -1,0 +1,34 @@
+<%= simple_form_for @actividad, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :numero %>
+  <%= f.input :minutos %>
+  <%= f.input :nombre %>
+  <%= f.association :actividadareas, 
+	  label: "Áreas",
+	  label_method: :nombre, 
+	  value_method: :id %>
+  <%= f.input :objetivo %>
+  <%= f.input :proyecto %>
+  <%= f.input :resultado %>
+  <%= f.input :fecha, :input_html => { "data-behaviour" => "datepicker"}, 
+	  :as => :string %>
+  <!--%= f.input :fecha, :input_html => { "data-behaviour" => 'datepicker' } %>
+  <div class="input date optional actividad_fecha">
+	  <label class="date optional control-label" for="actividad_fecha">Fecha</label>
+          <input id="actividad_fecha" name="actividad[fecha]" type="text" class="date optional" data-behaviour='datepicker'>
+  </div-->
+  <script type="text/javascript">
+	    $(document).ready(function(){
+	        $('[data-behaviour~=datepicker]').datepicker({
+                  format: 'yyyy-mm-dd',
+                });
+            })
+  </script>
+
+  <%= f.input :actividad %>
+  <%= f.input :observaciones %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => 'btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                actividades_path, :class => 'btn' %>
+  </div>
+<% end %>

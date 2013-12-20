@@ -1,0 +1,2 @@
+module HogarHelper
+end
