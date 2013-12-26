@@ -1,0 +1,21 @@
+<%= simple_form_for(@caso) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :titulo %>
+    <%= f.input :fecha %>
+    <%= f.input :hora %>
+    <%= f.input :duracion %>
+    <%= f.input :memo %>
+    <%= f.input :grconfiabilidad %>
+    <%= f.input :gresclarecimiento %>
+    <%= f.input :grimpunidad %>
+    <%= f.input :grinformacion %>
+    <%= f.input :bienes %>
+    <%= f.input :id_intervalo %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

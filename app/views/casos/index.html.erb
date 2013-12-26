@@ -1,0 +1,47 @@
+<h1>Listing casos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Titulo</th>
+      <th>Fecha</th>
+      <th>Hora</th>
+      <th>Duracion</th>
+      <th>Memo</th>
+      <th>Grconfiabilidad</th>
+      <th>Gresclarecimiento</th>
+      <th>Grimpunidad</th>
+      <th>Grinformacion</th>
+      <th>Bienes</th>
+      <th>Id intervalo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @casos.each do |caso| %>
+      <tr>
+        <td><%= caso.titulo %></td>
+        <td><%= caso.fecha %></td>
+        <td><%= caso.hora %></td>
+        <td><%= caso.duracion %></td>
+        <td><%= caso.memo %></td>
+        <td><%= caso.grconfiabilidad %></td>
+        <td><%= caso.gresclarecimiento %></td>
+        <td><%= caso.grimpunidad %></td>
+        <td><%= caso.grinformacion %></td>
+        <td><%= caso.bienes %></td>
+        <td><%= caso.id_intervalo %></td>
+        <td><%= link_to 'Show', caso %></td>
+        <td><%= link_to 'Edit', edit_caso_path(caso) %></td>
+        <td><%= link_to 'Destroy', caso, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Caso', new_caso_path %>
