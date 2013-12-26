@@ -1,8 +1,9 @@
 class CreateJoinTableActividadareasActividad < ActiveRecord::Migration
   def change
-    create_join_table :actividadareas, :actividades, table_name: :actividadareas_actividad do |t|
-      # t.index [:actividadarea_id, :actividad_id]
-      # t.index [:actividad_id, :actividadarea_id]
-    end
+	create_table :actividadareas_actividad do |t|
+		t.references :actividad
+		t.references :actividadarea
+		t.timestamps
+    	end
   end
 end

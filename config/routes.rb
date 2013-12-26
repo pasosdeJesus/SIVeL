@@ -1,4 +1,6 @@
 Sivel2::Application.routes.draw do
+  resources :casos
+
   resources :actividades
   resources :actividadareas
 
