@@ -3311,6 +3311,14 @@ ALTER TABLE ONLY actividadarea
 
 
 --
+-- Name: actividadareas_actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY actividadareas_actividad
+    ADD CONSTRAINT actividadareas_actividad_pkey PRIMARY KEY (actividadarea_id, actividad_id);
+
+
+--
 -- Name: actividadoficio_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 

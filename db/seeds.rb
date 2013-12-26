@@ -13,4 +13,10 @@ Actividadarea.create(id: 3, nombre: 'Organización - Comunal', fechacreacion: '2
 Actividadarea.create(id: 4, nombre: 'Emprendimiento', fechacreacion: '2013-12-04')
 Actividadarea.create(id: 5, nombre: 'Incidencia', fechacreacion: '2013-12-04')
 
-Usuario.create(id: 'sjrven', email: 'sjrven@sjrven.org', encrypted_password: '$2a$10$uMAciEcJuUXDnpelfSH6He7BxW0yBeq6VMemlWc5xEl6NZRDYVA3G', password: '', created_at: '2013-12-24',  updated_at: '2013-12-24', rol: 1)
+connection = ActiveRecord::Base.connection();
+connection.execute("INSERT INTO usuario 
+	(id, email, encrypted_password, password, created_at, updated_at, rol) 
+	VALUES ('sjrven', 'sjrven@sjrven.org', 
+	'$2a$10$uMAciEcJuUXDnpelfSH6He7BxW0yBeq6VMemlWc5xEl6NZRDYVA3G', 
+	'', '2013-12-24', '2013-12-24', 1);")
+
