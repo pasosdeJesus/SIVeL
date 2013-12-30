@@ -1,47 +1,38 @@
-<h1>Listing casos</h1>
-
-<table>
+<%- model_class = Caso -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Titulo</th>
-      <th>Fecha</th>
-      <th>Hora</th>
-      <th>Duracion</th>
-      <th>Memo</th>
-      <th>Grconfiabilidad</th>
-      <th>Gresclarecimiento</th>
-      <th>Grimpunidad</th>
-      <th>Grinformacion</th>
-      <th>Bienes</th>
-      <th>Id intervalo</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:fecharec) %></th>
+      <th><%= model_class.human_attribute_name(:fecha) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @casos.each do |caso| %>
       <tr>
-        <td><%= caso.titulo %></td>
+        <td><%= link_to caso.id, caso_path(caso) %></td>
+        <td><%= caso.casosjr.fecharec %></td>
         <td><%= caso.fecha %></td>
-        <td><%= caso.hora %></td>
-        <td><%= caso.duracion %></td>
-        <td><%= caso.memo %></td>
-        <td><%= caso.grconfiabilidad %></td>
-        <td><%= caso.gresclarecimiento %></td>
-        <td><%= caso.grimpunidad %></td>
-        <td><%= caso.grinformacion %></td>
-        <td><%= caso.bienes %></td>
-        <td><%= caso.id_intervalo %></td>
-        <td><%= link_to 'Show', caso %></td>
-        <td><%= link_to 'Edit', edit_caso_path(caso) %></td>
-        <td><%= link_to 'Destroy', caso, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l caso.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_caso_path(caso), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      caso_path(caso),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Caso', new_caso_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_caso_path,
+            :class => 'btn btn-primary' %>

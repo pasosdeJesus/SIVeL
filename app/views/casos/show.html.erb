@@ -1,59 +1,41 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Caso -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Titulo:</strong>
-  <%= @caso.titulo %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:titulo) %>:</strong></dt>
+  <dd><%= @caso.titulo %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:fecha) %>:</strong></dt>
+  <dd><%= @caso.fecha %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:hora) %>:</strong></dt>
+  <dd><%= @caso.hora %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:duracion) %>:</strong></dt>
+  <dd><%= @caso.duracion %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:memo) %>:</strong></dt>
+  <dd><%= @caso.memo %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:grconfiabilidad) %>:</strong></dt>
+  <dd><%= @caso.grconfiabilidad %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:gresclarecimiento) %>:</strong></dt>
+  <dd><%= @caso.gresclarecimiento %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:grimpunidad) %>:</strong></dt>
+  <dd><%= @caso.grimpunidad %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:grinformacion) %>:</strong></dt>
+  <dd><%= @caso.grinformacion %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:bienes) %>:</strong></dt>
+  <dd><%= @caso.bienes %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:id_intervalo) %>:</strong></dt>
+  <dd><%= @caso.id_intervalo %></dd>
+</dl>
 
-<p>
-  <strong>Fecha:</strong>
-  <%= @caso.fecha %>
-</p>
-
-<p>
-  <strong>Hora:</strong>
-  <%= @caso.hora %>
-</p>
-
-<p>
-  <strong>Duracion:</strong>
-  <%= @caso.duracion %>
-</p>
-
-<p>
-  <strong>Memo:</strong>
-  <%= @caso.memo %>
-</p>
-
-<p>
-  <strong>Grconfiabilidad:</strong>
-  <%= @caso.grconfiabilidad %>
-</p>
-
-<p>
-  <strong>Gresclarecimiento:</strong>
-  <%= @caso.gresclarecimiento %>
-</p>
-
-<p>
-  <strong>Grimpunidad:</strong>
-  <%= @caso.grimpunidad %>
-</p>
-
-<p>
-  <strong>Grinformacion:</strong>
-  <%= @caso.grinformacion %>
-</p>
-
-<p>
-  <strong>Bienes:</strong>
-  <%= @caso.bienes %>
-</p>
-
-<p>
-  <strong>Id intervalo:</strong>
-  <%= @caso.id_intervalo %>
-</p>
-
-<%= link_to 'Edit', edit_caso_path(@caso) %> |
-<%= link_to 'Back', casos_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              casos_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_caso_path(@caso), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              caso_path(@caso),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

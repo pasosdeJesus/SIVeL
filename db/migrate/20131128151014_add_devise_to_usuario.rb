@@ -34,11 +34,14 @@ class AddDeviseToUsuario < ActiveRecord::Migration
       # Uncomment below if timestamps were not included in your original model.
       t.timestamps
     end
-
+    execute <<-SQL
+      UPDATE usuario SET created_at = current_date WHERE created_at IS NULL;
+SQL
     add_index :usuario, :email,                :unique => true
     add_index :usuario, :reset_password_token, :unique => true
     # add_index :usuario, :confirmation_token,   :unique => true
     # add_index :usuario, :unlock_token,         :unique => true
+
   end
 
   def self.down

@@ -13,7 +13,6 @@ Sivel2::Application.routes.draw do
 
   root 'hogar#index'
 
-  get "capturacaso" => 'capturacaso#index'
   get 'nosotros' => 'hogar#nosotros'
   get 'contacto' => 'hogar#contacto'
   get "hogar" => 'hogar#index'

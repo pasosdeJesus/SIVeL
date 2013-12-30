@@ -1,21 +1,173 @@
-<%= simple_form_for(@caso) do |f| %>
-  <%= f.error_notification %>
+<%- if current_usuario.nil?  %>
+	<li><a href="usuarios/sign_in">Iniciar Sesión</a>
+<%- else  %>
+    <article>
 
-  <div class="form-inputs">
-    <%= f.input :titulo %>
-    <%= f.input :fecha %>
-    <%= f.input :hora %>
-    <%= f.input :duracion %>
-    <%= f.input :memo %>
-    <%= f.input :grconfiabilidad %>
-    <%= f.input :gresclarecimiento %>
-    <%= f.input :grimpunidad %>
-    <%= f.input :grinformacion %>
-    <%= f.input :bienes %>
-    <%= f.input :id_intervalo %>
+<%= simple_form_for @caso, :html => { :class => 'form-horizontal' } do |f| %>
+<div data-role="page" id="page1">
+	<div data-role="header">
+		<h1>SIVeL 2. Captura de Caso</h1>
+	</div>
+        <div data-role="content">
+  <!-- %= f.association :intervalo,
+	  label: "Intervalo",
+	  label_method: :nombre, 
+          value_method: :id %-->
+
+  <!-- %= f.input :id_intervalo %-->
+			<div class="accordion" id="accordion2">
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+							Datos Básicos
+						</a>
+					</div>
+					<div id="collapseOne" class="accordion-body collapse in">
+                                            <div class="accordion-inner">
+    <%= f.simple_fields_for :casosjr do |s| %>
+        <%= s.input :fecharec, 
+            :input_html => { "data-behaviour" => "datepicker" },
+            :as => :string, :label => "Fecha de Recepción" %>
+        Asesor<br>
+        Region<br>
+        Contacto<br>
+        <%= s.input :direccion%>
+        <%= s.input :telefono%>
+        <%= s.input :comosupo%>
+    <% end %>
+    <%= f.input :fecha, :input_html => { "data-behaviour" => "datepicker" },
+        :as => :string, :label => "Fecha del Desplazamiento" %>
+					</div>
+				</div>
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+Víctimas Individuales
+						</a>
+					</div>
+					<div id="collapseTwo" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseTres">
+Contacto
+						</a>
+					</div>
+					<div id="collapseTres" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#collapseCuatro">
+Ubicación
+						</a>
+					</div>
+					<div id="collapseCuatro" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion5" href="#collapseCinco">
+Desplazamientos
+						</a>
+					</div>
+					<div id="collapseCinco" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion6" href="#collapseSeis">
+Presuntos Responsables
+						</a>
+					</div>
+					<div id="collapseSeis" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion7" href="#collapseSiete">
+Causas/Antecedentes
+						</a>
+					</div>
+					<div id="collapseSiete" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion8" href="#collapseOcho"> 
+							Ayudas SJR
+						</a>
+					</div>
+					<div id="collapseOcho" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion9" href="#collapseNueve"> 
+							Anexos
+						</a>
+					</div>
+					<div id="collapseNueve" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+
+				<div class="accordion-group">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion10" href="#collapseDiez"> 
+							Etiquetas
+						</a>
+					</div>
+					<div id="collapseDiez" class="accordion-body collapse">
+						<div class="accordion-inner">
+							Formulario aqui
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+         <div class="form-actions">
+            <%= f.button :submit, :class => 'btn-primary' %>
+            <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                casos_path, :class => 'btn' %>
+        </div>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+  <% end %>
+</article>
+<% end -%>
+

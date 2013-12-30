@@ -17,3 +17,9 @@
 //= require wijmo/jquery.wijmo-open.all.min
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function(){
+	$('[data-behaviour~=datepicker]').datepicker({
+		format: 'yyyy-mm-dd',
+	});
+})

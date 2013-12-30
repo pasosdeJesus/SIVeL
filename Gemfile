@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.1'
+gem 'rails', '4.1.0beta1'
 
 # Use postgresql as the database for Active Record
 gem 'pg'
@@ -60,3 +60,8 @@ gem "jquery-ui-bootstrap-rails", git: "https://github.com/kristianmandrup/jquery
 gem "devise"
 gem "devise-i18n"
 gem "cancan"
+
+# 4.1
+gem "tzinfo"
+gem "tzinfo-data"
+gem 'spring', group: :development

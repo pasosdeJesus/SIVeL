@@ -39,16 +39,16 @@
   <body>
 
 
-    <%= nav_bar :fixed => :top, :brand => "Prototipo 0.1 de SIVeL 2.0", :responsive => true do %>
+    <%= nav_bar :fixed => :top, :brand => "Prototipo 0.2 de SIVeL 2.0", :responsive => true do %>
       <%= menu_group do %>
-        <%= menu_item "Ficha Caso", capturacaso_path %>
+        <%= menu_item "Casos", casos_path %>
         <%= menu_item "Actividades", actividades_path %>
       <% end %>
       <%= menu_group :pull => :right do %>
         <%= menu_item "Acerca de", nosotros_path %>
         <% if current_usuario %>
           <% if current_usuario.rol == 1 %>
-            <%= menu_item "Administrar Usuarios", "/usuarios/" %>
+            <%= menu_item "Administrar Usuarios", usuarios_path %>
           <% end %>
           <%= menu_item "Cerrar Sesión", sign_out_path %>
         <% else %>

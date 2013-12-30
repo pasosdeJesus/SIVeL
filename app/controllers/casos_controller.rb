@@ -15,6 +15,7 @@ class CasosController < ApplicationController
   # GET /casos/new
   def new
     @caso = Caso.new
+    @caso.casosjr = Casosjr.new
   end
 
   # GET /casos/1/edit
@@ -25,6 +26,8 @@ class CasosController < ApplicationController
   # POST /casos.json
   def create
     @caso = Caso.new(caso_params)
+    @caso.memo = ''
+    @caso.titulo = ''
 
     respond_to do |format|
       if @caso.save
@@ -69,6 +72,6 @@ class CasosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def caso_params
-      params.require(:caso).permit(:titulo, :fecha, :hora, :duracion, :memo, :grconfiabilidad, :gresclarecimiento, :grimpunidad, :grinformacion, :bienes, :id_intervalo)
+      params.require(:caso).permit(:titulo, :fecha, :hora, :duracion, :memo, :grconfiabilidad, :gresclarecimiento, :grimpunidad, :grinformacion, :bienes, :id_intervalo, :casosjr_attributes => [:fecharec, :asesor, :id_regionsjr, :direccion, :telefono, :comosupo, :contacto, :_destroy])
     end
 end

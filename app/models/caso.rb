@@ -3,5 +3,6 @@ class Caso < ActiveRecord::Base
         has_one :casosjr, foreign_key: "id_caso"
 
         accepts_nested_attributes_for :casosjr, allow_destroy: true
+        #attr_accessor :casosjr_attributes
         validates_presence_of :fecha
 end
