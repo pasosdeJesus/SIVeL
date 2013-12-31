@@ -147,17 +147,18 @@ function no_login_function()
 /**
  * Extrae opciones para un usuario.
  *
- * @param string  $usuario Login del usuario
- * @param handle  &$db     Conexión a BD
- * @param array   &$op     Se llena con opciones del usuario.
- * @param integer &$rol    Rol del usuario
+ * @param string  $usuario   Login del usuario
+ * @param handle  &$db       Conexión a BD
+ * @param array   &$op       Se llena con opciones del usuario.
+ * @param integer &$rol      Rol del usuario
+ * @param string  $cnusuario Campo con nombre de usuario
  *
  * @return  Nada
  */
-function saca_opciones($usuario, &$db, &$op, &$rol)
+function saca_opciones($usuario, &$db, &$op, &$rol, $cnusuario = "nusuario")
 {
     $q = "SELECT rol FROM usuario " .
-        "WHERE nusuario='" .  $usuario . "';";
+        "WHERE $cnusuario='" .  $usuario . "';";
     $result = hace_consulta_aut($db, $q, true);
     $row = array();
     if ($result->fetchInto($row)) {
@@ -256,14 +257,30 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         die("No hay usuarios en la base de datos creelos desde una terminal");
     }
 
-    $params = array(
-        "dsn" => $dsn,
-        "table" => "usuario",
-        "usernamecol" => "nusuario",
-        "passwordcol" => "password",
-        "cryptType" => 'sha1',
-        "db_where" => 'fechadeshabilitacion IS NULL'
-    );
+    $q = "SELECT COUNT(nusuario) FROM usuario";
+    $result = hace_consulta_aut($db, $q, false, false);
+    if (PEAR::isError($result)) {
+        $camponusuario = "id";
+        $params = array(
+            "dsn" => $dsn,
+            "table" => "usuario",
+            "usernamecol" => "id",
+            "passwordcol" => "password",
+            "cryptType" => 'sha1',
+        );
+        echo "<br>" . _("Aun no se emplea nueva tabla usuario, actualice");
+    } else {
+        $camponusuario = "nusuario";
+        $params = array(
+            "dsn" => $dsn,
+            "table" => "usuario",
+            "usernamecol" => "nusuario",
+            "passwordcol" => "password",
+            "cryptType" => 'sha1',
+            "db_where" => 'fechadeshabilitacion IS NULL'
+        );
+    }
+ 
     $a = new Auth("DB", $params, "login_function");
     $a->setSessionName($snru);
     //echo "<hr>OJO autentica_usuario $opcion Auth sesion:";
@@ -293,14 +310,14 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             if (!headers_sent()) {
                 session_regenerate_id();
             }
-            saca_opciones($usuario, $db, $op, $rol);
+            saca_opciones($usuario, $db, $op, $rol, $camponusuario);
             if (count($op) == 0) {
                 echo "Este usuario no tiene opciones, " .
                     "¿seguro la base está bien inicializada?";
             }
             $_SESSION['opciones'] = $op;
             $q = "SELECT id FROM usuario " .
-                "WHERE nusuario='" . $usuario . "';";
+                "WHERE $camponusuario='" . $usuario . "';";
             $result = hace_consulta_aut($db, $q);
             $row = array();
             if ($result->fetchInto($row)) {
@@ -309,7 +326,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             $_SESSION['id_nusuario'] = $usuario;
             $_SESSION['id_usuario'] = $idf;
             $q = "SELECT idioma FROM usuario " .
-                "WHERE nusuario = '" . $usuario . "';";
+                "WHERE $camponusuario = '" . $usuario . "';";
             $result = hace_consulta_aut($db, $q, false);
             $row = array();
             if (!PEAR::isError($result) && $result->fetchInto($row)) {
