@@ -2321,7 +2321,7 @@ class ResConsulta
             $dcasousuario->find();
             while ($dcasousuario->fetch()) {
                 $du= $dcasousuario->getLink('id_usuario');
-                $r .= $sep . trim($dusuario->nombre);
+                $r .= $sep . trim($du->nusuario);
                 $r .= "  ";
                 $m = explode("-", $dcasousuario->fechainicio);
                 $r .= $m[2] . "-".$GLOBALS['mes'][(int)$m[1]] . "-".$m[0];

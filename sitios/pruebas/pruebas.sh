@@ -187,7 +187,7 @@ EOF
 		echo $cmd;
 		eval $cmd;
 	} fi;
-	cmd="psql $socketopt -U $dbusuario -d $dbnombre -c \"SET client_encoding to 'LATIN1'; INSERT INTO usuario(id, nusuario, password, nombre, descripcion, rol, idioma, fechacreacion) VALUES (1, 'sivelpruebas', 'c2b96950b73332b8386406b6bee5f5db73a2bb7d', '', '', '1', 'es_CO', '2001-01-01');\"";
+	cmd="psql $socketopt -U $dbusuario -d $dbnombre -c \"SET client_encoding to 'LATIN1'; INSERT INTO usuario(id, nusuario, password, nombre, descripcion, rol, idioma, fechacreacion) VALUES (100, 'sivelpruebas', 'c2b96950b73332b8386406b6bee5f5db73a2bb7d', '', '', '1', 'es_CO', '2001-01-01');\"";
 	echo $cmd;
 	echo "Por evaluar";
 	eval $cmd;
@@ -218,6 +218,7 @@ prueba sitios/pruebas/inscaso-acto.php " - Actos"
 prueba sitios/pruebas/inscaso-memo.php " - Memo"
 prueba sitios/pruebas/inscaso-memo-valida.php " - Valida Memo"
 prueba sitios/pruebas/inscaso-anexos.php " - Anexo"
+#}
 prueba sitios/pruebas/inscaso-etiqueta.php " - Etiqueta"
 prueba sitios/pruebas/inscaso-evaluacion.php " - Evaluacion"
 prueba sitios/pruebas/inscaso-evaluacion-valida.php " - Valida Evaluacion"
@@ -230,7 +231,6 @@ prueba sitios/pruebas/novalida-basicos.php " - Validación básicos" novalida-ba
 prueba sitios/pruebas/novalida-frecuentes.php " - Validación frecuentes" novalida-frecuentes "" "1"
 prueba sitios/pruebas/externa.php " - Consulta externa" externa
 prueba sitios/pruebas/relato.php " - Exporta Relato " relato
-#}
 
 prueba sitios/pruebas/imprelato.php " - Importa Relato " imprelato "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*" "" "resimp.xrlt.espreg" "Warning" "fecha_fuente" "D -"
 exit 1;

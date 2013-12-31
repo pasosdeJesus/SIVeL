@@ -39,7 +39,7 @@ $_SESSION['_auth_PHPSESSID']['timestamp']
     = $_SESSION['_authsession']['timestamp'] = '1150453479';
 $_SESSION['_auth_PHPSESSID']['idle']
     = $_SESSION['_authsession']['idle'] = '1150454683';
-$_SESSION['id_usuario'] = '1';
+$_SESSION['id_usuario'] = 1;
 
 
 $_SESSION['opciones'][0] = 0;

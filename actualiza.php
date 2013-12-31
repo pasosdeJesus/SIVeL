@@ -2727,7 +2727,7 @@ if (!aplicado($idac)) {
     );
     hace_consulta(
         $db, "ALTER TABLE usuario ADD CONSTRAINT usuario_pkey
-        PRIMARY KEY (id)" 
+        PRIMARY KEY (id)", false
     );
     hace_consulta(
         $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT caso_etiqueta_pkey", false
