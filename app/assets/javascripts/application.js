@@ -16,6 +16,7 @@
 //= require bootstrap-datepicker
 //= require wijmo/jquery.wijmo-open.all.min
 //= require turbolinks
+//= require cocoon
 //= require_tree .
 
 $(document).ready(function(){

@@ -65,3 +65,7 @@ gem "cancan"
 gem "tzinfo"
 gem "tzinfo-data"
 gem 'spring', group: :development
+
+# 
+gem "cocoon"
+

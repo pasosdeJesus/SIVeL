@@ -57,6 +57,7 @@ class CasosController < ApplicationController
   # DELETE /casos/1
   # DELETE /casos/1.json
   def destroy
+    @caso.casosjr.destroy
     @caso.destroy
     respond_to do |format|
       format.html { redirect_to casos_url }
