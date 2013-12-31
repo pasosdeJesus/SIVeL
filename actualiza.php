@@ -2766,7 +2766,7 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db, "ALTER TABLE caso_etiqueta
         ADD CONSTRAINT caso_etiqueta_pkey
-        PRIMARY KEY (id_caso, id_etiqueta, id_usuario, fecha)"
+        PRIMARY KEY (id_caso, id_etiqueta, id_usuario, fecha)", false
     );
     hace_consulta(
         $db, "ALTER TABLE funcionario RENAME TO obsoleto_funcionario", false
@@ -2789,8 +2789,7 @@ if (!aplicado($idac)) {
         $db, "ALTER TABLE usuario ALTER COLUMN rol SET DEFAULT '4'"
     );
 
-
-    #aplicaact($act, $idac, 'Fusiona tablas usuario y funcionario');
+    aplicaact($act, $idac, 'Fusiona tablas usuario y funcionario');
 }
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
