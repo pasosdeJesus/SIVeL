@@ -45,7 +45,7 @@ res_valida(
     $db, _("Casos con fecha de fuente frecuente anterior a la del caso"),
     "SELECT caso.id, caso.fecha, ffrecuente.nombre
     FROM caso_ffrecuente, ffrecuente, caso
-    WHERE caso_ffrecuente.id_caso = caso.id 
+    WHERE caso_ffrecuente.id_caso = caso.id
     AND caso_ffrecuente.id_ffrecuente = ffrecuente.id
     AND caso_ffrecuente.fecha < caso.fecha
     ORDER BY fecha;"
@@ -54,25 +54,25 @@ res_valida(
 hace_consulta($db, "DROP VIEW y", false, false);
 hace_consulta(
     $db, "CREATE VIEW y AS SELECT caso.id, " .
-    " min(caso_funcionario.fechainicio) " .
-    " FROM caso_funcionario, caso " .
-    " WHERE caso.id>'35000' AND caso.id=caso_funcionario.id_caso " .
+    " min(caso_usuario.fechainicio) " .
+    " FROM caso_usuario, caso " .
+    " WHERE caso.id>'35000' AND caso.id=caso_usuario.id_caso " .
     " GROUP BY caso.id order by caso.id"
 );
 res_valida(
-    $db, _("Casos con fecha inicial de funcionario anterior o igual a la del caso"),
-    "SELECT y.id, caso.fecha, y.min as fecha_funcionario, funcionario.nombre
-    FROM y, caso, caso_funcionario, funcionario
+    $db, _("Casos con fecha inicial de usuario anterior o igual a la del caso"),
+    "SELECT y.id, caso.fecha, y.min as fecha_usuario, usuario.nusuario
+    FROM y, caso, caso_usuario, usuario
     WHERE y.id = caso.id AND y.min <= caso.fecha
-    AND caso_funcionario.id_caso = caso.id
-    AND caso_funcionario.fechainicio = y.min
-    AND caso_funcionario.id_funcionario = funcionario.id;"
+    AND caso_usuario.id_caso = caso.id
+    AND caso_usuario.fechainicio = y.min
+    AND caso_usuario.id_usuario = usuario.id;"
 );
 
 res_valida(
-    $db, _("Casos sin funcionario"),
+    $db, _("Casos sin usuario"),
     "SELECT caso.id FROM caso
-    WHERE caso.id NOT IN (SELECT id_caso FROM caso_funcionario) ORDER BY 1;"
+    WHERE caso.id NOT IN (SELECT id_caso FROM caso_usuario) ORDER BY 1;"
 );
 
 res_valida(

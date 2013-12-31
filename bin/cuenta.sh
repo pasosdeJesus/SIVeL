@@ -24,7 +24,7 @@ ctabla caso
 ctabla caso_contexto                   
 ctabla caso_ffrecuente
 ctabla caso_fotra
-ctabla caso_funcionario
+ctabla caso_usuario
 ctabla categoria                       
 ctabla caso_categoria_presponsable
 ctabla clase                           
@@ -40,7 +40,6 @@ ctabla filiacion
 ctabla fotra
 ctabla ffrecuente
 ctabla frontera                        
-ctabla funcionario                     
 ctabla intervalo                       
 ctabla municipio                       
 ctabla organizacion                    

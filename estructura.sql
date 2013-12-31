@@ -378,15 +378,6 @@ CREATE TABLE fotra (
 	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL
 );
 
-CREATE SEQUENCE funcionario_seq;
-
--- nombre es un id de la tabla usuario en caso de que aun este activo
-CREATE TABLE funcionario (
-	id INTEGER PRIMARY KEY DEFAULT(nextval('funcionario_seq')),
-	anotacion VARCHAR(50),
-	nombre 	VARCHAR(15) NOT NULL UNIQUE
-);
-
 CREATE SEQUENCE organizacion_seq;
 
 CREATE TABLE organizacion (
@@ -509,14 +500,23 @@ CREATE TABLE ubicacion (
 		clase (id, id_municipio, id_departamento)
 ); 
 
+CREATE SEQUENCE usuario_seq;
+
+-- Sólo deben poderse autenticar quienes tengan NULL en fechadeshabilitacion
 CREATE TABLE usuario (
-	id VARCHAR(15) PRIMARY KEY,
+	id INTEGER PRIMARY KEY DEFAULT(nextval('usuario_seq')),
+	nusuario VARCHAR(15) NOT NULL UNIQUE,
 	password VARCHAR(64) NOT NULL,
 	nombre VARCHAR(50) COLLATE es_co_utf_8,
 	descripcion VARCHAR(50),
-	rol INTEGER CHECK (rol>='1' AND rol<='4'),
-	diasedicion INTEGER,
-	idioma VARCHAR(6) NOT NULL DEFAULT 'es_CO'
+	rol INTEGER DEFAULT '4' CHECK (rol>='1' AND rol<='4'),
+	idioma VARCHAR(6) NOT NULL DEFAULT 'es_CO',
+	fechacreacion DATE NOT NULL,
+	fechadeshabilitacion DATE CHECK (
+		fechadeshabilitacion IS NULL OR 
+		fechadeshabilitacion>=fechacreacion
+	)
+
 );
 
 CREATE SEQUENCE vinculoestado_seq;
@@ -782,11 +782,11 @@ CREATE TABLE caso_fotra (
 	PRIMARY KEY(id_caso, id_fotra, fecha)
 );
 
-CREATE TABLE caso_funcionario (
-	id_funcionario INTEGER REFERENCES funcionario,
+CREATE TABLE caso_usuario (
+	id_usuario INTEGER REFERENCES usuario,
 	id_caso INTEGER REFERENCES caso,
 	fechainicio DATE,
-	PRIMARY KEY(id_funcionario, id_caso)
+	PRIMARY KEY(id_usuario, id_caso)
 );
 
 CREATE TABLE comunidad_organizacion (

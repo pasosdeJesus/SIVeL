@@ -605,7 +605,7 @@ class PagVictimaColectiva extends PagBaseMultiple
         if ($es_vacio) {
             return true;
         }
-        print_r($valores); 
+        print_r($valores);
         if (!$this->validate() ) {
             return false;
         }
@@ -741,7 +741,7 @@ class PagVictimaColectiva extends PagBaseMultiple
             }
         }
 
-        caso_funcionario($_SESSION['basicos_id']);
+        caso_usuario($_SESSION['basicos_id']);
         return  $ret;
     }
 

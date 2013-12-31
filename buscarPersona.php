@@ -44,10 +44,10 @@ function muestra()
         . "to_tsquery('spanish', '$consNomvic')";
     $q = "SELECT id, nombres, apellidos, anionac, mesnac, dianac, "
         . "sexo, id_departamento, id_municipio, id_clase, "
-        . "tipodocumento, numerodocumento " 
-        . " FROM persona " 
+        . "tipodocumento, numerodocumento "
+        . " FROM persona "
         . " WHERE " . $where
-        . " ORDER by nombres, apellidos "; 
+        . " ORDER by nombres, apellidos ";
 
 
     //echo "OJO q=\"$q\"<br>";

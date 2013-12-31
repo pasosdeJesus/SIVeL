@@ -22,10 +22,10 @@ if ($_SESSION['dirsitio'] != $dirsitio) {
     $s1 = stat($n1);
     $s2 = stat($n2);
     if (!isset($s1[1]) || !isset($s2[1]) || $s1[1] != $s2[1]) {
-        echo "<hr>$n1: ";var_dump($s1); 
+        echo "<hr>$n1: ";var_dump($s1);
         echo "<hr>$n2: ";var_dump($s2);
         echo "<hr>Son diferentes \$_SESSION['dirsitio'] "
-            . " y \$GLOBALS['dirsitio']<br>";
+            . " y \$GLOBALS['dirsitio'] < br>";
         echo "Configurar primero<hr>";
         exit(1);
     }
@@ -79,7 +79,7 @@ $_DB_DATAOBJECT_FORMBUILDER['CONFIG'] = array (
 
 
 if (!function_exists("esta_nueva_ficha")) {
-    /** 
+    /**
      * Determina si una ficha con la identificación dada ya está en las
      * programas para agregar
      *
@@ -87,7 +87,7 @@ if (!function_exists("esta_nueva_ficha")) {
      *
      * @return true sii una ficha con la id dada ya está en nuevas
      */
-    function esta_nueva_ficha($id) 
+    function esta_nueva_ficha($id)
     {
         foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
             $puesto = $a[0];

@@ -118,9 +118,6 @@ OTROS
 
 2. AUTENTICACIÓN
 
-* No permitir crear usuarios con id de funcionarios existentes
-
-
 3. INTERFAZ
 
 3.1 MENU

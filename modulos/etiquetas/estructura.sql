@@ -12,9 +12,9 @@ CREATE TABLE etiqueta (
 CREATE TABLE caso_etiqueta (
 	id_caso INTEGER REFERENCES caso NOT NULL,
 	id_etiqueta       INTEGER REFERENCES etiqueta NOT NULL,
-	id_funcionario INTEGER REFERENCES funcionario NOT NULL,
+	id_usuario INTEGER REFERENCES usuario NOT NULL,
 	fecha   DATE NOT NULL,
 	observaciones VARCHAR(5000),
-	PRIMARY KEY (id_caso, id_etiqueta,  id_funcionario, fecha)
+	PRIMARY KEY (id_caso, id_etiqueta, id_usuario, fecha)
 );
 

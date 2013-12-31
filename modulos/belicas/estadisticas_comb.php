@@ -400,7 +400,7 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
 
 }
 
-/** 
+/**
  * Punto de entrada
  *
  * @param string $dsn URL de base de datos

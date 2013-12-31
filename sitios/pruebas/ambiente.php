@@ -25,21 +25,21 @@ if (PHP_SAPI !== 'cli') {
 
 $include_path = ini_get("include_path");
 ini_set(
-    "include_path", $include_path 
+    "include_path", $include_path
     . ":/var/www/pear/lib:.:..:../..:../../DataObjects/"
 );
 
 
 $_COOKIE['PHPSESSID'] = 'vr3gae8jvi47847dfnutd6rkr7';
-$_SESSION['_auth_PHPSESSID']['registered'] 
+$_SESSION['_auth_PHPSESSID']['registered']
     = $_SESSION['_authsession']['registered'] = '1';
-$_SESSION['_auth_PHPSESSID']['username'] 
+$_SESSION['_auth_PHPSESSID']['username']
     = $_SESSION['_authsession']['username'] = 'sivel-prueba';
-$_SESSION['_auth_PHPSESSID']['timestamp'] 
+$_SESSION['_auth_PHPSESSID']['timestamp']
     = $_SESSION['_authsession']['timestamp'] = '1150453479';
-$_SESSION['_auth_PHPSESSID']['idle'] 
+$_SESSION['_auth_PHPSESSID']['idle']
     = $_SESSION['_authsession']['idle'] = '1150454683';
-$_SESSION['id_funcionario'] = '1';
+$_SESSION['id_usuario'] = '1';
 
 
 $_SESSION['opciones'][0] = 0;
@@ -86,7 +86,7 @@ function verificaInsercion(&$db, $tprueba, $na)
         echo "Error en conexión " . $db->getMesssage();
         exit(1);
     }
-    //echo "OJO verificaInsercion(db, " . count($tprueba) . ", " 
+    //echo "OJO verificaInsercion(db, " . count($tprueba) . ", "
     //.  count($na) . "\n";
     assert(count($tprueba) == count($na));
 
@@ -151,7 +151,7 @@ function pasaPestanaFicha(&$db, $tabla_prueba, $post, $basicos_id = null,
     $_SESSION['__container']['defaults']['cellsize']['count'] = '10';
     $_SESSION['__container']['defaults']['cellcolor']['active'] = '#006600';
     $_SESSION['__container']['defaults']['cellcolor']['inactive'] = '#CCCCCC';
-    $_SESSION['__container']['defaults']['cellfont']['family'] 
+    $_SESSION['__container']['defaults']['cellfont']['family']
         = 'Courier, Verdana';
     $_SESSION['__container']['defaults']['cellfont']['size'] = '8';
     $_SESSION['__container']['defaults']['cellfont']['color'] = '#000000';
@@ -162,7 +162,7 @@ function pasaPestanaFicha(&$db, $tabla_prueba, $post, $basicos_id = null,
     $_SESSION['__container']['defaults']['stringsize']['bgcolor'] = '#FFFFFF';
     $_SESSION['__container']['defaults']['stringvalign'] = 'right';
     $_SESSION['__container']['defaults']['stringalign'] = 'right';
-    $_SESSION['__container']['defaults']['stringfont']['family'] 
+    $_SESSION['__container']['defaults']['stringfont']['family']
         = 'Verdana, Arial, Helvetica, sans-serif';
     $_SESSION['__container']['defaults']['stringfont']['size'] = '10';
     $_SESSION['__container']['defaults']['stringfont']['color'] = '#000000';
@@ -263,7 +263,7 @@ if (!isset($_SESSION) || session_name() != $snru) {
 $params = array(
     "dsn" => $dsn,
     "table" => "usuario",
-    "usernamecol" => "id_usuario",
+    "usernamecol" => "nusuario",
     "passwordcol" => "password",
     "cryptType" => 'sha1',
 );

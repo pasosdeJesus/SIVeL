@@ -187,7 +187,7 @@ EOF
 		echo $cmd;
 		eval $cmd;
 	} fi;
-	cmd="psql $socketopt -U $dbusuario -d $dbnombre -c \"SET client_encoding to 'LATIN1'; INSERT INTO usuario(id, password, nombre, descripcion, rol) VALUES ('sivelpruebas', 'c2b96950b73332b8386406b6bee5f5db73a2bb7d', '', '', '1'); INSERT INTO funcionario(anotacion, nombre) VALUES ('', 'sivelpruebas'); \"";
+	cmd="psql $socketopt -U $dbusuario -d $dbnombre -c \"SET client_encoding to 'LATIN1'; INSERT INTO usuario(id, nusuario, password, nombre, descripcion, rol, idioma, fechacreacion) VALUES (1, 'sivelpruebas', 'c2b96950b73332b8386406b6bee5f5db73a2bb7d', '', '', '1', 'es_CO', '2001-01-01');\"";
 	echo $cmd;
 	echo "Por evaluar";
 	eval $cmd;

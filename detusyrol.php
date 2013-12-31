@@ -62,8 +62,6 @@ if (!isset($_GET['id'])) {
     $s->freeze();
     $e =& $f->createElement('submit', 'actualizar', _('Actualizar'));
     $ed[] =& $e;
-    $e =& $f->createElement('submit', 'eliminar', _('Eliminar'));
-    $ed[] =& $e;
 }
 $f->addGroup($ed, null, '', '&nbsp;', false);
 $f->addElement(
@@ -100,18 +98,12 @@ if ($actsincambiarclave || $f->validate()) {
             if (PEAR::isError($db)) {
                 die($db->getMessage());
             }
-            $q = "INSERT INTO funcionario (anotacion, nombre) " .
-                " VALUES ('"
-                . var_escapa($f->_submitValues['descripcion'], $db) . "', '"
-                . var_escapa($f->_submitValues['id'], $db) . "')";
-            //echo $q;
-            hace_consulta($db, $q);
         }
     } else {
         foreach ($f->_submitValues as $k => $v) {
             $d->$k = $v;
         }
-        $res=& $d->delete();
+        //$res=& $d->delete();
     }
     if ($res) {
         /*ambiente();

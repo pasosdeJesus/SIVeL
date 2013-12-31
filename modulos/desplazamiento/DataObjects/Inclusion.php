@@ -33,7 +33,7 @@ require_once 'DataObjects/Basica.php';
  */
 class DataObjects_Inclusion extends DataObjects_Basica
 {
-    var $__table = 'inclusion';                       
+    var $__table = 'inclusion';
 
     /**
      * Constructora

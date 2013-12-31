@@ -156,7 +156,7 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
         } elseif ($pSegun == 'id_filiacion'
             || $pSegun == 'id_organizacion'
             || $pSegun == 'id_sectorsocial'
-        ) { 
+        ) {
             $campoSegun = $pSegun;
             $ant = explode("_", $pSegun);
             $tablaSegun = "";
@@ -225,13 +225,13 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
             $campoSegun2=", ".$campoSegun;
         }
         $q1="CREATE VIEW $cons ($pQ1 id_caso, id_tviolencia, id_supracategoria,
-            id_categoria, id_pconsolidado".$pSegun2 .") AS 
-            SELECT $pQ1sel caso.id, categoria.id_tviolencia, 
-            categoria.id_supracategoria, $tCat.id_categoria, 
-            categoria.id_pconsolidado $campoSegun2 
-            FROM $tablas WHERE caso.id<>'".$GLOBALS['idbus'] . "'" ;
+            id_categoria, id_pconsolidado" . $pSegun2 .") AS
+            SELECT $pQ1sel caso.id, categoria.id_tviolencia,
+            categoria.id_supracategoria, $tCat.id_categoria,
+            categoria.id_pconsolidado $campoSegun2
+            FROM $tablas WHERE caso.id<>'" . $GLOBALS['idbus'] . "'" ;
         // Evitamos sobreconteos de duplicados en DIH y DH excluyendo los de DH
-        $q1 .=  " AND id_categoria NOT IN 
+        $q1 .=  " AND id_categoria NOT IN
             (SELECT id FROM categoria WHERE contadaen IS NOT NULL) ";
         if ($where != "") {
             $q1 .= " AND ".$where;
@@ -246,12 +246,12 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
             );
         }
 
-        $q2="CREATE VIEW $cons2 (id_persona, id_caso, id_tviolencia, 
-            id_supracategoria, id_categoria, id_pconsolidado" . $pSegun2 
+        $q2="CREATE VIEW $cons2 (id_persona, id_caso, id_tviolencia,
+            id_supracategoria, id_categoria, id_pconsolidado" . $pSegun2
             . ", id_departamento, id_municipio) ";
-        $q2 .= "AS SELECT $distinct $cons.id_persona, $cons.id_caso, 
-            id_tviolencia, id_supracategoria, id_categoria, id_pconsolidado" 
-            . $pSegun2 . ", ubicacion.id_departamento, ubicacion.id_municipio 
+        $q2 .= "AS SELECT $distinct $cons.id_persona, $cons.id_caso,
+            id_tviolencia, id_supracategoria, id_categoria, id_pconsolidado"
+            . $pSegun2 . ", ubicacion.id_departamento, ubicacion.id_municipio
             FROM ubicacion, $cons
             WHERE $cons.id_caso = ubicacion.id_caso";
 
@@ -267,8 +267,8 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
         // no hay asigna santa-marta y así saldría e.g PUTUMAYO    SANTA MARTA
         $q3 = "SELECT $cfSegun3 $tDep $tMun
             TRIM(pconsolidado.rotulo),
-            COUNT(cast($cons2.id_persona as text) || ' ' || 
-            cast($cons2.id_caso as text))
+            COUNT(cast($cons2.id_persona as text) || ' '
+            || cast($cons2.id_caso as text))
             FROM $tablaSegun departamento, municipio,
             pconsolidado,
             $cons2
@@ -445,7 +445,7 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
     }
 
 
-    /** 
+    /**
      * Retorna id del tipo de violencia
      *
      * @return string id
@@ -461,7 +461,7 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
         return $ntipoviolencia;
     }
 
-    /** 
+    /**
      * Retorna id de la categoria
      *
      * @return string id
@@ -476,9 +476,9 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
     }
 
 
-    /** 
+    /**
      * Construye formulario
-     * 
+     *
      * @return void
      */
     function buildForm()
@@ -561,9 +561,9 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
                 'sexo' => strtoupper($GLOBALS['etiqueta']['sexo']),
                 'id_filiacion' => strtoupper($GLOBALS['etiqueta']['filiacion']),
                 'id_profesion' => strtoupper($GLOBALS['etiqueta']['profesion']),
-                'id_sectorsocial' => 
+                'id_sectorsocial' =>
                 strtoupper($GLOBALS['etiqueta']['sectorsocial']),
-                    'id_organizacion' => 
+                    'id_organizacion' =>
                     strtoupper($GLOBALS['etiqueta']['organizacion']),
                 'meses' => 'MESES',
                 'id_profesion' => 'PROFESION',

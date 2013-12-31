@@ -160,7 +160,7 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
             }
         }
         if ((!isset($_SESSION['forma_modo'])
-            || $_SESSION['forma_modo'] != 'busqueda') 
+            || $_SESSION['forma_modo'] != 'busqueda')
             && !$puesto
         ) {
             $sel->setValue('');
@@ -212,7 +212,7 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
             hace_consulta($db, $q, false);
         }
 
-        caso_funcionario($_SESSION['basicos_id']);
+        caso_usuario($_SESSION['basicos_id']);
         return $r;
     }
 

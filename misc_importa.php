@@ -81,22 +81,22 @@ function sin_tildes($s)
 {
     $r = str_replace(
         array(
-            'á', 'é', 'í', 'ó', 'ú', 'ü', 'Á', 'É', 'Í', 
+            'á', 'é', 'í', 'ó', 'ú', 'ü', 'Á', 'É', 'Í',
             'Ó', 'Ú', 'Ü', 'ñ', 'Ñ'
         ),
         array(
-            'a', 'e', 'i', 'o', 'u', 'u', 'A', 'E', 'I', 
+            'a', 'e', 'i', 'o', 'u', 'u', 'A', 'E', 'I',
             'O', 'U', 'U', 'n', 'N'
         ),
         $s
     );
     $r = str_replace(
-        array("\xe1", "\xe9", "\xed", "\xf3", "\xfa", "\xfc", "\xc1", 
+        array("\xe1", "\xe9", "\xed", "\xf3", "\xfa", "\xfc", "\xc1",
         "\xc9", "\xcd", "\xd3", "\xda", "\xdc", "\xf1", "\xd1"),
         array('a', 'e', 'i', 'o', 'u', 'u', 'A', 'E', 'I', 'O', 'U', 'U', 'n', 'N'),
         $r
     );
-        
+
     return $r;
 }
 
@@ -155,7 +155,7 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
         }
         if (!isset($d->id)) {
             rep_obs(
-                _("Localización: Departamento desconocido") . 
+                _("Localización: Departamento desconocido") .
                 " '$departamento'", $obs
             );
             $idd = 1000;
@@ -281,7 +281,7 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
             }
         } else {
             rep_obs(
-                _("Localización: Clase desconocida ") . 
+                _("Localización: Clase desconocida ") .
                 " '$cenp' " . _("en municipio") .
                 " '$idm' " . _("y departamento") .
                 " '$idd'",
@@ -436,7 +436,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
             "Fecha incompleta '$fecha' convertida a $dia_s . $mes_s . $anio_s",
             $obs
         );
-    } else if (count($v)==4 && (int)$v[0] > 0 && (int)$v[2] > 0 
+    } else if (count($v)==4 && (int)$v[0] > 0 && (int)$v[2] > 0
         && (int)$v[3] > 0 && $v[1] == ''
     ) {
 
@@ -695,7 +695,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                 if (count($vg) == 3) {
                     $des = 'especial';
                     if ($vg[0] == '00') {
-                        $obs .= " " . _("Fecha: Dia desconocido") . 
+                        $obs .= " " . _("Fecha: Dia desconocido") .
                             ". ($fecha)";
                         $dia_s = 1;
                         $des = 'incompleta';
@@ -756,7 +756,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
         $dia_s = 1;
     }
 
-    return sprintf("%04d", $anio_s) . "-" . sprintf("%02d", $mes_s) . "-".
+    return sprintf("%04d", $anio_s) . "-" . sprintf("%02d", $mes_s) . "-" .
         sprintf("%02d", $dia_s);
 }
 
@@ -767,9 +767,9 @@ function conv_fecha($fecha, &$obs, $depura = false)
  * @param object &$idsiguales     Arreglo para completar con iguales
  * @param object &$idssimilares   Arreglo para completar con similares
  * @param array  $aper            Listado de personas de la base
- * @param string $nom             Nombre buscado, 
+ * @param string $nom             Nombre buscado,
  *      si es null supone que se busca apellidos nombres que vienen en $ap
- * @param string $ap              Apellido buscado, 
+ * @param string $ap              Apellido buscado,
  *      si es null supone que se busca nombres apellidos que vienen en $nom
  * @param string $mdlev           Distancia Levenshtein maxima para similares
  * @param string $anionac         Año de nacimiento
@@ -851,7 +851,7 @@ function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper,
                 $dna = levenshtein($anomap, $nomap);
                 $dan = levenshtein($aapnom, $apnom);
                 //echo "OJO mdlev=$mdlev,dn=$dn,da=$da,dna=$dna,dan=$dan<br>";
-                if (($dn <= $mdlev && $da <= $mdlev) || $dna <= $mdlev 
+                if (($dn <= $mdlev && $da <= $mdlev) || $dna <= $mdlev
                     || $dan <= $mdlev
                 ) {
                     //echo "OJO similares<br>";
@@ -977,7 +977,7 @@ function conv_persona(&$db, &$aper, &$obs, $nom, $ap, $anionac,
  *
  * @return array($aper, $maxidper) arreglo
  * de personas indexado por identificación en base, maxima identificación.
- * Cada entrada tiene es 
+ * Cada entrada tiene es
  *   idpersona => array(nombre, apellido, casoscomovictima, casoscomofamiliar)
  */
 function extrae_per(&$db)
@@ -1000,7 +1000,7 @@ function extrae_per(&$db)
     while ($rp->fetchInto($datp)) {
         $idp = $datp[0];
         $rv = hace_consulta(
-            $db, "SELECT id_caso FROM victima WHERE id_persona='$idp' " 
+            $db, "SELECT id_caso FROM victima WHERE id_persona='$idp' "
             . " ORDER BY id_caso"
         );
         /* $cvi = objeto_tabla('victima');
@@ -1015,8 +1015,8 @@ function extrae_per(&$db)
 
         $rf = hace_consulta(
             $db, "SELECT DISTINCT id_caso, persona1 "
-            . " FROM persona_trelacion, victima " 
-            . " WHERE persona2='$idp' AND id_persona=persona1" 
+            . " FROM persona_trelacion, victima "
+            . " WHERE persona2='$idp' AND id_persona=persona1"
             . " ORDER BY persona1"
         );
         $fcasos = array(); // Casos en los que es familiar
@@ -1456,7 +1456,7 @@ function conv_categoria(&$db, &$obs, $agr, $pr)
  * @return integer Identificación de presunto responsable en base o -1 si no hay
  */
 
-function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs, 
+function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs,
     $csinf = false
 ) {
     $ids = DataObjects_Presponsable::idSinInfo();
@@ -1529,16 +1529,16 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs,
     return $pr;
 }
 
-function divide_apellidos_nombres($apnom, &$apellidos, &$nombres) 
+function divide_apellidos_nombres($apnom, &$apellidos, &$nombres)
 {
     $r = preg_replace("/\s+/", " ", $apnom);
     //echo "OJO divide_ap nomap=$apnom r=$r";
     $p = explode(" ", $r);
-    if (count($p) >= 4)  {
+    if (count($p) >= 4) {
         //echo "OJO caso 1";
         $apellidos = $p[0] . " " . $p[1];
         $sep = $nombres = "";
-        for($i = 2; $i < count($p); $i++) {
+        for ($i = 2; $i < count($p); $i++) {
             $nombres .= $sep . $p[$i];
             $sep = " ";
         }

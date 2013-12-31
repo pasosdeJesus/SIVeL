@@ -87,10 +87,9 @@ class EliminaEst extends HTML_QuickForm_Action
 class DataObjects_Caso_etiqueta extends DB_DataObject_SIVeL
 {
     var $__table = 'caso_etiqueta';                         // table name
-    var $nom_tabla = 'Etiquetas de un caso';
     var $id_caso;                          // int4(4)  not_null primary_key
     var $id_etiqueta;                        // int4(4)  not_null primary_key
-    var $id_funcionario;                   // varchar(-1)  not_null
+    var $id_usuario;                   // varchar(-1)  not_null
     var $fecha;                            // date
     var $observaciones;                    // varchar(-1)  not_null
 
@@ -108,10 +107,11 @@ class DataObjects_Caso_etiqueta extends DB_DataObject_SIVeL
     {
         parent::__construct();
 
+        $this->nom_tabla = _('Etiquetas de un caso');
         $this->fb_fieldLabels= array(
            'fecha' => _('Fecha'),
            'observaciones' => _('Observaciones'),
-           'id_funcionario' => _('Funcionario'),
+           'id_usuario' => _('Usuario'),
         );
     }
 
@@ -135,26 +135,26 @@ class DataObjects_Caso_etiqueta extends DB_DataObject_SIVeL
         $db = $p->getDatabaseConnection();
         $p->id_caso = $_SESSION['basicos_id'];
         $p->id_etiqueta = null;
-        $p->id_funcionario = null;
+        $p->id_usuario = null;
         $p->fecha = null;
         $p->observaciones = null;
         $p->orderby('fecha');
         $p->find();
         while ($p->fetch() && $p->id_caso == $_SESSION['basicos_id'] ) {
             $dp = $p->getLink('id_etiqueta');
-            $fn = $p->getLink('id_funcionario');
+            $fn = $p->getLink('id_usuario');
             $n = 'fobs_' . (int)$p->id_caso . "_"
                 . (int)$p->id_etiqueta . "_"
-                . (int)$p->id_funcionario . "_" . $p->fecha;
+                . (int)$p->id_usuario . "_" . $p->fecha;
             $t .= '<tr><td>' . $p->fecha . '</td><td>'
                 . htmlentities($dp->nombre, ENT_COMPAT, 'UTF-8') . '</td>'
                 . '<td><textarea name="' . $n . '" cols="20" rows="3">'
-                . htmlentities($p->observaciones, ENT_COMPAT, 'UTF-8') 
+                . htmlentities($p->observaciones, ENT_COMPAT, 'UTF-8')
                 . '</textarea></td><td>'
                 . $fn->nombre . '</td><td><a href="'
                 . htmlspecialchars($_SERVER['PHP_SELF']) . '?eliminaest='
                 . (int)$p->id_caso . ":" . (int)$p->id_etiqueta . ":"
-                . (int)$p->id_funcionario. ":" . $p->fecha
+                . (int)$p->id_usuario . ":" . $p->fecha
                 . '">' . _('Eliminar') . '</a></td>';
         }
         $t .= '</table>';

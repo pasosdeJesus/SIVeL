@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2011 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: victimasrep.php,v 1.1 2012/01/11 17:41:30 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
@@ -40,12 +39,12 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
  *
  * @return Prefijo izquierdo de z hasta .
  */
-function hastapunto($s) 
+function hastapunto($s)
 {
     $p = strpos($s, '.');
     $r = $s;
     if ($p !== false) {
-        $r = substr($s, 0, $p); 
+        $r = substr($s, 0, $p);
     }
     return $p;
 }
@@ -76,11 +75,11 @@ function muestra($dsn)
         }
         $pIds   = var_escapa($_REQUEST['ids']);
     }
-    
+
     $par = array();
     $pp = preg_split("/[\s]+/", $pIds);
     $id1 = $id2 = null;
-    foreach($pp as $id) {
+    foreach ($pp as $id) {
         if ($id1 == null) {
             $id1 = $id;
             continue;
@@ -104,28 +103,28 @@ function muestra($dsn)
     $col1 = "#FFFFFF";
     $col2 = "#BBBBBB";
     $coltr = $col1;
-    foreach($par as $p) {
+    foreach ($par as $p) {
         list($id1, $id2) = $p;
         if ($coltr == $col1) {
             $coltr = $col2;
         } else {
             $coltr = $col1;
         }
-        foreach($p as $id) {
+        foreach ($p as $id) {
             $c = "SELECT DISTINCT caso.id, caso.fecha,
                 array(select departamento.nombre from departamento, ubicacion
-                where departamento.id=ubicacion.id_departamento 
-                and ubicacion.id_caso=caso.id),
+                where departamento.id = ubicacion.id_departamento
+                and ubicacion.id_caso = caso.id),
             array(select persona.nombres || ' ' || persona.apellidos
-            from victima, persona where victima.id_persona=persona.id
-            and victima.id_caso=caso.id), caso.memo
+            from victima, persona where victima.id_persona = persona.id
+            and victima.id_caso = caso.id), caso.memo
             FROM caso where caso.id = $id";
             $r = hace_consulta($db, $c);
             sin_error_pear($r);
             echo "<tr style='background-color:$coltr;'>\n";
             $rows = array();
             $r->fetchInto($rows);
-            foreach($rows as $n => $c) {
+            foreach ($rows as $n => $c) {
                 if ($n == 0) {
                     $v1_html = enlace_edita($c);
                 } else {
@@ -134,10 +133,10 @@ function muestra($dsn)
                 echo "<td>" . $v1_html . "</td>";
             }
             if ($id == $id1) {
-                echo "<td rowspan='2'>" 
+                echo "<td rowspan='2'>"
                     . "<input type='checkbox' name='m_{$id1}_{$id2}' checked/>"
                     . "</td>";
-            } 
+            }
             echo "</tr>\n";
         }
     }

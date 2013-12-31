@@ -2,6 +2,5 @@ INSERT INTO prensa
 INSERT INTO escrito_caso
 INSERT INTO fuente_directa
 INSERT INTO fuente_directa_caso
-INSERT INTO funcionario
 INSERT INTO usuario
-INSERT INTO funcionario_caso
+INSERT INTO caso_usuario

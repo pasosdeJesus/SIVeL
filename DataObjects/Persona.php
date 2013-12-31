@@ -154,7 +154,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
      */
     function setanionac($value)
     {
-        $this->anionac= ($value == '' || $value == 0) ?  
+        $this->anionac= ($value == '' || $value == 0) ?
             DB_DataObject_Cast::sql('NULL') : $value;
     }
 
@@ -169,7 +169,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
      */
     function setmesnac($value)
     {
-        $this->mesnac= ($value == '' || $value == 0) ? 
+        $this->mesnac= ($value == '' || $value == 0) ?
             DB_DataObject_Cast::sql('NULL') : $value;
     }
 
@@ -184,7 +184,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
      */
     function setdianac($value)
     {
-        $this->dianac= ($value == '' || $value == 0) ? 
+        $this->dianac= ($value == '' || $value == 0) ?
             DB_DataObject_Cast::sql('NULL') : $value;
     }
 
@@ -199,7 +199,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
      */
     function setnumerodocumento($value)
     {
-        $this->numerodocumento = ((int)$value == 0) ? 
+        $this->numerodocumento = ((int)$value == 0) ?
             DB_DataObject_Cast::sql('NULL') : $value;
     }
 
@@ -352,7 +352,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
         $form->addElement('hidden', 'anioactual', date('Y'));
         $form->addElement('hidden', 'mesactual', date('m'));
-        $form->addElement('hidden', 'diaactual', date('d')); 
+        $form->addElement('hidden', 'diaactual', date('d'));
 
         $fmes = $this->mesnac;
         $fdia = $this->dianac;
@@ -534,8 +534,8 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             $obs .= " persona.sexo={$this->sexo}";
         }
         // Remplaza sin concatenar cuando hay null o vacío
-        foreach(array('nombres', 'apellidos', 'tipodocumento') as $c) {
-            if (($this->$c == null || trim($this->$c) == '') 
+        foreach (array('nombres', 'apellidos', 'tipodocumento') as $c) {
+            if (($this->$c == null || trim($this->$c) == '')
                 && $otro->$c != null && trim($otro->$c) != ''
             ) {
                 $this->$c = $otro->$c;
@@ -543,9 +543,9 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             }
         }
         // Remplaza enteros cuando hay null
-        foreach(array(
+        foreach (array(
             'anionac', 'mesnac', 'dianac',
-            'id_departamento', 'id_municipio', 'id_clase', 
+            'id_departamento', 'id_municipio', 'id_clase',
             'numerodocumento'
         ) as $c) {
             if ($this->$c == null && $otro->$c != null) {

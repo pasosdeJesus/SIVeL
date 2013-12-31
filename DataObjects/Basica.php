@@ -81,8 +81,6 @@ class DataObjects_Basica extends DB_DataObject_SIVeL
         'nombre',
     );
 
-
-
     /**
      * Pone un valor en la base diferente al recibido del formulario.
      *
@@ -93,7 +91,6 @@ class DataObjects_Basica extends DB_DataObject_SIVeL
     function setfechadeshabilitacion($valor)
     {
         if ($valor == "0000-00-00") {
-            echo "1";
             $nv = 'null';
         } else {
             $nv = $valor;

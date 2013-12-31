@@ -7,8 +7,8 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Luca Urech <lucaurech@yahoo.de> 
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org> 
+ * @author    Luca Urech <lucaurech@yahoo.de>
+ * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2011 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * Acceso: CONSULTA PÚBLICA
@@ -23,7 +23,7 @@ $host = determina_host();
 
 // leer filtros desde los parametros GET
 $filtro = array(
-    'desde' => (!empty($_GET['desde'])) 
+    'desde' => (!empty($_GET['desde']))
     ? var_req_escapa('desde') : "2007-01-01",
         'hasta' => var_req_escapa('hasta'),
         'departamento' => var_req_escapa('departamento'),
@@ -32,22 +32,22 @@ $filtro = array(
     );
 
 // generar cadena de solicitud para sivel consulta web (responde XML)
-$requestUrl = $host . "consulta_web.php?_qf_consultaWeb_consulta=" 
-    . "Consulta&mostrar=relato&m_ubicacion=1&concoordenadas=1"; 
+$requestUrl = $host . "consulta_web.php?_qf_consultaWeb_consulta="
+    . "Consulta&mostrar=relato&m_ubicacion=1&concoordenadas=1";
 // applicar filtros
-$requestUrl .= (!empty($filtro['desde'])) ? 
-    "&fini[d]=" . substr($filtro['desde'], -2) 
-    . "&fini[M]=" . substr($filtro['desde'], 5, 2) 
+$requestUrl .= (!empty($filtro['desde'])) ?
+    "&fini[d]=" . substr($filtro['desde'], -2)
+    . "&fini[M]=" . substr($filtro['desde'], 5, 2)
     . "&fini[Y]=" . substr($filtro['desde'], 0, 4) : "";
-$requestUrl .= (!empty($filtro['hasta'])) ? 
-    "&ffin[d]=" . substr($filtro['hasta'], -2) 
-    . "&ffin[M]=" . substr($filtro['hasta'], 5, 2) 
+$requestUrl .= (!empty($filtro['hasta'])) ?
+    "&ffin[d]=" . substr($filtro['hasta'], -2)
+    . "&ffin[M]=" . substr($filtro['hasta'], 5, 2)
     . "&ffin[Y]=" . substr($filtro['hasta'], 0, 4) : "";
-$requestUrl .= (!empty($filtro['departamento'])) ? 
+$requestUrl .= (!empty($filtro['departamento'])) ?
     "&id_departamento=" . $filtro['departamento'] : "";
-$requestUrl .= (!empty($filtro['prresp'])) ? 
+$requestUrl .= (!empty($filtro['prresp'])) ?
     "&presponsable=" . $filtro['prresp'] : "";
-$requestUrl .= (!empty($filtro['tvio'])) ? 
+$requestUrl .= (!empty($filtro['tvio'])) ?
     "&tipo_violencia=" . $filtro['tvio'] : "";
 //trigger_error($requestUrl);
 if (($ca = file_get_contents($requestUrl)) === false) {
@@ -81,7 +81,7 @@ foreach ($xmlSivel->relato as $relato) {
     }
 }
 // generar JSON
-header("Content-type: application/json"); 
+header("Content-type: application/json");
 if (count($casos) > 0) {
     echo json_encode($casos);
 } else {

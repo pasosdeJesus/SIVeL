@@ -96,7 +96,7 @@ class DataObjects_Tviolencia extends DataObjects_Basica
      */
     function getfechadeshabilitacion($valor)
     {
-        $this->fechadeshabilitacion = ($valor == '0000-00-00') 
+        $this->fechadeshabilitacion = ($valor == '0000-00-00')
             ? 'null' : $valor;
     }
 

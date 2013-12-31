@@ -8,7 +8,7 @@
  * @category  SIVeL
  * @package   SIVeL
  * @author    Luca Urech <lucaurech@yahoo.de>
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org> 
+ * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2011 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * Acceso: CONSULTA PÚBLICA
@@ -21,7 +21,7 @@ require_once "mapag_misc.php";
 $host = determina_host();
 
 if (!isset($_GET['codigo'])) {
-    header("Content-type: application/json"); 
+    header("Content-type: application/json");
     echo "{}";
     return;
 }
@@ -29,7 +29,7 @@ $id_caso = (int) $_GET['codigo'];
 
 $requestUrl = $host . "/consulta_web.php?_qf_consultaWeb_consulta=Consulta"
     . "&mostrar=relato&caso_memo=1&m_victimas=1&m_presponsables=1"
-    . "&m_ubicacion=1&m_tipificacion=1&id_casos=" . $id_caso; 
+    . "&m_ubicacion=1&m_tipificacion=1&id_casos=" . $id_caso;
 
 // generar documento JSON
 if (!empty($id_caso) && $id_caso != 0) {
@@ -50,9 +50,9 @@ if (!empty($id_caso) && $id_caso != 0) {
     $victimas = array();
     foreach ($xmlSivel->relato->persona as $persona) {
         if (!empty($persona->nombre)) {
-            $victimas[(string)$persona->id_persona] 
+            $victimas[(string)$persona->id_persona]
                 = trim(
-                    trim((string)$persona->nombre) . " " 
+                    trim((string)$persona->nombre) . " "
                     . trim((string)$persona->apellido)
                 );
         }
@@ -72,7 +72,7 @@ if (!empty($id_caso) && $id_caso != 0) {
     );
 }
 
-header("Content-type: application/json"); 
+header("Content-type: application/json");
 echo json_encode($rta);
 
 ?>

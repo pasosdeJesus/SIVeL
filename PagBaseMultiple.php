@@ -375,7 +375,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
     {
         //echo "OJO PagBaseMultiple::compara(db, r, $id1, $id2, {";
         //print_r($a); echo "})<br>";
-        if ($cls == null || (is_array($cls) 
+        if ($cls == null || (is_array($cls)
             && count($cls) == 1 && current($cls) == 'caso_contexto')
         ) {
             $cls = array('Contextos' => array('caso_contexto', 'id_contexto'),
@@ -485,7 +485,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
                 list($cl, $ck, $clsol) = $clm;
             }
             //echo "OJO cl=$cl, ck=$ck,clsol=$clsol<br> ";
-            if ($idn == $id1 && isset($sol[$clsol][$ck]) 
+            if ($idn == $id1 && isset($sol[$clsol][$ck])
                 && $sol[$clsol][$ck] == 1
             ) {
                 //echo "OJO saltando cuando nuevo es 1";

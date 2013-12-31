@@ -23,7 +23,13 @@
 require_once "Auth.php";
 require_once "DB.php";
 require_once "HTML/Javascript.php";
-require_once "confv.php";
+if (!file_exists(dirname(__FILE__) . "/confv.php")) {
+    die(
+        "No existe archivo confv.php.\n"
+        . "Configure desde interprete de comandos con ./conf.sh"
+    );
+}
+require_once (dirname(__FILE__) . "/confv.php");
 
 
 /**
@@ -93,10 +99,10 @@ function idioma($l = "es_CO")
     bind_textdomain_codeset($td, 'UTF-8');
     textdomain($td);
     if ($l == "en_US" && "Fuente" == _("Fuente")) {
-        echo 
+        echo
             htmlentities(
                 "Error al inicializar idioma $l", ENT_COMPAT, 'UTF-8'
-            ) 
+            )
             . "<br>";
         debug_print_backtrace();
         die();
@@ -151,7 +157,7 @@ function no_login_function()
 function saca_opciones($usuario, &$db, &$op, &$rol)
 {
     $q = "SELECT rol FROM usuario " .
-        "WHERE id='" .  $usuario . "';";
+        "WHERE nusuario='" .  $usuario . "';";
     $result = hace_consulta_aut($db, $q, true);
     $row = array();
     if ($result->fetchInto($row)) {
@@ -253,16 +259,17 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
     $params = array(
         "dsn" => $dsn,
         "table" => "usuario",
-        "usernamecol" => "id",
+        "usernamecol" => "nusuario",
         "passwordcol" => "password",
         "cryptType" => 'sha1',
+        "db_where" => 'fechadeshabilitacion IS NULL'
     );
     $a = new Auth("DB", $params, "login_function");
     $a->setSessionName($snru);
-    //echo "<hr>OJO autentica_usuario $opcion Auth sesion:"; 
+    //echo "<hr>OJO autentica_usuario $opcion Auth sesion:";
     //print_r($a->session); echo "<br>";
     $a->start();
-    //echo "OJO snru=$snru"; 
+    //echo "OJO snru=$snru";
     if ($a->checkAuth()) {
         ini_set('session.cookie_httponly', true);
         ini_set('session.cookie_secure', true);
@@ -276,7 +283,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         //echo "<script>alert(document.cookie);</script>";
         $usuario = $a->getUsername();
         if (!isset($_SESSION['opciones']) || count($_SESSION['opciones']) == 0
-            || !isset($_SESSION['id_funcionario'])
+            || !isset($_SESSION['id_usuario'])
         ) {
             $op = array();
             $rol = -1;
@@ -292,17 +299,17 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
                     "¿seguro la base está bien inicializada?";
             }
             $_SESSION['opciones'] = $op;
-            $q = "SELECT id FROM funcionario " .
-                "WHERE nombre='" . $usuario . "';";
+            $q = "SELECT id FROM usuario " .
+                "WHERE nusuario='" . $usuario . "';";
             $result = hace_consulta_aut($db, $q);
             $row = array();
             if ($result->fetchInto($row)) {
                 $idf = $row[0];
             }
-            $_SESSION['id_usuario'] = $usuario;
-            $_SESSION['id_funcionario'] = $idf;
+            $_SESSION['id_nusuario'] = $usuario;
+            $_SESSION['id_usuario'] = $idf;
             $q = "SELECT idioma FROM usuario " .
-                "WHERE id='" . $usuario . "';";
+                "WHERE nusuario = '" . $usuario . "';";
             $result = hace_consulta_aut($db, $q, false);
             $row = array();
             if (!PEAR::isError($result) && $result->fetchInto($row)) {
@@ -398,8 +405,8 @@ function cierra_sesion($dsn)
     $nv = "_auth_" . nom_sesion();
     unset($_SESSION[$nv]);
     unset($_SESSION['_authession']);
-    unset($_SESSION['id_funcionario']);
     unset($_SESSION['id_usuario']);
+    unset($_SESSION['id_nusuario']);
     unset($_SESSION['opciones']);
     $a->logout();
     session_write_close();

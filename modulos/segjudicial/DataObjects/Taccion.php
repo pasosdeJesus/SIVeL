@@ -61,7 +61,7 @@ class DataObjects_Taccion extends DataObjects_Basica
     );
 
     /**
-     * Retorna valor SIN INFORMACION 
+     * Retorna valor SIN INFORMACION
      *
      * @return integer valor SIN INFORMACION
      */

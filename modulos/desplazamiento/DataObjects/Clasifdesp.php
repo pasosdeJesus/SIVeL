@@ -33,7 +33,7 @@ require_once 'DataObjects/Basica.php';
  */
 class DataObjects_Clasifdesp extends DataObjects_Basica
 {
-    var $__table = 'clasifdesp';                       
+    var $__table = 'clasifdesp';
 
     /**
      * Constructora

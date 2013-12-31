@@ -11,7 +11,7 @@ SELECT setval('filiacion_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(
 SELECT setval('iglesia_seq', MAX(id)) FROM (SELECT 1000 as id UNION SELECT MAX(id) FROM iglesia) AS s;
 SELECT setval('frontera_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM frontera) AS s;
 SELECT setval('fotra_seq', MAX(id)) FROM fotra;
-SELECT setval('funcionario_seq', MAX(id)) FROM funcionario;
+SELECT setval('usuario_seq', MAX(id)) FROM usuario;
 SELECT setval('grupoper_seq', MAX(id)) FROM grupoper;
 SELECT setval('iglesia_seq', MAX(id)) FROM (SELECT 1000 as id UNION SELECT MAX(id) FROM iglesia) AS s;
 SELECT setval('intervalo_seq', MAX(id)) FROM intervalo;

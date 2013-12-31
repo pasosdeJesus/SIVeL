@@ -37,7 +37,7 @@ $GLOBALS['m_opcion'][46] = array(
 $GLOBALS['m_opcion'][47] = array(
     'nombre' => _('Revista Memo Bélicas'),
     'idpapa' => 40,
-    'url' => 'consulta_web?mostrar=revista&categoria=belicas&' 
+    'url' => 'consulta_web?mostrar=revista&categoria=belicas&'
     . 'sincampos=caso_id,m_victimas,m_presponsables,'
     . 'm_tipificacion,m_fuentes'
 );

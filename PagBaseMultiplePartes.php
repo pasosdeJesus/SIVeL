@@ -1,7 +1,7 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Pestaña con siguiente/anterior y partes del multi-formulario para 
+ * Pestaña con siguiente/anterior y partes del multi-formulario para
  * capturar caso (captura_caso.php)
  *
  * PHP version 5
@@ -64,7 +64,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
 
     /** Titulo que aparecerá en formulario */
     var $titulo = 'Tabla Principal';
-    
+
     /** Titulo que aparecerá en Tablas Básicas*/
     const TITULO = 'Tabla Principal';
 
@@ -97,7 +97,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $bcm = "b" . $cll::CLASEMODELO;
         $ll = $cll::LLAVECOMP;
         $a = array(
-            $this->$bcm->_do->id_caso, 
+            $this->$bcm->_do->id_caso,
             $this->$bcm->_do->$ll
         );
 
@@ -125,9 +125,9 @@ class PagBaseMultiplePartes extends PagBaseMultiple
             for ($i = 0; $i < 2; $i++) {
                 foreach ($partes as $t) {
                     $nb = 'b' . $t;
-                    if (isset($this->$nb->_do->id_caso) 
+                    if (isset($this->$nb->_do->id_caso)
                         && isset($this->$nb->_do->$ll)
-                    ) { 
+                    ) {
                         $this->$nb->_do->delete();
                     }
                 }
@@ -262,7 +262,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
             $nf = 'f' . $t;
             $eti = isset($GLOBALS['etiqueta'][$t]) ?
                 $GLOBALS['etiqueta'][$t] : '';
-            if ($eti != '') { 
+            if ($eti != '') {
                 $this->addElement('header', $t, $eti);
             }
             $this->$nb->createSubmit = 0;
@@ -293,7 +293,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         }
     }
 
-     
+
     /**
      * Elimina clasemodelo
      *
@@ -315,10 +315,10 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $q = "DELETE FROM $cm WHERE id_caso={$idcaso}";
         $result = hace_consulta($db, $q);
     }
-    
-    /** 
+
+    /**
      * eliminaDep($db, $idcaso) elimina datos de la base $db presentados
-     * en este formulario, que dependen del caso $idcaso 
+     * en este formulario, que dependen del caso $idcaso
      *
      * @param object  &$db    Conexión a base
      * @param integer $idcaso Identificación del caso
@@ -386,7 +386,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $cpartes = $cll::PARTES;
         $bcm = "b" . $cm;
         $es_vacio = (!isset($valores[$ll])
-            || $valores[$ll] === '' 
+            || $valores[$ll] === ''
         );
 
         if ($es_vacio) {
@@ -409,13 +409,13 @@ class PagBaseMultiplePartes extends PagBaseMultiple
             ." AND $ll='$vll'";
         $nr = (int)$db->getOne($q);
         //echo "<hr>OJO q=$q, nr=$nr<br>";
-        if ($this->$bcm->_do->$ll == null 
+        if ($this->$bcm->_do->$ll == null
             || $this->$bcm->_do->$ll == ''
         ) {
             if ($nr > 0) {
                 error_valida(
                     _('Ya había una') . " $cm " . _('con la') . " $ll "
-                    . _('dada'), 
+                    . _('dada'),
                     $valores
                 );
                 return false;
@@ -430,7 +430,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                 DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEUPDATE
             );
         }
- 
+
         $ret = $this->process(
             array(&$this->$bcm, 'processForm'), false
         );
@@ -455,7 +455,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                     $vk[$k] = valor_fb2do(
                         $valores[$k], $this->$nb->_do->__table, $k, $tab
                     );
-                } 
+                }
             }
             if (!isset($this->partesmulti[$t])) {
                 $this->$nb->forceQueryType(
@@ -483,7 +483,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                     //echo "OJO 3 procesando<br>";
                     if (!isset($otratabla) || $otratabla == $t) {
                         $ret = $this->process(
-                            array(&$this->$nb, 'processForm'), 
+                            array(&$this->$nb, 'processForm'),
                             false
                         );
                     }
@@ -509,7 +509,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                 die($ret->getMessage());
             }
         }
-        caso_funcionario($idcaso);
+        caso_usuario($idcaso);
         return  $ret;
     }
 
@@ -543,8 +543,8 @@ class PagBaseMultiplePartes extends PagBaseMultiple
     }
 
 
-    /** 
-     * Extrae tablaprincipal de un caso y retorna su información en 
+    /**
+     * Extrae tablaprincipal de un caso y retorna su información en
      * vectores
      *
      *  @param integer $idcaso Id. del Caso
@@ -558,8 +558,8 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $cll = get_called_class();
         $ll = $cll::LLAVECOMP;
         $cm = $cll::CLASEMODELO;
-        $q = "SELECT $ll FROM $cm WHERE " 
-            . "$cm.id_caso='" . (int)$idcaso 
+        $q = "SELECT $ll FROM $cm WHERE "
+            . "$cm.id_caso='" . (int)$idcaso
             . "' ORDER BY $ll DESC";
         $result = hace_consulta($db, $q);
         $row = array();
@@ -621,7 +621,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         PagBaseMultiple::compara(
             $db, $r, $id1, $id2,
             array(
-                'BaseMultiplePartes' => 
+                'BaseMultiplePartes' =>
                 array('basemultiplepartes', 'fechaatencion')
             )
         );

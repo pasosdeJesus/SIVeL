@@ -63,7 +63,7 @@ class VerAnexo extends HTML_QuickForm_Action
                 if (!file_exists($arch)) {
                     die("No existe el archivo especificado");
                 }
-                $nombre = substr($nombre, strlen($inin));  
+                $nombre = substr($nombre, strlen($inin));
                 // Eliminado número de caso
                 $ps = (int)strpos($nombre, "_");
                 if ($ps < 1) {
@@ -315,7 +315,7 @@ class PagAnexo extends PagBaseMultiple
             $this->banexo->dateToDatabaseCallback,
             var_escapa($valores['fecha'], $db)
         );
-        $this->banexo->_do->descripcion 
+        $this->banexo->_do->descripcion
             = var_escapa($valores['descripcion'], $db);
 
         if (!isset($this->banexo->_do->id) || $this->banexo->_do->id <= 0) {
@@ -353,7 +353,7 @@ class PagAnexo extends PagBaseMultiple
         if (PEAR::isError($ret)) {
             die($ret->getMessage());
         }
-        caso_funcionario($_SESSION['basicos_id']);
+        caso_usuario($_SESSION['basicos_id']);
         return  $ret;
     }
 

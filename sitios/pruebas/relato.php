@@ -27,7 +27,7 @@ require_once "misc.php";
 /*** Validación y Relato ***/
 
 hace_consulta(
-    $db, "INSERT INTO comunidad_rangoedad " 
+    $db, "INSERT INTO comunidad_rangoedad "
     . "(id_caso, id_grupoper, id_rango) VALUES ('1', '1', '6');", false, false
 );
 

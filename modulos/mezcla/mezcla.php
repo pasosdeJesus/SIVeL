@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2011 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: victimasrep.php,v 1.1 2012/01/11 17:41:30 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
@@ -36,7 +35,7 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
 
 /**
  * Inserta un registro de la tabla $t en la base de datos $db con
- * estructura $estbd a partir de un DataObject $objd y una especificación 
+ * estructura $estbd a partir de un DataObject $objd y una especificación
  * de sus campos por cambiar $camposcamb.
  *
  * @param object $db         Conexión a base de datos
@@ -52,7 +51,7 @@ function inserta_con_plantilla($db, $estbd, $t, $camposcamb, $camposelim, $objd)
 {
     //echo "OJO inserta_con_plantilla(db, estbd, $t, camposcamb, camposelim, objd)<br>"; print_r($camposelim);
     $sep = $nc = $vc = "";
-    foreach($estbd[$t] as $c => $tc) {
+    foreach ($estbd[$t] as $c => $tc) {
         if (!isset($camposelim[$c])) {
             //echo "OJO c=$c, tc=$tc<br>";
             $nc .= "$sep$c";
@@ -73,23 +72,24 @@ function inserta_con_plantilla($db, $estbd, $t, $camposcamb, $camposelim, $objd)
     sin_error_pear($r);
 }
 
-/** 
+/**
  * Encuentra referencia inicial de una referencia $r de la tabla $t
  */
-function ref_inicial($enl, $t, $r) {
+function ref_inicial($enl, $t, $r)
+{
     //#echo "OJO ref_inicial(enl, $t, $r)";
     if (!isset($enl[$t])) {
         //echo "OJO caso 1";
         return $r;
     }
-    foreach($enl[$t] as $ct => $rotra) {
+    foreach ($enl[$t] as $ct => $rotra) {
         //echo "OJO ct=$ct, rotra=$rotra";
         if (strpos($ct, ",")) {
             $mct = explode(",", $ct);
             list($nt, $lc) = explode(":", $rotra);
             $mrotra = explode(",", $lc);
             //echo "OJO nt=$nt ";
-            for($i = 0; $i < count($mct); $i++) {
+            for ($i = 0; $i < count($mct); $i++) {
                 //echo "OJO i=$i, mct[i]={$mct[$i]}, mrotra[i]={$mrotra[$i]}<br>";
                 if ($mrotra[$i] == $r) {
                     return ref_inicial($enl, $nt, $mrotra[$i]);
@@ -102,7 +102,7 @@ function ref_inicial($enl, $t, $r) {
             if ($nc == $ct) {
                 if (isset($enl[$nt][$nc])) {
                     $ri = ref_inicial($enl, $nt, $enl[$nt][$nc]);
-                    if ($ri == "") { 
+                    if ($ri == "") {
                         $ri = $rotra;
                     }
                 } else {
@@ -132,15 +132,15 @@ function subizq_hasta_car($s, $c)
     $p = strpos($s, $c);
     $r = $s;
     if ($p !== false) {
-        $r = substr($s, 0, $p); 
+        $r = substr($s, 0, $p);
     }
     return $r;
 }
 
-/** 
+/**
  * Mezcla información del caso id2 dentro de id1
  * o dejando en observaciones cuando no puede
- * 
+ *
  * @param integer $id1    Primer caso
  * @param integer $id2    Segundo caso
  * @param bool    $elim2  Elimina segundo tras mezclar?
@@ -151,7 +151,8 @@ function subizq_hasta_car($s, $c)
  *
  * @return bool Si logra completar mezcla
  */
-function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
+function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep)
+{
     $dc = objeto_tabla('caso');
     $db = $dc->getDatabaseConnection();
     $estbd = parse_ini_file(
@@ -167,11 +168,11 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
     act_globales();
     $basicas = html_menu_toma_url($GLOBALS['menu_tablas_basicas']);
 
-    // Ordenamos tablas que referencian caso:id por su número de 
+    // Ordenamos tablas que referencian caso:id por su número de
     // llaves primarias, para comenzar por las que tienen menos.
     $ref = array();
-    foreach($enl as $t => $ct) {
-        foreach($ct as $c => $rl) {
+    foreach ($enl as $t => $ct) {
+        foreach ($ct as $c => $rl) {
             list($tab, $cam) = explode(":", $rl);
             //echo " OJO <br> t=$t, c=$c, tab=$tab, cam=$cam ";
             //echo " OJO estbd[tab__keys]= ";
@@ -210,7 +211,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
     sin_error_pear($do1);
     $fecha = $do1->fecha;
     unset($ref['caso:id']['caso']);
-    
+
     //echo "OJO Víctima<br>";
     $mapk = array();
     $do1 = objeto_tabla('victima');
@@ -260,7 +261,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
             //echo "OJO Inserta persona_trelacion";
             inserta_con_plantilla($db, $estbd, 'persona_trelacion',
                 array(
-                    'persona1' => $idp1, 
+                    'persona1' => $idp1,
                     'persona2' => $do2->persona2,
                 ), array(), $do2
             );
@@ -300,7 +301,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
     $do2->id_caso = $id2;
     $do2->find();
     sin_error_pear($do2);
-    while($do2->fetch()) {
+    while ($do2->fetch()) {
         $do1 = objeto_tabla('caso_presponsable');
         $do1->id_caso = $id1;
         $do1->id_presponsable = $do2->id_presponsable;
@@ -314,9 +315,9 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
             } else {
                 $m = (int)$m;
             }
-            inserta_con_plantilla($db, $estbd, 'caso_presponsable', 
+            inserta_con_plantilla($db, $estbd, 'caso_presponsable',
                 array(
-                    'id_caso' => $id1, 
+                    'id_caso' => $id1,
                     'id' => $m
                 ), array(), $do2
             );
@@ -333,7 +334,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
     $do2->id_caso = $id2;
     $do2->find();
     sin_error_pear($do2);
-    while($do2->fetch()) {
+    while ($do2->fetch()) {
         $do1 = objeto_tabla('caso_categoria_presponsable');
         $do1->id_caso = $id1;
         $do1->id_presponsable = $do2->id_presponsable;
@@ -343,9 +344,9 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
             /*$do2->id_caso = $id1;
             $do2->id = null;
             $do2->insert(); */
-            inserta_con_plantilla($db, $estbd, 'caso_categoria_presponsable', 
+            inserta_con_plantilla($db, $estbd, 'caso_categoria_presponsable',
                 array(
-                    'id_caso' => $id1, 
+                    'id_caso' => $id1,
                     'id' => $mapk['caso_presponsable'][$do2->id],
                 ), array(),
                 $do2
@@ -363,7 +364,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
     $do2->id_caso = $id2;
     $do2->find();
     sin_error_pear($do2);
-    while($do2->fetch()) {
+    while ($do2->fetch()) {
         if (isset($mapk['persona'][$do2->id_persona])) {
             $do1 = objeto_tabla('acto');
             $dot1 = objeto_tabla('actoreiniciar');
@@ -374,9 +375,9 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
             $do1->find();
             if (!$do1->fetch()) {
                 //$do1->insert();
-                inserta_con_plantilla($db, $estbd, 'acto', 
+                inserta_con_plantilla($db, $estbd, 'acto',
                     array(
-                        'id_caso' => $id1, 
+                        'id_caso' => $id1,
                         'id_persona' => $mapk['persona'][$do2->id_persona],
                     ), array(),
                     $do2
@@ -392,13 +393,13 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
             }
         }
     }
-    foreach(array('presponsable', 'caso', 'persona', 'categoria') as $t) {
+    foreach (array('presponsable', 'caso', 'persona', 'categoria') as $t) {
         unset($ref["$t:id"]['acto']);
         unset($ref["$t:id"]['actoreiniciar']);
     }
 
     // Otras tablas relacionadas con caso y persona
-    foreach($ref['persona:id'] as $t => $v) {
+    foreach ($ref['persona:id'] as $t => $v) {
         if (isset($ref['caso:id'][$t])) {
             unset($ref['persona:id'][$t]);
             //echo "OJO Con caso y persona $t<br>";
@@ -414,11 +415,11 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
             while ($do2->fetch()) {
                 $do1 = objeto_tabla($t);
                 $do1->id_caso = $id1;
-                $do1->id_persona = isset($mapk['persona'][$do2->id_persona]) ? 
+                $do1->id_persona = isset($mapk['persona'][$do2->id_persona]) ?
                     $mapk['persona'][$do2->id_persona] : $do2->id_persona;
                 $ck = $estbd["{$t}__keys"];
                 $llavmos = $sep = "";
-                foreach($ck as $k => $kb)  {
+                foreach ($ck as $k => $kb) {
                     if ($k != 'id_caso' && $k != 'id_persona') {
                         $do1->$k= $do2->$k;
                         $llavmos .= "$sep{$k}:{$do2->$k}";
@@ -433,10 +434,10 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
                 } else {
                     inserta_con_plantilla($db, $estbd, $t,
                         array(
-                            'id_caso' => $id1, 
-                            'id_persona' => 
-                            isset($mapk['persona'][$do2->id_persona]) ? 
-                            $mapk['persona'][$do2->id_persona] : 
+                            'id_caso' => $id1,
+                            'id_persona' =>
+                            isset($mapk['persona'][$do2->id_persona]) ?
+                            $mapk['persona'][$do2->id_persona] :
                             $do2->id_persona,
 
                         ), array(), $do2
@@ -449,7 +450,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
 
 
     //Otras tablas relacionadas con caso
-    foreach($ref['caso:id'] as $t => $n) {
+    foreach ($ref['caso:id'] as $t => $n) {
         //echo "OJO Otro t=$t<br>";
         $do2 = objeto_tabla($t);
         $do2->id_caso = $id2;
@@ -459,7 +460,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
             $do1->id_caso = $id1;
             $ck = $estbd["{$t}__keys"];
             $llavmos = $sep = "";
-            foreach($ck as $k => $kb)  {
+            foreach ($ck as $k => $kb) {
                 if ($k != 'id_caso' && $k != 'id') {
                     $do1->$k= $do2->$k;
                     $llavmos .= "$sep{$k}:{$do2->$k}";
@@ -479,7 +480,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
                 }
                 inserta_con_plantilla($db, $estbd, $t,
                     array(
-                        'id_caso' => $id1, 
+                        'id_caso' => $id1,
                     ), $pe, $do2
                 );
                 $obs .= " Asociada(g) $t({$llavmos})";
@@ -493,7 +494,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
                 $rdep = $ddep->nombre;
             }
         }
-        foreach($estbd[$t] as $c => $tip) {
+        foreach ($estbd[$t] as $c => $tip) {
             if (isset($enl[$t][$c])) {
                 unset($ref[$enl[$t][$c]][$t]);
             }
@@ -501,10 +502,10 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
         unset($ref['caso:id'][$t]);
     }
     //echo "OJO Proceso<br>";
-    foreach($ref['proceso:id'] as $t => $n) {
+    foreach ($ref['proceso:id'] as $t => $n) {
         //echo "OJO Proceso t=$t<br>";
         if (isset($mapk['proceso'])) {
-            foreach($mapk['proceso'] as $la => $ln) {
+            foreach ($mapk['proceso'] as $la => $ln) {
                 //echo "OJO la=$la, ln=$ln<br>";
                 $do2 = objeto_tabla($t);
                 $do2->id_proceso = $la;
@@ -513,7 +514,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
                     //echo "Insertando con plantilla ln=$ln<br>";
                     inserta_con_plantilla($db, $estbd, $t,
                         array(
-                            'id_proceso' => $ln, 
+                            'id_proceso' => $ln,
                         ), array('id' => 'E'), $do2
                     );
                 }
@@ -534,13 +535,13 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep) {
             $r = hace_consulta($db, $q);
         }
     }
-    return true;    
+    return true;
 }
 
 
 /**
  * Punto de entrada a formulario
- * 
+ *
  * @param string $dsn URL a base de datos
  *
  * @return void
@@ -549,7 +550,7 @@ function muestra($dsn)
 {
     global $db;
 
-    $t = "Mezcla " 
+    $t = "Mezcla "
         . date("Y-m-d H:m");
     encabezado_envia($t);
     echo '<table width="100%"><td style="white-space: ' .
@@ -559,7 +560,7 @@ function muestra($dsn)
     echo '</div></b></td></table>';
 
     $par = array();
-    foreach($_POST as $cid1 => $on) {
+    foreach ($_POST as $cid1 => $on) {
         $pd = explode("_", $cid1);
         if (isset($pd[1]) && isset($pd[2])) {
             if ((int)$pd[1] <= 0) {
@@ -585,14 +586,14 @@ function muestra($dsn)
             $par[] = array($id1, $id2);
         }
     }
- 
+
     $tmez = 0;
     $mezcladoen = array();
     echo "<p>Mezclando " . count($par) . " parejas de casos</p><p>";
     echo "<center><table border='1'>";
     echo "<tr><th>Caso que queda</th><th>Caso eliminado</th><th>Observaciones</th></tr>";
-    foreach($par as $p) {
-        $id1 = $p[0]; 
+    foreach ($par as $p) {
+        $id1 = $p[0];
         $id2 = $p[1];
         if (isset($mezcladoen[$id2])) {
             continue;
@@ -607,14 +608,14 @@ function muestra($dsn)
         }
         $dec->id_caso = $id1;
         $dec->id_etiqueta = $idet;
-        $dec->id_funcionario = $_SESSION['id_funcionario'];
+        $dec->id_usuario = $_SESSION['id_usuario'];
         $dec->fecha = @date('Y-m-d');
         $r1 = ResConsulta::reporteRelato(
-            $id1, $db, 
+            $id1, $db,
             $GLOBALS['cw_ncampos'] + array('m_fuentes' => 'Fuentes')
         );
         $r2 = ResConsulta::reporteRelato(
-            $id2, $db, 
+            $id2, $db,
             $GLOBALS['cw_ncampos'] + array('m_fuentes' => 'Fuentes')
         );
         $obs1 = "Caso original ($id1): " . strip_tags($r1)
@@ -623,7 +624,7 @@ function muestra($dsn)
         echo "<tr>";
         echo "<td><a href='captura_caso.php?modo=edita&id=$id1'>$id1</a></td>";
         echo "<td>$id2</td>";
-/*        for($i=2; $i<count($row); $i++) {
+/*        for ($i=2; $i<count($row); $i++) {
             echo "<td>{$row[$i]}</td>";
 } */
         $obs2 = "";
@@ -645,8 +646,8 @@ function muestra($dsn)
     echo "<center><table border='1'>";
     echo "<tr><th>Código inicial</th><th>Mezclado en</th><th>Víctima(s)</th><th>Fecha</th><th>Ubicación</th></tr>";
     ksort($mezcladoen);
-    foreach($mezcladoen as $id2 => $l) {
-        $id1 = $l[0]; 
+    foreach ($mezcladoen as $id2 => $l) {
+        $id1 = $l[0];
         $rvic = $l[1];
         $rfec = $l[2];
         $rdep = $l[3];

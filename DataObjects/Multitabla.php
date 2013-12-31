@@ -119,24 +119,34 @@ class BaseElimina extends HTML_QuickForm_Action
  */
 class DataObjects_Multitabla extends DB_DataObject_SIVeL
 {
-    var $__table = '';                       
+    var $__table = '';
 
-    /** Usada a la izquierda de la tabla */
-    var $nom_tabla = '';
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        parent::__construct();
 
-    /** 
-     * Llaves que son compartidas con la pestaña, 
+        /** Usada a la izquierda de la tabla */
+        $this->nom_tabla = _('Multitabla');
+    }
+
+
+    /**
+     * Llaves que son compartidas con la pestaña,
      * e.g id_caso y fechaatencion
      */
     var $llavescomunes = array();
 
-    /** 
+    /**
      * Llaves para eliminar
      * e.g fechaatencion e id_ayudaestado
      */
     var $llaveselimina = array();
 
-    /** 
+    /**
      * Campos asociados a tablas básicas que deben mostrarse como cuadros
      * de selección
      * e.g id_ayudaestado => ayudaestado
@@ -146,17 +156,8 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
     /** Nombre del botón para eliminar */
     var $botonelimina = 'eliminaayudaestado';
 
-    /** Nombre del botón para añadir */ 
+    /** Nombre del botón para añadir */
     var $botonagrega = 'agregaayudaestado';
-
-    /**
-     * Constructora
-     * return @void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /** Campos por incluir en la tabla */
     var $fb_fieldsToRender = array();
@@ -188,7 +189,7 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
     {
         parent::postGenerateForm($form, $formbuilder);
 
-        $t = '<table id="tabla' . $this->__table 
+        $t = '<table id="tabla' . $this->__table
             . '" width="100%"><thead><tr>';
         foreach ($this->fb_fieldsToRender as $c) {
             $t .= "<th>" . $this->fb_fieldLabels[$c] . "</th>";
@@ -210,17 +211,17 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
                 if (isset($this->camposselect[$ca])) {
                     $dd = $p->getLink($ca);
                     $t .= $dd->nombre;
-                } else if (isset($this->fb_booleanFields) 
+                } else if (isset($this->fb_booleanFields)
                     && in_array($c, $this->fb_booleanFields)
                 ) {
                     $t .= $p->$ca === true || $p->$ca === 't' ? "Si" : "No";
                 } else {
                     $t .= $p->$ca;
                 }
-                $t .= "</td>"; 
+                $t .= "</td>";
             }
-            $t .= "<td><a href='{$_SERVER['PHP_SELF']}?" 
-                . $form->getButtonName($this->botonelimina) 
+            $t .= "<td><a href='{$_SERVER['PHP_SELF']}?"
+                . $form->getButtonName($this->botonelimina)
                 . "=";
             $sep = "";
             foreach ($this->llaveselimina as $k) {

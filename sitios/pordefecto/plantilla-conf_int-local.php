@@ -25,6 +25,6 @@ $GLOBALS['ficha_color_fondo'] = '#EEE';
  * Dejar '' si no hay
  * @global string $GLOBALS['centro_principal']
  */
-//$GLOBALS['centro_principal'] 
+//$GLOBALS['centro_principal']
 //  = 'sitios/muyparticular/centro_principal-local-' . $lang . ".html";
 

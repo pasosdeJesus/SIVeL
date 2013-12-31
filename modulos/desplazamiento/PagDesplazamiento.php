@@ -122,7 +122,7 @@ class PagDesplazamiento extends PagBaseMultiple
         ) {
             $ddesplazamiento->fechaexpulsion = null;
         } else {
-            $ddesplazamiento->fechaexpulsion 
+            $ddesplazamiento->fechaexpulsion
                 = $idf[$_SESSION[$this->pref.'_pag']];
             $ddesplazamiento->id_caso = $idcaso;
             $ddesplazamiento->find();
@@ -161,7 +161,7 @@ class PagDesplazamiento extends PagBaseMultiple
             'departamentodecl', new CamDepartamento('departamentodecl')
         );
         $this->addAction(
-            'municipiodecl', 
+            'municipiodecl',
             new CamMunicipio('departamentodecl', 'municipiodecl')
         );
         $this->addAction('siguiente', new Siguiente());
@@ -198,8 +198,8 @@ class PagDesplazamiento extends PagBaseMultiple
         );
         PagUbicacion::modCampos(
             $db, $this, 'departamentodecl', 'municipiodecl', null,
-            $this->bdesplazamiento->_do->departamentodecl, 
-            $this->bdesplazamiento->_do->municipiodecl, 
+            $this->bdesplazamiento->_do->departamentodecl,
+            $this->bdesplazamiento->_do->municipiodecl,
             null
         );
         $this->bdesplazamiento->createSubmit = 0;
@@ -251,10 +251,10 @@ class PagDesplazamiento extends PagBaseMultiple
     }
 
     /**
-     * Elimina un registro 
+     * Elimina un registro
      *
      * @param object $ddesplazamiento DataObject
-     * 
+     *
      * @return  void
      */
     function eliminaDesplazamiento($ddesplazamiento)
@@ -269,8 +269,8 @@ class PagDesplazamiento extends PagBaseMultiple
     }
 
     /**
-     * eliminaDep($db, $idcaso) elimina victimas de la base $db presentados 
-     * en este formulario, que dependen del caso $idcaso 
+     * eliminaDep($db, $idcaso) elimina victimas de la base $db presentados
+     * en este formulario, que dependen del caso $idcaso
      *
      * @param object &$db    Conexión a base de datos
      * @param int    $idcaso Id del Caso.
@@ -300,8 +300,8 @@ class PagDesplazamiento extends PagBaseMultiple
      */
     function procesa(&$valores)
     {
-        $fechaex = arr_a_fecha($valores['fechaexpulsion'], true); 
-        $fechall = arr_a_fecha($valores['fechallegada'], true); 
+        $fechaex = arr_a_fecha($valores['fechaexpulsion'], true);
+        $fechall = arr_a_fecha($valores['fechallegada'], true);
 
         $es_vacio = (!isset($valores['expulsion'])
                 || $valores['expulsion'] === ''
@@ -338,7 +338,7 @@ class PagDesplazamiento extends PagBaseMultiple
             . " AND fechaexpulsion='$fechaex';";
         $this->bdesplazamiento->useMutators = true;
         $nr = $db->getOne($q);
-        if ($this->bdesplazamiento->_do->fechaexpulsion == null 
+        if ($this->bdesplazamiento->_do->fechaexpulsion == null
             || $this->bdesplazamiento->_do->fechaexpulsion == ''
         ) {
             if ($nr > 0) {
@@ -359,7 +359,7 @@ class PagDesplazamiento extends PagBaseMultiple
                 DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEUPDATE
             );
         }
- 
+
         $ret = $this->process(
             array(&$this->bdesplazamiento, 'processForm'), false
         );
@@ -367,7 +367,7 @@ class PagDesplazamiento extends PagBaseMultiple
             die($ret->getMessage());
         }
 
-        caso_funcionario($idcaso);
+        caso_usuario($idcaso);
         return  $ret;
     }
 
@@ -389,7 +389,7 @@ class PagDesplazamiento extends PagBaseMultiple
 
     }
 
-    /** Extrae desplazamientos de un caso y retorna su información en 
+    /** Extrae desplazamientos de un caso y retorna su información en
      *  vectores
      *
      *  @param integer $idcaso Id. del Caso
@@ -400,8 +400,8 @@ class PagDesplazamiento extends PagBaseMultiple
      **/
     function extrae_desplazamientos($idcaso, &$db, &$idf)
     {
-        $q = "SELECT fechaexpulsion FROM desplazamiento WHERE " 
-            . "desplazamiento.id_caso='" . (int)$idcaso 
+        $q = "SELECT fechaexpulsion FROM desplazamiento WHERE "
+            . "desplazamiento.id_caso='" . (int)$idcaso
             . "' ORDER BY fechaexpulsion";
         $result = hace_consulta($db, $q);
         $row = array();

@@ -264,6 +264,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         }
         ksort($cataux);
         if ($pMuestra == "tabla") {
+            encabezado_envia('Reporte Consolidado');
             $this->depTabla($db, $cataux, $pResto, $ncol);
             echo "<p>" . _("Presuntos Responsables") . "<br>";
         }
@@ -315,9 +316,9 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 && $pFincdesde['d'] != '';
             if ($fhastallena || $fdesdellena) {
                 /* Se hace así porque puede haber casos que no
-                    tengan asociado funcionario --cuando vienen de otro
+                    tengan asociado usuario --cuando vienen de otro
                     banco (?), antiguos*/
-                $q = "SELECT MIN(fechainicio) FROM caso_funcionario " .
+                $q = "SELECT MIN(fechainicio) FROM caso_usuario " .
                     " WHERE id_caso='" . $row[0] . "';";
                 $rfc = hace_consulta($db, $q);
                 if ($rfc->fetchInto($minf)) {
@@ -542,6 +543,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         if ($pMuestra == "tabla") {
             echo "</tr>";
             echo "</table>";
+            pie_envia();
         } elseif ($pMuestra == 'csv') {
             echo "\n";
         } elseif ($pMuestra == 'latex') {
@@ -638,7 +640,7 @@ class PagConsolidado extends HTML_QuickForm_Page
             }
         }
 
-        if (isset($_SESSION['id_funcionario'])) {
+        if (isset($_SESSION['id_usuario'])) {
             $aut_usuario = "";
             include $_SESSION['dirsitio'] . "/conf.php";
             autentica_usuario($dsn, $aut_usuario, 0);

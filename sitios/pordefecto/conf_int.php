@@ -31,7 +31,7 @@ $accno = "Acceso no autorizado\n";
 /** Mensaje por presentar si se encuentran fallas ortográficas al validar
  * @global string $GLOBALS['MENS_ORTOGRAFIA']
  */
-$GLOBALS['MENS_ORTOGRAFIA'] 
+$GLOBALS['MENS_ORTOGRAFIA']
     = 'Las palabras que estén bien por favor agreguelas al diccionario (%l).';
 
 /** Mensaje por presentar en la página principal para indicar donde reportar fallas.
@@ -97,13 +97,13 @@ $GLOBALS['emisor_correo'] = 'bancodat@nocheyniebla.org';
  */
 $GLOBALS['validaciones_tipicas'] = array();
 
-/** Funciones para validar caso de manera más compleja que con 
+/** Funciones para validar caso de manera más compleja que con
  * validaciones_tipicas
  * @global string $GLOBALS['gancho_valida_caso']
  */
 $GLOBALS['gancho_valida_caso'] = array();
 
-/** Funciones para validar base de datos de manera más compleja que con 
+/** Funciones para validar base de datos de manera más compleja que con
  * validaciones_tipicas
  * @global string $GLOBALS['gancho_valida_base']
  */
@@ -126,7 +126,7 @@ $GLOBALS['pie_consulta_web'] = '';
  * @global string $GLOBALS['pie_consulta_web_publica']
  */
 $GLOBALS['pie_consulta_web_publica'] = '<div align="right">'
-    . '<a href="http://sivel.sourceforge.net/1.1/consultaweb.html">' 
+    . '<a href="http://sivel.sourceforge.net/1.1/consultaweb.html">'
     . _('Documentación') .'</a></div>';
 
 /** Cabezote para enviar correos desde consulta_web.
@@ -139,7 +139,7 @@ $GLOBALS['cabezote_consulta_web_correo'] = '';
  * Dejar '' si no hay
  * @global string $GLOBALS['pie_consulta_web_correo']
  */
-$GLOBALS['pie_consulta_web_correo'] = '<hr/><a href="consulta_web.php">' 
+$GLOBALS['pie_consulta_web_correo'] = '<hr/><a href="consulta_web.php">'
     . 'Consulta web</a>';
 
 /** Archivo HTML que se pone como cabezote (antes del menú) del menú principal
@@ -199,33 +199,33 @@ $GLOBALS['menu_tablas_basicas'] = array(
         array('title'=>_('Etnia'), 'url'=>'etnia', 'sub'=>null),
         array('title'=>_('Filiación'), 'url'=>'filiacion', 'sub'=>null),
         array('title'=>_('Iglesia'), 'url'=>'iglesia', 'sub'=>null),
-        array('title'=>_('Organización Social'), 
+        array('title'=>_('Organización Social'),
             'url'=>'organizacion', 'sub'=>null),
         array('title'=>_('Profesión'), 'url'=>'profesion', 'sub'=>null),
         array('title'=>_('Rango de Edad'), 'url'=>'rangoedad', 'sub'=>null),
-        array('title'=>_('Resultado Agresión'), 
+        array('title'=>_('Resultado Agresión'),
             'url'=>'resagresion', 'sub'=>null),
         array('title'=>_('Sector Social'), 'url'=>'sectorsocial', 'sub'=>null),
         array('title'=>_('Tipo de Relación'), 'url'=>'trelacion', 'sub'=>null),
-        array('title'=>_('Vínculo con el Estado'), 
+        array('title'=>_('Vínculo con el Estado'),
             'url'=>'vinculoestado', 'sub'=>null),
         ),
     ),
     array('title'=>_('Información caso'), 'url'=> null, 'sub' => array(
-        array('title'=>_('Tipo de Violencia'), 
+        array('title'=>_('Tipo de Violencia'),
             'url'=>'tviolencia', 'sub'=>null),
-        array('title'=>_('Supracategoria'), 
+        array('title'=>_('Supracategoria'),
             'url'=>'supracategoria', 'sub'=>null),
         array('title'=>_('Categoria'), 'url'=>'categoria', 'sub'=>null),
         array('title'=>_('Contexto'), 'url'=>'contexto', 'sub'=>null),
-        array('title'=>_('Presuntos Responsables'), 
+        array('title'=>_('Presuntos Responsables'),
             'url'=>'presponsable', 'sub'=>null),
         array('title'=>_('Antecedentes'), 'url'=>'antecedente', 'sub'=>null),
         array('title'=>_('Intervalo'), 'url'=>'intervalo', 'sub'=>null),
         ),
     ),
     array('title'=>_('Información Fuentes'), 'url'=> null, 'sub' => array(
-        array('title'=>_('Fuentes Frecuentes'), 
+        array('title'=>_('Fuentes Frecuentes'),
             'url'=>'ffrecuente', 'sub'=>null),
         ),
     ),

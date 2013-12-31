@@ -2690,7 +2690,108 @@ $$
     aplicaact($act, $idac, 'Función Soundex en Español');
 } 
 
+$idac = '1.2-fun';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "ALTER TABLE usuario DROP COLUMN diasedicion", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario RENAME id TO nusuario", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ADD column id INTEGER", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario 
+        ADD COLUMN fechacreacion DATE NOT NULL DEFAULT '2001-01-01'" , false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario " .
+        "ADD COLUMN fechadeshabilitacion DATE DEFAULT NULL " .
+        "CHECK (fechadeshabilitacion IS NULL OR " .
+        "fechadeshabilitacion >= fechacreacion)", false
+    );
+    hace_consulta(
+        $db, "UPDATE usuario set id=funcionario.id, fechadeshabilitacion=NULL 
+        FROM funcionario WHERE 
+        funcionario.nombre = usuario.nusuario", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO usuario (id, nusuario, password, nombre, descripcion, rol, idioma, fechadeshabilitacion) (SELECT id, nombre, '', nombre, '', 4, 'es_CO', current_date FROM funcionario WHERE nombre NOT IN (SELECT nusuario FROM usuario))", false
+    );
+    hace_consulta(
+        $db, "CREATE UNIQUE INDEX usuario_nusuario ON usuario USING btree (nusuario)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario DROP CONSTRAINT usuario_pkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ADD CONSTRAINT usuario_pkey
+        PRIMARY KEY (id)" 
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT caso_etiqueta_pkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_funcionario DROP CONSTRAINT caso_funcionario_pkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_funcionario DROP CONSTRAINT caso_funcionario_id_funcionario_fkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT caso_etiqueta_id_funcionario_fkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE funcionario DROP CONSTRAINT funcionario_pkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_funcionario RENAME TO caso_usuario", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_usuario RENAME id_funcionario TO id_usuario", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta RENAME id_funcionario TO id_usuario", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_usuario 
+        ADD CONSTRAINT caso_usuario_id_usuario_fkey 
+        FOREIGN KEY (id_usuario) REFERENCES usuario(id)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta
+        ADD CONSTRAINT caso_etiqueta_id_usuario_fkey
+        FOREIGN KEY (id_usuario) REFERENCES usuario(id)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta
+        ADD CONSTRAINT caso_etiqueta_pkey
+        PRIMARY KEY (id_caso, id_etiqueta, id_usuario, fecha)"
+    );
+    hace_consulta(
+        $db, "ALTER TABLE funcionario RENAME TO obsoleto_funcionario", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE obsoleto_funcionario DROP CONSTRAINT 
+        funcionario_nombre_key", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE obsoleto_funcionario ALTER COLUMN id 
+        SET DEFAULT NULL"
+    );
+    hace_consulta(
+        $db, "ALTER SEQUENCE funcionario_seq RENAME TO usuario_seq", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ALTER COLUMN id SET DEFAULT nextval('usuario_seq')"
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ALTER COLUMN rol SET DEFAULT '4'"
+    );
 
+
+    #aplicaact($act, $idac, 'Fusiona tablas usuario y funcionario');
+}
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;

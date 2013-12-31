@@ -38,7 +38,7 @@ require_once 'DataObjects/Victimacolectiva.php';
 require_once 'DataObjects/Sectorsocial.php';
 require_once 'DataObjects/Comunidad_sectorsocial.php';
 require_once 'DataObjects/Comunidad_profesion.php';
-require_once 'DataObjects/Caso_funcionario.php';
+require_once 'DataObjects/Caso_usuario.php';
 require_once 'DataObjects/Resagresion.php';
 require_once 'DataObjects/Filiacion.php';
 require_once 'DataObjects/Sectorsocial.php';
@@ -55,7 +55,7 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
     // @codingStandardsIgnoreStart
     require_once "$c.php";
     // @codingStandardsIgnoreEnd
-    
+
 }
 
 
@@ -269,7 +269,7 @@ class ResConsulta
     }
 
     /**
-     * Retorna cadena con ubicaciones como 2 columnas en HTML 
+     * Retorna cadena con ubicaciones como 2 columnas en HTML
      *
      * @param handel  &$db    Conexión a BD
      * @param integer $idcaso Id. del caso
@@ -295,8 +295,8 @@ class ResConsulta
         $cmun = "";
         $sep = "";
         foreach ($ndd as $k => $nd) {
-            $cdep = $sep . htmlentities(trim($nd), ENT_COMPAT, 'UTF-8');
-            $cmun = $sep . htmlentities(trim($ndm[$k]), ENT_COMPAT, 'UTF-8');
+            $cdep = $sep . htmlentities(trim($nd, ENT_COMPAT, 'UTF-8'), ENT_COMPAT, 'UTF-8');
+            $cmun = $sep . htmlentities(trim($ndm[$k], ENT_COMPAT, 'UTF-8'), ENT_COMPAT, 'UTF-8');
             $sep = "<br/>";
         }
         $vr = "$cmun</td><td valign='top'>$cdep";
@@ -372,7 +372,7 @@ class ResConsulta
             $sepm ="</td><td valign='top'>";
         } else {
             $sepm =" ";
-        } 
+        }
         while ($result->fetchInto($row)) {
             $idp[] = $row[0];
             if ($septd) {
@@ -739,7 +739,7 @@ class ResConsulta
             //die("z");
         }
         $esadmin = false;
-        if (isset($_SESSION['id_funcionario'])) {
+        if (isset($_SESSION['id_usuario'])) {
             include $_SESSION['dirsitio'] . "/conf.php";
             global $dsn;
             $aut_usuario = "";
@@ -804,15 +804,15 @@ class ResConsulta
             $html_renglon = "<tr>";
             $rtexto = "";
             foreach ($this->campos as $cc => $nc) {
-                if ($cc == 'm_ubicacion' 
-                    && isset($GLOBALS['reptabla_separa_ubicacion']) 
-                    && $GLOBALS['reptabla_separa_ubicacion'] 
+                if ($cc == 'm_ubicacion'
+                    && isset($GLOBALS['reptabla_separa_ubicacion'])
+                    && $GLOBALS['reptabla_separa_ubicacion']
                 ) {
                     $html_renglon = "$html_renglon<th colspan='2' valign='top'>"
                         . "$nc</th>";
-                } elseif ($cc == 'm_victimas' 
-                    && isset($GLOBALS['reptabla_separa_nomap']) 
-                    && $GLOBALS['reptabla_separa_nomap'] 
+                } elseif ($cc == 'm_victimas'
+                    && isset($GLOBALS['reptabla_separa_nomap'])
+                    && $GLOBALS['reptabla_separa_nomap']
                 ) {
                     $html_renglon = "$html_renglon<th colspan='2' valign='top'>"
                         . "$nc</th>";
@@ -1232,7 +1232,7 @@ class ResConsulta
                 $seploc = "";
                 while ($dff->fetch()) {
                     $des = $dff->getLink('id_ffrecuente');
-                    $vr_html .= $seploc . strip_tags(trim($des->nombre)) 
+                    $vr_html .= $seploc . strip_tags(trim($des->nombre))
                         . " " . $dff->fecha;
                     $seploc = ", ";
                 }
@@ -1260,22 +1260,22 @@ class ResConsulta
                     $result = hace_consulta($db, $q);
                     $row = array();
                     $septip = " "; $tip = "";
-                    if (!isset($GLOBALS['reptabla_noagresion']) 
+                    if (!isset($GLOBALS['reptabla_noagresion'])
                         || !$GLOBALS['reptabla_noagresion']
                     ) {
                         $vrescon .= $seploc . trim($ndp_html[$k]);
                         while ($result->fetchInto($row)) {
-                            $tip .= $septip 
-                                . "<a href='consulta_web_cat.php?t = " 
+                            $tip .= $septip
+                                . "<a href='consulta_web_cat.php?t = "
                                 .  $row[0] . "&s = ".$row[1] . "&c = "
-                                . $row[2] . "'>" . $row[0] 
+                                . $row[2] . "'>" . $row[0]
                                 . $row[2] . "</a>";
                             $vrescon .= $septip . $row[0] . $row[2];
                             $septip = ", ";
                         }
                     }
                     $med = "";
-                    if (!isset($GLOBALS['reptabla_nonacimiento']) 
+                    if (!isset($GLOBALS['reptabla_nonacimiento'])
                         || !$GLOBALS['reptabla_nonacimiento']
                     ) {
                         if (isset($edp[$k]) && $edp[$k] > 0) {
@@ -1288,7 +1288,7 @@ class ResConsulta
                 $indid = -1;
                 $idind = -1;
                 $nind = -1; $totelem = 0;
-                if (!isset($GLOBALS['actoscolectivos']) 
+                if (!isset($GLOBALS['actoscolectivos'])
                     || $GLOBALS['actoscolectivos'] == true
                 ) {
                     $totv+=ResConsulta::extraeColectivas(
@@ -1309,9 +1309,9 @@ class ResConsulta
                         $septip = " "; $tip = "";
                         $vrescon .= $seploc . trim($ndp[$k]);
                         while ($result->fetchInto($row)) {
-                            $tip .= $septip 
-                                . "<a href='consulta_web_cat.php?t = " 
-                                .  $row[0] . "&s = ".$row[1] . "&c = ".$row[2] 
+                            $tip .= $septip
+                                . "<a href='consulta_web_cat.php?t = "
+                                .  $row[0] . "&s = ".$row[1] . "&c = ".$row[2]
                                 . "'>" .  $row[0] . $row[2] . "</a>";
                             $vrescon .= $septip . $row[0] . $row[2];
                             $septip = ", ";
@@ -1348,14 +1348,14 @@ class ResConsulta
                 );
                 $vr_html = $seploc = "";
                 foreach ($ncat as $k => $nc) {
-                    if (isset($GLOBALS['reptabla_tipificacion_breve']) 
+                    if (isset($GLOBALS['reptabla_tipificacion_breve'])
                         && $GLOBALS['reptabla_tipificacion_breve'] === true
 //                        && strpos($nc, ":")
-                    ) { 
+                    ) {
                         $nc = substr($nc, strpos($nc, ":") + 1);
                         $vr_html .= $seploc . strip_tags($nc);
                     } else {
-                        $vr_html .= $seploc . strip_tags($k) 
+                        $vr_html .= $seploc . strip_tags($k)
                             . " ".strip_tags($nc);
                     }
                     $seploc = ",  ";
@@ -1888,7 +1888,7 @@ class ResConsulta
 
         //        $r .= "<contexto>"
         if (isset($campos['m_fuentes'])
-            && isset($_SESSION['id_funcionario'])
+            && isset($_SESSION['id_usuario'])
         ) {
             //            include $_SESSION['dirsitio'] . "/conf.php";
             global $dsn;
@@ -2313,17 +2313,17 @@ class ResConsulta
         if (array_key_exists('m_fuentes', $campos)) {
             $sep = "\n\n" . a_mayusculas($GLOBALS['etiqueta']['analista']) .
                 "(s):\n    ";
-            $dfuncaso = objeto_tabla('caso_funcionario');
-            if (PEAR::isError($dfuncaso)) {
-                die($dfuncaso->getMessage());
+            $dcasousuario = objeto_tabla('caso_usuario');
+            if (PEAR::isError($dcasousuario)) {
+                die($dcasousuario->getMessage());
             }
-            $dfuncaso->id_caso = $idcaso;
-            $dfuncaso->find();
-            while ($dfuncaso->fetch()) {
-                $dfuncionario = $dfuncaso->getLink('id_funcionario');
-                $r .= $sep . trim($dfuncionario->nombre);
+            $dcasousuario->id_caso = $idcaso;
+            $dcasousuario->find();
+            while ($dcasousuario->fetch()) {
+                $du= $dcasousuario->getLink('id_usuario');
+                $r .= $sep . trim($dusuario->nombre);
                 $r .= "  ";
-                $m = explode("-", $dfuncaso->fechainicio);
+                $m = explode("-", $dcasousuario->fechainicio);
                 $r .= $m[2] . "-".$GLOBALS['mes'][(int)$m[1]] . "-".$m[0];
                 $sep = "\n    ";
             }

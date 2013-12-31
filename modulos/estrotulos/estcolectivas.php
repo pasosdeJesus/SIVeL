@@ -458,7 +458,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
     }
 
 
-    /** 
+    /**
      * Retorna id del tipo de violencia
      *
      * @return string id
@@ -474,7 +474,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
         return $ntipoviolencia;
     }
 
-    /** 
+    /**
      * Retorna id de la supracategoria
      *
      * @return string id

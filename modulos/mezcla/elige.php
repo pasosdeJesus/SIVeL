@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2011 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: victimasrep.php,v 1.1 2012/01/11 17:41:30 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
@@ -95,7 +94,7 @@ class AccionComparaDos extends HTML_QuickForm_Action
             );
             return false;
         }
-        foreach($a as $nc) {
+        foreach ($a as $nc) {
             if ($nc != (int)$nc) {
                 error_valida(
                     "Debe ingresar parejas de códigos separados por espacio "
@@ -152,7 +151,7 @@ class AccionVictimasrep extends HTML_QuickForm_Action
                 $rot = '';
             }
             if ($n<($ncol+1) || ($pResto && $n==($ncol+1))) {
-                $html_l = $sep . "<b>" . htmlentities($l, ENT_COMPAT, 'UTF-8') 
+                $html_l = $sep . "<b>" . htmlentities($l, ENT_COMPAT, 'UTF-8')
                     . " " . htmlentities($rot, ENT_COMPAT, 'UTF-8') . ":</b>";
                 echo $html_l;
                 foreach ($lc as $cc) {
@@ -228,10 +227,10 @@ class AccionVictimasrep extends HTML_QuickForm_Action
         } else if ($pIdDepartamento != '') {
             $tgeo = "ubicacion, ";
             consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
-            $where .= " AND ubicacion.id_departamento IN " 
+            $where .= " AND ubicacion.id_departamento IN "
                 . "('$pIdDepartamento', '1000') ";
         }
-        
+
         if ($pFini['Y'] != '') {
             consulta_and(
                 $db, $where, "caso.fecha",
@@ -305,7 +304,7 @@ class AccionVictimasrep extends HTML_QuickForm_Action
             echo "<td><a href='captura_caso.php?modo=edita&id=" .
                 (int)$idcaso . "'>" . (int)$idcaso . "</a></td>";
             echo "<td>" . (int)$idvic . "</td>";
-            echo "<td>" . htmlentities($fecha, ENT_COMPAT, 'UTF-8') . "</td><td>" . 
+            echo "<td>" . htmlentities($fecha, ENT_COMPAT, 'UTF-8') . "</td><td>" .
                     htmlentities($ubi, ENT_COMPAT, 'UTF-8') . "</td><td>" .
                     trim(htmlentities($nom, ENT_COMPAT, 'UTF-8')) . "</td>";
             echo "<td><input name='id" . (int)$idcaso .  "' "
@@ -373,7 +372,7 @@ class PagVictimasrep extends HTML_QuickForm_Page
         );
 
         $e =& $this->addElement(
-            'header', null, 
+            'header', null,
             'Reporte para identificar v&iacute;ctimas repetidas'
         );
 

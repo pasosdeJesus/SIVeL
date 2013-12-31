@@ -14,7 +14,7 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
-if (!isset($GLOBALS['dir_anexos'])) { 
+if (!isset($GLOBALS['dir_anexos'])) {
     /** Directorio donde se almacenan anexos */
     $GLOBALS['dir_anexos'] = '/resbase/anexos';
 }

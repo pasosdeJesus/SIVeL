@@ -160,7 +160,7 @@ class PagOtraAnexo extends PagOtrasFuentes
         if ($this->bcaso_fotra->_do->id_fotra != null) {
             $danexo = objeto_tabla('anexo');
             $danexo->id_caso = $_SESSION['basicos_id'];
-            $danexo->id_fotra 
+            $danexo->id_fotra
                 = $this->bcaso_fotra->_do->id_fotra;
             $danexo->find();
             if ($danexo->fetch()) {
@@ -171,7 +171,7 @@ class PagOtraAnexo extends PagOtrasFuentes
 
 
         if ((!isset($_SESSION['forma_modo'])
-            || $_SESSION['forma_modo'] != 'busqueda') 
+            || $_SESSION['forma_modo'] != 'busqueda')
             && !$puesto
         ) {
             $sel->setValue('');
@@ -217,7 +217,7 @@ class PagOtraAnexo extends PagOtrasFuentes
             hace_consulta($db, $q, false);
         }
 
-        caso_funcionario($_SESSION['basicos_id']);
+        caso_usuario($_SESSION['basicos_id']);
         return $r;
     }
 

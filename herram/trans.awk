@@ -286,7 +286,7 @@ function transear(sa)
 	}
 }
 
-/function .* {/ {
+/^[^"]*function .* {/ {
 	match($0, /^ */);
 	i = substr($0, 1, RLENGTH);
 	match($0, /^.*function[^\{]*/);

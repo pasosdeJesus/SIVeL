@@ -157,7 +157,7 @@ class DataObjects_Homonimosim extends DB_DataObject_SIVeL
                 '<td>' . $dp->apellidos.'</td>' .
                 '<td>' . $dp->id . '</td>' .
                 '<td><a href="'.$_SERVER['PHP_SELF'] . '?eliminahom=' .
-                $p->persona1.":".$p->persona2
+                $p->persona1.":".$p->persona2 .
                 '">'. _('Eliminar') . '</a></td>';
         }
         $t .= '</tbody></table>';
