@@ -69,3 +69,4 @@ INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-tb', '2013-0
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-sx', '2013-10-04', 'Funcion soundex en español'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.1-dp13', '2013-11-13', 'Actualiza con DIVIPOLA 2013'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-fun', '2013-12-31', 'Fusiona tablas funcionario y usuario'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-bc', '2014-01-01', 'Clave con condensado bcrypt'); 

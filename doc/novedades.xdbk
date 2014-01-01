@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
-	<varlistentry><term>Versión 1.2b1 (Sep.2013)</term>
+	<varlistentry><term>Versión 1.2b1 (Ene.2014)</term>
 		<listitem>
 			<para><itemizedlist>
+					<listitem><para>
+Simplificadas tablas de usuarios y cambiado algoritmo de condensado a bcrypt.
+					</para></listitem>
+
 					<listitem><para>
 Información geográfica actualizada con DIVIPOLA 2013.
 					</para></listitem>

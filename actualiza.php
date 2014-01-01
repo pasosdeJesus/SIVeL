@@ -2777,7 +2777,7 @@ if (!aplicado($idac)) {
     );
     hace_consulta(
         $db, "ALTER TABLE obsoleto_funcionario ALTER COLUMN id 
-        SET DEFAULT NULL"
+        SET DEFAULT NULL", false
     );
     hace_consulta(
         $db, "ALTER SEQUENCE funcionario_seq RENAME TO usuario_seq", false
@@ -2792,6 +2792,31 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Fusiona tablas usuario y funcionario');
 }
 
+$idac = '1.2-bc';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "ALTER TABLE usuario ADD COLUMN email VARCHAR(255) NOT NULL DEFAULT ''", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ADD COLUMN encrypted_password VARCHAR(255) NOT NULL DEFAULT ''", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ADD COLUMN sign_in_count INTEGER NOT NULL DEFAULT 0", 
+        false
+    );
+    hace_consulta(
+        $db, "UPDATE usuario SET email=(nusuario || '@localhost') 
+        WHERE email = ''", false
+    );
+    hace_consulta(
+        $db, "CREATE UNIQUE INDEX index_usuario_on_email ON usuario 
+        USING btree (email)",
+        false
+    );
+ 
+    #aplicaact($act, $idac, 'Emplea bcrypt para calcular condensado de claves y agrega inforación a tablas para hacer compatible con autenticación con Devise/Ruby');
+}
+ 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {

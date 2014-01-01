@@ -60,6 +60,58 @@ function hace_consulta_aut(&$db, $q, $finerror = true)
 }
 
 /**
+ * Genera colchon de datos aleatorios de longitud $lon.
+ *
+ * @return string Cadena con caracteres aleatorios y longitud $lon
+ */
+function colchon_aleatorios($lon)
+{
+    $col = "";
+    for ($i = 0 ; $i < $lon; $i++) {
+        $col .= chr(mt_rand(1, 255));
+    }
+
+	return $col;
+}
+
+
+/**
+ * Codifica sal para bcrypt
+ * Se basa en función encode_salt de libc de OpenBSD 
+ * @param array   $csal    Sal en binario
+ * @param integer $lrondas Cantidad de rondas es 2^$lrondas
+ *
+ * @return string Cadena con sal para bcrypt
+ */
+function codificar_sal($csal, $lrondas)
+{
+	$sal = sprintf("$2a$%2.2u$%s", $lrondas, base64_encode($csal));
+
+	return $sal;
+}
+
+
+/**
+ * Genera sal para bcrypt.  Se basa en función bcrypt_gensalt de 
+ * libc de OpenBSD.
+ * @param integer lrondas Cantidad de rondas es 2^lrondas
+ *
+ * @return string Cadena con sal para bcrypt
+ */
+function gen_sal_bcrypt($lrondas)
+{
+    $csal = colchon_aleatorios(16);
+    if ($lrondas < 4) {
+        $lrondas = 4;
+    } else if ($lrondas > 31) {
+        $lrondas = 31;
+    }
+    $gsal = codificar_sal($csal, 16, $lrondas);
+    return $gsal;
+}
+
+
+/**
  * Establece locale
  *
  * @param string $l Nombre del locale
@@ -221,6 +273,9 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         session_name($snru);
         session_start();
     }
+    if (CRYPT_BLOWFISH != 1) {
+        die("Se requiere PHP con CRYPT_BLOWFISH. Por favor actualice");
+    }
     $options = array('debug'       => 5);
     $db = DB::connect($dsn, $options);
     if (PEAR::isError($db)) {
@@ -256,31 +311,27 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
     if ((int)$n[0] == 0) {
         die("No hay usuarios en la base de datos creelos desde una terminal");
     }
-
+    $camponusuario = "nusuario";
+    $params = array(
+        "dsn" => $dsn,
+        "table" => "usuario",
+        "usernamecol" => "nusuario",
+        "passwordcol" => "encrypted_password",
+        "cryptType" => "crypt",
+        "db_where" => "fechadeshabilitacion IS NULL",
+    );
     $q = "SELECT COUNT(nusuario) FROM usuario";
     $result = hace_consulta_aut($db, $q, false, false);
     if (PEAR::isError($result)) {
         $camponusuario = "id";
-        $params = array(
-            "dsn" => $dsn,
-            "table" => "usuario",
-            "usernamecol" => "id",
-            "passwordcol" => "password",
-            "cryptType" => 'sha1',
-        );
-        echo "<br>" . _("Aun no se emplea nueva tabla usuario, actualice");
-    } else {
-        $camponusuario = "nusuario";
-        $params = array(
-            "dsn" => $dsn,
-            "table" => "usuario",
-            "usernamecol" => "nusuario",
-            "passwordcol" => "password",
-            "cryptType" => 'sha1',
-            "db_where" => 'fechadeshabilitacion IS NULL'
-        );
+        $params['usernamecol'] = 'id';
+        $params['password'] = 'password';
+        $params['cryptType'] = 'sha1';
+        $params['db_where'] = '';
+        echo "<hr>" . _("Aun no se emplea nueva tabla usuario.")
+           . _("Solicite actualización a un administrador") 
+            . "<hr>";
     }
- 
     $a = new Auth("DB", $params, "login_function");
     $a->setSessionName($snru);
     //echo "<hr>OJO autentica_usuario $opcion Auth sesion:";
@@ -296,7 +347,6 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         $a->setIdle($texp / 2);
 
         $_SESSION['dirsitio'] = localiza_conf();
-
         //echo "<script>alert(document.cookie);</script>";
         $usuario = $a->getUsername();
         if (!isset($_SESSION['opciones']) || count($_SESSION['opciones']) == 0
@@ -343,57 +393,86 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             return $db;
         }
         die($accno . " (1)");
-    } else {
-        if (isset($_SESSION['idioma_usuario'])) {
-            idioma($_SESSION['idioma_usuario']);
-        }
-        if (isset($_POST['username']) && isset($_POST['password'])) {
-            $params = array(
-                "dsn" => $dsn,
-                "table" => "usuario",
-                "usernamecol" => "id",
-                "passwordcol" => "password",
-                "cryptType" => 'md5',
-            );
-            $b = new Auth("DB", $params, "no_login_function");
-            $b->setSessionName($snru);
-            $b->start();
-            if ($b->checkAuth()) {
-                $clavesha1 = sha1(var_post_escapa('password', $db, 32));
-                $un = var_post_escapa('username', $db, 15);
-                hace_consulta_aut(
-                    $db,
-                    "ALTER TABLE usuario ADD COLUMN npass VARCHAR(64);"
-                );
-                hace_consulta_aut(
-                    $db,
-                    "UPDATE usuario SET npass=password;"
-                );
-                hace_consulta_aut(
-                    $db,
-                    "ALTER TABLE usuario DROP COLUMN password;"
-                );
-                hace_consulta_aut(
-                    $db,
-                    "ALTER TABLE usuario RENAME COLUMN npass TO password;"
-                );
-                $q = "UPDATE usuario SET password='$clavesha1' WHERE " .
-                    "id='$un';";
-                hace_consulta_aut($db, $q);
-                $htmljs = new HTML_Javascript();
-                echo $htmljs->startScript();
-                echo $htmljs->alert(
-                    'Condensado de la clave cambiado a sha1.' .
-                    ' Por favor autentiquese nuevamente'
-                );
-                echo $htmljs->endScript();
-                cierra_sesion($dsn);
-                exit(1);
-            }
-        }
-        unset($_POST['password']);
-        die($accno . " (2)");
+    } 
+    /* No autenticó con nuevo método, intentar anteriores */
+    if (isset($_SESSION['idioma_usuario'])) {
+        idioma($_SESSION['idioma_usuario']);
     }
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        $params = array(
+            "dsn" => $dsn,
+            "table" => "usuario",
+            "usernamecol" => "nusuario",
+            "passwordcol" => "password",
+            "cryptType" => "sha1"
+        );
+        $b = new Auth("DB", $params, "no_login_function");
+        $b->setSessionName($snru);
+        $b->start();
+        if ($b->checkAuth()) {
+            $clavebf = crypt(
+                var_post_escapa('password', $db, 32), gen_sal_bcrypt(10)
+            );
+            $un = var_post_escapa('username', $db, 15);
+            $q = "UPDATE usuario SET password='',
+                encrypted_password='$clavebf' 
+                WHERE nusuario='$un';";
+            hace_consulta_aut($db, $q);
+            $htmljs = new HTML_Javascript();
+            echo $htmljs->startScript();
+            echo $htmljs->alert(
+                'Condensado de la clave cambiado a bcrypt.' .
+                ' Por favor autentiquese nuevamente'
+            );
+            echo $htmljs->endScript();
+            cierra_sesion($dsn);
+            exit(1);
+        }
+        $params = array(
+            "dsn" => $dsn,
+            "table" => "usuario",
+            "usernamecol" => "id",
+            "passwordcol" => "password",
+            "cryptType" => 'md5',
+        );
+        $b = new Auth("DB", $params, "no_login_function");
+        $b->setSessionName($snru);
+        $b->start();
+        if ($b->checkAuth()) {
+            $clavesha1 = sha1(var_post_escapa('password', $db, 32));
+            $un = var_post_escapa('username', $db, 15);
+            hace_consulta_aut(
+                $db,
+                "ALTER TABLE usuario ADD COLUMN npass VARCHAR(64);"
+            );
+            hace_consulta_aut(
+                $db,
+                "UPDATE usuario SET npass=password;"
+            );
+            hace_consulta_aut(
+                $db,
+                "ALTER TABLE usuario DROP COLUMN password;"
+            );
+            hace_consulta_aut(
+                $db,
+                "ALTER TABLE usuario RENAME COLUMN npass TO password;"
+            );
+            $q = "UPDATE usuario SET password='$clavesha1' WHERE " .
+                "id='$un';";
+            hace_consulta_aut($db, $q);
+            $htmljs = new HTML_Javascript();
+            echo $htmljs->startScript();
+            echo $htmljs->alert(
+                'Condensado de la clave cambiado a sha1.' .
+                ' Por favor autentiquese nuevamente'
+            );
+            echo $htmljs->endScript();
+            cierra_sesion($dsn);
+            exit(1);
+        }
+    }
+    unset($_POST['password']);
+    die($accno . " (2)");
 }
 
 
@@ -414,8 +493,10 @@ function cierra_sesion($dsn)
     $params = array(
         "dsn" => $dsn,
         "table" => "usuario",
-        "usernamecol" => "id",
-        "passwordcol" => "password"
+        "usernamecol" => "nusuario",
+        "passwordcol" => "encrypted_password",
+        "cryptType" => "crypt",
+        "db_where" => "fechadeshabilitacion IS NULL"
     );
     $a = new Auth("DB", $params, "login_function");
     $a->setSessionName($snru);

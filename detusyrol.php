@@ -70,7 +70,7 @@ $f->addElement(
 );
 
 $actsincambiarclave = isset($f->_submitValues['actualizar'])
-    && $f->_submitValues['password'] == '';
+    && $f->_submitValues['encrypted_password'] == '';
 if ($actsincambiarclave || $f->validate()) {
     if (!verifica_sin_CSRF($f->_submitValues)) {
         die(_("Datos enviados no pasaron verificación CSRF"));
@@ -94,6 +94,9 @@ if ($actsincambiarclave || $f->validate()) {
         || isset($f->_submitValues['añadir'])
     ) {
         //echo "OJO 4\n";
+        if ($b->sign_in_count == null) {
+            $b->sign_in_count == 0;
+        }
         $res = $f->process(array($b, 'processForm'), false);
         //echo "OJO 5 res=$res\n";
         if ($_SESSION['id_usuario'] == $f->_submitValues['id']) {
@@ -116,9 +119,9 @@ if ($actsincambiarclave || $f->validate()) {
         return;die("OJO quitar"); */
         header('Location: usyroles.php');
     }
-    if (PEAR::isError($d->_lastError)) {
-        echo_esc($d->_lastError->getMessage());
-        echo_esc($d->_lastError->userinfo());
+    if (PEAR::isError($d)) {
+        echo_esc($d->getMessage());
+        echo_esc($d->userinfo());
     }
 }
 

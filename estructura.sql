@@ -511,6 +511,9 @@ CREATE TABLE usuario (
 	descripcion VARCHAR(50),
 	rol INTEGER DEFAULT '4' CHECK (rol>='1' AND rol<='4'),
 	idioma VARCHAR(6) NOT NULL DEFAULT 'es_CO',
+	email VARCHAR(255) NOT NULL DEFAULT '',
+	encrypted_password VARCHAR(255) NOT NULL DEFAULT '',
+	sign_in_count INTEGER NOT NULL DEFAULT 0,
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion DATE CHECK (
 		fechadeshabilitacion IS NULL OR 

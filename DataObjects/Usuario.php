@@ -39,6 +39,7 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
     var $id;                      // integer
     var $nusuario;
     var $password;                        // varchar(-1)  not_null
+    var $encrypted_pasword;                        // varchar(-1)  not_null
     var $nombre;                          // varchar(-1)
     var $descripcion;                     // varchar(-1)
     var $rol;                          // int4(4)
@@ -46,6 +47,8 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
     var $idioma;
     var $fechacreacion;
     var $fechadeshabilitacion;
+    var $email;
+    var $sign_in_count;
 
 
     /**
@@ -65,6 +68,7 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
             'descripcion' => _('Descripcion'),
             'rol' => _('Rol'),
             'idioma' => _('Idioma'),
+            'email' => _('Correo'),
             'fechacreacion' => _('Fecha de creación'),
             'fechadeshabilitacion' => _('Fecha de deshabilitación'),
         );
@@ -85,11 +89,11 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
 
     var $fb_preDefOrder = array(
         'nusuario', 'password', 'nombre', 'descripcion', 'rol',
-        'idioma', 'fechacreacion', 'fechadeshabilitacion'
+        'idioma', 'email', 'fechacreacion', 'fechadeshabilitacion'
     );
     var $fb_fieldsToRender = array(
         'nusuario', 'password', 'nombre', 'descripcion', 'rol',
-        'idioma', 'fechacreacion', 'fechadeshabilitacion'
+        'idioma', 'email', 'fechacreacion', 'fechadeshabilitacion'
     );
     var $fb_linkDisplayFields = array('nusuario');
     var $fb_select_display_field= 'nusuario';
@@ -123,10 +127,11 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
      */
     function setpassword($value)
     {
+        $this->password = '';
         if ($value == '') {
-            $this->password = null;
+            $this->encrypted_password = null;
         } else {
-            $this->password = sha1($value);
+            $this->encrypted_password = crypt($value, gen_sal_bcrypt(10));
         }
     }
 
@@ -178,7 +183,9 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
     {
         parent::postGenerateForm($form, $formbuilder);
         $e =& $form->getElement('password');
-        $e->setValue('');
+        if (!PEAR::isError($e)) {
+            $e->setValue('');
+        }
     }
 
 }
