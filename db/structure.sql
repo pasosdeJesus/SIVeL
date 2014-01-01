@@ -47,1527 +47,111 @@ COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
 
 
 --
--- Name: addauth(text); Type: FUNCTION; Schema: public; Owner: -
+-- Name: soundexesp(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
-CREATE FUNCTION addauth(text) RETURNS boolean
-    LANGUAGE plpgsql
-    AS $_$ 
-DECLARE
-	lockid alias for $1;
-	okay boolean;
-	myrec record;
-BEGIN
-	-- check to see if table exists
-	--  if not, CREATE TEMP TABLE mylock (transid xid, lockcode text)
-	okay := 'f';
-	FOR myrec IN SELECT * FROM pg_class WHERE relname = 'temp_lock_have_table' LOOP
-		okay := 't';
-	END LOOP; 
-	IF (okay <> 't') THEN 
-		CREATE TEMP TABLE temp_lock_have_table (transid xid, lockcode text);
-			-- this will only work from pgsql7.4 up
-			-- ON COMMIT DELETE ROWS;
-	END IF;
-
-	--  INSERT INTO mylock VALUES ( $1)
---	EXECUTE 'INSERT INTO temp_lock_have_table VALUES ( '||
---		quote_literal(getTransactionID()) || ',' ||
---		quote_literal(lockid) ||')';
-
-	INSERT INTO temp_lock_have_table VALUES (getTransactionID(), lockid);
-
-	RETURN true::boolean;
-END;
-$_$;
-
-
---
--- Name: addgeometrycolumn(character varying, character varying, integer, character varying, integer); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION addgeometrycolumn(character varying, character varying, integer, character varying, integer) RETURNS text
-    LANGUAGE plpgsql STRICT
-    AS $_$
-DECLARE
-	ret  text;
-BEGIN
-	SELECT AddGeometryColumn('','',$1,$2,$3,$4,$5) into ret;
-	RETURN ret;
-END;
-$_$;
-
-
---
--- Name: addgeometrycolumn(character varying, character varying, character varying, integer, character varying, integer); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION addgeometrycolumn(character varying, character varying, character varying, integer, character varying, integer) RETURNS text
-    LANGUAGE plpgsql STABLE STRICT
-    AS $_$
-DECLARE
-	ret  text;
-BEGIN
-	SELECT AddGeometryColumn('',$1,$2,$3,$4,$5,$6) into ret;
-	RETURN ret;
-END;
-$_$;
-
-
---
--- Name: addgeometrycolumn(character varying, character varying, character varying, character varying, integer, character varying, integer); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION addgeometrycolumn(character varying, character varying, character varying, character varying, integer, character varying, integer) RETURNS text
-    LANGUAGE plpgsql STRICT
-    AS $_$
-DECLARE
-	catalog_name alias for $1;
-	schema_name alias for $2;
-	table_name alias for $3;
-	column_name alias for $4;
-	new_srid alias for $5;
-	new_type alias for $6;
-	new_dim alias for $7;
-	rec RECORD;
-	sr varchar;
-	real_schema name;
-	sql text;
-
-BEGIN
-
-	-- Verify geometry type
-	IF ( NOT ( (new_type = 'GEOMETRY') OR
-			   (new_type = 'GEOMETRYCOLLECTION') OR
-			   (new_type = 'POINT') OR
-			   (new_type = 'MULTIPOINT') OR
-			   (new_type = 'POLYGON') OR
-			   (new_type = 'MULTIPOLYGON') OR
-			   (new_type = 'LINESTRING') OR
-			   (new_type = 'MULTILINESTRING') OR
-			   (new_type = 'GEOMETRYCOLLECTIONM') OR
-			   (new_type = 'POINTM') OR
-			   (new_type = 'MULTIPOINTM') OR
-			   (new_type = 'POLYGONM') OR
-			   (new_type = 'MULTIPOLYGONM') OR
-			   (new_type = 'LINESTRINGM') OR
-			   (new_type = 'MULTILINESTRINGM') OR
-			   (new_type = 'CIRCULARSTRING') OR
-			   (new_type = 'CIRCULARSTRINGM') OR
-			   (new_type = 'COMPOUNDCURVE') OR
-			   (new_type = 'COMPOUNDCURVEM') OR
-			   (new_type = 'CURVEPOLYGON') OR
-			   (new_type = 'CURVEPOLYGONM') OR
-			   (new_type = 'MULTICURVE') OR
-			   (new_type = 'MULTICURVEM') OR
-			   (new_type = 'MULTISURFACE') OR
-			   (new_type = 'MULTISURFACEM')) )
-	THEN
-		RAISE EXCEPTION 'Invalid type name - valid ones are:
-	POINT, MULTIPOINT,
-	LINESTRING, MULTILINESTRING,
-	POLYGON, MULTIPOLYGON,
-	CIRCULARSTRING, COMPOUNDCURVE, MULTICURVE,
-	CURVEPOLYGON, MULTISURFACE,
-	GEOMETRY, GEOMETRYCOLLECTION,
-	POINTM, MULTIPOINTM,
-	LINESTRINGM, MULTILINESTRINGM,
-	POLYGONM, MULTIPOLYGONM,
-	CIRCULARSTRINGM, COMPOUNDCURVEM, MULTICURVEM
-	CURVEPOLYGONM, MULTISURFACEM,
-	or GEOMETRYCOLLECTIONM';
-		RETURN 'fail';
-	END IF;
-
-
-	-- Verify dimension
-	IF ( (new_dim >4) OR (new_dim <0) ) THEN
-		RAISE EXCEPTION 'invalid dimension';
-		RETURN 'fail';
-	END IF;
-
-	IF ( (new_type LIKE '%M') AND (new_dim!=3) ) THEN
-		RAISE EXCEPTION 'TypeM needs 3 dimensions';
-		RETURN 'fail';
-	END IF;
-
-
-	-- Verify SRID
-	IF ( new_srid != -1 ) THEN
-		SELECT SRID INTO sr FROM spatial_ref_sys WHERE SRID = new_srid;
-		IF NOT FOUND THEN
-			RAISE EXCEPTION 'AddGeometryColumns() - invalid SRID';
-			RETURN 'fail';
-		END IF;
-	END IF;
-
-
-	-- Verify schema
-	IF ( schema_name IS NOT NULL AND schema_name != '' ) THEN
-		sql := 'SELECT nspname FROM pg_namespace ' ||
-			'WHERE text(nspname) = ' || quote_literal(schema_name) ||
-			'LIMIT 1';
-		RAISE DEBUG '%', sql;
-		EXECUTE sql INTO real_schema;
-
-		IF ( real_schema IS NULL ) THEN
-			RAISE EXCEPTION 'Schema % is not a valid schemaname', quote_literal(schema_name);
-			RETURN 'fail';
-		END IF;
-	END IF;
-
-	IF ( real_schema IS NULL ) THEN
-		RAISE DEBUG 'Detecting schema';
-		sql := 'SELECT n.nspname AS schemaname ' ||
-			'FROM pg_catalog.pg_class c ' ||
-			  'JOIN pg_catalog.pg_namespace n ON n.oid = c.relnamespace ' ||
-			'WHERE c.relkind = ' || quote_literal('r') ||
-			' AND n.nspname NOT IN (' || quote_literal('pg_catalog') || ', ' || quote_literal('pg_toast') || ')' ||
-			' AND pg_catalog.pg_table_is_visible(c.oid)' ||
-			' AND c.relname = ' || quote_literal(table_name);
-		RAISE DEBUG '%', sql;
-		EXECUTE sql INTO real_schema;
-
-		IF ( real_schema IS NULL ) THEN
-			RAISE EXCEPTION 'Table % does not occur in the search_path', quote_literal(table_name);
-			RETURN 'fail';
-		END IF;
-	END IF;
-
-
-	-- Add geometry column to table
-	sql := 'ALTER TABLE ' ||
-		quote_ident(real_schema) || '.' || quote_ident(table_name)
-		|| ' ADD COLUMN ' || quote_ident(column_name) ||
-		' geometry ';
-	RAISE DEBUG '%', sql;
-	EXECUTE sql;
-
-
-	-- Delete stale record in geometry_columns (if any)
-	sql := 'DELETE FROM geometry_columns WHERE
-		f_table_catalog = ' || quote_literal('') ||
-		' AND f_table_schema = ' ||
-		quote_literal(real_schema) ||
-		' AND f_table_name = ' || quote_literal(table_name) ||
-		' AND f_geometry_column = ' || quote_literal(column_name);
-	RAISE DEBUG '%', sql;
-	EXECUTE sql;
-
-
-	-- Add record in geometry_columns
-	sql := 'INSERT INTO geometry_columns (f_table_catalog,f_table_schema,f_table_name,' ||
-										  'f_geometry_column,coord_dimension,srid,type)' ||
-		' VALUES (' ||
-		quote_literal('') || ',' ||
-		quote_literal(real_schema) || ',' ||
-		quote_literal(table_name) || ',' ||
-		quote_literal(column_name) || ',' ||
-		new_dim::text || ',' ||
-		new_srid::text || ',' ||
-		quote_literal(new_type) || ')';
-	RAISE DEBUG '%', sql;
-	EXECUTE sql;
-
-
-	-- Add table CHECKs
-	sql := 'ALTER TABLE ' ||
-		quote_ident(real_schema) || '.' || quote_ident(table_name)
-		|| ' ADD CONSTRAINT '
-		|| quote_ident('enforce_srid_' || column_name)
-		|| ' CHECK (ST_SRID(' || quote_ident(column_name) ||
-		') = ' || new_srid::text || ')' ;
-	RAISE DEBUG '%', sql;
-	EXECUTE sql;
-
-	sql := 'ALTER TABLE ' ||
-		quote_ident(real_schema) || '.' || quote_ident(table_name)
-		|| ' ADD CONSTRAINT '
-		|| quote_ident('enforce_dims_' || column_name)
-		|| ' CHECK (ST_NDims(' || quote_ident(column_name) ||
-		') = ' || new_dim::text || ')' ;
-	RAISE DEBUG '%', sql;
-	EXECUTE sql;
-
-	IF ( NOT (new_type = 'GEOMETRY')) THEN
-		sql := 'ALTER TABLE ' ||
-			quote_ident(real_schema) || '.' || quote_ident(table_name) || ' ADD CONSTRAINT ' ||
-			quote_ident('enforce_geotype_' || column_name) ||
-			' CHECK (GeometryType(' ||
-			quote_ident(column_name) || ')=' ||
-			quote_literal(new_type) || ' OR (' ||
-			quote_ident(column_name) || ') is null)';
-		RAISE DEBUG '%', sql;
-		EXECUTE sql;
-	END IF;
-
-	RETURN
-		real_schema || '.' ||
-		table_name || '.' || column_name ||
-		' SRID:' || new_srid::text ||
-		' TYPE:' || new_type ||
-		' DIMS:' || new_dim::text || ' ';
-END;
-$_$;
-
-
---
--- Name: checkauth(text, text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION checkauth(text, text) RETURNS integer
-    LANGUAGE sql
-    AS $_$ SELECT CheckAuth('', $1, $2) $_$;
-
-
---
--- Name: checkauth(text, text, text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION checkauth(text, text, text) RETURNS integer
-    LANGUAGE plpgsql
-    AS $_$ 
-DECLARE
-	schema text;
-BEGIN
-	IF NOT LongTransactionsEnabled() THEN
-		RAISE EXCEPTION 'Long transaction support disabled, use EnableLongTransaction() to enable.';
-	END IF;
-
-	if ( $1 != '' ) THEN
-		schema = $1;
-	ELSE
-		SELECT current_schema() into schema;
-	END IF;
-
-	-- TODO: check for an already existing trigger ?
-
-	EXECUTE 'CREATE TRIGGER check_auth BEFORE UPDATE OR DELETE ON ' 
-		|| quote_ident(schema) || '.' || quote_ident($2)
-		||' FOR EACH ROW EXECUTE PROCEDURE CheckAuthTrigger('
-		|| quote_literal($3) || ')';
-
-	RETURN 0;
-END;
-$_$;
-
-
---
--- Name: disablelongtransactions(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION disablelongtransactions() RETURNS text
-    LANGUAGE plpgsql
-    AS $$ 
-DECLARE
-	rec RECORD;
-
-BEGIN
-
-	--
-	-- Drop all triggers applied by CheckAuth()
-	--
-	FOR rec IN
-		SELECT c.relname, t.tgname, t.tgargs FROM pg_trigger t, pg_class c, pg_proc p
-		WHERE p.proname = 'checkauthtrigger' and t.tgfoid = p.oid and t.tgrelid = c.oid
-	LOOP
-		EXECUTE 'DROP TRIGGER ' || quote_ident(rec.tgname) ||
-			' ON ' || quote_ident(rec.relname);
-	END LOOP;
-
-	--
-	-- Drop the authorization_table table
-	--
-	FOR rec IN SELECT * FROM pg_class WHERE relname = 'authorization_table' LOOP
-		DROP TABLE authorization_table;
-	END LOOP;
-
-	--
-	-- Drop the authorized_tables view
-	--
-	FOR rec IN SELECT * FROM pg_class WHERE relname = 'authorized_tables' LOOP
-		DROP VIEW authorized_tables;
-	END LOOP;
-
-	RETURN 'Long transactions support disabled';
-END;
-$$;
-
-
---
--- Name: dropgeometrycolumn(character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION dropgeometrycolumn(character varying, character varying) RETURNS text
-    LANGUAGE plpgsql STRICT
-    AS $_$
-DECLARE
-	ret text;
-BEGIN
-	SELECT DropGeometryColumn('','',$1,$2) into ret;
-	RETURN ret;
-END;
-$_$;
-
-
---
--- Name: dropgeometrycolumn(character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION dropgeometrycolumn(character varying, character varying, character varying) RETURNS text
-    LANGUAGE plpgsql STRICT
-    AS $_$
-DECLARE
-	ret text;
-BEGIN
-	SELECT DropGeometryColumn('',$1,$2,$3) into ret;
-	RETURN ret;
-END;
-$_$;
-
-
---
--- Name: dropgeometrycolumn(character varying, character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION dropgeometrycolumn(character varying, character varying, character varying, character varying) RETURNS text
-    LANGUAGE plpgsql STRICT
-    AS $_$
-DECLARE
-	catalog_name alias for $1;
-	schema_name alias for $2;
-	table_name alias for $3;
-	column_name alias for $4;
-	myrec RECORD;
-	okay boolean;
-	real_schema name;
-
-BEGIN
-
-
-	-- Find, check or fix schema_name
-	IF ( schema_name != '' ) THEN
-		okay = 'f';
-
-		FOR myrec IN SELECT nspname FROM pg_namespace WHERE text(nspname) = schema_name LOOP
-			okay := 't';
-		END LOOP;
-
-		IF ( okay <> 't' ) THEN
-			RAISE NOTICE 'Invalid schema name - using current_schema()';
-			SELECT current_schema() into real_schema;
-		ELSE
-			real_schema = schema_name;
-		END IF;
-	ELSE
-		SELECT current_schema() into real_schema;
-	END IF;
-
-	-- Find out if the column is in the geometry_columns table
-	okay = 'f';
-	FOR myrec IN SELECT * from geometry_columns where f_table_schema = text(real_schema) and f_table_name = table_name and f_geometry_column = column_name LOOP
-		okay := 't';
-	END LOOP;
-	IF (okay <> 't') THEN
-		RAISE EXCEPTION 'column not found in geometry_columns table';
-		RETURN 'f';
-	END IF;
-
-	-- Remove ref from geometry_columns table
-	EXECUTE 'delete from geometry_columns where f_table_schema = ' ||
-		quote_literal(real_schema) || ' and f_table_name = ' ||
-		quote_literal(table_name)  || ' and f_geometry_column = ' ||
-		quote_literal(column_name);
-
-	-- Remove table column
-	EXECUTE 'ALTER TABLE ' || quote_ident(real_schema) || '.' ||
-		quote_ident(table_name) || ' DROP COLUMN ' ||
-		quote_ident(column_name);
-
-	RETURN real_schema || '.' || table_name || '.' || column_name ||' effectively removed.';
-
-END;
-$_$;
-
-
---
--- Name: dropgeometrytable(character varying); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION dropgeometrytable(character varying) RETURNS text
-    LANGUAGE sql STRICT
-    AS $_$ SELECT DropGeometryTable('','',$1) $_$;
-
-
---
--- Name: dropgeometrytable(character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION dropgeometrytable(character varying, character varying) RETURNS text
-    LANGUAGE sql STRICT
-    AS $_$ SELECT DropGeometryTable('',$1,$2) $_$;
-
-
---
--- Name: dropgeometrytable(character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION dropgeometrytable(character varying, character varying, character varying) RETURNS text
-    LANGUAGE plpgsql STRICT
-    AS $_$
-DECLARE
-	catalog_name alias for $1;
-	schema_name alias for $2;
-	table_name alias for $3;
-	real_schema name;
-
-BEGIN
-
-	IF ( schema_name = '' ) THEN
-		SELECT current_schema() into real_schema;
-	ELSE
-		real_schema = schema_name;
-	END IF;
-
-	-- Remove refs from geometry_columns table
-	EXECUTE 'DELETE FROM geometry_columns WHERE ' ||
-		'f_table_schema = ' || quote_literal(real_schema) ||
-		' AND ' ||
-		' f_table_name = ' || quote_literal(table_name);
-
-	-- Remove table
-	EXECUTE 'DROP TABLE '
-		|| quote_ident(real_schema) || '.' ||
-		quote_ident(table_name);
-
-	RETURN
-		real_schema || '.' ||
-		table_name ||' dropped.';
-
-END;
-$_$;
-
-
---
--- Name: enablelongtransactions(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION enablelongtransactions() RETURNS text
-    LANGUAGE plpgsql
-    AS $$ 
-DECLARE
-	"query" text;
-	exists bool;
-	rec RECORD;
-
-BEGIN
-
-	exists = 'f';
-	FOR rec IN SELECT * FROM pg_class WHERE relname = 'authorization_table'
-	LOOP
-		exists = 't';
-	END LOOP;
-
-	IF NOT exists
-	THEN
-		"query" = 'CREATE TABLE authorization_table (
-			toid oid, -- table oid
-			rid text, -- row id
-			expires timestamp,
-			authid text
-		)';
-		EXECUTE "query";
-	END IF;
-
-	exists = 'f';
-	FOR rec IN SELECT * FROM pg_class WHERE relname = 'authorized_tables'
-	LOOP
-		exists = 't';
-	END LOOP;
-
-	IF NOT exists THEN
-		"query" = 'CREATE VIEW authorized_tables AS ' ||
-			'SELECT ' ||
-			'n.nspname as schema, ' ||
-			'c.relname as table, trim(' ||
-			quote_literal(chr(92) || '000') ||
-			' from t.tgargs) as id_column ' ||
-			'FROM pg_trigger t, pg_class c, pg_proc p ' ||
-			', pg_namespace n ' ||
-			'WHERE p.proname = ' || quote_literal('checkauthtrigger') ||
-			' AND c.relnamespace = n.oid' ||
-			' AND t.tgfoid = p.oid and t.tgrelid = c.oid';
-		EXECUTE "query";
-	END IF;
-
-	RETURN 'Long transactions support enabled';
-END;
-$$;
-
-
---
--- Name: find_srid(character varying, character varying, character varying); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION find_srid(character varying, character varying, character varying) RETURNS integer
-    LANGUAGE plpgsql IMMUTABLE STRICT
-    AS $_$
-DECLARE
-	schem text;
-	tabl text;
-	sr int4;
-BEGIN
-	IF $1 IS NULL THEN
-	  RAISE EXCEPTION 'find_srid() - schema is NULL!';
-	END IF;
-	IF $2 IS NULL THEN
-	  RAISE EXCEPTION 'find_srid() - table name is NULL!';
-	END IF;
-	IF $3 IS NULL THEN
-	  RAISE EXCEPTION 'find_srid() - column name is NULL!';
-	END IF;
-	schem = $1;
-	tabl = $2;
--- if the table contains a . and the schema is empty
--- split the table into a schema and a table
--- otherwise drop through to default behavior
-	IF ( schem = '' and tabl LIKE '%.%' ) THEN
-	 schem = substr(tabl,1,strpos(tabl,'.')-1);
-	 tabl = substr(tabl,length(schem)+2);
-	ELSE
-	 schem = schem || '%';
-	END IF;
-
-	select SRID into sr from geometry_columns where f_table_schema like schem and f_table_name = tabl and f_geometry_column = $3;
-	IF NOT FOUND THEN
-	   RAISE EXCEPTION 'find_srid() - couldnt find the corresponding SRID - is the geometry registered in the GEOMETRY_COLUMNS table?  Is there an uppercase/lowercase missmatch?';
-	END IF;
-	return sr;
-END;
-$_$;
-
-
---
--- Name: fix_geometry_columns(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION fix_geometry_columns() RETURNS text
-    LANGUAGE plpgsql
+CREATE FUNCTION soundexesp(input text) RETURNS text
+    LANGUAGE plpgsql IMMUTABLE STRICT COST 500
     AS $$
 DECLARE
-	mislinked record;
-	result text;
-	linked integer;
-	deleted integer;
-	foundschema integer;
+	soundex text='';	
+	-- para determinar la primera letra
+	pri_letra text;
+	resto text;
+	sustituida text ='';
+	-- para quitar adyacentes
+	anterior text;
+	actual text;
+	corregido text;
 BEGIN
-
-	-- Since 7.3 schema support has been added.
-	-- Previous postgis versions used to put the database name in
-	-- the schema column. This needs to be fixed, so we try to
-	-- set the correct schema for each geometry_colums record
-	-- looking at table, column, type and srid.
-	UPDATE geometry_columns SET f_table_schema = n.nspname
-		FROM pg_namespace n, pg_class c, pg_attribute a,
-			pg_constraint sridcheck, pg_constraint typecheck
-			WHERE ( f_table_schema is NULL
-		OR f_table_schema = ''
-			OR f_table_schema NOT IN (
-					SELECT nspname::varchar
-					FROM pg_namespace nn, pg_class cc, pg_attribute aa
-					WHERE cc.relnamespace = nn.oid
-					AND cc.relname = f_table_name::name
-					AND aa.attrelid = cc.oid
-					AND aa.attname = f_geometry_column::name))
-			AND f_table_name::name = c.relname
-			AND c.oid = a.attrelid
-			AND c.relnamespace = n.oid
-			AND f_geometry_column::name = a.attname
-
-			AND sridcheck.conrelid = c.oid
-		AND sridcheck.consrc LIKE '(srid(% = %)'
-			AND sridcheck.consrc ~ textcat(' = ', srid::text)
-
-			AND typecheck.conrelid = c.oid
-		AND typecheck.consrc LIKE
-		'((geometrytype(%) = ''%''::text) OR (% IS NULL))'
-			AND typecheck.consrc ~ textcat(' = ''', type::text)
-
-			AND NOT EXISTS (
-					SELECT oid FROM geometry_columns gc
-					WHERE c.relname::varchar = gc.f_table_name
-					AND n.nspname::varchar = gc.f_table_schema
-					AND a.attname::varchar = gc.f_geometry_column
-			);
-
-	GET DIAGNOSTICS foundschema = ROW_COUNT;
-
-	-- no linkage to system table needed
-	return 'fixed:'||foundschema::text;
-
-END;
-$$;
-
-
---
--- Name: get_proj4_from_srid(integer); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION get_proj4_from_srid(integer) RETURNS text
-    LANGUAGE plpgsql IMMUTABLE STRICT
-    AS $_$
-BEGIN
-	RETURN proj4text::text FROM spatial_ref_sys WHERE srid= $1;
-END;
-$_$;
-
-
---
--- Name: lockrow(text, text, text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION lockrow(text, text, text) RETURNS integer
-    LANGUAGE sql STRICT
-    AS $_$ SELECT LockRow(current_schema(), $1, $2, $3, now()::timestamp+'1:00'); $_$;
-
-
---
--- Name: lockrow(text, text, text, text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION lockrow(text, text, text, text) RETURNS integer
-    LANGUAGE sql STRICT
-    AS $_$ SELECT LockRow($1, $2, $3, $4, now()::timestamp+'1:00'); $_$;
-
-
---
--- Name: lockrow(text, text, text, timestamp without time zone); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION lockrow(text, text, text, timestamp without time zone) RETURNS integer
-    LANGUAGE sql STRICT
-    AS $_$ SELECT LockRow(current_schema(), $1, $2, $3, $4); $_$;
-
-
---
--- Name: lockrow(text, text, text, text, timestamp without time zone); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION lockrow(text, text, text, text, timestamp without time zone) RETURNS integer
-    LANGUAGE plpgsql STRICT
-    AS $_$ 
-DECLARE
-	myschema alias for $1;
-	mytable alias for $2;
-	myrid   alias for $3;
-	authid alias for $4;
-	expires alias for $5;
-	ret int;
-	mytoid oid;
-	myrec RECORD;
-	
-BEGIN
-
-	IF NOT LongTransactionsEnabled() THEN
-		RAISE EXCEPTION 'Long transaction support disabled, use EnableLongTransaction() to enable.';
-	END IF;
-
-	EXECUTE 'DELETE FROM authorization_table WHERE expires < now()'; 
-
-	SELECT c.oid INTO mytoid FROM pg_class c, pg_namespace n
-		WHERE c.relname = mytable
-		AND c.relnamespace = n.oid
-		AND n.nspname = myschema;
-
-	-- RAISE NOTICE 'toid: %', mytoid;
-
-	FOR myrec IN SELECT * FROM authorization_table WHERE 
-		toid = mytoid AND rid = myrid
-	LOOP
-		IF myrec.authid != authid THEN
-			RETURN 0;
-		ELSE
-			RETURN 1;
+       -- devolver null si recibi un string en blanco o con espacios en blanco
+	IF length(trim(input))= 0 then
+		RETURN NULL;
+	end IF;
+ 
+ 
+	-- 1: LIMPIEZA:
+		-- pasar a mayuscula, eliminar la letra "H" inicial, los acentos y la enie
+		-- 'holá coñó' => 'OLA CONO'
+		input=translate(ltrim(trim(upper(input)),'H'),'ÑÁÉÍÓÚÀÈÌÒÙÜ','NAEIOUAEIOUU');
+ 
+		-- eliminar caracteres no alfabéticos (números, símbolos como &,%,",*,!,+, etc.
+		input=regexp_replace(input, '[^a-zA-Z]', '', 'g');
+ 
+	-- 2: PRIMERA LETRA ES IMPORTANTE, DEBO ASOCIAR LAS SIMILARES
+	--  'vaca' se convierte en 'baca'  y 'zapote' se convierte en 'sapote'
+	-- un fenomeno importante es GE y GI se vuelven JE y JI; CA se vuelve KA, etc
+	pri_letra =substr(input,1,1);
+	resto =substr(input,2);
+	CASE 
+		when pri_letra IN ('V') then
+			sustituida='B';
+		when pri_letra IN ('Z','X') then
+			sustituida='S';
+		when pri_letra IN ('G') AND substr(input,2,1) IN ('E','I') then
+			sustituida='J';
+		when pri_letra IN('C') AND substr(input,2,1) NOT IN ('H','E','I') then
+			sustituida='K';
+		else
+			sustituida=pri_letra;
+ 
+	end case;
+	--corregir el parametro con las consonantes sustituidas:
+	input=sustituida || resto;		
+ 
+	-- 3: corregir "letras compuestas" y volverlas una sola
+	input=REPLACE(input,'CH','V');
+	input=REPLACE(input,'QU','K');
+	input=REPLACE(input,'LL','J');
+	input=REPLACE(input,'CE','S');
+	input=REPLACE(input,'CI','S');
+	input=REPLACE(input,'YA','J');
+	input=REPLACE(input,'YE','J');
+	input=REPLACE(input,'YI','J');
+	input=REPLACE(input,'YO','J');
+	input=REPLACE(input,'YU','J');
+	input=REPLACE(input,'GE','J');
+	input=REPLACE(input,'GI','J');
+	input=REPLACE(input,'NY','N');
+	-- para debug:    --return input;
+ 
+	-- EMPIEZA EL CALCULO DEL SOUNDEX
+	-- 4: OBTENER PRIMERA letra
+	pri_letra=substr(input,1,1);
+ 
+	-- 5: retener el resto del string
+	resto=substr(input,2);
+ 
+	--6: en el resto del string, quitar vocales y vocales fonéticas
+	resto=translate(resto,'@AEIOUHWY','@');
+ 
+	--7: convertir las letras foneticamente equivalentes a numeros  (esto hace que B sea equivalente a V, C con S y Z, etc.)
+	resto=translate(resto, 'BPFVCGKSXZDTLMNRQJ', '111122222233455677');
+	-- así va quedando la cosa
+	soundex=pri_letra || resto;
+ 
+	--8: eliminar números iguales adyacentes (A11233 se vuelve A123)
+	anterior=substr(soundex,1,1);
+	corregido=anterior;
+ 
+	FOR i IN 2 .. length(soundex) LOOP
+		actual = substr(soundex, i, 1);
+		IF actual <> anterior THEN
+			corregido=corregido || actual;
+			anterior=actual;			
 		END IF;
 	END LOOP;
-
-	EXECUTE 'INSERT INTO authorization_table VALUES ('||
-		quote_literal(mytoid::text)||','||quote_literal(myrid)||
-		','||quote_literal(expires::text)||
-		','||quote_literal(authid) ||')';
-
-	GET DIAGNOSTICS ret = ROW_COUNT;
-
-	RETURN ret;
-END;
-$_$;
-
-
---
--- Name: longtransactionsenabled(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION longtransactionsenabled() RETURNS boolean
-    LANGUAGE plpgsql
-    AS $$ 
-DECLARE
-	rec RECORD;
-BEGIN
-	FOR rec IN SELECT oid FROM pg_class WHERE relname = 'authorized_tables'
-	LOOP
-		return 't';
-	END LOOP;
-	return 'f';
-END;
+	-- así va la cosa
+	soundex=corregido;
+ 
+	-- 9: siempre retornar un string de 4 posiciones
+	soundex=rpad(soundex,4,'0');
+	soundex=substr(soundex,1,4);		
+ 
+	-- YA ESTUVO
+	RETURN soundex;	
+END;	
 $$;
-
-
---
--- Name: populate_geometry_columns(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION populate_geometry_columns() RETURNS text
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-	inserted    integer;
-	oldcount    integer;
-	probed      integer;
-	stale       integer;
-	gcs         RECORD;
-	gc          RECORD;
-	gsrid       integer;
-	gndims      integer;
-	gtype       text;
-	query       text;
-	gc_is_valid boolean;
-
-BEGIN
-	SELECT count(*) INTO oldcount FROM geometry_columns;
-	inserted := 0;
-
-	EXECUTE 'TRUNCATE geometry_columns';
-
-	-- Count the number of geometry columns in all tables and views
-	SELECT count(DISTINCT c.oid) INTO probed
-	FROM pg_class c,
-		 pg_attribute a,
-		 pg_type t,
-		 pg_namespace n
-	WHERE (c.relkind = 'r' OR c.relkind = 'v')
-	AND t.typname = 'geometry'
-	AND a.attisdropped = false
-	AND a.atttypid = t.oid
-	AND a.attrelid = c.oid
-	AND c.relnamespace = n.oid
-	AND n.nspname NOT ILIKE 'pg_temp%';
-
-	-- Iterate through all non-dropped geometry columns
-	RAISE DEBUG 'Processing Tables.....';
-
-	FOR gcs IN
-	SELECT DISTINCT ON (c.oid) c.oid, n.nspname, c.relname
-		FROM pg_class c,
-			 pg_attribute a,
-			 pg_type t,
-			 pg_namespace n
-		WHERE c.relkind = 'r'
-		AND t.typname = 'geometry'
-		AND a.attisdropped = false
-		AND a.atttypid = t.oid
-		AND a.attrelid = c.oid
-		AND c.relnamespace = n.oid
-		AND n.nspname NOT ILIKE 'pg_temp%'
-	LOOP
-
-	inserted := inserted + populate_geometry_columns(gcs.oid);
-	END LOOP;
-
-	-- Add views to geometry columns table
-	RAISE DEBUG 'Processing Views.....';
-	FOR gcs IN
-	SELECT DISTINCT ON (c.oid) c.oid, n.nspname, c.relname
-		FROM pg_class c,
-			 pg_attribute a,
-			 pg_type t,
-			 pg_namespace n
-		WHERE c.relkind = 'v'
-		AND t.typname = 'geometry'
-		AND a.attisdropped = false
-		AND a.atttypid = t.oid
-		AND a.attrelid = c.oid
-		AND c.relnamespace = n.oid
-	LOOP
-
-	inserted := inserted + populate_geometry_columns(gcs.oid);
-	END LOOP;
-
-	IF oldcount > inserted THEN
-	stale = oldcount-inserted;
-	ELSE
-	stale = 0;
-	END IF;
-
-	RETURN 'probed:' ||probed|| ' inserted:'||inserted|| ' conflicts:'||probed-inserted|| ' deleted:'||stale;
-END
-
-$$;
-
-
---
--- Name: populate_geometry_columns(oid); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION populate_geometry_columns(tbl_oid oid) RETURNS integer
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-	gcs         RECORD;
-	gc          RECORD;
-	gsrid       integer;
-	gndims      integer;
-	gtype       text;
-	query       text;
-	gc_is_valid boolean;
-	inserted    integer;
-
-BEGIN
-	inserted := 0;
-
-	-- Iterate through all geometry columns in this table
-	FOR gcs IN
-	SELECT n.nspname, c.relname, a.attname
-		FROM pg_class c,
-			 pg_attribute a,
-			 pg_type t,
-			 pg_namespace n
-		WHERE c.relkind = 'r'
-		AND t.typname = 'geometry'
-		AND a.attisdropped = false
-		AND a.atttypid = t.oid
-		AND a.attrelid = c.oid
-		AND c.relnamespace = n.oid
-		AND n.nspname NOT ILIKE 'pg_temp%'
-		AND c.oid = tbl_oid
-	LOOP
-
-	RAISE DEBUG 'Processing table %.%.%', gcs.nspname, gcs.relname, gcs.attname;
-
-	DELETE FROM geometry_columns
-	  WHERE f_table_schema = gcs.nspname
-	  AND f_table_name = gcs.relname
-	  AND f_geometry_column = gcs.attname;
-
-	gc_is_valid := true;
-
-	-- Try to find srid check from system tables (pg_constraint)
-	gsrid :=
-		(SELECT replace(replace(split_part(s.consrc, ' = ', 2), ')', ''), '(', '')
-		 FROM pg_class c, pg_namespace n, pg_attribute a, pg_constraint s
-		 WHERE n.nspname = gcs.nspname
-		 AND c.relname = gcs.relname
-		 AND a.attname = gcs.attname
-		 AND a.attrelid = c.oid
-		 AND s.connamespace = n.oid
-		 AND s.conrelid = c.oid
-		 AND a.attnum = ANY (s.conkey)
-		 AND s.consrc LIKE '%srid(% = %');
-	IF (gsrid IS NULL) THEN
-		-- Try to find srid from the geometry itself
-		EXECUTE 'SELECT srid(' || quote_ident(gcs.attname) || ')
-				 FROM ONLY ' || quote_ident(gcs.nspname) || '.' || quote_ident(gcs.relname) || '
-				 WHERE ' || quote_ident(gcs.attname) || ' IS NOT NULL LIMIT 1'
-			INTO gc;
-		gsrid := gc.srid;
-
-		-- Try to apply srid check to column
-		IF (gsrid IS NOT NULL) THEN
-			BEGIN
-				EXECUTE 'ALTER TABLE ONLY ' || quote_ident(gcs.nspname) || '.' || quote_ident(gcs.relname) || '
-						 ADD CONSTRAINT ' || quote_ident('enforce_srid_' || gcs.attname) || '
-						 CHECK (srid(' || quote_ident(gcs.attname) || ') = ' || gsrid || ')';
-			EXCEPTION
-				WHEN check_violation THEN
-					RAISE WARNING 'Not inserting ''%'' in ''%.%'' into geometry_columns: could not apply constraint CHECK (srid(%) = %)', quote_ident(gcs.attname), quote_ident(gcs.nspname), quote_ident(gcs.relname), quote_ident(gcs.attname), gsrid;
-					gc_is_valid := false;
-			END;
-		END IF;
-	END IF;
-
-	-- Try to find ndims check from system tables (pg_constraint)
-	gndims :=
-		(SELECT replace(split_part(s.consrc, ' = ', 2), ')', '')
-		 FROM pg_class c, pg_namespace n, pg_attribute a, pg_constraint s
-		 WHERE n.nspname = gcs.nspname
-		 AND c.relname = gcs.relname
-		 AND a.attname = gcs.attname
-		 AND a.attrelid = c.oid
-		 AND s.connamespace = n.oid
-		 AND s.conrelid = c.oid
-		 AND a.attnum = ANY (s.conkey)
-		 AND s.consrc LIKE '%ndims(% = %');
-	IF (gndims IS NULL) THEN
-		-- Try to find ndims from the geometry itself
-		EXECUTE 'SELECT ndims(' || quote_ident(gcs.attname) || ')
-				 FROM ONLY ' || quote_ident(gcs.nspname) || '.' || quote_ident(gcs.relname) || '
-				 WHERE ' || quote_ident(gcs.attname) || ' IS NOT NULL LIMIT 1'
-			INTO gc;
-		gndims := gc.ndims;
-
-		-- Try to apply ndims check to column
-		IF (gndims IS NOT NULL) THEN
-			BEGIN
-				EXECUTE 'ALTER TABLE ONLY ' || quote_ident(gcs.nspname) || '.' || quote_ident(gcs.relname) || '
-						 ADD CONSTRAINT ' || quote_ident('enforce_dims_' || gcs.attname) || '
-						 CHECK (ndims(' || quote_ident(gcs.attname) || ') = '||gndims||')';
-			EXCEPTION
-				WHEN check_violation THEN
-					RAISE WARNING 'Not inserting ''%'' in ''%.%'' into geometry_columns: could not apply constraint CHECK (ndims(%) = %)', quote_ident(gcs.attname), quote_ident(gcs.nspname), quote_ident(gcs.relname), quote_ident(gcs.attname), gndims;
-					gc_is_valid := false;
-			END;
-		END IF;
-	END IF;
-
-	-- Try to find geotype check from system tables (pg_constraint)
-	gtype :=
-		(SELECT replace(split_part(s.consrc, '''', 2), ')', '')
-		 FROM pg_class c, pg_namespace n, pg_attribute a, pg_constraint s
-		 WHERE n.nspname = gcs.nspname
-		 AND c.relname = gcs.relname
-		 AND a.attname = gcs.attname
-		 AND a.attrelid = c.oid
-		 AND s.connamespace = n.oid
-		 AND s.conrelid = c.oid
-		 AND a.attnum = ANY (s.conkey)
-		 AND s.consrc LIKE '%geometrytype(% = %');
-	IF (gtype IS NULL) THEN
-		-- Try to find geotype from the geometry itself
-		EXECUTE 'SELECT geometrytype(' || quote_ident(gcs.attname) || ')
-				 FROM ONLY ' || quote_ident(gcs.nspname) || '.' || quote_ident(gcs.relname) || '
-				 WHERE ' || quote_ident(gcs.attname) || ' IS NOT NULL LIMIT 1'
-			INTO gc;
-		gtype := gc.geometrytype;
-		--IF (gtype IS NULL) THEN
-		--    gtype := 'GEOMETRY';
-		--END IF;
-
-		-- Try to apply geometrytype check to column
-		IF (gtype IS NOT NULL) THEN
-			BEGIN
-				EXECUTE 'ALTER TABLE ONLY ' || quote_ident(gcs.nspname) || '.' || quote_ident(gcs.relname) || '
-				ADD CONSTRAINT ' || quote_ident('enforce_geotype_' || gcs.attname) || '
-				CHECK ((geometrytype(' || quote_ident(gcs.attname) || ') = ' || quote_literal(gtype) || ') OR (' || quote_ident(gcs.attname) || ' IS NULL))';
-			EXCEPTION
-				WHEN check_violation THEN
-					-- No geometry check can be applied. This column contains a number of geometry types.
-					RAISE WARNING 'Could not add geometry type check (%) to table column: %.%.%', gtype, quote_ident(gcs.nspname),quote_ident(gcs.relname),quote_ident(gcs.attname);
-			END;
-		END IF;
-	END IF;
-
-	IF (gsrid IS NULL) THEN
-		RAISE WARNING 'Not inserting ''%'' in ''%.%'' into geometry_columns: could not determine the srid', quote_ident(gcs.attname), quote_ident(gcs.nspname), quote_ident(gcs.relname);
-	ELSIF (gndims IS NULL) THEN
-		RAISE WARNING 'Not inserting ''%'' in ''%.%'' into geometry_columns: could not determine the number of dimensions', quote_ident(gcs.attname), quote_ident(gcs.nspname), quote_ident(gcs.relname);
-	ELSIF (gtype IS NULL) THEN
-		RAISE WARNING 'Not inserting ''%'' in ''%.%'' into geometry_columns: could not determine the geometry type', quote_ident(gcs.attname), quote_ident(gcs.nspname), quote_ident(gcs.relname);
-	ELSE
-		-- Only insert into geometry_columns if table constraints could be applied.
-		IF (gc_is_valid) THEN
-			INSERT INTO geometry_columns (f_table_catalog,f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, type)
-			VALUES ('', gcs.nspname, gcs.relname, gcs.attname, gndims, gsrid, gtype);
-			inserted := inserted + 1;
-		END IF;
-	END IF;
-	END LOOP;
-
-	-- Add views to geometry columns table
-	FOR gcs IN
-	SELECT n.nspname, c.relname, a.attname
-		FROM pg_class c,
-			 pg_attribute a,
-			 pg_type t,
-			 pg_namespace n
-		WHERE c.relkind = 'v'
-		AND t.typname = 'geometry'
-		AND a.attisdropped = false
-		AND a.atttypid = t.oid
-		AND a.attrelid = c.oid
-		AND c.relnamespace = n.oid
-		AND n.nspname NOT ILIKE 'pg_temp%'
-		AND c.oid = tbl_oid
-	LOOP
-		RAISE DEBUG 'Processing view %.%.%', gcs.nspname, gcs.relname, gcs.attname;
-
-	DELETE FROM geometry_columns
-	  WHERE f_table_schema = gcs.nspname
-	  AND f_table_name = gcs.relname
-	  AND f_geometry_column = gcs.attname;
-	  
-		EXECUTE 'SELECT ndims(' || quote_ident(gcs.attname) || ')
-				 FROM ' || quote_ident(gcs.nspname) || '.' || quote_ident(gcs.relname) || '
-				 WHERE ' || quote_ident(gcs.attname) || ' IS NOT NULL LIMIT 1'
-			INTO gc;
-		gndims := gc.ndims;
-
-		EXECUTE 'SELECT srid(' || quote_ident(gcs.attname) || ')
-				 FROM ' || quote_ident(gcs.nspname) || '.' || quote_ident(gcs.relname) || '
-				 WHERE ' || quote_ident(gcs.attname) || ' IS NOT NULL LIMIT 1'
-			INTO gc;
-		gsrid := gc.srid;
-
-		EXECUTE 'SELECT geometrytype(' || quote_ident(gcs.attname) || ')
-				 FROM ' || quote_ident(gcs.nspname) || '.' || quote_ident(gcs.relname) || '
-				 WHERE ' || quote_ident(gcs.attname) || ' IS NOT NULL LIMIT 1'
-			INTO gc;
-		gtype := gc.geometrytype;
-
-		IF (gndims IS NULL) THEN
-			RAISE WARNING 'Not inserting ''%'' in ''%.%'' into geometry_columns: could not determine ndims', quote_ident(gcs.attname), quote_ident(gcs.nspname), quote_ident(gcs.relname);
-		ELSIF (gsrid IS NULL) THEN
-			RAISE WARNING 'Not inserting ''%'' in ''%.%'' into geometry_columns: could not determine srid', quote_ident(gcs.attname), quote_ident(gcs.nspname), quote_ident(gcs.relname);
-		ELSIF (gtype IS NULL) THEN
-			RAISE WARNING 'Not inserting ''%'' in ''%.%'' into geometry_columns: could not determine gtype', quote_ident(gcs.attname), quote_ident(gcs.nspname), quote_ident(gcs.relname);
-		ELSE
-			query := 'INSERT INTO geometry_columns (f_table_catalog,f_table_schema, f_table_name, f_geometry_column, coord_dimension, srid, type) ' ||
-					 'VALUES ('''', ' || quote_literal(gcs.nspname) || ',' || quote_literal(gcs.relname) || ',' || quote_literal(gcs.attname) || ',' || gndims || ',' || gsrid || ',' || quote_literal(gtype) || ')';
-			EXECUTE query;
-			inserted := inserted + 1;
-		END IF;
-	END LOOP;
-
-	RETURN inserted;
-END
-
-$$;
-
-
---
--- Name: postgis_full_version(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION postgis_full_version() RETURNS text
-    LANGUAGE plpgsql IMMUTABLE
-    AS $$
-DECLARE
-	libver text;
-	projver text;
-	geosver text;
-	libxmlver text;
-	usestats bool;
-	dbproc text;
-	relproc text;
-	fullver text;
-BEGIN
-	SELECT postgis_lib_version() INTO libver;
-	SELECT postgis_proj_version() INTO projver;
-	SELECT postgis_geos_version() INTO geosver;
-	SELECT postgis_libxml_version() INTO libxmlver;
-	SELECT postgis_uses_stats() INTO usestats;
-	SELECT postgis_scripts_installed() INTO dbproc;
-	SELECT postgis_scripts_released() INTO relproc;
-
-	fullver = 'POSTGIS="' || libver || '"';
-
-	IF  geosver IS NOT NULL THEN
-		fullver = fullver || ' GEOS="' || geosver || '"';
-	END IF;
-
-	IF  projver IS NOT NULL THEN
-		fullver = fullver || ' PROJ="' || projver || '"';
-	END IF;
-
-	IF  libxmlver IS NOT NULL THEN
-		fullver = fullver || ' LIBXML="' || libxmlver || '"';
-	END IF;
-
-	IF usestats THEN
-		fullver = fullver || ' USE_STATS';
-	END IF;
-
-	-- fullver = fullver || ' DBPROC="' || dbproc || '"';
-	-- fullver = fullver || ' RELPROC="' || relproc || '"';
-
-	IF dbproc != relproc THEN
-		fullver = fullver || ' (procs from ' || dbproc || ' need upgrade)';
-	END IF;
-
-	RETURN fullver;
-END
-$$;
-
-
---
--- Name: postgis_scripts_build_date(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION postgis_scripts_build_date() RETURNS text
-    LANGUAGE sql IMMUTABLE
-    AS $$SELECT '2012-07-31 12:22:28'::text AS version$$;
-
-
---
--- Name: postgis_scripts_installed(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION postgis_scripts_installed() RETURNS text
-    LANGUAGE sql IMMUTABLE
-    AS $$SELECT '1.5 r7360'::text AS version$$;
-
-
---
--- Name: probe_geometry_columns(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION probe_geometry_columns() RETURNS text
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-	inserted integer;
-	oldcount integer;
-	probed integer;
-	stale integer;
-BEGIN
-
-	SELECT count(*) INTO oldcount FROM geometry_columns;
-
-	SELECT count(*) INTO probed
-		FROM pg_class c, pg_attribute a, pg_type t,
-			pg_namespace n,
-			pg_constraint sridcheck, pg_constraint typecheck
-
-		WHERE t.typname = 'geometry'
-		AND a.atttypid = t.oid
-		AND a.attrelid = c.oid
-		AND c.relnamespace = n.oid
-		AND sridcheck.connamespace = n.oid
-		AND typecheck.connamespace = n.oid
-		AND sridcheck.conrelid = c.oid
-		AND sridcheck.consrc LIKE '(srid('||a.attname||') = %)'
-		AND typecheck.conrelid = c.oid
-		AND typecheck.consrc LIKE
-		'((geometrytype('||a.attname||') = ''%''::text) OR (% IS NULL))'
-		;
-
-	INSERT INTO geometry_columns SELECT
-		''::varchar as f_table_catalogue,
-		n.nspname::varchar as f_table_schema,
-		c.relname::varchar as f_table_name,
-		a.attname::varchar as f_geometry_column,
-		2 as coord_dimension,
-		trim(both  ' =)' from
-			replace(replace(split_part(
-				sridcheck.consrc, ' = ', 2), ')', ''), '(', ''))::integer AS srid,
-		trim(both ' =)''' from substr(typecheck.consrc,
-			strpos(typecheck.consrc, '='),
-			strpos(typecheck.consrc, '::')-
-			strpos(typecheck.consrc, '=')
-			))::varchar as type
-		FROM pg_class c, pg_attribute a, pg_type t,
-			pg_namespace n,
-			pg_constraint sridcheck, pg_constraint typecheck
-		WHERE t.typname = 'geometry'
-		AND a.atttypid = t.oid
-		AND a.attrelid = c.oid
-		AND c.relnamespace = n.oid
-		AND sridcheck.connamespace = n.oid
-		AND typecheck.connamespace = n.oid
-		AND sridcheck.conrelid = c.oid
-		AND sridcheck.consrc LIKE '(st_srid('||a.attname||') = %)'
-		AND typecheck.conrelid = c.oid
-		AND typecheck.consrc LIKE
-		'((geometrytype('||a.attname||') = ''%''::text) OR (% IS NULL))'
-
-			AND NOT EXISTS (
-					SELECT oid FROM geometry_columns gc
-					WHERE c.relname::varchar = gc.f_table_name
-					AND n.nspname::varchar = gc.f_table_schema
-					AND a.attname::varchar = gc.f_geometry_column
-			);
-
-	GET DIAGNOSTICS inserted = ROW_COUNT;
-
-	IF oldcount > probed THEN
-		stale = oldcount-probed;
-	ELSE
-		stale = 0;
-	END IF;
-
-	RETURN 'probed:'||probed::text||
-		' inserted:'||inserted::text||
-		' conflicts:'||(probed-inserted)::text||
-		' stale:'||stale::text;
-END
-
-$$;
-
-
---
--- Name: rename_geometry_table_constraints(); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION rename_geometry_table_constraints() RETURNS text
-    LANGUAGE sql IMMUTABLE
-    AS $$
-SELECT 'rename_geometry_table_constraint() is obsoleted'::text
-$$;
-
-
---
--- Name: st_area(text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION st_area(text) RETURNS double precision
-    LANGUAGE sql IMMUTABLE STRICT
-    AS $_$ SELECT ST_Area($1::geometry);  $_$;
-
-
---
--- Name: st_asbinary(text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION st_asbinary(text) RETURNS bytea
-    LANGUAGE sql IMMUTABLE STRICT
-    AS $_$ SELECT ST_AsBinary($1::geometry);  $_$;
-
-
---
--- Name: st_asgeojson(text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION st_asgeojson(text) RETURNS text
-    LANGUAGE sql IMMUTABLE STRICT
-    AS $_$ SELECT ST_AsGeoJson($1::geometry);  $_$;
-
-
---
--- Name: st_asgml(text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION st_asgml(text) RETURNS text
-    LANGUAGE sql IMMUTABLE STRICT
-    AS $_$ SELECT ST_AsGML($1::geometry);  $_$;
-
-
---
--- Name: st_askml(text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION st_askml(text) RETURNS text
-    LANGUAGE sql IMMUTABLE STRICT
-    AS $_$ SELECT ST_AsKML($1::geometry);  $_$;
-
-
---
--- Name: st_assvg(text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION st_assvg(text) RETURNS text
-    LANGUAGE sql IMMUTABLE STRICT
-    AS $_$ SELECT ST_AsSVG($1::geometry);  $_$;
-
-
---
--- Name: st_astext(text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION st_astext(text) RETURNS text
-    LANGUAGE sql IMMUTABLE STRICT
-    AS $_$ SELECT ST_AsText($1::geometry);  $_$;
-
-
---
--- Name: st_coveredby(text, text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION st_coveredby(text, text) RETURNS boolean
-    LANGUAGE sql IMMUTABLE
-    AS $_$ SELECT ST_CoveredBy($1::geometry, $2::geometry);  $_$;
-
-
---
--- Name: st_covers(text, text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION st_covers(text, text) RETURNS boolean
-    LANGUAGE sql IMMUTABLE
-    AS $_$ SELECT ST_Covers($1::geometry, $2::geometry);  $_$;
-
-
---
--- Name: st_distance(text, text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION st_distance(text, text) RETURNS double precision
-    LANGUAGE sql IMMUTABLE STRICT
-    AS $_$ SELECT ST_Distance($1::geometry, $2::geometry);  $_$;
-
-
---
--- Name: st_dwithin(text, text, double precision); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION st_dwithin(text, text, double precision) RETURNS boolean
-    LANGUAGE sql IMMUTABLE
-    AS $_$ SELECT ST_DWithin($1::geometry, $2::geometry, $3);  $_$;
-
-
---
--- Name: st_intersects(text, text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION st_intersects(text, text) RETURNS boolean
-    LANGUAGE sql IMMUTABLE
-    AS $_$ SELECT ST_Intersects($1::geometry, $2::geometry);  $_$;
-
-
---
--- Name: st_length(text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION st_length(text) RETURNS double precision
-    LANGUAGE sql IMMUTABLE STRICT
-    AS $_$ SELECT ST_Length($1::geometry);  $_$;
-
-
---
--- Name: unlockrows(text); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION unlockrows(text) RETURNS integer
-    LANGUAGE plpgsql STRICT
-    AS $_$ 
-DECLARE
-	ret int;
-BEGIN
-
-	IF NOT LongTransactionsEnabled() THEN
-		RAISE EXCEPTION 'Long transaction support disabled, use EnableLongTransaction() to enable.';
-	END IF;
-
-	EXECUTE 'DELETE FROM authorization_table where authid = ' ||
-		quote_literal($1);
-
-	GET DIAGNOSTICS ret = ROW_COUNT;
-
-	RETURN ret;
-END;
-$_$;
-
-
---
--- Name: updategeometrysrid(character varying, character varying, integer); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION updategeometrysrid(character varying, character varying, integer) RETURNS text
-    LANGUAGE plpgsql STRICT
-    AS $_$
-DECLARE
-	ret  text;
-BEGIN
-	SELECT UpdateGeometrySRID('','',$1,$2,$3) into ret;
-	RETURN ret;
-END;
-$_$;
-
-
---
--- Name: updategeometrysrid(character varying, character varying, character varying, integer); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION updategeometrysrid(character varying, character varying, character varying, integer) RETURNS text
-    LANGUAGE plpgsql STRICT
-    AS $_$
-DECLARE
-	ret  text;
-BEGIN
-	SELECT UpdateGeometrySRID('',$1,$2,$3,$4) into ret;
-	RETURN ret;
-END;
-$_$;
-
-
---
--- Name: updategeometrysrid(character varying, character varying, character varying, character varying, integer); Type: FUNCTION; Schema: public; Owner: -
---
-
-CREATE FUNCTION updategeometrysrid(character varying, character varying, character varying, character varying, integer) RETURNS text
-    LANGUAGE plpgsql STRICT
-    AS $_$
-DECLARE
-	catalog_name alias for $1;
-	schema_name alias for $2;
-	table_name alias for $3;
-	column_name alias for $4;
-	new_srid alias for $5;
-	myrec RECORD;
-	okay boolean;
-	cname varchar;
-	real_schema name;
-
-BEGIN
-
-
-	-- Find, check or fix schema_name
-	IF ( schema_name != '' ) THEN
-		okay = 'f';
-
-		FOR myrec IN SELECT nspname FROM pg_namespace WHERE text(nspname) = schema_name LOOP
-			okay := 't';
-		END LOOP;
-
-		IF ( okay <> 't' ) THEN
-			RAISE EXCEPTION 'Invalid schema name';
-		ELSE
-			real_schema = schema_name;
-		END IF;
-	ELSE
-		SELECT INTO real_schema current_schema()::text;
-	END IF;
-
-	-- Find out if the column is in the geometry_columns table
-	okay = 'f';
-	FOR myrec IN SELECT * from geometry_columns where f_table_schema = text(real_schema) and f_table_name = table_name and f_geometry_column = column_name LOOP
-		okay := 't';
-	END LOOP;
-	IF (okay <> 't') THEN
-		RAISE EXCEPTION 'column not found in geometry_columns table';
-		RETURN 'f';
-	END IF;
-
-	-- Update ref from geometry_columns table
-	EXECUTE 'UPDATE geometry_columns SET SRID = ' || new_srid::text ||
-		' where f_table_schema = ' ||
-		quote_literal(real_schema) || ' and f_table_name = ' ||
-		quote_literal(table_name)  || ' and f_geometry_column = ' ||
-		quote_literal(column_name);
-
-	-- Make up constraint name
-	cname = 'enforce_srid_'  || column_name;
-
-	-- Drop enforce_srid constraint
-	EXECUTE 'ALTER TABLE ' || quote_ident(real_schema) ||
-		'.' || quote_ident(table_name) ||
-		' DROP constraint ' || quote_ident(cname);
-
-	-- Update geometries SRID
-	EXECUTE 'UPDATE ' || quote_ident(real_schema) ||
-		'.' || quote_ident(table_name) ||
-		' SET ' || quote_ident(column_name) ||
-		' = setSRID(' || quote_ident(column_name) ||
-		', ' || new_srid::text || ')';
-
-	-- Reset enforce_srid constraint
-	EXECUTE 'ALTER TABLE ' || quote_ident(real_schema) ||
-		'.' || quote_ident(table_name) ||
-		' ADD constraint ' || quote_ident(cname) ||
-		' CHECK (srid(' || quote_ident(column_name) ||
-		') = ' || new_srid::text || ')';
-
-	RETURN real_schema || '.' || table_name || '.' || column_name ||' SRID changed to ' || new_srid::text;
-
-END;
-$_$;
 
 
 --
@@ -1950,11 +534,23 @@ CREATE TABLE antecedente_victima (
 
 
 --
+-- Name: ayudaestado_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ayudaestado_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
 -- Name: ayudaestado; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE ayudaestado (
-    id integer DEFAULT nextval('acreditacion_seq'::regclass) NOT NULL,
+    id integer DEFAULT nextval('ayudaestado_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
     fechacreacion date DEFAULT '2013-06-16'::date NOT NULL,
     fechadeshabilitacion date,
@@ -1977,30 +573,6 @@ CREATE TABLE ayudaestado_respuesta (
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
-
-
---
--- Name: ayudaestado_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE ayudaestado_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: ayudaestado_seql; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE ayudaestado_seql
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
 
 
 --
@@ -2038,7 +610,7 @@ CREATE TABLE ayudasjr_respuesta (
     id_caso integer NOT NULL,
     fechaatencion date NOT NULL,
     id_ayudasjr integer NOT NULL,
-    detalle character varying(5000),
+    detallear character varying(5000),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -2113,7 +685,7 @@ CREATE TABLE caso_contexto (
 CREATE TABLE caso_etiqueta (
     id_caso integer NOT NULL,
     id_etiqueta integer NOT NULL,
-    id_funcionario integer NOT NULL,
+    id_usuario integer NOT NULL,
     fecha date NOT NULL,
     observaciones character varying(5000),
     created_at timestamp without time zone,
@@ -2166,19 +738,6 @@ CREATE TABLE caso_frontera (
 
 
 --
--- Name: caso_funcionario; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE caso_funcionario (
-    id_funcionario integer NOT NULL,
-    id_caso integer NOT NULL,
-    fechainicio date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
 -- Name: caso_presponsable; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2211,13 +770,26 @@ CREATE TABLE caso_region (
 
 
 --
+-- Name: caso_usuario; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE caso_usuario (
+    id_usuario integer NOT NULL,
+    id_caso integer NOT NULL,
+    fechainicio date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
 -- Name: casosjr; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE casosjr (
     id_caso integer NOT NULL,
-    fecharec date,
-    asesor integer,
+    fecharec date NOT NULL,
+    asesor integer NOT NULL,
     id_regionsjr integer,
     direccion character varying(1000),
     telefono character varying(1000),
@@ -2414,6 +986,135 @@ CREATE TABLE comunidad_vinculoestado (
 
 
 --
+-- Name: persona_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE persona_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: persona; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE persona (
+    id integer DEFAULT nextval('persona_seq'::regclass) NOT NULL,
+    nombres character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
+    apellidos character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
+    anionac integer,
+    mesnac integer,
+    dianac integer,
+    sexo character(1) NOT NULL,
+    id_departamento integer,
+    id_municipio integer,
+    id_clase integer,
+    tipodocumento character varying(2),
+    numerodocumento bigint,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT persona_check CHECK (((dianac IS NULL) OR ((((dianac >= 1) AND ((((((((mesnac = 1) OR (mesnac = 3)) OR (mesnac = 5)) OR (mesnac = 7)) OR (mesnac = 8)) OR (mesnac = 10)) OR (mesnac = 12)) AND (dianac <= 31))) OR (((((mesnac = 4) OR (mesnac = 6)) OR (mesnac = 9)) OR (mesnac = 11)) AND (dianac <= 30))) OR ((mesnac = 2) AND (dianac <= 29))))),
+    CONSTRAINT persona_mesnac_check CHECK (((mesnac IS NULL) OR ((mesnac >= 1) AND (mesnac <= 12)))),
+    CONSTRAINT persona_sexo_check CHECK ((((sexo = 'S'::bpchar) OR (sexo = 'F'::bpchar)) OR (sexo = 'M'::bpchar)))
+);
+
+
+--
+-- Name: victima; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE victima (
+    id_persona integer NOT NULL,
+    id_caso integer NOT NULL,
+    hijos integer,
+    id_profesion integer NOT NULL,
+    id_rangoedad integer NOT NULL,
+    id_filiacion integer NOT NULL,
+    id_sectorsocial integer NOT NULL,
+    id_organizacion integer NOT NULL,
+    id_vinculoestado integer NOT NULL,
+    organizacionarmada integer NOT NULL,
+    anotaciones character varying(1000),
+    id_etnia integer,
+    id_iglesia integer,
+    orientacionsexual character(1) DEFAULT 'H'::bpchar NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT victima_hijos_check CHECK (((hijos IS NULL) OR ((hijos >= 0) AND (hijos <= 100)))),
+    CONSTRAINT victima_orientacionsexual_check CHECK (((((((orientacionsexual = 'L'::bpchar) OR (orientacionsexual = 'G'::bpchar)) OR (orientacionsexual = 'B'::bpchar)) OR (orientacionsexual = 'T'::bpchar)) OR (orientacionsexual = 'I'::bpchar)) OR (orientacionsexual = 'H'::bpchar)))
+);
+
+
+--
+-- Name: cons; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW cons AS
+ SELECT DISTINCT victima.id_persona,
+    caso.id AS id_caso,
+    categoria.id_tviolencia,
+    categoria.id_supracategoria,
+    acto.id_categoria
+   FROM victima,
+    persona,
+    acto,
+    caso,
+    categoria
+  WHERE ((((((((((categoria.id = acto.id_categoria) AND (caso.id <> (-1))) AND (caso.fecha >= '1990-01-01'::date)) AND (caso.fecha <= '2024-11-30'::date)) AND (caso.fecha >= '1991-03-04'::date)) AND (victima.id_caso = caso.id)) AND (victima.id_persona = persona.id)) AND (persona.id = acto.id_persona)) AND (acto.id_caso = caso.id)) AND (acto.id_categoria = categoria.id));
+
+
+--
+-- Name: ubicacion_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ubicacion_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ubicacion; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE ubicacion (
+    id integer DEFAULT nextval('ubicacion_seq'::regclass) NOT NULL,
+    lugar character varying(500) COLLATE public.es_co_utf_8,
+    sitio character varying(500) COLLATE public.es_co_utf_8,
+    id_clase integer,
+    id_municipio integer,
+    id_departamento integer,
+    id_tsitio integer NOT NULL,
+    id_caso integer NOT NULL,
+    latitud double precision,
+    longitud double precision,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: cons2; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW cons2 AS
+ SELECT cons.id_persona,
+    cons.id_tviolencia,
+    cons.id_supracategoria,
+    cons.id_categoria,
+    ubicacion.id_departamento,
+    ubicacion.id_municipio
+   FROM ubicacion,
+    cons
+  WHERE (cons.id_caso = ubicacion.id_caso);
+
+
+--
 -- Name: contexto_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2514,7 +1215,7 @@ CREATE SEQUENCE derecho_seq
 
 CREATE TABLE derecho (
     id integer DEFAULT nextval('derecho_seq'::regclass) NOT NULL,
-    nombre character varying(50) NOT NULL,
+    nombre character varying(100) NOT NULL,
     fechacreacion date DEFAULT '2013-06-12'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
@@ -2876,48 +1577,6 @@ CREATE TABLE frontera (
 
 
 --
--- Name: funcionario_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE funcionario_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: funcionario; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE funcionario (
-    id integer DEFAULT nextval('funcionario_seq'::regclass) NOT NULL,
-    anotacion character varying(50),
-    nombre character varying(15) NOT NULL UNIQUE,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
-SET default_with_oids = true;
-
---
--- Name: geometry_columns; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE geometry_columns (
-    f_table_catalog character varying(256) NOT NULL,
-    f_table_schema character varying(256) NOT NULL,
-    f_table_name character varying(256) NOT NULL,
-    f_geometry_column character varying(256) NOT NULL,
-    coord_dimension integer NOT NULL,
-    srid integer NOT NULL,
-    type character varying(30) NOT NULL
-);
-
-
---
 -- Name: grupoper_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2928,8 +1587,6 @@ CREATE SEQUENCE grupoper_seq
     NO MAXVALUE
     CACHE 1;
 
-
-SET default_with_oids = false;
 
 --
 -- Name: grupoper; Type: TABLE; Schema: public; Owner: -; Tablespace: 
@@ -3163,11 +1820,23 @@ CREATE TABLE motivoconsulta (
 
 
 --
+-- Name: motivosjr_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE motivosjr_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
 -- Name: motivosjr; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE motivosjr (
-    id integer DEFAULT nextval('acreditacion_seq'::regclass) NOT NULL,
+    id integer DEFAULT nextval('motivosjr_seq'::regclass) NOT NULL,
     nombre character varying(100) NOT NULL,
     fechacreacion date DEFAULT '2013-06-16'::date NOT NULL,
     fechadeshabilitacion date,
@@ -3189,18 +1858,6 @@ CREATE TABLE motivosjr_respuesta (
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
-
-
---
--- Name: motivosjr_seql; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE motivosjr_seql
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
 
 
 --
@@ -3287,43 +1944,6 @@ CREATE TABLE pconsolidado (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     CONSTRAINT pconsolidado_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
-);
-
-
---
--- Name: persona_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE persona_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: persona; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE persona (
-    id integer DEFAULT nextval('persona_seq'::regclass) NOT NULL,
-    nombres character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
-    apellidos character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
-    anionac integer,
-    mesnac integer,
-    dianac integer,
-    sexo character(1) NOT NULL,
-    id_departamento integer,
-    id_municipio integer,
-    id_clase integer,
-    tipodocumento character varying(2),
-    numerodocumento bigint,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    CONSTRAINT persona_check CHECK (((dianac IS NULL) OR ((((dianac >= 1) AND ((((((((mesnac = 1) OR (mesnac = 3)) OR (mesnac = 5)) OR (mesnac = 7)) OR (mesnac = 8)) OR (mesnac = 10)) OR (mesnac = 12)) AND (dianac <= 31))) OR (((((mesnac = 4) OR (mesnac = 6)) OR (mesnac = 9)) OR (mesnac = 11)) AND (dianac <= 30))) OR ((mesnac = 2) AND (dianac <= 29))))),
-    CONSTRAINT persona_mesnac_check CHECK (((mesnac IS NULL) OR ((mesnac >= 1) AND (mesnac <= 12)))),
-    CONSTRAINT persona_sexo_check CHECK ((((sexo = 'S'::bpchar) OR (sexo = 'F'::bpchar)) OR (sexo = 'M'::bpchar)))
 );
 
 
@@ -3551,7 +2171,7 @@ CREATE SEQUENCE rangoedad_seq
 
 CREATE TABLE rangoedad (
     id integer DEFAULT nextval('rangoedad_seq'::regclass) NOT NULL,
-    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    nombre character varying(20) COLLATE public.es_co_utf_8 NOT NULL,
     rango character varying(20) NOT NULL,
     limiteinferior integer DEFAULT 0 NOT NULL,
     limitesuperior integer DEFAULT 0 NOT NULL,
@@ -3640,7 +2260,7 @@ CREATE TABLE regionsjr (
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    CONSTRAINT ubicacion_up_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+    CONSTRAINT regionsjr_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
@@ -3770,19 +2390,6 @@ CREATE TABLE sectorsocial (
 
 
 --
--- Name: spatial_ref_sys; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE spatial_ref_sys (
-    srid integer NOT NULL,
-    auth_name character varying(256),
-    auth_srid integer,
-    srtext character varying(2048),
-    proj4text character varying(2048)
-);
-
-
---
 -- Name: supracategoria; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3839,18 +2446,6 @@ CREATE TABLE tclase (
     updated_at timestamp without time zone,
     CONSTRAINT tclase_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
-
-
---
--- Name: tdesplazamiento_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE tdesplazamiento_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
 
 
 --
@@ -3969,10 +2564,10 @@ CREATE TABLE tviolencia (
 
 
 --
--- Name: ubicacion_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: usuario_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE ubicacion_seq
+CREATE SEQUENCE usuario_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -3981,76 +2576,33 @@ CREATE SEQUENCE ubicacion_seq
 
 
 --
--- Name: ubicacion; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE ubicacion (
-    id integer DEFAULT nextval('ubicacion_seq'::regclass) NOT NULL,
-    lugar character varying(500) COLLATE public.es_co_utf_8,
-    sitio character varying(500) COLLATE public.es_co_utf_8,
-    id_clase integer,
-    id_municipio integer,
-    id_departamento integer,
-    id_tsitio integer NOT NULL,
-    id_caso integer NOT NULL,
-    latitud double precision,
-    longitud double precision,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
 -- Name: usuario; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE usuario (
-    id character varying(15) NOT NULL,
+    id integer DEFAULT nextval('usuario_seq'::regclass) NOT NULL,
+    nusuario character varying(15) NOT NULL,
     password character varying(64) NOT NULL,
     nombre character varying(50) COLLATE public.es_co_utf_8,
     descripcion character varying(50),
-    rol integer,
-    diasedicion integer,
+    rol integer DEFAULT 4,
     idioma character varying(6) DEFAULT 'es_CO'::character varying NOT NULL,
-    email character varying(255) DEFAULT ''::character varying NOT NULL,
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
     encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
+    sign_in_count integer DEFAULT 0,
+    email character varying(255) DEFAULT ''::character varying NOT NULL,
     reset_password_token character varying(255),
     reset_password_sent_at timestamp without time zone,
     remember_created_at timestamp without time zone,
-    sign_in_count integer DEFAULT 0 NOT NULL,
     current_sign_in_at timestamp without time zone,
     last_sign_in_at timestamp without time zone,
     current_sign_in_ip character varying(255),
     last_sign_in_ip character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
+    CONSTRAINT usuario_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion))),
     CONSTRAINT usuario_rol_check CHECK (((rol >= 1) AND (rol <= 4)))
-);
-
-
---
--- Name: victima; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE victima (
-    id_persona integer NOT NULL,
-    id_caso integer NOT NULL,
-    hijos integer,
-    id_profesion integer NOT NULL,
-    id_rangoedad integer NOT NULL,
-    id_filiacion integer NOT NULL,
-    id_sectorsocial integer NOT NULL,
-    id_organizacion integer NOT NULL,
-    id_vinculoestado integer NOT NULL,
-    organizacionarmada integer NOT NULL,
-    anotaciones character varying(1000),
-    id_etnia integer,
-    id_iglesia integer,
-    orientacionsexual character(1) DEFAULT 'H'::bpchar NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    CONSTRAINT victima_hijos_check CHECK (((hijos IS NULL) OR ((hijos >= 0) AND (hijos <= 100)))),
-    CONSTRAINT victima_orientacionsexual_check CHECK (((((((orientacionsexual = 'L'::bpchar) OR (orientacionsexual = 'G'::bpchar)) OR (orientacionsexual = 'B'::bpchar)) OR (orientacionsexual = 'T'::bpchar)) OR (orientacionsexual = 'I'::bpchar)) OR (orientacionsexual = 'H'::bpchar)))
 );
 
 
@@ -4075,7 +2627,9 @@ CREATE TABLE victimacolectiva (
 CREATE TABLE victimasjr (
     id_persona integer NOT NULL,
     id_caso integer NOT NULL,
+    sindocumento boolean,
     id_estadocivil integer,
+    id_rolfamilia integer DEFAULT 0 NOT NULL,
     cabezafamilia boolean,
     id_maternidad integer,
     discapacitado boolean,
@@ -4091,9 +2645,7 @@ CREATE TABLE victimasjr (
     libretamilitar boolean,
     distrito integer,
     progadultomayor boolean,
-    sindocumento boolean,
     fechadesagregacion date,
-    id_rolfamilia integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -4335,7 +2887,7 @@ ALTER TABLE ONLY caso_contexto
 --
 
 ALTER TABLE ONLY caso_etiqueta
-    ADD CONSTRAINT caso_etiqueta_pkey PRIMARY KEY (id_caso, id_etiqueta, id_funcionario, fecha);
+    ADD CONSTRAINT caso_etiqueta_pkey PRIMARY KEY (id_caso, id_etiqueta, id_usuario, fecha);
 
 
 --
@@ -4363,14 +2915,6 @@ ALTER TABLE ONLY caso_frontera
 
 
 --
--- Name: caso_funcionario_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY caso_funcionario
-    ADD CONSTRAINT caso_funcionario_pkey PRIMARY KEY (id_funcionario, id_caso);
-
-
---
 -- Name: caso_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4392,6 +2936,14 @@ ALTER TABLE ONLY caso_presponsable
 
 ALTER TABLE ONLY caso_region
     ADD CONSTRAINT caso_region_pkey PRIMARY KEY (id_region, id_caso);
+
+
+--
+-- Name: caso_usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY caso_usuario
+    ADD CONSTRAINT caso_usuario_pkey PRIMARY KEY (id_usuario, id_caso);
 
 
 --
@@ -4619,30 +3171,6 @@ ALTER TABLE ONLY frontera
 
 
 --
--- Name: funcionario_nombre_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY funcionario
-    ADD CONSTRAINT funcionario_nombre_key UNIQUE (nombre);
-
-
---
--- Name: funcionario_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY funcionario
-    ADD CONSTRAINT funcionario_pkey PRIMARY KEY (id);
-
-
---
--- Name: geometry_columns_pk; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY geometry_columns
-    ADD CONSTRAINT geometry_columns_pk PRIMARY KEY (f_table_catalog, f_table_schema, f_table_name, f_geometry_column);
-
-
---
 -- Name: grupoper_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4736,14 +3264,6 @@ ALTER TABLE ONLY motivosjr_respuesta
 
 ALTER TABLE ONLY municipio
     ADD CONSTRAINT municipio_pkey PRIMARY KEY (id, id_departamento);
-
-
---
--- Name: numerodocumento_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY persona
-    ADD CONSTRAINT numerodocumento_key UNIQUE (tipodocumento, numerodocumento);
 
 
 --
@@ -4899,14 +3419,6 @@ ALTER TABLE ONLY sectorsocial
 
 
 --
--- Name: spatial_ref_sys_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY spatial_ref_sys
-    ADD CONSTRAINT spatial_ref_sys_pkey PRIMARY KEY (srid);
-
-
---
 -- Name: supracategoria_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4979,6 +3491,14 @@ ALTER TABLE ONLY ubicacion
 
 
 --
+-- Name: usuario_nusuario_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY usuario
+    ADD CONSTRAINT usuario_nusuario_key UNIQUE (nusuario);
+
+
+--
 -- Name: usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -5019,6 +3539,20 @@ ALTER TABLE ONLY vinculoestado
 
 
 --
+-- Name: caso_memo; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX caso_memo ON caso USING gin (to_tsvector('spanish'::regconfig, unaccent(memo)));
+
+
+--
+-- Name: caso_titulo; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX caso_titulo ON caso USING gin (to_tsvector('spanish'::regconfig, unaccent((titulo)::text)));
+
+
+--
 -- Name: index_actividad_rangoedad_on_actividad_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -5047,6 +3581,34 @@ CREATE UNIQUE INDEX index_usuario_on_reset_password_token ON usuario USING btree
 
 
 --
+-- Name: persona_apellidos_nombres; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX persona_apellidos_nombres ON persona USING gin (to_tsvector('spanish'::regconfig, ((unaccent((apellidos)::text) || ' '::text) || unaccent((nombres)::text))));
+
+
+--
+-- Name: persona_apellidos_nombres_doc; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX persona_apellidos_nombres_doc ON persona USING gin (to_tsvector('spanish'::regconfig, ((((unaccent((apellidos)::text) || ' '::text) || unaccent((nombres)::text)) || ' '::text) || COALESCE((numerodocumento)::text, ''::text))));
+
+
+--
+-- Name: persona_nombres_apellidos; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX persona_nombres_apellidos ON persona USING gin (to_tsvector('spanish'::regconfig, ((unaccent((nombres)::text) || ' '::text) || unaccent((apellidos)::text))));
+
+
+--
+-- Name: persona_nombres_apellidos_doc; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX persona_nombres_apellidos_doc ON persona USING gin (to_tsvector('spanish'::regconfig, ((((unaccent((nombres)::text) || ' '::text) || unaccent((apellidos)::text)) || ' '::text) || COALESCE((numerodocumento)::text, ''::text))));
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -5054,11 +3616,34 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
--- Name: accion_id_trelacion_accion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: usuario_nusuario; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX usuario_nusuario ON usuario USING btree (nusuario);
+
+
+--
+-- Name: accion_id_despacho_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY accion
-    ADD CONSTRAINT accion_id_trelacion_accion_fkey FOREIGN KEY (id_taccion) REFERENCES taccion(id);
+    ADD CONSTRAINT accion_id_despacho_fkey FOREIGN KEY (id_despacho) REFERENCES despacho(id);
+
+
+--
+-- Name: accion_id_proceso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY accion
+    ADD CONSTRAINT accion_id_proceso_fkey FOREIGN KEY (id_proceso) REFERENCES proceso(id);
+
+
+--
+-- Name: accion_id_taccion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY accion
+    ADD CONSTRAINT accion_id_taccion_fkey FOREIGN KEY (id_taccion) REFERENCES taccion(id);
 
 
 --
@@ -5422,11 +4007,11 @@ ALTER TABLE ONLY caso_etiqueta
 
 
 --
--- Name: caso_etiqueta_id_funcionario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: caso_etiqueta_id_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY caso_etiqueta
-    ADD CONSTRAINT caso_etiqueta_id_funcionario_fkey FOREIGN KEY (id_funcionario) REFERENCES funcionario(id);
+    ADD CONSTRAINT caso_etiqueta_id_usuario_fkey FOREIGN KEY (id_usuario) REFERENCES usuario(id);
 
 
 --
@@ -5478,22 +4063,6 @@ ALTER TABLE ONLY caso_frontera
 
 
 --
--- Name: caso_funcionario_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY caso_funcionario
-    ADD CONSTRAINT caso_funcionario_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
-
-
---
--- Name: caso_funcionario_id_funcionario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY caso_funcionario
-    ADD CONSTRAINT caso_funcionario_id_funcionario_fkey FOREIGN KEY (id_funcionario) REFERENCES funcionario(id);
-
-
---
 -- Name: caso_id_intervalo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5534,11 +4103,27 @@ ALTER TABLE ONLY caso_region
 
 
 --
+-- Name: caso_usuario_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_usuario
+    ADD CONSTRAINT caso_usuario_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: caso_usuario_id_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_usuario
+    ADD CONSTRAINT caso_usuario_id_usuario_fkey FOREIGN KEY (id_usuario) REFERENCES usuario(id);
+
+
+--
 -- Name: casosjr_asesor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY casosjr
-    ADD CONSTRAINT casosjr_asesor_fkey FOREIGN KEY (asesor) REFERENCES funcionario(id);
+    ADD CONSTRAINT casosjr_asesor_fkey FOREIGN KEY (asesor) REFERENCES usuario(id);
 
 
 --
@@ -6326,6 +4911,14 @@ ALTER TABLE ONLY victimasjr
 
 
 --
+-- Name: victimasjr_id_departamento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_departamento_fkey FOREIGN KEY (id_departamento) REFERENCES departamento(id);
+
+
+--
 -- Name: victimasjr_id_escolaridad_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -6347,6 +4940,14 @@ ALTER TABLE ONLY victimasjr
 
 ALTER TABLE ONLY victimasjr
     ADD CONSTRAINT victimasjr_id_maternidad_fkey FOREIGN KEY (id_maternidad) REFERENCES maternidad(id);
+
+
+--
+-- Name: victimasjr_id_municipio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_municipio_fkey FOREIGN KEY (id_municipio, id_departamento) REFERENCES municipio(id, id_departamento);
 
 
 --
@@ -6404,3 +5005,4 @@ INSERT INTO schema_migrations (version) VALUES ('20131210221541');
 INSERT INTO schema_migrations (version) VALUES ('20131220103409');
 
 INSERT INTO schema_migrations (version) VALUES ('20131223175141');
+

@@ -4,28 +4,27 @@
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:titulo) %>:</strong></dt>
-  <dd><%= @caso.titulo %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:codigo) %>:</strong></dt>
+  <dd><%= @caso.id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:fecha) %>:</strong></dt>
   <dd><%= @caso.fecha %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:hora) %>:</strong></dt>
-  <dd><%= @caso.hora %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:duracion) %>:</strong></dt>
-  <dd><%= @caso.duracion %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:memo) %>:</strong></dt>
-  <dd><%= @caso.memo %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:grconfiabilidad) %>:</strong></dt>
-  <dd><%= @caso.grconfiabilidad %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:gresclarecimiento) %>:</strong></dt>
-  <dd><%= @caso.gresclarecimiento %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:grimpunidad) %>:</strong></dt>
-  <dd><%= @caso.grimpunidad %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:grinformacion) %>:</strong></dt>
-  <dd><%= @caso.grinformacion %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:bienes) %>:</strong></dt>
-  <dd><%= @caso.bienes %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:id_intervalo) %>:</strong></dt>
-  <dd><%= @caso.id_intervalo %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:fecharec) %>:</strong></dt>
+  <dd><%= @caso.casosjr.fecharec %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:asesor) %>:</strong></dt>
+  <dd><%= @caso.casosjr.usuario.nusuario %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:regionsjr) %>:</strong></dt>
+  <dd><%= @caso.casosjr.regionsjr.nombre %></dd>
+<%- if !@caso.casosjr.persona.nil? %>
+  <dt><strong><%= model_class.human_attribute_name(:contacto) %>:</strong></dt>
+  <dd><%= (@caso.casosjr.persona.nombres + " " + @caso.casosjr.persona.apellidos) %></dd>
+<% end -%>
+  <dt><strong><%= model_class.human_attribute_name(:direccion) %>:</strong></dt>
+  <dd><%= @caso.casosjr.direccion %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:telefono) %>:</strong></dt>
+  <dd><%= @caso.casosjr.telefono %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:comosupo) %>:</strong></dt>
+  <dd><%= @caso.casosjr.comosupo %></dd>
+
 </dl>
 
 <div class="form-actions">

@@ -28,15 +28,18 @@
         <%= s.input :fecharec, 
             :input_html => { "data-behaviour" => "datepicker" },
             :as => :string, :label => "Fecha de Recepción" %>
-        <%= s.association :funcionario,
+        <%= s.association :usuario,
             label: "Asesor",
-	    label_method: :nombre, 
+	    label_method: :nusuario, 
             value_method: :id %>
         <%= s.association :regionsjr,
             label: "Región",
 	    label_method: :nombre, 
             value_method: :id %>
-        Contacto<br>
+        <%= s.association :persona,
+            label: "Contacto",
+	    label_method: :nombres, 
+            value_method: :id %>
         <%= s.input :direccion%>
         <%= s.input :telefono%>
         <%= s.input :comosupo%>

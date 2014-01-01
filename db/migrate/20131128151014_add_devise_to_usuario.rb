@@ -2,8 +2,8 @@ class AddDeviseToUsuario < ActiveRecord::Migration
   def self.up
     change_table(:usuario) do |t|
       ## Database authenticatable
-      t.string :email,              :null => false, :default => ""
-      t.string :encrypted_password, :null => false, :default => ""
+      #t.string :email,              :null => false, :default => ""
+      #t.string :encrypted_password, :null => false, :default => ""
 
       ## Recoverable
       t.string   :reset_password_token
@@ -13,7 +13,7 @@ class AddDeviseToUsuario < ActiveRecord::Migration
       t.datetime :remember_created_at
 
       ## Trackable
-      t.integer  :sign_in_count, :default => 0, :null => false
+      #t.integer  :sign_in_count, :default => 0, :null => false
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
       t.string   :current_sign_in_ip
@@ -37,7 +37,7 @@ class AddDeviseToUsuario < ActiveRecord::Migration
     execute <<-SQL
       UPDATE usuario SET created_at = current_date WHERE created_at IS NULL;
 SQL
-    add_index :usuario, :email,                :unique => true
+    #add_index :usuario, :email,                :unique => true
     add_index :usuario, :reset_password_token, :unique => true
     # add_index :usuario, :confirmation_token,   :unique => true
     # add_index :usuario, :unlock_token,         :unique => true

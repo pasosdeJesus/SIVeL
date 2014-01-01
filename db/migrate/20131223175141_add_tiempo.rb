@@ -44,8 +44,8 @@ class AddTiempo < ActiveRecord::Migration
 	  add_column :caso_fotra, :updated_at, :datetime
 	  add_column :caso_frontera, :created_at, :datetime 
 	  add_column :caso_frontera, :updated_at, :datetime
-	  add_column :caso_funcionario, :created_at, :datetime 
-	  add_column :caso_funcionario, :updated_at, :datetime
+	  add_column :caso_usuario, :created_at, :datetime 
+	  add_column :caso_usuario, :updated_at, :datetime
 	  add_column :caso_presponsable, :created_at, :datetime 
 	  add_column :caso_presponsable, :updated_at, :datetime
 	  add_column :caso_region, :created_at, :datetime 
@@ -106,8 +106,6 @@ class AddTiempo < ActiveRecord::Migration
 	  add_column :fotra, :updated_at, :datetime
 	  add_column :frontera, :created_at, :datetime 
 	  add_column :frontera, :updated_at, :datetime
-	  add_column :funcionario, :created_at, :datetime 
-	  add_column :funcionario, :updated_at, :datetime
 	  add_column :grupoper, :created_at, :datetime 
 	  add_column :grupoper, :updated_at, :datetime
 	  add_column :iglesia, :created_at, :datetime 
