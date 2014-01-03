@@ -4,6 +4,7 @@ class Caso < ActiveRecord::Base
         accepts_nested_attributes_for :casosjr, allow_destroy: true, update_only: true
 	has_many :victima,  :dependent => :delete_all
 	has_many :persona, :through => :victima
+        accepts_nested_attributes_for :victima, allow_destroy: true, update_only: true, reject_if: :all_blank
 
         validates_presence_of :fecha
 end

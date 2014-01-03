@@ -55,8 +55,12 @@ Víctimas Individuales
 						</a>
 					</div>
 					<div id="collapseTwo" class="accordion-body collapse">
-						<div class="accordion-inner">
-							Formulario aqui
+                                            <div class="accordion-inner">
+
+    <%= f.simple_fields_for :victima do |victima| %>
+      <%= render 'campos_victima', :f => victima %>
+      <%= link_to_add_association 'add ', victima, :victimas %>
+    <% end %>
 						</div>
 					</div>
 				</div>
