@@ -1,0 +1,12 @@
+<div class='.nested-fields'>
+    <%= f.input :id_persona %>
+    <%= f.input :id_profesion %>
+    <%= f.association :profesion,
+	    label: "Profesión",
+	    label_method: :nombre, 
+	    value_method: :id %>
+    <%= f.input :id_rangoedad %>
+    <%= f.input :id_etnia %>
+    <%= f.input :id_iglesia %>
+    <%= f.input :orientacionsexual %>
+</div>

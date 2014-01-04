@@ -58,8 +58,8 @@ Víctimas Individuales
                                             <div class="accordion-inner">
 
     <%= f.simple_fields_for :victima do |victima| %>
-      <%= render 'campos_victima', :f => victima %>
-      <%= link_to_add_association 'add ', victima, :victimas %>
+      <%= render 'victima_fields', :f => victima %>
+      <%= link_to_add_association 'add ', f, :victimas %>
     <% end %>
 						</div>
 					</div>

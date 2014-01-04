@@ -1,11 +1,11 @@
 <article>
-<h1>Prototipo de ficha de captura para SIVeL 2.0</h1>
+<h1>Prototipo de captura para SIVeL 2.0</h1>
 <ul>
 <%- if current_usuario.nil?  %>
 	<li><a href="usuarios/sign_in">Iniciar Sesión</a>
 <%- else  %>
 	<li>Usuario <%= current_usuario.email %>
 <% end -%>
-
 </ul>
+<%= render "local" %>
 </article>

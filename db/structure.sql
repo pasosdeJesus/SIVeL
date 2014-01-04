@@ -3,7 +3,6 @@
 --
 
 SET statement_timeout = 0;
-SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -327,31 +326,9 @@ ALTER SEQUENCE actividadarea_id_seq OWNED BY actividadarea.id;
 --
 
 CREATE TABLE actividadareas_actividad (
-    id integer NOT NULL,
-    actividad_id integer,
-    actividadarea_id integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    actividadarea_id integer NOT NULL,
+    actividad_id integer NOT NULL
 );
-
-
---
--- Name: actividadareas_actividad_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE actividadareas_actividad_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: actividadareas_actividad_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE actividadareas_actividad_id_seq OWNED BY actividadareas_actividad.id;
 
 
 --
@@ -983,135 +960,6 @@ CREATE TABLE comunidad_vinculoestado (
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
-
-
---
--- Name: persona_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE persona_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: persona; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE persona (
-    id integer DEFAULT nextval('persona_seq'::regclass) NOT NULL,
-    nombres character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
-    apellidos character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
-    anionac integer,
-    mesnac integer,
-    dianac integer,
-    sexo character(1) NOT NULL,
-    id_departamento integer,
-    id_municipio integer,
-    id_clase integer,
-    tipodocumento character varying(2),
-    numerodocumento bigint,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    CONSTRAINT persona_check CHECK (((dianac IS NULL) OR ((((dianac >= 1) AND ((((((((mesnac = 1) OR (mesnac = 3)) OR (mesnac = 5)) OR (mesnac = 7)) OR (mesnac = 8)) OR (mesnac = 10)) OR (mesnac = 12)) AND (dianac <= 31))) OR (((((mesnac = 4) OR (mesnac = 6)) OR (mesnac = 9)) OR (mesnac = 11)) AND (dianac <= 30))) OR ((mesnac = 2) AND (dianac <= 29))))),
-    CONSTRAINT persona_mesnac_check CHECK (((mesnac IS NULL) OR ((mesnac >= 1) AND (mesnac <= 12)))),
-    CONSTRAINT persona_sexo_check CHECK ((((sexo = 'S'::bpchar) OR (sexo = 'F'::bpchar)) OR (sexo = 'M'::bpchar)))
-);
-
-
---
--- Name: victima; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE victima (
-    id_persona integer NOT NULL,
-    id_caso integer NOT NULL,
-    hijos integer,
-    id_profesion integer NOT NULL,
-    id_rangoedad integer NOT NULL,
-    id_filiacion integer NOT NULL,
-    id_sectorsocial integer NOT NULL,
-    id_organizacion integer NOT NULL,
-    id_vinculoestado integer NOT NULL,
-    organizacionarmada integer NOT NULL,
-    anotaciones character varying(1000),
-    id_etnia integer,
-    id_iglesia integer,
-    orientacionsexual character(1) DEFAULT 'H'::bpchar NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    CONSTRAINT victima_hijos_check CHECK (((hijos IS NULL) OR ((hijos >= 0) AND (hijos <= 100)))),
-    CONSTRAINT victima_orientacionsexual_check CHECK (((((((orientacionsexual = 'L'::bpchar) OR (orientacionsexual = 'G'::bpchar)) OR (orientacionsexual = 'B'::bpchar)) OR (orientacionsexual = 'T'::bpchar)) OR (orientacionsexual = 'I'::bpchar)) OR (orientacionsexual = 'H'::bpchar)))
-);
-
-
---
--- Name: cons; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW cons AS
- SELECT DISTINCT victima.id_persona,
-    caso.id AS id_caso,
-    categoria.id_tviolencia,
-    categoria.id_supracategoria,
-    acto.id_categoria
-   FROM victima,
-    persona,
-    acto,
-    caso,
-    categoria
-  WHERE ((((((((((categoria.id = acto.id_categoria) AND (caso.id <> (-1))) AND (caso.fecha >= '1990-01-01'::date)) AND (caso.fecha <= '2024-11-30'::date)) AND (caso.fecha >= '1991-03-04'::date)) AND (victima.id_caso = caso.id)) AND (victima.id_persona = persona.id)) AND (persona.id = acto.id_persona)) AND (acto.id_caso = caso.id)) AND (acto.id_categoria = categoria.id));
-
-
---
--- Name: ubicacion_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE ubicacion_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: ubicacion; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE ubicacion (
-    id integer DEFAULT nextval('ubicacion_seq'::regclass) NOT NULL,
-    lugar character varying(500) COLLATE public.es_co_utf_8,
-    sitio character varying(500) COLLATE public.es_co_utf_8,
-    id_clase integer,
-    id_municipio integer,
-    id_departamento integer,
-    id_tsitio integer NOT NULL,
-    id_caso integer NOT NULL,
-    latitud double precision,
-    longitud double precision,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: cons2; Type: VIEW; Schema: public; Owner: -
---
-
-CREATE VIEW cons2 AS
- SELECT cons.id_persona,
-    cons.id_tviolencia,
-    cons.id_supracategoria,
-    cons.id_categoria,
-    ubicacion.id_departamento,
-    ubicacion.id_municipio
-   FROM ubicacion,
-    cons
-  WHERE (cons.id_caso = ubicacion.id_caso);
 
 
 --
@@ -1891,6 +1739,17 @@ CREATE TABLE municipio (
 
 
 --
+-- Name: obsoleto_funcionario; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE obsoleto_funcionario (
+    id integer NOT NULL,
+    anotacion character varying(50),
+    nombre character varying(15) NOT NULL
+);
+
+
+--
 -- Name: organizacion_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -1944,6 +1803,43 @@ CREATE TABLE pconsolidado (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     CONSTRAINT pconsolidado_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: persona_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE persona_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: persona; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE persona (
+    id integer DEFAULT nextval('persona_seq'::regclass) NOT NULL,
+    nombres character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
+    apellidos character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
+    anionac integer,
+    mesnac integer,
+    dianac integer,
+    sexo character(1) NOT NULL,
+    id_departamento integer,
+    id_municipio integer,
+    id_clase integer,
+    tipodocumento character varying(2),
+    numerodocumento bigint,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT persona_check CHECK (((dianac IS NULL) OR ((((dianac >= 1) AND ((((((((mesnac = 1) OR (mesnac = 3)) OR (mesnac = 5)) OR (mesnac = 7)) OR (mesnac = 8)) OR (mesnac = 10)) OR (mesnac = 12)) AND (dianac <= 31))) OR (((((mesnac = 4) OR (mesnac = 6)) OR (mesnac = 9)) OR (mesnac = 11)) AND (dianac <= 30))) OR ((mesnac = 2) AND (dianac <= 29))))),
+    CONSTRAINT persona_mesnac_check CHECK (((mesnac IS NULL) OR ((mesnac >= 1) AND (mesnac <= 12)))),
+    CONSTRAINT persona_sexo_check CHECK ((((sexo = 'S'::bpchar) OR (sexo = 'F'::bpchar)) OR (sexo = 'M'::bpchar)))
 );
 
 
@@ -2564,6 +2460,38 @@ CREATE TABLE tviolencia (
 
 
 --
+-- Name: ubicacion_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ubicacion_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ubicacion; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE ubicacion (
+    id integer DEFAULT nextval('ubicacion_seq'::regclass) NOT NULL,
+    lugar character varying(500) COLLATE public.es_co_utf_8,
+    sitio character varying(500) COLLATE public.es_co_utf_8,
+    id_clase integer,
+    id_municipio integer,
+    id_departamento integer,
+    id_tsitio integer NOT NULL,
+    id_caso integer NOT NULL,
+    latitud double precision,
+    longitud double precision,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
 -- Name: usuario_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2580,29 +2508,55 @@ CREATE SEQUENCE usuario_seq
 --
 
 CREATE TABLE usuario (
-    id integer DEFAULT nextval('usuario_seq'::regclass) NOT NULL,
     nusuario character varying(15) NOT NULL,
     password character varying(64) NOT NULL,
     nombre character varying(50) COLLATE public.es_co_utf_8,
     descripcion character varying(50),
     rol integer DEFAULT 4,
     idioma character varying(6) DEFAULT 'es_CO'::character varying NOT NULL,
-    fechacreacion date NOT NULL,
-    fechadeshabilitacion date,
-    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
-    sign_in_count integer DEFAULT 0,
     email character varying(255) DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
     reset_password_token character varying(255),
     reset_password_sent_at timestamp without time zone,
     remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
     current_sign_in_at timestamp without time zone,
     last_sign_in_at timestamp without time zone,
     current_sign_in_ip character varying(255),
     last_sign_in_ip character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
+    id integer DEFAULT nextval('usuario_seq'::regclass) NOT NULL,
+    fechacreacion date DEFAULT '2001-01-01'::date NOT NULL,
+    fechadeshabilitacion date,
     CONSTRAINT usuario_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion))),
     CONSTRAINT usuario_rol_check CHECK (((rol >= 1) AND (rol <= 4)))
+);
+
+
+--
+-- Name: victima; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE victima (
+    id_persona integer NOT NULL,
+    id_caso integer NOT NULL,
+    hijos integer,
+    id_profesion integer NOT NULL,
+    id_rangoedad integer NOT NULL,
+    id_filiacion integer NOT NULL,
+    id_sectorsocial integer NOT NULL,
+    id_organizacion integer NOT NULL,
+    id_vinculoestado integer NOT NULL,
+    organizacionarmada integer NOT NULL,
+    anotaciones character varying(1000),
+    id_etnia integer,
+    id_iglesia integer,
+    orientacionsexual character(1) DEFAULT 'H'::bpchar NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT victima_hijos_check CHECK (((hijos IS NULL) OR ((hijos >= 0) AND (hijos <= 100)))),
+    CONSTRAINT victima_orientacionsexual_check CHECK (((((((orientacionsexual = 'L'::bpchar) OR (orientacionsexual = 'G'::bpchar)) OR (orientacionsexual = 'B'::bpchar)) OR (orientacionsexual = 'T'::bpchar)) OR (orientacionsexual = 'I'::bpchar)) OR (orientacionsexual = 'H'::bpchar)))
 );
 
 
@@ -2700,13 +2654,6 @@ ALTER TABLE ONLY actividadarea ALTER COLUMN id SET DEFAULT nextval('actividadare
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY actividadareas_actividad ALTER COLUMN id SET DEFAULT nextval('actividadareas_actividad_id_seq'::regclass);
-
-
---
 -- Name: accion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2744,14 +2691,6 @@ ALTER TABLE ONLY actividad_rangoedad
 
 ALTER TABLE ONLY actividadarea
     ADD CONSTRAINT actividadarea_pkey PRIMARY KEY (id);
-
-
---
--- Name: actividadareas_actividad_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY actividadareas_actividad
-    ADD CONSTRAINT actividadareas_actividad_pkey PRIMARY KEY (id);
 
 
 --
@@ -2936,14 +2875,6 @@ ALTER TABLE ONLY caso_presponsable
 
 ALTER TABLE ONLY caso_region
     ADD CONSTRAINT caso_region_pkey PRIMARY KEY (id_region, id_caso);
-
-
---
--- Name: caso_usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY caso_usuario
-    ADD CONSTRAINT caso_usuario_pkey PRIMARY KEY (id_usuario, id_caso);
 
 
 --
@@ -3168,6 +3099,14 @@ ALTER TABLE ONLY fotra
 
 ALTER TABLE ONLY frontera
     ADD CONSTRAINT frontera_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: funcionario_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY obsoleto_funcionario
+    ADD CONSTRAINT funcionario_pkey PRIMARY KEY (id);
 
 
 --
@@ -3488,14 +3427,6 @@ ALTER TABLE ONLY tviolencia
 
 ALTER TABLE ONLY ubicacion
     ADD CONSTRAINT ubicacion_pkey PRIMARY KEY (id);
-
-
---
--- Name: usuario_nusuario_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY usuario
-    ADD CONSTRAINT usuario_nusuario_key UNIQUE (nusuario);
 
 
 --
@@ -4063,6 +3994,14 @@ ALTER TABLE ONLY caso_frontera
 
 
 --
+-- Name: caso_funcionario_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_usuario
+    ADD CONSTRAINT caso_funcionario_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
 -- Name: caso_id_intervalo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4103,14 +4042,6 @@ ALTER TABLE ONLY caso_region
 
 
 --
--- Name: caso_usuario_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY caso_usuario
-    ADD CONSTRAINT caso_usuario_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
-
-
---
 -- Name: caso_usuario_id_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4123,7 +4054,7 @@ ALTER TABLE ONLY caso_usuario
 --
 
 ALTER TABLE ONLY casosjr
-    ADD CONSTRAINT casosjr_asesor_fkey FOREIGN KEY (asesor) REFERENCES usuario(id);
+    ADD CONSTRAINT casosjr_asesor_fkey FOREIGN KEY (asesor) REFERENCES obsoleto_funcionario(id);
 
 
 --

@@ -1,3 +1,3 @@
 class Intervalo < ActiveRecord::Base
-	has_many :caso, validate: :true, foreign_key: 'id_intervalo'
+	has_many :caso, foreign_key: "id_intervalo", validate: true
 end
