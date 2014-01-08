@@ -31,6 +31,7 @@ $_REQUEST['password'] = $_POST['password'] = 'b';
 $_REQUEST['nombre'] = $_POST['nombre'] = 'c';
 $_REQUEST['descripcion'] = $_POST['descripcion'] = 'd';
 $_REQUEST['rol'] = $_POST['rol'] = '1';
+$_REQUEST['email'] = $_POST['email'] = 'inv1@localhost';
 $_REQUEST['idioma'] = $_POST['idoma'] = 'es_CO';
 $_REQUEST['fechacreacion']['Y'] = $_POST['fechacreacion']['Y'] = '2013';
 $_REQUEST['fechacreacion']['M'] = $_POST['fechacreacion']['M'] = '12';

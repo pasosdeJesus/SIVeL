@@ -217,8 +217,8 @@ prueba sitios/pruebas/inscaso-victimaColectiva.php " - Víctima Colectiva"
 prueba sitios/pruebas/inscaso-acto.php " - Actos"
 prueba sitios/pruebas/inscaso-memo.php " - Memo"
 prueba sitios/pruebas/inscaso-memo-valida.php " - Valida Memo"
-prueba sitios/pruebas/inscaso-anexos.php " - Anexo"
 #}
+prueba sitios/pruebas/inscaso-anexos.php " - Anexo"
 prueba sitios/pruebas/inscaso-etiqueta.php " - Etiqueta"
 prueba sitios/pruebas/inscaso-evaluacion.php " - Evaluacion"
 prueba sitios/pruebas/inscaso-evaluacion-valida.php " - Valida Evaluacion"
@@ -228,10 +228,9 @@ prueba sitios/pruebas/reprevista-filtros.php " - Filtros en Reporte Revista" rep
 prueba sitios/pruebas/repconsolidado.php " - Reporte Consolidado" repconsolidado
 prueba sitios/pruebas/estadisticas.php " - Estadísticas " estadisticas
 prueba sitios/pruebas/novalida-basicos.php " - Validación básicos" novalida-basicos
-prueba sitios/pruebas/novalida-frecuentes.php " - Validación frecuentes" novalida-frecuentes "" "1"
+prueba sitios/pruebas/novalida-frecuentes.php " - Validación frecuentes" novalida-frecuentes "" "202"
 prueba sitios/pruebas/externa.php " - Consulta externa" externa
 prueba sitios/pruebas/relato.php " - Exporta Relato " relato
 
 prueba sitios/pruebas/imprelato.php " - Importa Relato " imprelato "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*" "" "resimp.xrlt.espreg" "Warning" "fecha_fuente" "D -"
-exit 1;
 #prueba sitios/pruebas/mezcla.php " - Mezcla 2 Casos" mezcla

@@ -104,7 +104,7 @@ $c = 0;
 
 foreach (array('tsitio', 'frontera', 'region', 'filiacion', 'organizacion',
     'profesion', 'sectorsocial', 'vinculoestado', 'antecedente',
-    'contexto'
+    'contexto', 'etnia', 'iglesia'
 ) as $t
 ) {
     $c += instablabasica($t, 'nombre', $t . '1');

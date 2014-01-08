@@ -204,6 +204,15 @@ function pasaPestanaFicha(&$db, $tabla_prueba, $post, $basicos_id = null,
         $_FILES = $files;
     }
 
+    /*echo "OJO REQUEST:\n";
+    print_r($_REQUEST);
+    echo "OJO SESSION:\n";
+    print_r($_SESSION);
+    echo "OJO FILES:\n";
+    print_r($_FILES);
+    echo "OJO SERVER:\n";
+    print_r($_SERVER);*/
+
     include "captura_caso.php";
 
     $nume = verificaInsercion($db, $tabla_prueba, $na);
