@@ -86,7 +86,7 @@ class DataObjects_Ffrecuente extends DataObjects_Basica
      */
     static function idSinInfo()
     {
-        return 0;
+        return -1;  /** Nada automático con fuente SIN INFORMACIÓN */
     }
 
 }

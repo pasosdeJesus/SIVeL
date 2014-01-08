@@ -172,7 +172,7 @@ CREATE TABLE caso (
 	grimpunidad VARCHAR(5),
 	grinformacion VARCHAR(5),
 	bienes TEXT,
-	id_intervalo INTEGER REFERENCES intervalo
+	id_intervalo INTEGER REFERENCES intervalo DEFAULT '5'
 ); 
 
 CREATE INDEX caso_titulo ON caso 
@@ -489,7 +489,7 @@ CREATE TABLE ubicacion (
 	id_clase INTEGER,
 	id_municipio INTEGER,
 	id_departamento INTEGER REFERENCES departamento,
-	id_tsitio INTEGER REFERENCES tsitio NOT NULL,
+	id_tsitio INTEGER REFERENCES tsitio NOT NULL DEFAULT '1',
 	id_caso INTEGER NOT NULL REFERENCES caso,
 	latitud FLOAT,
 	longitud FLOAT,
@@ -513,7 +513,7 @@ CREATE TABLE usuario (
 	idioma VARCHAR(6) NOT NULL DEFAULT 'es_CO',
 	email VARCHAR(255) NOT NULL DEFAULT '',
 	encrypted_password VARCHAR(255) NOT NULL DEFAULT '',
-	sign_in_count INTEGER NOT NULL DEFAULT 0,
+	sign_in_count INTEGER NOT NULL DEFAULT '0',
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
@@ -609,7 +609,7 @@ CREATE TABLE trelacion (
 CREATE TABLE persona_trelacion (
 	persona1 INTEGER NOT NULL REFERENCES persona,
 	persona2 INTEGER NOT NULL REFERENCES persona,
-	id_trelacion CHAR(2) NOT NULL REFERENCES trelacion,
+	id_trelacion CHAR(2) NOT NULL REFERENCES trelacion DEFAULT 'SI',
 	observaciones VARCHAR(200),
 	PRIMARY KEY(persona1, persona2, id_trelacion)
 );
@@ -621,17 +621,17 @@ CREATE TABLE victima (
 	id_persona INTEGER REFERENCES persona NOT NULL,
 	id_caso	INTEGER REFERENCES caso NOT NULL,
 	hijos INTEGER CHECK (hijos IS NULL OR (hijos>='0' AND hijos<='100')),
-	id_profesion INTEGER REFERENCES profesion NOT NULL,
-	id_rangoedad INTEGER REFERENCES rangoedad NOT NULL,
-	id_filiacion INTEGER REFERENCES filiacion NOT NULL,
-	id_sectorsocial INTEGER REFERENCES sectorsocial NOT NULL,
-	id_organizacion	INTEGER REFERENCES organizacion NOT NULL,
-	id_vinculoestado INTEGER REFERENCES vinculoestado NOT NULL,
-	organizacionarmada INTEGER REFERENCES presponsable NOT NULL,
+	id_profesion INTEGER REFERENCES profesion NOT NULL DEFAULT '22',
+	id_rangoedad INTEGER REFERENCES rangoedad NOT NULL DEFAULT '6', 
+	id_filiacion INTEGER REFERENCES filiacion NOT NULL DEFAULT '10',
+	id_sectorsocial INTEGER REFERENCES sectorsocial NOT NULL DEFAULT '15',
+	id_organizacion	INTEGER REFERENCES organizacion NOT NULL DEFAULT '16',
+	id_vinculoestado INTEGER REFERENCES vinculoestado NOT NULL DEFAULT '38',
+	organizacionarmada INTEGER REFERENCES presponsable NOT NULL DEFAULT '35',
 	anotaciones	VARCHAR(1000),
-	id_etnia INTEGER REFERENCES etnia,
-	id_iglesia INTEGER REFERENCES iglesia,
-	orientacionsexual CHAR(1) NOT NULL DEFAULT 'H' CHECK (
+	id_etnia INTEGER REFERENCES etnia DEFAULT '1',
+	id_iglesia INTEGER REFERENCES iglesia DEFAULT '1',
+       	orientacionsexual CHAR(1) NOT NULL DEFAULT 'H' CHECK (
 		orientacionsexual='L' OR 
 		orientacionsexual='G' OR 
 		orientacionsexual='B' OR 
@@ -654,12 +654,12 @@ CREATE TABLE victimacolectiva (
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	personasaprox INTEGER,
-	organizacionarmada INTEGER REFERENCES presponsable,
+	organizacionarmada INTEGER REFERENCES presponsable DEFAULT '35',
 	PRIMARY KEY(id_grupoper, id_caso)
 );
 
 CREATE TABLE comunidad_vinculoestado (
-	id_vinculoestado INTEGER REFERENCES vinculoestado,
+	id_vinculoestado INTEGER REFERENCES vinculoestado DEFAULT '38',
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	FOREIGN KEY (id_grupoper, id_caso) REFERENCES 
@@ -668,7 +668,7 @@ CREATE TABLE comunidad_vinculoestado (
 );
 
 CREATE TABLE comunidad_profesion (
-	id_profesion INTEGER REFERENCES profesion,
+	id_profesion INTEGER REFERENCES profesion DEFAULT '22',
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	FOREIGN KEY (id_grupoper, id_caso) REFERENCES 
@@ -760,7 +760,7 @@ CREATE TABLE caso_ffrecuente (
 );
 
 CREATE TABLE comunidad_filiacion (
-	id_filiacion INTEGER REFERENCES filiacion,
+	id_filiacion INTEGER REFERENCES filiacion DEFAULT '10',
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	FOREIGN KEY (id_grupoper, id_caso) REFERENCES 
@@ -793,7 +793,7 @@ CREATE TABLE caso_usuario (
 );
 
 CREATE TABLE comunidad_organizacion (
-	id_organizacion INTEGER REFERENCES organizacion,
+	id_organizacion INTEGER REFERENCES organizacion DEFAULT '16',
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	FOREIGN KEY (id_grupoper, id_caso) REFERENCES 
@@ -802,7 +802,7 @@ CREATE TABLE comunidad_organizacion (
 );
 
 CREATE TABLE comunidad_rangoedad (
-	id_rangoedad INTEGER REFERENCES rangoedad,
+	id_rangoedad INTEGER REFERENCES rangoedad DEFAULT '6',
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	FOREIGN KEY (id_grupoper, id_caso) REFERENCES 
@@ -819,12 +819,12 @@ CREATE TABLE caso_region (
 
 
 CREATE TABLE comunidad_sectorsocial (
-	id_sector INTEGER REFERENCES sectorsocial,
+	id_sectorsocial INTEGER REFERENCES sectorsocial DEFAULT '15',
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	FOREIGN KEY (id_grupoper, id_caso) REFERENCES 
 		victimacolectiva(id_grupoper, id_caso),
-	PRIMARY KEY(id_sector, id_grupoper, id_caso)
+	PRIMARY KEY(id_sectorsocial, id_grupoper, id_caso)
 );
 
 

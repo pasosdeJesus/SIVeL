@@ -2814,9 +2814,50 @@ if (!aplicado($idac)) {
         false
     );
  
-    #aplicaact($act, $idac, 'Emplea bcrypt para calcular condensado de claves y agrega inforación a tablas para hacer compatible con autenticación con Devise/Ruby');
+    aplicaact($act, $idac, 'Emplea bcrypt para calcular condensado de claves y agrega inforación a tablas para hacer compatible con autenticación con Devise/Ruby');
 }
- 
+
+$idac = '1.2-def';
+if (!aplicado($idac)) {
+
+    $basicas = html_menu_toma_url($GLOBALS['menu_tablas_basicas']);
+    global $dbnombre;
+    $v = null;
+    $enl = parse_ini_file(
+        $_SESSION['dirsitio'] . "/DataObjects/" .
+        $GLOBALS['dbnombre'] . ".links.ini",
+        true
+    );
+    foreach($enl as $t => $e) {
+        $do = objeto_tabla($t);
+        foreach($e as $c => $rel) {
+            if (strpos($c, ',') === FALSE) {
+                $pd = strpos($rel, ':');
+                $ndo = substr($rel, 0, $pd);
+                $ids = valorSinInfo($do, $c);
+                if ($ids >= 0 && $ndo != 'presponsable') {
+                    $q = "ALTER TABLE $t ALTER COLUMN $c SET DEFAULT $ids";
+                    hace_consulta($db, $q, false);
+                } 
+            }
+        }
+    }
+    aplicaact($act, $idac, 'Valores por defecto en referencias a tablas básicas');
+
+}
+
+$idac = '1.2-nc';
+if (!aplicado($idac)) {
+
+    hace_consulta($db, $q, false);
+    hace_consulta(
+        $db,
+        "ALTER TABLE comunidad_sectorsocial 
+        RENAME COLUMN id_sector TO id_sectorsocial", false);
+
+    aplicaact($act, $idac, 'Nombre en Sector Social de Victima Colectiva');
+}
+
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {
