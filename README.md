@@ -32,9 +32,11 @@ Requiere:
 
 Configuración:
 * Ubique fuentes por ejemplo en /var/www/htdocs/sivel2/
-* Configure la misma base de datos de SIVeL 1.2 en config/databases.yml
 * Instale gemas requeridas (como Rails 4.1) con:
   bundle20 update
+* Configure la misma base de datos de un SIVeL 1.2 en config/databases.yml y
+  ejecute
+  rake db:migrate
 * En caso de que no tenga un SIVeL 1.2 en paralelo cree el usuario y base
   de datos que configure en config/database.yml e inicialice con:
   rake db:setup

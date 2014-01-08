@@ -11,4 +11,9 @@ class Victima < ActiveRecord::Base
 	belongs_to :organizacion, foreign_key: "id_organizacion", validate: true
 	belongs_to :vinculoestado, foreign_key: "id_vinculoestado", validate: true
 	belongs_to :presponsable, foreign_key: "organizacionarmada", validate: true
+
+  def new
+    id_filiacion = Filiacion.SININFO
+    super.new
+  end
 end
