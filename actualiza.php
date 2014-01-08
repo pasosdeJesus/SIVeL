@@ -2836,7 +2836,7 @@ if (!aplicado($idac)) {
                 $ndo = substr($rel, 0, $pd);
                 $ids = valorSinInfo($do, $c);
                 if ($ids >= 0 && $ndo != 'presponsable') {
-                    $q = "ALTER TABLE $t ALTER COLUMN $c SET DEFAULT $ids";
+                    $q = "ALTER TABLE $t ALTER COLUMN $c SET DEFAULT '$ids'";
                     hace_consulta($db, $q, false);
                 } 
             }

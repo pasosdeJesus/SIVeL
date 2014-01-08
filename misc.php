@@ -1145,7 +1145,7 @@ function sin_error_pear($do, $msg = "")
  * @param bool   $muestraerror Indica si debe mostrar mensaje de error
  *
  * @return resultado de la consulta. si hay errores los presenta.
-     */
+ */
 function hace_consulta(&$db, $q, $finenerror = true, $muestraerror = true)
 {
     if ($db == null || !($db instanceof PEAR)) {
