@@ -2817,6 +2817,18 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Emplea bcrypt para calcular condensado de claves y agrega inforación a tablas para hacer compatible con autenticación con Devise/Ruby');
 }
 
+$idac = '1.2-nc';
+if (!aplicado($idac)) {
+
+    hace_consulta($db, $q, false);
+    hace_consulta(
+        $db,
+        "ALTER TABLE comunidad_sectorsocial 
+        RENAME COLUMN id_sector TO id_sectorsocial", false);
+
+    aplicaact($act, $idac, 'Nombre en Sector Social de Victima Colectiva');
+}
+
 $idac = '1.2-def';
 if (!aplicado($idac)) {
 
@@ -2844,18 +2856,6 @@ if (!aplicado($idac)) {
     }
     aplicaact($act, $idac, 'Valores por defecto en referencias a tablas básicas');
 
-}
-
-$idac = '1.2-nc';
-if (!aplicado($idac)) {
-
-    hace_consulta($db, $q, false);
-    hace_consulta(
-        $db,
-        "ALTER TABLE comunidad_sectorsocial 
-        RENAME COLUMN id_sector TO id_sectorsocial", false);
-
-    aplicaact($act, $idac, 'Nombre en Sector Social de Victima Colectiva');
 }
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
