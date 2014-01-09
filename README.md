@@ -30,18 +30,21 @@ Requiere:
 * Recomendado sobre adJ 5.4 (que incluye todos los componentes mencionados).  
   Las siguientes instrucciones suponen que opera en este ambiente.
 
-Configuración:
+Configuración de servidor de desarrollo:
 * Ubique fuentes por ejemplo en /var/www/htdocs/sivel2/
 * Instale gemas requeridas (como Rails 4.1) con:
   bundle20 update
-* Configure la misma base de datos de un SIVeL 1.2 en config/databases.yml y
-  ejecute
+* Configure la misma base de datos de un SIVeL 1.2 en sección development
+  de config/databases.yml y ejecute
   rake db:migrate
+  rake db:seed
 * En caso de que no tenga un SIVeL 1.2 en paralelo cree el usuario y base
   de datos que configure en config/database.yml e inicialice con:
   rake db:setup
   rake db:migrate
   rake db:seed
+* Lance el servidor con
+  rails s
 
 Pruebas:
 
@@ -50,8 +53,12 @@ Servicios requeridos y prestados:
 Servidor de desarollo:
   rails s
 
-Despliegue en sitio de producción:
-* Utilizamos unicorn
+Despliegue en sitio de producción con unicorn:
+* Siga los mismos 2 primeros pasos para configurar un servidor de desarrollo
+* Configure la misma base de datos de un SIVeL 1.2 en sección production
+  de config/databases.yml y ejecute
+  RAILS_ENV=production rake db:migrate
+  RAILS_ENV=production rake db:seed
 * Recomendamos nginx, puede configurar un dominio virtual (digamos
   s2.pasosdeJesus.org) con:
 
@@ -77,6 +84,7 @@ Despliegue en sitio de producción:
     try_files $uri/index.html $uri @unicorn;
     location @unicorn {
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
             proxy_set_header Host $http_host;
             proxy_redirect off;
             proxy_pass http://unicorn;
@@ -86,6 +94,8 @@ Despliegue en sitio de producción:
     }
 
   }
+* Precompile los recursos 
+  rake assets:precompile
 * Tras reiniciar nginx, inicie unicorn desde directorio con fuentes con:
 ./bin/u.sh
 
