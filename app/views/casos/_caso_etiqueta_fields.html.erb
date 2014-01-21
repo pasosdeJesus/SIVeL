@@ -1,0 +1,13 @@
+<div class='control-group nested-fields'>
+  <div class="controls">
+    <%= f.association :etiqueta,
+	    label: "Etiqueta",
+      label_method: :nombre,
+	    value_method: :id %>
+    <%= f.input :id_usuario %>
+    <%= f.input :fecha %>
+    <%= f.input :observaciones %>
+    <%= link_to_remove_association "Eliminar Etiqueta", f, 
+        :class => 'btn-danger' %> 
+  </div>
+</div>

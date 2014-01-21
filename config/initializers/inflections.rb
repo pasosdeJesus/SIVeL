@@ -20,4 +20,6 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.plural /^(.*d)$/i, '\1es'
 	inflect.singular /^(.*d)es$/i, '\1'
 	inflect.irregular 'actividad', 'actividades'
+	inflect.irregular 'etiqueta', 'etiqueta'
+	inflect.irregular 'respuesta', 'respuesta'
 end

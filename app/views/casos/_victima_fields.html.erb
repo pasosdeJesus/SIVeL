@@ -1,15 +1,18 @@
 <div class='control-group nested-fields'>
   <div class="controls">
-    <%= f.input :id_persona %>
-    <!--%= f.input :id_profesion %-->
-    <%= f.association :profesion,
+    <%= f.simple_fields_for :persona do |persona| %>
+      <%= render 'persona_fields', :f => persona %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Añadir Persona', f, :persona, :class => 'btn-primary' %>
+    </div>
+      <%= f.association :profesion,
 	    label: "Profesión",
 	    label_method: :nombre, 
 	    value_method: :id %>
-      <!--%= f.input :id_rangoedad %-->
     <%= f.association :rangoedad,
 	    label: "Rango de Edad",
-	    label_method: :nombre, 
+	    label_method: :rango, 
 	    value_method: :id %>
       <!-- %= f.input :id_etnia %-->
     <%= f.association :etnia,
@@ -21,7 +24,7 @@
 	    label_method: :nombre, 
 	    value_method: :id %>
     <!-- %= f.input :id_iglesia %-->
-    <%= f.input :orientacionsexual %>
+    <%= f.input(:orientacionsexual, collection: [[:Heterosexual, :H], [:Lesbiana, :L], [:Gay, :G], [:Bisexual, :B], [:Transexual, :T]], prompt: "Orientación Sexual") %>
     <%= link_to_remove_association "Eliminar Víctima", f, :class => 'btn-danger' %> 
   </div>
 </div>

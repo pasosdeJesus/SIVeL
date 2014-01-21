@@ -1,0 +1,27 @@
+<div class='control-group nested-fields'>
+  <div class="controls">
+    <%= f.association :departamento,
+	    label: "Departamento",
+      label_method: :nombre,
+	    value_method: :id %>
+    <!-- %= f.association :municipio,
+	    label: "Municipio",
+	    label_method: :nombre, 
+      value_method: :id % -->
+    <!-- %= f.association :clase,
+	    label: "Clase",
+	    label_method: :nombre, 
+	    value_method: :id % -->
+    <%= f.input :lugar %>
+    <%= f.input :sitio %>
+    <%= f.input :latitud%>
+    <%= f.input :longitud%>
+    <%= f.association :tsitio,
+	    label: "Tipo de Sitio",
+	    label_method: :nombre, 
+      value_method: :id %>
+    <%= f.input :id, as: :hidden %>
+    <%= link_to_remove_association "Eliminar Ubicación", f, 
+        :class => 'btn-danger' %> 
+  </div>
+</div>
