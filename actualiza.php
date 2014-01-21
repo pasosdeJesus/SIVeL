@@ -2855,8 +2855,28 @@ if (!aplicado($idac)) {
         }
     }
     aplicaact($act, $idac, 'Valores por defecto en referencias a tablas básicas');
-
 }
+
+$idac = '1.3-cp';
+if (!aplicado($idac)) {
+    
+    hace_consulta($db, 'CREATE SEQUENCE caso_presponsable_seq', false);
+    hace_consulta($db, "ALTER TABLE caso_presponsable ALTER COLUMN id 
+        SET DEFAULT(nextval('caso_presponsable_seq'))", false
+    );
+    hace_consulta($db, "UPDATE caso_presponsable SET
+        id = id_caso*10 + id WHERE id<10", false);
+    hace_consulta($db, "ALTER TABLE caso_presponsable ADD UNIQUE(id);", true);
+    hace_consulta($db, "SELECT setval('caso_presponsable_seq', MAX(id)) 
+        FROM (SELECT 10 as id UNION SELECT MAX(id) 
+        FROM caso_presponsable) AS s;", false);
+    hace_consulta($db, "ALTER TABLE caso_presponsable ALTER COLUMN tipo
+        SET DEFAULT 0", false
+    );
+
+    aplicaact($act, $idac, 'id en tabla caso_presponsable es identificación');
+}
+
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;

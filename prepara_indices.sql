@@ -3,6 +3,7 @@ SET client_encoding = 'UTF8';
 
 SELECT setval('antecedente_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM antecedente) AS s;
 SELECT setval('caso_seq', MAX(id)) FROM caso;
+SELECT setval('caso_presponsable_seq', MAX(id)) FROM (SELECT 10 as id UNION SELECT MAX(id) FROM caso_presponsable) AS s;
 sELECT setval('clase_seq', MAX(id)) FROM clase;
 SELECT setval('contexto_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM contexto) AS s;
 SELECT setval('departamento_seq', MAX(id)) FROM departamento;

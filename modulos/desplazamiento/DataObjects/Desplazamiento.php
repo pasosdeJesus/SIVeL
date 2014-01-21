@@ -46,9 +46,9 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
 
     var $id_caso;
     var $fechaexpulsion;
-    var $expulsion;
+    var $id_expulsion;
     var $fechallegada;
-    var $llegada;
+    var $id_llegada;
     var $id_clasifdesp;
     var $id_tipodesp;
     var $descripcion;
@@ -84,9 +84,9 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         $this->nom_tabla = _('Desplazamiento');
         $this->fb_fieldLabels = array(
             'fechaexpulsion' => _('Fecha Expulsión'),
-            'expulsion' => _('Sitio de Expulsión'),
+            'id_expulsion' => _('Sitio de Expulsión'),
             'fechallegada' => _('Fecha de Llegada'),
-            'llegada' => _('Sitio de Llegada'),
+            'id_llegada' => _('Sitio de Llegada'),
             'id_clasifdesp' => _('Clasificación'),
             'id_tipodesp' => _('Tipo'),
             'descripcion' => _('Descripción'),
@@ -121,9 +121,9 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
 
     var $fb_preDefOrder = array(
         'fechaexpulsion' ,
-        'expulsion' ,
+        'id_expulsion' ,
         'fechallegada' ,
-        'llegada' ,
+        'id_llegada' ,
         'id_clasifdesp' ,
         'id_tipodesp' ,
         'descripcion' ,
@@ -148,9 +148,9 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
     );
     var $fb_fieldsToRender = array(
         'fechaexpulsion' ,
-        'expulsion' ,
+        'id_expulsion' ,
         'fechallegada' ,
-        'llegada' ,
+        'id_llegada' ,
         'id_clasifdesp' ,
         'id_tipodesp' ,
         'descripcion' ,
@@ -259,7 +259,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
             $seln->freeze();
         }
 
-        $s =& $form->getElement('expulsion');
+        $s =& $form->getElement('id_expulsion');
         $s->_options = array();
         $q = "SELECT ubicacion.id, trim(departamento.nombre || ', ' || lugar)
             FROM ubicacion, departamento
@@ -277,16 +277,16 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         sin_error_pear($op);
         $r = $s->loadArray(array('' => '') + htmlentities_array($op));
         $s->setValue(
-            $this->expulsion
+            $this->id_expulsion
         );
 
-        $s =& $form->getElement('llegada');
+        $s =& $form->getElement('id_llegada');
         $s->_options = array();
         $op = $db->getAssoc($q);
         sin_error_pear($op);
         $r = $s->loadArray(htmlentities_array($op));
         $s->setValue(
-            $this->expulsion
+            $this->id_expulsion
         );
 
 

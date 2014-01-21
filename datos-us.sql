@@ -72,6 +72,6 @@ INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-fun', '2013-
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-bc', '2014-01-01', 'Clave con condensado bcrypt'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-nc', '2014-01-08', 'Nombre en Sector Social de Victima Colectiva'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-def', '2014-01-08', 'Valores por defecto en referencias a tablas básicas'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.3-cp', '2014-01-12', 'id en tabla caso_presponsable es identificación'); 
     
-
 

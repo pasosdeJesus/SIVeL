@@ -303,8 +303,8 @@ class PagDesplazamiento extends PagBaseMultiple
         $fechaex = arr_a_fecha($valores['fechaexpulsion'], true);
         $fechall = arr_a_fecha($valores['fechallegada'], true);
 
-        $es_vacio = (!isset($valores['expulsion'])
-                || $valores['expulsion'] === ''
+        $es_vacio = (!isset($valores['id_expulsion'])
+                || $valores['id_expulsion'] === ''
             );
 
         if ($es_vacio) {
@@ -507,7 +507,7 @@ class PagDesplazamiento extends PagBaseMultiple
             PagBaseMultiple::mezcla(
                 $db, $sol, $id1, $id2, $idn,
                 array('Desplazamiento' => array(
-                    'desplazamiento', 'id_fechaexpulsion'
+                    'desplazamiento', 'fechaexpulsion'
                 ))
             );
             echo "Falta completar copia de Desplazamiento<br>";

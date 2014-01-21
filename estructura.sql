@@ -713,36 +713,38 @@ CREATE TABLE caso_contexto (
 	PRIMARY KEY(id_caso, id_contexto)
 );
 
+CREATE SEQUENCE caso_presponsable_seq;
+
 CREATE TABLE caso_presponsable (
+	id INTEGER UNIQUE DEFAULT(nextval('caso_presponsable_seq')) PRIMARY KEY,
 	id_caso INTEGER REFERENCES caso,
 	id_presponsable INTEGER REFERENCES presponsable,
-	tipo	INTEGER	NOT NULL,
+	tipo	INTEGER	NOT NULL DEFAULT 0,
 	bloque	VARCHAR(50),
 	frente	VARCHAR(50),
 	brigada	VARCHAR(50),
 	batallon VARCHAR(50),
 	division VARCHAR(50),
-	otro VARCHAR(500),
-	id INTEGER NOT NULL,
-	PRIMARY KEY (id_caso, id_presponsable, id)
+	otro VARCHAR(500)
 );
 
+CREATE UNIQUE INDEX "index_caso_presponsable_on_caso_id_and_presponsable_id" 
+	ON "caso_presponsable" ("id_caso", "id_presponsable"); 
+CREATE UNIQUE INDEX "index_caso_presponsable_on_presponsable_id_and_caso_id" 
+	ON "caso_presponsable" ("id_presponsable", "id_caso");
 
 CREATE TABLE caso_categoria_presponsable (
 	id_tviolencia VARCHAR(1) REFERENCES tviolencia,
 	id_supracategoria INTEGER,
 	id_categoria INTEGER REFERENCES categoria, 
 	--En interfaz verificar que categoria es de tipocat Otra ('O')
-	id INTEGER NOT NULL,
+	id_caso_presponsable INTEGER NOT NULL REFERENCES caso_presponsable,
 	id_caso INTEGER REFERENCES caso,
 	id_presponsable INTEGER REFERENCES presponsable,
 	PRIMARY KEY(id_tviolencia, id_supracategoria, id_categoria,
-		id, id_caso, id_presponsable),
+		id_caso_presponsable),
 	FOREIGN KEY (id_supracategoria, id_tviolencia) 
-	REFERENCES supracategoria (id, id_tviolencia),
-	FOREIGN KEY (id, id_caso, id_presponsable)
-	REFERENCES caso_presponsable (id, id_caso, 
-		id_presponsable)
+	REFERENCES supracategoria (id, id_tviolencia)
 );
 
 

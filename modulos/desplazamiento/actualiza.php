@@ -64,6 +64,20 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Cambio de código EXTERIOR de 0 a 10000');
 }
 
+$idac = 'des-13e';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "ALTER TABLE desplazamiento RENAME COLUMN
+        expulsion TO id_expulsion", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE desplazamiento RENAME COLUMN
+        llegada TO id_llegada", false
+    );
+    aplicaact($act, $idac, 'Renombra campos');
+}
+
+
 echo "Actualizando indices<br>";
 actualiza_indice($db, 'clasifdesp');
 actualiza_indice($db, 'tipodesp');

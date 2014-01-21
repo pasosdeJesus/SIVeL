@@ -1891,7 +1891,7 @@ function valor_fb2do($valor, $rel, $campo, &$estbd)
     $tipo = $estbd[$rel][$campo];
     //echo "OJO valor_fb2do, tipo=$tipo";
     if ($tipo & 1) {
-        if (isset($valor)) {
+        if (isset($valor) && $valor != null && $valor != '') {
             $ret = (int)$valor;
         } else {
             $ret = null;

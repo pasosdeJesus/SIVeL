@@ -48,4 +48,5 @@ INSERT INTO modalidadtierra (id, nombre) VALUES (7, 'CONSEJO COMUNITARIO');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('des-e1', '2013-05-24', 'Estructura inicial');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('des-d1', '2013-05-24', 'Datos iniciales');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('des-ext', '2013-06-13', 'Cambio depot EXTERIOR de código 0 a 1000');
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('des-13e', '2013-06-13', 'Renombra expulsión por id_exulsion y llegada por id_llegada');
 

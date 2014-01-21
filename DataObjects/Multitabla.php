@@ -203,6 +203,7 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
         foreach ($this->llavescomunes as $c) {
             $p->$c = $this->$c;
         }
+        //print_r($p); die("x");
         $p->find();
         while ($p->$c != null && $p->fetch()) {
             $t .= "<tr> ";

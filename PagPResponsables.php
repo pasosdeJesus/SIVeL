@@ -93,7 +93,7 @@ class PagPResponsables extends PagBaseMultiple
             if ($ir && $do->find()==1) {
                 $q = "DELETE FROM caso_categoria_presponsable " .
                     "WHERE id_caso='" . (int)$do->id_caso . "' " .
-                    " AND id='" . (int)var_escapa($do->id, $db) . "' " .
+                    " AND id_caso_presponsable='" . (int)var_escapa($do->id, $db) . "' " .
                     " AND id_presponsable='" .
                     (int)var_escapa($do->id_presponsable, $db) . "';";
                 hace_consulta($db, $q);
@@ -139,13 +139,14 @@ class PagPResponsables extends PagBaseMultiple
         $dcategoria->id_caso = $idcaso;
         if ($_SESSION['fpr_pag'] < 0 || $_SESSION['fpr_pag'] >= $tot) {
             $drespCaso->id_presponsable = null;
-            $q = "SELECT (max(id)) FROM " .
+/*            $q = "SELECT (max(id)) FROM " .
                     "caso_presponsable WHERE " .
                     "id_caso='" . $idcaso . "'";
             $id = (int)($db->getOne($q)) + 1;
-            $drespCaso->id = $id;
+$drespCaso->id = $id; */
+            $drespCaso->id = null;
             $dcategoria->id_presponsable = null;
-            $dcategoria->id = null;
+            $dcategoria->id_caso_presponsable = null;
             $dcategoria->id_tviolencia = null;
             $dcategoria->id_supracategoria = null;
             $dcategoria->id_categoria = null;
@@ -155,7 +156,7 @@ class PagPResponsables extends PagBaseMultiple
             $drespCaso->find();
             $drespCaso->fetch();
             $dcategoria->id_presponsable = $idp[$_SESSION['fpr_pag']];
-            $dcategoria->id = $idp2[$_SESSION['fpr_pag']];
+            $dcategoria->id_caso_presponsable = $idp2[$_SESSION['fpr_pag']];
         }
 
         $this->bcaso_presponsable =& DB_DataObject_FormBuilder::create(
@@ -317,7 +318,7 @@ class PagPResponsables extends PagBaseMultiple
                 $dc =& objeto_tabla('caso_categoria_presponsable');
                 $dc->id_caso = $idcaso;
                 $dc->id_presponsable = $idpr;
-                $dc->id = $id;
+                $dc->id_caso_presponsable = $id;
                 $dc->find();
                 while ($dc->fetch()) {
                     $vscc[] = $dc->id_tviolencia . ":" .
@@ -327,7 +328,7 @@ class PagPResponsables extends PagBaseMultiple
                 $v['clasificacion'] = $vscc;
                 // $scc->setValue($vscc);
             }
-            if (isset($this->bcategoria->_do->id)
+            if (isset($this->bcategoria->_do->id_caso_presponsable)
                 && isset($this->bcategoria->_do->id_presponsable)
             ) {
                 $this->bcategoria->_do->find();
@@ -453,7 +454,7 @@ class PagPResponsables extends PagBaseMultiple
             }
             $q = "DELETE FROM caso_categoria_presponsable " .
                 " WHERE id_caso='" . (int)$idcaso . "' " .
-                " AND id='" . (int)$id . "' " .
+                " AND id_caso_presponsable ='" . (int)$id . "' " .
                 " AND id_presponsable='" . (int)$idpres . "'";
             $result = hace_consulta($db, $q);
             $this->bcaso_presponsable->_do->delete();
@@ -474,10 +475,12 @@ class PagPResponsables extends PagBaseMultiple
         if (isset($valores['clasificacion'])) {
             foreach (var_escapa($valores['clasificacion']) as $k => $v) {
                 $t = explode(":", var_escapa($v, $db));
-                $this->bcategoria->_do->id
+                $this->bcategoria->_do->id_caso_presponsable
                     = $this->bcaso_presponsable->_do->id;
                 $this->bcategoria->_do->id_caso
                     = $this->bcaso_presponsable->_do->id_caso;
+                $this->bcategoria->_do->id_caso_presponsable 
+                    = $this->bcaso_presponsable->_do->id;
                 $this->bcategoria->_do->id_presponsable
                     = $this->bcaso_presponsable->_do->id_presponsable;
                 $this->bcategoria->_do->id_tviolencia = $t[0];
@@ -494,7 +497,7 @@ class PagPResponsables extends PagBaseMultiple
     /**
      * Prepara consulta SQL para buscar datos de este formulario.
      * Ver documentación completa en clase base.
-     *
+     **
      * @param string &$w       Consulta que se construye
      * @param string &$t       Tablas
      * @param string &$db      Conexión a base de datos

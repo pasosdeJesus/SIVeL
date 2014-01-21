@@ -36,6 +36,7 @@ class DataObjects_Caso_presponsable extends DB_DataObject_SIVeL
 {
 
     var $__table = 'caso_presponsable';     // table name
+    var $id;                              // int4(4)  multiple_key
     var $id_caso;                         // int4(4)  multiple_key
     var $id_presponsable;                // int4(4)  multiple_key
     var $tipo;                            // int4(4)  not_null
@@ -45,7 +46,6 @@ class DataObjects_Caso_presponsable extends DB_DataObject_SIVeL
     var $brigada;                         // varchar(-1)
     var $batallon;                        // varchar(-1)
     var $otro;                            // varchar(-1)
-    var $id;                              // int4(4)  multiple_key
 
     var $fb_preDefOrder = array('id_presponsable',
         'tipo', 'bloque', 'frente', 'division', 'brigada', 'batallon',

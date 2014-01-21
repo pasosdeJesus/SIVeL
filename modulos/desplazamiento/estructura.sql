@@ -55,9 +55,9 @@ CREATE SEQUENCE desplazamiento_seq;
 CREATE TABLE desplazamiento (
     id_caso INTEGER,
     fechaexpulsion DATE NOT NULL,
-	expulsion INTEGER NOT NULL REFERENCES ubicacion(id),
+    id_expulsion INTEGER NOT NULL REFERENCES ubicacion(id),
     fechallegada DATE NOT NULL,
-	llegada INTEGER NOT NULL REFERENCES ubicacion(id),
+    id_llegada INTEGER NOT NULL REFERENCES ubicacion(id),
     id_clasifdesp INTEGER NOT NULL REFERENCES clasifdesp DEFAULT '0',
     id_tipodesp INTEGER NOT NULL REFERENCES tipodesp DEFAULT '0',
     descripcion VARCHAR(5000), 
