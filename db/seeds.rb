@@ -24,4 +24,3 @@ connection.execute("INSERT INTO usuario
 	VALUES ('sjrven', 'sjrven@sjrven.org', 
 	'$2a$10$uMAciEcJuUXDnpelfSH6He7BxW0yBeq6VMemlWc5xEl6NZRDYVA3G', 
 	'', '2014-01-12', '2013-12-24', '2013-12-24', 1);")
-
