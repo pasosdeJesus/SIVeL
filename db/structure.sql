@@ -565,13 +565,12 @@ CREATE TABLE ayudaestado (
 --
 
 CREATE TABLE ayudaestado_respuesta (
-    id_caso integer NOT NULL,
-    fechaatencion date NOT NULL,
-    id_ayudaestado integer DEFAULT 0 NOT NULL,
+    id_ayudaestado integer NOT NULL,
     cantidad character varying(50),
     institucion character varying(100),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
 );
 
 
@@ -607,12 +606,11 @@ CREATE TABLE ayudasjr (
 --
 
 CREATE TABLE ayudasjr_respuesta (
-    id_caso integer NOT NULL,
-    fechaatencion date NOT NULL,
-    id_ayudasjr integer DEFAULT 0 NOT NULL,
+    id_ayudasjr integer NOT NULL,
     detallear character varying(5000),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
 );
 
 
@@ -658,9 +656,9 @@ CREATE TABLE caso_categoria_presponsable (
     id_tviolencia character varying(1) NOT NULL,
     id_supracategoria integer NOT NULL,
     id_categoria integer NOT NULL,
-    id integer NOT NULL,
-    id_caso integer NOT NULL,
-    id_presponsable integer NOT NULL,
+    id_caso_presponsable integer NOT NULL,
+    id_caso integer,
+    id_presponsable integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -738,20 +736,32 @@ CREATE TABLE caso_frontera (
 
 
 --
+-- Name: caso_presponsable_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE caso_presponsable_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
 -- Name: caso_presponsable; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE caso_presponsable (
-    id_caso integer NOT NULL,
-    id_presponsable integer NOT NULL,
-    tipo integer NOT NULL,
+    id integer DEFAULT nextval('caso_presponsable_seq'::regclass) NOT NULL,
+    id_caso integer,
+    id_presponsable integer,
+    tipo integer DEFAULT 0 NOT NULL,
     bloque character varying(50),
     frente character varying(50),
     brigada character varying(50),
     batallon character varying(50),
     division character varying(50),
     otro character varying(500),
-    id integer NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -790,7 +800,7 @@ CREATE TABLE casosjr (
     id_caso integer NOT NULL,
     fecharec date NOT NULL,
     asesor integer NOT NULL,
-    id_regionsjr integer DEFAULT 1,
+    id_regionsjr integer,
     direccion character varying(1000),
     telefono character varying(1000),
     comosupo character varying(5000),
@@ -1101,7 +1111,7 @@ CREATE TABLE derecho (
 
 CREATE TABLE derecho_procesosjr (
     id_proceso integer NOT NULL,
-    id_derecho integer DEFAULT 9 NOT NULL,
+    id_derecho integer NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -1112,13 +1122,12 @@ CREATE TABLE derecho_procesosjr (
 --
 
 CREATE TABLE derecho_respuesta (
-    id_caso integer NOT NULL,
-    fechaatencion date NOT NULL,
-    id_derecho integer DEFAULT 9 NOT NULL,
+    id_derecho integer NOT NULL,
     informacion boolean,
     acciones character varying(5000),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
 );
 
 
@@ -1158,9 +1167,9 @@ CREATE TABLE despacho (
 CREATE TABLE desplazamiento (
     id_caso integer NOT NULL,
     fechaexpulsion date NOT NULL,
-    expulsion integer NOT NULL,
+    id_expulsion integer NOT NULL,
     fechallegada date NOT NULL,
-    llegada integer NOT NULL,
+    id_llegada integer NOT NULL,
     id_clasifdesp integer DEFAULT 0 NOT NULL,
     id_tipodesp integer DEFAULT 0 NOT NULL,
     descripcion character varying(5000),
@@ -1722,12 +1731,11 @@ CREATE TABLE motivosjr (
 --
 
 CREATE TABLE motivosjr_respuesta (
-    id_caso integer NOT NULL,
-    fechaatencion date NOT NULL,
-    id_motivosjr integer DEFAULT 0 NOT NULL,
+    id_motivosjr integer NOT NULL,
     detalle character varying(5000),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
 );
 
 
@@ -1962,11 +1970,11 @@ CREATE TABLE proceso (
 
 CREATE TABLE procesosjr (
     id_proceso integer NOT NULL,
-    id_motivoconsulta integer DEFAULT 0,
+    id_motivoconsulta integer,
     narracion character varying(5000),
     hapresentado character(1),
-    id_mecanismoder integer DEFAULT 9,
-    id_instanciader integer DEFAULT 0,
+    id_mecanismoder integer,
+    id_instanciader integer,
     detinstancia character varying(5000),
     mecrespondido character(1),
     fecharespuesta date,
@@ -1976,8 +1984,8 @@ CREATE TABLE procesosjr (
     compromisossjr character varying(5000),
     compromisosper character varying(5000),
     surtioefecto character(1),
-    otromecanismo integer DEFAULT 9,
-    otrainstancia integer DEFAULT 0,
+    otromecanismo integer,
+    otrainstancia integer,
     detotrainstancia character varying(5000),
     persistevul boolean,
     resultado character varying(5000),
@@ -2052,12 +2060,11 @@ CREATE TABLE progestado (
 --
 
 CREATE TABLE progestado_respuesta (
-    id_caso integer NOT NULL,
-    fechaatencion date NOT NULL,
-    id_progestado integer DEFAULT 0 NOT NULL,
+    id_progestado integer NOT NULL,
     difobs character varying(5000),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    id_respuesta integer NOT NULL
 );
 
 
@@ -2200,6 +2207,18 @@ CREATE TABLE resagresion (
 
 
 --
+-- Name: respuesta_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE respuesta_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
 -- Name: respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2222,13 +2241,14 @@ CREATE TABLE respuesta (
     orientaciones character varying(5000),
     gestionessjr character varying(5000),
     observaciones character varying(5000),
-    id_personadesea integer DEFAULT 0,
-    id_causaref integer DEFAULT 0,
+    id_personadesea integer,
+    id_causaref integer,
     verifcsjr character varying(5000),
     verifcper character varying(5000),
     efectividad character varying(5000),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    id integer DEFAULT nextval('respuesta_seq'::regclass) NOT NULL
 );
 
 
@@ -2594,19 +2614,19 @@ CREATE TABLE victimasjr (
     id_persona integer NOT NULL,
     id_caso integer NOT NULL,
     sindocumento boolean,
-    id_estadocivil integer DEFAULT 0,
+    id_estadocivil integer,
     id_rolfamilia integer DEFAULT 0 NOT NULL,
     cabezafamilia boolean,
-    id_maternidad integer DEFAULT 0,
+    id_maternidad integer,
     discapacitado boolean,
-    id_actividadoficio integer DEFAULT 0,
-    id_escolaridad integer DEFAULT 0,
+    id_actividadoficio integer,
+    id_escolaridad integer,
     asisteescuela boolean,
     tienesisben boolean,
     id_departamento integer,
     id_municipio integer,
     nivelsisben integer,
-    id_regimensalud integer DEFAULT 0,
+    id_regimensalud integer,
     eps character varying(1000),
     libretamilitar boolean,
     distrito integer,
@@ -2813,7 +2833,7 @@ ALTER TABLE ONLY ayudaestado
 --
 
 ALTER TABLE ONLY ayudaestado_respuesta
-    ADD CONSTRAINT ayudaestado_respuesta_pkey PRIMARY KEY (id_caso, fechaatencion, id_ayudaestado);
+    ADD CONSTRAINT ayudaestado_respuesta_pkey PRIMARY KEY (id_respuesta, id_ayudaestado);
 
 
 --
@@ -2829,7 +2849,7 @@ ALTER TABLE ONLY ayudasjr
 --
 
 ALTER TABLE ONLY ayudasjr_respuesta
-    ADD CONSTRAINT ayudasjr_respuesta_pkey PRIMARY KEY (id_caso, fechaatencion, id_ayudasjr);
+    ADD CONSTRAINT ayudasjr_respuesta_pkey PRIMARY KEY (id_respuesta, id_ayudasjr);
 
 
 --
@@ -2837,7 +2857,7 @@ ALTER TABLE ONLY ayudasjr_respuesta
 --
 
 ALTER TABLE ONLY caso_categoria_presponsable
-    ADD CONSTRAINT caso_categoria_presponsable_pkey PRIMARY KEY (id_tviolencia, id_supracategoria, id_categoria, id, id_caso, id_presponsable);
+    ADD CONSTRAINT caso_categoria_presponsable_pkey PRIMARY KEY (id_tviolencia, id_supracategoria, id_categoria, id_caso_presponsable);
 
 
 --
@@ -2889,11 +2909,19 @@ ALTER TABLE ONLY caso
 
 
 --
+-- Name: caso_presponsable_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY caso_presponsable
+    ADD CONSTRAINT caso_presponsable_id_key UNIQUE (id);
+
+
+--
 -- Name: caso_presponsable_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY caso_presponsable
-    ADD CONSTRAINT caso_presponsable_pkey PRIMARY KEY (id_caso, id_presponsable, id);
+    ADD CONSTRAINT caso_presponsable_pkey PRIMARY KEY (id);
 
 
 --
@@ -3045,7 +3073,7 @@ ALTER TABLE ONLY derecho_procesosjr
 --
 
 ALTER TABLE ONLY derecho_respuesta
-    ADD CONSTRAINT derecho_respuesta_pkey PRIMARY KEY (id_caso, fechaatencion, id_derecho);
+    ADD CONSTRAINT derecho_respuesta_pkey PRIMARY KEY (id_respuesta, id_derecho);
 
 
 --
@@ -3221,7 +3249,7 @@ ALTER TABLE ONLY motivosjr
 --
 
 ALTER TABLE ONLY motivosjr_respuesta
-    ADD CONSTRAINT motivosjr_respuesta_pkey PRIMARY KEY (id_caso, fechaatencion, id_motivosjr);
+    ADD CONSTRAINT motivosjr_respuesta_pkey PRIMARY KEY (id_respuesta, id_motivosjr);
 
 
 --
@@ -3317,7 +3345,7 @@ ALTER TABLE ONLY progestado
 --
 
 ALTER TABLE ONLY progestado_respuesta
-    ADD CONSTRAINT progestado_respuesta_pkey PRIMARY KEY (id_caso, fechaatencion, id_progestado);
+    ADD CONSTRAINT progestado_respuesta_pkey PRIMARY KEY (id_respuesta, id_progestado);
 
 
 --
@@ -3361,11 +3389,19 @@ ALTER TABLE ONLY resagresion
 
 
 --
+-- Name: respuesta_id_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY respuesta
+    ADD CONSTRAINT respuesta_id_key UNIQUE (id);
+
+
+--
 -- Name: respuesta_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY respuesta
-    ADD CONSTRAINT respuesta_pkey PRIMARY KEY (id_caso, fechaatencion);
+    ADD CONSTRAINT respuesta_pkey PRIMARY KEY (id);
 
 
 --
@@ -3533,6 +3569,20 @@ CREATE INDEX index_actividad_rangoedad_on_rangoedad_id ON actividad_rangoedad US
 
 
 --
+-- Name: index_caso_presponsable_on_caso_id_and_presponsable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_caso_presponsable_on_caso_id_and_presponsable_id ON caso_presponsable USING btree (id_caso, id_presponsable);
+
+
+--
+-- Name: index_caso_presponsable_on_presponsable_id_and_caso_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_caso_presponsable_on_presponsable_id_and_caso_id ON caso_presponsable USING btree (id_presponsable, id_caso);
+
+
+--
 -- Name: index_usuario_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3623,14 +3673,6 @@ ALTER TABLE ONLY acto
 
 
 --
--- Name: acto_id_persona_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY acto
-    ADD CONSTRAINT acto_id_persona_fkey1 FOREIGN KEY (id_persona, id_caso) REFERENCES victima(id_persona, id_caso);
-
-
---
 -- Name: acto_id_presponsable_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -3684,14 +3726,6 @@ ALTER TABLE ONLY actocolectivo
 
 ALTER TABLE ONLY actosjr
     ADD CONSTRAINT actosjr_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
-
-
---
--- Name: actosjr_id_caso_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY actosjr
-    ADD CONSTRAINT actosjr_id_caso_fkey1 FOREIGN KEY (id_caso, fechaexpulsion) REFERENCES desplazamiento(id_caso, fechaexpulsion);
 
 
 --
@@ -3839,19 +3873,11 @@ ALTER TABLE ONLY ayudaestado_respuesta
 
 
 --
--- Name: ayudaestado_respuesta_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: ayudaestado_respuesta_id_respuesta_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ayudaestado_respuesta
-    ADD CONSTRAINT ayudaestado_respuesta_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES casosjr(id_caso);
-
-
---
--- Name: ayudaestado_respuesta_id_caso_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY ayudaestado_respuesta
-    ADD CONSTRAINT ayudaestado_respuesta_id_caso_fkey1 FOREIGN KEY (id_caso, fechaatencion) REFERENCES respuesta(id_caso, fechaatencion);
+    ADD CONSTRAINT ayudaestado_respuesta_id_respuesta_fkey FOREIGN KEY (id_respuesta) REFERENCES respuesta(id);
 
 
 --
@@ -3863,19 +3889,11 @@ ALTER TABLE ONLY ayudasjr_respuesta
 
 
 --
--- Name: ayudasjr_respuesta_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: ayudasjr_respuesta_id_respuesta_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ayudasjr_respuesta
-    ADD CONSTRAINT ayudasjr_respuesta_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES casosjr(id_caso);
-
-
---
--- Name: ayudasjr_respuesta_id_caso_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY ayudasjr_respuesta
-    ADD CONSTRAINT ayudasjr_respuesta_id_caso_fkey1 FOREIGN KEY (id_caso, fechaatencion) REFERENCES respuesta(id_caso, fechaatencion);
+    ADD CONSTRAINT ayudasjr_respuesta_id_respuesta_fkey FOREIGN KEY (id_respuesta) REFERENCES respuesta(id);
 
 
 --
@@ -3887,19 +3905,19 @@ ALTER TABLE ONLY caso_categoria_presponsable
 
 
 --
+-- Name: caso_categoria_presponsable_id_caso_presponsable_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_categoria_presponsable
+    ADD CONSTRAINT caso_categoria_presponsable_id_caso_presponsable_fkey FOREIGN KEY (id_caso_presponsable) REFERENCES caso_presponsable(id);
+
+
+--
 -- Name: caso_categoria_presponsable_id_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY caso_categoria_presponsable
     ADD CONSTRAINT caso_categoria_presponsable_id_categoria_fkey FOREIGN KEY (id_categoria) REFERENCES categoria(id);
-
-
---
--- Name: caso_categoria_presponsable_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY caso_categoria_presponsable
-    ADD CONSTRAINT caso_categoria_presponsable_id_fkey FOREIGN KEY (id, id_caso, id_presponsable) REFERENCES caso_presponsable(id, id_caso, id_presponsable);
 
 
 --
@@ -4367,27 +4385,19 @@ ALTER TABLE ONLY derecho_procesosjr
 
 
 --
--- Name: derecho_respuesta_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY derecho_respuesta
-    ADD CONSTRAINT derecho_respuesta_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES casosjr(id_caso);
-
-
---
--- Name: derecho_respuesta_id_caso_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY derecho_respuesta
-    ADD CONSTRAINT derecho_respuesta_id_caso_fkey1 FOREIGN KEY (id_caso, fechaatencion) REFERENCES respuesta(id_caso, fechaatencion);
-
-
---
 -- Name: derecho_respuesta_id_derecho_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY derecho_respuesta
     ADD CONSTRAINT derecho_respuesta_id_derecho_fkey FOREIGN KEY (id_derecho) REFERENCES derecho(id);
+
+
+--
+-- Name: derecho_respuesta_id_respuesta_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY derecho_respuesta
+    ADD CONSTRAINT derecho_respuesta_id_respuesta_fkey FOREIGN KEY (id_respuesta) REFERENCES respuesta(id);
 
 
 --
@@ -4404,14 +4414,6 @@ ALTER TABLE ONLY despacho
 
 ALTER TABLE ONLY desplazamiento
     ADD CONSTRAINT desplazamiento_departamentodecl_fkey FOREIGN KEY (departamentodecl) REFERENCES departamento(id);
-
-
---
--- Name: desplazamiento_expulsion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY desplazamiento
-    ADD CONSTRAINT desplazamiento_expulsion_fkey FOREIGN KEY (expulsion) REFERENCES ubicacion(id);
 
 
 --
@@ -4439,11 +4441,27 @@ ALTER TABLE ONLY desplazamiento
 
 
 --
+-- Name: desplazamiento_id_expulsion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_id_expulsion_fkey FOREIGN KEY (id_expulsion) REFERENCES ubicacion(id);
+
+
+--
 -- Name: desplazamiento_id_inclusion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY desplazamiento
     ADD CONSTRAINT desplazamiento_id_inclusion_fkey FOREIGN KEY (id_inclusion) REFERENCES inclusion(id);
+
+
+--
+-- Name: desplazamiento_id_llegada_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_id_llegada_fkey FOREIGN KEY (id_llegada) REFERENCES ubicacion(id);
 
 
 --
@@ -4463,14 +4481,6 @@ ALTER TABLE ONLY desplazamiento
 
 
 --
--- Name: desplazamiento_llegada_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY desplazamiento
-    ADD CONSTRAINT desplazamiento_llegada_fkey FOREIGN KEY (llegada) REFERENCES ubicacion(id);
-
-
---
 -- Name: desplazamiento_municipiodecl_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4487,27 +4497,19 @@ ALTER TABLE ONLY etapa
 
 
 --
--- Name: motivosjr_respuesta_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY motivosjr_respuesta
-    ADD CONSTRAINT motivosjr_respuesta_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES casosjr(id_caso);
-
-
---
--- Name: motivosjr_respuesta_id_caso_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY motivosjr_respuesta
-    ADD CONSTRAINT motivosjr_respuesta_id_caso_fkey1 FOREIGN KEY (id_caso, fechaatencion) REFERENCES respuesta(id_caso, fechaatencion);
-
-
---
 -- Name: motivosjr_respuesta_id_motivosjr_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY motivosjr_respuesta
     ADD CONSTRAINT motivosjr_respuesta_id_motivosjr_fkey FOREIGN KEY (id_motivosjr) REFERENCES motivosjr(id);
+
+
+--
+-- Name: motivosjr_respuesta_id_respuesta_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY motivosjr_respuesta
+    ADD CONSTRAINT motivosjr_respuesta_id_respuesta_fkey FOREIGN KEY (id_respuesta) REFERENCES respuesta(id);
 
 
 --
@@ -4631,22 +4633,6 @@ ALTER TABLE ONLY procesosjr
 
 
 --
--- Name: progestado_respuesta_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY progestado_respuesta
-    ADD CONSTRAINT progestado_respuesta_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES casosjr(id_caso);
-
-
---
--- Name: progestado_respuesta_id_caso_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY progestado_respuesta
-    ADD CONSTRAINT progestado_respuesta_id_caso_fkey1 FOREIGN KEY (id_caso, fechaatencion) REFERENCES respuesta(id_caso, fechaatencion);
-
-
---
 -- Name: progestado_respuesta_id_progestado_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4655,19 +4641,19 @@ ALTER TABLE ONLY progestado_respuesta
 
 
 --
+-- Name: progestado_respuesta_id_respuesta_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY progestado_respuesta
+    ADD CONSTRAINT progestado_respuesta_id_respuesta_fkey FOREIGN KEY (id_respuesta) REFERENCES respuesta(id);
+
+
+--
 -- Name: respuesta_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY respuesta
     ADD CONSTRAINT respuesta_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES casosjr(id_caso);
-
-
---
--- Name: respuesta_id_caso_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY respuesta
-    ADD CONSTRAINT respuesta_id_caso_fkey1 FOREIGN KEY (id_caso, fechaexpulsion) REFERENCES desplazamiento(id_caso, fechaexpulsion);
 
 
 --
@@ -4957,4 +4943,6 @@ INSERT INTO schema_migrations (version) VALUES ('20131210221541');
 INSERT INTO schema_migrations (version) VALUES ('20131220103409');
 
 INSERT INTO schema_migrations (version) VALUES ('20131223175141');
+
+INSERT INTO schema_migrations (version) VALUES ('20140117212555');
 
