@@ -26,6 +26,8 @@ echo -n "Nombre: ";
 read nombre;
 echo -n "Descripcion: ";
 read descripcion;
+echo -n "Correo: ";
+read correo;
 echo "Roles:";
 minr=0;
 maxr=0;
@@ -74,7 +76,7 @@ echo -n "Clave: ";
 stty -echo; read clave; stty echo
 fecha=`date +%Y-%m-%d`
 clavesha1=$($PHP -n -r "echo sha1('$clave');")
-q="SET client_encoding to 'UTF8'; INSERT INTO usuario(nusuario, password, nombre, descripcion, rol, idioma, fechacreacion)  VALUES ('$id', '$clavesha1', '$nombre', '$descripcion', '$sidrol', '$idsel', '$fecha');" 
+q="SET client_encoding to 'UTF8'; INSERT INTO usuario(nusuario, password, nombre, descripcion, rol, idioma, email, fechacreacion)  VALUES ('$id', '$clavesha1', '$nombre', '$descripcion', '$sidrol', '$idsel', '$correo', '$fecha');" 
 echo $q;
 ../../bin/psql.sh -c "$q"
 
