@@ -1,0 +1,16 @@
+<div class='control-group nested-fields'>
+  <div class="controls">
+    <%= f.input :nombres %>
+    <%= f.input :apellidos %>
+    <%= f.input :anionac %>
+    <%= f.input :mesnac %>
+    <%= f.input :dianac %>
+    <%= f.input :sexo, collection: [["SIN INFORMACIÓN", :S], ["FEMENINO", :F], ["MASCULINO", :M]], include_blank: false %>
+    <%= f.input :tipodocumento, collection: [["CC", :CC], ["TI", :TI], ["P", :P], [:O, :O]], prompt: "Tipo de Documento" %>
+    <%= f.input :numerodocumento%>
+    <%= f.association :departamento,
+	    label: "Departamento",
+      label_method: :nombre,
+      value_method: :id %>
+  </div>
+</div>

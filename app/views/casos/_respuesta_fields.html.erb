@@ -1,0 +1,24 @@
+<div class='control-group nested-fields'>
+  <div class="controls">
+    <%= f.input :fechaatencion, label: "Fecha de Atención" %>
+    <!-- %= f.input :fechaexpulsion, label: "Desplazamiento" %-->
+    <%= f.association :desplazamiento,
+      collection: Desplazamiento.where(:id_caso => @caso.id),
+      selected: :id,
+	    label: "Causó desplazamiento",
+      label_method: :fechaexpulsion,
+      value_method: :fechaexpulsion %>
+    <%= f.input :descamp, label: "Situación encontrada" %>
+    <%= f.input :observaciones, label: "Observaciones" %>
+    <%= f.input :orientaciones, label: "Recomendaciones" %>
+    <%= f.input :compromisos, label: "Compromisos de la Persona" %>
+    <%= f.input :gestionessjr, label: "Compromisos del SJR" %>
+    <%= f.simple_fields_for :ayudasjr_respuesta do |a| %>
+      <%= render 'ayudasjr_respuesta_fields', :f => a %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association 'Añadir Asistencia Humanitaria', f, :ayudasjr_respuesta, :class => 'btn-primary' %>
+    </div>
+    <%= link_to_remove_association "Eliminar Sesión de Atención", f, :class => 'btn-danger' %> 
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class='control-group nested-fields'>
+  <div class="controls">
+    <%= f.input :fechaexpulsion, 
+        :input_html => { "data-behaviour" => "datepicker" },
+        :as => :string, :label => "Fecha Expulsión" %>
+    <%= f.association :expulsion,
+        collection: Ubicacion.where(:id_caso => @caso.id),
+        label: "Sitio expulsión",
+        #label_method: :id_departamento,
+        label_method: lambda {|t| Departamento.find(t.id_departamento).nombre},
+        value_method: :id %>
+    <%= f.input :fechallegada, 
+        :input_html => { "data-behaviour" => "datepicker" },
+        :as => :string, :label => "Fecha Llegada" %>
+    <%= f.association :llegada,
+        collection: Ubicacion.where(:id_caso => @caso.id),
+	      label: "Sitio llegada",
+        label_method: lambda {|t| Departamento.find(t.id_departamento).nombre},
+        #label_method: :id_departamento,
+	      value_method: :id %>
+    <%= f.input :descripcion %>
+    <%= link_to_remove_association "Eliminar Desplazamiento", f, 
+        :class => 'btn-danger' %> 
+  </div>
+</div>

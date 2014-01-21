@@ -8,7 +8,7 @@
 	  value_method: :id %>
   <%= f.input :objetivo %>
   <%= f.input :proyecto %>
-  <%= f.input :resultado %>
+  <%= f.input :resultado, label: "Resultado asociado a Indicador del Proyecto" %>
   <%= f.input :fecha, :input_html => { "data-behaviour" => "datepicker"}, 
 	  :as => :string %>
   <!--%= f.input :fecha, :input_html => { "data-behaviour" => 'datepicker' } %>
@@ -24,7 +24,6 @@
             })
   </script-->
 
-  <%= f.input :actividad %>
   <%= f.input :observaciones %>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
