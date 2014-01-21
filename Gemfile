@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.0beta1'
 
-# Use postgresql as the database for Active Record
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails', '4.1.0.beta1'
+
 gem 'pg'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 4.0.0.rc1'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -16,7 +16,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+# gem 'therubyracer',  platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -27,10 +27,11 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
 
-group :doc do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'sdoc', require: false
-end
+# bundle exec rake doc:rails generates the API under doc/api.
+gem 'sdoc',          group: :doc, require: false
+
+# Spring speeds up development by keeping your application running in the background. Read more: https://github.com/jonleighton/spring
+gem 'spring',        group: :development
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
@@ -39,12 +40,14 @@ end
 # gem 'unicorn'
 
 # Use Capistrano for deployment
-# gem 'capistrano', group: :development
+# gem 'capistrano-rails', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-#
-#
+
+gem 'tzinfo'
+gem 'tzinfo-data'
+
 gem "rspec-rails", group: [:development, :test]
 gem "cucumber-rails", group: "test", :require => false
 gem 'capybara', group: [:development, :test]
@@ -60,12 +63,6 @@ gem "jquery-ui-bootstrap-rails", git: "https://github.com/kristianmandrup/jquery
 gem "devise"
 gem "devise-i18n"
 gem "cancan"
-
-# 4.1
-gem "tzinfo"
-gem "tzinfo-data"
-gem 'spring', group: :development
-
-# 
 gem "cocoon"
+
 
