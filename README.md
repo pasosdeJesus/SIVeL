@@ -34,6 +34,9 @@ Configuración:
 * Ubique fuentes por ejemplo en /var/www/htdocs/sivel2/
 * Instale gemas requeridas (como Rails 4.1) con:
   bundle20 update
+* Copie y modifique las plantillas:
+  cp config/secrets.yml.plantilla config/secrets.yml
+  cp app/views/hogar/_local.html.erb.plantilla app/views/hogar/_local.html.erb
 * Configure la misma base de datos de un SIVeL 1.2 en config/databases.yml y
   ejecute
   rake db:migrate
