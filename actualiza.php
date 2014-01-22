@@ -2873,6 +2873,29 @@ if (!aplicado($idac)) {
     hace_consulta($db, "ALTER TABLE caso_presponsable ALTER COLUMN tipo
         SET DEFAULT 0", false
     );
+    hace_consulta(
+        $db, "ALTER TABLE caso_categoria_presponsable 
+        ADD COLUMN id_caso_presponsable INTEGER 
+          REFERENCES caso_presponsable(id)",
+        false
+    );
+    hace_consulta(
+        $db, "UPDATE caso_categoria_presponsable SET
+        id_caso_presponsable = id_caso*10 + id WHERE id<10", 
+        false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_categoria_presponsable DROP COLUMN id"
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_presponsable 
+        DROP CONSTRAINT caso_presponsable_pkey;",
+        false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_presponsable ADD PRIMARY KEY (id);", 
+        false
+    );
 
     aplicaact($act, $idac, 'id en tabla caso_presponsable es identificación');
 }
