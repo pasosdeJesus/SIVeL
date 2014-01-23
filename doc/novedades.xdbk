@@ -5,7 +5,21 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>
-Simplificadas tablas de usuarios y cambiado algoritmo de condensado a bcrypt.
+Cambiado algoritmo de condensado de claves a bcrypt 
+(ver <ulink url="https://www.usenix.org/legacy/events/usenix99/provos/provos_html/node1.html"></ulink>).  
+Tras actualizar fuentes 
+desde el directorio de su sitio ejecute
+<screen>
+  sudo ../../bin/creaesquema.sh
+</screen>
+Después ingrese como usuario administrador y elija 
+<menuchoice><guimenu>Otros</guimenu><guimenuitem>Actualizar</guimenuitem></menuchoice>. 
+Posteriormente cada usuario que ingrese con su clave correcta verá
+por una sóla vez un mensaje que menciona el cambio de condensado para 
+su clave y que le indicará ingresar nuevamente.
+					</para></listitem>
+					<listitem><para>
+Simplificadas tablas de usuarios.
 					</para></listitem>
 
 					<listitem><para>
