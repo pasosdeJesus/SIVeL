@@ -295,8 +295,8 @@ class ResConsulta
         $cmun = "";
         $sep = "";
         foreach ($ndd as $k => $nd) {
-            $cdep = $sep . htmlentities(trim($nd, ENT_COMPAT, 'UTF-8'), ENT_COMPAT, 'UTF-8');
-            $cmun = $sep . htmlentities(trim($ndm[$k], ENT_COMPAT, 'UTF-8'), ENT_COMPAT, 'UTF-8');
+            $cdep = $sep . htmlentities(trim($nd), ENT_COMPAT, 'UTF-8');
+            $cmun = $sep . htmlentities(trim($ndm[$k]), ENT_COMPAT, 'UTF-8');
             $sep = "<br/>";
         }
         $vr = "$cmun</td><td valign='top'>$cdep";
