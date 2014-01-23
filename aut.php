@@ -325,7 +325,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
     if (PEAR::isError($result)) {
         $camponusuario = "id";
         $params['usernamecol'] = 'id';
-        $params['password'] = 'password';
+        $params['passwordcol'] = 'password';
         $params['cryptType'] = 'sha1';
         $params['db_where'] = '';
         echo "<hr>" . _("Aun no se emplea nueva tabla usuario.")
