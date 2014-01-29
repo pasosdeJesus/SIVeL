@@ -11,13 +11,10 @@
 // about supported directives.
 //
 //= require jquery
-//= require twitter/bootstrap
+//= require jquery_ujs
 //= require bootstrap-datepicker
+//= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
 
-$(document).ready(function(){
-	$('[data-behaviour~=datepicker]').datepicker({
-		format: 'yyyy-mm-dd',
-	});
-})
+
