@@ -48,7 +48,10 @@
         <%= menu_item "Acerca de", nosotros_path %>
         <% if current_usuario %>
           <% if current_usuario.rol == 1 %>
-            <%= menu_item "Administrar Usuarios", usuarios_path %>
+						<%= drop_down "Administrar" do %>
+						  <%= menu_item "Usuarios", usuarios_path %>
+							<%= menu_item "Áreas de Actividades", actividadareas_path %>
+						<% end %>
           <% end %>
           <%= menu_item "Cerrar Sesión", sign_out_path %>
         <% else %>
