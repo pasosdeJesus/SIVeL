@@ -1,12 +1,20 @@
 <div class='control-group nested-fields'>
   <div class="controls">
-    <%= f.simple_fields_for :persona do |persona| %>
-      <%= render 'persona_fields', :f => persona %>
+  <!-- %= f.simple_fields_for :persona do |persona| % 
+    %= render 'persona_fields', :f => persona %
+  % end %
+    div class="links"
+    %= link_to_add_association 'Añadir Persona', f, :persona, :class => 'btn-primary' %
+    /div-->
+     
+    <%= if f.object.persona.nil?
+          f.object.persona = Persona.new
+          nil
+        end %>
+    <%= f.simple_fields_for :persona do |p| %>
+        <%= render 'persona_fields', :f => p %>
     <% end %>
-    <div class="links">
-      <%= link_to_add_association 'Añadir Persona', f, :persona, :class => 'btn-primary' %>
-    </div>
-      <%= f.association :profesion,
+    <%= f.association :profesion,
 	    label: "Profesión",
 	    label_method: :nombre, 
 	    value_method: :id %>

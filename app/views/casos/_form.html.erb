@@ -63,7 +63,14 @@
             </div>
             <div id="contacto" class="accordion-body collapse">
               <div class="accordion-inner">
-                Formulario aqui
+                <%= f.simple_fields_for :casosjr do |s| %>
+                  <%= s.association :persona,
+                    collection: Persona.from('victima, persona').where('victima.id_persona=persona.id AND victima.id_caso=?', @caso.id),
+                    selected: :id,
+                    label: "Contacto",
+                    label_method: lambda {|t| t.nombres + ' ' + t.apellidos},
+                    value_method: :id %>
+              <% end %>
               </div>
             </div>
           </div>

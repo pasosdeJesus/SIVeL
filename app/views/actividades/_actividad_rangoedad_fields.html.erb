@@ -1,0 +1,9 @@
+<tr class='nested-fields'>
+  <td>
+    <%= f.collection_select :rangoedad_id, Rangoedad.all, :id, :rango %>
+  </td>
+  <td><%= f.input :f %></td>
+  <td><%= f.input :m %></td>
+  <td><%= f.input :id, as: :hidden %><%= link_to_remove_association "Eliminar Rango de Edad", f, 
+    :class => 'btn-danger' %></td>
+</tr>

@@ -91,6 +91,11 @@ class CasosController < ApplicationController
             acto.save
           }
         end
+        params[:caso][:caso_etiqueta_attributes].each {|k,v|
+          if (v[:id_usuario].nil? || v[:id_usuario] == "") 
+            v[:id_usuario] = current_usuario.id
+          end
+        }
         if @caso.update(caso_params)
           format.html { redirect_to @caso, notice: 'Caso actualizado.' }
           format.json { head :no_content }
@@ -148,7 +153,8 @@ class CasosController < ApplicationController
             [:id_ayudasjr, :detallear, :_destroy]
         ],
         :anexo_attributes => [:id, :fecha, :descripcion, :archivo, :_destroy],
-        :caso_etiqueta_attributes => [:id_etiqueta, :observaciones, :_destroy]
+        :caso_etiqueta_attributes => 
+            [:id_usuario, :fecha, :id_etiqueta, :observaciones, :_destroy]
       )
     end
 end
