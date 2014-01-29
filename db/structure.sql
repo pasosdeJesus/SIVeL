@@ -177,7 +177,7 @@ CREATE TABLE accion (
     id integer DEFAULT nextval('accion_seq'::regclass) NOT NULL,
     id_proceso integer NOT NULL,
     id_taccion integer DEFAULT 1 NOT NULL,
-    id_despacho integer DEFAULT 1 NOT NULL,
+    id_despacho integer DEFAULT 10 NOT NULL,
     fecha date NOT NULL,
     numeroradicado character varying(50),
     observacionesaccion character varying(4000),
@@ -564,7 +564,7 @@ CREATE TABLE ayudaestado (
 --
 
 CREATE TABLE ayudaestado_respuesta (
-    id_ayudaestado integer NOT NULL,
+    id_ayudaestado integer DEFAULT 0 NOT NULL,
     cantidad character varying(50),
     institucion character varying(100),
     created_at timestamp without time zone,
@@ -605,7 +605,7 @@ CREATE TABLE ayudasjr (
 --
 
 CREATE TABLE ayudasjr_respuesta (
-    id_ayudasjr integer NOT NULL,
+    id_ayudasjr integer DEFAULT 0 NOT NULL,
     detallear character varying(5000),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -655,9 +655,9 @@ CREATE TABLE caso_categoria_presponsable (
     id_tviolencia character varying(1) NOT NULL,
     id_supracategoria integer NOT NULL,
     id_categoria integer NOT NULL,
-    id_caso_presponsable integer NOT NULL,
-    id_caso integer,
-    id_presponsable integer,
+    id integer NOT NULL,
+    id_caso integer NOT NULL,
+    id_presponsable integer NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -751,9 +751,8 @@ CREATE SEQUENCE caso_presponsable_seq
 --
 
 CREATE TABLE caso_presponsable (
-    id integer DEFAULT nextval('caso_presponsable_seq'::regclass) NOT NULL,
-    id_caso integer,
-    id_presponsable integer,
+    id_caso integer NOT NULL,
+    id_presponsable integer NOT NULL,
     tipo integer DEFAULT 0 NOT NULL,
     bloque character varying(50),
     frente character varying(50),
@@ -761,6 +760,7 @@ CREATE TABLE caso_presponsable (
     batallon character varying(50),
     division character varying(50),
     otro character varying(500),
+    id integer DEFAULT nextval('caso_presponsable_seq'::regclass) NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -799,7 +799,7 @@ CREATE TABLE casosjr (
     id_caso integer NOT NULL,
     fecharec date NOT NULL,
     asesor integer NOT NULL,
-    id_regionsjr integer,
+    id_regionsjr integer DEFAULT 1,
     direccion character varying(1000),
     telefono character varying(1000),
     comosupo character varying(5000),
@@ -1110,7 +1110,7 @@ CREATE TABLE derecho (
 
 CREATE TABLE derecho_procesosjr (
     id_proceso integer NOT NULL,
-    id_derecho integer NOT NULL,
+    id_derecho integer DEFAULT 9 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -1121,7 +1121,7 @@ CREATE TABLE derecho_procesosjr (
 --
 
 CREATE TABLE derecho_respuesta (
-    id_derecho integer NOT NULL,
+    id_derecho integer DEFAULT 9 NOT NULL,
     informacion boolean,
     acciones character varying(5000),
     created_at timestamp without time zone,
@@ -1730,7 +1730,7 @@ CREATE TABLE motivosjr (
 --
 
 CREATE TABLE motivosjr_respuesta (
-    id_motivosjr integer NOT NULL,
+    id_motivosjr integer DEFAULT 0 NOT NULL,
     detalle character varying(5000),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -1969,11 +1969,11 @@ CREATE TABLE proceso (
 
 CREATE TABLE procesosjr (
     id_proceso integer NOT NULL,
-    id_motivoconsulta integer,
+    id_motivoconsulta integer DEFAULT 0,
     narracion character varying(5000),
     hapresentado character(1),
-    id_mecanismoder integer,
-    id_instanciader integer,
+    id_mecanismoder integer DEFAULT 9,
+    id_instanciader integer DEFAULT 0,
     detinstancia character varying(5000),
     mecrespondido character(1),
     fecharespuesta date,
@@ -1983,8 +1983,8 @@ CREATE TABLE procesosjr (
     compromisossjr character varying(5000),
     compromisosper character varying(5000),
     surtioefecto character(1),
-    otromecanismo integer,
-    otrainstancia integer,
+    otromecanismo integer DEFAULT 9,
+    otrainstancia integer DEFAULT 0,
     detotrainstancia character varying(5000),
     persistevul boolean,
     resultado character varying(5000),
@@ -2059,7 +2059,7 @@ CREATE TABLE progestado (
 --
 
 CREATE TABLE progestado_respuesta (
-    id_progestado integer NOT NULL,
+    id_progestado integer DEFAULT 0 NOT NULL,
     difobs character varying(5000),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -2240,8 +2240,8 @@ CREATE TABLE respuesta (
     orientaciones character varying(5000),
     gestionessjr character varying(5000),
     observaciones character varying(5000),
-    id_personadesea integer,
-    id_causaref integer,
+    id_personadesea integer DEFAULT 0,
+    id_causaref integer DEFAULT 0,
     verifcsjr character varying(5000),
     verifcper character varying(5000),
     efectividad character varying(5000),
@@ -2613,19 +2613,19 @@ CREATE TABLE victimasjr (
     id_persona integer NOT NULL,
     id_caso integer NOT NULL,
     sindocumento boolean,
-    id_estadocivil integer,
+    id_estadocivil integer DEFAULT 0,
     id_rolfamilia integer DEFAULT 0 NOT NULL,
     cabezafamilia boolean,
-    id_maternidad integer,
+    id_maternidad integer DEFAULT 0,
     discapacitado boolean,
-    id_actividadoficio integer,
-    id_escolaridad integer,
+    id_actividadoficio integer DEFAULT 0,
+    id_escolaridad integer DEFAULT 0,
     asisteescuela boolean,
     tienesisben boolean,
     id_departamento integer,
     id_municipio integer,
     nivelsisben integer,
-    id_regimensalud integer,
+    id_regimensalud integer DEFAULT 0,
     eps character varying(1000),
     libretamilitar boolean,
     distrito integer,
@@ -2856,7 +2856,7 @@ ALTER TABLE ONLY ayudasjr_respuesta
 --
 
 ALTER TABLE ONLY caso_categoria_presponsable
-    ADD CONSTRAINT caso_categoria_presponsable_pkey PRIMARY KEY (id_tviolencia, id_supracategoria, id_categoria, id_caso_presponsable);
+    ADD CONSTRAINT caso_categoria_presponsable_pkey PRIMARY KEY (id_tviolencia, id_supracategoria, id_categoria, id, id_caso, id_presponsable);
 
 
 --
@@ -2920,7 +2920,7 @@ ALTER TABLE ONLY caso_presponsable
 --
 
 ALTER TABLE ONLY caso_presponsable
-    ADD CONSTRAINT caso_presponsable_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT caso_presponsable_pkey PRIMARY KEY (id_caso, id_presponsable, id);
 
 
 --
@@ -3568,20 +3568,6 @@ CREATE INDEX index_actividad_rangoedad_on_rangoedad_id ON actividad_rangoedad US
 
 
 --
--- Name: index_caso_presponsable_on_caso_id_and_presponsable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_caso_presponsable_on_caso_id_and_presponsable_id ON caso_presponsable USING btree (id_caso, id_presponsable);
-
-
---
--- Name: index_caso_presponsable_on_presponsable_id_and_caso_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_caso_presponsable_on_presponsable_id_and_caso_id ON caso_presponsable USING btree (id_presponsable, id_caso);
-
-
---
 -- Name: index_usuario_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3904,19 +3890,19 @@ ALTER TABLE ONLY caso_categoria_presponsable
 
 
 --
--- Name: caso_categoria_presponsable_id_caso_presponsable_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY caso_categoria_presponsable
-    ADD CONSTRAINT caso_categoria_presponsable_id_caso_presponsable_fkey FOREIGN KEY (id_caso_presponsable) REFERENCES caso_presponsable(id);
-
-
---
 -- Name: caso_categoria_presponsable_id_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY caso_categoria_presponsable
     ADD CONSTRAINT caso_categoria_presponsable_id_categoria_fkey FOREIGN KEY (id_categoria) REFERENCES categoria(id);
+
+
+--
+-- Name: caso_categoria_presponsable_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_categoria_presponsable
+    ADD CONSTRAINT caso_categoria_presponsable_id_fkey FOREIGN KEY (id, id_caso, id_presponsable) REFERENCES caso_presponsable(id, id_caso, id_presponsable);
 
 
 --
@@ -4416,6 +4402,14 @@ ALTER TABLE ONLY desplazamiento
 
 
 --
+-- Name: desplazamiento_expulsion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_expulsion_fkey FOREIGN KEY (id_expulsion) REFERENCES ubicacion(id);
+
+
+--
 -- Name: desplazamiento_id_acreditacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4440,27 +4434,11 @@ ALTER TABLE ONLY desplazamiento
 
 
 --
--- Name: desplazamiento_id_expulsion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY desplazamiento
-    ADD CONSTRAINT desplazamiento_id_expulsion_fkey FOREIGN KEY (id_expulsion) REFERENCES ubicacion(id);
-
-
---
 -- Name: desplazamiento_id_inclusion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY desplazamiento
     ADD CONSTRAINT desplazamiento_id_inclusion_fkey FOREIGN KEY (id_inclusion) REFERENCES inclusion(id);
-
-
---
--- Name: desplazamiento_id_llegada_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY desplazamiento
-    ADD CONSTRAINT desplazamiento_id_llegada_fkey FOREIGN KEY (id_llegada) REFERENCES ubicacion(id);
 
 
 --
@@ -4477,6 +4455,14 @@ ALTER TABLE ONLY desplazamiento
 
 ALTER TABLE ONLY desplazamiento
     ADD CONSTRAINT desplazamiento_id_tipodesp_fkey FOREIGN KEY (id_tipodesp) REFERENCES tipodesp(id);
+
+
+--
+-- Name: desplazamiento_llegada_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_llegada_fkey FOREIGN KEY (id_llegada) REFERENCES ubicacion(id);
 
 
 --
