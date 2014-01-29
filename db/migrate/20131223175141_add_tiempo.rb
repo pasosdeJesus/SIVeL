@@ -1,7 +1,5 @@
 class AddTiempo < ActiveRecord::Migration
   def change
-	  add_column :accion, :created_at, :datetime 
-	  add_column :accion, :updated_at, :datetime
 	  add_column :acreditacion, :created_at, :datetime 
 	  add_column :acreditacion, :updated_at, :datetime
 	  add_column :actividadoficio, :created_at, :datetime 
@@ -80,20 +78,14 @@ class AddTiempo < ActiveRecord::Migration
 	  add_column :departamento, :updated_at, :datetime
 	  add_column :derecho, :created_at, :datetime 
 	  add_column :derecho, :updated_at, :datetime
-	  add_column :derecho_procesosjr, :created_at, :datetime 
-	  add_column :derecho_procesosjr, :updated_at, :datetime
 	  add_column :derecho_respuesta, :created_at, :datetime 
 	  add_column :derecho_respuesta, :updated_at, :datetime
-	  add_column :despacho, :created_at, :datetime 
-	  add_column :despacho, :updated_at, :datetime
 	  add_column :desplazamiento, :created_at, :datetime 
 	  add_column :desplazamiento, :updated_at, :datetime
 	  add_column :escolaridad, :created_at, :datetime 
 	  add_column :escolaridad, :updated_at, :datetime
 	  add_column :estadocivil, :created_at, :datetime 
 	  add_column :estadocivil, :updated_at, :datetime
-	  add_column :etapa, :created_at, :datetime 
-	  add_column :etapa, :updated_at, :datetime
 	  add_column :etiqueta, :created_at, :datetime 
 	  add_column :etiqueta, :updated_at, :datetime
 	  add_column :etnia, :created_at, :datetime 
@@ -140,10 +132,6 @@ class AddTiempo < ActiveRecord::Migration
 	  add_column :personadesea, :updated_at, :datetime
 	  add_column :presponsable, :created_at, :datetime 
 	  add_column :presponsable, :updated_at, :datetime
-	  add_column :proceso, :created_at, :datetime 
-	  add_column :proceso, :updated_at, :datetime
-	  add_column :procesosjr, :created_at, :datetime 
-	  add_column :procesosjr, :updated_at, :datetime
 	  add_column :profesion, :created_at, :datetime 
 	  add_column :profesion, :updated_at, :datetime
 	  add_column :progestado, :created_at, :datetime 
@@ -168,14 +156,10 @@ class AddTiempo < ActiveRecord::Migration
 	  add_column :sectorsocial, :updated_at, :datetime
 	  add_column :supracategoria, :created_at, :datetime 
 	  add_column :supracategoria, :updated_at, :datetime
-	  add_column :taccion, :created_at, :datetime 
-	  add_column :taccion, :updated_at, :datetime
 	  add_column :tclase, :created_at, :datetime 
 	  add_column :tclase, :updated_at, :datetime
 	  add_column :tipodesp, :created_at, :datetime 
 	  add_column :tipodesp, :updated_at, :datetime
-	  add_column :tproceso, :created_at, :datetime 
-	  add_column :tproceso, :updated_at, :datetime
 	  add_column :trelacion, :created_at, :datetime 
 	  add_column :trelacion, :updated_at, :datetime
 	  add_column :tsitio, :created_at, :datetime 

@@ -13,9 +13,9 @@ Actividadarea.create(id: 3, nombre: 'Organización - Comunal', fechacreacion: '2
 Actividadarea.create(id: 4, nombre: 'Emprendimiento', fechacreacion: '2013-12-04')
 Actividadarea.create(id: 5, nombre: 'Incidencia', fechacreacion: '2013-12-04')
 
-Regionsjr.create(id: 100, nombre: 'EL NULA', fechacreacion: '2014-01-11')
-Regionsjr.create(id: 101, nombre: 'MARACAIBO', fechacreacion: '2014-01-11')
-Regionsjr.create(id: 102, nombre: 'SAN CRISTOBAL', fechacreacion: '2014-01-11')
+#Regionsjr.create(id: 100, nombre: 'EL NULA', fechacreacion: '2014-01-11')
+#Regionsjr.create(id: 101, nombre: 'MARACAIBO', fechacreacion: '2014-01-11')
+#Regionsjr.create(id: 102, nombre: 'SAN CRISTOBAL', fechacreacion: '2014-01-11')
 
 connection = ActiveRecord::Base.connection();
 connection.execute("INSERT INTO usuario 
