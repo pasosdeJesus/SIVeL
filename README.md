@@ -1,6 +1,6 @@
-== Diseño de SIVeL 2
+# Diseño de SIVeL 2
 
-== Maqueta
+## Maqueta
 
 En el directorio rib se han ubicado maquetas para las fichas de captura.  
 
@@ -18,19 +18,19 @@ recodificar o con recode o para el caso de español con el script
 rib/codesp.sh ).
 
 
-== Prototipo con Ruby on Rails
+## Prototipo con Ruby on Rails
 
 Las demás carpetas y archivos de estas fuentes son un prototipo desarrollado 
 con Ruby on Rails. 
 
-Requiere:
+### Requerimientos
 * Ruby version >= 1.9
 * PostgreSQL >= 9.3
 * Se recomienda emplear en paralelo con una instancia de SIVeL 1.2 
 * Recomendado sobre adJ 5.4 (que incluye todos los componentes mencionados).  
   Las siguientes instrucciones suponen que opera en este ambiente.
 
-Configuración de servidor de desarrollo:
+### Configuración de servidor de desarrollo:
 * Ubique fuentes por ejemplo en /var/www/htdocs/sivel2/
 * Instale gemas requeridas (como Rails 4.1) con:
   bundle20 update
@@ -49,14 +49,14 @@ Configuración de servidor de desarrollo:
 * Lance el servidor con
   rails s
 
-Pruebas:
+### Pruebas:
 
-Servicios requeridos y prestados:
+### Servicios requeridos y prestados:
 
-Servidor de desarollo:
+### Servidor de desarrollo:
   rails s
 
-Despliegue en sitio de producción con unicorn:
+### Despliegue en sitio de producción con unicorn:
 * Siga los mismos 2 primeros pasos para configurar un servidor de desarrollo
 * Configure la misma base de datos de un SIVeL 1.2 en sección production
   de config/databases.yml y ejecute
