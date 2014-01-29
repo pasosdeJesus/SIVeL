@@ -3,7 +3,6 @@
 --
 
 SET statement_timeout = 0;
-SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -198,7 +197,6 @@ CREATE TABLE actividad (
     proyecto character varying(500),
     resultado character varying(500),
     fecha date,
-    actividad character varying(500),
     observaciones character varying(5000),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -4512,4 +4510,6 @@ INSERT INTO schema_migrations (version) VALUES ('20131220103409');
 INSERT INTO schema_migrations (version) VALUES ('20131223175141');
 
 INSERT INTO schema_migrations (version) VALUES ('20140117212555');
+
+INSERT INTO schema_migrations (version) VALUES ('20140129151136');
 

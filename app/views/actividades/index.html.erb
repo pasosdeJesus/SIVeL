@@ -14,7 +14,6 @@
       <th><%= model_class.human_attribute_name(:proyecto) %></th>
       <th><%= model_class.human_attribute_name(:resultado) %></th>
       <th><%= model_class.human_attribute_name(:fecha) %></th>
-      <th><%= model_class.human_attribute_name(:actividad) %></th>
       <th><%= model_class.human_attribute_name(:observaciones) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -31,7 +30,6 @@
         <td><%= actividad.proyecto %></td>
         <td><%= actividad.resultado %></td>
         <td><%= actividad.fecha %></td>
-        <td><%= actividad.actividad %></td>
         <td><%= actividad.observaciones %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
