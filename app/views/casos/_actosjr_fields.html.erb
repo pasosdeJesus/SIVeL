@@ -24,9 +24,10 @@
     <%= f.association :desplazamiento,
       collection: Desplazamiento.where(:id_caso => @caso.id),
       selected: :id,
+      include_blank: "",
 	    label: "Causó desplazamiento",
       label_method: :fechaexpulsion,
-      value_method: :id %>
+      value_method: :fechaexpulsion %>
     <%= link_to_remove_association "Eliminar Causa/Antecedente", f, :class => 'btn-danger' %> 
   </div>
 </div>
