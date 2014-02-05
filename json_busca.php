@@ -21,7 +21,7 @@ require_once 'misc.php';
 
 global $dsn;
 $aut_usuario = "";
-$db = autentica_usuario($dsn, $aut_usuario, 11);
+$db = autentica_usuario($dsn, $aut_usuario, 0);
 
 require_once $_SESSION['dirsitio'] . '/conf_int.php';
 require_once 'misc_caso.php';
