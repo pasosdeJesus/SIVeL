@@ -64,7 +64,8 @@ con Ruby on Rails.
   de config/databases.yml y ejecute
   ```sh
   RAILS_ENV=production rake db:migrate
-  RAILS_ENV=production rake db:seed```
+  RAILS_ENV=production rake db:seed
+```
 * Recomendamos nginx, puede configurar un dominio virtual (digamos
   s2.pasosdeJesus.org) con:
 
