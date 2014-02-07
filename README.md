@@ -68,7 +68,7 @@ con Ruby on Rails.
 ```
 * Recomendamos nginx, puede configurar un dominio virtual (digamos
   s2.pasosdeJesus.org) con:
-
+  ```
   server {
     listen 443;
     ssl on;
@@ -101,13 +101,14 @@ con Ruby on Rails.
     }
 
   }
+```
 * Precompile los recursos 
-  ``` rake assets:precompile
+  ```sh rake assets:precompile```
 * Tras reiniciar nginx, inicie unicorn desde directorio con fuentes con:
   ```sh ./bin/u.sh```
 * Puede logarse que inicie en cada arranque por ejemplo creando /etc/rc.d/miapp
 service="/var/www/htdocs/sivel2/bin/u.sh"
-  ```sh
+```sh
 . /etc/rc.d/rc.subr
 
 rc_cmd $1
