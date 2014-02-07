@@ -23,6 +23,7 @@ rib/codesp.sh ).
 Las demás carpetas y archivos de estas fuentes son un prototipo desarrollado 
 con Ruby on Rails. 
 
+
 ### Requerimientos
 * Ruby version >= 1.9
 * PostgreSQL >= 9.3
@@ -33,21 +34,32 @@ con Ruby on Rails.
 ### Configuración de servidor de desarrollo:
 * Ubique fuentes por ejemplo en /var/www/htdocs/sivel2/
 * Instale gemas requeridas (como Rails 4.1) con:
-  bundle20 update
+        ```bash
+  sudo bundle install
+  bundle install
+  ```
 * Copie y modifique las plantillas:
+  ```sh
   cp config/secrets.yml.plantilla config/secrets.yml
   cp app/views/hogar/_local.html.erb.plantilla app/views/hogar/_local.html.erb
+```
 * Configure la misma base de datos de un SIVeL 1.2 en la sección development
   de config/databases.yml y ejecute
+  ```sh
   rake db:migrate
   rake db:seed
+```
 * En caso de que no tenga un SIVeL 1.2 en paralelo cree el usuario y base
   de datos que configure en config/database.yml e inicialice con:
+  ```sh
   rake db:setup
   rake db:migrate
   rake db:seed
+```
 * Lance el servidor con
+  ```sh
   rails s
+```
 
 ### Pruebas:
 
@@ -60,11 +72,13 @@ con Ruby on Rails.
 * Siga los mismos 2 primeros pasos para configurar un servidor de desarrollo
 * Configure la misma base de datos de un SIVeL 1.2 en sección production
   de config/databases.yml y ejecute
+  ```sh
   RAILS_ENV=production rake db:migrate
   RAILS_ENV=production rake db:seed
+```
 * Recomendamos nginx, puede configurar un dominio virtual (digamos
   s2.pasosdeJesus.org) con:
-
+  ```
   server {
     listen 443;
     ssl on;
@@ -97,8 +111,31 @@ con Ruby on Rails.
     }
 
   }
+```
 * Precompile los recursos 
-  rake assets:precompile
+  ```sh rake assets:precompile```
 * Tras reiniciar nginx, inicie unicorn desde directorio con fuentes con:
-./bin/u.sh
+  ```sh ./bin/u.sh```
+* Puede logar que inicie en cada arranque en adJ por ejemplo creando 
+  /etc/rc.d/miapp 
+  ```sh
+servicio="/var/www/htdocs/sivel2/bin/u.sh"
+
+. /etc/rc.d/rc.subr
+
+rc_cmd $1
+```
+  E incluyendo miapp en pkg_scripts en /etc/rc.conf.local
+
+
+### Actualización de servidor de desarrollo
+
+* Actualice fuentes: ```sh git pull```
+* Instale nuevas versiones de gemas requeridas: 
+  ```sh
+  sudo bundle install
+  bundle install
+```
+* Aplique cambios a base de datos: ```sh rake db:migrate```
+
 
