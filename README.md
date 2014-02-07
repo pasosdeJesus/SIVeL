@@ -34,22 +34,32 @@ con Ruby on Rails.
 ### Configuración de servidor de desarrollo:
 * Ubique fuentes por ejemplo en /var/www/htdocs/sivel2/
 * Instale gemas requeridas (como Rails 4.1) con:
-  sudo bundle20 install
-  bundle20 install
+  ```sh
+  sudo bundle install
+  bundle install
+```
 * Copie y modifique las plantillas:
+  ```sh
   cp config/secrets.yml.plantilla config/secrets.yml
   cp app/views/hogar/_local.html.erb.plantilla app/views/hogar/_local.html.erb
+```
 * Configure la misma base de datos de un SIVeL 1.2 en la sección development
   de config/databases.yml y ejecute
+  ```sh
   rake db:migrate
   rake db:seed
+```
 * En caso de que no tenga un SIVeL 1.2 en paralelo cree el usuario y base
   de datos que configure en config/database.yml e inicialice con:
+  ```sh
   rake db:setup
   rake db:migrate
   rake db:seed
+```
 * Lance el servidor con
+  ```sh
   rails s
+```
 
 ### Pruebas:
 
@@ -108,7 +118,7 @@ con Ruby on Rails.
   ```sh ./bin/u.sh```
 * Puede logar que inicie en cada arranque en adJ por ejemplo creando 
   /etc/rc.d/miapp 
-```sh
+  ```sh
 servicio="/var/www/htdocs/sivel2/bin/u.sh"
 
 . /etc/rc.d/rc.subr
@@ -122,7 +132,7 @@ rc_cmd $1
 
 * Actualice fuentes: ```sh git pull```
 * Instale nuevas versiones de gemas requeridas: 
-```sh
+  ```sh
   sudo bundle install
   bundle install
 ```
