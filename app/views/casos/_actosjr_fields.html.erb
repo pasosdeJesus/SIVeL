@@ -18,13 +18,14 @@
 	    label: "Víctima",
       label_method: lambda {|t| t.nombres + ' ' + t.apellidos},
       value_method: :id %>
+
     <%= f.input :fecha, 
         :input_html => { "data-behaviour" => "datepicker" },
         :as => :string, :label => "Fecha" %>
+
     <%= f.association :desplazamiento,
       collection: Desplazamiento.where(:id_caso => @caso.id),
-      selected: :id,
-      include_blank: "",
+      selected: :fechaexpulsion,
 	    label: "Causó desplazamiento",
       label_method: :fechaexpulsion,
       value_method: :fechaexpulsion %>

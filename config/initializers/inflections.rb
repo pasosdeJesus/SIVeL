@@ -22,4 +22,5 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'actividad', 'actividades'
 	inflect.irregular 'etiqueta', 'etiqueta'
 	inflect.irregular 'respuesta', 'respuesta'
+	inflect.irregular 'error', 'errores'
 end

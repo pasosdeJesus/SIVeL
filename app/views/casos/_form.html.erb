@@ -3,19 +3,20 @@
 <%- else  %>
   <article>
   <%= simple_form_for @caso, :html => { :class => 'form-horizontal' } do |f| %>
-    <div data-role="header">
-      <h1>SIVeL 2. Captura de Caso</h1>
-    </div>
+    <%= f.input :id, as: :hidden %>
     <div data-role="content" class="form-inputs">
-      <%= f.error_notification %>
+      <div id="errores">
+        <%= f.error_notification %>
+      </div>
       <div class="accordion" id="accordion2">
+
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#basicos">
+            <a class="accordion-toggle" data-toggle="collapse" href="#basicos">
               Datos Básicos
             </a>
           </div>
-          <div id="basicos" class="accordion-body collapse in">
+          <div id="basicos" class="accordion-body collapse">
             <div class="accordion-inner">
               <%= f.simple_fields_for :casosjr do |s| %>
                 <%= s.input :fecharec, 
@@ -26,7 +27,7 @@
                   label_method: :nusuario, 
                   value_method: :id %>
                 <%= s.association :regionsjr,
-                  label: "Región",
+                  label: "Oficina",
                   label_method: :nombre, 
                   value_method: :id %>
                 <%= s.input :direccion%>
@@ -36,185 +37,186 @@
               <%= f.input :fecha, :input_html => { "data-behaviour" => "datepicker" },
                         :as => :string, :label => "Fecha del Desplazamiento" %>
             </div>
-          </div>
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#victima">
-                Víctimas Individuales
-              </a>
-            </div>
-            <div id="victima" class="accordion-body collapse">
-              <div class="accordion-inner">
-                <%= f.simple_fields_for :victima do |victima| %>
-                  <%= render 'victima_fields', :f => victima %>
-                <% end %>
-                <div class="links">
-                  <%= link_to_add_association 'Añadir Víctima', f, :victima, :class => 'btn-primary' %>
-                </div>
-              </div>
-            </div>
-          </div>
+          </div> 
+        </div> <! -- accordion-group -->
 
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#contacto">
-                Contacto
-              </a>
-            </div>
-            <div id="contacto" class="accordion-body collapse">
-              <div class="accordion-inner">
-                <%= f.simple_fields_for :casosjr do |s| %>
-                  <%= s.association :persona,
-                    collection: Persona.from('victima, persona').where('victima.id_persona=persona.id AND victima.id_caso=?', @caso.id),
-                    selected: :id,
-                    label: "Contacto",
-                    label_method: lambda {|t| t.nombres + ' ' + t.apellidos},
-                    value_method: :id %>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" href="#victima">Víctimas Individuales</a>
+          </div>
+          <div id="victima" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <%= f.simple_fields_for :victima do |victima| %>
+                <%= render 'victima_fields', :f => victima %>
               <% end %>
+              <div class="links">
+                <%= link_to_add_association 'Añadir Víctima', f, :victima, :class => 'btn-primary' %>
               </div>
             </div>
           </div>
+        </div> <! -- accordion-group -->
 
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#ubicacion">
-                Ubicación
-              </a>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" href="#contacto">
+              Contacto
+            </a>
+          </div>
+          <div id="contacto" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <%= f.simple_fields_for :casosjr do |s| %>
+                <%= s.association :persona,
+                  collection: Persona.from('victima, persona').where('victima.id_persona=persona.id AND victima.id_caso=?', @caso.id),
+                  selected: :id,
+                  label: "Contacto",
+                  label_method: lambda {|t| t.nombres + ' ' + t.apellidos},
+                  value_method: :id %>
+              <% end %>
             </div>
-            <div id="ubicacion" class="accordion-body collapse">
-              <div class="accordion-inner">
-                <%= f.simple_fields_for :ubicacion do |ubicacion| %>
-                  <%= render 'ubicacion_fields', :f => ubicacion %>
-                <% end %>
-                <div class="links">
-                  <%= link_to_add_association 'Añadir Ubicación', f, :ubicacion, :class => 'btn-primary' %>
-                </div>
+          </div>
+        </div> <! -- accordion-group -->
+
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" href="#ubicacion">
+              Ubicación
+            </a>
+          </div>
+          <div id="ubicacion" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <%= f.simple_fields_for :ubicacion do |ubicacion| %>
+                <%= render 'ubicacion_fields', :f => ubicacion %>
+              <% end %>
+              <div class="links">
+                <%= link_to_add_association 'Añadir Ubicación', f, :ubicacion, :class => 'btn-primary' %>
               </div>
             </div>
           </div>
+        </div> <! -- accordion-group -->
 
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion5" href="#desplazamientos">
-                Desplazamientos
-              </a>
-            </div>
-            <div id="desplazamientos" class="accordion-body collapse">
-              <div class="accordion-inner">
-                 <%= f.simple_fields_for :desplazamiento do |desplazamiento| %>
-                  <%= render 'desplazamiento_fields', :f => desplazamiento %>
-                <% end %>
-                <div class="links">
-                  <%= link_to_add_association 'Añadir Desplazamiento', f, 
-                    :desplazamiento, :class => 'btn-primary' %>
-                </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" href="#desplazamientos">
+              Desplazamientos
+            </a>
+          </div>
+          <div id="desplazamientos" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <%= f.simple_fields_for :desplazamiento do |desplazamiento| %>
+                <%= render 'desplazamiento_fields', :f => desplazamiento %>
+              <% end %>
+              <div class="links">
+                <%= link_to_add_association 'Añadir Desplazamiento', f, 
+                  :desplazamiento, :class => 'btn-primary' %>
               </div>
             </div>
           </div>
+        </div> <! -- accordion-group -->
 
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion6" href="#presponsables">
-                Presuntos Responsables
-              </a>
-            </div>
-            <div id="presponsables" class="accordion-body collapse">
-              <div class="accordion-inner">
-                 <%= f.simple_fields_for :caso_presponsable do |caso_presponsable| %>
-                  <%= render 'caso_presponsable_fields', :f => caso_presponsable %>
-                <% end %>
-                <div class="links">
-                  <%= link_to_add_association 'Añadir Presunto Responsable', f, 
-                    :caso_presponsable, :class => 'btn-primary' %>
-                </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" href="#presponsables">
+              Presuntos Responsables
+            </a>
+          </div>
+          <div id="presponsables" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <%= f.simple_fields_for :caso_presponsable do |caso_presponsable| %>
+                <%= render 'caso_presponsable_fields', :f => caso_presponsable %>
+              <% end %>
+              <div class="links">
+                <%= link_to_add_association 'Añadir Presunto Responsable', f, 
+                  :caso_presponsable, {:class => 'btn-primary', 
+                    "data-ajax" => "/casos/nuevopresponsable", 
+                    "data-ajaxdata" => "caso_id"}
+                %>
               </div>
             </div>
           </div>
-
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion7" href="#antecedentes">
-                Causas/Antecedentes
-              </a>
-            </div>
-            <div id="antecedentes" class="accordion-body collapse">
-              <div class="accordion-inner">
-                <%= f.simple_fields_for :actosjr do |actosjr| %>
-                  <%= render 'actosjr_fields', :f => actosjr%>
-                <% end %>
-                <div class="links">
-                  <%= link_to_add_association 'Añadir Causa/Antecedente', f, :actosjr, :class => 'btn-primary' %>
-                </div>
+        </div> <! -- accordion-group -->
+  
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" href="#antecedentes">
+              Causas/Antecedentes
+            </a>
+          </div>
+          <div id="antecedentes" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <%= f.simple_fields_for :actosjr do |actosjr| %>
+                <%= render 'actosjr_fields', :f => actosjr%>
+              <% end %>
+              <div class="links">
+                <%= link_to_add_association 'Añadir Causa/Antecedente', f, :actosjr, :class => 'btn-primary' %>
               </div>
             </div>
           </div>
-
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion8" href="#ayudasjr"> 
-                Sesiones de Atención
-              </a>
-            </div>
-            <div id="ayudasjr" class="accordion-body collapse">
-              <div class="accordion-inner">
-                <%= f.simple_fields_for :respuesta do |respuesta| %>
-                  <%= render 'respuesta_fields', :f => respuesta%>
-                <% end %>
-                <div class="links">
-                  <%= link_to_add_association 'Añadir Sesión de Atención', f, 
-                    :respuesta, :class => 'btn-primary' %>
-                </div>
+        </div> <! -- accordion-group -->
+  
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" href="#ayudasjr"> 
+              Sesiones de Atención
+            </a>
+          </div>
+          <div id="ayudasjr" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <%= f.simple_fields_for :respuesta do |respuesta| %>
+                <%= render 'respuesta_fields', :f => respuesta%>
+              <% end %>
+              <div class="links">
+                <%= link_to_add_association 'Añadir Sesión de Atención', f, 
+                  :respuesta, :class => 'btn-primary' %>
               </div>
             </div>
           </div>
+        </div> <! -- accordion-group -->
 
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion9" href="#anexos"> 
-                Anexos
-              </a>
-            </div>
-            <div id="anexos" class="accordion-body collapse">
-              <div class="accordion-inner">
-                <%= f.simple_fields_for :anexo do |anexo| %>
-                  <%= render 'anexo_fields', :f => anexo %>
-                <% end %>
-                <div class="links">
-                  <%= link_to_add_association 'Añadir Anexo', f, 
-                    :anexo, :class => 'btn-primary' %>
-                </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" href="#anexos"> 
+              Anexos
+            </a>
+          </div>
+          <div id="anexos" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <%= f.simple_fields_for :anexo do |anexo| %>
+                <%= render 'anexo_fields', :f => anexo %>
+              <% end %>
+              <div class="links">
+                <%= link_to_add_association 'Añadir Anexo', f, 
+                  :anexo, :class => 'btn-primary' %>
               </div>
             </div>
           </div>
+        </div> <! -- accordion-group -->
 
-
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion10" href="#etiquetas"> 
-                Etiquetas
-              </a>
-            </div>
-            <div id="etiquetas" class="accordion-body collapse">
-              <div class="accordion-inner">
-                <%= f.simple_fields_for :caso_etiqueta do |cetiqueta| %>
-                  <%= render 'caso_etiqueta_fields', :f => cetiqueta %>
-                <% end %>
-                <div class="links">
-                  <%= link_to_add_association 'Añadir Etiqueta', f, 
-                    :caso_etiqueta, :class => 'btn-primary' %>
-                </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" href="#etiquetas"> 
+              Etiquetas
+            </a>
+          </div>
+          <div id="etiquetas" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <%= f.simple_fields_for :caso_etiqueta do |cetiqueta| %>
+                <%= render 'caso_etiqueta_fields', :f => cetiqueta %>
+              <% end %>
+              <div class="links">
+                <%= link_to_add_association 'Añadir Etiqueta', f, 
+                  :caso_etiqueta, :class => 'btn-primary' %>
               </div>
             </div>
           </div>
+        </div> <! -- accordion-group -->
 
-
-        </div>
-      </div>
-      <div class="form-actions">
-        <%= f.button :submit, :class => 'btn-primary' %>
-        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-          casos_path, :class => 'btn' %>
-      </div>
+      </div> <!-- accordion -->
+    </div> <!-- form-inputs -->
+    <div class="form-actions">
+      <%= f.button :submit, 'Guardar', :class => 'btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+        casos_path, :class => 'btn' %>
+    </div>
   <% end %>
   </article>
 <% end -%>

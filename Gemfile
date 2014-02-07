@@ -64,6 +64,6 @@ gem "jquery-ui-bootstrap-rails", git: "https://github.com/kristianmandrup/jquery
 gem "devise"
 gem "devise-i18n"
 gem "cancan"
-gem "cocoon"
+gem 'cocoon', github: "vtamara/cocoon"
 
 
