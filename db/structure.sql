@@ -3,6 +3,7 @@
 --
 
 SET statement_timeout = 0;
+SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -22,6 +23,15 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+SET search_path = public, pg_catalog;
+
+--
+-- Name: es_co_utf_8; Type: COLLATION; Schema: public; Owner: -
+--
+
+CREATE COLLATION es_co_utf_8 (lc_collate = 'es_CO.UTF-8', lc_ctype = 'es_CO.UTF-8');
+
+
 --
 -- Name: unaccent; Type: EXTENSION; Schema: -; Owner: -
 --
@@ -36,80 +46,143 @@ CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
 COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
 
 
-SET search_path = public, pg_catalog;
+--
+-- Name: soundexesp(text); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION soundexesp(input text) RETURNS text
+    LANGUAGE plpgsql IMMUTABLE STRICT COST 500
+    AS $$
+DECLARE
+	soundex text='';	
+	-- para determinar la primera letra
+	pri_letra text;
+	resto text;
+	sustituida text ='';
+	-- para quitar adyacentes
+	anterior text;
+	actual text;
+	corregido text;
+BEGIN
+       -- devolver null si recibi un string en blanco o con espacios en blanco
+	IF length(trim(input))= 0 then
+		RETURN NULL;
+	end IF;
+ 
+ 
+	-- 1: LIMPIEZA:
+		-- pasar a mayuscula, eliminar la letra "H" inicial, los acentos y la enie
+		-- 'holá coñó' => 'OLA CONO'
+		input=translate(ltrim(trim(upper(input)),'H'),'ÑÁÉÍÓÚÀÈÌÒÙÜ','NAEIOUAEIOUU');
+ 
+		-- eliminar caracteres no alfabéticos (números, símbolos como &,%,",*,!,+, etc.
+		input=regexp_replace(input, '[^a-zA-Z]', '', 'g');
+ 
+	-- 2: PRIMERA LETRA ES IMPORTANTE, DEBO ASOCIAR LAS SIMILARES
+	--  'vaca' se convierte en 'baca'  y 'zapote' se convierte en 'sapote'
+	-- un fenomeno importante es GE y GI se vuelven JE y JI; CA se vuelve KA, etc
+	pri_letra =substr(input,1,1);
+	resto =substr(input,2);
+	CASE 
+		when pri_letra IN ('V') then
+			sustituida='B';
+		when pri_letra IN ('Z','X') then
+			sustituida='S';
+		when pri_letra IN ('G') AND substr(input,2,1) IN ('E','I') then
+			sustituida='J';
+		when pri_letra IN('C') AND substr(input,2,1) NOT IN ('H','E','I') then
+			sustituida='K';
+		else
+			sustituida=pri_letra;
+ 
+	end case;
+	--corregir el parametro con las consonantes sustituidas:
+	input=sustituida || resto;		
+ 
+	-- 3: corregir "letras compuestas" y volverlas una sola
+	input=REPLACE(input,'CH','V');
+	input=REPLACE(input,'QU','K');
+	input=REPLACE(input,'LL','J');
+	input=REPLACE(input,'CE','S');
+	input=REPLACE(input,'CI','S');
+	input=REPLACE(input,'YA','J');
+	input=REPLACE(input,'YE','J');
+	input=REPLACE(input,'YI','J');
+	input=REPLACE(input,'YO','J');
+	input=REPLACE(input,'YU','J');
+	input=REPLACE(input,'GE','J');
+	input=REPLACE(input,'GI','J');
+	input=REPLACE(input,'NY','N');
+	-- para debug:    --return input;
+ 
+	-- EMPIEZA EL CALCULO DEL SOUNDEX
+	-- 4: OBTENER PRIMERA letra
+	pri_letra=substr(input,1,1);
+ 
+	-- 5: retener el resto del string
+	resto=substr(input,2);
+ 
+	--6: en el resto del string, quitar vocales y vocales fonéticas
+	resto=translate(resto,'@AEIOUHWY','@');
+ 
+	--7: convertir las letras foneticamente equivalentes a numeros  (esto hace que B sea equivalente a V, C con S y Z, etc.)
+	resto=translate(resto, 'BPFVCGKSXZDTLMNRQJ', '111122222233455677');
+	-- así va quedando la cosa
+	soundex=pri_letra || resto;
+ 
+	--8: eliminar números iguales adyacentes (A11233 se vuelve A123)
+	anterior=substr(soundex,1,1);
+	corregido=anterior;
+ 
+	FOR i IN 2 .. length(soundex) LOOP
+		actual = substr(soundex, i, 1);
+		IF actual <> anterior THEN
+			corregido=corregido || actual;
+			anterior=actual;			
+		END IF;
+	END LOOP;
+	-- así va la cosa
+	soundex=corregido;
+ 
+	-- 9: siempre retornar un string de 4 posiciones
+	soundex=rpad(soundex,4,'0');
+	soundex=substr(soundex,1,4);		
+ 
+	-- YA ESTUVO
+	RETURN soundex;	
+END;	
+$$;
+
+
+--
+-- Name: acreditacion_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE acreditacion_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: accion; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE accion (
-    id integer NOT NULL,
-    id_proceso integer NOT NULL,
-    id_taccion integer NOT NULL,
-    id_despacho integer NOT NULL,
-    fecha date NOT NULL,
-    numeroradicado character varying(50),
-    observacionesaccion character varying(4000),
-    respondido boolean,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: accion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE accion_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: accion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE accion_id_seq OWNED BY accion.id;
-
-
---
 -- Name: acreditacion; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE acreditacion (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('acreditacion_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date DEFAULT '2013-05-24'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT acreditacion_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
-
-
---
--- Name: acreditacion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE acreditacion_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: acreditacion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE acreditacion_id_seq OWNED BY acreditacion.id;
 
 
 --
@@ -127,7 +200,8 @@ CREATE TABLE actividad (
     fecha date,
     observaciones character varying(5000),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    region_id integer
 );
 
 
@@ -223,30 +297,19 @@ ALTER SEQUENCE actividadarea_id_seq OWNED BY actividadarea.id;
 --
 
 CREATE TABLE actividadareas_actividad (
-    actividadarea_id integer NOT NULL,
-    actividad_id integer NOT NULL
-);
-
-
---
--- Name: actividadoficio; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE actividadoficio (
     id integer NOT NULL,
-    nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
-    fechadeshabilitacion date,
+    actividad_id integer,
+    actividadarea_id integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
 
 
 --
--- Name: actividadoficio_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: actividadareas_actividad_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE actividadoficio_id_seq
+CREATE SEQUENCE actividadareas_actividad_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -255,10 +318,37 @@ CREATE SEQUENCE actividadoficio_id_seq
 
 
 --
--- Name: actividadoficio_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: actividadareas_actividad_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE actividadoficio_id_seq OWNED BY actividadoficio.id;
+ALTER SEQUENCE actividadareas_actividad_id_seq OWNED BY actividadareas_actividad.id;
+
+
+--
+-- Name: actividadoficio_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE actividadoficio_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: actividadoficio; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE actividadoficio (
+    id integer DEFAULT nextval('actividadoficio_seq'::regclass) NOT NULL,
+    nombre character varying(50) NOT NULL,
+    fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT actividadoficio_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
 
 
 --
@@ -319,11 +409,23 @@ CREATE TABLE actualizacionbase (
 
 
 --
+-- Name: anexo_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE anexo_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
 -- Name: anexo; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE anexo (
-    id integer NOT NULL,
+    id integer DEFAULT nextval('anexo_seq'::regclass) NOT NULL,
     id_caso integer NOT NULL,
     fecha date NOT NULL,
     descripcion character varying(1500) NOT NULL,
@@ -337,10 +439,10 @@ CREATE TABLE anexo (
 
 
 --
--- Name: anexo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: antecedente_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE anexo_id_seq
+CREATE SEQUENCE antecedente_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -349,23 +451,17 @@ CREATE SEQUENCE anexo_id_seq
 
 
 --
--- Name: anexo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE anexo_id_seq OWNED BY anexo.id;
-
-
---
 -- Name: antecedente; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE antecedente (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('antecedente_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT antecedente_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
@@ -395,25 +491,6 @@ CREATE TABLE antecedente_comunidad (
 
 
 --
--- Name: antecedente_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE antecedente_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: antecedente_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE antecedente_id_seq OWNED BY antecedente.id;
-
-
---
 -- Name: antecedente_victima; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -427,24 +504,10 @@ CREATE TABLE antecedente_victima (
 
 
 --
--- Name: ayudaestado; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: ayudaestado_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE TABLE ayudaestado (
-    id integer NOT NULL,
-    nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT '2013-06-16'::date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: ayudaestado_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE ayudaestado_id_seq
+CREATE SEQUENCE ayudaestado_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -453,10 +516,18 @@ CREATE SEQUENCE ayudaestado_id_seq
 
 
 --
--- Name: ayudaestado_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: ayudaestado; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER SEQUENCE ayudaestado_id_seq OWNED BY ayudaestado.id;
+CREATE TABLE ayudaestado (
+    id integer DEFAULT nextval('ayudaestado_seq'::regclass) NOT NULL,
+    nombre character varying(50) NOT NULL,
+    fechacreacion date DEFAULT '2013-06-16'::date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT ayudaestado_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
 
 
 --
@@ -464,8 +535,7 @@ ALTER SEQUENCE ayudaestado_id_seq OWNED BY ayudaestado.id;
 --
 
 CREATE TABLE ayudaestado_respuesta (
-    id_caso integer NOT NULL,
-    fechaatencion date NOT NULL,
+    id_respuesta integer NOT NULL,
     id_ayudaestado integer NOT NULL,
     cantidad character varying(50),
     institucion character varying(100),
@@ -475,24 +545,10 @@ CREATE TABLE ayudaestado_respuesta (
 
 
 --
--- Name: ayudasjr; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: ayudasjr_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE TABLE ayudasjr (
-    id integer NOT NULL,
-    nombre character varying(100) NOT NULL,
-    fechacreacion date DEFAULT '2013-06-16'::date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: ayudasjr_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE ayudasjr_id_seq
+CREATE SEQUENCE ayudasjr_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -501,10 +557,18 @@ CREATE SEQUENCE ayudasjr_id_seq
 
 
 --
--- Name: ayudasjr_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: ayudasjr; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER SEQUENCE ayudasjr_id_seq OWNED BY ayudasjr.id;
+CREATE TABLE ayudasjr (
+    id integer DEFAULT nextval('ayudasjr_seq'::regclass) NOT NULL,
+    nombre character varying(100) NOT NULL,
+    fechacreacion date DEFAULT '2013-06-16'::date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT ayudasjr_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
 
 
 --
@@ -512,8 +576,7 @@ ALTER SEQUENCE ayudasjr_id_seq OWNED BY ayudasjr.id;
 --
 
 CREATE TABLE ayudasjr_respuesta (
-    id_caso integer NOT NULL,
-    fechaatencion date NOT NULL,
+    id_respuesta integer NOT NULL,
     id_ayudasjr integer NOT NULL,
     detallear character varying(5000),
     created_at timestamp without time zone,
@@ -522,11 +585,23 @@ CREATE TABLE ayudasjr_respuesta (
 
 
 --
+-- Name: caso_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE caso_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
 -- Name: caso; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE caso (
-    id integer NOT NULL,
+    id integer DEFAULT nextval('caso_seq'::regclass) NOT NULL,
     titulo character varying(50),
     fecha date NOT NULL,
     hora character varying(10),
@@ -537,7 +612,7 @@ CREATE TABLE caso (
     grimpunidad character varying(5),
     grinformacion character varying(5),
     bienes text,
-    id_intervalo integer,
+    id_intervalo integer DEFAULT 5,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -551,9 +626,9 @@ CREATE TABLE caso_categoria_presponsable (
     id_tviolencia character varying(1) NOT NULL,
     id_supracategoria integer NOT NULL,
     id_categoria integer NOT NULL,
-    id integer NOT NULL,
-    id_caso integer NOT NULL,
-    id_presponsable integer NOT NULL,
+    id_caso_presponsable integer NOT NULL,
+    id_caso integer,
+    id_presponsable integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -578,7 +653,7 @@ CREATE TABLE caso_contexto (
 CREATE TABLE caso_etiqueta (
     id_caso integer NOT NULL,
     id_etiqueta integer NOT NULL,
-    id_funcionario integer NOT NULL,
+    id_usuario integer NOT NULL,
     fecha date NOT NULL,
     observaciones character varying(5000),
     created_at timestamp without time zone,
@@ -631,23 +706,10 @@ CREATE TABLE caso_frontera (
 
 
 --
--- Name: caso_funcionario; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: caso_presponsable_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE TABLE caso_funcionario (
-    id_funcionario integer NOT NULL,
-    id_caso integer NOT NULL,
-    fechainicio date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: caso_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE caso_id_seq
+CREATE SEQUENCE caso_presponsable_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -656,27 +718,20 @@ CREATE SEQUENCE caso_id_seq
 
 
 --
--- Name: caso_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE caso_id_seq OWNED BY caso.id;
-
-
---
 -- Name: caso_presponsable; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE caso_presponsable (
-    id_caso integer NOT NULL,
-    id_presponsable integer NOT NULL,
-    tipo integer NOT NULL,
+    id integer DEFAULT nextval('caso_presponsable_seq'::regclass) NOT NULL,
+    id_caso integer,
+    id_presponsable integer,
+    tipo integer DEFAULT 0 NOT NULL,
     bloque character varying(50),
     frente character varying(50),
     brigada character varying(50),
     batallon character varying(50),
     division character varying(50),
     otro character varying(500),
-    id integer NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -689,6 +744,19 @@ CREATE TABLE caso_presponsable (
 CREATE TABLE caso_region (
     id_region integer NOT NULL,
     id_caso integer NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: caso_usuario; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE caso_usuario (
+    id_usuario integer NOT NULL,
+    id_caso integer NOT NULL,
+    fechainicio date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -718,38 +786,26 @@ CREATE TABLE casosjr (
 
 CREATE TABLE categoria (
     id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     id_supracategoria integer NOT NULL,
     id_tviolencia character varying(1) NOT NULL,
     id_pconsolidado integer,
     contadaen integer,
-    tipocat character varying(1) DEFAULT 'I'::character varying,
+    tipocat character(1) DEFAULT 'I'::bpchar,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT categoria_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion))),
+    CONSTRAINT categoria_tipocat_check CHECK ((((tipocat = 'I'::bpchar) OR (tipocat = 'C'::bpchar)) OR (tipocat = 'O'::bpchar)))
 );
 
 
 --
--- Name: causaref; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: causaref_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE TABLE causaref (
-    id integer NOT NULL,
-    nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT '2013-06-17'::date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: causaref_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE causaref_id_seq
+CREATE SEQUENCE causaref_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -758,10 +814,30 @@ CREATE SEQUENCE causaref_id_seq
 
 
 --
--- Name: causaref_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: causaref; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER SEQUENCE causaref_id_seq OWNED BY causaref.id;
+CREATE TABLE causaref (
+    id integer DEFAULT nextval('causaref_seq'::regclass) NOT NULL,
+    nombre character varying(50) NOT NULL,
+    fechacreacion date DEFAULT '2013-06-17'::date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT causaref_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: clase_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE clase_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -769,8 +845,8 @@ ALTER SEQUENCE causaref_id_seq OWNED BY causaref.id;
 --
 
 CREATE TABLE clase (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('clase_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     id_departamento integer NOT NULL,
     id_municipio integer NOT NULL,
     id_tclase character varying(10),
@@ -779,27 +855,21 @@ CREATE TABLE clase (
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT clase_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: clase_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: clasifdesp_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE clase_id_seq
+CREATE SEQUENCE clasifdesp_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: clase_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE clase_id_seq OWNED BY clase.id;
 
 
 --
@@ -807,32 +877,14 @@ ALTER SEQUENCE clase_id_seq OWNED BY clase.id;
 --
 
 CREATE TABLE clasifdesp (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('clasifdesp_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date DEFAULT '2013-05-24'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT clasifdesp_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
-
-
---
--- Name: clasifdesp_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE clasifdesp_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: clasifdesp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE clasifdesp_id_seq OWNED BY clasifdesp.id;
 
 
 --
@@ -840,7 +892,7 @@ ALTER SEQUENCE clasifdesp_id_seq OWNED BY clasifdesp.id;
 --
 
 CREATE TABLE comunidad_filiacion (
-    id_filiacion integer NOT NULL,
+    id_filiacion integer DEFAULT 10 NOT NULL,
     id_grupoper integer NOT NULL,
     id_caso integer NOT NULL,
     created_at timestamp without time zone,
@@ -853,7 +905,7 @@ CREATE TABLE comunidad_filiacion (
 --
 
 CREATE TABLE comunidad_organizacion (
-    id_organizacion integer NOT NULL,
+    id_organizacion integer DEFAULT 16 NOT NULL,
     id_grupoper integer NOT NULL,
     id_caso integer NOT NULL,
     created_at timestamp without time zone,
@@ -866,7 +918,7 @@ CREATE TABLE comunidad_organizacion (
 --
 
 CREATE TABLE comunidad_profesion (
-    id_profesion integer NOT NULL,
+    id_profesion integer DEFAULT 22 NOT NULL,
     id_grupoper integer NOT NULL,
     id_caso integer NOT NULL,
     created_at timestamp without time zone,
@@ -879,7 +931,7 @@ CREATE TABLE comunidad_profesion (
 --
 
 CREATE TABLE comunidad_rangoedad (
-    id_rangoedad integer NOT NULL,
+    id_rangoedad integer DEFAULT 6 NOT NULL,
     id_grupoper integer NOT NULL,
     id_caso integer NOT NULL,
     created_at timestamp without time zone,
@@ -892,7 +944,7 @@ CREATE TABLE comunidad_rangoedad (
 --
 
 CREATE TABLE comunidad_sectorsocial (
-    id_sector integer NOT NULL,
+    id_sectorsocial integer DEFAULT 15 NOT NULL,
     id_grupoper integer NOT NULL,
     id_caso integer NOT NULL,
     created_at timestamp without time zone,
@@ -905,7 +957,7 @@ CREATE TABLE comunidad_sectorsocial (
 --
 
 CREATE TABLE comunidad_vinculoestado (
-    id_vinculoestado integer NOT NULL,
+    id_vinculoestado integer DEFAULT 38 NOT NULL,
     id_grupoper integer NOT NULL,
     id_caso integer NOT NULL,
     created_at timestamp without time zone,
@@ -914,24 +966,10 @@ CREATE TABLE comunidad_vinculoestado (
 
 
 --
--- Name: contexto; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: contexto_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE TABLE contexto (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
-    fechacreacion date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: contexto_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE contexto_id_seq
+CREATE SEQUENCE contexto_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -940,10 +978,30 @@ CREATE SEQUENCE contexto_id_seq
 
 
 --
--- Name: contexto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: contexto; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER SEQUENCE contexto_id_seq OWNED BY contexto.id;
+CREATE TABLE contexto (
+    id integer DEFAULT nextval('contexto_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT contexto_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: declaroante_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE declaroante_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -951,32 +1009,26 @@ ALTER SEQUENCE contexto_id_seq OWNED BY contexto.id;
 --
 
 CREATE TABLE declaroante (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('declaroante_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date DEFAULT '2013-05-24'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT declaroante_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: declaroante_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: departamento_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE declaroante_id_seq
+CREATE SEQUENCE departamento_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: declaroante_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE declaroante_id_seq OWNED BY declaroante.id;
 
 
 --
@@ -984,34 +1036,28 @@ ALTER SEQUENCE declaroante_id_seq OWNED BY declaroante.id;
 --
 
 CREATE TABLE departamento (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('departamento_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     latitud double precision,
     longitud double precision,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT departamento_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: departamento_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: derecho_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE departamento_id_seq
+CREATE SEQUENCE derecho_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: departamento_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE departamento_id_seq OWNED BY departamento.id;
 
 
 --
@@ -1019,43 +1065,13 @@ ALTER SEQUENCE departamento_id_seq OWNED BY departamento.id;
 --
 
 CREATE TABLE derecho (
-    id integer NOT NULL,
+    id integer DEFAULT nextval('derecho_seq'::regclass) NOT NULL,
     nombre character varying(100) NOT NULL,
     fechacreacion date DEFAULT '2013-06-12'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: derecho_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE derecho_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: derecho_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE derecho_id_seq OWNED BY derecho.id;
-
-
---
--- Name: derecho_procesosjr; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE derecho_procesosjr (
-    id_proceso integer NOT NULL,
-    id_derecho integer NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT derecho_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
@@ -1064,8 +1080,7 @@ CREATE TABLE derecho_procesosjr (
 --
 
 CREATE TABLE derecho_respuesta (
-    id_caso integer NOT NULL,
-    fechaatencion date NOT NULL,
+    id_respuesta integer NOT NULL,
     id_derecho integer NOT NULL,
     informacion boolean,
     acciones character varying(5000),
@@ -1075,26 +1090,49 @@ CREATE TABLE derecho_respuesta (
 
 
 --
--- Name: despacho; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: desplazamiento; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE TABLE despacho (
-    id integer NOT NULL,
-    id_tproceso integer NOT NULL,
-    nombre character varying(500) NOT NULL,
-    observaciones character varying(500),
-    fechacreacion date DEFAULT '2001-01-01'::date NOT NULL,
-    fechadeshabilitacion date,
+CREATE TABLE desplazamiento (
+    id_caso integer NOT NULL,
+    fechaexpulsion date NOT NULL,
+    id_expulsion integer NOT NULL,
+    fechallegada date NOT NULL,
+    id_llegada integer NOT NULL,
+    id_clasifdesp integer DEFAULT 0 NOT NULL,
+    id_tipodesp integer DEFAULT 0 NOT NULL,
+    descripcion character varying(5000),
+    otrosdatos character varying(1000),
+    declaro character(1),
+    hechosdeclarados character varying(5000),
+    fechadeclaracion date,
+    departamentodecl integer,
+    municipiodecl integer,
+    id_declaroante integer DEFAULT 0,
+    id_inclusion integer DEFAULT 0,
+    id_acreditacion integer DEFAULT 0,
+    retornado boolean,
+    reubicado boolean,
+    connacionalretorno boolean,
+    acompestado boolean,
+    connacionaldeportado boolean,
+    oficioantes character varying(5000),
+    id_modalidadtierra integer DEFAULT 0,
+    materialesperdidos character varying(5000),
+    inmaterialesperdidos character varying(5000),
+    protegiorupta boolean,
+    documentostierra character varying(5000),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT desplazamiento_declaro_check CHECK ((((declaro = 'S'::bpchar) OR (declaro = 'N'::bpchar)) OR (declaro = 'R'::bpchar)))
 );
 
 
 --
--- Name: despacho_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: desplazamiento_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE despacho_id_seq
+CREATE SEQUENCE desplazamiento_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1103,48 +1141,15 @@ CREATE SEQUENCE despacho_id_seq
 
 
 --
--- Name: despacho_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: escolaridad_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE despacho_id_seq OWNED BY despacho.id;
-
-
---
--- Name: desplazamiento; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE desplazamiento (
-    id_caso integer NOT NULL,
-    fechaexpulsion date NOT NULL,
-    expulsion integer NOT NULL,
-    fechallegada date NOT NULL,
-    llegada integer NOT NULL,
-    id_clasifdesp integer NOT NULL,
-    id_tipodesp integer NOT NULL,
-    descripcion character varying(5000),
-    otrosdatos character varying(1000),
-    declaro character varying(1),
-    hechosdeclarados character varying(5000),
-    fechadeclaracion date,
-    departamentodecl integer,
-    municipiodecl integer,
-    id_declaroante integer,
-    id_inclusion integer,
-    id_acreditacion integer,
-    retornado boolean,
-    reubicado boolean,
-    connacionalretorno boolean,
-    acompestado boolean,
-    connacionaldeportado boolean,
-    oficioantes character varying(5000),
-    id_modalidadtierra integer,
-    materialesperdidos character varying(5000),
-    inmaterialesperdidos character varying(5000),
-    protegiorupta boolean,
-    documentostierra character varying(5000),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
+CREATE SEQUENCE escolaridad_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -1152,32 +1157,26 @@ CREATE TABLE desplazamiento (
 --
 
 CREATE TABLE escolaridad (
-    id integer NOT NULL,
+    id integer DEFAULT nextval('escolaridad_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
     fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT escolaridad_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: escolaridad_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: estadocivil_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE escolaridad_id_seq
+CREATE SEQUENCE estadocivil_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: escolaridad_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE escolaridad_id_seq OWNED BY escolaridad.id;
 
 
 --
@@ -1185,67 +1184,26 @@ ALTER SEQUENCE escolaridad_id_seq OWNED BY escolaridad.id;
 --
 
 CREATE TABLE estadocivil (
-    id integer NOT NULL,
+    id integer DEFAULT nextval('estadocivil_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
     fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT estadocivil_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: estadocivil_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: etiqueta_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE estadocivil_id_seq
+CREATE SEQUENCE etiqueta_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: estadocivil_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE estadocivil_id_seq OWNED BY estadocivil.id;
-
-
---
--- Name: etapa; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE etapa (
-    id integer NOT NULL,
-    id_tproceso integer NOT NULL,
-    nombre character varying(500) NOT NULL,
-    observaciones character varying(200),
-    fechacreacion date DEFAULT '2001-01-01'::date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: etapa_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE etapa_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: etapa_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE etapa_id_seq OWNED BY etapa.id;
 
 
 --
@@ -1253,33 +1211,27 @@ ALTER SEQUENCE etapa_id_seq OWNED BY etapa.id;
 --
 
 CREATE TABLE etiqueta (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('etiqueta_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     observaciones character varying(500),
     fechacreacion date DEFAULT '2001-01-01'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT etiqueta_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: etiqueta_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: etnia_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE etiqueta_id_seq
+CREATE SEQUENCE etnia_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: etiqueta_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE etiqueta_id_seq OWNED BY etiqueta.id;
 
 
 --
@@ -1287,33 +1239,27 @@ ALTER SEQUENCE etiqueta_id_seq OWNED BY etiqueta.id;
 --
 
 CREATE TABLE etnia (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('etnia_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     descripcion character varying(1000),
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT etnia_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: etnia_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: ffrecuente_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE etnia_id_seq
+CREATE SEQUENCE ffrecuente_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: etnia_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE etnia_id_seq OWNED BY etnia.id;
 
 
 --
@@ -1321,33 +1267,27 @@ ALTER SEQUENCE etnia_id_seq OWNED BY etnia.id;
 --
 
 CREATE TABLE ffrecuente (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('ffrecuente_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     tfuente character varying(25) NOT NULL,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT ffrecuente_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: ffrecuente_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: filiacion_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE ffrecuente_id_seq
+CREATE SEQUENCE filiacion_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: ffrecuente_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE ffrecuente_id_seq OWNED BY ffrecuente.id;
 
 
 --
@@ -1355,32 +1295,26 @@ ALTER SEQUENCE ffrecuente_id_seq OWNED BY ffrecuente.id;
 --
 
 CREATE TABLE filiacion (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('filiacion_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT filiacion_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: filiacion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: fotra_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE filiacion_id_seq
+CREATE SEQUENCE fotra_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: filiacion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE filiacion_id_seq OWNED BY filiacion.id;
 
 
 --
@@ -1388,30 +1322,23 @@ ALTER SEQUENCE filiacion_id_seq OWNED BY filiacion.id;
 --
 
 CREATE TABLE fotra (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('fotra_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
 
 
 --
--- Name: fotra_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: frontera_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE fotra_id_seq
+CREATE SEQUENCE frontera_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: fotra_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE fotra_id_seq OWNED BY fotra.id;
 
 
 --
@@ -1419,64 +1346,26 @@ ALTER SEQUENCE fotra_id_seq OWNED BY fotra.id;
 --
 
 CREATE TABLE frontera (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('frontera_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT frontera_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: frontera_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: grupoper_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE frontera_id_seq
+CREATE SEQUENCE grupoper_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: frontera_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE frontera_id_seq OWNED BY frontera.id;
-
-
---
--- Name: funcionario; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE funcionario (
-    id integer NOT NULL,
-    anotacion character varying(50),
-    nombre character varying(15) NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: funcionario_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE funcionario_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: funcionario_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE funcionario_id_seq OWNED BY funcionario.id;
 
 
 --
@@ -1484,8 +1373,8 @@ ALTER SEQUENCE funcionario_id_seq OWNED BY funcionario.id;
 --
 
 CREATE TABLE grupoper (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('grupoper_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     anotaciones character varying(1000),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -1493,22 +1382,15 @@ CREATE TABLE grupoper (
 
 
 --
--- Name: grupoper_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: iglesia_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE grupoper_id_seq
+CREATE SEQUENCE iglesia_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: grupoper_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE grupoper_id_seq OWNED BY grupoper.id;
 
 
 --
@@ -1516,33 +1398,27 @@ ALTER SEQUENCE grupoper_id_seq OWNED BY grupoper.id;
 --
 
 CREATE TABLE iglesia (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('iglesia_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     descripcion character varying(1000),
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT iglesia_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: iglesia_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: inclusion_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE iglesia_id_seq
+CREATE SEQUENCE inclusion_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: iglesia_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE iglesia_id_seq OWNED BY iglesia.id;
 
 
 --
@@ -1550,32 +1426,26 @@ ALTER SEQUENCE iglesia_id_seq OWNED BY iglesia.id;
 --
 
 CREATE TABLE inclusion (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('inclusion_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date DEFAULT '2013-05-24'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT inclusion_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: inclusion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: instanciader_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE inclusion_id_seq
+CREATE SEQUENCE instanciader_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: inclusion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE inclusion_id_seq OWNED BY inclusion.id;
 
 
 --
@@ -1583,32 +1453,26 @@ ALTER SEQUENCE inclusion_id_seq OWNED BY inclusion.id;
 --
 
 CREATE TABLE instanciader (
-    id integer NOT NULL,
+    id integer DEFAULT nextval('instanciader_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
     fechacreacion date DEFAULT '2013-06-12'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT instanciader_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: instanciader_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: intervalo_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE instanciader_id_seq
+CREATE SEQUENCE intervalo_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: instanciader_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE instanciader_id_seq OWNED BY instanciader.id;
 
 
 --
@@ -1616,33 +1480,27 @@ ALTER SEQUENCE instanciader_id_seq OWNED BY instanciader.id;
 --
 
 CREATE TABLE intervalo (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('intervalo_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     rango character varying(25) NOT NULL,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT intervalo_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: intervalo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: maternidad_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE intervalo_id_seq
+CREATE SEQUENCE maternidad_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: intervalo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE intervalo_id_seq OWNED BY intervalo.id;
 
 
 --
@@ -1650,32 +1508,26 @@ ALTER SEQUENCE intervalo_id_seq OWNED BY intervalo.id;
 --
 
 CREATE TABLE maternidad (
-    id integer NOT NULL,
+    id integer DEFAULT nextval('maternidad_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
     fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT maternidad_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: maternidad_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: mecanismoder_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE maternidad_id_seq
+CREATE SEQUENCE mecanismoder_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: maternidad_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE maternidad_id_seq OWNED BY maternidad.id;
 
 
 --
@@ -1683,32 +1535,26 @@ ALTER SEQUENCE maternidad_id_seq OWNED BY maternidad.id;
 --
 
 CREATE TABLE mecanismoder (
-    id integer NOT NULL,
+    id integer DEFAULT nextval('mecanismoder_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
     fechacreacion date DEFAULT '2013-06-12'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT mecanismoder_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: mecanismoder_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: modalidadtierra_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE mecanismoder_id_seq
+CREATE SEQUENCE modalidadtierra_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: mecanismoder_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE mecanismoder_id_seq OWNED BY mecanismoder.id;
 
 
 --
@@ -1716,32 +1562,26 @@ ALTER SEQUENCE mecanismoder_id_seq OWNED BY mecanismoder.id;
 --
 
 CREATE TABLE modalidadtierra (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('modalidadtierra_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date DEFAULT '2013-05-24'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT modalidadtierra_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: modalidadtierra_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: motivoconsulta_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE modalidadtierra_id_seq
+CREATE SEQUENCE motivoconsulta_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: modalidadtierra_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE modalidadtierra_id_seq OWNED BY modalidadtierra.id;
 
 
 --
@@ -1749,32 +1589,26 @@ ALTER SEQUENCE modalidadtierra_id_seq OWNED BY modalidadtierra.id;
 --
 
 CREATE TABLE motivoconsulta (
-    id integer NOT NULL,
+    id integer DEFAULT nextval('motivoconsulta_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
     fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT motivoconsulta_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: motivoconsulta_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: motivosjr_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE motivoconsulta_id_seq
+CREATE SEQUENCE motivosjr_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: motivoconsulta_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE motivoconsulta_id_seq OWNED BY motivoconsulta.id;
 
 
 --
@@ -1782,32 +1616,14 @@ ALTER SEQUENCE motivoconsulta_id_seq OWNED BY motivoconsulta.id;
 --
 
 CREATE TABLE motivosjr (
-    id integer NOT NULL,
+    id integer DEFAULT nextval('motivosjr_seq'::regclass) NOT NULL,
     nombre character varying(100) NOT NULL,
     fechacreacion date DEFAULT '2013-06-16'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT motivosjr_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
-
-
---
--- Name: motivosjr_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE motivosjr_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: motivosjr_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE motivosjr_id_seq OWNED BY motivosjr.id;
 
 
 --
@@ -1815,8 +1631,7 @@ ALTER SEQUENCE motivosjr_id_seq OWNED BY motivosjr.id;
 --
 
 CREATE TABLE motivosjr_respuesta (
-    id_caso integer NOT NULL,
-    fechaatencion date NOT NULL,
+    id_respuesta integer NOT NULL,
     id_motivosjr integer NOT NULL,
     detalle character varying(5000),
     created_at timestamp without time zone,
@@ -1825,27 +1640,10 @@ CREATE TABLE motivosjr_respuesta (
 
 
 --
--- Name: municipio; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: municipio_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE TABLE municipio (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
-    id_departamento integer NOT NULL,
-    latitud double precision,
-    longitud double precision,
-    fechacreacion date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: municipio_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE municipio_id_seq
+CREATE SEQUENCE municipio_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -1854,10 +1652,33 @@ CREATE SEQUENCE municipio_id_seq
 
 
 --
--- Name: municipio_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: municipio; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER SEQUENCE municipio_id_seq OWNED BY municipio.id;
+CREATE TABLE municipio (
+    id integer DEFAULT nextval('municipio_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    id_departamento integer NOT NULL,
+    latitud double precision,
+    longitud double precision,
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT municipio_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: organizacion_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE organizacion_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -1865,32 +1686,26 @@ ALTER SEQUENCE municipio_id_seq OWNED BY municipio.id;
 --
 
 CREATE TABLE organizacion (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('organizacion_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT organizacion_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: organizacion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: pconsolidado_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE organizacion_id_seq
+CREATE SEQUENCE pconsolidado_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: organizacion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE organizacion_id_seq OWNED BY organizacion.id;
 
 
 --
@@ -1898,35 +1713,29 @@ ALTER SEQUENCE organizacion_id_seq OWNED BY organizacion.id;
 --
 
 CREATE TABLE pconsolidado (
-    id integer NOT NULL,
-    rotulo character varying(500) NOT NULL,
+    id integer DEFAULT nextval('pconsolidado_seq'::regclass) NOT NULL,
+    rotulo character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     tipoviolencia character varying(25) NOT NULL,
     clasificacion character varying(25) NOT NULL,
     peso integer DEFAULT 0,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT pconsolidado_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: pconsolidado_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: persona_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE pconsolidado_id_seq
+CREATE SEQUENCE persona_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: pconsolidado_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE pconsolidado_id_seq OWNED BY pconsolidado.id;
 
 
 --
@@ -1934,40 +1743,24 @@ ALTER SEQUENCE pconsolidado_id_seq OWNED BY pconsolidado.id;
 --
 
 CREATE TABLE persona (
-    id integer NOT NULL,
-    nombres character varying(100) NOT NULL,
-    apellidos character varying(100) NOT NULL,
+    id integer DEFAULT nextval('persona_seq'::regclass) NOT NULL,
+    nombres character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
+    apellidos character varying(100) COLLATE public.es_co_utf_8 NOT NULL,
     anionac integer,
     mesnac integer,
     dianac integer,
-    sexo character varying(1) NOT NULL,
+    sexo character(1) NOT NULL,
     id_departamento integer,
     id_municipio integer,
     id_clase integer,
     tipodocumento character varying(2),
     numerodocumento bigint,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT persona_check CHECK (((dianac IS NULL) OR ((((dianac >= 1) AND ((((((((mesnac = 1) OR (mesnac = 3)) OR (mesnac = 5)) OR (mesnac = 7)) OR (mesnac = 8)) OR (mesnac = 10)) OR (mesnac = 12)) AND (dianac <= 31))) OR (((((mesnac = 4) OR (mesnac = 6)) OR (mesnac = 9)) OR (mesnac = 11)) AND (dianac <= 30))) OR ((mesnac = 2) AND (dianac <= 29))))),
+    CONSTRAINT persona_mesnac_check CHECK (((mesnac IS NULL) OR ((mesnac >= 1) AND (mesnac <= 12)))),
+    CONSTRAINT persona_sexo_check CHECK ((((sexo = 'S'::bpchar) OR (sexo = 'F'::bpchar)) OR (sexo = 'M'::bpchar)))
 );
-
-
---
--- Name: persona_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE persona_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: persona_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE persona_id_seq OWNED BY persona.id;
 
 
 --
@@ -1977,7 +1770,7 @@ ALTER SEQUENCE persona_id_seq OWNED BY persona.id;
 CREATE TABLE persona_trelacion (
     persona1 integer NOT NULL,
     persona2 integer NOT NULL,
-    id_trelacion character varying(2) NOT NULL,
+    id_trelacion character(2) DEFAULT 'SI'::bpchar NOT NULL,
     observaciones character varying(200),
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -1985,24 +1778,10 @@ CREATE TABLE persona_trelacion (
 
 
 --
--- Name: personadesea; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: personadesea_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE TABLE personadesea (
-    id integer NOT NULL,
-    nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT '2013-06-17'::date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: personadesea_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE personadesea_id_seq
+CREATE SEQUENCE personadesea_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2011,10 +1790,30 @@ CREATE SEQUENCE personadesea_id_seq
 
 
 --
--- Name: personadesea_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: personadesea; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER SEQUENCE personadesea_id_seq OWNED BY personadesea.id;
+CREATE TABLE personadesea (
+    id integer DEFAULT nextval('personadesea_seq'::regclass) NOT NULL,
+    nombre character varying(50) NOT NULL,
+    fechacreacion date DEFAULT '2013-06-17'::date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT personadesea_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: presponsable_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE presponsable_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -2022,104 +1821,27 @@ ALTER SEQUENCE personadesea_id_seq OWNED BY personadesea.id;
 --
 
 CREATE TABLE presponsable (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('presponsable_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     papa integer,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT presponsable_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: presponsable_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: profesion_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE presponsable_id_seq
+CREATE SEQUENCE profesion_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: presponsable_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE presponsable_id_seq OWNED BY presponsable.id;
-
-
---
--- Name: proceso; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE proceso (
-    id integer NOT NULL,
-    id_caso integer NOT NULL,
-    id_tproceso integer NOT NULL,
-    id_etapa integer NOT NULL,
-    proximafecha date,
-    demandante character varying(100),
-    demandado character varying(100),
-    poderdante character varying(100),
-    telefono character varying(50),
-    observaciones character varying(500),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: proceso_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE proceso_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: proceso_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE proceso_id_seq OWNED BY proceso.id;
-
-
---
--- Name: procesosjr; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE procesosjr (
-    id_proceso integer NOT NULL,
-    id_motivoconsulta integer,
-    narracion character varying(5000),
-    hapresentado character varying(1),
-    id_mecanismoder integer,
-    id_instanciader integer,
-    detinstancia character varying(5000),
-    mecrespondido character varying(1),
-    fecharespuesta date,
-    ajustaley character varying(1),
-    estadomecanismo character varying(5000),
-    orientacion character varying(5000),
-    compromisossjr character varying(5000),
-    compromisosper character varying(5000),
-    surtioefecto character varying(1),
-    otromecanismo integer,
-    otrainstancia integer,
-    detotrainstancia character varying(5000),
-    persistevul boolean,
-    resultado character varying(5000),
-    casoregistro character varying(1),
-    motivacionjuez character varying(5000),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
 
 
 --
@@ -2127,32 +1849,26 @@ CREATE TABLE procesosjr (
 --
 
 CREATE TABLE profesion (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('profesion_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT profesion_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: profesion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: progestado_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE profesion_id_seq
+CREATE SEQUENCE progestado_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: profesion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE profesion_id_seq OWNED BY profesion.id;
 
 
 --
@@ -2160,32 +1876,14 @@ ALTER SEQUENCE profesion_id_seq OWNED BY profesion.id;
 --
 
 CREATE TABLE progestado (
-    id integer NOT NULL,
+    id integer DEFAULT nextval('progestado_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
     fechacreacion date DEFAULT '2013-06-17'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT progestado_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
-
-
---
--- Name: progestado_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE progestado_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: progestado_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE progestado_id_seq OWNED BY progestado.id;
 
 
 --
@@ -2193,8 +1891,7 @@ ALTER SEQUENCE progestado_id_seq OWNED BY progestado.id;
 --
 
 CREATE TABLE progestado_respuesta (
-    id_caso integer NOT NULL,
-    fechaatencion date NOT NULL,
+    id_respuesta integer NOT NULL,
     id_progestado integer NOT NULL,
     difobs character varying(5000),
     created_at timestamp without time zone,
@@ -2203,27 +1900,10 @@ CREATE TABLE progestado_respuesta (
 
 
 --
--- Name: rangoedad; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: rangoedad_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE TABLE rangoedad (
-    id integer NOT NULL,
-    nombre character varying(20) NOT NULL,
-    rango character varying(20) NOT NULL,
-    limiteinferior integer DEFAULT 0 NOT NULL,
-    limitesuperior integer DEFAULT 0 NOT NULL,
-    fechacreacion date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: rangoedad_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE rangoedad_id_seq
+CREATE SEQUENCE rangoedad_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2232,10 +1912,33 @@ CREATE SEQUENCE rangoedad_id_seq
 
 
 --
--- Name: rangoedad_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: rangoedad; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER SEQUENCE rangoedad_id_seq OWNED BY rangoedad.id;
+CREATE TABLE rangoedad (
+    id integer DEFAULT nextval('rangoedad_seq'::regclass) NOT NULL,
+    nombre character varying(20) COLLATE public.es_co_utf_8 NOT NULL,
+    rango character varying(20) NOT NULL,
+    limiteinferior integer DEFAULT 0 NOT NULL,
+    limitesuperior integer DEFAULT 0 NOT NULL,
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT rangoedad_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
+
+
+--
+-- Name: regimensalud_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE regimensalud_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -2243,32 +1946,26 @@ ALTER SEQUENCE rangoedad_id_seq OWNED BY rangoedad.id;
 --
 
 CREATE TABLE regimensalud (
-    id integer NOT NULL,
+    id integer DEFAULT nextval('regimensalud_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
     fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT regimensalud_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: regimensalud_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: region_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE regimensalud_id_seq
+CREATE SEQUENCE region_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: regimensalud_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE regimensalud_id_seq OWNED BY regimensalud.id;
 
 
 --
@@ -2276,32 +1973,26 @@ ALTER SEQUENCE regimensalud_id_seq OWNED BY regimensalud.id;
 --
 
 CREATE TABLE region (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('region_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT region_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: region_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: regionsjr_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE region_id_seq
+CREATE SEQUENCE regionsjr_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: region_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE region_id_seq OWNED BY region.id;
 
 
 --
@@ -2309,32 +2000,26 @@ ALTER SEQUENCE region_id_seq OWNED BY region.id;
 --
 
 CREATE TABLE regionsjr (
-    id integer NOT NULL,
+    id integer DEFAULT nextval('regionsjr_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
     fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT regionsjr_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: regionsjr_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: resagresion_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE regionsjr_id_seq
+CREATE SEQUENCE resagresion_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: regionsjr_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE regionsjr_id_seq OWNED BY regionsjr.id;
 
 
 --
@@ -2342,20 +2027,21 @@ ALTER SEQUENCE regionsjr_id_seq OWNED BY regionsjr.id;
 --
 
 CREATE TABLE resagresion (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('resagresion_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT resagresion_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: resagresion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: respuesta_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE resagresion_id_seq
+CREATE SEQUENCE respuesta_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2364,18 +2050,12 @@ CREATE SEQUENCE resagresion_id_seq
 
 
 --
--- Name: resagresion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE resagresion_id_seq OWNED BY resagresion.id;
-
-
---
 -- Name: respuesta; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE respuesta (
-    id_caso integer NOT NULL,
+    id integer DEFAULT nextval('respuesta_seq'::regclass) NOT NULL,
+    id_caso integer,
     fechaatencion date NOT NULL,
     fechaexpulsion date NOT NULL,
     prorrogas boolean,
@@ -2404,24 +2084,10 @@ CREATE TABLE respuesta (
 
 
 --
--- Name: rolfamilia; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: rolfamilia_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE TABLE rolfamilia (
-    id integer NOT NULL,
-    nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT '2013-06-20'::date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: rolfamilia_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE rolfamilia_id_seq
+CREATE SEQUENCE rolfamilia_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2430,10 +2096,18 @@ CREATE SEQUENCE rolfamilia_id_seq
 
 
 --
--- Name: rolfamilia_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: rolfamilia; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER SEQUENCE rolfamilia_id_seq OWNED BY rolfamilia.id;
+CREATE TABLE rolfamilia (
+    id integer DEFAULT nextval('rolfamilia_seq'::regclass) NOT NULL,
+    nombre character varying(50) NOT NULL,
+    fechacreacion date DEFAULT '2013-06-20'::date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT rolfamilia_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
 
 
 --
@@ -2448,24 +2122,10 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: sectorsocial; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: sectorsocial_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE TABLE sectorsocial (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
-    fechacreacion date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: sectorsocial_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE sectorsocial_id_seq
+CREATE SEQUENCE sectorsocial_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2474,10 +2134,18 @@ CREATE SEQUENCE sectorsocial_id_seq
 
 
 --
--- Name: sectorsocial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: sectorsocial; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER SEQUENCE sectorsocial_id_seq OWNED BY sectorsocial.id;
+CREATE TABLE sectorsocial (
+    id integer DEFAULT nextval('sectorsocial_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT sectorsocial_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
 
 
 --
@@ -2486,47 +2154,14 @@ ALTER SEQUENCE sectorsocial_id_seq OWNED BY sectorsocial.id;
 
 CREATE TABLE supracategoria (
     id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     id_tviolencia character varying(1) NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT supracategoria_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
-
-
---
--- Name: taccion; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE taccion (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
-    observaciones character varying(200),
-    fechacreacion date DEFAULT '2001-01-01'::date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: taccion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE taccion_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: taccion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE taccion_id_seq OWNED BY taccion.id;
 
 
 --
@@ -2535,12 +2170,25 @@ ALTER SEQUENCE taccion_id_seq OWNED BY taccion.id;
 
 CREATE TABLE tclase (
     id character varying(10) NOT NULL,
-    nombre character varying(500) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT tclase_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
+
+
+--
+-- Name: tipodesp_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE tipodesp_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -2548,66 +2196,14 @@ CREATE TABLE tclase (
 --
 
 CREATE TABLE tipodesp (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id integer DEFAULT nextval('tipodesp_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     fechacreacion date DEFAULT '2013-05-24'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT tipodesp_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
-
-
---
--- Name: tipodesp_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE tipodesp_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: tipodesp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE tipodesp_id_seq OWNED BY tipodesp.id;
-
-
---
--- Name: tproceso; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE tproceso (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
-    observaciones character varying(200),
-    fechacreacion date DEFAULT '2001-01-01'::date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: tproceso_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE tproceso_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: tproceso_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE tproceso_id_seq OWNED BY tproceso.id;
 
 
 --
@@ -2615,36 +2211,23 @@ ALTER SEQUENCE tproceso_id_seq OWNED BY tproceso.id;
 --
 
 CREATE TABLE trelacion (
-    id character varying(2) NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id character(2) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     dirigido boolean NOT NULL,
     observaciones character varying(200),
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT trelacion_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
 
 --
--- Name: tsitio; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: tsitio_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE TABLE tsitio (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
-    fechacreacion date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: tsitio_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE tsitio_id_seq
+CREATE SEQUENCE tsitio_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2653,10 +2236,18 @@ CREATE SEQUENCE tsitio_id_seq
 
 
 --
--- Name: tsitio_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: tsitio; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER SEQUENCE tsitio_id_seq OWNED BY tsitio.id;
+CREATE TABLE tsitio (
+    id integer DEFAULT nextval('tsitio_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT tsitio_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
 
 
 --
@@ -2664,14 +2255,27 @@ ALTER SEQUENCE tsitio_id_seq OWNED BY tsitio.id;
 --
 
 CREATE TABLE tviolencia (
-    id character varying(1) NOT NULL,
-    nombre character varying(500) NOT NULL,
+    id character(1) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     nomcorto character varying(10) NOT NULL,
     fechacreacion date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT tviolencia_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
+
+
+--
+-- Name: ubicacion_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ubicacion_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
 
 
 --
@@ -2679,13 +2283,13 @@ CREATE TABLE tviolencia (
 --
 
 CREATE TABLE ubicacion (
-    id integer NOT NULL,
-    lugar character varying(500),
-    sitio character varying(500),
+    id integer DEFAULT nextval('ubicacion_seq'::regclass) NOT NULL,
+    lugar character varying(500) COLLATE public.es_co_utf_8,
+    sitio character varying(500) COLLATE public.es_co_utf_8,
     id_clase integer,
     id_municipio integer,
     id_departamento integer,
-    id_tsitio integer NOT NULL,
+    id_tsitio integer DEFAULT 1 NOT NULL,
     id_caso integer NOT NULL,
     latitud double precision,
     longitud double precision,
@@ -2695,10 +2299,10 @@ CREATE TABLE ubicacion (
 
 
 --
--- Name: ubicacion_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: usuario_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE ubicacion_id_seq
+CREATE SEQUENCE usuario_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2707,36 +2311,33 @@ CREATE SEQUENCE ubicacion_id_seq
 
 
 --
--- Name: ubicacion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE ubicacion_id_seq OWNED BY ubicacion.id;
-
-
---
 -- Name: usuario; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE usuario (
-    id character varying(15) NOT NULL,
+    id integer DEFAULT nextval('usuario_seq'::regclass) NOT NULL,
+    nusuario character varying(15) NOT NULL,
     password character varying(64) NOT NULL,
-    nombre character varying(50),
+    nombre character varying(50) COLLATE public.es_co_utf_8,
     descripcion character varying(50),
-    rol integer,
-    diasedicion integer,
+    rol integer DEFAULT 4,
     idioma character varying(6) DEFAULT 'es_CO'::character varying NOT NULL,
     email character varying(255) DEFAULT ''::character varying NOT NULL,
     encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
     reset_password_token character varying(255),
     reset_password_sent_at timestamp without time zone,
     remember_created_at timestamp without time zone,
-    sign_in_count integer DEFAULT 0 NOT NULL,
     current_sign_in_at timestamp without time zone,
     last_sign_in_at timestamp without time zone,
     current_sign_in_ip character varying(255),
     last_sign_in_ip character varying(255),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT usuario_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion))),
+    CONSTRAINT usuario_rol_check CHECK (((rol >= 1) AND (rol <= 4)))
 );
 
 
@@ -2748,19 +2349,21 @@ CREATE TABLE victima (
     id_persona integer NOT NULL,
     id_caso integer NOT NULL,
     hijos integer,
-    id_profesion integer NOT NULL,
-    id_rangoedad integer NOT NULL,
-    id_filiacion integer NOT NULL,
-    id_sectorsocial integer NOT NULL,
-    id_organizacion integer NOT NULL,
-    id_vinculoestado integer NOT NULL,
-    organizacionarmada integer NOT NULL,
+    id_profesion integer DEFAULT 22 NOT NULL,
+    id_rangoedad integer DEFAULT 6 NOT NULL,
+    id_filiacion integer DEFAULT 10 NOT NULL,
+    id_sectorsocial integer DEFAULT 15 NOT NULL,
+    id_organizacion integer DEFAULT 16 NOT NULL,
+    id_vinculoestado integer DEFAULT 38 NOT NULL,
+    organizacionarmada integer DEFAULT 35 NOT NULL,
     anotaciones character varying(1000),
-    id_etnia integer,
-    id_iglesia integer,
-    orientacionsexual character varying(1) DEFAULT 'H'::character varying NOT NULL,
+    id_etnia integer DEFAULT 1,
+    id_iglesia integer DEFAULT 1,
+    orientacionsexual character(1) DEFAULT 'H'::bpchar NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    CONSTRAINT victima_hijos_check CHECK (((hijos IS NULL) OR ((hijos >= 0) AND (hijos <= 100)))),
+    CONSTRAINT victima_orientacionsexual_check CHECK (((((((orientacionsexual = 'L'::bpchar) OR (orientacionsexual = 'G'::bpchar)) OR (orientacionsexual = 'B'::bpchar)) OR (orientacionsexual = 'T'::bpchar)) OR (orientacionsexual = 'I'::bpchar)) OR (orientacionsexual = 'H'::bpchar)))
 );
 
 
@@ -2772,7 +2375,7 @@ CREATE TABLE victimacolectiva (
     id_grupoper integer NOT NULL,
     id_caso integer NOT NULL,
     personasaprox integer,
-    organizacionarmada integer,
+    organizacionarmada integer DEFAULT 35,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
 );
@@ -2810,24 +2413,10 @@ CREATE TABLE victimasjr (
 
 
 --
--- Name: vinculoestado; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: vinculoestado_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE TABLE vinculoestado (
-    id integer NOT NULL,
-    nombre character varying(500) NOT NULL,
-    fechacreacion date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: vinculoestado_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE vinculoestado_id_seq
+CREATE SEQUENCE vinculoestado_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -2836,24 +2425,18 @@ CREATE SEQUENCE vinculoestado_id_seq
 
 
 --
--- Name: vinculoestado_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: vinculoestado; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER SEQUENCE vinculoestado_id_seq OWNED BY vinculoestado.id;
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY accion ALTER COLUMN id SET DEFAULT nextval('accion_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY acreditacion ALTER COLUMN id SET DEFAULT nextval('acreditacion_id_seq'::regclass);
+CREATE TABLE vinculoestado (
+    id integer DEFAULT nextval('vinculoestado_seq'::regclass) NOT NULL,
+    nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    CONSTRAINT vinculoestado_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
+);
 
 
 --
@@ -2881,400 +2464,7 @@ ALTER TABLE ONLY actividadarea ALTER COLUMN id SET DEFAULT nextval('actividadare
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY actividadoficio ALTER COLUMN id SET DEFAULT nextval('actividadoficio_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY anexo ALTER COLUMN id SET DEFAULT nextval('anexo_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY antecedente ALTER COLUMN id SET DEFAULT nextval('antecedente_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY ayudaestado ALTER COLUMN id SET DEFAULT nextval('ayudaestado_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY ayudasjr ALTER COLUMN id SET DEFAULT nextval('ayudasjr_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY caso ALTER COLUMN id SET DEFAULT nextval('caso_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY causaref ALTER COLUMN id SET DEFAULT nextval('causaref_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY clase ALTER COLUMN id SET DEFAULT nextval('clase_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY clasifdesp ALTER COLUMN id SET DEFAULT nextval('clasifdesp_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY contexto ALTER COLUMN id SET DEFAULT nextval('contexto_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY declaroante ALTER COLUMN id SET DEFAULT nextval('declaroante_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY departamento ALTER COLUMN id SET DEFAULT nextval('departamento_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY derecho ALTER COLUMN id SET DEFAULT nextval('derecho_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY despacho ALTER COLUMN id SET DEFAULT nextval('despacho_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY escolaridad ALTER COLUMN id SET DEFAULT nextval('escolaridad_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY estadocivil ALTER COLUMN id SET DEFAULT nextval('estadocivil_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY etapa ALTER COLUMN id SET DEFAULT nextval('etapa_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY etiqueta ALTER COLUMN id SET DEFAULT nextval('etiqueta_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY etnia ALTER COLUMN id SET DEFAULT nextval('etnia_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY ffrecuente ALTER COLUMN id SET DEFAULT nextval('ffrecuente_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY filiacion ALTER COLUMN id SET DEFAULT nextval('filiacion_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY fotra ALTER COLUMN id SET DEFAULT nextval('fotra_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY frontera ALTER COLUMN id SET DEFAULT nextval('frontera_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY funcionario ALTER COLUMN id SET DEFAULT nextval('funcionario_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY grupoper ALTER COLUMN id SET DEFAULT nextval('grupoper_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY iglesia ALTER COLUMN id SET DEFAULT nextval('iglesia_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY inclusion ALTER COLUMN id SET DEFAULT nextval('inclusion_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY instanciader ALTER COLUMN id SET DEFAULT nextval('instanciader_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY intervalo ALTER COLUMN id SET DEFAULT nextval('intervalo_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY maternidad ALTER COLUMN id SET DEFAULT nextval('maternidad_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY mecanismoder ALTER COLUMN id SET DEFAULT nextval('mecanismoder_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY modalidadtierra ALTER COLUMN id SET DEFAULT nextval('modalidadtierra_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY motivoconsulta ALTER COLUMN id SET DEFAULT nextval('motivoconsulta_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY motivosjr ALTER COLUMN id SET DEFAULT nextval('motivosjr_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY municipio ALTER COLUMN id SET DEFAULT nextval('municipio_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY organizacion ALTER COLUMN id SET DEFAULT nextval('organizacion_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY pconsolidado ALTER COLUMN id SET DEFAULT nextval('pconsolidado_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY persona ALTER COLUMN id SET DEFAULT nextval('persona_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY personadesea ALTER COLUMN id SET DEFAULT nextval('personadesea_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY presponsable ALTER COLUMN id SET DEFAULT nextval('presponsable_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY proceso ALTER COLUMN id SET DEFAULT nextval('proceso_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY profesion ALTER COLUMN id SET DEFAULT nextval('profesion_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY progestado ALTER COLUMN id SET DEFAULT nextval('progestado_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY rangoedad ALTER COLUMN id SET DEFAULT nextval('rangoedad_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY regimensalud ALTER COLUMN id SET DEFAULT nextval('regimensalud_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY region ALTER COLUMN id SET DEFAULT nextval('region_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY regionsjr ALTER COLUMN id SET DEFAULT nextval('regionsjr_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY resagresion ALTER COLUMN id SET DEFAULT nextval('resagresion_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY rolfamilia ALTER COLUMN id SET DEFAULT nextval('rolfamilia_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY sectorsocial ALTER COLUMN id SET DEFAULT nextval('sectorsocial_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY taccion ALTER COLUMN id SET DEFAULT nextval('taccion_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY tipodesp ALTER COLUMN id SET DEFAULT nextval('tipodesp_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY tproceso ALTER COLUMN id SET DEFAULT nextval('tproceso_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY tsitio ALTER COLUMN id SET DEFAULT nextval('tsitio_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY ubicacion ALTER COLUMN id SET DEFAULT nextval('ubicacion_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY vinculoestado ALTER COLUMN id SET DEFAULT nextval('vinculoestado_id_seq'::regclass);
-
-
---
--- Name: accion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY accion
-    ADD CONSTRAINT accion_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY actividadareas_actividad ALTER COLUMN id SET DEFAULT nextval('actividadareas_actividad_id_seq'::regclass);
 
 
 --
@@ -3314,7 +2504,7 @@ ALTER TABLE ONLY actividadarea
 --
 
 ALTER TABLE ONLY actividadareas_actividad
-    ADD CONSTRAINT actividadareas_actividad_pkey PRIMARY KEY (actividadarea_id, actividad_id);
+    ADD CONSTRAINT actividadareas_actividad_pkey PRIMARY KEY (id);
 
 
 --
@@ -3326,11 +2516,59 @@ ALTER TABLE ONLY actividadoficio
 
 
 --
+-- Name: acto_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY acto
+    ADD CONSTRAINT acto_pkey PRIMARY KEY (id_presponsable, id_categoria, id_persona, id_caso);
+
+
+--
+-- Name: actocolectivo_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY actocolectivo
+    ADD CONSTRAINT actocolectivo_pkey PRIMARY KEY (id_presponsable, id_categoria, id_grupoper, id_caso);
+
+
+--
+-- Name: actosjr_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY actosjr
+    ADD CONSTRAINT actosjr_pkey PRIMARY KEY (id_presponsable, id_categoria, id_persona, id_caso, fecha);
+
+
+--
+-- Name: actualizacionbase_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY actualizacionbase
+    ADD CONSTRAINT actualizacionbase_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: anexo_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY anexo
     ADD CONSTRAINT anexo_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: antecedente_caso_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY antecedente_caso
+    ADD CONSTRAINT antecedente_caso_pkey PRIMARY KEY (id_antecedente, id_caso);
+
+
+--
+-- Name: antecedente_comunidad_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY antecedente_comunidad
+    ADD CONSTRAINT antecedente_comunidad_pkey PRIMARY KEY (id_antecedente, id_grupoper, id_caso);
 
 
 --
@@ -3342,11 +2580,27 @@ ALTER TABLE ONLY antecedente
 
 
 --
+-- Name: antecedente_victima_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY antecedente_victima
+    ADD CONSTRAINT antecedente_victima_pkey PRIMARY KEY (id_antecedente, id_persona, id_caso);
+
+
+--
 -- Name: ayudaestado_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ayudaestado
     ADD CONSTRAINT ayudaestado_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ayudaestado_respuesta_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY ayudaestado_respuesta
+    ADD CONSTRAINT ayudaestado_respuesta_pkey PRIMARY KEY (id_respuesta, id_ayudaestado);
 
 
 --
@@ -3358,11 +2612,107 @@ ALTER TABLE ONLY ayudasjr
 
 
 --
+-- Name: ayudasjr_respuesta_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY ayudasjr_respuesta
+    ADD CONSTRAINT ayudasjr_respuesta_pkey PRIMARY KEY (id_respuesta, id_ayudasjr);
+
+
+--
+-- Name: caso_categoria_presponsable_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY caso_categoria_presponsable
+    ADD CONSTRAINT caso_categoria_presponsable_pkey PRIMARY KEY (id_tviolencia, id_supracategoria, id_categoria, id_caso_presponsable);
+
+
+--
+-- Name: caso_contexto_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY caso_contexto
+    ADD CONSTRAINT caso_contexto_pkey PRIMARY KEY (id_caso, id_contexto);
+
+
+--
+-- Name: caso_etiqueta_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY caso_etiqueta
+    ADD CONSTRAINT caso_etiqueta_pkey PRIMARY KEY (id_caso, id_etiqueta, id_usuario, fecha);
+
+
+--
+-- Name: caso_ffrecuente_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY caso_ffrecuente
+    ADD CONSTRAINT caso_ffrecuente_pkey PRIMARY KEY (fecha, id_ffrecuente, id_caso);
+
+
+--
+-- Name: caso_fotra_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY caso_fotra
+    ADD CONSTRAINT caso_fotra_pkey PRIMARY KEY (id_caso, id_fotra, fecha);
+
+
+--
+-- Name: caso_frontera_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY caso_frontera
+    ADD CONSTRAINT caso_frontera_pkey PRIMARY KEY (id_frontera, id_caso);
+
+
+--
 -- Name: caso_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY caso
     ADD CONSTRAINT caso_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: caso_presponsable_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY caso_presponsable
+    ADD CONSTRAINT caso_presponsable_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: caso_region_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY caso_region
+    ADD CONSTRAINT caso_region_pkey PRIMARY KEY (id_region, id_caso);
+
+
+--
+-- Name: caso_usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY caso_usuario
+    ADD CONSTRAINT caso_usuario_pkey PRIMARY KEY (id_usuario, id_caso);
+
+
+--
+-- Name: casosjr_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY casosjr
+    ADD CONSTRAINT casosjr_pkey PRIMARY KEY (id_caso);
+
+
+--
+-- Name: categoria_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY categoria
+    ADD CONSTRAINT categoria_pkey PRIMARY KEY (id);
 
 
 --
@@ -3378,7 +2728,7 @@ ALTER TABLE ONLY causaref
 --
 
 ALTER TABLE ONLY clase
-    ADD CONSTRAINT clase_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT clase_pkey PRIMARY KEY (id, id_municipio, id_departamento);
 
 
 --
@@ -3387,6 +2737,54 @@ ALTER TABLE ONLY clase
 
 ALTER TABLE ONLY clasifdesp
     ADD CONSTRAINT clasifdesp_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comunidad_filiacion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY comunidad_filiacion
+    ADD CONSTRAINT comunidad_filiacion_pkey PRIMARY KEY (id_filiacion, id_grupoper, id_caso);
+
+
+--
+-- Name: comunidad_organizacion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY comunidad_organizacion
+    ADD CONSTRAINT comunidad_organizacion_pkey PRIMARY KEY (id_organizacion, id_grupoper, id_caso);
+
+
+--
+-- Name: comunidad_profesion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY comunidad_profesion
+    ADD CONSTRAINT comunidad_profesion_pkey PRIMARY KEY (id_profesion, id_grupoper, id_caso);
+
+
+--
+-- Name: comunidad_rangoedad_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY comunidad_rangoedad
+    ADD CONSTRAINT comunidad_rangoedad_pkey PRIMARY KEY (id_rangoedad, id_grupoper, id_caso);
+
+
+--
+-- Name: comunidad_sectorsocial_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY comunidad_sectorsocial
+    ADD CONSTRAINT comunidad_sectorsocial_pkey PRIMARY KEY (id_sectorsocial, id_grupoper, id_caso);
+
+
+--
+-- Name: comunidad_vinculoestado_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY comunidad_vinculoestado
+    ADD CONSTRAINT comunidad_vinculoestado_pkey PRIMARY KEY (id_vinculoestado, id_grupoper, id_caso);
 
 
 --
@@ -3422,11 +2820,19 @@ ALTER TABLE ONLY derecho
 
 
 --
--- Name: despacho_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: derecho_respuesta_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY despacho
-    ADD CONSTRAINT despacho_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY derecho_respuesta
+    ADD CONSTRAINT derecho_respuesta_pkey PRIMARY KEY (id_respuesta, id_derecho);
+
+
+--
+-- Name: desplazamiento_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_pkey PRIMARY KEY (id_caso, fechaexpulsion);
 
 
 --
@@ -3443,14 +2849,6 @@ ALTER TABLE ONLY escolaridad
 
 ALTER TABLE ONLY estadocivil
     ADD CONSTRAINT estadocivil_pkey PRIMARY KEY (id);
-
-
---
--- Name: etapa_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY etapa
-    ADD CONSTRAINT etapa_pkey PRIMARY KEY (id);
 
 
 --
@@ -3499,14 +2897,6 @@ ALTER TABLE ONLY fotra
 
 ALTER TABLE ONLY frontera
     ADD CONSTRAINT frontera_pkey PRIMARY KEY (id);
-
-
---
--- Name: funcionario_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY funcionario
-    ADD CONSTRAINT funcionario_pkey PRIMARY KEY (id);
 
 
 --
@@ -3590,11 +2980,19 @@ ALTER TABLE ONLY motivosjr
 
 
 --
+-- Name: motivosjr_respuesta_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY motivosjr_respuesta
+    ADD CONSTRAINT motivosjr_respuesta_pkey PRIMARY KEY (id_respuesta, id_motivosjr);
+
+
+--
 -- Name: municipio_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY municipio
-    ADD CONSTRAINT municipio_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT municipio_pkey PRIMARY KEY (id, id_departamento);
 
 
 --
@@ -3622,6 +3020,14 @@ ALTER TABLE ONLY persona
 
 
 --
+-- Name: persona_trelacion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY persona_trelacion
+    ADD CONSTRAINT persona_trelacion_pkey PRIMARY KEY (persona1, persona2, id_trelacion);
+
+
+--
 -- Name: personadesea_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3638,14 +3044,6 @@ ALTER TABLE ONLY presponsable
 
 
 --
--- Name: proceso_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY proceso
-    ADD CONSTRAINT proceso_pkey PRIMARY KEY (id);
-
-
---
 -- Name: profesion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3659,6 +3057,14 @@ ALTER TABLE ONLY profesion
 
 ALTER TABLE ONLY progestado
     ADD CONSTRAINT progestado_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: progestado_respuesta_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY progestado_respuesta
+    ADD CONSTRAINT progestado_respuesta_pkey PRIMARY KEY (id_respuesta, id_progestado);
 
 
 --
@@ -3702,6 +3108,14 @@ ALTER TABLE ONLY resagresion
 
 
 --
+-- Name: respuesta_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY respuesta
+    ADD CONSTRAINT respuesta_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: rolfamilia_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3718,11 +3132,19 @@ ALTER TABLE ONLY sectorsocial
 
 
 --
--- Name: taccion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: supracategoria_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY taccion
-    ADD CONSTRAINT taccion_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY supracategoria
+    ADD CONSTRAINT supracategoria_pkey PRIMARY KEY (id, id_tviolencia);
+
+
+--
+-- Name: tclase_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tclase
+    ADD CONSTRAINT tclase_pkey PRIMARY KEY (id);
 
 
 --
@@ -3734,11 +3156,11 @@ ALTER TABLE ONLY tipodesp
 
 
 --
--- Name: tproceso_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: trelacion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY tproceso
-    ADD CONSTRAINT tproceso_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY trelacion
+    ADD CONSTRAINT trelacion_pkey PRIMARY KEY (id);
 
 
 --
@@ -3750,11 +3172,59 @@ ALTER TABLE ONLY tsitio
 
 
 --
+-- Name: tviolencia_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY tviolencia
+    ADD CONSTRAINT tviolencia_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: ubicacion_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY ubicacion
     ADD CONSTRAINT ubicacion_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: usuario_nusuario_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY usuario
+    ADD CONSTRAINT usuario_nusuario_key UNIQUE (nusuario);
+
+
+--
+-- Name: usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY usuario
+    ADD CONSTRAINT usuario_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: victima_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_pkey PRIMARY KEY (id_persona, id_caso);
+
+
+--
+-- Name: victimacolectiva_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY victimacolectiva
+    ADD CONSTRAINT victimacolectiva_pkey PRIMARY KEY (id_grupoper, id_caso);
+
+
+--
+-- Name: victimasjr_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_pkey PRIMARY KEY (id_persona, id_caso);
 
 
 --
@@ -3766,10 +3236,17 @@ ALTER TABLE ONLY vinculoestado
 
 
 --
--- Name: funcionario_nombre_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: caso_memo; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX funcionario_nombre_key ON funcionario USING btree (nombre);
+CREATE INDEX caso_memo ON caso USING gin (to_tsvector('spanish'::regconfig, unaccent(memo)));
+
+
+--
+-- Name: caso_titulo; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX caso_titulo ON caso USING gin (to_tsvector('spanish'::regconfig, unaccent((titulo)::text)));
 
 
 --
@@ -3787,10 +3264,17 @@ CREATE INDEX index_actividad_rangoedad_on_rangoedad_id ON actividad_rangoedad US
 
 
 --
--- Name: index_usuario_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_caso_presponsable_on_caso_id_and_presponsable_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_usuario_on_email ON usuario USING btree (email);
+CREATE UNIQUE INDEX index_caso_presponsable_on_caso_id_and_presponsable_id ON caso_presponsable USING btree (id_caso, id_presponsable);
+
+
+--
+-- Name: index_caso_presponsable_on_presponsable_id_and_caso_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_caso_presponsable_on_presponsable_id_and_caso_id ON caso_presponsable USING btree (id_presponsable, id_caso);
 
 
 --
@@ -3801,10 +3285,422 @@ CREATE UNIQUE INDEX index_usuario_on_reset_password_token ON usuario USING btree
 
 
 --
+-- Name: persona_apellidos_nombres; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX persona_apellidos_nombres ON persona USING gin (to_tsvector('spanish'::regconfig, ((unaccent((apellidos)::text) || ' '::text) || unaccent((nombres)::text))));
+
+
+--
+-- Name: persona_apellidos_nombres_doc; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX persona_apellidos_nombres_doc ON persona USING gin (to_tsvector('spanish'::regconfig, ((((unaccent((apellidos)::text) || ' '::text) || unaccent((nombres)::text)) || ' '::text) || COALESCE((numerodocumento)::text, ''::text))));
+
+
+--
+-- Name: persona_nombres_apellidos; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX persona_nombres_apellidos ON persona USING gin (to_tsvector('spanish'::regconfig, ((unaccent((nombres)::text) || ' '::text) || unaccent((apellidos)::text))));
+
+
+--
+-- Name: persona_nombres_apellidos_doc; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX persona_nombres_apellidos_doc ON persona USING gin (to_tsvector('spanish'::regconfig, ((((unaccent((nombres)::text) || ' '::text) || unaccent((apellidos)::text)) || ' '::text) || COALESCE((numerodocumento)::text, ''::text))));
+
+
+--
 -- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: acto_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY acto
+    ADD CONSTRAINT acto_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: acto_id_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY acto
+    ADD CONSTRAINT acto_id_categoria_fkey FOREIGN KEY (id_categoria) REFERENCES categoria(id);
+
+
+--
+-- Name: acto_id_persona_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY acto
+    ADD CONSTRAINT acto_id_persona_fkey FOREIGN KEY (id_persona) REFERENCES persona(id);
+
+
+--
+-- Name: acto_id_presponsable_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY acto
+    ADD CONSTRAINT acto_id_presponsable_fkey FOREIGN KEY (id_presponsable) REFERENCES presponsable(id);
+
+
+--
+-- Name: actocolectivo_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY actocolectivo
+    ADD CONSTRAINT actocolectivo_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: actocolectivo_id_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY actocolectivo
+    ADD CONSTRAINT actocolectivo_id_categoria_fkey FOREIGN KEY (id_categoria) REFERENCES categoria(id);
+
+
+--
+-- Name: actocolectivo_id_grupoper_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY actocolectivo
+    ADD CONSTRAINT actocolectivo_id_grupoper_fkey FOREIGN KEY (id_grupoper) REFERENCES grupoper(id);
+
+
+--
+-- Name: actocolectivo_id_grupoper_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY actocolectivo
+    ADD CONSTRAINT actocolectivo_id_grupoper_fkey1 FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso);
+
+
+--
+-- Name: actocolectivo_id_presponsable_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY actocolectivo
+    ADD CONSTRAINT actocolectivo_id_presponsable_fkey FOREIGN KEY (id_presponsable) REFERENCES presponsable(id);
+
+
+--
+-- Name: actosjr_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY actosjr
+    ADD CONSTRAINT actosjr_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: actosjr_id_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY actosjr
+    ADD CONSTRAINT actosjr_id_categoria_fkey FOREIGN KEY (id_categoria) REFERENCES categoria(id);
+
+
+--
+-- Name: actosjr_id_persona_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY actosjr
+    ADD CONSTRAINT actosjr_id_persona_fkey FOREIGN KEY (id_persona) REFERENCES persona(id);
+
+
+--
+-- Name: actosjr_id_presponsable_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY actosjr
+    ADD CONSTRAINT actosjr_id_presponsable_fkey FOREIGN KEY (id_presponsable) REFERENCES presponsable(id);
+
+
+--
+-- Name: actosjr_id_presponsable_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY actosjr
+    ADD CONSTRAINT actosjr_id_presponsable_fkey1 FOREIGN KEY (id_presponsable, id_categoria, id_persona, id_caso) REFERENCES acto(id_presponsable, id_categoria, id_persona, id_caso);
+
+
+--
+-- Name: anexo_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY anexo
+    ADD CONSTRAINT anexo_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: anexo_id_ffrecuente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY anexo
+    ADD CONSTRAINT anexo_id_ffrecuente_fkey FOREIGN KEY (id_ffrecuente) REFERENCES ffrecuente(id);
+
+
+--
+-- Name: anexo_id_fotra_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY anexo
+    ADD CONSTRAINT anexo_id_fotra_fkey FOREIGN KEY (id_fotra) REFERENCES fotra(id);
+
+
+--
+-- Name: antecedente_caso_id_antecedente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY antecedente_caso
+    ADD CONSTRAINT antecedente_caso_id_antecedente_fkey FOREIGN KEY (id_antecedente) REFERENCES antecedente(id);
+
+
+--
+-- Name: antecedente_caso_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY antecedente_caso
+    ADD CONSTRAINT antecedente_caso_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: antecedente_comunidad_id_antecedente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY antecedente_comunidad
+    ADD CONSTRAINT antecedente_comunidad_id_antecedente_fkey FOREIGN KEY (id_antecedente) REFERENCES antecedente(id);
+
+
+--
+-- Name: antecedente_comunidad_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY antecedente_comunidad
+    ADD CONSTRAINT antecedente_comunidad_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: antecedente_comunidad_id_grupoper_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY antecedente_comunidad
+    ADD CONSTRAINT antecedente_comunidad_id_grupoper_fkey FOREIGN KEY (id_grupoper) REFERENCES grupoper(id);
+
+
+--
+-- Name: antecedente_comunidad_id_grupoper_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY antecedente_comunidad
+    ADD CONSTRAINT antecedente_comunidad_id_grupoper_fkey1 FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso);
+
+
+--
+-- Name: antecedente_victima_id_antecedente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY antecedente_victima
+    ADD CONSTRAINT antecedente_victima_id_antecedente_fkey FOREIGN KEY (id_antecedente) REFERENCES antecedente(id);
+
+
+--
+-- Name: antecedente_victima_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY antecedente_victima
+    ADD CONSTRAINT antecedente_victima_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: antecedente_victima_id_persona_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY antecedente_victima
+    ADD CONSTRAINT antecedente_victima_id_persona_fkey FOREIGN KEY (id_persona) REFERENCES persona(id);
+
+
+--
+-- Name: antecedente_victima_id_persona_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY antecedente_victima
+    ADD CONSTRAINT antecedente_victima_id_persona_fkey1 FOREIGN KEY (id_persona, id_caso) REFERENCES victima(id_persona, id_caso);
+
+
+--
+-- Name: ayudaestado_respuesta_id_ayudaestado_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ayudaestado_respuesta
+    ADD CONSTRAINT ayudaestado_respuesta_id_ayudaestado_fkey FOREIGN KEY (id_ayudaestado) REFERENCES ayudaestado(id);
+
+
+--
+-- Name: ayudaestado_respuesta_id_respuesta_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ayudaestado_respuesta
+    ADD CONSTRAINT ayudaestado_respuesta_id_respuesta_fkey FOREIGN KEY (id_respuesta) REFERENCES respuesta(id);
+
+
+--
+-- Name: ayudasjr_respuesta_id_ayudasjr_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ayudasjr_respuesta
+    ADD CONSTRAINT ayudasjr_respuesta_id_ayudasjr_fkey FOREIGN KEY (id_ayudasjr) REFERENCES ayudasjr(id);
+
+
+--
+-- Name: ayudasjr_respuesta_id_respuesta_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ayudasjr_respuesta
+    ADD CONSTRAINT ayudasjr_respuesta_id_respuesta_fkey FOREIGN KEY (id_respuesta) REFERENCES respuesta(id);
+
+
+--
+-- Name: caso_categoria_presponsable_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_categoria_presponsable
+    ADD CONSTRAINT caso_categoria_presponsable_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: caso_categoria_presponsable_id_caso_presponsable_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_categoria_presponsable
+    ADD CONSTRAINT caso_categoria_presponsable_id_caso_presponsable_fkey FOREIGN KEY (id_caso_presponsable) REFERENCES caso_presponsable(id);
+
+
+--
+-- Name: caso_categoria_presponsable_id_categoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_categoria_presponsable
+    ADD CONSTRAINT caso_categoria_presponsable_id_categoria_fkey FOREIGN KEY (id_categoria) REFERENCES categoria(id);
+
+
+--
+-- Name: caso_categoria_presponsable_id_presponsable_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_categoria_presponsable
+    ADD CONSTRAINT caso_categoria_presponsable_id_presponsable_fkey FOREIGN KEY (id_presponsable) REFERENCES presponsable(id);
+
+
+--
+-- Name: caso_categoria_presponsable_id_supracategoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_categoria_presponsable
+    ADD CONSTRAINT caso_categoria_presponsable_id_supracategoria_fkey FOREIGN KEY (id_supracategoria, id_tviolencia) REFERENCES supracategoria(id, id_tviolencia);
+
+
+--
+-- Name: caso_categoria_presponsable_id_tviolencia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_categoria_presponsable
+    ADD CONSTRAINT caso_categoria_presponsable_id_tviolencia_fkey FOREIGN KEY (id_tviolencia) REFERENCES tviolencia(id);
+
+
+--
+-- Name: caso_contexto_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_contexto
+    ADD CONSTRAINT caso_contexto_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: caso_contexto_id_contexto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_contexto
+    ADD CONSTRAINT caso_contexto_id_contexto_fkey FOREIGN KEY (id_contexto) REFERENCES contexto(id);
+
+
+--
+-- Name: caso_etiqueta_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_etiqueta
+    ADD CONSTRAINT caso_etiqueta_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: caso_etiqueta_id_etiqueta_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_etiqueta
+    ADD CONSTRAINT caso_etiqueta_id_etiqueta_fkey FOREIGN KEY (id_etiqueta) REFERENCES etiqueta(id);
+
+
+--
+-- Name: caso_etiqueta_id_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_etiqueta
+    ADD CONSTRAINT caso_etiqueta_id_usuario_fkey FOREIGN KEY (id_usuario) REFERENCES usuario(id);
+
+
+--
+-- Name: caso_ffrecuente_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_ffrecuente
+    ADD CONSTRAINT caso_ffrecuente_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: caso_ffrecuente_id_ffrecuente_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_ffrecuente
+    ADD CONSTRAINT caso_ffrecuente_id_ffrecuente_fkey FOREIGN KEY (id_ffrecuente) REFERENCES ffrecuente(id);
+
+
+--
+-- Name: caso_fotra_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_fotra
+    ADD CONSTRAINT caso_fotra_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: caso_fotra_id_fotra_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_fotra
+    ADD CONSTRAINT caso_fotra_id_fotra_fkey FOREIGN KEY (id_fotra) REFERENCES fotra(id);
+
+
+--
+-- Name: caso_frontera_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_frontera
+    ADD CONSTRAINT caso_frontera_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: caso_frontera_id_frontera_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_frontera
+    ADD CONSTRAINT caso_frontera_id_frontera_fkey FOREIGN KEY (id_frontera) REFERENCES frontera(id);
 
 
 --
@@ -3816,24 +3712,790 @@ ALTER TABLE ONLY caso
 
 
 --
+-- Name: caso_presponsable_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_presponsable
+    ADD CONSTRAINT caso_presponsable_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: caso_presponsable_id_presponsable_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_presponsable
+    ADD CONSTRAINT caso_presponsable_id_presponsable_fkey FOREIGN KEY (id_presponsable) REFERENCES presponsable(id);
+
+
+--
+-- Name: caso_region_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_region
+    ADD CONSTRAINT caso_region_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: caso_region_id_region_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_region
+    ADD CONSTRAINT caso_region_id_region_fkey FOREIGN KEY (id_region) REFERENCES region(id);
+
+
+--
+-- Name: caso_usuario_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_usuario
+    ADD CONSTRAINT caso_usuario_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: caso_usuario_id_usuario_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY caso_usuario
+    ADD CONSTRAINT caso_usuario_id_usuario_fkey FOREIGN KEY (id_usuario) REFERENCES usuario(id);
+
+
+--
+-- Name: casosjr_asesor_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY casosjr
+    ADD CONSTRAINT casosjr_asesor_fkey FOREIGN KEY (asesor) REFERENCES usuario(id);
+
+
+--
+-- Name: casosjr_contacto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY casosjr
+    ADD CONSTRAINT casosjr_contacto_fkey FOREIGN KEY (contacto) REFERENCES persona(id);
+
+
+--
+-- Name: casosjr_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY casosjr
+    ADD CONSTRAINT casosjr_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: casosjr_id_regionsjr_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY casosjr
+    ADD CONSTRAINT casosjr_id_regionsjr_fkey FOREIGN KEY (id_regionsjr) REFERENCES regionsjr(id);
+
+
+--
+-- Name: categoria_contadaen_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY categoria
+    ADD CONSTRAINT categoria_contadaen_fkey FOREIGN KEY (contadaen) REFERENCES categoria(id);
+
+
+--
+-- Name: categoria_id_pconsolidado_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY categoria
+    ADD CONSTRAINT categoria_id_pconsolidado_fkey FOREIGN KEY (id_pconsolidado) REFERENCES pconsolidado(id);
+
+
+--
+-- Name: categoria_id_supracategoria_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY categoria
+    ADD CONSTRAINT categoria_id_supracategoria_fkey FOREIGN KEY (id_supracategoria, id_tviolencia) REFERENCES supracategoria(id, id_tviolencia);
+
+
+--
+-- Name: categoria_id_tviolencia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY categoria
+    ADD CONSTRAINT categoria_id_tviolencia_fkey FOREIGN KEY (id_tviolencia) REFERENCES tviolencia(id);
+
+
+--
+-- Name: clase_id_departamento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY clase
+    ADD CONSTRAINT clase_id_departamento_fkey FOREIGN KEY (id_departamento) REFERENCES departamento(id) ON DELETE CASCADE;
+
+
+--
+-- Name: clase_id_municipio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY clase
+    ADD CONSTRAINT clase_id_municipio_fkey FOREIGN KEY (id_municipio, id_departamento) REFERENCES municipio(id, id_departamento) ON DELETE CASCADE;
+
+
+--
+-- Name: clase_id_tclase_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY clase
+    ADD CONSTRAINT clase_id_tclase_fkey FOREIGN KEY (id_tclase) REFERENCES tclase(id);
+
+
+--
+-- Name: comunidad_filiacion_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_filiacion
+    ADD CONSTRAINT comunidad_filiacion_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: comunidad_filiacion_id_filiacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_filiacion
+    ADD CONSTRAINT comunidad_filiacion_id_filiacion_fkey FOREIGN KEY (id_filiacion) REFERENCES filiacion(id);
+
+
+--
+-- Name: comunidad_filiacion_id_grupoper_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_filiacion
+    ADD CONSTRAINT comunidad_filiacion_id_grupoper_fkey FOREIGN KEY (id_grupoper) REFERENCES grupoper(id);
+
+
+--
+-- Name: comunidad_filiacion_id_grupoper_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_filiacion
+    ADD CONSTRAINT comunidad_filiacion_id_grupoper_fkey1 FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso);
+
+
+--
+-- Name: comunidad_organizacion_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_organizacion
+    ADD CONSTRAINT comunidad_organizacion_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: comunidad_organizacion_id_grupoper_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_organizacion
+    ADD CONSTRAINT comunidad_organizacion_id_grupoper_fkey FOREIGN KEY (id_grupoper) REFERENCES grupoper(id);
+
+
+--
+-- Name: comunidad_organizacion_id_grupoper_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_organizacion
+    ADD CONSTRAINT comunidad_organizacion_id_grupoper_fkey1 FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso);
+
+
+--
+-- Name: comunidad_organizacion_id_organizacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_organizacion
+    ADD CONSTRAINT comunidad_organizacion_id_organizacion_fkey FOREIGN KEY (id_organizacion) REFERENCES organizacion(id);
+
+
+--
+-- Name: comunidad_profesion_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_profesion
+    ADD CONSTRAINT comunidad_profesion_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: comunidad_profesion_id_grupoper_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_profesion
+    ADD CONSTRAINT comunidad_profesion_id_grupoper_fkey FOREIGN KEY (id_grupoper) REFERENCES grupoper(id);
+
+
+--
+-- Name: comunidad_profesion_id_grupoper_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_profesion
+    ADD CONSTRAINT comunidad_profesion_id_grupoper_fkey1 FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso);
+
+
+--
+-- Name: comunidad_profesion_id_profesion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_profesion
+    ADD CONSTRAINT comunidad_profesion_id_profesion_fkey FOREIGN KEY (id_profesion) REFERENCES profesion(id);
+
+
+--
+-- Name: comunidad_rangoedad_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_rangoedad
+    ADD CONSTRAINT comunidad_rangoedad_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: comunidad_rangoedad_id_grupoper_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_rangoedad
+    ADD CONSTRAINT comunidad_rangoedad_id_grupoper_fkey FOREIGN KEY (id_grupoper) REFERENCES grupoper(id);
+
+
+--
+-- Name: comunidad_rangoedad_id_grupoper_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_rangoedad
+    ADD CONSTRAINT comunidad_rangoedad_id_grupoper_fkey1 FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso);
+
+
+--
+-- Name: comunidad_rangoedad_id_rangoedad_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_rangoedad
+    ADD CONSTRAINT comunidad_rangoedad_id_rangoedad_fkey FOREIGN KEY (id_rangoedad) REFERENCES rangoedad(id);
+
+
+--
+-- Name: comunidad_sectorsocial_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_sectorsocial
+    ADD CONSTRAINT comunidad_sectorsocial_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: comunidad_sectorsocial_id_grupoper_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_sectorsocial
+    ADD CONSTRAINT comunidad_sectorsocial_id_grupoper_fkey FOREIGN KEY (id_grupoper) REFERENCES grupoper(id);
+
+
+--
+-- Name: comunidad_sectorsocial_id_grupoper_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_sectorsocial
+    ADD CONSTRAINT comunidad_sectorsocial_id_grupoper_fkey1 FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso);
+
+
+--
+-- Name: comunidad_sectorsocial_id_sectorsocial_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_sectorsocial
+    ADD CONSTRAINT comunidad_sectorsocial_id_sectorsocial_fkey FOREIGN KEY (id_sectorsocial) REFERENCES sectorsocial(id);
+
+
+--
+-- Name: comunidad_vinculoestado_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_vinculoestado
+    ADD CONSTRAINT comunidad_vinculoestado_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: comunidad_vinculoestado_id_grupoper_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_vinculoestado
+    ADD CONSTRAINT comunidad_vinculoestado_id_grupoper_fkey FOREIGN KEY (id_grupoper) REFERENCES grupoper(id);
+
+
+--
+-- Name: comunidad_vinculoestado_id_grupoper_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_vinculoestado
+    ADD CONSTRAINT comunidad_vinculoestado_id_grupoper_fkey1 FOREIGN KEY (id_grupoper, id_caso) REFERENCES victimacolectiva(id_grupoper, id_caso);
+
+
+--
+-- Name: comunidad_vinculoestado_id_vinculoestado_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY comunidad_vinculoestado
+    ADD CONSTRAINT comunidad_vinculoestado_id_vinculoestado_fkey FOREIGN KEY (id_vinculoestado) REFERENCES vinculoestado(id);
+
+
+--
+-- Name: derecho_respuesta_id_derecho_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY derecho_respuesta
+    ADD CONSTRAINT derecho_respuesta_id_derecho_fkey FOREIGN KEY (id_derecho) REFERENCES derecho(id);
+
+
+--
+-- Name: derecho_respuesta_id_respuesta_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY derecho_respuesta
+    ADD CONSTRAINT derecho_respuesta_id_respuesta_fkey FOREIGN KEY (id_respuesta) REFERENCES respuesta(id);
+
+
+--
+-- Name: desplazamiento_departamentodecl_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_departamentodecl_fkey FOREIGN KEY (departamentodecl) REFERENCES departamento(id);
+
+
+--
+-- Name: desplazamiento_id_acreditacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_id_acreditacion_fkey FOREIGN KEY (id_acreditacion) REFERENCES acreditacion(id);
+
+
+--
+-- Name: desplazamiento_id_clasifdesp_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_id_clasifdesp_fkey FOREIGN KEY (id_clasifdesp) REFERENCES clasifdesp(id);
+
+
+--
+-- Name: desplazamiento_id_declaroante_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_id_declaroante_fkey FOREIGN KEY (id_declaroante) REFERENCES declaroante(id);
+
+
+--
+-- Name: desplazamiento_id_expulsion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_id_expulsion_fkey FOREIGN KEY (id_expulsion) REFERENCES ubicacion(id);
+
+
+--
+-- Name: desplazamiento_id_inclusion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_id_inclusion_fkey FOREIGN KEY (id_inclusion) REFERENCES inclusion(id);
+
+
+--
+-- Name: desplazamiento_id_llegada_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_id_llegada_fkey FOREIGN KEY (id_llegada) REFERENCES ubicacion(id);
+
+
+--
+-- Name: desplazamiento_id_modalidadtierra_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_id_modalidadtierra_fkey FOREIGN KEY (id_modalidadtierra) REFERENCES modalidadtierra(id);
+
+
+--
+-- Name: desplazamiento_id_tipodesp_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_id_tipodesp_fkey FOREIGN KEY (id_tipodesp) REFERENCES tipodesp(id);
+
+
+--
+-- Name: desplazamiento_municipiodecl_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY desplazamiento
+    ADD CONSTRAINT desplazamiento_municipiodecl_fkey FOREIGN KEY (municipiodecl, departamentodecl) REFERENCES municipio(id, id_departamento);
+
+
+--
+-- Name: motivosjr_respuesta_id_motivosjr_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY motivosjr_respuesta
+    ADD CONSTRAINT motivosjr_respuesta_id_motivosjr_fkey FOREIGN KEY (id_motivosjr) REFERENCES motivosjr(id);
+
+
+--
+-- Name: motivosjr_respuesta_id_respuesta_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY motivosjr_respuesta
+    ADD CONSTRAINT motivosjr_respuesta_id_respuesta_fkey FOREIGN KEY (id_respuesta) REFERENCES respuesta(id);
+
+
+--
+-- Name: municipio_id_departamento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY municipio
+    ADD CONSTRAINT municipio_id_departamento_fkey FOREIGN KEY (id_departamento) REFERENCES departamento(id) ON DELETE CASCADE;
+
+
+--
+-- Name: persona_id_departamento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY persona
+    ADD CONSTRAINT persona_id_departamento_fkey FOREIGN KEY (id_departamento) REFERENCES departamento(id) ON DELETE CASCADE;
+
+
+--
+-- Name: persona_trelacion_id_trelacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY persona_trelacion
+    ADD CONSTRAINT persona_trelacion_id_trelacion_fkey FOREIGN KEY (id_trelacion) REFERENCES trelacion(id);
+
+
+--
+-- Name: persona_trelacion_persona1_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY persona_trelacion
+    ADD CONSTRAINT persona_trelacion_persona1_fkey FOREIGN KEY (persona1) REFERENCES persona(id);
+
+
+--
+-- Name: persona_trelacion_persona2_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY persona_trelacion
+    ADD CONSTRAINT persona_trelacion_persona2_fkey FOREIGN KEY (persona2) REFERENCES persona(id);
+
+
+--
+-- Name: presponsable_papa_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY presponsable
+    ADD CONSTRAINT presponsable_papa_fkey FOREIGN KEY (papa) REFERENCES presponsable(id);
+
+
+--
+-- Name: progestado_respuesta_id_progestado_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY progestado_respuesta
+    ADD CONSTRAINT progestado_respuesta_id_progestado_fkey FOREIGN KEY (id_progestado) REFERENCES progestado(id);
+
+
+--
+-- Name: progestado_respuesta_id_respuesta_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY progestado_respuesta
+    ADD CONSTRAINT progestado_respuesta_id_respuesta_fkey FOREIGN KEY (id_respuesta) REFERENCES respuesta(id);
+
+
+--
+-- Name: respuesta_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY respuesta
+    ADD CONSTRAINT respuesta_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES casosjr(id_caso);
+
+
+--
+-- Name: respuesta_id_causaref_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY respuesta
+    ADD CONSTRAINT respuesta_id_causaref_fkey FOREIGN KEY (id_causaref) REFERENCES causaref(id);
+
+
+--
+-- Name: respuesta_id_personadesea_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY respuesta
+    ADD CONSTRAINT respuesta_id_personadesea_fkey FOREIGN KEY (id_personadesea) REFERENCES personadesea(id);
+
+
+--
+-- Name: supracategoria_id_tviolencia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY supracategoria
+    ADD CONSTRAINT supracategoria_id_tviolencia_fkey FOREIGN KEY (id_tviolencia) REFERENCES tviolencia(id);
+
+
+--
+-- Name: ubicacion_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ubicacion
+    ADD CONSTRAINT ubicacion_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: ubicacion_id_clase_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ubicacion
+    ADD CONSTRAINT ubicacion_id_clase_fkey FOREIGN KEY (id_clase, id_municipio, id_departamento) REFERENCES clase(id, id_municipio, id_departamento);
+
+
+--
+-- Name: ubicacion_id_departamento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ubicacion
+    ADD CONSTRAINT ubicacion_id_departamento_fkey FOREIGN KEY (id_departamento) REFERENCES departamento(id);
+
+
+--
+-- Name: ubicacion_id_municipio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ubicacion
+    ADD CONSTRAINT ubicacion_id_municipio_fkey FOREIGN KEY (id_municipio, id_departamento) REFERENCES municipio(id, id_departamento);
+
+
+--
+-- Name: ubicacion_id_tsitio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ubicacion
+    ADD CONSTRAINT ubicacion_id_tsitio_fkey FOREIGN KEY (id_tsitio) REFERENCES tsitio(id);
+
+
+--
+-- Name: victima_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: victima_id_etnia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_id_etnia_fkey FOREIGN KEY (id_etnia) REFERENCES etnia(id);
+
+
+--
+-- Name: victima_id_filiacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_id_filiacion_fkey FOREIGN KEY (id_filiacion) REFERENCES filiacion(id);
+
+
+--
+-- Name: victima_id_iglesia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_id_iglesia_fkey FOREIGN KEY (id_iglesia) REFERENCES iglesia(id);
+
+
+--
+-- Name: victima_id_organizacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_id_organizacion_fkey FOREIGN KEY (id_organizacion) REFERENCES organizacion(id);
+
+
+--
+-- Name: victima_id_persona_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_id_persona_fkey FOREIGN KEY (id_persona) REFERENCES persona(id);
+
+
+--
+-- Name: victima_id_profesion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_id_profesion_fkey FOREIGN KEY (id_profesion) REFERENCES profesion(id);
+
+
+--
+-- Name: victima_id_rangoedad_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_id_rangoedad_fkey FOREIGN KEY (id_rangoedad) REFERENCES rangoedad(id);
+
+
+--
+-- Name: victima_id_sectorsocial_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_id_sectorsocial_fkey FOREIGN KEY (id_sectorsocial) REFERENCES sectorsocial(id);
+
+
+--
+-- Name: victima_id_vinculoestado_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_id_vinculoestado_fkey FOREIGN KEY (id_vinculoestado) REFERENCES vinculoestado(id);
+
+
+--
+-- Name: victima_organizacionarmada_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_organizacionarmada_fkey FOREIGN KEY (organizacionarmada) REFERENCES presponsable(id);
+
+
+--
+-- Name: victimacolectiva_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimacolectiva
+    ADD CONSTRAINT victimacolectiva_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: victimacolectiva_id_grupoper_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimacolectiva
+    ADD CONSTRAINT victimacolectiva_id_grupoper_fkey FOREIGN KEY (id_grupoper) REFERENCES grupoper(id);
+
+
+--
+-- Name: victimacolectiva_organizacionarmada_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimacolectiva
+    ADD CONSTRAINT victimacolectiva_organizacionarmada_fkey FOREIGN KEY (organizacionarmada) REFERENCES presponsable(id);
+
+
+--
+-- Name: victimasjr_id_actividadoficio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_actividadoficio_fkey FOREIGN KEY (id_actividadoficio) REFERENCES actividadoficio(id);
+
+
+--
+-- Name: victimasjr_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_caso_fkey FOREIGN KEY (id_caso) REFERENCES caso(id);
+
+
+--
+-- Name: victimasjr_id_departamento_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_departamento_fkey FOREIGN KEY (id_departamento) REFERENCES departamento(id);
+
+
+--
+-- Name: victimasjr_id_escolaridad_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_escolaridad_fkey FOREIGN KEY (id_escolaridad) REFERENCES escolaridad(id);
+
+
+--
+-- Name: victimasjr_id_estadocivil_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_estadocivil_fkey FOREIGN KEY (id_estadocivil) REFERENCES estadocivil(id);
+
+
+--
+-- Name: victimasjr_id_maternidad_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_maternidad_fkey FOREIGN KEY (id_maternidad) REFERENCES maternidad(id);
+
+
+--
+-- Name: victimasjr_id_municipio_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_municipio_fkey FOREIGN KEY (id_municipio, id_departamento) REFERENCES municipio(id, id_departamento);
+
+
+--
+-- Name: victimasjr_id_persona_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_persona_fkey FOREIGN KEY (id_persona) REFERENCES persona(id);
+
+
+--
+-- Name: victimasjr_id_persona_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_persona_fkey1 FOREIGN KEY (id_persona, id_caso) REFERENCES victima(id_persona, id_caso);
+
+
+--
+-- Name: victimasjr_id_regimensalud_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_regimensalud_fkey FOREIGN KEY (id_regimensalud) REFERENCES regimensalud(id);
+
+
+--
+-- Name: victimasjr_id_rolfamilia_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_rolfamilia_fkey FOREIGN KEY (id_rolfamilia) REFERENCES rolfamilia(id);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
 SET search_path TO "$user",public;
 
-INSERT INTO schema_migrations (version) VALUES ('20131127210259');
-
 INSERT INTO schema_migrations (version) VALUES ('20131128151014');
 
-INSERT INTO schema_migrations (version) VALUES ('20131204115142');
-
-INSERT INTO schema_migrations (version) VALUES ('20131204124732');
-
-INSERT INTO schema_migrations (version) VALUES ('20131204133447');
-
 INSERT INTO schema_migrations (version) VALUES ('20131204135932');
-
-INSERT INTO schema_migrations (version) VALUES ('20131204143104');
 
 INSERT INTO schema_migrations (version) VALUES ('20131204143718');
 
@@ -3852,4 +4514,6 @@ INSERT INTO schema_migrations (version) VALUES ('20131223175141');
 INSERT INTO schema_migrations (version) VALUES ('20140117212555');
 
 INSERT INTO schema_migrations (version) VALUES ('20140129151136');
+
+INSERT INTO schema_migrations (version) VALUES ('20140207102709');
 
