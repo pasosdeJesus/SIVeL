@@ -1,4 +1,7 @@
 Sivel2::Application.routes.draw do
+  get 'casos/nuevo' => 'casos#new'
+  get 'casos/nuevopresponsable' => 'casos#nuevopresponsable'
+
   resources :casos
 
   resources :actividades
@@ -7,6 +10,7 @@ Sivel2::Application.routes.draw do
   devise_scope :usuario do
     get 'sign_out' => 'devise/sessions#destroy'
   end
+
 
   devise_for :usuarios
   resources :usuarios 
