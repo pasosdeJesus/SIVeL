@@ -34,7 +34,7 @@ con Ruby on Rails.
 ### Configuración de servidor de desarrollo:
 * Ubique fuentes por ejemplo en /var/www/htdocs/sivel2/
 * Instale gemas requeridas (como Rails 4.1) con:
-	```bash
+        ```bash
   sudo bundle install
   bundle install
   ```
