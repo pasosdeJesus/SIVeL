@@ -37,7 +37,7 @@ con Ruby on Rails.
   ```bash
   sudo bundle install
   bundle install
-```
+  ```
 * Copie y modifique las plantillas:
   ```sh
   cp config/secrets.yml.plantilla config/secrets.yml
