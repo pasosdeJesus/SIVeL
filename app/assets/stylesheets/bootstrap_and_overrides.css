@@ -5,3 +5,17 @@
   To use Glyphicons sprites instead of Font Awesome, replace with "require twitter-bootstrap-static/sprites"
   =require twitter-bootstrap-static/fontawesome
   */
+.form-horizontal .control-label {
+	padding-right: 20px;
+}
+
+.input {
+	padding: 2px;
+	border: 1px solid #ffffff;
+}
+
+.accordion-group {
+	border: 2px solid #e5e5e5;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
