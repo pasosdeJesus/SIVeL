@@ -91,11 +91,13 @@ class CasosController < ApplicationController
             acto.save
           }
         end
-        params[:caso][:caso_etiqueta_attributes].each {|k,v|
-          if (v[:id_usuario].nil? || v[:id_usuario] == "") 
-            v[:id_usuario] = current_usuario.id
-          end
-        }
+        if (!params[:caso][:caso_etiqueta_attributes].nil?)
+          params[:caso][:caso_etiqueta_attributes].each {|k,v|
+            if (v[:id_usuario].nil? || v[:id_usuario] == "") 
+              v[:id_usuario] = current_usuario.id
+            end
+          }
+        end
         if @caso.update(caso_params)
           format.html { redirect_to @caso, notice: 'Caso actualizado.' }
           format.json { head :no_content }
