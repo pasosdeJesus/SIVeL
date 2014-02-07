@@ -11,6 +11,7 @@ class Casosjr < ActiveRecord::Base
 	belongs_to :usuario, foreign_key: "asesor", validate: true
 
 	validates_presence_of :fecharec
+	validates_presence_of :asesor
 
 	self.primary_key = :id_caso
 end

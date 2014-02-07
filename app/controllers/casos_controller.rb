@@ -16,7 +16,30 @@ class CasosController < ApplicationController
   # GET /casos/new
   def new
     @caso = Caso.new
+    @caso.fecha = DateTime.now.strftime('%Y-%m-%d')
+    @caso.memo = ''
     @caso.casosjr = Casosjr.new
+    @caso.casosjr.fecharec = DateTime.now.strftime('%Y-%m-%d')
+    @caso.casosjr.asesor = current_usuario.id
+    @caso.save
+    render action: 'edit'
+  end
+
+  def nuevopresponsable
+    @presponsable = CasoPresponsable.new
+    if !params[:caso_id].nil?
+      @presponsable.id_caso = params[:caso_id]
+      @presponsable.id_presponsable = 35
+      if @presponsable.save
+        respond_to do |format|
+          format.js { render text: @presponsable.id.to_s }
+        end
+        return
+      end
+    end
+    respond_to do |format|
+      format.html { render inline: 'No' }
+    end
   end
 
   # GET /casos/1/edit
@@ -37,6 +60,20 @@ class CasosController < ApplicationController
       else
         format.html { render action: 'new' }
         format.json { render json: @caso.errors, status: :unprocessable_entity }
+      #  format.js { render inline: "
+#    <div id='errores'>
+#      <div class=\"alert alert-error\">
+#        Hay <%= pluralize(@caso.errors.count, \"error\") %>.
+#      </div>
+#      <ul>
+#        <% @caso.errors.full_messages.each do |msg| %>
+#          <li>* <%= msg %></li>
+#        <% end %>
+#      </ul>
+#    </div>
+#          "
+#        }
+#        format.js { render action: 'new' }
       end
     end
   end
@@ -91,17 +128,21 @@ class CasosController < ApplicationController
             acto.save
           }
         end
-        params[:caso][:caso_etiqueta_attributes].each {|k,v|
-          if (v[:id_usuario].nil? || v[:id_usuario] == "") 
-            v[:id_usuario] = current_usuario.id
-          end
-        }
+        if (!params[:caso][:caso_etiqueta_attributes].nil?)
+          params[:caso][:caso_etiqueta_attributes].each {|k,v|
+            if (v[:id_usuario].nil? || v[:id_usuario] == "") 
+              v[:id_usuario] = current_usuario.id
+            end
+          }
+        end
         if @caso.update(caso_params)
           format.html { redirect_to @caso, notice: 'Caso actualizado.' }
           format.json { head :no_content }
+          format.js   { redirect_to @caso, notice: 'Caso actualizado.' }
         else
           format.html { render action: 'edit' }
           format.json { render json: @caso.errors, status: :unprocessable_entity }
+          format.js   { render action: 'edit' }
         end
       end
     end
