@@ -18,8 +18,10 @@
             </div>
             <div id="basicos" class="accordion-body collapse in">
               <div class="accordion-inner">
-                  <%= f.input :id, label: "Código", readonly: true%>
-                  <%= s.input :fecharec, 
+
+                <%= f.input :id, label: "Código", readonly: true%>
+
+                <%= s.input :fecharec, 
                   :input_html => { "data-behaviour" => "datepicker" },
                   :as => :string, :label => "Fecha de Recepción" %>
                 <%= s.association :usuario,
@@ -30,13 +32,14 @@
                   label: "Oficina",
                   label_method: :nombre, 
                   value_method: :id %>
-                <%= f.input :fecha, :input_html => { "data-behaviour" => "datepicker" },
-                          :as => :string, :label => "Fecha del Hecho" %>
+                <%= f.input :fecha, :input_html => { 
+                    "data-behaviour" => "datepicker" },
+                    :as => :string, :label => "Fecha del Hecho" %>
                 <%= f.input :memo, label: 'Descripción' %>
               </div>
             </div> 
           </div> <! -- accordion-group -->
-  
+
           <div class="accordion-group">
             <div class="accordion-heading">
               <a class="accordion-toggle" data-toggle="collapse" href="#contacto">
@@ -66,14 +69,16 @@
 
         <% end %>
 
-        <div class="accordion-group">
+          <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" href="#victima">Núcleo Familiar</a>
           </div>
           <div id="victima" class="accordion-body collapse">
             <div class="accordion-inner">
               <%= f.simple_fields_for :victima do |victima| %>
-                <%= render 'victima_fields', :f => victima %>
+                <% if !victima.object.persona.nil?  && victima.object.persona.id != @caso.casosjr.contacto.id %>
+                  <%= render 'victima_fields', :f => victima %>
+                <% end %>
               <% end %>
               <div class="links">
                 <%= link_to_add_association 'Añadir Víctima', f, :victima, :class => 'btn-primary' %>

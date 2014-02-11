@@ -1,13 +1,5 @@
-<% if !f.object.persona.nil?  && f.object.persona.id != @caso.casosjr.contacto.id then %>
   <div class='control-group nested-fields'>
     <div class="controls">
-    <!-- %= f.simple_fields_for :persona do |persona| % 
-      %= render 'persona_fields', :f => persona %
-    % end %
-      div class="links"
-      %= link_to_add_association 'Añadir Persona', f, :persona, :class => 'btn-primary' %
-      /div-->
-       
       <%= if f.object.persona.nil?
             f.object.persona = Persona.new
             nil
@@ -37,4 +29,3 @@
       <%= link_to_remove_association "Eliminar Víctima", f, :class => 'btn-danger' %> 
     </div>
   </div>
-<% end %>
