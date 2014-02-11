@@ -21,6 +21,13 @@
 
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
+/* Autenticamos si la consulta pública está deshabilitada */
+if (isset($GLOBALS['consulta_publica_deshabilitada']) 
+    && $GLOBALS['consulta_publica_deshabilitada']
+) {
+        autentica_usuario($dsn, $aut_usuario, 0);
+}
+
 require_once 'HTML/QuickForm/Controller.php';
 
 require_once 'HTML/QuickForm/Action/Display.php';
@@ -957,7 +964,6 @@ function runController()
         session_start();
     }
 
-    /* No autenticamos porque pueden usarlo usuarios no autenticados */
     $nv = "_auth_" . $snru;
     $opciones = array();
     if (isset($_SESSION[$nv]['username'])) {
@@ -967,8 +973,7 @@ function runController()
         saca_opciones($_SESSION[$nv]['username'], $db, $opciones, $rol);
         //idioma('es_CO');
         include_once $_SESSION['dirsitio'] . "/conf_int.php";
-    }
-
+    } 
     $wizard = new HTML_QuickForm_Controller('Consulta', false);
     $consweb = new ConsultaWeb($opciones);
 

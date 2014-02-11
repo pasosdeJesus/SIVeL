@@ -49,7 +49,7 @@ $requestUrl .= (!empty($filtro['prresp'])) ?
     "&presponsable=" . $filtro['prresp'] : "";
 $requestUrl .= (!empty($filtro['tvio'])) ? 
     "&tipo_violencia=" . $filtro['tvio'] : "";
-//trigger_error($requestUrl);
+trigger_error("requestUrl=$requestUrl");
 if (($ca = file_get_contents($requestUrl)) === false) {
     die('No pudo leerse URL: \'' . $requestUrl . '\'');
 }
