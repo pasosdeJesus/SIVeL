@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/vtamara/cocoon.git
-  revision: 8db326d5afc2da7992179401213f89a004a5dbe3
+  revision: a359a398f0a11c34f2bb5cdd5942a2718d24f16d
   specs:
     cocoon (1.2.5)
 
