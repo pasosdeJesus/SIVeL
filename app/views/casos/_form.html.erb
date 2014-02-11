@@ -3,46 +3,72 @@
 <%- else  %>
   <article>
   <%= simple_form_for @caso, :html => { :class => 'form-horizontal' } do |f| %>
-    <%= f.input :id, as: :hidden %>
     <div data-role="content" class="form-inputs">
       <div id="errores">
         <%= f.error_notification %>
       </div>
       <div class="accordion" id="accordion2">
 
-        <div class="accordion-group">
-          <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" href="#basicos">
-              Datos Básicos
-            </a>
-          </div>
-          <div id="basicos" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <%= f.simple_fields_for :casosjr do |s| %>
-                <%= s.input :fecharec, 
+        <%= f.simple_fields_for :casosjr do |s| %>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" href="#basicos">
+                Datos Básicos
+              </a>
+            </div>
+            <div id="basicos" class="accordion-body collapse in">
+              <div class="accordion-inner">
+                  <%= f.input :id, label: "Código", readonly: true%>
+                  <%= s.input :fecharec, 
                   :input_html => { "data-behaviour" => "datepicker" },
                   :as => :string, :label => "Fecha de Recepción" %>
                 <%= s.association :usuario,
-                  label: "Asesor",
+                  label: "Asesor SJR",
                   label_method: :nusuario, 
                   value_method: :id %>
                 <%= s.association :regionsjr,
                   label: "Oficina",
                   label_method: :nombre, 
                   value_method: :id %>
-                <%= s.input :direccion%>
-                <%= s.input :telefono%>
-                <%= s.input :comosupo, :label => "Como supo" %>
-              <% end %>
-              <%= f.input :fecha, :input_html => { "data-behaviour" => "datepicker" },
-                        :as => :string, :label => "Fecha del Desplazamiento" %>
+                <%= f.input :fecha, :input_html => { "data-behaviour" => "datepicker" },
+                          :as => :string, :label => "Fecha del Hecho" %>
+                <%= f.input :memo, label: 'Descripción' %>
+              </div>
+            </div> 
+          </div> <! -- accordion-group -->
+  
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" href="#contacto">
+                Solicitante Principal
+              </a>
             </div>
-          </div> 
-        </div> <! -- accordion-group -->
+            <div id="contacto" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <%= f.simple_fields_for :victima do |victima| %>
+                  <%= s.input :direccion%>
+                  <%= s.input :telefono%>
+                  <%= s.input :comosupo, :label => "Como supo" %>
+                  <%= render 'contacto_fields', :f => victima  %>
+                  <div class="input string optional"><label class="string optional control-label" for="x1">Dependen econ.</label><input class="string optional" id="x1" name="x1" type="text"></div>
+                  <div class="input string optional"><label class="string optional control-label" for="x2">Sustento familiar</label><input class="string optional" id="x2" name="x2" type="text"></div>
+                  <div class="input string optional"><label class="string optional control-label" for="x3">Sabe leer y escribir</label><input class="string optional" id="x3" name="x3" type="text"></div>
+                  <div class="input string optional"><label class="string optional control-label" for="x4">Trajaba actualmente</label><input class="string optional" id="x4" name="x4" type="text"></div>
+                  <div class="input string optional"><label class="string optional control-label" for="x5">Ingreso mensual</label><input class="string optional" id="x5" name="x5" type="text"></div>
+                  <div class="input string optional"><label class="string optional control-label" for="x6">Estimado de gastos</label><input class="string optional" id="x6" name="x6" type="text"></div>
+                  <div class="input string optional"><label class="string optional control-label" for="x7">Estrato</label><input class="string optional" id="x7" name="x7" type="text"></div>
+                  <div class="input string optional"><label class="string optional control-label" for="x8">Status migratorio</label><input class="string optional" id="x8" name="x8" type="text"></div>
+                  <div class="input string optional"><label class="string optional control-label" for="x9">Personas con necesidad de protección internacional</label><input class="string optional" id="x9" name="x9" type="text"></div>
+                <% end %>
+              </div>
+            </div>
+          </div> <! -- accordion-group -->
+
+        <% end %>
 
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" href="#victima">Víctimas Individuales</a>
+            <a class="accordion-toggle" data-toggle="collapse" href="#victima">Núcleo Familiar</a>
           </div>
           <div id="victima" class="accordion-body collapse">
             <div class="accordion-inner">
@@ -58,28 +84,8 @@
 
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" href="#contacto">
-              Contacto
-            </a>
-          </div>
-          <div id="contacto" class="accordion-body collapse">
-            <div class="accordion-inner">
-              <%= f.simple_fields_for :casosjr do |s| %>
-                <%= s.association :persona,
-                  collection: Persona.from('victima, persona').where('victima.id_persona=persona.id AND victima.id_caso=?', @caso.id),
-                  selected: :id,
-                  label: "Contacto",
-                  label_method: lambda {|t| t.nombres + ' ' + t.apellidos},
-                  value_method: :id %>
-              <% end %>
-            </div>
-          </div>
-        </div> <! -- accordion-group -->
-
-        <div class="accordion-group">
-          <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" href="#ubicacion">
-              Ubicación
+              Sitios geográficos de refugios y desplazamientos
             </a>
           </div>
           <div id="ubicacion" class="accordion-body collapse">
@@ -88,7 +94,7 @@
                 <%= render 'ubicacion_fields', :f => ubicacion %>
               <% end %>
               <div class="links">
-                <%= link_to_add_association 'Añadir Ubicación', f, :ubicacion, :class => 'btn-primary' %>
+                <%= link_to_add_association 'Añadir Sitio geográfico', f, :ubicacion, :class => 'btn-primary' %>
               </div>
             </div>
           </div>
@@ -97,7 +103,7 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" href="#desplazamientos">
-              Desplazamientos
+              Refugios/Desplazamientos
             </a>
           </div>
           <div id="desplazamientos" class="accordion-body collapse">
@@ -106,7 +112,7 @@
                 <%= render 'desplazamiento_fields', :f => desplazamiento %>
               <% end %>
               <div class="links">
-                <%= link_to_add_association 'Añadir Desplazamiento', f, 
+                <%= link_to_add_association 'Añadir Refugio o Desplazamiento', f, 
                   :desplazamiento, :class => 'btn-primary' %>
               </div>
             </div>
@@ -116,7 +122,7 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" href="#presponsables">
-              Presuntos Responsables
+              Agente de Persecución
             </a>
           </div>
           <div id="presponsables" class="accordion-body collapse">
@@ -125,7 +131,7 @@
                 <%= render 'caso_presponsable_fields', :f => caso_presponsable %>
               <% end %>
               <div class="links">
-                <%= link_to_add_association 'Añadir Presunto Responsable', f, 
+                <%= link_to_add_association 'Añadir Agente de Persecución', f, 
                   :caso_presponsable, {:class => 'btn-primary', 
                     "data-ajax" => "/casos/nuevopresponsable", 
                     "data-ajaxdata" => "caso_id"}

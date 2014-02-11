@@ -42,11 +42,11 @@ $(document).on 'ready page:load',  ->
     $(this).html(nh)
     return )
 
-  $('#victima').on('cocoon:after-insert', (e, victima) ->
-    cid = victima.find('input[id*=nombres]').attr('name')
-    re= new RegExp(".*[[]([0-9][0-9]*).*");
-    iid = cid.replace(re, "$1"); 
-    debugger )
+#  $('#victima').on('cocoon:after-insert', (e, victima) ->
+#    cid = victima.find('input[id*=nombres]').attr('name')
+#    re= new RegExp(".*[[]([0-9][0-9]*).*");
+#    iid = cid.replace(re, "$1"); 
+#    debugger )
   # Deshabilitar parte para obligar a completar partes para continuar
   # http://stackoverflow.com/questions/16777003/what-is-the-easiest-way-to-disable-enable-buttons-and-links-jquery-bootstrap
   #$('body').on('click', 'a.disabled', (e) -> 

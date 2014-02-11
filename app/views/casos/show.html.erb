@@ -14,9 +14,9 @@
   <dd><%= @caso.casosjr.usuario.nusuario %></dd>
   <dt><strong><%= model_class.human_attribute_name(:regionsjr) %>:</strong></dt>
   <dd><%= @caso.casosjr.regionsjr.nombre %></dd>
-<%- if !@caso.casosjr.persona.nil? %>
+<%- if !@caso.casosjr.contacto.nil? %>
   <dt><strong><%= model_class.human_attribute_name(:contacto) %>:</strong></dt>
-  <dd><%= (@caso.casosjr.persona.nombres + " " + @caso.casosjr.persona.apellidos) %></dd>
+  <dd><%= (@caso.casosjr.contacto.nombres + " " + @caso.casosjr.contacto.apellidos) %></dd>
 <% end -%>
   <dt><strong><%= model_class.human_attribute_name(:direccion) %>:</strong></dt>
   <dd><%= @caso.casosjr.direccion %></dd>
