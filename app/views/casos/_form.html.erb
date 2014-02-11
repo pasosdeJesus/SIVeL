@@ -48,21 +48,21 @@
             </div>
             <div id="contacto" class="accordion-body collapse">
               <div class="accordion-inner">
+                <%= s.input :direccion%>
+                <%= s.input :telefono%>
+                <%= s.input :comosupo, :label => "Como supo" %>
                 <%= f.simple_fields_for :victima do |victima| %>
-                  <%= s.input :direccion%>
-                  <%= s.input :telefono%>
-                  <%= s.input :comosupo, :label => "Como supo" %>
                   <%= render 'contacto_fields', :f => victima  %>
-                  <div class="input string optional"><label class="string optional control-label" for="x1">Dependen econ.</label><input class="string optional" id="x1" name="x1" type="text"></div>
-                  <div class="input string optional"><label class="string optional control-label" for="x2">Sustento familiar</label><input class="string optional" id="x2" name="x2" type="text"></div>
-                  <div class="input string optional"><label class="string optional control-label" for="x3">Sabe leer y escribir</label><input class="string optional" id="x3" name="x3" type="text"></div>
-                  <div class="input string optional"><label class="string optional control-label" for="x4">Trajaba actualmente</label><input class="string optional" id="x4" name="x4" type="text"></div>
-                  <div class="input string optional"><label class="string optional control-label" for="x5">Ingreso mensual</label><input class="string optional" id="x5" name="x5" type="text"></div>
-                  <div class="input string optional"><label class="string optional control-label" for="x6">Estimado de gastos</label><input class="string optional" id="x6" name="x6" type="text"></div>
-                  <div class="input string optional"><label class="string optional control-label" for="x7">Estrato</label><input class="string optional" id="x7" name="x7" type="text"></div>
-                  <div class="input string optional"><label class="string optional control-label" for="x8">Status migratorio</label><input class="string optional" id="x8" name="x8" type="text"></div>
-                  <div class="input string optional"><label class="string optional control-label" for="x9">Personas con necesidad de protección internacional</label><input class="string optional" id="x9" name="x9" type="text"></div>
                 <% end %>
+                <div class="input string optional"><label class="string optional control-label" for="x1">Dependen econ.</label><input class="string optional" id="x1" name="x1" type="text"></div>
+                <div class="input string optional"><label class="string optional control-label" for="x2">Sustento familiar</label><input class="string optional" id="x2" name="x2" type="text"></div>
+                <div class="input string optional"><label class="string optional control-label" for="x3">Sabe leer y escribir</label><input class="string optional" id="x3" name="x3" type="text"></div>
+                <div class="input string optional"><label class="string optional control-label" for="x4">Trajaba actualmente</label><input class="string optional" id="x4" name="x4" type="text"></div>
+                <div class="input string optional"><label class="string optional control-label" for="x5">Ingreso mensual</label><input class="string optional" id="x5" name="x5" type="text"></div>
+                <div class="input string optional"><label class="string optional control-label" for="x6">Estimado de gastos</label><input class="string optional" id="x6" name="x6" type="text"></div>
+                <div class="input string optional"><label class="string optional control-label" for="x7">Estrato</label><input class="string optional" id="x7" name="x7" type="text"></div>
+                <div class="input string optional"><label class="string optional control-label" for="x8">Status migratorio</label><input class="string optional" id="x8" name="x8" type="text"></div>
+                <div class="input string optional"><label class="string optional control-label" for="x9">Personas con necesidad de protección internacional</label><input class="string optional" id="x9" name="x9" type="text"></div>
               </div>
             </div>
           </div> <! -- accordion-group -->
