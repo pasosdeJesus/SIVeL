@@ -198,7 +198,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
     var $es_enumOptions = array(
         'declaro' => array(
             'S' => 'SI',
-            'N' => 'NO', 
+            'N' => 'NO',
             'R'=> 'NO SABE/NO RESPONDE'
         ),
     );
@@ -207,7 +207,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
      * Retorna campos sin información
      *
      * @return array Campos que podrían ser sin información y su valor
-     */ 
+     */
     static function camposSinInfo()
     {
         return array(
@@ -261,15 +261,15 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
 
         $s =& $form->getElement('expulsion');
         $s->_options = array();
-        $q = "SELECT ubicacion.id, trim(departamento.nombre || ', ' || lugar) 
+        $q = "SELECT ubicacion.id, trim(departamento.nombre || ', ' || lugar)
             FROM ubicacion, departamento
-            WHERE ubicacion.id_caso='$idcaso'
-            AND ubicacion.id_municipio IS NULL 
+            WHERE ubicacion.id_caso = '$idcaso'
+            AND ubicacion.id_municipio IS NULL
             AND ubicacion.id_departamento = departamento.id
-            UNION SELECT ubicacion.id, trim(municipio.nombre || ', ' || 
-            departamento.nombre || ', ' || lugar)
+            UNION SELECT ubicacion.id, trim(municipio.nombre || ', '
+            || departamento.nombre || ', ' || lugar)
             FROM ubicacion, departamento, municipio
-            WHERE ubicacion.id_caso='$idcaso'
+            WHERE ubicacion.id_caso = '$idcaso'
             AND ubicacion.id_municipio = municipio.id
             AND ubicacion.id_departamento = municipio.id_departamento
             AND municipio.id_departamento = departamento.id";

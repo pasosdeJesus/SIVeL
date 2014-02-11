@@ -516,7 +516,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         as $cs => $cs2
                     ) {
                         //echo "OJO cs=$cs, cs2=$cs2<br>";
-                        $v = dato_en_obs($victima, $cs); 
+                        $v = dato_en_obs($victima, $cs);
                         //echo "OJO v=$v<br>";
                         if ($v != null) {
                             $la = explode(';', $v);
@@ -659,7 +659,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     }
                 }
             }
-            caso_funcionario($idcaso);
+            caso_usuario($idcaso);
 
             $html_rep = ResConsulta::reporteGeneralHtml(
                 $idcaso, $db,
@@ -674,7 +674,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             $ec->fecha = @date('Y-m-d');
             $ec->id_caso = $idcaso;
             $ec->id_etiqueta = $idetiqueta;
-            $ec->id_funcionario = $_SESSION['id_funcionario'];
+            $ec->id_usuario = $_SESSION['id_usuario'];
             $ec->fecha = @date('Y-m-d');
             $ec->observaciones = "";
             if (isset($r->id_relato)) {
@@ -687,7 +687,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 $ec->fecha = @date('Y-m-d');
                 $ec->id_caso = $idcaso;
                 $ec->id_etiqueta = $iderrorimportacion;
-                $ec->id_funcionario = $_SESSION['id_funcionario'];
+                $ec->id_usuario = $_SESSION['id_usuario'];
                 $ec->observaciones = $obs;
                 $ec->insert();
             }

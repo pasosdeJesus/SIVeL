@@ -16,7 +16,7 @@
 
 // Opciones del menú
 
-$GLOBALS['modulo'][1002] = 'modulos/mezcla/elije.php';
+$GLOBALS['modulo'][1002] = 'modulos/mezcla/elige.php';
 $GLOBALS['modulo'][1004] = 'modulos/mezcla/compara.php';
 $GLOBALS['modulo'][1005] = 'modulos/mezcla/mezcla.php';
 $GLOBALS['m_opcion'][1015]  = array(

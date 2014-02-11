@@ -36,13 +36,19 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
 {
 
     var $__table = 'usuario';                         // table name
-    var $id;                      // varchar(-1)  not_null primary_key
+    var $id;                      // integer
+    var $nusuario;
     var $password;                        // varchar(-1)  not_null
+    var $encrypted_pasword;                        // varchar(-1)  not_null
     var $nombre;                          // varchar(-1)
     var $descripcion;                     // varchar(-1)
     var $rol;                          // int4(4)
     var $diasedicion;               // int4(4)
     var $idioma;
+    var $fechacreacion;
+    var $fechadeshabilitacion;
+    var $email;
+    var $sign_in_count;
 
 
     /**
@@ -55,12 +61,16 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
 
         $this->nom_tabla = _("Usuario");
         $this->fb_fieldLabels= array(
-            'id' => _('Identificación'),
+            'id' => _('Código'),
+            'nusuario' => _('Identificación'),
             'password' => _('Clave'),
             'nombre' => _('Nombre'),
             'descripcion' => _('Descripcion'),
             'rol' => _('Rol'),
             'idioma' => _('Idioma'),
+            'email' => _('Correo'),
+            'fechacreacion' => _('Fecha de creación'),
+            'fechadeshabilitacion' => _('Fecha de deshabilitación'),
         );
         global $LENGDISP, $ROLESDISP;
         $ld = explode(" ", $LENGDISP);
@@ -78,18 +88,19 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
     }
 
     var $fb_preDefOrder = array(
-        'id', 'password', 'nombre', 'descripcion', 'rol',
-        'idioma'
+        'nusuario', 'password', 'nombre', 'descripcion', 'rol',
+        'idioma', 'email', 'fechacreacion', 'fechadeshabilitacion'
     );
     var $fb_fieldsToRender = array(
-        'id', 'password', 'nombre', 'descripcion', 'rol',
-        'idioma'
+        'nusuario', 'password', 'nombre', 'descripcion', 'rol',
+        'idioma', 'email', 'fechacreacion', 'fechadeshabilitacion'
     );
-    var $fb_linkDisplayFields = array('id');
-    var $fb_select_display_field= 'id';
+    var $fb_linkDisplayFields = array('nusuario');
+    var $fb_select_display_field= 'nusuario';
     var $fb_hidePrimaryKey = false;
 
     var $fb_enumFields = array('rol', 'idioma');
+    var $fb_selectAddEmpty = array('fechadeshabilitacion');
 
 
     /**
@@ -116,12 +127,32 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
      */
     function setpassword($value)
     {
+        $this->password = '';
         if ($value == '') {
-            $this->password = null;
+            $this->encrypted_password = null;
         } else {
-            $this->password = sha1($value);
+            $this->encrypted_password = crypt($value, gen_sal_bcrypt(10));
         }
     }
+
+    /**
+     * Pone un valor en la base diferente al recibido del formulario.
+     *
+     * @param string $valor Valor en formulario
+     *
+     * @return Valor para BD
+     */
+    function setfechadeshabilitacion($valor)
+    {
+        if ($valor == "0000-00-00") {
+            $nv = 'null';
+        } else {
+            $nv = $valor;
+        }
+        $this->fechadeshabilitacion = $nv;
+
+    }
+
     /**
      * Prepara antes de generar formulario.
      *
@@ -152,7 +183,9 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
     {
         parent::postGenerateForm($form, $formbuilder);
         $e =& $form->getElement('password');
-        $e->setValue('');
+        if (!PEAR::isError($e)) {
+            $e->setValue('');
+        }
     }
 
 }

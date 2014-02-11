@@ -1,6 +1,8 @@
 
 1.2 o posteriores
 
+Usar bcrypt con PHP-5.5 como en ruby
+
 Etnias: tikuna, zenu
 
 Consulta detallada buscar por procedencia de víctima
@@ -11,6 +13,7 @@ Falta consulta detallada al especificar
 	víctimas colectivas (sin org. arm), individuales (info. persona), 
 	actos, módulos seguimiento, anexos (sólo descripción),
 
+Que guarde filtro de consulta para repetir con cambios menores. Rosita.
 
 Actualizar Etnia  y DIVIPOLA
 Seguir completando herram/buscafallas.sh
@@ -114,9 +117,6 @@ OTROS
 
 
 2. AUTENTICACIÓN
-
-* No permitir crear usuarios con id de funcionarios existentes
-
 
 3. INTERFAZ
 

@@ -39,7 +39,7 @@ if (!aplicado($idac)) {
         alias VARCHAR(100),
         edad INTEGER CHECK (edad IS NULL OR edad >= 0),
         sexo    CHAR(1)  NOT NULL CHECK (sexo = 'S' OR sexo='M' OR sexo='F'),
-        id_resultado_agresion INTEGER NOT NULL REFERENCES resagresion,
+        id_resagresion INTEGER NOT NULL REFERENCES resagresion,
         id_profesion INTEGER REFERENCES profesion,
         id_rangoedad    INTEGER REFERENCES rangoedad,
         id_filiacion    INTEGER    REFERENCES filiacion,
@@ -135,7 +135,7 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db,
         "ALTER TABLE combatiente RENAME COLUMN id_resultado_agresion TO "
-        . "resagresion", false
+        . "id_resagresion", false
     );
     hace_consulta(
         $db,

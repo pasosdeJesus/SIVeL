@@ -231,7 +231,7 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
                 $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
-                $dsupracategoria->id_tviolencia 
+                $dsupracategoria->id_tviolencia
                     = $dcategoria->id_tviolencia;
                 $dsupracategoria->find(1);
 
@@ -256,7 +256,7 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
                 $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
-                $dsupracategoria->id_tviolencia 
+                $dsupracategoria->id_tviolencia
                     = $dcategoria->id_tviolencia;
                 $dsupracategoria->find(1);
 

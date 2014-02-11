@@ -142,6 +142,8 @@ s/numero_radicado/numeroradicado/g
 s/trelacion_accion/taccion/g
 s/DataObjects\/Tipo_sitio.php/DataObjects\/Tsitio.php/g
 s/funcionario_caso/caso_funcionario/g
+s/caso_funcionario/caso_usuario/g
+s/Caso_funcionario/Caso_usuario/g
 s/id_persona1/persona1/g
 s/id_persona2/persona2/g
 s/bicacion_up/bicacionup/g

@@ -156,7 +156,7 @@ class PagEtiquetas extends PagBaseSimple
      * Verifica y salva datos.
      * Típicamente debe validar datos, preprocesar de requerirse,
      * procesar con función process y finalmente registrar evento con función
-     * caso_funcionario
+     * caso_usuario
      *
      * @param array &$valores Valores enviados por el formulario.
      * @param bool  $aget     V sii agrega etiqueta
@@ -190,10 +190,11 @@ class PagEtiquetas extends PagBaseSimple
             $this->bcaso_etiqueta->_do->id_caso = (int)$idcaso;
             $this->bcaso_etiqueta->_do->id_etiqueta
                 = (int)$valores['fetiqueta'];
-            $this->bcaso_etiqueta->_do->id_funcionario 
-                = (int)$_SESSION['id_funcionario'];
+            $this->bcaso_etiqueta->_do->id_usuario
+                = (int)$_SESSION['id_usuario'];
+            //print_r($_SESSION); die("x");
             $this->bcaso_etiqueta->_do->fecha = @date('Y-m-d');
-            $this->bcaso_etiqueta->_do->observaciones 
+            $this->bcaso_etiqueta->_do->observaciones
                 = var_escapa($valores['fobservaciones'], $db);
             //print_r($this->bcaso_etiqueta->_do);
             $r = $this->bcaso_etiqueta->_do->insert();
@@ -208,14 +209,14 @@ class PagEtiquetas extends PagBaseSimple
                 $dec =& objeto_tabla('caso_etiqueta');
                 $dec->id_caso = $idcaso;
                 $dec->id_etiqueta = $po[2];
-                $dec->id_funcionario = $po[3];
+                $dec->id_usuario = $po[3];
                 $dec->fecha = $po[4];
                 $dec->observaciones = $v;
                 $dec->update();
             }
         }
 
-        caso_funcionario($_SESSION['basicos_id']);
+        caso_usuario($_SESSION['basicos_id']);
         return  $ret;
     }
 
@@ -251,7 +252,7 @@ class PagEtiquetas extends PagBaseSimple
                 $w2="";
                 if (isset($duc->anotacion) && $duc->anotacion != '') {
                     consulta_and(
-                        $db, $w2, "caso_etiqueta.id_funcionario",
+                        $db, $w2, "caso_etiqueta.id_usuario",
                         $duc->id_anotacion, "=", "AND"
                     );
                 }
@@ -297,7 +298,7 @@ class PagEtiquetas extends PagBaseSimple
         if (isset($_REQUEST['eliminaest'])) {
             assert($_REQUEST['eliminaest'] != null);
             $de=& objeto_tabla('caso_etiqueta');
-            list($de->id_caso, $de->id_etiqueta, $de->id_funcionario,
+            list($de->id_caso, $de->id_etiqueta, $de->id_usuario,
                 $de->fecha
             ) = explode(':', var_escapa($_REQUEST['eliminaest']));
             $de->delete();

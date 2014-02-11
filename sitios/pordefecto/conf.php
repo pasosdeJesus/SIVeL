@@ -18,7 +18,7 @@
 global $dbservidor;
 /** Servidor/socket del Motor de bases de datos */
 // Si prefiere TCP/IP (no recomendado) use tcp(localhost)
-$dbservidor = "unix(/tmp)"; 
+$dbservidor = "unix(/tmp)";
 
 global $dbnombre;
 /** Nombre de base de datos */
@@ -101,7 +101,7 @@ $GLOBALS['consulta_web_fecha_max'] = '2024-11-30';
 /** Fecha mínima de caso por consultar en web
  * @global string $GLOBALS['consulta_web_fecha_min']
  */
-$GLOBALS['consulta_web_fecha_min'] = '2001-1-1';
+$GLOBALS['consulta_web_fecha_min'] = '1990-1-1';
 
 /** Máximo de registros por retornar en una consulta web (0 es ilimitado)
  * @global string $GLOBALS['consulta_web_max']
@@ -244,7 +244,7 @@ $GLOBALS['m_opcion'] = array (
     12 => array('nombre' => _('Usuarios'), 'idpapa' => 10, 'url' => 'usyroles'),
     20 => array('nombre' => _('Caso'), 'idpapa' => 0, 'url' => null),
     21 => array('nombre' => _('Ficha'), 'idpapa' => 20, 'url' => 'captura_caso'),
-    30 => array('nombre' => _('Consultas'), 'idpapa' => 0, 'url' => null ),
+    30 => array('nombre' => _('Consultas'), 'idpapa' => 0, 'url' => null),
     31 => array(
         'nombre' => _('Consulta Detallada'), 'idpapa' => 30, 'url' => 'consulta'
     ),

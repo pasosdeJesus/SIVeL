@@ -46,7 +46,7 @@ function instablabasica($tabla, $llave_sec, $valor, $campos = array())
     $_REQUEST = $_POST = $_GET = array();
 
     $_REQUEST['tabla'] = $_GET['tabla'] = $tabla;
-    $_REQUEST["_qf__dataobjects_$tabla"] 
+    $_REQUEST["_qf__dataobjects_$tabla"]
         = $_POST["_qf__dataobjects_$tabla"] = '';
     $_REQUEST['id'] = $_POST['id'] = '';
     $_REQUEST[$llave_sec] = $_POST[$llave_sec] = $valor;
@@ -58,7 +58,7 @@ function instablabasica($tabla, $llave_sec, $valor, $campos = array())
 
     $_REQUEST['añadir'] = $_POST['añadir'] = 'Añadir';
 
-    $_REQUEST['evita_csrf'] = $_SESSION['sin_csrf'] 
+    $_REQUEST['evita_csrf'] = $_SESSION['sin_csrf']
         = $_POST['evita_csrf'] = 1234;
 
 
@@ -104,7 +104,7 @@ $c = 0;
 
 foreach (array('tsitio', 'frontera', 'region', 'filiacion', 'organizacion',
     'profesion', 'sectorsocial', 'vinculoestado', 'antecedente',
-    'contexto'
+    'contexto', 'etnia', 'iglesia'
 ) as $t
 ) {
     $c += instablabasica($t, 'nombre', $t . '1');

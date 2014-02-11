@@ -61,7 +61,23 @@ class DataObjects_Taccion extends DataObjects_Basica
     );
 
     /**
-     * Retorna valor SIN INFORMACION 
+     * Prepara consulta agregando objeto enlazado a este por
+     * campo field.
+     *
+     * @param object &$opts  objeto DB para completar consulta
+     * @param string &$field campo por el cual enlazar
+     *
+     * @return void
+     */
+    function prepareLinkedDataObject(&$opts, &$field)
+    {
+        if ($field = 'id_taccion') {
+            $opts->whereAdd('fechadeshabilitacion IS NULL');
+        }
+    }
+
+    /**
+     * Retorna valor SIN INFORMACION
      *
      * @return integer valor SIN INFORMACION
      */

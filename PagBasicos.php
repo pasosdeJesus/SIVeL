@@ -21,7 +21,7 @@
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
 //$aut_usuario = "";
-//autentica_usuario($GLOBALS['dsn'], $aut_usuario, 31); 
+//autentica_usuario($GLOBALS['dsn'], $aut_usuario, 31);
 require_once $_SESSION['dirsitio'] . "/conf_int.php";
 require_once 'HTML/QuickForm/Action.php';
 require_once 'PagBaseSimple.php';
@@ -318,14 +318,14 @@ class Busqueda extends HTML_QuickForm_Action
         if ((isset($pFiini['Y']) && $pFiini['Y'] != '')
             || (isset($pFifin['Y']) && $pFifin['Y'] != '')
         ) {
-                $t .= ", caso_funcionario";
-                consulta_and_sinap($w, "caso_funcionario.id_caso", "caso.id");
+                $t .= ", caso_usuario";
+                consulta_and_sinap($w, "caso_usuario.id_caso", "caso.id");
         }
         if (isset($pFiini['Y'])
             && $pFiini['Y'] != ''
         ) {
                 consulta_and(
-                    $db, $w, "caso_funcionario.fechainicio",
+                    $db, $w, "caso_usuario.fechainicio",
                     arr_a_fecha($pFiini, true), ">="
                 );
         }
@@ -333,7 +333,7 @@ class Busqueda extends HTML_QuickForm_Action
             && $pFifin['Y'] != ''
         ) {
                 consulta_and(
-                    $db, $w, "caso_funcionario.fechainicio",
+                    $db, $w, "caso_usuario.fechainicio",
                     arr_a_fecha($pFifin, false), "<="
                 );
         }
@@ -445,7 +445,15 @@ class ReporteGeneral extends HTML_QuickForm_Action
                 _("Reporte General del caso %s"), (int)$idcaso
             )
         );
-        $r = valida_caso($idcaso);
+        $buf_html = array();
+        $r = valida_caso($idcaso, $buf_html);
+        if ($r || count($buf_html) > 0) {
+            $msg_html = implode($buf_html, "\\n");
+            if (trim($msg_html) != "") {
+                error_valida($msg_html, null, '', true);
+            }
+        }
+
         $campos = array_merge(
             $GLOBALS['cw_ncampos'],
             array('m_fuentes'=>'Fuentes')
@@ -642,7 +650,7 @@ class PagBasicos extends PagBaseSimple
     function PagBasicos($nomForma)
     {
         $aut_usuario = "";
-        autentica_usuario($GLOBALS['dsn'], $aut_usuario, 31); 
+        autentica_usuario($GLOBALS['dsn'], $aut_usuario, 31);
         parent::PagBaseSimple($nomForma);
         $this->titulo = _('Datos Básicos');
         $this->tcorto = _('Básicos');
@@ -675,7 +683,7 @@ class PagBasicos extends PagBaseSimple
         ) {  //Busqueda
             $this->addElement('hidden', 'id', $GLOBALS['idbus']);
 
-            $slan = isset($_SESSION['LANG']) ?  
+            $slan = isset($_SESSION['LANG']) ?
                 substr($_SESSION['LANG'], 0, 2) : 'es';
             $e =& $this->addElement(
                 'date', 'fini', _('Fecha inicial'),
@@ -954,7 +962,7 @@ class PagBasicos extends PagBaseSimple
         }
 
         $_SESSION['basicos_id'] = $idcaso;
-        caso_funcionario($idcaso);
+        caso_usuario($idcaso);
         return  $ret;
     }
 

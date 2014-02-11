@@ -33,7 +33,7 @@ require_once 'DataObjects/Basica.php';
  */
 class DataObjects_Declaroante extends DataObjects_Basica
 {
-    var $__table = 'declaroante';                       
+    var $__table = 'declaroante';
 
     /**
      * Constructora

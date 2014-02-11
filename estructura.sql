@@ -15,6 +15,114 @@ ALTER TEXT SEARCH DICTIONARY unaccent (RULES='unaccent');
 
 ALTER FUNCTION unaccent(text) IMMUTABLE;
 
+-- Funcion Soundex en Español
+-- Tomado de http://wiki.postgresql.org/wiki/SoundexESP
+-- Oliver Mazariegos http://www.grupovesica.com
+
+CREATE OR REPLACE FUNCTION soundexesp(input text) RETURNS text
+IMMUTABLE STRICT COST 500 LANGUAGE plpgsql
+AS $$
+DECLARE
+	soundex text='';	
+	-- para determinar la primera letra
+	pri_letra text;
+	resto text;
+	sustituida text ='';
+	-- para quitar adyacentes
+	anterior text;
+	actual text;
+	corregido text;
+BEGIN
+       -- devolver null si recibi un string en blanco o con espacios en blanco
+	IF length(trim(input))= 0 then
+		RETURN NULL;
+	end IF;
+ 
+ 
+	-- 1: LIMPIEZA:
+		-- pasar a mayuscula, eliminar la letra "H" inicial, los acentos y la enie
+		-- 'holá coñó' => 'OLA CONO'
+		input=translate(ltrim(trim(upper(input)),'H'),'ÑÁÉÍÓÚÀÈÌÒÙÜ','NAEIOUAEIOUU');
+ 
+		-- eliminar caracteres no alfabéticos (números, símbolos como &,%,",*,!,+, etc.
+		input=regexp_replace(input, '[^a-zA-Z]', '', 'g');
+ 
+	-- 2: PRIMERA LETRA ES IMPORTANTE, DEBO ASOCIAR LAS SIMILARES
+	--  'vaca' se convierte en 'baca'  y 'zapote' se convierte en 'sapote'
+	-- un fenomeno importante es GE y GI se vuelven JE y JI; CA se vuelve KA, etc
+	pri_letra =substr(input,1,1);
+	resto =substr(input,2);
+	CASE 
+		when pri_letra IN ('V') then
+			sustituida='B';
+		when pri_letra IN ('Z','X') then
+			sustituida='S';
+		when pri_letra IN ('G') AND substr(input,2,1) IN ('E','I') then
+			sustituida='J';
+		when pri_letra IN('C') AND substr(input,2,1) NOT IN ('H','E','I') then
+			sustituida='K';
+		else
+			sustituida=pri_letra;
+ 
+	end case;
+	--corregir el parametro con las consonantes sustituidas:
+	input=sustituida || resto;		
+ 
+	-- 3: corregir "letras compuestas" y volverlas una sola
+	input=REPLACE(input,'CH','V');
+	input=REPLACE(input,'QU','K');
+	input=REPLACE(input,'LL','J');
+	input=REPLACE(input,'CE','S');
+	input=REPLACE(input,'CI','S');
+	input=REPLACE(input,'YA','J');
+	input=REPLACE(input,'YE','J');
+	input=REPLACE(input,'YI','J');
+	input=REPLACE(input,'YO','J');
+	input=REPLACE(input,'YU','J');
+	input=REPLACE(input,'GE','J');
+	input=REPLACE(input,'GI','J');
+	input=REPLACE(input,'NY','N');
+	-- para debug:    --return input;
+ 
+	-- EMPIEZA EL CALCULO DEL SOUNDEX
+	-- 4: OBTENER PRIMERA letra
+	pri_letra=substr(input,1,1);
+ 
+	-- 5: retener el resto del string
+	resto=substr(input,2);
+ 
+	--6: en el resto del string, quitar vocales y vocales fonéticas
+	resto=translate(resto,'@AEIOUHWY','@');
+ 
+	--7: convertir las letras foneticamente equivalentes a numeros  (esto hace que B sea equivalente a V, C con S y Z, etc.)
+	resto=translate(resto, 'BPFVCGKSXZDTLMNRQJ', '111122222233455677');
+	-- así va quedando la cosa
+	soundex=pri_letra || resto;
+ 
+	--8: eliminar números iguales adyacentes (A11233 se vuelve A123)
+	anterior=substr(soundex,1,1);
+	corregido=anterior;
+ 
+	FOR i IN 2 .. length(soundex) LOOP
+		actual = substr(soundex, i, 1);
+		IF actual <> anterior THEN
+			corregido=corregido || actual;
+			anterior=actual;			
+		END IF;
+	END LOOP;
+	-- así va la cosa
+	soundex=corregido;
+ 
+	-- 9: siempre retornar un string de 4 posiciones
+	soundex=rpad(soundex,4,'0');
+	soundex=substr(soundex,1,4);		
+ 
+	-- YA ESTUVO
+	RETURN soundex;	
+END;	
+$$
+;
+
 CREATE TABLE actualizacionbase (
 	id VARCHAR(10) PRIMARY KEY,
 	fecha DATE NOT NULL,
@@ -64,7 +172,7 @@ CREATE TABLE caso (
 	grimpunidad VARCHAR(5),
 	grinformacion VARCHAR(5),
 	bienes TEXT,
-	id_intervalo INTEGER REFERENCES intervalo
+	id_intervalo INTEGER REFERENCES intervalo DEFAULT '5'
 ); 
 
 CREATE INDEX caso_titulo ON caso 
@@ -270,15 +378,6 @@ CREATE TABLE fotra (
 	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL
 );
 
-CREATE SEQUENCE funcionario_seq;
-
--- nombre es un id de la tabla usuario en caso de que aun este activo
-CREATE TABLE funcionario (
-	id INTEGER PRIMARY KEY DEFAULT(nextval('funcionario_seq')),
-	anotacion VARCHAR(50),
-	nombre 	VARCHAR(15) NOT NULL UNIQUE
-);
-
 CREATE SEQUENCE organizacion_seq;
 
 CREATE TABLE organizacion (
@@ -390,7 +489,7 @@ CREATE TABLE ubicacion (
 	id_clase INTEGER,
 	id_municipio INTEGER,
 	id_departamento INTEGER REFERENCES departamento,
-	id_tsitio INTEGER REFERENCES tsitio NOT NULL,
+	id_tsitio INTEGER REFERENCES tsitio NOT NULL DEFAULT '1',
 	id_caso INTEGER NOT NULL REFERENCES caso,
 	latitud FLOAT,
 	longitud FLOAT,
@@ -401,14 +500,26 @@ CREATE TABLE ubicacion (
 		clase (id, id_municipio, id_departamento)
 ); 
 
+CREATE SEQUENCE usuario_seq;
+
+-- Sólo deben poderse autenticar quienes tengan NULL en fechadeshabilitacion
 CREATE TABLE usuario (
-	id VARCHAR(15) PRIMARY KEY,
+	id INTEGER PRIMARY KEY DEFAULT(nextval('usuario_seq')),
+	nusuario VARCHAR(15) NOT NULL UNIQUE,
 	password VARCHAR(64) NOT NULL,
 	nombre VARCHAR(50) COLLATE es_co_utf_8,
 	descripcion VARCHAR(50),
-	rol INTEGER CHECK (rol>='1' AND rol<='4'),
-	diasedicion INTEGER,
-	idioma VARCHAR(6) NOT NULL DEFAULT 'es_CO'
+	rol INTEGER DEFAULT '4' CHECK (rol>='1' AND rol<='4'),
+	idioma VARCHAR(6) NOT NULL DEFAULT 'es_CO',
+	email VARCHAR(255) NOT NULL DEFAULT '',
+	encrypted_password VARCHAR(255) NOT NULL DEFAULT '',
+	sign_in_count INTEGER NOT NULL DEFAULT '0',
+	fechacreacion DATE NOT NULL,
+	fechadeshabilitacion DATE CHECK (
+		fechadeshabilitacion IS NULL OR 
+		fechadeshabilitacion>=fechacreacion
+	)
+
 );
 
 CREATE SEQUENCE vinculoestado_seq;
@@ -498,7 +609,7 @@ CREATE TABLE trelacion (
 CREATE TABLE persona_trelacion (
 	persona1 INTEGER NOT NULL REFERENCES persona,
 	persona2 INTEGER NOT NULL REFERENCES persona,
-	id_trelacion CHAR(2) NOT NULL REFERENCES trelacion,
+	id_trelacion CHAR(2) NOT NULL REFERENCES trelacion DEFAULT 'SI',
 	observaciones VARCHAR(200),
 	PRIMARY KEY(persona1, persona2, id_trelacion)
 );
@@ -510,17 +621,17 @@ CREATE TABLE victima (
 	id_persona INTEGER REFERENCES persona NOT NULL,
 	id_caso	INTEGER REFERENCES caso NOT NULL,
 	hijos INTEGER CHECK (hijos IS NULL OR (hijos>='0' AND hijos<='100')),
-	id_profesion INTEGER REFERENCES profesion NOT NULL,
-	id_rangoedad INTEGER REFERENCES rangoedad NOT NULL,
-	id_filiacion INTEGER REFERENCES filiacion NOT NULL,
-	id_sectorsocial INTEGER REFERENCES sectorsocial NOT NULL,
-	id_organizacion	INTEGER REFERENCES organizacion NOT NULL,
-	id_vinculoestado INTEGER REFERENCES vinculoestado NOT NULL,
-	organizacionarmada INTEGER REFERENCES presponsable NOT NULL,
+	id_profesion INTEGER REFERENCES profesion NOT NULL DEFAULT '22',
+	id_rangoedad INTEGER REFERENCES rangoedad NOT NULL DEFAULT '6', 
+	id_filiacion INTEGER REFERENCES filiacion NOT NULL DEFAULT '10',
+	id_sectorsocial INTEGER REFERENCES sectorsocial NOT NULL DEFAULT '15',
+	id_organizacion	INTEGER REFERENCES organizacion NOT NULL DEFAULT '16',
+	id_vinculoestado INTEGER REFERENCES vinculoestado NOT NULL DEFAULT '38',
+	organizacionarmada INTEGER REFERENCES presponsable NOT NULL DEFAULT '35',
 	anotaciones	VARCHAR(1000),
-	id_etnia INTEGER REFERENCES etnia,
-	id_iglesia INTEGER REFERENCES iglesia,
-	orientacionsexual CHAR(1) NOT NULL DEFAULT 'H' CHECK (
+	id_etnia INTEGER REFERENCES etnia DEFAULT '1',
+	id_iglesia INTEGER REFERENCES iglesia DEFAULT '1',
+       	orientacionsexual CHAR(1) NOT NULL DEFAULT 'H' CHECK (
 		orientacionsexual='L' OR 
 		orientacionsexual='G' OR 
 		orientacionsexual='B' OR 
@@ -543,12 +654,12 @@ CREATE TABLE victimacolectiva (
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	personasaprox INTEGER,
-	organizacionarmada INTEGER REFERENCES presponsable,
+	organizacionarmada INTEGER REFERENCES presponsable DEFAULT '35',
 	PRIMARY KEY(id_grupoper, id_caso)
 );
 
 CREATE TABLE comunidad_vinculoestado (
-	id_vinculoestado INTEGER REFERENCES vinculoestado,
+	id_vinculoestado INTEGER REFERENCES vinculoestado DEFAULT '38',
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	FOREIGN KEY (id_grupoper, id_caso) REFERENCES 
@@ -557,7 +668,7 @@ CREATE TABLE comunidad_vinculoestado (
 );
 
 CREATE TABLE comunidad_profesion (
-	id_profesion INTEGER REFERENCES profesion,
+	id_profesion INTEGER REFERENCES profesion DEFAULT '22',
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	FOREIGN KEY (id_grupoper, id_caso) REFERENCES 
@@ -649,7 +760,7 @@ CREATE TABLE caso_ffrecuente (
 );
 
 CREATE TABLE comunidad_filiacion (
-	id_filiacion INTEGER REFERENCES filiacion,
+	id_filiacion INTEGER REFERENCES filiacion DEFAULT '10',
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	FOREIGN KEY (id_grupoper, id_caso) REFERENCES 
@@ -674,15 +785,15 @@ CREATE TABLE caso_fotra (
 	PRIMARY KEY(id_caso, id_fotra, fecha)
 );
 
-CREATE TABLE caso_funcionario (
-	id_funcionario INTEGER REFERENCES funcionario,
+CREATE TABLE caso_usuario (
+	id_usuario INTEGER REFERENCES usuario,
 	id_caso INTEGER REFERENCES caso,
 	fechainicio DATE,
-	PRIMARY KEY(id_funcionario, id_caso)
+	PRIMARY KEY(id_usuario, id_caso)
 );
 
 CREATE TABLE comunidad_organizacion (
-	id_organizacion INTEGER REFERENCES organizacion,
+	id_organizacion INTEGER REFERENCES organizacion DEFAULT '16',
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	FOREIGN KEY (id_grupoper, id_caso) REFERENCES 
@@ -691,7 +802,7 @@ CREATE TABLE comunidad_organizacion (
 );
 
 CREATE TABLE comunidad_rangoedad (
-	id_rangoedad INTEGER REFERENCES rangoedad,
+	id_rangoedad INTEGER REFERENCES rangoedad DEFAULT '6',
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	FOREIGN KEY (id_grupoper, id_caso) REFERENCES 
@@ -708,12 +819,12 @@ CREATE TABLE caso_region (
 
 
 CREATE TABLE comunidad_sectorsocial (
-	id_sector INTEGER REFERENCES sectorsocial,
+	id_sectorsocial INTEGER REFERENCES sectorsocial DEFAULT '15',
 	id_grupoper INTEGER REFERENCES grupoper,
 	id_caso INTEGER REFERENCES caso,
 	FOREIGN KEY (id_grupoper, id_caso) REFERENCES 
 		victimacolectiva(id_grupoper, id_caso),
-	PRIMARY KEY(id_sector, id_grupoper, id_caso)
+	PRIMARY KEY(id_sectorsocial, id_grupoper, id_caso)
 );
 
 

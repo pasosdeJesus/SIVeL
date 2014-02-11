@@ -33,7 +33,7 @@ require_once 'DataObjects/Basica.php';
  */
 class DataObjects_Modalidadtierra extends DataObjects_Basica
 {
-    var $__table = 'modalidadtierra';                       
+    var $__table = 'modalidadtierra';
 
     /**
      * Constructora

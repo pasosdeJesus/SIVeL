@@ -24,14 +24,18 @@ require_once "ambiente.php";
 
 $na = (int)$db->getOne("SELECT COUNT(id) FROM usuario;");
 
-echo "\nna=$na";
 $_REQUEST = $_POST = $_GET = array();
 $_REQUEST['_qf__dataobjects_usuario'] = $_POST['_qf__dataobjects_usuario'] = '';
-$_REQUEST['id'] = $_POST['id'] = 'inv1';
+$_REQUEST['nusuario'] = $_POST['nusuario'] = 'inv1';
 $_REQUEST['password'] = $_POST['password'] = 'b';
 $_REQUEST['nombre'] = $_POST['nombre'] = 'c';
 $_REQUEST['descripcion'] = $_POST['descripcion'] = 'd';
 $_REQUEST['rol'] = $_POST['rol'] = '1';
+$_REQUEST['email'] = $_POST['email'] = 'inv1@localhost';
+$_REQUEST['idioma'] = $_POST['idoma'] = 'es_CO';
+$_REQUEST['fechacreacion']['Y'] = $_POST['fechacreacion']['Y'] = '2013';
+$_REQUEST['fechacreacion']['M'] = $_POST['fechacreacion']['M'] = '12';
+$_REQUEST['fechacreacion']['d'] = $_POST['fechacreacion']['d'] = '31';
 $_REQUEST['añadir'] = $_POST['añadir'] = 'Añadir';
 $_REQUEST['evita_csrf'] = $_SESSION['sin_csrf'] = $_POST['evita_csrf'] = 1234;
 

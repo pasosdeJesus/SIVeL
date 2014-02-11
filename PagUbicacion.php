@@ -42,7 +42,7 @@ class CamDepartamento extends HTML_QuickForm_Action
      *
      * @return void
      */
-    function CamDepartamento($nomcampodep = 'id_departamento') 
+    function CamDepartamento($nomcampodep = 'id_departamento')
     {
         $this->nomcampodep = $nomcampodep;
     }
@@ -289,7 +289,7 @@ class PagUbicacion extends PagBaseMultiple
      *
      * @return array Con elementos para formulario (dep, mun, clase)
      */
-    static function creaCampos(&$form, $iddep = 'id_departamento', 
+    static function creaCampos(&$form, $iddep = 'id_departamento',
         $idmun = 'id_municipio', $idcla = 'id_clase'
     ) {
         assert($iddep != null);
@@ -297,7 +297,7 @@ class PagUbicacion extends PagBaseMultiple
             'select', $iddep,
             $GLOBALS['etiqueta']['departamento'],
             array()
-        ); 
+        );
         $mun = null;
         if ($idmun != null) {
             $mun =& $form->createElement(
@@ -312,7 +312,7 @@ class PagUbicacion extends PagBaseMultiple
                 'select', $idcla,
                 $GLOBALS['etiqueta']['clase'],
                 array()
-            ); 
+            );
         }
 
         return array($dep, $mun, $cla);
@@ -333,8 +333,8 @@ class PagUbicacion extends PagBaseMultiple
      *
      * @return void
      */
-    static function modCampos(&$db, &$form, 
-        $nomcdep = 'id_departamento', $nomcmun = 'id_municipio', 
+    static function modCampos(&$db, &$form,
+        $nomcdep = 'id_departamento', $nomcmun = 'id_municipio',
         $nomccla = 'id_clase', $vdep = null, $vmun = null, $vcla = null
     ) {
         assert($nomcdep != null);
@@ -354,11 +354,18 @@ class PagUbicacion extends PagBaseMultiple
         if ($nomcmun == null) {
             $d->updateAttributes(array("id" => "$nomcdep"));
         } else {
+            $sincoord = "false";
+            if (isset($_SESSION['forma_modo'])
+                && $_SESSION['forma_modo'] == 'busqueda'
+            ) {
+                $sincoord = "true";
+            }
+
             $d->updateAttributes(
                 array(
                     "id" => "$nomcdep",
                     "onchange" => "llenaMunicipio('$nomcdep', "
-                    . "'$nomcmun', '$nomccla')"
+                    . "'$nomcmun', '$nomccla', $sincoord)"
                 )
             );
             $m =& toma_elemento_recc($form, $nomcmun);
@@ -369,14 +376,14 @@ class PagUbicacion extends PagBaseMultiple
                 $m->updateAttributes(
                     array("id" => "$nomcmun",
                     "onchange" => "llenaClase('$nomcdep', "
-                    . "'$nomcmun', '$nomccla')")
+                    . "'$nomcmun', '$nomccla', $sincoord)")
                 );
                 $c =& toma_elemento_recc($form, $nomccla);
                 sin_error_pear($c);
                 $c->updateAttributes(
                     array("id" => "$nomccla",
                     "onchange" => "llenaCoord('$nomcdep', "
-                    . "'$nomcmun', '$nomccla')")
+                    . "'$nomcmun', '$nomccla', $sincoord)")
                 );
             }
         }
@@ -399,7 +406,7 @@ class PagUbicacion extends PagBaseMultiple
                     )
                 );
                 $m->loadArray($options);
-                if ($vmun != null 
+                if ($vmun != null
                     && $vmun != DB_DataObject_Cast::sql('NULL')
                 ) {
                     $m->setValue($vmun);
@@ -461,8 +468,8 @@ class PagUbicacion extends PagBaseMultiple
 
         PagUbicacion::modCampos(
             $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
-            $this->bubicacion->_do->id_departamento, 
-            $this->bubicacion->_do->id_municipio, 
+            $this->bubicacion->_do->id_departamento,
+            $this->bubicacion->_do->id_municipio,
             $this->bubicacion->_do->id_clase
         );
 
@@ -532,7 +539,7 @@ class PagUbicacion extends PagBaseMultiple
     {
         $tot = $_SESSION['fub_total'];
         $ni = $_SESSION['fub_pag'];
-         
+
         $dep =& $this->getElement('id_departamento');
         $mun =& $this->getElement('id_municipio');
         $cla =& $this->getElement('id_clase');
@@ -651,8 +658,8 @@ class PagUbicacion extends PagBaseMultiple
                 DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEUPDATE
             );
         }
-        if ($this->bubicacion->_do->id_municipio == 0 
-            || $this->bubicacion->_do->id_municipio == null 
+        if ($this->bubicacion->_do->id_municipio == 0
+            || $this->bubicacion->_do->id_municipio == null
             || $this->bubicacion->_do->id_municipio == ''
         ) {
             $this->bubicacion->_do->id_municipio = DB_DataObject_Cast::sql(
@@ -664,7 +671,7 @@ class PagUbicacion extends PagBaseMultiple
             die($ret->getMessage());
         }
 
-        caso_funcionario($_SESSION['basicos_id']);
+        caso_usuario($_SESSION['basicos_id']);
         return  true;
     }
 

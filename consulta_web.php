@@ -321,14 +321,14 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             && ($pUsuario != '' || (isset($pFiini['Y']) && $pFiini['Y'] != '')
             || (isset($pFifin['Y']) && $pFifin['Y'] != ''))
         ) {
-            agrega_tabla($tablas, 'caso_funcionario');
-            consulta_and_sinap($where, "caso_funcionario.id_caso", "caso.id");
+            agrega_tabla($tablas, 'caso_usuario');
+            consulta_and_sinap($where, "caso_usuario.id_caso", "caso.id");
         }
         if (in_array(42, $page->opciones)
             && isset($pFiini['Y']) && $pFiini['Y'] != ''
         ) {
             consulta_and(
-                $db, $where, "caso_funcionario.fechainicio",
+                $db, $where, "caso_usuario.fechainicio",
                 arr_a_fecha($pFiini, true), ">="
             );
         }
@@ -336,14 +336,14 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             && isset($pFifin['Y']) && $pFifin['Y'] != ''
         ) {
             consulta_and(
-                $db, $where, "caso_funcionario.fechainicio",
+                $db, $where, "caso_usuario.fechainicio",
                 arr_a_fecha($pFifin, false), "<="
             );
         }
 
         if (in_array(42, $page->opciones) && $pUsuario != '') {
             consulta_and(
-                $db, $where, "caso_funcionario.id_funcionario", $pUsuario
+                $db, $where, "caso_usuario.id_usuario", $pUsuario
             );
         }
 
@@ -543,7 +543,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
             $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
             $vdep, $vmun, $vcla
         );
-         
+
         $sel =& $this->addElement(
             'text', 'nomvic',
             _('Nombre o apellido de la víctima')
@@ -644,7 +644,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
 
         /*$aut_usuario = "";
-        if (!isset($_SESSION['id_funcionario'])) {
+        if (!isset($_SESSION['id_usuario'])) {
             include $_SESSION['dirsitio'] . "/conf.php";
             autentica_usuario($dsn, $aut_usuario, 0);
         }
@@ -664,7 +664,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
             }
         }
 
-        if (isset($_SESSION['id_funcionario'])) {
+        if (isset($_SESSION['id_usuario'])) {
             if (in_array(42, $_SESSION['opciones'])) {
                 $sel =& $this->addElement(
                     'select',
@@ -672,7 +672,9 @@ class ConsultaWeb extends HTML_QuickForm_Page
                 );
                 $options= array(''=>' ') + htmlentities_array(
                     $db->getAssoc(
-                        "SELECT id, nombre FROM funcionario ORDER by nombre"
+                        "SELECT id, nusuario FROM usuario 
+                        WHERE fechadeshabilitacion IS NULL
+                        ORDER by nusuario"
                     )
                 );
                 $sel->loadArray($options);
@@ -734,6 +736,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
                 $t =& $x;
             }
         }
+        $r = "";
         if (isset($GLOBALS['consultaweb_ordenarpor'])) {
             foreach ($GLOBALS['consultaweb_ordenarpor'] as $k => $f) {
                 if (is_callable($f)) {

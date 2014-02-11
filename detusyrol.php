@@ -62,8 +62,6 @@ if (!isset($_GET['id'])) {
     $s->freeze();
     $e =& $f->createElement('submit', 'actualizar', _('Actualizar'));
     $ed[] =& $e;
-    $e =& $f->createElement('submit', 'eliminar', _('Eliminar'));
-    $ed[] =& $e;
 }
 $f->addGroup($ed, null, '', '&nbsp;', false);
 $f->addElement(
@@ -72,26 +70,35 @@ $f->addElement(
 );
 
 $actsincambiarclave = isset($f->_submitValues['actualizar'])
-    && $f->_submitValues['password'] == '';
+    && $f->_submitValues['encrypted_password'] == '';
 if ($actsincambiarclave || $f->validate()) {
     if (!verifica_sin_CSRF($f->_submitValues)) {
         die(_("Datos enviados no pasaron verificación CSRF"));
     }
+    //echo "OJO 1\n";
     if (isset($GLOBALS['deshabilita_manejo_usuarios'])
         && $GLOBALS['deshabilita_manejo_usuarios'] === true
     ) {
             die(_("Funcionalidad deshabilitada"));
     }
 
+    //echo "OJO 2\n";
     if (isset($f->_submitValues['actualizar'])) {
+        //echo "OJO 2.1\n";
         $b->forceQueryType(DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEUPDATE);
     } else {
         $b->forceQueryType(DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT);
     }
+    //echo "OJO 3\n";
     if (isset($f->_submitValues['actualizar'])
         || isset($f->_submitValues['añadir'])
     ) {
+        //echo "OJO 4\n";
+        if ($b->sign_in_count == null) {
+            $b->sign_in_count == 0;
+        }
         $res = $f->process(array($b, 'processForm'), false);
+        //echo "OJO 5 res=$res\n";
         if ($_SESSION['id_usuario'] == $f->_submitValues['id']) {
             idioma($f->_submitValues['idioma']);
         }
@@ -100,27 +107,21 @@ if ($actsincambiarclave || $f->validate()) {
             if (PEAR::isError($db)) {
                 die($db->getMessage());
             }
-            $q = "INSERT INTO funcionario (anotacion, nombre) " .
-                " VALUES ('"
-                . var_escapa($f->_submitValues['descripcion'], $db) . "', '"
-                . var_escapa($f->_submitValues['id'], $db) . "')";
-            //echo $q;
-            hace_consulta($db, $q);
         }
     } else {
         foreach ($f->_submitValues as $k => $v) {
             $d->$k = $v;
         }
-        $res=& $d->delete();
+        //$res=& $d->delete();
     }
     if ($res) {
         /*ambiente();
-        die("OJO quitar");*/
+        return;die("OJO quitar"); */
         header('Location: usyroles.php');
     }
-    if (PEAR::isError($d->_lastError)) {
-        echo_esc($d->_lastError->getMessage());
-        echo_esc($d->_lastError->userinfo());
+    if (PEAR::isError($d)) {
+        echo_esc($d->getMessage());
+        echo_esc($d->userinfo());
     }
 }
 

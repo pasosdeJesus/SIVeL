@@ -47,7 +47,7 @@ function elimina_caso(&$db, $idcaso)
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
         list($n, $c, $o) = $tab;
         //echo "OJO 1 o=$o, c=$c<br>";
-        $bo[$o.$c] = $c;
+        $bo[$o . $c] = $c;
     }
     ksort($bo);
     foreach ($bo as $k => $c) {
@@ -61,7 +61,8 @@ function elimina_caso(&$db, $idcaso)
             echo_esc("Falta eliminaDep en $k, $c");
         }
     }
-    $q = "DELETE FROM caso_funcionario WHERE id_caso='$idcaso'";
+    $q = "DELETE FROM caso_usuario WHERE id_caso='$idcaso'";
+    //echo "OJO q=$q<br>";
     hace_consulta($db, $q);
     $q = "DELETE FROM caso WHERE id='$idcaso'";
     $res = hace_consulta($db, $q);

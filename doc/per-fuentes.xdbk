@@ -741,7 +741,7 @@ base de datos después de cambiarse de pestaña
 en la función <literal>procesa</literal>.  
 Note que tras procesar cada
 pestaña debe llamarse la función 
-<literal>funcionario_caso</literal>
+<literal>caso_usuario</literal>
 					</para>
 				</listitem>
 				<listitem>

@@ -16,12 +16,12 @@
  */
 
 /**
- * Definicion para la tabla funcionario.
+ * Definicion para la tabla caso_usuario.
  */
 require_once 'DB_DataObject_SIVeL.php';
 
 /**
- * Definicion para la tabla funcionario.
+ * Definicion para la tabla caso_usuario.
  * Ver documentación de DataObjects_Caso.
  *
  * @category SIVeL
@@ -31,17 +31,34 @@ require_once 'DB_DataObject_SIVeL.php';
  * @link     http://sivel.sf.net/tec
  * @see      DataObjects_Caso
  */
-class DataObjects_Funcionario extends DB_DataObject_SIVeL
+class DataObjects_Caso_usuario extends DB_DataObject_SIVeL
 {
 
-    var $__table = 'funcionario';                     // table name
-    var $id;                              // int4(4)  not_null primary_key
-    var $anotacion;                       // varchar(-1)
-    var $nombre;                          // varchar(-1)  not_null
+    var $__table = 'caso_usuario';                // table name
+    var $id_usuario;                  // int4(4)  multiple_key
+    var $id_caso;                         // int4(4)  multiple_key
+    var $fechainicio;                    // date(4)
 
 
-    var $fb_linkDisplayFields = array('nombre');
     var $fb_hidePrimaryKey = true;
+
+    /**
+     * Constructora
+     * return @void
+     */
+    public function __construct()
+    {
+        parent::__construct();
+
+        /**
+         * Nombres por presentar para cada campo.
+         */
+        $this->fb_fieldLabels= array(
+           'id_usuario' => _('Usuario'),
+           'id_caso' => _('Caso'),
+           'fechainicio' => _('Fecha en la que inicio el caso'),
+        );
+    }
 
 }
 

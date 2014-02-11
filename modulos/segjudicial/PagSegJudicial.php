@@ -341,7 +341,7 @@ class PagSegJudicial extends PagBaseMultiple
 
     /**
      * eliminaDep($db, $idcaso) elimina victimas de la base $db presentados
-     * en este formulario, que dependen del caso $idcaso 
+     * en este formulario, que dependen del caso $idcaso
      *
      * @param object &$db    Conexión a base
      * @param int    $idcaso Id del caso
@@ -423,9 +423,9 @@ class PagSegJudicial extends PagBaseMultiple
             $nacc->id_taccion = (int)$valores['id_taccion'];
             $nacc->id_despacho = (int)$valores['id_despacho'];
             $nacc->fecha = arr_a_fecha(var_escapa($valores['fecha'], $db, 20));
-            $nacc->numeroradicado 
+            $nacc->numeroradicado
                 = var_escapa($valores['numeroradicado'], $db);
-            $nacc->observacionesaccion 
+            $nacc->observacionesaccion
                 = var_escapa($valores['observacionesaccion'], $db);
             $nacc->insert();
             $nacc->respondido= isset($valores['respondido'])
@@ -436,7 +436,7 @@ class PagSegJudicial extends PagBaseMultiple
             $procAc = false;
         }
 
-        caso_funcionario($_SESSION['basicos_id']);
+        caso_usuario($_SESSION['basicos_id']);
         return  $ret;
     }
 
@@ -459,7 +459,7 @@ class PagSegJudicial extends PagBaseMultiple
 
     }
 
-    /** 
+    /**
      * Extrae procesos de un caso y retorna su información en varios
      * vectores
      *
@@ -612,7 +612,7 @@ class PagSegJudicial extends PagBaseMultiple
             }
         }
     }
- 
+
     /**
      * Llamada desde consulta_web para completar consulta poniendo una
      * política de ordenamiento

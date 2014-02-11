@@ -33,7 +33,7 @@ require_once 'DataObjects/Basica.php';
  */
 class DataObjects_Acreditacion extends DataObjects_Basica
 {
-    var $__table = 'acreditacion';                       
+    var $__table = 'acreditacion';
 
     /**
      * Constructora

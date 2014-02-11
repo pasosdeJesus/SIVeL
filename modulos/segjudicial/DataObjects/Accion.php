@@ -114,6 +114,22 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
         return (isset($this->respondido) && $this->respondido == 't') ? 1 : 0;
     }
 
+    /**
+     * Prepara consulta agregando objeto enlazado a este por
+     * campo field.
+     *
+     * @param object &$opts  objeto DB para completar consulta
+     * @param string &$field campo por el cual enlazar
+     *
+     * @return void
+     */
+    function prepareLinkedDataObject(&$opts, &$field)
+    {
+        if ($field = 'id_taccion') {
+            $opts->whereAdd('fechadeshabilitacion IS NULL');
+        }
+    }
+
 
     /**
      * Prepara antes de generar formulario.

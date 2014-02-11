@@ -313,13 +313,13 @@ class PagVictimaIndividual extends PagBaseMultiple
         $gr[] =& $cla;
 
         $this->addGroup(
-            $gr, 'procedencia', _('Lugar de Nacimiento'), 
+            $gr, 'procedencia', _('Lugar de Nacimiento'),
             '&nbsp;', false
         );
         PagUbicacion::modCampos(
             $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
-            $this->bpersona->_do->id_departamento, 
-            $this->bpersona->_do->id_municipio, 
+            $this->bpersona->_do->id_departamento,
+            $this->bpersona->_do->id_municipio,
             $this->bpersona->_do->id_clase
         );
 
@@ -652,14 +652,14 @@ class PagVictimaIndividual extends PagBaseMultiple
             return false;
         }
 
-        if (isset($valores['numerodocumento']) 
+        if (isset($valores['numerodocumento'])
             && (int)$valores['numerodocumento'] > 0
         ) {
             $q = "SELECT id FROM persona WHERE numerodocumento='"
                 . (int)$valores['numerodocumento'] . "'";
-            $r = hace_consulta($db, $q); $row = array(); 
+            $r = hace_consulta($db, $q); $row = array();
             if ($r->fetchInto($row)) {
-                if (!isset($this->bpersona->_do->id) 
+                if (!isset($this->bpersona->_do->id)
                     || $row[0] != $this->bpersona->_do->id
                 ) {
                     error_valida(_('Numero de documento repetido'), $valores);
@@ -674,7 +674,7 @@ class PagVictimaIndividual extends PagBaseMultiple
                 error_valida(_('Faltó nombre y/o apellido de familiar'), $valores);
                 return false;
         }
-    
+
         if (isset($GLOBALS['estilo_nombres'])
             && $GLOBALS['estilo_nombres'] == 'MAYUSCULAS'
         ) {
@@ -751,8 +751,8 @@ class PagVictimaIndividual extends PagBaseMultiple
             }
         }
 
-        //$bt->setMarker("procesa: antes de caso_funcionario");
-        caso_funcionario($_SESSION['basicos_id']);
+        //$bt->setMarker("procesa: antes de caso_usuario");
+        caso_usuario($_SESSION['basicos_id']);
         //$bt->_Benchmark_Timer();
         return  $ret;
     }
@@ -820,11 +820,11 @@ class PagVictimaIndividual extends PagBaseMultiple
                         if ($w5 != "") {
                             agrega_tabla($t, $subc['tabla']);
                             consulta_and_sinap(
-                                $w, "victima.id_persona", 
+                                $w, "victima.id_persona",
                                 $subc['tabla'] . ".id_persona", "=", "AND"
                             );
                             consulta_and_sinap(
-                                $w, "victima.id_caso", 
+                                $w, "victima.id_caso",
                                 $subc['tabla'] . ".id_caso", "=", "AND"
                             );
                             $w5 .= ' AND victima.id_caso = '
@@ -911,7 +911,7 @@ class PagVictimaIndividual extends PagBaseMultiple
      * @param integer $idn      Código del caso en el que aplicará los cambios
      * @param integer $tablavic Tabla victima
      *
-     * @return Mezcla valores de las victimas de $id2 en $idn si $idn==$id1
+     * @return Mezcla valores de las victimas de $id2 en $idn si $idn == $id1
      * intentando poner los datos con más información.
      * @see PagBaseSimple
      */
@@ -947,14 +947,14 @@ class PagVictimaIndividual extends PagBaseMultiple
                     if ($dse1 && method_exists($dse1, 'idSinInfo')) {
                         $vdf = $dse1->idSinInfo();
                     }
-                    if ($dp1->$ftr == $vdf && $dp2->$ftr != $vdf 
+                    if ($dp1->$ftr == $vdf && $dp2->$ftr != $vdf
                         && $dp2->$ftr != ""
                     ) {
                         //echo "OJO '$ftr': '{$dp1->$ftr}'->'{$dp2->$ftr}'<br>";
                         $dp1->$ftr = $dp2->$ftr;
                     }
                 }
-                $dp1->update(); 
+                $dp1->update();
                 $de = objeto_tabla($tablavic);
                 $de->id_caso = $id2;
                 $de->id_persona = $idp2;
@@ -966,15 +966,15 @@ class PagVictimaIndividual extends PagBaseMultiple
                     if ($dse1 && method_exists($dse1, 'idSinInfo')) {
                         $vdf = $dse1->idSinInfo();
                     }
-                    if (isset($dn->$ftr) && isset($e->$ftr) 
-                        && (is_null($dn->$ftr) || $dn->$ftr === "" 
-                        || ($dn->$ftr == $vdf && $de->$ftr != "" 
+                    if (isset($dn->$ftr) && isset($e->$ftr)
+                        && (is_null($dn->$ftr) || $dn->$ftr === ""
+                        || ($dn->$ftr == $vdf && $de->$ftr != ""
                         && $de->$ftr != $vdf))
                     ) {
                         $dn->$ftr = $de->$ftr;
                     }
                 }
-                //echo "OJO actualizando victima<br>";  var_dump($dn); 
+                //echo "OJO actualizando victima<br>";  var_dump($dn);
                 $dn->update();
                 //die("OJO x");
             }

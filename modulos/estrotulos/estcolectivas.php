@@ -256,8 +256,8 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         if ($where != "") {
             $q1 .= " AND ".$where;
         }
-        hace_consulta($db, "DROP VIEW $cons22", false, false);
-        hace_consulta($db, "DROP VIEW $cons21", false, false);
+        //hace_consulta($db, "DROP VIEW $cons22", false, false);
+        //hace_consulta($db, "DROP VIEW $cons21", false, false);
         hace_consulta($db, "DROP VIEW $cons2", false, false);
         hace_consulta($db, "DROP VIEW $cons", false, false);
         //echo "q1 es $q1<hr>";
@@ -458,7 +458,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
     }
 
 
-    /** 
+    /**
      * Retorna id del tipo de violencia
      *
      * @return string id
@@ -474,7 +474,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
         return $ntipoviolencia;
     }
 
-    /** 
+    /**
      * Retorna id de la supracategoria
      *
      * @return string id

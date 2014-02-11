@@ -57,7 +57,10 @@ if (test "$pa" != "") then {
 	aplica "$pa";
 } else {
 	for i in `find . -name "*php"`; do
-		aplica $i;
+		a=`echo $i | sed -e  "s/.*actualiza.php/..SI../g"`;
+		if (test "$a" != "..SI..") then {
+			aplica $i;
+		} fi;
 	done
 } fi;
 

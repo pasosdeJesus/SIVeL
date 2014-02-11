@@ -34,7 +34,7 @@ $post['_qf_default'] = 'anexos:siguiente';
 
 $files = array();
 $files['archivo_sel']['name'] = 'anexo.txt';
-$files['archivo_sel']['type'] = 'text/plani';
+$files['archivo_sel']['type'] = 'text/plain';
 $files['archivo_sel']['tmp_name'] = 'anexo.txt';
 
 pasaPestanaFicha($db, array("anexo"), $post, 1, true, $files);

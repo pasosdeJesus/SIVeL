@@ -7,10 +7,9 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org> 
+ * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2013 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   GIT:
  * Acceso: CONSULTA PÚBLICA
  * @link      http://sivel.sf.net
  */
@@ -21,10 +20,10 @@
  *
  * @return string servidor
  */
-function determina_host() 
+function determina_host()
 {
     if (isset($_SERVER['HTTP_REFERER'])) {
-        $pu = parse_url($_SERVER['HTTP_REFERER']); 
+        $pu = parse_url($_SERVER['HTTP_REFERER']);
     } else {
         $pu['scheme'] = isset($_SERVER['HTTPS']) &&  $_SERVER['HTTPS'] == 'on' ?
             "https" : "http";
@@ -36,16 +35,19 @@ function determina_host()
         $host .= ":" . $pu['port'];
     }
     $host .= dirname($pu['path']);
-    trigger_error("host=$host");
-    trigger_error(var_export($pu, true));
-    trigger_error(print_r($_GET,true));
+    if ($host[strlen($host) - 1] != '/') {
+        $host .= "/";
+    }
+    //trigger_error("host=$host");
+    //trigger_error(var_export($pu, true));
+    //trigger_error(print_r($_GET,true));
 
     return $host;
 }
 
 /**
  * Retorna error en lectura XML
- * 
+ *
  * @param string $error Descripcion
  * @param object $xml   Objeto
  *
@@ -87,7 +89,7 @@ function display_xml_error($error, $xml)
  *
  * @return void
  */
-function errores_xml($xml, $ca) 
+function errores_xml($xml, $ca)
 {
     trigger_error("ca=" . $ca);
     $lxml = explode("\n", $ca);

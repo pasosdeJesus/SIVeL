@@ -229,7 +229,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      * Verifica y salva datos.
      * Típicamente debe validar datos, preprocesar de requerirse,
      * procesar con función process y finalmente registrar evento con función
-     * caso_funcionario
+     * caso_usuario
      *
      * @param array &$valores Valores enviados por el formulario.
      *
@@ -264,7 +264,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
 
         // Otros
 
-        caso_funcionario($_SESSION['basicos_id']);
+        caso_usuario($_SESSION['basicos_id']);
         return  $ret;
     }
 
@@ -722,7 +722,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      *   compara.
      * @param integer $id1 Código de primer caso
      * @param integer $id2 Código de segundo caso
-     * @param integer $idn Código de nuevo caso en el que aplicará 
+     * @param integer $idn Código de nuevo caso en el que aplicará
      *      los cambios o $id1 si mezcla lo del segundo dentro del primero
      * @param arrayer $cls Especificación de tablas por mezclar
      *
@@ -734,7 +734,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
         assert($id1 != $id2);
         assert($id2 != $idn);
         assert($db != null);
-        //echo "OJO PagBaseSimple::mezcla(db, "; 
+        //echo "OJO PagBaseSimple::mezcla(db, ";
         //print_r($sol); echo ", $id1, $id2, $idn, ";
         //print_r($cls); echo ")<br> ";
         if (!is_array($cls)) {
@@ -744,13 +744,13 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
         foreach ($cls as $t) {
             $d1 = objeto_tabla($t);
             $d2 = objeto_tabla($t);
-            if ($nuevo) { 
+            if ($nuevo) {
                 $dd = objeto_tabla($t);
                 if ($t == 'caso') {
                     $dd->id = $idn;
                 } else {
                     $dd->id_caso = $idn;
-                } 
+                }
             } else {
                 $dd = $d1;
             }
@@ -798,7 +798,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
             ) {
                 //echo "OJO insertando";
                 $dd->id_caso = $idn;
-                //echo "OJO Antes: "; print_r($dd); 
+                //echo "OJO Antes: "; print_r($dd);
                 $dd->insert();
             } else if ($t == 'caso' || $dd->id_caso == $idn) {
                 //echo "OJO actualizando"; print_r($dd);  //die("x");
@@ -807,7 +807,6 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
             //echo "<br>OJO Después: "; print_r($dd);
         }
     }
-
 
 }
 

@@ -281,9 +281,9 @@ class PagOtrasFuentes extends PagBaseMultiple
             ) {
                 $f->setValue(
                     array(
-                        'd' => '', 
+                        'd' => '',
                         $lm => '',
-                        'Y' => '' 
+                        'Y' => ''
                     )
                 );
             }
@@ -424,7 +424,7 @@ class PagOtrasFuentes extends PagBaseMultiple
         );
         $_SESSION['fd_total']++;
 
-        caso_funcionario($_SESSION['basicos_id']);
+        caso_usuario($_SESSION['basicos_id']);
         return  $ret;
     }
 
@@ -597,8 +597,8 @@ class PagOtrasFuentes extends PagBaseMultiple
      * acuerdo a las preferencias especificadas en $sol.
      * @see PagBaseSimple
      */
-    static function mezcla(&$db, $sol, $id1, $id2, $idn, 
-        $cls=array('caso_fotra')
+    static function mezcla(&$db, $sol, $id1, $id2, $idn,
+        $cls = array('caso_fotra')
     ) {
         //echo "OJO PagOtrasFuentes::mezcla(db, ";
         //print_r($sol); echo ", $id1, $id2, $idn, ";print_r($cls);echo ")<br> ";
@@ -647,7 +647,7 @@ class PagOtrasFuentes extends PagBaseMultiple
                         $dd->$c = $d2->$c;
                     }
                 }
-                //echo "OJO 2 insertado dd"; print_r($dd); 
+                //echo "OJO 2 insertado dd"; print_r($dd);
                 $dd->insert();
             }
             //print_r($dd);

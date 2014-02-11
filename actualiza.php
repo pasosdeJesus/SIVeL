@@ -2345,13 +2345,19 @@ if (!aplicado($idac)) {
 
 $idac = '1.1-dp1';
 if (!aplicado($idac)) {
-    consulta_archivo(&$db, 'act-nom2012.sql');
+    consulta_archivo($db, 'act-nom2012.sql');
     aplicaact($act, $idac, 'Actualiza info. geográfica con DIVIPOLA 2012');
+}
+
+$idac = '1.1-dp13';
+if (!aplicado($idac)) {
+    consulta_archivo($db, 'act-nom2013.sql');
+    aplicaact($act, $idac, 'Actualiza info. geográfica con DIVIPOLA 2013');
 }
 
 $idac = '1.2-co';
 if (!aplicado($idac)) {
-    consulta_archivo(&$db, 'act-coor.sql');
+    consulta_archivo($db, 'act-coor.sql');
     aplicaact($act, $idac, 'Agrega coordenadas a departamentos y municipios');
 }
 
@@ -2570,6 +2576,288 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Renombrando tablas');
 } 
 
+$idac = '1.2-sx';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "
+-- Tomado de http://wiki.postgresql.org/wiki/SoundexESP
+-- Oliver Mazariegos http://www.grupovesica.com
+
+CREATE OR REPLACE FUNCTION soundexesp(input text) RETURNS text
+IMMUTABLE STRICT COST 500 LANGUAGE plpgsql
+AS $$
+DECLARE
+	soundex text='';	
+	-- para determinar la primera letra
+	pri_letra text;
+	resto text;
+	sustituida text ='';
+	-- para quitar adyacentes
+	anterior text;
+	actual text;
+	corregido text;
+BEGIN
+       -- devolver null si recibi un string en blanco o con espacios en blanco
+	IF length(trim(input))= 0 then
+		RETURN NULL;
+	end IF;
+ 
+ 
+	-- 1: LIMPIEZA:
+		-- pasar a mayuscula, eliminar la letra \"H\" inicial, los acentos y la enie
+		-- 'holá coñó' => 'OLA CONO'
+		input=translate(ltrim(trim(upper(input)),'H'),'ÑÁÉÍÓÚÀÈÌÒÙÜ','NAEIOUAEIOUU');
+ 
+		-- eliminar caracteres no alfabéticos (números, símbolos como &,%,\",*,!,+, etc.
+		input=regexp_replace(input, '[^a-zA-Z]', '', 'g');
+ 
+	-- 2: PRIMERA LETRA ES IMPORTANTE, DEBO ASOCIAR LAS SIMILARES
+	--  'vaca' se convierte en 'baca'  y 'zapote' se convierte en 'sapote'
+	-- un fenomeno importante es GE y GI se vuelven JE y JI; CA se vuelve KA, etc
+	pri_letra =substr(input,1,1);
+	resto =substr(input,2);
+	CASE 
+		when pri_letra IN ('V') then
+			sustituida='B';
+		when pri_letra IN ('Z','X') then
+			sustituida='S';
+		when pri_letra IN ('G') AND substr(input,2,1) IN ('E','I') then
+			sustituida='J';
+		when pri_letra IN('C') AND substr(input,2,1) NOT IN ('H','E','I') then
+			sustituida='K';
+		else
+			sustituida=pri_letra;
+ 
+	end case;
+	--corregir el parametro con las consonantes sustituidas:
+	input=sustituida || resto;		
+ 
+	-- 3: corregir \"letras compuestas\" y volverlas una sola
+	input=REPLACE(input,'CH','V');
+	input=REPLACE(input,'QU','K');
+	input=REPLACE(input,'LL','J');
+	input=REPLACE(input,'CE','S');
+	input=REPLACE(input,'CI','S');
+	input=REPLACE(input,'YA','J');
+	input=REPLACE(input,'YE','J');
+	input=REPLACE(input,'YI','J');
+	input=REPLACE(input,'YO','J');
+	input=REPLACE(input,'YU','J');
+	input=REPLACE(input,'GE','J');
+	input=REPLACE(input,'GI','J');
+	input=REPLACE(input,'NY','N');
+	-- para debug:    --return input;
+ 
+	-- EMPIEZA EL CALCULO DEL SOUNDEX
+	-- 4: OBTENER PRIMERA letra
+	pri_letra=substr(input,1,1);
+ 
+	-- 5: retener el resto del string
+	resto=substr(input,2);
+ 
+	--6: en el resto del string, quitar vocales y vocales fonéticas
+	resto=translate(resto,'@AEIOUHWY','@');
+ 
+	--7: convertir las letras foneticamente equivalentes a numeros  (esto hace que B sea equivalente a V, C con S y Z, etc.)
+	resto=translate(resto, 'BPFVCGKSXZDTLMNRQJ', '111122222233455677');
+	-- así va quedando la cosa
+	soundex=pri_letra || resto;
+ 
+	--8: eliminar números iguales adyacentes (A11233 se vuelve A123)
+	anterior=substr(soundex,1,1);
+	corregido=anterior;
+ 
+	FOR i IN 2 .. length(soundex) LOOP
+		actual = substr(soundex, i, 1);
+		IF actual <> anterior THEN
+			corregido=corregido || actual;
+			anterior=actual;			
+		END IF;
+	END LOOP;
+	-- así va la cosa
+	soundex=corregido;
+ 
+	-- 9: siempre retornar un string de 4 posiciones
+	soundex=rpad(soundex,4,'0');
+	soundex=substr(soundex,1,4);		
+ 
+	-- YA ESTUVO
+	RETURN soundex;	
+END;	
+$$
+        ", false
+    );
+    aplicaact($act, $idac, 'Función Soundex en Español');
+} 
+
+$idac = '1.2-fun';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "ALTER TABLE usuario DROP COLUMN diasedicion", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario RENAME id TO nusuario", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ADD column id INTEGER", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario 
+        ADD COLUMN fechacreacion DATE NOT NULL DEFAULT '2001-01-01'" , false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario " .
+        "ADD COLUMN fechadeshabilitacion DATE DEFAULT NULL " .
+        "CHECK (fechadeshabilitacion IS NULL OR " .
+        "fechadeshabilitacion >= fechacreacion)", false
+    );
+    hace_consulta(
+        $db, "UPDATE usuario set id=funcionario.id, fechadeshabilitacion=NULL 
+        FROM funcionario WHERE 
+        funcionario.nombre = usuario.nusuario", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO usuario (id, nusuario, password, nombre, descripcion, rol, idioma, fechadeshabilitacion) (SELECT id, nombre, '', nombre, '', 4, 'es_CO', current_date FROM funcionario WHERE nombre NOT IN (SELECT nusuario FROM usuario))", false
+    );
+    hace_consulta(
+        $db, "CREATE UNIQUE INDEX usuario_nusuario ON usuario USING btree (nusuario)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario DROP CONSTRAINT usuario_pkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ADD CONSTRAINT usuario_pkey
+        PRIMARY KEY (id)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT caso_etiqueta_pkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_funcionario DROP CONSTRAINT caso_funcionario_pkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_funcionario DROP CONSTRAINT caso_funcionario_id_funcionario_fkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT caso_etiqueta_id_funcionario_fkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE funcionario DROP CONSTRAINT funcionario_pkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_funcionario RENAME TO caso_usuario", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_usuario RENAME id_funcionario TO id_usuario", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta RENAME id_funcionario TO id_usuario", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_usuario 
+        ADD CONSTRAINT caso_usuario_id_usuario_fkey 
+        FOREIGN KEY (id_usuario) REFERENCES usuario(id)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta
+        ADD CONSTRAINT caso_etiqueta_id_usuario_fkey
+        FOREIGN KEY (id_usuario) REFERENCES usuario(id)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta
+        ADD CONSTRAINT caso_etiqueta_pkey
+        PRIMARY KEY (id_caso, id_etiqueta, id_usuario, fecha)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE funcionario RENAME TO obsoleto_funcionario", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE obsoleto_funcionario DROP CONSTRAINT 
+        funcionario_nombre_key", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE obsoleto_funcionario ALTER COLUMN id 
+        SET DEFAULT NULL", false
+    );
+    hace_consulta(
+        $db, "ALTER SEQUENCE funcionario_seq RENAME TO usuario_seq", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ALTER COLUMN id SET DEFAULT nextval('usuario_seq')"
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ALTER COLUMN rol SET DEFAULT '4'"
+    );
+
+    aplicaact($act, $idac, 'Fusiona tablas usuario y funcionario');
+}
+
+$idac = '1.2-bc';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "ALTER TABLE usuario ADD COLUMN email VARCHAR(255) NOT NULL DEFAULT ''", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ADD COLUMN encrypted_password VARCHAR(255) NOT NULL DEFAULT ''", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ADD COLUMN sign_in_count INTEGER NOT NULL DEFAULT 0", 
+        false
+    );
+    hace_consulta(
+        $db, "UPDATE usuario SET email=(nusuario || '@localhost') 
+        WHERE email = ''", false
+    );
+    hace_consulta(
+        $db, "CREATE UNIQUE INDEX index_usuario_on_email ON usuario 
+        USING btree (email)",
+        false
+    );
+ 
+    aplicaact($act, $idac, 'Emplea bcrypt para calcular condensado de claves y agrega inforación a tablas para hacer compatible con autenticación con Devise/Ruby');
+}
+
+$idac = '1.2-nc';
+if (!aplicado($idac)) {
+
+    hace_consulta($db, $q, false);
+    hace_consulta(
+        $db,
+        "ALTER TABLE comunidad_sectorsocial 
+        RENAME COLUMN id_sector TO id_sectorsocial", false);
+
+    aplicaact($act, $idac, 'Nombre en Sector Social de Victima Colectiva');
+}
+
+$idac = '1.2-def';
+if (!aplicado($idac)) {
+
+    $basicas = html_menu_toma_url($GLOBALS['menu_tablas_basicas']);
+    global $dbnombre;
+    $v = null;
+    $enl = parse_ini_file(
+        $_SESSION['dirsitio'] . "/DataObjects/" .
+        $GLOBALS['dbnombre'] . ".links.ini",
+        true
+    );
+    foreach($enl as $t => $e) {
+        $do = objeto_tabla($t);
+        foreach($e as $c => $rel) {
+            if (strpos($c, ',') === FALSE) {
+                $pd = strpos($rel, ':');
+                $ndo = substr($rel, 0, $pd);
+                $ids = valorSinInfo($do, $c);
+                if ($ids >= 0 && ($ndo != 'presponsable' || 
+                    $c == 'organizacionarmada' )) {
+                    $q = "ALTER TABLE $t ALTER COLUMN $c SET DEFAULT '$ids'";
+                    hace_consulta($db, $q, false);
+                } 
+            }
+        }
+    }
+    aplicaact($act, $idac, 'Valores por defecto en referencias a tablas básicas');
+
+}
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;

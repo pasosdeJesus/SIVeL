@@ -31,7 +31,7 @@ if (!isset($_GET['term'])) {
     die("Error: Falta variable <i>term</i> con nombre buscado");
 }
 //retrieve the search term that autocomplete sends
-$term = trim(strip_tags($_GET['term'])); 
+$term = trim(strip_tags($_GET['term']));
 
 
 //trigger_error("term=$term");
@@ -51,14 +51,14 @@ $where = " to_tsvector('spanish', unaccent(persona.nombres) "
 
 $penc = isset($GLOBALS['persona_en_caso']) ? $GLOBALS['persona_en_caso'] : '';
 $partes = array(
-    'nombres', 
-    'apellidos', 
+    'nombres',
+    'apellidos',
     'COALESCE(numerodocumento::TEXT, \'\')',
 /*    'ARRAY_TO_STRING(ARRAY('
         . ' SELECT id_caso FROM victima WHERE victima.id_persona=id '
         . ' UNION SELECT id_caso FROM persona_trelacion, victima '
         . ' WHERE persona1 = id_persona AND persona2 = id '
-        . $penc 
+        . $penc
         . '), \', \')' */
 );
 $s = "";
@@ -72,7 +72,7 @@ foreach ($partes as $p) {
 }
 $qstring = "SELECT TRIM($s), $l FROM persona WHERE $where ORDER BY 1";
 
-//trigger_error("$qstring"); 
+//trigger_error("$qstring");
 $res = hace_consulta($db, $qstring);
 
 $row = array();

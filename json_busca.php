@@ -21,7 +21,7 @@ require_once 'misc.php';
 
 global $dsn;
 $aut_usuario = "";
-$db = autentica_usuario($dsn, $aut_usuario, 11);
+$db = autentica_usuario($dsn, $aut_usuario, 0);
 
 require_once $_SESSION['dirsitio'] . '/conf_int.php';
 require_once 'misc_caso.php';
@@ -49,8 +49,7 @@ if (isset($_GET['tabla'])) {
             $sep = " AND ";
         }
     }
-    $q .= " ORDER BY ";
-    $q .= " nombre";
+    $q .= " ORDER BY nombre";
     //trigger_error("q=" . $q);
     $db->setFetchMode(DB_FETCHMODE_ASSOC);
     $r = hace_consulta($db, $q);

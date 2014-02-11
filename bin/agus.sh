@@ -26,6 +26,8 @@ echo -n "Nombre: ";
 read nombre;
 echo -n "Descripcion: ";
 read descripcion;
+echo -n "Correo: ";
+read correo;
 echo "Roles:";
 minr=0;
 maxr=0;
@@ -54,8 +56,6 @@ if (test "$sidrol" = "") then {
 	echo "No se eligió uno de los roles disponibles, eligiendo 2";
 	sidrol="2";
 } fi;
-echo -n "Anotación: ";
-read anotacion;
 echo "Idiomas disponibles: ";
 for i in ${LENGDISP}; do
 	echo "  " $i;
@@ -74,9 +74,9 @@ if (test "$idsel" = "") then {
 } fi;
 echo -n "Clave: ";
 stty -echo; read clave; stty echo
-
+fecha=`date +%Y-%m-%d`
 clavesha1=$($PHP -n -r "echo sha1('$clave');")
-q="SET client_encoding to 'UTF8'; INSERT INTO usuario(id, password, nombre, descripcion, rol, idioma)  VALUES ('$id', '$clavesha1', '$nombre', '$descripcion', '$sidrol', '$idsel'); INSERT INTO funcionario(anotacion, nombre) VALUES ('$anotacion', '$id');" 
+q="SET client_encoding to 'UTF8'; INSERT INTO usuario(nusuario, password, nombre, descripcion, rol, idioma, email, fechacreacion)  VALUES ('$id', '$clavesha1', '$nombre', '$descripcion', '$sidrol', '$idsel', '$correo', '$fecha');" 
 echo $q;
 ../../bin/psql.sh -c "$q"
 

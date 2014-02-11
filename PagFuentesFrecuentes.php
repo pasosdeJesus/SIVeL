@@ -230,13 +230,13 @@ class PagFuentesFrecuentes extends PagBaseMultiple
             $d = @date('d');
             $lm = isset($da['m']) ? 'm' : 'M';
             if ($da['Y'][0] == ($GLOBALS['anio_min'] - 1)
-                || ($y == $da['Y'][0] && $d == $da['d'][0] 
-                && $m == $da[$lm][0]) 
+                || ($y == $da['Y'][0] && $d == $da['d'][0]
+                && $m == $da[$lm][0])
             ) {
                 $f->setValue(
                     array('d' => '', // array('0' => ''),
-                    $lm => '', 
-                    'Y' => '' 
+                    $lm => '',
+                    'Y' => ''
                     )
                 );
             }
@@ -369,7 +369,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
         );
         $_SESSION['ff_total']++;
 
-        caso_funcionario($_SESSION['basicos_id']);
+        caso_usuario($_SESSION['basicos_id']);
         return  $ret;
     }
 

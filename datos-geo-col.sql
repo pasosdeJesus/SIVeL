@@ -1,13 +1,19 @@
+-- Información geográfica SIVeL
+
+-- Información extraida de DIVIPOLA (http://www.dane.gov.co/Divipola/), 
+--   Divipolador (http://sidih.colombiassh.org/im/divipolaLH/), 
+--   OpenStreetMap (http://www.openstreetmap.org) 
+--   Banco de Datos del CINEP y aportes de voluntarios(as) 
+--   especialmente de la Red de Bancos de Datos de DH y DIH
+-- Recopilado, gracias a Dios, por vtamara@pasosdeJesus.org
+-- Dominio público de acuerdo a legislación colombiana. Sin garantías.
+
+-- Los registros con fechadeshabilitacion no nula son históricos.
+
+
 SET client_encoding = 'UTF8';
 
-
-INSERT INTO tsitio (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (1, 'SIN INFORMACION', '2001-01-01', NULL);
-INSERT INTO tsitio (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (2, 'URBANO', '2001-01-01', NULL);
-INSERT INTO tsitio (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (3, 'RURAL', '2001-01-01', NULL);
-INSERT INTO tsitio (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (4, 'URBANO Y RURAL', '2001-01-01', NULL);
-
-SELECT setval('tsitio_seq', max(id)) FROM tsitio;
-
+--
 INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('CM', 'CABECERA MUNICIPAL', '2001-01-01', NULL);
 INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('C', 'CORREGIMIENTO', '2001-01-01', NULL);
 INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('CAS', 'CASERIO', '2001-01-01', NULL);
@@ -15,14 +21,13 @@ INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('IP
 INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('IPD', 'INSPECCION DE POLICIA DEPARTAMENTAL', '2001-01-01', NULL);
 INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('CP', 'CENTRO POBLADO', '2001-01-01', NULL);
 INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('IPM', 'INSPECCIÓN DE POLICIA MUNICIPAL', '2001-01-01', NULL);
-INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('CD', 'CORREGIMIENTO DEPARTAMENTAL', '2001-01-01', '2013-01-04');
 INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('ND', 'NO DETERMINADO', '2001-01-01', '2013-01-04');
 INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('CC', 'CORREGIMIENTO COMISARIAL', '2001-01-01', '2013-01-04');
 INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('IPI', 'INSPECCIÓN DE POLICIA INTENDENCIAL', '2001-01-01', '2013-01-04');
 INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('CI', 'CORREGIMIENTO INTENDENCIAL', '2001-01-01', '2013-01-04');
-INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('TEBF', 'TERRITORIOS ESPECIALES BIODIVERSOS Y FRONTERIZOS', '2013-01-04', NULL);
-
-
+INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('CD', 'CORREGIMIENTO DEPARTAMENTAL', '2001-01-01', NULL);
+INSERT INTO tclase (id, nombre, fechacreacion, fechadeshabilitacion) VALUES ('TEBF', 'TERRITORIOS ESPECIALES BIODIVERSOS Y FRONTERIZOS', '2013-01-04', '2013-11-13');
+--
 INSERT INTO departamento (id, nombre, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10000, 'EXTERIOR', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO departamento (id, nombre, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (91, 'AMAZONAS', -1.81887960000000004, -71.3423095454544978, '2001-01-01', NULL);
 INSERT INTO departamento (id, nombre, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'ANTIOQUIA', 6.55021133387096022, -75.5540034427420011, '2001-01-01', NULL);
@@ -60,14 +65,7 @@ INSERT INTO departamento (id, nombre, latitud, longitud, fechacreacion, fechades
 
 SELECT setval('departamento_seq', max(id)) FROM departamento;
 
-INSERT INTO frontera (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (1, 'Ecuador', '2001-01-01', NULL);
-INSERT INTO frontera (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (2, 'Brasil', '2001-01-01', NULL);
-INSERT INTO frontera (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (5, 'Panamá', '2001-01-01', NULL);
-INSERT INTO frontera (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (4, 'Venezuela', '2001-01-01', NULL);
-INSERT INTO frontera (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (6, 'Perú', '2001-01-01', NULL);
-
-SELECT setval('frontera_seq', max(id)) FROM frontera;
-
+--
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (110, 'BARRANCA DE UPÍA', 50, 4.57555560000000039, -72.9611110999999966, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (83, 'BELÉN', 52, 1.59749999999999992, -77.0174999999999983, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'BRASIL', 10000, -8.46661450000000038, -51.3333975999999979, '2001-01-01', NULL);
@@ -917,7 +915,6 @@ INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacrea
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (181, 'CHOACHÍ', 25, 4.58333329999999961, -73.9166666999999933, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'CHÁMEZA', 85, 5, -72.75, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (206, 'COLOMBIA', 41, 2.5, -75.75, '2001-01-01', NULL);
-INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (204, 'COLOSO (RICAURTE) (RICAURTE)', 70, 9.49666670000000046, -75.3555556000000024, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (219, 'COLÓN', 86, 1.19361110000000004, -76.9769443999999936, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (207, 'CONCEPCIÓN', 68, 6.91666670000000039, -72.5, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (205, 'CONCORDIA', 47, 9.84027780000000085, -74.4447222000000011, '2001-01-01', NULL);
@@ -1196,9 +1193,11 @@ INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacrea
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (899, 'ZIPAQUIRÁ', 25, 5.02833329999999989, -74.0058333000000061, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (980, 'ZONA BANANERA', 47, 10.7653999999999996, -74.1387, '2001-01-01', NULL);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (357, 'ÍQUIRA', 41, 2.75, -75.75, '2001-01-01', NULL);
+INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (204, 'COLOSÓ (RICAURTE)', 70, 9.49666670000000046, -75.3555556000000024, '2001-01-01', NULL);
 
 SELECT setval('municipio_seq', max(id)) FROM municipio;
 
+--
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LA GRANJA', 5, 361, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'LA CASCADA', 5, 364, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LA CASCADA', 5, 368, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -1212,7 +1211,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'LIBORINA', 5, 411, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'EL CARMEN - LA VENTA', 5, 411, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'LA HONDA', 5, 411, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LA MERCED (PLAYON)', 5, 411, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SAN DIEGO (PLACITA)', 5, 411, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'EL POTRERO', 5, 411, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'SOBRESABANA', 5, 411, 'IPM', NULL, NULL, '2001-01-01', NULL);
@@ -1235,7 +1233,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'VILLA ARTEAGA', 5, 480, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'PAVARANDO GRANDE', 5, 480, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'NARIÑO', 5, 483, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PUERTO VENUS (SAMANA)', 5, 483, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'EL FARO', 5, 483, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'EL TOTUMO', 5, 490, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'MULATOS', 5, 490, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -1312,6 +1309,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BOCATOCINO', 8, 372, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'LURUACO', 8, 421, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ARROYO DE PIEDRA', 8, 421, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'RIOCLARO', 17, 873, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'PALMAR DE CANDELARIA', 8, 421, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SANTA CRUZ', 8, 421, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'LA PUNTICA', 8, 421, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -1426,7 +1424,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'LA FE', 17, 867, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'EL PINDO', 17, 873, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LLANITOS', 17, 873, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'RIOCLARO', 17, 873, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'MIRAFLORES', 17, 873, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'GALLINAZO', 17, 873, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'LA NUEVA PRIMAVERA', 17, 873, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -1766,6 +1763,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'PUNTA DE HORNOS', 13, 650, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'EL PALMAR', 13, 650, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'CUATRO BOCAS', 13, 650, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'ÑANGUMA', 13, 442, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'VENTAQUEMADA', 15, 861, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'ESTANCIA GRANDE', 15, 861, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'ZETAQUIRA', 15, 897, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -1880,7 +1878,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'COROCITO', 13, 440, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CORREA', 13, 442, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'FLAMENCO', 13, 442, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'ÑANGUMA', 13, 442, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'RETIRO NUEVO', 13, 442, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'SAN PABLO', 13, 442, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'LOS BELLOS', 13, 442, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -1902,7 +1899,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN RAFAEL', 13, 42, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'SANTO DOMINGO', 13, 42, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'ARJONA', 13, 52, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PUERTO BADEL', 13, 52, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'GAMBOTE', 13, 52, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'ROCHA', 13, 52, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'ARROYOHONDO', 13, 62, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -1995,14 +1991,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SAN MARTÍN DE LOBA', 13, 667, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERTO NARIÑO', 91, 540, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'LETICIA', 91, 1, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'SAN MARTÍN DE AMACAYACU', 91, 1, 'ND', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'ARRECIFAL', 94, 343, 'IP', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'SEJAL', 94, 884, 'IP', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'EL COCO', 94, 1, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'GUASACAVI', 94, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'PUERTO CAMANAOS', 94, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'BARRANCO PICURE', 94, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'BARRANCO TIGRE', 94, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'TARAIRA', 97, 666, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'QUERARI', 97, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'BERMÚDEZ', 13, 655, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -2012,13 +2001,10 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MITÚ', 97, 1, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PAPURÍ', 97, 889, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'PARAÍSO', 13, 654, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERTO ARICA', 91, 536, 'TEBF', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SAN CRISTÓBAL', 13, 654, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'SANTA SOFÍA', 91, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'CHAGUITA', 94, 1, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'ANCA', 91, 1, 'IP', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'YURUPARÍ', 97, 161, 'IP', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'BARRANCO MINAS', 94, 343, 'TEBF', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'LAS CHARQUITAS', 13, 654, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'LAS MERCEDES', 13, 654, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'MÉJICO', 13, 655, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -2026,30 +2012,12 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'MERCEDES', 15, 180, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'NAZARETH', 91, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'SAN JOSÉ', 91, 1, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MIRITÍ', 91, 460, 'TEBF', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LAS PALMAS', 13, 654, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CHIMI', 13, 667, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'PAPAYAL', 13, 667, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LOS CEDROS', 15, 135, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'ARARA', 91, 1, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'ZARAGOZA', 91, 1, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'EL ENCANTO', 91, 263, 'TEBF', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'LA CHORRERA', 91, 405, 'TEBF', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'LA PEDRERA', 91, 407, 'TEBF', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PACOA', 91, 430, 'TEBF', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERTO ALEGRÍA', 91, 530, 'TEBF', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'TARAPACÁ', 91, 798, 'TEBF', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'COCONUEVO', 94, 1, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'COAYARE', 94, 1, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'YURÍ', 94, 1, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SAN FELIPE', 94, 883, 'TEBF', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERTO COLOMBIA', 94, 884, 'TEBF', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'LA GUADALUPE', 94, 885, 'TEBF', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CACAHUAL', 94, 886, 'TEBF', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CAMPO ALEGRE', 94, 887, 'TEBF', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MORICHAL NUEVO', 94, 888, 'TEBF', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PACOA', 97, 511, 'TEBF', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MORICHAL', 97, 777, 'TEBF', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BOCAS DEL YARI', 94, 886, 'IP', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'COBUGOTE', 15, 162, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'EL HATO', 15, 162, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -2084,7 +2052,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'LAGOS DEL DORADO', 95, 200, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SAN JOSÉ DEL GUAVIARE', 95, 1, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'PUERTO NUEVO', 95, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'PUERTO OSPINA ( EL RAUDAL )', 95, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'CHARRAS', 95, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'MOCUARE', 95, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CALAMAR', 95, 15, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -2107,12 +2074,38 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'SEVILLA', 47, 980, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'TUCURINCA', 47, 980, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'ZAWADY', 47, 980, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'LA CHORRERA', 91, 405, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'LA PEDRERA', 91, 407, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PACOA', 91, 430, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MIRITÍ', 91, 460, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERTO ALEGRÍA', 91, 530, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERTO ARICA', 91, 536, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'TARAPACÁ', 91, 798, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'COCO VIEJO', 94, 1, 'CP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'CHAQUITA', 94, 1, 'CP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'COCO NUEVO', 94, 1, 'CP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'BARRANCO TIGRE', 94, 1, 'CP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'COAYARE', 94, 1, 'CP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'YURÍ', 94, 1, 'CP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'BARRANCO MINAS', 94, 343, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SAN FELIPE', 94, 883, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERTO COLOMBIA', 94, 884, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'SEJAL (MAHIMACHI)', 94, 884, 'IP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'LA GUADALUPE', 94, 885, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CACAHUAL', 94, 886, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CAMPO ALEGRE', 94, 887, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MORICHAL NUEVO', 94, 888, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PACOA', 97, 511, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MORICHAL', 97, 777, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'PUERTO CAMANAOS', 94, 1, 'IP', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'PUERTO OSPINA (EL RAUDAL)', 95, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'SAN MARTÍN DE AMACAYACÚ', 91, 1, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'EL ENCANTO', 91, 263, 'CD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'LA CANDELARIA', 47, 980, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'PIEDRAS DE MOLER', 47, 960, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CAÑO DE AGUAS', 47, 960, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'PIEDRAS PINTADAS', 47, 960, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (28, 'VILLA PROVIDENCIA', 23, 807, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SIMON BOLÍVAR', 25, 120, 'ND', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CACHIPAY', 25, 123, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'CHUNTAME', 25, 126, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CAJICÁ', 25, 126, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -2149,7 +2142,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'EL DINDAL', 25, 148, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SAN PEDRO', 25, 148, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CUESTECITAS', 44, 35, 'IPM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'La Caldera', 52, 480, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (23, 'LA CARPA', 95, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'CERRITOS', 95, 25, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'ACEITICO', 99, 1, 'IP', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -2220,6 +2212,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'CÁCERES', 25, 148, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'EL SISGA', 25, 183, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'LA PLAZUELA', 25, 200, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA CALDERA', 52, 480, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'EL TRIUNFO', 25, 245, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'LA VICTORIA', 25, 245, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'PRADILLA', 25, 245, 'IPM', NULL, NULL, '2001-01-01', NULL);
@@ -2344,7 +2337,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PASUNCHA', 25, 513, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CUATRO CAMINOS', 25, 518, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'TUDELA', 25, 518, 'IPM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'EL PLOMO (EL PARAISO)', 25, 518, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'VENECIA', 25, 518, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'MAYA', 25, 530, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'SANTA CECILIA', 25, 530, 'IP', NULL, NULL, '2001-01-01', NULL);
@@ -2516,7 +2508,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (36, 'GITRADO', 27, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (40, 'EL TAMBO', 27, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (47, 'EL FUERTE', 27, 1, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (54, 'PACURITA', 27, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (56, 'PUERTO MURILLO', 27, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (60, 'VILLA DEL ROSARIO', 27, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (61, 'WINANDO', 27, 1, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -2560,11 +2551,10 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'EL BURRO', 20, 517, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'COSTILLA', 20, 550, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MANAURE BALCÓN DEL CESAR', 20, 443, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PIE DE PATÓ', 27, 25, 'CM', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PIE DE PATO', 27, 25, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'ACANDÍ', 27, 6, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (41, 'ALTO MUNGUIDÓ', 27, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'APARTADÓ', 27, 25, 'IP', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (44, 'BOCA DE NAURITÁ', 27, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'BOQUERÓN', 20, 400, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'BÚRBURA', 20, 310, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'CAPURGANÁ', 27, 6, 'IPD', NULL, NULL, '2001-01-01', NULL);
@@ -2637,7 +2627,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'EL BARRO', 20, 770, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'MINAS', 20, 770, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'PUERTO OCULTO', 20, 770, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SAN JOSÉ DE LAS AMERICAS', 20, 770, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'TORCOROMA', 20, 770, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'CUATRO BOCAS', 20, 770, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'LOS BAGRES', 20, 770, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -2675,6 +2664,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'EL SIGLO', 23, 189, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LAGUNETA', 23, 189, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'LOS MIMBRES', 23, 189, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (44, 'BOCA DE NAURITÁ (NAURITÁ)', 27, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SANTIAGO DEL SUR', 23, 189, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'EL BOBO', 23, 189, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'SALGUERO', 23, 189, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -2691,7 +2681,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'RÍO DE ORO', 20, 614, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'EL DESASTRE', 20, 750, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'PALMARITO (NUEVO COLÓN)', 20, 570, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'EL MARQUÉZ', 20, 614, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'MORRISON', 20, 614, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'VARAS BLANCAS', 20, 621, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'SAN JOSÉ DE ORIENTE - BETANIA', 20, 621, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -2703,7 +2692,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'PIJIGUAYAL', 23, 189, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'LA BARRA', 23, 189, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA CAJA', 20, 570, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'NABUSIMAKE', 20, 570, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'CANDELIA', 20, 770, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'TERRAPLEN', 20, 770, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'LA CURVA', 20, 770, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -2779,7 +2767,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'EL BRILLANTE', 23, 580, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ASERRADERO', 23, 586, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'EL HUESO', 23, 586, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PURÍSIMA', 23, 586, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SAHAGÚN', 23, 660, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'SAN JERÓNIMO', 23, 350, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (23, 'SAN ANTONIO DEL TÁCHIRA', 23, 189, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -2788,6 +2775,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'PASO DE LAS FLORES', 23, 300, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'VILLA NUEVA', 23, 300, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'SABANAL', 23, 300, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'EL MARQUEZ', 20, 614, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'LA APARTADA Y LA FRONTERA', 23, 350, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'NUEVO PUEBLO', 23, 350, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'MARGEN DERECHA DE PUERTO CÓRDOBA', 23, 350, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -2835,9 +2823,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'CATALINA', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'COLOMBOY', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'LLANADAS', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'LA YE', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'MORROCOY', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'RODANIA (RODACULO)', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'SALITRAL', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'SAN ANTONIO', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'SANTIAGO ABAJO', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -2845,7 +2831,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'AGUAS VIVAS', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'LAS BOCAS', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'PISA FLORES', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'EL ROBLE', 23, 660, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (26, 'LAS CRUCES', 23, 660, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (29, 'TREMENTINO', 23, 660, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (31, 'LA BALSA', 23, 660, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -2899,13 +2884,13 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'TIERRA SANTA', 23, 79, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'PUERTO CÓRDOBA', 23, 79, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'BELÉN', 23, 79, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (28, 'GUÁIMARITO', 23, 660, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BARBACOAS', 23, 670, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'MARRALÚ', 23, 68, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'EL ROBLE', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (28, 'GUÁIMARITO', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'NUEVA ESTACIÓN', 23, 79, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'NUEVA LUCÍA', 23, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'NUEVO PARAÍSO', 23, 1, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (27, 'RANCHERÍA', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'RÍO NUEVO', 23, 855, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'SANTA LUCÍA', 23, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'VILLA FÁTIMA', 23, 79, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -2924,7 +2909,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (23, 'BRUSELAS', 23, 660, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (23, 'BUENAVENTURA', 23, 1, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'EL AMARILLO', 23, 660, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (36, 'EL ORGULLO', 23, 660, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'EL TOTUMO', 23, 68, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (25, 'EL TRONCO', 23, 1, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'EL VENADO', 23, 855, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -2939,7 +2923,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'NUEVA ESTRELLA', 23, 670, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'PALOTAL', 23, 68, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'POPALES', 23, 68, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (34, 'SAN ANDRÉSITO', 23, 660, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'SANTA MARIA', 23, 855, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'TINAJON', 23, 855, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'COTORRA', 23, 79, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -3017,6 +3000,8 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'PUERTO QUINTERO', 76, 622, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'SANTA RITA', 76, 622, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'EL AGUACATE', 76, 622, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (36, 'EL ORGULLO', 23, 660, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (34, 'SAN ANDRESITO', 23, 660, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'EL HOBO', 76, 622, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'AGUA MORA', 76, 606, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'AGUAS BLANCAS', 23, 90, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -3300,12 +3285,10 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (18, 'CONCEPCIÓN', 76, 109, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (21, 'LADRILLEROS', 76, 109, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (22, 'LLANO BAJO', 76, 109, 'IPD', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (24, 'BOCAS DE MAYORQUÍN', 76, 109, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (37, 'SAN PEDRO', 76, 109, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (41, 'SAN JOSÉ (YURUMANGUÍ)', 76, 109, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (42, 'SABALETAS', 76, 109, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA CAMPIÑA', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'LA MESA - RIOLORO', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'CRUCERO - NOGALES', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BUENOS AIRES', 73, 1, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'GUASIMITO', 73, 678, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -3332,22 +3315,16 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (45, 'LA BARRA', 76, 109, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (47, 'PIANGUITA', 76, 109, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'EL PLACER', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'EL ROSARIO', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'EL SALADO', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'EL VINCULO', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'LA HABANA', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'LA MARÍA', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'MIRAFLORES', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'MONTERREY', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'ZANJÓN HONDO', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'LA PLAYA DEL BUEY', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (18, 'PUEBLO NUEVO', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'FRISOLES', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'LA MAGDALENA', 76, 111, 'CP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (21, 'EL MANANTIAL', 76, 111, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (22, 'ALASKA', 76, 111, 'CP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CHORRERAS', 76, 113, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'EL OVERO', 76, 113, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'GALICIA', 76, 113, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'LA MORENA', 76, 113, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'MESTIZAL', 76, 113, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -3360,6 +3337,12 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'EL RAICERO', 76, 113, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'EL RESGUARDO', 73, 870, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'EL ROCIO', 76, 113, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (31, 'SAN RAFAEL', 68, 615, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (24, 'BOCAS DE MAYORQUIN', 76, 109, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'RÍO LORO/LA MESA', 76, 111, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'EL OVERO (SECTOR POBLADO)', 76, 113, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'LA PLAYA DEL BUEY', 76, 111, 'C', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'FRISOLES', 76, 111, 'C', NULL, NULL, '2001-01-01', '2013-11-13');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'EL TIGRE', 76, 109, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'EL TRIGAL', 76, 109, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'EL VOLADERO', 76, 113, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -3426,7 +3409,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'SANTA BÁRBARA', 85, 125, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'URÍBE URÍBE', 76, 113, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'BARRAGÁN', 76, 122, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'EL DARIÉN', 76, 126, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'LA PRIMAVERA', 76, 126, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'GAVIOTAS', 85, 139, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SANTA HELENA DE CÚSIVA', 85, 139, 'IP', NULL, NULL, '2001-01-01', NULL);
@@ -3514,7 +3496,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'GURUVITA', 85, 15, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'ORITO', 86, 320, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA TESALIA', 86, 320, 'IPM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'LUCITANIA', 86, 320, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (21, 'TETEYE', 86, 568, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERTO CAICEDO', 86, 569, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'SAN PEDRO', 86, 569, 'IP', NULL, NULL, '2001-01-01', NULL);
@@ -3608,7 +3589,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'EL PLACER', 86, 865, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SAN ANTONIO', 86, 865, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'SANTA ROSA SUCUMBIOS', 86, 865, 'IP', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'VILLAFLOR', 86, 885, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MOCOA', 86, 1, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CONDAGUA', 86, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'EL PEPINO', 86, 1, 'IP', NULL, NULL, '2001-01-01', NULL);
@@ -3629,7 +3609,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN FRANCISCO', 68, 444, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SANTA CRUZ DE LA COLINA', 68, 444, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MOGOTES', 68, 464, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA VENTA', 68, 271, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'FLORIÁN', 68, 271, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'GALÁN', 68, 296, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MÁLAGA', 68, 432, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -3695,6 +3674,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'TRAVESIAS', 68, 271, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'TUBUGA', 68, 464, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'VENTA QUEMADA', 68, 432, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA VENTA', 68, 271, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'VERICUTE', 68, 276, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'VILLABEL', 68, 276, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'ZAPAMANGA IV', 68, 276, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -3807,7 +3787,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'VILLA PAZ', 68, 615, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (26, 'LA PLATANALA', 68, 615, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (27, 'LOS CHORROS (SAN JOSÉ)', 68, 615, 'IPM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (31, 'SAN RAFAEL', 68, 615, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (33, 'SAN JOSÉ DE AREVALO', 68, 615, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SABANA DE TORRES', 68, 655, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'PUERTO SANTOS', 68, 655, 'IPD', NULL, NULL, '2001-01-01', NULL);
@@ -3836,18 +3815,12 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'VIZCAÍNA BAJA', 68, 745, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'VERACRUZ KILÓMETRO 80', 68, 655, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'PAYOA CINCO', 68, 655, 'IPD', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA ARAGUA', 68, 720, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'SABANETA', 68, 655, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'PROVINCIA', 68, 655, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'LAGUNA DE ORTICES', 68, 669, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'PANGOTE', 68, 669, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'RICAURTE', 68, 682, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'TEQUIA', 68, 684, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PIEDRALARGA', 68, 686, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN PEDRO', 68, 686, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CACHIPAY', 68, 720, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN JUAN BOSCO', 68, 720, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'PLAN DE ALVAREZ', 68, 720, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ALTO DE JAIMES', 68, 669, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'ALTO DE LA CRUZ', 68, 755, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'ALTO DE SAN JOSÉ MIRANDA', 68, 684, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -3919,6 +3892,10 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'GRAMAL', 68, 820, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'PUERTO DEL LLANO', 68, 820, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (22, 'LOMALTA', 68, 861, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'PLAN DE ALVAREZ', 68, 720, 'CP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN JUAN BOSCO', 68, 720, 'CAS', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA ARAGUA', 68, 720, 'CP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CACHIPAY', 68, 720, 'CP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (23, 'ROPERO', 68, 861, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (24, 'LOS GUAYABOS', 68, 861, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'VETAS', 68, 867, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -4441,7 +4418,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'TRES AMIGOS', 68, 235, 'IP', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'VISTA HERMOSA DE LOS ANDES', 68, 235, 'IP', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUEBLORRICO', 5, 576, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CALIFORNIA', 5, 576, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PUERTO MURILLO', 5, 579, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'VIRGINIAS', 5, 579, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'CABAÑAS', 5, 579, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -4457,7 +4433,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'REMEDIOS', 5, 604, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA CRUZADA', 5, 604, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SANTA ISABEL', 5, 604, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'OTUL', 5, 604, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'RETIRO', 5, 607, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'RIONEGRO', 5, 615, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'AEROPUERTO', 5, 615, 'IPD', NULL, NULL, '2001-01-01', NULL);
@@ -4482,8 +4457,8 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'MARÍA AUXILIADORA', 5, 631, 'CP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'LA CÁMARA', 5, 642, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CAÑAVERALEJO', 5, 631, 'CP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'OTÚ', 5, 604, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERTO BERRÍO', 5, 579, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SINAÍ', 5, 576, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERTO NARE (LA MAGDALENA)', 5, 585, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'LOS DELIRIOS', 5, 585, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SAN ANDRÉS DE CUERQUÍA', 5, 647, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -4670,7 +4645,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LOS LLANOS', 5, 44, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'LA CEJITA', 5, 44, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'LA HIGUINA', 5, 44, 'IPD', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'SAN JOSÉ DE APARTADO', 5, 45, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'ZUNGO CARRETERA', 5, 45, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'ARBOLETES', 5, 51, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BUENOS AIRES', 5, 51, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -4678,7 +4652,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'LAS NARANJITAS', 5, 51, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'EL YESO', 5, 51, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'LA TRINIDAD', 5, 51, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'LAS PLATAS (SANTAFE)', 5, 51, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'LA CANDELARIA', 5, 51, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'ARGELIA', 5, 55, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'ARMENIA', 5, 59, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -4707,6 +4680,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CONCORDIA', 5, 209, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'EL SOCORRO', 5, 209, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'ANORÍ', 5, 40, 'CM', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'LAS PLATAS (SANTAFÉ)', 5, 51, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'APARTADÓ', 5, 45, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'COCORNÁ', 5, 197, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CONCEPCIÓN', 5, 206, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -4715,7 +4689,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'BARRANQUILLITA', 5, 172, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'MONTEFRÍO', 5, 40, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'VIJAGUAL', 5, 45, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SANTA FE DE ANTIOQUIA', 5, 42, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'HATILLO', 5, 79, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'EL TABLAZO', 5, 79, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'PLAYAS', 5, 86, 'IPM', NULL, NULL, '2001-01-01', NULL);
@@ -4801,7 +4774,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'LA ESPERANZA', 13, 160, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'LA NUTRIA', 13, 160, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'LA POZA', 13, 160, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'LA VICTORIA', 13, 160, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'LAS PAVAS', 13, 160, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'LOS CORONCOROS', 13, 160, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'LOS PATICOS', 13, 160, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -4816,10 +4788,11 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CÓRDOBA', 13, 212, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'GUAIMARAL', 13, 212, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'ISLA DE CÓRDOBA', 13, 212, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LA MONTAÑA DE ALONSO (MARTIN ALONSO)', 13, 212, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SAN ANDRÉS', 13, 212, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SINCELEJITO', 13, 212, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'TACAMOCHITO', 13, 212, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'LA VICTORIA (SEPULTURA)', 13, 160, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LA MONTAÑA DE ALONSO (MARTÍN ALONSO)', 13, 212, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'TACAMOCHO', 13, 212, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'PUEBLO NUEVO', 13, 300, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SAN MIGUEL', 13, 300, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -5015,7 +4988,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MUZO', 15, 480, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'NOBSA', 15, 491, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CHAMEZA MAYOR', 15, 491, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'SORCA', 15, 494, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'OTANCHE', 15, 507, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BETANIA', 15, 507, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'BUENAVISTA', 15, 507, 'IP', NULL, NULL, '2001-01-01', NULL);
@@ -5098,7 +5070,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CORMAL', 15, 580, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'EL PARQUE', 15, 580, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'HUMBO', 15, 580, 'IPD', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'GUAYABAL (FATIMA)', 15, 599, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'EL ESCOBAL', 15, 599, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'SAN CAYETANO', 15, 600, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'LA CANDELARIA', 15, 600, 'IPD', NULL, NULL, '2001-01-01', NULL);
@@ -5259,7 +5230,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'TRECE DE JUNIO', 5, 679, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BOCOTÁ', 15, 332, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'BOYACÁ', 13, 6, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'FORAQUIRÁ', 15, 367, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'GUAYATÁ', 15, 325, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'GÜICÁN', 15, 332, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'JERICÓ', 15, 368, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -5354,10 +5324,8 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'CUATRO BOCAS', 5, 893, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SAN FRANCISCO', 5, 893, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'ZARAGOZA', 5, 895, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'EL REAL', 5, 895, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'BUENOS AIRES', 5, 895, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'PATO', 5, 895, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'PUERTO COLOMBIA', 5, 895, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PALMITAS', 5, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ARAGÓN', 5, 686, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'VERSALLES', 5, 690, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -5388,6 +5356,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'EL RINCON', 5, 861, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'EL ROSARIO', 5, 690, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'EL ROSARIO', 5, 887, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'PUERTO COLOMBIA', 5, 895, 'IPD', NULL, NULL, '2001-01-01', '2013-11-14');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'EL SALADO', 5, 756, 'IPM', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'ESTACION TARSO', 5, 861, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'LA ALDEA', 5, 690, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -5466,7 +5435,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'ALEJANDRÍA', 5, 21, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'AMAGÁ', 5, 30, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ASESÍ', 5, 125, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BERLÍN', 5, 107, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'BURITICÁ', 5, 113, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CARACOLÍ', 5, 142, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CÁCERES', 5, 120, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -5476,7 +5444,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'RÍO MAN', 5, 120, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'EL CAÑO', 5, 129, 'CP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'LA LINDA', 5, 101, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'EL JARDÍN', 5, 120, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'PEDREGAL ALTO', 5, 1, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'PURIMA', 5, 2, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CAMILO C', 5, 30, 'CP', NULL, NULL, '2001-01-01', NULL);
@@ -5615,7 +5582,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'LA MATICA', 5, 308, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'LA PALMA', 5, 308, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'LA PIEDRA', 5, 321, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'LOS MEDIOS', 5, 313, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'MALABRIGO', 5, 315, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'MOJICONES', 15, 223, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'PARQUE LAS ORQUIDEAS', 5, 284, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -5741,7 +5707,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'SAN RAFAEL', 25, 740, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'SANTA RITA', 27, 205, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (33, 'TRAPICHE', 27, 361, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'CHACUA', 25, 740, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SILVANIA', 25, 743, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SUBIA', 25, 743, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SIMIJACA', 25, 745, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -5769,7 +5734,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'MUMBARADO', 27, 413, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'BORAUDO', 27, 413, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'CAMPOALEGRE', 27, 425, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'SAN JOSÉ DE BUEY', 27, 425, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'SAN ROQUE', 27, 425, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ALMENDRO', 27, 430, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BOCA DE AMÉ', 27, 425, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -5791,7 +5755,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'TOPAIPÍ', 25, 823, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'TUMUTUMBUDÓ', 27, 413, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'UBALÁ', 25, 839, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SAN BENITO', 25, 740, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'AZAFRANAL', 25, 743, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'MEUSA', 25, 758, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'HATOGRANDE', 25, 758, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -5841,6 +5804,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN GABRIEL', 25, 758, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'SAN JORGE', 25, 754, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN LUIS DE CHIS', 25, 805, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'CHACUA CENTRO', 25, 740, 'CP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SAN RAIMUNDO', 25, 754, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SAN VICENTE', 25, 805, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SANJOSÉ', 25, 769, 'ND', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -5850,7 +5814,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'TINZUQUE', 25, 754, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'YOYATA', 25, 743, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'ARENAL', 27, 430, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'SAN JOSÉ DE QUERA', 27, 430, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'EL TIGRE', 27, 491, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'LA PLAYITA', 27, 491, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SAN LORENZO', 27, 491, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -5908,7 +5871,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'LA PUNTA ANTADÓ', 27, 600, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'LA TRAVESÍA', 27, 615, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (28, 'LAS RAÍCES', 20, 1, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'MARÍANGOLA', 20, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'NUQUÍ', 27, 495, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'NÓVITA', 27, 491, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PAIMADÓ', 27, 600, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -5954,6 +5916,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'SAN SEBASTIAN', 20, 1, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SURAMITA', 27, 660, 'IP', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (29, 'TAPARAL', 27, 615, 'ND', NULL, NULL, '2001-01-01', '2013-01-04');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'EL TAMBO', 52, 260, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (25, 'TUMARADOCITO (BELLAVISTA)', 27, 615, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'TURRIQUITADO', 27, 615, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'VALENCIA', 27, 660, 'IP', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -6065,7 +6028,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'VILLAVICENCIO', 23, 417, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'ZARZALITO', 23, 162, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'LA VICTORIA', 52, 258, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'EL TAMBO', 52, 260, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'FUNES', 52, 287, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CHAPAL', 52, 287, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'GUACHUCAL', 52, 317, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -6253,7 +6215,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'CONTADERO', 52, 399, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CUSILLO ALTO', 52, 399, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'CUSILLO BAJO', 52, 399, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'EL GUABO', 52, 435, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (25, 'EL PELIGRO', 52, 399, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'GUAYABAL', 52, 418, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'JACOBA', 52, 399, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -6275,7 +6236,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'PUSUSQUER', 52, 435, 'IPM', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'REYES', 52, 399, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (23, 'RINCÓN CUSILLO', 52, 399, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'SAN MIGUEL', 52, 435, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (27, 'SANTA TERESA BAJO', 52, 399, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'SOFONIAS YACUP', 52, 390, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'SAN JOSÉ CALABAZAL', 52, 490, 'IPD', NULL, NULL, '2001-01-01', NULL);
@@ -6291,7 +6251,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CÓRDOBA', 52, 520, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'NICANOR VALENCIA', 52, 520, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'PATÍA', 52, 520, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SIMON BOLÍVAR', 52, 520, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'SAN MIGUEL', 52, 435, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'VICTOR CALONGE', 52, 520, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'BOCA DE CURAY', 52, 520, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'JORGE A.CUERO', 52, 520, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -6299,18 +6259,13 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'POLICARPA', 52, 540, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ALTAMIRA', 52, 540, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'MADRIGAL', 52, 540, 'IPD', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN ROQUE', 52, 540, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'EL EJIDO', 52, 540, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SANTA CRUZ', 52, 540, 'IPD', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'LA PALMA', 52, 560, 'IPD', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'LA CENTINELA', 52, 560, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'YAMUESQUER', 52, 560, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PROVIDENCIA', 52, 565, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERRES', 52, 573, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN MATEO', 52, 573, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUPIALES', 52, 585, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'EL ESPINO', 52, 585, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'MIRAFLORES', 52, 585, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'RICAURTE', 52, 612, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'NULPE ALTO', 52, 612, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'NULPE MEDIO', 52, 612, 'IPD', NULL, NULL, '2001-01-01', NULL);
@@ -6323,7 +6278,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'MUÑAMBI', 52, 621, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'NEGRITO', 52, 621, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'PALOSECO', 52, 621, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'PIRI (PARAISO)', 52, 621, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'SANTA ELENA', 52, 621, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (18, 'TASDAN', 52, 621, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'TRINIDAD LA MERCED', 52, 621, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -6372,7 +6326,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'CUASPUD NUCLEO (CUATRO ESQUINAS)', 52, 560, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'VILLA NUEVA', 52, 560, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CHIRES CENTRO', 52, 585, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'PIACÚN', 52, 585, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SAN JOSÉ', 52, 621, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'SAN ANTONIO - BOCA TELEMBI', 52, 621, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (22, 'ANTONIO NARIÑO', 52, 621, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -6406,6 +6359,12 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SAN PEDRO DE CARTAGO', 52, 694, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ATANASIO GIRARDOT', 52, 696, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SANABRIA', 52, 696, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SIMÓN BOLÍVAR', 52, 520, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN ROQUE (BUENAVISTA)', 52, 540, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'PIRI (PARAÍSO)', 52, 621, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'LA CENTINELA', 52, 560, 'IPD', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'MIRAFLORES', 52, 585, 'CAS', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'PIACÚN', 52, 585, 'CAS', NULL, NULL, '2001-01-01', '2013-11-13');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SANTANDER', 52, 696, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'FRANCISCO DE PARADA', 52, 696, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'PALOMINO', 52, 696, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -6519,6 +6478,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (73, 'EL CARMEN KM 63', 52, 835, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (83, 'LA SIRENA', 52, 835, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (88, 'RETOÑO', 52, 835, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA VIRGEN', 68, 327, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (100, 'SANTA MARÍA ROSARIO', 52, 835, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (114, 'GUABAL', 52, 835, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (115, 'GUACHAL', 52, 835, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -6641,7 +6601,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'YASCUAL', 52, 838, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'RANCHO GRANDE (SAN FRANCISCO)', 52, 838, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'LOS ARRAYANES (LA FLOR)', 52, 838, 'IPD', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'LA AGUADA', 52, 885, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CATAMBUCO', 52, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'GENOY', 52, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'GUALMATÁN', 52, 1, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -6742,12 +6701,10 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'EL OASIS', 81, 65, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'GUACA', 68, 318, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'GUADALUPE', 68, 320, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA VIRGEN', 68, 327, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'GUAPOTÁ', 68, 322, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'GUAVATÁ', 68, 324, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'GÜEPSA', 68, 327, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'PANAMÁ DE ARAUCA', 81, 65, 'IP', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'POTOSÍ', 81, 65, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'SAN RAMÓN', 81, 591, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'SANTA BÁRBARA', 81, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'BOCAS', 68, 307, 'CP', NULL, NULL, '2001-01-01', NULL);
@@ -7097,7 +7054,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'EL PLACER', 19, 142, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'HUASANO', 19, 142, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'QUINTERO', 19, 142, 'IPM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'EL ALBA', 19, 142, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'SANTA RITA', 19, 142, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (30, 'CRUCERO DE GUALÍ', 19, 142, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'MEDIA NARANJA', 19, 212, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -7213,13 +7169,10 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'LA SAGRADA FAMILIA', 19, 418, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'NOANAMITO', 19, 418, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'PLAYA GRANDE', 19, 418, 'IPD', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ALFONSO LÓPEZ', 19, 318, 'IPD', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'BENJAMÍN HERRERA', 19, 318, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'BOCA DE NAPÍ', 19, 318, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (21, 'CHAMÓN', 19, 318, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (22, 'CHANZARÁ', 19, 318, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (42, 'EL HIGUERÓN', 19, 256, 'IPD', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'EL PLAYÓN', 19, 418, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'INZÁ', 19, 355, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'JAMBALÓ', 19, 364, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'JOLÍ', 19, 418, 'IPD', NULL, NULL, '2001-01-01', NULL);
@@ -7296,7 +7249,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ARAUJO', 19, 517, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'PAN DE AZÚCAR', 19, 473, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'PAN DE AZÚCAR', 19, 532, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'RÍO MAYA', 19, 418, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SAN JOAQUÍN', 19, 450, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (18, 'VILLA RODRÍGUEZ', 19, 517, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'VITONCO', 19, 517, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -7308,6 +7260,8 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'EL CARBONERO', 19, 450, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'MOJARRAS', 19, 450, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'LOS LLANOS', 19, 450, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'EL PLAYÓN (SIGUÍ)', 19, 418, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'RÍO MAYA (DOS QUEBRADAS)', 19, 418, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (21, 'LOS MEDIOS', 19, 450, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LA MUNDA', 19, 455, 'CP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'MONTERREDONDO', 19, 455, 'CP', NULL, NULL, '2001-01-01', NULL);
@@ -7502,7 +7456,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'NATALA', 19, 821, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SAN FRANCISCO', 19, 821, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SANTO DOMINGO', 19, 821, 'IPD', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'TACUEYÓ', 19, 821, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'VILLA RICA', 19, 845, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'CHALO', 19, 845, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (24, 'EL CANELO', 19, 1, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -7696,15 +7649,9 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'PUEBLECITO (SAN MIGUEL)', 23, 464, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'EL ANCLAR', 23, 466, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'TIERRADENTRO', 23, 466, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'EL BRILLANTE', 23, 466, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'EL DISPARO', 23, 466, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'EL SOL', 23, 466, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'BOCAS DE PERRO', 23, 466, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'MORALITO', 23, 466, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'LA NUEVA', 23, 466, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'PUERTO CAREPA', 23, 466, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (23, 'CÓRDOBA', 23, 466, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (25, 'PUEBLECITO', 23, 466, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MOÑITOS', 23, 500, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'SANTANDER DE LA CRUZ', 23, 500, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'LA RADA', 23, 500, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -7741,9 +7688,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'VAPOR', 52, 256, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'CEDRO DE PIEDRA', 23, 464, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SAN FRANCISCO DEL RAYO', 23, 466, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'PICA PICA', 23, 466, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (28, 'EL PALMAR', 23, 466, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (32, 'JUAN JOSÉ', 23, 466, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'RÍO CEDRO', 23, 500, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CAMPO BELLO', 23, 555, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SANTANA (CENTRO ALEGRE)', 23, 555, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -7766,6 +7711,12 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'CAMPAMENTO', 23, 466, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (30, 'CAMPO ALEGRE', 23, 466, 'ND', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'CANALETE', 23, 419, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (25, 'PUEBLECITO', 23, 466, 'CAS', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (32, 'JUAN JOSÉ', 23, 466, 'C', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'PICA PICA NUEVO', 23, 466, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'EL DISPARO', 23, 466, 'CAS', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'EL SOL', 23, 466, 'CAS', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'PUERTO CAREPA', 23, 466, 'CAS', NULL, NULL, '2001-01-01', '2013-11-13');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'CARRETAL', 23, 670, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'CAÑADUZAL', 52, 256, 'IP', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (22, 'CRUZ CHIQUITA', 23, 670, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -7942,8 +7893,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'YUTO', 27, 50, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ARENAL', 27, 50, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'DOÑA JOSEFA', 27, 50, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SAN JOSÉ DE PURRE', 27, 50, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'SAN MARTÍN DE PURRE', 27, 50, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'ARENAS BLANCAS', 20, 178, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CHIRIGUANÁ', 20, 178, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'ESTACIÓN CHIRIGUANÁ', 20, 178, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -7993,6 +7942,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'CUATRO ESQUINAS', 25, 320, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'EL CARMEN', 20, 178, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'EL ESCRITORIO', 25, 320, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'SAN MARTÍN DE PURRÉ', 27, 50, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'EL HATO', 25, 377, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'EL HEBRON', 20, 175, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'EL POTRERO', 25, 394, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -8078,7 +8028,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'HIJUÁ', 27, 77, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'LA GRAN VÍA', 41, 306, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'MONGUÍ', 41, 206, 'IPD', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MÚTIS', 27, 75, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'NABUGÁ', 27, 75, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'ORPÚA', 27, 77, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'PUENTE DE PAIMADÓ', 27, 50, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -8200,7 +8149,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'AMBORCO', 41, 524, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BRUSELAS', 41, 551, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LA LAGUNA', 41, 551, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'CHILLURCO', 41, 551, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'CRIOLLO', 41, 551, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'RIVERITA', 41, 615, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'RÍO FRÍO', 41, 615, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -8221,6 +8169,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'IDOLOS', 41, 359, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'LA CUCHILLA', 41, 668, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'LA EUREKA', 41, 791, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SALERO', 41, 78, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'LOS CAUCHOS', 41, 668, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'MESA REDONDA', 41, 799, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'NILO', 41, 524, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -8337,7 +8286,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'MOTILON', 41, 1, 'IP', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PATÍA', 41, 78, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'POTRERITOS', 41, 16, 'ND', NULL, NULL, '2001-01-01', '2013-01-04');
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SALERO', 41, 78, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SAN ANTONIO', 44, 560, 'IP', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'SAN BARTOLO', 41, 1, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'SANTA FE', 41, 807, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -8392,7 +8340,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'LA DUDA', 44, 98, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'LOS HORNITOS', 44, 98, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'POTRERITO', 44, 98, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CANDELARIA', 47, 161, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CHIVOLO', 47, 170, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA CHINA', 47, 170, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LA ESTRELLA', 47, 170, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -8400,7 +8347,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SAN PEDRO DE LA SIERRA', 47, 189, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SEVILLANO', 47, 189, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (18, 'PALMOR', 47, 189, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'CONCEPCIÓN', 47, 161, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'EL CARDÓN', 44, 847, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'MONGUÍ', 44, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'CAIMITO', 44, 98, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -8427,7 +8373,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (21, 'CURAZAO', 44, 650, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (22, 'BOCA DEL MONTE', 44, 650, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (24, 'EL PLACER', 44, 650, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'JESÚS DEL MONTE', 47, 161, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'CAMPANA', 44, 1, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'CAMPO KENNEDY', 47, 189, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'CAÑO MOCHO', 47, 189, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -8452,6 +8397,8 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SEVILLA', 47, 189, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'TUCURINCA', 47, 189, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'VARELA', 47, 189, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'CONCEPCIÓN (COCO)', 47, 161, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'JESÚS DEL MONTE (MICO)', 47, 161, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'ZAWADY', 47, 189, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CONCORDIA', 47, 205, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'BELLAVISTA', 47, 205, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -8505,7 +8452,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PIJIÑO', 47, 545, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CABRERA', 47, 545, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'FILADELFIA', 47, 545, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN JOSÉ DE PREVENCION', 47, 545, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PIVIJAY', 47, 551, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'CHINOBLAS', 47, 551, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'LAS CANOAS', 47, 551, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -8575,7 +8521,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'MARTINETE', 47, 605, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'CESPEDES', 47, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'LA HORQUETA', 47, 660, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'LAS MULAS', 47, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'PUEBLITO DE LOS BARRIOS', 47, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SALAMINA', 47, 675, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BUENAVISTA', 47, 692, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -8688,8 +8633,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'LLANO', 52, 36, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'LIMONAR', 52, 36, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'BERRUECOS', 52, 51, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'LA COMUNIDAD', 52, 51, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'LA ESTANCIA', 52, 51, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'BARBACOAS', 52, 79, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ALTAQUER', 52, 79, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'BUENAVISTA', 52, 79, 'IPD', NULL, NULL, '2001-01-01', NULL);
@@ -8749,8 +8692,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CRUZ DE MAYO', 52, 36, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'COCHA BLANCA', 52, 36, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'SAN LUIS', 52, 36, 'IPM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'LA COCHA', 52, 51, 'IPM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'LA CAÑADA', 52, 51, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (35, 'ARANDA', 52, 1, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'BARRIO CRISTO REY', 47, 1, 'ND', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'BARRIO LA PAZ', 47, 1, 'ND', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -8762,7 +8703,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CHAPIURCO', 52, 19, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (44, 'CHORRO DE CHACHAGUI', 52, 1, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (28, 'EL BARBERO', 52, 1, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'EMPATE', 52, 51, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (26, 'JUANOY', 52, 1, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'LA ARADA', 52, 36, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'LA VEGA', 52, 19, 'IP', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -8793,6 +8733,9 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'MESA RICA', 54, 206, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'SOLEDAD', 54, 206, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'LA LIBERTAD', 54, 206, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'EL EMPATE', 52, 51, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'LA COCHA', 52, 51, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'LA CAÑADA', 52, 51, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'LA VEGA', 54, 206, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'PIEDECUESTA', 54, 206, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'HONDURAS', 54, 206, 'IPD', NULL, NULL, '2001-01-01', NULL);
@@ -8829,7 +8772,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'LAS PIEDRAS', 54, 261, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'GRAMALOTE', 54, 313, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'BELÉN', 52, 83, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CACHIRÁ', 54, 128, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CHINÁCOTA', 54, 172, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CHITAGÁ', 54, 174, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CONVENCIÓN', 54, 206, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -8928,14 +8870,10 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'LAS MERCEDES', 54, 720, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'LUIS VERO', 54, 720, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'SAN ROQUE', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'BALSAMINA', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'LA CRISTALINA', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'PARAMILLO', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA GARITA', 54, 405, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'HERRÁN', 54, 347, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'LEÓN XIII', 54, 385, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'BUENAVISTA', 54, 498, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'RÍO NUEVO', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'SAN JERÓNIMO', 54, 670, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'LA VEGA DE SAN ANTONIO', 54, 398, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'AGUASCLARAS', 54, 498, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -8946,7 +8884,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'OTARÉ', 54, 498, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'LA ERMITA', 54, 498, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'PUEBLO NUEVO', 54, 498, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'EL CARMEN DE NAZARETH', 54, 660, 'CP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'LA LAGUNA', 54, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SAN JOSÉ DEL AVILA', 54, 660, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CORNEJO', 54, 673, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -8996,14 +8933,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'TABIRO', 54, 673, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'VEINTE DE JULIO', 54, 385, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (21, 'VENADILLO', 54, 498, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'EL RIECITO', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'JORDANCITO', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (18, 'LA ESMERALDA', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'LA PRIMAVERA', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (22, 'LOS GUAMOS', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (23, 'PLANADAS', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (25, 'SAN ISIDRO', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (27, 'LA CARTAGENA', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SILOS', 54, 743, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BABEGA', 54, 743, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'TEORAMA', 54, 800, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -9018,6 +8947,16 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'GUARANAO', 54, 800, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'EL JUNCAL', 54, 800, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'LA CECILIA', 54, 800, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'JORDANCITO', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'LA PRIMAVERA', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (22, 'LOS GUAMOS', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (23, 'PLANADAS', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (25, 'SAN ISIDRO', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (27, 'LA CARTAGENA', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'BALSAMINA', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'PARAMILLO', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'RÍO NUEVO', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'EL RIECITO', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'LA JABONERA', 54, 800, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'LA TEJA', 54, 800, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'LA TRINIDAD', 54, 800, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -9040,16 +8979,13 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (28, 'ALTO VIENTO', 54, 1, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (33, 'LA JARRA', 54, 1, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'LA GABARRA', 54, 810, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'EL HIGUERÓN', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (31, 'EL RODEO', 54, 1, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'FÁTIMA', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'JUAN FRÍO', 54, 874, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LOS RINCÓN', 54, 743, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'VERSALLES', 54, 810, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (18, 'RAMÍREZ', 54, 800, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'RÍO DE ORO', 54, 800, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SAN ALBERTO', 54, 820, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (26, 'SAN SEBASTIÁN', 54, 720, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'TIBÚ', 54, 810, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (23, 'TRAVESÍAS', 54, 800, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'BUENA ESPERANZA', 54, 1, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -9132,6 +9068,8 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SAN IGNACIO CARUTAL', 50, 226, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'CANEY MEDIO', 50, 226, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'EL CAIBE', 50, 226, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'FÁTIMA', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (26, 'SAN SEBASTIÁN', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'MONTEBELLO', 50, 226, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'PRESENTADO', 50, 226, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'EL CALVARIO', 50, 245, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -9240,7 +9178,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SAN MARTÍN', 50, 689, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'EL MEREY', 50, 689, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'REFORMA', 50, 689, 'IPD', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'RINCON BOLÍVAR', 50, 689, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'VISTAHERMOSA', 50, 711, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CAMPO ALEGRE', 50, 711, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'PIÑALITO', 50, 711, 'IPD', NULL, NULL, '2001-01-01', NULL);
@@ -9450,7 +9387,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'TOFEME', 70, 124, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'CEDEÑO', 70, 124, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'MOLINERO', 70, 124, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'RICAURTE', 70, 204, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CHINULITO', 70, 204, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'EL CERRO', 70, 204, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'BAJO DON JUAN', 70, 204, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -9564,7 +9500,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'SONSO', 76, 318, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'ROBLES', 76, 364, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'SAN JOSE DE PILETA', 70, 215, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'GALERAS (NUEVA GRANADA)', 70, 235, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'PUEBLO NUEVO II', 70, 235, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'SAN ANTONIO DE LOS CABALLEROS', 76, 275, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (21, 'LOS CALEÑOS', 76, 275, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -9578,7 +9513,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'LA UNIÓN', 76, 275, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'PUEBLO NUEVO', 76, 275, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'REMOLINO', 76, 275, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'SAN FRANCISCO', 76, 275, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'TARRAGONA', 76, 275, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'EL PEDREGAL', 76, 275, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'SANTO DOMINGO', 76, 275, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -9686,7 +9620,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'PERENDENGUE', 70, 742, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'MORALITO', 70, 742, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SUCRE', 70, 771, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'BAJOGRANDE', 70, 771, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'CAMPO ALEGRE', 70, 771, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'CÓRDOBA', 70, 771, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'EL CONGRESO', 70, 771, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -9740,7 +9673,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ANIME', 70, 742, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (21, 'CALLEJON', 70, 678, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'CEJA', 70, 742, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'CHAPARRAL', 70, 771, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (30, 'GRILLO ALEGRE', 70, 678, 'ND', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'HATILLO', 70, 742, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'JUNIN', 70, 742, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -10232,7 +10164,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (31, 'ALBÍ', 52, 79, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ALDEA DE MARÍA', 52, 210, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ALEJANDRÍA', 47, 58, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ALFONSO LÓPEZ PUMAREJO', 52, 490, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ALFONSO LÓPEZ', 23, 68, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'ALFÉREZ', 70, 124, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'ALTO DEL ÁGUILA', 25, 899, 'CAS', NULL, NULL, '2001-01-01', NULL);
@@ -10256,7 +10187,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'BERLÍN', 85, 125, 'IP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BERÁSTEGUI', 23, 189, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'BETÉ', 27, 425, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (52, 'BOCA DE NEMOTÁ', 27, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BOTÓN DE LEIVA', 13, 440, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'BUSBANZÁ', 15, 114, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CAGUÁN', 41, 1, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -10271,6 +10201,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'CHIQUÍ', 23, 675, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CHURIDÓ', 5, 45, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'CONCEPCIÓN DE GUAJUÍ', 19, 318, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CAJAMARCA', 76, 622, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'DISTRACCIÓN', 44, 98, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'EL JORDÁN', 5, 649, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'EL LLANO DE BEBARAMÁ', 27, 425, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -10313,7 +10244,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (32, 'PIMBÍ', 52, 79, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERTO ASÍS', 86, 568, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERTO GAITÁN', 50, 568, 'CM', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (24, 'PUERTO LÓPEZ', 23, 466, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'PUERTO LÓPEZ', 44, 847, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PURIFICACIÓN', 73, 585, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'REPELÓN', 8, 606, 'CM', NULL, NULL, '2001-01-01', NULL);
@@ -10334,7 +10264,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'ARMENIA - CAMPARRUSIA', 5, 234, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN JOSÉ DEL NUS', 5, 670, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'SAN JOSÉ DEL CARRETAL', 8, 141, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'BOGOTÁ, DISTRITO CAPITAL ', 11, 1, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (23, 'SAN SEBASTIÁN DE BUENAVISTA', 13, 430, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'SAN JOSÉ DEL PLAYÓN', 13, 442, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'PUEBLO NUEVO - REGENCIA', 13, 458, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -10367,7 +10296,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SANTA ROSA', 47, 288, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'CARMEN DEL MAGDALENA (PARACO)', 47, 551, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'PUERTO LUCAS MARGEN IZQUIERDO', 50, 711, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CÁRDENAS ROSAFLORIDA', 52, 51, 'IPM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'SANTA ROSA (LA PALMA)', 52, 233, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'EL TABLÓN DE GÓMEZ', 52, 258, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'BELLAFLORIDA', 52, 411, 'IPD', NULL, NULL, '2001-01-01', NULL);
@@ -10377,6 +10305,8 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'BANCO DE ARENAS', 54, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (21, 'TRIBUNAS CORCEGA', 66, 1, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (61, 'PLAN DE VIVIENDA YARUMAL', 66, 1, 'CP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ANGOSTURAS', 76, 670, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'BOGOTÁ, D.C.', 11, 1, 'CM', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'PLAN DE VIVIENDA EL RAYO', 66, 440, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'CERRO DE LA PAZ', 68, 92, 'IPD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'PLANADAS DE LA ARRUMBAZON', 68, 255, 'IPM', NULL, NULL, '2001-01-01', NULL);
@@ -10403,7 +10333,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SANTA BÁRBARA', 73, 43, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (21, 'SANTA LUCÍA', 76, 834, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SAN SEBASTIÁN', 91, 1, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (31, 'SAN ANTONIO (DE YURUMANGUÍ)', 76, 109, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ATUNCELA', 76, 233, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'EL ÁGUILA - CAJONES', 76, 243, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'PUERTO MOLINA', 76, 497, 'C', NULL, NULL, '2001-01-01', NULL);
@@ -10465,7 +10394,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (18, 'PUERTO CALDAS', 66, 1, 'CP', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'LA ESTRELLA', 66, 682, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'SAN ROQUE', 68, 101, 'CAS', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN ANTONIO DE LEONES', 68, 271, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'LADERAS', 68, 368, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'EL MOHÁN', 68, 780, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'BUENAVISTICA', 70, 1, 'CP', NULL, NULL, '2001-01-01', NULL);
@@ -10485,16 +10413,12 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'PUERTO SAMARIA', 76, 497, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (18, 'LA HERRADURA', 76, 520, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BOLÍVAR', 76, 563, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'CAJAMARCA', 76, 622, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ANGOSTURAS', 76, 670, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'TRES ESQUINAS', 76, 736, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (31, 'SAN ANTONIO (YURUMANGUÍ)', 76, 109, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'ROBLEDO', 76, 828, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'QUEBRADAGRANDE', 76, 834, 'C', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'PUERTO NUEVO', 76, 863, 'CAS', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'GUASIMAL', 76, 895, 'C', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERTO SANTANDER', 91, 669, 'TEBF', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA LIBERTAD', 95, 25, 'IP', NULL, NULL, '2001-01-01', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'YAVARATÉ', 97, 889, 'TEBF', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'AEROPUERTO LA PISTA', 54, 810, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'AGUA BLANCA', 54, 344, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'ALTO GUAMITO', 68, 572, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -10593,6 +10517,9 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'EL TAMBOR', 17, 388, 'IPM', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'EL TESORO', 47, 660, 'C', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (18, 'EL TESORO', 68, 689, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'EL ENCIERRO', 5, 234, 'CP', NULL, NULL, '2013-01-07', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PUERTO SANTANDER', 91, 669, 'CD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'YAVARATÉ', 97, 889, 'CD', NULL, NULL, '2001-01-01', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'EL TIGRE', 5, 31, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (35, 'EL TREINTA Y CINCO', 23, 660, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'EL VENADO', 68, 572, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -10775,7 +10702,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'SAN JOSÉ DE LA MONTAÑA', 52, 256, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'SAN JOSÉ DE PILETA', 70, 215, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SAN LUIS', 5, 789, 'CAS', NULL, NULL, '2001-01-01', '2013-01-04');
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SAN MARTÍN DE LOBA', 54, 720, 'IPD', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (30, 'SAN MIGUEL', 27, 361, 'IP', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (18, 'SAN MIGUEL', 19, 548, 'IPM', NULL, NULL, '2001-01-01', '2013-01-04');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'SAN MIGUEL', 54, 810, 'IP', NULL, NULL, '2001-01-01', '2013-01-04');
@@ -10919,7 +10845,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (18, 'EL CONVENTO', 5, 212, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'EL NORAL', 5, 212, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'CAMPARRUSIA', 5, 234, 'CAS', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'EL ENCIERRO', 5, 234, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'LA CORONA', 5, 250, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'LAS NEGRITAS', 5, 250, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'SANTA BÁRBARA', 5, 250, 'CP', NULL, NULL, '2013-01-07', NULL);
@@ -11392,7 +11317,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'LAS PERLAS', 19, 50, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'PUENTE TIERRA', 19, 50, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'PUERTO RICO', 19, 50, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'SAN JUAN DE LA GUADUA', 19, 50, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'BERMEJA ALTA', 19, 75, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'PARAÍSO', 19, 75, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (29, 'LA ESPERANZA', 19, 110, 'CAS', NULL, NULL, '2013-01-07', NULL);
@@ -11684,7 +11608,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'PEREIRA', 23, 464, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (31, 'LAS MARGARITAS', 23, 466, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (33, 'PUERTO NUEVO', 23, 466, 'C', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (34, 'LOS CORDOBAS', 23, 466, 'C', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (29, 'SAN JERÓNIMO(GOLERO)', 23, 555, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (35, 'LOMA DE PIEDRA', 23, 555, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (44, 'PUNTA VERDE', 23, 555, 'CAS', NULL, NULL, '2013-01-07', NULL);
@@ -11706,7 +11629,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (39, 'LOS GALANES', 23, 660, 'C', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (40, 'SALGUERITO', 23, 660, 'C', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (41, 'BRISAS DEL MAR', 23, 660, 'CAS', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (42, 'CEIBA DE LECHE', 23, 660, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (45, 'ESCOBALITO', 23, 660, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (46, 'GUAYABAL', 23, 660, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (47, 'KILÓMETRO 32', 23, 660, 'CAS', NULL, NULL, '2013-01-07', NULL);
@@ -11718,7 +11640,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (62, 'SAN MIGUEL', 23, 660, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (63, 'ALPUJARRA II', 23, 660, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (64, 'LA QUEBRADA', 23, 660, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (65, 'LOS AMARILLOS', 23, 660, 'CP', NULL, NULL, '2013-01-07', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (42, 'CEIBA DE LECHE', 23, 660, 'CAS', NULL, NULL, '2013-01-07', '2013-11-13');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (66, 'LOS CHIBOLOS', 23, 660, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (67, 'NUEVA ESPERANZA', 23, 660, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (68, 'SABANA DE LA FUENTE', 23, 660, 'CP', NULL, NULL, '2013-01-07', NULL);
@@ -11931,9 +11853,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'BOITIVA LA ESPERANZA', 25, 736, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'PERICO SECTOR LA HONDA', 25, 740, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'PERICO SECTOR LA MACARENA', 25, 740, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'SAN BENITO SECTOR CENTRO', 25, 740, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'SAN FORTUNATO SECTOR LOS ZORROS', 25, 740, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'SAN MIGUEL SECTOR SUR', 25, 740, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'AGUA BONITA', 25, 743, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'EL RETÉN', 25, 745, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'CENTRO SECTOR JUAN PACHO', 25, 745, 'CP', NULL, NULL, '2013-01-07', NULL);
@@ -11943,6 +11863,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'PUEBLO VIEJO SECTOR NIÑO', 25, 758, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA MAGOLA', 25, 777, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'SANTA ROSA', 25, 777, 'CP', NULL, NULL, '2013-01-07', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'SAN MIGUEL', 25, 740, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'CHICÚ', 25, 785, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'EL BOTE', 25, 785, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'LOS CHAPARROS', 25, 785, 'CP', NULL, NULL, '2013-01-07', NULL);
@@ -12153,7 +12074,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'LA REFORMA', 41, 518, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'LAS LAJITAS', 41, 518, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LAS ORQUIDEAS', 41, 518, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ALTO DE LA CRUZ', 41, 530, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'CHARGUAYACO', 41, 551, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'PALMARITO', 41, 551, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'DIVINO NIÑO', 41, 551, 'CAS', NULL, NULL, '2013-01-07', NULL);
@@ -12365,9 +12285,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'LA QUINUA', 52, 36, 'IP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'EL PEDREGAL', 52, 36, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'LA AGUADA', 52, 36, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'SANTA TERESA', 52, 51, 'IPM', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'EL PEDREGAL', 52, 51, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'LAS PALMAS', 52, 51, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'ALTO HIGUERONES', 52, 110, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'BERMEJAL', 52, 110, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'BRUSELAS', 52, 110, 'CP', NULL, NULL, '2013-01-07', NULL);
@@ -12394,6 +12311,8 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'SAN SEBASTIÁN', 52, 207, 'IP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (21, 'SANTA INÉS', 52, 207, 'IP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (22, 'VILLA INÉS', 52, 207, 'IP', NULL, NULL, '2013-01-07', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'LAS PALMAS', 52, 51, 'CP', NULL, NULL, '2013-01-07', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'SANTA TERESA', 52, 51, 'C', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'CHAVISNÁN', 52, 224, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SAN FRANCISCO', 52, 224, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'GUAYABALITO NULPÍ', 52, 233, 'CAS', NULL, NULL, '2013-01-07', NULL);
@@ -12509,6 +12428,7 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (25, 'OBANDO', 52, 678, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (26, 'PIEDRABLANCA', 52, 678, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (27, 'PLAN DE SAN MARTÍN', 52, 678, 'CP', NULL, NULL, '2013-01-07', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'MESITAS', 54, 344, 'C', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (28, 'SANTA CATALINA', 52, 678, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'ALTAMIRA CRUZ DE ARADA', 52, 683, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'BALCON ALTO', 52, 683, 'CAS', NULL, NULL, '2013-01-07', NULL);
@@ -12620,7 +12540,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'CAMILANDIA', 54, 261, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'LAS JUNTAS', 54, 344, 'C', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'LOS LAURELES', 54, 344, 'C', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'MESITAS', 54, 344, 'C', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'VILLAMARÍA', 54, 385, 'C', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'CAMPO ALEGRE', 54, 385, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'AGUA LINDA', 54, 405, 'CAS', NULL, NULL, '2013-01-07', NULL);
@@ -12644,7 +12563,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (28, 'MONTERREY', 63, 190, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (29, 'SAN ANTONIO', 63, 190, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LA SILVIA', 63, 401, 'CAS', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'FUNDACION AMANECER', 63, 401, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'LA MONTAÑA', 63, 470, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'MACHO NEGRO', 63, 470, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'PUERTO SAMARIA', 63, 470, 'CAS', NULL, NULL, '2013-01-07', NULL);
@@ -12732,8 +12650,8 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'JUNÍN', 68, 250, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'SAN FRANCISCO', 68, 250, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'LA BATECA', 68, 255, 'IPM', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'OTROMUNDO', 68, 271, 'IP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'MONTEARROYO CONDOMINIO', 68, 276, 'CAS', NULL, NULL, '2013-01-07', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'OTROMUNDO', 68, 271, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'RUITOQUE COUNTRY CLUB CONDOMINIO', 68, 276, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'VALLE DE RUITOQUE', 68, 276, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'VILLA EDILIA CONDOMINIO', 68, 276, 'CAS', NULL, NULL, '2013-01-07', NULL);
@@ -12757,7 +12675,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'LA CARRERA', 68, 673, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'LAS CASITAS', 68, 673, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'CUTALIGUA', 68, 684, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SAN JUAN DE LA VERDE', 68, 720, 'IPD', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'CIÉNAGA DEL OPÓN', 68, 745, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'SAN ISIDRO', 68, 773, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'EL GUACAL', 68, 855, 'CAS', NULL, NULL, '2013-01-07', NULL);
@@ -12839,27 +12756,20 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'EL BAJO DE LA ALEGRÍA', 70, 717, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'PERENDENGUE', 70, 717, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (28, 'BUENAVISTA', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (29, 'BUENOS AIRES', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (30, 'CACAGUAL', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (31, 'CANTARRANA', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (32, 'CONCEPCIÓN', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (33, 'CUCHARAL', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (34, 'EL CEDRO', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (35, 'EL GARZAL', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (36, 'EL PAJONAL', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (37, 'EL SOCORRO', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (38, 'FUNDACIÓN', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (30, 'CACAGUAL', 70, 771, 'CP', NULL, NULL, '2013-01-07', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (33, 'CUCHARAL', 70, 771, 'CP', NULL, NULL, '2013-01-07', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SAN JUAN BOSCO DE LA VERDE', 68, 720, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (39, 'GALINDO', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (40, 'GARRAPATA', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (41, 'GUAMALITO', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (42, 'HUERTA GRANDE', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (43, 'LA REDONDA', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (44, 'LAS CARACUCHAS', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (45, 'LAS CRUCES', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (46, 'MOJANITA', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (47, 'PUEBLO NUEVO', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (48, 'QUITASUEÑO', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (49, 'SAN CAYETANO', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (50, 'SAN JOSÉ', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (51, 'SAN JOSÉ CALASTRABA', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (52, 'SAN RAFAEL', 70, 771, 'CP', NULL, NULL, '2013-01-07', NULL);
@@ -12962,6 +12872,11 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'OJO DE AGUA', 73, 563, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'PEÑÓN ALTO', 73, 563, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (21, 'TOMOGO', 73, 563, 'CP', NULL, NULL, '2013-01-07', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (47, 'PUEBLO NUEVO', 70, 771, 'CP', NULL, NULL, '2013-01-07', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (49, 'SAN CAYETANO', 70, 771, 'CP', NULL, NULL, '2013-01-07', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (40, 'GARRAPATA', 70, 771, 'CP', NULL, NULL, '2013-01-07', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (41, 'GUAMALITO', 70, 771, 'CP', NULL, NULL, '2013-01-07', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (46, 'MOJANITA', 70, 771, 'CP', NULL, NULL, '2013-01-07', '2013-11-14');
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (22, 'TORTUGAS', 73, 563, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'CHENCHE DOS', 73, 585, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'LA LUISA', 73, 624, 'IPM', NULL, NULL, '2013-01-07', NULL);
@@ -12998,12 +12913,10 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (35, 'PUEBLO NUEVO', 76, 1, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (36, 'SAN FRANCISCO', 76, 1, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (37, 'SAN ISIDRO', 76, 1, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (38, 'VILLA FLAMENCO', 76, 1, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (41, 'CASCAJAL III', 76, 1, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (42, 'EL ESTERO', 76, 1, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (43, 'LA LUISA', 76, 1, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (44, 'LA SIRENA', 76, 1, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (45, 'LAS PALMAS', 76, 1, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (46, 'SILOE', 76, 1, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'LA FLORESTA', 76, 20, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'ALTO BONITO', 76, 41, 'CP', NULL, NULL, '2013-01-07', NULL);
@@ -13067,7 +12980,6 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (25, 'LA UNIDAD', 76, 111, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (26, 'PUERTO BERTIN', 76, 111, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (27, 'SAN ANTONIO', 76, 111, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (28, 'EL BOSQUE', 76, 111, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (29, 'GUADALEJO', 76, 111, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (30, 'LA GRANJITA', 76, 111, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'EL OVERO (SECTOR LA MARÍA)', 76, 113, 'C', NULL, NULL, '2013-01-07', NULL);
@@ -13076,6 +12988,8 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'TETILLAL', 76, 113, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (18, 'LA PLAYA', 76, 126, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (19, 'EL VERGEL', 76, 126, 'C', NULL, NULL, '2013-01-07', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (38, 'FLAMENGO', 76, 1, 'CP', NULL, NULL, '2013-01-07', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (45, 'LAS PALMAS - LA CASTILLA', 76, 1, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'EL OTOÑO', 76, 130, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'EL GUALÍ', 76, 130, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'POBLADO CAMPESTRE', 76, 130, 'CAS', NULL, NULL, '2013-01-07', NULL);
@@ -13298,13 +13212,12 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'SIETE DE AGOSTO', 91, 540, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'TIPISCA', 91, 540, 'CP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'VEINTE DE JULIO', 91, 540, 'CP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'SAN FELIPE', 94, 1, 'IPD', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAPUARA', 94, 343, 'IP', NULL, NULL, '2013-01-07', NULL);
-INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MAPIRIPANA', 94, 663, 'TEBF', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PUERTO ZANCUDO', 94, 663, 'IP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BOCAS DE YARI', 94, 887, 'IP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'VENADO ISANA', 94, 887, 'IP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (24, 'BOQUERÓN', 95, 1, 'IP', NULL, NULL, '2013-01-07', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'MAPIRIPANA', 94, 663, 'CD', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (26, 'EL LIMÓN', 95, 1, 'IP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (27, 'LAS ACACIAS', 95, 1, 'IP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (28, 'NUEVO TOLIMA', 95, 1, 'IP', NULL, NULL, '2013-01-07', NULL);
@@ -13328,9 +13241,137 @@ INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'EL PROGRESO', 99, 773, 'CAS', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (21, 'EL TUPARRO', 99, 773, 'IP', NULL, NULL, '2013-01-07', NULL);
 INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (22, 'LA 14', 99, 773, 'CAS', NULL, NULL, '2013-01-07', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'CENTRO AGROINDUSTRIAL', 25, 286, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'TERMINAL DE CARGA', 25, 286, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (65, 'EL PORVENIR', 54, 1, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (66, 'LA CHINA', 54, 1, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'EMPALME', 86, 320, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (23, 'WERIMA', 99, 773, 'IP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'SITIO NUEVO', 23, 466, 'CAS', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (37, 'VILLA CARMINIA', 23, 466, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (48, 'KILÓMETRO 34', 23, 660, 'CAS', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (55, 'LAS CUMBRES', 23, 660, 'CAS', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (69, 'TREMENTINO BULERO', 23, 660, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'LA UNIÓN SECTOR LA UNIÓN', 25, 740, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'LA UNIÓN SECTOR PIE DE ALTO', 25, 740, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (14, 'SAN BENITO SECTOR JAZMÍN', 25, 740, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'EL CARMELO', 52, 435, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'EL ARCO', 52, 435, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (11, 'EL ARENAL', 52, 435, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'ZARAGOZA', 52, 885, 'IPM', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (20, 'INANTAS BAJO', 52, 885, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (39, 'ALTOS DE NORMANDIA - SECTOR TRES CRUCES BAJO', 76, 1, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (40, 'ALTOS DE NORMANDIA-LA ERMITA', 76, 1, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (47, 'LA FONDA', 76, 1, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (48, 'LOS LIMONES', 76, 1, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (49, 'MORGAN', 76, 1, 'CP', NULL, NULL, '2013-11-13', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'LA CRISTALINA', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'EL HIGUERÓN', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (18, 'LA ESMERALDA', 54, 720, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'FUNDACION AMANECER', 63, 401, 'CP', NULL, NULL, '2013-01-07', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'BAJOGRANDE', 70, 771, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (29, 'BUENOS AIRES', 70, 771, 'CP', NULL, NULL, '2013-01-07', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (38, 'FUNDACIÓN', 70, 771, 'CP', NULL, NULL, '2013-01-07', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'TRES ESQUINAS', 76, 736, 'C', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CALIFORNIA', 5, 576, 'IPD', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SINAÍ', 5, 576, 'IPD', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'FORAQUIRÁ', 15, 367, 'IP', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'SORCA', 15, 494, 'IPD', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'EL BRILLANTE', 23, 466, 'CAS', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (16, 'LA NUEVA', 23, 466, 'CAS', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (24, 'PUERTO LÓPEZ', 23, 466, 'CAS', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (34, 'LOS CORDOBAS', 23, 466, 'C', NULL, NULL, '2013-01-07', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (27, 'RANCHERÍA', 23, 660, 'C', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'SAN BENITO SECTOR CENTRO', 25, 740, 'CP', NULL, NULL, '2013-01-07', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'LA COMUNIDAD', 52, 51, 'C', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'LA ESTANCIA', 52, 51, 'C', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (15, 'EL PEDREGAL', 52, 51, 'CP', NULL, NULL, '2013-01-07', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'EL ESPINO', 52, 585, 'CAS', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PIEDRALARGA', 68, 686, 'CAS', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN PEDRO', 68, 686, 'CAS', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'EL ROSARIO', 76, 111, 'C', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (28, 'EL BOSQUE', 76, 111, 'CP', NULL, NULL, '2013-01-07', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'VILLAFLOR', 86, 885, 'IP', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'SAN FELIPE', 94, 1, 'IPD', NULL, NULL, '2013-01-07', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'GUASACAVI', 94, 1, 'IP', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'BARRANCO PICURE', 94, 1, 'IP', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'SANTA FÉ DE ANTIOQUIA', 5, 42, 'CM', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'SAN JOSÉ DE APARTADÓ', 5, 45, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'BERLÍN (PUEBLO NUEVO)', 5, 107, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'RICAURTE (COLOSÓ)', 70, 204, 'CM', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SAN MARTÍN DE LOBA', 54, 720, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'EL JARDÍN (TAMANÁ)', 5, 120, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'LA MERCED (PLAYÓN)', 5, 411, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PUERTO VENUS (SAMANÁ)', 5, 483, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'PUERTO BADEL (CAÑO SALADO)', 13, 52, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'GUAYABAL (FÁTIMA)', 15, 599, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (17, 'SAN JUAN GUADUA', 19, 50, 'CP', NULL, NULL, '2013-01-07', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ALFONSO LÓPEZ (BALSITAS)', 19, 318, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'TACUEYO', 19, 821, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'MARIANGOLA', 20, 1, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'NABUSIMAKE (SAN SEBASTIÁN)', 20, 570, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'SAN JOSÉ DE LAS AMÉRICAS', 20, 770, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (8, 'GUAYABAL LA YE', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (65, 'LOS AMARILLOS', 23, 660, 'C', NULL, NULL, '2013-01-07', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SIMÓN BOLÍVAR', 25, 120, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'EL PLOMO (EL PARAÍSO)', 25, 518, 'IPM', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'SAN BENITO CENTRO', 25, 740, 'CP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (52, 'BOCA DE NEMOTÁ (NEMOTÁ)', 27, 1, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (54, 'PACURITA (CABÍ)', 27, 1, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'SAN JOSÉ DE PURRÉ', 27, 50, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ALTO DE LA CRUZ', 41, 530, 'CP', NULL, NULL, '2013-01-07', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (5, 'LA PALMA', 52, 560, 'IPD', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (6, 'CHILLURCO (VILLAS DEL NORTE)', 41, 551, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'CANDELARIA (CAIMÁN)', 47, 161, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN JOSÉ DE PREVENCIÓN', 47, 545, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'LAS MULAS (SAN ROQUE)', 47, 660, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'RINCÓN BOLÍVAR', 50, 689, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ROSAFLORIDA (CÁRDENAS)', 52, 51, 'IPM', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'ALFONSO LÓPEZ PUMAREJO (FLORIDA)', 52, 490, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'AGUADA', 52, 885, 'CAS', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CÁCHIRA', 54, 128, 'CM', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (1, 'EL CARMEN DE NAZARETH', 54, 660, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'SAN ANTONIO DE LEONES', 68, 271, 'CP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'DARIÉN', 76, 126, 'CM', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'SAN FRANCISCO (EL LLANITO)', 76, 275, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'POTOSÍ (PRIMAVERA)', 81, 65, 'IPM', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'LUCITANIA (CHURUYACO)', 86, 320, 'IP', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'EL REAL', 5, 895, 'CAS', NULL, NULL, '2001-01-01', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (43, 'LA REDONDA', 70, 771, 'CP', NULL, NULL, '2013-01-07', '2013-11-14');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'EL SALADO', 76, 111, 'C', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (9, 'MIRAFLORES', 76, 111, 'C', NULL, NULL, '2001-01-01', '2013-11-13');
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (4, 'LOS MEDIOS', 5, 313, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (3, 'EL GUABO', 52, 435, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'GALERAS (NUEVA GRANADA)', 70, 235, 'CM', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'CHAPARRAL', 70, 771, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (13, 'EL ALBA (PARAISO, LOS MANGOS)', 19, 142, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (2, 'BENJAMÍN HERRERA (SAN VICENTE)', 19, 318, 'IPD', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'PURÍSIMA DE LA CONCEPCIÓN', 23, 586, 'CM', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (10, 'RODANIA (RODÁCULO)', 23, 660, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (0, 'CIUDAD MÚTIS', 27, 75, 'CM', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (7, 'SAN JOSÉ DE BUEY (ALTO BUEY)', 27, 425, 'C', NULL, NULL, '2001-01-01', NULL);
+INSERT INTO clase (id, nombre, id_departamento, id_municipio, id_tclase, latitud, longitud, fechacreacion, fechadeshabilitacion) VALUES (12, 'SAN JOSÉ DE QUERÁ', 27, 430, 'C', NULL, NULL, '2001-01-01', NULL);
 
 SELECT setval('clase_seq', max(id)) FROM clase;
 
+--
+INSERT INTO tsitio (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (1, 'SIN INFORMACION', '2001-01-01', NULL);
+INSERT INTO tsitio (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (2, 'URBANO', '2001-01-01', NULL);
+INSERT INTO tsitio (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (3, 'RURAL', '2001-01-01', NULL);
+INSERT INTO tsitio (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (4, 'URBANO Y RURAL', '2001-01-01', NULL);
+
+SELECT setval('tsitio_seq', max(id)) FROM tsitio;
+
+--
+INSERT INTO frontera (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (1, 'Ecuador', '2001-01-01', NULL);
+INSERT INTO frontera (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (2, 'Brasil', '2001-01-01', NULL);
+INSERT INTO frontera (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (5, 'Panamá', '2001-01-01', NULL);
+INSERT INTO frontera (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (4, 'Venezuela', '2001-01-01', NULL);
+INSERT INTO frontera (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (6, 'Perú', '2001-01-01', NULL);
+
+SELECT setval('frontera_seq', max(id)) FROM frontera;
+
+--
 INSERT INTO region (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (5, 'COSTA ATLANTICA', '2001-01-01', NULL);
 INSERT INTO region (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (7, 'LLANOS', '2001-01-01', NULL);
 INSERT INTO region (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (9, 'SUR OCCIDENTE', '2001-01-01', NULL);
@@ -13339,7 +13380,5 @@ INSERT INTO region (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (8, 
 INSERT INTO region (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (10, 'EJE CAFETERO Y TOLIMA GRANDE', '2001-01-01', NULL);
 INSERT INTO region (id, nombre, fechacreacion, fechadeshabilitacion) VALUES (11, 'EXTERIOR', '2001-01-01', NULL);
 
-
 SELECT setval('region_seq', max(id)) FROM region;
-
 

@@ -54,7 +54,7 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     );
     var $fb_linkDisplayLevel = 0;
     var $fb_preDefOrder = array(
-        'id_departamento', 'id_municipio', 'id_clase', 
+        'id_departamento', 'id_municipio', 'id_clase',
         'lugar', 'sitio', 'latitud', 'longitud', 'id_tsitio'
     );
     var $fb_fieldsToRender = array(
@@ -82,7 +82,7 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
             'longitud' => _('Longitud'),
         );
         if (isset($GLOBALS['etiqueta']['ubicacionlugar'])) {
-            $this->fb_fieldLabels['lugar'] 
+            $this->fb_fieldLabels['lugar']
                 = $GLOBALS['etiqueta']['ubicacionlugar'];
         }
     }
@@ -127,7 +127,7 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     */
     function setlatitud($value)
     {
-        $this->latitud = ($value == '') ? 
+        $this->latitud = ($value == '') ?
             DB_DataObject_Cast::sql('NULL') : $value;
     }
 
@@ -142,7 +142,7 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     */
     function setid_municipio($value)
     {
-        $this->id_municipio = ($value == '') ? 
+        $this->id_municipio = ($value == '') ?
             DB_DataObject_Cast::sql('NULL') : (int)$value;
     }
 
@@ -194,7 +194,7 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
             'select', 'id_departamento',
             $GLOBALS['etiqueta']['departamento'],
             array()
-        ); 
+        );
         $form->insertElementBefore($dep, 'lugar');
         $mun =& $form->createElement(
             'select', 'id_municipio',
@@ -206,7 +206,7 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
             'select', 'id_clase',
             $GLOBALS['etiqueta']['clase'],
             array()
-        ); 
+        );
         $form->insertElementBefore($cla, 'lugar');
 
     }

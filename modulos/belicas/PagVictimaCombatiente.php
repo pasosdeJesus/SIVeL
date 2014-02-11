@@ -147,7 +147,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             )
         );
         $this->bcombatiente->useMutators = true;
-        $this->bantecedente_combatiente 
+        $this->bantecedente_combatiente
             =& DB_DataObject_FormBuilder::create(
                 $dantecedente_combatiente,
                 array(
@@ -268,7 +268,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             if ($vv != '') {
                 $this->bantecedente_combatiente->_do->find();
                 while ($this->bantecedente_combatiente->_do->fetch()) {
-                    $valsca[] 
+                    $valsca[]
                         = $this->bantecedente_combatiente->_do->id_antecedente;
                 }
             }
@@ -422,8 +422,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
                 error_valida('Falta nombre de víctima', $valores);
                 return false;
             }
-            if (!isset($valores['id_resultado_agresion'])
-                || $valores['id_resultado_agresion'] == ''
+            if (!isset($valores['id_resagresion'])
+                || $valores['id_resagresion'] == ''
             ) {
                 error_valida('Falta resultado de agresión', $valores);
                 return false;
@@ -461,16 +461,16 @@ class PagVictimaCombatiente extends PagBaseMultiple
             }
             if (isset($valores['id_antecedente'])) {
                 foreach (var_escapa($valores['id_antecedente']) as $k => $v) {
-                    $this->bantecedente_combatiente->_do->id_combatiente 
+                    $this->bantecedente_combatiente->_do->id_combatiente
                         = $idcombatiente;
-                    $this->bantecedente_combatiente->_do->id_antecedente 
+                    $this->bantecedente_combatiente->_do->id_antecedente
                         = (int)var_escapa($v, $db);
                     $this->bantecedente_combatiente->_do->insert();
                 }
             }
 
         }
-        caso_funcionario($_SESSION['basicos_id']);
+        caso_usuario($_SESSION['basicos_id']);
         return  $ret;
     }
 
@@ -494,7 +494,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             $w, $t, $idcaso, 'combatiente',
             '', '', false, array('antecedente_combatiente'),
             'id_combatiente',
-            array('edad', 'id_resultado_agresion')
+            array('edad', 'id_resagresion')
         );
 
     }
@@ -520,10 +520,10 @@ class PagVictimaCombatiente extends PagBaseMultiple
         $r = "";
         while ($dcombatiente->fetch()) {
             $r .= $sep . trim($dcombatiente->nombre);
-            $r .= "\n    ".$GLOBALS['etiqueta']['resagresion'] . ": ";
-            $dresultado = $dcombatiente->getLink('id_resultado_agresion');
+            $r .= "\n    ".$GLOBALS['etiqueta']['id_resagresion'] . ": ";
+            $dresultado = $dcombatiente->getLink('id_resagresion');
             $r .= $dresultado->nombre;
-            $dresultado = $dcombatiente->getLink('id_resultado_agresion');
+            $dresultado = $dcombatiente->getLink('id_resagresion');
             $r .= " (".trim($dresultado->nombre).")";
             $sins = DataObjects_Sectorsocial::idSinInfo();
             if ($dcombatiente->id_sectorsocial != $sins) {
@@ -554,7 +554,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
 
     /**
      * Retorna en HTML reporte revista de un caso
-     * 
+     *
      * @param object &$db    Conexión a base de datos
      * @param array  $campos Campos por mostrar
      * @param int    $idcaso Código del caso
@@ -578,8 +578,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
                 $dorg = $dcombatiente->getLink('organizacionarmada');
                 $r .= " / ".trim($dorg->nombre);
             }
-            if (isset($dcombatiente->id_resultado_agresion)) {
-                $dresultado = $dcombatiente->getLink('id_resultado_agresion');
+            if (isset($dcombatiente->id_resagresion)) {
+                $dresultado = $dcombatiente->getLink('id_resagresion');
                 $r .= " ".trim($dresultado->nombre);
             }
             $r .= "\n";
@@ -588,7 +588,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
     }
 
 
-    /** 
+    /**
      * Verifica integridad referencial
      *
      * @return bool V sii hay integridad
@@ -603,9 +603,9 @@ class PagVictimaCombatiente extends PagBaseMultiple
         $nr = $db->getOne($q);
         if ($nr > 0) {
             error_valida(
-                'Hay ' . $nr . ' victima(s) ' 
-                . 'combatiente(s) con el presunto responsable que ' 
-                . ' quiere ' . $accion . '.<br>  ' 
+                'Hay ' . $nr . ' victima(s) '
+                . 'combatiente(s) con el presunto responsable que '
+                . ' quiere ' . $accion . '.<br>  '
                 . ' Por favor cambiela(s) antes', $valores
             );
             return false;

@@ -364,8 +364,8 @@ class PagVictimaColectiva extends PagBaseMultiple
             array('anotaciones'),
             $this->bvictimacolectiva->_do->fb_fieldsToRender,
             array(
-            'id_antecedente', 'id_rango',
-            'id_sector', 'id_vinculoestado', 'id_filiacion',
+            'id_antecedente', 'id_rangoedad',
+            'id_sectorsocial', 'id_vinculoestado', 'id_filiacion',
             'id_profesion', 'id_organizacion'
             )
         );
@@ -398,8 +398,8 @@ class PagVictimaColectiva extends PagBaseMultiple
                 $v[$c] = $d->$c;
             }
             $r = array('antecedente_comunidad' => 'id_antecedente',
-                'comunidad_rangoedad' =>  'id_rango',
-                'comunidad_sectorsocial' =>  'id_sector',
+                'comunidad_rangoedad' =>  'id_rangoedad',
+                'comunidad_sectorsocial' =>  'id_sectorsocial',
                 'comunidad_vinculoestado' =>  'id_vinculoestado',
                 'comunidad_filiacion' =>  'id_filiacion',
                 'comunidad_profesion' =>  'id_profesion',
@@ -434,12 +434,12 @@ class PagVictimaColectiva extends PagBaseMultiple
 
             $n = $this->bcomunidad_rangoedad->_do->find();
             while ($this->bcomunidad_rangoedad->_do->fetch()) {
-                $valscre[] = $this->bcomunidad_rangoedad->_do->id_rango;
+                $valscre[] = $this->bcomunidad_rangoedad->_do->id_rangoedad;
             }
 
             $this->bcomunidad_sectorsocial->_do->find();
             while ($this->bcomunidad_sectorsocial->_do->fetch()) {
-                $valscss[] = $this->bcomunidad_sectorsocial->_do->id_sector;
+                $valscss[] = $this->bcomunidad_sectorsocial->_do->id_sectorsocial;
             }
 
             $this->bcomunidad_vinculoestado->_do->find();
@@ -463,8 +463,8 @@ class PagVictimaColectiva extends PagBaseMultiple
                 $valscoc[] = $this->bcomunidad_organizacion->_do->id_organizacion;
             }
             $v['id_antecedente'] = $valsca;
-            $v['id_rango'] = $valscre;
-            $v['id_sector'] = $valscss;
+            $v['id_rangoedad'] = $valscre;
+            $v['id_sectorsocial'] = $valscss;
             $v['id_vinculoestado'] = $valscve;
             $v['id_filiacion'] = $valscfc;
             $v['id_profesion'] = $valscpro;
@@ -594,18 +594,18 @@ class PagVictimaColectiva extends PagBaseMultiple
             && (!isset($valores['id_antecedente'])
             || $valores['id_antecedente'] == array()
             )
-            && (!isset($valores['id_rango'])
-            || $valores['id_rango'] == array()
+            && (!isset($valores['id_rangoedad'])
+            || $valores['id_rangoedad'] == array()
             )
-            && (!isset($valores['id_sector'])
-            || $valores['id_sector'] == array()
+            && (!isset($valores['id_sectorsocial'])
+            || $valores['id_sectorsocial'] == array()
             )
         ;
 
         if ($es_vacio) {
             return true;
         }
-        print_r($valores); 
+        print_r($valores);
         if (!$this->validate() ) {
             return false;
         }
@@ -680,21 +680,21 @@ class PagVictimaColectiva extends PagBaseMultiple
         }
 
 
-        if (isset($valores['id_rango'])) {
-            foreach (var_escapa($valores['id_rango']) as $k => $v) {
+        if (isset($valores['id_rangoedad'])) {
+            foreach (var_escapa($valores['id_rangoedad']) as $k => $v) {
                 $this->bcomunidad_rangoedad->_do->id_grupoper = $idgrupoper;
                 $this->bcomunidad_rangoedad->_do->id_caso = $idcaso;
-                $this->bcomunidad_rangoedad->_do->id_rango
+                $this->bcomunidad_rangoedad->_do->id_rangoedad
                     = (int)var_escapa($v, $db);
                 $this->bcomunidad_rangoedad->_do->insert();
             }
         }
 
-        if (isset($valores['id_sector'])) {
-            foreach (var_escapa($valores['id_sector']) as $k => $v) {
+        if (isset($valores['id_sectorsocial'])) {
+            foreach (var_escapa($valores['id_sectorsocial']) as $k => $v) {
                 $this->bcomunidad_sectorsocial->_do->id_grupoper = $idgrupoper;
                 $this->bcomunidad_sectorsocial->_do->id_caso = $idcaso;
-                $this->bcomunidad_sectorsocial->_do->id_sector
+                $this->bcomunidad_sectorsocial->_do->id_sectorsocial
                     = (int)var_escapa($v, $db);
                 $this->bcomunidad_sectorsocial->_do->insert();
             }
@@ -741,7 +741,7 @@ class PagVictimaColectiva extends PagBaseMultiple
             }
         }
 
-        caso_funcionario($_SESSION['basicos_id']);
+        caso_usuario($_SESSION['basicos_id']);
         return  $ret;
     }
 

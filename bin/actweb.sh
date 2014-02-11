@@ -1,5 +1,5 @@
 #!/bin/sh
-# Saca copia de la base sin fuentes ni funcionarios y la envía a la
+# Saca copia de la base sin fuentes ni usuarios y la envía a la
 # máquina destinada para publicación
 # vtamara@pasosdeJesus.org. Dominio público. 2007
 

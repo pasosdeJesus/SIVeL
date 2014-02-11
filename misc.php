@@ -47,6 +47,29 @@ $GLOBALS['idbus']=-1;
 /* -------- OPERACIONES CON CADENAS */
 
 /**
+ * Convierte un nombre a una forma normal en español.  En mayúsculas,
+ * sin espacios redundantes y sin tildes.
+ *
+ * @param string $s Nombre
+ *
+ * @return string Convertido a "forma normal"
+ */
+function a_forma_normal($s)
+{
+    $r = a_mayusculas($s);
+    $r = trim($r);
+    $r = preg_replace("/  +/", "", $r);
+    $r = str_replace(
+        array('Á', 'É', 'Í', 'Ó', 'Ú', 'á', 'é', 'í', 'ó', 'ú'),
+        array('A', 'E', 'I', 'O', 'U', 'A', 'E', 'I', 'O', 'U'),
+        $r
+    );
+
+    return $r;
+}
+
+
+/**
  * Convierte a minúsculas textos en español
  *
  * @param string $s Cadena
@@ -462,7 +485,7 @@ function valida(&$page)
  * @param string $enhtml  Mensaje en HTML
  *
  * @return void
-     */
+ */
 function error_valida($msg, $valores, $iderr = '', $enhtml = false)
 {
     if (!headers_sent()) {
@@ -472,15 +495,7 @@ function error_valida($msg, $valores, $iderr = '', $enhtml = false)
         $_SESSION['recuperaErrorValida'] = $valores;
     }
     echo "<script>";
-    if ($enhtml) {
-        //echo "$(document).ready(function () {alert('$msg');});";
-        echo "alert('$msg');";
-    } else {
-        echo "alert('" . htmlentities($msg, ENT_COMPAT, 'UTF-8') . "');";
-        /*echo "$(document).ready(function () {alert('" 
-            . htmlentities($msg, ENT_COMPAT, 'UTF-8')
-            . "');});";*/
-    }
+    echo "alert('$msg');";
     echo "</script>";
     if ($iderr != '') {
         $_SESSION[$iderr] = $msg;
@@ -498,7 +513,7 @@ function error_valida($msg, $valores, $iderr = '', $enhtml = false)
  * @param object &$db     Conexión a base de datos
  * @param string $mens    Mensaje por mostrar
  * @param string $cons    Consulta pr realizar
- * @param bool   $confunc Incluir primer funcionario que trabajo caso, en este
+ * @param bool   $confunc Incluir primer usuario que trabajo caso, en este
  *                        caso columna con id del caso se llama id_caso
  *
  * @return void
@@ -538,10 +553,10 @@ function res_valida(&$db, $mens, $cons, $confunc = false)
         );
         hace_consulta(
             $db,
-            "CREATE VIEW primerfuncionario AS
+            "CREATE VIEW primerusuario AS
             SELECT id_caso, MIN(fechainicio) AS fechainicio,
-            FIRST(id_funcionario) AS id_funcionario
-            FROM caso_funcionario
+            FIRST(id_usuario) AS id_usuario
+            FROM caso_usuario
             GROUP BY id_caso ORDER BY id_caso;", false, false
         );
 
@@ -551,11 +566,11 @@ function res_valida(&$db, $mens, $cons, $confunc = false)
     if ($confunc) {
         $r = hace_consulta(
             $db,
-            "SELECT primerfuncionario.id_caso,
-            funcionario.nombre, sub.*
-            FROM primerfuncionario, funcionario, ($cons) AS sub
-            WHERE primerfuncionario.id_funcionario = funcionario.id
-            AND primerfuncionario.id_caso = sub.id_caso"
+            "SELECT primerusuario.id_caso,
+            usuario.nusuario, sub.*
+            FROM primerusuario, usuario, ($cons) AS sub
+            WHERE primerusuario.id_usuario = usuario.id
+            AND primerusuario.id_caso = sub.id_caso"
         );
     } else {
         $r = hace_consulta($db, $cons);
@@ -682,7 +697,7 @@ function toma_elemento_recc($form, $nom, $yaanalizados = array())
 }
 
 
-/** 
+/**
  * Retorna valor SIN INFORMACION del campo $c del DataObject $do
  *
  * @param object &$do DataObject
@@ -694,25 +709,31 @@ function valorSinInfo(&$do, $c)
 {
     global $dbnombre;
     $v = null;
-    $exc = isset(
-        $GLOBALS['_DB_DATAOBJECT']['LINKS'][$dbnombre][$do->__table][$c]
+    $enl = parse_ini_file(
+        $_SESSION['dirsitio'] . "/DataObjects/" .
+        $GLOBALS['dbnombre'] . ".links.ini",
+        true
     );
+
+    $exc = isset($enl[$do->__table][$c]);
     if ($exc) {
-        $rel = $GLOBALS['_DB_DATAOBJECT']['LINKS'][$dbnombre][$do->__table][$c];
+        $rel = $enl[$do->__table][$c];
         $pd = strpos($rel, ':');
         $ndo = substr($rel, 0, $pd);
         $or = objeto_tabla($ndo);
-        if (!PEAR::isError($or) 
-            && is_callable(array($or, 'idSinInfo'))
-        ) {
-            $v = $or->idSinInfo();
-            //echo "OJO sacando valor {$v}<br>";
-            if (is_array($v)) {
-                if (isset($v[$c])) {
-                    $v = $v[$c];
-                } else {
-                    $v = null;
-                }
+    } else {
+        $or =& $do;
+    }
+    if (!PEAR::isError($or)
+        && is_callable(array($or, 'idSinInfo'))
+    ) {
+        $v = $or->idSinInfo();
+        //echo "OJO sacando valor {$v}<br>";
+        if (is_array($v)) {
+            if (isset($v[$c])) {
+                $v = $v[$c];
+            } else {
+                $v = null;
             }
         }
     }
@@ -758,7 +779,17 @@ function valores_pordefecto_form($d, $form, $merr = true)
                 }
             } else {
                 if (!isset($d->$c) || $d->$c == null) {
-                    $v = valorSinInfo($d, $c);
+                    $tab = $d->table();
+                    if (($tab[$c] & DB_DATAOBJECT_STR)
+                        || ($tab[$c] & DB_DATAOBJECT_TXT)
+                        || ($tab[$c] & DB_DATAOBJECT_DATE)
+                    ) {
+                        //echo "OJO empleando ''<br>";
+                        $v = '';
+                    } else { 
+                        //echo "OJO empleando valorSinInfo c=$c, tab[c]={$tab[$c]}, d->c={$d->$c}<br>";
+                        $v = valorSinInfo($d, $c);
+                    }
                 } else {
                     $v = $d->$c;
                     //echo "OJO poniendo valor {$v}<br>";
@@ -843,8 +874,8 @@ function encabezado_envia($titulo = null, $cabezote = '')
 <html>
 <head>
   <meta charset = "UTF-8">
-  <script src="lib/jquery-2.0.3.min.js"></script> 
-  <script src="sivel.js"></script> 
+  <script src = "lib/jquery-2.0.3.min.js"></script>
+  <script src = "sivel.js"></script>
 ';
     if (isset($titulo)) {
         echo '  <title>' . htmlentities($titulo, ENT_COMPAT, 'UTF-8') . '</title>';
@@ -960,7 +991,7 @@ function enlaces_casos_persona_html(
         }
     }
 
-    $penc = isset($GLOBALS['persona_en_caso']) ? 
+    $penc = isset($GLOBALS['persona_en_caso']) ?
         str_replace("idp", $idp, $GLOBALS['persona_en_caso']) : '';
     $q = "SELECT id_caso FROM persona_trelacion, victima
         WHERE persona1 = id_persona AND persona2 = '$idp' "
@@ -1048,7 +1079,7 @@ function die_esc($mens)
  *
  * @return string cadena HTML con enlace para editar caso $idc
  */
-function enlace_edita($idc) 
+function enlace_edita($idc)
 {
     $idn = (int)$idc;
     return "<a href='captura_caso.php?modo=edita&id=$idn'>$idn</a>";
@@ -1099,7 +1130,7 @@ function sin_error_pear($do, $msg = "")
     if (PEAR::isError($do)) {
         debug_print_backtrace();
         die_act(
-            "Error " . trim($msg . " ") . $do->getMessage() . 
+            "Error " . trim($msg . " ") . $do->getMessage() .
             " - " . $do->getUserInfo()
         );
     }
@@ -1114,9 +1145,14 @@ function sin_error_pear($do, $msg = "")
  * @param bool   $muestraerror Indica si debe mostrar mensaje de error
  *
  * @return resultado de la consulta. si hay errores los presenta.
-     */
+ */
 function hace_consulta(&$db, $q, $finenerror = true, $muestraerror = true)
 {
+    if ($db == null || !($db instanceof PEAR)) {
+        echo "db no es objeto PEAR<br>";
+        debug_print_backtrace();
+        exit(1);
+    }
     $res = $db->query($q);
     if (PEAR::isError($res)) {
         if ($muestraerror) {
@@ -1143,14 +1179,14 @@ function hace_consulta(&$db, $q, $finenerror = true, $muestraerror = true)
  * @param string $q   Consulta
  * @param bool   $t   Termina?
  *
- * @return primer campo del resultado de la consulta. 
+ * @return primer campo del resultado de la consulta.
  *      Si no hay uno retorna -1 o termina
  */
 function consulta_uno(&$db, $q, $t = true)
 {
     $res = hace_consulta($db, $q);
     if (($nr = $res->numRows()) != 1) {
-        if ($t) { 
+        if ($t) {
             die_esc(
                 sprintf(
                     _("Se esperaba un resultado y no %s de consulta \"%s\""),
@@ -1484,26 +1520,26 @@ function ref_dataobject($base, $tabla)
 
 
 /**
- * Si hace falta, agrega el funcionario a quienes editaron/vieron
+ * Si hace falta, agrega el usuario a quienes editaron/vieron
  * el caso
  *
  * @param integer $idcaso Id. del caso
  *
  * @return void
      */
-function caso_funcionario($idcaso)
+function caso_usuario($idcaso)
 {
     if ($idcaso == $GLOBALS['idbus']) {
         return;
     }
-    if (!isset($_SESSION['id_funcionario'])
-        || $_SESSION['id_funcionario'] == ''
+    if (!isset($_SESSION['id_usuario'])
+        || $_SESSION['id_usuario'] == ''
     ) {
-        die_esc(_("No es funcionario"));
+        die_esc(_("No es usuario"));
     }
-    $dfc = objeto_tabla('caso_funcionario');
+    $dfc = objeto_tabla('caso_usuario');
     $dfc->id_caso = $idcaso;
-    $dfc->id_funcionario = $_SESSION['id_funcionario'];
+    $dfc->id_usuario = $_SESSION['id_usuario'];
     if ($dfc->find()<1) {
         $dfc->fechainicio = @date('Y-m-d H:i');
         $dfc->insert();
@@ -1604,7 +1640,7 @@ function var_req_escapa($nv, $db = null, $maxlong = 1024)
  * Convierte un arreglo para fechas a una fecha.
  * Mes y día pueden ser '' y supone valores por defecto (1).
  *
- * @param array $f     Arreglo con indices Y, M, d, el valor $f['Y'] 
+ * @param array $f     Arreglo con indices Y, M, d, el valor $f['Y']
  *                      no puede ser ''
  * @param bool  $desde Si es cierto completa suponiendo que es una fecha Desde,
  *                     de lo contrario completa como fecha Hasta.
@@ -1835,7 +1871,7 @@ function convierte_valor(&$do, $campo, $tipo)
  * Asigna un campo de un DataObject con el valor recibido del formulario
  *
  * @param array  $valor  Valor por asignar
- * @param object $rel    Tabla 
+ * @param object $rel    Tabla
  * @param object $campo  Campo de tabla $tabla
  * @param array  &$estbd Estructura de base sacada de .ini.  Si es null esta
  *                        función la llena
@@ -2125,7 +2161,7 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
             "idSinInfo")
         );
         return $r;
-    } 
+    }
 
     $nom0 = $d->$ncamp = ereg_replace(
         "  *", " ",
@@ -2160,7 +2196,7 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
 
         if (PEAR::isError($r) || $r == null) {
             rep_obs(
-                "-- " . _($tabla) . ": " . _("desconocido") . 
+                "-- " . _($tabla) . ": " . _("desconocido") .
                 " '$nombre'", $obs
             );
             if ($sininf
@@ -2208,11 +2244,12 @@ function es_objeto_nulo($do)
 /**
  * Validaciones globales de un caso
  *
- * @param integer $idcaso Identificación de caso por validar.
+ * @param integer $idcaso    Identificación de caso por validar.
+ * @param string  &$buf_html Arreglo de errores retornados escapados
  *
  * @return bool Validado
-     */
-function valida_caso($idcaso)
+ */
+function valida_caso($idcaso, &$buf_html)
 {
     $valr = true;
     $dcaso = objeto_tabla('caso');
@@ -2229,7 +2266,7 @@ function valida_caso($idcaso)
         "WHERE id_caso='" . $idcaso . "';";
     $nfue+=(int)$db->getOne($q);
     if ($nfue <= 0) {
-        error_valida('Falta fuente.', array());
+        $buf_html[] = _('Falta fuente.');
         $valr = false;
     }
     $q = "SELECT COUNT(*) FROM acto " .
@@ -2242,14 +2279,14 @@ function valida_caso($idcaso)
         "WHERE id_caso='" . $idcaso . "';";
     $ncat += (int)$db->getOne($q);
     if ($ncat <= 0) {
-        error_valida('Falta tipo de violencia.', array());
+        $buf_html[] = _('Falta tipo de violencia.');
         $valr = false;
     }
     $q = "SELECT COUNT(*) FROM caso_presponsable " .
         "WHERE id_caso='" . $idcaso . "';";
     $npresp = (int)$db->getOne($q);
     if ($npresp <= 0) {
-        error_valida('Falta presunto responsable.', array());
+        $buf_html[] = _('Falta presunto responsable.');
         $valr = false;
     }
     $q = "SELECT COUNT(*) FROM victima " .
@@ -2262,13 +2299,42 @@ function valida_caso($idcaso)
         "WHERE id_caso='" . $idcaso . "';";
     @$nvic+=(int)$db->getOne($q);
     if ($nvic <= 0) {
-        error_valida('Falta victima.', array());
+        $buf_html[] = _('Falta víctima.');
         $valr = false;
     }
     $dcaso->get($idcaso);
     if (trim($dcaso->memo)=='') {
-        error_valida('Falta memo.', array());
+        $buf_html[] = _('Falta memo.');
         $valr = false;
+    }
+
+    if (isset($GLOBALS['validaciones_tipicas'])
+        && is_array($GLOBALS['validaciones_tipicas'])
+    ) {
+        foreach ($GLOBALS['validaciones_tipicas'] as $desc => $sql) {
+            $q = "SELECT COUNT(s.id_caso)
+                FROM ($sql) AS s
+                WHERE s.id_caso = '$idcaso'";
+            $prob = $db->getOne($q);
+            sin_error_pear($prob);
+            if ((int)$prob > 0) {
+                $buf_html[] = _("Caso") . " " . $desc;
+                $valr = false;
+            }
+        }
+    }
+    if (isset($GLOBALS['gancho_valida_caso'])) {
+        foreach ($GLOBALS['gancho_valida_caso'] as $k => $f) {
+            if (is_callable($f)) {
+                $r = call_user_func_array(
+                    $f,
+                    array($idcaso, &$buf_html)
+                ) && $r;
+            } else {
+                echo_esc(_("Falta") . " $k - $f");
+            }
+            //print_r($buf_html); die("x $k - $f - $r");
+        }
     }
     if (isset($GLOBALS['ISPELL']) && $GLOBALS['ISPELL'] != '') {
         $cmd = "";
@@ -2280,19 +2346,15 @@ function valida_caso($idcaso)
         }
         $r=`$cmd`;
         if ($r != "") {
-            error_valida(
-                _("Errores ortográficos en memo") . ": $r<br>" .
+            $buf_html[] = _("Errores ortográficos en memo") . ": $r<br>" .
                 str_replace(
                     '%l', $GLOBALS['CHROOTDIR'] . getcwd() . "/" .
                     $GLOBALS['DICCIONARIO'], $GLOBALS['MENS_ORTOGRAFIA']
-                ),
-                array()
-            );
+                );
         }
     }
-    if (!$valr) {
-        echo "<hr>";
-    }
+
+
     return $valr;
 }
 

@@ -10,7 +10,6 @@
  * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
  * @copyright 2011 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
- * @version   CVS: $Id: victimasrep.php,v 1.1 2012/01/11 17:41:30 vtamara Exp $
  * @link      http://sivel.sf.net
 */
 
@@ -32,6 +31,17 @@ require_once 'PagTipoViolencia.php';
 require_once 'PagUbicacion.php';
 require_once 'ResConsulta.php';
 require_once 'misc.php';
+
+foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
+    list($n, $c, $o) = $tab;
+    if (($d = strrpos($c, "/"))>0) {
+        $c = substr($c, $d+1);
+    }
+    // @codingStandardsIgnoreStart
+    require_once "$c.php";
+    // @codingStandardsIgnoreEnd
+}
+
 
 
 /**
@@ -55,10 +65,47 @@ class AccionComparaDos extends HTML_QuickForm_Action
      */
     function perform(&$page, $actionName)
     {
-        $pId1   = var_post_escapa('id1', $db);
-        $pId2   = var_post_escapa('id2', $db);
+        $pIds = "";
+        if (!isset($_REQUEST['ids']) || $_REQUEST['ids'] == '') {
+            foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
+                list($n, $c, $o) = $tab;
+                //echo "OJO $n, $c, $o<br>";
+                if (($d = strrpos($c, "/"))>0) {
+                    $c = substr($c, $d+1);
+                }
+                if (is_callable(array($c, 'mezclaAccionFiltro'))) {
+                    $pIds = call_user_func_array(
+                        array($c, 'mezclaAccionFiltro'),
+                        array(&$this)
+                    );
+                    if ($pIds != "") {
+                        break;
+                    }
+                }
+            }
+        } else {
+            $pIds   = var_post_escapa('ids');
+        }
+        $a = explode(" ", $pIds);
+        if (count($a) < 2 || count($a) % 2 != 0) {
+            error_valida(
+                "Debe ingresar parejas de códigos separados por espacio "
+                . "(cuenta=" . count($a) . ")", null
+            );
+            return false;
+        }
+        foreach ($a as $nc) {
+            if ($nc != (int)$nc) {
+                error_valida(
+                    "Debe ingresar parejas de códigos separados por espacio "
+                    . " nc=$nc", null
+                );
+                return false;
+            }
+        }
 
-        header("Location: opcion.php?num=1004&id1=$pId1&id2=$pId2");
+        $_SESSION['mezcla_ids'] = $pIds;
+        header("Location: opcion.php?num=1004&ids=sesion");
 
         die("compara");
     }
@@ -104,11 +151,11 @@ class AccionVictimasrep extends HTML_QuickForm_Action
                 $rot = '';
             }
             if ($n<($ncol+1) || ($pResto && $n==($ncol+1))) {
-                $html_l = $sep . "<b>" . htmlentities($l) 
-                    . " " . htmlentities($rot) . ":</b>";
+                $html_l = $sep . "<b>" . htmlentities($l, ENT_COMPAT, 'UTF-8')
+                    . " " . htmlentities($rot, ENT_COMPAT, 'UTF-8') . ":</b>";
                 echo $html_l;
                 foreach ($lc as $cc) {
-                    echo htmlentities($cc) . " ";
+                    echo htmlentities($cc, ENT_COMPAT, 'UTF-8') . " ";
                 }
                 $sep = "; ";
             }
@@ -180,10 +227,10 @@ class AccionVictimasrep extends HTML_QuickForm_Action
         } else if ($pIdDepartamento != '') {
             $tgeo = "ubicacion, ";
             consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
-            $where .= " AND ubicacion.id_departamento IN " 
+            $where .= " AND ubicacion.id_departamento IN "
                 . "('$pIdDepartamento', '1000') ";
         }
-        
+
         if ($pFini['Y'] != '') {
             consulta_and(
                 $db, $where, "caso.fecha",
@@ -257,9 +304,9 @@ class AccionVictimasrep extends HTML_QuickForm_Action
             echo "<td><a href='captura_caso.php?modo=edita&id=" .
                 (int)$idcaso . "'>" . (int)$idcaso . "</a></td>";
             echo "<td>" . (int)$idvic . "</td>";
-            echo "<td>" . htmlentities($fecha) . "</td><td>" . 
-                    htmlentities($ubi) . "</td><td>" .
-                    trim(htmlentities($nom)) . "</td>";
+            echo "<td>" . htmlentities($fecha, ENT_COMPAT, 'UTF-8') . "</td><td>" .
+                    htmlentities($ubi, ENT_COMPAT, 'UTF-8') . "</td><td>" .
+                    trim(htmlentities($nom, ENT_COMPAT, 'UTF-8')) . "</td>";
             echo "<td><input name='id" . (int)$idcaso .  "' "
                 . " type=\"checkbox\"/></td>";
             echo "</tr>";
@@ -313,11 +360,11 @@ class PagVictimasrep extends HTML_QuickForm_Page
         $x =&  objeto_tabla('departamento');
         $db = $x->getDatabaseConnection();
 
-        $e =& $this->addElement('header', null, 'Compara dos casos por número');
-        $e =& $this->addElement('text', 'id1');
-        $e->setSize(7);
-        $e =& $this->addElement('text', 'id2');
-        $e->setSize(7);
+        $e =& $this->addElement(
+            'header', null, 'Compara pares de casos por código'
+        );
+        $e =& $this->addElement('text', 'ids');
+        $e->setSize(80);
 
         $e =& $this->addElement(
             'submit',
@@ -325,7 +372,7 @@ class PagVictimasrep extends HTML_QuickForm_Page
         );
 
         $e =& $this->addElement(
-            'header', null, 
+            'header', null,
             'Reporte para identificar v&iacute;ctimas repetidas'
         );
 
@@ -367,6 +414,19 @@ class PagVictimasrep extends HTML_QuickForm_Page
         $prevnext[] =& $sel;
         $this->addGroup($prevnext, null, '', '&nbsp;', false);
 
+        foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
+            list($n, $c, $o) = $tab;
+            if (($d = strrpos($c, "/"))>0) {
+                $c = substr($c, $d+1);
+            }
+            if (is_callable(array($c, 'mezclaFiltro'))) {
+                call_user_func_array(
+                    array($c, 'mezclaFiltro'),
+                    array(&$db, &$this)
+                );
+            }
+        }
+
         $tpie = "<div align=right><a href=\"index.php\">" .
             "Men&uacute; Principal</a></div>";
         $e =& $this->addElement('header', null, $tpie);
@@ -393,6 +453,7 @@ function muestra($dsn)
 {
     $aut_usuario = "";
     autentica_usuario($dsn, $accno, $aut_usuario, 31);
+    encabezado_envia('Elegir');
 
     $wizard =& new HTML_QuickForm_Controller('Victimasrep', false);
     $consweb = new PagVictimasrep();
