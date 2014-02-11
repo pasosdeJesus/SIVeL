@@ -1,0 +1,22 @@
+<% if !f.object.persona.nil?  && f.object.persona.id == @caso.casosjr.contacto.id then %>
+      <%= f.simple_fields_for :persona do |p| %>
+        <%= render 'persona_fields', :f => p %>
+      <% end %>
+      <%= f.association :profesion,
+  	    label: "Profesión",
+  	    label_method: :nombre, 
+  	    value_method: :id %>
+      <%= f.association :rangoedad,
+  	    label: "Rango de Edad",
+  	    label_method: :rango, 
+  	    value_method: :id %>
+      <%= f.association :etnia,
+  	    label: "Etnia",
+  	    label_method: :nombre, 
+  	    value_method: :id %>
+      <%= f.association :iglesia,
+  	    label: "Religión/Iglesia",
+  	    label_method: :nombre, 
+  	    value_method: :id %>
+      <%= f.input(:orientacionsexual, collection: [[:Heterosexual, :H], [:Lesbiana, :L], [:Gay, :G], [:Bisexual, :B], [:Transexual, :T]], prompt: "Orientación Sexual") %>
+<% end %>
