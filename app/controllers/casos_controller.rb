@@ -21,6 +21,16 @@ class CasosController < ApplicationController
     @caso.casosjr = Casosjr.new
     @caso.casosjr.fecharec = DateTime.now.strftime('%Y-%m-%d')
     @caso.casosjr.asesor = current_usuario.id
+    @caso.casosjr.regionsjr = Regionsjr.find(1);
+    per = Persona.new
+    per.nombres = 'Nombres';
+    per.apellidos = 'Apellidos';
+    per.sexo = 'S';
+    per.save;
+    vic = Victima.new
+    vic.persona = per;
+    @caso.victima<<vic;
+    @caso.casosjr.contacto = per;
     @caso.save
     render action: 'edit'
   end
@@ -175,7 +185,7 @@ class CasosController < ApplicationController
           :telefono, :comosupo, :contacto, :_destroy], 
         :victima_attributes => [:id_persona, :id_profesion, 
           :id_rangoedad, :id_etnia, :id_iglesia, :orientacionsexual, 
-          :_destroy, :persona_attributes => [:id_persona, :nombres, 
+          :_destroy, :persona_attributes => [:nombres, 
             :apellidos, :anionac, :mesnac, :dianac, :numerodocumento,
             :sexo, :id_departamento, :tipodocumento]], 
         :ubicacion_attributes => [:id, :id_departamento, :id_municipio, 

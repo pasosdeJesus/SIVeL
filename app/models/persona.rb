@@ -14,4 +14,5 @@ class Persona < ActiveRecord::Base
 
   validates_presence_of :nombres
   validates_presence_of :apellidos
+  validates_presence_of :sexo
 end
