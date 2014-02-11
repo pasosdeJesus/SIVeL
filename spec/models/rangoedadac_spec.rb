@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe ActividadRangoedad do
+describe Rangoedadac do
   pending "add some examples to (or delete) #{__FILE__}"
 end

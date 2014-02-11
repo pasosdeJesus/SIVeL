@@ -1,6 +1,9 @@
 <%= simple_form_for @actividad, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.error_notification %>
-  <%= f.input :numero %>
+  <%= f.association :oficina,
+    label: "Oficina",
+    label_method: :nombre, 
+    value_method: :id %>
   <%= f.input :minutos %>
   <%= f.input :nombre %>
   <%= f.association :actividadareas, 
@@ -14,20 +17,20 @@
 	  :as => :string %>
    <table border=1>
      <thead>
-       <tr><th>Rango de Edad</th><th>Femenino</th><th>Masculino</th><th>Acción</th></tr>
+       <tr><th>Rango de Edad</th><th>F. Local</th><th>F. Refugio</th><th>M. Local</th><th>M. Refugio</th><th>Acción</th></tr>
      </thead>
-     <tbody id="actividad_rangoedad">
-       <%= f.simple_fields_for :actividad_rangoedad do |s| %>
-         <%= render 'actividad_rangoedad_fields', :f => s %>
+     <tbody id="actividad_rangoedadac">
+       <%= f.simple_fields_for :actividad_rangoedadac do |s| %>
+         <%= render 'actividad_rangoedadac_fields', :f => s %>
        <% end %>
      </tbody>
    </table>
    <div class="links">
      <%= link_to_add_association 'Añadir Rango de Edad', f, 
-       :actividad_rangoedad, 
-       :"data-association-insertion-node" => "tbody#actividad_rangoedad", 
+       :actividad_rangoedadac, 
+       :"data-association-insertion-node" => "tbody#actividad_rangoedadac", 
        :"data-association-insertion-method" => "append", 
-       :partial => "actividad_rangoedad_fields", 
+       :partial => "actividad_rangoedadac_fields", 
        :class => "btn-primary" %>
    </div>
 
