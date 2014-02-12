@@ -14,6 +14,19 @@ Actividadarea.create(id: 4, nombre: 'Emprendimiento', fechacreacion: '2013-12-04
 Actividadarea.create(id: 5, nombre: 'Incidencia', fechacreacion: '2013-12-04')
 Actividadarea.create(id: 6, nombre: 'Comunicaciones', fechacreacion: '2014-01-29')
 
+Rangoedadac.create(id: 1, nombre: 'De 0 a 10', limiteinferior: 0,
+                 limitesuperior: 10, fechacreacion: '2014-02-11')
+Rangoedadac.create(id: 2, nombre: 'De 11 a 15', limiteinferior: 11,
+                 limitesuperior: 15, fechacreacion: '2014-02-11')
+Rangoedadac.create(id: 3, nombre: 'De 16 a 25', limiteinferior: 16,
+                 limitesuperior: 25, fechacreacion: '2014-02-11')
+Rangoedadac.create(id: 4, nombre: 'De 26 a 45', limiteinferior: 26,
+                 limitesuperior: 45, fechacreacion: '2014-02-11')
+Rangoedadac.create(id: 5, nombre: 'De 46 a 60', limiteinferior: 46,
+                 limitesuperior: 60, fechacreacion: '2014-02-11')
+Rangoedadac.create(id: 6, nombre: '61 en adelante', limiteinferior: 61,
+                 fechacreacion: '2014-02-11')
+
 connection = ActiveRecord::Base.connection();
 
 connection.execute("SELECT setval('actividadarea_id_seq', MAX(id)) FROM 

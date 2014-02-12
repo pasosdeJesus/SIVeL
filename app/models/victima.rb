@@ -13,7 +13,5 @@ class Victima < ActiveRecord::Base
   has_one   :victimasjr, foreign_key: [:id_caso, :id_persona], validate: true, dependent: :destroy
 
 	belongs_to :persona, foreign_key: "id_persona", validate: true
-	accepts_nested_attributes_for :persona, reject_if: :all_blank, update_only: true
-
-  self.primary_key = nil
+	accepts_nested_attributes_for :persona, reject_if: :all_blank
 end

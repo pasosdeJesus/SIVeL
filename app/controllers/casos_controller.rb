@@ -89,8 +89,6 @@ class CasosController < ApplicationController
   end
 
   def elimina_dep
-    @caso.victimasjr.clear
-    @caso.victima.clear
     @caso.caso_etiqueta.clear
     @caso.desplazamiento.clear
     @caso.actosjr.clear
@@ -183,9 +181,9 @@ class CasosController < ApplicationController
         :bienes, :id_intervalo, :memo, 
         :casosjr_attributes => [:fecharec, :asesor, :id_regionsjr, :direccion, 
           :telefono, :comosupo, :contacto, :_destroy], 
-        :victima_attributes => [:id_persona, :id_profesion, 
+        :victima_attributes => [:id, :id_persona, :id_profesion, 
           :id_rangoedad, :id_etnia, :id_iglesia, :orientacionsexual, 
-          :_destroy, :persona_attributes => [:nombres, 
+          :_destroy, :persona_attributes => [:id, :nombres, 
             :apellidos, :anionac, :mesnac, :dianac, :numerodocumento,
             :sexo, :id_departamento, :tipodocumento]], 
         :ubicacion_attributes => [:id, :id_departamento, :id_municipio, 

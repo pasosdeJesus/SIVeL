@@ -191,7 +191,6 @@ CREATE TABLE acreditacion (
 
 CREATE TABLE actividad (
     id integer NOT NULL,
-    numero integer,
     minutos integer,
     nombre character varying(500),
     objetivo character varying(500),
@@ -201,7 +200,8 @@ CREATE TABLE actividad (
     observaciones character varying(5000),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    region_id integer
+    regionsjr_id integer NOT NULL,
+    rangoedadac_id integer
 );
 
 
@@ -256,6 +256,42 @@ CREATE SEQUENCE actividad_rangoedad_id_seq
 --
 
 ALTER SEQUENCE actividad_rangoedad_id_seq OWNED BY actividad_rangoedad.id;
+
+
+--
+-- Name: actividad_rangoedadac; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE actividad_rangoedadac (
+    id integer NOT NULL,
+    actividad_id integer,
+    rangoedadac_id integer,
+    ml integer,
+    mr integer,
+    fl integer,
+    fr integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: actividad_rangoedadac_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE actividad_rangoedadac_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: actividad_rangoedadac_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE actividad_rangoedadac_id_seq OWNED BY actividad_rangoedadac.id;
 
 
 --
@@ -1930,6 +1966,41 @@ CREATE TABLE rangoedad (
 
 
 --
+-- Name: rangoedadac; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE rangoedadac (
+    id integer NOT NULL,
+    nombre character varying(255),
+    limiteinferior integer,
+    limitesuperior integer,
+    fechacreacion date,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: rangoedadac_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE rangoedadac_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: rangoedadac_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE rangoedadac_id_seq OWNED BY rangoedadac.id;
+
+
+--
 -- Name: regimensalud_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -2342,6 +2413,18 @@ CREATE TABLE usuario (
 
 
 --
+-- Name: victima_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE victima_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
 -- Name: victima; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2362,6 +2445,7 @@ CREATE TABLE victima (
     orientacionsexual character(1) DEFAULT 'H'::bpchar NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
+    id integer DEFAULT nextval('victima_seq'::regclass) NOT NULL,
     CONSTRAINT victima_hijos_check CHECK (((hijos IS NULL) OR ((hijos >= 0) AND (hijos <= 100)))),
     CONSTRAINT victima_orientacionsexual_check CHECK (((((((orientacionsexual = 'L'::bpchar) OR (orientacionsexual = 'G'::bpchar)) OR (orientacionsexual = 'B'::bpchar)) OR (orientacionsexual = 'T'::bpchar)) OR (orientacionsexual = 'I'::bpchar)) OR (orientacionsexual = 'H'::bpchar)))
 );
@@ -2408,7 +2492,8 @@ CREATE TABLE victimasjr (
     progadultomayor boolean,
     fechadesagregacion date,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    id_victima integer
 );
 
 
@@ -2457,6 +2542,13 @@ ALTER TABLE ONLY actividad_rangoedad ALTER COLUMN id SET DEFAULT nextval('activi
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY actividad_rangoedadac ALTER COLUMN id SET DEFAULT nextval('actividad_rangoedadac_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY actividadarea ALTER COLUMN id SET DEFAULT nextval('actividadarea_id_seq'::regclass);
 
 
@@ -2465,6 +2557,13 @@ ALTER TABLE ONLY actividadarea ALTER COLUMN id SET DEFAULT nextval('actividadare
 --
 
 ALTER TABLE ONLY actividadareas_actividad ALTER COLUMN id SET DEFAULT nextval('actividadareas_actividad_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY rangoedadac ALTER COLUMN id SET DEFAULT nextval('rangoedadac_id_seq'::regclass);
 
 
 --
@@ -2489,6 +2588,14 @@ ALTER TABLE ONLY actividad
 
 ALTER TABLE ONLY actividad_rangoedad
     ADD CONSTRAINT actividad_rangoedad_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: actividad_rangoedadac_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY actividad_rangoedadac
+    ADD CONSTRAINT actividad_rangoedadac_pkey PRIMARY KEY (id);
 
 
 --
@@ -3076,6 +3183,14 @@ ALTER TABLE ONLY rangoedad
 
 
 --
+-- Name: rangoedadac_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY rangoedadac
+    ADD CONSTRAINT rangoedadac_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: regimensalud_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3204,11 +3319,35 @@ ALTER TABLE ONLY usuario
 
 
 --
+-- Name: victima_id_caso_id_persona_key; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_id_caso_id_persona_key UNIQUE (id_caso, id_persona);
+
+
+--
+-- Name: victima_id_caso_id_persona_key1; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_id_caso_id_persona_key1 UNIQUE (id_caso, id_persona);
+
+
+--
+-- Name: victima_id_caso_id_persona_key2; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY victima
+    ADD CONSTRAINT victima_id_caso_id_persona_key2 UNIQUE (id_caso, id_persona);
+
+
+--
 -- Name: victima_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY victima
-    ADD CONSTRAINT victima_pkey PRIMARY KEY (id_persona, id_caso);
+    ADD CONSTRAINT victima_pkey PRIMARY KEY (id);
 
 
 --
@@ -3250,6 +3389,13 @@ CREATE INDEX caso_titulo ON caso USING gin (to_tsvector('spanish'::regconfig, un
 
 
 --
+-- Name: index_actividad_on_rangoedadac_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_actividad_on_rangoedadac_id ON actividad USING btree (rangoedadac_id);
+
+
+--
 -- Name: index_actividad_rangoedad_on_actividad_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3261,6 +3407,20 @@ CREATE INDEX index_actividad_rangoedad_on_actividad_id ON actividad_rangoedad US
 --
 
 CREATE INDEX index_actividad_rangoedad_on_rangoedad_id ON actividad_rangoedad USING btree (rangoedad_id);
+
+
+--
+-- Name: index_actividad_rangoedadac_on_actividad_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_actividad_rangoedadac_on_actividad_id ON actividad_rangoedadac USING btree (actividad_id);
+
+
+--
+-- Name: index_actividad_rangoedadac_on_rangoedadac_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_actividad_rangoedadac_on_rangoedadac_id ON actividad_rangoedadac USING btree (rangoedadac_id);
 
 
 --
@@ -3317,6 +3477,14 @@ CREATE INDEX persona_nombres_apellidos_doc ON persona USING gin (to_tsvector('sp
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- Name: actividad_regionsjr_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY actividad
+    ADD CONSTRAINT actividad_regionsjr_id_fkey FOREIGN KEY (regionsjr_id) REFERENCES regionsjr(id);
 
 
 --
@@ -3525,14 +3693,6 @@ ALTER TABLE ONLY antecedente_victima
 
 ALTER TABLE ONLY antecedente_victima
     ADD CONSTRAINT antecedente_victima_id_persona_fkey FOREIGN KEY (id_persona) REFERENCES persona(id);
-
-
---
--- Name: antecedente_victima_id_persona_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY antecedente_victima
-    ADD CONSTRAINT antecedente_victima_id_persona_fkey1 FOREIGN KEY (id_persona, id_caso) REFERENCES victima(id_persona, id_caso);
 
 
 --
@@ -4288,6 +4448,22 @@ ALTER TABLE ONLY ubicacion
 
 
 --
+-- Name: victima_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victima_fkey FOREIGN KEY (id_caso, id_persona) REFERENCES victima(id_caso, id_persona);
+
+
+--
+-- Name: victima_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY antecedente_victima
+    ADD CONSTRAINT victima_fkey FOREIGN KEY (id_caso, id_persona) REFERENCES victima(id_caso, id_persona);
+
+
+--
 -- Name: victima_id_caso_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4464,14 +4640,6 @@ ALTER TABLE ONLY victimasjr
 
 
 --
--- Name: victimasjr_id_persona_fkey1; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY victimasjr
-    ADD CONSTRAINT victimasjr_id_persona_fkey1 FOREIGN KEY (id_persona, id_caso) REFERENCES victima(id_persona, id_caso);
-
-
---
 -- Name: victimasjr_id_regimensalud_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4485,6 +4653,14 @@ ALTER TABLE ONLY victimasjr
 
 ALTER TABLE ONLY victimasjr
     ADD CONSTRAINT victimasjr_id_rolfamilia_fkey FOREIGN KEY (id_rolfamilia) REFERENCES rolfamilia(id);
+
+
+--
+-- Name: victimasjr_id_victima_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_victima_fkey FOREIGN KEY (id_victima) REFERENCES victima(id);
 
 
 --
@@ -4516,4 +4692,12 @@ INSERT INTO schema_migrations (version) VALUES ('20140117212555');
 INSERT INTO schema_migrations (version) VALUES ('20140129151136');
 
 INSERT INTO schema_migrations (version) VALUES ('20140207102709');
+
+INSERT INTO schema_migrations (version) VALUES ('20140207102739');
+
+INSERT INTO schema_migrations (version) VALUES ('20140211162355');
+
+INSERT INTO schema_migrations (version) VALUES ('20140211164659');
+
+INSERT INTO schema_migrations (version) VALUES ('20140211172443');
 
