@@ -185,7 +185,7 @@ class CasosController < ApplicationController
           :telefono, :comosupo, :contacto, :_destroy], 
         :victima_attributes => [:id_persona, :id_profesion, 
           :id_rangoedad, :id_etnia, :id_iglesia, :orientacionsexual, 
-          :_destroy, :persona_attributes => [:nombres, 
+          :_destroy, :persona_attributes => [:id, :nombres, 
             :apellidos, :anionac, :mesnac, :dianac, :numerodocumento,
             :sexo, :id_departamento, :tipodocumento]], 
         :ubicacion_attributes => [:id, :id_departamento, :id_municipio, 
