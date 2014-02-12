@@ -1,6 +1,6 @@
 language: ruby
 rvm:
         - 1.9.3
-before_install: cp config/database-sinhost.yml.plantilla config/database.yml; bundle install
+before_install: cp config/database.travis.yml config/database.yml; bundle install
 
 
