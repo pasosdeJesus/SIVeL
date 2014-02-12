@@ -52,7 +52,9 @@
                 <%= s.input :telefono%>
                 <%= s.input :comosupo, :label => "Como supo" %>
                 <%= f.simple_fields_for :victima do |victima| %>
-                  <%= render 'contacto_fields', :f => victima  %>
+                  <% if !victima.object.persona.nil?  && victima.object.persona.id == @caso.casosjr.contacto.id %>
+                    <%= render 'contacto_fields', :f => victima  %>
+                  <% end %>
                 <% end %>
                 <div class="input string optional"><label class="string optional control-label" for="x1">Dependen econ.</label><input class="string optional" id="x1" name="x1" type="text"></div>
                 <div class="input string optional"><label class="string optional control-label" for="x2">Sustento familiar</label><input class="string optional" id="x2" name="x2" type="text"></div>

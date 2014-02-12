@@ -1,6 +1,6 @@
 language: ruby
 rvm:
         - 1.9.3
-before_install: cp config/database.yml.plantilla config/database.yaml; bundle install
+before_install: cp config/database.yml.plantilla config/database.yml; bundle install
 
 
