@@ -615,9 +615,12 @@ CREATE TABLE persona_trelacion (
 );
 
 
+CREATE SEQUENCE victima_seq;
+
 -- Victima depende de caso.  Podría hacerse una tabla persona relacionada
 -- con esta. 
 CREATE TABLE victima (
+	id INTEGER PRIMARY KEY DEFAULT(nextval('victima_seq')),
 	id_persona INTEGER REFERENCES persona NOT NULL,
 	id_caso	INTEGER REFERENCES caso NOT NULL,
 	hijos INTEGER CHECK (hijos IS NULL OR (hijos>='0' AND hijos<='100')),
@@ -716,7 +719,7 @@ CREATE TABLE caso_contexto (
 CREATE SEQUENCE caso_presponsable_seq;
 
 CREATE TABLE caso_presponsable (
-	id INTEGER UNIQUE DEFAULT(nextval('caso_presponsable_seq')) PRIMARY KEY,
+	id INTEGER PRIMARY KEY DEFAULT(nextval('caso_presponsable_seq')),
 	id_caso INTEGER REFERENCES caso,
 	id_presponsable INTEGER REFERENCES presponsable,
 	tipo	INTEGER	NOT NULL DEFAULT 0,

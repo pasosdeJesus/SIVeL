@@ -2877,6 +2877,56 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'id en tabla caso_presponsable es identificación');
 }
 
+$idac = '1.3-vid';
+if (!aplicado($idac)) {
+    
+    hace_consulta($db, 'CREATE SEQUENCE victima_seq', false);
+    hace_consulta(
+        $db, "ALTER TABLE antecedente_victima
+        DROP CONSTRAINT antecedente_victima_id_persona_fkey1", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE victima DROP CONSTRAINT victima_pkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE victima ADD UNIQUE(id_caso, id_persona);", true
+    );
+    hace_consulta(
+        $db, "ALTER TABLE victima
+        ADD COLUMN id INTEGER PRIMARY KEY DEFAULT(nextval('victima_seq'))", 
+        false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE victima ADD CONSTRAINT victima_pkey
+        PRIMARY KEY (id)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE antecedente_victima
+        ADD CONSTRAINT victima_fkey
+        FOREIGN KEY (id_caso, id_persona) 
+        REFERENCES victima(id_caso, id_persona)", false
+    );
+/*    hace_consulta(
+        $db, "UPDATE victimasjr SET id_victima=victima.id FROM
+        victima WHERE victimasjr.id_persona=victima.id_persona AND
+        victimasjr.id_caso=victima.id_caso", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE antecedente_victima
+        ADD COLUMN id_victima INTEGER REFERENCES victima(id)", false
+    );
+    hace_consulta(
+        $db, "UPDATE antecedente_victima SET id_victima=victima.id FROM
+        victima WHERE antecedente_victima.id_persona=victima.id_persona AND
+        antecedente_victima.id_caso=victima.id_caso", false
+    ); */
+
+   /* 
+
+    aplicaact($act, $idac, 'id en tabla victima es identificación'); */
+}
+
+
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;

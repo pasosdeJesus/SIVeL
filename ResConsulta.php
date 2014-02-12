@@ -360,10 +360,10 @@ class ResConsulta
     function extraeVictimas($idcaso, &$db, &$idp, &$ndp,
         $id_persona, &$indid, &$edp, $primnom = true, $septd = false
     ) {
-        $q = "SELECT  id_persona, nombres, apellidos, anionac " .
+        $q = "SELECT id_persona, nombres, apellidos, anionac " .
             " FROM victima, persona " .
             " WHERE id_caso='$idcaso' AND victima.id_persona=persona.id " .
-            " ORDER BY id;";
+            " ORDER BY persona.id;";
         $result = hace_consulta($db, $q);
         $row = array();
         $tot = 0;
