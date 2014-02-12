@@ -53,7 +53,7 @@
                 <%= s.input :comosupo, :label => "Como supo" %>
                 <%= f.simple_fields_for :victima do |victima| %>
                   <% if !victima.object.persona.nil?  && victima.object.persona.id == @caso.casosjr.contacto.id %>
-                    <%= render 'contacto_fields', :f => victima  %>
+                    <%= render 'contacto_fields', :f => victima %>
                   <% end %>
                 <% end %>
                 <div class="input string optional"><label class="string optional control-label" for="x1">Dependen econ.</label><input class="string optional" id="x1" name="x1" type="text"></div>
@@ -78,7 +78,7 @@
           <div id="victima" class="accordion-body collapse">
             <div class="accordion-inner">
               <%= f.simple_fields_for :victima do |victima| %>
-                <% if !victima.object.persona.nil?  && victima.object.persona.id != @caso.casosjr.contacto.id %>
+                <% if !victima.object.persona.nil? && victima.object.persona.id != @caso.casosjr.contacto.id %>
                   <%= render 'victima_fields', :f => victima %>
                 <% end %>
               <% end %>

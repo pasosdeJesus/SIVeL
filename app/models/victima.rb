@@ -14,6 +14,4 @@ class Victima < ActiveRecord::Base
 
 	belongs_to :persona, foreign_key: "id_persona", validate: true
 	accepts_nested_attributes_for :persona, reject_if: :all_blank
-
-  self.primary_key = nil
 end
