@@ -40,6 +40,10 @@
         label: "Rol en Familia",
         label_method: :nombre, 
         value_method: :id %>
+      <%= s.association :actividadoficio,
+        label: "Oficio",
+        label_method: :nombre, 
+        value_method: :id %>
     <% end %>
     <%= link_to_remove_association "Eliminar Víctima", f, :class => 'btn-danger' %> 
   </div>

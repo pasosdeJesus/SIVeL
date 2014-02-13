@@ -21,17 +21,23 @@ class CasosController < ApplicationController
     @caso.casosjr = Casosjr.new
     @caso.casosjr.fecharec = DateTime.now.strftime('%Y-%m-%d')
     @caso.casosjr.asesor = current_usuario.id
-    @caso.casosjr.regionsjr = Regionsjr.find(1);
+    @caso.casosjr.regionsjr = Regionsjr.find(1)
     per = Persona.new
-    per.nombres = 'Nombres';
-    per.apellidos = 'Apellidos';
-    per.sexo = 'S';
-    per.save;
+    per.nombres = 'Nombres'
+    per.apellidos = 'Apellidos'
+    per.sexo = 'S'
+    per.save
     vic = Victima.new
-    vic.persona = per;
-    @caso.victima<<vic;
-    @caso.casosjr.contacto = per;
+    vic.persona = per
+    @caso.victima<<vic
+    @caso.casosjr.contacto = per
     @caso.save
+    vs = Victimasjr.new
+    vs.id_persona =  per.id
+    vs.id_caso = @caso.id
+    vic.victimasjr = vs
+    vic.save
+
     render action: 'edit'
   end
 
@@ -192,7 +198,8 @@ class CasosController < ApplicationController
             :numerodocumento, :sexo, :id_departamento, :tipodocumento
           ],
           :victimasjr_attributes => [
-            :id_rolfamilia
+            :id_rolfamilia,
+            :id_actividadoficio
           ]
         ], 
         :ubicacion_attributes => [

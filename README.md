@@ -27,14 +27,14 @@ con Ruby on Rails.
 ### Requerimientos
 * Ruby version >= 1.9
 * PostgreSQL >= 9.3
-* Se recomienda emplear en paralelo con una instancia de SIVeL 1.2 
+* Se recomienda emplear en paralelo con una instancia de SIVeL 1.3 
 * Recomendado sobre adJ 5.4 (que incluye todos los componentes mencionados).  
   Las siguientes instrucciones suponen que opera en este ambiente.
 
 ### Configuración de servidor de desarrollo:
 * Ubique fuentes por ejemplo en /var/www/htdocs/sivel2/
 * Instale gemas requeridas (como Rails 4.1) con:
-        ```bash
+  ```sh
   sudo bundle install
   bundle install
   ```
@@ -42,14 +42,15 @@ con Ruby on Rails.
   ```sh
   cp config/secrets.yml.plantilla config/secrets.yml
   cp app/views/hogar/_local.html.erb.plantilla app/views/hogar/_local.html.erb
+  cp config/database.yml.plantilla config/database.yml
 ```
-* Configure la misma base de datos de un SIVeL 1.2 en la sección development
+* Configure la misma base de datos de un SIVeL 1.3 en la sección development
   de config/databases.yml y ejecute
   ```sh
   rake db:migrate
   rake db:seed
 ```
-* En caso de que no tenga un SIVeL 1.2 en paralelo cree el usuario y base
+* En caso de que no tenga un SIVeL 1.3 en paralelo cree el usuario y base
   de datos que configure en config/database.yml e inicialice con:
   ```sh
   rake db:setup
@@ -70,7 +71,7 @@ con Ruby on Rails.
 
 ### Despliegue en sitio de producción con unicorn:
 * Siga los mismos 2 primeros pasos para configurar un servidor de desarrollo
-* Configure la misma base de datos de un SIVeL 1.2 en sección production
+* Configure la misma base de datos de un SIVeL 1.3 en sección production
   de config/databases.yml y ejecute
   ```sh
   RAILS_ENV=production rake db:migrate
