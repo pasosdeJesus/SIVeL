@@ -4,6 +4,7 @@ rvm:
 before_install: 
         - cp config/database.travis.yml config/database.yml
         - bundle install
+        - sudo locale-gen --no-archive es_CO.UTF-8
         - psql -c 'CREATE DATABASE sivelsjrven_test;' -U postgres
 
 
