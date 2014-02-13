@@ -1,7 +1,8 @@
 <div class='control-group nested-fields'>
   <div class="controls">
     <%= f.input :fechaexpulsion, 
-        :input_html => { "data-behaviour" => "datepicker" },
+        :input_html => { "data-behaviour" => "datepicker",
+          value: f.object.fechaexpulsion || @caso.fecha },
         :as => :string, :label => "Fecha Expulsión" %>
     <%= f.association :expulsion,
         collection: Ubicacion.where(:id_caso => @caso.id),
