@@ -10,7 +10,8 @@ class Victima < ActiveRecord::Base
 	belongs_to :organizacion, foreign_key: "id_organizacion", validate: true
 	belongs_to :vinculoestado, foreign_key: "id_vinculoestado", validate: true
 	belongs_to :presponsable, foreign_key: "organizacionarmada", validate: true
-  has_one   :victimasjr, foreign_key: [:id_caso, :id_persona], validate: true, dependent: :destroy
+  has_one   :victimasjr, foreign_key: "id_victima", validate: true, dependent: :destroy
+	accepts_nested_attributes_for :victimasjr, reject_if: :all_blank, update_only: true
 
 	belongs_to :persona, foreign_key: "id_persona", validate: true
 	accepts_nested_attributes_for :persona, reject_if: :all_blank
