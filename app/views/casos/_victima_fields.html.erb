@@ -1,9 +1,9 @@
 <div class='control-group nested-fields'>
   <div class="controls">
-    <%= if f.object.persona.nil?
+    <% if f.object.persona.nil?
           f.object.persona = Persona.new
           nil
-        end %>
+       end %>
     <%= f.simple_fields_for :persona do |p| %>
         <%= render 'persona_fields', :f => p %>
     <% end %>
@@ -29,6 +29,22 @@
       [:Heterosexual, :H], [:Lesbiana, :L], [:Gay, :G], 
       [:Bisexual, :B], [:Transexual, :T]], prompt: "Orientación Sexual") %>
     <%= f.input :id, as: :hidden %>  
+    <% if f.object.victimasjr.nil?
+         vs = Victimasjr.new
+         vs.id_persona =  f.object.id_persona
+         vs.id_caso = f.object.id_caso
+         f.object.victimasjr = vs
+       end %>
+    <%= f.simple_fields_for :victimasjr do |s| %>
+      <%= s.association :rolfamilia,
+        label: "Rol en Familia",
+        label_method: :nombre, 
+        value_method: :id %>
+      <%= s.association :actividadoficio,
+        label: "Oficio",
+        label_method: :nombre, 
+        value_method: :id %>
+    <% end %>
     <%= link_to_remove_association "Eliminar Víctima", f, :class => 'btn-danger' %> 
   </div>
 </div>

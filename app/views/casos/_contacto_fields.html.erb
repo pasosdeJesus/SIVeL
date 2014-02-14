@@ -6,19 +6,29 @@
   label_method: :nombre, 
   value_method: :id %>
 <%= f.association :rangoedad,
-    label: "Rango de Edad",
-    label_method: :rango, 
-    value_method: :id %>
+  label: "Rango de Edad",
+  label_method: :rango, 
+  value_method: :id %>
 <%= f.association :etnia,
-    label: "Etnia",
-    label_method: :nombre, 
-    value_method: :id %>
+  label: "Etnia",
+  label_method: :nombre, 
+  value_method: :id %>
 <%= f.association :iglesia,
-    label: "Religión/Iglesia",
-    label_method: :nombre, 
-    value_method: :id %>
+  label: "Religión/Iglesia",
+  label_method: :nombre, 
+  value_method: :id %>
 <%= f.input(:orientacionsexual, collection: [
-    [:Heterosexual, :H], [:Lesbiana, :L], [:Gay, :G], 
-    [:Bisexual, :B], [:Transexual, :T]], prompt: "Orientación Sexual") %>
+  [:Heterosexual, :H], [:Lesbiana, :L], [:Gay, :G], 
+  [:Bisexual, :B], [:Transexual, :T]], prompt: "Orientación Sexual") %>
 <%= f.input :id, as: :hidden %>
 
+<%= f.simple_fields_for :victimasjr do |s| %>
+  <%= s.association :rolfamilia,
+    label: "Rol en Familia",
+    label_method: :nombre, 
+    value_method: :id %>
+  <%= s.association :actividadoficio,
+    label: "Oficio",
+    label_method: :nombre, 
+    value_method: :id %>
+<% end %>

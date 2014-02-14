@@ -21,17 +21,23 @@ class CasosController < ApplicationController
     @caso.casosjr = Casosjr.new
     @caso.casosjr.fecharec = DateTime.now.strftime('%Y-%m-%d')
     @caso.casosjr.asesor = current_usuario.id
-    @caso.casosjr.regionsjr = Regionsjr.find(1);
+    @caso.casosjr.regionsjr = Regionsjr.find(1)
     per = Persona.new
-    per.nombres = 'Nombres';
-    per.apellidos = 'Apellidos';
-    per.sexo = 'S';
-    per.save;
+    per.nombres = 'Nombres'
+    per.apellidos = 'Apellidos'
+    per.sexo = 'S'
+    per.save
     vic = Victima.new
-    vic.persona = per;
-    @caso.victima<<vic;
-    @caso.casosjr.contacto = per;
+    vic.persona = per
+    @caso.victima<<vic
+    @caso.casosjr.contacto = per
     @caso.save
+    vs = Victimasjr.new
+    vs.id_persona =  per.id
+    vs.id_caso = @caso.id
+    vic.victimasjr = vs
+    vic.save
+
     render action: 'edit'
   end
 
@@ -176,34 +182,57 @@ class CasosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def caso_params
-      params.require(:caso).permit(:id, :titulo, :fecha, :hora, :duracion, 
+      params.require(:caso).permit(
+        :id, :titulo, :fecha, :hora, :duracion, 
         :grconfiabilidad, :gresclarecimiento, :grimpunidad, :grinformacion, 
         :bienes, :id_intervalo, :memo, 
-        :casosjr_attributes => [:fecharec, :asesor, :id_regionsjr, :direccion, 
-          :telefono, :comosupo, :contacto, :_destroy], 
-        :victima_attributes => [:id, :id_persona, :id_profesion, 
-          :id_rangoedad, :id_etnia, :id_iglesia, :orientacionsexual, 
-          :_destroy, :persona_attributes => [:id, :nombres, 
-            :apellidos, :anionac, :mesnac, :dianac, :numerodocumento,
-            :sexo, :id_departamento, :tipodocumento]], 
-        :ubicacion_attributes => [:id, :id_departamento, :id_municipio, 
+        :casosjr_attributes => [
+          :fecharec, :asesor, :id_regionsjr, :direccion, 
+          :telefono, :comosupo, :contacto, :_destroy
+        ], 
+        :victima_attributes => [
+          :id, :id_persona, :id_profesion, :id_rangoedad, :id_etnia, 
+          :id_iglesia, :orientacionsexual, :_destroy, 
+          :persona_attributes => [
+            :id, :nombres, :apellidos, :anionac, :mesnac, :dianac, 
+            :numerodocumento, :sexo, :id_departamento, :tipodocumento
+          ],
+          :victimasjr_attributes => [
+            :id_rolfamilia,
+            :id_actividadoficio
+          ]
+        ], 
+        :ubicacion_attributes => [
+          :id, :id_departamento, :id_municipio, 
           :id_clase, :lugar, :sitio, :latitud, :longitud, :id_tsitio, 
-          :_destroy],
-        :desplazamiento_attributes => [:fechaexpulsion, :id_expulsion, 
-          :fechallegada, :id_llegada, :descripcion, :_destroy],
-        :caso_presponsable_attributes => [:id_presponsable, :id, :tipo, 
-          :bloque, :frente, :brigada, :batallon, :division, :otro, :_destroy],
-        :actosjr_attributes => [:id_presponsable, :id_categoria, 
-          :id_persona, :fecha, :fechaexpulsion, :_destroy],
-        :respuesta_attributes => [:id, :fechaatencion, :fechaexpulsion,
+          :_destroy
+        ],
+        :desplazamiento_attributes => [
+          :fechaexpulsion, :id_expulsion, 
+          :fechallegada, :id_llegada, :descripcion, :_destroy
+        ],
+        :caso_presponsable_attributes => [
+          :id_presponsable, :id, :tipo, 
+          :bloque, :frente, :brigada, :batallon, :division, :otro, :_destroy
+        ],
+        :actosjr_attributes => [
+          :id_presponsable, :id_categoria, 
+          :id_persona, :fecha, :fechaexpulsion, :_destroy
+        ],
+        :respuesta_attributes => [
+          :id, :fechaatencion, :fechaexpulsion,
           :descamp, :observaciones, :orientaciones, :compromisos,
           :gestionessjr, :_destroy, 
-          :ayudasjr_respuesta_attributes => 
-            [:id_ayudasjr, :detallear, :_destroy]
+          :ayudasjr_respuesta_attributes => [
+            :id_ayudasjr, :detallear, :_destroy
+          ]
         ],
-        :anexo_attributes => [:id, :fecha, :descripcion, :archivo, :_destroy],
-        :caso_etiqueta_attributes => 
-            [:id_usuario, :fecha, :id_etiqueta, :observaciones, :_destroy]
+        :anexo_attributes => [
+          :id, :fecha, :descripcion, :archivo, :_destroy
+        ],
+        :caso_etiqueta_attributes => [
+          :id_usuario, :fecha, :id_etiqueta, :observaciones, :_destroy
+        ]
       )
     end
 end

@@ -6,5 +6,6 @@ before_install:
         - bundle install
         - sudo locale-gen --no-archive es_CO.UTF-8
         - psql -c 'CREATE DATABASE sivelsjrven_test;' -U postgres
-
+        - cp config/secrets.yml.plantilla config/secrets.yml
+        - cp app/views/hogar/_local.html.erb.plantilla app/views/hogar/_local.html.erb
 
