@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "actividadarea/show" do
+describe "actividadareas/show" do
   before(:each) do
     @actividadarea = assign(:actividadarea, stub_model(Actividadarea,
       :nombre => "Nombre",

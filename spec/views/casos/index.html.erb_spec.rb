@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "caso/index" do
+describe "casos/index" do
   before(:each) do
     assign(:caso, [
       stub_model(Caso,

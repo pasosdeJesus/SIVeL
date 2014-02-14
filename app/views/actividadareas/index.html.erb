@@ -15,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @actividadareas.each do |actividadarea| %>
+    <% @actividadareas.try(:each) do |actividadarea| %>
       <tr>
         <td><%= link_to actividadarea.id, actividadarea_path(actividadarea) %></td>
         <td><%= actividadarea.nombre %></td>

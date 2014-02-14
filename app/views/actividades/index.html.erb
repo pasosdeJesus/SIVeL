@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:numero) %></th>
+      <th><%= model_class.human_attribute_name(:oficina) %></th>
       <th><%= model_class.human_attribute_name(:minutos) %></th>
       <th><%= model_class.human_attribute_name(:nombre) %></th>
       <th><%= model_class.human_attribute_name(:areas) %></th>
@@ -19,10 +19,10 @@
     </tr>
   </thead>
   <tbody>
-    <% @actividades.each do |actividad| %>
+    <% @actividades.try(:each) do |actividad| %>
       <tr>
         <td><%= link_to actividad.id, actividad_path(actividad) %></td>
-        <td><%= actividad.numero %></td>
+        <td><%= actividad.oficina.nombre if !actividad.oficina.nil? %></td>
         <td><%= actividad.minutos %></td>
 	<td><%= actividad.nombre %></td>
 	<td><%= actividad.actividadareas.map { |i| i.nombre} %></td>

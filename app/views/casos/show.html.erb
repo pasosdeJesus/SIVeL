@@ -9,21 +9,21 @@
   <dt><strong><%= model_class.human_attribute_name(:fecha) %>:</strong></dt>
   <dd><%= @caso.fecha %></dd>
   <dt><strong><%= model_class.human_attribute_name(:fecharec) %>:</strong></dt>
-  <dd><%= @caso.casosjr.fecharec %></dd>
+  <dd><%= @caso.casosjr.fecharec if !@caso.casosjr.nil? %></dd>
   <dt><strong><%= model_class.human_attribute_name(:asesor) %>:</strong></dt>
-  <dd><%= @caso.casosjr.usuario.nusuario %></dd>
+  <dd><%= @caso.casosjr.usuario.nusuario if !@caso.casosjr.nil? %></dd>
   <dt><strong><%= model_class.human_attribute_name(:regionsjr) %>:</strong></dt>
-  <dd><%= @caso.casosjr.regionsjr.nombre %></dd>
-<%- if !@caso.casosjr.contacto.nil? %>
-  <dt><strong><%= model_class.human_attribute_name(:contacto) %>:</strong></dt>
-  <dd><%= (@caso.casosjr.contacto.nombres + " " + @caso.casosjr.contacto.apellidos) %></dd>
-<% end -%>
+  <dd><%= @caso.casosjr.regionsjr.nombre if !@caso.casosjr.nil? %></dd>
+  <%- if !@caso.casosjr.nil? && !@caso.casosjr.contacto.nil? %>
+    <dt><strong><%= model_class.human_attribute_name(:contacto) %>:</strong></dt>
+    <dd><%= (@caso.casosjr.contacto.nombres + " " + @caso.casosjr.contacto.apellidos) if !@caso.casosjr.nil?%></dd>
+  <% end -%>
   <dt><strong><%= model_class.human_attribute_name(:direccion) %>:</strong></dt>
-  <dd><%= @caso.casosjr.direccion %></dd>
+  <dd><%= @caso.casosjr.direccion if !@caso.casosjr.nil?%></dd>
   <dt><strong><%= model_class.human_attribute_name(:telefono) %>:</strong></dt>
-  <dd><%= @caso.casosjr.telefono %></dd>
+  <dd><%= @caso.casosjr.telefono if !@caso.casosjr.nil?%></dd>
   <dt><strong><%= model_class.human_attribute_name(:comosupo) %>:</strong></dt>
-  <dd><%= @caso.casosjr.comosupo %></dd>
+  <dd><%= @caso.casosjr.comosupo if !@caso.casosjr.nil?%></dd>
 
 </dl>
 
