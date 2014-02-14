@@ -2944,9 +2944,7 @@ if (!aplicado($idac)) {
         antecedente_victima.id_caso=victima.id_caso", false
     ); */
 
-   /* 
-
-    aplicaact($act, $idac, 'id en tabla victima es identificación'); */
+    aplicaact($act, $idac, 'id en tabla victima es identificación'); 
 }
 
 
