@@ -144,10 +144,10 @@ function edadDeFechaNac(anioref, mesref, diaref)
 	na = anioref-anionac;
 	if (mesnac != undefined && mesnac != '' && mesnac > 0
 			&& mesref != undefined && mesref!= '' && mesref > 0
-			&& mesnac <= mesref) {
-		if (mesnac < mesref || (dianac != undefined && dianac != '' 
+			&& mesnac >= mesref) {
+		if (mesnac > mesref || (dianac != undefined && dianac != '' 
                     && dianac > 0 && diaref != undefined && diaref!= '' 
-                    && diaref > 0 && dianac < diaref)
+                    && diaref > 0 && dianac > diaref)
 		   ) {
 			na--;
 		}
@@ -406,8 +406,7 @@ $( document ).ready(function () {
                 $("[name='edad']").val(
                     edadDeFechaNac(aniocaso, mescaso, diacaso));
                 $("[name='edadactual']").val(edadDeFechaNac(
-                        anioactual, mesactual, diaactual
-                        ));
+                    anioactual, mesactual, diaactual));
             }
             ponerRangoEdad();
         });
@@ -419,8 +418,8 @@ $( document ).ready(function () {
             ponerRangoEdad();
         });
         $("[name='dianac']").on('change', function (event) {
-            $("[name='edad']").val(
-                edadDeFechaNac(aniocaso, mescaso, diacaso));
+            $("[name='edad']").val( 
+                edadDeFechaNac(aniocaso, mescaso, diacaso)); 
             $("[name='edadactual']").val(
                 edadDeFechaNac(anioactual, mesactual, diaactual));
             ponerRangoEdad();
