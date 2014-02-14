@@ -2909,7 +2909,7 @@ if (!aplicado($idac)) {
         DROP CONSTRAINT antecedente_victima_id_persona_fkey1", false
     );
     hace_consulta(
-        $db, "ALTER TABLE victima DROP CONSTRAINT victima_pkey", false
+        $db, "ALTER TABLE victima DROP CONSTRAINT victima_pkey CASCADE", false
     );
     hace_consulta(
         $db, "ALTER TABLE victima ADD UNIQUE(id_caso, id_persona);", true
