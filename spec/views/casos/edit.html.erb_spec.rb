@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "caso/edit" do
+describe "casos/edit" do
   before(:each) do
     @caso = assign(:caso, stub_model(Caso,
       :titulo => "MyString",

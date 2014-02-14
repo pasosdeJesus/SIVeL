@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "actividadarea/edit" do
+describe "actividadareas/edit" do
   before(:each) do
     @actividadarea = assign(:actividadarea, stub_model(Actividadarea,
       :nombre => "MyString",

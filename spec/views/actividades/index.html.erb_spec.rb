@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "actividad/index" do
+describe "actividades/index" do
   before(:each) do
     assign(:actividad, [
       stub_model(Actividad,

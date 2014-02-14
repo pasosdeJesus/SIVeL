@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "usuario/new" do
+describe "usuarios/new" do
   before(:each) do
     assign(:usuario, stub_model(Usuario,
       :id => "MyString",

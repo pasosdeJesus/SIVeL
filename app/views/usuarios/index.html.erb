@@ -25,7 +25,7 @@
     </tr>
   </thead>
   <tbody>
-    <% @usuarios.each do |usuario| %>
+    <% @usuarios.try(:each) do |usuario| %>
       <tr>
         <td><%= link_to usuario.id, usuario_path(usuario) %></td>
         <td><%= usuario.password %></td>

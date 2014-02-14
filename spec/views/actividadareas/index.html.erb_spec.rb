@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "actividadarea/index" do
+describe "actividadareas/index" do
   before(:each) do
     assign(:actividadarea, [
       stub_model(Actividadarea,

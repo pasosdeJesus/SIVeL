@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "usuario/show" do
+describe "usuarios/show" do
   before(:each) do
     @usuario = assign(:usuario, stub_model(Usuario,
       :id => "Id",

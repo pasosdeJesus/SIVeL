@@ -13,16 +13,16 @@
     </tr>
   </thead>
   <tbody>
-    <% @casos.each do |caso| %>
+    <% @casos.try(:each) do |caso| %>
       <tr>
         <td><%= link_to caso.id, caso_path(caso) %></td>
         <td><%= caso.casosjr.fecharec %></td>
         <td><%= caso.fecha %></td>
-	<td>
-	<%- if !caso.created_at.nil? %>
-        	<%=l caso.created_at %>
-	<% end -%>
-	</td>
+	      <td>
+          <%- if !caso.created_at.nil? %>
+            <%=l caso.created_at %>
+          <% end -%>
+        </td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_caso_path(caso), :class => 'btn btn-mini' %>

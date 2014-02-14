@@ -5,7 +5,7 @@
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:oficina) %>:</strong></dt>
-  <dd><%= @actividad.oficina.nombre %></dd>
+  <dd><%= @actividad.oficina.nombre if !@actividad.oficina.nil? %></dd>
   <dt><strong><%= model_class.human_attribute_name(:minutos) %>:</strong></dt>
   <dd><%= @actividad.minutos %></dd>
   <dt><strong><%= model_class.human_attribute_name(:nombre) %>:</strong></dt>
