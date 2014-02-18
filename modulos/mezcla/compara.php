@@ -91,13 +91,14 @@ function muestra($dsn)
         $id2 = null;
     }
 
-    echo "<p>Por mezclar " . count($par) . " parejas de casos</p>";
-    echo "<p>Se mezclará los segundos casos en los primeros y se eliminaran los segundos.</p>";
+    echo "<p>Por confirmar " . count($par) . " parejas de casos</p>";
+    echo "<p>En los que confirme, se mezclarán los segundos casos en los primeros y se eliminaran los segundos.</p>";
     echo "<form action='opcion.php?num=1005' method='POST' target='_blank'>";
     echo "<center><table border='1'>";
     echo "<tr><th>Código</th><th>Fecha</th>"
         . "<th>Departamento</th><th>Víctimas</th><th>Descripción</th>"
-        . "<th>Confirma</th></tr>";
+        . "<th>Etiquetas</th>"
+        . "<th>Confirma</th><th>Homónimos</th></tr>";
 
 
     $col1 = "#FFFFFF";
@@ -112,12 +113,15 @@ function muestra($dsn)
         }
         foreach ($p as $id) {
             $c = "SELECT DISTINCT caso.id, caso.fecha,
-                array(select departamento.nombre from departamento, ubicacion
-                where departamento.id = ubicacion.id_departamento
-                and ubicacion.id_caso = caso.id),
-            array(select persona.nombres || ' ' || persona.apellidos
-            from victima, persona where victima.id_persona = persona.id
-            and victima.id_caso = caso.id), caso.memo
+                array(SELECT departamento.nombre FROM departamento, ubicacion
+                WHERE departamento.id = ubicacion.id_departamento
+                AND ubicacion.id_caso = caso.id),
+            array(SELECT persona.nombres || ' ' || persona.apellidos
+            FROM victima, persona where victima.id_persona = persona.id
+            AND victima.id_caso = caso.id), caso.memo,
+            array(SELECT etiqueta.nombre FROM etiqueta, caso_etiqueta
+            WHERE caso_etiqueta.id_etiqueta=etiqueta.id 
+            AND caso_etiqueta.id_caso=caso.id)
             FROM caso where caso.id = $id";
             $r = hace_consulta($db, $c);
             sin_error_pear($r);
@@ -136,6 +140,9 @@ function muestra($dsn)
                 echo "<td rowspan='2'>"
                     . "<input type='checkbox' name='m_{$id1}_{$id2}' checked/>"
                     . "</td>";
+                echo "<td rowspan='2'>"
+                    . "<input type='checkbox' name='h_{$id1}_{$id2}'/>"
+                    . "</td>";
             }
             echo "</tr>\n";
         }
@@ -143,9 +150,6 @@ function muestra($dsn)
     echo "</table></center>";
     echo "<center><input type='submit' value='Mezclar Segundo en Primero y Eliminar Segundo'/></center>";
     echo "</form>";
-
-
 }
-
 
 ?>

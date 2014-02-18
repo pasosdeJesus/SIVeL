@@ -123,6 +123,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
     );
     var $fb_addFormHeader = false;
     var $fb_selectAddEmpty = array();
+    var $fb_select_display_field = "id";
     var $fb_fieldsRequired = array('nombres');
     var $fb_useMutators = true;
     var $fb_hidePrimaryKey = true;

@@ -560,6 +560,7 @@ function muestra($dsn)
     echo '</div></b></td></table>';
 
     $par = array();
+    $hom = array();
     foreach ($_POST as $cid1 => $on) {
         $pd = explode("_", $cid1);
         if (isset($pd[1]) && isset($pd[2])) {
@@ -583,7 +584,11 @@ function muestra($dsn)
                 );
                 return false;
             }
-            $par[] = array($id1, $id2);
+            if ($pd[0] == 'm') {
+                $par[] = array($id1, $id2);
+            } else if ($pd[0] == 'h') {
+                $hom[] = array($id1, $id2);
+            }
         }
     }
 
@@ -658,6 +663,43 @@ function muestra($dsn)
     }
     echo "</table></center>";
 
+    echo "<p>Agregando " . count($hom) . " parejas de homonimos o similares (pero diferentes)</p><p>";
+    echo "<center><table border='1'>";
+    echo "<tr><th>Caso 1</th><th>Persona 1</th><th>Caso 2</th><th>Persona 2</th2><td>Observaciones</td></tr>";
+    foreach ($hom as $par) {
+        $v1 = objeto_tabla('victima');
+        $v1->id_caso = $par[0];
+        $v1->find(1);
+        $v2 = objeto_tabla('victima');
+        $v2->id_caso = $par[1];
+        $v2->find(1);
+        $id1 = $id2 = -1;
+        if ($v1->id_persona < $v2->id_persona) {
+            $id1 = $v1->id_persona;
+            $id2 = $v2->id_persona;
+        } else if ($v1->id_persona > $v2->id_persona) {
+            $id2 = $v1->id_persona;
+            $id1 = $v2->id_persona;
+        }
+        if ($id1 != $id2) {
+            $h = objeto_tabla('homonimosim');
+            $h->id_persona1 = $id1;
+            $h->id_persona2 = $id2;
+            $h->insert();
+        }
+        sin_error_pear($h);
+        echo "<tr>";
+        echo "<td>{$par[0]}</td><td>{$v1->id_persona}</td><td>${par[1]}</td><td>{$v2->id_persona}</td>";
+        if ($id1 == $id2) {
+            echo "<td>Misma persona --no es homonimo</td>";
+        } else {
+            echo "<td></td>";
+        }
+        echo "</tr>";
+    }
+ 
+    echo "</table></center>";
+ 
     echo '<table width="100%">
         <td style = "white-space: nowrap; background-color: #CCCCCC;"
         align = "left" valign="top" colspan="2"><b><div align=right>
