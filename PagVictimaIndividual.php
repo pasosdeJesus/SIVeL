@@ -729,6 +729,14 @@ class PagVictimaIndividual extends PagBaseMultiple
             $this->bpersona_trelacion->_do->observaciones
                 = var_escapa($valores['fobservaciones'], $db);
             $this->bpersona_trelacion->_do->insert();
+            $tr = $this->bpersona_trelacion->_do->getLink('id_trelacion');
+            if ($tr->inverso != NULL) {
+                $npr = objeto_tabla('persona_trelacion');
+                $npr->persona1 = $this->bpersona_trelacion->_do->persona2;
+                $npr->persona2 = $this->bpersona_trelacion->_do->persona1;
+                $npr->id_trelacion = $tr->inverso;
+                $npr->insert();
+            }
             $procFam = false;
         }
 

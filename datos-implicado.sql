@@ -160,35 +160,24 @@ INSERT INTO vinculoestado(id, nombre, fechacreacion) VALUES (40, 'VICEPRESIDENCI
 
 SELECT setval('vinculoestado_seq', max(id)) FROM vinculoestado;
 
--- trelacion inicialmente de parametros:ParentesecoFamiliar
-INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
-VALUES ('AB', 'Abuela', true, NULL, '2001-01-01');
-INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
-VALUES ('AO','Abuelo', true, NULL, '2001-01-01');
-INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
-VALUES ('CO','Conyuge y/o Companero Permanente', false, NULL, '2001-01-01');
-INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
-VALUES ('HA','Hija', true, NULL, '2001-01-01');
-INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
-VALUES ('HE','Hermano', false, NULL, '2001-01-01');
-INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
-VALUES ('HI','Hijo', true, NULL, '2001-01-01');
-INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
-VALUES ('HR','Hermana', false, NULL, '2001-01-01');
-INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
-VALUES ('MA','Madrina', true, NULL, '2001-01-01');
-INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
-VALUES ('ME','Madre', true, NULL, '2001-01-01');
-INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
-VALUES ('PA','Padre', true, NULL, '2001-01-01');
-INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
-VALUES ('PO','Padrino', true, NULL, '2001-01-01');
-INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
-VALUES ('TA','Tia', true, NULL, '2001-01-01');
-INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
-VALUES ('TO','Tio', true, NULL, '2001-01-01');
-INSERT INTO trelacion (id, nombre, dirigido, observaciones, fechacreacion) 
-VALUES ('SI','SIN INFORMACION', true, NULL, '2001-01-01');
+-- trelacion 
+
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('SI', 'SIN INFORMACION', NULL, '2001-01-01', NULL, NULL);
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('SO', 'ESPOSA(O)/COMPAÑERA(O)', '', '2001-01-01', NULL, 'SO');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('AB', 'ABUELA(O)', '', '2001-01-01', NULL, 'NO');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('NO', 'NIETA(O)', '', '2011-03-17', NULL, 'AB');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('PA', 'MADRE/PADRE', NULL, '2001-01-01', NULL, 'HI');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('HI', 'HIJA(O)', NULL, '2001-01-01', NULL, 'PA');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('HE', 'HERMANA(O)', NULL, '2001-01-01', NULL, 'HE');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('PO', 'MADRINA/PADRINO', NULL, '2001-01-01', NULL, 'AH');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('AH', 'AHIJADA(O)', '', '2011-08-04', NULL, 'PO');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('TO', 'TIA(O)', NULL, '2001-01-01', NULL, 'OO');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('OO', 'SOBRINA(O)', '', '2011-07-21', NULL, 'TO');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('PD', 'MADRASTRA(PADRASTRO)', '', '2011-09-21', NULL, 'HO');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('HO', 'HIJASTRA(O)', '', '2011-05-02', NULL, 'PD');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('SG', 'SUEGRA(O)', '', '2011-05-27', NULL, 'YE');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('YE', 'NUERA/YERNO', NULL, '2014-02-18', NULL, 'SG');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('PM', 'PRIMA(O)', NULL, '2014-02-18', NULL, 'PM');
 
 
 -- etnia
