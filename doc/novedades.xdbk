@@ -5,6 +5,17 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>
+Soporte de homónimos o nombres similares para excluirlos de búsquedas
+para mezclar.
+					</para></listitem>
+
+					<listitem><para>
+Refinadas relaciones entre personas, posibilida de especificar relación
+inversa para agregar simultaneamente 2 relaciones al añadir familiares
+de una víctima.
+					</para></listitem>
+
+					<listitem><para>
 Cambiado algoritmo de condensado de claves a bcrypt 
 (ver <ulink url="https://www.usenix.org/legacy/events/usenix99/provos/provos_html/node1.html"></ulink>).  
 Tras actualizar fuentes 

@@ -55,6 +55,59 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
  */
 class AccionComparaDos extends HTML_QuickForm_Action
 {
+
+    static function busca() {
+        $pIds = "";
+        $do = objeto_tabla("caso");
+        $db =& $do->getDatabaseConnection();
+        $dlev = isset($_POST['dlev']) && (int)$_POST['dlev'] > 0 ? 
+            (int)$_POST['dlev'] : 3;
+        $figuales = isset($_POST['figuales']) && $_POST['figuales'] == '1';
+        $diguales = isset($_POST['diguales']) && $_POST['diguales'] == '1';
+        // Fechas iguales, departamentos iguales, nombres parecidos pero
+        // no en homonimos
+        $cons = "SELECT DISTINCT v1.id_caso, v2.id_caso AS id_caso
+            FROM victima AS v1, persona AS p1, victima AS v2, persona AS p2,
+            caso AS c1, caso AS c2, ubicacion AS u1, ubicacion AS u2
+            WHERE v1.id_caso = c1.id AND v2.id_caso = c2.id
+            AND u1.id_caso = c1.id AND u2.id_caso = c2.id ";
+        if ($diguales) {
+            $cons .= "AND u1.id_departamento = u2.id_departamento ";
+        }
+        if ($figuales) {
+            $cons .= "AND c1.fecha = c2.fecha";
+        }
+        $cons .=" AND v1.id_persona=p1.id AND v2.id_persona=p2.id 
+            AND 
+            (levenshtein(p1.nombres || ' ' || p1.apellidos, p2.nombres || ' ' || p2.apellidos)<$dlev OR
+            levenshtein(p1.apellidos || ' ' || p1.nombres, p2.nombres || ' ' || p2.apellidos)<$dlev)
+            AND v1.id_caso < v2.id_caso AND p1.nombres <> 'N' 
+            AND p1.apellidos <> 'N' 
+            AND (p1.id, p2.id) NOT IN (SELECT id_persona1, id_persona2 FROM homonimia)
+            ORDER BY 2 DESC, 1
+            ";
+        $r = hace_consulta($db, $cons);
+        $mezcladoen = array();
+        $row = array();
+        while ($r->fetchInto($row)) {
+            $nr = 0;
+            $id1 = $row[0];
+            $id2 = $row[1];
+            if (isset($mezcladoen[$id2])) {
+                continue;
+            }
+            $mezcladoen[$id2] = $id1;
+        }
+        $sep = "";
+        $pIds = "";
+        foreach ($mezcladoen as $id2 => $id1) {
+            $pIds .= $sep . $id1 . " " . $id2;
+            $sep = " ";
+        }
+        return $pIds;
+    }
+
+
     /**
      * Ejecuta acción
      *
@@ -67,6 +120,11 @@ class AccionComparaDos extends HTML_QuickForm_Action
     {
         $pIds = "";
         if (!isset($_REQUEST['ids']) || $_REQUEST['ids'] == '') {
+
+            if (isset($_POST['_mezclaFiltro'])) {
+                
+                $pIds = AccionComparaDos::busca();
+            }
             foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
                 list($n, $c, $o) = $tab;
                 //echo "OJO $n, $c, $o<br>";
@@ -87,7 +145,10 @@ class AccionComparaDos extends HTML_QuickForm_Action
             $pIds   = var_post_escapa('ids');
         }
         $a = explode(" ", $pIds);
-        if (count($a) < 2 || count($a) % 2 != 0) {
+        if (count($a) == 0) {
+            error_valida("No se encontraron parejas de casos");
+            return false;
+        } else if (count($a) < 2 || count($a) % 2 != 0) {
             error_valida(
                 "Debe ingresar parejas de códigos separados por espacio "
                 . "(cuenta=" . count($a) . ")", null
@@ -97,7 +158,7 @@ class AccionComparaDos extends HTML_QuickForm_Action
         foreach ($a as $nc) {
             if ($nc != (int)$nc) {
                 error_valida(
-                    "Debe ingresar parejas de códigos separados por espacio "
+                    "Debe ingresar parejas de códigos separados por un espacio "
                     . " nc=$nc", null
                 );
                 return false;
@@ -413,6 +474,27 @@ class PagVictimasrep extends HTML_QuickForm_Page
         );
         $prevnext[] =& $sel;
         $this->addGroup($prevnext, null, '', '&nbsp;', false);
+
+        $e =& $this->addElement('header', null, 'Buscar similares');
+        $e =& $this->addElement('hidden', '_mezclaFiltro', 'si');
+
+        $e =& $this->addElement(
+            'text', 'dlev', 'Distancia máxima entre nombres'
+        );
+        $e->setSize(10);
+        $e =& $this->addElement(
+            'checkbox',
+            'figuales', _('Fechas iguales'), ''
+        );
+        $e =& $this->addElement(
+            'checkbox',
+            'diguales', _('Departamentos iguales'), ''
+        );
+
+        $e =& $this->addElement(
+            'submit',
+            $this->getButtonName('compara'), 'Comparar'
+        );
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
             list($n, $c, $o) = $tab;
