@@ -37,6 +37,8 @@ class DataObjects_Municipio extends DataObjects_Basica
 
     var $__table = 'municipio';                       // table name
     var $id_departamento;                 // int4(4)  multiple_key
+    var $latitud;
+    var $longitud;
 
     /**
      * Constructora
@@ -50,6 +52,8 @@ class DataObjects_Municipio extends DataObjects_Basica
         $this->fb_fieldLabels = array(
             'id_departamento' => _('Departamento'),
             'nombre' => _('Nombre'),
+            'latitud'=> _('Latitud'),
+            'longitud'=> _('Longitud'),
             'fechacreacion' => _('Fecha de Creación'),
             'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
         );

@@ -114,6 +114,11 @@ $GLOBALS['anio_min']=1990;
 */
 $GLOBALS['actoscolectivos'] = true;
 
+/** Indica si en la pestaña Presuntos Responsables se deja Otras Agresiones
+ * @global bool $GLOBALS['presponsables_otrasagresiones']
+*/
+$GLOBALS['presponsables_otrasagresiones'] = true;
+
 /** Consulta adicional para determinar casos en los que aparece una
  * persona además de lo estándar de SIVeL básico (ver json_persona.php).
  * Emplear id para comparar identificación de persona.

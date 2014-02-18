@@ -165,6 +165,7 @@ $drespCaso->id = $id; */
                 'ruleViolationMessage' => $GLOBALS['mreglavio']
             )
         );
+        $this->bcaso_presponsable->useMutators = true;
         $this->bcategoria =& DB_DataObject_FormBuilder::create(
             $dcategoria,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
@@ -250,22 +251,25 @@ $drespCaso->id = $id; */
         $pr =& $this->getElement('id_presponsable');
         sort($pr->_options);
 
-        $sel =& $this->addElement(
-            'select', 'clasificacion',
-            _('Otras Agresiones')
-        );
-        $this->addRule(
-            'clasificacion', 'requerido',
-            _('Otras Agresiones'), 'required', '', 'client'
-        );
-        $sel->setMultiple(true);
-        ResConsulta::llenaSelCategoria(
-            $db,
-            "SELECT id_tviolencia, id_supracategoria, " .
-            "id FROM categoria " .
-            "WHERE tipocat='O' ORDER BY id_tviolencia, id;", $sel
-        );
-
+        if (!isset($GLOBALS['presponsables_otrasagresiones']) 
+            || $GLOBALS['presponsables_otrasagresiones']
+        ) {
+            $sel =& $this->addElement(
+                'select', 'clasificacion',
+                _('Otras Agresiones')
+            );
+            $this->addRule(
+                'clasificacion', 'requerido',
+                _('Otras Agresiones'), 'required', '', 'client'
+            );
+            $sel->setMultiple(true);
+            ResConsulta::llenaSelCategoria(
+                $db,
+                "SELECT id_tviolencia, id_supracategoria, " .
+                "id FROM categoria " .
+                "WHERE tipocat='O' ORDER BY id_tviolencia, id;", $sel
+            );
+        }
         if (strpos($GLOBALS['modulos'], 'modulos/belicas') === false) {
             $this->removeElement('tipo');
             $this->addElement('hidden', 'tipo', 0);
@@ -434,36 +438,30 @@ $drespCaso->id = $id; */
 
         $db = $this->iniVar();
         $this->bcaso_presponsable->forceQueryType(
-            DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
+            DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEUPDATE
         );
-        if (isset($this->bcaso_presponsable->_do->id)
-            && isset($this->bcaso_presponsable->_do->id_presponsable)
+        $idcaso = $_SESSION['basicos_id'];
+        $idsininf = DataObjects_Presponsable::idSinInfo();
+        if (!isset($this->bcaso_presponsable->_do->id)
+            || !isset($this->bcaso_presponsable->_do->id_presponsable)
         ) {
-            $id = (int)var_escapa($valores['id'], $db);
-            $idcaso = $this->bcaso_presponsable->_do->id_caso;
-            $idpres = $this->bcaso_presponsable->_do->id_presponsable;
-            if (isset($idpres) && $idpres != ''
-                && $valores['id_presponsable'] != $idpres
-            ) {
-                $ir =$this->integridadRef(
-                    $db, $idcaso, $idpres, 'modificar', $valores
-                );
-                if (!$ir) {
-                    return false;
-                }
-            }
-            $q = "DELETE FROM caso_categoria_presponsable " .
-                " WHERE id_caso='" . (int)$idcaso . "' " .
-                " AND id_caso_presponsable ='" . (int)$id . "' " .
-                " AND id_presponsable='" . (int)$idpres . "'";
-            $result = hace_consulta($db, $q);
-            $this->bcaso_presponsable->_do->delete();
-            $this->bcaso_presponsable->_do->id = $id;
             $this->bcaso_presponsable->_do->id_caso = $idcaso;
-        } else {
+            $this->bcaso_presponsable->_do->id_presponsable = $idsininf;
+            $this->bcaso_presponsable->_do->insert();
+            $idpres = $this->bcaso_presponsable->_do->id;
+            $valores['id'] = $idpres;
             $_SESSION['fpr_total']++;
+        } else {
+            $idcaso = $this->bcaso_presponsable->_do->id_caso ; 
+            $idsininf = $this->bcaso_presponsable->_do->id_presponsable ;
+            $idpres = $this->bcaso_presponsable->_do->id;
         }
-
+        $ir =$this->integridadRef(
+            $db, $idcaso, $idpres, 'modificar', $valores
+        );
+        if (!$ir) {
+            return false;
+        }
         $ret = $this->process(
             array(&$this->bcaso_presponsable,
             'processForm'
@@ -472,24 +470,6 @@ $drespCaso->id = $id; */
         if (PEAR::isError($ret)) {
             die($ret->getMessage());
         }
-        if (isset($valores['clasificacion'])) {
-            foreach (var_escapa($valores['clasificacion']) as $k => $v) {
-                $t = explode(":", var_escapa($v, $db));
-                $this->bcategoria->_do->id_caso_presponsable
-                    = $this->bcaso_presponsable->_do->id;
-                $this->bcategoria->_do->id_caso
-                    = $this->bcaso_presponsable->_do->id_caso;
-                $this->bcategoria->_do->id_caso_presponsable 
-                    = $this->bcaso_presponsable->_do->id;
-                $this->bcategoria->_do->id_presponsable
-                    = $this->bcaso_presponsable->_do->id_presponsable;
-                $this->bcategoria->_do->id_tviolencia = $t[0];
-                $this->bcategoria->_do->id_supracategoria = $t[1];
-                $this->bcategoria->_do->id_categoria = $t[2];
-                $this->bcategoria->_do->insert();
-            }
-        }
-
         caso_usuario($_SESSION['basicos_id']);
         return  $ret;
     }

@@ -21,6 +21,7 @@ SELECT setval('organizacion_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT M
 SELECT setval('pconsolidado_seq', MAX(id)) FROM pconsolidado;
 SELECT setval('persona_seq', MAX(id)) FROM persona;
 SELECT setval('ffrecuente_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM ffrecuente) AS s;
+SELECT setval('pais_seq', MAX(id)) FROM pais;
 SELECT setval('presponsable_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM presponsable) AS s;
 SELECT setval('profesion_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM profesion) AS s;
 SELECT setval('rangoedad_seq', MAX(id)) FROM rangoedad;
@@ -29,6 +30,8 @@ SELECT setval('resagresion_seq', MAX(id)) FROM resagresion;
 SELECT setval('sectorsocial_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM sectorsocial) AS s;
 SELECT setval('tsitio_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM tsitio) AS s;
 SELECT setval('ubicacion_seq', MAX(id)) FROM ubicacion;
+SELECT setval('usuario_seq', MAX(id)) FROM ubicacion;
+SELECT setval('victima_seq', MAX(id)) FROM ubicacion;
 SELECT setval('vinculoestado_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM vinculoestado) AS s;
-
+SELECT setval('vinculoestado_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM vinculoestado) AS s;
 

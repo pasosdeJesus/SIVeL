@@ -81,7 +81,7 @@ class DataObjects_Caso_presponsable extends DB_DataObject_SIVeL
             'otro' => _('Otro')
         );
     }
-    var $fb_hidePrimaryKey = false;
+    var $fb_hidePrimaryKey = true;
 
     /**
      * Funciona legada
@@ -96,6 +96,17 @@ class DataObjects_Caso_presponsable extends DB_DataObject_SIVeL
         return $this->es_enumOptions[$key];
     }
 
+    /**
+     * Pone un valor en la base diferente al recibido del formulario.
+     *
+     * @param string $value Valor en formulario
+     *
+     * @return Valor para BD
+     */
+    function setid($value)
+    {
+        $this->id = ($value == '') ? 'null' : $value;
+    }
 
     /**
      * Prepara antes de generar formulario.

@@ -37,6 +37,8 @@ class DataObjects_Clase extends DataObjects_Basica
     var $id_municipio;                    // int4(4)  multiple_key
     var $id_tclase;                   // varchar(-1)
     var $id_departamento;                 // int4(4)  multiple_key
+    var $latitud;
+    var $longitud;
 
     /**
      * Constructora
@@ -52,6 +54,8 @@ class DataObjects_Clase extends DataObjects_Basica
             'id_departamento' => _('Departamento'),
             'id_municipio'=> _('Municipio'),
             'id_tclase'=> _('Tipo Clase'),
+            'latitud'=> _('Latitud'),
+            'longitud'=> _('Longitud'),
             'fechacreacion' => _('Fecha de Creación'),
             'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
         );

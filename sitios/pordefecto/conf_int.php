@@ -185,6 +185,7 @@ $GLOBALS['fondo']= ''; //$dirsitio . '/fondo.jpg';
 /** Tablas básicas */
 $GLOBALS['menu_tablas_basicas'] = array(
     array('title' => _('Información geográfica'), 'url'=> null, 'sub' => array(
+        array('title'=>_('País'), 'url'=>'pais','sub'=>null),
         array('title'=>_('Departamento'), 'url'=>'departamento','sub'=>null),
         array('title'=>_('Municipio'), 'url'=>'municipio', 'sub'=>null),
         array('title'=>_('Tipo Clase'), 'url'=>'tclase', 'sub'=>null),

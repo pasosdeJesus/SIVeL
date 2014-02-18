@@ -251,6 +251,22 @@ CREATE TABLE tclase (
 );
 
 
+CREATE SEQUENCE pais_seq;
+
+CREATE TABLE pais (
+            id INTEGER PRIMARY KEY DEFAULT(nextval('pais_seq')),
+            nombre VARCHAR(200) NOT NULL,
+            latitud DOUBLE,
+            longitud DOUBLE,
+	    iso3166 VARCHAR(2),
+            div1 VARCHAR(100),
+            div2 VARCHAR(100),
+            div3 VARCHAR(100),
+            fechacreacion    DATE NOT NULL,
+            fechadeshabilitacion    DATE CHECK (fechadeshabilitacion IS NULL
+                OR fechadeshabilitacion >= fechacreacion)
+);
+
 CREATE SEQUENCE departamento_seq;
 
 
