@@ -5,8 +5,10 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>
-Soporte de homónimos o nombres similares para excluirlos de búsquedas
-para mezclar.
+Modulo de mezclas: Búsqueda de casos repetidos por mezclar por
+fecha, departamento o nombres similares.
+Soporte de homónimos o nombres similares para 
+excluirlos de búsquedas para mezclar.
 					</para></listitem>
 
 					<listitem><para>
