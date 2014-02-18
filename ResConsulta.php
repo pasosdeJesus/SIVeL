@@ -532,17 +532,19 @@ class ResConsulta
             $etablas, array('caso',
             'victima', 'persona', 'presponsable',
             'acto',
-            'sectorsocial', 'organizacion'
+            'sectorsocial', 'organizacion', 'rangoedad'
         )
         );
         $etablas = implode(", ", array_unique($etablas));
         $q = " SELECT caso.id, persona.id, " .
             " persona.nombres || ' ' || persona.apellidos, caso.fecha, " .
             " acto.id_categoria, presponsable.nombre, " .
-            " sectorsocial.nombre, organizacion.nombre  " .
+            " sectorsocial.nombre, organizacion.nombre, " .
+            " persona.sexo, rangoedad.rango " .
             " FROM  $etablas WHERE " .
             " presponsable.id=acto.id_presponsable " .
             " AND acto.id_persona=persona.id " .
+            " AND rangoedad.id=victima.id_rangoedad " .
             " AND persona.id=victima.id_persona " .
             " AND caso.id=victima.id_caso " .
             " AND caso.id=acto.id_caso " .
@@ -557,6 +559,7 @@ class ResConsulta
         $ac = array(
             _("Fecha"), _("Caso"), _("Víctima"),
             _("Sector Social"), _("Organización Social"),
+            _("Sexo"), _("Rango de Edad"),
             _("Categoria"), _("P. Responsable")
         );
 
@@ -580,6 +583,7 @@ class ResConsulta
                 . '\hline\n';
         } else { // tabla o consolidado
 
+            encabezado_envia("Actos");
             echo "<table border='1'>\n";
             $st = ""; $cpm = "<tr>";
             foreach ($ac as $c) {
@@ -599,6 +603,8 @@ class ResConsulta
             $idvic = $row[1];
             $idcaso = $row[0];
             $presp = $row[5];
+            $sexo = $row[8];
+            $rangoedad = $row[9];
 
             if ($pMuestra == "tabla" || $pMuestra == 'actos') {
                 $html_il = "<tr><td>" .
@@ -607,6 +613,8 @@ class ResConsulta
                     "</td><td>" . trim(htmlentities($nom, ENT_COMPAT, 'UTF-8')).
                     "</td><td>" . trim(htmlentities($ss, ENT_COMPAT, 'UTF-8')) .
                     "</td><td>" . trim(htmlentities($os, ENT_COMPAT, 'UTF-8')) .
+                    "</td><td>" . htmlentities($sexo, ENT_COMPAT, 'UTF-8') .
+                    "</td><td>" . htmlentities($rangoedad, ENT_COMPAT, 'UTF-8') .
                     "</td><td>" . htmlentities($cat, ENT_COMPAT, 'UTF-8') .
                     "</td><td>" . htmlentities($presp, ENT_COMPAT, 'UTF-8') .
                     "</td>";
@@ -623,7 +631,7 @@ class ResConsulta
 
             echo $html_il;
 
-            if ($pMuestra == "tabla" || $pMuestra == 'consolidado') {
+            if ($pMuestra == "tabla" || $pMuestra == 'actos') {
                 echo "</tr>\n";
             } elseif ($pMuestra == 'csv') {
                 echo " \n";
@@ -632,8 +640,9 @@ class ResConsulta
             }
 
         }
-        if ($pMuestra == "tabla"  || $pMuestra == 'consolidado') {
+        if ($pMuestra == "tabla"  || $pMuestra == 'actos') {
             echo "</table>";
+            pie_envia();
         } elseif ($pMuestra == 'csv') {
         } elseif ($pMuestra == 'latex') {
         }
