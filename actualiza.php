@@ -1026,11 +1026,6 @@ if (!aplicado($idac)) {
         FOREIGN KEY (id_caso, id_persona) 
         REFERENCES victima(id_caso, id_persona)", false
     );
-/*    hace_consulta(
-        $db, "UPDATE victimasjr SET id_victima=victima.id FROM
-        victima WHERE victimasjr.id_persona=victima.id_persona AND
-        victimasjr.id_caso=victima.id_caso", false
-    );
     hace_consulta(
         $db, "ALTER TABLE antecedente_victima
         ADD COLUMN id_victima INTEGER REFERENCES victima(id)", false
@@ -1039,7 +1034,7 @@ if (!aplicado($idac)) {
         $db, "UPDATE antecedente_victima SET id_victima=victima.id FROM
         victima WHERE antecedente_victima.id_persona=victima.id_persona AND
         antecedente_victima.id_caso=victima.id_caso", false
-    ); */
+    ); 
 
     aplicaact($act, $idac, 'id en tabla victima es identificación'); 
 }
