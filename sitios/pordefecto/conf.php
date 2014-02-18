@@ -87,6 +87,10 @@ $GLOBALS['derechos'] = 'Dominio Público';
  */
 $GLOBALS['iglesias_cristianas'] = true;
 
+/** Indica si debe deshabilitazarse consulta pública de consulta_web.php
+ * @global string $GLOBALS['consulta_publica_deshabilitada']
+ */
+$GLOBALS['consulta_publica_deshabilitada'] = false;
 
 /** Fecha máxima de caso por usar en consulta web.
  * año-mes-año

@@ -30,7 +30,11 @@ function determina_host()
         $pu['host'] = $_SERVER['HTTP_HOST'];
         $pu['path'] = str_replace("modulos/mapag/", "", $_SERVER['REQUEST_URI']);
     }
-    $host = $pu['scheme'] . '://' . $pu['host'] . dirname($pu['path']);
+    $host = $pu['scheme'] . '://' . $pu['host'];
+    if (isset($pu['port'])) {
+        $host .= ":" . $pu['port'];
+    }
+    $host .= dirname($pu['path']);
     if ($host[strlen($host) - 1] != '/') {
         $host .= "/";
     }
@@ -87,10 +91,11 @@ function display_xml_error($error, $xml)
  */
 function errores_xml($xml, $ca)
 {
+    trigger_error("ca=" . $ca);
     $lxml = explode("\n", $ca);
     $errors = libxml_get_errors();
     foreach ($errors as $error) {
-        echo display_xml_error($error, $lxml);
+        trigger_error(display_xml_error($error, $lxml));
     }
     libxml_clear_errors();
 }
