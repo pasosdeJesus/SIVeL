@@ -5,7 +5,7 @@ class ActividadesController < ApplicationController
   # GET /actividades
   # GET /actividades.json
   def index
-    @actividades = Actividad.all
+    @actividades = Actividad.paginate(:page => params[:pagina], per_page: 20)
   end
 
   # GET /actividades/1

@@ -51,7 +51,7 @@
                 <%= f.simple_fields_for :victima do |victima| %>
                   <% if !victima.object.persona.nil?  && victima.object.persona.id == @caso.casosjr.contacto.id %>
                     <%= render 'contacto_fields', :f => victima, 
-                      locals: { casosjr: @caso.casosjr }  %>
+                      locals: { s: s, casosjr: @caso.casosjr }  %>
                   <% end %>
                 <% end %>
                 <div class="input string optional"><label class="string optional control-label" for="x1">Dependen econ.</label><input class="string optional" id="x1" name="x1" type="text"></div>

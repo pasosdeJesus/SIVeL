@@ -5,10 +5,12 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:fecharec) %></th>
-      <th><%= model_class.human_attribute_name(:fecha) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= Caso.human_attribute_name(:id) %></th>
+      <th><%= Casosjr.human_attribute_name(:fecharec) %></th>
+      <th><%= Casosjr.human_attribute_name(:regionsjr) %></th>
+      <th><%= Caso.human_attribute_name(:fecha) %></th>
+      <th><%= Caso.human_attribute_name(:memo) %></th>
+      <th><%= Caso.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -16,13 +18,11 @@
     <% @casos.try(:each) do |caso| %>
       <tr>
         <td><%= link_to caso.id, caso_path(caso) %></td>
-        <td><%= caso.casosjr.fecharec %></td>
+        <td><%= caso.casosjr.fecharec if !caso.casosjr.nil? %></td>
+        <td><%= caso.casosjr.regionsjr.nombre if !caso.casosjr.nil? && !caso.casosjr.regionsjr.nil? %></td>
         <td><%= caso.fecha %></td>
-	      <td>
-          <%- if !caso.created_at.nil? %>
-            <%=l caso.created_at %>
-          <% end -%>
-        </td>
+        <td><%= caso.memo %></td>
+	      <td><%= caso.created_at.to_date if !caso.created_at.nil?%></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_caso_path(caso), :class => 'btn btn-mini' %>
@@ -36,7 +36,7 @@
     <% end %>
   </tbody>
 </table>
-
+<%= will_paginate @caso, { param_name: :pagina }  %>
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            '/casos/nuevo',
+            new_caso_path,
             :class => 'btn btn-primary' %>

@@ -20,15 +20,25 @@
     <div class="links">
       <%= link_to_add_association 'Añadir Asistencia Humanitaria', f, :ayudasjr_respuesta, :class => 'btn-primary' %>
     </div>
+    <%= f.simple_fields_for :emprendimiento_respuesta do |a| %>
+      <%= render 'emprendimiento_respuesta_fields', :f => a %>
+    <% end %>
     <div class="links">
-      <a class='btn-primary'>Añadir Emprendimiento Económico</a>
+      <%= link_to_add_association 'Añadir Emprendimiento', f, :emprendimiento_respuesta, :class => 'btn-primary' %>
     </div>
+    <%= f.simple_fields_for :aspsicosocial_respuesta do |a| %>
+      <%= render 'aspsicosocial_respuesta_fields', :f => a %>
+    <% end %>
+    <div class="links" -->
+      <%= link_to_add_association 'Añadir Asistencia Psicosocial', f, :aspsicosocial_respuesta, :class => 'btn-primary' %>
+    </div -->
+    <%= f.simple_fields_for :aslegal_respuesta do |a| %>
+      <%= render 'aslegal_respuesta_fields', :f => a %>
+    <% end %>
     <div class="links">
-      <a class='btn-primary'>Añadir Asistencia Piscosocial</a>
+      <%= link_to_add_association 'Añadir Asistencia legal', f, :aslegal_respuesta, :class => 'btn-primary' %>
     </div>
-    <div class="links">
-      <a class='btn-primary'>Añadir Asistencia Legal</a>
-    </div>
+
     <%= link_to_remove_association "Eliminar Sesión de Atención", f, :class => 'btn-danger' %> 
   </div>
 </div>
