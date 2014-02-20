@@ -6,35 +6,35 @@ GIT
 
 GIT
   remote: https://github.com/kristianmandrup/jquery-ui-bootstrap-rails
-  revision: 47957c2250ee54364197aa02b180f9644cdbc113
+  revision: 944cf4164ea511a2977f91031cc7f69d3e06e6cb
   specs:
-    jquery-ui-bootstrap-rails (0.1.0)
+    jquery-ui-bootstrap-rails (0.1.1)
       rails
 
 GEM
   remote: https://rubygems.org/
   specs:
-    actionmailer (4.1.0.beta1)
-      actionpack (= 4.1.0.beta1)
-      actionview (= 4.1.0.beta1)
+    actionmailer (4.1.0.rc1)
+      actionpack (= 4.1.0.rc1)
+      actionview (= 4.1.0.rc1)
       mail (~> 2.5.4)
-    actionpack (4.1.0.beta1)
-      actionview (= 4.1.0.beta1)
-      activesupport (= 4.1.0.beta1)
+    actionpack (4.1.0.rc1)
+      actionview (= 4.1.0.rc1)
+      activesupport (= 4.1.0.rc1)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    actionview (4.1.0.beta1)
-      activesupport (= 4.1.0.beta1)
+    actionview (4.1.0.rc1)
+      activesupport (= 4.1.0.rc1)
       builder (~> 3.1)
       erubis (~> 2.7.0)
-    activemodel (4.1.0.beta1)
-      activesupport (= 4.1.0.beta1)
+    activemodel (4.1.0.rc1)
+      activesupport (= 4.1.0.rc1)
       builder (~> 3.1)
-    activerecord (4.1.0.beta1)
-      activemodel (= 4.1.0.beta1)
-      activesupport (= 4.1.0.beta1)
+    activerecord (4.1.0.rc1)
+      activemodel (= 4.1.0.rc1)
+      activesupport (= 4.1.0.rc1)
       arel (~> 5.0.0)
-    activesupport (4.1.0.beta1)
+    activesupport (4.1.0.rc1)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
@@ -45,7 +45,7 @@ GEM
     bcrypt-ruby (3.1.2)
     bootstrap-datepicker-rails (1.3.0.1)
       railties (>= 3.0)
-    bootstrap-sass (3.1.0.2)
+    bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
     builder (3.2.2)
     cancan (1.6.10)
@@ -105,8 +105,8 @@ GEM
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (4.1.1)
-      railties (>= 3.1.0)
+    jquery-ui-rails (4.2.0)
+      railties (>= 3.2.16)
     json (1.8.1)
     mail (2.5.4)
       mime-types (~> 1.16)
@@ -120,26 +120,26 @@ GEM
       mini_portile (~> 0.5.0)
     orm_adapter (0.5.0)
     pg (0.17.1)
-    polyglot (0.3.3)
+    polyglot (0.3.4)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
-    rails (4.1.0.beta1)
-      actionmailer (= 4.1.0.beta1)
-      actionpack (= 4.1.0.beta1)
-      actionview (= 4.1.0.beta1)
-      activemodel (= 4.1.0.beta1)
-      activerecord (= 4.1.0.beta1)
-      activesupport (= 4.1.0.beta1)
+    rails (4.1.0.rc1)
+      actionmailer (= 4.1.0.rc1)
+      actionpack (= 4.1.0.rc1)
+      actionview (= 4.1.0.rc1)
+      activemodel (= 4.1.0.rc1)
+      activerecord (= 4.1.0.rc1)
+      activesupport (= 4.1.0.rc1)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.1.0.beta1)
+      railties (= 4.1.0.rc1)
       sprockets-rails (~> 2.0.0)
     rails-i18n (4.0.1)
       i18n (~> 0.6)
       rails (~> 4.0)
-    railties (4.1.0.beta1)
-      actionpack (= 4.1.0.beta1)
-      activesupport (= 4.1.0.beta1)
+    railties (4.1.0.rc1)
+      actionpack (= 4.1.0.rc1)
+      activesupport (= 4.1.0.rc1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.1.1)
@@ -169,7 +169,7 @@ GEM
       actionpack (>= 4.0.0, < 4.1)
       activemodel (>= 4.0.0, < 4.1)
     spring (1.1.1)
-    sprockets (2.10.1)
+    sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -201,6 +201,7 @@ GEM
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
+    will_paginate (3.0.5)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -224,7 +225,7 @@ DEPENDENCIES
   jquery-ui-bootstrap-rails!
   jquery-ui-rails
   pg
-  rails (= 4.1.0.beta1)
+  rails (= 4.1.0.rc1)
   rails-i18n
   rspec-rails
   sass-rails (~> 4.0.0.rc1)
@@ -236,3 +237,4 @@ DEPENDENCIES
   tzinfo
   tzinfo-data
   uglifier (>= 1.3.0)
+  will_paginate
