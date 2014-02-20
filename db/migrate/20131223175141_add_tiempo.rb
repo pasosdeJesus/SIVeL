@@ -22,6 +22,14 @@ class AddTiempo < ActiveRecord::Migration
 	  add_column :antecedente_comunidad, :updated_at, :datetime
 	  add_column :antecedente_victima, :created_at, :datetime 
 	  add_column :antecedente_victima, :updated_at, :datetime
+	  add_column :aslegal, :created_at, :datetime 
+	  add_column :aslegal, :updated_at, :datetime
+	  add_column :aslegal_respuesta, :created_at, :datetime 
+	  add_column :aslegal_respuesta, :updated_at, :datetime
+	  add_column :aspsicosocial, :created_at, :datetime 
+	  add_column :aspsicosocial, :updated_at, :datetime
+	  add_column :aspsicosocial_respuesta, :created_at, :datetime 
+	  add_column :aspsicosocial_respuesta, :updated_at, :datetime
 	  add_column :ayudaestado, :created_at, :datetime 
 	  add_column :ayudaestado, :updated_at, :datetime
 	  add_column :ayudaestado_respuesta, :created_at, :datetime 
@@ -82,6 +90,10 @@ class AddTiempo < ActiveRecord::Migration
 	  add_column :derecho_respuesta, :updated_at, :datetime
 	  add_column :desplazamiento, :created_at, :datetime 
 	  add_column :desplazamiento, :updated_at, :datetime
+	  add_column :emprendimiento, :created_at, :datetime 
+	  add_column :emprendimiento, :updated_at, :datetime
+	  add_column :emprendimiento_respuesta, :created_at, :datetime 
+	  add_column :emprendimiento_respuesta, :updated_at, :datetime
 	  add_column :escolaridad, :created_at, :datetime 
 	  add_column :escolaridad, :updated_at, :datetime
 	  add_column :estadocivil, :created_at, :datetime 
@@ -138,6 +150,8 @@ class AddTiempo < ActiveRecord::Migration
 	  add_column :progestado, :updated_at, :datetime
 	  add_column :progestado_respuesta, :created_at, :datetime 
 	  add_column :progestado_respuesta, :updated_at, :datetime
+	  add_column :proteccion, :created_at, :datetime 
+	  add_column :proteccion, :updated_at, :datetime 
 	  add_column :regimensalud, :created_at, :datetime 
 	  add_column :regimensalud, :updated_at, :datetime
 	  add_column :region, :created_at, :datetime 
@@ -154,6 +168,8 @@ class AddTiempo < ActiveRecord::Migration
 	  add_column :schema_migrations, :updated_at, :datetime
 	  add_column :sectorsocial, :created_at, :datetime 
 	  add_column :sectorsocial, :updated_at, :datetime
+	  add_column :statusmigratorio, :created_at, :datetime
+	  add_column :statusmigratorio, :updated_at, :datetime
 	  add_column :supracategoria, :created_at, :datetime 
 	  add_column :supracategoria, :updated_at, :datetime
 	  add_column :tclase, :created_at, :datetime 
