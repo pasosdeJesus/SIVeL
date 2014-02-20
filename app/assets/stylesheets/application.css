@@ -15,3 +15,7 @@
  *= require bootstrap-datepicker
  *= require_tree .
  */
+
+.pagination {
+	text-align: center;
+}
