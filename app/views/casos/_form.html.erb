@@ -50,19 +50,32 @@
               <div class="accordion-inner">
                 <%= f.simple_fields_for :victima do |victima| %>
                   <% if !victima.object.persona.nil?  && victima.object.persona.id == @caso.casosjr.contacto.id %>
-                    <%= render 'contacto_fields', :f => victima, 
-                      locals: { s: s, casosjr: @caso.casosjr }  %>
+                    <%= s.input :direccion %>
+                    <%= s.input :telefono %>
+                    <%= s.input :comosupo, :label => "Como supo" %>
+                    <%= render 'contacto_fields', :f => victima %>
+                    <%= s.input :dependen, label: "Dependen econ." %>
+                    <%= s.input :sustento, label: "Sustento familiar" %>
+                    <%= s.input :leerescribir, label: "Sabe leer y escribir",
+                      wrapper_html: { class: "span11 offset1" }  %>
+                    <%= s.input :trabaja, label: "Trajaba actualmente",
+                      wrapper_html: { class: "span11 offset1" }  %>
+                    <%= s.input :ingresomensual, label: "Ingreso mensual" %>
+                    <%= s.input :gastos, label: "Estimado de gastos" %>
+                    <%= s.input :estrato, collection: [
+                                [:A, :A], [:B, :B], [:C, :C], 
+                                [:D, :D], [:E, :E], [:Otro, :O]], 
+                                label: "Estrato" %>
+                    <%= s.association :statusmigratorio,
+                      label: "Status migratorio",
+                      label_method: :nombre, 
+                      value_method: :id %>
+                    <%= s.association :proteccion, 
+                      label: "Necesidad de protección internacional",
+                      label_method: :nombre, 
+                      value_method: :id %>
                   <% end %>
                 <% end %>
-                <div class="input string optional"><label class="string optional control-label" for="x1">Dependen econ.</label><input class="string optional" id="x1" name="x1" type="text"></div>
-                <div class="input string optional"><label class="string optional control-label" for="x2">Sustento familiar</label><input class="string optional" id="x2" name="x2" type="text"></div>
-                <div class="input string optional"><label class="string optional control-label" for="x3">Sabe leer y escribir</label><input class="string optional" id="x3" name="x3" type="text"></div>
-                <div class="input string optional"><label class="string optional control-label" for="x4">Trajaba actualmente</label><input class="string optional" id="x4" name="x4" type="text"></div>
-                <div class="input string optional"><label class="string optional control-label" for="x5">Ingreso mensual</label><input class="string optional" id="x5" name="x5" type="text"></div>
-                <div class="input string optional"><label class="string optional control-label" for="x6">Estimado de gastos</label><input class="string optional" id="x6" name="x6" type="text"></div>
-                <div class="input string optional"><label class="string optional control-label" for="x7">Estrato</label><input class="string optional" id="x7" name="x7" type="text"></div>
-                <div class="input string optional"><label class="string optional control-label" for="x8">Status migratorio</label><input class="string optional" id="x8" name="x8" type="text"></div>
-                <div class="input string optional"><label class="string optional control-label" for="x9">Personas con necesidad de protección internacional</label><input class="string optional" id="x9" name="x9" type="text"></div>
               </div>
             </div>
           </div> <! -- accordion-group -->

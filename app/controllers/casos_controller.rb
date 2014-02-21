@@ -208,7 +208,9 @@ class CasosController < ApplicationController
           ],
           :victimasjr_attributes => [
             :id_rolfamilia,
-            :id_actividadoficio
+            :id_actividadoficio, :id_estadocivil, 
+            :id_maternidad, :discapacitado, :id_escolaridad, 
+            :progadultomayor 
           ]
         ], 
         :ubicacion_attributes => [
@@ -233,16 +235,16 @@ class CasosController < ApplicationController
           :descamp, :observaciones, :orientaciones, :compromisos,
           :gestionessjr, :_destroy, 
           :ayudasjr_respuesta_attributes => [
-            :id_ayudasjr, :detallear, :monto, :_destroy
+            :id_ayudasjr, :detallear, :montoar, :_destroy
           ],
           :emprendimiento_respuesta_attributes => [
-            :id_emprendimiento, :detalle, :monto, :_destroy
+            :id_emprendimiento, :detalleem, :montoem, :_destroy
           ],
           :aspsicosocial_respuesta_attributes => [
-            :id_aspsicosocial, :detalle, :monto, :_destroy
+            :id_aspsicosocial, :detalleap, :montoap, :_destroy
           ],
           :aslegal_respuesta_attributes => [
-            :id_aslegal, :detalle, :monto, :_destroy
+            :id_aslegal, :detalleal, :montoal, :_destroy
           ]
         ],
         :anexo_attributes => [
