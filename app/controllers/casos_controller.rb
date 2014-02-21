@@ -5,7 +5,7 @@ class CasosController < ApplicationController
   # GET /casos
   # GET /casos.json
   def index
-    @casos = Caso.all
+    @casos = Caso.paginate(:page => params[:pagina], per_page: 20)
   end
 
   # GET /casos/1
@@ -32,11 +32,11 @@ class CasosController < ApplicationController
     @caso.victima<<vic
     @caso.casosjr.contacto = per
     @caso.save
-    vs = Victimasjr.new
-    vs.id_persona =  per.id
-    vs.id_caso = @caso.id
-    vic.victimasjr = vs
     vic.save
+    vs = Victimasjr.new
+    vs.id_victima = vic.id
+    vic.victimasjr = vs
+    vs.save
 
     render action: 'edit'
   end
@@ -99,7 +99,12 @@ class CasosController < ApplicationController
     @caso.desplazamiento.clear
     @caso.actosjr.clear
     @caso.acto.clear
-    @caso.respuesta.each { |r| r.ayudasjr.clear }
+    @caso.respuesta.each { |r| 
+      r.ayudasjr.clear 
+      r.emprendimiento.clear
+      r.aspsicosocial.clear
+      r.aslegal.clear
+    }
   end
 
   # PATCH/PUT /casos/1
@@ -188,7 +193,11 @@ class CasosController < ApplicationController
         :bienes, :id_intervalo, :memo, 
         :casosjr_attributes => [
           :fecharec, :asesor, :id_regionsjr, :direccion, 
-          :telefono, :comosupo, :contacto, :_destroy
+          :telefono, :comosupo, :contacto,
+          :dependen, :sustento, :leerescribir, :trabaja,
+          :ingresomensual, :gastos, :estrato, :id_statusmigratorio,
+          :id_proteccion, :id_idioma,
+          :_destroy
         ], 
         :victima_attributes => [
           :id, :id_persona, :id_profesion, :id_rangoedad, :id_etnia, 
@@ -199,7 +208,9 @@ class CasosController < ApplicationController
           ],
           :victimasjr_attributes => [
             :id_rolfamilia,
-            :id_actividadoficio
+            :id_actividadoficio, :id_estadocivil, 
+            :id_maternidad, :discapacitado, :id_escolaridad, 
+            :progadultomayor 
           ]
         ], 
         :ubicacion_attributes => [
@@ -224,7 +235,16 @@ class CasosController < ApplicationController
           :descamp, :observaciones, :orientaciones, :compromisos,
           :gestionessjr, :_destroy, 
           :ayudasjr_respuesta_attributes => [
-            :id_ayudasjr, :detallear, :_destroy
+            :id_ayudasjr, :detallear, :montoar, :_destroy
+          ],
+          :emprendimiento_respuesta_attributes => [
+            :id_emprendimiento, :detalleem, :montoem, :_destroy
+          ],
+          :aspsicosocial_respuesta_attributes => [
+            :id_aspsicosocial, :detalleap, :montoap, :_destroy
+          ],
+          :aslegal_respuesta_attributes => [
+            :id_aslegal, :detalleal, :montoal, :_destroy
           ]
         ],
         :anexo_attributes => [

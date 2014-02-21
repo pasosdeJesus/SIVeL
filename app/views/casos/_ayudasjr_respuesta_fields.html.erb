@@ -1,11 +1,11 @@
 <div class='control-group nested-fields'>
   <div class="controls">
     <%= f.association :ayudasjr,
-	    label: "Asistencia Humanitaria",
+	    label: "Asist. Humanitaria",
       label_method: :nombre,
 	    value_method: :id %>
     <%= f.input :detallear, label: "Carácter" %>
-    <!-- %= f.input :monto, label: "Monto" %-->
+    <%= f.input :montoar, label: "Monto" %>
     <%= link_to_remove_association "Eliminar Asistencia Humanitaria", f, 
         :class => 'btn-danger' %> 
   </div>

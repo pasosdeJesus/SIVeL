@@ -45,6 +45,7 @@
   </tbody>
 </table>
 
+<%= will_paginate @actividad, { param_name: :pagina }  %>
 <%= link_to t('.new', :default => 'Nueva'),
             new_actividad_path,
             :class => 'btn btn-primary' %>

@@ -5,7 +5,7 @@ class ActividadesController < ApplicationController
   # GET /actividades
   # GET /actividades.json
   def index
-    @actividades = Actividad.all
+    @actividades = Actividad.paginate(:page => params[:pagina], per_page: 20)
   end
 
   # GET /actividades/1
@@ -29,7 +29,7 @@ class ActividadesController < ApplicationController
 
     respond_to do |format|
       if @actividad.save
-        format.html { redirect_to @actividad, notice: 'Actividad was successfully created.' }
+        format.html { redirect_to @actividad, notice: 'Actividad creada.' }
         format.json { render action: 'show', status: :created, location: @actividad }
       else
         format.html { render action: 'new' }
@@ -43,7 +43,7 @@ class ActividadesController < ApplicationController
   def update
     respond_to do |format|
       if @actividad.update(actividad_params)
-        format.html { redirect_to @actividad, notice: 'Actividad was successfully updated.' }
+        format.html { redirect_to @actividad, notice: 'Actividad actualizada.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

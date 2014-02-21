@@ -40,8 +40,15 @@ $(document).on 'ready page:load',  ->
       op = $(v).find('[value=' + v.value + ']').text()
       nh = nh + ">" + op + "</option>" )
     $(this).html(nh)
-    return )
+  )
 
+  $('#presponsable').on('cocoon:after-delete', (e, presponsable) ->
+    debugger 
+    cid = presponsable.find('input[id*=nombres]').attr('name')
+    re= new RegExp(".*[[]([0-9][0-9]*).*")
+    iid = cid.replace(re, "$1") 
+  )
+  
 #  $('#victima').on('cocoon:after-insert', (e, victima) ->
 #    cid = victima.find('input[id*=nombres]').attr('name')
 #    re= new RegExp(".*[[]([0-9][0-9]*).*");
@@ -73,4 +80,4 @@ $(document).on 'ready page:load',  ->
 #  $('#caso_fecha').on('change', ->
 # )
 
-
+  return

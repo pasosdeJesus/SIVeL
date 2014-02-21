@@ -1,5 +1,9 @@
 
 es:
+  will_paginate:
+    previous_label: "&#8592; Anterior"
+    next_label: "&#8594; Siguiente"
+    page_gap: "&hellip;"
   activerecord:
     attributes:
       actividad: 
@@ -15,4 +19,13 @@ es:
         actividad:  Actividad
         observaciones: Observaciones
         created_at: Creado en
+      casosjr:
+        fecharec: F. Atención
+        regionsjr: Oficina
+        contacto: Solicitante Principal
+      caso:
+        memo: Descripción
+        created_at: F. Creación
+        fecha: F. Hecho
+
 

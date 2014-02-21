@@ -29,7 +29,7 @@ class ActividadareasController < ApplicationController
 
     respond_to do |format|
       if @actividadarea.save
-        format.html { redirect_to @actividadarea, notice: 'Actividadarea was successfully created.' }
+        format.html { redirect_to @actividadarea, notice: 'Área para actividades creada.' }
         format.json { render action: 'show', status: :created, location: @actividadarea }
       else
         format.html { render action: 'new' }
@@ -43,7 +43,7 @@ class ActividadareasController < ApplicationController
   def update
     respond_to do |format|
       if @actividadarea.update(actividadarea_params)
-        format.html { redirect_to @actividadarea, notice: 'Actividadarea was successfully updated.' }
+        format.html { redirect_to @actividadarea, notice: 'Área para actividades actualizada.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

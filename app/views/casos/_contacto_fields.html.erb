@@ -1,8 +1,3 @@
-<%= f.simple_fields_for :casosjr do |s| %>
-  <%= s.input :direccion%>
-  <%= s.input :telefono%>
-  <%= s.input :comosupo, :label => "Como supo" %>
-<% end %>
 <%= f.simple_fields_for :persona do |p| %>
   <%= render 'persona_fields', :f => p %>
 <% end %>
@@ -28,12 +23,29 @@
 <%= f.input :id, as: :hidden %>
 
 <%= f.simple_fields_for :victimasjr do |s| %>
+  <%= s.association :estadocivil,
+    label: "Estado Civil",
+    label_method: :nombre, 
+    value_method: :id %>
   <%= s.association :rolfamilia,
     label: "Rol en Familia",
     label_method: :nombre, 
     value_method: :id %>
+  <%= s.association :maternidad,
+    label: "Maternidad",
+    label_method: :nombre, 
+    value_method: :id %>
+  <%= s.input :discapacitado, label: "Discapacitado",
+      wrapper_html: { class: "span11 offset1" }  %>
   <%= s.association :actividadoficio,
     label: "Oficio",
     label_method: :nombre, 
     value_method: :id %>
+  <%= s.association :escolaridad,
+    label: "Nivel Escolar",
+    label_method: :nombre, 
+    value_method: :id %>
+  <%= s.input :progadultomayor, label: "Programa Adulto Mayor",
+      wrapper_html: { class: "span11 offset1" }  %>
+
 <% end %>
