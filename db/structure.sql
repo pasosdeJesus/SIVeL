@@ -3,7 +3,6 @@
 --
 
 SET statement_timeout = 0;
-SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -535,7 +534,8 @@ CREATE TABLE antecedente_victima (
     id_persona integer NOT NULL,
     id_caso integer NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    id_victima integer
 );
 
 
@@ -897,6 +897,7 @@ CREATE TABLE casosjr (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     dependen integer,
+    sustento character varying(1000),
     leerescribir boolean,
     trabaja boolean,
     ingresomensual integer,
@@ -904,7 +905,6 @@ CREATE TABLE casosjr (
     estrato character(1),
     id_statusmigratorio integer,
     id_proteccion integer,
-    sustento character varying(1000),
     id_idioma integer
 );
 
@@ -2462,7 +2462,7 @@ CREATE SEQUENCE statusmigratorio_seq
 CREATE TABLE statusmigratorio (
     id integer DEFAULT nextval('statusmigratorio_seq'::regclass) NOT NULL,
     nombre character varying(100) NOT NULL,
-    fechacreacion date DEFAULT '2014-02-14'::date NOT NULL,
+    fechacreacion date DEFAULT '2014-02-18'::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -3656,38 +3656,6 @@ ALTER TABLE ONLY victima
 
 
 --
--- Name: victima_id_caso_id_persona_key1; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY victima
-    ADD CONSTRAINT victima_id_caso_id_persona_key1 UNIQUE (id_caso, id_persona);
-
-
---
--- Name: victima_id_caso_id_persona_key2; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY victima
-    ADD CONSTRAINT victima_id_caso_id_persona_key2 UNIQUE (id_caso, id_persona);
-
-
---
--- Name: victima_id_caso_id_persona_key3; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY victima
-    ADD CONSTRAINT victima_id_caso_id_persona_key3 UNIQUE (id_caso, id_persona);
-
-
---
--- Name: victima_id_caso_id_persona_key4; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY victima
-    ADD CONSTRAINT victima_id_caso_id_persona_key4 UNIQUE (id_caso, id_persona);
-
-
---
 -- Name: victima_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4038,6 +4006,14 @@ ALTER TABLE ONLY antecedente_victima
 
 ALTER TABLE ONLY antecedente_victima
     ADD CONSTRAINT antecedente_victima_id_persona_fkey FOREIGN KEY (id_persona) REFERENCES persona(id);
+
+
+--
+-- Name: antecedente_victima_id_victima_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY antecedente_victima
+    ADD CONSTRAINT antecedente_victima_id_victima_fkey FOREIGN KEY (id_victima) REFERENCES victima(id);
 
 
 --
@@ -5046,6 +5022,14 @@ ALTER TABLE ONLY victimasjr
 
 ALTER TABLE ONLY victimasjr
     ADD CONSTRAINT victimasjr_id_rolfamilia_fkey FOREIGN KEY (id_rolfamilia) REFERENCES rolfamilia(id);
+
+
+--
+-- Name: victimasjr_id_victima_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY victimasjr
+    ADD CONSTRAINT victimasjr_id_victima_fkey FOREIGN KEY (id_victima) REFERENCES victima(id);
 
 
 --
