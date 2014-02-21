@@ -66,6 +66,10 @@
                                 [:A, :A], [:B, :B], [:C, :C], 
                                 [:D, :D], [:E, :E], [:Otro, :O]], 
                                 label: "Estrato" %>
+                    <%= s.association :idioma, 
+                      label: "Idioma",
+                      label_method: :nombre, 
+                      value_method: :id %>
                     <%= s.association :statusmigratorio,
                       label: "Status migratorio",
                       label_method: :nombre, 

@@ -196,7 +196,7 @@ class CasosController < ApplicationController
           :telefono, :comosupo, :contacto,
           :dependen, :sustento, :leerescribir, :trabaja,
           :ingresomensual, :gastos, :estrato, :id_statusmigratorio,
-          :id_proteccion,
+          :id_proteccion, :id_idioma,
           :_destroy
         ], 
         :victima_attributes => [

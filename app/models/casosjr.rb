@@ -8,6 +8,7 @@ class Casosjr < ActiveRecord::Base
 	belongs_to :usuario, foreign_key: "asesor", validate: true
 	belongs_to :statusmigratorio, foreign_key: "id_statusmigratorio", validate: true
 	belongs_to :proteccion, foreign_key: "id_proteccion", validate: true
+	belongs_to :idioma, foreign_key: "id_idioma", validate: true
 
 	validates_presence_of :fecharec
 	validates_presence_of :asesor
