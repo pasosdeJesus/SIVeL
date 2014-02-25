@@ -34,31 +34,31 @@ con Ruby on Rails.
 ### Configuración de servidor de desarrollo:
 * Ubique fuentes por ejemplo en /var/www/htdocs/sivel2/
 * Instale gemas requeridas (como Rails 4.1) con:
-  ```sh
+```sh
   sudo bundle install
   bundle install
-  ```
+```
 * Copie y modifique las plantillas:
-  ```sh
+```sh
   cp config/secrets.yml.plantilla config/secrets.yml
   cp app/views/hogar/_local.html.erb.plantilla app/views/hogar/_local.html.erb
   cp config/database.yml.plantilla config/database.yml
 ```
 * Configure la misma base de datos de un SIVeL 1.3 en la sección development
   de config/databases.yml y ejecute
-  ```sh
+```sh
   rake db:migrate
   rake db:seed
 ```
 * En caso de que no tenga un SIVeL 1.3 en paralelo cree el usuario y base
   de datos que configure en config/database.yml e inicialice con:
-  ```sh
+```sh
   rake db:setup
   rake db:migrate
   rake db:seed
 ```
 * Lance el servidor con
-  ```sh
+```sh
   rails s
 ```
 
@@ -73,13 +73,13 @@ con Ruby on Rails.
 * Siga los mismos 2 primeros pasos para configurar un servidor de desarrollo
 * Configure la misma base de datos de un SIVeL 1.3 en sección production
   de config/databases.yml y ejecute
-  ```sh
+```sh
   RAILS_ENV=production rake db:migrate
   RAILS_ENV=production rake db:seed
 ```
 * Recomendamos nginx, puede configurar un dominio virtual (digamos
   s2.pasosdeJesus.org) con:
-  ```
+```
   server {
     listen 443;
     ssl on;
@@ -114,12 +114,12 @@ con Ruby on Rails.
   }
 ```
 * Precompile los recursos 
-  ```sh rake assets:precompile```
+```sh rake assets:precompile```
 * Tras reiniciar nginx, inicie unicorn desde directorio con fuentes con:
-  ```sh ./bin/u.sh```
+```sh ./bin/u.sh```
 * Puede logar que inicie en cada arranque en adJ por ejemplo creando 
   /etc/rc.d/miapp 
-  ```sh
+```sh
 servicio="/var/www/htdocs/sivel2/bin/u.sh"
 
 . /etc/rc.d/rc.subr
@@ -131,12 +131,12 @@ rc_cmd $1
 
 ### Actualización de servidor de desarrollo
 
-* Actualice fuentes: ```sh git pull```
+* Actualice fuentes: ```git pull```
 * Instale nuevas versiones de gemas requeridas: 
-  ```sh
+```sh
   sudo bundle install
   bundle install
 ```
-* Aplique cambios a base de datos: ```sh rake db:migrate```
+* Aplique cambios a base de datos: ```rake db:migrate```
 
 
