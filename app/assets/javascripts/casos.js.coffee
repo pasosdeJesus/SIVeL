@@ -5,6 +5,81 @@
 
 #//= require cocoon
 
+#  Completa municipio.
+llenaMunicipio = ($this) -> 
+  iddep=$this.attr('id')
+  idmun=iddep.replace('id_departamento', 'id_municipio')
+  idcla=iddep.replace('id_departamento', 'id_clase')
+  dep = $this.val()
+  if (+dep > 0) 
+      x = $.getJSON("/casos/lista", {tabla: 'municipio', id_departamento: dep})
+      x.done((data) -> 
+          op = '<option value=""></option>'
+          $.each( data, ( i, item ) -> 
+              op += '<option value="' + 
+                item.id + '">' + item.nombre + '</option>'
+          )
+          $("#" + idmun ).html(op)
+          $("#" + idcla).html('')
+      )
+      x.error((m1, m2, m3) -> 
+          alert(
+              'Problema leyendo Municipios de ' + dep + ' ' + m1 + ' '
+              + m2 + ' ' + m3)
+      )
+      par = {
+          tabla: 'departamento',
+          id: dep
+      }
+      #if (sincoord !== true) 
+      #    poneCoord(par)
+      $("#" + idmun).attr("disabled", false)
+  else
+      $("#" + idmun).val("")
+      $("#" + idmun).attr("disabled", true)
+  if (idcla != '') 
+      $("#" + idcla).val("")
+      $("#" + idcla).attr("disabled", true)
+
+# Completa cuadro de selección para clase de acuerdo a depto y mcpio.
+llenaClase = ($this) -> 
+  iddep = "id_departamento"
+  idcla = "id_clase"
+  idmun = $this.attr('id')
+  iddep=iddep.replace('id_municipio', 'id_departamento')
+  idcla=iddep.replace('id_municipio', 'id_clase')
+  sincoord = false
+  dep = +$("#" + iddep).val();
+  mun = +$("#" + idmun).val();
+  par = {
+    tabla: 'clase',
+    id_departamento: dep,
+    id_municipio: mun,
+  };
+  x = $.getJSON("/casos/lista", par)
+  x.done( ( data ) ->
+    op = '<option value=""></option>';
+    $.each( data, ( i, item ) ->
+      op += '<option value="' + item.id + '">' + item.nombre + '</option>';
+    )
+    $("#" + idcla).html(op);
+  )
+  x.error( (m1, m2, m3) ->
+    alert('Problema leyendo Clase ' + x + m1 + m2 + m3)
+  )
+  par = {
+      tabla: 'municipio',
+      id_departamento: dep,
+      id: mun,
+  }
+  #if (sincoord != true) 
+  #  poneCoord(par);
+  if (dep == 0 || mun == 0) 
+    $("#" + idcla).attr("disabled", true);
+  else 
+    $("#" + idcla).attr("disabled", false);
+
+
 $(document).on 'ready page:load',  -> 
   $(document).on('cocoon:after-insert', (e) ->
     $('[data-behaviour~=datepicker]').datepicker({
@@ -42,6 +117,13 @@ $(document).on 'ready page:load',  ->
     $(this).html(nh)
   )
 
+  $(document).on('change', 'select[id^=caso_ubicacion_attributes_][id$=id_departamento]', (e) ->
+    llenaMunicipio($(this))
+  )
+  $(document).on('change', 'select[id^=caso_ubicacion_attributes_][id$=id_municipio]', (e) ->
+    llenaClase($(this))
+  )
+ 
   $('#presponsable').on('cocoon:after-delete', (e, presponsable) ->
     debugger 
     cid = presponsable.find('input[id*=nombres]').attr('name')
@@ -79,5 +161,4 @@ $(document).on 'ready page:load',  ->
 
 #  $('#caso_fecha').on('change', ->
 # )
-
   return

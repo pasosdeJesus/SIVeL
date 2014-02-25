@@ -1,17 +1,19 @@
 <div class='control-group nested-fields'>
   <div class="controls">
     <%= f.association :departamento,
-	    label: "Departamento",
+	    label: "Estado/Departamento",
       label_method: :nombre,
-	    value_method: :id %>
-    <!-- %= f.association :municipio,
+			value_method: :id %>
+    <%= f.association :municipio,
+			collection: (Municipio.where(id_departamento: f.object.id_departamento)),
 	    label: "Municipio",
-	    label_method: :nombre, 
-      value_method: :id % -->
-    <!-- %= f.association :clase,
-	    label: "Clase",
-	    label_method: :nombre, 
-	    value_method: :id % -->
+      label_method: :nombre,
+			value_method: :id %>
+    <%= f.association :clase,
+			collection: (Clase.where(id_departamento: f.object.id_departamento, id_municipio: f.object.id_municipio)),
+	    label: "Centro Poblado",
+      label_method: :nombre,
+			value_method: :id %>
     <%= f.input :lugar %>
     <%= f.input :sitio %>
     <%= f.input :latitud%>

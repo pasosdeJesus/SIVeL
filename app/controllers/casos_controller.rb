@@ -58,6 +58,28 @@ class CasosController < ApplicationController
     end
   end
 
+	def lista
+    if !params[:tabla].nil?
+			r = nil
+			if (params[:tabla] == "municipio" && params[:id_departamento].to_i > 0)
+				r = Municipio.where(id_departamento: params[:id_departamento].to_i)
+			elsif (params[:tabla] == "clase" && params[:id_departamento].to_i > 0 && 
+						 params[:id_municipio].to_i > 0)
+				r = Clase.where(id_departamento: params[:id_departamento].to_i,
+											 id_municipio: params[:id_municipio].to_i)
+			end
+			respond_to do |format|
+				format.js { render json: r }
+				format.html { render json: r }
+			end
+      return
+    end
+    respond_to do |format|
+      format.html { render inline: 'No' }
+    end
+  end
+
+
   # GET /casos/1/edit
   def edit
   end

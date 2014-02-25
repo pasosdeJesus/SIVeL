@@ -1,6 +1,7 @@
 Sivel2::Application.routes.draw do
 
   get '/casos/nuevopresponsable' => 'casos#nuevopresponsable'
+  get '/casos/lista' => 'casos#lista'
   resources :casos, path_names: { new: 'nuevo', edit: 'edita' }
 
   resources :actividades, path_names: { new: 'nueva', edit: 'edita' }
