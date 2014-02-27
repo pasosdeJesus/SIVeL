@@ -21,8 +21,8 @@ if (test "$id" = "") then {
 } fi;
 
 
-q="SET client_encoding to 'LATIN1'; DELETE FROM usuario WHERE id_usuario='$id'"
+q="SET client_encoding to 'LATIN1'; DELETE FROM usuario WHERE nusuario='$id'"
 echo $q;
-$DIRSEG/psql.sh -c "$q"
+$DIRSEG/bin/psql.sh -c "$q"
 
 

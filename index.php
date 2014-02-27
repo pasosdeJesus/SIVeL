@@ -53,13 +53,14 @@ function bd_a_menu($id)
             } else {
                 $url = '';
             }
-            $r[] = array(
+            $r[$idop] = array(
                 'title' => $dop['nombre'],
                 'url' => $url,
                 'sub' => bd_a_menu($idop)
             );
         }
     }
+    ksort($r);
     return $r;
 }
 
