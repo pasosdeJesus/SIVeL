@@ -17,6 +17,8 @@
  * @link      http://sivel.sf.net
  */
 
+require_once "bcrypt.php";
+
 /**
  * Funciones para autenticación de usuarios con Auth de Pear.
  */
@@ -58,58 +60,6 @@ function hace_consulta_aut(&$db, $q, $finerror = true)
     }
     return $result;
 }
-
-/**
- * Genera colchon de datos aleatorios de longitud $lon.
- *
- * @return string Cadena con caracteres aleatorios y longitud $lon
- */
-function colchon_aleatorios($lon)
-{
-    $col = "";
-    for ($i = 0 ; $i < $lon; $i++) {
-        $col .= chr(mt_rand(1, 255));
-    }
-
-	return $col;
-}
-
-
-/**
- * Codifica sal para bcrypt
- * Se basa en función encode_salt de libc de OpenBSD 
- * @param array   $csal    Sal en binario
- * @param integer $lrondas Cantidad de rondas es 2^$lrondas
- *
- * @return string Cadena con sal para bcrypt
- */
-function codificar_sal($csal, $lrondas)
-{
-	$sal = sprintf("$2a$%2.2u$%s", $lrondas, base64_encode($csal));
-
-	return $sal;
-}
-
-
-/**
- * Genera sal para bcrypt.  Se basa en función bcrypt_gensalt de 
- * libc de OpenBSD.
- * @param integer lrondas Cantidad de rondas es 2^lrondas
- *
- * @return string Cadena con sal para bcrypt
- */
-function gen_sal_bcrypt($lrondas)
-{
-    $csal = colchon_aleatorios(16);
-    if ($lrondas < 4) {
-        $lrondas = 4;
-    } else if ($lrondas > 31) {
-        $lrondas = 31;
-    }
-    $gsal = codificar_sal($csal, 16, $lrondas);
-    return $gsal;
-}
-
 
 /**
  * Establece locale
@@ -471,6 +421,10 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             exit(1);
         }
     }
+        $clavesha1 = sha1(var_post_escapa('password', $db, 32));
+	//echo "OJO clavesha1=$clavesha1<br>";
+        $clavemd5 = md5(var_post_escapa('password', $db, 32));
+	//echo "OJO clavemd5=$clavemd5<br>";
     unset($_POST['password']);
     die($accno . " (2)");
 }

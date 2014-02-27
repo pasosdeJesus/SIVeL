@@ -2859,6 +2859,12 @@ if (!aplicado($idac)) {
 
 }
 
+$idac = '1.2-mp';
+if (!aplicado($idac)) {
+    hace_consulta($db, "INSERT INTO filiacion (id, nombre, fechacreacion) VALUES ('16', 'MARCHA PATRIOTICA', '2014-02-27');");
+    aplicaact($act, $idac, 'Datos recientes');
+}
+
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {
