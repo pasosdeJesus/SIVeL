@@ -34,6 +34,7 @@ require_once 'DataObjects/Basica.php';
 class DataObjects_Departamento extends DataObjects_Basica
 {
     var $__table = 'departamento';                    // table name
+    var $id_pais;
     var $latitud;
     var $longitud;
 
@@ -46,6 +47,7 @@ class DataObjects_Departamento extends DataObjects_Basica
         parent::__construct();
         $this->nom_tabla = _('Departamento');
         $this->fb_fieldLabels = array(
+            'id_pais' => _('País'),
             'nombre' => _('Nombre'),
             'latitud'=> _('Latitud'),
             'longitud'=> _('Longitud'),
@@ -55,9 +57,40 @@ class DataObjects_Departamento extends DataObjects_Basica
 
     }
 
-    var $fb_linkDisplayFields = array('nombre');
+    var $fb_linkDisplayFields = array('nombre', 'id_pais');
 
-    var $fb_linkDisplayLevel = 1;
+    var $fb_preDefOrder = array(
+        'id',
+        'id_pais',
+        'nombre',
+        'fechacreacion',
+        'fechadeshabilitacion',
+    );
+    var $fb_fieldsToRender = array(
+        'id_pais',
+        'nombre',
+        'fechacreacion',
+        'fechadeshabilitacion',
+    );
+
+    var $fb_hidePrimaryKey = false;
+
+    /**
+     * Ajusta formulario generado.
+     *
+     * @param object &$form        Formulario HTML_QuickForm
+     * @param object &$formbuilder Generador DataObject_FormBuilder
+     *
+     * @return void
+     */
+    function postGenerateForm(&$form, &$formbuilder)
+    {
+        parent::postGenerateForm($form, $formbuilder);
+        $form->removeElement('id');
+    }
+
+    var $fb_linkDisplayLevel = 2;
+
 }
 
 ?>

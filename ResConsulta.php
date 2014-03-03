@@ -183,6 +183,8 @@ class ResConsulta
      *
      * @param integer $idcaso Código del caso
      * @param handle  &$db    Conexión a base de datos
+     * @param array   &$idp   Ids. de paises retornados
+     * @param array   &$ndp   Nombres de paises retornados
      * @param array   &$idd   Ids. de departamentos  retornados
      * @param array   &$ndd   Nombres de departamentos  retornados
      * @param array   &$idm   Ids. de municipios  retornados
@@ -193,78 +195,124 @@ class ResConsulta
      *
      * @return integer Cantidad de ubicaciones encontradas
      */
-    function extraeUbicacionCaso($idcaso, &$db,
+    function extraeUbicacionCaso($idcaso, &$db, &$idp, &$ndp,
         &$idd, &$ndd, &$idm, &$ndm, &$idc, &$ndc, &$tdu
     ) {
 
         $tot = 0;
-        $q = "SELECT ubicacion.id_departamento, ubicacion.id_municipio, " .
-            " ubicacion.id_clase, " .
-            " departamento.nombre, municipio.nombre, clase.nombre, " .
+        $q = "SELECT ubicacion.id_pais, ubicacion.id_departamento, " .
+            " ubicacion.id_municipio, ubicacion.id_clase, " .
+            " pais.nombre, departamento.nombre, " .
+            " municipio.nombre, clase.nombre, " .
             " tsitio.nombre " .
-            " FROM ubicacion, tsitio, departamento, municipio, clase " .
+            " FROM ubicacion, tsitio, pais, departamento, municipio, clase " .
             " WHERE ubicacion.id_caso='$idcaso' " .
             " AND ubicacion.id_tsitio=tsitio.id " .
+            " AND ubicacion.id_pais=pais.id " .
             " AND ubicacion.id_departamento=departamento.id " .
             " AND ubicacion.id_municipio=municipio.id " .
             " AND ubicacion.id_clase=clase.id " .
+            " AND departamento.id_pais=pais.id " .
+            " AND municipio.id_pais=pais.id " .
             " AND municipio.id_departamento=departamento.id " .
+            " AND clase.id_pais=pais.id " .
             " AND clase.id_departamento=departamento.id " .
             " AND clase.id_municipio=municipio.id " .
-            " ORDER BY departamento.nombre, municipio.nombre, clase.nombre;";
+            " ORDER BY pais.nombre, departamento.nombre, " .
+            " municipio.nombre, clase.nombre;";
         $result = hace_consulta($db, $q);
         while (isset($result) && $result->fetchInto($row)) {
-            $idd[] = $row[0];
-            $idm[] = $row[1];
-            $idc[] = $row[2];
-            $ndd[] = $row[3];
-            $ndm[] = $row[4];
-            $ndc[] = $row[5];
+            $idp[] = $row[0];
+            $idd[] = $row[1];
+            $idm[] = $row[2];
+            $idc[] = $row[3];
+            $ndp[] = $row[4];
+            $ndd[] = $row[5];
+            $ndm[] = $row[6];
+            $ndc[] = $row[7];
+            $tdu[] = $row[8];
+            $tot++;
+        }
+        //echo "OJO tot1=$tot<br>";
+        $q = "SELECT ubicacion.id_pais, ubicacion.id_departamento, " .
+            " ubicacion.id_municipio, " .
+            " pais.nombre, departamento.nombre, municipio.nombre, " .
+            " tsitio.nombre " .
+            " FROM ubicacion, tsitio, pais, departamento, municipio " .
+            " WHERE ubicacion.id_caso='$idcaso' " .
+            " AND ubicacion.id_tsitio=tsitio.id " .
+            " AND ubicacion.id_pais=pais.id " .
+            " AND ubicacion.id_departamento=departamento.id " .
+            " AND ubicacion.id_municipio=municipio.id " .
+            " AND departamento.id_pais=pais.id " .
+            " AND municipio.id_pais=pais.id " .
+            " AND municipio.id_departamento=departamento.id " .
+            " AND ubicacion.id_clase IS NULL " .
+            " ORDER BY pais.nombre, departamento.nombre, municipio.nombre;";
+        $result = hace_consulta($db, $q);
+        while (isset($result) && $result->fetchInto($row)) {
+            $idp[] = $row[0];
+            $idd[] = $row[1];
+            $idm[] = $row[2];
+            $idc[] = null;
+            $ndp[] = $row[3];
+            $ndd[] = $row[4];
+            $ndm[] = $row[5];
+            $ndc[] = '';
             $tdu[] = $row[6];
             $tot++;
         }
-        $q = "SELECT ubicacion.id_departamento, ubicacion.id_municipio, " .
-            " departamento.nombre, municipio.nombre, " .
-            " tsitio.nombre " .
-            " FROM ubicacion, tsitio, departamento, municipio " .
+        //echo "OJO tot2=$tot<br>";
+        $q = "SELECT ubicacion.id_pais, ubicacion.id_departamento, " .
+            " pais.nombre, departamento.nombre, tsitio.nombre " .
+            " FROM ubicacion, tsitio, pais, departamento " .
             " WHERE ubicacion.id_caso='$idcaso' " .
             " AND ubicacion.id_tsitio=tsitio.id " .
+            " AND ubicacion.id_pais=pais.id " .
             " AND ubicacion.id_departamento=departamento.id " .
-            " AND municipio.id_departamento=departamento.id " .
-            " AND ubicacion.id_municipio=municipio.id " .
+            " AND ubicacion.id_municipio IS NULL " .
             " AND ubicacion.id_clase IS NULL " .
-            " ORDER BY departamento.nombre, municipio.nombre;";
+            " AND departamento.id_pais=pais.id " .
+            " ORDER BY pais.nombre, departamento.nombre;";
         $result = hace_consulta($db, $q);
         while (isset($result) && $result->fetchInto($row)) {
-            $idd[] = $row[0];
-            $idm[] = $row[1];
+            $idp[] = $row[0];
+            $idd[] = $row[1];
+            $idm[] = null;
             $idc[] = null;
-            $ndd[] = $row[2];
-            $ndm[] = $row[3];
+            $ndp[] = $row[2];
+            $ndd[] = $row[3];
+            $ndm[] = '';
             $ndc[] = '';
             $tdu[] = $row[4];
             $tot++;
         }
-        $q = "SELECT ubicacion.id_departamento, departamento.nombre, " .
-            " tsitio.nombre " .
-            " FROM ubicacion, tsitio, departamento " .
+        //echo "OJO tot3=$tot<br>";
+        $q = "SELECT ubicacion.id_pais, " .
+            " pais.nombre, tsitio.nombre " .
+            " FROM ubicacion, tsitio, pais " .
             " WHERE ubicacion.id_caso='$idcaso' " .
             " AND ubicacion.id_tsitio=tsitio.id " .
-            " AND ubicacion.id_departamento=departamento.id " .
+            " AND ubicacion.id_pais=pais.id " .
+            " AND ubicacion.id_departamento IS NULL " .
             " AND ubicacion.id_municipio IS NULL " .
             " AND ubicacion.id_clase IS NULL " .
-            " ORDER BY departamento.nombre;";
+            " ORDER BY pais.nombre;";
         $result = hace_consulta($db, $q);
         while (isset($result) && $result->fetchInto($row)) {
-            $idd[] = $row[0];
+            $idp[] = $row[0];
+            $idd[] = null;
             $idm[] = null;
             $idc[] = null;
-            $ndd[] = $row[1];
+            $ndp[] = $row[1];
+            $ndd[] = '';
             $ndm[] = '';
             $ndc[] = '';
             $tdu[] = $row[2];
             $tot++;
         }
+        //echo "OJO tot4=$tot<br>";
+
         return $tot;
     }
 
@@ -278,28 +326,36 @@ class ResConsulta
      */
     function ubicacion_separada_html(&$db, $idcaso)
     {
-        $idd = array(); // Identificaciones
+        $idp = array(); // Identificaciones
+        $idd = array(); 
         $idm = array();
         $idc = array();
-        $ndd = array(); // Nombres
+        $ndp = array(); // Nombres
+        $ndd = array(); 
         $ndm = array();
         $ndc = array();
         $tdu = array();
         ResConsulta::extraeUbicacionCaso(
-            $idcaso,
-            $db, $idd, $ndd, $idm, $ndm, $idc, $ndc, $tdu
+            $idcaso, $db, $idp, $ndp, $idd, $ndd, $idm, $ndm, $idc, $ndc, $tdu
         );
         $seploc = "";
         $vr = "";
         $cdep = "";
         $cmun = "";
         $sep = "";
-        foreach ($ndd as $k => $nd) {
-            $cdep = $sep . htmlentities(trim($nd, ENT_COMPAT, 'UTF-8'), ENT_COMPAT, 'UTF-8');
-            $cmun = $sep . htmlentities(trim($ndm[$k], ENT_COMPAT, 'UTF-8'), ENT_COMPAT, 'UTF-8');
+        foreach ($ndp as $k => $np) {
+            $cpais = $sep . htmlentities(
+                trim($np, ENT_COMPAT, 'UTF-8'), ENT_COMPAT, 'UTF-8'
+            );
+            $cdep = $sep . htmlentities(
+                trim($ndd[$k], ENT_COMPAT, 'UTF-8'), ENT_COMPAT, 'UTF-8'
+            );
+            $cmun = $sep . htmlentities(
+                trim($ndm[$k], ENT_COMPAT, 'UTF-8'), ENT_COMPAT, 'UTF-8'
+            );
             $sep = "<br/>";
         }
-        $vr = "$cmun</td><td valign='top'>$cdep";
+        $vr = "$cmun</td><td valign='top'>$cpais . " / " .$cdep";
         return $vr;
     }
 
@@ -314,21 +370,25 @@ class ResConsulta
      */
     function ubicacion(&$db, $idcaso)
     {
-        $idd = array(); // Identificaciones
+        $idp = array(); // Identificaciones
+        $idd = array(); 
         $idm = array();
         $idc = array();
-        $ndd = array(); // Nombres
+        $ndp = array(); // Nombres
+        $ndd = array(); 
         $ndm = array();
         $ndc = array();
         $tdu = array();
         ResConsulta::extraeUbicacionCaso(
-            $idcaso,
-            $db, $idd, $ndd, $idm, $ndm, $idc, $ndc, $tdu
+            $idcaso, $db, $idp, $ndp, $idd, $ndd, $idm, $ndm, $idc, $ndc, $tdu
         );
         $seploc = "";
         $vr = "";
-        foreach ($ndd as $k => $nd) {
-            $vr .= $seploc . trim($nd);
+        foreach ($ndp as $k => $np) {
+            $vr .= $seploc . trim($np);
+            if ($ndd[$k] != '') {
+                $vr .= " / " . trim($ndd[$k]);
+            }
             if ($ndm[$k] != '') {
                 $vr .= " / " . trim($ndm[$k]);
             }
@@ -2093,25 +2153,31 @@ class ResConsulta
             }
         }
         if (array_key_exists('m_ubicacion', $campos)) {
-            $idd = array(); // Identificaciones
+            $idp = array(); // Identificaciones
+            $idd = array(); 
             $idm = array();
             $idc = array();
-            $ndd = array(); // Nombres
+            $ndp = array(); // Nombres
+            $ndd = array(); 
             $ndm = array();
             $ndc = array();
             $tdu = array();
             ResConsulta::extraeUbicacionCaso(
-                $idcaso,
-                $db, $idd, $ndd, $idm, $ndm, $idc, $ndc, $tdu
+                $idcaso, $db, 
+                $idp, $ndp, $idd, $ndd, $idm, $ndm, $idc, $ndc, $tdu
             );
             $seploc = "";
             $vr = "";
             $idu = ":";
             $cadub = "";
             $arr_ubica_listo = array();
-            foreach ($ndd as $k => $nd) {
-                $vr .= $seploc . trim($nd);
-                $idu .= $idd[$k];
+            foreach ($ndp as $k => $np) {
+                $vr .= $seploc . trim($np);
+                $idu .= $idp[$k];
+                if ($ndd[$k] != '') {
+                    $vr .= $seploc . trim($ndd[$k]);
+                    $idu .= $idd[$k];
+                }
                 if ($ndm[$k] != '') {
                     $vr .= " / ".trim($ndm[$k]);
                     $idu .= ":".$idm[$k];
@@ -2919,10 +2985,12 @@ class ResConsulta
 
         $parche = "";
         if (array_key_exists('m_ubicacion', $campos)) {
-            $idd = array(); // Identificaciones
+            $idp = array(); // Identificaciones
+            $idd = array(); 
             $idm = array();
             $idc = array();
-            $ndd = array(); // Nombres
+            $ndp = array(); // Nombres
+            $ndd = array(); 
             $ndm = array();
             $ndc = array();
             $tdu = array();
@@ -2931,20 +2999,24 @@ class ResConsulta
                 $db, $idd, $ndd, $idm, $ndm, $idc, $ndc, $tdu
             );
             $locs = "";
-            foreach ($ndd as $k => $nd) {
-                $cnd = trim(strip_tags($nd));
+            foreach ($ndp as $k => $np) {
+                $cnp = trim(strip_tags($np));
+                $cnd = trim(strip_tags($ndd[$k]));
                 $cndm = trim(strip_tags($ndm[$k]));
                 if ($numcaso != null) {
-                    $locs .= " - " . prim_may($cnd) . " / " .
+                    $locs .= " - " . prim_may($cnp) . " / " .
+                        prim_may($cnd) . " / " .
                         prim_may($cndm) . " ";
                 } elseif (array_key_exists('m_tipificacion', $campos)) {
-                    $locs= "\n\n" .
-                        a_mayusculas($GLOBALS['etiqueta']['departamento']) .
+                    $locs= "\n\n";
+                    $locs .= a_mayusculas($GLOBALS['etiqueta']['pais']) .
+                        ": " . $cnp . "\n";
+                    $locs .= a_mayusculas($GLOBALS['etiqueta']['departamento']).
                         ": " . $cnd . "\n";
                     $locs .= a_mayusculas($GLOBALS['etiqueta']['municipio']) .
                         ": " .  $cndm;
                 } else {
-                    $locs .= $cnd . " - " . $cndm . "  ";
+                    $locs .= $cnp . " - " . $cnd . " - " . $cndm . "  ";
                 }
             }
             $r .= $locs . "\n";

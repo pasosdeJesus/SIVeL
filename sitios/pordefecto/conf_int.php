@@ -250,6 +250,7 @@ $GLOBALS['etiqueta'] = array(
     'region' => _('Región'),
     'frontera' => _('Frontera'),
 
+    'pais' => _('País'),
     'departamento' => _('Departamento'),
     'municipio' => _('Municipio'),
     'clase' => _('Clase'),

@@ -43,6 +43,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
     var $mesnac;                            // int4(4)
     var $dianac;                            // int4(4)
     var $sexo;                            // varchar(-1)
+    var $id_pais;                            // varchar(-1)
     var $id_departamento;                            // varchar(-1)
     var $id_municipio;                            // varchar(-1)
     var $id_clase;                            // varchar(-1)
@@ -53,8 +54,8 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
     var $fb_preDefOrder = array(
         'nombres', 'apellidos', 'anionac',
-        'mesnac', 'dianac', 'sexo',   'tipodocumento',
-        'numerodocumento','id_departamento', 'id_municipio', 'id_clase'
+        'mesnac', 'dianac', 'sexo',   'tipodocumento', 'numerodocumento',
+        'id_pais','id_departamento', 'id_municipio', 'id_clase'
     );
 
     var $fb_fieldsToRender = array(
@@ -80,6 +81,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             'sexo' => _('Sexo'),
             'tipodocumento' => _('Tipo de Docuento'),
             'numerodocumento' => _('Número de Documento'),
+            'id_pais' => _('Pais'),
             'id_departamento' => _('Departamento'),
             'id_municipio' => _('Municipio'),
             'id_clase'  => _('Clase'),
@@ -443,7 +445,8 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
     function aRelato(&$ar, $dad = array())
     {
         parent::aRelato($ar, $dad);
-        if ($this->id_departamento != null && $this->id_municipio != null) {
+        if ($this->id_pais != null
+            && $this->id_departamento != null && $this->id_municipio != null) {
             $dmun = objeto_tabla('municipio');
             $dmun->id_departamento = $this->id_departamento;
             $dmun->id = $this->id_municipio;

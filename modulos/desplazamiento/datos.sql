@@ -49,4 +49,4 @@ INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('des-e1', '2013-0
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('des-d1', '2013-05-24', 'Datos iniciales');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('des-ext', '2013-06-13', 'Cambio depot EXTERIOR de código 0 a 1000');
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('des-13e', '2013-06-13', 'Renombra expulsión por id_exulsion y llegada por id_llegada');
-
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('des-13p', '2014-02-23', 'Paises');

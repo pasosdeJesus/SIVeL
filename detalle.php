@@ -85,15 +85,18 @@ $f->addElement(
 
 
 if ($f->validate()) {
+    echo "OJO valida 1<br>";
     if (!$d->masValidaciones($f->_submitValues)) {
         echo _("No pasaron validaciones adicionales");
     } else if (!verifica_sin_CSRF($f->_submitValues)) {
         die(_("Datos enviados no pasaron verificación CSRF"));
     } else {
+        echo "OJO valida 2<br>";
         $res = null;
         if (isset($f->_submitValues['actualizar'])
             || isset($f->_submitValues['añadir'])
         ) {
+            echo "OJO valida 3<br>";
             if (isset($f->_submitValues['actualizar'])) {
                 $b->forceQueryType(
                     DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEUPDATE
@@ -103,7 +106,9 @@ if ($f->validate()) {
                     DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
                 );
             }
+            echo "OJO valida 4<br>";
             $res = $f->process(array($b, 'processForm'), false);
+            echo "OJO valida 5<br>"; 
         } else {
             foreach ($f->_submitValues as $k => $v) {
                 $d->$k = $v;

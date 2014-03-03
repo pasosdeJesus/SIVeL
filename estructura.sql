@@ -271,15 +271,18 @@ CREATE SEQUENCE departamento_seq;
 
 
 CREATE TABLE departamento (
-	id INTEGER PRIMARY KEY DEFAULT(nextval('departamento_seq')),
+	id INTEGER NOT NULL DEFAULT(nextval('departamento_seq')),
 	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL,
 	latitud FLOAT,
 	longitud FLOAT,
+	id_pais INTEGER NOT NULL REFERENCES pais,
 	fechacreacion	DATE NOT NULL,
 	fechadeshabilitacion	DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
 		fechadeshabilitacion>=fechacreacion
-	)
+	),
+	-- En llaves múltiples rails retorna según primera parte de la llave
+	PRIMARY KEY (id, id_pais)
 );
 
 
@@ -291,8 +294,8 @@ CREATE SEQUENCE municipio_seq;
 CREATE TABLE municipio (
 	id INTEGER NOT NULL DEFAULT(nextval('municipio_seq')),
 	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL,
-	id_departamento INTEGER NOT NULL REFERENCES departamento 
-	ON DELETE CASCADE,
+	id_pais INTEGER NOT NULL REFERENCES pais,
+	id_departamento INTEGER NOT NULL,
 	latitud FLOAT,
 	longitud FLOAT,
 	fechacreacion	DATE NOT NULL,
@@ -300,7 +303,9 @@ CREATE TABLE municipio (
 		fechadeshabilitacion IS NULL OR 
 		fechadeshabilitacion>=fechacreacion
 	),
-	PRIMARY KEY (id, id_departamento)
+	FOREIGN KEY (id_departamento, id_pais) REFERENCES 
+		departamento (id, id_pais) ON DELETE CASCADE,
+	PRIMARY KEY (id, id_departamento, id_pais)
 );
 
 
@@ -309,8 +314,9 @@ CREATE SEQUENCE clase_seq;
 CREATE TABLE clase (
 	id INTEGER NOT NULL DEFAULT(nextval('clase_seq')),
 	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL,
-	id_departamento INTEGER REFERENCES departamento ON DELETE CASCADE,
-	id_municipio INTEGER,
+	id_pais INTEGER NOT NULL REFERENCES pais,
+	id_departamento INTEGER NOT NULL,
+	id_municipio INTEGER NOT NULL REFERENCES municipio,
 	id_tclase VARCHAR(10) REFERENCES tclase, 
 	latitud FLOAT,
 	longitud FLOAT,
@@ -319,9 +325,11 @@ CREATE TABLE clase (
 		fechadeshabilitacion IS NULL OR 
 		fechadeshabilitacion>=fechacreacion
 	),
-	FOREIGN KEY (id_municipio, id_departamento) REFERENCES 
-		municipio (id, id_departamento) ON DELETE CASCADE,
-	PRIMARY KEY (id, id_municipio, id_departamento)
+	FOREIGN KEY (id_departamento, id_pais) REFERENCES 
+		departamento (id, id_pais) ON DELETE CASCADE,
+	FOREIGN KEY (id_municipio, id_departamento, id_pais) REFERENCES 
+		municipio (id, id_departamento, id_pais) ON DELETE CASCADE,
+	PRIMARY KEY (id, id_municipio, id_departamento, id_pais)
 );
 
 
@@ -504,16 +512,19 @@ CREATE TABLE ubicacion (
 	sitio VARCHAR(500) COLLATE es_co_utf_8,
 	id_clase INTEGER,
 	id_municipio INTEGER,
-	id_departamento INTEGER REFERENCES departamento,
+	id_departamento INTEGER,
+	id_pais INTEGER REFERENCES pais,
 	id_tsitio INTEGER REFERENCES tsitio NOT NULL DEFAULT '1',
 	id_caso INTEGER NOT NULL REFERENCES caso,
 	latitud FLOAT,
 	longitud FLOAT,
 
-	FOREIGN KEY (id_municipio, id_departamento) REFERENCES
-		municipio (id, id_departamento),
-	FOREIGN KEY (id_clase, id_municipio, id_departamento) REFERENCES
-		clase (id, id_municipio, id_departamento)
+	FOREIGN KEY (id_departamento, id_pais) REFERENCES
+		departamento (id, id_pais),
+	FOREIGN KEY (id_municipio, id_departamento,  id_pais) REFERENCES
+		municipio (id, id_departamento, id_pais),
+	FOREIGN KEY (id_clase, id_municipio, id_departamento, id_pais) 
+		REFERENCES clase (id, id_municipio, id_departamento, id_pais) 
 ); 
 
 CREATE SEQUENCE usuario_seq;
@@ -583,12 +594,19 @@ CREATE TABLE persona (
 			(mesnac='2' AND dianac<='29'))
 	),
 	sexo CHAR(1) NOT NULL CHECK (sexo='S' OR sexo='F' OR sexo='M'),
-	id_departamento INTEGER REFERENCES departamento ON DELETE CASCADE,
+	id_pais INTEGER REFERENCES pais ON DELETE CASCADE,
+	id_departamento INTEGER, 
 	id_municipio    INTEGER,
 	id_clase        INTEGER,
 	-- Verificar en interfaz
 	tipodocumento VARCHAR(2),
-	numerodocumento BIGINT
+	numerodocumento BIGINT,
+	FOREIGN KEY (id_departamento, id_pais) REFERENCES 
+		departamento(id, id_pais),
+	FOREIGN KEY (id_municipio, id_departamento, id_pais) REFERENCES 
+		municipio(id, id_departamento, id_pais),
+	FOREIGN KEY (id_clase, id_municipio, id_departamento, id_pais)
+       		REFERENCES clase(id, id_municipio, id_departamento, id_pais)
 );
 
 CREATE INDEX persona_nombres_apellidos ON persona 

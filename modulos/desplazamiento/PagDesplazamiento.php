@@ -158,11 +158,16 @@ class PagDesplazamiento extends PagBaseMultiple
             $this->tcorto = $GLOBALS['etiqueta']['Desplazamiento'];
         }
         $this->addAction(
-            'departamentodecl', new CamDepartamento('departamentodecl')
+            'paisdecl', new CamPais('paisdecl')
+        );
+        $this->addAction(
+            'departamentodecl', new CamDepartamento(
+                'paisdecl', 'departamentodecl'
+            )
         );
         $this->addAction(
             'municipiodecl',
-            new CamMunicipio('departamentodecl', 'municipiodecl')
+            new CamMunicipio('paisdecl', 'departamentodecl', 'municipiodecl')
         );
         $this->addAction('siguiente', new Siguiente());
         $this->addAction('anterior', new Anterior());
@@ -186,9 +191,10 @@ class PagDesplazamiento extends PagBaseMultiple
             ? $this->bdesplazamiento->_do->fechaexpulsion : '';
         $this->addElement('');
 
-        list($dep, $mun, $cla) = PagUbicacion::creaCampos(
-            $this, 'departamentodecl', 'municipiodecl', 'clasedecl'
+        list($pais, $dep, $mun, $cla) = PagUbicacion::creaCampos(
+            $this, 'paisdecl', 'departamentodecl', 'municipiodecl', 'clasedecl'
         );
+        $gr[] =& $pais;
         $gr[] =& $dep;
         $gr[] =& $mun;
 
@@ -197,7 +203,9 @@ class PagDesplazamiento extends PagBaseMultiple
             $gr, 'sitiodeclaracion', _('Declaro en'), '&nbsp;', false
         );
         PagUbicacion::modCampos(
-            $db, $this, 'departamentodecl', 'municipiodecl', null,
+            $db, $this, 'paisdecl', 'departamentodecl', 'municipiodecl', 
+            null, 
+            $this->bdesplazamiento->_do->paisdecl,
             $this->bdesplazamiento->_do->departamentodecl,
             $this->bdesplazamiento->_do->municipiodecl,
             null
@@ -240,12 +248,15 @@ class PagDesplazamiento extends PagBaseMultiple
             );
         } else {
             $e =& $this->getElement('sitiodeclaracion');
-            $dep =& $e->_elements[0];
-            $mun =& $e->_elements[1];
+            $pais =& $e->_elements[1];
+            $dep =& $e->_elements[1];
+            $mun =& $e->_elements[2];
             PagUbicacion::valoresUbicacion(
-                $this, $this->bdesplazamiento->_do->departamentodecl,
+                $this, $this->bdesplazamiento->_do->paisdecl,
+                $this->bdesplazamiento->_do->departamentodecl,
                 $this->bdesplazamiento->_do->municipiodecl, null,
-                $dep, $mun, null, 'departamentodecl', 'municipiodecl'
+                $pais, $dep, $mun, null, 'paisdecl', 'departamentodecl', 
+                'municipiodecl'
             );
         }
     }

@@ -42,6 +42,7 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     var $id_clase;                        // int4(4)
     var $id_municipio;                    // int4(4)
     var $id_departamento;                 // int4(4)
+    var $id_pais;                 // int4(4)
     var $id_tsitio;                   // varchar(-1)
     var $id_caso;                         // varchar(-1)
     var $latitud;
@@ -50,11 +51,11 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
 
 
     var $fb_linkDisplayFields = array(
-        'id_municipio,id_departamento', 'id_departamento', 'lugar'
+        'id_municipio,id_departamento,id_pais', 'id_departamento,id_pais', 'lugar'
     );
     var $fb_linkDisplayLevel = 0;
     var $fb_preDefOrder = array(
-        'id_departamento', 'id_municipio', 'id_clase',
+        'id_pais', 'id_departamento', 'id_municipio', 'id_clase',
         'lugar', 'sitio', 'latitud', 'longitud', 'id_tsitio'
     );
     var $fb_fieldsToRender = array(
@@ -72,6 +73,7 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
         parent::__construct();
 
         $this->fb_fieldLabels= array(
+            'id_pais' => _('País'),
             'id_departamento' => _('Departamento'),
             'id_municipio' => _('Municipio'),
             'id_clase' => _('Centro Poblado'),
@@ -190,6 +192,12 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
             $e->setMaxlength(200);
         }
         $e =& $form->getElement('id');
+        $pais =& $form->createElement(
+            'select', 'id_pais',
+            $GLOBALS['etiqueta']['pais'],
+            array()
+        );
+        $form->insertElementBefore($pais, 'lugar');
         $dep =& $form->createElement(
             'select', 'id_departamento',
             $GLOBALS['etiqueta']['departamento'],
@@ -223,33 +231,40 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     function aRelato(&$ar, $dad = array())
     {
         parent::aRelato($ar, $dad);
+        $p = '';
+        if (isset($this->id_pais)) {
+            $op = $this->getLink('id_pais');
+            $p = $op->nombre;
+        }
+        $ar['pais'] = $p;
         $d = '';
         if (isset($this->id_departamento)) {
-            $od = $this->getLink('id_departamento');
+            $od = objeto_tabla('departamento');
+            $od->id_pais = $this->id_pais;
+            $od->id = $this->id_departamento;
+            $od->find(1);
             $d = $od->nombre;
         }
         $ar['departamento'] = $d;
         $m = '';
         if (isset($this->id_municipio)) {
             $om = objeto_tabla('municipio');
+            $om->id_pais = $this->id_pais;
             $om->id_departamento = $this->id_departamento;
             $om->id = $this->id_municipio;
-            $om->find();
-            if ($om->fetch()) {
-                $m = $om->nombre;
-            }
+            $om->find(1);
+            $m = $om->nombre;
         }
         $ar['municipio'] = $m;
         $c = '';
         if (isset($this->id_municipio) && isset($this->id_clase)) {
             $oc = objeto_tabla('clase');
+            $oc->id_pais = $this->id_pais;
             $oc->id_departamento = $this->id_departamento;
             $oc->id_municipio = $this->id_municipio;
             $oc->id = $this->id_clase;
-            $oc->find();
-            if ($oc->fetch()) {
-                $c = $oc->nombre;
-            }
+            $oc->find(1);
+            $c = $oc->nombre;
         }
         $ar['centro_poblado'] = $c;
         return $ar;

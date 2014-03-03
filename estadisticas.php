@@ -76,15 +76,18 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $pMuestra   = var_post_escapa('muestra');
         $pMunicipio = (int)var_post_escapa('municipio');
         $pDepartamento = (int)var_post_escapa('departamento');
+        $pPais = (int)var_post_escapa('pais');
         $pSinCatRepetidas = var_post_escapa('sin_cat_repetidas');
 
         //verifica_sin_CSRF($page->_submitValues);
 
         $tGeo = '';
         if ($pMunicipio != '') {
-            $tGeo = 'departamento, municipio, ';
+            $tGeo = 'pais, departamento, municipio, ';
         } elseif ($pDepartamento != '') {
-            $tGeo = 'departamento, ';
+            $tGeo = 'pais, departamento, ';
+        } elseif ($pPais != '') {
+            $tGeo = 'pais, ';
         }
         $cons = 'cons';
         $cons2="cons2";
@@ -180,6 +183,13 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $cab = array();
         if ($titSegun != "") {
             $cab[] = $titSegun;
+        }
+        $tPais = $gPais = "";
+        if ($pPais == "1") {
+            $tPais = "pais.id, trim(pais.nombre), ";
+            $gPais = "pais.id, pais.nombre, ";
+            $cab[] = _('C. País');
+            $cab[] = _('País');
         }
         $tDep = $gDep = "";
         if ($pDepartamento == "1") {
@@ -293,16 +303,16 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
 
         $q2="CREATE VIEW $cons2 ($cCons, id_tviolencia, " .
             "id_supracategoria, id_categoria" . $pSegun2 .
-            ", id_departamento, id_municipio) ";
+            ", id_pais, id_departamento, id_municipio) ";
         $q2 .= "AS SELECT $cons.$cCons, id_tviolencia, " .
             "id_supracategoria, id_categoria" . $pSegun2 .
-            ", ubicacion.id_departamento, ubicacion.id_municipio FROM " .
+            ", ubicacion.id_pais, ubicacion.id_departamento, ubicacion.id_municipio FROM " .
             "ubicacion, $cons " .
             "WHERE $cons.id_caso = ubicacion.id_caso "
             ;
         //echo "q2=$q2<br>";
         $result = hace_consulta($db, $q2);
-        $q3="SELECT $cfSegun3 $tDep $tMun trim(tviolencia.nombre), " .
+        $q3="SELECT $cfSegun3 $tPais $tDep $tMun trim(tviolencia.nombre), " .
             "trim(supracategoria.nombre), trim(categoria.nombre), " .
             "count($cons2.$cCons) FROM
         $tGeo $tablaSegun tviolencia,
@@ -313,17 +323,22 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         AND $cons2 . id_tviolencia = categoria.id_tviolencia
         AND $cons2 . id_supracategoria = categoria.id_supracategoria
         AND $cons2 . id_categoria = categoria.id ";
+        if ($pPais == "1"  || $pDepartamento == "1" || $pMunicipio == "1") {
+            $q3 .= " AND pais.id=$cons2.id_pais ";
+        }
         if ($pDepartamento == "1"  || $pMunicipio == "1") {
+            $q3 .= " AND departamento.id_pais=$cons2.id_pais ";
             $q3 .= " AND departamento.id=$cons2.id_departamento ";
         }
         if ($pMunicipio == "1") {
+            $q3 .= " AND municipio.id_pais=$cons2.id_pais ";
             $q3 .= " AND municipio.id=$cons2.id_municipio ";
             $q3 .= " AND municipio.id_departamento=$cons2.id_departamento ";
         }
         $q3 .= " $condSegun
-            GROUP BY $cfSegun2 $gDep $gMun tviolencia.nombre,
+            GROUP BY $cfSegun2 $gPais $gDep $gMun tviolencia.nombre,
             supracategoria.nombre, categoria.nombre
-            ORDER BY $cfSegun2 $gDep $gMun tviolencia.nombre,
+            ORDER BY $cfSegun2 $gPais $gDep $gMun tviolencia.nombre,
             supracategoria.nombre, categoria.nombre
             ";
 
@@ -570,6 +585,13 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
 
         $ae = array();
         $sel =& $this->createElement(
+            'checkbox', 'pais', 'País', _('País')
+        );
+        $sel->setValue(true);
+        $ae[] =& $sel;
+
+
+        $sel =& $this->createElement(
             'checkbox', 'departamento', 'Departamento', _('Departamento')
         );
         $sel->setValue(true);
@@ -580,6 +602,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
         );
         $sel->setValue(true);
         $ae[] =& $sel;
+
         $this->addGroup($ae, null, _('Ubicación'), '&nbsp;', false);
 
         $sel =& $this->addElement(

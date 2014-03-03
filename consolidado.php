@@ -166,6 +166,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         $pIdClase   = (int)var_post_escapa('id_clase');
         $pIdMunicipio = (int)var_post_escapa('id_municipio', $db);
         $pIdDepartamento = (int)var_post_escapa('id_departamento', $db);
+        $pIdPais = (int)var_post_escapa('id_pais', $db);
 
         $campos = array('caso_id' => 'Cód.');
         $tablas = "persona, victima, caso, acto ";
@@ -220,6 +221,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         if ($pIdClase != '') {
             $tgeo = "ubicacion, ";
             consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
+            consulta_and_sinap($where, "ubicacion.id_pais", $pIdPais);
             consulta_and_sinap(
                 $where, "ubicacion.id_departamento", $pIdDepartamento
             );
@@ -228,6 +230,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         } else if ($pIdMunicipio != '') {
             $tgeo = "ubicacion, ";
             consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
+            consulta_and_sinap($where, "ubicacion.id_pais", $pIdPais);
             consulta_and_sinap(
                 $where, "ubicacion.id_departamento", $pIdDepartamento
             );
@@ -235,6 +238,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         } else if ($pIdDepartamento != '') {
             $tgeo = "ubicacion, ";
             consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
+            consulta_and_sinap($where, "ubicacion.id_pais", $pIdPais);
             consulta_and_sinap(
                 $where, "ubicacion.id_departamento", $pIdDepartamento
             );
@@ -417,16 +421,31 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 );
             }
             $u->fetch();
-            $d = $u->getLink('id_departamento');
-            $ubi = trim($d->nombre);
+            $p =& $u->getLink('id_pais');
+            $ubi = trim($p->nombre);
+            if (isset($u->id_departamento)) {
+                $d =&  objeto_tabla('municipio');
+                $d->id = $u->id_municipio;
+                $d->id_pais = $u->id_pais;
+                if ($d->find()==0) {
+                    die(sprintf(
+                        "El caso %s referencia departamento inexistente %s",
+                        $idcaso, $d->id . ", " . $d->id_pais
+                    ));
+                }
+                $d->fetch();
+                $ubi .= " - ".trim($d->nombre);
+            }
             if (isset($u->id_municipio)) {
                 $m =&  objeto_tabla('municipio');
                 $m->id = $u->id_municipio;
                 $m->id_departamento = $u->id_departamento;
+                $m->id_pais = $u->id_pais;
                 if ($m->find()==0) {
                     die(sprintf(
                         "El caso %s referencia municipio inexistente %s",
-                        $idcaso, $m->id . ", " . $m->id_departamento
+                        $idcaso, "{$m->id}, {$m->id_departamento}, " .
+                        "{$m->id_pais}"
                     ));
                 }
                 $m->fetch();
@@ -574,6 +593,7 @@ class PagConsolidado extends HTML_QuickForm_Page
     {
         $this->HTML_QuickForm_Page('consolidado', 'post', '_self', null);
 
+        $this->addAction('id_pais', new CamPais());
         $this->addAction('id_departamento', new CamDepartamento());
         $this->addAction('id_municipio', new CamMunicipio());
 
@@ -597,15 +617,17 @@ class PagConsolidado extends HTML_QuickForm_Page
 
         $e =& $this->addElement('header', null, _('Reporte consolidado'));
 
-        list($dep, $mun, $cla) = PagUbicacion::creaCampos(
-            $this, 'id_departamento', 'id_municipio', 'id_clase'
+        list($pais, $dep, $mun, $cla) = PagUbicacion::creaCampos(
+            $this, 'id_pais', 'id_departamento', 'id_municipio', 'id_clase'
         );
+        $this->addElement($pais);
         $this->addElement($dep);
         $this->addElement($mun);
         $this->addElement($cla);
         PagUbicacion::modCampos(
-            $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
-            null, null, null
+            $db, $this, 
+            'id_pais', 'id_departamento', 'id_municipio', 'id_clase',
+            null, null, null, null
         );
 
         $cy = @date('Y');

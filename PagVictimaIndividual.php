@@ -270,6 +270,7 @@ class PagVictimaIndividual extends PagBaseMultiple
             $this->tcorto = $GLOBALS['etiqueta']['Victimas Individuales'];
         }
 
+        $this->addAction('id_pais', new CamPais());
         $this->addAction('id_departamento', new CamDepartamento());
         $this->addAction('id_municipio', new CamMunicipio());
 
@@ -304,10 +305,11 @@ class PagVictimaIndividual extends PagBaseMultiple
         $this->bpersona->useForm($this);
         $this->bpersona->getForm($this);
 
-        list($dep, $mun, $cla) = PagUbicacion::creaCampos(
-            $this, 'id_departamento', 'id_municipio', 'id_clase'
+        list($pais, $dep, $mun, $cla) = PagUbicacion::creaCampos(
+            $this, 'id_pais', 'id_departamento', 'id_municipio', 'id_clase'
         );
         $gr = array();
+        $gr[] =& $pais;
         $gr[] =& $dep;
         $gr[] =& $mun;
         $gr[] =& $cla;
@@ -317,7 +319,9 @@ class PagVictimaIndividual extends PagBaseMultiple
             '&nbsp;', false
         );
         PagUbicacion::modCampos(
-            $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
+            $db, $this, 
+            'id_pais', 'id_departamento', 'id_municipio', 'id_clase',
+            $this->bpersona->_do->id_pais,
             $this->bpersona->_do->id_departamento,
             $this->bpersona->_do->id_municipio,
             $this->bpersona->_do->id_clase
@@ -388,14 +392,16 @@ class PagVictimaIndividual extends PagBaseMultiple
             $dcaso->get($idcaso);
 
             $e =& $this->getElement('procedencia');
-            $dep =& $e->_elements[0];
-            $mun =& $e->_elements[1];
-            $cla =& $e->_elements[2];
+            $pais =& $e->_elements[0];
+            $dep =& $e->_elements[1];
+            $mun =& $e->_elements[2];
+            $cla =& $e->_elements[3];
             PagUbicacion::valoresUbicacion(
-                $this, $this->bpersona->_do->id_departamento,
+                $this, $this->bpersona->_do->id_pais,
+                $this->bpersona->_do->id_departamento,
                 $this->bpersona->_do->id_municipio,
                 $this->bpersona->_do->id_clase,
-                $dep, $mun, $cla
+                $pais, $dep, $mun, $cla
             );
 
             $fmes = $this->bpersona->_do->mesnac;

@@ -31,7 +31,7 @@ SELECT setval('sectorsocial_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT M
 SELECT setval('tsitio_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM tsitio) AS s;
 SELECT setval('ubicacion_seq', MAX(id)) FROM ubicacion;
 SELECT setval('usuario_seq', MAX(id)) FROM ubicacion;
-SELECT setval('victima_seq', MAX(id)) FROM ubicacion;
+SELECT setval('victima_seq', MAX(id)) FROM victima;
 SELECT setval('vinculoestado_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM vinculoestado) AS s;
 SELECT setval('vinculoestado_seq', MAX(id)) FROM (SELECT 100 as id UNION SELECT MAX(id) FROM vinculoestado) AS s;
 

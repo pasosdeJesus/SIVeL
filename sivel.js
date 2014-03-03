@@ -215,15 +215,67 @@ function poneCoord(par) {
     }
 }
 
+/**
+ * Completa departamento
+ */
+function llenaDepartamento(idpais, iddep, idmun, idcla, sincoord) {
+    var pais = $("#" + idpais).val();
+    var par = { 
+        tabla: 'departamento',
+        id_pais: pais,
+    };
+    if (+pais > 0) {
+        var x = $.getJSON("json_busca.php", par);
+        x.done(function( data ) {
+            var op = '<option value=""></option>';
+            $.each( data, function ( i, item ) {
+                op += '<option value="' 
+                + item.id + '">' + item.nombre
+                + '</option>';
+            });
+            $("#" + iddep ).html(op);
+            $("#" + idmun ).html('');
+            $("#" + idcla).html('');
+        });
+        x.error(function(m1, m2, m3) {
+            alert(
+                'Problema leyendo Departamentos de ' + pais + ' ' + m1 + ' ' 
+                + m2 + ' ' + m3
+                );
+        });
+        par = { 
+            tabla: 'pais',
+            id: pais
+        };
+        if (sincoord !== true) {
+            poneCoord(par);
+        }
+        $("#" + iddep).attr("disabled", false);
+    } else  {
+        $("#" + iddep).val("");
+        $("#" + iddep).attr("disabled", true);
+    }
+    if (idmun != '') {
+        $("#" + idmun).val("");
+        $("#" + idmun).attr("disabled", true);
+    }
+    if (idcla != '') {
+        $("#" + idcla).val("");
+        $("#" + idcla).attr("disabled", true);
+    }
+}
+
 
 /**
  * Completa municipio
  * Basada en función de Luca Urech <lucaurech@yahoo.de>
  */
-function llenaMunicipio(iddep, idmun, idcla, sincoord) {
+function llenaMunicipio(idpais, iddep, idmun, idcla, sincoord) {
+	var pais = +$("#" + idpais).val();
     var dep = $("#" + iddep).val();
     var par = { 
         tabla: 'municipio',
+        id_pais: pais,
         id_departamento: dep,
     };
     if (+dep > 0) {
@@ -246,6 +298,7 @@ function llenaMunicipio(iddep, idmun, idcla, sincoord) {
         });
         par = { 
             tabla: 'departamento',
+            id_pais: pais,
             id: dep
         };
         if (sincoord !== true) {
@@ -266,11 +319,13 @@ function llenaMunicipio(iddep, idmun, idcla, sincoord) {
 /** 
  * Completa cuadro de selección para clase de acuerdo a depto y mcpio.
  */
-function llenaClase(iddep, idmun, idcla, sincoord) {
+function llenaClase(idpais, iddep, idmun, idcla, sincoord) {
+	var pais = +$("#" + idpais).val();
 	var dep = +$("#" + iddep).val();
 	var mun = +$("#" + idmun).val();
 	var par = { 
         tabla: 'clase',
+        id_pais: pais,
 		id_departamento: dep,
 		id_municipio: mun,
        	};
@@ -289,13 +344,14 @@ function llenaClase(iddep, idmun, idcla, sincoord) {
 	});
     par = { 
         tabla: 'municipio',
+        id_pais: pais,
         id_departamento: dep,
         id: mun,
     };
     if (sincoord !== true) {
         poneCoord(par);
     }
-	if (dep == 0 || mun == 0) {
+	if (pais == 0 || dep == 0 || mun == 0) {
 		$("#" + idcla).attr("disabled", true);
 	} else {
 		$("#" + idcla).attr("disabled", false);

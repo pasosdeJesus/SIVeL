@@ -56,6 +56,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
     var $declaro;
     var $hechosdeclarados;
     var $fechadeclaracion;
+    var $paisdecl;
     var $departamentodecl;
     var $municipiodecl;
     var $id_declaroante;
@@ -94,6 +95,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
             'declaro' => _('Declaró'),
             'hechosdeclarados' => _('Hechos Declarados'),
             'fechadeclaracion' => _('Fecha de Declaración'),
+            'paisdecl' => _('País Declaración'),
             'departamentodecl' => _('Departamento Declaración'),
             'municipiodecl' => _('Municipio Declaración'),
             'id_declaroante' => _('Declaro Ante'),
@@ -261,17 +263,30 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
 
         $s =& $form->getElement('id_expulsion');
         $s->_options = array();
-        $q = "SELECT ubicacion.id, trim(departamento.nombre || ', ' || lugar)
-            FROM ubicacion, departamento
+        $q = "
+            SELECT ubicacion.id, trim(pais.nombre || ', ' || lugar)
+            FROM ubicacion, pais
+            WHERE ubicacion.id_caso = '$idcaso'
+            AND ubicacion.id_municipio IS NULL
+            AND ubicacion.id_departamento IS NULL
+            AND ubicacion.id_pais = pais.id
+            UNION SELECT ubicacion.id, trim(departamento.nombre || 
+            ', ' || pais.nombre || ', ' || lugar)
+            FROM ubicacion, departamento, pais
             WHERE ubicacion.id_caso = '$idcaso'
             AND ubicacion.id_municipio IS NULL
             AND ubicacion.id_departamento = departamento.id
+            AND ubicacion.id_pais = pais.id
+            AND departamento.id_pais = pais.id
             UNION SELECT ubicacion.id, trim(municipio.nombre || ', '
-            || departamento.nombre || ', ' || lugar)
-            FROM ubicacion, departamento, municipio
+            || departamento.nombre || ', ' || pais.nombre || ', ' || lugar)
+            FROM ubicacion, pais, departamento, municipio
             WHERE ubicacion.id_caso = '$idcaso'
+            AND ubicacion.id_pais = pais.id
             AND ubicacion.id_municipio = municipio.id
             AND ubicacion.id_departamento = municipio.id_departamento
+            AND departamento.id_pais = pais .id
+            AND municipio.id_pais = pais .id
             AND municipio.id_departamento = departamento.id";
         $op = $db->getAssoc($q);
         sin_error_pear($op);

@@ -34,9 +34,10 @@ require_once 'DataObjects/Basica.php';
 class DataObjects_Clase extends DataObjects_Basica
 {
     var $__table = 'clase';                           // table name
+    var $id_pais;                    // int4(4)  multiple_key
+    var $id_departamento;                    // int4(4)  multiple_key
     var $id_municipio;                    // int4(4)  multiple_key
     var $id_tclase;                   // varchar(-1)
-    var $id_departamento;                 // int4(4)  multiple_key
     var $latitud;
     var $longitud;
 
@@ -51,6 +52,7 @@ class DataObjects_Clase extends DataObjects_Basica
         $this->nom_tabla = _('Clase');
         $this->fb_fieldLabels = array(
             'nombre' => _('Nombre'),
+            'id_pais' => _('País'),
             'id_departamento' => _('Departamento'),
             'id_municipio'=> _('Municipio'),
             'id_tclase'=> _('Tipo Clase'),
@@ -64,23 +66,21 @@ class DataObjects_Clase extends DataObjects_Basica
 
 
     var $fb_select_display_field = 'nombre';
-    var $fb_linkDisplayFields = array('nombre', 'id_departamento',
-        'id_municipio'
+    var $fb_linkDisplayFields = array(
+        'nombre', 'id_municipio', 'id_departamento', 'id_pais'
     );
     var $fb_preDefOrder = array(
-        'nombre', 'id_departamento', 'id_municipio',
-        'id_tclase',
-        'fechacreacion',
-        'fechadeshabilitacion',
+        'nombre', 'id_pais', 'id_departamento', 'id_municipio',
+        'id_tclase', 'fechacreacion', 'fechadeshabilitacion',
     );
     var $fb_fieldsToRender = array(
-        'nombre', 'id_municipio',
-        'id_tclase',
-        'fechacreacion',
+        'nombre', 'id_pais', 'id_municipio',
+        'id_tclase', 'fechacreacion', 
         'fechadeshabilitacion',
     );
     var $fb_hidePrimaryKey = false;
 
+    var $fb_linkDisplayLevel = 4;
 
     /**
      * Convierte valor de base a formulario.
@@ -91,7 +91,8 @@ class DataObjects_Clase extends DataObjects_Basica
      */
     function getid_municipio(&$valor)
     {
-        $valor = $this->id_municipio."-" . $this->id_departamento;
+        $valor = $this->id_municipio. "-" . 
+            $this->id_departamento . "-" . $this->id_pais;
         return $valor;
     }
 
@@ -110,6 +111,7 @@ class DataObjects_Clase extends DataObjects_Basica
         $v = explode("-", $valor);
         $this->id_municipio = $v[0];
         $this->id_departamento = $v[1];
+        $this->id_pais = $v[2];
     }
 
     /**
@@ -130,25 +132,34 @@ class DataObjects_Clase extends DataObjects_Basica
         $db = $this->getDatabaseConnection();
         $result = hace_consulta(
             $db, "SELECT municipio.id, municipio.id_departamento, " .
-            "municipio.nombre, departamento.nombre " .
-            "FROM municipio, departamento " .
+            " municipio.id_pais, " .
+            "municipio.nombre, departamento.nombre, pais.nombre " .
+            "FROM municipio, departamento, pais " .
             " WHERE id_departamento=departamento.id " .
-            " ORDER BY municipio.nombre, departamento.nombre"
+            " AND municipio.id_pais = pais.id " .
+            " AND departamento.id_pais = pais.id " .
+            " ORDER BY municipio.nombre, departamento.nombre, pais.nombre"
         );
         $options = array();
         $row = array();
         while ($result != null && !PEAR::isError($result)
             && $result->fetchInto($row)
         ) {
-            $options[$row[0] . "-" . $row[1]] = $row[2] . " (" . $row[3] . ")";
+            $options["{$row[0]}-{$row[1]}-{$row[2]}"] = 
+                "{$row[3]} ({$row[4]} - {$row[5]})";
         }
-        $k = $this->id_municipio . "-" . $this->id_departamento;
+        $k = $this->id_municipio . "-" . $this->id_departamento . "-" .
+            $this->id_pais;
         $s->loadArray($options, $k);
 
         $this->fb_preDefElements = array('id_municipio' => $s,
             'id_departamento' => HTML_QuickForm::createElement(
                 'hidden',
                 'id_departamento'
+            ),
+            'id_pais' => HTML_QuickForm::createElement(
+                'hidden',
+                'id_pais'
             ),
             'id' => HTML_QuickForm::createElement('hidden', 'id')
         );
@@ -168,7 +179,8 @@ class DataObjects_Clase extends DataObjects_Basica
 
         if (isset($this->id_municipio)) {
             $h =& $form->getElement('id_municipio');
-            $k= $this->id_municipio."-" . $this->id_departamento;
+            $k= $this->id_municipio."-" . $this->id_departamento . "-" .
+                $this->id_pais;
             $h->setValue($k);
         }
     }

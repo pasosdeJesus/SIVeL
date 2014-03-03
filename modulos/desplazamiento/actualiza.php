@@ -77,6 +77,38 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Renombra campos');
 }
 
+$idac = 'des-13p';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "ALTER TABLE desplazamiento ADD COLUMN 
+        paisdecl INTEGER REFERENCES pais", false
+    );
+    hace_consulta(
+        $db, "UPDATE desplazamiento SET paisdecl = '170'"
+    );
+    hace_consulta(
+        $db, "ALTER TABLE desplazamiento
+        DROP CONSTRAINT desplazamiento_departamentodecl_fkey CASCADE", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE desplazamiento
+        ADD CONSTRAINT desplazamiento_departamentodecl_fkey 
+        FOREIGN KEY(paisdecl, departamentodecl) 
+        REFERENCES departamento(id_pais, id)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE desplazamiento
+        DROP CONSTRAINT desplazamiento_municipiodecl_fkey", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE desplazamiento
+        ADD CONSTRAINT desplazamiento_municipiodecl_fkey 
+        FOREIGN KEY(paisdecl, departamentodecl, municipiodecl) 
+        REFERENCES municipio(id_pais, id_departamento, id)", false
+    );
+    aplicaact($act, $idac, 'Pais');
+}
+
 
 echo "Actualizando indices<br>";
 actualiza_indice($db, 'clasifdesp');

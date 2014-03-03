@@ -84,6 +84,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         $pIdClase   = (int)var_req_escapa('id_clase', $db);
         $pIdMunicipio   = (int)var_req_escapa('id_municipio', $db);
         $pIdDepartamento= (int)var_req_escapa('id_departamento', $db);
+        $pIdPais = (int)var_req_escapa('id_pais', $db);
         $pClasificacion = var_req_escapa('clasificacion', $db);
         $pPresponsable  = (int)var_req_escapa('presponsable', $db);
         $pSsocial   = (int)var_req_escapa('ssocial', $db);
@@ -265,10 +266,9 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 }
             }
         }
-
-
         if ($pIdClase != '') {
             consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
+            consulta_and( $db, $where, "ubicacion.id_pais", $pIdPais);
             consulta_and(
                 $db, $where, "ubicacion.id_departamento", $pIdDepartamento
             );
@@ -277,6 +277,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             $tablas .= ", ubicacion ";
         } else if ($pIdMunicipio != '') {
             consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
+            consulta_and( $db, $where, "ubicacion.id_pais", $pIdPais);
             consulta_and(
                 $db, $where, "ubicacion.id_departamento", $pIdDepartamento
             );
@@ -284,9 +285,14 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             agrega_tabla($tablas, 'ubicacion');
         } else if ($pIdDepartamento != '') {
             consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
+            consulta_and( $db, $where, "ubicacion.id_pais", $pIdPais);
             consulta_and(
                 $db, $where, "ubicacion.id_departamento", $pIdDepartamento
             );
+            agrega_tabla($tablas, 'ubicacion');
+        } else if ($pIdPais != '') {
+            consulta_and_sinap($where, "ubicacion.id_caso", "caso.id");
+            consulta_and( $db, $where, "ubicacion.id_pais", $pIdPais);
             agrega_tabla($tablas, 'ubicacion');
         }
         if ($pConcoordenadas) {
@@ -513,6 +519,10 @@ class ConsultaWeb extends HTML_QuickForm_Page
         );
         $sel->setSize(80);
 
+        $pais =& $this->addElement(
+            'select', 'id_pais',
+            _('País') . ': ', array()
+        );
         $dep =& $this->addElement(
             'select', 'id_departamento',
             _('Departamento') . ': ', array()
@@ -526,6 +536,8 @@ class ConsultaWeb extends HTML_QuickForm_Page
             'select', 'id_clase',
             _('Centro Poblado') . ': ', array()
         );
+        $vpais = isset($this->_submitValues['id_pais']) ?
+           $this->_submitValues['id_pais'] : null;
         $vdep = isset($this->_submitValues['id_departamento']) ?
            $this->_submitValues['id_departamento'] : null;
         $vmun = isset($this->_submitValues['id_municipio']) ?
@@ -533,8 +545,9 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $vcla = isset($this->_submitValues['id_clase']) ?
            $this->_submitValues['id_clase'] : null;
         PagUbicacion::modCampos(
-            $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
-            $vdep, $vmun, $vcla
+            $db, $this, 
+            'id_pais', 'id_departamento', 'id_municipio', 'id_clase',
+            $vpais, $vdep, $vmun, $vcla
         );
 
         $sel =& $this->addElement(

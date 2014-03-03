@@ -43,7 +43,7 @@ function muestra()
         . " || ' ' || unaccent(persona.apellidos)) @@ "
         . "to_tsquery('spanish', '$consNomvic')";
     $q = "SELECT id, nombres, apellidos, anionac, mesnac, dianac, "
-        . "sexo, id_departamento, id_municipio, id_clase, "
+        . "sexo, id_pais, id_departamento, id_municipio, id_clase, "
         . "tipodocumento, numerodocumento "
         . " FROM persona "
         . " WHERE " . $where

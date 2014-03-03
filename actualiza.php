@@ -1039,7 +1039,7 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'id en tabla victima es identificación'); 
 }
 
-$idac = '1.3-geo';
+$idac = '1.3-pa';
 if (!aplicado($idac)) {
     
     hace_consulta($db, 'CREATE SEQUENCE pais_seq', false);
@@ -1061,257 +1061,344 @@ if (!aplicado($idac)) {
                 OR fechadeshabilitacion >= fechacreacion)
         );", false
     );
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('1', 'AFGANISTÁN', 'AFGANISTAN', 'AF', 'AFG', '4', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('2', 'ÅLAND', 'ISLAS ÅLAND', 'AX', 'ALA', '248', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('3', 'ALBANIA', 'ALBANIA', 'AL', 'ALB', '8', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('4', 'ALEMANIA', 'ALEMANIA', 'DE', 'DEU', '276', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('5', 'ANDORRA', 'ANDORRA', 'AD', 'AND', '20', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('6', 'ANGOLA', 'ANGOLA', 'AO', 'AGO', '24', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('7', 'ANGUILA', 'ANGUILA', 'AI', 'AIA', '660', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('8', 'ANTÁRTIDA', 'ANTARTIDA', 'AQ', 'ATA', '10', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('9', 'ANTIGUA Y BARBUDA', 'ANTIGUA Y BARBUDA', 'AG', 'ATG', '28', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('10', 'ARABIA SAUDITA', 'ARABIA SAUDITA', 'SA', 'SAU', '682', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('11', 'ARGELIA', 'ARGELIA', 'DZ', 'DZA', '12', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('12', 'ARGENTINA', 'ARGENTINA', 'AR', 'ARG', '32', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('13', 'ARMENIA', 'ARMENIA', 'AM', 'ARM', '51', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('14', 'ARUBA', 'ARUBA', 'AW', 'ABW', '533', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('15', 'AUSTRALIA', 'AUSTRALIA', 'AU', 'AUS', '36', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('16', 'AUSTRIA', 'AUSTRIA', 'AT', 'AUT', '40', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('17', 'AZERBAIYÁN', 'AZERBAIYAN', 'AZ', 'AZE', '31', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('18', 'BAHAMAS', 'BAHAMAS', 'BS', 'BHS', '44', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('19', 'BANGLADÉS', 'BANGLADES', 'BD', 'BGD', '50', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('20', 'BARBADOS', 'BARBADOS', 'BB', 'BRB', '52', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('21', 'BARÉIN', 'BAREIN', 'BH', 'BHR', '48', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('22', 'BÉLGICA', 'BELGICA', 'BE', 'BEL', '56', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('23', 'BELICE', 'BELICE', 'BZ', 'BLZ', '84', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('24', 'BENÍN', 'BENIN', 'BJ', 'BEN', '204', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('25', 'BERMUDAS', 'BERMUDAS', 'BM', 'BMU', '60', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('26', 'BIELORRUSIA', 'BIELORRUSIA', 'BY', 'BLR', '112', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('27', 'BIRMANIA', 'MYANMAR nota 1', 'MM', 'MMR', '104', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('28', 'BOLIVIA', 'BOLIVIA, ESTADO PLURINACIONAL DE', 'BO', 'BOL', '68', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('29', 'BOSNIA Y HERZEGOVINA', 'BOSNIA Y HERZEGOVINA', 'BA', 'BIH', '70', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('30', 'BOTSUANA', 'BOTSUANA', 'BW', 'BWA', '72', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('31', 'BRASIL', 'BRASIL', 'BR', 'BRA', '76', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('32', 'BRUNÉI', 'BRUNEI DARUSSALAM', 'BN', 'BRN', '96', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('33', 'BULGARIA', 'BULGARIA', 'BG', 'BGR', '100', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('34', 'BURKINA FASO', 'BURKINA FASO', 'BF', 'BFA', '854', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('35', 'BURUNDI', 'BURUNDI', 'BI', 'BDI', '108', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('36', 'BUTÁN', 'BUTAN', 'BT', 'BTN', '64', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('37', 'CABO VERDE', 'CABO VERDE', 'CV', 'CPV', '132', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('38', 'CAMBOYA', 'CAMBOYA', 'KH', 'KHM', '116', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('39', 'CAMERÚN', 'CAMERUN', 'CM', 'CMR', '120', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('40', 'CANADÁ', 'CANADA', 'CA', 'CAN', '124', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('41', 'CATAR', 'QATAR', 'QA', 'QAT', '634', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('42', 'CARIBE NEERLANDÉS', 'BONAIRE, SAN EUSTAQUIO Y SABA', 'BQ', 'BES', '535', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('43', 'CHAD', 'CHAD', 'TD', 'TCD', '148', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('44', 'CHILE', 'CHILE', 'CL', 'CHL', '152', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('45', 'CHINA', 'CHINA, REPUBLICA POPULAR', 'CN', 'CHN', '156', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('46', 'CHIPRE', 'CHIPRE', 'CY', 'CYP', '196', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('47', 'COLOMBIA', 'COLOMBIA', 'CO', 'COL', '170', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('48', 'COMORAS', 'COMORAS', 'KM', 'COM', '174', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('49', 'COREA DEL NORTE', 'COREA, REPUBLICA DEMOCRATICA POPULAR DE', 'KP', 'PRK', '408', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('50', 'COREA DEL SUR', 'COREA, REPUBLICA DE', 'KR', 'KOR', '410', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('51', 'COSTA DE MARFIL', 'COSTA DE MARFIL', 'CI', 'CIV', '384', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('52', 'COSTA RICA', 'COSTA RICA', 'CR', 'CRI', '188', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('53', 'CROACIA', 'CROACIA', 'HR', 'HRV', '191', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('54', 'CUBA', 'CUBA', 'CU', 'CUB', '192', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('55', 'CURAZAO', 'CURAZAO', 'CW', 'CUW', '531', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('56', 'DINAMARCA', 'DINAMARCA', 'DK', 'DNK', '208', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('57', 'DOMINICA', 'DOMINICA', 'DM', 'DMA', '212', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('58', 'ECUADOR', 'ECUADOR', 'EC', 'ECU', '218', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('59', 'EGIPTO', 'EGIPTO', 'EG', 'EGY', '818', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('60', 'EL SALVADOR', 'EL SALVADOR', 'SV', 'SLV', '222', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('61', 'EMIRATOS ÁRABES UNIDOS', 'EMIRATOS ARABES UNIDOS', 'AE', 'ARE', '784', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('62', 'ERITREA', 'ERITREA', 'ER', 'ERI', '232', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('63', 'ESLOVAQUIA', 'ESLOVAQUIA', 'SK', 'SVK', '703', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('64', 'ESLOVENIA', 'ESLOVENIA', 'SI', 'SVN', '705', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('65', 'ESPAÑA', 'ESPAÑA', 'ES', 'ESP', '724', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('66', 'ESTADOS UNIDOS', 'ESTADOS UNIDOS', 'US', 'USA', '840', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('67', 'ESTONIA', 'ESTONIA', 'EE', 'EST', '233', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('68', 'ETIOPÍA', 'ETIOPIA', 'ET', 'ETH', '231', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('69', 'FILIPINAS', 'FILIPINAS', 'PH', 'PHL', '608', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('70', 'FINLANDIA', 'FINLANDIA', 'FI', 'FIN', '246', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('71', 'FIYI', 'FIYI', 'FJ', 'FJI', '242', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('72', 'FRANCIA', 'FRANCIA', 'FR', 'FRA', '250', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('73', 'GABÓN', 'GABON', 'GA', 'GAB', '266', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('74', 'GAMBIA', 'GAMBIA', 'GM', 'GMB', '270', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('75', 'GEORGIA', 'GEORGIA', 'GE', 'GEO', '268', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('76', 'GHANA', 'GHANA', 'GH', 'GHA', '288', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('77', 'GIBRALTAR', 'GIBRALTAR', 'GI', 'GIB', '292', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('78', 'GRANADA', 'GRANADA', 'GD', 'GRD', '308', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('79', 'GRECIA', 'GRECIA', 'GR', 'GRC', '300', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('80', 'GROENLANDIA', 'GROENLANDIA', 'GL', 'GRL', '304', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('81', 'GUADALUPE', 'GUADALUPE', 'GP', 'GLP', '312', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('82', 'GUAM', 'GUAM', 'GU', 'GUM', '316', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('83', 'GUATEMALA', 'GUATEMALA', 'GT', 'GTM', '320', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('84', 'GUAYANA FRANCESA', 'GUAYANA FRANCESA', 'GF', 'GUF', '254', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('85', 'GUERNSEY', 'GUERNSEY', 'GG', 'GGY', '831', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('86', 'GUINEA', 'GUINEA', 'GN', 'GIN', '324', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('87', 'GUINEA-BISÁU', 'GUINEA-BISAU', 'GW', 'GNB', '624', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('88', 'GUINEA ECUATORIAL', 'GUINEA ECUATORIAL', 'GQ', 'GNQ', '226', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('89', 'GUYANA', 'GUYANA', 'GY', 'GUY', '328', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('90', 'HAITÍ', 'HAITI', 'HT', 'HTI', '332', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('91', 'HONDURAS', 'HONDURAS', 'HN', 'HND', '340', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('92', 'HONG KONG', 'HONG KONG', 'HK', 'HKG', '344', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('93', 'HUNGRÍA', 'HUNGRIA', 'HU', 'HUN', '348', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('94', 'INDIA', 'INDIA', 'IN', 'IND', '356', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('95', 'INDONESIA', 'INDONESIA', 'ID', 'IDN', '360', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('96', 'IRAK', 'IRAK', 'IQ', 'IRQ', '368', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('97', 'IRÁN', 'IRAN, REPUBLICA ISLAMICA DE', 'IR', 'IRN', '364', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('98', 'IRLANDA', 'IRLANDA', 'IE', 'IRL', '372', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('99', 'ISLA BOUVET', 'ISLA BOUVET', 'BV', 'BVT', '74', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('100', 'ISLA DE MAN', 'ISLA DE MAN', 'IM', 'IMN', '833', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('101', 'ISLA DE NAVIDAD', 'ISLA DE NAVIDAD', 'CX', 'CXR', '162', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('102', 'NORFOLK', 'ISLA NORFOLK', 'NF', 'NFK', '574', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('103', 'ISLANDIA', 'ISLANDIA', 'IS', 'ISL', '352', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('104', 'ISLAS CAIMÁN', 'ISLAS CAIMAN', 'KY', 'CYM', '136', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('105', 'ISLAS COCOS', 'ISLAS COCOS (KEELING)', 'CC', 'CCK', '166', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('106', 'ISLAS COOK', 'ISLAS COOK', 'CK', 'COK', '184', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('107', 'ISLAS FEROE', 'ISLAS FEROE', 'FO', 'FRO', '234', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('108', 'ISLAS GEORGIAS DEL SUR Y SANDWICH DEL SUR', 'ISLAS GEORGIAS DEL SUR Y SANDWICH DEL SUR', 'GS', 'SGS', '239', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('109', 'ISLAS HEARD Y MCDONALD', 'ISLAS HEARD Y MCDONALD', 'HM', 'HMD', '334', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('110', 'ISLAS MALVINAS', 'ISLAS FALKLAND ( MALVINAS )', 'FK', 'FLK', '238', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('111', 'ISLAS MARIANAS DEL NORTE', 'ISLAS MARIANAS DEL NORTE', 'MP', 'MNP', '580', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('112', 'ISLAS MARSHALL', 'ISLAS MARSHALL', 'MH', 'MHL', '584', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('113', 'ISLAS PITCAIRN', 'PITCAIRN', 'PN', 'PCN', '612', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('114', 'ISLAS SALOMÓN', 'ISLAS SALOMON', 'SB', 'SLB', '90', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('115', 'ISLAS TURCAS Y CAICOS', 'ISLAS TURCAS Y CAICOS', 'TC', 'TCA', '796', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('116', 'ISLAS ULTRAMARINAS DE ESTADOS UNIDOS', 'ISLAS ULTRAMARINAS MENORES DE ESTADOS UNIDOS', 'UM', 'UMI', '581', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('117', 'ISLAS VÍRGENES BRITÁNICAS', 'ISLAS VIRGENES BRITANICAS', 'VG', 'VGB', '92', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('118', 'ISLAS VÍRGENES DE LOS ESTADOS UNIDOS', 'ISLAS VIRGENES DE LOS ESTADOS UNIDOS', 'VI', 'VIR', '850', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('119', 'ISRAEL', 'ISRAEL', 'IL', 'ISR', '376', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('120', 'ITALIA', 'ITALIA', 'IT', 'ITA', '380', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('121', 'JAMAICA', 'JAMAICA', 'JM', 'JAM', '388', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('122', 'JAPÓN', 'JAPON', 'JP', 'JPN', '392', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('123', 'JERSEY', 'JERSEY', 'JE', 'JEY', '832', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('124', 'JORDANIA', 'JORDANIA', 'JO', 'JOR', '400', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('125', 'KAZAJISTÁN', 'KAZAJISTAN', 'KZ', 'KAZ', '398', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('126', 'KENIA', 'KENIA', 'KE', 'KEN', '404', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('127', 'KIRGUISTÁN', 'KIRGUISTAN', 'KG', 'KGZ', '417', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('128', 'KIRIBATI', 'KIRIBATI', 'KI', 'KIR', '296', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('129', 'KUWAIT', 'KUWAIT', 'KW', 'KWT', '414', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('130', 'LAOS', 'REPUBLICA DEMOCRATICA POPULAR LAO', 'LA', 'LAO', '418', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('131', 'LESOTO', 'LESOTO', 'LS', 'LSO', '426', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('132', 'LETONIA', 'LETONIA', 'LV', 'LVA', '428', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('133', 'LÍBANO', 'LIBANO', 'LB', 'LBN', '422', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('134', 'LIBERIA', 'LIBERIA', 'LR', 'LBR', '430', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('135', 'LIBIA', 'LIBIA', 'LY', 'LBY', '434', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('136', 'LIECHTENSTEIN', 'LIECHTENSTEIN', 'LI', 'LIE', '438', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('137', 'LITUANIA', 'LITUANIA', 'LT', 'LTU', '440', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('138', 'LUXEMBURGO', 'LUXEMBURGO', 'LU', 'LUX', '442', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('139', 'MACAO', 'MACAO', 'MO', 'MAC', '446', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('140', 'MADAGASCAR', 'MADAGASCAR', 'MG', 'MDG', '450', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('141', 'MALASIA', 'MALASIA', 'MY', 'MYS', '458', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('142', 'MALAUI', 'MALAUI', 'MW', 'MWI', '454', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('143', 'MALDIVAS', 'MALDIVAS', 'MV', 'MDV', '462', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('144', 'MALÍ', 'MALI', 'ML', 'MLI', '466', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('145', 'MALTA', 'MALTA', 'MT', 'MLT', '470', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('146', 'MARRUECOS', 'MARRUECOS', 'MA', 'MAR', '504', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('147', 'MARTINICA', 'MARTINICA', 'MQ', 'MTQ', '474', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('148', 'MAURICIO', 'MAURICIO', 'MU', 'MUS', '480', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('149', 'MAURITANIA', 'MAURITANIA', 'MR', 'MRT', '478', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('150', 'MAYOTTE', 'MAYOTTE', 'YT', 'MYT', '175', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('151', 'MÉXICO', 'MEXICO', 'MX', 'MEX', '484', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('152', 'MICRONESIA', 'MICRONESIA, ESTADOS FEDERADOS DE', 'FM', 'FSM', '583', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('153', 'MOLDAVIA', 'MOLDAVIA, REPUBLICA DE', 'MD', 'MDA', '498', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('154', 'MÓNACO', 'MONACO', 'MC', 'MCO', '492', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('155', 'MONGOLIA', 'MONGOLIA', 'MN', 'MNG', '496', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('156', 'MONTENEGRO', 'MONTENEGRO', 'ME', 'MNE', '499', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('157', 'MONTSERRAT', 'MONTSERRAT', 'MS', 'MSR', '500', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('158', 'MOZAMBIQUE', 'MOZAMBIQUE', 'MZ', 'MOZ', '508', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('159', 'NAMIBIA', 'NABIMIA', 'NA', 'NAM', '516', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('160', 'NAURU', 'NAURU', 'NR', 'NRU', '520', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('161', 'NEPAL', 'NEPAL', 'NP', 'NPL', '524', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('162', 'NICARAGUA', 'NICARAGUA', 'NI', 'NIC', '558', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('163', 'NÍGER', 'NIGER', 'NE', 'NER', '562', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('164', 'NIGERIA', 'NIGERIA', 'NG', 'NGA', '566', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('165', 'NIUE', 'NIUE', 'NU', 'NIU', '570', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('166', 'NORUEGA', 'NORUEGA', 'NO', 'NOR', '578', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('167', 'NUEVA CALEDONIA', 'NUEVA CALEDONIA', 'NC', 'NCL', '540', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('168', 'NUEVA ZELANDA', 'NUEVA ZELANDA', 'NZ', 'NZL', '554', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('169', 'OMÁN', 'OMAN', 'OM', 'OMN', '512', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('170', 'PAÍSES BAJOS', 'PAISES BAJOS', 'NL', 'NLD', '528', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('171', 'PAKISTÁN', 'PAKISTAN', 'PK', 'PAK', '586', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('172', 'PALAOS', 'PALAOS', 'PW', 'PLW', '585', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('173', 'ESTADO DE PALESTINA', 'PALESTINA, ESTADO DE', 'PS', 'PSE', '275', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('174', 'PANAMÁ', 'PANAMA', 'PA', 'PAN', '591', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('175', 'PAPÚA NUEVA GUINEA', 'PAPUA NUEVA GUINEA', 'PG', 'PNG', '598', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('176', 'PARAGUAY', 'PARAGUAY', 'PY', 'PRY', '600', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('177', 'PERÚ', 'PERU', 'PE', 'PER', '604', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('178', 'POLINESIA FRANCESA', 'POLINESIA FRANCESA', 'PF', 'PYF', '258', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('179', 'POLONIA', 'POLONIA', 'PL', 'POL', '616', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('180', 'PORTUGAL', 'PORTUGAL', 'PT', 'PRT', '620', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('181', 'PUERTO RICO', 'PUERTO RICO', 'PR', 'PRI', '630', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('182', 'REINO UNIDO', 'REINO UNIDO', 'GB', 'GBR', '826', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('183', 'REPÚBLICA CENTROAFRICANA', 'REPUBLICA CENTROAFRICANA', 'CF', 'CAF', '140', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('184', 'REPÚBLICA CHECA', 'REPUBLICA CHECA', 'CZ', 'CZE', '203', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('185', 'REPÚBLICA DE MACEDONIA', 'MACEDONIA, LA ANTIGUA REPUBLICA YUGOSLAVA DE', 'MK', 'MKD', '807', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('186', 'REPÚBLICA DEL CONGO', 'CONGO', 'CG', 'COG', '178', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('187', 'REPÚBLICA DEMOCRÁTICA DEL CONGO', 'CONGO, LA REPUBLICA DEMOCRATICA DEL', 'CD', 'COD', '180', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('188', 'REPÚBLICA DOMINICANA', 'REPUBLICA DOMINICANA', 'DO', 'DOM', '214', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('189', 'REUNIÓN', 'REUNION', 'RE', 'REU', '638', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('190', 'RUANDA', 'RUANDA', 'RW', 'RWA', '646', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('191', 'RUMANIA', 'RUMANIA', 'RO', 'ROU', '642', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('192', 'RUSIA', 'FEDERACION RUSA', 'RU', 'RUS', '643', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('193', 'SAHARA OCCIDENTAL', 'SAHARA OCCIDENTAL', 'EH', 'ESH', '732', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('194', 'SAMOA', 'SAMOA', 'WS', 'WSM', '882', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('195', 'SAMOA AMERICANA', 'SAMOA AMERICANA', 'AS', 'ASM', '16', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('196', 'SAN BARTOLOMÉ', 'SAN BARTOLOME', 'BL', 'BLM', '652', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('197', 'SAN CRISTÓBAL Y NIEVES', 'SAN CRISTOBAL Y NIEVES', 'KN', 'KNA', '659', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('198', 'SAN MARINO', 'SAN MARINO', 'SM', 'SMR', '674', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('199', 'SAN MARTÍN', 'SAN MARTIN (PARTE FRANCESA)', 'MF', 'MAF', '663', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('200', 'SAN PEDRO Y MIQUELÓN', 'SAN PEDRO Y MIQUELON', 'PM', 'SPM', '666', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('201', 'SAN VICENTE Y LAS GRANADINAS', 'SAN VICENTE Y LAS GRANADINAS', 'VC', 'VCT', '670', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('202', 'SANTA HELENA, A. Y T.', 'SANTA HELENA, ASCENSION Y TRISTAN DE ACUÑA', 'SH', 'SHN', '654', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('203', 'SANTA LUCÍA', 'SANTA LUCIA', 'LC', 'LCA', '662', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('204', 'SANTO TOMÉ Y PRÍNCIPE', 'SANTO TOME Y PRINCIPE', 'ST', 'STP', '678', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('205', 'SENEGAL', 'SENEGAL', 'SN', 'SEN', '686', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('206', 'SERBIA', 'SERBIA', 'RS', 'SRB', '688', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('207', 'SEYCHELLES', 'SEYCHELLES', 'SC', 'SYC', '690', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('208', 'SIERRA LEONA', 'SIERRA LEONA', 'SL', 'SLE', '694', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('209', 'SINGAPUR', 'SINGAPUR', 'SG', 'SGP', '702', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('210', 'SINT MAARTEN', 'SINT MAARTEN (PARTE NEERLANDESA)', 'SX', 'SXM', '534', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('211', 'SIRIA', 'REPUBLICA ARABE DE SIRIA', 'SY', 'SYR', '760', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('212', 'SOMALIA', 'SOMALIA', 'SO', 'SOM', '706', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('213', 'SRI LANKA', 'SRI LANKA', 'LK', 'LKA', '144', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('214', 'SUAZILANDIA', 'SUAZILANDIA', 'SZ', 'SWZ', '748', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('215', 'SUDÁFRICA', 'SUDAFRICA', 'ZA', 'ZAF', '710', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('216', 'SUDÁN', 'SUDAN', 'SD', 'SDN', '729', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('217', 'SUDÁN DEL SUR', 'SUDAN DEL SUR', 'SS', 'SSD', '728', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('218', 'SUECIA', 'SUECIA', 'SE', 'SWE', '752', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('219', 'SUIZA', 'SUIZA', 'CH', 'CHE', '756', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('220', 'SURINAM', 'SURINAM', 'SR', 'SUR', '740', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('221', 'SVALBARD Y JAN MAYEN', 'SVALBARD Y JAN MAYEN', 'SJ', 'SJM', '744', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('222', 'TAILANDIA', 'TAILANDIA', 'TH', 'THA', '764', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('223', 'TAIWÁN', 'TAIWAN, PROVINCIA DE CHINA', 'TW', 'TWN', '158', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('224', 'TANZANIA', 'TANZANIA, REPUBLICA UNIDA DE', 'TZ', 'TZA', '834', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('225', 'TAYIKISTÁN', 'TAYIKISTAN', 'TJ', 'TJK', '762', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('226', 'TERRITORIO BRITÁNICO DEL OCÉANO ÍNDICO', 'TERRITORIO BRITANICO DEL OCEANO INDICO', 'IO', 'IOT', '86', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('227', 'TERRITORIOS AUSTRALES FRANCESES', 'TERRITORIOS AUSTRALES FRANCESES', 'TF', 'ATF', '260', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('228', 'TIMOR ORIENTAL', 'TIMOR-LESTE', 'TL', 'TLS', '626', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('229', 'TOGO', 'TOGO', 'TG', 'TGO', '768', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('230', 'TOKELAU', 'TOKELAU', 'TK', 'TKL', '772', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('231', 'TONGA', 'TONGA', 'TO', 'TON', '776', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('232', 'TRINIDAD Y TOBAGO', 'TRINIDAD Y TOBAGO', 'TT', 'TTO', '780', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('233', 'TÚNEZ', 'TUNEZ', 'TN', 'TUN', '788', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('234', 'TURKMENISTÁN', 'TURKMENISTAN', 'TM', 'TKM', '795', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('235', 'TURQUÍA', 'TURQUIA', 'TR', 'TUR', '792', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('236', 'TUVALU', 'TUVALU', 'TV', 'TUV', '798', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('237', 'UCRANIA', 'UCRANIA', 'UA', 'UKR', '804', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('238', 'UGANDA', 'UGANDA', 'UG', 'UGA', '800', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('239', 'URUGUAY', 'URUGUAY', 'UY', 'URY', '858', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('240', 'UZBEKISTÁN', 'UZBEKISTAN', 'UZ', 'UZB', '860', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('241', 'VANUATU', 'VANUATU', 'VU', 'VUT', '548', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('242', 'CIUDAD DEL VATICANO', 'SANTA SEDE (CIUDAD ESTADO VATICAVO)', 'VA', 'VAT', '336', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('243', 'VENEZUELA', 'VENEZUELA, REPUBLICA BOLIVARIANA DE', 'VE', 'VEN', '862', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('244', 'VIETNAM', 'VIET NAM', 'VN', 'VNM', '704', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('245', 'WALLIS Y FUTUNA', 'WALLIS Y FUTUNA', 'WF', 'WLF', '876', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('246', 'YEMEN', 'YEMEN', 'YE', 'YEM', '887', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('247', 'YIBUTI', 'YIBUTI', 'DJ', 'DJI', '262', '2014-02-17');", false);
-	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('248', 'ZAMBIA', 'ZAMBIA', 'ZM', 'ZMB', '894', '2014-02-17');", false);
-    hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, codiso, fechacreacion) VALUES ('249', 'ZIMBABUE', 'ZIMBABUE', 'ZW', 'ZWE', '716', '2014-02-17');", false);
 
-    #aplicaact($act, $idac, 'paises y geografía'); 
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('4',  'AFGANISTÁN', 'AFGANISTAN', 'AF', 'AFG', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('248',  'ÅLAND', 'ISLAS ÅLAND', 'AX', 'ALA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('8',  'ALBANIA', 'ALBANIA', 'AL', 'ALB', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('276',  'ALEMANIA', 'ALEMANIA', 'DE', 'DEU', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('20',  'ANDORRA', 'ANDORRA', 'AD', 'AND', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('24',  'ANGOLA', 'ANGOLA', 'AO', 'AGO', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('660',  'ANGUILA', 'ANGUILA', 'AI', 'AIA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('10',  'ANTÁRTIDA', 'ANTARTIDA', 'AQ', 'ATA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('28',  'ANTIGUA Y BARBUDA', 'ANTIGUA Y BARBUDA', 'AG', 'ATG', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('682',  'ARABIA SAUDITA', 'ARABIA SAUDITA', 'SA', 'SAU', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('12',  'ARGELIA', 'ARGELIA', 'DZ', 'DZA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('32',  'ARGENTINA', 'ARGENTINA', 'AR', 'ARG', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('51',  'ARMENIA', 'ARMENIA', 'AM', 'ARM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('533',  'ARUBA', 'ARUBA', 'AW', 'ABW', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('36',  'AUSTRALIA', 'AUSTRALIA', 'AU', 'AUS', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('40',  'AUSTRIA', 'AUSTRIA', 'AT', 'AUT', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('31',  'AZERBAIYÁN', 'AZERBAIYAN', 'AZ', 'AZE', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('44',  'BAHAMAS', 'BAHAMAS', 'BS', 'BHS', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('50',  'BANGLADÉS', 'BANGLADES', 'BD', 'BGD', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('52',  'BARBADOS', 'BARBADOS', 'BB', 'BRB', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('48',  'BARÉIN', 'BAREIN', 'BH', 'BHR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('56',  'BÉLGICA', 'BELGICA', 'BE', 'BEL', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('84',  'BELICE', 'BELICE', 'BZ', 'BLZ', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('204',  'BENÍN', 'BENIN', 'BJ', 'BEN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('60',  'BERMUDAS', 'BERMUDAS', 'BM', 'BMU', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('112',  'BIELORRUSIA', 'BIELORRUSIA', 'BY', 'BLR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('104',  'BIRMANIA', 'MYANMAR nota 1', 'MM', 'MMR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('68',  'BOLIVIA', 'BOLIVIA, ESTADO PLURINACIONAL DE', 'BO', 'BOL', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('70',  'BOSNIA Y HERZEGOVINA', 'BOSNIA Y HERZEGOVINA', 'BA', 'BIH', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('72',  'BOTSUANA', 'BOTSUANA', 'BW', 'BWA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('76',  'BRASIL', 'BRASIL', 'BR', 'BRA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('96',  'BRUNÉI', 'BRUNEI DARUSSALAM', 'BN', 'BRN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('100',  'BULGARIA', 'BULGARIA', 'BG', 'BGR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('854',  'BURKINA FASO', 'BURKINA FASO', 'BF', 'BFA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('108',  'BURUNDI', 'BURUNDI', 'BI', 'BDI', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('64',  'BUTÁN', 'BUTAN', 'BT', 'BTN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('132',  'CABO VERDE', 'CABO VERDE', 'CV', 'CPV', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('116',  'CAMBOYA', 'CAMBOYA', 'KH', 'KHM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('120',  'CAMERÚN', 'CAMERUN', 'CM', 'CMR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('124',  'CANADÁ', 'CANADA', 'CA', 'CAN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('634',  'CATAR', 'QATAR', 'QA', 'QAT', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('535',  'CARIBE NEERLANDÉS', 'BONAIRE, SAN EUSTAQUIO Y SABA', 'BQ', 'BES', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('148',  'CHAD', 'CHAD', 'TD', 'TCD', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('152',  'CHILE', 'CHILE', 'CL', 'CHL', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('156',  'CHINA', 'CHINA, REPUBLICA POPULAR', 'CN', 'CHN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('196',  'CHIPRE', 'CHIPRE', 'CY', 'CYP', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('170',  'COLOMBIA', 'COLOMBIA', 'CO', 'COL', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('174',  'COMORAS', 'COMORAS', 'KM', 'COM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('408',  'COREA DEL NORTE', 'COREA, REPUBLICA DEMOCRATICA POPULAR DE', 'KP', 'PRK', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('410',  'COREA DEL SUR', 'COREA, REPUBLICA DE', 'KR', 'KOR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('384',  'COSTA DE MARFIL', 'COSTA DE MARFIL', 'CI', 'CIV', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('188',  'COSTA RICA', 'COSTA RICA', 'CR', 'CRI', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('191',  'CROACIA', 'CROACIA', 'HR', 'HRV', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('192',  'CUBA', 'CUBA', 'CU', 'CUB', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('531',  'CURAZAO', 'CURAZAO', 'CW', 'CUW', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('208',  'DINAMARCA', 'DINAMARCA', 'DK', 'DNK', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('212',  'DOMINICA', 'DOMINICA', 'DM', 'DMA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('218',  'ECUADOR', 'ECUADOR', 'EC', 'ECU', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('818',  'EGIPTO', 'EGIPTO', 'EG', 'EGY', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('222',  'EL SALVADOR', 'EL SALVADOR', 'SV', 'SLV', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('784',  'EMIRATOS ÁRABES UNIDOS', 'EMIRATOS ARABES UNIDOS', 'AE', 'ARE', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('232',  'ERITREA', 'ERITREA', 'ER', 'ERI', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('703',  'ESLOVAQUIA', 'ESLOVAQUIA', 'SK', 'SVK', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('705',  'ESLOVENIA', 'ESLOVENIA', 'SI', 'SVN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('724',  'ESPAÑA', 'ESPAÑA', 'ES', 'ESP', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('840',  'ESTADOS UNIDOS', 'ESTADOS UNIDOS', 'US', 'USA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('233',  'ESTONIA', 'ESTONIA', 'EE', 'EST', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('231',  'ETIOPÍA', 'ETIOPIA', 'ET', 'ETH', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('608',  'FILIPINAS', 'FILIPINAS', 'PH', 'PHL', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('246',  'FINLANDIA', 'FINLANDIA', 'FI', 'FIN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('242',  'FIYI', 'FIYI', 'FJ', 'FJI', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('250',  'FRANCIA', 'FRANCIA', 'FR', 'FRA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('266',  'GABÓN', 'GABON', 'GA', 'GAB', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('270',  'GAMBIA', 'GAMBIA', 'GM', 'GMB', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('268',  'GEORGIA', 'GEORGIA', 'GE', 'GEO', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('288',  'GHANA', 'GHANA', 'GH', 'GHA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('292',  'GIBRALTAR', 'GIBRALTAR', 'GI', 'GIB', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('308',  'GRANADA', 'GRANADA', 'GD', 'GRD', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('300',  'GRECIA', 'GRECIA', 'GR', 'GRC', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('304',  'GROENLANDIA', 'GROENLANDIA', 'GL', 'GRL', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('312',  'GUADALUPE', 'GUADALUPE', 'GP', 'GLP', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('316',  'GUAM', 'GUAM', 'GU', 'GUM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('320',  'GUATEMALA', 'GUATEMALA', 'GT', 'GTM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('254',  'GUAYANA FRANCESA', 'GUAYANA FRANCESA', 'GF', 'GUF', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('831',  'GUERNSEY', 'GUERNSEY', 'GG', 'GGY', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('324',  'GUINEA', 'GUINEA', 'GN', 'GIN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('624',  'GUINEA-BISÁU', 'GUINEA-BISAU', 'GW', 'GNB', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('226',  'GUINEA ECUATORIAL', 'GUINEA ECUATORIAL', 'GQ', 'GNQ', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('328',  'GUYANA', 'GUYANA', 'GY', 'GUY', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('332',  'HAITÍ', 'HAITI', 'HT', 'HTI', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('340',  'HONDURAS', 'HONDURAS', 'HN', 'HND', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('344',  'HONG KONG', 'HONG KONG', 'HK', 'HKG', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('348',  'HUNGRÍA', 'HUNGRIA', 'HU', 'HUN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('356',  'INDIA', 'INDIA', 'IN', 'IND', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('360',  'INDONESIA', 'INDONESIA', 'ID', 'IDN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('368',  'IRAK', 'IRAK', 'IQ', 'IRQ', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('364',  'IRÁN', 'IRAN, REPUBLICA ISLAMICA DE', 'IR', 'IRN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('372',  'IRLANDA', 'IRLANDA', 'IE', 'IRL', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('74',  'ISLA BOUVET', 'ISLA BOUVET', 'BV', 'BVT', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('833',  'ISLA DE MAN', 'ISLA DE MAN', 'IM', 'IMN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('162',  'ISLA DE NAVIDAD', 'ISLA DE NAVIDAD', 'CX', 'CXR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('574',  'NORFOLK', 'ISLA NORFOLK', 'NF', 'NFK', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('352',  'ISLANDIA', 'ISLANDIA', 'IS', 'ISL', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('136',  'ISLAS CAIMÁN', 'ISLAS CAIMAN', 'KY', 'CYM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('166',  'ISLAS COCOS', 'ISLAS COCOS (KEELING)', 'CC', 'CCK', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('184',  'ISLAS COOK', 'ISLAS COOK', 'CK', 'COK', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('234',  'ISLAS FEROE', 'ISLAS FEROE', 'FO', 'FRO', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('239',  'ISLAS GEORGIAS DEL SUR Y SANDWICH DEL SUR', 'ISLAS GEORGIAS DEL SUR Y SANDWICH DEL SUR', 'GS', 'SGS', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('334',  'ISLAS HEARD Y MCDONALD', 'ISLAS HEARD Y MCDONALD', 'HM', 'HMD', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('238',  'ISLAS MALVINAS', 'ISLAS FALKLAND ( MALVINAS )', 'FK', 'FLK', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('580',  'ISLAS MARIANAS DEL NORTE', 'ISLAS MARIANAS DEL NORTE', 'MP', 'MNP', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('584',  'ISLAS MARSHALL', 'ISLAS MARSHALL', 'MH', 'MHL', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('612',  'ISLAS PITCAIRN', 'PITCAIRN', 'PN', 'PCN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('90',  'ISLAS SALOMÓN', 'ISLAS SALOMON', 'SB', 'SLB', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('796',  'ISLAS TURCAS Y CAICOS', 'ISLAS TURCAS Y CAICOS', 'TC', 'TCA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('581',  'ISLAS ULTRAMARINAS DE ESTADOS UNIDOS', 'ISLAS ULTRAMARINAS MENORES DE ESTADOS UNIDOS', 'UM', 'UMI', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('92',  'ISLAS VÍRGENES BRITÁNICAS', 'ISLAS VIRGENES BRITANICAS', 'VG', 'VGB', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('850',  'ISLAS VÍRGENES DE LOS ESTADOS UNIDOS', 'ISLAS VIRGENES DE LOS ESTADOS UNIDOS', 'VI', 'VIR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('376',  'ISRAEL', 'ISRAEL', 'IL', 'ISR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('380',  'ITALIA', 'ITALIA', 'IT', 'ITA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('388',  'JAMAICA', 'JAMAICA', 'JM', 'JAM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('392',  'JAPÓN', 'JAPON', 'JP', 'JPN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('832',  'JERSEY', 'JERSEY', 'JE', 'JEY', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('400',  'JORDANIA', 'JORDANIA', 'JO', 'JOR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('398',  'KAZAJISTÁN', 'KAZAJISTAN', 'KZ', 'KAZ', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('404',  'KENIA', 'KENIA', 'KE', 'KEN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('417',  'KIRGUISTÁN', 'KIRGUISTAN', 'KG', 'KGZ', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('296',  'KIRIBATI', 'KIRIBATI', 'KI', 'KIR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('414',  'KUWAIT', 'KUWAIT', 'KW', 'KWT', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('418',  'LAOS', 'REPUBLICA DEMOCRATICA POPULAR LAO', 'LA', 'LAO', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('426',  'LESOTO', 'LESOTO', 'LS', 'LSO', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('428',  'LETONIA', 'LETONIA', 'LV', 'LVA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('422',  'LÍBANO', 'LIBANO', 'LB', 'LBN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('430',  'LIBERIA', 'LIBERIA', 'LR', 'LBR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('434',  'LIBIA', 'LIBIA', 'LY', 'LBY', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('438',  'LIECHTENSTEIN', 'LIECHTENSTEIN', 'LI', 'LIE', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('440',  'LITUANIA', 'LITUANIA', 'LT', 'LTU', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('442',  'LUXEMBURGO', 'LUXEMBURGO', 'LU', 'LUX', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('446',  'MACAO', 'MACAO', 'MO', 'MAC', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('450',  'MADAGASCAR', 'MADAGASCAR', 'MG', 'MDG', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('458',  'MALASIA', 'MALASIA', 'MY', 'MYS', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('454',  'MALAUI', 'MALAUI', 'MW', 'MWI', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('462',  'MALDIVAS', 'MALDIVAS', 'MV', 'MDV', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('466',  'MALÍ', 'MALI', 'ML', 'MLI', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('470',  'MALTA', 'MALTA', 'MT', 'MLT', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('504',  'MARRUECOS', 'MARRUECOS', 'MA', 'MAR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('474',  'MARTINICA', 'MARTINICA', 'MQ', 'MTQ', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('480',  'MAURICIO', 'MAURICIO', 'MU', 'MUS', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('478',  'MAURITANIA', 'MAURITANIA', 'MR', 'MRT', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('175',  'MAYOTTE', 'MAYOTTE', 'YT', 'MYT', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('484',  'MÉXICO', 'MEXICO', 'MX', 'MEX', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('583',  'MICRONESIA', 'MICRONESIA, ESTADOS FEDERADOS DE', 'FM', 'FSM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('498',  'MOLDAVIA', 'MOLDAVIA, REPUBLICA DE', 'MD', 'MDA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('492',  'MÓNACO', 'MONACO', 'MC', 'MCO', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('496',  'MONGOLIA', 'MONGOLIA', 'MN', 'MNG', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('499',  'MONTENEGRO', 'MONTENEGRO', 'ME', 'MNE', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('500',  'MONTSERRAT', 'MONTSERRAT', 'MS', 'MSR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('508',  'MOZAMBIQUE', 'MOZAMBIQUE', 'MZ', 'MOZ', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('516',  'NAMIBIA', 'NABIMIA', 'NA', 'NAM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('520',  'NAURU', 'NAURU', 'NR', 'NRU', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('524',  'NEPAL', 'NEPAL', 'NP', 'NPL', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('558',  'NICARAGUA', 'NICARAGUA', 'NI', 'NIC', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('562',  'NÍGER', 'NIGER', 'NE', 'NER', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('566',  'NIGERIA', 'NIGERIA', 'NG', 'NGA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('570',  'NIUE', 'NIUE', 'NU', 'NIU', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('578',  'NORUEGA', 'NORUEGA', 'NO', 'NOR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('540',  'NUEVA CALEDONIA', 'NUEVA CALEDONIA', 'NC', 'NCL', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('554',  'NUEVA ZELANDA', 'NUEVA ZELANDA', 'NZ', 'NZL', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('512',  'OMÁN', 'OMAN', 'OM', 'OMN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('528',  'PAÍSES BAJOS', 'PAISES BAJOS', 'NL', 'NLD', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('586',  'PAKISTÁN', 'PAKISTAN', 'PK', 'PAK', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('585',  'PALAOS', 'PALAOS', 'PW', 'PLW', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('275',  'ESTADO DE PALESTINA', 'PALESTINA, ESTADO DE', 'PS', 'PSE', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('591',  'PANAMÁ', 'PANAMA', 'PA', 'PAN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('598',  'PAPÚA NUEVA GUINEA', 'PAPUA NUEVA GUINEA', 'PG', 'PNG', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('600',  'PARAGUAY', 'PARAGUAY', 'PY', 'PRY', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('604',  'PERÚ', 'PERU', 'PE', 'PER', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('258',  'POLINESIA FRANCESA', 'POLINESIA FRANCESA', 'PF', 'PYF', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('616',  'POLONIA', 'POLONIA', 'PL', 'POL', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('620',  'PORTUGAL', 'PORTUGAL', 'PT', 'PRT', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('630',  'PUERTO RICO', 'PUERTO RICO', 'PR', 'PRI', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('826',  'REINO UNIDO', 'REINO UNIDO', 'GB', 'GBR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('140',  'REPÚBLICA CENTROAFRICANA', 'REPUBLICA CENTROAFRICANA', 'CF', 'CAF', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('203',  'REPÚBLICA CHECA', 'REPUBLICA CHECA', 'CZ', 'CZE', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('807',  'REPÚBLICA DE MACEDONIA', 'MACEDONIA, LA ANTIGUA REPUBLICA YUGOSLAVA DE', 'MK', 'MKD', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('178',  'REPÚBLICA DEL CONGO', 'CONGO', 'CG', 'COG', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('180',  'REPÚBLICA DEMOCRÁTICA DEL CONGO', 'CONGO, LA REPUBLICA DEMOCRATICA DEL', 'CD', 'COD', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('214',  'REPÚBLICA DOMINICANA', 'REPUBLICA DOMINICANA', 'DO', 'DOM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('638',  'REUNIÓN', 'REUNION', 'RE', 'REU', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('646',  'RUANDA', 'RUANDA', 'RW', 'RWA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('642',  'RUMANIA', 'RUMANIA', 'RO', 'ROU', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('643',  'RUSIA', 'FEDERACION RUSA', 'RU', 'RUS', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('732',  'SAHARA OCCIDENTAL', 'SAHARA OCCIDENTAL', 'EH', 'ESH', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('882',  'SAMOA', 'SAMOA', 'WS', 'WSM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('16',  'SAMOA AMERICANA', 'SAMOA AMERICANA', 'AS', 'ASM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('652',  'SAN BARTOLOMÉ', 'SAN BARTOLOME', 'BL', 'BLM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('659',  'SAN CRISTÓBAL Y NIEVES', 'SAN CRISTOBAL Y NIEVES', 'KN', 'KNA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('674',  'SAN MARINO', 'SAN MARINO', 'SM', 'SMR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('663',  'SAN MARTÍN', 'SAN MARTIN (PARTE FRANCESA)', 'MF', 'MAF', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('666',  'SAN PEDRO Y MIQUELÓN', 'SAN PEDRO Y MIQUELON', 'PM', 'SPM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('670',  'SAN VICENTE Y LAS GRANADINAS', 'SAN VICENTE Y LAS GRANADINAS', 'VC', 'VCT', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('654',  'SANTA HELENA, A. Y T.', 'SANTA HELENA, ASCENSION Y TRISTAN DE ACUÑA', 'SH', 'SHN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('662',  'SANTA LUCÍA', 'SANTA LUCIA', 'LC', 'LCA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('678',  'SANTO TOMÉ Y PRÍNCIPE', 'SANTO TOME Y PRINCIPE', 'ST', 'STP', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('686',  'SENEGAL', 'SENEGAL', 'SN', 'SEN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('688',  'SERBIA', 'SERBIA', 'RS', 'SRB', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('690',  'SEYCHELLES', 'SEYCHELLES', 'SC', 'SYC', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('694',  'SIERRA LEONA', 'SIERRA LEONA', 'SL', 'SLE', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('702',  'SINGAPUR', 'SINGAPUR', 'SG', 'SGP', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('534',  'SINT MAARTEN', 'SINT MAARTEN (PARTE NEERLANDESA)', 'SX', 'SXM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('760',  'SIRIA', 'REPUBLICA ARABE DE SIRIA', 'SY', 'SYR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('706',  'SOMALIA', 'SOMALIA', 'SO', 'SOM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('144',  'SRI LANKA', 'SRI LANKA', 'LK', 'LKA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('748',  'SUAZILANDIA', 'SUAZILANDIA', 'SZ', 'SWZ', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('710',  'SUDÁFRICA', 'SUDAFRICA', 'ZA', 'ZAF', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('729',  'SUDÁN', 'SUDAN', 'SD', 'SDN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('728',  'SUDÁN DEL SUR', 'SUDAN DEL SUR', 'SS', 'SSD', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('752',  'SUECIA', 'SUECIA', 'SE', 'SWE', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('756',  'SUIZA', 'SUIZA', 'CH', 'CHE', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('740',  'SURINAM', 'SURINAM', 'SR', 'SUR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('744',  'SVALBARD Y JAN MAYEN', 'SVALBARD Y JAN MAYEN', 'SJ', 'SJM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('764',  'TAILANDIA', 'TAILANDIA', 'TH', 'THA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('158',  'TAIWÁN', 'TAIWAN, PROVINCIA DE CHINA', 'TW', 'TWN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('834',  'TANZANIA', 'TANZANIA, REPUBLICA UNIDA DE', 'TZ', 'TZA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('762',  'TAYIKISTÁN', 'TAYIKISTAN', 'TJ', 'TJK', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('86',  'TERRITORIO BRITÁNICO DEL OCÉANO ÍNDICO', 'TERRITORIO BRITANICO DEL OCEANO INDICO', 'IO', 'IOT', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('260',  'TERRITORIOS AUSTRALES FRANCESES', 'TERRITORIOS AUSTRALES FRANCESES', 'TF', 'ATF', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('626',  'TIMOR ORIENTAL', 'TIMOR-LESTE', 'TL', 'TLS', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('768',  'TOGO', 'TOGO', 'TG', 'TGO', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('772',  'TOKELAU', 'TOKELAU', 'TK', 'TKL', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('776',  'TONGA', 'TONGA', 'TO', 'TON', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('780',  'TRINIDAD Y TOBAGO', 'TRINIDAD Y TOBAGO', 'TT', 'TTO', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('788',  'TÚNEZ', 'TUNEZ', 'TN', 'TUN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('795',  'TURKMENISTÁN', 'TURKMENISTAN', 'TM', 'TKM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('792',  'TURQUÍA', 'TURQUIA', 'TR', 'TUR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('798',  'TUVALU', 'TUVALU', 'TV', 'TUV', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('804',  'UCRANIA', 'UCRANIA', 'UA', 'UKR', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('800',  'UGANDA', 'UGANDA', 'UG', 'UGA', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('858',  'URUGUAY', 'URUGUAY', 'UY', 'URY', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('860',  'UZBEKISTÁN', 'UZBEKISTAN', 'UZ', 'UZB', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('548',  'VANUATU', 'VANUATU', 'VU', 'VUT', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('336',  'CIUDAD DEL VATICANO', 'SANTA SEDE (CIUDAD ESTADO VATICAVO)', 'VA', 'VAT', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('862',  'VENEZUELA', 'VENEZUELA, REPUBLICA BOLIVARIANA DE', 'VE', 'VEN', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('704',  'VIETNAM', 'VIET NAM', 'VN', 'VNM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('876',  'WALLIS Y FUTUNA', 'WALLIS Y FUTUNA', 'WF', 'WLF', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('887',  'YEMEN', 'YEMEN', 'YE', 'YEM', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('262',  'YIBUTI', 'YIBUTI', 'DJ', 'DJI', '2014-02-17');", false);
+	hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('894',  'ZAMBIA', 'ZAMBIA', 'ZM', 'ZMB', '2014-02-17');", false);
+    hace_consulta($db, "INSERT INTO pais (id, nombre, nombreiso, alfa2, alfa3, fechacreacion) VALUES ('716',  'ZIMBABUE', 'ZIMBABUE', 'ZW', 'ZWE', '2014-02-17');", false);
+    hace_consulta(
+        $db, "ALTER TABLE departamento ADD COLUMN 
+        id_pais INTEGER REFERENCES pais", false
+    );
+    hace_consulta(
+        $db, "UPDATE departamento SET id_pais='170'"
+    );
+    hace_consulta(
+        $db, "ALTER TABLE departamento 
+        DROP CONSTRAINT departamento_pkey CASCADE", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE departamento 
+        ADD CONSTRAINT departamento_pkey PRIMARY KEY(id, id_pais)", false
+    );
+
+    foreach(array("municipio", "clase", "ubicacion", "persona") as $t
+    ) {
+        $idp = "id_pais";
+        $idd = "id_departamento";
+        $idm = "id_municipio";
+        hace_consulta(
+            $db, "ALTER TABLE $t ADD COLUMN 
+            {$idp} INTEGER REFERENCES pais", false
+        );
+        hace_consulta(
+            $db, "UPDATE $t SET {$idp} = '170'"
+        );
+        hace_consulta(
+            $db, "ALTER TABLE {$t}
+            DROP CONSTRAINT {$t}_{$idd}_fkey CASCADE", false
+        );
+        hace_consulta(
+            $db, "ALTER TABLE {$t}
+            ADD CONSTRAINT {$t}_{$idd}_fkey 
+            FOREIGN KEY($idd, $idp) 
+            REFERENCES departamento(id, id_pais)", false
+        );
+        if ($t == "municipio") {
+            hace_consulta(
+                $db, "ALTER TABLE {$t}
+                DROP CONSTRAINT {$t}_pkey CASCADE", false
+            );
+            hace_consulta(
+                $db, "ALTER TABLE {$t}
+                ADD CONSTRAINT {$t}_pkey 
+                PRIMARY KEY(id, id_departamento, id_pais)", false
+            );
+        }  else if ($t == "clase") {
+            hace_consulta(
+                $db, "ALTER TABLE {$t}
+                DROP CONSTRAINT {$t}_pkey CASCADE", false
+            );
+            hace_consulta(
+                $db, "ALTER TABLE {$t}
+                ADD CONSTRAINT {$t}_pkey
+                PRIMARY KEY(id, id_municipio, id_departamento, id_pais)", false
+            );
+        } 
+
+        if ($t != "municipio") {
+            hace_consulta(
+                $db, "ALTER TABLE {$t}
+                DROP CONSTRAINT {$t}_{$idm}_fkey", false
+            );
+            hace_consulta(
+               $db, "ALTER TABLE {$t}
+                ADD CONSTRAINT {$t}_{$idm}_fkey 
+                FOREIGN KEY($idm, $idd, $idp) 
+                REFERENCES municipio(id, id_departamento, id_pais)", false
+            );
+            if ($t != "clase") {
+                hace_consulta(
+                    $db, "ALTER TABLE {$t}
+                    DROP CONSTRAINT {$t}_id_clase_fkey", false
+                );
+                hace_consulta(
+                    $db, "ALTER TABLE {$t}
+                    ADD CONSTRAINT {$t}_id_clase_fkey 
+                    FOREIGN KEY(id_clase, id_municipio, id_departamento, id_pais) 
+                    REFERENCES clase(id, id_municipio, id_departamento, id_pais)", 
+                    false
+                );
+            }
+        }
+    }
+
+    aplicaact($act, $idac, 'País'); 
 }
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {

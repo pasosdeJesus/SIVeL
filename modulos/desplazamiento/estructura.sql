@@ -65,7 +65,8 @@ CREATE TABLE desplazamiento (
     declaro CHAR CHECK (declaro = 'S' OR declaro = 'N' OR declaro = 'R'),
     hechosdeclarados VARCHAR(5000),
     fechadeclaracion DATE,
-    departamentodecl INTEGER REFERENCES departamento,
+    paisdecl INTEGER REFERENCES pais,
+    departamentodecl INTEGER,
     municipiodecl INTEGER,
     id_declaroante INTEGER REFERENCES declaroante DEFAULT '0',
     id_inclusion  INTEGER REFERENCES inclusion DEFAULT '0',
@@ -81,8 +82,10 @@ CREATE TABLE desplazamiento (
     inmaterialesperdidos VARCHAR(5000),
     protegiorupta BOOL,
     documentostierra VARCHAR(5000),
-    FOREIGN KEY (municipiodecl, departamentodecl) REFERENCES
-        municipio (id, id_departamento),
+    FOREIGN KEY (paisdecl, departamentodecl) REFERENCES
+        departamento (id_pais, id),
+    FOREIGN KEY (paisdecl, departamentodecl, municipiodecl) REFERENCES
+        municipio (id_pais, id_departamento, id),
     PRIMARY KEY (id_caso, fechaexpulsion)
 );
 

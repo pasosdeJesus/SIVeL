@@ -38,7 +38,6 @@ class DataObjects_Pais extends DataObjects_Basica
     var $div1;
     var $div2;
     var $div3;
-    var $codiso;
     var $alfa2;
     var $alfa3;
     var $nombreiso;
@@ -59,7 +58,6 @@ class DataObjects_Pais extends DataObjects_Basica
             'div1'=> _('Primer Nivel Divisón Politico-Administrativa'),
             'div2'=> _('Segundo Nivel Divisón Politico-Administrativa'),
             'div3'=> _('Tercer Nivel Divisón Politico-Administrativa'),
-            'codiso'=> _('Código ISO'),
             'alfa2'=> _('Identificación ISO de 2 letras'),
             'alfa3'=> _('Identificación ISO de 3 letras'),
             'nombreiso'=> _('Nombre ISO'),
@@ -67,6 +65,15 @@ class DataObjects_Pais extends DataObjects_Basica
             'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
         );
     }
+
+    var $fb_preDefOrder = array('id', 'nombre', 'latitud', 'longitud',
+         'div1', 'div2', 'div3', 'alfa2', 'alfa3', 'nombreiso',
+        'fechacreacion', 'fechadeshabilitacion'
+    );
+    var $fb_fieldsToRender = array('id', 'nombre', 'latitud', 'longitud',
+         'div1', 'div2', 'div3', 'alfa2', 'alfa3', 'nombreiso',
+        'fechacreacion', 'fechadeshabilitacion'
+    );
 
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'
