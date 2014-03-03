@@ -69,8 +69,8 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
             'rol' => _('Rol'),
             'idioma' => _('Idioma'),
             'email' => _('Correo'),
-            'fechacreacion' => _('Fecha de creación'),
-            'fechadeshabilitacion' => _('Fecha de deshabilitación'),
+            'fechacreacion' => _('Fecha de Creación'),
+            'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
         );
         global $LENGDISP, $ROLESDISP;
         $ld = explode(" ", $LENGDISP);

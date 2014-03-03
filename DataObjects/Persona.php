@@ -81,7 +81,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
             'sexo' => _('Sexo'),
             'tipodocumento' => _('Tipo de Docuento'),
             'numerodocumento' => _('Número de Documento'),
-            'id_pais' => _('Pais'),
+            'id_pais' => _('País'),
             'id_departamento' => _('Departamento'),
             'id_municipio' => _('Municipio'),
             'id_clase'  => _('Clase'),

@@ -50,7 +50,7 @@ class DataObjects_Pais extends DataObjects_Basica
     {
         parent::__construct();
 
-        $this->nom_tabla = _('Pais');
+        $this->nom_tabla = _('País');
         $this->fb_fieldLabels = array(
             'nombre' => _('Nombre'),
             'latitud'=> _('Latitud'),
