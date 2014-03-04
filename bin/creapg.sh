@@ -134,7 +134,9 @@ if (test "$SIN_DATOS" = "1") then {
 echo "Poblando base";
 
 leeSQL ${RUTASQL}/datos-us.sql;
+leeSQL ${RUTASQL}/datos-geo-pais.sql;
 leeSQL ${RUTASQL}/datos-geo-col.sql;
+leeSQL ${RUTASQL}/datos-geo-ven.sql;
 leeSQL ${RUTASQL}/datos-implicado.sql;
 leeSQL ${RUTASQL}/datos-caso.sql;
 leeSQL ${RUTASQL}/datos-presp.sql;
