@@ -117,8 +117,7 @@ con Ruby on Rails.
 ```sh rake assets:precompile```
 * Tras reiniciar nginx, inicie unicorn desde directorio con fuentes con:
 ```sh ./bin/u.sh```
-* Puede logar que inicie en cada arranque en adJ por ejemplo creando 
-  /etc/rc.d/miapp 
+* Para iniciar en cada arranque, por ejemplo en adJ cree /etc/rc.d/miapp 
 ```sh
 servicio="/var/www/htdocs/sivel2/bin/u.sh"
 
@@ -126,11 +125,12 @@ servicio="/var/www/htdocs/sivel2/bin/u.sh"
 
 rc_cmd $1
 ```
-  E incluyendo miapp en pkg_scripts en /etc/rc.conf.local
+  E incluya miapp en pkg_scripts en /etc/rc.conf.local
 
 
 ### Actualización de servidor de desarrollo
 
+* Detenga el servidor de desarrollo (teclas Control-C)
 * Actualice fuentes: ```git pull```
 * Instale nuevas versiones de gemas requeridas: 
 ```sh
@@ -138,5 +138,6 @@ rc_cmd $1
   bundle install
 ```
 * Aplique cambios a base de datos: ```rake db:migrate```
+* Lance nuevamente el servidor de desarrollo: ```rails s```
 
 

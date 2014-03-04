@@ -49,8 +49,13 @@ class CasosController < ApplicationController
       if @presponsable.save
         respond_to do |format|
           format.js { render text: @presponsable.id.to_s }
+          format.json { render json: @presponsable.id.to_s, status: :created }
+          format.html { render inline: @presponsable.id.to_s }
         end
         return
+      else
+        format.html { render action: "error" }
+        format.json { render json: @presponsable.errors, status: :unprocessable_entity }
       end
     end
     respond_to do |format|
@@ -61,12 +66,19 @@ class CasosController < ApplicationController
 	def lista
     if !params[:tabla].nil?
 			r = nil
-			if (params[:tabla] == "municipio" && params[:id_departamento].to_i > 0)
-				r = Municipio.where(id_departamento: params[:id_departamento].to_i)
-			elsif (params[:tabla] == "clase" && params[:id_departamento].to_i > 0 && 
-						 params[:id_municipio].to_i > 0)
-				r = Clase.where(id_departamento: params[:id_departamento].to_i,
-											 id_municipio: params[:id_municipio].to_i)
+      
+			if (params[:tabla] == "departamento" && params[:id_pais].to_i > 0)
+				r = Departamento.where(id_pais: params[:id_pais].to_i)
+			elsif (params[:tabla] == "municipio" && params[:id_pais].to_i > 0 && 
+             params[:id_departamento].to_i > 0 )
+				r = Municipio.where(id_pais: params[:id_pais].to_i, 
+                            id_departamento: params[:id_departamento].to_i)
+			elsif (params[:tabla] == "clase" && params[:id_pais].to_i > 0 && 
+             params[:id_departamento].to_i > 0 && 
+             params[:id_municipio].to_i > 0)
+				r = Clase.where(id_pais: params[:id_pais].to_i, 
+                        id_departamento: params[:id_departamento].to_i, 
+                        id_municipio: params[:id_municipio].to_i)
 			end
 			respond_to do |format|
 				format.js { render json: r }
@@ -152,7 +164,6 @@ class CasosController < ApplicationController
     #        p.numerodocumento = params[:pnueva_numerodocumento]
     #        p.save
     #        params[:caso][:victima_attributes][k][:id_persona] = p.id
-    #        debugger
     #    else
     #      flash[:error] = "Falta nombre de víctima"
     #    end
@@ -161,12 +172,14 @@ class CasosController < ApplicationController
         elimina_dep
         if (!params[:caso][:actosjr_attributes].nil?) 
           params[:caso][:actosjr_attributes].each {|k,v| 
-            acto = Acto.new
-            acto.id_presponsable = v[:id_presponsable]
-            acto.id_persona = v[:id_persona]
-            acto.id_categoria = v[:id_categoria]
-            acto.id_caso = @caso.id
-            acto.save
+            if (v[:_destroy].nil? || v[:_destroy] != 1)
+              acto = Acto.new
+              acto.id_presponsable = v[:id_presponsable]
+              acto.id_persona = v[:id_persona]
+              acto.id_categoria = v[:id_categoria]
+              acto.id_caso = @caso.id
+              acto.save
+            end
           }
         end
         if (!params[:caso][:caso_etiqueta_attributes].nil?)
@@ -226,7 +239,8 @@ class CasosController < ApplicationController
           :id_iglesia, :orientacionsexual, :_destroy, 
           :persona_attributes => [
             :id, :nombres, :apellidos, :anionac, :mesnac, :dianac, 
-            :numerodocumento, :sexo, :id_departamento, :tipodocumento
+            :id_pais, :id_departamento, :id_municipio, :id_clase, 
+            :numerodocumento, :sexo, :tipodocumento
           ],
           :victimasjr_attributes => [
             :id_rolfamilia,
@@ -236,8 +250,8 @@ class CasosController < ApplicationController
           ]
         ], 
         :ubicacion_attributes => [
-          :id, :id_departamento, :id_municipio, 
-          :id_clase, :lugar, :sitio, :latitud, :longitud, :id_tsitio, 
+          :id, :id_pais, :id_departamento, :id_municipio, :id_clase, 
+          :lugar, :sitio, :latitud, :longitud, :id_tsitio, 
           :_destroy
         ],
         :desplazamiento_attributes => [

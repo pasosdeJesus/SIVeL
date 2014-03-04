@@ -9,6 +9,7 @@ class Desplazamiento < ActiveRecord::Base
 	belongs_to :inclusion, foreign_key: "id_inclusion", validate: true
 	belongs_to :acreditacion, foreign_key: "id_acreditacion", validate: true
 	belongs_to :modalidadtierra, foreign_key: "id_modalidadtierra", validate: true
+	belongs_to :pais, foreign_key: "paisdecl", validate: true
 	belongs_to :departamento, foreign_key: "departamentodecl", validate: true
 	belongs_to :municipio, foreign_key: "municipiodecl", validate: true
 	belongs_to :caso, foreign_key: "id_caso", validate: true

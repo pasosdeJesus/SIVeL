@@ -9,7 +9,7 @@
   <dt><strong><%= Casosjr.human_attribute_name(:fecharec) %>:</strong></dt>
   <dd><%= @caso.casosjr.fecharec if !@caso.casosjr.nil? %></dd>
   <dt><strong><%= Casosjr.human_attribute_name(:regionsjr) %>:</strong></dt>
-  <dd><%= @caso.casosjr.regionsjr.nombre if !@caso.casosjr.nil? %></dd>
+  <dd><%= @caso.casosjr.regionsjr.nombre if !@caso.casosjr.nil? && !@caso.casosjr.regionsjr.nil? %></dd>
   <dt><strong><%= Caso.human_attribute_name(:fecha) %>:</strong></dt>
   <dd><%= @caso.fecha %></dd>
   <% if !@caso.memo.nil? && @caso.memo != '' %>

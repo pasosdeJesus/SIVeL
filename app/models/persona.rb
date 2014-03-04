@@ -8,6 +8,7 @@ class Persona < ActiveRecord::Base
 	has_many :casosjr, foreign_key: "contacto", validate: true
 	has_many :victimasjr, foreign_key: "id_persona", validate: true
 	has_many :actosjr, foreign_key: "id_persona", validate: true
+	belongs_to :pais, foreign_key: "id_pais", validate: true
 	belongs_to :departamento, foreign_key: "id_departamento", validate: true
 	belongs_to :municipio, foreign_key: "id_municipio", validate: true
 	belongs_to :clase, foreign_key: "id_clase", validate: true
