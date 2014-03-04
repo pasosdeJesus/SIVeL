@@ -2,7 +2,6 @@
   <div class="controls">
     <%= f.association :presponsable,
       collection: Presponsable.from('caso_presponsable, presponsable').where('caso_presponsable.id_presponsable=presponsable.id AND caso_presponsable.id_caso=?', @caso.id),
-      selected: :id,
       label: "Presunto Responsable",
       label_method: :nombre,
       value_method: :id %>
@@ -24,7 +23,7 @@
         :as => :string, :label => "Fecha" %>
 
     <%= f.association :desplazamiento,
-      collection: Desplazamiento.where(:id_caso => @caso.id),
+      collection: ([] + Desplazamiento.where(:id_caso => @caso.id)),
       selected: :fechaexpulsion,
 	    label: "Causó desplazamiento",
       label_method: :fechaexpulsion,
