@@ -37,6 +37,11 @@ class CasosController < ApplicationController
     vs.id_victima = vic.id
     vic.victimasjr = vs
     vs.save
+    cu = CasoUsuario.new
+    cu.id_usuario = current_usuario.id
+    cu.id_caso = @caso.id
+    cu.fechainicio = DateTime.now.strftime('%Y-%m-%d')
+    cu.save
 
     render action: 'edit'
   end
