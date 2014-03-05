@@ -75,5 +75,4 @@ INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-def', '2014-
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.3-cp', '2014-01-12', 'id en tabla caso_presponsable es identificación'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.3-vid', '2014-02-12', 'id en tabla victima'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.3-pa', '2014-02-25', 'pais'); 
-    
-
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.3-pru', '2014-03-04', 'Presunto responsable no unico por caso'); 

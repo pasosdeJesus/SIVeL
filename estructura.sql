@@ -765,11 +765,6 @@ CREATE TABLE caso_presponsable (
 	otro VARCHAR(500)
 );
 
-CREATE UNIQUE INDEX "index_caso_presponsable_on_caso_id_and_presponsable_id" 
-	ON "caso_presponsable" ("id_caso", "id_presponsable"); 
-CREATE UNIQUE INDEX "index_caso_presponsable_on_presponsable_id_and_caso_id" 
-	ON "caso_presponsable" ("id_presponsable", "id_caso");
-
 CREATE TABLE caso_categoria_presponsable (
 	id_tviolencia VARCHAR(1) REFERENCES tviolencia,
 	id_supracategoria INTEGER,

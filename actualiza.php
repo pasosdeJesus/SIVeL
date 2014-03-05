@@ -1155,6 +1155,16 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'País y Datos Venezuela'); 
 }
 
+$idac = '1.3-pru';
+if (!aplicado($idac)) {
+
+    hace_consulta($db, "DROP INDEX 
+        \"index_caso_presponsable_on_caso_id_and_presponsable_id\"", false);
+    hace_consulta($db, "DROP INDEX 
+        \"index_caso_presponsable_on_presponsable_id_and_caso_id\"", false);
+    aplicaact($act, $idac, 'Presunto responsable no unico por caso'); 
+}
+
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {
