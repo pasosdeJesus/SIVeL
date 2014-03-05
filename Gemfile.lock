@@ -211,6 +211,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt
   bootstrap-datepicker-rails
   bootstrap-sass
   cancan

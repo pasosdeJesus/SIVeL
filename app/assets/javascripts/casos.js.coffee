@@ -166,24 +166,26 @@ $(document).on 'ready page:load',  ->
   
   $(document).on('cocoon:before-remove', '', (e, presponsable) ->
     root = exports ? this
+    # Ingresa 2 veces, evitando duplicar
+    if (root.actospe && root.actospe.length>0) 
+      return
     root.actospe = []
-    esel=presponsable.find('select[data-actualiza=presponsable] option[selected=selected]')
-    if (esel.length == 0)
-      return
-    idp = esel.val()
-    otiguales = presponsable.siblings().filter('div[class*=control-group]').filter('div[style!="display: none;"]').find('select option[selected=selected][value=' + idp + ']')
-    if (otiguales.length != 0)
-      return
-    $('#antecedentes div[class*=caso_actosjr_presponsable] select').each((v, e) ->
-      if ($(e).val() == idp) 
-        root.actospe.push($(e).parent().parent());
-      )
-    if (root.actospe.length>0)
-      r = confirm("Hay " + root.actospe.length + " causas/antecedentes que se eliminarán con este presunto responsable, ¿Continuar?")
-      if (r==false)
-        presponsable.data('remove-cancel', 'true')
-      else
-        presponsable.data('remove-cancel', 'false')
+    esel=presponsable.find('select[data-actualiza=presponsable]')
+    if (esel.length > 0) 
+      idp = esel.val()
+      otiguales = presponsable.siblings().filter('div[class*=control-group]').filter('div[style!="display: none;"]').find('select option[selected=selected][value=' + idp + ']')
+      if (otiguales.length != 0)
+        return
+      $('#antecedentes div[class*=caso_actosjr_presponsable] select').each((v, e) ->
+        if ($(e).val() == idp) 
+          root.actospe.push($(e).parent().parent());
+        )
+      if (root.actospe.length>0)
+        r = confirm("Hay " + root.actospe.length + " causas/antecedentes que se eliminarán con este presunto responsable, ¿Continuar?")
+        if (r==false)
+          presponsable.data('remove-cancel', 'true')
+        else
+          presponsable.data('remove-cancel', 'false')
   )
 
   $(document).on('cocoon:after-remove', '', (e, presponsable) ->
@@ -191,6 +193,7 @@ $(document).on 'ready page:load',  ->
     for i, e of root.actospe
       l = e.find('.remove_fields')
       _cocoon_remove_fields(l)
+    root.actospe = []
   )
   
 #  $('#victima').on('cocoon:after-insert', (e, victima) ->
