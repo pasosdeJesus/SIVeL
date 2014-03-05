@@ -19,7 +19,7 @@
   value_method: :id %>
 <%= f.input(:orientacionsexual, collection: [
   [:Heterosexual, :H], [:Lesbiana, :L], [:Gay, :G], 
-  [:Bisexual, :B], [:Transexual, :T]], prompt: "Orientación Sexual") %>
+  [:Bisexual, :B], [:Transexual, :T]], label: "Orientación Sexual") %>
 <%= f.input :id, as: :hidden %>
 
 <%= f.simple_fields_for :victimasjr do |s| %>

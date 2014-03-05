@@ -141,29 +141,59 @@ $(document).on 'ready page:load',  ->
     })
   )
 
+  # En actos, lista de presuntos responsables se calcula
   $(document).on('focusin', 'select[id^=caso_actosjr_attributes_][id$=id_presponsable]', (e) ->
     #debugger
     sel = $(this).val()
     nh = ''
-    $('#presponsables>div>div[style!="display: none;"] select').each((k, v) ->
-      nh = nh + "<option value='" + v.value + "'"
-      if v.value == sel 
+    lcg = $('#presponsables .control-group[style!="display: none;"]')
+    lcg.each((k, v) ->
+      id = $(v).find('select[data-actualiza=presponsable]').val()
+      nh = nh + "<option value='" + id + "'"
+      if id == sel 
         nh = nh + ' selected'
-      op = $(v).find('[value=' + v.value + ']').text()
-      nh = nh + ">" + op + "</option>" )
+      tx = $(v).find('select[data-actualiza=presponsable] option[value=' + id + ']').text()
+      nh = nh + ">" + tx + "</option>" )
     $(this).html(nh)
   )
 
+  # En actos, lista de víctimas se cálcula
+  $(document).on('focusin', 'select[id^=caso_actosjr_attributes_][id$=id_persona]', (e) ->
+    sel = $(this).val()
+    nh = ''
+    v = $('#contacto')
+    lcg = v.add('#victima .control-group[style!="display: none;"]')
+    lcg.each((k, v) ->
+      # id: persona
+      id = $(v).find('.caso_victima_persona_id input').val()
+      nh = nh + "<option value='" + id + "'"
+      if id == sel 
+        nh = nh + ' selected'
+      # texto: nombres apellidos
+      nom = $(v).find('.caso_victima_persona_nombres input').val()
+      ap =  $(v).find('.caso_victima_persona_apellidos input').val()
+      tx = (nom + " " + ap).trim()
+      nh = nh + ">" + tx + "</option>" )
+    $(this).html(nh)
+  )
+
+
+  # Al cambiar país se recalcula lista de departamentos
   $(document).on('change', 'select[id^=caso_][id$=id_pais]', (e) ->
     llenaDepartamento($(this))
   )
+
+  # Al cambiar departamento se recalcula lista de municipios
   $(document).on('change', 'select[id^=caso_][id$=id_departamento]', (e) ->
     llenaMunicipio($(this))
   )
+
+  # Al cambiar municipio se recalcula lista de centros poblados
   $(document).on('change', 'select[id^=caso_][id$=id_municipio]', (e) ->
     llenaClase($(this))
   )
-  
+ 
+  # Al eliminar registros se debe confirmar si se eliminan dependientes
   $(document).on('cocoon:before-remove', '', (e, presponsable) ->
     root = exports ? this
     # Ingresa 2 veces, evitando duplicar
@@ -188,6 +218,7 @@ $(document).on 'ready page:load',  ->
           presponsable.data('remove-cancel', 'false')
   )
 
+  # Complemento de la anterior para eliminar dependientes tras confirmación
   $(document).on('cocoon:after-remove', '', (e, presponsable) ->
     root = exports ? this
     for i, e of root.actospe

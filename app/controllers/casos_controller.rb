@@ -23,8 +23,8 @@ class CasosController < ApplicationController
     @caso.casosjr.asesor = current_usuario.id
     @caso.casosjr.regionsjr = Regionsjr.find(1)
     per = Persona.new
-    per.nombres = 'Nombres'
-    per.apellidos = 'Apellidos'
+    per.nombres = 'N'
+    per.apellidos = 'N'
     per.sexo = 'S'
     per.save
     vic = Victima.new
@@ -57,16 +57,52 @@ class CasosController < ApplicationController
           format.json { render json: @presponsable.id.to_s, status: :created }
           format.html { render inline: @presponsable.id.to_s }
         end
-        return
       else
         format.html { render action: "error" }
         format.json { render json: @presponsable.errors, status: :unprocessable_entity }
       end
+      return
     end
     respond_to do |format|
-      format.html { render inline: 'No' }
+      format.html { render inline: 'Falta identificacion del caso' }
     end
   end
+
+
+  def nuevavictima
+    @persona = Persona.new
+    @victima = Victima.new
+    @victimasjr = Victimasjr.new
+    @persona.nombres = 'N'
+    @persona.apellidos = 'N'
+    @persona.sexo = 'S'
+    if !params[:caso_id].nil?
+      if !@persona.save
+        respond_to do |format|
+          format.html { render inline: 'No pudo crear persona' }
+        end
+        return
+      end
+      @victima.id_caso = params[:caso_id]
+      @victima.id_persona = @persona.id
+      @victima.victimasjr = @victimasjr
+      if @victima.save
+        respond_to do |format|
+          format.js { render text: @victima.id.to_s }
+          format.json { render json: @victima.id.to_s, status: :created }
+          format.html { render inline: @victima.id.to_s }
+        end
+      else
+        format.html { render action: "error" }
+        format.json { render json: @victima.errors, status: :unprocessable_entity }
+      end
+      return
+    end
+    respond_to do |format|
+      format.html { render inline: 'Falta identificacion del caso' }
+    end
+  end
+
 
 	def lista
     if !params[:tabla].nil?

@@ -13,7 +13,6 @@
 
     <%= f.association :persona,
       collection: Persona.from('victima, persona').where('victima.id_persona=persona.id AND victima.id_caso=?', @caso.id),
-      selected: :id,
 	    label: "Víctima",
       label_method: lambda {|t| t.nombres + ' ' + t.apellidos},
       value_method: :id %>
@@ -24,7 +23,7 @@
 
     <%= f.association :desplazamiento,
       collection: ([] + Desplazamiento.where(:id_caso => @caso.id)),
-      selected: :fechaexpulsion,
+      #selected: :fechaexpulsion,
 	    label: "Causó desplazamiento",
       label_method: :fechaexpulsion,
       value_method: :fechaexpulsion %>

@@ -98,8 +98,13 @@
                 <% end %>
               <% end %>
               <div class="links">
-                <%= link_to_add_association 'Añadir Víctima', f, :victima, :class => 'btn-primary' %>
+                <%= link_to_add_association 'Añadir Víctima', f, :victima, 
+                  { :class => 'btn-primary',
+                    "data-ajax" => "/casos/nuevavictima", 
+                    "data-ajaxdata" => "caso_id" }
+                %>
               </div>
+
             </div>
           </div>
         </div> <! -- accordion-group -->

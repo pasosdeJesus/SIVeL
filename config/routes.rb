@@ -1,25 +1,23 @@
 Sivel2::Application.routes.draw do
 
-  get '/casos/nuevopresponsable' => 'casos#nuevopresponsable'
   get '/casos/lista' => 'casos#lista'
-  resources :casos, path_names: { new: 'nuevo', edit: 'edita' }
+  get '/casos/nuevavictima' => 'casos#nuevavictima'
+  get '/casos/nuevopresponsable' => 'casos#nuevopresponsable'
+  get 'nosotros' => 'hogar#nosotros'
+  get 'contacto' => 'hogar#contacto'
+  get "hogar" => 'hogar#index'
 
   resources :actividades, path_names: { new: 'nueva', edit: 'edita' }
   resources :actividadareas, path_names: { new: 'nueva', edit: 'edita' }
+  resources :casos, path_names: { new: 'nuevo', edit: 'edita' }
 
   devise_scope :usuario do
     get 'sign_out' => 'devise/sessions#destroy'
   end
-
-
   devise_for :usuarios
   resources :usuarios, path_names: { new: 'nuevo', edit: 'edita' } 
 
   root 'hogar#index'
-
-  get 'nosotros' => 'hogar#nosotros'
-  get 'contacto' => 'hogar#contacto'
-  get "hogar" => 'hogar#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

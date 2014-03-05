@@ -1,13 +1,13 @@
 <!-- %= f.input :id, readonly: true %-->
 <%= f.input :id, as: :hidden %>
-<%= f.input :nombres %>
-<%= f.input :apellidos %>
-<%= f.input :anionac %>
-<%= f.input :mesnac %>
-<%= f.input :dianac %>
+<%= f.input :nombres, placeholder: 'N' %>
+<%= f.input :apellidos, placeholder: 'N' %>
+<%= f.input :anionac, label: 'Año Nacimiento' %>
+<%= f.input :mesnac, label: 'Mes Nacimiento' %>
+<%= f.input :dianac, label: 'Día Nacimiento' %>
 <%= f.input :sexo, collection: [["SIN INFORMACIÓN", :S], ["FEMENINO", :F], ["MASCULINO", :M]], include_blank: false %>
-<%= f.input :tipodocumento, collection: [["CC", :CC], ["TI", :TI], ["P", :P], [:O, :O]], prompt: "Tipo de Documento" %>
-<%= f.input :numerodocumento%>
+<%= f.input :tipodocumento, collection: [["CC", :CC], ["TI", :TI], ["P", :P], [:O, :O]], label: "Tipo de Documento" %>
+<%= f.input :numerodocumento, label: 'Número Documento'%>
 <%= f.association :pais,
   label: "País",
   label_method: :nombre,
