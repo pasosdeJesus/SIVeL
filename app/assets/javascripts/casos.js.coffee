@@ -192,39 +192,51 @@ $(document).on 'ready page:load',  ->
   $(document).on('change', 'select[id^=caso_][id$=id_municipio]', (e) ->
     llenaClase($(this))
   )
- 
+
   # Al eliminar registros se debe confirmar si se eliminan dependientes
-  $(document).on('cocoon:before-remove', '', (e, presponsable) ->
+  $(document).on('cocoon:before-remove', '', (e, papa) ->
     root = exports ? this
     # Ingresa 2 veces, evitando duplicar
-    if (root.actospe && root.actospe.length>0) 
+    if (root.elempe && root.elempe.length>0) 
       return
-    root.actospe = []
-    esel=presponsable.find('select[data-actualiza=presponsable]')
+    root.elempe = []
+    vsel=papa.find('.caso_victima_persona_id input')
+    esel=papa.find('select[data-actualiza=presponsable]')
     if (esel.length > 0) 
       idp = esel.val()
-      otiguales = presponsable.siblings().filter('div[class*=control-group]').filter('div[style!="display: none;"]').find('select option[selected=selected][value=' + idp + ']')
+      otiguales = papa.siblings().filter('div[class*=control-group]').filter('div[style!="display: none;"]').find('select option[selected=selected][value=' + idp + ']')
       if (otiguales.length != 0)
         return
-      $('#antecedentes div[class*=caso_actosjr_presponsable] select').each((v, e) ->
+      nomelempe = "causas/antecedentes"
+      $('#antecedentes .caso_actosjr_presponsable select').each((v, e) ->
         if ($(e).val() == idp) 
-          root.actospe.push($(e).parent().parent());
+          root.elempe.push($(e).parent().parent());
         )
-      if (root.actospe.length>0)
-        r = confirm("Hay " + root.actospe.length + " causas/antecedentes que se eliminarán con este presunto responsable, ¿Continuar?")
-        if (r==false)
-          presponsable.data('remove-cancel', 'true')
-        else
-          presponsable.data('remove-cancel', 'false')
+    else
+      if (vsel.length>0)
+        idv = vsel.val()
+        nomelempe = "causas/antecedentes"
+        $('#antecedentes .caso_actosjr_persona select').each((v, e) ->
+          if ($(e).val() == idv) 
+            root.elempe.push($(e).parent().parent());
+        )
+       
+    if (root.elempe.length>0)
+      r = confirm("Hay " + root.elempe.length + " " + nomelempe + 
+        " que se eliminarán con este presunto responsable, ¿Continuar?")
+      if (r==false)
+        papa.data('remove-cancel', 'true')
+      else
+        papa.data('remove-cancel', 'false')
   )
 
   # Complemento de la anterior para eliminar dependientes tras confirmación
   $(document).on('cocoon:after-remove', '', (e, presponsable) ->
     root = exports ? this
-    for i, e of root.actospe
+    for i, e of root.elempe
       l = e.find('.remove_fields')
       _cocoon_remove_fields(l)
-    root.actospe = []
+    root.elempe = []
   )
   
 #  $('#victima').on('cocoon:after-insert', (e, victima) ->

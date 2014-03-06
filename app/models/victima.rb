@@ -1,5 +1,5 @@
 class Victima < ActiveRecord::Base
-	has_many :antecedente_victima, foreign_key: "id_persona,id_caso", validate: true, dependent: :destroy
+	#has_many :antecedente_victima, foreign_key: [:id_persona, :id_caso], validate: true, dependent: :destroy
 	belongs_to :caso, foreign_key: "id_caso", validate: true
 	belongs_to :profesion, foreign_key: "id_profesion", validate: true
 	belongs_to :rangoedad, foreign_key: "id_rangoedad", validate: true
