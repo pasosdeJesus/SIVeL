@@ -146,7 +146,7 @@ $(document).on 'ready page:load',  ->
     #debugger
     sel = $(this).val()
     nh = ''
-    lcg = $('#presponsables .control-group[style!="display: none;"]')
+    lcg = $('#presponsable .control-group[style!="display: none;"]')
     lcg.each((k, v) ->
       id = $(v).find('select[data-actualiza=presponsable]').val()
       nh = nh + "<option value='" + id + "'"
@@ -177,6 +177,45 @@ $(document).on 'ready page:load',  ->
     $(this).html(nh)
   )
 
+  # En desplazamientos, lista de sitios de expulsión se cálcula
+  $(document).on('focusin', 'select[id^=caso_desplazamiento_attributes_][id$=id_expulsion]', (e) ->
+    sel = $(this).val()
+    nh = ''
+    lcg = $('#ubicacion .control-group[style!="display: none;"]')
+    lcg.each((k, v) ->
+      # id: ubicacion
+      id = $(v).find('.caso_ubicacion_id input').val()
+      nh = nh + "<option value='" + id + "'"
+      if id == sel 
+        nh = nh + ' selected'
+      idp = $(v).find('.caso_ubicacion_pais select').val()
+      tx = $(v).find('.caso_ubicacion_pais select option[value=' + idp + ']').text()
+      idd = $(v).find('.caso_ubicacion_departamento select').val()
+      if (idd > 0)
+        tx = tx + " / " + $(v).find('.caso_ubicacion_departamento select option[value=' + idd + ']').text()
+      nh = nh + ">" + tx + "</option>" )
+    $(this).html(nh)
+  )
+
+  # En desplazamientos, lista de sitios de llegada se cálcula
+  $(document).on('focusin', 'select[id^=caso_desplazamiento_attributes_][id$=id_llegada]', (e) ->
+    sel = $(this).val()
+    nh = ''
+    lcg = $('#ubicacion .control-group[style!="display: none;"]')
+    lcg.each((k, v) ->
+      # id: ubicacion
+      id = $(v).find('.caso_ubicacion_id input').val()
+      nh = nh + "<option value='" + id + "'"
+      if id == sel 
+        nh = nh + ' selected'
+      idp = $(v).find('.caso_ubicacion_pais select').val()
+      tx = $(v).find('.caso_ubicacion_pais select option[value=' + idp + ']').text()
+      idd = $(v).find('.caso_ubicacion_departamento select').val()
+      if (idd > 0)
+        tx = tx + " / " + $(v).find('.caso_ubicacion_departamento select option[value=' + idd + ']').text()
+      nh = nh + ">" + tx + "</option>" )
+    $(this).html(nh)
+  )
 
   # Al cambiar país se recalcula lista de departamentos
   $(document).on('change', 'select[id^=caso_][id$=id_pais]', (e) ->
@@ -193,6 +232,7 @@ $(document).on 'ready page:load',  ->
     llenaClase($(this))
   )
 
+
   # Al eliminar registros se debe confirmar si se eliminan dependientes
   $(document).on('cocoon:before-remove', '', (e, papa) ->
     root = exports ? this
@@ -208,14 +248,16 @@ $(document).on 'ready page:load',  ->
       if (otiguales.length != 0)
         return
       nomelempe = "causas/antecedentes"
+      nomesteelem = "este presunto responsable"
       $('#antecedentes .caso_actosjr_presponsable select').each((v, e) ->
         if ($(e).val() == idp) 
           root.elempe.push($(e).parent().parent());
-        )
+      )
     else
       if (vsel.length>0)
         idv = vsel.val()
         nomelempe = "causas/antecedentes"
+        nomesteelem = "esta víctima"
         $('#antecedentes .caso_actosjr_persona select').each((v, e) ->
           if ($(e).val() == idv) 
             root.elempe.push($(e).parent().parent());
@@ -223,7 +265,37 @@ $(document).on 'ready page:load',  ->
        
     if (root.elempe.length>0)
       r = confirm("Hay " + root.elempe.length + " " + nomelempe + 
-        " que se eliminarán con este presunto responsable, ¿Continuar?")
+        " que se eliminarán con " + nomesteelem + ", ¿Continuar?")
+      if (r==false)
+        papa.data('remove-cancel', 'true')
+      else
+        papa.data('remove-cancel', 'false')
+  )
+
+  # Validaciones al eliminar ubicación
+  $('#ubicacion').on('cocoon:before-remove', (e, papa) ->
+    root = exports ? this
+    # Si ingresa más de una vez se evita duplicar
+    if (root.elempe && root.elempe.length>0) 
+      return
+    root.elempe = []
+    usel=papa.find('.caso_ubicacion_id input')
+    if (usel.length>0)
+      id = usel.val()
+      nomelempe = "desplazamientos"
+      nomesteelem = "este sitio geográfico"
+      $('#desplazamiento .caso_desplazamiento_expulsion select').each((v, e) ->
+        if ($(e).val() == id) 
+          root.elempe.push($(e).parent().parent());
+      )
+      $('#desplazamiento .caso_desplazamiento_llegada select').each((v, e) ->
+        if ($(e).val() == id) 
+          root.elempe.push($(e).parent().parent());
+      )
+       
+    if (root.elempe.length>0)
+      r = confirm("Hay " + root.elempe.length + " " + nomelempe + 
+        " que se eliminarán con " + nomesteelem + ", ¿Continuar?")
       if (r==false)
         papa.data('remove-cancel', 'true')
       else

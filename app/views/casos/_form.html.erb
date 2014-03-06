@@ -121,7 +121,11 @@
                 <%= render 'ubicacion_fields', :f => ubicacion %>
               <% end %>
               <div class="links">
-                <%= link_to_add_association 'Añadir Sitio geográfico', f, :ubicacion, :class => 'btn-primary' %>
+                <%= link_to_add_association 'Añadir Sitio geográfico', f, 
+                  :ubicacion, { :class => 'btn-primary',
+                    "data-ajax" => "/casos/nuevaubicacion", 
+                    "data-ajaxdata" => "caso_id" }
+                %>
               </div>
             </div>
           </div>
@@ -129,11 +133,11 @@
 
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" href="#desplazamientos">
+            <a class="accordion-toggle" data-toggle="collapse" href="#desplazamiento">
               Refugios/Desplazamientos
             </a>
           </div>
-          <div id="desplazamientos" class="accordion-body collapse">
+          <div id="desplazamiento" class="accordion-body collapse">
             <div class="accordion-inner">
               <%= f.simple_fields_for :desplazamiento do |desplazamiento| %>
                 <%= render 'desplazamiento_fields', :f => desplazamiento %>
@@ -148,11 +152,11 @@
 
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" href="#presponsables">
+            <a class="accordion-toggle" data-toggle="collapse" href="#presponsable">
               Agente de Persecución
             </a>
           </div>
-          <div id="presponsables" class="accordion-body collapse">
+          <div id="presponsable" class="accordion-body collapse">
             <div class="accordion-inner">
               <%= f.simple_fields_for :caso_presponsable do |caso_presponsable| %>
                 <%= render 'caso_presponsable_fields', :f => caso_presponsable %>
@@ -207,11 +211,11 @@
 
         <div class="accordion-group">
           <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" href="#anexos"> 
+            <a class="accordion-toggle" data-toggle="collapse" href="#anexo"> 
               Anexos
             </a>
           </div>
-          <div id="anexos" class="accordion-body collapse">
+          <div id="anexo" class="accordion-body collapse">
             <div class="accordion-inner">
               <%= f.simple_fields_for :anexo do |anexo| %>
                 <%= render 'anexo_fields', :f => anexo %>

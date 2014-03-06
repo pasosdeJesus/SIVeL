@@ -47,8 +47,8 @@ class CasosController < ApplicationController
   end
 
   def nuevopresponsable
-    @presponsable = CasoPresponsable.new
     if !params[:caso_id].nil?
+      @presponsable = CasoPresponsable.new
       @presponsable.id_caso = params[:caso_id]
       @presponsable.id_presponsable = 35
       if @presponsable.save
@@ -58,25 +58,27 @@ class CasosController < ApplicationController
           format.html { render inline: @presponsable.id.to_s }
         end
       else
-        format.html { render action: "error" }
-        format.json { render json: @presponsable.errors, status: :unprocessable_entity }
+        respond_to do |format|
+          format.html { render action: "error" }
+          format.json { render json: @presponsable.errors, status: :unprocessable_entity }
+        end
       end
-      return
-    end
-    respond_to do |format|
-      format.html { render inline: 'Falta identificacion del caso' }
+    else
+      respond_to do |format|
+        format.html { render inline: 'Falta identificacion del caso' }
+      end
     end
   end
 
 
   def nuevavictima
-    @persona = Persona.new
-    @victima = Victima.new
-    @victimasjr = Victimasjr.new
-    @persona.nombres = 'N'
-    @persona.apellidos = 'N'
-    @persona.sexo = 'S'
     if !params[:caso_id].nil?
+      @persona = Persona.new
+      @victima = Victima.new
+      @victimasjr = Victimasjr.new
+      @persona.nombres = 'N'
+      @persona.apellidos = 'N'
+      @persona.sexo = 'S'
       if !@persona.save
         respond_to do |format|
           format.html { render inline: 'No pudo crear persona' }
@@ -93,13 +95,39 @@ class CasosController < ApplicationController
           format.html { render inline: @victima.id.to_s }
         end
       else
-        format.html { render action: "error" }
-        format.json { render json: @victima.errors, status: :unprocessable_entity }
+        respond_to do |format|
+          format.html { render action: "error" }
+          format.json { render json: @victima.errors, status: :unprocessable_entity }
+        end
       end
-      return
+    else
+      respond_to do |format|
+        format.html { render inline: 'Falta identificacion del caso' }
+      end
     end
-    respond_to do |format|
-      format.html { render inline: 'Falta identificacion del caso' }
+  end
+
+  def nuevaubicacion
+    if !params[:caso_id].nil?
+      @ubicacion = Ubicacion.new
+      @ubicacion.id_caso = params[:caso_id]
+      @ubicacion.id_pais = 862
+      if @ubicacion.save
+        respond_to do |format|
+          format.js { render text: @ubicacion.id.to_s }
+          format.json { render json: @ubicacion.id.to_s, status: :created }
+          format.html { render inline: @ubicacion.id.to_s }
+        end
+      else
+        respond_to do |format|
+          format.html { render action: "error" }
+          format.json { render json: @ubicacion.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { render inline: 'Falta identificacion del caso' }
+      end
     end
   end
 

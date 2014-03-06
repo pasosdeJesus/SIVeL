@@ -1,6 +1,7 @@
 Sivel2::Application.routes.draw do
 
   get '/casos/lista' => 'casos#lista'
+  get '/casos/nuevaubicacion' => 'casos#nuevaubicacion'
   get '/casos/nuevavictima' => 'casos#nuevavictima'
   get '/casos/nuevopresponsable' => 'casos#nuevopresponsable'
   get 'nosotros' => 'hogar#nosotros'

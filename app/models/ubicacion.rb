@@ -7,4 +7,5 @@ class Ubicacion < ActiveRecord::Base
 	belongs_to :clase, foreign_key: "id_clase", validate: true
 	belongs_to :tsitio, foreign_key: "id_tsitio", validate: true
 	belongs_to :caso, foreign_key: "id_caso", validate: true
+  validates_presence_of :pais
 end
