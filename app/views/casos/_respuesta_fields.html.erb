@@ -5,7 +5,6 @@
       :as => :string, :label => "Fecha de Atención" %>
     <%= f.association :desplazamiento,
       collection: Desplazamiento.where(:id_caso => @caso.id),
-      selected: :id,
 	    label: "Desp. Atendido",
       label_method: :fechaexpulsion,
       value_method: :fechaexpulsion %>

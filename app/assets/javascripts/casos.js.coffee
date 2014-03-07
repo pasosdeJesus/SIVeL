@@ -131,7 +131,17 @@ llenaClase = ($this) ->
     $("#" + idcla).attr("disabled", false);
 
 
+# Elimina secciones agregadas con cocoon listadas en elempe
+eliminaPendientes = (elempe) ->
+  for i, e of elempe
+    l = e.find('.remove_fields')
+    _cocoon_remove_fields(l)
+
+
 $(document).on 'ready page:load',  -> 
+
+  root = exports ? this
+
   $(document).on('cocoon:after-insert', (e) ->
     $('[data-behaviour~=datepicker]').datepicker({
       format: 'yyyy-mm-dd'
@@ -161,21 +171,60 @@ $(document).on 'ready page:load',  ->
   $(document).on('focusin', 'select[id^=caso_actosjr_attributes_][id$=id_persona]', (e) ->
     sel = $(this).val()
     nh = ''
-    v = $('#contacto')
-    lcg = v.add('#victima .control-group[style!="display: none;"]')
+    c = $('#contacto')
+    lcg = c.add('#victima .control-group[style!="display: none;"]')
     lcg.each((k, v) ->
       # id: persona
-      id = $(v).find('.caso_victima_persona_id input').val()
+      # Nos gustaría 
+      # id = $(v).find('.caso_victima_persona_id input').val()
+      # pero como nombre de clase genera caso_victima_279_persona_id
+      id = $(v).find('div').filter( () -> this.attributes.class.value.match(/caso_victima[_0-9]*persona_id/)).find('input').val()
       nh = nh + "<option value='" + id + "'"
       if id == sel 
         nh = nh + ' selected'
       # texto: nombres apellidos
-      nom = $(v).find('.caso_victima_persona_nombres input').val()
-      ap =  $(v).find('.caso_victima_persona_apellidos input').val()
+      nom = $(v).find('div').filter( () -> this.attributes.class.value.match(/caso_victima[_0-9]*persona_nombres/)).find('input').val()
+      nom = $(v).find('.caso_victima_persona_apellidos input').val()
+      ap = $(v).find('div').filter( () -> this.attributes.class.value.match(/caso_victima[_0-9]*persona_apellidos/)).find('input').val()
       tx = (nom + " " + ap).trim()
       nh = nh + ">" + tx + "</option>" )
     $(this).html(nh)
   )
+
+  # En actos, lista de desplazamientos se cálcula
+  $(document).on('focusin', 'select[id^=caso_actosjr_attributes_][id$=fechaexpulsion]', (e) ->
+    sel = $(this).val()
+    nh = '<option value=""></option>'
+    lcg = $('#desplazamiento .control-group[style!="display: none;"]')
+    lcg.each((k, v) ->
+      # id: fechaexpulsion
+      id = $(v).find('.caso_desplazamiento_fechaexpulsion input').val()
+      nh = nh + "<option value='" + id + "'"
+      if id == sel 
+        nh = nh + ' selected'
+      # texto: fechaexpulsion
+      tx = id
+      nh = nh + ">" + tx + "</option>" )
+    $(this).html(nh)
+  )
+
+  # En sesiones de atención, lista de desplazamientos se cálcula
+  $(document).on('focusin', 'select[id^=caso_respuesta_attributes_][id$=fechaexpulsion]', (e) ->
+    sel = $(this).val()
+    nh = ''
+    lcg = $('#desplazamiento .control-group[style!="display: none;"]')
+    lcg.each((k, v) ->
+      # id: fechaexpulsion
+      id = $(v).find('.caso_desplazamiento_fechaexpulsion input').val()
+      nh = nh + "<option value='" + id + "'"
+      if id == sel 
+        nh = nh + ' selected'
+      # texto: fechaexpulsion
+      tx = id
+      nh = nh + ">" + tx + "</option>" )
+    $(this).html(nh)
+  )
+
 
   # En desplazamientos, lista de sitios de expulsión se cálcula
   $(document).on('focusin', 'select[id^=caso_desplazamiento_attributes_][id$=id_expulsion]', (e) ->
@@ -232,15 +281,12 @@ $(document).on 'ready page:load',  ->
     llenaClase($(this))
   )
 
-
-  # Al eliminar registros se debe confirmar si se eliminan dependientes
-  $(document).on('cocoon:before-remove', '', (e, papa) ->
-    root = exports ? this
+  # Antes de eliminar presponsable confirmar si se eliminan dependientes
+  $('#presponsable').on('cocoon:before-remove', '', (e, papa) ->
     # Ingresa 2 veces, evitando duplicar
     if (root.elempe && root.elempe.length>0) 
       return
     root.elempe = []
-    vsel=papa.find('.caso_victima_persona_id input')
     esel=papa.find('select[data-actualiza=presponsable]')
     if (esel.length > 0) 
       idp = esel.val()
@@ -249,19 +295,10 @@ $(document).on 'ready page:load',  ->
         return
       nomelempe = "causas/antecedentes"
       nomesteelem = "este presunto responsable"
-      $('#antecedentes .caso_actosjr_presponsable select').each((v, e) ->
+      $('#antecedentes .control-group[style!="display: none;"] .caso_actosjr_presponsable select').each((v, e) ->
         if ($(e).val() == idp) 
           root.elempe.push($(e).parent().parent());
       )
-    else
-      if (vsel.length>0)
-        idv = vsel.val()
-        nomelempe = "causas/antecedentes"
-        nomesteelem = "esta víctima"
-        $('#antecedentes .caso_actosjr_persona select').each((v, e) ->
-          if ($(e).val() == idv) 
-            root.elempe.push($(e).parent().parent());
-        )
        
     if (root.elempe.length>0)
       r = confirm("Hay " + root.elempe.length + " " + nomelempe + 
@@ -272,9 +309,45 @@ $(document).on 'ready page:load',  ->
         papa.data('remove-cancel', 'false')
   )
 
-  # Validaciones al eliminar ubicación
+  # Tras eliminar presponsable, eliminar dependientes
+  $('#presponsable').on('cocoon:after-remove', '', (e, presponsable) ->
+    eliminaPendientes(root.elempe);
+    root.elempe = []
+  )
+ 
+  # Antes de eliminar víctima confirmar si se eliminan dependientes
+  $('#victima').on('cocoon:before-remove', '', (e, papa) ->
+    # Ingresa 2 veces, evitando duplicar
+    if (root.elempe && root.elempe.length>0) 
+      return
+    root.elempe = []
+    vsel=papa.find('.caso_victima_persona_id input')
+    if (vsel.length>0)
+      idv = vsel.val()
+      nomelempe = "causas/antecedentes"
+      nomesteelem = "esta víctima"
+      $('#antecedentes .control-group[style!="display: none;"] .caso_actosjr_persona select').each((v, e) ->
+        if ($(e).val() == idv) 
+          root.elempe.push($(e).parent().parent());
+      )
+       
+    if (root.elempe.length>0)
+      r = confirm("Hay " + root.elempe.length + " " + nomelempe + 
+        " que se eliminarán con " + nomesteelem + ", ¿Continuar?")
+      if (r==false)
+        papa.data('remove-cancel', 'true')
+      else
+        papa.data('remove-cancel', 'false')
+  )
+
+  # Tras eliminar víctima, eliminar dependientes
+  $('#victima').on('cocoon:after-remove', '', (e, presponsable) ->
+    eliminaPendientes(root.elempe);
+    root.elempe = []
+  )
+ 
+  # Antes de eliminar ubicacion confirmar si se eliminan dependientes
   $('#ubicacion').on('cocoon:before-remove', (e, papa) ->
-    root = exports ? this
     # Si ingresa más de una vez se evita duplicar
     if (root.elempe && root.elempe.length>0) 
       return
@@ -284,11 +357,11 @@ $(document).on 'ready page:load',  ->
       id = usel.val()
       nomelempe = "desplazamientos"
       nomesteelem = "este sitio geográfico"
-      $('#desplazamiento .caso_desplazamiento_expulsion select').each((v, e) ->
+      $('#desplazamiento .control-group[style!="display: none;"] .caso_desplazamiento_expulsion select').each((v, e) ->
         if ($(e).val() == id) 
           root.elempe.push($(e).parent().parent());
       )
-      $('#desplazamiento .caso_desplazamiento_llegada select').each((v, e) ->
+      $('#desplazamiento .control-group[style!="display: none;"] .caso_desplazamiento_llegada select').each((v, e) ->
         if ($(e).val() == id) 
           root.elempe.push($(e).parent().parent());
       )
@@ -302,28 +375,61 @@ $(document).on 'ready page:load',  ->
         papa.data('remove-cancel', 'false')
   )
 
-  # Complemento de la anterior para eliminar dependientes tras confirmación
-  $(document).on('cocoon:after-remove', '', (e, presponsable) ->
-    root = exports ? this
-    for i, e of root.elempe
-      l = e.find('.remove_fields')
-      _cocoon_remove_fields(l)
+  # Tras eliminar ubicacion, eliminar dependientes
+  $('#ubicacion').on('cocoon:after-remove', (e, papa) ->
+    eliminaPendientes(root.elempe);
     root.elempe = []
   )
-  
-#  $('#victima').on('cocoon:after-insert', (e, victima) ->
-#    cid = victima.find('input[id*=nombres]').attr('name')
-#    re= new RegExp(".*[[]([0-9][0-9]*).*");
-#    iid = cid.replace(re, "$1"); 
-#    debugger )
+ 
+  # Antes de eliminar desplazamiento confirmar si se eliminan dependientes
+  $('#desplazamiento').on('cocoon:before-remove', (e, papa) ->
+    # Si ingresa más de una vez se evita duplicar
+    if (root.elempe && root.elempe.length>0) 
+      return
+    root.elempe = []
+    usel=papa.find('.caso_desplazamiento_fechaexpulsion input')
+    if (usel.length>0)
+      id = usel.val()
+      nomelempe = "causas/antecedentes"
+      nomesteelem = "este desplazamiento"
+      $('#antecedentes .control-group[style!="display: none;"] .caso_actosjr_desplazamiento select').each((v, e) ->
+        if ($(e).val() == id) 
+          root.elempe.push($(e).parent().parent());
+      )
+      if (root.elempe.length>0)
+        r = confirm("Hay " + root.elempe.length + " " + nomelempe + 
+          " que se eliminarán con " + nomesteelem + ", ¿Continuar?")
+        if (r==false)
+          papa.data('remove-cancel', 'true')
+        else
+          papa.data('remove-cancel', 'false')
+      lelempe = root.elempe.length
+      nomelempe = "sesionesantecedentes"
+      nomesteelem = "este desplazamiento"
+      $('#ayudasjr .control-group[style!="display: none;"] .caso_respuesta_desplazamiento select').each((v, e) ->
+        if ($(e).val() == id) 
+          root.elempe.push($(e).parent().parent());
+      )
+
+    if (root.elempe.length > lelempe)
+      r = confirm("Hay " + root.elempe.length + " " + nomelempe + 
+        " que se eliminarán con " + nomesteelem + ", ¿Continuar?")
+      if (r==false)
+        papa.data('remove-cancel', 'true')
+  )
+
+  # Tras eliminar desplazamiento, eliminar dependientes
+  $('#desplazamiento').on('cocoon:after-remove', (e, papa) ->
+    eliminaPendientes(root.elempe);
+    root.elempe = []
+  )
+ 
+
   # Deshabilitar parte para obligar a completar partes para continuar
   # http://stackoverflow.com/questions/16777003/what-is-the-easiest-way-to-disable-enable-buttons-and-links-jquery-bootstrap
   #$('body').on('click', 'a.disabled', (e) -> 
   #  e.preventDefault() )
 
-  # Guardar automáticamente caso nuevo cuando se editen fecha de caso o
-  # de desplazamiento
-  
   # Método para detectar cambios en datepicker de
   # http://stackoverflow.com/questions/17009354/detect-change-to-selected-date-with-bootstrap-datepicker
   #$('#caso_fecha').datepicker({
@@ -336,9 +442,4 @@ $(document).on 'ready page:load',  ->
   #  $(this).parents("form").submit() 
   #  $("article").css("cursor", "default") );
 
-#  $('#caso_fecha').change( () ->
-#    console.log($('#date-daily').val()) );
-
-#  $('#caso_fecha').on('change', ->
-# )
   return

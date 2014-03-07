@@ -90,9 +90,12 @@ class CasosController < ApplicationController
       @victima.victimasjr = @victimasjr
       if @victima.save
         respond_to do |format|
-          format.js { render text: @victima.id.to_s }
-          format.json { render json: @victima.id.to_s, status: :created }
-          format.html { render inline: @victima.id.to_s }
+          format.js { render json: {'victima' => @victima.id.to_s,
+            'persona' => @persona.id.to_s} }
+          format.json { render json: {'victima' => @victima.id.to_s,
+            'persona' => @persona.id.to_s}, status: :created }
+          format.html { render json: {'victima' => @victima.id.to_s,
+            'persona' => @persona.id.to_s} }
         end
       else
         respond_to do |format|
