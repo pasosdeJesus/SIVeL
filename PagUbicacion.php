@@ -666,7 +666,11 @@ class PagUbicacion extends PagBaseMultiple
             /*DB_DataObject_Cast::sql(
                 'NULL'
             ); */
-            unset($valores['id_municipio']);
+        }
+        if ($valores['id_municipio'] == '') {
+            //print_r($valores); die("x");
+            //unset($valores['id_municipio']);
+            $valores['id_municipio'] = 'null';
         }
         $ret = $this->process(array(&$this->bubicacion, 'processForm'), false);
         if (PEAR::isError($ret)) {

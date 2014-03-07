@@ -578,7 +578,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $lpr = htmlentities_array(
             $db->getAssoc(
                 "SELECT id, nombre FROM presponsable " .
-                "WHERE fechadeshabilitacion is null"
+                "WHERE fechadeshabilitacion is null ORDER BY nombre"
             )
         );
         if (PEAR::isError($lpr)) {

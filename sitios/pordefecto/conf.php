@@ -294,7 +294,7 @@ $GLOBALS['m_opcion'] = array (
         'nombre' => _('Buscar repetidos'), 'idpapa' => 60,
         'url' => 'buscaRepetidos'
     ),
-    69 => array('nombre' => _('Salir'), 'idpapa' => 60, 'url' => 'terminar'),
+    6900 => array('nombre' => _('Salir'), 'idpapa' => 60, 'url' => 'terminar'),
 );
 
 /** Roles para los que está disponible cada opción del menú

@@ -2937,7 +2937,7 @@ if (!aplicado($idac)) {
         AND persona_trelacion.id_trelacion=trelacion.id
         AND trelacion.inverso IS NOT NULL)"
     );
-    aplicaact($act, $idac, 'Datos para tablas básicas');
+    aplicaact($act, $idac, 'Relaciones familiares refinadas');
 }
 
 

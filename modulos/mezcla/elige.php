@@ -79,8 +79,8 @@ class AccionComparaDos extends HTML_QuickForm_Action
         }
         $cons .=" AND v1.id_persona=p1.id AND v2.id_persona=p2.id 
             AND 
-            (levenshtein(p1.nombres || ' ' || p1.apellidos, p2.nombres || ' ' || p2.apellidos)<$dlev OR
-            levenshtein(p1.apellidos || ' ' || p1.nombres, p2.nombres || ' ' || p2.apellidos)<$dlev)
+            (levenshtein(p1.nombres || ' ' || p1.apellidos, p2.nombres || ' ' || p2.apellidos)<=$dlev OR
+            levenshtein(p1.apellidos || ' ' || p1.nombres, p2.nombres || ' ' || p2.apellidos)<=$dlev)
             AND v1.id_caso < v2.id_caso AND p1.nombres <> 'N' 
             AND p1.apellidos <> 'N' 
             AND (p1.id, p2.id) NOT IN (SELECT id_persona1, id_persona2 FROM homonimia)
