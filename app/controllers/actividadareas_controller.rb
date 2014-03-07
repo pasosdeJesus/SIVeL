@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class ActividadareasController < ApplicationController
   before_action :set_actividadarea, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
