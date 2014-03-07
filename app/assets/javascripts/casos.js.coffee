@@ -184,7 +184,6 @@ $(document).on 'ready page:load',  ->
         nh = nh + ' selected'
       # texto: nombres apellidos
       nom = $(v).find('div').filter( () -> this.attributes.class.value.match(/caso_victima[_0-9]*persona_nombres/)).find('input').val()
-      nom = $(v).find('.caso_victima_persona_apellidos input').val()
       ap = $(v).find('div').filter( () -> this.attributes.class.value.match(/caso_victima[_0-9]*persona_apellidos/)).find('input').val()
       tx = (nom + " " + ap).trim()
       nh = nh + ">" + tx + "</option>" )

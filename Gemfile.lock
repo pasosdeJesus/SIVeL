@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/vtamara/cocoon.git
-  revision: 5582fdd26c48998e02ac29e5f94f35c85a21b8b5
+  revision: d0630b3ea2974fed935d9d879f66501da64602a9
   specs:
     cocoon (1.2.5)
 
@@ -116,7 +116,7 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (5.3.0)
-    multi_json (1.8.4)
+    multi_json (1.9.0)
     multi_test (0.0.3)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
