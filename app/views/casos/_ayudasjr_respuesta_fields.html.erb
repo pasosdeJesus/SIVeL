@@ -1,6 +1,7 @@
 <div class='control-group nested-fields'>
   <div class="controls">
     <%= f.association :ayudasjr,
+			collection: Ayudasjr.order(:nombre),
 	    label: "Asist. Humanitaria",
       label_method: :nombre,
 	    value_method: :id %>

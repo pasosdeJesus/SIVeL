@@ -4,12 +4,13 @@
       collection: Presponsable.from('caso_presponsable, presponsable').where('caso_presponsable.id_presponsable=presponsable.id AND caso_presponsable.id_caso=?', @caso.id),
       label: "Presunto Responsable",
       label_method: :nombre,
-      value_method: :id %>
+			value_method: :id %>
 
     <%= f.association :categoria,
 	    label: "Categoria",
 	    label_method: :nombre, 
-      value_method: :id %>
+      label_method: lambda {|t| t.id_tviolencia + t.id.to_s + ' ' + t.nombre },
+			value_method: :id %>
 
     <%= f.association :persona,
       collection: Persona.from('victima, persona').where('victima.id_persona=persona.id AND victima.id_caso=?', @caso.id),

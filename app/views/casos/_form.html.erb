@@ -25,6 +25,7 @@
                   :input_html => { "data-behaviour" => "datepicker" },
                   :as => :string, :label => "Fecha de Recepción" %>
                 <%= s.association :usuario,
+                  collection: Usuario.all.order(:nombre),
                   label: "Asesor SJR",
                   label_method: :nusuario, 
                   value_method: :id %>
@@ -55,7 +56,8 @@
                     <%= s.input :telefono %>
                     <%= s.input :comosupo, :label => "Como supo del SJR" %>
                     <%= render 'contacto_fields', :f => victima %>
-                    <%= s.input :dependen, label: "Cuantos dependen econ." %>
+										<%= s.input :dependen, label: "Cuantos dependen econ.",
+											wrapper_html: { style: "padding-bottom: 18px;" }	%>
                     <%= s.input :sustento, label: "Sustento familiar" %>
                     <%= s.input :leerescribir, label: "Sabe leer y escribir",
                       wrapper_html: { class: "span11 offset1" }  %>
@@ -66,14 +68,17 @@
                                 [:D, :D], [:E, :E], [:Otro, :O]], 
                                 label: "Estrato" %>
                     <%= s.association :idioma, 
+                  	  collection: Idioma.all.order(:nombre),
                       label: "Idioma",
                       label_method: :nombre, 
                       value_method: :id %>
                     <%= s.association :statusmigratorio,
+                  	  collection: Statusmigratorio.all.order(:nombre),
                       label: "Status migratorio",
                       label_method: :nombre, 
                       value_method: :id %>
                     <%= s.association :proteccion, 
+                  	  collection: Proteccion.all.order(:nombre),
                       label: "Necesidad de protección internacional",
                       label_method: :nombre, 
                       value_method: :id %>

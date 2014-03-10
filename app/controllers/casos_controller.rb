@@ -140,15 +140,15 @@ class CasosController < ApplicationController
 			r = nil
       
 			if (params[:tabla] == "departamento" && params[:id_pais].to_i > 0)
-				r = Departamento.where(id_pais: params[:id_pais].to_i)
+				r = Departamento.order(:nombre).where(id_pais: params[:id_pais].to_i)
 			elsif (params[:tabla] == "municipio" && params[:id_pais].to_i > 0 && 
              params[:id_departamento].to_i > 0 )
-				r = Municipio.where(id_pais: params[:id_pais].to_i, 
+				r = Municipio.order(:nombre).where(id_pais: params[:id_pais].to_i, 
                             id_departamento: params[:id_departamento].to_i)
 			elsif (params[:tabla] == "clase" && params[:id_pais].to_i > 0 && 
              params[:id_departamento].to_i > 0 && 
              params[:id_municipio].to_i > 0)
-				r = Clase.where(id_pais: params[:id_pais].to_i, 
+				r = Clase.order(:nombre).where(id_pais: params[:id_pais].to_i, 
                         id_departamento: params[:id_departamento].to_i, 
                         id_municipio: params[:id_municipio].to_i)
 			end
@@ -317,7 +317,7 @@ class CasosController < ApplicationController
           :victimasjr_attributes => [
             :id_rolfamilia,
             :id_actividadoficio, :id_estadocivil, 
-            :id_maternidad, :discapacitado, :id_escolaridad, 
+            :id_maternidad, :ndiscapacidad, :id_escolaridad, 
             :enfermedad
           ]
         ], 

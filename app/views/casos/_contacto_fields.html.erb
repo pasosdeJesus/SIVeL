@@ -2,6 +2,7 @@
   <%= render 'persona_fields', :f => p %>
 <% end %>
 <%= f.association :profesion,
+  collection: Profesion.all.order(:nombre),
   label: "Profesión",
   label_method: :nombre, 
   value_method: :id %>
@@ -10,10 +11,12 @@
   label_method: :rango, 
   value_method: :id %>
 <%= f.association :etnia,
+  collection: Etnia.all.order(:nombre),
   label: "Etnia",
   label_method: :nombre, 
   value_method: :id %>
 <%= f.association :iglesia,
+  collection: Iglesia.all.order(:nombre),
   label: "Religión/Iglesia",
   label_method: :nombre, 
   value_method: :id %>
@@ -24,25 +27,31 @@
 
 <%= f.simple_fields_for :victimasjr do |s| %>
   <%= s.association :estadocivil,
+    collection: Estadocivil.all.order(:nombre),
     label: "Estado Civil",
     label_method: :nombre, 
     value_method: :id %>
   <%= s.association :rolfamilia,
+    collection: Rolfamilia.all.order(:nombre),
     label: "Rol en Familia",
     label_method: :nombre, 
     value_method: :id %>
   <%= s.association :maternidad,
+    collection: Maternidad.all.order(:nombre),
     label: "Maternidad",
     label_method: :nombre, 
-    value_method: :id %>
-  <%= s.input :discapacitado, label: "Discapacitado",
-      wrapper_html: { class: "span11 offset1" }  %>
+		value_method: :id %>
+  <%= s.input(:ndiscapacidad, collection: [
+      ['FÍSICA', 'FÍSICA'], ['PSIQUICA', 'PSIQUICA'], ['SENSORIAL', 'SENSORIAL']
+    ], label: "Discapacidad") %>
   <%= s.input :enfermedad %>
   <%= s.association :actividadoficio,
+    collection: Actividadoficio.all.order(:nombre),
     label: "Actividad/Oficio actual",
     label_method: :nombre, 
     value_method: :id %>
   <%= s.association :escolaridad,
+    collection: Escolaridad.all.order(:nombre),
     label: "Nivel Escolar",
     label_method: :nombre, 
     value_method: :id %>
