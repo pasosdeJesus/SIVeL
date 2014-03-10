@@ -954,6 +954,86 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Valores por defecto en referencias a tablas básicas');
 }
 
+$idac = '1.2-db';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "INSERT INTO filiacion (id, nombre, fechacreacion) 
+        VALUES (15, 'MARCHA PATRIÓTICA', '2014-02-14')"
+    );
+
+    aplicaact($act, $idac, 'Datos para tablas básicas');
+}
+
+$idac = '1.2-fam';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "ALTER TABLE trelacion ADD COLUMN 
+        inverso VARCHAR(2) REFERENCES trelacion(id)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE trelacion DROP COLUMN dirigido", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
+        VALUES ('PM', 'PRIMA(O)', '2014-02-18')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
+        VALUES ('YE', 'NUERA/YERNO', '2014-02-18')", false
+    );
+  
+    foreach(array("AO" => "AB", "HA" => "HO", "HR" => "HE", "MA" => "PO",
+        "ME" => "PA", "TA" => "TO", "CO" => "SO", "SA" => "OO",
+        "NA" => "NO", "HT" => "HO", "OA" => "OO", "Pr" => "PM",
+        "Pm" => "PM", "MD" => "PD", "NU" => "YE") as $ant => $nue
+    ) {
+            hace_consulta(
+                $db, "UPDATE persona_trelacion SET id_trelacion='$nue' 
+                WHERE id_trelacion='$ant'"
+            );
+            hace_consulta(
+                $db, "DELETE FROM trelacion WHERE id='$ant'"
+            );
+    }
+    hace_consulta($db, "UPDATE trelacion SET nombre='ESPOSA(O)/COMPAÑERA(O)' WHERE id='SO'");
+    hace_consulta($db, "UPDATE trelacion SET nombre='ABUELA(O)' WHERE id='AB'");
+    hace_consulta($db, "UPDATE trelacion SET nombre='NIETA(O)' WHERE id='NO'");
+    hace_consulta($db, "UPDATE trelacion SET nombre='MADRE/PADRE' WHERE id='PA'");
+    hace_consulta($db, "UPDATE trelacion SET nombre='HIJA(O)' WHERE id='HI'");
+    hace_consulta($db, "UPDATE trelacion SET nombre='HERMANA(O)' WHERE id='HE'");
+    hace_consulta($db, "UPDATE trelacion SET nombre='MADRINA/PADRINO' WHERE id='PO'");
+    hace_consulta($db, "UPDATE trelacion SET nombre='AHIJADA(O)' WHERE id='AH'");
+    hace_consulta($db, "UPDATE trelacion SET nombre='TIA(O)' WHERE id='TO'");
+    hace_consulta($db, "UPDATE trelacion SET nombre='SOBRINA(O)' WHERE id='OO'");
+    hace_consulta($db, "UPDATE trelacion SET nombre='MADRASTRA(PADRASTRO)' WHERE id='PD'");
+    hace_consulta($db, "UPDATE trelacion SET nombre='HIJASTRA(O)' WHERE id='HO'");
+    hace_consulta($db, "UPDATE trelacion SET nombre='SUEGRA(O)' WHERE id='SG'");
+
+    foreach(array("SO" => "SO", "AB" => "NO", "PA" => "HI",
+        "HE" => "HE", "PO" => "AH", "TO" => "OO",
+        "PD" => "HO", "SG" => "YE", "PM" => "PM") as $r1 => $r2
+    ) {
+        hace_consulta(
+            $db, "UPDATE trelacion SET inverso='$r2' WHERE id='$r1'"
+        );
+        hace_consulta(
+            $db, "UPDATE trelacion SET inverso='$r1' WHERE id='$r2'"
+        );
+    }
+
+    hace_consulta($db, "INSERT INTO persona_trelacion 
+        (persona1, persona2, id_trelacion) 
+        (SELECT persona2, persona1, inverso  
+        FROM persona_trelacion, trelacion 
+        WHERE (persona2, persona1, inverso) NOT IN 
+        (SELECT persona1 as p1, persona2 as p2, id_trelacion as it 
+        FROM persona_trelacion) 
+        AND persona_trelacion.id_trelacion=trelacion.id
+        AND trelacion.inverso IS NOT NULL)"
+    );
+    aplicaact($act, $idac, 'Relaciones familiares refinadas');
+}
+
 $idac = '1.3-cp';
 if (!aplicado($idac)) {
     

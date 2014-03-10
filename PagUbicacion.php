@@ -789,6 +789,10 @@ class PagUbicacion extends PagBaseMultiple
                 'NULL'
             );
         }
+        if ($valores['id_municipio'] == '') {
+            $valores['id_municipio'] = 'null';
+        }
+
         $ret = $this->process(array(&$this->bubicacion, 'processForm'), false);
         if (PEAR::isError($ret)) {
             die($ret->getMessage());

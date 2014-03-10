@@ -107,6 +107,10 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         'tipodocumento' => array (
             'CC' => 'Cédula de Ciudadania',
             'CE' => 'Cédula de Extranjería',
+            'CI' => 'Cédula de Identidad',
+            'CR' => 'Cédula de Residente',
+            'CT' => 'Cédula de Transeunte',
+            'DP' => 'Documento Provisional',
             'RC' => 'Registro Civil',
             'TI' => 'Tarjeta de Identidad',
             'OT' => 'Otro',
