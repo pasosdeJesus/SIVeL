@@ -29,6 +29,7 @@
                   label_method: :nusuario, 
                   value_method: :id %>
                 <%= s.association :regionsjr,
+                  collection: Regionsjr.all.order(:nombre),
                   label: "Oficina",
                   label_method: :nombre, 
                   value_method: :id %>
@@ -50,15 +51,13 @@
               <div class="accordion-inner">
                 <%= f.simple_fields_for :victima do |victima| %>
                   <% if !victima.object.persona.nil?  && victima.object.persona.id == @caso.casosjr.contacto.id %>
-                    <%= s.input :direccion %>
+                    <%= s.input :direccion, label: "Dirección actual" %>
                     <%= s.input :telefono %>
-                    <%= s.input :comosupo, :label => "Como supo" %>
+                    <%= s.input :comosupo, :label => "Como supo del SJR" %>
                     <%= render 'contacto_fields', :f => victima %>
-                    <%= s.input :dependen, label: "Dependen econ." %>
+                    <%= s.input :dependen, label: "Cuantos dependen econ." %>
                     <%= s.input :sustento, label: "Sustento familiar" %>
                     <%= s.input :leerescribir, label: "Sabe leer y escribir",
-                      wrapper_html: { class: "span11 offset1" }  %>
-                    <%= s.input :trabaja, label: "Trajaba actualmente",
                       wrapper_html: { class: "span11 offset1" }  %>
                     <%= s.input :ingresomensual, label: "Ingreso mensual" %>
                     <%= s.input :gastos, label: "Estimado de gastos" %>

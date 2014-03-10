@@ -301,7 +301,7 @@ class CasosController < ApplicationController
         :casosjr_attributes => [
           :fecharec, :asesor, :id_regionsjr, :direccion, 
           :telefono, :comosupo, :contacto,
-          :dependen, :sustento, :leerescribir, :trabaja,
+          :dependen, :sustento, :leerescribir, 
           :ingresomensual, :gastos, :estrato, :id_statusmigratorio,
           :id_proteccion, :id_idioma,
           :_destroy
@@ -318,7 +318,7 @@ class CasosController < ApplicationController
             :id_rolfamilia,
             :id_actividadoficio, :id_estadocivil, 
             :id_maternidad, :discapacitado, :id_escolaridad, 
-            :progadultomayor 
+            :enfermedad
           ]
         ], 
         :ubicacion_attributes => [

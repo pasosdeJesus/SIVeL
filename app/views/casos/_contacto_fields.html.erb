@@ -18,8 +18,8 @@
   label_method: :nombre, 
   value_method: :id %>
 <%= f.input(:orientacionsexual, collection: [
-  [:Heterosexual, :H], [:Lesbiana, :L], [:Gay, :G], 
-  [:Bisexual, :B], [:Transexual, :T]], label: "Orientación Sexual") %>
+  [:HETEROSEXUAL, :H], [:LESBIANA, :L], [:GAY, :G], 
+  [:BSIEXUAL, :B], [:TRANSEXUAL, :T]], label: "Orientación Sexual") %>
 <%= f.input :id, as: :hidden %>
 
 <%= f.simple_fields_for :victimasjr do |s| %>
@@ -37,15 +37,14 @@
     value_method: :id %>
   <%= s.input :discapacitado, label: "Discapacitado",
       wrapper_html: { class: "span11 offset1" }  %>
+  <%= s.input :enfermedad %>
   <%= s.association :actividadoficio,
-    label: "Oficio",
+    label: "Actividad/Oficio actual",
     label_method: :nombre, 
     value_method: :id %>
   <%= s.association :escolaridad,
     label: "Nivel Escolar",
     label_method: :nombre, 
     value_method: :id %>
-  <%= s.input :progadultomayor, label: "Programa Adulto Mayor",
-      wrapper_html: { class: "span11 offset1" }  %>
 
 <% end %>

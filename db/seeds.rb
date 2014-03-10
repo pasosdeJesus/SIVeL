@@ -7,12 +7,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Actividadarea.create(id: 1, nombre: 'Psicosocial', fechacreacion: '2013-12-04')
-Actividadarea.create(id: 2, nombre: 'Jurídica - Legal', fechacreacion: '2013-12-04')
-Actividadarea.create(id: 3, nombre: 'Organización - Comunal', fechacreacion: '2013-12-04')
-Actividadarea.create(id: 4, nombre: 'Emprendimiento', fechacreacion: '2013-12-04')
-Actividadarea.create(id: 5, nombre: 'Incidencia', fechacreacion: '2013-12-04')
-Actividadarea.create(id: 6, nombre: 'Comunicaciones', fechacreacion: '2014-01-29')
+Actividadarea.create(id: 1, nombre: 'PSICOSOCIAL', fechacreacion: '2013-12-04')
+Actividadarea.create(id: 2, nombre: 'JURÍDICA - LEGAL', fechacreacion: '2013-12-04')
+Actividadarea.create(id: 3, nombre: 'ORGANIZACIÓN COMUNITARIA', fechacreacion: '2013-12-04')
+Actividadarea.create(id: 4, nombre: 'EMPRENDIMIENTO', fechacreacion: '2013-12-04')
+Actividadarea.create(id: 5, nombre: 'INCIDENCIA', fechacreacion: '2013-12-04')
+Actividadarea.create(id: 6, nombre: 'COMUNICACIONES', fechacreacion: '2014-01-29')
+Actividadarea.create(id: 7, nombre: 'INTEGRACIÓN LOCAL', fechacreacion: '2014-01-29')
 
 Rangoedadac.create(id: 1, nombre: 'De 0 a 10', limiteinferior: 0,
                  limitesuperior: 10, fechacreacion: '2014-02-11')
