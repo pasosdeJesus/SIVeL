@@ -995,19 +995,43 @@ if (!aplicado($idac)) {
                 $db, "DELETE FROM trelacion WHERE id='$ant'"
             );
     }
-    hace_consulta($db, "UPDATE trelacion SET nombre='ESPOSA(O)/COMPAÑERA(O)' WHERE id='SO'");
+    hace_consulta(
+        $db, "UPDATE trelacion 
+        SET nombre='ESPOSA(O)/COMPAÑERA(O)' WHERE id='SO'"
+    );
     hace_consulta($db, "UPDATE trelacion SET nombre='ABUELA(O)' WHERE id='AB'");
     hace_consulta($db, "UPDATE trelacion SET nombre='NIETA(O)' WHERE id='NO'");
+    hace_consulta(
+        $db, 
+        "INSERT INTO trelacion (id, nombre, fechacreacion) 
+        VALUES ('NO', 'NIETA(O)', '2014-03-07')"
+    );
     hace_consulta($db, "UPDATE trelacion SET nombre='MADRE/PADRE' WHERE id='PA'");
     hace_consulta($db, "UPDATE trelacion SET nombre='HIJA(O)' WHERE id='HI'");
     hace_consulta($db, "UPDATE trelacion SET nombre='HERMANA(O)' WHERE id='HE'");
     hace_consulta($db, "UPDATE trelacion SET nombre='MADRINA/PADRINO' WHERE id='PO'");
     hace_consulta($db, "UPDATE trelacion SET nombre='AHIJADA(O)' WHERE id='AH'");
+    hace_consulta(
+        $db, 
+        "INSERT INTO trelacion (id, nombre, fechacreacion) 
+        VALUES ('AH', 'AHIJADA(O)', '2014-03-07')"
+    );
     hace_consulta($db, "UPDATE trelacion SET nombre='TIA(O)' WHERE id='TO'");
     hace_consulta($db, "UPDATE trelacion SET nombre='SOBRINA(O)' WHERE id='OO'");
+    hace_consulta(
+        $db, 
+        "INSERT INTO trelacion (id, nombre, fechacreacion) 
+        VALUES ('OO', 'SOBRINA(O)', '2014-03-07')"
+    );
     hace_consulta($db, "UPDATE trelacion SET nombre='MADRASTRA(PADRASTRO)' WHERE id='PD'");
     hace_consulta($db, "UPDATE trelacion SET nombre='HIJASTRA(O)' WHERE id='HO'");
     hace_consulta($db, "UPDATE trelacion SET nombre='SUEGRA(O)' WHERE id='SG'");
+    hace_consulta(
+        $db, 
+        "INSERT INTO trelacion (id, nombre, fechacreacion) 
+        VALUES ('SG', 'SUEGRA(O)', '2014-03-07')"
+    );
+
 
     foreach(array("SO" => "SO", "AB" => "NO", "PA" => "HI",
         "HE" => "HE", "PO" => "AH", "TO" => "OO",
