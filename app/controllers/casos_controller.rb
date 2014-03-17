@@ -54,6 +54,7 @@ class CasosController < ApplicationController
       if !ruta.nil?
         n=sprintf("%s/public/system/anexos/adjuntos/000/000/%03d/original/%s", 
                  Rails.root, @anexo.id, ruta)
+        n=sprintf("/var/www/resbase/anexos-sjrven/%d_%s", @anexo.id, ruta)
         puts n
         send_file n, x_sendfile: true
       else
