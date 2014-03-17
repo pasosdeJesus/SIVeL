@@ -28,6 +28,7 @@ Rangoedadac.create(id: 5, nombre: 'De 46 a 60', limiteinferior: 46,
 Rangoedadac.create(id: 6, nombre: '61 en adelante', limiteinferior: 61,
                  fechacreacion: '2014-02-11')
 
+
 connection = ActiveRecord::Base.connection();
 
 connection.execute("SELECT setval('actividadarea_id_seq', MAX(id)) FROM 
@@ -44,3 +45,5 @@ connection.execute("INSERT INTO usuario
 	VALUES ('sjrven', 'sjrven@sjrven.org', 
 	'$2a$10$uMAciEcJuUXDnpelfSH6He7BxW0yBeq6VMemlWc5xEl6NZRDYVA3G', 
 	'', '2014-01-12', '2013-12-24', '2013-12-24', 1);")
+
+

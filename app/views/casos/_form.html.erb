@@ -138,7 +138,7 @@
         <div class="accordion-group">
           <div class="accordion-heading">
             <a class="accordion-toggle" data-toggle="collapse" href="#desplazamiento">
-              Refugios/Desplazamientos
+              Desplazamientos
             </a>
           </div>
           <div id="desplazamiento" class="accordion-body collapse">
@@ -147,8 +147,27 @@
                 <%= render 'desplazamiento_fields', :f => desplazamiento %>
               <% end %>
               <div class="links">
-                <%= link_to_add_association 'Añadir Refugio o Desplazamiento', f, 
+                <%= link_to_add_association 'Añadir Desplazamiento', f, 
                   :desplazamiento, :class => 'btn-primary' %>
+              </div>
+            </div>
+          </div>
+        </div> <! -- accordion-group -->
+
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" href="#refugio">
+              Refugios
+            </a>
+          </div>
+          <div id="refugio" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <%= f.simple_fields_for :refugio do |refugio| %>
+                <%= render 'refugio_fields', :f => refugio %>
+              <% end %>
+              <div class="links">
+                <%= link_to_add_association 'Añadir Refugio', f, 
+                  :refugio, :class => 'btn-primary' %>
               </div>
             </div>
           </div>

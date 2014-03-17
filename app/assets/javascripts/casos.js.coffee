@@ -265,6 +265,45 @@ $(document).on 'ready page:load',  ->
     $(this).html(nh)
   )
 
+  # En refugios, lista de sitios de salida se cálcula
+  $(document).on('focusin', 'select[id^=caso_refugio_attributes_][id$=id_salida]', (e) ->
+    sel = $(this).val()
+    nh = ''
+    lcg = $('#ubicacion .control-group[style!="display: none;"]')
+    lcg.each((k, v) ->
+      id = $(v).find('.caso_ubicacion_id input').val()
+      nh = nh + "<option value='" + id + "'"
+      if id == sel 
+        nh = nh + ' selected'
+      idp = $(v).find('.caso_ubicacion_pais select').val()
+      tx = $(v).find('.caso_ubicacion_pais select option[value=' + idp + ']').text()
+      idd = $(v).find('.caso_ubicacion_departamento select').val()
+      if (idd > 0)
+        tx = tx + " / " + $(v).find('.caso_ubicacion_departamento select option[value=' + idd + ']').text()
+      nh = nh + ">" + tx + "</option>" )
+    $(this).html(nh)
+  )
+
+  # En refugio, lista de sitios de llegada se cálcula
+  $(document).on('focusin', 'select[id^=caso_refugio_attributes_][id$=id_llegada]', (e) ->
+    sel = $(this).val()
+    nh = ''
+    lcg = $('#ubicacion .control-group[style!="display: none;"]')
+    lcg.each((k, v) ->
+      # id: ubicacion
+      id = $(v).find('.caso_ubicacion_id input').val()
+      nh = nh + "<option value='" + id + "'"
+      if id == sel 
+        nh = nh + ' selected'
+      idp = $(v).find('.caso_ubicacion_pais select').val()
+      tx = $(v).find('.caso_ubicacion_pais select option[value=' + idp + ']').text()
+      idd = $(v).find('.caso_ubicacion_departamento select').val()
+      if (idd > 0)
+        tx = tx + " / " + $(v).find('.caso_ubicacion_departamento select option[value=' + idd + ']').text()
+      nh = nh + ">" + tx + "</option>" )
+    $(this).html(nh)
+  )
+
   # Al cambiar país se recalcula lista de departamentos
   $(document).on('change', 'select[id^=caso_][id$=id_pais]', (e) ->
     llenaDepartamento($(this))

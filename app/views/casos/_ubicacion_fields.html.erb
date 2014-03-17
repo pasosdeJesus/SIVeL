@@ -1,7 +1,7 @@
 <div class='control-group nested-fields'>
   <div class="controls">
     <%= f.association :pais,
-			collection: Pais.order(:nombre),
+			collection: Pais.where(fechadeshabilitacion: nil).order(:nombre),
 	    label: "País",
       label_method: :nombre,
 			value_method: :id %>

@@ -46,7 +46,24 @@ class CasosController < ApplicationController
     render action: 'edit'
   end
 
-  def nuevopresponsable
+
+  def descarga_anexo
+    if !params[:id].nil?
+      @anexo = Anexo.find(params[:id])
+      ruta = @anexo.adjunto_file_name
+      if !ruta.nil?
+        n=sprintf("%s/public/system/anexos/adjuntos/000/000/%03d/original/%s", 
+                 Rails.root, @anexo.id, ruta)
+        puts n
+        send_file n, x_sendfile: true
+      else
+        redirect_to casos_url
+      end
+    end
+  end
+
+
+  def nuevo_presponsable
     if !params[:caso_id].nil?
       @presponsable = CasoPresponsable.new
       @presponsable.id_caso = params[:caso_id]
@@ -71,7 +88,7 @@ class CasosController < ApplicationController
   end
 
 
-  def nuevavictima
+  def nueva_victima
     if !params[:caso_id].nil?
       @persona = Persona.new
       @victima = Victima.new
@@ -110,7 +127,7 @@ class CasosController < ApplicationController
     end
   end
 
-  def nuevaubicacion
+  def nueva_ubicacion
     if !params[:caso_id].nil?
       @ubicacion = Ubicacion.new
       @ubicacion.id_caso = params[:caso_id]
@@ -330,6 +347,13 @@ class CasosController < ApplicationController
           :fechaexpulsion, :id_expulsion, 
           :fechallegada, :id_llegada, :descripcion, :_destroy
         ],
+        :refugio_attributes => [
+          :id,
+          :fechasalida, :id_salida, 
+          :fechallegada, :id_llegada, 
+          :id_causaref,
+          :observaciones, :_destroy
+        ],
         :caso_presponsable_attributes => [
           :id_presponsable, :id, :tipo, 
           :bloque, :frente, :brigada, :batallon, :division, :otro, :_destroy
@@ -356,7 +380,7 @@ class CasosController < ApplicationController
           ]
         ],
         :anexo_attributes => [
-          :id, :fecha, :descripcion, :archivo, :_destroy
+          :id, :fecha, :descripcion, :archivo, :adjunto, :_destroy
         ],
         :caso_etiqueta_attributes => [
           :id_usuario, :fecha, :id_etiqueta, :observaciones, :_destroy
