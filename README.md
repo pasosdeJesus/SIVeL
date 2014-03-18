@@ -140,4 +140,7 @@ rc_cmd $1
 * Aplique cambios a base de datos: ```rake db:migrate```
 * Lance nuevamente el servidor de desarrollo: ```rails s```
 
+### Convenciones
+
+http://www.caliban.org/ruby/rubyguide.shtml
 

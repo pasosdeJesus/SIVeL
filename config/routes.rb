@@ -1,9 +1,10 @@
 Sivel2::Application.routes.draw do
 
+  get '/casos/descarga_anexo/:id' => 'casos#descarga_anexo'
   get '/casos/lista' => 'casos#lista'
-  get '/casos/nuevaubicacion' => 'casos#nuevaubicacion'
-  get '/casos/nuevavictima' => 'casos#nuevavictima'
-  get '/casos/nuevopresponsable' => 'casos#nuevopresponsable'
+  get '/casos/nuevaubicacion' => 'casos#nueva_ubicacion'
+  get '/casos/nuevavictima' => 'casos#nueva_victima'
+  get '/casos/nuevopresponsable' => 'casos#nuevo_presponsable'
   get 'nosotros' => 'hogar#nosotros'
   get 'contacto' => 'hogar#contacto'
   get "hogar" => 'hogar#index'

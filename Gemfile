@@ -67,3 +67,6 @@ gem "cancan"
 gem "cocoon", github: "vtamara/cocoon"
 
 gem "will_paginate"
+
+gem "paperclip", "~> 4.1"
+
