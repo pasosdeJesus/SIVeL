@@ -301,7 +301,7 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
         sin_error_pear($op);
         $r = $s->loadArray(htmlentities_array($op));
         $s->setValue(
-            $this->id_expulsion
+            $this->id_llegada
         );
 
 
