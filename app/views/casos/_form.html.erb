@@ -81,7 +81,13 @@
                   	  collection: Proteccion.all.order(:nombre),
                       label: "Necesidad de protección internacional",
                       label_method: :nombre, 
-                      value_method: :id %>
+											value_method: :id %>
+								  	<%= s.input :concentimientosjr, 
+								  		label: "Concentimiento Informado compartir SJR",
+                      wrapper_html: { class: "span11 offset1" }  %>
+								  	<%= s.input :concentimientobd, 
+								  		label: "Concentimiento Informado compartir BD",
+                      wrapper_html: { class: "span11 offset1" }  %>
                   <% end %>
                 <% end %>
               </div>

@@ -318,7 +318,8 @@ class CasosController < ApplicationController
             :id_rolfamilia,
             :id_actividadoficio, :id_estadocivil, 
             :id_maternidad, :ndiscapacidad, :id_escolaridad, 
-            :enfermedad
+            :enfermedad,
+					  :id_victima
           ]
         ], 
         :ubicacion_attributes => [
