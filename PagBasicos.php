@@ -919,6 +919,12 @@ class PagBasicos extends PagBaseSimple
             die($ret->getMessage());
         }
         $idcaso = $this->bcaso->_do->id;
+        //echo "OJO "; print_r($this->bcaso->_do->created_at);  echo "<br>";
+         if (!isset($this->bcaso->_do->created_at)) {
+             $this->bcaso->_do->created_at = @date('Y-m-d');
+             $this->bcaso->_do->update();
+        }
+        //echo "OJO 2 "; print_r($this->bcaso->_do->created_at);  echo "<br>"; die("x");
 
         if (isset($_SESSION['forma_modo'])
             && $_SESSION['forma_modo'] == 'busqueda'

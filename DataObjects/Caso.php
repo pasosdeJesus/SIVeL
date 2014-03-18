@@ -50,6 +50,7 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
     var $grinformacion;                  // varchar(-1)
     var $bienes;                          // text(-1)
     var $id_intervalo;                    // int4(4)
+    var $created_at;                    // int4(4)
 
 
     /**
@@ -79,7 +80,7 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
     * Orden de campos.
     */
     var $fb_preDefOrder = array('titulo', 'fecha', 'hora',
-        'duracion', 'id_intervalo'
+        'duracion', 'id_intervalo', 'created_at'
     );
 
     /**
@@ -200,6 +201,9 @@ class DataObjects_Caso extends DB_DataObject_SIVeL
             } else {
                 $this->id_intervalo = '';
             }
+        }
+        if (!isset($this->created_at)) {
+            $this->created_at = @date('Y-m-d');
         }
     }
 
