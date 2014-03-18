@@ -54,6 +54,7 @@ class CasosController < ApplicationController
       if !ruta.nil?
         n=sprintf("%s/public/system/anexos/adjuntos/000/000/%03d/original/%s", 
                  Rails.root, @anexo.id, ruta)
+        n=sprintf("/var/www/resbase/anexos-sjrven/%d_%s", @anexo.id, ruta)
         puts n
         send_file n, x_sendfile: true
       else
@@ -335,7 +336,8 @@ class CasosController < ApplicationController
             :id_rolfamilia,
             :id_actividadoficio, :id_estadocivil, 
             :id_maternidad, :ndiscapacidad, :id_escolaridad, 
-            :enfermedad
+            :enfermedad,
+					  :id_victima
           ]
         ], 
         :ubicacion_attributes => [
