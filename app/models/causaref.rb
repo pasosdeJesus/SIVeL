@@ -1,4 +1,4 @@
 class Causaref < ActiveRecord::Base
-    has_many :refugio, foreign_key: "id_refugio", validate: true
+    has_one :casosjr, foreign_key: "id_causaref", validate: true
     validates_presence_of :nombre
 end
