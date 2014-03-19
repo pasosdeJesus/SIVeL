@@ -28,8 +28,6 @@ class Caso < ActiveRecord::Base
 	accepts_nested_attributes_for :ubicacion, allow_destroy: true, reject_if: :all_blank
 	has_many :desplazamiento, foreign_key: "id_caso", validate: true, dependent: :destroy
 	accepts_nested_attributes_for :desplazamiento , allow_destroy: true, reject_if: :all_blank
-	has_many :refugio, foreign_key: "id_caso", validate: true, dependent: :destroy
-	accepts_nested_attributes_for :refugio, allow_destroy: true, reject_if: :all_blank
 
 	has_many :victimacolectiva, foreign_key: "id_caso", validate: true, dependent: :destroy
 	has_many :anexo, foreign_key: "id_caso", validate: true, dependent: :destroy

@@ -322,6 +322,11 @@ class CasosController < ApplicationController
           :dependen, :sustento, :leerescribir, 
           :ingresomensual, :gastos, :estrato, :id_statusmigratorio,
           :id_proteccion, :id_idioma,
+          :concentimientosjr, :concentimientobd,
+          :fechasalida, :id_salida, 
+          :fechallegada, :id_llegada, 
+          :id_causaref,
+          :observacionesref,
           :_destroy
         ], 
         :victima_attributes => [
@@ -349,13 +354,7 @@ class CasosController < ApplicationController
           :fechaexpulsion, :id_expulsion, 
           :fechallegada, :id_llegada, :descripcion, :_destroy
         ],
-        :refugio_attributes => [
-          :id,
-          :fechasalida, :id_salida, 
-          :fechallegada, :id_llegada, 
-          :id_causaref,
-          :observaciones, :_destroy
-        ],
+          
         :caso_presponsable_attributes => [
           :id_presponsable, :id, :tipo, 
           :bloque, :frente, :brigada, :batallon, :division, :otro, :_destroy

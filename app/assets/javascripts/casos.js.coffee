@@ -266,7 +266,7 @@ $(document).on 'ready page:load',  ->
   )
 
   # En refugios, lista de sitios de salida se cálcula
-  $(document).on('focusin', 'select[id^=caso_refugio_attributes_][id$=id_salida]', (e) ->
+  $(document).on('focusin', 'select[id^=caso_casosjr_attributes_][id$=id_salida]', (e) ->
     sel = $(this).val()
     nh = ''
     lcg = $('#ubicacion .control-group[style!="display: none;"]')
@@ -285,7 +285,7 @@ $(document).on 'ready page:load',  ->
   )
 
   # En refugio, lista de sitios de llegada se cálcula
-  $(document).on('focusin', 'select[id^=caso_refugio_attributes_][id$=id_llegada]', (e) ->
+  $(document).on('focusin', 'select[id^=caso_casosjr_attributes_][id$=id_llegada]', (e) ->
     sel = $(this).val()
     nh = ''
     lcg = $('#ubicacion .control-group[style!="display: none;"]')
