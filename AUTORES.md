@@ -1,4 +1,4 @@
 
 En orden de primera contribución:
 
-* Vladimir Támara <vtamara@pasosdeJesus.org>
+* Vladimir Támara Patiño <vtamara@pasosdeJesus.org>
