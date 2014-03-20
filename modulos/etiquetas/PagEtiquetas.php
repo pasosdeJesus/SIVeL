@@ -204,7 +204,7 @@ class PagEtiquetas extends PagBaseSimple
 
         // Actualizamos observaciones
         foreach ($valores as $i => $v) {
-            if (substr($i, 0, 5)=='fobs_') {
+            if (substr($i, 0, 5)=='fobs_' && (int)$idcaso>0) {
                 $po = explode('_', $i);
                 $dec =& objeto_tabla('caso_etiqueta');
                 $dec->id_caso = $idcaso;
