@@ -1,7 +1,11 @@
 <!-- %= f.input :id, readonly: true %-->
 <%= f.input :id, as: :hidden %>
-<%= f.input :nombres, placeholder: 'N' %>
-<%= f.input :apellidos, placeholder: 'N' %>
+<%= f.input :nombres, placeholder: 'N',
+	value_method: lambda {|t| '' if t.nombres == 'N'}
+ %>
+<%= f.input :apellidos, placeholder: 'N',
+	value_method: lambda {|t| '' if t.apellidos == 'N'}
+%>
 <%= f.input :anionac, label: 'Año Nacimiento' %>
 <%= f.input :mesnac, label: 'Mes Nacimiento' %>
 <%= f.input :dianac, label: 'Día Nacimiento' %>

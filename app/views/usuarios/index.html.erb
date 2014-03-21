@@ -42,7 +42,7 @@
         <td><%= usuario.last_sign_in_at %></td>
         <td><%= usuario.current_sign_in_ip %></td>
         <td><%= usuario.last_sign_in_ip %></td>
-        <td><%=l usuario.created_at %></td>
+        <td><%= usuario.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_usuario_path(usuario), :class => 'btn btn-mini' %>
