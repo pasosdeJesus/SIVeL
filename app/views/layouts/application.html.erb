@@ -38,21 +38,23 @@
   </head>
   <body>
 
-
-    <%= nav_bar :fixed => :top, :brand => "Prototipo 0.8 de SIVeL 2.0", :responsive => true do %>
+    <%= nav_bar :fixed => :top, :brand => "SIVeL 2.0 - SJR Venezuela: Prototipo 0.9", :responsive => true do %>
       <%= menu_group do %>
-        <%= menu_item "Casos", casos_path %>
-        <%= menu_item "Actividades", actividades_path %>
+        <% if !current_usuario.nil? %>
+          <%= menu_item "Casos", casos_path %>
+          <%= menu_item "Actividades", actividades_path %>
+        <% end %>
       <% end %>
       <%= menu_group :pull => :right do %>
-        <%= menu_item "Acerca de", nosotros_path %>
-        <% if current_usuario %>
+        <%= menu_item "Acerca de", acercade_path %>
+        <% if !current_usuario.nil? %>
           <% if current_usuario.rol == 1 %>
 						<%= drop_down "Administrar" do %>
 						  <%= menu_item "Usuarios", usuarios_path %>
 							<%= menu_item "Áreas de Actividades", actividadareas_path %>
 						<% end %>
           <% end %>
+          <%= current_usuario.nusuario %>
           <%= menu_item "Cerrar Sesión", sign_out_path %>
         <% else %>
           <%= menu_item "Iniciar Sesión", "/usuarios/sign_in" %>
@@ -69,9 +71,9 @@
     </div>
 
     <footer align='right'>
-      <p>Dominio Público de acuerdo a Legislación Colombiana.<br/>
-      Desarrollado por Pasos de Jesús con apoyo de SJR LAC. 2013.
-      </p>
+    <p><span class='derechos'>Dominio Público de acuerdo a Legislación Colombiana<br/>
+      Desarrollado para <a href="http://www.sjrlac.org" target="_blank">SJR LAC</a> por <a href="http://www.pasosdeJesus.org" target="_blank">Pasos de Jesús</a>. 2014. 
+    </span></p>
     </footer>
 
     </div> <!-- /container -->
