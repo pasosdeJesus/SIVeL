@@ -88,21 +88,18 @@
 				&ficha-intro;
 				&ficha-basicos;
 				&ficha-vindividual;
-				&ficha-vcolectiva;
 				&ficha-ubicacion;
 				&ficha-desplazamiento;
 				&ficha-presponsables;
 				&ficha-actos;
 				&ficha-respuesta;
-				&ficha-memo;
 				&ficha-anexos;
 				&ficha-segjudicial;
 				&ficha-etiquetas;
-				&ficha-otras;
 			</sect2>
 		</sect1>
 	</chapter>
-	<chapter id="personalizacion" role="periodo" userlevel="p1">
+	<!--chapter id="personalizacion" role="periodo" userlevel="p1">
 		<title>Personalización y Desarrollo</title>
 		<para>Para hacer más breve este manual omitimos la
 			mayoría de este capítulo,
@@ -161,7 +158,7 @@
 				</itemizedlist>
 			</para>
 		</sect1>
-	</chapter>
+	</chapter -->
 
 	<!-- Apendices -->
 	<appendix id="novedades">

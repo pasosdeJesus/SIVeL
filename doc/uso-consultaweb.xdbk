@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <sect1 id="consultaweb">
-	<title>Consulta Web</title>
+	<title>Listado de Casos</title>
 	<!--      <highlights role="logros">
 		<itemizedlist>
 			<listitem role="indicador" id="logro1.ind1"><para>Puede buscar
@@ -13,98 +13,30 @@
 		</itemizedlist>
 	</highlights> -->
 	<para>
-		La consulta web es un filtro sobre algunas 
-		variables de un caso (e.g localizaci&oacute;n geográfica, rango para 
-		fecha del caso, etc.).        </para>
+		Al ingresar al menú casos, podrá ver un listado de los casos disponibles,
+		notará que este listado se presenta por páginas de 25 casos, en la parte 
+		inferior encontrará una barra de navegacion que le permite pasar de una
+		página a otra.
+	</para>
 	<informalfigure><screenshot><mediaobject>
 				<imageobject><imagedata fileref="pconsultaweb.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
 				<imageobject><imagedata fileref="pconsultaweb.png" format="PNG" align="center"></imagedata></imageobject>
 	</mediaobject></screenshot></informalfigure> 
-	<para>Si deja todos los campos del formulario en blanco (como se
-		presenta en la figura), y hace la consulta,
-		al no haber filtro está solicitando todos los registros existentes
-		en la base.  Si s&oacute;lo desea los de un departamento debe 
-		especificar el departamento.  Si desea los de un departamento
-		en un rango de fechas debe especificar tanto el departamento
-		como la fecha inicial y la fecha final.
+	<para>
+		Podrá examinar breves detalles de un caso sin editarlo pulsando
+		sobre la identificación del caso (columna <literal>Id</literal>). Otra
+		manera si ya conoce la identificación del caso es empleando una
+		URL de la forma <literal>&URL-BASE;casos/3</literal>, cambiando 3 por
+		la identificación.
 	</para>
-	<para>Esta consulta es pública, sin embargo las siguientes posibilidades
-		sólo están disponibles para usuarios autenticados: buscar por 
-		c&oacute;digo, ver fuentes y generar reportes generales.
-	</para>
-	<para>Puede especificar también como desea el resultado de su consulta:
-		criterio de ordenamiento, forma de presentaci&oacute;n, informaci&oacute;n
-		que desea incluir, si desea descripciones como tablas o en
-		una sola línea. Las posibles formas de presentaci&oacute;n son:
-		<itemizedlist>
-			<listitem>
-				<para>Tabla: presenta la cantidad de 
-					resultados de la consulta y a 
-					continuaci&oacute;n una tabla con los 
-					campos que solicit&oacute;</para>
-			</listitem>
-			<listitem>
-				<para>Reporte General: presenta de cada caso
-					toda la informaci&oacute;n disponible 
-					en la base, incluyendo fuentes
-					por lo que no es apropiada para 
-					compartir fuera de la 
-					organizaci&oacute;n</para>
-			</listitem>
-			<listitem>
-				<para>Reporte Revista: presenta de cada caso
-					la fecha, el lugar, el listado de 
-					víctimas, la descripci&oacute;n
-					de los hechos (que llamamos memo), los 
-					presuntos responsables
-					y la tipificaci&oacute;n.   El 
-					resultado de esta consulta es
-					apropiado para publicar en revistas, 
-					Internet o compartir
-					fuera de la organizaci&oacute;n.</para>
-			</listitem>
-		</itemizedlist>
+	<para>
+		Podrá editar el caso presionando el botón <literal>Editar</literal> 
+		de la columna <literal>Acciones</literal> y podrá eliminarlo
+		(tras confirmar) con el botón <literal>Eliminar</literal> de la 
+		misma columna.  Si conoce el número de caso, también podrá editarlo 
+		empleando un URL de la forma 
+		<literal>&URL-BASE;casos/3/edita</literal>, cambiando 3 por
+		la identificación del caso.
 	</para>
 
-	<para>
-		Para practicar su uso sin instalar SIVeL puede emplear
-		las siguientes consultas publicas con casos reales:
-		<itemizedlist>
-			<listitem>
-				<para>
-					<ulink url="https://www.nocheyniebla.org/consulta_web.php"/>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<ulink url="https://documentacion.justapaz.org/consulta_web.php"/>
-				</para>
-			</listitem>
-		</itemizedlist>
-	</para>
-
-	&buscaexterna;
-	<para>
-		Otra forma de buscar ---que posiblemente será
-		la que más utilizará una vez el sistema esté en 
-		producci&oacute;n---
-		está en la ficha de captura, en la primera pestaña que
-		corresponde a datos <literal>Básicos</literal>, puede 
-		ingresar el n&uacute;mero de un caso y oprimir el bot&oacute;n 
-		<literal>Buscar</literal> que está al lado para quedar
-		en la ficha del caso solicitado.
-	</para>
-	<para>El resultado &resultadoexterna; de una consulta web
-		será un reporte.  Los detalles de la presentaci&oacute;n de
-		este se presentan en una secci&oacute;n posterior
-		<xref linkend="reportes"></xref>
-	</para>
-	<para>La consulta web fue diseñada para publicaci&oacute;n de 
-		informaci&oacute;n
-		en Internet y para recibir retroalimentaci&oacute;n cifrada por 
-		correo (con el bot&oacute;n 'Comente Caso').
-		Para activar estas funcionalidades consulte
-		las secciones <xref linkend="publicacion-web"></xref>
-		y <xref linkend="retroalimentacion"></xref>
-	</para>
 </sect1>

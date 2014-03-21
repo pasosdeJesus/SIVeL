@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 
-<!ENTITY URL-BASE "https://sivel12.pasosdeJesus.org/sivelsjr/">
+<!ENTITY URL-BASE "http://s2.pasosdeJesus.org/">
 <!ENTITY buscaexterna "">
 <!ENTITY resultadoexterna "">
-<!ENTITY OPENBSD-VER "5.3">
-<!ENTITY ADJ-VER "5.3">
+<!ENTITY OPENBSD-VER "5.4">
+<!ENTITY ADJ-VER "5.4">
 

@@ -13,12 +13,11 @@
 		un cambio radical de tecnologías migrando hacia SIVeL 2.0 cuyo
 		prototipo para la captura de información ya opera 
 		sobre plataforma Ruby on Rails tras 4 meses de desarrollo
-		<xref linkend="desarrollosjr"></xref>
 		<footnote><para>
 				SIVeL 2 busca mantener tanta compatibilidad como es posible con 
 				SIVeL 1 que opera sobre PHP, ver 
 				<ulink url="http://sivel.sf.net"></ulink>
-		</para></footnote>
+		</para></footnote>.
 	</para>
 	<para>La operación continúa del nuevo sistema de información requiere
 		de personas que desempeñen roles y de una infraestructura 

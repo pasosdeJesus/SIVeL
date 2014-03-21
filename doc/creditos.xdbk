@@ -112,6 +112,13 @@
     Jun.2013 con autorización del sacerdote John Jairo Montoya.
 </para>
 		</listitem>
+		<listitem>
+<para>
+	La sección sobre Refugio y algunos detalles de SIVeL 2.0 fueron
+	concebidos por Randolf Laverde y Merlys Mosquera.
+</para>
+		</listitem>
+
 
 	</itemizedlist>
 </para>	
@@ -173,23 +180,16 @@
 	</itemizedlist>
 </para>
 	<para>
-		En sus albores, parte del código fue generado automáticamente con:
-		<itemizedlist>
-			<listitem>
-				<para>
-	DB_DataObject y DB_DataObject_FormBuilder de Pear	
-				</para>
-			</listitem>
-		</itemizedlist>
-	</para>
-	<para>
 		El cabezote del menú principal y el fondo son aportes
 		de William Rozo (wiroal@nocheyniebla.org).
 	</para>
-	<para>Han ayudado a probar y reportar problemas: William Rozo (wiroal@nocheyniebla.org), Carlos Garaviz, Marcela Medina, Rosa Liliana Ortiz, Diana Garzón y Fabian Wilches</para>
+	<para>Han ayudado a probar y reportar problemas: William Rozo (wiroal@nocheyniebla.org), Carlos Garaviz, Marcela Medina, Rosa Liliana Ortiz, Diana Garzón y Fabian Wilches, Randolf Laverde</para>
 
 <para>
-	Los colores y organización de la Ficha Caso son tomados de un generador 
+	Partes importantes de la versión 2.0 fueron financiadas y cedidas al dominio
+	público por el SJR LAC con autorización de Merlys Mosquera.
+
+	Para la versiónLos colores y organización de la Ficha Caso son tomados de un generador 
 	de barras de progreso del paquete HTML_Progress de Pear.   
 </para>
 <para>La idea de ofrecer retribución pública a quienes encuentren
