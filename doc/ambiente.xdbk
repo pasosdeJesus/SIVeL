@@ -1,79 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-	<sect1 id="recurso-humano">
-		<title>Recurso Humano</title>
-		<para>
-Para usar el sistema de información de manera continua se requieren
-personas capacitadas en los siguiente roles:
-	<itemizedlist>
-		<listitem>
-			<para>Archivista(s): que mantiene archivo 
-				de fuentes documentales
-				bien en medio físico o bien en medio digital 
-				(rol <literal>consulta</literal> en SIVeL).</para>
-		</listitem>
-		<listitem>
-			<para>Analista(s) de información:  Que recolecta,
-				analiza, clasifica e ingresa información
-				periódicamente.  
-				Es deseable que se entreviste directamente 
-				con las víctimas.  Aprovecha el sistema
-				para hacer consultas y conteos (rol 
-				<literal>analista</literal>).
-			</para>
-		</listitem>
-		<listitem>
-			<para>Administrador(a) de Tecnología: Que instala, 
-				mantiene y mejora 
-				la infraestructura buscando garantizar
-				servicio continuo. Saca copias de respaldo
-				periódicamente, administra usuarios de SIVeL,
-				realiza personalizaciones básicas (e.g
-				información geográfica, profesiones,
-				sectores, presuntos responsables, marco 
-				conceptual). Actualiza
-				sistema operativo y SIVeL por lo menos
-				cada 6 meses. (rol 
-				<literal>administrador</literal>).</para>
-		</listitem>
-		<listitem>
-		<para>Desarrollador(es) de SIVeL: Realiza 
-			personalizaciones más avanzadas y las aporta
-			liberándolas al dominio público.  
-			</para>
-		</listitem>
-	</itemizedlist>
-</para>
+<sect1 id="recurso-humano">
+	<title>Recurso Humano</title>
+	<para>
+		Para usar el sistema de información de manera continua se requieren
+		personas capacitadas en los siguiente roles:
+		<itemizedlist>
+			<listitem>
+				<para>Analista(s) de información:  Que recolecta,
+					analiza, clasifica e ingresa información
+					periódicamente.  
+					Es deseable que se entreviste directamente 
+					con las víctimas.  Aprovecha el sistema
+					para hacer consultas y conteos (rol 
+					<literal>analista</literal>).
+				</para>
+			</listitem>
+			<listitem>
+				<para>Administrador(a) de Tecnología: Que instala, 
+					mantiene y mejora 
+					la infraestructura buscando garantizar
+					servicio continuo. Saca copias de respaldo
+					periódicamente, administra usuarios de SIVeL,
+					realiza personalizaciones básicas (e.g
+					información geográfica, profesiones,
+					sectores, presuntos responsables, marco 
+					conceptual). Actualiza
+					sistema operativo y SIVeL por lo menos
+					cada 6 meses. (rol 
+					<literal>administrador</literal>).</para>
+			</listitem>
+			<listitem>
+				<para>Desarrollador(es) de SIVeL: Realiza 
+					personalizaciones más avanzadas y las aporta
+					liberándolas al dominio público.  
+				</para>
+			</listitem>
+		</itemizedlist>
+	</para>
 
-	</sect1>
+</sect1>
 
-	<sect1 id="infraestructura-tecnologica">
-		<title>Infraestructura Tecnológica</title>
-		<para>
-También se requiere mantener una infraestructra tecnológica,  que en
-la personalización de SIVeL para el SJR corresponde a la siguiente (ver otras
-posibles en la documentación de SIVeL genérico en <ulink url="http://sivel.sf.net/"></ulink>):
-	<itemizedlist>
-		<listitem>
-			<para>[Nivel 6] Una zona desmilitarizada (DMZ), con un 
-				cortafuegos en OpenBSD, una zona para el
-				servidor con SIVeL personalizado para el SJR
-			       	y otra zona para la red 
-				local. Soporta usuarios en la intranet y 
-				en internet.  Esta configuración
-				aisla más la red local del 
-				servidor.
-			</para>
-			<informalfigure>
-				<screenshot><mediaobject><imageobject><imagedata
-								fileref="nivel6.eps" format="EPS" scale="40"
-								align="center"></imagedata>
-						</imageobject>
-						<imageobject><imagedata fileref="nivel6.png"
-								format="PNG" align="center"></imagedata></imageobject>
-				</mediaobject></screenshot>
-			</informalfigure>
-		</listitem>
-	</itemizedlist>
-</para>
-	</sect1>
+<sect1 id="infraestructura-tecnologica">
+	<title>Infraestructura Tecnológica</title>
+	<para>
+		También se requiere mantener una infraestructra tecnológica,  que en
+		la personalización de SIVeL para el SJR corresponde a la siguiente 
+		(ver otras posibles en la documentación de SIVeL genérico 
+		en <ulink url="http://sivel.sf.net/"></ulink>):
+		<itemizedlist>
+			<listitem>
+				<para>[Nivel 6] Una zona desmilitarizada (DMZ), con un 
+					cortafuegos en OpenBSD/adJ, una zona para el
+					servidor con SIVeL personalizado para el SJR
+					y otra zona para la red local. Soporta usuarios en la intranet y 
+					en internet.  Esta configuración aisla más la red local del 
+					servidor.
+				</para>
+				<informalfigure>
+					<screenshot><mediaobject><imageobject><imagedata
+									fileref="nivel6.eps" format="EPS" scale="40"
+									align="center"></imagedata>
+							</imageobject>
+							<imageobject><imagedata fileref="nivel6.png"
+									format="PNG" align="center"></imagedata></imageobject>
+					</mediaobject></screenshot>
+				</informalfigure>
+			</listitem>
+		</itemizedlist>
+	</para>
+</sect1>

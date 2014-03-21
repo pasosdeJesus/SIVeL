@@ -7,6 +7,7 @@
 			value_method: :id %>
 
     <%= f.association :categoria,
+      collection: Categoria.from('categoria').where(fechadeshabilitacion: nil).order(:id_tviolencia, :id),
 	    label: "Categoria",
 	    label_method: :nombre, 
       label_method: lambda {|t| t.id_tviolencia + t.id.to_s + ' ' + t.nombre },

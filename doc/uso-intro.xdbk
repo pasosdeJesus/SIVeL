@@ -5,16 +5,12 @@
 		<listitem role="logro" id="iniciar"><para>Puede iniciar una sesi&oacute;n y 
 				distinguir posibilidad de uso seg&uacute;n el rol.
 		</para></listitem>
-		<listitem role="logro" id="buscar"><para>Puede buscar casos por c&oacute;digo y otros criterios y examinarlos tanto en reportes como individualmente
+		<listitem role="logro" id="buscar"><para>Puede buscar casos por c&oacute;digo y examinarlo.
 		</para></listitem>
 		<listitem role="logro" id="actualizar"><para>Puede actualizar 
 				informaci&oacute;n de un caso o agregar casos nuevos
 		</para></listitem>
 		<listitem role="logro" id="eliminar"><para>Puede eliminar un caso
-		</para></listitem>
-		<listitem role="logro" id="conteos"><para>Puede generar conteos de 
-				víctimas o casos, filtrando por rangos de tiempo y 
-				desagregando/agregando seg&uacute;n diversos criterios.
 		</para></listitem>
 	</itemizedlist>
 </highlights>

@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
+	<varlistentry><term>Versión 2.0pre9 (Mar.2014)</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem><para>
+							Sobre Ruby on Rails
+					</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
 	<varlistentry><term>Versión 1.2b1 (Ene.2014)</term>
 		<listitem>
 			<para><itemizedlist>

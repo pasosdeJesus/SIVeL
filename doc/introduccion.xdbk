@@ -2,16 +2,25 @@
 <chapter id="introduccion">
 	<title>Introducción</title>
 
-	<para>Desde comienzos de 2013 el SJR Colombia con financiación
-		de Trocair, buscó sistematizar
-		la información que maneja en las diferentes sedes del país.
-		Comenzó acordando formatos en papel para la captura de 
-		información y continuó con
-		el desarrollo de un sistema de información en los meses
-		de Mayo y Junio de 2013 (ver 
-		<xref linkend="desarrollosjr"></xref> ). 
+	<para>A finales de 2013 el SJR Latinoamérica comenzó a financiar
+		el desarrollo de un sistema de información que inicialmente pudiera 
+		servir para sus 3 oficinas en Venezuela.  Partió de la experiencia del 
+		SJR Colombia y su reciente sistema de información 
+		<literal>SIVeL 1.2 Colombia</literal> desarrollado y personalizado por 
+		Vladimir Támara del proyecto Pasos de Jesús.  </para>
+	<para>
+		Particularmente Merlys Mosquera y Randolf Laverde, apoyaron 
+		un cambio radical de tecnologías migrando hacia SIVeL 2.0 cuyo
+		prototipo para la captura de información ya opera 
+		sobre plataforma Ruby on Rails tras 4 meses de desarrollo
+		<xref linkend="desarrollosjr"></xref>
+		<footnote><para>
+				SIVeL 2 busca mantener tanta compatibilidad como es posible con 
+				SIVeL 1 que opera sobre PHP, ver 
+				<ulink url="http://sivel.sf.net"></ulink>
+		</para></footnote>
 	</para>
-	<para>La operación continúa de este sistema de información requiere
+	<para>La operación continúa del nuevo sistema de información requiere
 		de personas que desempeñen roles y de una infraestructura 
 		tecnológica que opere de manera continua.   
 		Estos temas, precedidos de
