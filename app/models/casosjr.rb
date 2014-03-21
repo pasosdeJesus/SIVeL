@@ -1,4 +1,5 @@
 class Casosjr < ActiveRecord::Base
+
 	has_many :ayudaestado_respuesta, foreign_key: "id_caso", validate: true, dependent: :destroy
 	has_many :derecho_respuesta, foreign_key: "id_caso", validate: true, dependent: :destroy
 	has_many :respuesta, foreign_key: "id_caso", validate: true, dependent: :destroy
@@ -14,9 +15,16 @@ class Casosjr < ActiveRecord::Base
 	belongs_to :salida, class_name: "Ubicacion", foreign_key: "id_salida", validate: true
 	belongs_to :causaref, foreign_key: "id_causaref", validate: true
 
+	self.primary_key = :id_caso
+
 	validates_presence_of :fecharec
 	validates_presence_of :asesor
   validates_presence_of :regionsjr
+  validate :llegada_posterior_a_salida
 
-	self.primary_key = :id_caso
+  def llegada_posterior_a_salida
+    if fechallegada.present? && fechasalida.present? && fechallegada<fechasalida
+      errors.add(:fechallegada, " debe ser posterior a la fecha de salida")
+    end
+  end
 end

@@ -1,4 +1,5 @@
 class Desplazamiento < ActiveRecord::Base
+
 	has_many :actosjr, foreign_key: "id_caso", validate: true
 	has_many :respuesta, foreign_key: "fechaexpulsion", validate: true
 	belongs_to :expulsion, class_name: "Ubicacion", foreign_key: "id_expulsion", validate: true
@@ -14,7 +15,18 @@ class Desplazamiento < ActiveRecord::Base
 	belongs_to :municipio, foreign_key: "municipiodecl", validate: true
 	belongs_to :caso, foreign_key: "id_caso", validate: true
 
-  validates_presence_of :fechaexpulsion, :expulsion, :fechallegada, :llegada
-
   self.primary_key = nil
+
+  validates_presence_of :fechaexpulsion, :expulsion, :fechallegada, :llegada
+  validate :llegada_posterior_a_expulsion
+  validate :fechaexpulsion, uniqueness: { scope: :id_caso,
+    message: " ya existe otro desplazamiento con la misma fecha de expulsión"
+  }
+
+  def llegada_posterior_a_expulsion
+    if fechallegada.present? && fechaexpulsion.present? && fechallegada<fechaexpulsion
+      errors.add(:fechallegada, " debe ser posterior a la fecha de expulsión")
+    end
+  end
+
 end
