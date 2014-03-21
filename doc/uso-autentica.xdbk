@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect1 id="autenticacion">
+	<title>Inicio de una sesi&oacute;n y autenticaci&oacute;n</title>
+	<para>
+		Desde un computador seguro (preferiblemente con OpenBSD o Ubuntu)
+		ingrese a su navegador y en la barra de direcciones digite:
+		<literal>&URL-BASE;</literal> 
+		(Nota: esta dirección cambiará una vez se coloque el servidor
+		del SJR).
+	</para>
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pautentica.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pautentica.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Autenticaci&oacute;n</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+	<warning><para>Note que el URL comienza con <literal>https</literal>
+			es decir se transmite informaci&oacute;n del servidor a su
+			computador con el protocolo del web típico (HTTP) pero con 
+			cifrado fuerte SSL.  Este cifrado requiere que
+			el servidor web tenga un certificado, como empleamos
+			un certificado autofirmado, su navegador reportará la 
+			situaci&oacute;n como problemática, a&uacute;n cuando no
+			lo es.
+	</para></warning>
+
+	<para>
+		Para iniciar una sesi&oacute;n debe ingresar su nombre de usuario
+		y su clave (que debi&oacute; ser creada por un usuario con rol 
+		administrador).
+		<warning><para>SIVeL no almacena su clave directamente sino
+				una especie de huella digital de la misma
+				(condensado SHA-256). Por esto puede emplear la clave que
+				prefiera con la confianza que no podrá ser
+				conocida por administradores que tengan acceso
+				a la base.  Se recomienda que tenga n&uacute;meros,
+				letras y caracteres especiales.  Es conveniente
+				cambiarla peri&oacute;dicamente, lo cual podrá hacer con
+				asistencia de un usuario que tenga el rol 
+				Administrador.</para></warning>
+	Una vez autenticado verá el menú principal de SIVeL.
+		<informalfigure>
+			<screenshot><mediaobject><imageobject>
+						<imagedata fileref="pmenu.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+					<imageobject><imagedata fileref="pmenu.png" format="PNG" align="center"></imagedata></imageobject>
+					<textobject><phrase>Menu Principal</phrase></textobject></mediaobject>
+			</screenshot>
+		</informalfigure>
+
+</para>
+<para>
+		Dependiendo del rol de su usuario 
+		(ver <xref linkend="recurso-humano"/>) tendrá o no
+		tendrá acceso a las opciones del men&uacute;:  No se requiere 
+		autenticaci&oacute;n<footnote><para>Así se facilita que
+				cuando lo desee, configure su servidor y navegador
+				para compartir los casos que sistematice
+				en el web --aunque para prevenir eventuales
+				fallas sugerimos que en tal caso comparta una base 
+				alterna que sea copia de la principal pero sin 
+				fuentes, preferiblemente en un computador diferente
+				al servidor o al menos con un usuario diferente
+				en el mismo motor de base de datos de la base
+				principal.
+		</para></footnote> para emplear la consulta web sin fuentes
+		(con un URL como <literal>&URL-BASE;consulta_web.php</literal> 
+		o
+		disponible en el men&uacute; <literal>Consulta</literal>). 
+		Las personas con 
+		rol consulta, s&oacute;lo podrán emplear los
+		men&uacute;s <literal>Consulta</literal>, <literal>Reportes</literal>, 
+		<literal>Conteos</literal> y <literal>Otros</literal>. El rol
+		analista además de los anteriores podrá ingresar casos desde
+		el men&uacute; <literal>Caso</literal>.  El rol administrador además
+		podrá ingresar a las opciones del men&uacute; 
+		<literal>Administraci&oacute;n</literal>
+
+	</para>
+</sect1>
+

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<variablelist>
+	<varlistentry><term>Versión 1.2b1 (Ene.2014)</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem><para>
+Simplificadas tablas de usuarios y cambiado algoritmo de condensado a bcrypt.
+					</para></listitem>
+
+					<listitem><para>
+Información geográfica actualizada con DIVIPOLA 2013.
+					</para></listitem>
+
+					<listitem><para>
+Reimplementado módulo de mezcla.
+					</para></listitem>
+					<listitem><para>
+Función soundexesp, agradecimiento a Oliver Mazariegos de Grupo Vesica.
+					</para></listitem>
+					<listitem><para>
+Añadidas variables de configuración para añadir validaciones:
+$GLOBALS['validaciones_tipicas'], 
+$GLOBALS['gancho_valida_caso'], 
+$GLOBALS['gancho_valida_base'].
+					</para></listitem>
+					<listitem><para>
+Añadido archivo de comandos <literal>bin/elimcaso.sh</literal> que ayuda a 
+eliminar un caso dado el código
+					</para></listitem>
+					<listitem><para>
+Añadidas variable de configuración para controlar presentación de 
+reporte tabla: $GLOBALS['reptabla_nonacimiento'], 
+$GLOBALS['reptabla_noagresion'], 
+$GLOBALS['reptabla_separa_ubicacion'] (que separa ubicación en 2 columnas para
+municipio y departamento),
+$GLOBALS['reptabla_separa_nomap'] (que separa nombres y apellidos en 2 columnas) y
+$GLOBALS['reptabla_tipificacion_breve'] (que presenta tipificación sin código ni supracategoria).
+					</para></listitem>
+					<listitem><para>
+Fallas resueltas: Al buscar por consulta detallada en pestaña ubicación no 
+pone automáticamente latitud y longitud. Agradecemos reporte a Miltón Mejía.
+Permite poner sector social y rango edad en víctimas colectivas.
+					</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+	<varlistentry><term>Versión 1.2a1 (Ago.2013)</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem><para>
+Modulo nuevo <literal>desplazamiento</literal> para registrar desplazamiento. 
+Requiere que en el caso se registren dos o más ubicaciones por donde
+se han desplazado las víctimas. Agradecemos al
+SJR Colombia por financiar este desarrollo de dominio público.  
+					</para></listitem>
+					<listitem><para>
+Modulo experimental <literal>mezcla</literal> para mezclar casos.
+Ayuda a mezclar dos casos identificados por sus códigos
+o permite elegir 2 casos entre un listado de posibles repetidos.  
+Puede mezclar bien uno en otro o bien crear un caso nuevo con el
+resultado de la mezcla. Por ser experimental se
+recomienda examinar caso resultante.
+					</para></listitem>
+					<listitem><para>
+Usabilidad: agrega automáticamente latitud y longitud al elegir 
+departamento o municipio en pestaña Ubicación; control AJAX más eficiente para 
+elegir departamento, municipio y clase (por ejemplo en
+Consulta Web o en pestañas Ubicación y Víctima Individual); 
+permite especificar edad actual de una víctima, autocompleta año de nacimiento, edad en hecho, edad actual y rango de edad cuando uno de estos se cambia;
+alerta para reportar errores de validación.  
+					</para></listitem>
+					<listitem>
+						<para>
+Internacionalización y localización: Activado Soporte de Idiomas 
+Nativos y codificación UTF8. Permite especificar al usuario el idioma 
+que prefiere para la interfaz, en el momento hay traducciones a español e 
+inglés.  Activada cotejación en español, el ordenamiento  ahora corresponde 
+al del español (por ejemplo en reporte revista por localización o en 
+tablas básicas). 
+						</para>
+					</listitem>
+					<listitem><para>
+Activada búsqueda de textos completos 
+ignorando mayúsculas, minúsculas y tildes, usable al buscar por nombre, por 
+título y por descripción en consulta web.  
+En consulta detallada en campos de texto (como nombre de víctima) se 
+específica cualquiera con *.    
+					</para></listitem>
+					<listitem><para>
+Módulo de georeferenciación en Google Maps convertido a la versión 3 del API.  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+Administradores: Se dividió el archivo de configuración en una parte para 
+servidor (e.g base de datos y módulos) y otra para interfaz.
+Activa PostGIS al crear base de datos.
+Configuración más sencilla de módulos,  basta agregar el módulo en la 
+variable <literal>modulos</literal> del archivo de configuración del sitio 
+y desde el menú principal elegir 
+<menuchoice><guimenu>Otros</guimenu><guimenuitem>Actualizar</guimenuitem></menuchoice>.  
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+Desarrolladores: Fuentes migradas a 
+<ulink url="https://github.com/pasosdeJesus/SIVeL">github</ulink>. 
+Afinado para PHP 5.3. Base de datos debe estar en UTF-8.  
+Salida enviada al navegador en UTF-8. Fuentes en UTF-8.  
+Estándares de nomenclatura SQL y Javascript.  Archivo de comandos
+<filename>herram/creatabla.sh</filename> que genera automaticamente
+estructura de tabla básica y/o a partir de la estructura en estructura.sql 
+genera la clase en el directorio DataObject y los datos en 
+<filename>DataObjects/estructura-dataobject.ini</filename> y 
+<filename>DataObjects/estructura-dataobject.links.ini</filename>.
+Clase <filename>DataObject/Multitabla</filename> para extender
+y facilitar personalizaciones con un control de 
+multitabla (similar al de familiar en Victima Individual).
+Clase <filename>PagBaseMultiplePartes</filename> para extender
+y facilitar creación de pestañas con partes provenientes de diversos
+DataObject.  
+Se actualiza traducción de fuentes con <filename>herram/intl.sh</filename>.
+Para personalizaciones que se desarrollen en diferentes 
+entornos puede especificarse configuración particular a cada entorno
+en <filename>conf-local.php</filename>, <filename>conf_int-local.php</filename>
+y <filename>vardb-local.sh</filename>.
+					</para>
+					</listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+	</variablelist>
+
+El historial de la versión 1.1 puede verse en el <ulink url="http://sivel.sf.net/1.1/">manual de esa versión</ulink>. 
+
+

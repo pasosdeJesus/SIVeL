@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="respuesta">
+	<title>Respuesta Institucional y Seguimiento</title>
+
+	<para>
+		Pueden agregarse varias respuestas y seguimientos con fecha de atención diferente.
+	</para>
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pficharespuesta.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pficharespuesta.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Respuesta</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+	<para>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+Fecha Expulsión: Específica el desplazamiento del cual se 
+describe la respuesta institucional y seguimiento.
+				</para>
+			</listitem> 
+			<listitem>
+				<para>
+Ayudas Otorgadas por el Estado:
+Elija el tipo de ayuda, especifique la cantidad y la institución
+y presione el boton Añadir que está a la derecha.  Puede agregar 
+una a una todas las ayudas que haya recibido la persona.
+				</para>
+			</listitem>
+		</itemizedlist>
+Los derechos vulnerados, motivo de la consulta y subsidios y 
+programas  se agregan de manera análoga a las Ayudas Otorgadas
+por el Estado.
+	</para>
+
+	<para>
+Los botones de la parte superior permiten
+especificar más de una Respuesta de forma
+análoga a otras pestañas (ver <xref linkend="victimaindividual"/>).
+	</para>
+</sect3>

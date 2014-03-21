@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+	<sect2 id="ficha">
+		<title>Ficha</title>
+
+		<para>Antes de ingresar un nuevo caso es recomendable 
+			que b&uacute;sque
+			si ya está registrado por ejemplo utilizando la
+			Consulta Web y buscando por parte del nombre de la 
+			víctima y/o por fecha y/o lugar en el que 
+			ocurri&oacute;.</para>
+		<para>Si está seguro que se trata de un caso nuevo, desde 
+			el menú principal elija 
+			<literal>Ficha</literal> del men&uacute; 
+			<literal>Caso</literal>.
+		</para>
+
+		<para>Comience a digitar la
+			informaci&oacute;n en cada una de las pestañas del formulario
+			sin indicar un n&uacute;mero de caso explícito en la pestaña
+			de datos básicos --el sistema asignará un n&uacute;mero
+			consecutivo automáticamente<footnote><para>La numeraci&oacute;n 
+					es consecutiva --con saltos cuando se borran casos o se insertan en lote
+					de otro SIVeL.   Para efectos de conteos es mejor emplear la consulta
+					web (ver <xref linkend="consultaweb"/>).
+</para></footnote>. 
+		</para>
+		<para>Si no desea que se actualicen los cambios de la pestaña
+			en la que está, no presione bot&oacute;n alguno del
+			formulario, sino 
+			devuelvase usando el botón del navegador
+			o ubiquese en el espacio con la direcci&oacute;n 
+			de la página (URL),  digite la dirección
+			con la que comienza una sesión 
+			(<xref linkend="autenticacion"></xref>) y presione 
+			ENTER. </para>
+
+		<para>Aunque se sugiere llenar los datos del caso en
+			el orden de las pestañas,
+			podrá pasar de una pestaña a otra e iniciar
+			en la que prefiera. 
+			Esto por ejemplo es &uacute;til para
+			iniciar un caso del que acaba de recibir informaci&oacute;n
+			digital pero que no puede analizar en detalle en el
+			momento, pues puede poner la fecha (indispensable) 
+			y pasar
+			a la pestaña Memo para pegar los datos que recibi&oacute;.
+		</para>
+
+		<sect3 id="basicos">
+			<title>Datos Básicos</title>
+
+			<para>
+				Entre los datos básicos de un caso es indispensable 
+				la fecha del desplazamiento.  
+				Si desconoce o no requiere especificar
+				otros, en esta y en otras pestañas déjelos en la
+				opci&oacute;n <literal>SIN INFORMACI&Oacute;N</literal>.
+			</para>
+			<informalfigure>
+				<screenshot><mediaobject><imageobject>
+							<imagedata fileref="pfichabasicos.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+						<imageobject><imagedata fileref="pfichabasicos.png" format="PNG" align="center"></imagedata></imageobject>
+						<textobject><phrase>Datos básicos</phrase></textobject></mediaobject>
+				</screenshot>
+			</informalfigure>
+
+			<para>
+
+				<itemizedlist>
+					<listitem>
+						<para>
+							No. Caso: Junto con el bot&oacute;n <literal>Buscar</literal> que está a su lado, 
+							permite buscar un caso por n&uacute;mero. 
+						</para>
+					</listitem> 
+					<listitem>
+						<para>
+							Titulo:
+							Permite poner un título al caso.   C&oacute;mo la consulta web permite buscar
+							por título, si tiene una publicaci&oacute;n peri&oacute;dica
+							es práctico que ponga como título el n&uacute;mero de la edici&oacute;n en la que 
+							apareci&oacute; el caso. También podría poner detalles del estado del caso 
+							(por ejemplo Incompleto).
+						</para>
+					</listitem> 
+					<listitem>
+						<para>
+Fecha: 
+Especifica la fecha del hecho.  Es un campo indispensable, si no conoce la
+fecha del hecho puede acordar una convenci&oacute;n por ejemplo 15 para un día
+desconocido, Jun para un mes desconocido y el año en curso cuando el
+año es desconocido.  En estos caso incluya una anotaci&oacute;n en el 
+Memo (ver <xref linkend="memo"/>) que indique la necesidad de conseguir 
+más informaci&oacute;n o que explique la ausencia, y añada la
+etiqueta <literal>MES_INEXACTO</literal> o bien 
+<literal>DIA_INEXACTO</literal>.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Hora y duraci&oacute;n de los hechos en caso de conocerse.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Intervalo: 
+							Empleelo si no conoce la hora.  Puede cambiar las opciones desde la 
+							tabla básica correspondiente.  (Ver <xref linkend="tablasbasicas"/>).
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Regi&oacute;n:						
+							Márquela en caso de que no conozca el departamento donde ocurri&oacute; el hecho,
+							teniendo en cuenta que el caso no saldrá en estadísticas si no específica 
+							un departamento.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Frontera:
+							Especifíquela si el caso ocurre en alguna frontera.  Si el caso ocurre
+							fuera del país puede especificarlo en la pestaña siguiente (ver <xref linkend="ubicacion"/>).
+						</para>
+					</listitem>
+				</itemizedlist>
+
+			</para>
+
+			<para>
+				En la parte inferior de todas las pestañas aparecen los siguientes botones:
+
+				<itemizedlist>
+					<listitem>
+						<para>
+							Anterior: Conduce a la pestaña precedente.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Val. y Rep. Ger: Genera un reporte general y valida informaci&oacute;n reportando 
+							pestañas que falten por llenar del caso y errores ortográficos en el memo.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Men&uacute;: Conduce al men&uacute; principal.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Elimina caso: Permite eliminar el caso que se edita, previa confirmaci&oacute;n 
+							por parte del usuario.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Caso nuevo: Inicia edici&oacute;n de un caso nuevo.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Siguiente: Conduce a la pestaña siguiente.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+		</sect3>
+
+		<sect3 id="ubicacion">
+			<title>Ubicaci&oacute;n</title>
+
+			<para>
+				La ubicaci&oacute;n de un caso se específica en esta
+				pestaña de acuerdo al DIVIPOLA (Divisi&oacute;n Político
+				Administrativa del país de acuerdo al DANE).
+				Si entre las opciones que se le presentan no está el que 
+				busca puede agregar el departamento, municipio o centro poblado en la 
+				tabla básica correspondiente.
+			</para>
+
+			<informalfigure>
+				<screenshot><mediaobject><imageobject>
+							<imagedata fileref="pfichaubicacion.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+						<imageobject><imagedata fileref="pfichaubicacion.png" format="PNG" align="center"></imagedata></imageobject>
+						<textobject><phrase>Ubicaci&oacute;n</phrase></textobject></mediaobject>
+				</screenshot>
+			</informalfigure>
+
+
+			<para>
+
+				<itemizedlist>
+					<listitem>
+						<para>
+							Departamento: 
+							Si el caso ocurre fuera del país elija <literal>Exterior</literal>.
+							Si no conoce el departamento especifique la regi&oacute;n en la pestaña
+							anterior (ver <xref linkend="basicos"/>).
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Municipio: 
+							Una vez elija el departamento puede elegirse entre sus municipios. 
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Clase:  Una vez llene el municipio, aparecen posibles centros poblados 
+							y sitios de un municipio de acuerdo a 
+							la Divisi&oacute;n Político Administrativa.
+						</para>
+					</listitem>
+
+					<listitem>
+						<para>
+							Lugar: 
+							Precisa un poco más donde ocurrieron los hecho. e.g. Vereda en casos rurales 
+							y Barrio en casos urbanos.
+						</para>
+					</listitem>
+					<listitem><para>
+							Sitio:
+							Precisa a&uacute;n más la ubicaci&oacute;n de los hechos. e.g. Casa, Finca, Direcci&oacute;n.
+					</para></listitem>
+					<listitem><para>
+							Latitud:
+							En decimal, si requiere convertir de grados, minutos y segundos a decimal 
+							puede emplear <ulink url="http://segdeha.com/e/convert_lat_long/"></ulink>.
+					</para></listitem>
+					<listitem><para>
+							Longitud:
+							En decimal.  Una vez almacene la informaci&oacute;n y vuelva a esta pestaña verá
+							un enlace a las coordenadas que ingres&oacute; en OpenStreetmap.
+					</para></listitem>
+					<listitem>
+						<para>
+							Tipo de ubicaci&oacute;n: 
+							Permite especificar si el caso ocurri&oacute; en zona rural o urbana o en ambas. 
+						</para>
+					</listitem>
+
+				</itemizedlist>
+
+
+				En la parte inferior de algunas pestañas, aparecen botones análogos
+				a los de esta, los cuales le permiten especificar más de una ubicaci&oacute;n
+				(podría ser &uacute;til por ejemplo en casos de desplazamiento, aunque la 
+				ubicaci&oacute;n principal es la primera).   Estos botones se relacionan con
+				los datos del lado izquierdo del encabezado
+				(<literal>-/0</literal> en este ejemplo), que indica el n&uacute;mero de 
+				ubicaci&oacute;n en el que está o <literal>-</literal> si es una nueva
+				ubicaci&oacute;n , y el total de ubicaciones ya asociadas al caso.
+
+				<itemizedlist>
+					<listitem>
+						<para>
+							Eliminar: Descarta la ubicaci&oacute;n que está examinando
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Nueva: Ingresa ubicaci&oacute;n editada y genera una nueva.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Nueva copia: Ingresaría la ubicaci&oacute;n editada y generaría una nueva como 
+							copia de la actual.   Aunque no es muy &uacute;til en el caso de ubicaciones
+							(por eso está deshabilitado) en otras pestaña (por ejemplo las de víctimas)
+							es muy &uacute;til para ingresar varias víctimas con características similares.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Ubicaci&oacute;n anterior: Ingresa la ubicaci&oacute;n editada y conduce a la anterior.
+							Las ubicaciones se numeran por orden alfabético no por el orden en el 
+							que las ingrese.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Ubicaci&oacute;n siguiente: Ingresa la ubicaci&oacute;n editada y conduce a la 
+							siguiente.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</para>
+
+
+		</sect3>
+
+		<sect3 id="fuentesfrecuentes">
+			<title>Fuentes Frecuentes</title>
+
+			<informalfigure>
+				<screenshot><mediaobject><imageobject>
+							<imagedata fileref="pfichafrecuentes.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+						<imageobject><imagedata fileref="pfichafrecuentes.png" format="PNG" align="center"></imagedata></imageobject>
+						<textobject><phrase>Fuentes frecuentes</phrase></textobject></mediaobject>
+				</screenshot>
+			</informalfigure>
+
+
+			<para>
+
+				<itemizedlist>
+					<listitem>
+						<para>
+							Fuente: Permite elegir una de las fuentes configuradas en tablas básicas
+							(ver <xref linkend="tablasbasicas"/>).
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Fecha: De la fuente, debe ser posterior a la fecha del hecho.
+
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Ubicaci&oacute;n: N&uacute;mero de la página del documento o secci&oacute;n donde se encuentra la 
+							informaci&oacute;n.
+
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Clasificaci&oacute;n: Se referencia los c&oacute;digos de los tipos de violencia que
+							la fuente describe (ver <xref linkend="actos"/>).
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Ubicaci&oacute;n física: Referencia el sitio físico donde la organizaci&oacute;n
+							almacena la fuente (e.g carpeta DH, caja fuerte, etc.) o una URL.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Anexo: Permite elegir uno de los anexos del casos 
+							(ver <xref linkend="anexos"></xref>), indicando así que la fuente
+							frecuente es justamente ese anexo.
+						</para>
+					</listitem>
+
+				</itemizedlist>
+
+				En la parte inferior hay botones que permiten especificar más
+				de una fuente frecuente para el caso.  Son análogos a los de la
+				pestaña Localizaci&oacute;n (ver <xref linkend="ubicacion"/>).
+			</para>
+		</sect3>
+
+		<sect3 id="otrasfuentes">
+			<title>Otras Fuentes</title>
+
+			<para>
+				Permite especificar personas que han aportado informaci&oacute;n para el caso.    
+				Esta informaci&oacute;n no sale en los reportes tipo revista y es la que más 
+				debe proteger su organizaci&oacute;n para evitarle riesgos a quienes
+				dan informaci&oacute;n.
+			</para>
+
+
+			<informalfigure> 
+				<screenshot><mediaobject><imageobject>
+							<imagedata fileref="pfichaotras.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+						<imageobject><imagedata fileref="pfichaotras.png" format="PNG" align="center"></imagedata></imageobject>
+						<textobject><phrase>Otras Fuentes</phrase></textobject></mediaobject>
+				</screenshot>
+			</informalfigure>
+
+
+			<para>
+
+				<itemizedlist>
+					<listitem>
+						<para>
+							Nombre: En esta casilla se menciona si hubo testigos de los acontecimientos, como también personas que rindieron testimonio sobre el caso.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Anotaciones: Con respecto a la persona o al testimonio.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Fecha: En la que la persona aport&oacute; la informaci&oacute;n.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Ubicaci&oacute;n física:  Donde se almacena la fuente física (casete, papel, o 
+							un URL).
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Tipo de fuente: Directa o Indirecta.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Anexo: Permite elegir uno de los anexos del casos 
+							(ver <xref linkend="anexos"></xref>), indicando así que la fuente
+							es justamente ese anexo.
+						</para>
+					</listitem>
+
+				</itemizedlist>
+
+				En la parte inferior de esta pestaña hay botones análogos a los de otras
+				(ver <xref linkend="ubicacion"/>).
+			</para>
+		</sect3>
+
+		<sect3 id="contexto">
+			<title>Contexto</title>
+
+			<informalfigure>
+				<screenshot><mediaobject><imageobject>
+							<imagedata fileref="pfichacontexto.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+						<imageobject><imagedata fileref="pfichacontexto.png" format="PNG" align="center"></imagedata></imageobject>
+						<textobject><phrase>Contexto</phrase></textobject></mediaobject>
+				</screenshot>
+			</informalfigure>
+
+
+			<para>
+
+				<itemizedlist>
+					<listitem>
+						<para>
+							Contexto: en el que ocurri&oacute; el hecho de violencia.
+							Los posibles contextos pueden configurarse en las tablas básicas
+							(ver <xref linkend="tablasbasicas"/>).
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+
+							Antecedentes: al hecho de violencia.
+							Son configurables en la tabla básica Antecedentes.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+
+							Bienes Afectados: Listado de bienes robados o destruidos durante el hecho.
+						</para>
+					</listitem>
+
+
+				</itemizedlist>
+
+			</para>
+		</sect3>
+
+		<sect3 id="presuntosresponsables">
+			<title>Presuntos Responsables</title>
+
+
+			<informalfigure>
+				<screenshot><mediaobject><imageobject>
+							<imagedata fileref="pfichapresponsables.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+						<imageobject><imagedata fileref="pfichapresponsables.png" format="PNG" align="center"></imagedata></imageobject>
+						<textobject><phrase>Presuntos Responsables</phrase></textobject></mediaobject>
+				</screenshot>
+			</informalfigure>
+
+
+			<para>
+
+				<itemizedlist>
+					<listitem>
+						<para>
+							Presunto responsable: Permite elegir uno de los configurados
+							en la tabla básica Presuntos Responsables (ver <xref linkend="tablasbasicas"/>)
+							---que incluye SIN INFORMACI&Oacute;N como posible opci&oacute;n.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Bloque: Hace referencia a un bloque paramilitar.
+
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Frente: Un frente armado de la guerrilla.
+
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Brigada: Del ejercito.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Batall&oacute;n: Del ejercito.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Divisi&oacute;n
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Otro: Permite especificar responsabilidad individual,  como nombres, 
+							cargos, alías o n&uacute;mero de integrantes.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+
+							Otras agresiones: Presenta la lista de categorías de violencia que
+							no son contra víctimas para elegir las que se requieran para el caso
+							(puede seleccionar varias en Firefox manteniendo presionada la tecla Control 
+							mientras elige con el rat&oacute;n). 
+							Si  hay varios presuntos responsables en un caso, cada uno puede tener una
+							clasificaci&oacute;n diferente.
+						</para>
+					</listitem>
+
+				</itemizedlist>
+				En la parte inferior de la pestaña hay botones que permiten especificar
+				más de un presunto responsable (ver <xref linkend="ubicacion"/>).
+			</para>
+		</sect3>
+
+		<sect3 id="victimaindividual">
+			<title>Víctima Individual</title>
+
+
+			<informalfigure>
+				<screenshot><mediaobject><imageobject>
+							<imagedata fileref="pfichavictimaindividual.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+						<imageobject><imagedata fileref="pfichavictimaindividual.png" format="PNG" align="center"></imagedata></imageobject>
+						<textobject><phrase>Víctima Individual</phrase></textobject></mediaobject>
+				</screenshot>
+			</informalfigure>
+
+
+			<para>
+
+				Antes de ingresar un caso es conveniente que busque si los nombres
+				de víctimas ya están en otros casos y de ser así que busque aclarar
+				si se trata de personas diferentes hom&oacute;nimas, o realmente de la misma
+				persona.
+			</para>
+			<para>
+				En el momento de ingresar una víctima en un caso, teclee parte del
+				nombre y/o del apellido y pulse sobre el enlace "Buscar persona." 
+				En el caso de un familiar teclee parte del nombre y/o apellido
+				del familiar y pulse sobre el enlace "Buscar".  Con esto se
+				abrirá una nueva ventana con los nombres de víctimas que 
+				se parezcan al que tecle&oacute;, también aparecerán enlaces a los casos
+				en los que la persona aparezca como víctima o como familiar,
+				esos enlaces lo dirigen a un reporte general del caso en otra
+				pestaña por lo que puede emplearlos tranquilamente para verificar
+				si la persona que busca efectivamente es la que se referencia en
+				los otros casos.   Cuando ubiqué la persona en la ventana con
+				nombres de personas presione sobre el nombre de la persona.
+			</para>
+			<para>
+				Sugerimos que haga esto para que se completen automáticamente los datos
+				conocidos de esa persona (e.g. Procedencia, Documento de Identidad, Nombres,
+				Apellidos, Fecha de Nacimiento y Sexo) y para que quede la misma persona
+				relacionada en los dos casos.  
+			</para>
+
+			<itemizedlist>
+				<listitem>
+					<para>
+						Procedencia: Sitio de nacimiento de la persona.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Documento de Identidad: Especifique el tipo y el n&uacute;mero.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+
+						Nombres y Apellidos: Se recomienda escribirlos en may&uacute;sculas y con tildes.
+
+					</para>
+				</listitem>
+
+				<listitem>
+					<para>
+						Fecha de Nacimiento o Edad: Especifique una de las 2 (edad se refiere
+						a la edad en el momento de los hechos).
+					</para>
+				</listitem>
+
+				<listitem>
+					<para>
+						Hijos y Sexo: Permite especificar informaci&oacute;n demográfica (hijos se refiere 
+						a cantidad en el momento de los hechos).
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Profesi&oacute;n: Configurables en la tabla básica del mismo nombre.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Rango de edad: Debe ser acorde con la edad (a menos que no se haya 
+						especificado edad).  Si especific&oacute; la edad, puede dejar esta casilla
+						SIN INFORMACI&Oacute;N y el sistema pondrá el rango correspondiente.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Filiaci&oacute;n política: Opciones configurables en la tabla básica
+						del mismo  nombre.
+					</para>
+				</listitem>
+
+				<listitem>
+					<para>
+						Organizaci&oacute;n Social: Si la víctima hace parte de una organizaci&oacute;n.
+						Los posibles tipos de organizaciones pueden configurarse en la tabla
+						básica del mismo nombre.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Sector Social: De la víctima.  
+						Se configuran en la tabla básica del mismo nombre.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Vínculo Estado: Se selecciona informaci&oacute;n si la víctima tenía 
+						alg&uacute;n vínculo con el Estado (e.g. GOBERNACI&Oacute;N, CONCEJO MUNICIPAL, ALCALD&Iacute;A).
+						Los posibles vínculos se configuran en una tabla básica.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Organizaci&oacute;n Armada: Esta casilla se llena si la víctima hacía parte de 
+						una organizaci&oacute;n armada legal o ilegal.  Las opciones corresponden
+						a la tabla básica Presunto Responsable.
+
+					</para>
+				</listitem>
+
+				<listitem>
+					<para>
+						Antecedentes: de la víctima.  Las opciones provienen de la tabla básica
+						del mismo nombre.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				Los botones de la parte inferior permiten
+				especificar más de una víctima de forma
+				análoga a otras pestañas (ver <xref linkend="ubicacion"/>).
+			</para>
+		</sect3>
+
+		<sect3 id="victimacolectiva">
+			<title>Víctima Colectiva</title>
+
+			<para>
+				En un hecho de violencia con muchas víctimas, si la cantidad
+				precisa de víctimas se conoce, es importante especificarlas todas
+				y cada una como víctimas individuales (a&uacute;n cuando deba usarse
+				como nombre NN).   Esta pestaña de víctimas colectivas se reserva
+				para casos en los que el n&uacute;mero de personas afectadas no puede
+				determinarse (e.g. una fumigaci&oacute;n).  Por ser un n&uacute;mero aproximado
+				el que puede especificarse, las víctimas colectivas no se incluyen 
+				en los conteos (ver <xref linkend="cconteos"></xref>.
+			</para>
+
+			<informalfigure>
+				<screenshot><mediaobject><imageobject>
+							<imagedata fileref="pfichavictimacolectiva.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+						<imageobject><imagedata fileref="pfichavictimacolectiva.png" format="PNG" align="center"></imagedata></imageobject>
+						<textobject><phrase>Víctima Colectiva</phrase></textobject></mediaobject>
+				</screenshot>
+			</informalfigure>
+
+
+			<para>
+
+				Los campos de esta ficha son prácticamente los mismos de
+				víctima individual. Y también es posible relacionar una víctima colectiva de
+				otro caso con el enlace "Buscar Grupo".  Las novedades son:
+				<itemizedlist>
+					<listitem>
+						<para>
+							Nombre: Se refiere al nombre de la comunidad afectada.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Num. Aprox. Personas: Se especifica con cifras la cantidad de víctimas.
+
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							En los demás campos es posible elegir más de una opci&oacute;n, para especificar
+							la variedad de profesiones, rangos de edad, antecedentes, etc. de los
+							integrantes del grupo.
+
+						</para>
+					</listitem>
+				</itemizedlist>
+
+				Los botones de la parte inferior permiten especificar
+				más de una víctima colectiva.
+			</para>
+		</sect3>
+
+
+		<sect3 id="actos">
+			<title>Actos</title>
+
+			<para>
+				<informalfigure>
+					<screenshot><mediaobject><imageobject>
+								<imagedata fileref="pfichaactos.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+							<imageobject><imagedata fileref="pfichaactos.png" format="PNG" align="center"></imagedata></imageobject>
+							<textobject><phrase>Actos</phrase></textobject></mediaobject>
+					</screenshot>
+				</informalfigure>
+
+				Permite especificar las agresiones, indicando quien le hizo que a quien.  
+				Es decir especificando o marcando uno o más presuntos responsables, una
+				o más categorías de violencia y una o más víctimas.
+				Las categorías de violencia son las especificadas en
+				<literal>Tipo de Violencia</literal>, <literal>Supracategoría</literal> y 
+				<literal>Categoría</literal> (ver <xref linkend="tablasbasicas"/>).
+				Puede elegir varios presuntos responsables o varias categorías o varias
+				víctimas (desde Firefox presionando la tecla Control
+				mientras con el bot&oacute;n del rat&oacute;n se marcan las diversas opciones).  Y una
+				vez las elija, presione el bot&oacute;n Añadir.
+			</para>
+			<para>
+				Por defecto SIVeL incluye como tipología el Marco Conceptual de la
+				revista Noche y Niebla el cual tiene 4 tipos de violencia:
+				Derechos Humanos (A), Violencia Socio Política (B), Acciones Bélicas (C)
+				y Derecho Internacional Humanitario.  Las  supracategorías en 
+				el tipo de violencia Derechos Humanos ---para crímenes cometidos
+				por agentes estatales) tiene c&oacute;digos así:
+				De A10 - A19 y A101 - A150 son de PERSECUCI&Oacute;N POL&Iacute;TICA; de A22 - A29 son 
+				ABUSO DE AUTORIDAD; de A30 - A39 y A301 - A302 son INTOLERANCIA SOCIAL.
+				En Violencia Socio Política (que se usa cuando el presunto responsable
+				es desconocido pero se nota una m&oacute;vil político) las supracategorías son: 
+				de B40 - B49 son de PERSECUCI&Oacute;N POL&Iacute;TICA; de B50 - B501 son INTOLERANCIA 
+				SOCIAL.
+				Los c&oacute;digos de C62 a C500 son de B&Eacute;LICAS (confrontaciones armadas entre
+				agentes del estado y grupos guerrilleros).  Del D72 - D904 son DIH (crímenes
+				tipificados en el Derecho Internacional Humanitario cometidos bien
+				por agentes estatales o bien por grupos guerrilleros), cuyas
+				supracategorías son PERSONAS, BIENES y M&Eacute;TODOS.
+			</para>
+
+
+		</sect3>
+
+
+		<sect3 id="memo">
+			<title>Memo</title>
+
+
+			<informalfigure>
+				<screenshot><mediaobject><imageobject>
+							<imagedata fileref="pfichamemo.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+						<imageobject><imagedata fileref="pfichamemo.png" format="PNG" align="center"></imagedata></imageobject>
+						<textobject><phrase>Memo</phrase></textobject></mediaobject>
+				</screenshot>
+			</informalfigure>
+
+
+			<para>
+				Se emplea para describir los hechos.   Al emplear Mozilla Firefox 
+				con diccionario en Español pueden verse y corregirse errores
+				ortográficos mientras teclea.  
+			</para>
+		</sect3>
+
+		<sect3 id="anexos">
+			<title>Anexos</title>
+
+
+			<informalfigure>
+				<screenshot><mediaobject><imageobject>
+							<imagedata fileref="pfichaanexos.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+						<imageobject><imagedata fileref="pfichaanexos.png" format="PNG" align="center"></imagedata></imageobject>
+						<textobject><phrase>Anexos</phrase></textobject></mediaobject>
+				</screenshot>
+			</informalfigure>
+
+			<para>
+				Permite anexar archivos.  Si se configur&oacute; correctamente los archivos
+				quedan almacenados en una partici&oacute;n cifrada.  Por ejemplo pueden 
+				anexarse fuentes y después 
+				referenciarlas en las pestañas de fuentes.
+			</para>
+		</sect3>
+
+
+		<sect3 id="etiquetas">
+			<title>Etiquetas</title>
+
+
+			<informalfigure>
+				<screenshot><mediaobject><imageobject>
+							<imagedata fileref="pfichaetiqueta.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+						<imageobject><imagedata fileref="pfichaetiquetas.png" format="PNG" align="center"></imagedata></imageobject>
+						<textobject><phrase>Etiquetas</phrase></textobject></mediaobject>
+				</screenshot>
+			</informalfigure>
+
+			<para>
+				Permite poner etiquetas con comentarios al caso.  Note que debe
+				elegir una de las etiquetas (las cuales se 
+				especificar en la tabla básica Etiqueta), opcionalmente poner
+				un comentario y presionar el bot&oacute;n Añadir.  
+				Es posible cambiar los comentarios --por ejemplo si se emplean
+				etiquetas para marcar casos que deben revisarse, una vez revisados
+				debe quitarse o cambiarse el comentario.
+			</para>
+			<para>Hay algunas etiquetas con nombres de colores (por defecto
+				ROJO, AMARILLO, AZUL y VERDE), que de agregarse a un caso,
+				harán que el caso se presenten con ese color en la consulta
+				en forma de tabla.
+				Puede definirse un nuevo color, creando una nueva etiqueta (desde
+				el men&uacute; Tablas Básicas, ver <xref linkend="tablasbasicas"></xref>) 
+				con el 
+				nombre del color (digamos C&Iacute;AN cuyos componentes RGB en hexadecimal 
+				son 00FFFF) y poniendo una observaci&oacute;n de la forma 'Color #00FFFF.'
+			</para>
+
+		</sect3>
+
+
+
+		<sect3 id="evaluacion">
+			<title>Evaluaci&oacute;n</title>
+
+
+			<informalfigure>
+				<screenshot><mediaobject><imageobject>
+							<imagedata fileref="pfichaevaluacion.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+						<imageobject><imagedata fileref="pfichaevaluacion.png" format="PNG" align="center"></imagedata></imageobject>
+						<textobject><phrase>Evaluaci&oacute;n</phrase></textobject></mediaobject>
+				</screenshot>
+			</informalfigure>
+
+			<para>
+				Permite calificar el caso de acuerdo a: Grado de confiabilidad de las
+				fuentes, Grado de esclarecimiento, Grado de impunidad y Grado de 
+				Informaci&oacute;n.
+			</para>
+		</sect3>
+
+
+	</sect2>
+
+</sect1>

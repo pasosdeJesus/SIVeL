@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="ubicacion">
+	<title>Ubicaci&oacute;n</title>
+
+	<para>
+Las diferentes ubicaciones por las que el grupo familiar ha
+pasado en desplazamientos forzados se especifican en esta pestaña, 
+se recomienda comenzar con el sitio de expulsion del desplazamiento principal
+pues la primera ubicación será la tenida en cuenta en algunos conteos.
+</para>
+<para>
+Cada ubicaci&oacute;n se específica 
+de acuerdo al DIVIPOLA (Divisi&oacute;n Político
+Administrativa del país de acuerdo al DANE).
+Si entre las opciones que se le presentan no está el que 
+busca puede agregar el departamento, municipio o centro poblado en la 
+tabla básica correspondiente (ver <xref linkend="tablasbasicas"></xref>).
+	</para>
+
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichaubicacion.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichaubicacion.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Ubicaci&oacute;n</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+
+	<para>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+Departamento: 
+Si el caso ocurre fuera del país elija <literal>Exterior</literal>.
+Si no conoce el departamento especifique la regi&oacute;n en la pestaña
+anterior (ver <xref linkend="basicos"/>).
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Municipio: 
+Una vez elija el departamento puede elegirse entre sus municipios. 
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Clase:  Una vez llene el municipio, aparecen posibles centros poblados 
+y sitios de un municipio de acuerdo a 
+la Divisi&oacute;n Político Administrativa.
+				</para>
+			</listitem>
+
+			<listitem>
+				<para>
+Lugar: 
+Precisa un poco más donde ocurrieron los hecho. e.g. Vereda en casos rurales 
+y Barrio en casos urbanos.
+				</para>
+			</listitem>
+			<listitem><para>
+Sitio:
+Precisa a&uacute;n más la ubicaci&oacute;n de 
+los hechos. e.g. Casa, Finca, Direcci&oacute;n.
+			</para></listitem>
+			<listitem><para>
+Latitud:
+En decimal, si requiere convertir de grados, minutos y segundos a decimal 
+puede emplear <ulink url="http://segdeha.com/e/convert_lat_long/"></ulink>.
+			</para></listitem>
+			<listitem><para>
+Longitud:
+En decimal.  Una vez almacene la informaci&oacute;n y vuelva a esta pestaña verá
+un enlace a las coordenadas que ingres&oacute; en OpenStreetmap.
+			</para></listitem>
+			<listitem>
+				<para>
+Tipo de ubicaci&oacute;n: 
+Permite especificar si el caso ocurri&oacute; en 
+zona rural o urbana o en ambas. 
+				</para>
+			</listitem>
+
+		</itemizedlist>
+	</para>
+
+	<para>
+Los botones de la parte superior permiten
+especificar más de una ubicación de forma
+análoga a otras pestañas 
+(ver <xref linkend="victimaindividual"/>).
+	</para>
+
+</sect3>
+

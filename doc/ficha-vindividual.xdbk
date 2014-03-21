@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="victimaindividual">
+	<title>Víctima Individual</title>
+
+
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichavictimaindividual.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichavictimaindividual.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Víctima Individual</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+
+	<para>
+Mediante esta pestaña podrá ingresar uno a uno,  los datos de todos los
+miembros que constituyen el grupo familiar del caso, datos referidos
+al último desplazamiento.   Tenga en cuenta que 
+si un grupo familiar acude 2 o más veces al SJR para reportar nuevos
+desplazamientos, deben actualizarse los datos de cada una de las víctimas.
+	</para>
+	<para>
+Cada vez que ingrese datos de una de las víctimas, es
+conveniente que verifique que la misma persona no está registrada
+en otro caso (o si esta registrada que ya esté desagregada del otro caso).
+Para buscar facilmente, teclee parte del
+nombre y/o del apellido en el campo con este fin
+y pulse el enlace "Buscar persona." 
+Al hacerlo se abrirá una nueva ventana con los nombres de víctimas que 
+se parezcan al que tecle&oacute;, también aparecerán enlaces a 
+los casos en los que la persona aparezca como víctima,
+esos enlaces lo dirigen a un reporte general del caso en otra
+pestaña por lo que puede emplearlos tranquilamente para verificar
+si la persona que busca efectivamente es la que se referencia en
+los otros casos.   Cuando ubiqué la persona en la ventana con
+nombres de personas presione sobre el nombre de la persona.
+Sugerimos que haga esto para que se completen automáticamente los datos
+conocidos de esa persona (e.g. Documento de Identidad, Nombres,
+Apellidos, Fecha de Nacimiento y Sexo) y para que quede la misma persona
+relacionada en los dos casos.  
+	</para>
+
+	<itemizedlist>
+		<listitem>
+			<para>
+Documento de Identidad: Especifique el tipo y el n&uacute;mero.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+
+Nombres y Apellidos: Se recomienda escribirlos en may&uacute;sculas 
+y con tildes.
+
+			</para>
+		</listitem>
+
+		<listitem>
+			<para>
+Fecha de Nacimiento o Edad: Especifique una de las 2 (edad se refiere
+a la edad en el momento de los hechos).
+			</para>
+		</listitem>
+
+		<listitem>
+			<para>
+La mayoría de cuadros de selección pueden configurarse en tablas básicas 
+(ver <xref linkend="tablasbasicas"></xref>) típicamente con el mismo nombre: 
+Filiación Política, Organización Social, Vínculo Estado, Etnia, 
+Antecedentes, Profesi&oacute;, Estado Civil, Rol en Famila, Maternidad, 
+Actividad u Oficio, Nivel Escolar, Régimen de Salud.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+Rango de edad: Debe ser acorde con la edad (a menos que no se haya 
+especificado edad).  Si especific&oacute; la edad, puede dejar esta casilla
+SIN INFORMACI&Oacute;N y el sistema pondrá el rango correspondiente.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+Rol en Familia: Dado que el caso se asocia a un grupo familiar, con este campo
+se específica el rol que la víctima desempeña en ese grupo familiar.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+Actividad u oficio: Se refiere al que desempeñara la víctima en el momento
+del desplazamiento más reciente.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+Fecha desagregación: Debe mantenerse en blanco para víctimas que continuan
+haciendo parte del grupo familiar con el que se inició el caso.
+Si transcurrido un tiempo uno de los miembros del grupo familiar se
+independiza, por ejemplo porque se casa o muere.  Es importante poner
+en este campo la fecha en la que se desagregó del grupo familiar.
+			</para>
+		</listitem>
+
+
+	</itemizedlist>
+	<para>
+En la parte superior de algunas pestañas, aparecen botones análogos
+a los de esta, los cuales le permiten especificar más de una v&iacute;ctima
+Estos botones se relacionan con los datos en el centro del encabezado
+(<literal>-/0</literal> en este ejemplo), que indica el n&uacute;mero de 
+víctima en el que está o <literal>-</literal> si es una nueva víctima,
+y el total de víctimas ya asociadas al caso.
+
+		<itemizedlist>
+			<listitem>
+				<para>
+Eliminar: Descarta la v&iacute;ctima que está examinando
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Nueva: Ingresa v&iacute;ctima editada y genera una nueva.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Nueva copia: Ingresaría la v&iacute;ctima editada y generaría una nueva como 
+copia de la actual.   
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+V&iacute;ctima anterior: Ingresa la v&iacute;ctima editada 
+y conduce a la anterior.  Las víctimas se numera por el orden en el que se ingresan, pero el criterio cambia en otras pestañas (por ejemplo en Ubicación se emplea orden alfabético, mientras que en desplazamiento por fecha de expulsión).
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+V&iacute;ctima siguiente: Ingresa la v&iacute;ctima editada 
+y conduce a la siguiente.
+				</para>
+			</listitem>
+		</itemizedlist>
+
+	</para>
+</sect3>
+

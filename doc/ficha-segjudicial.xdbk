@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="segjudicial">
+	<title>Seguimiento Judicial</title>
+
+	<para>
+Permite especificar uno o más seguimientos judiciales,
+uno por cada tipo de proceso.
+Tenga en cuenta que la primera vez que acude la persona
+se llean una parte de la ficha (Historia antes SJR),  cuando vuelve
+a reportar seguimiento se llena otra (Seguimiento Anterior Asesoria SJR).
+El historia de las acciones realizadas se registra en la sección Acciones 
+Realizadas.</para>
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichasegjudicial.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichasegjudicial.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Seguimiento Judicial</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+	<para>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+Tipo/Etapa: Un abogado podrá emplear todos los tipos de
+procesos. Se esperan que los asesores del SJR empleen el tipo 
+<literal>ASESORIA SJR</literal>.  Es indispensable comenzar llenando el
+Tipo de Proceso.
+				</para>
+			</listitem> 
+			<listitem>
+				<para>
+Próxima Fecha:
+Se refiere a la fecha en la que vence la próxima actuación (términos).				</para>
+			</listitem> 
+			<listitem>
+				<para>
+Acciones Realizadas: 
+Puede especificar una a una las acciones y añadirlas una a una con
+el botón Añadir Acción.
+Los tipos de accion y despachos pueden configurarse
+(ver <xref linkend="tablasbasicas"></xref>).
+				</para>
+			</listitem>
+		</itemizedlist>
+
+	</para>
+
+	<para>
+Los botones de la parte superior permiten
+especificar más de un seguimiento judicial de forma
+análoga a otras pestañas 
+(ver <xref linkend="victimaindividual"/>).
+	</para>
+</sect3>

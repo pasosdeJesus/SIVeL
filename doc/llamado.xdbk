@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<appendix id="llamado">
+  <title>Llamado público a auditar SIVeL 1.1</title> 
+
+  <para>Gracias a Dios podemos ofrecer 
+	  $300.000 pesos colombianos (aprox. $EU100) por cada falla 
+	  de seguridad encontrada y solucionada en SIVeL &PRY-VERSION; 
+	  (agradecemos los $150.000 adicionales ofrecidos por wiroal@riseup.net
+	  desde el 6.May.2010).  </para>
+  <para>Si pertenece a una organización donde se documentan
+	  infracciones al Derecho Internacional Humanitario o 
+	  violaciones a los Derechos Humanos con 
+	  SIVeL l@ invitamos a hacer donaciones para este
+	  llamado público de forma que la retribución aumente.  </para>
+  <para>Si es desarrollador(a) o interesad@ en seguridad informática 
+	  l@ invitamos a buscar fallas de seguridad en SIVeL, bien
+	  experimentando en la instalación de prueba para este llamado,
+	  o bien haciendo su propia instalación siguiendo las 
+	  recomendaciones para el ambiente de ejecución (ver 
+	  <ulink url="http://sivel.sourceforge.net/1.1/instalacion.htmlhttp://sivel.sourceforge.net/1.1/instalacion.html"></ulink>),
+	  o bien auditando las fuentes de dominio público en PHP.
+  </para>
+  <para>
+	  Para reportar cada falla tenga en cuenta:
+	  <itemizedlist>
+		  <listitem>
+			  <para>Sumercé encontró la falla.  </para>
+		  </listitem>
+		  <listitem>
+			  <para>Cada falla debe ser replicable en la
+				  instalación de prueba.
+				  Busque tanto en el formulario que no 
+				  requiere autenticación:
+				  <ulink url="https://sivel11.pasosdeJesus.org/consulta_web.php"></ulink> ;
+				  como en otros componentes que no deberían
+				  permitir modificación de datos como
+				  usuario
+				  <literal>sivel11</literal> y
+				  clave <literal>sivel11</literal>:
+				  <ulink url="https://sivel11.pasosdeJesus.org/index.php"></ulink> ; o como administrador 
+				  <literal>adminsivel11</literal> y también
+				  clave <literal>sivel11</literal>.
+				  Esta instalación opera 
+				  en la plataforma de ejecución
+				  recomendada (distribución
+				  <ulink url="https://aprendiendo.pasosdeJesus.org">adJ</ulink> &VER-OPENBSD; 
+				  de OpenBSD, servidor web con SSL en chroot,
+				  PostgreSQL con autenticación y hardened PHP)
+				  y opera con datos del 
+				  <ulink url="http://www.nocheyniebla.org">Banco De Datos de Violencia Política, DH y DIH del CINEP</ulink>.
+			  </para>
+		  </listitem>
+		  <listitem>
+			  <para>Su reporte debe incluir la metodología 
+				  que empleó para encontrarla y proponer una 
+				  solución para las fuentes de la 
+				  rama SIVEL1_1 disponibles en el repositorio
+				  CVS
+				  <ulink url="https://sourceforge.net/scm/?type=cvs&amp;group_id=104373"></ulink>. 
+				  (en el directorio <filename>doc</filename>
+				  de las fuentes hay ejemplos de auditorías 
+				  anteriores).
+			  </para>
+		  </listitem>
+		  <listitem>
+			  <para>Para reportar la falla suscriba una 
+				  dirección de correo en la lista no moderada
+				  <ulink url="https://lists.sourceforge.net/lists/listinfo/sivel-desarrollo">sivel-desarrollo</ulink> y envíe 
+				  allí su reporte de dominio público 
+				  (el hecho de reportar una falla en esa 
+				  lista confirma que su contribución es de 
+				  dominio público). </para>
+		  </listitem>
+		  <listitem>
+			  <para>Su aporte será evaluado y respondido en
+				  la misma lista y  en caso de que podamos
+				  reproducir la falla, 
+				  le entregaremos la retribución personalmente 
+				  o por PayPal  o por transferencia bancaria.
+			  </para>
+		  </listitem>
+		  <listitem>
+			  <para>Los datos que no desee publicar en la lista 
+				  (por ejemplo su nombre) puede enviarlos 
+				  a Vladimir Támara Patiño
+				  vtamara@pasosdeJesus.org o escribiendo
+				  por correo postal a Cr 5 #33B-02, Bogotá,
+				  Colombia (si requiere enviar información 
+				  cifrada puede emplear la llave pública PGP
+				  disponible en <ulink url="http://vtamara.pasosdeJesus.org/vtamara-pgp.txt"></ulink>).
+			  </para>
+		  </listitem>
+	  </itemizedlist>
+  </para>
+  <para>
+	  Agradecemos su interés en esta convocatoria pública, cuya versión
+	  más reciente está disponible en 
+	  <ulink url="http://sivel.sf.net/1.1/llamado.html"></ulink> Lo 
+	  invitamos a distribuirla solidariamente y sin cambios.
+  </para>
+
+</appendix>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="desplazamiento">
+	<title>Desplazamiento</title>
+
+	<para>
+Permite especificar uno a uno datos de los diversos desplazamientos
+del grupo familiar.  Debe llenarse después de ingresar ubicaciones
+desde la pestaña Ubicación.
+	</para>
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichadesplazamiento.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichadesplazamiento.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Desplazamiento</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+	<para>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+Sitio de Expulsión/Llegada: Permitirá elegir entre las
+ubicaciones que hubiera especificado en la pestaña Ubicación.
+				</para>
+			</listitem> 
+			<listitem>
+				<para>
+Descripción:
+Del desplazamiento.  Para aprovechar algunos de los reportes existentes
+ingrese la descripción del desplazamiento principal en la pestaña Memo.
+				</para>
+			</listitem> 
+		</itemizedlist>
+
+	</para>
+
+
+	<para>
+Los botones de la parte superior permiten
+especificar más de un desplazamiento de forma
+análoga a otras pestañas 
+(ver <xref linkend="victimaindividual"/>).
+	</para>
+</sect3>

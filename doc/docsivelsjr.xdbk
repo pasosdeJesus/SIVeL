@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" [ 
+<!ENTITY % confv SYSTEM "confv.ent">
+<!ENTITY % personaliza SYSTEM "personaliza.ent">
+<!ENTITY % infoversion SYSTEM "infoversion.ent">
+%confv;
+%personaliza;
+%infoversion;
+<!ENTITY principios SYSTEM "principios.xdbk">
+<!ENTITY introduccion SYSTEM "introduccion.xdbk">
+<!ENTITY ambiente SYSTEM "ambiente.xdbk">
+
+<!ENTITY uso-intro SYSTEM "uso-intro.xdbk">
+<!ENTITY uso-autentica SYSTEM "uso-autentica.xdbk">
+<!ENTITY uso-consultaweb SYSTEM "uso-consultaweb.xdbk">
+
+<!ENTITY ficha-intro SYSTEM "ficha-intro.xdbk">
+<!ENTITY ficha-basicos SYSTEM "ficha-basicos.xdbk">
+<!ENTITY ficha-vindividual SYSTEM "ficha-vindividual.xdbk">
+<!ENTITY ficha-vcolectiva SYSTEM "ficha-vcolectiva.xdbk">
+<!ENTITY ficha-ubicacion SYSTEM "ficha-ubicacion.xdbk">
+<!ENTITY ficha-desplazamiento SYSTEM "ficha-desplazamiento.xdbk">
+<!ENTITY ficha-presponsables SYSTEM "ficha-presponsables.xdbk">
+<!ENTITY ficha-actos SYSTEM "ficha-actos.xdbk">
+<!ENTITY ficha-respuesta SYSTEM "ficha-respuesta.xdbk">
+<!ENTITY ficha-memo SYSTEM "ficha-memo.xdbk">
+<!ENTITY ficha-anexos SYSTEM "ficha-anexos.xdbk">
+<!ENTITY ficha-segjudicial SYSTEM "ficha-segjudicial.xdbk">
+<!ENTITY ficha-etiquetas SYSTEM "ficha-etiquetas.xdbk">
+<!ENTITY ficha-otras SYSTEM "ficha-otras.xdbk">
+
+
+
+<!ENTITY novedades SYSTEM "novedades.xdbk">
+<!ENTITY creditos SYSTEM "creditos.xdbk">
+<!ENTITY llamado SYSTEM "llamado.xdbk">
+<!ENTITY biblio SYSTEM "biblio.xdbk">
+<!ENTITY indice SYSTEM "indice.xdbk">
+]>
+
+<book lang="es">
+	<title>Documentación de SIVeL &PRY-VERSION;</title>
+  <bookinfo>
+	  <title>Documentación de SIVeL personalizado para el SJR &PRY-VERSION;</title>
+	<!--	<author><firstname>Vladimir</firstname>
+		<surname>Támara Patiño</surname>
+	</author> -->
+	<legalnotice><para>SIVeL se dedica a Dios y a las víctimas. 
+            Su código fuente se libera al Dominio Público de
+            acuerdo a la legislación colombiana, sin 
+	    garantías. Se registró como obra de dominio público ante
+	    la Dirección Nacional de Derechos de Autor de Colombia
+	    el 10 de Mayo de 2011. 
+            Oramos para que no sea utilizado por 
+			estructuras armadas.  Esta documentación fue
+			actualizada por última vez en &FECHA-ACT;</para>
+		<para>En Internet puede descargar 
+			<ulink url="http://sourceforge.net/projects/sivel/files/">el
+				código fuente de SIVeL</ulink> o
+
+			consultar su
+			<ulink url="&URLSITE;/tec/">documentación técnica</ulink>.
+		</para>
+		<para>Lo invitamos a consultar versiones recientes de SIVeL
+			y noticias relacionadas en 
+			<ulink url="http://sivel.sf.net"/>
+		</para>
+	</legalnotice>
+  </bookinfo>
+
+  <!-- Introducción -->
+  &introduccion; 
+
+  <!-- Tema -->
+  <chapter id="uso" role="periodo" userlevel="p1">
+        <title>Uso</title>
+        &uso-intro;
+        &uso-autentica;
+	&uso-consultaweb;
+	<sect1 id="actualizacion">
+		<title>Ingreso de nuevos casos y actualizaci&oacute;n</title>
+		<sect2 id="ficha">
+			<title>Ficha</title>
+			&ficha-intro;
+			&ficha-basicos;
+			&ficha-vindividual;
+			&ficha-vcolectiva;
+			&ficha-ubicacion;
+			&ficha-desplazamiento;
+			&ficha-presponsables;
+			&ficha-actos;
+			&ficha-respuesta;
+			&ficha-memo;
+			&ficha-anexos;
+			&ficha-segjudicial;
+			&ficha-etiquetas;
+			&ficha-otras;
+		</sect2>
+	</sect1>
+</chapter>
+  <chapter id="personalizacion" role="periodo" userlevel="p1">
+        <title>Personalización y Desarrollo</title>
+	<para>Para hacer más breve este manual omitimos la
+		mayoría de este capítulo,
+		al lector interesado lo referimos a la documentacion
+		de SIVeL genérico <ulink url="http://sivel.sf.net/1.2/"></ulink>
+	</para> 
+	<para>Consignamos sólo algunos aspectos del proceso de desarrollo y
+		sobre cambios a la presentación visual (interfaz).
+	</para>
+	<sect1 id="desarrollosjr">
+		<title>Proceso de desarrollo de la personalización para el SJR</title>
+	
+		<para>
+El Servicio Jesuita de Refugiados Colombia (SJR) por medio de su
+director, el sacerdote John Jairo Montoya, 
+solicitó a Vladimir Támara del proyecto Pasos de Jesús (PdJ) implementar
+en 2 meses (Mayo y Junio 2013) su sistema de información con fuentes en el 
+dominio público.	
+	<itemizedlist>
+			<listitem>
+				<para>
+El SJR mediante Vera Samudio plasmó requerimientos iniciales 
+en hojas de cálculo.  Por la premura de tiempo se acordó no seguir la misma
+presentación visual de estas, sino adaptar rápidamente lo que
+ya se tenía en SIVeL 1.2a1.</para>
+			</listitem>
+			<listitem>
+				<para>
+PdJ propuso entregas semanales de 
+avances en la implementación y aclaración o refinamiento de requerimientos 
+tanto por correo como en reunión presencial.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+En cada entrega el SJR tenía el compromiso de probar por intermedio de Edwin
+Camargo	y retroalimentar por correo en 3 dias hábiles.
+</para>
+			</listitem>
+			<listitem>
+				<para>
+PdJ corregía o avanzaba en corrección de fallas para cada entrega semanal.
+</para>
+			</listitem>
+			<listitem>
+				<para>
+El avance, pequeños cambios en requerimientos y reporte de fallas se mantuvo 
+al dia en Trello.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+La última semana de desarrollo se planeó para organizar este manual.
+				</para>
+			</listitem>
+		</itemizedlist>
+	</para>
+	</sect1>
+  </chapter>
+
+  <!-- Apendices -->
+  <appendix id="novedades">
+	   <title>Novedades</title>
+	   <para>
+             &novedades;
+           </para>
+   </appendix>
+
+  &llamado;
+  &creditos;
+  &biblio;
+  <!--  &indice; -->
+</book>

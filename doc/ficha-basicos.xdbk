@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="basicos">
+	<title>Datos Básicos</title>
+
+	<para>
+		Entre los datos básicos de un caso es indispensable 
+		la fecha del desplazamiento.  
+		Si desconoce o no requiere especificar
+		otros, en esta y en otras pestañas déjelos en blanco
+		o en cuadros de selección en la
+		opci&oacute;n <literal>SIN INFORMACI&Oacute;N</literal>.
+	</para>
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichabasicos.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichabasicos.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Datos básicos</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+	<para>
+
+		<itemizedlist>
+			<listitem>
+				<para>
+No. Caso: Junto con el bot&oacute;n <literal>Buscar</literal> 
+que está a su lado, permite buscar un caso por n&uacute;mero. 
+				</para>
+			</listitem> 
+			<listitem>
+				<para>
+Contacto:
+Nombres, apellidos y número de identificación de la persona que contacta al 
+SJR.  Cuando comience a digitar el nombre o el apellido o el número
+de identificación, aparecerá un listado de personas ya registradas que
+coinciden, si elije alguna de estas, quedará vinculado el contacto con la 
+persona elejida y ya no podrá modificar datos del contacto desde esta pestaña.
+En general se espera que la persona
+contacto esté en el mismom caso como víctima, por este motivo cuando ingrese
+la persona contacto, esta será añadida automáticamente como víctima del caso.
+Si necesita modificar datos de un contacto hagalo desde la pestaña
+Víctima Individual.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Fecha del Desplazamiento.
+Se refiere al desplazamiento principal por el cual se reporta el caso
+y es indispensable. Si no conoce la 
+fecha del hecho puede acordar una convenci&oacute;n por ejemplo 15 para un día
+desconocido, Jun para un mes desconocido y el año en curso cuando el
+año es desconocido, además incluya una anotaci&oacute;n en el 
+Memo (ver <xref linkend="memo"/>) que indique la necesidad de conseguir 
+más informaci&oacute;n o que explique la ausencia, y añada la
+etiqueta <literal>MES_INEXACTO</literal> y/o 
+<literal>DIA_INEXACTO</literal>.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+Hora de los hechos en caso de conocerse.
+				</para>
+			</listitem>
+
+		</itemizedlist>
+
+	</para>
+
+	<para>
+En la parte inferior de todas las pestañas aparecen los siguientes botones:
+
+		<itemizedlist>
+			<listitem>
+				<para>
+<emphasis>Anterior</emphasis>: Conduce a la pestaña precedente.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+<emphasis>Val. y Rep. Gen</emphasis>: Genera un reporte general y valida 
+informaci&oacute;n reportando pestañas que falten por llenar del 
+caso y errores ortográficos en el memo.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+<emphasis>Men&uacute;</emphasis>: Conduce al men&uacute; principal.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+<emphasis>Elimina caso</emphasis>: Permite eliminar el caso que se edita, 
+previa confirmaci&oacute;n por parte del usuario.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+<emphasis>Caso nuevo</emphasis>: Inicia edici&oacute;n de un caso nuevo.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+<emphasis>Siguiente</emphasis>: Conduce a la pestaña siguiente.
+				</para>
+			</listitem>
+		</itemizedlist>
+	</para>
+</sect3>

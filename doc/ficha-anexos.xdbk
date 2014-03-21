@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="anexos">
+	<title>Anexos</title>
+
+
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichaanexos.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichaanexos.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Anexos</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+	<para>
+		Permite anexar archivos.  Si se configur&oacute; correctamente los archivos
+		quedan almacenados en una partici&oacute;n cifrada.  Por ejemplo pueden 
+		anexarse fuentes y después 
+		referenciarlas en las pestañas de fuentes.
+	</para>
+</sect3>
+

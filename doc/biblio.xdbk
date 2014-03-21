@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<bibliography>
+      
+	<biblioentry id="sivel1">
+	  <title>SIVeL 1.0</title>
+    <bibliomisc><ulink
+		    url="http://sivel.sf.net/1.0/"/></bibliomisc>
+  </biblioentry>
+
+
+	<biblioentry id="secunia">
+	  <title>Secunia Advisories</title>
+    <bibliomisc>Secunia.   <ulink
+		    url="http://secunia.com/advisories/"/></bibliomisc>
+  </biblioentry>
+
+
+	<biblioentry id="aperturatotal">
+	  <title>Apertura total. Traducción</title>
+    <bibliomisc>Security Focus <ulink
+		    url="https://seguridad.pasosdejesus.org/?id=Apertura+Total"/></bibliomisc>
+  </biblioentry>
+
+
+  <biblioentry id="crashcourse">
+	  <title>PHP Security Crash Course for beginners</title>
+    <bibliomisc>Stefan Esser. 2009   <ulink
+		    url="http://www.suspekt.org/2009/06/16/dutch-php-conference-the-slides/"/></bibliomisc>
+  </biblioentry>
+
+      
+  <biblioentry id="marco">
+	  <title>Marco Conceptual</title>
+    <bibliomisc>Banco de Datos de Derechos Humanos y Violencia Política. CINEP.  <ulink
+		    url="http://www.nocheyniebla.org/files/u1/comun/marcoteorico.pdf"/>. 2008</bibliomisc>
+  </biblioentry>
+
+     
+  <biblioentry id="phpcs">
+	  <title>Package Information: PHP_CodeSniffer</title>
+    <bibliomisc><ulink
+		    url="http://pear.php.net/package/PHP_CodeSniffer"/>. 2009</bibliomisc>
+  </biblioentry>
+
+  <biblioentry id="pearcs">
+	  <title>Pear Manual: Coding Standards</title>
+    <bibliomisc><ulink
+		    url="http://pear.php.net/manual/en/coding-standards.php"/>. 2009</bibliomisc>
+  </biblioentry>
+
+  <biblioentry id="phpdoc">
+	  <title>phpDocumentor</title>
+    <bibliomisc><ulink
+		    url="http://www.phpdoc.org/"/>. 2009</bibliomisc>
+  </biblioentry>
+
+  <biblioentry id="sqlpost">
+	  <title>PostgreSQL Documentation: The SQL Language</title>
+    <bibliomisc><ulink
+		    url="http://www.postgresql.org/docs/8.0/static/tutorial-sql.html"/>. 2009</bibliomisc>
+  </biblioentry>
+
+  <biblioentry id="pear">
+    <title>Pear Manual</title>
+    <bibliomisc><ulink
+        url="http://pear.php.net/manual/en/"/>. 2009</bibliomisc>
+  </biblioentry>
+
+  <biblioentry id="dbdataobject">
+    <title>Package Information: DB_DataObject</title>
+    <bibliomisc><ulink
+        url="http://pear.php.net/package/DB_DataObject"/>. 2009</bibliomisc>
+  </biblioentry>
+
+  <biblioentry id="dbdataobjectformbuilder">
+    <title>Package Information: DB_DataObject_FormBuilder</title>
+    <bibliomisc><ulink
+        url="http://pear.php.net/package/DB_DataObject_FormBuilder/"/>. 2009</bibliomisc>
+  </biblioentry>
+
+  <biblioentry id="php">
+	  <title>PHP Manual</title>
+    <bibliomisc><ulink
+		    url="http://www.php.net/manual/en/http://www.php.net/manual/en/"/>. Editado por Philip Olson. 2009</bibliomisc>
+  </biblioentry>
+
+  <biblioentry id="graphviz">
+	  <title>Graphviz - Graph Visualization Software</title>
+    <bibliomisc><ulink
+		    url="http://www.graphviz.org/"/>. Consultado 2009</bibliomisc>
+  </biblioentry>
+
+  <biblioentry id="selenium">
+	  <title>Selenium IDE</title>
+    <bibliomisc><ulink
+		    url="http://seleniumhq.org/projects/ide/"/>. 
+	    Consultado Mar 2011</bibliomisc>
+  </biblioentry>
+
+  <biblioentry id="nomenclaturaphp">
+	  <title>Coding Conventions: Naming</title>
+    <bibliomisc><ulink
+		    url="https://code.silverorange.com/wiki/CodingConventions/Naming"/>.  SilverOrange.
+	    Consultado Mar 2011</bibliomisc>
+  </biblioentry>
+
+  <biblioentry id="nomcakephp">
+	  <title>Cookbook 1.3: Model and Database Conventions</title>
+    <bibliomisc><ulink
+		    url="http://book.cakephp.org/1.3/en/view/903/Model-and-Database-Conventions"/>.  CakePHP
+	    Consultado Ago 2012</bibliomisc>
+  </biblioentry>
+
+
+  <bibliomixed id="basico_OpenBSD">
+	  <title>Uso Básico de la distribución Aprendiendo de Jesús de OpenBSD</title>
+	<bibliomisc><ulink
+			url="http://structio.sourceforge.net/guias/basico_OpenBSD">http://structio.sourceforge.net/guias/basico_OpenBSD</ulink> 2011</bibliomisc>
+  </bibliomixed>
+
+  <biblioentry id="javascriptgoogl">
+    <title>Google JavaScript Style Guide</title>
+    <bibliomisc><ulink url="http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml"/>.  Rev 2.82. 2013</bibliomisc>
+  </biblioentry>
+
+
+
+  <biblioentry id="bdp">
+  <title>Traducción de los evangelios de dominio público y abierta a mejoras</title>
+    <bibliomisc><ulink
+	url="http://de.geocities.com/nuestroamigoJesus/bdp">http://de.geocities.com/nuestroamigoJesus/bdp</ulink> 2003</bibliomisc>
+  </biblioentry>
+
+  <biblioentry id="WEB">
+    <title>World English Bible</title>
+    <bibliomisc><ulink url="http://www.ebible.org">http://www.ebible.org</ulink> 2002</bibliomisc>
+  </biblioentry>
+
+</bibliography>
+

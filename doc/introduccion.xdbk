@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter id="introduccion">
+	<title>Introducción</title>
+
+	<para>Desde comienzos de 2013 el SJR Colombia con financiación
+		de Trocair, buscó sistematizar
+		la información que maneja en las diferentes sedes del país.
+		Comenzó acordando formatos en papel para la captura de 
+		información y continuó con
+		el desarrollo de un sistema de información en los meses
+		de Mayo y Junio de 2013 (ver 
+		<xref linkend="desarrollosjr"></xref> ). 
+	</para>
+	<para>La operación continúa de este sistema de información requiere
+		de personas que desempeñen roles y de una infraestructura 
+		tecnológica que opere de manera continua.   
+		Estos temas, precedidos de
+		los principios que han guiado el desarrollo de SIVeL,
+		se presentan en el resto de este capítulo.
+	</para>
+	<sect1 id="principios">
+		<title>Principios para el desarrollo de SIVeL</title>
+		&principios;
+	</sect1>	
+	&ambiente; 
+
+
+</chapter>

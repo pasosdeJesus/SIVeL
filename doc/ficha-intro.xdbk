@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<para>
+En este sistema de información un caso se asocia
+a un grupo familiar que acude al SJR por intermedio de una persona
+contacto.   
+El mismo grupo familiar, puede haber sido desplazado en diversas oportunidades
+o haber recibido ayudas del SJR en diferentes momentos, pero sigue siendo
+un mismo caso y todo el historial de desplazamientos, apoyos y seguimientos 
+institucionales y del SJR se registran en el mismo.
+</para>
+<para>
+Por esto antes de ingresar un nuevo caso es recomendable 
+que b&uacute;sque
+si ya está registrado por ejemplo utilizando la
+Consulta Web y buscando por parte del nombre de algunos de los
+miembros del grupo familiar y/o por fecha y/o lugar en el que 
+ocurri&oacute;.
+</para>
+
+<para>
+Si está seguro que se trata de un caso nuevo, desde 
+el menú principal elija 
+<literal>Ficha</literal> del men&uacute; 
+<literal>Caso</literal>.
+Comience a digitar la
+informaci&oacute;n en cada una de las pestañas del formulario
+sin indicar un n&uacute;mero de caso explícito en la pestaña
+de datos básicos --el sistema asignará un n&uacute;mero
+consecutivo automáticamente<footnote><para>
+La numeraci&oacute;n 
+es consecutiva --con saltos cuando se borran casos o se insertan en lote
+de otro SIVeL.   Para efectos de conteos es mejor emplear la consulta
+web (ver <xref linkend="consultaweb"/>).
+	</para></footnote>. 
+</para>
+<para>
+Si no desea que se actualicen los cambios de la pestaña
+en la que está, no presione bot&oacute;n alguno del
+formulario, sino 
+devuelvase usando el botón del navegador
+o ubiquese en el espacio con la direcci&oacute;n 
+de la página (URL),  digite la dirección
+con la que comienza una sesión 
+(<xref linkend="autenticacion"></xref>) y presione 
+ENTER. 
+</para>
+
+<para>
+Aunque se sugiere llenar los datos del caso en
+el orden de las pestañas,
+podrá pasar de una pestaña a otra e iniciar
+en la que prefiera. 
+Esto por ejemplo es &uacute;til para
+iniciar un caso del que acaba de recibir informaci&oacute;n
+digital pero que no puede analizar en detalle en el
+momento, pues puede poner la fecha del desplazamiento (indispensable) 
+y pasar
+a la pestaña Memo para pegar los datos que recibi&oacute;.
+</para>
+
+<para>
+Si emplea varias pestañas o ventanas de su navegador, tenga en cuenta 
+que la ficha de captura debe estar abierta sólo en una  (no pueden
+editarse simultaneamente desde el mismo navegador dos
+casos diferentes).</para>

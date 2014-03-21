@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="actos">
+	<title>Causas/Actos</title>
+
+	<para>
+		<informalfigure>
+			<screenshot><mediaobject><imageobject>
+						<imagedata fileref="pfichaactos.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+					<imageobject><imagedata fileref="pfichaactos.png" format="PNG" align="center"></imagedata></imageobject>
+					<textobject><phrase>Actos</phrase></textobject></mediaobject>
+			</screenshot>
+		</informalfigure>
+
+Permite especificar las agresiones que causaron el desplazamiento
+o antecedentes, indicando quien le hizo que a quien.  
+Para añadir antecedentes debe especificar la fecha de la 
+agresión, marcar uno o más presuntos responsables, una o más 
+categorías de violencia y una o más víctimas,  después de
+esto presionar el botón Añadir.  Si se desea 
+especificar una causa de un desplazamiento, además de los
+anteriores debe especificar la fecha de expulsión del
+desplazamiento (por esto antes de esta pestaña debe
+completarse la pestaña Desplazamiento).
+</para>
+<para>
+Las categorías de violencia son las especificadas en
+<literal>Tipo de Violencia</literal>, <literal>Supracategoría</literal> y 
+<literal>Categoría</literal> (ver <xref linkend="tablasbasicas"/>).
+
+Puede elegir varios presuntos responsables o varias categorías 
+o varias víctimas (desde Firefox presionando la tecla Control
+mientras con el bot&oacute;n del rat&oacute;n se marcan las 
+diversas opciones).  Y una
+vez las elija, presione el bot&oacute;n Añadir.
+	</para>
+	<para>
+Las posibles agresiones constan de la tipología el Marco 
+Conceptual de la revista Noche y Niebla aumentadas
+con un tipo de violencia para el SJR.
+
+El Marco Conceptual de Noche y Niebla tiene 4 tipos de violencia:
+Derechos Humanos (A), Violencia Socio Política (B), Acciones Bélicas (C)
+y Derecho Internacional Humanitario.  Las  supracategorías en 
+el tipo de violencia Derechos Humanos ---para crímenes cometidos
+por agentes estatales) tiene c&oacute;digos así:
+De A10 - A19 y A101 - A150 son de PERSECUCI&Oacute;N POL&Iacute;TICA; de A22 - A29 son 
+ABUSO DE AUTORIDAD; de A30 - A39 y A301 - A302 son INTOLERANCIA SOCIAL.
+En Violencia Socio Política (que se usa cuando el presunto responsable
+es desconocido pero se nota una m&oacute;vil político) las supracategorías son: 
+de B40 - B49 son de PERSECUCI&Oacute;N POL&Iacute;TICA; de B50 - B501 son INTOLERANCIA 
+SOCIAL.
+Los c&oacute;digos de C62 a C500 son de B&Eacute;LICAS (confrontaciones armadas entre
+agentes del estado y grupos guerrilleros).  Del D72 - D904 son DIH (crímenes
+tipificados en el Derecho Internacional Humanitario cometidos bien
+por agentes estatales o bien por grupos guerrilleros), cuyas
+supracategorías son PERSONAS, BIENES y M&Eacute;TODOS.
+	</para>
+	<para>
+		Las categorias del SJR homologables a las del Marco Conceptual son:
+		<variablelist>
+			<varlistentry>
+
+				<term>AMENAZAS DIRECTAS</term>
+				<listitem><para>A15, A25, A35, B45, B55, D73</para></listitem>
+			</varlistentry>
+			<varlistentry><term>ATENTADO </term>
+				<listitem><para>A16, A26, A37, B46, B57</para></listitem>
+			</varlistentry>
+			<varlistentry><term>CAMPAÑAS DE INTOLERANCIA</term>
+				<listitem><para>A30-A39, A301, A302, A391-A397, B50-B59, B501, B520-B527</para></listitem>
+			</varlistentry>
+			<varlistentry><term>DESAPARICIÓN FORZADA</term>
+				<listitem><para>A11, A21, A302, B58, D79</para></listitem>
+			</varlistentry>
+			<varlistentry><term>EJECUCIÓN EXTRAJUDICIAL </term>
+				<listitem><para>A10, A20, A30</para></listitem>
+			</varlistentry>
+			<varlistentry><term>HOMICIDIO </term>
+				<listitem><para>B40, B50, D701</para></listitem>
+			</varlistentry>
+			<varlistentry><term>SECUESTRO </term>
+				<listitem><para>B41</para></listitem>
+			</varlistentry>
+			<varlistentry><term>HERIDAS </term>
+				<listitem><para>A13, A23, A33, B43, B53, D702, D704, D88, D98</para></listitem>
+			</varlistentry>
+			<varlistentry><term>TORTURA</term>
+				<listitem><para>A12, A22, A36, B47, B56, D72</para></listitem>
+			</varlistentry>
+			<varlistentry><term>VIOLENCIA SEXUAL</term>
+				<listitem><para>A19, A29, A39, A195, A196, A295, A296, A396, B420, B425, B426, B520, B525, B526, D77, D775, D776</para></listitem>
+			</varlistentry>
+		</variablelist>
+		
+		Las categorias no homologrables se agregaron en
+		un tipo de violencia
+		<literal>S-SJR</literal>, una supracategoria
+		con las siguientes categorias:
+		<itemizedlist>
+			<listitem><para>10002: AMENAZAS INDIRECTAS</para></listitem>
+			<listitem><para>10003: AMETRALLAMIENTOS/BOMBARDEO</para></listitem>
+			<listitem><para>10006: CAMPOS MINADOS/MUNICIONES SIN DETONAR</para></listitem>
+			<listitem><para>10007: CONFRONTACIONES POR ACTORES ARMADOS</para></listitem>
+			<listitem><para>10011: ERRADICACIÓN Y FUMIGACIONES</para></listitem>
+			<listitem><para>10013: PRESENCIA GUERRILLERA</para></listitem>
+			<listitem><para>10014: PARAMILITARIZACIÓN</para></listitem>
+			<listitem><para>10015: MILITARIZACIÓN</para></listitem>
+			<listitem><para>10017: MEGAPROYECTO DE MINERÍA</para></listitem>
+			<listitem><para>10018: MEGAPROYECTO DE PALMA</para></listitem>
+			<listitem><para>10019: MEGAPROYECTO DE PUERTOS</para></listitem>
+			<listitem><para>10020: ORIENTACIÓN SEXUAL</para></listitem>
+			<listitem><para>10021: RECLUTAMIENTO Y VINCULACIÓN DE NNAJ</para></listitem>
+			<listitem><para>10022: POR PERTENECER A UN GRUPO SOCIAL</para></listitem>
+			<listitem><para>10025: CONFINAMIENTO</para></listitem>
+			<listitem><para>10026: TEMOR FUNDADO</para></listitem>
+		</itemizedlist>
+	</para>
+
+</sect3>
+

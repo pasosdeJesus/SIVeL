@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sect3 id="memo">
+	<title>Memo</title>
+
+
+	<informalfigure>
+		<screenshot><mediaobject><imageobject>
+					<imagedata fileref="pfichamemo.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+				<imageobject><imagedata fileref="pfichamemo.png" format="PNG" align="center"></imagedata></imageobject>
+				<textobject><phrase>Memo</phrase></textobject></mediaobject>
+		</screenshot>
+	</informalfigure>
+
+
+	<para>
+Se emplea para describir los hechos del desplazamiento 
+principal.   Al emplear Mozilla Firefox 
+con diccionario en Español pueden verse y corregirse errores
+ortográficos mientras teclea.  
+	</para>
+</sect3>
+
