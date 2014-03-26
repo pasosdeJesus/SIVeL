@@ -494,8 +494,8 @@ function error_valida($msg, $valores, $iderr = '', $enhtml = false)
     if (isset($valores) && is_array($valores) && count($valores) > 0) {
         $_SESSION['recuperaErrorValida'] = $valores;
     }
-    echo "<script>";
-    echo "alert('$msg');";
+    echo "<script language=\"JavaScript\">";
+    echo "alert('" . json_encode($msg) . "');";
     echo "</script>";
     if ($iderr != '') {
         $_SESSION[$iderr] = $msg;
@@ -2318,7 +2318,16 @@ function valida_caso($idcaso, &$buf_html)
             $prob = $db->getOne($q);
             sin_error_pear($prob);
             if ((int)$prob > 0) {
-                $buf_html[] = _("Caso") . " " . $desc;
+                $q = "SELECT *
+                    FROM ($sql) AS s
+                    WHERE s.id_caso = '$idcaso'";
+                $r = hace_consulta($db, $q);
+                $row = array();
+                $r->fetchInto($row);
+                unset($row[0]);
+                $re = implode(", ", $row);
+                $prob = $db->getOne($q);
+                $buf_html[] = _("Caso") . " " . $desc . ". " . $re;
                 $valr = false;
             }
         }
@@ -2353,7 +2362,6 @@ function valida_caso($idcaso, &$buf_html)
                 );
         }
     }
-
 
     return $valr;
 }

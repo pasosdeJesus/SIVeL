@@ -15,6 +15,7 @@
 
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
+require_once $_SESSION['dirsitio'] . '/conf_int.php';
 require_once "confv.php";
 require_once "misc.php";
 

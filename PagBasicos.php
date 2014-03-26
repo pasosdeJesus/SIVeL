@@ -447,8 +447,8 @@ class ReporteGeneral extends HTML_QuickForm_Action
         );
         $buf_html = array();
         $r = valida_caso($idcaso, $buf_html);
-        if ($r || count($buf_html) > 0) {
-            $msg_html = implode($buf_html, "\\n");
+        if (!$r || count($buf_html) > 0) {
+            $msg_html = implode($buf_html, "\n");
             if (trim($msg_html) != "") {
                 error_valida($msg_html, null, '', true);
             }
