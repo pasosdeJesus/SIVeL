@@ -8,9 +8,9 @@ echo "* Emplear htmlentities_array con $db->getAssoc"
 find . -name "*php" -exec grep -B 1 "getAssoc" {} ';' | sed -e "s/^[^ ]*: *//g" | sed -e "s/^\./|/g;s/  */ /g" | tr -d "\n"  | tr "|" "\n" | grep -v "htmlentities_array"
 echo "* Escapar antes de incluir en base de datos para evitar inyecciones SQL"
 find . -name "*php" -exec grep -l -e "[^=]= *\$valores\[" {} ';'
-find . -name "*php" -exec grep -l "[^=]= *\$_REQUEST\[[^=]*$" {} ';'
-find . -name "*php" -exec grep -l "[^=]= *\$_GET\[[^=]*$" {} ';'
-find . -name "*php" -exec grep -l "[^=]= *\$_POST\[[^=]*$" {} ';'
+find . -name "*php" -exec grep -l -e "[^=]= *\$_REQUEST\[[^=]*$" {} ';'
+find . -name "*php" -exec grep -l -e "[^=]= *\$_GET\[[^=]*$" {} ';'
+find . -name "*php" -exec grep -l -e "[^=]= *\$_POST\[[^=]*$" {} ';'
 echo "* Emplear loadArray(htmlentities_array en lugar de loadDbResult"
 find . -name "*php" -exec grep -l -e "loadDbResult" {} ';'
 echo "* No usar loadQuery sino htmlentities_array(getAssoc"
@@ -22,7 +22,7 @@ find . -name "*php" -exec grep "loadQuery" {} ';'
 echo -n "* Extensiones identificadas en documentación: ";
 tot=0;
 ident=0;
-for i in `find ./ -type f | sed -e "s/.*[^\/.]\.//g;s/.*Makefile//g;s/.*.htacces//g;s/.*\/CVS\/.*//g;s/.*db2rep//g" | sort -u`; do
+for i in `find ./ -type f | sed -e "s/.*[^\/.]\.//g;s/.*Makefile//g;s/.*.htacces//g;s/.*\/CVS\/.*//g;s/.*db2rep//g;s/\.git.*//g;s/.*xsl//g;s/.*xml//g;s/.*~//g;s/.*txt//g;s/.*tmp.*//g;s/.*jpg//g;s/.*awk//g;s/.*[0-9]$//g" | sort -u`; do
     grep ".$i" ./doc/personalizacion.xdbk > /dev/null 2> /dev/null
     if (test "$?" != "0") then {
         echo -n " *Falta $i* ";

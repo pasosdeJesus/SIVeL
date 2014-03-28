@@ -47,7 +47,7 @@ class BaseAgrega extends HTML_QuickForm_Action
         $do = objeto_tabla($this->tabla);
         foreach ($do->fb_fieldsToRender as $k) {
             if (isset($_REQUEST['f' . $k])) {
-                $page->_submitValues[$k] = $_REQUEST['f' . $k];
+                $page->_submitValues[$k] = var_escapa($_REQUEST['f' . $k]);
                 //echo "$k <br>";
             }
         }
