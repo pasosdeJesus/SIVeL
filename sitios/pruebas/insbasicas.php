@@ -169,6 +169,11 @@ $c += instablabasica(
     'clase', 'nombre', 'clase1',
     array('id_municipio' => '1-1' )
 );
+/*$c += instablabasica(
+    'etiqueta', 'nombre', 'AMARILLO',
+    array('id' => '7' )
+); */
+
 
 if ($c > 0) {
     echo "** Errores: $c\n";

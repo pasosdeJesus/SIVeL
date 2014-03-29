@@ -1,6 +1,6 @@
 
 
-<script>alert('Fecha de fuente no puede ser anterior a la del caso');</script>
+<script language="JavaScript">alert('"Fecha de fuente no puede ser anterior a la del caso"');</script>
 
 
 

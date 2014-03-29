@@ -249,8 +249,7 @@ cvs -z3 co sivel
 					</para>
 				</listitem>
 				<listitem>
-					<para>.odt: Documentación en Open 
-						Document Format.
+					<para>.odt: Documentación en Open Document Format.
 					</para>
 				</listitem>
 				<listitem>
@@ -312,6 +311,20 @@ cvs -z3 co sivel
 				</listitem>
 				<listitem>
 					<para>.xsl: Hoja de estilo XSL.</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+		<para>Además durante la configuración y la generación de documentación 
+			se generan archivos con las siguientes extensiones:
+			<itemizedlist>
+				<listitem>
+					<para>.dvi: </para>
+				</listitem>
+				<listitem>
+					<para>.idx: </para>
+				</listitem>
+				<listitem>
+					<para>.idx: </para>
 				</listitem>
 			</itemizedlist>
 		</para>
