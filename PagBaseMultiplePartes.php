@@ -393,7 +393,8 @@ class PagBaseMultiplePartes extends PagBaseMultiple
             return true;
         }
 
-        $vll = $valores[$ll];
+                    
+        $vll = var_escapa($valores[$ll]);
         if (!$this->validate() ) {
             return false;
         }
@@ -416,7 +417,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                 error_valida(
                     _('Ya había una') . " $cm " . _('con la') . " $ll "
                     . _('dada'),
-                    $valores
+                    var_escapa($valores)
                 );
                 return false;
             }
@@ -453,7 +454,8 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                 if (isset($valores[$k])) {
                     //echo "OJO 2 k=$k, valores[k]=" . $valores[$k] . "<br>";
                     $vk[$k] = valor_fb2do(
-                        $valores[$k], $this->$nb->_do->__table, $k, $tab
+                        var_escapa($valores[$k]), 
+                        $this->$nb->_do->__table, $k, $tab
                     );
                 }
             }
