@@ -137,10 +137,12 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
         $sel = $form->createElement(
             'hierselect', 'tipoetapa', _('Tipo/Etapa'), null, '/'
         );
-        $mainOptions = htmlentities_array($db->getAssoc(
-            'SELECT id, nombre FROM tproceso 
-            WHERE fechadeshabilitacion IS NULL'
-        ));
+        $mainOptions = htmlentities_array(
+            $db->getAssoc(
+                'SELECT id, nombre FROM tproceso 
+                WHERE fechadeshabilitacion IS NULL'
+            )
+        );
         $sel->setMainOptions($mainOptions);
 
         $result = $db->query(

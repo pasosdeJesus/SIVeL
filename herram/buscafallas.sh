@@ -2,7 +2,7 @@
 # Busca posibles fallas de seguridad en fuentes de SIVeL
 # Dominio público. 2011. Sin Garantías. vtamara@pasosdeJesus.org
 
-#function x {
+function x {
 echo "* Emplear htmlentities_array con $db->getAssoc"
 #find . -name "*php" -exec grep -l -e "[\(] *\$db->getAssoc" {} ';'
 find . -name "*php" -exec grep -B 1 "getAssoc" {} ';' | sed -e "s/^[^ ]*: *//g" | sed -e "s/^\./|/g;s/  */ /g" | tr -d "\n"  | tr "|" "\n" | grep -v "htmlentities_array"
@@ -51,32 +51,34 @@ echo "  $ident / $tot"
 
 echo "* V4.1 Autenticación en páginas que lo requieren, las que no deben decir forma de acceso especial"
 find . -name "*php" | sort > /tmp/todos
-find . -name "*php" -exec grep -l -e "autentica_usuario" -e "Acceso: SÓLO DEFINICIONES" -e "Acceso: CONSULTA PÚBLICA" -e "Acceso: INTERPRETE DE COMANDOS" {} ';' | sort > /tmp/conAutentica 
+find . -name "*php" -exec grep -l -e "autentica_usuario" -e "Acceso: S.*LO DEFINICIONES" -e "Acceso: CONSULTA P.*BLICA" -e "Acceso: INTERPRETE DE COMANDOS" {} ';' | sort > /tmp/conAutentica 
 diff /tmp/todos /tmp/conAutentica
 
 
 echo "* V5.1, V5.2 Funcion procesa llama valores a su primer argumento"
 p=`find . -name "*php" -exec grep -l -e "function *procesa *(" {} ';'`
 grep -A 1 "function *procesa" $p | grep "^[^ ]*:" | grep -v -e "procesa *( *\&\$valores"
+
 echo "V5.1, V5.2 Variables de entrada sin asignacion, comparación, isset o var_escapa:"
 for b in _REQUEST _POST _GET valores ; do
 	p=`find . -name "*php" -exec grep -l -e "$b *\[" {} ';'`
-	grep -A 1 "$b *\[" $p | grep "^[^ ]*:" | grep -v -e "isset *( *\$$b" -e "unset *( *\$$b" -e "\$$b[^ ]* *=" -e "\$$b[^ ]* *!=" -e "(int) *\$$b" -e "var_escapa( *\$$b" 
+	grep -A 1 "$b *\[" $p | grep "^[^ ]*:" | grep -v -e "isset *( *\$$b" -e "unset *( *\$$b" -e "\$$b[^ ]* *=" -e "\$$b[^ ]* *!=" -e "(int) *\$$b" -e "var_escapa( *\$$b"  -e "empty *( *\$$b" -e "^[^\$]*//"
 done;
 p=`find . -name "*php" -exec grep -l -e "_submitValues *\[" {} ';'`
-grep -A 1 "_submitValues *\[" $p | grep "^[^ ]*:" | grep -v -e "isset *(.*->_submitValues" -e "unset *(.*->_submitValues" -e "_submitValues[^ ]* *=" -e "_submitValues[^ ]* *!=" -e "(int).*->_submitValues" -e "var_escapa(.*->_submitValues" 
+grep -A 1 "_submitValues *\[" $p | grep "^[^ ]*:" | grep -v -e "isset *(.*->_submitValues" -e "unset *(.*->_submitValues" -e "_submitValues[^ ]* *=" -e "_submitValues[^ ]* *!=" -e "(int).*->_submitValues" -e "var_escapa(.*->_submitValues"  -e "== .*->_submitValues"
 
 #| grep -v -e "\$_REQUEST[^ ]* *!=" 
 #for i in `find . -name "*php" -exec grep -l -e "_REQUEST" {} ';'`; do
 #	grep -C 1 -e "isset *( *\$_REQUEST"  -e "(int) *\$_REQUEST" -e "var_escapa *( *\$_REQUEST" $i
 #done
 
-#}
+}
 echo "OWASP V6.1 Validando salida";
 p=`find . -name "*php" -exec grep -l -e "[ \t]echo[ \t]" -e print_r {} ';'`
 for i in $p; do
 	awk "/ echo / { ini = 1; }
 	/.*/ { if (ini == 1) { print \"$i: \" \$0; } }
+	/ ?>/ { ini = 0; }
 	/; *\$/ { ini = 0; }" $i
-done | grep '\$' | grep -v -e '(int)\$' -e "OJO" -e "htmljs" -e "htmlspecialchars" -e "pruebas" -e GLOBALS -e "htmlentities" -e "//" -e "urlencode" -e "html_" -e "Html" -e "adjunto_" -e "Adjunto" ;
+done | grep '\$' | grep -v -e '(int)\$' -e "OJO" -e "htmljs" -e "htmlspecialchars" -e "pruebas" -e GLOBALS -e "htmlentities" -e "//" -e "urlencode" -e "html_" -e "Html" -e "adjunto_" -e "Adjunto" -e "count" -e "_ne" -e "json_encode" -e "format";
 

@@ -300,8 +300,8 @@ class PagDesplazamiento extends PagBaseMultiple
      */
     function procesa(&$valores)
     {
-        $fechaex = arr_a_fecha($valores['fechaexpulsion'], true);
-        $fechall = arr_a_fecha($valores['fechallegada'], true);
+        $fechaex = arr_a_fecha(var_escapa($valores['fechaexpulsion']), true);
+        $fechall = arr_a_fecha(var_escapa($valores['fechallegada']), true);
 
         $es_vacio = (!isset($valores['expulsion'])
                 || $valores['expulsion'] === ''

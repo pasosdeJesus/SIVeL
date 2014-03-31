@@ -565,31 +565,30 @@ class ResConsulta
 
         if ($pMuestra == "csv") {
             header("Content-type: text/csv");
-            $st = ""; $cpm = "";
+            $st = ""; $cpm_ne = "";
             foreach ($ac as $c) {
-                $cpm .= $st . "\"$c\"";
+                $cpm_ne .= $st . "\"$c\"";
                 $st = ", ";
             }
-            echo $cpm . ', ""\n';
+            echo $cpm_ne . ', ""\n'; 
         } elseif ($pMuestra == 'latex') {
             //header("Content-type: application/x-latex");
             echo "<pre>";
-            $st = ""; $cpm = "";
+            $st = ""; $cpm_ne = "";
             foreach ($ac as $c) {
-                $cpm .= $st . "\\textbf{$c}";
+                $cpm_ne .= $st . "\\textbf{$c}";
                 $st = " & ";
             }
-            echo $cpm . ' \\\\ \n'
-                . '\hline\n';
+            echo $cpm_ne . ' \\\\ \n' . '\hline\n'; 
         } else { // tabla o consolidado
 
             encabezado_envia("Actos");
             echo "<table border='1'>\n";
-            $st = ""; $cpm = "<tr>";
+            $st = ""; $cpm_ne = "<tr>";
             foreach ($ac as $c) {
-                $cpm .= $st . "<th>$c</th>";
+                $cpm_ne .= $st . "<th>$c</th>";
             }
-            echo $cpm . '</tr>';
+            echo $cpm_ne . '</tr>'; 
         }
 
         $tv = 0;
@@ -857,11 +856,11 @@ class ResConsulta
             if (!isset($GLOBALS['DIR_RELATOS'])
                 || $GLOBALS['DIR_RELATOS'] == ''
             ) {
+                $na = "$dirserv/$dirsitio/conf.php";
                 echo _("Falta definir directorio destino en variable") ." " .
                     "\$GLOBALS['DIR_RELATOS'] " . _("del archivo") ." " .
-                    htmlentities(
-                        "$dirserv/$dirsitio/conf.php", ENT_COMPAT, 'UTF-8'
-                    ) . "<br>";
+                    htmlentities($na, ENT_COMPAT, 'UTF-8') 
+                    . "<br>";
                 die("");
             } else if (!is_writable($GLOBALS['DIR_RELATOS'])) {
                 echo _("No puede escribirse en directorio") . " " .
@@ -986,10 +985,11 @@ class ResConsulta
                     echo $html_relato;
                     break;
                 case 'csv':
-                    echo $this->reporteCsvAdjunto(
+                    $r_ne = $this->reporteCsvAdjunto(
                         $this->db, $idcaso,
                         $this->campos, $this->conv, $sal
                     );
+                    echo $r_ne;
                     echo "\n";
                     break;
                 case 'tabla':
@@ -1359,7 +1359,6 @@ class ResConsulta
                 foreach ($ncat as $k => $nc) {
                     if (isset($GLOBALS['reptabla_tipificacion_breve'])
                         && $GLOBALS['reptabla_tipificacion_breve'] === true
-//                        && strpos($nc, ":")
                     ) {
                         $nc = substr($nc, strpos($nc, ":") + 1);
                         $vr_html .= $seploc . strip_tags($nc);

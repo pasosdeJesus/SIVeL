@@ -424,6 +424,11 @@
 <tr>
 	<td>addSelection</td>
 	<td>categorias[]</td>
+	<td>label=D701 HOMICIDIO INTENCIONAL PERSONA PROTEGIDA</td>
+</tr>
+<tr>
+	<td>addSelection</td>
+	<td>categorias[]</td>
 	<td>label=A10 EJECUCIÓN EXTRAJUDICIAL</td>
 </tr>
 <tr>

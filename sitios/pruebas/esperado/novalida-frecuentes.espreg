@@ -68,9 +68,10 @@ function validate_frecuentes(frm) {
 <head>
 <meta charset = "UTF-8">
 <title>Ficha caso</title>
-<link rel = "stylesheet" href="lib/jqueryui-1.10.3/themes/smoothness/jquery-ui.css" />
-<link rel = "stylesheet" type = "text/css" href = "estilo.css" />
-<style type = "text/css">
+<link rel="stylesheet" 
+    href="lib/jqueryui-1.10.3/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="estilo.css" />
+<style type="text/css">
 
 body {
   background-color: #FFFFFF;
@@ -120,11 +121,11 @@ input.flat {
     height: 100px;
 }
 </style>
-<script src = "lib/jquery-2.0.3.min.js"></script>
-<script src = "lib/jqueryui-1.10.3/jquery-ui.min.js"></script>
-<script src = "lib/jquery.watermark.min.js"></script>
-<script type = "text/javascript" src="sivel.js" type="text/javascript"></script>
-<script type = "text/javascript">
+<script src="lib/jquery-2.0.3.min.js"></script>
+<script src="lib/jqueryui-1.10.3/jquery-ui.min.js"></script>
+<script src="lib/jquery.watermark.min.js"></script>
+<script type="text/javascript" src="sivel.js" type="text/javascript"></script>
+<script type="text/javascript">
 <!--
 function envia(que) {
   document.forms[0]._qf_default.value = que;

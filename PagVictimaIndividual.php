@@ -655,14 +655,22 @@ class PagVictimaIndividual extends PagBaseMultiple
         if (isset($valores['numerodocumento'])
             && (int)$valores['numerodocumento'] > 0
         ) {
-            $q = "SELECT id, nombres, apellidos, id_caso FROM victima, persona WHERE persona.id=victima.id_persona AND numerodocumento='"
+            $q = "SELECT id, nombres, apellidos, id_caso 
+                FROM victima, persona 
+                WHERE persona.id=victima.id_persona 
+                AND numerodocumento='"
                 . (int)$valores['numerodocumento'] . "'";
             $r = hace_consulta($db, $q); $row = array();
             if ($r->fetchInto($row)) {
                 if (!isset($valores['id'])
                     || $row[0] != (int)$valores['id']
                 ) {
-                    error_valida(_('Numero de documento repetido en víctima ' . $row[1] . " " . $row[2] . " de caso " . $row[3] ), $valores);
+                    error_valida(
+                        _(
+                            'Numero de documento repetido en víctima ' 
+                            . $row[1] . " " . $row[2] . " de caso " . $row[3]
+                        ), $valores
+                    );
                     return false;
                 }
             }
@@ -730,7 +738,7 @@ class PagVictimaIndividual extends PagBaseMultiple
                 = var_escapa($valores['fobservaciones'], $db);
             $this->bpersona_trelacion->_do->insert();
             $tr = $this->bpersona_trelacion->_do->getLink('id_trelacion');
-            if ($tr->inverso != NULL) {
+            if ($tr->inverso != null) {
                 $npr = objeto_tabla('persona_trelacion');
                 $npr->persona1 = $this->bpersona_trelacion->_do->persona2;
                 $npr->persona2 = $this->bpersona_trelacion->_do->persona1;

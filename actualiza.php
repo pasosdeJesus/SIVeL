@@ -2606,7 +2606,8 @@ BEGIN
 	-- 1: LIMPIEZA:
 		-- pasar a mayuscula, eliminar la letra \"H\" inicial, los acentos y la enie
 		-- 'holá coñó' => 'OLA CONO'
-		input=translate(ltrim(trim(upper(input)),'H'),'ÑÁÉÍÓÚÀÈÌÒÙÜ','NAEIOUAEIOUU');
+        input=translate(ltrim(trim(upper(input)),'H'),'ÑÁÉÍÓÚÀÈÌÒÙÜ',
+            'NAEIOUAEIOUU');
  
 		-- eliminar caracteres no alfabéticos (números, símbolos como &,%,\",*,!,+, etc.
 		input=regexp_replace(input, '[^a-zA-Z]', '', 'g');
@@ -2658,7 +2659,8 @@ BEGIN
 	--6: en el resto del string, quitar vocales y vocales fonéticas
 	resto=translate(resto,'@AEIOUHWY','@');
  
-	--7: convertir las letras foneticamente equivalentes a numeros  (esto hace que B sea equivalente a V, C con S y Z, etc.)
+    --7: convertir las letras foneticamente equivalentes a numeros  
+    --   (esto hace que B sea equivalente a V, C con S y Z, etc.)
 	resto=translate(resto, 'BPFVCGKSXZDTLMNRQJ', '111122222233455677');
 	-- así va quedando la cosa
 	soundex=pri_letra || resto;
@@ -2703,7 +2705,7 @@ if (!aplicado($idac)) {
     );
     hace_consulta(
         $db, "ALTER TABLE usuario 
-        ADD COLUMN fechacreacion DATE NOT NULL DEFAULT '2001-01-01'" , false
+        ADD COLUMN fechacreacion DATE NOT NULL DEFAULT '2001-01-01'", false
     );
     hace_consulta(
         $db, "ALTER TABLE usuario " .
@@ -2717,10 +2719,15 @@ if (!aplicado($idac)) {
         funcionario.nombre = usuario.nusuario", false
     );
     hace_consulta(
-        $db, "INSERT INTO usuario (id, nusuario, password, nombre, descripcion, rol, idioma, fechadeshabilitacion) (SELECT id, nombre, '', nombre, '', 4, 'es_CO', current_date FROM funcionario WHERE nombre NOT IN (SELECT nusuario FROM usuario))", false
+        $db, "INSERT INTO usuario (id, nusuario, password, nombre, descripcion,
+        rol, idioma, fechadeshabilitacion) 
+        (SELECT id, nombre, '', nombre, '', 4, 'es_CO', current_date 
+        FROM funcionario WHERE nombre NOT IN 
+        (SELECT nusuario FROM usuario))", false
     );
     hace_consulta(
-        $db, "CREATE UNIQUE INDEX usuario_nusuario ON usuario USING btree (nusuario)", false
+        $db, "CREATE UNIQUE INDEX usuario_nusuario ON usuario 
+        USING btree (nusuario)", false
     );
     hace_consulta(
         $db, "ALTER TABLE usuario DROP CONSTRAINT usuario_pkey", false
@@ -2730,16 +2737,20 @@ if (!aplicado($idac)) {
         PRIMARY KEY (id)", false
     );
     hace_consulta(
-        $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT caso_etiqueta_pkey", false
+        $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT caso_etiqueta_pkey", 
+        false
     );
     hace_consulta(
-        $db, "ALTER TABLE caso_funcionario DROP CONSTRAINT caso_funcionario_pkey", false
+        $db, "ALTER TABLE caso_funcionario 
+        DROP CONSTRAINT caso_funcionario_pkey", false
     );
     hace_consulta(
-        $db, "ALTER TABLE caso_funcionario DROP CONSTRAINT caso_funcionario_id_funcionario_fkey", false
+        $db, "ALTER TABLE caso_funcionario 
+        DROP CONSTRAINT caso_funcionario_id_funcionario_fkey", false
     );
     hace_consulta(
-        $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT caso_etiqueta_id_funcionario_fkey", false
+        $db, "ALTER TABLE caso_etiqueta 
+        DROP CONSTRAINT caso_etiqueta_id_funcionario_fkey", false
     );
     hace_consulta(
         $db, "ALTER TABLE funcionario DROP CONSTRAINT funcionario_pkey", false
@@ -2748,10 +2759,12 @@ if (!aplicado($idac)) {
         $db, "ALTER TABLE caso_funcionario RENAME TO caso_usuario", false
     );
     hace_consulta(
-        $db, "ALTER TABLE caso_usuario RENAME id_funcionario TO id_usuario", false
+        $db, "ALTER TABLE caso_usuario 
+        RENAME id_funcionario TO id_usuario", false
     );
     hace_consulta(
-        $db, "ALTER TABLE caso_etiqueta RENAME id_funcionario TO id_usuario", false
+        $db, "ALTER TABLE caso_etiqueta 
+        RENAME id_funcionario TO id_usuario", false
     );
     hace_consulta(
         $db, "ALTER TABLE caso_usuario 
@@ -2783,10 +2796,12 @@ if (!aplicado($idac)) {
         $db, "ALTER SEQUENCE funcionario_seq RENAME TO usuario_seq", false
     );
     hace_consulta(
-        $db, "ALTER TABLE usuario ALTER COLUMN id SET DEFAULT nextval('usuario_seq')"
+        $db, "ALTER TABLE usuario ALTER COLUMN id 
+        SET DEFAULT nextval('usuario_seq')"
     );
     hace_consulta(
-        $db, "ALTER TABLE usuario ALTER COLUMN rol SET DEFAULT '4'"
+        $db, "ALTER TABLE usuario ALTER COLUMN rol 
+        SET DEFAULT '4'"
     );
 
     aplicaact($act, $idac, 'Fusiona tablas usuario y funcionario');
@@ -2795,13 +2810,16 @@ if (!aplicado($idac)) {
 $idac = '1.2-bc';
 if (!aplicado($idac)) {
     hace_consulta(
-        $db, "ALTER TABLE usuario ADD COLUMN email VARCHAR(255) NOT NULL DEFAULT ''", false
+        $db, "ALTER TABLE usuario ADD COLUMN 
+        email VARCHAR(255) NOT NULL DEFAULT ''", false
     );
     hace_consulta(
-        $db, "ALTER TABLE usuario ADD COLUMN encrypted_password VARCHAR(255) NOT NULL DEFAULT ''", false
+        $db, "ALTER TABLE usuario ADD COLUMN 
+        encrypted_password VARCHAR(255) NOT NULL DEFAULT ''", false
     );
     hace_consulta(
-        $db, "ALTER TABLE usuario ADD COLUMN sign_in_count INTEGER NOT NULL DEFAULT 0", 
+        $db, "ALTER TABLE usuario ADD COLUMN 
+        sign_in_count INTEGER NOT NULL DEFAULT 0", 
         false
     );
     hace_consulta(
@@ -2814,7 +2832,11 @@ if (!aplicado($idac)) {
         false
     );
  
-    aplicaact($act, $idac, 'Emplea bcrypt para calcular condensado de claves y agrega inforación a tablas para hacer compatible con autenticación con Devise/Ruby');
+    aplicaact(
+        $act, $idac, 'Emplea bcrypt para calcular condensado de claves '
+        . ' y agrega inforación a tablas para hacer compatible con '
+        . ' autenticación con Devise/Ruby'
+    );
 }
 
 $idac = '1.2-nc';
@@ -2824,7 +2846,8 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db,
         "ALTER TABLE comunidad_sectorsocial 
-        RENAME COLUMN id_sector TO id_sectorsocial", false);
+        RENAME COLUMN id_sector TO id_sectorsocial", false
+    );
 
     aplicaact($act, $idac, 'Nombre en Sector Social de Victima Colectiva');
 }
@@ -2840,15 +2863,16 @@ if (!aplicado($idac)) {
         $GLOBALS['dbnombre'] . ".links.ini",
         true
     );
-    foreach($enl as $t => $e) {
+    foreach ($enl as $t => $e) {
         $do = objeto_tabla($t);
-        foreach($e as $c => $rel) {
-            if (strpos($c, ',') === FALSE) {
+        foreach ($e as $c => $rel) {
+            if (strpos($c, ',') === false) {
                 $pd = strpos($rel, ':');
                 $ndo = substr($rel, 0, $pd);
                 $ids = valorSinInfo($do, $c);
-                if ($ids >= 0 && ($ndo != 'presponsable' || 
-                    $c == 'organizacionarmada' )) {
+                if ($ids >= 0 && ($ndo != 'presponsable' 
+                    || $c == 'organizacionarmada' )
+                ) {
                     $q = "ALTER TABLE $t ALTER COLUMN $c SET DEFAULT '$ids'";
                     hace_consulta($db, $q, false);
                 } 
@@ -2887,35 +2911,68 @@ if (!aplicado($idac)) {
         $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
         VALUES ('YE', 'NUERA/YERNO', '2014-02-18')", false
     );
-  
-    foreach(array("AO" => "AB", "HA" => "HO", "HR" => "HE", "MA" => "PO",
+    hace_consulta(
+        $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
+        VALUES ('NO', 'NIETA(O)', '2014-02-18')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
+        VALUES ('AH', 'AHIJADA(O)', '2014-02-18')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
+        VALUES ('OO', 'SOBRINA(O)', '2014-02-18')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
+        VALUES ('SG', 'SUEGRA(O)', '2014-02-18')", false
+    );
+
+    foreach (array("AO" => "AB", "HA" => "HO", "HR" => "HE", "MA" => "PO",
         "ME" => "PA", "TA" => "TO", "CO" => "SO", "SA" => "OO",
         "NA" => "NO", "HT" => "HO", "OA" => "OO", "Pr" => "PM",
         "Pm" => "PM", "MD" => "PD", "NU" => "YE") as $ant => $nue
     ) {
-            hace_consulta(
-                $db, "UPDATE persona_trelacion SET id_trelacion='$nue' 
-                WHERE id_trelacion='$ant'"
-            );
-            hace_consulta(
-                $db, "DELETE FROM trelacion WHERE id='$ant'"
-            );
+        hace_consulta(
+            $db, "UPDATE persona_trelacion SET id_trelacion='$nue' 
+            WHERE id_trelacion='$ant'"
+        );
+        hace_consulta(
+            $db, "DELETE FROM trelacion WHERE id='$ant'"
+        );
     }
-    hace_consulta($db, "UPDATE trelacion SET nombre='ESPOSA(O)/COMPAÑERA(O)' WHERE id='SO'");
+    hace_consulta(
+        $db, "UPDATE trelacion SET 
+        nombre='ESPOSA(O)/COMPAÑERA(O)' WHERE id='SO'"
+    );
     hace_consulta($db, "UPDATE trelacion SET nombre='ABUELA(O)' WHERE id='AB'");
     hace_consulta($db, "UPDATE trelacion SET nombre='NIETA(O)' WHERE id='NO'");
-    hace_consulta($db, "UPDATE trelacion SET nombre='MADRE/PADRE' WHERE id='PA'");
+    hace_consulta(
+        $db, "UPDATE trelacion SET nombre='MADRE/PADRE' WHERE id='PA'"
+    );
     hace_consulta($db, "UPDATE trelacion SET nombre='HIJA(O)' WHERE id='HI'");
-    hace_consulta($db, "UPDATE trelacion SET nombre='HERMANA(O)' WHERE id='HE'");
-    hace_consulta($db, "UPDATE trelacion SET nombre='MADRINA/PADRINO' WHERE id='PO'");
-    hace_consulta($db, "UPDATE trelacion SET nombre='AHIJADA(O)' WHERE id='AH'");
+    hace_consulta(
+        $db, "UPDATE trelacion SET nombre='HERMANA(O)' WHERE id='HE'"
+    );
+    hace_consulta(
+        $db, "UPDATE trelacion SET nombre='MADRINA/PADRINO' WHERE id='PO'"
+    );
+    hace_consulta(
+        $db, "UPDATE trelacion SET nombre='AHIJADA(O)' WHERE id='AH'"
+    );
     hace_consulta($db, "UPDATE trelacion SET nombre='TIA(O)' WHERE id='TO'");
-    hace_consulta($db, "UPDATE trelacion SET nombre='SOBRINA(O)' WHERE id='OO'");
-    hace_consulta($db, "UPDATE trelacion SET nombre='MADRASTRA(PADRASTRO)' WHERE id='PD'");
-    hace_consulta($db, "UPDATE trelacion SET nombre='HIJASTRA(O)' WHERE id='HO'");
+    hace_consulta(
+        $db, "UPDATE trelacion SET nombre='SOBRINA(O)' WHERE id='OO'"
+    );
+    hace_consulta(
+        $db, "UPDATE trelacion SET nombre='MADRASTRA(PADRASTRO)' WHERE id='PD'"
+    );
+    hace_consulta(
+        $db, "UPDATE trelacion SET nombre='HIJASTRA(O)' WHERE id='HO'"
+    );
     hace_consulta($db, "UPDATE trelacion SET nombre='SUEGRA(O)' WHERE id='SG'");
 
-    foreach(array("SO" => "SO", "AB" => "NO", "PA" => "HI",
+    foreach (array("SO" => "SO", "AB" => "NO", "PA" => "HI",
         "HE" => "HE", "PO" => "AH", "TO" => "OO",
         "PD" => "HO", "SG" => "YE", "PM" => "PM") as $r1 => $r2
     ) {
@@ -2927,7 +2984,8 @@ if (!aplicado($idac)) {
         );
     }
 
-    hace_consulta($db, "INSERT INTO persona_trelacion 
+    hace_consulta(
+        $db, "INSERT INTO persona_trelacion 
         (persona1, persona2, id_trelacion) 
         (SELECT persona2, persona1, inverso  
         FROM persona_trelacion, trelacion 
@@ -2952,11 +3010,10 @@ if (isset($GLOBALS['menu_tablas_basicas'])) {
         }
     }
     if (!$hayrep) {
+        $a = $_SESSION['dirsitio'] . "/conf_int.php";
         echo "<font color='red'>En el arreglo <tt>menu_tablas_basicas</tt> " .
-            "del archivo <tt>" .
-            htmlentities(
-                $_SESSION['dirsitio'] . "/conf_int.php", ENT_COMPAT, 'UTF-8'
-            ) . "</tt> falta:
+            "del archivo <tt>" .  htmlentities($a, ENT_COMPAT, 'UTF-8') . 
+            "</tt> falta:
 <pre>
     array('title' => 'Reportes', 'url'=> null, 'sub' => array(
         array('title'=>'Columnas de Reporte Consolidado',
@@ -3016,27 +3073,21 @@ function agrega_archivo($fuente, $destino, $modo = "w")
  */
 function lee_escritura($nd, $dbnombre, $dirap, $modo)
 {
-    if (!file_exists("$nd/DataObjects/estructura-dataobject.ini")) {
-        echo "No puede leerse "
-            . htmlentities(
-                "$nd/DataObjects/estructura-dataobject.ini",
-                ENT_COMPAT, 'UTF-8'
-            )
+    $a = "$nd/DataObjects/estructura-dataobject.ini";
+    if (!file_exists($a)) {
+        echo "No puede leerse " . htmlentities($a, ENT_COMPAT, 'UTF-8') 
             . "<br>";
         return;
     }
-    agrega_archivo(
-        "$nd/DataObjects/estructura-dataobject.ini",
-        "$dirap/DataObjects/$dbnombre.ini", $modo
-    );
+    agrega_archivo($a, "$dirap/DataObjects/$dbnombre.ini", $modo); 
 
-    if (!file_exists("$nd/DataObjects/estructura-dataobject.links.ini")) {
-        die("No puede leerse $nd/DataObjects/estructura-dataobject.ini");
+    $a = "$nd/DataObjects/estructura-dataobject.links.ini";
+    if (!file_exists($a)) {
+        echo "No puede leerse " . htmlentities($a, ENT_COMPAT, 'UTF-8') 
+            . "<br>";
+        return;
     }
-    agrega_archivo(
-        "$nd/DataObjects/estructura-dataobject.links.ini",
-        "$dirap/DataObjects/$dbnombre.links.ini", $modo
-    );
+    agrega_archivo($a, "$dirap/DataObjects/$dbnombre.links.ini", $modo);
 }
 
 if (!isset($_SESSION['SIN_INDICES']) || !$_SESSION['SIN_INDICES']) {

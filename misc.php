@@ -787,7 +787,8 @@ function valores_pordefecto_form($d, $form, $merr = true)
                         //echo "OJO empleando ''<br>";
                         $v = '';
                     } else { 
-                        //echo "OJO empleando valorSinInfo c=$c, tab[c]={$tab[$c]}, d->c={$d->$c}<br>";
+                        //echo "OJO empleando valorSinInfo c=$c, 
+                        //tab[c]={$tab[$c]}, d->c={$d->$c}<br>";
                         $v = valorSinInfo($d, $c);
                     }
                 } else {
@@ -917,8 +918,8 @@ function textCounter(field, cntfield, maxlimit)
         }
         fclose($rh);
     } else {
-        $f = isset($GLOBALS['fondo']) ? $GLOBALS['fondo'] : '';
-        echo '</' . 'head><' . 'body background = "' . $f . '">';
+        $html_f = isset($GLOBALS['fondo']) ? $GLOBALS['fondo'] : '';
+        echo '</' . 'head><' . 'body background="' .  $html_f . '">';
     }
 }
 

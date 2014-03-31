@@ -79,7 +79,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
     {
         $cll = get_called_class();
         $cpartes = $cll::PARTES;
-        foreach (explode(' ', $cpartes) as $t) {
+        foreach (preg_split('/[\s]+/', $cpartes) as $t) {
             $nb = 'b' . $t;
             $this->$nb = null;
         }
@@ -120,7 +120,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $cpartes = $cll::PARTES;
         if (isset($this->$bcm->_do->$ll)) {
             $partes = array_diff(
-                explode(' ', $cpartes), array($cll::CLASEMODELO)
+                preg_split('/[\s]+/', $cpartes), array($cll::CLASEMODELO)
             );
             for ($i = 0; $i < 2; $i++) {
                 foreach ($partes as $t) {
@@ -182,7 +182,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         }
 
         $partes = array_diff(
-            explode(' ', $cpartes), array($cm)
+            preg_split('/[\s]+/', $cpartes), array($cm)
         );
         foreach ($partes as $t) {
             $nb = 'b' . $t;
@@ -257,7 +257,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
 
         $cll = get_called_class();
         $cpartes = $cll::PARTES;
-        foreach (explode(' ', $cpartes) as $t) {
+        foreach (preg_split('/[\s]+/', $cpartes) as $t) {
             $nb = 'b' . $t;
             $nf = 'f' . $t;
             $eti = isset($GLOBALS['etiqueta'][$t]) ?
@@ -287,7 +287,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $cpartes = $cll::PARTES;
         $bcm = "b" . $cll::CLASEMODELO;
         valores_pordefecto_form($this->$bcm->_do, $this);
-        foreach (explode(' ', $cpartes) as $t) {
+        foreach (preg_split('/[\s]+/', $cpartes) as $t) {
             $nb = 'b' . $t;
             valores_pordefecto_form($this->$nb->_do, $this, false);
         }
@@ -297,7 +297,8 @@ class PagBaseMultiplePartes extends PagBaseMultiple
     /**
      * Elimina clasemodelo
      *
-     * @param object $dcm DataObject de la clase modelo
+     * @param object  $dcm    DataObject de la clase modelo
+     * @param integer $idcaso Id del caso del cual se elimina relacionado
      *
      * @return void
      */
@@ -333,7 +334,10 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $cll = get_called_class();
         $cpartes = $cll::PARTES;
         $partes = array_reverse(
-            array_diff(explode(' ', $cpartes), array($cll::CLASEMODELO))
+            array_diff(
+                preg_split('/[\s]+/', $cpartes), 
+                array($cll::CLASEMODELO)
+            )
         );
         $ll = $cll::LLAVECOMP;
         foreach ($partes as $t) {
@@ -443,7 +447,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $fa = null;
         $tab = null;
         $partes = array_diff(
-            explode(' ', $cpartes), array($cm)
+            preg_split('/[\s]+/', $cpartes), array($cm)
         );
         foreach ($partes as $t) {
             $nb = 'b' . $t;

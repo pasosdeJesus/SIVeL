@@ -31,7 +31,7 @@ if (!file_exists(dirname(__FILE__) . "/confv.php")) {
         . "Configure desde interprete de comandos con ./conf.sh"
     );
 }
-require_once (dirname(__FILE__) . "/confv.php");
+require_once dirname(__FILE__) . "/confv.php";
 
 
 /**
@@ -48,9 +48,7 @@ function hace_consulta_aut(&$db, $q, $finerror = true)
 {
     $result = $db->query($q);
     if (PEAR::isError($result)) {
-        echo htmlentities(
-            $result->getMessage() . " - " . $result->getUserInfo()
-        );
+        echo htmlentities("{$result->getMessage()} - {$result->getUserInfo()}");
         echo "<br>" . _("&iquest;Ya") . " <a href='actualiza.php'>"
             . _("actualiz&oacute;") . "</a> "
             . _("y regener&oacute; esquema?");
@@ -75,11 +73,13 @@ function idioma($l = "es_CO")
     include "confv.php";
     $ld = explode(" ", $LENGDISP);
     if (!in_array($l, $ld)) {
-        echo "El idioma '$l', se solicitó pero no está disponible.<br>";
+        echo "El idioma '" 
+            . htmlentities($l, ENT_COMPAT, 'UTF-8')
+            . "', se solicitó pero no está disponible.<br>";
         echo "Los idiomas disponibles son: ";
         $sep ="";
         foreach ($ld as $nl) {
-            echo $sep . $nl;
+            echo $sep . htmlentities($nl, ENT_COMPAT, 'UTF-8');
             $sep =", ";
         }
         echo "<br>Estableciendo es_CO<br>";
@@ -102,9 +102,7 @@ function idioma($l = "es_CO")
     textdomain($td);
     if ($l == "en_US" && "Fuente" == _("Fuente")) {
         echo
-            htmlentities(
-                "Error al inicializar idioma $l", ENT_COMPAT, 'UTF-8'
-            )
+            htmlentities("Error al inicializar idioma $l", ENT_COMPAT, 'UTF-8')
             . "<br>";
         debug_print_backtrace();
         die();
@@ -359,6 +357,10 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         $b = new Auth("DB", $params, "no_login_function");
         $b->setSessionName($snru);
         $b->start();
+        $clavebf = crypt(
+            var_post_escapa('password', $db, 32), gen_sal_bcrypt(10)
+        );
+        //echo  "OJO clavebf=$clavebf<br>";
         if ($b->checkAuth()) {
             $clavebf = crypt(
                 var_post_escapa('password', $db, 32), gen_sal_bcrypt(10)
@@ -421,10 +423,8 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             exit(1);
         }
     }
-        $clavesha1 = sha1(var_post_escapa('password', $db, 32));
-	//echo "OJO clavesha1=$clavesha1<br>";
-        $clavemd5 = md5(var_post_escapa('password', $db, 32));
-	//echo "OJO clavemd5=$clavemd5<br>";
+    $clavesha1 = sha1(var_post_escapa('password', $db, 32));
+    $clavemd5 = md5(var_post_escapa('password', $db, 32));
     unset($_POST['password']);
     die($accno . " (2)");
 }

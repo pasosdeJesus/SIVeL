@@ -92,7 +92,8 @@ function muestra($dsn)
     }
 
     echo "<p>Por confirmar " . count($par) . " parejas de casos</p>";
-    echo "<p>En los que confirme, se mezclarán los segundos casos en los primeros y se eliminaran los segundos.</p>";
+    echo "<p>En los que confirme, se mezclarán los segundos casos 
+        en los primeros y se eliminaran los segundos.</p>";
     echo "<form action='opcion.php?num=1005' method='POST' target='_blank'>";
     echo "<center><table border='1'>";
     echo "<tr><th>Código</th><th>Fecha</th>"
@@ -103,13 +104,13 @@ function muestra($dsn)
 
     $col1 = "#FFFFFF";
     $col2 = "#BBBBBB";
-    $coltr = $col1;
+    $html_coltr = $col1;
     foreach ($par as $p) {
         list($id1, $id2) = $p;
-        if ($coltr == $col1) {
-            $coltr = $col2;
+        if ($html_coltr == $col1) {
+            $html_coltr = $col2;
         } else {
-            $coltr = $col1;
+            $html_coltr = $col1;
         }
         foreach ($p as $id) {
             $c = "SELECT DISTINCT caso.id, caso.fecha,
@@ -125,30 +126,29 @@ function muestra($dsn)
             FROM caso where caso.id = $id";
             $r = hace_consulta($db, $c);
             sin_error_pear($r);
-            echo "<tr style='background-color:$coltr;'>\n";
+            echo "<tr style='background-color:$html_coltr;'>\n";
             $rows = array();
             $r->fetchInto($rows);
             foreach ($rows as $n => $c) {
                 if ($n == 0) {
-                    $v1_html = enlace_edita($c);
+                    $html_v1 = enlace_edita($c);
                 } else {
-                    $v1_html = $c;
+                    $html_v1 = $c;
                 }
-                echo "<td>" . $v1_html . "</td>";
+                echo "<td>" . $html_v1 . "</td>";
             }
             if ($id == $id1) {
-                echo "<td rowspan='2'>"
-                    . "<input type='checkbox' name='m_{$id1}_{$id2}' checked/>"
-                    . "</td>";
-                echo "<td rowspan='2'>"
-                    . "<input type='checkbox' name='h_{$id1}_{$id2}'/>"
-                    . "</td>";
+                echo "<td rowspan='2'><input type='checkbox' "
+                    . "name='m_{(int)$id1}_{(int)$id2}' checked/></td>";
+                echo "<td rowspan='2'><input type='checkbox' "
+                    . "name='h_{(int)$id1}_{(int)$id2}'/></td>";
             }
             echo "</tr>\n";
         }
     }
     echo "</table></center>";
-    echo "<center><input type='submit' value='Mezclar Segundo en Primero y Eliminar Segundo'/></center>";
+    echo "<center><input type='submit' 
+        value='Mezclar Segundo en Primero y Eliminar Segundo'/></center>";
     echo "</form>";
 }
 

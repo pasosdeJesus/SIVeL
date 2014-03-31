@@ -527,6 +527,11 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
 
     /**
      * Mezcla automáticamente datos de otro objeto
+     *
+     * @param object $otro DataObject que se mezcla con este
+     * @param string &$obs Colchón para observaciones
+     *
+     * @return void Mezcla $otro en $this y agrega observaciones a $obs
      */
     function mezclaAutom($otro, &$obs)
     {
