@@ -30,7 +30,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><!doctype html>
+</script></head><body background=""><!doctype html>
 <html>
 <head>
   <meta charset = "UTF-8">
@@ -62,6 +62,6 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><table border="1"><tr><th>C. Dep.</th><th>Departamento</th><th>C. Mun.</th><th>Municipio</th><th>Tipo de Violencia</th><th>Supracategoria</th><th>Categoria</th><th>N. V&iacute;ctimizaciones</th></tr>
+</script></head><body background=""><table border="1"><tr><th>C. Dep.</th><th>Departamento</th><th>C. Mun.</th><th>Municipio</th><th>Tipo de Violencia</th><th>Supracategoria</th><th>Categoria</th><th>N. V&iacute;ctimizaciones</th></tr>
 <tr><td>1</td><td>y</td><td>1</td><td>municipio1</td><td>tipo1</td><td>supra1</td><td>cat1</td><td>1</td></tr>
 </table><div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html></body></html>

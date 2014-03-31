@@ -30,7 +30,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><pre>CASO No. <a href='captura_caso.php?modo=edita&id=1'>1</a>
+</script></head><body background=""><pre>CASO No. <a href='captura_caso.php?modo=edita&id=1'>1</a>
 FECHA: 07-Agosto-2007 15:00 intervalo1  Tip. Ub: Tsitio1
 
 y / municipio1 / clase1
