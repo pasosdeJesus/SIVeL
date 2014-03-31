@@ -64,11 +64,15 @@ Precisa a&uacute;n más la ubicaci&oacute;n de los hechos. e.g. Casa, Finca, Dir
 Latitud:
 En decimal, si requiere convertir de grados, minutos y segundos a decimal 
 puede emplear <ulink url="http://segdeha.com/e/convert_lat_long/"></ulink>.
+Junto con Longitud, se llena automáticamente cuando cambiar el Departamento o 
+el Municipio con un valor cercano al del centro del departamento o municipio.
 			</para></listitem>
 			<listitem><para>
 Longitud:
 En decimal.  Una vez almacene la informaci&oacute;n y vuelva a esta pestaña verá
-un enlace a las coordenadas que ingres&oacute; en OpenStreetmap.
+un enlace a las coordenadas que ingres&oacute; en OpenStreetmap.  Cuando cambia
+el departamento o el municipio se llena automáticamente junto con la 
+latitud (ver Latitud).
 			</para></listitem>
 			<listitem>
 				<para>
