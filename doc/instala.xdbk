@@ -603,13 +603,14 @@ servidor en <ulink url="https://127.0.0.1/actualiza.php"></ulink>.
 Es posible que tenga que iniciar la sesión 2 o 3 veces mientras
 se actualiza en cada intento la forma de cifrado de las claves<footnote><para>En
         caso de que tenga incoveniente reiterativos con claves asegurese 
-        que en la base de datos se esté almacenando el condensado SHA256 
-        de la clave y no el antiguo MD5, esto lo puede hacer para el usuario 
+        que en la base de datos se esté almacenando el condensado bcrypt
+				de la clave y no los antiguos SHA-256 y MD5. <!--, esto lo puede hacer 
+				para el usuario 
         <literal>juan</literal> ejecutando desde el directorio
         del sitio:
         <screen>
             ../../bin/clave_sha1.sh juan
-        </screen>
+					</screen> -->
 </para></footnote>.</para>
 	</listitem>
 	<listitem>

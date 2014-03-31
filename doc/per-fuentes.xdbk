@@ -160,8 +160,8 @@ git clone -b sivel1_2 https://github.com/pasosdeJesus/SIVeL.git
 				<listitem>
 					<para><filename>herram/trans.sh</filename> Para agregar cambios.</para>
 				</listitem>
+			</itemizedlist>
 	
-			herram/trans.sh 
 		</para>
 	</sect2>
 	<sect2 id="fuentes">
