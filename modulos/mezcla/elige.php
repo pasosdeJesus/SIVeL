@@ -331,7 +331,7 @@ class AccionVictimasrep extends HTML_QuickForm_Action
             $tv++;
         }
 
-        echo "<p>Total de casos con v&iacute;ctima: {(int)$tv}</p>";
+        echo "<p>Total de casos con v&iacute;ctima: " . (int)$tv . "</p>";
         $suma = array();
         echo "<form  action='opcion.php?num=1004' method='post' target='_blank'>";
         echo "<input name='Comparar' type='submit' class='form' id='Comparar' "

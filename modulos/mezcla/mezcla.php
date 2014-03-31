@@ -655,9 +655,9 @@ function muestra($dsn)
             . "\nCaso mezclado ($id2): " . strip_tags($r2) ."\n";
 
         echo "<tr>";
-        echo "<td><a href='captura_caso.php?modo=edita&id={(int)$id1}'>"
+        echo "<td><a href='captura_caso.php?modo=edita&id=" . (int)$id1 . "'>"
             . (int)$id1 . "</a></td>";
-        echo "<td>{(int)$id2}</td>";
+        echo "<td>" . (int)$id2 . "</td>";
         $html_obs2 = "";
         $fecha = ""; $dep = ""; $vic = "";
         if (mezclaen($id1, $id2, true, $html_obs2, $vic, $fecha, $dep)) {
@@ -684,7 +684,7 @@ function muestra($dsn)
         $rfec = $l[2];
         $rdep = $l[3];
         echo "<tr>";
-        echo "<td>{(int)}$id2}</td><td>{(int)$id1}</td>";
+        echo "<td>" . (int)$id2 . "</td><td>" . (int)$id1 . "</td>";
         echo "<td>" . htmlentities($rvic, ENT_COMPAT, 'UTF-8') . "</td>"
             . "<td>" . htmlentities($rfec, ENT_COMPAT, 'UTF-8') . "</td>"
             . "<td>" . htmlentities($rdep, ENT_COMPAT, 'UTF-8') . "</td>";
@@ -720,8 +720,9 @@ function muestra($dsn)
         }
         sin_error_pear($h);
         echo "<tr>";
-        echo "<td>{(int)$par[0]}</td><td>{(int)$v1->id_persona}</td>
-            <td>${(int)par[1]}</td><td>{(int)$v2->id_persona}</td>";
+        echo "<td>" . (int)$par[0] . "</td><td>" . (int)$v1->id_persona 
+            . "</td><td>" . (int)$par[1] . "</td><td>" . (int)$v2->id_persona
+            . "</td>";
         if ($id1 == $id2) {
             echo "<td>Misma persona --no es homonimo</td>";
         } else {
