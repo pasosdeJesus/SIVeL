@@ -584,11 +584,12 @@ class ResConsulta
 
             encabezado_envia("Actos");
             echo "<table border='1'>\n";
-            $st = ""; $cpm_ne = "<tr>";
+            $st = ""; $html_cpm = "<tr>";
             foreach ($ac as $c) {
-                $cpm_ne .= $st . "<th>$c</th>";
+                $html_cpm .= $st . "<th>" . 
+                    htmlentities($c, ENT_COMPAT, 'UTF-8') . "</th>";
             }
-            echo $cpm_ne . '</tr>'; 
+            echo $html_cpm . '</tr>'; 
         }
 
         $tv = 0;

@@ -2,7 +2,7 @@
 # Busca posibles fallas de seguridad en fuentes de SIVeL
 # Dominio público. 2011. Sin Garantías. vtamara@pasosdeJesus.org
 
-function x {
+#function x {
 echo "* Emplear htmlentities_array con $db->getAssoc"
 #find . -name "*php" -exec grep -l -e "[\(] *\$db->getAssoc" {} ';'
 find . -name "*php" -exec grep -B 1 "getAssoc" {} ';' | sed -e "s/^[^ ]*: *//g" | sed -e "s/^\./|/g;s/  */ /g" | tr -d "\n"  | tr "|" "\n" | grep -v "htmlentities_array"
@@ -72,7 +72,7 @@ grep -A 1 "_submitValues *\[" $p | grep "^[^ ]*:" | grep -v -e "isset *(.*->_sub
 #	grep -C 1 -e "isset *( *\$_REQUEST"  -e "(int) *\$_REQUEST" -e "var_escapa *( *\$_REQUEST" $i
 #done
 
-}
+#}
 echo "OWASP V6.1 Validando salida";
 p=`find . -name "*php" -exec grep -l -e "[ \t]echo[ \t]" -e print_r {} ';'`
 for i in $p; do
