@@ -14,8 +14,12 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+
 /**
  * Genera colchon de datos aleatorios de longitud $lon.
+ * Como generador de números aleatorios emplea /dev/random 
+ * (que es criptografícamente bueno en OpenBSD >=5.1) o si no está emplea 
+ * la función insegura mt_rand
  *
  * @param integer $lon Longitud del colchón por generar
  *
@@ -23,11 +27,34 @@
  */
 function colchon_aleatorios($lon)
 {
-    $col = "";
-    for ($i = 0 ; $i < $lon; $i++) {
-        $col .= chr(mt_rand(1, 255));
+    $f = null;
+    if (file_exists("/dev/random")) {
+        //echo "OJO Si hay /dev/random\n";
+        $f = fopen("/dev/random", "rb");
+        $a = fread($f, 1);
+        if ($a<0 || $a>255) {
+            trigger_error("No se pudo usar /dev/random");
+            fclose($f);
+            $f = null;
+        }
+    } else {
+        trigger_error("No existe /dev/random, se recomienda adJ>=5.4");
     }
 
+    $col = "";
+    for ($i = 0 ; $i < $lon; $i++) {
+        if ($f != null) {
+            $a = fread($f, 1);
+            //echo "OJO a= " . ord($a) . "\n";
+        } else {
+            $a = chr(mt_rand(1, 255));
+        }
+        $col .= $a;
+    }
+
+    if ($f != null) {
+        fclose($f);
+    }
     return $col;
 }
 

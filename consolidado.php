@@ -699,7 +699,7 @@ class PagConsolidado extends HTML_QuickForm_Page
         $e =& $this->addElement('header', null, $tpie);
 
         if (!isset($_POST['evita_csrf'])) {
-            $_SESSION['sin_csrf'] = mt_rand(0, 1000);
+            $_SESSION['sin_csrf'] = base64_encode(colchon_aleatorios(16));
         }
         $this->addElement('hidden', 'evita_csrf', $_SESSION['sin_csrf']);
 

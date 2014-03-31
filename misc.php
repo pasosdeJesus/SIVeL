@@ -20,6 +20,7 @@
  * Funciones diversas útiles en varias fuentes PHP.
  */
 
+require_once "bcrypt.php";
 require_once "Auth.php";
 require_once "HTML/QuickForm.php";
 require_once "HTML/Common.php";
@@ -1767,7 +1768,7 @@ function verifica_edad_y_rango($e, $r)
      */
 function agrega_control_CSRF(&$form)
 {
-    $_SESSION['sin_csrf'] = mt_rand(0, 1000);
+    $_SESSION['sin_csrf'] = base64_encode(colchon_aleatorios(16));
     $form->addElement('hidden', 'evita_csrf', $_SESSION['sin_csrf']);
 }
 
