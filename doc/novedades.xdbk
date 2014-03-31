@@ -51,15 +51,22 @@ eliminar un caso dado el código
 					<listitem><para>
 Añadidas variable de configuración para controlar presentación de 
 reporte tabla: $GLOBALS['reptabla_nonacimiento'], 
-</literal>$GLOBALS['reptabla_noagresion']</literal>, 
-$</literal>GLOBALS['reptabla_separa_ubicacion']</literal> (que separa 
+<literal>$GLOBALS['reptabla_noagresion']</literal>, 
+<literal>$GLOBALS['reptabla_separa_ubicacion']</literal> (que separa 
 ubicación en 2 columnas para municipio y departamento),
-</literal>$GLOBALS['reptabla_separa_nomap']</literal> (que separa 
+<literal>$GLOBALS['reptabla_separa_nomap']</literal> (que separa 
 nombres y apellidos en 2 columnas) y
-</literal>$GLOBALS['reptabla_tipificacion_breve']</literal> (que presenta 
+<literal>$GLOBALS['reptabla_tipificacion_breve']</literal> (que presenta 
 tipificación sin código ni supracategoria).
 					</para></listitem>
 					<listitem><para>
+Validaciones: tanto desde el menú  
+<menuchoice><guimenu>Otros</guimenu><guimenuitem>Validar</guimenuitem></menuchoice> como con el botón 
+
+<menuchoice><guimenu>Val. y Rep. G</guimenu></menuchoice> al editar
+un caso se verifica que se hayan duplicado categorias que lo requieren.
+					 </para></listitem>
+				       <listitem><para>
 Fallas resueltas: Al buscar por consulta detallada en pestaña ubicación no 
 pone automáticamente latitud y longitud. Agradecemos reporte a Miltón Mejía.
 Permite poner sector social y rango edad en víctimas colectivas.
@@ -153,7 +160,6 @@ y <filename>vardb-local.sh</filename>.
 	</varlistentry>
 
 	</variablelist>
-
-El historial de la versión 1.1 puede verse en el <ulink url="http://sivel.sf.net/1.1/">manual de esa versión</ulink>. 
+	<para>El historial de la versión 1.1 puede verse en el <ulink url="http://sivel.sf.net/1.1/">manual de esa versión</ulink>. </para>
 
 
