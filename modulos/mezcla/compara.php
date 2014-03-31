@@ -139,9 +139,11 @@ function muestra($dsn)
             }
             if ($id == $id1) {
                 echo "<td rowspan='2'><input type='checkbox' "
-                    . "name='m_{(int)$id1}_{(int)$id2}' checked/></td>";
+                    . "name='m_" . (int)$id1 . "_" . (int)$id2 
+                    . "' checked/></td>";
                 echo "<td rowspan='2'><input type='checkbox' "
-                    . "name='h_{(int)$id1}_{(int)$id2}'/></td>";
+                    . "name='h_" . (int)$id1 . "_" . (int)$id2
+                    . "'/></td>";
             }
             echo "</tr>\n";
         }
