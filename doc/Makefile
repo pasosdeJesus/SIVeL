@@ -83,7 +83,7 @@ GENDIST=$(SOURCES) $(IMAGES)
 ACTHOST=web.sourceforge.net
 # Sitio en Internet donde actualizar. Método indicado por ACT_PROC de confv.sh
 
-ACTDIR=/home/groups/s/si/sivel/htdocs/1.1/
+ACTDIR=/home/groups/s/si/sivel/htdocs/1.2/
 # Directorio en ACTHOST por actualizar
 
 #USER=
