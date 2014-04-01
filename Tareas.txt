@@ -1,7 +1,8 @@
 
 1.2 o posteriores
 
-Usar bcrypt con PHP-5.5 como en ruby
+En actualizar tener en cuenta que en 1.1 la base es LATIN1 mientras que en
+1.2 debe ser UTF8
 
 Etnias: tikuna, zenu
 
@@ -15,9 +16,8 @@ Falta consulta detallada al especificar
 
 Que guarde filtro de consulta para repetir con cambios menores. Rosita.
 
-Actualizar Etnia  y DIVIPOLA
 Seguir completando herram/buscafallas.sh
-Sal en hashes, cambiar a SHA256, modelamiento de amenazas, evitar 
+modelamiento de amenazas, evitar 
 autocompletación de claves, reautenticar para cambiar clave, rol y 
 crear usuarios.
 Bitacoras para decisiones de autenticación y fallidas.
@@ -33,7 +33,6 @@ Política de manejo de llaves.
 Verificar manejo de errores de servidor al lado del servidor.
 Verificar eliminación de información sensible en cliente y servidor.
 Ceritificados firmados por CA y posibilidad real de verificar y revocar.
-Considerar codificación UTF-8.
 Banderas en galletas.
 Juego de caracteres en todo encabezado respuesta.
 Cifrado debería ser función de API.
@@ -43,19 +42,10 @@ Duplicación entre Fuentes Frecuentes con FD-Fuente Directa y Otras Fuentes.
 Será mejor quitar Otras Fuentes y pasarlas a Fuentes Frecuentes como FD o OTRAS
 y renombrar a Fuentes ?
 
-Buscar forma de actualizar DIVIPOLA y tablas básicas, posiblemente
-leyendos datos-*.sql, reconociendo y comparando con lo que hay en la
-base.  Ver funcion lee_sql de actualiza.php
-
-Revisar y aplicar estándares de nomenclatura SQL (_ solo para relaciones).
-
 Bitácora de actualizaciones realizadas.
 
 Agregar etiqueta NO PUBLICABLE, que no salgan casos con esa etiqueta
 en estadísticas ni en consulta web no autenticada
-
-Ortografía en tablas basicas como presunto responsable 
-(INFORMACION->INFORMACIÓN)
 
 Quita tipo_violencia y supracategoria de categoria_p_responsable_caso
 
