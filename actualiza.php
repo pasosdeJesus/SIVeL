@@ -2927,6 +2927,25 @@ if (!aplicado($idac)) {
         $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
         VALUES ('SG', 'SUEGRA(O)', '2014-02-18')", false
     );
+    hace_consulta(
+            $db, "INSERT INTO trelacion 
+            (id, nombre, observaciones, fechacreacion, 
+             fechadeshabilitacion, inverso) VALUES ('HO', 'HIJASTRA(O)', '', 
+             '2011-05-02', NULL, NULL);", false
+    );
+    hace_consulta(
+            $db, "INSERT INTO trelacion (id, nombre, observaciones, 
+        fechacreacion, fechadeshabilitacion, inverso) 
+            VALUES ('PD', 'MADRASTRA(PADRASTRO)', '', 
+                '2011-09-21', NULL, 'HO');"
+    );
+
+    hace_consulta(
+            $db, "INSERT INTO trelacion (id, nombre, observaciones, 
+        fechacreacion, fechadeshabilitacion, inverso) 
+            VALUES ('SO', 'ESPOSA(O)/COMPAÑERA(O)', '', 
+                '2001-01-01', NULL, 'SO');", false
+    );
 
     foreach (array("AO" => "AB", "HA" => "HO", "HR" => "HE", "MA" => "PO",
         "ME" => "PA", "TA" => "TO", "CO" => "SO", "SA" => "OO",
