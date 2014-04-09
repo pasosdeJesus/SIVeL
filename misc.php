@@ -2248,10 +2248,11 @@ function es_objeto_nulo($do)
  *
  * @param integer $idcaso    Identificación de caso por validar.
  * @param string  &$buf_html Arreglo de errores retornados escapados
+ * @param string  &$buf_ort  Errores ortograficos
  *
  * @return bool Validado
  */
-function valida_caso($idcaso, &$buf_html)
+function valida_caso($idcaso, &$buf_html, &$buf_ort)
 {
     $valr = true;
     $dcaso = objeto_tabla('caso');
@@ -2357,7 +2358,7 @@ function valida_caso($idcaso, &$buf_html)
         }
         $r=`$cmd`;
         if ($r != "") {
-            $buf_html[] = _("Errores ortográficos en memo") . ": $r<br>" .
+            $buf_ort .= _("Errores ortográficos en memo") . ": $r<br>" .
                 str_replace(
                     '%l', $GLOBALS['CHROOTDIR'] . getcwd() . "/" .
                     $GLOBALS['DICCIONARIO'], $GLOBALS['MENS_ORTOGRAFIA']
