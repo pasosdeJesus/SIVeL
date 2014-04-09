@@ -2741,9 +2741,14 @@ if (!aplicado($idac)) {
         false
     );
     hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT etiquetacaso_pkey", 
+        false, false
+    );
+    hace_consulta(
         $db, "ALTER TABLE caso_funcionario 
         DROP CONSTRAINT caso_funcionario_pkey", false
     );
+
     hace_consulta(
         $db, "ALTER TABLE caso_funcionario 
         DROP CONSTRAINT caso_funcionario_id_funcionario_fkey", false
@@ -2752,6 +2757,11 @@ if (!aplicado($idac)) {
         $db, "ALTER TABLE caso_etiqueta 
         DROP CONSTRAINT caso_etiqueta_id_funcionario_fkey", false
     );
+    hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta 
+        DROP CONSTRAINT etiquetacaso_id_funcionario_fkey", false, false
+    );
+
     hace_consulta(
         $db, "ALTER TABLE funcionario DROP CONSTRAINT funcionario_pkey", false
     );
