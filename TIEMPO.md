@@ -103,3 +103,16 @@ Editar un caso: 6.5
 Agregar etiqueta y guardar: 4
 Editar de nuevo: 5.1
 
+Fecha: 13.Abr.2014
+Servidor: SJR-3
+Cliente: V-1
+Primera carga de sitio tras actualizar fuentes y reiniciar servidor: 8.98
+Autenticar: 6.1
+Lista de actividades: 1.88
+Editar una actividad: 0.6
+Listado de casos: 1.96
+Editar un caso: 5.33
+Agregar etiqueta y guardar: 1.3
+Editar de nuevo: 5.99
+
+
