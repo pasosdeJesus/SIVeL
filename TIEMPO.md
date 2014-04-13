@@ -20,6 +20,16 @@ SERVIDOR SJR-2d:
 El mismo SJR-2 pero con
 * Plataforma: adJ 5.4, PostgreSQL 9.3.2, ruby 2.0.0, RoR 4.1.0rc1, webricks
 
+SERVIDOR SJR-3:
+El mismo SJR-1 pero con
+* Plataforma: adJ 5.4p1, PostgreSQL 9.3.2, ruby 2.0.0, RoR 4.1.0, unicorn-4.8.2
+
+
+SERVIDOR SJR-3d:
+El mismo SJR-3 pero con
+* Plataforma: adJ 5.4p1, PostgreSQL 9.3.2, ruby 2.0.0, RoR 4.1.0, webricks
+
+
 CLIENTE V-1:
 * AMD E-450. 1647.97 MHz
 * RAM: 4G
@@ -82,4 +92,14 @@ Editar un caso: 12.85
 Agregar etiqueta y guardar: 9.63
 Editar de nuevo: 12.82
 
+Fecha: 13.Abr.2014
+Servidor: SJR-3d
+Cliente: V-1
+Autenticar: 4.32
+Lista de actividades: <1
+Editar una actividad: <1
+Listado de casos: <1
+Editar un caso: 6.5
+Agregar etiqueta y guardar: 4
+Editar de nuevo: 5.1
 
