@@ -2741,9 +2741,14 @@ if (!aplicado($idac)) {
         false
     );
     hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT etiquetacaso_pkey", 
+        false, false
+    );
+    hace_consulta(
         $db, "ALTER TABLE caso_funcionario 
         DROP CONSTRAINT caso_funcionario_pkey", false
     );
+
     hace_consulta(
         $db, "ALTER TABLE caso_funcionario 
         DROP CONSTRAINT caso_funcionario_id_funcionario_fkey", false
@@ -2752,6 +2757,11 @@ if (!aplicado($idac)) {
         $db, "ALTER TABLE caso_etiqueta 
         DROP CONSTRAINT caso_etiqueta_id_funcionario_fkey", false
     );
+    hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta 
+        DROP CONSTRAINT etiquetacaso_id_funcionario_fkey", false, false
+    );
+
     hace_consulta(
         $db, "ALTER TABLE funcionario DROP CONSTRAINT funcionario_pkey", false
     );
@@ -2926,6 +2936,25 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
         VALUES ('SG', 'SUEGRA(O)', '2014-02-18')", false
+    );
+    hace_consulta(
+            $db, "INSERT INTO trelacion 
+            (id, nombre, observaciones, fechacreacion, 
+             fechadeshabilitacion, inverso) VALUES ('HO', 'HIJASTRA(O)', '', 
+             '2011-05-02', NULL, NULL);", false
+    );
+    hace_consulta(
+            $db, "INSERT INTO trelacion (id, nombre, observaciones, 
+        fechacreacion, fechadeshabilitacion, inverso) 
+            VALUES ('PD', 'MADRASTRA(PADRASTRO)', '', 
+                '2011-09-21', NULL, 'HO');"
+    );
+
+    hace_consulta(
+            $db, "INSERT INTO trelacion (id, nombre, observaciones, 
+        fechacreacion, fechadeshabilitacion, inverso) 
+            VALUES ('SO', 'ESPOSA(O)/COMPAÑERA(O)', '', 
+                '2001-01-01', NULL, 'SO');", false
     );
 
     foreach (array("AO" => "AB", "HA" => "HO", "HR" => "HE", "MA" => "PO",

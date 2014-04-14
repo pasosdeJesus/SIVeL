@@ -53,11 +53,6 @@ $GLOBALS['m_opcion'][49] = array(
     . 'nobelicas&sincampos=caso_id,m_victimas,m_presponsables,'
     . 'm_tipificacion,m_fuentes'
 );
-$GLOBALS['m_opcion'][54] = array(
-    'nombre' => _('Colectivas con Rotulos de Rep. Cons.'),
-    'idpapa' => 50,
-    'url' => 'opcion?num=101'
-);
 
 $GLOBALS['m_opcion_rol'][46] = array(1, 2);
 $GLOBALS['m_opcion_rol'][47] = array(1, 2);
