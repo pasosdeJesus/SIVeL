@@ -35,11 +35,19 @@ CLIENTE V-1:
 * RAM: 4G
 * Disco: 500G
 * Conexión a Internet por UNE Inalámbrico 2MB
-* Plataforma: adJ 5.4, chrome
+* Plataforma: adJ 5.4, chrome, ruby 2.0, rails 4.0
 
 CLIENTE V-1m:
 El mismo CLIENTE V pero con
 * Conexión a Internet por Movistar Mobil 3G.
+
+
+CLIENTE V-2:
+* AMD E-450. 1647.97 MHz
+* RAM: 4G
+* Disco: 500G
+* Conexión a Internet por UNE Inalámbrico 2MB
+* Plataforma: OpenBSD current (5.6), chrome, ruby 2.1, rails 4.1
 
 
 Fecha: 19.Mar.2014
@@ -102,4 +110,16 @@ Listado de casos: <1
 Editar un caso: 6.5
 Agregar etiqueta y guardar: 4
 Editar de nuevo: 5.1
+
+Fecha: 19.Abr.2014
+Servidor: V-2 (sin Internet)
+Cliente: V-2 (sin Internet)
+Autenticar: 2.76
+Lista de actividades: 1.3
+Editar una actividad: 2
+Lista de casos: 1.87
+Editar un caso: 10.27
+Agregar etiqueta y guardar: 5.26
+Editar de nuevo: 10.12
+
 
