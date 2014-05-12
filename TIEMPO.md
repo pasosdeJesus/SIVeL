@@ -7,7 +7,7 @@ SERVIDOR SJR-1:
 * AMD FX-6100 3315MHz, 6 núcleos
 * RAM: 8G
 * Disco: 2 discos de 1T
-* Conexión a Internet por Claro 10MB.
+* Conexión a Internet por Claro 10MB de bajada, 2MB de subida.
 * Plataforma: adJ 5.4, PostgreSQL 9.2.4, ruby 1.9, RoR 4.1.0rc1, unicorn 4.7.0
 
 
@@ -30,6 +30,10 @@ El mismo SJR-3 pero con
 * Plataforma: adJ 5.4p1, PostgreSQL 9.3.2, ruby 2.0.0, RoR 4.1.0, webricks
 
 
+SERVIDOR SJR-4:
+El mismo SJR-3 pero con
+* Conexión a Internet por Claro con fibra optica 6MB de subida, 12MB de bajada
+
 CLIENTE V-1:
 * AMD E-450. 1647.97 MHz
 * RAM: 4G
@@ -49,6 +53,20 @@ CLIENTE V-2:
 * Conexión a Internet por UNE Inalámbrico 2MB
 * Plataforma: OpenBSD current (5.6), chrome, ruby 2.1, rails 4.1
 
+CLIENTE V-2:
+* AMD E-450. 1647.97 MHz
+* RAM: 4G
+* Disco: 500G
+* Conexión a Internet por UNE Inalámbrico 2MB
+* Plataforma: OpenBSD current (5.6), chrome, ruby 2.1, rails 4.1
+
+
+CLIENTE BD-1:
+* AMD FX(tm)-8320 Eight-Core Processor 
+* RAM: 8G
+* Disco: 1T
+* Conectado en red Ethernet de 1G con SJR-4
+* Plataforma: adJ 5.4, chrome 28.0.1500.45
 
 Fecha: 19.Mar.2014
 Servidor: SJR-1
@@ -121,5 +139,16 @@ Lista de casos: 1.87
 Editar un caso: 10.27
 Agregar etiqueta y guardar: 5.26
 Editar de nuevo: 10.12
+
+Fecha: 12.May.2014
+Servidor: S-4
+Cliente: BD-1
+Autenticar: 6.39
+Lista de actividades: 1.3
+Editar una actividad: 1.55
+Lista de casos: 0.3
+Editar un caso: 5.3
+Agregar etiqueta y guardar: 2
+Editar de nuevo: 6.31
 
 
