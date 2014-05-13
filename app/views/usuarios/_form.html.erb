@@ -1,18 +1,12 @@
 <%= simple_form_for @usuario, :html => { :class => 'form-horizontal' } do |f| %>
-  <%= f.input :password %>
+  <%= f.input :id, label: "Código", readonly: true%>
+  <%= f.input :nusuario %>
   <%= f.input :nombre %>
   <%= f.input :descripcion %>
   <%= f.input :rol %>
   <%= f.input :idioma %>
   <%= f.input :email %>
   <%= f.input :encrypted_password %>
-  <%= f.input :reset_password_token %>
-  <%= f.input :reset_password_sent_at %>
-  <%= f.input :remember_created_at %>
-  <%= f.input :current_sign_in_at %>
-  <%= f.input :last_sign_in_at %>
-  <%= f.input :current_sign_in_ip %>
-  <%= f.input :last_sign_in_ip %>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

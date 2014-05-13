@@ -4,10 +4,8 @@
 </div>
 
 <dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:password) %>:</strong></dt>
-  <dd><%= @usuario.password %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:nombre) %>:</strong></dt>
-  <dd><%= @usuario.nombre %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:nusuario) %>:</strong></dt>
+  <dd><%= @usuario.usuario %></dd>
   <dt><strong><%= model_class.human_attribute_name(:descripcion) %>:</strong></dt>
   <dd><%= @usuario.descripcion %></dd>
   <dt><strong><%= model_class.human_attribute_name(:rol) %>:</strong></dt>
@@ -18,20 +16,6 @@
   <dd><%= @usuario.email %></dd>
   <dt><strong><%= model_class.human_attribute_name(:encrypted_password) %>:</strong></dt>
   <dd><%= @usuario.encrypted_password %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:reset_password_token) %>:</strong></dt>
-  <dd><%= @usuario.reset_password_token %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:reset_password_sent_at) %>:</strong></dt>
-  <dd><%= @usuario.reset_password_sent_at %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:remember_created_at) %>:</strong></dt>
-  <dd><%= @usuario.remember_created_at %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:current_sign_in_at) %>:</strong></dt>
-  <dd><%= @usuario.current_sign_in_at %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:last_sign_in_at) %>:</strong></dt>
-  <dd><%= @usuario.last_sign_in_at %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:current_sign_in_ip) %>:</strong></dt>
-  <dd><%= @usuario.current_sign_in_ip %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:last_sign_in_ip) %>:</strong></dt>
-  <dd><%= @usuario.last_sign_in_ip %></dd>
 </dl>
 
 <div class="form-actions">

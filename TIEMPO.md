@@ -7,7 +7,7 @@ SERVIDOR SJR-1:
 * AMD FX-6100 3315MHz, 6 núcleos
 * RAM: 8G
 * Disco: 2 discos de 1T
-* Conexión a Internet por Claro 10MB.
+* Conexión a Internet por Claro 10MB coaxial.  2M de subida.
 * Plataforma: adJ 5.4, PostgreSQL 9.2.4, ruby 1.9, RoR 4.1.0rc1, unicorn 4.7.0
 
 
@@ -28,6 +28,10 @@ El mismo SJR-1 pero con
 SERVIDOR SJR-3d:
 El mismo SJR-3 pero con
 * Plataforma: adJ 5.4p1, PostgreSQL 9.3.2, ruby 2.0.0, RoR 4.1.0, webricks
+
+SERVIDOR SJR-4:
+El mismo SJR-3 pero con
+* Conexión a Internet por Claro 12MB fibra óptica. 5M de subida.
 
 
 CLIENTE V-1:
@@ -121,5 +125,17 @@ Lista de casos: 1.87
 Editar un caso: 10.27
 Agregar etiqueta y guardar: 5.26
 Editar de nuevo: 10.12
+
+Fecha: 24.Abr.2014
+Servidor: SJR-4
+Cliente: V-2 (sin Internet)
+Autenticar: 2.76
+Lista de actividades: 1.3
+Editar una actividad: 2
+Lista de casos: 1.87
+Editar un caso: 10.27
+Agregar etiqueta y guardar: 5.26
+Editar de nuevo: 10.12
+
 
 
