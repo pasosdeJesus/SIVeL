@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class UsuariosController < ApplicationController
   before_action :set_usuario, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
@@ -26,8 +28,9 @@ class UsuariosController < ApplicationController
   # POST /usuarios.json
   def create
     @usuario = Usuario.new(usuario_params)
-    @usuario.password = 'x';
-    debugger;
+    @usuario.encrypted_password = BCrypt::Password.create(
+      params[:usuario][:encrypted_password],
+      {:cost => Rails.application.config.devise.stretches})
     respond_to do |format|
       if @usuario.save
         format.html { redirect_to @usuario, notice: 'Usuario was successfully created.' }
@@ -42,8 +45,10 @@ class UsuariosController < ApplicationController
   # PATCH/PUT /usuarios/1
   # PATCH/PUT /usuarios/1.json
   def update
-    debugger;
     if (!params[:usuario][:encrypted_password].nil?)
+      params[:usuario][:encrypted_password] = BCrypt::Password.create(
+        params[:usuario][:encrypted_password],
+        {:cost => Rails.application.config.devise.stretches})
     end
     respond_to do |format|
       if @usuario.update(usuario_params)

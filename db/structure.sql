@@ -33,20 +33,6 @@ CREATE COLLATION es_co_utf_8 (lc_collate = 'es_CO.UTF-8', lc_ctype = 'es_CO.UTF-
 
 
 --
--- Name: unaccent; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS unaccent WITH SCHEMA public;
-
-
---
--- Name: EXTENSION unaccent; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION unaccent IS 'text search dictionary that removes accents';
-
-
---
 -- Name: soundexesp(text); Type: FUNCTION; Schema: public; Owner: -
 --
 
@@ -2649,7 +2635,7 @@ CREATE SEQUENCE usuario_seq
 CREATE TABLE usuario (
     id integer DEFAULT nextval('usuario_seq'::regclass) NOT NULL,
     nusuario character varying(15) NOT NULL,
-    password character varying(64) NOT NULL,
+    password character varying(64) DEFAULT ''::character varying NOT NULL,
     nombre character varying(50) COLLATE public.es_co_utf_8,
     descripcion character varying(50),
     rol integer DEFAULT 4,
@@ -2657,7 +2643,7 @@ CREATE TABLE usuario (
     email character varying(255) DEFAULT ''::character varying NOT NULL,
     encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
     sign_in_count integer DEFAULT 0 NOT NULL,
-    fechacreacion date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     reset_password_token character varying(255),
     reset_password_sent_at timestamp without time zone,
@@ -2666,7 +2652,7 @@ CREATE TABLE usuario (
     last_sign_in_at timestamp without time zone,
     current_sign_in_ip character varying(255),
     last_sign_in_ip character varying(255),
-    created_at timestamp without time zone,
+    created_at timestamp without time zone DEFAULT ('now'::text)::date,
     updated_at timestamp without time zone,
     CONSTRAINT usuario_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion))),
     CONSTRAINT usuario_rol_check CHECK (((rol >= 1) AND (rol <= 4)))
@@ -3733,20 +3719,6 @@ ALTER TABLE ONLY vinculoestado
 
 
 --
--- Name: caso_memo; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX caso_memo ON caso USING gin (to_tsvector('spanish'::regconfig, unaccent(memo)));
-
-
---
--- Name: caso_titulo; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX caso_titulo ON caso USING gin (to_tsvector('spanish'::regconfig, unaccent((titulo)::text)));
-
-
---
 -- Name: index_actividad_on_rangoedadac_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3786,34 +3758,6 @@ CREATE INDEX index_actividad_rangoedadac_on_rangoedadac_id ON actividad_rangoeda
 --
 
 CREATE UNIQUE INDEX index_usuario_on_reset_password_token ON usuario USING btree (reset_password_token);
-
-
---
--- Name: persona_apellidos_nombres; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX persona_apellidos_nombres ON persona USING gin (to_tsvector('spanish'::regconfig, ((unaccent((apellidos)::text) || ' '::text) || unaccent((nombres)::text))));
-
-
---
--- Name: persona_apellidos_nombres_doc; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX persona_apellidos_nombres_doc ON persona USING gin (to_tsvector('spanish'::regconfig, ((((unaccent((apellidos)::text) || ' '::text) || unaccent((nombres)::text)) || ' '::text) || COALESCE((numerodocumento)::text, ''::text))));
-
-
---
--- Name: persona_nombres_apellidos; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX persona_nombres_apellidos ON persona USING gin (to_tsvector('spanish'::regconfig, ((unaccent((nombres)::text) || ' '::text) || unaccent((apellidos)::text))));
-
-
---
--- Name: persona_nombres_apellidos_doc; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX persona_nombres_apellidos_doc ON persona USING gin (to_tsvector('spanish'::regconfig, ((((unaccent((nombres)::text) || ' '::text) || unaccent((apellidos)::text)) || ' '::text) || COALESCE((numerodocumento)::text, ''::text))));
 
 
 --
@@ -5152,4 +5096,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140211172443');
 INSERT INTO schema_migrations (version) VALUES ('20140217100541');
 
 INSERT INTO schema_migrations (version) VALUES ('20140313012209');
+
+INSERT INTO schema_migrations (version) VALUES ('20140514142421');
 
