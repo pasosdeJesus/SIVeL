@@ -1379,7 +1379,7 @@ class ResConsulta
                 $vr_html = strip_tags(trim($sal[$conv[$cc]]));
             } else {
                 $vr_html = '';
-                //print_r($GLOBALS['ficha_tabuladores']);
+                //echo "<hr>"; var_dump($GLOBALS['ficha_tabuladores']);
                 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
                     list($n, $c, $o) = $tab;
                     if (($d = strrpos($c, "/"))>0) {

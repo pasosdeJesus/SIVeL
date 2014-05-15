@@ -2947,7 +2947,7 @@ if (!aplicado($idac)) {
             $db, "INSERT INTO trelacion (id, nombre, observaciones, 
         fechacreacion, fechadeshabilitacion, inverso) 
             VALUES ('PD', 'MADRASTRA(PADRASTRO)', '', 
-                '2011-09-21', NULL, 'HO');"
+                '2011-09-21', NULL, 'HO');", false
     );
 
     hace_consulta(

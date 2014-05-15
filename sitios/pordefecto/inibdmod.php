@@ -89,6 +89,7 @@ if (!function_exists("esta_nueva_ficha")) {
      */
     function esta_nueva_ficha($id)
     {
+        //echo "OJO esta_nueva_ficha($id)<br>";
         foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
             $puesto = $a[0];
             $nom = $a[1];
@@ -106,6 +107,7 @@ global $modulos;
 /* Rutas en particular donde haya subdirectorios DataObjects */
 $rutas_include = ini_get('include_path').
     ":.:$dirserv:$dirserv/$dirsitio:$dirsitio:";
+//echo "OJO modulos=$modulos<br>\n";
 $lm = explode(" ", $modulos);
 foreach ($lm as $m) {
     $rutas_include .= "$m:$m/DataObjects/:";
@@ -115,11 +117,13 @@ foreach ($lm as $m) {
 ini_set('include_path', $rutas_include);
 
 foreach ($lm as $m) {
+    //echo "OJO modulo $m<br>\n";
     if (file_exists("$m/conf.php")) {
-        include_once "$m/conf.php";
+        //echo "OJO existe<br>\n";
+        include "$m/conf.php";
     }
 }
-//echo "OJO antes de remplaza<hr>" ;print_r($GLOBALS['ficha_tabuladores']);
+//echo "<hr>OJO antes de remplaza " ;print_r($GLOBALS['ficha_tabuladores']);
 if (isset($GLOBALS['remplaza_ficha_tabuladores'])) {
     foreach ($GLOBALS['remplaza_ficha_tabuladores'] as $a) {
         $nom = $a[0];
@@ -139,9 +143,10 @@ if (isset($GLOBALS['remplaza_ficha_tabuladores'])) {
     }
 }
 
-//echo "OJO antes de elimina<hr>" ;print_r($GLOBALS['ficha_tabuladores']);
+//echo "<hr>OJO antes de elimina " ;print_r($GLOBALS['ficha_tabuladores']);
 if (isset($GLOBALS['elimina_ficha_tabuladores'])) {
     foreach ($GLOBALS['elimina_ficha_tabuladores'] as $idf) {
+        $puesto = -1;
         for ($nf = 0;
         $nf < count($GLOBALS['ficha_tabuladores']);
         $nf++
@@ -150,36 +155,42 @@ if (isset($GLOBALS['elimina_ficha_tabuladores'])) {
             if ($f[0] == $idf) {
                 $puestoelim = $f[2];
                 $puesto = $nf;
+                //echo "OJO ciclo 1 f[0]={$f[0]}, idf=$idf, puestoelim={$f[2]}, puesto=$nf<br>\n";
                 break;
             }
         }
-        $nft = array();
-        for ($nf = 0;
-        $nf < count($GLOBALS['ficha_tabuladores']) - 1;
-        $nf++
-        ) {
-            $f = $GLOBALS['ficha_tabuladores'][$nf];
-            $fpe = $f[2];
-            if ($fpe > $puestoelim) {
-                $f[2] = $fpe - 1;
-            }
-            if ($nf < $puesto) {
+        //echo "OJO puesto por eliminar: $puesto<br>\n";
+        if ($puesto >= 0) {
+            $nft = array();
+            for ($nf = 0;
+            $nf < count($GLOBALS['ficha_tabuladores']) - 1;
+            $nf++
+            ) {
+                if ($nf < $puesto) {
+                    $f = $GLOBALS['ficha_tabuladores'][$nf];
+                } else if ($nf >= $puesto) {
+                    $f = $GLOBALS['ficha_tabuladores'][$nf + 1];
+                }
+                $fpe = $f[2];
+                if ($fpe > $puestoelim) {
+                    $f[2] = $fpe - 1;
+                }
                 $nft[$nf] = $f;
-            } else if ($nf >= $puesto) {
-                $nft[$nf] = $GLOBALS['ficha_tabuladores'][$nf + 1];
             }
+            //echo "Tras eliminar 1: "; print_r($nft); echo "<br>";
+            $GLOBALS['ficha_tabuladores'] = $nft;
         }
-        $GLOBALS['ficha_tabuladores'] = $nft;
     }
 }
 
-//echo "OJO antes de nuevas<hr>" ;print_r($GLOBALS['ficha_tabuladores']);
+//echo "<hr>OJO antes de nuevas " ;print_r($GLOBALS['ficha_tabuladores']);
 if (isset($GLOBALS['nueva_ficha_tabuladores'])) {
     foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
         $puesto = $a[0];
         $nom = $a[1];
         $arc = $a[2];
         $puestoelim = $a[3];
+        //echo "OJO Por agregar $nom<br>\n";
         $nft = array();
         $incluida = false;
         for ($nf = 0; $nf < count($GLOBALS['ficha_tabuladores']); $nf++) {
@@ -206,4 +217,4 @@ if (isset($GLOBALS['nueva_ficha_tabuladores'])) {
     }
 }
 
-//var_dump($GLOBALS['ficha_tabuladores']);
+//echo "<hr>OJO Final inibd<br>\n"; var_dump($GLOBALS['ficha_tabuladores']);

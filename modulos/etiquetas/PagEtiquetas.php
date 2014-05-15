@@ -454,7 +454,6 @@ class PagEtiquetas extends PagBaseSimple
      */
     static function resConsultaFilaTabla(&$db, $cc, $idcaso)
     {
-        die("x");
         $vr = "";
         if (!isset($_POST[$cc])) {
             return $vr;
