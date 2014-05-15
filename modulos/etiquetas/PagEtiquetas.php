@@ -442,6 +442,42 @@ class PagEtiquetas extends PagBaseSimple
     }
 
     /**
+     * Llamada desde la función que muestra cada fila de la tabla en
+     * ResConsulta.
+     * Hace posible modificar la tabla.
+     *
+     * @param object &$db    Base de datos
+     * @param string $cc     Campo que se procesa
+     * @param int    $idcaso Número de caso
+     *
+     * @return Cadena por presentar
+     */
+    static function resConsultaFilaTabla(&$db, $cc, $idcaso)
+    {
+        die("x");
+        $vr = "";
+        if (!isset($_POST[$cc])) {
+            return $vr;
+        }
+        $nc = substr($cc, 2);
+        if ($nc == 'etiquetas') {
+            $q = "SELECT etiqueta.nombre FROM etiqueta, caso_etiqueta
+                WHERE caso_etiqueta.id_etiqueta=etiqueta.id 
+                AND caso_etiqueta.id_caso='$idcaso'";
+            $r = hace_consulta($db, $q);
+            sin_error_pear($r);
+            $row = array();
+            $html_sep = "";
+            while ($r->fetchInto($row)) {
+                $vr .= $html_sep . htmlentities($row[0], ENT_COMPAT, 'UTF-8');
+                $html_sep = ", ";
+            }
+        }
+
+        return $vr;
+    }
+
+    /**
      * Llamada desde consolidado para completar consulta SQL en caso
      *
      * @param object &$db     Conexión a B.D

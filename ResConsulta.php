@@ -1379,11 +1379,13 @@ class ResConsulta
                 $vr_html = strip_tags(trim($sal[$conv[$cc]]));
             } else {
                 $vr_html = '';
+                //print_r($GLOBALS['ficha_tabuladores']);
                 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
                     list($n, $c, $o) = $tab;
                     if (($d = strrpos($c, "/"))>0) {
                         $c = substr($c, $d+1);
                     }
+                    //echo $c;
                     if (is_callable(array($c, 'resConsultaFilaTabla'))) {
                         $vr_html .= call_user_func_array(
                             array($c, 'resConsultaFilaTabla'),
