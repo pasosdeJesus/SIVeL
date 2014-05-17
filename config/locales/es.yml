@@ -27,5 +27,9 @@ es:
         memo: Descripción
         created_at: F. Creación
         fecha: F. Hecho
-
+      usuario:
+        nusuario: Usuario
+        descripcion: Descripción
+        encrypted_password: Clave cifrada
+        created_at: Fecha Registro
 

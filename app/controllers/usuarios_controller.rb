@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class UsuariosController < ApplicationController
   before_action :set_usuario, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
@@ -26,7 +28,9 @@ class UsuariosController < ApplicationController
   # POST /usuarios.json
   def create
     @usuario = Usuario.new(usuario_params)
-
+    @usuario.encrypted_password = BCrypt::Password.create(
+      params[:usuario][:encrypted_password],
+      {:cost => Rails.application.config.devise.stretches})
     respond_to do |format|
       if @usuario.save
         format.html { redirect_to @usuario, notice: 'Usuario was successfully created.' }
@@ -41,6 +45,11 @@ class UsuariosController < ApplicationController
   # PATCH/PUT /usuarios/1
   # PATCH/PUT /usuarios/1.json
   def update
+    if (!params[:usuario][:encrypted_password].nil?)
+      params[:usuario][:encrypted_password] = BCrypt::Password.create(
+        params[:usuario][:encrypted_password],
+        {:cost => Rails.application.config.devise.stretches})
+    end
     respond_to do |format|
       if @usuario.update(usuario_params)
         format.html { redirect_to @usuario, notice: 'Usuario was successfully updated.' }
@@ -70,6 +79,6 @@ class UsuariosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def usuario_params
-      params.require(:usuario).permit(:id, :password, :nombre, :descripcion, :rol, :idioma, :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip)
+      params.require(:usuario).permit(:id, :nusuario, :password, :nombre, :descripcion, :rol, :idioma, :email, :encrypted_password, :reset_password_token, :reset_password_sent_at, :remember_created_at, :sign_in_count, :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip, :last_sign_in_ip)
     end
 end

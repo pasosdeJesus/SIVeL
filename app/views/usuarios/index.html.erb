@@ -6,20 +6,12 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:password) %></th>
+      <th><%= model_class.human_attribute_name(:nusuario) %></th>
       <th><%= model_class.human_attribute_name(:nombre) %></th>
       <th><%= model_class.human_attribute_name(:descripcion) %></th>
       <th><%= model_class.human_attribute_name(:rol) %></th>
       <th><%= model_class.human_attribute_name(:idioma) %></th>
       <th><%= model_class.human_attribute_name(:email) %></th>
-      <th><%= model_class.human_attribute_name(:encrypted_password) %></th>
-      <th><%= model_class.human_attribute_name(:reset_password_token) %></th>
-      <th><%= model_class.human_attribute_name(:reset_password_sent_at) %></th>
-      <th><%= model_class.human_attribute_name(:remember_created_at) %></th>
-      <th><%= model_class.human_attribute_name(:current_sign_in_at) %></th>
-      <th><%= model_class.human_attribute_name(:last_sign_in_at) %></th>
-      <th><%= model_class.human_attribute_name(:current_sign_in_ip) %></th>
-      <th><%= model_class.human_attribute_name(:last_sign_in_ip) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -28,20 +20,12 @@
     <% @usuarios.try(:each) do |usuario| %>
       <tr>
         <td><%= link_to usuario.id, usuario_path(usuario) %></td>
-        <td><%= usuario.password %></td>
+        <td><%= usuario.nusuario %></td>
         <td><%= usuario.nombre %></td>
         <td><%= usuario.descripcion %></td>
         <td><%= usuario.rol %></td>
         <td><%= usuario.idioma %></td>
         <td><%= usuario.email %></td>
-        <td><%= usuario.encrypted_password %></td>
-        <td><%= usuario.reset_password_token %></td>
-        <td><%= usuario.reset_password_sent_at %></td>
-        <td><%= usuario.remember_created_at %></td>
-        <td><%= usuario.current_sign_in_at %></td>
-        <td><%= usuario.last_sign_in_at %></td>
-        <td><%= usuario.current_sign_in_ip %></td>
-        <td><%= usuario.last_sign_in_ip %></td>
         <td><%= usuario.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
