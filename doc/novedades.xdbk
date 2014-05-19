@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
+	<varlistentry><term>Versión 1.2b2 (Jun.2014)</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem><para>
+Módulo etiquetas permite agregar una columna con etiquetas en consulta web.  
+En <filename>conf.php</filename> agregar en <literal>cwncampos</literal>:
+<screen>
+'m_etiquetas' => _('Etiquetas'),
+</screen>
+
+	
+					</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
 	<varlistentry><term>Versión 1.2b1 (Mar.2014)</term>
 		<listitem>
 			<para><itemizedlist>
