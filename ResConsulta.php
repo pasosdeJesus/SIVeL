@@ -1195,11 +1195,13 @@ class ResConsulta
                 }
             }
         }
-        $html_renglon = "<tr style='background-color: " .
-            htmlentities($col, ENT_COMPAT, 'UTF-8') .
-            "'>";
+        $html_renglon = "<tr>";
         foreach ($campos as $cc => $nc) {
-            $html_renglon .= "<td valign='top'>";
+            $html_renglon .= "<td valign='top'";
+            if ($cc == "caso_id") {
+                $html_renglon .= "style='background-color: " .  htmlentities($col, ENT_COMPAT, 'UTF-8') .  "'";
+            }
+            $html_renglon .= ">";
             $sep = "";
             $vr_html = $vrescon = $vrpre = $vrpost = "";
             // No se sacaron responsables y demás directamente en
