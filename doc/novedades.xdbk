@@ -10,9 +10,11 @@ En <filename>conf.php</filename> agregar en <literal>cwncampos</literal>:
 <screen>
 'm_etiquetas' => _('Etiquetas'),
 </screen>
-
-	
 					</para></listitem>
+					<listitem><para>
+En consulta web como tabla color de un caso ahora sólo en el código (no en toda la fila).
+					</para></listitem>
+
 			</itemizedlist></para>
 		</listitem>
 	</varlistentry>
