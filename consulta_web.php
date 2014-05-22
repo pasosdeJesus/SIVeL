@@ -595,9 +595,11 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $sel->setSize(5);
         ResConsulta::llenaSelCategoria(
             $db,
-            "SELECT id_tviolencia, id_supracategoria, " .
-            "id FROM categoria ORDER BY id_tviolencia," .
-            "id_supracategoria, id;",
+            "SELECT id_tviolencia, id_supracategoria, id 
+            FROM categoria 
+            WHERE fechadeshabilitacion IS NULL
+            ORDER BY id_tviolencia,
+            id_supracategoria, id;",
             $sel
         );
         if ($pCategoria == 'belicas') {
