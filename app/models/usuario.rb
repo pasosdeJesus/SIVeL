@@ -7,6 +7,8 @@ class Usuario < ActiveRecord::Base
 	has_many :caso_etiqueta, foreign_key: "id_usuario", validate: true
 	has_many :casosjr, foreign_key: "asesor", validate: true
 
+  belongs_to :regionsjr
+
   #http://stackoverflow.com/questions/1200568/using-rails-how-can-i-set-my-primary-key-to-not-be-an-integer-typed-column
   self.primary_key=:id
 
@@ -19,5 +21,9 @@ class Usuario < ActiveRecord::Base
   validates_presence_of   :encrypted_password, :on=>:create
   validates_confirmation_of   :encrypted_password, :on=>:create
   #validates_length_of :password, :within => Devise.password_length, :allow_blank => true
+  validates :regionsjr, presence: true, 
+    unless: Proc.new { |u| u.rol == Ability::ROLADMIN || 
+      u.rol == Ability::ROLINV || 
+      u.rol == Ability::ROLDIR }
 
 end
