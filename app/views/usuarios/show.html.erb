@@ -6,10 +6,14 @@
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:nusuario) %>:</strong></dt>
   <dd><%= @usuario.nusuario %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:descripcion) %>:</strong></dt>
-  <dd><%= @usuario.descripcion %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:regionsjr) %>:</strong></dt>
+  <dd><%= if @usuario.regionsjr.nil? then "Nacional" else @usuario.regionsjr.nombre end %></dd>
+  <% if !@usuario.descripcion.nil? && @usuario.descripcion.length > 0 then %>
+    <dt><strong><%= model_class.human_attribute_name(:descripcion) %>:</strong></dt>
+    <dd><%= @usuario.descripcion %></dd>
+  <% end %>
   <dt><strong><%= model_class.human_attribute_name(:rol) %>:</strong></dt>
-  <dd><%= @usuario.rol %></dd>
+  <dd><%= Ability::ROLES[@usuario.rol-1][0] %></dd>
   <dt><strong><%= model_class.human_attribute_name(:idioma) %>:</strong></dt>
   <dd><%= @usuario.idioma %></dd>
   <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
