@@ -1,0 +1,23 @@
+<%= simple_form_for @basica, 
+  url: @basica.id.nil? ? (admin_basicas_path(@basica)) : 
+    admin_basica_path(@basica), 
+  html: { class: 'form-horizontal' } do |f| %>
+    <% atributos_index.each do |atr|  %>
+      <% if atr != "id" || @basica.class.columns_hash[atr].type != :integer then %>
+        <% if @basica.class.columns_hash[atr].type == :date then %>
+          <%= f.input atr.to_sym,
+            :input_html => { "data-behaviour" => "datepicker"}, 
+            :as => :string 
+          %>
+        <% else %>
+          <%= f.input atr.to_sym %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <div class="form-actions">
+      <%= f.button :submit, :class => 'btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+        admin_basicas_path(@basica), :class => 'btn' 
+      %>
+    </div>
+<% end %>

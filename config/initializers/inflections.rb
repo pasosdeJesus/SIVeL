@@ -17,9 +17,12 @@
 ActiveSupport::Inflector.inflections do |inflect|
 	inflect.plural /^(.*s)$/i, '\1es'
 	inflect.singular /^(.*s)es$/i, '\1'
+	inflect.plural /^(.*a)$/i, '\1s'
 	inflect.plural /^(.*d)$/i, '\1es'
 	inflect.singular /^(.*d)es$/i, '\1'
 	inflect.irregular 'actividad', 'actividades'
+	inflect.irregular 'ayudaestado', 'ayudasestado'
+	inflect.irregular 'clase', 'clases'
 	inflect.irregular 'etiqueta', 'etiqueta'
 	inflect.irregular 'respuesta', 'respuesta'
 	inflect.irregular 'error', 'errores'

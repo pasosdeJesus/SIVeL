@@ -1,11 +1,22 @@
 
 es:
+  attributes:
+    fechacreacion: Creación
+    fechadeshabilitacion: Deshabilitación 
   will_paginate:
     previous_label: "&#8592; Anterior"
     next_label: "&#8594; Siguiente"
     page_gap: "&hellip;"
   activerecord:
     attributes:
+      fechacreacion: Creación
+      fechadeshabilitacion: Deshabilitación 
+      actividadarea: 
+        Actividadarea: Área de Actividad
+        Actividadareas: Áreas de Actividades
+      ayudaestado: 
+        Ayudaestado: Ayuda del Estado
+        Ayudasestado: Ayudas del Estado
       actividad: 
         id: Identificación
         numero: Número
@@ -29,6 +40,7 @@ es:
         fecha: F. Hecho
       usuario:
         nusuario: Usuario
+        regionsjr: Oficina
         descripcion: Descripción
         encrypted_password: Clave cifrada
         created_at: Fecha Registro

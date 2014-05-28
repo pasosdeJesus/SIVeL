@@ -10,7 +10,6 @@ Sivel2::Application.routes.draw do
   get "hogar" => 'hogar#index'
 
   resources :actividades, path_names: { new: 'nueva', edit: 'edita' }
-  resources :actividadareas, path_names: { new: 'nueva', edit: 'edita' }
   resources :casos, path_names: { new: 'nuevo', edit: 'edita' }
 
   devise_scope :usuario do
@@ -18,6 +17,42 @@ Sivel2::Application.routes.draw do
   end
   devise_for :usuarios
   resources :usuarios, path_names: { new: 'nuevo', edit: 'edita' } 
+
+  #get 'admin/actividadareas', to: 'actividadareas', as: :actividadareas_path
+  namespace :admin do
+    Ability.tablasbasicas.each do |t|
+        resources t.pluralize.to_sym, path_names: { new: 'nueva', edit: 'edita' }
+    end
+    #resources :actividadareas, path_names: { new: 'nueva', edit: 'edita' }
+    #resources :ayudasestado, path_names: { new: 'nueva', edit: 'edita' }
+    #resources :etnia, path_names: { new: 'nueva', edit: 'edita' }
+    #resources :tsitio, path_names: { new: 'nueva', edit: 'edita' }
+    #resources :clase, path_names: { new: 'nueva', edit: 'edita' }
+    #resources :idioma, path_names: { new: 'nueva', edit: 'edita' }
+# departamento
+# municipio
+# actividadoficio
+# aslegal
+# aspsicosocial
+# ayudasjr
+# categoria
+# causaref
+# desplazamiento
+# emprendimiento
+# escolaridad
+# estadocivil
+# etiqueta
+# iglesia
+# maternidad
+# pais
+# presponsable
+# profesion
+# proteccion
+# regionsjr
+# rolfamilia
+# statusmigratorio
+# tsitio
+  end
 
   root 'hogar#index'
 
