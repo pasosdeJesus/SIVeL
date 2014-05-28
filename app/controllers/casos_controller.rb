@@ -21,7 +21,7 @@ class CasosController < ApplicationController
     @caso.casosjr = Casosjr.new
     @caso.casosjr.fecharec = DateTime.now.strftime('%Y-%m-%d')
     @caso.casosjr.asesor = current_usuario.id
-    @caso.casosjr.regionsjr = Regionsjr.find(1)
+    @caso.casosjr.regionsjr = current_usuario.regionsjr_id
     per = Persona.new
     per.nombres = 'N'
     per.apellidos = 'N'
@@ -184,6 +184,9 @@ class CasosController < ApplicationController
 
   # GET /casos/1/edit
   def edit
+    @caso = Caso.find(params[:id])
+    unauthorized! if (cannot? :edit, @caso)
+    #unauthorized! if  current_usuaurio.rol == ROLSIST and caso.regi 
   end
 
   # POST /casos
