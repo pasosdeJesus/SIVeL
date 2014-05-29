@@ -8,6 +8,7 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:nusuario) %></th>
       <th><%= model_class.human_attribute_name(:nombre) %></th>
+      <th><%= model_class.human_attribute_name(:regionsjr) %></th>
       <th><%= model_class.human_attribute_name(:descripcion) %></th>
       <th><%= model_class.human_attribute_name(:rol) %></th>
       <th><%= model_class.human_attribute_name(:idioma) %></th>
@@ -22,11 +23,12 @@
         <td><%= link_to usuario.id, usuario_path(usuario) %></td>
         <td><%= usuario.nusuario %></td>
         <td><%= usuario.nombre %></td>
+        <td><%= usuario.regionsjr.nombre if !usuario.regionsjr.nil? %></td>
         <td><%= usuario.descripcion %></td>
         <td><%= usuario.rol %></td>
         <td><%= usuario.idioma %></td>
         <td><%= usuario.email %></td>
-        <td><%= usuario.created_at %></td>
+        <td><%= usuario.created_at.strftime('%Y-%m-%d') %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_usuario_path(usuario), :class => 'btn btn-mini' %>
@@ -41,6 +43,7 @@
   </tbody>
 </table>
 
+<%= will_paginate @usuario, { param_name: :pagina }  %>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_usuario_path,
             :class => 'btn btn-primary' %>

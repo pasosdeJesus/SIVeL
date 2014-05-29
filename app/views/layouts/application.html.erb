@@ -47,13 +47,22 @@
       <% end %>
       <%= menu_group :pull => :right do %>
         <% if !current_usuario.nil? %>
-          <% if current_usuario.rol == 1 %>
-						<%= drop_down "Administrar" do %>
-						  <%= menu_item "Usuarios", usuarios_path %>
-							<%= menu_item "Áreas de Actividades", actividadareas_path %>
-						<% end %>
+					<%= drop_down "Administrar" do %>
+            <%= menu_item "Clave", usuarios_path %>
+            <% if current_usuario.rol == Ability::ROLADMIN %>
+              <%= menu_item "Usuarios", usuarios_path %>
+              <%= drop_down_divider %>
+              <% Ability.tablasbasicas.each do |t| %>
+                <% k = t.capitalize.constantize %>
+                <% n = k.human_attribute_name(t.pluralize.capitalize) %>
+                <% l = send("admin_" + t.pluralize + "_path") %>
+                <%= menu_item n, l %>
+              <% end %>
+
+              <!-- %= #menu_item "Casos", admin_casos_path % -->
+				    <% end %>
           <% end %>
-					<%= menu_item "Cerrar Sesión de #{current_usuario.nusuario}", sign_out_path %>
+				  <%= menu_item "Cerrar Sesión de #{current_usuario.nusuario}", sign_out_path %>
         <% else %>
           <%= menu_item "Acerca de", acercade_path %>
           <%= menu_item "Iniciar Sesión", "/usuarios/sign_in" %>

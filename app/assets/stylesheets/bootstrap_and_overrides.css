@@ -19,3 +19,7 @@
 	border-radius: 10px;
 	-webkit-border-radius: 10px;
 }
+
+.page-header {
+	margin: 30px 0 30px;
+}
