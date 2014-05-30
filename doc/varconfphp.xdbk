@@ -21,6 +21,8 @@
 <listitem><para> Año mínimo que puede elegirse en fechas de la Ficha</para></listitem></varlistentry>
 <varlistentry><term><literal>actoscolectivos</literal></term>
 <listitem><para> Indica si en la pestaña Actos deben presentarse actos colectivos</para></listitem></varlistentry>
+<varlistentry><term><literal>presponsables_otrasagresiones</literal></term>
+<listitem><para> Indica si en la pestaña Presuntos Responsables se deja Otras Agresiones</para></listitem></varlistentry>
 <varlistentry><term><literal>persona_en_caso</literal></term>
 <listitem><para> Consulta adicional para determinar casos en los que aparece una</para></listitem></varlistentry>
 <varlistentry><term><literal>reporte_tabla_fila_totales</literal></term>
@@ -59,6 +61,8 @@
 <listitem><para> Separar departamento y municipio en columas aparte</para></listitem></varlistentry>
 <varlistentry><term><literal>reptabla_separa_nomap</literal></term>
 <listitem><para> Separar nombre y apellido en columas aparte</para></listitem></varlistentry>
+<varlistentry><term><literal>reptabla_tipificacion_breve</literal></term>
+<listitem><para> En reporte tabla mostrar forma resumida de agresión</para></listitem></varlistentry>
 <varlistentry><term><literal>receptor_correo</literal></term>
 <listitem><para> Dirección de correo a la cual enviar mensajes cifrados.</para></listitem></varlistentry>
 <varlistentry><term><literal>emisor_correo</literal></term>
@@ -66,9 +70,9 @@
 <varlistentry><term><literal>validaciones_tipicas</literal></term>
 <listitem><para> Validaciones indice es mensaje de error y valor es consulta SQL</para></listitem></varlistentry>
 <varlistentry><term><literal>gancho_valida_caso</literal></term>
-<listitem><para> Funciones para validar caso de manera más compleja que con </para></listitem></varlistentry>
+<listitem><para> Funciones para validar caso de manera más compleja que con</para></listitem></varlistentry>
 <varlistentry><term><literal>gancho_valida_base</literal></term>
-<listitem><para> Funciones para validar base de datos de manera más compleja que con </para></listitem></varlistentry>
+<listitem><para> Funciones para validar base de datos de manera más compleja que con</para></listitem></varlistentry>
 <varlistentry><term><literal>cabezote_consulta_web</literal></term>
 <listitem><para> Cabezote en consulta_web.</para></listitem></varlistentry>
 <varlistentry><term><literal>pie_consulta_web</literal></term>

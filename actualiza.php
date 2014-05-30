@@ -1058,6 +1058,148 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Relaciones familiares refinadas');
 }
 
+$idac = '1.2-et';
+if (!aplicado($idac)) {
+
+    // 24 y 21 repetidos
+    hace_consulta($db, "UPDATE victima SET id_etnia='21' WHERE id_etnia='24'");
+    hace_consulta($db, "DELETE FROM etnia WHERE id='24'");
+
+    $ae =array(
+        array(1, 'SIN INFORMACIÓN', ''),
+        array(2, 'MESTIZO', ''),
+        array(3, 'BLANCO', ''),
+        array(4, 'NEGRO', '200'),
+        array(5, 'INDÍGENA', ''),
+        array(6, 'ACHAGUA', '1'),
+        array(7, 'ANDAKÍ', ''),
+        array(8, 'ANDOQUE', '3'),
+        array(9, 'ARHUACO', '4'),
+        array(10, 'AWA', '5'),
+        array(11, 'BARÁ', '6'),
+        array(12, 'BARASANA', '7'),
+        array(13, 'BARÍ', '8'),
+        array(14, 'CAMSA - KAMSA', '35'),
+        array(15, 'CARIJONA', '13'),
+        array(16, 'COCAMA', '16'),
+        array(17, 'COFÁN', '18'),
+        array(18, 'COREGUAJE - KOREGUAJE', '37'),
+        array(19, 'CUBEO', '20'),
+        array(20, 'CUIBA', '21'),
+        array(21, 'CHIMILA', ''),
+        array(22, 'DESANO', '23'),
+        array(23, 'EMBERA', '25'),
+        array(25, 'GUAMBIANO', '29'),
+        array(26, 'GUANANO - GUANACA', '30'),
+        array(27, 'GUAYABERO', '31'),
+        array(28, 'HUITOTO - WITOTO', '73'),
+        array(29, 'INGA', '34'),
+        array(30, 'JUPDA', ''),
+        array(31, 'KARAPANA - CARAPANA', '12'),
+        array(32, 'KOGUI', '36'),
+        array(33, 'CURRIPACO', '22'),
+        array(34, 'MACUNA', '41'),
+        array(35, 'MACAGUAJE', '39'),
+        array(36, 'MOCANÁ', ''),
+        array(37, 'MUISCA', '46'),
+        array(38, 'NASA - PAÉZ', '49'),
+        array(39, 'NUKAK', ''),
+        array(40, 'PASTOS', '50'),
+        array(41, 'PIAPOCO', '51'),
+        array(42, 'PIJAO', ''),
+        array(43, 'PIRATAPUYO', '53'),
+        array(44, 'PUINAVE', '55'),
+        array(45, 'SÁLIBA', '56'),
+        array(46, 'SIKUANI', '57'),
+        array(47, 'SIONA', '58'),
+        array(48, 'TATUYO', '64'),
+        array(49, 'TINIGUA', ''),
+        array(50, 'TUCANO', '67'),
+        array(51, 'UMBRÁ', ''),
+        array(52, 'U´WA', '70'),
+        array(53, 'WAYUU', '72'),
+        array(54, 'WIWA - WIWUA', '74'),
+        array(55, 'WOUNAAN', '75'),
+        array(56, 'YAGUA', '76'),
+        array(57, 'YANACONA', '77'),
+        array(58, 'YUCUNA', '79'),
+        array(59, 'YUKPA', ''),
+        array(60, 'ROM', '400')
+    );
+    foreach($ae as $g) {
+        $d = $g[2];
+        if ($d != '') {
+            $d .= ' en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls';
+        }
+        $q = "UPDATE etnia SET nombre='{$g[1]}', 
+            descripcion='{$d} '
+            WHERE id='{$g[0]}'";
+        hace_consulta($db, $q);
+    }
+
+    $ng = array(
+        array(61, 'AMORUA', '2'),
+        array(62, 'BETOYE', '9'),
+        array(63, 'BORA', '10'),
+        array(64, 'CABIYARI', '11'),
+        array(65, 'CARAMANTA', '84'),
+        array(66, 'CHAMI', '86'),
+        array(67, 'CHIMILA', '14'),
+        array(68, 'CHIRICOA', '15'),
+        array(69, 'COCONUCO', '17'),
+        array(70, 'COROCORO', '87'),
+        array(71, 'COYAIMA-NATAGAIMA', '19'),
+        array(72, 'DATUANA', '88'),
+        array(73, 'DUJOS', '24'),
+        array(74, 'EMBERA CATIO', '26'),
+        array(75, 'EMBERA CHAMI', '27'),
+        array(76, 'EMBERA SIAPIDARA', '28'),
+        array(77, 'KATIO', '85'),
+        array(78, 'LETUAMA', '38'),
+        array(79, 'MASIGUARE', '42'),
+        array(80, 'MATAPI', '43'),
+        array(81, 'MUINANE', '45'),
+        array(82, 'MURA', '90'),
+        array(83, 'NONUYA', '47'),
+        array(84, 'OCAINA', '48'),
+        array(85, 'PAYOARINI', '91'),
+        array(86, 'PIAROA', '52'),
+        array(87, 'PISAMIRA', '54'),
+        array(88, 'POLINDARA', '94'),
+        array(89, 'QUIYASINGAS', '93'),
+        array(90, 'SIRIANO', '59'),
+        array(91, 'SIRIPU', '60'),
+        array(92, 'TAIWANO', '61'),
+        array(93, 'TAMA', '92'),
+        array(94, 'TANIMUKA', '62'),
+        array(95, 'TARIANO', '63'),
+        array(96, 'TIKUNAS', '65'),
+        array(97, 'TULE', '68'),
+        array(98, 'TUYUCA', '69'),
+        array(99, 'WANANO', '71'),
+        array(100, 'YAUNA', '78'),
+        array(101, 'YUKO', '80'),
+        array(102, 'GARÚ', '89'),
+        array(103, 'GUAYUÚ', '32'),
+        array(104, 'HITNÚ', '33'),
+        array(105, 'MACÚ', '40'),
+        array(106, 'MIRAÑA', '44'),
+        array(107, 'TOTORÓ', '66'),
+        array(108, 'YURUTÍ', '82'),
+        array(109, 'YURÍ', '81'),
+        array(110, 'ZENÚ', '83 ')
+    );
+    foreach($ng as $g) {
+        hace_consulta(
+            $db, "INSERT INTO etnia (id, nombre, descripcion, fechacreacion) 
+            VALUES ({$g[0]}, '{$g[1]}', '{$g[2]} en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls', 
+            '2014-05-30')", false
+        );
+    }
+
+    aplicaact($act, $idac, 'Listado de etnias mejorado');
+}
+
 $idac = '1.3-cp';
 if (!aplicado($idac)) {
     
