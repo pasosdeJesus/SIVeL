@@ -5,6 +5,9 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>
+							Listado de etnias completado con <ulink url="http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls"></ulink>.
+					</para></listitem>
+					<listitem><para>
 Módulo etiquetas permite agregar una columna con etiquetas en consulta web.  
 En <filename>conf.php</filename> agregar en <literal>cwncampos</literal>:
 <screen>
