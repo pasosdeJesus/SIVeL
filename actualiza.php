@@ -3159,11 +3159,11 @@ if (!aplicado($idac)) {
         array(110, 'ZENÚ', '83 ')
     );
     foreach($ng as $g) {
-        hace_consulta(
-            $db, "INSERT INTO etnia (id, nombre, descripcion, fechacreacion) 
-            VALUES ({$g[0]}, '{$g[1]}', '{$g[2]} en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls', 
-            '2014-05-30')", false
-        );
+        $q = "INSERT INTO etnia (id, nombre, descripcion, fechacreacion) 
+            VALUES ({$g[0]}, '{$g[1]}', 
+            '{$g[2]} en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls', 
+            '2014-05-30')";
+        hace_consulta($db, $q, false);
     }
 
     aplicaact($act, $idac, 'Listado de etnias mejorado');
