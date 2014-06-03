@@ -7,7 +7,28 @@
   <% atributos_index.each do |atr|  %>
     <% if !@basica[atr].nil? && @basica[atr].to_s.length > 0 %>
       <dt><strong><%= model_class.human_attribute_name(atr.to_sym) %>:</strong></dt>
-      <dd><%= @basica[atr] %></dd>
+      <% if atr == 'id_pais' then %>
+        <dd><%= Pais.find(@basica[atr]).nombre %></dd>
+      <% elsif atr == 'id_departamento' then %>
+        <dd><%= Departamento.find(@basica[atr]).nombre %></dd>
+      <% elsif atr == 'id_municipio' then %>
+        <dd><%= Municipio.find(@basica[atr]).nombre %></dd>
+      <% elsif atr == "id_tclase" then %>
+        <dd><%= Tclase.find(@basica[atr]).nombre%></dd>
+      <% elsif atr == "id_supracategoria" then %>
+        <dd><%= Supracategoria.find(@basica[atr]).nombre%></dd>
+      <% elsif atr == "id_tviolencia" then %>
+        <dd><%= Tviolencia.find(@basica[atr]).nombre%></dd>
+      <% elsif atr == "id_pconsolidado" then %>
+        <dd><%= Pconsolidado.find(@basica[atr]).nombre%></dd>
+      <% elsif atr == "tipocat" then %>
+        <dd>
+        <% h={C: "Colectivo", I: "Individual", O: "Otro"} %>
+        <%= h[@basica[atr].to_sym]%>
+        </dd>
+      <% else %>
+        <dd><%= @basica[atr] %></dd>
+      <% end%>
     <% end %>
   <% end %>
 </dl>

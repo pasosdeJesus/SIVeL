@@ -13,17 +13,14 @@ module Admin
       @basica = Etnia.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def etnia_params
-      params.require(:etnia).permit(
-        :nombre, :descripcion, :fechacreacion, :fechadeshabilitacion
-      )
-    end
-
     def atributos_index
       ["id", "nombre", "descripcion", "fechacreacion", "fechadeshabilitacion"]
     end
 
-    helper_method :clase, :atributos_index
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def etnia_params
+      params.require(:etnia).permit(*atributos_form)
+    end
+
   end
 end

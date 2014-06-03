@@ -12,8 +12,17 @@ class Ability
       ["Director Nacional", ROLDIR], ["Coordinador oficina", ROLCOOR], 
       ["Analista nacional", ROLANALI], ["Sistematizador oficina", ROLSIST]]
 
-  @@tablasbasicas = [ "actividadarea", "ayudaestado",
-    "clase"
+  @@tablasbasicas = [
+    'actividadarea', 'actividadoficio', 'aslegal', 'aspsicosocial', 'ayudasjr', 
+    'categoria', 'causaref', 'clase', 
+    'departamento', 
+    'emprendimiento', 'escolaridad', 'estadocivil', 'etiqueta', 'etnia', 
+    'idioma', 'iglesia', 
+    'maternidad', 'municipio', 
+    'pais', 'presponsable', 'profesion', 'proteccion', 
+    'rangoedad', 'regionsjr', 'rolfamilia', 
+    'statusmigratorio', 'supracategoria',
+    'tclase', 'tsitio', 'tviolencia'
   ]
 
   def self.tablasbasicas

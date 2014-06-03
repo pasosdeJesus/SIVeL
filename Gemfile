@@ -49,6 +49,7 @@ gem "bcrypt"
 gem "tzinfo"
 gem "tzinfo-data"
 
+gem "rspec", group: [:development, :test]
 gem "rspec-rails", group: [:development, :test]
 gem "cucumber-rails", group: "test", :require => false
 gem "capybara", group: [:development, :test]

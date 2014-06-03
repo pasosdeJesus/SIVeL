@@ -7,7 +7,7 @@
     <tr>
       <!-- Idea from http://blog.crowdint.com/2013/08/22/rails-template-inheritance.html -->
       <% atributos_index.each do |atr| %>
-        <th><%= model_class.human_attribute_name(atr) %></th>
+          <th><%= model_class.human_attribute_name(atr) %></th>
       <% end %>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -16,7 +16,28 @@
     <% @basica.try(:each) do |basica| %>
       <tr>
         <% atributos_index.each do |atr| %>
-          <td><%= basica[atr] %></td>
+          <% if atr == "id_pais" then %>
+            <td><%= Pais.find(basica[atr]).nombre%></td>
+          <% elsif atr == "id_departamento" then %>
+            <td><%= Departamento.find(basica[atr]).nombre%></td>
+          <% elsif atr == "id_municipio" then %>
+            <td><%= Municipio.find(basica[atr]).nombre%></td>
+          <% elsif atr == "id_tclase" then %>
+            <td><%= basica[atr].nil? ? "" : Tclase.find(basica[atr]).nombre%></td>
+          <% elsif atr == "id_supracategoria" then %>
+            <td><%= Supracategoria.find(basica[atr]).nombre%></td>
+          <% elsif atr == "id_tviolencia" then %>
+            <td><%= Tviolencia.find(basica[atr]).nombre%></td>
+          <% elsif atr == "id_pconsolidado" then %>
+            <td><%= Pconsolidado.find(basica[atr]).nombre%></td>
+          <% elsif atr == "tipocat" then %>
+            <td>
+              <% h={C: "Colectivo", I: "Individual", O: "Otro"} %>
+              <%= h[basica[atr].to_sym]%>
+            </td>
+          <% else %>
+            <td><%= basica[atr] %></td>
+          <% end %>
         <% end %>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

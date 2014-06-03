@@ -1,21 +1,21 @@
 # encoding: UTF-8
 module Admin
-  class TsitiosController < BasicasController
-    before_action :set_tsitio, only: [:show, :edit, :update, :destroy]
+  class AslegalesController < BasicasController
+    before_action :set_aslegal, only: [:show, :edit, :update, :destroy]
     load_and_authorize_resource
 
     def clase 
-      "tsitio"
+      "aslegal"
     end
 
     # Use callbacks to share common setup or constraints between actions.
-    def set_tsitio
-      @basica = Tsitio.find(params[:id])
+    def set_aslegal
+      @basica = Aslegal.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def tsitio_params
-      params.require(:tsitio).permit(*atributos_form)
+    def aslegal_params
+      params.require(:aslegal).permit(*atributos_form)
     end
 
   end

@@ -5,6 +5,7 @@ Sivel2::Application.routes.draw do
   get '/casos/nuevaubicacion' => 'casos#nueva_ubicacion'
   get '/casos/nuevavictima' => 'casos#nueva_victima'
   get '/casos/nuevopresponsable' => 'casos#nuevo_presponsable'
+  get "tablasbasicas" => 'hogar#tablasbasicas'
   get 'acercade' => 'hogar#acercade'
   get 'contacto' => 'hogar#contacto'
   get "hogar" => 'hogar#index'
@@ -23,35 +24,6 @@ Sivel2::Application.routes.draw do
     Ability.tablasbasicas.each do |t|
         resources t.pluralize.to_sym, path_names: { new: 'nueva', edit: 'edita' }
     end
-    #resources :actividadareas, path_names: { new: 'nueva', edit: 'edita' }
-    #resources :ayudasestado, path_names: { new: 'nueva', edit: 'edita' }
-    #resources :etnia, path_names: { new: 'nueva', edit: 'edita' }
-    #resources :tsitio, path_names: { new: 'nueva', edit: 'edita' }
-    #resources :clase, path_names: { new: 'nueva', edit: 'edita' }
-    #resources :idioma, path_names: { new: 'nueva', edit: 'edita' }
-# departamento
-# municipio
-# actividadoficio
-# aslegal
-# aspsicosocial
-# ayudasjr
-# categoria
-# causaref
-# desplazamiento
-# emprendimiento
-# escolaridad
-# estadocivil
-# etiqueta
-# iglesia
-# maternidad
-# pais
-# presponsable
-# profesion
-# proteccion
-# regionsjr
-# rolfamilia
-# statusmigratorio
-# tsitio
   end
 
   root 'hogar#index'
