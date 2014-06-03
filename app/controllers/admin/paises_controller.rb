@@ -19,7 +19,7 @@ module Admin
         "fechacreacion", "fechadeshabilitacion"]
     end
    
-    def atributos_index
+    def atributos_form
       atributos_index
     end
 

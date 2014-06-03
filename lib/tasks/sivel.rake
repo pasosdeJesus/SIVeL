@@ -6,14 +6,12 @@ namespace :sivel do
              (SELECT 100 as id UNION SELECT MAX(id) FROM actividadarea) AS s;")
     tb= Ability::tablasbasicas - 
       [ "actividadarea", "categoria", "clase", "departamento", "municipio",
-        "tclase" ]
+        "supracategoria", "tclase", "tviolencia" ]
     tb.each do |t|
-#    ['contexto', 'etnia', 'filiacion', 'idioma', 'iglesia', 'organizacion', 'presponsable', 'profesion', 'region', 'sectorsocial', 'tsitio', 'vinculoestado'].each do |t|
       connection.execute("SELECT setval('#{t}_seq', MAX(id)) FROM 
              (SELECT 100 as id UNION SELECT MAX(id) FROM #{t}) AS s;");
     end
-    ['caso', 'clase', 'departamento', 'municipio', 'persona',
-      'ubicacion', 'usuario'].each do |t|
+    ['caso', 'persona', 'ubicacion', 'usuario'].each do |t|
       connection.execute("SELECT setval('#{t}_seq', MAX(id)) FROM #{t}");
     end
   end
