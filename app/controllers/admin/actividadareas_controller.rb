@@ -13,18 +13,13 @@ module Admin
       @basica = Actividadarea.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def actividadarea_params
-      params.require(:actividadarea).permit(
-        :nombre, :observaciones, :fechacreacion, :fechadeshabilitacion
-      )
-    end
-
     def atributos_index
       ["id", "nombre", "observaciones", "fechacreacion", "fechadeshabilitacion"]
     end
 
-    helper_method :clase, :atributos_index
-
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def actividadarea_params
+      params.require(:actividadarea).permit(*atributos_form)
+    end
   end
 end

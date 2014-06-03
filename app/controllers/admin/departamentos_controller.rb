@@ -1,21 +1,20 @@
 # encoding: UTF-8
 module Admin
-  class ClasesController < BasicasController
-    before_action :set_clase, only: [:show, :edit, :update, :destroy]
+  class DepartamentosController < BasicasController
+    before_action :set_departamento, only: [:show, :edit, :update, :destroy]
     load_and_authorize_resource
 
     def clase 
-      "clase"
+      "departamento"
     end
 
     # Use callbacks to share common setup or constraints between actions.
-    def set_clase
-      @basica = Clase.find(params[:id])
+    def set_departamento
+      @basica = Departamento.find(params[:id])
     end
 
     def atributos_index
-      ["id", "nombre", "id_municipio", "id_departamento", "id_pais",
-        "id_tclase", "latitud", "longitud", 
+      ["id", "nombre", "latitud", "longitud", "id_pais",
         "fechacreacion", "fechadeshabilitacion"]
     end
 
@@ -24,8 +23,8 @@ module Admin
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def clase_params
-      params.require(:clase).permit(*atributos_form)
+    def departamento_params
+      params.require(:departamento).permit(*atributos_form)
     end
 
   end

@@ -51,14 +51,7 @@
             <%= menu_item "Clave", usuarios_path %>
             <% if current_usuario.rol == Ability::ROLADMIN %>
               <%= menu_item "Usuarios", usuarios_path %>
-              <%= drop_down_divider %>
-              <% Ability.tablasbasicas.each do |t| %>
-                <% k = t.capitalize.constantize %>
-                <% n = k.human_attribute_name(t.pluralize.capitalize) %>
-                <% l = send("admin_" + t.pluralize + "_path") %>
-                <%= menu_item n, l %>
-              <% end %>
-
+              <%= menu_item "Tablas Básicas", tablasbasicas_path %>
               <!-- %= #menu_item "Casos", admin_casos_path % -->
 				    <% end %>
           <% end %>

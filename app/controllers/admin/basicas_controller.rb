@@ -9,7 +9,7 @@ module Admin
     # GET /basicas.json
     def index
       c = clase.capitalize.constantize
-      @basica = c.paginate(:page => params[:pagina], per_page: 20)
+      @basica = c.order(:nombre).paginate(:page => params[:pagina], per_page: 20)
     end
 
     # GET /basicas/1
@@ -20,6 +20,7 @@ module Admin
     # GET /basicas/new
     def new
       @basica = clase.capitalize.constantize.new
+      @basica.fechacreacion = DateTime.now.strftime('%Y-%m-%d')
     end
 
     # GET /basicas/1/edit
@@ -66,5 +67,19 @@ module Admin
         format.json { head :no_content }
       end
     end
+
+    def clase 
+      "BASICA_CAMBIAR"
+    end
+
+    def atributos_index
+      ["id", "nombre", "fechacreacion", "fechadeshabilitacion"]
+    end
+
+    def atributos_form
+      atributos_index - ["id"]
+    end
+
+    helper_method :clase, :atributos_index, :atributos_form
   end
 end
