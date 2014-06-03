@@ -104,6 +104,8 @@ es:
       rangoedad:
         Rangoedad: Rango de Edad
         Rangosedad: Rangos de Edad
+        limiteinferior: Límite Inferior
+        limitesuperior: Límite Superior
       regionsjr:
         Regionsjr: Oficina
         Regionessjr: Oficinas
