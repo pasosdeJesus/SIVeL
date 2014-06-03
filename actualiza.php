@@ -3170,6 +3170,13 @@ if (!aplicado($idac)) {
 }
 
 
+$idac = '1.2-ig';
+if (!aplicado($idac)) {
+
+    hace_consulta($db, "UPDATE iglesia SET nombre=UPPER(nombre);", false);
+
+    aplicaact($act, $idac, 'Listado de iglesias mejorado');
+}
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
