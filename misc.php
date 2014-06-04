@@ -720,7 +720,9 @@ function valorSinInfo(&$do, $c)
         $rel = $enl[$do->__table][$c];
         $pd = strpos($rel, ':');
         $ndo = substr($rel, 0, $pd);
-        $or = objeto_tabla($ndo);
+        $db2 = new DB_DataObject();
+        sin_error_pear($db2);
+        $or = $db2->factory($ndo);
     } else {
         $or =& $do;
     }

@@ -938,16 +938,20 @@ if (!aplicado($idac)) {
         true
     );
     foreach($enl as $t => $e) {
-        $do = objeto_tabla($t);
-        foreach($e as $c => $rel) {
-            if (strpos($c, ',') === FALSE) {
-                $pd = strpos($rel, ':');
-                $ndo = substr($rel, 0, $pd);
-                $ids = valorSinInfo($do, $c);
-                if ($ids >= 0 && $ndo != 'presponsable') {
-                    $q = "ALTER TABLE $t ALTER COLUMN $c SET DEFAULT '$ids'";
-                    hace_consulta($db, $q, false);
-                } 
+        $db2 = new DB_DataObject();
+        sin_error_pear($db2);
+        $do = $db2->factory($t);
+        if (!PEAR::isError($do)) {
+            foreach($e as $c => $rel) {
+                if (strpos($c, ',') === FALSE) {
+                    $pd = strpos($rel, ':');
+                    $ndo = substr($rel, 0, $pd);
+                    $ids = valorSinInfo($do, $c);
+                    if ($ids >= 0 && $ndo != 'presponsable') {
+                        $q = "ALTER TABLE $t ALTER COLUMN $c SET DEFAULT '$ids'";
+                        hace_consulta($db, $q, false);
+                    } 
+                }
             }
         }
     }
