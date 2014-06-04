@@ -1,6 +1,34 @@
 class Ability
   include CanCan::Ability
 
+  ROLADMIN  = 1
+  ROLINV    = 2
+  ROLDIR    = 3
+  ROLCOOR   = 4
+  ROLANALI  = 5
+  ROLSIST   = 6
+
+  ROLES = [["Administrador", ROLADMIN], ["Invitado Nacional", ROLINV], 
+      ["Director Nacional", ROLDIR], ["Coordinador oficina", ROLCOOR], 
+      ["Analista nacional", ROLANALI], ["Sistematizador oficina", ROLSIST]]
+
+  @@tablasbasicas = [
+    'actividadarea', 'actividadoficio', 'aslegal', 'aspsicosocial', 'ayudasjr', 
+    'categoria', 'causaref', 'clase', 
+    'departamento', 
+    'emprendimiento', 'escolaridad', 'estadocivil', 'etiqueta', 'etnia', 
+    'idioma', 'iglesia', 
+    'maternidad', 'municipio', 
+    'pais', 'presponsable', 'profesion', 'proteccion', 
+    'rangoedad', 'regionsjr', 'rolfamilia', 
+    'statusmigratorio', 'supracategoria',
+    'tclase', 'tsitio', 'tviolencia'
+  ]
+
+  def self.tablasbasicas
+    @@tablasbasicas
+  end
+
   def initialize(user)
 	  #debugger
 	  if !user.nil? && !user.rol.nil? && user.rol > 0 then

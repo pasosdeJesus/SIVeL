@@ -48,11 +48,13 @@
       <%= menu_group :pull => :right do %>
         <%= menu_item "Documentacion", "/doc/html/index.html"%>
         <% if !current_usuario.nil? %>
-          <% if current_usuario.rol == 1 %>
-						<%= drop_down "Administrar" do %>
-						  <%= menu_item "Usuarios", usuarios_path %>
-							<%= menu_item "Áreas de Actividades", actividadareas_path %>
-						<% end %>
+					<%= drop_down "Administrar" do %>
+            <%= menu_item "Clave", usuarios_path %>
+            <% if current_usuario.rol == Ability::ROLADMIN %>
+              <%= menu_item "Usuarios", usuarios_path %>
+              <%= menu_item "Tablas Básicas", tablasbasicas_path %>
+              <!-- %= #menu_item "Casos", admin_casos_path % -->
+				    <% end %>
           <% end %>
 					<%= menu_item "Salir #{current_usuario.nusuario}", sign_out_path %>
         <% else %>

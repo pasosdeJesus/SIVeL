@@ -332,7 +332,7 @@ CREATE TABLE actividadarea (
     id integer NOT NULL,
     nombre character varying(500),
     observaciones character varying(5000),
-    fechacreacion date,
+    fechacreacion date DEFAULT ('now'::text)::date,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone
@@ -409,7 +409,7 @@ CREATE SEQUENCE actividadoficio_seq
 CREATE TABLE actividadoficio (
     id integer DEFAULT nextval('actividadoficio_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -592,7 +592,7 @@ CREATE SEQUENCE aslegal_seq
 CREATE TABLE aslegal (
     id integer DEFAULT nextval('aslegal_seq'::regclass) NOT NULL,
     nombre character varying(100) NOT NULL,
-    fechacreacion date DEFAULT '2014-02-14'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -633,7 +633,7 @@ CREATE SEQUENCE aspsicosocial_seq
 CREATE TABLE aspsicosocial (
     id integer DEFAULT nextval('aspsicosocial_seq'::regclass) NOT NULL,
     nombre character varying(100) NOT NULL,
-    fechacreacion date DEFAULT '2014-02-14'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -674,7 +674,7 @@ CREATE SEQUENCE ayudaestado_seq
 CREATE TABLE ayudaestado (
     id integer DEFAULT nextval('ayudaestado_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT '2013-06-16'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -715,7 +715,7 @@ CREATE SEQUENCE ayudasjr_seq
 CREATE TABLE ayudasjr (
     id integer DEFAULT nextval('ayudasjr_seq'::regclass) NOT NULL,
     nombre character varying(100) NOT NULL,
-    fechacreacion date DEFAULT '2013-06-16'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -958,7 +958,7 @@ CREATE TABLE casosjr (
 CREATE TABLE categoria (
     id integer NOT NULL,
     nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
-    fechacreacion date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     id_supracategoria integer NOT NULL,
     id_tviolencia character varying(1) NOT NULL,
@@ -991,7 +991,7 @@ CREATE SEQUENCE causaref_seq
 CREATE TABLE causaref (
     id integer DEFAULT nextval('causaref_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT '2013-06-17'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -1212,7 +1212,7 @@ CREATE TABLE departamento (
     nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     latitud double precision,
     longitud double precision,
-    fechacreacion date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -1374,7 +1374,7 @@ CREATE SEQUENCE emprendimiento_seq
 CREATE TABLE emprendimiento (
     id integer DEFAULT nextval('emprendimiento_seq'::regclass) NOT NULL,
     nombre character varying(100) NOT NULL,
-    fechacreacion date DEFAULT '2014-02-14'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -1415,7 +1415,7 @@ CREATE SEQUENCE escolaridad_seq
 CREATE TABLE escolaridad (
     id integer DEFAULT nextval('escolaridad_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -1442,7 +1442,7 @@ CREATE SEQUENCE estadocivil_seq
 CREATE TABLE estadocivil (
     id integer DEFAULT nextval('estadocivil_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -1499,7 +1499,7 @@ CREATE TABLE etiqueta (
     id integer DEFAULT nextval('etiqueta_seq'::regclass) NOT NULL,
     nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     observaciones character varying(500),
-    fechacreacion date DEFAULT '2001-01-01'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -1713,7 +1713,7 @@ CREATE TABLE iglesia (
     id integer DEFAULT nextval('iglesia_seq'::regclass) NOT NULL,
     nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     descripcion character varying(1000),
-    fechacreacion date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -1822,7 +1822,7 @@ CREATE SEQUENCE maternidad_seq
 CREATE TABLE maternidad (
     id integer DEFAULT nextval('maternidad_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -1973,7 +1973,7 @@ CREATE TABLE municipio (
     id_departamento integer NOT NULL,
     latitud double precision,
     longitud double precision,
-    fechacreacion date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -2037,7 +2037,7 @@ CREATE TABLE pais (
     div1 character varying(100),
     div2 character varying(100),
     div3 character varying(100),
-    fechacreacion date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -2174,7 +2174,7 @@ CREATE TABLE presponsable (
     id integer DEFAULT nextval('presponsable_seq'::regclass) NOT NULL,
     nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
     papa integer,
-    fechacreacion date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -2270,7 +2270,7 @@ CREATE SEQUENCE profesion_seq
 CREATE TABLE profesion (
     id integer DEFAULT nextval('profesion_seq'::regclass) NOT NULL,
     nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
-    fechacreacion date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -2337,7 +2337,7 @@ CREATE SEQUENCE proteccion_seq
 CREATE TABLE proteccion (
     id integer DEFAULT nextval('proteccion_seq'::regclass) NOT NULL,
     nombre character varying(100) NOT NULL,
-    fechacreacion date DEFAULT '2014-02-14'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -2483,7 +2483,7 @@ CREATE SEQUENCE regionsjr_seq
 CREATE TABLE regionsjr (
     id integer DEFAULT nextval('regionsjr_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT '2013-05-13'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -2583,7 +2583,7 @@ CREATE SEQUENCE rolfamilia_seq
 CREATE TABLE rolfamilia (
     id integer DEFAULT nextval('rolfamilia_seq'::regclass) NOT NULL,
     nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT '2013-06-20'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -2648,7 +2648,7 @@ CREATE SEQUENCE statusmigratorio_seq
 CREATE TABLE statusmigratorio (
     id integer DEFAULT nextval('statusmigratorio_seq'::regclass) NOT NULL,
     nombre character varying(100) NOT NULL,
-    fechacreacion date DEFAULT '2014-02-18'::date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -2806,7 +2806,7 @@ CREATE SEQUENCE tsitio_seq
 CREATE TABLE tsitio (
     id integer DEFAULT nextval('tsitio_seq'::regclass) NOT NULL,
     nombre character varying(500) COLLATE public.es_co_utf_8 NOT NULL,
-    fechacreacion date NOT NULL,
+    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -2901,8 +2901,9 @@ CREATE TABLE usuario (
     last_sign_in_ip character varying(255),
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
+    regionsjr_id integer,
     CONSTRAINT usuario_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion))),
-    CONSTRAINT usuario_rol_check CHECK (((rol >= 1) AND (rol <= 4)))
+    CONSTRAINT usuario_rol_check CHECK (((rol >= 1) AND (rol <= 6)))
 );
 
 
@@ -4070,6 +4071,13 @@ CREATE INDEX index_actividad_rangoedadac_on_actividad_id ON actividad_rangoedada
 --
 
 CREATE INDEX index_actividad_rangoedadac_on_rangoedadac_id ON actividad_rangoedadac USING btree (rangoedadac_id);
+
+
+--
+-- Name: index_usuario_on_regionsjr_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_usuario_on_regionsjr_id ON usuario USING btree (regionsjr_id);
 
 
 --
@@ -5595,4 +5603,10 @@ INSERT INTO schema_migrations (version) VALUES ('20140313012209');
 INSERT INTO schema_migrations (version) VALUES ('20140317121823');
 
 INSERT INTO schema_migrations (version) VALUES ('20140514142421');
+
+INSERT INTO schema_migrations (version) VALUES ('20140518120059');
+
+INSERT INTO schema_migrations (version) VALUES ('20140527110223');
+
+INSERT INTO schema_migrations (version) VALUES ('20140528043115');
 

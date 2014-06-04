@@ -49,6 +49,7 @@ con Ruby on Rails.
 ```sh
   rake db:migrate
   rake db:seed
+  rake sivel:indices
 ```
 * En caso de que no tenga un SIVeL 1.3 en paralelo cree el usuario y base
   de datos que configure en config/database.yml e inicialice con:
@@ -56,6 +57,7 @@ con Ruby on Rails.
   rake db:setup
   rake db:migrate
   rake db:seed
+  rake sivel:indices
 ```
 * Lance el servidor con
 ```sh
@@ -76,6 +78,7 @@ con Ruby on Rails.
 ```sh
   RAILS_ENV=production rake db:migrate
   RAILS_ENV=production rake db:seed
+  RAILS_ENV=production rake sivel:indices
 ```
 * Recomendamos nginx, puede configurar un dominio virtual (digamos
   s2.pasosdeJesus.org) con:
@@ -138,6 +141,7 @@ rc_cmd $1
   bundle install
 ```
 * Aplique cambios a base de datos: ```rake db:migrate```
+* Actualice índices: ```rake sivel:indices```
 * Lance nuevamente el servidor de desarrollo: ```rails s```
 
 ### Convenciones

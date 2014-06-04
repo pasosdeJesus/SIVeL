@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem "rails", github: 'rails/rails'
-gem "rails", '4.1.0'
+gem "rails", '4.1.1'
 
 gem "pg"
 
@@ -49,6 +49,7 @@ gem "bcrypt"
 gem "tzinfo"
 gem "tzinfo-data"
 
+gem "rspec", group: [:development, :test]
 gem "rspec-rails", group: [:development, :test]
 gem "cucumber-rails", group: "test", :require => false
 gem "capybara", group: [:development, :test]

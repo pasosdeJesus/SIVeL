@@ -63,6 +63,13 @@ CLIENTE V-2:
 * Conexión a Internet por UNE Inalámbrico 2MB
 * Plataforma: OpenBSD current (5.6), chrome, ruby 2.1, rails 4.1
 
+CLIENTE V-3d:
+* AMD E-450. 1647.97 MHz
+* RAM: 4G
+* Disco: 500G
+* Conexión a Internet por UNE Inalámbrico 2MB. 
+* Plataforma: OpenBSD current (5.6), chrome, ruby 2.1.2, rails 4.1.1
+
 
 CLIENTE BD-1:
 * AMD FX(tm)-8320 Eight-Core Processor 
@@ -158,5 +165,27 @@ Lista de casos: 0.4
 Editar un caso: 6.5
 Agregar etiqueta y guardar: 3
 Editar de nuevo: 6.45
+
+### Fecha: 27.May.2014.  Servidor: V-3 (sin Internet). Cliente: V-3 (sin Internet).
+* Autenticar: 9.5
+* Lista de actividades: 1.5
+* Editar una actividad: 1.47
+* Lista de casos: 1.73
+* Editar un caso: 13.44
+* Agregar etiqueta y guardar: 13
+* Editar de nuevo: 9.82
+
+
+Fecha: 13.Abr.2014
+Servidor: SJR-3
+Cliente: V-1
+Primera carga de sitio tras actualizar fuentes y reiniciar servidor: 8.98
+Autenticar: 6.1
+Lista de actividades: 1.88
+Editar una actividad: 0.6
+Listado de casos: 1.96
+Editar un caso: 5.33
+Agregar etiqueta y guardar: 1.3
+Editar de nuevo: 5.99
 
 

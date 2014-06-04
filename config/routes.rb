@@ -5,12 +5,12 @@ Sivel2::Application.routes.draw do
   get '/casos/nuevaubicacion' => 'casos#nueva_ubicacion'
   get '/casos/nuevavictima' => 'casos#nueva_victima'
   get '/casos/nuevopresponsable' => 'casos#nuevo_presponsable'
+  get "tablasbasicas" => 'hogar#tablasbasicas'
   get 'acercade' => 'hogar#acercade'
   get 'contacto' => 'hogar#contacto'
   get "hogar" => 'hogar#index'
 
   resources :actividades, path_names: { new: 'nueva', edit: 'edita' }
-  resources :actividadareas, path_names: { new: 'nueva', edit: 'edita' }
   resources :casos, path_names: { new: 'nuevo', edit: 'edita' }
 
   devise_scope :usuario do
@@ -18,6 +18,13 @@ Sivel2::Application.routes.draw do
   end
   devise_for :usuarios
   resources :usuarios, path_names: { new: 'nuevo', edit: 'edita' } 
+
+  #get 'admin/actividadareas', to: 'actividadareas', as: :actividadareas_path
+  namespace :admin do
+    Ability.tablasbasicas.each do |t|
+        resources t.pluralize.to_sym, path_names: { new: 'nueva', edit: 'edita' }
+    end
+  end
 
   root 'hogar#index'
 

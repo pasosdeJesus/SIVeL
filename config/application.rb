@@ -26,5 +26,11 @@ module Sivel2
     config.i18n.default_locale = :es
     I18n.enforce_available_locales = true
     config.active_record.schema_format = :sql
+    
+    config.generators do |g|
+      g.orm                 :active_record
+      g.template_engine     :erb
+      g.test_framework      false
+    end
   end
 end

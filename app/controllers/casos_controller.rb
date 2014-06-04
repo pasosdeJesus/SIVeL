@@ -21,27 +21,31 @@ class CasosController < ApplicationController
     @caso.casosjr = Casosjr.new
     @caso.casosjr.fecharec = DateTime.now.strftime('%Y-%m-%d')
     @caso.casosjr.asesor = current_usuario.id
-    @caso.casosjr.regionsjr = Regionsjr.find(1)
+    @caso.casosjr.regionsjr = current_usuario.regionsjr_id.nil? ?  
+      Regionsjr.find(1) : 
+      current_usuario.regionsjr_id
     per = Persona.new
     per.nombres = 'N'
     per.apellidos = 'N'
     per.sexo = 'S'
-    per.save
+    per.save!
     vic = Victima.new
     vic.persona = per
     @caso.victima<<vic
     @caso.casosjr.contacto = per
-    @caso.save
-    vic.save
+    @caso.save!
+    vic.id_caso = @caso.id
+    #debugger
+    vic.save!
     vs = Victimasjr.new
     vs.id_victima = vic.id
     vic.victimasjr = vs
-    vs.save
+    vs.save!
     cu = CasoUsuario.new
     cu.id_usuario = current_usuario.id
     cu.id_caso = @caso.id
     cu.fechainicio = DateTime.now.strftime('%Y-%m-%d')
-    cu.save
+    cu.save!
 
     render action: 'edit'
   end
@@ -158,17 +162,20 @@ class CasosController < ApplicationController
 			r = nil
       
 			if (params[:tabla] == "departamento" && params[:id_pais].to_i > 0)
-				r = Departamento.order(:nombre).where(id_pais: params[:id_pais].to_i)
+				r = Departamento.where(fechadeshabilitacion: nil,
+                               id_pais: params[:id_pais].to_i).order(:nombre)
 			elsif (params[:tabla] == "municipio" && params[:id_pais].to_i > 0 && 
              params[:id_departamento].to_i > 0 )
-				r = Municipio.order(:nombre).where(id_pais: params[:id_pais].to_i, 
-                            id_departamento: params[:id_departamento].to_i)
+				r = Municipio.where(id_pais: params[:id_pais].to_i, 
+                            id_departamento: params[:id_departamento].to_i,
+                            fechadeshabilitacion: nil).order(:nombre)
 			elsif (params[:tabla] == "clase" && params[:id_pais].to_i > 0 && 
              params[:id_departamento].to_i > 0 && 
              params[:id_municipio].to_i > 0)
-				r = Clase.order(:nombre).where(id_pais: params[:id_pais].to_i, 
+        r = Clase.where(id_pais: params[:id_pais].to_i, 
                         id_departamento: params[:id_departamento].to_i, 
-                        id_municipio: params[:id_municipio].to_i)
+                        id_municipio: params[:id_municipio].to_i,
+                        fechadeshabilitacion: nil).order(:nombre)
 			end
 			respond_to do |format|
 				format.js { render json: r }
@@ -184,6 +191,9 @@ class CasosController < ApplicationController
 
   # GET /casos/1/edit
   def edit
+    @caso = Caso.find(params[:id])
+    unauthorized! if (cannot? :edit, @caso)
+    #unauthorized! if  current_usuaurio.rol == ROLSIST and caso.regi 
   end
 
   # POST /casos
@@ -268,7 +278,7 @@ class CasosController < ApplicationController
               acto.id_persona = v[:id_persona]
               acto.id_categoria = v[:id_categoria]
               acto.id_caso = @caso.id
-              acto.save
+              acto.save!
             end
           }
         end
