@@ -23,10 +23,6 @@ module Admin
       @basica.fechacreacion = DateTime.now.strftime('%Y-%m-%d')
     end
 
-		def genclase
-			return 'F';
-		end
-
     # GET /basicas/1/edit
     def edit
       @basica = clase.capitalize.constantize.find(params[:id])
@@ -75,6 +71,10 @@ module Admin
     def clase 
       "BASICA_CAMBIAR"
     end
+
+		def genclase
+			return 'F';
+		end
 
     def atributos_index
       ["id", "nombre", "fechacreacion", "fechadeshabilitacion"]

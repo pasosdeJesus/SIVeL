@@ -54,6 +54,7 @@
 </table>
 
 <%= will_paginate @basica, { param_name: :pagina }  %>
-<%= link_to t('.new', :default => t("helpers.links.new")),
+<% ng = (!genclase.nil? && genclase == 'F') ? 'Nueva' : 'Nuevo' %>
+<%= link_to t('.new', :default => [ng, t("helpers.links.new")]),
             new_admin_basica_path(@basica),
             :class => 'btn btn-primary' %>

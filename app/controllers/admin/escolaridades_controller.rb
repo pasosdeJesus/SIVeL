@@ -13,6 +13,10 @@ module Admin
       @basica = Escolaridad.find(params[:id])
     end
 
+		def genclase
+			'M'
+		end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def escolaridad_params
       params.require(:escolaridad).permit(*atributos_form)

@@ -13,6 +13,10 @@ module Admin
       @basica = Estadocivil.find(params[:id])
     end
 
+		def genclase
+			return 'M';
+		end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def estadocivil_params
       params.require(:estadocivil).permit(*atributos_form)

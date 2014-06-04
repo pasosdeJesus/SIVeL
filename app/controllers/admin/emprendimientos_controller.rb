@@ -13,6 +13,10 @@ module Admin
       @basica = Emprendimiento.find(params[:id])
     end
 
+		def genclase
+			return 'M';
+		end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def emprendimiento_params
       params.require(:emprendimiento).permit(*atributos_form)

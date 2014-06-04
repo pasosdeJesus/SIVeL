@@ -17,6 +17,10 @@ module Admin
 			atributos_index
 		end
 
+		def genclase
+			return 'M';
+		end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def tclase_params
       params.require(:tclase).permit(*atributos_form)

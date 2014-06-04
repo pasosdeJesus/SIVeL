@@ -13,6 +13,10 @@ module Admin
       @basica = Idioma.find(params[:id])
     end
 
+		def genclase
+			return 'M';
+		end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def idioma_params
       params.require(:idioma).permit(*atributos_form)

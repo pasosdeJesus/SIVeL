@@ -13,6 +13,10 @@ module Admin
       @basica = Tsitio.find(params[:id])
     end
 
+		def genclase
+			return 'M';
+		end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def tsitio_params
       params.require(:tsitio).permit(*atributos_form)

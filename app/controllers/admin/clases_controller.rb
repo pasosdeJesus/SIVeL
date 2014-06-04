@@ -23,6 +23,10 @@ module Admin
       atributos_index
     end
 
+		def genclase
+			return 'M';
+		end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def clase_params
       params.require(:clase).permit(*atributos_form)

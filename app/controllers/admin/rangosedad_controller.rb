@@ -18,6 +18,10 @@ module Admin
         "fechacreacion", "fechadeshabilitacion"]
     end
 
+		def genclase
+			return 'M';
+		end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def rangoedad_params
       params.require(:rangoedad).permit(*atributos_form)

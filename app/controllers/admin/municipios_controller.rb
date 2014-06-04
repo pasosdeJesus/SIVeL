@@ -22,6 +22,10 @@ module Admin
       atributos_index
     end
 
+		def genclase
+			return 'M';
+		end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def municipio_params
       params.require(:municipio).permit( *atributos_form)

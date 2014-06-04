@@ -13,6 +13,10 @@ module Admin
       @basica = Statusmigratorio.find(params[:id])
     end
 
+		def genclase
+			return 'M';
+		end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def statusmigratorio_params
       params.require(:statusmigratorio).permit(*atributos_form)
