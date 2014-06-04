@@ -2864,7 +2864,6 @@ if (!aplicado($idac)) {
 
 $idac = '1.2-def';
 if (!aplicado($idac)) {
-
     $basicas = html_menu_toma_url($GLOBALS['menu_tablas_basicas']);
     global $dbnombre;
     $v = null;
@@ -2874,23 +2873,24 @@ if (!aplicado($idac)) {
         true
     );
     foreach ($enl as $t => $e) {
-        $do = objeto_tabla($t);
-        foreach ($e as $c => $rel) {
-            if (strpos($c, ',') === false) {
-                $pd = strpos($rel, ':');
-                $ndo = substr($rel, 0, $pd);
-                $ids = valorSinInfo($do, $c);
-                if ($ids >= 0 && ($ndo != 'presponsable' 
-                    || $c == 'organizacionarmada' )
-                ) {
-                    $q = "ALTER TABLE $t ALTER COLUMN $c SET DEFAULT '$ids'";
+        $db2 = new DB_DataObject();
+        sin_error_pear($db2);
+        $do = $db2->factory($t);
+        if (!PEAR::isError($do)) {
+            foreach($e as $c => $rel) {
+                if (strpos($c, ',') === FALSE) {
+                    $pd = strpos($rel, ':');
+                    $ndo = substr($rel, 0, $pd);
+                    $ids = valorSinInfo($do, $c);
+                    if ($ids >= 0 && ($ndo != 'presponsable' 
+                        || $c == 'organizacionarmada' )
+                        $q = "ALTER TABLE $t ALTER COLUMN $c SET DEFAULT '$ids'";
                     hace_consulta($db, $q, false);
                 } 
             }
         }
     }
     aplicaact($act, $idac, 'Valores por defecto en referencias a tablas básicas');
-
 }
 
 $idac = '1.2-db';
