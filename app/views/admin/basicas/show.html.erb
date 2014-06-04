@@ -10,7 +10,7 @@
       <% if atr == 'id_pais' then %>
         <dd><%= Pais.find(@basica[atr]).nombre %></dd>
       <% elsif atr == 'id_departamento' then %>
-        <dd><%= Departamento.find(@basica[atr]).nombre %></dd>
+        <dd><%= Departamento.where(id: @basica[atr], id_pais: @basica['id_pais']).first.nombre %></dd>
       <% elsif atr == 'id_municipio' then %>
         <dd><%= Municipio.find(@basica[atr]).nombre %></dd>
       <% elsif atr == "id_tclase" then %>

@@ -15,6 +15,7 @@
 //= require bootstrap-datepicker
 //= require twitter/bootstrap
 //= require turbolinks
+//= require geo
 //= require_tree .
 
 
