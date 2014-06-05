@@ -138,12 +138,27 @@ function muestra($dsn)
                 echo "<td>" . $html_v1 . "</td>";
             }
             if ($id == $id1) {
+                // Busca si es homonimo para poner como homonimo por defecto.
+                $q = "SELECT COUNT(*) FROM victima, homonimia WHERE 
+                    victima.id_caso='$id1'
+                    AND victima.id_persona = homonimia.id_persona1
+                    AND homonimia.id_persona2 IN 
+                    (SELECT id_persona FROM victima
+                    WHERE id_caso='$id2')";
+                $nh = $db->getOne($q);
+                sin_error_pear($nh);
+                $chm = "checked";
+                $chh = "";
+                if ($nh > 0) {
+                    $chh = "checked";
+                    $chm = "";
+                }
                 echo "<td rowspan='2'><input type='checkbox' "
                     . "name='m_" . (int)$id1 . "_" . (int)$id2 
-                    . "' checked/></td>";
+                    . "' $chm/></td>";
                 echo "<td rowspan='2'><input type='checkbox' "
                     . "name='h_" . (int)$id1 . "_" . (int)$id2
-                    . "'/></td>";
+                    . "' $chh/></td>";
             }
             echo "</tr>\n";
         }
