@@ -1487,7 +1487,7 @@ class ResConsulta
 
         //print_r($arcaso); die("x");
         $r = "<relato>\n";
-        $r .= a_elementos_xml(
+        a_elementos_xml(
             $r, 2,
             array('organizacion_responsable' =>
             $GLOBALS['organizacion_responsable'],
@@ -1495,16 +1495,16 @@ class ResConsulta
             $GLOBALS['derechos']
         )
         );
-        $r .= a_elementos_xml(
+        a_elementos_xml(
             $r, 2,
             array('id_relato' => $dcaso->id,
             'forma_compartir' => $formacomp
             )
         );
         //echo "OJO Antes de agregar titulo: " . memory_get_usage() ."<br>";
-        $r .= a_elementos_xml($r, 2, array('titulo' => $arcaso['titulo']));
+        a_elementos_xml($r, 2, array('titulo' => $arcaso['titulo']));
         if (isset($campos['caso_memo'])) {
-            $r .= a_elementos_xml(
+            a_elementos_xml(
                 $r, 2,
                 array('hechos' => $arcaso['hechos'])
             );
@@ -1767,7 +1767,7 @@ class ResConsulta
                 $arubicacion,
                 array('forma_compartir' => $formacomp)
             );
-            $r .= a_elementos_xml(
+            a_elementos_xml(
                 $r, 2,
                 subarreglo(
                     $arcaso, array('fecha', 'hora',
@@ -1776,7 +1776,7 @@ class ResConsulta
                 )
             );
 
-            $r .= a_elementos_xml(
+            a_elementos_xml(
                 $r, 2,
                 subarreglo(
                     $arubicacion, array('departamento', 'municipio',
@@ -1825,7 +1825,7 @@ class ResConsulta
                     $general = $dcat->nombre;
                 }
                 $r .= "  <acto>\n";
-                $r .= a_elementos_xml(
+                a_elementos_xml(
                     $r, 4,
                     array('agresion' => $general,
                     'agresion_particular' => $dcat->nombre . " (" .
@@ -1873,7 +1873,7 @@ class ResConsulta
                 $r .= "  <acto>\n";
                 $idgv = $dvictimacol->valorRelato();
                 //echo "idgv=$idgv<br>";
-                $r .= a_elementos_xml(
+                a_elementos_xml(
                     $r, 4,
                     array('agresion' => $general,
                     'agresion_particular' => $dccom->nombre . " (" .
@@ -2011,7 +2011,7 @@ class ResConsulta
             );
             $arotros['observaciones{tipo->region}'] = $reg;
 
-            $r .= a_elementos_xml($r, 2, $arotros);
+            a_elementos_xml($r, 2, $arotros);
             unset($arotros);
             unset($reg);
             unset($fr);
@@ -2019,7 +2019,7 @@ class ResConsulta
              * Se decide no poner analista
              *
              */
-            $r .= a_elementos_xml(
+            a_elementos_xml(
                 $r, 2,
                 subarreglo(
                     $arcaso, array(
@@ -2040,7 +2040,7 @@ class ResConsulta
                 'antecedente_caso',
                 array('id_caso' => $idcaso), 'id_antecedente'
             );
-            $r .= a_elementos_xml(
+            a_elementos_xml(
                 $r, 2,
                 array('observaciones{tipo->sitio}' => $ubisitio,
                 'observaciones{tipo->lugar}' => $ubilugar,
@@ -2054,9 +2054,28 @@ class ResConsulta
             unset($ubilugar);
             unset($ubisitio);
         }
+        // Módulos, van como observaciones
+        foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
+            list($n, $c, $o) = $tab;
+            if (($d = strrpos($c, "/"))>0) {
+                $c = substr($c, $d+1);
+            }
+            //echo $c;
+            if (is_callable(array($c, 'aRelato'))) {
+                call_user_func_array(
+                    array($c, 'aRelato'),
+                    array(&$db, $dcaso, &$r)
+                );
+            } else {
+                echo_esc(
+                    _("Falta") . " aRelato " . _("en")
+                    . " $n, $c"
+                );
+            }
+        }
+   
         $dcaso->free();
         unset($dcaso);
-        // Modulos, van como observaciones
         unset($arcaso);
         if ($locdb) {
             unset($db);
