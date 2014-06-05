@@ -1402,7 +1402,9 @@ function consulta_orden(&$q, $pOrdenar)
 
 
 /**
- * Retorna cadena con lista de relacionados de una tabla
+ * Retorna cadena con lista de nombres relacionados con
+ * el campo $enlace de registros de una tabla $tabla. Los
+ * registros de $tabla se filtran con la $llave
  *
  * @param string $tabla       Tabla inicial
  * @param string $llave       Arreglo que relaciona nombres de campos llave
@@ -2436,7 +2438,6 @@ function crea_patron($ar)
 function a_elementos_xml(&$r, $ind, $ad, $ren = null)
 {
     foreach ($ad as $ie => $dato) {
-
         if (isset($ren) && isset($ren[$ie])) {
             $marca = $ren[$ie];
         } else {
@@ -2446,7 +2447,6 @@ function a_elementos_xml(&$r, $ind, $ad, $ren = null)
             for ($i = 0; $i < $ind; $i++) {
                 $r .= " ";
             }
-
             if (($pi = strpos($marca, '{'))
                 && ($pm = strpos($marca, '->'))
                 && ($pd = strpos($marca, '}'))
