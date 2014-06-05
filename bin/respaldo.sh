@@ -19,4 +19,8 @@ if (test "$copiaphp" = "true") then {
 for i in $rremotos; do 
 	echo scp -i $llave $rlocal/$n.gz $i
 	scp -i $llave $rlocal/$n.gz $i
+	if (test "$RESPALDOMES" = "1") then {
+		echo scp -i $llave $rlocal/$h.gz $i
+		scp -i $llave $rlocal/$h.gz $i
+	} fi;
 done;
