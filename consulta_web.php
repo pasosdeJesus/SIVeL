@@ -87,7 +87,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         $pMostrar   = var_req_escapa('mostrar', $db, 32);
         $pOrdenar   = substr(var_req_escapa('ordenar', $db), 0, 32);
         $pUsuario   = substr(var_req_escapa('usuario', $db), 0, 32);
-        $pIdCasos   = substr(var_req_escapa('id_casos', $db), 0, 1024);
+        $pIdCasos   = substr(var_req_escapa('id_casos', $db), 0, 50000);
         $pIdClase   = (int)var_req_escapa('id_clase', $db);
         $pIdMunicipio   = (int)var_req_escapa('id_municipio', $db);
         $pIdDepartamento= (int)var_req_escapa('id_departamento', $db);
@@ -390,7 +390,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         }
         consulta_orden($q, $pOrdenar);
 
-        //echo "OJO q es $q"; die("x");
+        //echo "OJO q es $q"; //die("x");
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
             list($n, $c, $o) = $tab;
