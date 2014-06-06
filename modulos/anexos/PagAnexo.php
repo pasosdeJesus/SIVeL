@@ -375,42 +375,5 @@ class PagAnexo extends PagBaseMultiple
         consulta_or_muchos($w, $t, 'anexo');
     }
 
-    /**
-     * Compara datos relacionados con esta pestaña de los casos
-     * con identificación id1 e id2.
-     *
-     * @param object  &$db Conexión a base de datos
-     * @param array   &$r  Resultados de comparación
-     * @param integer $id1 Código de primer caso
-     * @param integer $id2 Código de segundo caso
-     * @param array   $a   Arreglo
-     *
-     * @return Añade a $r datos de comparación
-     * @see PagBaseSimple
-     */
-    static function compara(&$db, &$r, $id1, $id2, $a = array('caso'))
-    {
-    }
-
-    /**
-     * Mezcla valores de los casos $id1 e $id2 en el caso $idn de
-     * acuerdo a las preferencias especificadas en $sol.
-     *
-     * @param object  &$db Conexión a base de datos
-     * @param array   $sol Arreglo con solicitudes de cambios
-     * @param integer $id1 Código de primer caso
-     * @param integer $id2 Código de segundo caso
-     * @param integer $idn Código del caso en el que aplicará los cambios
-     * @param integer $t   Tabla
-     *
-     * @return Mezcla valores de los casos $id1 e $id2 en el caso $idn de
-     * acuerdo a las preferencias especificadas en $sol.
-     * @see PagBaseSimple
-     */
-    static function mezcla(&$db, $sol, $id1, $id2, $idn, $t = 'anexo')
-    {
-        //echo "OJO PagAnexo::mezcla<br>";
-        PagOtrasFuentes::mezcla($db, $sol, $id1, $id2, $idn, 'anexo');
-    }
 }
 ?>

@@ -147,7 +147,7 @@ function muestra($dsn)
                     WHERE id_caso='$id2')";
                 $nh = $db->getOne($q);
                 sin_error_pear($nh);
-                $chm = "checked";
+                $chm = "";
                 $chh = "";
                 if ($nh > 0) {
                     $chh = "checked";
