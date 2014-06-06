@@ -596,15 +596,14 @@ USING gin(to_tsvector('spanish', unaccent(persona.apellidos)
 CREATE TABLE trelacion (
 	id      CHAR(2) PRIMARY KEY,
 	nombre VARCHAR(500) COLLATE es_co_utf_8 NOT NULL,
-	dirigido BOOLEAN NOT NULL, ---false significa que persona2 también se re laciona con persona1 de la misma forma e.g papa serìa true mientras que hermanos serìa false.
 	observaciones VARCHAR(200),
+	inverso	CHAR(2) REFERENCES trelacion(id),
 	fechacreacion DATE NOT NULL,
 	fechadeshabilitacion DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
 		fechadeshabilitacion>=fechacreacion
 	)
 );
-
 
 CREATE TABLE persona_trelacion (
 	persona1 INTEGER NOT NULL REFERENCES persona,

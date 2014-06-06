@@ -31,7 +31,7 @@ if (!isset($_GET['term'])) {
     die("Error: Falta variable <i>term</i> con nombre buscado");
 }
 //retrieve the search term that autocomplete sends
-$term = trim(strip_tags($_GET['term']));
+$term = trim(strip_tags(var_escapa($_GET['term'], $db)));
 
 
 //trigger_error("term=$term");

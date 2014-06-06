@@ -32,10 +32,10 @@ edtchroot=`echo $dtchroot | sed -e "s/\//\\\\\\\\\//g"`
 #echo "edts=$edts";
 #echo "edtchroot=$edtchroot";
 
-nomplant="plantilla-conf"
+nomplant="conf.php.plantilla"
 
 if (test "$CON_TODO" = "1") then {
-	nomplant="plantilla-todomodulo-conf"
+	nomplant="conf.php.todomodulo.plantilla"
 } fi;
 
 if (test "$usivel" = "") then {
@@ -47,12 +47,12 @@ if (test -f /home/$usivel/.pgpass) then {
 } fi;
 
 mkdir -p $ns/DataObjects
-sed -e "s/dbnombre *= *\".*\"/dbnombre = \"$ns\"/g;s/dbclave *= *\".*\"/dbclave = \"$CLSIVELPG\"/g;s/dirsitio *= *\".*\"/dirsitio = \"sitios\/$ns\"/g;s/dirserv *= *\".*\"/dirserv = \"$edtchroot\"/g" pordefecto/${nomplant}.php > $ns/conf.php
-sed -e "s/dbnombre *= *\".*\"/dbnombre = \"$ns\"/g;s/dbclave *= *\".*\"/dbclave = \"$CLSIVELPG\"/g;s/dirsitio *= *\".*\"/dirsitio = \"sitios\/$ns\"/g;s/dirserv *= *\".*\"/dirserv = \"$edtchroot\"/g" pordefecto/plantilla-conf-local.php > $ns/conf-local.php
-sed -e "s/dirap *= *.*/dirap=$edts\/sitios\/$ns/g" pordefecto/plantilla-vardb.sh > $ns/vardb.sh
-sed -e "s/dirap *= *.*/dirap=$edts\/sitios\/$ns/g" pordefecto/plantilla-vardb-local.sh > $ns/vardb-local.sh
-cp pordefecto/plantilla-conf_int.php $ns/conf_int.php
-cp pordefecto/plantilla-conf_int-local.php $ns/conf_int-local.php
+sed -e "s/dbnombre *= *\".*\"/dbnombre = \"$ns\"/g;s/dbclave *= *\".*\"/dbclave = \"$CLSIVELPG\"/g;s/dirsitio *= *\".*\"/dirsitio = \"sitios\/$ns\"/g;s/dirserv *= *\".*\"/dirserv = \"$edtchroot\"/g" pordefecto/${nomplant} > $ns/conf.php
+sed -e "s/dbnombre *= *\".*\"/dbnombre = \"$ns\"/g;s/dbclave *= *\".*\"/dbclave = \"$CLSIVELPG\"/g;s/dirsitio *= *\".*\"/dirsitio = \"sitios\/$ns\"/g;s/dirserv *= *\".*\"/dirserv = \"$edtchroot\"/g" pordefecto/conf-local.php.plantilla > $ns/conf-local.php
+sed -e "s/dirap *= *.*/dirap=$edts\/sitios\/$ns/g" pordefecto/vardb.sh.plantilla > $ns/vardb.sh
+sed -e "s/dirap *= *.*/dirap=$edts\/sitios\/$ns/g" pordefecto/vardb-local.sh.plantilla > $ns/vardb-local.sh
+cp pordefecto/conf_int.php.plantilla $ns/conf_int.php
+cp pordefecto/conf_int-local.php.plantilla $ns/conf_int-local.php
 sudo touch $ns/ultimoenvio.txt
 sudo chown -f www:www $ns/ultimoenvio.txt
 sudo chgrp www $ns/conf*.php

@@ -46,7 +46,7 @@ function instablabasica($tabla, $llave_sec, $valor, $campos = array())
     $_REQUEST = $_POST = $_GET = array();
 
     $_REQUEST['tabla'] = $_GET['tabla'] = $tabla;
-    $_REQUEST["_qf__dataobjects_$tabla"]
+    $_REQUEST["_qf__dataobjects_$tabla"] 
         = $_POST["_qf__dataobjects_$tabla"] = '';
     $_REQUEST['id'] = $_POST['id'] = '';
     $_REQUEST[$llave_sec] = $_POST[$llave_sec] = $valor;
@@ -169,6 +169,11 @@ $c += instablabasica(
     'clase', 'nombre', 'clase1',
     array('id_municipio' => '1-1' )
 );
+/*$c += instablabasica(
+    'etiqueta', 'nombre', 'AMARILLO',
+    array('id' => '7' )
+); */
+
 
 if ($c > 0) {
     echo "** Errores: $c\n";

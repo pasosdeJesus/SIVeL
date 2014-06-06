@@ -446,9 +446,10 @@ class ReporteGeneral extends HTML_QuickForm_Action
             )
         );
         $buf_html = array();
-        $r = valida_caso($idcaso, $buf_html);
-        if ($r || count($buf_html) > 0) {
-            $msg_html = implode($buf_html, "\\n");
+	$buf_ort = "";
+        $r = valida_caso($idcaso, $buf_html, $buf_ort);
+        if (!$r || count($buf_html) > 0) {
+            $msg_html = implode($buf_html, "\n");
             if (trim($msg_html) != "") {
                 error_valida($msg_html, null, '', true);
             }
@@ -459,6 +460,7 @@ class ReporteGeneral extends HTML_QuickForm_Action
             array('m_fuentes'=>'Fuentes')
         );
         $html_rep = ResConsulta::reporteGeneralHtml($idcaso, null, $campos);
+	echo $buf_ort;
         echo "<pre>";
         echo $html_rep;
         echo "</pre>";

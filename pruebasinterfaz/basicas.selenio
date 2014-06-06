@@ -1058,7 +1058,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Abuela</td>
+	<td>link=ABUELA(O)</td>
 	<td></td>
 </tr>
 <tr>
@@ -1083,7 +1083,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Abuela</td>
+	<td>link=ABUELA(O)</td>
 	<td></td>
 </tr>
 <tr>
@@ -1120,11 +1120,6 @@
 	<td>type</td>
 	<td>nombre</td>
 	<td>x</td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>xpath=//input[@type='checkbox']</td>
-	<td></td>
 </tr>
 <tr>
 	<td>type</td>

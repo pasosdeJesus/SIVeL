@@ -25,7 +25,7 @@
 			(ver <xref linkend="nomcakephp"></xref>.  Los nombres 
 			de campos no llevan espacios ni _, excepto que una
 			llave foranea de la tabla <literal>t</literal>
-			puede ser <literal>id_tabla</literal>
+			puede ser <literal>id_t</literal>
 			--aunque un campo que referencie llave de otra tabla 
 			puede tener un nombre diferente cuando se requiera 
 			aclarar.
@@ -50,7 +50,7 @@ herram/estandares.sh
 			Los errores quedarán en el archivo 
 			<filename>/tmp/e</filename>.
 		</para>
-		<para>Las fuentes en Javascript seguirán la guía de éstilo de
+		<para>Las fuentes en Javascript seguirán la guía de estilo de
 			Google <xref linkend="javascriptgoogle"></xref></para>
 	</sect2>
 
@@ -78,7 +78,7 @@ make tecdoc
 			</screen>
 			El resultado queda en el directorio 
 			<filename>pdoc</filename> o puede consultarse en
-			<ulink url="&URLSITE;/tec/"/>.
+			<ulink url="&URLSITE;tec/"/>.
 		</para>
 	</sect2>
 
@@ -133,34 +133,35 @@ make
 	<sect2 id="controlversiones">
 		<title>Control de versiones</title>
 		<para>Las fuentes de la aplicación se mantienen en un
-			repositorio CVS amablemente mantenido por SourceForge y
+			repositorio git amablemente mantenido por Github y
 			utilizable públicamente en modo de sólo lectura.
 		</para>
 		<para>
 			Los usuarios anonimos puede extraer fuentes de sólo 
 			lectura con:
 			<screen>
-cvs -z3 -danonymous@sivel.cvs.sourceforge.net:/cvsroot/sivel co -rSIVEL1_1 sivel
-			</screen>
-			Los desarrolladores pueden extraer las fuentes de
-			lectura/escritura como se presenta a continuación
-			(remplace <literal>miusuario</literal> por su 
-			identificación en SourceForge):
-			<screen>
-cvs -z3 -dmiusuario@sivel.cvs.sourceforge.net:/cvsroot/sivel co -rSIVEL1_1 sivel
-			</screen>
-			o una vez con las fuentes pueden establecerse las 
-			variables CVSROOT y CVS_RSH con la utilidad 
-			<filename>pcvs.sh</filename>:
-			<screen>
-./pcvs.sh
-cvs -z3 co sivel
+git clone -b sivel1_2 https://github.com/pasosdeJesus/SIVeL.git
 			</screen>
 		</para>
-		<para>La rama de las versión 1.1 es: 
-			"<literal>SIVEL1_1</literal>".
+		<para>La rama de las versión 1.2 es: 
+			"<literal>sivel1_2</literal>".
 			La versión en desarrollo está en la rama 
-			"<literal>HEAD</literal>".
+			"<literal>master</literal>".
+		</para>
+		<para>
+			Los desarrolladores con permiso de escritura pueden usar:
+			<itemizedlist>
+				<listitem>
+					<para><filename>herram/gitact.sh</filename> Para actualizar.</para>
+				</listitem>
+				<listitem>
+					<para><filename>herram/gitcommit.sh</filename> Para agregar cambios.</para>
+				</listitem>
+				<listitem>
+					<para><filename>herram/trans.sh</filename> Para agregar cambios.</para>
+				</listitem>
+			</itemizedlist>
+	
 		</para>
 	</sect2>
 	<sect2 id="fuentes">
@@ -249,8 +250,7 @@ cvs -z3 co sivel
 					</para>
 				</listitem>
 				<listitem>
-					<para>.odt: Documentación en Open 
-						Document Format.
+					<para>.odt: Documentación en Open Document Format.
 					</para>
 				</listitem>
 				<listitem>
@@ -263,21 +263,23 @@ cvs -z3 co sivel
 					</para>
 				</listitem>
 				<listitem>
-					<para>.plantilla: Fuente en PHP con 
-						variables de configuración 
-						por defecto.</para>
+					<para>.plantilla: Fuente con variables de configuración 
+						por defecto, para copiar y modificar.</para>
 				</listitem>
 				<listitem>
-					<para>.png: Formato gráfico sin 
-						perdidas.</para>
+					<para>.png: Formato gráfico sin perdidas.</para>
 				</listitem>
 				<listitem>
-					<para>.sed: Instrucciones para el 
-						Stream Editor sed.</para>
+					<para>.pot: Fuente de de localización.</para>
 				</listitem>
 				<listitem>
-					<para>.selenio: Pruebas de regresión 
-						para Selenium.</para>
+					<para>.pot: Localización compilada.</para>
+				</listitem>
+				<listitem>
+					<para>.sed: Instrucciones para el Stream Editor sed.</para>
+				</listitem>
+				<listitem>
+					<para>.selenio: Pruebas de regresión para Selenium.</para>
 				</listitem>
 				<listitem>
 					<para>.sh: Archivos de comandos para 
@@ -315,6 +317,19 @@ cvs -z3 co sivel
 				</listitem>
 			</itemizedlist>
 		</para>
+		<para>Además durante la configuración y la generación de documentación 
+			se generan archivos con las siguientes extensiones:
+			<itemizedlist>
+				<listitem>
+					<para>.dvi: Formato de salida del programa TeX (sigla de 
+						Device Independent).</para>
+				</listitem>
+				<listitem>
+					<para>.pdf: Formato para documentos digitales (sigla de 
+						Portable Document Format)</para>
+				</listitem>
+			</itemizedlist>
+		</para>
 		<sect3 id="fuentes-herramientas">
 			<title>Fuentes de herramientas administrativas y de desarrollo</title>
 			<para>
@@ -343,7 +358,16 @@ ver la descripción de cada una en <xref linkend="admin2"></xref>.</para>
 			<para>
 El archivo de comandos
 <literal>herram/buscafallas.sh</literal> verifica que se sigan
-algunas prácticas seguras en las fuentes.
+algunas prácticas seguras en las fuentes. 
+			</para>
+			<para>
+El archivo de comandos
+<literal>herram/trans.sh</literal> ayuda a aplicar transformaciones
+automáticas a las fuentes definidas en <filename>herram/trans.sed</filename> y
+<filename>herram/trans.awk</filename>.
+El archivo de comandos
+<literal>herram/geo/dump-a-datos.sh</literal> genera un volcado de 
+la información geográfica incluida en la base.
 			</para>
 		</sect3>
 
@@ -456,7 +480,8 @@ En cuanto a base de datos la estructura en SQL (ver
 y los datos iniciales en archivos con nombres de la forma 
 <filename>datos-*.sql</filename>.   A continuación se incluye un grafo extaido 
 de <filename>estructura.sql</filename> y generado
-con GraphViz (ver <xref linkend="graphviz"></xref>).
+de las fuentes con <filename>herram/incl.sh</filename> y
+producido con GraphViz (ver <xref linkend="graphviz"></xref>).
 		</para>
 		<informalfigure>
 			<screenshot><mediaobject><imageobject>

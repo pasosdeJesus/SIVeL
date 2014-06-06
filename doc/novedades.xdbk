@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
-	<varlistentry><term>Versión 1.2b1 (Ene.2014)</term>
+	<varlistentry><term>Versión 1.2b2 (Jun.2014)</term>
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>
-Cambiado algoritmo de condensado de claves a bcrypt 
-(ver <ulink url="https://www.usenix.org/legacy/events/usenix99/provos/provos_html/node1.html"></ulink>).  
-Tras actualizar fuentes 
-desde el directorio de su sitio ejecute
+							Listado de etnias completado con <ulink url="http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls"></ulink>. Listado de iglesias mejorado.
+					</para></listitem>
+					<listitem><para>
+Módulo etiquetas permite agregar una columna con etiquetas en consulta web.  
+En <filename>conf.php</filename> agregar en <literal>cwncampos</literal>:
+<screen>
+'m_etiquetas' => _('Etiquetas'),
+</screen>
+					</para></listitem>
+					<listitem><para>
+En consulta web como tabla color de un caso ahora sólo en el código (no en toda la fila).
+					</para></listitem>
+
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
+	<varlistentry><term>Versión 1.2b1 (Mar.2014)</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem><para>
+Refinadas relaciones entre personas, posibilida de especificar relación
+inversa para agregar simultaneamente 2 relaciones al añadir familiares
+de una víctima.
+					</para></listitem>
+
+					<listitem><para>
+Almacenamiento de claves más seguro: Cambiado algoritmo de condensado de 
+claves a bcrypt 
+(ver <ulink url="https://www.usenix.org/legacy/events/usenix99/provos/provos_html/node1.html"></ulink>),
+que usa, si está disponible, el buen generador de números 
+aleatorios de OpenBSD (<filename>/dev/random</filename>), adJ 5.4 lo 
+configura por defecto para que el servidor web y SIVeL lo puedan usar. 
+Tras actualizar fuentes desde el directorio de su 
+sitio ejecute
 <screen>
   sudo ../../bin/creaesquema.sh
 </screen>
@@ -25,18 +57,14 @@ Simplificadas tablas de usuarios.
 					<listitem><para>
 Información geográfica actualizada con DIVIPOLA 2013.
 					</para></listitem>
-
-					<listitem><para>
-Reimplementado módulo de mezcla.
-					</para></listitem>
 					<listitem><para>
 Función soundexesp, agradecimiento a Oliver Mazariegos de Grupo Vesica.
 					</para></listitem>
 					<listitem><para>
 Añadidas variables de configuración para añadir validaciones:
-$GLOBALS['validaciones_tipicas'], 
-$GLOBALS['gancho_valida_caso'], 
-$GLOBALS['gancho_valida_base'].
+<literal>$GLOBALS['validaciones_tipicas']</literal>, 
+<literal>$GLOBALS['gancho_valida_caso']</literal>, 
+<literal>$GLOBALS['gancho_valida_base']</literal>.
 					</para></listitem>
 					<listitem><para>
 Añadido archivo de comandos <literal>bin/elimcaso.sh</literal> que ayuda a 
@@ -45,13 +73,22 @@ eliminar un caso dado el código
 					<listitem><para>
 Añadidas variable de configuración para controlar presentación de 
 reporte tabla: $GLOBALS['reptabla_nonacimiento'], 
-$GLOBALS['reptabla_noagresion'], 
-$GLOBALS['reptabla_separa_ubicacion'] (que separa ubicación en 2 columnas para
-municipio y departamento),
-$GLOBALS['reptabla_separa_nomap'] (que separa nombres y apellidos en 2 columnas) y
-$GLOBALS['reptabla_tipificacion_breve'] (que presenta tipificación sin código ni supracategoria).
+<literal>$GLOBALS['reptabla_noagresion']</literal>, 
+<literal>$GLOBALS['reptabla_separa_ubicacion']</literal> (que separa 
+ubicación en 2 columnas para municipio y departamento),
+<literal>$GLOBALS['reptabla_separa_nomap']</literal> (que separa 
+nombres y apellidos en 2 columnas) y
+<literal>$GLOBALS['reptabla_tipificacion_breve']</literal> (que presenta 
+tipificación sin código ni supracategoria).
 					</para></listitem>
 					<listitem><para>
+Validaciones: tanto desde el menú  
+<menuchoice><guimenu>Otros</guimenu><guimenuitem>Validar</guimenuitem></menuchoice> como con el botón 
+
+<menuchoice><guimenu>Val. y Rep. G</guimenu></menuchoice> al editar
+un caso se verifica que se hayan duplicado categorias que lo requieren.
+					 </para></listitem>
+				       <listitem><para>
 Fallas resueltas: Al buscar por consulta detallada en pestaña ubicación no 
 pone automáticamente latitud y longitud. Agradecemos reporte a Miltón Mejía.
 Permite poner sector social y rango edad en víctimas colectivas.
@@ -69,12 +106,11 @@ se han desplazado las víctimas. Agradecemos al
 SJR Colombia por financiar este desarrollo de dominio público.  
 					</para></listitem>
 					<listitem><para>
-Modulo experimental <literal>mezcla</literal> para mezclar casos.
-Ayuda a mezclar dos casos identificados por sus códigos
-o permite elegir 2 casos entre un listado de posibles repetidos.  
-Puede mezclar bien uno en otro o bien crear un caso nuevo con el
-resultado de la mezcla. Por ser experimental se
-recomienda examinar caso resultante.
+Modulo <literal>mezcla</literal> para mezclar casos:
+Búsqueda de casos repetidos por mezclar por
+fecha, departamento o nombres similares. Emplea heurística
+para mezclar.  Soporte de homónimos o nombres similares para 
+excluirlos de búsquedas para mezclar.
 					</para></listitem>
 					<listitem><para>
 Usabilidad: agrega automáticamente latitud y longitud al elegir 
@@ -146,7 +182,6 @@ y <filename>vardb-local.sh</filename>.
 	</varlistentry>
 
 	</variablelist>
-
-El historial de la versión 1.1 puede verse en el <ulink url="http://sivel.sf.net/1.1/">manual de esa versión</ulink>. 
+	<para>El historial de la versión 1.1 puede verse en el <ulink url="http://sivel.sf.net/1.1/">manual de esa versión</ulink>. </para>
 
 

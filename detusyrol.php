@@ -100,7 +100,7 @@ if ($actsincambiarclave || $f->validate()) {
         $res = $f->process(array($b, 'processForm'), false);
         //echo "OJO 5 res=$res\n";
         if ($_SESSION['id_usuario'] == $f->_submitValues['id']) {
-            idioma($f->_submitValues['idioma']);
+            idioma(var_escapa($f->_submitValues['idioma']));
         }
         if (isset($f->_submitValues['añadir']) ) {
             $db = $d->getDatabaseConnection();

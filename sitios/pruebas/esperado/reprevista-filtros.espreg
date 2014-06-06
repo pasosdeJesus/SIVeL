@@ -31,7 +31,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -77,7 +77,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -123,7 +123,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -169,7 +169,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -215,7 +215,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -261,7 +261,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -307,7 +307,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -353,7 +353,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -399,7 +399,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -445,7 +445,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -491,7 +491,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -537,7 +537,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -583,7 +583,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -629,7 +629,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -675,7 +675,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 1 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 <tr style='background-color: #FFFF00'><td valign='top'><a href='captura_caso.php?modo=edita&id=1'>1</a></td><td valign='top'>memo</td><td valign='top'>2007-08-07</td><td valign='top'>APELLIDOS NOMBRES (2006) <a href='consulta_web_cat.php?t = T&s = 1000&c = 1000'>T1000</a> | Víctimas:4</td><td valign='top'>presuntos r1</td><td valign='top'>T:1000:1000 supra1:cat1</td><td valign='top'>ffrecuente1 2007-10-10</td>
 <td valign=top><form method="POST" action="consulta_web_correo.php">
 <input type="hidden" name="caso_id" value="1">
@@ -721,7 +721,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Todas las restricciones<!doctype html>
 <html>
 <head>
@@ -754,7 +754,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Código errado<!doctype html>
 <html>
 <head>
@@ -787,7 +787,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Título errado<!doctype html>
 <html>
 <head>
@@ -820,7 +820,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Departamento errado<!doctype html>
 <html>
 <head>
@@ -853,7 +853,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Municipio errado<!doctype html>
 <html>
 <head>
@@ -886,7 +886,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Clase errado<!doctype html>
 <html>
 <head>
@@ -919,7 +919,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Nombre errado<!doctype html>
 <html>
 <head>
@@ -952,7 +952,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Dia final errado<!doctype html>
 <html>
 <head>
@@ -985,7 +985,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Mes final errado<!doctype html>
 <html>
 <head>
@@ -1018,7 +1018,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Año final errado<!doctype html>
 <html>
 <head>
@@ -1051,7 +1051,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Día inicial errado<!doctype html>
 <html>
 <head>
@@ -1084,7 +1084,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Mes inicial errado<!doctype html>
 <html>
 <head>
@@ -1117,7 +1117,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Año inicial errado<!doctype html>
 <html>
 <head>
@@ -1150,7 +1150,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** P. Resp errado<!doctype html>
 <html>
 <head>
@@ -1183,7 +1183,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Sector Social errado<!doctype html>
 <html>
 <head>
@@ -1216,7 +1216,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Usuario errado<!doctype html>
 <html>
 <head>
@@ -1249,7 +1249,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Ordenado por localización
 <!doctype html>
 <html>
@@ -1283,7 +1283,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Ordenado por código
 <!doctype html>
 <html>
@@ -1317,7 +1317,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th><th valign=top>Retroalimentación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Sin retroalimentación
 <!doctype html>
 <html>
@@ -1351,7 +1351,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th><th valign='top'>Fuentes</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Sin fuentes
 <!doctype html>
 <html>
@@ -1385,7 +1385,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th><th valign='top'>Tipificación</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Sin tipificacion
 <!doctype html>
 <html>
@@ -1419,7 +1419,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th><th valign='top'>Pr. Resp.</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Sin P. Responsables
 <!doctype html>
 <html>
@@ -1453,7 +1453,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th><th valign='top'>Víctimas</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Sin Víctimas
 <!doctype html>
 <html>
@@ -1487,7 +1487,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Sin Localización
 <!doctype html>
 <html>
@@ -1521,7 +1521,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th><th valign='top'>Fecha</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Sin Fecha
 <!doctype html>
 <html>
@@ -1555,7 +1555,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th><th valign='top'>Descripción</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Sin Memo
 <!doctype html>
 <html>
@@ -1589,7 +1589,7 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr><th valign='top'>Código</th></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>** Sin Código
 <!doctype html>
 <html>
@@ -1623,5 +1623,5 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background = ""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr></tr>
+</script></head><body background=""><html><head><title>Tabla</title></head><body>Consulta de 0 casos. <p><table border=1 cellspacing=0 cellpadding=5><tr></tr>
 </table><a href = "consulta_web.php">Consulta Web</a>, <div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html>

@@ -72,7 +72,8 @@ function elimina_caso(&$db, $idcaso)
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
-            echo "Se intentó eliminar $c<br>";
+            echo "Se intentó eliminar " 
+                . htmlentities($c,  ENT_COMPAT, 'UTF-8') . "<br>";
         }
         die($res->getMessage() ." - " . $res->getUserInfo());
     }

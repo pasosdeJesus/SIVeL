@@ -135,7 +135,7 @@ if (test "$SALTAINI" != "1") then {
 	fuenteschrootsed=`echo $fuentes | sed -e "s/$chres//g" | sed -e "s/\//\\\\\\\\\//g"`;
 
 
-	( cat sitios/pordefecto/plantilla-conf.php; ) | 
+	( cat sitios/pordefecto/conf.php.plantilla; ) | 
 	sed -e "s/^ *\$dbservidor *=.*/\$dbservidor = \"unix($chres$dschrootsed)\";/g" |
 	sed -e "s/^ *\$dbusuario *=.*/\$dbusuario = \"$dbusuario\";/g"  |
 	sed -e "s/^ *\$dbclave *=.*/\$dbclave = \"$dbclave\";/g"  |
@@ -158,9 +158,9 @@ EOF
 	sudo chgrp www sitios/pruebas/conf.php
 	chmod g-wx+r sitios/pruebas/conf.php
 
-	sed -e "s/^ *dirap=.*/dirap=\"$fuentessed\/sitios\/pruebas\"/g" sitios/pordefecto/plantilla-vardb.sh > sitios/pruebas/vardb.sh
+	sed -e "s/^ *dirap=.*/dirap=\"$fuentessed\/sitios\/pruebas\"/g" sitios/pordefecto/vardb.sh.plantilla > sitios/pruebas/vardb.sh
 
-	cp sitios/pordefecto/plantilla-conf_int.php sitios/pruebas/conf_int.php
+	cp sitios/pordefecto/conf_int.php.plantilla sitios/pruebas/conf_int.php
 
 	mkdir -p sitios/pruebas/DataObjects
 #	cp $dirplant/DataObjects/$nombase.ini sitios/pruebas/sivelpruebas.ini

@@ -260,8 +260,8 @@ cd /var/www/htdocs/sivel/sitios
 ./nuevo.sh sivel
 </screen>
 Este archivo de ordenes 
-copiará los archivo <filename>pordefecto/plantilla-conf.php</filename> 
-y <filename>pordefecto/plantilla-vardb.sh</filename> como
+copiará los archivo <filename>pordefecto/conf.php.plantilla</filename> 
+y <filename>pordefecto/vardb.sh.plantilla</filename> como
 <filename>sivel/conf.php</filename> y <filename>sivel/vardb.sh</filename>
 cuadrando rutas y usuario de PostgreSQL (si requiere cambiar usuario
 o clave de PostgreSQL edite <filename>sivel/conf.php</filename>).  También
@@ -603,13 +603,14 @@ servidor en <ulink url="https://127.0.0.1/actualiza.php"></ulink>.
 Es posible que tenga que iniciar la sesión 2 o 3 veces mientras
 se actualiza en cada intento la forma de cifrado de las claves<footnote><para>En
         caso de que tenga incoveniente reiterativos con claves asegurese 
-        que en la base de datos se esté almacenando el condensado SHA256 
-        de la clave y no el antiguo MD5, esto lo puede hacer para el usuario 
+        que en la base de datos se esté almacenando el condensado bcrypt
+				de la clave y no los antiguos SHA-256 y MD5. <!--, esto lo puede hacer 
+				para el usuario 
         <literal>juan</literal> ejecutando desde el directorio
         del sitio:
         <screen>
             ../../bin/clave_sha1.sh juan
-        </screen>
+					</screen> -->
 </para></footnote>.</para>
 	</listitem>
 	<listitem>

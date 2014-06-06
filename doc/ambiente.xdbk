@@ -244,9 +244,9 @@ defecto una partición primaria (ver <xref linkend="instalacion"></xref>).
 					</para>
 				</listitem>
 				<listitem>
-					<para>[Nivel 2] Lo de [Nivel 1] y además red local 
-						o RAL o LAN (puede ser Ethernet 
-velocidades 100MB o 1GB con cableado estructurado y concentrador o 
+					<para>[Nivel 2] Lo de [Nivel 1] y además Red de Area Local 
+						o RAL (del inglés <emphasis>LAN</emphasis> que puede ser Ethernet 
+de velocidades 100MB o 1GB con cableado estructurado y concentrador o 
 bien inalámbrica 2MB).
 					</para>
 				</listitem>
@@ -323,7 +323,7 @@ de las víctimas.
 		de correo, hoja de cálculo, procesador de texto), aprovechar 
 		el servidor web para practicar diseño de páginas web 
 		(con HTML y CSS) o para aprender programación (por ejemplo 
-		PHP y Javascript) y sobre documentación técnica (DocBook,
+		Ruby, PHP y Javascript) y sobre documentación técnica (DocBook,
 		LaTeX).</para>
 </listitem>
 <listitem>
@@ -346,7 +346,7 @@ de las víctimas.
 <listitem>
 	<para>[Nivel 4], [Nivel 5] y [Nivel 6] El servidor continuamente conectado a Internet 
 		puede ser fundamental en la estrategía de comunicaciones de la 
-		organización (apreciada por agencias de cooperación) por 
+		organización por 
 		cuanto puede configurarse para:
 		alojar página web de la organización con limitaciones
 		de espacio dadas por capacidad de disco y con posibilidad

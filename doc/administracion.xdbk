@@ -486,7 +486,7 @@ cd /var/www/htdocs/sivel/sitios/sivel
                 </variablelist>
                 Si olvida la clave de un usuario puede eliminarlo y volver
                 a crearlo o ingresara a la interfaz SQL y modificar el
-                condensado SHA256 con la clave (ver ejemplo más adelante).
+                condensado bcrypt con la clave (ver ejemplo más adelante).
             </para>
             <para>Para contar los registros de las tablas de la base empleada
                 por su sitio:
@@ -495,40 +495,52 @@ cd /var/www/htdocs/sivel/sitios/sivel
 ../../bin/cuenta.sh
                         </screen>
                     </para>
-                    <para>Puede familiarizarse más con
-                        la estructura de la base de datos documentanda en 
-                        este manual y explorarla con comandos SQL (con cuidado)
-                        desde una interfaz interactiva plana que inicia
-                        desde el directorio de su sitio con:
+										<para>
+Puede familiarizarse más con la estructura de la base de datos documentanda en 
+este manual y explorarla con comandos SQL (con cuidado)
+desde una interfaz interactiva plana que inicia desde el directorio de su 
+sitio con:
                         <screen>
 cd /var/www/htdocs/sivel/sitios/sivel
 ../../bin/psql.sh
                         </screen>
-                        Por ejemplo para examinar las cuentas y condensados
-                        SHA de claves ejecute allí:
+Por ejemplo para examinar las cuentas y condensados bcrypt de claves ejecute 
+allí:
                         <screen>
-SELECT id_usuario, password FROM usuario;
+SELECT nusuario, encrypted_password FROM usuario;
                         </screen>
-                        Si por ejemplo olvida la clave del usuario 
+Si por ejemplo olvida la clave del usuario 
                         <literal>juan</literal> puede
-                        ponerle la clave <literal>noolvidar</literal> así:
+ponerle la clave <literal>noolvidar</literal> así:
                         <screen>
-UPDATE usuario SET password='1e6d8c848f4c51b9e01e5512ac4ae413de3e1840';
+UPDATE usuario SET encrypted_password='$2a$16$zxwFRS0O2R/fKY5ZdV9aHOshGS1oL61wkfzhPlcyBg8ei3eByaC8C';
                         </screen>
                     </para>
 
-                    <para>Desde esa interfaz puede realizar otras operaciones
-                        SQL como borrar, un ejemplo para eliminar acciones
-                        bélicas se incluye en un archivo de comandos que
-                        puede ejecutar así:
+										<para>
+Desde esa interfaz puede realizar otras operaciones SQL como borrar, 
+un ejemplo para eliminar acciones bélicas se incluye en un archivo de 
+comandos que puede ejecutar así:
                         <screen>
 cd /var/www/htdocs/sivel/sitios/sivel
 ../../bin/elim-belicas.sh
                         </screen>
-                        Ese archivo de comandos a su vez emplea 
-                        <filename>bin/elimcomun.sh</filename>, que facilita
-                        eliminar los casos incluidos en una vista.
-                        </para>
+Ese archivo de comandos a su vez emplea <filename>bin/elimcomun.sh</filename>, 
+que facilita eliminar los casos incluidos en una vista.
+											</para>
+											<para>Para borrar un caso (digamos el 323):
+                        <screen>
+cd /var/www/htdocs/sivel/sitios/sivel
+../../bin/elimcaso.sh 323
+                        </screen>
+											</para>
+											<para>Y para borrar un rango de casos (por ejemplo del 323 al 500):
+                        <screen>
+cd /var/www/htdocs/sivel/sitios/sivel
+../../bin/elim-rango.sh 323 500
+                        </screen>
+											</para>
+
         </sect2>
 
        <sect2 id="retroalimentacion">

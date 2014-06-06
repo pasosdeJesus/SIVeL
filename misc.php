@@ -20,6 +20,7 @@
  * Funciones diversas útiles en varias fuentes PHP.
  */
 
+require_once "bcrypt.php";
 require_once "Auth.php";
 require_once "HTML/QuickForm.php";
 require_once "HTML/Common.php";
@@ -494,8 +495,8 @@ function error_valida($msg, $valores, $iderr = '', $enhtml = false)
     if (isset($valores) && is_array($valores) && count($valores) > 0) {
         $_SESSION['recuperaErrorValida'] = $valores;
     }
-    echo "<script>";
-    echo "alert('$msg');";
+    echo "<script language=\"JavaScript\">";
+    echo "alert('" . json_encode($msg) . "');";
     echo "</script>";
     if ($iderr != '') {
         $_SESSION[$iderr] = $msg;
@@ -720,7 +721,9 @@ function valorSinInfo(&$do, $c)
         $rel = $enl[$do->__table][$c];
         $pd = strpos($rel, ':');
         $ndo = substr($rel, 0, $pd);
-        $or = objeto_tabla($ndo);
+        $db2 = new DB_DataObject();
+        sin_error_pear($db2);
+        $or = $db2->factory($ndo);
     } else {
         $or =& $do;
     }
@@ -787,7 +790,8 @@ function valores_pordefecto_form($d, $form, $merr = true)
                         //echo "OJO empleando ''<br>";
                         $v = '';
                     } else { 
-                        //echo "OJO empleando valorSinInfo c=$c, tab[c]={$tab[$c]}, d->c={$d->$c}<br>";
+                        //echo "OJO empleando valorSinInfo c=$c, 
+                        //tab[c]={$tab[$c]}, d->c={$d->$c}<br>";
                         $v = valorSinInfo($d, $c);
                     }
                 } else {
@@ -917,8 +921,8 @@ function textCounter(field, cntfield, maxlimit)
         }
         fclose($rh);
     } else {
-        $f = isset($GLOBALS['fondo']) ? $GLOBALS['fondo'] : '';
-        echo '</' . 'head><' . 'body background = "' . $f . '">';
+        $html_f = isset($GLOBALS['fondo']) ? $GLOBALS['fondo'] : '';
+        echo '</' . 'head><' . 'body background="' .  $html_f . '">';
     }
 }
 
@@ -1766,7 +1770,7 @@ function verifica_edad_y_rango($e, $r)
      */
 function agrega_control_CSRF(&$form)
 {
-    $_SESSION['sin_csrf'] = mt_rand(0, 1000);
+    $_SESSION['sin_csrf'] = base64_encode(colchon_aleatorios(16));
     $form->addElement('hidden', 'evita_csrf', $_SESSION['sin_csrf']);
 }
 
@@ -2246,10 +2250,11 @@ function es_objeto_nulo($do)
  *
  * @param integer $idcaso    Identificación de caso por validar.
  * @param string  &$buf_html Arreglo de errores retornados escapados
+ * @param string  &$buf_ort  Errores ortograficos
  *
  * @return bool Validado
  */
-function valida_caso($idcaso, &$buf_html)
+function valida_caso($idcaso, &$buf_html, &$buf_ort)
 {
     $valr = true;
     $dcaso = objeto_tabla('caso');
@@ -2318,7 +2323,16 @@ function valida_caso($idcaso, &$buf_html)
             $prob = $db->getOne($q);
             sin_error_pear($prob);
             if ((int)$prob > 0) {
-                $buf_html[] = _("Caso") . " " . $desc;
+                $q = "SELECT *
+                    FROM ($sql) AS s
+                    WHERE s.id_caso = '$idcaso'";
+                $r = hace_consulta($db, $q);
+                $row = array();
+                $r->fetchInto($row);
+                unset($row[0]);
+                $re = implode(", ", $row);
+                $prob = $db->getOne($q);
+                $buf_html[] = _("Caso") . " " . $desc . ". " . $re;
                 $valr = false;
             }
         }
@@ -2346,14 +2360,13 @@ function valida_caso($idcaso, &$buf_html)
         }
         $r=`$cmd`;
         if ($r != "") {
-            $buf_html[] = _("Errores ortográficos en memo") . ": $r<br>" .
+            $buf_ort .= _("Errores ortográficos en memo") . ": $r<br>" .
                 str_replace(
                     '%l', $GLOBALS['CHROOTDIR'] . getcwd() . "/" .
                     $GLOBALS['DICCIONARIO'], $GLOBALS['MENS_ORTOGRAFIA']
                 );
         }
     }
-
 
     return $valr;
 }

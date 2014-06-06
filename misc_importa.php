@@ -1529,6 +1529,15 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs,
     return $pr;
 }
 
+/**
+ * Separa apellidos de nombres
+ *
+ * @param string $apnom      Apellidos nombres
+ * @param string &$apellidos Apellidos retornados
+ * @param string &$nombres   Nombres retornados
+ *
+ * @return void Propone separción de $apnom en $apellidos y $nombres
+ */
 function divide_apellidos_nombres($apnom, &$apellidos, &$nombres)
 {
     $r = preg_replace("/\s+/", " ", $apnom);

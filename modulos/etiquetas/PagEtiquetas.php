@@ -204,7 +204,7 @@ class PagEtiquetas extends PagBaseSimple
 
         // Actualizamos observaciones
         foreach ($valores as $i => $v) {
-            if (substr($i, 0, 5)=='fobs_') {
+            if (substr($i, 0, 5)=='fobs_' && (int)$idcaso > 0) {
                 $po = explode('_', $i);
                 $dec =& objeto_tabla('caso_etiqueta');
                 $dec->id_caso = $idcaso;
@@ -439,6 +439,41 @@ class PagEtiquetas extends PagBaseSimple
     static function consolidadoFiltro(&$db, &$form)
     {
         PagEtiquetas::estadisticasIndFiltro($db, $form);
+    }
+
+    /**
+     * Llamada desde la función que muestra cada fila de la tabla en
+     * ResConsulta.
+     * Hace posible modificar la tabla.
+     *
+     * @param object &$db    Base de datos
+     * @param string $cc     Campo que se procesa
+     * @param int    $idcaso Número de caso
+     *
+     * @return Cadena por presentar
+     */
+    static function resConsultaFilaTabla(&$db, $cc, $idcaso)
+    {
+        $vr = "";
+        if (!isset($_POST[$cc])) {
+            return $vr;
+        }
+        $nc = substr($cc, 2);
+        if ($nc == 'etiquetas') {
+            $q = "SELECT etiqueta.nombre FROM etiqueta, caso_etiqueta
+                WHERE caso_etiqueta.id_etiqueta=etiqueta.id 
+                AND caso_etiqueta.id_caso='$idcaso'";
+            $r = hace_consulta($db, $q);
+            sin_error_pear($r);
+            $row = array();
+            $html_sep = "";
+            while ($r->fetchInto($row)) {
+                $vr .= $html_sep . htmlentities($row[0], ENT_COMPAT, 'UTF-8');
+                $html_sep = ", ";
+            }
+        }
+
+        return $vr;
     }
 
     /**

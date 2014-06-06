@@ -95,7 +95,15 @@ $GLOBALS['emisor_correo'] = 'bancodat@nocheyniebla.org';
 /** Validaciones indice es mensaje de error y valor es consulta SQL
  * @global string $GLOBALS['validaciones_tipicas']
  */
-$GLOBALS['validaciones_tipicas'] = array();
+$GLOBALS['validaciones_tipicas'] = array(
+    'sin categorias replicadas' =>
+    'SELECT id_caso, id_categoria FROM acto AS a1, categoria WHERE 
+    a1.id_categoria=categoria.id 
+    AND contadaen IS NOT NULL 
+    AND contadaen NOT IN 
+    (SELECT id_categoria FROM acto AS a2 WHERE a1.id_caso=a2.id_caso) '
+
+);
 
 /** Funciones para validar caso de manera más compleja que con
  * validaciones_tipicas

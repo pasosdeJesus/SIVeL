@@ -2606,7 +2606,8 @@ BEGIN
 	-- 1: LIMPIEZA:
 		-- pasar a mayuscula, eliminar la letra \"H\" inicial, los acentos y la enie
 		-- 'holá coñó' => 'OLA CONO'
-		input=translate(ltrim(trim(upper(input)),'H'),'ÑÁÉÍÓÚÀÈÌÒÙÜ','NAEIOUAEIOUU');
+        input=translate(ltrim(trim(upper(input)),'H'),'ÑÁÉÍÓÚÀÈÌÒÙÜ',
+            'NAEIOUAEIOUU');
  
 		-- eliminar caracteres no alfabéticos (números, símbolos como &,%,\",*,!,+, etc.
 		input=regexp_replace(input, '[^a-zA-Z]', '', 'g');
@@ -2658,7 +2659,8 @@ BEGIN
 	--6: en el resto del string, quitar vocales y vocales fonéticas
 	resto=translate(resto,'@AEIOUHWY','@');
  
-	--7: convertir las letras foneticamente equivalentes a numeros  (esto hace que B sea equivalente a V, C con S y Z, etc.)
+    --7: convertir las letras foneticamente equivalentes a numeros  
+    --   (esto hace que B sea equivalente a V, C con S y Z, etc.)
 	resto=translate(resto, 'BPFVCGKSXZDTLMNRQJ', '111122222233455677');
 	-- así va quedando la cosa
 	soundex=pri_letra || resto;
@@ -2703,7 +2705,7 @@ if (!aplicado($idac)) {
     );
     hace_consulta(
         $db, "ALTER TABLE usuario 
-        ADD COLUMN fechacreacion DATE NOT NULL DEFAULT '2001-01-01'" , false
+        ADD COLUMN fechacreacion DATE NOT NULL DEFAULT '2001-01-01'", false
     );
     hace_consulta(
         $db, "ALTER TABLE usuario " .
@@ -2717,10 +2719,15 @@ if (!aplicado($idac)) {
         funcionario.nombre = usuario.nusuario", false
     );
     hace_consulta(
-        $db, "INSERT INTO usuario (id, nusuario, password, nombre, descripcion, rol, idioma, fechadeshabilitacion) (SELECT id, nombre, '', nombre, '', 4, 'es_CO', current_date FROM funcionario WHERE nombre NOT IN (SELECT nusuario FROM usuario))", false
+        $db, "INSERT INTO usuario (id, nusuario, password, nombre, descripcion,
+        rol, idioma, fechadeshabilitacion) 
+        (SELECT id, nombre, '', nombre, '', 4, 'es_CO', current_date 
+        FROM funcionario WHERE nombre NOT IN 
+        (SELECT nusuario FROM usuario))", false
     );
     hace_consulta(
-        $db, "CREATE UNIQUE INDEX usuario_nusuario ON usuario USING btree (nusuario)", false
+        $db, "CREATE UNIQUE INDEX usuario_nusuario ON usuario 
+        USING btree (nusuario)", false
     );
     hace_consulta(
         $db, "ALTER TABLE usuario DROP CONSTRAINT usuario_pkey", false
@@ -2730,17 +2737,31 @@ if (!aplicado($idac)) {
         PRIMARY KEY (id)", false
     );
     hace_consulta(
-        $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT caso_etiqueta_pkey", false
+        $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT caso_etiqueta_pkey", 
+        false
     );
     hace_consulta(
-        $db, "ALTER TABLE caso_funcionario DROP CONSTRAINT caso_funcionario_pkey", false
+        $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT etiquetacaso_pkey", 
+        false, false
     );
     hace_consulta(
-        $db, "ALTER TABLE caso_funcionario DROP CONSTRAINT caso_funcionario_id_funcionario_fkey", false
+        $db, "ALTER TABLE caso_funcionario 
+        DROP CONSTRAINT caso_funcionario_pkey", false
+    );
+
+    hace_consulta(
+        $db, "ALTER TABLE caso_funcionario 
+        DROP CONSTRAINT caso_funcionario_id_funcionario_fkey", false
     );
     hace_consulta(
-        $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT caso_etiqueta_id_funcionario_fkey", false
+        $db, "ALTER TABLE caso_etiqueta 
+        DROP CONSTRAINT caso_etiqueta_id_funcionario_fkey", false
     );
+    hace_consulta(
+        $db, "ALTER TABLE caso_etiqueta 
+        DROP CONSTRAINT etiquetacaso_id_funcionario_fkey", false, false
+    );
+
     hace_consulta(
         $db, "ALTER TABLE funcionario DROP CONSTRAINT funcionario_pkey", false
     );
@@ -2748,10 +2769,12 @@ if (!aplicado($idac)) {
         $db, "ALTER TABLE caso_funcionario RENAME TO caso_usuario", false
     );
     hace_consulta(
-        $db, "ALTER TABLE caso_usuario RENAME id_funcionario TO id_usuario", false
+        $db, "ALTER TABLE caso_usuario 
+        RENAME id_funcionario TO id_usuario", false
     );
     hace_consulta(
-        $db, "ALTER TABLE caso_etiqueta RENAME id_funcionario TO id_usuario", false
+        $db, "ALTER TABLE caso_etiqueta 
+        RENAME id_funcionario TO id_usuario", false
     );
     hace_consulta(
         $db, "ALTER TABLE caso_usuario 
@@ -2783,10 +2806,12 @@ if (!aplicado($idac)) {
         $db, "ALTER SEQUENCE funcionario_seq RENAME TO usuario_seq", false
     );
     hace_consulta(
-        $db, "ALTER TABLE usuario ALTER COLUMN id SET DEFAULT nextval('usuario_seq')"
+        $db, "ALTER TABLE usuario ALTER COLUMN id 
+        SET DEFAULT nextval('usuario_seq')"
     );
     hace_consulta(
-        $db, "ALTER TABLE usuario ALTER COLUMN rol SET DEFAULT '4'"
+        $db, "ALTER TABLE usuario ALTER COLUMN rol 
+        SET DEFAULT '4'"
     );
 
     aplicaact($act, $idac, 'Fusiona tablas usuario y funcionario');
@@ -2795,13 +2820,16 @@ if (!aplicado($idac)) {
 $idac = '1.2-bc';
 if (!aplicado($idac)) {
     hace_consulta(
-        $db, "ALTER TABLE usuario ADD COLUMN email VARCHAR(255) NOT NULL DEFAULT ''", false
+        $db, "ALTER TABLE usuario ADD COLUMN 
+        email VARCHAR(255) NOT NULL DEFAULT ''", false
     );
     hace_consulta(
-        $db, "ALTER TABLE usuario ADD COLUMN encrypted_password VARCHAR(255) NOT NULL DEFAULT ''", false
+        $db, "ALTER TABLE usuario ADD COLUMN 
+        encrypted_password VARCHAR(255) NOT NULL DEFAULT ''", false
     );
     hace_consulta(
-        $db, "ALTER TABLE usuario ADD COLUMN sign_in_count INTEGER NOT NULL DEFAULT 0", 
+        $db, "ALTER TABLE usuario ADD COLUMN 
+        sign_in_count INTEGER NOT NULL DEFAULT 0", 
         false
     );
     hace_consulta(
@@ -2814,7 +2842,11 @@ if (!aplicado($idac)) {
         false
     );
  
-    aplicaact($act, $idac, 'Emplea bcrypt para calcular condensado de claves y agrega inforación a tablas para hacer compatible con autenticación con Devise/Ruby');
+    aplicaact(
+        $act, $idac, 'Emplea bcrypt para calcular condensado de claves '
+        . ' y agrega inforación a tablas para hacer compatible con '
+        . ' autenticación con Devise/Ruby'
+    );
 }
 
 $idac = '1.2-nc';
@@ -2824,14 +2856,14 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db,
         "ALTER TABLE comunidad_sectorsocial 
-        RENAME COLUMN id_sector TO id_sectorsocial", false);
+        RENAME COLUMN id_sector TO id_sectorsocial", false
+    );
 
     aplicaact($act, $idac, 'Nombre en Sector Social de Victima Colectiva');
 }
 
 $idac = '1.2-def';
 if (!aplicado($idac)) {
-
     $basicas = html_menu_toma_url($GLOBALS['menu_tablas_basicas']);
     global $dbnombre;
     $v = null;
@@ -2840,23 +2872,311 @@ if (!aplicado($idac)) {
         $GLOBALS['dbnombre'] . ".links.ini",
         true
     );
-    foreach($enl as $t => $e) {
-        $do = objeto_tabla($t);
-        foreach($e as $c => $rel) {
-            if (strpos($c, ',') === FALSE) {
-                $pd = strpos($rel, ':');
-                $ndo = substr($rel, 0, $pd);
-                $ids = valorSinInfo($do, $c);
-                if ($ids >= 0 && ($ndo != 'presponsable' || 
-                    $c == 'organizacionarmada' )) {
-                    $q = "ALTER TABLE $t ALTER COLUMN $c SET DEFAULT '$ids'";
-                    hace_consulta($db, $q, false);
+    foreach ($enl as $t => $e) {
+        $db2 = new DB_DataObject();
+        sin_error_pear($db2);
+        $do = $db2->factory($t);
+        if (!PEAR::isError($do)) {
+            foreach($e as $c => $rel) {
+                if (strpos($c, ',') === FALSE) {
+                    $pd = strpos($rel, ':');
+                    $ndo = substr($rel, 0, $pd);
+                    $ids = valorSinInfo($do, $c);
+                    if ($ids >= 0 && ($ndo != 'presponsable' 
+                        || $c == 'organizacionarmada')) {
+                            $q = "ALTER TABLE $t ALTER COLUMN $c SET DEFAULT '$ids'";
+                            hace_consulta($db, $q, false);
+                    }
                 } 
             }
         }
     }
     aplicaact($act, $idac, 'Valores por defecto en referencias a tablas básicas');
+}
 
+$idac = '1.2-db';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "INSERT INTO filiacion (id, nombre, fechacreacion) 
+        VALUES (15, 'MARCHA PATRIÓTICA', '2014-02-14')"
+    );
+
+
+    aplicaact($act, $idac, 'Datos para tablas básicas');
+}
+
+$idac = '1.2-fam';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "ALTER TABLE trelacion ADD COLUMN 
+        inverso VARCHAR(2) REFERENCES trelacion(id)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE trelacion DROP COLUMN dirigido", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
+        VALUES ('PM', 'PRIMA(O)', '2014-02-18')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
+        VALUES ('YE', 'NUERA/YERNO', '2014-02-18')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
+        VALUES ('NO', 'NIETA(O)', '2014-02-18')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
+        VALUES ('AH', 'AHIJADA(O)', '2014-02-18')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
+        VALUES ('OO', 'SOBRINA(O)', '2014-02-18')", false
+    );
+    hace_consulta(
+        $db, "INSERT INTO trelacion (id, nombre, fechacreacion)
+        VALUES ('SG', 'SUEGRA(O)', '2014-02-18')", false
+    );
+    hace_consulta(
+            $db, "INSERT INTO trelacion 
+            (id, nombre, observaciones, fechacreacion, 
+             fechadeshabilitacion, inverso) VALUES ('HO', 'HIJASTRA(O)', '', 
+             '2011-05-02', NULL, NULL);", false
+    );
+    hace_consulta(
+            $db, "INSERT INTO trelacion (id, nombre, observaciones, 
+        fechacreacion, fechadeshabilitacion, inverso) 
+            VALUES ('PD', 'MADRASTRA(PADRASTRO)', '', 
+                '2011-09-21', NULL, 'HO');", false
+    );
+
+    hace_consulta(
+            $db, "INSERT INTO trelacion (id, nombre, observaciones, 
+        fechacreacion, fechadeshabilitacion, inverso) 
+            VALUES ('SO', 'ESPOSA(O)/COMPAÑERA(O)', '', 
+                '2001-01-01', NULL, 'SO');", false
+    );
+
+    foreach (array("AO" => "AB", "HA" => "HO", "HR" => "HE", "MA" => "PO",
+        "ME" => "PA", "TA" => "TO", "CO" => "SO", "SA" => "OO",
+        "NA" => "NO", "HT" => "HO", "OA" => "OO", "Pr" => "PM",
+        "Pm" => "PM", "MD" => "PD", "NU" => "YE") as $ant => $nue
+    ) {
+        hace_consulta(
+            $db, "UPDATE persona_trelacion SET id_trelacion='$nue' 
+            WHERE id_trelacion='$ant'"
+        );
+        hace_consulta(
+            $db, "DELETE FROM trelacion WHERE id='$ant'"
+        );
+    }
+    hace_consulta(
+        $db, "UPDATE trelacion SET 
+        nombre='ESPOSA(O)/COMPAÑERA(O)' WHERE id='SO'"
+    );
+    hace_consulta($db, "UPDATE trelacion SET nombre='ABUELA(O)' WHERE id='AB'");
+    hace_consulta($db, "UPDATE trelacion SET nombre='NIETA(O)' WHERE id='NO'");
+    hace_consulta(
+        $db, "UPDATE trelacion SET nombre='MADRE/PADRE' WHERE id='PA'"
+    );
+    hace_consulta($db, "UPDATE trelacion SET nombre='HIJA(O)' WHERE id='HI'");
+    hace_consulta(
+        $db, "UPDATE trelacion SET nombre='HERMANA(O)' WHERE id='HE'"
+    );
+    hace_consulta(
+        $db, "UPDATE trelacion SET nombre='MADRINA/PADRINO' WHERE id='PO'"
+    );
+    hace_consulta(
+        $db, "UPDATE trelacion SET nombre='AHIJADA(O)' WHERE id='AH'"
+    );
+    hace_consulta($db, "UPDATE trelacion SET nombre='TIA(O)' WHERE id='TO'");
+    hace_consulta(
+        $db, "UPDATE trelacion SET nombre='SOBRINA(O)' WHERE id='OO'"
+    );
+    hace_consulta(
+        $db, "UPDATE trelacion SET nombre='MADRASTRA(PADRASTRO)' WHERE id='PD'"
+    );
+    hace_consulta(
+        $db, "UPDATE trelacion SET nombre='HIJASTRA(O)' WHERE id='HO'"
+    );
+    hace_consulta($db, "UPDATE trelacion SET nombre='SUEGRA(O)' WHERE id='SG'");
+
+    foreach (array("SO" => "SO", "AB" => "NO", "PA" => "HI",
+        "HE" => "HE", "PO" => "AH", "TO" => "OO",
+        "PD" => "HO", "SG" => "YE", "PM" => "PM") as $r1 => $r2
+    ) {
+        hace_consulta(
+            $db, "UPDATE trelacion SET inverso='$r2' WHERE id='$r1'"
+        );
+        hace_consulta(
+            $db, "UPDATE trelacion SET inverso='$r1' WHERE id='$r2'"
+        );
+    }
+
+    hace_consulta(
+        $db, "INSERT INTO persona_trelacion 
+        (persona1, persona2, id_trelacion) 
+        (SELECT persona2, persona1, inverso  
+        FROM persona_trelacion, trelacion 
+        WHERE (persona2, persona1, inverso) NOT IN 
+        (SELECT persona1 as p1, persona2 as p2, id_trelacion as it 
+        FROM persona_trelacion) 
+        AND persona_trelacion.id_trelacion=trelacion.id
+        AND trelacion.inverso IS NOT NULL)"
+    );
+    aplicaact($act, $idac, 'Relaciones familiares refinadas');
+}
+
+$idac = '1.2-et';
+if (!aplicado($idac)) {
+
+    // 24 y 21 repetidos
+    hace_consulta($db, "UPDATE victima SET id_etnia='21' WHERE id_etnia='24'");
+    hace_consulta($db, "DELETE FROM etnia WHERE id='24'");
+
+    $ae =array(
+        array(1, 'SIN INFORMACIÓN', ''),
+        array(2, 'MESTIZO', ''),
+        array(3, 'BLANCO', ''),
+        array(4, 'NEGRO', '200'),
+        array(5, 'INDÍGENA', ''),
+        array(6, 'ACHAGUA', '1'),
+        array(7, 'ANDAKÍ', ''),
+        array(8, 'ANDOQUE', '3'),
+        array(9, 'ARHUACO', '4'),
+        array(10, 'AWA', '5'),
+        array(11, 'BARÁ', '6'),
+        array(12, 'BARASANA', '7'),
+        array(13, 'BARÍ', '8'),
+        array(14, 'CAMSA - KAMSA', '35'),
+        array(15, 'CARIJONA', '13'),
+        array(16, 'COCAMA', '16'),
+        array(17, 'COFÁN', '18'),
+        array(18, 'COREGUAJE - KOREGUAJE', '37'),
+        array(19, 'CUBEO', '20'),
+        array(20, 'CUIBA', '21'),
+        array(21, 'CHIMILA', ''),
+        array(22, 'DESANO', '23'),
+        array(23, 'EMBERA', '25'),
+        array(25, 'GUAMBIANO', '29'),
+        array(26, 'GUANANO - GUANACA', '30'),
+        array(27, 'GUAYABERO', '31'),
+        array(28, 'HUITOTO - WITOTO', '73'),
+        array(29, 'INGA', '34'),
+        array(30, 'JUPDA', ''),
+        array(31, 'KARAPANA - CARAPANA', '12'),
+        array(32, 'KOGUI', '36'),
+        array(33, 'CURRIPACO', '22'),
+        array(34, 'MACUNA', '41'),
+        array(35, 'MACAGUAJE', '39'),
+        array(36, 'MOCANÁ', ''),
+        array(37, 'MUISCA', '46'),
+        array(38, 'NASA - PAÉZ', '49'),
+        array(39, 'NUKAK', ''),
+        array(40, 'PASTOS', '50'),
+        array(41, 'PIAPOCO', '51'),
+        array(42, 'PIJAO', ''),
+        array(43, 'PIRATAPUYO', '53'),
+        array(44, 'PUINAVE', '55'),
+        array(45, 'SÁLIBA', '56'),
+        array(46, 'SIKUANI', '57'),
+        array(47, 'SIONA', '58'),
+        array(48, 'TATUYO', '64'),
+        array(49, 'TINIGUA', ''),
+        array(50, 'TUCANO', '67'),
+        array(51, 'UMBRÁ', ''),
+        array(52, 'U´WA', '70'),
+        array(53, 'WAYUU', '72'),
+        array(54, 'WIWA - WIWUA', '74'),
+        array(55, 'WOUNAAN', '75'),
+        array(56, 'YAGUA', '76'),
+        array(57, 'YANACONA', '77'),
+        array(58, 'YUCUNA', '79'),
+        array(59, 'YUKPA', ''),
+        array(60, 'ROM', '400')
+    );
+    foreach($ae as $g) {
+        $d = $g[2];
+        if ($d != '') {
+            $d .= ' en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls';
+        }
+        $q = "UPDATE etnia SET nombre='{$g[1]}', 
+            descripcion='{$d} '
+            WHERE id='{$g[0]}'";
+        hace_consulta($db, $q);
+    }
+
+    $ng = array(
+        array(61, 'AMORUA', '2'),
+        array(62, 'BETOYE', '9'),
+        array(63, 'BORA', '10'),
+        array(64, 'CABIYARI', '11'),
+        array(65, 'CARAMANTA', '84'),
+        array(66, 'CHAMI', '86'),
+        array(67, 'CHIMILA', '14'),
+        array(68, 'CHIRICOA', '15'),
+        array(69, 'COCONUCO', '17'),
+        array(70, 'COROCORO', '87'),
+        array(71, 'COYAIMA-NATAGAIMA', '19'),
+        array(72, 'DATUANA', '88'),
+        array(73, 'DUJOS', '24'),
+        array(74, 'EMBERA CATIO', '26'),
+        array(75, 'EMBERA CHAMI', '27'),
+        array(76, 'EMBERA SIAPIDARA', '28'),
+        array(77, 'KATIO', '85'),
+        array(78, 'LETUAMA', '38'),
+        array(79, 'MASIGUARE', '42'),
+        array(80, 'MATAPI', '43'),
+        array(81, 'MUINANE', '45'),
+        array(82, 'MURA', '90'),
+        array(83, 'NONUYA', '47'),
+        array(84, 'OCAINA', '48'),
+        array(85, 'PAYOARINI', '91'),
+        array(86, 'PIAROA', '52'),
+        array(87, 'PISAMIRA', '54'),
+        array(88, 'POLINDARA', '94'),
+        array(89, 'QUIYASINGAS', '93'),
+        array(90, 'SIRIANO', '59'),
+        array(91, 'SIRIPU', '60'),
+        array(92, 'TAIWANO', '61'),
+        array(93, 'TAMA', '92'),
+        array(94, 'TANIMUKA', '62'),
+        array(95, 'TARIANO', '63'),
+        array(96, 'TIKUNAS', '65'),
+        array(97, 'TULE', '68'),
+        array(98, 'TUYUCA', '69'),
+        array(99, 'WANANO', '71'),
+        array(100, 'YAUNA', '78'),
+        array(101, 'YUKO', '80'),
+        array(102, 'GARÚ', '89'),
+        array(103, 'GUAYUÚ', '32'),
+        array(104, 'HITNÚ', '33'),
+        array(105, 'MACÚ', '40'),
+        array(106, 'MIRAÑA', '44'),
+        array(107, 'TOTORÓ', '66'),
+        array(108, 'YURUTÍ', '82'),
+        array(109, 'YURÍ', '81'),
+        array(110, 'ZENÚ', '83 ')
+    );
+    foreach($ng as $g) {
+        $q = "INSERT INTO etnia (id, nombre, descripcion, fechacreacion) 
+            VALUES ({$g[0]}, '{$g[1]}', 
+            '{$g[2]} en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls', 
+            '2014-05-30')";
+        hace_consulta($db, $q, false);
+    }
+
+    aplicaact($act, $idac, 'Listado de etnias mejorado');
+}
+
+
+$idac = '1.2-ig';
+if (!aplicado($idac)) {
+
+    hace_consulta($db, "UPDATE iglesia SET nombre=UPPER(nombre);", false);
+
+    aplicaact($act, $idac, 'Listado de iglesias mejorado');
 }
 
 $idac = '1.2-mp';
@@ -2875,11 +3195,10 @@ if (isset($GLOBALS['menu_tablas_basicas'])) {
         }
     }
     if (!$hayrep) {
+        $a = $_SESSION['dirsitio'] . "/conf_int.php";
         echo "<font color='red'>En el arreglo <tt>menu_tablas_basicas</tt> " .
-            "del archivo <tt>" .
-            htmlentities(
-                $_SESSION['dirsitio'] . "/conf_int.php", ENT_COMPAT, 'UTF-8'
-            ) . "</tt> falta:
+            "del archivo <tt>" .  htmlentities($a, ENT_COMPAT, 'UTF-8') . 
+            "</tt> falta:
 <pre>
     array('title' => 'Reportes', 'url'=> null, 'sub' => array(
         array('title'=>'Columnas de Reporte Consolidado',
@@ -2939,27 +3258,21 @@ function agrega_archivo($fuente, $destino, $modo = "w")
  */
 function lee_escritura($nd, $dbnombre, $dirap, $modo)
 {
-    if (!file_exists("$nd/DataObjects/estructura-dataobject.ini")) {
-        echo "No puede leerse "
-            . htmlentities(
-                "$nd/DataObjects/estructura-dataobject.ini",
-                ENT_COMPAT, 'UTF-8'
-            )
+    $a = "$nd/DataObjects/estructura-dataobject.ini";
+    if (!file_exists($a)) {
+        echo "No puede leerse " . htmlentities($a, ENT_COMPAT, 'UTF-8') 
             . "<br>";
         return;
     }
-    agrega_archivo(
-        "$nd/DataObjects/estructura-dataobject.ini",
-        "$dirap/DataObjects/$dbnombre.ini", $modo
-    );
+    agrega_archivo($a, "$dirap/DataObjects/$dbnombre.ini", $modo); 
 
-    if (!file_exists("$nd/DataObjects/estructura-dataobject.links.ini")) {
-        die("No puede leerse $nd/DataObjects/estructura-dataobject.ini");
+    $a = "$nd/DataObjects/estructura-dataobject.links.ini";
+    if (!file_exists($a)) {
+        echo "No puede leerse " . htmlentities($a, ENT_COMPAT, 'UTF-8') 
+            . "<br>";
+        return;
     }
-    agrega_archivo(
-        "$nd/DataObjects/estructura-dataobject.links.ini",
-        "$dirap/DataObjects/$dbnombre.links.ini", $modo
-    );
+    agrega_archivo($a, "$dirap/DataObjects/$dbnombre.links.ini", $modo);
 }
 
 if (!isset($_SESSION['SIN_INDICES']) || !$_SESSION['SIN_INDICES']) {

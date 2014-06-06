@@ -532,17 +532,19 @@ class ResConsulta
             $etablas, array('caso',
             'victima', 'persona', 'presponsable',
             'acto',
-            'sectorsocial', 'organizacion'
+            'sectorsocial', 'organizacion', 'rangoedad'
         )
         );
         $etablas = implode(", ", array_unique($etablas));
         $q = " SELECT caso.id, persona.id, " .
             " persona.nombres || ' ' || persona.apellidos, caso.fecha, " .
             " acto.id_categoria, presponsable.nombre, " .
-            " sectorsocial.nombre, organizacion.nombre  " .
+            " sectorsocial.nombre, organizacion.nombre, " .
+            " persona.sexo, rangoedad.rango " .
             " FROM  $etablas WHERE " .
             " presponsable.id=acto.id_presponsable " .
             " AND acto.id_persona=persona.id " .
+            " AND rangoedad.id=victima.id_rangoedad " .
             " AND persona.id=victima.id_persona " .
             " AND caso.id=victima.id_caso " .
             " AND caso.id=acto.id_caso " .
@@ -557,35 +559,37 @@ class ResConsulta
         $ac = array(
             _("Fecha"), _("Caso"), _("Víctima"),
             _("Sector Social"), _("Organización Social"),
+            _("Sexo"), _("Rango de Edad"),
             _("Categoria"), _("P. Responsable")
         );
 
         if ($pMuestra == "csv") {
             header("Content-type: text/csv");
-            $st = ""; $cpm = "";
+            $st = ""; $cpm_ne = "";
             foreach ($ac as $c) {
-                $cpm .= $st . "\"$c\"";
+                $cpm_ne .= $st . "\"$c\"";
                 $st = ", ";
             }
-            echo $cpm . ', ""\n';
+            echo $cpm_ne . ', ""\n'; 
         } elseif ($pMuestra == 'latex') {
             //header("Content-type: application/x-latex");
             echo "<pre>";
-            $st = ""; $cpm = "";
+            $st = ""; $cpm_ne = "";
             foreach ($ac as $c) {
-                $cpm .= $st . "\\textbf{$c}";
+                $cpm_ne .= $st . "\\textbf{$c}";
                 $st = " & ";
             }
-            echo $cpm . ' \\\\ \n'
-                . '\hline\n';
+            echo $cpm_ne . ' \\\\ \n' . '\hline\n'; 
         } else { // tabla o consolidado
 
+            encabezado_envia("Actos");
             echo "<table border='1'>\n";
-            $st = ""; $cpm = "<tr>";
+            $st = ""; $html_cpm = "<tr>";
             foreach ($ac as $c) {
-                $cpm .= $st . "<th>$c</th>";
+                $html_cpm .= $st . "<th>" . 
+                    htmlentities($c, ENT_COMPAT, 'UTF-8') . "</th>";
             }
-            echo $cpm . '</tr>';
+            echo $html_cpm . '</tr>'; 
         }
 
         $tv = 0;
@@ -599,6 +603,8 @@ class ResConsulta
             $idvic = $row[1];
             $idcaso = $row[0];
             $presp = $row[5];
+            $sexo = $row[8];
+            $rangoedad = $row[9];
 
             if ($pMuestra == "tabla" || $pMuestra == 'actos') {
                 $html_il = "<tr><td>" .
@@ -607,6 +613,8 @@ class ResConsulta
                     "</td><td>" . trim(htmlentities($nom, ENT_COMPAT, 'UTF-8')).
                     "</td><td>" . trim(htmlentities($ss, ENT_COMPAT, 'UTF-8')) .
                     "</td><td>" . trim(htmlentities($os, ENT_COMPAT, 'UTF-8')) .
+                    "</td><td>" . htmlentities($sexo, ENT_COMPAT, 'UTF-8') .
+                    "</td><td>" . htmlentities($rangoedad, ENT_COMPAT, 'UTF-8') .
                     "</td><td>" . htmlentities($cat, ENT_COMPAT, 'UTF-8') .
                     "</td><td>" . htmlentities($presp, ENT_COMPAT, 'UTF-8') .
                     "</td>";
@@ -623,7 +631,7 @@ class ResConsulta
 
             echo $html_il;
 
-            if ($pMuestra == "tabla" || $pMuestra == 'consolidado') {
+            if ($pMuestra == "tabla" || $pMuestra == 'actos') {
                 echo "</tr>\n";
             } elseif ($pMuestra == 'csv') {
                 echo " \n";
@@ -632,8 +640,9 @@ class ResConsulta
             }
 
         }
-        if ($pMuestra == "tabla"  || $pMuestra == 'consolidado') {
+        if ($pMuestra == "tabla"  || $pMuestra == 'actos') {
             echo "</table>";
+            pie_envia();
         } elseif ($pMuestra == 'csv') {
         } elseif ($pMuestra == 'latex') {
         }
@@ -848,11 +857,11 @@ class ResConsulta
             if (!isset($GLOBALS['DIR_RELATOS'])
                 || $GLOBALS['DIR_RELATOS'] == ''
             ) {
+                $na = "$dirserv/$dirsitio/conf.php";
                 echo _("Falta definir directorio destino en variable") ." " .
                     "\$GLOBALS['DIR_RELATOS'] " . _("del archivo") ." " .
-                    htmlentities(
-                        "$dirserv/$dirsitio/conf.php", ENT_COMPAT, 'UTF-8'
-                    ) . "<br>";
+                    htmlentities($na, ENT_COMPAT, 'UTF-8') 
+                    . "<br>";
                 die("");
             } else if (!is_writable($GLOBALS['DIR_RELATOS'])) {
                 echo _("No puede escribirse en directorio") . " " .
@@ -977,10 +986,11 @@ class ResConsulta
                     echo $html_relato;
                     break;
                 case 'csv':
-                    echo $this->reporteCsvAdjunto(
+                    $r_ne = $this->reporteCsvAdjunto(
                         $this->db, $idcaso,
                         $this->campos, $this->conv, $sal
                     );
+                    echo $r_ne;
                     echo "\n";
                     break;
                 case 'tabla':
@@ -1185,11 +1195,13 @@ class ResConsulta
                 }
             }
         }
-        $html_renglon = "<tr style='background-color: " .
-            htmlentities($col, ENT_COMPAT, 'UTF-8') .
-            "'>";
+        $html_renglon = "<tr>";
         foreach ($campos as $cc => $nc) {
-            $html_renglon .= "<td valign='top'>";
+            $html_renglon .= "<td valign='top'";
+            if ($cc == "caso_id") {
+                $html_renglon .= "style='background-color: " .  htmlentities($col, ENT_COMPAT, 'UTF-8') .  "'";
+            }
+            $html_renglon .= ">";
             $sep = "";
             $vr_html = $vrescon = $vrpre = $vrpost = "";
             // No se sacaron responsables y demás directamente en
@@ -1350,7 +1362,6 @@ class ResConsulta
                 foreach ($ncat as $k => $nc) {
                     if (isset($GLOBALS['reptabla_tipificacion_breve'])
                         && $GLOBALS['reptabla_tipificacion_breve'] === true
-//                        && strpos($nc, ":")
                     ) {
                         $nc = substr($nc, strpos($nc, ":") + 1);
                         $vr_html .= $seploc . strip_tags($nc);
@@ -1370,11 +1381,13 @@ class ResConsulta
                 $vr_html = strip_tags(trim($sal[$conv[$cc]]));
             } else {
                 $vr_html = '';
+                //echo "<hr>"; var_dump($GLOBALS['ficha_tabuladores']);
                 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
                     list($n, $c, $o) = $tab;
                     if (($d = strrpos($c, "/"))>0) {
                         $c = substr($c, $d+1);
                     }
+                    //echo $c;
                     if (is_callable(array($c, 'resConsultaFilaTabla'))) {
                         $vr_html .= call_user_func_array(
                             array($c, 'resConsultaFilaTabla'),

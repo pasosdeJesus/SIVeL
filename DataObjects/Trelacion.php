@@ -35,7 +35,7 @@ require_once 'HTML/QuickForm/Action.php';
 class DataObjects_Trelacion extends DataObjects_Basica
 {
     var $__table = 'trelacion';         // table name
-    var $dirigido;                        // boolean
+    var $inverso;                        // integer
     var $observaciones;                   // varchar(-1)  not_null
 
     /**
@@ -52,7 +52,7 @@ class DataObjects_Trelacion extends DataObjects_Basica
             'nombre' => _('Nombre'),
             'fechacreacion' => _('Fecha de Creación'),
             'fechadeshabilitacion' => _('Fecha de Deshabilitación'),
-            'dirigido' => _('Dirigido'),
+            'inverso' => _('Relación Inversa'),
             'observaciones' => _('Observaciones'),
         );
 
@@ -62,7 +62,7 @@ class DataObjects_Trelacion extends DataObjects_Basica
     var $fb_preDefOrder = array(
         'id',
         'nombre',
-        'dirigido',
+        'inverso',
         'observaciones',
         'fechacreacion',
         'fechadeshabilitacion'
@@ -70,16 +70,12 @@ class DataObjects_Trelacion extends DataObjects_Basica
     var $fb_fieldsToRender = array(
         'id',
         'nombre',
-        'dirigido',
+        'inverso',
         'observaciones',
         'fechacreacion',
         'fechadeshabilitacion'
     );
     var $fb_hidePrimaryKey = false;
-    var $fb_booleanFields = array(
-        'dirigido'
-    );
-
 
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'

@@ -534,11 +534,11 @@ class ConsultaWeb extends HTML_QuickForm_Page
             _('Centro Poblado') . ': ', array()
         );
         $vdep = isset($this->_submitValues['id_departamento']) ?
-           $this->_submitValues['id_departamento'] : null;
+           var_escapa($this->_submitValues['id_departamento'], $db) : null;
         $vmun = isset($this->_submitValues['id_municipio']) ?
-           $this->_submitValues['id_municipio'] : null;
+           var_escapa($this->_submitValues['id_municipio'], $db) : null;
         $vcla = isset($this->_submitValues['id_clase']) ?
-           $this->_submitValues['id_clase'] : null;
+           var_escapa($this->_submitValues['id_clase'], $db) : null;
         PagUbicacion::modCampos(
             $db, $this, 'id_departamento', 'id_municipio', 'id_clase',
             $vdep, $vmun, $vcla
@@ -595,9 +595,11 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $sel->setSize(5);
         ResConsulta::llenaSelCategoria(
             $db,
-            "SELECT id_tviolencia, id_supracategoria, " .
-            "id FROM categoria ORDER BY id_tviolencia," .
-            "id_supracategoria, id;",
+            "SELECT id_tviolencia, id_supracategoria, id 
+            FROM categoria 
+            WHERE fechadeshabilitacion IS NULL
+            ORDER BY id_tviolencia,
+            id_supracategoria, id;",
             $sel
         );
         if ($pCategoria == 'belicas') {
@@ -641,14 +643,6 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
         $sel =& $this->addElement('text', 'descripcion', _('Descripción'));
         $sel->setSize(80);
-
-
-        /*$aut_usuario = "";
-        if (!isset($_SESSION['id_usuario'])) {
-            include $_SESSION['dirsitio'] . "/conf.php";
-            autentica_usuario($dsn, $aut_usuario, 0);
-        }
-        echo "OJO <hr>"; var_dump($GLOBALS['ficha_tabuladores']); die("x");*/
 
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {

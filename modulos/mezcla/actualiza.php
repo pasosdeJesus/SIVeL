@@ -29,6 +29,27 @@ $act = objeto_tabla('actualizacionbase');
 
 $idac = 'mez-em';
 if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "CREATE EXTENSION fuzzystrmatch", false
+    );
+    hace_consulta($db, "CREATE SEQUENCE homonimosim_seq;", false);
+    hace_consulta(
+        $db, "CREATE TABLE homonimosim (
+        id_persona1 INTEGER REFERENCES persona,
+        id_persona2 INTEGER REFERENCES persona 
+                CHECK (id_persona2 > id_persona1),
+        PRIMARY KEY (id_persona1, id_persona2)", false
+    );
+    hace_consulta(
+        $db, "CREATE VIEW homonimia AS
+        SELECT homonimosim.id_persona1,
+            homonimosim.id_persona2
+           FROM homonimosim
+        UNION
+        SELECT homonimosim.id_persona2 AS id_persona1,
+            homonimosim.id_persona1 AS id_persona2
+           FROM homonimosim;", false
+    );
     inserta_etiqueta_si_falta(
         $db, 'MEZCLA_CASOS', 'Caso tras mezclar dos'
     );

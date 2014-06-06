@@ -404,7 +404,7 @@ if (test "$regenera" = "1") then {
 		if (test -f sitios/sivel/vardb.sh) then {
 			cp -f sitios/sivel/vardb.sh sitios/sivel/vardb.sh.copia
 		} fi;
-		sed -e "s/^ *dirap=.*/dirap=$fuentessed\/sitios\/sivel/g" sitios/pordefecto/plantilla-vardb.sh > sitios/sivel/vardb.sh
+		sed -e "s/^ *dirap=.*/dirap=$fuentessed\/sitios\/sivel/g" sitios/pordefecto/vardb.sh.plantilla > sitios/sivel/vardb.sh
 
 		if (test ! -f sitios/sivel/ultimoenvio.txt) then {
 			touch sitios/sivel/ultimoenvio.txt

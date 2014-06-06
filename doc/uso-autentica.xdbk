@@ -34,10 +34,14 @@
 		por un usuario con rol administrador).
 		<warning><para>SIVeL no almacena su clave directamente sino
 				una especie de huella digital de la misma
-				(condensado SHA-256). Por esto puede emplear la clave que
-				prefiera con la confianza que no podrá ser
-				conocida por administradores que tengan acceso
-				a la base.  Se recomienda que tenga n&uacute;meros,
+				(condensado bcrypt), que para evitar ser descubierta con ataques
+				de fuerza bruta es un poco demorada de calcular. 
+				Por esto mismo puede emplear la clave que
+				prefiera con la confianza que no es visible
+				a administradores que tengan acceso
+				a la base.
+				Se recomienda que no aparezca en diccionario alguno,
+				que tenga n&uacute;meros,
 				letras y caracteres especiales.  Es conveniente
 				cambiarla peri&oacute;dicamente, lo cual podrá hacer con
 				asistencia de un usuario que tenga el rol 

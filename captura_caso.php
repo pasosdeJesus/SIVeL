@@ -102,9 +102,10 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
 <head>
 <meta charset = "UTF-8">
 <title>Ficha caso</title>
-<link rel = "stylesheet" href="lib/jqueryui-1.10.3/themes/smoothness/jquery-ui.css" />
-<link rel = "stylesheet" type = "text/css" href = "estilo.css" />
-<style type = "text/css">
+<link rel="stylesheet" 
+    href="lib/jqueryui-1.10.3/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="estilo.css" />
+<style type="text/css">
 {%style%}
 .ui-autocomplete-loading {
     background: white url(\'imagen/ajax-loader.gif\') right center no-repeat;
@@ -119,11 +120,11 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
     height: 100px;
 }
 </style>
-<script src = "lib/jquery-2.0.3.min.js"></script>
-<script src = "lib/jqueryui-1.10.3/jquery-ui.min.js"></script>
-<script src = "lib/jquery.watermark.min.js"></script>
-<script type = "text/javascript" src="sivel.js" type="text/javascript"></script>
-<script type = "text/javascript">
+<script src="lib/jquery-2.0.3.min.js"></script>
+<script src="lib/jqueryui-1.10.3/jquery-ui.min.js"></script>
+<script src="lib/jquery.watermark.min.js"></script>
+<script type="text/javascript" src="sivel.js" type="text/javascript"></script>
+<script type="text/javascript">
 <!--
 {%javascript%}
 -->

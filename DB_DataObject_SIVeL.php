@@ -278,6 +278,11 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
 
     /**
      * Mezcla automáticamente datos de otro objeto
+     *
+     * @param object $otro DataObject que se mezcla con este
+     * @param string &$obs Colchón para observaciones
+     *
+     * @return void Mezcla $otro en $this y agrega observaciones a $obs
      */
     function mezclaAutom($otro, &$obs)
     {
@@ -285,7 +290,6 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
         $t = $this->table();
         foreach ($this->fb_fieldLabels as $v => $et) {
             if ($otro->$v != $this->$v) {
-                //$obs .= " OJO diferentes $v - {$t[$v]} - {$this->$v} - {$otro->$v}. ";
                 if ((($t[$v] & DB_DATAOBJECT_STR)
                     || ($t[$v] & DB_DATAOBJECT_TXT))
                     && !($t[$v] & DB_DATAOBJECT_DATE)
