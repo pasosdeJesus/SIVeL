@@ -268,9 +268,9 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         "cryptType" => "crypt",
         "db_where" => "fechadeshabilitacion IS NULL",
     );
-    $q = "SELECT COUNT(nusuario) FROM usuario";
-    $result = hace_consulta_aut($db, $q, false, false);
-    if (PEAR::isError($result)) {
+    $q = "SELECT COUNT(nusuario) FROM usuario WHERE encrypted_password<>''";
+    $n = $db->getOne($q);
+    if (PEAR::isError($n)) {
         $camponusuario = "id";
         $params['usernamecol'] = 'id';
         $params['passwordcol'] = 'password';
@@ -278,8 +278,18 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         $params['db_where'] = '';
         echo "<hr>" . _("Aun no se emplea nueva tabla usuario.")
            . _("Solicite actualización a un administrador") 
-            . "<hr>";
+           . "<hr>";
+        echo $htmljs->startScript();
+        echo $htmljs->alert(
+            'Se intento usar bctyp sin exito.\n' .
+            ' Por favor autentiquese nuevamente'
+        );
+        echo $htmljs->endScript();
+        cierra_sesion($dsn);
+        exit(1);
+
     }
+    //echo "OJO params=";print_r($params);echo "<hr>";
     $a = new Auth("DB", $params, "login_function");
     $a->setSessionName($snru);
     //echo "<hr>OJO autentica_usuario $opcion Auth sesion:";
@@ -287,6 +297,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
     $a->start();
     //echo "OJO snru=$snru";
     if ($a->checkAuth()) {
+        //echo "<hr>OJO autenticó 1";
         ini_set('session.cookie_httponly', true);
         ini_set('session.cookie_secure', true);
         $texp = 60*60*4; // 4 horas de sesión
@@ -362,14 +373,17 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         );
         //echo  "OJO clavebf=$clavebf<br>";
         if ($b->checkAuth()) {
-            $clavebf = crypt(
+            /*$clavebf = crypt(
                 var_post_escapa('password', $db, 32), gen_sal_bcrypt(10)
-            );
-            $un = var_post_escapa('username', $db, 15);
-            $q = "UPDATE usuario SET password='',
-                encrypted_password='$clavebf' 
-                WHERE nusuario='$un';";
-            hace_consulta_aut($db, $q);
+            ); */
+
+            if (strlen($clavebf) > 10) {
+                $un = var_post_escapa('username', $db, 15);
+                $q = "UPDATE usuario SET password='',
+                    encrypted_password='$clavebf' 
+                    WHERE nusuario='$un';";
+                hace_consulta_aut($db, $q);
+            }
             $htmljs = new HTML_Javascript();
             echo $htmljs->startScript();
             echo $htmljs->alert(
