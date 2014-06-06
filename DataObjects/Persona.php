@@ -396,7 +396,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
         $gr[] =& $seln;
 
         $seln =& $form->createElement(
-            'static', 'pia', '', _('Edad actual') . ':', array(
+            'static', 'pia', '', _('Aniversario de nacimiento') . ':', array(
                 'id' => 'edadactual',
                 'onchange' => 'cambiaEdadActual()'
             )
