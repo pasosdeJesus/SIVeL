@@ -1,11 +1,6 @@
 
 1.2 o posteriores
 
-En actualizar tener en cuenta que en 1.1 la base es LATIN1 mientras que en
-1.2 debe ser UTF8
-
-Etnias: tikuna, zenu
-
 Consulta detallada buscar por procedencia de víctima
 
 Falta consulta detallada al especificar 

@@ -4,6 +4,9 @@
 	<varlistentry><term>Versión 1.2b2 (Jun.2014)</term>
 		<listitem>
 			<para><itemizedlist>
+					<listitem>
+						<para>Al generar relatos puede exportar etiquetas.</para>
+					</listitem>
 					<listitem><para>
 							Listado de etnias completado con <ulink url="http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls"></ulink>. Listado de iglesias mejorado.
 					</para></listitem>
