@@ -552,19 +552,22 @@ class PagEtiquetas extends PagBaseSimple
      */
     static function aRelato(&$db, $dcaso, &$r)
     {
-        $et = lista_relacionados(
-            'caso_etiqueta',
-            array('id_caso' => $dcaso->id), 'id_etiqueta'
-        );
-        //print_r($et); //die("x");
-        a_elementos_xml(
-            $r, 2,
-            array(
-                'observaciones{etiqueta}' => $et,
-            )
-        );
-        unset($tan);
- 
+        $lsr = array();
+        $do = objeto_tabla('caso_etiqueta');
+        $do->id_caso = $dcaso->id;
+        $do->orderBy('id_etiqueta');
+        $do->find();
+        $vd = array();
+        while ($do->fetch()) {
+            $dr= $do->getLink('id_etiqueta');
+            $vd['observaciones{tipo->etiqueta:' . $dr->nombre . ':' . 
+                $do->fecha . '}'] = $do->observaciones=='' ? ' ' : 
+                $do->observaciones;
+            $dr->free();
+        }
+        $do->free();
+        //print_r($vd);
+        a_elementos_xml($r, 2, $vd);
     }
 
 }
