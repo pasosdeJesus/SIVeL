@@ -90,11 +90,16 @@ class AccionComparaDos extends HTML_QuickForm_Action
              levenshtein(p1.apellidos || ' ' || p1.nombres, 
                 p2.nombres || ' ' || p2.apellidos)<=$dlev)
             AND v1.id_caso < v2.id_caso 
-            AND UPPER(TRIM(p1.nombres || ' '  || p1.apellidos)) <> 'PERSONA SIN IDENTIFICAR'
-            AND UPPER(regexp_replace(p1.nombres || p1.apellidos, '[ .,]', '', 'g')) <> 'N'
-            AND UPPER(regexp_replace(p1.nombres || p1.apellidos, '[ .,]', '', 'g')) <> 'NN'
-            AND UPPER(regexp_replace(p1.nombres || p1.apellidos, '[ .,]', '', 'g')) <> 'NNN'
-            AND UPPER(regexp_replace(p1.nombres || p1.apellidos, '[ .,]', '', 'g')) <> 'NNNN'
+            AND UPPER(TRIM(p1.nombres || ' '  || p1.apellidos)) <> 
+                'PERSONA SIN IDENTIFICAR'
+            AND UPPER(regexp_replace(p1.nombres || p1.apellidos, 
+                '[ .,]', '', 'g')) <> 'N'
+            AND UPPER(regexp_replace(p1.nombres || p1.apellidos, 
+                '[ .,]', '', 'g')) <> 'NN'
+            AND UPPER(regexp_replace(p1.nombres || p1.apellidos, 
+                '[ .,]', '', 'g')) <> 'NNN'
+            AND UPPER(regexp_replace(p1.nombres || p1.apellidos, 
+                '[ .,]', '', 'g')) <> 'NNNN'
             AND (p1.id, p2.id) NOT IN 
               (SELECT id_persona1, id_persona2 FROM homonimia)
             ORDER BY 2 DESC, 1

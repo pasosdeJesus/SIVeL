@@ -567,9 +567,9 @@ class PagEtiquetas extends PagBaseSimple
      * Exporta a relato lo relacionado con esta pestaña, en el caso
      * de módulos como observaciones al final del caso.
      *
-     * @param object &$db    Conexión a base de datos
-     * @param int    $dcaso  Objeto Dataobject con el caso que se exporta.
-     * @param string $r      XML generado al que debe concatenarse al final
+     * @param object  &$db   Conexión a base de datos
+     * @param integer $dcaso Objeto Dataobject con el caso que se exporta.
+     * @param string  &$r    XML generado al que debe concatenarse al final
      *                       lo de esta pestaña.
      *
      * @return void

@@ -11,7 +11,7 @@
  * @copyright 2011 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * @link      http://sivel.sf.net
-*/
+ */
 
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
@@ -381,13 +381,15 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep)
     while ($do2->fetch()) {
         if (isset($mapk['persona'][$do2->id_persona])) {
             $do1 = objeto_tabla('acto');
-	    if ($GLOBALS['actoreiniciar']) {
-		    $dot1 = objeto_tabla('actoreiniciar');
-		    $dot1->id_caso = $do1->id_caso = $id1;
-		    $dot1->id_presponsable = $do1->id_presponsable = $do2->id_presponsable;
-		    $dot1->id_categoria = $do1->id_categoria = $do2->id_categoria;
-		    $dot1->id_persona = $do1->id_persona = $mapk['persona'][$do2->id_persona];
-	    }
+            if ($GLOBALS['actoreiniciar']) {
+                $dot1 = objeto_tabla('actoreiniciar');
+                $dot1->id_caso = $do1->id_caso = $id1;
+                $dot1->id_presponsable = $do1->id_presponsable = 
+                    $do2->id_presponsable;
+                $dot1->id_categoria = $do1->id_categoria = $do2->id_categoria;
+                $dot1->id_persona = $do1->id_persona = 
+                    $mapk['persona'][$do2->id_persona];
+            }
             $do1->find();
             if (!$do1->fetch()) {
                 //$do1->insert();
@@ -403,17 +405,17 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep)
                     . "{$do1->id_persona},id_categoria:{$do2->id_categoria})";
             }
             if ($GLOBALS['actoreiniciar']) {
-		    $dot1->find();
-		    if (!$dot1->fetch()) {
-			    $dot1->fecha = $fecha;
-			    $dot1->insert();
-			    sin_error_pear($dot1);
-			    $obs .= " Asociado actoreiniciar(id_persona:" +
-				"{$dot1->id_persona}," +
-				"id_categoria:{$dot1->id_categoria}," +
-				"fecha:{$dot1->fecha})";
-		    }
-	    }
+                $dot1->find();
+                if (!$dot1->fetch()) {
+                    $dot1->fecha = $fecha;
+                    $dot1->insert();
+                    sin_error_pear($dot1);
+                    $obs .= " Asociado actoreiniciar(id_persona:" +
+                        "{$dot1->id_persona}," +
+                        "id_categoria:{$dot1->id_categoria}," +
+                        "fecha:{$dot1->fecha})";
+                }
+            }
         }
     }
     foreach (array('presponsable', 'caso', 'persona', 'categoria') as $t) {
@@ -729,9 +731,9 @@ function muestra($dsn)
         }
         echo "</tr>";
     }
- 
+
     echo "</table></center>";
- 
+
     echo '<table width="100%">
         <td style = "white-space: nowrap; background-color: #CCCCCC;"
         align = "left" valign="top" colspan="2"><b><div align=right>

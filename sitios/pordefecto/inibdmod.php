@@ -155,7 +155,6 @@ if (isset($GLOBALS['elimina_ficha_tabuladores'])) {
             if ($f[0] == $idf) {
                 $puestoelim = $f[2];
                 $puesto = $nf;
-                //echo "OJO ciclo 1 f[0]={$f[0]}, idf=$idf, puestoelim={$f[2]}, puesto=$nf<br>\n";
                 break;
             }
         }
