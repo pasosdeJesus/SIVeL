@@ -537,6 +537,30 @@ class PagEtiquetas extends PagBaseSimple
      */
     static function importaRelato(&$db, $r, $idcaso, &$obs)
     {
+        //echo "OJO PagEtiqueta::importaRelato(db, r, $idcaso, obs)<br>";
+        $po = $r->xpath("observaciones[contains(@tipo, 'etiqueta:')]");
+        foreach ($po as $v) {
+            $a = $v->attributes();
+            $s = explode(':', $a);
+            if (count($s) == 3) {
+                $e = $s[1];
+                $f = $s[2];
+                $c = (string)$v;
+                if (($ide = conv_basica($db, 'etiqueta', $e, $obs)) >= 0) {
+                    $ec = objeto_tabla('caso_etiqueta');
+                    $ec->fecha = $f;
+                    $ec->id_caso = $idcaso;
+                    $ec->id_etiqueta = $ide;
+                    $ec->id_usuario = $_SESSION['id_usuario'];
+                    $ec->observaciones = $c;
+                    $r = $ec->insert();
+                    sin_error_pear($r);
+                } else {
+                    $obs .= "No se hayó etiqueta $e, ignorando etiqueta " .
+                        "con fecha $f y contenido $c";
+                }
+            }
+        }
     }
 
     /**
