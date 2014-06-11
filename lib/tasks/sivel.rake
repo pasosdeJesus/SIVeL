@@ -25,7 +25,7 @@ namespace :sivel do
   task vuelcabasicas: :environment do
 		abcs = ActiveRecord::Base.configurations
     connection = ActiveRecord::Base.connection()
-    tb= Ability::tablasbasicas;
+    tb= ["pconsolidado"] + Ability::tablasbasicas;
 		filename = "db/datos-basicas.sql"
 		File.open(filename, "w") { |f| f << "-- Volcado de tablas basicas\n\n" }
 		set_psql_env(abcs[Rails.env])
