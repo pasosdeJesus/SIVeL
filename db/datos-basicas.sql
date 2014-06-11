@@ -15356,6 +15356,69 @@ SET client_min_messages = warning;
 SET search_path = public, pg_catalog;
 
 --
+-- Data for Name: vinculoestado; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'CONGRESO', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'PRESIDENCIA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'MINISTERIOS', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'DEPTOS. ADMINISTRATIVOS', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'EMP. IND. Y COM. DEL EST.', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'SUPERINTENDENCIAS', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (7, 'CONS. SUP. DE LA JUDICAT.', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (8, 'CORT. SUPREMA DE JUSTICIA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (9, 'CORTE CONSTITUCIONAL', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (10, 'FISCALIA GRAL DE LA NAC.', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (11, 'CONSEJO NACIONAL ELECTOR.', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (12, 'REGIS. NAL DEL EST. CIVIL', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (13, 'PROCURADURIA GENERAL', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (38, 'SIN INFORMACIÓN', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (14, 'CONTRALORIA GENERAL DE R.', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (15, 'DEFENSORIA DEL PUEBLO', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (16, 'ASAMBLEA DEPARTAMENTAL', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (17, 'GOBERNACION', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (18, 'SECRETARIAS (DTO.)', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (19, 'EMPRESAS PUBLICAS DTALES.', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (20, 'TRIBUNALES DTALES.', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (21, 'REGISTRADURIA DTAL.', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (22, 'CONTRALORIA DTAL.', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (23, 'PROCURADURIA DTAL.', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (24, 'DEFENSORIA DTAL.', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (25, 'CONCEJO MUNICIPAL', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (26, 'ALCALDIA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (27, 'SECRETARIAS MPALES.', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (28, 'EMPRESAS PUBLICAS MPALES.', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (29, 'JUZGADOS (MPALES.)', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (30, 'PROCURADURIA DELEGADA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (31, 'DEFENSORIA (MPAL.)', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (32, 'PERSONERIA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (33, 'CONTRALORIA (MPAL.)', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (34, 'JUNTAS ADMINIST. LOCALES', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (35, 'ALCALDIA MENOR', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (36, 'SECRETARIAS LOCALES', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (37, 'CASAS DE JUSTICIA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (39, 'TRIBUNALES', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO vinculoestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (40, 'VICEPRESIDENCIA', '2013-07-05', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
 -- Data for Name: actividadarea; Type: TABLE DATA; Schema: public; Owner: -
 --
 
