@@ -32,7 +32,11 @@ namespace :sivel do
 		];
     tb= sb + (Ability::tablasbasicas - sb);
 		filename = "db/datos-basicas.sql"
-		File.open(filename, "w") { |f| f << "-- Volcado de tablas basicas\n\n" }
+		File.open(filename, "w") { |f| f << "-- Volcado de tablas basicas\n\n
+
+    ALTER TABLE ONLY categoria
+    DROP CONSTRAINT categoria_contadaen_fkey; 
+			" }
 		set_psql_env(abcs[Rails.env])
 		search_path = abcs[Rails.env]['schema_search_path']
 		unless search_path.blank?
@@ -43,6 +47,11 @@ namespace :sivel do
 			puts command
 			raise "Error al volcar tabla #{t}" unless Kernel.system(command)
     end
+		File.open(filename, "a") { |f| f << "
+    ALTER TABLE ONLY categoria
+    ADD CONSTRAINT categoria_contadaen_fkey FOREIGN KEY (contadaen) 
+    REFERENCES categoria(id); 
+		" }
   end
 
 end

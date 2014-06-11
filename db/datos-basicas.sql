@@ -1,6 +1,10 @@
 -- Volcado de tablas basicas
 
---
+
+
+    ALTER TABLE ONLY categoria
+    DROP CONSTRAINT categoria_contadaen_fkey; 
+			--
 -- PostgreSQL database dump
 --
 
@@ -16313,3 +16317,8 @@ INSERT INTO tsitio (id, nombre, fechacreacion, fechadeshabilitacion, created_at,
 -- PostgreSQL database dump complete
 --
 
+
+    ALTER TABLE ONLY categoria
+    ADD CONSTRAINT categoria_contadaen_fkey FOREIGN KEY (contadaen) 
+    REFERENCES categoria(id); 
+		
