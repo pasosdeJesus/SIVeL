@@ -15317,6 +15317,45 @@ SET client_min_messages = warning;
 SET search_path = public, pg_catalog;
 
 --
+-- Data for Name: sectorsocial; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'CAMPESINO', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'INDIGENA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'OBRERO', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'COMERCIANTE', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'EMPLEADO', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'TRABAJADOR INDEPENDIENTE', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (7, 'PROFESIONAL', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (8, 'EMPRESARIO', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (9, 'INDUSTRIAL', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (10, 'HACENDADO', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (11, 'MARGINADO', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (12, 'TRABAJADOR (A) SEXUAL', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (13, 'DESEMPLEADO (A)', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (14, 'OTRO', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (15, 'SIN INFORMACIÓN', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO sectorsocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (16, 'TRANSPORTADOR', '2001-01-01', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
 -- Data for Name: actividadarea; Type: TABLE DATA; Schema: public; Owner: -
 --
 
