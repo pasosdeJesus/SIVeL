@@ -15239,6 +15239,44 @@ SET client_min_messages = warning;
 SET search_path = public, pg_catalog;
 
 --
+-- Data for Name: filiacion; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'LIBERAL', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'CONSERVADOR', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'ALIANZAS TRADICIONALES', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'IZQUIERDA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'ALIANZAS IZQUIERDA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'DERECHA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (7, 'DESMOVILIZADOS', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (8, 'CIVICO POLITICOS ELECTORA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (9, 'OTRO', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (10, 'SIN INFORMACIÓN', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (11, 'UNIÓN PATRÍOTICA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (12, 'COMUNISTA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (13, 'POLO DEMOCRÁTICO', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (14, 'FRENTE SOCIAL Y POLÍTICO', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO filiacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (15, 'MARCHA PATRIÓTICA', '2014-02-14', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
 -- Data for Name: actividadarea; Type: TABLE DATA; Schema: public; Owner: -
 --
 
