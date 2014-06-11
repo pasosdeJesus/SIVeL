@@ -14,6 +14,54 @@ SET client_min_messages = warning;
 SET search_path = public, pg_catalog;
 
 --
+-- Data for Name: pconsolidado; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'MUERTOS', 'DH', 'VIDA', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'MUERTOS', 'DIH', 'VIDA', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'MUERTOS', 'VP', 'VIDA', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'TORTURA', 'DH', 'INTEGRIDAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'HERIDOS', 'DH', 'INTEGRIDAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'ATENTADOS', 'DH', 'INTEGRIDAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (7, 'AMENAZAS', 'DH', 'INTEGRIDAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (8, 'VIOLENCIA SEXUAL', 'DH', 'INTEGRIDAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (9, 'TORTURA', 'DIH', 'INTEGRIDAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (10, 'HERIDOS', 'DIH', 'INTEGRIDAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (11, 'AMENAZAS', 'DIH', 'INTEGRIDAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (12, 'VIOLENCIA SEXUAL', 'DIH', 'INTEGRIDAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (13, 'TORTURA', 'VP', 'INTEGRIDAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (14, 'HERIDOS', 'VP', 'INTEGRIDAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (15, 'ATENTADOS', 'VP', 'INTEGRIDAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (16, 'AMENAZAS', 'VP', 'INTEGRIDAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (17, 'DESAPARICIÓN', 'DH', 'LIBERTAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (18, 'DETENCION ARBITRARIA', 'DH', 'LIBERTAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (19, 'DEPORTACIÓN', 'DH', 'LIBERTAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (20, 'RECLUTAMIENTO DE MENORES', 'DIH', 'LIBERTAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (21, 'TOMA DE REHENES', 'DIH', 'LIBERTAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (22, 'ESCUDO', 'DIH', 'LIBERTAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (23, 'RAPTO', 'VP', 'LIBERTAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (24, 'SECUESTRO', 'VP', 'LIBERTAD', 0, '2001-01-01', NULL, NULL, NULL);
+INSERT INTO pconsolidado (id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (25, 'COLECTIVO CONFINADO', 'DIH', 'INTEGRIDAD', 0, '2001-01-01', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
 -- Data for Name: actividadarea; Type: TABLE DATA; Schema: public; Owner: -
 --
 
