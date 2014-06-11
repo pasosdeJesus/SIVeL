@@ -31,7 +31,7 @@ Rangoedadac.create(id: 6, nombre: '61 en adelante', limiteinferior: 61,
 
 connection = ActiveRecord::Base.connection();
 
-connection.execute("SELECT setval('actividadarea_id_seq', MAX(id)) FROM 
+Connection.execute("SELECT setval('actividadarea_id_seq', MAX(id)) FROM 
 									 (SELECT 100 as id 
 									 UNION SELECT MAX(id) FROM actividadarea) AS s;");
 
@@ -45,33 +45,4 @@ connection.execute("INSERT INTO usuario
 	VALUES ('sjrven', 'sjrven@sjrven.org', 
 	'$2a$10$uMAciEcJuUXDnpelfSH6He7BxW0yBeq6VMemlWc5xEl6NZRDYVA3G', 
 	'', '2014-01-12', '2013-12-24', '2013-12-24', 1);")
-connection.execute("INSERT INTO usuario 
-	(nusuario, email, encrypted_password, password, 
-  fechacreacion, created_at, updated_at, rol) 
-	VALUES ('promotorcomunitario', 'promotorcomunitario@sjrven.org', 
-	'$2a$10$uMAciEcJuUXDnpelfSH6He7BxW0yBeq6VMemlWc5xEl6NZRDYVA3G', 
-	'', '2014-01-12', '2013-12-24', '2013-12-24', 4);")
-connection.execute("INSERT INTO usuario 
-	(nusuario, email, encrypted_password, password, 
-  fechacreacion, created_at, updated_at, rol) 
-	VALUES ('acompjuridico', 'acompjuridico@sjrven.org', 
-	'$2a$10$uMAciEcJuUXDnpelfSH6He7BxW0yBeq6VMemlWc5xEl6NZRDYVA3G', 
-	'', '2014-01-12', '2013-12-24', '2013-12-24', 4);")
-connection.execute("INSERT INTO usuario 
-	(nusuario, email, encrypted_password, password, 
-  fechacreacion, created_at, updated_at, rol) 
-	VALUES ('acomppsico', 'acomppsico@sjrven.org', 
-	'$2a$10$uMAciEcJuUXDnpelfSH6He7BxW0yBeq6VMemlWc5xEl6NZRDYVA3G', 
-	'', '2014-01-12', '2013-12-24', '2013-12-24', 4);")
-connection.execute("INSERT INTO usuario 
-	(nusuario, email, encrypted_password, password, 
-  fechacreacion, created_at, updated_at, rol) 
-	VALUES ('coordoficina', 'coordoficina@sjrven.org', 
-	'$2a$10$uMAciEcJuUXDnpelfSH6He7BxW0yBeq6VMemlWc5xEl6NZRDYVA3G', 
-	'', '2014-01-12', '2013-12-24', '2013-12-24', 1);")
-
-
-
-
-
 

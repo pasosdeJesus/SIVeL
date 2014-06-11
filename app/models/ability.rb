@@ -20,7 +20,7 @@ class Ability
     'idioma', 'iglesia', 
     'maternidad', 'municipio', 
     'pais', 'presponsable', 'profesion', 'proteccion', 
-    'rangoedad', 'regionsjr', 'rolfamilia', 
+    'rangoedad', 'rangoedadac', 'regionsjr', 'rolfamilia', 
     'statusmigratorio', 'supracategoria',
     'tclase', 'tsitio', 'tviolencia'
   ]

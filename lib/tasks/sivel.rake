@@ -1,3 +1,6 @@
+require 'active_support/core_ext/object/inclusion'
+require 'active_record'
+
 namespace :sivel do
   desc "Actualiza indices"
   task indices: :environment do
@@ -16,4 +19,33 @@ namespace :sivel do
     end
   end
 
+	# De implementacion de structure:dump de rake y de
+	# https://github.com/opdemand/puppet-modules/blob/master/rails/files/databases.rakeset
+  desc "Vuelca tablas básicas"
+  task vuelcabasicas: :environment do
+		abcs = ActiveRecord::Base.configurations
+    connection = ActiveRecord::Base.connection()
+    tb= Ability::tablasbasicas;
+		filename = "db/datos-basicas.sql"
+		File.open(filename, "w") { |f| f << "-- Volcado de tablas basicas\n\n" }
+		set_psql_env(abcs[Rails.env])
+		search_path = abcs[Rails.env]['schema_search_path']
+		unless search_path.blank?
+			search_path = search_path.split(",").map{|search_path_part| "--schema=#{Shellwords.escape(search_path_part.strip)}" }.join(" ")
+		end
+		tb.each do |t|
+			command = "pg_dump -i -a -x -O --column-inserts -t #{t}  #{search_path} #{Shellwords.escape(abcs[Rails.env]['database'])} >> #{Shellwords.escape(filename)}"
+			puts command
+			raise "Error al volcar tabla #{t}" unless Kernel.system(command)
+    end
+  end
+
+end
+
+# de https://github.com/opdemand/puppet-modules/blob/master/rails/files/databases.rake
+def set_psql_env(config)
+	ENV['PGHOST']     = config['host']          if config['host']
+	ENV['PGPORT']     = config['port'].to_s     if config['port']
+	ENV['PGPASSWORD'] = config['password'].to_s if config['password']
+	ENV['PGUSER']     = config['username'].to_s if config['username']
 end
