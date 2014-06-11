@@ -542,16 +542,15 @@ class PagEtiquetas extends PagBaseSimple
         foreach ($po as $v) {
             $a = $v->attributes();
             $s = explode(':', $a);
-            if (count($s) == 3) {
+            if (count($s) == 2) {
                 $e = $s[1];
-                $f = $s[2];
                 $c = (string)$v;
                 if (($ide = conv_basica($db, 'etiqueta', $e, $obs)) >= 0) {
                     $ec = objeto_tabla('caso_etiqueta');
-                    $ec->fecha = $f;
                     $ec->id_caso = $idcaso;
                     $ec->id_etiqueta = $ide;
                     $ec->id_usuario = $_SESSION['id_usuario'];
+                    $ec->fecha = @date('Y-m-d');
                     $ec->observaciones = $c;
                     $r = $ec->insert();
                     sin_error_pear($r);
@@ -584,9 +583,8 @@ class PagEtiquetas extends PagBaseSimple
         $vd = array();
         while ($do->fetch()) {
             $dr= $do->getLink('id_etiqueta');
-            $vd['observaciones{tipo->etiqueta:' . $dr->nombre . ':' . 
-                $do->fecha . '}'] = $do->observaciones=='' ? ' ' : 
-                $do->observaciones;
+            $vd['observaciones{tipo->etiqueta:' . $dr->nombre . '}'] 
+                = $do->observaciones=='' ? ' ' : $do->observaciones;
             $dr->free();
         }
         $do->free();
