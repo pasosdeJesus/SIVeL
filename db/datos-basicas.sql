@@ -3,7 +3,10 @@
 
 
     ALTER TABLE ONLY categoria
-    DROP CONSTRAINT categoria_contadaen_fkey; 
+      DROP CONSTRAINT categoria_contadaen_fkey; 
+    ALTER TABLE ONLY presponsable
+      DROP CONSTRAINT presponsable_papa_fkey;
+
 			--
 -- PostgreSQL database dump
 --
@@ -15208,6 +15211,34 @@ SET client_min_messages = warning;
 SET search_path = public, pg_catalog;
 
 --
+-- Data for Name: intervalo; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO intervalo (id, nombre, rango, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'MADRUGADA', '00:00 A 05:59', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO intervalo (id, nombre, rango, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'MAÑANA', '06:00 A 12:59', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO intervalo (id, nombre, rango, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'TARDE', '13:00 A 18:59', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO intervalo (id, nombre, rango, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'NOCHE', '19:00 A 24:59', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO intervalo (id, nombre, rango, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'SIN INFORMACIÓN', 'SIN INFORMACIÓN', '2001-01-01', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
 -- Data for Name: actividadarea; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -16319,6 +16350,9 @@ INSERT INTO tsitio (id, nombre, fechacreacion, fechadeshabilitacion, created_at,
 
 
     ALTER TABLE ONLY categoria
-    ADD CONSTRAINT categoria_contadaen_fkey FOREIGN KEY (contadaen) 
-    REFERENCES categoria(id); 
+      ADD CONSTRAINT categoria_contadaen_fkey FOREIGN KEY (contadaen) 
+      REFERENCES categoria(id); 
+    ALTER TABLE ONLY presponsable
+      ADD CONSTRAINT presponsable_papa_fkey FOREIGN KEY (papa) 
+      REFERENCES presponsable(id);
 		

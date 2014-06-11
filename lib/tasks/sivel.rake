@@ -25,17 +25,21 @@ namespace :sivel do
   task vuelcabasicas: :environment do
 		abcs = ActiveRecord::Base.configurations
     connection = ActiveRecord::Base.connection()
-		# Asegurasmo que primero se vuelcan superbasicas en orden correcto
+		# Asegurasmo que primero se vuelcan superbasicas y otras en orden correcto
 		sb= [
 			"pconsolidado", "tviolencia", "supracategoria",
-			"tclase", "pais", "departamento", "municipio", "clase"
+			"tclase", "pais", "departamento", "municipio", "clase",
+			"intervalo"
 		];
     tb= sb + (Ability::tablasbasicas - sb);
 		filename = "db/datos-basicas.sql"
 		File.open(filename, "w") { |f| f << "-- Volcado de tablas basicas\n\n
 
     ALTER TABLE ONLY categoria
-    DROP CONSTRAINT categoria_contadaen_fkey; 
+      DROP CONSTRAINT categoria_contadaen_fkey; 
+    ALTER TABLE ONLY presponsable
+      DROP CONSTRAINT presponsable_papa_fkey;
+
 			" }
 		set_psql_env(abcs[Rails.env])
 		search_path = abcs[Rails.env]['schema_search_path']
@@ -49,8 +53,11 @@ namespace :sivel do
     end
 		File.open(filename, "a") { |f| f << "
     ALTER TABLE ONLY categoria
-    ADD CONSTRAINT categoria_contadaen_fkey FOREIGN KEY (contadaen) 
-    REFERENCES categoria(id); 
+      ADD CONSTRAINT categoria_contadaen_fkey FOREIGN KEY (contadaen) 
+      REFERENCES categoria(id); 
+    ALTER TABLE ONLY presponsable
+      ADD CONSTRAINT presponsable_papa_fkey FOREIGN KEY (papa) 
+      REFERENCES presponsable(id);
 		" }
   end
 
