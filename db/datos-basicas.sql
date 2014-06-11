@@ -15277,6 +15277,46 @@ SET client_min_messages = warning;
 SET search_path = public, pg_catalog;
 
 --
+-- Data for Name: organizacion; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'CAMPESINA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'INDIGENA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'SINDICAL', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'CIVICA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'ESTUDIANTIL', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'PROFESIONAL', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (7, 'NEGRITUDES', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (8, 'FEMENINA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (9, 'RELIGIOSA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (10, 'HUMANITARIA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (11, 'DERECHOS HUMANOS', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (12, 'GREMIAL', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (13, 'JUVENIL', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (14, 'AMBIENTALISTA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (15, 'OTRA', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (16, 'SIN INFORMACIÓN', '2001-01-01', NULL, NULL, NULL);
+INSERT INTO organizacion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (17, 'VÍCTIMAS', '2013-07-05', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
 -- Data for Name: actividadarea; Type: TABLE DATA; Schema: public; Owner: -
 --
 

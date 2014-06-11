@@ -29,7 +29,7 @@ namespace :sivel do
 		sb= [
 			"pconsolidado", "tviolencia", "supracategoria",
 			"tclase", "pais", "departamento", "municipio", "clase",
-			"intervalo", "filiacion"
+			"intervalo", "filiacion", "organizacion"
 		];
     tb= sb + (Ability::tablasbasicas - sb);
 		filename = "db/datos-basicas.sql"
