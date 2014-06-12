@@ -70,6 +70,7 @@ Lancelo con:
   rails s
 ```
 ### Despliegue en sitio de producción con unicorn:
+* Se recomienda que deje fuentes en /var/www/htdocs/sivel2
 * Siga los mismos 2 primeros pasos para configurar un servidor de desarrollo
 * Configure la misma base de datos de un SIVeL 1.3 en sección production
   de config/databases.yml y ejecute

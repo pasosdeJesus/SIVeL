@@ -49,6 +49,8 @@ gem "bcrypt"
 gem "tzinfo"
 gem "tzinfo-data"
 
+gem "unicorn", group: [:production]
+
 gem "rspec", group: [:development, :test]
 gem "rspec-rails", group: [:development, :test]
 gem "cucumber-rails", group: "test", :require => false
