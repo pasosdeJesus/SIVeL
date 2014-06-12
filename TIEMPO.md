@@ -71,12 +71,26 @@ CLIENTE V-3d:
 * Plataforma: OpenBSD current (5.6), chrome, ruby 2.1.2, rails 4.1.1
 
 
-CLIENTE BD-1:
+CLIENTE BD-CF1:
 * AMD FX(tm)-8320 Eight-Core Processor 
 * RAM: 8G
 * Disco: 1T
 * Conectado en red Ethernet de 1G con SJR-4
 * Plataforma: adJ 5.4, chrome 28.0.1500.45
+
+CLIENTE BD-CF2d:
+* AMD FX(tm)-8320 Eight-Core Processor 
+* RAM: 8G
+* Disco: 1T
+* Conectado en red Ethernet de 1G
+* Plataforma: adJ 5.5, ruby 2.1.0, rails 4.1.1, webrick, chrome 32
+
+CLIENTE BD-CF3d:
+* AMD FX(tm)-8320 Eight-Core Processor 
+* RAM: 8G
+* Disco: 1T
+* Conectado en red Ethernet de 1G
+* Plataforma: adJ 5.5, ruby 2.1.2, rails 4.1.1, webrick, chrome 32
 
 
 ## MEDICIONES
@@ -148,7 +162,7 @@ Editar un caso: 10.27
 Agregar etiqueta y guardar: 5.26
 Editar de nuevo: 10.12
 
-### Fecha: 12.May.2014. Servidor: S-4. Cliente: BD-1. 
+### Fecha: 12.May.2014. Servidor: S-4. Cliente: BD-CF1. 
 * Autenticar: 6.39
 * Lista de actividades: 1.3
 * Editar una actividad: 1.55
@@ -166,6 +180,34 @@ Editar un caso: 6.5
 Agregar etiqueta y guardar: 3
 Editar de nuevo: 6.45
 
+### Fecha: 16.May.2014.  Servidor: SJR-4. Cliente: Windows desde Oficina Zulia/Venezuela
+* Autenticar: 7
+* Lista de actividades: 3.2
+* Editar una actividad: 2.1
+* Lista de casos: 2.1
+* Editar un caso: 9.1
+* Agregar etiqueta y guardar: 3.2
+* Editar de nuevo: 10.7
+
+### Fecha: 20.May.2014.  Servidor: SJR-4. Cliente: Windows Randolf desde Apure/Venezuela
+* Autenticar: 6.7
+* Lista de actividades: 7.1
+* Editar una actividad: 6.9
+* Lista de casos: 7
+* Editar un caso: 16.9
+* Agregar etiqueta y guardar: 3.6
+* Editar de nuevo: 17.1
+
+### Fecha: 21.May.2014.  Servidor: SJR-4. Cliente: Windows Randolf desde Tachira/Venezuela
+* Autenticar: 6.4
+* Lista de actividades: 0.5
+* Editar una actividad: 7.3
+* Lista de casos: 1.8
+* Editar un caso: 9.7
+* Agregar etiqueta y guardar: 2.7
+* Editar de nuevo: 8.5
+
+
 ### Fecha: 27.May.2014.  Servidor: V-3 (sin Internet). Cliente: V-3 (sin Internet).
 * Autenticar: 9.5
 * Lista de actividades: 1.5
@@ -175,17 +217,35 @@ Editar de nuevo: 6.45
 * Agregar etiqueta y guardar: 13
 * Editar de nuevo: 9.82
 
+### Fecha: 11.Jun.2014.  Servidor/cliente: BD-CF2d 
+Pruebas locales vistas sobre Internet por un proxy sobre conexión UNE de 2MB. 
+* Autenticar: 2.8
+* Lista de actividades: 0.2
+* Editar una actividad: 1.76
+* Lista de casos: 0.4
+* Editar un caso: 4.57
+* Agregar etiqueta y guardar: 3.75
+* Editar de nuevo: 3.92
 
-Fecha: 13.Abr.2014
-Servidor: SJR-3
-Cliente: V-1
-Primera carga de sitio tras actualizar fuentes y reiniciar servidor: 8.98
-Autenticar: 6.1
-Lista de actividades: 1.88
-Editar una actividad: 0.6
-Listado de casos: 1.96
-Editar un caso: 5.33
-Agregar etiqueta y guardar: 1.3
-Editar de nuevo: 5.99
+
+### Fecha: 11.Jun.2014.  Servidor/cliente: BD-CF3d 
+Pruebas locales vistas sobre Internet por un proxy sobre conexión UNE de 2MB. 
+* Autenticar: 3,3
+* Lista de actividades: 0,5
+* Editar una actividad: 0,7
+* Lista de casos: 0,5
+* Editar un caso: 5,65
+* Agregar etiqueta y guardar: 4,2
+* Editar de nuevo: 3,21
+
+### Fecha: 11.Jun.2014.  Servidor/cliente: BD-CF3
+Pruebas locales vistas sobre Internet por un proxy sobre conexión UNE de 2MB. 
+* Autenticar: 3,3
+* Lista de actividades: 0,5
+* Editar una actividad: 0,7
+* Lista de casos: 0,5
+* Editar un caso: 5,65
+* Agregar etiqueta y guardar: 4,2
+* Editar de nuevo: 3,21
 
 

@@ -59,18 +59,16 @@ con Ruby on Rails.
   rake db:seed
   rake sivel:indices
 ```
-* Lance el servidor con
-```sh
-  rails s
-```
 
 ### Pruebas:
 
 ### Servicios requeridos y prestados:
 
 ### Servidor de desarrollo:
+Lancelo con:
+```sh
   rails s
-
+```
 ### Despliegue en sitio de producción con unicorn:
 * Siga los mismos 2 primeros pasos para configurar un servidor de desarrollo
 * Configure la misma base de datos de un SIVeL 1.3 en sección production
