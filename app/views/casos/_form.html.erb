@@ -23,17 +23,22 @@
 
                 <%= s.input :fecharec, 
                   :input_html => { "data-behaviour" => "datepicker" },
-                  :as => :string, :label => "Fecha de Recepción" %>
-                <%= s.association :usuario,
-                  collection: Usuario.all.order(:nombre),
-                  label: "Asesor SJR",
-                  label_method: :nusuario, 
-                  value_method: :id %>
+									:as => :string, :label => "Fecha de Recepción" 
+								%>
+								<%= s.association :usuario,
+									collection: Usuario.all.order(:nombre),
+									include_blank: false,
+									label: "Asesor SJR",
+									label_method: :nusuario, 
+									value_method: :id 
+								%>
                 <%= s.association :regionsjr,
                   collection: Regionsjr.all.order(:nombre),
+									include_blank: false,
                   label: "Oficina",
                   label_method: :nombre, 
-                  value_method: :id %>
+									value_method: :id 
+								%>
                 <%= f.input :fecha, :input_html => { 
                     "data-behaviour" => "datepicker" },
                     :as => :string, :label => "Fecha del Hecho" %>
@@ -63,31 +68,41 @@
                       wrapper_html: { class: "span11 offset1" }  %>
                     <%= s.input :ingresomensual, label: "Ingreso mensual" %>
                     <%= s.input :gastos, label: "Estimado de gastos" %>
-                    <%= s.input :estrato, collection: [
-                                [:A, :A], [:B, :B], [:C, :C], 
-                                [:D, :D], [:E, :E], [:Otro, :O]], 
-                                label: "Estrato" %>
+										<%= s.input :estrato, collection: [
+											[:A, :A], [:B, :B], [:C, :C], 
+											[:D, :D], [:E, :E], [:Otro, :O]], 
+											include_blank: false,
+											label: "Estrato" 
+										%>
                     <%= s.association :idioma, 
-                  	  collection: Idioma.all.order(:nombre),
-                      label: "Idioma",
+											collection: Idioma.all.order(:nombre),
+											include_blank: false,
+											label: "Idioma",
                       label_method: :nombre, 
-                      value_method: :id %>
+											value_method: :id 
+										%>
                     <%= s.association :statusmigratorio,
                   	  collection: Statusmigratorio.all.order(:nombre),
+											include_blank: false,
                       label: "Status migratorio",
                       label_method: :nombre, 
-                      value_method: :id %>
+											value_method: :id 
+										%>
                     <%= s.association :proteccion, 
                   	  collection: Proteccion.all.order(:nombre),
+											include_blank: false,
                       label: "Necesidad de protección internacional",
                       label_method: :nombre, 
-											value_method: :id %>
+											value_method: :id 
+										%>
 								  	<%= s.input :concentimientosjr, 
 								  		label: "Concentimiento Informado compartir SJR",
-                      wrapper_html: { class: "span11 offset1" }  %>
+											wrapper_html: { class: "span11 offset1" }  
+										%>
 								  	<%= s.input :concentimientobd, 
 								  		label: "Concentimiento Informado compartir BD",
-                      wrapper_html: { class: "span11 offset1" }  %>
+											wrapper_html: { class: "span11 offset1" }  
+										%>
                   <% end %>
                 <% end %>
               </div>
@@ -148,28 +163,35 @@
           </div>
           <div id="refugio" class="accordion-body collapse">
             <div class="accordion-inner">
-              <%= s.input :fechasalida, 
-                :input_html => { "data-behaviour" => "datepicker",
-                  value: s.object.fechasalida || @caso.fecha },
-                  :as => :string, :label => "Fecha Salida" %>
+							<%= s.input :fechasalida, 
+								input_html: { 
+								"data-behaviour" => "datepicker",
+								value: s.object.fechasalida || @caso.fecha 
+							},
+								as: :string, label: "Fecha Salida" 
+							%>
               <%= s.association :salida,
                 collection: Ubicacion.where(:id_caso => @caso.id),
                 label: "Sitio salida",
                 label_method: lambda {|t| Pais.find(t.id_pais).nombre + (t.id_departamento.nil? ? "" : " / " + Departamento.find(t.id_departamento).nombre) },
-                value_method: :id %>
+								value_method: :id 
+							%>
               <%= s.input :fechallegada, 
                 :input_html => { "data-behaviour" => "datepicker" },
-                :as => :string, :label => "Fecha Llegada" %>
+								:as => :string, :label => "Fecha Llegada" 
+							%>
               <%= s.association :llegada,
                 collection: Ubicacion.where(:id_caso => @caso.id),
                 label: "Sitio llegada",
                 label_method: lambda {|t| Pais.find(t.id_pais).nombre + (t.id_departamento.nil? ? "" : " / " + Departamento.find(t.id_departamento).nombre) },
-                value_method: :id %>
-              <%= s.association :causaref,
-                collection: Causaref.where(fechadeshabilitacion: nil).order(:nombre),
-                label_method: lambda {|t| t.nombre},
-                label: "Causa del Refugio"
-              %>
+								value_method: :id 
+							%>
+							<%= s.association :causaref,
+								collection: Causaref.where(fechadeshabilitacion: nil).order(:nombre),
+								label_method: lambda {|t| t.nombre},
+								include_blank: false,
+								label: "Causa del Refugio"
+							%>
               <%= s.input :observacionesref, 
                 label: "Observaciones" 
               %>
