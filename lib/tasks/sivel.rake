@@ -5,10 +5,15 @@ namespace :sivel do
   desc "Actualiza indices"
   task indices: :environment do
     connection = ActiveRecord::Base.connection();
-    connection.execute("SELECT setval('actividadarea_id_seq', MAX(id)) FROM 
-             (SELECT 100 as id UNION SELECT MAX(id) FROM actividadarea) AS s;")
-    tb= Ability::tablasbasicas - 
-      [ "actividadarea", "categoria", "clase", "departamento", "municipio",
+		# Primero tablas basicas creadas en Rails
+    tbn = [ "actividadarea", "rangoedadac" ]
+    tbn.each do |t|
+    	connection.execute("SELECT setval('#{t}_id_seq', MAX(id)) FROM 
+             (SELECT 100 as id UNION SELECT MAX(id) FROM #{t}) AS s;")
+		end
+		# Despues otras tablas basicas pero excluyendo las que no tienen id autoincremental
+    tb= (Ability::tablasbasicas - tbn) -
+      [ "categoria", "clase", "departamento", "municipio",
         "supracategoria", "tclase", "tviolencia" ]
     tb.each do |t|
       connection.execute("SELECT setval('#{t}_seq', MAX(id)) FROM 
