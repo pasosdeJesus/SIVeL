@@ -273,7 +273,6 @@ class CasosController < ApplicationController
             end
           }
         end
-				debugger
         if (!params[:caso][:respusta_attributes].nil?)
           params[:caso][:respuesta_attributes].each {|k,v|
             if (v[:id_caso].nil?) 

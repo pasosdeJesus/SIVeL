@@ -25,7 +25,8 @@ class Caso < ActiveRecord::Base
 	has_many :caso_usuario, foreign_key: "id_caso", validate: true, dependent: :destroy
 
 	has_one :casosjr, foreign_key: "id_caso", inverse_of: :caso, validate: true, dependent: :destroy
-	has_many :respuesta, :through => :casosjr, dependent: :destroy
+	# respuseta deberìa ser con :through => :casosjr pero más dificil guardar
+	has_many :respuesta, foreign_key: "id_caso", validate:true, dependent: :destroy
 	accepts_nested_attributes_for :respuesta, allow_destroy: true, reject_if: :all_blank
 	accepts_nested_attributes_for :casosjr, allow_destroy: true, update_only: true
 
