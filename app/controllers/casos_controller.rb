@@ -252,29 +252,6 @@ class CasosController < ApplicationController
   # PATCH/PUT /casos/1.json
   def update
     respond_to do |format|
-    # http://archive.railsforum.com/viewtopic.php?id=41569
-    # child = ChildModel.save(params[:child].except(:parent_attributes))
-    # parent = Parent.new(params[:child][:parent_attributes].merge(:child_id => child.id))
-    # parent.save
-    #  k = params[:caso][:victima_attributes].keys[0]
-    #  if params[:caso][:victima_attributes][k][:id_persona] == ''
-    #    if params[:pnueva_nombres] != ''
-    #        p = Persona.new
-    #        p.nombres = params[:pnueva_nombres]
-    #        p.apellidos = params[:pnueva_apellidos]
-    #        p.anionac = params[:pnueva_anionac]
-    #        p.mesnac= params[:pnueva_mesnac]
-    #        p.dianac= params[:pnueva_dianac]
-    #        p.sexo = params[:pnueva_sexo]
-    #        p.id_departamento = params[:pnueva_id_departamento]
-    #        p.tipodocumento = params[:pnueva_tipodocumento]
-    #        p.numerodocumento = params[:pnueva_numerodocumento]
-    #        p.save
-    #        params[:caso][:victima_attributes][k][:id_persona] = p.id
-    #    else
-    #      flash[:error] = "Falta nombre de víctima"
-    #    end
-    #  end
       if @caso.valid?
         elimina_dep
         if (!params[:caso][:actosjr_attributes].nil?) 
