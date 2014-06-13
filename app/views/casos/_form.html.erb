@@ -64,8 +64,10 @@
 										<%= s.input :dependen, label: "Cuantos dependen econ.",
 											wrapper_html: { style: "padding-bottom: 18px;" }	%>
                     <%= s.input :sustento, label: "Sustento familiar" %>
-                    <%= s.input :leerescribir, label: "Sabe leer y escribir",
-                      wrapper_html: { class: "span11 offset1" }  %>
+										<%= s.input :leerescribir, label: "Sabe leer y escribir",
+											wrapper_html: {class: "span11 offset1", 
+												style: "padding-bottom: 26px;" }
+										%>
                     <%= s.input :ingresomensual, label: "Ingreso mensual" %>
                     <%= s.input :gastos, label: "Estimado de gastos" %>
 										<%= s.input :estrato, collection: [
@@ -93,7 +95,8 @@
 											include_blank: false,
                       label: "Necesidad de protección internacional",
                       label_method: :nombre, 
-											value_method: :id 
+											value_method: :id,
+											wrapper_html: {style: "padding-bottom: 40px;" }
 										%>
 								  	<%= s.input :concentimientosjr, 
 								  		label: "Concentimiento Informado compartir SJR",
