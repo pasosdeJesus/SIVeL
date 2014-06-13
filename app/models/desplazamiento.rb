@@ -1,7 +1,7 @@
 class Desplazamiento < ActiveRecord::Base
 
 	has_many :actosjr, foreign_key: "id_caso", validate: true
-	has_many :respuesta, foreign_key: "fechaexpulsion", validate: true
+
 	belongs_to :expulsion, class_name: "Ubicacion", foreign_key: "id_expulsion", validate: true
 	belongs_to :llegada, class_name: "Ubicacion", foreign_key: "id_llegada", validate: true
 	belongs_to :clasifdesp, foreign_key: "id_clasifdesp", validate: true
