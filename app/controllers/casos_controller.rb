@@ -231,6 +231,7 @@ class CasosController < ApplicationController
   def elimina_dep
     @caso.caso_etiqueta.clear
     @caso.desplazamiento.clear
+		#@caso.caso_presponsable.clear
     @caso.actosjr.clear
     @caso.acto.clear
     @caso.respuesta.each { |r| 
@@ -238,36 +239,20 @@ class CasosController < ApplicationController
       r.emprendimiento.clear
       r.aspsicosocial.clear
       r.aslegal.clear
+			r.clear
     }
+		#@caso.respuesta.clear
+		#@caso.ubicacion.clear
+    #@caso.victima.each { |v| 
+		#	v.victimasjr.destroy
+		#}
+		#@caso.victima.clear
   end
 
   # PATCH/PUT /casos/1
   # PATCH/PUT /casos/1.json
   def update
     respond_to do |format|
-    # http://archive.railsforum.com/viewtopic.php?id=41569
-    # child = ChildModel.save(params[:child].except(:parent_attributes))
-    # parent = Parent.new(params[:child][:parent_attributes].merge(:child_id => child.id))
-    # parent.save
-    #  k = params[:caso][:victima_attributes].keys[0]
-    #  if params[:caso][:victima_attributes][k][:id_persona] == ''
-    #    if params[:pnueva_nombres] != ''
-    #        p = Persona.new
-    #        p.nombres = params[:pnueva_nombres]
-    #        p.apellidos = params[:pnueva_apellidos]
-    #        p.anionac = params[:pnueva_anionac]
-    #        p.mesnac= params[:pnueva_mesnac]
-    #        p.dianac= params[:pnueva_dianac]
-    #        p.sexo = params[:pnueva_sexo]
-    #        p.id_departamento = params[:pnueva_id_departamento]
-    #        p.tipodocumento = params[:pnueva_tipodocumento]
-    #        p.numerodocumento = params[:pnueva_numerodocumento]
-    #        p.save
-    #        params[:caso][:victima_attributes][k][:id_persona] = p.id
-    #    else
-    #      flash[:error] = "Falta nombre de víctima"
-    #    end
-    #  end
       if @caso.valid?
         elimina_dep
         if (!params[:caso][:actosjr_attributes].nil?) 
@@ -278,7 +263,7 @@ class CasosController < ApplicationController
               acto.id_persona = v[:id_persona]
               acto.id_categoria = v[:id_categoria]
               acto.id_caso = @caso.id
-              acto.save!
+              acto.save
             end
           }
         end

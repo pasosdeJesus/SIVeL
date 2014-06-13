@@ -4,7 +4,7 @@ es:
     fechacreacion: Creación
     fechadeshabilitacion: Deshabilitación 
     id_municipio: Municipio
-    id_departamento: Departamento
+    id_departamento: Departamento/Estado
     id_tclase: Tipo de Centro Poblado
     id_pais: País
     id_supracategoria: Supracategoria
@@ -66,8 +66,8 @@ es:
         Clase: Centro Poblado
         Clases: Centros Poblados
       departamento:
-        Departamento: Departamento
-        Departamentos: Departamentos
+        Departamento: Departamento/Estado
+        Departamentos: Departamentos/Estados
       emprendimiento:
         Emprendimiento: Emprendimiento
         Emprendimientos: Emprendimientos

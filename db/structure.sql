@@ -966,6 +966,7 @@ CREATE TABLE causaref (
     fechadeshabilitacion date,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
+    codigo character varying(10),
     CONSTRAINT causaref_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
 
@@ -5250,4 +5251,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140527110223');
 INSERT INTO schema_migrations (version) VALUES ('20140528043115');
 
 INSERT INTO schema_migrations (version) VALUES ('20140611110441');
+
+INSERT INTO schema_migrations (version) VALUES ('20140611111020');
 

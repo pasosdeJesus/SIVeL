@@ -1,19 +1,23 @@
 class Casosjr < ActiveRecord::Base
+	has_many :respuesta, foreign_key: "id_caso", validate: true, 
+		dependent: :destroy
 
-	has_many :ayudaestado_respuesta, foreign_key: "id_caso", validate: true, dependent: :destroy
-	has_many :derecho_respuesta, foreign_key: "id_caso", validate: true, dependent: :destroy
-	has_many :respuesta, foreign_key: "id_caso", validate: true, dependent: :destroy
-	belongs_to :caso, foreign_key: "id_caso", validate: true, inverse_of: :casosjr
-	belongs_to :contacto, class_name: "Persona", foreign_key: "contacto", validate: true
-	belongs_to :regionsjr, foreign_key: "id_regionsjr", validate: true
+	# Ordenados por foreign_key para comparar con esquema en base
 	belongs_to :usuario, foreign_key: "asesor", validate: true
-	belongs_to :statusmigratorio, foreign_key: "id_statusmigratorio", validate: true
-	belongs_to :proteccion, foreign_key: "id_proteccion", validate: true
-	belongs_to :idioma, foreign_key: "id_idioma", validate: true
-
-	belongs_to :llegada, class_name: "Ubicacion", foreign_key: "id_llegada", validate: true
-	belongs_to :salida, class_name: "Ubicacion", foreign_key: "id_salida", validate: true
+	belongs_to :contacto, class_name: "Persona", foreign_key: "contacto", 
+		validate: true
+	belongs_to :caso, foreign_key: "id_caso", validate: true, 
+		inverse_of: :casosjr
 	belongs_to :causaref, foreign_key: "id_causaref", validate: true
+	belongs_to :idioma, foreign_key: "id_idioma", validate: true
+	belongs_to :llegada, class_name: "Ubicacion", foreign_key: "id_llegada", 
+		validate: true
+	belongs_to :proteccion, foreign_key: "id_proteccion", validate: true
+	belongs_to :regionsjr, foreign_key: "id_regionsjr", validate: true
+	belongs_to :salida, class_name: "Ubicacion", foreign_key: "id_salida", 
+		validate: true
+	belongs_to :statusmigratorio, foreign_key: "id_statusmigratorio", 
+		validate: true
 
 	self.primary_key = :id_caso
 
