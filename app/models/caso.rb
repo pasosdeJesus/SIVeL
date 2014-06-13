@@ -35,7 +35,7 @@ class Caso < ActiveRecord::Base
 	has_many :comunidad_rangoedad, foreign_key: "id_caso", validate: true, dependent: :destroy
 	has_many :comunidad_sectorsocial, foreign_key: "id_caso", validate: true, dependent: :destroy
 	has_many :comunidad_vinculoestado, foreign_key: "id_caso", validate: true, dependent: :destroy
-	has_many :proceso, foreign_key: "id_caso", validate: true, dependent: :destroy
+	#has_many :proceso, foreign_key: "id_caso", validate: true, dependent: :destroy
 	has_many :ubicacion, foreign_key: "id_caso", validate: true, dependent: :destroy
 	accepts_nested_attributes_for :ubicacion, allow_destroy: true, reject_if: :all_blank
 	has_many :desplazamiento, foreign_key: "id_caso", validate: true, dependent: :destroy

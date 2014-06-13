@@ -232,13 +232,14 @@ class CasosController < ApplicationController
     @caso.caso_etiqueta.clear
     @caso.desplazamiento.clear
 		#@caso.caso_presponsable.clear
-    @caso.actosjr.destroy
+    @caso.actosjr.clear
     @caso.acto.clear
     @caso.respuesta.each { |r| 
       r.ayudasjr.clear 
       r.emprendimiento.clear
       r.aspsicosocial.clear
       r.aslegal.clear
+			r.clear
     }
 		#@caso.respuesta.clear
 		#@caso.ubicacion.clear
@@ -262,7 +263,7 @@ class CasosController < ApplicationController
               acto.id_persona = v[:id_persona]
               acto.id_categoria = v[:id_categoria]
               acto.id_caso = @caso.id
-              acto.save!
+              acto.save
             end
           }
         end
@@ -289,7 +290,7 @@ class CasosController < ApplicationController
   # DELETE /casos/1
   # DELETE /casos/1.json
   def destroy
-    #elimina_dep
+    elimina_dep
     @caso.casosjr.destroy
     @caso.destroy
     respond_to do |format|
