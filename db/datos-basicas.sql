@@ -15620,6 +15620,168 @@ SET client_min_messages = warning;
 SET search_path = public, pg_catalog;
 
 --
+-- Data for Name: personadesea; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO personadesea (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (0, 'SIN INFORMACIÓN', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO personadesea (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'PERMANECER', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO personadesea (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'REUBICARSE', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO personadesea (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'RETORNAR', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO personadesea (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'SALIR DEL  PAÍS', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO personadesea (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'REGRESAR AL PAÌS', '2013-06-17', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: ayudaestado; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (0, 'SIN INFORMACIÓN', '2013-06-16', NULL, NULL, NULL);
+INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'ALIMENTACIÓN', '2013-06-16', NULL, NULL, NULL);
+INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'ALOJAMIENTO', '2013-06-16', NULL, NULL, NULL);
+INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'APOYO A PROYECTO PRODUCTIVO', '2013-06-16', NULL, NULL, NULL);
+INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'ATENCIÓN PSICOLÓGICA O PSICOSOCIAL', '2013-06-16', NULL, NULL, NULL);
+INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'DOCUMENTACIÓN', '2013-06-16', NULL, NULL, NULL);
+INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'AYUDAS ECONÓMICAS', '2013-06-16', NULL, NULL, NULL);
+INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (7, 'KIT HÁBITAT', '2013-06-16', NULL, NULL, NULL);
+INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (8, 'SALUD', '2013-06-16', NULL, NULL, NULL);
+INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (9, 'VESTUARIO', '2013-06-16', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: derecho; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO derecho (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'DERECHO A LA INTEGRIDAD PERSONAL', '2013-06-12', NULL, NULL, NULL);
+INSERT INTO derecho (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'DERECHO A LA IGUALDAD Y A LA NO DISCRIMINACIÓN', '2013-06-12', NULL, NULL, NULL);
+INSERT INTO derecho (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'DERECHO A LA LIBERTAD', '2013-06-12', NULL, NULL, NULL);
+INSERT INTO derecho (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'DERECHO A LA LIBRE CIRCULACIÓN Y RESIDENCIA', '2013-06-12', NULL, NULL, NULL);
+INSERT INTO derecho (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'DERECHO A LA LIBRE OPINIÓN Y A LA EXPRESIÓN', '2013-06-12', NULL, NULL, NULL);
+INSERT INTO derecho (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'DERECHO A LA SALUD', '2013-06-12', NULL, NULL, NULL);
+INSERT INTO derecho (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (7, 'DERECHO A LA EDUCACIÓN', '2013-06-12', NULL, NULL, NULL);
+INSERT INTO derecho (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (8, 'DERECHO A LA VIVIENDA', '2013-06-12', NULL, NULL, NULL);
+INSERT INTO derecho (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (9, 'N/A  ', '2013-06-12', NULL, NULL, NULL);
+INSERT INTO derecho (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (10, 'DERECHO A LA VERDAD, A A LA JUSTCIA Y A LA REPARACIÓN  ', '2013-06-16', NULL, NULL, NULL);
+INSERT INTO derecho (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (11, 'DERECHO A LA ALIMENTACIÓN', '2013-06-16', NULL, NULL, NULL);
+INSERT INTO derecho (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (12, 'DERECHO A LA IDENTIDAD', '2013-06-16', NULL, NULL, NULL);
+INSERT INTO derecho (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (13, 'DERECHO AL TRABAJO', '2013-06-16', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: progestado; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO progestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (0, 'SIN INFORMACIÓN', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO progestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'EN ACCIÓN', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO progestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'RED JUNTOS', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO progestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'VIVIENDA', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO progestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'TERCERA EDAD', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO progestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'OTROS ¿CUÁL?', '2013-06-17', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: motivosjr; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO motivosjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (0, 'SIN INFORMACIÓN', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO motivosjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (11, 'ASESORÍA PARA EL INGRESO EN PROGRAMAS DE EDUCACIÓN', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO motivosjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (12, 'ASESORÍA PARA EL INGRESO EN PROGRAMAS DE VIVIENDA', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO motivosjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (13, 'ASESORÍA PARA EL INGRESO AL SISTEMA DE LEY DE VÍCTIMAS', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO motivosjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (14, 'INFORMACIÓN SOBRE LEY DE VÍCTIMAS', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO motivosjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (15, 'ASESORÍA SOSBRE PROGRAMA DE GENERACIÓN DE INGRESOS', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO motivosjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (16, 'SOLICITUD DE PROTECCIÓN', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO motivosjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (17, 'ACOMPAÑAMIENTO PSICOSOCIAL / APOYO PSICOLÓGICO', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO motivosjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (18, 'APOYO Y/ O SOLICITUD DE INFORMACIÓN PARA REFUGIO', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO motivosjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (19, 'TRÁMITE DE DOCUMENTACIÓN', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO motivosjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (20, 'VERIFICACIÓN', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO motivosjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (21, 'ASESORÍA JURÍDICA', '2013-06-17', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
 -- Data for Name: actividadarea; Type: TABLE DATA; Schema: public; Owner: -
 --
 

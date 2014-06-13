@@ -32,7 +32,8 @@ namespace :sivel do
 			"intervalo", "filiacion", "organizacion", "sectorsocial",
 			"vinculoestado", "regimensalud", "acreditacion",
 			"clasifdesp", "declaroante", "inclusion", "modalidadtierra",
-			"tipodesp"
+			"tipodesp", "personadesea", "ayudaestado", "derecho", "progestado",
+			"motivosjr"
 		];
     tb= sb + (Ability::tablasbasicas - sb);
 		filename = "db/datos-basicas.sql"
