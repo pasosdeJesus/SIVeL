@@ -2515,7 +2515,6 @@ CREATE TABLE respuesta (
     id integer DEFAULT nextval('respuesta_seq'::regclass) NOT NULL,
     id_caso integer,
     fechaatencion date NOT NULL,
-    fechaexpulsion date NOT NULL,
     prorrogas boolean,
     numprorrogas integer,
     montoprorrogas integer,
@@ -2790,6 +2789,9 @@ CREATE TABLE usuario (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     regionsjr_id integer,
+    failed_attempts integer DEFAULT 0,
+    unlock_token character varying(255),
+    locked_at timestamp without time zone,
     CONSTRAINT usuario_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion))),
     CONSTRAINT usuario_rol_check CHECK (((rol >= 1) AND (rol <= 6)))
 );
@@ -5253,4 +5255,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140528043115');
 INSERT INTO schema_migrations (version) VALUES ('20140611110441');
 
 INSERT INTO schema_migrations (version) VALUES ('20140611111020');
+
+INSERT INTO schema_migrations (version) VALUES ('20140613044320');
+
+INSERT INTO schema_migrations (version) VALUES ('20140613200951');
 
