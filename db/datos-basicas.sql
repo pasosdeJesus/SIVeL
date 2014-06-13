@@ -15504,6 +15504,122 @@ SET client_min_messages = warning;
 SET search_path = public, pg_catalog;
 
 --
+-- Data for Name: declaroante; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO declaroante (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (0, 'SIN INFORMACIÓN', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO declaroante (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'PERSONERIA MUNICIPAL', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO declaroante (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'DEFENSORIA REGIONAL', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO declaroante (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'ROCURADURIA REGIONAL', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO declaroante (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'PROCURADURIA PROVINCIAL ', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO declaroante (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'OTRO', '2013-05-24', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: inclusion; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO inclusion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (0, 'SIN INFORMACIÓN', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO inclusion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'SIN RESPUESTA', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO inclusion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'INCLUIDO', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO inclusion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'NO INCLUIDO', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO inclusion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'EN VALORACIÓN', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO inclusion (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'EXCLUIDO', '2013-05-24', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: modalidadtierra; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO modalidadtierra (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (0, 'SIN INFORMACIÓN', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO modalidadtierra (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'TENEDOR', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO modalidadtierra (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'COLONO', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO modalidadtierra (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'NO DEJÓ', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO modalidadtierra (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'POSEEDOR', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO modalidadtierra (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'PROPIETARIO', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO modalidadtierra (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'RESGUARDO', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO modalidadtierra (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (7, 'CONSEJO COMUNITARIO', '2013-05-24', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- Data for Name: tipodesp; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO tipodesp (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (0, 'SIN INFORMACIÓN', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO tipodesp (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'GOTA A GOTA', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO tipodesp (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'MASIVO', '2013-05-24', NULL, NULL, NULL);
+INSERT INTO tipodesp (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'FAMILIAR', '2013-05-24', NULL, NULL, NULL);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
 -- Data for Name: actividadarea; Type: TABLE DATA; Schema: public; Owner: -
 --
 
