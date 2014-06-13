@@ -1,5 +1,6 @@
 class Respuesta < ActiveRecord::Base
-  belongs_to :caso, foreign_key: "id_caso", validate: true
+
+  belongs_to :casosjr, foreign_key: "id_caso", validate: true
   belongs_to :desplazamiento, foreign_key: "fechaexpulsion", validate: true
 
   has_many :ayudasjr, :through => :ayudasjr_respuesta
