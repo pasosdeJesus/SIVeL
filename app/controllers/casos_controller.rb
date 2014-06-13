@@ -231,7 +231,7 @@ class CasosController < ApplicationController
   def elimina_dep
     @caso.caso_etiqueta.clear
     @caso.desplazamiento.clear
-		#@caso.caso_presponsable.clear
+		@caso.caso_presponsable.clear
     @caso.actosjr.destroy
     @caso.acto.clear
     @caso.respuesta.each { |r| 
