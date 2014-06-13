@@ -14,7 +14,7 @@ module Admin
     end
 
     def atributos_index
-      ["id", "nombre", "latitud", "longitud", "id_pais",
+      ["id", "id_pais", "nombre", "latitud", "longitud", 
         "fechacreacion", "fechadeshabilitacion"]
     end
 
