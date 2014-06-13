@@ -30,7 +30,8 @@ namespace :sivel do
 			"pconsolidado", "tviolencia", "supracategoria",
 			"tclase", "pais", "departamento", "municipio", "clase",
 			"intervalo", "filiacion", "organizacion", "sectorsocial",
-			"vinculoestado", "regimensalud", "acreditacion"
+			"vinculoestado", "regimensalud", "acreditacion",
+			"clasifdesp"
 		];
     tb= sb + (Ability::tablasbasicas - sb);
 		filename = "db/datos-basicas.sql"

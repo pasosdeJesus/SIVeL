@@ -239,7 +239,6 @@ class CasosController < ApplicationController
       r.emprendimiento.clear
       r.aspsicosocial.clear
       r.aslegal.clear
-			r.clear
     }
 		#@caso.respuesta.clear
 		#@caso.ubicacion.clear
@@ -271,6 +270,14 @@ class CasosController < ApplicationController
           params[:caso][:caso_etiqueta_attributes].each {|k,v|
             if (v[:id_usuario].nil? || v[:id_usuario] == "") 
               v[:id_usuario] = current_usuario.id
+            end
+          }
+        end
+				debugger
+        if (!params[:caso][:respusta_attributes].nil?)
+          params[:caso][:respuesta_attributes].each {|k,v|
+            if (v[:id_caso].nil?) 
+              v[:id_caso] = @caso.id
             end
           }
         end
@@ -376,8 +383,8 @@ class CasosController < ApplicationController
           ]
         ],
         :anexo_attributes => [
-          :id, :fecha, :descripcion, :archivo, :adjunto, :_destroy
-        ],
+					:id, :fecha, :descripcion, :archivo, :adjunto, :_destroy
+				],
         :caso_etiqueta_attributes => [
           :id_usuario, :fecha, :id_etiqueta, :observaciones, :_destroy
         ]
