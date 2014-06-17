@@ -239,7 +239,6 @@ class CasosController < ApplicationController
       r.emprendimiento.clear
       r.aspsicosocial.clear
       r.aslegal.clear
-			r.clear
     }
 		#@caso.respuesta.clear
 		#@caso.ubicacion.clear
