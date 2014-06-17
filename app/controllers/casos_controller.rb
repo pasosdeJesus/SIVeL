@@ -273,6 +273,13 @@ class CasosController < ApplicationController
             end
           }
         end
+        if (!params[:caso][:respusta_attributes].nil?)
+          params[:caso][:respuesta_attributes].each {|k,v|
+            if (v[:id_caso].nil?) 
+              v[:id_caso] = @caso.id
+            end
+          }
+        end
         if @caso.update(caso_params)
           format.html { redirect_to @caso, notice: 'Caso actualizado.' }
           format.json { head :no_content }
@@ -375,8 +382,8 @@ class CasosController < ApplicationController
           ]
         ],
         :anexo_attributes => [
-          :id, :fecha, :descripcion, :archivo, :adjunto, :_destroy
-        ],
+					:id, :fecha, :descripcion, :archivo, :adjunto, :_destroy
+				],
         :caso_etiqueta_attributes => [
           :id_usuario, :fecha, :id_etiqueta, :observaciones, :_destroy
         ]

@@ -3,11 +3,6 @@
     <%= f.input :fechaatencion, 
       :input_html => { "data-behaviour" => "datepicker" },
       :as => :string, :label => "Fecha de Atención" %>
-    <%= f.association :desplazamiento,
-      collection: Desplazamiento.where(:id_caso => @caso.id),
-	    label: "Desp. Atendido",
-      label_method: :fechaexpulsion,
-      value_method: :fechaexpulsion %>
     <%= f.input :descamp, as: :text, label: "Situación encontrada" %>
     <%= f.input :observaciones, as: :text, label: "Observaciones" %>
     <%= f.input :orientaciones, as: :text, label: "Recomendaciones" %>

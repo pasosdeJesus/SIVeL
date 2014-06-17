@@ -17,7 +17,19 @@
   %>
   <%= f.input :idioma %>
   <%= f.input :email %>
-  <%= f.input :encrypted_password %>
+	<%= f.input :encrypted_password %>
+	<%= f.input :failed_attempts,
+		label: 'Intentos fallidos'
+	%>
+	<%= f.input :unlock_token,
+		wrapper_html: { style: "padding-bottom:18px;" },
+		label: 'Testigo para desbloquear'
+	%>
+	<%= f.input :locked_at,
+		label: 'Hora del Bloqueo',
+		input_html: { "data-behaviour" => "datepicker" }, 
+	  :as => :string
+	%>
   <div class="form-actions">
     <%= f.button :submit, :class => 'btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

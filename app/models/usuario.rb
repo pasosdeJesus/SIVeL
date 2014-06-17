@@ -1,7 +1,7 @@
 class Usuario < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :recoverable :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :rememberable, :trackable
+  devise :database_authenticatable, :rememberable, :trackable, :lockable
 
 	has_many :caso_usuario, foreign_key: "id_usuario", validate: true
 	has_many :caso_etiqueta, foreign_key: "id_usuario", validate: true
