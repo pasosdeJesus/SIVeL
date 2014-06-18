@@ -3189,6 +3189,26 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Datos recientes');
 }
 
+$idac = '1.2-lo';
+if (!aplicado($idac)) {
+    hace_consulta(
+        $db, "ALTER TABLE usuario ADD COLUMN failed_attempts INTEGER", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ADD COLUMN unlock_token VARCHAR(64)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE usuario ADD COLUMN locked_at TIMESTAMP", false
+    );
+
+    die("x");
+    aplicaact(
+        $act, $idac, 
+        'Cuentas se bloquean tras varios intentos fallidos de ingreso'
+    );
+}
+
+
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {
