@@ -204,13 +204,18 @@ function poneCoord(par) {
             }
         });
         y.error(function(m1, m2, m3) {
-            ar = "";
-            sep = "";
-            for(var i in par) {
-                ar = ar + sep + i + ":" + par[i];
-                sep = ", ";
+            if (m1.responseText.indexOf("Acceso no autorizado") >=0) {
+                alert("Se requiere autenticación");
+            } else {
+
+                ar = "";
+                sep = "";
+                for(var i in par) {
+                    ar = ar + sep + i + ":" + par[i];
+                    sep = ", ";
+                }
+                alert('Problema leyendo ' + ar + ". " + m1 + ' ' + m2 + ' ' + m3);
             }
-            alert('Problema leyendo ' + ar + ". " + m1 + ' ' + m2 + ' ' + m3);
         });
     }
 }
@@ -239,10 +244,14 @@ function llenaMunicipio(iddep, idmun, idcla, sincoord) {
             $("#" + idcla).html('');
         });
         x.error(function(m1, m2, m3) {
-            alert(
-                'Problema leyendo Municipios de ' + dep + ' ' + m1 + ' ' 
-                + m2 + ' ' + m3
-                );
+            if (m1.responseText.indexOf("Acceso no autorizado") >=0) {
+                alert("Se requiere autenticación");
+            } else {
+                alert(
+                    'Problema leyendo Municipios de ' + dep + ' ' + m1 + ' ' 
+                    + m2 + ' ' + m3
+                    );
+            }
         });
         par = { 
             tabla: 'departamento',
@@ -285,7 +294,11 @@ function llenaClase(iddep, idmun, idcla, sincoord) {
 		$("#" + idcla).html(op);
 	});
 	x.error(function(m1, m2, m3) {
-		alert('Problema leyendo Clase ' + x + m1 + m2 + m3);
+        if (m1.responseText.indexOf("Acceso no autorizado") >=0) {
+            alert("Se requiere autenticación");
+        } else {
+            alert('Problema leyendo Clase ' + x + m1 + m2 + m3);
+        }
 	});
     par = { 
         tabla: 'municipio',
@@ -396,7 +409,11 @@ $( document ).ready(function () {
             });
         });
         x.error(function(m1, m2, m3) {
-            alert('Problema leyendo Rangos de edad ' + m1 + m2 + m3);
+            if (m1.responseText.indexOf("Acceso no autorizado") >=0) {
+                alert("Se requiere autenticación");
+            } else {
+                alert('Problema leyendo Rangos de edad ' + m1 + m2 + m3);
+            }
         });
         $("[name='anionac']").on('change', function (event) {
             anionac = $(this).val();
