@@ -543,15 +543,24 @@ function localiza_conf()
     }
     if (!$existe) {
         global $CHROOTDIR;
+	if ($pbase == '127') {
+		$pbase = 'sivel';
+	}
         encabezado_envia('Error');
         echo "No existe configuraci&oacute;n '"
             . htmlentities($dirsitio, ENT_COMPAT, 'UTF-8') . "'<br>";
-        $r = dirname($_SERVER['PATH_TRANSLATED']) . "/sitios";
+        if (isset($_SERVER['PATH_TRANSLATED'])) {
+            $r = dirname($_SERVER['PATH_TRANSLATED']) . "/sitios";
+        } elseif (isset($_SERVER['SCRIPT_FILENAME'])) {
+            $r = dirname($_SERVER['SCRIPT_FILENAME']) . "/sitios";
+        } else {
+            $r = $_SERVER['DOCUMENT_ROOT'] . "/sitios";
+        } 
         $rs = $CHROOTDIR . $r;
-        $cmd ="cd $rs; sudo ./nuevo.sh $pbase; sudo ln -s $pbase "
+        $cmd ="cd $rs; sudo chown \$USER:\$USER .; ./nuevo.sh $pbase; ln -s $pbase "
             . strtoupper($n);
         foreach (array($nn, 'sivel') as $pn) {
-            $rp = $r . "/" . $pn;
+            $rp = $r . "/" . $pn . "/conf.php";
             if (file_exists($rp)) {
                 $fn = $pn;
                 echo "Existe ruta "
