@@ -70,6 +70,16 @@ namespace :sivel do
 		" }
   end
 
+ 	desc "Actualiza tablas básicas"
+	task actbasicas: :environment do
+		value = %x(
+			pwd
+			rails dbconsole <<EOF
+\\i db/datos-basicas.sql
+EOF
+		)
+  end
+
 end
 
 # de https://github.com/opdemand/puppet-modules/blob/master/rails/files/databases.rake

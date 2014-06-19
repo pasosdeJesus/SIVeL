@@ -140,6 +140,7 @@ rc_cmd $1
   bundle install
 ```
 * Aplique cambios a base de datos: ```rake db:migrate```
+* Actualice tablas básicas: ```rake sivel:actbasicas'''
 * Actualice índices: ```rake sivel:indices```
 * Lance nuevamente el servidor de desarrollo: ```rails s```
 
