@@ -107,6 +107,7 @@
   <observaciones tipo="tsitio">tsitio1</observaciones>
   <observaciones tipo="contexto">contexto1</observaciones>
   <observaciones tipo="antecedente">antecedente1</observaciones>
+  <observaciones tipo="etiqueta:AMARILLO:">con color</observaciones>
 </relato><relato>
   <organizacion_responsable>D</organizacion_responsable>
   <derechos>Dominio Público</derechos>
@@ -203,4 +204,6 @@
   <observaciones tipo="tsitio">tsitio1</observaciones>
   <observaciones tipo="contexto">contexto1</observaciones>
   <observaciones tipo="antecedente">antecedente1</observaciones>
+  <observaciones tipo="etiqueta:IMPORTA_RELATO:">1</observaciones>
+  <observaciones tipo="etiqueta:ERROR_IMPORTACIÓN:">Persona repetida 1 - 'NOMBRES APELLIDOS' , como víctima en casos 1. -- presponsable: desconocido 'nombre'</observaciones>
 </relato></relatos>

@@ -60,7 +60,8 @@ function prueba {
 	} fi;
 	if (test "$otrocomp" != "") then {
 		if (test "$saca2" != "") then {
-			cp sitios/pruebas/salida/$otrocomp sitios/pruebas/salida/$otrocomp.tmp
+			f=`date "+%Y-%m-%d"`
+			sed -e "s/$f//g" sitios/pruebas/salida/$otrocomp > sitios/pruebas/salida/$otrocomp.tmp
 			grep -v "$saca2" sitios/pruebas/salida/$otrocomp.tmp | grep -v "Warning" > sitios/pruebas/salida/$otrocomp
 			if (test "$saca3" != "") then {
 				cp sitios/pruebas/salida/$otrocomp sitios/pruebas/salida/$otrocomp.tmp2
@@ -230,7 +231,7 @@ prueba sitios/pruebas/estadisticas.php " - Estadísticas " estadisticas
 prueba sitios/pruebas/novalida-basicos.php " - Validación básicos" novalida-basicos
 prueba sitios/pruebas/novalida-frecuentes.php " - Validación frecuentes" novalida-frecuentes "" "202"
 prueba sitios/pruebas/externa.php " - Consulta externa" externa
-prueba sitios/pruebas/relato.php " - Exporta Relato " relato
+prueba sitios/pruebas/relato.php " - Exporta Relato " relato "AMARILLO"
 
 prueba sitios/pruebas/imprelato.php " - Importa Relato " imprelato "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*" "" "resimp.xrlt.espreg" "Warning" "fecha_fuente" "D -"
 #prueba sitios/pruebas/mezcla.php " - Mezcla 2 Casos" mezcla
