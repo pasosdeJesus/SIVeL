@@ -5,6 +5,16 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem>
+						<para>En módulo homónimos nueva opción del menú Otros para examinar listado.
+						</para>
+					</listitem>
+					<listitem>
+						<para>En consulta web y al buscar similares en el módulo mezcla, permite buscar nombres similares al pronunciar en español ---usa soundex en español.</para>
+					</listitem>
+					<listitem>
+						<para>En el módulo mezclar al buscar similares emplea soundex para español.</para>
+					</listitem>
+					<listitem>
 						<para>En relatos importa/exporta etiquetas.</para>
 					</listitem>
 					<listitem><para>

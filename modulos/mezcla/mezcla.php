@@ -384,11 +384,11 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep)
             if ($GLOBALS['actoreiniciar']) {
                 $dot1 = objeto_tabla('actoreiniciar');
                 $dot1->id_caso = $do1->id_caso = $id1;
-                $dot1->id_presponsable = $do1->id_presponsable = 
-                    $do2->id_presponsable;
+                $dot1->id_presponsable = $do1->id_presponsable 
+                    = $do2->id_presponsable;
                 $dot1->id_categoria = $do1->id_categoria = $do2->id_categoria;
-                $dot1->id_persona = $do1->id_persona = 
-                    $mapk['persona'][$do2->id_persona];
+                $dot1->id_persona = $do1->id_persona 
+                    = $mapk['persona'][$do2->id_persona];
             }
             $do1->find();
             if (!$do1->fetch()) {

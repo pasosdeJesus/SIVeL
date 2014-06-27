@@ -1199,7 +1199,8 @@ class ResConsulta
         foreach ($campos as $cc => $nc) {
             $html_renglon .= "<td valign='top'";
             if ($cc == "caso_id") {
-                $html_renglon .= "style='background-color: " .  htmlentities($col, ENT_COMPAT, 'UTF-8') .  "'";
+                $html_renglon .= "style='background-color: " 
+                    .  htmlentities($col, ENT_COMPAT, 'UTF-8') .  "'";
             }
             $html_renglon .= ">";
             $sep = "";

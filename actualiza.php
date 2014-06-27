@@ -2877,13 +2877,14 @@ if (!aplicado($idac)) {
         sin_error_pear($db2);
         $do = $db2->factory($t);
         if (!PEAR::isError($do)) {
-            foreach($e as $c => $rel) {
-                if (strpos($c, ',') === FALSE) {
+            foreach ($e as $c => $rel) {
+                if (strpos($c, ',') === false) {
                     $pd = strpos($rel, ':');
                     $ndo = substr($rel, 0, $pd);
                     $ids = valorSinInfo($do, $c);
                     if ($ids >= 0 && ($ndo != 'presponsable' 
-                        || $c == 'organizacionarmada')) {
+                        || $c == 'organizacionarmada')
+                    ) {
                             $q = "ALTER TABLE $t ALTER COLUMN $c SET DEFAULT '$ids'";
                             hace_consulta($db, $q, false);
                     }
@@ -2939,23 +2940,23 @@ if (!aplicado($idac)) {
         VALUES ('SG', 'SUEGRA(O)', '2014-02-18')", false
     );
     hace_consulta(
-            $db, "INSERT INTO trelacion 
-            (id, nombre, observaciones, fechacreacion, 
-             fechadeshabilitacion, inverso) VALUES ('HO', 'HIJASTRA(O)', '', 
-             '2011-05-02', NULL, NULL);", false
+        $db, "INSERT INTO trelacion 
+        (id, nombre, observaciones, fechacreacion, 
+        fechadeshabilitacion, inverso) VALUES ('HO', 'HIJASTRA(O)', '', 
+        '2011-05-02', NULL, NULL);", false
     );
     hace_consulta(
-            $db, "INSERT INTO trelacion (id, nombre, observaciones, 
+        $db, "INSERT INTO trelacion (id, nombre, observaciones, 
         fechacreacion, fechadeshabilitacion, inverso) 
-            VALUES ('PD', 'MADRASTRA(PADRASTRO)', '', 
-                '2011-09-21', NULL, 'HO');", false
+        VALUES ('PD', 'MADRASTRA(PADRASTRO)', '', 
+        '2011-09-21', NULL, 'HO');", false
     );
 
     hace_consulta(
-            $db, "INSERT INTO trelacion (id, nombre, observaciones, 
+        $db, "INSERT INTO trelacion (id, nombre, observaciones, 
         fechacreacion, fechadeshabilitacion, inverso) 
-            VALUES ('SO', 'ESPOSA(O)/COMPAÑERA(O)', '', 
-                '2001-01-01', NULL, 'SO');", false
+        VALUES ('SO', 'ESPOSA(O)/COMPAÑERA(O)', '', 
+        '2001-01-01', NULL, 'SO');", false
     );
 
     foreach (array("AO" => "AB", "HA" => "HO", "HR" => "HE", "MA" => "PO",
@@ -3096,10 +3097,12 @@ if (!aplicado($idac)) {
         array(59, 'YUKPA', ''),
         array(60, 'ROM', '400')
     );
-    foreach($ae as $g) {
+    $fetnias = 'http://www.mineducacion.gov.co/1621/articles-255690'
+        . '_archivo_xls_listado_etnias.xls';
+    foreach ($ae as $g) {
         $d = $g[2];
         if ($d != '') {
-            $d .= ' en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls';
+            $d .= " en $fetnias";
         }
         $q = "UPDATE etnia SET nombre='{$g[1]}', 
             descripcion='{$d} '
@@ -3159,10 +3162,10 @@ if (!aplicado($idac)) {
         array(109, 'YURÍ', '81'),
         array(110, 'ZENÚ', '83 ')
     );
-    foreach($ng as $g) {
+    foreach ($ng as $g) {
         $q = "INSERT INTO etnia (id, nombre, descripcion, fechacreacion) 
             VALUES ({$g[0]}, '{$g[1]}', 
-            '{$g[2]} en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls', 
+            '{$g[2]} en {$fetnias}', 
             '2014-05-30')";
         hace_consulta($db, $q, false);
     }
@@ -3181,7 +3184,10 @@ if (!aplicado($idac)) {
 
 $idac = '1.2-mp';
 if (!aplicado($idac)) {
-    hace_consulta($db, "INSERT INTO filiacion (id, nombre, fechacreacion) VALUES ('16', 'MARCHA PATRIOTICA', '2014-02-27');");
+    hace_consulta(
+        $db, "INSERT INTO filiacion (id, nombre, fechacreacion) 
+        VALUES ('16', 'MARCHA PATRIOTICA', '2014-02-27');"
+    );
     aplicaact($act, $idac, 'Datos recientes');
 }
 
@@ -3215,9 +3221,10 @@ if (!aplicado($idac)) {
     		  ' ' || apellidos, '  *', ' '), ' ')) AS s 
     		ORDER BY 1) AS n) AS nomsoundexesp
     	FROM persona, victima 
-    	WHERE persona.id=victima.id_persona", false);
+        WHERE persona.id=victima.id_persona", false
+    );
 
-     aplicaact(
+    aplicaact(
         $act, $idac, 
         'Vista con soundexesp de nombres de personas'
     );

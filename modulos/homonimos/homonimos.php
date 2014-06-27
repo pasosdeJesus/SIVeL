@@ -1,5 +1,17 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
+/**
+ * Listado de homonimos
+ *
+ * PHP version 5
+ *
+ * @category  SIVeL
+ * @package   SIVeL
+ * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
+ * @copyright 2014 Dominio público. Sin garantías.
+ * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
+ * @link      http://sivel.sf.net
+*/
 
 /**
  * Punto de entrada
@@ -8,7 +20,8 @@
  *
  * @return void
  */
-function muestra() {
+function muestra() 
+{
     $tabla = "homonimosim";
 
     $d = objeto_tabla($tabla);
@@ -22,7 +35,8 @@ function muestra() {
         . 'valign = "top" colspan = "2"><b>Homonimos o Similares (pero diferentes)'
         . '</b></td></tr></table>';
 
-    echo "<table border = '1'><tr><th>Número</th><th colspan='2' align='center'>Persona 1</th>
+    echo "<table border = '1'><tr><th>Número</th>
+        <th colspan='2' align='center'>Persona 1</th>
         <th colspan='2' align='center'>Persona 2</th></tr>";
     echo "<tr><th></th><th>Nombre</th><th>En casos como Víctima</th>
         <th>Nombre</th><th>En casos como Víctima</th>
