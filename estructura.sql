@@ -848,3 +848,15 @@ CREATE TABLE actocolectivo (
 );
 
 
+-- Vistas
+
+CREATE MATERIALIZED VIEW vvictimasoundexesp AS
+	SELECT victima.id_caso, persona.id AS id_persona, 
+		(persona.nombres || ' ' || persona.apellidos) AS nomap, 
+		(SELECT array_to_string(array_agg(soundexesp(s)),' ') 
+		FROM (SELECT unnest(string_to_array(regexp_replace(nombres || 
+		  ' ' || apellidos, '  *', ' '), ' ')) AS s 
+		ORDER BY 1) AS n) AS soundexesp
+	FROM persona, victima 
+	WHERE persona.id=victima.id_persona;
+
