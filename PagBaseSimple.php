@@ -587,7 +587,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      *
      * @param object &$db   Conexión a base de datos
      * @param int    $dcaso Objeto Dataobject con el caso que se exporta.
-     * @param string $r     XML generado al que debe concatenarse al final
+     * @param string &$r    XML generado al que debe concatenarse al final
      *                      lo de esta pestaña.
      *
      * @return void
