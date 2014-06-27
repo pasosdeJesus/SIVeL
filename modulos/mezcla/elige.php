@@ -66,14 +66,15 @@ class AccionComparaDos extends HTML_QuickForm_Action
         $pIds = "";
         $do = objeto_tabla("caso");
         $db =& $do->getDatabaseConnection();
-        $dlev = isset($_POST['dlev']) && (int)$_POST['dlev'] > 0 ? 
-            (int)$_POST['dlev'] : 3;
         $figuales = isset($_POST['figuales']) && $_POST['figuales'] == '1';
         $diguales = isset($_POST['diguales']) && $_POST['diguales'] == '1';
         // Fechas iguales, departamentos iguales, nombres parecidos pero
         // no en homonimos
+        hace_consulta(
+            $db, 'REFRESH MATERIALIZED VIEW vvictimasoundexesp'
+        );
         $cons = "SELECT DISTINCT v1.id_caso, v2.id_caso AS id_caso
-            FROM victima AS v1, persona AS p1, victima AS v2, persona AS p2,
+            FROM vvictimasoundexesp AS v1, vvictimasoundexesp AS v2, 
             caso AS c1, caso AS c2, ubicacion AS u1, ubicacion AS u2
             WHERE v1.id_caso = c1.id AND v2.id_caso = c2.id
             AND u1.id_caso = c1.id AND u2.id_caso = c2.id ";
@@ -83,25 +84,17 @@ class AccionComparaDos extends HTML_QuickForm_Action
         if ($figuales) {
             $cons .= "AND c1.fecha = c2.fecha";
         }
-        $cons .=" AND v1.id_persona=p1.id AND v2.id_persona=p2.id 
-            AND 
-            (levenshtein(p1.nombres || ' ' || p1.apellidos, 
-              p2.nombres || ' ' || p2.apellidos)<=$dlev OR
-             levenshtein(p1.apellidos || ' ' || p1.nombres, 
-                p2.nombres || ' ' || p2.apellidos)<=$dlev)
-            AND v1.id_caso < v2.id_caso 
-            AND UPPER(TRIM(p1.nombres || ' '  || p1.apellidos)) <> 
+        $cons .="AND c1.id<c2.id
+            AND (POSITION(v1.nomsoundexesp IN v2.nomsoundexesp)>0 OR
+                POSITION(v2.nomsoundexesp IN v1.nomsoundexesp)>0) 
+            AND (v1.id_persona, v2.id_persona) NOT IN 
+                (SELECT * FROM homonimia) 
+            AND UPPER(v1.nomap) <> 
                 'PERSONA SIN IDENTIFICAR'
-            AND UPPER(regexp_replace(p1.nombres || p1.apellidos, 
-                '[ .,]', '', 'g')) <> 'N'
-            AND UPPER(regexp_replace(p1.nombres || p1.apellidos, 
-                '[ .,]', '', 'g')) <> 'NN'
-            AND UPPER(regexp_replace(p1.nombres || p1.apellidos, 
-                '[ .,]', '', 'g')) <> 'NNN'
-            AND UPPER(regexp_replace(p1.nombres || p1.apellidos, 
-                '[ .,]', '', 'g')) <> 'NNNN'
-            AND (p1.id, p2.id) NOT IN 
-              (SELECT id_persona1, id_persona2 FROM homonimia)
+            AND UPPER(regexp_replace(v1.nomap, '[ .,]', '', 'g')) <> 'N'
+            AND UPPER(regexp_replace(v1.nomap, '[ .,]', '', 'g')) <> 'NN'
+            AND UPPER(regexp_replace(v1.nomap, '[ .,]', '', 'g')) <> 'NNN'
+            AND UPPER(regexp_replace(v1.nomap, '[ .,]', '', 'g')) <> 'NNNN'
             ORDER BY 2 DESC, 1
             ";
         $r = hace_consulta($db, $cons);
@@ -496,10 +489,6 @@ class PagVictimasrep extends HTML_QuickForm_Page
         $e =& $this->addElement('header', null, 'Buscar similares');
         $e =& $this->addElement('hidden', '_mezclaFiltro', 'si');
 
-        $e =& $this->addElement(
-            'text', 'dlev', 'Distancia máxima entre nombres'
-        );
-        $e->setSize(10);
         $e =& $this->addElement(
             'checkbox',
             'figuales', _('Fechas iguales'), ''
