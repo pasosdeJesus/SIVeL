@@ -49,6 +49,9 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
     var $fechadeshabilitacion;
     var $email;
     var $sign_in_count;
+    var $failed_attempts;
+    var $unlock_token;
+    var $locked_at;
 
 
     /**
@@ -71,6 +74,9 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
             'email' => _('Correo'),
             'fechacreacion' => _('Fecha de creación'),
             'fechadeshabilitacion' => _('Fecha de deshabilitación'),
+            'failed_attempts' => _('Intentos fallidos'),
+            'unlock_token' => _('Testigo para desbloquear'),
+            'locked_at' => _('Momento del bloqueo'),
         );
         global $LENGDISP, $ROLESDISP;
         $ld = explode(" ", $LENGDISP);
@@ -89,11 +95,13 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
 
     var $fb_preDefOrder = array(
         'nusuario', 'password', 'nombre', 'descripcion', 'rol',
-        'idioma', 'email', 'fechacreacion', 'fechadeshabilitacion'
+        'idioma', 'email', 'fechacreacion', 'fechadeshabilitacion',
+        'failed_attempts', 'unlock_token', 'locked_at'
     );
     var $fb_fieldsToRender = array(
         'nusuario', 'password', 'nombre', 'descripcion', 'rol',
-        'idioma', 'email', 'fechacreacion', 'fechadeshabilitacion'
+        'idioma', 'email', 'fechacreacion', 'fechadeshabilitacion',
+        'failed_attempts', 'unlock_token', 'locked_at'
     );
     var $fb_linkDisplayFields = array('nusuario');
     var $fb_select_display_field= 'nusuario';
@@ -152,6 +160,24 @@ class DataObjects_Usuario extends DB_DataObject_SIVeL
         $this->fechadeshabilitacion = $nv;
 
     }
+
+    /**
+     * Pone un valor en la base diferente al recibido del formulario.
+     *
+     * @param string $valor Valor en formulario
+     *
+     * @return Valor para BD
+     */
+    function setlocked_at($valor)
+    {
+        if ($valor == '') {
+            $nv = 'null';
+        } else {
+            $nv = $valor;
+        }
+        $this->locked_at = $nv;
+    }
+
 
     /**
      * Prepara antes de generar formulario.

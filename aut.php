@@ -231,6 +231,8 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         $m = str_replace($dsn, '', $m);
         die($m);
     }
+
+    $username = var_post_escapa('username', $db, 32);
     $db1 = new DB();
     $db->query('SET client_encoding TO UTF8');
     $q = "SELECT COUNT(id) FROM usuario";
@@ -247,7 +249,6 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             $db, "ALTER TABLE usuario ADD COLUMN idioma "
             . " VARCHAR(6) NOT NULL DEFAULT 'es_CO'", false
         );
-
         $result = hace_consulta_aut($db, $q, false);
     }
     if (PEAR::isError($result)) {
@@ -259,6 +260,35 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
     if ((int)$n[0] == 0) {
         die("No hay usuarios en la base de datos creelos desde una terminal");
     }
+    $q = "SELECT locked_at FROM usuario WHERE nusuario='$username'";
+    $locked = $db->getOne($q);
+    if (PEAR::isError($locked)) {
+        echo "<br>" . _("No pudo determinar si está bloqueado");
+    }
+    if (strlen($locked) > 0) {
+        $t = strtotime($locked);
+        $ta = time();
+        $d = $ta - $t;
+        if ((isset($GLOBALS['segundos_desbloqueo']) 
+            && $d <= $GLOBALS['segundos_desbloqueo']) 
+            || (!isset($GLOBALS['segundos_desbloqueo'])  
+            && $d <= 60)
+        ) {
+            echo "<br>" .  _("Cuenta bloqueada. Por favor informe al administrador");
+            $username = $_GET['username'] = 
+                $_POST['username'] = $_REQUEST['username'] = "";
+        } else {
+            // Desbloquea tras una hora  o los segundos especificados en
+            // $GLOBALS['segundos_desbloqueo']
+            $q = "UPDATE usuario SET failed_attempts=0, locked_at=NULL, 
+                unlock_token=NULL
+                WHERE nusuario='$username'"; 
+            $locked = "";
+            hace_consulta_aut($db, $q);
+            echo "<br>" .  _("Cuenta desbloqueada tras $d segundos");
+        }
+    }
+
     $camponusuario = "nusuario";
     $params = array(
         "dsn" => $dsn,
@@ -296,8 +326,13 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
     //print_r($a->session); echo "<br>";
     $a->start();
     //echo "OJO snru=$snru";
-    if ($a->checkAuth()) {
+    if (strlen($locked) == 0 && $a->checkAuth()) {
         //echo "<hr>OJO autenticó 1";
+        $q = "UPDATE usuario SET failed_attempts=0, locked_at=NULL, 
+            unlock_token=NULL
+            WHERE nusuario='$username'";
+        hace_consulta_aut($db, $q);
+
         ini_set('session.cookie_httponly', true);
         ini_set('session.cookie_secure', true);
         $texp = 60*60*4; // 4 horas de sesión
@@ -325,8 +360,8 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
                     "¿seguro la base está bien inicializada?";
             }
             $_SESSION['opciones'] = $op;
-            $q = "SELECT id FROM usuario " .
-                "WHERE $camponusuario='" . $usuario . "';";
+            $q = "SELECT id FROM usuario 
+                WHERE $camponusuario='" . $usuario . "';";
             $result = hace_consulta_aut($db, $q);
             $row = array();
             if ($result->fetchInto($row)) {
@@ -372,7 +407,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             var_post_escapa('password', $db, 32), gen_sal_bcrypt(10)
         );
         //echo  "OJO clavebf=$clavebf<br>";
-        if ($b->checkAuth()) {
+        if (strlen($locked) == 0 && $b->checkAuth()) {
             /*$clavebf = crypt(
                 var_post_escapa('password', $db, 32), gen_sal_bcrypt(10)
             ); */
@@ -404,7 +439,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         $b = new Auth("DB", $params, "no_login_function");
         $b->setSessionName($snru);
         $b->start();
-        if ($b->checkAuth()) {
+        if (strlen($locked) == 0 && $b->checkAuth()) {
             $clavesha1 = sha1(var_post_escapa('password', $db, 32));
             $un = var_post_escapa('username', $db, 15);
             hace_consulta_aut(
@@ -435,6 +470,29 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             echo $htmljs->endScript();
             cierra_sesion($dsn);
             exit(1);
+        }
+        $q = "UPDATE usuario SET failed_attempts=COALESCE(failed_attempts, 0)+1 
+            WHERE nusuario='$username'";
+        hace_consulta_aut($db, $q);
+        $q = "SELECT failed_attempts FROM usuario WHERE nusuario='$username'";
+        $intentos = $db->getOne($q);
+        if (PEAR::isError($locked)) {
+            echo "<br>" . _("No pudo determinar intentos fallidos");
+        }
+        if ((isset($GLOBALS['max_intentos_fallidos']) && 
+            (int)$intentos >= $GLOBALS['max_intentos_fallidos']) ||
+            (!isset($GLOBALS['max_intentos_fallidos']) && 
+            (int)$intentos >= 3)
+        ) {
+            $d = @date('Y-m-d H:i');
+            $q = "UPDATE usuario SET locked_at='$d'
+                WHERE nusuario='$username'";
+            hace_consulta_aut($db, $q);
+            echo "<br>" . _("Usuario bloqueado.");
+            // Si no tiene token poner
+            // $tok = base64_encode(colchon_aleatorios(16));
+            // Enviar correo con URL y token
+            // Hacer página que recibe token y desbloquea
         }
     }
     $clavesha1 = sha1(var_post_escapa('password', $db, 32));

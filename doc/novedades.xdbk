@@ -5,6 +5,18 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem>
+						<para>
+Bloquea cuenta que tenga más de 5 intentos fallidos de ingreso 
+(configurable con <literal>$GLOBALS['max_intentos_fallidos']</literal>).  
+Dos formas de desbloquear: 
+(1) Un administrador va a Administrar->Usuario 
+y elige el usuario bloqueado y pone en blanco campos Intentos fallidos, 
+Testigo para desbloquear y Momento del bloqueo o 
+(2) la cuenta se desbloquea automáticamente después de una hora (o el tiempo 
+especificado en <literal>$GLOBALS['segundos_desbloqueo']</literal>).
+						</para>
+					</listitem>
+					<listitem>
 						<para>En relatos importa/exporta etiquetas.</para>
 					</listitem>
 					<listitem><para>

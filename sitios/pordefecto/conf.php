@@ -129,6 +129,12 @@ $GLOBALS['persona_en_caso'] = '';
 // Opciones de Reporte Tabla
 $GLOBALS['reporte_tabla_fila_totales'] = false;
 
+//Tras bloquear cuenta por ingresos fallidos tiempo por
+//esperar para desbloqueo automático.
+$GLOBALS['segundos_desbloqueo'] = 3600;
+
+//Máximo intentos fallido de ingreso para que la cuenta quede bloqueada
+$GLOBALS['max_intentos_fallidos'] = 5;
 
 // VOLCADOS  - COPIAS DE RESPALDO LOCALES
 
