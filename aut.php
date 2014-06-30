@@ -35,6 +35,56 @@ require_once dirname(__FILE__) . "/confv.php";
 
 
 /**
+ * Escapa el valor de una variable o de valores en un arreglo.
+ * Si $v es null retorna ''
+ * Agradecimientos por correciones a garcez@linuxmail.org
+ *
+ * @param string  $v       Nombre de variable POST
+ * @param handle  &$db     Conexión a BD.
+ * @param integer $maxlong Longitud máxima
+ *
+ * @return string Cadena escapada
+     */
+function var_escapa_aut($v, &$db = null, $maxlong = 1024)
+{
+    if (isset($v)) {
+        if (is_array($v)) {
+            $r = array();
+            foreach ($v as $k => $e) {
+                $r[$k] = var_escapa($e, $db, $maxlong);
+            }
+            return $r;
+        } else {
+            /** Evita buffer overflows */
+            $nv = substr($v, 0, $maxlong);
+
+            /** Evita falla %00 en cadenas que vienen de HTTP */
+            $p1=str_replace("\0", ' ', $v);
+
+            /** Evita XSS */
+            $p2=htmlspecialchars($p1);
+
+            /** Evita inyección de código SQL */
+            if (isset($db) && $db != null && !PEAR::isError($db)) {
+                $p3 = $db->escapeSimple($p2);
+            } else {
+                // Tomado de librería de Pear DB/pgsql.php
+                $p3 = (!get_magic_quotes_gpc())?str_replace(
+                    "'", "''",
+                    str_replace('\\', '\\\\', $p2)
+                ):$p2;
+                //$p3=(!get_magic_quotes_gpc())?addslashes($p2):$p2;
+            }
+
+            return $p3;
+        }
+    } else {
+        return '';
+    }
+}
+
+/**
+/**
  * Realiza una consulta SQL y retorna resultado
  *
  * @param object &$db      Base de datos
@@ -232,7 +282,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         die($m);
     }
 
-    $username = var_post_escapa('username', $db, 32);
+    $username = var_escapa_aut($_POST['username'], $db, 32);
     $db1 = new DB();
     $db->query('SET client_encoding TO UTF8');
     $q = "SELECT COUNT(id) FROM usuario";
@@ -404,7 +454,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         $b->setSessionName($snru);
         $b->start();
         $clavebf = crypt(
-            var_post_escapa('password', $db, 32), gen_sal_bcrypt(10)
+            var_escapa_aut($_POST['password'], $db, 32), gen_sal_bcrypt(10)
         );
         //echo  "OJO clavebf=$clavebf<br>";
         if (strlen($locked) == 0 && $b->checkAuth()) {
@@ -413,7 +463,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             ); */
 
             if (strlen($clavebf) > 10) {
-                $un = var_post_escapa('username', $db, 15);
+                $un = var_escapa_aut($_POST['username'], $db, 15);
                 $q = "UPDATE usuario SET password='',
                     encrypted_password='$clavebf' 
                     WHERE nusuario='$un';";
@@ -440,8 +490,8 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         $b->setSessionName($snru);
         $b->start();
         if (strlen($locked) == 0 && $b->checkAuth()) {
-            $clavesha1 = sha1(var_post_escapa('password', $db, 32));
-            $un = var_post_escapa('username', $db, 15);
+            $clavesha1 = sha1(var_escapa_aut($_POST['password'], $db, 32));
+            $un = var_escapa_aut($_POST['username'], $db, 15);
             hace_consulta_aut(
                 $db,
                 "ALTER TABLE usuario ADD COLUMN npass VARCHAR(64);"
@@ -495,8 +545,8 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             // Hacer página que recibe token y desbloquea
         }
     }
-    $clavesha1 = sha1(var_post_escapa('password', $db, 32));
-    $clavemd5 = md5(var_post_escapa('password', $db, 32));
+    $clavesha1 = sha1(var_escapa_aut($_POST['password'], $db, 32));
+    $clavemd5 = md5(var_escapa_aut($_POST['password'], $db, 32));
     unset($_POST['password']);
     die($accno . " (2)");
 }
@@ -601,9 +651,9 @@ function localiza_conf()
     }
     if (!$existe) {
         global $CHROOTDIR;
-	if ($pbase == '127') {
-		$pbase = 'sivel';
-	}
+        if ($pbase == '127') {
+            $pbase = 'sivel';
+        }
         encabezado_envia('Error');
         echo "No existe configuraci&oacute;n '"
             . htmlentities($dirsitio, ENT_COMPAT, 'UTF-8') . "'<br>";

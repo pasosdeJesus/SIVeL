@@ -95,6 +95,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         $pPresponsable  = (int)var_req_escapa('presponsable', $db);
         $pSsocial   = (int)var_req_escapa('ssocial', $db);
         $pNomvic    = substr(var_req_escapa('nomvic', $db), 0, 32);
+        $pNomsim    = substr(var_req_escapa('nomsim', $db), 0, 32);
         $pDesc      = substr(var_req_escapa('descripcion', $db), 0, 32);
         $pMFuentes  = (int)var_req_escapa('m_fuentes', $db);
         $pRetroalimentacion = (int)var_req_escapa('retroalimentacion', $db);
@@ -350,6 +351,18 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         if ($pNomvic != "") {
             agrega_tabla($tablas, 'persona');
             consulta_and_sinap($where, "victima.id_persona", "persona.id");
+            if ($pNomsim) {
+                hace_consulta(
+                    $db, 'REFRESH MATERIALIZED VIEW vvictimasoundexesp'
+                );
+                agrega_tabla($tablas, 'vvictimasoundexesp');
+                consulta_and_sinap(
+                    $where, "persona.id", "vvictimasoundexesp.id_persona"
+                );
+                consulta_and_sinap(
+                    $where, "caso.id", "vvictimasoundexesp.id_caso"
+                );
+            }
         }
         if ($pNomvic != "" || $pSsocial != "") {
             agrega_tabla($tablas, 'victima');
@@ -361,13 +374,18 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
 
         if (trim($pNomvic) != '') {
             if ($where != "") {
-                $where .= " AND";
+                $where .= " AND ";
             }
-            $consNomVic =  trim(a_minusculas(sin_tildes($pNomvic)));
-            $consNomvic = preg_replace("/ +/", " & ", $consNomVic);
-            $where .= " to_tsvector('spanish', unaccent(persona.nombres) "
-                . " || ' ' || unaccent(persona.apellidos)) @@ "
-                . "to_tsquery('spanish', '$consNomvic')";
+            if ($pNomsim) {
+                $where .= "(position(soundexesp('$pNomvic') in nomsoundexesp)>0
+                    OR position(nomsoundexesp in soundexesp('$pNomvic'))>0)";
+            } else {
+                $consNomVic =  trim(a_minusculas(sin_tildes($pNomvic)));
+                $consNomvic = preg_replace("/ +/", " & ", $consNomVic);
+                $where .= "to_tsvector('spanish', unaccent(persona.nombres) "
+                    . " || ' ' || unaccent(persona.apellidos)) @@ "
+                    . "to_tsquery('spanish', '$consNomvic')";
+            }
         }
 
         // Búsqueda por víctima no incluye combatientes para evitar sobreconteos
@@ -390,7 +408,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         }
         consulta_orden($q, $pOrdenar);
 
-        //echo "OJO q es $q"; //die("x");
+        //echo "OJO q es $q"; die("x");
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
             list($n, $c, $o) = $tab;
@@ -544,11 +562,23 @@ class ConsultaWeb extends HTML_QuickForm_Page
             $vdep, $vmun, $vcla
         );
 
-        $sel =& $this->addElement(
+        $opch = array();
+        $sel =& $this->createElement(
             'text', 'nomvic',
             _('Nombre o apellido de la víctima')
         );
         $sel->setSize(80);
+        $opch[] =& $sel;
+        $sel =& $this->createElement(
+            'checkbox',
+            'nomsim', _('Buscar Similares'), _('Buscar Similares')
+        );
+        $opch[] =& $sel;
+
+        $this->addGroup(
+            $opch, null, 
+            _('Nombre o apellido de la víctima'), '&nbsp;', false
+        );
 
         $cy = @date('Y');
         if ($cy < 2005) {

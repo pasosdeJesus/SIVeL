@@ -3164,7 +3164,7 @@ if (!aplicado($idac)) {
     );
     foreach ($ng as $g) {
         $q = "INSERT INTO etnia (id, nombre, descripcion, fechacreacion) 
-            VALUES ({$g[0]}, '{$g[1]}', '{$g[2]} en $ue', '2014-05-30')";
+            VALUES ({$g[0]}, '{$g[1]}', '{$g[2]} en {$ue}', '2014-05-30')";
         hace_consulta($db, $q, false);
     }
 
@@ -3201,10 +3201,30 @@ if (!aplicado($idac)) {
         $db, "ALTER TABLE usuario ADD COLUMN locked_at TIMESTAMP", false
     );
 
-    die("x");
     aplicaact(
         $act, $idac, 
         'Cuentas se bloquean tras varios intentos fallidos de ingreso'
+    );
+}
+
+$idac = '1.2-sxe';
+if (!aplicado($idac)) {
+    
+    hace_consulta(
+        $db, "CREATE MATERIALIZED VIEW vvictimasoundexesp AS
+    	SELECT victima.id_caso, persona.id AS id_persona, 
+    		(persona.nombres || ' ' || persona.apellidos) AS nomap, 
+    		(SELECT array_to_string(array_agg(soundexesp(s)),' ') 
+    		FROM (SELECT unnest(string_to_array(regexp_replace(nombres || 
+    		  ' ' || apellidos, '  *', ' '), ' ')) AS s 
+    		ORDER BY 1) AS n) AS nomsoundexesp
+    	FROM persona, victima 
+        WHERE persona.id=victima.id_persona", false
+    );
+
+    aplicaact(
+        $act, $idac, 
+        'Vista con soundexesp de nombres de personas'
     );
 }
 

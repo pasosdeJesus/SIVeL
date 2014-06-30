@@ -518,8 +518,10 @@ CREATE TABLE usuario (
 	fechadeshabilitacion DATE CHECK (
 		fechadeshabilitacion IS NULL OR 
 		fechadeshabilitacion>=fechacreacion
-	)
-
+	),
+	failed_attempts INTEGER,
+	unlock_token VARCHAR(64),
+	locked_at TIMESTAMP
 );
 
 CREATE SEQUENCE vinculoestado_seq;
@@ -847,4 +849,16 @@ CREATE TABLE actocolectivo (
 	PRIMARY KEY(id_presponsable, id_categoria, id_grupoper, id_caso)
 );
 
+
+-- Vistas
+
+CREATE MATERIALIZED VIEW vvictimasoundexesp AS
+	SELECT victima.id_caso, persona.id AS id_persona, 
+		(persona.nombres || ' ' || persona.apellidos) AS nomap, 
+		(SELECT array_to_string(array_agg(soundexesp(s)),' ') 
+		FROM (SELECT unnest(string_to_array(regexp_replace(nombres || 
+		  ' ' || apellidos, '  *', ' '), ' ')) AS s 
+		ORDER BY 1) AS n) AS soundexesp
+	FROM persona, victima 
+	WHERE persona.id=victima.id_persona;
 
