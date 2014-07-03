@@ -248,4 +248,13 @@ Pruebas locales vistas sobre Internet por un proxy sobre conexión UNE de 2MB.
 * Agregar etiqueta y guardar: 4,2
 * Editar de nuevo: 3,21
 
+### Fecha: 2.Jul.2014.  Servidor: SJR-4 con nuevo cortafuegos. Cliente: V-3
+* Autenticar: 3,3
+* Lista de actividades: 2,3
+* Editar una actividad: 0.7
+* Lista de casos: 2,27
+* Editar un caso: 6,37
+* Agregar etiqueta y guardar: 2,3
+* Editar de nuevo: 5,9
+
 
