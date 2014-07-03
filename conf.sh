@@ -246,8 +246,8 @@ function estapear {
 	} fi;
 } 
 
-echo " Apache corriendo";
-proceso httpd Apache
+echo " nginx corriendo";
+proceso nginx Nginx
 c=`ps ax | grep "[h]ttpd:.*parent.*chroot" | sed -e "s/.*chroot //g;s/].*//g"`
 check "CHROOTDIR" "optional" "test -d \$CHROOTDIR" $c '/var/www/' 
 echo " PostgreSQL corriendo";

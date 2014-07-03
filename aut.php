@@ -334,7 +334,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
                 unlock_token=NULL
                 WHERE nusuario='$username'"; 
             $locked = "";
-            hace_consulta_aut($db, $q);
+            hace_consulta_aut($db, $q, false);
             echo "<br>" .  _("Cuenta desbloqueada tras $d segundos");
         }
     }
@@ -381,7 +381,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         $q = "UPDATE usuario SET failed_attempts=0, locked_at=NULL, 
             unlock_token=NULL
             WHERE nusuario='$username'";
-        hace_consulta_aut($db, $q);
+        hace_consulta_aut($db, $q, false);
 
         ini_set('session.cookie_httponly', true);
         ini_set('session.cookie_secure', true);
@@ -523,7 +523,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         }
         $q = "UPDATE usuario SET failed_attempts=COALESCE(failed_attempts, 0)+1 
             WHERE nusuario='$username'";
-        hace_consulta_aut($db, $q);
+        hace_consulta_aut($db, $q, false);
         $q = "SELECT failed_attempts FROM usuario WHERE nusuario='$username'";
         $intentos = $db->getOne($q);
         if (PEAR::isError($locked)) {
