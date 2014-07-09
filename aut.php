@@ -282,7 +282,8 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         die($m);
     }
 
-    $username = var_escapa_aut($_POST['username'], $db, 32);
+    $username = isset($_POST['username']) ? 
+        var_escapa_aut($_POST['username'], $db, 32) : '';
     $db1 = new DB();
     $db->query('SET client_encoding TO UTF8');
     $q = "SELECT COUNT(id) FROM usuario";

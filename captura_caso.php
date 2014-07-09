@@ -139,7 +139,7 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
                 $c = substr($c, $d+1);
             }
             if (is_callable(array($c, 'encJavascript'))) {
-                call_user_func(array($c, 'encJavascript'), &$js);
+                call_user_func_array(array($c, 'encJavascript'), array(&$js));
             } else {
                 echo_enc("Falta encJavascript en $n, $c");
             }
