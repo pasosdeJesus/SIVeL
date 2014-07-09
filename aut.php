@@ -359,15 +359,6 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         echo "<hr>" . _("Aun no se emplea nueva tabla usuario.")
            . _("Solicite actualización a un administrador") 
            . "<hr>";
-        echo $htmljs->startScript();
-        echo $htmljs->alert(
-            'Se intento usar bctyp sin exito.\n' .
-            ' Por favor autentiquese nuevamente'
-        );
-        echo $htmljs->endScript();
-        cierra_sesion($dsn);
-        exit(1);
-
     }
     //echo "OJO params=";print_r($params);echo "<hr>";
     $a = new Auth("DB", $params, "login_function");
