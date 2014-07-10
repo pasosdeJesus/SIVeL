@@ -19,9 +19,13 @@ require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
 require_once 'misc.php';
 
-global $dsn;
-$aut_usuario = "";
-$db = autentica_usuario($dsn, $aut_usuario, 0);
+if (isset($GLOBALS['consulta_publica_deshabilitada']) && 
+    $GLOBALS['consulta_publica_deshabilitada']
+) {
+    global $dsn;
+    $aut_usuario = "";
+    $db = autentica_usuario($dsn, $aut_usuario, 0); 
+}
 
 require_once $_SESSION['dirsitio'] . '/conf_int.php';
 require_once 'misc_caso.php';
