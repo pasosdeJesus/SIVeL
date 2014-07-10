@@ -536,8 +536,8 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             // Hacer página que recibe token y desbloquea
         }
     }
-    $clavesha1 = sha1(var_escapa_aut($_POST['password'], $db, 32));
-    $clavemd5 = md5(var_escapa_aut($_POST['password'], $db, 32));
+    //$clavesha1 = sha1(var_escapa_aut($_POST['password'], $db, 32));
+    //$clavemd5 = md5(var_escapa_aut($_POST['password'], $db, 32));
     unset($_POST['password']);
     die($accno . " (2)");
 }
