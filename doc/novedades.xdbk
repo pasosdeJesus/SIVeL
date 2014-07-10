@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
-	<varlistentry><term>Versión 1.2b2 (Jun.2014)</term>
+	<varlistentry><term>Versión 1.2b2 (Jul.2014)</term>
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>
@@ -14,7 +14,8 @@ con PHP 5.4 y ambiente de adJ 5.5.
 					</para></listitem>
 
 					<listitem><para>
-Bloquea cuenta que tenga más de 5 intentos fallidos de ingreso 
+Más verificaciones de seguridad inspiradas por OWASP por ejemplo
+bloquea cuenta que tenga más de 5 intentos fallidos de ingreso 
 (configurable con <literal>$GLOBALS['max_intentos_fallidos']</literal>).  
 Dos formas de desbloquear: 
 (1) Un administrador va a Administrar->Usuario 
