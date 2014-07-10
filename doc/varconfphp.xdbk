@@ -27,6 +27,10 @@
 <listitem><para> Consulta adicional para determinar casos en los que aparece una</para></listitem></varlistentry>
 <varlistentry><term><literal>reporte_tabla_fila_totales</literal></term>
 <listitem><para> Consulta adicional para determinar casos en los que aparece una</para></listitem></varlistentry>
+<varlistentry><term><literal>segundos_desbloqueo</literal></term>
+<listitem><para> Consulta adicional para determinar casos en los que aparece una</para></listitem></varlistentry>
+<varlistentry><term><literal>max_intentos_fallidos</literal></term>
+<listitem><para> Consulta adicional para determinar casos en los que aparece una</para></listitem></varlistentry>
 <varlistentry><term><literal>PALABRA_SITIO</literal></term>
 <listitem><para> Palabra clave para algunos cifrados.</para></listitem></varlistentry>
 <varlistentry><term><literal>deshabilita_manejo_usuarios</literal></term>
