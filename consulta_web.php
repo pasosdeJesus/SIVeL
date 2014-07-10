@@ -105,6 +105,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         $pTitulo    = substr(var_req_escapa('titulo', $db), 0, 32);
         $pTvio    = substr(var_req_escapa('tviolencia', $db), 0, 1);
         $pPrimNom = var_req_escapa('primnom') == 'nombre';
+        $pSexo    = var_req_escapa('sexo');
 
         $campos = array(); //'caso_id' => 'Cód.');
         $tablas = "caso";
@@ -316,8 +317,6 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             );
             agrega_tabla($tablas, 'caso_presponsable');
         }
-
-
         if (in_array(42, $page->opciones)
             && ($pUsuario != '' || (isset($pFiini['Y']) && $pFiini['Y'] != '')
             || (isset($pFifin['Y']) && $pFifin['Y'] != ''))
@@ -341,37 +340,33 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 arr_a_fecha($pFifin, false), "<="
             );
         }
-
         if (in_array(42, $page->opciones) && $pUsuario != '') {
             consulta_and(
                 $db, $where, "caso_usuario.id_usuario", $pUsuario
             );
         }
-
-        if ($pNomvic != "") {
+        if ($pNomvic != "" || $pSsocial != "" || $pSexo != "") {
+            agrega_tabla($tablas, 'victima');
             agrega_tabla($tablas, 'persona');
             consulta_and_sinap($where, "victima.id_persona", "persona.id");
-            if ($pNomsim) {
-                hace_consulta(
-                    $db, 'REFRESH MATERIALIZED VIEW vvictimasoundexesp'
-                );
-                agrega_tabla($tablas, 'vvictimasoundexesp');
-                consulta_and_sinap(
-                    $where, "persona.id", "vvictimasoundexesp.id_persona"
-                );
-                consulta_and_sinap(
-                    $where, "caso.id", "vvictimasoundexesp.id_caso"
-                );
-            }
-        }
-        if ($pNomvic != "" || $pSsocial != "") {
-            agrega_tabla($tablas, 'victima');
             consulta_and_sinap($where, "victima.id_caso", "caso.id");
+        }
+        if ($pSexo != "") {
+            consulta_and($db, $where, "persona.sexo", "$pSexo");
+        }
+        if ($pNomvic != "") {
+            hace_consulta($db, 'REFRESH MATERIALIZED VIEW vvictimasoundexesp');
+            agrega_tabla($tablas, 'vvictimasoundexesp');
+            consulta_and_sinap(
+                $where, "persona.id", "vvictimasoundexesp.id_persona"
+            );
+            consulta_and_sinap(
+                $where, "caso.id", "vvictimasoundexesp.id_caso"
+            );
         }
         if ($pSsocial != '') {
             consulta_and($db, $where, "victima.id_sectorsocial", $pSsocial);
         }
-
         if (trim($pNomvic) != '') {
             if ($where != "") {
                 $where .= " AND ";
@@ -546,7 +541,6 @@ class ConsultaWeb extends HTML_QuickForm_Page
             'select', 'id_municipio',
             _('Municipio') .': ', array()
         );
-
         $cla =& $this->addElement(
             'select', 'id_clase',
             _('Centro Poblado') . ': ', array()
@@ -579,6 +573,15 @@ class ConsultaWeb extends HTML_QuickForm_Page
             $opch, null, 
             _('Nombre o apellido de la víctima'), '&nbsp;', false
         );
+        $sexo =& $this->addElement(
+            'select', 'sexo',
+            _('Sexo') . ': ', array(
+                '' => '', 
+                'F' => 'FEMENINO', 
+                'M' => 'MASCULINO',
+                'S' => 'SIN INFORMACIÓN')
+        );
+        $sexo->setValue('');
 
         $cy = @date('Y');
         if ($cy < 2005) {
