@@ -84,7 +84,6 @@ function var_escapa_aut($v, &$db = null, $maxlong = 1024)
 }
 
 /**
-/**
  * Realiza una consulta SQL y retorna resultado
  *
  * @param object &$db      Base de datos
@@ -326,8 +325,8 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             && $d <= 60)
         ) {
             echo "<br>" .  _("Cuenta bloqueada. Por favor informe al administrador");
-            $username = $_GET['username'] = 
-                $_POST['username'] = $_REQUEST['username'] = "";
+            $username = $_GET['username'] 
+                = $_POST['username'] = $_REQUEST['username'] = "";
         } else {
             // Desbloquea tras una hora  o los segundos especificados en
             // $GLOBALS['segundos_desbloqueo']
@@ -521,10 +520,10 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         if (PEAR::isError($locked)) {
             echo "<br>" . _("No pudo determinar intentos fallidos");
         }
-        if ((isset($GLOBALS['max_intentos_fallidos']) && 
-            (int)$intentos >= $GLOBALS['max_intentos_fallidos']) ||
-            (!isset($GLOBALS['max_intentos_fallidos']) && 
-            (int)$intentos >= 3)
+        if ((isset($GLOBALS['max_intentos_fallidos']) 
+            && (int)$intentos >= $GLOBALS['max_intentos_fallidos']) 
+            || (!isset($GLOBALS['max_intentos_fallidos']) 
+            && (int)$intentos >= 3)
         ) {
             $d = @date('Y-m-d H:i');
             $q = "UPDATE usuario SET locked_at='$d'

@@ -16,8 +16,6 @@
 /**
  * Punto de entrada
  *
- * @param string $dsn URL de base
- *
  * @return void
  */
 function muestra() 
