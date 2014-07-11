@@ -123,7 +123,7 @@ if (isset($GLOBALS['gancho_valida_base'])) {
         if (is_callable($f)) {
             call_user_func_array(
                 $f,
-                array($db)
+                array(&$db)
             );
         } else {
             echo_esc(_("Falta") . " $k - $f");
