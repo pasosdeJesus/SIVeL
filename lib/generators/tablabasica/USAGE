@@ -1,0 +1,12 @@
+Description:
+    Genera modelo para una tabla básica y lo añade al arreglo de tablas básicas
+
+Ejemplo:
+    rails generate tablabasica etnia
+
+    Creará:
+	app/model/etnia.rb
+
+    Modificará arreglo @@tablasbasicas de app/models/ability.rb
+    Proximamente también creara app/controllers/admin/etnias_controller.rb
+

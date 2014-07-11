@@ -1,5 +1,7 @@
 class TablabasicaGenerator < Rails::Generators::NamedBase
   source_root File.expand_path('../templates', __FILE__)
+  # para crear modelo: 
+  # sed "s/idioma/${ms}/g;s/Idiomas/${Mp}/g;s/Idioma/${Ms}/g" app/controllers/admin/idiomas_controller.rb > app/controllers/admin/${mp}_controller.rb
   def crea_controlador
     create_file "app/controllers/admin/#{plural_name}_controller.rb", <<-FILE
 # encoding: UTF-8
