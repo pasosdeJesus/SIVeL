@@ -333,7 +333,7 @@ class CasosController < ApplicationController
           :concentimientosjr, :concentimientobd,
           :fechasalida, :id_salida, 
           :fechallegada, :id_llegada, 
-          :id_causaref,
+          :categoriaref,
           :observacionesref,
           :_destroy
         ], 

@@ -8,7 +8,7 @@ class Casosjr < ActiveRecord::Base
 		validate: true
 	belongs_to :caso, foreign_key: "id_caso", validate: true, 
 		inverse_of: :casosjr
-	belongs_to :causaref, foreign_key: "id_causaref", validate: true
+	belongs_to :categoria, foreign_key: "categoriaref", validate: true
 	belongs_to :idioma, foreign_key: "id_idioma", validate: true
 	belongs_to :llegada, class_name: "Ubicacion", foreign_key: "id_llegada", 
 		validate: true
