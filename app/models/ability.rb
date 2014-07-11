@@ -38,6 +38,7 @@ class Ability
       when Ability::ROLSIST
         can :read, Caso, casosjr: { id_regionsjr: usuario.regionsjr_id }
         can [:update, :create, :destroy], Caso, casosjr: { asesor: usuario.id, id_regionsjr:usuario.regionsjr_id }
+				can :new, Caso
         can [:update, :create, :destroy], Actividad, regionsjr: usuario.regionsjr_id
       when Ability::ROLANALI
         can :read, Caso
