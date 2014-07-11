@@ -23,7 +23,7 @@ describe ActividadesController do
   # This should return the minimal set of attributes required to create a valid
   # Actividad. As you add validations to Actividad, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "numero" => "1" } }
+  let(:valid_attributes) { { "regionsjr_id" => "1" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -85,14 +85,14 @@ describe ActividadesController do
       it "assigns a newly created but unsaved actividad as @actividad" do
         # Trigger the behavior that occurs when invalid params are submitted
         Actividad.any_instance.stub(:save).and_return(false)
-        post :create, {:actividad => { "numero" => "invalid value" }}, valid_session
+        post :create, {:actividad => { "regionsjr_id" => "invalid value" }}, valid_session
         assigns(:actividad).should be_a_new(Actividad)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Actividad.any_instance.stub(:save).and_return(false)
-        post :create, {:actividad => { "numero" => "invalid value" }}, valid_session
+        post :create, {:actividad => { "regionsjr_id" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
     end
@@ -106,8 +106,8 @@ describe ActividadesController do
         # specifies that the Actividad created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Actividad.any_instance.should_receive(:update).with({ "numero" => "1" })
-        put :update, {:id => actividad.to_param, :actividad => { "numero" => "1" }}, valid_session
+        Actividad.any_instance.should_receive(:update).with({ "regionsjr_id" => "1" })
+        put :update, {:id => actividad.to_param, :actividad => { "regionsjr_id" => "1" }}, valid_session
       end
 
       it "assigns the requested actividad as @actividad" do
@@ -128,7 +128,7 @@ describe ActividadesController do
         actividad = Actividad.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Actividad.any_instance.stub(:save).and_return(false)
-        put :update, {:id => actividad.to_param, :actividad => { "numero" => "invalid value" }}, valid_session
+        put :update, {:id => actividad.to_param, :actividad => { "regionsjr_id" => "invalid value" }}, valid_session
         assigns(:actividad).should eq(actividad)
       end
 
@@ -136,7 +136,7 @@ describe ActividadesController do
         actividad = Actividad.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Actividad.any_instance.stub(:save).and_return(false)
-        put :update, {:id => actividad.to_param, :actividad => { "numero" => "invalid value" }}, valid_session
+        put :update, {:id => actividad.to_param, :actividad => { "regionsjr_id" => "invalid value" }}, valid_session
         response.should render_template("edit")
       end
     end

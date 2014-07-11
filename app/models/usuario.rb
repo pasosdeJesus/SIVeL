@@ -6,6 +6,8 @@ class Usuario < ActiveRecord::Base
 	has_many :caso_usuario, foreign_key: "id_usuario", validate: true
 	has_many :caso_etiqueta, foreign_key: "id_usuario", validate: true
 	has_many :casosjr, foreign_key: "asesor", validate: true
+	has_many :etiqueta_usuario, dependent: :delete_all
+	has_many :etiqueta, through: :etiqueta_usuario
 
   belongs_to :regionsjr
 
@@ -21,9 +23,27 @@ class Usuario < ActiveRecord::Base
   validates_presence_of   :encrypted_password, :on=>:create
   validates_confirmation_of   :encrypted_password, :on=>:create
   #validates_length_of :password, :within => Devise.password_length, :allow_blank => true
-  validates :regionsjr, presence: true, 
-    unless: Proc.new { |u| u.rol == Ability::ROLADMIN || 
-      u.rol == Ability::ROLINV || 
-      u.rol == Ability::ROLDIR }
+  
+  validate :oficina_rol_etiqueta
+  
+  def oficina_rol_etiqueta
+    if !regionsjr.nil? && (rol == Ability::ROLADMIN ||
+      rol == Ability::ROLINV || 
+      rol == Ability::ROLDIR)
+      errors.add(:regionsjr, "Oficina debe estar en blanco para el rol elegido")
+    end
+    if regionsjr.nil? && rol != Ability::ROLADMIN && rol != Ability::ROLINV && 
+      rol != Ability::ROLDIR
+      errors.add(:regionsjr, "El rol elegido debe tener oficina")
+    end
+#    if (etiqueta.count == 0 && rol == Ability::ROLINV) 
+#      errors.add(:etiqueta, "El rol invitado debe tener etiquetas compartir")
+#    end
+    if (etiqueta.count != 0 && rol != Ability::ROLINV) 
+      errors.add(:etiqueta, "El rol elegido no requiere etiquetas de compartir")
+    end
+  end
+
+  #validates :regionsjr, presence: true, unless: Proc.new { |u| u.rol == Ability::ROLADMIN || u.rol == Ability::ROLINV || u.rol == Ability::ROLDIR }
 
 end

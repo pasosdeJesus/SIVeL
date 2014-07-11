@@ -5,12 +5,21 @@ class CasosController < ApplicationController
   # GET /casos
   # GET /casos.json
   def index
-    @casos = Caso.paginate(:page => params[:pagina], per_page: 20)
+    if (current_usuario.rol == Ability::ROLSIST) 
+        @casos = Caso.where(
+          "id IN (SELECT id_caso FROM casosjr WHERE id_regionsjr='" + 
+          current_usuario.regionsjr_id.to_s + "')").paginate(
+          :page => params[:pagina], per_page: 20)
+    else
+        @casos = Caso.paginate(:page => params[:pagina], per_page: 20)
+    end
   end
 
   # GET /casos/1
   # GET /casos/1.json
   def show
+    @caso = Caso.find(params[:id])
+    #authorize! if  current_usuario.rol != Ability::ROLSIST or @caso.casosjr.id_regionsjr == current_usuario.regionsjr_id
   end
 
   # GET /casos/new
@@ -21,9 +30,8 @@ class CasosController < ApplicationController
     @caso.casosjr = Casosjr.new
     @caso.casosjr.fecharec = DateTime.now.strftime('%Y-%m-%d')
     @caso.casosjr.asesor = current_usuario.id
-    @caso.casosjr.regionsjr = current_usuario.regionsjr_id.nil? ?  
-      Regionsjr.find(1) : 
-      current_usuario.regionsjr_id
+    @caso.casosjr.id_regionsjr = current_usuario.regionsjr_id.nil? ?  
+      1 : current_usuario.regionsjr_id
     per = Persona.new
     per.nombres = 'N'
     per.apellidos = 'N'
@@ -46,7 +54,6 @@ class CasosController < ApplicationController
     cu.id_caso = @caso.id
     cu.fechainicio = DateTime.now.strftime('%Y-%m-%d')
     cu.save!
-
     render action: 'edit'
   end
 
@@ -192,8 +199,8 @@ class CasosController < ApplicationController
   # GET /casos/1/edit
   def edit
     @caso = Caso.find(params[:id])
-    unauthorized! if (cannot? :edit, @caso)
-    #unauthorized! if  current_usuaurio.rol == ROLSIST and caso.regi 
+    #unauthorized! if (cannot? :edit, @caso)
+    #unauthorized! if  current_usuario.rol == ROLSIST and @caso.casosjr.asesor != current_usuario.id
   end
 
   # POST /casos

@@ -8,6 +8,7 @@
       <th><%= Caso.human_attribute_name(:id) %></th>
       <th><%= Casosjr.human_attribute_name(:fecharec) %></th>
       <th><%= Casosjr.human_attribute_name(:regionsjr) %></th>
+      <th><%= Casosjr.human_attribute_name(:asesor) %></th>
       <th><%= Caso.human_attribute_name(:fecha) %></th>
       <th><%= Caso.human_attribute_name(:memo) %></th>
       <th><%= Caso.human_attribute_name(:created_at) %></th>
@@ -20,6 +21,7 @@
         <td><%= link_to caso.id, caso_path(caso) %></td>
         <td><%= caso.casosjr.fecharec if !caso.casosjr.nil? %></td>
         <td><%= caso.casosjr.regionsjr.nombre if !caso.casosjr.nil? && !caso.casosjr.regionsjr.nil? %></td>
+        <td><%= caso.casosjr.usuario.nusuario if !caso.casosjr.nil? && !caso.casosjr.usuario.nil? %></td>
         <td><%= caso.fecha %></td>
         <td><%= caso.memo %></td>
 	      <td><%= caso.created_at.to_date if !caso.created_at.nil?%></td>
