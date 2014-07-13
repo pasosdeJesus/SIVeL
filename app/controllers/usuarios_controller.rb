@@ -18,6 +18,9 @@ class UsuariosController < ApplicationController
   # GET /usuarios/new
   def new
     @usuario = Usuario.new
+    @usuario.current_usuario = current_usuario
+    @usuario.regionsjr_id = current_usuario.regionsjr_id.nil? ?  
+      0 : current_usuario.regionsjr_id
   end
 
   # GET /usuarios/1/edit
@@ -28,6 +31,7 @@ class UsuariosController < ApplicationController
   # POST /usuarios.json
   def create
     @usuario = Usuario.new(usuario_params)
+    @usuario.current_usuario = current_usuario
     @usuario.encrypted_password = BCrypt::Password.create(
       params[:usuario][:encrypted_password],
       {:cost => Rails.application.config.devise.stretches})
@@ -75,6 +79,7 @@ class UsuariosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_usuario
       @usuario = Usuario.find(params[:id])
+    	@usuario.current_usuario = current_usuario
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

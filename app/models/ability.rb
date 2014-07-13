@@ -31,38 +31,50 @@ class Ability
 
   def initialize(usuario)
     can :contar, Caso
-    can :read, Actividad
     can :buscar, Caso
 	  if !usuario.nil? && !usuario.rol.nil? then
       case usuario.rol 
       when Ability::ROLSIST
         can :read, Caso, casosjr: { id_regionsjr: usuario.regionsjr_id }
         can :new, Caso
-        can [:update, :create, :destroy], Caso, casosjr: { asesor: usuario.id, id_regionsjr:usuario.regionsjr_id }
+        can [:update, :create, :destroy], Caso, 
+					casosjr: { asesor: usuario.id, id_regionsjr:usuario.regionsjr_id }
+    		can :read, Actividad
         can :new, Actividad
-        can [:update, :create, :destroy], Actividad, oficina: { id: usuario.regionsjr_id}
+        can [:update, :create, :destroy], Actividad, 
+					oficina: { id: usuario.regionsjr_id}
       when Ability::ROLANALI
         can :read, Caso
         can :new, Caso
-        can [:update, :create, :destroy], Caso, casosjr: { id_regionsjr: usuario.regionsjr_id }
+        can [:update, :create, :destroy], Caso, 
+					casosjr: { id_regionsjr: usuario.regionsjr_id }
+    		can :read, Actividad
         can :new, Actividad
-        can [:update, :create, :destroy], Actividad, oficina: { id: usuario.regionsjr_id}
+        can [:update, :create, :destroy], Actividad, 
+					oficina: { id: usuario.regionsjr_id}
       when Ability::ROLCOOR
         can :read, Caso
-        can [:update, :create, :destroy, :poneretcomp], Caso, casosjr: { id_regionsjr: usuario.regionsjr_id }
-        can [:update, :create, :destroy], Actividad, oficina: { id: usuario.regionsjr_id}
-        can :manage, Usuario, regionsjr: usuario.regionsjr_id
+        can :new, Caso
+        can [:update, :create, :destroy, :poneretcomp], Caso, 
+					casosjr: { id_regionsjr: usuario.regionsjr_id }
+    		can :read, Actividad
+        can :new, Actividad
+        can [:update, :create, :destroy], Actividad, 
+					oficina: { id: usuario.regionsjr_id}
+				can :new, Usuario
+        can [:read, :manage], Usuario, regionsjr: { id: usuario.regionsjr_id}
       when Ability::ROLDIR
-        can [:read, :update, :create, :destroy, :ponetetcomp, :adminbasicas], Caso
-        can [:update, :create, :destroy], Actividad
+        can [:read, :new, :update, :create, :destroy, :ponetetcomp], Caso
+        can [:read, :new, :update, :create, :destroy], Actividad
         can :manage, Usuario
+				can :manage, :tablasbasicas
       when Ability::ROLINV
         cannot :buscar, Caso
         #can :read, Caso # etiquetas
       when Ability::ROLADMIN
         cannot :buscar, Caso
         can :manage, Usuario
-        can :adminbasicas, Caso
+				can :manage, :tablasbasicas
       end
     end
 

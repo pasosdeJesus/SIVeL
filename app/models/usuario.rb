@@ -1,4 +1,7 @@
 class Usuario < ActiveRecord::Base
+  @current_usuario = -1
+  attr_accessor :current_usuario
+
   # Include default devise modules. Others available are:
   # :recoverable :registerable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :rememberable, :trackable, :lockable
@@ -9,7 +12,7 @@ class Usuario < ActiveRecord::Base
 	has_many :etiqueta_usuario, dependent: :delete_all
 	has_many :etiqueta, through: :etiqueta_usuario
 
-  belongs_to :regionsjr
+	belongs_to :regionsjr, foreign_key: "regionsjr_id", validate: true
 
   #http://stackoverflow.com/questions/1200568/using-rails-how-can-i-set-my-primary-key-to-not-be-an-integer-typed-column
   self.primary_key=:id
@@ -24,9 +27,8 @@ class Usuario < ActiveRecord::Base
   validates_confirmation_of   :encrypted_password, :on=>:create
   #validates_length_of :password, :within => Devise.password_length, :allow_blank => true
   
-  validate :oficina_rol_etiqueta
-  
-  def oficina_rol_etiqueta
+  validate :rol_usuario
+  def rol_usuario
     if !regionsjr.nil? && (rol == Ability::ROLADMIN ||
       rol == Ability::ROLINV || 
       rol == Ability::ROLDIR)
@@ -41,6 +43,12 @@ class Usuario < ActiveRecord::Base
 #    end
     if (etiqueta.count != 0 && rol != Ability::ROLINV) 
       errors.add(:etiqueta, "El rol elegido no requiere etiquetas de compartir")
+    end
+    if (current_usuario.rol == Ability::ROLCOOR)
+        if (regionsjr.nil? || 
+						regionsjr.id != current_usuario.regionsjr_id)
+            errors.add(:regionsjr, "Solo puede editar usuarios de su oficina")
+        end
     end
   end
 

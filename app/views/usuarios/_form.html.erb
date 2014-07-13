@@ -3,7 +3,8 @@
   <%= f.input :nusuario %>
   <%= f.input :nombre %>
   <%= f.association :regionsjr, 
-    collection: Regionsjr.where(fechadeshabilitacion: nil).order(:nombre),
+		collection: Regionsjr.where("fechadeshabilitacion IS NULL AND id<>'1'").
+			order(:nombre),
     label: "Oficina",
     label_method: :nombre,
     value_method: :id,

@@ -17,8 +17,8 @@ class Actividad < ActiveRecord::Base
   validates_presence_of :nombre
   validates_presence_of :fecha
 
-  validate :oficina_rol_caso
-  def oficina_rol_caso
+  validate :rol_usuario
+  def rol_usuario
     if (current_usuario.rol == Ability::ROLSIST || 
          current_usuario.rol == Ability::ROLCOOR || 
          current_usuario.rol == Ability::ROLANALI)

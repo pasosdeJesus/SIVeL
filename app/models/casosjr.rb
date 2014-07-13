@@ -32,14 +32,14 @@ class Casosjr < ActiveRecord::Base
     end
   end
 
-  validate :oficina_rol_caso
-  def oficina_rol_caso
+  validate :rol_usuario
+  def rol_usuario
+		if (usuario.regionsjr_id != regionsjr.id && regionsjr.id != 1)
+			errors.add(:usuario, "Asesor debe ser de oficina")
+		end
     if (caso.current_usuario.rol == Ability::ROLSIST || 
          caso.current_usuario.rol == Ability::ROLCOOR || 
          caso.current_usuario.rol == Ability::ROLANALI)
-        if (usuario.regionsjr_id != regionsjr.id)
-            errors.add(:usuario, "Asesor debe ser de oficina")
-        end
         if (regionsjr.id != caso.current_usuario.regionsjr_id)
             errors.add(:regionsjr, "Solo puede editar casos de su oficina")
         end

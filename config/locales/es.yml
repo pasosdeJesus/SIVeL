@@ -133,6 +133,6 @@ es:
         nusuario: Usuario
         regionsjr: Oficina
         descripcion: Descripción
-        encrypted_password: Clave cifrada
+        encrypted_password: Clave
         created_at: Fecha Registro
 
