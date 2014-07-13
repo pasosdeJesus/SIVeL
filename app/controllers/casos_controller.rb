@@ -5,26 +5,28 @@ class CasosController < ApplicationController
   # GET /casos
   # GET /casos.json
   def index
-    if (current_usuario.rol == Ability::ROLSIST) 
-        @casos = Caso.where(
-          "id IN (SELECT id_caso FROM casosjr WHERE id_regionsjr='" + 
-          current_usuario.regionsjr_id.to_s + "')").paginate(
-          :page => params[:pagina], per_page: 20)
-    else
+    #if (current_usuario.rol == Ability::ROLSIST) 
+    #    @casos = Caso.where(
+    #      "id IN (SELECT id_caso FROM casosjr WHERE id_regionsjr='" + 
+    #      current_usuario.regionsjr_id.to_s + "')").paginate(
+    #      :page => params[:pagina], per_page: 20)
+    #else
         @casos = Caso.paginate(:page => params[:pagina], per_page: 20)
-    end
+    #end
   end
 
   # GET /casos/1
   # GET /casos/1.json
   def show
     @caso = Caso.find(params[:id])
+    @caso.current_usuario = current_usuario
     #authorize! if  current_usuario.rol != Ability::ROLSIST or @caso.casosjr.id_regionsjr == current_usuario.regionsjr_id
   end
 
   # GET /casos/new
   def new
     @caso = Caso.new
+    @caso.current_usuario = current_usuario
     @caso.fecha = DateTime.now.strftime('%Y-%m-%d')
     @caso.memo = ''
     @caso.casosjr = Casosjr.new
@@ -199,6 +201,7 @@ class CasosController < ApplicationController
   # GET /casos/1/edit
   def edit
     @caso = Caso.find(params[:id])
+    @caso.current_usuario = current_usuario
     #unauthorized! if (cannot? :edit, @caso)
     #unauthorized! if  current_usuario.rol == ROLSIST and @caso.casosjr.asesor != current_usuario.id
   end
@@ -207,6 +210,7 @@ class CasosController < ApplicationController
   # POST /casos.json
   def create
     @caso = Caso.new(caso_params)
+    @caso.current_usuario = current_usuario
     @caso.memo = ''
     @caso.titulo = ''
 
@@ -259,7 +263,7 @@ class CasosController < ApplicationController
   # PATCH/PUT /casos/1.json
   def update
     respond_to do |format|
-      if @caso.valid?
+      #if @caso.valid?
         elimina_dep
         if (!params[:caso][:actosjr_attributes].nil?) 
           params[:caso][:actosjr_attributes].each {|k,v| 
@@ -296,7 +300,11 @@ class CasosController < ApplicationController
           format.json { render json: @caso.errors, status: :unprocessable_entity }
           format.js   { render action: 'edit' }
         end
-      end
+      #else
+      #  format.html { render action: 'edit' }
+      # format.json { render json: @caso.errors, status: :unprocessable_entity }
+      # format.js   { render action: 'edit' }
+      #end
     end
   end
 
@@ -316,6 +324,7 @@ class CasosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_caso
       @caso = Caso.find(params[:id])
+      @caso.current_usuario = current_usuario
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,5 +1,8 @@
 class Caso < ActiveRecord::Base
 
+  @current_usuario = -1
+  attr_accessor :current_usuario
+
 	# Ordenados por foreign_key para facilitar comparar con esquema en base
 	has_many :acto, foreign_key: "id_caso", validate: true, dependent: :destroy
 	accepts_nested_attributes_for :acto, allow_destroy: true, reject_if: :all_blank
@@ -54,25 +57,20 @@ class Caso < ActiveRecord::Base
 
 	validates_presence_of :fecha
 
-  #validate :oficina_rol_caso
+  validate :oficina_rol_caso
   
   def oficina_rol_caso
     if (current_usuario.rol != Ability::ROLDIR &&
         current_usuario.rol != Ability::ROLSIST &&
         current_usuario.rol != Ability::ROLCOOR &&
         current_usuario.rol != Ability::ROLANALI) 
-      errors.add(:regionsjr, "Rol de usuario no apropiado para editar")
+      errors.add(:id, "Rol de usuario no apropiado para editar")
     end
     if (current_usuario.rol == Ability::ROLSIST && 
-        (asesor.id != current_usuario.id))
-      errors.add(:asesor, "Sistematizador solo puede editar sus casos")
+        (casosjr.asesor != current_usuario.id))
+      errors.add(:id, "Sistematizador solo puede editar sus casos")
     end
-    if ((current_usuario.rol == Ability::ROLSIST || 
-         current_usuario.rol == Ability::ROLCOOR || 
-         current_usuario.rol == Ability::ROLANALI) && 
-         (regionsjr.id != current_usuario.regionsjr_id))
-      errors.add(:regionsjr, "Su rol solo puede editar casos de su oficina")
-    end
+
   end
 
 

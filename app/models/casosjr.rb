@@ -31,4 +31,20 @@ class Casosjr < ActiveRecord::Base
       errors.add(:fechallegada, " debe ser posterior a la fecha de salida")
     end
   end
+
+  validate :oficina_rol_caso
+  def oficina_rol_caso
+    if (caso.current_usuario.rol == Ability::ROLSIST || 
+         caso.current_usuario.rol == Ability::ROLCOOR || 
+         caso.current_usuario.rol == Ability::ROLANALI)
+        if (usuario.regionsjr_id != regionsjr.id)
+            errors.add(:usuario, "Asesor debe ser de oficina")
+        end
+        if (regionsjr.id != caso.current_usuario.regionsjr_id)
+            errors.add(:regionsjr, 
+                       "Su rol solo puede editar casos de su oficina")
+        end
+    end
+  end
+
 end

@@ -37,11 +37,15 @@ class Ability
       case usuario.rol 
       when Ability::ROLSIST
         can :read, Caso, casosjr: { id_regionsjr: usuario.regionsjr_id }
+        can :new, Caso
         can [:update, :create, :destroy], Caso, casosjr: { asesor: usuario.id, id_regionsjr:usuario.regionsjr_id }
+        can :new, Actividad
         can [:update, :create, :destroy], Actividad, regionsjr: usuario.regionsjr_id
       when Ability::ROLANALI
         can :read, Caso
+        can :new, Caso
         can [:update, :create, :destroy], Caso, casosjr: { id_regionsjr: usuario.regionsjr_id }
+        can :new, Actividad
         can [:update, :create, :destroy], Actividad, regionsjr: usuario.regionsjr_id
       when Ability::ROLCOOR
         can :read, Caso
