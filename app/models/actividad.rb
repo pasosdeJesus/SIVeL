@@ -1,4 +1,7 @@
 class Actividad < ActiveRecord::Base
+  @current_usuario = -1
+  attr_accessor :current_usuario
+
 	has_many :actividadareas_actividad, dependent: :delete_all
 	has_many :actividadareas, through: :actividadareas_actividad
 	has_many :rangoedadac, through: :actividad_rangoedadac
@@ -13,4 +16,17 @@ class Actividad < ActiveRecord::Base
   validates_presence_of :oficina
   validates_presence_of :nombre
   validates_presence_of :fecha
+
+  validate :oficina_rol_caso
+  def oficina_rol_caso
+    if (current_usuario.rol == Ability::ROLSIST || 
+         current_usuario.rol == Ability::ROLCOOR || 
+         current_usuario.rol == Ability::ROLANALI)
+        if (oficina.id != current_usuario.regionsjr_id)
+            errors.add(:oficina, "Solo puede editar actividades de su oficina")
+        end
+    end
+  end
+
+
 end

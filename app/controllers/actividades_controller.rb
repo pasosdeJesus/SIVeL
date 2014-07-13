@@ -16,6 +16,9 @@ class ActividadesController < ApplicationController
   # GET /actividades/new
   def new
     @actividad = Actividad.new
+    @actividad.current_usuario = current_usuario
+    @actividad.regionsjr_id = current_usuario.regionsjr_id.nil? ?  
+      1 : current_usuario.regionsjr_id
   end
 
   # GET /actividades/1/edit
@@ -26,6 +29,7 @@ class ActividadesController < ApplicationController
   # POST /actividades.json
   def create
     @actividad = Actividad.new(actividad_params)
+    @actividad.current_usuario = current_usuario
 
     respond_to do |format|
       if @actividad.save
@@ -66,6 +70,7 @@ class ActividadesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_actividad
       @actividad = Actividad.find(params[:id])
+    	@actividad.current_usuario = current_usuario
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
