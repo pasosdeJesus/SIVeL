@@ -1,6 +1,6 @@
 class Caso < ActiveRecord::Base
 
-  @current_usuario = -1
+  @current_usuario = nil
   attr_accessor :current_usuario
 
 	# Ordenados por foreign_key para facilitar comparar con esquema en base
@@ -59,7 +59,8 @@ class Caso < ActiveRecord::Base
 
   validate :rol_usuario
   def rol_usuario
-    if (current_usuario.rol != Ability::ROLDIR &&
+    if (current_usuario.rol != Ability::ROLADMIN &&
+        current_usuario.rol != Ability::ROLDIR &&
         current_usuario.rol != Ability::ROLSIST &&
         current_usuario.rol != Ability::ROLCOOR &&
         current_usuario.rol != Ability::ROLANALI) 

@@ -72,7 +72,8 @@ class Ability
         cannot :buscar, Caso
         can :read, Caso 
       when Ability::ROLADMIN
-        cannot :buscar, Caso
+        can :manage, Caso
+        can :manage, Actividad
         can :manage, Usuario
 				can :manage, :tablasbasicas
       end

@@ -44,7 +44,7 @@ class Usuario < ActiveRecord::Base
     if (etiqueta.count != 0 && rol != Ability::ROLINV) 
       errors.add(:etiqueta, "El rol elegido no requiere etiquetas de compartir")
     end
-    if (current_usuario.rol == Ability::ROLCOOR)
+    if (!current_usuario.nil? && current_usuario.rol == Ability::ROLCOOR)
         if (regionsjr.nil? || 
 						regionsjr.id != current_usuario.regionsjr_id)
             errors.add(:regionsjr, "Solo puede editar usuarios de su oficina")

@@ -12,6 +12,7 @@ class CasoEtiqueta < ActiveRecord::Base
   def rol_usuario
 		if (etiqueta.nombre.start_with?('COMPARTIR'))
 			if (usuario.rol != Ability::ROLCOOR &&
+					usuario.rol != Ability::ROLADMIN &&
 					usuario.rol != Ability::ROLDIR)
 				errors.add(:etiqueta, "No puede poner etiquetas de compartir")
 			end

@@ -5,7 +5,7 @@ class ActividadesController < ApplicationController
   # GET /actividades
   # GET /actividades.json
   def index
-    @actividades = Actividad.paginate(:page => params[:pagina], per_page: 20)
+    @actividades = @actividades.paginate(:page => params[:pagina], per_page: 20)
   end
 
   # GET /actividades/1
@@ -15,7 +15,6 @@ class ActividadesController < ApplicationController
 
   # GET /actividades/new
   def new
-    @actividad = Actividad.new
     @actividad.current_usuario = current_usuario
     @actividad.regionsjr_id = current_usuario.regionsjr_id.nil? ?  
       1 : current_usuario.regionsjr_id
@@ -28,7 +27,6 @@ class ActividadesController < ApplicationController
   # POST /actividades
   # POST /actividades.json
   def create
-    @actividad = Actividad.new(actividad_params)
     @actividad.current_usuario = current_usuario
 
     respond_to do |format|

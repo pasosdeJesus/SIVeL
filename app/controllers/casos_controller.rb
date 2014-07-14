@@ -12,22 +12,20 @@ class CasosController < ApplicationController
     #      :page => params[:pagina], per_page: 20)
     #else
     if (current_usuario.rol == Ability::ROLINV) 
-        @casos = Caso.where(
+        @casos = @casos.where(
           "id IN (SELECT id_caso FROM caso_etiqueta, etiqueta_usuario 
           WHERE caso_etiqueta.id_etiqueta=etiqueta_usuario.etiqueta_id
           AND etiqueta_usuario.usuario_id ='" + 
           current_usuario.id.to_s + "')").paginate(
           :page => params[:pagina], per_page: 20)
     else
-        @casos = Caso.paginate(:page => params[:pagina], per_page: 20)
+        @casos = @casos.paginate(:page => params[:pagina], per_page: 20)
     end
   end
 
   # GET /casos/1
   # GET /casos/1.json
   def show
-    @caso = Caso.find(params[:id])
-    @caso.current_usuario = current_usuario
     # No hemos logrado poner con cancan la condición para ROLINV en 
     # models/ability.rb
     if current_usuario.rol == Ability::ROLINV
@@ -42,7 +40,6 @@ class CasosController < ApplicationController
 
   # GET /casos/new
   def new
-    @caso = Caso.new
     @caso.current_usuario = current_usuario
     @caso.fecha = DateTime.now.strftime('%Y-%m-%d')
     @caso.memo = ''
@@ -217,16 +214,11 @@ class CasosController < ApplicationController
 
   # GET /casos/1/edit
   def edit
-    @caso = Caso.find(params[:id])
-    @caso.current_usuario = current_usuario
-    #unauthorized! if (cannot? :edit, @caso)
-    #unauthorized! if  current_usuario.rol == ROLSIST and @caso.casosjr.asesor != current_usuario.id
   end
 
   # POST /casos
   # POST /casos.json
   def create
-    @caso = Caso.new(caso_params)
     @caso.current_usuario = current_usuario
     @caso.memo = ''
     @caso.titulo = ''
@@ -238,20 +230,6 @@ class CasosController < ApplicationController
       else
         format.html { render action: 'new' }
         format.json { render json: @caso.errors, status: :unprocessable_entity }
-      #  format.js { render inline: "
-#    <div id='errores'>
-#      <div class=\"alert alert-error\">
-#        Hay <%= pluralize(@caso.errors.count, \"error\") %>.
-#      </div>
-#      <ul>
-#        <% @caso.errors.full_messages.each do |msg| %>
-#          <li>* <%= msg %></li>
-#        <% end %>
-#      </ul>
-#    </div>
-#          "
-#        }
-#        format.js { render action: 'new' }
       end
     end
   end
@@ -259,7 +237,6 @@ class CasosController < ApplicationController
   def elimina_dep
     @caso.caso_etiqueta.clear
     @caso.desplazamiento.clear
-		#@caso.caso_presponsable.clear
     @caso.actosjr.clear
     @caso.acto.clear
     @caso.respuesta.each { |r| 
@@ -268,60 +245,48 @@ class CasosController < ApplicationController
       r.aspsicosocial.clear
       r.aslegal.clear
     }
-		#@caso.respuesta.clear
-		#@caso.ubicacion.clear
-    #@caso.victima.each { |v| 
-		#	v.victimasjr.destroy
-		#}
-		#@caso.victima.clear
   end
 
   # PATCH/PUT /casos/1
   # PATCH/PUT /casos/1.json
   def update
     respond_to do |format|
-      #if @caso.valid?
-        elimina_dep
-        if (!params[:caso][:actosjr_attributes].nil?) 
-          params[:caso][:actosjr_attributes].each {|k,v| 
-            if (v[:_destroy].nil? || v[:_destroy] != 1)
-              acto = Acto.new
-              acto.id_presponsable = v[:id_presponsable]
-              acto.id_persona = v[:id_persona]
-              acto.id_categoria = v[:id_categoria]
-              acto.id_caso = @caso.id
-              acto.save
-            end
-          }
-        end
-        if (!params[:caso][:caso_etiqueta_attributes].nil?)
-          params[:caso][:caso_etiqueta_attributes].each {|k,v|
-            if (v[:id_usuario].nil? || v[:id_usuario] == "") 
-              v[:id_usuario] = current_usuario.id
-            end
-          }
-        end
-        if (!params[:caso][:respusta_attributes].nil?)
-          params[:caso][:respuesta_attributes].each {|k,v|
-            if (v[:id_caso].nil?) 
-              v[:id_caso] = @caso.id
-            end
-          }
-        end
-        if @caso.update(caso_params)
-          format.html { redirect_to @caso, notice: 'Caso actualizado.' }
-          format.json { head :no_content }
-          format.js   { redirect_to @caso, notice: 'Caso actualizado.' }
-        else
-          format.html { render action: 'edit' }
-          format.json { render json: @caso.errors, status: :unprocessable_entity }
-          format.js   { render action: 'edit' }
-        end
-      #else
-      #  format.html { render action: 'edit' }
-      # format.json { render json: @caso.errors, status: :unprocessable_entity }
-      # format.js   { render action: 'edit' }
-      #end
+      elimina_dep
+      if (!params[:caso][:actosjr_attributes].nil?) 
+        params[:caso][:actosjr_attributes].each {|k,v| 
+          if (v[:_destroy].nil? || v[:_destroy] != 1)
+            acto = Acto.new
+            acto.id_presponsable = v[:id_presponsable]
+            acto.id_persona = v[:id_persona]
+            acto.id_categoria = v[:id_categoria]
+            acto.id_caso = @caso.id
+            acto.save
+          end
+        }
+      end
+      if (!params[:caso][:caso_etiqueta_attributes].nil?)
+        params[:caso][:caso_etiqueta_attributes].each {|k,v|
+          if (v[:id_usuario].nil? || v[:id_usuario] == "") 
+            v[:id_usuario] = current_usuario.id
+          end
+        }
+      end
+      if (!params[:caso][:respusta_attributes].nil?)
+        params[:caso][:respuesta_attributes].each {|k,v|
+          if (v[:id_caso].nil?) 
+            v[:id_caso] = @caso.id
+          end
+        }
+      end
+      if @caso.update(caso_params)
+        format.html { redirect_to @caso, notice: 'Caso actualizado.' }
+        format.json { head :no_content }
+        format.js   { redirect_to @caso, notice: 'Caso actualizado.' }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @caso.errors, status: :unprocessable_entity }
+        format.js   { render action: 'edit' }
+      end
     end
   end
 
