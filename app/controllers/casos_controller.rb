@@ -11,8 +11,16 @@ class CasosController < ApplicationController
     #      current_usuario.regionsjr_id.to_s + "')").paginate(
     #      :page => params[:pagina], per_page: 20)
     #else
+    if (current_usuario.rol == Ability::ROLINV) 
+        @casos = Caso.where(
+          "id IN (SELECT id_caso FROM caso_etiqueta, etiqueta_usuario 
+          WHERE caso_etiqueta.id_etiqueta=etiqueta_usuario.etiqueta_id
+          AND etiqueta_usuario.usuario_id ='" + 
+          current_usuario.id.to_s + "')").paginate(
+          :page => params[:pagina], per_page: 20)
+    else
         @casos = Caso.paginate(:page => params[:pagina], per_page: 20)
-    #end
+    end
   end
 
   # GET /casos/1
@@ -20,7 +28,16 @@ class CasosController < ApplicationController
   def show
     @caso = Caso.find(params[:id])
     @caso.current_usuario = current_usuario
-    #authorize! if  current_usuario.rol != Ability::ROLSIST or @caso.casosjr.id_regionsjr == current_usuario.regionsjr_id
+    # No hemos logrado poner con cancan la condición para ROLINV en 
+    # models/ability.rb
+    if current_usuario.rol == Ability::ROLINV
+      ace = @caso.caso_etiqueta.map { |ce| ce.id_etiqueta }
+      aeu = current_usuario.etiqueta_usuario.map { |eu| eu.etiqueta_id }
+      ie = ace & aeu
+      if (ie.size == 0)
+        raise CanCan::AccessDenied.new("Invitado no autorizado!", :read, Caso)
+      end
+    end
   end
 
   # GET /casos/new

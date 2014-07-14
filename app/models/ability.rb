@@ -70,7 +70,7 @@ class Ability
 				can :manage, :tablasbasicas
       when Ability::ROLINV
         cannot :buscar, Caso
-        #can :read, Caso # etiquetas
+        can :read, Caso 
       when Ability::ROLADMIN
         cannot :buscar, Caso
         can :manage, Usuario

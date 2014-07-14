@@ -57,7 +57,6 @@ gem "cucumber-rails", group: "test", :require => false
 gem "capybara", group: [:development, :test]
 gem "factory_girl_rails", group: [:development, :test]
 gem "rails-i18n"
-#gem "debugger"
 gem "simple_form"
 gem "twitter-bootstrap-rails"
 gem "bootstrap-datepicker-rails"

@@ -17,7 +17,7 @@ class UsuariosController < ApplicationController
 
   # GET /usuarios/new
   def new
-    @usuario = Usuario.new
+    #@usuario = Usuario.new
     @usuario.current_usuario = current_usuario
     @usuario.regionsjr_id = current_usuario.regionsjr_id.nil? ?  
       0 : current_usuario.regionsjr_id
@@ -30,7 +30,7 @@ class UsuariosController < ApplicationController
   # POST /usuarios
   # POST /usuarios.json
   def create
-    @usuario = Usuario.new(usuario_params)
+    #@usuario = Usuario.new(usuario_params)
     @usuario.current_usuario = current_usuario
     @usuario.encrypted_password = BCrypt::Password.create(
       params[:usuario][:encrypted_password],
