@@ -13,6 +13,9 @@
  * @link      http://sivel.sf.net
  */
 
+/**
+ * Realiza validaciones a datos de base
+ */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once $_SESSION['dirsitio'] . '/conf_int.php';

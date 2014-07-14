@@ -1,18 +1,95 @@
 Apéndice A. Novedades
 
+   Versión 1.2b2 (Jul.2014)
+
+          + Consulta web ahora incluye filtro Sexo para hacer consultas
+            por género.
+          + Fallas corregidas: En consulta web no autenticada información
+            geográfica correcta. Permite autenticar cuando se actualiza de
+            1.1 a 1.2. Opera con PHP 5.4 y ambiente de adJ 5.5.
+          + Más verificaciones de seguridad inspiradas por OWASP por
+            ejemplo bloquea cuenta que tenga más de 5 intentos fallidos de
+            ingreso (configurable con $GLOBALS['max_intentos_fallidos']).
+            Dos formas de desbloquear: (1) Un administrador va a
+            Administrar->Usuario y elige el usuario bloqueado y pone en
+            blanco campos Intentos fallidos, Testigo para desbloquear y
+            Momento del bloqueo o (2) la cuenta se desbloquea
+            automáticamente después de una hora (o el tiempo especificado
+            en $GLOBALS['segundos_desbloqueo']).
+          + En módulo homónimos nueva opción del menú Otros para examinar
+            listado.
+          + En consulta web y al buscar similares en el módulo mezcla,
+            permite buscar nombres similares al pronunciar en español
+            ---usa soundex en español. En el módulo mezclar al buscar
+            similares emplea soundex para español.
+          + En relatos importa/exporta etiquetas.
+          + Listado de etnias completado con
+            http://www.mineducacion.gov.co/1621/articles-255690_archivo_xl
+            s_listado_etnias.xls. Listado de iglesias mejorado.
+          + Módulo etiquetas permite agregar una columna con etiquetas en
+            consulta web. En conf.php agregar en cwncampos:
+'m_etiquetas' => _('Etiquetas'),
+
+          + En consulta web como tabla color de un caso ahora sólo en el
+            código (no en toda la fila).
+
+   Versión 1.2b1 (Mar.2014)
+
+          + Refinadas relaciones entre personas, posibilida de especificar
+            relación inversa para agregar simultaneamente 2 relaciones al
+            añadir familiares de una víctima.
+          + Almacenamiento de claves más seguro: Cambiado algoritmo de
+            condensado de claves a bcrypt (ver
+            https://www.usenix.org/legacy/events/usenix99/provos/provos_ht
+            ml/node1.html), que usa, si está disponible, el buen generador
+            de números aleatorios de OpenBSD (/dev/random), adJ 5.4 lo
+            configura por defecto para que el servidor web y SIVeL lo
+            puedan usar. Tras actualizar fuentes desde el directorio de su
+            sitio ejecute
+  sudo ../../bin/creaesquema.sh
+
+            Después ingrese como usuario administrador y elija
+            Otros->Actualizar. Posteriormente cada usuario que ingrese con
+            su clave correcta verá por una sóla vez un mensaje que
+            menciona el cambio de condensado para su clave y que le
+            indicará ingresar nuevamente.
+          + Simplificadas tablas de usuarios.
+          + Información geográfica actualizada con DIVIPOLA 2013.
+          + Función soundexesp, agradecimiento a Oliver Mazariegos de
+            Grupo Vesica.
+          + Añadidas variables de configuración para añadir validaciones:
+            $GLOBALS['validaciones_tipicas'],
+            $GLOBALS['gancho_valida_caso'],
+            $GLOBALS['gancho_valida_base'].
+          + Añadido archivo de comandos bin/elimcaso.sh que ayuda a
+            eliminar un caso dado el código
+          + Añadidas variable de configuración para controlar presentación
+            de reporte tabla: $GLOBALS['reptabla_nonacimiento'],
+            $GLOBALS['reptabla_noagresion'],
+            $GLOBALS['reptabla_separa_ubicacion'] (que separa ubicación en
+            2 columnas para municipio y departamento),
+            $GLOBALS['reptabla_separa_nomap'] (que separa nombres y
+            apellidos en 2 columnas) y
+            $GLOBALS['reptabla_tipificacion_breve'] (que presenta
+            tipificación sin código ni supracategoria).
+          + Validaciones: tanto desde el menú Otros->Validar como con el
+            botón Val. y Rep. G al editar un caso se verifica que se hayan
+            duplicado categorias que lo requieren.
+          + Fallas resueltas: Al buscar por consulta detallada en pestaña
+            ubicación no pone automáticamente latitud y longitud.
+            Agradecemos reporte a Miltón Mejía. Permite poner sector
+            social y rango edad en víctimas colectivas.
+
    Versión 1.2a1 (Ago.2013)
 
           + Modulo nuevo desplazamiento para registrar desplazamiento.
             Requiere que en el caso se registren dos o más ubicaciones por
             donde se han desplazado las víctimas. Agradecemos al SJR
             Colombia por financiar este desarrollo de dominio público.
-          + Modulo experimental mezcla para mezclar casos. Ayuda a mezclar
-            dos casos identificados por sus códigos o permite elegir 2
-            casos entre un listado de posibles repetidos. Puede mezclar
-            bien uno en otro o bien crear un caso nuevo con el resultado
-            de la mezcla. Por ser experimental se recomienda examinar caso
-            resultante. Agradecemos a Reiniciar por financiar este
-            desarrollo de dominio público.
+          + Modulo mezcla para mezclar casos: Búsqueda de casos repetidos
+            por mezclar por fecha, departamento o nombres similares.
+            Emplea heurística para mezclar. Soporte de homónimos o nombres
+            similares para excluirlos de búsquedas para mezclar.
           + Usabilidad: agrega automáticamente latitud y longitud al
             elegir departamento o municipio en pestaña Ubicación; control
             AJAX más eficiente para elegir departamento, municipio y clase

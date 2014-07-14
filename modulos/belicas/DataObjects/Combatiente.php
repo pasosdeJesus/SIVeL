@@ -15,6 +15,9 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+/**
+ * Objeto asociado a una tabla combatiente
+ */
 require_once 'DB_DataObject_SIVeL.php';
 require_once 'DataObjects/Filiacion.php';
 require_once 'DataObjects/Organizacion.php';

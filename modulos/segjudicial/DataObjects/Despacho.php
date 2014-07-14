@@ -15,6 +15,9 @@
  */
 
 
+/**
+ * Objeto tabla despacho
+ */
 require_once 'DataObjects/Basica.php';
 
 /**

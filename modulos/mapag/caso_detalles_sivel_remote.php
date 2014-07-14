@@ -1,7 +1,7 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Detalls de un caso
+ * Detalle de un caso
  *
  * PHP version 5
  *
@@ -15,6 +15,9 @@
  * @link      http://sivel.sf.net
  */
 
+/**
+ * Detalle de un caso
+ */
 require_once "../../misc.php";
 require_once "mapag_misc.php";
 

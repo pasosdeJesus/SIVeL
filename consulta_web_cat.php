@@ -16,6 +16,9 @@
  * Acceso: CONSULTA PÚBLICA
  */
 
+/**
+ * Consulta de categoria para consulta web
+ */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
 require_once "misc.php";

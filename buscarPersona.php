@@ -13,6 +13,9 @@
  * @link      http://sivel.sf.net
  */
 
+/**
+ * Elegir una persona
+ */
 require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . "/conf.php";
 require_once "DataObjects/Persona.php";

@@ -14,6 +14,9 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+/**
+ * Objeto tabla tproceso
+ */
 require_once 'DataObjects/Basica.php';
 
 /**

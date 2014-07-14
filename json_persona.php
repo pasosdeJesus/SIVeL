@@ -14,6 +14,9 @@
  * @link      http://sivel.sf.net
  */
 
+/**
+ * Listado de nombres de personas en base de datos en formato JSON
+ */
 require_once 'misc.php';
 require_once 'misc_importa.php';
 require_once 'aut.php';

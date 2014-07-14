@@ -13,6 +13,9 @@
  * @link      http://sivel.sf.net
  */
 
+/**
+ * Importa relato
+ */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
 $aut_usuario = "";

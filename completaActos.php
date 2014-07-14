@@ -13,6 +13,9 @@
  * @link      http://sivel.sf.net
  */
 
+/**
+ * Completa categorias replicadas
+ */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
 require_once "confv.php";

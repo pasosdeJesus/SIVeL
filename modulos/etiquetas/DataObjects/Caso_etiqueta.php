@@ -14,6 +14,9 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+/**
+ * Definición de objeto tabla caso_etiqueta
+ */
 require_once 'DB/DataObject.php';
 require_once 'HTML/QuickForm/Action.php';
 

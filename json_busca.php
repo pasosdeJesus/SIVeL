@@ -15,6 +15,9 @@
  */
 
 
+/**
+ * Busca y retorna información de una tabla en formato JSON
+ */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
 require_once 'misc.php';

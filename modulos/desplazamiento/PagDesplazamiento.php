@@ -1,7 +1,7 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- *Página del multi-formulario para capturar caso (captura_caso.php).
+ * Página del multi-formulario para capturar caso (captura_caso.php).
  *
  * PHP version 5
  *
@@ -14,6 +14,9 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+/**
+ * Página del multi-formulario para capturar caso (captura_caso.php).
+ */
 require_once 'PagBaseMultiple.php';
 require_once 'ResConsulta.php';
 require_once 'PagUbicacion.php';

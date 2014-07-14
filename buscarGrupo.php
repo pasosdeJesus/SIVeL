@@ -1,7 +1,7 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker fileencoding=utf-8:
 /**
- * Permite elegir una persona de la lista de las que están en la base
+ * Permite elegir un grupo de la lista de las que están en la base
  *
  * PHP version 5
  *
@@ -13,6 +13,9 @@
  * @link      http://sivel.sf.net
  */
 
+/**
+ * Elegir un grupo
+ */
 require_once 'aut.php';
 require_once 'misc.php';
 require_once $_SESSION['dirsitio'] . "/conf.php";

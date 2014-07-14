@@ -15,6 +15,9 @@
  */
 
 
+/**
+ * Objeto tabla proceso
+ */
 require_once 'DB_DataObject_SIVeL.php';
 require_once  $GLOBALS['dirsitio'] . "/conf.php";
 require_once "Tproceso.php";

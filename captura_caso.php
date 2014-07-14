@@ -14,6 +14,9 @@
  * @link      http://www.21st.de/downloads/rapidprototyping.pdf
  */
 
+/**
+ * Ficha para capturar casos (también utilizable para buscar).
+ */
 require_once "aut.php";
 require_once "confv.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";

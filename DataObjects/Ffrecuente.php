@@ -15,6 +15,9 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+/**
+ * Objeto asociado a una tabla de la base de datos.
+ */
 require_once 'DataObjects/Basica.php';
 
 /**

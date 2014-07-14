@@ -14,6 +14,9 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+/**
+ * Funciones para importar relatos
+ */
 require_once "DataObjects/Presponsable.php";
 
 /**

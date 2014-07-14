@@ -14,6 +14,9 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+/**
+ * Clase base para objetos que representan registros/tablas
+ */
 require_once "DB/DataObject.php";
 require_once "aut.php";
 //require_once $_SESSION['dirsitio'] . "/conf.php";

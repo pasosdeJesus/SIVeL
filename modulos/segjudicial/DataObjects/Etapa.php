@@ -14,6 +14,9 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+/**
+ * Objeto tabla etapa
+ */
 require_once 'DataObjects/Basica.php';
 
 /**

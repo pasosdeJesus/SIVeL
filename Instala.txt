@@ -114,7 +114,7 @@ cd /var/www/htdocs/sivel/sitios
 ./nuevo.sh sivel
 
        Este archivo de ordenes copiará los archivo
-       pordefecto/plantilla-conf.php y pordefecto/plantilla-vardb.sh como
+       pordefecto/conf.php.plantilla y pordefecto/vardb.sh.plantilla como
        sivel/conf.php y sivel/vardb.sh cuadrando rutas y usuario de
        PostgreSQL (si requiere cambiar usuario o clave de PostgreSQL edite
        sivel/conf.php). También inicializará la base de datos y los

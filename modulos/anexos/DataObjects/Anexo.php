@@ -14,6 +14,9 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+/**
+ * Definicion  para la tabla anexo.
+ */
 require_once 'DB/DataObject.php';
 
 /**

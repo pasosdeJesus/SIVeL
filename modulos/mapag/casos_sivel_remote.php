@@ -15,6 +15,9 @@
  * @link      http://sivel.sf.net
  */
 
+/**
+ * Listado de casos restringiendo por filtro
+ */
 require_once "../../misc.php";
 require_once "mapag_misc.php";
 

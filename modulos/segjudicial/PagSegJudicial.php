@@ -14,6 +14,9 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+/**
+ *Página del multi-formulario para capturar caso (captura_caso.php).
+ */
 require_once 'PagBaseMultiple.php';
 require_once 'ResConsulta.php';
 require_once 'HTML/QuickForm/Action.php';

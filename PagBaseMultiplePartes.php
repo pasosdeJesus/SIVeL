@@ -15,6 +15,9 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+/**
+ * Pestaña con siguiente/anterior para capturar caso 
+ */
 require_once 'PagBaseMultiple.php';
 require_once 'ResConsulta.php';
 require_once 'PagUbicacion.php';

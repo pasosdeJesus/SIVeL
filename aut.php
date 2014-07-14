@@ -17,6 +17,9 @@
  * @link      http://sivel.sf.net
  */
 
+/**
+ * Autenticación
+ */
 require_once "bcrypt.php";
 
 /**

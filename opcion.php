@@ -13,6 +13,9 @@
  * @link      http://sivel.sf.net
  */
 
+/**
+ * Carga una opción no estándar del menú
+ */
 require_once 'misc.php';
 require_once 'aut.php';
 require_once $_SESSION['dirsitio'] . '/conf.php';
