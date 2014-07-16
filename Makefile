@@ -6,13 +6,13 @@
 # Configuration variables
 include Make.inc
 
-USERCVS=$(USER)
-USERACT=$(USERCVS),$(PROYECTO)   # En caso de Sourceforge
+USERCVS?=$(USER)
+USERACT=$(USERCVS),$(PROYECTO)
 
 # Variables requeridas por comdist.mak
 GENDIST=Instala.txt Novedades.txt #usrdoc
 ACTHOST=web.sourceforge.net
-ACTDIR=/home/groups/s/si/sivel/htdocs/1.1/
+ACTDIR=/home/groups/s/si/sivel/htdocs/1.2/
 GENACT=distsf
 FILESACT=$(PROYECTO)-$(PRY_VERSION).tar.gz
 
@@ -66,9 +66,18 @@ usrdoc:
 	(cd doc/ ; ./conf.sh; make; make ../Instala.txt; make ../Novedades.txt; make ../Creditos.txt; make ../Derechos.txt)
 
 .PRECIOUS: .pdoc
-tecdoc: 
+tecdoc1: 
 	mkdir -p pdoc
-	phpdoc -dc SIVeL -t pdoc -d . -i "pruebas/*,conf*php,doc/*,Make.inc,*sitios**,*web*index.php,/herram/ind.php,/web/index.php"
+	phpdoc --encoding=utf8 -dc SIVeL -t pdoc -d . -i "pruebas/*,conf*php,doc/*,Make.inc,*sitios**,*web*index.php,/herram/ind.php,/web/index.php"
+
+tecdoc2:
+	for i in `find pdoc -name "*html"`; do \
+		cp $$i $$i.copia; \
+		sed -e 's/iso-8859-1/utf-8/g' $$i.copia > $$i; \
+	done
+
+tecdoc: tecdoc1 tecdoc2
+	rm -rf pdoc/*copia
 
 tecdoc-act: tecdoc-$(ACT_PROC)
 	if (test "$(OTHER_ACT)" != "") then { make tecdoc-$(OTHER_ACT); } fi;

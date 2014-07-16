@@ -6,7 +6,7 @@ include Make.inc
 
 # Variables requeridas por comdocbook.mak
 
-USERCVS=$(USER)
+USERCVS?=$(USER)
 USERACT=$(USERCVS),sivel
 
 EXT_DOCBOOK=xdbk
