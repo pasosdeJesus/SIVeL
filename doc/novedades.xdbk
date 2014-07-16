@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
+	<varlistentry><term>Versión 1.2 (Sep.2014)</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem><para>
+Al validar se identifican hombres con nombre de mujer y mujeres con nombre de 
+hombre con un modelo probabilístico.
+					</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
 	<varlistentry><term>Versión 1.2b2 (Jul.2014)</term>
 		<listitem>
 			<para><itemizedlist>

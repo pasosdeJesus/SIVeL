@@ -3228,6 +3228,97 @@ if (!aplicado($idac)) {
     );
 }
 
+$idac = '1.2-sexo';
+if (!aplicado($idac)) {
+
+    hace_consulta(
+        $db, "CREATE OR REPLACE FUNCTION divarr(in_array ANYARRAY) 
+RETURNS SETOF TEXT as
+$$
+    SELECT ($1)[s] FROM generate_series(1,array_upper($1, 1)) AS s;
+$$
+    LANGUAGE SQL IMMUTABLE;"
+    );
+    hace_consulta(
+        $db, "CREATE TYPE nomcod AS (nombre VARCHAR(100), caso INTEGER);"
+    );
+    hace_consulta(
+        $db, "CREATE OR REPLACE FUNCTION divarr_concod(in_array ANYARRAY, 
+	in_integer INTEGER) RETURNS SETOF nomcod as
+$$
+    SELECT ($1)[s],$2 FROM generate_series(1,array_upper($1, 1)) AS s;
+$$
+    LANGUAGE SQL IMMUTABLE;"
+    );
+    hace_consulta(
+        $db, "CREATE MATERIALIZED VIEW nmujeres AS 
+        SELECT  (p).nombre, COUNT((p).caso) AS frec
+        FROM (SELECT 
+            divarr_concod(string_to_array(trim(nombres), ' '), id_caso) AS p 
+            FROM persona, victima WHERE victima.id_persona=persona.id 
+            AND sexo='F' ORDER BY 1) AS r 
+        GROUP BY 1 ORDER BY 2;"
+    );
+    hace_consulta(
+        $db, "CREATE MATERIALIZED VIEW nhombres AS 
+        SELECT  (p).nombre, COUNT((p).caso) AS frec
+        FROM (SELECT 
+            divarr_concod(string_to_array(nombres, ' '), id_caso) AS p 
+            FROM persona, victima WHERE victima.id_persona=persona.id 
+            AND sexo='M' ORDER BY 1) AS r 
+        GROUP BY 1 ORDER BY 2;"
+    );
+    hace_consulta(
+        $db, "CREATE OR REPLACE FUNCTION probcadm(in_text TEXT) 
+        RETURNS NUMERIC AS
+$$
+	SELECT CASE WHEN (SELECT SUM(frec) FROM nmujeres)=0 THEN 0
+		WHEN (SELECT COUNT(*) FROM nmujeres WHERE nombre=$1)=0 THEN 0
+		ELSE (SELECT frec/(SELECT SUM(frec) FROM nmujeres) 
+			FROM nmujeres WHERE nombre=$1)
+		END
+$$
+LANGUAGE SQL IMMUTABLE;"
+        );
+    hace_consulta(
+        $db, "CREATE OR REPLACE FUNCTION probcadh(in_text TEXT) 
+        RETURNS NUMERIC AS
+$$
+	SELECT CASE WHEN (SELECT SUM(frec) FROM nhombres)=0 THEN 0
+		WHEN (SELECT COUNT(*) FROM nhombres WHERE nombre=$1)=0 THEN 0
+		ELSE (SELECT frec/(SELECT SUM(frec) FROM nhombres) 
+			FROM nhombres WHERE nombre=$1)
+		END
+$$
+LANGUAGE SQL IMMUTABLE;"
+    );
+    hace_consulta(
+        $db, "CREATE OR REPLACE FUNCTION probhombre(in_text TEXT) 
+        RETURNS NUMERIC AS
+$$
+	SELECT sum(ppar) FROM (SELECT p, peso*probcadh(p) AS ppar FROM (
+		SELECT p, CASE WHEN rnum=1 THEN 9 ELSE 1 END AS peso 
+		FROM (SELECT p, row_number() OVER () AS rnum FROM 
+			divarr(string_to_array(trim($1), ' ')) AS p) 
+		AS s) AS s2) AS s3;
+$$
+    LANGUAGE SQL IMMUTABLE;"
+    );
+    hace_consulta(
+        $db, "CREATE OR REPLACE FUNCTION probmujer(in_text TEXT) 
+        RETURNS NUMERIC AS
+$$
+	SELECT sum(ppar) FROM (SELECT p, peso*probcadm(p) AS ppar FROM (
+		SELECT p, CASE WHEN rnum=1 THEN 9 ELSE 1 END AS peso 
+		FROM (SELECT p, row_number() OVER () AS rnum FROM 
+			divarr(string_to_array(trim($1), ' ')) AS p) 
+		AS s) AS s2) AS s3;
+$$
+    LANGUAGE SQL IMMUTABLE;"
+    );
+
+    aplicaact($act, $idac, 'Valida sexo de víctimas con modelo prob.'); 
+}
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;

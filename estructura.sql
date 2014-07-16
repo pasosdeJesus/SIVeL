@@ -15,114 +15,6 @@ ALTER TEXT SEARCH DICTIONARY unaccent (RULES='unaccent');
 
 ALTER FUNCTION unaccent(text) IMMUTABLE;
 
--- Funcion Soundex en Español
--- Tomado de http://wiki.postgresql.org/wiki/SoundexESP
--- Oliver Mazariegos http://www.grupovesica.com
-
-CREATE OR REPLACE FUNCTION soundexesp(input text) RETURNS text
-IMMUTABLE STRICT COST 500 LANGUAGE plpgsql
-AS $$
-DECLARE
-	soundex text='';	
-	-- para determinar la primera letra
-	pri_letra text;
-	resto text;
-	sustituida text ='';
-	-- para quitar adyacentes
-	anterior text;
-	actual text;
-	corregido text;
-BEGIN
-       -- devolver null si recibi un string en blanco o con espacios en blanco
-	IF length(trim(input))= 0 then
-		RETURN NULL;
-	end IF;
- 
- 
-	-- 1: LIMPIEZA:
-		-- pasar a mayuscula, eliminar la letra "H" inicial, los acentos y la enie
-		-- 'holá coñó' => 'OLA CONO'
-		input=translate(ltrim(trim(upper(input)),'H'),'ÑÁÉÍÓÚÀÈÌÒÙÜ','NAEIOUAEIOUU');
- 
-		-- eliminar caracteres no alfabéticos (números, símbolos como &,%,",*,!,+, etc.
-		input=regexp_replace(input, '[^a-zA-Z]', '', 'g');
- 
-	-- 2: PRIMERA LETRA ES IMPORTANTE, DEBO ASOCIAR LAS SIMILARES
-	--  'vaca' se convierte en 'baca'  y 'zapote' se convierte en 'sapote'
-	-- un fenomeno importante es GE y GI se vuelven JE y JI; CA se vuelve KA, etc
-	pri_letra =substr(input,1,1);
-	resto =substr(input,2);
-	CASE 
-		when pri_letra IN ('V') then
-			sustituida='B';
-		when pri_letra IN ('Z','X') then
-			sustituida='S';
-		when pri_letra IN ('G') AND substr(input,2,1) IN ('E','I') then
-			sustituida='J';
-		when pri_letra IN('C') AND substr(input,2,1) NOT IN ('H','E','I') then
-			sustituida='K';
-		else
-			sustituida=pri_letra;
- 
-	end case;
-	--corregir el parametro con las consonantes sustituidas:
-	input=sustituida || resto;		
- 
-	-- 3: corregir "letras compuestas" y volverlas una sola
-	input=REPLACE(input,'CH','V');
-	input=REPLACE(input,'QU','K');
-	input=REPLACE(input,'LL','J');
-	input=REPLACE(input,'CE','S');
-	input=REPLACE(input,'CI','S');
-	input=REPLACE(input,'YA','J');
-	input=REPLACE(input,'YE','J');
-	input=REPLACE(input,'YI','J');
-	input=REPLACE(input,'YO','J');
-	input=REPLACE(input,'YU','J');
-	input=REPLACE(input,'GE','J');
-	input=REPLACE(input,'GI','J');
-	input=REPLACE(input,'NY','N');
-	-- para debug:    --return input;
- 
-	-- EMPIEZA EL CALCULO DEL SOUNDEX
-	-- 4: OBTENER PRIMERA letra
-	pri_letra=substr(input,1,1);
- 
-	-- 5: retener el resto del string
-	resto=substr(input,2);
- 
-	--6: en el resto del string, quitar vocales y vocales fonéticas
-	resto=translate(resto,'@AEIOUHWY','@');
- 
-	--7: convertir las letras foneticamente equivalentes a numeros  (esto hace que B sea equivalente a V, C con S y Z, etc.)
-	resto=translate(resto, 'BPFVCGKSXZDTLMNRQJ', '111122222233455677');
-	-- así va quedando la cosa
-	soundex=pri_letra || resto;
- 
-	--8: eliminar números iguales adyacentes (A11233 se vuelve A123)
-	anterior=substr(soundex,1,1);
-	corregido=anterior;
- 
-	FOR i IN 2 .. length(soundex) LOOP
-		actual = substr(soundex, i, 1);
-		IF actual <> anterior THEN
-			corregido=corregido || actual;
-			anterior=actual;			
-		END IF;
-	END LOOP;
-	-- así va la cosa
-	soundex=corregido;
- 
-	-- 9: siempre retornar un string de 4 posiciones
-	soundex=rpad(soundex,4,'0');
-	soundex=substr(soundex,1,4);		
- 
-	-- YA ESTUVO
-	RETURN soundex;	
-END;	
-$$
-;
-
 CREATE TABLE actualizacionbase (
 	id VARCHAR(10) PRIMARY KEY,
 	fecha DATE NOT NULL,
@@ -850,7 +742,118 @@ CREATE TABLE actocolectivo (
 );
 
 
--- Vistas
+-- Funciones y Vistas
+
+-- Soundex
+
+-- Funcion Soundex en Español
+-- Tomado de http://wiki.postgresql.org/wiki/SoundexESP
+-- Oliver Mazariegos http://www.grupovesica.com
+
+CREATE OR REPLACE FUNCTION soundexesp(input text) RETURNS text
+IMMUTABLE STRICT COST 500 LANGUAGE plpgsql
+AS $$
+DECLARE
+	soundex text='';	
+	-- para determinar la primera letra
+	pri_letra text;
+	resto text;
+	sustituida text ='';
+	-- para quitar adyacentes
+	anterior text;
+	actual text;
+	corregido text;
+BEGIN
+       -- devolver null si recibi un string en blanco o con espacios en blanco
+	IF length(trim(input))= 0 then
+		RETURN NULL;
+	end IF;
+ 
+ 
+	-- 1: LIMPIEZA:
+		-- pasar a mayuscula, eliminar la letra "H" inicial, los acentos y la enie
+		-- 'holá coñó' => 'OLA CONO'
+		input=translate(ltrim(trim(upper(input)),'H'),'ÑÁÉÍÓÚÀÈÌÒÙÜ','NAEIOUAEIOUU');
+ 
+		-- eliminar caracteres no alfabéticos (números, símbolos como &,%,",*,!,+, etc.
+		input=regexp_replace(input, '[^a-zA-Z]', '', 'g');
+ 
+	-- 2: PRIMERA LETRA ES IMPORTANTE, DEBO ASOCIAR LAS SIMILARES
+	--  'vaca' se convierte en 'baca'  y 'zapote' se convierte en 'sapote'
+	-- un fenomeno importante es GE y GI se vuelven JE y JI; CA se vuelve KA, etc
+	pri_letra =substr(input,1,1);
+	resto =substr(input,2);
+	CASE 
+		when pri_letra IN ('V') then
+			sustituida='B';
+		when pri_letra IN ('Z','X') then
+			sustituida='S';
+		when pri_letra IN ('G') AND substr(input,2,1) IN ('E','I') then
+			sustituida='J';
+		when pri_letra IN('C') AND substr(input,2,1) NOT IN ('H','E','I') then
+			sustituida='K';
+		else
+			sustituida=pri_letra;
+ 
+	end case;
+	--corregir el parametro con las consonantes sustituidas:
+	input=sustituida || resto;		
+ 
+	-- 3: corregir "letras compuestas" y volverlas una sola
+	input=REPLACE(input,'CH','V');
+	input=REPLACE(input,'QU','K');
+	input=REPLACE(input,'LL','J');
+	input=REPLACE(input,'CE','S');
+	input=REPLACE(input,'CI','S');
+	input=REPLACE(input,'YA','J');
+	input=REPLACE(input,'YE','J');
+	input=REPLACE(input,'YI','J');
+	input=REPLACE(input,'YO','J');
+	input=REPLACE(input,'YU','J');
+	input=REPLACE(input,'GE','J');
+	input=REPLACE(input,'GI','J');
+	input=REPLACE(input,'NY','N');
+	-- para debug:    --return input;
+ 
+	-- EMPIEZA EL CALCULO DEL SOUNDEX
+	-- 4: OBTENER PRIMERA letra
+	pri_letra=substr(input,1,1);
+ 
+	-- 5: retener el resto del string
+	resto=substr(input,2);
+ 
+	--6: en el resto del string, quitar vocales y vocales fonéticas
+	resto=translate(resto,'@AEIOUHWY','@');
+ 
+	--7: convertir las letras foneticamente equivalentes a numeros  (esto hace que B sea equivalente a V, C con S y Z, etc.)
+	resto=translate(resto, 'BPFVCGKSXZDTLMNRQJ', '111122222233455677');
+	-- así va quedando la cosa
+	soundex=pri_letra || resto;
+ 
+	--8: eliminar números iguales adyacentes (A11233 se vuelve A123)
+	anterior=substr(soundex,1,1);
+	corregido=anterior;
+ 
+	FOR i IN 2 .. length(soundex) LOOP
+		actual = substr(soundex, i, 1);
+		IF actual <> anterior THEN
+			corregido=corregido || actual;
+			anterior=actual;			
+		END IF;
+	END LOOP;
+	-- así va la cosa
+	soundex=corregido;
+ 
+	-- 9: siempre retornar un string de 4 posiciones
+	soundex=rpad(soundex,4,'0');
+	soundex=substr(soundex,1,4);		
+ 
+	-- YA ESTUVO
+	RETURN soundex;	
+END;	
+$$
+;
+
 
 CREATE MATERIALIZED VIEW vvictimasoundexesp AS
 	SELECT victima.id_caso, persona.id AS id_persona, 
@@ -861,4 +864,89 @@ CREATE MATERIALIZED VIEW vvictimasoundexesp AS
 		ORDER BY 1) AS n) AS soundexesp
 	FROM persona, victima 
 	WHERE persona.id=victima.id_persona;
+
+
+-- Hombres - Mujeres
+
+CREATE OR REPLACE FUNCTION divarr(in_array ANYARRAY) RETURNS SETOF TEXT as
+$$
+    SELECT ($1)[s] FROM generate_series(1,array_upper($1, 1)) AS s;
+$$
+LANGUAGE SQL IMMUTABLE;
+
+
+CREATE TYPE nomcod AS (nombre VARCHAR(100), caso INTEGER);
+
+CREATE OR REPLACE FUNCTION divarr_concod(in_array ANYARRAY, 
+	in_integer INTEGER) RETURNS SETOF nomcod as
+$$
+    SELECT ($1)[s],$2 FROM generate_series(1,array_upper($1, 1)) AS s;
+$$
+LANGUAGE SQL IMMUTABLE;
+
+CREATE MATERIALIZED VIEW nmujeres AS 
+	SELECT  (p).nombre, COUNT((p).caso) AS frec
+	FROM (SELECT 
+		divarr_concod(string_to_array(trim(nombres), ' '), id_caso) AS p 
+		FROM persona, victima WHERE victima.id_persona=persona.id 
+		AND sexo='F' ORDER BY 1) AS r 
+	GROUP BY 1 ORDER BY 2;
+
+CREATE MATERIALIZED VIEW nhombres AS 
+	SELECT  (p).nombre, COUNT((p).caso) AS frec
+	FROM (SELECT 
+		divarr_concod(string_to_array(nombres, ' '), id_caso) AS p 
+		FROM persona, victima WHERE victima.id_persona=persona.id 
+		AND sexo='M' ORDER BY 1) AS r 
+	GROUP BY 1 ORDER BY 2;
+
+
+-- Probabilidad de que una cadena (sin espacios) sea un nombre de mujer
+CREATE OR REPLACE FUNCTION probcadm(in_text TEXT) RETURNS NUMERIC AS
+$$
+	SELECT CASE WHEN (SELECT SUM(frec) FROM nmujeres)=0 THEN 0
+		WHEN (SELECT COUNT(*) FROM nmujeres WHERE nombre=$1)=0 THEN 0
+		ELSE (SELECT frec/(SELECT SUM(frec) FROM nmujeres) 
+			FROM nmujeres WHERE nombre=$1)
+		END
+$$
+LANGUAGE SQL IMMUTABLE;
+
+-- Probabilidad de que una cadena (sin espacios) sea un nombre de hombre
+CREATE OR REPLACE FUNCTION probcadh(in_text TEXT) RETURNS NUMERIC AS
+$$
+	SELECT CASE WHEN (SELECT SUM(frec) FROM nhombres)=0 THEN 0
+		WHEN (SELECT COUNT(*) FROM nhombres WHERE nombre=$1)=0 THEN 0
+		ELSE (SELECT frec/(SELECT SUM(frec) FROM nhombres) 
+			FROM nhombres WHERE nombre=$1)
+		END
+$$
+LANGUAGE SQL IMMUTABLE;
+
+
+-- Heuristica de probabilidad que un nombre compuesto sea de hombre
+-- Supone que la primera parte tiene más peso que las demás
+CREATE OR REPLACE FUNCTION probhombre(in_text TEXT) RETURNS NUMERIC AS
+$$
+	SELECT sum(ppar) FROM (SELECT p, peso*probcadh(p) AS ppar FROM (
+		SELECT p, CASE WHEN rnum=1 THEN 9 ELSE 1 END AS peso 
+		FROM (SELECT p, row_number() OVER () AS rnum FROM 
+			divarr(string_to_array(trim($1), ' ')) AS p) 
+		AS s) AS s2) AS s3;
+$$
+LANGUAGE SQL IMMUTABLE;
+
+-- Idea de probabilidad que un nombre compuesto sea de mujer
+-- Supone que la primera parte tiene más peso que las demás
+CREATE OR REPLACE FUNCTION probmujer(in_text TEXT) RETURNS NUMERIC AS
+$$
+	SELECT sum(ppar) FROM (SELECT p, peso*probcadm(p) AS ppar FROM (
+		SELECT p, CASE WHEN rnum=1 THEN 9 ELSE 1 END AS peso 
+		FROM (SELECT p, row_number() OVER () AS rnum FROM 
+			divarr(string_to_array(trim($1), ' ')) AS p) 
+		AS s) AS s2) AS s3;
+$$
+LANGUAGE SQL IMMUTABLE;
+
+
 

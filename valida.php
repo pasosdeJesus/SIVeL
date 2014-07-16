@@ -116,6 +116,27 @@ res_valida(
     AND id NOT IN (SELECT id_grupoper FROM actocolectivo)"
 );
 
+res_valida(
+    $db, _("Nombres de mujeres que parecen de hombre"),
+    "SELECT id_caso, nombres, probmujer(nombres) AS pmujer, 
+    probhombre(nombres) AS phombre FROM persona, victima 
+    WHERE victima.id_persona=persona.id 
+    AND sexo='F' 
+    AND probhombre(nombres)>probmujer(nombres)
+    AND nombres<>'N'"
+);
+
+res_valida(
+    $db, _("Nombres de hombres que parecen de mujer"),
+    "SELECT id_caso, nombres, probhombre(nombres) AS phombre, 
+    probmujer(nombres) AS pmujer FROM persona, victima 
+    WHERE victima.id_persona=persona.id 
+    AND sexo='M' 
+    AND probhombre(nombres)<probmujer(nombres)
+    AND nombres<>'N'"
+);
+
+
 foreach ($GLOBALS['validaciones_tipicas'] as $desc => $sql) {
     res_valida($db, _("Casos") . " " . $desc, $sql);
 }
