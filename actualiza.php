@@ -3297,7 +3297,7 @@ LANGUAGE SQL IMMUTABLE;"
         RETURNS NUMERIC AS
 $$
 	SELECT sum(ppar) FROM (SELECT p, peso*probcadh(p) AS ppar FROM (
-		SELECT p, CASE WHEN rnum=1 THEN 9 ELSE 1 END AS peso 
+		SELECT p, CASE WHEN rnum=1 THEN 100 ELSE 1 END AS peso 
 		FROM (SELECT p, row_number() OVER () AS rnum FROM 
 			divarr(string_to_array(trim($1), ' ')) AS p) 
 		AS s) AS s2) AS s3;
@@ -3309,7 +3309,7 @@ $$
         RETURNS NUMERIC AS
 $$
 	SELECT sum(ppar) FROM (SELECT p, peso*probcadm(p) AS ppar FROM (
-		SELECT p, CASE WHEN rnum=1 THEN 9 ELSE 1 END AS peso 
+		SELECT p, CASE WHEN rnum=1 THEN 100 ELSE 1 END AS peso 
 		FROM (SELECT p, row_number() OVER () AS rnum FROM 
 			divarr(string_to_array(trim($1), ' ')) AS p) 
 		AS s) AS s2) AS s3;
