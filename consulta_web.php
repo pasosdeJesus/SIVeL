@@ -126,18 +126,18 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 $where .= " AND ";
             }
             $consTitulo =  trim(a_minusculas(sin_tildes($pTitulo)));
-            $consTitulo = preg_replace("/ +/", " & ", $consTitulo);
+            //$consTitulo = preg_replace("/ +/", " & ", $consTitulo);
             $where .= " to_tsvector('spanish', unaccent(caso.titulo)) "
-                . " @@ to_tsquery('spanish', '$consTitulo')";
+                . " @@ plainto_tsquery('spanish', '$consTitulo')";
         }
         if (trim($pDesc) != '') {
             if ($where != "") {
                 $where .= " AND ";
             }
             $consDesc =  trim(a_minusculas(sin_tildes($pDesc)));
-            $consDesc = preg_replace("/ +/", " & ", $consDesc);
+            //$consDesc = preg_replace("/ +/", " & ", $consDesc);
             $where .= " to_tsvector('spanish', unaccent(caso.memo)) "
-                . " @@ to_tsquery('spanish', '$consDesc')";
+                . " @@ plainto_tsquery('spanish', '$consDesc')";
         }
 
         if (isset($pFini['Y']) && $pFini['Y'] != '') {
@@ -372,14 +372,14 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 $where .= " AND ";
             }
             if ($pNomsim) {
-                $where .= "(position(soundexesp('$pNomvic') in nomsoundexesp)>0
-                    OR position(nomsoundexesp in soundexesp('$pNomvic'))>0)";
+                $where .= "(position(soundexespm('$pNomvic') in nomsoundexesp)>0
+                    OR position(nomsoundexesp in soundexespm('$pNomvic'))>0)";
             } else {
                 $consNomVic =  trim(a_minusculas(sin_tildes($pNomvic)));
-                $consNomvic = preg_replace("/ +/", " & ", $consNomVic);
+                //$consNomvic = preg_replace("/ +/", " & ", $consNomVic);
                 $where .= "to_tsvector('spanish', unaccent(persona.nombres) "
                     . " || ' ' || unaccent(persona.apellidos)) @@ "
-                    . "to_tsquery('spanish', '$consNomvic')";
+                    . "plainto_tsquery('spanish', '$consNomVic')";
             }
         }
 

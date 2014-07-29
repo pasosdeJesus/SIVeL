@@ -116,6 +116,10 @@ res_valida(
     AND id NOT IN (SELECT id_grupoper FROM actocolectivo)"
 );
 
+hace_consulta($db, 'REFRESH MATERIALIZED VIEW nmujeres');
+
+hace_consulta($db, 'REFRESH MATERIALIZED VIEW nhombres');
+
 res_valida(
     $db, _("Nombres de mujeres que parecen de hombre"),
     "SELECT id_caso, nombres, probmujer(nombres) AS pmujer, 
@@ -135,6 +139,38 @@ res_valida(
     AND probhombre(nombres)<probmujer(nombres)
     AND nombres<>'N'"
 );
+
+res_valida(
+    $db, _("Nombres con sexo SIN INFORMACIÓN que parecen de mujer"),
+    "SELECT id_caso, nombres, probhombre(nombres) AS phombre, 
+    probmujer(nombres) AS pmujer FROM persona, victima 
+    WHERE victima.id_persona=persona.id 
+    AND sexo='S' 
+    AND probhombre(nombres)<probmujer(nombres)
+    AND nombres<>'N'"
+);
+
+res_valida(
+    $db, _("Nombres con sexo SIN INFORMACIÓN que parecen de hombre"),
+    "SELECT id_caso, nombres, probhombre(nombres) AS phombre, 
+    probmujer(nombres) AS pmujer FROM persona, victima 
+    WHERE victima.id_persona=persona.id 
+    AND sexo='S' 
+    AND probhombre(nombres)>probmujer(nombres)
+    AND nombres<>'N'"
+);
+
+res_valida(
+    $db, _("Nombres con sexo SIN INFORMACIÓN cuyo sexo no puede identificarse"),
+    "SELECT id_caso, nombres, probhombre(nombres) AS phombre, 
+    probmujer(nombres) AS pmujer FROM persona, victima 
+    WHERE victima.id_persona=persona.id 
+    AND sexo='S' 
+    AND probhombre(nombres)=probmujer(nombres)
+    AND nombres<>'N'"
+);
+
+
 
 
 foreach ($GLOBALS['validaciones_tipicas'] as $desc => $sql) {

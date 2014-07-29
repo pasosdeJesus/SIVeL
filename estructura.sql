@@ -746,10 +746,9 @@ CREATE TABLE actocolectivo (
 
 -- Soundex
 
--- Funcion Soundex en Español
+-- Funcion Soundex en Español para una cadena sin espacios
 -- Tomado de http://wiki.postgresql.org/wiki/SoundexESP
 -- Oliver Mazariegos http://www.grupovesica.com
-
 CREATE OR REPLACE FUNCTION soundexesp(input text) RETURNS text
 IMMUTABLE STRICT COST 500 LANGUAGE plpgsql
 AS $$
@@ -855,16 +854,20 @@ $$
 ;
 
 
+CREATE OR REPLACE FUNCTION soundexespm(in_text TEXT) RETURNS TEXT AS
+$$
+	SELECT ARRAY_TO_STRING(ARRAY_AGG(soundexesp(s)),' ')                
+	FROM (SELECT UNNEST(STRING_TO_ARRAY(
+		REGEXP_REPLACE(TRIM($1), '  *', ' '), ' ')) AS s                
+	      ORDER BY 1) AS n;
+$$
+LANGUAGE SQL IMMUTABLE;
+
 CREATE MATERIALIZED VIEW vvictimasoundexesp AS
 	SELECT victima.id_caso, persona.id AS id_persona, 
 		(persona.nombres || ' ' || persona.apellidos) AS nomap, 
-		(SELECT array_to_string(array_agg(soundexesp(s)),' ') 
-		FROM (SELECT unnest(string_to_array(regexp_replace(nombres || 
-		  ' ' || apellidos, '  *', ' '), ' ')) AS s 
-		ORDER BY 1) AS n) AS soundexesp
-	FROM persona, victima 
+		soundexespm(nombres || ' ' || apellidos) as nomsoundexesp FROM persona, victima 
 	WHERE persona.id=victima.id_persona;
-
 
 -- Hombres - Mujeres
 
@@ -929,7 +932,7 @@ LANGUAGE SQL IMMUTABLE;
 CREATE OR REPLACE FUNCTION probhombre(in_text TEXT) RETURNS NUMERIC AS
 $$
 	SELECT sum(ppar) FROM (SELECT p, peso*probcadh(p) AS ppar FROM (
-		SELECT p, CASE WHEN rnum=1 THEN 9 ELSE 1 END AS peso 
+		SELECT p, CASE WHEN rnum=1 THEN 100 ELSE 1 END AS peso 
 		FROM (SELECT p, row_number() OVER () AS rnum FROM 
 			divarr(string_to_array(trim($1), ' ')) AS p) 
 		AS s) AS s2) AS s3;
@@ -941,12 +944,11 @@ LANGUAGE SQL IMMUTABLE;
 CREATE OR REPLACE FUNCTION probmujer(in_text TEXT) RETURNS NUMERIC AS
 $$
 	SELECT sum(ppar) FROM (SELECT p, peso*probcadm(p) AS ppar FROM (
-		SELECT p, CASE WHEN rnum=1 THEN 9 ELSE 1 END AS peso 
+		SELECT p, CASE WHEN rnum=1 THEN 100 ELSE 1 END AS peso 
 		FROM (SELECT p, row_number() OVER () AS rnum FROM 
 			divarr(string_to_array(trim($1), ' ')) AS p) 
 		AS s) AS s2) AS s3;
 $$
 LANGUAGE SQL IMMUTABLE;
-
 
 
