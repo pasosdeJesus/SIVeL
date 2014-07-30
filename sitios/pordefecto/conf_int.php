@@ -92,7 +92,9 @@ $GLOBALS['receptor_correo'] = 'sivel@localhost';
  */
 $GLOBALS['emisor_correo'] = 'bancodat@nocheyniebla.org';
 
-/** Validaciones indice es mensaje de error y valor es consulta SQL
+/** Validaciones indice es mensaje de error y valor es consulta SQL.
+ * La consulta debe responder primero con la identificacion del caso con 
+ * nombre id_caso y cualquier otra información que se requiera desplegar.
  * @global string $GLOBALS['validaciones_tipicas']
  */
 $GLOBALS['validaciones_tipicas'] = array(
@@ -101,7 +103,22 @@ $GLOBALS['validaciones_tipicas'] = array(
     a1.id_categoria=categoria.id 
     AND contadaen IS NOT NULL 
     AND contadaen NOT IN 
-    (SELECT id_categoria FROM acto AS a2 WHERE a1.id_caso=a2.id_caso) '
+    (SELECT id_categoria FROM acto AS a2 WHERE a1.id_caso=a2.id_caso) ',
+    'sin Presunto Responsable'  => 'SELECT id as id_caso FROM
+    caso WHERE id NOT IN (SELECT id_caso FROM caso_presponsable)
+    ORDER BY 1',
+    'sin Actos'  => 'SELECT id as id_caso, 
+    (SELECT array_agg(persona.nombres || \' \' || persona.apellidos) 
+      FROM victima, persona
+      WHERE victima.id_caso=caso.id 
+      AND victima.id_persona=persona.id), memo, 
+    (SELECT array_agg(etiqueta.nombre) FROM etiqueta, caso_etiqueta
+    WHERE caso_etiqueta.id_etiqueta=etiqueta.id
+    AND caso_etiqueta.id_caso=caso.id)
+    FROM caso
+    WHERE id NOT IN (SELECT id_caso FROM acto)
+    ORDER BY 1',
+
 );
 
 /** Funciones para validar caso de manera más compleja que con
