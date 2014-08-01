@@ -104,7 +104,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         $pTeX       = (int)var_req_escapa('m_tex', $db);
         $pTitulo    = substr(var_req_escapa('titulo', $db), 0, 32);
         $pTvio    = substr(var_req_escapa('tviolencia', $db), 0, 1);
-        $pPrimNom = var_req_escapa('primnom') == 'nombre';
+        $pPrimNom = isset($_REQUEST['primnom']);
         $pSexo    = var_req_escapa('sexo');
 
         $campos = array(); //'caso_id' => 'Cód.');
