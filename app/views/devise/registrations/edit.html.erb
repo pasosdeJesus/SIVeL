@@ -1,27 +1,33 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2>Editar <%= resource_name.to_s.humanize %> <%= @usuario.nusuario %></h2>
 
-<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+<%= simple_form_for(resource, :as => resource_name, :url => registro_usuario_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, :required => true, :autofocus => true %>
+    <%= f.input :nombre, label: 'Nombre',
+      :required => false, :autofocus => true %>
+
+    <%= f.input :email, label: 'Correo electrónico',
+      :required => true, :autofocus => true %>
+  
+    <%= f.input :descripcion, label: 'Descripción',
+      :required => false, :autofocus => true %>
 
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+      <p>Aún esperando confirmación para: <%= resource.unconfirmed_email %></p>
     <% end %>
 
-    <%= f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false %>
-    <%= f.input :password_confirmation, :required => false %>
-    <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true %>
+    <%= f.input :password, label: 'Nueva clave', :autocomplete => "off", 
+      :hint => " deje en blanco si no desea cambiarla", :required => false %>
+    <%= f.input :password_confirmation, label: 'Confirmación de nueva clave',
+      :required => false %>
+    <%= f.input :current_password, label: 'Clave actual',
+      :hint => " requerida para confirmar sus cambios", 
+      :required => true %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+    <%= f.button :submit, "Actualizar" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
-
-<%= link_to "Back", :back %>

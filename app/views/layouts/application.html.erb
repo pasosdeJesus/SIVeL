@@ -49,7 +49,7 @@
         <%= menu_item "Documentacion", "/doc/html/index.html"%>
         <% if !current_usuario.nil? %>
 					<%= drop_down "Administrar" do %>
-            <%= menu_item "Clave", usuarios_path %>
+            <%= menu_item "Clave", editar_registro_usuario_path %>
 						<% if current_usuario.rol == Ability::ROLADMIN || 
 							current_usuario.rol == Ability::ROLCOOR ||
 							current_usuario.rol == Ability::ROLDIR %>

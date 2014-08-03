@@ -19,5 +19,7 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
 	  devise_parameter_sanitizer.for(:sign_up) << :nusuario
+	  devise_parameter_sanitizer.for(:account_update) << 
+        [:nombre, :email, :descripcion]
   end
 end
