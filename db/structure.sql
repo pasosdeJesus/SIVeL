@@ -1175,6 +1175,7 @@ CREATE TABLE persona (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     id_pais integer,
+    nacionalde integer,
     CONSTRAINT persona_check CHECK (((dianac IS NULL) OR ((((dianac >= 1) AND ((((((((mesnac = 1) OR (mesnac = 3)) OR (mesnac = 5)) OR (mesnac = 7)) OR (mesnac = 8)) OR (mesnac = 10)) OR (mesnac = 12)) AND (dianac <= 31))) OR (((((mesnac = 4) OR (mesnac = 6)) OR (mesnac = 9)) OR (mesnac = 11)) AND (dianac <= 30))) OR ((mesnac = 2) AND (dianac <= 29))))),
     CONSTRAINT persona_mesnac_check CHECK (((mesnac IS NULL) OR ((mesnac >= 1) AND (mesnac <= 12)))),
     CONSTRAINT persona_sexo_check CHECK ((((sexo = 'S'::bpchar) OR (sexo = 'F'::bpchar)) OR (sexo = 'M'::bpchar)))
@@ -4454,6 +4455,14 @@ ALTER TABLE ONLY casosjr
 
 
 --
+-- Name: casosjr_comosupo_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY casosjr
+    ADD CONSTRAINT casosjr_comosupo_id_fkey FOREIGN KEY (comosupo_id) REFERENCES comosupo(id);
+
+
+--
 -- Name: casosjr_contacto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -4966,6 +4975,14 @@ ALTER TABLE ONLY persona
 
 
 --
+-- Name: persona_nacionalde_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY persona
+    ADD CONSTRAINT persona_nacionalde_fkey FOREIGN KEY (nacionalde) REFERENCES pais(id);
+
+
+--
 -- Name: persona_trelacion_id_trelacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5368,4 +5385,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140704035033');
 INSERT INTO schema_migrations (version) VALUES ('20140804194616');
 
 INSERT INTO schema_migrations (version) VALUES ('20140804200235');
+
+INSERT INTO schema_migrations (version) VALUES ('20140804202958');
 

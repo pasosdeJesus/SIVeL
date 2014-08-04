@@ -271,7 +271,7 @@ class CasosController < ApplicationController
           end
         }
       end
-      if (!params[:caso][:respusta_attributes].nil?)
+      if (!params[:caso][:respuesta_attributes].nil?)
         params[:caso][:respuesta_attributes].each {|k,v|
           if (v[:id_caso].nil?) 
             v[:id_caso] = @caso.id
@@ -317,7 +317,7 @@ class CasosController < ApplicationController
         :bienes, :id_intervalo, :memo, 
         :casosjr_attributes => [
           :fecharec, :asesor, :id_regionsjr, :direccion, 
-          :telefono, :comosupo, :contacto,
+          :telefono, :comosupo_id, :contacto,
           :dependen, :sustento, :leerescribir, 
           :ingresomensual, :gastos, :estrato, :id_statusmigratorio,
           :id_proteccion, :id_idioma,
@@ -334,7 +334,7 @@ class CasosController < ApplicationController
           :persona_attributes => [
             :id, :nombres, :apellidos, :anionac, :mesnac, :dianac, 
             :id_pais, :id_departamento, :id_municipio, :id_clase, 
-            :numerodocumento, :sexo, :tipodocumento
+            :nacionalde, :numerodocumento, :sexo, :tipodocumento
           ],
           :victimasjr_attributes => [
             :id_rolfamilia,
