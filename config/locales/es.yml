@@ -9,6 +9,8 @@ es:
     id_pais: País
     id_supracategoria: Supracategoria
     id_tviolencia: Tipo de Violencia
+    limiteinferior: Límite Inferior
+    limitesuperior: Límite Superior
   will_paginate:
     previous_label: "&#8592; Anterior"
     next_label: "&#8594; Siguiente"
@@ -101,11 +103,12 @@ es:
       proteccion:
         Proteccion: Medida de Protección
         Protecciones: Medidas de Protección
+      rangoedadac:
+        Rangoedad: Rango de Edad para Actividad
+        Rangosedad: Rangos de Edad para Actividades
       rangoedad:
         Rangoedad: Rango de Edad
         Rangosedad: Rangos de Edad
-        limiteinferior: Límite Inferior
-        limitesuperior: Límite Superior
       regionsjr:
         Regionsjr: Oficina
         Regionessjr: Oficinas

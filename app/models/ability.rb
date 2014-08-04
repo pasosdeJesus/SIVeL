@@ -68,6 +68,10 @@ class Ability
         can [:read, :new, :update, :create, :destroy], Actividad
         can :manage, Usuario
 				can :manage, :tablasbasicas
+        @@tablasbasicas.each do |t|
+            c = t.capitalize.constantize
+				    can :manage, c
+        end
       when Ability::ROLINV
         cannot :buscar, Caso
         can :read, Caso 
@@ -76,6 +80,10 @@ class Ability
         can :manage, Actividad
         can :manage, Usuario
 				can :manage, :tablasbasicas
+        @@tablasbasicas.each do |t|
+            c = t.capitalize.constantize
+				    can :manage, c
+        end
       end
     end
 
