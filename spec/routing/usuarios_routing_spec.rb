@@ -24,7 +24,7 @@ describe UsuariosController do
     end
 
     it "routes to #update" do
-      put("/usuario/1").should route_to("usuario#update", :id => "1")
+      patch("/usuario/1").should route_to("usuario#update", :id => "1")
     end
 
     it "routes to #destroy" do

@@ -81,6 +81,21 @@ EOF
 		)
   end
 
+	desc "Vuelca base de datos completa"
+  task vuelca: :environment do
+		fecha = DateTime.now.strftime('%Y-%m-%d') 
+		archcopia = "db/copia-" + fecha + ".sql"
+		File.open(archcopia, "w") { |f| f << "-- Volcado del #{fecha}\n\n" }
+		abcs = ActiveRecord::Base.configurations
+		set_psql_env(abcs[Rails.env])
+		search_path = abcs[Rails.env]['schema_search_path']
+		unless search_path.blank?
+			search_path = search_path.split(",").map{|search_path_part| "--schema=#{Shellwords.escape(search_path_part.strip)}" }.join(" ")
+		end
+		command = "pg_dump --encoding=UTF8 -cO --column-inserts #{search_path} #{Shellwords.escape(abcs[Rails.env]['database'])} > #{Shellwords.escape(archcopia)}"
+		puts command
+		raise "Error al volcar" unless Kernel.system(command)
+	end	
 end
 
 # de https://github.com/opdemand/puppet-modules/blob/master/rails/files/databases.rake
