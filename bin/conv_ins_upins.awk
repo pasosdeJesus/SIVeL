@@ -5,6 +5,8 @@
 # Convierte INSERT a UPDATE seguido del INSERT
 
 /INSERT/ {
+	delete campo;
+	delete valor;
 	if (match($1, /INSERT INTO .* \(/)<=0) { 
 		print FILENAME ":" FNR ": Se esperaba INSERT INTO"; 
 		exit 1; 
