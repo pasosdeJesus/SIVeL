@@ -337,6 +337,13 @@ $(document).on 'ready page:load',  ->
     root.elempe = []
   )
  
+  # Tras añadir desplazamiento poner como fecha por defecto la del hecho
+  $('#desplazamiento').on('cocoon:after-insert', (e, papa) ->
+    usel=papa.find('.caso_desplazamiento_fechaexpulsion input')
+    usel.val($('#caso_fecha').val()) 
+    return
+  )
+ 
 
   # Deshabilitar parte para obligar a completar partes para continuar
   # http://stackoverflow.com/questions/16777003/what-is-the-easiest-way-to-disable-enable-buttons-and-links-jquery-bootstrap
