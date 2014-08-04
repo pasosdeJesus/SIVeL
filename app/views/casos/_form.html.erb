@@ -58,8 +58,14 @@
                 <%= f.simple_fields_for :victima do |victima| %>
                   <% if !victima.object.persona.nil?  && victima.object.persona.id == @caso.casosjr.contacto.id %>
                     <%= s.input :direccion, label: "Dirección actual" %>
-                    <%= s.input :telefono %>
-                    <%= s.input :comosupo, :label => "Como supo del SJR" %>
+										<%= s.input :telefono %>
+                    <%= s.association :comosupo,
+                  	  collection: Comosupo.all.order(:nombre),
+											include_blank: false,
+                      label: "Como supo del SJR",
+                      label_method: :nombre, 
+											value_method: :id 
+										%>
                     <%= render 'contacto_fields', :f => victima %>
 										<%= s.input :dependen, label: "Cuantos dependen econ.",
 											wrapper_html: { style: "padding-bottom: 18px;" }	%>

@@ -897,7 +897,6 @@ CREATE TABLE casosjr (
     id_regionsjr integer DEFAULT 1,
     direccion character varying(1000),
     telefono character varying(1000),
-    comosupo character varying(5000),
     contacto integer,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
@@ -918,7 +917,8 @@ CREATE TABLE casosjr (
     fechallegada date,
     id_llegada integer,
     categoriaref integer,
-    observacionesref character varying(5000)
+    observacionesref character varying(5000),
+    comosupo_id integer DEFAULT 1
 );
 
 
@@ -1029,6 +1029,40 @@ CREATE TABLE clasifdesp (
     updated_at timestamp without time zone,
     CONSTRAINT clasifdesp_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
 );
+
+
+--
+-- Name: comosupo; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE comosupo (
+    id integer NOT NULL,
+    nombre character varying(500) NOT NULL,
+    observaciones character varying(5000),
+    fechacreacion date NOT NULL,
+    fechadeshabilitacion date,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: comosupo_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE comosupo_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: comosupo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE comosupo_id_seq OWNED BY comosupo.id;
 
 
 --
@@ -2940,6 +2974,13 @@ ALTER TABLE ONLY actividadareas_actividad ALTER COLUMN id SET DEFAULT nextval('a
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY comosupo ALTER COLUMN id SET DEFAULT nextval('comosupo_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY etiqueta_usuario ALTER COLUMN id SET DEFAULT nextval('etiqueta_usuario_id_seq'::regclass);
 
 
@@ -3267,6 +3308,14 @@ ALTER TABLE ONLY clase
 
 ALTER TABLE ONLY clasifdesp
     ADD CONSTRAINT clasifdesp_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comosupo_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY comosupo
+    ADD CONSTRAINT comosupo_pkey PRIMARY KEY (id);
 
 
 --
@@ -3878,6 +3927,13 @@ CREATE INDEX index_actividad_rangoedadac_on_actividad_id ON actividad_rangoedada
 --
 
 CREATE INDEX index_actividad_rangoedadac_on_rangoedadac_id ON actividad_rangoedadac USING btree (rangoedadac_id);
+
+
+--
+-- Name: index_casosjr_on_comosupo_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_casosjr_on_comosupo_id ON casosjr USING btree (comosupo_id);
 
 
 --
@@ -5308,4 +5364,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140613200951');
 INSERT INTO schema_migrations (version) VALUES ('20140620112004');
 
 INSERT INTO schema_migrations (version) VALUES ('20140704035033');
+
+INSERT INTO schema_migrations (version) VALUES ('20140804194616');
+
+INSERT INTO schema_migrations (version) VALUES ('20140804200235');
 

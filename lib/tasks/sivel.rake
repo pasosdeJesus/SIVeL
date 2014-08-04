@@ -7,7 +7,7 @@ namespace :sivel do
   task indices: :environment do
     connection = ActiveRecord::Base.connection();
 		# Primero tablas basicas creadas en Rails
-    tbn = [ "actividadarea", "rangoedadac" ]
+    tbn = [ "actividadarea", "comosupo", "rangoedadac" ]
     tbn.each do |t|
     	connection.execute("SELECT setval('#{t}_id_seq', MAX(id)) FROM 
              (SELECT 100 as id UNION SELECT MAX(id) FROM #{t}) AS s;")

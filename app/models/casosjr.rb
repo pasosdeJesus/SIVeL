@@ -4,6 +4,7 @@ class Casosjr < ActiveRecord::Base
 
 	# Ordenados por foreign_key para comparar con esquema en base
 	belongs_to :usuario, foreign_key: "asesor", validate: true
+	belongs_to :comosupo, foreign_key: "comosupo_id", validate: true
 	belongs_to :contacto, class_name: "Persona", foreign_key: "contacto", 
 		validate: true
 	belongs_to :caso, foreign_key: "id_caso", validate: true, 
