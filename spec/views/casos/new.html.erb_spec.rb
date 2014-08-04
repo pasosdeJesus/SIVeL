@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "casos/new" do
   before(:each) do
-    assign(:caso, stub_model(Caso,
+    assigns[:caso] = stub_model(Caso,
       :titulo => "MyString",
       :hora => "MyString",
       :duracion => "MyString",
@@ -13,7 +13,7 @@ describe "casos/new" do
       :grinformacion => "MyString",
       :bienes => "MyText",
       :id_intervalo => 1
-    ).as_new_record)
+    ).as_new_record
   end
 
   it "renders new caso form" do
