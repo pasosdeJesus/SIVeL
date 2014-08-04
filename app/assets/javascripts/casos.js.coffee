@@ -343,23 +343,34 @@ $(document).on 'ready page:load',  ->
     usel.val($('#caso_fecha').val()) 
     return
   )
- 
+
+  # Al cambiar fecha del hecho cambiar fecha de salida si no se ha 
+  # llenado refugio
+  # Método para detectar cambios en datepicker de
+  # http://stackoverflow.com/questions/17009354/detect-change-to-selected-date-with-bootstrap-datepicker
+  $('#caso_fecha').datepicker({
+    format: 'yyyy-mm-dd'
+    autoclose: true
+    todayHighlight: true
+    language: 'es'
+  }).on('changeDate', (ev) ->
+    vss=$('#caso_casosjr_attributes_id_salida').val()
+    vfl=$('#caso_casosjr_attributes_fechallegada').val()
+    vsl=$('#caso_casosjr_attributes_id_llegada').val()
+    vcr=$('#caso_casosjr_attributes_categoriaref').val()
+    vob=$('#caso_casosjr_attributes_observacionesref').val()
+    if (vss == "" && vfl == "" && vsl == "" && vcr == "" && vob == "") 
+      vfl=$('#caso_casosjr_attributes_fechasalida').val(this.value)
+    return
+  #  $("article").css("cursor", "wait")
+  #  $(this).parents("form").submit() 
+  #  $("article").css("cursor", "default") 
+  )
+
 
   # Deshabilitar parte para obligar a completar partes para continuar
   # http://stackoverflow.com/questions/16777003/what-is-the-easiest-way-to-disable-enable-buttons-and-links-jquery-bootstrap
   #$('body').on('click', 'a.disabled', (e) -> 
   #  e.preventDefault() )
-
-  # Método para detectar cambios en datepicker de
-  # http://stackoverflow.com/questions/17009354/detect-change-to-selected-date-with-bootstrap-datepicker
-  #$('#caso_fecha').datepicker({
-  #  format: 'yyyy-mm-dd'
-  #  autoclose: true
-  #  todayHighlight: true
-  #  language: 'es'
-  #}).on('changeDate', (ev) ->
-  #  $("article").css("cursor", "wait")
-  #  $(this).parents("form").submit() 
-  #  $("article").css("cursor", "default") );
 
   return
