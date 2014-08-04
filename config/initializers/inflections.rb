@@ -35,6 +35,7 @@ ActiveSupport::Inflector.inflections do |inflect|
 	inflect.irregular 'profesion', 'profesiones'
 	inflect.irregular 'proteccion', 'protecciones'
 	inflect.irregular 'rangoedad', 'rangosedad'
+	inflect.irregular 'rangoedadac', 'rangosedadac'
 	inflect.irregular 'regionsjr', 'regionessjr'
 	inflect.irregular 'respuesta', 'respuesta'
 	inflect.irregular 'rolfamilia', 'rolesfamilia'

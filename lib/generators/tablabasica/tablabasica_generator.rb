@@ -34,5 +34,7 @@ end
 FILE
     gsub_file("app/models/ability.rb", /(@@tablasbasicas = \[.*)/, 
               "\1\n    '#{file_name}',")
+    # Infleccion no regular en config/initializers/inflections.rb
+    # Nombre en español en config/locales/es.yml
   end
 end
