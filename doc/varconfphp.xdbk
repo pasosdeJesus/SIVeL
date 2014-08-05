@@ -72,7 +72,7 @@
 <varlistentry><term><literal>emisor_correo</literal></term>
 <listitem><para> Dirección de la cual provendrán mensajes cifrados.</para></listitem></varlistentry>
 <varlistentry><term><literal>validaciones_tipicas</literal></term>
-<listitem><para> Validaciones indice es mensaje de error y valor es consulta SQL</para></listitem></varlistentry>
+<listitem><para> Validaciones indice es mensaje de error y valor es consulta SQL.</para></listitem></varlistentry>
 <varlistentry><term><literal>gancho_valida_caso</literal></term>
 <listitem><para> Funciones para validar caso de manera más compleja que con</para></listitem></varlistentry>
 <varlistentry><term><literal>gancho_valida_base</literal></term>

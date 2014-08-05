@@ -5,8 +5,11 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>
-Al validar se identifican hombres con nombre de mujer y mujeres con nombre de 
-hombre con un modelo probabilístico.
+Consulta web permite especificar dos etiquetas.
+					</para></listitem>
+
+					<listitem><para>
+Al validar con modelos probabilisticos se identifican hombres con nombre de mujer,  mujeres con nombre de hombre y nombres que parece apellidos.
 					</para></listitem>
 			</itemizedlist></para>
 		</listitem>
