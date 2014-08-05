@@ -7,7 +7,7 @@ FactoryGirl.define do
     latitud 1.5
     longitud 1.5
     fechacreacion "2014-08-04"
-    fechadeshabilitacion "2014-08-04"
+    fechadeshabilitacion nil
     association :pais, factory: :pais
   end
 end

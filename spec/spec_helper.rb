@@ -3,6 +3,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'factory_girl'
+require 'capybara/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -20,6 +21,7 @@ RSpec.configure do |config|
   # config.mock_with :mocha
   # config.mock_with :flexmock
   # config.mock_with :rr
+  config.mock_with :rspec
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -28,6 +30,9 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+	# De https://gist.github.com/Bregor/1053489
+	config.use_transactional_examples= true
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
@@ -42,7 +47,14 @@ RSpec.configure do |config|
 
 	config.include FactoryGirl::Syntax::Methods
 
+	config.include Capybara::DSL
+
 	config.expect_with :rspec do |c|
 		c.syntax = :expect
 	end
+
+	config.include Rails.application.routes.url_helpers
+
+	config.include Devise::TestHelpers, :type => :controller
+	config.include ControllerHelpers, :type => :controller
 end

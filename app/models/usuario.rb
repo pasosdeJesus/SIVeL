@@ -23,6 +23,14 @@ class Usuario < ActiveRecord::Base
   validates_uniqueness_of    :nusuario,     :case_sensitive => false, :allow_blank => true
   validates_format_of :nusuario, :with  => /\A[a-zA-Z_0-9]+\z/, :allow_blank => true
 
+  validates_presence_of :nusuario
+  validates_presence_of :password
+  validates_presence_of :idioma
+  validates_presence_of :rol
+  validates_presence_of :email
+  validates_presence_of :sign_in_count
+  validates_presence_of :fechacreacion
+
   validates_presence_of   :encrypted_password, :on=>:create
   validates_confirmation_of   :encrypted_password, :on=>:create
   #validates_length_of :password, :within => Devise.password_length, :allow_blank => true
