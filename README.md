@@ -1,4 +1,16 @@
-# Diseño de SIVeL 2
+# Diseño de SIVeL 2 [![Build Status](https://api.travis-ci.org/pasosdeJesus/SIVeL.svg?branch=dis2)](https://travis-ci.org/pasosdeJesus/SIVeL)
+
+## Tabla de Contenido
+* [Maqueta](#maqueta)
+* [Prototipo con Ruby on Rails](#prototipo-con-ruby-on-rails)
+	* [Requerimientos] (#requerimientos)
+	* [Configuración de servidor de desarrollo] (#configuración-del-servidor-de-desarollo)
+	* [Pruebas] (#pruebas)
+	* [Servidor de desarrollo] (#servidor-de-desarrollo)
+	* [Despliegue en sitio de producción con unicorn] (despliegue-en-sitio-de-producción-con-unicorn)
+	* [Actualización de servidor de desarrollo] (actualizacion-de-servidor-de-desarrollo)
+	* [Convenciones] (convenciones)
+
 
 ## Maqueta
 
@@ -28,10 +40,10 @@ con Ruby on Rails.
 * Ruby version >= 1.9
 * PostgreSQL >= 9.3
 * Se recomienda emplear en paralelo con una instancia de SIVeL 1.3 
-* Recomendado sobre adJ 5.4 (que incluye todos los componentes mencionados).  
+* Recomendado sobre adJ 5.5 (que incluye todos los componentes mencionados).  
   Las siguientes instrucciones suponen que opera en este ambiente.
 
-### Configuración de servidor de desarrollo:
+### Configuración de servidor de desarrollo
 * Ubique fuentes por ejemplo en /var/www/htdocs/sivel2/
 * Instale gemas requeridas (como Rails 4.1) con:
 ```sh
@@ -60,11 +72,17 @@ con Ruby on Rails.
   rake sivel:indices
 ```
 
-### Pruebas:
+### Pruebas
 
-### Servicios requeridos y prestados:
+Se han implementado algunas pruebas con RSpec a modelos y pruebas de regresión.
+Ejecutelas con:
 
-### Servidor de desarrollo:
+```sh
+RAILS_ENV=test rake db:reset
+rake
+```
+
+### Servidor de desarrollo
 Lancelo con:
 ```sh
   rails s
