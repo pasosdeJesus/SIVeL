@@ -338,15 +338,16 @@ class PagEtiquetas extends PagBaseSimple
 
         $sel =& $form->createElement(
             'select',
-            'critetiqueta', _('Criterio Etiqueta')
+            'critetiqueta', _('Criterio Etiqueta 1')
         );
         $sel->loadArray(array('0' => _('tiene'), '1' => _('no tiene')));
         $gr[] = $sel;
 
         $sel =& $form->createElement(
             'select',
-            'poretiqueta', _('Etiqueta')
+            'poretiqueta', _('Etiqueta 1')
         );
+        $options = array();
         if (!PEAR::isError($sel)) {
             $options = array('' => '') +
                 htmlentities_array(
@@ -355,10 +356,25 @@ class PagEtiquetas extends PagBaseSimple
                         ORDER BY nombre"
                     )
                 );
-            $sel->loadArray($options);
         }
+        $sel->loadArray($options);
         $gr[] = $sel;
-        $form->addGroup($gr, null, _('Etiqueta'), '&nbsp;', false);
+        $form->addGroup($gr, null, _('Etiqueta 1'), '&nbsp;', false);
+        $gr = array();
+        $sel =& $form->createElement(
+            'select',
+            'critetiqueta2', _('Criterio Etiqueta 2')
+        );
+        $sel->loadArray(array('0' => _('tiene'), '1' => _('no tiene')));
+        $gr[] = $sel;
+        $sel =& $form->createElement(
+            'select',
+            'poretiqueta2', _('Etiqueta 2')
+        );
+        $sel->loadArray($options);
+        $gr[] = $sel;
+        $form->addGroup($gr, null, _('Etiqueta 2'), '&nbsp;', false);
+
     }
 
 
@@ -390,6 +406,8 @@ class PagEtiquetas extends PagBaseSimple
     {
         $pEtiqueta  = var_req_escapa('poretiqueta', $db, 32);
         $pCon = (int)var_req_escapa('critetiqueta', $db, 32);
+        $pEtiqueta2  = var_req_escapa('poretiqueta2', $db, 32);
+        $pCon2 = (int)var_req_escapa('critetiqueta2', $db, 32);
         if ($pEtiqueta != "") {
             if ($pCon === 0) {
                 agrega_tabla($tablas, 'caso_etiqueta');
@@ -408,8 +426,25 @@ class PagEtiquetas extends PagBaseSimple
                 //var_dump($where); die("x");
             }
         }
+        if ($pEtiqueta2 != "") {
+            if ($pCon2 === 0) {
+                consulta_and_sinap(
+                    $where, "caso.id",
+                    "(SELECT id_caso FROM caso_etiqueta
+                    WHERE id_etiqueta='$pEtiqueta2')",
+                    ' IN '
+                );
+            } else {
+                consulta_and_sinap(
+                    $where, "caso.id",
+                    "(SELECT id_caso FROM caso_etiqueta
+                    WHERE id_etiqueta = '$pEtiqueta2')",
+                    ' NOT IN '
+                );
+                //var_dump($where); die("x");
+            }
+        }
     }
-
 
     /**
      * Llamada desde consulta_web para completar consulta SQL en caso
