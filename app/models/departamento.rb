@@ -6,4 +6,9 @@ class Departamento < ActiveRecord::Base
 	has_many :ubicacion, foreign_key: "id_departamento", validate: true
 	has_many :desplazamiento, foreign_key: "departamentodecl", validate: true
 	has_many :victimasjr, foreign_key: "id_departamento", validate: true
+
+  validates_presence_of :id
+  validates_presence_of :id_pais
+  validates_presence_of :nombre
+  validates_presence_of :fechacreacion
 end
