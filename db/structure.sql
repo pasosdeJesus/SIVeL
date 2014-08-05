@@ -225,40 +225,6 @@ ALTER SEQUENCE actividad_id_seq OWNED BY actividad.id;
 
 
 --
--- Name: actividad_rangoedad; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE actividad_rangoedad (
-    id integer NOT NULL,
-    actividad_id integer,
-    rangoedad_id integer,
-    m integer,
-    f integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: actividad_rangoedad_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE actividad_rangoedad_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: actividad_rangoedad_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE actividad_rangoedad_id_seq OWNED BY actividad_rangoedad.id;
-
-
---
 -- Name: actividad_rangoedadac; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2947,13 +2913,6 @@ ALTER TABLE ONLY actividad ALTER COLUMN id SET DEFAULT nextval('actividad_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY actividad_rangoedad ALTER COLUMN id SET DEFAULT nextval('actividad_rangoedad_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY actividad_rangoedadac ALTER COLUMN id SET DEFAULT nextval('actividad_rangoedadac_id_seq'::regclass);
 
 
@@ -3013,14 +2972,6 @@ ALTER TABLE ONLY acreditacion
 
 ALTER TABLE ONLY actividad
     ADD CONSTRAINT actividad_pkey PRIMARY KEY (id);
-
-
---
--- Name: actividad_rangoedad_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY actividad_rangoedad
-    ADD CONSTRAINT actividad_rangoedad_pkey PRIMARY KEY (id);
 
 
 --
@@ -3900,20 +3851,6 @@ ALTER TABLE ONLY vinculoestado
 --
 
 CREATE INDEX index_actividad_on_rangoedadac_id ON actividad USING btree (rangoedadac_id);
-
-
---
--- Name: index_actividad_rangoedad_on_actividad_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_actividad_rangoedad_on_actividad_id ON actividad_rangoedad USING btree (actividad_id);
-
-
---
--- Name: index_actividad_rangoedad_on_rangoedad_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_actividad_rangoedad_on_rangoedad_id ON actividad_rangoedad USING btree (rangoedad_id);
 
 
 --
@@ -5387,4 +5324,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140804194616');
 INSERT INTO schema_migrations (version) VALUES ('20140804200235');
 
 INSERT INTO schema_migrations (version) VALUES ('20140804202958');
+
+INSERT INTO schema_migrations (version) VALUES ('20140805030341');
 

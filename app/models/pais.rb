@@ -7,4 +7,9 @@ class Pais < ActiveRecord::Base
 	has_many :ubicacion, foreign_key: "id_pais", validate: true
 	has_many :desplazamiento, foreign_key: "paisdecl", validate: true
 	has_many :victimasjr, foreign_key: "id_pais", validate: true
+
+  validates_presence_of :id
+  validates_presence_of :nombre
+  validates_presence_of :nombreiso
+  validates_presence_of :fechacreacion
 end
