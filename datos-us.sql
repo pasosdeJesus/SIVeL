@@ -73,6 +73,13 @@ INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-bc', '2014-0
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-nc', '2014-01-08', 'Nombre en Sector Social de Victima Colectiva'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-def', '2014-01-08', 'Valores por defecto en referencias a tablas básicas'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-fam', '2014-03-08', 'Tipos de relaciones'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-et', '2014-03-08', 'Listado de etnias mejorado'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-ig', '2014-03-08', 'Listado de iglesias mejorado'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-mp', '2014-03-08', 'Datos recientes'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-lo', '2014-03-08', 'Cuentas se bloquean tras varios intentos fallidos de ingreso'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-sxe', '2014-03-08', 'Vista con soundexesp de nombres de personas'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-sexo', '2014-03-08', 'Valida sexo de víctimas con modelo prob.'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-apn', '2014-03-08', 'Valida apellidos/nombres con modelo prob.'); 
     
 
 

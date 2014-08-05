@@ -871,6 +871,7 @@ CREATE MATERIALIZED VIEW vvictimasoundexesp AS
 
 -- Hombres - Mujeres
 
+-- Convierte un arreglo de cadenas en un conjunto de resultados en mayusculas
 CREATE OR REPLACE FUNCTION divarr(in_array ANYARRAY) RETURNS SETOF TEXT as
 $$
     SELECT ($1)[s] FROM generate_series(1,array_upper($1, 1)) AS s;
@@ -878,8 +879,10 @@ $$
 LANGUAGE SQL IMMUTABLE;
 
 
+-- Pareja (nombre, numero de caso)
 CREATE TYPE nomcod AS (nombre VARCHAR(100), caso INTEGER);
 
+-- Recibe un código y un arreglo de cadenas y convierte el arreglo en un cojunto de parejas (cadena, numero)
 CREATE OR REPLACE FUNCTION divarr_concod(in_array ANYARRAY, 
 	in_integer INTEGER) RETURNS SETOF nomcod as
 $$
@@ -887,6 +890,7 @@ $$
 $$
 LANGUAGE SQL IMMUTABLE;
 
+-- Vista con nombres de mujeres y frecuencia de cada nombre
 CREATE MATERIALIZED VIEW nmujeres AS 
 	SELECT  (p).nombre, COUNT((p).caso) AS frec
 	FROM (SELECT 
@@ -895,6 +899,7 @@ CREATE MATERIALIZED VIEW nmujeres AS
 		AND sexo='F' ORDER BY 1) AS r 
 	GROUP BY 1 ORDER BY 2;
 
+-- Vista con nombres de hombres y frecuencia de cada nombre
 CREATE MATERIALIZED VIEW nhombres AS 
 	SELECT  (p).nombre, COUNT((p).caso) AS frec
 	FROM (SELECT 
@@ -904,7 +909,7 @@ CREATE MATERIALIZED VIEW nhombres AS
 	GROUP BY 1 ORDER BY 2;
 
 
--- Probabilidad de que una cadena (sin espacios) sea un nombre de mujer
+-- Probabilidad de que una cadena (sin espacios) sea nombre de mujer
 CREATE OR REPLACE FUNCTION probcadm(in_text TEXT) RETURNS NUMERIC AS
 $$
 	SELECT CASE WHEN (SELECT SUM(frec) FROM nmujeres)=0 THEN 0
@@ -948,6 +953,36 @@ $$
 		FROM (SELECT p, row_number() OVER () AS rnum FROM 
 			divarr(string_to_array(trim($1), ' ')) AS p) 
 		AS s) AS s2) AS s3;
+$$
+LANGUAGE SQL IMMUTABLE;
+
+-- Vista con apellidos y frecuencia de cada uno
+CREATE MATERIALIZED VIEW napellidos AS 
+	SELECT  (p).nombre as apellido, COUNT((p).caso) AS frec
+	FROM (SELECT 
+		divarr_concod(string_to_array(trim(apellidos), ' '), id_caso) 
+		AS p 
+		FROM persona, victima WHERE victima.id_persona=persona.id 
+		ORDER BY 1) AS r 
+	GROUP BY 1 ORDER BY 2;
+
+-- Probabilidad de que una cadena (sin espacios) sea un apellido
+CREATE OR REPLACE FUNCTION probcadap(in_text TEXT) RETURNS NUMERIC AS
+$$
+	SELECT CASE WHEN (SELECT SUM(frec) FROM napellidos)=0 THEN 0
+		WHEN (SELECT COUNT(*) FROM napellidos WHERE apellido=$1)=0 THEN 0
+		ELSE (SELECT frec/(SELECT SUM(frec) FROM napellidos) 
+			FROM napellidos WHERE apellido=$1)
+		END
+$$
+LANGUAGE SQL IMMUTABLE;
+
+-- Idea de probabilidad que una cadena con espacios sea apellido
+CREATE OR REPLACE FUNCTION probapellido(in_text TEXT) RETURNS NUMERIC AS
+$$
+	SELECT sum(ppar) FROM (SELECT p, probcadap(p) AS ppar FROM (
+		SELECT p FROM divarr(string_to_array(trim($1), ' ')) AS p) 
+		AS s) AS s2;
 $$
 LANGUAGE SQL IMMUTABLE;
 

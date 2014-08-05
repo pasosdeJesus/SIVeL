@@ -3215,6 +3215,13 @@ if (!aplicado($idac)) {
         RETURNS TEXT AS
 $$
 SELECT ARRAY_TO_STRING(ARRAY_AGG(soundexesp(s)),' ')
+FROM (SELECT UNNEST(STRING_TO_ARRAY(
+		REGEXP_REPLACE(TRIM($1), '  *', ' '), ' ')) AS s                
+	      ORDER BY 1) AS n;
+$$
+        LANGUAGE SQL IMMUTABLE;"
+    );
+
     hace_consulta(
         $db, "CREATE MATERIALIZED VIEW vvictimasoundexesp AS
         SELECT victima.id_caso, persona.id AS id_persona,
@@ -3321,6 +3328,41 @@ $$
 
     aplicaact($act, $idac, 'Valida sexo de víctimas con modelo prob.'); 
 }
+
+$idac = '1.2-apn';
+if (!aplicado($idac)) {
+
+    hace_consulta(
+        $db, "CREATE MATERIALIZED VIEW napellidos AS 
+        SELECT  (p).nombre as apellido, COUNT((p).caso) AS frec
+        FROM (SELECT 
+            divarr_concod(string_to_array(trim(apellidos), ' '), id_caso) 
+            AS p 
+            FROM persona, victima WHERE victima.id_persona=persona.id 
+            ORDER BY 1) AS r 
+        GROUP BY 1 ORDER BY 2;
+    
+        CREATE OR REPLACE FUNCTION probcadap(in_text TEXT) RETURNS NUMERIC AS
+$$
+    SELECT CASE WHEN (SELECT SUM(frec) FROM napellidos)=0 THEN 0
+        WHEN (SELECT COUNT(*) FROM napellidos WHERE apellido=$1)=0 THEN 0
+        ELSE (SELECT frec/(SELECT SUM(frec) FROM napellidos) 
+            FROM napellidos WHERE apellido=$1)
+        END
+$$
+        LANGUAGE SQL IMMUTABLE 
+        CREATE OR REPLACE FUNCTION probapellido(in_text TEXT) RETURNS NUMERIC AS
+$$
+	SELECT sum(ppar) FROM (SELECT p, probcadap(p) AS ppar FROM (
+		SELECT p FROM divarr(string_to_array(trim($1), ' ')) AS p) 
+		AS s) AS s2;
+$$
+        LANGUAGE SQL IMMUTABLE; "
+    );
+    aplicaact($act, $idac, 'Valida apellidos con modelo prob.'); 
+}
+
+
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;

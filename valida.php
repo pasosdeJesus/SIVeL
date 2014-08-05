@@ -33,7 +33,7 @@ echo '<table width="100%"><td style="white-space: ' .
 echo '</div></b></td></table>';
 res_valida(
     $db, _("Casos con memo vacio"),
-    "SELECT id, fecha FROM caso WHERE memo='' ORDER BY fecha;"
+    "SELECT id, fecha FROM caso WHERE TRIM(memo)='' ORDER BY fecha;"
 );
 
 res_valida(
@@ -120,6 +120,8 @@ hace_consulta($db, 'REFRESH MATERIALIZED VIEW nmujeres');
 
 hace_consulta($db, 'REFRESH MATERIALIZED VIEW nhombres');
 
+hace_consulta($db, 'REFRESH MATERIALIZED VIEW napellidos');
+
 res_valida(
     $db, _("Nombres de mujeres que parecen de hombre"),
     "SELECT id_caso, nombres, probmujer(nombres) AS pmujer, 
@@ -129,6 +131,7 @@ res_valida(
     AND probhombre(nombres)>probmujer(nombres)
     AND nombres<>'N'"
 );
+
 
 res_valida(
     $db, _("Nombres de hombres que parecen de mujer"),
@@ -169,6 +172,51 @@ res_valida(
     AND probhombre(nombres)=probmujer(nombres)
     AND nombres<>'N'"
 );
+
+res_valida(
+    $db, _("Nombres muy cortos"),
+    "SELECT id_caso, nombres FROM persona, victima 
+    WHERE victima.id_persona=persona.id 
+    AND length(nombres) <= 2
+    AND nombres<>'N'"
+);
+res_valida(
+    $db, _("Apellidos muy cortos"),
+    "SELECT id_caso, nombres FROM persona, victima 
+    WHERE victima.id_persona=persona.id 
+    AND length(apellidos) <= 2
+    AND apellidos<>'N'"
+);
+
+res_valida(
+    $db, _("Nombres de mujeres que parecen apellidos"),
+    "SELECT id_caso, nombres, probmujer(nombres) AS pmujer, 
+    probapellido(nombres) AS papellidos FROM persona, victima 
+    WHERE victima.id_persona=persona.id 
+    AND sexo='F' 
+    AND probapellido(nombres)>probmujer(nombres)
+    AND nombres<>'N'"
+);
+
+res_valida(
+    $db, _("Nombres de hombres que parecen apellidos"),
+    "SELECT id_caso, nombres, probhombre(nombres) AS phombre, 
+    probapellido(nombres) AS papellidos FROM persona, victima 
+    WHERE victima.id_persona=persona.id 
+    AND sexo='M' 
+    AND probapellido(nombres)>probhombre(nombres)
+    AND nombres<>'N'"
+);
+
+res_valida(
+    $db, _("Apellidos que parecen nombre de hombre"),
+    "SELECT id_caso, apellidos, probhombre(apellidos) AS phombre, 
+    probapellido(apellidos) AS papellidos FROM persona, victima 
+    WHERE victima.id_persona=persona.id 
+    AND probapellido(apellidos)<probhombre(apellidos)
+    AND apellidos<>'N'"
+);
+
 
 
 
