@@ -79,6 +79,7 @@ Ejecutelas con:
 
 ```sh
 RAILS_ENV=test rake db:reset
+RAILS_ENV=test rake sivel:indices
 rake
 ```
 
