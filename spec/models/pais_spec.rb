@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'rails_helper'
 
 # Como nuestras pruebas a modelos se hacen en una base de datos

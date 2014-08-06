@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'rails_helper'
 
 RSpec.describe Persona, :type => :model do

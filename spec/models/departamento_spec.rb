@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'rails_helper'
 
 RSpec.describe Departamento, :type => :model do
