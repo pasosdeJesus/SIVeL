@@ -3,6 +3,7 @@ require 'rails_helper'
 # Como nuestras pruebas a modelos se hacen en una base de datos
 # que tiene muchos datos básicos (e.g información geográfica), 
 # no usamo database_clenaer, sino que las pruebas que crean elementos 
+# de datos básicos
 # son responsables de borrarlos
 RSpec.describe Pais, :type => :model do
   it "nuevo valido" do
