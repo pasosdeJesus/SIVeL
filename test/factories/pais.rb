@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :pais do
-    id 1
+    id 1000  # No interfiere con los ya definidos
     nombre "Pais1"
     nombreiso "Pais1"
     fechacreacion "2014-08-04"

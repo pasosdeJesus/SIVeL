@@ -2,12 +2,12 @@
 
 FactoryGirl.define do
   factory :departamento do
-    id 1
+		id 1000  # No interfiere
     nombre "Departamento1"
     latitud 1.5
     longitud 1.5
     fechacreacion "2014-08-04"
     fechadeshabilitacion nil
-    association :pais, factory: :pais
+		id_pais	862 # Venezuela
   end
 end

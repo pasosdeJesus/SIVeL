@@ -8,7 +8,7 @@ class Municipio < ActiveRecord::Base
 	belongs_to :departamento, foreign_key: "id_departamento", validate: true
 	belongs_to :pais, foreign_key: "id_pais", validate: true
 
-  validates_presence_of :id
+  validates_presence_of :id  # Diseñados en el caso de SIVeL 
   validates_presence_of :id_pais
   validates_presence_of :id_departamento
   validates_presence_of :nombre

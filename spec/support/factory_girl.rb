@@ -2,16 +2,17 @@ RSpec.configure do |config|
 	config.include FactoryGirl::Syntax::Methods
 
 	config.before(:suite) do
-		DatabaseCleaner.strategy = :transaction
-		DatabaseCleaner.clean_with(:truncation)
+		FactoryGirl.lint
+		#DatabaseCleaner.strategy = :transaction
+		#DatabaseCleaner.clean_with(:truncation)
 	end
 
 	config.before(:each) do
-		DatabaseCleaner.start
+		#DatabaseCleaner.start
 	end
 
 	config.after(:each) do
-		DatabaseCleaner.clean
+		#DatabaseCleaner.clean
 	end
 	#config.before(:suite) do
 	#	begin

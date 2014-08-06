@@ -15,6 +15,8 @@ class Persona < ActiveRecord::Base
 	belongs_to :municipio, foreign_key: "id_municipio", validate: true
 	belongs_to :clase, foreign_key: "id_clase", validate: true
 
+  # identificación autogenerada en este y demás modelos (excepto los de
+  # información geográfica).
   validates_presence_of :nombres
   validates_presence_of :apellidos
   validates_presence_of :sexo
