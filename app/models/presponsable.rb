@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Presponsable < ActiveRecord::Base
 	has_many :acto, foreign_key: "id_presponsable", validate: true
 	has_many :actocolectivo, foreign_key: "id_presponsable", validate: true

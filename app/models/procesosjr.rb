@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Procesosjr < ActiveRecord::Base
 	has_many :derecho_procesosjr, foreign_key: "id_proceso", validate: true, dependent: :destroy
 	belongs_to :proceso, foreign_key: "id_proceso", validate: true

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Respuesta < ActiveRecord::Base
 
   # Debería ser: belongs_to :casosjr, foreign_key: "id_caso", validate: true

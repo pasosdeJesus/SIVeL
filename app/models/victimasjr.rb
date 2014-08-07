@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Victimasjr < ActiveRecord::Base
 
 	# Orden de esquema en base

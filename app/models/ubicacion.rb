@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Ubicacion < ActiveRecord::Base
 	has_many :expulsion, class_name: "Desplazamiento", foreign_key: "id_expulsion", validate: true
 	has_many :llegada, class_name: "Desplazamiento", foreign_key: "id_llegada", validate: true

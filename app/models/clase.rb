@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Clase < ActiveRecord::Base
 	has_many :persona, foreign_key: "id_clase", validate: true
 	has_many :ubicacion, foreign_key: "id_clase", validate: true

@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Statusmigratorio < ActiveRecord::Base
 	has_many :casosjr, foreign_key: "id_statusmigratorio", validate: true
 

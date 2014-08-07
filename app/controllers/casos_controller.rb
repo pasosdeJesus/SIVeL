@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class CasosController < ApplicationController
   before_action :set_caso, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource

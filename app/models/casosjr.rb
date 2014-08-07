@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Casosjr < ActiveRecord::Base
 	has_many :respuesta, foreign_key: "id_caso", validate: true, 
 		dependent: :destroy

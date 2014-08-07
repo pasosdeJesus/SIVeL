@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Acto < ActiveRecord::Base
 	has_many :actosjr, foreign_key: "id_presponsable,id_persona,id_caso,id_categoria", validate: true
 	belongs_to :presponsable, foreign_key: "id_presponsable", validate: true

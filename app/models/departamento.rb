@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Departamento < ActiveRecord::Base
 	has_many :clase, foreign_key: "id_departamento", validate: true
 	has_many :municipio, foreign_key: "id_departamento", validate: true

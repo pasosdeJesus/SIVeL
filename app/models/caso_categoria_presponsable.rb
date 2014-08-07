@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class CasoCategoriaPresponsable < ActiveRecord::Base
 	belongs_to :tviolencia, foreign_key: "id_tviolencia", validate: true
 	belongs_to :categoria, foreign_key: "id_categoria", validate: true

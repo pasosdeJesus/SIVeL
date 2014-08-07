@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class CasoEtiqueta < ActiveRecord::Base
 
   self.table_name = 'caso_etiqueta'

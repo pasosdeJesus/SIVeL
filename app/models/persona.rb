@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Persona < ActiveRecord::Base
 	has_many :acto, foreign_key: "id_persona", validate: true
 	has_many :antecedente_victima, foreign_key: "id_persona", validate: true

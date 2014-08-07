@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Victima < ActiveRecord::Base
 	#has_many :antecedente_victima, foreign_key: [:id_persona, :id_caso], validate: true, dependent: :destroy
 	has_one :victimasjr, foreign_key: "id_victima", inverse_of: :victima, validate: true, dependent: :destroy

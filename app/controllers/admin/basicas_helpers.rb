@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module Admin
   module BasicasHelpers
     include ActionView::Helpers::TextHelper

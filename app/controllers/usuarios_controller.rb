@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'bcrypt'
 
 class UsuariosController < ApplicationController

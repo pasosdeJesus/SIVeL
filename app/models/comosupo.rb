@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Comosupo < ActiveRecord::Base
 	has_many :casosjr
 

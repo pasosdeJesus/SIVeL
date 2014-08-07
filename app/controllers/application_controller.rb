@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class ApplicationController < ActionController::Base
   before_filter do
 	  resource = controller_name.singularize.to_sym

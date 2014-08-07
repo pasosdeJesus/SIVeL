@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Usuario < ActiveRecord::Base
   @current_usuario = -1
   attr_accessor :current_usuario

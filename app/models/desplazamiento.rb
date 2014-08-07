@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Desplazamiento < ActiveRecord::Base
 
 	has_many :actosjr, foreign_key: "id_caso", validate: true
