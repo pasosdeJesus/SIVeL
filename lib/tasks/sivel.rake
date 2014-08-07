@@ -27,7 +27,7 @@ namespace :sivel do
 
 	# De implementacion de structure:dump de rake y de
 	# https://github.com/opdemand/puppet-modules/blob/master/rails/files/databases.rakeset
-  desc "Vuelca tablas básicas"
+  desc "Vuelca tablas básicas en orden"
   task vuelcabasicas: :environment do
 		abcs = ActiveRecord::Base.configurations
     connection = ActiveRecord::Base.connection()
@@ -42,33 +42,61 @@ namespace :sivel do
 			"motivosjr"
 		];
     tb= sb + (Ability::tablasbasicas - sb);
+    set_psql_env(abcs[Rails.env])
+    search_path = abcs[Rails.env]['schema_search_path']
+    unless search_path.blank?
+      search_path = search_path.split(",").map{|search_path_part| "--schema=#{Shellwords.escape(search_path_part.strip)}" }.join(" ")
+    end
+    archt = Dir::Tmpname.make_tmpname(["/tmp/vb", ".sql"], nil)
 		filename = "db/datos-basicas.sql"
-		File.open(filename, "w") { |f| f << "-- Volcado de tablas basicas\n\n
+    File.open(filename, "w") { |f| f << "-- Volcado de tablas basicas\n\n
 
     ALTER TABLE ONLY categoria
       DROP CONSTRAINT categoria_contadaen_fkey; 
     ALTER TABLE ONLY presponsable
       DROP CONSTRAINT presponsable_papa_fkey;
 
-			" }
-		set_psql_env(abcs[Rails.env])
-		search_path = abcs[Rails.env]['schema_search_path']
-		unless search_path.blank?
-			search_path = search_path.split(",").map{|search_path_part| "--schema=#{Shellwords.escape(search_path_part.strip)}" }.join(" ")
-		end
-		tb.each do |t|
-			command = "pg_dump -i -a -x -O --column-inserts -t #{t}  #{search_path} #{Shellwords.escape(abcs[Rails.env]['database'])} >> #{Shellwords.escape(filename)}"
-			puts command
-			raise "Error al volcar tabla #{t}" unless Kernel.system(command)
-    end
-		File.open(filename, "a") { |f| f << "
+      " 
+      tb.each do |t|
+        command = "pg_dump -i -a -x -O --column-inserts -t #{t}  #{search_path} #{Shellwords.escape(abcs[Rails.env]['database'])} > #{archt}"
+        puts command
+        raise "Error al volcar tabla #{t}" unless Kernel.system(command)
+        inserto = false
+        ordeno = false
+        porord = []
+        # Agrega volcado pero ordenando los INSERTS
+        # (pues pg_dump reordena arbitrariamente haciendo que entre
+        # un volcado y otro se vean diferencias con diff cuando no hay)
+        File.open(archt, "r") { |ent| 
+          ent.each_line { |line| 
+            if line[0,6] == "INSERT"
+              inserto=true
+              porord << line
+            else
+              if !inserto || (inserto && ordeno) 
+                f << line
+              else
+                porord.sort!
+                porord.each { |l|
+                  f << l
+                }
+                ordeno = true
+                f << line
+              end
+            end
+          }
+        }
+      end
+
+      f << "
     ALTER TABLE ONLY categoria
       ADD CONSTRAINT categoria_contadaen_fkey FOREIGN KEY (contadaen) 
       REFERENCES categoria(id); 
     ALTER TABLE ONLY presponsable
       ADD CONSTRAINT presponsable_papa_fkey FOREIGN KEY (papa) 
       REFERENCES presponsable(id);
-		" }
+      " 
+    }
   end
 
  	desc "Actualiza tablas básicas"
