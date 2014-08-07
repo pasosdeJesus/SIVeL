@@ -10,8 +10,8 @@ class Ability
   ROLSIST   = 6
 
   ROLES = [["Administrador", ROLADMIN], ["Invitado Nacional", ROLINV], 
-      ["Director Nacional", ROLDIR], ["Coordinador oficina", ROLCOOR], 
-      ["Analista nacional", ROLANALI], ["Sistematizador oficina", ROLSIST]]
+    ["Director Nacional", ROLDIR], ["Coordinador oficina", ROLCOOR], 
+    ["Analista nacional", ROLANALI], ["Sistematizador oficina", ROLSIST]]
 
   @@tablasbasicas = [
     'actividadarea', 'actividadoficio', 'aslegal', 'aspsicosocial', 'ayudasjr', 
@@ -33,45 +33,45 @@ class Ability
   def initialize(usuario)
     can :contar, Caso
     can :buscar, Caso
-	  if !usuario.nil? && !usuario.rol.nil? then
+    if !usuario.nil? && !usuario.rol.nil? then
       case usuario.rol 
       when Ability::ROLSIST
         can :read, Caso, casosjr: { id_regionsjr: usuario.regionsjr_id }
         can :new, Caso
         can [:update, :create, :destroy], Caso, 
-					casosjr: { asesor: usuario.id, id_regionsjr:usuario.regionsjr_id }
-    		can :read, Actividad
+          casosjr: { asesor: usuario.id, id_regionsjr:usuario.regionsjr_id }
+        can :read, Actividad
         can :new, Actividad
         can [:update, :create, :destroy], Actividad, 
-					oficina: { id: usuario.regionsjr_id}
+          oficina: { id: usuario.regionsjr_id}
       when Ability::ROLANALI
         can :read, Caso
         can :new, Caso
         can [:update, :create, :destroy], Caso, 
-					casosjr: { id_regionsjr: usuario.regionsjr_id }
-    		can :read, Actividad
+          casosjr: { id_regionsjr: usuario.regionsjr_id }
+        can :read, Actividad
         can :new, Actividad
         can [:update, :create, :destroy], Actividad, 
-					oficina: { id: usuario.regionsjr_id}
+          oficina: { id: usuario.regionsjr_id}
       when Ability::ROLCOOR
         can :read, Caso
         can :new, Caso
         can [:update, :create, :destroy, :poneretcomp], Caso, 
-					casosjr: { id_regionsjr: usuario.regionsjr_id }
-    		can :read, Actividad
+          casosjr: { id_regionsjr: usuario.regionsjr_id }
+        can :read, Actividad
         can :new, Actividad
         can [:update, :create, :destroy], Actividad, 
-					oficina: { id: usuario.regionsjr_id}
-				can :new, Usuario
+          oficina: { id: usuario.regionsjr_id}
+        can :new, Usuario
         can [:read, :manage], Usuario, regionsjr: { id: usuario.regionsjr_id}
       when Ability::ROLDIR
         can [:read, :new, :update, :create, :destroy, :ponetetcomp], Caso
         can [:read, :new, :update, :create, :destroy], Actividad
         can :manage, Usuario
-				can :manage, :tablasbasicas
+        can :manage, :tablasbasicas
         @@tablasbasicas.each do |t|
-            c = t.capitalize.constantize
-				    can :manage, c
+          c = t.capitalize.constantize
+          can :manage, c
         end
       when Ability::ROLINV
         cannot :buscar, Caso
@@ -80,10 +80,10 @@ class Ability
         can :manage, Caso
         can :manage, Actividad
         can :manage, Usuario
-				can :manage, :tablasbasicas
+        can :manage, :tablasbasicas
         @@tablasbasicas.each do |t|
-            c = t.capitalize.constantize
-				    can :manage, c
+          c = t.capitalize.constantize
+          can :manage, c
         end
       end
     end

@@ -154,7 +154,7 @@ rc_cmd $1
 * Detenga el servidor de desarrollo (teclas Control-C)
 * Actualice fuentes: ```git pull```
 * Instale nuevas versiones de gemas requeridas: 
-```sh
+``` sh
   sudo bundle install
   bundle install
 ```
@@ -165,5 +165,16 @@ rc_cmd $1
 
 ### Convenciones
 
+2 espacios de indentación.
+
+Para configurarlo en vim, agregue al final de ==~/.vim/ftplugin/ruby.vim==:
+``` vim
+set shiftwidth=2
+set softtabstop=2
+set expandtab
+set autoindent
+```
+
+http://betterspecs.org/
 http://www.caliban.org/ruby/rubyguide.shtml
 
