@@ -1,3 +1,4 @@
+# vim: set expandtab tabstop=2 shiftwidth=2 fileencoding=utf-8:
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
@@ -218,6 +219,7 @@ $(document).on 'ready page:load',  ->
         " que se eliminarán con " + nomesteelem + ", ¿Continuar?")
       if (r==false)
         papa.data('remove-cancel', 'true')
+        root.elempe = []
       else
         papa.data('remove-cancel', 'false')
   )
@@ -249,6 +251,7 @@ $(document).on 'ready page:load',  ->
         " que se eliminarán con " + nomesteelem + ", ¿Continuar?")
       if (r==false)
         papa.data('remove-cancel', 'true')
+        root.elempe = []
       else
         papa.data('remove-cancel', 'false')
   )
@@ -265,7 +268,8 @@ $(document).on 'ready page:load',  ->
     if (root.elempe && root.elempe.length>0) 
       return
     root.elempe = []
-    root.elimrefugio = false
+    root.elimrefugiosalida = false
+    root.elimrefugiollegada = false
     usel=papa.find('.caso_ubicacion_id input')
     if (usel.length>0)
       id = usel.val()
@@ -279,22 +283,27 @@ $(document).on 'ready page:load',  ->
         if ($(e).val() == id) 
           root.elempe.push($(e).parent().parent());
       )
-      if ($('#caso_casosjr_attributes_id_salida').val() == id) 
-        root.elimrefugio = true;
     msg=""
-    msgsep="Con " + nomesteelem + " por eliminar "   
+    msgsep="Junto con " + nomesteelem + " por eliminar: "   
     if (root.elempe.length>0)
       msg+=msgsep + root.elempe.length + " " + nomelempe
       msgsep=" y "
-    if (root.elimrefugio) 
-      msg+=msgsep + "el refugio"; 
-    if (msg !== "")
+    if ($('#caso_casosjr_attributes_id_salida').val() == id) 
+      msg+=msgsep + "Sitio de Salida del Refugio"; 
+      root.elimrefugiosalida = true;
+      msgsep=" y "
+    if ($('#caso_casosjr_attributes_id_llegada').val() == id) 
+      msg+=msgsep + "Sitio de Llegada del Refugio"; 
+      root.elimrefugiollegada = true;
+      msgsep=" y "
+
+    if (msg != "")
       msg+=", ¿Continuar?"
       r = confirm(msg)
       if (r==false)
-        papa.data('remove-cancel', 'true')
-    	root.elempe = []
-    	root.elimrefugio = false
+       papa.data('remove-cancel', 'true')
+       root.elempe = []
+       root.elimrefugio = false
       else
         papa.data('remove-cancel', 'false')
   )
@@ -303,6 +312,12 @@ $(document).on 'ready page:load',  ->
   $('#ubicacion').on('cocoon:after-remove', (e, papa) ->
     eliminaPendientes(root.elempe);
     root.elempe = []
+    if (root.elimrefugiosalida) 
+      $('#caso_casosjr_attributes_id_salida').val("")
+      root.elimrefugiosalida = false
+    if (root.elimrefugiollegada) 
+      $('#caso_casosjr_attributes_id_llegada').val("")
+      root.elimrefugiollegada = false
   )
  
   # Antes de eliminar desplazamiento confirmar si se eliminan dependientes
@@ -325,6 +340,7 @@ $(document).on 'ready page:load',  ->
           " que se eliminarán con " + nomesteelem + ", ¿Continuar?")
         if (r==false)
           papa.data('remove-cancel', 'true')
+          root.elempe = []
         else
           papa.data('remove-cancel', 'false')
       lelempe = root.elempe.length
@@ -340,6 +356,7 @@ $(document).on 'ready page:load',  ->
         " que se eliminarán con " + nomesteelem + ", ¿Continuar?")
       if (r==false)
         papa.data('remove-cancel', 'true')
+        root.elempe = []
   )
 
   # Tras eliminar desplazamiento, eliminar dependientes
