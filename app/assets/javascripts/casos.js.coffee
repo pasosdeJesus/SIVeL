@@ -265,6 +265,7 @@ $(document).on 'ready page:load',  ->
     if (root.elempe && root.elempe.length>0) 
       return
     root.elempe = []
+    root.elimrefugio = false
     usel=papa.find('.caso_ubicacion_id input')
     if (usel.length>0)
       id = usel.val()
@@ -278,12 +279,22 @@ $(document).on 'ready page:load',  ->
         if ($(e).val() == id) 
           root.elempe.push($(e).parent().parent());
       )
-       
+      if ($('#caso_casosjr_attributes_id_salida').val() == id) 
+        root.elimrefugio = true;
+    msg=""
+    msgsep="Con " + nomesteelem + " por eliminar "   
     if (root.elempe.length>0)
-      r = confirm("Hay " + root.elempe.length + " " + nomelempe + 
-        " que se eliminarán con " + nomesteelem + ", ¿Continuar?")
+      msg+=msgsep + root.elempe.length + " " + nomelempe
+      msgsep=" y "
+    if (root.elimrefugio) 
+      msg+=msgsep + "el refugio"; 
+    if (msg !== "")
+      msg+=", ¿Continuar?"
+      r = confirm(msg)
       if (r==false)
         papa.data('remove-cancel', 'true')
+    	root.elempe = []
+    	root.elimrefugio = false
       else
         papa.data('remove-cancel', 'false')
   )

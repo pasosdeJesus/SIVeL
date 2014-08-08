@@ -60,8 +60,13 @@ describe "Llenar caso con javascript", :js => true do
       click_on "Núcleo Familiar"  # Cerrar requerido en navegadores
 
       # Sitios Geográficos
-      click_on "Sitios geográficos de refugios y desplazamientos"
+      click_link "Sitios geográficos de refugios y desplazamientos"
       page.save_screenshot('sitio1.png')
+      if (!find_link('Añadir Sitio Geográfico').visible?)
+        click_link "Sitios geográficos de refugios y desplazamientos"
+      end
+      page.save_screenshot('sitio2.png')
+      expect(page).to have_content "Añadir Sitio Geográfico"
       click_on "Añadir Sitio Geográfico"
       page.save_screenshot('sitio2.png')
       within ("div#ubicacion") do 
@@ -97,6 +102,10 @@ describe "Llenar caso con javascript", :js => true do
       
       # Refugio
       click_on "Refugio"
+      page.save_screenshot('ref1.png')
+      if (!find(:css, '#caso_casosjr_attributes_id_salida').visible?)
+        click_on "Refugio"
+      end
       expect(page).to have_field('Fecha de Salida', with: '2014-08-03')
       within ("div#refugio") do 
         find('#caso_casosjr_attributes_id_salida').click
