@@ -4,9 +4,6 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'factory_girl'
 require 'capybara/rspec'
-require 'capybara/poltergeist'
-
-Capybara.javascript_driver = :poltergeist
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -60,4 +57,6 @@ RSpec.configure do |config|
 
 	config.include Devise::TestHelpers, :type => :controller
 	config.include ControllerHelpers, :type => :controller
+
+  Capybara.javascript_driver = :webkit
 end
