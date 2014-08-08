@@ -1,7 +1,17 @@
 language: ruby
 rvm:
         - 1.9.3
+        - 2.1.2
+notifications:
+        email: false
+script: xvfb-run rake
+env:
+        global:
+                - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
 before_install: 
+        - sudo apt-add-repository -y ppa:ubuntu-sdk-team/ppa
+        - sudo apt-get update
+        - sudo apt-get install libqt5webkit5-dev qtdeclarative5-dev qtlocation5-dev qtsensors5-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev qt4-default
         - cp config/database.travis.yml config/database.yml
         - bundle install
         - sudo locale-gen --no-archive es_CO.UTF-8
