@@ -26,8 +26,15 @@ class Casosjr < ActiveRecord::Base
 	validates_presence_of :fecharec
 	validates_presence_of :asesor
   validates_presence_of :regionsjr
-  validate :llegada_posterior_a_salida
 
+  validate :sitios_diferentes
+  def sitios_diferentes
+    if llegada.present? && salida.present? && llegada=salida
+      errors.add(:llegada, " debe ser diferente al sitio de salida")
+    end
+  end
+
+  validate :llegada_posterior_a_salida
   def llegada_posterior_a_salida
     if fechallegada.present? && fechasalida.present? && fechallegada<fechasalida
       errors.add(:fechallegada, " debe ser posterior a la fecha de salida")

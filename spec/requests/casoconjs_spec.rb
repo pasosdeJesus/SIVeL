@@ -89,19 +89,37 @@ describe "Llenar caso con javascript", :js => true do
       #click_button "Guardar"
       #expect(page).to have_content("2014-08-03")
       #click_on "Editar"
-      # Desplazamiento
+      
+      # Refugio
       click_on "Refugio"
       expect(page).to have_field('Fecha de Salida', with: '2014-08-03')
-      page.save_screenshot('s.png')
-      print page.html
       within ("div#refugio") do 
+        find('#caso_casosjr_attributes_id_salida').click
         select('VENEZUELA / ARAGUA', from: 'Sitio de Salida') 
         fill_in "Fecha de Llegada", with: '2014-08-04'
-        select('COLOMBIA / BOYACA', from: 'Sitio de Llegada') 
+        find('#caso_casosjr_attributes_id_llegada').click
+        select('COLOMBIA / BOYACÁ', from: 'Sitio de Llegada') 
         select('R2000 RAZA', from: 'Causa del Refugio') 
         fill_in "Observaciones", with: 'Observaciones refugio'
       end
       click_on "Refugio"
+
+      #Desplazamiento
+      click_on "Desplazamientos"
+      click_on "Añadir Desplazamiento"
+      expect(find('#desplazamiento')).to 
+             have_field('Fecha de Salida', with: '2014-08-03')
+      within ("#desplazamiento") do 
+        click_on "Sitio de Salida"
+        page.save_screenshot('s0.png')
+        select('VENEZUELA / ARAGUA', from: 'Sitio de Salida') 
+        fill_in "Fecha de Llegada", with: '2014-08-04'
+        click_on "Sitio de Llegada"
+        select('COLOMBIA / BOYACÁ', from: 'Sitio de Llegada') 
+        fill_in "Descripción", with: 'Descripción desplazamiento'
+      end
+
+      click_on "Desplazamientos"
 
       click_button "Guardar"
       expect(page).to have_content("2014-08-03")

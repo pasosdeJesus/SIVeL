@@ -3,7 +3,7 @@
     <%= f.input :fechaexpulsion, 
         :input_html => { "data-behaviour" => "datepicker",
           value: f.object.fechaexpulsion || @caso.fecha },
-        :as => :string, :label => "Fecha Expulsión" %>
+        :as => :string, :label => "Fecha de Expulsión" %>
     <%= f.association :expulsion,
         collection: Ubicacion.where(:id_caso => @caso.id),
         label: "Sitio de Expulsión",
@@ -14,7 +14,7 @@
         value_method: :id %>
     <%= f.input :fechallegada, 
         :input_html => { "data-behaviour" => "datepicker" },
-        :as => :string, :label => "Fecha Llegada" %>
+        :as => :string, :label => "Fecha de Llegada" %>
     <%= f.association :llegada,
         collection: Ubicacion.where(:id_caso => @caso.id),
 	      label: "Sitio de Llegada",
