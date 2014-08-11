@@ -54,10 +54,10 @@ describe "Llenar caso con javascript", :js => true do
         select('PESCADOR', from: 'Actividad/Oficio actual') 
         select('PRIMARIA', from: 'Nivel Escolar') 
       end
-      #click_button "Guardar"
-      #expect(page).to have_content("2014-08-03")
-      #click_on "Editar"
-      click_on "Núcleo Familiar"  # Cerrar requerido en navegadores
+      click_button "Guardar"
+      expect(page).to have_content("2014-08-03")
+      click_on "Editar"
+      #click_on "Núcleo Familiar"  # Cerrar requerido en navegadores
 
       # Sitios Geográficos
       click_link "Sitios geográficos de refugios y desplazamientos"
@@ -95,10 +95,10 @@ describe "Llenar caso con javascript", :js => true do
         fill_in "Longitud", with: '-74.32'
         select('RURAL', from: 'Tipo de Sitio') 
       end
-      click_on "Sitios geográficos de refugios y desplazamientos"
-      #click_button "Guardar"
-      #expect(page).to have_content("2014-08-03")
-      #click_on "Editar"
+      #click_on "Sitios geográficos de refugios y desplazamientos"
+      click_button "Guardar"
+      expect(page).to have_content("2014-08-03")
+      click_on "Editar"
       
       # Refugio
       click_on "Refugio"
@@ -116,7 +116,10 @@ describe "Llenar caso con javascript", :js => true do
         select('R2000 RAZA', from: 'Causa del Refugio') 
         fill_in "Observaciones", with: 'Observaciones refugio'
       end
-      click_on "Refugio"
+      click_button "Guardar"
+      expect(page).to have_content("2014-08-03")
+      click_on "Editar"
+      #click_on "Refugio"
 
       #Desplazamiento
       click_on "Desplazamientos"
@@ -132,8 +135,10 @@ describe "Llenar caso con javascript", :js => true do
         select('COLOMBIA / BOYACÁ', from: 'Sitio de Llegada') 
         fill_in "Descripción", with: 'Descripción desplazamiento'
       end
-
-      click_on "Desplazamientos"
+      click_button "Guardar"
+      expect(page).to have_content("2014-08-03")
+      click_on "Editar"
+      #click_on "Desplazamientos"
 
       click_button "Guardar"
       expect(page).to have_content("2014-08-03")
