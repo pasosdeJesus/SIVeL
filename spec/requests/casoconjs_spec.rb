@@ -29,7 +29,6 @@ describe "Llenar caso con javascript", :js => true do
       # Núcleo familiar
       click_on "Núcleo Familiar"
       click_on "Añadir Víctima"
-      page.save_screenshot('ben1.png')
       within ("div#victima") do 
         fill_in "Nombres", with: 'Nombres Beneficiario'
         fill_in "Apellidos", with: 'Apellidos Beneficiario'
@@ -61,14 +60,11 @@ describe "Llenar caso con javascript", :js => true do
 
       # Sitios Geográficos
       click_link "Sitios geográficos de refugios y desplazamientos"
-      page.save_screenshot('sitio1.png')
       if (!find_link('Añadir Sitio Geográfico').visible?)
         click_link "Sitios geográficos de refugios y desplazamientos"
       end
-      page.save_screenshot('sitio2.png')
       expect(page).to have_content "Añadir Sitio Geográfico"
       click_on "Añadir Sitio Geográfico"
-      page.save_screenshot('sitio2.png')
       within ("div#ubicacion") do 
         select('VENEZUELA', from: 'País') 
         select('ARAGUA', from: 'Estado/Departamento') 
@@ -80,9 +76,7 @@ describe "Llenar caso con javascript", :js => true do
         fill_in "Longitud", with: '-74.3'
         select('URBANO', from: 'Tipo de Sitio') 
       end
-      page.save_screenshot('sitio3.png')
       click_on "Añadir Sitio Geográfico"
-      page.save_screenshot('sitio4.png')
       su = "//div[@id='ubicacion']/div/div[2]"
       within(:xpath, su) do 
         select('COLOMBIA', from: 'País') 
@@ -102,7 +96,6 @@ describe "Llenar caso con javascript", :js => true do
       
       # Refugio
       click_on "Refugio"
-      page.save_screenshot('ref1.png')
       if (!find(:css, '#caso_casosjr_attributes_id_salida').visible?)
         click_on "Refugio"
       end
@@ -124,14 +117,13 @@ describe "Llenar caso con javascript", :js => true do
       #Desplazamiento
       click_on "Desplazamientos"
       click_on "Añadir Desplazamiento"
-      expect(find('#desplazamiento')).to have_field( 'Fecha de Salida', 
+      expect(find('#desplazamiento')).to have_field( 'Fecha de Expulsión', 
                                                     with: '2014-08-03')
       within ("#desplazamiento") do 
-        click_on "Sitio de Salida"
-        page.save_screenshot('s0.png')
-        select('VENEZUELA / ARAGUA', from: 'Sitio de Salida') 
+        find_field('Sitio de Expulsión').click
+        select('VENEZUELA / ARAGUA', from: 'Sitio de Expulsión') 
         fill_in "Fecha de Llegada", with: '2014-08-04'
-        click_on "Sitio de Llegada"
+        find_field('Sitio de Llegada').click
         select('COLOMBIA / BOYACÁ', from: 'Sitio de Llegada') 
         fill_in "Descripción", with: 'Descripción desplazamiento'
       end
