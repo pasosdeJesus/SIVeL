@@ -400,5 +400,6 @@ $(document).on 'ready page:load',  ->
   # http://stackoverflow.com/questions/16777003/what-is-the-easiest-way-to-disable-enable-buttons-and-links-jquery-bootstrap
   #$('body').on('click', 'a.disabled', (e) -> 
   #  e.preventDefault() )
+  
 
   return

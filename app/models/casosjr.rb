@@ -29,7 +29,7 @@ class Casosjr < ActiveRecord::Base
 
   validate :sitios_diferentes
   def sitios_diferentes
-    if llegada.present? && salida.present? && llegada=salida
+    if llegada.present? && salida.present? && id_llegada == id_salida
       errors.add(:llegada, " debe ser diferente al sitio de salida")
     end
   end
