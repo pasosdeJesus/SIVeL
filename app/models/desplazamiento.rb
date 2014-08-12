@@ -32,10 +32,19 @@ class Desplazamiento < ActiveRecord::Base
 
   validate :sitios_diferentes
   def sitios_diferentes
-    if llegada.present? && expulsion.present? && llegada=expulsion
+    if llegada.present? && expulsion.present? && id_llegada == id_expulsion
       errors.add(:llegada, " debe ser diferente al sitio de expulsion")
     end
   end
+
+  validate :fechaexpulsion_unica
+  def fechaexpulsion_unica
+    if fechaexpulsion.present? && Desplazamiento.where(id_caso: id_caso,
+      fechaexpulsion: fechaexpulsion).count>1
+      errors.add(:fechaexpulsion, " debe ser única")
+    end
+  end
+
 
 
 end
