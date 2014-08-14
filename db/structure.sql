@@ -3,6 +3,7 @@
 --
 
 SET statement_timeout = 0;
+SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -918,22 +919,6 @@ CREATE SEQUENCE causaref_seq
     NO MINVALUE
     NO MAXVALUE
     CACHE 1;
-
-
---
--- Name: causaref; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE causaref (
-    id integer DEFAULT nextval('causaref_seq'::regclass) NOT NULL,
-    nombre character varying(50) NOT NULL,
-    fechacreacion date DEFAULT ('now'::text)::date NOT NULL,
-    fechadeshabilitacion date,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    codigo character varying(10),
-    CONSTRAINT causaref_check CHECK (((fechadeshabilitacion IS NULL) OR (fechadeshabilitacion >= fechacreacion)))
-);
 
 
 --
@@ -2563,7 +2548,6 @@ CREATE TABLE respuesta (
     gestionessjr character varying(5000),
     observaciones character varying(5000),
     id_personadesea integer DEFAULT 0,
-    id_causaref integer DEFAULT 0,
     verifcsjr character varying(5000),
     verifcper character varying(5000),
     efectividad character varying(5000),
@@ -3235,14 +3219,6 @@ ALTER TABLE ONLY casosjr
 
 ALTER TABLE ONLY categoria
     ADD CONSTRAINT categoria_pkey PRIMARY KEY (id);
-
-
---
--- Name: causaref_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY causaref
-    ADD CONSTRAINT causaref_pkey PRIMARY KEY (id);
 
 
 --
@@ -4975,14 +4951,6 @@ ALTER TABLE ONLY respuesta
 
 
 --
--- Name: respuesta_id_causaref_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY respuesta
-    ADD CONSTRAINT respuesta_id_causaref_fkey FOREIGN KEY (id_causaref) REFERENCES causaref(id);
-
-
---
 -- Name: respuesta_id_personadesea_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -5325,4 +5293,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140804200235');
 INSERT INTO schema_migrations (version) VALUES ('20140804202958');
 
 INSERT INTO schema_migrations (version) VALUES ('20140805030341');
+
+INSERT INTO schema_migrations (version) VALUES ('20140814184537');
 
