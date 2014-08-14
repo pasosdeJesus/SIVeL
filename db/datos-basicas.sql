@@ -416,7 +416,7 @@ INSERT INTO pais (id, nombre, nombreiso, latitud, longitud, alfa2, alfa3, codiso
 INSERT INTO pais (id, nombre, nombreiso, latitud, longitud, alfa2, alfa3, codiso, div1, div2, div3, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (858, 'URUGUAY', 'URUGUAY', NULL, NULL, 'UY', 'URY', NULL, NULL, NULL, NULL, '2014-02-17', NULL, NULL, NULL);
 INSERT INTO pais (id, nombre, nombreiso, latitud, longitud, alfa2, alfa3, codiso, div1, div2, div3, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (86, 'TERRITORIO BRITÁNICO DEL OCÉANO ÍNDICO', 'TERRITORIO BRITANICO DEL OCEANO INDICO', NULL, NULL, 'IO', 'IOT', NULL, NULL, NULL, NULL, '2014-02-17', NULL, NULL, NULL);
 INSERT INTO pais (id, nombre, nombreiso, latitud, longitud, alfa2, alfa3, codiso, div1, div2, div3, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (860, 'UZBEKISTÁN', 'UZBEKISTAN', NULL, NULL, 'UZ', 'UZB', NULL, NULL, NULL, NULL, '2014-02-17', NULL, NULL, NULL);
-INSERT INTO pais (id, nombre, nombreiso, latitud, longitud, alfa2, alfa3, codiso, div1, div2, div3, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (862, 'VENEZUELA', 'VENEZUELA, REPUBLICA BOLIVARIANA DE', NULL, NULL, 'VE', 'VEN', NULL, NULL, NULL, NULL, '2014-02-17', NULL, NULL, NULL);
+INSERT INTO pais (id, nombre, nombreiso, latitud, longitud, alfa2, alfa3, codiso, div1, div2, div3, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (862, 'VENEZUELA', 'VENEZUELA, REPUBLICA BOLIVARIANA DE', -66.221500000000006, 7.72320000000000029, 'VE', 'VEN', NULL, NULL, NULL, NULL, '2014-02-17', NULL, NULL, NULL);
 INSERT INTO pais (id, nombre, nombreiso, latitud, longitud, alfa2, alfa3, codiso, div1, div2, div3, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (882, 'SAMOA', 'SAMOA', NULL, NULL, 'WS', 'WSM', NULL, NULL, NULL, NULL, '2014-02-17', NULL, NULL, NULL);
 INSERT INTO pais (id, nombre, nombreiso, latitud, longitud, alfa2, alfa3, codiso, div1, div2, div3, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (887, 'YEMEN', 'YEMEN', NULL, NULL, 'YE', 'YEM', NULL, NULL, NULL, NULL, '2014-02-17', NULL, NULL, NULL);
 INSERT INTO pais (id, nombre, nombreiso, latitud, longitud, alfa2, alfa3, codiso, div1, div2, div3, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (894, 'ZAMBIA', 'ZAMBIA', NULL, NULL, 'ZM', 'ZMB', NULL, NULL, NULL, NULL, '2014-02-17', NULL, NULL, NULL);
@@ -1946,7 +1946,6 @@ INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacrea
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion, created_at, updated_at, id_pais) VALUES (887, 'YARUMAL', 5, 7, -75.5, '2001-01-01', NULL, NULL, NULL, 170);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion, created_at, updated_at, id_pais) VALUES (888, 'MORICHAL (MORICHAL NUEVO)', 94, 2.23919999999999986, -69.9416400000000067, '2001-01-01', NULL, NULL, NULL, 170);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion, created_at, updated_at, id_pais) VALUES (889, 'YAVARATÉ', 97, 0.610339999999999994, -69.2040700000000015, '2001-01-01', NULL, NULL, NULL, 170);
-INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion, created_at, updated_at, id_pais) VALUES (889, 'dsasd', 25, NULL, NULL, '2014-06-03', NULL, '2014-06-04 04:36:33.782966', '2014-06-04 04:36:33.782966', 862);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion, created_at, updated_at, id_pais) VALUES (890, 'YOLOMBÓ', 5, 6.66666670000000039, -75, '2001-01-01', NULL, NULL, NULL, 170);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion, created_at, updated_at, id_pais) VALUES (890, 'YOTOCO', 76, 3.91666669999999995, -76.3333333000000067, '2001-01-01', NULL, NULL, NULL, 170);
 INSERT INTO municipio (id, nombre, id_departamento, latitud, longitud, fechacreacion, fechadeshabilitacion, created_at, updated_at, id_pais) VALUES (892, 'YUMBO', 76, 3.58499999999999996, -76.495833300000001, '2001-01-01', NULL, NULL, NULL, 170);
@@ -15660,7 +15659,6 @@ SET search_path = public, pg_catalog;
 
 INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (0, 'SIN INFORMACIÓN', '2013-06-16', NULL, NULL, NULL);
 INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'ALIMENTACIÓN', '2013-06-16', NULL, NULL, NULL);
-INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (101, 'otra', '2014-05-29', NULL, '2014-05-29 18:35:37.94846', '2014-05-29 18:35:37.94846');
 INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'ALOJAMIENTO', '2013-06-16', NULL, NULL, NULL);
 INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'APOYO A PROYECTO PRODUCTIVO', '2013-06-16', NULL, NULL, NULL);
 INSERT INTO ayudaestado (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'ATENCIÓN PSICOLÓGICA O PSICOSOCIAL', '2013-06-16', NULL, NULL, NULL);
@@ -15795,7 +15793,7 @@ SET search_path = public, pg_catalog;
 INSERT INTO actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'PSICOSOCIAL', '', '2013-12-04', NULL, '2014-01-09 02:23:28.732636', '2014-03-07 18:43:00.812476');
 INSERT INTO actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (101, 'COMUNICACIONES', '', '2014-01-29', NULL, '2014-01-29 16:15:43.824216', '2014-03-07 18:43:45.251193');
 INSERT INTO actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (103, 'INTEGRACIÓN LOCAL', '', '2014-02-08', NULL, '2014-02-08 13:30:24.014081', '2014-03-07 18:43:56.884996');
-INSERT INTO actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (105, 'ACOMPAÑAMIENTO PASTORAL', '', '2014-02-08', NULL, '2014-05-15 21:54:52.38907', '2014-05-15 21:55:15.864721');
+INSERT INTO actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (105, 'ACOMPAÑAMIENTO PASTORAL', '', '2014-02-08', NULL, '2014-05-15 21:54:52.38907', '2014-08-04 15:33:38.05227');
 INSERT INTO actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'JURÍDICA - LEGAL', '', '2013-12-04', NULL, '2014-01-09 02:23:28.745075', '2014-03-07 18:43:14.269965');
 INSERT INTO actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'ORGANIZACIÓN COMUNITARIA', '', '2013-12-04', NULL, '2014-01-09 02:23:28.747505', '2014-03-07 18:44:06.691283');
 INSERT INTO actividadarea (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'EMPRENDIMIENTO', '', '2013-12-04', NULL, '2014-01-09 02:23:28.749798', '2014-03-07 18:43:27.89929');
@@ -15879,14 +15877,12 @@ INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at
 INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'RENUNCIA AL PROCEDIMIENTO DE SOLICITUD DE REFUGIO: TIPO Y MOTIVOS', '2014-02-14', NULL, NULL, '2014-08-04 14:29:09.190492');
 INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (10, 'ASESORÍA SOBRE TRÁMITES DE NATURALIZACIÓN', '2014-02-14', NULL, NULL, '2014-08-04 14:27:04.064535');
 INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (11, 'APERTURA EXPEDIENTE SOLICITUD DE REFUGIO', '2014-02-14', NULL, NULL, '2014-08-04 14:26:02.056113');
-INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (12, 'INFORMACIÓN DERECHOS, DEBERES Y CONDICIÓN PROCEDIMIENTO DE REFUGIO', '2014-02-14', NULL, NULL, NULL);
+INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (12, 'INFORMACIÓN DERECHOS, DEBERES Y CONDICIÓN PROCEDIMIENTO DE REFUGIO', '2014-02-14', NULL, NULL, '2014-08-04 14:28:13.313206');
 INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (13, 'GESTIONES PARA TRÁMITES DE DOCUMENTACIÓN ANTE CNR Y SAIME', '2014-02-14', NULL, NULL, '2014-08-04 14:27:31.736931');
 INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (14, 'PERMISO DE TRABAJO', '2014-02-14', NULL, NULL, '2014-08-04 14:28:40.275613');
-INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (15, 'INSERCIÓN EDUCATIVA - VISAS', '2014-02-14', NULL, NULL, NULL);
 INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (16, 'ACCIONES DE EXIGIBILIDAD DE DERECHOS ANTE CUALQUIER ORGANISMO', '2014-02-14', NULL, NULL, '2014-08-04 14:25:38.610317');
 INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (17, 'TRATA Y TRÁFICO', '2014-02-14', NULL, NULL, '2014-08-04 14:29:54.891343');
 INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'ASESORÍA DECISIÓN REFUGIO NEGATIVA', '2014-02-14', NULL, NULL, '2014-08-04 14:26:26.746522');
-INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'ORIENTACIÓN LEGAL GENERAL', '2014-02-14', NULL, NULL, NULL);
 INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'CAMBIO DE DOMICILIO PERMANENTE', '2014-02-14', NULL, NULL, '2014-08-04 14:27:19.07573');
 INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'NOTIFICACIONES DE TRASLADO TEMPORAL', '2014-02-14', NULL, NULL, '2014-08-04 14:28:24.132981');
 INSERT INTO aslegal (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'REMISIÓN DE CASOS', '2014-02-14', NULL, NULL, '2014-08-04 14:29:41.030037');
@@ -15917,7 +15913,7 @@ SET search_path = public, pg_catalog;
 --
 
 INSERT INTO aspsicosocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (0, 'SIN INFORMACIÓN', '2014-02-14', NULL, NULL, NULL);
-INSERT INTO aspsicosocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'ATENCIÓN PSICOLÓGICA (INDIVIDUAL GRUPAL O FAMILIAR)', '2014-02-14', NULL, NULL, NULL);
+INSERT INTO aspsicosocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'ATENCIÓN PSICOLÓGICA (INDIVIDUAL, GRUPAL O FAMILIAR)', '2014-02-14', NULL, NULL, NULL);
 INSERT INTO aspsicosocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (102, 'PRIMEROS AUXILIOS PSICOLOGICOS', '2014-07-01', NULL, '2014-07-01 15:37:35.991268', '2014-07-01 15:37:35.991268');
 INSERT INTO aspsicosocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'SEGUIMIENTO A - VISITAS', '2014-02-14', NULL, NULL, NULL);
 INSERT INTO aspsicosocial (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'PARTICIPACIÓN', '2014-02-14', NULL, NULL, NULL);
@@ -15946,7 +15942,6 @@ SET search_path = public, pg_catalog;
 -- Data for Name: ayudasjr; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO ayudasjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (0, 'SIN INFORMACIÓN', '2013-06-17', NULL, NULL, NULL);
 INSERT INTO ayudasjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'PAGO DE HOSPEDAJE', '2013-06-17', NULL, NULL, '2014-08-04 14:21:44.383232');
 INSERT INTO ayudasjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (10, 'OTROS ¿CUÁL(ES)?', '2013-06-17', NULL, NULL, NULL);
 INSERT INTO ayudasjr (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (102, 'ENTREGA DE ÚTILES ESCOLARES', '2014-07-01', NULL, '2014-07-01 15:27:43.631626', '2014-08-04 14:19:42.62921');
@@ -16181,24 +16176,24 @@ SET search_path = public, pg_catalog;
 -- Data for Name: causaref; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (0, 'SIN INFORMACIÓN', '2013-06-17', NULL, NULL, NULL, NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (1, 'GRUPO SOCIAL', '2013-06-17', NULL, NULL, NULL, NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (10, 'AGRESIÓN EXTRANJERA', '2013-06-17', NULL, NULL, NULL, NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (103, 'POLITICAS ECONOMICAS ERRONEAS', '2014-07-26', NULL, '2014-07-27 00:29:54.776931', '2014-07-27 00:29:54.776931', NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (104, 'DESASTRES NATURALES', '2014-07-26', NULL, '2014-07-27 00:30:43.241775', '2014-07-27 00:30:43.241775', NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (105, 'SOLICITUD DE ASILO', '2014-07-26', NULL, '2014-07-27 00:31:31.51124', '2014-07-27 00:31:31.51124', NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (11, 'CONFLICTOS INTERNOS', '2013-06-17', NULL, NULL, NULL, NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (12, 'VIOLACIÓN MASIVA A LOS DDHH', '2013-06-17', NULL, NULL, NULL, NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (13, 'GRAVE PERTURBACIÓN AL ORDEN PÚBLICO', '2013-06-17', NULL, NULL, NULL, NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (14, 'GENERO', '2014-03-19', NULL, NULL, NULL, NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (15, 'RAZONES ECONÓMICAS', '2014-03-19', NULL, NULL, NULL, NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (2, 'NACIONALIDAD', '2013-06-17', NULL, NULL, NULL, NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (3, 'OPINIÓN POLÍTICA', '2013-06-17', NULL, NULL, NULL, NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (4, 'RAZA', '2013-06-17', NULL, NULL, NULL, NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (5, 'RELIGIÓN', '2013-06-17', NULL, NULL, NULL, NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (6, 'SEXO', '2013-06-17', NULL, NULL, NULL, NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (7, 'VIOLENCIA GENERALIZADA', '2013-06-17', NULL, NULL, NULL, NULL);
-INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at, codigo) VALUES (9, 'PERSECUCIÓN', '2013-06-17', NULL, NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (0, 'SIN INFORMACIÓN', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'GRUPO SOCIAL', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (10, 'AGRESIÓN EXTRANJERA', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (103, 'POLITICAS ECONOMICAS ERRONEAS', '2014-07-26', NULL, '2014-07-27 00:29:54.776931', '2014-07-27 00:29:54.776931');
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (104, 'DESASTRES NATURALES', '2014-07-26', NULL, '2014-07-27 00:30:43.241775', '2014-07-27 00:30:43.241775');
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (105, 'SOLICITUD DE ASILO', '2014-07-26', NULL, '2014-07-27 00:31:31.51124', '2014-07-27 00:31:31.51124');
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (11, 'CONFLICTOS INTERNOS', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (12, 'VIOLACIÓN MASIVA A LOS DDHH', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (13, 'GRAVE PERTURBACIÓN AL ORDEN PÚBLICO', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (14, 'GENERO', '2014-03-19', NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (15, 'RAZONES ECONÓMICAS', '2014-03-19', NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'NACIONALIDAD', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'OPINIÓN POLÍTICA', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'RAZA', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'RELIGIÓN', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'SEXO', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (7, 'VIOLENCIA GENERALIZADA', '2013-06-17', NULL, NULL, NULL);
+INSERT INTO causaref (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (9, 'PERSECUCIÓN', '2013-06-17', NULL, NULL, NULL);
 
 
 --
@@ -16242,7 +16237,7 @@ INSERT INTO comosupo (id, nombre, observaciones, fechacreacion, fechadeshabilita
 -- Name: comosupo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('comosupo_id_seq', 100, true);
+SELECT pg_catalog.setval('comosupo_id_seq', 1, false);
 
 
 --
@@ -16269,7 +16264,6 @@ SET search_path = public, pg_catalog;
 INSERT INTO emprendimiento (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (0, 'SIN INFORMACIÓN', '2014-02-14', NULL, NULL, NULL);
 INSERT INTO emprendimiento (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'INFORMACIÓN Y CAPACITACIÓN', '2014-02-14', NULL, NULL, '2014-08-04 14:16:21.864164');
 INSERT INTO emprendimiento (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'FORMULACIÓN DE PROYECTO DE EMPRENDIMIENTO', '2014-02-14', NULL, NULL, '2014-08-04 14:16:06.753018');
-INSERT INTO emprendimiento (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'MESAS TÉCNICAS', '2014-02-14', NULL, NULL, NULL);
 INSERT INTO emprendimiento (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'PAGO DE CUOTA EN CASO DE MICROCRÉDITO', '2014-02-14', NULL, NULL, '2014-08-04 14:17:22.171892');
 INSERT INTO emprendimiento (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'INFORMACIÓN SOBRE INICIATIVA DE EMPRENDIMIENTO', '2014-02-14', NULL, NULL, '2014-08-04 14:17:03.670455');
 INSERT INTO emprendimiento (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'SEGUIMIENTO Y EVALUACIÓN DE PROYECTO E INICIATIVA', '2014-02-14', NULL, NULL, '2014-08-04 14:17:41.68388');
@@ -16844,8 +16838,7 @@ SET search_path = public, pg_catalog;
 -- Data for Name: rangoedadac; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'De 0 a 15', 0, 15, '2014-02-11', NULL, '2014-03-07 19:19:02.690768', '2014-03-07 19:19:02.690768');
-INSERT INTO rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'De 11 a 15', 11, 15, '2014-02-11', NULL, '2014-02-14 09:42:25.036655', '2014-02-14 09:42:25.036655');
+INSERT INTO rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'De 0 a 10', 0, 10, '2014-02-11', NULL, '2014-03-07 19:19:02.690768', '2014-03-07 19:19:02.690768');
 INSERT INTO rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'De 16 a 25', 16, 25, '2014-02-11', NULL, '2014-03-07 19:19:09.515802', '2014-03-07 19:19:09.515802');
 INSERT INTO rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'De 26 a 45', 26, 45, '2014-02-11', NULL, '2014-03-07 19:19:09.527935', '2014-03-07 19:19:09.527935');
 INSERT INTO rangoedadac (id, nombre, limiteinferior, limitesuperior, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'De 46 a 60', 46, 60, '2014-02-11', NULL, '2014-03-07 19:19:09.539237', '2014-03-07 19:19:09.539237');
@@ -16912,7 +16905,6 @@ INSERT INTO rolfamilia (id, nombre, fechacreacion, fechadeshabilitacion, created
 INSERT INTO rolfamilia (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (101, 'PADRASTRO - MADRASTRA', '2014-07-01', NULL, '2014-07-01 16:17:33.798486', '2014-07-01 16:17:33.798486');
 INSERT INTO rolfamilia (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (102, 'YERNO - NUERA', '2014-07-26', NULL, '2014-07-27 00:50:19.492556', '2014-08-04 14:06:38.788713');
 INSERT INTO rolfamilia (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (103, 'CUÑADO(A)', '2014-07-26', NULL, '2014-07-27 00:50:31.271452', '2014-08-04 14:07:05.805427');
-INSERT INTO rolfamilia (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'MAMÁ', '2013-06-20', NULL, NULL, NULL);
 INSERT INTO rolfamilia (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'HIJO(A)', '2013-06-20', NULL, NULL, '2014-08-04 14:07:14.804963');
 INSERT INTO rolfamilia (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'OTRO', '2013-06-20', NULL, NULL, NULL);
 INSERT INTO rolfamilia (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'ABUELO(A)', '2013-07-05', NULL, NULL, '2014-08-04 14:06:54.968667');
@@ -16945,7 +16937,6 @@ SET search_path = public, pg_catalog;
 INSERT INTO statusmigratorio (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (0, 'SIN INFORMACIÓN', '2014-02-16', NULL, NULL, NULL);
 INSERT INTO statusmigratorio (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (1, 'MIGRANTE', '2014-02-16', NULL, NULL, NULL);
 INSERT INTO statusmigratorio (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (2, 'REFUGIADO', '2014-02-16', NULL, NULL, NULL);
-INSERT INTO statusmigratorio (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (3, 'NACIONAL', '2014-02-16', NULL, NULL, NULL);
 INSERT INTO statusmigratorio (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (4, 'APÁTRIDA', '2014-02-16', NULL, NULL, NULL);
 INSERT INTO statusmigratorio (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (5, 'NACIONAL POR NACIMIENTO', '2014-03-10', NULL, NULL, NULL);
 INSERT INTO statusmigratorio (id, nombre, fechacreacion, fechadeshabilitacion, created_at, updated_at) VALUES (6, 'NACIONAL POR NATURALIZACIÓN', '2014-03-10', NULL, NULL, NULL);
