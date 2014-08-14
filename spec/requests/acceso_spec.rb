@@ -65,7 +65,7 @@ describe "Control de acceso " do
       check 'Concentimiento Informado compartir BD'
       click_button "Guardar"
 		  expect(page).to have_content("2014-08-05") 
-      puts page.body
+      #puts page.body
 			# Driver no acepta: accept_confirm do click_on "Eliminar" end
 		  #expect(page).to have_content("Casos")
     end
