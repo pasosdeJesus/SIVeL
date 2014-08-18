@@ -182,7 +182,7 @@ res_valida(
 );
 res_valida(
     $db, _("Apellidos muy cortos"),
-    "SELECT id_caso, nombres FROM persona, victima 
+    "SELECT id_caso, apellidos FROM persona, victima 
     WHERE victima.id_persona=persona.id 
     AND length(apellidos) <= 2
     AND apellidos<>'N'"
