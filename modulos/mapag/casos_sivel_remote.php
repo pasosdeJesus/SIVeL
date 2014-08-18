@@ -60,11 +60,11 @@ if (strpos($ca, "Por favor refine su consulta") !== false) {
     die($ca);
 }
 $casos = array();
-// carga datos del archivo XML de Sivel
+// carga datos del archivo XML
 $xmlSivel = simplexml_load_string($ca);
 if ($xmlSivel === false) {
     errores_xml($xmlSivel, $ca);
-    die("El url '" . $requestUrl . "' no está cargando");
+    die("El url '" . $requestUrl . "' no está cargando.\n\n" . $ca);
 }
 
 foreach ($xmlSivel->relato as $relato) {

@@ -24,8 +24,12 @@ require_once $_SESSION['dirsitio'] . "/conf.php";
 /* Autenticamos si la consulta pública está deshabilitada */
 if (isset($GLOBALS['consulta_publica_deshabilitada']) 
     && $GLOBALS['consulta_publica_deshabilitada']
-) {
+) { 
+    /* Per permitimos consultas del mismo servidor pues vendrían
+     * de módulos como mapag */
+    if ($_SERVER['REMOTE_ADDR'] != $_SERVER['SERVER_ADDR']) {
         autentica_usuario($dsn, $aut_usuario, 0);
+    }
 }
 
 require_once 'HTML/QuickForm/Controller.php';
