@@ -84,7 +84,7 @@ class AccionComparaDos extends HTML_QuickForm_Action
         if ($figuales) {
             $cons .= "AND c1.fecha = c2.fecha";
         }
-        $cons .="AND c1.id<c2.id
+        $cons .=" AND c1.id<c2.id
             AND (POSITION(v1.nomsoundexesp IN v2.nomsoundexesp)>0 OR
                 POSITION(v2.nomsoundexesp IN v1.nomsoundexesp)>0) 
             AND (v1.id_persona, v2.id_persona) NOT IN 
