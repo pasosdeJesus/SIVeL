@@ -79,10 +79,10 @@ class AccionComparaDos extends HTML_QuickForm_Action
             WHERE v1.id_caso = c1.id AND v2.id_caso = c2.id
             AND u1.id_caso = c1.id AND u2.id_caso = c2.id ";
         if ($diguales) {
-            $cons .= "AND u1.id_departamento = u2.id_departamento ";
+            $cons .= " AND u1.id_departamento = u2.id_departamento ";
         }
         if ($figuales) {
-            $cons .= "AND c1.fecha = c2.fecha";
+            $cons .= " AND c1.fecha = c2.fecha";
         }
         $cons .=" AND c1.id<c2.id
             AND (POSITION(v1.nomsoundexesp IN v2.nomsoundexesp)>0 OR
