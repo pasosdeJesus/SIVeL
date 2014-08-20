@@ -3340,9 +3340,9 @@ if (!aplicado($idac)) {
             AS p 
             FROM persona, victima WHERE victima.id_persona=persona.id 
             ORDER BY 1) AS r 
-        GROUP BY 1 ORDER BY 2;
-    
-        CREATE OR REPLACE FUNCTION probcadap(in_text TEXT) RETURNS NUMERIC AS
+        GROUP BY 1 ORDER BY 2;");
+    hace_consulta(
+        $db, "CREATE OR REPLACE FUNCTION probcadap(in_text TEXT) RETURNS NUMERIC AS
 $$
     SELECT CASE WHEN (SELECT SUM(frec) FROM napellidos)=0 THEN 0
         WHEN (SELECT COUNT(*) FROM napellidos WHERE apellido=$1)=0 THEN 0
@@ -3350,8 +3350,9 @@ $$
             FROM napellidos WHERE apellido=$1)
         END
 $$
-        LANGUAGE SQL IMMUTABLE 
-        CREATE OR REPLACE FUNCTION probapellido(in_text TEXT) RETURNS NUMERIC AS
+        LANGUAGE SQL IMMUTABLE ");
+    hace_consulta(
+        $db, "CREATE OR REPLACE FUNCTION probapellido(in_text TEXT) RETURNS NUMERIC AS
 $$
 	SELECT sum(ppar) FROM (SELECT p, probcadap(p) AS ppar FROM (
 		SELECT p FROM divarr(string_to_array(trim($1), ' ')) AS p) 
