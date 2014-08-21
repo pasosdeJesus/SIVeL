@@ -55,8 +55,8 @@
 			  <para>Su reporte debe incluir la metodología 
 				  que empleó para encontrarla y proponer una 
 				  solución para las fuentes de la 
-				  rama sivel1_2 disponibles en el repositorio
-				  git
+				  rama <literal>master</literal> 
+				  disponibles en el repositorio git
 				  <ulink url="https://github.com/pasosdeJesus/SIVeL"></ulink>. 
 				  (en el directorio <filename>doc</filename>
 				  de las fuentes hay ejemplos de auditorías 

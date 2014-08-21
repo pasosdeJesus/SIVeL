@@ -67,20 +67,9 @@
 	</para>
 
 	<para>
-		Para practicar su uso sin instalar SIVeL puede emplear
-		las siguientes consultas publicas con casos reales:
-		<itemizedlist>
-			<listitem>
-				<para>
-					<ulink url="https://www.nocheyniebla.org/consulta_web.php"/>
-				</para>
-			</listitem>
-			<listitem>
-				<para>
-					<ulink url="https://documentacion.justapaz.org/consulta_web.php"/>
-				</para>
-			</listitem>
-		</itemizedlist>
+		Para practicar su uso sin instalar SIVeL puede emplear por
+		ejemplo 
+		<ulink url="https://www.nocheyniebla.org/consulta_web.php"/>.
 	</para>
 
 	&buscaexterna;

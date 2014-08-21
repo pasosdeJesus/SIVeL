@@ -33,6 +33,9 @@ administradores y usuarios.  Algunos lineamientos son:
 			<para>
 				Preferir aplicaciones y protocolos que empleen 
 				cifrado fuerte. Cifrar datos sensibles.
+				En el caso de usuario finales examinar
+				que las direcciones web comiencen con
+				https.
 			</para>
 		</listitem>
 		<listitem>

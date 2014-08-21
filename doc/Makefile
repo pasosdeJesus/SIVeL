@@ -41,7 +41,8 @@ IMAGES= img/home.png img/prev.png img/toc-minus.png img/blank.png \
 	../modulos/etiquetas/doc/img/pfichaetiquetas.png \
 	img/pfichaevaluacion.png img/pconsultaweb.png img/pautentica.png \
 	img/pmenu.png img/peditafrecuente.png img/pnuevafrecuente.png \
-	img/preporteconsolidado.png img/preporterevistanobelicas.png \
+	img/preporteconsolidado.png img/preportegeneralloc.png \
+	img/mapa.png \
 	img/ptablasbasicas.png img/ptablasbasicas-noautorizado.png \
 	img/pusuarios.png img/pusuarionuevo.png img/ptablafrecuente.png \
 	img/pconteovindividuales.png img/presconteo.png img/presconteo2.png \

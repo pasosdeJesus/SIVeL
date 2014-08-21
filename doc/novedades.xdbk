@@ -12,7 +12,8 @@ Consulta web permite especificar dos etiquetas.
 Al validar con modelos probabilisticos se identifican hombres con nombre de mujer,  mujeres con nombre de hombre y nombres que parece apellidos.
 					</para></listitem>
 					<listitem><para>
-Otra verificación de seguridad sugeridad por OWASP: escapar informacion emitida en XML.
+Implementada otra verificación de seguridad sugeridad por OWASP: escapar 
+informacion emitida en XML.
 					</para></listitem>
 			</itemizedlist></para>
 		</listitem>
