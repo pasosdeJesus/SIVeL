@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
-	<varlistentry><term>Versión 1.2 (Sep.2014)</term>
+	<varlistentry><term>Versión 1.2b3 (Ago.2014)</term>
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>
@@ -13,6 +13,7 @@ Al validar con modelos probabilisticos se identifican hombres con nombre de muje
 					</para></listitem>
 					<listitem><para>
 Otra verificación de seguridad sugeridad por OWASP: escapar informacion emitida en XML.
+					</para></listitem>
 			</itemizedlist></para>
 		</listitem>
 	</varlistentry>
