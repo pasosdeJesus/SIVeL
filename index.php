@@ -20,6 +20,17 @@
  */
 require_once 'misc.php';
 require_once 'aut.php';
+if (!file_exists($_SESSION['dirsitio'] . '/conf.php')) {
+	die("No ha configurado fuentes");
+} 
+$fc = fopen($_SESSION['dirsitio'] . '/conf.php', 'r');
+if (!$fc) {
+    die(
+        "No puede leerse " . $_SESSION['dirsitio'] . '/conf.php' 
+        . " Mejore permisos"
+    );
+}
+fclose($fc);
 require_once $_SESSION['dirsitio'] . '/conf.php';
 $aut_usuario = "";
 $db = autentica_usuario($dsn, $aut_usuario, 0);
