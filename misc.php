@@ -2424,6 +2424,67 @@ function crea_patron($ar)
 /* -------- XML y RELATO */
 
 /**
+ * Escapa una cadena para ponerla como dato en XML
+ *
+ * @param string $s Cadena por escapar
+ * 
+ * @return string Cadena $s escapada.
+ * @see http://stackoverflow.com/questions/3957360/generating-xml-document-in-php-escape-characters
+ */
+function escapa_dato_xml($s)
+{
+    $s = html_entity_decode($s, ENT_QUOTES, 'UTF-8');
+    $s = htmlspecialchars($s, ENT_QUOTES, 'UTF-8', false);
+    return $s;
+}
+
+/**
+ * Escapa una cadena para ponerla como valor en un atributo XML
+ *
+ * De acuerdo a http://www.liquid-technologies.com/XML/EscapingData.aspx
+ * solo deben escaparse ", ' y &, pero xmllint exige que también se
+ * escape <
+ * @param string $s Cadena por escapar
+ * 
+ * @return string Cadena $s escapada.
+ * @see http://www.liquid-technologies.com/XML/EscapingData.aspx
+ * @see http://stackoverflow.com/questions/3957360/generating-xml-document-in-php-escape-characters
+ */
+function escapa_valoratributo_xml($s)
+{
+    return strtr(
+        $s, 
+        array(
+            '"' => "&quot;",
+            "'" => "&apos;",
+            "<" => "&lt;",
+            "&" => "&amp;",
+        )
+    );
+}
+
+
+/**
+ * Modifica una cadena para emplearla como etiqueta en XML
+ *
+ * @param string $s Cadena por escapar
+ * 
+ * @return string Cadena $s escapada.
+ * @see http://www.w3schools.com/xml/xml_elements.asp
+ */
+function arregla_etiqueta_xml($s)
+{
+    $s = preg_replace("/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜñÑ_]*/", "", $s); // Por convención solo aceptamos letras del español, números y subrayado
+    $s = preg_replace("/^[0-9_]*/", "", $s); // No comienza con número o c.punt.
+    $s = preg_replace("/  */", "", $s); // No contiene espacios
+    $s = preg_replace("/^xml/i", "", $s); // No comienza con XML
+
+    return $s;
+}
+
+
+
+/**
  * a_elementos_xml($r, $ind, $ad) convierte vector con datos [ad] a
  * cadena de elementos XML que adiciona al final de [r] indentando a
  * [ind] espacios.
@@ -2434,7 +2495,7 @@ function crea_patron($ar)
  * @param array   $ren Renombra indices de $ad
  *
  * @return string Cadena XML con datos de $ad convertidos
-     */
+ */
 function a_elementos_xml(&$r, $ind, $ad, $ren = null)
 {
     foreach ($ad as $ie => $dato) {
@@ -2452,13 +2513,19 @@ function a_elementos_xml(&$r, $ind, $ad, $ren = null)
                 && ($pd = strpos($marca, '}'))
             ) {
                 $marcad = substr($marca, 0, $pi);
-                $atr = " " . substr($marca, $pi+1, $pm - $pi - 1) . "=\"" .
-                    substr($marca, $pm+2, $pd - $pm - 2) . "\"";
+                $atr = " " 
+                    . arregla_etiqueta_xml(substr($marca, $pi+1, $pm - $pi - 1))
+                    . "=\"" 
+                    . escapa_valoratributo_xml(
+                        substr($marca, $pm+2, $pd - $pm - 2)
+                    ) . "\"";
             } else {
                 $marcad = $marca;
                 $atr = "";
             }
-            $r .= "<$marcad$atr>" . trim($dato) . "</$marcad>\n";
+            $et = arregla_etiqueta_xml($marcad);
+            $r .= "<" . $et . "$atr>" . escapa_dato_xml(trim($dato)) 
+                . "</" . $et . ">\n";
         }
     }
 }
