@@ -54,6 +54,16 @@ herram/estandares.sh
 			Google <xref linkend="javascriptgoogle"></xref></para>
 	</sect2>
 
+	<sect2 id="i18n">
+		<title>Internacionalización</title>
+		<para>Para actualizar traducciones desde el directorio
+			con fuentes ejecute:
+			<screen>
+make trad
+			</screen>
+		</para>
+	</sect2>
+	
 
 	<sect2 id="documentacion-tecnica">
 		<title>Documentación técnica</title>
@@ -157,11 +167,7 @@ git clone https://github.com/pasosdeJesus/SIVeL.git
 				<listitem>
 					<para><filename>herram/gitcommit.sh</filename> Para agregar cambios.</para>
 				</listitem>
-				<listitem>
-					<para><filename>herram/trans.sh</filename> Para actualizar archivos de traducciones en agregar cambios.</para>
-				</listitem>
 			</itemizedlist>
-	
 		</para>
 	</sect2>
 	<sect2 id="fuentes">
@@ -305,6 +311,9 @@ git clone https://github.com/pasosdeJesus/SIVeL.git
 						en DocBook XML.</para>
 				</listitem>
 				<listitem>
+					<para>.xcf: Gráfico para editar
+						con GIMP</para>
+				<listitem>
 					<para>.xml: Archivo de configuración 
 						en XML.</para>
 				</listitem>
@@ -365,10 +374,17 @@ El archivo de comandos
 <literal>herram/trans.sh</literal> ayuda a aplicar transformaciones
 automáticas a las fuentes definidas en <filename>herram/trans.sed</filename> y
 <filename>herram/trans.awk</filename>.
+</para>
+<para>
 El archivo de comandos
 <literal>herram/geo/dump-a-datos.sh</literal> genera un volcado de 
 la información geográfica incluida en la base.
 			</para>
+<para>
+	El archivo de comandos <literal>herram/incl.sh</literal>
+	genera un grafo de inclusión de las fuentes en el formato
+	de Graphviz.
+</para>
 		</sect3>
 
 		<sect3 id="fuentes-pruebas">
@@ -479,8 +495,7 @@ En cuanto a base de datos la estructura en SQL (ver
 <filename>estructura.sql</filename>
 y los datos iniciales en archivos con nombres de la forma 
 <filename>datos-*.sql</filename>.   A continuación se incluye un grafo extaido 
-de <filename>estructura.sql</filename> y generado
-de las fuentes con <filename>herram/incl.sh</filename> y
+de <filename>estructura.sql</filename> con visql y
 producido con GraphViz (ver <xref linkend="graphviz"></xref>).
 		</para>
 		<informalfigure>

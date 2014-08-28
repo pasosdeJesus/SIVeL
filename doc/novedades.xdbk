@@ -229,8 +229,18 @@ y <filename>vardb-local.sh</filename>.
 			</itemizedlist></para>
 		</listitem>
 	</varlistentry>
+	<varlistentry><term>Versión 1.0 y 1.1</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem><para>
+				El historial de la versión 1.1 puede verse en el <ulink url="http://sivel.sf.net/1.1/">manual de esa versión</ulink>. 
+					</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
 
 	</variablelist>
-	<para>El historial de la versión 1.1 puede verse en el <ulink url="http://sivel.sf.net/1.1/">manual de esa versión</ulink>. </para>
+
 
 
