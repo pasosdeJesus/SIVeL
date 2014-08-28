@@ -21,7 +21,7 @@
 require_once 'misc.php';
 require_once 'aut.php';
 if (!file_exists($_SESSION['dirsitio'] . '/conf.php')) {
-	die("No ha configurado fuentes");
+    die("No ha configurado fuentes");
 } 
 $fc = fopen($_SESSION['dirsitio'] . '/conf.php', 'r');
 if (!$fc) {

@@ -2429,7 +2429,8 @@ function crea_patron($ar)
  * @param string $s Cadena por escapar
  * 
  * @return string Cadena $s escapada.
- * @see http://stackoverflow.com/questions/3957360/generating-xml-document-in-php-escape-characters
+ * @see http://stackoverflow.com/questions/3957360/\
+ *  generating-xml-document-in-php-escape-characters
  */
 function escapa_dato_xml($s)
 {
@@ -2444,11 +2445,13 @@ function escapa_dato_xml($s)
  * De acuerdo a http://www.liquid-technologies.com/XML/EscapingData.aspx
  * solo deben escaparse ", ' y &, pero xmllint exige que también se
  * escape <
+ *
  * @param string $s Cadena por escapar
  * 
  * @return string Cadena $s escapada.
  * @see http://www.liquid-technologies.com/XML/EscapingData.aspx
- * @see http://stackoverflow.com/questions/3957360/generating-xml-document-in-php-escape-characters
+ * @see http://stackoverflow.com/questions/3957360/\
+ *  generating-xml-document-in-php-escape-characters
  */
 function escapa_valoratributo_xml($s)
 {
@@ -2474,7 +2477,8 @@ function escapa_valoratributo_xml($s)
  */
 function arregla_etiqueta_xml($s)
 {
-    $s = preg_replace("/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜñÑ_]*/", "", $s); // Por convención solo aceptamos letras del español, números y subrayado
+    // Por convención solo aceptamos letras del español, números y subrayado
+    $s = preg_replace("/[^A-Za-z0-9áéíóúÁÉÍÓÚüÜñÑ_]*/", "", $s); 
     $s = preg_replace("/^[0-9_]*/", "", $s); // No comienza con número o c.punt.
     $s = preg_replace("/  */", "", $s); // No contiene espacios
     $s = preg_replace("/^xml/i", "", $s); // No comienza con XML
