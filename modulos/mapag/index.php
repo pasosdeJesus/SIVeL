@@ -15,6 +15,7 @@
  * Acceso: CONSULTA PÚBLICA
  */
 
+// @codingStandardsIgnoreStart
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -75,6 +76,7 @@
                 <input type="text" name="desde" class="inputDesde"
                     id="inputDesde"
                     value="<?php
+    // @codingStandardsIgnoreEnd
     $d=new DateTime();
     $d->sub(new DateInterval('P6M'));
     echo isset($GLOBALS['mapag_fechadesde']) ? $GLOBALS['mapag_fechadesde'] :
