@@ -7,7 +7,7 @@ echo "digraph inclusionPHP {
 graph [ rankdir = "LR" ]; ";
 
 for i in *php; do 
-	for j in  `grep require_once $i | sed -e "s/.*require_once[ ('\"]*\([^'\"]*\).*/\1/g"`; do 
+	for j in  `grep require_once $i | sed -e "s/ ._SESSION[^ ]* ./dirsitio/g;s/.*require_once[ ('\"]*\([^'\"]*\).*/\1/g"`; do 
 		echo "\"$j\" -> \"$i\""; 
 	done; 
 done;

@@ -328,8 +328,10 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             && $d <= 60)
         ) {
             echo "<br>" .  _("Cuenta bloqueada. Por favor informe al administrador");
-            $username = $_GET['username'] 
-                = $_POST['username'] = $_REQUEST['username'] = "";
+            $username = "";
+            $_GET['username'] = "";
+            $_POST['username'] = "";
+            $_REQUEST['username'] = "";
         } else {
             // Desbloquea tras una hora  o los segundos especificados en
             // $GLOBALS['segundos_desbloqueo']
@@ -338,7 +340,9 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
                 WHERE nusuario='$username'"; 
             $locked = "";
             hace_consulta_aut($db, $q, false);
-            echo "<br>" .  _("Cuenta desbloqueada tras $d segundos");
+            echo "<br>" .  _("Cuenta desbloqueada tras " 
+                .  htmlentities($d, ENT_COMPAT, 'UTF-8') 
+                . " segundos");
         }
     }
 

@@ -11,7 +11,9 @@
  * @copyright 2014 Dominio público. Sin garantías.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html Dominio Público. Sin garantías.
  * @link      http://sivel.sf.net
-*/
+ *
+ * Acceso: SÓLO DEFINICIONES
+ */
 
 /**
  * Punto de entrada
@@ -45,23 +47,31 @@ function muestra()
         $num++;
         $p1 = $d->getLink('id_persona1');
         $p2 = $d->getLink('id_persona2');
-        echo "<tr><td>$num</td><td>{$p1->nombres} {$p1->apellidos}</td><td>";
-        $q = "SELECT id_caso FROM victima WHERE id_persona={$d->id_persona1}";
+        echo "<tr><td>" . htmlentities($num, ENT_COMPAT, 'UTF-8') 
+            . "</td><td>" . htmlentities($p1->nombres, ENT_COMPAT, 'UTF-8') 
+            . " " . htmlentities($p1->apellidos, ENT_COMPAT, 'UTF-8') 
+            . "</td><td>";
+        $q = "SELECT id_caso FROM victima WHERE id_persona="
+            . var_escapa($d->id_persona1, $db);
         $r = hace_consulta($db, $q);
         $fila = array();
-        $sep = "";
+        $sep_html = "";
         while ($r->fetchInto($fila)) {
-            echo $sep . $fila[0];
-            $sep =", ";
+            echo $sep_html . htmlentities($fila[0], ENT_COMPAT, 'UTF-8') ;
+            $sep_html =", ";
         }
-        echo "</td><td>{$p2->nombres} {$p2->apellidos}</td><td>";
-        $q = "SELECT id_caso FROM victima WHERE id_persona={$d->id_persona2}";
+        echo "</td><td>"
+                .  htmlentities($p2->nombres, ENT_COMPAT, 'UTF-8') 
+                .  " " . htmlentities($p2->apellidos, ENT_COMPAT, 'UTF-8') 
+                . "</td><td>";
+        $q = "SELECT id_caso FROM victima WHERE id_persona=" 
+            . var_escapa($d->id_persona2, $db);
         $r = hace_consulta($db, $q);
         $fila = array();
-        $sep = "";
+        $sep_html = "";
         while ($r->fetchInto($fila)) {
-            echo $sep . $fila[0];
-            $sep =", ";
+            echo $sep_html . htmlentities($fila[0], ENT_COMPAT, 'UTF-8') ;
+            $sep_html =", ";
         }
         echo "</td></tr>";
     }

@@ -5,7 +5,7 @@
 
 -- Ver convenciones de nomenclatura SQL en manual de SIVeL, sección estándares
 
-SET client_encoding = 'UTF8';
+--SET client_encoding = 'UTF8';
 
 CREATE COLLATION es_co_utf_8 (LOCALE = 'es_CO.UTF-8');
 

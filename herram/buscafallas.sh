@@ -4,15 +4,15 @@
 
 #function x {
 echo "* Emplear htmlentities_array con $db->getAssoc"
-#find . -name "*php" -exec grep -l -e "[\(] *\$db->getAssoc" {} ';'
+#find . -name "*php" -exec grep -H -e "[\(] *\$db->getAssoc" {} ';'
 find . -name "*php" -exec grep -B 1 "getAssoc" {} ';' | sed -e "s/^[^ ]*: *//g" | sed -e "s/^\./|/g;s/  */ /g" | tr -d "\n"  | tr "|" "\n" | grep -v "htmlentities_array"
 echo "* Escapar antes de incluir en base de datos para evitar inyecciones SQL"
-find . -name "*php" -exec grep -l -e "[^=]= *\$valores\[" {} ';'
-find . -name "*php" -exec grep -l -e "[^=]= *\$_REQUEST\[[^=]*$" {} ';'
-find . -name "*php" -exec grep -l -e "[^=]= *\$_GET\[[^=]*$" {} ';'
-find . -name "*php" -exec grep -l -e "[^=]= *\$_POST\[[^=]*$" {} ';'
+find . -name "*php" -exec grep -H -e "[^=]= *\$valores\[" {} ';'
+find . -name "*php" -exec grep -H -e "[^=]= *\$_REQUEST\[[^=]*$" {} ';'
+find . -name "*php" -exec grep -H -e "[^=]= *\$_GET\[[^=]*$" {} ';'
+find . -name "*php" -exec grep -H -e "[^=]= *\$_POST\[[^=]*$" {} ';'
 echo "* Emplear loadArray(htmlentities_array en lugar de loadDbResult"
-find . -name "*php" -exec grep -l -e "loadDbResult" {} ';'
+find . -name "*php" -exec grep -H -e "loadDbResult" {} ';'
 echo "* No usar loadQuery sino htmlentities_array(getAssoc"
 find . -name "*php" -exec grep "loadQuery" {} ';'
 
@@ -59,10 +59,10 @@ echo "* V5.1, V5.2 Funcion procesa llama valores a su primer argumento"
 p=`find . -name "*php" -exec grep -l -e "function *procesa *(" {} ';'`
 grep -A 1 "function *procesa" $p | grep "^[^ ]*:" | grep -v -e "procesa *( *\&\$valores"
 
-echo "V5.1, V5.2 Variables de entrada sin asignacion, comparación, isset o var_escapa:"
+echo "V5.1, V5.2 Variables de entrada sin asignacion, comparación, isset, var_escapa_aut o var_escapa:"
 for b in _REQUEST _POST _GET valores ; do
 	p=`find . -name "*php" -exec grep -l -e "$b *\[" {} ';'`
-	grep -A 1 "$b *\[" $p | grep "^[^ ]*:" | grep -v -e "isset *( *\$$b" -e "unset *( *\$$b" -e "\$$b[^ ]* *=" -e "\$$b[^ ]* *!=" -e "(int) *\$$b" -e "var_escapa( *\$$b"  -e "empty *( *\$$b" -e "^[^\$]*//"
+	grep -A 1 "$b *\[" $p | grep "^[^ ]*:" | grep -v -e "isset *( *\$$b" -e "unset *( *\$$b" -e "\$$b[^ ]* *=" -e "\$$b[^ ]* *!=" -e "(int) *\$$b" -e "var_escapa( *\$$b"  -e "empty *( *\$$b" -e "^[^\$]*//" -e "var_escapa_aut( *\$$b"
 done;
 p=`find . -name "*php" -exec grep -l -e "_submitValues *\[" {} ';'`
 grep -A 1 "_submitValues *\[" $p | grep "^[^ ]*:" | grep -v -e "isset *(.*->_submitValues" -e "unset *(.*->_submitValues" -e "_submitValues[^ ]* *=" -e "_submitValues[^ ]* *!=" -e "(int).*->_submitValues" -e "var_escapa(.*->_submitValues"  -e "== .*->_submitValues"
