@@ -68,7 +68,7 @@ usrdoc:
 .PRECIOUS: .pdoc
 tecdoc1: 
 	mkdir -p pdoc
-	phpdoc --encoding=utf8 -dc SIVeL -t pdoc -d . -i "pruebas/*,conf*php,doc/*,Make.inc,*sitios**,*web*index.php,/herram/ind.php,/web/index.php"
+	phpdoc -dc SIVeL -t pdoc -d . -i "pruebas/*,conf*php,doc/*,Make.inc,*sitios**,*web*index.php,/herram/ind.php,/web/index.php"
 
 tecdoc2:
 	for i in `find pdoc -name "*html"`; do \
