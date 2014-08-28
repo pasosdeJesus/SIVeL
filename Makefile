@@ -98,3 +98,23 @@ distsf: distcvs
 	cp doc/html/index.html doc/html/index.html-sinsf
 	sed -e "s/HTML comprimido<\/a>./ HTML comprimido<\/a>. Agradecemos el hospedaje brindado por SourceForge <a href=\"http:\/\/sourceforge.net\/projects\/sivel\"><img src=\"http:\/\/sflogo.sourceforge.net\/sflogo.php?group_id=104373&amp;type=8\" width=\"80\" height=\"15\" alt=\"Get SIVeL at SourceForge.net. Fast, secure and Free Open Source software downloads\" \/><\/a>/g" doc/html/index.html-sinsf > doc/html/index.html
 
+actualiza-pot:
+	echo '' > locale/m.pot
+	find . -type f -name "*.php" | xgettext -o locale/m.pot -j --from-code=UTF-8  -f -
+	msgmerge -N locale/sivel.pot locale/m.pot > locale/nuevo.pot
+	mv locale/nuevo.pot locale/sivel.pot
+
+actualiza-po: actualiza-pot
+	for i in locale/?? ; do \
+		echo $$i;\
+		msgmerge -vU $$i/LC_MESSAGES/sivel.po locale/sivel.pot; \
+	done
+	
+actualiza-mo: actualiza-po
+	for i in locale/?? ; do \
+		echo $$i;\
+		msgcat $$i/LC_MESSAGES/sivel.po | msgfmt -vo $$i/LC_MESSAGES/sivel.mo - ; \
+	done
+
+trad: actualiza-mo
+	
