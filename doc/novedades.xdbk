@@ -48,7 +48,7 @@ especificado en <literal>$GLOBALS['segundos_desbloqueo']</literal>).
 						</para>
 					</listitem>
 					<listitem>
-						<para>En consulta web y al buscar similares en el módulo mezcla, permite buscar nombres similares al pronunciar en español ---usa soundex en español.   En el módulo mezclar al buscar similares emplea soundex para español.</para>
+						<para>En consulta web y al buscar similares en el módulo mezcla, permite buscar nombres similares al pronunciar en español ---usa soundex en español, agradecimientos a Oliver Mazariegos de Grupo Vesica.   En el módulo mezclar al buscar similares emplea soundex para español.</para>
 					</listitem>
 					<listitem>
 						<para>En relatos importa/exporta etiquetas.</para>
@@ -105,9 +105,6 @@ Simplificadas tablas de usuarios.
 
 					<listitem><para>
 Información geográfica actualizada con DIVIPOLA 2013.
-					</para></listitem>
-					<listitem><para>
-Función soundexesp, agradecimiento a Oliver Mazariegos de Grupo Vesica.
 					</para></listitem>
 					<listitem><para>
 Añadidas variables de configuración para añadir validaciones:
