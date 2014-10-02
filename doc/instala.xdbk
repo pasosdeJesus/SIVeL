@@ -89,7 +89,7 @@ cada una en un CD por si desea mantener copias de respaldo (ver <ulink url="http
 				</listitem>
 				<listitem>
 					<para>
-Servidor web con SSL, recomendamos Apache con <literal>mod_ssl</literal>
+Servidor web con SSL, recomendamos con <literal>mod_ssl</literal>
 (ver <ulink url="http://structio.sourceforge.net/guias/servidor_OpenBSD/apache.html#ssl"></ulink>).
 Sugerimos que lo ejecute con <command>chroot</command> en 
 <filename>/var/www</filename> y que cree el directorio 
@@ -196,11 +196,11 @@ para sivel (digamos con login <literal>sivel</literal>).
 				</listitem>
 				<listitem>
 					<para>
-Instale en un directorio utilizable por Apache con SSL.
+Instale en un directorio utilizable por nginx con SSL.
 Por ejemplo si las fuentes están en
 <filename>~/Desktop/sivel-&PRY-VERSION;.tar.gz</filename> y va a 
 instalar en el directorio <filename>/var/www/htdocs/sivel</filename> que
-debería ser visible para Apache, emplee:
+debería ser visible para nginx , emplee:
 <screen>
 cd /var/www/htdocs
 sudo mkdir sivel
@@ -213,29 +213,23 @@ cd /var/www/htdocs/sivel/
 sudo chown -R sivel:sivel .
 sudo chmod -R a+r .
 </screen>
-Después puede editar <filename>/var/www/conf/httpd.conf</filename>
-y cambiar algunas líneas de la configuracion de SSL (remplace 
-<literal>miServidor</literal> y 
-<literal>micorreo@midominio.org</literal> por valores apropiados para su caso):
+Después puede editar <filename>/etc/nginx/nginx.conf</filename>
+y cambiar algunas líneas de la configuracion de SSL --es decir las que 
+aparecen en la sección server con listen 443:
 <screen>
-DocumentRoot /var/www/htdocs/sivel
-ServerName miServidor
-ServerAdmin micorreo@midominio.org
-ErrorLog logs/error_log
-TransferLog logs/access_log
+root /var/www/htdocs/sivel/;
 </screen>
-
 					</para>
 				</listitem>
 				<listitem>
 					<para>
 Cree un usuario para PostgreSQL para manejar la base de datos (las
-siguientes instrucciones son para PostgreSQL 8.4):
+siguientes instrucciones son para PostgreSQL 9.3):
  <screen>
 sudo mkdir /var/www/tmp
 sudo chmod -R a+rxw /var/www/tmp
 sudo su - _postgresql
-createuser -h /var/www/tmp/ -S -d sivel
+createuser -h /var/www/tmp/ -s -d sivel
 exit
 </screen>
 
@@ -288,8 +282,8 @@ cd /var/www/htdocs/sivel/sitios/sivel
 				<listitem>
 					<para>
 Desde un navegador abra el directorio en el que instaló.   Si lo requiere
-puede revisar errores en la bitácora de Apache (por defecto
-<filename>/var/www/log/error_log</filename>).
+puede revisar errores en la bitácora de nginx (por defecto
+<filename>/var/www/log/error.log</filename>).
 					</para>
 				</listitem>
 			</orderedlist>
@@ -329,7 +323,7 @@ opcionalmente de la última semana en un computador remoto. Requieren
 					<para>Para activar corrección
 ortográfica, instale 
 <application>ispell</application> e <application>ispell-spanish</application>.
-Si Apache corre chroot en un directorio (digamos <filename>/var/www</filename>),
+Si ngingx corre chroot en un directorio (digamos <filename>/var/www</filename>),
 cree en ese directorio la estructura de directorios que requieren
 <application>ispell</application> e <application>ispell-spanish</application>
 y copie lo básico de estos en la nueva estructura ---las librerías compartidas
@@ -376,14 +370,18 @@ retroalimentación cifrada por correo vea
 		<para>Es importante:
 			<itemizedlist>
 				<listitem>
-					<para>Actualizar SIVeL y el sistema operativo aproximadamente cada 6 meses, para cerrar posibles fallas de seguridad o funcionalidad descubiertas en ese lapso.</para>
+					<para>Actualizar SIVeL y el sistema operativo aproximadamente cada 
+						6 meses, para cerrar posibles fallas de seguridad o funcionalidad 
+						descubiertas en ese lapso.</para>
 				</listitem>
 				<listitem>
-					<para>Mantenerse informado de novedades, por ejemplo mediante la lista 
+					<para>Mantenerse informado de novedades, por ejemplo mediante 
+						la lista 
 						<literal>sivel-soporte@lists.sourceforge.net</literal></para>
 				</listitem>
 				<listitem>
-					<para>Capacitarse para realizar actualizaciones periódicas al sistema operativo y a SIVeL.</para>
+					<para>Capacitarse para realizar actualizaciones periódicas al 
+						sistema operativo y a SIVeL.</para>
 				</listitem>
 			</itemizedlist>
 		</para>
@@ -483,7 +481,7 @@ cvs -z3 -d:pserver:anonymous@sivel.cvs.sourceforge.net:/cvsroot/sivel update -rS
 			</orderedlist>
 		</para>
 		<para>
-Después debe asegurarse de tener configurado Apache para
+Después debe asegurarse de tener configurado nginx para
 acceder a SIVeL en su nueva ubicación 
 <filename>/var/www/htdocs/sivel/</filename>. 
 Para esto edite el archivo de configuración con:
@@ -498,7 +496,7 @@ y si la encuentra remplázela por:
 <screen>
 DocumentRoot "/var/www/htdocs/sivel"
 </screen>
-Complete reiniciando Apache con 
+Complete reiniciando nginx con 
 <screen>
 sudo apachectl stop; sleep 1
 sudo sh /etc/rc.local
