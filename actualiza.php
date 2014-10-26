@@ -947,7 +947,7 @@ if (!aplicado($idac)) {
                     $pd = strpos($rel, ':');
                     $ndo = substr($rel, 0, $pd);
                     $ids = valorSinInfo($do, $c);
-                    if ($ids >= 0 && $ndo != 'presponsable'
+                    if ($ids >= 0 && ($ndo != 'presponsable'
                         || $c == 'organizacionarmada')
                     ) {
                         $q = "ALTER TABLE $t ALTER COLUMN $c SET DEFAULT '$ids'";
@@ -1294,17 +1294,17 @@ if (!aplicado($idac)) {
 $idac = '1.3-pa';
 if (!aplicado($idac)) {
     
-    hace_consulta($db, 'CREATE SEQUENCE pais_seq', false);
+    hace_consulta($db, 'CREATE SEQUENCE pais_id_seq', false);
     hace_consulta(
         $db, "CREATE TABLE pais (
-            id INTEGER PRIMARY KEY DEFAULT(nextval('pais_seq')),
+            id INTEGER PRIMARY KEY DEFAULT(nextval('pais_id_seq')),
             nombre VARCHAR(200) NOT NULL,
             nombreiso VARCHAR(200) NOT NULL,
             latitud FLOAT,
             longitud FLOAT,
             alfa2 VARCHAR(2),
             alfa3 VARCHAR(3),
-    codiso INTEGER, 
+            codiso INTEGER, 
             div1 VARCHAR(100),
             div2 VARCHAR(100),
             div3 VARCHAR(100),
