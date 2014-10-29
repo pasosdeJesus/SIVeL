@@ -5,21 +5,20 @@
 		con cierto formato la informaci&oacute;n recolectada o parte de la 
 		
 		misma.   En realidad todos, excepto Reporte Consolidado
-		y Consulta Externa son la misma Consulta Web 
+		y Mapa en Googlemaps son la misma Consulta Web 
 		(ver <xref linkend="consultaweb"></xref>)
-		pero con algunas categorías señaladas para diferenciar 
-		Bélicas de No-Bélicas y una forma de presentaci&oacute;n diferente
-		a la tabla.
+		pero con diferentes formas de ordenamiento
+		o presentación.
 	</para>
 	<para>	En la figura siguiente se presenta la
-		selecci&oacute;n que hace en el formulario consulta web el
-		<literal>Reporte Revista No Bélicas</literal>.
+		selecci&oacute;n que hace en el formulario de consulta web el
+		<literal>General por Localización</literal>.
 	</para>
   <informalfigure>
 	<screenshot><mediaobject><imageobject>
-	<imagedata fileref="preporterevistanobelicas.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
-	<imageobject><imagedata fileref="preporterevistanobelicas.png" format="PNG" align="center"></imagedata></imageobject>
-	<textobject><phrase>Reporte Revista No Bélicas</phrase></textobject></mediaobject>
+	<imagedata fileref="preportegeneralloc.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+	<imageobject><imagedata fileref="preportegeneralloc.png" format="PNG" align="center"></imagedata></imageobject>
+	<textobject><phrase>Reporte General por Localización</phrase></textobject></mediaobject>
 	</screenshot>
   </informalfigure>
 
@@ -66,6 +65,27 @@ revisi&oacute;n al interior de la organizaci&oacute;n.
 	<textobject><phrase>Reporte Consolidado</phrase></textobject></mediaobject>
 	</screenshot>
 </informalfigure>
+<para>
+	El Mapa en Googlemap, que se presenta en la figura siguiente, ubica 
+	cada caso --según la latidud y longitud ingresada 
+	en cada caso-- con una bandera sobre las que puede pulsar el botón
+	izquierdo del ratón para obtener detalles.   Cuando hay un grupo
+	de casos muy cercanos aparece un círculo de color con el número 
+	de casos.  Al acercarse (con los controles de la izquierda) 
+	lo suficiente verá las banderas separadas y podrá pulsar
+	sobre la que requiera.   Puede interactuar con 
+	<ulink url="https://www.nocheyniebla.org/opcion.php?num=300">uno
+		del Banco de Datos del CINEP</ulink>.
+
+</para>
+	<informalfigure>
+	<screenshot><mediaobject><imageobject>
+	<imagedata fileref="mapa.eps" format="EPS" scale="40" align="center"></imagedata></imageobject>
+	<imageobject><imagedata fileref="mapa.png" format="PNG" align="center"></imagedata></imageobject>
+	<textobject><phrase>Mapa en GoogleMaps con datos del Banco de Datos del CINEP</phrase></textobject></mediaobject>
+	</screenshot>
+</informalfigure>
+
 	<para>
 		La <literal>Consulta Externa</literal> presenta la
 		misma ficha de captura, para permitirle establecer

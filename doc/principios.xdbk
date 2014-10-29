@@ -77,6 +77,16 @@ del sistema operativo OpenBSD y su distribución
 		</para></footnote> y constituida por herramientas de
 		dominio público o de licencias cercanas.  </para>
 </listitem>
+ <listitem>
+		 <para>
+			 Recomendamos de manera especial OpenBSD por sus niveles de seguridad
+			 y la distribución adJ por su soporte de español y porque por defecto 
+			 las bases de datos y respaldos de SIVeL quedan cifrados con una clave 
+			 que debe darse durante el arranque.  Por lo mismo en caso de 
+			 hurto la información no será visible para quien hurta, y en caso de 
+			 una inspección ilegitima basta apagar o desconectar el computador.
+		 </para>
+	 </listitem>
 		</itemizedlist>  			
 
 	<warning><para>Reconocemos como fallas de seguridad 

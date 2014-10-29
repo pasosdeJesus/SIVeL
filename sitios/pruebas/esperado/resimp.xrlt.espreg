@@ -143,7 +143,6 @@
   <grupo>
     <id_grupo>3</id_grupo>
     <nombre_grupo>presuntos r1</nombre_grupo>
-      <agresion_sin_vicd>cat1 (1000)</agresion_sin_vicd>
     <observaciones tipo="bloque">bloque</observaciones>
     <observaciones tipo="frente">frente</observaciones>
     <observaciones tipo="brigada">brigada</observaciones>
@@ -206,5 +205,5 @@
   <observaciones tipo="antecedente">antecedente1</observaciones>
   <observaciones tipo="etiqueta:IMPORTA_RELATO">1</observaciones>
   <observaciones tipo="etiqueta:AMARILLO">con color</observaciones>
-  <observaciones tipo="etiqueta:ERROR_IMPORTACIÓN">Persona repetida 1 - 'NOMBRES APELLIDOS' , como víctima en casos 1. -- presponsable: desconocido 'nombre'</observaciones>
+  <observaciones tipo="etiqueta:ERROR_IMPORTACIÓN">Persona repetida 1 - &#039;NOMBRES APELLIDOS&#039; , como víctima en casos 1. -- presponsable: desconocido &#039;nombre&#039;</observaciones>
 </relato></relatos>

@@ -164,20 +164,29 @@ SELECT setval('vinculoestado_seq', max(id)) FROM vinculoestado;
 
 INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('SI', 'SIN INFORMACION', NULL, '2001-01-01', NULL, NULL);
 INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('SO', 'ESPOSA(O)/COMPAÑERA(O)', '', '2001-01-01', NULL, 'SO');
-INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('AB', 'ABUELA(O)', '', '2001-01-01', NULL, 'NO');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('AB', 'ABUELA(O)', '', '2001-01-01', NULL, NULL);
 INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('NO', 'NIETA(O)', '', '2011-03-17', NULL, 'AB');
-INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('PA', 'MADRE/PADRE', NULL, '2001-01-01', NULL, 'HI');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('PA', 'MADRE/PADRE', NULL, '2001-01-01', NULL, NULL);
 INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('HI', 'HIJA(O)', NULL, '2001-01-01', NULL, 'PA');
-INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('HE', 'HERMANA(O)', NULL, '2001-01-01', NULL, 'HE');
-INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('PO', 'MADRINA/PADRINO', NULL, '2001-01-01', NULL, 'AH');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('HE', 'HERMANA(O)', NULL, '2001-01-01', NULL, NULL);
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('PO', 'MADRINA/PADRINO', NULL, '2001-01-01', NULL, NULL);
 INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('AH', 'AHIJADA(O)', '', '2011-08-04', NULL, 'PO');
-INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('TO', 'TIA(O)', NULL, '2001-01-01', NULL, 'OO');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('TO', 'TIA(O)', NULL, '2001-01-01', NULL, NULL);
 INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('OO', 'SOBRINA(O)', '', '2011-07-21', NULL, 'TO');
-INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('PD', 'MADRASTRA(PADRASTRO)', '', '2011-09-21', NULL, 'HO');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('PD', 'MADRASTRA(PADRASTRO)', '', '2011-09-21', NULL, NULL);
 INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('HO', 'HIJASTRA(O)', '', '2011-05-02', NULL, 'PD');
-INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('SG', 'SUEGRA(O)', '', '2011-05-27', NULL, 'YE');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('SG', 'SUEGRA(O)', '', '2011-05-27', NULL, NULL);
 INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('YE', 'NUERA/YERNO', NULL, '2014-02-18', NULL, 'SG');
-INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('PM', 'PRIMA(O)', NULL, '2014-02-18', NULL, 'PM');
+INSERT INTO trelacion (id, nombre, observaciones, fechacreacion, fechadeshabilitacion, inverso) VALUES ('PM', 'PRIMA(O)', NULL, '2014-02-18', NULL, NULL);
+
+UPDATE trelacion SET inverso = 'NO' WHERE id='AB';
+UPDATE trelacion SET inverso = 'HI' WHERE id='PA';
+UPDATE trelacion SET inverso = 'HE' WHERE id='HE';
+UPDATE trelacion SET inverso = 'AH' WHERE id='PO';
+UPDATE trelacion SET inverso = 'OO' WHERE id='TO';
+UPDATE trelacion SET inverso = 'HO' WHERE id='PD';
+UPDATE trelacion SET inverso = 'YE' WHERE id='SG';
+UPDATE trelacion SET inverso = 'PM' WHERE id='PM';
 
 
 -- etnia
@@ -195,7 +204,7 @@ INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion)
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (18, 'COREGUAJE - KOREGUAJE', '37 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls ', '2011-04-29', NULL);
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (19, 'CUBEO', '20 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls ', '2011-04-29', NULL);
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (20, 'CUIBA', '21 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls ', '2011-04-29', NULL);
-INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (21, 'CHIMILA', ' ', '2011-04-29', NULL);
+INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (21, 'CHIMILA', '14 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls', '2011-04-29', NULL);
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (22, 'DESANO', '23 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls ', '2011-04-29', NULL);
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (23, 'EMBERA', '25 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls ', '2011-04-29', NULL);
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (25, 'GUAMBIANO', '29 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls ', '2011-04-29', NULL);
@@ -247,7 +256,6 @@ INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion)
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (64, 'CABIYARI', '11 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls', '2014-05-30', NULL);
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (65, 'CARAMANTA', '84 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls', '2014-05-30', NULL);
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (66, 'CHAMI', '86 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls', '2014-05-30', NULL);
-INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (67, 'CHIMILA', '14 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls', '2014-05-30', NULL);
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (68, 'CHIRICOA', '15 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls', '2014-05-30', NULL);
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (69, 'COCONUCO', '17 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls', '2014-05-30', NULL);
 INSERT INTO etnia (id, nombre, descripcion, fechacreacion, fechadeshabilitacion) VALUES (70, 'COROCORO', '87 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls', '2014-05-30', NULL);

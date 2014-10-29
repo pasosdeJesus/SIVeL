@@ -16,7 +16,7 @@ if (test ! -f "$DIRSEG/vardb.sh" ) then {
 . $DIRSEG/vardb.sh
 . $DIRSEG/../../confv.sh
 
-if (test $PHP = "") then {
+if (test $PHP = "" -o ! -x "$PHP") then {
 	echo "Falta configurar fuentes";
 	exit 1;
 } fi;

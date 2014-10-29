@@ -16,7 +16,7 @@
  */
 
 /**
- * Pestaña con siguiente/anterior para capturar caso 
+ * Pestaña con siguiente/anterior para capturar caso
  */
 require_once 'PagBaseMultiple.php';
 require_once 'ResConsulta.php';
@@ -338,7 +338,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $cpartes = $cll::PARTES;
         $partes = array_reverse(
             array_diff(
-                preg_split('/[\s]+/', $cpartes), 
+                preg_split('/[\s]+/', $cpartes),
                 array($cll::CLASEMODELO)
             )
         );
@@ -400,7 +400,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
             return true;
         }
 
-                    
+
         $vll = var_escapa($valores[$ll]);
         if (!$this->validate() ) {
             return false;
@@ -461,7 +461,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                 if (isset($valores[$k])) {
                     //echo "OJO 2 k=$k, valores[k]=" . $valores[$k] . "<br>";
                     $vk[$k] = valor_fb2do(
-                        var_escapa($valores[$k]), 
+                        var_escapa($valores[$k]),
                         $this->$nb->_do->__table, $k, $tab
                     );
                 }

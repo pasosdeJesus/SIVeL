@@ -89,6 +89,8 @@ if ($f->validate()) {
         echo _("No pasaron validaciones adicionales");
     } else if (!verifica_sin_CSRF($f->_submitValues)) {
         die(_("Datos enviados no pasaron verificación CSRF"));
+    } else if (isset($GLOBALS['deshabilita_manejo_tablasbasicas']) && $GLOBALS['deshabilita_manejo_tablasbasicas']) {
+        echo _("Edición de tablas básicas deshabilitada");
     } else {
         $res = null;
         if (isset($f->_submitValues['actualizar'])

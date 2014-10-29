@@ -655,10 +655,10 @@ class PagVictimaIndividual extends PagBaseMultiple
         if (isset($valores['numerodocumento'])
             && (int)$valores['numerodocumento'] > 0
         ) {
-            $q = "SELECT id, nombres, apellidos, id_caso 
-                FROM victima, persona 
-                WHERE persona.id=victima.id_persona 
-                AND numerodocumento='"
+            $q = "SELECT id, nombres, apellidos, id_caso
+                FROM victima, persona
+                WHERE persona.id = victima.id_persona
+                AND numerodocumento = '"
                 . (int)$valores['numerodocumento'] . "'";
             $r = hace_consulta($db, $q); $row = array();
             if ($r->fetchInto($row)) {
@@ -667,7 +667,7 @@ class PagVictimaIndividual extends PagBaseMultiple
                 ) {
                     error_valida(
                         _(
-                            'Numero de documento repetido en víctima ' 
+                            'Numero de documento repetido en víctima '
                             . $row[1] . " " . $row[2] . " de caso " . $row[3]
                         ), $valores
                     );

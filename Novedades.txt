@@ -1,5 +1,14 @@
 Apéndice A. Novedades
 
+   Versión 1.2b3 (Ago.2014)
+
+          + Consulta web permite especificar dos etiquetas.
+          + Al validar con modelos probabilisticos se identifican hombres
+            con nombre de mujer, mujeres con nombre de hombre y nombres
+            que parece apellidos.
+          + Implementada otra verificación de seguridad sugeridad por
+            OWASP: escapar informacion emitida en XML.
+
    Versión 1.2b2 (Jul.2014)
 
           + Consulta web ahora incluye filtro Sexo para hacer consultas
@@ -20,8 +29,9 @@ Apéndice A. Novedades
             listado.
           + En consulta web y al buscar similares en el módulo mezcla,
             permite buscar nombres similares al pronunciar en español
-            ---usa soundex en español. En el módulo mezclar al buscar
-            similares emplea soundex para español.
+            ---usa soundex en español, agradecimientos a Oliver Mazariegos
+            de Grupo Vesica. En el módulo mezclar al buscar similares
+            emplea soundex para español.
           + En relatos importa/exporta etiquetas.
           + Listado de etnias completado con
             http://www.mineducacion.gov.co/1621/articles-255690_archivo_xl
@@ -55,8 +65,6 @@ Apéndice A. Novedades
             indicará ingresar nuevamente.
           + Simplificadas tablas de usuarios.
           + Información geográfica actualizada con DIVIPOLA 2013.
-          + Función soundexesp, agradecimiento a Oliver Mazariegos de
-            Grupo Vesica.
           + Añadidas variables de configuración para añadir validaciones:
             $GLOBALS['validaciones_tipicas'],
             $GLOBALS['gancho_valida_caso'],
@@ -137,4 +145,7 @@ Apéndice A. Novedades
             configuración particular a cada entorno en conf-local.php,
             conf_int-local.php y vardb-local.sh.
 
-   El historial de la versión 1.1 puede verse en el manual de esa versión.
+   Versión 1.0 y 1.1
+
+          + El historial de la versión 1.1 puede verse en el manual de esa
+            versión.

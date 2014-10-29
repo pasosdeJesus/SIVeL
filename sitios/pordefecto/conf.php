@@ -195,6 +195,11 @@ $GLOBALS['PALABRA_SITIO'] = 'sigamos el ejemplo de Jesús';
  */
 $GLOBALS['deshabilita_manejo_usuarios'] = false;
 
+/** Deshabilita ediciones a tablas básicas
+ * @global string $GLOBALS['deshabilita_manejo_tablasbasicas']
+ */
+$GLOBALS['deshabilita_manejo_tablasbasicas'] = false;
+
 /** Nivel de depuración para DB_DataObject. 0 a 5.
  * @global string $GLOBALS['DB_Debug']
  */

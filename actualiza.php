@@ -3288,7 +3288,7 @@ $$
 		END
 $$
 LANGUAGE SQL IMMUTABLE;"
-        );
+    );
     hace_consulta(
         $db, "CREATE OR REPLACE FUNCTION probcadh(in_text TEXT) 
         RETURNS NUMERIC AS
@@ -3344,7 +3344,7 @@ if (!aplicado($idac)) {
     );
     hace_consulta(
         $db, "CREATE OR REPLACE FUNCTION probcadap(in_text TEXT) 
-        RETURNS NUMERIC AS
+            RETURNS NUMERIC AS
 $$
     SELECT CASE WHEN (SELECT SUM(frec) FROM napellidos)=0 THEN 0
         WHEN (SELECT COUNT(*) FROM napellidos WHERE apellido=$1)=0 THEN 0
@@ -3368,7 +3368,14 @@ $$
     aplicaact($act, $idac, 'Valida apellidos con modelo prob.'); 
 }
 
+$idac = '1.2-nre';
+if (!aplicado($idac)) {
+    hace_consulta($db, "UPDATE victima SET id_etnia='21' WHERE id_etnia='67'", false);
+    hace_consulta($db, "UPDATE etnia SET descripcion='14 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls' WHERE id='21'", false);
+    hace_consulta($db, "DELETE FROM etnia WHERE id='67'", false);
 
+    aplicaact($act, $idac, 'Eliminada etnia repetida');
+}
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;

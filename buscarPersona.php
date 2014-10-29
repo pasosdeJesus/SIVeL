@@ -52,7 +52,6 @@ function muestra()
         . " WHERE " . $where
         . " ORDER by nombres, apellidos ";
 
-
     //echo "OJO q=\"$q\"<br>";
     $result = hace_consulta($db, $q);
 
@@ -87,11 +86,10 @@ function muestra()
         $html_comovic = "";
         $html_comofam = "";
         enlaces_casos_persona_html(
-            &$db, 0, $row[0], &$html_comovic, &$html_comofam
+            $db, 0, $row[0], $html_comovic, $html_comofam
         );
         echo "<td align='center'>" . $html_comovic . "</td>";
         echo "<td align='center'>" . $html_comofam . "</td>";
-
         echo "</tr>\n";
     }
     echo "</table>";
