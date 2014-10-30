@@ -5,6 +5,11 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>
+Fallas corregidas: cálculo de edad.
+					</para></listitem>
+
+
+					<listitem><para>
 En módulo mapag puede configurarse autenticación para ver mapa con 
 $GLOBALS['mapag_autentica'].
 					</para></listitem>
