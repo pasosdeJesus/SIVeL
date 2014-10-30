@@ -1823,9 +1823,9 @@ function edad_de_fechanac($anionac, $aniohecho, $mesnac = null,
         return -1;
     }
     $na = $aniohecho-$anionac;
-    if ($mesnac != null && $meshecho != null && $mesnac <= $meshecho) {
-        if ($mesnac < $meshecho || ($dianac != null && $diahecho != null
-            && $dianac < $diahecho)
+    if ($mesnac != null && $meshecho != null && $mesnac >= $meshecho) {
+        if ($mesnac > $meshecho || ($dianac != null && $diahecho != null
+            && $dianac > $diahecho)
         ) {
             $na--;
         }
