@@ -171,6 +171,7 @@ class DataObjects_Victima extends DB_DataObject_SIVeL
     {
         switch ($field) {
         case 'id_sectorsocial':
+        case 'id_rangoedad':
         case 'id_vinculoestado':
         case 'id_organizacion':
         case 'id_profesion':
