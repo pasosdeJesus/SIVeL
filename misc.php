@@ -1221,7 +1221,7 @@ function consulta_uno(&$db, $q, $t = true)
      */
 function consulta_and(&$db, &$w, $n, $v, $opcmp = '=', $con='AND')
 {
-    if (!isset($v) || $v === '' || $v === ' ' || ord($v)==32) {
+    if (!isset($v) || $v === '' || $v === ' ' || ord($v) == 32) {
         return;
     }
     if ($w != "") {
@@ -1573,7 +1573,7 @@ function var_escapa($v, &$db = null, $maxlong = 1024)
                 $r[$k] = var_escapa($e, $db, $maxlong);
             }
             return $r;
-        } else {
+        } else if (is_string($v)) {
             /** Evita buffer overflows */
             $nv = substr($v, 0, $maxlong);
 
@@ -1596,10 +1596,11 @@ function var_escapa($v, &$db = null, $maxlong = 1024)
             }
 
             return $p3;
+        } else {
+            return $v;
         }
-    } else {
-        return '';
     }
+    return '';
 }
 
 /**

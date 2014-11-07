@@ -31,7 +31,6 @@ function consultaweb($post)
     static $cuenta = 0;
     $_REQUEST = $_POST = $post;
     $_REQUEST['evita_csrf'] = $_SESSION['sin_csrf'] = $_POST['evita_csrf'] = 1234;
-
     include_once "consulta_web.php";
     if ($cuenta > 0) {
         runController();
