@@ -2960,7 +2960,7 @@ if (!aplicado($idac)) {
     );
 
     foreach (array("AO" => "AB", "HA" => "HO", "HR" => "HE", "MA" => "PO",
-        "ME" => "PA", "TA" => "TO", "CO" => "SO", "SA" => "OO",
+        "ME" => "PA", "TA" => "TO", "CO" => "SO", "SA" => "SO",
         "NA" => "NO", "HT" => "HO", "OA" => "OO", "Pr" => "PM",
         "Pm" => "PM", "MD" => "PD", "NU" => "YE") as $ant => $nue
     ) {
