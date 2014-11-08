@@ -2436,7 +2436,7 @@ if (!aplicado($idac)) {
 $idac = '1.2-btc';
 if (!aplicado($idac)) {
     hace_consulta(
-        $db, "CREATE EXTENSION unaccent", false
+        $db, "CREATE EXTENSION unaccent"
     );
     hace_consulta(
         $db, "ALTER TEXT SEARCH DICTIONARY unaccent (RULES='unaccent')", false

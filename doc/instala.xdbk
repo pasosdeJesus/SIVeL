@@ -89,8 +89,8 @@ cada una en un CD por si desea mantener copias de respaldo (ver <ulink url="http
 				</listitem>
 				<listitem>
 					<para>
-Servidor web con SSL, recomendamos con <literal>mod_ssl</literal>
-(ver <ulink url="http://structio.sourceforge.net/guias/servidor_OpenBSD/apache.html#ssl"></ulink>).
+Servidor web con SSL, recomendamos <literal>nginx</literal>
+(ver <ulink url="http://structio.sourceforge.net/guias/servidor_OpenBSD/sevidor-web.html#nginx"></ulink>).
 Sugerimos que lo ejecute con <command>chroot</command> en 
 <filename>/var/www</filename> y que cree el directorio 
 <filename>/var/www/tmp</filename> para que PostgreSQL ubique su socket allí, 
@@ -112,8 +112,8 @@ autovacuum = on
 				</listitem>
 				<listitem>
 					<para> 
-PHP 5 con módulo para PostgreSQL y Pear (ver instalación
-de PHP 5 en <ulink url="http://structio.sourceforge.net/guias/servidor_OpenBSD/apache.html#php"></ulink>). 
+PHP 5 con módulo para PostgreSQL y Pear (ver uso 
+de PHP 5 con nginx en <ulink url="http://structio.sourceforge.net/guias/servidor_OpenBSD/sevidor-web.html#nginx"></ulink>). 
 					</para>
 					<para>
 Se sugiere editar <filename>/var/www/conf/php.ini</filename>
@@ -408,9 +408,9 @@ PHP, SQL y seguridad informática) mezcle actualizaciones del SIVeL
 genérico a las fuentes personalizadas.  
 		</para>
 	<sect3 id="actualizacionmenor">
-		<title>Actualización de versiones menores (e.g 1.1b1 a 1.1b2)</title>
+		<title>Actualización de versiones menores (e.g 1.2b1 a 1.2b2)</title>
 		<para>
-			Descargue fuentes de la versión 1.1 más recientes con uno de los siguientes métodos:
+			Descargue fuentes de la versión 1.2 más recientes con uno de los siguientes métodos:
 			<orderedlist>
 				<!--								<listitem>
 					<para>De resultarle posible actualice 
@@ -439,14 +439,14 @@ cd /var/www/users/sivel
 				<listitem>
 					<para>
 Descargue las fuentes más recientes desde 
-<ulink url="http://sivel.sourceforge.net/1.1/"></ulink>, 
+<ulink url="http://sivel.sourceforge.net/1.2/"></ulink>, 
 ubiquelas en el servidor y descomprímalas.  Si las descarga con 
-Firefox desde el servidor posiblemente quedaran en el directorio 
-<literal>Desktop</literal> de su cuenta personal por lo que puede 
+chrome desde el servidor posiblemente quedaran en el directorio 
+<literal>Documentos</literal> de su cuenta personal por lo que puede 
 descomprimir y remplazar fuentes anteriores.  Usando OpenBSD adJ sería
 con:
 						<screen>
-cd ~/Desktop
+cd ~/Documentos
 tar xvfz sivel-&PRY-VERSION;.tar.gz
 sudo chown $USER:$USER /var/www/htdocs/sivel/
 cp -rf sivel-&PRY-VERSION;/* /var/www/htdocs/sivel/
@@ -460,22 +460,20 @@ Si desea emplear las fuentes de desarrollo descárguelas y cópielas con
 cd ~
 mkdir tmp2
 cd tmp2
-cvs -d:pserver:anonymous@sivel.cvs.sourceforge.net:/cvsroot/sivel login
-cvs -z3 -d:pserver:anonymous@sivel.cvs.sourceforge.net:/cvsroot/sivel co -rSIVEL1_1 -P sivel
+git clone https://github.com/pasosdeJesus/SIVeL.git
 sudo chown $USER:$USER /var/www/htdocs/sivel
-cp -rf sivel/* /var/www/htdocs/sivel
+cp -rf SIVeL/* /var/www/htdocs/sivel
 </screen>
-Cuando le solicite clave presione ENTER.
 					</para>
 				</listitem>
 			<listitem>
-				<para>Si ya tiene unas fuentes que tengan control de versiones (con el directorio CVS), actualicelas asi:
+				<para>
+Si ya tiene unas fuentes que tengan 
+control de versiones (con el directorio .git), actualicelas asi:
 <screen>
 cd /var/www/htdocs/sivel
-cvs -d:pserver:anonymous@sivel.cvs.sourceforge.net:/cvsroot/sivel login
-cvs -z3 -d:pserver:anonymous@sivel.cvs.sourceforge.net:/cvsroot/sivel update -rSIVEL1_1 -Pd
+git pull
 </screen>
-
 					</para>
 				</listitem>
 			</orderedlist>
@@ -486,78 +484,99 @@ acceder a SIVeL en su nueva ubicación
 <filename>/var/www/htdocs/sivel/</filename>. 
 Para esto edite el archivo de configuración con:
 <screen>
-sudo xfw /var/www/conf/httpd.conf
+sudo xfw /etc/nginx/nginx.conf
 </screen>
 Busque una línea con:
 <screen>
-DocumentRoot "/var/www/users/sivel"
+root "/var/www/htdocs";
 </screen>
 y si la encuentra remplázela por:
 <screen>
-DocumentRoot "/var/www/htdocs/sivel"
+root "/var/www/htdocs/sivel";
 </screen>
 Complete reiniciando nginx con 
 <screen>
-sudo apachectl stop; sleep 1
-sudo sh /etc/rc.local
+sudo sh /etc/rc.d/nginx restart
 </screen>
 		</para>
-
 	</sect3>
-	<sect3 id="actualizaciondeunoaunouno">
-		<title>Actualización de la versión 1.0 a la versión 1.1</title>
+
+	<sect3 id="actualizaciondeunounoaunodos">
+		<title>Actualización de la versión 1.1 a la versión 1.2</title>
 		<para>Esta actualización es bastante compleja, se
-			recomienda dejar su versión 1.0 utilizable con 
+			recomienda dejar su versión 1.1 utilizable con 
 			propósitos de auditoria y respaldo.
 		</para>
 		<para>
 <orderedlist>
 	<listitem>
 		<para>
-Actualice a la versión más reciente de SIVeL 1.0 (1.0.6 en el 
+Actualice a la versión más reciente de SIVeL 1.1 (1.1.5 en el 
 momento de este escrito), siguiendo las instrucciones de 
-<ulink url="http://sivel.sourceforge.net/1.0/actualizacion-sivel.html"></ulink></para>
+<ulink url="http://sivel.sourceforge.net/1.1/actualizacion-sivel.html"></ulink></para>
 	</listitem>
 	<listitem>
 		<para>
-Valide sus datos desde el menú Otros->Validar.  Examine el reporte y 
-corrija las inconsistencias en su base, puede ejecutar varias veces el 
-procedimiento de validación hasta asegurarse de tener datos consistentes.  
+En cada sitio valide sus datos desde el menú Otros->Validar.  Examine el 
+reporte y corrija las inconsistencias en su base, puede ejecutar varias 
+veces el procedimiento de validación hasta asegurarse de tener datos 
+consistentes.  
 Esto es muy importante porque para la conversión a 1.1 sólo esperamos 
 que se conviertan datos correctos en datos correctos. 
-<warning><para>Los datos incorrectos o inconsistentes pueden perderse al convertirlos a la versión 1.1.</para></warning>
+<warning><para>Los datos incorrectos o inconsistentes pueden perderse al 
+		convertirlos a la versión 1.2.</para></warning>
  </para>
 	</listitem>	
 	<listitem>
-		<para>Respalde y mueva su sistema 1.0 a otro URL.  En general 
-debe bastar para el usuario que administra SIVeL ejecutar desde una terminal:
-
+		<para>Respalde y mueva los sitios de su sistema 1.1 a otros 
+			URLs.  
+En general debe bastar para el usuario que administra SIVeL ejecutar 
+desde una terminal por cada sitio:
 <screen>
-cd /var/www/htdocs/sivel
+	cd /var/www/htdocs/sivel/sitios/primersitio /var/www/htdocs/sivel11 primersitio11
 bin/mueve.sh
 </screen>
-Que dejará las fuentes en <filename>/var/www/htdocs/sivel10</filename> 
-usando la base de datos <literal>sivel10</literal> con copia de sus datos
-y permite ingresar agregando <literal>sivel10/</literal> al URL base. 
-Por ejemplo <ulink url="http://127.0.0.1/sivel10/"></ulink> desde el
-mismo servidor.</para>
+Que dejará las fuentes en <filename>/var/www/htdocs/sivel11</filename> 
+que usará lusando la base de datos <literal>primersitio11</literal> 
+con copia de sus datos y permite ingresar agregando 
+<literal>sivel11/primersitio11/</literal> al URL base. 
+Por ejemplo <ulink url="http://127.0.0.1/sivel11/primersitio11"></ulink> 
+desde el mismo servidor.</para>
 <para>Si requiere reubicar en otro sitio consulte 
-<ulink url="http://sivel.sourceforge.net/1.0/admin2.html#copias-respaldo"></ulink></para>
+<ulink url="http://sivel.sourceforge.net/1.1/admin2.html#copias-respaldo"></ulink></para>
 <para>Este script al terminar la reubicación, le sugerirá revisar el nuevo URL
-	y borrar las fuentes de la versión 1.0 de su ubicación anterior,
+	y borrar las fuentes de la versión 1.1 de su ubicación anterior,
 	presionando la tecla 's' y 'RETORNO'. Es recomendable que realice
 	esta acción.
 	</para>
 	</listitem>
 	<listitem>
 		<para>
-Instale la versión de desarrollo de SIVeL 1.1, siguiendo los mismos pasos
+Instale la versión de desarrollo de SIVeL 1.2, siguiendo los mismos pasos
 descritos en:
 			<xref linkend="actualizacionmenor"></xref>.
 		</para>
 	</listitem>
 	<listitem>
-		<para>Configúrela para que use la base legada de SIVeL 1.0.
+		<para>SIVeL 1.2 emplea codificación UTF-8 por lo que
+			deben recodificarse datos de las bases provenientes
+			de 1.1.   Para esto basta sacar copia de la base
+			usando 1.1 y restaurarla en una base ya creada pero
+			sin datos para 1.2.
+
+			Por otra parte SIVeL 1.2 para las búsquedas 
+			que no tienen en cuenta tildes emplea la extensión
+			unaccent, la cual para su instalación requiere
+			que el usuario dueño de la base de datos sea
+			superusuario.  Para convertir un usuario sivel
+			en superusuario:
+			sudo su - _postgresql
+			psql -h/var/www/tmp -Upostgres template1
+			alter role sivel with superuser;
+
+
+
+
 Si movió su sistema 1.0 como se describió en esta sección
 y dejo las ubicaciones por defecto, basta que ejecute:
 <screen>
