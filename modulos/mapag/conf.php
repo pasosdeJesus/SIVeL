@@ -14,6 +14,16 @@
  * Acceso: SÓLO DEFINICIONES
  */
 
+
+// Opciones
+
+
+/** ¿Autenticar para usar mapa?  Si es false es público.
+ * @global string $GLOBALS['familiaresvictima']
+ */
+$GLOBALS['mapag_autentica'] = false;
+
+
 // Opciones del menú
 
 $GLOBALS['modulo'][300] = 'modulos/mapag/index.php';
@@ -23,6 +33,5 @@ $GLOBALS['m_opcion'][491] = array(
     'idpapa' => 40,
     'url' => 'opcion?num=300',
 );
-
 
 

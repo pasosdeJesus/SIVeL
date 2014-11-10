@@ -2436,7 +2436,7 @@ if (!aplicado($idac)) {
 $idac = '1.2-btc';
 if (!aplicado($idac)) {
     hace_consulta(
-        $db, "CREATE EXTENSION unaccent", false
+        $db, "CREATE EXTENSION unaccent"
     );
     hace_consulta(
         $db, "ALTER TEXT SEARCH DICTIONARY unaccent (RULES='unaccent')", false
@@ -2960,7 +2960,7 @@ if (!aplicado($idac)) {
     );
 
     foreach (array("AO" => "AB", "HA" => "HO", "HR" => "HE", "MA" => "PO",
-        "ME" => "PA", "TA" => "TO", "CO" => "SO", "SA" => "OO",
+        "ME" => "PA", "TA" => "TO", "CO" => "SO", "SA" => "SO",
         "NA" => "NO", "HT" => "HO", "OA" => "OO", "Pr" => "PM",
         "Pm" => "PM", "MD" => "PD", "NU" => "YE") as $ant => $nue
     ) {
@@ -3352,11 +3352,11 @@ $$
             FROM napellidos WHERE apellido=$1)
         END
 $$
-        LANGUAGE SQL IMMUTABLE "
+        LANGUAGE SQL IMMUTABLE"
     );
     hace_consulta(
         $db, "CREATE OR REPLACE FUNCTION probapellido(in_text TEXT) 
-            RETURNS NUMERIC AS
+        RETURNS NUMERIC AS
 $$
 	SELECT sum(ppar) FROM (SELECT p, probcadap(p) AS ppar FROM (
 		SELECT p FROM divarr(string_to_array(trim($1), ' ')) AS p) 
@@ -3364,10 +3364,18 @@ $$
 $$
         LANGUAGE SQL IMMUTABLE; "
     );
+    
     aplicaact($act, $idac, 'Valida apellidos con modelo prob.'); 
 }
 
+$idac = '1.2-nre';
+if (!aplicado($idac)) {
+    hace_consulta($db, "UPDATE victima SET id_etnia='21' WHERE id_etnia='67'", false);
+    hace_consulta($db, "UPDATE etnia SET descripcion='14 en http://www.mineducacion.gov.co/1621/articles-255690_archivo_xls_listado_etnias.xls' WHERE id='21'", false);
+    hace_consulta($db, "DELETE FROM etnia WHERE id='67'", false);
 
+    aplicaact($act, $idac, 'Eliminada etnia repetida');
+}
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;

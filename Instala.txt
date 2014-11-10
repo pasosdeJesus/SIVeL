@@ -1,6 +1,6 @@
 1. Prerrequisitos
 
-     * Sistema tipo Unix, recomendamos OpenBSD 5.3 y en particular la
+     * Sistema tipo Unix, recomendamos OpenBSD 5.5 y en particular la
        distribución Aprendiendo de Jesús (ver
        http://aprendiendo.pasosdeJesus.org).
      * Para hacer pruebas durante la configuración puede emplear una
@@ -28,7 +28,6 @@
        autovaciado en /var/postgresql/data/postgresql.conf con las líneas:
 track_counts = on
 autovacuum = on
-
      * PHP 5 con módulo para PostgreSQL y Pear (ver instalación de PHP 5
        en
        http://structio.sourceforge.net/guias/servidor_OpenBSD/apache.html#
@@ -73,7 +72,7 @@ sudo pear install ./Validate-*
     1. Aunque no es indispensable se recomienda que cree una cuenta para
        sivel (digamos con login sivel).
     2. Instale en un directorio utilizable por Apache con SSL. Por ejemplo
-       si las fuentes están en ~/Desktop/sivel-1.2a1.tar.gz y va a
+       si las fuentes están en ~/Desktop/sivel-1.2b3.tar.gz y va a
        instalar en el directorio /var/www/htdocs/sivel que debería ser
        visible para Apache, emplee:
 cd /var/www/htdocs
@@ -81,8 +80,8 @@ sudo mkdir sivel
 cd ~/
 mkdir -p tmp
 cd tmp
-tar xvfz ~/Desktop/sivel-1.2a1.tar.gz
-sudo cp -rf sivel-1.2a1/* /var/www/htdocs/sivel/
+tar xvfz ~/Desktop/sivel-1.2b3.tar.gz
+sudo cp -rf sivel-1.2b3/* /var/www/htdocs/sivel/
 cd /var/www/htdocs/sivel/
 sudo chown -R sivel:sivel .
 sudo chmod -R a+r .
@@ -151,9 +150,9 @@ make
        que facilitan hacer respaldo diario y mantener la copia del último
        mes en el computador local y opcionalmente de la última semana en
        un computador remoto. Requieren scp y algunas variables de
-       configuración de conf.php (ver Sección 2.1, "Copias de respaldo y
-       restauración" y Sección 2.1.3, "Configuración de respaldo
-       automático diario").
+       configuración de conf.php (ver Sección 2.1, “Copias de respaldo y
+       restauración” y Sección 2.1.3, “Configuración de respaldo
+       automático diario”).
     3. Para activar corrección ortográfica, instale ispell e
        ispell-spanish. Si Apache corre chroot en un directorio (digamos
        /var/www), cree en ese directorio la estructura de directorios que
@@ -180,4 +179,4 @@ $ ./conf.sh
        como "naci'on" (sin comillas).
     4. Para publicar la Consulta Web en Internet y activar
        retroalimentación cifrada por correo vea Sección 2.4,
-       "Retroalimentación por correo desde Consulta Web".
+       “Retroalimentación por correo desde Consulta Web”.

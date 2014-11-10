@@ -88,7 +88,19 @@ class DataObjects_Rangoedad extends DataObjects_Basica
         'fechacreacion',
     );
 
-
+    /**
+     * Prepara consulta agregando objeto enlazado a este por
+     * campo field.
+     *
+     * @param object &$opts  objeto DB para completar consulta
+     * @param string &$field campo por el cual enlazar
+     *
+     * @return void
+     */
+    function prepareLinkedDataObject(&$opts, &$field)
+    {
+        $opts->whereAdd('fechadeshabilitacion IS NULL');
+    }
 
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'

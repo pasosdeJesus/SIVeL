@@ -13,8 +13,8 @@
 	  for this public invitation, in order to increase the
 	  reward offered.  </para>
   <para>If you are developer or interested in information security 
-	  we invite you to look for bugs in the security of SIVeL,
-	  by experimenting on the test installation; by doing your 
+	  we invite you to look for in the security of SIVeL,
+	  by experimenting on the test installation; or by doing your 
 	  own installation, following the recommendations for the operation 
 	  environment
 	  (see <xref linkend="instalacion"/>),
@@ -27,22 +27,21 @@
 			  <para>You found the bug. </para>
 		  </listitem>
 		  <listitem>
-			  <para>Each bug must be replicable in the
-				  test installation.
-				  You can check the form that doesn't
-				  require authentication:
+			  <para>Each bug must be replicable in the test installation.
+				  You can check the form that doesn't require authentication:
           <ulink url="https://www.pasosdeJesus.org/sivel12/consulta_web.php"></ulink> ;
-				  as well as in other components as the user
-				  <literal>sivel12</literal> with
-          password <literal>sivel12</literal> and role <literal>analyst</literal>:
-          <ulink url="https://www.pasosdeJesus.org/sivel12/index.php"></ulink> ; 
+          as well as in other components as the user 
+          <literal>sivel12</literal> with password 
+          <literal>sivel12</literal> and role <literal>analyst</literal>:
+         <ulink url="https://www.pasosdeJesus.org/sivel12/index.php"></ulink> ; 
 				  or as administrator 
 				  <literal>adminsivel12</literal> also with
 				  password <literal>sivel12</literal>.
 				  This installation operates on the 
 				  recommended execution platform
 				  (OpenBSD distribution
-				  <ulink url="https://aprendiendo.pasosdeJesus.org">adJ</ulink> &VER-OPENBSD;, 
+          <ulink url="https://aprendiendo.pasosdeJesus.org">adJ</ulink> 
+          &VER-OPENBSD;, 
 				  web server nginx with SSL in chroot,
 				  PostgreSQL with authentication and hardened PHP) and 
 				  uses data from
@@ -63,7 +62,7 @@
 		  </listitem>
 		  <listitem>
         <para>Report the vulnerability  as an
-          <ulink url="https://github.com/pasosdeJesus/SIVeL/issues">issue</ulink>
+          <ulink url="https://github.com/pasosdeJesus/SIVeL/issues">issue in github</ulink>
           and the fix as a pull request with the commentary "given to public domain."
 
 			  </para>

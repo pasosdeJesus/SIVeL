@@ -15,7 +15,17 @@
  * Acceso: CONSULTA PÚBLICA
  */
 
-// @codingStandardsIgnoreStart
+require_once "aut.php";
+require_once "confv.php";
+require_once $_SESSION['dirsitio'] . "/conf.php";
+
+// Si $GLOBALS['mapag_autentica'] es false, es consulta pública
+if (isset($GLOBALS['mapag_autentica']) && $GLOBALS['mapag_autentica']) {
+    $aut_usuario = "";
+    $accno = "";
+    autentica_usuario($dsn, $aut_usuario, 0);
+}
+
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -181,6 +191,5 @@ while ($d->fetch()) {
  */
 function muestra()
 {
-    // No autenticamos porque es consulta pública
 }
 ?>
