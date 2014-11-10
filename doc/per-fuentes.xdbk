@@ -313,6 +313,7 @@ git clone https://github.com/pasosdeJesus/SIVeL.git
 				<listitem>
 					<para>.xcf: Gráfico para editar
 						con GIMP</para>
+				</listitem>
 				<listitem>
 					<para>.xml: Archivo de configuración 
 						en XML.</para>

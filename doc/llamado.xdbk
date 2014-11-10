@@ -32,20 +32,20 @@
 				  instalación de prueba.
 				  Busque tanto en el formulario que no 
 				  requiere autenticación:
-				  <ulink url="https://sivel12.pasosdeJesus.org/consulta_web.php"></ulink> ;
-				  como en otros componentes que no deberían
-				  permitir modificación de datos como
-				  usuario
+          <ulink url="https://www.pasosdeJesus.org/sivel12/consulta_web.php"></ulink> ;
+          como en otros componentes con el 
+          rol <literal>analista</literal>
+				  del usuario
 				  <literal>sivel12</literal> y
 				  clave <literal>sivel12</literal>:
-				  <ulink url="https://sivel12.pasosdeJesus.org/index.php"></ulink> ; o como administrador 
+          <ulink url="https://www.pasosdeJesus.org/sivel12/index.php"></ulink> ; o como administrador 
 				  <literal>adminsivel12</literal> y también
 				  clave <literal>sivel12</literal>.
 				  Esta instalación opera 
 				  en la plataforma de ejecución
 				  recomendada (distribución
 				  <ulink url="https://aprendiendo.pasosdeJesus.org">adJ</ulink> &VER-OPENBSD; 
-				  de OpenBSD, servidor web con SSL en chroot,
+				  de OpenBSD, servidor web nginx con SSL en chroot,
 				  PostgreSQL con autenticación y hardened PHP)
 				  y opera con datos del 
 				  <ulink url="http://www.nocheyniebla.org">Banco De Datos de Violencia Política, DH y DIH del CINEP</ulink>.
@@ -65,7 +65,7 @@
 		  </listitem>
 		  <listitem>
 			  <para>Reporte la falla en el 
-				  <ulink url="https://github.com/pasosdeJesus/SIVeL/issues">sistema de seguimiento</ulink>
+          <ulink url="https://github.com/pasosdeJesus/SIVeL/issues">sistema de seguimiento</ulink> y la solución como un <emphasis>pull request</emphasis> que incluya el comentario "se cede al dominio público."
 			  </para>
 		  </listitem>
 		  <listitem>
@@ -74,7 +74,7 @@
 				  reproducir la falla, 
 				  le entregaremos la retribución como 
 				  lo prefiera y sea posible: personalmente 
-				  o por PayPal  o por transferencia bancaria.
+				  o por PayPal  o por transferencia bancaria en Colombia.
 			  </para>
 		  </listitem>
 		  <listitem>

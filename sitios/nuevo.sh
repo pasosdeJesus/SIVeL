@@ -1,10 +1,10 @@
 #!/bin/sh
 # Preparar nuevo sitio
-# Dominio público. vtamara@pasosdeJesus.org 2009
+# Dominio p?blico. vtamara@pasosdeJesus.org 2009
 
 ns=$1;
 if (test "$ns" == "") then {
-	echo "Primer parámetro debe ser nombre de nuevo sitio";
+	echo "Primer par?metro debe ser nombre de nuevo sitio";
 	exit 1;
 } fi;
 
@@ -47,12 +47,26 @@ if (test -f /home/$usivel/.pgpass) then {
 } fi;
 
 mkdir -p $ns/DataObjects
-sed -e "s/dbnombre *= *\".*\"/dbnombre = \"$ns\"/g;s/dbclave *= *\".*\"/dbclave = \"$CLSIVELPG\"/g;s/dirsitio *= *\".*\"/dirsitio = \"sitios\/$ns\"/g;s/dirserv *= *\".*\"/dirserv = \"$edtchroot\"/g" pordefecto/${nomplant} > $ns/conf.php
-sed -e "s/dbnombre *= *\".*\"/dbnombre = \"$ns\"/g;s/dbclave *= *\".*\"/dbclave = \"$CLSIVELPG\"/g;s/dirsitio *= *\".*\"/dirsitio = \"sitios\/$ns\"/g;s/dirserv *= *\".*\"/dirserv = \"$edtchroot\"/g" pordefecto/conf-local.php.plantilla > $ns/conf-local.php
-sed -e "s/dirap *= *.*/dirap=$edts\/sitios\/$ns/g" pordefecto/vardb.sh.plantilla > $ns/vardb.sh
-sed -e "s/dirap *= *.*/dirap=$edts\/sitios\/$ns/g" pordefecto/vardb-local.sh.plantilla > $ns/vardb-local.sh
-cp pordefecto/conf_int.php.plantilla $ns/conf_int.php
-cp pordefecto/conf_int-local.php.plantilla $ns/conf_int-local.php
+if (test ! -f $ns/conf.php) then {
+  sed -e "s/dbnombre *= *\".*\"/dbnombre = \"$ns\"/g;s/dbclave *= *\".*\"/dbclave = \"$CLSIVELPG\"/g;s/dirsitio *= *\".*\"/dirsitio = \"sitios\/$ns\"/g;s/dirserv *= *\".*\"/dirserv = \"$edtchroot\"/g" pordefecto/${nomplant} > $ns/conf.php
+  sed -e "s/dbnombre *= *\".*\"/dbnombre = \"$ns\"/g;s/dbclave *= *\".*\"/dbclave = \"$CLSIVELPG\"/g;s/dirsitio *= *\".*\"/dirsitio = \"sitios\/$ns\"/g;s/dirserv *= *\".*\"/dirserv = \"$edtchroot\"/g" pordefecto/${nomplant} > $ns/conf.php
+} fi;
+
+if (test ! -f $ns/conf-local.php) then {
+  sed -e "s/dbnombre *= *\".*\"/dbnombre = \"$ns\"/g;s/dbclave *= *\".*\"/dbclave = \"$CLSIVELPG\"/g;s/dirsitio *= *\".*\"/dirsitio = \"sitios\/$ns\"/g;s/dirserv *= *\".*\"/dirserv = \"$edtchroot\"/g" pordefecto/conf-local.php.plantilla > $ns/conf-local.php
+} fi;
+if (test ! -f $ns/vardb.sh) then {
+  sed -e "s/dirap *= *.*/dirap=$edts\/sitios\/$ns/g" pordefecto/vardb.sh.plantilla > $ns/vardb.sh
+} fi;
+if (test ! -f $ns/vardb-local.sh) then {
+  sed -e "s/dirap *= *.*/dirap=$edts\/sitios\/$ns/g" pordefecto/vardb-local.sh.plantilla > $ns/vardb-local.sh
+} fi;
+if (test ! -f $ns/conf_int.php) then {
+  cp pordefecto/conf_int.php.plantilla $ns/conf_int.php
+} fi;
+if (test ! -f $ns/conf_int-local.php) then {
+  cp pordefecto/conf_int-local.php.plantilla $ns/conf_int-local.php
+} fi;
 sudo touch $ns/ultimoenvio.txt
 sudo chown -f www:www $ns/ultimoenvio.txt
 sudo chgrp www $ns/conf*.php
@@ -64,9 +78,13 @@ sudo touch $ns/DataObjects/$ns.links.ini
 
 sudo chown www:www $ns/DataObjects/$ns.ini
 sudo chown www:www $ns/DataObjects/$ns.links.ini
-cp ../imagen/sivel12-es.jpg $ns/centro.jpg
-cp ../centro_principal-es.html $ns/centro.jpg
-if (test -f ../imagen/fondo.jpg) then {
+if (test ! -f $ns/centro.jpg) then {
+  cp ../imagen/sivel12-es.jpg $ns/centro.jpg
+} fi;
+if (test ! -f $ns/centro.html) then {
+  cp ../centro_principal-es.html $ns/centro.html
+} fi;
+if (test -f ../imagen/fondo.jpg -a ! -f $ns/fondo.jpg) then {
     cp ../imagen/fondo.jpg $ns/fondo.jpg
 } fi;
 
