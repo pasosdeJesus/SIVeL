@@ -99,8 +99,8 @@ con permisos de ejecución, lectura y escritura para todos.
 				</listitem>
 				<listitem>
 					<para>
-PostgreSQL (ver <ulink url="http://structio.sourceforge.net/guias/servidor_OpenBSD/postgresql.html#primera-instalaci%C3%B3n"></ulink>),
-sugerimos que la configure para usar sockets en 
+PostgreSQL (ver <ulink url="http://structio.sourceforge.net/guias/servidor_OpenBSD/postgresql.html#primera-instalaci%C3%B3n"></ulink>) con extensiones postgresql-contrib.
+Sugerimos que la configure para usar sockets en 
 <filename>/var/www/tmp</filename>.  Así mismo se sugiere que active 
 autovaciado en <filename>/var/postgresql/data/postgresql.conf</filename>
 con las líneas:
