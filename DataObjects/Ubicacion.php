@@ -180,18 +180,14 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
         $e->_options = htmlentities_array($e->_options);
 
         $e =& $form->getElement('lugar');
-        if (isset($e) && !PEAR::isError($e)) {
-            if (method_exists($e, 'setSize')) {
-                $e->setSize(65);
-                $e->setMaxlength(200);
-            }
+        if (isset($e) && !PEAR::isError($e) && method_exists($e, 'setSize')) {
+            $e->setSize(65);
+            $e->setMaxlength(200);
         }
         $e =& $form->getElement('sitio');
-        if (isset($e) && !PEAR::isError($e)) {
-            if (method_exists($e, 'setSize')) {
-                $e->setSize(65);
-                $e->setMaxlength(200);
-            }
+        if (isset($e) && !PEAR::isError($e) && method_exists($e, 'setSize')) {
+            $e->setSize(65);
+            $e->setMaxlength(200);
         }
         $e =& $form->getElement('id');
         $dep =& $form->createElement(
