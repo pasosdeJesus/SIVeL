@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <appendix id="call">
-  <title>Public invitation to audit SIVeL 1.2</title> 
+  <title>Public invitation to audit SIVeL 2.1</title> 
 
   <para>Thanks to God  we
 	  are able to offer $360.000 colombian pesos (aprox. EU$120) for each
-	  vulnerability found and fixed in SIVeL 1.2b3 (we thank
+	  vulnerability found and fixed in SIVeL 1.2 (we thank
   EU$50 offered by wiroal@riseup.net since 6.May.2010).</para>
   <para>If you belong to an organization that documents infractions
-	  to Humanitarian international Law or Human Rights Violations
+	  to Humanitarian International Law or Human Rights Violations
 	  with SIVeL, we invite you to donate
 	  for this public invitation, in order to increase the
 	  reward offered.  </para>
@@ -29,21 +29,21 @@
 		  <listitem>
 			  <para>Each bug must be replicable in the test installation.
 				  You can check the form that doesn't require authentication:
-				  <ulink url="https://sivel12.pasosdeJesus.org/consulta_web.php"></ulink> ;
-				  as well as other components that shouldn't allow
-				  modification of information as
-				  user <literal>sivel12</literal> with
-				  password <literal>sivel12</literal>:
-				  <ulink url="https://sivel12.pasosdeJesus.org/index.php"></ulink> ; 
+          <ulink url="https://www.pasosdeJesus.org/sivel12/consulta_web.php"></ulink> ;
+          as well as in other components as the user 
+          <literal>sivel12</literal> with password 
+          <literal>sivel12</literal> and role <literal>analyst</literal>:
+         <ulink url="https://www.pasosdeJesus.org/sivel12/index.php"></ulink> ; 
 				  or as administrator 
 				  <literal>adminsivel12</literal> also with
 				  password <literal>sivel12</literal>.
 				  This installation operates on the 
 				  recommended execution platform
 				  (OpenBSD distribution
-					<ulink url="https://aprendiendo.pasosdeJesus.org">adJ</ulink> 
-					&VER-OPENBSD;, 
-				  web server with SSL in chroot, PostgreSQL and hardened PHP) and 
+          <ulink url="https://aprendiendo.pasosdeJesus.org">adJ</ulink> 
+          &VER-OPENBSD;, 
+				  web server nginx with SSL in chroot,
+				  PostgreSQL with authentication and hardened PHP) and 
 				  uses data from
 				  <ulink url="http://www.nocheyniebla.org">Banco De Datos de Violencia Política, DH y DIH del CINEP</ulink>.
 			  </para>
@@ -51,9 +51,9 @@
 		  <listitem>
 			  <para>Your report should explain the methodology
 				  that you used to find the bug and propose 
-					a solution in the source code of the branch
-					master available in the git repository
-				  <ulink url="https://github.com/pasosdeJesus/SIVeL"></ulink> 
+				  a solution in the source code of the
+				  branch master of the git repository
+				  <ulink url="https://github.com/pasosdeJesus/SIVeL"></ulink>. 
 				  (in the directory
 				  <filename>doc</filename>
 				  of the sources there are examples of past 
@@ -61,17 +61,17 @@
 			  </para>
 		  </listitem>
 		  <listitem>
-				<para>Report the vulnerability as an 
-					<ulink url="https://github.com/pasosdeJesus/SIVeL/issues">issue 
-						in github</ulink>.
-				</para>
+        <para>Report the vulnerability  as an
+          <ulink url="https://github.com/pasosdeJesus/SIVeL/issues">issue in github</ulink>
+          and the fix as a pull request with the commentary "given to public domain."
+
+			  </para>
 		  </listitem>
 		  <listitem>
-			  <para>Your report will be evaluated and 
-				  answered there, and if
-				  we are able to reproduce it, we will
-				  give you the monetary compensation personally,
-				  or via PayPal or a bank transfer.
+        <para>Your report will be evaluated there
+				  and if we are able to reproduce the bug, we will
+          give you the monetary compensation as you prefer:
+          personally or via PayPal or bank transfer in Colombia.
 			  </para>
 		  </listitem>
 		  <listitem>
