@@ -3180,15 +3180,6 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Listado de iglesias mejorado');
 }
 
-$idac = '1.2-mp';
-if (!aplicado($idac)) {
-    hace_consulta(
-        $db, "INSERT INTO filiacion (id, nombre, fechacreacion) 
-        VALUES ('16', 'MARCHA PATRIOTICA', '2014-02-27');"
-    );
-    aplicaact($act, $idac, 'Datos recientes');
-}
-
 $idac = '1.2-lo';
 if (!aplicado($idac)) {
     hace_consulta(
@@ -3375,6 +3366,16 @@ if (!aplicado($idac)) {
     hace_consulta($db, "DELETE FROM etnia WHERE id='67'", false);
 
     aplicaact($act, $idac, 'Eliminada etnia repetida');
+}
+
+$idac = '1.2-mp2';
+if (!aplicado($idac)) {
+
+    hace_consulta($db, "UPDATE victima SET id_filiacion='15' WHERE id_filiacion='16' AND 'MARCHA PATRIOTICA' IN (SELECT nombre FROM filiacion WHERE id='16') AND 'MARCHA PATRIÓTICA' IN (SELECT nombre FROM filiacion WHERE id='15')");
+    hace_consulta($db, "DELETE FROM filiacion WHERE id='16' AND nombre='MARCHA PATRIOTICA'");
+    hace_consulta($db, "UPDATE filiacion SET nombre='MOVIMIENTO POLÍTICO Y SOCIAL MARCHA PATRIÓTICA' WHERE id='15' AND nombre='MARCHA PATRIÓTICA'"); 
+
+    aplicaact($act, $idac, 'Arreglada marcha patriotica redundante');
 }
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {

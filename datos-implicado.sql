@@ -22,6 +22,7 @@ INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (11, 'UNIÓN PATRÍOTICA
 INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (12, 'COMUNISTA', '2001-01-01');
 INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (13, 'POLO DEMOCRÁTICO', '2001-01-01');
 INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (14, 'FRENTE SOCIAL Y POLÍTICO', '2001-01-01');
+INSERT INTO filiacion(id, nombre, fechacreacion) VALUES (15, 'MOVIMIENTO POLÍTICO Y SOCIAL MARCHA PATRIÓTICA', '2014-02-14');
 
 SELECT setval('filiacion_seq', max(id)) FROM filiacion;
 
