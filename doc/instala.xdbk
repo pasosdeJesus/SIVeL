@@ -394,18 +394,18 @@ actualización <literal>actualiza.php</literal>.
 <sect2 id="actualiza-fuentes">
         <title>Actualización de fuentes</title>
 		<para>
-Para actualizar fuentes de un SIVeL genérico o con personalizaciones 
+La actualización de un SIVeL genérico o con personalizaciones 
 simples (módulos, tablas básicas, interfaz y reinterpretaciones, 
-ver <xref linkend="personalizacion"></xref>) la actualización puede 
+ver <xref linkend="personalizacion"></xref>) puede 
 hacerla un administrador de red siguiendo las instrucciones de esta sección.
 		</para>
 
 		<para>
-Para actualizar fuentes con personalizaciones profundas (más que uso de 
-módulos existentes, refinamiento de tablas básicas y de variables de 
-configuración) es necesario que un desarrollador (con conocimientos de 
-PHP, SQL y seguridad informática) mezcle actualizaciones del SIVeL 
-genérico a las fuentes personalizadas.  
+Para actualizar fuentes con personalizaciones profundas (por ejemplo
+con módulos desarrollados para una organización)
+es necesario que un desarrollador con conocimientos de 
+PHP, SQL y seguridad informática, mezcle actualizaciones del SIVeL 
+genérico a las fuentes personalizadas y actualicé los módulos particulares.  
 		</para>
 	<sect3 id="actualizacionmenor">
 		<title>Actualización de versiones menores (e.g 1.2b1 a 1.2b2)</title>
@@ -511,7 +511,7 @@ sudo sh /etc/rc.d/nginx restart
 <orderedlist>
 	<listitem>
 		<para>
-Actualice a la versión más reciente de SIVeL 1.1 (1.1.5 en el 
+Actualice a la versión más reciente de SIVeL 1.1 (1.1.6 en el 
 momento de este escrito), siguiendo las instrucciones de 
 <ulink url="http://sivel.sourceforge.net/1.1/actualizacion-sivel.html"></ulink></para>
 	</listitem>
