@@ -131,7 +131,10 @@ class AccionEnviaCorreo extends HTML_QuickForm_Action
         $oheaders['Subject']="Comentario Indice: $indice";
 
         $ocorreo = Mail::factory('smtp', array('host' => 'localhost'));
-        @$r = $ocorreo->send($recip1, $oheaders, $cuerpo);
+        if (PEAR::isError($ocorreo)) {
+            die($ocorreo->getMessage());
+        }
+        $r = $ocorreo->send($recip1, $oheaders, $cuerpo);
         if (PEAR::isError($r)) {
             die($r->getMessage());
         }
@@ -152,17 +155,26 @@ class AccionEnviaCorreo extends HTML_QuickForm_Action
             "$hora:$minutos:$segundos\n";
 
         $mime = new Mail_mime("\n");
-        @$mime->setTXTBody($text_message);
+        if (PEAR::isError($mime)) {
+            die($mime->getMessage());
+        }
+        $mime->setTXTBody($text_message);
+        if (PEAR::isError($mime)) {
+            die($mime->getMessage());
+        }
 
-        @$mime->addAttachment(
+        $mime->addAttachment(
             $adjuntoencriptado, 'application/octet-stream',
             'adjunto-encriptado' . $anno . $mes . $dia, false
         );
+        if (PEAR::isError($mime)) {
+            die($mime->getMessage());
+        }
 
-        @$cuerpo_mime = $mime->get();
-        @$mime_enc = $mime->headers($oheaders);
+        $cuerpo_mime = $mime->get();
+        $mime_enc = $mime->headers($oheaders);
 
-        @$r = $ocorreo->send($recip1, $mime_enc, $cuerpo_mime);
+        $r = $ocorreo->send($recip1, $mime_enc, $cuerpo_mime);
         if (PEAR::isError($r)) {
             die($r->getMessage());
         }
