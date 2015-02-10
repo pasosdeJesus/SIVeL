@@ -231,7 +231,7 @@ prueba sitios/pruebas/reprevista-filtros.php " - Filtros en Reporte Revista" rep
 prueba sitios/pruebas/repconsolidado.php " - Reporte Consolidado" repconsolidado
 prueba sitios/pruebas/estadisticas.php " - Estadísticas " estadisticas
 prueba sitios/pruebas/novalida-basicos.php " - Validación básicos" novalida-basicos
-prueba sitios/pruebas/novalida-frecuentes.php " - Validación frecuentes" novalida-frecuentes "" "202"
+prueba sitios/pruebas/novalida-frecuentes.php " - Validación frecuentes" novalida-frecuentes "<option"
 prueba sitios/pruebas/externa.php " - Consulta externa" externa
 prueba sitios/pruebas/relato.php " - Exporta Relato " relato
 
