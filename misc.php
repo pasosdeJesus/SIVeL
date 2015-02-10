@@ -2305,7 +2305,11 @@ function valida_caso($idcaso, &$buf_html, &$buf_ort)
     $nvic+=(int)$db->getOne($q);
     $q = "SELECT COUNT(*) FROM combatiente " .
         "WHERE id_caso='" . $idcaso . "';";
-    @$nvic+=(int)$db->getOne($q);
+    $ncomb = $db->getOne($q);
+    if (PEAR::isError($ncomb)) {
+        $ncomb = 0;
+    }
+    $nvic += (int)$ncomb;
     if ($nvic <= 0) {
         $buf_html[] = _('Falta víctima.');
         $valr = false;

@@ -80,7 +80,7 @@ hace_consulta(
 //hace_consulta($db, "INSERT INTO caso (id, fecha, memo, id_intervalo) " .
 //    "VALUES ('-1', '2005-1-1', '', '5');");
 
-@pasaPestanaFicha($db, array("caso"), $post, null);
+pasaPestanaFicha($db, array("caso"), $post, null);
 
 exit(0);
 ?>

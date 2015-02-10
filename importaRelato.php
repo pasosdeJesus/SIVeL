@@ -160,7 +160,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         $relatos = simplexml_load_string($cont);
         if (!$relatos) {
             $e = libxml_get_errors();
-            var_dump($e);
             die(_("No pudo cargarse") . " '" . $pArchivo . "'");
         }
 
