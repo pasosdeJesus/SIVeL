@@ -528,26 +528,44 @@ que se conviertan datos correctos en datos correctos.
  </para>
 	</listitem>	
 	<listitem>
-		<para>Respalde y mueva los sitios de su sistema 1.1 a otros 
-			URLs.  
-En general debe bastar para el usuario que administra SIVeL ejecutar 
-desde una terminal por cada sitio:
+		<para>Respalde las fuentes completas:
 <screen>
-	cd /var/www/htdocs/sivel/sitios/primersitio /var/www/htdocs/sivel11 primersitio11
-bin/mueve.sh
+	sudo cp -rfp /var/www/htdocs/sivel /var/www/htdocs/sivel11
+</screen>
+Por cada sitio que vaya a migrar ejecute:
+<screen>
+	cd /var/www/htdocs/sivel/sitios/primersitio
+	../../bin/mueve.sh /var/www/htdocs/sivel11/ primersitio11
 </screen>
 Que dejará las fuentes en <filename>/var/www/htdocs/sivel11</filename> 
-que usará lusando la base de datos <literal>primersitio11</literal> 
-con copia de sus datos y permite ingresar agregando 
-<literal>sivel11/primersitio11/</literal> al URL base. 
-Por ejemplo <ulink url="http://127.0.0.1/sivel11/primersitio11"></ulink> 
-desde el mismo servidor.</para>
-<para>Si requiere reubicar en otro sitio consulte 
-<ulink url="http://sivel.sourceforge.net/1.1/admin2.html#copias-respaldo"></ulink></para>
-<para>Este script al terminar la reubicación, le sugerirá revisar el nuevo URL
-	y borrar las fuentes de la versión 1.1 de su ubicación anterior,
-	presionando la tecla 's' y 'RETORNO'. Es recomendable que realice
-	esta acción.
+con un sitio <literal>primersitio11</literal> 
+con copia de sus datos en una base también de nombre <literal>primersitio11</literal>.  
+</para>
+<para>Para poder ingresar en un nuevo URL, digamos
+<ulink url="http://127.0.0.1/sivel11/primersitio11"></ulink> 
+en el archivo <filename>/etc/nginx/nginx.conf</filename>
+en la sección del servidor https donde opere SIVeL añada:
+<screen>
+	location ~ ^/primersitio11/(.+\.php)$ {
+		alias       /htdocs/sivel11/$1;
+		fastcgi_pass   127.0.0.1:9000;
+		fastcgi_index  index.php;
+		fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+		include        fastcgi_params;
+	}
+	location ~ ^/primersitio11/(.*)$
+	{
+		alias /htdocs/sivel11/$1;
+	}
+</screen>
+
+Reinicie nginx y verifique que opera en el nuevo URL.
+
+También debe crear los enlaces necesarios en el directorio sivel11/sitios.
+</para>
+<para>Tras completar la ejecución de este script,  completar las configuraciones
+	y examinar el nuevo URL, es recomendable borrar las fuentes de
+	de la versión 1.1 de su ubicación anterior.
 	</para>
 	</listitem>
 	<listitem>
@@ -562,23 +580,21 @@ descritos en:
 			deben recodificarse datos de las bases provenientes
 			de 1.1.   Para esto basta sacar copia de la base
 			usando 1.1 y restaurarla en una base ya creada pero
-			sin datos para 1.2.
-
+			sin datos para 1.2.</para>
+		<para>
 			Por otra parte SIVeL 1.2 para las búsquedas 
 			que no tienen en cuenta tildes emplea la extensión
 			unaccent, la cual para su instalación requiere
 			que el usuario dueño de la base de datos sea
 			superusuario.  Para convertir un usuario sivel
 			en superusuario:
-			sudo su - _postgresql
-			psql -h/var/www/tmp -Upostgres template1
-			alter role sivel with superuser;
-
-
-
-
-Si movió su sistema 1.0 como se describió en esta sección
-y dejo las ubicaciones por defecto, basta que ejecute:
+			<screen>
+sudo su - _postgresql
+psql -h/var/www/tmp -Upostgres template1
+alter role sivel with superuser;
+			</screen>
+	Si movió su sistema 1.1 como se describió en esta sección
+	y dejo las ubicaciones por defecto, basta que ejecute:
 <screen>
 	cd /var/www/htdocs/sivel/
 	./conf.sh -i

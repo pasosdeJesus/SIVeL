@@ -21,7 +21,7 @@ echo $n | grep "sql.gz$"
 if (test "$?" = "0") then {
 	nomsql=`echo $n | sed -e "s/.*\///g;s/^\([^\/]*.\).sql.gz/\/tmp\/\1.sql/g"`;
 	cp $n $nomsql.gz
-	gzip -d $nomsql.gz
+	gzip -df $nomsql.gz
 } fi;
 
 echo "Por remplazar base $dbnombre con volcado $nomsql";
