@@ -427,7 +427,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
     /**
      * Id supracategoria
      *
-     * @return string id
+     * @return integer|null id
      */
     function idSupracategoria()
     {

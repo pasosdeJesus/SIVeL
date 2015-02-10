@@ -195,7 +195,7 @@ class DataObjects_Categoria extends DataObjects_Basica
      * Para evitar que intente numeración automática cuando se
      * agregan categorias
      *
-     * @return array Indica no numerar automáticamente
+     * @return false[] Indica no numerar automáticamente
      */
     function sequenceKey()
     {

@@ -21,7 +21,7 @@ function leeSQL {
 	nd2=$1;
 	if (test -f $nd2) then {
 		cmd="psql $socketopt -d $dbnombre -U $dbusuario -f $nd2";
-		#echo $cmd;
+		echo $cmd;
 		eval $cmd;
 	} fi;
 }

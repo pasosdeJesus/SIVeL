@@ -55,7 +55,7 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
     /**
      * Truco de compatibilidad con ZE2
      *
-     * @return object copia del objeto
+     * @return DB_DataObject_SIVeL copia del objeto
      */
     function __clone()
     {

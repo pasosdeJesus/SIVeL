@@ -94,7 +94,7 @@ function a_minusculas($s)
  * @param string $s Cadena
  *
  * @return string Convertida a mayúscula
-     */
+ */
 function a_mayusculas($s)
 {
     $r = str_replace(
@@ -115,7 +115,7 @@ function a_mayusculas($s)
  *
  * @return string Convertida primera letra de cada palabra a mayúscula
  *         y resto a minúsculas
-     */
+ */
 function prim_may($s)
 {
     $rs = a_minusculas($s);
@@ -139,10 +139,10 @@ function prim_may($s)
 /**
  * Caracteres escapados en LaTeX
  *
- * @param char $c caracter
+ * @param string $c caracter
  *
  * @return string  Representación laTeX
-     */
+ */
 function car2latex($c)
 {
     switch ($c) {
@@ -199,7 +199,7 @@ function car2latex($c)
  * @param string $s Texto
  *
  * @return string Latex
-     */
+ */
 function txt2latex($s)
 {
     $r = "";
@@ -237,7 +237,7 @@ function txt2latex($s)
  * @param string $t texto
  *
  * @return string Tex
-     */
+ */
 function formato_texto_tex($t)
 {
     $num_com = 0;  // Número de comillas
@@ -280,8 +280,8 @@ function formato_texto_tex($t)
 /**
  * Retorna el subarreglo de $ar que tiene llaves de $ind
  *
- * @param array $ar  Arreglo
- * @param array $ind Arreglo de llaves
+ * @param array    $ar  Arreglo
+ * @param string[] $ind Arreglo de llaves
  *
  * @return array Subarreglo de $arr cuyas llaves están en $ind
  **/
@@ -309,8 +309,8 @@ function subarreglo($ar, $ind)
  * @param string $nurl       Url por asociar al subtitulo agregado
  * @param array  $nsub       Subarbol por asociar al subtitulo agregado
  *
- * @return true si y solo si encuentra el titulo y puede añadir subtitulo nuevo
-     */
+ * @return booelan true si y solo si encuentra el titulo y puede añadir subtitulo nuevo
+ */
 function html_menu_agrega_submenu(&$menu, $titulo, $nsubtitulo, $nurl,
     $nsub = null
 ) {
@@ -365,7 +365,7 @@ function html_menu_agrega_submenu(&$menu, $titulo, $nsubtitulo, $nurl,
  * @param array $m Arreglo para HTML_Menu
  *
  * @return array Arreglo de URLs
-     */
+ */
 function html_menu_toma_url($m)
 {
     $r = array();
@@ -423,7 +423,7 @@ function muestra_archivo($noma, $esc = false)
  * @param object &$da    Dataobject
  *
  * @return object Formulario
-     */
+ */
 function agregar_tabla($nom, &$f, $idcaso, $nuevo, &$da)
 {
     if (!isset($da) || $da == null) {
@@ -460,7 +460,7 @@ function agregar_tabla($nom, &$f, $idcaso, $nuevo, &$da)
  * @param mixed &$page Página
  *
  * @return boolean Validado
-     */
+ */
 function valida(&$page)
 {
 
@@ -607,7 +607,7 @@ function res_valida(&$db, $mens, $cons, $confunc = false)
  * Retira variables de sesión
  *
  * @return void
-     */
+ */
 function unset_var_session()
 {
     unset($_SESSION['basicos_id']);
@@ -649,7 +649,7 @@ function unset_var_session()
  * @param array  $valores Valores indexados por campos
  *
  * @return void
-     */
+ */
 function establece_valores_form(&$pag, $campos, $valores)
 {
     foreach ($campos as $c) {
@@ -671,7 +671,7 @@ function establece_valores_form(&$pag, $campos, $valores)
  * @param array  $yaanalizados No revisar elementos/grupos con estos nombres
  *
  * @return object o null si no lo encuentra
-     */
+ */
 function toma_elemento_recc($form, $nom, $yaanalizados = array())
 {
     assert(is_array($yaanalizados));
@@ -811,7 +811,7 @@ function valores_pordefecto_form($d, $form, $merr = true)
  * @param object $form Formulario
  *
  * @return string id de departamento
-     */
+ */
 function ret_id_departamento($form)
 {
     $ndepartamento = null;
@@ -830,7 +830,7 @@ function ret_id_departamento($form)
  * @param object $form Formulario
  *
  * @return string id de municipio
-     */
+ */
 function ret_id_municipio($form)
 {
 
@@ -849,8 +849,8 @@ function ret_id_municipio($form)
  *
  * @param object $form Formulario
  *
- * @return string id de clase
-     */
+ * @return integer|null id de clase
+ */
 function ret_id_clase($form)
 {
     $nclase = null;
@@ -870,7 +870,7 @@ function ret_id_clase($form)
  * @param string $cabezote Imagen de Cabezote
  *
  * @return void
-     */
+ */
 function encabezado_envia($titulo = null, $cabezote = '')
 {
     // http://www.w3.org/TR/html5-diff/
@@ -933,7 +933,7 @@ function textCounter(field, cntfield, maxlimit)
  * @param string $pie Archivo con pie de página por mostrar
  *
  * @return void
-     */
+ */
 function pie_envia($pie = '')
 {
     if ($pie != '' && file_exists($pie)) {
@@ -956,7 +956,7 @@ function pie_envia($pie = '')
  * @param integer $id Identificación del caso
  *
  * @return string Cadena HTML con enlace a caso
-     */
+ */
 function enlace_caso_html($id)
 {
     return "<a target='_otro' href='consulta_web.php?" .
@@ -979,7 +979,7 @@ function enlace_caso_html($id)
  * @return void Llena $comovic y $comofan con enlaces a casos donde
  * se referencia idp como víctima y familiar respectivamente
  * (excepto idcaso)
-     */
+ */
 function enlaces_casos_persona_html(
     &$db, $idcaso, $idp, &$comovic, &$comofam
 ) {
@@ -1023,7 +1023,7 @@ function enlaces_casos_persona_html(
  *
  * @return void Llena $comovic con enlaces a casos donde se referencia
  *   idc como víctima y familiar respectivamente (excepto idcaso)
-     */
+ */
 function enlaces_casos_grupoper_html(&$db, $idcaso, $idc, &$comovic)
 {
     $q = "SELECT id_caso FROM victimacolectiva WHERE id_grupoper = '$idc'";
@@ -1070,7 +1070,7 @@ function htmlentities_array($ar, $enc = 'UTF-8')
  * @param string $mens Mensaje por mostrar
  *
  * @return void
-     */
+ */
 function die_esc($mens)
 {
     die(htmlentities($mens, ENT_COMPAT, 'UTF-8'));
@@ -1218,7 +1218,7 @@ function consulta_uno(&$db, $q, $t = true)
  * @param string  $con   con
  *
  * @return void
-     */
+ */
 function consulta_and(&$db, &$w, $n, $v, $opcmp = '=', $con='AND')
 {
     if (!isset($v) || $v === '' || $v === ' ' || ord($v) == 32) {
@@ -1242,7 +1242,7 @@ function consulta_and(&$db, &$w, $n, $v, $opcmp = '=', $con='AND')
  * @param string $con   con
  *
  * @return void
-     */
+ */
 function consulta_and_sinap(&$w, $n, $v, $opcmp = '=', $con = "AND")
 {
     if ($w != "") {
@@ -1264,11 +1264,11 @@ function consulta_and_sinap(&$w, $n, $v, $opcmp = '=', $con = "AND")
  * @param string  $ntabla       Nombre de tabla
  * @param string  $gcon         Operador
  * @param string  $llave_ntabla Llave de tabla
- * @param unknown $id_prin      Campo que referencia a otra tabla
+ * @param integer $id_prin      Campo que referencia a otra tabla
  * @param string  $llave_prin   Llave en otra tabla
  *
  * @return void
-     */
+ */
 function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
     $llave_ntabla = 'id_caso', $id_prin = -1, $llave_prin = 'caso.id'
 ) {
@@ -1333,7 +1333,7 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
  * @param string $pOrdenar Criterio
  *
  * @return void
-     */
+ */
 function consulta_orden(&$q, $pOrdenar)
 {
     if ($pOrdenar == 'ubicacion') {
@@ -1418,7 +1418,7 @@ function consulta_orden(&$q, $pOrdenar)
  * @param string $camponombre Campo con nombre en tabla
  *
  * @return string cadena con valores
-     */
+ */
 function lista_relacionados($tabla, $llave,
     $enlace, $csep = '; ', $csepi = '', $connombre = true,
     $camponombre = 'nombre'
@@ -1471,7 +1471,7 @@ function lista_relacionados($tabla, $llave,
  * @param array  $delta Cambio en numeración
  *
  * @return string  instrucción SQL
-     */
+ */
 function inserta_sql(&$db, $d, $delta = null)
 {
     $ca = $d->table();
@@ -1505,7 +1505,7 @@ function inserta_sql(&$db, $d, $delta = null)
  * @param string $tabla Tabla
  *
  * @return array Tablas que referencian a $tabla
-     */
+ */
 function ref_dataobject($base, $tabla)
 {
     $l = $GLOBALS['_DB_DATAOBJECT']['LINKS'][$base];
@@ -1532,7 +1532,7 @@ function ref_dataobject($base, $tabla)
  * @param integer $idcaso Id. del caso
  *
  * @return void
-     */
+ */
 function caso_usuario($idcaso)
 {
     if ($idcaso == $GLOBALS['idbus']) {
@@ -1563,7 +1563,7 @@ function caso_usuario($idcaso)
  * @param integer $maxlong Longitud máxima
  *
  * @return string Cadena escapada
-     */
+ */
 function var_escapa($v, &$db = null, $maxlong = 1024)
 {
     if (isset($v)) {
@@ -1611,8 +1611,8 @@ function var_escapa($v, &$db = null, $maxlong = 1024)
  * @param handle  $db      Conexión a BD.
  * @param integer $maxlong Longitud máxima
  *
- * @return mixed Cadena escapada
-     */
+ * @return string Cadena escapada
+ */
 function var_post_escapa($nv, $db = null, $maxlong = 1024)
 {
     if (isset($_POST[$nv])) {
@@ -1631,8 +1631,8 @@ function var_post_escapa($nv, $db = null, $maxlong = 1024)
  * @param handle  $db      Conexión a BD.
  * @param integer $maxlong Longitud máxima
  *
- * @return mixed Cadena escapada
-     */
+ * @return string Cadena escapada
+ */
 function var_req_escapa($nv, $db = null, $maxlong = 1024)
 {
     if (isset($_REQUEST[$nv])) {
@@ -1653,7 +1653,7 @@ function var_req_escapa($nv, $db = null, $maxlong = 1024)
  *                     de lo contrario completa como fecha Hasta.
  *
  * @return string Fecha
-     */
+ */
 function arr_a_fecha($f, $desde = true)
 {
     assert(isset($f['Y']));
@@ -1698,8 +1698,8 @@ function arr_a_fecha($f, $desde = true)
  *
  * @param array $f Fecha por convertir en formato AAAA-MM-DD
  *
- * @return array 'Y' => año, 'm' => mes, 'd' => día
-     */
+ * @return integer[] 'Y' => año, 'm' => mes, 'd' => día
+ */
 function fecha_a_arr($f)
 {
     $ar = array();
@@ -1718,7 +1718,7 @@ function fecha_a_arr($f)
  * @param integer $er edad
  *
  * @return integer Id del rango
-     */
+ */
 function rango_de_edad($er)
 {
     //echo "OJO rango_de_edad($er)<br>";
@@ -1744,7 +1744,7 @@ function rango_de_edad($er)
  * @param int $r Identificación del rango en BD.
  *
  * @return boolean true si la edad está en el rango.
-     */
+ */
 function verifica_edad_y_rango($e, $r)
 {
     $do = objeto_tabla('rangoedad');
@@ -1770,7 +1770,7 @@ function verifica_edad_y_rango($e, $r)
  * @param object &$form Formulario
  *
  * @return void
-     */
+ */
 function agrega_control_CSRF(&$form)
 {
     $_SESSION['sin_csrf'] = base64_encode(colchon_aleatorios(16));
@@ -1783,8 +1783,8 @@ function agrega_control_CSRF(&$form)
  *
  * @param array $valores Valores recibidos de formulario
  *
- * @return void
-     */
+ * @return boolean
+ */
 function verifica_sin_CSRF($valores)
 {
     if (!isset($_SESSION['sin_csrf'])) {
@@ -1842,7 +1842,7 @@ function edad_de_fechanac($anionac, $aniohecho, $mesnac = null,
  * @param string $nt Nueva tabla por agregar si falta
  *
  * @return void Modifica $t de requerirse
-     */
+ */
 function agrega_tabla(&$t, $nt)
 {
     $at = explode(',', $t);
@@ -1877,7 +1877,7 @@ function convierte_valor(&$do, $campo, $tipo)
 /**
  * Asigna un campo de un DataObject con el valor recibido del formulario
  *
- * @param array  $valor  Valor por asignar
+ * @param string $valor  Valor por asignar
  * @param object $rel    Tabla
  * @param object $campo  Campo de tabla $tabla
  * @param array  &$estbd Estructura de base sacada de .ini.  Si es null esta
@@ -2079,7 +2079,7 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
  * @param array  $masenl  Enlaces a otras tablas
  *
  * @return void Resultado queda en $w y $t
-     */
+ */
 function prepara_consulta_gen(&$w, &$t, $idcaso, $rel, $bas, $crelbas, $enbas,
     $otrast = array(), $iotrast = '', $nonulos = array(), $irelot = "id",
     $masenl = array()
@@ -2130,7 +2130,7 @@ function prepara_consulta_gen(&$w, &$t, $idcaso, $rel, $bas, $crelbas, $enbas,
  * @param string $nom Nombre de la tabla
  *
  * @return object   DB_DataObject si no hay error, en caso de error termina
-     */
+ */
 function objeto_tabla($nom)
 {
     assert($nom != '');
@@ -2240,8 +2240,8 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
  *
  * @param DB_DataObject $do objeto
  *
- * @return true si y solo si es nulo
-     */
+ * @return boolean true si y solo si es nulo
+ */
 function es_objeto_nulo($do)
 {
     return is_null($do) || $do == null
@@ -2550,7 +2550,7 @@ function a_elementos_xml(&$r, $ind, $ad, $ren = null)
  * @param string $camponombre nombre de campo por agregar a $ad
  *
  * @return void
-     */
+ */
 function dato_relacionado(&$ad, $tabla,
     $id, $camporel = 'id_sectorsocial', $camponombre = 'nombre'
 ) {
@@ -2582,7 +2582,7 @@ function dato_relacionado(&$ad, $tabla,
  * @param string $valor    Valor por incluir en $ad
  *
  * @return void
-     */
+ */
 function enlaza_relato(&$do, $campo, $elemento, &$ad, $valor = null)
 {
     assert($do != null);
@@ -2638,7 +2638,7 @@ function enlaza_relato(&$do, $campo, $elemento, &$ad, $valor = null)
  * @param array  $a   Variable
  *
  * @return void
-     */
+ */
 function impvar($nom, $a)
 {
     foreach ($a as $k => $v) {
@@ -2655,7 +2655,7 @@ function impvar($nom, $a)
  * Presenta ambiente de ejcución
  *
  * @return void
-     */
+ */
 function ambiente()
 {
     echo "<pre>";
@@ -2694,7 +2694,7 @@ if (!function_exists('get_called_class')) {
     /**
      * Retorna nombre de clase llamadora
      *
-     * @return void
+     * @return string
      */
     function get_called_class()
     {

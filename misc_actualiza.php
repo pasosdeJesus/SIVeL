@@ -29,7 +29,7 @@ require_once "DataObjects/Categoria.php";
  * @param string $a Archivo de configuración
  * @param string $v Archivo de configuración
  *
- * @return null si no encuentra variable
+ * @return string|null si no encuentra variable
  */
 function val_var_conf($a, $v)
 {
@@ -379,7 +379,7 @@ function cambia_datos(&$db, $tabla, $deshabilitar, $agregar, $homologar,
  * @param bool   $merr  Mostrar mensajes de error
  * @param bool   $mcons Mostrar consultas por ejecutar
  *
- * @return true si y solo si puede leer y ejecutar consultas.
+ * @return boolean true si y solo si puede leer y ejecutar consultas.
  */
 function consulta_archivo(&$db, $na, $derr = false, $merr = false,
     $mcons = false

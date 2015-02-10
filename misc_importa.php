@@ -78,7 +78,7 @@ function conv_violacion(&$db, $tipoi, $id_presp, &$obs)
  *
  * @param string $s Cadena
  *
- * @return Cadena sin tildes
+ * @return string Cadena sin tildes
  */
 function sin_tildes($s)
 {
@@ -303,14 +303,14 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
 /**
  * Indica en observaciones como es conversión de fecha
  *
- * @param string $d       Dia
- * @param string $m       Mes
- * @param string $a       Año
- * @param string $orig    Orig
- * @param string &$dia_s  Para retornar día
- * @param string &$mes_s  Retorna mes
- * @param string &$anio_s Retorna año
- * @param string &$obs    Colchon para agregar observaciones
+ * @param string  $d       Dia
+ * @param string  $m       Mes
+ * @param string  $a       Año
+ * @param string  $orig    Orig
+ * @param integer &$dia_s  Para retornar día
+ * @param integer &$mes_s  Retorna mes
+ * @param integer &$anio_s Retorna año
+ * @param string  &$obs    Colchon para agregar observaciones
  *
  * @return array (idd, idm, idc)  Identificaciones de departamento, municipio
  *  y clase
@@ -766,24 +766,24 @@ function conv_fecha($fecha, &$obs, $depura = false)
 /**
  * Convierte datos de persona y los inserta/actualiza en la base
  *
- * @param object &$db             Conexion a base de datos
- * @param object &$idsiguales     Arreglo para completar con iguales
- * @param object &$idssimilares   Arreglo para completar con similares
- * @param array  $aper            Listado de personas de la base
- * @param string $nom             Nombre buscado,
+ * @param object  &$db             Conexion a base de datos
+ * @param object  &$idsiguales     Arreglo para completar con iguales
+ * @param object  &$idssimilares   Arreglo para completar con similares
+ * @param array   $aper            Listado de personas de la base
+ * @param string  $nom             Nombre buscado,
  *      si es null supone que se busca apellidos nombres que vienen en $ap
- * @param string $ap              Apellido buscado,
+ * @param string  $ap              Apellido buscado,
  *      si es null supone que se busca nombres apellidos que vienen en $nom
- * @param string $mdlev           Distancia Levenshtein maxima para similares
- * @param string $anionac         Año de nacimiento
- * @param string $mesnac          Mes de nacimiento
- * @param string $dianac          Dia de nacimiento
- * @param string $sexo            Sexo
- * @param string $id_departamento Código del dep. de procedencia
- * @param string $id_municipio    Código del mun. de procedencia
- * @param string $id_clase        Código de la clase de procedencia
- * @param string $tipodocumento   Tipo de documento de identidad
- * @param string $numerodocumento Número de documento de identidad
+ * @param integer $mdlev           Distancia Levenshtein maxima para similares
+ * @param string  $anionac         Año de nacimiento
+ * @param string  $mesnac          Mes de nacimiento
+ * @param string  $dianac          Dia de nacimiento
+ * @param string  $sexo            Sexo
+ * @param string  $id_departamento Código del dep. de procedencia
+ * @param string  $id_municipio    Código del mun. de procedencia
+ * @param string  $id_clase        Código de la clase de procedencia
+ * @param string  $tipodocumento   Tipo de documento de identidad
+ * @param string  $numerodocumento Número de documento de identidad
  *
  * @return integer  Iguales mas similares.  Las ids de los iguales loas
  * deja en idsiguales, los ids de similares en idssimilares
@@ -1338,7 +1338,7 @@ function sxml_valor_atributo($oxml, $nomat)
  * @param object &$oxml Objeto XML
  * @param string $id    Identificación por buscar en observaciones
  *
- * @return null si no hay observacion con el tipo dado o la observación
+ * @return string|null si no hay observacion con el tipo dado o la observación
  */
 function dato_en_obs(&$oxml, $id)
 {
@@ -1426,7 +1426,7 @@ function dato_basico_en_obs(&$db, &$obs, $oxml,
  * @param string $agr  Cadena con agresión
  * @param string $pr   Presunto responsable
  *
- * @return Identificación de categoria
+ * @return integer Identificación de categoria
  * @see conv_violacion
  */
 function conv_categoria(&$db, &$obs, $agr, $pr)

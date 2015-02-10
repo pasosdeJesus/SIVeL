@@ -62,7 +62,7 @@ function colchon_aleatorios($lon)
  * Codifica sal para bcrypt
  * Se basa en función encode_salt de libc de OpenBSD.
  *
- * @param array   $csal    Sal en binario
+ * @param string  $csal    Sal en binario
  * @param integer $lrondas Cantidad de rondas es 2^$lrondas
  *
  * @return string Cadena con sal para bcrypt

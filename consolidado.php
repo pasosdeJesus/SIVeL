@@ -65,8 +65,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
      *
      * @param handle  &$db    Conexión a BD
      * @param array   $cataux Cat
-     * @param unknown $pResto pResto
-     * @param unknown $ncol   Número de columnas
+     * @param string  $pResto pResto
+     * @param integer $ncol   Número de columnas
      *
      * @return void
      */
@@ -106,7 +106,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
      *
      * @param object  &$db     Conexión a BD
      * @param array   &$tpresp Tabla de presuntos responsables
-     * @param unknown $muestra Muestra
+     * @param boolean $muestra Muestra
      *
      * @return void
      */

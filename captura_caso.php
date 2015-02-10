@@ -435,8 +435,8 @@ class CapturaCaso extends HTML_QuickForm_Controller
      * Habilita botones estándar de la página.
      * Adaptada de Progress/generator.php
      *
-     * @param object &$page  HTML_QuickForm_Page Página con ficha.
-     * @param array  $events Eventos
+     * @param object   &$page  HTML_QuickForm_Page Página con ficha.
+     * @param string[] $events Eventos
      *
      * @return void
      */
