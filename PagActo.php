@@ -486,6 +486,13 @@ class PagActo extends PagBaseSimple
      */
     function procesa(&$valores, $procActo = false, $procActocol = false)
     {
+        if (isset($GLOBALS['no_permite_editar']) && $GLOBALS['no_permite_editar']) {
+            $htmljs = new HTML_Javascript();
+            echo $htmljs->startScript();
+            echo $htmljs->alert( 'Edición deshabilitada.');
+            echo $htmljs->endScript();
+            return true;
+        }
         //$bt=new Benchmark_Timer(true);
         if (!$this->validate() ) {
             return false;

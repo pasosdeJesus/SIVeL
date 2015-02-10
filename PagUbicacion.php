@@ -605,6 +605,13 @@ class PagUbicacion extends PagBaseMultiple
      */
     function procesa(&$valores)
     {
+        if (isset($GLOBALS['no_permite_editar']) && $GLOBALS['no_permite_editar']) {
+            $htmljs = new HTML_Javascript();
+            echo $htmljs->startScript();
+            echo $htmljs->alert( 'Edición deshabilitada.');
+            echo $htmljs->endScript();
+            return true;
+        }
         $es_vacio = (!isset($valores['lugar']) || $valores['lugar'] == '')
             && (!isset($valores['sitio']) || $valores['sitio'] == '')
             && (!isset($valores['latitud']) || $valores['latitud'] == '')

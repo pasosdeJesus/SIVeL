@@ -865,6 +865,19 @@ class PagBasicos extends PagBaseSimple
      */
     function procesa(&$valores)
     {
+        if (isset($GLOBALS['no_permite_editar']) && $GLOBALS['no_permite_editar']) {
+            $htmljs = new HTML_Javascript();
+            echo $htmljs->startScript();
+            echo $htmljs->alert( 'Edición deshabilitada.');
+            echo $htmljs->endScript();
+            if (!isset($valores['id_caso']) || $valores['id_caso'] == ''
+                || $valores['id_caso'] == null
+            ) {
+                return false;
+            } else { 
+                return true;
+            }
+        }
         if (!$this->validate()) {
             return false;
         }

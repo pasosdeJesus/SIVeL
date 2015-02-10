@@ -286,6 +286,13 @@ class PagTipoViolencia extends PagBaseSimple
      */
     function procesa(&$valores)
     {
+        if (isset($GLOBALS['no_permite_editar']) && $GLOBALS['no_permite_editar']) {
+            $htmljs = new HTML_Javascript();
+            echo $htmljs->startScript();
+            echo $htmljs->alert( 'Edición deshabilitada.');
+            echo $htmljs->endScript();
+            return true;
+        }
         if (!$this->validate() ) {
             return false;
         }

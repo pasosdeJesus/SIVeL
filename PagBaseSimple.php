@@ -237,6 +237,14 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      */
     function procesa(&$valores)
     {
+
+        if (isset($GLOBALS['no_permite_editar']) && $GLOBALS['no_permite_editar']) {
+            $htmljs = new HTML_Javascript();
+            echo $htmljs->startScript();
+            echo $htmljs->alert( 'Edición deshabilitada.');
+            echo $htmljs->endScript();
+            return true;
+        }
         // Verifica si es vacio
 
         if (!$this->validate()) {

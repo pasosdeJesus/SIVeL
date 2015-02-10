@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
-	<varlistentry><term>Versión 1.2 (Nov.2014)</term>
+	<varlistentry><term>Versión 1.2 (Feb.2014)</term>
 		<listitem>
 			<para><itemizedlist>
+					<listitem><para>
+Puede deshabilitarse edición de casos con
+$GLOBALS['no_permite_editar'].
+					</para></listitem>
 					<listitem><para>
 Fallas corregidas: cálculo de edad, no muestra rangos de edad deshabilitados en ficha de captura, eliminada Marcha Patriótica duplicada de Filiación Política.
 					</para></listitem>

@@ -327,6 +327,13 @@ class PagOtrasFuentes extends PagBaseMultiple
      */
     function procesa(&$valores)
     {
+        if (isset($GLOBALS['no_permite_editar']) && $GLOBALS['no_permite_editar']) {
+            $htmljs = new HTML_Javascript();
+            echo $htmljs->startScript();
+            echo $htmljs->alert( 'Edición deshabilitada.');
+            echo $htmljs->endScript();
+            return true;
+        }
         $es_vacio = ($valores['nombre'] == null || $valores['nombre'] == '')
             && ($valores['anotacion'] == null || $valores['anotacion'] == '')
             && ($valores['ubicacionfisica'] == null

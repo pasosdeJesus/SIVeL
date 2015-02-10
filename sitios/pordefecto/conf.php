@@ -205,6 +205,11 @@ $GLOBALS['deshabilita_manejo_tablasbasicas'] = false;
  */
 $GLOBALS['DB_Debug'] = 0;
 
+/** Evita edición de casos
+ * @global bool $GLOBALS['no_permite_editar']
+ */
+$GLOBALS['no_permite_editar'] = false;
+
 /** Pestañas de la Ficha  de captura
     'id', 'Clase', 'orden en eliminación (no rep)' */
 $GLOBALS['ficha_tabuladores'] = array(

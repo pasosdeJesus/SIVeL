@@ -571,6 +571,13 @@ class PagVictimaIndividual extends PagBaseMultiple
      */
     function procesa(&$valores, $procFam = false)
     {
+        if (isset($GLOBALS['no_permite_editar']) && $GLOBALS['no_permite_editar']) {
+            $htmljs = new HTML_Javascript();
+            echo $htmljs->startScript();
+            echo $htmljs->alert( 'Edición deshabilitada.');
+            echo $htmljs->endScript();
+            return true;
+        }
         $es_vacio = (!isset($valores['nombres']) || $valores['nombres'] == '');
         $es_vacio = $es_vacio
             && (!isset($valores['apellidos']) || $valores['apellidos'] == '');

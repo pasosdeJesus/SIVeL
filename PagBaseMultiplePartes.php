@@ -386,6 +386,13 @@ class PagBaseMultiplePartes extends PagBaseMultiple
     function procesa(&$valores, $otratabla = '')
     {
 
+        if (isset($GLOBALS['no_permite_editar']) && $GLOBALS['no_permite_editar']) {
+            $htmljs = new HTML_Javascript();
+            echo $htmljs->startScript();
+            echo $htmljs->alert( 'Edición deshabilitada.');
+            echo $htmljs->endScript();
+            return true;
+        }
         //echo "OJO PagAyudahumanitaria::procesa(" ; print_r($valores); echo ")<br>";
         $cll = get_called_class();
         $ll = $cll::LLAVECOMP;
