@@ -259,7 +259,7 @@ verphp=`$PHP -v | grep "PHP " | sed -e "s|.*PHP \([0-9.]*\).*|\1|g"`;
 if (test "$?" != 0 -o "x$verphp" = "x") then {
 	echo "  $PROYECTO funciona con versiones de PHP posteriores a la 5.0";
 } fi;
-check "phpdoc" "optional" "test -x phpdoc" `which phpdoc 2> /dev/null`
+check "PHPDOC" "optional" "test -x phpdoc" `which phpdoc 2> /dev/null`
 check "PEAR" "" "test -x \$PEAR" `which pear 2> /dev/null`
 echo " Paquetes de PEAR";
 estapear Auth

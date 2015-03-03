@@ -591,7 +591,7 @@ descritos en:
 			<screen>
 sudo su - _postgresql
 psql -h/var/www/tmp -Upostgres template1
-alter role sivel with superuser;
+ALTER ROLE sivel WITH SUPERUSER;
 			</screen>
 	Si movió su sistema 1.1 como se describió en esta sección
 	y dejo las ubicaciones por defecto, basta que ejecute:
@@ -599,12 +599,43 @@ alter role sivel with superuser;
 	cd /var/www/htdocs/sivel/
 	./conf.sh -i
 </screen>
-En caso de que no tenga respaldo de su sistema 1.0 en las ubicaciones
-por defecto, configure manualmente. 
+Por cada sitio que ya haya copiado cree una base en blanco pero con 
+codificación UTF-8:
 <screen>
-cd /var/www/htdocs/sivel/
-./nuevo.sh sivel
+	cd /var/www/htdocs/sivel12/sitios/
+	SIN_ESQUEMA=1 SIN_DATOS=1 ./nuevo.sh primersitio
 </screen>
+Restaure los datos de la base respaldada:
+<screen>
+	cd primersitio
+	../../bin/restaura.sh /var/www/resbase/movido-primersitio-dump-03.sql.gz
+</screen>
+Configure nginx para abrir nuevo sitio en <filename>/etc/nginx/nginx.conf</filename>:
+<screen>
+	location ~ ^/primersitio/(.+\.php)$ {
+            alias	   /var/www/htdocs/sivel12/$1;
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+	location /primersitio/ {
+		alias /htdocs/sivel12/$1;
+	}
+</screen>
+Cree los enlaces de acuerdo a las formas como abrirá la base, por ejemplo:
+<screen>
+	cd /var/www/htdocs/sivel12/sitios/
+	ln -sf primersitio 127.0.0.1_PRIMERSITIO
+</screen>
+y pruebe desde URLs acordes a los enlaces por ejemplo:
+<literal>https://127.0.0.1/primersitio/</literal>
+</para>
+	</listitem>
+	<listitem>
+		<para>
+Restaure los datos de la base respaldada:
 Si requiere conocer la clave del usuario SIVeL ubiquese en el directorio con 
 fuentes de la versión  1.0 y ejecute:
 <screen>

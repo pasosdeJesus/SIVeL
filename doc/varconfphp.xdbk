@@ -39,6 +39,8 @@
 <listitem><para> Deshabilita ediciones a tablas básicas</para></listitem></varlistentry>
 <varlistentry><term><literal>DB_Debug</literal></term>
 <listitem><para> Nivel de depuración para DB_DataObject. 0 a 5.</para></listitem></varlistentry>
+<varlistentry><term><literal>no_permite_editar</literal></term>
+<listitem><para> Evita edición de casos</para></listitem></varlistentry>
 <varlistentry><term><literal>ficha_tabuladores</literal></term>
 <listitem><para> Pestañas de la Ficha  de captura</para></listitem></varlistentry>
 <varlistentry><term><literal>nueva_ficha_tabuladores</literal></term>

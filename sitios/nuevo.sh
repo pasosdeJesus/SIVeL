@@ -92,7 +92,9 @@ cd $ns
 if (test "$SIN_CREAR" != "1") then {
 
 	../../bin/creapg.sh
-	../../bin/agus.sh
+	if (test "$SIN_ESQUEMA" != "1") then {
+		../../bin/agus.sh
+	} fi;
 	sudo ../../bin/creaesquema.sh
 } fi;
 sudo chown -f www:www DataObjects/$ns.ini

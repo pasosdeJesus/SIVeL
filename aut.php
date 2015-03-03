@@ -21,7 +21,6 @@
  * Autenticación
  */
 require_once "bcrypt.php";
-
 /**
  * Funciones para autenticación de usuarios con Auth de Pear.
  */
@@ -30,7 +29,7 @@ require_once "DB.php";
 require_once "HTML/Javascript.php";
 if (!file_exists(dirname(__FILE__) . "/confv.php")) {
     die(
-        "No existe archivo confv.php.\n"
+        "No existe archivo confv.php en " . dirname(__FILE__)  . "\n"
         . "Configure desde interprete de comandos con ./conf.sh"
     );
 }
@@ -286,6 +285,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
 
     $username = isset($_POST['username']) ? 
         var_escapa_aut($_POST['username'], $db, 32) : '';
+    //echo "OJO 1 username=$username<br>";
     $db1 = new DB();
     $db->query('SET client_encoding TO UTF8');
     $q = "SELECT COUNT(id) FROM usuario";
@@ -315,6 +315,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
     }
     $q = "SELECT locked_at FROM usuario WHERE nusuario='$username'";
     $locked = $db->getOne($q);
+    //echo "OJO q2 q=$q, locked=$locked<br>";
     if (PEAR::isError($locked)) {
         echo "<br>" . _("No pudo determinar si está bloqueado");
     }
@@ -391,6 +392,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         $_SESSION['dirsitio'] = localiza_conf();
         //echo "<script>alert(document.cookie);</script>";
         $usuario = $a->getUsername();
+	    //echo "OJO 3 usuario=$usuario<br>";
         if (!isset($_SESSION['opciones']) || count($_SESSION['opciones']) == 0
             || !isset($_SESSION['id_usuario'])
         ) {
@@ -519,11 +521,13 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             cierra_sesion($dsn);
             exit(1);
         }
+	    $intentos = 0;
         $q = "UPDATE usuario SET failed_attempts=COALESCE(failed_attempts, 0)+1 
             WHERE nusuario='$username'";
         hace_consulta_aut($db, $q, false);
         $q = "SELECT failed_attempts FROM usuario WHERE nusuario='$username'";
         $intentos = $db->getOne($q);
+	    //echo "OJO q=$q, intentos=$intentos<br>";
         if (PEAR::isError($locked)) {
             echo "<br>" . _("No pudo determinar intentos fallidos");
         }
