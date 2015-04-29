@@ -530,17 +530,20 @@ class ResConsulta
         }
         $etablas = array_merge(
             $etablas, array('caso',
-            'victima', 'persona', 'presponsable',
-            'acto',
-            'sectorsocial', 'organizacion', 'rangoedad'
-        )
+            'victima', 'departamento', 'municipio',
+            'persona', 'presponsable', 'acto',
+            'sectorsocial', 'organizacion', 'rangoedad',
+            'ubicacion')
         );
+        $etablas = array_map("trim", $etablas);
         $etablas = implode(", ", array_unique($etablas));
         $q = " SELECT caso.id, persona.id, " .
-            " persona.nombres || ' ' || persona.apellidos, caso.fecha, " .
+            " persona.nombres, persona.apellidos, caso.fecha, " .
             " acto.id_categoria, presponsable.nombre, " .
             " sectorsocial.nombre, organizacion.nombre, " .
-            " persona.sexo, rangoedad.rango " .
+            " persona.sexo, rangoedad.rango, " .
+            " ubicacion.id_departamento,  ubicacion.id_municipio, " .
+            " departamento.nombre, municipio.nombre " .
             " FROM  $etablas WHERE " .
             " presponsable.id=acto.id_presponsable " .
             " AND acto.id_persona=persona.id " .
@@ -550,6 +553,10 @@ class ResConsulta
             " AND caso.id=acto.id_caso " .
             " AND sectorsocial.id=victima.id_sectorsocial" .
             " AND organizacion.id=victima.id_organizacion" .
+            " AND ubicacion.id_caso=caso.id " .
+            " AND departamento.id=ubicacion.id_departamento " .
+            " AND municipio.id=ubicacion.id_municipio" .
+            " AND municipio.id_departamento=ubicacion.id_departamento" .
             " AND $donde ORDER BY caso.fecha" ;
         //echo "q es $q<br>";
         //die("x");
@@ -557,10 +564,13 @@ class ResConsulta
 
         $suma = array();
         $ac = array(
-            _("Fecha"), _("Caso"), _("Víctima"),
+            _("Fecha"), _("Caso"), _("Nombres Víctima"),
+             _("Apellidos Víctima"),
             _("Sector Social"), _("Organización Social"),
             _("Sexo"), _("Rango de Edad"),
-            _("Categoria"), _("P. Responsable")
+            _("Categoria"), _("P. Responsable"),
+            _("Departamento"), _("Municipio"),
+            _("Nom. Departamento"), _("Nom. Municipio"),
         );
 
         if ($pMuestra == "csv") {
@@ -595,28 +605,38 @@ class ResConsulta
         $tv = 0;
         while ($result->fetchInto($row)) {
             //print_r($row);
-            $fecha = $row[3];
-            $cat = $row[4];
+            $fecha = $row[4];
+            $cat = $row[5];
             $nom = $row[2];
-            $ss = $row[6];
-            $os = $row[7];
+            $ap = $row[3];
+            $ss = $row[7];
+            $os = $row[8];
             $idvic = $row[1];
             $idcaso = $row[0];
-            $presp = $row[5];
-            $sexo = $row[8];
-            $rangoedad = $row[9];
+            $presp = $row[6];
+            $sexo = $row[9];
+            $rangoedad = $row[10];
+            $dep = $row[11];
+            $mun = $row[12];
+            $ndep = $row[13];
+            $nmun = $row[14];
 
             if ($pMuestra == "tabla" || $pMuestra == 'actos') {
                 $html_il = "<tr><td>" .
                     htmlentities($fecha, ENT_COMPAT, 'UTF-8') . "</td>" .
                     "<td>" . trim(htmlentities($idcaso, ENT_COMPAT, 'UTF-8')) .
                     "</td><td>" . trim(htmlentities($nom, ENT_COMPAT, 'UTF-8')).
+                    "</td><td>" . trim(htmlentities($ap, ENT_COMPAT, 'UTF-8')).
                     "</td><td>" . trim(htmlentities($ss, ENT_COMPAT, 'UTF-8')) .
                     "</td><td>" . trim(htmlentities($os, ENT_COMPAT, 'UTF-8')) .
                     "</td><td>" . htmlentities($sexo, ENT_COMPAT, 'UTF-8') .
                     "</td><td>" . htmlentities($rangoedad, ENT_COMPAT, 'UTF-8') .
                     "</td><td>" . htmlentities($cat, ENT_COMPAT, 'UTF-8') .
                     "</td><td>" . htmlentities($presp, ENT_COMPAT, 'UTF-8') .
+                    "</td><td>" . htmlentities($dep, ENT_COMPAT, 'UTF-8') .
+                    "</td><td>" . htmlentities($mun, ENT_COMPAT, 'UTF-8') .
+                    "</td><td>" . htmlentities($ndep, ENT_COMPAT, 'UTF-8') .
+                    "</td><td>" . htmlentities($nmun, ENT_COMPAT, 'UTF-8') .
                     "</td>";
             } elseif ($pMuestra == 'csv') {
                 $html_il = $fecha . ", ".trim($nom).

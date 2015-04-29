@@ -548,7 +548,7 @@ en la sección del servidor https donde opere SIVeL añada:
 <screen>
 	location ~ ^/primersitio11/(.+\.php)$ {
 		alias       /htdocs/sivel11/$1;
-		fastcgi_pass   127.0.0.1:9000;
+		fastcgi_pass   unix:run/php-fpm.sock;
 		fastcgi_index  index.php;
 		fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
 		include        fastcgi_params;
@@ -559,12 +559,18 @@ en la sección del servidor https donde opere SIVeL añada:
 	}
 </screen>
 
-Reinicie nginx y verifique que opera en el nuevo URL.
+Cree los enlaces necesarios en el directorio sivel11/sitios, por ejemplo
+<screen>
+	cd /var/www/htdocs/sivel11/sitios
+	ln -s primersitio11 127.0.0.1_PRIMERSITIO11
+</screen>
 
-También debe crear los enlaces necesarios en el directorio sivel11/sitios.
+Reinicie nginx (con <command>sudo sh /etc/rc.d/nginx restart</command>)
+y verifique que opera el nuevo URL.
+
 </para>
-<para>Tras completar la ejecución de este script,  completar las configuraciones
-	y examinar el nuevo URL, es recomendable borrar las fuentes de
+<para>Cuando complete este procedimiento con todos los sitios,
+	se recomienda borrar las fuentes de
 	de la versión 1.1 de su ubicación anterior.
 	</para>
 	</listitem>

@@ -2042,8 +2042,8 @@ if (!aplicado($idac)) {
         "ALTER TABLE usuario ADD CONSTRAINT usuario_id_rol_check "
         . " CHECK (rol>='1' AND rol<='4')", false
     );
-    hace_consulta($db, 'DROP TABLE rol', false);
-    hace_consulta($db, 'DROP SEQUENCE rol_seq', false);
+    hace_consulta($db, 'DROP TABLE rol CASCADE', false);
+    hace_consulta($db, 'DROP SEQUENCE rol_seq CASCADE', false);
 
     aplicaact(
         $act, $idac, 'Menú pasa de base de datos a interfaz'
@@ -2389,6 +2389,9 @@ $idac = '1.2-loc';
 if (!aplicado($idac)) {
     hace_consulta(
         $db, "CREATE COLLATION es_co_utf_8 (LOCALE = 'es_CO.UTF-8')", false
+    );
+    hace_consulta(
+        $db, "DROP VIEW IF EXISTS vestcomb", false
     );
     foreach (array(
         'Antecedente', 'Categoria', 'Clase', 'Contexto',
@@ -2898,8 +2901,13 @@ if (!aplicado($idac)) {
 $idac = '1.2-db';
 if (!aplicado($idac)) {
     hace_consulta(
-        $db, "INSERT INTO filiacion (id, nombre, fechacreacion) 
-        VALUES (15, 'MARCHA PATRIÓTICA', '2014-02-14')"
+        $db, "
+        INSERT INTO filiacion (id, nombre, fechacreacion) 
+        SELECT 15, 'MARCHA PATRIÓTICA', '2014-02-14'
+        WHERE
+        NOT EXISTS (
+            SELECT id FROM filiacion WHERE id = 15
+        );"
     );
 
 

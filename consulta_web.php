@@ -97,6 +97,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         $pIdDepartamento= (int)var_req_escapa('id_departamento', $db);
         $pClasificacion = var_req_escapa('clasificacion', $db);
         $pPresponsable  = (int)var_req_escapa('presponsable', $db);
+        $pContexto= (int)var_req_escapa('contexto', $db);
         $pSsocial   = (int)var_req_escapa('ssocial', $db);
         $pNomvic    = substr(var_req_escapa('nomvic', $db), 0, 32);
         $pNomsim    = substr(var_req_escapa('nomsim', $db), 0, 32);
@@ -308,6 +309,18 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 $where, "ubicacion.latitud", "NULL", " IS NOT "
             );
             agrega_tabla($tablas, 'ubicacion');
+        }
+
+        if ($pContexto != '') {
+            consulta_and_sinap(
+                $where, "caso_contexto.id_caso",
+                "caso.id"
+            );
+            consulta_and(
+                $db, $where, "caso_contexto.id_contexto",
+                $pContexto
+            );
+            agrega_tabla($tablas, 'caso_contexto');
         }
 
         if ($pPresponsable != '') {
@@ -615,6 +628,22 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $lpr = htmlentities_array(
             $db->getAssoc(
                 "SELECT id, nombre FROM presponsable " .
+                "WHERE fechadeshabilitacion is null ORDER BY nombre"
+            )
+        );
+        if (PEAR::isError($lpr)) {
+            die($lpr->getMessage() . " - " . $lpr->getUserInfo());
+        }
+        $options = array('' => '') + $lpr;
+        $sel->loadArray($options);
+
+        $sel =& $this->addElement(
+            'select',
+            'contexto', _('Contexto')
+        );
+        $lpr = htmlentities_array(
+            $db->getAssoc(
+                "SELECT id, nombre FROM contexto " .
                 "WHERE fechadeshabilitacion is null ORDER BY nombre"
             )
         );
