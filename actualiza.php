@@ -2735,9 +2735,16 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db, "ALTER TABLE usuario DROP CONSTRAINT usuario_pkey", false
     );
+    aplicaact($act, $idac, 'Fusiona tablas usuario y funcionario 1');
+} 
+
+
+$idac = '1.2-fu2';
+if (!aplicado($idac)) {
+    # Si hay inconsistencias en usuarios el siguiente falla
     hace_consulta(
         $db, "ALTER TABLE usuario ADD CONSTRAINT usuario_pkey
-        PRIMARY KEY (id)", false
+        PRIMARY KEY (id)"
     );
     hace_consulta(
         $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT caso_etiqueta_pkey", 
@@ -2817,7 +2824,7 @@ if (!aplicado($idac)) {
         SET DEFAULT '4'"
     );
 
-    aplicaact($act, $idac, 'Fusiona tablas usuario y funcionario');
+    aplicaact($act, $idac, 'Fusiona tablas usuario y funcionario 2');
 }
 
 $idac = '1.2-bc';
