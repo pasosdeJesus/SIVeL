@@ -414,7 +414,7 @@ class PagUbicacion extends PagBaseMultiple
                         $c->_options = array();
                         $options = array('' => '') + htmlentities_array(
                             $db->getAssoc(
-                                "SELECT id, nombre FROM clase "
+                                "SELECT id, nombre || ' (' || id_tclase || ')' FROM clase "
                                 . " WHERE id_departamento='" . (int)$vdep . "' "
                                 . " AND id_municipio='" .(int)$vmun . "' "
                                 . " ORDER BY nombre"
