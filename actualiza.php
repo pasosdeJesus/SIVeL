@@ -2035,7 +2035,8 @@ if (!aplicado($idac)) {
         $db, "ALTER TABLE usuario DROP CONSTRAINT usuario_id_rol_fkey", false
     );
     hace_consulta(
-        $db, "ALTER TABLE usuario DROP CONSTRAINT usuario_id_rol_check", false
+        $db, "ALTER TABLE usuario DROP CONSTRAINT usuario_id_rol_check", 
+        false, false
     );
     hace_consulta(
         $db,
@@ -2054,7 +2055,7 @@ $idac = '1.2-lu';
 if (!aplicado($idac)) {
     hace_consulta(
         $db, "ALTER TABLE usuario ADD COLUMN idioma "
-        . " VARCHAR(6) NOT NULL DEFAULT 'es_CO'", false
+        . " VARCHAR(6) NOT NULL DEFAULT 'es_CO'", false, false
     );
 
     aplicaact($act, $idac, 'Idioma preferido por usuario');
@@ -2283,7 +2284,7 @@ if (!aplicado($idac)) {
         array("comunidad_rangoedad", "id_rango", "id_rangoedad"),
         array("comunidad_sectorsocial", "id_sector", "id_sectorsocial"),
         array("ffrecuente", "tipo_fuente", "tfuente"),
-        array("presponsable_caso", "id_p_responsable", "id_presponsable"),
+        array("presunto_responsable_caso", "id_p_responsable", "id_presponsable"),
         array("ubicacion", "id_tipo_sitio", "id_tsitio"),
         array("usuario", "id_rol", "rol"),
         array("usuario", "id_usuario", "id"),
@@ -2328,7 +2329,7 @@ if (!aplicado($idac)) {
             " ADD COLUMN longitud FLOAT", false
         );
     }
-    aplicaact($act, $idac, 'Latitude y Longitud en departamento, municipio y clase');
+    aplicaact($act, $idac, 'Latitud y Longitud en departamento, municipio y clase');
 }
 
 $idac = '1.1-dp';
@@ -2503,7 +2504,8 @@ if (!aplicado($idac)) {
         CAST (numerodocumento AS BIGINT)"
     );
     hace_consulta(
-        $db, "ALTER TABLE persona DROP CONSTRAINT numerodocumento_key ", false
+        $db, "ALTER TABLE persona DROP CONSTRAINT numerodocumento_key ", 
+        false, false
     );
     hace_consulta(
         $db, "ALTER TABLE persona ADD CONSTRAINT numerodocumento_key "
@@ -2556,7 +2558,7 @@ if (!aplicado($idac)) {
     );
     hace_consulta(
         $db, "INSERT INTO etnia (id, nombre, descripcion, fechacreacion) 
-        VALUES (60, 'ROM', '', '2013-07-05')", false
+              VALUES ('60', 'ROM', '', '2013-07-05')" , false, false
     );
 
     aplicaact($act, $idac, 'Aumentadas tablas básicas');
@@ -2745,6 +2747,9 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db, "ALTER TABLE usuario ADD CONSTRAINT usuario_pkey
         PRIMARY KEY (id)"
+    );
+    hace_consulta(
+        $db, "ALTER TABLE etiquetacaso RENAME TO caso_etiqueta", false
     );
     hace_consulta(
         $db, "ALTER TABLE caso_etiqueta DROP CONSTRAINT caso_etiqueta_pkey", 

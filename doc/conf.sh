@@ -301,7 +301,7 @@ check "TIDY" "optional" "test -x \$TIDY" `which tidy 2> /dev/null`
 check "TOUCH" "" "test -x \$TOUCH" `which touch 2> /dev/null`
 
 # Corrección ortografica
-check "W3M" "optional" "test -x \$W3M" `which w3m 2> /dev/null` `which lynx 2> /dev/null`
+check "W3M" "optional" "test -x \$W3M" `which lynx 2> /dev/null` `which w3m 2> /dev/null` 
 l=`echo $W3M | sed -e "s|.*lynx.*|si|g"`
 W3M_OPT=""; 
 if (test "$l" = "si") then {

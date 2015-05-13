@@ -1,5 +1,21 @@
 Apéndice A. Novedades
 
+   Versión 1.2b4 (May.2015)
+
+          + Consulta web permite filtrar por contexto.
+          + Reporte de actos como en 1.1 pero con las columnas adicionales
+            Sexo y Rango de Edad.
+          + Puede deshabilitarse edición de casos con
+            $GLOBALS['no_permite_editar'].
+          + Fallas corregidas: cálculo de edad, no muestra rangos de edad
+            deshabilitados en ficha de captura, eliminada Marcha
+            Patriótica duplicada de Filiación Política.
+          + En módulo mapag puede configurarse autenticación para ver mapa
+            con $GLOBALS['mapag_autentica'].
+          + Puede deshabilitarse manejo (edición/adición/eliminación) de
+            tablas básicas con
+            $GLOBALS['deshabilita_manejo_tablasbasicas']
+
    Versión 1.2b3 (Ago.2014)
 
           + Consulta web permite especificar dos etiquetas.
