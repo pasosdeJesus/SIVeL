@@ -559,26 +559,58 @@ en la sección del servidor https donde opere SIVeL añada:
 	}
 </screen>
 
-Cree los enlaces necesarios en el directorio sivel11/sitios, por ejemplo
+Reinicie nginx:
 <screen>
-	cd /var/www/htdocs/sivel11/sitios
-	ln -s primersitio11 127.0.0.1_PRIMERSITIO11
+	sudo sh /etc/rc.d/nginx restart
 </screen>
 
-Reinicie nginx (con <command>sudo sh /etc/rc.d/nginx restart</command>)
-y verifique que opera el nuevo URL.
-
+Cree los enlaces necesarios en el directorio 
+<filename>sivel11/sitios</filename>.  Puede ver la manera intentando ingresar
+al URL, debe ser algo de la forma:
+<screen>
+	cd /var/www/htdocs/sivel11/sitios
+	ln -s primersitio11 127.0.0.1_PRIMESITIO11
+</screen>
 </para>
 <para>Cuando complete este procedimiento con todos los sitios,
 	se recomienda borrar las fuentes de
 	de la versión 1.1 de su ubicación anterior.
-	</para>
+	Por ejemplo para eliminar un sitio:
+<screen>
+	cd /var/www/htdocs/sivel/sitios
+	rm -rf primersitio
+</screen>
+	O si ya migró todos los sitios puede borrar el directorio
+	completo con fuentes de SIVeL 1.1:
+	<filename>/var/www/htdocs/sivel</filename>
+</para>
 	</listitem>
 	<listitem>
 		<para>
 Instale la versión de desarrollo de SIVeL 1.2, siguiendo los mismos pasos
 descritos en:
-			<xref linkend="actualizacionmenor"></xref>.
+<xref linkend="actualizacionmenor"></xref>.
+Asegurse de ejecutar <filename>conf.sh</filename>:
+<screen>
+	cd /var/www/htdocs/sivel12/
+	./conf.sh -i
+</screen>
+		</para>
+	</listitem>
+	<listitem>
+		<para>
+			SIVeL 1.2 para las búsquedas 
+			que no tienen en cuenta tildes emplea la extensión
+			<literal>unaccent</literal>, la cual para su 
+			instalación requiere que el usuario dueño de la 
+			base de datos sea superusuario.  
+			Para convertir un usuario <literal>sivel</literal> 
+			en superusuario:
+			<screen>
+sudo su - _postgresql
+psql -h/var/www/tmp -Upostgres template1
+ALTER ROLE sivel WITH SUPERUSER;
+			</screen>
 		</para>
 	</listitem>
 	<listitem>
@@ -588,17 +620,6 @@ descritos en:
 			usando 1.1 y restaurarla en una base ya creada pero
 			sin datos para 1.2.</para>
 		<para>
-			Por otra parte SIVeL 1.2 para las búsquedas 
-			que no tienen en cuenta tildes emplea la extensión
-			unaccent, la cual para su instalación requiere
-			que el usuario dueño de la base de datos sea
-			superusuario.  Para convertir un usuario sivel
-			en superusuario:
-			<screen>
-sudo su - _postgresql
-psql -h/var/www/tmp -Upostgres template1
-ALTER ROLE sivel WITH SUPERUSER;
-			</screen>
 	Si movió su sistema 1.1 como se describió en esta sección
 	y dejo las ubicaciones por defecto, basta que ejecute:
 <screen>
@@ -611,7 +632,16 @@ codificación UTF-8:
 	cd /var/www/htdocs/sivel12/sitios/
 	SIN_ESQUEMA=1 SIN_DATOS=1 ./nuevo.sh primersitio
 </screen>
-Restaure los datos de la base respaldada:
+Si requiere conocer la clave del usuario SIVeL ubiquese en el directorio con 
+fuentes de la versión  1.0 y ejecute:
+<screen>
+sudo grep "dbclave *=" aut/conf.php
+</screen>
+Y ponga esa clave en el archivo de configuración de la nueva versión.
+</para>
+<para>
+Restaure los datos de la base respaldada (cambie el nombre de la base y el día 
+de acuerdo a su caso):
 <screen>
 	cd primersitio
 	../../bin/restaura.sh /var/www/resbase/movido-primersitio-dump-03.sql.gz
@@ -619,50 +649,36 @@ Restaure los datos de la base respaldada:
 Configure nginx para abrir nuevo sitio en <filename>/etc/nginx/nginx.conf</filename>:
 <screen>
 	location ~ ^/primersitio/(.+\.php)$ {
-            alias	   /var/www/htdocs/sivel12/$1;
+            alias	   /htdocs/sivel12/$1;
             fastcgi_pass   127.0.0.1:9000;
             fastcgi_index  index.php;
             fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
             include        fastcgi_params;
         }
 
-	location /primersitio/ {
+	
+	location ~ ^/primersitio/(.*)$ {
 		alias /htdocs/sivel12/$1;
 	}
 </screen>
-Cree los enlaces de acuerdo a las formas como abrirá la base, por ejemplo:
+A continuación reinicie el servidor web:
 <screen>
-	cd /var/www/htdocs/sivel12/sitios/
-	ln -sf primersitio 127.0.0.1_PRIMERSITIO
+	sudo sh /etc/rc.d/nginx restart
 </screen>
-y pruebe desde URLs acordes a los enlaces por ejemplo:
-<literal>https://127.0.0.1/primersitio/</literal>
 </para>
 	</listitem>
 	<listitem>
-		<para>
-Restaure los datos de la base respaldada:
-Si requiere conocer la clave del usuario SIVeL ubiquese en el directorio con 
-fuentes de la versión  1.0 y ejecute:
-<screen>
-sudo grep "dbclave *=" aut/conf.php
-</screen>
-Y ponga esa clave en el archivo de la nueva versión, que puede editar con:
-<screen>
-sudo xfw /var/www/htdocs/sivel/sitios/sivel/conf.php
-</screen>
-buscando <literal>dbclave</literal> y remplazando <literal>xyz</literal> por la clave que anotó.  Salve 
-y salga.
-</para>
-	</listitem>
-	<listitem>
-		<para>Haga utilizable su sitio con todas las formas de conexión que tenga a su base por ejemplo si típicamente desde la red local emplea: https://192.168.44.10 para ingresar a SIVeL ejecute:
+		<para>Haga utilizable su sitio con todas las formas de 
+			conexión que tenga a su base por ejemplo si 
+			típicamente desde la red local emplea: 
+			https://192.168.44.10/primersitio/ para ingresar a 
+			un sitio, ejecute:
 			<screen>
-cd /var/www/htdocs/sivel/sitios/
-ln -s sivel 192.168.44.10
+cd /var/www/htdocs/sivel12/sitios/
+ln -s primersitio 192.168.44.10_PRIMERSITIO
 			</screen>
 Haga lo mismo con otras ubicaciones, el nombre del 
-enlace que debe crear lo verá al intentar abrir SIVeL.
+enlace que debe crear lo verá al intentar usar el URL en un navegador.
 		</para>
 	</listitem>
 	<listitem>
@@ -672,9 +688,9 @@ herramienta de actualización que debería estar disponible desde el mismo
 servidor en <ulink url="https://127.0.0.1/actualiza.php"></ulink>.
 Es posible que tenga que iniciar la sesión 2 o 3 veces mientras
 se actualiza en cada intento la forma de cifrado de las claves<footnote><para>En
-        caso de que tenga incoveniente reiterativos con claves asegurese 
-        que en la base de datos se esté almacenando el condensado bcrypt
-				de la clave y no los antiguos SHA-256 y MD5. <!--, esto lo puede hacer 
+caso de que tenga incoveniente reiterativos con claves asegurese 
+que en la base de datos se esté almacenando el condensado bcrypt
+de la clave y no los antiguos SHA-256 y MD5. <!--, esto lo puede hacer 
 				para el usuario 
         <literal>juan</literal> ejecutando desde el directorio
         del sitio:
@@ -689,8 +705,8 @@ se actualiza en cada intento la forma de cifrado de las claves<footnote><para>En
 			puede verificar que el número de casos coincidan,
 			así como los conteos por víctimas individuales.</para>
 		<para>Para hacer una auditoria más intensiva se sugiere que 
-genere un reporte general de todos los casos del sistema 1.0 y un 
-reporte general en el 1.1 y los compare teniendo en cuenta que 
+genere un reporte general de todos los casos del sistema 1.1 y un 
+reporte general en el 1.2 y los compare teniendo en cuenta que 
 ha cambiado un poco el formato del reporte general 
 (Si en su base ha registrado acciones 
 bélicas active el módulo respectivo antes de realizar las comparaciones).
