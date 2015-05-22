@@ -564,6 +564,10 @@ al URL, debe ser algo de la forma:
 	ln -s primersitio11 127.0.0.1_PRIMESITIO11
 </screen>
 </para>
+<para>
+	Verifique que opera su sitio desde un navegador por ejemplo desde el
+	mismo servidor con https://127.0.0.1/primersitio11/
+</para>
 <para>Cuando complete este procedimiento con todos los sitios,
 	se recomienda borrar las fuentes de
 	de la versión 1.1 de su ubicación anterior.
@@ -613,23 +617,17 @@ ALTER ROLE sivel WITH SUPERUSER;
 			sin datos para 1.2.</para>
 		<para>
 	Si movió su sistema 1.1 como se describió en esta sección
-	y dejo las ubicaciones por defecto, basta que ejecute:
-<screen>
-	cd /var/www/htdocs/sivel12/
-	./conf.sh -i
-</screen>
-Por cada sitio que ya haya copiado cree una base en blanco pero con 
-codificación UTF-8:
+	y dejo las ubicaciones por defecto, basta que ejecute por cada sitio que haya copiado:
 <screen>
 	cd /var/www/htdocs/sivel12/sitios/
 	SIN_ESQUEMA=1 SIN_DATOS=1 ./nuevo.sh primersitio12
 </screen>
-Si requiere conocer la clave del usuario SIVeL ubiquese en el directorio con 
-fuentes de la versión  1.0 y ejecute:
+Si al hacerlo tiene problemas de clave, debe configurar en el archivo primersitio12/conf.php.  
+Puede examinar la clave del usuario SIVeL que emplea en 1.1, ubicandose en el directorio con 
+fuentes de esa versión  y ejecutando:
 <screen>
-sudo grep "dbclave *=" aut/conf.php
+	sudo grep "dbclave *=" sitios/primersitio11/conf.php
 </screen>
-Y ponga esa clave en el archivo de configuración de la nueva versión.
 </para>
 <para>
 Restaure los datos de la base respaldada (cambie el nombre de la base y el día 
@@ -638,7 +636,7 @@ de acuerdo a su caso):
 	cd primersitio12
 	../../bin/restaura.sh /var/www/resbase/movido-primersitio-dump-03.sql.gz
 </screen>
-Configure nginx para abrir nuevo sitio en <filename>/etc/nginx/nginx.conf</filename>:
+Configure nginx para abrir el nuevo sitio en <filename>/etc/nginx/nginx.conf</filename>:
 <screen>
 	location ~ ^/primersitio12/(.+\.php)$ {
             alias	   /htdocs/sivel12/$1;
@@ -673,7 +671,13 @@ y pruebe desde URLs acordes a los enlaces por ejemplo:
 		</para>
 <para>
 Haga lo mismo con otras ubicaciones, el nombre del 
-enlace que debe crear lo verá al intentar abrir SIVeL.
+enlace que debe crear lo verá al intentar abrir SIVeL.  
+Asegurese también de dejar un enlace al mismo servidor:
+<screen>
+cd /var/www/htdocs/sivel12/sitios/
+ln -s primersitio 127.0.0.1_PRIMERSITIO
+</screen>
+
 </para>
 	</listitem>
 	<listitem>
