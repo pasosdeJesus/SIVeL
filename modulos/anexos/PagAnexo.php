@@ -331,16 +331,29 @@ class PagAnexo extends PagBaseMultiple
 
             $ida = $this->banexo->_do->id_caso."_".$this->banexo->_do->id;
             $nnom = $ida . "_".$v['name'];
-            if (file_exists($GLOBALS['dir_anexos'] . "/$nnom")) {
+            $nloc = $GLOBALS['dir_anexos'] . "/$nnom";
+            if (file_exists($nloc)) {
                  error_valida('Ya existe un archivo con ese nombre', $valores);
+                 return false;
+            }
+            if (mb_strlen($nloc, "UTF-8") > 255) {
+                 error_valida('Nombre tiene mas de 255 caracteres', $valores);
+                 return false;
+            }
+            $r=preg_match("/^[-0-9A-Za-z_\.\/]+$/",$nloc);
+            if ($r != 1) {
+                error_valida('Nombre tiene caracteres no admisibles " .
+                    "--solo debe constar de digitos, letras, _ y .', $valores);
                  return false;
             }
             $rmuf = $s->moveUploadedFile($GLOBALS['dir_anexos'], $nnom);
             if (!$rmuf) {
                 error_valida(
-                    'No pudo moverse el archivo ' .
-                    $nnom . ' al directorio: ' .
-                    $GLOBALS['dir_anexos'], $valores
+                    "No pudo moverse el archivo $nnom al directorio: " .
+                    $GLOBALS['dir_anexos'] .
+                    ".\n ¿El tamaño supera " .
+                    ini_get('upload_max_filesize') . " o " . 
+                    ini_get('post_max_size') . "?", $valores
                 );
                  return false;
             }
