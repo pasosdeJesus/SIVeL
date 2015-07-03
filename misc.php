@@ -309,7 +309,7 @@ function subarreglo($ar, $ind)
  * @param string $nurl       Url por asociar al subtitulo agregado
  * @param array  $nsub       Subarbol por asociar al subtitulo agregado
  *
- * @return booelan true si y solo si encuentra el titulo y puede añadir subtitulo nuevo
+ * @return boolean true si y solo si encuentra el titulo y puede añadir subtitulo nuevo
  */
 function html_menu_agrega_submenu(&$menu, $titulo, $nsubtitulo, $nurl,
     $nsub = null
@@ -644,9 +644,9 @@ function unset_var_session()
 /**
  * Pone en campos de un formulario los valores del arreglo valores
  *
- * @param object &$pag    Formulario
- * @param array  $campos  Campos por establecer
- * @param array  $valores Valores indexados por campos
+ * @param mixed &$pag    Formulario
+ * @param array $campos  Campos por establecer
+ * @param array $valores Valores indexados por campos
  *
  * @return void
  */

@@ -228,7 +228,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             );
             $dcaso->bienes = dato_en_obs($r, 'bienes');
             if (!$dcaso->insert()) {
-                var_dump($dcaso);
+                //var_dump($dcaso);
                 die(_("No pudo insertar caso ") . $dcaso->id);
             }
             $idcaso = $dcaso->id;

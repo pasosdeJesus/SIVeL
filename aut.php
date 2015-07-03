@@ -304,6 +304,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         );
         $result = hace_consulta_aut($db, $q, false);
     }
+
     if (PEAR::isError($result)) {
         echo "<br>" . _("No pudo emplear tabla de usuarios");
         exit(1);
@@ -413,6 +414,8 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             $q = "SELECT id FROM usuario 
                 WHERE $camponusuario='" . $usuario . "';";
             $result = hace_consulta_aut($db, $q);
+            $idf = -1;
+            $lang = "es_CO";
             $row = array();
             if ($result->fetchInto($row)) {
                 $idf = $row[0];

@@ -129,21 +129,20 @@ limpia:
 ../Instala.txt: html/instalacion.html html/pasos.html
 	$(W3M) $(W3M_OPT) -dump html/instalacion.html | awk -f herram/conthtmldoc.awk | awk '/\. Prerrequisitos/ { e=e+1; } /.*/ {if (e>1) { print $$0; }} BEGIN { e=0; } ' > ../Instala.txt
 	$(W3M) $(W3M_OPT) -dump html/pasos.html | awk -f herram/conthtmldoc.awk | awk '/\. Procedimiento/ { e=e+1; } /.*/ {if (e>0) { print $$0; }} BEGIN { e=0; } ' >> ../Instala.txt
-	#$(RECODE) latin1..utf8 ../Instala.txt
+	if (test "$(W3M)" = "/usr/local/bin/lynx") then { $(RECODE) latin1..utf8 ../Instala.txt; } fi;
 
 ../Novedades.txt: html/novedades.html 
 	$(W3M) $(W3M_OPT) -dump html/novedades.html | awk -f herram/conthtmldoc.awk | awk '/\. Novedades/ { e=e+1; } /.*/ {if (e>0) { print $$0; }} BEGIN { e=0; } ' > ../Novedades.txt
-	#$(RECODE) latin1..utf8 ../Novedades.txt
+	if (test "$(W3M)" = "/usr/local/bin/lynx") then { $(RECODE) latin1..utf8 ../Novedades.txt; } fi;
 
 
 ../Creditos.txt: html/creditos.html
 	$(W3M) $(W3M_OPT) -dump html/creditos.html | awk -f herram/conthtmldoc.awk | awk '/\. Cr.*ditos/ { e=e+1; } /.*/ {if (e>=1) { print $$0; }} BEGIN { e=0; } ' > ../Creditos.txt
-	#$(RECODE) latin1..utf8 ../Creditos.txt
-
+	if (test "$(W3M)" = "/usr/local/bin/lynx") then { $(RECODE) latin1..utf8 ../Creditos.txt; } fi;
 
 ../Derechos.txt: html/index.html 
 	$(W3M) $(W3M_OPT) -dump html/index.html | awk -f herram/conthtmldoc.awk | awk '/.*/ {if (e>=1) { print $$0; }} /Documentac/ { e=e+1; } BEGIN { e=0; } ' > ../Derechos.txt
-	#$(RECODE) latin1..utf8 ../Derechos.txt
+	if (test "$(W3M)" = "/usr/local/bin/lynx") then { $(RECODE) latin1..utf8 ../Derechos.txt; } fi;
 
 varconfphp.xdbk: ../sitios/pordefecto/conf.php ../sitios/pordefecto/conf_int.php
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > varconfphp.xdbk

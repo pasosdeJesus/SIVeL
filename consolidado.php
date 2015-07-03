@@ -120,6 +120,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         $result = hace_consulta($db, $q);
         $tpresp = array();
         $l = 1;
+        $row = array();
         while ($result->fetchInto($row)) {
             $d = objeto_tabla('presponsable');
             if (PEAR::isError($d)) {

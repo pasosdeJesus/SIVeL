@@ -196,35 +196,16 @@ para sivel (digamos con login <literal>sivel</literal>).
 				</listitem>
 				<listitem>
 					<para>
-Instale en un directorio utilizable por nginx con SSL.
-Por ejemplo si las fuentes están en
-<filename>~/Desktop/sivel-&PRY-VERSION;.tar.gz</filename> y va a 
-instalar en el directorio <filename>/var/www/htdocs/sivel</filename> que
-debería ser visible para nginx , emplee:
-<screen>
-cd /var/www/htdocs
-sudo mkdir sivel
-cd ~/
-mkdir -p tmp
-cd tmp
-tar xvfz ~/Desktop/sivel-&PRY-VERSION;.tar.gz
-sudo cp -rf sivel-&PRY-VERSION;/* /var/www/htdocs/sivel/
-cd /var/www/htdocs/sivel/
-sudo chown -R sivel:sivel .
-sudo chmod -R a+r .
-</screen>
-Después puede editar <filename>/etc/nginx/nginx.conf</filename>
-y cambiar algunas líneas de la configuracion de SSL --es decir las que 
-aparecen en la sección server con listen 443:
-<screen>
-root /var/www/htdocs/sivel/;
-</screen>
+Instale el paquete <filename>sivel-&PRY-VERSION;.tar.gz</filename>
+que se distribuye con adJ-&VER-ADJ;.     Si prefiere descargar fuentes o clonar 
+el repositorio git, asegurese de dejar en un directorio utilizabel por nginx 
+con SSL y consulte <xref linkend="actualizacionmenor"></xref>.
 					</para>
 				</listitem>
 				<listitem>
 					<para>
 Cree un usuario para PostgreSQL para manejar la base de datos (las
-siguientes instrucciones son para PostgreSQL 9.3):
+siguientes instrucciones son para PostgreSQL 9.4):
  <screen>
 sudo mkdir /var/www/tmp
 sudo chmod -R a+rxw /var/www/tmp
@@ -239,7 +220,7 @@ exit
 					<para>
 Ejecute el archivo de ordenes de configuración:
 <screen>
-cd /var/www/htdocs/sivel/
+cd /var/www/htdocs/sivel12/
 ./conf.sh
 </screen>
 					</para>
@@ -250,26 +231,26 @@ Cree un nuevo sitio desde el directorio <filename>sitios</filename>
 con el archivo de ordenes <filename>nuevo.sh</filename>.  Por ejemplo
 para crear el sitio <literal>sivel</literal>:
 <screen>
-cd /var/www/htdocs/sivel/sitios
-./nuevo.sh sivel
+cd /var/www/htdocs/sivel12/sitios
+./nuevo.sh sivel12
 </screen>
 Este archivo de ordenes 
 copiará los archivo <filename>pordefecto/conf.php.plantilla</filename> 
 y <filename>pordefecto/vardb.sh.plantilla</filename> como
-<filename>sivel/conf.php</filename> y <filename>sivel/vardb.sh</filename>
+<filename>sivel12/conf.php</filename> y <filename>sivel12/vardb.sh</filename>
 cuadrando rutas y usuario de PostgreSQL (si requiere cambiar usuario
-o clave de PostgreSQL edite <filename>sivel/conf.php</filename>).  También
+o clave de PostgreSQL edite <filename>sivel12/conf.php</filename>).  También
 inicializará la base de datos y los archivos relacionados, lo cual usted 
 puede hacer manualmente con:
 <screen>
-cd /var/www/htdocs/sivel/sitios/sivel
+cd /var/www/htdocs/sivel12/sitios/sivel12
 ../../bin/creapg.sh
 </screen>
 y el mismo archivo de ordenes le permitirá agregar el primer usuario al cual
 debe darle el rol de administrador.  Si posteriormente requiere agregar
 otros usuarios para este sitio desde el interprete de comandos ejecute:
 <screen>
-cd /var/www/htdocs/sivel/sitios/sivel
+cd /var/www/htdocs/sivel12/sitios/sivel12
 ../../bin/agus.sh
 </screen>
 </para>
@@ -298,7 +279,7 @@ puede revisar errores en la bitácora de nginx (por defecto
 					<para>
 Si desea generar la documentación:
 <screen>
-cd /var/www/htdocs/sivel/doc
+cd /var/www/htdocs/sivel12/doc
 ./conf.sh
 cp personaliza.ent.plantilla personaliza.ent
 </screen>
@@ -386,13 +367,6 @@ retroalimentación cifrada por correo vea
 			</itemizedlist>
 		</para>
 
-		 <para>El proceso de actualización consta de dos partes: primero
-actualizar las fuentes y después ejecutar la herramienta de
-actualización <literal>actualiza.php</literal>.
-</para>
-
-<sect2 id="actualiza-fuentes">
-        <title>Actualización de fuentes</title>
 		<para>
 La actualización de un SIVeL genérico o con personalizaciones 
 simples (módulos, tablas básicas, interfaz y reinterpretaciones, 
@@ -407,7 +381,16 @@ es necesario que un desarrollador con conocimientos de
 PHP, SQL y seguridad informática, mezcle actualizaciones del SIVeL 
 genérico a las fuentes personalizadas y actualicé los módulos particulares.  
 		</para>
-	<sect3 id="actualizacionmenor">
+
+		 <para>El proceso de actualización consta de dos partes: primero
+actualizar las fuentes y después ejecutar la herramienta de
+actualización <literal>actualiza.php</literal> en cada sitio.  
+Estos pasos son más simples para pasar de una versión menor a otra, pero requieren más 
+detalles al pasar de una versión 1.1.x a 1.2.
+</para>
+
+
+	<sect2 id="actualizacionmenor">
 		<title>Actualización de versiones menores (e.g 1.2b1 a 1.2b2)</title>
 		<para>
 			Descargue fuentes de la versión 1.2 más recientes con uno de los siguientes métodos:
@@ -441,15 +424,15 @@ cd /var/www/users/sivel
 Descargue las fuentes más recientes desde 
 <ulink url="http://sivel.sourceforge.net/1.2/"></ulink>, 
 ubiquelas en el servidor y descomprímalas.  Si las descarga con 
-chrome desde el servidor posiblemente quedaran en el directorio 
+chrome desde el servidor posiblemente quedarán en el directorio 
 <literal>Documentos</literal> de su cuenta personal por lo que puede 
 descomprimir y remplazar fuentes anteriores.  Usando OpenBSD adJ sería
 con:
 						<screen>
 cd ~/Documentos
-tar xvfz sivel-&PRY-VERSION;.tar.gz
-sudo chown $USER:$USER /var/www/htdocs/sivel/
-cp -rf sivel-&PRY-VERSION;/* /var/www/htdocs/sivel/
+tar xvfz SIVeL-&PRY-VERSION;.tar.gz
+sudo chown $USER:$USER /var/www/htdocs/sivel12/
+cp -rf SIVeL-&PRY-VERSION;/* /var/www/htdocs/sivel12/
 </screen>
 					</para>
 				</listitem>
@@ -461,8 +444,8 @@ cd ~
 mkdir tmp2
 cd tmp2
 git clone https://github.com/pasosdeJesus/SIVeL.git
-sudo chown $USER:$USER /var/www/htdocs/sivel
-cp -rf SIVeL/* /var/www/htdocs/sivel
+sudo chown $USER:$USER /var/www/htdocs/sivel12
+cp -rf SIVeL/* /var/www/htdocs/sivel12
 </screen>
 					</para>
 				</listitem>
@@ -471,7 +454,7 @@ cp -rf SIVeL/* /var/www/htdocs/sivel
 Si ya tiene unas fuentes que tengan 
 control de versiones (con el directorio .git), actualicelas asi:
 <screen>
-cd /var/www/htdocs/sivel
+cd /var/www/htdocs/sivel12
 git pull
 </screen>
 					</para>
@@ -481,7 +464,7 @@ git pull
 		<para>
 Después debe asegurarse de tener configurado nginx para
 acceder a SIVeL en su nueva ubicación 
-<filename>/var/www/htdocs/sivel/</filename>. 
+<filename>/var/www/htdocs/sivel12/</filename>. 
 Para esto edite el archivo de configuración con:
 <screen>
 sudo xfw /etc/nginx/nginx.conf
@@ -492,16 +475,26 @@ root "/var/www/htdocs";
 </screen>
 y si la encuentra remplázela por:
 <screen>
-root "/var/www/htdocs/sivel";
+root "/var/www/htdocs/sivel12";
 </screen>
 Complete reiniciando nginx con 
 <screen>
 sudo sh /etc/rc.d/nginx restart
 </screen>
 		</para>
-	</sect3>
 
-	<sect3 id="actualizaciondeunounoaunodos">
+		<para>
+Termine ejecutando la herramienta de actualización, abriendo SIVeL con un navegador pero agregando a la dirección 
+<literal>actualiza.php</literal> 
+(e.g. desde el mismo servidor sería <ulink url="https://127.0.0.1/actualiza.php"></ulink>).
+		</para>
+		<para>
+		Este mismo procedimiento debe realizarlo si activa módulos.</para>
+
+
+	</sect2>
+
+	<sect2 id="actualizaciondeunounoaunodos">
 		<title>Actualización de la versión 1.1 a la versión 1.2</title>
 		<para>Esta actualización es bastante compleja, se
 			recomienda dejar su versión 1.1 utilizable con 
@@ -511,7 +504,7 @@ sudo sh /etc/rc.d/nginx restart
 <orderedlist>
 	<listitem>
 		<para>
-Actualice a la versión más reciente de SIVeL 1.1 (1.1.6 en el 
+Actualice a la versión más reciente de SIVeL 1.1 (1.1.7 en el 
 momento de este escrito), siguiendo las instrucciones de 
 <ulink url="http://sivel.sourceforge.net/1.1/actualizacion-sivel.html"></ulink></para>
 	</listitem>
@@ -553,32 +546,63 @@ en la sección del servidor https donde opere SIVeL añada:
 		fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
 		include        fastcgi_params;
 	}
-	location ~ ^/primersitio11/(.*)$
-	{
+	location /primersitio11/ {
 		alias /htdocs/sivel11/$1;
 	}
 </screen>
 
-Cree los enlaces necesarios en el directorio sivel11/sitios, por ejemplo
+Reinicie nginx:
 <screen>
-	cd /var/www/htdocs/sivel11/sitios
-	ln -s primersitio11 127.0.0.1_PRIMERSITIO11
+	sudo sh /etc/rc.d/nginx restart
 </screen>
 
-Reinicie nginx (con <command>sudo sh /etc/rc.d/nginx restart</command>)
-y verifique que opera el nuevo URL.
-
+Cree los enlaces necesarios en el directorio 
+<filename>sivel11/sitios</filename>.  Puede ver la manera intentando ingresar
+al URL, debe ser algo de la forma:
+<screen>
+	cd /var/www/htdocs/sivel11/sitios
+	ln -s primersitio11 127.0.0.1_PRIMESITIO11
+</screen>
 </para>
 <para>Cuando complete este procedimiento con todos los sitios,
 	se recomienda borrar las fuentes de
 	de la versión 1.1 de su ubicación anterior.
-	</para>
+	Por ejemplo para eliminar un sitio:
+<screen>
+	cd /var/www/htdocs/sivel/sitios
+	rm -rf primersitio
+</screen>
+	O si ya migró todos los sitios puede borrar el directorio
+	completo con fuentes de SIVeL 1.1:
+	<filename>/var/www/htdocs/sivel</filename>
+</para>
 	</listitem>
 	<listitem>
 		<para>
-Instale la versión de desarrollo de SIVeL 1.2, siguiendo los mismos pasos
-descritos en:
-			<xref linkend="actualizacionmenor"></xref>.
+
+Instale la versión de desarrollo de SIVeL 1.2, bien con el paquete disponible en adJ-&VER-ADJ; o siguiendo los mismos pasos descritos en 
+<xref linkend="actualizacionmenor"></xref>.
+Asegurse de ejecutar <filename>conf.sh</filename>:
+<screen>
+	cd /var/www/htdocs/sivel12/
+	./conf.sh -i
+</screen>
+		</para>
+	</listitem>
+	<listitem>
+		<para>
+			SIVeL 1.2 para las búsquedas 
+			que no tienen en cuenta tildes emplea la extensión
+			<literal>unaccent</literal>, la cual para su 
+			instalación requiere que el usuario dueño de la 
+			base de datos sea superusuario.  
+			Para convertir un usuario <literal>sivel</literal> 
+			en superusuario:
+			<screen>
+sudo su - _postgresql
+psql -h/var/www/tmp -Upostgres template1
+ALTER ROLE sivel WITH SUPERUSER;
+			</screen>
 		</para>
 	</listitem>
 	<listitem>
@@ -588,93 +612,81 @@ descritos en:
 			usando 1.1 y restaurarla en una base ya creada pero
 			sin datos para 1.2.</para>
 		<para>
-			Por otra parte SIVeL 1.2 para las búsquedas 
-			que no tienen en cuenta tildes emplea la extensión
-			unaccent, la cual para su instalación requiere
-			que el usuario dueño de la base de datos sea
-			superusuario.  Para convertir un usuario sivel
-			en superusuario:
-			<screen>
-sudo su - _postgresql
-psql -h/var/www/tmp -Upostgres template1
-ALTER ROLE sivel WITH SUPERUSER;
-			</screen>
 	Si movió su sistema 1.1 como se describió en esta sección
 	y dejo las ubicaciones por defecto, basta que ejecute:
 <screen>
-	cd /var/www/htdocs/sivel/
+	cd /var/www/htdocs/sivel12/
 	./conf.sh -i
 </screen>
 Por cada sitio que ya haya copiado cree una base en blanco pero con 
 codificación UTF-8:
 <screen>
 	cd /var/www/htdocs/sivel12/sitios/
-	SIN_ESQUEMA=1 SIN_DATOS=1 ./nuevo.sh primersitio
+	SIN_ESQUEMA=1 SIN_DATOS=1 ./nuevo.sh primersitio12
 </screen>
-Restaure los datos de la base respaldada:
-<screen>
-	cd primersitio
-	../../bin/restaura.sh /var/www/resbase/movido-primersitio-dump-03.sql.gz
-</screen>
-Configure nginx para abrir nuevo sitio en <filename>/etc/nginx/nginx.conf</filename>:
-<screen>
-	location ~ ^/primersitio/(.+\.php)$ {
-            alias	   /var/www/htdocs/sivel12/$1;
-            fastcgi_pass   127.0.0.1:9000;
-            fastcgi_index  index.php;
-            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-            include        fastcgi_params;
-        }
-
-	location /primersitio/ {
-		alias /htdocs/sivel12/$1;
-	}
-</screen>
-Cree los enlaces de acuerdo a las formas como abrirá la base, por ejemplo:
-<screen>
-	cd /var/www/htdocs/sivel12/sitios/
-	ln -sf primersitio 127.0.0.1_PRIMERSITIO
-</screen>
-y pruebe desde URLs acordes a los enlaces por ejemplo:
-<literal>https://127.0.0.1/primersitio/</literal>
-</para>
-	</listitem>
-	<listitem>
-		<para>
-Restaure los datos de la base respaldada:
 Si requiere conocer la clave del usuario SIVeL ubiquese en el directorio con 
 fuentes de la versión  1.0 y ejecute:
 <screen>
 sudo grep "dbclave *=" aut/conf.php
 </screen>
-Y ponga esa clave en el archivo de la nueva versión, que puede editar con:
+Y ponga esa clave en el archivo de configuración de la nueva versión.
+</para>
+<para>
+Restaure los datos de la base respaldada (cambie el nombre de la base y el día 
+de acuerdo a su caso):
 <screen>
-sudo xfw /var/www/htdocs/sivel/sitios/sivel/conf.php
+	cd primersitio12
+	../../bin/restaura.sh /var/www/resbase/movido-primersitio-dump-03.sql.gz
 </screen>
-buscando <literal>dbclave</literal> y remplazando <literal>xyz</literal> por la clave que anotó.  Salve 
-y salga.
+Configure nginx para abrir nuevo sitio en <filename>/etc/nginx/nginx.conf</filename>:
+<screen>
+	location ~ ^/primersitio12/(.+\.php)$ {
+            alias	   /htdocs/sivel12/$1;
+	    fastcgi_pass   unix:run/php-fpm.sock;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+
+	location /primersitio12/ {
+		alias /htdocs/sivel12/$1;
+	}
+</screen>
+A continuación reinicie el servidor web:
+<screen>
+	sudo sh /etc/rc.d/nginx restart
+</screen>
 </para>
 	</listitem>
 	<listitem>
-		<para>Haga utilizable su sitio con todas las formas de conexión que tenga a su base por ejemplo si típicamente desde la red local emplea: https://192.168.44.10 para ingresar a SIVeL ejecute:
+		<para>Haga utilizable su sitio con todas las formas de 
+			conexión que tenga a su base por ejemplo si 
+			típicamente desde la red local emplea: 
+			https://192.168.44.10/primersitio/ para ingresar a 
+			un sitio, ejecute:
 			<screen>
-cd /var/www/htdocs/sivel/sitios/
-ln -s sivel 192.168.44.10
+cd /var/www/htdocs/sivel12/sitios/
+ln -s primersitio 192.168.44.10_PRIMERSITIO
 			</screen>
+y pruebe desde URLs acordes a los enlaces por ejemplo:
+<literal>https://192.168.44.10/primersitio/</literal>.
+		</para>
+<para>
 Haga lo mismo con otras ubicaciones, el nombre del 
 enlace que debe crear lo verá al intentar abrir SIVeL.
-		</para>
+</para>
 	</listitem>
 	<listitem>
 		<para>
 Convierta sus datos.  Para esto basta que ejecute la 
 herramienta de actualización que debería estar disponible desde el mismo 
 servidor en <ulink url="https://127.0.0.1/actualiza.php"></ulink>.
-Es posible que tenga que iniciar la sesión 2 o 3 veces mientras
+Es posible que al autenticarse vea mensajes de error que tipicamente 
+puede ignorar y que tenga que iniciar la sesión 2 o 3 veces mientras
 se actualiza en cada intento la forma de cifrado de las claves<footnote><para>En
-        caso de que tenga incoveniente reiterativos con claves asegurese 
-        que en la base de datos se esté almacenando el condensado bcrypt
-				de la clave y no los antiguos SHA-256 y MD5. <!--, esto lo puede hacer 
+caso de que tenga incoveniente reiterativos con claves asegurese 
+que en la base de datos se esté almacenando el condensado bcrypt
+de la clave y no los antiguos SHA-256 y MD5. <!--, esto lo puede hacer 
 				para el usuario 
         <literal>juan</literal> ejecutando desde el directorio
         del sitio:
@@ -682,6 +694,10 @@ se actualiza en cada intento la forma de cifrado de las claves<footnote><para>En
             ../../bin/clave_sha1.sh juan
 					</screen> -->
 </para></footnote>.</para>
+<para>Una vez pueda ingressar y actulizar recomendamos que copie la bitacora 
+	de lo realizado y de posibles errores en el proceso, pues estos
+	si son importantes y pueden requerir correcciones.
+</para>
 	</listitem>
 	<listitem>
 		<para>
@@ -689,8 +705,8 @@ se actualiza en cada intento la forma de cifrado de las claves<footnote><para>En
 			puede verificar que el número de casos coincidan,
 			así como los conteos por víctimas individuales.</para>
 		<para>Para hacer una auditoria más intensiva se sugiere que 
-genere un reporte general de todos los casos del sistema 1.0 y un 
-reporte general en el 1.1 y los compare teniendo en cuenta que 
+genere un reporte general de todos los casos del sistema 1.1 y un 
+reporte general en el 1.2 y los compare teniendo en cuenta que 
 ha cambiado un poco el formato del reporte general 
 (Si en su base ha registrado acciones 
 bélicas active el módulo respectivo antes de realizar las comparaciones).
@@ -700,7 +716,7 @@ Abra dos pestañas en su navegador en una realice un reporte general con
 todos los datos de la base anterior y en la otra el mismo reporte en la 
 base nueva.  Después:
 <screen>
-cd /var/www/htdocs/sivel/sitios/sivel
+cd /var/www/htdocs/sivel12/sitios/sivel12
 mkdir compara-migra
 cd compara-migra/
 </screen>
@@ -722,21 +738,9 @@ Verá sus resultados con el paginador less.
 	</listitem>
 </orderedlist>
 </para>
-	</sect3>
 </sect2>
 
 
-	<sect2 id="actualiza.php">
-		<title>Herramienta de actualización</title>
-
-		<para>
-La ejecuta abriendo SIVeL con un navegador pero agregando a la dirección 
-<literal>actualiza.php</literal> 
-(e.g. desde el mismo servidor sería <ulink url="https://127.0.0.1/actualiza.php"></ulink>).
-		</para>
-		<para>
-		Este mismo procedimiento debe realizarlo si activa módulos.</para>
-	</sect2>
 
 	</sect1>
 	<sect1 id="pruebas-regresion">
