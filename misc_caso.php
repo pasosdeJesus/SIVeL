@@ -44,6 +44,13 @@ function elimina_caso(&$db, $idcaso)
     if (!isset($idcaso) || $idcaso == "") {
         die("Sólo se eliminan casos ya ingresados");
     }
+    $q = "DELETE FROM homonimosim WHERE id_persona1 IN
+        (SELECT id_persona FROM victima WHERE id_caso='$idcaso') OR
+        id_persona2 IN
+        (SELECT id_persona FROM victima WHERE id_caso='$idcaso') 
+        ";
+    hace_consulta($db, $q, false);
+
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
         list($n, $c, $o) = $tab;
         //echo "OJO 1 o=$o, c=$c<br>";
@@ -62,7 +69,6 @@ function elimina_caso(&$db, $idcaso)
         }
     }
     $q = "DELETE FROM caso_usuario WHERE id_caso='$idcaso'";
-    //echo "OJO q=$q<br>";
     hace_consulta($db, $q);
     $q = "DELETE FROM caso WHERE id='$idcaso'";
     $res = hace_consulta($db, $q);
