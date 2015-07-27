@@ -820,14 +820,7 @@ class PagBasicos extends PagBaseSimple
                 $v = $this->bcaso->_do->id_intervalo;
                 $sci->setValue($v);
             }
-        } else {
-            $e =& $this->getElement('fecha');
-            if (isset($e) && !PEAR::isError($e)) {
-                $e->_elements[0]->setValue('');
-                $e->_elements[1]->setValue('');
-                $e->_elements[2]->setValue('');
-            }
-        }
+        } 
     }
 
     /**
