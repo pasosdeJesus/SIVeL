@@ -59,7 +59,7 @@ class AccionComparaDos extends HTML_QuickForm_Action
     /**
      * Busca similares
      *
-     * @return void
+     * @return string
      */
     static function busca() 
     {
@@ -125,7 +125,7 @@ class AccionComparaDos extends HTML_QuickForm_Action
      * @param object &$page      Página
      * @param string $actionName Acción
      *
-     * @return void
+     * @return boolean
      */
     function perform(&$page, $actionName)
     {

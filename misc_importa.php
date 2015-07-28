@@ -307,10 +307,10 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
  * @param string  $m       Mes
  * @param string  $a       Año
  * @param string  $orig    Orig
- * @param integer &$dia_s  Para retornar día
- * @param integer &$mes_s  Retorna mes
- * @param integer &$anio_s Retorna año
- * @param string  &$obs    Colchon para agregar observaciones
+ * @param integer $dia_s   Para retornar día
+ * @param integer $mes_s   Retorna mes
+ * @param integer $anio_s  Retorna año
+ * @param string  $obs     Colchon para agregar observaciones
  *
  * @return array (idd, idm, idc)  Identificaciones de departamento, municipio
  *  y clase

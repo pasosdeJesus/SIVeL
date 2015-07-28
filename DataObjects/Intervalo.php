@@ -74,7 +74,7 @@ class DataObjects_Intervalo extends DataObjects_Basica
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'
      *
-     * @return string Identificación
+     * @return integer Identificación
      */
     static function idSinInfo()
     {

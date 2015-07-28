@@ -78,7 +78,7 @@ class DataObjects_Etapa extends DataObjects_Basica
      /**
      * Identificacion de registro 'SIN INFORMACIÓN'
      *
-     * @return string Identificación
+     * @return integer Identificación
      */
     static function idSinInfo()
     {

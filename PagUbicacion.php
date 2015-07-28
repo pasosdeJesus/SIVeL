@@ -175,7 +175,7 @@ class PagUbicacion extends PagBaseMultiple
      *
      * @param array &$valores Valores enviados por formulario.
      *
-     * @return null
+     * @return boolean
      */
     function elimina(&$valores)
     {
@@ -282,7 +282,7 @@ class PagUbicacion extends PagBaseMultiple
      * Crea campos departamento, municipio y clase en blanco para
      * completar con la función modCampos
      *
-     * @param object &$form Formulario
+     * @param object $form  Formulario
      * @param object $iddep Nombre campo departamento
      * @param object $idmun Nombre campo municipio
      * @param object $idcla Nombre campo clase
@@ -323,7 +323,7 @@ class PagUbicacion extends PagBaseMultiple
      * Modifica campos interdependientes Departamento/Muncipio/Clase
      *
      * @param object &$db     Base de datos
-     * @param object &$form   Formulario
+     * @param object $form   Formulario
      * @param object $nomcdep Nombre campo departamento
      * @param object $nomcmun Nombre campo municipio
      * @param object $nomccla Nombre campo clase
@@ -492,7 +492,7 @@ class PagUbicacion extends PagBaseMultiple
     /**
      * Llena valores de ubicación en formulario.
      *
-     * @param handle  &$form       Formulario
+     * @param handle  $form       Formulario
      * @param integer $depdef      Departamento por defecto
      * @param integer $mundef      Municipio por defecto
      * @param integer $cladef      Clase por defecto
@@ -600,7 +600,7 @@ class PagUbicacion extends PagBaseMultiple
      *
      * @param handle &$valores Valores ingresados por usuario
      *
-     * @return bool Verdadero si y solo si puede completarlo con éxito
+     * @return boolean Verdadero si y solo si puede completarlo con éxito
      * @see PagBaseSimple
      */
     function procesa(&$valores)

@@ -507,7 +507,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
      * @param array  $campos Campos por mostrar
      * @param int    $idcaso Código de caso
      *
-     * @return void
+     * @return string
      */
     static function reporteGeneralRegistroHtml(&$db, $campos, $idcaso)
     {
@@ -610,6 +610,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             );
             return false;
         }
+        return true;
     }
 
 

@@ -83,7 +83,7 @@ class DataObjects_Clase extends DataObjects_Basica
      *
      * @param string &$valor Valor en base
      *
-     * @return Valor para formulario
+     * @return string Valor para formulario
      */
     function getid_municipio(&$valor)
     {

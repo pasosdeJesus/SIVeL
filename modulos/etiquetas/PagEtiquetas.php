@@ -164,7 +164,7 @@ class PagEtiquetas extends PagBaseSimple
      * @param array &$valores Valores enviados por el formulario.
      * @param bool  $aget     V sii agrega etiqueta
      *
-     * @return void
+     * @return boolean
      */
     function procesa(&$valores, $aget = false)
     {
@@ -488,7 +488,7 @@ class PagEtiquetas extends PagBaseSimple
      * @param string $cc     Campo que se procesa
      * @param int    $idcaso Número de caso
      *
-     * @return Cadena por presentar
+     * @return string Cadena por presentar
      */
     static function resConsultaFilaTabla(&$db, $cc, $idcaso)
     {
@@ -535,7 +535,7 @@ class PagEtiquetas extends PagBaseSimple
      * @param array  $campos Campos por mostrar
      * @param int    $idcaso Código de caso
      *
-     * @return void
+     * @return string
      */
     static function reporteGeneralRegistroHtml(&$db, $campos, $idcaso)
     {

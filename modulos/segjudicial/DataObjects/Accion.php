@@ -107,7 +107,7 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
     /**
     * Convierte de base de datos a formulario
     *
-    * @return Valor para base de datos
+    * @return integer Valor para base de datos
     */
     function getrespondido()
     {

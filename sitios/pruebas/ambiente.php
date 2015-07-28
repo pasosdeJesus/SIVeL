@@ -77,7 +77,7 @@ require_once "conf.php";
  * @param array  $tprueba Tablas por revisar
  * @param array  $na      Número de registros antes de inserción
  *
- * @return Retorna cantidad de errores de validación.  Hay error en una
+ * @return integer Retorna cantidad de errores de validación.  Hay error en una
  * de las tablas si la cuenta de registros es una más que la de $na
  */
 function verificaInsercion(&$db, $tprueba, $na)

@@ -85,7 +85,7 @@ if (!function_exists("esta_nueva_ficha")) {
      *
      * @param string $id Id de ficha
      *
-     * @return true sii una ficha con la id dada ya está en nuevas
+     * @return boolean true sii una ficha con la id dada ya está en nuevas
      */
     function esta_nueva_ficha($id)
     {

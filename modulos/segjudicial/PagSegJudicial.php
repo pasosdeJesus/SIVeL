@@ -504,10 +504,10 @@ class PagSegJudicial extends PagBaseMultiple
      * Llamada en cada inicio de una consulta ResConsulta.
      * Hace posible nuevos tipos de consulta.
      *
-     * @param string $mostrar  Forma de mostrar consulta
-     * @param string &$renglon Llena como iniciar consulta
-     * @param string &$rtexto  Llena texto inicial de consula
-     * @param array  $tot      Total de casos en consulta
+     * @param string  $mostrar  Forma de mostrar consulta
+     * @param string  &$renglon Llena como iniciar consulta
+     * @param string  &$rtexto  Llena texto inicial de consula
+     * @param integer $tot      Total de casos en consulta
      *
      * @return void
      */

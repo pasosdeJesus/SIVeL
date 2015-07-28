@@ -469,8 +469,8 @@ class CapturaCaso extends HTML_QuickForm_Controller
      * Deshabilita los botones estándar de una página.
      * Adaptada de Progress/generator.php
      *
-     * @param object &$page  HTML_QuickForm_Page Página con ficha.
-     * @param array  $events Eventos
+     * @param object   &$page  HTML_QuickForm_Page Página con ficha.
+     * @param string[] $events Eventos
      *
      * @return void
      */

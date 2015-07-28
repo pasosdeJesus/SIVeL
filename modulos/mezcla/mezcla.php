@@ -137,7 +137,7 @@ function ref_inicial($enl, $t, $r)
  * @param string $s Cadena en la cual buscar
  * @param string $c Catacter buscado
  *
- * @return Subcadena de $s
+ * @return string Subcadena de $s
  */
 function subizq_hasta_car($s, $c)
 {
@@ -156,10 +156,10 @@ function subizq_hasta_car($s, $c)
  * @param integer $id1    Primer caso
  * @param integer $id2    Segundo caso
  * @param bool    $elim2  Elimina segundo tras mezclar?
- * @param string  &$obs   Colchon de observaciones
- * @param string  &$rvic  Retorna aqui víctimas tras mezclas
- * @param string  &$fecha Retorna aqui fecha tras mezcla
- * @param string  &$rdep  Retorna aqui departamento tras mezcla
+ * @param string  $obs   Colchon de observaciones
+ * @param string  $rvic  Retorna aqui víctimas tras mezclas
+ * @param string  $fecha Retorna aqui fecha tras mezcla
+ * @param string  $rdep  Retorna aqui departamento tras mezcla
  *
  * @return bool Si logra completar mezcla
  */

@@ -350,12 +350,12 @@ class ResConsulta
      * @param array   &$idp       Vector de identificaciones
      * @param array   &$ndp       Vector de nombres
      * @param integer $id_persona Id.
-     * @param integer &$indid     Indid
+     * @param integer $indid     Indid
      * @param object  &$edp       edp
      * @param boolean $primnom    Nombre y apellido
      * @param boolean $septd      Emplear como separador </td><td> y quitar tags
      *
-     * @return Total de víctimas
+     * @return integer Total de víctimas
      */
     function extraeVictimas($idcaso, &$db, &$idp, &$ndp,
         $id_persona, &$indid, &$edp, $primnom = true, $septd = false
@@ -407,9 +407,9 @@ class ResConsulta
      * @param array   &$idp           Vector de identificaciones
      * @param array   &$ndp           Vector de nombres
      * @param integer $id_combatiente Id.
-     * @param integer &$indid         Indid
+     * @param integer $indid         Indid
      *
-     * @return Total de víctimas
+     * @return integer Total de víctimas
 
      */
     function extraeCombatientes($idcaso, &$db, &$idp, &$ndp,
@@ -479,9 +479,9 @@ class ResConsulta
      * @param int    $id_grupoper Si no es null y hay un indice en idp
      * que corresponda a este valor, retorna tal indice en indid
      * @param int    &$indid      indid
-     * @param int    &$totelem    Total de elementos agregados a cada arreglo
+     * @param int    $totelem    Total de elementos agregados a cada arreglo
      *
-     * @return Suma de victimas.
+     * @return integer Suma de victimas.
      **/
     function extraeColectivas($idcaso, &$db, &$idp, &$ndp, &$cdp,
         $id_grupoper, &$indid, &$totelem
@@ -2521,7 +2521,7 @@ class ResConsulta
     *
     * @param integer $idcaso Id. del caso
     * @param array   $campos Campos por mostrar
-    * @param strgin  &$r     Colchon para dejar respuesta
+    * @param strgin  $r      Colchon para dejar respuesta
     * @param boolena $repgen Para reporte general
     *
     * @return void Agrega al colchon r

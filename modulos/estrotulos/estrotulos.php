@@ -464,7 +464,7 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
     /**
      * Retorna id de la categoria
      *
-     * @return string id
+     * @return integer|null id
      */
     function idSupracategoria()
     {

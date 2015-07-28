@@ -80,7 +80,7 @@ class DataObjects_Trelacion extends DataObjects_Basica
     /**
      * Identificacion de registro 'SIN INFORMACIÓN'
      *
-     * @return integer Id del registro SIN INFORMACIÓN
+     * @return string Id del registro SIN INFORMACIÓN
      */
     static function idSinInfo()
     {

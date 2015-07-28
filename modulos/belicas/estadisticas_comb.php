@@ -306,7 +306,7 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
     /**
      * Id. supracategoria
      *
-     * @return string Supracategoria
+     * @return integer|null Supracategoria
      * @access public
      */
     function idSupracategoria()
