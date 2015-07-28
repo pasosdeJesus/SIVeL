@@ -1,0 +1,4 @@
+Este módulo fue financiado por CINEP (http://www.cinep.org.co) en el 2015 
+en el marco de una contratación que cede al dominio público el desarrollo. 
+
+Agradecemos especialmente al director Luis Guillermo Álvarez.
