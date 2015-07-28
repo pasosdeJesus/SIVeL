@@ -368,7 +368,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     //echo "OJO ndep=$ndep, nmun=$nmun, ncla=$ncla<br>";
                     $idd = $idm = $idc = null;
                     if (($ndep !== null && strlen($ndep) > 0) || 
-                        ($nmun !== null && strlen($num) > 0) || 
+                        ($nmun !== null && strlen($nmun) > 0) || 
                         ($ncla !== null && strlen($ncla) > 0)
                     ) {
                         list($idd, $idm, $idc) = conv_localizacion(
