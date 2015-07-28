@@ -219,7 +219,7 @@ class PagVictimaIndividual extends PagBaseMultiple
         $dantecedente_victima->id_persona = $dvictima->id_persona;
         $dantecedente_victima->id_caso = $dvictima->id_caso;
 
-        $this->bvictima=& DB_DataObject_FormBuilder::create(
+        $this->bvictima =& DB_DataObject_FormBuilder::create(
             $dvictima,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
                 'ruleViolationMessage' => $GLOBALS['mreglavio']
@@ -641,7 +641,6 @@ class PagVictimaIndividual extends PagBaseMultiple
             return true;
         }
 
-
         if (!isset($valores['id']) || $valores['id'] == '') {
             $valores['id'] = null;
             $db = $this->iniVar(null);
@@ -716,10 +715,12 @@ class PagVictimaIndividual extends PagBaseMultiple
                 DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
             );
         }
+
         $ret = $this->process(array(&$this->bvictima, 'processForm'), false);
         if (PEAR::isError($ret)) {
             die($ret->getMessage());
         }
+
         if ($procFam) {
             $nper =& objeto_tabla('persona');
             if (isset($valores['persona2'])
@@ -754,7 +755,6 @@ class PagVictimaIndividual extends PagBaseMultiple
             }
             $procFam = false;
         }
-
 
         if (isset($this->bpersona->_do->id)) {
             $idpersona = $this->bpersona->_do->id;
