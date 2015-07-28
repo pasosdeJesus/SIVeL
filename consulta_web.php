@@ -18,7 +18,6 @@
 /**
  * Consulta web.
  */
-
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
 /* Autenticamos si la consulta pública está deshabilitada */
@@ -180,7 +179,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 SELECT id_caso FROM caso_categoria_presponsable WHERE
                 id_tviolencia = '$pTvio')";
         }
-        if ($pClasificacion != '') {
+        if (is_array($pClasificacion) && count($pClasificacion) > 0) {
             $ini = '(';
             $so = '';
             $tind = false;
@@ -769,33 +768,33 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
 
         $ae = array();
-        $x =& $this->createElement(
+        $x = $this->createElement(
             'radio', 'ordenar', 'fecha',
             _('Fecha'), 'fecha'
         );
-        $ae[] =&  $x;
-        if ($pOrden == '' || $pOrden == 'fecha') {
-            $t =& $x;
-        }
-        $x =& $this->createElement(
+        $ae[] = $x;
+        $t =& end($ae);
+    
+        $x = $this->createElement(
             'radio', 'ordenar', 'ubicacion',
             _('Ubicación'), 'ubicacion'
         );
-        $ae[] =& $x;
+        $ae[] = $x;
         if ($pOrden == 'ubicacion') {
-            $t =& $x;
+            $t =& end($ae);
         }
 
         if ($this->opciones != array()) {
-            $x =& $this->createElement(
+            $x = $this->createElement(
                 'radio', 'ordenar', 'codigo',
                 _('Código'), 'codigo'
             );
-            $ae[] =& $x;
+            $ae[] = $x;
             if ($pOrden == 'codigo') {
-                $t =& $x;
+                $t =& end($ae);
             }
         }
+
         $r = "";
         if (isset($GLOBALS['consultaweb_ordenarpor'])) {
             foreach ($GLOBALS['consultaweb_ordenarpor'] as $k => $f) {
@@ -812,7 +811,6 @@ class ConsultaWeb extends HTML_QuickForm_Page
                 }
             }
         }
-
 
         $this->addGroup($ae, null, _('Ordenar por'), '&nbsp;', false);
         $t->setChecked(true);
