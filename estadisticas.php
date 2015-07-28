@@ -301,34 +301,54 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             "WHERE $cons.id_caso = ubicacion.id_caso "
             ;
         //echo "q2=$q2<br>";
-        $result = hace_consulta($db, $q2);
-        $q3="SELECT $cfSegun3 $tDep $tMun trim(tviolencia.nombre), " .
-            "trim(supracategoria.nombre), trim(categoria.nombre), " .
-            "count($cons2.$cCons) FROM
-        $tGeo $tablaSegun tviolencia,
-        supracategoria, categoria , $cons2
-        WHERE $cons2 . id_tviolencia = tviolencia.id
-        AND $cons2 . id_tviolencia = supracategoria.id_tviolencia
-        AND $cons2 . id_supracategoria = supracategoria.id
-        AND $cons2 . id_tviolencia = categoria.id_tviolencia
-        AND $cons2 . id_supracategoria = categoria.id_supracategoria
-        AND $cons2 . id_categoria = categoria.id ";
+        $resultado = hace_consulta($db, $q2);
+
+        $campos3 = "$cfSegun3 $tDep $tMun trim(tviolencia.nombre), "
+            . "trim(supracategoria.nombre), trim(categoria.nombre), "
+            . "count($cons2.$cCons)";
+        $tablas3 = "$tGeo $tablaSegun tviolencia, "
+            . "supracategoria, categoria , $cons2";
+        $cond3 = "$cons2.id_tviolencia = tviolencia.id
+            AND $cons2.id_tviolencia = supracategoria.id_tviolencia
+            AND $cons2.id_supracategoria = supracategoria.id
+            AND $cons2.id_tviolencia = categoria.id_tviolencia
+            AND $cons2.id_supracategoria = categoria.id_supracategoria
+            AND $cons2.id_categoria = categoria.id ";
         if ($pDepartamento == "1"  || $pMunicipio == "1") {
-            $q3 .= " AND departamento.id=$cons2.id_departamento ";
+            $cond3 .= " AND departamento.id=$cons2.id_departamento ";
         }
         if ($pMunicipio == "1") {
-            $q3 .= " AND municipio.id=$cons2.id_municipio ";
-            $q3 .= " AND municipio.id_departamento=$cons2.id_departamento ";
+            $cond3 .= " AND municipio.id=$cons2.id_municipio ";
+            $cond3 .= " AND municipio.id_departamento=$cons2.id_departamento ";
         }
-        $q3 .= " $condSegun
-            GROUP BY $cfSegun2 $gDep $gMun tviolencia.nombre,
-            supracategoria.nombre, categoria.nombre
-            ORDER BY $cfSegun2 $gDep $gMun tviolencia.nombre,
-            supracategoria.nombre, categoria.nombre
-            ";
+        $cond3 .= " $condSegun";
 
+        if (isset($GLOBALS['gancho_ei_creaconsulta3'])) {
+            foreach ($GLOBALS['gancho_ei_creaconsulta3'] as $k => $f) {
+                if (is_callable($f)) {
+                    call_user_func_array(
+                        $f,
+                        array(&$db, &$campos3,
+                        &$tablas3, &$cond3, &$pMuestra)
+                    );
+                } else {
+                    echo_esc("Falta $f de gancho_ei_creaconsulta3[$k]");
+                }
+            }
+        }
+        $nc3 = explode(",", $campos3);
+        $gr3 = "";
+        $sep = "";
+        $i = 0;
+        for ($i = 1; $i < count($nc3); $i++) {
+            $gr3 .= $sep . "$i";
+            $sep = ", ";
+        }
+
+        $q3="SELECT $campos3 FROM $tablas3
+            WHERE $cond3 GROUP BY $gr3 ORDER BY $gr3";
         //echo "q3 es $q3<hr>";
-        $result = hace_consulta($db, $q3);
+        $resultado = hace_consulta($db, $q3);
 
         if ($pMuestra == 'tabla') {
             encabezado_envia();
@@ -355,7 +375,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
                     '<b>' . _('Men&uacute; Principal') . '</b></a></div>';
             }
             pie_envia();
-        } else { // CSV
+        } elseif ($pMuestra == 'csv') { // CSV
             // http://www.creativyst.com/Doc/Articles/CSV/CSV01.htm
             header("Content-type: text/csv");
             $sep = '';
@@ -375,9 +395,27 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
                 }
                 echo "\n";
             }
+        } else {
+            if (isset($GLOBALS['gancho_ei_muestraconsulta'])) {
+                foreach ($GLOBALS['gancho_ei_muestraconsulta'] as $k => $f) {
+                    if (is_callable($f)) {
+                        call_user_func_array(
+                            $f,
+                            array(&$db, &$resultado, $pMuestra, $cab)
+                        );
+                    } else {
+                        echo_esc(
+                            "Falta $f de "
+                            . "gancho_ei_muestracreaconsulta[$k]"
+                        );
+                    }
+                }
+            }
         }
+
     }
-}
+
+} // AcionEstadisticasInd
 
 
 /**
@@ -557,12 +595,12 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
                 if (is_callable($f)) {
                     call_user_func_array(
                         $f,
-                        array($pMostrar, $this->opciones, $this, &$ae, &$t)
+                        array(&$db, &$this)
                     );
                 } else {
                     echo_esc(
                         _("Falta") . " $f " .  _("de")
-                        . " estadisticasIndFiltro[$k]"
+                        . " gancho_ei_filtro[$k]"
                     );
                 }
             }
