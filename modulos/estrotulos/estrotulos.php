@@ -504,7 +504,7 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
         $e =& $this->addElement(
             'date', 'fini', 'Desde: ',
             array('language' => $slan, 'addEmptyOption' => true,
-            'minYear' => '1990', 'maxYear' => $cy)
+            'minYear' => '1920', 'maxYear' => $cy)
         );
         $e->setValue(($cy - 1) . "-01-01");
 

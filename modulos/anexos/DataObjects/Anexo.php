@@ -89,7 +89,7 @@ class DataObjects_Anexo extends DB_DataObject_SIVeL
             $e->_options['language'] = isset($_SESSION['LANG'])
                 ? $_SESSION['LANG'] : 'es';
             $e->_options['format'] = 'd-M-Y';
-            $e->_options['minYear']=1990;
+            $e->_options['minYear']=1920;
         }
 
         if (!isset($this->id)) {

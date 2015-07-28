@@ -101,7 +101,7 @@ $GLOBALS['consulta_web_fecha_max'] = '2024-11-30';
 /** Fecha mínima de caso por consultar en web
  * @global string $GLOBALS['consulta_web_fecha_min']
  */
-$GLOBALS['consulta_web_fecha_min'] = '1990-1-1';
+$GLOBALS['consulta_web_fecha_min'] = '1920-1-1';
 
 /** Máximo de registros por retornar en una consulta web (0 es ilimitado)
  * @global string $GLOBALS['consulta_web_max']
@@ -111,7 +111,7 @@ $GLOBALS['consulta_web_max']=4000;
 /** Año mínimo que puede elegirse en fechas de la Ficha
  * @global string $GLOBALS['anio_min']
  */
-$GLOBALS['anio_min']=1990;
+$GLOBALS['anio_min']=1920;
 
 /** Indica si en la pestaña Actos deben presentarse actos colectivos
  * @global bool $GLOBALS['actoscolectivos']
