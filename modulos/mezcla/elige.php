@@ -125,7 +125,7 @@ class AccionComparaDos extends HTML_QuickForm_Action
      * @param object &$page      Página
      * @param string $actionName Acción
      *
-     * @return boolean
+     * @return false|null
      */
     function perform(&$page, $actionName)
     {

@@ -2521,7 +2521,7 @@ class ResConsulta
     *
     * @param integer $idcaso Id. del caso
     * @param array   $campos Campos por mostrar
-    * @param strgin  $r      Colchon para dejar respuesta
+    * @param string  $r      Colchon para dejar respuesta
     * @param boolena $repgen Para reporte general
     *
     * @return void Agrega al colchon r

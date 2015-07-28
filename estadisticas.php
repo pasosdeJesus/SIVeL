@@ -181,17 +181,15 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         if ($titSegun != "") {
             $cab[] = $titSegun;
         }
-        $tDep = $gDep = "";
+        $tDep = "";
         if ($pDepartamento == "1") {
             $tDep = "departamento.id, trim(departamento.nombre), ";
-            $gDep = "departamento.id, departamento.nombre, ";
             $cab[] = _('C. Dep.');
             $cab[] = _('Departamento');
         }
-        $tMun = $gMun = "";
+        $tMun = "";
         if ($pMunicipio == "1") {
             $tMun = "municipio.id, trim(municipio.nombre), ";
-            $gMun = "municipio.id, municipio.nombre, ";
             $cab[] = _('C. Mun.');
             $cab[] = _('Municipio');
         }
@@ -264,10 +262,9 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             }
         }
 
-        $campoSegun2=$cfSegun2=$cfSegun3=$pSegun2="";
+        $campoSegun2 = $cfSegun3 = $pSegun2 = "";
         if ($pSegun != "") {
             $pSegun2=", ".$pSegun;
-            $cfSegun2=$cfSegun . ", ";
             $cfSegun3="trim(" . $cfSegun . "), ";
             $campoSegun2=", ".$campoSegun;
         }
@@ -289,7 +286,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         hace_consulta($db, "DROP VIEW $cons2", false, false);
         hace_consulta($db, "DROP VIEW $cons", false, false);
         //echo "q1=$q1<br>";
-        $result = hace_consulta($db, $q1);
+        hace_consulta($db, $q1);
 
         $q2="CREATE VIEW $cons2 ($cCons, id_tviolencia, " .
             "id_supracategoria, id_categoria" . $pSegun2 .
@@ -301,7 +298,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             "WHERE $cons.id_caso = ubicacion.id_caso "
             ;
         //echo "q2=$q2<br>";
-        $resultado = hace_consulta($db, $q2);
+        hace_consulta($db, $q2);
 
         $campos3 = "$cfSegun3 $tDep $tMun trim(tviolencia.nombre), "
             . "trim(supracategoria.nombre), trim(categoria.nombre), "
@@ -340,7 +337,8 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $gr3 = "";
         $sep = "";
         $i = 0;
-        for ($i = 1; $i < count($nc3); $i++) {
+        $maxi = count($nc3);
+        for ($i = 1; $i < $maxi; $i++) {
             $gr3 .= $sep . "$i";
             $sep = ", ";
         }
@@ -359,7 +357,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             echo "</tr>\n";
             $row = array();
             $nf = 0;
-            while ($result->fetchInto($row)) {
+            while ($resultado->fetchInto($row)) {
                 echo "<tr>";
                 foreach ($cab as $k => $t) {
                     echo "<td>";
@@ -386,7 +384,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             }
             echo "\n";
             $row = array();
-            while ($result->fetchInto($row)) {
+            while ($resultado->fetchInto($row)) {
                 $sep = '';
                 foreach ($cab as $k => $t) {
                     $adjunto_t = $sep . $row[$k];

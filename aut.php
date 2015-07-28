@@ -61,7 +61,7 @@ function var_escapa_aut($v, &$db = null, $maxlong = 1024)
             $nv = substr($v, 0, $maxlong);
 
             /** Evita falla %00 en cadenas que vienen de HTTP */
-            $p1=str_replace("\0", ' ', $v);
+            $p1=str_replace("\0", ' ', $nv);
 
             /** Evita XSS */
             $p2=htmlspecialchars($p1);
@@ -147,8 +147,7 @@ function idioma($l = "es_CO")
     setlocale(LC_ALL, $l);
     setlocale(LC_CTYPE, $l);
     $locales_dir = dirname(__FILE__).'/locale';
-    $locales_dir = './locale';
-    bindtextdomain($td, $locales_dir);
+    bindtextdomain($td, './locale');
     bind_textdomain_codeset($td, 'UTF-8');
     textdomain($td);
     if ($l == "en_US" && "Fuente" == _("Fuente")) {
@@ -286,16 +285,15 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
     $username = isset($_POST['username']) ? 
         var_escapa_aut($_POST['username'], $db, 32) : '';
     //echo "OJO 1 username=$username<br>";
-    $db1 = new DB();
     $db->query('SET client_encoding TO UTF8');
     $q = "SELECT COUNT(id) FROM usuario";
     $result = hace_consulta_aut($db, $q, false);
     if (PEAR::isError($result)) {
         echo "<br>" . _("Intentado actualizar usuario");
-        $result = hace_consulta_aut(
+        hace_consulta_aut(
             $db, "ALTER TABLE usuario RENAME COLUMN id_rol TO rol", false
         );
-        $result = hace_consulta_aut(
+        hace_consulta_aut(
             $db, "ALTER TABLE usuario RENAME COLUMN id_usuario TO id", false
         );
         hace_consulta_aut(
@@ -524,7 +522,6 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             cierra_sesion($dsn);
             exit(1);
         }
-	    $intentos = 0;
         $q = "UPDATE usuario SET failed_attempts=COALESCE(failed_attempts, 0)+1 
             WHERE nusuario='$username'";
         hace_consulta_aut($db, $q, false);
@@ -601,7 +598,6 @@ function cierra_sesion($dsn)
 function localiza_conf()
 {
     global $dirsitio;
-    $pbase = 'sivel';
     if (isset($_SERVER['HTTP_X_FORWARDED_SERVER'])) {
         $n = $_SERVER['HTTP_X_FORWARDED_SERVER'];
     } else {
@@ -675,7 +671,6 @@ function localiza_conf()
         foreach (array($nn, 'sivel') as $pn) {
             $rp = $r . "/" . $pn . "/conf.php";
             if (file_exists($rp)) {
-                $fn = $pn;
                 echo "Existe ruta "
                     . htmlentities("$CHROOTDIR$rp", ENT_COMPAT, 'UTF-8')
                     . "<br>";

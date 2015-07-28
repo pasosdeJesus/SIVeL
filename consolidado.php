@@ -112,8 +112,6 @@ class AccionConsolidado extends HTML_QuickForm_Action
      */
     function muestraPresp(&$db, &$tpresp, $muestra)
     {
-        $n = 1;
-        $sep = "";
         $q = "SELECT DISTINCT id_presponsable " .
             " FROM acto ORDER BY 1";
         //die("q es $q<br>");
@@ -251,6 +249,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         if ($ncol <= 0) {
             die(_('Falta información para reporte consolidado en tabla categoria'));
         }
+        $cataux = array();
         $d->orderBy('id');
         $d->find();
         while ($d->fetch()) {
@@ -306,8 +305,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
         //echo "q es $q<br>";
         $result = hace_consulta($db, $q);
 
+        $row = array();
         $datv = array();
-        $dn = array();
         $tv = 0;
         while ($result->fetchInto($row)) {
             $excl = false;
@@ -319,6 +318,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 /* Se hace así porque puede haber casos que no
                     tengan asociado usuario --cuando vienen de otro
                     banco (?), antiguos*/
+                $minf = array();
                 $q = "SELECT MIN(fechainicio) FROM caso_usuario " .
                     " WHERE id_caso='" . $row[0] . "';";
                 $rfc = hace_consulta($db, $q);
@@ -343,7 +343,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                         )
                     );
 
-                    if ($fhastamen || $fdesdemen) {
+                    if ($fhastamen || $fdesdemay) {
                         if ($pMuestra == "tabla") {
                             //echo "Excluyendo :" . $row[0] . "<br>";
                             $excl = true;
@@ -351,6 +351,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                     }
                 }
             }
+            $dv = array();
             if (!$excl) {
                 if (!isset($dv[$row[0]][$row[1]])) {
                     $datv[$tv] = array($row[0], $row[1], $row[2], $row[3]);
@@ -405,7 +406,6 @@ class AccionConsolidado extends HTML_QuickForm_Action
             $idvic = $datv[$v][1];
             $nom = $datv[$v][2];
             $fecha = $datv[$v][3];
-            $ubi = "";
             $u =&  objeto_tabla('ubicacion');
             $u->id_caso = $idcaso;
             if ($u->find() == 0) {
@@ -485,6 +485,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                     }
                 }
             }
+            $presp = "";
             $acto =&  objeto_tabla('acto');
             $acto->id_persona = $idvic;
             $acto->id_caso = $idcaso;
@@ -499,7 +500,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 );
             } else {
                 $apr = array();
-                $pr_sep = $presp = "";
+                $pr_sep = "";
 
                 while ($acto->fetch()) {
                     $d = $acto->getLink('id_presponsable');
@@ -644,6 +645,7 @@ class PagConsolidado extends HTML_QuickForm_Page
         if (isset($_SESSION['id_usuario'])) {
             $aut_usuario = "";
             include $_SESSION['dirsitio'] . "/conf.php";
+            global $dsn;
             autentica_usuario($dsn, $aut_usuario, 0);
             if (in_array(42, $_SESSION['opciones'])) {
                 $e =& $this->addElement(

@@ -78,7 +78,6 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
      */
     function _renderForm(&$pag)
     {
-        $nomPag = $pag->getAttribute('name');
         $css = new HTML_CSS();
         $css->setStyle('body', 'background-color', '#FFFFFF');
         $css->setStyle('body', 'font-family', 'Arial');
@@ -243,11 +242,11 @@ class CapturaCaso extends HTML_QuickForm_Controller
             );
         }
 
-        $nobus = !isset($_SESSION['forma_modo'])
+        /*$nobus = !isset($_SESSION['forma_modo'])
             || $_SESSION['forma_modo'] != 'busqueda' ;
         $mreq = '<span style = "font-size:80%; color:#ff0000;">*</span>' .
             '<span style = "font-size:80%;"> '
-            . _('marca un campo requerido') . '</span>';
+            . _('marca un campo requerido') . '</span>'; */
         foreach ($this->_tabs as $tab) {
             list($pag, $cl) = $tab;
             if (($d = strrpos($cl, "/"))>0) {
@@ -280,7 +279,6 @@ class CapturaCaso extends HTML_QuickForm_Controller
 
         // set ProgressBar default values on first run
         $sess = $this->container();
-        $defaults = $sess['defaults'];
 
         if (count($sess['defaults']) == 0) {
             $this->setDefaults(

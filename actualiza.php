@@ -3446,7 +3446,6 @@ function agrega_archivo($fuente, $destino, $modo = "w")
     if (!($fsal = fopen($destino, $modo))) {
         die ("No se pudo escribir $destino");
     }
-    $buf = "";
     while (!feof($fen)) {
         $ll = fread($fen, 1024);
         if (fwrite($fsal, $ll) === false) {
