@@ -200,11 +200,15 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
         foreach ($this->fb_fieldLabels as $c => $l) {
             $p->$c = null;
         }
+        $lcom = NULL;
         foreach ($this->llavescomunes as $c) {
+            if ($lcom == null) {
+                $lcom = $c;
+            }
             $p->$c = $this->$c;
         }
         $p->find();
-        while ($p->$c != null && $p->fetch()) {
+        while ($p->$lcom != null && $p->fetch()) {
             $t .= "<tr> ";
             foreach ($this->fb_fieldsToRender as $ca) {
                 $t .= "<td>";
@@ -212,7 +216,7 @@ class DataObjects_Multitabla extends DB_DataObject_SIVeL
                     $dd = $p->getLink($ca);
                     $t .= $dd->nombre;
                 } else if (isset($this->fb_booleanFields)
-                    && in_array($c, $this->fb_booleanFields)
+                    && in_array($lcom, $this->fb_booleanFields)
                 ) {
                     $t .= $p->$ca === true || $p->$ca === 't' ? "Si" : "No";
                 } else {

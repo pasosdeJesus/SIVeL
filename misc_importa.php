@@ -177,6 +177,8 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
             array('A', 'E', 'I', 'O', 'U', 'U'),
             a_mayusculas($municipio)
         );
+        $cmun = null;
+        $nr = 0;
         foreach (array($municipio, a_mayusculas($municipio), $municipiost)
             as $nommun) {
             if ($idd == 1000) {
@@ -234,6 +236,7 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
             array('A', 'E', 'I', 'O', 'U', 'U'),
             a_mayusculas($cenp)
         );
+        $ccla = null;
         foreach (array($cenp, a_mayusculas($cenp), $cenpst) as $nomc) {
             if ($idd == 1000) {   //$idm tambien es 1000
                 $q = "SELECT id, id_departamento, id_municipio FROM clase " .
@@ -320,6 +323,7 @@ function conv_dia_mes_anio($d, $m, $a, $orig, &$dia_s, &$mes_s, &$anio_s, &$obs)
     $dia_s = (int)$d;
     $mes_s = (int)$m;
     $anio_s = (int)$a;
+    $o = "";
 
     if ($dia_s == 0) {
         $dia_s = 1;
@@ -550,7 +554,7 @@ function conv_fecha($fecha, &$obs, $depura = false)
                         echo "caso 6.1.5";
                     }
                     rep_obs(
-                        "Fecha con formato no reconocido $fechan",
+                        "Fecha con formato no reconocido $fecha",
                         $obs
                     );
                 }
@@ -1114,7 +1118,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
         $dgrupo = objeto_tabla('grupoper');
         $dgrupo->nombre = $nombre;
         if (!$dgrupo->insert()) {
-            rep_obs("No pudo insertarse grupo '$nombre'");
+            rep_obs("No pudo insertarse grupo '$nombre'", $obs);
             return 0;
         }
         $idgr = $dgrupo->id;
@@ -1158,7 +1162,7 @@ function conv_victima_col(&$db, $agr, $idcaso, $grupo, &$obs)
                 if (!$drviccol->insert()) {
                     rep_obs(
                         "Colectiva: No pudo insertar '$v' en "
-                        . " $t:$idt,$id_caso,$id_grupoper\n", $obs
+                        . " $t:$idt,$idcaso,$idgr\n", $obs
                     );
                 }
             }
@@ -1392,12 +1396,13 @@ function dato_basico_en_obs(&$db, &$obs, $oxml,
      . " idcaso=$idcaso, sepv=$sepv)<br>"; */
 
     $noms = dato_en_obs($oxml, $ntipoobs);
-    if ($noms != null) {
-        if ($sepv != null) {
+    if ($noms !== null && strlen($noms) > 0) {
+        if ($sepv !== null && strlen($sepv) > 0) {
             $adat = explode($sepv, $noms);
         } else {
             $adat = array(0 => $noms);
         }
+        $idb = 0;
         foreach ($adat as $nom) {
             $idb = conv_basica($db, $ntablabas, $nom, $obs);
             //echo "OJO itera nom=$nom, idb=$idb<br>";

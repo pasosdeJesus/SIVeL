@@ -117,6 +117,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $tQue = "";
         $condSegun = "";
         $distinct = 'DISTINCT';
+        $cfSegun = $campoSegun = '';
         if ($pSegun == 'id_rangoedad') {
             consulta_and_sinap(
                 $where, "victima.id_rangoedad", "rangoedad.id"
@@ -246,12 +247,14 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
                 echo_esc("Falta estadisticasIndCreaConsulta en $n, $c");
             }
         }
+        $ae = array();
+        $t = array();
         if (isset($GLOBALS['gancho_ei_creaconsulta'])) {
             foreach ($GLOBALS['gancho_ei_creaconsulta'] as $k => $f) {
                 if (is_callable($f)) {
                     call_user_func_array(
                         $f,
-                        array($pMostrar, $this->opciones, $this, &$ae, &$t)
+                        array($pMuestra, $this->opciones, $this, &$ae, &$t)
                     );
                 } else {
                     echo_esc(

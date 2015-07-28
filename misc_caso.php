@@ -49,7 +49,7 @@ function elimina_caso(&$db, $idcaso)
         id_persona2 IN
         (SELECT id_persona FROM victima WHERE id_caso='$idcaso') 
         ";
-    hace_consulta($db, $q, false);
+    hace_consulta($db, $q, false, false);
 
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
         list($n, $c, $o) = $tab;

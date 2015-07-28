@@ -204,7 +204,7 @@ class PagAnexo extends PagBaseMultiple
      */
     function PagAnexo($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
 
         $this->titulo  = _('Anexos');
         $this->tcorto = _('Anexo');

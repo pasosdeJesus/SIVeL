@@ -343,7 +343,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         );
                     } else if (isset($persona->observaciones)) {
                         $edad = dato_en_obs($persona, 'edad');
-                        if ($edad != null) {
+                        if ($edad !== null && strlen($edad)>0 ) {
                             $anionac = $aniocaso - lnat_a_numero($edad);
                         }
                     }
@@ -367,12 +367,12 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     $ncla = dato_en_obs($persona, 'clase');
                     //echo "OJO ndep=$ndep, nmun=$nmun, ncla=$ncla<br>";
                     $idd = $idm = $idc = null;
-                    if ($ndep != null || $nmun != null
-                        || $ncla != null
+                    if (($ndep !== null && strlen($ndep) > 0) || 
+                        ($nmun !== null && strlen($num) > 0) || 
+                        ($ncla !== null && strlen($ncla) > 0)
                     ) {
                         list($idd, $idm, $idc) = conv_localizacion(
-                            $db,
-                            $ndep, $nmun, $ncla, $obs
+                            $db, $ndep, $nmun, $ncla, $obs
                         );
                         //echo "OJO idd=$idd, idm=$idm, idc=$idc<br>";
                         if ($idd == 1000) {
@@ -420,7 +420,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         $dvictima->id_caso = (int)$idcaso;
 
                         $hijos = dato_en_obs($victima, 'hijos');
-                        if ($hijos != null) {
+                        if ($hijos !== null && strlen($hijos) > 0) {
                             $dvictima->hijos= lnat_a_numero($hijos);
                         }
                         $dvictima->id_persona
@@ -435,7 +435,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         } else {
                             $redad = dato_en_obs($victima, 'rangoedad');
                             //echo "OJO redad=$redad<br>\n";
-                            if ($redad != null) {
+                            if ($redad !== null && strlen($redad) > 0) {
                                 $idredad = (int)conv_basica(
                                     $db, 'rangoedad',
                                     $redad, $obs, false, 'rango'
@@ -496,7 +496,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     if ($v == null) {
                         $v = dato_en_obs($victima, "organizacion_armada");
                     }
-                    if ($v != null) {
+                    if ($v !== null && strlen($v) > 0) {
                         $dvictima->organizacionarmada = (int)conv_basica(
                             $db, 'presponsable', $v, $obs
                         );
@@ -520,7 +520,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         //echo "OJO cs=$cs, cs2=$cs2<br>";
                         $v = dato_en_obs($victima, $cs);
                         //echo "OJO v=$v<br>";
-                        if ($v != null) {
+                        if ($v !== null && strlen($v) > 0) {
                             $la = explode(';', $v);
                             foreach ($la as $ant) {
                                 //echo "OJO ant=$ant<br>";
@@ -595,6 +595,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     } else if (!empty($acto->id_grupo_victima)) {
                         $ia = (string)$acto->id_grupo_victima;
                         $g = $datgrupo[$ia];
+                        $cg = "";
                         if (isset($id_vcol[$ia])) {
                             $cg = $id_vcol[$ia];
                         } else if (!empty($g->nombre_grupo)) {

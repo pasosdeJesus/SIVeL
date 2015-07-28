@@ -22,6 +22,7 @@
 
 require_once "bcrypt.php";
 require_once "Auth.php";
+require_once "PEAR.php";
 require_once "HTML/QuickForm.php";
 require_once "HTML/Common.php";
 require_once "DB_DataObject_SIVeL.php";
@@ -204,7 +205,7 @@ function txt2latex($s)
 {
     $r = "";
     $nc = 0; // Número de comillas encontradas
-    $nc = 0; // Número de apostrofes encontradas
+    $na = 0; // Número de apostrofes encontradas
     for ($i = 0; $i < strlen($s); $i++) {
         switch ($s{$i}) {
         case '"':
@@ -400,7 +401,7 @@ function muestra_archivo($noma, $esc = false)
 {
     $rh = fopen($noma, "rb");
     while ($rh != false && !feof($rh)) {
-        if ($esc) {
+        if ($esc === true) {
             echo_esc(fread($rh, 1024));
         } else {
             $html_l = fread($rh, 1024);
@@ -580,6 +581,7 @@ function res_valida(&$db, $mens, $cons, $confunc = false)
     echo (int)$nr;
     if ($nr > 0) {
         echo "<center><table border='1'>";
+        $row = array();
         while ($r->fetchInto($row)) {
             echo "<tr>";
             $nr = 0;
@@ -1824,8 +1826,8 @@ function edad_de_fechanac($anionac, $aniohecho, $mesnac = null,
         return -1;
     }
     $na = $aniohecho-$anionac;
-    if ($mesnac != null && $meshecho != null && $mesnac >= $meshecho) {
-        if ($mesnac > $meshecho || ($dianac != null && $diahecho != null
+    if ($mesnac !== null && $meshecho !== null && $mesnac >= $meshecho) {
+        if ($mesnac > $meshecho || ($dianac != null && $diahecho !== null
             && $dianac > $diahecho)
         ) {
             $na--;
@@ -2084,6 +2086,7 @@ function prepara_consulta_gen(&$w, &$t, $idcaso, $rel, $bas, $crelbas, $enbas,
     $otrast = array(), $iotrast = '', $nonulos = array(), $irelot = "id",
     $masenl = array()
 ) {
+    assert(is_string($iotrast));
     //echo "OJO prepara_consulta_gen(w=$w, t=$t, idcaso=$idcaso, rel=$rel, "
     //. "bas=$bas, crelbas=$crelbas, enbas=$enbas, otrast=$otrast, "
     //. "iotrast=$iotrast, nonulos=$nonulos, irelot=$irelot)<br>";
@@ -2183,6 +2186,7 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
         $d->$ncamp= $nom1;
         $d->find(1);
     }
+    $nom2 = '';
     if (!isset($d->id)) {
         $nom2 = $d->$ncamp
             = a_mayusculas(sin_tildes(var_escapa($nom0, $db)));
@@ -2347,10 +2351,10 @@ function valida_caso($idcaso, &$buf_html, &$buf_ort)
     if (isset($GLOBALS['gancho_valida_caso'])) {
         foreach ($GLOBALS['gancho_valida_caso'] as $k => $f) {
             if (is_callable($f)) {
-                $r = call_user_func_array(
+                $valr = call_user_func_array(
                     $f,
                     array($idcaso, &$buf_html)
-                ) && $r;
+                ) && $valr;
             } else {
                 echo_esc(_("Falta") . " $k - $f");
             }
@@ -2549,7 +2553,7 @@ function a_elementos_xml(&$r, $ind, $ad, $ren = null)
  *
  * @param array  &$ad         Arreglo al cual agrega información convertida
  * @param string $tabla       nombre de tabla (e.g comunidad_sectorsocial)
- * @param string $id          Arreglo con llaves y valores
+ * @param array  $id          Arreglo con llaves y valores
  * @param string $camporel    Campo de $tabla
  * @param string $camponombre nombre de campo por agregar a $ad
  *
