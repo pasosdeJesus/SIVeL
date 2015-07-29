@@ -245,7 +245,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
     /**
      * Retorna una identificación del registro actual.
      *
-     * @return string Identifación
+     * @return string|array Identifación
      */
     abstract function copiaId();
 

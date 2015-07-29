@@ -372,7 +372,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      * @param string $cc     Campo que se procesa
      * @param int    $idcaso Número de caso
      *
-     * @return Cadena por presentar
+     * @return string Cadena por presentar
      */
     static function resConsultaFilaTabla(&$db, $cc, $idcaso)
     {
@@ -383,7 +383,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      *
      * @param string $cc Campo que se procesa
      *
-     * @return Cadena por presentar
+     * @return string Cadena por presentar
      */
     static function resConsultaFinaltablaHtml($cc)
     {
@@ -396,7 +396,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      * @param object &$db   Conexión a B.D
      * @param object &$form Formulario
      *
-     * @return Cadena por presentar
+     * @return string Cadena por presentar
      */
 
     static function consultaWebFiltro(&$db, &$form)
@@ -478,7 +478,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      * @param object &$db   Conexión a B.D
      * @param object &$form Formulario
      *
-     * @return Cadena por presentar
+     * @return string Cadena por presentar
      */
     static function consolidadoFiltro(&$db, &$form)
     {
@@ -533,7 +533,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      * @param object &$db   Conexión a B.D
      * @param object &$form Formulario
      *
-     * @return Cadena por presentar
+     * @return string Cadena por presentar
      */
     static function estadisticasIndFiltro(&$db, &$form)
     {
