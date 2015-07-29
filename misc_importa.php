@@ -237,6 +237,7 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
             a_mayusculas($cenp)
         );
         $ccla = null;
+        $nr = 0;
         foreach (array($cenp, a_mayusculas($cenp), $cenpst) as $nomc) {
             if ($idd == 1000) {   //$idm tambien es 1000
                 $q = "SELECT id, id_departamento, id_municipio FROM clase " .

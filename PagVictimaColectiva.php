@@ -278,7 +278,7 @@ class PagVictimaColectiva extends PagBaseMultiple
      */
     function PagVictimaColectiva($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo = _('Víctimas Colectivas');
         $this->tcorto = _('Vic. colectiva');
         if (isset($GLOBALS['etiqueta']['Victimas Colectivas'])) {

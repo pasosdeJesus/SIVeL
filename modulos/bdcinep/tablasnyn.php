@@ -135,6 +135,9 @@ function consulta3_categoria_nombre(&$db, &$campos3, &$tablas3, &$cond3,
         if ($pMuestra == 'categoria_horizontal') {
             $res = array();  // Resultados como tabla
             $enc = array();  // Encabezados son categorias de violencia
+            $tot = array();
+            $totcat = array();
+            $row = array();
             while ($resultado->fetchInto($row)) {
                 $ini = "";
                 $sep = "";
@@ -174,6 +177,7 @@ function consulta3_categoria_nombre(&$db, &$campos3, &$tablas3, &$cond3,
             }
             echo "<th>Total</th>";
             echo "</tr>\n";
+            $cini2 = array();
             foreach($res as $cini => $catval) {
                 echo "<tr>";
                 $cini2 = explode("_", $cini);

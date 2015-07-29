@@ -111,7 +111,7 @@ function verificaInsercion(&$db, $tprueba, $na)
  * require se ejecuta una vez)
  *
  * @param handle  &$db          Conexión a BD
- * @param string  $tabla_prueba Tabla que debe incrementarse tras pasar pestaña
+ * @param array   $tabla_prueba Tabla que debe incrementarse tras pasar pestaña
  * @param array   $post         Valor que debe tomar la variable POST
  * @param integer $basicos_id   Cód. caso si falta $_SESSION['basicos_id']
  * @param boolean $terminaError Si hay error terminar

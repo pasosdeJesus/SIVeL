@@ -153,6 +153,8 @@ class DataObjects_Proceso extends DB_DataObject_SIVeL
             WHERE fechadeshabilitacion IS NULL 
             ORDER BY 1, 2"
         );
+        $row = array();
+        $secOptions = array();
         while ($result->fetchInto($row)) {
             $secOptions[$row[0]][$row[1]] = $row[2];
         }

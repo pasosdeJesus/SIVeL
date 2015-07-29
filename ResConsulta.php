@@ -143,7 +143,7 @@ class ResConsulta
      *
      * @param array   &$campos      Campos por mostrar id => nombre
      * @param handle  &$db          Conexión a base de datos
-     * @param string  &$resultado   Resultado de consulta tiene caso.id
+     * @param array   &$resultado   Resultado de consulta tiene caso.id
      * @param array   &$conv        Convertir id de campos a base de datos
      * @param string  $mostrar      Forma de presentacion (rev., gen., tabla)
      * @param array   $detallesform Partir  memo en varias lineas
@@ -213,6 +213,7 @@ class ResConsulta
             " AND clase.id_municipio=municipio.id " .
             " ORDER BY departamento.nombre, municipio.nombre, clase.nombre;";
         $result = hace_consulta($db, $q);
+        $row = array();
         while (isset($result) && $result->fetchInto($row)) {
             $idd[] = $row[0];
             $idm[] = $row[1];
@@ -603,6 +604,7 @@ class ResConsulta
         }
 
         $tv = 0;
+        $row = array();
         while ($result->fetchInto($row)) {
             //print_r($row);
             $fecha = $row[4];
@@ -621,6 +623,7 @@ class ResConsulta
             $ndep = $row[13];
             $nmun = $row[14];
 
+            $html_il = "";
             if ($pMuestra == "tabla" || $pMuestra == 'actos') {
                 $html_il = "<tr><td>" .
                     htmlentities($fecha, ENT_COMPAT, 'UTF-8') . "</td>" .
@@ -752,7 +755,7 @@ class ResConsulta
         $html_enlace1=null
     ) {
         //echo "OJO aHtml";
-        if ($html_enlace1 == null) {
+        if ($html_enlace1 === null || strlen($html_enlace1) == 0) {
             $html_enlace1 = '<a href = "consulta_web.php">'
                 . _('Consulta Web') . '</a>, ';
         }
@@ -812,14 +815,14 @@ class ResConsulta
         case 'csv':
             header("Content-type: text/csv");
             header('Content-Disposition: attachment; filename = "consulta.csv"');
-            $adjunto_renglon = "";
+            $renglon = "";
             $sep = "";
             foreach ($this->campos as $cc => $nc) {
                 $nc = str_replace('"', '""', $nc);
                 $renglon .= $sep . '"' . $nc . '"';
                 $sep = ', ';
             }
-            echo "$adjunto_renglon\n";
+            echo "$renglon\n";
             break;
         case 'tabla':
             encabezado_envia(
@@ -877,6 +880,7 @@ class ResConsulta
             if (!isset($GLOBALS['DIR_RELATOS'])
                 || $GLOBALS['DIR_RELATOS'] == ''
             ) {
+                global $dirserv, $dirsitio;
                 $na = "$dirserv/$dirsitio/conf.php";
                 echo _("Falta definir directorio destino en variable") ." " .
                     "\$GLOBALS['DIR_RELATOS'] " . _("del archivo") ." " .
@@ -901,6 +905,7 @@ class ResConsulta
             echo _("Generando relatos") . ":<br>";
             break;
         default:
+            $rtexto = "";
             foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
                 list($n, $c, $o) = $tab;
                 if (($d = strrpos($c, "/"))>0) {
@@ -1216,6 +1221,7 @@ class ResConsulta
             }
         }
         $html_renglon = "<tr>";
+        $escon = array();
         foreach ($campos as $cc => $nc) {
             $html_renglon .= "<td valign='top'";
             if ($cc == "caso_id") {
@@ -1768,6 +1774,7 @@ class ResConsulta
             $dubicacion->id_caso = $idcaso;
             $dubicacion->find();
             $nubi = 0; $pobs = "";
+            $uobs = "";
             while ($dubicacion->fetch()) {
                 $nubi++;
                 $uobs = $pobs;
@@ -2162,20 +2169,21 @@ class ResConsulta
             $idu = ":";
             $cadub = "";
             $arr_ubica_listo = array();
+            $arr_ubica = array();
             foreach ($ndd as $k => $nd) {
                 $vr .= $seploc . trim($nd);
                 $idu .= $idd[$k];
                 if ($ndm[$k] != '') {
-                    $vr .= " / ".trim($ndm[$k]);
-                    $idu .= ":".$idm[$k];
+                    $vr .= " / " . trim($ndm[$k]);
+                    $idu .= ":" . $idm[$k];
                 }
                 if ($ndc[$k] != '') {
-                    $vr .= " / ".trim($ndc[$k]);
-                    $idu .= ":".$idc[$k];
+                    $vr .= " / " . trim($ndc[$k]);
+                    $idu .= ":" . $idc[$k];
                 }
                 if (isset($arr_ubica[$idu])) {
                     $sepu = " : ";
-                    $arr_ubica_listo[$idu]=1;
+                    $arr_ubica_listo[$idu] = 1;
                     foreach ($arr_ubica[$idu] as $i => $nu) {
                         $vr .= $sepu . $nu;
                         $sepu = ", ";
@@ -2189,9 +2197,8 @@ class ResConsulta
                 foreach ($arr_ubica_listo as $idu => $v) {
                     $sepu = "\n";
                     if ($v == 0) {
-                        foreach ($arr_ubica_divipol[$idu] as $idd => $ddiv) {
-                            $vr .= $sepu . $arr_ubica_divipol[$idu][$idd]
-                                . "/" . $arr_ubica[$idu][$idd];
+                        foreach ($arr_ubica[$idu] as $idd => $ddiv) {
+                            $vr .= $sepu . "/" . $arr_ubica[$idu][$idd];
                         }
                     }
                 }
@@ -2430,8 +2437,8 @@ class ResConsulta
      * Representacion de un grupo de victimas
      *
      * @param string &$r      Cadena resultante
-     * @param string $lvc     Arreglo con códigos de personas por presentar
-     * @param string $lvic    Arreglo de datos de victimas indexado por código
+     * @param array  $lvc     Arreglo con códigos de personas por presentar
+     * @param array  $lvic    Arreglo de datos de victimas indexado por código
      * @param bool   $indenta Identacion?
      * @param bool   $corto   Formato corto?
      *
@@ -2908,12 +2915,12 @@ class ResConsulta
     /**
      * Retorna un registro del reporte revista
      *
-     * @param integer $idcaso  Id. del caso
-     * @param handle  $db      Conexión a BD
-     * @param array   $campos  Campos por mostrar
-     * @param boolean $varlin  Varias líneas
-     * @param boolean $tex     Generar TeX ?
-     * @param boolean $numcaso Número de caso para orden por rótulo
+     * @param integer      $idcaso  Id. del caso
+     * @param handle       $db      Conexión a BD
+     * @param array        $campos  Campos por mostrar
+     * @param boolean      $varlin  Varias líneas
+     * @param boolean      $tex     Generar TeX ?
+     * @param integer|null $numcaso Número de caso para orden por rótulo
      *
      * @return string  Registro
      */
@@ -3088,7 +3095,7 @@ class ResConsulta
      *
      * @return void
      */
-    function reporteCsvAdjnto($db, $idcaso, $campos, $conv, $sal)
+    function reporteCsvAdjunto($db, $idcaso, $campos, $conv, $sal)
     {
         $adjunto_renglon = "";
         $vrpre = '"';

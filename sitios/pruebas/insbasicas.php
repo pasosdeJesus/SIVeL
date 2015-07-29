@@ -28,7 +28,7 @@ require_once "ambiente.php";
  * @param string $tabla     Nombre de la tabla
  * @param string $llave_sec Llave secundaria
  * @param string $valor     Valor
- * @param string $campos    Campos
+ * @param array  $campos    Campos
  *
  * @return 0 si inserta, 1 si no inserta
  */

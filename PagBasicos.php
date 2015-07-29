@@ -653,7 +653,7 @@ class PagBasicos extends PagBaseSimple
     {
         $aut_usuario = "";
         autentica_usuario($GLOBALS['dsn'], $aut_usuario, 31);
-        parent::PagBaseSimple($nomForma);
+        $this->PagBaseSimple($nomForma);
         $this->titulo = _('Datos Básicos');
         $this->tcorto = _('Básicos');
 

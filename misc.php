@@ -1154,7 +1154,7 @@ function sin_error_pear($do, $msg = "")
  */
 function hace_consulta(&$db, $q, $finenerror = true, $muestraerror = true)
 {
-    if ($db == null || !($db instanceof PEAR)) {
+    if ($db == null || !method_exists($db, 'query')) {
         echo "db no es objeto PEAR<br>";
         debug_print_backtrace();
         exit(1);
@@ -1560,11 +1560,11 @@ function caso_usuario($idcaso)
  * Si $v es null retorna ''
  * Agradecimientos por correciones a garcez@linuxmail.org
  *
- * @param string  $v       Nombre de variable POST
- * @param handle  &$db     Conexión a BD.
- * @param integer $maxlong Longitud máxima
+ * @param string|array  $v       Nombre de variable POST
+ * @param handle        &$db     Conexión a BD.
+ * @param integer       $maxlong Longitud máxima
  *
- * @return string Cadena escapada
+ * @return string|array Cadena escapada
  */
 function var_escapa($v, &$db = null, $maxlong = 1024)
 {
@@ -1828,7 +1828,7 @@ function edad_de_fechanac($anionac, $aniohecho, $mesnac = null,
     }
     $na = $aniohecho-$anionac;
     if ($mesnac !== null && $meshecho !== null && $mesnac >= $meshecho) {
-        if ($mesnac > $meshecho || ($dianac != null && $diahecho !== null
+        if ($mesnac > $meshecho || ($dianac !== null && $diahecho !== null
             && $dianac > $diahecho)
         ) {
             $na--;

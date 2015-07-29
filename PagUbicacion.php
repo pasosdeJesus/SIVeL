@@ -264,7 +264,7 @@ class PagUbicacion extends PagBaseMultiple
      */
     function PagUbicacion($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo = _('Ubicación');
         $this->tcorto = _('Ubicación');
         if (isset($GLOBALS['etiqueta']['Ubicacion'])) {
@@ -394,7 +394,7 @@ class PagUbicacion extends PagBaseMultiple
             )
         );
         $d->loadArray($options);
-        if ($vdep != null && $vdep != DB_DataObject_Cast::sql('NULL')) {
+        if ($vdep !== null && $vdep != DB_DataObject_Cast::sql('NULL')) {
             $d->setValue($vdep);
             if ($m != null) {
                 $m->_options = array();
@@ -406,7 +406,7 @@ class PagUbicacion extends PagBaseMultiple
                     )
                 );
                 $m->loadArray($options);
-                if ($vmun != null
+                if ($vmun !== null
                     && $vmun != DB_DataObject_Cast::sql('NULL')
                 ) {
                     $m->setValue($vmun);
@@ -421,7 +421,7 @@ class PagUbicacion extends PagBaseMultiple
                             )
                         );
                         $c->loadArray($options);
-                        if ($vcla != null
+                        if ($vcla !== null
                             && $vcla != DB_DataObject_Cast::sql('NULL')
                         ) {
                             $c->setValue($vcla);
@@ -496,9 +496,9 @@ class PagUbicacion extends PagBaseMultiple
      * @param integer $depdef      Departamento por defecto
      * @param integer $mundef      Municipio por defecto
      * @param integer $cladef      Clase por defecto
-     * @param integer $dep         Objeto departamento en formulario
-     * @param integer $mun         Objeto municipio en formulario
-     * @param integer $cla         Objeto clase en formulario
+     * @param object  $dep         Objeto departamento en formulario
+     * @param object  $mun         Objeto municipio en formulario
+     * @param object  $cla         Objeto clase en formulario
      * @param string  $nomcampodep Nombre del campo con depto
      * @param string  $nomcampomun Nombre del campo con municipio
      * @param string  $nomcampocla Nombre del campo con clase
@@ -851,7 +851,7 @@ class PagUbicacion extends PagBaseMultiple
         }
         foreach (array('lugar', 'sitio') as $c) {
             $d = dato_en_obs($r, $c);
-            if ($d != null) {
+            if ($d !== null) {
                 $dubicacion->$c = $d;
             }
         }

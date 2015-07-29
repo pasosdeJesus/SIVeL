@@ -252,7 +252,7 @@ class PagActo extends PagBaseSimple
      */
     function PagActo($nomForma)
     {
-        parent::PagBaseSimple($nomForma);
+        $this->PagBaseSimple($nomForma);
         $this->titulo = _('Actos');
         $this->tcorto = _('Actos');
         if (isset($GLOBALS['etiqueta']['Actos'])) {

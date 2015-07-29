@@ -258,7 +258,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
      */
     function PagBaseMultiple($nomForma)
     {
-        parent::PagBaseSimple($nomForma);
+        $this->PagBaseSimple($nomForma);
 
         $this->addAction('eliminar', new EliminarMultiple());
         $this->addAction('nuevo', new NuevoMultiple());

@@ -185,7 +185,7 @@ class PagPResponsables extends PagBaseMultiple
      */
     function PagPResponsables($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo = _('Presuntos Responsables');
         $this->tcorto = _('P. Resp.');
         if (isset($GLOBALS['etiqueta']['Presuntos Responsables'])) {
@@ -478,7 +478,7 @@ class PagPResponsables extends PagBaseMultiple
         if (PEAR::isError($ret)) {
             die($ret->getMessage());
         }
-        if (isset($valores['clasificacion'])) {
+        if (isset($valores['clasificacion']) && isset($this->bcategoria->_do)) {
             foreach (var_escapa($valores['clasificacion']) as $k => $v) {
                 $t = explode(":", var_escapa($v, $db));
                 $this->bcategoria->_do->id

@@ -328,9 +328,6 @@ class PagCifrasCons extends HTML_QuickForm_Page
      * Constructora.
      * Ver documentación completa en clase base.
      *
-     * @param string $nomForma Nombre
-     * @param string $mreq     Mensaje de dato requerido
-     *
      * @return void
      */
     function PagCifrasCons()

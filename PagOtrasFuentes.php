@@ -174,7 +174,7 @@ class PagOtrasFuentes extends PagBaseMultiple
      */
     function PagOtrasFuentes($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo = _('Otras Fuentes');
         $this->tcorto = _('Fuente');
         if (isset($GLOBALS['etiqueta']['Otras Fuentes'])) {
@@ -507,11 +507,11 @@ class PagOtrasFuentes extends PagBaseMultiple
             $row = array();
             $rp->fetchInto($row);
             $dfdc->id_fotra = $row[0];
-            if ($rp->fetchInto($row)) {
+            if ($nr > 1) {
                 rep_obs(
                     _("Hay ") . $nr .
                     _("fuentes no frecuentes con nombre como ")
-                    .  $fuente->nombre_fuente
+                    .  $nomf
                     .  _(", escogida la primera") . "\n", $obs
                 );
             }
@@ -541,7 +541,7 @@ class PagOtrasFuentes extends PagBaseMultiple
             if (empty($fuente->fecha_fuente)) {
                 rep_obs(
                     _("No se incluyó fuente sin fecha: ") .
-                    $fuente->asXML()
+                    $fuente->asXML(), $obs
                 );
             } else if (empty($fuente->nombre_fuente)) {
                 rep_obs(

@@ -47,7 +47,7 @@ class PagMemo extends PagBaseSimple
      */
     function PagMemo($nomForma)
     {
-        parent::PagBaseSimple($nomForma);
+        $this->PagBaseSimple($nomForma);
         $this->titulo = _('Memo');
         if (isset($GLOBALS['etiqueta']['Memo'])) {
             $this->titulo = $GLOBALS['etiqueta']['Memo'];

@@ -234,7 +234,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
      */
     function PagBaseMultiplePartes($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo  = 'Pag. Base Múltiple';
         $this->tcorto  = 'Pag. Base Múltiple';
         $this->addAction('siguiente', new Siguiente());
@@ -309,7 +309,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
     {
         assert($dcm != null);
         assert($dcm->id_caso != null);
-        if ($idcaso == null) {
+        if ($idcaso === null) {
             $idcaso = $_SESSION['basicos_id'];
         }
         //echo "OJO eliminaClasemodelo({$dcm->__table}, $idcaso)<br>";

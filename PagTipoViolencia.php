@@ -134,7 +134,7 @@ class PagTipoViolencia extends PagBaseSimple
      */
     function PagTipoViolencia($nomForma)
     {
-        parent::PagBaseSimple($nomForma);
+        $this->PagBaseSimple($nomForma);
 
         $this->titulo = _('Contexto');
         if (isset($GLOBALS['etiqueta']['Contexto'])) {

@@ -493,7 +493,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         //echo "OJO dvictima->ncs=" .  $dvictima->$ncs . "<br>";
                     }
                     $v = dato_en_obs($victima, "organizacionarmada");
-                    if ($v == null) {
+                    if ($v === null || strlen($v) == 0) {
                         $v = dato_en_obs($victima, "organizacion_armada");
                     }
                     if ($v !== null && strlen($v) > 0) {
