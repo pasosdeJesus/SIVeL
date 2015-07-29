@@ -1690,7 +1690,8 @@ function arr_a_fecha($f, $desde = true)
         'd' => (int)$dia
     );
 
-    return $fb->_array2date($ft);
+    $ret = $fb->_array2date($ft);
+    return $ret;
     // Ojala fuera DB_DataObject_Formbuilder::array2date($ft)
 }
 

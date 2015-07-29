@@ -20,6 +20,7 @@
 require_once 'PagBaseSimple.php';
 require_once 'Caso_etiqueta.php';
 require_once 'misc.php';
+require_once 'misc_importa.php';
 
 
 /**
@@ -87,7 +88,7 @@ class PagEtiquetas extends PagBaseSimple
      */
     function PagEtiquetas($nomForma)
     {
-        parent::PagBaseSimple($nomForma, $this->titulo);
+        $this->PagBaseSimple($nomForma, $this->titulo);
         $this->titulo  = _('Etiquetas');
         $this->tcorto  = _('Etiquetas');
         if (isset($GLOBALS['etiqueta']['Etiquetas'])) {
@@ -196,7 +197,15 @@ class PagEtiquetas extends PagBaseSimple
             $this->bcaso_etiqueta->_do->id_usuario
                 = (int)$_SESSION['id_usuario'];
             //print_r($_SESSION); die("x");
-            $this->bcaso_etiqueta->_do->fecha = @date('Y-m-d');
+            if (isset($valores['ffecha']) && isset($valores['ffecha']['Y']) && 
+                isset($valores['ffecha']['m']) && isset($valores['ffecha']['d'])
+            ) {
+                $this->bcaso_etiqueta->_do->fecha = 
+                    arr_a_fecha($valores['ffecha']);
+            } else {
+                $this->bcaso_etiqueta->_do->fecha = @date('Y-m-d');
+            }
+            #$this->bcaso_etiqueta->_do->fecha = @date('Y-m-d');
             $this->bcaso_etiqueta->_do->observaciones
                 = var_escapa($valores['fobservaciones'], $db);
             //print_r($this->bcaso_etiqueta->_do);
@@ -580,15 +589,19 @@ class PagEtiquetas extends PagBaseSimple
         foreach ($po as $v) {
             $a = $v->attributes();
             $s = explode(':', $a);
-            if (count($s) == 2) {
+            if (count($s) >= 2) {
                 $e = $s[1];
+                $f = @date('Y-m-d');
+                if (count($s) >= 3 && trim($s[2]) != '') {
+                    $f = conv_fecha($s[2], $obs); 
+                }
                 $c = (string)$v;
                 if (($ide = conv_basica($db, 'etiqueta', $e, $obs)) >= 0) {
                     $ec = objeto_tabla('caso_etiqueta');
                     $ec->id_caso = $idcaso;
                     $ec->id_etiqueta = $ide;
                     $ec->id_usuario = $_SESSION['id_usuario'];
-                    $ec->fecha = @date('Y-m-d');
+                    $ec->fecha = $f;
                     $ec->observaciones = $c;
                     $r = $ec->insert();
                     sin_error_pear($r);
@@ -621,8 +634,9 @@ class PagEtiquetas extends PagBaseSimple
         $vd = array();
         while ($do->fetch()) {
             $dr= $do->getLink('id_etiqueta');
-            $vd['observaciones{tipo->etiqueta:' . $dr->nombre . '}'] 
-                = $do->observaciones=='' ? ' ' : $do->observaciones;
+            $ind = 'observaciones{tipo->etiqueta:' .  
+                $dr->nombre . ':' . $do->fecha. '}';
+            $vd[$ind] = $do->observaciones=='' ? ' ' : $do->observaciones;
             $dr->free();
         }
         $do->free();

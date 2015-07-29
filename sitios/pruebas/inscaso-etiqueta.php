@@ -21,10 +21,12 @@ if (PHP_SAPI !== 'cli') {
     die("Acceso: INTERPRETE DE COMANDOS");
 }
 require_once "ambiente.php";
+require_once "confv.php";
 
 $post = array();
 $post['fetiqueta'] = '7';
 $post['fobservaciones'] = 'con color';
+$post['ffecha'] = array('Y' => '2015', 'm' => '07', 'd' => '28');
 $post['_qf_etiquetas_agregarEtiqueta'] = 'Añadir';
 $post['_qf_default'] = 'etiquetas:siguiente';
 pasaPestanaFicha($db, array("caso_etiqueta"), $post, 1);

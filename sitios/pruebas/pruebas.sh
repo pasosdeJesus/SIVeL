@@ -20,8 +20,8 @@ function genDataObject {
 function prueba {
 	a=$1;          # Archivo PHP
 	d=$2;          # Descripción
-	sal=$3;        # 
-	saca="$4";     # Que lineas sacar del resultado para comparar
+	sal=$3;        # Archivo de salida
+	saca="$4";     # Que lineas sacar del resultado antes de comparar
 	sintab="$5";   # 
 	otrocomp="$6"  # Otro archivo por comparar entre salida y esperado
 	saca2="$7"      # Lineas por sacar de otrocomp
@@ -166,6 +166,7 @@ EOF
 	mkdir -p sitios/pruebas/DataObjects
 #	cp $dirplant/DataObjects/$nombase.ini sitios/pruebas/sivelpruebas.ini
 #	cp $dirplant/DataObjects/$nombase.links.ini sitios/pruebas/sivelpruebaslinks.ini
+	#cp confv.php sitios/pruebas
 
 	(cd sitios/pruebas ; ../../bin/creaesquema.sh)
 
@@ -218,8 +219,8 @@ prueba sitios/pruebas/inscaso-victimaColectiva.php " - Víctima Colectiva"
 prueba sitios/pruebas/inscaso-acto.php " - Actos"
 prueba sitios/pruebas/inscaso-memo.php " - Memo"
 prueba sitios/pruebas/inscaso-memo-valida.php " - Valida Memo"
-#}
 prueba sitios/pruebas/inscaso-anexos.php " - Anexo"
+#}
 prueba sitios/pruebas/inscaso-etiqueta.php " - Etiqueta"
 prueba sitios/pruebas/inscaso-evaluacion.php " - Evaluacion"
 prueba sitios/pruebas/inscaso-evaluacion-valida.php " - Valida Evaluacion"
@@ -233,7 +234,6 @@ prueba sitios/pruebas/estadisticas.php " - Estadísticas " estadisticas
 prueba sitios/pruebas/novalida-basicos.php " - Validación básicos" novalida-basicos
 prueba sitios/pruebas/novalida-frecuentes.php " - Validación frecuentes" novalida-frecuentes "<option"
 prueba sitios/pruebas/externa.php " - Consulta externa" externa
-prueba sitios/pruebas/relato.php " - Exporta Relato " relato
-
+prueba sitios/pruebas/relato.php " - Exporta Relato " relato 
 prueba sitios/pruebas/imprelato.php " - Importa Relato " imprelato "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*" "" "resimp.xrlt.espreg" "Warning" "fecha_fuente" "D -"
 #prueba sitios/pruebas/mezcla.php " - Mezcla 2 Casos" mezcla
