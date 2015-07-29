@@ -170,7 +170,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
      */
     function PagVictimaCombatiente($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo  = _('Víctima Combatiente');
         $this->tcorto  = _('Comb.');
         if (isset($GLOBALS['etiqueta']['Victima Combatiente'])) {
@@ -234,6 +234,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
         //$sca =& $this->getElement('id_antecedente');
             $valsca = array();
 
+        $v = array();
         if (isset($_SESSION['recuperaErrorValida'])) {
             $v = $_SESSION['recuperaErrorValida'];
         } else if (isset($_SESSION['nuevo_copia_id'])) {
@@ -459,7 +460,9 @@ class PagVictimaCombatiente extends PagBaseMultiple
             } else {
                 $this->eliminaVic($this->bcombatiente->_do, false);
             }
-            if (isset($valores['id_antecedente'])) {
+            if (isset($valores['id_antecedente']) &&
+                is_array($valores['id_antecedente']
+            ) {
                 foreach (var_escapa($valores['id_antecedente']) as $k => $v) {
                     $this->bantecedente_combatiente->_do->id_combatiente
                         = $idcombatiente;
@@ -593,7 +596,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
      *
      * @return bool V sii hay integridad
      */
-    function integridad_ref_tipoviolencia()
+    function integridad_ref_tipoviolencia(&$db, $idcaso, $idpres, 
+        $accion, $valores)
     {
         $q = "SELECT COUNT(id_combatiente) FROM "
             . "combatiente_presponsable, combatiente WHERE "
