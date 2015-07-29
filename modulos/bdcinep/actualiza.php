@@ -1,22 +1,22 @@
 <?php
 // vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=marker:
 /**
-* Actualiza personalización
+* Actualiza personalizaciÃ³n
  *
  * PHP version 5
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2015 Dominio público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2015 Dominio pÃºblico. Sin garantÃ­as.
  * @license   https://www.pasosdejesus.org/dominio_publico_colombia.html DP
- *            Dominio Público. Sin garantías.
+ *            Dominio PÃºblico. Sin garantÃ­as.
  * @version   CVS: $$
  * @link      http://sivel.sf.net
  */
 
 /**
- * Actualiza base de datos después de actualizar fuentes 
+ * Actualiza base de datos despuÃ©s de actualizar fuentes 
 */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . '/conf.php';
@@ -38,7 +38,7 @@ if (!aplicado($idac)) {
     hace_consulta(
         $db, "INSERT INTO opcion 
         (id_opcion, descripcion, id_mama, nomid) 
-        VALUES ('57', 'Tablas Consolidado General de Víctimas', '50', 'opcion?num=1000')", false
+        VALUES ('57', 'Tablas Consolidado General de VÃ­ctimas', '50', 'opcion?num=1000')", false
     ); 
     aplicaact($act, $idac, 'Opciones de BD');
 }

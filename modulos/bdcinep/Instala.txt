@@ -11,4 +11,10 @@ Módulo Tablas Consolidadas Estilo Revista Noche y Niebla
 3. Para usar:
 	3.1 Tablas consolidadas
 		Desde el menú Conteos elija 
+		"Tablas Csonsolidado General de Víctimas"
+	3.2 Tablas 
+		Desde Conteos->V. Individuales marcando
+		"Categorias en eje horizontal y sin supracategoria"
+		
+
 

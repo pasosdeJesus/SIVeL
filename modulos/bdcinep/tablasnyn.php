@@ -7,14 +7,14 @@
  *
  * @category  SIVeL
  * @package   SIVeL
- * @author    Vladimir Támara <vtamara@pasosdeJesus.org>
- * @copyright 2014 Dominio público. Sin garantías.
- * @license   http://creativecommons.org/licenses/publicdomain/ Dominio Público. Sin garantías.
+ * @author    Vladimir TÃ¡mara <vtamara@pasosdeJesus.org>
+ * @copyright 2014 Dominio pÃºblico. Sin garantÃ­as.
+ * @license   http://creativecommons.org/licenses/publicdomain/ Dominio PÃºblico. Sin garantÃ­as.
  * @version   $$
  * @link      http://sivel.sf.net
  */
 
-/** Actualiza base de datos después de actualizar fuentes */
+/** Actualiza base de datos despuÃ©s de actualizar fuentes */
 require_once "aut.php";
 require_once $_SESSION['dirsitio'].'/conf.php';
 require_once "confv.php";
@@ -27,10 +27,10 @@ $db = autentica_usuario($dsn, $aut_usuario, 21);
 
 
 /**
- * Llamada desde formulario de estadísticas individuales para
- * dar la posibilidad de añadir elementos.
+ * Llamada desde formulario de estadÃ­sticas individuales para
+ * dar la posibilidad de aÃ±adir elementos.
  *
- * @param object &$db   Conexión a B.D
+ * @param object &$db   ConexiÃ³n a B.D
  * @param object &$form Formulario
  *
  * @return Cadena por presentar
@@ -49,9 +49,9 @@ function agregar_categoria_nombre(&$db, &$form) {
 
 /**
  * Llamada desde estadisticas.php para completar primera consulta SQL
- * que genera estadísticas
+ * que genera estadÃ­sticas
  *
- * @param object &$db     Conexión a B.D
+ * @param object &$db     ConexiÃ³n a B.D
  * @param string &$where  Consulta SQL que se completa
  * @param string &$tablas Tablas incluidas en consulta
  * @param string &$pSegun Nombre de columna resultante en cons
@@ -62,7 +62,7 @@ function agregar_categoria_nombre(&$db, &$form) {
 function consulta_categoria_nombre(&$db, &$where, &$tablas, &$pSegun, 
     &$campoSegun)
 {
-    echo "OJO consulta_categoria_nombre(db, $where, $tablas, $pSegun, $campoSegun)";
+    //echo "OJO consulta_categoria_nombre(db, $where, $tablas, $pSegun, $campoSegun)";
     $pCatHorizontales= var_req_escapa('cat_horizontales', $db, 32);
     if ($pCatHorizontales == "1") {
 /*        $pSegun .= $pSegun == "" ? "" : ", ";
@@ -73,20 +73,20 @@ $campoSegun .= 'categoria.nombre'; */
 
 /**
  * Llamada desde estadisticas.php para completar tercera consulta SQL
- * que genera estadísticas con SELECT $campos3 FROM $tablas3 WHERE $cond3
+ * que genera estadÃ­sticas con SELECT $campos3 FROM $tablas3 WHERE $cond3
  *
- * @param object &$db       Conexión a B.D
+ * @param object &$db       ConexiÃ³n a B.D
  * @param string &$campos3  Campos que genera, debe terminar en el que se agrupa
  * @param string &$tablas3  Tablas sobre las que se hace
- * @param string &$cond3    Condición
+ * @param string &$cond3    CondiciÃ³n
  * @param string &$pMuestra Forma de presentar
  *
  * @return void Puede modificar $tablas, $where y $pSegun
  */
 function consulta3_categoria_nombre(&$db, &$campos3, &$tablas3, &$cond3, 
-    $pMuestra)
+    &$pMuestra)
 {
-    echo "OJO consulta3_categoria_nombre(db, $campos3, $tablas3, $cond3, $pMuestra)";
+    //echo "OJO consulta3_categoria_nombre(db, $campos3, $tablas3, $cond3, $pMuestra)";
     $pCatHorizontales= var_req_escapa('cat_horizontales', $db, 32);
     if ($pCatHorizontales == "1") {
         $campos3 = str_replace("departamento.id, ", "", $campos3);
@@ -124,14 +124,14 @@ function consulta3_categoria_nombre(&$db, &$campos3, &$tablas3, &$cond3,
     /**
      * Presenta resultados como tabla con categoria horizontal
      *
-     * @param object &$db        Conexión a B.D
+     * @param object &$db        ConexiÃ³n a B.D
      * @param string &$resultado Resultado de consulta
      *
      * @return void Presenta tabla en html
      */
-    function muetra_horizontal_html(&$db, &$resultado, $pMuestra, $cab)
+    function muestra_horizontal_html(&$db, &$resultado, $pMuestra, $cab)
     {
-        echo "OJO muestra_horizontal_html(db, $resultado, $pMuestra, $cab)";
+        //echo "OJO muestra_horizontal_html(db, resultado, $pMuestra, $cab)";
         if ($pMuestra == 'categoria_horizontal') {
             $res = array();  // Resultados como tabla
             $enc = array();  // Encabezados son categorias de violencia
@@ -162,8 +162,8 @@ function consulta3_categoria_nombre(&$db, &$campos3, &$tablas3, &$cond3,
             foreach ($cab as $k => $t) {
                 if ($t != "C. Dep." && $t != "Tipo de Violencia" &&
                     $t != "Supracategoria" && $t != "Categoria" &&
-                    $t != "N. Víctimizaciones" && $t != 'N. Actos') { 
-                        echo "<th>" . htmlentities($t, ENT_COMPAT, 'ISO-8859-1') 
+                    $t != "N. VÃ­ctimizaciones" && $t != 'N. Actos') { 
+                        echo "<th>" . htmlentities($t, ENT_COMPAT, 'UTF-8') 
                             . "</th>";
                         $colenc = true;
                     }
@@ -172,7 +172,7 @@ function consulta3_categoria_nombre(&$db, &$campos3, &$tablas3, &$cond3,
                 echo "<th></th>";
             }
             foreach ($enc as $k => $t) {
-                echo "<th> " . htmlentities($k, ENT_COMPAT, 'ISO-8859-1') 
+                echo "<th> " . htmlentities($k, ENT_COMPAT, 'UTF-8') 
                     . "</th>";
             }
             echo "<th>Total</th>";
@@ -182,17 +182,17 @@ function consulta3_categoria_nombre(&$db, &$campos3, &$tablas3, &$cond3,
                 echo "<tr>";
                 $cini2 = explode("_", $cini);
                 foreach($cini2 as $k => $c) {
-                    echo "<td>" . htmlentities($c, ENT_COMPAT, 'ISO-8859-1') 
+                    echo "<td>" . htmlentities($c, ENT_COMPAT, 'UTF-8') 
                         . "</td>";
                 }
                 foreach ($enc as $k => $t) {
                     echo "<td> ";
                     if (isset($catval[$k])) {
-                        echo htmlentities($catval[$k], ENT_COMPAT, 'ISO-8859-1');
+                        echo htmlentities($catval[$k], ENT_COMPAT, 'UTF-8');
                     }
                     echo "</td>";
                 }
-                echo "<td>" . htmlentities($tot[$cini], ENT_COMPAT, 'ISO-8859-1') 
+                echo "<td>" . htmlentities($tot[$cini], ENT_COMPAT, 'UTF-8') 
                     . "</td>";
                 echo "</tr>";
             }
@@ -209,12 +209,12 @@ function consulta3_categoria_nombre(&$db, &$campos3, &$tablas3, &$cond3,
             foreach ($enc as $k => $t) {
                 echo "<td> ";
                 if (isset($totcat[$k])) {
-                    echo htmlentities($totcat[$k], ENT_COMPAT, 'ISO-8859-1');
+                    echo htmlentities($totcat[$k], ENT_COMPAT, 'UTF-8');
                     $gt += $totcat[$k];
                 }
                 echo "</td>";
             }
-            echo "<td>" . htmlentities($gt, ENT_COMPAT, 'ISO-8859-1') 
+            echo "<td>" . htmlentities($gt, ENT_COMPAT, 'UTF-8') 
                 . "</td>";
             echo "</tr>";
 
@@ -225,7 +225,7 @@ function consulta3_categoria_nombre(&$db, &$campos3, &$tablas3, &$cond3,
             echo "<tr>";
             foreach ($cab as $k => $t) {
                 echo "<td>";
-                echo htmlentities($row[$k], ENT_COMPAT, 'ISO-8859-1');
+                echo htmlentities($row[$k], ENT_COMPAT, 'UTF-8');
                 echo "</td>";
             }
             echo "</tr>\n";
@@ -234,7 +234,7 @@ function consulta3_categoria_nombre(&$db, &$campos3, &$tablas3, &$cond3,
         echo "</table>";
         if ($nf > 0) {
             echo '<div align = "right"><a href = "index.php">' .
-                '<b>Menú principal</b></a></div>';
+                '<b>MenÃº principal</b></a></div>';
         }
         pie_envia(); */
         }

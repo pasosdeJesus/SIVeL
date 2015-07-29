@@ -254,7 +254,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
                 if (is_callable($f)) {
                     call_user_func_array(
                         $f,
-                        array($pMuestra, $this->opciones, $this, &$ae, &$t)
+                        array(&$db, &$where, &$tablas, &$pSegun, &$campoSegun)
                     );
                 } else {
                     echo_esc(
@@ -352,7 +352,8 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $resultado = hace_consulta($db, $q3);
 
         if ($pMuestra == 'tabla') {
-            encabezado_envia();
+            #encabezado_envia();
+            encabezado_envia(_('Conteos Victimizaciones Individuales'));
             echo "<table border=\"1\"><tr>";
             foreach ($cab as $k => $t) {
                 echo "<th>" . htmlentities($t, ENT_COMPAT, 'UTF-8') . "</th>";
@@ -400,6 +401,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             if (isset($GLOBALS['gancho_ei_muestraconsulta'])) {
                 foreach ($GLOBALS['gancho_ei_muestraconsulta'] as $k => $f) {
                     if (is_callable($f)) {
+                    //echo "OJO pMuestra=$pMuestra, f=$f<br>";
                         call_user_func_array(
                             $f,
                             array(&$db, &$resultado, $pMuestra, $cab)
@@ -664,7 +666,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
 
 }
 
-encabezado_envia(_('Conteos Victimizaciones Individuales'));
+#encabezado_envia(_('Conteos Victimizaciones Individuales'));
 $wizard = new HTML_QuickForm_Controller('EstadisticasInd', false);
 $consweb = new PagEstadisticasInd($mreq);
 

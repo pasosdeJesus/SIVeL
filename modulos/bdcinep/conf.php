@@ -33,5 +33,5 @@ require_once "modulos/bdcinep/tablasnyn.php";
 $GLOBALS['gancho_ei_filtro'][] = 'agregar_categoria_nombre';
 $GLOBALS['gancho_ei_creaconsulta'][] = 'consulta_categoria_nombre';
 $GLOBALS['gancho_ei_creaconsulta3'][] = 'consulta3_categoria_nombre';
-$GLOBALS['gancho_ei_muestraconsulta'][] = 'muetra_horizontal_html';
+$GLOBALS['gancho_ei_muestraconsulta'][] = 'muestra_horizontal_html';
 
