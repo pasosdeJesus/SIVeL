@@ -380,6 +380,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep)
     $do2 = objeto_tabla('acto');
     $do2->id_caso = $id2;
     $do2->find();
+    $dot1 = null;
     sin_error_pear($do2);
     while ($do2->fetch()) {
         if (isset($mapk['persona'][$do2->id_persona])) {
@@ -407,7 +408,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep)
                 $obs .= " Asociado acto(id_persona:"
                     . "{$do1->id_persona},id_categoria:{$do2->id_categoria})";
             }
-            if ($GLOBALS['actoreiniciar']) {
+            if ($dot1 != null) {
                 $dot1->find();
                 if (!$dot1->fetch()) {
                     $dot1->fecha = $fecha;
@@ -721,8 +722,8 @@ function muestra($dsn)
             $h->id_persona1 = $id1;
             $h->id_persona2 = $id2;
             $h->insert();
+            sin_error_pear($h);
         }
-        sin_error_pear($h);
         echo "<tr>";
         echo "<td>" . (int)$par[0] . "</td><td>" . (int)$v1->id_persona 
             . "</td><td>" . (int)$par[1] . "</td><td>" . (int)$v2->id_persona
