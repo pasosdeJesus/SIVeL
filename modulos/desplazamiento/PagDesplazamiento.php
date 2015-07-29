@@ -153,7 +153,7 @@ class PagDesplazamiento extends PagBaseMultiple
      */
     function PagDesplazamiento($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo  = _('Desplazamiento');
         $this->tcorto  = _('Desplazamiento');
         if (isset($GLOBALS['etiqueta']['Desplazamiento'])) {

@@ -129,6 +129,7 @@ class AccionComparaDos extends HTML_QuickForm_Action
      */
     function perform(&$page, $actionName)
     {
+        $valores = $page->exportValues();
         $pIds = "";
         if (!isset($_REQUEST['ids']) || $_REQUEST['ids'] == '') {
 
@@ -157,12 +158,12 @@ class AccionComparaDos extends HTML_QuickForm_Action
         }
         $a = explode(" ", $pIds);
         if (count($a) == 0) {
-            error_valida("No se encontraron parejas de casos");
+            error_valida("No se encontraron parejas de casos", $valores);
             return false;
         } else if (count($a) < 2 || count($a) % 2 != 0) {
             error_valida(
                 "Debe ingresar parejas de códigos separados por espacio "
-                . "(cuenta=" . count($a) . ")", null
+                . "(cuenta=" . count($a) . ")", $valores
             );
             return false;
         }
@@ -170,7 +171,7 @@ class AccionComparaDos extends HTML_QuickForm_Action
             if ($nc != (int)$nc) {
                 error_valida(
                     "Debe ingresar parejas de códigos separados por un espacio "
-                    . " nc=$nc", null
+                    . " nc=$nc", $valores
                 );
                 return false;
             }
@@ -328,6 +329,7 @@ class AccionVictimasrep extends HTML_QuickForm_Action
         $datv = array();
         $dn = array();
         $tv = 0;
+        $row = array();
         while ($result->fetchInto($row)) {
             $datv[$tv] = array($row[0], $row[1], $row[2], $row[3]);
             $tv++;

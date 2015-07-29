@@ -204,7 +204,7 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
     $r = "";
     $peso = 0;
     $rotulo = "";
-    if ($numcaso != null) {
+    if ($numcaso !== null && strlen($numcaso) > 0) {
         if (array_key_exists('m_presponsables', $campos)) {
             $dprespcaso = objeto_tabla('caso_presponsable');
             if (PEAR::isError($dprespcaso)) {

@@ -77,6 +77,8 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
         $cons = 'cons';
         $cons2="cons2";
         $where = "";
+        $cfSegun = "";
+        $campoSegun = "";
 
         consulta_and(
             $db, $where, "caso.fecha", $GLOBALS['consulta_web_fecha_min'],
@@ -220,7 +222,7 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
         $campoSegun2=$cfSegun2=$cfSegun3=$pSegun2="";
         if ($pSegun != "") {
             $pSegun2=", ".$pSegun;
-            $cfSegun2=$cfSegun . ", ";
+            $cfSegun2 = $cfSegun . ", ";
             $cfSegun3="trim(" . $cfSegun . "), ";
             $campoSegun2=", ".$campoSegun;
         }
@@ -404,7 +406,7 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
                 $sep = '';
                 foreach ($cab as $k => $t) {
                     $adjunto_t = $sep . $row[$k];
-                    echo $adjunto_r;
+                    echo $adjunto_t;
                     $sep = ', ';
                 }
                 echo "\n";

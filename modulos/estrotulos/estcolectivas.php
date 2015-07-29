@@ -75,7 +75,9 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         $pDepartamento = var_post_escapa('departamento');
         $pSinFiliacion = var_post_escapa('sinfiliacion');
 
-
+        $tablaFil = "";
+        $cfSegun = "";
+        $campoSegun = "";
         $cons = 'cons';
         $cons2="cons2";
         $where = "";
