@@ -1469,7 +1469,7 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs,
     $csinf = false
 ) {
     $ids = DataObjects_Presponsable::idSinInfo();
-    $nomg = $g->nombre_grupo;
+    $nomg = $g->nombre_grupo->__toString();
     $pr = conv_basica(
         $db, 'presponsable',
         $nomg, $obs, false

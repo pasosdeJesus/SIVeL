@@ -454,7 +454,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                                 $dvictima->$ncs = (int)conv_basica(
                                     $db,
                                     "$cs",
-                                    $victima->$cr,
+                                    $victima->$cr->__toString(),
                                     $obs
                                 );
                             } else if (is_callable(

@@ -1554,6 +1554,75 @@ function caso_usuario($idcaso)
     }
 }
 
+/**
+ * Escapa el valor de una cadena
+ * Si $v es null retorna ''
+ * Agradecimientos por correciones a garcez@linuxmail.org
+ *
+ * @param string  $v       Nombre de variable POST
+ * @param handle  &$db     Conexión a BD.
+ * @param integer $maxlong Longitud máxima
+ *
+ * @return string Cadena escapada
+ */
+function var_escapa_cadena($v, &$db = null, $maxlong = 1024)
+{
+    if ($v == null || !is_string($v)) {
+        return '';
+    }
+
+    /** Evita buffer overflows */
+    $nv = substr($v, 0, $maxlong);
+
+    /** Evita falla %00 en cadenas que vienen de HTTP */
+    $p1=str_replace("\0", ' ', $nv);
+
+    /** Evita XSS */
+    $p2=htmlspecialchars($p1);
+
+    /** Evita inyección de código SQL */
+    if (isset($db) && $db != null && !PEAR::isError($db)) {
+        $p3 = $db->escapeSimple($p2);
+    } else {
+        // Tomado de librería de Pear DB/pgsql.php
+        $p3 = (!get_magic_quotes_gpc())?str_replace(
+            "'", "''",
+            str_replace('\\', '\\\\', $p2)
+        ) : $p2;
+        //$p3=(!get_magic_quotes_gpc())?addslashes($p2):$p2;
+    }
+
+    return $p3;
+}
+
+/**
+ * Escapa valores cadena del arreglo recursivamente.
+ * Si $v es null retorna [] y los valores internos que sean null o
+ * desconocidos los pasa a ''
+ *
+ * @param array   $v       Nombre de variable POST
+ * @param handle  &$db     Conexión a BD.
+ * @param integer $maxlong Longitud máxima
+ *
+ * @return array Arreglo con valores cadena escapados
+ */
+function var_escapa_arreglo($v, &$db = null, $maxlong = 1024)
+{
+    if (isset($v) && is_array($v)) {
+        $r = array();
+        foreach ($v as $k => $e) {
+            if (is_array($e)) {
+                $r[$k] = var_escapa_arreglo($e, $db, $maxlong);
+            } else if (is_string($e)) {
+                $r[$k] = var_escapa_cadena($e, $db, $maxlong);
+            } else {
+                $r[$k] = '';
+            }
+        }
+        return $r;
+    }
+    return [];
+}
 
 /**
  * Escapa el valor de una variable o de valores en un arreglo.
@@ -1568,41 +1637,76 @@ function caso_usuario($idcaso)
  */
 function var_escapa($v, &$db = null, $maxlong = 1024)
 {
+/*    if (isset($v)) {
+        if (is_array($v)) {
+            return var_escapa_arreglo($v, $db, $maxlong);
+        } else if (is_string($v)) {
+            return var_escapa_cadena($v, $db, $maxlong);
+        } 
+    }
+    return '';
+ */
+//    if (false) {
     if (isset($v)) {
         if (is_array($v)) {
-            $r = array();
+            return var_escapa_arreglo($v, $db, $maxlong);
+            /*$r = array();
             foreach ($v as $k => $e) {
                 $r[$k] = var_escapa($e, $db, $maxlong);
             }
-            return $r;
+            return $r; */
         } else if (is_string($v)) {
-            /** Evita buffer overflows */
-            $nv = substr($v, 0, $maxlong);
-
-            /** Evita falla %00 en cadenas que vienen de HTTP */
-            $p1=str_replace("\0", ' ', $nv);
-
-            /** Evita XSS */
-            $p2=htmlspecialchars($p1);
-
-            /** Evita inyección de código SQL */
-            if (isset($db) && $db != null && !PEAR::isError($db)) {
-                $p3 = $db->escapeSimple($p2);
-            } else {
-                // Tomado de librería de Pear DB/pgsql.php
-                $p3 = (!get_magic_quotes_gpc())?str_replace(
-                    "'", "''",
-                    str_replace('\\', '\\\\', $p2)
-                ):$p2;
-                //$p3=(!get_magic_quotes_gpc())?addslashes($p2):$p2;
-            }
-
-            return $p3;
-        } else {
+            return var_escapa_cadena($v, $db, $maxlong);
+        } else if (is_integer($v)) {
             return $v;
+        } else {
+            echo "OJO v no es arreglo, ni cadena: ";
+            print_r($v);
+            echo "<br>\n";
+            debug_print_backtrace();
+            return ''; //$v;
         }
     }
     return '';
+//    }
+}
+
+/**
+ * Retorna una variable enviada por método POST tras escaparla como cadena
+ *  para hacer consultas con DB
+ *
+ * @param string  $nv      Nombre de variable POST
+ * @param handle  $db      Conexión a BD.
+ * @param integer $maxlong Longitud máxima
+ *
+ * @return string Cadena escapada
+ */
+function var_post_escapa_cadena($nv, $db = null, $maxlong = 1024)
+{
+    if (isset($_POST[$nv])) {
+        return var_escapa_cadena($_POST[$nv], $db, $maxlong);
+    } else {
+        return '';
+    }
+}
+
+/**
+ * Retorna una variable enviada por método POST tras escaparla como arreglo
+ *  para hacer consultas con DB
+ *
+ * @param string  $nv      Nombre de variable POST
+ * @param handle  $db      Conexión a BD.
+ * @param integer $maxlong Longitud máxima
+ *
+ * @return array Arreglo escapado
+ */
+function var_post_escapa_arreglo($nv, $db = null, $maxlong = 1024)
+{
+    if (isset($_POST[$nv])) {
+        return var_escapa_arreglo($_POST[$nv], $db, $maxlong);
+    } else {
+        return [];
+    }
 }
 
 /**
@@ -1626,6 +1730,44 @@ function var_post_escapa($nv, $db = null, $maxlong = 1024)
 
 
 /**
+ * Retorna una variable cadena enviada por método POST o por GET tras escaparla
+ * para hacer consultas con DB
+ *
+ * @param string  $nv      Nombre de variable
+ * @param handle  $db      Conexión a BD.
+ * @param integer $maxlong Longitud máxima
+ *
+ * @return string Cadena escapada
+ */
+function var_req_escapa_cadena($nv, $db = null, $maxlong = 1024)
+{
+    if (isset($_REQUEST[$nv])) {
+        return var_escapa_cadena($_REQUEST[$nv], $db, $maxlong);
+    } else {
+        return '';
+    }
+}
+
+/**
+ * Retorna una variable arreglo enviada por método POST o por GET tras escaparla
+ * para hacer consultas con DB
+ *
+ * @param string  $nv      Nombre de variable
+ * @param handle  $db      Conexión a BD.
+ * @param integer $maxlong Longitud máxima
+ *
+ * @return array Arreglo
+ */
+function var_req_escapa_arreglo($nv, $db = null, $maxlong = 1024)
+{
+    if (isset($_REQUEST[$nv])) {
+        return var_escapa_arreglo($_REQUEST[$nv], $db, $maxlong);
+    } else {
+        return [];
+    }
+}
+
+/**
  * Retorna una variable enviada por método POST o por GET tras escaparla
  * para hacer consultas con DB
  *
@@ -1643,7 +1785,6 @@ function var_req_escapa($nv, $db = null, $maxlong = 1024)
         return '';
     }
 }
-
 
 /**
  * Convierte un arreglo para fechas a una fecha.
