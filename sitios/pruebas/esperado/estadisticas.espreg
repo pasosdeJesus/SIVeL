@@ -30,38 +30,6 @@ function textCounter(field, cntfield, maxlimit)
         cntfield.value = maxlimit - field.value.length;
 }
 //  End -->
-</script></head><body background=""><!doctype html>
-<html>
-<head>
-  <meta charset = "UTF-8">
-  <script src = "lib/jquery-2.0.3.min.js"></script>
-  <script src = "sivel.js"></script>
-<link rel = "stylesheet" type = "text/css" href = "estilo.css" />
-<!--Fuentes de dominio publico. Sin garantias. 2004-->
-<!-- http://sivel.sf.net -->
-<script language = "JavaScript">
-<!--
-function envia(que){
-    document.forms[0]._qf_default.value = que;
-    document.forms[0].submit();
-}
-// -->
-<!-- Contador por: Nannette Thacker -->
-<!-- http://www.shiningstar.net -->
-<!-- Original by :  Ronnie T. Moore -->
-<!-- Web Site:  The JavaScript Source -->
-<!-- Use one function for multiple text areas on a page -->
-<!-- Limit the number of characters per textarea -->
-<!-- Begin
-function textCounter(field, cntfield, maxlimit)
-{
-    if (field.value.length > maxlimit) // if too long...trim it!
-        field.value = field.value.substring(0, maxlimit);
-    // otherwise, update 'characters left' counter
-    else
-        cntfield.value = maxlimit - field.value.length;
-}
-//  End -->
 </script></head><body background=""><table border="1"><tr><th>C. Dep.</th><th>Departamento</th><th>C. Mun.</th><th>Municipio</th><th>Tipo de Violencia</th><th>Supracategoria</th><th>Categoria</th><th>N. V&iacute;ctimizaciones</th></tr>
 <tr><td>1</td><td>y</td><td>1</td><td>municipio1</td><td>tipo1</td><td>supra1</td><td>cat1</td><td>1</td></tr>
 </table><div align = "right"><a href = "index.php"><b>Men&uacute; Principal</b></a></div></body></html></body></html>

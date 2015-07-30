@@ -163,7 +163,7 @@ class PagTipoViolencia extends PagBaseSimple
         $this->bcaso_contexto->useForm($this);
         $this->bcaso_contexto->getForm();
 
-        $cont = $this->getElement('id_contexto');
+        #$cont = $this->getElement('id_contexto');
 
         $this->bantecedente_caso->createSubmit = 0;
         $this->bantecedente_caso->useForm($this);
@@ -247,11 +247,11 @@ class PagTipoViolencia extends PagBaseSimple
     {
         assert($db != null);
         assert(isset($idcaso));
-        $result = hace_consulta(
+        hace_consulta(
             $db, "DELETE FROM caso_contexto " .
             " WHERE id_caso='$idcaso'"
         );
-        $result = hace_consulta(
+        hace_consulta(
             $db, "DELETE FROM antecedente_caso " .
             " WHERE id_caso='$idcaso'"
         );
@@ -312,11 +312,11 @@ class PagTipoViolencia extends PagBaseSimple
         // Verificamos no ir a violar integridad referencial
         // en caso de modificación
 
-        $result = hace_consulta(
+        hace_consulta(
             $db, "DELETE FROM caso_contexto " .
             " WHERE id_caso='$idcaso'"
         );
-        $result = hace_consulta(
+        hace_consulta(
             $db, "DELETE FROM antecedente_caso " .
             " WHERE id_caso='$idcaso'"
         );
@@ -424,12 +424,12 @@ class PagTipoViolencia extends PagBaseSimple
      */
     static function importaRelato(&$db, $r, $idcaso, &$obs)
     {
-        $reg = dato_basico_en_obs(
+        dato_basico_en_obs(
             $db, $obs, $r,
             'contexto', 'contexto', 'caso_contexto', $idcaso, '; ',
             'id_contexto'
         );
-        $reg = dato_basico_en_obs(
+        dato_basico_en_obs(
             $db, $obs, $r,
             'antecedente', 'antecedente', 'antecedente_caso', $idcaso, '; ',
             'id_antecedente'

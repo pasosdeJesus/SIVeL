@@ -131,8 +131,6 @@ function conv_localizacion(&$db, $departamento, $municipio, $cenp, &$obs)
     //echo "OJO conv_localización comienzo: departamento=$departamento, "
     //    . "municipio=$municipio, observaciones=$obs\n";
 
-    $lugar = '';
-    $sitio = '';
     $idd = 1000;
     $idm = 1000;
     $idc = null;
@@ -339,10 +337,8 @@ function conv_dia_mes_anio($d, $m, $a, $orig, &$dia_s, &$mes_s, &$anio_s, &$obs)
         $o .= " Falta año.";
     }
 
-    $m = 'especial';
     if ($o != '') {
         $obs .= " Fecha: $o ($orig).";
-        $m = 'incompleta';
     }
 }
 
@@ -405,29 +401,25 @@ function conv_fecha($fecha, &$obs, $depura = false)
         if ($depura) {
             echo "caso 1";
         }
-        $des = '';
         if ((int)$v[0] > 0) {
             $dia_s = (int)$v[0];
         } else {
-            $des = 'incompleta';
             $dia_s = 1;
-            $observacion = "Fecha: dia por completar. ";
+            rep_obs("Fecha: dia por completar. ", $obs);
         }
         $mes_s = (int)$v[1];
         if ((int)$v[1] > 0) {
             $mes_s = (int)$v[1];
         } else {
-            $des = 'incompleta';
             $mes_s = 1;
-            $observacion = "Fecha: mes por completar. ";
+            rep_obs("Fecha: mes por completar. ", $obs);
         }
         $anio_s = (int)$v[2];
         if ((int)$v[2] > 0) {
             $anio_s = (int)$v[2];
         } else {
             $anio_s = 2;
-            $observacion = "Fecha: anio por completar. ";
-            $des = 'incompleta';
+            rep_obs("Fecha: anio por completar. ", $obs);
         }
     } else if (count($v)==3 && (int)$v[0] > 0 && strpos($v[1], '-')>0) {
         if ($depura) {
@@ -701,12 +693,10 @@ function conv_fecha($fecha, &$obs, $depura = false)
                     $vg[$i] = trim($vg[$i]);
                 }
                 if (count($vg) == 3) {
-                    $des = 'especial';
                     if ($vg[0] == '00') {
                         $obs .= " " . _("Fecha: Dia desconocido") .
                             ". ($fecha)";
                         $dia_s = 1;
-                        $des = 'incompleta';
                     } else {
                         $dia_s = (int)$vg[0];
                     }
@@ -714,7 +704,6 @@ function conv_fecha($fecha, &$obs, $depura = false)
                         $obs .= " " . _("Fecha: Mes desconocido") .
                            " ($fecha)";
                         $mes_s = 1;
-                        $des = 'incompleta';
                     } else {
                         $mes_s = (int)$vg[1];
                     }

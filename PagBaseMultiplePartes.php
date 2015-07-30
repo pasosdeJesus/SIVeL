@@ -317,7 +317,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $cll = get_called_class();
         $cm = $cll::CLASEMODELO;
         $q = "DELETE FROM $cm WHERE id_caso={$idcaso}";
-        $result = hace_consulta($db, $q);
+        hace_consulta($db, $q);
     }
 
     /**
@@ -505,7 +505,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                     }
                 }
             } else {
-                $result = hace_consulta(
+                hace_consulta(
                     $db, "DELETE FROM $t " .
                     " WHERE id_caso='$idcaso' AND $ll='$fa'"
                 );

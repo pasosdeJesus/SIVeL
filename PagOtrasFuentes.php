@@ -232,13 +232,13 @@ class PagOtrasFuentes extends PagBaseMultiple
         } else {
             $v = array();
             foreach ($this->bfotra->_do->fb_fieldsToRender as $c) {
-                $cq = $this->getElement($c);
+                #$cq = $this->getElement($c);
                 if (isset($this->bfotra->_do->$c)) {
                     $v[$c] = $this->bfotra->_do->$c;
                 }
             }
             foreach ($this->bcaso_fotra->_do->fb_fieldsToRender as $c) {
-                $cq = $this->getElement($c);
+                #$cq = $this->getElement($c);
                 if (isset($this->bcaso_fotra->_do->$c)) {
                     $v[$c] =$this->bcaso_fotra->_do->$c;
                 }
@@ -254,7 +254,7 @@ class PagOtrasFuentes extends PagBaseMultiple
                     $d =& objeto_tabla($n);
                     $d->get($k, $id);
                     foreach ($d->fb_fieldsToRender as $c) {
-                        $cq = $this->getElement($c);
+                        #$cq = $this->getElement($c);
                         $v[$c] = $d->$c;
                     }
                 }
@@ -536,7 +536,6 @@ class PagOtrasFuentes extends PagBaseMultiple
     static function importaRelato(&$db, $r, $idcaso, &$obs)
     {
         foreach ($r->fuente as $fuente) {
-            $idffrecuente = null;
             $nomf = $fuente->nombre_fuente;
             if (empty($fuente->fecha_fuente)) {
                 rep_obs(
@@ -546,7 +545,7 @@ class PagOtrasFuentes extends PagBaseMultiple
             } else if (empty($fuente->nombre_fuente)) {
                 rep_obs(
                     _("No se incluyó fuente sin nombre: ") .
-                    $fuente->asXML()
+                    $fuente->asXML(), $obs
                 );
             } else {
                 $fecha = conv_fecha($fuente->fecha_fuente, $obs);

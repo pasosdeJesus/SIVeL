@@ -46,7 +46,7 @@ function hastapunto($s)
     if ($p !== false) {
         $r = substr($s, 0, $p);
     }
-    return $p;
+    return $r;
 }
 
 /**

@@ -2614,8 +2614,6 @@ function enlaza_relato(&$do, $campo, $elemento, &$ad, $valor = null)
         $rel = $GLOBALS['_DB_DATAOBJECT']['LINKS'][$dbnombre][$do->__table][$campo];
         $pd = strpos($rel, ':');
         $ndo = substr($rel, 0, $pd);
-        $ndoc = "DataObject_" . ucfirst($ndo);
-        //echo "OJO ndoc=$ndoc";
         $vsi = '';
         $csinf = $do->camposSinInfo();
         //print_r($csinf);

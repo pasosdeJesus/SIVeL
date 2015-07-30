@@ -335,7 +335,7 @@ class PagSegJudicial extends PagBaseMultiple
         assert($dproceso->id != null);
         $db =& $dproceso->getDatabaseConnection();
         $q = "DELETE FROM accion WHERE id_proceso='{$dproceso->id}'";
-        $result = hace_consulta($db, $q);
+        hace_consulta($db, $q);
         if ($elimProc) {
             $q = "DELETE FROM proceso WHERE id='{$dproceso->id}'";
             $result = hace_consulta($db, $q);
@@ -435,7 +435,6 @@ class PagSegJudicial extends PagBaseMultiple
             $q = "UPDATE accion SET respondido='".$nacc->respondido."' " .
                 " WHERE id='".$nacc->id."'";
             hace_consulta($db, $q);
-            $procAc = false;
         }
 
         caso_usuario($_SESSION['basicos_id']);

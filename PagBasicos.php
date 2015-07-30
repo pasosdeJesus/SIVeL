@@ -593,7 +593,7 @@ class PagBasicos extends PagBaseSimple
         }
         $db = $r[0];
         $dcaso = $r[1];
-        $idcaso = $r[2];
+        #$idcaso = $r[2];
         $dcaso_frontera =& objeto_tabla('caso_frontera');
         $dcaso_region =& objeto_tabla('caso_region');
 
@@ -809,7 +809,7 @@ class PagBasicos extends PagBaseSimple
             $scr =& $this->getElement('id_region');
             if (!PEAR::isError($scr)) {
                 $valscr = array();
-                $t = $this->bcaso_region->_do->find();
+                $this->bcaso_region->_do->find();
                 while ($this->bcaso_region->_do->fetch()) {
                     $valscr[] = $this->bcaso_region->_do->id_region;
                 }
@@ -837,11 +837,11 @@ class PagBasicos extends PagBaseSimple
     {
         assert($db != null);
         assert(isset($idcaso));
-        $result = hace_consulta(
+        hace_consulta(
             $db, "DELETE FROM caso_frontera " .
             "WHERE id_caso='" . $idcaso . "'"
         );
-        $result = hace_consulta(
+        hace_consulta(
             $db, "DELETE FROM caso_region " .
             "WHERE id_caso='" . $idcaso . "'"
         );

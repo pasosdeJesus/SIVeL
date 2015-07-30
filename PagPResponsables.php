@@ -310,7 +310,7 @@ class PagPResponsables extends PagBaseMultiple
                 $d->find();
                 $d->fetch();
                 foreach ($d->fb_fieldsToRender as $c) {
-                    $cq = $this->getElement($c);
+                    #$cq = $this->getElement($c);
                     $v[$c] = $d->$c;
                     //$cq->setValue($d->$c);
                 }
@@ -439,6 +439,9 @@ class PagPResponsables extends PagBaseMultiple
 
 
         $db = $this->iniVar();
+        if ($this->bcaso_presponsable === null) {
+            return false;
+        }
         $this->bcaso_presponsable->forceQueryType(
             DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
         );
@@ -462,7 +465,7 @@ class PagPResponsables extends PagBaseMultiple
                 " WHERE id_caso='" . (int)$idcaso . "' " .
                 " AND id='" . (int)$id . "' " .
                 " AND id_presponsable='" . (int)$idpres . "'";
-            $result = hace_consulta($db, $q);
+            hace_consulta($db, $q);
             $this->bcaso_presponsable->_do->delete();
             $this->bcaso_presponsable->_do->id = $id;
             $this->bcaso_presponsable->_do->id_caso = $idcaso;

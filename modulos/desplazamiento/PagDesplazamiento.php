@@ -115,7 +115,6 @@ class PagDesplazamiento extends PagBaseMultiple
         }
 
         $idf = array();
-        $indid = -1;
         $tot = PagDesplazamiento::extrae_desplazamientos($idcaso, $db, $idf);
 
         $_SESSION[$this->pref.'_total'] = $tot;
@@ -268,7 +267,7 @@ class PagDesplazamiento extends PagBaseMultiple
         $q = "DELETE FROM desplazamiento WHERE fechaexpulsion=' "
             . "{$ddesplazamiento->fechaexpulsion}' "
             . " AND id_caso={$_SESSION['basicos_id']}";
-        $result = hace_consulta($db, $q);
+        hace_consulta($db, $q);
     }
 
     /**

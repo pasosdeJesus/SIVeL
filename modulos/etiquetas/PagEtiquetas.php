@@ -150,7 +150,7 @@ class PagEtiquetas extends PagBaseSimple
     {
         assert($db != null);
         assert(isset($idcaso));
-        $result = hace_consulta(
+        hace_consulta(
             $db, "DELETE FROM caso_etiqueta WHERE " .
             "id_caso='$idcaso'"
         );
@@ -211,7 +211,6 @@ class PagEtiquetas extends PagBaseSimple
             //print_r($this->bcaso_etiqueta->_do);
             $r = $this->bcaso_etiqueta->_do->insert();
             sin_error_pear($r, _('No pudo insertar en base.'));
-            $aget = false;
         }
 
         // Actualizamos observaciones
@@ -626,7 +625,6 @@ class PagEtiquetas extends PagBaseSimple
      */
     static function aRelato(&$db, $dcaso, &$r)
     {
-        $lsr = array();
         $do = objeto_tabla('caso_etiqueta');
         $do->id_caso = $dcaso->id;
         $do->orderBy('id_etiqueta');

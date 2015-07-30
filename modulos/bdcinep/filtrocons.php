@@ -137,8 +137,6 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         $pFini = var_post_escapa('fini');
         $pFfin = var_post_escapa('ffin');
 
-        $cons = 'cons';
-        $cons2="cons2";
         $where = "";
 
         $tfini = $GLOBALS['consulta_web_fecha_min'];
@@ -346,9 +344,10 @@ class PagCifrasCons extends HTML_QuickForm_Page
         encabezado_envia();
         $this->_formBuilt = true;
         $x =&  objeto_tabla('departamento');
-        $db = $x->getDatabaseConnection();
 
-        $e =& $this->addElement('header', null, 'Cifras del Consolidado General de Víctimas');
+        $e =& $this->addElement('header', null, 
+            'Cifras del Consolidado General de Víctimas'
+        );
         $e =& $this->addElement('hidden', 'num', (int)$_REQUEST['num']);
 
         //    $e =& $this->addElement('static', 'fini', 'Victimas ');

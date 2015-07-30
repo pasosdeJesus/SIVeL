@@ -100,8 +100,6 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
 
         verifica_sin_CSRF($page->_submitValues);
 
-        $cons = 'cons';
-        $cons2="cons2";
         $where = "";
 
         consulta_and(
@@ -126,10 +124,7 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
             );
         }
 
-        $wgeo = '';
         $sgeo = '';
-        $tgeo = '';
-        $ggeo = '';
         $ogeo = '';
         $cab = array('Organización');
         if ($pDepartamento != '') {
@@ -311,7 +306,6 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
      */
     function idSupracategoria()
     {
-        $nclase = null;
         if (isset($this->_submitValues['id_supracategoria'])) {
             return  (int)$this->_submitValues['id_supracategoria'] ;
         }
@@ -330,7 +324,6 @@ class PagEstadisticasComb extends HTML_QuickForm_Page
         encabezado_envia();
         $this->_formBuilt = true;
         $x =&  objeto_tabla('departamento');
-        $db = $x->getDatabaseConnection();
 
         $e =& $this->addElement(
             'header', null,

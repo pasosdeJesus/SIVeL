@@ -245,7 +245,6 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
                 echo_esc("Falta estadisticasIndCreaConsulta en $n, $c");
             }
         }
-        $ae = array();
         $t = array();
         if (isset($GLOBALS['gancho_ei_creaconsulta'])) {
             foreach ($GLOBALS['gancho_ei_creaconsulta'] as $k => $f) {
@@ -490,7 +489,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
 
         $e =& $this->addElement(
             'header', null,
-            _('Conteos Victimizacione Individuales')
+            _('Conteos Victimizaciones Individuales')
         );
         $slang = 'es';
         if (isset($_SESSION['LANG'])) {

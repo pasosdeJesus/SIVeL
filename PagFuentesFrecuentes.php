@@ -427,7 +427,6 @@ class PagFuentesFrecuentes extends PagBaseMultiple
             $db, "SELECT id FROM ffrecuente WHERE " .
             "nombre ILIKE '$nomf'"
         );
-        $rows = array();
         $nr = $rp->numRows();
         $row = array();
         if ($rp->fetchInto($row)) {
@@ -471,7 +470,6 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     static function importaRelato(&$db, $r, $idcaso, &$obs)
     {
         foreach ($r->fuente as $fuente) {
-            $idffrecuente = null;
             $nomf = utf8_decode($fuente->nombre_fuente);
             if (empty($fuente->fecha_fuente)) {
                 rep_obs(

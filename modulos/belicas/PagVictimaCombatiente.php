@@ -258,7 +258,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             $v['id_antecedente'] = $valsca;
         } else {
             foreach ($this->bcombatiente->_do->fb_fieldsToRender as $c) {
-                $cq = $this->getElement($c);
+                //$cq = $this->getElement($c);
                 if (isset($this->bcombatiente->_do->$c)) {
                     $v[$c] = $this->bcombatiente->_do->$c;
                     //$cq->setValue($this->bcombatiente->_do->$c);
@@ -301,7 +301,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
         if ($dcombatiente->id != null) {
             $db =& $dcombatiente->getDatabaseConnection();
             $idcombatiente = $dcombatiente->id;
-            $result = hace_consulta(
+            hace_consulta(
                 $db, "DELETE FROM antecedente_combatiente " .
                 "WHERE id_combatiente='$idcombatiente'"
             );
@@ -444,7 +444,6 @@ class PagVictimaCombatiente extends PagBaseMultiple
             $db = $this->iniVar(array((int)$valores['id']));
         }
 
-        $idcaso = $this->bcombatiente->_do->id_caso;
         $nuevo = $this->bcombatiente->_do->id == null;
         $ret = $this->process(
             array(&$this->bcombatiente, 'processForm'),

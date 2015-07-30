@@ -545,7 +545,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 //    . $acto->agresion_particular . "<br>";
                 if (!empty($acto->agresion_particular)) {
                     $idp = (string)$acto->id_presunto_grupo_responsable;
-                    $pr = null;
                     if (isset($id_presp[$idp])) {
                         // Ya registrado presunto responsable
                         $pr = $id_presp[$idp];

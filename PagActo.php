@@ -467,10 +467,10 @@ class PagActo extends PagBaseSimple
 
         $q = "DELETE FROM acto " .
             " WHERE id_caso='$idcaso'";
-        $result = hace_consulta($db, $q, false);
+        hace_consulta($db, $q, false);
         $q = "DELETE FROM actocolectivo " .
             " WHERE id_caso='$idcaso'";
-        $result = hace_consulta($db, $q, false);
+        hace_consulta($db, $q, false);
     }
 
     /**
@@ -505,7 +505,7 @@ class PagActo extends PagBaseSimple
             return true;
         }
 
-        $db = $this->iniVar();
+        $this->iniVar();
         $idcaso = $_SESSION['basicos_id'];
         $ret = true;
         $da = objeto_tabla('acto');

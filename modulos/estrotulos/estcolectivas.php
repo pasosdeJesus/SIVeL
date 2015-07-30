@@ -227,9 +227,6 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         $pQ1='id_grupoper, ';
         $pQ1sel = 'victimacolectiva.id_grupoper, ';
         $tablas = $tablaFil . $tablaSegun . "$tQue actocolectivo, caso, categoria ";
-        $campos = array('caso_id' => 'Cód.');
-
-
         if ($pTipo != '') {
             consulta_and($db, $where, "categoria.id_tviolencia", $pTipo);
         }
@@ -362,7 +359,6 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             echo "<th>Total</th>";
             echo "</tr>\n";
 
-            $row = array();
             foreach ($tfil as $f => $t1) {
                 echo "<tr>";
                 $sfil = 0;
@@ -483,7 +479,6 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
      */
     function idSupracategoria()
     {
-        $nclase = null;
         if (isset($this->_submitValues['id_supracategoria'])) {
             return  (int)$this->_submitValues['id_supracategoria'] ;
         }
@@ -565,8 +560,6 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
             );
             $supra->loadArray($options);
         }
-        $nsupra = $this->idSupracategoria();
-
         $sel =& $this->addElement(
             'select',
             'segun', 'Según'
