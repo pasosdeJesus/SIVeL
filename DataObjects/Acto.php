@@ -78,7 +78,6 @@ class DataObjects_Acto extends DB_DataObject_SIVeL
             '<th>' . _('P. Responsable') . '</th><th>' . _('Categoria') .
             '</th>' . '<th>' . _('Víctima') . '</th><th></th></thead><tbody>';
         $p = clone $formbuilder->_do;
-        $db = $p->getDatabaseConnection();
         $p->id_presponsable = null;
         $p->id_categoria = null;
         $p->id_persona = null;

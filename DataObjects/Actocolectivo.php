@@ -80,11 +80,10 @@ class DataObjects_Actocolectivo extends DB_DataObject_SIVeL
             '</th><th>' . _('Víctima Colectiva') .
             '</th><th></th></thead><tbody>';
         $p = clone $formbuilder->_do;
-        $db = $p->getDatabaseConnection();
         $p->id_presponsable = null;
         $p->id_categoria = null;
         $p->id_grupoper= null;
-        $n = $p->find();
+        $p->find();
         while ($p->id_caso != null && $p->fetch()) {
             $pp =& $p->getLink('id_presponsable');
             $ca =& $p->getLink('id_categoria');

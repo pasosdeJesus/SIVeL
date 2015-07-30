@@ -448,7 +448,7 @@ function agregar_tabla($nom, &$f, $idcaso, $nuevo, &$da)
 
     $ba->createSubmit = 0;
     $ba->useForm($f);
-    $fa = $ba->getForm();
+    $ba->getForm();
 
     return $ba;
 }
@@ -495,9 +495,10 @@ function error_valida($msg, $valores, $iderr = '', $enhtml = false)
     }
     if (isset($valores) && is_array($valores) && count($valores) > 0) {
         $_SESSION['recuperaErrorValida'] = $valores;
-    }
+   }
+    $mcod = $enhtml ? $msg : json_encode($msg);
     echo "<script language=\"JavaScript\">";
-    echo "alert('" . json_encode($msg) . "');";
+    echo "alert('" . $mcod . "');";
     echo "</script>";
     if ($iderr != '') {
         $_SESSION[$iderr] = $msg;
@@ -619,7 +620,7 @@ function unset_var_session()
     unset($_SESSION['camMunicipio']);
 
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-        list($pag, $cl) = $tab;
+        list(, $cl) = $tab;
         $vars = get_class_vars($cl);
         if (isset($vars['pref'])) {
             unset($_SESSION[$vars['pref'] . '_pag']);
@@ -1482,7 +1483,6 @@ function inserta_sql(&$db, $d, $delta = null)
     foreach ($ca as $l => $v) { // $v  & DB_DATAOBJECT_BOOL
         // $v & DB_DATAOBJECT_STR
         $ncol .= $sep . $l;
-        $val = "";
         if (strtolower($d->$l)==='null' || !isset($d->$l)) {
             $val = 'null';
         } else if (isset($delta) && isset($delta[$l])) {
@@ -1580,7 +1580,7 @@ function var_escapa($v, &$db = null, $maxlong = 1024)
             $nv = substr($v, 0, $maxlong);
 
             /** Evita falla %00 en cadenas que vienen de HTTP */
-            $p1=str_replace("\0", ' ', $v);
+            $p1=str_replace("\0", ' ', $nv);
 
             /** Evita XSS */
             $p2=htmlspecialchars($p1);
@@ -1731,7 +1731,7 @@ function rango_de_edad($er)
     $do->find();
     $res = DataObjects_Rangoedad::idSinInfo();
     while ($do->fetch()) {
-        if ($do->limiteinferior <= $er && $er <= $do->limitesuperior) {
+        if ((int)$do->limiteinferior <= $e && $e <= (int)$do->limitesuperior) {
             $res = $do->id;
         }
     }
@@ -2098,12 +2098,11 @@ function prepara_consulta_gen(&$w, &$t, $idcaso, $rel, $bas, $crelbas, $enbas,
     );
     $duc =& objeto_tabla($rel);
     sin_error_pear($duc);
-    $db = $duc->getDatabaseConnection();
     $duc->id_caso = (int)($idcaso);
     if (@$duc->find() == 0) {
         return;
     }
-    $csininf = @$duc->camposSinInfo();
+    #$csininf = @$duc->camposSinInfo();
     $w3="";
     while ($duc->fetch()) {
         $w2 = prepara_consulta_con_tabla(
@@ -2344,7 +2343,7 @@ function valida_caso($idcaso, &$buf_html, &$buf_ort)
                 unset($row[0]);
                 $re = implode(", ", $row);
                 $prob = $db->getOne($q);
-                $buf_html[] = _("Caso") . " " . $desc . ". " . $re;
+                $buf_html[] = _("Caso") . " " . $desc . ". " . $re . " " . $prob;
                 $valr = false;
             }
         }

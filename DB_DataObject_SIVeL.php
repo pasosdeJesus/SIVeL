@@ -289,7 +289,6 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
      */
     function mezclaAutom($otro, &$obs)
     {
-        $alfinal = array();
         $t = $this->table();
         foreach ($this->fb_fieldLabels as $v => $et) {
             if ($otro->$v != $this->$v) {

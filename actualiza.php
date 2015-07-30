@@ -1628,8 +1628,8 @@ if (!aplicado($idac)) {
 
 $idac = '1.1b2-lu';
 if (!aplicado($idac)) {
-    cambia_tipocol($db, 'ubicacion', 'sitio', 'VARCHAR(260)', false);
-    cambia_tipocol($db, 'ubicacion', 'lugar', 'VARCHAR(260)', false);
+    cambia_tipocol($db, 'ubicacion', 'sitio', 'VARCHAR(260)');
+    cambia_tipocol($db, 'ubicacion', 'lugar', 'VARCHAR(260)');
 
     aplicaact($act, $idac, 'Tamaño de ubicación');
 }

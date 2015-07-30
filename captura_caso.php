@@ -135,7 +135,7 @@ class PresentaFormulario extends HTML_QuickForm_Action_Display
         $enc= str_replace('{%style%}', $css->toString(), $enc);
         $js = "";
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             //echo "OJO n=$n, c=$c, o=$o<br>\n";
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);

@@ -133,14 +133,12 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         );
         $intensivo = isset($_POST['intensivo']) && $_POST['intensivo'] == '1';
         $aper = array();
-        $maxidper = 0;
         $agr = array();
         if ($intensivo) {
-            list($aper, $maxidper) = extrae_per($db);
+            list($aper, ) = extrae_per($db);
             $agr = extrae_grupos($db);
         }
 
-        $cont = "";
         if (substr($pArchivo, strlen($pArchivo) - 3, 3) == '.gz') {
             if (!function_exists('readgzfile')) {
                 die(_("Falta soporte para Zlib en su instalación de PHP.") . " "
@@ -160,12 +158,12 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         $relatos = simplexml_load_string($cont);
         if (!$relatos) {
             $e = libxml_get_errors();
-            die(_("No pudo cargarse") . " '" . $pArchivo . "'");
+            die(_("No pudo cargarse") . " '" . $pArchivo . "': " . $e);
         }
 
         $yaesta = array(); // Indica cuales pestañas ya importaron
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             $yaesta[$c] = false;
         }
 
@@ -173,7 +171,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         foreach ($relatos->relato as $r) {
             $obs = "";
             $id_presp = array();  // Presuntos responsables identificados
-            $id_pers = array();
             $id_vcol = array();
             $datgrupo = array();
             $dcaso = objeto_tabla('caso');
@@ -256,7 +253,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 . "<relatos>\n"
                 . $r->asXml()
                 . "\n</relatos>\n" ;
-            $nf = 0;
             $ax = $idcaso . "_" . $anexof->id . "_relatoimportado.xrlt";
             $cax = $GLOBALS['dir_anexos'] . "/" . $ax;
             file_put_contents($cax, $rx);
@@ -267,7 +263,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 $db, $r, $idcaso,
                 $obs
             );
-            $idffrecuente = null;
             $nomf = $r->organizacion_responsable;
             $fecha = @date('Y-m-d');
             $orgfuente = PagFuentesFrecuentes::busca_inserta(
@@ -308,7 +303,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
 
 
             // Grupo
-            $pr = -1;
             foreach ($r->grupo as $grupo) {
                 if (!empty($grupo->nombre_grupo)) {
                     $idg = (string)$grupo->id_grupo;
@@ -647,7 +641,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             }
 
             foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                list($n, $c, $o) = $tab;
+                list($n, $c, ) = $tab;
                 if (!$yaesta[$c]) {
                     if (($d = strrpos($c, "/"))>0) {
                         $c = substr($c, $d+1);

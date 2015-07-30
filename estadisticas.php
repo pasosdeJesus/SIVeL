@@ -222,8 +222,6 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $pQ1sel = 'victima.id_persona, ';
 
         $tablas = $tablaSegun . "$tQue caso, categoria";
-        $campos = array('caso_id' => _('Cód.'));
-
 
         if ($pTipo != '') {
             consulta_and($db, $where, "categoria.id_tviolencia", $pTipo);
@@ -234,7 +232,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         }
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -339,7 +337,6 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $nc3 = explode(",", $campos3);
         $gr3 = "";
         $sep = "";
-        $i = 0;
         $maxi = count($nc3);
         for ($i = 1; $i < $maxi; $i++) {
             $gr3 .= $sep . "$i";
@@ -472,7 +469,6 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
      */
     function idSupracategoria()
     {
-        $nclase = null;
         if (isset($this->_submitValues['id_supracategoria'])) {
             return  (int)$this->_submitValues['id_supracategoria'] ;
         }
@@ -555,8 +551,6 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
             );
             $supra->loadArray($options);
         }
-        $nsupra = $this->idSupracategoria();
-
         $sel =& $this->addElement(
             'select', 'segun', _('Según')
         );
@@ -580,7 +574,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
         );
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }

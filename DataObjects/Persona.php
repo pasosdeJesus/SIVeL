@@ -263,7 +263,6 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
                 $this->$c = $v;
             }
         }
-        $f = array();
         $aa = max(date('Y'), 2007);
         $anios = array();
         for ($i = 1900; $i <= $aa; $i++) {

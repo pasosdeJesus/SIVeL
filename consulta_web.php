@@ -45,7 +45,7 @@ require_once 'PagTipoViolencia.php';
 require_once 'ResConsulta.php';
 
 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-    list($n, $c, $o) = $tab;
+    list($n, $c, ) = $tab;
     if (($d = strrpos($c, "/"))>0) {
         $c = substr($c, $d+1);
     }
@@ -144,13 +144,13 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 . " @@ plainto_tsquery('spanish', '$consDesc')";
         }
 
-        if (isset($pFini['Y']) && $pFini['Y'] != '') {
+        if (is_array($pFini) && isset($pFini['Y']) && $pFini['Y'] != '') {
             consulta_and(
                 $db, $where, "caso.fecha",
                 arr_a_fecha($pFini, true), ">="
             );
         }
-        if (isset($pFfin['Y']) && $pFfin['Y'] != '') {
+        if (is_array($pFfin) && isset($pFfin['Y']) && $pFfin['Y'] != '') {
             consulta_and(
                 $db, $where, "caso.fecha",
                 arr_a_fecha($pFfin, false), "<="
@@ -241,7 +241,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
 
         $oconv = array(); // Campos resultado además de conv
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -334,14 +334,15 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             agrega_tabla($tablas, 'caso_presponsable');
         }
         if (in_array(42, $page->opciones)
-            && ($pUsuario != '' || (isset($pFiini['Y']) && $pFiini['Y'] != '')
-            || (isset($pFifin['Y']) && $pFifin['Y'] != ''))
+            && ($pUsuario != '' || (is_array($pFiini) && 
+            isset($pFiini['Y']) && $pFiini['Y'] != '')
+            || (is_array($pFifin) && isset($pFifin['Y']) && $pFifin['Y'] != ''))
         ) {
             agrega_tabla($tablas, 'caso_usuario');
             consulta_and_sinap($where, "caso_usuario.id_caso", "caso.id");
         }
         if (in_array(42, $page->opciones)
-            && isset($pFiini['Y']) && $pFiini['Y'] != ''
+            && is_array($pFiini) && isset($pFiini['Y']) && $pFiini['Y'] != ''
         ) {
             consulta_and(
                 $db, $where, "caso_usuario.fechainicio",
@@ -349,7 +350,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             );
         }
         if (in_array(42, $page->opciones)
-            && isset($pFifin['Y']) && $pFifin['Y'] != ''
+            && is_array($pFfin) && isset($pFifin['Y']) && $pFifin['Y'] != ''
         ) {
             consulta_and(
                 $db, $where, "caso_usuario.fechainicio",
@@ -450,7 +451,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             $campos['m_fuentes'] = 'Fuentes';
         }
 
-        if ($pMostrar != 'csv'
+        if (!is_array($pMostrar) && $pMostrar != 'csv'
             && $pMostrar != 'revista'
             && $pMostrar != 'tabla'
             && $pMostrar != 'relato'
@@ -711,7 +712,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -851,7 +852,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         }
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -962,7 +963,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $opch[] =& $sel;
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }

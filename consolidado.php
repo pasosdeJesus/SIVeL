@@ -166,7 +166,6 @@ class AccionConsolidado extends HTML_QuickForm_Action
         $pIdMunicipio = (int)var_post_escapa('id_municipio', $db);
         $pIdDepartamento = (int)var_post_escapa('id_departamento', $db);
 
-        $campos = array('caso_id' => 'Cód.');
         $tablas = "persona, victima, caso, acto ";
         $where = "";
 
@@ -183,7 +182,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         );
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($ntab, $ctab, $otab) = $tab;
+            list($ntab, $ctab, ) = $tab;
             if (($possl = strrpos($ctab, "/"))>0) {
                 $ctab = substr($ctab, $possl+1);
             }
@@ -282,13 +281,13 @@ class AccionConsolidado extends HTML_QuickForm_Action
             }
         }
 
-        if ($pFini['Y'] != '') {
+        if (is_array($pFini) && $pFini['Y'] != '') {
             consulta_and(
                 $db, $where, "caso.fecha",
                 arr_a_fecha($pFini, true), ">="
             );
         }
-        if ($pFfin['Y'] != '') {
+        if (is_array($pFfin) && $pFfin['Y'] != '') {
             consulta_and(
                 $db, $where, "caso.fecha",
                 arr_a_fecha($pFfin, false), "<="

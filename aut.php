@@ -146,7 +146,6 @@ function idioma($l = "es_CO")
     putenv("LC_MESSAGESL=$l");
     setlocale(LC_ALL, $l);
     setlocale(LC_CTYPE, $l);
-    $locales_dir = dirname(__FILE__).'/locale';
     bindtextdomain($td, './locale');
     bind_textdomain_codeset($td, 'UTF-8');
     textdomain($td);
