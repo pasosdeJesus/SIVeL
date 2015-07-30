@@ -1300,8 +1300,8 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
             foreach ($llave_ntabla as $il => $vl) {
                 consulta_and_sinap(
                     $w, var_escapa($ntabla, $db). "." .
-                    var_escapa($vl),
-                    var_escapa($llave_prin[$il]),
+                    var_escapa_cadena($vl),
+                    var_escapa_cadena($llave_prin[$il]),
                     "=", $gcon
                 );
             }
@@ -1554,11 +1554,50 @@ function caso_usuario($idcaso)
     }
 }
 
+/**
+ * Escapa el valor de una cadena
+ * Si $v es null retorna ''
+ * Agradecimientos por correciones a garcez@linuxmail.org
+ *
+ * @param string  $v       Nombre de variable POST
+ * @param handle  &$db     Conexión a BD.
+ * @param integer $maxlong Longitud máxima
+ *
+ * @return string|array Cadena escapada
+ */
+function var_escapa_cadena($v, &$db = null, $maxlong = 1024)
+{
+    if ($v == null) {
+        return '';
+    }
+
+    /** Evita buffer overflows */
+    $nv = substr($v, 0, $maxlong);
+
+    /** Evita falla %00 en cadenas que vienen de HTTP */
+    $p1=str_replace("\0", ' ', $nv);
+
+    /** Evita XSS */
+    $p2=htmlspecialchars($p1);
+
+    /** Evita inyección de código SQL */
+    if (isset($db) && $db != null && !PEAR::isError($db)) {
+        $p3 = $db->escapeSimple($p2);
+    } else {
+        // Tomado de librería de Pear DB/pgsql.php
+        $p3 = (!get_magic_quotes_gpc())?str_replace(
+            "'", "''",
+            str_replace('\\', '\\\\', $p2)
+        ) : $p2;
+        //$p3=(!get_magic_quotes_gpc())?addslashes($p2):$p2;
+    }
+
+    return $p3;
+}
 
 /**
  * Escapa el valor de una variable o de valores en un arreglo.
  * Si $v es null retorna ''
- * Agradecimientos por correciones a garcez@linuxmail.org
  *
  * @param string|array  $v       Nombre de variable POST
  * @param handle        &$db     Conexión a BD.
@@ -1576,28 +1615,7 @@ function var_escapa($v, &$db = null, $maxlong = 1024)
             }
             return $r;
         } else if (is_string($v)) {
-            /** Evita buffer overflows */
-            $nv = substr($v, 0, $maxlong);
-
-            /** Evita falla %00 en cadenas que vienen de HTTP */
-            $p1=str_replace("\0", ' ', $nv);
-
-            /** Evita XSS */
-            $p2=htmlspecialchars($p1);
-
-            /** Evita inyección de código SQL */
-            if (isset($db) && $db != null && !PEAR::isError($db)) {
-                $p3 = $db->escapeSimple($p2);
-            } else {
-                // Tomado de librería de Pear DB/pgsql.php
-                $p3 = (!get_magic_quotes_gpc())?str_replace(
-                    "'", "''",
-                    str_replace('\\', '\\\\', $p2)
-                ):$p2;
-                //$p3=(!get_magic_quotes_gpc())?addslashes($p2):$p2;
-            }
-
-            return $p3;
+            return var_escapa_cadena($v);
         } else {
             return $v;
         }

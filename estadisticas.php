@@ -99,13 +99,13 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             $GLOBALS['consulta_web_fecha_max'], "<="
         );
 
-        if ($pFini['Y'] != '') {
+        if (is_array($pFini) && $pFini['Y'] != '') {
             consulta_and(
                 $db, $where, "caso.fecha",
                 arr_a_fecha($pFini, true), ">="
             );
         }
-        if ($pFfin['Y'] != '') {
+        if (is_array($pFfin) && $pFfin['Y'] != '') {
             consulta_and(
                 $db, $where, "caso.fecha",
                 arr_a_fecha($pFfin, false), "<="
@@ -223,7 +223,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
 
         $tablas = $tablaSegun . "$tQue caso, categoria";
 
-        if ($pTipo != '') {
+        if (is_string($pTipo) && $pTipo != '') {
             consulta_and($db, $where, "categoria.id_tviolencia", $pTipo);
         }
 

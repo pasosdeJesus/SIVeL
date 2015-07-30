@@ -39,7 +39,7 @@ if (isset($_GET['tabla'])) {
     $tabla = var_escapa($_GET['tabla']);
     act_globales();
     $u = html_menu_toma_url($GLOBALS['menu_tablas_basicas']);
-    if (!in_array($tabla, $u)) {
+    if (!is_string($tabla) && !in_array($tabla, $u)) {
         die(_("La tabla '") . $tabla . _("' no es básica"));
     }
     $do = objeto_tabla($tabla);

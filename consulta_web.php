@@ -350,7 +350,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             );
         }
         if (in_array(42, $page->opciones)
-            && is_array($pFfin) && isset($pFifin['Y']) && $pFifin['Y'] != ''
+            && is_array($pFifin) && isset($pFifin['Y']) && $pFifin['Y'] != ''
         ) {
             consulta_and(
                 $db, $where, "caso_usuario.fechainicio",
@@ -451,15 +451,14 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             $campos['m_fuentes'] = 'Fuentes';
         }
 
-        if (!is_array($pMostrar) && $pMostrar != 'csv'
+        if (is_array($pMostrar) || ($pMostrar != 'csv'
             && $pMostrar != 'revista'
             && $pMostrar != 'tabla'
             && $pMostrar != 'relato'
-            && !in_array(42, $page->opciones)
+            && !in_array(42, $page->opciones))
         ) {
             die('No es posible');
         }
-
 
         $ar =& $result;
         $r = new ResConsulta(
