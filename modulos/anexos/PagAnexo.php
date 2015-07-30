@@ -161,7 +161,6 @@ class PagAnexo extends PagBaseMultiple
     {
         list($db, $dcaso, $idcaso) = parent::iniVar(array(true, true));
 
-        $row = array();
         $ida = array();
         $tot = 0;
         $d =& objeto_tabla('anexo');
@@ -310,7 +309,6 @@ class PagAnexo extends PagBaseMultiple
 
 
         $db = $this->iniVar();
-        $idcaso = $this->banexo->_do->id_caso;
         $this->banexo->_do->fecha = call_user_func(
             $this->banexo->dateToDatabaseCallback,
             var_escapa($valores['fecha'], $db)

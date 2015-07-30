@@ -168,7 +168,7 @@ class PagVictimaIndividual extends PagBaseMultiple
     {
         $id_persona = null;
         if (isset($apar) && count($apar) == 1) {
-            $id_persoea = $apar[0];
+            $id_persona = $apar[0];
         }
         $dvictima=& objeto_tabla('victima');
         $dpersona=& objeto_tabla('persona');
@@ -398,11 +398,6 @@ class PagVictimaIndividual extends PagBaseMultiple
                 $dep, $mun, $cla
             );
 
-            $fmes = $this->bpersona->_do->mesnac;
-            $fdia = $this->bpersona->_do->dianac;
-            $fanio = $this->bpersona->_do->anionac;
-            $fsexo = $this->bpersona->_do->sexo;
-
             foreach ($this->bvictima->_do->fb_fieldsToRender as $c) {
                 $cq = $this->getElement($c);
                 if (!PEAR::isError($cq) && isset($this->bvictima->_do->$c)) {
@@ -444,7 +439,7 @@ class PagVictimaIndividual extends PagBaseMultiple
             $dv->id_caso= $idcaso;
             $dv->find(1);
 
-            $csn = DataObjects_Victima::camposSinInfo();
+            #$csn = DataObjects_Victima::camposSinInfo();
             foreach ($dv->fb_fieldsToRender as $c) {
                 $cq = $this->getElement($c);
                 if (isset($dv->$c)) {
@@ -515,7 +510,7 @@ class PagVictimaIndividual extends PagBaseMultiple
 
         $q = "DELETE FROM antecedente_victima WHERE id_persona='$idpersona' " .
             " AND id_caso='$idcaso'";
-        $result = hace_consulta($db, $q);
+        hace_consulta($db, $q);
         if ($elimVic) {
             $q = "DELETE FROM acto WHERE id_persona='$idpersona' " .
                 " AND id_caso='$idcaso'";
@@ -753,7 +748,6 @@ class PagVictimaIndividual extends PagBaseMultiple
                 $npr->id_trelacion = $tr->inverso;
                 $npr->insert();
             }
-            $procFam = false;
         }
 
         if (isset($this->bpersona->_do->id)) {

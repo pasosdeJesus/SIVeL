@@ -259,8 +259,8 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
 
 
         // Reglas de integridad referencial
-
-        $db = $this->iniVar();
+        $db = $this->iniVar();         
+        assert($db != null);
 
         // Preprocesamiento
 

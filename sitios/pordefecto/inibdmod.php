@@ -91,10 +91,10 @@ if (!function_exists("esta_nueva_ficha")) {
     {
         //echo "OJO esta_nueva_ficha($id)<br>";
         foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
-            $puesto = $a[0];
+            #$puesto = $a[0];
             $nom = $a[1];
-            $arc = $a[2];
-            $puestoelim = $a[3];
+            #$arc = $a[2];
+            #$puestoelim = $a[3];
             if ($nom == $id) {
                 return true;
             }

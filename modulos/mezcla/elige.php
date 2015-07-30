@@ -63,7 +63,6 @@ class AccionComparaDos extends HTML_QuickForm_Action
      */
     static function busca() 
     {
-        $pIds = "";
         $do = objeto_tabla("caso");
         $db =& $do->getDatabaseConnection();
         $figuales = isset($_POST['figuales']) && $_POST['figuales'] == '1';
@@ -101,7 +100,6 @@ class AccionComparaDos extends HTML_QuickForm_Action
         $mezcladoen = array();
         $row = array();
         while ($r->fetchInto($row)) {
-            $nr = 0;
             $id1 = $row[0];
             $id2 = $row[1];
             if (isset($mezcladoen[$id2])) {
@@ -267,8 +265,6 @@ class AccionVictimasrep extends HTML_QuickForm_Action
         $pIdMunicipio = (int)var_post_escapa('id_municipio', $db);
         $pIdDepartamento = (int)var_post_escapa('id_departamento', $db);
 
-        $campos = array('caso_id' => 'Cód.');
-        $tablas = "victima, caso";
         $where = "";
 
         consulta_and_sinap($where, "victima.id_caso", "caso.id");
@@ -327,7 +323,6 @@ class AccionVictimasrep extends HTML_QuickForm_Action
         $result = hace_consulta($db, $q);
 
         $datv = array();
-        $dn = array();
         $tv = 0;
         $row = array();
         while ($result->fetchInto($row)) {
@@ -336,7 +331,6 @@ class AccionVictimasrep extends HTML_QuickForm_Action
         }
 
         echo "<p>Total de casos con v&iacute;ctima: " . (int)$tv . "</p>";
-        $suma = array();
         echo "<form  action='opcion.php?num=1004' method='post' target='_blank'>";
         echo "<input name='Comparar' type='submit' class='form' id='Comparar' "
             . " value='Comparar'>";
@@ -350,7 +344,6 @@ class AccionVictimasrep extends HTML_QuickForm_Action
             $idvic = $datv[$v][1];
             $nom = $datv[$v][2];
             $fecha = $datv[$v][3];
-            $ubi = "";
             $u =&  objeto_tabla('ubicacion');
             $u->id_caso = $idcaso;
             if ($u->find() == 0) {

@@ -228,7 +228,6 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
             $dacto->find();
             while ($dacto->fetch()) {
                 $dcategoria = $dacto->getLink('id_categoria');
-                $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
                 $dsupracategoria->id_tviolencia
@@ -253,7 +252,6 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
             $dactocolectivo->find();
             while ($dactocolectivo->fetch()) {
                 $dcategoria = $dactocolectivo->getLink('id_categoria');
-                $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
                 $dsupracategoria->id_tviolencia
@@ -278,7 +276,6 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
             $catpresp->find();
             while ($catpresp->fetch()) {
                 $dcategoria = $catpresp->getLink('id_categoria');
-                $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
                 $dsupracategoria->id_tviolencia

@@ -186,15 +186,14 @@ class DataObjects_Accion extends DB_DataObject_SIVeL
             . '</th><th>' . _('Resp')
             . '</th></tr>';
         $p = objeto_tabla('accion');
-        $db = $p->getDatabaseConnection();
         $p->id_proceso = $formbuilder->_do->id_proceso;
         $p->orderby('fecha desc');
         $p->find();
         while ($p->id_proceso != null && $p->fetch()) {
             $dtipo = $p->getLink('id_taccion');
             $ddespacho = $p->getLink('id_despacho');
-            $n = "fobs_{$p->id_proceso}_{$p->id_taccion}_" .
-                "{$p->id_despacho}_{$p->fecha}";
+            #$n = "fobs_{$p->id_proceso}_{$p->id_taccion}_" .
+            #    "{$p->id_despacho}_{$p->fecha}";
             $t .= "<tr><td>"
                 . htmlentities($dtipo->nombre, ENT_COMPAT, 'UTF-8')
                 . "</td><td>"

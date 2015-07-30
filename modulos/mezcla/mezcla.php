@@ -560,11 +560,11 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep)
         }
         if (isset($idp2) && $idp1 != $idp2) {
             $q = "DELETE FROM persona_trelacion WHERE persona1='$idp2'";
-            $r = hace_consulta($db, $q);
+            hace_consulta($db, $q);
             $q = "DELETE FROM persona_trelacion WHERE persona2='$idp2'";
-            $r = hace_consulta($db, $q);
+            hace_consulta($db, $q);
             $q = "DELETE FROM persona WHERE id='$idp2'";
-            $r = hace_consulta($db, $q);
+            hace_consulta($db, $q);
         }
     }
     return true;

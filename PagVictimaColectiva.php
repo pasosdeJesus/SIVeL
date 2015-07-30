@@ -303,8 +303,8 @@ class PagVictimaColectiva extends PagBaseMultiple
     function formularioAgrega(&$db, $idcaso)
     {
         $e = $this->getElement(null);
-        $vv= isset($this->bvictimacolectiva->_do->id_grupoper) ?
-            $this->bvictimacolectiva->_do->id_grupoper : '';
+        #$vv= isset($this->bvictimacolectiva->_do->id_grupoper) ?
+        #    $this->bvictimacolectiva->_do->id_grupoper : '';
         //$this->addElement('hidden', 'id_grupoper', $vv);
 
         $this->bgrupoper->createSubmit = 0;
@@ -432,7 +432,7 @@ class PagVictimaColectiva extends PagBaseMultiple
                 $valsca[] = $this->bantecedente_comunidad->_do->id_antecedente;
             }
 
-            $n = $this->bcomunidad_rangoedad->_do->find();
+            $this->bcomunidad_rangoedad->_do->find();
             while ($this->bcomunidad_rangoedad->_do->fetch()) {
                 $valscre[] = $this->bcomunidad_rangoedad->_do->id_rangoedad;
             }

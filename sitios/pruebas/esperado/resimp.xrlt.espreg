@@ -203,7 +203,5 @@
   <observaciones tipo="tsitio">tsitio1</observaciones>
   <observaciones tipo="contexto">contexto1</observaciones>
   <observaciones tipo="antecedente">antecedente1</observaciones>
-  <observaciones tipo="etiqueta:IMPORTA_RELATO:">1</observaciones>
   <observaciones tipo="etiqueta:AMARILLO:2015-07-28">con color</observaciones>
-  <observaciones tipo="etiqueta:ERROR_IMPORTACIÓN:">Persona repetida 1 - &#039;NOMBRES APELLIDOS&#039; , como víctima en casos 1. -- presponsable: desconocido &#039;nombre&#039;</observaciones>
 </relato></relatos>

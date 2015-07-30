@@ -1216,7 +1216,7 @@ function consulta_uno(&$db, $q, $t = true)
  * @param unknown &$db   Conexión a base de datos
  * @param string  &$w    cadena con WHERE que se completa
  * @param string  $n     nombre de campo
- * @param string  $v     valor esperado
+ * @param string|integer  $v     valor esperado
  * @param string  $opcmp operador de comparación por usar.
  * @param string  $con   con
  *
@@ -1230,7 +1230,7 @@ function consulta_and(&$db, &$w, $n, $v, $opcmp = '=', $con='AND')
     if ($w != "") {
         $w .= " $con";
     }
-    $w .= " " . $n . $opcmp . "'".var_escapa($v, $db)."'";
+    $w .= " " . $n . $opcmp . "'". var_escapa($v, $db) . "'";
 }
 
 
@@ -1292,16 +1292,16 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
     $db = $d->getDatabaseConnection();
     $ks = $d->keys();
     foreach ($llave_ntabla as $il => $vl) {
-        $d->$vl = var_escapa($id_prin[$il]);
+        $d->$vl = var_escapa_cadena($id_prin[$il], $db);
     }
     if ($d->find()>0) {
         if (strstr($t, $ntabla)==false) {
             $t .= ", " . $ntabla;
             foreach ($llave_ntabla as $il => $vl) {
                 consulta_and_sinap(
-                    $w, var_escapa($ntabla, $db). "." .
-                    var_escapa($vl),
-                    var_escapa($llave_prin[$il]),
+                    $w, var_escapa_cadena($ntabla, $db). "." .
+                    var_escapa_cadena($vl, $db),
+                    var_escapa_cadena($llave_prin[$il], $db),
                     "=", $gcon
                 );
             }
@@ -1313,7 +1313,7 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
                 if (!in_array($llave, $llave_ntabla)) {
                     consulta_and(
                         $db, $w2, "$ntabla . $llave",
-                        var_escapa($d->$llave, $db), '=', 'AND'
+                        var_escapa_cadena($d->$llave, $db), '=', 'AND'
                     );
                 }
             }
@@ -1486,9 +1486,9 @@ function inserta_sql(&$db, $d, $delta = null)
         if (strtolower($d->$l)==='null' || !isset($d->$l)) {
             $val = 'null';
         } else if (isset($delta) && isset($delta[$l])) {
-            $val = "'".($d->$l+$delta[$l])."'";
+            $val = "'" . ($d->$l+$delta[$l]) . "'";
         } else {
-            $val = "'".var_escapa($d->$l, $db)."'";
+            $val = "'" . var_escapa_cadena($d->$l, $db) . "'";
         }
         $nval .= $sep . $val;
         $sep = ', ';
@@ -1595,39 +1595,10 @@ function var_escapa_cadena($v, &$db = null, $maxlong = 1024)
     return $p3;
 }
 
-/**
- * Escapa valores cadena del arreglo recursivamente.
- * Si $v es null retorna [] y los valores internos que sean null o
- * desconocidos los pasa a ''
- *
- * @param array   $v       Nombre de variable POST
- * @param handle  &$db     Conexión a BD.
- * @param integer $maxlong Longitud máxima
- *
- * @return array Arreglo con valores cadena escapados
- */
-function var_escapa_arreglo($v, &$db = null, $maxlong = 1024)
-{
-    if (isset($v) && is_array($v)) {
-        $r = array();
-        foreach ($v as $k => $e) {
-            if (is_array($e)) {
-                $r[$k] = var_escapa_arreglo($e, $db, $maxlong);
-            } else if (is_string($e)) {
-                $r[$k] = var_escapa_cadena($e, $db, $maxlong);
-            } else {
-                $r[$k] = '';
-            }
-        }
-        return $r;
-    }
-    return [];
-}
 
 /**
  * Escapa el valor de una variable o de valores en un arreglo.
  * Si $v es null retorna ''
- * Agradecimientos por correciones a garcez@linuxmail.org
  *
  * @param string|array  $v       Nombre de variable POST
  * @param handle        &$db     Conexión a BD.
@@ -1637,38 +1608,43 @@ function var_escapa_arreglo($v, &$db = null, $maxlong = 1024)
  */
 function var_escapa($v, &$db = null, $maxlong = 1024)
 {
-/*    if (isset($v)) {
-        if (is_array($v)) {
-            return var_escapa_arreglo($v, $db, $maxlong);
-        } else if (is_string($v)) {
-            return var_escapa_cadena($v, $db, $maxlong);
-        } 
-    }
-    return '';
- */
-//    if (false) {
     if (isset($v)) {
         if (is_array($v)) {
             return var_escapa_arreglo($v, $db, $maxlong);
-            /*$r = array();
-            foreach ($v as $k => $e) {
-                $r[$k] = var_escapa($e, $db, $maxlong);
-            }
-            return $r; */
         } else if (is_string($v)) {
             return var_escapa_cadena($v, $db, $maxlong);
         } else if (is_integer($v)) {
             return $v;
         } else {
-            echo "OJO v no es arreglo, ni cadena: ";
+            echo "var_escapa: Tipo desconocido de valor: ";
             print_r($v);
-            echo "<br>\n";
-            debug_print_backtrace();
-            return ''; //$v;
+            print_debug_backtrace();
+            die("x");
         }
     }
     return '';
-//    }
+}
+
+/**
+ * Escapa el valor de un arreglo recursivamente con la funcion var_escapa.
+ * Si $v es null retorna [] y los valores internos que sean null los pasa a ''
+ *
+ * @param array   $v       Nombre de variable POST
+ * @param handle  &$db     Conexión a BD.
+ * @param integer $maxlong Longitud máxima
+ *
+ * @return array Cadena escapada
+ */
+function var_escapa_arreglo($v, &$db = null, $maxlong = 1024)
+{
+    if (isset($v) && is_array($v)) {
+        $r = array();
+        foreach ($v as $k => $e) {
+            $r[$k] = var_escapa($e, $db, $maxlong);
+        }
+        return $r;
+    }
+    return [];
 }
 
 /**
@@ -1683,7 +1659,7 @@ function var_escapa($v, &$db = null, $maxlong = 1024)
  */
 function var_post_escapa_cadena($nv, $db = null, $maxlong = 1024)
 {
-    if (isset($_POST[$nv])) {
+    if (is_string($_POST[$nv])) {
         return var_escapa_cadena($_POST[$nv], $db, $maxlong);
     } else {
         return '';
@@ -1702,7 +1678,7 @@ function var_post_escapa_cadena($nv, $db = null, $maxlong = 1024)
  */
 function var_post_escapa_arreglo($nv, $db = null, $maxlong = 1024)
 {
-    if (isset($_POST[$nv])) {
+    if (is_array($_POST[$nv])) {
         return var_escapa_arreglo($_POST[$nv], $db, $maxlong);
     } else {
         return [];
@@ -1717,7 +1693,7 @@ function var_post_escapa_arreglo($nv, $db = null, $maxlong = 1024)
  * @param handle  $db      Conexión a BD.
  * @param integer $maxlong Longitud máxima
  *
- * @return string Cadena escapada
+ * @return string|array Cadena/arreglo escapado
  */
 function var_post_escapa($nv, $db = null, $maxlong = 1024)
 {
@@ -1727,7 +1703,6 @@ function var_post_escapa($nv, $db = null, $maxlong = 1024)
         return '';
     }
 }
-
 
 /**
  * Retorna una variable cadena enviada por método POST o por GET tras escaparla
@@ -1760,7 +1735,7 @@ function var_req_escapa_cadena($nv, $db = null, $maxlong = 1024)
  */
 function var_req_escapa_arreglo($nv, $db = null, $maxlong = 1024)
 {
-    if (isset($_REQUEST[$nv])) {
+    if (isset($_REQUEST[$nv]) && is_array($_REQUEST[$nv])) {
         return var_escapa_arreglo($_REQUEST[$nv], $db, $maxlong);
     } else {
         return [];
@@ -2160,7 +2135,7 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
             consulta_or_muchos(
                 $w2, $t, $ot,
                 'AND', $iotrast,
-                var_escapa($duc->$irelot, $db), $rel . "." . $irelot
+                var_escapa_cadena($duc->$irelot, $db), $rel . "." . $irelot
             );
         }
     }
@@ -2316,7 +2291,7 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
 
     $nom0 = $d->$ncamp = ereg_replace(
         "  *", " ",
-        trim(var_escapa($nombre, $db))
+        trim(var_escapa_cadena($nombre, $db))
     );
     $d->find(1);
     if (PEAR::isError($d)) {
@@ -2330,7 +2305,7 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
     $nom2 = '';
     if (!isset($d->id)) {
         $nom2 = $d->$ncamp
-            = a_mayusculas(sin_tildes(var_escapa($nom0, $db)));
+            = a_mayusculas(sin_tildes(var_escapa_cadena($nom0, $db)));
         $d->find(1);
     }
     if (!isset($d->id)) {
@@ -2752,11 +2727,9 @@ function enlaza_relato(&$do, $campo, $elemento, &$ad, $valor = null)
         $ad[$elemento] = $valor;
     } else if ($exc) {
         //echo "OJO enlazada con otra tabla";
-        $rel = $GLOBALS['_DB_DATAOBJECT']['LINKS'][$dbnombre][$do->__table][$campo];
-        $pd = strpos($rel, ':');
-        $ndo = substr($rel, 0, $pd);
-        $ndoc = "DataObject_" . ucfirst($ndo);
-        //echo "OJO ndoc=$ndoc";
+        #$rel = $GLOBALS['_DB_DATAOBJECT']['LINKS'][$dbnombre][$do->__table][$campo];
+        #$pd = strpos($rel, ':');
+        #$ndo = substr($rel, 0, $pd);
         $vsi = '';
         $csinf = $do->camposSinInfo();
         //print_r($csinf);

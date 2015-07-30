@@ -63,7 +63,6 @@ function extrae_var_php($f)
     $source = file_get_contents($f);
     $tokens = token_get_all($source);
 
-    $ttokens = count($tokens);
     $estado = 0;
     $avar = array(); // Arreglo con variables encontradas
     $nomvar = ""; //Nombre de última variable encontrada
@@ -181,7 +180,6 @@ function val_var_confPHP($a, $v)
         die("Falta archivo de configuración '$a'");
     }
 
-    $r = null;
     $com = ""; /* Comentario */
     $lv = ""; /* Lineas que definen variable */
     $estado = 0;
@@ -296,7 +294,7 @@ function actualiza_indice(&$db, $tabla, $nid = 'id', $maxreserv = 0)
     if ($maxreserv > 0 && !PEAR::isError($r)
         && $r->fetchInto($t) && $t[0] < $maxreserv
     ) {
-        $r = hace_consulta(
+        hace_consulta(
             $db, "SELECT setval('{$tabla}_seq', $maxreserv) " .
             " FROM $tabla"
         );

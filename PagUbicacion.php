@@ -791,7 +791,7 @@ class PagUbicacion extends PagBaseMultiple
         assert($idcaso > 0);
 
         //echo "OJO importaRelato(db, r, idcaso=$idcaso, observaciones=$obs)<br>";
-        $reg = dato_basico_en_obs(
+        /*dato_basico_en_obs(
             $db, $obs, $r,
             'region', 'region', 'caso_region', $idcaso, '; ', 'id_region'
         );
@@ -799,7 +799,7 @@ class PagUbicacion extends PagBaseMultiple
             $db, $obs, $r,
             'frontera', 'frontera', 'caso_frontera', $idcaso, '; ',
             'id_frontera'
-        );
+        );*/
         $dubicacion = objeto_tabla('ubicacion');
         $dubicacion->id_caso = $idcaso;
         $departamento = ereg_replace(

@@ -118,7 +118,6 @@ class DataObjects_Homonimosim extends DB_DataObject_SIVeL
                 $this->$c = $csin[$c];
             }
         }
-        $f = array();
     }
 
 
@@ -142,10 +141,10 @@ class DataObjects_Homonimosim extends DB_DataObject_SIVeL
         $db = $p->getDatabaseConnection();
         $p->persona2=null;
         $p->find();
-        while ($p->persona1!=null && $p->fetch()) {
+        $comovic = "";
+        $comofam = "";
+        while ($p->persona1 != null && $p->fetch()) {
             $dp = $p->getLink('persona2');
-            $comovic = "";
-            $comofam = "";
             enlaces_casos_persona_html(
                 $db, $_SESSION['basicos_id'],
                 $dp->id, $comovic, $comofam
