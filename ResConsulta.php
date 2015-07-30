@@ -2724,7 +2724,6 @@ class ResConsulta
         }
         $dcat->id_caso = $idcaso;
         $dcat->find();
-        $sep = "";
         $asinv = array();
         while ($dcat->fetch()) {
             $esta = 0;
@@ -3102,7 +3101,6 @@ class ResConsulta
                     $seploc = ". ";
                 }
             } else if ($cc == 'm_fuentes') {
-                $ndp = array();
                 $dff = objeto_tabla('caso_ffrecuente');
                 if (PEAR::isError($dff)) {
                     die($dff->getMessage());

@@ -125,7 +125,6 @@ class AccionEstadisticasComb extends HTML_QuickForm_Action
         }
 
         $sgeo = '';
-        $ogeo = '';
         $cab = array('Organización');
         if ($pDepartamento != '') {
             $cab[] = 'C. Dep.';

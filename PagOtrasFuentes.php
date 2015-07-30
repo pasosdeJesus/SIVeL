@@ -496,7 +496,6 @@ class PagOtrasFuentes extends PagBaseMultiple
             $db, "SELECT id FROM fotra " .
             " WHERE nombre ILIKE '$nomf'"
         );
-        $rows = array();
         $nr = $rp->numRows();
         $dfd = objeto_tabla('fotra');
         if ($nr == 0) {

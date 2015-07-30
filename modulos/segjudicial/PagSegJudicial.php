@@ -338,7 +338,7 @@ class PagSegJudicial extends PagBaseMultiple
         hace_consulta($db, $q);
         if ($elimProc) {
             $q = "DELETE FROM proceso WHERE id='{$dproceso->id}'";
-            $result = hace_consulta($db, $q);
+            hace_consulta($db, $q);
         }
     }
 

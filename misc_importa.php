@@ -408,16 +408,12 @@ function conv_fecha($fecha, &$obs, $depura = false)
             rep_obs("Fecha: dia por completar. ", $obs);
         }
         $mes_s = (int)$v[1];
-        if ((int)$v[1] > 0) {
-            $mes_s = (int)$v[1];
-        } else {
+        if ($mes_s <= 0) {
             $mes_s = 1;
             rep_obs("Fecha: mes por completar. ", $obs);
         }
         $anio_s = (int)$v[2];
-        if ((int)$v[2] > 0) {
-            $anio_s = (int)$v[2];
-        } else {
+        if ($anio_s <= 0) {
             $anio_s = 2;
             rep_obs("Fecha: anio por completar. ", $obs);
         }
@@ -789,7 +785,6 @@ function ubica_persona(&$db, &$idsiguales, &$idssimilares, $aper,
     $id_clase = null, $tipodocumento = null, $numerodocumento = null
 ) {
     //echo "OJO ubica_persona(nom=$nom, $ap, $mdlev, ...)<br>";
-    $idper = -1;
     if (isset($GLOBALS['estilo_nombres'])
         && $GLOBALS['estilo_nombres'] == 'MAYUSCULAS'
     ) {
@@ -1179,7 +1174,6 @@ function extrae_grupos(&$db)
     $options =& PEAR::getStaticProperty('DB_DataObject', 'options');
     $options['dont_die'] = true;
 
-    $maxidper = 0;
     $pe = objeto_tabla('grupoper');
     $pe->orderBy('id');
     $pe->find();
@@ -1213,8 +1207,7 @@ function extrae_casos()
     $cat = array(); // Arreglo de categorias por caso
     $ubicacion = array(); // Arreglo de ubicaciones de los casos
     $dcaso = objeto_tabla('caso');
-    $db = $dcaso->getDatabaseConnection();
-    $maxidcaso = 0;
+    #$db = $dcaso->getDatabaseConnection();
     $dcaso->orderBy('id');
     $dcaso->find();
     while ($dcaso->fetch()) {
@@ -1376,8 +1369,6 @@ function dato_en_obs(&$oxml, $id)
 function dato_basico_en_obs(&$db, &$obs, $oxml,
     $ntipoobs, $ntablabas, $ntablacaso, $idcaso, $sepv = null, $ncampo = ''
 ) {
-
-    $ret = 0;
     if ($ncampo == '') {
         $ncampo = $ntipoobs;
     }
@@ -1463,11 +1454,9 @@ function conv_presp(&$db, $idcaso, $idp, $g, &$id_presp, &$obs,
         $db, 'presponsable',
         $nomg, $obs, false
     );
-    $otro = "";
     if ($pr == -1) {
         if ($csinf) {
             $pr = $ids;
-            $otro = $nomg;
         } else {
             return -1;
         }

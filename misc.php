@@ -2612,8 +2612,8 @@ function enlaza_relato(&$do, $campo, $elemento, &$ad, $valor = null)
     } else if ($exc) {
         //echo "OJO enlazada con otra tabla";
         $rel = $GLOBALS['_DB_DATAOBJECT']['LINKS'][$dbnombre][$do->__table][$campo];
-        $pd = strpos($rel, ':');
-        $ndo = substr($rel, 0, $pd);
+        #$pd = strpos($rel, ':');
+        #$ndo = substr($rel, 0, $pd);
         $vsi = '';
         $csinf = $do->camposSinInfo();
         //print_r($csinf);
