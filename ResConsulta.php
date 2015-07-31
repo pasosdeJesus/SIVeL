@@ -116,7 +116,7 @@ class ResConsulta
 
     /**
      * Ordenar
-     * @var    bool
+     * @var string
      */
     var $ordenar;
 
@@ -157,7 +157,7 @@ class ResConsulta
      */
     function ResConsulta(&$campos, &$db, &$resultado, &$conv, $mostrar,
         $detallesform = array(), $ordCasos = array(), $busca_pr = null,
-        $ordenar = null, $primnom = true
+        $ordenar = '', $primnom = true
     ) {
         $this->campos =& $campos;
         $this->db=& $db;
@@ -3202,7 +3202,7 @@ class ResConsulta
             $adjunto_renglon .= $vrpre . $vr . $vrpost;
             $vrpre = ', "';
         }
-        echo $adjunto_renglon;
+        return $adjunto_renglon;
     }
 
 }

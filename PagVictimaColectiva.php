@@ -676,76 +676,61 @@ class PagVictimaColectiva extends PagBaseMultiple
             $this->eliminaVic($this->bvictimacolectiva->_do, false);
         }
 
-        if (isset($valores['id_antecedente'])) {
-            foreach (var_escapa($valores['id_antecedente']) as $k => $v) {
-                $this->bantecedente_comunidad->_do->id_grupoper = $idgrupoper;
-                $this->bantecedente_comunidad->_do->id_caso = $idcaso;
-                $this->bantecedente_comunidad->_do->id_antecedente
-                    = (int)var_escapa($v, $db);
-                $this->bantecedente_comunidad->_do->insert();
-            }
+        foreach (var_escapa_arreglo($valores['id_antecedente']) as $k => $v) {
+            $this->bantecedente_comunidad->_do->id_grupoper = $idgrupoper;
+            $this->bantecedente_comunidad->_do->id_caso = $idcaso;
+            $this->bantecedente_comunidad->_do->id_antecedente
+                = (int)var_escapa($v, $db);
+            $this->bantecedente_comunidad->_do->insert();
         }
 
-
-        if (isset($valores['id_rangoedad'])) {
-            foreach (var_escapa($valores['id_rangoedad']) as $k => $v) {
-                $this->bcomunidad_rangoedad->_do->id_grupoper = $idgrupoper;
-                $this->bcomunidad_rangoedad->_do->id_caso = $idcaso;
-                $this->bcomunidad_rangoedad->_do->id_rangoedad
-                    = (int)var_escapa($v, $db);
-                $this->bcomunidad_rangoedad->_do->insert();
-            }
+        foreach (var_escapa_arreglo($valores['id_rangoedad']) as $k => $v) {
+            $this->bcomunidad_rangoedad->_do->id_grupoper = $idgrupoper;
+            $this->bcomunidad_rangoedad->_do->id_caso = $idcaso;
+            $this->bcomunidad_rangoedad->_do->id_rangoedad
+                = (int)var_escapa($v, $db);
+            $this->bcomunidad_rangoedad->_do->insert();
         }
 
-        if (isset($valores['id_sectorsocial'])) {
-            foreach (var_escapa($valores['id_sectorsocial']) as $k => $v) {
-                $this->bcomunidad_sectorsocial->_do->id_grupoper = $idgrupoper;
-                $this->bcomunidad_sectorsocial->_do->id_caso = $idcaso;
-                $this->bcomunidad_sectorsocial->_do->id_sectorsocial
-                    = (int)var_escapa($v, $db);
-                $this->bcomunidad_sectorsocial->_do->insert();
-            }
+        foreach (var_escapa_arreglo($valores['id_sectorsocial']) as $k => $v) {
+            $this->bcomunidad_sectorsocial->_do->id_grupoper = $idgrupoper;
+            $this->bcomunidad_sectorsocial->_do->id_caso = $idcaso;
+            $this->bcomunidad_sectorsocial->_do->id_sectorsocial
+                = (int)var_escapa($v, $db);
+            $this->bcomunidad_sectorsocial->_do->insert();
         }
 
-        if (isset($valores['id_vinculoestado'])) {
-            foreach (var_escapa($valores['id_vinculoestado']) as $k => $v) {
-                $this->bcomunidad_vinculoestado->_do->id_grupoper
-                    = $idgrupoper;
-                $this->bcomunidad_vinculoestado->_do->id_caso = $idcaso;
-                $this->bcomunidad_vinculoestado->_do->id_vinculoestado
-                    = (int)var_escapa($v, $db);
-                $this->bcomunidad_vinculoestado->_do->insert();
-            }
+        foreach (var_escapa_arreglo($valores['id_vinculoestado']) as $k => $v) {
+            $this->bcomunidad_vinculoestado->_do->id_grupoper
+                = $idgrupoper;
+            $this->bcomunidad_vinculoestado->_do->id_caso = $idcaso;
+            $this->bcomunidad_vinculoestado->_do->id_vinculoestado
+                = (int)var_escapa($v, $db);
+            $this->bcomunidad_vinculoestado->_do->insert();
         }
 
-        if (isset($valores['id_filiacion'])) {
-            foreach (var_escapa($valores['id_filiacion']) as $k => $v) {
-                $this->bcomunidad_filiacion->_do->id_grupoper = $idgrupoper;
-                $this->bcomunidad_filiacion->_do->id_caso = $idcaso;
-                $this->bcomunidad_filiacion->_do->id_filiacion
-                    = (int)var_escapa($v, $db);
-                $this->bcomunidad_filiacion->_do->insert();
-            }
+        foreach (var_escapa_arreglo($valores['id_filiacion']) as $k => $v) {
+            $this->bcomunidad_filiacion->_do->id_grupoper = $idgrupoper;
+            $this->bcomunidad_filiacion->_do->id_caso = $idcaso;
+            $this->bcomunidad_filiacion->_do->id_filiacion
+                = (int)var_escapa($v, $db);
+            $this->bcomunidad_filiacion->_do->insert();
         }
 
-        if (isset($valores['id_profesion'])) {
-            foreach (var_escapa($valores['id_profesion']) as $k => $v) {
-                $this->bcomunidad_profesion->_do->id_grupoper = $idgrupoper;
-                $this->bcomunidad_profesion->_do->id_caso= $idcaso;
-                $this->bcomunidad_profesion->_do->id_profesion
-                    = (int)var_escapa($v, $db);
-                $this->bcomunidad_profesion->_do->insert();
-            }
+        foreach (var_escapa_arreglo($valores['id_profesion']) as $k => $v) {
+            $this->bcomunidad_profesion->_do->id_grupoper = $idgrupoper;
+            $this->bcomunidad_profesion->_do->id_caso= $idcaso;
+            $this->bcomunidad_profesion->_do->id_profesion
+                = (int)var_escapa($v, $db);
+            $this->bcomunidad_profesion->_do->insert();
         }
 
-        if (isset($valores['id_organizacion'])) {
-            foreach (var_escapa($valores['id_organizacion']) as $k => $v) {
-                $this->bcomunidad_organizacion->_do->id_grupoper = $idgrupoper;
-                $this->bcomunidad_organizacion->_do->id_caso = $idcaso;
-                $this->bcomunidad_organizacion->_do->id_organizacion
-                    = (int)var_escapa($v, $db);
-                $this->bcomunidad_organizacion->_do->insert();
-            }
+        foreach (var_escapa_arreglo($valores['id_organizacion']) as $k => $v) {
+            $this->bcomunidad_organizacion->_do->id_grupoper = $idgrupoper;
+            $this->bcomunidad_organizacion->_do->id_caso = $idcaso;
+            $this->bcomunidad_organizacion->_do->id_organizacion
+                = (int)var_escapa($v, $db);
+            $this->bcomunidad_organizacion->_do->insert();
         }
 
         caso_usuario($_SESSION['basicos_id']);

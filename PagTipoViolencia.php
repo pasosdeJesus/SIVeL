@@ -320,20 +320,16 @@ class PagTipoViolencia extends PagBaseSimple
             $db, "DELETE FROM antecedente_caso " .
             " WHERE id_caso='$idcaso'"
         );
-        if (isset($valores['id_contexto'])) {
-            foreach (var_escapa($valores['id_contexto']) as $k => $v) {
-                $this->bcaso_contexto->_do->id_caso = $idcaso;
-                $this->bcaso_contexto->_do->id_contexto = $v;
-                $this->bcaso_contexto->_do->insert();
-            }
+        foreach (var_escapa_arreglo($valores['id_contexto']) as $k => $v) {
+            $this->bcaso_contexto->_do->id_caso = $idcaso;
+            $this->bcaso_contexto->_do->id_contexto = $v;
+            $this->bcaso_contexto->_do->insert();
         }
 
-        if (isset($valores['id_antecedente'])) {
-            foreach (var_escapa($valores['id_antecedente']) as $k => $v) {
-                $this->bantecedente_caso->_do->id_caso = $idcaso;
-                $this->bantecedente_caso->_do->id_antecedente = $v;
-                $this->bantecedente_caso->_do->insert();
-            }
+        foreach (var_escapa_arreglo($valores['id_antecedente']) as $k => $v) {
+            $this->bantecedente_caso->_do->id_caso = $idcaso;
+            $this->bantecedente_caso->_do->id_antecedente = $v;
+            $this->bantecedente_caso->_do->insert();
         }
         $this->bcaso->forceQueryType(DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEUPDATE);
 

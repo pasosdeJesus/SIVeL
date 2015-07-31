@@ -184,7 +184,7 @@ if (isset($GLOBALS['elimina_ficha_tabuladores'])) {
 
 //echo "<hr>OJO antes de nuevas " ;print_r($GLOBALS['ficha_tabuladores']);
 if (isset($GLOBALS['nueva_ficha_tabuladores']) &&
-    $GLOBALS['nueva_ficha_tabuladores'] !== null
+    is_array($GLOBALS['nueva_ficha_tabuladores'])
 ) {
     foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
         $puesto = $a[0];

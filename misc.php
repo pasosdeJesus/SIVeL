@@ -1619,7 +1619,6 @@ function var_escapa($v, &$db = null, $maxlong = 1024)
             echo "var_escapa: Tipo desconocido de valor: ";
             print_r($v);
             print_debug_backtrace();
-            die("x");
         }
     }
     return '';

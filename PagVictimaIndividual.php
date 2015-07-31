@@ -473,10 +473,8 @@ class PagVictimaIndividual extends PagBaseMultiple
                     $cq->setValue(var_escapa($_POST[$c], $db));
                 }
             }
-            if (isset($_POST['id_antecedente'])) {
-                foreach (var_escapa($_POST['id_antecedente'], $db) as $r) {
-                    $valsca[] = $r;
-                }
+            foreach (var_escapa_arreglo($_POST['id_antecedente'], $db) as $r) {
+                $valsca[] = $r;
             }
         }
 
@@ -758,13 +756,11 @@ class PagVictimaIndividual extends PagBaseMultiple
             } else {
                 $this->eliminaVic($this->bvictima->_do, false);
             }
-            if (isset($valores['id_antecedente'])) {
-                foreach (var_escapa($valores['id_antecedente']) as $k => $v) {
-                    $this->bantecedente_victima->_do->id_persona = $idpersona;
-                    $this->bantecedente_victima->_do->id_caso = $idcaso;
-                    $this->bantecedente_victima->_do->id_antecedente = $v;
-                    $this->bantecedente_victima->_do->insert();
-                }
+            foreach (var_escapa_arreglo($valores['id_antecedente']) as $k => $v) {
+                $this->bantecedente_victima->_do->id_persona = $idpersona;
+                $this->bantecedente_victima->_do->id_caso = $idcaso;
+                $this->bantecedente_victima->_do->id_antecedente = $v;
+                $this->bantecedente_victima->_do->insert();
             }
         }
 

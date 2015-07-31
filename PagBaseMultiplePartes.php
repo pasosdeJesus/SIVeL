@@ -510,15 +510,13 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                     " WHERE id_caso='$idcaso' AND $ll='$fa'"
                 );
                 $c = $this->partesmulti[$t];
-                if (isset($valores[$c])) {
-                    foreach (var_escapa($valores[$c]) as $k => $v) {
-                        $do = objeto_tabla($t);
-                        $do->id_caso = $idcaso;
-                        $do->$ll = $fa;
-                        $do->$c = $v;
-                        $ret = $do->insert();
-                        $do->free();
-                    }
+                foreach (var_escapa_arreglo($valores[$c]) as $k => $v) {
+                    $do = objeto_tabla($t);
+                    $do->id_caso = $idcaso;
+                    $do->$ll = $fa;
+                    $do->$c = $v;
+                    $ret = $do->insert();
+                    $do->free();
                 }
             }
             if (PEAR::isError($ret)) {

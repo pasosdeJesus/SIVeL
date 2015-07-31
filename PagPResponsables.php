@@ -481,8 +481,10 @@ class PagPResponsables extends PagBaseMultiple
         if (PEAR::isError($ret)) {
             die($ret->getMessage());
         }
-        if (isset($valores['clasificacion']) && isset($this->bcategoria->_do)) {
-            foreach (var_escapa($valores['clasificacion']) as $k => $v) {
+        if (isset($this->bcategoria->_do)) {
+            foreach (var_escapa_arreglo($valores['clasificacion']) 
+                as $k => $v
+            ) {
                 $t = explode(":", var_escapa($v, $db));
                 $this->bcategoria->_do->id
                     = $this->bcaso_presponsable->_do->id;

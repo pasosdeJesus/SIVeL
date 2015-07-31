@@ -462,7 +462,9 @@ class PagVictimaCombatiente extends PagBaseMultiple
             if (isset($valores['id_antecedente']) &&
                 is_array($valores['id_antecedente'])
             ) {
-                foreach (var_escapa($valores['id_antecedente']) as $k => $v) {
+                foreach (var_escapa_arreglo($valores['id_antecedente']) 
+                    as $k => $v
+                ) {
                     $this->bantecedente_combatiente->_do->id_combatiente
                         = $idcombatiente;
                     $this->bantecedente_combatiente->_do->id_antecedente
