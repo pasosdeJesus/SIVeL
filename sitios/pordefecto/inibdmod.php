@@ -117,7 +117,7 @@ foreach ($lm as $m) {
 ini_set('include_path', $rutas_include);
 
 foreach ($lm as $m) {
-    //echo "OJO modulo $m<br>\n";
+    //echo "OJO modulo $m/conf.php<br>\n";
     if (file_exists("$m/conf.php")) {
         //echo "OJO existe<br>\n";
         include "$m/conf.php";

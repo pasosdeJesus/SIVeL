@@ -59,7 +59,7 @@ function hastapunto($s)
 function muestra($dsn)
 {
     $aut_usuario = "";
-    $db = autentica_usuario($dsn, $accno, $aut_usuario, 31);
+    $db = autentica_usuario($dsn, $aut_usuario, 31);
     encabezado_envia("Comparación y mezcla de 2 casos");
 
     if (isset($_SESSION['mezcla_ids'])) {

@@ -159,7 +159,7 @@ class PagAnexo extends PagBaseMultiple
      */
     function iniVar($aper = null)
     {
-        list($db, $dcaso, $idcaso) = parent::iniVar(array(true, true));
+        list($db, , $idcaso) = parent::iniVar(array(true, true));
 
         $ida = array();
         $tot = 0;

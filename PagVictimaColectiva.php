@@ -152,7 +152,7 @@ class PagVictimaColectiva extends PagBaseMultiple
         $dgrupoper =& objeto_tabla('grupoper');
         $dvictimacolectiva =& objeto_tabla('victimacolectiva');
         $dantecedente_comunidad =&
-            objeto_tabla('antecedente_comunidad', $this);
+            objeto_tabla('antecedente_comunidad');
         $dcomunidad_rangoedad =&
             objeto_tabla('comunidad_rangoedad');
         $dcomunidad_sectorsocial =&

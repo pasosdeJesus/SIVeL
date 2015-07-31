@@ -20,7 +20,7 @@
  *
  * @return void
  */
-function muestra() 
+function muestra($dsn) 
 {
     $tabla = "homonimosim";
 

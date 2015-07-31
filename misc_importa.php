@@ -41,14 +41,13 @@ function rep_obs($nobs, &$obs, $coneco = false)
 /**
  * Convierte violación
  *
- * @param object &$db      Conexión a base de datos
  * @param string $tipoi    Nombre de violación
  * @param string $id_presp Id. del presunto responsable
  * @param string &$obs     Colchon para agregar observaciones
  *
  * @return integer Código del tipo de violencia o 0 si no encontró
  */
-function conv_violacion(&$db, $tipoi, $id_presp, &$obs)
+function conv_violacion($tipoi, $id_presp, &$obs)
 {
     $tipo = a_mayusculas(trim($tipoi));
 
@@ -1425,7 +1424,7 @@ function conv_categoria(&$db, &$obs, $agr, $pr)
         $id_categoria = (int)(substr($agr, 1));
     }
     if ($id_categoria == 0) {
-        $id_categoria = conv_violacion($db, $agr, $pr, $obs);
+        $id_categoria = conv_violacion($agr, $pr, $obs);
     }
     return $id_categoria;
 }

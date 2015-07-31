@@ -84,12 +84,11 @@ function display_xml_error($error, $xml)
 /**
  * Presenta errores en lectura XML
  *
- * @param object $xml Objeto
  * @param string $ca  Unparsed xml string
  *
  * @return void
  */
-function errores_xml($xml, $ca)
+function errores_xml($ca)
 {
     trigger_error("ca=" . $ca);
     $lxml = explode("\n", $ca);

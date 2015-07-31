@@ -20,8 +20,6 @@ require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
 require_once 'misc.php';
 
-$aut_usuario = "";
-$db = autentica_usuario($dsn, $accno, $aut_usuario, 31);
 
 require_once $_SESSION['dirsitio'] . "/conf_int.php";
 require_once 'misc_caso.php';
@@ -185,7 +183,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep)
     $ref = array();
     foreach ($enl as $t => $ct) {
         foreach ($ct as $c => $rl) {
-            list($tab, $cam) = explode(":", $rl);
+            list($tab, ) = explode(":", $rl);
             //echo " OJO <br> t=$t, c=$c, tab=$tab, cam=$cam ";
             //echo " OJO estbd[tab__keys]= ";
             //print_r($estbd["{$t}__keys"]);
@@ -581,6 +579,8 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep)
 function muestra($dsn)
 {
     global $db;
+    $aut_usuario = "";
+    $db = autentica_usuario($dsn, $aut_usuario, 31);
 
     $html_t = "Mezcla "
         . date("Y-m-d H:m");

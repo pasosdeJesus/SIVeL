@@ -136,7 +136,7 @@ class AccionComparaDos extends HTML_QuickForm_Action
                 $pIds = AccionComparaDos::busca();
             }
             foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                list($n, $c, $o) = $tab;
+                list( , $c, $o) = $tab;
                 //echo "OJO $n, $c, $o<br>";
                 if (($d = strrpos($c, "/"))>0) {
                     $c = substr($c, $d+1);
@@ -499,7 +499,7 @@ class PagVictimasrep extends HTML_QuickForm_Page
         );
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list(, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -536,7 +536,7 @@ class PagVictimasrep extends HTML_QuickForm_Page
 function muestra($dsn)
 {
     $aut_usuario = "";
-    autentica_usuario($dsn, $accno, $aut_usuario, 31);
+    autentica_usuario($dsn, $aut_usuario, 31);
     encabezado_envia('Elegir');
 
     $wizard =& new HTML_QuickForm_Controller('Victimasrep', false);

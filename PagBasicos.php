@@ -375,7 +375,6 @@ class Busqueda extends HTML_QuickForm_Action
             if ($_SESSION['busca_presenta']['mostrar'] == 'actos') {
                 ResConsulta::actosHtml(
                     $db, $tablas, $w,
-                    $_SESSION['bus_fecha_final'],
                     var_escapa(
                         $_SESSION['busca_presenta']['mostrar'],
                         $db

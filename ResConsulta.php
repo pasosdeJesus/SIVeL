@@ -520,7 +520,7 @@ class ResConsulta
      *
      * @return void
      */
-    function actosHtml(&$db, $tablas, $donde, $pFinchasta, $pMuestra)
+    function actosHtml(&$db, $tablas, $donde, $pMuestra)
     {
         $etablas = array();
         if (is_array($tablas)) {
@@ -850,7 +850,7 @@ class ResConsulta
                 }
                 $rtexto = "$rtexto\n$nc";
                 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                    list($n, $c, $o) = $tab;
+                    list($n, $c, ) = $tab;
                     if (($d = strrpos($c, "/"))>0) {
                         $c = substr($c, $d+1);
                     }
@@ -904,7 +904,7 @@ class ResConsulta
         default:
             $rtexto = "";
             foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                list($n, $c, $o) = $tab;
+                list($n, $c, ) = $tab;
                 if (($d = strrpos($c, "/"))>0) {
                     $c = substr($c, $d+1);
                 }
@@ -1003,7 +1003,7 @@ class ResConsulta
                 case 'relato':
                     $html_relato = $this->reporteRelato(
                         $idcaso, null,
-                        $this->campos, $this->varlin
+                        $this->campos
                     );
                     echo $html_relato;
                     break;
@@ -1032,7 +1032,7 @@ class ResConsulta
                         $r = $html_erelato;
                         $r .= ResConsulta::reporteRelato(
                             $idcaso, $this->db,
-                            $this->campos, $this->varlin
+                            $this->campos
                         );
                         $r .= "</relatos>\n";
                         if (!file_put_contents($nar, $r)) {
@@ -1047,7 +1047,7 @@ class ResConsulta
 
                 default:
                     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                        list($n, $c, $o) = $tab;
+                        list($n, $c, ) = $tab;
                         if (($d = strrpos($c, "/"))>0) {
                             $c = substr($c, $d+1);
                         }
@@ -1111,7 +1111,7 @@ class ResConsulta
                 foreach ($this->campos as $cc => $nc) {
                     $html_renglon .= "<td>";
                     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                        list($n, $c, $o) = $tab;
+                        list($n, $c, ) = $tab;
                         if (($d = strrpos($c, "/"))>0) {
                             $c = substr($c, $d+1);
                         }
@@ -1139,7 +1139,7 @@ class ResConsulta
             break;
         default:
             foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                list($n, $c, $o) = $tab;
+                list($n, $c, ) = $tab;
                 if (($d = strrpos($c, "/"))>0) {
                     $c = substr($c, $d+1);
                 }
@@ -1399,7 +1399,7 @@ class ResConsulta
                 $vr_html = '';
                 //echo "<hr>"; var_dump($GLOBALS['ficha_tabuladores']);
                 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                    list($n, $c, $o) = $tab;
+                    list($n, $c, ) = $tab;
                     if (($d = strrpos($c, "/"))>0) {
                         $c = substr($c, $d+1);
                     }
@@ -1455,9 +1455,7 @@ class ResConsulta
      *
      * @return string Reporte
      */
-    static function reporteRelato($idcaso, $db = null,
-        $campos = array(), $varlin = true
-    ) {
+    static function reporteRelato($idcaso, $db = null, $campos = array()) {
         $arotros = array(); // Para poner observaciones al final
         $dcaso = objeto_tabla('caso');
         $dcaso->get('id', $idcaso);
@@ -2072,7 +2070,7 @@ class ResConsulta
         }
         // Módulos, van como observaciones
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -2341,7 +2339,7 @@ class ResConsulta
         $r .= "\n";
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -3020,7 +3018,7 @@ class ResConsulta
             }
         }
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }

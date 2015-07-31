@@ -423,7 +423,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         //echo "OJO q es $q"; die("x");
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }

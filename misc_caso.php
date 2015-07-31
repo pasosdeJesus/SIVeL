@@ -52,7 +52,7 @@ function elimina_caso(&$db, $idcaso)
     hace_consulta($db, $q, false, false);
 
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-        list($n, $c, $o) = $tab;
+        list(, $c, $o) = $tab;
         //echo "OJO 1 o=$o, c=$c<br>";
         $bo[$o . $c] = $c;
     }
@@ -95,7 +95,7 @@ function elimina_caso(&$db, $idcaso)
 function act_globales()
 {
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-        list($n, $c, $o) = $tab;
+        list($n, $c, ) = $tab;
         if (($d = strrpos($c, "/"))>0) {
             $c = substr($c, $d+1);
         }

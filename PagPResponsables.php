@@ -230,10 +230,10 @@ class PagPResponsables extends PagBaseMultiple
         $op = array();
         reset($l);
         while ($result->fetchInto($row)) {
-            list($llave, $op[$row[0]]) = each($l);
+            list( , $op[$row[0]]) = each($l);
         }
         while (count($op)<3) {
-            list($llave, $op[]) = each($l);
+            list( , $op[]) = each($l);
         }
         $this->bcaso_presponsable->_do->es_enumOptions['tipo'] = $op;
         if (isset($_SESSION['forma_modo'])

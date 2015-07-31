@@ -48,30 +48,6 @@ function agregar_categoria_nombre(&$db, &$form) {
 }
 
 /**
- * Llamada desde estadisticas.php para completar primera consulta SQL
- * que genera estadísticas
- *
- * @param object &$db     Conexión a B.D
- * @param string &$where  Consulta SQL que se completa
- * @param string &$tablas Tablas incluidas en consulta
- * @param string &$pSegun Nombre de columna resultante en cons
- * @param string &$campoSegun Columnas por extraer para ser pSegun
- *
- * @return void Puede modificar $tablas, $where y $pSegun
- */
-function consulta_categoria_nombre(&$db, &$where, &$tablas, &$pSegun, 
-    &$campoSegun)
-{
-    //echo "OJO consulta_categoria_nombre(db, $where, $tablas, $pSegun, $campoSegun)";
-    $pCatHorizontales= var_req_escapa('cat_horizontales', $db, 32);
-    if ($pCatHorizontales == "1") {
-/*        $pSegun .= $pSegun == "" ? "" : ", ";
-        $pSegun .= 'categoria_nombre';
-$campoSegun .= 'categoria.nombre'; */
-    }
-}
-
-/**
  * Llamada desde estadisticas.php para completar tercera consulta SQL
  * que genera estadísticas con SELECT $campos3 FROM $tablas3 WHERE $cond3
  *
@@ -132,6 +108,7 @@ function consulta3_categoria_nombre(&$db, &$campos3, &$tablas3, &$cond3,
     function muestra_horizontal_html(&$db, &$resultado, $pMuestra, $cab)
     {
         //echo "OJO muestra_horizontal_html(db, resultado, $pMuestra, $cab)";
+        sin_error_pear($db);
         if ($pMuestra == 'categoria_horizontal') {
             $res = array();  // Resultados como tabla
             $enc = array();  // Encabezados son categorias de violencia

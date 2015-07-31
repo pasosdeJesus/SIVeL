@@ -63,7 +63,7 @@ class PagEtiquetas extends PagBaseSimple
      */
     function iniVar($aper = null)
     {
-        list($db, $dcaso, $idcaso) = parent::iniVar(array(true, true));
+        list($db, , $idcaso) = parent::iniVar(array(true, true));
 
         $dcaso_etiqueta =& objeto_tabla('caso_etiqueta');
         $dcaso_etiqueta->id_caso = $idcaso;

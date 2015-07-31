@@ -17,7 +17,6 @@
 
 // Opciones
 
-
 // Opciones del menú
 
 $GLOBALS['modulo'][1000] = 'modulos/bdcinep/filtrocons.php';
@@ -31,7 +30,6 @@ $GLOBALS['m_opcion'][57] = array(
 require_once "modulos/bdcinep/tablasnyn.php";
 
 $GLOBALS['gancho_ei_filtro'][] = 'agregar_categoria_nombre';
-$GLOBALS['gancho_ei_creaconsulta'][] = 'consulta_categoria_nombre';
 $GLOBALS['gancho_ei_creaconsulta3'][] = 'consulta3_categoria_nombre';
 $GLOBALS['gancho_ei_muestraconsulta'][] = 'muestra_horizontal_html';
 

@@ -109,6 +109,7 @@ function rotulos_orden_cons(&$q, $pOrdenar)
  */
 function rotulos_inicial(&$db, $campos, $idcaso, $numcaso)
 {
+    sin_error_pear($db);
     $r = "";
     if ($numcaso != null) {
         $r .= " CASO $numcaso\n";
@@ -201,6 +202,7 @@ function rotulos_inicial(&$db, $campos, $idcaso, $numcaso)
 function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
 {
     //echo "OJO rotulos_final de idcaso=$idcaso, numcaso=$numcaso<br>";
+    sin_error_pear($db);
     $r = "";
     $peso = 0;
     $rotulo = "";
