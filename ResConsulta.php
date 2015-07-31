@@ -3063,7 +3063,7 @@ class ResConsulta
      * Renglon de reporte CSV
      *
      * @param object  $db     Conexión
-     * @param unknown $idcaso Id. caso
+     * @param integer $idcaso Id. caso
      * @param array   $campos Campos por mostrar
      * @param array   $conv   Para conversión de ids.
      * @param array   $sal    registro por generar

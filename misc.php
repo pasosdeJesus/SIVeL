@@ -1575,13 +1575,16 @@ function var_escapa_cadena($v, &$db = null, $maxlong = 1024)
     $nv = substr($v, 0, $maxlong);
 
     /** Evita falla %00 en cadenas que vienen de HTTP */
-    $p1=str_replace("\0", ' ', $nv);
+    $p1 = str_replace("\0", ' ', $nv);
 
     /** Evita XSS */
-    $p2=htmlspecialchars($p1);
+    $p2 = htmlspecialchars($p1);
 
     /** Evita inyección de código SQL */
     if (isset($db) && $db != null && !PEAR::isError($db)) {
+        if (!method_exists($db, 'escapeSimple')) {
+            debug_print_backtrace();
+        }
         $p3 = $db->escapeSimple($p2);
     } else {
         // Tomado de librería de Pear DB/pgsql.php

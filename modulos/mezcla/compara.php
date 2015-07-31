@@ -37,7 +37,7 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
  *
  * @param string $s Cadena
  *
- * @return integer Prefijo izquierdo de z hasta .
+ * @return string Prefijo izquierdo de z hasta .
  */
 function hastapunto($s)
 {

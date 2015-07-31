@@ -19,14 +19,13 @@
  * Agrega tipo de orden a consulta web
  *
  * @param string $pOrden   Orden por poner
- * @param array  $opciones Opciones del usuario autenticado
  * @param object $obj      Objeto HTML_QuickForm con formulario
  * @param array  &$ae      Arreglo de opciones de ordenamiento
  * @param object &$t       Opción por defecto
  *
  * @return void Modifica $ae y $t
  */
-function rotulos_cwebordenar($pOrden, $opciones, $obj, &$ae, &$t)
+function rotulos_cwebordenar($pOrden, $obj, &$ae, &$t)
 {
     $x =& $obj->createElement(
         'radio', 'ordenar', 'rotulo', 'Rótulo',
