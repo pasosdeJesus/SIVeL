@@ -150,7 +150,7 @@ class ResConsulta
      * @param array        $detallesform Partir  memo en varias lineas
      * @param array        $ordCasos     Orden de los casos por mostrar
      * @param array        $busca_pr     Opciones de mostrar info.
-     * @param array        $ordenar      Ordenar
+     * @param string       $ordenar      Ordenar
      * @param boolean      $primnom      Nombre y apellido
      *
      * @return void
@@ -1451,7 +1451,6 @@ class ResConsulta
      * @param integer $idcaso Identificación del caso
      * @param object  $db     conexión a base de datos
      * @param array   $campos Campos por mostrar
-     * @param boolean $varlin Varías lineas?
      *
      * @return string Reporte
      */
