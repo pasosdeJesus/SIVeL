@@ -294,13 +294,14 @@ class PagPResponsables extends PagBaseMultiple
         if (isset($_SESSION['recuperaErrorValida'])) {
             $v = $_SESSION['recuperaErrorValida'];
         } else {
+            $v = array();
             $cpr = $this->bcaso_presponsable->_do->id_presponsable;
             $v['id_presponsable'] = $cpr;
             $pr=& $this->getElement('id_presponsable');
             $pr->setValue($cpr);
             $vscc = array();
             if (isset($_SESSION['nuevo_copia_id'])
-                && strstr($_SESSION['nuevo_copia_id'], ':') != false
+                && strstr($_SESSION['nuevo_copia_id'], ':') !== false
             ) {
                 list($idpr, $id) = explode(':', $_SESSION['nuevo_copia_id']);
                 unset($_SESSION['nuevo_copia_id']);

@@ -298,7 +298,7 @@ abstract class DB_DataObject_SIVeL extends DB_DataObject
                 ) {
                     //$obs .= " OJO texto";
                     if (trim($otro->$v) != ""
-                        && strstr($this->$v, $otro->$v) == false
+                        && strstr($this->$v, $otro->$v) === false
                     ) {
                         // Si no está concatenamos texto
                         if (trim($this->$v) == "") {

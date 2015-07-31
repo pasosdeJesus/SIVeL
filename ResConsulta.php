@@ -156,7 +156,7 @@ class ResConsulta
      * @return void
      */
     function ResConsulta(&$campos, &$db, &$resultado, &$conv, $mostrar,
-        $detallesform = array(), $ordCasos = array(), $busca_pr = null,
+        $detallesform = array(), $ordCasos = array(), $busca_pr = array(),
         $ordenar = '', $primnom = true
     ) {
         $this->campos =& $campos;
@@ -515,7 +515,6 @@ class ResConsulta
      * @param object &$db        Conexión a BD
      * @param array  $tablas     Tablas
      * @param string $donde      Donde
-     * @param string $pFinchasta Caja de selección
      * @param string $pMuestra   Muestra
      *
      * @return void
@@ -3075,6 +3074,7 @@ class ResConsulta
     {
         $adjunto_renglon = "";
         $vrpre = '"';
+        $escon = array();
         foreach ($campos as $cc => $nc) {
             $adjunto_renglon .= "";
             $vr = $vrescon = "";

@@ -203,6 +203,7 @@ class PagTipoViolencia extends PagBaseSimple
             while ($ndo->fetch()) {
                 $valscd[] = $ndo->id_contexto;
             }
+            $v = array();
             //$scd->setValue($valscd);
             $v['id_contexto'] = $valscd;
 

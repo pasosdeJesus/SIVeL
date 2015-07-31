@@ -91,6 +91,7 @@ function verificaInsercion(&$db, $tprueba, $na)
     assert(count($tprueba) == count($na));
 
     $nume = 0;
+    $nd = array();
     /* Verificando */
     foreach ($tprueba as $nt) {
         $q = "SELECT COUNT(*) FROM $nt";

@@ -244,7 +244,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
 
 
         if (isset($_SESSION['nuevo_copia_id'])
-            && strstr($_SESSION['nuevo_copia_id'], ":") != false
+            && strstr($_SESSION['nuevo_copia_id'], ":") !== false
         ) {
             list($idc, $idp, $fecha)
                 = explode(':', $_SESSION['nuevo_copia_id']);

@@ -51,6 +51,7 @@ function elimina_caso(&$db, $idcaso)
         ";
     hace_consulta($db, $q, false, false);
 
+    $bo = array();
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
         list(, $c, $o) = $tab;
         //echo "OJO 1 o=$o, c=$c<br>";

@@ -188,6 +188,7 @@ class PagDesplazamiento extends PagBaseMultiple
             ? $this->bdesplazamiento->_do->fechaexpulsion : '';
         $this->addElement('');
 
+        $gr =array();
         list($dep, $mun, ) = PagUbicacion::creaCampos(
             $this, 'departamentodecl', 'municipiodecl', 'clasedecl'
         );

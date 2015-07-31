@@ -50,7 +50,7 @@ class VerAnexo extends HTML_QuickForm_Action
             if (isset($page->_submitValues['archivo'])) {
                 $nombre = var_escapa($page->_submitValues['archivo']);
                 $inin = $_SESSION['basicos_id'] . "_";
-                if (strpos($nombre, '/')  != false) {
+                if (strpos($nombre, '/')  !== false) {
                     die("No puede tener el caracter/");
                 }
                 if ((substr($nombre, 0, strlen($inin))) != $inin) {

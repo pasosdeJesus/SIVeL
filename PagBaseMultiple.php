@@ -311,6 +311,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
         );
 
 
+        $ed = array();
         $nac = 'eliminar';
         $n = $this->getButtonName($nac);
         $e =& $this->createElement('submit', $n, _('Eliminar'));

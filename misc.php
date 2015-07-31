@@ -1295,7 +1295,7 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
         $d->$vl = var_escapa_cadena($id_prin[$il], $db);
     }
     if ($d->find()>0) {
-        if (strstr($t, $ntabla)==false) {
+        if (strstr($t, $ntabla) === false) {
             $t .= ", " . $ntabla;
             foreach ($llave_ntabla as $il => $vl) {
                 consulta_and_sinap(

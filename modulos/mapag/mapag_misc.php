@@ -25,6 +25,7 @@ function determina_host()
     if (isset($_SERVER['HTTP_REFERER'])) {
         $pu = parse_url($_SERVER['HTTP_REFERER']);
     } else {
+        $pu = array();
         $pu['scheme'] = isset($_SERVER['HTTPS']) &&  $_SERVER['HTTPS'] == 'on' ?
             "https" : "http";
         $pu['host'] = $_SERVER['HTTP_HOST'];

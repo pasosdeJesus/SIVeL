@@ -1209,6 +1209,7 @@ function extrae_casos()
     #$db = $dcaso->getDatabaseConnection();
     $dcaso->orderBy('id');
     $dcaso->find();
+    $ubicaso = array();
     while ($dcaso->fetch()) {
         $obs[$dcaso->id]=""; // No hay observaciones para esta conversión en BD
         $fechacaso[$dcaso->id] = $dcaso->fecha;

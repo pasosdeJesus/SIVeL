@@ -608,7 +608,7 @@ function localiza_conf()
     if (($ps = strrpos($n, "/")) !== false) {
         $n = substr($n, 0, $ps);
     }
-    if (($pm = strpos($n, "/modulos")) != false) {
+    if (($pm = strpos($n, "/modulos")) !== false) {
         $n = substr($n, 0, $pm);
     }
     $n = str_replace("/", "_", $n);
@@ -618,7 +618,7 @@ function localiza_conf()
     }
     if (strpos($n, "_") > 0) {
         $nn = substr($n, strpos($n, "_") + 1);
-    } else if (($pp = strpos($n, ".")) == true) {
+    } else if (($pp = strpos($n, ".")) !== false) {
         $nn = substr($n, 0, $pp);
     } else {
         $nn = $n;
