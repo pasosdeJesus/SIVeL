@@ -2245,10 +2245,8 @@ class ResConsulta
                 $fl = "\n";
                 $sep = "\n ";
             }
-            $r .= $fl;
 
             $fl = "";
-            $sep = "";
             $dfuentedirectacaso = objeto_tabla('caso_fotra');
             if (PEAR::isError($dfuentedirectacaso)) {
                 die($dfuentedirectacaso->getMessage());

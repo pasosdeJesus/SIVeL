@@ -195,6 +195,26 @@ function car2latex($c)
 
 
 /**
+ * Decide si $cadena comienza con $subcadena
+ * @return bool
+ */
+function comienza_con($cadena, $subcadena) 
+{
+    return $subcadena === "" || (strlen($subcadena) <= strlen($cadena) && 
+        substr($cadena, 0, strlen($subcadena)) == $subcadena);
+}
+
+/**
+ * Decide si $cadena termina con $subcadena
+ * @return bool
+ */
+function termina_con($cadena, $subcadena) 
+{
+    return $subcadena === "" || (strlen($subcadena) <= strlen($cadena) &&
+        substr($cadena, strlen($cadena) - strlen($subcadena)) == $subcadena);
+}
+
+/**
  * Convierte de texto a laTeX
  *
  * @param string $s Texto
