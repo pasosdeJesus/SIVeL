@@ -128,7 +128,7 @@ function procesa_fuente(&$db, $linea, &$dff, &$ffexistente, &$ffex,
         $fecha = conv_fecha($a[3], $obs);
     }
     if ($depura >= 3) {
-        echo "Depura: fuente vista n=$n, o=$o, fecha=$fecha<br>\n";
+        echo "Depura: fuente vista n='$n', o='$o', fecha='$fecha'<br>\n";
     }
     $n = trim($n);
     $idff = (int)conv_basica($db, 'ffrecuente', $n, $obs, false);
@@ -390,7 +390,7 @@ function perform()
         die_esc('No se pudo leer ' . $pArchivo);
     }
 
-    $depura = 5; 
+    $depura = 0; 
     // 1 Existente o no
     // 2 cambios a base de datos
     // 3 variables internas
@@ -781,7 +781,7 @@ function perform()
                 break;
             } else if (comienza_con($linea, 'Memo:')) {
                 $memo = "";
-                $sep = "";
+                $sepmemo = "";
                 $estado = 7;
                 break;
             }
@@ -814,14 +814,17 @@ function perform()
         case 6: // Esperando Memo:
             if (comienza_con($linea, 'Memo:')) {
                 $memo = "";
-                $sep = "";
+                $sepmemo = "";
                 $estado = 7;
                 break;
             }
             break;
         case 7: // Procesando Memo
             if (trim($linea) == '') {
-                $sep = "\n";
+                if ($depura >= 3) {
+                    echo "Depura en memo, línea en blanco<br>";
+                }
+                $sepmemo = "\n";
                 // Sigue en 7
                 break;
             } if (comienza_con($linea, 'Contexto: ')) {
@@ -846,10 +849,11 @@ function perform()
                 }
                 if (!$salta) {
                     if ($depura >= 3) {
-                        echo "Depura: memo aumentado $linea<br>\n";
+                        echo "Depura: memo aumentado $linea, sepmemo es " .
+                            ord($sepmemo) . "<br>\n";
                     }
-                    $memo .= $sep . $linea;
-                    $sep = " ";
+                    $memo .= $sepmemo . $linea;
+                    $sepmemo = "\n";
                     // Sigue en 7
                     break;
                 }
@@ -857,7 +861,7 @@ function perform()
             // sin break porque puede pasar a 8
         case 8: // Procesamiento de contexto si hay 
             if (trim($memo) != "") {
-                cambia_campo($dcaso, 'memo', trim($memo), $depura, $memosex);
+                cambia_campo($dcaso, 'memo', $memo, $depura, $memosex);
                 $memo = "";
             }
             if (trim($linea) == '') {
@@ -1190,6 +1194,10 @@ function perform()
                                     $lvicr[] = $row[0];
                                 }
                             }
+                            if ($depura >= 3) {
+                                echo "lvicr con " . count($lvicr) . "<br>";
+                            }
+
                             if (count($lvicr) == 0) {
                                 reperror_txt($pArchivo, $nlin, 
                                     "Se agotó lvicr, puede haber varios grupos de víctimas repetidas que no se maneja<br>");
@@ -1199,8 +1207,9 @@ function perform()
                             $dv->id_persona = array_shift($lvicr);
                             $dv->find();
                             $dv->fetch();
-                            // Escoger un $dv 
-                            break;
+                            if ($depura >= 3) {
+                                echo "Depura, elegida {$dv->id_persona}<br>";
+                            }
                         } else {
                             $row = array();
                             $r->fetchInto($row);
@@ -1215,7 +1224,7 @@ function perform()
                             $dv->find();
                             $dv->fetch();
                             if ($depura >= 3) {
-                                echo "Depura, hay una víctima para $nper<br>";
+                                echo "Depura, unica {$dv->id_persona}<br>";
                             }
                         }
                         $dp = $dv->getLink('id_persona');
@@ -1393,7 +1402,7 @@ function perform()
             // Etiquetas
 
             if (trim($memo) != "") {
-                cambia_campo($dcaso, 'memo', trim($memo), $depura, $memosex);
+                cambia_campo($dcaso, 'memo', $memo, $depura, $memosex);
                 $memo = "";
             }
             if (trim($linea) == "") {
@@ -1458,7 +1467,7 @@ function perform()
         case 15:
             // Analistas (pasada linea ANALISTA(s):
             if (trim($memo) != "") {
-                cambia_campo($dcaso, 'memo', trim($memo), $depura, $memosex);
+                cambia_campo($dcaso, 'memo', $memo, $depura, $memosex);
                 $memo = "";
             }
             if (trim($linea) == '') {
@@ -1488,7 +1497,8 @@ function perform()
                         $escribe, $depura);
 
                     actualiza_arreglo_do($dff, $ffexistente,
-                        'id_caso, id_contexto', $escribe, $depura
+                        'id_caso, id_ffrecuente, fecha, ubicacion', 
+                        $escribe, $depura
                     );
 
                     foreach($dof as $i => $df) {
@@ -1527,8 +1537,16 @@ function perform()
                                 $dacto->id_categoria = $id_c[0];
                                 $dacto->id_persona = $dp->id;
                                 $dacto->id_caso = $idcaso;
+                                if ($depura >= 3) {
+                                    echo "Depura, examinando si ya está acto " .
+                                        "$id_pr, {$id_c[0]}, {$dp->id}, " .
+                                        "$idcaso<br>";
+                                }
                                 $dacto->find();
                                 if (!$dacto->fetch()) {
+                                    if ($depura >= 3) {
+                                        echo "Depura, no esta, insertando";
+                                    }
                                     $actosnuevos++;
                                     inserta_do($dacto, 
                                         'id_presponsable, id_categoria, ' .
