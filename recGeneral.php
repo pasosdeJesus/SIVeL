@@ -495,7 +495,7 @@ function perform()
             $repgen .= $linea;
         }
         if ($depura >= 6) {
-            echo "Depura: línea $nlin, estado=$estado<br>";
+            echo "Depura: línea $nlin, estado=$estado, linea=$linea<br>";
         }
         switch ($estado) {
         case 0: 
