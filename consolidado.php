@@ -360,7 +360,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             }
         }
 
-        $depuraConsolidado = false;
+        $depuraConsolidado = true;
         $suma = array();
         if ($pMuestra == "tabla") {
             echo "<table border='1'>\n";
@@ -436,8 +436,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
             if ($pMuestra == "tabla") {
                 echo "<tr>";
                 if ($depuraConsolidado) {
-                    echo "<td>". (int)$idcaso . "</td><td>"
-                        . (int)$idvic . "</td>";
+                    echo "<td><a href='captura_caso.php?modo=edita&id={$idcaso}'>"
+                        . "{$idcaso}</a>\n";
                 }
                 echo "<td>" . htmlentities($fecha, ENT_COMPAT, 'UTF-8') .
                     "</td><td>" .  htmlentities($ubi, ENT_COMPAT, 'UTF-8') .
