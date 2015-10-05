@@ -5,6 +5,10 @@
 		<listitem>
 			<para><itemizedlist>
 				<listitem><para>
+Renombrados archivos de comandos actweb.sh y pubweb.sh a exporta-web.sh y borratodo-publica-web.sh respectivamente.
+				</para></listitem>
+
+				<listitem><para>
 Al exportar/importar casos con etiquetas se conserva la fecha de estas.
 				</para></listitem>
 				<listitem><para>
