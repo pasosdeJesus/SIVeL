@@ -366,7 +366,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             echo "<table border='1'>\n";
             echo "<tr>";
             if ($depuraConsolidado) {
-                echo "<td>IdCaso</td><td>IdVic</td>";
+                echo "<td>IdCaso</td>";
             }
             echo "<th>" . _("Fecha") . "</th><th>" . _("Ubicación")
                 . "</th><th>" . _("Víctimas") . "</th>";
