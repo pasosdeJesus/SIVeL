@@ -3398,6 +3398,40 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Arreglada marcha patriotica redundante');
 }
 
+$idac = '1.2-vv2';
+if (!aplicado($idac)) {
+
+    hace_consulta($db, "DROP MATERIALIZED VIEW IF EXISTS nmujeres");
+    hace_consulta($db, "CREATE MATERIALIZED VIEW nmujeres AS 
+	SELECT  s.nombre, COUNT(*) AS frec
+	FROM (SELECT 
+		divarr(string_to_array(trim(nombres), ' ')) AS nombre 
+		FROM persona, victima WHERE victima.id_persona=persona.id 
+		AND sexo='F') AS s 
+	GROUP BY s.nombre ORDER BY frec;");
+    hace_consulta($db, "DROP MATERIALIZED VIEW IF EXISTS nhombres");
+    hace_consulta($db, "CREATE MATERIALIZED VIEW nhombres AS 
+	SELECT  s.nombre, COUNT(*) AS frec
+	FROM (SELECT 
+		divarr(string_to_array(trim(nombres), ' ')) AS nombre
+		FROM persona, victima WHERE victima.id_persona=persona.id 
+		AND sexo='M') AS s
+	GROUP BY s.nombre ORDER BY frec;");
+    hace_consulta($db, "DROP MATERIALIZED VIEW IF EXISTS napellidos");
+    hace_consulta($db, "CREATE MATERIALIZED VIEW napellidos AS 
+	SELECT  s.apellido, COUNT(*) AS frec
+	FROM (SELECT 
+		divarr(string_to_array(trim(apellidos), ' ')) AS apellido
+		FROM persona, victima WHERE victima.id_persona=persona.id) AS s 
+	GROUP BY s.apellido ORDER BY frec;");
+    hace_consulta($db, "DROP FUNCTION IF EXISTS 
+        divarr_concod(ANYARRAY, INTEGER)");
+    hace_consulta($db, "DROP TYPE IF EXISTS nomcod");
+
+    aplicaact($act, $idac, 'Mejora velocidad de determinación probabilistica de sexo con base en nombres');
+}
+
+
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {
@@ -3425,7 +3459,7 @@ if (isset($GLOBALS['menu_tablas_basicas'])) {
         "<tt>menu_tablas_basicas</tt></font>";
 }
 
-
+ 
 // Creando esquema
 regenera_esquemas();
 

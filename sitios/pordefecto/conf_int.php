@@ -90,7 +90,7 @@ $GLOBALS['receptor_correo'] = 'sivel@localhost';
 /** Dirección de la cual provendrán mensajes cifrados.
  * @global string $GLOBALS['emisor_correo']
  */
-$GLOBALS['emisor_correo'] = 'bancodat@nocheyniebla.org';
+$GLOBALS['emisor_correo'] = 'micorreo@miorg.org';
 
 /** Validaciones indice es mensaje de error y valor es consulta SQL.
  * La consulta debe responder primero con la identificacion del caso con 
