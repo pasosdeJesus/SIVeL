@@ -33,5 +33,6 @@ function textCounter(field, cntfield, maxlimit)
 //  End -->
 </script></head><body background=""><b>A (rotulo1):</b>1000 <p>Presuntos Responsables<br><b>1</b>: presuntos r1;
 <table border='1'>
-<tr><th>Fecha</th><th>Ubicación</th><th>Víctimas</th><th>A</th><td>PR</td></tr><tr><td>2007-08-07</td><td>y - municipio1</td><td>NOMBRES APELLIDOS</td><td>X</td><td>1</td></tr>
+<tr><td>IdCaso</td><th>Fecha</th><th>Ubicación</th><th>Víctimas</th><th>A</th><td>PR</td></tr><tr><td><a href='captura_caso.php?modo=edita&id=1'>1</a>
+<td>2007-08-07</td><td>y - municipio1</td><td>NOMBRES APELLIDOS</td><td>X</td><td>1</td></tr>
 <tr><td></td><td></td><td></td><td>1</td></tr></table></body></html>
