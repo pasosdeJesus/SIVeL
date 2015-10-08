@@ -654,7 +654,6 @@ function localiza_conf()
         if ($pbase == '127') {
             $pbase = 'sivel';
         }
-        encabezado_envia('Error');
         echo "No existe configuraci&oacute;n '"
             . htmlentities($dirsitio, ENT_COMPAT, 'UTF-8') . "'<br>";
         if (isset($_SERVER['PATH_TRANSLATED'])) {
