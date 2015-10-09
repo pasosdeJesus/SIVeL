@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
-	<varlistentry><term>Versión 1.2 (Sep.2015)</term>
+	<varlistentry><term>Versión 1.2 (Oct.2015)</term>
 		<listitem>
 			<para><itemizedlist>
+				<listitem><para>
+Validación más veloz de nombres, apellidos y sexo de nacimiento.
+				</para></listitem>
+
+
 				<listitem><para>
 Renombrados archivos de comandos actweb.sh y pubweb.sh a exporta-web.sh y borratodo-publica-web.sh respectivamente.
 				</para></listitem>

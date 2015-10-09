@@ -13,7 +13,7 @@ PROYECTO=docsivel
 # Nombre del proyecto
 #
 
-PRY_VERSION="1.2b4"
+PRY_VERSION="1.2"
 # Versión
 #
 
@@ -21,7 +21,7 @@ PRY_DESC="Documentación de SIVeL"
 # Descripción corta
 #
 
-FECHA_PROX="20/03/2013"
+FECHA_PROX="20/12/2016"
 # Fecha en la que esperamos liberar próxima versión
 #
 
@@ -38,7 +38,7 @@ CVSPROYECTO="sivel.cvs.sourceforge.net:/cvsroot/sivel/doc"
 
 # Las siguientes variables serán modificadas por conf.sh (normalmente no las debe editar)
 
-MES_ACT="octubre de 2002"
+MES_ACT="octubre de 2015"
 # Mes de actualización
 #
 

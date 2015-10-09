@@ -113,10 +113,10 @@
   </biblioentry>
 
 
-  <bibliomixed id="basico_OpenBSD">
+  <bibliomixed id="basico_adJ">
 	  <title>Uso Básico de la distribución Aprendiendo de Jesús de OpenBSD</title>
 	<bibliomisc><ulink
-			url="http://structio.sourceforge.net/guias/basico_OpenBSD">http://structio.sourceforge.net/guias/basico_OpenBSD</ulink> 2011</bibliomisc>
+			url="http://pasosdeJesus.github.io/basico_adJ">http://pasosdeJesus.github.io/basico_adJ</ulink>. 2015</bibliomisc>
   </bibliomixed>
 
   <biblioentry id="javascriptgoogle">

@@ -197,7 +197,7 @@ que un presunto responsable A sea subestructura de B y B
 	  <para>Como las
 operaciones que se presentan a continuación deben realizarse desde una
 terminal con un interprete de comandos, recomendamos que lea al respecto
-(ver por ejemplo <xref linkend="basico_OpenBSD"></xref>) y que conozca la 
+(ver por ejemplo <xref linkend="basico_adJ"></xref>) y que conozca la 
 ubicación de las fuentes de SIVeL y
 del sitio o sitios que maneje.  Por ejemplo en adJ las fuentes de SIVeL
 estarán en <filename>/var/www/htdocs/sivel</filename>,  el sitio

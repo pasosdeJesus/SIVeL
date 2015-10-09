@@ -110,7 +110,7 @@ include herram/comdist.mak
 
 # Elimina hasta configuración
 limpiadist: limpiamas
-	rm -f confv.sh confv.ent Make.inc .#*
+	rm -f confaux.sed confv.sh confv.ent Make.inc .#*
 	rm -rf $(HTML_DIR)
 	rm -rf $(PRINT_DIR)
 
