@@ -1,5 +1,15 @@
 Apéndice A. Novedades
 
+   Versión 1.2 (Oct.2015)
+
+          + Validación más veloz de nombres, apellidos y sexo de
+            nacimiento.
+          + Renombrados archivos de comandos actweb.sh y pubweb.sh a
+            exporta-web.sh y borratodo-publica-web.sh respectivamente.
+          + Al exportar/importar casos con etiquetas se conserva la fecha
+            de estas.
+          + Fallas reportadas por scrutinizer-ci resueltas.
+
    Versión 1.2b4 (May.2015)
 
           + Consulta web permite filtrar por contexto.
