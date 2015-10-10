@@ -13,7 +13,7 @@ USERACT=$(USERCVS),$(PROYECTO)
 GENDIST=Instala.txt Novedades.txt #usrdoc
 ACTHOST=web.sourceforge.net
 ACTDIR=/home/groups/s/si/sivel/htdocs/1.2/
-GENACT=distsf
+GENACT=ghtodo
 FILESACT=$(PROYECTO)-$(PRY_VERSION).tar.gz
 
 all:

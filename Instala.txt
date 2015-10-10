@@ -4,26 +4,26 @@
        distribución Aprendiendo de Jesús (ver
        http://aprendiendo.pasosdeJesus.org).
      * Para hacer pruebas durante la configuración puede emplear una
-       consola y el navegador tipo texto w3m, sin embargo se sugiere
+       consola y el navegador tipo texto lynx, sin embargo se sugiere
        configurar X-Window (ver
-       http://pasosdeJesus.github.io/usuario_OpenBSD/sobre-la-inst
+       http://structio.sourceforge.net/guias/usuario_OpenBSD/sobre-la-inst
        alacion.html#configuracion-de-xorg) y un navegador gráfico como
        mozilla-firefox.
      * Se sugiere crear dos contenedores cifrados en los que residirán la
        base de datos y copias de respaldo respectivamente. Cada una debe
        ser al menos de 100MB aunque se sugiere 700MB --para que quepa cada
        una en un CD por si desea mantener copias de respaldo (ver
-       http://pasosdeJesus.github.io/usuario_OpenBSD/configuracion
+       http://structio.sourceforge.net/guias/usuario_OpenBSD/configuracion
        -de-algunos-dispositivos.html#imagen-cifrada)-- o de 4GB si saca
        copias en DVD.
      * Servidor web con SSL, recomendamos nginx (ver
-       http://pasosdeJesus.github.io/servidor_OpenBSD/sevidor-web.
+       http://structio.sourceforge.net/guias/servidor_OpenBSD/sevidor-web.
        html#nginx). Sugerimos que lo ejecute con chroot en /var/www y que
        cree el directorio /var/www/tmp para que PostgreSQL ubique su
        socket allí, con permisos de ejecución, lectura y escritura para
        todos.
      * PostgreSQL (ver
-       http://pasosdeJesus.github.io/servidor_OpenBSD/postgresql.h
+       http://structio.sourceforge.net/guias/servidor_OpenBSD/postgresql.h
        tml#primera-instalaci%C3%B3n) con extensiones postgresql-contrib.
        Sugerimos que la configure para usar sockets en /var/www/tmp. Así
        mismo se sugiere que active autovaciado en
@@ -33,7 +33,7 @@ autovacuum = on
 
      * PHP 5 con módulo para PostgreSQL y Pear (ver uso de PHP 5 con nginx
        en
-       http://pasosdeJesus.github.io/servidor_OpenBSD/sevidor-web.
+       http://structio.sourceforge.net/guias/servidor_OpenBSD/sevidor-web.
        html#nginx).
        Se sugiere editar /var/www/conf/php.ini para asegurar que tiene:
 max_execution_time = 900
@@ -41,7 +41,7 @@ max_input_time = 900
 
        así cada analista tendrá más tiempo de edición en algunos casos.
        Para instalar pear en OpenBSD, configure la variable PKG_PATH (ver
-       http://pasosdeJesus.github.io/usuario_OpenBSD/paquetes-y-po
+       http://structio.sourceforge.net/guias/usuario_OpenBSD/paquetes-y-po
        rtes.html#paquetes ) y ejecute:
 sudo pkg_add pear
 

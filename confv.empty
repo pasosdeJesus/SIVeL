@@ -56,6 +56,11 @@ CVSPROYECTO="sivel.cvs.sourceforge.net:/cvsroot/sivel"
 # CVSROOT del proyecto
 #
 
+
+GHPROYECTO="github.com/pasosdeJesus/SIVeL"
+# CVSROOT del proyecto
+#
+
 MES_ACT="octubre de 2002"
 # Mes de actualización
 #
