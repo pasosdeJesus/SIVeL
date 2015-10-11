@@ -32,22 +32,24 @@ limpia:
 limpiamas: limpia
 	find . -type file -name "*bak" | xargs rm -f 
 	find . -type file -name "*~" | xargs rm -f 
-	rm -f confaux.tmp doc/conf.php
+	rm -f confaux.tmp doc/conf.php confv.copia 
 	-cd doc/ && make limpiamas
 
-
 limpiadist: limpiamas
+	rm -rf $(PROYECTO)-$(PRY_VERSION).tar.gz
+	rm -rf doc/personaliza.ent.copia
+	rm -rf locale/m.pot
 	rm -f fixlinks.sh
-	rm -f confv.sh
+	rm -f confv.sh confv.php
 	rm -f Anotaciones.txt varses.sh Mejoras.txt clave-* sivel-*.ini sivel-*.links.ini vardb.sh aut/conf.php DataObject.ini doc/personaliza.ent FondoSecc.png DataObject-*ini
 	rm -rf tmp
-	for i in `find . -name *plantilla`; do n=`echo $$i | sed -e "s/.plantilla//g"`; rm -f $$n;  done;
-	rm -rf ewiki ultimoenvio.txt priv bak valida cuenta-datos.out
+	#for i in `find . -name *plantilla`; do n=`echo $$i | sed -e "s/.plantilla//g"`; rm -f $$n;  done;
+	rm -rf ewiki ultimoenvio.txt priv bak valida/* cuenta-datos.out
 	#rm -rf st; mkdir -p st; mv sitios/nuevo.sh sitios/pordefecto sitios/pruebas st/; rm -rf sitios/*; mv st/* sitios/; rm -rf st
 	#rm -rf mt; mkdir -p mt; mv modulos/{anexos,bdcinep,belicas,desplazamiento,estrotulos,etiquetas,segjudicial} mt/; rm -rf modulos/*; mv mt/* modulos/; rm -rf mt
 	rm -rf web tmp sitios/pruebas/salida pdoc
 	find . -name ".#*" -exec rm {} ';'
-	-cd doc;make limpiadist
+	-(cd doc;make limpiadist)
 
 
 

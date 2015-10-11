@@ -40,6 +40,7 @@ dist:
 	mkdir -p $(PROYECTO)-$(PRY_VERSION); \
 	cp -rf $$a $(PROYECTO)-$(PRY_VERSION)
 	find $(PROYECTO)-$(PRY_VERSION) -name "CVS" | xargs rm -rf
+	find $(PROYECTO)-$(PRY_VERSION) -name ".git" | xargs rm -rf
 	if (test "$(LIMPIADIST2)" != "") then { echo "LIMPIADIST2"; cd $(PROYECTO)-$(PRY_VERSION); make $(LIMPIADIST2);} fi;
 	cp Make.inc $(PROYECTO)-$(PRY_VERSION); cd $(PROYECTO)-$(PRY_VERSION); make limpiadist; rm -f Make.inc
 	tar cvfz $(PROYECTO)-$(PRY_VERSION).tar.gz $(PROYECTO)-$(PRY_VERSION)

@@ -9,14 +9,7 @@
    En Internet puede consultar la versión más reciente de esta
    documentación en http://sivel.sf.net/1.2/, así como la documentación
    técnica o bien descargar el código fuente de SIVeL o esta documentación
-   en formato HTML comprimido. Agradecemos el hospedaje brindado por
-   SourceForge Get SIVeL at SourceForge.net. Fast, secure and Free Open
-   Source software downloads Agradecemos el hospedaje brindado por
-   SourceForge [a>. Agradecemos el hospedaje brindado por SourceForge <a
-   href=] Get SIVeL at SourceForge.net. Fast, secure and Free Open Source
-   software downloads amp;type=8" width="80" height="15" alt="Get SIVeL at
-   SourceForge.net. Fast, secure and Free Open Source software downloads"
-   />
+   en formato HTML comprimido.
 
    Lo invitamos a consultar versiones más recientes y noticias
    relacionadas con SIVeL en http://sivel.sf.net

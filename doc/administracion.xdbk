@@ -435,7 +435,7 @@ requiere estar cifrada), por ejemplo <literal>/var/www/resbase</literal>.
 usuario administrador de SIVeL ejecute:
 						<screen>
 cd /var/www/htdocs/sivel/sitios/sivel
-../../bin/actweb.sh
+../../bin/exporta-web.sh
 						</screen>
 Este script generará un volcado, del cual eliminará las fuentes y
 enviará el volcado resultante con <literal>scp</literal> al destino 
@@ -449,7 +449,7 @@ configurado con un nombre de la forma
 						<screen>
 cd /var/www/htdocs/sivel/sitios/sivel
 ../../bin/pgdump.sh
-../../bin/pubweb.sh
+../../bin/borratodo-publica-web.sh
 						</screen>
 					</para>
 				</listitem>
