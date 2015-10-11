@@ -45,7 +45,7 @@ limpiadist: limpiamas
 	rm -rf tmp
 	#for i in `find . -name *plantilla`; do n=`echo $$i | sed -e "s/.plantilla//g"`; rm -f $$n;  done;
 	rm -rf ewiki ultimoenvio.txt priv bak valida/* cuenta-datos.out
-	#rm -rf st; mkdir -p st; mv sitios/nuevo.sh sitios/pordefecto sitios/pruebas st/; rm -rf sitios/*; mv st/* sitios/; rm -rf st
+	rm -rf st; mkdir -p st; mv sitios/nuevo.sh sitios/pordefecto sitios/pruebas st/; rm -rf sitios/*; mv st/* sitios/; rm -rf st
 	#rm -rf mt; mkdir -p mt; mv modulos/{anexos,bdcinep,belicas,desplazamiento,estrotulos,etiquetas,segjudicial} mt/; rm -rf modulos/*; mv mt/* modulos/; rm -rf mt
 	rm -rf web tmp sitios/pruebas/salida pdoc
 	find . -name ".#*" -exec rm {} ';'
