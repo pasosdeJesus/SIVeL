@@ -13,7 +13,9 @@ USERACT=$(USERCVS),$(PROYECTO)
 GENDIST=Instala.txt Novedades.txt #usrdoc
 ACTHOST=web.sourceforge.net
 ACTDIR=/home/groups/s/si/sivel/htdocs/1.2/
-GENACT=ghtodo
+GITHOST=https://github.com/pasosdeJesus/
+GITPRY=SIVeL
+GENACT=distsf
 FILESACT=$(PROYECTO)-$(PRY_VERSION).tar.gz
 
 all:
@@ -41,8 +43,8 @@ limpiadist: limpiamas
 	rm -rf tmp
 	for i in `find . -name *plantilla`; do n=`echo $$i | sed -e "s/.plantilla//g"`; rm -f $$n;  done;
 	rm -rf ewiki ultimoenvio.txt priv bak valida cuenta-datos.out
-	rm -rf st; mkdir -p st; mv sitios/nuevo.sh sitios/pordefecto sitios/pruebas st/; rm -rf sitios/*; mv st/* sitios/; rm -rf st
-	rm -rf mt; mkdir -p mt; mv modulos/{anexos,belicas,etiquetas,segjudicial} mt/; rm -rf modulos/*; mv mt/* modulos/; rm -rf mt
+	#rm -rf st; mkdir -p st; mv sitios/nuevo.sh sitios/pordefecto sitios/pruebas st/; rm -rf sitios/*; mv st/* sitios/; rm -rf st
+	#rm -rf mt; mkdir -p mt; mv modulos/{anexos,bdcinep,belicas,desplazamiento,estrotulos,etiquetas,segjudicial} mt/; rm -rf modulos/*; mv mt/* modulos/; rm -rf mt
 	rm -rf web tmp sitios/pruebas/salida pdoc
 	find . -name ".#*" -exec rm {} ';'
 	-cd doc;make limpiadist
@@ -94,7 +96,7 @@ doc: usrdoc Creditos.txt Instala.txt Derechos.txt Novedades.txt
 docdist: 
 	(cd doc/ ; make dist)
 
-distsf: distcvs
+distsf: doc distgh
 	cp doc/html/index.html doc/html/index.html-sinsf
 	sed -e "s/HTML comprimido<\/a>./ HTML comprimido<\/a>. Agradecemos el hospedaje brindado por SourceForge <a href=\"http:\/\/sourceforge.net\/projects\/sivel\"><img src=\"http:\/\/sflogo.sourceforge.net\/sflogo.php?group_id=104373&amp;type=8\" width=\"80\" height=\"15\" alt=\"Get SIVeL at SourceForge.net. Fast, secure and Free Open Source software downloads\" \/><\/a>/g" doc/html/index.html-sinsf > doc/html/index.html
 

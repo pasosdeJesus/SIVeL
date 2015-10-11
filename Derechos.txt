@@ -4,12 +4,19 @@
    está registrada como obra de dominio público ante la oficina de
    Derechos de Autor de Colombia desde el 10 de Mayo de 2011. Oramos para
    que no sea utilizado por estructuras armadas. Esta documentación fue
-   actualizada por última vez en 09/10/2015
+   actualizada por última vez en 10/10/2015
 
    En Internet puede consultar la versión más reciente de esta
    documentación en http://sivel.sf.net/1.2/, así como la documentación
    técnica o bien descargar el código fuente de SIVeL o esta documentación
-   en formato HTML comprimido.
+   en formato HTML comprimido. Agradecemos el hospedaje brindado por
+   SourceForge Get SIVeL at SourceForge.net. Fast, secure and Free Open
+   Source software downloads Agradecemos el hospedaje brindado por
+   SourceForge [a>. Agradecemos el hospedaje brindado por SourceForge <a
+   href=] Get SIVeL at SourceForge.net. Fast, secure and Free Open Source
+   software downloads amp;type=8" width="80" height="15" alt="Get SIVeL at
+   SourceForge.net. Fast, secure and Free Open Source software downloads"
+   />
 
    Lo invitamos a consultar versiones más recientes y noticias
    relacionadas con SIVeL en http://sivel.sf.net

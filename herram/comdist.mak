@@ -19,6 +19,13 @@
 # 		en una distribución de fuentes.
 
 
+distgh:
+	git clone $(GITHOST)$(GITPRY)
+	$(RM) -rf $(PROYECTO)-$(PRY_VERSION)
+	$(MV)  $(GITPRY) $(PROYECTO)-$(PRY_VERSION)
+	tar cvfz $(PROYECTO)-$(PRY_VERSION).tar.gz $(PROYECTO)-$(PRY_VERSION)
+	rm -rf $(PROYECTO)-$(PRY_VERSION)
+
 distcvs:
 	cvs -d:pserver:anonymous@$(CVSPROYECTO) login
 	cvs -z3 -d:pserver:anonymous@$(CVSPROYECTO) co -r$(RAMA) -P $(PROYECTO)
