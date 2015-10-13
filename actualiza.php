@@ -2745,6 +2745,9 @@ $idac = '1.2-fu2';
 if (!aplicado($idac)) {
     # Si hay inconsistencias en usuarios el siguiente falla
     hace_consulta(
+        $db, "ALTER TABLE usuario DROP CONSTRAINT IF EXISTS usuario_pkey"
+    );
+    hace_consulta(
         $db, "ALTER TABLE usuario ADD CONSTRAINT usuario_pkey
         PRIMARY KEY (id)"
     );
