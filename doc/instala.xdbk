@@ -220,7 +220,7 @@ exit
 					<para>
 Ejecute el archivo de ordenes de configuración:
 <screen>
-cd /var/www/htdocs/sivel12/
+cd /var/www/htdocs/sivel/
 ./conf.sh
 </screen>
 					</para>
@@ -231,26 +231,26 @@ Cree un nuevo sitio desde el directorio <filename>sitios</filename>
 con el archivo de ordenes <filename>nuevo.sh</filename>.  Por ejemplo
 para crear el sitio <literal>sivel</literal>:
 <screen>
-cd /var/www/htdocs/sivel12/sitios
-./nuevo.sh sivel12
+cd /var/www/htdocs/sivel/sitios
+./nuevo.sh sivel
 </screen>
 Este archivo de ordenes 
 copiará los archivo <filename>pordefecto/conf.php.plantilla</filename> 
 y <filename>pordefecto/vardb.sh.plantilla</filename> como
-<filename>sivel12/conf.php</filename> y <filename>sivel12/vardb.sh</filename>
+<filename>sivel/conf.php</filename> y <filename>sivel/vardb.sh</filename>
 cuadrando rutas y usuario de PostgreSQL (si requiere cambiar usuario
-o clave de PostgreSQL edite <filename>sivel12/conf.php</filename>).  También
+o clave de PostgreSQL edite <filename>sivel/conf.php</filename>).  También
 inicializará la base de datos y los archivos relacionados, lo cual usted 
 puede hacer manualmente con:
 <screen>
-cd /var/www/htdocs/sivel12/sitios/sivel12
+cd /var/www/htdocs/sivel/sitios/sivel
 ../../bin/creapg.sh
 </screen>
 y el mismo archivo de ordenes le permitirá agregar el primer usuario al cual
 debe darle el rol de administrador.  Si posteriormente requiere agregar
 otros usuarios para este sitio desde el interprete de comandos ejecute:
 <screen>
-cd /var/www/htdocs/sivel12/sitios/sivel12
+cd /var/www/htdocs/sivel/sitios/sivel
 ../../bin/agus.sh
 </screen>
 </para>
@@ -279,7 +279,7 @@ puede revisar errores en la bitácora de nginx (por defecto
 					<para>
 Si desea generar la documentación:
 <screen>
-cd /var/www/htdocs/sivel12/doc
+cd /var/www/htdocs/sivel/doc
 ./conf.sh
 cp personaliza.ent.plantilla personaliza.ent
 </screen>
@@ -431,8 +431,8 @@ con:
 						<screen>
 cd ~/Documentos
 tar xvfz SIVeL-&PRY-VERSION;.tar.gz
-sudo chown $USER:$USER /var/www/htdocs/sivel12/
-cp -rf SIVeL-&PRY-VERSION;/* /var/www/htdocs/sivel12/
+sudo chown $USER:$USER /var/www/htdocs/sivel/
+cp -rf SIVeL-&PRY-VERSION;/* /var/www/htdocs/sivel/
 </screen>
 					</para>
 				</listitem>
@@ -444,8 +444,8 @@ cd ~
 mkdir tmp2
 cd tmp2
 git clone https://github.com/pasosdeJesus/SIVeL.git
-sudo chown $USER:$USER /var/www/htdocs/sivel12
-cp -rf SIVeL/* /var/www/htdocs/sivel12
+sudo chown $USER:$USER /var/www/htdocs/sivel
+cp -rf SIVeL/* /var/www/htdocs/sivel
 </screen>
 					</para>
 				</listitem>
@@ -454,7 +454,7 @@ cp -rf SIVeL/* /var/www/htdocs/sivel12
 Si ya tiene unas fuentes que tengan 
 control de versiones (con el directorio .git), actualicelas asi:
 <screen>
-cd /var/www/htdocs/sivel12
+cd /var/www/htdocs/sivel
 git pull
 </screen>
 					</para>
@@ -464,7 +464,7 @@ git pull
 		<para>
 Después debe asegurarse de tener configurado nginx para
 acceder a SIVeL en su nueva ubicación 
-<filename>/var/www/htdocs/sivel12/</filename>. 
+<filename>/var/www/htdocs/sivel/</filename>. 
 Para esto edite el archivo de configuración con:
 <screen>
 sudo xfw /etc/nginx/nginx.conf
@@ -475,7 +475,7 @@ root "/var/www/htdocs";
 </screen>
 y si la encuentra remplázela por:
 <screen>
-root "/var/www/htdocs/sivel12";
+root "/var/www/htdocs/sivel";
 </screen>
 Complete reiniciando nginx con 
 <screen>
@@ -580,11 +580,11 @@ al URL, debe ser algo de la forma:
 	<listitem>
 		<para>
 
-Instale la versión de desarrollo de SIVeL 1.2, bien con el paquete disponible en adJ-&VER-ADJ; o siguiendo los mismos pasos descritos en 
+Instale SIVeL 1.2, bien con el paquete disponible en adJ-&VER-ADJ; o siguiendo los mismos pasos descritos en 
 <xref linkend="actualizacionmenor"></xref>.
 Asegurse de ejecutar <filename>conf.sh</filename>:
 <screen>
-	cd /var/www/htdocs/sivel12/
+	cd /var/www/htdocs/sivel/
 	./conf.sh -i
 </screen>
 		</para>
@@ -615,14 +615,14 @@ ALTER ROLE sivel WITH SUPERUSER;
 	Si movió su sistema 1.1 como se describió en esta sección
 	y dejo las ubicaciones por defecto, basta que ejecute:
 <screen>
-	cd /var/www/htdocs/sivel12/
+	cd /var/www/htdocs/sivel/
 	./conf.sh -i
 </screen>
 Por cada sitio que ya haya copiado cree una base en blanco pero con 
 codificación UTF-8:
 <screen>
-	cd /var/www/htdocs/sivel12/sitios/
-	SIN_ESQUEMA=1 SIN_DATOS=1 ./nuevo.sh primersitio12
+	cd /var/www/htdocs/sivel/sitios/
+	SIN_ESQUEMA=1 SIN_DATOS=1 ./nuevo.sh primersitio
 </screen>
 Si requiere conocer la clave del usuario SIVeL ubiquese en el directorio con 
 fuentes de la versión  1.0 y ejecute:
@@ -635,21 +635,21 @@ Y ponga esa clave en el archivo de configuración de la nueva versión.
 Restaure los datos de la base respaldada (cambie el nombre de la base y el día 
 de acuerdo a su caso):
 <screen>
-	cd primersitio12
+	cd primersitio
 	../../bin/restaura.sh /var/www/resbase/movido-primersitio-dump-03.sql.gz
 </screen>
 Configure nginx para abrir nuevo sitio en <filename>/etc/nginx/nginx.conf</filename>:
 <screen>
-	location ~ ^/primersitio12/(.+\.php)$ {
-            alias	   /htdocs/sivel12/$1;
+	location ~ ^/primersitio/(.+\.php)$ {
+            alias	   /htdocs/sivel/$1;
 	    fastcgi_pass   unix:run/php-fpm.sock;
             fastcgi_index  index.php;
             fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
             include        fastcgi_params;
         }
 
-	location /primersitio12/ {
-		alias /htdocs/sivel12/$1;
+	location /primersitio/ {
+		alias /htdocs/sivel/$1;
 	}
 </screen>
 A continuación reinicie el servidor web:
@@ -665,7 +665,7 @@ A continuación reinicie el servidor web:
 			https://192.168.44.10/primersitio/ para ingresar a 
 			un sitio, ejecute:
 			<screen>
-cd /var/www/htdocs/sivel12/sitios/
+cd /var/www/htdocs/sivel/sitios/
 ln -s primersitio 192.168.44.10_PRIMERSITIO
 			</screen>
 y pruebe desde URLs acordes a los enlaces por ejemplo:
@@ -716,7 +716,7 @@ Abra dos pestañas en su navegador en una realice un reporte general con
 todos los datos de la base anterior y en la otra el mismo reporte en la 
 base nueva.  Después:
 <screen>
-cd /var/www/htdocs/sivel12/sitios/sivel12
+cd /var/www/htdocs/sivel/sitios/sivel
 mkdir compara-migra
 cd compara-migra/
 </screen>

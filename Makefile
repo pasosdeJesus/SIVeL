@@ -20,7 +20,7 @@ FILESACT=$(PROYECTO)-$(PRY_VERSION).tar.gz
 
 all:
 
-docact:  #distcvs
+docact: dist #distcvs
 	rm -rf $(PROYECTO)-$(PRY_VERSION)
 	tar xvfz $(PROYECTO)-$(PRY_VERSION).tar.gz	
 	(cd $(PROYECTO)-$(PRY_VERSION)/doc; ./conf.sh; make; make act)

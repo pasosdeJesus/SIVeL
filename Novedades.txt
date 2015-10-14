@@ -6,6 +6,8 @@ Apéndice A. Novedades
             nacimiento.
           + Renombrados archivos de comandos actweb.sh y pubweb.sh a
             exporta-web.sh y borratodo-publica-web.sh respectivamente.
+            Esqueleto de programa para recuperar casos a partir de un
+            reporte general recGeneral.html.
           + Al exportar/importar casos con etiquetas se conserva la fecha
             de estas.
           + Fallas reportadas por scrutinizer-ci resueltas.
@@ -15,16 +17,19 @@ Apéndice A. Novedades
           + Consulta web permite filtrar por contexto.
           + Reporte de actos como en 1.1 pero con las columnas adicionales
             Sexo y Rango de Edad.
-          + Puede deshabilitarse edición de casos con
-            $GLOBALS['no_permite_editar'].
+          + Puede deshabilitar edición de casos con
+            $GLOBALS['no_permite_editar'] en archivo de configuración (e.g
+            sitios/sivel/conf.php).
           + Fallas corregidas: cálculo de edad, no muestra rangos de edad
             deshabilitados en ficha de captura, eliminada Marcha
             Patriótica duplicada de Filiación Política.
           + En módulo mapag puede configurarse autenticación para ver mapa
-            con $GLOBALS['mapag_autentica'].
+            con $GLOBALS['mapag_autentica'] en archivo de configuración
+            (e.g sitios/sivel/conf.php).
           + Puede deshabilitarse manejo (edición/adición/eliminación) de
             tablas básicas con
-            $GLOBALS['deshabilita_manejo_tablasbasicas']
+            $GLOBALS['deshabilita_manejo_tablasbasicas'] en archivo de
+            configuración (e.g sitios/sivel/conf.php).
 
    Versión 1.2b3 (Ago.2014)
 

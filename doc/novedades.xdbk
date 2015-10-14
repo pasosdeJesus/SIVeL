@@ -7,12 +7,13 @@
 				<listitem><para>
 Validación más veloz de nombres, apellidos y sexo de nacimiento.
 				</para></listitem>
-
-
 				<listitem><para>
-Renombrados archivos de comandos actweb.sh y pubweb.sh a exporta-web.sh y borratodo-publica-web.sh respectivamente.
+Renombrados archivos de comandos <literal>actweb.sh</literal> 
+y <literal>pubweb.sh</literal> a <literal>exporta-web.sh</literal> 
+y <literal>borratodo-publica-web.sh</literal> respectivamente.  
+Esqueleto de programa para recuperar casos a partir de un reporte general
+<literal>recGeneral.html</literal>.
 				</para></listitem>
-
 				<listitem><para>
 Al exportar/importar casos con etiquetas se conserva la fecha de estas.
 				</para></listitem>
@@ -35,22 +36,28 @@ Sexo y Rango de Edad.
 					</para></listitem>
 
 					<listitem><para>
-Puede deshabilitarse edición de casos con
-$GLOBALS['no_permite_editar'].
+Puede deshabilitar edición de casos con
+$GLOBALS['no_permite_editar'] en archivo de configuración 
+(e.g <literal>sitios/sivel/conf.php</literal>).
 					</para></listitem>
 					<listitem><para>
-Fallas corregidas: cálculo de edad, no muestra rangos de edad deshabilitados en ficha de captura, eliminada Marcha Patriótica duplicada de Filiación Política.
+Fallas corregidas: cálculo de edad, no muestra rangos de edad deshabilitados en 
+ficha de captura, eliminada Marcha Patriótica duplicada de Filiación Política.
 					</para></listitem>
 
 
 					<listitem><para>
 En módulo mapag puede configurarse autenticación para ver mapa con 
-$GLOBALS['mapag_autentica'].
+$GLOBALS['mapag_autentica']
+ en archivo de configuración 
+(e.g <literal>sitios/sivel/conf.php</literal>).
 					</para></listitem>
 
 					<listitem><para>
 Puede deshabilitarse manejo (edición/adición/eliminación) de tablas básicas con
 $GLOBALS['deshabilita_manejo_tablasbasicas']
+en archivo de configuración 
+(e.g <literal>sitios/sivel/conf.php</literal>).
 					</para></listitem>
 			</itemizedlist></para>
 		</listitem>
