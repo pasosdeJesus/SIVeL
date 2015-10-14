@@ -388,6 +388,7 @@ if (test "$regenera" = "1") then {
 		if (test -f sitios/sivel/conf.php) then {
 			cp -f sitios/sivel/conf.php sitios/sivel/conf.php.copia
 		} fi;
+		chmod u+rw sitios/sivel/conf.php sitios/sivel/vardb.sh
 		sed -e "s/^ *\$dbservidor=.*/\$dbservidor=\"unix($dschrootsed)\";/g" sitios/pordefecto/conf.php.plantilla |
 		sed -e "s/^ *\$dbnombre *=.*/\$dbnombre = \"$dbnombre\";/g"  |
 		sed -e "s/^ *\$dbusuario *=.*/\$dbusuario = \"$dbusuario\";/g"  |
