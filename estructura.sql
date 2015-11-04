@@ -744,6 +744,23 @@ CREATE TABLE actocolectivo (
 
 -- Funciones y Vistas
 
+-- Quien inicio un caso
+
+CREATE VIEW iniciador AS (
+ SELECT caso_usuario.id_caso,
+    caso_usuario.fechainicio AS fecha_inicio,
+    min(caso_usuario.id_usuario) AS id_funcionario
+   FROM caso_usuario,
+    ( SELECT funcionario_caso_1.id_caso,
+            min(funcionario_caso_1.fechainicio) AS m
+           FROM caso_usuario funcionario_caso_1
+          GROUP BY funcionario_caso_1.id_caso) c
+  WHERE caso_usuario.id_caso = c.id_caso AND caso_usuario.fechainicio = c.m
+  GROUP BY caso_usuario.id_caso, caso_usuario.fechainicio
+  ORDER BY caso_usuario.id_caso, caso_usuario.fechainicio
+);
+
+
 -- Soundex
 
 -- Funcion Soundex en Español para una cadena sin espacios

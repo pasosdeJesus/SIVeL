@@ -2745,7 +2745,7 @@ $idac = '1.2-fu2';
 if (!aplicado($idac)) {
     # Si hay inconsistencias en usuarios el siguiente falla
     hace_consulta(
-        $db, "ALTER TABLE usuario DROP CONSTRAINT IF EXISTS usuario_pkey"
+        $db, "ALTER TABLE usuario DROP CONSTRAINT IF EXISTS usuario_pkey "
     );
     hace_consulta(
         $db, "ALTER TABLE usuario ADD CONSTRAINT usuario_pkey
@@ -3434,6 +3434,25 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Mejora velocidad de determinación probabilistica de sexo con base en nombres');
 }
 
+$idac = '1.2-in';
+if (!aplicado($idac)) {
+    hace_consulta($db, "CREATE VIEW iniciador AS (
+     SELECT caso_usuario.id_caso,
+        caso_usuario.fechainicio AS fecha_inicio,
+        min(caso_usuario.id_usuario) AS id_funcionario
+       FROM caso_usuario,
+        ( SELECT funcionario_caso_1.id_caso,
+                min(funcionario_caso_1.fechainicio) AS m
+               FROM caso_usuario funcionario_caso_1
+              GROUP BY funcionario_caso_1.id_caso) c
+      WHERE caso_usuario.id_caso = c.id_caso AND caso_usuario.fechainicio = c.m
+      GROUP BY caso_usuario.id_caso, caso_usuario.fechainicio
+      ORDER BY caso_usuario.id_caso, caso_usuario.fechainicio
+      ); ");
+    aplicaact($act, $idac, 'Vista de usuario que inicia caso');
+}
+
+ 
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;

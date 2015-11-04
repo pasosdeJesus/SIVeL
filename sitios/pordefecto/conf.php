@@ -200,6 +200,11 @@ $GLOBALS['deshabilita_manejo_usuarios'] = false;
  */
 $GLOBALS['deshabilita_manejo_tablasbasicas'] = false;
 
+/** Anios para validaciones relacionadas con sexo
+ * @global string $GLOBALS['anios_valida_sexo']
+ */
+$GLOBALS['anios_valida_sexo'] = 5;
+
 /** Nivel de depuración para DB_DataObject. 0 a 5.
  * @global string $GLOBALS['DB_Debug']
  */

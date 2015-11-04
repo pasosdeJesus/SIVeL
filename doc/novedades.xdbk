@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
+	<varlistentry><term>Versión 1.2.1 (Dic.2015)</term>
+		<listitem>
+			<para><itemizedlist>
+				<listitem><para>
+Cantidad de años por validar nombres, apellidos y sexo de nacimiento 
+configurable con variable <literal>$GLOBALS['anios_valida_sexo']</literal>.
+Por defecto empieza en 5.
+				</para></listitem>
+
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
 	<varlistentry><term>Versión 1.2 (Oct.2015)</term>
 		<listitem>
 			<para><itemizedlist>
