@@ -77,7 +77,7 @@ require_once "conf.php";
  * @param array  $tprueba Tablas por revisar
  * @param array  $na      Número de registros antes de inserción
  *
- * @return Retorna cantidad de errores de validación.  Hay error en una
+ * @return integer Retorna cantidad de errores de validación.  Hay error en una
  * de las tablas si la cuenta de registros es una más que la de $na
  */
 function verificaInsercion(&$db, $tprueba, $na)
@@ -91,6 +91,7 @@ function verificaInsercion(&$db, $tprueba, $na)
     assert(count($tprueba) == count($na));
 
     $nume = 0;
+    $nd = array();
     /* Verificando */
     foreach ($tprueba as $nt) {
         $q = "SELECT COUNT(*) FROM $nt";
@@ -111,7 +112,7 @@ function verificaInsercion(&$db, $tprueba, $na)
  * require se ejecuta una vez)
  *
  * @param handle  &$db          Conexión a BD
- * @param string  $tabla_prueba Tabla que debe incrementarse tras pasar pestaña
+ * @param array   $tabla_prueba Tabla que debe incrementarse tras pasar pestaña
  * @param array   $post         Valor que debe tomar la variable POST
  * @param integer $basicos_id   Cód. caso si falta $_SESSION['basicos_id']
  * @param boolean $terminaError Si hay error terminar

@@ -744,6 +744,23 @@ CREATE TABLE actocolectivo (
 
 -- Funciones y Vistas
 
+-- Quien inicio un caso
+
+CREATE VIEW iniciador AS (
+ SELECT caso_usuario.id_caso,
+    caso_usuario.fechainicio AS fecha_inicio,
+    min(caso_usuario.id_usuario) AS id_funcionario
+   FROM caso_usuario,
+    ( SELECT funcionario_caso_1.id_caso,
+            min(funcionario_caso_1.fechainicio) AS m
+           FROM caso_usuario funcionario_caso_1
+          GROUP BY funcionario_caso_1.id_caso) c
+  WHERE caso_usuario.id_caso = c.id_caso AND caso_usuario.fechainicio = c.m
+  GROUP BY caso_usuario.id_caso, caso_usuario.fechainicio
+  ORDER BY caso_usuario.id_caso, caso_usuario.fechainicio
+);
+
+
 -- Soundex
 
 -- Funcion Soundex en Español para una cadena sin espacios
@@ -882,31 +899,23 @@ LANGUAGE SQL IMMUTABLE;
 -- Pareja (nombre, numero de caso)
 CREATE TYPE nomcod AS (nombre VARCHAR(100), caso INTEGER);
 
--- Recibe un código y un arreglo de cadenas y convierte el arreglo en un cojunto de parejas (cadena, numero)
-CREATE OR REPLACE FUNCTION divarr_concod(in_array ANYARRAY, 
-	in_integer INTEGER) RETURNS SETOF nomcod as
-$$
-    SELECT ($1)[s],$2 FROM generate_series(1,array_upper($1, 1)) AS s;
-$$
-LANGUAGE SQL IMMUTABLE;
-
 -- Vista con nombres de mujeres y frecuencia de cada nombre
 CREATE MATERIALIZED VIEW nmujeres AS 
-	SELECT  (p).nombre, COUNT((p).caso) AS frec
+	SELECT  s.nombre, COUNT(*) AS frec
 	FROM (SELECT 
-		divarr_concod(string_to_array(trim(nombres), ' '), id_caso) AS p 
+		divarr(string_to_array(trim(nombres), ' ')) AS nombre
 		FROM persona, victima WHERE victima.id_persona=persona.id 
-		AND sexo='F' ORDER BY 1) AS r 
-	GROUP BY 1 ORDER BY 2;
+		AND sexo='F') AS s
+	GROUP BY s.nombre ORDER BY frec;
 
 -- Vista con nombres de hombres y frecuencia de cada nombre
 CREATE MATERIALIZED VIEW nhombres AS 
-	SELECT  (p).nombre, COUNT((p).caso) AS frec
+	SELECT  s.nombre, COUNT(*) AS frec
 	FROM (SELECT 
-		divarr_concod(string_to_array(nombres, ' '), id_caso) AS p 
+		divarr(string_to_array(trim(nombres), ' ')) AS nombre
 		FROM persona, victima WHERE victima.id_persona=persona.id 
-		AND sexo='M' ORDER BY 1) AS r 
-	GROUP BY 1 ORDER BY 2;
+		AND sexo='M') AS s
+	GROUP BY s.nombre ORDER BY frec;
 
 
 -- Probabilidad de que una cadena (sin espacios) sea nombre de mujer
@@ -958,13 +967,11 @@ LANGUAGE SQL IMMUTABLE;
 
 -- Vista con apellidos y frecuencia de cada uno
 CREATE MATERIALIZED VIEW napellidos AS 
-	SELECT  (p).nombre as apellido, COUNT((p).caso) AS frec
+	SELECT  s.apellido, COUNT(*) AS frec
 	FROM (SELECT 
-		divarr_concod(string_to_array(trim(apellidos), ' '), id_caso) 
-		AS p 
-		FROM persona, victima WHERE victima.id_persona=persona.id 
-		ORDER BY 1) AS r 
-	GROUP BY 1 ORDER BY 2;
+		divarr(string_to_array(trim(apellidos), ' ')) AS apellido
+		FROM persona, victima WHERE victima.id_persona=persona.id) AS s 
+	GROUP BY s.apellido ORDER BY frec;
 
 -- Probabilidad de que una cadena (sin espacios) sea un apellido
 CREATE OR REPLACE FUNCTION probcadap(in_text TEXT) RETURNS NUMERIC AS

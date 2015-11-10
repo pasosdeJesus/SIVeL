@@ -25,6 +25,7 @@ function determina_host()
     if (isset($_SERVER['HTTP_REFERER'])) {
         $pu = parse_url($_SERVER['HTTP_REFERER']);
     } else {
+        $pu = array();
         $pu['scheme'] = isset($_SERVER['HTTPS']) &&  $_SERVER['HTTPS'] == 'on' ?
             "https" : "http";
         $pu['host'] = $_SERVER['HTTP_HOST'];
@@ -84,12 +85,11 @@ function display_xml_error($error, $xml)
 /**
  * Presenta errores en lectura XML
  *
- * @param object $xml Objeto
  * @param string $ca  Unparsed xml string
  *
  * @return void
  */
-function errores_xml($xml, $ca)
+function errores_xml($ca)
 {
     trigger_error("ca=" . $ca);
     $lxml = explode("\n", $ca);

@@ -185,7 +185,7 @@ class PagPResponsables extends PagBaseMultiple
      */
     function PagPResponsables($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo = _('Presuntos Responsables');
         $this->tcorto = _('P. Resp.');
         if (isset($GLOBALS['etiqueta']['Presuntos Responsables'])) {
@@ -230,10 +230,10 @@ class PagPResponsables extends PagBaseMultiple
         $op = array();
         reset($l);
         while ($result->fetchInto($row)) {
-            list($llave, $op[$row[0]]) = each($l);
+            list( , $op[$row[0]]) = each($l);
         }
         while (count($op)<3) {
-            list($llave, $op[]) = each($l);
+            list( , $op[]) = each($l);
         }
         $this->bcaso_presponsable->_do->es_enumOptions['tipo'] = $op;
         if (isset($_SESSION['forma_modo'])
@@ -294,13 +294,14 @@ class PagPResponsables extends PagBaseMultiple
         if (isset($_SESSION['recuperaErrorValida'])) {
             $v = $_SESSION['recuperaErrorValida'];
         } else {
+            $v = array();
             $cpr = $this->bcaso_presponsable->_do->id_presponsable;
             $v['id_presponsable'] = $cpr;
             $pr=& $this->getElement('id_presponsable');
             $pr->setValue($cpr);
             $vscc = array();
             if (isset($_SESSION['nuevo_copia_id'])
-                && strstr($_SESSION['nuevo_copia_id'], ':') != false
+                && strstr($_SESSION['nuevo_copia_id'], ':') !== false
             ) {
                 list($idpr, $id) = explode(':', $_SESSION['nuevo_copia_id']);
                 unset($_SESSION['nuevo_copia_id']);
@@ -310,7 +311,7 @@ class PagPResponsables extends PagBaseMultiple
                 $d->find();
                 $d->fetch();
                 foreach ($d->fb_fieldsToRender as $c) {
-                    $cq = $this->getElement($c);
+                    #$cq = $this->getElement($c);
                     $v[$c] = $d->$c;
                     //$cq->setValue($d->$c);
                 }
@@ -439,6 +440,9 @@ class PagPResponsables extends PagBaseMultiple
 
 
         $db = $this->iniVar();
+        if ($this->bcaso_presponsable === null) {
+            return false;
+        }
         $this->bcaso_presponsable->forceQueryType(
             DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
         );
@@ -462,7 +466,7 @@ class PagPResponsables extends PagBaseMultiple
                 " WHERE id_caso='" . (int)$idcaso . "' " .
                 " AND id='" . (int)$id . "' " .
                 " AND id_presponsable='" . (int)$idpres . "'";
-            $result = hace_consulta($db, $q);
+            hace_consulta($db, $q);
             $this->bcaso_presponsable->_do->delete();
             $this->bcaso_presponsable->_do->id = $id;
             $this->bcaso_presponsable->_do->id_caso = $idcaso;
@@ -478,8 +482,10 @@ class PagPResponsables extends PagBaseMultiple
         if (PEAR::isError($ret)) {
             die($ret->getMessage());
         }
-        if (isset($valores['clasificacion'])) {
-            foreach (var_escapa($valores['clasificacion']) as $k => $v) {
+        if (isset($this->bcategoria->_do)) {
+            foreach (var_escapa_arreglo($valores['clasificacion']) 
+                as $k => $v
+            ) {
                 $t = explode(":", var_escapa($v, $db));
                 $this->bcategoria->_do->id
                     = $this->bcaso_presponsable->_do->id;

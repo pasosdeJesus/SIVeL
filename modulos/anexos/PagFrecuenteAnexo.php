@@ -76,7 +76,7 @@ class PagFrecuenteAnexo extends PagFuentesFrecuentes
      */
     function PagFrecuenteAnexo($nomForma)
     {
-        parent::PagFuentesFrecuentes($nomForma);
+        $this->PagFuentesFrecuentes($nomForma);
         $this->titulo  = _('Fuentes Frecuentes');
         if (isset($GLOBALS['etiqueta']['Fuentes Frecuentes'])) {
             $this->titulo = $GLOBALS['etiqueta']['Fuentes Frecuentes'];

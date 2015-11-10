@@ -18,7 +18,6 @@
 /**
  * Consulta web.
  */
-
 require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
 /* Autenticamos si la consulta pública está deshabilitada */
@@ -46,7 +45,7 @@ require_once 'PagTipoViolencia.php';
 require_once 'ResConsulta.php';
 
 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-    list($n, $c, $o) = $tab;
+    list($n, $c, ) = $tab;
     if (($d = strrpos($c, "/"))>0) {
         $c = substr($c, $d+1);
     }
@@ -84,31 +83,31 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             die($d->getMessage());
         }
         $db =& $d->getDatabaseConnection();
-        $pFini      = var_req_escapa('fini', $db);
-        $pFfin      = var_req_escapa('ffin', $db);
-        $pFiini     = var_req_escapa('fiini', $db);
-        $pFifin     = var_req_escapa('fifin', $db);
-        $pMostrar   = var_req_escapa('mostrar', $db, 32);
-        $pOrdenar   = substr(var_req_escapa('ordenar', $db), 0, 32);
-        $pUsuario   = substr(var_req_escapa('usuario', $db), 0, 32);
-        $pIdCasos   = substr(var_req_escapa('id_casos', $db), 0, 50000);
-        $pIdClase   = (int)var_req_escapa('id_clase', $db);
-        $pIdMunicipio   = (int)var_req_escapa('id_municipio', $db);
-        $pIdDepartamento= (int)var_req_escapa('id_departamento', $db);
-        $pClasificacion = var_req_escapa('clasificacion', $db);
-        $pPresponsable  = (int)var_req_escapa('presponsable', $db);
-        $pContexto= (int)var_req_escapa('contexto', $db);
-        $pSsocial   = (int)var_req_escapa('ssocial', $db);
-        $pNomvic    = substr(var_req_escapa('nomvic', $db), 0, 32);
-        $pNomsim    = substr(var_req_escapa('nomsim', $db), 0, 32);
-        $pDesc      = substr(var_req_escapa('descripcion', $db), 0, 32);
-        $pMFuentes  = (int)var_req_escapa('m_fuentes', $db);
-        $pRetroalimentacion = (int)var_req_escapa('retroalimentacion', $db);
-        $pVarLineas = (int)var_req_escapa('m_varlineas', $db);
-        $pConcoordenadas = (int)var_req_escapa('concoordenadas', $db);
-        $pTeX       = (int)var_req_escapa('m_tex', $db);
-        $pTitulo    = substr(var_req_escapa('titulo', $db), 0, 32);
-        $pTvio    = substr(var_req_escapa('tviolencia', $db), 0, 1);
+        $pFini      = var_req_escapa_arreglo('fini', $db);
+        $pFfin      = var_req_escapa_arreglo('ffin', $db);
+        $pFiini     = var_req_escapa_arreglo('fiini', $db);
+        $pFifin     = var_req_escapa_arreglo('fifin', $db);
+        $pMostrar   = var_req_escapa_cadena('mostrar', $db, 32);
+        $pOrdenar   = var_req_escapa_cadena('ordenar', $db, 32);
+        $pUsuario   = var_req_escapa_cadena('usuario', $db, 32);
+        $pIdCasos   = var_req_escapa_cadena('id_casos', $db, 50000);
+        $pIdClase   = (int)var_req_escapa_cadena('id_clase', $db);
+        $pIdMunicipio   = (int)var_req_escapa_cadena('id_municipio', $db);
+        $pIdDepartamento= (int)var_req_escapa_cadena('id_departamento', $db);
+        $pClasificacion = var_req_escapa_arreglo('clasificacion', $db);
+        $pPresponsable  = (int)var_req_escapa_cadena('presponsable', $db);
+        $pContexto= (int)var_req_escapa_cadena('contexto', $db);
+        $pSsocial   = (int)var_req_escapa_cadena('ssocial', $db);
+        $pNomvic    = substr(var_req_escapa_cadena('nomvic', $db), 0, 32);
+        $pNomsim    = substr(var_req_escapa_cadena('nomsim', $db), 0, 32);
+        $pDesc      = substr(var_req_escapa_cadena('descripcion', $db), 0, 32);
+        $pMFuentes  = (int)var_req_escapa_cadena('m_fuentes', $db);
+        $pRetroalimentacion = (int)var_req_escapa_cadena('retroalimentacion', $db);
+        $pVarLineas = (int)var_req_escapa_cadena('m_varlineas', $db);
+        $pConcoordenadas = (int)var_req_escapa_cadena('concoordenadas', $db);
+        $pTeX       = (int)var_req_escapa_cadena('m_tex', $db);
+        $pTitulo    = var_req_escapa_cadena('titulo', $db, 32);
+        $pTvio    = var_req_escapa_cadena('tviolencia', $db, 1);
         $pPrimNom = isset($_REQUEST['primnom']);
         $pSexo    = var_req_escapa('sexo');
 
@@ -180,7 +179,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
                 SELECT id_caso FROM caso_categoria_presponsable WHERE
                 id_tviolencia = '$pTvio')";
         }
-        if ($pClasificacion != '') {
+        if (is_array($pClasificacion) && count($pClasificacion) > 0) {
             $ini = '(';
             $so = '';
             $tind = false;
@@ -242,7 +241,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
 
         $oconv = array(); // Campos resultado además de conv
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -335,14 +334,15 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             agrega_tabla($tablas, 'caso_presponsable');
         }
         if (in_array(42, $page->opciones)
-            && ($pUsuario != '' || (isset($pFiini['Y']) && $pFiini['Y'] != '')
-            || (isset($pFifin['Y']) && $pFifin['Y'] != ''))
+            && ($pUsuario != '' || (is_array($pFiini) && 
+            isset($pFiini['Y']) && $pFiini['Y'] != '')
+            || (is_array($pFifin) && isset($pFifin['Y']) && $pFifin['Y'] != ''))
         ) {
             agrega_tabla($tablas, 'caso_usuario');
             consulta_and_sinap($where, "caso_usuario.id_caso", "caso.id");
         }
         if (in_array(42, $page->opciones)
-            && isset($pFiini['Y']) && $pFiini['Y'] != ''
+            && is_array($pFiini) && isset($pFiini['Y']) && $pFiini['Y'] != ''
         ) {
             consulta_and(
                 $db, $where, "caso_usuario.fechainicio",
@@ -350,7 +350,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             );
         }
         if (in_array(42, $page->opciones)
-            && isset($pFifin['Y']) && $pFifin['Y'] != ''
+            && is_array($pFifin) && isset($pFifin['Y']) && $pFifin['Y'] != ''
         ) {
             consulta_and(
                 $db, $where, "caso_usuario.fechainicio",
@@ -423,7 +423,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         //echo "OJO q es $q"; die("x");
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -451,15 +451,14 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             $campos['m_fuentes'] = 'Fuentes';
         }
 
-        if ($pMostrar != 'csv'
+        if (is_array($pMostrar) || ($pMostrar != 'csv'
             && $pMostrar != 'revista'
             && $pMostrar != 'tabla'
             && $pMostrar != 'relato'
-            && !in_array(42, $page->opciones)
+            && !in_array(42, $page->opciones))
         ) {
             die('No es posible');
         }
-
 
         $ar =& $result;
         $r = new ResConsulta(
@@ -712,7 +711,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -769,33 +768,33 @@ class ConsultaWeb extends HTML_QuickForm_Page
 
 
         $ae = array();
-        $x =& $this->createElement(
+        $x = $this->createElement(
             'radio', 'ordenar', 'fecha',
             _('Fecha'), 'fecha'
         );
-        $ae[] =&  $x;
-        if ($pOrden == '' || $pOrden == 'fecha') {
-            $t =& $x;
-        }
-        $x =& $this->createElement(
+        $ae[] = $x;
+        $t =& end($ae);
+    
+        $x = $this->createElement(
             'radio', 'ordenar', 'ubicacion',
             _('Ubicación'), 'ubicacion'
         );
-        $ae[] =& $x;
+        $ae[] = $x;
         if ($pOrden == 'ubicacion') {
-            $t =& $x;
+            $t =& end($ae);
         }
 
         if ($this->opciones != array()) {
-            $x =& $this->createElement(
+            $x = $this->createElement(
                 'radio', 'ordenar', 'codigo',
                 _('Código'), 'codigo'
             );
-            $ae[] =& $x;
+            $ae[] = $x;
             if ($pOrden == 'codigo') {
-                $t =& $x;
+                $t =& end($ae);
             }
         }
+
         $r = "";
         if (isset($GLOBALS['consultaweb_ordenarpor'])) {
             foreach ($GLOBALS['consultaweb_ordenarpor'] as $k => $f) {
@@ -812,7 +811,6 @@ class ConsultaWeb extends HTML_QuickForm_Page
                 }
             }
         }
-
 
         $this->addGroup($ae, null, _('Ordenar por'), '&nbsp;', false);
         $t->setChecked(true);
@@ -853,7 +851,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         }
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -964,7 +962,7 @@ class ConsultaWeb extends HTML_QuickForm_Page
         $opch[] =& $sel;
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }

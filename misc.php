@@ -22,6 +22,7 @@
 
 require_once "bcrypt.php";
 require_once "Auth.php";
+require_once "PEAR.php";
 require_once "HTML/QuickForm.php";
 require_once "HTML/Common.php";
 require_once "DB_DataObject_SIVeL.php";
@@ -194,6 +195,26 @@ function car2latex($c)
 
 
 /**
+ * Decide si $cadena comienza con $subcadena
+ * @return bool
+ */
+function comienza_con($cadena, $subcadena) 
+{
+    return $subcadena === "" || (strlen($subcadena) <= strlen($cadena) && 
+        substr($cadena, 0, strlen($subcadena)) == $subcadena);
+}
+
+/**
+ * Decide si $cadena termina con $subcadena
+ * @return bool
+ */
+function termina_con($cadena, $subcadena) 
+{
+    return $subcadena === "" || (strlen($subcadena) <= strlen($cadena) &&
+        substr($cadena, strlen($cadena) - strlen($subcadena)) == $subcadena);
+}
+
+/**
  * Convierte de texto a laTeX
  *
  * @param string $s Texto
@@ -204,7 +225,7 @@ function txt2latex($s)
 {
     $r = "";
     $nc = 0; // Número de comillas encontradas
-    $nc = 0; // Número de apostrofes encontradas
+    $na = 0; // Número de apostrofes encontradas
     for ($i = 0; $i < strlen($s); $i++) {
         switch ($s{$i}) {
         case '"':
@@ -400,7 +421,7 @@ function muestra_archivo($noma, $esc = false)
 {
     $rh = fopen($noma, "rb");
     while ($rh != false && !feof($rh)) {
-        if ($esc) {
+        if ($esc === true) {
             echo_esc(fread($rh, 1024));
         } else {
             $html_l = fread($rh, 1024);
@@ -447,7 +468,7 @@ function agregar_tabla($nom, &$f, $idcaso, $nuevo, &$da)
 
     $ba->createSubmit = 0;
     $ba->useForm($f);
-    $fa = $ba->getForm();
+    $ba->getForm();
 
     return $ba;
 }
@@ -494,9 +515,10 @@ function error_valida($msg, $valores, $iderr = '', $enhtml = false)
     }
     if (isset($valores) && is_array($valores) && count($valores) > 0) {
         $_SESSION['recuperaErrorValida'] = $valores;
-    }
+   }
+    $mcod = $enhtml ? $msg : json_encode($msg);
     echo "<script language=\"JavaScript\">";
-    echo "alert('" . json_encode($msg) . "');";
+    echo "alert('" . $mcod . "');";
     echo "</script>";
     if ($iderr != '') {
         $_SESSION[$iderr] = $msg;
@@ -580,6 +602,7 @@ function res_valida(&$db, $mens, $cons, $confunc = false)
     echo (int)$nr;
     if ($nr > 0) {
         echo "<center><table border='1'>";
+        $row = array();
         while ($r->fetchInto($row)) {
             echo "<tr>";
             $nr = 0;
@@ -617,7 +640,7 @@ function unset_var_session()
     unset($_SESSION['camMunicipio']);
 
     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-        list($pag, $cl) = $tab;
+        list(, $cl) = $tab;
         $vars = get_class_vars($cl);
         if (isset($vars['pref'])) {
             unset($_SESSION[$vars['pref'] . '_pag']);
@@ -1152,7 +1175,7 @@ function sin_error_pear($do, $msg = "")
  */
 function hace_consulta(&$db, $q, $finenerror = true, $muestraerror = true)
 {
-    if ($db == null || !($db instanceof PEAR)) {
+    if ($db == null || !method_exists($db, 'query')) {
         echo "db no es objeto PEAR<br>";
         debug_print_backtrace();
         exit(1);
@@ -1213,7 +1236,7 @@ function consulta_uno(&$db, $q, $t = true)
  * @param unknown &$db   Conexión a base de datos
  * @param string  &$w    cadena con WHERE que se completa
  * @param string  $n     nombre de campo
- * @param string  $v     valor esperado
+ * @param string|integer  $v     valor esperado
  * @param string  $opcmp operador de comparación por usar.
  * @param string  $con   con
  *
@@ -1227,7 +1250,7 @@ function consulta_and(&$db, &$w, $n, $v, $opcmp = '=', $con='AND')
     if ($w != "") {
         $w .= " $con";
     }
-    $w .= " " . $n . $opcmp . "'".var_escapa($v, $db)."'";
+    $w .= " " . $n . $opcmp . "'". var_escapa($v, $db) . "'";
 }
 
 
@@ -1289,16 +1312,16 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
     $db = $d->getDatabaseConnection();
     $ks = $d->keys();
     foreach ($llave_ntabla as $il => $vl) {
-        $d->$vl = var_escapa($id_prin[$il]);
+        $d->$vl = var_escapa_cadena($id_prin[$il], $db);
     }
     if ($d->find()>0) {
-        if (strstr($t, $ntabla)==false) {
+        if (strstr($t, $ntabla) === false) {
             $t .= ", " . $ntabla;
             foreach ($llave_ntabla as $il => $vl) {
                 consulta_and_sinap(
-                    $w, var_escapa($ntabla, $db). "." .
-                    var_escapa($vl),
-                    var_escapa($llave_prin[$il]),
+                    $w, var_escapa_cadena($ntabla, $db). "." .
+                    var_escapa_cadena($vl, $db),
+                    var_escapa_cadena($llave_prin[$il], $db),
                     "=", $gcon
                 );
             }
@@ -1310,7 +1333,7 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
                 if (!in_array($llave, $llave_ntabla)) {
                     consulta_and(
                         $db, $w2, "$ntabla . $llave",
-                        var_escapa($d->$llave, $db), '=', 'AND'
+                        var_escapa_cadena($d->$llave, $db), '=', 'AND'
                     );
                 }
             }
@@ -1480,13 +1503,12 @@ function inserta_sql(&$db, $d, $delta = null)
     foreach ($ca as $l => $v) { // $v  & DB_DATAOBJECT_BOOL
         // $v & DB_DATAOBJECT_STR
         $ncol .= $sep . $l;
-        $val = "";
         if (strtolower($d->$l)==='null' || !isset($d->$l)) {
             $val = 'null';
         } else if (isset($delta) && isset($delta[$l])) {
-            $val = "'".($d->$l+$delta[$l])."'";
+            $val = "'" . ($d->$l+$delta[$l]) . "'";
         } else {
-            $val = "'".var_escapa($d->$l, $db)."'";
+            $val = "'" . var_escapa_cadena($d->$l, $db) . "'";
         }
         $nval .= $sep . $val;
         $sep = ', ';
@@ -1552,9 +1574,8 @@ function caso_usuario($idcaso)
     }
 }
 
-
 /**
- * Escapa el valor de una variable o de valores en un arreglo.
+ * Escapa el valor de una cadena
  * Si $v es null retorna ''
  * Agradecimientos por correciones a garcez@linuxmail.org
  *
@@ -1564,43 +1585,126 @@ function caso_usuario($idcaso)
  *
  * @return string Cadena escapada
  */
+function var_escapa_cadena($v, &$db = null, $maxlong = 1024)
+{
+    if ($v == null || !is_string($v)) {
+        return '';
+    }
+
+    /** Evita buffer overflows */
+    $nv = substr($v, 0, $maxlong);
+
+    /** Evita falla %00 en cadenas que vienen de HTTP */
+    $p1 = str_replace("\0", ' ', $nv);
+
+    /** Evita XSS */
+    $p2 = htmlspecialchars($p1);
+
+    /** Evita inyección de código SQL */
+    if (isset($db) && $db != null && !PEAR::isError($db)) {
+        if (!method_exists($db, 'escapeSimple')) {
+            debug_print_backtrace();
+        }
+        $p3 = $db->escapeSimple($p2);
+    } else {
+        // Tomado de librería de Pear DB/pgsql.php
+        $p3 = (!get_magic_quotes_gpc())?str_replace(
+            "'", "''",
+            str_replace('\\', '\\\\', $p2)
+        ) : $p2;
+        //$p3=(!get_magic_quotes_gpc())?addslashes($p2):$p2;
+    }
+
+    return $p3;
+}
+
+
+/**
+ * Escapa el valor de una variable o de valores en un arreglo.
+ * Si $v es null retorna ''
+ *
+ * @param string|array  $v       Nombre de variable POST
+ * @param handle        &$db     Conexión a BD.
+ * @param integer       $maxlong Longitud máxima
+ *
+ * @return string|array Cadena escapada
+ */
 function var_escapa($v, &$db = null, $maxlong = 1024)
 {
     if (isset($v)) {
         if (is_array($v)) {
-            $r = array();
-            foreach ($v as $k => $e) {
-                $r[$k] = var_escapa($e, $db, $maxlong);
-            }
-            return $r;
+            return var_escapa_arreglo($v, $db, $maxlong);
         } else if (is_string($v)) {
-            /** Evita buffer overflows */
-            $nv = substr($v, 0, $maxlong);
-
-            /** Evita falla %00 en cadenas que vienen de HTTP */
-            $p1=str_replace("\0", ' ', $v);
-
-            /** Evita XSS */
-            $p2=htmlspecialchars($p1);
-
-            /** Evita inyección de código SQL */
-            if (isset($db) && $db != null && !PEAR::isError($db)) {
-                $p3 = $db->escapeSimple($p2);
-            } else {
-                // Tomado de librería de Pear DB/pgsql.php
-                $p3 = (!get_magic_quotes_gpc())?str_replace(
-                    "'", "''",
-                    str_replace('\\', '\\\\', $p2)
-                ):$p2;
-                //$p3=(!get_magic_quotes_gpc())?addslashes($p2):$p2;
-            }
-
-            return $p3;
-        } else {
+            return var_escapa_cadena($v, $db, $maxlong);
+        } else if (is_integer($v)) {
             return $v;
+        } else {
+            echo "var_escapa: Tipo desconocido de valor: ";
+            print_r($v);
+            print_debug_backtrace();
         }
     }
     return '';
+}
+
+/**
+ * Escapa el valor de un arreglo recursivamente con la funcion var_escapa.
+ * Si $v es null retorna [] y los valores internos que sean null los pasa a ''
+ *
+ * @param array   $v       Nombre de variable POST
+ * @param handle  &$db     Conexión a BD.
+ * @param integer $maxlong Longitud máxima
+ *
+ * @return array Cadena escapada
+ */
+function var_escapa_arreglo($v, &$db = null, $maxlong = 1024)
+{
+    if (isset($v) && is_array($v)) {
+        $r = array();
+        foreach ($v as $k => $e) {
+            $r[$k] = var_escapa($e, $db, $maxlong);
+        }
+        return $r;
+    }
+    return [];
+}
+
+/**
+ * Retorna una variable enviada por método POST tras escaparla como cadena
+ *  para hacer consultas con DB
+ *
+ * @param string  $nv      Nombre de variable POST
+ * @param handle  $db      Conexión a BD.
+ * @param integer $maxlong Longitud máxima
+ *
+ * @return string Cadena escapada
+ */
+function var_post_escapa_cadena($nv, $db = null, $maxlong = 1024)
+{
+    if (is_string($_POST[$nv])) {
+        return var_escapa_cadena($_POST[$nv], $db, $maxlong);
+    } else {
+        return '';
+    }
+}
+
+/**
+ * Retorna una variable enviada por método POST tras escaparla como arreglo
+ *  para hacer consultas con DB
+ *
+ * @param string  $nv      Nombre de variable POST
+ * @param handle  $db      Conexión a BD.
+ * @param integer $maxlong Longitud máxima
+ *
+ * @return array Arreglo escapado
+ */
+function var_post_escapa_arreglo($nv, $db = null, $maxlong = 1024)
+{
+    if (is_array($_POST[$nv])) {
+        return var_escapa_arreglo($_POST[$nv], $db, $maxlong);
+    } else {
+        return [];
+    }
 }
 
 /**
@@ -1611,7 +1715,7 @@ function var_escapa($v, &$db = null, $maxlong = 1024)
  * @param handle  $db      Conexión a BD.
  * @param integer $maxlong Longitud máxima
  *
- * @return string Cadena escapada
+ * @return string|array Cadena/arreglo escapado
  */
 function var_post_escapa($nv, $db = null, $maxlong = 1024)
 {
@@ -1622,6 +1726,43 @@ function var_post_escapa($nv, $db = null, $maxlong = 1024)
     }
 }
 
+/**
+ * Retorna una variable cadena enviada por método POST o por GET tras escaparla
+ * para hacer consultas con DB
+ *
+ * @param string  $nv      Nombre de variable
+ * @param handle  $db      Conexión a BD.
+ * @param integer $maxlong Longitud máxima
+ *
+ * @return string Cadena escapada
+ */
+function var_req_escapa_cadena($nv, $db = null, $maxlong = 1024)
+{
+    if (isset($_REQUEST[$nv])) {
+        return var_escapa_cadena($_REQUEST[$nv], $db, $maxlong);
+    } else {
+        return '';
+    }
+}
+
+/**
+ * Retorna una variable arreglo enviada por método POST o por GET tras escaparla
+ * para hacer consultas con DB
+ *
+ * @param string  $nv      Nombre de variable
+ * @param handle  $db      Conexión a BD.
+ * @param integer $maxlong Longitud máxima
+ *
+ * @return array Arreglo
+ */
+function var_req_escapa_arreglo($nv, $db = null, $maxlong = 1024)
+{
+    if (isset($_REQUEST[$nv]) && is_array($_REQUEST[$nv])) {
+        return var_escapa_arreglo($_REQUEST[$nv], $db, $maxlong);
+    } else {
+        return [];
+    }
+}
 
 /**
  * Retorna una variable enviada por método POST o por GET tras escaparla
@@ -1641,7 +1782,6 @@ function var_req_escapa($nv, $db = null, $maxlong = 1024)
         return '';
     }
 }
-
 
 /**
  * Convierte un arreglo para fechas a una fecha.
@@ -1688,7 +1828,8 @@ function arr_a_fecha($f, $desde = true)
         'd' => (int)$dia
     );
 
-    return $fb->_array2date($ft);
+    $ret = $fb->_array2date($ft);
+    return $ret;
     // Ojala fuera DB_DataObject_Formbuilder::array2date($ft)
 }
 
@@ -1728,7 +1869,7 @@ function rango_de_edad($er)
     $do->find();
     $res = DataObjects_Rangoedad::idSinInfo();
     while ($do->fetch()) {
-        if ($do->limiteinferior <= $er && $er <= $do->limitesuperior) {
+        if ((int)$do->limiteinferior <= $e && $e <= (int)$do->limitesuperior) {
             $res = $do->id;
         }
     }
@@ -1824,8 +1965,8 @@ function edad_de_fechanac($anionac, $aniohecho, $mesnac = null,
         return -1;
     }
     $na = $aniohecho-$anionac;
-    if ($mesnac != null && $meshecho != null && $mesnac >= $meshecho) {
-        if ($mesnac > $meshecho || ($dianac != null && $diahecho != null
+    if ($mesnac !== null && $meshecho !== null && $mesnac >= $meshecho) {
+        if ($mesnac > $meshecho || ($dianac !== null && $diahecho !== null
             && $dianac > $diahecho)
         ) {
             $na--;
@@ -2016,7 +2157,7 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
             consulta_or_muchos(
                 $w2, $t, $ot,
                 'AND', $iotrast,
-                var_escapa($duc->$irelot, $db), $rel . "." . $irelot
+                var_escapa_cadena($duc->$irelot, $db), $rel . "." . $irelot
             );
         }
     }
@@ -2084,6 +2225,7 @@ function prepara_consulta_gen(&$w, &$t, $idcaso, $rel, $bas, $crelbas, $enbas,
     $otrast = array(), $iotrast = '', $nonulos = array(), $irelot = "id",
     $masenl = array()
 ) {
+    assert(is_string($iotrast));
     //echo "OJO prepara_consulta_gen(w=$w, t=$t, idcaso=$idcaso, rel=$rel, "
     //. "bas=$bas, crelbas=$crelbas, enbas=$enbas, otrast=$otrast, "
     //. "iotrast=$iotrast, nonulos=$nonulos, irelot=$irelot)<br>";
@@ -2094,12 +2236,11 @@ function prepara_consulta_gen(&$w, &$t, $idcaso, $rel, $bas, $crelbas, $enbas,
     );
     $duc =& objeto_tabla($rel);
     sin_error_pear($duc);
-    $db = $duc->getDatabaseConnection();
     $duc->id_caso = (int)($idcaso);
     if (@$duc->find() == 0) {
         return;
     }
-    $csininf = @$duc->camposSinInfo();
+    #$csininf = @$duc->camposSinInfo();
     $w3="";
     while ($duc->fetch()) {
         $w2 = prepara_consulta_con_tabla(
@@ -2158,7 +2299,8 @@ function objeto_tabla($nom)
 function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
     $ncamp = "nombre"
 ) {
-    //echo "OJO conv_basica(db, $tabla, $nombre, $obs)<br>";
+    #echo "OJO conv_basica(db, '$tabla', '$nombre', '$obs')<br>";
+    $r = -1; // Valor por retornar
     $d = objeto_tabla($tabla);
     if ($sininf && ($nombre == null || $nombre == '')
         && is_callable(array("DataObjects_$tabla", 'idSinInfo'))
@@ -2170,66 +2312,94 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
         return $r;
     }
 
-    $nom0 = $d->$ncamp = ereg_replace(
-        "  *", " ",
-        trim(var_escapa($nombre, $db))
-    );
+    $d->$ncamp = $nombre;
     $d->find(1);
     if (PEAR::isError($d)) {
         die($d->getMessage());
     }
+    if (isset($d->id)) {
+        $r = $d->id;
+        return $r;
+    }
+        
+    $nom0 = ereg_replace(
+        "  *", " ",
+        trim(var_escapa_cadena($nombre, $db))
+    );
+    $d->$ncamp = $nom0;
+    $d->find(1);
+    if (PEAR::isError($d)) {
+        die($d->getMessage());
+    }
+    if (isset($d->id)) {
+        $r = $d->id;
+        return $r;
+    }
+
     $nom1 = a_mayusculas($nom0);
-    if (!isset($d->id)) {
-        $d->$ncamp= $nom1;
-        $d->find(1);
+    $d->$ncamp = $nom1;
+    $d->find(1);
+    if (PEAR::isError($d)) {
+        die($d->getMessage());
     }
-    if (!isset($d->id)) {
-        $nom2 = $d->$ncamp
-            = a_mayusculas(sin_tildes(var_escapa($nom0, $db)));
-        $d->find(1);
+    if (isset($d->id)) {
+        $r = $d->id;
+        return $r;
     }
-    if (!isset($d->id)) {
+
+    $nom2 = $d->$ncamp
+        = a_mayusculas(sin_tildes(var_escapa_cadena($nom0, $db)));
+    $d->find(1);
+    if (PEAR::isError($d)) {
+        die($d->getMessage());
+    }
+    if (isset($d->id)) {
+        $r = $d->id;
+        return $r;
+    }
+
+    $q = "SELECT id FROM $tabla WHERE TRIM($ncamp) ILIKE '${nom0}'";
+    $r = $db->getOne($q);
+    if (PEAR::isError($r) || $r == null) {
         $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom0}%'";
         $r = $db->getOne($q);
-        if (PEAR::isError($r) || $r == null) {
-            $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom1}%'";
-            $r = $db->getOne($q);
-        }
-        if (PEAR::isError($r) || $r == null) {
-            $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom2}%'";
-            //echo " q=$q";
-            $r = $db->getOne($q);
-        }
+    }
+    if (PEAR::isError($r) || $r == null) {
+        $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom1}%'";
+        $r = $db->getOne($q);
+    }
+    if (PEAR::isError($r) || $r == null) {
+        $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom2}%'";
+        //echo " q=$q";
+        $r = $db->getOne($q);
+    }
 
-        if (PEAR::isError($r) || $r == null) {
-            rep_obs(
-                "-- " . _($tabla) . ": " . _("desconocido") .
-                " '$nombre'", $obs
-            );
-            if ($sininf
-                && is_callable(array("DataObjects_$tabla", 'idSinInfo'))
-            ) {
-                $r = call_user_func(
-                    array("DataObjects_$tabla",
-                    "idSinInfo"
-                    )
-                );
-            } else {
-                $r = -1;
-            }
+    if (PEAR::isError($r) || $r == null) {
+        rep_obs(
+            "-- " . _($tabla) . ": " . _("desconocido") .
+            " '$nombre'", $obs
+        );
+        if ($sininf
+            && is_callable(array("DataObjects_$tabla", 'idSinInfo'))
+        ) {
+            $r = call_user_func(
+                array("DataObjects_$tabla",
+                "idSinInfo"
+            )
+        );
         } else {
-            $d = objeto_tabla($tabla);
-            $d->id = $r;
-            $d->find(1);
-            if (trim($d->$ncamp) != trim($nom0)) {
-                rep_obs(
-                    "$tabla: elegido registro '$r' con nombre '" .
-                    $d->$ncamp . "' que es similar a '$nom0'", $obs
-                );
-            }
+            $r = -1;
         }
     } else {
-        $r = $d->id;
+        $d = objeto_tabla($tabla);
+        $d->id = $r;
+        $d->find(1);
+        if (trim($d->$ncamp) != trim($nom0)) {
+            rep_obs(
+                "$tabla: elegido registro '$r' con nombre '" .
+                $d->$ncamp . "' que es similar a '$nom0'", $obs
+            );
+        }
     }
 
     return $r;
@@ -2339,7 +2509,7 @@ function valida_caso($idcaso, &$buf_html, &$buf_ort)
                 unset($row[0]);
                 $re = implode(", ", $row);
                 $prob = $db->getOne($q);
-                $buf_html[] = _("Caso") . " " . $desc . ". " . $re;
+                $buf_html[] = _("Caso") . " " . $desc . ". " . $re . " " . $prob;
                 $valr = false;
             }
         }
@@ -2347,10 +2517,10 @@ function valida_caso($idcaso, &$buf_html, &$buf_ort)
     if (isset($GLOBALS['gancho_valida_caso'])) {
         foreach ($GLOBALS['gancho_valida_caso'] as $k => $f) {
             if (is_callable($f)) {
-                $r = call_user_func_array(
+                $valr = call_user_func_array(
                     $f,
                     array($idcaso, &$buf_html)
-                ) && $r;
+                ) && $valr;
             } else {
                 echo_esc(_("Falta") . " $k - $f");
             }
@@ -2549,7 +2719,7 @@ function a_elementos_xml(&$r, $ind, $ad, $ren = null)
  *
  * @param array  &$ad         Arreglo al cual agrega información convertida
  * @param string $tabla       nombre de tabla (e.g comunidad_sectorsocial)
- * @param string $id          Arreglo con llaves y valores
+ * @param array  $id          Arreglo con llaves y valores
  * @param string $camporel    Campo de $tabla
  * @param string $camponombre nombre de campo por agregar a $ad
  *
@@ -2607,11 +2777,9 @@ function enlaza_relato(&$do, $campo, $elemento, &$ad, $valor = null)
         $ad[$elemento] = $valor;
     } else if ($exc) {
         //echo "OJO enlazada con otra tabla";
-        $rel = $GLOBALS['_DB_DATAOBJECT']['LINKS'][$dbnombre][$do->__table][$campo];
-        $pd = strpos($rel, ':');
-        $ndo = substr($rel, 0, $pd);
-        $ndoc = "DataObject_" . ucfirst($ndo);
-        //echo "OJO ndoc=$ndoc";
+        #$rel = $GLOBALS['_DB_DATAOBJECT']['LINKS'][$dbnombre][$do->__table][$campo];
+        #$pd = strpos($rel, ':');
+        #$ndo = substr($rel, 0, $pd);
         $vsi = '';
         $csinf = $do->camposSinInfo();
         //print_r($csinf);

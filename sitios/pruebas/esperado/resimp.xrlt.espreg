@@ -39,7 +39,7 @@
   <grupo>
     <id_grupo>2</id_grupo>
     <nombre_grupo>presuntos r1</nombre_grupo>
-      <agresion_sin_vicd>cat1 (1000)</agresion_sin_vicd>
+      <agresion_sin_vicd>cat-otra2 (1001)</agresion_sin_vicd>
     <observaciones tipo="bloque">bloque</observaciones>
     <observaciones tipo="frente">frente</observaciones>
     <observaciones tipo="brigada">brigada</observaciones>
@@ -107,7 +107,7 @@
   <observaciones tipo="tsitio">tsitio1</observaciones>
   <observaciones tipo="contexto">contexto1</observaciones>
   <observaciones tipo="antecedente">antecedente1</observaciones>
-  <observaciones tipo="etiqueta:AMARILLO">con color</observaciones>
+  <observaciones tipo="etiqueta:AMARILLO:2015-07-28">con color</observaciones>
 </relato><relato>
   <organizacion_responsable>D</organizacion_responsable>
   <derechos>Dominio Público</derechos>
@@ -203,7 +203,5 @@
   <observaciones tipo="tsitio">tsitio1</observaciones>
   <observaciones tipo="contexto">contexto1</observaciones>
   <observaciones tipo="antecedente">antecedente1</observaciones>
-  <observaciones tipo="etiqueta:IMPORTA_RELATO">1</observaciones>
-  <observaciones tipo="etiqueta:AMARILLO">con color</observaciones>
-  <observaciones tipo="etiqueta:ERROR_IMPORTACIÓN">Persona repetida 1 - &#039;NOMBRES APELLIDOS&#039; , como víctima en casos 1. -- presponsable: desconocido &#039;nombre&#039;</observaciones>
+  <observaciones tipo="etiqueta:AMARILLO:2015-07-28">con color</observaciones>
 </relato></relatos>

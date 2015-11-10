@@ -73,7 +73,7 @@ class PagPresentaRes extends PagBaseSimple
      */
     function PagPresentaRes($nomForma, $opciones = null)
     {
-        parent::PagBaseSimple($nomForma);
+        $this->PagBaseSimple($nomForma);
         $this->titulo = _('Forma de Presentar Resultados');
         if (isset($GLOBALS['etiqueta']['Forma de Presentar Resultados'])) {
             $this->titulo = $GLOBALS['etiqueta']['Forma de Presentar Resultados'];
@@ -113,9 +113,7 @@ class PagPresentaRes extends PagBaseSimple
             'radio', 'ordenar', 'fecha', _('Fecha'), 'fecha'
         );
         $ae[] =&  $x;
-        if ($ult['ordenar'] == '' || $ult['ordenar'] == 'fecha') {
-            $t =& $x;
-        }
+        $t =& $x;
         $x =& $this->createElement(
             'radio', 'ordenar', 'ubicacion',
             _('Ubicación'), 'ubicacion'
@@ -211,10 +209,10 @@ class PagPresentaRes extends PagBaseSimple
         $this->addGroup($ae, null, _('Forma'), '&nbsp;', false);
         $t->setChecked(true);
 
-        $asinc = array();
-        if (isset($pSinCampos) && $pSinCampos != '') {
-            $asinc = explode(',', $pSinCampos);
-        }
+#        $asinc = array();
+#        if (isset($pSinCampos) && $pSinCampos != '') {
+#            $asinc = explode(',', $pSinCampos);
+#        }
         $prevnext = array();
         foreach ($GLOBALS['cw_ncampos'] as $idc => $dc) {
             $sel =& $this->createElement(

@@ -234,7 +234,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
      */
     function PagBaseMultiplePartes($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo  = 'Pag. Base Múltiple';
         $this->tcorto  = 'Pag. Base Múltiple';
         $this->addAction('siguiente', new Siguiente());
@@ -309,7 +309,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
     {
         assert($dcm != null);
         assert($dcm->id_caso != null);
-        if ($idcaso == null) {
+        if ($idcaso === null) {
             $idcaso = $_SESSION['basicos_id'];
         }
         //echo "OJO eliminaClasemodelo({$dcm->__table}, $idcaso)<br>";
@@ -317,7 +317,7 @@ class PagBaseMultiplePartes extends PagBaseMultiple
         $cll = get_called_class();
         $cm = $cll::CLASEMODELO;
         $q = "DELETE FROM $cm WHERE id_caso={$idcaso}";
-        $result = hace_consulta($db, $q);
+        hace_consulta($db, $q);
     }
 
     /**
@@ -505,20 +505,18 @@ class PagBaseMultiplePartes extends PagBaseMultiple
                     }
                 }
             } else {
-                $result = hace_consulta(
+                hace_consulta(
                     $db, "DELETE FROM $t " .
                     " WHERE id_caso='$idcaso' AND $ll='$fa'"
                 );
                 $c = $this->partesmulti[$t];
-                if (isset($valores[$c])) {
-                    foreach (var_escapa($valores[$c]) as $k => $v) {
-                        $do = objeto_tabla($t);
-                        $do->id_caso = $idcaso;
-                        $do->$ll = $fa;
-                        $do->$c = $v;
-                        $ret = $do->insert();
-                        $do->free();
-                    }
+                foreach (var_escapa_arreglo($valores[$c]) as $k => $v) {
+                    $do = objeto_tabla($t);
+                    $do->id_caso = $idcaso;
+                    $do->$ll = $fa;
+                    $do->$c = $v;
+                    $ret = $do->insert();
+                    $do->free();
                 }
             }
             if (PEAR::isError($ret)) {

@@ -238,7 +238,7 @@ class PagSegJudicial extends PagBaseMultiple
      */
     function PagSegJudicial($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo  = _('Seguimiento Judicial');
         $this->tcorto  = _('Seg. Jud.');
         if (isset($GLOBALS['etiqueta']['Seguimiento Judicial'])) {
@@ -335,10 +335,10 @@ class PagSegJudicial extends PagBaseMultiple
         assert($dproceso->id != null);
         $db =& $dproceso->getDatabaseConnection();
         $q = "DELETE FROM accion WHERE id_proceso='{$dproceso->id}'";
-        $result = hace_consulta($db, $q);
+        hace_consulta($db, $q);
         if ($elimProc) {
             $q = "DELETE FROM proceso WHERE id='{$dproceso->id}'";
-            $result = hace_consulta($db, $q);
+            hace_consulta($db, $q);
         }
     }
 
@@ -380,13 +380,12 @@ class PagSegJudicial extends PagBaseMultiple
         $valores['id_tproceso'] = (int)$valores['tipoetapa'][0];
         $valores['id_etapa'] = (int)$valores['tipoetapa'][1];
         $es_vacio = (
-            (!isset($valores['id_tproceso'])
-            || $valores['id_tproceso'] === ''
+            (!isset($valores['tipoetapa'][0])
+            || $valores['tipoetapa'][0] === ''
             || $valores['id_tproceso'] == DataObjects_Tproceso::idSinInfo()
             )
             || (!isset($valores['id_etapa'])
-                || $valores['id_etapa']==
-                DataObjects_Etapa::idSinInfo()
+                || $valores['id_etapa'] == DataObjects_Etapa::idSinInfo()
             )
         );
 
@@ -436,7 +435,6 @@ class PagSegJudicial extends PagBaseMultiple
             $q = "UPDATE accion SET respondido='".$nacc->respondido."' " .
                 " WHERE id='".$nacc->id."'";
             hace_consulta($db, $q);
-            $procAc = false;
         }
 
         caso_usuario($_SESSION['basicos_id']);
@@ -504,10 +502,10 @@ class PagSegJudicial extends PagBaseMultiple
      * Llamada en cada inicio de una consulta ResConsulta.
      * Hace posible nuevos tipos de consulta.
      *
-     * @param string $mostrar  Forma de mostrar consulta
-     * @param string &$renglon Llena como iniciar consulta
-     * @param string &$rtexto  Llena texto inicial de consula
-     * @param array  $tot      Total de casos en consulta
+     * @param string  $mostrar  Forma de mostrar consulta
+     * @param string  &$renglon Llena como iniciar consulta
+     * @param string  &$rtexto  Llena texto inicial de consula
+     * @param integer $tot      Total de casos en consulta
      *
      * @return void
      */

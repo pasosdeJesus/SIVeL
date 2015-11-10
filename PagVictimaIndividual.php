@@ -168,7 +168,7 @@ class PagVictimaIndividual extends PagBaseMultiple
     {
         $id_persona = null;
         if (isset($apar) && count($apar) == 1) {
-            $id_persoea = $apar[0];
+            $id_persona = $apar[0];
         }
         $dvictima=& objeto_tabla('victima');
         $dpersona=& objeto_tabla('persona');
@@ -219,7 +219,7 @@ class PagVictimaIndividual extends PagBaseMultiple
         $dantecedente_victima->id_persona = $dvictima->id_persona;
         $dantecedente_victima->id_caso = $dvictima->id_caso;
 
-        $this->bvictima=& DB_DataObject_FormBuilder::create(
+        $this->bvictima =& DB_DataObject_FormBuilder::create(
             $dvictima,
             array('requiredRuleMessage' => $GLOBALS['mreglareq'],
                 'ruleViolationMessage' => $GLOBALS['mreglavio']
@@ -262,7 +262,7 @@ class PagVictimaIndividual extends PagBaseMultiple
      */
     function PagVictimaIndividual($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo = _('Víctimas Individuales');
         $this->tcorto = _('Víctima');
         if (isset($GLOBALS['etiqueta']['Victimas Individuales'])) {
@@ -398,11 +398,6 @@ class PagVictimaIndividual extends PagBaseMultiple
                 $dep, $mun, $cla
             );
 
-            $fmes = $this->bpersona->_do->mesnac;
-            $fdia = $this->bpersona->_do->dianac;
-            $fanio = $this->bpersona->_do->anionac;
-            $fsexo = $this->bpersona->_do->sexo;
-
             foreach ($this->bvictima->_do->fb_fieldsToRender as $c) {
                 $cq = $this->getElement($c);
                 if (!PEAR::isError($cq) && isset($this->bvictima->_do->$c)) {
@@ -444,7 +439,7 @@ class PagVictimaIndividual extends PagBaseMultiple
             $dv->id_caso= $idcaso;
             $dv->find(1);
 
-            $csn = DataObjects_Victima::camposSinInfo();
+            #$csn = DataObjects_Victima::camposSinInfo();
             foreach ($dv->fb_fieldsToRender as $c) {
                 $cq = $this->getElement($c);
                 if (isset($dv->$c)) {
@@ -478,10 +473,8 @@ class PagVictimaIndividual extends PagBaseMultiple
                     $cq->setValue(var_escapa($_POST[$c], $db));
                 }
             }
-            if (isset($_POST['id_antecedente'])) {
-                foreach (var_escapa($_POST['id_antecedente'], $db) as $r) {
-                    $valsca[] = $r;
-                }
+            foreach (var_escapa_arreglo($_POST['id_antecedente'], $db) as $r) {
+                $valsca[] = $r;
             }
         }
 
@@ -515,7 +508,7 @@ class PagVictimaIndividual extends PagBaseMultiple
 
         $q = "DELETE FROM antecedente_victima WHERE id_persona='$idpersona' " .
             " AND id_caso='$idcaso'";
-        $result = hace_consulta($db, $q);
+        hace_consulta($db, $q);
         if ($elimVic) {
             $q = "DELETE FROM acto WHERE id_persona='$idpersona' " .
                 " AND id_caso='$idcaso'";
@@ -641,7 +634,6 @@ class PagVictimaIndividual extends PagBaseMultiple
             return true;
         }
 
-
         if (!isset($valores['id']) || $valores['id'] == '') {
             $valores['id'] = null;
             $db = $this->iniVar(null);
@@ -716,10 +708,12 @@ class PagVictimaIndividual extends PagBaseMultiple
                 DB_DATAOBJECT_FORMBUILDER_QUERY_FORCEINSERT
             );
         }
+
         $ret = $this->process(array(&$this->bvictima, 'processForm'), false);
         if (PEAR::isError($ret)) {
             die($ret->getMessage());
         }
+
         if ($procFam) {
             $nper =& objeto_tabla('persona');
             if (isset($valores['persona2'])
@@ -752,9 +746,7 @@ class PagVictimaIndividual extends PagBaseMultiple
                 $npr->id_trelacion = $tr->inverso;
                 $npr->insert();
             }
-            $procFam = false;
         }
-
 
         if (isset($this->bpersona->_do->id)) {
             $idpersona = $this->bpersona->_do->id;
@@ -764,13 +756,11 @@ class PagVictimaIndividual extends PagBaseMultiple
             } else {
                 $this->eliminaVic($this->bvictima->_do, false);
             }
-            if (isset($valores['id_antecedente'])) {
-                foreach (var_escapa($valores['id_antecedente']) as $k => $v) {
-                    $this->bantecedente_victima->_do->id_persona = $idpersona;
-                    $this->bantecedente_victima->_do->id_caso = $idcaso;
-                    $this->bantecedente_victima->_do->id_antecedente = $v;
-                    $this->bantecedente_victima->_do->insert();
-                }
+            foreach (var_escapa_arreglo($valores['id_antecedente']) as $k => $v) {
+                $this->bantecedente_victima->_do->id_persona = $idpersona;
+                $this->bantecedente_victima->_do->id_caso = $idcaso;
+                $this->bantecedente_victima->_do->id_antecedente = $v;
+                $this->bantecedente_victima->_do->insert();
             }
         }
 

@@ -189,7 +189,8 @@ while ($d->fetch()) {
  *
  * @return void
  */
-function muestra()
+function muestra($dsn)
 {
+    assert($dsn !== null);
 }
 ?>

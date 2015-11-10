@@ -145,7 +145,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
      */
     function PagFuentesFrecuentes($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
 
         $this->titulo = _('Fuentes Frecuentes');
         $this->tcorto = _('Fuente');
@@ -244,7 +244,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
 
 
         if (isset($_SESSION['nuevo_copia_id'])
-            && strstr($_SESSION['nuevo_copia_id'], ":") != false
+            && strstr($_SESSION['nuevo_copia_id'], ":") !== false
         ) {
             list($idc, $idp, $fecha)
                 = explode(':', $_SESSION['nuevo_copia_id']);
@@ -427,15 +427,14 @@ class PagFuentesFrecuentes extends PagBaseMultiple
             $db, "SELECT id FROM ffrecuente WHERE " .
             "nombre ILIKE '$nomf'"
         );
-        $rows = array();
         $nr = $rp->numRows();
+        $row = array();
         if ($rp->fetchInto($row)) {
             $idffrecuente = $row[0];
-            if ($rp->fetchInto($row)) {
+            if ($nr > 1) {
                 rep_obs(
-                    "Hay $nr fuentes frecuentes con nombre como " .
-                    $fuente->nombre_fuente .
-                    ", escogido el primero\n", $obs
+                    "Hay $nr fuentes frecuentes con nombre como $nomf " .
+                    ", escogido la primera\n", $obs
                 );
             }
             if (!empty($fecha)) {
@@ -471,7 +470,6 @@ class PagFuentesFrecuentes extends PagBaseMultiple
     static function importaRelato(&$db, $r, $idcaso, &$obs)
     {
         foreach ($r->fuente as $fuente) {
-            $idffrecuente = null;
             $nomf = utf8_decode($fuente->nombre_fuente);
             if (empty($fuente->fecha_fuente)) {
                 rep_obs(
@@ -489,8 +487,7 @@ class PagFuentesFrecuentes extends PagBaseMultiple
                     $db, $idcaso, $nomf, $fecha,
                     utf8_decode((string)$fuente->ubicacion_fuente),
                     dato_en_obs($fuente, 'ubicacion'),
-                    dato_en_obs($fuente, 'clasificacion'),
-                    $ubif, $ubi, $cla, $obs
+                    dato_en_obs($fuente, 'clasificacion'), $obs
                 );
             }
         }

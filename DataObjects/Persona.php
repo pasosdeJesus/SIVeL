@@ -263,7 +263,6 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
                 $this->$c = $v;
             }
         }
-        $f = array();
         $aa = max(date('Y'), 2007);
         $anios = array();
         for ($i = 1900; $i <= $aa; $i++) {
@@ -470,7 +469,7 @@ class DataObjects_Persona extends DB_DataObject_SIVeL
      * @param string $fecharef Fecha de referencia para calcular año nac.
      * @param bool   $valrango Decide si se valida/autocompleta rango de edad
      * @param array  &$valores Valores recibidos en formulario
-     * @param string &$merr    Colchon para mensajes de error
+     * @param string $merr    Colchon para mensajes de error
      *
      * @return bool Verdadero sii valida bien y autocompleta valores
      *    (edad, anionac, mesnac, dianac, id_rangoedad),

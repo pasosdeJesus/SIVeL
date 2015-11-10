@@ -28,7 +28,7 @@ require_once "ambiente.php";
  * @param string $tabla     Nombre de la tabla
  * @param string $llave_sec Llave secundaria
  * @param string $valor     Valor
- * @param string $campos    Campos
+ * @param array  $campos    Campos
  *
  * @return 0 si inserta, 1 si no inserta
  */
@@ -158,6 +158,15 @@ $c += instablabasica(
         'id' => 1000,
         'id_pconsolidado' => 1,
         'tipocat' => 'I',
+        'fechacreacion' => $fc
+    )
+);
+$c += instablabasica(
+    'categoria', 'nombre', 'cat-otra2',
+    array('id_supracategoria' => 'T:1000',
+        'id' => 1001,
+        'id_pconsolidado' => 1,
+        'tipocat' => 'O',
         'fechacreacion' => $fc
     )
 );

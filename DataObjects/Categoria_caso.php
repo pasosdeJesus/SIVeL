@@ -73,7 +73,7 @@ class DataObjects_Categoria_caso extends DB_DataObject_SIVeL
             'Clasificación de Violencia'
         );
         if (isset($GLOBALS['etiqueta']['clasificacion'])) {
-            $e->setLabel($GLOBALS['etiqueta']['clasificacion']);
+            $sel->setLabel($GLOBALS['etiqueta']['clasificacion']);
         }
         $tvio =  htmlentities_array(
             $db->getAssoc("SELECT id, nombre FROM tviolencia;")

@@ -59,11 +59,10 @@ class AccionComparaDos extends HTML_QuickForm_Action
     /**
      * Busca similares
      *
-     * @return void
+     * @return string
      */
     static function busca() 
     {
-        $pIds = "";
         $do = objeto_tabla("caso");
         $db =& $do->getDatabaseConnection();
         $figuales = isset($_POST['figuales']) && $_POST['figuales'] == '1';
@@ -101,7 +100,6 @@ class AccionComparaDos extends HTML_QuickForm_Action
         $mezcladoen = array();
         $row = array();
         while ($r->fetchInto($row)) {
-            $nr = 0;
             $id1 = $row[0];
             $id2 = $row[1];
             if (isset($mezcladoen[$id2])) {
@@ -125,10 +123,11 @@ class AccionComparaDos extends HTML_QuickForm_Action
      * @param object &$page      Página
      * @param string $actionName Acción
      *
-     * @return void
+     * @return false|null
      */
     function perform(&$page, $actionName)
     {
+        $valores = $page->exportValues();
         $pIds = "";
         if (!isset($_REQUEST['ids']) || $_REQUEST['ids'] == '') {
 
@@ -137,7 +136,7 @@ class AccionComparaDos extends HTML_QuickForm_Action
                 $pIds = AccionComparaDos::busca();
             }
             foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                list($n, $c, $o) = $tab;
+                list( , $c, $o) = $tab;
                 //echo "OJO $n, $c, $o<br>";
                 if (($d = strrpos($c, "/"))>0) {
                     $c = substr($c, $d+1);
@@ -157,12 +156,12 @@ class AccionComparaDos extends HTML_QuickForm_Action
         }
         $a = explode(" ", $pIds);
         if (count($a) == 0) {
-            error_valida("No se encontraron parejas de casos");
+            error_valida("No se encontraron parejas de casos", $valores);
             return false;
         } else if (count($a) < 2 || count($a) % 2 != 0) {
             error_valida(
                 "Debe ingresar parejas de códigos separados por espacio "
-                . "(cuenta=" . count($a) . ")", null
+                . "(cuenta=" . count($a) . ")", $valores
             );
             return false;
         }
@@ -170,7 +169,7 @@ class AccionComparaDos extends HTML_QuickForm_Action
             if ($nc != (int)$nc) {
                 error_valida(
                     "Debe ingresar parejas de códigos separados por un espacio "
-                    . " nc=$nc", null
+                    . " nc=$nc", $valores
                 );
                 return false;
             }
@@ -266,8 +265,6 @@ class AccionVictimasrep extends HTML_QuickForm_Action
         $pIdMunicipio = (int)var_post_escapa('id_municipio', $db);
         $pIdDepartamento = (int)var_post_escapa('id_departamento', $db);
 
-        $campos = array('caso_id' => 'Cód.');
-        $tablas = "victima, caso";
         $where = "";
 
         consulta_and_sinap($where, "victima.id_caso", "caso.id");
@@ -326,15 +323,14 @@ class AccionVictimasrep extends HTML_QuickForm_Action
         $result = hace_consulta($db, $q);
 
         $datv = array();
-        $dn = array();
         $tv = 0;
+        $row = array();
         while ($result->fetchInto($row)) {
             $datv[$tv] = array($row[0], $row[1], $row[2], $row[3]);
             $tv++;
         }
 
         echo "<p>Total de casos con v&iacute;ctima: " . (int)$tv . "</p>";
-        $suma = array();
         echo "<form  action='opcion.php?num=1004' method='post' target='_blank'>";
         echo "<input name='Comparar' type='submit' class='form' id='Comparar' "
             . " value='Comparar'>";
@@ -348,7 +344,6 @@ class AccionVictimasrep extends HTML_QuickForm_Action
             $idvic = $datv[$v][1];
             $nom = $datv[$v][2];
             $fecha = $datv[$v][3];
-            $ubi = "";
             $u =&  objeto_tabla('ubicacion');
             $u->id_caso = $idcaso;
             if ($u->find() == 0) {
@@ -504,7 +499,7 @@ class PagVictimasrep extends HTML_QuickForm_Page
         );
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list(, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -541,7 +536,7 @@ class PagVictimasrep extends HTML_QuickForm_Page
 function muestra($dsn)
 {
     $aut_usuario = "";
-    autentica_usuario($dsn, $accno, $aut_usuario, 31);
+    autentica_usuario($dsn, $aut_usuario, 31);
     encabezado_envia('Elegir');
 
     $wizard =& new HTML_QuickForm_Controller('Victimasrep', false);

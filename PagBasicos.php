@@ -375,7 +375,6 @@ class Busqueda extends HTML_QuickForm_Action
             if ($_SESSION['busca_presenta']['mostrar'] == 'actos') {
                 ResConsulta::actosHtml(
                     $db, $tablas, $w,
-                    $_SESSION['bus_fecha_final'],
                     var_escapa(
                         $_SESSION['busca_presenta']['mostrar'],
                         $db
@@ -593,7 +592,7 @@ class PagBasicos extends PagBaseSimple
         }
         $db = $r[0];
         $dcaso = $r[1];
-        $idcaso = $r[2];
+        #$idcaso = $r[2];
         $dcaso_frontera =& objeto_tabla('caso_frontera');
         $dcaso_region =& objeto_tabla('caso_region');
 
@@ -653,7 +652,7 @@ class PagBasicos extends PagBaseSimple
     {
         $aut_usuario = "";
         autentica_usuario($GLOBALS['dsn'], $aut_usuario, 31);
-        parent::PagBaseSimple($nomForma);
+        $this->PagBaseSimple($nomForma);
         $this->titulo = _('Datos Básicos');
         $this->tcorto = _('Básicos');
 
@@ -809,7 +808,7 @@ class PagBasicos extends PagBaseSimple
             $scr =& $this->getElement('id_region');
             if (!PEAR::isError($scr)) {
                 $valscr = array();
-                $t = $this->bcaso_region->_do->find();
+                $this->bcaso_region->_do->find();
                 while ($this->bcaso_region->_do->fetch()) {
                     $valscr[] = $this->bcaso_region->_do->id_region;
                 }
@@ -820,14 +819,7 @@ class PagBasicos extends PagBaseSimple
                 $v = $this->bcaso->_do->id_intervalo;
                 $sci->setValue($v);
             }
-        } else {
-            $e =& $this->getElement('fecha');
-            if (isset($e) && !PEAR::isError($e)) {
-                $e->_elements[0]->setValue('');
-                $e->_elements[1]->setValue('');
-                $e->_elements[2]->setValue('');
-            }
-        }
+        } 
     }
 
     /**
@@ -844,11 +836,11 @@ class PagBasicos extends PagBaseSimple
     {
         assert($db != null);
         assert(isset($idcaso));
-        $result = hace_consulta(
+        hace_consulta(
             $db, "DELETE FROM caso_frontera " .
             "WHERE id_caso='" . $idcaso . "'"
         );
-        $result = hace_consulta(
+        hace_consulta(
             $db, "DELETE FROM caso_region " .
             "WHERE id_caso='" . $idcaso . "'"
         );
@@ -961,19 +953,15 @@ class PagBasicos extends PagBaseSimple
         // al eliminaDep de la clase extendida que borrará más de lo que
         // espera esta funcion.
         PagBasicos::eliminaDep($db, $idcaso);
-        if (isset($valores['id_frontera'])) {
-            foreach (var_escapa($valores['id_frontera'], $db) as $k => $v) {
-                $this->bcaso_frontera->_do->id_caso = $idcaso;
-                $this->bcaso_frontera->_do->id_frontera = $v;
-                $this->bcaso_frontera->_do->insert();
-            }
+        foreach (var_escapa_arreglo($valores['id_frontera'], $db) as $k => $v) {
+            $this->bcaso_frontera->_do->id_caso = $idcaso;
+            $this->bcaso_frontera->_do->id_frontera = $v;
+            $this->bcaso_frontera->_do->insert();
         }
-        if (isset($valores['id_region'])) {
-            foreach (var_escapa($valores['id_region'], $db) as $k => $v) {
-                $this->bcaso_region->_do->id_caso = $idcaso;
-                $this->bcaso_region->_do->id_region = $v;
-                $this->bcaso_region->_do->insert();
-            }
+        foreach (var_escapa_arreglo($valores['id_region'], $db) as $k => $v) {
+            $this->bcaso_region->_do->id_caso = $idcaso;
+            $this->bcaso_region->_do->id_region = $v;
+            $this->bcaso_region->_do->insert();
         }
 
         $_SESSION['basicos_id'] = $idcaso;

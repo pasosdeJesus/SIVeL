@@ -19,14 +19,13 @@
  * Agrega tipo de orden a consulta web
  *
  * @param string $pOrden   Orden por poner
- * @param array  $opciones Opciones del usuario autenticado
  * @param object $obj      Objeto HTML_QuickForm con formulario
  * @param array  &$ae      Arreglo de opciones de ordenamiento
  * @param object &$t       Opción por defecto
  *
  * @return void Modifica $ae y $t
  */
-function rotulos_cwebordenar($pOrden, $opciones, $obj, &$ae, &$t)
+function rotulos_cwebordenar($pOrden, $obj, &$ae, &$t)
 {
     $x =& $obj->createElement(
         'radio', 'ordenar', 'rotulo', 'Rótulo',
@@ -109,6 +108,7 @@ function rotulos_orden_cons(&$q, $pOrdenar)
  */
 function rotulos_inicial(&$db, $campos, $idcaso, $numcaso)
 {
+    sin_error_pear($db);
     $r = "";
     if ($numcaso != null) {
         $r .= " CASO $numcaso\n";
@@ -201,10 +201,11 @@ function rotulos_inicial(&$db, $campos, $idcaso, $numcaso)
 function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
 {
     //echo "OJO rotulos_final de idcaso=$idcaso, numcaso=$numcaso<br>";
+    sin_error_pear($db);
     $r = "";
     $peso = 0;
     $rotulo = "";
-    if ($numcaso != null) {
+    if ($numcaso !== null && strlen($numcaso) > 0) {
         if (array_key_exists('m_presponsables', $campos)) {
             $dprespcaso = objeto_tabla('caso_presponsable');
             if (PEAR::isError($dprespcaso)) {
@@ -228,7 +229,6 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
             $dacto->find();
             while ($dacto->fetch()) {
                 $dcategoria = $dacto->getLink('id_categoria');
-                $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
                 $dsupracategoria->id_tviolencia
@@ -253,7 +253,6 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
             $dactocolectivo->find();
             while ($dactocolectivo->fetch()) {
                 $dcategoria = $dactocolectivo->getLink('id_categoria');
-                $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
                 $dsupracategoria->id_tviolencia
@@ -278,7 +277,6 @@ function rotulos_final(&$db, $campos, $idcaso, $numcaso = null)
             $catpresp->find();
             while ($catpresp->fetch()) {
                 $dcategoria = $catpresp->getLink('id_categoria');
-                $dtipoviolencia = $dcategoria->getLink('id_tviolencia');
                 $dsupracategoria = objeto_tabla('supracategoria');
                 $dsupracategoria->id = $dcategoria->id_supracategoria;
                 $dsupracategoria->id_tviolencia

@@ -20,6 +20,7 @@
 require_once 'PagBaseSimple.php';
 require_once 'Caso_etiqueta.php';
 require_once 'misc.php';
+require_once 'misc_importa.php';
 
 
 /**
@@ -62,7 +63,7 @@ class PagEtiquetas extends PagBaseSimple
      */
     function iniVar($aper = null)
     {
-        list($db, $dcaso, $idcaso) = parent::iniVar(array(true, true));
+        list($db, , $idcaso) = parent::iniVar(array(true, true));
 
         $dcaso_etiqueta =& objeto_tabla('caso_etiqueta');
         $dcaso_etiqueta->id_caso = $idcaso;
@@ -87,7 +88,7 @@ class PagEtiquetas extends PagBaseSimple
      */
     function PagEtiquetas($nomForma)
     {
-        parent::PagBaseSimple($nomForma, $this->titulo);
+        $this->PagBaseSimple($nomForma, $this->titulo);
         $this->titulo  = _('Etiquetas');
         $this->tcorto  = _('Etiquetas');
         if (isset($GLOBALS['etiqueta']['Etiquetas'])) {
@@ -149,7 +150,7 @@ class PagEtiquetas extends PagBaseSimple
     {
         assert($db != null);
         assert(isset($idcaso));
-        $result = hace_consulta(
+        hace_consulta(
             $db, "DELETE FROM caso_etiqueta WHERE " .
             "id_caso='$idcaso'"
         );
@@ -164,7 +165,7 @@ class PagEtiquetas extends PagBaseSimple
      * @param array &$valores Valores enviados por el formulario.
      * @param bool  $aget     V sii agrega etiqueta
      *
-     * @return void
+     * @return boolean
      */
     function procesa(&$valores, $aget = false)
     {
@@ -196,13 +197,20 @@ class PagEtiquetas extends PagBaseSimple
             $this->bcaso_etiqueta->_do->id_usuario
                 = (int)$_SESSION['id_usuario'];
             //print_r($_SESSION); die("x");
-            $this->bcaso_etiqueta->_do->fecha = @date('Y-m-d');
+            if (isset($valores['ffecha']) && isset($valores['ffecha']['Y']) && 
+                isset($valores['ffecha']['m']) && isset($valores['ffecha']['d'])
+            ) {
+                $this->bcaso_etiqueta->_do->fecha = 
+                    arr_a_fecha($valores['ffecha']);
+            } else {
+                $this->bcaso_etiqueta->_do->fecha = @date('Y-m-d');
+            }
+            #$this->bcaso_etiqueta->_do->fecha = @date('Y-m-d');
             $this->bcaso_etiqueta->_do->observaciones
                 = var_escapa($valores['fobservaciones'], $db);
             //print_r($this->bcaso_etiqueta->_do);
             $r = $this->bcaso_etiqueta->_do->insert();
             sin_error_pear($r, _('No pudo insertar en base.'));
-            $aget = false;
         }
 
         // Actualizamos observaciones
@@ -488,7 +496,7 @@ class PagEtiquetas extends PagBaseSimple
      * @param string $cc     Campo que se procesa
      * @param int    $idcaso Número de caso
      *
-     * @return Cadena por presentar
+     * @return string Cadena por presentar
      */
     static function resConsultaFilaTabla(&$db, $cc, $idcaso)
     {
@@ -535,7 +543,7 @@ class PagEtiquetas extends PagBaseSimple
      * @param array  $campos Campos por mostrar
      * @param int    $idcaso Código de caso
      *
-     * @return void
+     * @return string
      */
     static function reporteGeneralRegistroHtml(&$db, $campos, $idcaso)
     {
@@ -580,15 +588,19 @@ class PagEtiquetas extends PagBaseSimple
         foreach ($po as $v) {
             $a = $v->attributes();
             $s = explode(':', $a);
-            if (count($s) == 2) {
+            if (count($s) >= 2) {
                 $e = $s[1];
+                $f = @date('Y-m-d');
+                if (count($s) >= 3 && trim($s[2]) != '') {
+                    $f = conv_fecha($s[2], $obs); 
+                }
                 $c = (string)$v;
                 if (($ide = conv_basica($db, 'etiqueta', $e, $obs)) >= 0) {
                     $ec = objeto_tabla('caso_etiqueta');
                     $ec->id_caso = $idcaso;
                     $ec->id_etiqueta = $ide;
                     $ec->id_usuario = $_SESSION['id_usuario'];
-                    $ec->fecha = @date('Y-m-d');
+                    $ec->fecha = $f;
                     $ec->observaciones = $c;
                     $r = $ec->insert();
                     sin_error_pear($r);
@@ -613,7 +625,6 @@ class PagEtiquetas extends PagBaseSimple
      */
     static function aRelato(&$db, $dcaso, &$r)
     {
-        $lsr = array();
         $do = objeto_tabla('caso_etiqueta');
         $do->id_caso = $dcaso->id;
         $do->orderBy('id_etiqueta');
@@ -621,8 +632,9 @@ class PagEtiquetas extends PagBaseSimple
         $vd = array();
         while ($do->fetch()) {
             $dr= $do->getLink('id_etiqueta');
-            $vd['observaciones{tipo->etiqueta:' . $dr->nombre . '}'] 
-                = $do->observaciones=='' ? ' ' : $do->observaciones;
+            $ind = 'observaciones{tipo->etiqueta:' .  
+                $dr->nombre . ':' . $do->fecha. '}';
+            $vd[$ind] = $do->observaciones=='' ? ' ' : $do->observaciones;
             $dr->free();
         }
         $do->free();

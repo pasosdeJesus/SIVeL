@@ -112,8 +112,6 @@ class AccionConsolidado extends HTML_QuickForm_Action
      */
     function muestraPresp(&$db, &$tpresp, $muestra)
     {
-        $n = 1;
-        $sep = "";
         $q = "SELECT DISTINCT id_presponsable " .
             " FROM acto ORDER BY 1";
         //die("q es $q<br>");
@@ -168,7 +166,6 @@ class AccionConsolidado extends HTML_QuickForm_Action
         $pIdMunicipio = (int)var_post_escapa('id_municipio', $db);
         $pIdDepartamento = (int)var_post_escapa('id_departamento', $db);
 
-        $campos = array('caso_id' => 'Cód.');
         $tablas = "persona, victima, caso, acto ";
         $where = "";
 
@@ -185,7 +182,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         );
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($ntab, $ctab, $otab) = $tab;
+            list($ntab, $ctab, ) = $tab;
             if (($possl = strrpos($ctab, "/"))>0) {
                 $ctab = substr($ctab, $possl+1);
             }
@@ -217,6 +214,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             }
         }
 
+        $dv = array();
         $tgeo = "";
         if ($pIdClase != '') {
             $tgeo = "ubicacion, ";
@@ -251,6 +249,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         if ($ncol <= 0) {
             die(_('Falta información para reporte consolidado en tabla categoria'));
         }
+        $cataux = array();
         $d->orderBy('id');
         $d->find();
         while ($d->fetch()) {
@@ -283,13 +282,13 @@ class AccionConsolidado extends HTML_QuickForm_Action
             }
         }
 
-        if ($pFini['Y'] != '') {
+        if (is_array($pFini) && $pFini['Y'] != '') {
             consulta_and(
                 $db, $where, "caso.fecha",
                 arr_a_fecha($pFini, true), ">="
             );
         }
-        if ($pFfin['Y'] != '') {
+        if (is_array($pFfin) && $pFfin['Y'] != '') {
             consulta_and(
                 $db, $where, "caso.fecha",
                 arr_a_fecha($pFfin, false), "<="
@@ -306,8 +305,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
         //echo "q es $q<br>";
         $result = hace_consulta($db, $q);
 
+        $row = array();
         $datv = array();
-        $dn = array();
         $tv = 0;
         while ($result->fetchInto($row)) {
             $excl = false;
@@ -319,6 +318,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 /* Se hace así porque puede haber casos que no
                     tengan asociado usuario --cuando vienen de otro
                     banco (?), antiguos*/
+                $minf = array();
                 $q = "SELECT MIN(fechainicio) FROM caso_usuario " .
                     " WHERE id_caso='" . $row[0] . "';";
                 $rfc = hace_consulta($db, $q);
@@ -343,7 +343,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                         )
                     );
 
-                    if ($fhastamen || $fdesdemen) {
+                    if ($fhastamen || $fdesdemay) {
                         if ($pMuestra == "tabla") {
                             //echo "Excluyendo :" . $row[0] . "<br>";
                             $excl = true;
@@ -360,13 +360,13 @@ class AccionConsolidado extends HTML_QuickForm_Action
             }
         }
 
-        $depuraConsolidado = false;
+        $depuraConsolidado = true;
         $suma = array();
         if ($pMuestra == "tabla") {
             echo "<table border='1'>\n";
             echo "<tr>";
             if ($depuraConsolidado) {
-                echo "<td>IdCaso</td><td>IdVic</td>";
+                echo "<td>IdCaso</td>";
             }
             echo "<th>" . _("Fecha") . "</th><th>" . _("Ubicación")
                 . "</th><th>" . _("Víctimas") . "</th>";
@@ -405,7 +405,6 @@ class AccionConsolidado extends HTML_QuickForm_Action
             $idvic = $datv[$v][1];
             $nom = $datv[$v][2];
             $fecha = $datv[$v][3];
-            $ubi = "";
             $u =&  objeto_tabla('ubicacion');
             $u->id_caso = $idcaso;
             if ($u->find() == 0) {
@@ -437,8 +436,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
             if ($pMuestra == "tabla") {
                 echo "<tr>";
                 if ($depuraConsolidado) {
-                    echo "<td>". (int)$idcaso . "</td><td>"
-                        . (int)$idvic . "</td>";
+                    echo "<td><a href='captura_caso.php?modo=edita&id={$idcaso}'>"
+                        . "{$idcaso}</a>\n";
                 }
                 echo "<td>" . htmlentities($fecha, ENT_COMPAT, 'UTF-8') .
                     "</td><td>" .  htmlentities($ubi, ENT_COMPAT, 'UTF-8') .
@@ -452,6 +451,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
                     " & " . txt2latex(trim($nom)) . " ";
                 echo htmlentities($lt, ENT_COMPAT, 'UTF-8');
             }
+            //echo "<hr>OJO cat"; print_r($cat); 
+            //echo "<hr>dv[idcaso=$idcaso][idvic=$idvic]"; print_r($dv[$idcaso][$idvic]); die("OJO x");
             foreach ($cat as $idcat => $cp) {
                 if (isset($dv[$idcaso][$idvic][$idcat])) {
                     if ($pResto || $idcat != chr($ncol+65)) {
@@ -485,6 +486,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                     }
                 }
             }
+            $presp = "";
             $acto =&  objeto_tabla('acto');
             $acto->id_persona = $idvic;
             $acto->id_caso = $idcaso;
@@ -499,7 +501,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 );
             } else {
                 $apr = array();
-                $pr_sep = $presp = "";
+                $pr_sep = "";
 
                 while ($acto->fetch()) {
                     $d = $acto->getLink('id_presponsable');
@@ -644,6 +646,7 @@ class PagConsolidado extends HTML_QuickForm_Page
         if (isset($_SESSION['id_usuario'])) {
             $aut_usuario = "";
             include $_SESSION['dirsitio'] . "/conf.php";
+            global $dsn;
             autentica_usuario($dsn, $aut_usuario, 0);
             if (in_array(42, $_SESSION['opciones'])) {
                 $e =& $this->addElement(

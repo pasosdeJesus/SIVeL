@@ -245,7 +245,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
     /**
      * Retorna una identificación del registro actual.
      *
-     * @return string Identifación
+     * @return string|array Identifación
      */
     abstract function copiaId();
 
@@ -258,7 +258,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
      */
     function PagBaseMultiple($nomForma)
     {
-        parent::PagBaseSimple($nomForma);
+        $this->PagBaseSimple($nomForma);
 
         $this->addAction('eliminar', new EliminarMultiple());
         $this->addAction('nuevo', new NuevoMultiple());
@@ -311,6 +311,7 @@ abstract class PagBaseMultiple extends PagBaseSimple
         );
 
 
+        $ed = array();
         $nac = 'eliminar';
         $n = $this->getButtonName($nac);
         $e =& $this->createElement('submit', $n, _('Eliminar'));

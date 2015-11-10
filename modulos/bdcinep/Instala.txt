@@ -1,0 +1,21 @@
+Módulo Tablas Consolidadas Estilo Revista Noche y Niebla 
+
+1. En el archivo de configuración de SIVeL (conf.php)
+	1.1 agregue modulos/bdcinep entre los módulos
+		$modulos="modulos/bdcinep";
+
+2. Desde un navegador abra la página de actualización de la base, por
+   ejemplo desde el mismo servidor con:
+	https://127.0.0.1/actualiza.php  
+
+3. Para usar:
+	3.1 Tablas consolidadas
+		Desde el menú Conteos elija 
+		"Tablas Consolidado General de Víctimas"
+	3.2 Otras Tablas 
+		Desde Conteos->V. Individuales marcando
+		"Categorias en eje horizontal y sin supracategoria"
+		
+		
+
+

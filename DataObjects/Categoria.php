@@ -184,7 +184,7 @@ class DataObjects_Categoria extends DataObjects_Basica
             WHERE tviolencia.id = supracategoria.id_tviolencia";
         $op = $db->getAssoc($q);
         sin_error_pear($op);
-        $r = $s->loadArray(htmlentities_array($op));
+        $s->loadArray(htmlentities_array($op));
         $s->setValue(
             $this->id_tviolencia.':' .
             $this->id_supracategoria

@@ -254,7 +254,7 @@ echo " PostgreSQL corriendo";
 proceso post Postgresql 
 check "SOCKPSQL" "" "test -S \$SOCKPSQL/.s.PGSQL.5432" '/var/www/tmp/' '/tmp/' '/var/run/postgresql/'
 
-check "PHP" "" "test -x \$PHP" `which php-5.4 2> /dev/null` `which php-5.3 2> /dev/null` `which php-5.2 2> /dev/null` `which php 2> /dev/null` 
+check "PHP" "" "test -x \$PHP" `which php-5.5 2> /dev/null` `php-5.4 2> /dev/null` `which php-5.3 2> /dev/null` `which php-5.2 2> /dev/null` `which php 2> /dev/null` 
 verphp=`$PHP -v | grep "PHP " | sed -e "s|.*PHP \([0-9.]*\).*|\1|g"`;
 if (test "$?" != 0 -o "x$verphp" = "x") then {
 	echo "  $PROYECTO funciona con versiones de PHP posteriores a la 5.0";
@@ -388,6 +388,7 @@ if (test "$regenera" = "1") then {
 		if (test -f sitios/sivel/conf.php) then {
 			cp -f sitios/sivel/conf.php sitios/sivel/conf.php.copia
 		} fi;
+		chmod u+rw sitios/sivel/conf.php sitios/sivel/vardb.sh
 		sed -e "s/^ *\$dbservidor=.*/\$dbservidor=\"unix($dschrootsed)\";/g" sitios/pordefecto/conf.php.plantilla |
 		sed -e "s/^ *\$dbnombre *=.*/\$dbnombre = \"$dbnombre\";/g"  |
 		sed -e "s/^ *\$dbusuario *=.*/\$dbusuario = \"$dbusuario\";/g"  |

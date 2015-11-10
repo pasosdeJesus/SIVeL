@@ -12,11 +12,11 @@
 
 # Identificación
 
-PROYECTO="sivel"
+PROYECTO="SIVeL"
 # Nombre del proyecto
 #
 
-PRY_VERSION="1.2b4"
+PRY_VERSION="1.2.1"
 # Version
 #
 
@@ -34,7 +34,7 @@ URLSITE="http://www.sourceforge.net/projects/sivel"
 # Sitio de desarrollo de este proyecto
 #
 
-FECHA_PROX="20/03/2013"
+FECHA_PROX="01/08/2015"
 # Fecha en la que esperamos liberar próxima versión
 #
 
@@ -53,6 +53,11 @@ ACT_PROC="act-scp"
 # Las que hay por defecto son act-scp y act-ncftpput
 
 CVSPROYECTO="sivel.cvs.sourceforge.net:/cvsroot/sivel"
+# CVSROOT del proyecto
+#
+
+
+GHPROYECTO="github.com/pasosdeJesus/SIVeL"
 # CVSROOT del proyecto
 #
 

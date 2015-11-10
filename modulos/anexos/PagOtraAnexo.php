@@ -89,7 +89,7 @@ class PagOtraAnexo extends PagOtrasFuentes
      */
     function PagOtraAnexo($nomForma)
     {
-        parent::PagOtrasFuentes($nomForma);
+        $this->PagOtrasFuentes($nomForma);
         $this->titulo  = _('Otras Fuentes');
         if (isset($GLOBALS['etiqueta']['Otras Fuentes'])) {
             $this->titulo = $GLOBALS['etiqueta']['Otras Fuentes'];

@@ -1,36 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
+	<varlistentry><term>Versión 1.2.1 (Dic.2015)</term>
+		<listitem>
+			<para><itemizedlist>
+				<listitem><para>
+Cantidad de años por validar nombres, apellidos y sexo de nacimiento 
+configurable con variable <literal>$GLOBALS['anios_valida_sexo']</literal>.
+Por defecto empieza en 5.
+				</para></listitem>
+
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+	<varlistentry><term>Versión 1.2 (Oct.2015)</term>
+		<listitem>
+			<para><itemizedlist>
+				<listitem><para>
+Validación más veloz de nombres, apellidos y sexo de nacimiento.
+				</para></listitem>
+				<listitem><para>
+Renombrados archivos de comandos <literal>actweb.sh</literal> 
+y <literal>pubweb.sh</literal> a <literal>exporta-web.sh</literal> 
+y <literal>borratodo-publica-web.sh</literal> respectivamente.  
+Esqueleto de programa para recuperar casos a partir de un reporte general
+<literal>recGeneral.html</literal>.
+				</para></listitem>
+				<listitem><para>
+Al exportar/importar casos con etiquetas se conserva la fecha de estas.
+				</para></listitem>
+				<listitem><para>
+Fallas reportadas por scrutinizer-ci resueltas.
+				</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
 	<varlistentry><term>Versión 1.2b4 (May.2015)</term>
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>
 Consulta web permite filtrar por contexto.
 					</para></listitem>
-
-
 					<listitem><para>
 Reporte de actos como en 1.1 pero con las columnas adicionales 
 Sexo y Rango de Edad.
 					</para></listitem>
 
 					<listitem><para>
-Puede deshabilitarse edición de casos con
-$GLOBALS['no_permite_editar'].
+Puede deshabilitar edición de casos con
+$GLOBALS['no_permite_editar'] en archivo de configuración 
+(e.g <literal>sitios/sivel/conf.php</literal>).
 					</para></listitem>
 					<listitem><para>
-Fallas corregidas: cálculo de edad, no muestra rangos de edad deshabilitados en ficha de captura, eliminada Marcha Patriótica duplicada de Filiación Política.
+Fallas corregidas: cálculo de edad, no muestra rangos de edad deshabilitados en 
+ficha de captura, eliminada Marcha Patriótica duplicada de Filiación Política.
 					</para></listitem>
 
 
 					<listitem><para>
 En módulo mapag puede configurarse autenticación para ver mapa con 
-$GLOBALS['mapag_autentica'].
+$GLOBALS['mapag_autentica']
+ en archivo de configuración 
+(e.g <literal>sitios/sivel/conf.php</literal>).
 					</para></listitem>
 
 					<listitem><para>
 Puede deshabilitarse manejo (edición/adición/eliminación) de tablas básicas con
 $GLOBALS['deshabilita_manejo_tablasbasicas']
+en archivo de configuración 
+(e.g <literal>sitios/sivel/conf.php</literal>).
 					</para></listitem>
 			</itemizedlist></para>
 		</listitem>

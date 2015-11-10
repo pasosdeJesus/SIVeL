@@ -40,7 +40,7 @@ if (!empty($id_caso) && $id_caso != 0) {
     $ca = file_get_contents($requestUrl);
     $xmlSivel = simplexml_load_string($ca);
     if ($xmlSivel === false) {
-        errores_xml($xmlSivel, $ca);
+        errores_xml($ca);
         die("No pudo cargarse del url '" . $requestUrl . "'");
     }
     // todo bien, crear documento json

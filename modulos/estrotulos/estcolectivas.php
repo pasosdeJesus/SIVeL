@@ -75,7 +75,9 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         $pDepartamento = var_post_escapa('departamento');
         $pSinFiliacion = var_post_escapa('sinfiliacion');
 
-
+        $tablaFil = "";
+        $cfSegun = "";
+        $campoSegun = "";
         $cons = 'cons';
         $cons2="cons2";
         $where = "";
@@ -225,9 +227,6 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
         $pQ1='id_grupoper, ';
         $pQ1sel = 'victimacolectiva.id_grupoper, ';
         $tablas = $tablaFil . $tablaSegun . "$tQue actocolectivo, caso, categoria ";
-        $campos = array('caso_id' => 'Cód.');
-
-
         if ($pTipo != '') {
             consulta_and($db, $where, "categoria.id_tviolencia", $pTipo);
         }
@@ -360,7 +359,6 @@ class AccionEstadisticasCol extends HTML_QuickForm_Action
             echo "<th>Total</th>";
             echo "</tr>\n";
 
-            $row = array();
             foreach ($tfil as $f => $t1) {
                 echo "<tr>";
                 $sfil = 0;
@@ -477,11 +475,10 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
     /**
      * Retorna id de la supracategoria
      *
-     * @return string id
+     * @return integer|null id
      */
     function idSupracategoria()
     {
-        $nclase = null;
         if (isset($this->_submitValues['id_supracategoria'])) {
             return  (int)$this->_submitValues['id_supracategoria'] ;
         }
@@ -517,7 +514,7 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
         $e =& $this->addElement(
             'date', 'fini', 'Desde: ',
             array('language' => $slan, 'addEmptyOption' => true,
-            'minYear' => '1990', 'maxYear' => $cy
+            'minYear' => '1920', 'maxYear' => $cy
             )
         );
         $e->setValue(($cy - 1) . "-01-01");
@@ -563,8 +560,6 @@ class PagEstadisticasCol extends HTML_QuickForm_Page
             );
             $supra->loadArray($options);
         }
-        $nsupra = $this->idSupracategoria();
-
         $sel =& $this->addElement(
             'select',
             'segun', 'Según'

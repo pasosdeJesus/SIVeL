@@ -122,7 +122,6 @@ class DataObjects_Persona_trelacion extends DB_DataObject_SIVeL
                 $this->$c = $csin[$c];
             }
         }
-        $f = array();
     }
 
 

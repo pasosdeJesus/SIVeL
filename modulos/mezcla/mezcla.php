@@ -20,8 +20,6 @@ require_once "aut.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
 require_once 'misc.php';
 
-$aut_usuario = "";
-$db = autentica_usuario($dsn, $accno, $aut_usuario, 31);
 
 require_once $_SESSION['dirsitio'] . "/conf_int.php";
 require_once 'misc_caso.php';
@@ -137,7 +135,7 @@ function ref_inicial($enl, $t, $r)
  * @param string $s Cadena en la cual buscar
  * @param string $c Catacter buscado
  *
- * @return Subcadena de $s
+ * @return string Subcadena de $s
  */
 function subizq_hasta_car($s, $c)
 {
@@ -156,10 +154,10 @@ function subizq_hasta_car($s, $c)
  * @param integer $id1    Primer caso
  * @param integer $id2    Segundo caso
  * @param bool    $elim2  Elimina segundo tras mezclar?
- * @param string  &$obs   Colchon de observaciones
- * @param string  &$rvic  Retorna aqui víctimas tras mezclas
- * @param string  &$fecha Retorna aqui fecha tras mezcla
- * @param string  &$rdep  Retorna aqui departamento tras mezcla
+ * @param string  $obs   Colchon de observaciones
+ * @param string  $rvic  Retorna aqui víctimas tras mezclas
+ * @param string  $fecha Retorna aqui fecha tras mezcla
+ * @param string  $rdep  Retorna aqui departamento tras mezcla
  *
  * @return bool Si logra completar mezcla
  */
@@ -185,7 +183,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep)
     $ref = array();
     foreach ($enl as $t => $ct) {
         foreach ($ct as $c => $rl) {
-            list($tab, $cam) = explode(":", $rl);
+            list($tab, ) = explode(":", $rl);
             //echo " OJO <br> t=$t, c=$c, tab=$tab, cam=$cam ";
             //echo " OJO estbd[tab__keys]= ";
             //print_r($estbd["{$t}__keys"]);
@@ -380,6 +378,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep)
     $do2 = objeto_tabla('acto');
     $do2->id_caso = $id2;
     $do2->find();
+    $dot1 = null;
     sin_error_pear($do2);
     while ($do2->fetch()) {
         if (isset($mapk['persona'][$do2->id_persona])) {
@@ -407,7 +406,7 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep)
                 $obs .= " Asociado acto(id_persona:"
                     . "{$do1->id_persona},id_categoria:{$do2->id_categoria})";
             }
-            if ($GLOBALS['actoreiniciar']) {
+            if ($dot1 != null) {
                 $dot1->find();
                 if (!$dot1->fetch()) {
                     $dot1->fecha = $fecha;
@@ -559,11 +558,11 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep)
         }
         if (isset($idp2) && $idp1 != $idp2) {
             $q = "DELETE FROM persona_trelacion WHERE persona1='$idp2'";
-            $r = hace_consulta($db, $q);
+            hace_consulta($db, $q);
             $q = "DELETE FROM persona_trelacion WHERE persona2='$idp2'";
-            $r = hace_consulta($db, $q);
+            hace_consulta($db, $q);
             $q = "DELETE FROM persona WHERE id='$idp2'";
-            $r = hace_consulta($db, $q);
+            hace_consulta($db, $q);
         }
     }
     return true;
@@ -580,6 +579,8 @@ function mezclaen($id1, $id2, $elim2, &$obs, &$rvic, &$fecha, &$rdep)
 function muestra($dsn)
 {
     global $db;
+    $aut_usuario = "";
+    $db = autentica_usuario($dsn, $aut_usuario, 31);
 
     $html_t = "Mezcla "
         . date("Y-m-d H:m");
@@ -721,8 +722,8 @@ function muestra($dsn)
             $h->id_persona1 = $id1;
             $h->id_persona2 = $id2;
             $h->insert();
+            sin_error_pear($h);
         }
-        sin_error_pear($h);
         echo "<tr>";
         echo "<td>" . (int)$par[0] . "</td><td>" . (int)$v1->id_persona 
             . "</td><td>" . (int)$par[1] . "</td><td>" . (int)$v2->id_persona

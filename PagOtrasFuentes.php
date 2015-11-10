@@ -174,7 +174,7 @@ class PagOtrasFuentes extends PagBaseMultiple
      */
     function PagOtrasFuentes($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo = _('Otras Fuentes');
         $this->tcorto = _('Fuente');
         if (isset($GLOBALS['etiqueta']['Otras Fuentes'])) {
@@ -232,13 +232,13 @@ class PagOtrasFuentes extends PagBaseMultiple
         } else {
             $v = array();
             foreach ($this->bfotra->_do->fb_fieldsToRender as $c) {
-                $cq = $this->getElement($c);
+                #$cq = $this->getElement($c);
                 if (isset($this->bfotra->_do->$c)) {
                     $v[$c] = $this->bfotra->_do->$c;
                 }
             }
             foreach ($this->bcaso_fotra->_do->fb_fieldsToRender as $c) {
-                $cq = $this->getElement($c);
+                #$cq = $this->getElement($c);
                 if (isset($this->bcaso_fotra->_do->$c)) {
                     $v[$c] =$this->bcaso_fotra->_do->$c;
                 }
@@ -254,7 +254,7 @@ class PagOtrasFuentes extends PagBaseMultiple
                     $d =& objeto_tabla($n);
                     $d->get($k, $id);
                     foreach ($d->fb_fieldsToRender as $c) {
-                        $cq = $this->getElement($c);
+                        #$cq = $this->getElement($c);
                         $v[$c] = $d->$c;
                     }
                 }
@@ -496,7 +496,6 @@ class PagOtrasFuentes extends PagBaseMultiple
             $db, "SELECT id FROM fotra " .
             " WHERE nombre ILIKE '$nomf'"
         );
-        $rows = array();
         $nr = $rp->numRows();
         $dfd = objeto_tabla('fotra');
         if ($nr == 0) {
@@ -507,11 +506,11 @@ class PagOtrasFuentes extends PagBaseMultiple
             $row = array();
             $rp->fetchInto($row);
             $dfdc->id_fotra = $row[0];
-            if ($rp->fetchInto($row)) {
+            if ($nr > 1) {
                 rep_obs(
                     _("Hay ") . $nr .
                     _("fuentes no frecuentes con nombre como ")
-                    .  $fuente->nombre_fuente
+                    .  $nomf
                     .  _(", escogida la primera") . "\n", $obs
                 );
             }
@@ -536,17 +535,16 @@ class PagOtrasFuentes extends PagBaseMultiple
     static function importaRelato(&$db, $r, $idcaso, &$obs)
     {
         foreach ($r->fuente as $fuente) {
-            $idffrecuente = null;
             $nomf = $fuente->nombre_fuente;
             if (empty($fuente->fecha_fuente)) {
                 rep_obs(
                     _("No se incluyó fuente sin fecha: ") .
-                    $fuente->asXML()
+                    $fuente->asXML(), $obs
                 );
             } else if (empty($fuente->nombre_fuente)) {
                 rep_obs(
                     _("No se incluyó fuente sin nombre: ") .
-                    $fuente->asXML()
+                    $fuente->asXML(), $obs
                 );
             } else {
                 $fecha = conv_fecha($fuente->fecha_fuente, $obs);

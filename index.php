@@ -79,11 +79,9 @@ function bd_a_menu($id)
 /**
  * Presenta menú principal.
  *
- * @param handle &$db Conexión a base de datos
- *
  * @return void
  */
-function menu_principal(&$db)
+function menu_principal()
 {
 
     $datMenu = bd_a_menu(0);
@@ -157,7 +155,7 @@ sin_error_pear(
 
 inicializa($db);
 
-menu_principal($db);
+menu_principal();
 
 unset_var_session();
 

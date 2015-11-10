@@ -115,7 +115,6 @@ class PagDesplazamiento extends PagBaseMultiple
         }
 
         $idf = array();
-        $indid = -1;
         $tot = PagDesplazamiento::extrae_desplazamientos($idcaso, $db, $idf);
 
         $_SESSION[$this->pref.'_total'] = $tot;
@@ -153,7 +152,7 @@ class PagDesplazamiento extends PagBaseMultiple
      */
     function PagDesplazamiento($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo  = _('Desplazamiento');
         $this->tcorto  = _('Desplazamiento');
         if (isset($GLOBALS['etiqueta']['Desplazamiento'])) {
@@ -189,7 +188,8 @@ class PagDesplazamiento extends PagBaseMultiple
             ? $this->bdesplazamiento->_do->fechaexpulsion : '';
         $this->addElement('');
 
-        list($dep, $mun, $cla) = PagUbicacion::creaCampos(
+        $gr =array();
+        list($dep, $mun, ) = PagUbicacion::creaCampos(
             $this, 'departamentodecl', 'municipiodecl', 'clasedecl'
         );
         $gr[] =& $dep;
@@ -268,7 +268,7 @@ class PagDesplazamiento extends PagBaseMultiple
         $q = "DELETE FROM desplazamiento WHERE fechaexpulsion=' "
             . "{$ddesplazamiento->fechaexpulsion}' "
             . " AND id_caso={$_SESSION['basicos_id']}";
-        $result = hace_consulta($db, $q);
+        hace_consulta($db, $q);
     }
 
     /**

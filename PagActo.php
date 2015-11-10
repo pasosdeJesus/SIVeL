@@ -252,7 +252,7 @@ class PagActo extends PagBaseSimple
      */
     function PagActo($nomForma)
     {
-        parent::PagBaseSimple($nomForma);
+        $this->PagBaseSimple($nomForma);
         $this->titulo = _('Actos');
         $this->tcorto = _('Actos');
         if (isset($GLOBALS['etiqueta']['Actos'])) {
@@ -467,10 +467,10 @@ class PagActo extends PagBaseSimple
 
         $q = "DELETE FROM acto " .
             " WHERE id_caso='$idcaso'";
-        $result = hace_consulta($db, $q, false);
+        hace_consulta($db, $q, false);
         $q = "DELETE FROM actocolectivo " .
             " WHERE id_caso='$idcaso'";
-        $result = hace_consulta($db, $q, false);
+        hace_consulta($db, $q, false);
     }
 
     /**
@@ -505,16 +505,14 @@ class PagActo extends PagBaseSimple
             return true;
         }
 
-        $db = $this->iniVar();
+        $this->iniVar();
         $idcaso = $_SESSION['basicos_id'];
         $ret = true;
         $da = objeto_tabla('acto');
-        if ($procActo  && isset($valores['presponsables'])
-            && isset($valores['categorias']) && isset($valores['victimas'])
-        ) {
-            foreach (var_escapa($valores['presponsables']) as $pr) {
-                foreach (var_escapa($valores['categorias']) as $ca) {
-                    foreach (var_escapa($valores['victimas']) as $vi) {
+        if ($procActo) {
+            foreach (var_escapa_arreglo($valores['presponsables']) as $pr) {
+                foreach (var_escapa_arreglo($valores['categorias']) as $ca) {
+                    foreach (var_escapa_arreglo($valores['victimas']) as $vi) {
                         $da->id_caso = $idcaso;
                         $da->id_presponsable = $pr;
                         $da->id_categoria = $ca;
@@ -527,13 +525,12 @@ class PagActo extends PagBaseSimple
             }
         }
         $dactocol = objeto_tabla('actocolectivo');
-        if ($procActocol  && isset($valores['presponsablescol'])
-            && isset($valores['categoriascol'])
-            && isset($valores['victimascol'])
-        ) {
-            foreach (var_escapa($valores['presponsablescol']) as $pr) {
-                foreach (var_escapa($valores['categoriascol']) as $ca) {
-                    foreach (var_escapa($valores['victimascol']) as $vi) {
+        if ($procActocol) {
+            foreach (var_escapa_arreglo($valores['presponsablescol']) as $pr) {
+                foreach (var_escapa_arreglo($valores['categoriascol']) as $ca) {
+                    foreach (var_escapa_arreglo($valores['victimascol']) 
+                        as $vi
+                    ) {
                         $dactocol->id_caso = $idcaso;
                         $dactocol->id_presponsable = $pr;
                         $dactocol->id_categoria = $ca;

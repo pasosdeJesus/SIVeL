@@ -50,7 +50,7 @@ class VerAnexo extends HTML_QuickForm_Action
             if (isset($page->_submitValues['archivo'])) {
                 $nombre = var_escapa($page->_submitValues['archivo']);
                 $inin = $_SESSION['basicos_id'] . "_";
-                if (strpos($nombre, '/')  != false) {
+                if (strpos($nombre, '/')  !== false) {
                     die("No puede tener el caracter/");
                 }
                 if ((substr($nombre, 0, strlen($inin))) != $inin) {
@@ -159,9 +159,8 @@ class PagAnexo extends PagBaseMultiple
      */
     function iniVar($aper = null)
     {
-        list($db, $dcaso, $idcaso) = parent::iniVar(array(true, true));
+        list($db, , $idcaso) = parent::iniVar(array(true, true));
 
-        $row = array();
         $ida = array();
         $tot = 0;
         $d =& objeto_tabla('anexo');
@@ -204,7 +203,7 @@ class PagAnexo extends PagBaseMultiple
      */
     function PagAnexo($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
 
         $this->titulo  = _('Anexos');
         $this->tcorto = _('Anexo');
@@ -310,7 +309,6 @@ class PagAnexo extends PagBaseMultiple
 
 
         $db = $this->iniVar();
-        $idcaso = $this->banexo->_do->id_caso;
         $this->banexo->_do->fecha = call_user_func(
             $this->banexo->dateToDatabaseCallback,
             var_escapa($valores['fecha'], $db)
@@ -331,16 +329,29 @@ class PagAnexo extends PagBaseMultiple
 
             $ida = $this->banexo->_do->id_caso."_".$this->banexo->_do->id;
             $nnom = $ida . "_".$v['name'];
-            if (file_exists($GLOBALS['dir_anexos'] . "/$nnom")) {
+            $nloc = $GLOBALS['dir_anexos'] . "/$nnom";
+            if (file_exists($nloc)) {
                  error_valida('Ya existe un archivo con ese nombre', $valores);
+                 return false;
+            }
+            if (mb_strlen($nloc, "UTF-8") > 255) {
+                 error_valida('Nombre tiene mas de 255 caracteres', $valores);
+                 return false;
+            }
+            $r=preg_match("/^[-0-9A-Za-z_\.\/]+$/",$nloc);
+            if ($r != 1) {
+                error_valida('Nombre tiene caracteres no admisibles " .
+                    "--solo debe constar de digitos, letras, _ y .', $valores);
                  return false;
             }
             $rmuf = $s->moveUploadedFile($GLOBALS['dir_anexos'], $nnom);
             if (!$rmuf) {
                 error_valida(
-                    'No pudo moverse el archivo ' .
-                    $nnom . ' al directorio: ' .
-                    $GLOBALS['dir_anexos'], $valores
+                    "No pudo moverse el archivo $nnom al directorio: " .
+                    $GLOBALS['dir_anexos'] .
+                    ".\n ¿El tamaño supera " .
+                    ini_get('upload_max_filesize') . " o " . 
+                    ini_get('post_max_size') . "?", $valores
                 );
                  return false;
             }

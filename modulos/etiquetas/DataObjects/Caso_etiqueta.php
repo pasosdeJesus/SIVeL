@@ -166,11 +166,14 @@ class DataObjects_Caso_etiqueta extends DB_DataObject_SIVeL
         $form->removeElement('observaciones');
         $form->removeElement('fecha');
 
+
         $fm = array();
         $sel =& $form->createElement(
-            'static', 'ffecha', 'ffecha',
-            @date('Y-m-d')
+            'date', 'ffecha', null, array('format' => 'Y-m-d')
         );
+        $sel->setValue(array(
+            'Y' => @date('Y'), 'm' => @date('m'), 'd' => @date('d')));
+        $sel->freeze();
         $fm[] =& $sel;
         $sel =& $form->createElement('select', 'fetiqueta', 'fetiqueta', array());
         $sel->loadArray(

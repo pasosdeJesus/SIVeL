@@ -133,14 +133,12 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         );
         $intensivo = isset($_POST['intensivo']) && $_POST['intensivo'] == '1';
         $aper = array();
-        $maxidper = 0;
         $agr = array();
         if ($intensivo) {
-            list($aper, $maxidper) = extrae_per($db);
+            list($aper, ) = extrae_per($db);
             $agr = extrae_grupos($db);
         }
 
-        $cont = "";
         if (substr($pArchivo, strlen($pArchivo) - 3, 3) == '.gz') {
             if (!function_exists('readgzfile')) {
                 die(_("Falta soporte para Zlib en su instalación de PHP.") . " "
@@ -160,12 +158,12 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         $relatos = simplexml_load_string($cont);
         if (!$relatos) {
             $e = libxml_get_errors();
-            die(_("No pudo cargarse") . " '" . $pArchivo . "'");
+            die(_("No pudo cargarse") . " '" . $pArchivo . "': " . $e);
         }
 
         $yaesta = array(); // Indica cuales pestañas ya importaron
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             $yaesta[$c] = false;
         }
 
@@ -173,7 +171,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
         foreach ($relatos->relato as $r) {
             $obs = "";
             $id_presp = array();  // Presuntos responsables identificados
-            $id_pers = array();
             $id_vcol = array();
             $datgrupo = array();
             $dcaso = objeto_tabla('caso');
@@ -256,7 +253,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 . "<relatos>\n"
                 . $r->asXml()
                 . "\n</relatos>\n" ;
-            $nf = 0;
             $ax = $idcaso . "_" . $anexof->id . "_relatoimportado.xrlt";
             $cax = $GLOBALS['dir_anexos'] . "/" . $ax;
             file_put_contents($cax, $rx);
@@ -267,7 +263,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 $db, $r, $idcaso,
                 $obs
             );
-            $idffrecuente = null;
             $nomf = $r->organizacion_responsable;
             $fecha = @date('Y-m-d');
             $orgfuente = PagFuentesFrecuentes::busca_inserta(
@@ -308,7 +303,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
 
 
             // Grupo
-            $pr = -1;
             foreach ($r->grupo as $grupo) {
                 if (!empty($grupo->nombre_grupo)) {
                     $idg = (string)$grupo->id_grupo;
@@ -343,7 +337,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         );
                     } else if (isset($persona->observaciones)) {
                         $edad = dato_en_obs($persona, 'edad');
-                        if ($edad != null) {
+                        if ($edad !== null && strlen($edad)>0 ) {
                             $anionac = $aniocaso - lnat_a_numero($edad);
                         }
                     }
@@ -367,12 +361,12 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     $ncla = dato_en_obs($persona, 'clase');
                     //echo "OJO ndep=$ndep, nmun=$nmun, ncla=$ncla<br>";
                     $idd = $idm = $idc = null;
-                    if ($ndep != null || $nmun != null
-                        || $ncla != null
+                    if (($ndep !== null && strlen($ndep) > 0) || 
+                        ($nmun !== null && strlen($nmun) > 0) || 
+                        ($ncla !== null && strlen($ncla) > 0)
                     ) {
                         list($idd, $idm, $idc) = conv_localizacion(
-                            $db,
-                            $ndep, $nmun, $ncla, $obs
+                            $db, $ndep, $nmun, $ncla, $obs
                         );
                         //echo "OJO idd=$idd, idm=$idm, idc=$idc<br>";
                         if ($idd == 1000) {
@@ -420,7 +414,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         $dvictima->id_caso = (int)$idcaso;
 
                         $hijos = dato_en_obs($victima, 'hijos');
-                        if ($hijos != null) {
+                        if ($hijos !== null && strlen($hijos) > 0) {
                             $dvictima->hijos= lnat_a_numero($hijos);
                         }
                         $dvictima->id_persona
@@ -435,7 +429,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         } else {
                             $redad = dato_en_obs($victima, 'rangoedad');
                             //echo "OJO redad=$redad<br>\n";
-                            if ($redad != null) {
+                            if ($redad !== null && strlen($redad) > 0) {
                                 $idredad = (int)conv_basica(
                                     $db, 'rangoedad',
                                     $redad, $obs, false, 'rango'
@@ -460,7 +454,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                                 $dvictima->$ncs = (int)conv_basica(
                                     $db,
                                     "$cs",
-                                    $victima->$cr,
+                                    $victima->$cr->__toString(),
                                     $obs
                                 );
                             } else if (is_callable(
@@ -493,10 +487,10 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         //echo "OJO dvictima->ncs=" .  $dvictima->$ncs . "<br>";
                     }
                     $v = dato_en_obs($victima, "organizacionarmada");
-                    if ($v == null) {
+                    if ($v === null || strlen($v) == 0) {
                         $v = dato_en_obs($victima, "organizacion_armada");
                     }
-                    if ($v != null) {
+                    if ($v !== null && strlen($v) > 0) {
                         $dvictima->organizacionarmada = (int)conv_basica(
                             $db, 'presponsable', $v, $obs
                         );
@@ -520,7 +514,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                         //echo "OJO cs=$cs, cs2=$cs2<br>";
                         $v = dato_en_obs($victima, $cs);
                         //echo "OJO v=$v<br>";
-                        if ($v != null) {
+                        if ($v !== null && strlen($v) > 0) {
                             $la = explode(';', $v);
                             foreach ($la as $ant) {
                                 //echo "OJO ant=$ant<br>";
@@ -551,7 +545,6 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                 //    . $acto->agresion_particular . "<br>";
                 if (!empty($acto->agresion_particular)) {
                     $idp = (string)$acto->id_presunto_grupo_responsable;
-                    $pr = null;
                     if (isset($id_presp[$idp])) {
                         // Ya registrado presunto responsable
                         $pr = $id_presp[$idp];
@@ -595,6 +588,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
                     } else if (!empty($acto->id_grupo_victima)) {
                         $ia = (string)$acto->id_grupo_victima;
                         $g = $datgrupo[$ia];
+                        $cg = "";
                         if (isset($id_vcol[$ia])) {
                             $cg = $id_vcol[$ia];
                         } else if (!empty($g->nombre_grupo)) {
@@ -646,7 +640,7 @@ class AccionImportaRelato extends HTML_QuickForm_Action
             }
 
             foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                list($n, $c, $o) = $tab;
+                list($n, $c, ) = $tab;
                 if (!$yaesta[$c]) {
                     if (($d = strrpos($c, "/"))>0) {
                         $c = substr($c, $d+1);

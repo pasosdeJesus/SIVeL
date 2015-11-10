@@ -20,13 +20,15 @@ function genDataObject {
 function prueba {
 	a=$1;          # Archivo PHP
 	d=$2;          # Descripción
-	sal=$3;        # 
-	saca="$4";     # Que lineas sacar del resultado para comparar
+	sal=$3;        # Archivo de salida
+	saca="$4";     # Que lineas sacar del resultado antes de comparar
 	sintab="$5";   # 
 	otrocomp="$6"  # Otro archivo por comparar entre salida y esperado
 	saca2="$7"      # Lineas por sacar de otrocomp
 	saca3="$8"      # Mas lineas por sacar de otrocomp
 	saca4="$9"      # Mas lineas por sacar del resultado principal
+	shift
+	saca5="$9"     # Mas lineas por sacar de otrocomp
 
 	echo -n "$a $d : ";
 	echo -n "$a $d : " >> sitios/pruebas/pruebas.bitacora;
@@ -66,6 +68,10 @@ function prueba {
 			if (test "$saca3" != "") then {
 				cp sitios/pruebas/salida/$otrocomp sitios/pruebas/salida/$otrocomp.tmp2
 				grep -v "$saca3" sitios/pruebas/salida/$otrocomp.tmp2 > sitios/pruebas/salida/$otrocomp
+				if (test "$saca5" != "") then {
+					cp sitios/pruebas/salida/$otrocomp sitios/pruebas/salida/$otrocomp.tmp3
+					grep -v "$saca5" sitios/pruebas/salida/$otrocomp.tmp3 > sitios/pruebas/salida/$otrocomp
+				} fi;
 			} fi;
 		}  fi;
 		diff -b sitios/pruebas/salida/$otrocomp sitios/pruebas/esperado/$otrocomp > /dev/null
@@ -166,6 +172,7 @@ EOF
 	mkdir -p sitios/pruebas/DataObjects
 #	cp $dirplant/DataObjects/$nombase.ini sitios/pruebas/sivelpruebas.ini
 #	cp $dirplant/DataObjects/$nombase.links.ini sitios/pruebas/sivelpruebaslinks.ini
+	#cp confv.php sitios/pruebas
 
 	(cd sitios/pruebas ; ../../bin/creaesquema.sh)
 
@@ -218,22 +225,19 @@ prueba sitios/pruebas/inscaso-victimaColectiva.php " - Víctima Colectiva"
 prueba sitios/pruebas/inscaso-acto.php " - Actos"
 prueba sitios/pruebas/inscaso-memo.php " - Memo"
 prueba sitios/pruebas/inscaso-memo-valida.php " - Valida Memo"
-#}
 prueba sitios/pruebas/inscaso-anexos.php " - Anexo"
 prueba sitios/pruebas/inscaso-etiqueta.php " - Etiqueta"
 prueba sitios/pruebas/inscaso-evaluacion.php " - Evaluacion"
 prueba sitios/pruebas/inscaso-evaluacion-valida.php " - Valida Evaluacion"
 prueba sitios/pruebas/inscaso-valrepgen.php " - Validar y Reporte General" valrepgen "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*"
 prueba sitios/pruebas/reprevista.php " - Reporte Revista" reprevista
-#}
 prueba sitios/pruebas/reprevista-filtros.php " - Filtros en Reporte Revista" reprevista-filtros "Warning"
-#exit 1;
 prueba sitios/pruebas/repconsolidado.php " - Reporte Consolidado" repconsolidado
+#}
 prueba sitios/pruebas/estadisticas.php " - Estadísticas " estadisticas
 prueba sitios/pruebas/novalida-basicos.php " - Validación básicos" novalida-basicos
 prueba sitios/pruebas/novalida-frecuentes.php " - Validación frecuentes" novalida-frecuentes "<option"
 prueba sitios/pruebas/externa.php " - Consulta externa" externa
-prueba sitios/pruebas/relato.php " - Exporta Relato " relato
-
-prueba sitios/pruebas/imprelato.php " - Importa Relato " imprelato "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*" "" "resimp.xrlt.espreg" "Warning" "fecha_fuente" "D -"
+prueba sitios/pruebas/relato.php " - Exporta Relato " relato 
+prueba sitios/pruebas/imprelato.php " - Importa Relato " imprelato "sivelpruebas *[0-9]*-[A-Za-z]*-[0-9]*" "" "resimp.xrlt.espreg" "Warning" "fecha_fuente" "D -" "IMPORTA"
 #prueba sitios/pruebas/mezcla.php " - Mezcla 2 Casos" mezcla

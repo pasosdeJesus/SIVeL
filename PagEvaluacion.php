@@ -48,7 +48,7 @@ class PagEvaluacion extends PagBaseSimple
      */
     function PagEvaluacion($nomForma)
     {
-        parent::PagBaseSimple($nomForma);
+        $this->PagBaseSimple($nomForma);
         $this->titulo = _('Evaluación');
         if (isset($GLOBALS['etiqueta']['Evaluacion'])) {
             $this->titulo = $GLOBALS['etiqueta']['Evaluacion'];

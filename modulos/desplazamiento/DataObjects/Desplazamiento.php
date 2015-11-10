@@ -275,20 +275,15 @@ class DataObjects_Desplazamiento extends DB_DataObject_SIVeL
             AND municipio.id_departamento = departamento.id";
         $op = $db->getAssoc($q);
         sin_error_pear($op);
-        $r = $s->loadArray(array('' => '') + htmlentities_array($op));
-        $s->setValue(
-            $this->expulsion
-        );
+        $s->loadArray(array('' => '') + htmlentities_array($op));
+        $s->setValue($this->expulsion);
 
         $s =& $form->getElement('llegada');
         $s->_options = array();
         $op = $db->getAssoc($q);
         sin_error_pear($op);
-        $r = $s->loadArray(htmlentities_array($op));
-        $s->setValue(
-            $this->expulsion
-        );
-
+        $s->loadArray(htmlentities_array($op));
+        $s->setValue($this->llegada);
 
         $s =& $form->getElement('otrosdatos');
         $s->setSize(75);

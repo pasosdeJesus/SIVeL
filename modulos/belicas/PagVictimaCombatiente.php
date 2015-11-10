@@ -170,7 +170,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
      */
     function PagVictimaCombatiente($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo  = _('Víctima Combatiente');
         $this->tcorto  = _('Comb.');
         if (isset($GLOBALS['etiqueta']['Victima Combatiente'])) {
@@ -234,6 +234,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
         //$sca =& $this->getElement('id_antecedente');
             $valsca = array();
 
+        $v = array();
         if (isset($_SESSION['recuperaErrorValida'])) {
             $v = $_SESSION['recuperaErrorValida'];
         } else if (isset($_SESSION['nuevo_copia_id'])) {
@@ -257,7 +258,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             $v['id_antecedente'] = $valsca;
         } else {
             foreach ($this->bcombatiente->_do->fb_fieldsToRender as $c) {
-                $cq = $this->getElement($c);
+                //$cq = $this->getElement($c);
                 if (isset($this->bcombatiente->_do->$c)) {
                     $v[$c] = $this->bcombatiente->_do->$c;
                     //$cq->setValue($this->bcombatiente->_do->$c);
@@ -300,7 +301,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
         if ($dcombatiente->id != null) {
             $db =& $dcombatiente->getDatabaseConnection();
             $idcombatiente = $dcombatiente->id;
-            $result = hace_consulta(
+            hace_consulta(
                 $db, "DELETE FROM antecedente_combatiente " .
                 "WHERE id_combatiente='$idcombatiente'"
             );
@@ -443,7 +444,6 @@ class PagVictimaCombatiente extends PagBaseMultiple
             $db = $this->iniVar(array((int)$valores['id']));
         }
 
-        $idcaso = $this->bcombatiente->_do->id_caso;
         $nuevo = $this->bcombatiente->_do->id == null;
         $ret = $this->process(
             array(&$this->bcombatiente, 'processForm'),
@@ -459,8 +459,12 @@ class PagVictimaCombatiente extends PagBaseMultiple
             } else {
                 $this->eliminaVic($this->bcombatiente->_do, false);
             }
-            if (isset($valores['id_antecedente'])) {
-                foreach (var_escapa($valores['id_antecedente']) as $k => $v) {
+            if (isset($valores['id_antecedente']) &&
+                is_array($valores['id_antecedente'])
+            ) {
+                foreach (var_escapa_arreglo($valores['id_antecedente']) 
+                    as $k => $v
+                ) {
                     $this->bantecedente_combatiente->_do->id_combatiente
                         = $idcombatiente;
                     $this->bantecedente_combatiente->_do->id_antecedente
@@ -507,7 +511,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
      * @param array  $campos Campos por mostrar
      * @param int    $idcaso Código de caso
      *
-     * @return void
+     * @return string
      */
     static function reporteGeneralRegistroHtml(&$db, $campos, $idcaso)
     {
@@ -593,7 +597,8 @@ class PagVictimaCombatiente extends PagBaseMultiple
      *
      * @return bool V sii hay integridad
      */
-    function integridad_ref_tipoviolencia()
+    function integridad_ref_tipoviolencia(&$db, $idcaso, $idpres, 
+        $accion, $valores)
     {
         $q = "SELECT COUNT(id_combatiente) FROM "
             . "combatiente_presponsable, combatiente WHERE "
@@ -610,6 +615,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
             );
             return false;
         }
+        return true;
     }
 
 

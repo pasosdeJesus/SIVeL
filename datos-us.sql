@@ -69,6 +69,7 @@ INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-tb', '2013-0
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-sx', '2013-10-04', 'Funcion soundex en español'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.1-dp13', '2013-11-13', 'Actualiza con DIVIPOLA 2013'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-fun', '2013-12-31', 'Fusiona tablas funcionario y usuario'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-fu2', '2013-12-31', 'Fusiona tablas funcionario y usuario 2'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-bc', '2014-01-01', 'Clave con condensado bcrypt'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-nc', '2014-01-08', 'Nombre en Sector Social de Victima Colectiva'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-def', '2014-01-08', 'Valores por defecto en referencias a tablas básicas'); 
@@ -80,6 +81,7 @@ INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-lo', '2014-0
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-sxe', '2014-03-08', 'Vista con soundexesp de nombres de personas'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-sexo', '2014-03-08', 'Valida sexo de víctimas con modelo prob.'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-apn', '2014-03-08', 'Valida apellidos/nombres con modelo prob.'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-in', '2015-11-04', 'Vista para quien inica un caso'); 
     
 
 

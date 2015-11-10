@@ -86,7 +86,7 @@ class ResConsulta
 
     /**
      * Resultado
-     * @var    string
+     * @var    array
      */
     var $resultado;
 
@@ -116,7 +116,7 @@ class ResConsulta
 
     /**
      * Ordenar
-     * @var    bool
+     * @var string
      */
     var $ordenar;
 
@@ -127,36 +127,37 @@ class ResConsulta
     var $tex;
 
     /**
-     * ordCod
+     * ordCasos
      * @var    array
      */
-    var $ordCod;
+    var $ordCasos;
+
 
     /**
      * Vector con opciones para presentar resultado
      * @var    array
      */
-    var $busca_pr; //
+    var $busca_pr; 
 
     /**
      * Constructora
      *
-     * @param array   &$campos      Campos por mostrar id => nombre
-     * @param handle  &$db          Conexión a base de datos
-     * @param string  &$resultado   Resultado de consulta tiene caso.id
-     * @param array   &$conv        Convertir id de campos a base de datos
-     * @param string  $mostrar      Forma de presentacion (rev., gen., tabla)
-     * @param array   $detallesform Partir  memo en varias lineas
-     * @param array   $ordCasos     Orden de los casos por mostrar
-     * @param array   $busca_pr     Opciones de mostrar info.
-     * @param array   $ordenar      Ordenar
-     * @param boolean $primnom      Nombre y apellido
+     * @param array        &$campos      Campos por mostrar id => nombre
+     * @param handle       &$db          Conexión a base de datos
+     * @param array|object &$resultado   Resultado de consulta tiene caso.id
+     * @param array        &$conv        Convertir id de campos a base de datos
+     * @param string       $mostrar      Forma de presentacion 
+     * @param array        $detallesform Partir  memo en varias lineas
+     * @param array        $ordCasos     Orden de los casos por mostrar
+     * @param array        $busca_pr     Opciones de mostrar info.
+     * @param string       $ordenar      Ordenar
+     * @param boolean      $primnom      Nombre y apellido
      *
      * @return void
      */
     function ResConsulta(&$campos, &$db, &$resultado, &$conv, $mostrar,
-        $detallesform = array(), $ordCasos = array(), $busca_pr = null,
-        $ordenar = null, $primnom = true
+        $detallesform = array(), $ordCasos = array(), $busca_pr = array(),
+        $ordenar = '', $primnom = true
     ) {
         $this->campos =& $campos;
         $this->db=& $db;
@@ -213,6 +214,7 @@ class ResConsulta
             " AND clase.id_municipio=municipio.id " .
             " ORDER BY departamento.nombre, municipio.nombre, clase.nombre;";
         $result = hace_consulta($db, $q);
+        $row = array();
         while (isset($result) && $result->fetchInto($row)) {
             $idd[] = $row[0];
             $idm[] = $row[1];
@@ -289,8 +291,6 @@ class ResConsulta
             $idcaso,
             $db, $idd, $ndd, $idm, $ndm, $idc, $ndc, $tdu
         );
-        $seploc = "";
-        $vr = "";
         $cdep = "";
         $cmun = "";
         $sep = "";
@@ -350,12 +350,12 @@ class ResConsulta
      * @param array   &$idp       Vector de identificaciones
      * @param array   &$ndp       Vector de nombres
      * @param integer $id_persona Id.
-     * @param integer &$indid     Indid
+     * @param integer $indid     Indid
      * @param object  &$edp       edp
      * @param boolean $primnom    Nombre y apellido
      * @param boolean $septd      Emplear como separador </td><td> y quitar tags
      *
-     * @return Total de víctimas
+     * @return integer Total de víctimas
      */
     function extraeVictimas($idcaso, &$db, &$idp, &$ndp,
         $id_persona, &$indid, &$edp, $primnom = true, $septd = false
@@ -407,9 +407,9 @@ class ResConsulta
      * @param array   &$idp           Vector de identificaciones
      * @param array   &$ndp           Vector de nombres
      * @param integer $id_combatiente Id.
-     * @param integer &$indid         Indid
+     * @param integer $indid         Indid
      *
-     * @return Total de víctimas
+     * @return integer Total de víctimas
 
      */
     function extraeCombatientes($idcaso, &$db, &$idp, &$ndp,
@@ -479,9 +479,9 @@ class ResConsulta
      * @param int    $id_grupoper Si no es null y hay un indice en idp
      * que corresponda a este valor, retorna tal indice en indid
      * @param int    &$indid      indid
-     * @param int    &$totelem    Total de elementos agregados a cada arreglo
+     * @param int    $totelem    Total de elementos agregados a cada arreglo
      *
-     * @return Suma de victimas.
+     * @return integer Suma de victimas.
      **/
     function extraeColectivas($idcaso, &$db, &$idp, &$ndp, &$cdp,
         $id_grupoper, &$indid, &$totelem
@@ -515,12 +515,11 @@ class ResConsulta
      * @param object &$db        Conexión a BD
      * @param array  $tablas     Tablas
      * @param string $donde      Donde
-     * @param string $pFinchasta Caja de selección
      * @param string $pMuestra   Muestra
      *
      * @return void
      */
-    function actosHtml(&$db, $tablas, $donde, $pFinchasta, $pMuestra)
+    function actosHtml(&$db, $tablas, $donde, $pMuestra)
     {
         $etablas = array();
         if (is_array($tablas)) {
@@ -562,7 +561,6 @@ class ResConsulta
         //die("x");
         $result = hace_consulta($db, $q);
 
-        $suma = array();
         $ac = array(
             _("Fecha"), _("Caso"), _("Nombres Víctima"),
              _("Apellidos Víctima"),
@@ -602,7 +600,7 @@ class ResConsulta
             echo $html_cpm . '</tr>'; 
         }
 
-        $tv = 0;
+        $row = array();
         while ($result->fetchInto($row)) {
             //print_r($row);
             $fecha = $row[4];
@@ -611,7 +609,7 @@ class ResConsulta
             $ap = $row[3];
             $ss = $row[7];
             $os = $row[8];
-            $idvic = $row[1];
+            //$idvic = $row[1];
             $idcaso = $row[0];
             $presp = $row[6];
             $sexo = $row[9];
@@ -621,6 +619,7 @@ class ResConsulta
             $ndep = $row[13];
             $nmun = $row[14];
 
+            $html_il = "";
             if ($pMuestra == "tabla" || $pMuestra == 'actos') {
                 $html_il = "<tr><td>" .
                     htmlentities($fecha, ENT_COMPAT, 'UTF-8') . "</td>" .
@@ -752,13 +751,14 @@ class ResConsulta
         $html_enlace1=null
     ) {
         //echo "OJO aHtml";
-        if ($html_enlace1 == null) {
+        if ($html_enlace1 === null || strlen($html_enlace1) == 0) {
             $html_enlace1 = '<a href = "consulta_web.php">'
                 . _('Consulta Web') . '</a>, ';
         }
         $html_erelato =  $GLOBALS['enc_relato']
             . "<relatos>";
 
+        $renglon = "";
         $j = 0;
         $tot = 0;
         foreach ($this->resultado as $resultado) {
@@ -812,14 +812,13 @@ class ResConsulta
         case 'csv':
             header("Content-type: text/csv");
             header('Content-Disposition: attachment; filename = "consulta.csv"');
-            $adjunto_renglon = "";
             $sep = "";
             foreach ($this->campos as $cc => $nc) {
                 $nc = str_replace('"', '""', $nc);
                 $renglon .= $sep . '"' . $nc . '"';
                 $sep = ', ';
             }
-            echo "$adjunto_renglon\n";
+            echo "$renglon\n";
             break;
         case 'tabla':
             encabezado_envia(
@@ -850,7 +849,7 @@ class ResConsulta
                 }
                 $rtexto = "$rtexto\n$nc";
                 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                    list($n, $c, $o) = $tab;
+                    list($n, $c, ) = $tab;
                     if (($d = strrpos($c, "/"))>0) {
                         $c = substr($c, $d+1);
                     }
@@ -877,6 +876,7 @@ class ResConsulta
             if (!isset($GLOBALS['DIR_RELATOS'])
                 || $GLOBALS['DIR_RELATOS'] == ''
             ) {
+                global $dirserv, $dirsitio;
                 $na = "$dirserv/$dirsitio/conf.php";
                 echo _("Falta definir directorio destino en variable") ." " .
                     "\$GLOBALS['DIR_RELATOS'] " . _("del archivo") ." " .
@@ -901,8 +901,9 @@ class ResConsulta
             echo _("Generando relatos") . ":<br>";
             break;
         default:
+            $rtexto = "";
             foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                list($n, $c, $o) = $tab;
+                list($n, $c, ) = $tab;
                 if (($d = strrpos($c, "/"))>0) {
                     $c = substr($c, $d+1);
                 }
@@ -1001,7 +1002,7 @@ class ResConsulta
                 case 'relato':
                     $html_relato = $this->reporteRelato(
                         $idcaso, null,
-                        $this->campos, $this->varlin
+                        $this->campos
                     );
                     echo $html_relato;
                     break;
@@ -1030,7 +1031,7 @@ class ResConsulta
                         $r = $html_erelato;
                         $r .= ResConsulta::reporteRelato(
                             $idcaso, $this->db,
-                            $this->campos, $this->varlin
+                            $this->campos
                         );
                         $r .= "</relatos>\n";
                         if (!file_put_contents($nar, $r)) {
@@ -1045,7 +1046,7 @@ class ResConsulta
 
                 default:
                     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                        list($n, $c, $o) = $tab;
+                        list($n, $c, ) = $tab;
                         if (($d = strrpos($c, "/"))>0) {
                             $c = substr($c, $d+1);
                         }
@@ -1109,7 +1110,7 @@ class ResConsulta
                 foreach ($this->campos as $cc => $nc) {
                     $html_renglon .= "<td>";
                     foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                        list($n, $c, $o) = $tab;
+                        list($n, $c, ) = $tab;
                         if (($d = strrpos($c, "/"))>0) {
                             $c = substr($c, $d+1);
                         }
@@ -1137,7 +1138,7 @@ class ResConsulta
             break;
         default:
             foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                list($n, $c, $o) = $tab;
+                list($n, $c, ) = $tab;
                 if (($d = strrpos($c, "/"))>0) {
                     $c = substr($c, $d+1);
                 }
@@ -1206,7 +1207,6 @@ class ResConsulta
         if (!PEAR::isError($dec)) {
             $dec->id_caso = $idcaso;
             $dec->find();
-            $seploc = "";
             while ($dec->fetch()) {
                 $det = $dec->getLink('id_etiqueta');
                 if (strtolower(substr($det->observaciones, 0, 7)) == 'color #'
@@ -1216,6 +1216,7 @@ class ResConsulta
             }
         }
         $html_renglon = "<tr>";
+        $escon = array();
         foreach ($campos as $cc => $nc) {
             $html_renglon .= "<td valign='top'";
             if ($cc == "caso_id") {
@@ -1223,7 +1224,6 @@ class ResConsulta
                     . htmlentities($col, ENT_COMPAT, 'UTF-8') .  "'";
             }
             $html_renglon .= ">";
-            $sep = "";
             $vr_html = $vrescon = $vrpre = $vrpost = "";
             // No se sacaron responsables y demás directamente en
             // la consulta por dificultad en el caso de ubicación
@@ -1253,8 +1253,6 @@ class ResConsulta
                     $seploc = ", ";
                 }
             } else if ($cc == 'm_fuentes') {
-                $idp = array(); // Identificaciones
-                $idp2=array();
                 $ndp = array();
                 $dff = objeto_tabla('caso_ffrecuente');
                 if (PEAR::isError($dff)) {
@@ -1280,7 +1278,6 @@ class ResConsulta
                     isset($GLOBALS['reptabla_separa_nomap'])
                     && $GLOBALS['reptabla_separa_nomap']
                 );
-                $k = 0;
                 $seploc = "";
                 for ($k = 0; $k < count($ndp_html); $k++) {
                     $q = "SELECT id_tviolencia, id_supracategoria, " .
@@ -1318,9 +1315,7 @@ class ResConsulta
                     $vr_html .= $seploc . $ndp_html[$k] . $med . $tip;
                     $seploc = ", ";
                 }
-                $indid = -1;
-                $idind = -1;
-                $nind = -1; $totelem = 0;
+                $totelem = 0;
                 if (!isset($GLOBALS['actoscolectivos'])
                     || $GLOBALS['actoscolectivos'] == true
                 ) {
@@ -1360,7 +1355,6 @@ class ResConsulta
                     $vrpost = " | " . _("Víctimas") . ":".$totv;
                 }
             } else if ($cc == 'm_tipificacion') {
-                $idp = array(); // Identificaciones
                 $ndp = array();
                 $ncat = array();
                 ResConsulta::llenaSelCategoria(
@@ -1404,7 +1398,7 @@ class ResConsulta
                 $vr_html = '';
                 //echo "<hr>"; var_dump($GLOBALS['ficha_tabuladores']);
                 foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-                    list($n, $c, $o) = $tab;
+                    list($n, $c, ) = $tab;
                     if (($d = strrpos($c, "/"))>0) {
                         $c = substr($c, $d+1);
                     }
@@ -1456,18 +1450,14 @@ class ResConsulta
      * @param integer $idcaso Identificación del caso
      * @param object  $db     conexión a base de datos
      * @param array   $campos Campos por mostrar
-     * @param boolean $varlin Varías lineas?
      *
      * @return string Reporte
      */
-    static function reporteRelato($idcaso, $db = null,
-        $campos = array(), $varlin = true
-    ) {
+    static function reporteRelato($idcaso, $db = null, $campos = array()) {
         $arotros = array(); // Para poner observaciones al final
         $dcaso = objeto_tabla('caso');
         $dcaso->get('id', $idcaso);
         $arcaso = array();
-        $formacomp = 'privado';
         $locdb = false;
         if ($db == null) {
             $locdb = true;
@@ -1768,6 +1758,7 @@ class ResConsulta
             $dubicacion->id_caso = $idcaso;
             $dubicacion->find();
             $nubi = 0; $pobs = "";
+            $uobs = "";
             while ($dubicacion->fetch()) {
                 $nubi++;
                 $uobs = $pobs;
@@ -1824,7 +1815,7 @@ class ResConsulta
             $dacto->find();
             while ($dacto->fetch()) {
                 $dcat = $dacto->getLink('id_categoria');
-                $dper = $dacto->getLink('id_persona');
+                #$dper = $dacto->getLink('id_persona');
                 $dpres = $dacto->getLink('id_presponsable');
                 $dvictima = objeto_tabla('victima');
                 $dvictima->id_caso = $idcaso;
@@ -2077,7 +2068,7 @@ class ResConsulta
         }
         // Módulos, van como observaciones
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -2162,20 +2153,21 @@ class ResConsulta
             $idu = ":";
             $cadub = "";
             $arr_ubica_listo = array();
+            $arr_ubica = array();
             foreach ($ndd as $k => $nd) {
                 $vr .= $seploc . trim($nd);
                 $idu .= $idd[$k];
                 if ($ndm[$k] != '') {
-                    $vr .= " / ".trim($ndm[$k]);
-                    $idu .= ":".$idm[$k];
+                    $vr .= " / " . trim($ndm[$k]);
+                    $idu .= ":" . $idm[$k];
                 }
                 if ($ndc[$k] != '') {
-                    $vr .= " / ".trim($ndc[$k]);
-                    $idu .= ":".$idc[$k];
+                    $vr .= " / " . trim($ndc[$k]);
+                    $idu .= ":" . $idc[$k];
                 }
                 if (isset($arr_ubica[$idu])) {
                     $sepu = " : ";
-                    $arr_ubica_listo[$idu]=1;
+                    $arr_ubica_listo[$idu] = 1;
                     foreach ($arr_ubica[$idu] as $i => $nu) {
                         $vr .= $sepu . $nu;
                         $sepu = ", ";
@@ -2189,9 +2181,8 @@ class ResConsulta
                 foreach ($arr_ubica_listo as $idu => $v) {
                     $sepu = "\n";
                     if ($v == 0) {
-                        foreach ($arr_ubica_divipol[$idu] as $idd => $ddiv) {
-                            $vr .= $sepu . $arr_ubica_divipol[$idu][$idd]
-                                . "/" . $arr_ubica[$idu][$idd];
+                        foreach ($arr_ubica[$idu] as $idd => $ddiv) {
+                            $vr .= $sepu . "/" . $arr_ubica[$idu][$idd];
                         }
                     }
                 }
@@ -2254,10 +2245,8 @@ class ResConsulta
                 $fl = "\n";
                 $sep = "\n ";
             }
-            $r .= $fl;
 
             $fl = "";
-            $sep = "";
             $dfuentedirectacaso = objeto_tabla('caso_fotra');
             if (PEAR::isError($dfuentedirectacaso)) {
                 die($dfuentedirectacaso->getMessage());
@@ -2346,7 +2335,7 @@ class ResConsulta
         $r .= "\n";
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -2430,8 +2419,8 @@ class ResConsulta
      * Representacion de un grupo de victimas
      *
      * @param string &$r      Cadena resultante
-     * @param string $lvc     Arreglo con códigos de personas por presentar
-     * @param string $lvic    Arreglo de datos de victimas indexado por código
+     * @param array  $lvc     Arreglo con códigos de personas por presentar
+     * @param array  $lvic    Arreglo de datos de victimas indexado por código
      * @param bool   $indenta Identacion?
      * @param bool   $corto   Formato corto?
      *
@@ -2521,7 +2510,7 @@ class ResConsulta
     *
     * @param integer $idcaso Id. del caso
     * @param array   $campos Campos por mostrar
-    * @param strgin  &$r     Colchon para dejar respuesta
+    * @param string  $r      Colchon para dejar respuesta
     * @param boolena $repgen Para reporte general
     *
     * @return void Agrega al colchon r
@@ -2543,7 +2532,6 @@ class ResConsulta
         $dvictima->id_caso = $idcaso;
         $dvictima->orderBy('id_persona');
         $dvictima->find();
-        $sep = "";
         $porVic = array();
         $lvic = array();
         while ($dvictima->fetch()) {
@@ -2553,11 +2541,7 @@ class ResConsulta
             $dacto->id_caso = $dvictima->id_caso;
             $dacto->orderBy('id_presponsable, id_categoria');
             $dacto->find();
-            $sep2="";
-            $icat = "";
-            $presp = "";
             while ($dacto->fetch()) {
-                $sep2 = ",";
                 $ia1 = $dacto->id_presponsable;
                 $ia2 = $dacto->id_categoria;
                 $ia3 = 'i' . $dacto->id_persona;
@@ -2586,7 +2570,7 @@ class ResConsulta
                     $nvc .= " - " . strip_tags($dprofesion->nombre);
                 }
             }
-            $dper = $dvictima->getLink('id_persona');
+            #$dper = $dvictima->getLink('id_persona');
             if ($repgen && $dvictima->hijos != null
                 && $dvictima->hijos != null && !$corto
             ) {
@@ -2621,11 +2605,9 @@ class ResConsulta
         $dvictimacol->id_caso = $idcaso;
         $dvictimacol->orderBy('id_grupoper');
         $dvictimacol->find();
-        $sep = "";
         while ($dvictimacol->fetch()) {
             $dgrupoper = $dvictimacol->getLink('id_grupoper');
             $dactoc = objeto_tabla('actocolectivo');
-            $sep2="";
             $dactoc->id_grupoper = $dvictimacol->id_grupoper;
             $dactoc->id_caso = $dvictimacol->id_caso;
             $dactoc->orderBy('id_presponsable, id_categoria');
@@ -2736,7 +2718,6 @@ class ResConsulta
         }
         $dcat->id_caso = $idcaso;
         $dcat->find();
-        $sep = "";
         $asinv = array();
         while ($dcat->fetch()) {
             $esta = 0;
@@ -2908,12 +2889,12 @@ class ResConsulta
     /**
      * Retorna un registro del reporte revista
      *
-     * @param integer $idcaso  Id. del caso
-     * @param handle  $db      Conexión a BD
-     * @param array   $campos  Campos por mostrar
-     * @param boolean $varlin  Varias líneas
-     * @param boolean $tex     Generar TeX ?
-     * @param boolean $numcaso Número de caso para orden por rótulo
+     * @param integer      $idcaso  Id. del caso
+     * @param handle       $db      Conexión a BD
+     * @param array        $campos  Campos por mostrar
+     * @param boolean      $varlin  Varias líneas
+     * @param boolean      $tex     Generar TeX ?
+     * @param integer|null $numcaso Número de caso para orden por rótulo
      *
      * @return string  Registro
      */
@@ -2970,7 +2951,6 @@ class ResConsulta
             }
         }
 
-        $parche = "";
         if (array_key_exists('m_ubicacion', $campos)) {
             $idd = array(); // Identificaciones
             $idm = array();
@@ -2987,7 +2967,7 @@ class ResConsulta
             foreach ($ndd as $k => $nd) {
                 $cnd = trim(strip_tags($nd));
                 $cndm = trim(strip_tags($ndm[$k]));
-                if ($numcaso != null) {
+                if ($numcaso !== null) {
                     $locs .= " - " . prim_may($cnd) . " / " .
                         prim_may($cndm) . " ";
                 } elseif (array_key_exists('m_tipificacion', $campos)) {
@@ -3009,7 +2989,7 @@ class ResConsulta
         $r = "";
         $mvicopr = array_key_exists('m_victimas', $campos)
             || array_key_exists('m_presponsables', $campos);
-        if ($numcaso == null && $mvicopr) {
+        if ($numcaso === null && $mvicopr) {
             ResConsulta::listaPrCatVictima($idcaso, $campos, $r);
         }
 
@@ -3034,7 +3014,7 @@ class ResConsulta
             }
         }
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -3081,20 +3061,20 @@ class ResConsulta
      * Renglon de reporte CSV
      *
      * @param object  $db     Conexión
-     * @param unknown $idcaso Id. caso
+     * @param integer $idcaso Id. caso
      * @param array   $campos Campos por mostrar
      * @param array   $conv   Para conversión de ids.
      * @param array   $sal    registro por generar
      *
      * @return void
      */
-    function reporteCsvAdjnto($db, $idcaso, $campos, $conv, $sal)
+    function reporteCsvAdjunto($db, $idcaso, $campos, $conv, $sal)
     {
         $adjunto_renglon = "";
         $vrpre = '"';
+        $escon = array();
         foreach ($campos as $cc => $nc) {
             $adjunto_renglon .= "";
-            $sep = "";
             $vr = $vrescon = "";
             $vrpost = '"';
             // No se sacaron responsables y demás directamente en
@@ -3116,9 +3096,6 @@ class ResConsulta
                     $seploc = ". ";
                 }
             } else if ($cc == 'm_fuentes') {
-                $idp = array(); // Identificaciones
-                $idp2=array();
-                $ndp = array();
                 $dff = objeto_tabla('caso_ffrecuente');
                 if (PEAR::isError($dff)) {
                     die($dff->getMessage());
@@ -3141,7 +3118,6 @@ class ResConsulta
                     $idcaso,
                     $db, $idp, $ndp, null, $indid, $edp
                 );
-                $k = 0;
                 $seploc = "";
                 for ($k = 0; $k < count($ndp); $k++) {
                     $q = "SELECT id_tviolencia, id_categoria " .
@@ -3166,8 +3142,7 @@ class ResConsulta
                     $vr .= $seploc . $ndp[$k] . $med . $tip;
                     $seploc = "; ";
                 }
-                $indid = -1;
-                $idind = -1;
+                #$indid = -1;
                 /* $totv+=ResConsulta::extraeCombatientes($idcaso,
                     $db, $idp, $ndp, null, $indid
                 );
@@ -3177,7 +3152,7 @@ class ResConsulta
                     $seploc = "; ";
                 } */
 
-                $nind = -1; $totelem = 0;
+                $totelem = 0;
                 $totv+=ResConsulta::extraeColectivas(
                     $idcaso,
                     $db, $idp, $ndp, $cdp, null, $ind, $totelem
@@ -3192,8 +3167,6 @@ class ResConsulta
                 $vrpost = " ".$GLOBALS['etiqueta']['victimas'] . ":" . $totv . '"';
 
             } else if ($cc == 'm_tipificacion') {
-                $idp = array(); // Identificaciones
-                $ndp = array();
                 $ncat = array();
                 ResConsulta::llenaSelCategoria(
                     $db,
@@ -3224,7 +3197,7 @@ class ResConsulta
             $adjunto_renglon .= $vrpre . $vr . $vrpost;
             $vrpre = ', "';
         }
-        echo $adjunto_renglon;
+        return $adjunto_renglon;
     }
 
 }

@@ -85,16 +85,16 @@ if (!function_exists("esta_nueva_ficha")) {
      *
      * @param string $id Id de ficha
      *
-     * @return true sii una ficha con la id dada ya está en nuevas
+     * @return boolean true sii una ficha con la id dada ya está en nuevas
      */
     function esta_nueva_ficha($id)
     {
         //echo "OJO esta_nueva_ficha($id)<br>";
         foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
-            $puesto = $a[0];
+            #$puesto = $a[0];
             $nom = $a[1];
-            $arc = $a[2];
-            $puestoelim = $a[3];
+            #$arc = $a[2];
+            #$puestoelim = $a[3];
             if ($nom == $id) {
                 return true;
             }
@@ -117,7 +117,7 @@ foreach ($lm as $m) {
 ini_set('include_path', $rutas_include);
 
 foreach ($lm as $m) {
-    //echo "OJO modulo $m<br>\n";
+    //echo "OJO modulo $m/conf.php<br>\n";
     if (file_exists("$m/conf.php")) {
         //echo "OJO existe<br>\n";
         include "$m/conf.php";
@@ -183,7 +183,9 @@ if (isset($GLOBALS['elimina_ficha_tabuladores'])) {
 }
 
 //echo "<hr>OJO antes de nuevas " ;print_r($GLOBALS['ficha_tabuladores']);
-if (isset($GLOBALS['nueva_ficha_tabuladores'])) {
+if (isset($GLOBALS['nueva_ficha_tabuladores']) &&
+    is_array($GLOBALS['nueva_ficha_tabuladores'])
+) {
     foreach ($GLOBALS['nueva_ficha_tabuladores'] as $a) {
         $puesto = $a[0];
         $nom = $a[1];

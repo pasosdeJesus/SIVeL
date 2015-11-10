@@ -99,13 +99,13 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             $GLOBALS['consulta_web_fecha_max'], "<="
         );
 
-        if ($pFini['Y'] != '') {
+        if (is_array($pFini) && $pFini['Y'] != '') {
             consulta_and(
                 $db, $where, "caso.fecha",
                 arr_a_fecha($pFini, true), ">="
             );
         }
-        if ($pFfin['Y'] != '') {
+        if (is_array($pFfin) && $pFfin['Y'] != '') {
             consulta_and(
                 $db, $where, "caso.fecha",
                 arr_a_fecha($pFfin, false), "<="
@@ -117,6 +117,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $tQue = "";
         $condSegun = "";
         $distinct = 'DISTINCT';
+        $cfSegun = $campoSegun = '';
         if ($pSegun == 'id_rangoedad') {
             consulta_and_sinap(
                 $where, "victima.id_rangoedad", "rangoedad.id"
@@ -181,17 +182,15 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         if ($titSegun != "") {
             $cab[] = $titSegun;
         }
-        $tDep = $gDep = "";
+        $tDep = "";
         if ($pDepartamento == "1") {
             $tDep = "departamento.id, trim(departamento.nombre), ";
-            $gDep = "departamento.id, departamento.nombre, ";
             $cab[] = _('C. Dep.');
             $cab[] = _('Departamento');
         }
-        $tMun = $gMun = "";
+        $tMun = "";
         if ($pMunicipio == "1") {
             $tMun = "municipio.id, trim(municipio.nombre), ";
-            $gMun = "municipio.id, municipio.nombre, ";
             $cab[] = _('C. Mun.');
             $cab[] = _('Municipio');
         }
@@ -223,10 +222,8 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $pQ1sel = 'victima.id_persona, ';
 
         $tablas = $tablaSegun . "$tQue caso, categoria";
-        $campos = array('caso_id' => _('Cód.'));
 
-
-        if ($pTipo != '') {
+        if (is_string($pTipo) && $pTipo != '') {
             consulta_and($db, $where, "categoria.id_tviolencia", $pTipo);
         }
 
@@ -235,7 +232,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         }
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -248,12 +245,13 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
                 echo_esc("Falta estadisticasIndCreaConsulta en $n, $c");
             }
         }
+        $t = array();
         if (isset($GLOBALS['gancho_ei_creaconsulta'])) {
             foreach ($GLOBALS['gancho_ei_creaconsulta'] as $k => $f) {
                 if (is_callable($f)) {
                     call_user_func_array(
                         $f,
-                        array($pMostrar, $this->opciones, $this, &$ae, &$t)
+                        array(&$db, &$where, &$tablas, &$pSegun, &$campoSegun)
                     );
                 } else {
                     echo_esc(
@@ -264,10 +262,9 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             }
         }
 
-        $campoSegun2=$cfSegun2=$cfSegun3=$pSegun2="";
+        $campoSegun2 = $cfSegun3 = $pSegun2 = "";
         if ($pSegun != "") {
             $pSegun2=", ".$pSegun;
-            $cfSegun2=$cfSegun . ", ";
             $cfSegun3="trim(" . $cfSegun . "), ";
             $campoSegun2=", ".$campoSegun;
         }
@@ -289,7 +286,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         hace_consulta($db, "DROP VIEW $cons2", false, false);
         hace_consulta($db, "DROP VIEW $cons", false, false);
         //echo "q1=$q1<br>";
-        $result = hace_consulta($db, $q1);
+        hace_consulta($db, $q1);
 
         $q2="CREATE VIEW $cons2 ($cCons, id_tviolencia, " .
             "id_supracategoria, id_categoria" . $pSegun2 .
@@ -301,37 +298,58 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             "WHERE $cons.id_caso = ubicacion.id_caso "
             ;
         //echo "q2=$q2<br>";
-        $result = hace_consulta($db, $q2);
-        $q3="SELECT $cfSegun3 $tDep $tMun trim(tviolencia.nombre), " .
-            "trim(supracategoria.nombre), trim(categoria.nombre), " .
-            "count($cons2.$cCons) FROM
-        $tGeo $tablaSegun tviolencia,
-        supracategoria, categoria , $cons2
-        WHERE $cons2 . id_tviolencia = tviolencia.id
-        AND $cons2 . id_tviolencia = supracategoria.id_tviolencia
-        AND $cons2 . id_supracategoria = supracategoria.id
-        AND $cons2 . id_tviolencia = categoria.id_tviolencia
-        AND $cons2 . id_supracategoria = categoria.id_supracategoria
-        AND $cons2 . id_categoria = categoria.id ";
+        hace_consulta($db, $q2);
+
+        $campos3 = "$cfSegun3 $tDep $tMun trim(tviolencia.nombre), "
+            . "trim(supracategoria.nombre), trim(categoria.nombre), "
+            . "count($cons2.$cCons)";
+        $tablas3 = "$tGeo $tablaSegun tviolencia, "
+            . "supracategoria, categoria , $cons2";
+        $cond3 = "$cons2.id_tviolencia = tviolencia.id
+            AND $cons2.id_tviolencia = supracategoria.id_tviolencia
+            AND $cons2.id_supracategoria = supracategoria.id
+            AND $cons2.id_tviolencia = categoria.id_tviolencia
+            AND $cons2.id_supracategoria = categoria.id_supracategoria
+            AND $cons2.id_categoria = categoria.id ";
         if ($pDepartamento == "1"  || $pMunicipio == "1") {
-            $q3 .= " AND departamento.id=$cons2.id_departamento ";
+            $cond3 .= " AND departamento.id=$cons2.id_departamento ";
         }
         if ($pMunicipio == "1") {
-            $q3 .= " AND municipio.id=$cons2.id_municipio ";
-            $q3 .= " AND municipio.id_departamento=$cons2.id_departamento ";
+            $cond3 .= " AND municipio.id=$cons2.id_municipio ";
+            $cond3 .= " AND municipio.id_departamento=$cons2.id_departamento ";
         }
-        $q3 .= " $condSegun
-            GROUP BY $cfSegun2 $gDep $gMun tviolencia.nombre,
-            supracategoria.nombre, categoria.nombre
-            ORDER BY $cfSegun2 $gDep $gMun tviolencia.nombre,
-            supracategoria.nombre, categoria.nombre
-            ";
+        $cond3 .= " $condSegun";
 
+        if (isset($GLOBALS['gancho_ei_creaconsulta3'])) {
+            foreach ($GLOBALS['gancho_ei_creaconsulta3'] as $k => $f) {
+                if (is_callable($f)) {
+                    call_user_func_array(
+                        $f,
+                        array(&$db, &$campos3,
+                        &$tablas3, &$cond3, &$pMuestra)
+                    );
+                } else {
+                    echo_esc("Falta $f de gancho_ei_creaconsulta3[$k]");
+                }
+            }
+        }
+        $nc3 = explode(",", $campos3);
+        $gr3 = "";
+        $sep = "";
+        $maxi = count($nc3);
+        for ($i = 1; $i < $maxi; $i++) {
+            $gr3 .= $sep . "$i";
+            $sep = ", ";
+        }
+
+        $q3="SELECT $campos3 FROM $tablas3
+            WHERE $cond3 GROUP BY $gr3 ORDER BY $gr3";
         //echo "q3 es $q3<hr>";
-        $result = hace_consulta($db, $q3);
+        $resultado = hace_consulta($db, $q3);
 
         if ($pMuestra == 'tabla') {
-            encabezado_envia();
+            #encabezado_envia();
+            encabezado_envia(_('Conteos Victimizaciones Individuales'));
             echo "<table border=\"1\"><tr>";
             foreach ($cab as $k => $t) {
                 echo "<th>" . htmlentities($t, ENT_COMPAT, 'UTF-8') . "</th>";
@@ -339,7 +357,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             echo "</tr>\n";
             $row = array();
             $nf = 0;
-            while ($result->fetchInto($row)) {
+            while ($resultado->fetchInto($row)) {
                 echo "<tr>";
                 foreach ($cab as $k => $t) {
                     echo "<td>";
@@ -355,7 +373,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
                     '<b>' . _('Men&uacute; Principal') . '</b></a></div>';
             }
             pie_envia();
-        } else { // CSV
+        } elseif ($pMuestra == 'csv') { // CSV
             // http://www.creativyst.com/Doc/Articles/CSV/CSV01.htm
             header("Content-type: text/csv");
             $sep = '';
@@ -366,7 +384,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             }
             echo "\n";
             $row = array();
-            while ($result->fetchInto($row)) {
+            while ($resultado->fetchInto($row)) {
                 $sep = '';
                 foreach ($cab as $k => $t) {
                     $adjunto_t = $sep . $row[$k];
@@ -375,9 +393,28 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
                 }
                 echo "\n";
             }
+        } else {
+            if (isset($GLOBALS['gancho_ei_muestraconsulta'])) {
+                foreach ($GLOBALS['gancho_ei_muestraconsulta'] as $k => $f) {
+                    if (is_callable($f)) {
+                    //echo "OJO pMuestra=$pMuestra, f=$f<br>";
+                        call_user_func_array(
+                            $f,
+                            array(&$db, &$resultado, $pMuestra, $cab)
+                        );
+                    } else {
+                        echo_esc(
+                            "Falta $f de "
+                            . "gancho_ei_muestracreaconsulta[$k]"
+                        );
+                    }
+                }
+            }
         }
+
     }
-}
+
+} // AcionEstadisticasInd
 
 
 /**
@@ -431,7 +468,6 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
      */
     function idSupracategoria()
     {
-        $nclase = null;
         if (isset($this->_submitValues['id_supracategoria'])) {
             return  (int)$this->_submitValues['id_supracategoria'] ;
         }
@@ -453,7 +489,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
 
         $e =& $this->addElement(
             'header', null,
-            _('Conteos Victimizacione Individuales')
+            _('Conteos Victimizaciones Individuales')
         );
         $slang = 'es';
         if (isset($_SESSION['LANG'])) {
@@ -514,8 +550,6 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
             );
             $supra->loadArray($options);
         }
-        $nsupra = $this->idSupracategoria();
-
         $sel =& $this->addElement(
             'select', 'segun', _('Según')
         );
@@ -539,7 +573,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
         );
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
-            list($n, $c, $o) = $tab;
+            list($n, $c, ) = $tab;
             if (($d = strrpos($c, "/"))>0) {
                 $c = substr($c, $d+1);
             }
@@ -557,12 +591,12 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
                 if (is_callable($f)) {
                     call_user_func_array(
                         $f,
-                        array($pMostrar, $this->opciones, $this, &$ae, &$t)
+                        array(&$db, &$this)
                     );
                 } else {
                     echo_esc(
                         _("Falta") . " $f " .  _("de")
-                        . " estadisticasIndFiltro[$k]"
+                        . " gancho_ei_filtro[$k]"
                     );
                 }
             }
@@ -625,7 +659,7 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
 
 }
 
-encabezado_envia(_('Conteos Victimizaciones Individuales'));
+#encabezado_envia(_('Conteos Victimizaciones Individuales'));
 $wizard = new HTML_QuickForm_Controller('EstadisticasInd', false);
 $consweb = new PagEstadisticasInd($mreq);
 

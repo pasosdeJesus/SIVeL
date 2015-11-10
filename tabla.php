@@ -118,10 +118,9 @@ function rama($tabla, $titulo, $idpapa, $arbol, $indenta)
         $d->papa = $idpapa;
     }
     if (is_array($titulo)) {
-        $d->orderBy(implode(",", $titulo));
-    } else {
-        $d->orderBy($titulo);
+        $titulo = implode(",", $titulo);
     }
+    $d->orderBy($titulo);
     $d->find();
     $pm = array();
     $k = $d->keys();

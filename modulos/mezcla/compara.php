@@ -37,7 +37,7 @@ foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
  *
  * @param string $s Cadena
  *
- * @return Prefijo izquierdo de z hasta .
+ * @return string Prefijo izquierdo de z hasta .
  */
 function hastapunto($s)
 {
@@ -46,7 +46,7 @@ function hastapunto($s)
     if ($p !== false) {
         $r = substr($s, 0, $p);
     }
-    return $p;
+    return $r;
 }
 
 /**
@@ -59,7 +59,7 @@ function hastapunto($s)
 function muestra($dsn)
 {
     $aut_usuario = "";
-    $db = autentica_usuario($dsn, $accno, $aut_usuario, 31);
+    $db = autentica_usuario($dsn, $aut_usuario, 31);
     encabezado_envia("Comparación y mezcla de 2 casos");
 
     if (isset($_SESSION['mezcla_ids'])) {

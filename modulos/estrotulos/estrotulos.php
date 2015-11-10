@@ -77,6 +77,8 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
         $cons = 'cons';
         $cons2="cons2";
         $where = "";
+        $cfSegun = "";
+        $campoSegun = "";
 
         consulta_and(
             $db, $where, "caso.fecha", $GLOBALS['consulta_web_fecha_min'],
@@ -207,8 +209,6 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
         $pQ1='id_persona, ';
         $pQ1sel = 'persona.id, ';
         $tablas = $tablaSegun . "$tQue caso, categoria";
-        $campos = array('caso_id' => 'Cód.');
-
 
         if ($pTipo != '') {
             consulta_and($db, $where, "categoria.id_tviolencia", $pTipo);
@@ -220,7 +220,7 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
         $campoSegun2=$cfSegun2=$cfSegun3=$pSegun2="";
         if ($pSegun != "") {
             $pSegun2=", ".$pSegun;
-            $cfSegun2=$cfSegun . ", ";
+            $cfSegun2 = $cfSegun . ", ";
             $cfSegun3="trim(" . $cfSegun . "), ";
             $campoSegun2=", ".$campoSegun;
         }
@@ -344,7 +344,6 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
             echo "<th>Total</th>";
             echo "</tr>\n";
 
-            $row = array();
             foreach ($tfil as $f => $t1) {
                 echo "<tr>"; //<td>" . $f . "</td>";
                 $sfil = 0;
@@ -404,7 +403,7 @@ class AccionEstadisticasIndRot extends HTML_QuickForm_Action
                 $sep = '';
                 foreach ($cab as $k => $t) {
                     $adjunto_t = $sep . $row[$k];
-                    echo $adjunto_r;
+                    echo $adjunto_t;
                     $sep = ', ';
                 }
                 echo "\n";
@@ -464,11 +463,10 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
     /**
      * Retorna id de la categoria
      *
-     * @return string id
+     * @return integer|null id
      */
     function idSupracategoria()
     {
-        $nclase = null;
         if (isset($this->_submitValues['id_supracategoria'])) {
             return  (int)$this->_submitValues['id_supracategoria'] ;
         }
@@ -504,7 +502,7 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
         $e =& $this->addElement(
             'date', 'fini', 'Desde: ',
             array('language' => $slan, 'addEmptyOption' => true,
-            'minYear' => '1990', 'maxYear' => $cy)
+            'minYear' => '1920', 'maxYear' => $cy)
         );
         $e->setValue(($cy - 1) . "-01-01");
 
@@ -547,7 +545,6 @@ class PagEstadisticasIndRot extends HTML_QuickForm_Page
             );
             $supra->loadArray($options);
         }
-        $nsupra = $this->idSupracategoria();
 
         $sel =& $this->addElement(
             'select',

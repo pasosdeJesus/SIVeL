@@ -17,7 +17,7 @@ if (test ! -f "conf.sh" -o ! -f "confv.sh") then {
 
 s=`cd sitios; ls`
 for i in $s; do 
-	echo -n sitios/$i;
+	echo -n "sitios/$i ";
 	if (test -d "sitios/$i") then {
 	       if (test ! -h "sitios/$i" -a "$i" != "pordefecto" -a "$i" != "pruebas" -a -f "sitios/$i/conf.php") then {
 		(cd sitios/$i; ../../bin/respaldo.sh)

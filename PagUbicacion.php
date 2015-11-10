@@ -175,7 +175,7 @@ class PagUbicacion extends PagBaseMultiple
      *
      * @param array &$valores Valores enviados por formulario.
      *
-     * @return null
+     * @return boolean
      */
     function elimina(&$valores)
     {
@@ -264,7 +264,7 @@ class PagUbicacion extends PagBaseMultiple
      */
     function PagUbicacion($nomForma)
     {
-        parent::PagBaseMultiple($nomForma);
+        $this->PagBaseMultiple($nomForma);
         $this->titulo = _('Ubicación');
         $this->tcorto = _('Ubicación');
         if (isset($GLOBALS['etiqueta']['Ubicacion'])) {
@@ -282,7 +282,7 @@ class PagUbicacion extends PagBaseMultiple
      * Crea campos departamento, municipio y clase en blanco para
      * completar con la función modCampos
      *
-     * @param object &$form Formulario
+     * @param object $form  Formulario
      * @param object $iddep Nombre campo departamento
      * @param object $idmun Nombre campo municipio
      * @param object $idcla Nombre campo clase
@@ -323,7 +323,7 @@ class PagUbicacion extends PagBaseMultiple
      * Modifica campos interdependientes Departamento/Muncipio/Clase
      *
      * @param object &$db     Base de datos
-     * @param object &$form   Formulario
+     * @param object $form   Formulario
      * @param object $nomcdep Nombre campo departamento
      * @param object $nomcmun Nombre campo municipio
      * @param object $nomccla Nombre campo clase
@@ -394,7 +394,7 @@ class PagUbicacion extends PagBaseMultiple
             )
         );
         $d->loadArray($options);
-        if ($vdep != null && $vdep != DB_DataObject_Cast::sql('NULL')) {
+        if ($vdep !== null && $vdep != DB_DataObject_Cast::sql('NULL')) {
             $d->setValue($vdep);
             if ($m != null) {
                 $m->_options = array();
@@ -406,7 +406,7 @@ class PagUbicacion extends PagBaseMultiple
                     )
                 );
                 $m->loadArray($options);
-                if ($vmun != null
+                if ($vmun !== null
                     && $vmun != DB_DataObject_Cast::sql('NULL')
                 ) {
                     $m->setValue($vmun);
@@ -421,7 +421,7 @@ class PagUbicacion extends PagBaseMultiple
                             )
                         );
                         $c->loadArray($options);
-                        if ($vcla != null
+                        if ($vcla !== null
                             && $vcla != DB_DataObject_Cast::sql('NULL')
                         ) {
                             $c->setValue($vcla);
@@ -492,13 +492,13 @@ class PagUbicacion extends PagBaseMultiple
     /**
      * Llena valores de ubicación en formulario.
      *
-     * @param handle  &$form       Formulario
+     * @param handle  $form       Formulario
      * @param integer $depdef      Departamento por defecto
      * @param integer $mundef      Municipio por defecto
      * @param integer $cladef      Clase por defecto
-     * @param integer $dep         Objeto departamento en formulario
-     * @param integer $mun         Objeto municipio en formulario
-     * @param integer $cla         Objeto clase en formulario
+     * @param object  $dep         Objeto departamento en formulario
+     * @param object  $mun         Objeto municipio en formulario
+     * @param object  $cla         Objeto clase en formulario
      * @param string  $nomcampodep Nombre del campo con depto
      * @param string  $nomcampomun Nombre del campo con municipio
      * @param string  $nomcampocla Nombre del campo con clase
@@ -600,7 +600,7 @@ class PagUbicacion extends PagBaseMultiple
      *
      * @param handle &$valores Valores ingresados por usuario
      *
-     * @return bool Verdadero si y solo si puede completarlo con éxito
+     * @return boolean Verdadero si y solo si puede completarlo con éxito
      * @see PagBaseSimple
      */
     function procesa(&$valores)
@@ -791,7 +791,7 @@ class PagUbicacion extends PagBaseMultiple
         assert($idcaso > 0);
 
         //echo "OJO importaRelato(db, r, idcaso=$idcaso, observaciones=$obs)<br>";
-        $reg = dato_basico_en_obs(
+        /*dato_basico_en_obs(
             $db, $obs, $r,
             'region', 'region', 'caso_region', $idcaso, '; ', 'id_region'
         );
@@ -799,7 +799,7 @@ class PagUbicacion extends PagBaseMultiple
             $db, $obs, $r,
             'frontera', 'frontera', 'caso_frontera', $idcaso, '; ',
             'id_frontera'
-        );
+        );*/
         $dubicacion = objeto_tabla('ubicacion');
         $dubicacion->id_caso = $idcaso;
         $departamento = ereg_replace(
@@ -851,7 +851,7 @@ class PagUbicacion extends PagBaseMultiple
         }
         foreach (array('lugar', 'sitio') as $c) {
             $d = dato_en_obs($r, $c);
-            if ($d != null) {
+            if ($d !== null) {
                 $dubicacion->$c = $d;
             }
         }

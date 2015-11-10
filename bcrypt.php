@@ -90,7 +90,7 @@ function gen_sal_bcrypt($lrondas)
     } else if ($lrondas > 31) {
         $lrondas = 31;
     }
-    $gsal = codificar_sal($csal, 16, $lrondas);
+    $gsal = codificar_sal($csal, $lrondas);
 
     return $gsal;
 }
