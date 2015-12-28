@@ -953,15 +953,20 @@ class PagBasicos extends PagBaseSimple
         // al eliminaDep de la clase extendida que borrará más de lo que
         // espera esta funcion.
         PagBasicos::eliminaDep($db, $idcaso);
-        foreach (var_escapa_arreglo($valores['id_frontera'], $db) as $k => $v) {
-            $this->bcaso_frontera->_do->id_caso = $idcaso;
-            $this->bcaso_frontera->_do->id_frontera = $v;
-            $this->bcaso_frontera->_do->insert();
+        if (isset($valores['id_frontera'])) { 
+            foreach (var_escapa_arreglo($valores['id_frontera'], $db) as $k => $v) {
+                $this->bcaso_frontera->_do->id_caso = $idcaso;
+                $this->bcaso_frontera->_do->id_frontera = $v;
+                $this->bcaso_frontera->_do->insert();
+            }
         }
-        foreach (var_escapa_arreglo($valores['id_region'], $db) as $k => $v) {
-            $this->bcaso_region->_do->id_caso = $idcaso;
-            $this->bcaso_region->_do->id_region = $v;
-            $this->bcaso_region->_do->insert();
+
+        if (isset($valores['id_region'])) { 
+            foreach (var_escapa_arreglo($valores['id_region'], $db) as $k => $v) {
+                $this->bcaso_region->_do->id_caso = $idcaso;
+                $this->bcaso_region->_do->id_region = $v;
+                $this->bcaso_region->_do->insert();
+            }
         }
 
         $_SESSION['basicos_id'] = $idcaso;

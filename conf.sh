@@ -246,8 +246,27 @@ function estapear {
 	} fi;
 } 
 
-echo " nginx corriendo";
-proceso nginx Nginx
+echo -n " OpenBSD httpd corriendo: ";
+pgrep "httpd" > /dev/null
+if (test "$?" != "0") then { 
+	echo "no";
+	echo -n " O nginx corriendo: ";
+	pgrep "nginx" > /dev/null
+	if (test "$?" != "0") then { 
+		echo "no";
+		echo "OpenBSD httpd o nginx debería estar corriendo, continua (s/n)";
+		read sn
+		if (test "$sn" = "n") then {
+			exit 1;
+		} fi;
+	} else {
+		echo "si";
+		sweb='nginx';
+	} fi;
+} else {
+	echo "si";
+	sweb='httpd';
+} fi;
 c=`ps ax | grep "[h]ttpd:.*parent.*chroot" | sed -e "s/.*chroot //g;s/].*//g"`
 check "CHROOTDIR" "optional" "test -d \$CHROOTDIR" $c '/var/www/' 
 echo " PostgreSQL corriendo";
