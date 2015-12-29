@@ -1,5 +1,15 @@
 Apéndice A. Novedades
 
+   Versión 1.2.1 (Dic.2015)
+
+          + Cantidad de años por validar nombres, apellidos y sexo de
+            nacimiento configurable con variable
+            $GLOBALS['anios_valida_sexo']. Por defecto empieza en 5.
+          + Arregladas fallas: Al instalar con inst-sivel.sh crea bien
+            confv.sh y sitios/sivel/conf.php (en otro caso primera
+            instalación agota memoria por inclusión recursiva de
+            conf.php).
+
    Versión 1.2 (Oct.2015)
 
           + Validación más veloz de nombres, apellidos y sexo de

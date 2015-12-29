@@ -9,6 +9,10 @@ Cantidad de años por validar nombres, apellidos y sexo de nacimiento
 configurable con variable <literal>$GLOBALS['anios_valida_sexo']</literal>.
 Por defecto empieza en 5.
 				</para></listitem>
+				<listitem><para>
+Arregladas fallas: Al instalar con inst-sivel.sh crea bien confv.sh y sitios/sivel/conf.php 
+(en otro caso primera instalación agota memoria por inclusión recursiva de conf.php).
+				</para></listitem>
 
 			</itemizedlist></para>
 		</listitem>
