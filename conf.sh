@@ -11,7 +11,7 @@
 
 
 # Reading configuration variables
-if (test ! -f confv.sh) then {
+if (test ! -s confv.sh) then {
         cp confv.empty confv.sh
 } fi;
 . ./confv.sh
