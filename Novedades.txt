@@ -2,6 +2,10 @@ Apéndice A. Novedades
 
    Versión 1.2.1 (Dic.2015)
 
+          + Nueva variable global reporte_general_detallado para
+            especificar mayor detalle en reporte general. Cuando es mayor
+            o igual a 1 incluye: sitio, lugar, latitud y longitud junto a
+            cada ubicación, antecedentes.
           + Cantidad de años por validar nombres, apellidos y sexo de
             nacimiento configurable con variable
             $GLOBALS['anios_valida_sexo']. Por defecto empieza en 5.

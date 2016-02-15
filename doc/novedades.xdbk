@@ -5,8 +5,9 @@
 		<listitem>
 			<para><itemizedlist>
 				<listitem><para>
-Permite reportar sitio, lugar, latitud y longitud junto a cada sitio cuando 
-variable global <literal>reporte_general_detallado</literal> es mayor o igual a 1
+Nueva variable global <literal>reporte_general_detallado</literal> para especificar
+mayor detalle en reporte general. Cuando es mayor o igual a 1 incluye:
+sitio, lugar, latitud y longitud junto a cada ubicación, antecedentes.
 				</para></listitem>
 				<listitem><para>
 Cantidad de años por validar nombres, apellidos y sexo de nacimiento 

@@ -13,7 +13,7 @@ PROYECTO=docsivel
 # Nombre del proyecto
 #
 
-PRY_VERSION="1.2b4"
+PRY_VERSION="1.2"
 # Versión
 #
 
@@ -21,7 +21,7 @@ PRY_DESC="Documentación de SIVeL"
 # Descripción corta
 #
 
-FECHA_PROX="20/03/2013"
+FECHA_PROX="01/08/2015"
 # Fecha en la que esperamos liberar próxima versión
 #
 

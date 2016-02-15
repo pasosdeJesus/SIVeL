@@ -74,8 +74,8 @@ sudo pear install ./Validate-*
 
     1. Aunque no es indispensable se recomienda que cree una cuenta para
        sivel (digamos con login sivel).
-    2. Instale el paquete sivel-1.2b4.tar.gz que se distribuye con
-       adJ-5.7. Si prefiere descargar fuentes o clonar el repositorio git,
+    2. Instale el paquete sivel-1.2.tar.gz que se distribuye con adJ-5.7.
+       Si prefiere descargar fuentes o clonar el repositorio git,
        asegurese de dejar en un directorio utilizabel por nginx con SSL y
        consulte Sección 3.1, "Actualización de versiones menores (e.g
        1.2b1 a 1.2b2)".
