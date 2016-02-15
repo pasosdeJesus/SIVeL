@@ -2157,13 +2157,27 @@ class ResConsulta
             foreach ($ndd as $k => $nd) {
                 $vr .= $seploc . trim($nd);
                 $idu .= $idd[$k];
+                $q = "SELECT ubicacion.lugar, ubicacion.sitio, 
+                    ubicacion.latitud, ubicacion.longitud" .
+                    " FROM ubicacion " .
+                    " WHERE ubicacion.id_caso='$idcaso' " .
+                    " AND ubicacion.id_departamento = {$idd[$k]} ";
                 if ($ndm[$k] != '') {
                     $vr .= " / " . trim($ndm[$k]);
                     $idu .= ":" . $idm[$k];
+                    $q .= " AND ubicacion.id_municipio = {$idm[$k]} ";
                 }
                 if ($ndc[$k] != '') {
                     $vr .= " / " . trim($ndc[$k]);
                     $idu .= ":" . $idc[$k];
+                    $q .= " AND ubicacion.id_clae = {$idc[$k]} ";
+                }
+                $result = hace_consulta($db, $q);
+                $row = array();
+                if ($GLOBALS['reporte_general_detallado'] &&
+                    $GLOBALS['reporte_general_detallado'] >= 2 &&
+                    isset($result) && $result->fetchInto($row)) {
+                    $vr .= " ({$row[0]}, {$row[1]}, {$row[2]}, {$row[3]})";
                 }
                 if (isset($arr_ubica[$idu])) {
                     $sepu = " : ";
