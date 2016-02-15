@@ -5,15 +5,20 @@
 		<listitem>
 			<para><itemizedlist>
 				<listitem><para>
+Permite reportar sitio, lugar, latitud y longitud junto a cada sitio cuando 
+variable global <literal>reporte_general_detallado</literal> es mayor o igual a 1
+				</para></listitem>
+				<listitem><para>
 Cantidad de años por validar nombres, apellidos y sexo de nacimiento 
 configurable con variable <literal>$GLOBALS['anios_valida_sexo']</literal>.
 Por defecto empieza en 5.
 				</para></listitem>
 				<listitem><para>
-Arregladas fallas: Al instalar con inst-sivel.sh crea bien confv.sh y sitios/sivel/conf.php 
-(en otro caso primera instalación agota memoria por inclusión recursiva de conf.php).
+Arregladas fallas: Al instalar con <literal>inst-sivel.sh</literal> crea bien 
+<filename>confv.sh</filename> y s<filename>itios/sivel/conf.php</filename>
+(en otro caso primera instalación agota memoria por inclusión recursiva de 
+<filename>conf.php</filename>).
 				</para></listitem>
-
 			</itemizedlist></para>
 		</listitem>
 	</varlistentry>
