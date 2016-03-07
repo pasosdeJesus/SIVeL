@@ -2795,9 +2795,11 @@ if (!aplicado($idac)) {
         RENAME id_funcionario TO id_usuario", false
     );
     hace_consulta(
-        $db, "ALTER TABLE caso_usuario 
-        ADD CONSTRAINT caso_usuario_id_usuario_fkey 
+        $db, "ALTER TABLE caso_usuario DROP
         FOREIGN KEY (id_usuario) REFERENCES usuario(id)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_usuario DROP CONSTRAINT \"$1\"", false
     );
     hace_consulta(
         $db, "ALTER TABLE caso_etiqueta
@@ -3436,7 +3438,7 @@ if (!aplicado($idac)) {
 
 $idac = '1.2-in';
 if (!aplicado($idac)) {
-    hace_consulta($db, "CREATE VIEW iniciador AS (
+    hace_consulta($db, "CREATE OR REPLACE VIEW iniciador AS (
      SELECT caso_usuario.id_caso,
         caso_usuario.fechainicio AS fecha_inicio,
         min(caso_usuario.id_usuario) AS id_funcionario
