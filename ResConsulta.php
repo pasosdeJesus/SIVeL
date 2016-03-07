@@ -2170,7 +2170,7 @@ class ResConsulta
                 if ($ndc[$k] != '') {
                     $vr .= " / " . trim($ndc[$k]);
                     $idu .= ":" . $idc[$k];
-                    $q .= " AND ubicacion.id_clae = {$idc[$k]} ";
+                    $q .= " AND ubicacion.id_clase = {$idc[$k]} ";
                 }
                 $result = hace_consulta($db, $q);
                 $row = array();
@@ -2460,7 +2460,7 @@ class ResConsulta
     static function representa_victimas(&$r, $lvc, $lvic,
         $indenta, $corto = false
     ) {
-        $nns = 0;
+        $nns = array();
         $sep = $corto ? _("Víctimas") . ": " : "";
         $fin = "";
         foreach ($lvc as $idv) {
@@ -2468,8 +2468,9 @@ class ResConsulta
                 return ;
             }
             $nv = $lvic[$idv];
-            if (trim($nv)=="NN") {
-                $nns++;
+            
+            if (substr(trim($nv), 0, 3) == "N N") {
+                $nns[substr(trim($nv), 3)] += 1;
             } else {
                 if ($indenta) {
                     $r .= "&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -2484,13 +2485,19 @@ class ResConsulta
             }
         }
         $r .= $fin;
-        if ($nns >= 1 && $indenta) {
-            $r .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-        }
-        if ($nns == 1) {
-            $r .= _("PERSONA SIN IDENTIFICAR") . "\n";
-        } else if ($nns > 1) {
-            $r .= $nns . " " . _("PERSONAS SIN IDENTIFICAR") . "\n";
+        foreach($nns as $s => $v) {
+            $sec = "";
+            if (strlen($s) > 2) {
+                $sec = $s;
+            }
+            if ($v >= 1 && $indenta) {
+                $r .= "&nbsp;&nbsp;&nbsp;&nbsp;";
+            }
+            if ($v == 1) {
+                $r .= _("PERSONA SIN IDENTIFICAR") . $sec . "\n";
+            } else if ($v > 1) {
+                $r .= $v . " " . _("PERSONAS SIN IDENTIFICAR") . $sec . "\n";
+            }
         }
     }
 
