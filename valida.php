@@ -144,12 +144,14 @@ echo "Refrescados apellidos<br>";
 
 res_valida(
     $db, _("Nombres de personas con sexo de nacimiento femenino 
-    que parecen de hombre ingresados en último año"),
+    que parecen de hombre ingresados hace 
+    ${GLOBALS['anios_valida_sexo']} año(s)"),
     "SELECT victima.id_caso, nombres, probmujer(nombres) AS pmujer, 
     probhombre(nombres) AS phombre FROM persona, victima, iniciador
     WHERE victima.id_persona=persona.id 
     AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date - interval '1 year')
+    AND iniciador.fecha_inicio>=(current_date - 
+    interval '${GLOBALS['anios_valida_sexo']} year')
     AND sexo='F' 
     AND probhombre(nombres)>probmujer(nombres)
     AND nombres<>'N'"
@@ -157,12 +159,15 @@ res_valida(
 
 res_valida(
     $db, _("Nombres de personas con sexo de nacimiento masculino 
-    que parecen de mujer ingresados en el último año"),
+    que parecen de mujer ingresados hace
+    ${GLOBALS['anios_valida_sexo']} año(s)"),
     "SELECT victima.id_caso, nombres, probhombre(nombres) AS phombre, 
     probmujer(nombres) AS pmujer FROM persona, victima, iniciador
     WHERE victima.id_persona=persona.id 
     AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date - interval '1 year')
+    AND iniciador.fecha_inicio>=(current_date -
+    interval '${GLOBALS['anios_valida_sexo']} year')
+    AND sexo='F' 
     AND sexo='M' 
     AND probhombre(nombres)<probmujer(nombres)
     AND nombres<>'N'"
@@ -171,13 +176,15 @@ res_valida(
 
 res_valida(
     $db, _("Nombres de personas con sexo de nacimiento SIN INFORMACIÓN 
-    que parecen de mujer ingresados en el último año"),
+    que parecen de mujer ingresados hace
+    ${GLOBALS['anios_valida_sexo']} año(s)"),
     "SELECT victima.id_caso, nombres, persona.id,
     probhombre(nombres) AS phombre, 
     probmujer(nombres) AS pmujer FROM persona, victima, iniciador
     WHERE victima.id_persona=persona.id 
     AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date - interval '1 year')
+    AND iniciador.fecha_inicio>=(current_date - 
+    interval '${GLOBALS['anios_valida_sexo']} year')
     AND sexo='S' 
     AND probhombre(nombres)<probmujer(nombres)
     AND nombres<>'N'
@@ -187,13 +194,15 @@ res_valida(
 
 res_valida(
     $db, _("Nombres de personas con sexo de nacimiento SIN INFORMACIÓN 
-    que parecen de hombre ingresados en el último año"),
+    que parecen de hombre ingresados hace
+    ${GLOBALS['anios_valida_sexo']} año(s)"),
     "SELECT victima.id_caso, nombres, persona.id, 
     probhombre(nombres) AS phombre, 
     probmujer(nombres) AS pmujer FROM persona, victima, iniciador
     WHERE victima.id_persona=persona.id 
     AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date - interval '1 year')
+    AND iniciador.fecha_inicio>=(current_date - 
+    interval '${GLOBALS['anios_valida_sexo']} year')
     AND sexo='S' 
     AND probhombre(nombres)>probmujer(nombres)
     AND nombres<>'N'
@@ -203,13 +212,15 @@ res_valida(
 
 
 res_valida(
-    $db, _("Nombres con sexo SIN INFORMACIÓN cuyo sexo no puede identificarse"),
+    $db, _("Nombres con sexo SIN INFORMACIÓN cuyo sexo no puede identificarse
+    hace ${GLOBALS['anios_valida_sexo']} año(s)"),
     "SELECT victima.id_caso, nombres, persona.id, 
     probhombre(nombres) AS phombre, 
     probmujer(nombres) AS pmujer FROM persona, victima, iniciador
     WHERE victima.id_persona=persona.id 
     AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date - interval '1 year')
+    AND iniciador.fecha_inicio>=(current_date -
+    	interval '${GLOBALS['anios_valida_sexo']} year')
     AND sexo='S' 
     AND probhombre(nombres)=probmujer(nombres)
     AND nombres<>'N'
@@ -218,25 +229,29 @@ res_valida(
 );
 
 res_valida(
-    $db, _("Nombres de mujeres que parecen apellidos en último año"),
+    $db, _("Nombres de mujeres que parecen apellidos 
+    hace ${GLOBALS['anios_valida_sexo']} año(s)"),
     "SELECT victima.id_caso, nombres, persona.id, probmujer(nombres) AS pmujer, 
     probapellido(nombres) AS papellidos FROM persona, victima, iniciador
     WHERE victima.id_persona=persona.id 
     AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date - interval '1 year')
+    AND iniciador.fecha_inicio>=(current_date -
+    	interval '${GLOBALS['anios_valida_sexo']} year')
     AND sexo='F' 
     AND probapellido(nombres)>probmujer(nombres)
     AND nombres<>'N'"
 );
 
 res_valida(
-    $db, _("Nombres de hombres que parecen apellidos en último año"),
+    $db, _("Nombres de hombres que parecen apellidos 
+    hace ${GLOBALS['anios_valida_sexo']} año(s)"),
     "SELECT victima.id_caso, nombres, persona.id,
     probhombre(nombres) AS phombre, 
     probapellido(nombres) AS papellidos FROM persona, victima, iniciador
     WHERE victima.id_persona=persona.id 
     AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date - interval '1 year')
+    AND iniciador.fecha_inicio>=(current_date -
+    	interval '${GLOBALS['anios_valida_sexo']} year')
     AND sexo='M' 
     AND probapellido(nombres)>probhombre(nombres)
     AND nombres<>'N'"
@@ -261,23 +276,27 @@ if (isset($GLOBALS['gancho_valida_base'])) {
 }
 
 res_valida(
-    $db, _("Apellidos que parecen nombre de hombre en último año"),
+    $db, _("Apellidos que parecen nombre de hombre 
+    hace ${GLOBALS['anios_valida_sexo']} año(s)"),
     "SELECT victima.id_caso, apellidos, probhombre(apellidos) AS phombre, 
     probapellido(apellidos) AS papellidos FROM persona, victima, iniciador
     WHERE victima.id_persona=persona.id 
     AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date - interval '1 year')
+    AND iniciador.fecha_inicio>=(current_date -
+    	interval '${GLOBALS['anios_valida_sexo']} year')
     AND probapellido(apellidos)<probhombre(apellidos)
     AND apellidos<>'N'"
 );
 
 res_valida(
-    $db, _("Apellidos que parecen nombre de mujer en último año"),
+    $db, _("Apellidos que parecen nombre de mujer 
+    hace ${GLOBALS['anios_valida_sexo']} año(s)"),
     "SELECT victima.id_caso, apellidos, probhombre(apellidos) AS phombre, 
     probapellido(apellidos) AS papellidos FROM persona, victima, iniciador
     WHERE victima.id_persona=persona.id 
     AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date - interval '1 year')
+    AND iniciador.fecha_inicio>=(current_date -
+    	interval '${GLOBALS['anios_valida_sexo']} year')
     AND probapellido(apellidos)<probmujer(apellidos)
     AND apellidos<>'N'"
 );

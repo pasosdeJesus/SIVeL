@@ -17,3 +17,12 @@ Módulo Mapa con GoogleMaps por Luca Urech <lucaurech@yahoo.de>
 4. Puede ver el mapa desde el menú Reportes o con un URL de la forma
 	https://127.0.0.1/opcion.php?num=200
 
+Una vez en operación puede configurar algunos detalles en el archivo
+conf.php de su sitio antes de la línea donde especifíco el módulo (paso 2).
+
+$GLOBALS['mapag_fechadesde'] permite especificar una fecha inicial fija 
+        (el usuario la podrá variar tras primer despliegue)
+
+$GLOBALS['mapag_fechahasta'] permite especificar una fecha final fija
+        (el usuario la podrá variar tras primer despliegue)
+

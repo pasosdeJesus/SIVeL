@@ -57,6 +57,14 @@ $GLOBALS['ancho-tabla'] = "78%";
  */
 $GLOBALS['reporte_indenta_victimas'] = true;
 
+/** Nivel de detalle adicional en reporte general
+ * 0 sin detalle adicional
+ * 1 con algunos detalles adicionales (corto)
+ * 2 con todo detalle adicional (largo)
+ * @global string $GLOBALS['reporte_general_detallado']
+ */
+$GLOBALS['reporte_general_detallado'] = 0;
+
 /** Evitar mostrar año de nacimiento en reporte tabla
  * @global string $GLOBALS['reptabla_nonacimiento']
  */

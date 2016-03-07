@@ -2157,13 +2157,27 @@ class ResConsulta
             foreach ($ndd as $k => $nd) {
                 $vr .= $seploc . trim($nd);
                 $idu .= $idd[$k];
+                $q = "SELECT ubicacion.lugar, ubicacion.sitio, 
+                    ubicacion.latitud, ubicacion.longitud" .
+                    " FROM ubicacion " .
+                    " WHERE ubicacion.id_caso='$idcaso' " .
+                    " AND ubicacion.id_departamento = {$idd[$k]} ";
                 if ($ndm[$k] != '') {
                     $vr .= " / " . trim($ndm[$k]);
                     $idu .= ":" . $idm[$k];
+                    $q .= " AND ubicacion.id_municipio = {$idm[$k]} ";
                 }
                 if ($ndc[$k] != '') {
                     $vr .= " / " . trim($ndc[$k]);
                     $idu .= ":" . $idc[$k];
+                    $q .= " AND ubicacion.id_clae = {$idc[$k]} ";
+                }
+                $result = hace_consulta($db, $q);
+                $row = array();
+                if (isset($GLOBALS['reporte_general_detallado']) &&
+                    $GLOBALS['reporte_general_detallado'] >= 1 &&
+                    isset($result) && $result->fetchInto($row)) {
+                    $vr .= " ({$row[0]}, {$row[1]}, {$row[2]}, {$row[3]})";
                 }
                 if (isset($arr_ubica[$idu])) {
                     $sepu = " : ";
@@ -2277,7 +2291,7 @@ class ResConsulta
             $dcontexto = objeto_tabla('caso_contexto');
             $dcontexto->id_caso = $idcaso;
             $dcontexto->find();
-            $pref = _("Contexto") . ": ";
+            $pref = _("Contexto(s)") . ": ";
             $post = "";
             while ($dcontexto->fetch()) {
                 $dc = $dcontexto->getLink('id_contexto');
@@ -2286,6 +2300,23 @@ class ResConsulta
                 $post = "\n";
             }
             $r .= $post;
+
+            if (isset($GLOBALS['reporte_general_detallado']) &&
+                $GLOBALS['reporte_general_detallado'] >= 1
+            ) {
+                $dantecedente = objeto_tabla('antecedente_caso');
+                $dantecedente->id_caso = $idcaso;
+                $dantecedente->find();
+                $pref = _("Antecedente(s)") . ": ";
+                $post = "";
+                while ($dantecedente->fetch()) {
+                    $da = $dantecedente->getLink('id_antecedente');
+                    $r .= $pref . $da->nombre;
+                    $pref = ", ";
+                    $post = "\n";
+                }
+                $r .= $post;
+            }
 
             $dacto = objeto_tabla('acto');
             $dacto->id_caso = $idcaso;

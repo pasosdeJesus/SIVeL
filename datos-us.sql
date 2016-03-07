@@ -81,6 +81,7 @@ INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-lo', '2014-0
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-sxe', '2014-03-08', 'Vista con soundexesp de nombres de personas'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-sexo', '2014-03-08', 'Valida sexo de víctimas con modelo prob.'); 
 INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-apn', '2014-03-08', 'Valida apellidos/nombres con modelo prob.'); 
+INSERT INTO actualizacionbase (id, fecha, descripcion) VALUES ('1.2-in', '2015-11-04', 'Vista para quien inica un caso'); 
     
 
 

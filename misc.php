@@ -1571,7 +1571,8 @@ function caso_usuario($idcaso)
     if ($dfc->find()<1) {
         $dfc->fechainicio = @date('Y-m-d H:i');
         $dfc->insert();
-    }
+        sin_error_pear($dfc);
+    } 
 }
 
 /**

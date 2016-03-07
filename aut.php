@@ -678,7 +678,7 @@ function localiza_conf()
         echo "Posiblemente basta que ejecute desde una terminal: <br>";
         echo "<font size='-1' color='#db9090'>"
             . htmlentities($cmd, ENT_COMPAT, 'UTF-8') . "</font>";
-        pie_envia();
+        //pie_envia();
         exit(1);
     }
     //echo "OJO retornando $dirsitio<br>";
