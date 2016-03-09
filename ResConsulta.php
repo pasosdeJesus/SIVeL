@@ -3089,7 +3089,7 @@ class ResConsulta
         }
 
         //echo "OJO reg reporteRevisa con r=$r, peso=$peso y rotulo=$rotulo";
-        return array($rantmemo . $r . $rdespuesmemo,
+        return array($rantmemo . $r . "\n" . $rdespuesmemo,
             $peso, $rotulo
         );
     }
