@@ -18,7 +18,7 @@
 global $dbservidor;
 /** Servidor/socket del Motor de bases de datos */
 // Si prefiere TCP/IP (no recomendado) use tcp(localhost)
-$dbservidor = "unix(/tmp)";
+$dbservidor = "unix(/var/run/postgresql)";
 
 global $dbnombre;
 /** Nombre de base de datos */
@@ -34,7 +34,7 @@ $dbclave = "xyz";
 
 global $socketopt;
 /** Opciones especiales para acceder base de datos desde consola */
-$socketopt = "-h /var/www/tmp";
+$socketopt = "-h /var/www/var/run/postgresql";
 
 global $dirchroot;
 /** Directorio en el que correo servidor web */

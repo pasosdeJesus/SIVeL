@@ -1500,11 +1500,11 @@ class ResConsulta
         $r = "<relato>\n";
         a_elementos_xml(
             $r, 2,
-            array('organizacion_responsable' =>
-            $GLOBALS['organizacion_responsable'],
-            'derechos' =>
-            $GLOBALS['derechos']
-        )
+            array(
+                'organizacion_responsable' => 
+                $GLOBALS['organizacion_responsable'],
+                'derechos' => $GLOBALS['derechos']
+            )
         );
         a_elementos_xml(
             $r, 2,

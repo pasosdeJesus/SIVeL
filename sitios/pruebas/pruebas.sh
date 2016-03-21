@@ -162,7 +162,7 @@ w
 q
 EOF
 	chmod o-rwx sitios/pruebas/conf.php
-	sudo chgrp www sitios/pruebas/conf.php
+	doas chgrp www sitios/pruebas/conf.php
 	chmod g-wx+r sitios/pruebas/conf.php
 
 	sed -e "s/^ *dirap=.*/dirap=\"$fuentessed\/sitios\/pruebas\"/g" sitios/pordefecto/vardb.sh.plantilla > sitios/pruebas/vardb.sh

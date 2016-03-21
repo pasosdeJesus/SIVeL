@@ -13,13 +13,13 @@ mkdir -p $dchroot/usr/local/lib/ispell
 mkdir -p $dchroot/usr/lib
 mkdir -p $dchroot/usr/libexec
 mkdir -p $dchroot/bin/
-mkdir -p $dchroot/usr/sbin/
+mkdir -p $dchroot/usr/bin/
 
 cp /usr/local/bin/ispell $dchroot/usr/local/bin/ispell
 cp /usr/local/lib/ispell/spanish.{aff,hash} $dchroot/usr/local/lib/ispell/
 cp /usr/lib/{libc.so.*,libtermcap.so.*,libssl.so.*,libcrypto.so.*} $dchroot/usr/lib/
 cp /usr/libexec/ld.so $dchroot/usr/libexec/
-cp /usr/sbin/openssl $dchroot/usr/sbin/
+cp /usr/bin/openssl $dchroot/usr/bin/
 cp /bin/echo $dchroot/bin/
 
 # Pruebas

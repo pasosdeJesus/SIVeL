@@ -14,10 +14,10 @@ if (test "${IMAGENRLOCAL}" = "") then {
 } fi;
 
 ./bin/resptodositio.sh
-cmd="sudo mkisofs -r -l -f -o /tmp/copia.iso  ${IMAGENRLOCAL}"
+cmd="doas mkisofs -r -l -f -o /tmp/copia.iso  ${IMAGENRLOCAL}"
 echo "$cmd"
 eval "$cmd"
-cmd="sudo cdrecord dev=/dev/rcd0c -data speed=16 /tmp/copia.iso"
+cmd="doas cdrecord dev=/dev/rcd0c -data speed=16 /tmp/copia.iso"
 echo "$cmd"
 eval "$cmd"
 

@@ -398,7 +398,7 @@ if (test "$regenera" = "1") then {
 		sed -e "s/sitios\/pordefecto/sitios\/sivel/g"  |
 		sed -e "s/^ *\$socketopt *=.*/\$socketopt = \"-h $dssed\";/g"  > sitios/sivel/conf.php
 		chmod o-rwx sitios/sivel/conf.php
-		sudo chgrp www sitios/sivel/conf.php
+		doas chgrp www sitios/sivel/conf.php
 		chmod g-wx+r sitios/sivel/conf.php
 
 		if (test -f sitios/sivel/vardb.sh) then {
@@ -409,13 +409,12 @@ if (test "$regenera" = "1") then {
 		if (test ! -f sitios/sivel/ultimoenvio.txt) then {
 			touch sitios/sivel/ultimoenvio.txt
 		} fi;
-		sudo chown -f www:www sitios/sivel/ultimoenvio.txt
+		doas chown -f www:www sitios/sivel/ultimoenvio.txt
 		(cd sitios/sivel; ../../bin/creaesquema.sh)
-		sudo chown -f www:www sitios/sivel/DataObjects/sivel.*
+		doas chown -f www:www sitios/sivel/DataObjects/sivel.*
 		(cd sitios; ln -s sivel 127.0.0.1)
-		sudo mkdir -p /var/www/resbase/anexos
-		sudo chown -f www:www /var/www/resbase/anexos
-
+		doas mkdir -p /var/www/resbase/anexos
+		doas chown -f www:www /var/www/resbase/anexos
 	} fi;
 } fi;
 

@@ -16,7 +16,7 @@ dirac=`pwd`;
 
 dpl=`stat -f "%Su" ../../confv.php`
 if (test "$USER" != "$dpl") then {
-	echo "*** El usuario que ejecuta debería ser el dueño de las fuentes de $dirac ($dpl) y tener permiso para ejecutar sudo";
+	echo "*** El usuario que ejecuta debería ser el dueño de las fuentes de $dirac ($dpl) y tener permiso para ejecutar doas";
 	exit 1;
 } fi;
 
@@ -35,7 +35,7 @@ if (test "$?" != "0") then {
 	echo "*** Volcado de la base $dbnombre no pudo realizarse";
 	exit 1;
 } fi;
-sudo cp $rlocal/$nommes.gz $rlocal/movido-$nommes.gz
+doas cp $rlocal/$nommes.gz $rlocal/movido-$nommes.gz
 
 echo "Respaldando fuentes en $rlocal/fuentes11-$dbnombre.tar.gz";
 (cd ../..; tar cfz $rlocal/fuentes11-$dbnombre.tar.gz .)
@@ -43,12 +43,12 @@ echo "Respaldando fuentes en $rlocal/fuentes11-$dbnombre.tar.gz";
 echo "¿Seguro que desea mover las fuentes de SIVeL 1.1 del directorio $dirac/../.. al directorio $dirdest y copiar los datos de la base $dbnombre del usuario $dbusuario a la base $nuevonombd del mismo usuario? (Cancele con Control-C o continúe con ENTER)";
 read
 
-sudo mkdir -p $dirdest 2> /dev/null
+doas mkdir -p $dirdest 2> /dev/null
 if (test "$?" != "0") then {
 	echo "*** No pudo crearse directorio destino $dirdest";
 	exit 1;
 } fi;
-sudo chown $dpl:$gdpl $dirdest
+doas chown $dpl:$gdpl $dirdest
 
 cmd="(cd $dirdest; tar xvfz $rlocal/fuentes11-$dbnombre.tar.gz)";
 eval $cmd;
@@ -97,7 +97,7 @@ cd $dirdest/
 cd sitios
 
 if (test -h 127.0.0.1) then {
-	sudo rm 127.0.0.1
+	doas rm 127.0.0.1
 } fi;
 
 ln -s $nuevonombd/ 127.0.0.1
@@ -108,7 +108,7 @@ SIN_ESQUEMA=1 ../../bin/creapg.sh
 ../../bin/restaura.sh $rlocal/movido-$nommes.gz
 
 # Cambiar URL
-sudo cp /var/www/conf/httpd.conf /var/www/conf/httpd.conf-antesmueve
+doas cp /var/www/conf/httpd.conf /var/www/conf/httpd.conf-antesmueve
 ba=`dirname $diract`;
 ba=`dirname $ba`;
 grep "DocumentRoot $ba" /var/www/conf/httpd.conf 
@@ -119,21 +119,21 @@ if (test "$r" != "0") then {
 } fi;
 
 if (test "$r" = "0") then {
-	sudo chmod +w /var/www/conf/httpd.conf
-	sudo cp /var/www/conf/httpd.conf /var/www/conf/httpd.conf-antesmueve
-	sudo rm -rf /tmp/httpd.conf
-	sudo sed -e "s/DocumentRoot .*$ba.*/DocumentRoot \"$schlne\"/g;s/DocumentRoot .*var.www.users.sivel.*/DocumentRoot \"$schlne\"/g" /var/www/conf/httpd.conf > /tmp/httpd.conf
-	sudo cp /tmp/httpd.conf /var/www/conf/httpd.conf
-	sudo chmod -w /var/www/conf/httpd.conf
+	doas chmod +w /var/www/conf/httpd.conf
+	doas cp /var/www/conf/httpd.conf /var/www/conf/httpd.conf-antesmueve
+	doas rm -rf /tmp/httpd.conf
+	doas sed -e "s/DocumentRoot .*$ba.*/DocumentRoot \"$schlne\"/g;s/DocumentRoot .*var.www.users.sivel.*/DocumentRoot \"$schlne\"/g" /var/www/conf/httpd.conf > /tmp/httpd.conf
+	doas cp /tmp/httpd.conf /var/www/conf/httpd.conf
+	doas chmod -w /var/www/conf/httpd.conf
 } fi;
 
 
 # Comprobar que funciona
 grep "^ *FORCE_SSL_PROMPT:yes" /etc/lynx.cfg > /dev/null 2>&1
 if (test "$?" != "0") then {
-	sudo cp /etc/lynx.cfg /etc/lynx.cfg-antesmueve
-	sudo sed -e "s/#* *FORCE_SSL_PROMPT.*/FORCE_SSL_PROMPT:yes/g" /etc/lynx.cfg-antesmueve > /tmp/lynx.cfg-mueve
-	sudo cp /tmp/lynx.cfg-mueve /etc/lynx.cfg
+	doas cp /etc/lynx.cfg /etc/lynx.cfg-antesmueve
+	doas sed -e "s/#* *FORCE_SSL_PROMPT.*/FORCE_SSL_PROMPT:yes/g" /etc/lynx.cfg-antesmueve > /tmp/lynx.cfg-mueve
+	doas cp /tmp/lynx.cfg-mueve /etc/lynx.cfg
 } fi;
 lynx -dump https://127.0.0.1/ > /tmp/dump-mueve
 grep "Autenticación" /tmp/dump-mueve > /dev/null 2>&1
@@ -147,7 +147,7 @@ echo "Si desea borrar las fuentes de su localización inicial presione la letra '
 read sn
 if (test "$sn" = "s") then {
 	# Eliminar fuentes anteriores
-	sudo rm -rf $dirac
+	doas rm -rf $dirac
 } fi;
 
 

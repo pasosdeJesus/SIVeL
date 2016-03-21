@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
+	<varlistentry><term>Versión 1.2.1 (Mar.2016)</term>
+		<listitem>
+			<para><itemizedlist>
+				<listitem><para>
+            Preparado para adJ 5.: Ubicación de socket de PostgreSQL por omisión en <filename>/var/www/var/run/postgresql</filename>, utiliza <literal>doas</literal> en lugar de <literal>sudo</literal>
+       </para></listitem>
+				<listitem><para>
+           Ubicación de socket de PostgreSQL por omisión en /var/www/var/run/postgresql (como en adJ 5.8)
+				</para></listitem>
+
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
 	<varlistentry><term>Versión 1.2 (Sep.2015)</term>
 		<listitem>
 			<para><itemizedlist>

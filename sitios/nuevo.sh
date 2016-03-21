@@ -67,17 +67,17 @@ if (test ! -f $ns/conf_int.php) then {
 if (test ! -f $ns/conf_int-local.php) then {
   cp pordefecto/conf_int-local.php.plantilla $ns/conf_int-local.php
 } fi;
-sudo touch $ns/ultimoenvio.txt
-sudo chown -f www:www $ns/ultimoenvio.txt
-sudo chgrp www $ns/conf*.php
-sudo chmod o-rwx $ns/conf*php
+doas touch $ns/ultimoenvio.txt
+doas chown -f www:www $ns/ultimoenvio.txt
+doas chgrp www $ns/conf*.php
+doas chmod o-rwx $ns/conf*php
 touch $ns/DataObjects/estructura-dataobject.ini
 touch $ns/DataObjects/estructura-dataobject.links.ini
-sudo touch $ns/DataObjects/$ns.ini
-sudo touch $ns/DataObjects/$ns.links.ini
+doas touch $ns/DataObjects/$ns.ini
+doas touch $ns/DataObjects/$ns.links.ini
 
-sudo chown www:www $ns/DataObjects/$ns.ini
-sudo chown www:www $ns/DataObjects/$ns.links.ini
+doas chown www:www $ns/DataObjects/$ns.ini
+doas chown www:www $ns/DataObjects/$ns.links.ini
 if (test ! -f $ns/centro.jpg) then {
   cp ../imagen/sivel12-es.jpg $ns/centro.jpg
 } fi;
@@ -95,7 +95,7 @@ if (test "$SIN_CREAR" != "1") then {
 	if (test "$SIN_ESQUEMA" != "1") then {
 		../../bin/agus.sh
 	} fi;
-	sudo ../../bin/creaesquema.sh
+	doas ../../bin/creaesquema.sh
 } fi;
-sudo chown -f www:www DataObjects/$ns.ini
-sudo chown -f www:www DataObjects/$ns.links.ini
+doas chown -f www:www DataObjects/$ns.ini
+doas chown -f www:www DataObjects/$ns.links.ini

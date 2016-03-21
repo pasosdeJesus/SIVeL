@@ -15,7 +15,7 @@ if (test "${IMAGENRLOCAL}" = "") then {
 
 
 ./bin/resptodositio.sh
-cmd="sudo growisofs -Z /dev/rcd0c -R ${IMAGENRLOCAL}"
+cmd="doas growisofs -Z /dev/rcd0c -R ${IMAGENRLOCAL}"
 echo "$cmd"
 eval "$cmd"
 
