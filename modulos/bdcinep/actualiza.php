@@ -27,10 +27,10 @@ require_once "misc_actualiza.php";
 
 
 $aut_usuario = "";
-$db = autenticaUsuario($dsn, $accno, $aut_usuario, 21);
+$db = autentica_usuario($dsn, $aut_usuario, 21);
 
 
-$act = objeto_tabla('Actualizacion_base');
+$act = objeto_tabla('actualizacionbase');
 
 $idac = 'bd-1';
 if (!aplicado($idac)) {

@@ -2157,13 +2157,27 @@ class ResConsulta
             foreach ($ndd as $k => $nd) {
                 $vr .= $seploc . trim($nd);
                 $idu .= $idd[$k];
+                $q = "SELECT ubicacion.lugar, ubicacion.sitio, 
+                    ubicacion.latitud, ubicacion.longitud" .
+                    " FROM ubicacion " .
+                    " WHERE ubicacion.id_caso='$idcaso' " .
+                    " AND ubicacion.id_departamento = {$idd[$k]} ";
                 if ($ndm[$k] != '') {
                     $vr .= " / " . trim($ndm[$k]);
                     $idu .= ":" . $idm[$k];
+                    $q .= " AND ubicacion.id_municipio = {$idm[$k]} ";
                 }
                 if ($ndc[$k] != '') {
                     $vr .= " / " . trim($ndc[$k]);
                     $idu .= ":" . $idc[$k];
+                    $q .= " AND ubicacion.id_clase = {$idc[$k]} ";
+                }
+                $result = hace_consulta($db, $q);
+                $row = array();
+                if (isset($GLOBALS['reporte_general_detallado']) &&
+                    $GLOBALS['reporte_general_detallado'] >= 1 &&
+                    isset($result) && $result->fetchInto($row)) {
+                    $vr .= " ({$row[0]}, {$row[1]}, {$row[2]}, {$row[3]})";
                 }
                 if (isset($arr_ubica[$idu])) {
                     $sepu = " : ";
@@ -2277,7 +2291,7 @@ class ResConsulta
             $dcontexto = objeto_tabla('caso_contexto');
             $dcontexto->id_caso = $idcaso;
             $dcontexto->find();
-            $pref = _("Contexto") . ": ";
+            $pref = _("Contexto(s)") . ": ";
             $post = "";
             while ($dcontexto->fetch()) {
                 $dc = $dcontexto->getLink('id_contexto');
@@ -2286,6 +2300,23 @@ class ResConsulta
                 $post = "\n";
             }
             $r .= $post;
+
+            if (isset($GLOBALS['reporte_general_detallado']) &&
+                $GLOBALS['reporte_general_detallado'] >= 1
+            ) {
+                $dantecedente = objeto_tabla('antecedente_caso');
+                $dantecedente->id_caso = $idcaso;
+                $dantecedente->find();
+                $pref = _("Antecedente(s)") . ": ";
+                $post = "";
+                while ($dantecedente->fetch()) {
+                    $da = $dantecedente->getLink('id_antecedente');
+                    $r .= $pref . $da->nombre;
+                    $pref = ", ";
+                    $post = "\n";
+                }
+                $r .= $post;
+            }
 
             $dacto = objeto_tabla('acto');
             $dacto->id_caso = $idcaso;
@@ -2429,7 +2460,7 @@ class ResConsulta
     static function representa_victimas(&$r, $lvc, $lvic,
         $indenta, $corto = false
     ) {
-        $nns = 0;
+        $nns = array();
         $sep = $corto ? _("Víctimas") . ": " : "";
         $fin = "";
         foreach ($lvc as $idv) {
@@ -2437,8 +2468,9 @@ class ResConsulta
                 return ;
             }
             $nv = $lvic[$idv];
-            if (trim($nv)=="NN") {
-                $nns++;
+            
+            if (substr(trim($nv), 0, 3) == "N N") {
+                $nns[substr(trim($nv), 3)] += 1;
             } else {
                 if ($indenta) {
                     $r .= "&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -2453,13 +2485,19 @@ class ResConsulta
             }
         }
         $r .= $fin;
-        if ($nns >= 1 && $indenta) {
-            $r .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-        }
-        if ($nns == 1) {
-            $r .= _("PERSONA SIN IDENTIFICAR") . "\n";
-        } else if ($nns > 1) {
-            $r .= $nns . " " . _("PERSONAS SIN IDENTIFICAR") . "\n";
+        foreach($nns as $s => $v) {
+            $sec = "";
+            if (strlen($s) > 2) {
+                $sec = $s;
+            }
+            if ($v >= 1 && $indenta) {
+                $r .= "&nbsp;&nbsp;&nbsp;&nbsp;";
+            }
+            if ($v == 1) {
+                $r .= _("PERSONA SIN IDENTIFICAR") . $sec . "\n";
+            } else if ($v > 1) {
+                $r .= $v . " " . _("PERSONAS SIN IDENTIFICAR") . $sec . "\n";
+            }
         }
     }
 
@@ -3051,7 +3089,7 @@ class ResConsulta
         }
 
         //echo "OJO reg reporteRevisa con r=$r, peso=$peso y rotulo=$rotulo";
-        return array($rantmemo . $r . $rdespuesmemo,
+        return array($rantmemo . $r . "\n" . $rdespuesmemo,
             $peso, $rotulo
         );
     }

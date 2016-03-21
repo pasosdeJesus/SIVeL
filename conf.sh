@@ -11,7 +11,7 @@
 
 
 # Reading configuration variables
-if (test ! -f confv.sh) then {
+if (test ! -s confv.sh) then {
         cp confv.empty confv.sh
 } fi;
 . ./confv.sh
@@ -246,8 +246,27 @@ function estapear {
 	} fi;
 } 
 
-echo " nginx corriendo";
-proceso nginx Nginx
+echo -n " OpenBSD httpd corriendo: ";
+pgrep "httpd" > /dev/null
+if (test "$?" != "0") then { 
+	echo "no";
+	echo -n " O nginx corriendo: ";
+	pgrep "nginx" > /dev/null
+	if (test "$?" != "0") then { 
+		echo "no";
+		echo "OpenBSD httpd o nginx debería estar corriendo, continua (s/n)";
+		read sn
+		if (test "$sn" = "n") then {
+			exit 1;
+		} fi;
+	} else {
+		echo "si";
+		sweb='nginx';
+	} fi;
+} else {
+	echo "si";
+	sweb='httpd';
+} fi;
 c=`ps ax | grep "[h]ttpd:.*parent.*chroot" | sed -e "s/.*chroot //g;s/].*//g"`
 check "CHROOTDIR" "optional" "test -d \$CHROOTDIR" $c '/var/www/' 
 echo " PostgreSQL corriendo";
@@ -388,6 +407,7 @@ if (test "$regenera" = "1") then {
 		if (test -f sitios/sivel/conf.php) then {
 			cp -f sitios/sivel/conf.php sitios/sivel/conf.php.copia
 		} fi;
+		chmod u+rw sitios/sivel/conf.php sitios/sivel/vardb.sh
 		sed -e "s/^ *\$dbservidor=.*/\$dbservidor=\"unix($dschrootsed)\";/g" sitios/pordefecto/conf.php.plantilla |
 		sed -e "s/^ *\$dbnombre *=.*/\$dbnombre = \"$dbnombre\";/g"  |
 		sed -e "s/^ *\$dbusuario *=.*/\$dbusuario = \"$dbusuario\";/g"  |

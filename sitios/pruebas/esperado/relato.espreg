@@ -37,7 +37,7 @@
   <grupo>
     <id_grupo>2</id_grupo>
     <nombre_grupo>presuntos r1</nombre_grupo>
-      <agresion_sin_vicd>cat1 (1000)</agresion_sin_vicd>
+      <agresion_sin_vicd>cat-otra2 (1001)</agresion_sin_vicd>
     <observaciones tipo="bloque">bloque</observaciones>
     <observaciones tipo="frente">frente</observaciones>
     <observaciones tipo="brigada">brigada</observaciones>

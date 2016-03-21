@@ -2745,6 +2745,9 @@ $idac = '1.2-fu2';
 if (!aplicado($idac)) {
     # Si hay inconsistencias en usuarios el siguiente falla
     hace_consulta(
+        $db, "ALTER TABLE usuario DROP CONSTRAINT IF EXISTS usuario_pkey "
+    );
+    hace_consulta(
         $db, "ALTER TABLE usuario ADD CONSTRAINT usuario_pkey
         PRIMARY KEY (id)"
     );
@@ -2792,9 +2795,11 @@ if (!aplicado($idac)) {
         RENAME id_funcionario TO id_usuario", false
     );
     hace_consulta(
-        $db, "ALTER TABLE caso_usuario 
-        ADD CONSTRAINT caso_usuario_id_usuario_fkey 
+        $db, "ALTER TABLE caso_usuario DROP
         FOREIGN KEY (id_usuario) REFERENCES usuario(id)", false
+    );
+    hace_consulta(
+        $db, "ALTER TABLE caso_usuario DROP CONSTRAINT \"$1\"", false
     );
     hace_consulta(
         $db, "ALTER TABLE caso_etiqueta
@@ -3398,6 +3403,59 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Arreglada marcha patriotica redundante');
 }
 
+$idac = '1.2-vv2';
+if (!aplicado($idac)) {
+
+    hace_consulta($db, "DROP MATERIALIZED VIEW IF EXISTS nmujeres");
+    hace_consulta($db, "CREATE MATERIALIZED VIEW nmujeres AS 
+	SELECT  s.nombre, COUNT(*) AS frec
+	FROM (SELECT 
+		divarr(string_to_array(trim(nombres), ' ')) AS nombre 
+		FROM persona, victima WHERE victima.id_persona=persona.id 
+		AND sexo='F') AS s 
+	GROUP BY s.nombre ORDER BY frec;");
+    hace_consulta($db, "DROP MATERIALIZED VIEW IF EXISTS nhombres");
+    hace_consulta($db, "CREATE MATERIALIZED VIEW nhombres AS 
+	SELECT  s.nombre, COUNT(*) AS frec
+	FROM (SELECT 
+		divarr(string_to_array(trim(nombres), ' ')) AS nombre
+		FROM persona, victima WHERE victima.id_persona=persona.id 
+		AND sexo='M') AS s
+	GROUP BY s.nombre ORDER BY frec;");
+    hace_consulta($db, "DROP MATERIALIZED VIEW IF EXISTS napellidos");
+    hace_consulta($db, "CREATE MATERIALIZED VIEW napellidos AS 
+	SELECT  s.apellido, COUNT(*) AS frec
+	FROM (SELECT 
+		divarr(string_to_array(trim(apellidos), ' ')) AS apellido
+		FROM persona, victima WHERE victima.id_persona=persona.id) AS s 
+	GROUP BY s.apellido ORDER BY frec;");
+    hace_consulta($db, "DROP FUNCTION IF EXISTS 
+        divarr_concod(ANYARRAY, INTEGER)");
+    hace_consulta($db, "DROP TYPE IF EXISTS nomcod");
+
+    aplicaact($act, $idac, 'Mejora velocidad de determinación probabilistica de sexo con base en nombres');
+}
+
+$idac = '1.2-in';
+if (!aplicado($idac)) {
+    hace_consulta($db, "CREATE OR REPLACE VIEW iniciador AS (
+     SELECT caso_usuario.id_caso,
+        caso_usuario.fechainicio AS fecha_inicio,
+        min(caso_usuario.id_usuario) AS id_funcionario
+       FROM caso_usuario,
+        ( SELECT funcionario_caso_1.id_caso,
+                min(funcionario_caso_1.fechainicio) AS m
+               FROM caso_usuario funcionario_caso_1
+              GROUP BY funcionario_caso_1.id_caso) c
+      WHERE caso_usuario.id_caso = c.id_caso AND caso_usuario.fechainicio = c.m
+      GROUP BY caso_usuario.id_caso, caso_usuario.fechainicio
+      ORDER BY caso_usuario.id_caso, caso_usuario.fechainicio
+      ); ");
+    aplicaact($act, $idac, 'Vista de usuario que inicia caso');
+}
+
+ 
+
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {
@@ -3425,7 +3483,7 @@ if (isset($GLOBALS['menu_tablas_basicas'])) {
         "<tt>menu_tablas_basicas</tt></font>";
 }
 
-
+ 
 // Creando esquema
 regenera_esquemas();
 

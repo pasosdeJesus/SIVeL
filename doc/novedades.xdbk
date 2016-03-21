@@ -5,20 +5,41 @@
 		<listitem>
 			<para><itemizedlist>
 				<listitem><para>
-            Preparado para adJ 5.: Ubicación de socket de PostgreSQL por omisión en <filename>/var/www/var/run/postgresql</filename>, utiliza <literal>doas</literal> en lugar de <literal>sudo</literal>
+            Preparado para adJ 5.8: Ubicación de socket de PostgreSQL por omisión en <filename>/var/www/var/run/postgresql</filename>, utiliza <literal>doas</literal> en lugar de <literal>sudo</literal>
        </para></listitem>
 				<listitem><para>
-           Ubicación de socket de PostgreSQL por omisión en /var/www/var/run/postgresql (como en adJ 5.8)
+Nueva variable global <literal>reporte_general_detallado</literal> para especificar
+mayor detalle en reporte general. Cuando es mayor o igual a 1 incluye:
+sitio, lugar, latitud y longitud junto a cada ubicación, antecedentes.
 				</para></listitem>
-
+				<listitem><para>
+Cantidad de años por validar nombres, apellidos y sexo de nacimiento 
+configurable con variable <literal>$GLOBALS['anios_valida_sexo']</literal>.
+Por defecto empieza en 5.
+				</para></listitem>
+				<listitem><para>
+Arregladas fallas: Al instalar con <literal>inst-sivel.sh</literal> crea bien 
+<filename>confv.sh</filename> y s<filename>itios/sivel/conf.php</filename>
+(en otro caso primera instalación agota memoria por inclusión recursiva de 
+<filename>conf.php</filename>).
+				</para></listitem>
 			</itemizedlist></para>
 		</listitem>
 	</varlistentry>
 
-
-	<varlistentry><term>Versión 1.2 (Sep.2015)</term>
+	<varlistentry><term>Versión 1.2 (Oct.2015)</term>
 		<listitem>
 			<para><itemizedlist>
+				<listitem><para>
+Validación más veloz de nombres, apellidos y sexo de nacimiento.
+				</para></listitem>
+				<listitem><para>
+Renombrados archivos de comandos <literal>actweb.sh</literal> 
+y <literal>pubweb.sh</literal> a <literal>exporta-web.sh</literal> 
+y <literal>borratodo-publica-web.sh</literal> respectivamente.  
+Esqueleto de programa para recuperar casos a partir de un reporte general
+<literal>recGeneral.html</literal>.
+				</para></listitem>
 				<listitem><para>
 Al exportar/importar casos con etiquetas se conserva la fecha de estas.
 				</para></listitem>
@@ -41,22 +62,28 @@ Sexo y Rango de Edad.
 					</para></listitem>
 
 					<listitem><para>
-Puede deshabilitarse edición de casos con
-$GLOBALS['no_permite_editar'].
+Puede deshabilitar edición de casos con
+$GLOBALS['no_permite_editar'] en archivo de configuración 
+(e.g <literal>sitios/sivel/conf.php</literal>).
 					</para></listitem>
 					<listitem><para>
-Fallas corregidas: cálculo de edad, no muestra rangos de edad deshabilitados en ficha de captura, eliminada Marcha Patriótica duplicada de Filiación Política.
+Fallas corregidas: cálculo de edad, no muestra rangos de edad deshabilitados en 
+ficha de captura, eliminada Marcha Patriótica duplicada de Filiación Política.
 					</para></listitem>
 
 
 					<listitem><para>
 En módulo mapag puede configurarse autenticación para ver mapa con 
-$GLOBALS['mapag_autentica'].
+$GLOBALS['mapag_autentica']
+ en archivo de configuración 
+(e.g <literal>sitios/sivel/conf.php</literal>).
 					</para></listitem>
 
 					<listitem><para>
 Puede deshabilitarse manejo (edición/adición/eliminación) de tablas básicas con
 $GLOBALS['deshabilita_manejo_tablasbasicas']
+en archivo de configuración 
+(e.g <literal>sitios/sivel/conf.php</literal>).
 					</para></listitem>
 			</itemizedlist></para>
 		</listitem>

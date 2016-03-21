@@ -1,20 +1,52 @@
 Apéndice A. Novedades
 
+   Versión 1.2.1 (Mar.2016)
+
+          + Preparado para adJ 5.8: Ubicación de socket de PostgreSQL por
+            omisión en /var/www/var/run/postgresql, utiliza doas en lugar
+            de sudo
+          + Nueva variable global reporte_general_detallado para
+            especificar mayor detalle en reporte general. Cuando es mayor
+            o igual a 1 incluye: sitio, lugar, latitud y longitud junto a
+            cada ubicación, antecedentes.
+          + Cantidad de años por validar nombres, apellidos y sexo de
+            nacimiento configurable con variable
+            $GLOBALS['anios_valida_sexo']. Por defecto empieza en 5.
+          + Arregladas fallas: Al instalar con inst-sivel.sh crea bien
+            confv.sh y sitios/sivel/conf.php (en otro caso primera
+            instalación agota memoria por inclusión recursiva de
+            conf.php).
+
+   Versión 1.2 (Oct.2015)
+
+          + Validación más veloz de nombres, apellidos y sexo de
+            nacimiento.
+          + Renombrados archivos de comandos actweb.sh y pubweb.sh a
+            exporta-web.sh y borratodo-publica-web.sh respectivamente.
+            Esqueleto de programa para recuperar casos a partir de un
+            reporte general recGeneral.html.
+          + Al exportar/importar casos con etiquetas se conserva la fecha
+            de estas.
+          + Fallas reportadas por scrutinizer-ci resueltas.
+
    Versión 1.2b4 (May.2015)
 
           + Consulta web permite filtrar por contexto.
           + Reporte de actos como en 1.1 pero con las columnas adicionales
             Sexo y Rango de Edad.
-          + Puede deshabilitarse edición de casos con
-            $GLOBALS['no_permite_editar'].
+          + Puede deshabilitar edición de casos con
+            $GLOBALS['no_permite_editar'] en archivo de configuración (e.g
+            sitios/sivel/conf.php).
           + Fallas corregidas: cálculo de edad, no muestra rangos de edad
             deshabilitados en ficha de captura, eliminada Marcha
             Patriótica duplicada de Filiación Política.
           + En módulo mapag puede configurarse autenticación para ver mapa
-            con $GLOBALS['mapag_autentica'].
+            con $GLOBALS['mapag_autentica'] en archivo de configuración
+            (e.g sitios/sivel/conf.php).
           + Puede deshabilitarse manejo (edición/adición/eliminación) de
             tablas básicas con
-            $GLOBALS['deshabilita_manejo_tablasbasicas']
+            $GLOBALS['deshabilita_manejo_tablasbasicas'] en archivo de
+            configuración (e.g sitios/sivel/conf.php).
 
    Versión 1.2b3 (Ago.2014)
 

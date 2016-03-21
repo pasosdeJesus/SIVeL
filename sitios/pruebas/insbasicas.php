@@ -162,6 +162,15 @@ $c += instablabasica(
     )
 );
 $c += instablabasica(
+    'categoria', 'nombre', 'cat-otra2',
+    array('id_supracategoria' => 'T:1000',
+        'id' => 1001,
+        'id_pconsolidado' => 1,
+        'tipocat' => 'O',
+        'fechacreacion' => $fc
+    )
+);
+$c += instablabasica(
     'municipio', 'nombre', 'municipio1',
     array('id_departamento' => '1' )
 );

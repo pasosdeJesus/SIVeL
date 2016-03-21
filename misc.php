@@ -1571,7 +1571,8 @@ function caso_usuario($idcaso)
     if ($dfc->find()<1) {
         $dfc->fechainicio = @date('Y-m-d H:i');
         $dfc->insert();
-    }
+        sin_error_pear($dfc);
+    } 
 }
 
 /**
@@ -2299,7 +2300,8 @@ function objeto_tabla($nom)
 function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
     $ncamp = "nombre"
 ) {
-    //echo "OJO conv_basica(db, $tabla, $nombre, $obs)<br>";
+    #echo "OJO conv_basica(db, '$tabla', '$nombre', '$obs')<br>";
+    $r = -1; // Valor por retornar
     $d = objeto_tabla($tabla);
     if ($sininf && ($nombre == null || $nombre == '')
         && is_callable(array("DataObjects_$tabla", 'idSinInfo'))
@@ -2311,67 +2313,94 @@ function conv_basica(&$db, $tabla, $nombre, &$obs, $sininf = true,
         return $r;
     }
 
-    $nom0 = $d->$ncamp = ereg_replace(
-        "  *", " ",
-        trim(var_escapa_cadena($nombre, $db))
-    );
+    $d->$ncamp = $nombre;
     $d->find(1);
     if (PEAR::isError($d)) {
         die($d->getMessage());
     }
+    if (isset($d->id)) {
+        $r = $d->id;
+        return $r;
+    }
+        
+    $nom0 = ereg_replace(
+        "  *", " ",
+        trim(var_escapa_cadena($nombre, $db))
+    );
+    $d->$ncamp = $nom0;
+    $d->find(1);
+    if (PEAR::isError($d)) {
+        die($d->getMessage());
+    }
+    if (isset($d->id)) {
+        $r = $d->id;
+        return $r;
+    }
+
     $nom1 = a_mayusculas($nom0);
-    if (!isset($d->id)) {
-        $d->$ncamp= $nom1;
-        $d->find(1);
+    $d->$ncamp = $nom1;
+    $d->find(1);
+    if (PEAR::isError($d)) {
+        die($d->getMessage());
     }
-    $nom2 = '';
-    if (!isset($d->id)) {
-        $nom2 = $d->$ncamp
-            = a_mayusculas(sin_tildes(var_escapa_cadena($nom0, $db)));
-        $d->find(1);
+    if (isset($d->id)) {
+        $r = $d->id;
+        return $r;
     }
-    if (!isset($d->id)) {
+
+    $nom2 = $d->$ncamp
+        = a_mayusculas(sin_tildes(var_escapa_cadena($nom0, $db)));
+    $d->find(1);
+    if (PEAR::isError($d)) {
+        die($d->getMessage());
+    }
+    if (isset($d->id)) {
+        $r = $d->id;
+        return $r;
+    }
+
+    $q = "SELECT id FROM $tabla WHERE TRIM($ncamp) ILIKE '${nom0}'";
+    $r = $db->getOne($q);
+    if (PEAR::isError($r) || $r == null) {
         $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom0}%'";
         $r = $db->getOne($q);
-        if (PEAR::isError($r) || $r == null) {
-            $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom1}%'";
-            $r = $db->getOne($q);
-        }
-        if (PEAR::isError($r) || $r == null) {
-            $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom2}%'";
-            //echo " q=$q";
-            $r = $db->getOne($q);
-        }
+    }
+    if (PEAR::isError($r) || $r == null) {
+        $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom1}%'";
+        $r = $db->getOne($q);
+    }
+    if (PEAR::isError($r) || $r == null) {
+        $q = "SELECT id FROM $tabla WHERE $ncamp ILIKE '%${nom2}%'";
+        //echo " q=$q";
+        $r = $db->getOne($q);
+    }
 
-        if (PEAR::isError($r) || $r == null) {
-            rep_obs(
-                "-- " . _($tabla) . ": " . _("desconocido") .
-                " '$nombre'", $obs
-            );
-            if ($sininf
-                && is_callable(array("DataObjects_$tabla", 'idSinInfo'))
-            ) {
-                $r = call_user_func(
-                    array("DataObjects_$tabla",
-                    "idSinInfo"
-                    )
-                );
-            } else {
-                $r = -1;
-            }
+    if (PEAR::isError($r) || $r == null) {
+        rep_obs(
+            "-- " . _($tabla) . ": " . _("desconocido") .
+            " '$nombre'", $obs
+        );
+        if ($sininf
+            && is_callable(array("DataObjects_$tabla", 'idSinInfo'))
+        ) {
+            $r = call_user_func(
+                array("DataObjects_$tabla",
+                "idSinInfo"
+            )
+        );
         } else {
-            $d = objeto_tabla($tabla);
-            $d->id = $r;
-            $d->find(1);
-            if (trim($d->$ncamp) != trim($nom0)) {
-                rep_obs(
-                    "$tabla: elegido registro '$r' con nombre '" .
-                    $d->$ncamp . "' que es similar a '$nom0'", $obs
-                );
-            }
+            $r = -1;
         }
     } else {
-        $r = $d->id;
+        $d = objeto_tabla($tabla);
+        $d->id = $r;
+        $d->find(1);
+        if (trim($d->$ncamp) != trim($nom0)) {
+            rep_obs(
+                "$tabla: elegido registro '$r' con nombre '" .
+                $d->$ncamp . "' que es similar a '$nom0'", $obs
+            );
+        }
     }
 
     return $r;

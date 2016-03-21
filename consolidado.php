@@ -214,6 +214,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             }
         }
 
+        $dv = array();
         $tgeo = "";
         if ($pIdClase != '') {
             $tgeo = "ubicacion, ";
@@ -350,7 +351,6 @@ class AccionConsolidado extends HTML_QuickForm_Action
                     }
                 }
             }
-            $dv = array();
             if (!$excl) {
                 if (!isset($dv[$row[0]][$row[1]])) {
                     $datv[$tv] = array($row[0], $row[1], $row[2], $row[3]);
@@ -360,13 +360,13 @@ class AccionConsolidado extends HTML_QuickForm_Action
             }
         }
 
-        $depuraConsolidado = false;
+        $depuraConsolidado = true;
         $suma = array();
         if ($pMuestra == "tabla") {
             echo "<table border='1'>\n";
             echo "<tr>";
             if ($depuraConsolidado) {
-                echo "<td>IdCaso</td><td>IdVic</td>";
+                echo "<td>IdCaso</td>";
             }
             echo "<th>" . _("Fecha") . "</th><th>" . _("Ubicación")
                 . "</th><th>" . _("Víctimas") . "</th>";
@@ -436,8 +436,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
             if ($pMuestra == "tabla") {
                 echo "<tr>";
                 if ($depuraConsolidado) {
-                    echo "<td>". (int)$idcaso . "</td><td>"
-                        . (int)$idvic . "</td>";
+                    echo "<td><a href='captura_caso.php?modo=edita&id={$idcaso}'>"
+                        . "{$idcaso}</a>\n";
                 }
                 echo "<td>" . htmlentities($fecha, ENT_COMPAT, 'UTF-8') .
                     "</td><td>" .  htmlentities($ubi, ENT_COMPAT, 'UTF-8') .
@@ -451,6 +451,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
                     " & " . txt2latex(trim($nom)) . " ";
                 echo htmlentities($lt, ENT_COMPAT, 'UTF-8');
             }
+            //echo "<hr>OJO cat"; print_r($cat); 
+            //echo "<hr>dv[idcaso=$idcaso][idvic=$idvic]"; print_r($dv[$idcaso][$idvic]); die("OJO x");
             foreach ($cat as $idcat => $cp) {
                 if (isset($dv[$idcaso][$idvic][$idcat])) {
                     if ($pResto || $idcat != chr($ncol+65)) {

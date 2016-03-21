@@ -110,7 +110,7 @@ include herram/comdist.mak
 
 # Elimina hasta configuración
 limpiadist: limpiamas
-	rm -f confv.sh confv.ent Make.inc .#*
+	rm -f confaux.sed confv.sh confv.ent Make.inc .#*
 	rm -rf $(HTML_DIR)
 	rm -rf $(PRINT_DIR)
 
@@ -144,10 +144,10 @@ limpia:
 	$(W3M) $(W3M_OPT) -dump html/index.html | awk -f herram/conthtmldoc.awk | awk '/.*/ {if (e>=1) { print $$0; }} /Documentac/ { e=e+1; } BEGIN { e=0; } ' > ../Derechos.txt
 	if (test "$(W3M)" = "/usr/local/bin/lynx") then { $(RECODE) latin1..utf8 ../Derechos.txt; } fi;
 
-varconfphp.xdbk: ../sitios/pordefecto/conf.php ../sitios/pordefecto/conf_int.php
+varconfphp.xdbk: ../sitios/pordefecto/conf.php.plantilla ../sitios/pordefecto/conf_int.php.plantilla
 	echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" > varconfphp.xdbk
-	awk -f herram/convar.awk ../sitios/pordefecto/conf.php >> varconfphp.xdbk
-	awk -f herram/convar.awk ../sitios/pordefecto/conf_int.php >> varconfphp.xdbk
+	awk -f herram/convar.awk ../sitios/pordefecto/conf.php.plantilla >> varconfphp.xdbk
+	awk -f herram/convar.awk ../sitios/pordefecto/conf_int.php.plantilla >> varconfphp.xdbk
 
 personaliza.ent: personaliza.ent.plantilla
 	if (test -f personaliza.ent) then { cp personaliza.ent personaliza.ent.copia; } fi

@@ -1,6 +1,6 @@
 1. Prerrequisitos
 
-     * Sistema tipo Unix, recomendamos OpenBSD 5.6 y en particular la
+     * Sistema tipo Unix, recomendamos OpenBSD 5.7 y en particular la
        distribución Aprendiendo de Jesús (ver
        http://aprendiendo.pasosdeJesus.org).
      * Para hacer pruebas durante la configuración puede emplear una
@@ -74,8 +74,8 @@ sudo pear install ./Validate-*
 
     1. Aunque no es indispensable se recomienda que cree una cuenta para
        sivel (digamos con login sivel).
-    2. Instale el paquete sivel-1.2b4.tar.gz que se distribuye con
-       adJ-5.6. Si prefiere descargar fuentes o clonar el repositorio git,
+    2. Instale el paquete sivel-1.2.tar.gz que se distribuye con adJ-5.7.
+       Si prefiere descargar fuentes o clonar el repositorio git,
        asegurese de dejar en un directorio utilizabel por nginx con SSL y
        consulte Sección 3.1, "Actualización de versiones menores (e.g
        1.2b1 a 1.2b2)".
@@ -88,28 +88,28 @@ createuser -h /var/www/tmp/ -s -d sivel
 exit
 
     4. Ejecute el archivo de ordenes de configuración:
-cd /var/www/htdocs/sivel12/
+cd /var/www/htdocs/sivel/
 ./conf.sh
 
     5. Cree un nuevo sitio desde el directorio sitios con el archivo de
        ordenes nuevo.sh. Por ejemplo para crear el sitio sivel:
-cd /var/www/htdocs/sivel12/sitios
-./nuevo.sh sivel12
+cd /var/www/htdocs/sivel/sitios
+./nuevo.sh sivel
 
        Este archivo de ordenes copiará los archivo
        pordefecto/conf.php.plantilla y pordefecto/vardb.sh.plantilla como
-       sivel12/conf.php y sivel12/vardb.sh cuadrando rutas y usuario de
+       sivel/conf.php y sivel/vardb.sh cuadrando rutas y usuario de
        PostgreSQL (si requiere cambiar usuario o clave de PostgreSQL edite
-       sivel12/conf.php). También inicializará la base de datos y los
+       sivel/conf.php). También inicializará la base de datos y los
        archivos relacionados, lo cual usted puede hacer manualmente con:
-cd /var/www/htdocs/sivel12/sitios/sivel12
+cd /var/www/htdocs/sivel/sitios/sivel
 ../../bin/creapg.sh
 
        y el mismo archivo de ordenes le permitirá agregar el primer
        usuario al cual debe darle el rol de administrador. Si
        posteriormente requiere agregar otros usuarios para este sitio
        desde el interprete de comandos ejecute:
-cd /var/www/htdocs/sivel12/sitios/sivel12
+cd /var/www/htdocs/sivel/sitios/sivel
 ../../bin/agus.sh
 
        Este archivo de ordenes también pondrá un fondo por defecto que
@@ -122,7 +122,7 @@ cd /var/www/htdocs/sivel12/sitios/sivel12
 2.1. Otros pasos de instalación opcionales
 
     1. Si desea generar la documentación:
-cd /var/www/htdocs/sivel12/doc
+cd /var/www/htdocs/sivel/doc
 ./conf.sh
 cp personaliza.ent.plantilla personaliza.ent
 

@@ -33,7 +33,7 @@ $post['brigada'] = 'brigada';
 $post['division'] = 'division';
 $post['batallon'] = 'batallon';
 $post['otro'] = 'otro';
-$post['clasificacion']['0'] = 'T:1000:1000';
+$post['clasificacion']['0'] = 'T:1000:1001';
 $post['_qf_pResponsables_siguienteMultiple'] = 'Responsable siguiente';
 $post['_qf_default'] = 'pResponsables:siguiente';
 pasaPestanaFicha(

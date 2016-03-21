@@ -654,7 +654,6 @@ function localiza_conf()
         if ($pbase == '127') {
             $pbase = 'sivel';
         }
-        encabezado_envia('Error');
         echo "No existe configuraci&oacute;n '"
             . htmlentities($dirsitio, ENT_COMPAT, 'UTF-8') . "'<br>";
         if (isset($_SERVER['PATH_TRANSLATED'])) {
@@ -679,7 +678,7 @@ function localiza_conf()
         echo "Posiblemente basta que ejecute desde una terminal: <br>";
         echo "<font size='-1' color='#db9090'>"
             . htmlentities($cmd, ENT_COMPAT, 'UTF-8') . "</font>";
-        pie_envia();
+        //pie_envia();
         exit(1);
     }
     //echo "OJO retornando $dirsitio<br>";
