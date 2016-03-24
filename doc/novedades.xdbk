@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
+	<varlistentry><term>Versión 1.2.2 (?.2016)</term>
+		<listitem>
+			<para><itemizedlist>
+				<listitem><para>
+            Corregidos conteos del módulo de tablas de Banco de Datos del CINEP.
+       				</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
 	<varlistentry><term>Versión 1.2.1 (Mar.2016)</term>
 		<listitem>
 			<para><itemizedlist>
