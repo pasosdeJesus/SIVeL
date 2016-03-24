@@ -1430,7 +1430,7 @@ function consulta_orden(&$q, $pOrdenar)
  * registros de $tabla se filtran con la $llave
  *
  * @param string $tabla       Tabla inicial
- * @param string $llave       Arreglo que relaciona nombres de campos llave
+ * @param array  $llave       Arreglo que relaciona nombres de campos llave
  *  de tabla con valores, de forma que ubiquen los registrso en tabla
  *  por relacionar.
  * @param string $enlace      Campo que enlaza 'tabla' con otra

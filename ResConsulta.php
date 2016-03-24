@@ -155,7 +155,7 @@ class ResConsulta
      *
      * @return void
      */
-    function ResConsulta(&$campos, &$db, &$resultado, &$conv, $mostrar,
+    public function ResConsulta(&$campos, &$db, &$resultado, &$conv, $mostrar,
         $detallesform = array(), $ordCasos = array(), $busca_pr = array(),
         $ordenar = '', $primnom = true
     ) {
@@ -194,7 +194,7 @@ class ResConsulta
      *
      * @return integer Cantidad de ubicaciones encontradas
      */
-    function extraeUbicacionCaso($idcaso, &$db,
+    public function extraeUbicacionCaso($idcaso, &$db,
         &$idd, &$ndd, &$idm, &$ndm, &$idc, &$ndc, &$tdu
     ) {
 
@@ -278,7 +278,7 @@ class ResConsulta
      *
      * @return string ubicaciones
      */
-    function ubicacion_separada_html(&$db, $idcaso)
+    public function ubicacion_separada_html(&$db, $idcaso)
     {
         $idd = array(); // Identificaciones
         $idm = array();
@@ -312,7 +312,7 @@ class ResConsulta
      *
      * @return string ubicaciones
      */
-    function ubicacion(&$db, $idcaso)
+    public function ubicacion(&$db, $idcaso)
     {
         $idd = array(); // Identificaciones
         $idm = array();
@@ -357,7 +357,7 @@ class ResConsulta
      *
      * @return integer Total de víctimas
      */
-    function extraeVictimas($idcaso, &$db, &$idp, &$ndp,
+    public function extraeVictimas($idcaso, &$db, &$idp, &$ndp,
         $id_persona, &$indid, &$edp, $primnom = true, $septd = false
     ) {
         $q = "SELECT  id_persona, nombres, apellidos, anionac " .
@@ -412,7 +412,7 @@ class ResConsulta
      * @return integer Total de víctimas
 
      */
-    function extraeCombatientes($idcaso, &$db, &$idp, &$ndp,
+    public function extraeCombatientes($idcaso, &$db, &$idp, &$ndp,
         $id_combatiente, &$indid
     ) {
 
@@ -445,7 +445,7 @@ class ResConsulta
      *
      * @return integer Return description (if any) ...
      */
-    function extraePResponsables($idcaso, &$db, &$idp, &$idp2, &$ndp)
+    public function extraePResponsables($idcaso, &$db, &$idp, &$idp2, &$ndp)
     {
         $q = "SELECT  id_presponsable, caso_presponsable.id, " .
             " presponsable.nombre " .
@@ -483,7 +483,7 @@ class ResConsulta
      *
      * @return integer Suma de victimas.
      **/
-    function extraeColectivas($idcaso, &$db, &$idp, &$ndp, &$cdp,
+    public function extraeColectivas($idcaso, &$db, &$idp, &$ndp, &$cdp,
         $id_grupoper, &$indid, &$totelem
     ) {
         $q = "SELECT id_grupoper, nombre, personasaprox " .
@@ -519,7 +519,7 @@ class ResConsulta
      *
      * @return void
      */
-    function actosHtml(&$db, $tablas, $donde, $pMuestra)
+    public function actosHtml(&$db, $tablas, $donde, $pMuestra)
     {
         $etablas = array();
         if (is_array($tablas)) {
@@ -679,7 +679,8 @@ class ResConsulta
      *
      * @return void
      */
-    function llenaSelCategoria(&$db, $q, &$sel, $orden = array(-1, 0, 1, 2))
+    public function llenaSelCategoria(&$db, $q, &$sel, 
+        $orden = array(-1, 0, 1, 2))
     {
         $result = hace_consulta($db, $q);
         $row = array();
@@ -747,7 +748,7 @@ class ResConsulta
      *
      * @return void
      */
-    function aHtml($retroalim = true,
+    public function aHtml($retroalim = true,
         $html_enlace1=null
     ) {
         //echo "OJO aHtml";
@@ -1279,7 +1280,8 @@ class ResConsulta
                     && $GLOBALS['reptabla_separa_nomap']
                 );
                 $seploc = "";
-                for ($k = 0; $k < count($ndp_html); $k++) {
+                $cndp = count($ndp_html);
+                for ($k = 0; $k < $cndp; $k++) {
                     $q = "SELECT id_tviolencia, id_supracategoria, " .
                     "id_categoria " .
                     " FROM acto, categoria " .
@@ -1324,7 +1326,8 @@ class ResConsulta
                         $db, $idp, $ndp, $cdp, null, $ind, $totelem
                     );
                     $bk = $k;
-                    for (; $k < count($ndp); $k++) {
+                    $cndp = count($ndp);
+                    for (; $k < $cndp; $k++) {
                         $q = "SELECT id_tviolencia, id_supracategoria, " .
                             " id_categoria " .
                             " FROM actocolectivo, categoria " .
@@ -1500,11 +1503,11 @@ class ResConsulta
         $r = "<relato>\n";
         a_elementos_xml(
             $r, 2,
-            array('organizacion_responsable' =>
-            $GLOBALS['organizacion_responsable'],
-            'derechos' =>
-            $GLOBALS['derechos']
-        )
+            array(
+                'organizacion_responsable' => 
+                $GLOBALS['organizacion_responsable'],
+                'derechos' => $GLOBALS['derechos']
+            )
         );
         a_elementos_xml(
             $r, 2,
@@ -2240,7 +2243,6 @@ class ResConsulta
             $r .= "\n";
         }
         if (array_key_exists('m_fuentes', $campos)) {
-            $fl = "";
             $sep = $GLOBALS['etiqueta']['id_ffrecuente'] . ": ";
             $descritocaso = objeto_tabla('caso_ffrecuente');
             if (PEAR::isError($descritocaso)) {
@@ -2256,7 +2258,6 @@ class ResConsulta
                 $r .= " - ";
                 $m = explode("-", $descritocaso->fecha);
                 $r .= $m[2] . "-".$GLOBALS['mes'][(int)$m[1]] . "-".$m[0];
-                $fl = "\n";
                 $sep = "\n ";
             }
 
@@ -2549,12 +2550,12 @@ class ResConsulta
     * @param integer $idcaso Id. del caso
     * @param array   $campos Campos por mostrar
     * @param string  $r      Colchon para dejar respuesta
-    * @param boolena $repgen Para reporte general
+    * @param boolean $repgen Para reporte general
     *
     * @return void Agrega al colchon r
     */
     static function listaPrCatVictima($idcaso,  $campos, &$r,
-        $repgen= false
+        $repgen = false
     ) {
         $corto = !array_key_exists('m_presponsables', $campos)
             && !array_key_exists('m_tipificacion', $campos)
@@ -3157,7 +3158,8 @@ class ResConsulta
                     $db, $idp, $ndp, null, $indid, $edp
                 );
                 $seploc = "";
-                for ($k = 0; $k < count($ndp); $k++) {
+                $cndp = count($ndp);
+                for ($k = 0; $k < $cndp; $k++) {
                     $q = "SELECT id_tviolencia, id_categoria " .
                         " FROM acto, categoria " .
                         " WHERE id_persona='". (int)$idp[$k] . "' " .
@@ -3196,7 +3198,8 @@ class ResConsulta
                     $db, $idp, $ndp, $cdp, null, $ind, $totelem
                 );
                 $bk = $k;
-                for (; $k < count($ndp); $k++) {
+                $cndp = count($ndp);
+                for (; $k < $cndp; $k++) {
                     $vr .= $seploc . $ndp[$k] . " (".$cdp[$k-$bk] . ")";
                     $vrescon .= $seploc . trim($ndp[$k])." (".$cdp[$k-$bk] . ")";
                     $seploc = "; ";
@@ -3242,4 +3245,3 @@ class ResConsulta
 
 
 
-?>

@@ -343,8 +343,8 @@ echo "" >> Make.inc
 #Directorio para anexos
 mount | grep resbase > /dev/null 2>&1
 if (test "$?" = "0" -a -d /var/www/resbase/) then {
-	sudo mkdir -p /var/www/resbase/anexos
-	sudo chown www:www /var/www/resbase/anexos
+	doas mkdir -p /var/www/resbase/anexos
+	doas chown www:www /var/www/resbase/anexos
 } fi;
 
 # Adding configuration variables to Make.inc

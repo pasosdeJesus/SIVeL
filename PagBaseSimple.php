@@ -47,7 +47,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
      * DB_DataObject_FormBuilder).
      * Convención sugerida: que comienzan con la letra b
      */
-    var $bcaso = null;
+    public $bcaso = null;
 
     /**
      * Mensaje de campos requeridos

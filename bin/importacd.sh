@@ -10,13 +10,13 @@ if (test ! -f ./vardb.sh -o ! -f conf.php) then {
 
 . ./vardb.sh
 
-sudo mount /mnt/cdrom/ 
-sudo /sbin/umount /dev/svnd0c 
-sudo /usr/sbin/vnconfig -u svnd0c
-sudo /usr/sbin/vnconfig -ckv svnd0 /mnt/cdrom/resbase.img
-sudo /sbin/fsck_ffs -y /dev/svnd0c
-sudo mkdir -p /mnt/tmp
-sudo /sbin/mount -o ro /dev/svnd0c /mnt/tmp
+doas mount /mnt/cdrom/ 
+doas /sbin/umount /dev/svnd0c 
+doas /usr/sbin/vnconfig -u svnd0c
+doas /usr/sbin/vnconfig -ckv svnd0 /mnt/cdrom/resbase.img
+doas /sbin/fsck_ffs -y /dev/svnd0c
+doas mkdir -p /mnt/tmp
+doas /sbin/mount -o ro /dev/svnd0c /mnt/tmp
 (cd /mnt/tmp;ls -l /mnt/tmp)
 echo -n "¿Qué volcado restaurar? ";
 read nom;

@@ -271,9 +271,9 @@ c=`ps ax | grep "[h]ttpd:.*parent.*chroot" | sed -e "s/.*chroot //g;s/].*//g"`
 check "CHROOTDIR" "optional" "test -d \$CHROOTDIR" $c '/var/www/' 
 echo " PostgreSQL corriendo";
 proceso post Postgresql 
-check "SOCKPSQL" "" "test -S \$SOCKPSQL/.s.PGSQL.5432" '/var/www/tmp/' '/tmp/' '/var/run/postgresql/'
+check "SOCKPSQL" "" "test -S \$SOCKPSQL/.s.PGSQL.5432" '/var/www/var/run/postgresql' '/var/www/tmp/' '/tmp/' '/var/run/postgresql/'
 
-check "PHP" "" "test -x \$PHP" `which php-5.5 2> /dev/null` `php-5.4 2> /dev/null` `which php-5.3 2> /dev/null` `which php-5.2 2> /dev/null` `which php 2> /dev/null` 
+check "PHP" "" "test -x \$PHP" `which php-5.6 2> /dev/null` `which php-5.5 2> /dev/null` `php-5.4 2> /dev/null` `which php-5.3 2> /dev/null` `which php-5.2 2> /dev/null` `which php 2> /dev/null` 
 verphp=`$PHP -v | grep "PHP " | sed -e "s|.*PHP \([0-9.]*\).*|\1|g"`;
 if (test "$?" != 0 -o "x$verphp" = "x") then {
 	echo "  $PROYECTO funciona con versiones de PHP posteriores a la 5.0";
@@ -418,7 +418,7 @@ if (test "$regenera" = "1") then {
 		sed -e "s/sitios\/pordefecto/sitios\/sivel/g"  |
 		sed -e "s/^ *\$socketopt *=.*/\$socketopt = \"-h $dssed\";/g"  > sitios/sivel/conf.php
 		chmod o-rwx sitios/sivel/conf.php
-		sudo chgrp www sitios/sivel/conf.php
+		doas chgrp www sitios/sivel/conf.php
 		chmod g-wx+r sitios/sivel/conf.php
 
 		if (test -f sitios/sivel/vardb.sh) then {
@@ -429,13 +429,12 @@ if (test "$regenera" = "1") then {
 		if (test ! -f sitios/sivel/ultimoenvio.txt) then {
 			touch sitios/sivel/ultimoenvio.txt
 		} fi;
-		sudo chown -f www:www sitios/sivel/ultimoenvio.txt
+		doas chown -f www:www sitios/sivel/ultimoenvio.txt
 		(cd sitios/sivel; ../../bin/creaesquema.sh)
-		sudo chown -f www:www sitios/sivel/DataObjects/sivel.*
+		doas chown -f www:www sitios/sivel/DataObjects/sivel.*
 		(cd sitios; ln -s sivel 127.0.0.1)
-		sudo mkdir -p /var/www/resbase/anexos
-		sudo chown -f www:www /var/www/resbase/anexos
-
+		doas mkdir -p /var/www/resbase/anexos
+		doas chown -f www:www /var/www/resbase/anexos
 	} fi;
 } fi;
 

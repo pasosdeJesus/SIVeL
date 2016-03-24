@@ -604,7 +604,7 @@ Asegurse de ejecutar <filename>conf.sh</filename>:
 			en superusuario:
 			<screen>
 sudo su - _postgresql
-psql -h/var/www/tmp -Upostgres template1
+psql -h/var/www/var/run/postgresql -Upostgres template1
 ALTER ROLE sivel WITH SUPERUSER;
 			</screen>
 		</para>

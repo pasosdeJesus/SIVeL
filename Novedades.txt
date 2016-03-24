@@ -1,7 +1,10 @@
 Apéndice A. Novedades
 
-   Versión 1.2.1 (Dic.2015)
+   Versión 1.2.1 (Mar.2016)
 
+          + Preparado para adJ 5.8: Ubicación de socket de PostgreSQL por
+            omisión en /var/www/var/run/postgresql, utiliza doas en lugar
+            de sudo
           + Nueva variable global reporte_general_detallado para
             especificar mayor detalle en reporte general. Cuando es mayor
             o igual a 1 incluye: sitio, lugar, latitud y longitud junto a

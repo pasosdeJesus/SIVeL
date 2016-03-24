@@ -251,7 +251,7 @@ function nom_sesion2()
 }
 
 /** DSN de la base de datos.  */
-$dsn = "pgsql://$dbusuario:$dbclave@unix(/var/www/tmp)/$dbnombre";
+$dsn = "pgsql://$dbusuario:$dbclave@unix(/var/www/var/run/postgresql)/$dbnombre";
 $opdb = array('debug' => 5);
 $db =& DB::connect($dsn, $opdb);
 if (PEAR::isError($db)) {
