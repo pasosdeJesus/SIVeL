@@ -59,9 +59,11 @@ class AccionCifrasCons extends HTML_QuickForm_Action
     function cuenta_actos(&$db, $cat, $w)
     {
         consulta_and($db, $w, "acto.id_categoria", (int)$cat);
-        $q = "SELECT count(*) FROM caso, acto WHERE caso.id=acto.id_caso AND "
-            . $w;
-        //echo "OJO q=$q<br>";
+        $q = "SELECT count(*) FROM (SELECT DISTINCT acto.id_caso, 
+            acto.id_persona, acto.id_categoria FROM caso, acto
+            WHERE caso.id=acto.id_caso AND "
+            . $w . ") AS subcuentaactos;";
+        #echo "OJO q=$q<br>";
         $r = $db->getOne($q);
         sin_error_pear($r);
         return (int)$r;
@@ -112,9 +114,8 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         echo "</td></tr>";
 
         echo "</table>";
-
-
     }
+
     /**
      * Ejecuta acción
      *
@@ -184,7 +185,7 @@ class AccionCifrasCons extends HTML_QuickForm_Action
             "Total víctimas que perdieron la vida",
             $where
 
-        );
+        ); 
 
         echo "<h3>DERECHO A LA INTEGRIDAD</h3>";
         $filas = array();
@@ -232,7 +233,7 @@ class AccionCifrasCons extends HTML_QuickForm_Action
 
         $filas = array();
         $filas[0] = array(
-            "cat" => array( 0 => 22, 1 => 32),
+            "cat" => array( 0 => 22, 1 => 36),
             "titulo" => "Víctimas de Tortura por Abuso de Autoridad e Intolerancia Social por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
         );
         $filas[1] = array(
@@ -266,15 +267,15 @@ class AccionCifrasCons extends HTML_QuickForm_Action
 
         $filas = array();
         $filas[0] = array(
-            "cat" => array( 0 => 296, 1 => 396),
+            "cat" => array( 0 => 29, 1 => 39),
             "titulo" => "Víctimas de Violencia Sexual por móvil de Abuso de Autoridad o Intolerancia Social, perpetrada por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
         );
         $filas[1] = array(
-            "cat" => array( 0 => 196),
+            "cat" => array( 0 => 19),
             "titulo" => "Casos registrados simultáneamente como víctimas de Violencia Sexual por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) y como casos que constituyen al mismo tiempo infracciones al Derecho Internacional Humanitario."
         );
         $filas[2] = array(
-            "cat" => array( 0 => 77, 1 => -196),
+            "cat" => array( 0 => 77, 1 => -19),
             "titulo" => "Casos de Violencia Sexual que constituyen infracciones al Derecho Internacional Humanitario por parte de la insurgencia o combatientes."
         );
          $this->gen_tabla(
