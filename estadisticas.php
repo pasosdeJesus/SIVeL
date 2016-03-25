@@ -285,7 +285,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         }
         hace_consulta($db, "DROP VIEW $cons2", false, false);
         hace_consulta($db, "DROP VIEW $cons", false, false);
-        //echo "q1=$q1<br>";
+        //echo "OJO q1=$q1<br>";
         hace_consulta($db, $q1);
 
         $q2="CREATE VIEW $cons2 ($cCons, id_tviolencia, " .
@@ -297,7 +297,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             "ubicacion, $cons " .
             "WHERE $cons.id_caso = ubicacion.id_caso "
             ;
-        //echo "q2=$q2<br>";
+        //echo "OJO q2=$q2<br>";
         hace_consulta($db, $q2);
 
         $campos3 = "$cfSegun3 $tDep $tMun trim(tviolencia.nombre), "
@@ -344,7 +344,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
 
         $q3="SELECT $campos3 FROM $tablas3
             WHERE $cond3 GROUP BY $gr3 ORDER BY $gr3";
-        //echo "q3 es $q3<hr>";
+        //echo "OJO q3 es $q3<hr>";
         $resultado = hace_consulta($db, $q3);
 
         if ($pMuestra == 'tabla') {
