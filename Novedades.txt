@@ -2,6 +2,8 @@ Apéndice A. Novedades
 
    Versión 1.2.2 (?.2016)
 
+          + Validaciones más veloces, que presentan siempre persona que
+            inició caso y fecha del caso.
           + Corregidos conteos del módulo de tablas de Banco de Datos del
             CINEP.
 

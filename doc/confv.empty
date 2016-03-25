@@ -21,7 +21,7 @@ PRY_DESC="Documentación de SIVeL"
 # Descripción corta
 #
 
-FECHA_PROX="20/03/2013"
+FECHA_PROX="01/08/2015"
 # Fecha en la que esperamos liberar próxima versión
 #
 
@@ -120,6 +120,10 @@ CP=""
 CVS=""
 # Para control de versiones
 # Sugerido http://www.opencvs.org
+
+DOAS=""
+# Para ejecutar ordenes como administrador
+# En OpenBSD reciente doas, hasta 5.7 y otros sistemas sudo
 
 DOT="dot-falta"
 # Convierte grafo en formato dotty a gráfica

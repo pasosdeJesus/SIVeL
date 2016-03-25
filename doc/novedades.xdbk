@@ -5,7 +5,14 @@
 		<listitem>
 			<para><itemizedlist>
 				<listitem><para>
-            Corregidos conteos del módulo de tablas de Banco de Datos del CINEP.
+Detecta ubicación de socket para operar en adJ anteriores a 5.8
+       				</para></listitem>
+				<listitem><para>
+Validaciones más veloces, que presentan siempre persona que inició 
+caso y fecha del caso.
+       				</para></listitem>
+				<listitem><para>
+Corregidos conteos del módulo de tablas de Banco de Datos del CINEP.
        				</para></listitem>
 			</itemizedlist></para>
 		</listitem>

@@ -94,6 +94,10 @@ CVS=""
 # Para control de versiones
 # Sugerido http://www.opencvs.org
 
+DOAS=""
+# Para ejecutar ordenes como administrador
+# En OpenBSD reciente doas, hasta 5.7 y otros sistemas sudo
+
 ECHO="/bin/echo"
 # Ejecutable echo
 #

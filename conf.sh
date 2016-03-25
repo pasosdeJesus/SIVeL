@@ -193,6 +193,7 @@ if (test "$VERBOSE_FLAG" -gt "0") then {
 check "AWK" "" "test -x \$AWK" `which awk 2> /dev/null`
 check "CP" "" "test -x \$CP" `which cp 2> /dev/null`
 check "CVS" "optional" "test -x \$CVS" `which cvs 2> /dev/null`
+check "DOAS" "" "test -x \$DOAS" `which doas 2> /dev/null` `which sudo 2> /dev/null`
 check "ECHO" "" "test -x \$ECHO" `which ed 2> /dev/null`
 check "ED" "" "test -x \$ED" `which ed 2> /dev/null`
 check "FIND" "" "test -x \$FIND" `which find 2> /dev/null`
@@ -366,10 +367,8 @@ if (test "$VERBOSE_FLAG" -gt "0") then {
 } fi;
 
 if (test "$regenera" = "1") then {
-
 	csitios=`cd sitios/ ; ls | grep -v CVS | grep -v nuevo.sh | tr "\n" " "`;
 	if (test "$csitios" = "pordefecto pruebas ") then {
-
 		chres=`echo $CHROOTDIR | sed -e "s/\//\\\\\\\\\//g"`;
 		ds=`echo $SOCKPSQL | sed -e "s/.s.PGSQL.*//g;"`;
 		dssed=`echo $ds | sed -e "s/\//\\\\\\\\\//g"`;
@@ -377,8 +376,6 @@ if (test "$regenera" = "1") then {
 		fuentes=`pwd | sed -e "s/\/pruebas//g"`;
 		fuentessed=`echo $fuentes | sed -e "s/\//\\\\\\\\\//g"`;
 		fuenteschrootsed=`echo $fuentes | sed -e "s/$chres//g" | sed -e "s/\//\\\\\\\\\//g"`;
-
-
 		if (test ! -f /var/www/htdocs/sivel10/aut/conf.php) then {
 			# nuevo
 			cp -rf sitios/pordefecto sitios/sivel
@@ -390,7 +387,6 @@ if (test "$regenera" = "1") then {
 			} else {
 				dbclave=`apg | head -n 1`;
 			} fi;
-
 		} else { #  aut/conf.php existe
 			# de 1.0 a 1.1
 			cp -rf sitios/pordefecto sitios/sivel
@@ -418,7 +414,7 @@ if (test "$regenera" = "1") then {
 		sed -e "s/sitios\/pordefecto/sitios\/sivel/g"  |
 		sed -e "s/^ *\$socketopt *=.*/\$socketopt = \"-h $dssed\";/g"  > sitios/sivel/conf.php
 		chmod o-rwx sitios/sivel/conf.php
-		doas chgrp www sitios/sivel/conf.php
+		$DOAS chgrp www sitios/sivel/conf.php
 		chmod g-wx+r sitios/sivel/conf.php
 
 		if (test -f sitios/sivel/vardb.sh) then {
@@ -429,14 +425,65 @@ if (test "$regenera" = "1") then {
 		if (test ! -f sitios/sivel/ultimoenvio.txt) then {
 			touch sitios/sivel/ultimoenvio.txt
 		} fi;
-		doas chown -f www:www sitios/sivel/ultimoenvio.txt
+		$DOAS chown -f www:www sitios/sivel/ultimoenvio.txt
 		(cd sitios/sivel; ../../bin/creaesquema.sh)
-		doas chown -f www:www sitios/sivel/DataObjects/sivel.*
+		$DOAS chown -f www:www sitios/sivel/DataObjects/sivel.*
 		(cd sitios; ln -s sivel 127.0.0.1)
-		doas mkdir -p /var/www/resbase/anexos
-		doas chown -f www:www /var/www/resbase/anexos
+		$DOAS mkdir -p /var/www/resbase/anexos
+		$DOAS chown -f www:www /var/www/resbase/anexos
+	} else {
+		ds=`echo $SOCKPSQL | sed -e "s/.s.PGSQL.*//g;"`;
+		dssed=`echo $ds | sed -e "s/\//\\\\\\\\\//g"`;
+		chres=`echo $CHROOTDIR | sed -e "s/\//\\\\\\\\\//g"`;
+		dschroot=`echo $ds | sed -e "s/$chres//g"`;
+		dschrootsed=`echo $dschroot | sed -e "s/\//\\\\\\\\\//g"`;
+		echo "OJO ds=$ds"
+		echo "OJO dssed=$dssed"
+		echo "OJO chres=$chres"
+		echo "OJO chres=$chres"
+		echo "OJO dschroot=$dschroot"
+		echo "OJO dschrootsed=$dschrootsed"
+		for dsitio in $csitios; do
+			#echo "OJO dsitio=$dsitio"
+			if (test "$dsitio" = "pordefecto") then {
+				continue;
+			} elif (test -h sitios/$dsitio) then {
+				continue;
+			} elif (test -f sitios/$dsitio/conf-local.php)  then {
+				cdsitio="sitios/$dsitio/conf-local.php";
+			} elif (test -f sitios/$dsitio/conf.php)  then {
+				cdsitio="sitios/$dsitio/conf.php";
+			} else {
+				echo "** No se encontró archivo de configuración en $dsitio"
+				continue;
+			} fi;
+			cp -f $cdsitio $cdsitio.copia
+			chmod u+rw $cdsitio 
+			grep socketopt $cdsitio > /dev/null 2> /dev/null
+			if (test "$?" != "0") then {
+				echo "Agregando socketopt en $cdsitio"
+				echo "" >> $cdsitio
+				echo "/** Opciones especiales para acceder base de datos desde consola */" >> $cdsitio
+				echo "\$socketopt = \"-h $ds\";" >> $cdsitio
+			} else {
+				echo "Modificando socketopt en $cdsitio"
+				sed -e "s/^ *\$socketopt *=.*/\$socketopt = \"-h $dssed\";/g" $cdsitio.copia > $cdsitio
+			} fi;
+			grep dbservidor $cdsitio > /dev/null 2> /dev/null
+			if (test "$?" != "0") then {
+				echo "Agregando dbservidor en $cdsitio"
+				echo "" >> $cdsitio
+				echo "/** Servidor/socket del Motor de bases de datos */" >> $cdsitio
+				echo "\$dbservidor = \"unix($dschroot)\";" >> $cdsitio
+			} else {
+				echo "Modificando dbservidor en $cdsitio"
+				sed -e "s/^ *\$dbservidor=.*/\$dbservidor=\"unix($dschrootsed)\";/g" $cdsitio.copia > $cdsitio
+			} fi;
+			$DOAS chmod o-rwx $cdsitio
+			$DOAS chgrp www $cdsitio
+			$DOAS chmod g-wx+r $cdsitio
+		done
 	} fi;
 } fi;
-
 
 echo "Configuración completada";
