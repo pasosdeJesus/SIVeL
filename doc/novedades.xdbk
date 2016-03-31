@@ -8,11 +8,15 @@
 Detecta ubicación de socket para operar en adJ anteriores a 5.8
        				</para></listitem>
 				<listitem><para>
-Validaciones más veloces, que presentan siempre persona que inició 
-caso y fecha del caso.
+Validaciones más veloces, que presentan y ordenan siempre por fecha del caso.
        				</para></listitem>
 				<listitem><para>
 Corregidos conteos del módulo de tablas de Banco de Datos del CINEP.
+				</para></listitem>
+				<listitem><para>
+Configurado para adJ 5.8 con socket de PostgreSQL ubicado por defecto en 
+<filename>/var/www/var/run/postgresql</filename>, pero detecta ruta usada en 
+adJ 5.7 y anteriores (<filename>/var/www/tmp</filename>)
        				</para></listitem>
 			</itemizedlist></para>
 		</listitem>

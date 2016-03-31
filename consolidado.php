@@ -154,6 +154,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
         $fb =& DB_DataObject_FormBuilder::create($d);
         $db =& $d->getDatabaseConnection();
 
+        $pIdCasos   = var_req_escapa_cadena('id_casos', $db, 50000);
         $pFini      = var_post_escapa('fini', $db);
         $pFfin      = var_post_escapa('ffin', $db);
         $pFincdesde = var_post_escapa('fincdesde', $db);
@@ -168,6 +169,17 @@ class AccionConsolidado extends HTML_QuickForm_Action
 
         $tablas = "persona, victima, caso, acto ";
         $where = "";
+
+        if ($pIdCasos != '') {
+            $ordCasos = explode(' ', $pIdCasos);
+            $wc = "";
+            foreach ($ordCasos as $cc) {
+                consulta_and($db, $wc, "caso.id", (int)$cc, "=", "OR");
+            }
+            if ($wc != "") {
+                $where = "(" . $wc . ") ";
+            }
+        }
 
         consulta_and_sinap($where, "victima.id_caso", "caso.id");
         consulta_and_sinap($where, "victima.id_persona", "acto.id_persona");
@@ -525,7 +537,11 @@ class AccionConsolidado extends HTML_QuickForm_Action
 
         }
         if ($pMuestra == "tabla") {
-            echo "<tr><td></td><td></td><td></td>";
+            echo "<tr>";
+            if ($depuraConsolidado) {
+                echo "<td></td>";
+            }
+            echo "<td></td><td></td><td></td>";
         } elseif ($pMuestra == 'csv') {
             echo '"", "", "", ""';
         } elseif ($pMuestra == 'latex') {
@@ -599,6 +615,12 @@ class PagConsolidado extends HTML_QuickForm_Page
         $db = $x->getDatabaseConnection();
 
         $e =& $this->addElement('header', null, _('Reporte consolidado'));
+
+
+        $cod =& $this->addElement(
+            'text', 'id_casos', _('Código(s)') . ': '
+        );
+        $cod->setSize(80);
 
         list($dep, $mun, $cla) = PagUbicacion::creaCampos(
             $this, 'id_departamento', 'id_municipio', 'id_clase'
