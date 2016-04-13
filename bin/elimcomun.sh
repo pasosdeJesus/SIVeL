@@ -8,14 +8,14 @@ function eliminafuera {
 		echo "elimina_fuera requiere nombre de la vista con casos por preservar como primer   parámetro.  La vista debe tener un campo id_caso";
 		exit 1;
 	} fi;
-	../../bin/psql.sh -c "select count(id_caso) from $nvista" >/dev/null 2> /dev/null
+	../../bin/psql.sh -c "SELECT COUNT(id_caso) FROM $nvista" >/dev/null 2> /dev/null
 	if (test "$?" != "0") then {
 		echo "No hay codigos de casos por preservar en vista $nvista, campo id_caso";
 		exit 1;
 	} fi;
 
-	t=`../../bin/psql.sh -c "select count(id) from caso" | tail -n 3 | head -n 1`
-	cc=`../../bin/psql.sh -c "select count(id_caso) from $nvista" | tail -n 3 | head -n 1`
+	t=`../../bin/psql.sh -c "SELECT COUNT(id) FROM caso" | tail -n 3 | head -n 1`
+	cc=`../../bin/psql.sh -c "SELECT COUNT(id_caso) FROM $nvista" | tail -n 3 | head -n 1`
 	pe=`expr $t - $cc`;
 	echo "Total de casos antes: $t";
 	echo "Vista con casos por preservar: $nvista";
@@ -24,10 +24,10 @@ function eliminafuera {
 	echo "Presione  [RETORNO] para continuar";
         read 
 
-	for nt in caso_contexto categoria_p_responsable_caso caso_presponsable antecedente_caso ubicacion caso_usuario acto antecedente_victima victima region_caso frontera_caso antecedente_comunidad vinculo_estado_comunidad profesion_comunidad filiacion_comunidad organizacion_comunidad rango_edad_comunidad sector_social_comunidad actocolectivo victima_colectiva etiquetacaso escrito_caso fuente_directa_caso anexo; do
-		../../bin/psql.sh -c "delete from $nt where id_caso not in (select distinct id_caso from $nvista order by 1);"
+	for nt in caso_contexto caso_categoria_presponsable caso_presponsable antecedente_caso ubicacion caso_usuario acto antecedente_victima victima caso_region caso_frontera antecedente_comunidad comunidad_vinculoestado comunidad_profesion comunidad_filiacion comunidad_organizacion comunidad_rangoedad comunidad_sectorsocial actocolectivo victimacolectiva caso_etiqueta caso_ffrecuente caso_fotra anexo; do
+		../../bin/psql.sh -c "DELETE FROM $nt WHERE id_caso NOT IN (SELECT DISTINCT id_caso FROM $nvista ORDER BY 1);"
 	done
-	../../bin/psql.sh -c "delete from caso where id not in (select distinct id_caso from $nvista order by 1);"
+	../../bin/psql.sh -c "DELETE FROM caso WHERE id NOT IN (SELECT DISTINCT id_caso FROM $nvista ORDER BY 1);"
 
 }
 
