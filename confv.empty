@@ -16,7 +16,7 @@ PROYECTO="SIVeL"
 # Nombre del proyecto
 #
 
-PRY_VERSION="1.2.1"
+PRY_VERSION="1.2.2"
 # Version
 #
 
@@ -93,6 +93,10 @@ CP=""
 CVS=""
 # Para control de versiones
 # Sugerido http://www.opencvs.org
+
+DOAS=""
+# Para ejecutar ordenes como administrador
+# En OpenBSD reciente doas, hasta 5.7 y otros sistemas sudo
 
 ECHO="/bin/echo"
 # Ejecutable echo

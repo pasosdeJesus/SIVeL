@@ -13,7 +13,7 @@ PROYECTO=docsivel
 # Nombre del proyecto
 #
 
-PRY_VERSION="1.2"
+PRY_VERSION="1.2.2"
 # Versión
 #
 
@@ -120,6 +120,10 @@ CP=""
 CVS=""
 # Para control de versiones
 # Sugerido http://www.opencvs.org
+
+DOAS=""
+# Para ejecutar ordenes como administrador
+# En OpenBSD reciente doas, hasta 5.7 y otros sistemas sudo
 
 DOT="dot-falta"
 # Convierte grafo en formato dotty a gráfica

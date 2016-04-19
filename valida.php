@@ -76,61 +76,83 @@ res_valida(
 
 res_valida(
     $db, _("Casos sin usuario"),
-    "SELECT caso.id FROM caso
-    WHERE caso.id NOT IN (SELECT id_caso FROM caso_usuario) ORDER BY 1;"
+    "SELECT caso.id, caso.fecha FROM caso
+    WHERE NOT EXISTS (SELECT id_caso FROM caso_usuario WHERE id_caso=caso.id) ORDER BY 2;"
 );
 
 res_valida(
     $db,
     _("Casos que no tienen una sóla ubicación (mal en conteos)"),
-    "SELECT id, c from (SELECT caso.id, count(ubicacion.id) AS c
+    "SELECT id, fecha, c from (SELECT caso.id, caso.fecha, 
+    count(ubicacion.id) AS c
     FROM caso, ubicacion WHERE caso.id = ubicacion.id_caso
-    GROUP BY caso.id order by 2) AS f WHERE c <> 1"
+    GROUP BY caso.id order by 3 desc, 2) AS f WHERE c <> 1"
 );
 
 
 res_valida(
     $db, _("Víctimas con categorias que no son para víctimas individuales"),
-    "SELECT acto.id_caso, acto.id_categoria, acto.id_persona,
+    "SELECT acto.id_caso, caso.fecha, acto.id_categoria, acto.id_persona,
     persona.nombres || ' ' || persona.apellidos
-    FROM acto, persona
-    WHERE persona.id = acto.id_persona AND id_categoria
-    NOT IN (SELECT id FROM categoria WHERE tipocat = 'I');"
+    FROM acto, caso, persona
+    WHERE acto.id_caso=caso.id 
+    AND persona.id = acto.id_persona 
+    AND NOT EXISTS (SELECT id FROM categoria WHERE tipocat = 'I' AND id=id_categoria)
+    ORDER BY caso.fecha;"
 );
 
 
 res_valida(
     $db,
     _("Víctimas colectivas con categorias que no son para víctimas colectivas"),
-    "SELECT actocolectivo.id_caso, actocolectivo.id_categoria, grupoper.nombre
-    FROM actocolectivo, grupoper
+    "SELECT actocolectivo.id_caso, caso.fecha, actocolectivo.id_categoria, 
+        grupoper.nombre
+    FROM actocolectivo, grupoper, caso
     WHERE grupoper.id = actocolectivo.id_grupoper
-    AND id_categoria NOT IN (SELECT id FROM categoria WHERE tipocat = 'C');"
+    AND actocolectivo.id_caso=caso.id
+    AND NOT EXISTS (SELECT id FROM categoria WHERE tipocat = 'C' and id=id_categoria)
+    ORDER BY caso.fecha;"
+);
+
+res_valida(
+    $db, _("Registros en victima individual sin acto de violencia"),
+    "SELECT id_caso, caso.fecha, id_persona, 
+        persona.nombres || ' ' || persona.apellidos
+    FROM victima JOIN caso ON id_caso=caso.id 
+        JOIN persona ON id_persona=persona.id
+    WHERE NOT EXISTS (SELECT id_persona FROM acto WHERE id_persona=persona.id)
+    ORDER BY caso.fecha"
 );
 
 
 res_valida(
-    $db, _("Registros en victimacolectiva que no est&aacute;n en actocolectivo"),
-    "SELECT id_caso, id_grupoper, grupoper.nombre
-    FROM victimacolectiva, grupoper
-    WHERE grupoper.id = victimacolectiva.id_grupoper
-    AND id NOT IN (SELECT id_grupoper FROM actocolectivo)"
+    $db, _("Registros en victimacolectiva que no están en actocolectivo"),
+    "SELECT id_caso, caso.fecha, id_grupoper, grupoper.nombre
+    FROM victimacolectiva JOIN caso ON id_caso=caso.id 
+        JOIN grupoper ON id_grupoper=grupoper.id
+    WHERE NOT EXISTS (SELECT id_grupoper FROM actocolectivo 
+        WHERE id_grupoper=grupoper.id)
+    ORDER BY caso.fecha"
 );
 
 res_valida(
     $db, _("Nombres muy cortos"),
-    "SELECT id_caso, nombres FROM persona, victima 
-    WHERE victima.id_persona=persona.id 
-    AND length(nombres) <= 2
-    AND nombres<>'N'"
+    "SELECT id_caso, caso.fecha, nombres FROM victima 
+        JOIN caso ON victima.id_caso=caso.id
+        JOIN persona ON victima.id_persona=persona.id 
+    WHERE length(nombres) <= 2
+    AND nombres<>'N'
+    ORDER BY caso.fecha"
 );
 res_valida(
     $db, _("Apellidos muy cortos"),
-    "SELECT id_caso, apellidos FROM persona, victima 
-    WHERE victima.id_persona=persona.id 
-    AND length(apellidos) <= 2
+    "SELECT id_caso, caso.fecha, apellidos FROM victima 
+        JOIN caso ON victima.id_caso=caso.id
+        JOIN persona ON victima.id_persona=persona.id 
+    WHERE length(apellidos) <= 2
     AND apellidos<>''
-    AND apellidos<>'N'"
+    AND apellidos<>'N'
+    ORDER BY caso.fecha"
 );
 
 hace_consulta($db, "REFRESH MATERIALIZED VIEW nmujeres");
@@ -146,115 +168,137 @@ res_valida(
     $db, _("Nombres de personas con sexo de nacimiento femenino 
     que parecen de hombre ingresados hace 
     ${GLOBALS['anios_valida_sexo']} año(s)"),
-    "SELECT victima.id_caso, nombres, probmujer(nombres) AS pmujer, 
-    probhombre(nombres) AS phombre FROM persona, victima, iniciador
-    WHERE victima.id_persona=persona.id 
-    AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date - 
+    "SELECT victima.id_caso, caso.fecha,nombres, probmujer(nombres) AS pmujer, 
+        probhombre(nombres) AS phombre 
+    FROM victima
+        JOIN caso ON victima.id_caso=caso.id
+        JOIN persona ON victima.id_persona=persona.id
+        JOIN iniciador ON victima.id_caso=iniciador.id_caso
+    WHERE iniciador.fecha_inicio>=(current_date - 
     interval '${GLOBALS['anios_valida_sexo']} year')
     AND sexo='F' 
     AND probhombre(nombres)>probmujer(nombres)
-    AND nombres<>'N'"
+    AND nombres<>'N'
+    ORDER BY caso.fecha"
 );
 
 res_valida(
     $db, _("Nombres de personas con sexo de nacimiento masculino 
     que parecen de mujer ingresados hace
     ${GLOBALS['anios_valida_sexo']} año(s)"),
-    "SELECT victima.id_caso, nombres, probhombre(nombres) AS phombre, 
-    probmujer(nombres) AS pmujer FROM persona, victima, iniciador
-    WHERE victima.id_persona=persona.id 
-    AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date -
+    "SELECT victima.id_caso, caso.fecha, nombres, 
+        probhombre(nombres) AS phombre, 
+        probmujer(nombres) AS pmujer 
+    FROM victima
+        JOIN caso ON victima.id_caso=caso.id
+        JOIN persona ON victima.id_persona=persona.id
+        JOIN iniciador ON victima.id_caso=iniciador.id_caso
+    WHERE iniciador.fecha_inicio>=(current_date -
     interval '${GLOBALS['anios_valida_sexo']} year')
     AND sexo='F' 
     AND sexo='M' 
     AND probhombre(nombres)<probmujer(nombres)
-    AND nombres<>'N'"
+    AND nombres<>'N'
+    ORDER BY caso.fecha"
 );
-
 
 res_valida(
     $db, _("Nombres de personas con sexo de nacimiento SIN INFORMACIÓN 
     que parecen de mujer ingresados hace
     ${GLOBALS['anios_valida_sexo']} año(s)"),
-    "SELECT victima.id_caso, nombres, persona.id,
-    probhombre(nombres) AS phombre, 
-    probmujer(nombres) AS pmujer FROM persona, victima, iniciador
-    WHERE victima.id_persona=persona.id 
-    AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date - 
+    "SELECT victima.id_caso, caso.fecha, nombres, persona.id,
+        probhombre(nombres) AS phombre, 
+        probmujer(nombres) AS pmujer 
+    FROM victima
+        JOIN caso ON victima.id_caso=caso.id
+        JOIN persona ON victima.id_persona=persona.id
+        JOIN iniciador ON victima.id_caso=iniciador.id_caso
+    WHERE iniciador.fecha_inicio>=(current_date - 
     interval '${GLOBALS['anios_valida_sexo']} year')
     AND sexo='S' 
     AND probhombre(nombres)<probmujer(nombres)
     AND nombres<>'N'
     AND nombres<>'N.'
-    AND nombres<>'PERSONA SIN IDENTIFICAR'"
+    AND nombres<>'PERSONA SIN IDENTIFICAR'
+    ORDER BY caso.fecha"
 );
 
 res_valida(
     $db, _("Nombres de personas con sexo de nacimiento SIN INFORMACIÓN 
     que parecen de hombre ingresados hace
     ${GLOBALS['anios_valida_sexo']} año(s)"),
-    "SELECT victima.id_caso, nombres, persona.id, 
-    probhombre(nombres) AS phombre, 
-    probmujer(nombres) AS pmujer FROM persona, victima, iniciador
-    WHERE victima.id_persona=persona.id 
-    AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date - 
+    "SELECT victima.id_caso, caso.fecha, nombres, persona.id, 
+        probhombre(nombres) AS phombre, 
+        probmujer(nombres) AS pmujer 
+    FROM victima
+        JOIN caso ON victima.id_caso=caso.id
+        JOIN persona ON victima.id_persona=persona.id
+        JOIN iniciador ON victima.id_caso=iniciador.id_caso
+    WHERE iniciador.fecha_inicio>=(current_date - 
     interval '${GLOBALS['anios_valida_sexo']} year')
     AND sexo='S' 
     AND probhombre(nombres)>probmujer(nombres)
     AND nombres<>'N'
     AND nombres<>'N.'
-    AND nombres<>'PERSONA SIN IDENTIFICAR'"
+    AND nombres<>'PERSONA SIN IDENTIFICAR'
+    ORDER BY caso.fecha"
 );
 
 
 res_valida(
-    $db, _("Nombres con sexo SIN INFORMACIÓN cuyo sexo no puede identificarse
+    $db, _("Nombres con sexo SIN INFORMACIÓN que podría deducirse
     hace ${GLOBALS['anios_valida_sexo']} año(s)"),
-    "SELECT victima.id_caso, nombres, persona.id, 
-    probhombre(nombres) AS phombre, 
-    probmujer(nombres) AS pmujer FROM persona, victima, iniciador
-    WHERE victima.id_persona=persona.id 
-    AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date -
+    "SELECT victima.id_caso, caso.fecha, nombres, persona.id, 
+        probhombre(nombres) AS phombre, 
+        probmujer(nombres) AS pmujer 
+    FROM victima
+        JOIN caso ON victima.id_caso=caso.id
+        JOIN persona ON victima.id_persona=persona.id
+        JOIN iniciador ON victima.id_caso=iniciador.id_caso
+    WHERE iniciador.fecha_inicio>=(current_date -
     	interval '${GLOBALS['anios_valida_sexo']} year')
     AND sexo='S' 
     AND probhombre(nombres)=probmujer(nombres)
     AND nombres<>'N'
     AND nombres<>'N.'
-    AND nombres<>'PERSONA SIN IDENTIFICAR'"
+    AND nombres<>'PERSONA SIN IDENTIFICAR'
+    ORDER BY caso.fecha"
 );
 
 res_valida(
     $db, _("Nombres de mujeres que parecen apellidos 
     hace ${GLOBALS['anios_valida_sexo']} año(s)"),
-    "SELECT victima.id_caso, nombres, persona.id, probmujer(nombres) AS pmujer, 
-    probapellido(nombres) AS papellidos FROM persona, victima, iniciador
-    WHERE victima.id_persona=persona.id 
-    AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date -
+    "SELECT victima.id_caso, caso.fecha, nombres, persona.id, 
+        probmujer(nombres) AS pmujer, 
+        probapellido(nombres) AS papellidos 
+    FROM victima
+        JOIN caso ON victima.id_caso=caso.id
+        JOIN persona ON victima.id_persona=persona.id
+        JOIN iniciador ON victima.id_caso=iniciador.id_caso
+    WHERE iniciador.fecha_inicio>=(current_date -
     	interval '${GLOBALS['anios_valida_sexo']} year')
     AND sexo='F' 
     AND probapellido(nombres)>probmujer(nombres)
-    AND nombres<>'N'"
+    AND nombres<>'N' 
+    ORDER BY caso.fecha"
 );
 
 res_valida(
     $db, _("Nombres de hombres que parecen apellidos 
     hace ${GLOBALS['anios_valida_sexo']} año(s)"),
-    "SELECT victima.id_caso, nombres, persona.id,
+    "SELECT victima.id_caso, caso.fecha, nombres, persona.id,
     probhombre(nombres) AS phombre, 
-    probapellido(nombres) AS papellidos FROM persona, victima, iniciador
-    WHERE victima.id_persona=persona.id 
-    AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date -
+    probapellido(nombres) AS papellidos 
+    FROM victima
+        JOIN caso ON victima.id_caso=caso.id
+        JOIN persona ON victima.id_persona=persona.id
+        JOIN iniciador ON victima.id_caso=iniciador.id_caso
+    WHERE iniciador.fecha_inicio>=(current_date -
     	interval '${GLOBALS['anios_valida_sexo']} year')
     AND sexo='M' 
     AND probapellido(nombres)>probhombre(nombres)
-    AND nombres<>'N'"
+    AND nombres<>'N'
+    ORDER BY caso.fecha"
 );
 
 foreach ($GLOBALS['validaciones_tipicas'] as $desc => $sql) {
@@ -278,27 +322,35 @@ if (isset($GLOBALS['gancho_valida_base'])) {
 res_valida(
     $db, _("Apellidos que parecen nombre de hombre 
     hace ${GLOBALS['anios_valida_sexo']} año(s)"),
-    "SELECT victima.id_caso, apellidos, probhombre(apellidos) AS phombre, 
-    probapellido(apellidos) AS papellidos FROM persona, victima, iniciador
-    WHERE victima.id_persona=persona.id 
-    AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date -
+    "SELECT victima.id_caso, caso.fecha, apellidos, 
+        probhombre(apellidos) AS phombre, 
+        probapellido(apellidos) AS papellidos 
+    FROM victima
+        JOIN caso ON victima.id_caso=caso.id
+        JOIN persona ON victima.id_persona=persona.id
+        JOIN iniciador ON victima.id_caso=iniciador.id_caso
+    WHERE iniciador.fecha_inicio>=(current_date -
     	interval '${GLOBALS['anios_valida_sexo']} year')
     AND probapellido(apellidos)<probhombre(apellidos)
-    AND apellidos<>'N'"
+    AND apellidos<>'N' 
+    ORDER BY caso.fecha"
 );
 
 res_valida(
     $db, _("Apellidos que parecen nombre de mujer 
     hace ${GLOBALS['anios_valida_sexo']} año(s)"),
-    "SELECT victima.id_caso, apellidos, probhombre(apellidos) AS phombre, 
-    probapellido(apellidos) AS papellidos FROM persona, victima, iniciador
-    WHERE victima.id_persona=persona.id 
-    AND victima.id_caso=iniciador.id_caso 
-    AND iniciador.fecha_inicio>=(current_date -
+    "SELECT victima.id_caso, caso.fecha, apellidos, 
+        probhombre(apellidos) AS phombre, 
+        probapellido(apellidos) AS papellidos 
+    FROM victima
+        JOIN caso ON victima.id_caso=caso.id
+        JOIN persona ON victima.id_persona=persona.id
+        JOIN iniciador ON victima.id_caso=iniciador.id_caso
+    WHERE iniciador.fecha_inicio>=(current_date -
     	interval '${GLOBALS['anios_valida_sexo']} year')
     AND probapellido(apellidos)<probmujer(apellidos)
-    AND apellidos<>'N'"
+    AND apellidos<>'N'
+    ORDER BY caso.fecha"
 );
 
 

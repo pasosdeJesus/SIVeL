@@ -284,6 +284,7 @@ check "AWK" "" "test -x \$AWK" `which awk 2> /dev/null`
 check "CP" "" "test -x \$CP" `which cp 2> /dev/null`
 check "CVS" "optional" "test -x \$CVS" `which cvs 2> /dev/null`
 check "DOT" "optional" "test -x \$DOT" `which dot 2> /dev/null`
+check "DOAS" "" "test -x \$DOAS" `which doas 2> /dev/null` `which sudo 2> /dev/null`
 check "ED" "" "test -x \$ED" `which ed 2> /dev/null`
 check "FIG2DEV" "optional" "test -x \$FIG2DEV" `which fig2dev 2> /dev/null`
 check "FIND" "" "test -x \$FIND" `which find 2> /dev/null`
@@ -343,8 +344,8 @@ echo "" >> Make.inc
 #Directorio para anexos
 mount | grep resbase > /dev/null 2>&1
 if (test "$?" = "0" -a -d /var/www/resbase/) then {
-	doas mkdir -p /var/www/resbase/anexos
-	doas chown www:www /var/www/resbase/anexos
+	$DOAS mkdir -p /var/www/resbase/anexos
+	$DOAS chown www:www /var/www/resbase/anexos
 } fi;
 
 # Adding configuration variables to Make.inc

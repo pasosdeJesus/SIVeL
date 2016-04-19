@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
+	<varlistentry><term>Versión 1.2.2 (?.2016)</term>
+		<listitem>
+			<para><itemizedlist>
+				<listitem><para>
+Detecta ubicación de socket para operar en adJ anteriores a 5.8
+       				</para></listitem>
+				<listitem><para>
+Validaciones más veloces, que presentan y ordenan siempre por fecha del caso.
+       				</para></listitem>
+				<listitem><para>
+Corregidos conteos del módulo de tablas de Banco de Datos del CINEP.
+				</para></listitem>
+				<listitem><para>
+Configurado para adJ 5.8 con socket de PostgreSQL ubicado por defecto en 
+<filename>/var/www/var/run/postgresql</filename>, pero detecta ruta usada en 
+adJ 5.7 y anteriores (<filename>/var/www/tmp</filename>)
+       				</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
 	<varlistentry><term>Versión 1.2.1 (Mar.2016)</term>
 		<listitem>
 			<para><itemizedlist>

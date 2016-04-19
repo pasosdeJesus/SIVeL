@@ -1,5 +1,12 @@
 Apéndice A. Novedades
 
+   Versión 1.2.2 (?.2016)
+
+          + Validaciones más veloces, que presentan siempre persona que
+            inició caso y fecha del caso.
+          + Corregidos conteos del módulo de tablas de Banco de Datos del
+            CINEP.
+
    Versión 1.2.1 (Mar.2016)
 
           + Preparado para adJ 5.8: Ubicación de socket de PostgreSQL por

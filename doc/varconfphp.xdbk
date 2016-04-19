@@ -1,113 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<varlistentry><term><literal>DIR_RELATOS</literal></term>
-<listitem><para> Directorio del sitio relativo a $dirserv</para></listitem></varlistentry>
-<varlistentry><term><literal>estilo_nombres</literal></term>
-<listitem><para> Directorio del sitio relativo a $dirserv</para></listitem></varlistentry>
+<varlistentry><term><literal>PALABRA_SITIO</literal></term>
+<listitem><para> Palabra clave para algunos cifrados.</para></listitem></varlistentry>
 <varlistentry><term><literal>organizacion_responsable</literal></term>
 <listitem><para> Organización responsable, aparecerá al exportar relatos</para></listitem></varlistentry>
 <varlistentry><term><literal>PREF_RELATOS</literal></term>
 <listitem><para> Organización responsable, aparecerá al exportar relatos</para></listitem></varlistentry>
 <varlistentry><term><literal>derechos</literal></term>
 <listitem><para> Derechos de reproducción por defecto, aparecerán al exportar relatos</para></listitem></varlistentry>
-<varlistentry><term><literal>iglesias_cristianas</literal></term>
-<listitem><para> Incluir iglesias cristianas en ficha</para></listitem></varlistentry>
-<varlistentry><term><literal>consulta_publica_deshabilitada</literal></term>
-<listitem><para> Indica si debe deshabilitazarse consulta pública de consulta_web.php</para></listitem></varlistentry>
-<varlistentry><term><literal>consulta_web_fecha_max</literal></term>
-<listitem><para> Fecha máxima de caso por usar en consulta web.</para></listitem></varlistentry>
-<varlistentry><term><literal>consulta_web_fecha_min</literal></term>
-<listitem><para> Fecha mínima de caso por consultar en web</para></listitem></varlistentry>
-<varlistentry><term><literal>consulta_web_max</literal></term>
-<listitem><para> Máximo de registros por retornar en una consulta web (0 es ilimitado)</para></listitem></varlistentry>
-<varlistentry><term><literal>anio_min</literal></term>
-<listitem><para> Año mínimo que puede elegirse en fechas de la Ficha</para></listitem></varlistentry>
-<varlistentry><term><literal>actoscolectivos</literal></term>
-<listitem><para> Indica si en la pestaña Actos deben presentarse actos colectivos</para></listitem></varlistentry>
-<varlistentry><term><literal>persona_en_caso</literal></term>
-<listitem><para> Consulta adicional para determinar casos en los que aparece una</para></listitem></varlistentry>
-<varlistentry><term><literal>reporte_tabla_fila_totales</literal></term>
-<listitem><para> Consulta adicional para determinar casos en los que aparece una</para></listitem></varlistentry>
-<varlistentry><term><literal>segundos_desbloqueo</literal></term>
-<listitem><para> Consulta adicional para determinar casos en los que aparece una</para></listitem></varlistentry>
-<varlistentry><term><literal>max_intentos_fallidos</literal></term>
-<listitem><para> Consulta adicional para determinar casos en los que aparece una</para></listitem></varlistentry>
-<varlistentry><term><literal>PALABRA_SITIO</literal></term>
-<listitem><para> Palabra clave para algunos cifrados.</para></listitem></varlistentry>
-<varlistentry><term><literal>deshabilita_manejo_usuarios</literal></term>
-<listitem><para> Deshabilita operaciones con usuarios</para></listitem></varlistentry>
-<varlistentry><term><literal>deshabilita_manejo_tablasbasicas</literal></term>
-<listitem><para> Deshabilita ediciones a tablas básicas</para></listitem></varlistentry>
-<varlistentry><term><literal>DB_Debug</literal></term>
-<listitem><para> Nivel de depuración para DB_DataObject. 0 a 5.</para></listitem></varlistentry>
-<varlistentry><term><literal>no_permite_editar</literal></term>
-<listitem><para> Evita edición de casos</para></listitem></varlistentry>
-<varlistentry><term><literal>ficha_tabuladores</literal></term>
-<listitem><para> Pestañas de la Ficha  de captura</para></listitem></varlistentry>
-<varlistentry><term><literal>nueva_ficha_tabuladores</literal></term>
-<listitem><para> Solicitudes de nuevas pestañas en ficha de captura</para></listitem></varlistentry>
-<varlistentry><term><literal>m_rol</literal></term>
-<listitem><para> Roles</para></listitem></varlistentry>
-<varlistentry><term><literal>m_opcion</literal></term>
-<listitem><para> Opciones del menú principal</para></listitem></varlistentry>
-<varlistentry><term><literal>m_opcion_rol</literal></term>
-<listitem><para> Roles para los que está disponible cada opción del menú</para></listitem></varlistentry>
 <varlistentry><term><literal>ficha_color_fondo</literal></term>
 <listitem><para></para></listitem></varlistentry>
-<varlistentry><term><literal>MENS_ORTOGRAFIA</literal></term>
-<listitem><para> Mensaje por presentar si se encuentran fallas ortográficas al validar</para></listitem></varlistentry>
-<varlistentry><term><literal>REPORTA_FALLAS</literal></term>
-<listitem><para> Mensaje por presentar en la página principal para indicar donde reportar fallas.</para></listitem></varlistentry>
-<varlistentry><term><literal>ancho-tabla</literal></term>
-<listitem><para> Ancho en porcentaje de tablas en reporte general.</para></listitem></varlistentry>
-<varlistentry><term><literal>reporte_indenta_victimas</literal></term>
-<listitem><para> Determina si se indentan o no víctimas en reporte general y revista</para></listitem></varlistentry>
-<varlistentry><term><literal>reptabla_nonacimiento</literal></term>
-<listitem><para> Evitar mostrar año de nacimiento en reporte tabla</para></listitem></varlistentry>
-<varlistentry><term><literal>reptabla_noagresion</literal></term>
-<listitem><para> Evitar mostrar categorias de agresiones junto a víctima en reporte tabla</para></listitem></varlistentry>
-<varlistentry><term><literal>reptabla_separa_ubicacion</literal></term>
-<listitem><para> Separar departamento y municipio en columas aparte</para></listitem></varlistentry>
-<varlistentry><term><literal>reptabla_separa_nomap</literal></term>
-<listitem><para> Separar nombre y apellido en columas aparte</para></listitem></varlistentry>
-<varlistentry><term><literal>reptabla_tipificacion_breve</literal></term>
-<listitem><para> En reporte tabla mostrar forma resumida de agresión</para></listitem></varlistentry>
-<varlistentry><term><literal>receptor_correo</literal></term>
-<listitem><para> Dirección de correo a la cual enviar mensajes cifrados.</para></listitem></varlistentry>
-<varlistentry><term><literal>emisor_correo</literal></term>
-<listitem><para> Dirección de la cual provendrán mensajes cifrados.</para></listitem></varlistentry>
-<varlistentry><term><literal>validaciones_tipicas</literal></term>
-<listitem><para> Validaciones indice es mensaje de error y valor es consulta SQL.</para></listitem></varlistentry>
-<varlistentry><term><literal>gancho_valida_caso</literal></term>
-<listitem><para> Funciones para validar caso de manera más compleja que con</para></listitem></varlistentry>
-<varlistentry><term><literal>gancho_valida_base</literal></term>
-<listitem><para> Funciones para validar base de datos de manera más compleja que con</para></listitem></varlistentry>
-<varlistentry><term><literal>cabezote_consulta_web</literal></term>
-<listitem><para> Cabezote en consulta_web.</para></listitem></varlistentry>
-<varlistentry><term><literal>pie_consulta_web</literal></term>
-<listitem><para> Pie en consulta_web.</para></listitem></varlistentry>
-<varlistentry><term><literal>pie_consulta_web_publica</literal></term>
-<listitem><para> Pie en consulta_web publica.</para></listitem></varlistentry>
-<varlistentry><term><literal>cabezote_consulta_web_correo</literal></term>
-<listitem><para> Cabezote para enviar correos desde consulta_web.</para></listitem></varlistentry>
-<varlistentry><term><literal>pie_consulta_web_correo</literal></term>
-<listitem><para> Pie para enviar correos desde consulta_web.</para></listitem></varlistentry>
-<varlistentry><term><literal>cabezote_principal</literal></term>
-<listitem><para> Archivo HTML que se pone como cabezote (antes del menú) del menú principal</para></listitem></varlistentry>
-<varlistentry><term><literal>centro_principal</literal></term>
-<listitem><para> Archivo HTML que se pone en el centro del menú principal</para></listitem></varlistentry>
-<varlistentry><term><literal>fondo</literal></term>
-<listitem><para> Imagen de fondo</para></listitem></varlistentry>
-<varlistentry><term><literal>menu_tablas_basicas</literal></term>
-<listitem><para> Tablas básicas</para></listitem></varlistentry>
-<varlistentry><term><literal>etiqueta</literal></term>
-<listitem><para> Etiquetas que aparecen en la interfaz</para></listitem></varlistentry>
-<varlistentry><term><literal>cw_ncampos</literal></term>
-<listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
-<varlistentry><term><literal>mes</literal></term>
-<listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
-<varlistentry><term><literal>mes_corto</literal></term>
-<listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
-<varlistentry><term><literal>mreglareq</literal></term>
-<listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
-<varlistentry><term><literal>mreglavio</literal></term>
-<listitem><para> Campos que pueden elegirse en consultas</para></listitem></varlistentry>
