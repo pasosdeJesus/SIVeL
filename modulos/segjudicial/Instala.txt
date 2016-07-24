@@ -1,8 +1,8 @@
 Seguimiento Judicial
 
 1. En el archivo de configuración del sitio agregue modulos/segjudicial 
-   entre los módulos:
-		$modulos="modulos/segjudicial";
+   entre los módulos (algo como lo siguiente sin puntos supensivos):
+		$modulos="... modulos/segjudicial ...";
 
 2. Desde un navegador abra la página de actualización de la base, por
    ejemplo desde el mismo servidor con:
