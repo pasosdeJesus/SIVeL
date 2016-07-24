@@ -16,9 +16,7 @@
  */
 
 require_once "aut.php";
-require_once "confv.php";
 require_once $_SESSION['dirsitio'] . "/conf.php";
-
 // Si $GLOBALS['mapag_autentica'] es false, es consulta pública
 if (isset($GLOBALS['mapag_autentica']) && $GLOBALS['mapag_autentica']) {
     $aut_usuario = "";
@@ -26,6 +24,7 @@ if (isset($GLOBALS['mapag_autentica']) && $GLOBALS['mapag_autentica']) {
     autentica_usuario($dsn, $aut_usuario, 0);
 }
 
+require_once "confv.php";
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -168,7 +167,33 @@ while ($d->fetch()) {
                  </div>
             </div>
 
+<?php
+
+    $snru = nom_sesion();
+    if (!isset($_SESSION) || session_name() != $snru) {
+        session_name($snru);
+        session_start();
+    }
+
+    $nv = "_auth_" . $snru;
+    $opciones = array();
+    if (isset($_SESSION[$nv]['username'])) {
+?>
+
+            <div class="settings_element">
+                <div class="left">Etiqueta:</div>
+                <div class="right">
+                    <select name="etiqueta" id="etiqueta" style="width:150px;">
+                        <option value="0">Mostrar todos</option>
+                        <option value="">-----------------------</option>
+                    </select>
+                 </div>
+            </div>
+<?php
+}
+?>
         </div>
+
         <div class="clear"></div>
         <div class="submit_box">
             <input type="button" class="button" value="Filtrar casos"
