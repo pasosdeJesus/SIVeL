@@ -1,11 +1,18 @@
 Apéndice A. Novedades
 
-   Versión 1.2.2 (?.2016)
+   Versión 1.2.3 (Ago.2016)
 
-          + Validaciones más veloces, que presentan siempre persona que
-            inició caso y fecha del caso.
+          + Actualizado módulo bélicas.
+
+   Versión 1.2.2 (Abr.2016)
+
+          + Validaciones más veloces, que presentan y ordenan siempre por
+            fecha del caso.
           + Corregidos conteos del módulo de tablas de Banco de Datos del
             CINEP.
+          + Configurado para adJ 5.8 con socket de PostgreSQL ubicado por
+            defecto en /var/www/var/run/postgresql, pero detecta ruta
+            usada en adJ 5.7 y anteriores (/var/www/tmp)
 
    Versión 1.2.1 (Mar.2016)
 
