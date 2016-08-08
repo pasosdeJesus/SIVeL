@@ -6,6 +6,9 @@
 			<para><itemizedlist>
 				<listitem><para>
 				Actualizado módulo bélicas.
+				</para></listitem>
+				<listitem><para>
+			 	Administradores pueden listar otras fuentes en consulta web.
        				</para></listitem>
 			</itemizedlist></para>
 		</listitem>

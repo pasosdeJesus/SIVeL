@@ -3,6 +3,7 @@ Apéndice A. Novedades
    Versión 1.2.3 (Ago.2016)
 
           + Actualizado módulo bélicas.
+          + Administradores pueden listar otras fuentes en consulta web.
 
    Versión 1.2.2 (Abr.2016)
 

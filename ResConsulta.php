@@ -1254,7 +1254,9 @@ class ResConsulta
                     $seploc = ", ";
                 }
             } else if ($cc == 'm_fuentes') {
-                $ndp = array();
+                if (!in_array(42, $_SESSION['opciones'])) {
+                    return;
+                }
                 $dff = objeto_tabla('caso_ffrecuente');
                 if (PEAR::isError($dff)) {
                     die($dff->getMessage());
@@ -1266,6 +1268,18 @@ class ResConsulta
                     $des = $dff->getLink('id_ffrecuente');
                     $vr_html .= $seploc . strip_tags(trim($des->nombre))
                         . " " . $dff->fecha;
+                    $seploc = ", ";
+                }
+                $dfo = objeto_tabla('caso_fotra');
+                if (PEAR::isError($dfo)) {
+                    die($dff->getMessage());
+                }
+                $dfo->id_caso = $idcaso;
+                $dfo->find();
+                while ($dfo->fetch()) {
+                    $des = $dfo->getLink('id_fotra');
+                    $vr_html .= $seploc . strip_tags(trim($des->nombre))
+                        . " " . $dfo->fecha;
                     $seploc = ", ";
                 }
             } else if ($cc == 'm_victimas') {
