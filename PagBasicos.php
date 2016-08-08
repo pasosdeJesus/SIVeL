@@ -349,7 +349,7 @@ class Busqueda extends HTML_QuickForm_Action
         "  WHERE $wc";
         consulta_orden($q, $_SESSION['busca_presenta']['ordenar']);
 
-        //echo "q es $q"; die("x");
+        #echo "q es $q"; die("x");
         return array($q, $db, $wc, $t);
     }
 

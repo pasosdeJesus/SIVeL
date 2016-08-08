@@ -612,7 +612,7 @@ class PagVictimaColectiva extends PagBaseMultiple
         if ($es_vacio) {
             return true;
         }
-        print_r($valores);
+        #print_r($valores);
         if (!$this->validate() ) {
             return false;
         }

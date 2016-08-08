@@ -1301,6 +1301,10 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
         || (!is_array($llave_ntabla)
         && !is_array($id_prin) && !is_array($llave_prin))
     );
+    #echo "OJO consulta_or_muchos, w=$w, t=$t, ntabla=$ntabla,"
+    #    ."gcon=$gcon, llave_ntabla=$llave_ntabla, id_prin=$id_prin,"
+    #    ."llave_prin=$llave_prin<br>";
+
 
     if (!is_array($llave_ntabla)) {
         $llave_ntabla = array('0' => $llave_ntabla);
@@ -1317,6 +1321,7 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
     if ($d->find()>0) {
         if (strstr($t, $ntabla) === false) {
             $t .= ", " . $ntabla;
+            #echo "OJO 3 llave_ntabla="; print_r($llave_ntabla); echo "<br>";
             foreach ($llave_ntabla as $il => $vl) {
                 consulta_and_sinap(
                     $w, var_escapa_cadena($ntabla, $db). "." .
@@ -1326,11 +1331,12 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
                 );
             }
         }
+        #echo "OJO 3 w=$w<br>";
         $w3="";
         while ($d->fetch()) {
             $w2="";
             foreach ($ks as $llave) {
-                if (!in_array($llave, $llave_ntabla)) {
+               if (!in_array($llave, $llave_ntabla)) {
                     consulta_and(
                         $db, $w2, "$ntabla . $llave",
                         var_escapa_cadena($d->$llave, $db), '=', 'AND'
@@ -2068,6 +2074,7 @@ function valor_fb2do($valor, $rel, $campo, &$estbd)
  * Prepara una consulta que coincida con los datos de una tabla.
  *
  * @param object  &$duc    Objeto DataObject del cual se formará consulta
+ * @param string  &$t      Lista de tablas
  * @param string  $rel     Relación
  * @param string  $bas     Tabla básica
  * @param string  $crelbas Relación con tabla básica
@@ -2082,11 +2089,11 @@ function valor_fb2do($valor, $rel, $campo, &$estbd)
  *
  * @return string Consulta SQL
  */
-function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
-    $otrast = array(), $iotrast = '', $nonulos = array(), $irelot = "id",
-    $masenl = array(), $tab = null, $fignora = true
+function prepara_consulta_con_tabla(&$duc, &$t, $rel, $bas, $crelbas, 
+    $enbas, $otrast = array(), $iotrast = '', $nonulos = array(), 
+    $irelot = "id", $masenl = array(), $tab = null, $fignora = true
 ) {
-    //echo "OJO prepara_consulta_con_tabla(duc, $rel, $bas, $crelbas, "
+    //echo "OJO prepara_consulta_con_tabla(duc, $t, $rel, $bas, $crelbas, "
     // . "$enbas, $otrast,  $iotrast,  $nonulos,  $irelot, $masenl,  "
     // . "$tab) <br>";
 
@@ -2153,15 +2160,20 @@ function prepara_consulta_con_tabla(&$duc, $rel, $bas, $crelbas, $enbas,
             //echo "OJO w2=$w2,<br>";
         }
     }
+    #echo "OJO1 w2=$w2<br>"; 
     if (isset($otrast) && is_array($otrast) && $iotrast != '') {
         foreach ($otrast as $ot) {
+            #echo "OJO1.5 w2=$w2<br>"; 
+            $valv = var_escapa_cadena($duc->$irelot, $db);
+            #echo "OJO1.5 ot=$ot, t=$t, ot=$ot, iotrast=$iotrast, valv=$valv, irelot=$irelot, valv=$valv<br>"; 
             consulta_or_muchos(
                 $w2, $t, $ot,
                 'AND', $iotrast,
-                var_escapa_cadena($duc->$irelot, $db), $rel . "." . $irelot
+                $valv, $rel . "." . $irelot
             );
         }
     }
+    #echo "OJO2 w2=$w2"; die("x");
 
     if ($enbas && $bas != '' && $crelbas != '') {
         $du=& objeto_tabla($bas);
@@ -2227,9 +2239,9 @@ function prepara_consulta_gen(&$w, &$t, $idcaso, $rel, $bas, $crelbas, $enbas,
     $masenl = array()
 ) {
     assert(is_string($iotrast));
-    //echo "OJO prepara_consulta_gen(w=$w, t=$t, idcaso=$idcaso, rel=$rel, "
-    //. "bas=$bas, crelbas=$crelbas, enbas=$enbas, otrast=$otrast, "
-    //. "iotrast=$iotrast, nonulos=$nonulos, irelot=$irelot)<br>";
+    #echo "OJO prepara_consulta_gen(w=$w, t=$t, idcaso=$idcaso, rel=$rel, "
+    #. "bas=$bas, crelbas=$crelbas, enbas=$enbas, otrast=$otrast, "
+    #. "iotrast=$iotrast, nonulos=$nonulos, irelot=$irelot)<br>";
     $tab = parse_ini_file(
         $_SESSION['dirsitio'] . "/DataObjects/" .
         $GLOBALS['dbnombre'] . ".ini",
@@ -2245,7 +2257,7 @@ function prepara_consulta_gen(&$w, &$t, $idcaso, $rel, $bas, $crelbas, $enbas,
     $w3="";
     while ($duc->fetch()) {
         $w2 = prepara_consulta_con_tabla(
-            $duc, $rel, $bas, $crelbas, $enbas,
+            $duc, $t, $rel, $bas, $crelbas, $enbas,
             $otrast,  $iotrast, $nonulos,  $irelot, $masenl, $tab
         );
         //echo "<hr>".$w2;

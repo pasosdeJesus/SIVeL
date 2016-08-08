@@ -800,12 +800,12 @@ class PagVictimaIndividual extends PagBaseMultiple
         while ($duc->fetch()) {
             $dper = $duc->getLink('id_persona');
             $w4 = prepara_consulta_con_tabla(
-                $dper, 'persona', '', '', false,
+                $dper, $t, 'persona', '', '', false,
                 array(), '',
                 array(), 'id', array(), $tab
             );
             $w2 = prepara_consulta_con_tabla(
-                $duc, 'victima', '', '', false,
+                $duc, $t, 'victima', '', '', false,
                 array('antecedente_victima'), 'id_persona',
                 array('edad', 'hijos'), 'id_persona', array(), $tab
             );
@@ -826,7 +826,7 @@ class PagVictimaIndividual extends PagBaseMultiple
                     $ds->id_persona = $duc->id_persona;
                     if (@$ds->find(1) == 1) {
                         $w5 = prepara_consulta_con_tabla(
-                            $ds, $subc['tabla'], '', '', false,
+                            $ds, $t, $subc['tabla'], '', '', false,
                             array(), 'id_persona',
                             array(), 'id_persona', array(), $tab
                         );
