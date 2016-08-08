@@ -70,12 +70,11 @@ global $modulos;
 /** Módulos empleados (relativos a directorio con fuentes) */
 $modulos = "modulos/anexos modulos/etiquetas modulos/mapag";
 
+require 'sitios/pordefecto/inibdmod.php';
 
 if (file_exists($_SESSION['dirsitio'] . '/conf-local.php')) {
     include $_SESSION['dirsitio'] . '/conf-local.php';
 }
-
-require 'sitios/pordefecto/inibdmod.php';
 
 // Sobrecarga a configuración de módulos
 

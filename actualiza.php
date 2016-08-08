@@ -72,7 +72,7 @@ function regenera_esquemas()
             . "Desde la línea de comandos intente el siguiente comando y vuelva "
             . " a cargar esta página: <br><tt>";
         echo_esc(
-            "  sudo chmod a-w $dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.*"
+            "  doas chmod a-w $dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.*"
         );
         echo "</tt>";
     } else {
@@ -85,11 +85,11 @@ function regenera_esquemas()
         );
         echo "<tt>";
         echo_esc(
-            "  sudo chown www:www "
+            "  doas chown www:www "
             . "$dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.*"
         );
         echo_esc(
-            "  sudo chmod u+w "
+            "  doas chmod u+w "
             . "$dirchroot/$dirserv/$dirsitio/DataObjects/$dbnombre.*"
         );
         echo "</tt>";

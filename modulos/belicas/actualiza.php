@@ -64,58 +64,11 @@ if (!aplicado($idac)) {
 
 $idac = 'sbel-2';
 if (!aplicado($idac)) {
-
-    hace_consulta(
-        $db, "INSERT INTO opcion 
-        (id_opcion, descripcion, id_mama, nomid) 
-        VALUES ('52', 'V. Combatientes', '50', 'opcion?num=200')", false
-    );
-    hace_consulta(
-        $db, "INSERT INTO opcion 
-        VALUES ('46', 'Revista Bélicas', 40, 
-        'consulta_web?mostrar=revista&categoria=belicas&sincampos=caso_id')", 
-        false
-    );
-    hace_consulta(
-        $db, "INSERT INTO opcion VALUES ('47', 'Revista Memo Bélicas', 40, 
-        'consulta_web?mostrar=revista&categoria'
-        . '=belicas&sincampos=caso_id,m_victimas,m_presponsables,'
-        . 'm_tipificacion,m_fuentes')", 
-        false
-    );
-    hace_consulta(
-        $db, "INSERT INTO opcion VALUES ('48', 'Revista NO Bélicas', 40, 
-        'consulta_web?mostrar=revista&categoria=nobelicas&sincampos=caso_id')", 
-        false
-    );
-    hace_consulta(
-        $db, "INSERT INTO opcion VALUES ('49', 'Revista Memo NO Bélicas', 40, 
-        'consulta_web?mostrar=revista&categoria=nobelicas'
-        . '&sincampos=caso_id,m_victimas,m_presponsables,'
-        . 'm_tipificacion, m_fuentes')", 
-        false
-    );
-    hace_consulta(
-        $db, "INSERT INTO opcion (id_opcion, descripcion, id_mama, nomid) 
-        VALUES ('54', 'Colectivas con Rotulos de Rep. Cons.', '50', 
-        'opcion?num=101')", false
-    );
-
     aplicaact($act, $idac, 'Opciones de bélicas en menu');
 }
 
 $idac = 'sbel-3';
 if (!aplicado($idac)) {
-
-    hace_consulta($db, "INSERT INTO opcion_rol VALUES ('46', '1')", false);
-    hace_consulta($db, "INSERT INTO opcion_rol VALUES ('46', '2')", false);
-    hace_consulta($db, "INSERT INTO opcion_rol VALUES ('47', '1')", false);
-    hace_consulta($db, "INSERT INTO opcion_rol VALUES ('47', '2')", false);
-    hace_consulta($db, "INSERT INTO opcion_rol VALUES ('48', '1')", false);
-    hace_consulta($db, "INSERT INTO opcion_rol VALUES ('48', '2')", false);
-    hace_consulta($db, "INSERT INTO opcion_rol VALUES ('49', '1')", false);
-    hace_consulta($db, "INSERT INTO opcion_rol VALUES ('49', '2')", false);
-
     aplicaact($act, $idac, 'Roles');
 }
 

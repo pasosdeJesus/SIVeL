@@ -664,7 +664,7 @@ function localiza_conf()
             $r = $_SERVER['DOCUMENT_ROOT'] . "/sitios";
         } 
         $rs = $CHROOTDIR . $r;
-        $cmd ="cd $rs; sudo chown \$USER:\$USER .; ./nuevo.sh $pbase; ln -s $pbase "
+        $cmd ="cd $rs; doas chown \$USER:\$USER .; ./nuevo.sh $pbase; ln -s $pbase "
             . strtoupper($n);
         foreach (array($nn, 'sivel') as $pn) {
             $rp = $r . "/" . $pn . "/conf.php";
@@ -672,7 +672,7 @@ function localiza_conf()
                 echo "Existe ruta "
                     . htmlentities("$CHROOTDIR$rp", ENT_COMPAT, 'UTF-8')
                     . "<br>";
-                $cmd ="cd $rs; sudo ln -s $pn " . strtoupper($n);
+                $cmd ="cd $rs; doas ln -s $pn " . strtoupper($n);
             }
         }
         echo "Posiblemente basta que ejecute desde una terminal: <br>";

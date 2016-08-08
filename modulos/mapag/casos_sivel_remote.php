@@ -32,6 +32,7 @@ $filtro = array(
         'departamento' => var_req_escapa('departamento'),
         'prresp' => var_req_escapa('prresp'),
         'tvio' => var_req_escapa('tvio'),
+        'etiqueta' => var_req_escapa('etiqueta'),
     );
 
 // generar cadena de solicitud para sivel consulta web (responde XML)
@@ -51,7 +52,9 @@ $requestUrl .= (!empty($filtro['departamento'])) ?
 $requestUrl .= (!empty($filtro['prresp'])) ?
     "&presponsable=" . $filtro['prresp'] : "";
 $requestUrl .= (!empty($filtro['tvio'])) ?
-    "&tipo_violencia=" . $filtro['tvio'] : "";
+    "&tviolencia=" . $filtro['tvio'] : "";
+$requestUrl .= (!empty($filtro['etiqueta'])) ?
+    "&poretiqueta=" . $filtro['etiqueta'] : "";
 trigger_error("requestUrl=$requestUrl");
 if (($ca = file_get_contents($requestUrl)) === false) {
     die('No pudo leerse URL: \'' . $requestUrl . '\'');
