@@ -25,7 +25,7 @@
  *
  * @return void Modifica $ae y $t
  */
-function rotulos_cwebordenar($pOrden, $obj, &$ae, &$t)
+function rotulos_cwebordenar($pOrden, $opciones, $obj, &$ae, &$t)
 {
     $x =& $obj->createElement(
         'radio', 'ordenar', 'rotulo', 'Rótulo',

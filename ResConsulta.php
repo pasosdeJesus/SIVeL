@@ -2485,7 +2485,11 @@ class ResConsulta
             $nv = $lvic[$idv];
             
             if (substr(trim($nv), 0, 3) == "N N") {
-                $nns[substr(trim($nv), 3)] += 1;
+                if (!isset($nns[substr(trim($nv), 3)])) {
+                    $nns[substr(trim($nv), 3)] = 0;
+                } else {
+                    $nns[substr(trim($nv), 3)] += 1;
+                }
             } else {
                 if ($indenta) {
                     $r .= "&nbsp;&nbsp;&nbsp;&nbsp;";
