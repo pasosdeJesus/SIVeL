@@ -2486,7 +2486,7 @@ class ResConsulta
             
             if (substr(trim($nv), 0, 3) == "N N") {
                 if (!isset($nns[substr(trim($nv), 3)])) {
-                    $nns[substr(trim($nv), 3)] = 0;
+                    $nns[substr(trim($nv), 3)] = 1;
                 } else {
                     $nns[substr(trim($nv), 3)] += 1;
                 }
