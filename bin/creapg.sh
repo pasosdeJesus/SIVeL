@@ -101,6 +101,16 @@ eval $cmd
 cmd="createlang $socketopt plpgsql -U $dbusuario $dbnombre"
 echo $cmd
 eval $cmd
+echo "CREATE EXTENSION unaccent;" > /tmp/unaccent.sql
+if (test -f /tmp/unaccent.sql) then {
+	cmd="psql $socketopt -U $dbusuario -d $dbnombre -f /tmp/unaccent.sql"
+	echo $cmd
+	eval $cmd
+} else {
+	echo "*** No pudo crearse extension unaccent. Es posible que el usuario $dbusuario no sea superusuario y requiera ejecutar 'ALTER USER $dbusuario WITH SUPERUSER' y crear la extensión en la base $dbnombre manualmente con 'CREATE EXTENSION unaccent'."
+} fi;
+
+
 if (test -f /usr/local/share/postgresql/contrib/postgis-1.5/postgis.sql) then {
 	cmd="psql $socketopt -U $dbusuario -d $dbnombre -f /usr/local/share/postgresql/contrib/postgis-1.5/postgis.sql"
 	echo $cmd
