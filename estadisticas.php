@@ -70,7 +70,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $pFini      = var_post_escapa('fini');
         $pFfin      = var_post_escapa('ffin');
         $pTipo      = var_post_escapa('id_tviolencia');
-        $pSupra     = (int)var_post_escapa('id_supracategoria');
+        $pSupra     = var_post_escapa('id_supracategoria');
         $pSegun     = var_post_escapa('segun');
         //$pQue       = var_post_escapa('que');
         $pMuestra   = var_post_escapa('muestra');
@@ -228,7 +228,10 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         }
 
         if ($pSupra != '') {
-            consulta_and($db, $where, "categoria.id_supracategoria", $pSupra);
+            if ($pSupra[0] == $pTipo) {
+                $cs = (int)substr($pSupra,1);
+                consulta_and($db, $where, "categoria.id_supracategoria", $cs);
+            }
         }
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
@@ -539,17 +542,20 @@ class PagEstadisticasInd extends HTML_QuickForm_Page
             _('Supracategoria') . ': ', array()
         );
 
-        $ntipoviolencia = $this->idTipoViolencia();
-        if ($ntipoviolencia != null) {
-            $tipo->setValue($ntipoviolencia);
-            $options= array('' => '') + htmlentities_array(
-                $db->getAssoc(
-                    "SELECT  id, nombre FROM supracategoria " .
-                    "WHERE id_tviolencia='$ntipoviolencia' ORDER BY id"
-                )
-            );
-            $supra->loadArray($options);
+        $opb = $db->getAssoc(
+            "SELECT  tviolencia.id || supracategoria.id, supracategoria.nombre ||
+            ' (' || tviolencia.nombre || ')' FROM supracategoria 
+            JOIN tviolencia ON 
+            supracategoria.id_tviolencia=tviolencia.id 
+            WHERE supracategoria.fechadeshabilitacion IS NULL"
+        );
+        if (PEAR::isError($opb)) {
+            die($opb->getMessage());
         }
+
+        $options= array('' => '') + htmlentities_array($opb);
+        $supra->loadArray($options);
+
         $sel =& $this->addElement(
             'select', 'segun', _('Según')
         );

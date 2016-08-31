@@ -5,8 +5,14 @@
 		<listitem>
 			<para><itemizedlist>
 				<listitem><para>
+						Vuelve a operar elección de supracategoria en 
+<menuchoice><guimenu>Conteos</guimenu><guimenuitem>V. Individuales</guimenuitem></menuchoice>. 
+				</para></listitem>
+
+				<listitem><para>
 				Actualizado módulo bélicas.
 				</para></listitem>
+
 				<listitem><para>
 			 	Administradores pueden listar otras fuentes en consulta web.
        				</para></listitem>
