@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
-	<varlistentry><term>Versión 1.2.3 (Ago.2016)</term>
+	<varlistentry><term>Versión 1.2.3 (Sep.2016)</term>
 		<listitem>
 			<para><itemizedlist>
 				<listitem><para>
-						Vuelve a poderse ver categoria
-						de violencia en consulta web.
+Actualiza marco conceptual.
+				</para></listitem>
+				<listitem><para>
+Vuelve a poderse ver categoria de violencia en consulta web.
 				</para></listitem>
 
 				<listitem><para>
-						Vuelve a operar elección de supracategoria en 
+Vuelve a operar elección de supracategoria en 
 <menuchoice><guimenu>Conteos</guimenu><guimenuitem>V. Individuales</guimenuitem></menuchoice>. 
 				</para></listitem>
 

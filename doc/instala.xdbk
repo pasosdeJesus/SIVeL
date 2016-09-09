@@ -510,6 +510,12 @@ momento de este escrito), siguiendo las instrucciones de
 	</listitem>
 	<listitem>
 		<para>
+En cada sitio que convertirá asegurse de tener un usuario administrador
+que le permita completar el proceso una ve migrado a 1.2
+        	</para>
+	</listitem>	
+	<listitem>
+		<para>
 En cada sitio valide sus datos desde el menú Otros->Validar.  Examine el 
 reporte y corrija las inconsistencias en su base, puede ejecutar varias 
 veces el procedimiento de validación hasta asegurarse de tener datos 
@@ -518,13 +524,18 @@ Esto es muy importante porque para la conversión a 1.1 sólo esperamos
 que se conviertan datos correctos en datos correctos. 
 <warning><para>Los datos incorrectos o inconsistentes pueden perderse al 
 		convertirlos a la versión 1.2.</para></warning>
- </para>
+        	 </para>
 	</listitem>	
 	<listitem>
-		<para>Respalde las fuentes completas:
+		<para>
+Respalde las fuentes completas:
 <screen>
 	sudo cp -rfp /var/www/htdocs/sivel /var/www/htdocs/sivel11
 </screen>
+		</para>
+	</listitem>	
+	<listitem>
+		<para>
 Por cada sitio que vaya a migrar ejecute:
 <screen>
 	cd /var/www/htdocs/sivel/sitios/primersitio
@@ -568,7 +579,10 @@ al URL, debe ser algo de la forma:
 	Verifique que opera su sitio desde un navegador por ejemplo desde el
 	mismo servidor con https://127.0.0.1/primersitio11/
 </para>
-<para>Cuando complete este procedimiento con todos los sitios,
+	</listitem>
+	<listitem>
+		<para>
+	Cuando complete el procedimiento anterior con todos los sitios,
 	se recomienda borrar las fuentes de
 	de la versión 1.1 de su ubicación anterior.
 	Por ejemplo para eliminar un sitio:
@@ -579,7 +593,7 @@ al URL, debe ser algo de la forma:
 	O si ya migró todos los sitios puede borrar el directorio
 	completo con fuentes de SIVeL 1.1:
 	<filename>/var/www/htdocs/sivel</filename>
-</para>
+		</para>
 	</listitem>
 	<listitem>
 		<para>
