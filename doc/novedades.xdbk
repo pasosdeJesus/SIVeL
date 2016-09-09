@@ -5,6 +5,11 @@
 		<listitem>
 			<para><itemizedlist>
 				<listitem><para>
+						Vuelve a poderse ver categoria
+						de violencia en consulta web.
+				</para></listitem>
+
+				<listitem><para>
 						Vuelve a operar elección de supracategoria en 
 <menuchoice><guimenu>Conteos</guimenu><guimenuitem>V. Individuales</guimenuitem></menuchoice>. 
 				</para></listitem>

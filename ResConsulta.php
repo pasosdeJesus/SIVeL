@@ -1312,8 +1312,8 @@ class ResConsulta
                         $vrescon .= $seploc . trim($ndp_html[$k]);
                         while ($result->fetchInto($row)) {
                             $tip .= $septip
-                                . "<a href='consulta_web_cat.php?t = "
-                                .  $row[0] . "&s = ".$row[1] . "&c = "
+                                . "<a href='consulta_web_cat.php?t="
+                                .  $row[0] . "&s=".$row[1] . "&c="
                                 . $row[2] . "'>" . $row[0]
                                 . $row[2] . "</a>";
                             $vrescon .= $septip . $row[0] . $row[2];
@@ -1355,8 +1355,8 @@ class ResConsulta
                         $vrescon .= $seploc . trim($ndp[$k]);
                         while ($result->fetchInto($row)) {
                             $tip .= $septip
-                                . "<a href='consulta_web_cat.php?t = "
-                                .  $row[0] . "&s = ".$row[1] . "&c = ".$row[2]
+                                . "<a href='consulta_web_cat.php?t="
+                                .  $row[0] . "&s=".$row[1] . "&c=".$row[2]
                                 . "'>" .  $row[0] . $row[2] . "</a>";
                             $vrescon .= $septip . $row[0] . $row[2];
                             $septip = ", ";
