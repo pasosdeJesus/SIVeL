@@ -39,7 +39,7 @@ eval $cmd;
 
 if (test "$?" = "0") then {
         echo "Ahora ingrese al servidor $maquinaweb y ejecute desde el directorio del sitio:"
-        echo " $ ../../bin/pubweb.sh";
+        echo " $ ../../bin/borratodo-publica-web.sh";
         echo "Y modifique fechas en conf.php";
 	echo "Para eliminar bélicas desde $maquinaweb ejecute: ";
         echo " $ ../../bin/elim-belicas.sh";
