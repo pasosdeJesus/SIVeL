@@ -2440,7 +2440,7 @@ if (!aplicado($idac)) {
 $idac = '1.2-btc';
 if (!aplicado($idac)) {
     hace_consulta(
-        $db, "CREATE EXTENSION unaccent"
+        $db, "CREATE EXTENSION unaccent", false
     );
     hace_consulta(
         $db, "ALTER TEXT SEARCH DICTIONARY unaccent (RULES='unaccent')", false
@@ -2744,8 +2744,9 @@ if (!aplicado($idac)) {
 $idac = '1.2-fu2';
 if (!aplicado($idac)) {
     # Si hay inconsistencias en usuarios el siguiente falla
+    
     hace_consulta(
-        $db, "ALTER TABLE usuario DROP CONSTRAINT IF EXISTS usuario_pkey "
+        $db, "ALTER TABLE usuario DROP CONSTRAINT IF EXISTS usuario_pkey CASCADE"
     );
     hace_consulta(
         $db, "ALTER TABLE usuario ADD CONSTRAINT usuario_pkey

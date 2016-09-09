@@ -70,7 +70,7 @@ $f->addElement(
 );
 
 $actsincambiarclave = isset($f->_submitValues['actualizar'])
-    && $f->_submitValues['encrypted_password'] == '';
+    && $f->_submitValues['password'] == '';
 if ($actsincambiarclave || $f->validate()) {
     if (!verifica_sin_CSRF($f->_submitValues)) {
         die(_("Datos enviados no pasaron verificación CSRF"));
