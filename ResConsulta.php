@@ -751,7 +751,7 @@ class ResConsulta
     public function aHtml($retroalim = true,
         $html_enlace1=null
     ) {
-        //echo "OJO aHtml";
+        #echo "OJO aHtml";
         if ($html_enlace1 === null || strlen($html_enlace1) == 0) {
             $html_enlace1 = '<a href = "consulta_web.php">'
                 . _('Consulta Web') . '</a>, ';
@@ -1202,7 +1202,7 @@ class ResConsulta
     static function filaTabla($db, $idcaso, $campos, $conv, $sal,
         $retroalim = true, $primnom = true
     ) {
-        //echo "OJO filaTabla(db, $idcaso, campos, conv, sal, retroalim);<br>";
+        #echo "OJO filaTabla(db, $idcaso, campos, conv, sal, retroalim);<br>";
         $col = "#FFFFFF";
         $dec = objeto_tabla('caso_etiqueta');
         if (!PEAR::isError($dec)) {
@@ -1217,8 +1217,10 @@ class ResConsulta
             }
         }
         $html_renglon = "<tr>";
+        #echo "OJO campos="; print_r($campos); echo "<br>\n";
         $escon = array();
         foreach ($campos as $cc => $nc) {
+            #echo "OJO cc=$cc, nc=$nc<br>\n";
             $html_renglon .= "<td valign='top'";
             if ($cc == "caso_id") {
                 $html_renglon .= "style='background-color: " 
@@ -1255,8 +1257,9 @@ class ResConsulta
                 }
             } else if ($cc == 'm_fuentes') {
                 if (!in_array(42, $_SESSION['opciones'])) {
-                    return;
+                    break;
                 }
+                #echo "OJO 2, m_fuentes<br>\n";
                 $dff = objeto_tabla('caso_ffrecuente');
                 if (PEAR::isError($dff)) {
                     die($dff->getMessage());
@@ -1404,11 +1407,12 @@ class ResConsulta
                     $seploc = ",  ";
                 }
             } else if ($cc == 'caso_id') {
+
                 $vrpre = "<a href='captura_caso.php?modo=edita&id=" .
                 $sal[$conv[$cc]] . "'>";
                 $vr_html = strip_tags($sal[$conv[$cc]]);
                 $vrpost = "</a>";
-                //echo "OJO 1 cc=$cc,  vr = $vr <br>";
+                #echo "OJO 1 cc=$cc,  vr = $vr_html <br>";
             } else if (isset($conv[$cc]) && isset($sal[$conv[$cc]])) {
                 $vr_html = strip_tags(trim($sal[$conv[$cc]]));
             } else {
@@ -1433,10 +1437,11 @@ class ResConsulta
                     }
                 }
             }
-            //echo "OJO 1 cc=$cc,  vr = $vr <br>";
+            #echo "OJO 1 cc=$cc,  vr_html = $vr_html <br>\n";
             $escon[$cc] = $vrescon == '' ? $vr_html : $vrescon;
             $html_renglon .= $vrpre . $vr_html . $vrpost . "</td>";
         }
+        #echo "OJO 1 html_renglon=$html_renglon<br>\n";
         echo "$html_renglon\n";
         if ($retroalim) {
             echo "<td valign=top><form method=\"POST\" " .
