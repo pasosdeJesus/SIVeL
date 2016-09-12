@@ -596,6 +596,7 @@ function res_valida(&$db, $mens, $cons, $confunc = false)
             AND primerusuario.id_caso = sub.id_caso"
         );
     } else {
+        #echo "OJO res_valida, cons=$cons<br>";
         $r = hace_consulta($db, $cons);
     }
     $nr = $r->numRows();

@@ -125,6 +125,7 @@ $GLOBALS['validaciones_tipicas'] = array(
     AND caso_etiqueta.id_caso=caso.id)
     FROM caso
     WHERE id NOT IN (SELECT id_caso FROM acto)
+    AND id NOT IN (SELECT id_caso FROM caso_categoria_presponsable WHERE id_tviolencia=\'C\')
     ORDER BY 1',
 
 );
