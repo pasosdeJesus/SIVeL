@@ -1312,11 +1312,24 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
         $llave_prin = array('0' => $llave_prin);
     }
 
+    #echo "<br>OJO 2llave_ntabla<br>"; print_r($llave_ntabla);
+    #echo "<br>OJO 2 id_prin<br>"; print_r($id_prin);
+    #echo "<br>OJO 2 llave_prin<br>"; print_r($llave_prin);
     $d=& objeto_tabla($ntabla);
     $db = $d->getDatabaseConnection();
     $ks = $d->keys();
+
+    #echo <br>OJO 2 ks=<br>"; print_r($ks);
     foreach ($llave_ntabla as $il => $vl) {
-        $d->$vl = var_escapa_cadena($id_prin[$il], $db);
+        #echo "<br>OJO 2 il=$il, vl=$vl,id_prin[il]={$id_prin[$il]}<br>";
+        $tipo = tipo_campo($ntabla, $vl);
+        #echo "<br>OJO 2 tipo=$tipo<br>";
+        if ($tipo & 1) {
+            $d->$vl = (int)$id_prin[$il];
+        } else {
+            $d->$vl = var_escapa_cadena($id_prin[$il], $db);
+        }
+        #echo "OJO 2 vl={$vl}, d->vl={$d->$vl}<br>";
     }
     if ($d->find()>0) {
         if (strstr($t, $ntabla) === false) {
@@ -1598,14 +1611,18 @@ function var_escapa_cadena($v, &$db = null, $maxlong = 1024)
         return '';
     }
 
+    #echo "<br>OJO var_escapa_cadena(v=$v,...)";
     /** Evita buffer overflows */
     $nv = substr($v, 0, $maxlong);
+    #echo "<br>OJO var_escapa_cadena, nv=$nv";
 
     /** Evita falla %00 en cadenas que vienen de HTTP */
     $p1 = str_replace("\0", ' ', $nv);
+    #echo "<br>OJO var_escapa_cadena, p1=$p1";
 
     /** Evita XSS */
     $p2 = htmlspecialchars($p1);
+    #echo "<br>OJO var_escapa_cadena, p2=$p2";
 
     /** Evita inyección de código SQL */
     if (isset($db) && $db != null && !PEAR::isError($db)) {
@@ -1613,12 +1630,14 @@ function var_escapa_cadena($v, &$db = null, $maxlong = 1024)
             debug_print_backtrace();
         }
         $p3 = $db->escapeSimple($p2);
+        #echo "<br>OJO var_escapa_cadena, con db, p3=$p3";
     } else {
         // Tomado de librería de Pear DB/pgsql.php
         $p3 = (!get_magic_quotes_gpc())?str_replace(
             "'", "''",
             str_replace('\\', '\\\\', $p2)
         ) : $p2;
+        #echo "<br>OJO var_escapa_cadena, sin db, p3=$p3";
         //$p3=(!get_magic_quotes_gpc())?addslashes($p2):$p2;
     }
 
@@ -2021,13 +2040,39 @@ function convierte_valor(&$do, $campo, $tipo)
     }
 }
 
+/**
+ * Retorna tipo de un campo de una tabla.
+ *
+ * Los tipos de DataObject son:
+ *  Entero:  & 1 
+ *  Cadena: & 2
+ *  Fecha: & 6
+ *  Booleano: 18, 146
+ *
+ * @param object $rel    Tabla
+ * @param object $campo  Campo de tabla $rel
+ * @param array  &$estbd Estructura de base sacada de .ini.  Si es null esta
+ *                        función la llena
+ *
+ * @return integer Tipo del campo $campo de la talba $rel
+ */
+function tipo_campo($rel, $campo, &$estbd) {
+    if ($estbd== null || !isset($estbd)) {
+        $estbd = parse_ini_file(
+            $_SESSION['dirsitio'] . "/DataObjects/" .
+            $GLOBALS['dbnombre'] . ".ini",
+            true
+        );
+    }
+    return $estbd[$rel][$campo];
+}
 
 /**
  * Asigna un campo de un DataObject con el valor recibido del formulario
  *
  * @param string $valor  Valor por asignar
  * @param object $rel    Tabla
- * @param object $campo  Campo de tabla $tabla
+ * @param object $campo  Campo de tabla tabla
  * @param array  &$estbd Estructura de base sacada de .ini.  Si es null esta
  *                        función la llena
  *
@@ -2036,14 +2081,7 @@ function convierte_valor(&$do, $campo, $tipo)
 function valor_fb2do($valor, $rel, $campo, &$estbd)
 {
     //echo "OJO valor_fb2do($valor, $rel, $campo, estbd)<br>";
-    if ($estbd== null || !isset($estbd)) {
-        $estbd = parse_ini_file(
-            $_SESSION['dirsitio'] . "/DataObjects/" .
-            $GLOBALS['dbnombre'] . ".ini",
-            true
-        );
-    }
-    $tipo = $estbd[$rel][$campo];
+    $tipo = tipo_campo($rel, $campo, $estbd);
     //echo "OJO valor_fb2do, tipo=$tipo";
     if ($tipo & 1) {
         if (isset($valor)) {

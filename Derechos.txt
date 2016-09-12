@@ -9,7 +9,8 @@
    En Internet puede consultar la versión más reciente de esta
    documentación en http://sivel.sf.net/1.2/, así como la documentación
    técnica o bien descargar el código fuente de SIVeL o esta documentación
-   en formato HTML comprimido.
+   en formato HTML comprimido. Agradecemos el hospedaje brindado por
+   SourceForge .
 
    Lo invitamos a consultar versiones más recientes y noticias
    relacionadas con SIVeL en http://sivel.sf.net
