@@ -5,6 +5,10 @@
 		<listitem>
 			<para><itemizedlist>
 				<listitem><para>
+Al validar no reporta casos sin actos cuando son acciones bélicas.
+				</para></listitem>
+
+				<listitem><para>
 Filtros en consulta detallada operan (por ejemplo por contexto).
 				</para></listitem>
 				<listitem><para>
