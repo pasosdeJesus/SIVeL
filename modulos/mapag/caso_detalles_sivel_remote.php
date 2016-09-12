@@ -54,7 +54,12 @@ if (!empty($id_caso) && $id_caso != 0) {
     $presp = array();
     foreach ($xmlSivel->relato->grupo as $grupo) {
         if (!empty($grupo->nombre_grupo)) {
-            $presp[(string)$grupo->id_grupo] = (string)$grupo->nombre_grupo;
+            $idg = (int)$grupo->id_grupo;
+            foreach($xmlSivel->relato->acto as $acto) {
+                if ((int)$acto->id_presunto_grupo_responsable == $idg) {
+                    $presp[(string)$grupo->id_grupo] = (string)$grupo->nombre_grupo;
+                }
+            }
         }
     }
     $victimas = array();

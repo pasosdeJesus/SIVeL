@@ -5,9 +5,14 @@
 		<listitem>
 			<para><itemizedlist>
 				<listitem><para>
+Arreglos en mapa para que (1) opere tras cambios en librerías de Google.  
+Ahora se requiere instalación local de librería, ver 
+modulos/mapag/Instala.txt; (2) presente bien presuntos responsables en 
+resumen.
+				</para></listitem>
+				<listitem><para>
 Al validar no reporta casos sin actos cuando son acciones bélicas.
 				</para></listitem>
-
 				<listitem><para>
 Filtros en consulta detallada operan (por ejemplo por contexto).
 				</para></listitem>
