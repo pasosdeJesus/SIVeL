@@ -1322,7 +1322,8 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
     #echo <br>OJO 2 ks=<br>"; print_r($ks);
     foreach ($llave_ntabla as $il => $vl) {
         #echo "<br>OJO 2 il=$il, vl=$vl,id_prin[il]={$id_prin[$il]}<br>";
-        $tipo = tipo_campo($ntabla, $vl);
+        $estbd = null;
+        $tipo = tipo_campo($ntabla, $vl, $estbd);
         #echo "<br>OJO 2 tipo=$tipo<br>";
         if ($tipo & 1) {
             $d->$vl = (int)$id_prin[$il];
