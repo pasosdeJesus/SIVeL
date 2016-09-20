@@ -15,7 +15,7 @@
  */
 
 /**
- * Pestaña Víctima Combatiente de la ficha de captura de caso
+ * Pestaña Combatiente de la ficha de captura de caso
  */
 require_once 'PagBaseMultiple.php';
 require_once 'ResConsulta.php';
@@ -30,7 +30,7 @@ require_once 'DataObjects/Presponsable.php';
 require_once 'DataObjects/Resagresion.php';
 
 /**
- * Víctima Combatiente.
+ * Combatiente.
  * Ver documentación de funciones en clase base.
  *
  * @category SIVeL
@@ -54,7 +54,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
 
     var $clase_modelo = 'combatiente';
 
-    var $titulo = 'Víctima Combatiente';
+    var $titulo = 'Combatiente';
 
     /**
      * Pone en null variables asociadas a tablas de la pestaña.
@@ -171,7 +171,7 @@ class PagVictimaCombatiente extends PagBaseMultiple
     function PagVictimaCombatiente($nomForma)
     {
         $this->PagBaseMultiple($nomForma);
-        $this->titulo  = _('Víctima Combatiente');
+        $this->titulo  = _('Combatiente');
         $this->tcorto  = _('Comb.');
         if (isset($GLOBALS['etiqueta']['Victima Combatiente'])) {
             $this->titulo = $GLOBALS['etiqueta']['Victima Combatiente'];
