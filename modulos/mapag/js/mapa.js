@@ -14,7 +14,7 @@ var map = null;
 var mc = null;
 var markersClusterer = [];
 var bounds;
-var mcOptions = {gridSize: 40, maxZoom: 10}; // conf. de MarkerClusterer
+var mcOptions = {gridSize: 40, maxZoom: 10, imagePath: 'modulos/mapag/vendor/js-marker-clusterer/images/m'}; // conf. de MarkerClusterer
 
 function showLoader() {
 	$('#loader').show();

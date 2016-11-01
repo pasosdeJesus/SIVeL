@@ -37,7 +37,14 @@ $requestUrl = $host . "/consulta_web.php?_qf_consultaWeb_consulta=Consulta"
 // generar documento JSON
 if (!empty($id_caso) && $id_caso != 0) {
     // carga datos del archivo XML de Sivel
-    $ca = file_get_contents($requestUrl);
+
+    $co =array(
+        "ssl"=>array(
+            "verify_peer"=>false,
+            "verify_peer_name"=>false,
+        ),
+    );  
+    $ca = file_get_contents($requestUrl, false, stream_context_create($co));
     $xmlSivel = simplexml_load_string($ca);
     if ($xmlSivel === false) {
         errores_xml($ca);
@@ -47,7 +54,12 @@ if (!empty($id_caso) && $id_caso != 0) {
     $presp = array();
     foreach ($xmlSivel->relato->grupo as $grupo) {
         if (!empty($grupo->nombre_grupo)) {
-            $presp[(string)$grupo->id_grupo] = (string)$grupo->nombre_grupo;
+            $idg = (int)$grupo->id_grupo;
+            foreach($xmlSivel->relato->acto as $acto) {
+                if ((int)$acto->id_presunto_grupo_responsable == $idg) {
+                    $presp[(string)$grupo->id_grupo] = (string)$grupo->nombre_grupo;
+                }
+            }
         }
     }
     $victimas = array();

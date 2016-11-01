@@ -36,18 +36,18 @@ require_once "confv.php";
     <link rel="stylesheet" media="screen" type="text/css"
         href="modulos/mapag/css/mapa.css" />
     <link rel="stylesheet" media="screen" type="text/css"
-        href="https://raw.github.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/datepicker.css" />
+        href="https://cdn.rawgit.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/datepicker.css" />
     <script type="text/javascript"
         src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js">
     </script>
     <script type="text/javascript"
-        src="https://raw.github.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/datepicker.js">
+        src="https://cdn.rawgit.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/datepicker.js">
     </script>
     <script type="text/javascript"
-        src="https://raw.github.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/eye.js">
+        src="https://cdn.rawgit.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/eye.js">
     </script>
     <script type="text/javascript"
-        src="https://raw.github.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/utils.js">
+        src="https://cdn.rawgit.com/pasosdeJesus/js/master/www.eyecon.ro_Stefan_Petre/utils.js">
     </script>
     <!-- script type = "text/javascript"
         src = "modulos/mapag/js/datepicker_mapa.js"></script -->
@@ -55,13 +55,13 @@ require_once "confv.php";
     <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVATZz-dHXuzNkySAo1O2VQ30ixzhwf7w&sensor=false&language=es&region=CO">
     <script type="text/javascript"
-        src="https://gmaps-utility-library.googlecode.com/svn/trunk/markerclusterer/1.0/src/markerclusterer.js">
+        src="modulos/mapag/vendor/js-marker-clusterer/src/markerclusterer.js">
     </script>
     <script type="text/javascript"
-        src="https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclusterer/1.0/src/markerclusterer.js">
+        src="modulos/mapag/vendor/js-marker-clusterer/src/markerclusterer.js">
     </script>
     <script type="text/javascript"
-        src="https://google-maps-utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble.js">
+        src="modulos/mapag/vendor/js-info-bubble/src/infobubble.js">
     </script>
     <script type="text/javascript" src="modulos/mapag/js/mapa.js"></script>
     <script type="text/javascript"

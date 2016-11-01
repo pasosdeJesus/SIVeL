@@ -4,12 +4,13 @@
    está registrada como obra de dominio público ante la oficina de
    Derechos de Autor de Colombia desde el 10 de Mayo de 2011. Oramos para
    que no sea utilizado por estructuras armadas. Esta documentación fue
-   actualizada por última vez en 08/08/2016
+   actualizada por última vez en 09/09/2016
 
    En Internet puede consultar la versión más reciente de esta
    documentación en http://sivel.sf.net/1.2/, así como la documentación
    técnica o bien descargar el código fuente de SIVeL o esta documentación
-   en formato HTML comprimido.
+   en formato HTML comprimido. Agradecemos el hospedaje brindado por
+   SourceForge .
 
    Lo invitamos a consultar versiones más recientes y noticias
    relacionadas con SIVeL en http://sivel.sf.net

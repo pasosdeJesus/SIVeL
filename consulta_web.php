@@ -420,7 +420,7 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
         }
         consulta_orden($q, $pOrdenar);
 
-        //echo "OJO q es $q"; die("x");
+        #echo "OJO q es $q"; die("x");
 
         foreach ($GLOBALS['ficha_tabuladores'] as $tab) {
             list($n, $c, ) = $tab;

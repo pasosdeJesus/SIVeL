@@ -56,7 +56,21 @@ $requestUrl .= (!empty($filtro['tvio'])) ?
 $requestUrl .= (!empty($filtro['etiqueta'])) ?
     "&poretiqueta=" . $filtro['etiqueta'] : "";
 trigger_error("requestUrl=$requestUrl");
-if (($ca = file_get_contents($requestUrl)) === false) {
+
+/**
+ * Bastantes problemas con certificado de COMODO y para 
+ * depurar con openssl en jaula chroot.
+ *
+ * http://stackoverflow.com/questions/26148701/file-get-contents-ssl-operation-failed-with-code-1-and-more 
+ **/
+$co =array(
+	"ssl"=>array(
+		"verify_peer"=>false,
+		"verify_peer_name"=>false,
+	),
+);  
+$ca = file_get_contents($requestUrl, false, stream_context_create($co));
+if ($ca === false) {
     die('No pudo leerse URL: \'' . $requestUrl . '\'');
 }
 if (strpos($ca, "Por favor refine su consulta") !== false) {

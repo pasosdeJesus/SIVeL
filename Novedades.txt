@@ -1,7 +1,11 @@
 Apéndice A. Novedades
 
-   Versión 1.2.3 (Ago.2016)
+   Versión 1.2.3 (Sep.2016)
 
+          + Actualiza marco conceptual.
+          + Vuelve a poderse ver categoria de violencia en consulta web.
+          + Vuelve a operar elección de supracategoria en Conteos->V.
+            Individuales.
           + Actualizado módulo bélicas.
           + Administradores pueden listar otras fuentes en consulta web.
 

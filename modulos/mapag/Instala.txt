@@ -14,8 +14,14 @@ Módulo Mapa con GoogleMaps por Luca Urech <lucaurech@yahoo.de>
    ejemplo desde el mismo servidor con:
 	https://127.0.0.1/actualiza.php  
 
-4. Puede ver el mapa desde el menú Reportes o con un URL de la forma
-	https://127.0.0.1/opcion.php?num=200
+4. Instale librerías requeridas por este módulo (que no son de dominio
+   publico):
+   	cd modulos/mapag/vendor
+	git clone https://github.com/googlemaps/js-info-bubble.git
+	git clone https://github.com/googlemaps/js-marker-clusterer.git
+	
+5. Puede ver el mapa desde el menú Reportes o con un URL de la forma
+	https://127.0.0.1/opcion.php?num=300
 
 Una vez en operación puede configurar algunos detalles en el archivo
 conf.php de su sitio antes de la línea donde especifíco el módulo (paso 2).

@@ -2440,7 +2440,7 @@ if (!aplicado($idac)) {
 $idac = '1.2-btc';
 if (!aplicado($idac)) {
     hace_consulta(
-        $db, "CREATE EXTENSION unaccent"
+        $db, "CREATE EXTENSION unaccent", false
     );
     hace_consulta(
         $db, "ALTER TEXT SEARCH DICTIONARY unaccent (RULES='unaccent')", false
@@ -2744,8 +2744,9 @@ if (!aplicado($idac)) {
 $idac = '1.2-fu2';
 if (!aplicado($idac)) {
     # Si hay inconsistencias en usuarios el siguiente falla
+    
     hace_consulta(
-        $db, "ALTER TABLE usuario DROP CONSTRAINT IF EXISTS usuario_pkey "
+        $db, "ALTER TABLE usuario DROP CONSTRAINT IF EXISTS usuario_pkey CASCADE"
     );
     hace_consulta(
         $db, "ALTER TABLE usuario ADD CONSTRAINT usuario_pkey
@@ -3454,7 +3455,75 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Vista de usuario que inicia caso');
 }
 
- 
+
+$idac = '1.2-ma1i';
+if (!aplicado($idac)) {
+    hace_consulta($db, "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, contadaen, tipocat, nombre) VALUES (17, '2002-07-16', '2002-07-16', 1, 'A', NULL, NULL, 'I', 'SECUESTRO');", false);
+    hace_consulta($db, "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, contadaen, tipocat, nombre) VALUES (31, '2002-07-16', '2002-07-16', 3, 'A', NULL, NULL, 'I', 'DESAPARICION POR INTOLERANCIA SOCIAL');", false);
+    hace_consulta($db, "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, contadaen, tipocat, nombre) VALUES (52, '2002-07-16', '2002-07-16', 2, 'B', NULL, NULL, 'I', 'HERIDOS');", false);
+    hace_consulta($db, "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, contadaen, tipocat, nombre) VALUES (60, '2002-07-16', '2002-07-16', 1, 'C', NULL, NULL, 'I', 'HOSTIGAMIENTO');", false);
+    hace_consulta($db, "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, contadaen, tipocat, nombre) VALUES (61, '2002-07-16', '2002-07-16', 1, 'C', NULL, NULL, 'O', 'ASALTO - TOMA');", false);
+    hace_consulta($db, "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, contadaen, tipocat, nombre) VALUES (70, '2002-07-16', '2002-07-16', 1, 'D', NULL, NULL, 'I', 'HOMICIDIO FC');", false);
+    hace_consulta($db, "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, contadaen, tipocat, nombre) VALUES (71, '2002-07-16', '2002-07-16', 1, 'D', NULL, NULL, 'I', 'HERIDO FC');", false);
+    hace_consulta($db, "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, contadaen, tipocat, nombre) VALUES (76, '2002-07-16', '2002-07-16', 1, 'D', NULL, NULL, 'I', 'DESPLAZAMIENTO FORZADO');", false);
+    hace_consulta($db, "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, contadaen, tipocat, nombre) VALUES (81, '2002-07-16', '2002-07-16', 2, 'D', NULL, NULL, 'O', 'OLEODUCTOS');", false);
+    hace_consulta($db, "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, contadaen, tipocat, nombre) VALUES (82, '2002-07-16', '2002-07-16', 2, 'D', NULL, NULL, 'O', 'INFRAESTRUCTURA ELECTRICA Y COMUNICACIONES');", false);
+    hace_consulta($db, "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, contadaen, tipocat, nombre) VALUES (83, '2002-07-16', '2002-07-16', 2, 'D', NULL, NULL, 'O', 'INFRAESTRUCTURA VIAL');", false);
+    hace_consulta($db, "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, contadaen, tipocat, nombre) VALUES (901, '2000-08-09', '2001-07-11', 3, 'D', NULL, NULL, 'I', 'COMUNIDAD DESPLAZADA');", false);
+    hace_consulta($db, "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, contadaen, tipocat, nombre) VALUES (94, '2002-07-23', '2002-07-23', 3, 'D', NULL, NULL, 'O', 'MATERIAL BÉLICO ABANDONADO');", false);
+    hace_consulta($db, "INSERT INTO categoria (id, fechacreacion, fechadeshabilitacion, id_supracategoria, id_tviolencia, id_pconsolidado, contadaen, tipocat, nombre) VALUES (99, '2000-08-09', '2001-05-23', 3, 'D', NULL, NULL, 'I', 'DESPLAZAMIENTO FORZADO');", false);
+
+    aplicaact($act, $idac, 'Actualización marco conceptual, inserta');
+}
+
+$idac = '1.2-ma1r';
+if (!aplicado($idac)) {
+    hace_consulta($db, "UPDATE categoria SET nombre='VIOLACIÓN' WHERE id='291';");
+    hace_consulta($db, "UPDATE categoria SET nombre='EMBARAZO FORZADO' WHERE id='292';");
+    hace_consulta($db, "UPDATE categoria SET nombre='PROSTITUCIÓN FORZADA' WHERE id='293';");
+    hace_consulta($db, "UPDATE categoria SET nombre='ESTERELIZACIÓN FORZADA' WHERE id='294';");
+    hace_consulta($db, "UPDATE categoria SET nombre='ESCLAVITUD SEXUAL' WHERE id='295';");
+    hace_consulta($db, "UPDATE categoria SET nombre='ABUSO SEXUAL' WHERE id='296';");
+    hace_consulta($db, "UPDATE categoria SET nombre='ABORTO FORZADO' WHERE id='297';");
+    hace_consulta($db, "UPDATE categoria SET nombre='VIOLACIÓN' WHERE id='391';");
+    hace_consulta($db, "UPDATE categoria SET nombre=' EMBARAZO FORZADO' WHERE id='392';");
+    hace_consulta($db, "UPDATE categoria SET nombre='PROSTITUCIÓN FORZADA' WHERE id='393';");
+    hace_consulta($db, "UPDATE categoria SET nombre='ESTERELIZACIÓN FORZADA' WHERE id='394';");
+    hace_consulta($db, "UPDATE categoria SET nombre='ESCLAVITUD SEXUAL' WHERE id='395';");
+    hace_consulta($db, "UPDATE categoria SET nombre='ABUSO SEXUAL' WHERE id='396';");
+    hace_consulta($db, "UPDATE categoria SET nombre='ABORTO FORZADO' WHERE id='397';");
+    hace_consulta($db, "UPDATE categoria SET nombre='RAPTO' WHERE id='58';");
+    hace_consulta($db, "UPDATE categoria SET nombre='DESAPARICIÓN' WHERE id='79';");
+    hace_consulta($db, "UPDATE categoria SET nombre='VIOLACIÓN' WHERE id='191';");
+    hace_consulta($db, "UPDATE categoria SET nombre='EMBARAZO FORZADO' WHERE id='192';");
+    hace_consulta($db, "UPDATE categoria SET nombre='PROSTITUCIÓN FORZADA' WHERE id='193';");
+    hace_consulta($db, "UPDATE categoria SET nombre='ESTERELIZACIÓN FORZADA' WHERE id='194';");
+    hace_consulta($db, "UPDATE categoria SET nombre='ESCLAVITUD SEXUAL' WHERE id='195';");
+    hace_consulta($db, "UPDATE categoria SET nombre='ABUSO SEXUAL' WHERE id='196';");
+    hace_consulta($db, "UPDATE categoria SET nombre='ABORTO FORZADO' WHERE id='197';");
+    hace_consulta($db, "UPDATE categoria SET nombre='BLOQUEO DE VÍAS' WHERE id='66';");
+
+    aplicaact($act, $idac, 'Actualización marco conceptual, renombra');
+}
+
+$idac = '1.2-ma1p';
+if (!aplicado($idac)) {
+    hace_consulta($db, "UPDATE categoria SET id_pconsolidado='24' WHERE id='41';");
+    hace_consulta($db, "UPDATE categoria SET id_pconsolidado='23' WHERE id='48';");
+    hace_consulta($db, "UPDATE categoria SET id_pconsolidado='23' WHERE id='58';");
+    hace_consulta($db, "UPDATE categoria SET id_pconsolidado='22' WHERE id='78';");
+
+    aplicaact($act, $idac, 'Actualización marco conceptual, consolidado');
+}
+
+$idac = '1.2-ma1t';
+if (!aplicado($idac)) {
+    hace_consulta($db, "UPDATE categoria SET tipocat='O' WHERE id='64';");
+    hace_consulta($db, "UPDATE categoria SET tipocat='O' WHERE id='65';");
+    hace_consulta($db, "UPDATE categoria SET tipocat='O' WHERE id='910';");
+
+    aplicaact($act, $idac, 'Actualización marco conceptual, tipo');
+}
 
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
