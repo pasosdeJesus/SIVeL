@@ -1316,12 +1316,12 @@ function consulta_or_muchos(&$w, &$t, $ntabla, $gcon = "AND",
     $db = $d->getDatabaseConnection();
     $ks = $d->keys();
     foreach ($llave_ntabla as $il => $vl) {
-        $d->$vl = var_escapa_cadena($id_prin[$il], $db);
+        $vbus = var_escapa_cadena($id_prin[$il], $db);
+        $d->$vl = $vbus;
     }
     if ($d->find()>0) {
         if (strstr($t, $ntabla) === false) {
             $t .= ", " . $ntabla;
-            #echo "OJO 3 llave_ntabla="; print_r($llave_ntabla); echo "<br>";
             foreach ($llave_ntabla as $il => $vl) {
                 consulta_and_sinap(
                     $w, var_escapa_cadena($ntabla, $db). "." .
@@ -1594,10 +1594,12 @@ function caso_usuario($idcaso)
  */
 function var_escapa_cadena($v, &$db = null, $maxlong = 1024)
 {
+    if (is_integer($v)) {
+        return $v;
+    }
     if ($v == null || !is_string($v)) {
         return '';
     }
-
     /** Evita buffer overflows */
     $nv = substr($v, 0, $maxlong);
 

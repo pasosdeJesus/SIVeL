@@ -344,10 +344,6 @@ class PagEtiquetas extends PagBaseSimple
         sin_error_pear($db);
         $gr = array();
 
-        if ($form->opciones == array()) {
-            return ;
-        }
-
         $sel =& $form->createElement(
             'select',
             'critetiqueta', _('Criterio Etiqueta 1')
