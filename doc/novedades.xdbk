@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
+	<varlistentry><term>Versión 1.2.4 (Nov.2016)</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem><para>Opera con PHP 5.6 que es más estricto en chequeo de tipos
+				</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+
+
 	<varlistentry><term>Versión 1.2.3 (Ago.2016)</term>
 		<listitem>
 			<para><itemizedlist>
