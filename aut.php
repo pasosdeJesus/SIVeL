@@ -527,7 +527,7 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
         $q = "SELECT failed_attempts FROM usuario WHERE nusuario='$username'";
         $intentos = $db->getOne($q);
 	    //echo "OJO q=$q, intentos=$intentos<br>";
-        if (PEAR::isError($locked)) {
+        if (PEAR::isError($intentos)) {
             echo "<br>" . _("No pudo determinar intentos fallidos");
         }
         if ((isset($GLOBALS['max_intentos_fallidos']) 
@@ -546,8 +546,8 @@ function autentica_usuario($dsn,  &$usuario, $opcion)
             // Hacer página que recibe token y desbloquea
         }
     }
-    //$clavesha1 = sha1(var_escapa_aut($_POST['password'], $db, 32));
-    //$clavemd5 = md5(var_escapa_aut($_POST['password'], $db, 32));
+    $clavesha1 = sha1(var_escapa_aut($_POST['password'], $db, 32));
+    $clavemd5 = md5(var_escapa_aut($_POST['password'], $db, 32));
     unset($_POST['password']);
     die($accno . " (2)");
 }
