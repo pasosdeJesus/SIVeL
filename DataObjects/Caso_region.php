@@ -59,6 +59,25 @@ class DataObjects_Caso_region extends DB_DataObject_SIVeL
 
 
     /**
+     * Prepara consulta agregando objeto enlazado a este por
+     * campo field.
+     *
+     * @param object &$opts  objeto DB para completar consulta
+     * @param string &$field campo por el cual enlazar
+     *
+     * @return void
+     */
+    function prepareLinkedDataObject(&$opts, &$field)
+    {
+        switch ($field) {
+        case 'id_region':
+            $opts->whereAdd('fechadeshabilitacion IS NULL');
+            break;
+
+        }
+    }
+
+    /**
      * Prepara antes de generar formulario.
      *
      * @param object &$formbuilder Generador DataObject_FormBuilder
