@@ -21,7 +21,6 @@ require_once 'PagBaseSimple.php';
 require_once 'PagBaseMultiple.php';
 require_once 'HTML/QuickForm/Action.php';
 
-
 /**
  * Acción que responde al botón ver anexo
  *
@@ -35,6 +34,44 @@ require_once 'HTML/QuickForm/Action.php';
  */
 class VerAnexo extends HTML_QuickForm_Action
 {
+    static function descarga_anexo($id_caso, $archivo) 
+    { 
+        $inin = $id_caso . "_";
+        if (strpos($archivo, '/')  !== false) {
+            die("No puede tener el caracter /");
+        }
+        if ((substr($archivo, 0, strlen($inin))) != $inin) {
+            die("El archivo del archivo es incorrecto, " .
+                "porque no comienza con '$inin'"
+            );
+        }
+        $arch = $GLOBALS['dir_anexos'] . "/" . $archivo;
+        //echo "OJO arch=$arch<br>";
+        if (!file_exists($arch)) {
+            die("No existe el archivo especificado");
+        }
+        $archivo = substr($archivo, strlen($inin));
+        // Eliminado número de caso
+        $ps = (int)strpos($archivo, "_");
+        if ($ps < 1) {
+            die("El nombre del archivo no es estándar");
+        }
+        $archivo = substr($archivo, $ps+1);
+        header('HTTP/1.1 200 OK');
+        header('Status: 200 OK');
+        header('Accept-Ranges: bytes');
+        header('Content-Transfer-Encoding: Binary');
+        header('Content-Type: application/octet-stream');
+        header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+        //    header('Content-Disposition: inline');
+        header("Content-Disposition: attachment; filename=\"{$archivo}\"");
+        header("Content-Transfer-Encoding: binary");
+
+        readfile($arch);
+        exit(0);
+    }
+
+
     /**
      * Ejecuta acción
      *
@@ -49,39 +86,8 @@ class VerAnexo extends HTML_QuickForm_Action
         if ($page->procesa($page->_submitValues)) {
             if (isset($page->_submitValues['archivo'])) {
                 $nombre = var_escapa($page->_submitValues['archivo']);
-                $inin = $_SESSION['basicos_id'] . "_";
-                if (strpos($nombre, '/')  !== false) {
-                    die("No puede tener el caracter/");
-                }
-                if ((substr($nombre, 0, strlen($inin))) != $inin) {
-                    die("El nombre del archivo es incorrecto, " .
-                        "porque no comienza con '$inin'"
-                    );
-                }
-                $arch = $GLOBALS['dir_anexos'] . "/" . $nombre;
-                //echo "OJO arch=$arch<br>";
-                if (!file_exists($arch)) {
-                    die("No existe el archivo especificado");
-                }
-                $nombre = substr($nombre, strlen($inin));
-                // Eliminado número de caso
-                $ps = (int)strpos($nombre, "_");
-                if ($ps < 1) {
-                    die("El nombre del archivo no es estándar");
-                }
-                $nombre = substr($nombre, $ps+1);
-                header('HTTP/1.1 200 OK');
-                header('Status: 200 OK');
-                header('Accept-Ranges: bytes');
-                header('Content-Transfer-Encoding: Binary');
-                header('Content-Type: application/octet-stream');
-                header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-                //    header('Content-Disposition: inline');
-                header("Content-Disposition: attachment; filename=\"{$nombre}\"");
-                header("Content-Transfer-Encoding: binary");
-
-                readfile($arch);
-                exit(0);
+                VerAnexo::descarga_anexo(
+                    $_SESSION['basicos_id'], $nombre);
             }
         }
         $page->handle('display');

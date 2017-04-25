@@ -2403,9 +2403,23 @@ class ResConsulta
             }
         }
 
+        $ranexo = "";
         if (array_key_exists('m_fuentes', $campos)) {
-            $sep = "\n\n" . a_mayusculas($GLOBALS['etiqueta']['analista']) .
-                "(s):\n    ";
+            $sep = "\n\n" . a_mayusculas('Anexo(s)') . ":\n";
+            $danexo = objeto_tabla('anexo');
+            if (PEAR::isError($danexo)) {
+                die($danexo->getMessage());
+            }
+            $danexo->id_caso = $idcaso;
+            $danexo->find();
+            while ($danexo->fetch()) {
+                $ranexo .= $sep . "    <a href='descargaanexo.php?" .
+                    "idcaso={$danexo->id_caso}&" .
+                    "archivo={$danexo->archivo}'>{$danexo->archivo}</a>";
+                $sep ="\n";
+            }
+            $sep = "\n\n" . 
+                a_mayusculas($GLOBALS['etiqueta']['analista']) . "(s):\n    ";
             $dcasousuario = objeto_tabla('caso_usuario');
             if (PEAR::isError($dcasousuario)) {
                 die($dcasousuario->getMessage());
@@ -2420,6 +2434,7 @@ class ResConsulta
                 $r .= $m[2] . "-".$GLOBALS['mes'][(int)$m[1]] . "-".$m[0];
                 $sep = "\n    ";
             }
+
         }
 
         $r .= "\n\n";
@@ -2440,7 +2455,7 @@ class ResConsulta
             }
         }
 
-        return $r . strip_tags($rdespuesmemo);
+        return $r . $ranexo . strip_tags($rdespuesmemo);
     }
 
     /**
