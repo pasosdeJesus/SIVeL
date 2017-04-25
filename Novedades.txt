@@ -1,5 +1,11 @@
 Apéndice A. Novedades
 
+   Versión 1.2.4 (Abr.2017)
+
+          + Permite descargar anexos desde reporte general
+          + Actualiza marco conceptual.
+
+
    Versión 1.2.3 (Sep.2016)
 
           + Actualiza marco conceptual.
