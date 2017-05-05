@@ -37,8 +37,10 @@ hace_consulta($db, "DROP VIEW replicadas", false, false);
 hace_consulta(
     $db, "CREATE VIEW replicadas AS " .
     " SELECT id_presponsable, contadaen, id_persona, id_caso " .
-    " FROM acto, categoria WHERE acto.id_categoria=categoria.id " .
-    " AND categoria.contadaen IS NOT NULL ORDER BY id;"
+    " FROM acto JOIN categoria ON acto.id_categoria=categoria.id " .
+    " JOIN caso ON acto.id_caso=caso.id " .
+    " WHERE caso.fecha >= '2016-06-30' " .
+    " AND categoria.contadaen IS NOT NULL ORDER BY categoria.id, caso.id;"
 );
 $pres = " FROM replicadas WHERE (id_presponsable, contadaen, " .
     " id_persona, id_caso) NOT IN (select id_presponsable, " .
@@ -46,7 +48,7 @@ $pres = " FROM replicadas WHERE (id_presponsable, contadaen, " .
 $s = "SELECT COUNT(*) $pres";
 $ni = $db->getOne($s);
 sin_error_pear($ni);
-echo " Se insertarán " . (int)$ni . " actos<br>";
+echo " Se insertarán " . (int)$ni . " actos individuales<br>";
 hace_consulta(
     $db, "INSERT INTO acto (id_presponsable, id_categoria, " .
     " id_persona, id_caso) SELECT * $pres"
@@ -59,9 +61,11 @@ hace_consulta($db, "DROP VIEW replicadasc", false, false);
 hace_consulta(
     $db, "CREATE VIEW replicadasc AS " .
     " SELECT id_presponsable, contadaen, id_grupoper, id_caso " .
-    " FROM actocolectivo, categoria " .
-    " WHERE actocolectivo.id_categoria=categoria.id " .
-    " AND categoria.contadaen IS NOT NULL ORDER BY id;"
+    " FROM actocolectivo " .
+    " JOIN categoria ON actocolectivo.id_categoria=categoria.id " .
+    " JOIN caso ON actocolectivo.id_caso=caso.id " .
+    " WHERE caso.fecha >= '2016-06-30' " .
+    " AND categoria.contadaen IS NOT NULL ORDER BY categoria.id, caso.id;"
 );
 $pres = " FROM replicadasc " .
     " WHERE (id_presponsable, contadaen, id_grupoper, id_caso) " .
