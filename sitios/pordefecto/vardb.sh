@@ -16,6 +16,9 @@ function valconf {
 	} fi;
 	res="ImP0S1BLi"
 	for a in $dirap/conf-local.php $dirap/conf.php $dirap/../pordefecto/conf.php; do
+		if (test "$nv" = "dirsitio") then {
+			echo "OJO a=$a, nv=$nv";
+		} fi;
 		if (test "$res" = "ImP0S1BLi") then {
 			grep "\$$nv *=" $a 2> /dev/null > /dev/null
 			if (test "$?" = "0") then {

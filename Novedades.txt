@@ -1,13 +1,23 @@
 Apéndice A. Novedades
 
-   Versión 1.2.4 (Abr.2017)
+   Versión 1.2.4 (May.2017)
 
+          + Actualiza marco conceptual para adoptar más categorias y
+            nomenclatura del Derecho Internacional Humanitario
+            Consuetudinario
           + Permite descargar anexos desde reporte general
-          + Actualiza marco conceptual.
-
+          + Opera con PHP 5.6 que es más estricto en chequeo de tipos
 
    Versión 1.2.3 (Sep.2016)
 
+          + Arreglos en mapa para que (1) opere tras cambios en librerías
+            de Google. Ahora se requiere instalación local de librería,
+            ver modulos/mapag/Instala.txt; (2) presente bien presuntos
+            responsables en resumen.
+          + Al validar no reporta casos sin actos cuando son acciones
+            bélicas.
+          + Filtros en consulta detallada operan (por ejemplo por
+            contexto).
           + Actualiza marco conceptual.
           + Vuelve a poderse ver categoria de violencia en consulta web.
           + Vuelve a operar elección de supracategoria en Conteos->V.

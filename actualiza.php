@@ -3525,6 +3525,143 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, 'Actualización marco conceptual, tipo');
 }
 
+# Cambio a marco conceptual en 2017
+$idac = '1.2-mc2017';
+if (!aplicado($idac)) {
+    hace_consulta($db, "
+    BEGIN;
+    UPDATE categoria SET nombre='LESIÓN FÍSICA' WHERE id in ('13', '23', '33', '43', '53'); -- HERIDO->LESIÓN FÍSICA
+   
+    -- A 
+    UPDATE categoria SET nombre='DESAPARICIÓN FORZADA' WHERE id in ('11', '21', '302'); -- Añadida FORZADA
+
+    UPDATE categoria SET fechadeshabilitacion=NULL, fechacreacion='2017-05-05',
+    nombre='COLECTIVO LESIONADO' WHERE id='17';
+
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('231', 'COLECTIVO LESIONADO', 'A', '2', 'C', '2017-05-05');
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('331', 'COLECTIVO LESIONADO', 'A', '3', 'C', '2017-05-05');
+
+    UPDATE categoria SET nombre='DESPLAZAMIENTO FORZADO' WHERE id in ('102'); -- COLECTIVO -> FORZADO
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('27', 'DESPLAZAMIENTO FORZADO', 'A', '2', 'C', '2017-05-05');
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('34', 'DESPLAZAMIENTO FORZADO', 'A', '3', 'C', '2017-05-05');
+
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('141', 'JUDICIALIZACIÓN ARBITRARIA', 'A', '1', 'I', '2017-05-05');
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('241', 'JUDICIALIZACIÓN ARBITRARIA', 'A', '2', 'I', '2017-05-05');
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('341', 'JUDICIALIZACIÓN ARBITRARIA', 'A', '3', 'I', '2017-05-05');
+
+    UPDATE categoria SET nombre='VIOLACION' WHERE id IN  ('191', '291', '391'); -- Se quita V.S. -
+    UPDATE categoria SET nombre='EMBARAZO FORZADO' WHERE id IN ('192', '292', '392'); -- Se quita V.S. -
+    UPDATE categoria SET nombre='PROSTITUCIÓN FORZADA' WHERE id IN ('193', '293', '393'); -- Se quita V.S. -
+    UPDATE categoria SET nombre='ESTERILIZACIÓN FORZADA' WHERE id IN ('194', '294', '394'); -- Se quita V.S. -
+    UPDATE categoria SET nombre='ESCLAVITUD SEXUAL' WHERE id IN ('195', '295', '395'); -- Se quita V.S. -
+    UPDATE categoria SET nombre='ABUSO SEXUAL' WHERE id IN ('196', '296', '396'); -- Se quita V.S. -
+    UPDATE categoria SET nombre='ABORTO FORZADO' WHERE id IN ('197', '297', '397'); -- Se quita V.S. -
+    
+    UPDATE categoria SET nombre='CONFINAMIENTO COLECTIVO' WHERE id in ('104'); -- Se quita COMO REPRESALIA O CASTIGO
+ 
+    -- B 
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('402', 'COLECTIVO LESIONADO', 'B', '1', 'C', '2017-05-05');
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('502', 'COLECTIVO LESIONADO', 'B', '2', 'C', '2017-05-05');
+
+    UPDATE categoria SET nombre='RAPTO' WHERE id='58'; --Era DESAPARICIÓN
+
+
+    -- C
+    UPDATE categoria SET nombre='AMETRALLAMIENTO Y/O BOMBARDEO' WHERE id in ('65');
+    UPDATE categoria SET nombre='ATAQUE A OBJETIVO MILITAR' WHERE id in ('67'); -- era OBJETIVOS MILITARES
+    UPDATE categoria SET fechadeshabilitacion='2017-05-03' WHERE id in ('910'); -- ENFRENTAMIENTO INTERNO
+
+    --D
+    UPDATE categoria SET nombre='TOMA DE REHENES' WHERE id='74'; -- era DE REHÉN
+
+    UPDATE categoria SET fechadeshabilitacion=NULL, fechacreacion='2017-05-05',
+        nombre='DESAPARICIÓN FORZADA' WHERE id='76';
+
+    UPDATE categoria SET nombre='ESCUDO INDIVIDUAL' WHERE id in ('78');
+    UPDATE categoria SET nombre='MUERTO POR ATAQUE A BIENES CIVILES' WHERE id in ('87'); -- EN->POR
+    UPDATE categoria SET nombre='LESIÓN POR ATAQUE A BIENES CIVILES' WHERE id in ('88'); -- EN->POR, HERIDO->LESIÓN
+    UPDATE categoria SET nombre='MUERTO POR OBJETIVOS, MÉTODOS Y MEDIOS ILÍCITOS' WHERE id in ('97'); -- Añadido OBJETIVOS
+    UPDATE categoria SET nombre='LESIÓN POR OBJETIVOS, MÉTODOS Y MEDIOS ILÍCITOS' WHERE id in ('98'); -- Añadido OBJETIVOS, HERIDO -> LESIÓN
+    UPDATE categoria SET nombre='LESIÓN A PERSONA PROTEGIDA' WHERE id in ('702'); -- HERIDO INTENCIONAL -> LESIÓN A
+
+    UPDATE categoria SET nombre='HOMICIDIO INTENCIONAL DE PERSONA PROTEGIDA ' WHERE id='701'; -- Se agregó DE
+    UPDATE categoria SET nombre='CIVIL MUERTO EN ACCIÓN BÉLICA' WHERE id='703'; -- ACCIONES BÉLICAS -> ACCIÓN BÉLICA
+    UPDATE categoria SET nombre='LESIÓN A CIVILES EN ACCIÓN BÉLICA' WHERE id in ('704'); -- CIVIL HERIDO -> LESIÓN A CIVILES
+
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('705', 'COLECTIVO LESIONADO POR INFRACCIONES AL DIHC', 'D', '1', 'C', '2017-05-05'); 
+   
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('714', 'ESCLAVITUD Y TRABAJOS FORZADOS', 'D', '1', 'I', '2017-05-05'); 
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('715', 'JUDICIALIZACIÓN ARBITRARIA', 'D', '1', 'I', '2017-05-05'); 
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('716', 'NEGACIÓN DE DERECHOS A PRISIONEROS DE GUERRA', 'D', '1', 'I', '2017-05-05'); 
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('717', 'NEGACIÓN DE ATENCIÓN A PERSONAS VULNERABLES', 'D', '1', 'I', '2017-05-05'); 
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('718', 'PROFANACIÓN Y OCULTAMIENTO DE CADÁVERES', 'D', '1', 'I', '2017-05-05'); 
+
+    UPDATE categoria SET nombre='DESPLAZAMIENTO FORZADO' WHERE id ='903'; -- COLECTIVO DESPLAZADO -> DESPLAZAMIENTO FORZADO
+    UPDATE categoria SET nombre='COLECTIVO ESCUDO' WHERE id ='904'; -- ESCUDO -> COLECTIVO ESCUDO
+    UPDATE categoria SET nombre='CONFINAMIENTO COLECTIVO' WHERE id ='906'; -- COMO REPRESALIA O CASTIGO COLECTIVO -> COLECTIVO
+
+
+    UPDATE supracategoria SET 
+      nombre='OBJETIVOS, MÉTODOS Y MÉDIOS ILÍCITOS' WHERE id_tviolencia='D' AND id='2'; -- Era BIENES
+    UPDATE supracategoria SET 
+      fechadeshabilitacion='2017-05-03' WHERE id_tviolencia='D' AND id='3'; -- MÉTODOS
+    UPDATE categoria SET id_supracategoria='2' 
+      WHERE id_tviolencia='D' AND id_supracategoria='3';
+
+    UPDATE categoria SET nombre='MEDIO AMBIENTE' 
+      WHERE id ='84'; -- Se quitó INFRACCIÓN CONTRA
+    UPDATE categoria SET nombre='BIENES CULTURALES Y RELIGIOSOS' 
+      WHERE id ='85'; -- Se quitó INFRACCIÓN CONTRA
+    UPDATE categoria SET nombre='HAMBRE COMO MÉTODO DE GUERRA' 
+      WHERE id ='86'; -- Era BIENES INDISPENSABLES PARA LA SUPERV. DE LA POB.
+    UPDATE categoria SET nombre='ESTRUCTURA VIAL' 
+      WHERE id ='89'; -- Se quitó INFRACCIÓN CONTRA LA
+    UPDATE categoria SET nombre='ATAQUE A OBRAS E INST. QUE CONT. FUERZAS PELIGR.' 
+      WHERE id ='801'; -- Era ATAQUE A OBRAS / INSTALACIONES QUE CONT. FUERZAS PELGIROSAS
+    UPDATE categoria SET nombre='ATAQUE INDISCRIMINADO' WHERE id ='90'; -- Era AMETRALLAMIENTO Y/O BOMBARDEO INDISCRIMINADO
+    UPDATE categoria SET nombre='ARMAS ABSOLUTAMENTE PROHIBIDAS' WHERE id ='92'; -- Era ARMA PROHIBIDA
+    UPDATE categoria SET nombre='EMPLEO ILÍCITO DE ARMAS DE USO RESTRINGIDO' WHERE id ='93'; -- Era MINA ILÍCITA / ARMA TRAMPA
+    UPDATE categoria SET nombre='MISIÓN MÉDICA O SANITARIA' WHERE id ='707'; -- Era INFRACCIÓN CONTRA MISIÓN MÉDICA
+    UPDATE categoria SET nombre='MISIÓN RELIGIOSA' WHERE id ='708'; -- Se quitó INFRACCIÓN CONTRA
+    UPDATE categoria SET nombre='MISIÓN HUMANITARIA' WHERE id ='709'; -- Se quitó INFRACCIÓN CONTRA
+
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('710', 'MISIONES DE PAZ', 'D', '2', 'O', '2017-05-05'); 
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('711', 'MISIÓN INFORMATIVA', 'D', '2', 'O', '2017-05-05'); 
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('712', 'ZONAS HUMANITARIAS', 'D', '2', 'O', '2017-05-05'); 
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      VALUES ('713', 'CONVERSACIONES DE PAZ', 'D', '2', 'O', '2017-05-05'); 
+
+    UPDATE categoria SET nombre='DESPLAZAMIENTO FORZADO' WHERE id ='902'; -- Se quitó COLECTIVO
+
+    INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+      vaLUES ('905', 'GUERRA SIN CUARTEL', 'D', '2', 'O', '2017-05-05'); 
+
+    -- Pregunta, desplazamiento forzado es colectivo, que tal desplazamiento forzado colectivo
+    COMMIT;
+    ");
+
+    aplicaact($act, $idac, 'Actualización marco conceptual 2017');
+}
+
+
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {
