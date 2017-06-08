@@ -104,7 +104,7 @@ Renombrados archivos de comandos <literal>actweb.sh</literal>
 y <literal>pubweb.sh</literal> a <literal>exporta-web.sh</literal> 
 y <literal>borratodo-publica-web.sh</literal> respectivamente.  
 Esqueleto de programa para recuperar casos a partir de un reporte general
-<literal>recGeneral.html</literal>.
+<literal>recGeneral.php</literal>.
 				</para></listitem>
 				<listitem><para>
 Al exportar/importar casos con etiquetas se conserva la fecha de estas.
