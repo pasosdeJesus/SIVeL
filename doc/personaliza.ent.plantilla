@@ -4,6 +4,6 @@
 <!ENTITY URL-BASE "https://127.0.0.1/">
 <!ENTITY buscaexterna "<para>En SIVeL hay otra forma de buscar, se trata de la consulta externa que permite buscar prácticamente por todo criterio posible a partir del formulario de captura. Se explica en detalle en la secci&oacute;n sobre reportes.  </para>">
 <!ENTITY resultadoexterna "de una consulta externa y">
-<!ENTITY OPENBSD-VER "5.3">
-<!ENTITY ADJ-VER "5.3">
+<!ENTITY OPENBSD-VER "6.1">
+<!ENTITY ADJ-VER "6.1">
 

@@ -680,7 +680,7 @@ class ResConsulta
      * @return void
      */
     public function llenaSelCategoria(&$db, $q, &$sel, 
-        $orden = array(-1, 0, 1, 2))
+        $orden = array(-1, 0, 1, 2), $escapa = 'html')
     {
         $result = hace_consulta($db, $q);
         $row = array();
@@ -688,24 +688,25 @@ class ResConsulta
             $qtvio = "SELECT id, nomcorto "
                 .  " FROM tviolencia "
                 .  " WHERE id='" . $row[0] . "';";
-            $tvio = htmlentities_array($db->getAssoc($qtvio));
-            $scat = htmlentities_array(
-                $db->getAssoc(
-                    "SELECT id, nombre " .
-                    " FROM supracategoria " .
-                    " WHERE id_tviolencia='" . $row[0] . "' " .
-                    " AND id='" . $row[1] . "';"
-                )
+            $tvio = $db->getAssoc($qtvio);
+            $scat = $db->getAssoc(
+                "SELECT id, nombre " .
+                " FROM supracategoria " .
+                " WHERE id_tviolencia='" . $row[0] . "' " .
+                " AND id='" . $row[1] . "';"
             );
-            $cat = htmlentities_array(
-                $db->getAssoc(
-                    "SELECT id, nombre " .
-                    "FROM categoria WHERE " .
-                    "id_tviolencia='".$row[0] . "' AND " .
-                    "id_supracategoria='".$row[1] . "' AND " .
-                    "id='".$row[2] . "';"
-                )
+            $cat = $db->getAssoc(
+                "SELECT id, nombre " .
+                "FROM categoria WHERE " .
+                "id_tviolencia='".$row[0] . "' AND " .
+                "id_supracategoria='".$row[1] . "' AND " .
+                "id='".$row[2] . "';"
             );
+            if ($escapa == 'html') {
+                $tvio = htmlentities_array($tvio);
+                $scat = htmlentities_array($scat);
+                $cat = htmlentities_array($cat);
+            }
             if (isset($orden) && is_array($orden)) {
                 $sepnord = "";
                 $n = "";
@@ -3203,7 +3204,7 @@ class ResConsulta
                         " WHERE id_persona='". (int)$idp[$k] . "' " .
                         " AND id_caso='" . (int)$idcaso ."' " .
                         " AND acto.id_categoria=categoria.id "
-                    ;
+                        ;
                     $result = hace_consulta($db, $q);
                     $row = array();
                     $septip = " "; $tip = "";
@@ -3247,14 +3248,22 @@ class ResConsulta
 
             } else if ($cc == 'm_tipificacion') {
                 $ncat = array();
-                ResConsulta::llenaSelCategoria(
-                    $db,
-                    "SELECT id_tviolencia, id_supracategoria, " .
-                    "id_categoria FROM categoria_caso " .
-                    "WHERE id_caso='$idcaso' " .
+                $q = "(SELECT id_tviolencia, id_supracategoria, " .
+                    "id_categoria FROM caso_categoria_presponsable " .
+                    "WHERE id_caso='$idcaso') UNION " .
+                    "(SELECT id_tviolencia, id_supracategoria, " .
+                    "id_categoria FROM categoria, acto " .
+                    "WHERE id_caso='$idcaso' AND " .
+                    "categoria.id=acto.id_categoria) UNION " .
+                    "(SELECT id_tviolencia, id_supracategoria, " .
+                    "id_categoria FROM categoria, actocolectivo " .
+                    "WHERE id_caso='$idcaso' AND " .
+                    "categoria.id=actocolectivo.id_categoria) " .
                     "ORDER BY id_tviolencia," .
-                    "id_supracategoria, id_categoria;",
-                    $ncat, array(1, 2)
+                    "id_supracategoria, id_categoria;";
+                #echo "q=$q<br>";
+                ResConsulta::llenaSelCategoria(
+                    $db, $q, $ncat, array(1, 2), 'csv'
                 );
                 $vr = $seploc = "";
                 foreach ($ncat as $k => $nc) {
@@ -3270,6 +3279,9 @@ class ResConsulta
                 $vr = trim($sal[$conv[$cc]]);
             } else {
                 $vr = '';
+            }
+            if (strlen($vr) > 0 && $vr[0] == '=') {
+                $vrpre .= "'";
             }
             $vr = str_replace('"', '""', $vr);
             $escon[$cc] = $vrescon == '' ? $vr : $vrescon;

@@ -304,7 +304,7 @@ check "TOUCH" "" "test -x \$TOUCH" `which touch 2> /dev/null`
 # Corrección ortografica
 check "W3M" "optional" "test -x \$W3M" `which lynx 2> /dev/null` `which w3m 2> /dev/null` 
 l=`echo $W3M | sed -e "s|.*lynx.*|si|g"`
-W3M_OPT=""; 
+W3M_OPT="-no-graph"; 
 if (test "$l" = "si") then {
 	W3M_OPT="-nolist";
 } fi;

@@ -212,6 +212,8 @@ l=`echo $W3M | sed -e "s|.*lynx.*|si|g"`
 W3M_OPT="";
 if (test "$l" = "si") then {
 	W3M_OPT="-nolist";
+} else {
+	W3M_OPT="-no-graph";
 } fi;
 changeVar W3M_OPT 1;
 check "ZIP" "optional" "test -x \$ZIP" `which zip 2> /dev/null`
