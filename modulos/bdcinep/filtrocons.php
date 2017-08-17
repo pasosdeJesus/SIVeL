@@ -183,7 +183,7 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         echo_esc($tfini . " - " . $tffin);
         echo "</h2>";
 
-        echo "<h3>DERECHO A LA INTEGRIDAD</h3>";
+        echo "<h3>DERECHO A LA VIDA</h3>";
         # DERECHO A LA VIDA
         $filas = array();
         $filas[0] = array(
@@ -200,7 +200,7 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         );
         $filas[3] = array(
             "cat" => array( 0 => "701&!10", 2 => 97, 3 => 703, 4 => 87),
-            "titulo" => "Víctimas de 'Homicidio Intencional de Persona Protegida' (excepto casos de Violaciones a Derechos Humanos) o 'Muerte Causad por Empleo de Métodos y Medios Ilícitos de Guerra' o 'Muerte de Civil en Acción Bélica' o 'Muerte Causada por Ataque a Bienes Civiles'."
+            "titulo" => "Víctimas de 'Homicidio Intencional de Persona Protegida' (excepto casos de Violaciones a Derechos Humanos) o 'Muerte Causada por Empleo de Métodos y Medios Ilícitos de Guerra' o 'Muerte de Civil en Acción Bélica' o 'Muerte Causada por Ataque a Bienes Civiles'."
         );
         $filas[4] = array(
             "cat" => array( 0 => 40),
@@ -210,65 +210,47 @@ class AccionCifrasCons extends HTML_QuickForm_Action
             "cat" => array( 0 => 50),
             "titulo" => "Víctimas de 'Asesinato' por Intolerancia Social con Móviles Político-Sociales"
         );
-
-
-        $this->gen_tabla(
-            $db,
-            "", 
-            $filas, 
-            "Total víctimas que perdieron la vida",
-            $where
-
+        $this->gen_tabla($db, "EJECUCIONES EXTRAJUDICIALES, HOMICIDIOS Y ASESINATOS", 
+            $filas, "Total víctimas que perdieron la vida", $where
         ); 
 
-        echo "<h3>DERECHO A LA INTEGRIDAD</h3>";
 
-        # LESIONES FÍSICA
+        # ATENTADOS
         $filas = array();
         $filas[0] = array(
-            "cat" => array( 0 => 23, 1 => 33),
-            "titulo" => "Víctimas de 'Lesión Física' por Abuso de Autoridad e Intolerancia Social por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)"
+            "cat" => array( 0 => 26, 1 => 37),
+            "titulo" => "Victimizaciones por 'Atentado' por Abuso de Autoridad o Intolerancia Social por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
         );
         $filas[1] = array(
-            "cat" => array( 0 => "13&!702"),
-            "titulo" => "Víctimas de 'Lesión Física' por Persecución Política (Violaciones a los DH) que no representan infracciones al DIHC"
+            "cat" => array( 0 => 16),
+            "titulo" => "Victimizaciones por 'Atentado' por Persecución Política por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
         );
-
         $filas[2] = array(
-            "cat" => array( 0 => "13&702"),
-            "titulo" => "Víctimas de 'Lesión Física' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) y de 'Lesión Intencional a la Integridad Personal de Personas Protegidas' (Infracciones al Derecho Internacional Humanitario Consuetudinario)."
+            "cat" => array( 0 => 46),
+            "titulo" => "Victimizaciones por 'Atentado' por Presecución Política con Móviles Político-Sociales sin autor determinado"
         );
         $filas[3] = array(
-            "cat" => array( 0=> "702&!13", 2 => 98, 3=> 704, 4 => 88),
-            "titulo" => "Víctimas de 'Lesión Intencional a la Integridad de Persona Protegida' (excepto casos de Violación a Derechos Humanos) o 'Lesiones a la Integridad Personal de Persona Protegida por Empleo de Métodos o Medios Ilícitos de Guerra' o 'Lesiones a la Integridad Personal de Persona Protegida como Consecuencia de una Acción Bélica' o 'Lesiones a la Integridad Personal de Persona Protegida como Consecuencia de Ataques a Bienes de Cáracter Civil'"
+            "cat" => array( 0 => 57),
+            "titulo" => "Victimizaciones por 'Atentando por Intolerancia Social' con Móviles Político-Sociales sin autor determinado"
         );
-        $filas[4] = array(
-            "cat" => array( 0 => 43),
-            "titulo" => "Víctimas de 'Lesión Física' por Presecución Política con Móviles Político-Sociales sin autor determinado"
-        );
-        $filas[5] = array(
-            "cat" => array( 0 => 53),
-            "titulo" => "Víctimas de 'Lesión Física' por Intolerancia Social con Móviles Político-Sociales sin autor determinado"
-        );
-
          $this->gen_tabla(
             $db,
-            "LESIONES FÍSICAS", 
+            "ATENTADOS", 
             $filas, 
-            "Total víctimas lesionadas",
+            "Total victimizaciones por atentados",
             $where
-
         );
+
 
         # AMENAZAS
         $filas = array();
         $filas[0] = array(
             "cat" => array( 0 => 25, 1 => 35),
-            "titulo" => "Víctimas de 'Amenaza' por Abuso de Autoridad e Intolerancia Social por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
+            "titulo" => "Victimizaciones por 'Amenaza' por Abuso de Autoridad e Intolerancia Social por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
         );
         $filas[1] = array(
             "cat" => array( 0 => "15&!73"),
-            "titulo" => "Víctimas de 'Amenaza' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) que no constituyen Infracciones al Derecho Internacional Humanitario Consuetudinario."
+            "titulo" => "Victimizaciones por 'Amenaza' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) que no constituyen Infracciones al Derecho Internacional Humanitario Consuetudinario."
         );
         $filas[2] = array(
             "cat" => array( 0 => "15&73"),
@@ -276,33 +258,74 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         );
         $filas[3] = array(
             "cat" => array( 0 => "73&!15"),
-            "titulo" => "Víctimas de 'Amenaza' como Infracciones al Derecho Internacional Humanitario Consuetudinario por parte de la insurgencia o combatientes."
+            "titulo" => "Victimizaciones por 'Amenaza' como Infracciones al Derecho Internacional Humanitario Consuetudinario por parte de la insurgencia o combatientes."
         );
         $filas[4] = array(
             "cat" => array( 0 => 45),
-            "titulo" => "Víctimas de 'Amenaza' por Presecución Política con Móviles Político-Sociales sin autor determinado"
+            "titulo" => "Victimizaciones por 'Amenaza' por Presecución Política con Móviles Político-Sociales sin autor determinado"
         );
         $filas[5] = array(
             "cat" => array( 0 => 55),
-            "titulo" => "Víctimas de 'Amenaza por Intolerancia Social' con Móviles Político-Sociales sin autor determinado"
+            "titulo" => "Victimizaciones por 'Amenaza por Intolerancia Social' con Móviles Político-Sociales sin autor determinado"
         );
          $this->gen_tabla(
             $db,
             "AMENAZAS", 
             $filas, 
-            "Total víctimas de amenazas",
+            "Total victimizaciones por amenazas",
             $where
+        );
+
+
+
+        echo "<h3>DERECHO A LA INTEGRIDAD</h3>";
+
+        # LESIONES FÍSICA
+        $filas = array();
+        $filas[0] = array(
+            "cat" => array( 0 => 23, 1 => 33),
+            "titulo" => "Victimizaciones por 'Lesión Física' por Abuso de Autoridad e Intolerancia Social por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)"
+        );
+        $filas[1] = array(
+            "cat" => array( 0 => "13&!702"),
+            "titulo" => "Victimizaciones por 'Lesión Física' por Persecución Política (Violaciones a los DH) que no representan infracciones al DIHC"
+        );
+
+        $filas[2] = array(
+            "cat" => array( 0 => "13&702"),
+            "titulo" => "Victimizaciones por 'Lesión Física' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) y de 'Lesión Intencional a la Integridad Personal de Personas Protegidas' (Infracciones al Derecho Internacional Humanitario Consuetudinario)."
+        );
+        $filas[3] = array(
+            "cat" => array( 0=> "702&!13", 2 => 98, 3=> 704, 4 => 88),
+            "titulo" => "Victimizaciones por 'Lesión Intencional a la Integridad de Persona Protegida' (excepto casos de Violación a Derechos Humanos) o 'Lesiones a la Integridad Personal de Persona Protegida por Empleo de Métodos o Medios Ilícitos de Guerra' o 'Lesiones a la Integridad Personal de Persona Protegida como Consecuencia de una Acción Bélica' o 'Lesiones a la Integridad Personal de Persona Protegida como Consecuencia de Ataques a Bienes de Cáracter Civil'"
+        );
+        $filas[4] = array(
+            "cat" => array( 0 => 43),
+            "titulo" => "Victimizaciones por 'Lesión Física' por Presecución Política con Móviles Político-Sociales sin autor determinado"
+        );
+        $filas[5] = array(
+            "cat" => array( 0 => 53),
+            "titulo" => "Victimizaciones por 'Lesión Física' por Intolerancia Social con Móviles Político-Sociales sin autor determinado"
+        );
+
+         $this->gen_tabla(
+            $db,
+            "LESIONES FÍSICAS", 
+            $filas, 
+            "Total victimizaciones por lesión física",
+            $where
+
         );
 
         # TORTURA
         $filas = array();
         $filas[0] = array(
             "cat" => array( 0 => 22, 1 => 36),
-            "titulo" => "Víctimas de 'Tortura' por Abuso de Autoridad e Intolerancia Social por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
+            "titulo" => "Victimizaciones por 'Tortura' por Abuso de Autoridad e Intolerancia Social por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
         );
         $filas[1] = array(
             "cat" => array( 0 => "12&!72"),
-            "titulo" => "Víctimas de 'Tortura' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) que no constituye Infracción al Derecho Internacional Humanitario Consuetudinario."
+            "titulo" => "Victimizaciones por 'Tortura' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) que no constituye Infracción al Derecho Internacional Humanitario Consuetudinario."
         );
         $filas[2] = array(
             "cat" => array( 0 => "12&72"),
@@ -311,47 +334,21 @@ class AccionCifrasCons extends HTML_QuickForm_Action
 
         $filas[3] = array(
             "cat" => array( 0 => "72&!12"),
-            "titulo" => "Víctimas de 'Tortura y Tratos Crueles e Inhumanos, Atentados contra la Dignidad Personal, Tratos Humillantes y Degradantes y Castigos Corporales, como Instrumentos de Guerra' como Infracciones al Derecho Internacional Humanitario Consuetudinario por parte de la insurgencia o combatientes."
+            "titulo" => "Victimizaciones por 'Tortura y Tratos Crueles e Inhumanos, Atentados contra la Dignidad Personal, Tratos Humillantes y Degradantes y Castigos Corporales, como Instrumentos de Guerra' como Infracciones al Derecho Internacional Humanitario Consuetudinario por parte de la insurgencia o combatientes."
         );
         $filas[4] = array(
             "cat" => array( 0 => 47),
-            "titulo" => "Víctimas de 'Tortura' por Presecución Política con Móviles Político-Sociales sin autor determinado"
+            "titulo" => "Victimizaciones por 'Tortura' por Presecución Política con Móviles Político-Sociales sin autor determinado"
         );
         $filas[5] = array(
             "cat" => array( 0 => 56),
-            "titulo" => "Víctimas de 'Tortura por Intolerancia Social' con Móviles Político-Sociales sin autor determinado"
+            "titulo" => "Victimizaciones por 'Tortura por Intolerancia Social' con Móviles Político-Sociales sin autor determinado"
         );
          $this->gen_tabla(
             $db,
             "TORTURA", 
             $filas, 
-            "Total víctimas de tortura",
-            $where
-        );
-
-        # ATENTADOS
-        $filas = array();
-        $filas[0] = array(
-            "cat" => array( 0 => 26, 1 => 37),
-            "titulo" => "Víctimas de 'Atentado' por Abuso de Autoridad o Intolerancia Social por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
-        );
-        $filas[1] = array(
-            "cat" => array( 0 => 16),
-            "titulo" => "Víctimas de 'Atentado' por Persecución Política por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
-        );
-        $filas[2] = array(
-            "cat" => array( 0 => 46),
-            "titulo" => "Víctimas de 'Atentado' por Presecución Política con Móviles Político-Sociales sin autor determinado"
-        );
-        $filas[3] = array(
-            "cat" => array( 0 => 57),
-            "titulo" => "Víctimas de 'Atentando por Intolerancia Social' con Móviles Político-Sociales sin autor determinado"
-        );
-         $this->gen_tabla(
-            $db,
-            "ATENTADOS", 
-            $filas, 
-            "Total víctimas de atentados",
+            "Total victimizaciones por tortura",
             $where
         );
 
@@ -359,74 +356,93 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         $filas = array();
         $filas[0] = array(
             "cat" => array( 0 => 29, 1 => 39),
-            "titulo" => "Víctimas de 'Violencia Sexual' por móvil de Abuso de Autoridad o Intolerancia Social, perpetrada por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
+            "titulo" => "Victimizaciones por 'Violencia Sexual' por móvil de Abuso de Autoridad o Intolerancia Social, perpetrada por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
         );
         $filas[1] = array(
             "cat" => array( 0 => "19&!77"),
-            "titulo" => "Víctimas de 'Violencia Sexual' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) que no representan infracciones al Derecho Internacional Humanitario Consuetudinario."
+            "titulo" => "Victimizaciones por 'Violencia Sexual' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) que no representan infracciones al Derecho Internacional Humanitario Consuetudinario."
         );
         $filas[2] = array(
             "cat" => array( 0 => "19&77"),
-            "titulo" => "Víctimas de 'Violencia Sexual' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) y que constituyen al mismo tiempo infracciones al Derecho Internacional Humanitario Consuetudinario."
+            "titulo" => "Victimizaciones por 'Violencia Sexual' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) y que constituyen al mismo tiempo infracciones al Derecho Internacional Humanitario Consuetudinario."
         );
         $filas[3] = array(
             "cat" => array( 0 => "77&!19"),
-            "titulo" => "Víctimas de 'Violencia Sexual' que constituyen infracciones al Derecho Internacional Humanitario Consuetudinario por parte de la insurgencia o combatientes."
+            "titulo" => "Victimizaciones por 'Violencia Sexual' que constituyen infracciones al Derecho Internacional Humanitario Consuetudinario por parte de la insurgencia o combatientes."
         );
         $filas[4] = array(
             "cat" => array( 0 => 420),
-            "titulo" => "Víctimas de 'Violencia Sexual' por Presecución Política con Móviles Político-Sociales sin autor determinado"
+            "titulo" => "Victimizaciones por 'Violencia Sexual' por Presecución Política con Móviles Político-Sociales sin autor determinado"
         );
         $filas[5] = array(
             "cat" => array( 0 => 520),
-            "titulo" => "Víctimas de 'Violencia Sexual por Intolerancia Social' con Móviles Político-Sociales sin autor determinado"
+            "titulo" => "Victimizaciones por 'Violencia Sexual por Intolerancia Social' con Móviles Político-Sociales sin autor determinado"
         );
          $this->gen_tabla(
             $db,
             "VIOLENCIA SEXUAL", 
             $filas, 
-            "Total víctimas de violencia sexual",
+            "Total victimizaciones por violencia sexual",
             $where
         );
+
 
         echo "<h3>DERECHO A LA LIBERTAD</h3>";
         # DERECHO A LA LIBERTAD
         $filas = array();
         $filas[0] = array(
-            "cat" => array( 0 => 21, 1 => 24, 2=>241, 3=>302, 4=>301, 5=>341),
-            "titulo" => "Víctimas de 'Desaparición Forzada e Involuntaria', 'Detención Arbitraria' y 'Judicialización Arbitraria' por móvil de Abuso de Autoridad o Intolerancia Social, perpetrada por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
+            "cat" => array( 0 => 21,  1=>302),
+            "titulo" => "Victimizaciones por 'Desaparición Forzada e Involuntaria' por móvil de Abuso de Autoridad o Intolerancia Social, perpetrada por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
         );
         $filas[1] = array(
-            "cat" => array( 0 => 14, 1 => 141, 2=>101),
-            "titulo" => "Víctimas de 'Detención Arbitraria',  'Judicialización Arbitraria' y 'Deportación' por móviles de Persecución Política (Violaciones a los Derechos Humanos)."
+            "cat" => array( 0 => "11&!76"),
+            "titulo" => "Victimizaciones por 'Desaparicion Forzada e Involuntaria' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) que no representan infracciones al Derecho Internacional Humanitario Consuetudinario."
         );
         $filas[2] = array(
-            "cat" => array( 0 => "11&!76"),
-            "titulo" => "Víctimas de 'Desaparicion Forzada e Involuntaria' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) que no representan infracciones al Derecho Internacional Humanitario Consuetudinario."
+            "cat" => array( 0 => "11&76"),
+            "titulo" => "Victimizaciones por 'Desaparicion Forzada e Involuntaria' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) y que constituyen al mismo tiempo infracciones al Derecho Internacional Humanitario Consuetudinario."
         );
         $filas[3] = array(
-            "cat" => array( 0 => "11&76"),
-            "titulo" => "Víctimas de 'Desaparicion Forzada e Involuntaria' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) y que constituyen al mismo tiempo infracciones al Derecho Internacional Humanitario Consuetudinario."
-        );
-        $filas[4] = array(
             "cat" => array( 0 => "76&!11"),
-            "titulo" => "Víctimas de 'Desaparición Forzada como Instrumento de Guerra' que constituyen infracciones al Derecho Internacional Humanitario Consuetudinario pero no violación a los Derechos Humanos."
-        );
-        $filas[5] = array(
-            "cat" => array( 0 => 48, 1 => 41),
-            "titulo" => "Víctimas de 'Rapto por Móvies Politicos' y 'Secuestro perpetrado por organizaciones insurgentes'."
-        );
-        $filas[7] = array(
-            "cat" => array( 0 => 58),
-            "titulo" => "Víctimas de 'Rapto' por móviles de Intolerancia Social sin autor determinado."
+            "titulo" => "Victimizaciones por 'Desaparición Forzada como Instrumento de Guerra' que constituyen infracciones al Derecho Internacional Humanitario Consuetudinario pero no violación a los Derechos Humanos."
         );
          $this->gen_tabla(
             $db,
-            "", 
+            "DESAPARICIÓN FORZADA E INVOLUNTARIA", 
             $filas, 
-            "Total víctimas de violación del derecho a la libertad",
+            "Total victimizaciones por desparición forzada e involuntaria",
             $where
         );
+
+        $filas = array();
+        $filas[0] = array(
+            "cat" => array( 0 => 24, 1=>241, 2=>301, 3=>341),
+            "titulo" => "Victimizaciones por 'Detención Arbitraria' y 'Judicialización Arbitraria' por móvil de Abuso de Autoridad o Intolerancia Social, perpetrada por agentes directos o indirectos del Estado (Violaciones a los Derechos Humanos)."
+        );
+        $filas[1] = array(
+            "cat" => array( 0 => 14, 1 => 141, 2=>101),
+            "titulo" => "Victimizaciones por 'Detención Arbitraria',  'Judicialización Arbitraria' y 'Deportación' por móviles de Persecución Política (Violaciones a los Derechos Humanos)."
+        );
+        $filas[2] = array(
+            "cat" => array( 0 => 48),
+            "titulo" => "Victimizaciones por 'Rapto por Móvies Politicos' y 'Secuestro perpetrado por organizaciones insurgentes'."
+        );
+        $filas[3] = array(
+            "cat" => array( 0 => 41),
+            "titulo" => "Victimizaciones por 'Secuestro perpetrado por organizaciones insurgentes'."
+        );
+        $filas[4] = array(
+            "cat" => array( 0 => 58),
+            "titulo" => "Victimizaciones por 'Rapto' por móviles de Intolerancia Social sin autor determinado."
+        );
+         $this->gen_tabla(
+            $db,
+            "OTRAS VIOLACIONES AL DERECHO A LA LIBERTAD", 
+            $filas, 
+            "Total victimizaciones de otras violaciones al derecho a la libertad",
+            $where
+        );
+
 
 
         pie_envia();
