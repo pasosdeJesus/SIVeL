@@ -3662,6 +3662,97 @@ if (!aplicado($idac)) {
 }
 
 
+$idac = '1.2-cons17';
+if (!aplicado($idac)) {
+    hace_consulta($db, "
+      BEGIN;
+        UPDATE pconsolidado SET rotulo='MUERTOS-DH', tipoviolencia='DH', clasificacion='VIDA' WHERE id='1';
+        UPDATE pconsolidado SET rotulo='MUERTOS-DIHC', tipoviolencia='DIHC', clasificacion='VIDA' WHERE id='2';
+        UPDATE pconsolidado SET rotulo='MUERTOS-VPS', tipoviolencia='VPS', clasificacion='VIDA' WHERE id='3';
+        UPDATE pconsolidado SET rotulo='DESAPARICIÓN-DH', tipoviolencia='DH', clasificacion='LIBERTAD' WHERE id='4';
+        UPDATE pconsolidado SET rotulo='DESAPARICIÓN-DIHC', tipoviolencia='DIHC', clasificacion='LIBERTAD' WHERE id='5';
+        UPDATE pconsolidado SET rotulo='TORTURA-DH', tipoviolencia='DH', clasificacion='INTEGRIDAD' WHERE id='6';
+        UPDATE pconsolidado SET rotulo='TORTURA-VPS', tipoviolencia='VPS', clasificacion='INTEGRIDAD' WHERE id='7';
+        UPDATE pconsolidado SET rotulo='TORTURA-DIHC', tipoviolencia='DIHC', clasificacion='INTEGRIDAD' WHERE id='8';
+        UPDATE pconsolidado SET rotulo='LESIONADOS-DH', tipoviolencia='DH', clasificacion='INTEGRIDAD' WHERE id='9';
+        UPDATE pconsolidado SET rotulo='LESIONADOS-VPS', tipoviolencia='VPS', clasificacion='INTEGRIDAD' WHERE id='10';
+        UPDATE pconsolidado SET rotulo='LESIONADOS-DIHC', tipoviolencia='DIHC', clasificacion='INTEGRIDAD' WHERE id='11';
+        UPDATE pconsolidado SET rotulo='DETENCIÓN ARBITRARÌA-DH', tipoviolencia='DH', clasificacion='LIBERTAD' WHERE id='12';
+        UPDATE pconsolidado SET rotulo='AMENAZA-DH', tipoviolencia='DH', clasificacion='VIDA' WHERE id='13';
+        UPDATE pconsolidado SET rotulo='AMENAZA-VPS', tipoviolencia='VPS', clasificacion='VIDA' WHERE id='14';
+        UPDATE pconsolidado SET rotulo='AMENAZA-DIHC', tipoviolencia='DIHC', clasificacion='VIDA' WHERE id='15';
+        UPDATE pconsolidado SET rotulo='ATENTADO-DH', tipoviolencia='DH', clasificacion='VIDA' WHERE id='16'; 
+        UPDATE pconsolidado SET rotulo='ATENTADO-VPS', tipoviolencia='VPS', clasificacion='VIDA' WHERE id='17'; 
+        UPDATE pconsolidado SET rotulo='JUDICIALIZACIÓN ARBITRARIA-DH', tipoviolencia='DH', clasificacion='LIBERTAD' WHERE id='18'; 
+        UPDATE pconsolidado SET rotulo='JUDICIALIZACIÓN ARBITRARIA-DIHC', tipoviolencia='DIHC', clasificacion='LIBERTAD' WHERE id='19'; 
+        UPDATE pconsolidado SET rotulo='VIOLENCIA SEXUAL-DH', tipoviolencia='DH', clasificacion='INTEGRIDAD' WHERE id='20'; 
+        UPDATE pconsolidado SET rotulo='VIOLENCIA SEXUAL-VPS', tipoviolencia='VPS', clasificacion='INTEGRIDAD' WHERE id='21'; 
+        UPDATE pconsolidado SET rotulo='VIOLENCIA SEXUAL-DIHC', tipoviolencia='DIHC', clasificacion='INTEGRIDAD' WHERE id='22'; 
+        UPDATE pconsolidado SET rotulo='DEPORTACIÓN-DH', tipoviolencia='DH', clasificacion='LIBERTAD' WHERE id='23'; 
+        UPDATE pconsolidado SET rotulo='SECUESTRO-VPS', tipoviolencia='VPS', clasificacion='LIBERTAD' WHERE id='24'; 
+        UPDATE pconsolidado SET rotulo='RAPTO-VPS', tipoviolencia='VPS', clasificacion='LIBERTAD' WHERE id='25'; 
+      COMMIT;
+     ");
+    hace_consulta($db, "
+      BEGIN;
+        UPDATE categoria SET id_pconsolidado=NULL;
+        DELETE FROM pconsolidado WHERE id>='26' AND id<='32';
+      COMMIT;
+     ");
+    hace_consulta($db, "
+      BEGIN;
+        INSERT INTO pconsolidado ( id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion) VALUES ('26', 'TOMA DE REHENES-DIHC', 'DIHC', 'LIBERTAD', '0', '2017-08-29'); 
+        INSERT INTO pconsolidado ( id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion) VALUES ('27', 'ESCLAVITUD Y TRABAJOS FORZADOS-DIHC', 'DH', 'LIBERTAD', '0', '2017-08-29'); 
+      BEGIN;
+        INSERT INTO pconsolidado ( id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion) VALUES ('28', 'NEGACIÓN DE DERECHOS A PRISIONEROS DE GUERRA-DIHC', 'DIHC', 'VIDA', '0', '2017-08-29'); 
+        INSERT INTO pconsolidado ( id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion) VALUES ('29', 'NEGACIÓN DE ATENCIÓN A PERSONAS VULNERABLES-DIHC', 'DIHC', 'VIDA', '0', '2017-08-29'); 
+        INSERT INTO pconsolidado ( id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion) VALUES ('30', 'PROFANACIÓN Y OCULTAMIENTO DE CADAVERES-DIHC', 'DIHC', 'LIBERTAD', '0', '2017-08-29'); 
+        INSERT INTO pconsolidado ( id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion) VALUES ('31', 'RECLUTAMIENTO DE MENORES-DIHC', 'DIHC', 'LIBERTAD', '0', '2017-08-29'); 
+        INSERT INTO pconsolidado ( id, rotulo, tipoviolencia, clasificacion, peso, fechacreacion) VALUES ('32', 'ESCUDO INDIVIDUAL-DIHC', 'DIHC', 'VIDA', '0', '2017-08-29'); 
+      COMMIT;
+      ");
+
+    hace_consulta($db, "
+      BEGIN;
+        UPDATE categoria SET id_pconsolidado='1' WHERE id IN ('10', '20', '30');
+        UPDATE categoria SET id_pconsolidado='2' WHERE id IN ('87', '97', '701', '703');
+        UPDATE categoria SET id_pconsolidado='3' WHERE id IN ('40', '50');
+        UPDATE categoria SET id_pconsolidado='4' WHERE id IN ('11', '21', '302');
+        UPDATE categoria SET id_pconsolidado='5' WHERE id IN ('76');
+        UPDATE categoria SET id_pconsolidado='6' WHERE id IN ('12', '22', '36');
+        UPDATE categoria SET id_pconsolidado='7' WHERE id IN ('47', '56');
+        UPDATE categoria SET id_pconsolidado='8' WHERE id IN ('72');
+        UPDATE categoria SET id_pconsolidado='9' WHERE id IN ('13', '23', '33');
+        UPDATE categoria SET id_pconsolidado='10' WHERE id IN ('43', '53');
+        UPDATE categoria SET id_pconsolidado='11' WHERE id IN ('88', '98', '702', '704');
+        UPDATE categoria SET id_pconsolidado='12' WHERE id IN ('14', '24', '301');
+        UPDATE categoria SET id_pconsolidado='13' WHERE id IN ('15', '25', '35');
+        UPDATE categoria SET id_pconsolidado='14' WHERE id IN ('45', '55');
+        UPDATE categoria SET id_pconsolidado='15' WHERE id IN ('73');
+        UPDATE categoria SET id_pconsolidado='16' WHERE id IN ('16', '26', '37');
+        UPDATE categoria SET id_pconsolidado='17' WHERE id IN ('46', '57');
+        UPDATE categoria SET id_pconsolidado='18' WHERE id IN ('141', '241', '341');
+        UPDATE categoria SET id_pconsolidado='19' WHERE id IN ('715');
+        UPDATE categoria SET id_pconsolidado='20' WHERE id IN ('19', '29', '39');
+        UPDATE categoria SET id_pconsolidado='21' WHERE id IN ('420', '520');
+        UPDATE categoria SET id_pconsolidado='22' WHERE id IN ('77');
+        UPDATE categoria SET id_pconsolidado='23' WHERE id IN ('101');
+        UPDATE categoria SET id_pconsolidado='24' WHERE id IN ('41');
+        UPDATE categoria SET id_pconsolidado='25' WHERE id IN ('48', '58');
+        UPDATE categoria SET id_pconsolidado='26' WHERE id IN ('74');
+        UPDATE categoria SET id_pconsolidado='27' WHERE id IN ('714');
+        UPDATE categoria SET id_pconsolidado='28' WHERE id IN ('716');
+        UPDATE categoria SET id_pconsolidado='29' WHERE id IN ('717');
+        UPDATE categoria SET id_pconsolidado='30' WHERE id IN ('718');
+        UPDATE categoria SET id_pconsolidado='31' WHERE id IN ('75');
+        UPDATE categoria SET id_pconsolidado='32' WHERE id IN ('78');
+            
+        --
+      COMMIT;
+    ");
+    aplicaact($act, $idac, ' Cambio a consolidado victimas con nuevas categorias DIHC');
+}
+
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {

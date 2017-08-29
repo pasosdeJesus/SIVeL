@@ -87,7 +87,8 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 $rot = '';
             }
             if ($n<($ncol+1) || ($pResto && $n==($ncol+1))) {
-                $html_l = $sep . "<b>" . htmlentities($l, ENT_COMPAT, 'UTF-8')
+                $html_l = $sep . "<b>" . 
+                    htmlentities($this->nom_columna($l), ENT_COMPAT, 'UTF-8')
                     . " " . htmlentities($rot, ENT_COMPAT, 'UTF-8') . ":</b>";
                 echo $html_l;
                 foreach ($lc as $cc) {
@@ -131,6 +132,53 @@ class AccionConsolidado extends HTML_QuickForm_Action
                     . htmlentities($d->nombre, ENT_COMPAT, 'UTF-8') . ";";
             }
             $l++;
+        }
+    }
+
+    function nom_columna($num)
+    {
+        assert($num>0);
+        $cesp=['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+            'L', 'M', 'N', 'Ñ', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+            'W', 'X', 'Y', 'Z'];
+        $r = "";
+        $n = $num - 1;
+        do {
+            //echo "OJO3 n=$n<br>";
+            $d = $n % 27;
+            //echo "OJO3 d=$d<br>";
+            $r = $cesp[$d] . $r;
+            //echo "OJO3 r=$r<br>";
+            $n = floor($n / 27) - 1;
+            //echo "OJO3 n=$n<br>";
+        } while ($n >= 0);
+        return $r; 
+    }
+
+
+    function celdas_nom($cat, $pResto, $ncol, $pMuestra, $suma, $inisuma)
+    {
+        foreach ($cat as $icol => $cp) {
+            if (!$pResto || $icol != $ncol+1) {
+                if ($pMuestra == "tabla") {
+                    echo "<th>". $this->nom_columna($icol) . "</th>";
+                } elseif ($pMuestra == 'csv') {
+                    echo ", \"" . $this->nom_columna($icol) . "\"";
+                } elseif ($pMuestra == 'latex') {
+                    echo "& \\textbf{" . $this->nom_columna($icol) . "} ";
+                }
+            } else {
+                if ($pMuestra == "tabla") {
+                    echo "<th>Resto</th>";
+                } elseif ($pMuestra == 'csv') {
+                    echo ", \"Resto\"";
+                } elseif ($pMuestra == 'latex') {
+                    echo "& \\textbf{Resto} ";
+                }
+            }
+            if ($inisuma) {
+                $suma[$icol]=0;
+            }
         }
     }
 
@@ -266,9 +314,11 @@ class AccionConsolidado extends HTML_QuickForm_Action
         $d->find();
         while ($d->fetch()) {
             if (isset($d->id_pconsolidado) && $d->id_pconsolidado > 0) {
-                $ic = chr($d->id_pconsolidado+64);
+                $ic = $d->id_pconsolidado;
+                //echo "OJO1 ic=$ic <br>";
             } else {
-                $ic = chr($ncol+65);
+                $ic = $ncol+1;
+                //echo "OJO2 ic=$ic <br>";
             }
             $cataux[$ic] = isset($cataux[$ic]) ?
                 $cataux[$ic]+array($d->id => $d->id) :
@@ -392,18 +442,27 @@ class AccionConsolidado extends HTML_QuickForm_Action
             echo '\\textbf{' . _('Fecha') . '} & \\textbf{' . _('Ubicacion')
                 . '} & \\textbf{' . _('Víctimas') . '} ';
         }
-        foreach ($cat as $html_idcat => $cp) {
-            if ($pResto || $html_idcat != chr($ncol+65)) {
+        $this->celdas_nom($cat, $pResto, $ncol, $pMuestra, $suma, true);
+/*        foreach ($cat as $icol => $cp) {
+            if (!$pResto || $icol != $ncol+1) {
                 if ($pMuestra == "tabla") {
-                    echo "<th>". $html_idcat . "</th>";
+                    echo "<th>". $this->nom_columna($icol) . "</th>";
                 } elseif ($pMuestra == 'csv') {
-                    echo ", \"" . $html_idcat . "\"";
+                    echo ", \"" . $this->nom_columna($icol) . "\"";
                 } elseif ($pMuestra == 'latex') {
-                    echo "& \\textbf{" . $html_idcat . "} ";
+                    echo "& \\textbf{" . $this->nom_columna($icol) . "} ";
+                }
+            } else {
+                if ($pMuestra == "tabla") {
+                    echo "<th>Resto</th>";
+                } elseif ($pMuestra == 'csv') {
+                    echo ", \"Resto\"";
+                } elseif ($pMuestra == 'latex') {
+                    echo "& \\textbf{Resto} ";
                 }
             }
-            $suma[$html_idcat]=0;
-        }
+            $suma[$icol]=0;
+}*/
         if ($pMuestra == "tabla") {
             echo "<td>PR</td></tr>";
         } elseif ($pMuestra == 'csv') {
@@ -559,6 +618,21 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 }
             }
         }
+        if ($pMuestra == "tabla") {
+            echo "</tr>";
+            echo "<tr>";
+            if ($depuraConsolidado) {
+                echo "<td></td>";
+            }
+            echo "<td></td><td></td><td></td>";
+        } elseif ($pMuestra == 'csv') {
+            echo "\n";
+            echo '"", "", "", ""';
+        } elseif ($pMuestra == 'latex') {
+            echo "\\\\\n \hline\n";
+            echo ' & & ';
+        }
+        $this->celdas_nom($cat, $pResto, $ncol, $pMuestra, $suma, false);
         if ($pMuestra == "tabla") {
             echo "</tr>";
             echo "</table>";
