@@ -227,11 +227,11 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         );
         $filas[2] = array(
             "cat" => array( 0 => 46),
-            "titulo" => "Victimizaciones por 'Atentado' por Presecución Política con Móviles Político-Sociales sin autor determinado"
+            "titulo" => "Victimizaciones por 'Atentado' por Persecución Política con Móviles Político-Sociales sin autor determinado"
         );
         $filas[3] = array(
             "cat" => array( 0 => 57),
-            "titulo" => "Victimizaciones por 'Atentando por Intolerancia Social' con Móviles Político-Sociales sin autor determinado"
+            "titulo" => "Victimizaciones por 'Atentado por Intolerancia Social' con Móviles Político-Sociales sin autor determinado"
         );
          $this->gen_tabla(
             $db,
@@ -254,7 +254,7 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         );
         $filas[2] = array(
             "cat" => array( 0 => "15&73"),
-            "titulo" => "Víctimas simultaneamente de 'Amenaza' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) y de 'Amenaza' que constituyen Infracciones al Derecho Internacional Humanitario Consuetudinario por parte de agentes directos o indirectos del Estado."
+            "titulo" => "Víctimas simultáneamente de 'Amenaza' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) y de 'Amenaza' que constituyen Infracciones al Derecho Internacional Humanitario Consuetudinario por parte de agentes directos o indirectos del Estado."
         );
         $filas[3] = array(
             "cat" => array( 0 => "73&!15"),
@@ -262,7 +262,7 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         );
         $filas[4] = array(
             "cat" => array( 0 => 45),
-            "titulo" => "Victimizaciones por 'Amenaza' por Presecución Política con Móviles Político-Sociales sin autor determinado"
+            "titulo" => "Victimizaciones por 'Amenaza' por Persecución Política con Móviles Político-Sociales sin autor determinado"
         );
         $filas[5] = array(
             "cat" => array( 0 => 55),
@@ -301,7 +301,7 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         );
         $filas[4] = array(
             "cat" => array( 0 => 43),
-            "titulo" => "Victimizaciones por 'Lesión Física' por Presecución Política con Móviles Político-Sociales sin autor determinado"
+            "titulo" => "Victimizaciones por 'Lesión Física' por Persecución Política con Móviles Político-Sociales sin autor determinado"
         );
         $filas[5] = array(
             "cat" => array( 0 => 53),
@@ -329,7 +329,7 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         );
         $filas[2] = array(
             "cat" => array( 0 => "12&72"),
-            "titulo" => "Víctimas simultáneamente 'Tortura' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) y de 'Tortura y Tratos Crueles e Inhumanos, Atentados contra la Dignidad Personal, Tratos Humillantes y Degradantes y Castigos Corporales, como Instrumentos de Guerra' que constituye Infracción al Derecho Internacional Humanitario Consuetudinario por parte de agentes directos o indirectos del Estado."
+            "titulo" => "Víctimas simultáneamente de 'Tortura' por agentes directos o indirectos del Estado por móviles de Persecución Política (Violaciones a los Derechos Humanos) y de 'Tortura y Tratos Crueles e Inhumanos, Atentados contra la Dignidad Personal, Tratos Humillantes y Degradantes y Castigos Corporales, como Instrumentos de Guerra' que constituye Infracción al Derecho Internacional Humanitario Consuetudinario por parte de agentes directos o indirectos del Estado."
         );
 
         $filas[3] = array(
@@ -338,7 +338,7 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         );
         $filas[4] = array(
             "cat" => array( 0 => 47),
-            "titulo" => "Victimizaciones por 'Tortura' por Presecución Política con Móviles Político-Sociales sin autor determinado"
+            "titulo" => "Victimizaciones por 'Tortura' por Persecución Política con Móviles Político-Sociales sin autor determinado"
         );
         $filas[5] = array(
             "cat" => array( 0 => 56),
@@ -372,7 +372,7 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         );
         $filas[4] = array(
             "cat" => array( 0 => 420),
-            "titulo" => "Victimizaciones por 'Violencia Sexual' por Presecución Política con Móviles Político-Sociales sin autor determinado"
+            "titulo" => "Victimizaciones por 'Violencia Sexual' por Persecución Política con Móviles Político-Sociales sin autor determinado"
         );
         $filas[5] = array(
             "cat" => array( 0 => 520),
@@ -410,7 +410,7 @@ class AccionCifrasCons extends HTML_QuickForm_Action
             $db,
             "DESAPARICIÓN FORZADA E INVOLUNTARIA", 
             $filas, 
-            "Total victimizaciones por desparición forzada e involuntaria",
+            "Total victimizaciones por desaparición forzada e involuntaria",
             $where
         );
 
@@ -433,7 +433,7 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         );
         $filas[4] = array(
             "cat" => array( 0 => 58),
-            "titulo" => "Victimizaciones por 'Rapto' por móviles de Intolerancia Social sin autor determinado."
+            "titulo" => "Victimizaciones por 'Rapto' por Móviles de Intolerancia Social sin autor determinado."
         );
          $this->gen_tabla(
             $db,
