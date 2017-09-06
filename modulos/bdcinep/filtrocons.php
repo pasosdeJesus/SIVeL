@@ -425,7 +425,7 @@ class AccionCifrasCons extends HTML_QuickForm_Action
         );
         $filas[2] = array(
             "cat" => array( 0 => 48),
-            "titulo" => "Victimizaciones por 'Rapto por Móvies Politicos' y 'Secuestro perpetrado por organizaciones insurgentes'."
+            "titulo" => "Victimizaciones por 'Rapto por Móviles Politicos' y 'Secuestro perpetrado por organizaciones insurgentes'."
         );
         $filas[3] = array(
             "cat" => array( 0 => 41),
