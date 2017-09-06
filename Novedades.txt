@@ -1,17 +1,17 @@
 Ap ndice A. Novedades
- 
-Versión 1.2.4 (Ago.2017)
-      * Se actualiza consolidado general de víctima (módulo bdcinep)
-        de acuerdo a nuevo marco conceptual
 
-      * Vuelve a operar exportación a CSV y se evita posible ataque XSS
-        descrito en https://stackoverflow.com/questions/43894241/
-        birt-possible-xss-in-xls-format
+Versión 1.2.4 (Sep.2017)
+      * Se actualiza consolidado general de víctima (módulo bdcinep) de acuerdo
+        a nuevo marco conceptual
 
       * Actualiza marco conceptual para adoptar más categorias y nomenclatura
         del Derecho Internacional Humanitario Consuetudinario
 
       * Permite descargar anexos desde reporte general
+
+      * Vuelve a operar exportación a CSV y se evita posible ataque XSS
+        descrito en https://stackoverflow.com/questions/43894241/
+        birt-possible-xss-in-xls-format
 
       * Opera con PHP 5.6 que es más estricto en chequeo de tipos
 

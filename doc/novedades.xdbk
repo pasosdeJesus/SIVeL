@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
-	<varlistentry><term>Versión 1.2.4 (Jun.2017)</term>
+	<varlistentry><term>Versión 1.2.4 (Sep.2017)</term>
 		<listitem>
 			<para><itemizedlist>
-					<listitem><para>Vuelve a operar exportación a CSV y se evita posible ataque XSS descrito en https://stackoverflow.com/questions/43894241/birt-possible-xss-in-xls-format</para></listitem>
+				<listitem><para>Se actualiza consolidado general de víctima (módulo bdcinep) de acuerdo a nuevo marco conceptual</para></listitem>
 					<listitem><para>Actualiza marco conceptual para adoptar más categorias y nomenclatura del Derecho Internacional Humanitario Consuetudinario</para></listitem>
 					<listitem><para>Permite descargar anexos desde reporte general</para></listitem>
+					<listitem><para>Vuelve a operar exportación a CSV y se evita posible ataque XSS descrito en https://stackoverflow.com/questions/43894241/birt-possible-xss-in-xls-format</para></listitem>
 					<listitem><para>Opera con PHP 5.6 que es más estricto en chequeo de tipos</para></listitem>
 			</itemizedlist></para>
 		</listitem>
