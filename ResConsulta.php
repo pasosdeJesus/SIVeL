@@ -2312,7 +2312,7 @@ class ResConsulta
             $dcontexto = objeto_tabla('caso_contexto');
             $dcontexto->id_caso = $idcaso;
             $dcontexto->find();
-            $pref = _("Contexto(s)") . ": ";
+            $pref = "\n\n" . _("Contexto(s)") . ": ";
             $post = "";
             while ($dcontexto->fetch()) {
                 $dc = $dcontexto->getLink('id_contexto');
