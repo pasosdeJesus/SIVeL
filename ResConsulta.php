@@ -1339,13 +1339,17 @@ class ResConsulta
                 if (!isset($GLOBALS['actoscolectivos'])
                     || $GLOBALS['actoscolectivos'] == true
                 ) {
-                    $totv+=ResConsulta::extraeColectivas(
+                    $idp = array(); // Identificaciones
+                    $ndp = array();
+                    $cdp = array();
+                    $ind = -1;
+                    $totelem = -1;
+                    ResConsulta::extraeColectivas(
                         $idcaso,
                         $db, $idp, $ndp, $cdp, null, $ind, $totelem
                     );
-                    $bk = $k;
                     $cndp = count($ndp);
-                    for (; $k < $cndp; $k++) {
+                    for ($k = 0; $k < $cndp; $k++) {
                         $q = "SELECT id_tviolencia, id_supracategoria, " .
                             " id_categoria " .
                             " FROM actocolectivo, categoria " .
@@ -1366,14 +1370,14 @@ class ResConsulta
                             $septip = ", ";
                         }
                         $vr_html .= $seploc . strip_tags($ndp[$k]) . $tip;
-                        if ((int)$cdp[$k - $bk] > 0) {
-                            $vr_html .= " (". strip_tags($cdp[$k - $bk]) . ")";
-                            $vrescon .= " (".(int)$cdp[$k - $bk] . ")";
+                        if ((int)$cdp[$k] > 0) {
+                            $vr_html .= " (". strip_tags($cdp[$k]) . ")";
+                            $vrescon .= " (".(int)$cdp[$k] . ")";
                         }
                         $seploc = ", ";
                     }
 
-                    $vrpost = " | " . _("Víctimas") . ":".$totv;
+                    $vrpost = " | " . _("Víctimas Ind") . ":".$totv;
                 }
             } else if ($cc == 'm_tipificacion') {
                 $ndp = array();
@@ -3232,7 +3236,7 @@ class ResConsulta
                 } */
 
                 $totelem = 0;
-                $totv+=ResConsulta::extraeColectivas(
+                ResConsulta::extraeColectivas(
                     $idcaso,
                     $db, $idp, $ndp, $cdp, null, $ind, $totelem
                 );
