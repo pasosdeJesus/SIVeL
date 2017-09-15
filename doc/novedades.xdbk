@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
+	<varlistentry><term>Versión 1.2.5 (Mar.2018)</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem><para>Corrección: Consulta web presentada como tabla, presenta todas las víctimas colectivas</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+	
 	<varlistentry><term>Versión 1.2.4 (Sep.2017)</term>
 		<listitem>
 			<para><itemizedlist>

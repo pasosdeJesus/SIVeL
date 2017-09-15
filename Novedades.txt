@@ -1,5 +1,9 @@
 Ap ndice A. Novedades
 
+Versión 1.2.5 (Mar.2018)
+      * Corrección: Consulta web presentada como tabla, presenta todas las
+        víctimas colectivas
+
 Versión 1.2.4 (Sep.2017)
       * Se actualiza consolidado general de víctima (módulo bdcinep) de acuerdo
         a nuevo marco conceptual
