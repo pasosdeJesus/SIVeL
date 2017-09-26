@@ -563,7 +563,7 @@ class ResConsulta
 
         $ac = array(
             _("Fecha"), _("Caso"), _("Nombres Víctima"),
-             _("Apellidos Víctima"),
+            _("Apellidos Víctima"), _("Código Víctima"),
             _("Sector Social"), _("Organización Social"),
             _("Sexo"), _("Rango de Edad"),
             _("Categoria"), _("P. Responsable"),
@@ -607,6 +607,7 @@ class ResConsulta
             $cat = $row[5];
             $nom = $row[2];
             $ap = $row[3];
+            $idper = $row[1];
             $ss = $row[7];
             $os = $row[8];
             //$idvic = $row[1];
@@ -626,6 +627,7 @@ class ResConsulta
                     "<td>" . trim(htmlentities($idcaso, ENT_COMPAT, 'UTF-8')) .
                     "</td><td>" . trim(htmlentities($nom, ENT_COMPAT, 'UTF-8')).
                     "</td><td>" . trim(htmlentities($ap, ENT_COMPAT, 'UTF-8')).
+                    "</td><td>" . trim(htmlentities($idper, ENT_COMPAT, 'UTF-8')).
                     "</td><td>" . trim(htmlentities($ss, ENT_COMPAT, 'UTF-8')) .
                     "</td><td>" . trim(htmlentities($os, ENT_COMPAT, 'UTF-8')) .
                     "</td><td>" . htmlentities($sexo, ENT_COMPAT, 'UTF-8') .
