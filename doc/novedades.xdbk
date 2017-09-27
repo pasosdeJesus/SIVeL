@@ -4,7 +4,7 @@
 	<varlistentry><term>Versión 1.2.5 (Mar.2018)</term>
 		<listitem>
 			<para><itemizedlist>
-					<listitem><para>En reporte de actos ahora se incluye código de víctima para facilitar hacer conteos por víctima</para></listitem>
+					<listitem><para>En reporte de actos ahora se incluye código de víctima para facilitar hacer conteos por víctima, así como organización, filiación, vínculo con el estado y etnia.</para></listitem>
 					<listitem><para>Corrección: Consulta web presentada como tabla, presenta todas las víctimas colectivas</para></listitem>
 			</itemizedlist></para>
 		</listitem>

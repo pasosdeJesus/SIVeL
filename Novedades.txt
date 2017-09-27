@@ -1,6 +1,10 @@
 Ap ndice A. Novedades
 
 Versión 1.2.5 (Mar.2018)
+      * En reporte de actos ahora se incluye código de víctima para facilitar
+        hacer conteos por víctima, así como organización, filiación, vínculo
+        con el estado y etnia.
+
       * Corrección: Consulta web presentada como tabla, presenta todas las
         víctimas colectivas
 
