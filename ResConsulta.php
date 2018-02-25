@@ -536,14 +536,14 @@ class ResConsulta
         );
         $etablas = array_map("trim", $etablas);
         $etablas = implode(", ", array_unique($etablas));
-        $q = " SELECT caso.id, persona.id, " .
+        $q1 = " SELECT DISTINCT caso.id, persona.id, " .
             " persona.nombres, persona.apellidos, caso.fecha, " .
             " acto.id_categoria, presponsable.nombre, " .
             " sectorsocial.nombre, organizacion.nombre, " .
             " persona.sexo, rangoedad.rango, " .
             " ubicacion.id_departamento,  ubicacion.id_municipio, " .
-            " departamento.nombre, municipio.nombre " .
-            " FROM  $etablas WHERE " .
+            " departamento.nombre, municipio.nombre ";
+        $q2 = " FROM  $etablas WHERE " .
             " presponsable.id=acto.id_presponsable " .
             " AND acto.id_persona=persona.id " .
             " AND rangoedad.id=victima.id_rangoedad " .
@@ -556,9 +556,9 @@ class ResConsulta
             " AND departamento.id=ubicacion.id_departamento " .
             " AND municipio.id=ubicacion.id_municipio" .
             " AND municipio.id_departamento=ubicacion.id_departamento" .
-            " AND $donde ORDER BY caso.fecha" ;
-        //echo "q es $q<br>";
-        //die("x");
+            " AND $donde" ;
+        $q = $q1 . $q2 . " ORDER BY caso.fecha";
+        #echo "q es $q<br>";
         $result = hace_consulta($db, $q);
 
         $ac = array(
