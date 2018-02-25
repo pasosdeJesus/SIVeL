@@ -5,7 +5,8 @@ Versión 1.2.5 (Feb.2018)
         agregadas categorias análogas para víctimas colectivas 916 y 917.
 
       * En reporte de actos ahora se incluye código de víctima para facilitar
-        hacer conteos por víctima.
+        hacer conteos por víctima, así como organización, filiación, vínculo
+        con el estado y etnia.
 
       * Corrección: Consulta web presentada como tabla, presenta todas las
         víctimas colectivas.

@@ -5,7 +5,7 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>Nombre de categorias individuales 716 y 717 ahora en singular y agregadas categorias análogas para víctimas colectivas 916 y 917.</para></listitem>
-					<listitem><para>En reporte de actos ahora se incluye código de víctima para facilitar hacer conteos por víctima.</para></listitem>
+					<listitem><para>En reporte de actos ahora se incluye código de víctima para facilitar hacer conteos por víctima, así como organización, filiación, vínculo con el estado y etnia.</para></listitem>
 					<listitem><para>Corrección: Consulta web presentada como tabla, presenta todas las víctimas colectivas.</para></listitem>
 					<listitem><para>Corrección: Consulta detallada en reporte de actos ya no duplica actos cuando se especificaba rango de la fecha de ingreso.</para></listitem>
 					<listitem><para>Documentación: Uso de base remota (ver <xref linkend="base-remota"></xref>). </para></listitem>

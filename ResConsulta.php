@@ -532,7 +532,7 @@ class ResConsulta
             'victima', 'departamento', 'municipio',
             'persona', 'presponsable', 'acto',
             'sectorsocial', 'organizacion', 'rangoedad',
-            'ubicacion')
+            'ubicacion', 'filiacion', 'vinculoestado', 'etnia')
         );
         $etablas = array_map("trim", $etablas);
         $etablas = implode(", ", array_unique($etablas));
@@ -542,7 +542,9 @@ class ResConsulta
             " sectorsocial.nombre, organizacion.nombre, " .
             " persona.sexo, rangoedad.rango, " .
             " ubicacion.id_departamento,  ubicacion.id_municipio, " .
-            " departamento.nombre, municipio.nombre ";
+            " departamento.nombre, municipio.nombre, " .
+            " filiacion.nombre, vinculoestado.nombre, " .
+            " etnia.nombre " ;
         $q2 = " FROM  $etablas WHERE " .
             " presponsable.id=acto.id_presponsable " .
             " AND acto.id_persona=persona.id " .
@@ -556,9 +558,13 @@ class ResConsulta
             " AND departamento.id=ubicacion.id_departamento " .
             " AND municipio.id=ubicacion.id_municipio" .
             " AND municipio.id_departamento=ubicacion.id_departamento" .
+            " AND filiacion.id=victima.id_filiacion" .
+            " AND vinculoestado.id=victima.id_vinculoestado" .
+            " AND etnia.id=victima.id_etnia" .
             " AND $donde" ;
         $q = $q1 . $q2 . " ORDER BY caso.fecha";
-        #echo "q es $q<br>";
+        //echo "q es $q<br>";
+        //die("x");
         $result = hace_consulta($db, $q);
 
         $ac = array(
@@ -569,6 +575,8 @@ class ResConsulta
             _("Categoria"), _("P. Responsable"),
             _("Departamento"), _("Municipio"),
             _("Nom. Departamento"), _("Nom. Municipio"),
+            _("Filiacion Política"), _("Vínculo con Estado"),
+            _("Etnia"),
         );
 
         if ($pMuestra == "csv") {
@@ -619,6 +627,9 @@ class ResConsulta
             $mun = $row[12];
             $ndep = $row[13];
             $nmun = $row[14];
+            $fil = $row[15];
+            $vc = $row[16];
+            $etnia = $row[17];
 
             $html_il = "";
             if ($pMuestra == "tabla" || $pMuestra == 'actos') {
@@ -638,6 +649,9 @@ class ResConsulta
                     "</td><td>" . htmlentities($mun, ENT_COMPAT, 'UTF-8') .
                     "</td><td>" . htmlentities($ndep, ENT_COMPAT, 'UTF-8') .
                     "</td><td>" . htmlentities($nmun, ENT_COMPAT, 'UTF-8') .
+                    "</td><td>" . htmlentities($fil, ENT_COMPAT, 'UTF-8') .
+                    "</td><td>" . htmlentities($vc, ENT_COMPAT, 'UTF-8') .
+                    "</td><td>" . htmlentities($etnia, ENT_COMPAT, 'UTF-8') .
                     "</td>";
             } elseif ($pMuestra == 'csv') {
                 $html_il = $fecha . ", ".trim($nom).
