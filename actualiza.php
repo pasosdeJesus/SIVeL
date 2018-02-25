@@ -3753,6 +3753,24 @@ if (!aplicado($idac)) {
     aplicaact($act, $idac, ' Cambio a consolidado victimas con nuevas categorias DIHC');
 }
 
+$idac = '1.2-sc18';
+if (!aplicado($idac)) {
+    
+    hace_consulta($db, "UPDATE categoria SET nombre='NEGACIÓN DE DERECHOS A PRISIONERO DE GUERRA' WHERE id='716';");
+    hace_consulta($db, "UPDATE categoria SET nombre='NEGACIÓN DE ATENCIÓN A PERSONA VULNERABLE' WHERE id='717';");
+    hace_consulta($db, "
+          INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+          VALUES ('916', 'NEGACIÓN DE DERECHOS A PRISIONEROS DE GUERRA', 'D', '1', 'C', '2018-02-24'); 
+    ");
+    hace_consulta($db, "
+          INSERT INTO categoria (id, nombre, id_tviolencia, id_supracategoria, tipocat, fechacreacion)
+          VALUES ('917', 'NEGACIÓN DE ATENCIÓN A PERSONAS VULNERABLES', 'D', '1', 'C', '2018-02-24'); 
+    ");
+
+    aplicaact($act, $idac, 'Cambio a marco conceptual singular/plural');
+}
+
+
 if (isset($GLOBALS['menu_tablas_basicas'])) {
     $hayrep = false;
     foreach ($GLOBALS['menu_tablas_basicas'] as $a) {
