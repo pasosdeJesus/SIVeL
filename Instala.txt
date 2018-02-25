@@ -83,7 +83,7 @@
  1. Aunque no es indispensable se recomienda que cree una cuenta para sivel
     (digamos con login sivel).
 
- 2. Instale el paquete sivel-1.2.4.tar.gz que se distribuye con adJ-6.0. Si
+ 2. Instale el paquete sivel-1.2.5.tar.gz que se distribuye con adJ-6.0. Si
     prefiere descargar fuentes o clonar el repositorio git, asegurese de dejar
     en un directorio utilizabel por nginx con SSL y consulte Sección 3.1,
     “Actualización de versiones menores (e.g 1.2b1 a 1.2b2)”.
@@ -132,7 +132,40 @@
     puede revisar errores en la bitácora de nginx (por defecto /var/www/log/
     error.log).
 
-2.1. Otros pasos de instalación opcionales
+2.1. Uso de una base de datos remota
+
+Si el motor de bases de datos no corre en el mismo computador del servidor
+donde corre SIVeL (como se documenta en http://pasosdejesus.github.io/
+servidor_adJ/otros_servicios_que_puede_prestar_el_servidor.html#
+base-postgresql-remota ).
+
+ 1. Ubique el certificado (digamos sivel.crt) y la llave SSL (sivel.key) en el
+    mismo directorio del sitio (/var/www/htdocs/sivel12/sitios/sivel12),
+
+ 2. Asegura que los archivos de ordenes son usables desde la terminal editando
+    vardb.sh del sitio para agregar:
+
+    export PGSSLCERT=./sivel.crt
+    export PGSSLKEY=./sivel.key
+
+    justo antes de la línea:
+
+    . ../pordefecto/vardb.sh
+
+ 3. Asegure que aplicación puede usar la base remota editando conf.php del
+    sitio para agregar entre las primeras variables (cambie la IP por la del
+    servidor donde corre PostgreSQL):
+
+            global $dbservidor;
+            $dbservidor = "192.168.100.21";
+
+    y al final de ese archivo agregue la ubicación del certificado y la llave
+    (relativo a la jaula chroot del servidor web):
+
+            putenv('PGSSLCERT=/htdocs/sivel12/sitios/sivel12/sivel.crt');
+            putenv('PGSSLKEY=/htdocs/sivel12/sitios/sivel12/sivel.key');
+
+2.2. Otros pasos de instalación opcionales
 
  1. Si desea generar la documentación:
 

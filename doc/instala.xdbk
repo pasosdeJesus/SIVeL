@@ -271,6 +271,55 @@ puede revisar errores en la bitácora de nginx (por defecto
 
 
 		</para>
+		<sect2 id="base-remota">
+			<title>Uso de una base de datos remota</title>
+			<para>
+Si el motor de bases de datos no corre en el mismo computador del servidor donde
+corre SIVeL (como se documenta en http://pasosdejesus.github.io/servidor_adJ/otros_servicios_que_puede_prestar_el_servidor.html#base-postgresql-remota ).
+
+			<orderedlist>
+				<listitem>
+					<para>
+Ubique el certificado (digamos <filename>sivel.crt</filename>) y la 
+llave SSL  (<filename>sivel.key</filename>)
+en el mismo directorio del sitio (<filename>/var/www/htdocs/sivel12/sitios/sivel12</filename>),
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+Asegura que los archivos de ordenes son usables desde la terminal
+editando <filename>vardb.sh</filename> del sitio para agregar:
+<screen>
+export PGSSLCERT=./sivel.crt
+export PGSSLKEY=./sivel.key
+</screen>
+justo antes de la línea:
+<screen>
+. ../pordefecto/vardb.sh
+</screen>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+Asegure que aplicación puede usar la base remota editando 
+<filename>conf.php</filename> del sitio para 
+agregar entre las primeras variables (cambie la IP por la del
+servidor donde corre PostgreSQL):
+<screen>
+	global $dbservidor;
+	$dbservidor = "192.168.100.21";
+</screen>
+y al final de ese archivo agregue la ubicación del certificado
+y la llave (relativo a la jaula chroot del servidor web):
+<screen>
+	putenv('PGSSLCERT=/htdocs/sivel12/sitios/sivel12/sivel.crt');
+	putenv('PGSSLKEY=/htdocs/sivel12/sitios/sivel12/sivel.key');
+</screen>
+					</para>
+				</listitem>
+			</orderedlist>
+		</para>
+		</sect2>
 		<sect2 id="inst-opcional">
 			<title>Otros pasos de instalación opcionales</title>
 

@@ -1,8 +1,20 @@
 Ap ndice A. Novedades
 
-Versión 1.2.5 (Mar.2018)
+Versión 1.2.5 (Feb.2018)
+      * Nombre de categorias individuales 716 y 717 ahora en singular y
+        agregadas categorias análogas para víctimas colectivas 916 y 917.
+
+      * En reporte de actos ahora se incluye código de víctima para facilitar
+        hacer conteos por víctima.
+
       * Corrección: Consulta web presentada como tabla, presenta todas las
-        víctimas colectivas
+        víctimas colectivas.
+
+      * Corrección: Consulta detallada en reporte de actos ya no duplica actos
+        cuando se especificaba rango de la fecha de ingreso.
+
+      * Documentación: Uso de base remota (ver Sección 2.1, “Uso de una base de
+        datos remota”).
 
 Versión 1.2.4 (Sep.2017)
       * Se actualiza consolidado general de víctima (módulo bdcinep) de acuerdo

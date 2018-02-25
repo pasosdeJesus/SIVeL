@@ -17,7 +17,7 @@ if (test ! -f vardb.sh -o ! -f conf.php) then {
 
 . ./vardb.sh
 
-echo "Por generar copia sin fuentes para enviar a  $usuarioact@$maquinaweb:$dirweb";
+echo "Por generar copia sin fuentes para enviar a  $usuarioact@$maquinaweb:$dirweb con opciones '$opscpweb'";
 echo "El usuario puede cambiarse en usuarioact de aut/conf.php";
 echo "[ENTER] para continuar o [Ctrl]-[C] para detener";
 read a
