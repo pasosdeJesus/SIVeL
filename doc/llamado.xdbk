@@ -47,7 +47,7 @@
 				  <ulink url="https://aprendiendo.pasosdeJesus.org">adJ</ulink> &VER-OPENBSD; 
 				  de OpenBSD, servidor web nginx con SSL en chroot,
 				  PostgreSQL con autenticación y hardened PHP)
-				  y opera con datos del 
+				  y con algunos datos producidos por
 				  <ulink url="http://www.nocheyniebla.org">Banco De Datos de Violencia Política, DH y DIH del CINEP</ulink>.
 			  </para>
 		  </listitem>

@@ -44,7 +44,7 @@
           &VER-OPENBSD;, 
 				  web server nginx with SSL in chroot,
 				  PostgreSQL with authentication and hardened PHP) and 
-				  uses data from
+				  with some data produced by 
 				  <ulink url="http://www.nocheyniebla.org">Banco De Datos de Violencia Política, DH y DIH del CINEP</ulink>.
 			  </para>
 		  </listitem>
