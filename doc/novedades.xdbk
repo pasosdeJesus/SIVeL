@@ -5,9 +5,9 @@
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>Al validar desde Otros->Validar, todas las validaciones  ahora incluyen analista.</para></listitem>
-					<listitem><para>Resuelto problema al editar casos con ubicaciones con departamento y sin municipio.</para></listitem>
+					<listitem><para>Resuelto problema al editar casos con ubicaciones con departamento y sin municipio (agradecemos reporte a Carlos Garaviz).</para></listitem>
 					<listitem><para>Conteo por víctimas individuales ahora incluye casos sin ubicación o sin municipio (presenta en blanco estos datos cuando no hay información).</para></listitem>
-					<listitem><para>Resuelto problema de cambio de fecha de caso al intentar añadir un anexo con nombre inválido.</para></listitem>
+					<listitem><para>Resuelto problema de cambio de fecha de caso al intentar añadir un anexo con nombre inválido (agradecemos reporte de Alejandro Burgos).</para></listitem>
 			</itemizedlist></para>
 		</listitem>
 	</varlistentry>

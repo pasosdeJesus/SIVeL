@@ -1,5 +1,19 @@
 Ap ndice A. Novedades
 
+Versión 1.2.6 (Ago.2018)
+      * Al validar desde Otros->Validar, todas las validaciones ahora incluyen
+        analista.
+
+      * Resuelto problema al editar casos con ubicaciones con departamento y
+        sin municipio (agradecemos reporte a Carlos Garaviz).
+
+      * Conteo por víctimas individuales ahora incluye casos sin ubicación o
+        sin municipio (presenta en blanco estos datos cuando no hay
+        información).
+
+      * Resuelto problema de cambio de fecha de caso al intentar añadir un
+        anexo con nombre inválido (agradecemos reporte de Alejandro Burgos).
+
 Versión 1.2.5 (Feb.2018)
       * Nombre de categorias individuales 716 y 717 ahora en singular y
         agregadas categorias análogas para víctimas colectivas 916 y 917.
