@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
+	<varlistentry><term>Versión 1.2.6 (Ago.2018)</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem><para>Al validar desde Otros->Validr, todas las validaciones  ahora incluyen analista.</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+	
 	<varlistentry><term>Versión 1.2.5 (Feb.2018)</term>
 		<listitem>
 			<para><itemizedlist>

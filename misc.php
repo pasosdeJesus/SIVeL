@@ -593,7 +593,7 @@ function res_valida(&$db, $mens, $cons, $confunc = false)
             usuario.nusuario, sub.*
             FROM primerusuario, usuario, ($cons) AS sub
             WHERE primerusuario.id_usuario = usuario.id
-            AND primerusuario.id_caso = sub.id_caso"
+            AND primerusuario.id_caso = sub.id"
         );
     } else {
         #echo "OJO res_valida, cons=$cons<br>";
