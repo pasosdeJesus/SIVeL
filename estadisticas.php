@@ -80,15 +80,20 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
 
         //verifica_sin_CSRF($page->_submitValues);
 
-        $tGeo = '';
-        if ($pMunicipio != '') {
-            $tGeo = 'departamento, municipio, ';
-        } elseif ($pDepartamento != '') {
-            $tGeo = 'departamento, ';
-        }
         $cons = 'cons';
         $cons2="cons2";
         $where = "";
+        $tGeo = '';
+        if ($pDepartamento != '' || $pMunicipio != '') {
+            $tGeo .= " LEFT JOIN departamento ON " .
+                "$cons2.id_departamento=departamento.id ";
+        }
+        if ($pMunicipio != '') {
+            $tGeo .= " LEFT JOIN municipio ON " .
+                "$cons2.id_municipio=municipio.id " .
+                "AND $cons2.id_departamento=municipio.id ";
+        }
+        $tGeo .= ', ';
 
         consulta_and(
             $db, $where, "caso.fecha",
@@ -297,8 +302,8 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $q2 .= "AS SELECT $cons.$cCons, id_tviolencia, " .
             "id_supracategoria, id_categoria" . $pSegun2 .
             ", ubicacion.id_departamento, ubicacion.id_municipio FROM " .
-            "ubicacion, $cons " .
-            "WHERE $cons.id_caso = ubicacion.id_caso "
+            "$cons LEFT JOIN ubicacion ON " .
+            "$cons.id_caso = ubicacion.id_caso "
             ;
         //echo "OJO q2=$q2<br>";
         hace_consulta($db, $q2);
@@ -306,21 +311,14 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         $campos3 = "$cfSegun3 $tDep $tMun trim(tviolencia.nombre), "
             . "trim(supracategoria.nombre), trim(categoria.nombre), "
             . "count($cons2.$cCons)";
-        $tablas3 = "$tGeo $tablaSegun tviolencia, "
-            . "supracategoria, categoria , $cons2";
+        $tablas3 = "$cons2 $tGeo $tablaSegun tviolencia, "
+            . "supracategoria, categoria";
         $cond3 = "$cons2.id_tviolencia = tviolencia.id
             AND $cons2.id_tviolencia = supracategoria.id_tviolencia
             AND $cons2.id_supracategoria = supracategoria.id
             AND $cons2.id_tviolencia = categoria.id_tviolencia
             AND $cons2.id_supracategoria = categoria.id_supracategoria
             AND $cons2.id_categoria = categoria.id ";
-        if ($pDepartamento == "1"  || $pMunicipio == "1") {
-            $cond3 .= " AND departamento.id=$cons2.id_departamento ";
-        }
-        if ($pMunicipio == "1") {
-            $cond3 .= " AND municipio.id=$cons2.id_municipio ";
-            $cond3 .= " AND municipio.id_departamento=$cons2.id_departamento ";
-        }
         $cond3 .= " $condSegun";
 
         if (isset($GLOBALS['gancho_ei_creaconsulta3'])) {

@@ -142,7 +142,7 @@ class DataObjects_Ubicacion extends DB_DataObject_SIVeL
     */
     function setid_municipio($value)
     {
-        $this->id_municipio = ($value == '' || $value == 0) ?
+        $this->id_municipio = ($value == '' || $value == 0 || $value == 'null') ?
             DB_DataObject_Cast::sql('NULL') : (int)$value;
     }
 
