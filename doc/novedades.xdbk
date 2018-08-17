@@ -6,6 +6,9 @@
 			<para><itemizedlist>
 					<listitem><para>Al validar desde Otros->Validr, todas las validaciones  ahora incluyen analista.</para></listitem>
 			</itemizedlist></para>
+			<para><itemizedlist>
+					<listitem><para>Resuelto problema con ubicaciones con departamento y sin municipio.</para></listitem>
+			</itemizedlist></para>
 		</listitem>
 	</varlistentry>
 	
