@@ -508,21 +508,28 @@ function valida(&$page)
  *
  * @return void
  */
-function error_valida($msg, $valores, $iderr = '', $enhtml = false)
+function error_valida($msg, $valores, $iderr = '', $enhtml = false, 
+    $enviar_encabezados = false)
 {
-    if (!headers_sent()) {
-        encabezado_envia();
-    }
     if (isset($valores) && is_array($valores) && count($valores) > 0) {
         $_SESSION['recuperaErrorValida'] = $valores;
-   }
-    $mcod = $enhtml ? $msg : json_encode($msg);
-    echo "<script language=\"JavaScript\">";
-    echo "alert('" . $mcod . "');";
-    echo "</script>";
+    }
     if ($iderr != '') {
         $_SESSION[$iderr] = $msg;
     }
+    $mcod = $enhtml ? $msg : json_encode($msg);
+    if (!headers_sent()) {
+        if ($enviar_encabezados) {
+            encabezado_envia();  # Es problemático enviar encabezados siempre
+            # por ejemplo si anexo tiene falla se pierde los datos
+            # de datos basicos (fecha, frontera, region) quedando la fecha
+            # del anexo que falló
+            echo "<script language=\"JavaScript\">";
+            echo "alert('" . json_encode($msg) . "');";
+            echo "</script>";
+        }
+    }
+    echo "<span style='color: red'>". $mcod. "</span>";
 }
 
 /**

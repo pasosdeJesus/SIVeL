@@ -327,9 +327,14 @@ class PagAnexo extends PagBaseMultiple
             $s = $f->getElement('archivo_sel');
             $v = $s->getValue();
             if (!isset($v['name']) || $v['name'] == '') {
-                 error_valida('Falta archivo por anexar', array());
-                 return false;
+                 die('Falta archivo por anexar');
             }
+            $r=preg_match("/^[-0-9A-Za-z_\.\/]+$/", $v['name']);
+            if ($r != 1) {
+                die('Nombre tiene caracteres no admisibles " .
+                    "--solo debe constar de digitos, letras, _ y .');
+            }
+
             $this->banexo->_do->archivo = '';
             $this->banexo->_do->insert();
 
@@ -337,18 +342,10 @@ class PagAnexo extends PagBaseMultiple
             $nnom = $ida . "_".$v['name'];
             $nloc = $GLOBALS['dir_anexos'] . "/$nnom";
             if (file_exists($nloc)) {
-                 error_valida('Ya existe un archivo con ese nombre', $valores);
-                 return false;
+                 die('Ya existe un archivo con ese nombre');
             }
             if (mb_strlen($nloc, "UTF-8") > 255) {
-                 error_valida('Nombre tiene mas de 255 caracteres', $valores);
-                 return false;
-            }
-            $r=preg_match("/^[-0-9A-Za-z_\.\/]+$/",$nloc);
-            if ($r != 1) {
-                error_valida('Nombre tiene caracteres no admisibles " .
-                    "--solo debe constar de digitos, letras, _ y .', $valores);
-                 return false;
+                die('Nombre tiene mas de 255 caracteres');
             }
             $rmuf = $s->moveUploadedFile($GLOBALS['dir_anexos'], $nnom);
             if (!$rmuf) {

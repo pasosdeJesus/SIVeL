@@ -450,7 +450,7 @@ class ReporteGeneral extends HTML_QuickForm_Action
         if (!$r || count($buf_html) > 0) {
             $msg_html = implode($buf_html, "\n");
             if (trim($msg_html) != "") {
-                error_valida($msg_html, null, '', true);
+                error_valida($msg_html, null, '', true, true);
             }
         }
 
