@@ -738,7 +738,10 @@ class ResConsulta
                         $r = $scat[$row[1]];
                         break;
                     default:
-                        $r = $cat[$row[2]];
+                        if (array_key_exists($row[2], $cat))
+                            $r = $cat[$row[2]];
+                        else
+                            $r = "CATEGORIA INEXISTENTE {$row[2]}";
                         break;
                     }
                     $n .= $sepnord . trim($r);
