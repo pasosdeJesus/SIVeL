@@ -1,5 +1,8 @@
 Ap ndice A. Novedades
 
+Versión 1.2.7 (Dic.2018)
+	* Menú vuele a operar correctamente en chromium y chrome 
+
 Versión 1.2.6 (Ago.2018)
       * Al validar desde Otros->Validar, todas las validaciones ahora incluyen
         analista.
