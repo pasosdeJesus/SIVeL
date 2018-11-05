@@ -91,7 +91,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
         if ($pMunicipio != '') {
             $tGeo .= " LEFT JOIN municipio ON " .
                 "$cons2.id_municipio=municipio.id " .
-                "AND $cons2.id_departamento=municipio.id ";
+                "AND $cons2.id_departamento=municipio.id_departamento ";
         }
         $tGeo .= ', ';
 
@@ -305,7 +305,7 @@ class AccionEstadisticasInd extends HTML_QuickForm_Action
             "$cons LEFT JOIN ubicacion ON " .
             "$cons.id_caso = ubicacion.id_caso "
             ;
-        //echo "OJO q2=$q2<br>";
+        //echo "OJO q2=$q2<br>tGeo=$tGeo<br>";
         hace_consulta($db, $q2);
 
         $campos3 = "$cfSegun3 $tDep $tMun trim(tviolencia.nombre), "
