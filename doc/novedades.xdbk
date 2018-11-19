@@ -4,6 +4,7 @@
 	<varlistentry><term>Versión 1.2.7 (Dic.2018)</term>
 		<listitem>
 			<para><itemizedlist>
+					<listitem><para>Exportación de datos públicos ahora incluye fecha de ingreso de los casos.</para></listitem>
 					<listitem><para>Falla corregida, en conteo de víctimas individuales vuelve a verse municipio. Gracias a Elizabeth Florez por reportar.</para></listitem>
 					<listitem><para>Menú vuele a operar correctamente en chromium y chrome.  Gracias a Fabiana Carvajala por reporte y ayuda.</para></listitem>
 			</itemizedlist></para>

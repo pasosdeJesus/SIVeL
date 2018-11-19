@@ -29,7 +29,7 @@ cp -f $rlocal/$h.gz $rlocal/web-sf.sql.gz
 rm $rlocal/web-sf.sql
 gzip -d $rlocal/web-sf.sql.gz
 
-grep -a -v -f ../../bin/actweb.grep $rlocal/web-sf.sql > $rlocal/web-sf-sinf-$dm.sql
+grep -a -v -f ../../bin/actweb.grep $rlocal/web-sf.sql | sed -e "s/\(.*INTO.*caso_usuario.*(\)[0-9]*,/\11,/g" > $rlocal/web-sf-sinf-$dm.sql
 rm $rlocal/web-sf-sinf-$dm.sql.gz
 gzip $rlocal/web-sf-sinf-$dm.sql
 echo "3 de 3. Transfiriendo ..."
