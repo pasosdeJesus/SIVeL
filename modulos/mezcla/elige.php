@@ -539,7 +539,7 @@ function muestra($dsn)
     autentica_usuario($dsn, $aut_usuario, 31);
     encabezado_envia('Elegir');
 
-    $wizard =& new HTML_QuickForm_Controller('Victimasrep', false);
+    $wizard = new HTML_QuickForm_Controller('Victimasrep', false);
     $consweb = new PagVictimasrep();
 
     $wizard->addPage($consweb);

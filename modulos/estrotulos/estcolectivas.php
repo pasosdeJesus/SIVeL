@@ -644,7 +644,7 @@ function muestra($dsn)
     $aut_usuario = "";
     autentica_usuario($dsn, $aut_usuario, 21);
 
-    $wizard =& new HTML_QuickForm_Controller('EstadisticasCol', false);
+    $wizard = new HTML_QuickForm_Controller('EstadisticasCol', false);
     $consweb = new PagEstadisticasCol();
 
     $wizard->addPage($consweb);

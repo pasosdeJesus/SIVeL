@@ -404,7 +404,7 @@ function muestra($dsn)
     $aut_usuario = "";
     autentica_usuario($dsn, $aut_usuario, 21);
 
-    $wizard =& new HTML_QuickForm_Controller('EstadisticasComb', false);
+    $wizard = new HTML_QuickForm_Controller('EstadisticasComb', false);
     global $mreq;
     $consweb = new PagEstadisticasComb($mreq);
 

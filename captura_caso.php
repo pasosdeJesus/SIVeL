@@ -253,9 +253,9 @@ class CapturaCaso extends HTML_QuickForm_Controller
                 $cl = substr($cl, $d+1);
             }
             if ($pag == "presentacion") {
-                $clpag =& new $cl($pag, $opciones);
+                $clpag = new $cl($pag, $opciones);
             } else {
-                $clpag =& new $cl($pag);
+                $clpag = new $cl($pag);
             }
             if (!isset($GLOBALS['etiqueta'][$cl])) {
                 $GLOBALS['etiqueta'][$cl] = $clpag->titulo;
