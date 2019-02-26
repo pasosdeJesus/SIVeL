@@ -53,8 +53,10 @@ class PagMemo extends PagBaseSimple
             $this->titulo = $GLOBALS['etiqueta']['Memo'];
             $this->tcorto = $GLOBALS['etiqueta']['Memo'];
         }
-        $this->addAction('siguiente', new Siguiente());
-        $this->addAction('anterior', new Anterior());
+        $s = new Siguiente();
+        $this->addAction('siguiente', $s);
+        $a = new Anterior();
+        $this->addAction('anterior', $a);
     }
 
     /**

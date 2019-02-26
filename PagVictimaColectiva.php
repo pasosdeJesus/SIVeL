@@ -285,8 +285,10 @@ class PagVictimaColectiva extends PagBaseMultiple
             $this->titulo = $GLOBALS['etiqueta']['Victimas Colectivas'];
             $this->tcorto = $GLOBALS['etiqueta']['Victimas Colectivas'];
         }
-        $this->addAction('siguiente', new Siguiente());
-        $this->addAction('anterior', new Anterior());
+        $s = new Siguiente();
+        $this->addAction('siguiente', $s);
+        $a = new Anterior();
+        $this->addAction('anterior', $a);
     }
 
 

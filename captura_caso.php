@@ -261,21 +261,30 @@ class CapturaCaso extends HTML_QuickForm_Controller
                 $GLOBALS['etiqueta'][$cl] = $clpag->titulo;
             }
             $this->addPage($clpag);
-            $this->addAction($pag, new Salta());
+            $s = new Salta();
+            $this->addAction($pag, $s);
         }
+        $r = new ReporteGeneral();
+        $this->addAction('reporte', $r);
+        $t = new Terminar();
+        $this->addAction('menu', $t);
+        $ec = new EliminaCaso();
+        $this->addAction('elimina_caso', $ec);
+        $cn = new CasoNuevo();
+        $this->addAction('casonuevo', $cn);
+        $pf = new PresentaFormulario();
+        $this->addAction('display', $pf);
+        $hn = new HTML_QuickForm_Action_Next();
+            $this->addAction('next', $hn);
+        $hb =  new HTML_QuickForm_Action_Back();
+        $this->addAction('back', $hb);
+        $hj = new HTML_QuickForm_Action_Jump();
+        $this->addAction('jump', $hj);
 
-        $this->addAction('reporte', new ReporteGeneral());
-        $this->addAction('menu', new Terminar());
-        $this->addAction('elimina_caso', new EliminaCaso());
-        $this->addAction('casonuevo', new CasoNuevo());
-        $this->addAction('display', new PresentaFormulario());
-        $this->addAction('next', new HTML_QuickForm_Action_Next());
-        $this->addAction('back', new HTML_QuickForm_Action_Back());
-        $this->addAction('jump', new HTML_QuickForm_Action_Jump());
-
-        $this->addAction('process', new Terminar());
-
-        $this->addAction('buscar', new BuscarId());
+        $t = new Terminar();
+        $this->addAction('process', $t);
+        $b = new BuscarId();
+        $this->addAction('buscar', $b);
 
         // set ProgressBar default values on first run
         $sess = $this->container();
@@ -513,7 +522,7 @@ if (isset($_SESSION[$nv]['username']) || $opciones == array()) {
     if (PEAR::isError($d)) {
         die($d->getMessage());
     }
-    $db =& $d->getDatabaseConnection();
+    $db = $d->getDatabaseConnection();
     $rol = "";
     saca_opciones($_SESSION[$nv]['username'], $db, $opciones, $rol);
 }

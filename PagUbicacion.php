@@ -271,11 +271,15 @@ class PagUbicacion extends PagBaseMultiple
             $this->titulo = $GLOBALS['etiqueta']['Ubicacion'];
             $this->tcorto = $GLOBALS['etiqueta']['Ubicacion'];
         }
-        $this->addAction('id_departamento', new CamDepartamento());
-        $this->addAction('id_municipio', new CamMunicipio());
+        $d = new CamDepartamento();
+        $this->addAction('id_departamento', $d);
+        $c = new CamMunicipio();
+        $this->addAction('id_municipio', $c);
 
-        $this->addAction('siguiente', new Siguiente());
-        $this->addAction('anterior', new Anterior());
+        $s = new Siguiente();
+        $this->addAction('siguiente', $s);
+        $a = new Anterior();
+        $this->addAction('anterior', $a);
     }
 
     /**

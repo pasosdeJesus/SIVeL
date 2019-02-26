@@ -270,13 +270,19 @@ class PagVictimaIndividual extends PagBaseMultiple
             $this->tcorto = $GLOBALS['etiqueta']['Victimas Individuales'];
         }
 
-        $this->addAction('id_departamento', new CamDepartamento());
-        $this->addAction('id_municipio', new CamMunicipio());
+        $d = new CamDepartamento();
+        $this->addAction('id_departamento', $d);
+        $m = new CamMunicipio();
+        $this->addAction('id_municipio', $m);
 
-        $this->addAction('siguiente', new Siguiente());
-        $this->addAction('anterior', new Anterior());
-        $this->addAction('eliminarel', new EliminaRel());
-        $this->addAction('agregarFamiliar', new AgregarFamiliar());
+        $s = new Siguiente();
+        $this->addAction('siguiente', $s);
+        $a = new Anterior();
+        $this->addAction('anterior', $a);
+        $e = new EliminaRel();
+        $this->addAction('eliminarel', $e);
+        $f = new AgregarFamiliar();
+        $this->addAction('agregarFamiliar', $f);
 
     }
 

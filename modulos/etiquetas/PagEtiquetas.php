@@ -95,11 +95,16 @@ class PagEtiquetas extends PagBaseSimple
             $this->titulo = $GLOBALS['etiqueta']['Etiquetas'];
             $this->tcorto = $GLOBALS['etiqueta']['Etiquetas'];
         }
-        $this->addAction('process', new Terminar());
-        $this->addAction('siguiente', new Siguiente());
-        $this->addAction('anterior', new Anterior());
-        $this->addAction('agregarEtiqueta', new AgregarEtiqueta());
-        $this->addAction('eliminaest', new EliminaEst());
+        $t = new Terminar();
+        $this->addAction('process', $t);
+        $s = new Siguiente();
+        $this->addAction('siguiente', $s);
+        $a = new Anterior();
+        $this->addAction('anterior', $a);
+        $ae = new AgregarEtiqueta();
+        $this->addAction('agregarEtiqueta', $ae);
+        $ee = new EliminaEst();
+        $this->addAction('eliminaest', $ee);
     }
 
 
@@ -467,7 +472,7 @@ class PagEtiquetas extends PagBaseSimple
      * @return void
      */
     static function consultaWebCreaConsulta(&$db, $mostrar, &$where, &$tablas,
-        &$pOrdenar, &$campos
+        &$pOrdenar, &$campos, &$oconv
     ) {
         PagEtiquetas::estadisticasIndCreaConsulta($db, $where, $tablas);
     }

@@ -141,8 +141,10 @@ class PagTipoViolencia extends PagBaseSimple
             $this->titulo = $GLOBALS['etiqueta']['Contexto'];
             $this->tcorto = $GLOBALS['etiqueta']['Contexto'];
         }
-        $this->addAction('siguiente', new Siguiente('salvaTipoViolencia'));
-        $this->addAction('anterior', new Anterior('salvaTipoViolencia'));
+        $s = new Siguiente('salvaTipoViolencia');
+        $this->addAction('siguiente', $s);
+        $a = new Anterior('salvaTipoViolencia');
+        $this->addAction('anterior', $a);
     }
 
 

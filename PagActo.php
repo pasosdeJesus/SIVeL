@@ -260,14 +260,20 @@ class PagActo extends PagBaseSimple
             $this->tcorto = $GLOBALS['etiqueta']['Actos'];
         }
 
-        $this->addAction('siguiente', new Siguiente());
-        $this->addAction('anterior', new Anterior());
+        $s = new Siguiente();
+        $this->addAction('siguiente', $s);
+        $a = new Anterior();
+        $this->addAction('anterior', $a);
 
-        $this->addAction('agregarActo', new AgregarActo());
-        $this->addAction('agregarActocolectivo', new AgregarActocolectivo());
+        $aa = new AgregarActo();
+        $this->addAction('agregarActo', $aa);
+        $ac = new AgregarActocolectivo();
+        $this->addAction('agregarActocolectivo', $ac);
 
-        $this->addAction('eliminaacto', new EliminaActo());
-        $this->addAction('eliminaactocolectivo', new EliminaActocolectivo());
+        $e = new EliminaActo();
+        $this->addAction('eliminaacto', $e);
+        $ea = new EliminaActocolectivo();
+        $this->addAction('eliminaactocolectivo', $ea);
 
     }
 

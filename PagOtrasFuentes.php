@@ -181,8 +181,10 @@ class PagOtrasFuentes extends PagBaseMultiple
             $this->titulo = $GLOBALS['etiqueta']['Otras Fuentes'];
             $this->tcorto = $GLOBALS['etiqueta']['Otras Fuentes'];
         }
-        $this->addAction('siguiente', new Siguiente());
-        $this->addAction('anterior', new Anterior());
+        $s = new Siguiente();
+        $this->addAction('siguiente', $s);
+        $a = new Anterior();
+        $this->addAction('anterior', $a);
     }
 
 

@@ -83,7 +83,7 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
         }
         $dcaso = objeto_tabla('caso');
         sin_error_pear($dcaso);
-        $db =& $dcaso->getDatabaseConnection();
+        $db = $dcaso->getDatabaseConnection();
 
         $idcaso = null;
         if ($cargaCaso && isset($_SESSION['basicos_id'])) {
@@ -183,7 +183,11 @@ abstract class PagBaseSimple extends HTML_QuickForm_Page
                 die($cm . " - " . $db->getMessage());
             }
         }
-        $idcaso = $_SESSION['basicos_id'];
+        if (isset($_SESSION['basicos_id'])) {
+            $idcaso = $_SESSION['basicos_id'];
+        } else {
+            $idcaso = null;
+        }
         $this->controller->crea_tabuladores($this, array('class' => 'flat'));
 
         $comp = isset($_SESSION['forma_modo'])

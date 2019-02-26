@@ -192,8 +192,10 @@ class PagPResponsables extends PagBaseMultiple
             $this->titulo = $GLOBALS['etiqueta']['Presuntos Responsables'];
             $this->tcorto = $GLOBALS['etiqueta']['Presuntos Responsables'];
         }
-        $this->addAction('siguiente', new Siguiente());
-        $this->addAction('anterior', new Anterior());
+        $s = new Siguiente();
+        $a = new Anterior();
+        $this->addAction('siguiente', $s);
+        $this->addAction('anterior', $a);
     }
 
 

@@ -54,13 +54,16 @@ class PagEvaluacion extends PagBaseSimple
             $this->titulo = $GLOBALS['etiqueta']['Evaluacion'];
             $this->tcorto = $GLOBALS['etiqueta']['Evaluacion'];
         }
-        $this->addAction('process', new Terminar());
+        $t = new Terminar();
+        $this->addAction('process', $t);
         if (isset($_SESSION['forma_modo'])
             && $_SESSION['forma_modo'] == 'busqueda'
         ) {
-            $this->addAction('siguiente', new Siguiente());
+            $s = new Siguiente();
+            $this->addAction('siguiente', $s);
         }
-        $this->addAction('anterior', new Anterior());
+        $a = new Anterior();
+        $this->addAction('anterior', $a);
     }
 
 

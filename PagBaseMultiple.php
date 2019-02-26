@@ -260,13 +260,18 @@ abstract class PagBaseMultiple extends PagBaseSimple
     {
         $this->PagBaseSimple($nomForma);
 
-        $this->addAction('eliminar', new EliminarMultiple());
-        $this->addAction('nuevo', new NuevoMultiple());
+        $e = new EliminarMultiple();
+        $this->addAction('eliminar', $e);
+        $m = new NuevoMultiple();
+        $this->addAction('nuevo', $m);
         if ($this->nuevoCopia) {
-            $this->addAction('nuevoCopia', new NuevoCopiaMultiple());
+            $n = new NuevoCopiaMultiple();
+            $this->addAction('nuevoCopia', $n);
         }
-        $this->addAction('anteriorMultiple', new AnteriorMultiple());
-        $this->addAction('siguienteMultiple', new SiguienteMultiple());
+        $a = new AnteriorMultiple();
+        $this->addAction('anteriorMultiple', $a);
+        $s = new SiguienteMultiple();
+        $this->addAction('siguienteMultiple', $s);
 
         if (!isset($_SESSION[$this->pref . '_pag'])) {
             $_SESSION[$this->pref . '_pag'] = 0;
