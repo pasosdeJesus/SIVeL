@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
-	<varlistentry><term>Versión 1.2.7 (Dic.2018)</term>
+	<varlistentry><term>Versión 1.2.7 (Mar.2019)</term>
 		<listitem>
 			<para><itemizedlist>
 					<listitem><para>Exportación de datos públicos ahora incluye fecha de ingreso de los casos.</para></listitem>

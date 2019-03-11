@@ -1,283 +1,279 @@
-Ap ndice A. Novedades
-
-Versión 1.2.7 (Dic.2018)
-	* Menú vuele a operar correctamente en chromium y chrome 
-
-Versión 1.2.6 (Ago.2018)
-      * Al validar desde Otros->Validar, todas las validaciones ahora incluyen
-        analista.
-
-      * Resuelto problema al editar casos con ubicaciones con departamento y
-        sin municipio (agradecemos reporte a Carlos Garaviz).
-
-      * Conteo por víctimas individuales ahora incluye casos sin ubicación o
-        sin municipio (presenta en blanco estos datos cuando no hay
-        información).
-
-      * Resuelto problema de cambio de fecha de caso al intentar añadir un
-        anexo con nombre inválido (agradecemos reporte de Alejandro Burgos).
-
-Versión 1.2.5 (Feb.2018)
-      * Nombre de categorias individuales 716 y 717 ahora en singular y
-        agregadas categorias análogas para víctimas colectivas 916 y 917.
-
-      * En reporte de actos ahora se incluye código de víctima para facilitar
-        hacer conteos por víctima, así como organización, filiación, vínculo
-        con el estado y etnia.
-
-      * Corrección: Consulta web presentada como tabla, presenta todas las
-        víctimas colectivas.
-
-      * Corrección: Consulta detallada en reporte de actos ya no duplica actos
-        cuando se especificaba rango de la fecha de ingreso.
-
-      * Documentación: Uso de base remota (ver Sección 2.1, “Uso de una base de
-        datos remota”).
-
-Versión 1.2.4 (Sep.2017)
-      * Se actualiza consolidado general de víctima (módulo bdcinep) de acuerdo
-        a nuevo marco conceptual
-
-      * Actualiza marco conceptual para adoptar más categorias y nomenclatura
-        del Derecho Internacional Humanitario Consuetudinario
-
-      * Permite descargar anexos desde reporte general
-
-      * Vuelve a operar exportación a CSV y se evita posible ataque XSS
-        descrito en https://stackoverflow.com/questions/43894241/
-        birt-possible-xss-in-xls-format
-
-      * Opera con PHP 5.6 que es más estricto en chequeo de tipos
-
-Versión 1.2.3 (Sep.2016)
-      * Arreglos en mapa para que (1) opere tras cambios en librerías de
-        Google. Ahora se requiere instalación local de librería, ver modulos/
-        mapag/Instala.txt; (2) presente bien presuntos responsables en resumen.
-
-      * Al validar no reporta casos sin actos cuando son acciones bélicas.
-
-      * Filtros en consulta detallada operan (por ejemplo por contexto).
-
-      * Actualiza marco conceptual.
-
-      * Vuelve a poderse ver categoria de violencia en consulta web.
-
-      * Vuelve a operar elección de supracategoria en Conteos->V. Individuales.
-
-      * Actualizado módulo bélicas.
-
-      * Administradores pueden listar otras fuentes en consulta web.
-
-Versión 1.2.2 (Abr.2016)
-      * Validaciones más veloces, que presentan y ordenan siempre por fecha del
-        caso.
-
-      * Corregidos conteos del módulo de tablas de Banco de Datos del CINEP.
-
-      * Configurado para adJ 5.8 con socket de PostgreSQL ubicado por defecto
-        en /var/www/var/run/postgresql, pero detecta ruta usada en adJ 5.7 y
-        anteriores (/var/www/tmp)
-
-Versión 1.2.1 (Mar.2016)
-      * Preparado para adJ 5.8: Ubicación de socket de PostgreSQL por omisión
-        en /var/www/var/run/postgresql, utiliza doas en lugar de sudo
-
-      * Nueva variable global reporte_general_detallado para especificar mayor
-        detalle en reporte general. Cuando es mayor o igual a 1 incluye: sitio,
-        lugar, latitud y longitud junto a cada ubicación, antecedentes.
-
-      * Cantidad de años por validar nombres, apellidos y sexo de nacimiento
-        configurable con variable $GLOBALS['anios_valida_sexo']. Por defecto
-        empieza en 5.
-
-      * Arregladas fallas: Al instalar con inst-sivel.sh crea bien confv.sh y
-        sitios/sivel/conf.php (en otro caso primera instalación agota memoria
-        por inclusión recursiva de conf.php).
-
-Versión 1.2 (Oct.2015)
-      * Validación más veloz de nombres, apellidos y sexo de nacimiento.
-
-      * Renombrados archivos de comandos actweb.sh y pubweb.sh a exporta-web.sh
-        y borratodo-publica-web.sh respectivamente. Esqueleto de programa para
-        recuperar casos a partir de un reporte general recGeneral.php.
-
-      * Al exportar/importar casos con etiquetas se conserva la fecha de estas.
-
-      * Fallas reportadas por scrutinizer-ci resueltas.
-
-Versión 1.2b4 (May.2015)
-      * Consulta web permite filtrar por contexto.
-
-      * Reporte de actos como en 1.1 pero con las columnas adicionales Sexo y
-        Rango de Edad.
-
-      * Puede deshabilitar edición de casos con $GLOBALS['no_permite_editar']
-        en archivo de configuración (e.g sitios/sivel/conf.php).
-
-      * Fallas corregidas: cálculo de edad, no muestra rangos de edad
-        deshabilitados en ficha de captura, eliminada Marcha Patriótica
-        duplicada de Filiación Política.
-
-      * En módulo mapag puede configurarse autenticación para ver mapa con
-        $GLOBALS['mapag_autentica'] en archivo de configuración (e.g sitios/
-        sivel/conf.php).
-
-      * Puede deshabilitarse manejo (edición/adición/eliminación) de tablas
-        básicas con $GLOBALS['deshabilita_manejo_tablasbasicas'] en archivo de
-        configuración (e.g sitios/sivel/conf.php).
-
-Versión 1.2b3 (Ago.2014)
-      * Consulta web permite especificar dos etiquetas.
-
-      * Al validar con modelos probabilisticos se identifican hombres con
-        nombre de mujer, mujeres con nombre de hombre y nombres que parece
-        apellidos.
-
-      * Implementada otra verificación de seguridad sugeridad por OWASP:
-        escapar informacion emitida en XML.
-
-Versión 1.2b2 (Jul.2014)
-      * Consulta web ahora incluye filtro Sexo para hacer consultas por género.
-
-      * Fallas corregidas: En consulta web no autenticada información
-        geográfica correcta. Permite autenticar cuando se actualiza de 1.1 a
-        1.2. Opera con PHP 5.4 y ambiente de adJ 5.5.
-
-      * Más verificaciones de seguridad inspiradas por OWASP por ejemplo
-        bloquea cuenta que tenga más de 5 intentos fallidos de ingreso
-        (configurable con $GLOBALS['max_intentos_fallidos']). Dos formas de
-        desbloquear: (1) Un administrador va a Administrar->Usuario y elige el
-        usuario bloqueado y pone en blanco campos Intentos fallidos, Testigo
-        para desbloquear y Momento del bloqueo o (2) la cuenta se desbloquea
-        automáticamente después de una hora (o el tiempo especificado en
-        $GLOBALS['segundos_desbloqueo']).
-
-      * En módulo homónimos nueva opción del menú Otros para examinar listado.
-
-      * En consulta web y al buscar similares en el módulo mezcla, permite
-        buscar nombres similares al pronunciar en español ---usa soundex en
-        español, agradecimientos a Oliver Mazariegos de Grupo Vesica. En el
-        módulo mezclar al buscar similares emplea soundex para español.
-
-      * En relatos importa/exporta etiquetas.
-
-      * Listado de etnias completado con http://www.mineducacion.gov.co/1621/
-        articles-255690_archivo_xls_listado_etnias.xls. Listado de iglesias
-        mejorado.
-
-      * Módulo etiquetas permite agregar una columna con etiquetas en consulta
-        web. En conf.php agregar en cwncampos:
-
-        'm_etiquetas' => _('Etiquetas'),
-
-      * En consulta web como tabla color de un caso ahora sólo en el código (no
-        en toda la fila).
-
-Versión 1.2b1 (Mar.2014)
-      * Refinadas relaciones entre personas, posibilida de especificar relación
-        inversa para agregar simultaneamente 2 relaciones al añadir familiares
-        de una víctima.
-
-      * Almacenamiento de claves más seguro: Cambiado algoritmo de condensado
-        de claves a bcrypt (ver https://www.usenix.org/legacy/events/usenix99/
-        provos/provos_html/node1.html), que usa, si está disponible, el buen
-        generador de números aleatorios de OpenBSD (/dev/random), adJ 5.4 lo
-        configura por defecto para que el servidor web y SIVeL lo puedan usar.
-        Tras actualizar fuentes desde el directorio de su sitio ejecute
-
-          sudo ../../bin/creaesquema.sh
-
-        Después ingrese como usuario administrador y elija Otros->Actualizar.
-        Posteriormente cada usuario que ingrese con su clave correcta verá por
-        una sóla vez un mensaje que menciona el cambio de condensado para su
-        clave y que le indicará ingresar nuevamente.
-
-      * Simplificadas tablas de usuarios.
-
-      * Información geográfica actualizada con DIVIPOLA 2013.
-
-      * Añadidas variables de configuración para añadir validaciones: $GLOBALS
-        ['validaciones_tipicas'], $GLOBALS['gancho_valida_caso'], $GLOBALS
-        ['gancho_valida_base'].
-
-      * Añadido archivo de comandos bin/elimcaso.sh que ayuda a eliminar un
-        caso dado el código
-
-      * Añadidas variable de configuración para controlar presentación de
-        reporte tabla: $GLOBALS['reptabla_nonacimiento'], $GLOBALS
-        ['reptabla_noagresion'], $GLOBALS['reptabla_separa_ubicacion'] (que
-        separa ubicación en 2 columnas para municipio y departamento), $GLOBALS
-        ['reptabla_separa_nomap'] (que separa nombres y apellidos en 2
-        columnas) y $GLOBALS['reptabla_tipificacion_breve'] (que presenta
-        tipificación sin código ni supracategoria).
-
-      * Validaciones: tanto desde el menú Otros->Validar como con el botón Val.
-        y Rep. G al editar un caso se verifica que se hayan duplicado
-        categorias que lo requieren.
-
-      * Fallas resueltas: Al buscar por consulta detallada en pestaña ubicación
-        no pone automáticamente latitud y longitud. Agradecemos reporte a
-        Miltón Mejía. Permite poner sector social y rango edad en víctimas
-        colectivas.
-
-Versión 1.2a1 (Ago.2013)
-      * Modulo nuevo desplazamiento para registrar desplazamiento. Requiere que
-        en el caso se registren dos o más ubicaciones por donde se han
-        desplazado las víctimas. Agradecemos al SJR Colombia por financiar este
-        desarrollo de dominio público.
-
-      * Modulo mezcla para mezclar casos: Búsqueda de casos repetidos por
-        mezclar por fecha, departamento o nombres similares. Emplea heurística
-        para mezclar. Soporte de homónimos o nombres similares para excluirlos
-        de búsquedas para mezclar.
-
-      * Usabilidad: agrega automáticamente latitud y longitud al elegir
-        departamento o municipio en pestaña Ubicación; control AJAX más
-        eficiente para elegir departamento, municipio y clase (por ejemplo en
-        Consulta Web o en pestañas Ubicación y Víctima Individual); permite
-        especificar edad actual de una víctima, autocompleta año de nacimiento,
-        edad en hecho, edad actual y rango de edad cuando uno de estos se
-        cambia; alerta para reportar errores de validación.
-
-      * Internacionalización y localización: Activado Soporte de Idiomas
-        Nativos y codificación UTF8. Permite especificar al usuario el idioma
-        que prefiere para la interfaz, en el momento hay traducciones a español
-        e inglés. Activada cotejación en español, el ordenamiento ahora
-        corresponde al del español (por ejemplo en reporte revista por
-        localización o en tablas básicas).
-
-      * Activada búsqueda de textos completos ignorando mayúsculas, minúsculas
-        y tildes, usable al buscar por nombre, por título y por descripción en
-        consulta web. En consulta detallada en campos de texto (como nombre de
-        víctima) se específica cualquiera con *.
-
-      * Módulo de georeferenciación en Google Maps convertido a la versión 3
-        del API.
-
-      * Administradores: Se dividió el archivo de configuración en una parte
-        para servidor (e.g base de datos y módulos) y otra para interfaz.
-        Activa PostGIS al crear base de datos. Configuración más sencilla de
-        módulos, basta agregar el módulo en la variable modulos del archivo de
-        configuración del sitio y desde el menú principal elegir Otros->
-        Actualizar.
-
-      * Desarrolladores: Fuentes migradas a github. Afinado para PHP 5.3. Base
-        de datos debe estar en UTF-8. Salida enviada al navegador en UTF-8.
-        Fuentes en UTF-8. Estándares de nomenclatura SQL y Javascript. Archivo
-        de comandos herram/creatabla.sh que genera automaticamente estructura
-        de tabla básica y/o a partir de la estructura en estructura.sql genera
-        la clase en el directorio DataObject y los datos en DataObjects/
-        estructura-dataobject.ini y DataObjects/
-        estructura-dataobject.links.ini. Clase DataObject/Multitabla para
-        extender y facilitar personalizaciones con un control de multitabla
-        (similar al de familiar en Victima Individual). Clase
-        PagBaseMultiplePartes para extender y facilitar creación de pestañas
-        con partes provenientes de diversos DataObject. Se actualiza traducción
-        de fuentes con herram/intl.sh. Para personalizaciones que se
-        desarrollen en diferentes entornos puede especificarse configuración
-        particular a cada entorno en conf-local.php, conf_int-local.php y
-        vardb-local.sh.
-
-Versión 1.0 y 1.1
-      * El historial de la versión 1.1 puede verse en el manual de esa versión.
-
+Apéndice A. Novedades
+
+   Versión 1.2.7 (Mar.2019)
+
+          + Exportación de datos públicos ahora incluye fecha de ingreso
+            de los casos.
+          + Falla corregida, en conteo de víctimas individuales vuelve a
+            verse municipio. Gracias a Elizabeth Florez por reportar.
+          + Menú vuele a operar correctamente en chromium y chrome.
+            Gracias a Fabiana Carvajala por reporte y ayuda.
+
+   Versión 1.2.6 (Ago.2018)
+
+          + Al validar desde Otros->Validar, todas las validaciones ahora
+            incluyen analista.
+          + Resuelto problema al editar casos con ubicaciones con
+            departamento y sin municipio (agradecemos reporte a Carlos
+            Garaviz).
+          + Conteo por víctimas individuales ahora incluye casos sin
+            ubicación o sin municipio (presenta en blanco estos datos
+            cuando no hay información).
+          + Resuelto problema de cambio de fecha de caso al intentar
+            añadir un anexo con nombre inválido (agradecemos reporte de
+            Alejandro Burgos).
+
+   Versión 1.2.5 (Feb.2018)
+
+          + Nombre de categorias individuales 716 y 717 ahora en singular
+            y agregadas categorias análogas para víctimas colectivas 916 y
+            917.
+          + En reporte de actos ahora se incluye código de víctima para
+            facilitar hacer conteos por víctima, así como organización,
+            filiación, vínculo con el estado y etnia.
+          + Corrección: Consulta web presentada como tabla, presenta todas
+            las víctimas colectivas.
+          + Corrección: Consulta detallada en reporte de actos ya no
+            duplica actos cuando se especificaba rango de la fecha de
+            ingreso.
+          + Documentación: Uso de base remota (ver Sección 2.1, "Uso de
+            una base de datos remota").
+
+   Versión 1.2.4 (Sep.2017)
+
+          + Se actualiza consolidado general de víctima (módulo bdcinep)
+            de acuerdo a nuevo marco conceptual
+          + Actualiza marco conceptual para adoptar más categorias y
+            nomenclatura del Derecho Internacional Humanitario
+            Consuetudinario
+          + Permite descargar anexos desde reporte general
+          + Vuelve a operar exportación a CSV y se evita posible ataque
+            XSS descrito en
+            https://stackoverflow.com/questions/43894241/birt-possible-xss
+            -in-xls-format
+          + Opera con PHP 5.6 que es más estricto en chequeo de tipos
+
+   Versión 1.2.3 (Sep.2016)
+
+          + Arreglos en mapa para que (1) opere tras cambios en librerías
+            de Google. Ahora se requiere instalación local de librería,
+            ver modulos/mapag/Instala.txt; (2) presente bien presuntos
+            responsables en resumen.
+          + Al validar no reporta casos sin actos cuando son acciones
+            bélicas.
+          + Filtros en consulta detallada operan (por ejemplo por
+            contexto).
+          + Actualiza marco conceptual.
+          + Vuelve a poderse ver categoria de violencia en consulta web.
+          + Vuelve a operar elección de supracategoria en Conteos->V.
+            Individuales.
+          + Actualizado módulo bélicas.
+          + Administradores pueden listar otras fuentes en consulta web.
+
+   Versión 1.2.2 (Abr.2016)
+
+          + Validaciones más veloces, que presentan y ordenan siempre por
+            fecha del caso.
+          + Corregidos conteos del módulo de tablas de Banco de Datos del
+            CINEP.
+          + Configurado para adJ 5.8 con socket de PostgreSQL ubicado por
+            defecto en /var/www/var/run/postgresql, pero detecta ruta
+            usada en adJ 5.7 y anteriores (/var/www/tmp)
+
+   Versión 1.2.1 (Mar.2016)
+
+          + Preparado para adJ 5.8: Ubicación de socket de PostgreSQL por
+            omisión en /var/www/var/run/postgresql, utiliza doas en lugar
+            de sudo
+          + Nueva variable global reporte_general_detallado para
+            especificar mayor detalle en reporte general. Cuando es mayor
+            o igual a 1 incluye: sitio, lugar, latitud y longitud junto a
+            cada ubicación, antecedentes.
+          + Cantidad de años por validar nombres, apellidos y sexo de
+            nacimiento configurable con variable
+            $GLOBALS['anios_valida_sexo']. Por defecto empieza en 5.
+          + Arregladas fallas: Al instalar con inst-sivel.sh crea bien
+            confv.sh y sitios/sivel/conf.php (en otro caso primera
+            instalación agota memoria por inclusión recursiva de
+            conf.php).
+
+   Versión 1.2 (Oct.2015)
+
+          + Validación más veloz de nombres, apellidos y sexo de
+            nacimiento.
+          + Renombrados archivos de comandos actweb.sh y pubweb.sh a
+            exporta-web.sh y borratodo-publica-web.sh respectivamente.
+            Esqueleto de programa para recuperar casos a partir de un
+            reporte general recGeneral.php.
+          + Al exportar/importar casos con etiquetas se conserva la fecha
+            de estas.
+          + Fallas reportadas por scrutinizer-ci resueltas.
+
+   Versión 1.2b4 (May.2015)
+
+          + Consulta web permite filtrar por contexto.
+          + Reporte de actos como en 1.1 pero con las columnas adicionales
+            Sexo y Rango de Edad.
+          + Puede deshabilitar edición de casos con
+            $GLOBALS['no_permite_editar'] en archivo de configuración (e.g
+            sitios/sivel/conf.php).
+          + Fallas corregidas: cálculo de edad, no muestra rangos de edad
+            deshabilitados en ficha de captura, eliminada Marcha
+            Patriótica duplicada de Filiación Política.
+          + En módulo mapag puede configurarse autenticación para ver mapa
+            con $GLOBALS['mapag_autentica'] en archivo de configuración
+            (e.g sitios/sivel/conf.php).
+          + Puede deshabilitarse manejo (edición/adición/eliminación) de
+            tablas básicas con
+            $GLOBALS['deshabilita_manejo_tablasbasicas'] en archivo de
+            configuración (e.g sitios/sivel/conf.php).
+
+   Versión 1.2b3 (Ago.2014)
+
+          + Consulta web permite especificar dos etiquetas.
+          + Al validar con modelos probabilisticos se identifican hombres
+            con nombre de mujer, mujeres con nombre de hombre y nombres
+            que parece apellidos.
+          + Implementada otra verificación de seguridad sugeridad por
+            OWASP: escapar informacion emitida en XML.
+
+   Versión 1.2b2 (Jul.2014)
+
+          + Consulta web ahora incluye filtro Sexo para hacer consultas
+            por género.
+          + Fallas corregidas: En consulta web no autenticada información
+            geográfica correcta. Permite autenticar cuando se actualiza de
+            1.1 a 1.2. Opera con PHP 5.4 y ambiente de adJ 5.5.
+          + Más verificaciones de seguridad inspiradas por OWASP por
+            ejemplo bloquea cuenta que tenga más de 5 intentos fallidos de
+            ingreso (configurable con $GLOBALS['max_intentos_fallidos']).
+            Dos formas de desbloquear: (1) Un administrador va a
+            Administrar->Usuario y elige el usuario bloqueado y pone en
+            blanco campos Intentos fallidos, Testigo para desbloquear y
+            Momento del bloqueo o (2) la cuenta se desbloquea
+            automáticamente después de una hora (o el tiempo especificado
+            en $GLOBALS['segundos_desbloqueo']).
+          + En módulo homónimos nueva opción del menú Otros para examinar
+            listado.
+          + En consulta web y al buscar similares en el módulo mezcla,
+            permite buscar nombres similares al pronunciar en español
+            ---usa soundex en español, agradecimientos a Oliver Mazariegos
+            de Grupo Vesica. En el módulo mezclar al buscar similares
+            emplea soundex para español.
+          + En relatos importa/exporta etiquetas.
+          + Listado de etnias completado con
+            http://www.mineducacion.gov.co/1621/articles-255690_archivo_xl
+            s_listado_etnias.xls. Listado de iglesias mejorado.
+          + Módulo etiquetas permite agregar una columna con etiquetas en
+            consulta web. En conf.php agregar en cwncampos:
+'m_etiquetas' => _('Etiquetas'),
+
+          + En consulta web como tabla color de un caso ahora sólo en el
+            código (no en toda la fila).
+
+   Versión 1.2b1 (Mar.2014)
+
+          + Refinadas relaciones entre personas, posibilida de especificar
+            relación inversa para agregar simultaneamente 2 relaciones al
+            añadir familiares de una víctima.
+          + Almacenamiento de claves más seguro: Cambiado algoritmo de
+            condensado de claves a bcrypt (ver
+            https://www.usenix.org/legacy/events/usenix99/provos/provos_ht
+            ml/node1.html), que usa, si está disponible, el buen generador
+            de números aleatorios de OpenBSD (/dev/random), adJ 5.4 lo
+            configura por defecto para que el servidor web y SIVeL lo
+            puedan usar. Tras actualizar fuentes desde el directorio de su
+            sitio ejecute
+  sudo ../../bin/creaesquema.sh
+
+            Después ingrese como usuario administrador y elija
+            Otros->Actualizar. Posteriormente cada usuario que ingrese con
+            su clave correcta verá por una sóla vez un mensaje que
+            menciona el cambio de condensado para su clave y que le
+            indicará ingresar nuevamente.
+          + Simplificadas tablas de usuarios.
+          + Información geográfica actualizada con DIVIPOLA 2013.
+          + Añadidas variables de configuración para añadir validaciones:
+            $GLOBALS['validaciones_tipicas'],
+            $GLOBALS['gancho_valida_caso'],
+            $GLOBALS['gancho_valida_base'].
+          + Añadido archivo de comandos bin/elimcaso.sh que ayuda a
+            eliminar un caso dado el código
+          + Añadidas variable de configuración para controlar presentación
+            de reporte tabla: $GLOBALS['reptabla_nonacimiento'],
+            $GLOBALS['reptabla_noagresion'],
+            $GLOBALS['reptabla_separa_ubicacion'] (que separa ubicación en
+            2 columnas para municipio y departamento),
+            $GLOBALS['reptabla_separa_nomap'] (que separa nombres y
+            apellidos en 2 columnas) y
+            $GLOBALS['reptabla_tipificacion_breve'] (que presenta
+            tipificación sin código ni supracategoria).
+          + Validaciones: tanto desde el menú Otros->Validar como con el
+            botón Val. y Rep. G al editar un caso se verifica que se hayan
+            duplicado categorias que lo requieren.
+          + Fallas resueltas: Al buscar por consulta detallada en pestaña
+            ubicación no pone automáticamente latitud y longitud.
+            Agradecemos reporte a Miltón Mejía. Permite poner sector
+            social y rango edad en víctimas colectivas.
+
+   Versión 1.2a1 (Ago.2013)
+
+          + Modulo nuevo desplazamiento para registrar desplazamiento.
+            Requiere que en el caso se registren dos o más ubicaciones por
+            donde se han desplazado las víctimas. Agradecemos al SJR
+            Colombia por financiar este desarrollo de dominio público.
+          + Modulo mezcla para mezclar casos: Búsqueda de casos repetidos
+            por mezclar por fecha, departamento o nombres similares.
+            Emplea heurística para mezclar. Soporte de homónimos o nombres
+            similares para excluirlos de búsquedas para mezclar.
+          + Usabilidad: agrega automáticamente latitud y longitud al
+            elegir departamento o municipio en pestaña Ubicación; control
+            AJAX más eficiente para elegir departamento, municipio y clase
+            (por ejemplo en Consulta Web o en pestañas Ubicación y Víctima
+            Individual); permite especificar edad actual de una víctima,
+            autocompleta año de nacimiento, edad en hecho, edad actual y
+            rango de edad cuando uno de estos se cambia; alerta para
+            reportar errores de validación.
+          + Internacionalización y localización: Activado Soporte de
+            Idiomas Nativos y codificación UTF8. Permite especificar al
+            usuario el idioma que prefiere para la interfaz, en el momento
+            hay traducciones a español e inglés. Activada cotejación en
+            español, el ordenamiento ahora corresponde al del español (por
+            ejemplo en reporte revista por localización o en tablas
+            básicas).
+          + Activada búsqueda de textos completos ignorando mayúsculas,
+            minúsculas y tildes, usable al buscar por nombre, por título y
+            por descripción en consulta web. En consulta detallada en
+            campos de texto (como nombre de víctima) se específica
+            cualquiera con *.
+          + Módulo de georeferenciación en Google Maps convertido a la
+            versión 3 del API.
+          + Administradores: Se dividió el archivo de configuración en una
+            parte para servidor (e.g base de datos y módulos) y otra para
+            interfaz. Activa PostGIS al crear base de datos. Configuración
+            más sencilla de módulos, basta agregar el módulo en la
+            variable modulos del archivo de configuración del sitio y
+            desde el menú principal elegir Otros->Actualizar.
+          + Desarrolladores: Fuentes migradas a github. Afinado para PHP
+            5.3. Base de datos debe estar en UTF-8. Salida enviada al
+            navegador en UTF-8. Fuentes en UTF-8. Estándares de
+            nomenclatura SQL y Javascript. Archivo de comandos
+            herram/creatabla.sh que genera automaticamente estructura de
+            tabla básica y/o a partir de la estructura en estructura.sql
+            genera la clase en el directorio DataObject y los datos en
+            DataObjects/estructura-dataobject.ini y
+            DataObjects/estructura-dataobject.links.ini. Clase
+            DataObject/Multitabla para extender y facilitar
+            personalizaciones con un control de multitabla (similar al de
+            familiar en Victima Individual). Clase PagBaseMultiplePartes
+            para extender y facilitar creación de pestañas con partes
+            provenientes de diversos DataObject. Se actualiza traducción
+            de fuentes con herram/intl.sh. Para personalizaciones que se
+            desarrollen en diferentes entornos puede especificarse
+            configuración particular a cada entorno en conf-local.php,
+            conf_int-local.php y vardb-local.sh.
+
+   Versión 1.0 y 1.1
+
+          + El historial de la versión 1.1 puede verse en el manual de esa
+            versión.
