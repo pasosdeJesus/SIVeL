@@ -1,5 +1,5 @@
-# Elimina bélicas de la base de datos
-# Dominio público. 2008. vtamara@pasosdeJesus.org
+# Elimina bÃ©licas de la base de datos
+# Dominio pÃºblico. 2008. vtamara@pasosdeJesus.org
 
 if (test ! -f ./vardb.sh -o ! -f conf.php) then {
 	echo "Ejecute desde directorio del sitio";
@@ -10,7 +10,7 @@ if (test ! -f ./vardb.sh -o ! -f conf.php) then {
 
 . ../../bin/elimcomun.sh
 
-echo "Este script eliminará clasificación de bélicas de casos así como casos que sólo tengan clasificación de bélicas (y las víctimas que pudieran tener erradamente  asociadas.  Confirma continuar (s para continuar)";
+echo "Este script eliminarÃ¡ clasificaciÃ³n de bÃ©licas de casos asÃ­ como casos que sÃ³lo tengan clasificaciÃ³n de bÃ©licas (y las vÃ­ctimas que pudieran tener erradamente  asociadas.  Confirma continuar (s para continuar)";
 read sn
 if (test "$sn" = "s") then {
 	../../bin/psql.sh -c "DELETE FROM antecedente_combatiente;"
