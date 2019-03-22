@@ -536,7 +536,11 @@ class AccionConsolidado extends HTML_QuickForm_Action
                         }
                     }
                     if ($dv[$idcaso][$idvic][$idcat] == 1) {
-                        $suma[$idcat]++;
+                        if (isset($suma[$idcat])) {
+                            $suma[$idcat]++;
+                        } else {
+                            $suma[$idcat] = 0;
+                        }
                     } else {
                         die(sprintf(
                             "Sobreconteo por caso %s "
@@ -610,11 +614,22 @@ class AccionConsolidado extends HTML_QuickForm_Action
         foreach ($cat as $idcat => $cp) {
             if ($pResto || $idcat != chr($ncol+65)) {
                 if ($pMuestra == "tabla") {
-                    echo "<td>" . (int)$suma[$idcat] . "</td>";
+                    echo "<td>";
+                    if (isset($suma[$idcat])) {
+                        echo (int)$suma[$idcat];
+                    }
+                    echo "</td>";
                 } elseif ($pMuestra == 'csv') {
-                    echo ", " . (int)$suma[$idcat];
+                    echo ", ";
+                    if (isset($suma[$idcat])) {
+                        echo (int)$suma[$idcat];
+                    }
                 } elseif ($pMuestra == 'latex') {
-                    echo "& " . (int)$suma[$idcat] . " ";
+                    echo "& ";
+                    if (isset($suma[$idcat])) {
+                        echo (int)$suma[$idcat];
+                    }
+                    echo " ";
                 }
             }
         }
