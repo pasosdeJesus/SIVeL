@@ -1,6 +1,9 @@
-INSERT INTO prensa
-INSERT INTO escrito_caso
-INSERT INTO fuente_directa
-INSERT INTO fuente_directa_caso
-INSERT INTO usuario
-INSERT INTO caso_usuario
+INSERT INTO public.anexo
+INSERT INTO public.caso_fotra
+INSERT INTO public.caso_ffrecuente
+INSERT INTO public.escrito_caso
+INSERT INTO public.fuente_directa
+INSERT INTO public.fuente_directa_caso
+INSERT INTO public.fotra
+INSERT INTO public.usuario
+INSERT INTO public.prensa
