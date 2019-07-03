@@ -658,12 +658,15 @@ class ConsultaWeb extends HTML_QuickForm_Page
         );
         $sel->setMultiple(true);
         $sel->setSize(5);
+        $wrl = "WHERE fechadeshabilitacion IS NULL";
+        if (in_array(42, $this->opciones)) { 
+            $wrl = "";
+        }
         ResConsulta::llenaSelCategoria(
             $db,
             "SELECT id_tviolencia, id_supracategoria, id 
-            FROM categoria 
-            WHERE fechadeshabilitacion IS NULL
-            ORDER BY id_tviolencia,
+            FROM categoria " . $wrl . 
+            " ORDER BY id_tviolencia,
             id_supracategoria, id;",
             $sel
         );
