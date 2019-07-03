@@ -1,15 +1,14 @@
 
-   SIVeL se dedica a Dios y a las víctimas. Su código fuente se libera al
-   Dominio Público de acuerdo a la legislación colombiana, sin garantías,
-   está registrada como obra de dominio público ante la oficina de
-   Derechos de Autor de Colombia desde el 10 de Mayo de 2011. Oramos para
-   que no sea utilizado por estructuras armadas. Esta documentación fue
-   actualizada por última vez en 11/03/2019
+SIVeL se dedica a Dios y a las v ctimas. Su código fuente se libera al Dominio
+Público de acuerdo a la legislación colombiana, sin garantías, está registrada
+como obra de dominio público ante la oficina de Derechos de Autor de Colombia
+desde el 10 de Mayo de 2011. Oramos para que no sea utilizado por estructuras
+armadas. Esta documentación fue actualizada por última vez en 03/07/2019
 
-   En Internet puede consultar la versión más reciente de esta
-   documentación en http://sivel.sf.net/1.2/, así como la documentación
-   técnica o bien descargar el código fuente de SIVeL o esta documentación
-   en formato HTML comprimido.
+En Internet puede consultar la versión más reciente de esta documentación en
+http://sivel.sf.net/1.2/, así como la documentación técnica o bien descargar el
+código fuente de SIVeL o esta documentación en formato HTML comprimido.
 
-   Lo invitamos a consultar versiones más recientes y noticias
-   relacionadas con SIVeL en http://sivel.sf.net
+Lo invitamos a consultar versiones más recientes y noticias relacionadas con
+SIVeL en http://sivel.sf.net
+
