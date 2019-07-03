@@ -34,7 +34,7 @@ echo '</div></b></td></table>';
 
 res_valida(
     $db, _("Casos con memo vacio"),
-    "SELECT id, fecha FROM caso WHERE TRIM(memo)='' ORDER BY fecha", true
+    "SELECT id, fecha FROM caso WHERE LENGTH(TRIM(memo)) < 30 ORDER BY fecha", true
 );
 
 res_valida(
