@@ -1,3 +1,5 @@
+# Descripción del API empleado por módulo de mapas en SIVeL 1.2
+
 El módulo de mapas opera sobre el API de Google Maps y obtiene dinámicamente los datos que presenta de una instancia de SIVeL 1.2.
 
 Obtiene datos de SIVeL 1.2 mediante 2 rutas:
@@ -6,7 +8,7 @@ Obtiene datos de SIVeL 1.2 mediante 2 rutas:
 
 A continuación se detallan los parámetros que cada una de estas dos rutas puede manejar:
 
-I. casos_sivel_remote.php:
+## Ruta 1. casos_sivel_remote.php:
 
 Sólo responde a GET, con parámetros que permiten filtrar los casos que retorna así:
 
@@ -89,7 +91,7 @@ La respuesta será un JSON de la forma:
 }
 ```
 
-II. caso_detalles_sivel_remote.php:
+## Ruta 2. caso_detalles_sivel_remote.php:
 
 Recibe sólo un parámetro que es obligatorio:
 - id_caso: Identificación del caso del cual se dan detalles
