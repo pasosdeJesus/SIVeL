@@ -31,6 +31,7 @@ Se solicitan los casos del primer semestre del 2018 en el departamento de Antioq
 La respuesta será un JSON de la forma:
 
 ```JSON
+{
 158601: {
 fecha: "2018-01-09"
 latitud: "7.88592040204419"
@@ -49,7 +50,7 @@ latitud: "7.88596001302042"
 longitud: "-76.6343585952416"
 titulo: ""
 },
-158614:
+158614: {
 fecha: "2018-03-08"
 latitud: "7.88567243205197"
 longitud: "-76.6350480509681"
