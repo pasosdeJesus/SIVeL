@@ -18,7 +18,7 @@ Sólo responde a GET, con parámetros que permiten filtrar los casos que retorna
 - etiqueta: Identificación de la etiqueta
 
 
-Responde con los casos que pasan el filtro en un JSON que consta de:
+Responde con los casos que pasan el filtro en un JSON consistente de un objeto, cada item del objeto tendrá como propiedad la identificacin de un caso y su valor será un objeto con detalles del mismo:
  - id: identificación del caso
    - latitud, longitud Con latitud y longitud en 
    - titulo: Titulo del caso
@@ -32,60 +32,60 @@ La respuesta será un JSON de la forma:
 
 ```JSON
 {
-158601: {
-fecha: "2018-01-09"
-latitud: "7.88592040204419"
-longitud: "-76.6348432017632"
-titulo: ""
-},
-158606: {
-fecha: "2018-02-15"
-latitud: "7.88509472352357"
-longitud: "-76.635152884457"
-titulo: ""
-},
-158612: {
-fecha: "2018-03-02"
-latitud: "7.88596001302042"
-longitud: "-76.6343585952416"
-titulo: ""
-},
-158614: {
-fecha: "2018-03-08"
-latitud: "7.88567243205197"
-longitud: "-76.6350480509681"
-titulo: ""
-}, 
-158615: {
-fecha: "2018-03-15"
-latitud: "7.88540798598625"
-longitud: "-76.6345313593739"
-titulo: ""
-}, 
-158626: {
-fecha: "2018-04-27"
-latitud: "7.88550014534744"
-longitud: "-76.6346938766204"
-titulo: ""
-}.
-158629: {
-fecha: "2018-04-30"
-latitud: "7.88604828340681"
-longitud: "-76.6351158279358"
-titulo: ""
-},
-158630: {
-fecha: "2018-05-05"
-latitud: "7.88528522478287"
-longitud: "-76.6346952392787"
-titulo: ""
-},
-158926:{ 
-fecha: "2018-04-22"
-latitud: "7.00784579460548"
-longitud: "-73.9143915476742"
-titulo: ""
-}
+  158601: {
+    fecha: "2018-01-09"
+    latitud: "7.88592040204419"
+    longitud: "-76.6348432017632"
+    titulo: ""
+  },
+  158606: {
+    fecha: "2018-02-15"
+    latitud: "7.88509472352357"
+    longitud: "-76.635152884457"
+    titulo: ""
+  },
+  158612: {
+    fecha: "2018-03-02"
+    latitud: "7.88596001302042"
+    longitud: "-76.6343585952416"
+    titulo: ""
+  },
+  158614: {
+    fecha: "2018-03-08"
+    latitud: "7.88567243205197"
+    longitud: "-76.6350480509681"
+    titulo: ""
+  }, 
+  158615: {
+    fecha: "2018-03-15"
+    latitud: "7.88540798598625"
+    longitud: "-76.6345313593739"
+    titulo: ""
+  }, 
+  158626: {
+    fecha: "2018-04-27"
+    latitud: "7.88550014534744"
+    longitud: "-76.6346938766204"
+    titulo: ""
+  }.
+  158629: {
+    fecha: "2018-04-30"
+    latitud: "7.88604828340681"
+    longitud: "-76.6351158279358"
+    titulo: ""
+  },
+  158630: {
+    fecha: "2018-05-05"
+    latitud: "7.88528522478287"
+    longitud: "-76.6346952392787"
+    titulo: ""
+  },
+  158926:{ 
+    fecha: "2018-04-22"
+    latitud: "7.00784579460548"
+    longitud: "-73.9143915476742"
+    titulo: ""
+  }
 }
 ```
 
