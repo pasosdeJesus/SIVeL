@@ -67,7 +67,7 @@ La respuesta será un JSON de la forma:
     latitud: "7.88550014534744"
     longitud: "-76.6346938766204"
     titulo: ""
-  }.
+  },
   158629: {
     fecha: "2018-04-30"
     latitud: "7.88604828340681"
