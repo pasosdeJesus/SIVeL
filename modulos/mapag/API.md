@@ -111,5 +111,33 @@ Responde con los detalles del caso con un objeto JSON con una sola propiedad `ca
   - `presponsables`: un objeto que puede tener varios items, uno por presunto responsable, la propiedad de cada uno será la identificación del presunto responsable y su valor será el nombre
   - `victimas`: un objeto que puede tener varios items, uno por víctima individual del caso, la propiedad de cada uno será la identificación de la víctima y su valor será los nombres de la víctima seguido de un espacio y los apellidos.
   
-    
+Por ejemplo una peticin GET al URL:    
+```
+https://base.nocheyniebla.org/modulos/mapag/caso_detalles_sivel_remote.php?codigo=160405
+```
+
+Responde con detalles del caso con id 160405:
+
+```JSON
+{
+  "caso":{
+    "id":160405,
+    "titulo":"",
+    "hechos":"Miembros de la Guardia Nacional Bolivariana de Venezuela incursionaron en el sector conocido como Islas Maipures y detuvieron arbitrariamente a tres campesinos de nacionalidad colombiana a quienes llevaron a territorio venezolano.",
+    "fecha":"2018-09-13",
+    "hora":"",
+    "departamento":"VICHADA",
+    "municipio":"CUMARIBO",
+    "centro_poblado":"",
+    "presponsables":{
+      "24":"AGENTE EXTRANJERO"
+    },
+    "victimas":{
+      "251898":"N N",
+      "251899":"N N",
+      "251900":"N N"
+    }
+  }
+}
+```
   
