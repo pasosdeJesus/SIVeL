@@ -6,6 +6,8 @@ Para obtener datos de SIVeL 1.2 emplea 2 rutas:
   1. `casos_sivel_remote.php` Que responde con un conjunto de casos y pocos detalles de cada uno
   2. `caso_detalles_sivel_remote.php` Que responde con detalles de un sólo caso
 
+Dado que es un servicio a las víctimas no requiere autenticacin pero casos_sivel_remote.php responde máximo con 4000 casos.
+
 A continuación se detallan los parámetros que cada una de estas dos rutas puede manejar y sus respuestas.
 
 ## Ruta 1. `casos_sivel_remote.php`
