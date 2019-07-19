@@ -19,12 +19,10 @@ Los parámetros que puede obtener permiten filtrar los casos que retorna así:
 
 
 Responde con los casos que pasan el filtro en un JSON que consta de:
-
-- id_relato con identificación del caso
-- latitud, longitud Con latitud y longitud en 
-- titulo: Titulo del caso
-- fecha: Fecha del caso
-
+ - id: identificación del caso
+   - latitud, longitud Con latitud y longitud en 
+   - titulo: Titulo del caso
+   - fecha: Fecha del caso
 
 
 II. caso_detalles_sivel_remote.php:
