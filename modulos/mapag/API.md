@@ -32,8 +32,8 @@ La respuesta será un JSON de la forma:
 
 ```JSON
 {
-  158601: {
-    fecha: "2018-01-09"
+  "158601": {
+    "fecha": "2018-01-09"
     latitud: "7.88592040204419"
     longitud: "-76.6348432017632"
     titulo: ""
