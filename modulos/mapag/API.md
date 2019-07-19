@@ -3,32 +3,36 @@
 El módulo de mapas opera sobre el API de Google Maps y obtiene dinámicamente los datos que presenta de una instancia de SIVeL 1.2.
 
 Obtiene datos de SIVeL 1.2 mediante 2 rutas:
-1. casos_sivel_remote.php  Responde con un conjunto de casos y pocos detalles de cada uno
-2. caso_detalles_sivel_remote.php Responde con detalles de un sólo caso
+  1. `casos_sivel_remote.php` Responde con un conjunto de casos y pocos detalles de cada uno
+  2. `caso_detalles_sivel_remote.php` Responde con detalles de un sólo caso
 
 A continuación se detallan los parámetros que cada una de estas dos rutas puede manejar:
 
-## Ruta 1. casos_sivel_remote.php:
+## Ruta 1. `casos_sivel_remote.php`
 
-Sólo responde a GET, con parámetros que permiten filtrar los casos que retorna así:
+Sólo responde a peticiones GET con parámetros que permiten filtrar los casos que retorna así:
 
-- desde: Fecha inicial en formato ISO (es indispensable).
-- hasta: Fecha final en formato ISO 
-- departamento:  Identificación del departamento 
-- prresp: Identificación del presunto responsable
-- tvio: Identificación del tipo de violencia
-- etiqueta: Identificación de la etiqueta
+- `desde`: Fecha inicial en formato ISO (es indispensable).
+- `hasta`: Fecha final en formato ISO 
+- `departamento`:  Identificación del departamento 
+- `prresp`: Identificación del presunto responsable
+- `tvio`: Identificación del tipo de violencia
+- `etiqueta`: Identificación de la etiqueta
 
 
 Responde con los casos que pasan el filtro en un JSON consistente de un objeto, cada item del objeto tendrá como propiedad la identificacin de un caso y su valor será un objeto con detalles del mismo:
- - id: identificación del caso
-   - latitud, longitud Con latitud y longitud en 
-   - titulo: Titulo del caso
-   - fecha: Fecha del caso
+ - número que identifica el caso
+   - `latitud`: decimal para sistema de proyección WGS84
+   - `longitud`: decimal para sistema de proyección WGS84
+   - `titulo`: Titulo del caso
+   - `fecha`: Fecha del caso
 
-Por ejemplo mediante una peticin GET al URL https://base.nocheyniebla.org/modulos/mapag/casos_sivel_remote.php?desde=2018-01-01&hasta=2018-06-30&departamento=5&tvio=A&prresp=4
+Por ejemplo mediante una petición GET al URL 
+```
+https://base.nocheyniebla.org/modulos/mapag/casos_sivel_remote.php?desde=2018-01-01&hasta=2018-06-30&departamento=5&tvio=A&prresp=4
+```
 
-Se solicitan los casos del primer semestre del 2018 en el departamento de Antioquia (con id 5 en tabla departamento), que sean violaciones a Derechos Humanos (A es Derechos Humanos en tabla tviolencia) y del presunto reponsable (cuyo código es 4 en la tabla presponsable).
+Se solicitan los casos del primer semestre del 2018 en el departamento de Antioquia (con id 5 en tabla departamento), que sean violaciones a Derechos Humanos (A es Derechos Humanos en tabla tviolencia) y del presunto reponsable Ejército (cuyo código es 4 en la tabla presponsable).
 
 La respuesta será un JSON de la forma:
 
@@ -91,24 +95,24 @@ La respuesta será un JSON de la forma:
 }
 ```
 
-## Ruta 2. caso_detalles_sivel_remote.php:
+## Ruta 2. `caso_detalles_sivel_remote.php`
 
-Recibe sólo un parámetro que es obligatorio:
-- id_caso: Identificación del caso del cual se dan detalles
+Sólo responde a peticiones GET con un sólo parámetro que es obligatorio:
+- `id_caso`: Identificación del caso del cual se dan detalles
 
 Responde con los detalles del caso con un JSON que consta de:
--caso
-  - id: Identificación
-  - titulo
-  - hechos: Descripción o memo del caso
-  - fecha
-  - hora 
-  - departamento: principal
-  - municipio: principal
-  - centro_poblado: principal
-  - presponsables:
+-`caso`
+  - `id`: Identificación
+  - `titulo`
+  - `hechos`: Descripción o memo del caso
+  - `fecha`
+  - `hora` 
+  - `departamento`: principal
+  - `municipio`: principal
+  - `centro_poblado`: principal
+  - `presponsables`:
     - id: nombre
-  - victimas:
+  - `victimas`:
     - id: nombres apellidos
     
   
