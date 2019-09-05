@@ -119,10 +119,11 @@ ini_set('include_path', $rutas_include);
 foreach ($lm as $m) {
     //echo "OJO modulo $m/conf.php<br>\n";
     if (file_exists("$m/conf.php")) {
-        //echo "OJO existe<br>\n";
+        #echo "OJO existe $m<br>\n";
         include "$m/conf.php";
     }
 }
+
 //echo "<hr>OJO antes de remplaza " ;print_r($GLOBALS['ficha_tabuladores']);
 if (isset($GLOBALS['remplaza_ficha_tabuladores'])) {
     foreach ($GLOBALS['remplaza_ficha_tabuladores'] as $a) {

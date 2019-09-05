@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
-	<varlistentry><term>Versión 1.2.8 (Ago.2019)</term>
+	<varlistentry><term>Versión 1.2.8 (Sep.2019)</term>
 		<listitem>
 			<para><itemizedlist>
-					<listitem><para>Al validad incluye entre los casos vacios los que tengan memo de menos de 30 caracteres.</para></listitem>
+					<listitem><para>Al validad incluye entre los casos vacíos los que tengan memo de menos de 30 caracteres.</para></listitem>
 					<listitem><para>En consulta web los usuarios autenticados pueden buscar por categorias deshabilitadas.</para></listitem>
 			</itemizedlist></para>
 		</listitem>

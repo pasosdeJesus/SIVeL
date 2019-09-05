@@ -1,7 +1,7 @@
 Ap ndice A. Novedades
 
-Versión 1.2.8 (Ago.2019)
-      * Al validad incluye entre los casos vacios los que tengan memo de menos
+Versión 1.2.8 (Sep.2019)
+      * Al validar incluye entre los casos vacios los que tengan memo de menos
         de 30 caracteres.
 
       * En consulta web los usuarios autenticados pueden buscar por categorias

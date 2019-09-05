@@ -4,7 +4,7 @@
 # Basado en script de http://structio.sourceforge.net/seguidor
 
 if (test ! -f $dirap/conf.php) then {
-	echo "Modifique la variable dirap del script vardb.sh para que tenga directorio de    instalacion";
+	echo "Modifique la variable dirap del script vardb.sh para que tenga directorio de    instalacion (ahora es $dirap y no se encontro $dirap/conf.php)";
 	exit 1;
 } fi;
 
