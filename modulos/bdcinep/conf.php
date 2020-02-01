@@ -26,7 +26,6 @@ $GLOBALS['m_opcion'][57] = array(
     'idpapa' => 50,
     'url' => 'opcion?num=1000',
 );
-
 require_once "modulos/bdcinep/tablasnyn.php";
 
 $GLOBALS['gancho_ei_filtro'][] = 'agregar_categoria_nombre';
