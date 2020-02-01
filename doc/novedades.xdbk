@@ -8,7 +8,8 @@
       Se arregla filtro por fecha de ingreso en Consulta Web --antes
         tenía en cuenta casos ingresados o revisados/modificados en el
 	rango de fechas, ahora solo tiene en cuenta casos ingresados en el 
-        rango de fechas
+	rango de fechas. Agradecimientos por ayudar a detectar este
+	error a Cristina Cano.
 					</para></listitem>
 			</itemizedlist></para>
 		</listitem>
