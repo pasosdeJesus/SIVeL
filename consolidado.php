@@ -364,7 +364,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
             " WHERE persona.id=victima.id_persona " .
             " AND $where " ;
         $q = "(" . $q . ") ORDER BY 3";
-        //echo "q es $q<br>";
+        #echo "q es $q<br>"; 
         $result = hace_consulta($db, $q);
 
         $row = array();
@@ -383,6 +383,7 @@ class AccionConsolidado extends HTML_QuickForm_Action
                 $minf = array();
                 $q = "SELECT MIN(fechainicio) FROM caso_usuario " .
                     " WHERE id_caso='" . $row[0] . "';";
+                #echo "q es $q<br>"; die("x");
                 $rfc = hace_consulta($db, $q);
                 if ($rfc->fetchInto($minf)) {
                     $arf = explode('-', $minf[0]);

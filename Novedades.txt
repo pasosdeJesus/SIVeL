@@ -1,5 +1,11 @@
 Ap ndice A. Novedades
 
+Versión 1.2.9 (Feb.2020)
+      * Se arregla filtro por fecha de ingreso en Consulta Web --antes
+        tenía en cuenta casos ingresados o revisados/modificados en el
+	rango de fechas, ahora solo tiene en cuenta casos ingresados en el 
+        rango de fechas
+
 Versión 1.2.8 (Ago.2019)
       * Al validad incluye entre los casos vacios los que tengan memo de menos
         de 30 caracteres.
