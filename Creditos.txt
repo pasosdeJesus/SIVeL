@@ -1,90 +1,106 @@
-Apéndice D. Créditos
+Ap ndice D. Cr ditos
 
-   Damos gracias primero a Dios y a Él encomendamos y dedicamos este
-   proyecto.
+Damos gracias primero a Dios y a  l encomendamos y dedicamos este proyecto.
 
-   En 2004 con autorización del sacerdote Javier Giraldo se emplearon como
-   referencia inicial interfaces de usuario y datos (sin consultar fuentes
-   ni estructuras de las bases) de las siguientes bases de datos del Banco
-   de Datos de DDHH, DIH y VPS del CINEP:
-     * Base empleada de 1998 a 2000.
-     * Base empleada de 2000 a 2004.
+En 2004 con autorización del sacerdote Javier Giraldo se emplearon como
+referencia inicial interfaces de usuario y datos (sin consultar fuentes ni
+estructuras de las bases) de las siguientes bases de datos del Banco de Datos
+de DDHH, DIH y VPS del CINEP:
 
-   Los aportes iniciales para las tablas básicas provienen de:
-     * Categorías de "Marco Conceptual", revista Noche y Niebla.
-       http://www.nocheyniebla.org
-     * Información geográfica tomada del Departamento Nacional de
-       Planeación, DANE, Banco de Datos de Derechos Humanos y Violencia
-       Política.
-     * Otros datos empleados en el Banco de Datos de Derechos Humanos y
-       Violencia Política del CINEP, así como por integrantes de la Red de
-       Bancos de Datos.
+  * Base empleada de 1998 a 2000.
 
-   Han ayudado con sugerencias y requerimientos:
-     * William Rozo Alvarez (wiroal@nocheyniebla.org), Juana, Mauricio
-       Giraldo, Juliana Villabono, Bernardo, Jerry Garavito, Freddy
-       Rivera.
+  * Base empleada de 2000 a 2004.
 
-   A las fuentes de la versión 1.0, le hicieron auditorías de seguridad
-   (ver sus reportes en las fuentes de la versión 1.0):
-     * Julio César Garcés Rios. (garcez@linuxmail.org)
-     * Fernando Muñoz. (munozferna@gmail.com)
+Los aportes iniciales para las tablas básicas provienen de:
 
-   Con respecto a módulos:
-     * El módulo de seguimiento judicial y los datos relacionados fueron
-       aportados en Nov.2009 por Humanidad Vigente con autorización de
-       Yenly Mendez.
-     * El módulo de Etiquetas se desarrolló inicialmente para el OPI en
-       2006 con autorización de Santiago Camargo.
-     * El módulo de Estadísticas por Rótulos se desarrolló inicialmente
-       para Justapaz en 2007 con autorización de Jenny Neme.
-     * El módulo de Anexos se desarrolló inicialmente para Reiniciar en
-       2006 con autorización de Jahel Quiroga.
-     * El módulo de Georeferenciación sobre Googlemaps lo desarrollo Luca
-       Urech <lucaurech@yahoo.de> para la Corporación Compromiso en 2008
-       con autorización de Jorge Castellanos.
-     * El módulo de Desplazamiento se desarrolló inicialmente para el
-       Servicio Jesuita de Refugiados en Jun.2013 con autorización del
-       sacerdote John Jairo Montoya.
+  * Categorías de "Marco Conceptual", revista Noche y Niebla. http://
+    www.nocheyniebla.org
 
-   Han ayudado a documentar:
-     * Diana Garzón (artemisa1786@hotmail.com), quien preparó un manual
-       para Humanidad Vigente algunas de cuyas partes se incorporaron a
-       este manual con al autorización de Humanidad Vigente.
-     * Shalom Wiebe (shalomwiebe@gmail.com), quien corrigió llamado en
-       inglés.
-     * Vladimir Támara Patiño (vtamara@pasosdeJesus.org).
-     * Eduard Hoyos escribió documentación inicial para restaurar un
-       volcado SQL.
+  * Información geográfica tomada del Departamento Nacional de Planeación,
+    DANE, Banco de Datos de Derechos Humanos y Violencia Política.
 
-   Han ayudado a programar:
-     * Mauricio Rivera (mauricio.rivera.p@gmail.com) desarrolló una
-       versión previa de la Consulta Web e ideó el nombre SIVeL.
-     * Luca Urech <lucaurech@yahoo.de> desarrollo módulo inicial de
-       visualización en Google Maps.
-     * Vladimir Támara Patiño (vtamara@pasosdeJesus.org), quien ha
-       desarrollado fuera del tiempo retribuido por CINEP y con otras
-       organizaciones con contrataciones que liberan explicitamente al
-       dominio público los desarrollos.
+  * Otros datos empleados en el Banco de Datos de Derechos Humanos y Violencia
+    Política del CINEP, así como por integrantes de la Red de Bancos de Datos.
 
-   En sus albores, parte del código fue generado automáticamente con:
-     * DB_DataObject y DB_DataObject_FormBuilder de Pear
+Han ayudado con sugerencias y requerimientos:
 
-   El cabezote del menú principal y el fondo son aportes de William Rozo
-   (wiroal@nocheyniebla.org).
+  * William Rozo Alvarez (wiroal@nocheyniebla.org), Juana, Mauricio Giraldo,
+    Juliana Villabono, Bernardo, Jerry Garavito, Freddy Rivera.
 
-   Han ayudado a probar y reportar problemas: William Rozo
-   (wiroal@nocheyniebla.org), Carlos Garaviz, Marcela Medina, Rosa Liliana
-   Ortiz, Diana Garzón y Fabian Wilches
+A las fuentes de la versión 1.0, le hicieron auditorías de seguridad (ver sus
+reportes en las fuentes de la versión 1.0):
 
-   Los colores y organización de la Ficha Caso son tomados de un generador
-   de barras de progreso del paquete HTML_Progress de Pear.
+  * Julio César Garcés Rios. (garcez@linuxmail.org)
 
-   La idea de ofrecer retribución pública a quienes encuentren fallas de
-   seguridad fue tomada de djbdns escrito por Daniel Bernstein.
+  * Fernando Muñoz. (munozferna@gmail.com)
 
-   La nomenclatura de versiones se base en la de Mozilla Firefox.
+Con respecto a módulos:
 
-   Entre otras empleamos las siguientes herramientas (ver un listado más
-   detallado en archivo Instala.txt de la distribución de fuentes):
-   OpenBSD, PostgreSQL, Apache con mod_ssl, PHP, Pear.
+  * El módulo de seguimiento judicial y los datos relacionados fueron aportados
+    en Nov.2009 por Humanidad Vigente con autorización de Yenly Mendez.
+
+  * El módulo de Etiquetas se desarrolló inicialmente para el OPI en 2006 con
+    autorización de Santiago Camargo.
+
+  * El módulo de Estadísticas por Rótulos se desarrolló inicialmente para
+    Justapaz en 2007 con autorización de Jenny Neme.
+
+  * El módulo de Anexos se desarrolló inicialmente para Reiniciar en 2006 con
+    autorización de Jahel Quiroga.
+
+  * El módulo de Georeferenciación sobre Googlemaps lo desarrollo Luca Urech
+    <lucaurech@yahoo.de> para la Corporación Compromiso en 2008 con
+    autorización de Jorge Castellanos.
+
+  * El módulo de Desplazamiento se desarrolló inicialmente para el Servicio
+    Jesuita de Refugiados en Jun.2013 con autorización del sacerdote John Jairo
+    Montoya.
+
+Han ayudado a documentar:
+
+  * Diana Garzón (artemisa1786@hotmail.com), quien preparó un manual para
+    Humanidad Vigente algunas de cuyas partes se incorporaron a este manual con
+    al autorización de Humanidad Vigente.
+
+  * Shalom Wiebe (shalomwiebe@gmail.com), quien corrigió llamado en inglés.
+
+  * Vladimir Támara Patiño (vtamara@pasosdeJesus.org).
+
+  * Eduard Hoyos escribió documentación inicial para restaurar un volcado SQL.
+
+Han ayudado a programar:
+
+  * Mauricio Rivera (mauricio.rivera.p@gmail.com) desarrolló una versión previa
+    de la Consulta Web e ideó el nombre SIVeL.
+
+  * Luca Urech <lucaurech@yahoo.de> desarrollo módulo inicial de visualización
+    en Google Maps.
+
+  * Vladimir Támara Patiño (vtamara@pasosdeJesus.org), quien ha desarrollado
+    fuera del tiempo retribuido por CINEP y con otras organizaciones con
+    contrataciones que liberan explicitamente al dominio público los
+    desarrollos.
+
+En sus albores, parte del código fue generado automáticamente con:
+
+  * DB_DataObject y DB_DataObject_FormBuilder de Pear
+
+El cabezote del menú principal y el fondo son aportes de William Rozo
+(wiroal@nocheyniebla.org).
+
+Han ayudado a probar y reportar problemas: William Rozo
+(wiroal@nocheyniebla.org), Carlos Garaviz, Marcela Medina, Rosa Liliana Ortiz,
+Diana Garzón y Fabian Wilches
+
+Los colores y organización de la Ficha Caso son tomados de un generador de
+barras de progreso del paquete HTML_Progress de Pear.
+
+La idea de ofrecer retribución pública a quienes encuentren fallas de seguridad
+fue tomada de djbdns escrito por Daniel Bernstein.
+
+La nomenclatura de versiones se base en la de Mozilla Firefox.
+
+Entre otras empleamos las siguientes herramientas (ver un listado más detallado
+en archivo Instala.txt de la distribución de fuentes): OpenBSD, PostgreSQL,
+Apache con mod_ssl, PHP, Pear.
+

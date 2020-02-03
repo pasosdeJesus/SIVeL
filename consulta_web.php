@@ -338,14 +338,14 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             isset($pFiini['Y']) && $pFiini['Y'] != '')
             || (is_array($pFifin) && isset($pFifin['Y']) && $pFifin['Y'] != ''))
         ) {
-            agrega_tabla($tablas, 'caso_usuario');
-            consulta_and_sinap($where, "caso_usuario.id_caso", "caso.id");
+            agrega_tabla($tablas, 'primerusuario');
+            consulta_and_sinap($where, "primerusuario.id_caso", "caso.id");
         }
         if (in_array(42, $page->opciones)
             && is_array($pFiini) && isset($pFiini['Y']) && $pFiini['Y'] != ''
         ) {
             consulta_and(
-                $db, $where, "caso_usuario.fechainicio",
+                $db, $where, "primerusuario.fechainicio",
                 arr_a_fecha($pFiini, true), ">="
             );
         }
@@ -353,13 +353,13 @@ class AccionConsultaWeb extends HTML_QuickForm_Action
             && is_array($pFifin) && isset($pFifin['Y']) && $pFifin['Y'] != ''
         ) {
             consulta_and(
-                $db, $where, "caso_usuario.fechainicio",
+                $db, $where, "primerusuario.fechainicio",
                 arr_a_fecha($pFifin, false), "<="
             );
         }
         if (in_array(42, $page->opciones) && $pUsuario != '') {
             consulta_and(
-                $db, $where, "caso_usuario.id_usuario", $pUsuario
+                $db, $where, "primerusuario.id_usuario", $pUsuario
             );
         }
         if ($pNomvic != "" || $pSsocial != "" || $pSexo != "") {
@@ -658,12 +658,15 @@ class ConsultaWeb extends HTML_QuickForm_Page
         );
         $sel->setMultiple(true);
         $sel->setSize(5);
+        $wrl = "WHERE fechadeshabilitacion IS NULL";
+        if (in_array(42, $this->opciones)) { 
+            $wrl = "";
+        }
         ResConsulta::llenaSelCategoria(
             $db,
             "SELECT id_tviolencia, id_supracategoria, id 
-            FROM categoria 
-            WHERE fechadeshabilitacion IS NULL
-            ORDER BY id_tviolencia,
+            FROM categoria " . $wrl . 
+            " ORDER BY id_tviolencia,
             id_supracategoria, id;",
             $sel
         );

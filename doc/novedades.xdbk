@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <variablelist>
+	<varlistentry><term>Versión 1.2.9 (Feb.2020)</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem><para>
+      Se arregla filtro por fecha de ingreso en Consulta Web --antes
+        tenía en cuenta casos ingresados o revisados/modificados en el
+	rango de fechas, ahora solo tiene en cuenta casos ingresados en el 
+	rango de fechas. Agradecimientos por ayudar a detectar este
+	error a Cristina Cano.
+					</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+	
+	<varlistentry><term>Versión 1.2.8 (Sep.2019)</term>
+		<listitem>
+			<para><itemizedlist>
+					<listitem><para>Al validad incluye entre los casos vacíos los que tengan memo de menos de 30 caracteres.</para></listitem>
+					<listitem><para>En consulta web los usuarios autenticados pueden buscar por categorias deshabilitadas.</para></listitem>
+			</itemizedlist></para>
+		</listitem>
+	</varlistentry>
+	
 	<varlistentry><term>Versión 1.2.7 (Mar.2019)</term>
 		<listitem>
 			<para><itemizedlist>

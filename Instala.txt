@@ -1,194 +1,218 @@
 1. Prerrequisitos
 
-     * Sistema tipo Unix, recomendamos OpenBSD 6.3 y en particular la
-       distribución Aprendiendo de Jesús (ver
-       http://aprendiendo.pasosdeJesus.org).
-     * Para hacer pruebas durante la configuración puede emplear una
-       consola y el navegador tipo texto lynx, sin embargo se sugiere
-       configurar X-Window (ver
-       http://structio.sourceforge.net/guias/usuario_OpenBSD/sobre-la-inst
-       alacion.html#configuracion-de-xorg) y un navegador gráfico como
-       mozilla-firefox.
-     * Se sugiere crear dos contenedores cifrados en los que residirán la
-       base de datos y copias de respaldo respectivamente. Cada una debe
-       ser al menos de 100MB aunque se sugiere 700MB --para que quepa cada
-       una en un CD por si desea mantener copias de respaldo (ver
-       http://structio.sourceforge.net/guias/usuario_OpenBSD/configuracion
-       -de-algunos-dispositivos.html#imagen-cifrada)-- o de 4GB si saca
-       copias en DVD.
-     * Servidor web con SSL, recomendamos nginx (ver
-       http://structio.sourceforge.net/guias/servidor_OpenBSD/sevidor-web.
-       html#nginx). Sugerimos que lo ejecute con chroot en /var/www y que
-       cree el directorio /var/www/tmp para que PostgreSQL ubique su
-       socket allí, con permisos de ejecución, lectura y escritura para
-       todos.
-     * PostgreSQL (ver
-       http://structio.sourceforge.net/guias/servidor_OpenBSD/postgresql.h
-       tml#primera-instalaci%C3%B3n) con extensiones postgresql-contrib.
-       Sugerimos que la configure para usar sockets en /var/www/tmp. Así
-       mismo se sugiere que active autovaciado en
-       /var/postgresql/data/postgresql.conf con las líneas:
-track_counts = on
-autovacuum = on
+  * Sistema tipo Unix, recomendamos OpenBSD 6.3 y en particular la distribución
+    Aprendiendo de Jesús (ver http://aprendiendo.pasosdeJesus.org).
 
-     * PHP 5 con módulo para PostgreSQL y Pear (ver uso de PHP 5 con nginx
-       en
-       http://structio.sourceforge.net/guias/servidor_OpenBSD/sevidor-web.
-       html#nginx).
-       Se sugiere editar /var/www/conf/php.ini para asegurar que tiene:
-max_execution_time = 900
-max_input_time = 900
+  * Para hacer pruebas durante la configuración puede emplear una consola y el
+    navegador tipo texto lynx, sin embargo se sugiere configurar X-Window (ver
+    http://structio.sourceforge.net/guias/usuario_OpenBSD/
+    sobre-la-instalacion.html#configuracion-de-xorg) y un navegador gráfico
+    como mozilla-firefox.
 
-       así cada analista tendrá más tiempo de edición en algunos casos.
-       Para instalar pear en OpenBSD, configure la variable PKG_PATH (ver
-       http://structio.sourceforge.net/guias/usuario_OpenBSD/paquetes-y-po
-       rtes.html#paquetes ) y ejecute:
-sudo pkg_add pear
+  * Se sugiere crear dos contenedores cifrados en los que residirán la base de
+    datos y copias de respaldo respectivamente. Cada una debe ser al menos de
+    100MB aunque se sugiere 700MB --para que quepa cada una en un CD por si
+    desea mantener copias de respaldo (ver http://structio.sourceforge.net/
+    guias/usuario_OpenBSD/configuracion-de-algunos-dispositivos.html#
+    imagen-cifrada)-- o de 4GB si saca copias en DVD.
 
-     * Puede instalar algunos paquetes estables de pear que también están
-       disponibles como paquetes de OpenBSD por ejemplo con:
-sudo pkg_add pear-DB
+  * Servidor web con SSL, recomendamos nginx (ver http://
+    structio.sourceforge.net/guias/servidor_OpenBSD/sevidor-web.html#nginx).
+    Sugerimos que lo ejecute con chroot en /var/www y que cree el directorio /
+    var/www/tmp para que PostgreSQL ubique su socket allí, con permisos de
+    ejecución, lectura y escritura para todos.
 
-       Otros paquetes estables para pear los puede instalar con una
-       conexión a Internet por ejemplo con:
-sudo pear install Auth
-sudo pear install HTML_Common
-sudo pear install HTML_Menu
-sudo pear install HTML_QuickForm
-sudo pear install HTML_QuickForm_Controller
-sudo pear install HTML_Javascript
-sudo pear install HTML_CSS
-sudo pear install Date
-sudo pear install DB_DataObject
-sudo pear install Mail
-sudo pear install Mail_Mime
-sudo pear install Net_Socket
-sudo pear install Net_SMTP
-sudo pear install Benchmark
-sudo pear install DB_DataObject_FormBuilder
-       Y los paquetes en desarrollo en el momento de este escrito los
-       puede descargar e instalar con:
-sudo pear download Validate
-sudo pear install ./Validate-*
-2. Procedimiento de instalación
+  * PostgreSQL (ver http://structio.sourceforge.net/guias/servidor_OpenBSD/
+    postgresql.html#primera-instalaci%C3%B3n) con extensiones
+    postgresql-contrib. Sugerimos que la configure para usar sockets en /var/
+    www/tmp. Así mismo se sugiere que active autovaciado en /var/postgresql/
+    data/postgresql.conf con las líneas:
 
-    1. Aunque no es indispensable se recomienda que cree una cuenta para
-       sivel (digamos con login sivel).
-    2. Instale el paquete sivel-1.2.3.tar.gz que se distribuye con
-       adJ-6.3. Si prefiere descargar fuentes o clonar el repositorio git,
-       asegurese de dejar en un directorio utilizabel por nginx con SSL y
-       consulte Sección 3.1, "Actualización de versiones menores (e.g
-       1.2b1 a 1.2b2)".
-    3. Cree un usuario para PostgreSQL para manejar la base de datos (las
-       siguientes instrucciones son para PostgreSQL 9.4):
-sudo mkdir /var/www/tmp
-sudo chmod -R a+rxw /var/www/tmp
-sudo su - _postgresql
-createuser -h /var/www/tmp/ -s -d sivel
-exit
+    track_counts = on
+    autovacuum = on
 
-    4. Ejecute el archivo de ordenes de configuración:
-cd /var/www/htdocs/sivel/
-./conf.sh
+  * PHP 5 con módulo para PostgreSQL y Pear (ver uso de PHP 5 con nginx en
+    http://structio.sourceforge.net/guias/servidor_OpenBSD/sevidor-web.html#
+    nginx).
 
-    5. Cree un nuevo sitio desde el directorio sitios con el archivo de
-       ordenes nuevo.sh. Por ejemplo para crear el sitio sivel:
-cd /var/www/htdocs/sivel/sitios
-./nuevo.sh sivel
+    Se sugiere editar /var/www/conf/php.ini para asegurar que tiene:
 
-       Este archivo de ordenes copiará los archivo
-       pordefecto/conf.php.plantilla y pordefecto/vardb.sh.plantilla como
-       sivel/conf.php y sivel/vardb.sh cuadrando rutas y usuario de
-       PostgreSQL (si requiere cambiar usuario o clave de PostgreSQL edite
-       sivel/conf.php). También inicializará la base de datos y los
-       archivos relacionados, lo cual usted puede hacer manualmente con:
-cd /var/www/htdocs/sivel/sitios/sivel
-../../bin/creapg.sh
+    max_execution_time = 900
+    max_input_time = 900
 
-       y el mismo archivo de ordenes le permitirá agregar el primer
-       usuario al cual debe darle el rol de administrador. Si
-       posteriormente requiere agregar otros usuarios para este sitio
-       desde el interprete de comandos ejecute:
-cd /var/www/htdocs/sivel/sitios/sivel
-../../bin/agus.sh
+    así cada analista tendrá más tiempo de edición en algunos casos.
 
-       Este archivo de ordenes también pondrá un fondo por defecto que
-       puede modificar cambiando en el directorio de su sitio el archivo
-       fondo.jpg.
-    6. Desde un navegador abra el directorio en el que instaló. Si lo
-       requiere puede revisar errores en la bitácora de nginx (por defecto
-       /var/www/log/error.log).
+    Para instalar pear en OpenBSD, configure la variable PKG_PATH (ver http://
+    structio.sourceforge.net/guias/usuario_OpenBSD/paquetes-y-portes.html#
+    paquetes ) y ejecute:
+
+    sudo pkg_add pear
+
+  * Puede instalar algunos paquetes estables de pear que también están
+    disponibles como paquetes de OpenBSD por ejemplo con:
+
+    sudo pkg_add pear-DB
+
+    Otros paquetes estables para pear los puede instalar con una conexión a
+    Internet por ejemplo con:
+
+    sudo pear install Auth
+    sudo pear install HTML_Common
+    sudo pear install HTML_Menu
+    sudo pear install HTML_QuickForm
+    sudo pear install HTML_QuickForm_Controller
+    sudo pear install HTML_Javascript
+    sudo pear install HTML_CSS
+    sudo pear install Date
+    sudo pear install DB_DataObject
+    sudo pear install Mail
+    sudo pear install Mail_Mime
+    sudo pear install Net_Socket
+    sudo pear install Net_SMTP
+    sudo pear install Benchmark
+    sudo pear install DB_DataObject_FormBuilder
+
+    Y los paquetes en desarrollo en el momento de este escrito los puede
+    descargar e instalar con:
+
+    sudo pear download Validate
+    sudo pear install ./Validate-*
+
+2. Procedimiento de instalaci n
+
+ 1. Aunque no es indispensable se recomienda que cree una cuenta para sivel
+    (digamos con login sivel).
+
+ 2. Instale el paquete sivel-1.2.8.tar.gz que se distribuye con adJ-6.3. Si
+    prefiere descargar fuentes o clonar el repositorio git, asegurese de dejar
+    en un directorio utilizabel por nginx con SSL y consulte Sección 3.1,
+    “Actualización de versiones menores (e.g 1.2b1 a 1.2b2)”.
+
+ 3. Cree un usuario para PostgreSQL para manejar la base de datos (las
+    siguientes instrucciones son para PostgreSQL 9.4):
+
+    sudo mkdir /var/www/tmp
+    sudo chmod -R a+rxw /var/www/tmp
+    sudo su - _postgresql
+    createuser -h /var/www/tmp/ -s -d sivel
+    exit
+
+ 4. Ejecute el archivo de ordenes de configuración:
+
+    cd /var/www/htdocs/sivel/
+    ./conf.sh
+
+ 5. Cree un nuevo sitio desde el directorio sitios con el archivo de ordenes
+    nuevo.sh. Por ejemplo para crear el sitio sivel:
+
+    cd /var/www/htdocs/sivel/sitios
+    ./nuevo.sh sivel
+
+    Este archivo de ordenes copiará los archivo pordefecto/conf.php.plantilla y
+    pordefecto/vardb.sh.plantilla como sivel/conf.php y sivel/vardb.sh
+    cuadrando rutas y usuario de PostgreSQL (si requiere cambiar usuario o
+    clave de PostgreSQL edite sivel/conf.php). También inicializará la base de
+    datos y los archivos relacionados, lo cual usted puede hacer manualmente
+    con:
+
+    cd /var/www/htdocs/sivel/sitios/sivel
+    ../../bin/creapg.sh
+
+    y el mismo archivo de ordenes le permitirá agregar el primer usuario al
+    cual debe darle el rol de administrador. Si posteriormente requiere agregar
+    otros usuarios para este sitio desde el interprete de comandos ejecute:
+
+    cd /var/www/htdocs/sivel/sitios/sivel
+    ../../bin/agus.sh
+
+    Este archivo de ordenes también pondrá un fondo por defecto que puede
+    modificar cambiando en el directorio de su sitio el archivo fondo.jpg.
+
+ 6. Desde un navegador abra el directorio en el que instaló. Si lo requiere
+    puede revisar errores en la bitácora de nginx (por defecto /var/www/log/
+    error.log).
 
 2.1. Uso de una base de datos remota
 
-   Si el motor de bases de datos no corre en el mismo computador del
-   servidor donde corre SIVeL (como se documenta en
-   http://pasosdejesus.github.io/servidor_adJ/otros_servicios_que_puede_pr
-   estar_el_servidor.html#base-postgresql-remota ).
-    1. Ubique el certificado (digamos sivel.crt) y la llave SSL
-       (sivel.key) en el mismo directorio del sitio
-       (/var/www/htdocs/sivel12/sitios/sivel12),
-    2. Asegura que los archivos de ordenes son usables desde la terminal
-       editando vardb.sh del sitio para agregar:
-export PGSSLCERT=./sivel.crt
-export PGSSLKEY=./sivel.key
+Si el motor de bases de datos no corre en el mismo computador del servidor
+donde corre SIVeL (como se documenta en http://pasosdejesus.github.io/
+servidor_adJ/otros_servicios_que_puede_prestar_el_servidor.html#
+base-postgresql-remota ).
 
-       justo antes de la línea:
-. ../pordefecto/vardb.sh
+ 1. Ubique el certificado (digamos sivel.crt) y la llave SSL (sivel.key) en el
+    mismo directorio del sitio (/var/www/htdocs/sivel12/sitios/sivel12),
 
-    3. Asegure que aplicación puede usar la base remota editando conf.php
-       del sitio para agregar entre las primeras variables (cambie la IP
-       por la del servidor donde corre PostgreSQL):
-        global $dbservidor;
-        $dbservidor = "192.168.100.21";
+ 2. Asegura que los archivos de ordenes son usables desde la terminal editando
+    vardb.sh del sitio para agregar:
 
-       y al final de ese archivo agregue la ubicación del certificado y la
-       llave (relativo a la jaula chroot del servidor web):
-        putenv('PGSSLCERT=/htdocs/sivel12/sitios/sivel12/sivel.crt');
-        putenv('PGSSLKEY=/htdocs/sivel12/sitios/sivel12/sivel.key');
+    export PGSSLCERT=./sivel.crt
+    export PGSSLKEY=./sivel.key
+
+    justo antes de la línea:
+
+    . ../pordefecto/vardb.sh
+
+ 3. Asegure que aplicación puede usar la base remota editando conf.php del
+    sitio para agregar entre las primeras variables (cambie la IP por la del
+    servidor donde corre PostgreSQL):
+
+            global $dbservidor;
+            $dbservidor = "192.168.100.21";
+
+    y al final de ese archivo agregue la ubicación del certificado y la llave
+    (relativo a la jaula chroot del servidor web):
+
+            putenv('PGSSLCERT=/htdocs/sivel12/sitios/sivel12/sivel.crt');
+            putenv('PGSSLKEY=/htdocs/sivel12/sitios/sivel12/sivel.key');
 
 2.2. Otros pasos de instalación opcionales
 
-    1. Si desea generar la documentación:
-cd /var/www/htdocs/sivel/doc
-./conf.sh
-cp personaliza.ent.plantilla personaliza.ent
+ 1. Si desea generar la documentación:
 
-       de requerirlo modifique personaliza.ent y finalmente:
-make
+    cd /var/www/htdocs/sivel/doc
+    ./conf.sh
+    cp personaliza.ent.plantilla personaliza.ent
 
-    2. Si desea configurar un esquema de respaldos puede emplear los
-       archivos de comandos ../../bin/pgdump.sh y ../../bin/respaldo.sh,
-       que facilitan hacer respaldo diario y mantener la copia del último
-       mes en el computador local y opcionalmente de la última semana en
-       un computador remoto. Requieren scp y algunas variables de
-       configuración de conf.php (ver Sección 2.1, "Copias de respaldo y
-       restauración" y Sección 2.1.3, "Configuración de respaldo
-       automático diario").
-    3. Para activar corrección ortográfica, instale ispell e
-       ispell-spanish. Si ngingx corre chroot en un directorio (digamos
-       /var/www), cree en ese directorio la estructura de directorios que
-       requieren ispell e ispell-spanish y copie lo básico de estos en la
-       nueva estructura ---las librerías compartidas que ispell requiera
-       puede verlas con ldd. Eventualmente podrá efectuar estas
-       operaciones con el script bin/prep-chroot.sh distribuido junto con
-       las fuentes de SIVeL.
-       Una vez instale y pruebe ispell en el directorio chroot, desde el
-       directorio de fuentes de SIVeL verifique que la ruta esté
-       especificada en confv.empty (variable CHROOT) y ejecute:
-$ rm confv.sh
-$ ./conf.sh
+    de requerirlo modifique personaliza.ent y finalmente:
 
-       Finalmente puede editar conf.php en el directorio de su sitio para
-       modificar el mensaje que se presenta cuando se encuentras errores
-       ortográficos (MENS_ORTOGRAFIA).
-       Una vez en operación podrá agregar palabras que sean correctas en
-       el diccionario configurado (por defecto está en las fuentes de
-       SIVeL con nombre ispell.dic); una palabra por línea, sin dejar
-       espacios a izquierda ni derecha. Si va a agregar palabras con
-       tildes, cambie la vocal tildada por la vocal sin tilde pero con un
-       apostrofe como prefijo, por ejemplo la palabra "nación" se agrega
-       como "naci'on" (sin comillas).
-    4. Para publicar la Consulta Web en Internet y activar
-       retroalimentación cifrada por correo vea Sección 2.4,
-       "Retroalimentación por correo desde Consulta Web".
+    make
+
+ 2. Si desea configurar un esquema de respaldos puede emplear los archivos de
+    comandos ../../bin/pgdump.sh y ../../bin/respaldo.sh, que facilitan hacer
+    respaldo diario y mantener la copia del último mes en el computador local y
+    opcionalmente de la última semana en un computador remoto. Requieren scp y
+    algunas variables de configuración de conf.php (ver Sección 2.1, “Copias de
+    respaldo y restauración” y Sección 2.1.3, “Configuración de respaldo
+    automático diario”).
+
+ 3. Para activar corrección ortográfica, instale ispell e ispell-spanish. Si
+    ngingx corre chroot en un directorio (digamos /var/www), cree en ese
+    directorio la estructura de directorios que requieren ispell e 
+    ispell-spanish y copie lo básico de estos en la nueva estructura ---las
+    librerías compartidas que ispell requiera puede verlas con ldd.
+    Eventualmente podrá efectuar estas operaciones con el script bin/
+    prep-chroot.sh distribuido junto con las fuentes de SIVeL.
+
+    Una vez instale y pruebe ispell en el directorio chroot, desde el
+    directorio de fuentes de SIVeL verifique que la ruta esté especificada en
+    confv.empty (variable CHROOT) y ejecute:
+
+    $ rm confv.sh
+    $ ./conf.sh
+
+
+    Finalmente puede editar conf.php en el directorio de su sitio para
+    modificar el mensaje que se presenta cuando se encuentras errores
+    ortográficos (MENS_ORTOGRAFIA).
+
+    Una vez en operación podrá agregar palabras que sean correctas en el
+    diccionario configurado (por defecto está en las fuentes de SIVeL con
+    nombre ispell.dic); una palabra por línea, sin dejar espacios a izquierda
+    ni derecha. Si va a agregar palabras con tildes, cambie la vocal tildada
+    por la vocal sin tilde pero con un apostrofe como prefijo, por ejemplo la
+    palabra "nación" se agrega como "naci'on" (sin comillas).
+
+ 4. Para publicar la Consulta Web en Internet y activar retroalimentación
+    cifrada por correo vea Sección 2.4, “Retroalimentación por correo desde
+    Consulta Web”.
+
