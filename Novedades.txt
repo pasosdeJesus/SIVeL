@@ -6,6 +6,9 @@ Versión 1.2.9 (Feb.2020)
         ahora solo tiene en cuenta casos ingresados en el rango de fechas.
         Agradecimientos por ayudar a detectar este error a Cristina Cano.
 
+      * Reporte revista no presenta dia ni mes en casos con etiqueta
+        MES_INEXACTOS; y no presenta el día en casos con etiqueta DIA_INEXACTO.
+
 Versión 1.2.8 (Sep.2019)
       * Al validad incluye entre los casos vacíos los que tengan memo de menos
         de 30 caracteres.

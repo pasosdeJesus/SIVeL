@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!ENTITY VER-ADJ "6.3">
-<!ENTITY VER-OPENBSD "6.3">
-<!ENTITY VER-OPENBSD-S "63">
-<!ENTITY VER-OPENBSD-U "6_3">
+<!ENTITY VER-ADJ "6.6">
+<!ENTITY VER-OPENBSD "6.6">
+<!ENTITY VER-OPENBSD-S "66">
+<!ENTITY VER-OPENBSD-U "6_6">
 <!ENTITY VER-XORG "">
 <!ENTITY p-mailman "mailman">
 <!ENTITY p-jdk-linux "jdk-linux">

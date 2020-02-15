@@ -11,6 +11,12 @@
 	rango de fechas. Agradecimientos por ayudar a detectar este
 	error a Cristina Cano.
 					</para></listitem>
+					<listitem><para>
+       Reporte revista no presenta dia ni mes en casos con etiqueta
+	MES_INEXACTOS; y no presenta el día en casos con etiqueta
+	DIA_INEXACTO.
+					</para></listitem>
+
 			</itemizedlist></para>
 		</listitem>
 	</varlistentry>

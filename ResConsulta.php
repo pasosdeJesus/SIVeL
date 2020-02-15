@@ -3046,8 +3046,21 @@ class ResConsulta
                 $r .= $fecha;
                 $r .= "]";
             } else {
-                $fecha = $GLOBALS['mes'][(int)$a[1]] . " " .
-                    (int)$a[2] . "/" . (int)$a[0] . " ";
+                $nom = $db->getOne(
+                    "SELECT nombre FROM etiqueta, caso_etiqueta "
+                    . " WHERE caso_etiqueta.id_caso='$idcaso' " .
+                    " AND caso_etiqueta.id_etiqueta=etiqueta.id " .
+                    " AND nombre LIKE '%_INEXACTO'"
+                );
+                if (!PEAR::isError($nom) && $nom == 'DIA_INEXACTO') {
+                    $fecha = $GLOBALS['mes'][(int)$a[1]] . " " .
+                        (int)$a[0] . " ";
+                } else if (!PEAR::isError($nom) && $nom == 'MES_INEXACTO') {
+                    $fecha = (int)$a[0] . " ";
+                } else {
+                    $fecha = $GLOBALS['mes'][(int)$a[1]] . " " .
+                        (int)$a[2] . "/" . (int)$a[0] . " ";
+                }
                 $r .= $fecha;
             }
         }
